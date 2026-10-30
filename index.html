@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E5E7DD">
+<meta name="description" content="Offline survival, tactical and emergency field reference.">
+<title>Field Kit</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+/* Field Kit design tokens
+   Day: field-sage paper, OD green (tactical), coyote (survival), blaze (emergency).
+   Night: red-light mode to protect night vision — every colour collapses to red on black. */
+:root{
+  --paper:#E5E7DD; --surface:#F1F2EB; --ink:#1C2117; --muted:#5A6150; --line:#C3C8B5;
+  --od:#4A5233; --coyote:#8C6E3F; --blaze:#C2410C; --on-accent:#F6F7F1;
+  --c:var(--od);
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="night"]){
+    --paper:#151912; --surface:#1E2319; --ink:#E3E6D9; --muted:#9BA28C; --line:#343B2B;
+    --od:#9AAA68; --coyote:#C9A86F; --blaze:#F2692B; --on-accent:#141710;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="night"]{
+  --paper:#000; --surface:#0E0101; --ink:#E5322B; --muted:#9C2219; --line:#3B0906;
+  --od:#E5322B; --coyote:#E5322B; --blaze:#FF3B30; --on-accent:#000;
+  color-scheme:dark;
+}
+:root[data-tab="survival"]{--c:var(--coyote)}
+:root[data-tab="emergency"]{--c:var(--blaze)}
+
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.5 Roboto,system-ui,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent;
+  font-variant-numeric:tabular-nums}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+[hidden]{display:none !important}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;display:flex;align-items:center;gap:8px;
+  padding:12px 16px;background:var(--paper);border-bottom:1px solid var(--line)}
+.top h1{margin:0;font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-.01em;color:var(--c)}
+.top .spacer{flex:1}
+.chip{font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.icon-btn{min-width:48px;min-height:48px;display:grid;place-items:center;border:1px solid var(--line);
+  background:var(--surface);border-radius:8px;padding:0 12px;cursor:pointer}
+.icon-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.icon-btn svg{width:22px;height:22px}
+
+main{max-width:640px;margin:0 auto;padding:16px 16px calc(96px + env(safe-area-inset-bottom,0px))}
+
+/* Bottom tab bar — thumb reach on a tall phone */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:6;display:grid;grid-template-columns:repeat(3,1fr);
+  background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabbar button{min-height:64px;border:0;border-top:3px solid transparent;background:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:13px;color:var(--muted)}
+.tabbar svg{width:24px;height:24px}
+.tabbar button[data-tab="survival"]{--t:var(--coyote)}
+.tabbar button[data-tab="tactical"]{--t:var(--od)}
+.tabbar button[data-tab="emergency"]{--t:var(--blaze)}
+.tabbar button[aria-current="page"]{color:var(--t);border-top-color:var(--t);font-weight:600}
+
+/* Segmented control */
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid var(--line);border-radius:8px;
+  overflow:hidden;margin-bottom:16px;background:var(--surface)}
+.seg button{min-height:44px;border:0;background:none;cursor:pointer;color:var(--muted)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-selected="true"]{background:var(--c);color:var(--on-accent);font-weight:600}
+.seg.small button{min-height:36px;font-size:14px}
+
+/* Sections */
+.block{padding:16px 0;border-top:1px solid var(--line)}
+.block:first-child{border-top:0;padding-top:0}
+h2{font-size:18px;line-height:1.3;margin:0 0 8px;font-weight:650}
+h3{font-size:16px;margin:16px 0 4px;font-weight:650}
+p{margin:0 0 8px}
+.hint{font-size:14px;color:var(--muted)}
+.muted{color:var(--muted)}
+
+/* Position readout — the hero */
+.readout{padding:4px 0 16px}
+.status{font-size:14px;color:var(--muted);min-height:21px}
+.status.warn{color:var(--blaze)}
+.mgrs{display:block;width:100%;text-align:left;border:0;background:none;padding:4px 0;cursor:pointer;
+  font-size:40px;line-height:1.1;font-weight:650;letter-spacing:.01em;word-spacing:.15em}
+.mgrs .gz{display:block;font-size:22px;color:var(--muted);font-weight:500;letter-spacing:.02em}
+.mgrs.empty{color:var(--muted);font-weight:400;font-size:28px}
+.latlon{font-size:15px;color:var(--muted);margin-top:4px;border:0;background:none;padding:4px 0;cursor:pointer;text-align:left}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stat{border-left:3px solid var(--c);padding:2px 0 2px 10px}
+.stat b{display:block;font-size:20px;font-weight:650;line-height:1.2}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* Compass */
+.compass-wrap{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.compass{width:min(46vw,220px);aspect-ratio:1;position:relative}
+.compass svg{width:100%;height:100%;display:block}
+#rose{transition:transform .12s linear;transform-origin:50% 50%}
+@media (prefers-reduced-motion:reduce){#rose{transition:none}}
+.hdg b{font-size:44px;line-height:1;font-weight:650;display:block}
+.hdg .ref{font-size:14px;color:var(--muted)}
+.hdg .tgt{margin-top:12px;font-size:15px}
+
+/* Forms */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+label.f.wide{grid-column:1/-1}
+input,select{min-height:48px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+  font-size:17px;color:var(--ink);width:100%}
+input::placeholder{color:var(--muted);opacity:.8}
+.row{display:flex;gap:8px;margin-top:8px}
+.row>input{flex:1;min-width:0}
+.btn{min-height:48px;padding:0 16px;border-radius:8px;border:1px solid var(--c);background:var(--c);color:var(--on-accent);
+  font-weight:600;cursor:pointer;white-space:nowrap}
+.btn.ghost{background:none;color:var(--c)}
+.btn.small{min-height:40px;padding:0 12px;font-size:14px}
+.btn.full{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* Waypoints */
+.wps{list-style:none;margin:12px 0 0;padding:0}
+.wps li{padding:12px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:4px 8px;align-items:center}
+.wps li.target .wname::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:8px}
+.wname{font-weight:600}
+.wmeta{font-size:14px;color:var(--muted);grid-column:1}
+.wact{grid-column:2;grid-row:1/3;display:flex;gap:6px}
+
+/* Ballistics output */
+.solution{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px;border:2px solid var(--c);border-radius:8px;margin-bottom:8px}
+.solution .k{font-size:14px;color:var(--muted)}
+.solution .v{font-size:36px;line-height:1.1;font-weight:700}
+.solution .v small{font-size:16px;font-weight:500;color:var(--muted)}
+.solution .sub{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.tablewrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:8px 10px;text-align:right;white-space:nowrap}
+th{font-weight:600;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface)}
+td:first-child,th:first-child{text-align:left;font-weight:600}
+tr.zero td{color:var(--muted)}
+tr.trans td{color:var(--blaze)}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 60%,transparent)}
+details.more{margin-top:12px}
+details.more summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600;color:var(--c)}
+
+/* Reference content */
+.call{display:flex;align-items:center;justify-content:center;gap:12px;min-height:64px;border-radius:8px;
+  background:var(--blaze);color:var(--on-accent);font-size:22px;font-weight:700;text-decoration:none;margin-bottom:4px}
+.call svg{width:26px;height:26px}
+details.ref{border-top:1px solid var(--line)}
+details.ref:last-of-type{border-bottom:1px solid var(--line)}
+details.ref>summary{min-height:56px;display:flex;align-items:center;gap:12px;cursor:pointer;font-size:17px;font-weight:600;list-style:none}
+details.ref>summary::-webkit-details-marker{display:none}
+details.ref>summary::after{content:"+";margin-left:auto;font-size:24px;font-weight:400;color:var(--c)}
+details.ref[open]>summary::after{content:"–"}
+details.ref .body{padding:0 0 16px}
+ol.steps{margin:0;padding-left:24px}
+ol.steps li{margin:0 0 8px;padding-left:4px}
+ol.steps li::marker{font-weight:700;color:var(--c)}
+dl.march{margin:0;display:grid;grid-template-columns:40px 1fr;gap:8px 8px}
+dl.march dt{font-size:28px;font-weight:700;line-height:1;color:var(--c)}
+dl.march dd{margin:0}
+.timer{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 12px;padding:12px 0;border-top:1px solid var(--line)}
+.timer b{font-size:32px;font-weight:700;line-height:1.1}
+.timer .lbl{font-size:14px;color:var(--muted)}
+.timer .x{grid-column:2;grid-row:1/3}
+.cpr{display:flex;align-items:center;gap:16px;margin-top:12px}
+.beat{width:64px;height:64px;border-radius:50%;border:3px solid var(--blaze);display:grid;place-items:center;font-size:24px;font-weight:700}
+.beat.on{background:var(--blaze);color:var(--on-accent)}
+.signals{display:flex;gap:24px;margin:8px 0}
+.signals div{text-align:center;font-size:14px;color:var(--muted)}
+.signals b{display:block;font-size:48px;line-height:1.1;color:var(--ink)}
+.next{columns:2;gap:16px;padding-left:20px;margin:8px 0;color:var(--muted)}
+.foot{margin-top:24px;font-size:13px;color:var(--muted)}
+
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:15px;z-index:20;
+  opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+
+@media (min-width:600px){.mgrs{font-size:52px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1 id="title">Tactical</h1>
+  <span class="chip" id="netChip" hidden>Offline</span>
+  <span class="spacer"></span>
+  <button class="icon-btn" id="installBtn" hidden>Install</button>
+  <button class="icon-btn" id="nightBtn" aria-pressed="false" aria-label="Red light mode" title="Red light mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+</header>
+
+<main>
+<!-- ============ SURVIVAL ============ -->
+<section class="tab" id="tab-survival" hidden>
+  <div class="block">
+    <h2>Priorities: the rule of threes</h2>
+    <p>In harsh conditions a person can last roughly 3 minutes without air, 3 hours without shelter, 3 days without water and 3 weeks without food. Work the problem in that order.</p>
+  </div>
+
+  <details class="ref">
+    <summary>Make water safe</summary>
+    <div class="body">
+      <ol class="steps">
+        <li>If the water is cloudy, let it settle, then strain it through a clean cloth.</li>
+        <li>Boil at a rolling boil for 1 minute. Above 6,500 ft, boil for 3 minutes.</li>
+        <li>No fire? Use unscented household bleach: 8 drops of 6% bleach (or 6 drops of 8.25%) per gallon. Double it for cloudy or very cold water. Stir and wait 30 minutes.</li>
+        <li>Tablets and filters: follow the maker’s directions. Most filters don’t stop viruses.</li>
+      </ol>
+      <p class="hint">Source: CDC emergency water guidance.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Signal for rescue</summary>
+    <div class="body">
+      <p>Three of anything is a distress signal: three fires in a triangle, three whistle blasts, three flashes. Repeat at intervals.</p>
+      <p>Ground-to-air symbols, as large as you can make them with high contrast:</p>
+      <div class="signals">
+        <div><b>V</b>Need assistance</div>
+        <div><b>X</b>Need medical help</div>
+      </div>
+      <p>Use a mirror or your phone screen to flash sunlight at aircraft. Aim with two fingers in a V toward the target.</p>
+    </div>
+  </details>
+
+  <div class="block" style="border-top:0">
+    <h3>Next to build</h3>
+    <ul class="next">
+      <li>Shelter</li><li>Fire</li><li>Edible plants</li><li>Traps and snares</li>
+      <li>Field dressing</li><li>Navigation</li><li>Region guides</li><li>Knots</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TACTICAL ============ -->
+<section class="tab" id="tab-tactical">
+  <div class="seg" role="tablist" id="tacSeg">
+    <button role="tab" data-view="position" aria-selected="true">Position</button>
+    <button role="tab" data-view="ballistics" aria-selected="false">Ballistics</button>
+  </div>
+
+  <!-- Position -->
+  <div id="view-position">
+    <div class="readout">
+      <div class="status" id="gpsStatus">Starting GPS…</div>
+      <button class="mgrs empty" id="mgrs" aria-label="MGRS coordinate. Tap to copy.">No fix yet</button>
+      <button class="latlon" id="latlon" aria-label="Latitude and longitude. Tap to switch format."></button>
+      <div class="stats">
+        <div class="stat"><b id="sAlt">—</b><span>Altitude</span></div>
+        <div class="stat"><b id="sAcc">—</b><span>Accuracy</span></div>
+        <div class="stat"><b id="sSpd">—</b><span>Speed</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="compass-wrap">
+        <div class="compass">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="96" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+            <g id="rose"></g>
+            <path d="M100 2 L108 18 L92 18 Z" fill="var(--c)"/>
+            <line x1="100" y1="80" x2="100" y2="120" stroke="var(--muted)" stroke-width="1"/>
+            <line x1="80" y1="100" x2="120" y2="100" stroke="var(--muted)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="hdg">
+          <b id="hdg">—</b>
+          <div class="ref" id="hdgRef">Hold the phone flat</div>
+          <div class="tgt" id="tgtInfo" hidden></div>
+        </div>
+      </div>
+      <div class="grid2" style="margin-top:12px">
+        <label class="f">Declination (°, east +)
+          <input id="decl" type="number" inputmode="decimal" step="0.1" placeholder="0">
+        </label>
+        <label class="f">Screen
+          <button class="btn ghost" id="wakeBtn" aria-pressed="false">Keep screen on</button>
+        </label>
+      </div>
+      <p class="hint" style="margin-top:8px">The compass reads magnetic north. Enter your local declination to get true bearings that line up with waypoints. Calibrate by moving the phone in a figure-8.</p>
+    </div>
+
+    <div class="block">
+      <h2>Waypoints</h2>
+      <div class="row"><input id="wpName" placeholder="Name (optional)" autocomplete="off"><button class="btn" id="wpMark">Mark here</button></div>
+      <div class="row"><input id="wpCoord" placeholder="MGRS or lat, lon" autocomplete="off" autocapitalize="characters"><button class="btn ghost" id="wpAdd">Add</button></div>
+      <p class="hint" id="wpMsg" style="margin-top:8px"></p>
+      <ul class="wps" id="wpList"></ul>
+      <button class="btn ghost full" id="wpExport" style="margin-top:12px">Export KML for ATAK</button>
+    </div>
+  </div>
+
+  <!-- Ballistics -->
+  <div id="view-ballistics" hidden>
+    <div class="solution" id="solution" aria-live="polite">
+      <div><div class="k">Elevation</div><div class="v" id="solElev">—</div></div>
+      <div><div class="k">Windage</div><div class="v" id="solWind">—</div></div>
+      <div class="sub" id="solSub"></div>
+    </div>
+    <div class="seg small" role="tablist" id="unitSeg" style="margin:12px 0">
+      <button role="tab" data-unit="mil" aria-selected="true">MIL (MRAD)</button>
+      <button role="tab" data-unit="moa" aria-selected="false">MOA</button>
+    </div>
+
+    <div class="block">
+      <h2>Shot</h2>
+      <div class="grid2">
+        <label class="f">Target range (yd)<input id="bRange" type="number" inputmode="decimal" value="500"></label>
+        <label class="f">Incline (°)<input id="bAngle" type="number" inputmode="decimal" value="0" placeholder="+ up, − down"></label>
+        <label class="f">Wind speed (mph)<input id="bWind" type="number" inputmode="decimal" value="10"></label>
+        <label class="f">Wind from (clock)
+          <select id="bClock">
+            <option value="12">12, head</option><option value="1">1</option><option value="2">2</option>
+            <option value="3" selected>3, right</option><option value="4">4</option><option value="5">5</option>
+            <option value="6">6, tail</option><option value="7">7</option><option value="8">8</option>
+            <option value="9">9, left</option><option value="10">10</option><option value="11">11</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Rifle and load</h2>
+      <label class="f wide">Profile
+        <select id="bProfile"></select>
+      </label>
+      <div class="grid2" style="margin-top:12px">
+        <label class="f">Ballistic coefficient<input id="bBC" type="number" inputmode="decimal" step="0.001"></label>
+        <label class="f">Drag model
+          <select id="bModel"><option>G1</option><option>G7</option></select>
+        </label>
+        <label class="f">Bullet weight (gr)<input id="bW" type="number" inputmode="decimal"></label>
+        <label class="f">Muzzle velocity (fps)<input id="bMV" type="number" inputmode="decimal"></label>
+        <label class="f">Sight height (in)<input id="bSH" type="number" inputmode="decimal" step="0.1"></label>
+        <label class="f">Zero range (yd)<input id="bZero" type="number" inputmode="decimal"></label>
+      </div>
+      <p class="hint" style="margin-top:8px">Built-in profiles are starting points. Your barrel and ammo lot change velocity, so chronograph your load and confirm at distance. AR-15 scopes usually sit 2.5–2.7 in above the bore.</p>
+      <div class="row"><button class="btn ghost" id="bSave">Save as new profile</button><button class="btn ghost" id="bDel" hidden>Delete profile</button></div>
+    </div>
+
+    <div class="block">
+      <h2>Conditions</h2>
+      <div class="grid2">
+        <label class="f">Temperature (°F)<input id="bTemp" type="number" inputmode="decimal" value="59"></label>
+        <label class="f">Altitude (ft)<input id="bAlt" type="number" inputmode="decimal" value="0"></label>
+        <label class="f">Station pressure (inHg)<input id="bPress" type="number" inputmode="decimal" step="0.01" placeholder="From altitude"></label>
+        <label class="f">Humidity (%)<input id="bRH" type="number" inputmode="decimal" value="50"></label>
+      </div>
+      <p class="hint" style="margin-top:8px">Leave pressure blank to estimate it from altitude. A Kestrel or phone barometer reading is more accurate.</p>
+    </div>
+
+    <div class="block">
+      <h2>Dope card</h2>
+      <div class="grid2">
+        <label class="f">Out to (yd)<input id="bMax" type="number" inputmode="decimal" value="1000"></label>
+        <label class="f">Every (yd)
+          <select id="bStep"><option>25</option><option selected>50</option><option>100</option></select>
+        </label>
+      </div>
+      <div class="tablewrap"><table id="dope"></table></div>
+      <p class="hint" style="margin-top:8px">Rows in orange are transonic (below Mach 1.2), where accuracy falls off and predictions get less reliable. Spin drift and Coriolis are not included yet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EMERGENCY ============ -->
+<section class="tab" id="tab-emergency" hidden>
+  <a class="call" href="tel:911">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    Call 911
+  </a>
+  <p class="hint">112 works in Europe and many other countries.</p>
+
+  <details class="ref" open>
+    <summary>Life-threatening bleeding</summary>
+    <div class="body">
+      <ol class="steps">
+        <li>Call 911, or have someone call.</li>
+        <li>Find where the blood is coming from. Open or cut away clothing to see the wound.</li>
+        <li>Arm or leg: put a tourniquet 2–3 inches above the wound, not on a joint. Tighten until the bleeding stops, then start a timer below.</li>
+        <li>Neck, shoulder or groin: pack the wound tightly with gauze or clean cloth, then press hard with both hands.</li>
+        <li>No tourniquet or gauze: press firmly and steadily on the wound with both hands and don’t let up.</li>
+        <li>If bleeding continues, add a second tourniquet above the first. Don’t loosen or remove a tourniquet; leave that to medical staff.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="ref" open>
+    <summary>Tourniquet timers</summary>
+    <div class="body">
+      <div class="row" style="margin-top:0">
+        <select id="tqLimb" aria-label="Limb">
+          <option>Left arm</option><option>Right arm</option><option>Left leg</option><option>Right leg</option><option>Other</option>
+        </select>
+        <button class="btn" id="tqStart">Start timer</button>
+      </div>
+      <div id="tqList"></div>
+      <p class="hint" style="margin-top:8px">Timers keep running if you close the app. Tell responders the time each tourniquet went on, and write it on the tourniquet or casualty if you can.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>CPR, adult</summary>
+    <div class="body">
+      <ol class="steps">
+        <li>Tap and shout. If they don’t respond and aren’t breathing normally, call 911 and send someone for an AED.</li>
+        <li>Push hard and fast in the centre of the chest: at least 2 inches deep, 100–120 times a minute. Let the chest fully rise between pushes.</li>
+        <li>If you’re trained, give 30 compressions, then 2 breaths. If not, keep doing compressions only.</li>
+        <li>Turn on the AED as soon as it arrives and follow its voice prompts.</li>
+        <li>Keep going until help takes over or the person starts breathing.</li>
+      </ol>
+      <div class="cpr">
+        <div class="beat" id="beat" aria-live="off">0</div>
+        <button class="btn" id="cprBtn">Start metronome</button>
+      </div>
+      <p class="hint" style="margin-top:8px">Clicks at 110 per minute and counts to 30. Turn your volume up.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Trauma priorities (MARCH)</summary>
+    <div class="body">
+      <dl class="march">
+        <dt>M</dt><dd>Massive bleeding. Stop it first, before anything else.</dd>
+        <dt>A</dt><dd>Airway. Open it. Roll an unresponsive, breathing casualty onto their side.</dd>
+        <dt>R</dt><dd>Respiration. Seal open chest wounds with a vented chest seal. Watch for breathing that gets worse.</dd>
+        <dt>C</dt><dd>Circulation. Check for other bleeding and signs of shock: pale, cold, clammy skin and a fast pulse.</dd>
+        <dt>H</dt><dd>Hypothermia and head injury. Insulate the casualty from the ground and keep them warm, even in warm weather.</dd>
+      </dl>
+    </div>
+  </details>
+
+  <p class="foot">Reference only, not a substitute for training. Take a Stop the Bleed, CPR and wilderness first aid course.</p>
+</section>
+</main>
+
+<nav class="tabbar" aria-label="Sections">
+  <button data-tab="survival" aria-current="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 12 4l9 16z"/><path d="M12 20v-6"/><path d="M9.5 20 12 14l2.5 6"/></svg>
+    Survival
+  </button>
+  <button data-tab="tactical" aria-current="page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 1v5M12 18v5M1 12h5M18 12h5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+    Tactical
+  </button>
+  <button data-tab="emergency" aria-current="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg>
+    Emergency
+  </button>
+</nav>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- Geo: WGS84 UTM / MGRS, distance, bearing ---------- */
+const GEO = (() => {
+  const a = 6378137, f = 1 / 298.257223563, k0 = 0.9996;
+  const e2 = f * (2 - f), ep2 = e2 / (1 - e2);
+  const D2R = Math.PI / 180, R2D = 180 / Math.PI;
+  const BANDS = 'CDEFGHJKLMNPQRSTUVWX';
+  const COLS = ['ABCDEFGH', 'JKLMNPQR', 'STUVWXYZ'];
+  const ROWS = 'ABCDEFGHJKLMNPQRSTUV';
+
+  function zoneFor(lat, lon) {
+    let z = Math.floor((lon + 180) / 6) + 1;
+    if (z > 60) z = 60;
+    if (lat >= 56 && lat < 64 && lon >= 3 && lon < 12) z = 32;
+    if (lat >= 72 && lat < 84) {
+      if (lon >= 0 && lon < 9) z = 31;
+      else if (lon >= 9 && lon < 21) z = 33;
+      else if (lon >= 21 && lon < 33) z = 35;
+      else if (lon >= 33 && lon < 42) z = 37;
+    }
+    return z;
+  }
+
+  function toUTM(lat, lon, forceZone) {
+    const zone = forceZone || zoneFor(lat, lon);
+    const lon0 = ((zone - 1) * 6 - 180 + 3) * D2R;
+    const p = lat * D2R, l = lon * D2R;
+    const sp = Math.sin(p), cp = Math.cos(p), tp = Math.tan(p);
+    const N = a / Math.sqrt(1 - e2 * sp * sp);
+    const T = tp * tp, C = ep2 * cp * cp, A = cp * (l - lon0);
+    const M = a * ((1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 ** 3 / 256) * p
+      - (3 * e2 / 8 + 3 * e2 * e2 / 32 + 45 * e2 ** 3 / 1024) * Math.sin(2 * p)
+      + (15 * e2 * e2 / 256 + 45 * e2 ** 3 / 1024) * Math.sin(4 * p)
+      - (35 * e2 ** 3 / 3072) * Math.sin(6 * p));
+    const easting = k0 * N * (A + (1 - T + C) * A ** 3 / 6
+      + (5 - 18 * T + T * T + 72 * C - 58 * ep2) * A ** 5 / 120) + 500000;
+    let northing = k0 * (M + N * tp * (A * A / 2 + (5 - T + 9 * C + 4 * C * C) * A ** 4 / 24
+      + (61 - 58 * T + T * T + 600 * C - 330 * ep2) * A ** 6 / 720));
+    if (lat < 0) northing += 10000000;
+    return { zone, hemi: lat < 0 ? 'S' : 'N', easting, northing };
+  }
+
+  function fromUTM(zone, hemi, E, N) {
+    const x = E - 500000, y = hemi === 'S' ? N - 10000000 : N;
+    const lon0 = ((zone - 1) * 6 - 180 + 3) * D2R;
+    const mu = (y / k0) / (a * (1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 ** 3 / 256));
+    const e1 = (1 - Math.sqrt(1 - e2)) / (1 + Math.sqrt(1 - e2));
+    const p1 = mu + (3 * e1 / 2 - 27 * e1 ** 3 / 32) * Math.sin(2 * mu)
+      + (21 * e1 * e1 / 16 - 55 * e1 ** 4 / 32) * Math.sin(4 * mu)
+      + (151 * e1 ** 3 / 96) * Math.sin(6 * mu)
+      + (1097 * e1 ** 4 / 512) * Math.sin(8 * mu);
+    const sp = Math.sin(p1), cp = Math.cos(p1), tp = Math.tan(p1);
+    const N1 = a / Math.sqrt(1 - e2 * sp * sp);
+    const T1 = tp * tp, C1 = ep2 * cp * cp;
+    const R1 = a * (1 - e2) / Math.pow(1 - e2 * sp * sp, 1.5);
+    const D = x / (N1 * k0);
+    const lat = p1 - (N1 * tp / R1) * (D * D / 2
+      - (5 + 3 * T1 + 10 * C1 - 4 * C1 * C1 - 9 * ep2) * D ** 4 / 24
+      + (61 + 90 * T1 + 298 * C1 + 45 * T1 * T1 - 252 * ep2 - 3 * C1 * C1) * D ** 6 / 720);
+    const lon = lon0 + (D - (1 + 2 * T1 + C1) * D ** 3 / 6
+      + (5 - 2 * C1 + 28 * T1 - 3 * C1 * C1 + 8 * ep2 + 24 * T1 * T1) * D ** 5 / 120) / cp;
+    return { lat: lat * R2D, lon: lon * R2D };
+  }
+
+  /* MGRS (WGS84, AA lettering). Polar UPS regions are not covered. */
+  function toMGRS(lat, lon, digits = 5) {
+    if (!(lat >= -80 && lat < 84)) return null;
+    const u = toUTM(lat, lon);
+    const band = BANDS[Math.min(19, Math.floor((lat + 80) / 8))];
+    const col = Math.floor(u.easting / 1e5);
+    const colL = COLS[(u.zone - 1) % 3][col - 1];
+    const rowL = ROWS[(Math.floor(u.northing / 1e5) + (u.zone % 2 === 0 ? 5 : 0)) % 20];
+    const div = Math.pow(10, 5 - digits);
+    // 1 mm tolerance so round-tripped grids don't floor 25000 down to 24999
+    const e = String(Math.floor(((u.easting + 1e-3) % 1e5) / div)).padStart(digits, '0');
+    const n = String(Math.floor(((u.northing + 1e-3) % 1e5) / div)).padStart(digits, '0');
+    return { gzd: `${u.zone}${band}`, sq: colL + rowL, e, n, text: `${u.zone}${band} ${colL}${rowL} ${e} ${n}` };
+  }
+
+  function parseMGRS(str) {
+    const s = String(str).toUpperCase().replace(/\s+/g, '');
+    const m = s.match(/^(\d{1,2})([C-HJ-NP-X])([A-HJ-NP-Z])([A-HJ-NP-V])(\d*)$/);
+    if (!m) return null;
+    const zone = +m[1], band = m[2], colL = m[3], rowL = m[4], digs = m[5];
+    if (zone < 1 || zone > 60 || digs.length % 2 || digs.length > 10) return null;
+    const half = digs.length / 2;
+    const scale = Math.pow(10, 5 - half);
+    const centre = half < 5 ? scale / 2 : 0; // middle of the square at reduced precision
+    const eVal = (half ? +digs.slice(0, half) : 0) * scale + centre;
+    const nVal = (half ? +digs.slice(half) : 0) * scale + centre;
+    const colIdx = COLS[(zone - 1) % 3].indexOf(colL);
+    if (colIdx < 0) return null;
+    let rowIdx = ROWS.indexOf(rowL);
+    if (zone % 2 === 0) rowIdx = (rowIdx - 5 + 20) % 20;
+    const E = (colIdx + 1) * 1e5 + eVal;
+    let N = rowIdx * 1e5 + nVal;
+    const latBand = BANDS.indexOf(band) * 8 - 80;
+    const hemi = latBand >= 0 ? 'N' : 'S';
+    const cm = (zone - 1) * 6 - 180 + 3;
+    const nBand = Math.floor(toUTM(latBand, cm, zone).northing / 1e5) * 1e5;
+    let n2M = 0;
+    while (n2M + N < nBand) n2M += 2e6;
+    N += n2M;
+    return fromUTM(zone, hemi, E, N);
+  }
+
+  /* Accepts MGRS or "lat, lon" in decimal degrees. */
+  function parseAny(str) {
+    const ll = String(str).trim().match(/^(-?\d+(?:\.\d+)?)\s*[,\s]\s*(-?\d+(?:\.\d+)?)$/);
+    if (ll) {
+      const lat = +ll[1], lon = +ll[2];
+      if (Math.abs(lat) <= 90 && Math.abs(lon) <= 180) return { lat, lon };
+      return null;
+    }
+    return parseMGRS(str);
+  }
+
+  function distance(lat1, lon1, lat2, lon2) {
+    const R = 6371008.8;
+    const dp = (lat2 - lat1) * D2R, dl = (lon2 - lon1) * D2R;
+    const h = Math.sin(dp / 2) ** 2 + Math.cos(lat1 * D2R) * Math.cos(lat2 * D2R) * Math.sin(dl / 2) ** 2;
+    return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+  }
+
+  function bearing(lat1, lon1, lat2, lon2) {
+    const p1 = lat1 * D2R, p2 = lat2 * D2R, dl = (lon2 - lon1) * D2R;
+    const y = Math.sin(dl) * Math.cos(p2);
+    const x = Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl);
+    return (Math.atan2(y, x) * R2D + 360) % 360;
+  }
+
+  function dms(v, pos, neg) {
+    const h = v < 0 ? neg : pos;
+    v = Math.abs(v);
+    let d = Math.floor(v), m = Math.floor((v - d) * 60), s = ((v - d) * 60 - m) * 60;
+    if (s >= 59.95) { s = 0; m += 1; }
+    if (m >= 60) { m = 0; d += 1; }
+    return `${d}°${String(m).padStart(2, '0')}′${s.toFixed(1).padStart(4, '0')}″${h}`;
+  }
+
+  const CARD = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  const cardinal = deg => CARD[Math.round(((deg % 360) + 360) % 360 / 22.5) % 16];
+
+  return { toUTM, fromUTM, toMGRS, parseMGRS, parseAny, distance, bearing, dms, cardinal };
+})();
+
+/* ---------- Ballistics: point-mass solver, G1/G7 standard drag ---------- */
+const BAL = (() => {
+  // [Mach, Cd] standard projectile drag tables
+  const G1 = [[0,.2629],[.05,.2558],[.1,.2487],[.15,.2413],[.2,.2344],[.25,.2278],[.3,.2214],[.35,.2155],[.4,.2104],[.45,.2061],[.5,.2032],[.55,.202],[.6,.2034],[.7,.2165],[.725,.223],[.75,.2313],[.775,.2417],[.8,.2546],[.825,.2706],[.85,.2901],[.875,.3136],[.9,.3415],[.925,.3734],[.95,.4084],[.975,.4448],[1,.4805],[1.025,.5136],[1.05,.5427],[1.075,.5677],[1.1,.5883],[1.125,.6053],[1.15,.6191],[1.2,.6393],[1.25,.6518],[1.3,.6589],[1.35,.6621],[1.4,.6625],[1.45,.6607],[1.5,.6573],[1.55,.6528],[1.6,.6474],[1.65,.6413],[1.7,.6347],[1.75,.628],[1.8,.621],[1.85,.6141],[1.9,.6072],[1.95,.6003],[2,.5934],[2.05,.5867],[2.1,.5804],[2.15,.5743],[2.2,.5685],[2.25,.563],[2.3,.5577],[2.35,.5527],[2.4,.5481],[2.45,.5438],[2.5,.5397],[2.6,.5325],[2.7,.5264],[2.8,.5211],[2.9,.5168],[3,.5133],[3.1,.5105],[3.2,.5084],[3.3,.5067],[3.4,.5054],[3.5,.504],[3.6,.503],[3.7,.5022],[3.8,.5016],[3.9,.501],[4,.5006],[4.2,.4998],[4.4,.4995],[4.6,.4992],[4.8,.499],[5,.4988]];
+  const G7 = [[0,.1198],[.05,.1197],[.1,.1196],[.15,.1194],[.2,.1193],[.25,.1194],[.3,.1194],[.35,.1194],[.4,.1193],[.45,.1193],[.5,.1194],[.55,.1193],[.6,.1194],[.65,.1197],[.7,.1202],[.725,.1207],[.75,.1215],[.775,.1226],[.8,.1242],[.825,.1266],[.85,.1306],[.875,.1368],[.9,.1464],[.925,.166],[.95,.2054],[.975,.2993],[1,.3803],[1.025,.4015],[1.05,.4043],[1.075,.4034],[1.1,.4014],[1.125,.3987],[1.15,.3955],[1.2,.3884],[1.25,.381],[1.3,.3732],[1.35,.3657],[1.4,.358],[1.5,.344],[1.55,.3376],[1.6,.3315],[1.65,.326],[1.7,.3209],[1.75,.316],[1.8,.3117],[1.85,.3078],[1.9,.3042],[1.95,.301],[2,.298],[2.05,.2951],[2.1,.2922],[2.15,.2892],[2.2,.2864],[2.25,.2835],[2.3,.2807],[2.35,.2779],[2.4,.2752],[2.45,.2725],[2.5,.2697],[2.55,.267],[2.6,.2643],[2.65,.2615],[2.7,.2588],[2.75,.2561],[2.8,.2533],[2.85,.2506],[2.9,.2479],[2.95,.2451],[3,.2424],[3.1,.2368],[3.2,.2313],[3.3,.2258],[3.4,.2205],[3.5,.2154],[3.6,.2106],[3.7,.206],[3.8,.2017],[3.9,.1975],[4,.1935],[4.2,.1861],[4.4,.1793],[4.6,.173],[4.8,.1672],[5,.1618]];
+  const TABLES = { G1, G7 };
+
+  const G = 9.80665, IN = 0.0254, YD = 0.9144, FPS = 0.3048, MPH = 0.44704;
+  const LBIN2 = 703.0696; // lb/in² → kg/m²
+
+  function cd(t, m) {
+    if (m <= t[0][0]) return t[0][1];
+    const last = t.length - 1;
+    if (m >= t[last][0]) return t[last][1];
+    let lo = 0, hi = last;
+    while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (t[mid][0] <= m) lo = mid; else hi = mid; }
+    const [m0, c0] = t[lo], [m1, c1] = t[hi];
+    return c0 + (c1 - c0) * (m - m0) / (m1 - m0);
+  }
+
+  /* Air density (kg/m³) and speed of sound (m/s) at the shooter. */
+  function atmosphere(tempF, altFt, pressInHg, rh) {
+    const Tc = (tempF - 32) * 5 / 9, T = Tc + 273.15;
+    const pIn = pressInHg > 0 ? pressInHg : 29.92126 * Math.pow(1 - 6.8755856e-6 * altFt, 5.2558797);
+    const P = pIn * 3386.389;
+    const Psat = 610.78 * Math.exp(17.27 * Tc / (Tc + 237.3));
+    const Pv = Math.min(1, Math.max(0, rh / 100)) * Psat;
+    const rho = (P - Pv) / (287.058 * T) + Pv / (461.495 * T);
+    const c = 331.3 * Math.sqrt(1 + Tc / 273.15);
+    return { rho, c, pIn };
+  }
+
+  /* Integrate in a frame aligned with the line of sight (x downrange, y up, z right).
+     Returns the state interpolated at each requested x (metres, ascending). */
+  function fly(s, alpha, theta, wx, wz, xs) {
+    const gx = -G * Math.sin(theta), gy = -G * Math.cos(theta);
+    const t = TABLES[s.model];
+    const acc = (vx, vy, vz) => {
+      const rx = vx - wx, rz = vz - wz;
+      const vr = Math.hypot(rx, vy, rz);
+      const k = s.K * s.rho * cd(t, vr / s.c) * vr;
+      return [-k * rx + gx, -k * vy + gy, -k * rz];
+    };
+    let st = [0, -s.h, 0, s.v0 * Math.cos(alpha), s.v0 * Math.sin(alpha), 0, 0];
+    const out = [];
+    let i = 0;
+    const dt = 0.001;
+    while (i < xs.length && st[6] < 15) {
+      const [x, y, z, vx, vy, vz, tm] = st;
+      const a1 = acc(vx, vy, vz);
+      const a2 = acc(vx + a1[0] * dt / 2, vy + a1[1] * dt / 2, vz + a1[2] * dt / 2);
+      const a3 = acc(vx + a2[0] * dt / 2, vy + a2[1] * dt / 2, vz + a2[2] * dt / 2);
+      const a4 = acc(vx + a3[0] * dt, vy + a3[1] * dt, vz + a3[2] * dt);
+      const nvx = vx + dt / 6 * (a1[0] + 2 * a2[0] + 2 * a3[0] + a4[0]);
+      const nvy = vy + dt / 6 * (a1[1] + 2 * a2[1] + 2 * a3[1] + a4[1]);
+      const nvz = vz + dt / 6 * (a1[2] + 2 * a2[2] + 2 * a3[2] + a4[2]);
+      const nst = [x + dt * (vx + nvx) / 2, y + dt * (vy + nvy) / 2, z + dt * (vz + nvz) / 2, nvx, nvy, nvz, tm + dt];
+      if (nvx <= 0) break;
+      while (i < xs.length && nst[0] >= xs[i]) {
+        const r = (xs[i] - x) / (nst[0] - x);
+        const L = k => st[k] + (nst[k] - st[k]) * r;
+        out.push({ x: xs[i], y: L(1), z: L(2), v: Math.hypot(L(3), L(4), L(5)), t: L(6) });
+        i++;
+      }
+      st = nst;
+    }
+    return out;
+  }
+
+  /* p: { bc, model, w (gr), mv (fps), sight (in), zero (yd), temp (°F), alt (ft),
+          press (inHg, 0 = from altitude), rh (%), wind (mph), clock (1–12), angle (°),
+          ranges: [yd,...] } */
+  function solve(p) {
+    if (!(p.bc > 0) || !(p.mv > 0) || !(p.zero > 0)) return { error: 'Enter a BC, muzzle velocity and zero range.' };
+    const atm = atmosphere(p.temp, p.alt || 0, p.press, p.rh || 0);
+    const s = { model: p.model === 'G7' ? 'G7' : 'G1', K: (Math.PI / 8) / (p.bc * LBIN2),
+      rho: atm.rho, c: atm.c, v0: p.mv * FPS, h: (p.sight || 0) * IN };
+
+    // Zero under current conditions, level, no wind.
+    const zx = p.zero * YD;
+    let alpha = Math.atan(s.h / zx);
+    for (let n = 0; n < 25; n++) {
+      const r = fly(s, alpha, 0, 0, 0, [zx])[0];
+      if (!r) return { error: 'Bullet never reaches the zero range with these inputs.' };
+      if (Math.abs(r.y) < 1e-6) break;
+      alpha -= r.y / zx;
+    }
+
+    const ang = ((p.clock || 12) % 12) * 30 * Math.PI / 180;
+    const W = (p.wind || 0) * MPH;
+    const wx = -W * Math.cos(ang), wz = -W * Math.sin(ang);
+    const theta = (p.angle || 0) * Math.PI / 180;
+    const xs = [...new Set(p.ranges.filter(r => r > 0))].sort((a, b) => a - b).map(r => r * YD);
+    const pts = fly(s, alpha, theta, wx, wz, xs);
+
+    const rows = pts.map(q => {
+      const vf = q.v / FPS;
+      const elev = -Math.atan2(q.y, q.x), wind = -Math.atan2(q.z, q.x);
+      return { yd: Math.round(q.x / YD), dropIn: q.y / IN, windIn: q.z / IN,
+        elevMil: elev * 1000, elevMoa: elev * 180 / Math.PI * 60,
+        windMil: wind * 1000, windMoa: wind * 180 / Math.PI * 60,
+        fps: vf, ftlb: (p.w || 0) * vf * vf / 450240, tof: q.t, mach: q.v / s.c };
+    });
+    return { rows, atm, cross: W / MPH * Math.sin(ang), head: W / MPH * Math.cos(ang) };
+  }
+
+  return { solve, atmosphere };
+})();
+
+/* ---------- App ---------- */
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement;
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('fk.' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('fk.' + k, JSON.stringify(v)); } catch { /* storage unavailable */ } }
+  };
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const num = el => { const v = parseFloat(el.value); return Number.isFinite(v) ? v : 0; };
+
+  let toastT;
+  function toast(msg) {
+    const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  /* ---------- Theme ---------- */
+  function setNight(on) {
+    if (on) root.dataset.theme = 'night'; else delete root.dataset.theme;
+    $('#nightBtn').setAttribute('aria-pressed', String(on));
+    store.set('night', on);
+    requestAnimationFrame(() => {
+      $('meta[name="theme-color"]').content = getComputedStyle(root).getPropertyValue('--paper').trim() || '#000';
+    });
+  }
+  $('#nightBtn').addEventListener('click', () => setNight(root.dataset.theme !== 'night'));
+
+  /* ---------- Navigation ---------- */
+  const TITLES = { survival: 'Survival', tactical: 'Tactical', emergency: 'Emergency' };
+  let view = store.get('view', 'position');
+  function showTab(id) {
+    if (!TITLES[id]) id = 'tactical';
+    $$('.tab').forEach(t => { t.hidden = t.id !== 'tab-' + id; });
+    $$('.tabbar button').forEach(b => b.setAttribute('aria-current', b.dataset.tab === id ? 'page' : 'false'));
+    root.dataset.tab = id;
+    $('#title').textContent = TITLES[id];
+    store.set('tab', id);
+    window.scrollTo(0, 0);
+    sensors();
+  }
+  function showView(v) {
+    view = v === 'ballistics' ? 'ballistics' : 'position';
+    $('#view-position').hidden = view !== 'position';
+    $('#view-ballistics').hidden = view !== 'ballistics';
+    $$('#tacSeg button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === view)));
+    store.set('view', view);
+    sensors();
+  }
+  $$('.tabbar button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+  $$('#tacSeg button').forEach(b => b.addEventListener('click', () => showView(b.dataset.view)));
+
+  /* ---------- GPS ---------- */
+  let watchId = null, fix = store.get('lastFix', null), llFormat = store.get('llFormat', 'dec');
+  const positionVisible = () => root.dataset.tab === 'tactical' && view === 'position' && !document.hidden;
+
+  function setStatus(msg, warn) { const s = $('#gpsStatus'); s.textContent = msg; s.classList.toggle('warn', !!warn); }
+
+  function startGps() {
+    if (watchId !== null) return;
+    if (!('geolocation' in navigator)) { setStatus('This browser has no location support.', true); return; }
+    if (!window.isSecureContext) { setStatus('Location needs HTTPS. Open the app from its GitHub Pages address.', true); return; }
+    setStatus(fix ? 'Updating position…' : 'Getting a GPS fix. Open sky helps.');
+    watchId = navigator.geolocation.watchPosition(onFix, onGpsErr, { enableHighAccuracy: true, maximumAge: 2000, timeout: 30000 });
+  }
+  function stopGps() { if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; } }
+
+  function onFix(p) {
+    const c = p.coords;
+    fix = { lat: c.latitude, lon: c.longitude, alt: c.altitude, acc: c.accuracy, spd: c.speed, t: p.timestamp };
+    store.set('lastFix', fix);
+    setStatus('Live fix, ' + new Date(p.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+    renderFix(); renderWps(); renderTarget();
+  }
+  function onGpsErr(e) {
+    const msgs = {
+      1: 'Location is blocked. Allow location for this site in Chrome’s site settings, then reload.',
+      2: 'No GPS signal. Move to open sky.',
+      3: 'Still searching for satellites. Move to open sky.'
+    };
+    setStatus(msgs[e.code] || 'Location error: ' + e.message, true);
+  }
+
+  function renderFix() {
+    const m = $('#mgrs'), ll = $('#latlon');
+    if (!fix) { m.classList.add('empty'); m.textContent = 'No fix yet'; ll.textContent = ''; return; }
+    const g = GEO.toMGRS(fix.lat, fix.lon);
+    m.classList.remove('empty');
+    m.innerHTML = g ? `<span class="gz">${g.gzd} ${g.sq}</span>${g.e} ${g.n}` : 'Polar region (UPS)';
+    ll.textContent = llFormat === 'dms'
+      ? `${GEO.dms(fix.lat, 'N', 'S')}  ${GEO.dms(fix.lon, 'E', 'W')}`
+      : `${fix.lat.toFixed(6)}, ${fix.lon.toFixed(6)}`;
+    $('#sAlt').textContent = fix.alt == null ? '—' : `${Math.round(fix.alt * 3.28084).toLocaleString()} ft`;
+    $('#sAcc').textContent = fix.acc == null ? '—' : `±${Math.round(fix.acc)} m`;
+    $('#sSpd').textContent = fix.spd == null || Number.isNaN(fix.spd) ? '—' : `${(fix.spd * 2.23694).toFixed(1)} mph`;
+  }
+
+  $('#mgrs').addEventListener('click', () => {
+    if (!fix) return;
+    const g = GEO.toMGRS(fix.lat, fix.lon);
+    copy(g ? g.text : `${fix.lat.toFixed(6)}, ${fix.lon.toFixed(6)}`);
+  });
+  $('#latlon').addEventListener('click', () => {
+    llFormat = llFormat === 'dec' ? 'dms' : 'dec'; store.set('llFormat', llFormat); renderFix();
+  });
+  async function copy(text) {
+    try { await navigator.clipboard.writeText(text); toast('Copied ' + text); } catch { toast(text); }
+  }
+
+  /* ---------- Compass ---------- */
+  let heading = null, compassOn = false, gotOri = false, oriTimer = null;
+  let decl = store.get('decl', 0);
+  $('#decl').value = decl || '';
+  $('#decl').addEventListener('input', e => { decl = num(e.target); store.set('decl', decl); renderCompass(); renderWps(); renderTarget(); });
+
+  // Build rose: ticks every 10°, cardinal letters
+  (function buildRose() {
+    const g = $('#rose'); let s = '';
+    for (let d = 0; d < 360; d += 10) {
+      const major = d % 90 === 0, mid = d % 30 === 0;
+      s += `<line x1="100" y1="${major ? 6 : 6}" x2="100" y2="${major ? 22 : mid ? 18 : 13}" stroke="var(--ink)" stroke-width="${major ? 2.5 : 1.2}" transform="rotate(${d} 100 100)"/>`;
+      if (mid && !major) s += `<text x="100" y="34" font-size="11" text-anchor="middle" fill="var(--muted)" transform="rotate(${d} 100 100)">${d}</text>`;
+    }
+    [['N', 0], ['E', 90], ['S', 180], ['W', 270]].forEach(([l, d]) => {
+      s += `<text x="100" y="42" font-size="${l === 'N' ? 22 : 18}" font-weight="700" text-anchor="middle" fill="${l === 'N' ? 'var(--c)' : 'var(--ink)'}" transform="rotate(${d} 100 100)">${l}</text>`;
+    });
+    s += `<g id="tgtMark" hidden><circle cx="100" cy="58" r="7" fill="var(--blaze)"/></g>`;
+    g.innerHTML = s;
+  })();
+
+  function onOri(e) {
+    let h = null;
+    if (typeof e.webkitCompassHeading === 'number') h = e.webkitCompassHeading;
+    else if (e.alpha != null && (e.absolute || e.type === 'deviceorientationabsolute')) h = 360 - e.alpha;
+    if (h == null) return;
+    const scr = (screen.orientation && screen.orientation.angle) || 0;
+    h = (h + scr + 360) % 360;
+    gotOri = true;
+    if (heading == null) heading = h;
+    else { const d = ((h - heading + 540) % 360) - 180; heading = (heading + d * 0.25 + 360) % 360; }
+    renderCompass(); renderTarget();
+  }
+  function startCompass() {
+    if (compassOn) return;
+    compassOn = true;
+    if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', onOri);
+    else window.addEventListener('deviceorientation', onOri);
+    clearTimeout(oriTimer);
+    oriTimer = setTimeout(() => { if (!gotOri) $('#hdgRef').textContent = 'No compass sensor found.'; }, 4000);
+  }
+  function stopCompass() {
+    if (!compassOn) return;
+    compassOn = false;
+    window.removeEventListener('deviceorientationabsolute', onOri);
+    window.removeEventListener('deviceorientation', onOri);
+  }
+  const trueHeading = () => heading == null ? null : (heading + decl + 360) % 360;
+  function renderCompass() {
+    const th = trueHeading();
+    if (th == null) return;
+    $('#rose').style.transform = `rotate(${-th}deg)`;
+    $('#hdg').textContent = Math.round(th) % 360 + '°';
+    const mils = Math.round(th * 6400 / 360) % 6400;
+    $('#hdgRef').textContent = `${GEO.cardinal(th)}, ${mils} mils, ${decl ? 'true' : 'magnetic'}`;
+  }
+
+  /* ---------- Screen wake lock ---------- */
+  let wakeWanted = false, wakeLock = null;
+  async function acquireWake() {
+    try { wakeLock = await navigator.wakeLock.request('screen'); wakeLock.addEventListener('release', () => { wakeLock = null; }); }
+    catch { wakeWanted = false; toast('This browser can’t keep the screen on.'); }
+    $('#wakeBtn').setAttribute('aria-pressed', String(wakeWanted));
+    $('#wakeBtn').textContent = wakeWanted ? 'Screen stays on' : 'Keep screen on';
+  }
+  async function setWake(on) {
+    wakeWanted = on;
+    if (on) { if (!('wakeLock' in navigator)) { wakeWanted = false; toast('This browser can’t keep the screen on.'); } else await acquireWake(); }
+    else if (wakeLock) { await wakeLock.release(); wakeLock = null; }
+    $('#wakeBtn').setAttribute('aria-pressed', String(wakeWanted));
+    $('#wakeBtn').textContent = wakeWanted ? 'Screen stays on' : 'Keep screen on';
+  }
+  $('#wakeBtn').addEventListener('click', () => setWake(!wakeWanted));
+
+  /* ---------- Waypoints ---------- */
+  let wps = store.get('wps', []);
+  let targetId = store.get('target', null);
+  const saveWps = () => { store.set('wps', wps); store.set('target', targetId); };
+  const fmtDist = m => m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(m < 10000 ? 2 : 1)} km`;
+  const fmtMi = m => `${(m / 1609.344).toFixed(m < 16093 ? 2 : 1)} mi`;
+
+  function addWp(lat, lon, name, alt) {
+    const n = (name || '').trim() || `WP ${wps.length + 1}`;
+    wps.push({ id: Date.now().toString(36), name: n, lat, lon, alt: alt ?? null, t: Date.now() });
+    saveWps(); renderWps();
+    return n;
+  }
+  $('#wpMark').addEventListener('click', () => {
+    if (!fix) { $('#wpMsg').textContent = 'Wait for a GPS fix before marking.'; return; }
+    const n = addWp(fix.lat, fix.lon, $('#wpName').value, fix.alt);
+    $('#wpName').value = ''; $('#wpMsg').textContent = `Marked ${n}.`;
+  });
+  $('#wpAdd').addEventListener('click', () => {
+    const p = GEO.parseAny($('#wpCoord').value);
+    if (!p) { $('#wpMsg').textContent = 'Couldn’t read that. Try 18S UJ 23394 07395 or 38.8977, -77.0365.'; return; }
+    const n = addWp(p.lat, p.lon, $('#wpName').value);
+    $('#wpCoord').value = ''; $('#wpName').value = ''; $('#wpMsg').textContent = `Added ${n}.`;
+  });
+
+  function renderWps() {
+    const ul = $('#wpList');
+    if (!wps.length) { ul.innerHTML = '<li><span class="wmeta">No waypoints yet. Mark your position or add a grid.</span></li>'; $('#wpExport').disabled = true; return; }
+    $('#wpExport').disabled = false;
+    ul.innerHTML = wps.map(w => {
+      const g = GEO.toMGRS(w.lat, w.lon);
+      let rel = '';
+      if (fix) {
+        const d = GEO.distance(fix.lat, fix.lon, w.lat, w.lon);
+        const b = GEO.bearing(fix.lat, fix.lon, w.lat, w.lon);
+        rel = d < 3 ? '<br>You are here' : `<br>${fmtDist(d)} (${fmtMi(d)}) at ${Math.round(b)}° true`;
+      }
+      const isT = w.id === targetId;
+      return `<li class="${isT ? 'target' : ''}" data-id="${w.id}">
+        <span class="wname">${esc(w.name)}</span>
+        <span class="wmeta">${g ? g.text : w.lat.toFixed(5) + ', ' + w.lon.toFixed(5)}${rel}</span>
+        <span class="wact">
+          <button class="btn small ${isT ? '' : 'ghost'}" data-act="nav">${isT ? 'Stop' : 'Go to'}</button>
+          <button class="btn small ghost" data-act="del" aria-label="Delete ${esc(w.name)}">Delete</button>
+        </span></li>`;
+    }).join('');
+  }
+  $('#wpList').addEventListener('click', e => {
+    const btn = e.target.closest('button'); if (!btn) return;
+    const id = btn.closest('li').dataset.id, w = wps.find(x => x.id === id); if (!w) return;
+    if (btn.dataset.act === 'nav') { targetId = targetId === id ? null : id; }
+    if (btn.dataset.act === 'del') {
+      if (!confirm(`Delete ${w.name}?`)) return;
+      wps = wps.filter(x => x.id !== id); if (targetId === id) targetId = null;
+    }
+    saveWps(); renderWps(); renderTarget();
+  });
+
+  function renderTarget() {
+    const w = wps.find(x => x.id === targetId), info = $('#tgtInfo'), mark = $('#tgtMark');
+    if (!w || !fix) { info.hidden = true; mark.setAttribute('hidden', ''); return; }
+    const d = GEO.distance(fix.lat, fix.lon, w.lat, w.lon);
+    const b = GEO.bearing(fix.lat, fix.lon, w.lat, w.lon);
+    mark.removeAttribute('hidden');
+    mark.setAttribute('transform', `rotate(${b} 100 100)`);
+    let turn = '';
+    const th = trueHeading();
+    if (th != null) {
+      const off = ((b - th + 540) % 360) - 180;
+      turn = Math.abs(off) < 5 ? 'Straight ahead' : `Turn ${Math.round(Math.abs(off))}° ${off > 0 ? 'right' : 'left'}`;
+    }
+    info.hidden = false;
+    info.innerHTML = `<b style="font-size:20px">${esc(w.name)}</b><br>${fmtDist(d)} at ${Math.round(b)}° true${turn ? '<br>' + turn : ''}`;
+  }
+
+  $('#wpExport').addEventListener('click', () => {
+    const pm = wps.map(w => `  <Placemark><name>${esc(w.name)}</name><Point><coordinates>${w.lon},${w.lat},${w.alt ?? 0}</coordinates></Point></Placemark>`).join('\n');
+    const kml = `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2">\n<Document><name>Field Kit waypoints</name>\n${pm}\n</Document>\n</kml>\n`;
+    const url = URL.createObjectURL(new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' }));
+    const a = Object.assign(document.createElement('a'), { href: url, download: `waypoints-${new Date().toISOString().slice(0, 10)}.kml` });
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    toast('Saved to Downloads. In ATAK: Import → Local SD.');
+  });
+
+  /* ---------- Sensors on/off with visibility (saves battery) ---------- */
+  function sensors() {
+    if (positionVisible()) { startGps(); startCompass(); }
+    else { stopGps(); stopCompass(); }
+    tqTick();
+  }
+  document.addEventListener('visibilitychange', () => {
+    sensors();
+    if (!document.hidden && wakeWanted && !wakeLock) acquireWake();
+  });
+
+  /* ---------- Ballistics ---------- */
+  const PRESETS = [
+    { id: 'p556', name: '5.56 NATO 62 gr M855, 20″ barrel', bc: 0.304, model: 'G1', w: 62, mv: 3020, sight: 2.6, zero: 100 },
+    { id: 'p223', name: '.223 Rem 77 gr OTM', bc: 0.372, model: 'G1', w: 77, mv: 2750, sight: 2.6, zero: 100 },
+    { id: 'p76239', name: '7.62×39 123 gr FMJ', bc: 0.29, model: 'G1', w: 123, mv: 2350, sight: 2.0, zero: 100 },
+    { id: 'p65cm', name: '6.5 Creedmoor 140 gr ELD-M', bc: 0.326, model: 'G7', w: 140, mv: 2710, sight: 1.5, zero: 100 },
+    { id: 'p308', name: '.308 Win 175 gr SMK', bc: 0.243, model: 'G7', w: 175, mv: 2600, sight: 1.5, zero: 100 }
+  ];
+  let profiles = store.get('profiles', []);
+  let unit = store.get('unit', 'mil');
+  const F = id => $('#' + id);
+  const LOAD_FIELDS = { bc: 'bBC', model: 'bModel', w: 'bW', mv: 'bMV', sight: 'bSH', zero: 'bZero' };
+  const ALL_FIELDS = ['bRange', 'bAngle', 'bWind', 'bClock', 'bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep'];
+
+  function fillProfiles(sel) {
+    const opt = p => `<option value="${p.id}">${esc(p.name)}</option>`;
+    F('bProfile').innerHTML =
+      (profiles.length ? `<optgroup label="My profiles">${profiles.map(opt).join('')}</optgroup>` : '') +
+      `<optgroup label="Starting points">${PRESETS.map(opt).join('')}</optgroup>` +
+      `<option value="custom">Custom (unsaved)</option>`;
+    F('bProfile').value = sel || 'custom';
+    if (!F('bProfile').value) F('bProfile').value = 'custom';
+    F('bDel').hidden = !profiles.some(p => p.id === F('bProfile').value);
+  }
+  function loadProfile(id) {
+    const p = profiles.find(x => x.id === id) || PRESETS.find(x => x.id === id);
+    if (!p) return;
+    for (const [k, fid] of Object.entries(LOAD_FIELDS)) F(fid).value = p[k];
+    F('bDel').hidden = !profiles.some(x => x.id === id);
+  }
+  F('bProfile').addEventListener('change', e => { loadProfile(e.target.value); saveInputs(); calc(); });
+  F('bSave').addEventListener('click', () => {
+    const name = (prompt('Name this profile, e.g. "Tikka .308 – 175 SMK"') || '').trim();
+    if (!name) return;
+    const p = { id: 'u' + Date.now().toString(36), name };
+    for (const [k, fid] of Object.entries(LOAD_FIELDS)) p[k] = k === 'model' ? F(fid).value : num(F(fid));
+    profiles.push(p); store.set('profiles', profiles); fillProfiles(p.id); saveInputs(); toast(`Saved ${name}`);
+  });
+  F('bDel').addEventListener('click', () => {
+    const id = F('bProfile').value, p = profiles.find(x => x.id === id);
+    if (!p || !confirm(`Delete ${p.name}?`)) return;
+    profiles = profiles.filter(x => x.id !== id); store.set('profiles', profiles); fillProfiles('custom'); saveInputs();
+  });
+
+  function saveInputs() {
+    const s = { profile: F('bProfile').value };
+    ALL_FIELDS.forEach(id => { s[id] = F(id).value; });
+    store.set('bal', s);
+  }
+  function restoreInputs() {
+    const s = store.get('bal', null);
+    if (!s) { fillProfiles('p308'); loadProfile('p308'); return; }
+    fillProfiles(s.profile);
+    ALL_FIELDS.forEach(id => { if (s[id] !== undefined) F(id).value = s[id]; });
+  }
+
+  const fmtAng = v => Math.abs(v).toFixed(1);
+  function calc() {
+    const max = Math.min(3000, Math.max(50, num(F('bMax')) || 1000));
+    const step = +F('bStep').value || 50;
+    const target = num(F('bRange'));
+    const ranges = [];
+    for (let r = step; r <= max; r += step) ranges.push(r);
+    const zero = num(F('bZero'));
+    if (zero && !ranges.includes(zero)) ranges.push(zero);
+    if (target > 0) ranges.push(target);
+
+    const res = BAL.solve({
+      bc: num(F('bBC')), model: F('bModel').value, w: num(F('bW')), mv: num(F('bMV')),
+      sight: num(F('bSH')), zero, temp: F('bTemp').value === '' ? 59 : num(F('bTemp')), alt: num(F('bAlt')),
+      press: num(F('bPress')), rh: num(F('bRH')), wind: num(F('bWind')), clock: +F('bClock').value,
+      angle: num(F('bAngle')), ranges
+    });
+    const U = unit === 'mil' ? 'mil' : 'MOA';
+    const ev = r => unit === 'mil' ? r.elevMil : r.elevMoa;
+    const wv = r => unit === 'mil' ? r.windMil : r.windMoa;
+    const dirE = v => Math.abs(v) < 0.05 ? '' : v > 0 ? 'U ' : 'D ';
+    const dirW = v => Math.abs(v) < 0.05 ? '' : v > 0 ? 'R ' : 'L ';
+
+    if (res.error) {
+      $('#solElev').textContent = '—'; $('#solWind').textContent = '—';
+      $('#solSub').textContent = res.error; $('#dope').innerHTML = ''; return;
+    }
+    const t = res.rows.find(r => r.yd === Math.round(target));
+    if (t) {
+      $('#solElev').innerHTML = `${dirE(ev(t))}${fmtAng(ev(t))} <small>${U}</small>`;
+      $('#solWind').innerHTML = `${dirW(wv(t))}${fmtAng(wv(t))} <small>${U}</small>`;
+      $('#solSub').textContent = `At ${t.yd} yd: drop ${Math.abs(t.dropIn).toFixed(1)} in, drift ${Math.abs(t.windIn).toFixed(1)} in, `
+        + `${Math.round(t.fps)} fps, ${Math.round(t.ftlb)} ft-lb, ${t.tof.toFixed(2)} s flight`
+        + (t.mach < 1 ? '. Subsonic: expect larger errors.' : '.');
+    } else {
+      $('#solElev').textContent = '—'; $('#solWind').textContent = '—';
+      $('#solSub').textContent = target > 0 ? 'Bullet doesn’t reach that range with these inputs.' : 'Enter a target range.';
+    }
+    const rows = res.rows.filter(r => r.yd % step === 0 || r.yd === zero);
+    $('#dope').innerHTML = `<thead><tr><th>Yd</th><th>Elev ${U}</th><th>Wind ${U}</th><th>Drop in</th><th>Drift in</th><th>fps</th><th>ft-lb</th><th>Time s</th></tr></thead><tbody>` +
+      rows.map(r => `<tr class="${r.yd === zero ? 'zero' : ''} ${r.mach < 1.2 ? 'trans' : ''}"><td>${r.yd}</td>` +
+        `<td>${dirE(ev(r))}${fmtAng(ev(r))}</td><td>${dirW(wv(r))}${fmtAng(wv(r))}</td>` +
+        `<td>${r.dropIn.toFixed(1)}</td><td>${Math.abs(r.windIn).toFixed(1)}</td><td>${Math.round(r.fps)}</td>` +
+        `<td>${Math.round(r.ftlb)}</td><td>${r.tof.toFixed(2)}</td></tr>`).join('') + '</tbody>';
+  }
+  let calcT;
+  ALL_FIELDS.forEach(id => F(id).addEventListener('input', e => {
+    if (Object.values(LOAD_FIELDS).includes(id)) { F('bProfile').value = 'custom'; F('bDel').hidden = true; }
+    clearTimeout(calcT); calcT = setTimeout(() => { saveInputs(); calc(); }, 150);
+  }));
+  $$('#unitSeg button').forEach(b => b.addEventListener('click', () => {
+    unit = b.dataset.unit; store.set('unit', unit);
+    $$('#unitSeg button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+    calc();
+  }));
+
+  /* ---------- Tourniquet timers ---------- */
+  let tqs = store.get('tq', []), tqInt = null;
+  const hms = ms => {
+    const s = Math.max(0, Math.floor(ms / 1000));
+    return `${Math.floor(s / 3600)}:${String(Math.floor(s / 60) % 60).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  };
+  function renderTq() {
+    $('#tqList').innerHTML = tqs.map(t => `<div class="timer" data-id="${t.id}">
+      <b>${hms(Date.now() - t.start)}</b>
+      <button class="btn small ghost x" data-act="clear">Clear</button>
+      <span class="lbl">${esc(t.limb)}, on at ${new Date(t.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+    </div>`).join('');
+  }
+  function tqTick() {
+    const want = root.dataset.tab === 'emergency' && tqs.length && !document.hidden;
+    if (want && !tqInt) { renderTq(); tqInt = setInterval(renderTq, 1000); }
+    if (!want && tqInt) { clearInterval(tqInt); tqInt = null; }
+  }
+  $('#tqStart').addEventListener('click', () => {
+    tqs.push({ id: Date.now().toString(36), limb: $('#tqLimb').value, start: Date.now() });
+    store.set('tq', tqs); renderTq(); tqTick();
+  });
+  $('#tqList').addEventListener('click', e => {
+    const b = e.target.closest('button[data-act="clear"]'); if (!b) return;
+    const id = b.closest('.timer').dataset.id, t = tqs.find(x => x.id === id);
+    if (!t || !confirm(`Clear the ${t.limb} timer? Only do this once responders have the time.`)) return;
+    tqs = tqs.filter(x => x.id !== id); store.set('tq', tqs); renderTq(); tqTick();
+  });
+
+  /* ---------- CPR metronome ---------- */
+  let ac = null, cprInt = null, count = 0;
+  function click() {
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.frequency.value = count % 30 === 0 ? 1320 : 880;
+    g.gain.setValueAtTime(0.0001, ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.6, ac.currentTime + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.08);
+    o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime + 0.09);
+  }
+  $('#cprBtn').addEventListener('click', async () => {
+    const beat = $('#beat');
+    if (cprInt) {
+      clearInterval(cprInt); cprInt = null; beat.classList.remove('on'); beat.textContent = '0';
+      $('#cprBtn').textContent = 'Start metronome';
+      if (!wakeWanted && wakeLock) { await wakeLock.release(); wakeLock = null; }
+      return;
+    }
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    await ac.resume();
+    count = 0;
+    if ('wakeLock' in navigator && !wakeLock) { try { wakeLock = await navigator.wakeLock.request('screen'); } catch { /* ignore */ } }
+    cprInt = setInterval(() => {
+      count = count % 30 + 1; click();
+      beat.textContent = count; beat.classList.add('on'); setTimeout(() => beat.classList.remove('on'), 120);
+      if (navigator.vibrate) navigator.vibrate(25);
+    }, 60000 / 110);
+    $('#cprBtn').textContent = 'Stop metronome';
+  });
+
+  /* ---------- Online status, install, offline cache ---------- */
+  const net = () => { $('#netChip').hidden = navigator.onLine; };
+  addEventListener('online', net); addEventListener('offline', net); net();
+
+  let installEvt = null;
+  addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('#installBtn').hidden = false; });
+  $('#installBtn').addEventListener('click', async () => {
+    if (!installEvt) return; installEvt.prompt(); await installEvt.userChoice; installEvt = null; $('#installBtn').hidden = true;
+  });
+  addEventListener('appinstalled', () => { $('#installBtn').hidden = true; toast('Installed. Field Kit now works offline.'); });
+
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    navigator.serviceWorker.register('sw.js').catch(() => { /* offline cache unavailable */ });
+  }
+
+  /* ---------- Start ---------- */
+  setNight(store.get('night', false));
+  $$('#unitSeg button').forEach(x => x.setAttribute('aria-selected', String(x.dataset.unit === unit)));
+  restoreInputs();
+  calc();
+  renderFix(); renderWps();
+  showView(view);
+  showTab(store.get('tab', 'tactical'));
+})();
+
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /* Field Kit offline cache. Bump VERSION whenever you upload changed files. */
-const VERSION = 'fieldkit-v2';
+const VERSION = 'fieldkit-v5';
 const TILES = 'fk-tiles';
 const TILE_HOSTS = ['basemap.nationalmap.gov'];
 const ASSETS = ['./', './index.html', './manifest.json', './leaflet.js', './leaflet.css',
@@ -31,7 +31,22 @@ self.addEventListener('fetch', e => {
   }
   if (url.origin !== location.origin) return;
 
-  // App files: cache first so it opens instantly offline; refresh in the background when online.
+  // The page itself: try the network briefly so updates arrive on the next open, then fall back to the cache.
+  if (req.mode === 'navigate') {
+    e.respondWith(caches.open(VERSION).then(async cache => {
+      try {
+        const res = await fetch(req, { signal: AbortSignal.timeout(3000) });
+        if (res.ok) { cache.put('./index.html', res.clone()); return res; }
+        // GitHub Pages hiccup (404/5xx): keep the working app rather than showing an error page.
+        return (await cache.match('./index.html')) || res;
+      } catch {
+        return (await cache.match('./index.html')) || (await cache.match('./')) || Response.error();
+      }
+    }));
+    return;
+  }
+
+  // Other app files: cache first so it opens instantly offline; refresh in the background when online.
   e.respondWith(caches.open(VERSION).then(async cache => {
     const hit = await cache.match(req, { ignoreSearch: true }) ||
       (req.mode === 'navigate' ? await cache.match('./index.html') : undefined);

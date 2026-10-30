@@ -7,6 +7,7 @@
 <meta name="description" content="Offline survival, tactical and emergency field reference.">
 <title>Field Kit</title>
 <link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="leaflet.css">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
@@ -15,7 +16,7 @@
    Night: red-light mode to protect night vision — every colour collapses to red on black. */
 :root{
   --paper:#E5E7DD; --surface:#F1F2EB; --ink:#1C2117; --muted:#5A6150; --line:#C3C8B5;
-  --od:#4A5233; --coyote:#8C6E3F; --blaze:#C2410C; --on-accent:#F6F7F1;
+  --od:#4A5233; --coyote:#8C6E3F; --blaze:#C2410C; --on-accent:#F6F7F1; --me:#1D4ED8;
   --c:var(--od);
   color-scheme:light;
   box-sizing:border-box;
@@ -24,13 +25,13 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="night"]){
     --paper:#151912; --surface:#1E2319; --ink:#E3E6D9; --muted:#9BA28C; --line:#343B2B;
-    --od:#9AAA68; --coyote:#C9A86F; --blaze:#F2692B; --on-accent:#141710;
+    --od:#9AAA68; --coyote:#C9A86F; --blaze:#F2692B; --on-accent:#141710; --me:#60A5FA;
     color-scheme:dark;
   }
 }
 :root[data-theme="night"]{
   --paper:#000; --surface:#0E0101; --ink:#E5322B; --muted:#9C2219; --line:#3B0906;
-  --od:#E5322B; --coyote:#E5322B; --blaze:#FF3B30; --on-accent:#000;
+  --od:#E5322B; --coyote:#E5322B; --blaze:#FF3B30; --on-accent:#000; --me:#FF5A4F;
   color-scheme:dark;
 }
 :root[data-tab="survival"]{--c:var(--coyote)}
@@ -153,9 +154,6 @@ details.more{margin-top:12px}
 details.more summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600;color:var(--c)}
 
 /* Reference content */
-.call{display:flex;align-items:center;justify-content:center;gap:12px;min-height:64px;border-radius:8px;
-  background:var(--blaze);color:var(--on-accent);font-size:22px;font-weight:700;text-decoration:none;margin-bottom:4px}
-.call svg{width:26px;height:26px}
 details.ref{border-top:1px solid var(--line)}
 details.ref:last-of-type{border-bottom:1px solid var(--line)}
 details.ref>summary{min-height:56px;display:flex;align-items:center;gap:12px;cursor:pointer;font-size:17px;font-weight:600;list-style:none}
@@ -188,6 +186,80 @@ dl.march dd{margin:0}
 .toast.show{opacity:1}
 
 @media (min-width:600px){.mgrs{font-size:52px}}
+
+/* Map */
+body.mapmode{overflow:hidden}
+body.mapmode main{padding-bottom:0}
+body.mapmode #tacSeg{margin-bottom:12px}
+.mapwrap{position:relative;margin:0 -16px;height:60vh;overflow:hidden;border-top:1px solid var(--line)}
+#map{position:absolute;inset:0;background:var(--surface)}
+.leaflet-container{font:inherit;font-size:14px}
+:root[data-theme="night"] .leaflet-tile-pane{filter:grayscale(1) invert(1) brightness(.7) sepia(1) saturate(9) hue-rotate(-38deg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="night"]) .leaflet-tile-pane{filter:brightness(.82)}}
+.leaflet-bar a{width:44px;height:44px;line-height:44px;font-size:22px;background:var(--surface);color:var(--ink);border-color:var(--line)}
+.leaflet-bar{border:1px solid var(--line) !important;box-shadow:none !important;border-radius:8px}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--surface) 80%,transparent) !important;color:var(--muted);font-size:10px}
+.leaflet-control-attribution a{color:var(--muted)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--surface);color:var(--ink);border-radius:8px}
+.leaflet-popup-content{margin:12px 14px;font-size:15px;line-height:1.4}
+.pop-act{margin-top:8px}
+.cross{position:absolute;left:50%;top:50%;width:32px;height:32px;margin:-16px 0 0 -16px;pointer-events:none;z-index:600}
+.cross::before,.cross::after{content:"";position:absolute;background:var(--ink);box-shadow:0 0 0 1px var(--surface)}
+.cross::before{left:15px;top:0;width:2px;height:32px}
+.cross::after{top:15px;left:0;height:2px;width:32px}
+.mapctl{position:absolute;right:12px;top:12px;z-index:1000;display:flex;flex-direction:column;gap:8px}
+.mapctl button{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.mapctl button svg{width:24px;height:24px}
+.mapctl button[aria-pressed="true"]{background:var(--c);color:var(--on-accent);border-color:var(--c)}
+#mTrack[aria-pressed="true"]{background:var(--blaze);border-color:var(--blaze)}
+.maptag{position:absolute;left:68px;top:12px;z-index:1000;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.maptag span{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.maptag .rec{background:var(--blaze);color:var(--on-accent);border-color:var(--blaze);font-weight:600}
+.mapbar{position:absolute;left:12px;right:12px;bottom:22px;z-index:1000;display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 8px 8px 12px}
+.mapbar .c{flex:1;min-width:0}
+.mapbar button.grid{display:block;border:0;background:none;padding:0;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left;white-space:nowrap}
+.mapbar .rel{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wp-icon,.me-icon{background:none;border:0}
+.wp-pin{position:relative;width:18px;height:18px}
+.wp-pin i{display:block;width:18px;height:18px;border-radius:50%;background:var(--od);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--ink)}
+.wp-pin.tgt i{background:var(--blaze)}
+.wp-pin b{position:absolute;left:22px;top:-1px;white-space:nowrap;font-size:13px;font-weight:700;color:var(--ink);
+  text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface)}
+.me{position:relative;width:64px;height:64px}
+.me .cone{position:absolute;inset:0;width:64px;height:64px;transform-origin:50% 50%}
+.me .cone path{fill:var(--me);opacity:.28}
+.me .dot{position:absolute;left:23px;top:23px;width:18px;height:18px;border-radius:50%;background:var(--me);border:3px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+:root[data-theme="night"] .me .dot{border-color:#000}
+path.acc{fill:var(--me);fill-opacity:.1;stroke:var(--me);stroke-opacity:.4;stroke-width:1}
+path.trk{stroke:var(--me);stroke-width:4;stroke-opacity:.85;fill:none;stroke-linecap:round;stroke-linejoin:round}
+path.tgt-line{stroke:var(--blaze);stroke-width:3;stroke-dasharray:8 8;fill:none}
+path.area-rect{stroke:var(--od);stroke-width:2;stroke-dasharray:4 6;fill:var(--od);fill-opacity:.05}
+
+/* Dialogs */
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);padding:20px 16px;
+  width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 48px)}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+dialog h2{margin-bottom:12px}
+dialog .row{flex-wrap:wrap}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
+.opt input{width:22px;min-height:22px;height:22px;margin-top:2px;accent-color:var(--c)}
+progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
+.arealist{list-style:none;margin:8px 0 0;padding:0}
+.arealist li{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
+
+/* Survival */
+.search{position:relative}
+.search input{padding-left:40px}
+.search svg{position:absolute;left:12px;top:14px;width:20px;height:20px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.chips button{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
+.chips button[aria-selected="true"]{background:var(--coyote);border-color:var(--coyote);color:var(--on-accent);font-weight:600}
+.region ul,.body ul{margin:0 0 8px;padding-left:20px}
+.region li,.body ul li{margin-bottom:6px}
+.knot{margin-bottom:12px}
+.knot b{display:block}
+.empty-msg{padding:16px 0;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -204,10 +276,90 @@ dl.march dd{margin:0}
 <main>
 <!-- ============ SURVIVAL ============ -->
 <section class="tab" id="tab-survival" hidden>
-  <div class="block">
-    <h2>Priorities: the rule of threes</h2>
-    <p>In harsh conditions a person can last roughly 3 minutes without air, 3 hours without shelter, 3 days without water and 3 weeks without food. Work the problem in that order.</p>
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+    <input type="search" id="survSearch" placeholder="Search: water, snare, bowline…" aria-label="Search survival topics" autocomplete="off">
   </div>
+
+  <div id="survTop">
+    <div class="block" style="border-top:0;padding-top:16px">
+      <h2>Your environment</h2>
+      <div class="chips" role="tablist" id="regionSeg">
+        <button role="tab" data-region="temperate">Forest</button>
+        <button role="tab" data-region="desert">Desert</button>
+        <button role="tab" data-region="cold">Cold and snow</button>
+        <button role="tab" data-region="tropical">Jungle</button>
+        <button role="tab" data-region="coastal">Coast and sea</button>
+      </div>
+      <div class="region" data-region="temperate">
+        <ul>
+          <li>The biggest killer here is hypothermia in wet, windy weather between 30 and 50°F, not extreme cold. Get out of wind and rain early, before you’re soaked.</li>
+          <li>Water is usually plentiful. Treat all of it.</li>
+          <li>Dead and downed wood is everywhere, so fire is usually achievable. Look for standing dead wood when the ground is wet.</li>
+          <li>Check your skin for ticks every day.</li>
+        </ul>
+      </div>
+      <div class="region" data-region="desert" hidden>
+        <ul>
+          <li>Ration sweat, not water. Drink what you have when you’re thirsty, rest in shade through the heat of the day, and move at dawn, dusk or night.</li>
+          <li>Keep skin covered, including head and neck. Loose, light-coloured clothing keeps you cooler than bare skin.</li>
+          <li>Stay out of dry washes when storms are around. Flash floods can arrive from rain miles away.</li>
+          <li>Nights can drop near freezing. Keep a warm layer.</li>
+          <li>Headache, dizziness, nausea, confusion or hot dry skin means heat illness. Get into shade and cool down immediately.</li>
+        </ul>
+      </div>
+      <div class="region" data-region="cold" hidden>
+        <ul>
+          <li>Remember COLD: keep clothing Clean, avoid Overheating (sweat soaks insulation), wear it Loose and in layers, and keep it Dry.</li>
+          <li>Cover head, hands and feet. Check each other for frostbite: white or grey-yellow skin that feels hard or waxy. Don’t rub it, and only rewarm it if it won’t freeze again.</li>
+          <li>Eat and drink regularly. Your body needs fuel to make heat.</li>
+          <li>Melt snow before drinking it. Eating it lowers your core temperature.</li>
+          <li>Never run a stove or fire in a sealed tent or snow shelter. Carbon monoxide kills without warning.</li>
+          <li>Wear sunglasses, or cut thin slits in bark or cloth, to prevent snow blindness.</li>
+        </ul>
+      </div>
+      <div class="region" data-region="tropical" hidden>
+        <ul>
+          <li>Water is plentiful, but nearly all of it needs treating.</li>
+          <li>Sleep off the ground in a hammock or on a raised platform, away from insects, snakes and flooding.</li>
+          <li>Keep your feet dry and change socks whenever you can to prevent immersion foot. Shake out boots and clothing before you put them on.</li>
+          <li>Travel along ridges rather than through dense valley growth. Following rivers downstream usually leads to people.</li>
+          <li>Clean and cover every cut. Infections set in fast in heat and humidity.</li>
+        </ul>
+      </div>
+      <div class="region" data-region="coastal" hidden>
+        <ul>
+          <li>Never drink seawater. It dehydrates you faster.</li>
+          <li>Collect rain and dew. On a beach, dig behind the first dune where plants grow; fresh water often collects there.</li>
+          <li>Only eat mussels and clams that were alive and closed before cooking, and skip them entirely during red tide warnings.</li>
+          <li>Know the tide times. Rising water can cut you off on points and tidal flats.</li>
+          <li>Cover up. Sun reflected off water and sand burns fast.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Priorities</h2>
+      <p>In harsh conditions a person can last roughly 3 minutes without air, 3 hours without shelter, 3 days without water and 3 weeks without food. Work the problem in that order.</p>
+      <p>If you’re lost, STOP: Stop, Think, Observe, Plan. If someone knows your route and when you’re due back, staying put usually gets you found faster than wandering.</p>
+    </div>
+  </div>
+
+  <div id="survTopics">
+  <details class="ref">
+    <summary>Find water</summary>
+    <div class="body">
+      <ul>
+        <li>Water runs downhill. Check valley bottoms, the base of cliffs, and dry stream beds; dig on the outside of bends where water last flowed.</li>
+        <li>Signs of water nearby: green vegetation, swarming insects, animal trails that join up, and birds flying low and straight at dawn and dusk.</li>
+        <li>Catch rain with a tarp, poncho or large leaves.</li>
+        <li>Before sunrise, tie absorbent cloth around your ankles, walk through tall grass, and wring out the dew.</li>
+        <li>Tie a clear plastic bag over a leafy branch of a non-poisonous plant in full sun. Water collects in the bag as the leaves breathe.</li>
+        <li>Never drink seawater or urine.</li>
+        <li>Treat all wild water before drinking (see Make water safe).</li>
+      </ul>
+    </div>
+  </details>
 
   <details class="ref">
     <summary>Make water safe</summary>
@@ -218,7 +370,167 @@ dl.march dd{margin:0}
         <li>No fire? Use unscented household bleach: 8 drops of 6% bleach (or 6 drops of 8.25%) per gallon. Double it for cloudy or very cold water. Stir and wait 30 minutes.</li>
         <li>Tablets and filters: follow the maker’s directions. Most filters don’t stop viruses.</li>
       </ol>
-      <p class="hint">Source: CDC emergency water guidance.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Shelter</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Pick the spot</h3>
+      <ul>
+        <li>Flat, dry ground above flood level, with no dead trees or hanging branches overhead.</li>
+        <li>Avoid valley floors on cold nights (cold air pools there) and exposed ridgetops (wind).</li>
+        <li>Close to water and building material, but never in a dry wash.</li>
+      </ul>
+      <h3>Build</h3>
+      <ol class="steps">
+        <li>Insulate from the ground first: a bed of dry leaves, grass or boughs at least a hand’s width thick once you lie on it. The ground pulls heat out of you faster than the air.</li>
+        <li>Keep it small, just big enough to lie in. Your body has to heat the space.</li>
+        <li>Debris hut: prop a long ridgepole on a stump or forked stick at about hip height. Lean sticks along both sides, then pile leaves and debris at least an arm’s length thick. Pull a pile of leaves into the entrance once you’re inside.</li>
+        <li>Lean-to: lash a pole between two trees, lean branches against it on the windward side, and cover with boughs or a tarp. Build a fire in front, with a wall of logs or rocks behind it to reflect heat in.</li>
+        <li>Tarp: tie a ridgeline between trees and drape the tarp over it as an A-frame, low end facing the wind.</li>
+      </ol>
+      <h3>Snow and desert</h3>
+      <ul>
+        <li>A snow trench or snow cave insulates well. Poke a ventilation hole, keep your digging tool inside with you, and never use a stove or fire in a sealed snow shelter.</li>
+        <li>In the desert, shade comes first. Two layers of material with an air gap between them are much cooler than one. Stay off the hot ground.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Fire</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Gather first, about twice what you think</h3>
+      <ul>
+        <li>Tinder: dry, fine and fluffy. Birch bark, dry grass, cattail fluff, resin-soaked pine (fatwood), dryer lint, cotton balls with petroleum jelly.</li>
+        <li>Kindling: dead twigs from pencil-lead to pencil thickness.</li>
+        <li>Fuel: dead wood wrist-thick and bigger. Dry wood snaps with a crack.</li>
+      </ul>
+      <h3>Build and light</h3>
+      <ol class="steps">
+        <li>Clear a 10-foot circle down to bare soil, away from overhanging branches. On snow or wet ground, build on a platform of green sticks or flat rocks.</li>
+        <li>Put the tinder bundle in the centre and lean kindling around it like a teepee, with an opening facing the wind.</li>
+        <li>Light the tinder from the upwind side, then add fuel from small to large. Blow gently at the base.</li>
+      </ol>
+      <h3>Ways to light it</h3>
+      <ul>
+        <li>Ferro rod: hold the striker still against the rod, right in the tinder, and pull the rod back. Pushing the striker scatters the tinder.</li>
+        <li>9-volt battery and fine steel wool: touch both terminals to the wool and it ignites.</li>
+        <li>Bow drill: it works, but it takes practice. Learn it before you need it.</li>
+      </ul>
+      <p>In wet weather, use standing dead wood and the dead lower branches of conifers, and split wood to reach the dry core. Birch bark burns even when damp.</p>
+      <p>Never leave a fire unattended. Before you leave, drown it, stir it, and feel that it’s cold.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Food and wild plants</summary>
+    <div class="body">
+      <p>Food is the lowest priority, since you can last weeks without it. Don’t spend energy or risk poisoning chasing it early.</p>
+      <p><b>Only eat a plant you can identify with certainty.</b> Water hemlock and poison hemlock, two of the deadliest plants in North America, look like wild carrot or parsley, and a small amount can kill.</p>
+      <h3>Warning signs in plants you don’t know</h3>
+      <ul>
+        <li>Milky or discoloured sap</li>
+        <li>Beans, bulbs or seeds inside pods</li>
+        <li>A bitter or soapy taste</li>
+        <li>Spines, fine hairs or thorns</li>
+        <li>Carrot-, parsley- or dill-like leaves</li>
+        <li>An almond smell in the leaves or wood</li>
+        <li>Grain heads with pink, purple or black spurs</li>
+        <li>Leaves in groups of three</li>
+      </ul>
+      <p>A few well-known edibles break these rules (blackberry canes have thorns), which is why positive identification matters more than any rule. Skip wild mushrooms entirely: almost no calories, and deadly lookalikes.</p>
+      <h3>Widespread, easier options</h3>
+      <ul>
+        <li>Cattail: young shoots, starchy roots and pollen. Grows in wet ground across much of the world.</li>
+        <li>Dandelion: leaves, flowers and roots are all edible.</li>
+        <li>Acorns: shell and chop them, then soak or boil in several changes of water until they’re no longer bitter.</li>
+        <li>Blackberries and raspberries: clustered berries with few toxic lookalikes.</li>
+        <li>Insects: grasshoppers, crickets, grubs and ants. Remove legs and wings and cook them. Skip brightly coloured, hairy or smelly insects, caterpillars, and flies, ticks and mosquitoes.</li>
+        <li>Fish: all freshwater fish can be eaten if cooked thoroughly.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Traps and fishing</summary>
+    <div class="body">
+      <p class="hint">Outside a genuine emergency, trapping, snaring and set lines are regulated or illegal in most places. Check your state’s rules before practising.</p>
+      <ul>
+        <li>Set traps on active game trails, at spots where the trail narrows, and near water, dens or feeding signs.</li>
+        <li>Set many. Most traps catch nothing, so a dozen beats one.</li>
+        <li>Handle them as little as possible and leave the trail undisturbed. Check them at least once a day.</li>
+      </ul>
+      <h3>Traps</h3>
+      <ul>
+        <li>Simple snare: a loop of wire or strong cord with a sliding noose, anchored firmly. For rabbits, make the loop about fist-sized with its bottom about 3 inches above the trail.</li>
+        <li>Squirrel pole: lean a long pole against a tree squirrels use and fix several small snares along it.</li>
+        <li>Figure-4 deadfall: three notched sticks hold up a heavy rock or log, and bait on the trigger stick drops it. Keep your hands and body out from under the weight while setting it.</li>
+      </ul>
+      <h3>Fishing</h3>
+      <ul>
+        <li>Gorge hook: a short sliver of bone or hardwood, sharpened at both ends and tied at the middle. Bait it; it lodges crosswise when swallowed.</li>
+        <li>Fish trap: a funnel of stakes in shallow water that fish swim into but struggle to find their way out of.</li>
+        <li>Several baited lines left out overnight catch more than one rod you have to watch.</li>
+        <li>Fish feed most around dawn and dusk.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Field dressing game</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Deer-sized game</h3>
+      <ol class="steps">
+        <li>Make sure it’s dead: approach from behind and touch the open eye with a stick. No blink, no movement.</li>
+        <li>Tag it if the law requires, and put on gloves.</li>
+        <li>Lay it on its back with the head slightly uphill.</li>
+        <li>Pinch up the belly skin and make a shallow cut. With two fingers inside guiding the blade edge-up, open the belly from the pelvis to the breastbone without puncturing the stomach or intestines.</li>
+        <li>Cut around the anus to free it, and tie it off to keep waste off the meat.</li>
+        <li>Cut the diaphragm away from the ribs, reach up into the chest, and cut the windpipe and gullet as far forward as you can.</li>
+        <li>Roll the animal onto its side and pull the organs out. Keep the heart and liver if they look healthy.</li>
+        <li>Drain the cavity and cool the carcass fast: prop it open, get it off the ground and into shade, and skin it in warm weather.</li>
+      </ol>
+      <h3>Small game and fish</h3>
+      <ul>
+        <li>Rabbits and squirrels: pinch the back skin, cut a slit, and pull the hide apart toward the head and feet. Open the belly and remove the organs.</li>
+        <li>Wear gloves with rabbits. If the liver has white spots, throw the whole animal away (tularemia).</li>
+        <li>Fish: cut from the vent to the gills, pull out the guts, then scale or skin.</li>
+        <li>Birds: pluck or skin, then open the body cavity and remove the organs.</li>
+      </ul>
+      <p>Cook all wild game thoroughly. Bear and wild pig must be cooked through to kill trichinella parasites.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Navigation without a compass</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Shadow stick (works in both hemispheres)</h3>
+      <ol class="steps">
+        <li>Push a straight stick upright into level ground and mark the tip of its shadow.</li>
+        <li>Wait at least 15 minutes and mark the new shadow tip.</li>
+        <li>A line from the first mark to the second runs roughly west to east. Stand with the first mark on your left and the second on your right, and you’re facing north.</li>
+      </ol>
+      <h3>Analog watch</h3>
+      <ul>
+        <li>Northern Hemisphere: point the hour hand at the sun. South is halfway between the hour hand and 12 o’clock. During daylight saving time, use 1 o’clock instead of 12.</li>
+        <li>Southern Hemisphere: point 12 o’clock at the sun. North is halfway between 12 and the hour hand.</li>
+      </ul>
+      <h3>Night sky</h3>
+      <ul>
+        <li>North Star: follow the two stars at the end of the Big Dipper’s cup about five times the gap between them. Polaris is within about a degree of true north, and its height above the horizon roughly equals your latitude.</li>
+        <li>Southern Cross: extend the long axis of the cross about four and a half times its length, then drop straight down to the horizon for south.</li>
+        <li>Moon: if it rises before the sun sets, its lit side faces west. If it rises after midnight, the lit side faces east.</li>
+      </ul>
+      <h3>Staying on course</h3>
+      <ul>
+        <li>Pace count: count each time your left foot lands. Most adults take 60 to 70 per 100 m on flat ground; measure yours on a known distance.</li>
+        <li>Pick a landmark on your bearing, walk to it, then pick the next.</li>
+        <li>Follow handrails like streams, ridges and roads, and pick a catching feature past your goal so you know when you’ve overshot.</li>
+        <li>Aim off: to hit a spot on a river, aim deliberately to one side so you know which way to turn when you reach it.</li>
+        <li>Daylight left: hold your hand out at arm’s length. Each finger between the sun and the horizon is roughly 15 minutes.</li>
+      </ul>
     </div>
   </details>
 
@@ -235,24 +547,63 @@ dl.march dd{margin:0}
     </div>
   </details>
 
-  <div class="block" style="border-top:0">
-    <h3>Next to build</h3>
-    <ul class="next">
-      <li>Shelter</li><li>Fire</li><li>Edible plants</li><li>Traps and snares</li>
-      <li>Field dressing</li><li>Navigation</li><li>Region guides</li><li>Knots</li>
-    </ul>
+  <details class="ref">
+    <summary>Knots</summary>
+    <div class="body">
+      <div class="knot"><b>Bowline: a fixed loop that won’t slip or jam</b>Make a small loop in the standing part. Pass the end up through it, around behind the standing part, and back down through the small loop. “The rabbit comes out of the hole, around the tree, and back down the hole.”</div>
+      <div class="knot"><b>Clove hitch: quick tie-off to a pole</b>Wrap around the pole, cross over your first wrap, wrap again, and tuck the end under that second wrap.</div>
+      <div class="knot"><b>Taut-line hitch: adjustable tent and tarp lines</b>Pass the end around the anchor. Make two turns around the standing line inside the loop, then one more turn outside the loop. Slide the knot to tighten.</div>
+      <div class="knot"><b>Trucker’s hitch: cinch a load or ridgeline tight</b>Tie a fixed loop partway along the line, pass the end around the anchor and back through the loop, pull tight, and lock it with two half hitches.</div>
+      <div class="knot"><b>Square knot: join two ends of the same size</b>Right over left and under, then left over right and under. Not for critical loads.</div>
+      <div class="knot"><b>Sheet bend: join two ropes of different sizes</b>Fold a bight in the thicker rope. Pass the thinner rope up through it, around behind both legs, and tuck it under itself.</div>
+    </div>
+  </details>
+  <p class="empty-msg" id="survEmpty" hidden>No topics match that search.</p>
   </div>
+
+  <p class="foot">Sources: US Army survival manual (FM 21-76), CDC emergency water guidance, USDA game safety. Practise skills before you need them.</p>
 </section>
 
 <!-- ============ TACTICAL ============ -->
 <section class="tab" id="tab-tactical">
   <div class="seg" role="tablist" id="tacSeg">
-    <button role="tab" data-view="position" aria-selected="true">Position</button>
+    <button role="tab" data-view="map" aria-selected="true">Map</button>
+    <button role="tab" data-view="position" aria-selected="false">Position</button>
     <button role="tab" data-view="ballistics" aria-selected="false">Ballistics</button>
   </div>
 
+  <!-- Map -->
+  <div id="view-map">
+    <div class="mapwrap" id="mapWrap">
+      <div id="map" aria-label="Map"></div>
+      <div class="cross" aria-hidden="true"></div>
+      <div class="maptag"><span id="mLayerName">USGS Topo</span><span class="rec" id="recChip" hidden>Recording</span></div>
+      <div class="mapctl">
+        <button id="mLayers" aria-label="Map layers" title="Map layers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5z"/><path d="m2 13 10 5 10-5"/></svg>
+        </button>
+        <button id="mLocate" aria-label="Follow my position" aria-pressed="false" title="Follow my position">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+        </button>
+        <button id="mTrack" aria-label="Track recording" aria-pressed="false" title="Track recording">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19c3 0 3-6 7-6s3 4 6 4"/><circle cx="19" cy="6" r="3"/><circle cx="4" cy="19" r="1.5" fill="currentColor"/></svg>
+        </button>
+        <button id="mSave" aria-label="Save map for offline" title="Save map for offline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 20h16"/></svg>
+        </button>
+      </div>
+      <div class="mapbar">
+        <div class="c">
+          <button class="grid" id="mCenter" aria-label="Grid at crosshair. Tap to copy.">—</button>
+          <span class="rel" id="mCenterRel">Grid at the crosshair</span>
+        </div>
+        <button class="btn small" id="mMark">Mark</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Position -->
-  <div id="view-position">
+  <div id="view-position" hidden>
     <div class="readout">
       <div class="status" id="gpsStatus">Starting GPS…</div>
       <button class="mgrs empty" id="mgrs" aria-label="MGRS coordinate. Tap to copy.">No fix yet</button>
@@ -377,11 +728,6 @@ dl.march dd{margin:0}
 
 <!-- ============ EMERGENCY ============ -->
 <section class="tab" id="tab-emergency" hidden>
-  <a class="call" href="tel:911">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
-    Call 911
-  </a>
-  <p class="hint">112 works in Europe and many other countries.</p>
 
   <details class="ref" open>
     <summary>Life-threatening bleeding</summary>
@@ -461,8 +807,45 @@ dl.march dd{margin:0}
   </button>
 </nav>
 
+<dialog id="dlgLayers">
+  <h2>Map layers</h2>
+  <div id="layerList"></div>
+  <div class="row"><button class="btn ghost full" id="layersClose">Close</button></div>
+</dialog>
+
+<dialog id="dlgSave">
+  <h2>Save map for offline</h2>
+  <p class="hint">Downloads the area on screen for the current map layer. Zoom the map to frame it first.</p>
+  <div class="grid2">
+    <label class="f">Name<input id="saveName" placeholder="e.g. Hunting unit 4" autocomplete="off"></label>
+    <label class="f">Most detail
+      <select id="saveZ">
+        <option value="13">Overview (13)</option><option value="14">Trails (14)</option>
+        <option value="15" selected>Detailed (15)</option><option value="16">Maximum (16)</option>
+      </select>
+    </label>
+  </div>
+  <p id="saveEst" style="margin-top:12px"></p>
+  <progress id="saveProg" hidden></progress>
+  <p class="hint" id="saveStatus" aria-live="polite"></p>
+  <div class="row"><button class="btn" id="saveGo">Download</button><button class="btn ghost" id="saveClose">Close</button></div>
+  <h3 style="margin-top:20px">Saved areas</h3>
+  <ul class="arealist" id="areaList"></ul>
+  <p class="hint" id="storeUse"></p>
+</dialog>
+
+<dialog id="dlgTrack">
+  <h2>Track</h2>
+  <p id="trkInfo"></p>
+  <div class="row"><button class="btn full" id="trkToggle">Start recording</button></div>
+  <div class="row"><button class="btn ghost" id="trkExport">Export GPX</button><button class="btn ghost" id="trkClear">Clear track</button></div>
+  <p class="hint" style="margin-top:12px">Records only while Field Kit is open, so the screen stays on while recording. The GPX file includes your waypoints and opens in ATAK, Gaia and most mapping apps.</p>
+  <div class="row"><button class="btn ghost full" id="trkClose">Close</button></div>
+</dialog>
+
 <div class="toast" id="toast" role="status"></div>
 
+<script src="leaflet.js"></script>
 <script>
 /* ---------- Geo: WGS84 UTM / MGRS, distance, bearing ---------- */
 const GEO = (() => {
@@ -729,6 +1112,15 @@ const BAL = (() => {
   };
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const num = el => { const v = parseFloat(el.value); return Number.isFinite(v) ? v : 0; };
+  const bus = {};
+  const on = (ev, fn) => (bus[ev] = bus[ev] || []).push(fn);
+  const emit = (ev, d) => (bus[ev] || []).forEach(fn => { try { fn(d); } catch (e) { console.error(e); } });
+  function download(name, text, type) {
+    const url = URL.createObjectURL(new Blob([text], { type }));
+    const el = Object.assign(document.createElement('a'), { href: url, download: name });
+    document.body.appendChild(el); el.click(); el.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+  }
 
   let toastT;
   function toast(msg) {
@@ -749,7 +1141,7 @@ const BAL = (() => {
 
   /* ---------- Navigation ---------- */
   const TITLES = { survival: 'Survival', tactical: 'Tactical', emergency: 'Emergency' };
-  let view = store.get('view', 'position');
+  let view = store.get('view', 'map');
   function showTab(id) {
     if (!TITLES[id]) id = 'tactical';
     $$('.tab').forEach(t => { t.hidden = t.id !== 'tab-' + id; });
@@ -758,22 +1150,28 @@ const BAL = (() => {
     $('#title').textContent = TITLES[id];
     store.set('tab', id);
     window.scrollTo(0, 0);
-    sensors();
+    shown();
   }
   function showView(v) {
-    view = v === 'ballistics' ? 'ballistics' : 'position';
-    $('#view-position').hidden = view !== 'position';
-    $('#view-ballistics').hidden = view !== 'ballistics';
+    view = ['map', 'position', 'ballistics'].includes(v) ? v : 'map';
+    ['map', 'position', 'ballistics'].forEach(x => { $('#view-' + x).hidden = view !== x; });
     $$('#tacSeg button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === view)));
     store.set('view', view);
+    window.scrollTo(0, 0);
+    shown();
+  }
+  function shown() {
+    document.body.classList.toggle('mapmode', root.dataset.tab === 'tactical' && view === 'map');
     sensors();
+    emit('shown', { tab: root.dataset.tab, view });
   }
   $$('.tabbar button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
   $$('#tacSeg button').forEach(b => b.addEventListener('click', () => showView(b.dataset.view)));
 
   /* ---------- GPS ---------- */
   let watchId = null, fix = store.get('lastFix', null), llFormat = store.get('llFormat', 'dec');
-  const positionVisible = () => root.dataset.tab === 'tactical' && view === 'position' && !document.hidden;
+  const navVisible = () => root.dataset.tab === 'tactical' && (view === 'position' || view === 'map') && !document.hidden;
+  const gpsWanted = () => !document.hidden && (navVisible() || !!(window.FK && FK.isRecording && FK.isRecording()));
 
   function setStatus(msg, warn) { const s = $('#gpsStatus'); s.textContent = msg; s.classList.toggle('warn', !!warn); }
 
@@ -792,6 +1190,7 @@ const BAL = (() => {
     store.set('lastFix', fix);
     setStatus('Live fix, ' + new Date(p.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     renderFix(); renderWps(); renderTarget();
+    emit('fix', fix);
   }
   function onGpsErr(e) {
     const msgs = {
@@ -800,6 +1199,7 @@ const BAL = (() => {
       3: 'Still searching for satellites. Move to open sky.'
     };
     setStatus(msgs[e.code] || 'Location error: ' + e.message, true);
+    emit('gpsError', msgs[e.code] || e.message);
   }
 
   function renderFix() {
@@ -860,6 +1260,7 @@ const BAL = (() => {
     if (heading == null) heading = h;
     else { const d = ((h - heading + 540) % 360) - 180; heading = (heading + d * 0.25 + 360) % 360; }
     renderCompass(); renderTarget();
+    emit('heading', trueHeading());
   }
   function startCompass() {
     if (compassOn) return;
@@ -905,7 +1306,7 @@ const BAL = (() => {
   /* ---------- Waypoints ---------- */
   let wps = store.get('wps', []);
   let targetId = store.get('target', null);
-  const saveWps = () => { store.set('wps', wps); store.set('target', targetId); };
+  const saveWps = () => { store.set('wps', wps); store.set('target', targetId); emit('wps'); };
   const fmtDist = m => m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(m < 10000 ? 2 : 1)} km`;
   const fmtMi = m => `${(m / 1609.344).toFixed(m < 16093 ? 2 : 1)} mi`;
 
@@ -980,17 +1381,14 @@ const BAL = (() => {
   $('#wpExport').addEventListener('click', () => {
     const pm = wps.map(w => `  <Placemark><name>${esc(w.name)}</name><Point><coordinates>${w.lon},${w.lat},${w.alt ?? 0}</coordinates></Point></Placemark>`).join('\n');
     const kml = `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2">\n<Document><name>Field Kit waypoints</name>\n${pm}\n</Document>\n</kml>\n`;
-    const url = URL.createObjectURL(new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' }));
-    const a = Object.assign(document.createElement('a'), { href: url, download: `waypoints-${new Date().toISOString().slice(0, 10)}.kml` });
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    download(`waypoints-${new Date().toISOString().slice(0, 10)}.kml`, kml, 'application/vnd.google-earth.kml+xml');
     toast('Saved to Downloads. In ATAK: Import → Local SD.');
   });
 
   /* ---------- Sensors on/off with visibility (saves battery) ---------- */
   function sensors() {
-    if (positionVisible()) { startGps(); startCompass(); }
-    else { stopGps(); stopCompass(); }
+    if (gpsWanted()) startGps(); else stopGps();
+    if (navVisible()) startCompass(); else stopCompass();
     tqTick();
   }
   document.addEventListener('visibilitychange', () => {
@@ -1180,9 +1578,18 @@ const BAL = (() => {
   });
   addEventListener('appinstalled', () => { $('#installBtn').hidden = true; toast('Installed. Field Kit now works offline.'); });
 
-  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  if ('serviceWorker' in navigator && window.isSecureContext) {
     navigator.serviceWorker.register('sw.js').catch(() => { /* offline cache unavailable */ });
   }
+
+  /* ---------- Shared API for the map module ---------- */
+  window.FK = {
+    $, $$, store, toast, esc, on, emit, download, sensors,
+    getFix: () => fix, getWps: () => wps, getTarget: () => targetId,
+    toggleTarget(id) { targetId = targetId === id ? null : id; saveWps(); renderWps(); renderTarget(); },
+    addWp, trueHeading, setWake, wakeOn: () => wakeWanted,
+    tab: () => root.dataset.tab, view: () => view
+  };
 
   /* ---------- Start ---------- */
   setNight(store.get('night', false));
@@ -1192,6 +1599,453 @@ const BAL = (() => {
   renderFix(); renderWps();
   showView(view);
   showTab(store.get('tab', 'tactical'));
+})();
+
+/* ---------- Map: offline topo, waypoints, tracks ---------- */
+(() => {
+  const FK = window.FK;
+  const { $, store, toast, esc } = FK;
+  const TILE_CACHE = 'fk-tiles';
+  const USGS = 'https://basemap.nationalmap.gov/arcgis/rest/services/';
+  const LAYERS = {
+    topo: { name: 'USGS Topo', note: 'US and territories. Saves for offline.',
+      url: USGS + 'USGSTopo/MapServer/tile/{z}/{y}/{x}', maxNative: 16, offline: true, kb: 20,
+      attr: '<a href="https://www.usgs.gov/programs/national-geospatial-program/national-map">USGS The National Map</a>' },
+    imagery: { name: 'USGS Imagery + Topo', note: 'US satellite imagery with contours. Saves for offline.',
+      url: USGS + 'USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', maxNative: 16, offline: true, kb: 45,
+      attr: '<a href="https://www.usgs.gov/programs/national-geospatial-program/national-map">USGS The National Map</a>' },
+    otm: { name: 'OpenTopoMap', note: 'Worldwide, online only. Its terms don’t allow bulk downloads.',
+      url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', subdomains: 'abc', maxNative: 17, offline: false, kb: 30,
+      attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | © <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)' }
+  };
+
+  let map = null, base = null, layerId = LAYERS[store.get('mapLayer', 'topo')] ? store.get('mapLayer', 'topo') : 'topo';
+  let me = null, acc = null, tgtLine = null, trackLine = null;
+  const wpGroup = () => map._fkWps, areaGroup = () => map._fkAreas;
+  let follow = store.get('mapFollow', true), zoomedToFix = false;
+  let areas = store.get('areas', []);
+  let track = store.get('track', []);
+  let recording = store.get('recording', false);
+  FK.isRecording = () => recording;
+
+  /* ---------- Sizing ---------- */
+  function sizeMap() {
+    const wrap = $('#mapWrap');
+    if (!wrap || $('#view-map').hidden) return;
+    const top = wrap.getBoundingClientRect().top;
+    const tb = $('.tabbar').offsetHeight;
+    wrap.style.height = Math.max(260, window.innerHeight - top - tb) + 'px';
+    if (map) map.invalidateSize();
+  }
+  addEventListener('resize', sizeMap);
+
+  /* ---------- Init ---------- */
+  const visible = () => !!map && !$('#view-map').hidden && FK.tab() === 'tactical';
+  function init() {
+    if (map) {
+      // Re-show: resize without letting Leaflet shift the centre, then restore the last view.
+      const wrap = $('#mapWrap'), top = wrap.getBoundingClientRect().top;
+      wrap.style.height = Math.max(260, window.innerHeight - top - $('.tabbar').offsetHeight) + 'px';
+      map.invalidateSize({ pan: false });
+      const v = store.get('mapView', null), f = FK.getFix();
+      if (follow && f) map.setView([f.lat, f.lon], map.getZoom(), { animate: false });
+      else if (v) map.setView([v.lat, v.lon], v.z, { animate: false });
+      renderWps(); renderMe(); renderCenter();
+      return;
+    }
+    if (!window.L) { $('#mapWrap').innerHTML = '<p class="hint" style="padding:16px">The map library didn’t load. Reload the app while online.</p>'; return; }
+    sizeMap();
+    const v = store.get('mapView', null), f = FK.getFix();
+    map = L.map('map', { zoomControl: false, maxZoom: 18, minZoom: 3, worldCopyJump: true })
+      .setView(v ? [v.lat, v.lon] : f ? [f.lat, f.lon] : [39.5, -98.35], v ? v.z : f ? 14 : 4);
+    L.control.zoom({ position: 'topleft' }).addTo(map);
+    map.attributionControl.setPrefix(false);
+    map._fkAreas = L.layerGroup().addTo(map);
+    map._fkWps = L.layerGroup().addTo(map);
+    trackLine = L.polyline([], { className: 'trk', interactive: false }).addTo(map);
+    tgtLine = L.polyline([], { className: 'tgt-line', interactive: false }).addTo(map);
+    setBase(layerId);
+
+    map.on('move', renderCenter);
+    map.on('moveend', () => {
+      if (!visible()) return;
+      const c = map.getCenter();
+      store.set('mapView', { lat: c.lat, lon: c.lng, z: map.getZoom() });
+      renderCenter();
+    });
+    map.on('dragstart', () => setFollow(false));
+    map.on('contextmenu', e => addWpAt(e.latlng));
+    map.getContainer().addEventListener('click', e => {
+      const b = e.target.closest('[data-pop]');
+      if (!b) return;
+      if (b.dataset.pop === 'nav') FK.toggleTarget(b.dataset.id);
+      map.closePopup();
+    });
+
+    renderAreas(); renderWps(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
+  }
+
+  /* Tile layer that, when a tile is missing (e.g. offline past the saved zoom), scales up the
+     nearest saved lower-zoom tile instead of leaving a blank square. */
+  const FallbackLayer = L.TileLayer.extend({
+    createTile(coords, done) {
+      const tile = L.TileLayer.prototype.createTile.call(this, coords, done);
+      tile._fk = { x: coords.x, y: coords.y, z: this._getZoomForUrl(), depth: 0 };
+      return tile;
+    },
+    _tileOnError(done, tile, e) {
+      const f = tile._fk;
+      if (!f || f.depth >= 6 || f.z - f.depth <= 0) return L.TileLayer.prototype._tileOnError.call(this, done, tile, e);
+      f.depth++;
+      const k = 2 ** f.depth, px = Math.floor(f.x / k), py = Math.floor(f.y / k), size = this.getTileSize();
+      const W = size.x * k, H = size.y * k, ox = (f.x - px * k) * size.x, oy = (f.y - py * k) * size.y;
+      tile.style.width = W + 'px';
+      tile.style.height = H + 'px';
+      tile.style.marginLeft = -ox + 'px';
+      tile.style.marginTop = -oy + 'px';
+      // Show only this tile's own square of the enlarged parent, so neighbours don't overlap.
+      tile.style.clipPath = `inset(${oy}px ${W - ox - size.x}px ${H - oy - size.y}px ${ox}px)`;
+      tile.src = L.Util.template(this._url, L.extend({ x: px, y: py, z: f.z - f.depth, s: this._getSubdomain({ x: px, y: py }) }, this.options));
+    }
+  });
+
+  function setBase(id) {
+    layerId = LAYERS[id] ? id : 'topo';
+    store.set('mapLayer', layerId);
+    const L0 = LAYERS[layerId];
+    if (base) map.removeLayer(base);
+    base = new FallbackLayer(L0.url, { maxNativeZoom: L0.maxNative, maxZoom: 18, subdomains: L0.subdomains || 'abc',
+      attribution: L0.attr, keepBuffer: 3 }).addTo(map);
+    $('#mLayerName').textContent = L0.name;
+  }
+
+  /* ---------- Position marker ---------- */
+  const meIcon = () => L.divIcon({ className: 'me-icon', iconSize: [64, 64], iconAnchor: [32, 32],
+    html: '<div class="me"><svg class="cone" viewBox="0 0 64 64" hidden><path d="M32 32 L20 2 H44 Z"/></svg><span class="dot"></span></div>' });
+  function renderMe() {
+    const f = FK.getFix();
+    if (!map || !f) return;
+    const ll = [f.lat, f.lon];
+    if (!me) {
+      acc = L.circle(ll, { radius: f.acc || 0, className: 'acc', interactive: false }).addTo(map);
+      me = L.marker(ll, { icon: meIcon(), interactive: false, keyboard: false, zIndexOffset: 1000 }).addTo(map);
+    } else { me.setLatLng(ll); acc.setLatLng(ll).setRadius(f.acc || 0); }
+    renderHeading(FK.trueHeading());
+    if (visible() && map.getZoom() < 9 && !zoomedToFix) { zoomedToFix = true; map.setView(ll, 14, { animate: false }); setFollow(true); }
+    else if (follow && visible()) map.panTo(ll, { animate: true });
+    renderTarget(); renderCenter();
+  }
+  function renderHeading(h) {
+    if (!me || !me.getElement()) return;
+    const cone = me.getElement().querySelector('.cone');
+    if (h == null) { cone.setAttribute('hidden', ''); return; }
+    cone.removeAttribute('hidden');
+    cone.style.transform = `rotate(${h}deg)`;
+  }
+  function setFollow(on) {
+    follow = on; store.set('mapFollow', on);
+    $('#mLocate').setAttribute('aria-pressed', String(on));
+  }
+  $('#mLocate').addEventListener('click', () => {
+    const f = FK.getFix();
+    if (!f) { toast('Waiting for a GPS fix. Open sky helps.'); return; }
+    setFollow(true);
+    map.setView([f.lat, f.lon], Math.max(map.getZoom(), 15));
+  });
+
+  /* ---------- Center readout ---------- */
+  const fmtDist = m => m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(m < 10000 ? 2 : 1)} km`;
+  function renderCenter() {
+    if (!visible()) return;
+    const c = map.getCenter(), g = GEO.toMGRS(c.lat, c.lng);
+    $('#mCenter').textContent = g ? g.text : `${c.lat.toFixed(5)}, ${c.lng.toFixed(5)}`;
+    const f = FK.getFix();
+    if (f) {
+      const d = GEO.distance(f.lat, f.lon, c.lat, c.lng), b = GEO.bearing(f.lat, f.lon, c.lat, c.lng);
+      $('#mCenterRel').textContent = d < 3 ? 'Your position' : `${fmtDist(d)} at ${Math.round(b)}° true from you`;
+    } else $('#mCenterRel').textContent = 'Grid at the crosshair';
+  }
+  $('#mCenter').addEventListener('click', async () => {
+    const t = $('#mCenter').textContent;
+    try { await navigator.clipboard.writeText(t); toast('Copied ' + t); } catch { toast(t); }
+  });
+  $('#mMark').addEventListener('click', () => map && addWpAt(map.getCenter()));
+
+  function addWpAt(ll) {
+    const n = FK.getWps().length + 1;
+    const name = prompt('Name this waypoint', `WP ${n}`);
+    if (name === null) return;
+    const saved = FK.addWp(ll.lat, ll.lng, name);
+    toast(`Added ${saved}`);
+  }
+
+  /* ---------- Waypoints and target ---------- */
+  function renderWps() {
+    if (!map) return;
+    const g = wpGroup(); g.clearLayers();
+    const tid = FK.getTarget(), f = FK.getFix();
+    FK.getWps().forEach(w => {
+      const isT = w.id === tid;
+      const icon = L.divIcon({ className: 'wp-icon', iconSize: [18, 18], iconAnchor: [9, 9],
+        html: `<div class="wp-pin${isT ? ' tgt' : ''}"><i></i><b>${esc(w.name)}</b></div>` });
+      const m = GEO.toMGRS(w.lat, w.lon);
+      let rel = '';
+      if (f) {
+        const d = GEO.distance(f.lat, f.lon, w.lat, w.lon);
+        rel = `<br>${fmtDist(d)} at ${Math.round(GEO.bearing(f.lat, f.lon, w.lat, w.lon))}° true`;
+      }
+      L.marker([w.lat, w.lon], { icon, title: w.name }).addTo(g)
+        .bindPopup(`<b>${esc(w.name)}</b><br>${m ? m.text : ''}${rel}<div class="pop-act">
+          <button class="btn small" data-pop="nav" data-id="${w.id}">${isT ? 'Stop navigating' : 'Go to'}</button></div>`);
+    });
+    renderTarget();
+  }
+  function renderTarget() {
+    if (!map) return;
+    const w = FK.getWps().find(x => x.id === FK.getTarget()), f = FK.getFix();
+    tgtLine.setLatLngs(w && f ? [[f.lat, f.lon], [w.lat, w.lon]] : []);
+  }
+
+  /* ---------- Track recording ---------- */
+  const trackDist = () => track.reduce((s, p, i) => i ? s + GEO.distance(track[i - 1][0], track[i - 1][1], p[0], p[1]) : 0, 0);
+  function renderTrack() {
+    if (map) trackLine.setLatLngs(track.map(p => [p[0], p[1]]));
+    const d = trackDist();
+    $('#recChip').hidden = !recording;
+    $('#recChip').textContent = `Recording, ${fmtDist(d)}`;
+    $('#mTrack').setAttribute('aria-pressed', String(recording));
+    if (track.length) {
+      const mins = Math.round((track[track.length - 1][3] - track[0][3]) / 60000);
+      $('#trkInfo').textContent = `${fmtDist(d)} over ${mins >= 60 ? Math.floor(mins / 60) + ' h ' : ''}${mins % 60} min, ${track.length} points.`;
+    } else $('#trkInfo').textContent = 'No track recorded yet.';
+    $('#trkToggle').textContent = recording ? 'Stop recording' : 'Start recording';
+    $('#trkExport').disabled = !track.length && !FK.getWps().length;
+    $('#trkClear').disabled = !track.length || recording;
+  }
+  function onFixTrack(f) {
+    if (!recording || f.acc == null || f.acc > 50) return;
+    const last = track[track.length - 1];
+    if (last && GEO.distance(last[0], last[1], f.lat, f.lon) < 5) return;
+    track.push([+f.lat.toFixed(6), +f.lon.toFixed(6), f.alt == null ? null : Math.round(f.alt * 10) / 10, f.t || Date.now()]);
+    store.set('track', track);
+    renderTrack();
+  }
+  $('#mTrack').addEventListener('click', () => { renderTrack(); $('#dlgTrack').showModal(); });
+  $('#trkToggle').addEventListener('click', () => {
+    recording = !recording; store.set('recording', recording);
+    if (recording) { FK.setWake(true); toast('Recording. The screen stays on so GPS keeps running.'); }
+    else FK.setWake(false);
+    FK.sensors(); renderTrack();
+  });
+  $('#trkClear').addEventListener('click', () => {
+    if (!confirm('Clear the recorded track?')) return;
+    track = []; store.set('track', track); renderTrack();
+  });
+  $('#trkExport').addEventListener('click', () => {
+    const x = s => esc(s);
+    const wpts = FK.getWps().map(w => `<wpt lat="${w.lat}" lon="${w.lon}">${w.alt != null ? `<ele>${w.alt}</ele>` : ''}<name>${x(w.name)}</name></wpt>`).join('\n');
+    const pts = track.map(p => `<trkpt lat="${p[0]}" lon="${p[1]}">${p[2] != null ? `<ele>${p[2]}</ele>` : ''}<time>${new Date(p[3]).toISOString()}</time></trkpt>`).join('\n');
+    const day = new Date().toISOString().slice(0, 10);
+    const gpx = `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Field Kit" xmlns="http://www.topografix.com/GPX/1/1">\n${wpts}\n` +
+      (track.length ? `<trk><name>Field Kit track ${day}</name><trkseg>\n${pts}\n</trkseg></trk>\n` : '') + '</gpx>\n';
+    FK.download(`fieldkit-${day}.gpx`, gpx, 'application/gpx+xml');
+    toast('Saved to Downloads. ATAK imports GPX from Import → Local SD.');
+  });
+  $('#trkClose').addEventListener('click', () => $('#dlgTrack').close());
+
+  /* ---------- Layers ---------- */
+  $('#mLayers').addEventListener('click', () => {
+    $('#layerList').innerHTML = Object.entries(LAYERS).map(([id, l]) => `<label class="opt">
+      <input type="radio" name="layer" value="${id}" ${id === layerId ? 'checked' : ''}>
+      <span><b>${l.name}</b><br><span class="hint">${l.note}</span></span></label>`).join('');
+    $('#dlgLayers').showModal();
+  });
+  $('#layerList').addEventListener('change', e => { setBase(e.target.value); $('#dlgLayers').close(); });
+  $('#layersClose').addEventListener('click', () => $('#dlgLayers').close());
+
+  /* ---------- Offline areas ---------- */
+  const lon2x = (lon, z) => Math.floor((lon + 180) / 360 * 2 ** z);
+  const lat2y = (lat, z) => {
+    const r = Math.max(-85.0511, Math.min(85.0511, lat)) * Math.PI / 180;
+    return Math.floor((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * 2 ** z);
+  };
+  function ranges(a) {
+    const out = [];
+    for (let z = a.zMin; z <= a.zMax; z++) {
+      const n = 2 ** z - 1;
+      out.push({ z, x1: Math.max(0, lon2x(a.w, z)), x2: Math.min(n, lon2x(a.e, z)), y1: Math.max(0, lat2y(a.n, z)), y2: Math.min(n, lat2y(a.s, z)) });
+    }
+    return out;
+  }
+  const countTiles = a => ranges(a).reduce((s, r) => s + (r.x2 - r.x1 + 1) * (r.y2 - r.y1 + 1), 0);
+  const tileUrl = (layer, z, x, y) => LAYERS[layer].url.replace('{z}', z).replace('{x}', x).replace('{y}', y);
+  function* tiles(a) {
+    for (const r of ranges(a)) for (let x = r.x1; x <= r.x2; x++) for (let y = r.y1; y <= r.y2; y++) yield [r.z, x, y];
+  }
+  const covers = (a, z, x, y) => {
+    if (z < a.zMin || z > a.zMax) return false;
+    return x >= lon2x(a.w, z) && x <= lon2x(a.e, z) && y >= lat2y(a.n, z) && y <= lat2y(a.s, z);
+  };
+  const MAX_TILES = 30000;
+  const fmtMB = b => b < 1e6 ? `${Math.max(1, Math.round(b / 1e3))} KB` : `${(b / 1e6).toFixed(b < 1e8 ? 1 : 0)} MB`;
+
+  function currentArea() {
+    const b = map.getBounds(), zMax = +$('#saveZ').value;
+    return { s: b.getSouth(), w: b.getWest(), n: b.getNorth(), e: b.getEast(), zMax, zMin: Math.max(3, zMax - 9), layer: layerId };
+  }
+  function estimate() {
+    const L0 = LAYERS[layerId];
+    const go = $('#saveGo');
+    if (!L0.offline) { $('#saveEst').textContent = `${L0.name} can’t be saved. Switch to a USGS map in Layers.`; go.disabled = true; return; }
+    const a = currentArea(), n = countTiles(a);
+    if (n > MAX_TILES) { $('#saveEst').textContent = `${n.toLocaleString()} tiles is too many. Zoom in on the map or pick less detail.`; go.disabled = true; return; }
+    $('#saveEst').textContent = `${L0.name}: about ${n.toLocaleString()} tiles, roughly ${fmtMB(n * L0.kb * 1024)}.`;
+    go.disabled = false;
+  }
+  async function renderAreaList() {
+    $('#areaList').innerHTML = areas.length ? areas.map(a => `<li data-id="${a.id}">
+      <span><b>${esc(a.name)}</b><br><span class="hint">${LAYERS[a.layer] ? LAYERS[a.layer].name : a.layer}, zoom ${a.zMax}, ${a.tiles.toLocaleString()} tiles, ${fmtMB(a.bytes)}${a.partial ? ', incomplete' : ''}</span></span>
+      <span class="wact"><button class="btn small ghost" data-area="show">Show</button><button class="btn small ghost" data-area="del">Delete</button></span></li>`).join('')
+      : '<li><span class="hint">Nothing saved yet. Frame an area on the map, then download it here.</span></li>';
+    if (navigator.storage && navigator.storage.estimate) {
+      const e = await navigator.storage.estimate();
+      $('#storeUse').textContent = `Field Kit is using ${fmtMB(e.usage || 0)} of storage on this phone.`;
+    }
+  }
+  function renderAreas() {
+    if (!map) return;
+    const g = areaGroup(); g.clearLayers();
+    areas.forEach(a => L.rectangle([[a.s, a.w], [a.n, a.e]], { className: 'area-rect', interactive: false }).addTo(g));
+  }
+
+  let busy = false, cancel = false;
+  $('#mSave').addEventListener('click', () => {
+    if (!busy) { $('#saveName').value = ''; $('#saveProg').hidden = true; $('#saveStatus').textContent = ''; }
+    estimate(); renderAreaList(); $('#dlgSave').showModal();
+  });
+  $('#saveZ').addEventListener('change', estimate);
+  $('#saveClose').addEventListener('click', () => $('#dlgSave').close());
+
+  async function probe(layer) {
+    const u = tileUrl(layer, 0, 0, 0);
+    try { const r = await fetch(u, { mode: 'cors', cache: 'no-store' }); if (r.ok) return 'cors'; } catch { /* try opaque */ }
+    try { await fetch(u, { mode: 'no-cors', cache: 'no-store' }); return 'no-cors'; } catch { return null; }
+  }
+
+  $('#saveGo').addEventListener('click', async () => {
+    if (busy) { cancel = true; return; }
+    const a = currentArea(), L0 = LAYERS[a.layer], total = countTiles(a);
+    if (!L0.offline || total > MAX_TILES) return;
+    if (!navigator.onLine) { $('#saveStatus').textContent = 'You’re offline. Connect to download maps.'; return; }
+    busy = true; cancel = false;
+    $('#saveGo').textContent = 'Cancel';
+    $('#saveStatus').textContent = 'Checking the map server…';
+    const mode = await probe(a.layer);
+    if (!mode) { done('Couldn’t reach the map server. Check your connection and try again.'); return; }
+    // Without CORS, Chrome counts each stored tile as much larger than it is, so keep areas small.
+    if (mode === 'no-cors' && total > 3000) { done('This map server only allows small offline areas. Zoom in or pick less detail (under 3,000 tiles).'); return; }
+    if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+    let lock = null;
+    if ('wakeLock' in navigator) { try { lock = await navigator.wakeLock.request('screen'); } catch { /* ignore */ } }
+
+    const cache = await caches.open(TILE_CACHE);
+    const it = tiles(a);
+    let finished = 0, failed = 0, bytes = 0;
+    const prog = $('#saveProg'); prog.hidden = false; prog.max = total; prog.value = 0;
+    const update = () => { prog.value = finished; $('#saveStatus').textContent = `${finished.toLocaleString()} of ${total.toLocaleString()} tiles. Keep Field Kit open.`; };
+    async function one(z, x, y) {
+      const url = tileUrl(a.layer, z, x, y);
+      if (await cache.match(url, { ignoreVary: true })) return;
+      for (let t = 0; t < 3; t++) {
+        try {
+          const res = await fetch(url, { mode });
+          if (res.type === 'opaque' || res.ok) {
+            bytes += res.type === 'opaque' ? L0.kb * 1024 : (await res.clone().blob()).size;
+            await cache.put(url, res);
+            return;
+          }
+          if (res.status === 404) return;
+        } catch { /* retry */ }
+        await new Promise(r => setTimeout(r, 600 * (t + 1)));
+      }
+      failed++;
+    }
+    async function worker() {
+      for (let n = it.next(); !n.done && !cancel; n = it.next()) {
+        await one(...n.value); finished++;
+        if (finished % 10 === 0) update();
+      }
+    }
+    await Promise.all(Array.from({ length: 6 }, worker));
+    update();
+    if (lock) lock.release().catch(() => {});
+
+    const name = $('#saveName').value.trim() || `Area ${areas.length + 1}`;
+    if (finished > 0) {
+      areas.push({ id: Date.now().toString(36), name, layer: a.layer, s: a.s, w: a.w, n: a.n, e: a.e, zMin: a.zMin, zMax: a.zMax,
+        tiles: total, bytes, partial: cancel || failed > 0, date: Date.now() });
+      store.set('areas', areas); renderAreas();
+    }
+    done(cancel ? `Stopped. Kept the ${finished.toLocaleString()} tiles already saved.`
+      : failed ? `Saved ${name}, but ${failed} tiles failed. Download it again to fill the gaps.`
+      : `Saved ${name}. It works offline now.`);
+  });
+  function done(msg) {
+    busy = false; cancel = false;
+    $('#saveGo').textContent = 'Download';
+    $('#saveStatus').textContent = msg;
+    renderAreaList();
+  }
+
+  $('#areaList').addEventListener('click', async e => {
+    const b = e.target.closest('[data-area]'); if (!b) return;
+    const id = b.closest('li').dataset.id, a = areas.find(x => x.id === id); if (!a) return;
+    if (b.dataset.area === 'show') { $('#dlgSave').close(); map.fitBounds([[a.s, a.w], [a.n, a.e]]); setFollow(false); return; }
+    if (!confirm(`Delete ${a.name} from this phone?`)) return;
+    b.disabled = true;
+    const others = areas.filter(x => x.id !== id && x.layer === a.layer);
+    const cache = await caches.open(TILE_CACHE);
+    for (const [z, x, y] of tiles(a)) {
+      if (!others.some(o => covers(o, z, x, y))) await cache.delete(tileUrl(a.layer, z, x, y), { ignoreVary: true });
+    }
+    areas = areas.filter(x => x.id !== id); store.set('areas', areas);
+    renderAreas(); renderAreaList(); toast(`Deleted ${a.name}`);
+  });
+
+  /* ---------- Wiring ---------- */
+  FK.on('shown', s => { if (s.tab === 'tactical' && s.view === 'map') requestAnimationFrame(init); });
+  FK.on('fix', f => { onFixTrack(f); renderMe(); });
+  FK.on('heading', renderHeading);
+  FK.on('wps', () => { renderWps(); renderTrack(); });
+  renderTrack();
+  if (recording) { FK.sensors(); if (!FK.wakeOn()) FK.setWake(true); }
+  if (FK.tab() === 'tactical' && FK.view() === 'map') requestAnimationFrame(init);
+})();
+
+/* ---------- Survival: region picker and topic search ---------- */
+(() => {
+  const { $, store } = window.FK;
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  function setRegion(id) {
+    if (!$$('#regionSeg button').some(b => b.dataset.region === id)) id = 'temperate';
+    $$('#regionSeg button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.region === id)));
+    $$('.region').forEach(r => { r.hidden = r.dataset.region !== id; });
+    store.set('region', id);
+  }
+  $$('#regionSeg button').forEach(b => b.addEventListener('click', () => setRegion(b.dataset.region)));
+  setRegion(store.get('region', 'temperate'));
+
+  const topics = $$('#survTopics details.ref');
+  $('#survSearch').addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    $('#survTop').hidden = !!q;
+    let any = false;
+    topics.forEach(d => {
+      const hit = !q || d.textContent.toLowerCase().includes(q);
+      d.hidden = !hit; d.open = !!q && hit; any = any || hit;
+    });
+    $('#survEmpty').hidden = any;
+  });
 })();
 
 </script>

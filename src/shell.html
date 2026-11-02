@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E5E7DD">
+<meta name="description" content="Offline survival, tactical and emergency field reference.">
+<title>Field Kit</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="leaflet.css">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+/* Field Kit design tokens
+   Day: field-sage paper, OD green (tactical), coyote (survival), blaze (emergency).
+   Night: red-light mode to protect night vision — every colour collapses to red on black. */
+:root{
+  --paper:#E5E7DD; --surface:#F1F2EB; --ink:#1C2117; --muted:#5A6150; --line:#C3C8B5;
+  --od:#4A5233; --coyote:#7A5F34; --blaze:#B03A0A; --on-accent:#F6F7F1; --me:#1D4ED8;
+  --c:var(--od);
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="night"]){
+    --paper:#151912; --surface:#1E2319; --ink:#E3E6D9; --muted:#9BA28C; --line:#343B2B;
+    --od:#9AAA68; --coyote:#C9A86F; --blaze:#F2692B; --on-accent:#141710; --me:#60A5FA;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="night"]{
+  --paper:#000; --surface:#0E0101; --ink:#FF4F42; --muted:#E2352C; --line:#4A0B07;
+  --od:#FF4F42; --coyote:#FF4F42; --blaze:#FF4F42; --on-accent:#000; --me:#FF5A4F;
+  color-scheme:dark;
+}
+:root[data-tab="survival"]{--c:var(--coyote)}
+:root[data-tab="emergency"]{--c:var(--blaze)}
+
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.5 Roboto,system-ui,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent;
+  font-variant-numeric:tabular-nums}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+button,input,select{font:inherit;color:inherit}
+button,a,input,select,summary,label{touch-action:manipulation}
+h1,h2,h3,summary{text-wrap:balance}
+p,li{text-wrap:pretty}
+button{transition:transform .12s ease-out,background-color .15s ease,border-color .15s ease}
+button:not(:disabled):active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .btn:not(:disabled):hover{filter:brightness(1.08)}
+  .btn.ghost:not(:disabled):hover,.icon-btn:hover,.mapctl button:hover,.chips button:hover,.seg button:hover{background:color-mix(in srgb,var(--c) 10%,var(--surface))}
+  details.ref>summary:hover{color:var(--c)}
+}
+@media (prefers-reduced-motion:reduce){button{transition:none}button:not(:disabled):active{transform:none}}
+dialog{overscroll-behavior:contain}
+.tablewrap:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+[hidden]{display:none !important}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;display:flex;align-items:center;gap:8px;
+  padding:12px 16px;background:var(--paper);border-bottom:1px solid var(--line)}
+.top h1{margin:0;font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-.01em;color:var(--c)}
+.top .spacer{flex:1}
+.chip{font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.icon-btn{min-width:48px;min-height:48px;display:grid;place-items:center;border:1px solid var(--line);
+  background:var(--surface);border-radius:8px;padding:0 12px;cursor:pointer}
+.icon-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.icon-btn svg{width:22px;height:22px}
+
+main{max-width:640px;margin:0 auto;padding:16px 16px calc(96px + env(safe-area-inset-bottom,0px))}
+
+/* Bottom tab bar — thumb reach on a tall phone */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:6;display:grid;grid-template-columns:repeat(3,1fr);
+  background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabbar button{min-height:64px;border:0;border-top:3px solid transparent;background:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:13px;color:var(--muted)}
+.tabbar svg{width:24px;height:24px}
+.tabbar button[data-tab="survival"]{--t:var(--coyote)}
+.tabbar button[data-tab="tactical"]{--t:var(--od)}
+.tabbar button[data-tab="emergency"]{--t:var(--blaze)}
+.tabbar button[aria-current="page"]{color:var(--t);border-top-color:var(--t);font-weight:600}
+
+/* Segmented control */
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid var(--line);border-radius:8px;
+  overflow:hidden;margin-bottom:16px;background:var(--surface)}
+.seg button{min-height:44px;border:0;background:none;cursor:pointer;color:var(--muted)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-selected="true"]{background:var(--c);color:var(--on-accent);font-weight:600}
+.seg.small button{min-height:36px;font-size:14px}
+
+/* Sections */
+.block{padding:16px 0;border-top:1px solid var(--line)}
+.block:first-child{border-top:0;padding-top:0}
+h2{font-size:18px;line-height:1.3;margin:0 0 8px;font-weight:650}
+h3{font-size:16px;margin:16px 0 4px;font-weight:650}
+p{margin:0 0 8px}
+.hint{font-size:14px;color:var(--muted)}
+.muted{color:var(--muted)}
+
+/* Position readout — the hero */
+.readout{padding:4px 0 16px}
+.status{font-size:14px;color:var(--muted);min-height:21px}
+.status.warn{color:var(--blaze)}
+.mgrs{display:block;width:100%;text-align:left;border:0;background:none;padding:4px 0;cursor:pointer;
+  font-size:40px;line-height:1.1;font-weight:650;letter-spacing:.01em;word-spacing:.15em}
+.mgrs .gz{display:block;font-size:22px;color:var(--muted);font-weight:500;letter-spacing:.02em}
+.mgrs.empty{color:var(--muted);font-weight:400;font-size:28px}
+.latlon{font-size:15px;color:var(--muted);margin-top:4px;border:0;background:none;padding:4px 0;cursor:pointer;text-align:left}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stat{border-left:3px solid var(--c);padding:2px 0 2px 10px}
+.stat b{display:block;font-size:20px;font-weight:650;line-height:1.2}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* Compass */
+.compass-wrap{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.compass{width:min(46vw,220px);aspect-ratio:1;position:relative}
+.compass svg{width:100%;height:100%;display:block}
+#rose{transition:transform .12s linear;transform-origin:50% 50%}
+@media (prefers-reduced-motion:reduce){#rose{transition:none}}
+.hdg b{font-size:44px;line-height:1;font-weight:650;display:block}
+.hdg .ref{font-size:14px;color:var(--muted)}
+.hdg .tgt{margin-top:12px;font-size:15px}
+
+/* Forms */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+label.f.wide{grid-column:1/-1}
+input,select{min-height:48px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+  font-size:17px;color:var(--ink);width:100%}
+input::placeholder{color:var(--muted);opacity:.8}
+.row{display:flex;gap:8px;margin-top:8px}
+.row>input{flex:1;min-width:0}
+.btn{min-height:48px;padding:0 16px;border-radius:8px;border:1px solid var(--c);background:var(--c);color:var(--on-accent);
+  font-weight:600;cursor:pointer;white-space:nowrap}
+.btn.ghost{background:none;color:var(--c)}
+.btn.small{min-height:40px;padding:0 12px;font-size:14px}
+.btn.full{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* Waypoints */
+.wps{list-style:none;margin:12px 0 0;padding:0}
+.wps li{padding:12px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:4px 8px;align-items:center}
+.wps li.target .wname::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:8px}
+.wname{font-weight:600}
+.wmeta{font-size:14px;color:var(--muted);grid-column:1}
+.wact{grid-column:2;grid-row:1/3;display:flex;gap:6px}
+
+/* Ballistics output */
+.solution{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px;border:2px solid var(--c);border-radius:8px;margin-bottom:8px}
+.solution .k{font-size:14px;color:var(--muted)}
+.solution .v{font-size:36px;line-height:1.1;font-weight:700}
+.solution .v small{font-size:16px;font-weight:500;color:var(--muted)}
+.solution .sub{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.tablewrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:8px 10px;text-align:right;white-space:nowrap}
+th{font-weight:600;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface)}
+td:first-child,th:first-child{text-align:left;font-weight:600}
+tr.zero td{color:var(--muted)}
+tr.trans td{color:var(--blaze)}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 60%,transparent)}
+details.more{margin-top:12px}
+details.more summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600;color:var(--c)}
+
+/* Reference content */
+details.ref{border-top:1px solid var(--line)}
+details.ref:last-of-type{border-bottom:1px solid var(--line)}
+details.ref>summary{min-height:56px;display:flex;align-items:center;gap:12px;cursor:pointer;font-size:17px;font-weight:600;list-style:none}
+details.ref>summary::-webkit-details-marker{display:none}
+details.ref>summary::after{content:"+";margin-left:auto;font-size:24px;font-weight:400;color:var(--c)}
+details.ref[open]>summary::after{content:"–"}
+details.ref .body{padding:0 0 16px}
+ol.steps{margin:0;padding-left:24px}
+ol.steps li{margin:0 0 8px;padding-left:4px}
+ol.steps li::marker{font-weight:700;color:var(--c)}
+dl.march{margin:0;display:grid;grid-template-columns:40px 1fr;gap:8px 8px}
+dl.march dt{font-size:28px;font-weight:700;line-height:1;color:var(--c)}
+dl.march dd{margin:0}
+.timer{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 12px;padding:12px 0;border-top:1px solid var(--line)}
+.timer b{font-size:32px;font-weight:700;line-height:1.1}
+.timer .lbl{font-size:14px;color:var(--muted)}
+.timer .x{grid-column:2;grid-row:1/3}
+.cpr{display:flex;align-items:center;gap:16px;margin-top:12px}
+.beat{width:64px;height:64px;border-radius:50%;border:3px solid var(--blaze);display:grid;place-items:center;font-size:24px;font-weight:700}
+.beat.on{background:var(--blaze);color:var(--on-accent)}
+.signals{display:flex;gap:24px;margin:8px 0}
+.signals div{text-align:center;font-size:14px;color:var(--muted)}
+.signals b{display:block;font-size:48px;line-height:1.1;color:var(--ink)}
+.next{columns:2;gap:16px;padding-left:20px;margin:8px 0;color:var(--muted)}
+.foot{margin-top:24px;font-size:13px;color:var(--muted)}
+
+.update{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;gap:12px;align-items:center;justify-content:space-between;
+  background:var(--ink);color:var(--paper);padding:10px 12px 10px 16px;border-radius:8px;font-size:15px}
+.update .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:15px;z-index:20;
+  opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+
+@media (min-width:600px){.mgrs{font-size:52px}}
+
+/* Map */
+body.mapmode{overflow:hidden}
+body.mapmode main{padding-bottom:0}
+body.mapmode #tacSeg{margin-bottom:12px}
+.mapwrap{position:relative;margin:0 -16px;height:60vh;overflow:hidden;border-top:1px solid var(--line)}
+#map{position:absolute;inset:0;background:var(--surface)}
+.leaflet-container{font:inherit;font-size:14px}
+:root[data-theme="night"] .leaflet-tile-pane{filter:grayscale(1) invert(1) brightness(.7) sepia(1) saturate(9) hue-rotate(-38deg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="night"]) .leaflet-tile-pane{filter:brightness(.82)}}
+.leaflet-bar a{width:44px;height:44px;line-height:44px;font-size:22px;background:var(--surface);color:var(--ink);border-color:var(--line)}
+.leaflet-bar{border:1px solid var(--line) !important;box-shadow:none !important;border-radius:8px}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--surface) 80%,transparent) !important;color:var(--muted);font-size:10px}
+.leaflet-control-attribution a{color:var(--muted)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--surface);color:var(--ink);border-radius:8px}
+.leaflet-popup-content{margin:12px 14px;font-size:15px;line-height:1.4}
+.pop-act{margin-top:8px}
+.cross{position:absolute;left:50%;top:50%;width:32px;height:32px;margin:-16px 0 0 -16px;pointer-events:none;z-index:600}
+.cross::before,.cross::after{content:"";position:absolute;background:var(--ink);box-shadow:0 0 0 1px var(--surface)}
+.cross::before{left:15px;top:0;width:2px;height:32px}
+.cross::after{top:15px;left:0;height:2px;width:32px}
+.mapctl{position:absolute;right:12px;top:12px;z-index:1000;display:flex;flex-direction:column;gap:8px}
+.mapctl button{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.mapctl button svg{width:24px;height:24px}
+.mapctl button[aria-pressed="true"]{background:var(--c);color:var(--on-accent);border-color:var(--c)}
+#mTrack[aria-pressed="true"]{background:var(--blaze);border-color:var(--blaze)}
+.maptag{position:absolute;left:68px;top:12px;z-index:1000;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.maptag span{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.maptag .rec{background:var(--blaze);color:var(--on-accent);border-color:var(--blaze);font-weight:600}
+.mapbar{position:absolute;left:12px;right:12px;bottom:22px;z-index:1000;display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 8px 8px 12px}
+.mapbar .c{flex:1;min-width:0}
+.mapbar button.grid{display:block;border:0;background:none;padding:0;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left;white-space:nowrap}
+.mapbar .rel{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wp-icon,.me-icon{background:none;border:0}
+.wp-pin{position:relative;width:18px;height:18px}
+.wp-pin i{display:block;width:18px;height:18px;border-radius:50%;background:var(--od);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--ink)}
+.wp-pin.tgt i{background:var(--blaze)}
+.wp-pin b{position:absolute;left:22px;top:-1px;white-space:nowrap;font-size:13px;font-weight:700;color:var(--ink);
+  text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface)}
+.me{position:relative;width:64px;height:64px}
+.me .cone{position:absolute;inset:0;width:64px;height:64px;transform-origin:50% 50%}
+.me .cone path{fill:var(--me);opacity:.28}
+.me .dot{position:absolute;left:23px;top:23px;width:18px;height:18px;border-radius:50%;background:var(--me);border:3px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+:root[data-theme="night"] .me .dot{border-color:#000}
+path.acc{fill:var(--me);fill-opacity:.1;stroke:var(--me);stroke-opacity:.4;stroke-width:1}
+path.trk{stroke:var(--me);stroke-width:4;stroke-opacity:.85;fill:none;stroke-linecap:round;stroke-linejoin:round}
+path.tgt-line{stroke:var(--blaze);stroke-width:3;stroke-dasharray:8 8;fill:none}
+path.area-rect{stroke:var(--od);stroke-width:2;stroke-dasharray:4 6;fill:var(--od);fill-opacity:.05}
+
+/* Dialogs */
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);padding:20px 16px;
+  width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 48px)}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+dialog h2{margin-bottom:12px}
+dialog .row{flex-wrap:wrap}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
+.opt input{width:22px;min-height:22px;height:22px;margin-top:2px;accent-color:var(--c)}
+progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
+.arealist{list-style:none;margin:8px 0 0;padding:0}
+.arealist li{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
+
+/* Survival */
+.search{position:relative}
+.search input{padding-left:40px}
+.search svg{position:absolute;left:12px;top:14px;width:20px;height:20px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.chips button{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
+.chips button[aria-selected="true"]{background:var(--coyote);border-color:var(--coyote);color:var(--on-accent);font-weight:600}
+.region ul,.body ul{margin:0 0 8px;padding-left:20px}
+.region li,.body ul li{margin-bottom:6px}
+.knot{margin-bottom:12px}
+.knot b{display:block}
+.empty-msg{padding:16px 0;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1 id="title">Tactical</h1>
+  <span class="chip" id="netChip" hidden>Offline</span>
+  <span class="spacer"></span>
+  <button class="icon-btn" id="installBtn" hidden>Install</button>
+  <button class="icon-btn" id="menuBtn" aria-label="Settings and backup" title="Settings and backup">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <button class="icon-btn" id="nightBtn" aria-pressed="false" aria-label="Red light mode" title="Red light mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+</header>
+
+<main>
+<!-- ============ SURVIVAL ============ -->
+<section class="tab" id="tab-survival" hidden>
+<!-- Filled from src/survival.html by build.py. Edit that file, not this one. -->
+</section>
+
+<!-- ============ TACTICAL ============ -->
+<section class="tab" id="tab-tactical">
+  <div class="seg" role="tablist" id="tacSeg">
+    <button role="tab" data-view="map" aria-selected="true">Map</button>
+    <button role="tab" data-view="position" aria-selected="false">Position</button>
+    <button role="tab" data-view="ballistics" aria-selected="false">Ballistics</button>
+  </div>
+
+  <!-- Map -->
+  <div id="view-map">
+    <div class="mapwrap" id="mapWrap">
+      <div id="map" aria-label="Map"></div>
+      <div class="cross" aria-hidden="true"></div>
+      <div class="maptag"><span id="mLayerName">USGS Topo</span><span class="rec" id="recChip" hidden>Recording</span></div>
+      <div class="mapctl">
+        <button id="mLayers" aria-label="Map layers" title="Map layers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5z"/><path d="m2 13 10 5 10-5"/></svg>
+        </button>
+        <button id="mLocate" aria-label="Follow my position" aria-pressed="false" title="Follow my position">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+        </button>
+        <button id="mTrack" aria-label="Track recording" aria-pressed="false" title="Track recording">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19c3 0 3-6 7-6s3 4 6 4"/><circle cx="19" cy="6" r="3"/><circle cx="4" cy="19" r="1.5" fill="currentColor"/></svg>
+        </button>
+        <button id="mSave" aria-label="Save map for offline" title="Save map for offline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 20h16"/></svg>
+        </button>
+      </div>
+      <div class="mapbar">
+        <div class="c">
+          <button class="grid" id="mCenter" translate="no" aria-label="Grid at crosshair. Tap to copy.">—</button>
+          <span class="rel" id="mCenterRel">Grid at the crosshair</span>
+        </div>
+        <button class="btn small" id="mMark">Mark</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Position -->
+  <div id="view-position" hidden>
+    <div class="readout">
+      <div class="status" id="gpsStatus">Starting GPS…</div>
+      <button class="mgrs empty" id="mgrs" translate="no" aria-label="MGRS coordinate. Tap to copy.">No fix yet</button>
+      <button class="latlon" id="latlon" aria-label="Latitude and longitude. Tap to switch format."></button>
+      <div class="stats">
+        <div class="stat"><b id="sAlt">—</b><span>Altitude</span></div>
+        <div class="stat"><b id="sAcc">—</b><span>Accuracy</span></div>
+        <div class="stat"><b id="sSpd">—</b><span>Speed</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="compass-wrap">
+        <div class="compass">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="96" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+            <g id="rose"></g>
+            <path d="M100 2 L108 18 L92 18 Z" fill="var(--c)"/>
+            <line x1="100" y1="80" x2="100" y2="120" stroke="var(--muted)" stroke-width="1"/>
+            <line x1="80" y1="100" x2="120" y2="100" stroke="var(--muted)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="hdg">
+          <b id="hdg">—</b>
+          <div class="ref" id="hdgRef">Hold the phone flat</div>
+          <div class="tgt" id="tgtInfo" hidden></div>
+        </div>
+      </div>
+      <div class="grid2" style="margin-top:12px">
+        <label class="f">Declination (°, east +)
+          <input id="decl" type="number" inputmode="decimal" step="0.1" placeholder="0">
+        </label>
+        <label class="f">Screen
+          <button class="btn ghost" id="wakeBtn" aria-pressed="false">Keep screen on</button>
+        </label>
+      </div>
+      <p class="hint" style="margin-top:8px">The compass reads magnetic north. Enter your local declination to get true bearings that line up with waypoints. Calibrate by moving the phone in a figure-8.</p>
+    </div>
+
+    <div class="block">
+      <h2>Waypoints</h2>
+      <div class="row"><input id="wpName" placeholder="Name (optional)…" aria-label="Waypoint name" autocomplete="off"><button class="btn" id="wpMark">Mark here</button></div>
+      <div class="row"><input id="wpCoord" placeholder="Grid or lat/long to add…" aria-label="Grid or coordinates to add" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="btn ghost" id="wpAdd">Add</button></div>
+      <p class="hint" id="wpMsg" style="margin-top:8px"></p>
+      <ul class="wps" id="wpList"></ul>
+      <button class="btn ghost full" id="wpExport" style="margin-top:12px">Export KML for ATAK</button>
+    </div>
+  </div>
+
+  <!-- Ballistics -->
+  <div id="view-ballistics" hidden>
+    <div class="solution" id="solution" aria-live="polite">
+      <div><div class="k">Elevation</div><div class="v" id="solElev">—</div></div>
+      <div><div class="k">Windage</div><div class="v" id="solWind">—</div></div>
+      <div class="sub" id="solSub"></div>
+    </div>
+    <div class="seg small" role="tablist" id="unitSeg" style="margin:12px 0">
+      <button role="tab" data-unit="mil" aria-selected="true">MIL (MRAD)</button>
+      <button role="tab" data-unit="moa" aria-selected="false">MOA</button>
+    </div>
+
+    <div class="block">
+      <h2>Shot</h2>
+      <div class="grid2">
+        <label class="f">Target range (yd)<input id="bRange" type="number" inputmode="decimal" value="500"></label>
+        <label class="f">Incline (°)<input id="bAngle" type="number" inputmode="decimal" value="0" placeholder="+ up, − down"></label>
+        <label class="f">Wind speed (mph)<input id="bWind" type="number" inputmode="decimal" value="10"></label>
+        <label class="f">Wind from (clock)
+          <select id="bClock">
+            <option value="12">12, head</option><option value="1">1</option><option value="2">2</option>
+            <option value="3" selected>3, right</option><option value="4">4</option><option value="5">5</option>
+            <option value="6">6, tail</option><option value="7">7</option><option value="8">8</option>
+            <option value="9">9, left</option><option value="10">10</option><option value="11">11</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Rifle and load</h2>
+      <label class="f wide">Profile
+        <select id="bProfile"></select>
+      </label>
+      <div class="grid2" style="margin-top:12px">
+        <label class="f">Ballistic coefficient<input id="bBC" type="number" inputmode="decimal" step="0.001"></label>
+        <label class="f">Drag model
+          <select id="bModel"><option>G1</option><option>G7</option></select>
+        </label>
+        <label class="f">Bullet weight (gr)<input id="bW" type="number" inputmode="decimal"></label>
+        <label class="f">Muzzle velocity (fps)<input id="bMV" type="number" inputmode="decimal"></label>
+        <label class="f">Sight height (in)<input id="bSH" type="number" inputmode="decimal" step="0.1"></label>
+        <label class="f">Zero range (yd)<input id="bZero" type="number" inputmode="decimal"></label>
+      </div>
+      <p class="hint" style="margin-top:8px">Built-in profiles are starting points. Your barrel and ammo lot change velocity, so chronograph your load and confirm at distance. AR-15 scopes usually sit 2.5–2.7 in above the bore.</p>
+      <div class="row"><button class="btn ghost" id="bSave">Save as new profile</button><button class="btn ghost" id="bDel" hidden>Delete profile</button></div>
+    </div>
+
+    <div class="block">
+      <h2>Conditions</h2>
+      <div class="grid2">
+        <label class="f">Temperature (°F)<input id="bTemp" type="number" inputmode="decimal" value="59"></label>
+        <label class="f">Altitude (ft)<input id="bAlt" type="number" inputmode="decimal" value="0"></label>
+        <label class="f">Station pressure (inHg)<input id="bPress" type="number" inputmode="decimal" step="0.01" placeholder="From altitude"></label>
+        <label class="f">Humidity (%)<input id="bRH" type="number" inputmode="decimal" value="50"></label>
+      </div>
+      <p class="hint" style="margin-top:8px">Leave pressure blank to estimate it from altitude. A Kestrel or phone barometer reading is more accurate.</p>
+    </div>
+
+    <div class="block">
+      <h2>Dope card</h2>
+      <div class="grid2">
+        <label class="f">Out to (yd)<input id="bMax" type="number" inputmode="decimal" value="1000"></label>
+        <label class="f">Every (yd)
+          <select id="bStep"><option>25</option><option selected>50</option><option>100</option></select>
+        </label>
+      </div>
+      <div class="tablewrap" tabindex="0" role="region" aria-label="Dope card table, scrolls sideways"><table id="dope"></table></div>
+      <p class="hint" style="margin-top:8px">Rows in orange are transonic (below Mach 1.2), where accuracy falls off and predictions get less reliable. Spin drift and Coriolis are not included yet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EMERGENCY ============ -->
+<section class="tab" id="tab-emergency" hidden>
+
+  <details class="ref" open>
+    <summary>Life-threatening bleeding</summary>
+    <div class="body">
+      <ol class="steps">
+        <li>Call 911, or have someone call.</li>
+        <li>Find where the blood is coming from. Open or cut away clothing to see the wound.</li>
+        <li>Arm or leg: put a tourniquet 2–3 inches above the wound, not on a joint. Tighten until the bleeding stops, then start a timer below.</li>
+        <li>Neck, shoulder or groin: pack the wound tightly with gauze or clean cloth, then press hard with both hands.</li>
+        <li>No tourniquet or gauze: press firmly and steadily on the wound with both hands and don’t let up.</li>
+        <li>If bleeding continues, add a second tourniquet above the first. Don’t loosen or remove a tourniquet; leave that to medical staff.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="ref" open>
+    <summary>Tourniquet timers</summary>
+    <div class="body">
+      <div class="row" style="margin-top:0">
+        <select id="tqLimb" aria-label="Limb">
+          <option>Left arm</option><option>Right arm</option><option>Left leg</option><option>Right leg</option><option>Other</option>
+        </select>
+        <button class="btn" id="tqStart">Start timer</button>
+      </div>
+      <div id="tqList"></div>
+      <p class="hint" style="margin-top:8px">Timers keep running if you close the app. Tell responders the time each tourniquet went on, and write it on the tourniquet or casualty if you can.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>CPR, adult</summary>
+    <div class="body">
+      <ol class="steps">
+        <li>Tap and shout. If they don’t respond and aren’t breathing normally, call 911 and send someone for an AED.</li>
+        <li>Push hard and fast in the centre of the chest: at least 2 inches deep, 100–120 times a minute. Let the chest fully rise between pushes.</li>
+        <li>If you’re trained, give 30 compressions, then 2 breaths. If not, keep doing compressions only.</li>
+        <li>Turn on the AED as soon as it arrives and follow its voice prompts.</li>
+        <li>Keep going until help takes over or the person starts breathing.</li>
+      </ol>
+      <div class="cpr">
+        <div class="beat" id="beat" aria-live="off">0</div>
+        <button class="btn" id="cprBtn">Start metronome</button>
+      </div>
+      <p class="hint" style="margin-top:8px">Clicks at 110 per minute and counts to 30. Turn your volume up.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Trauma priorities (MARCH)</summary>
+    <div class="body">
+      <dl class="march">
+        <dt>M</dt><dd>Massive bleeding. Stop it first, before anything else.</dd>
+        <dt>A</dt><dd>Airway. Open it. Roll an unresponsive, breathing casualty onto their side.</dd>
+        <dt>R</dt><dd>Respiration. Seal open chest wounds with a vented chest seal. Watch for breathing that gets worse.</dd>
+        <dt>C</dt><dd>Circulation. Check for other bleeding and signs of shock: pale, cold, clammy skin and a fast pulse.</dd>
+        <dt>H</dt><dd>Hypothermia and head injury. Insulate the casualty from the ground and keep them warm, even in warm weather.</dd>
+      </dl>
+    </div>
+  </details>
+
+  <p class="foot">Reference only, not a substitute for training. Take a Stop the Bleed, CPR and wilderness first aid course.</p>
+</section>
+</main>
+
+<nav class="tabbar" aria-label="Sections">
+  <button data-tab="survival" aria-current="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 12 4l9 16z"/><path d="M12 20v-6"/><path d="M9.5 20 12 14l2.5 6"/></svg>
+    Survival
+  </button>
+  <button data-tab="tactical" aria-current="page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 1v5M12 18v5M1 12h5M18 12h5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+    Tactical
+  </button>
+  <button data-tab="emergency" aria-current="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg>
+    Emergency
+  </button>
+</nav>
+
+<dialog id="dlgLayers">
+  <h2>Map layers</h2>
+  <div id="layerList"></div>
+  <div class="row"><button class="btn ghost full" id="layersClose">Close</button></div>
+</dialog>
+
+<dialog id="dlgSave">
+  <h2>Save map for offline</h2>
+  <p class="hint">Downloads the area on screen for the current map layer. Zoom the map to frame it first.</p>
+  <div class="grid2">
+    <label class="f">Name<input id="saveName" placeholder="e.g. Hunting unit 4…" autocomplete="off"></label>
+    <label class="f">Most detail
+      <select id="saveZ">
+        <option value="13">Overview (13)</option><option value="14">Trails (14)</option>
+        <option value="15" selected>Detailed (15)</option><option value="16">Maximum (16)</option>
+      </select>
+    </label>
+  </div>
+  <p id="saveEst" style="margin-top:12px"></p>
+  <progress id="saveProg" hidden></progress>
+  <p class="hint" id="saveStatus" aria-live="polite"></p>
+  <div class="row"><button class="btn" id="saveGo">Download</button><button class="btn ghost" id="saveClose">Close</button></div>
+  <h3 style="margin-top:20px">Saved areas</h3>
+  <ul class="arealist" id="areaList"></ul>
+  <p class="hint" id="storeUse"></p>
+</dialog>
+
+<dialog id="dlgTrack">
+  <h2>Track</h2>
+  <p id="trkInfo"></p>
+  <div class="row"><button class="btn full" id="trkToggle">Start recording</button></div>
+  <div class="row"><button class="btn ghost" id="trkExport">Export GPX</button><button class="btn ghost" id="trkClear">Clear track</button></div>
+  <p class="hint" style="margin-top:12px">Records only while Field Kit is open, so the screen stays on while recording. The GPX file includes your waypoints and opens in ATAK, Gaia and most mapping apps.</p>
+  <div class="row"><button class="btn ghost full" id="trkClose">Close</button></div>
+</dialog>
+
+<dialog id="dlgFig">
+  <div id="figBody"></div>
+  <p class="hint" id="figCap" style="margin-top:8px"></p>
+  <p class="hint">Turn your phone sideways for a bigger view.</p>
+  <div class="row"><button class="btn ghost full" id="figClose">Close</button></div>
+</dialog>
+
+<dialog id="dlgMenu">
+  <h2>Settings and backup</h2>
+  <p class="hint">Waypoints, tracks, rifle profiles and timers live only on this phone. Back them up now and then, and before clearing Chrome’s data.</p>
+  <div class="row"><button class="btn" id="bkSave">Back up data</button><label class="btn ghost" for="bkFile" style="display:inline-flex;align-items:center">Restore backup</label></div>
+  <input type="file" id="bkFile" accept="application/json,.json" hidden>
+  <p class="hint" id="bkMsg" aria-live="polite"></p>
+  <h3>This phone</h3>
+  <p class="hint" id="diag"></p>
+  <div class="row"><button class="btn ghost" id="updBtn">Check for update</button><button class="btn ghost" id="menuClose">Close</button></div>
+</dialog>
+
+<div class="update" id="updBar" role="status" hidden>
+  <span>A new version of Field Kit is ready.</span>
+  <button class="btn small" id="updReload">Reload</button>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="leaflet.js"></script>
+<script>
+/*__SCRIPTS__*/
+</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<section class="tab" id="tab-survival" hidden>
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+    <input type="search" id="survSearch" placeholder="Search: water, snare, bowline…" aria-label="Search survival topics" autocomplete="off">
+  </div>
+
+  <div id="survTop">
+    <div class="block" style="border-top:0;padding-top:16px">
+      <h2>Your environment</h2>
+      <div class="chips" role="tablist" id="regionSeg">
+        <button role="tab" data-region="temperate">Forest</button>
+        <button role="tab" data-region="desert">Desert</button>
+        <button role="tab" data-region="cold">Cold and snow</button>
+        <button role="tab" data-region="tropical">Jungle</button>
+        <button role="tab" data-region="coastal">Coast and sea</button>
+      </div>
+      <div class="region" data-region="temperate">
+        <ul>
+          <li>The biggest killer here is hypothermia in wet, windy weather between 30 and 50°F, not extreme cold. Get out of wind and rain early, before you’re soaked.</li>
+          <li>Water is usually plentiful. Treat all of it.</li>
+          <li>Dead and downed wood is everywhere, so fire is usually achievable. Look for standing dead wood when the ground is wet.</li>
+          <li>Check your skin for ticks every day.</li>
+        </ul>
+      </div>
+      <div class="region" data-region="desert" hidden>
+        <ul>
+          <li>Ration sweat, not water. Drink what you have when you’re thirsty, rest in shade through the heat of the day, and move at dawn, dusk or night.</li>
+          <li>Keep skin covered, including head and neck. Loose, light-coloured clothing keeps you cooler than bare skin.</li>
+          <li>Stay out of dry washes when storms are around. Flash floods can arrive from rain miles away.</li>
+          <li>Nights can drop near freezing. Keep a warm layer.</li>
+          <li>Headache, dizziness, nausea, confusion or hot dry skin means heat illness. Get into shade and cool down immediately.</li>
+        </ul>
+      </div>
+      <div class="region" data-region="cold" hidden>
+        <ul>
+          <li>Remember COLD: keep clothing Clean, avoid Overheating (sweat soaks insulation), wear it Loose and in layers, and keep it Dry.</li>
+          <li>Cover head, hands and feet. Check each other for frostbite: white or grey-yellow skin that feels hard or waxy. Don’t rub it, and only rewarm it if it won’t freeze again.</li>
+          <li>Eat and drink regularly. Your body needs fuel to make heat.</li>
+          <li>Melt snow before drinking it. Eating it lowers your core temperature.</li>
+          <li>Never run a stove or fire in a sealed tent or snow shelter. Carbon monoxide kills without warning.</li>
+          <li>Wear sunglasses, or cut thin slits in bark or cloth, to prevent snow blindness.</li>
+        </ul>
+      </div>
+      <div class="region" data-region="tropical" hidden>
+        <ul>
+          <li>Water is plentiful, but nearly all of it needs treating.</li>
+          <li>Sleep off the ground in a hammock or on a raised platform, away from insects, snakes and flooding.</li>
+          <li>Keep your feet dry and change socks whenever you can to prevent immersion foot. Shake out boots and clothing before you put them on.</li>
+          <li>Travel along ridges rather than through dense valley growth. Following rivers downstream usually leads to people.</li>
+          <li>Clean and cover every cut. Infections set in fast in heat and humidity.</li>
+        </ul>
+      </div>
+      <div class="region" data-region="coastal" hidden>
+        <ul>
+          <li>Never drink seawater. It dehydrates you faster.</li>
+          <li>Collect rain and dew. On a beach, dig behind the first dune where plants grow; fresh water often collects there.</li>
+          <li>Only eat mussels and clams that were alive and closed before cooking, and skip them entirely during red tide warnings.</li>
+          <li>Know the tide times. Rising water can cut you off on points and tidal flats.</li>
+          <li>Cover up. Sun reflected off water and sand burns fast.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Priorities</h2>
+      <p>In harsh conditions a person can last roughly 3 minutes without air, 3 hours without shelter, 3 days without water and 3 weeks without food. Work the problem in that order.</p>
+      <p>If you’re lost, STOP: Stop, Think, Observe, Plan. If someone knows your route and when you’re due back, staying put usually gets you found faster than wandering.</p>
+    </div>
+  </div>
+
+  <div id="survTopics">
+  <details class="ref">
+    <summary>The ten essentials</summary>
+    <div class="body">
+      <p>Pack these on every trip into the backcountry, even a short one.</p>
+      {{fig:kit|Ten things that turn a bad night out into a survivable one.}}
+      <ul>
+        <li>Navigation: map, compass, and a charged phone or GPS.</li>
+        <li>Headlamp, with spare batteries.</li>
+        <li>Sun protection: sunglasses, sunscreen and a hat.</li>
+        <li>First aid kit, including a tourniquet.</li>
+        <li>Knife or multi-tool.</li>
+        <li>Fire: lighter, ferro rod or waterproof matches, plus tinder.</li>
+        <li>Emergency shelter: space blanket, bivy sack or tarp.</li>
+        <li>Extra food: a day’s worth beyond the plan.</li>
+        <li>Extra water and a way to treat more.</li>
+        <li>Extra layers: insulation and rain gear.</li>
+      </ul>
+      <p>Tell someone your route and when you’ll be back, and add a whistle: three blasts carries farther than shouting.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Find water</summary>
+    <div class="body">
+      <ul>
+        <li>Water runs downhill. Check valley bottoms, the base of cliffs, and dry stream beds; dig on the outside of bends where water last flowed.</li>
+      </ul>
+      {{fig:water-bend|Water lingers longest under the outside of a bend, where the current cut deepest.}}
+      <ul>
+        <li>Signs of water nearby: green vegetation, swarming insects, animal trails that join up, and birds flying low and straight at dawn and dusk.</li>
+        <li>Catch rain with a tarp, poncho or large leaves.</li>
+        <li>Before sunrise, tie absorbent cloth around your ankles, walk through tall grass, and wring out the dew.</li>
+        <li>Tie a clear plastic bag over a leafy branch of a non-poisonous plant in full sun. Water collects in the bag as the leaves breathe.</li>
+      </ul>
+      {{fig:water-bag|A transpiration bag yields a little water over several hours. Move it to a fresh branch daily.}}
+      <ul>
+        <li>Never drink seawater or urine.</li>
+        <li>Treat all wild water before drinking (see Make water safe).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Make water safe</summary>
+    <div class="body">
+      <ol class="steps">
+        <li>If the water is cloudy, let it settle, then strain it through a clean cloth.</li>
+        <li>Boil at a rolling boil for 1 minute. Above 6,500 ft, boil for 3 minutes.</li>
+        <li>No fire? Use unscented household bleach: 8 drops of 6% bleach (or 6 drops of 8.25%) per gallon. Double it for cloudy or very cold water. Stir and wait 30 minutes.</li>
+        <li>Tablets and filters: follow the maker’s directions. Most filters don’t stop viruses.</li>
+      </ol>
+      {{fig:water-safe|Boiling is the most reliable method. Bleach must be plain, unscented and not expired.}}
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Shelter</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Pick the spot</h3>
+      <ul>
+        <li>Flat, dry ground above flood level, with no dead trees or hanging branches overhead.</li>
+        <li>Avoid valley floors on cold nights (cold air pools there) and exposed ridgetops (wind).</li>
+        <li>Close to water and building material, but never in a dry wash.</li>
+      </ul>
+      {{fig:shelter-site|A level spot partway up a slope beats both the valley floor and the ridgetop.}}
+      <h3>Build</h3>
+      <ol class="steps">
+        <li>Insulate from the ground first: a bed of dry leaves, grass or boughs at least a hand’s width thick once you lie on it. The ground pulls heat out of you faster than the air.</li>
+        <li>Keep it small, just big enough to lie in. Your body has to heat the space.</li>
+        <li>Debris hut: prop a long ridgepole on a stump or forked stick at about hip height. Lean sticks along both sides, then pile leaves and debris at least an arm’s length thick. Pull a pile of leaves into the entrance once you’re inside.</li>
+        <li>Lean-to: lash a pole between two trees, lean branches against it on the windward side, and cover with boughs or a tarp. Build a fire in front, with a wall of logs or rocks behind it to reflect heat in.</li>
+        <li>Tarp: tie a ridgeline between trees and drape the tarp over it as an A-frame, low end facing the wind.</li>
+      </ol>
+      {{fig:shelter-debris|Debris hut. More debris means more warmth; it should be thick enough that you can’t see light through it.}}
+      {{fig:shelter-leanto|Lean-to. The log wall throws the fire’s heat back into the shelter.}}
+      {{fig:shelter-tarp|Tarp A-frame. Pitch the end facing the wind lower to keep rain and wind out.}}
+      <h3>Snow and desert</h3>
+      <ul>
+        <li>A snow trench or snow cave insulates well. Poke a ventilation hole, keep your digging tool inside with you, and never use a stove or fire in a sealed snow shelter.</li>
+        <li>In the desert, shade comes first. Two layers of material with an air gap between them are much cooler than one. Stay off the hot ground.</li>
+      </ul>
+      {{fig:shelter-snow|Snow trench. Sleeping above the floor keeps you out of the coldest air.}}
+      {{fig:shelter-desert|Desert shade. The air gap keeps the sun-heated top layer from heating the space below.}}
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Fire</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Gather first, about twice what you think</h3>
+      <ul>
+        <li>Tinder: dry, fine and fluffy. Birch bark, dry grass, cattail fluff, resin-soaked pine (fatwood), dryer lint, cotton balls with petroleum jelly.</li>
+        <li>Kindling: dead twigs from pencil-lead to pencil thickness.</li>
+        <li>Fuel: dead wood wrist-thick and bigger. Dry wood snaps with a crack.</li>
+      </ul>
+      {{fig:fire-sizes|Most failed fires run short on kindling. Gather far more than seems necessary.}}
+      <h3>Build and light</h3>
+      <ol class="steps">
+        <li>Clear a 10-foot circle down to bare soil, away from overhanging branches. On snow or wet ground, build on a platform of green sticks or flat rocks.</li>
+        <li>Put the tinder bundle in the centre and lean kindling around it like a teepee, with an opening facing the wind.</li>
+        <li>Light the tinder from the upwind side, then add fuel from small to large. Blow gently at the base.</li>
+        <li>Once it’s going, a log cabin of fuel stacked around the teepee burns longer and makes good coals for cooking.</li>
+      </ol>
+      {{fig:fire-lays|Start with a teepee; build a log cabin around it once it catches.}}
+      <h3>Ways to light it</h3>
+      <ul>
+        <li>Ferro rod: hold the striker still against the rod, right in the tinder, and pull the rod back. Pushing the striker scatters the tinder.</li>
+      </ul>
+      {{fig:fire-ferro|Pulling the rod back keeps the sparks landing exactly where the striker sits.}}
+      <ul>
+        <li>9-volt battery and fine steel wool: touch both terminals to the wool and it ignites.</li>
+        <li>Bow drill: it works, but it takes practice. Learn it before you need it.</li>
+      </ul>
+      <p>In wet weather, use standing dead wood and the dead lower branches of conifers, and split wood to reach the dry core. Birch bark burns even when damp.</p>
+      {{fig:fire-platform|A platform stops snowmelt or wet ground from drowning the fire from below.}}
+      <p>Never leave a fire unattended. Before you leave, drown it, stir it, and feel that it’s cold.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Food and wild plants</summary>
+    <div class="body">
+      <p>Food is the lowest priority, since you can last weeks without it. Don’t spend energy or risk poisoning chasing it early.</p>
+      <p><b>Only eat a plant you can identify with certainty.</b> Water hemlock and poison hemlock, two of the deadliest plants in North America, look like wild carrot or parsley, and a small amount can kill.</p>
+      <h3>Warning signs in plants you don’t know</h3>
+      <ul>
+        <li>Milky or discoloured sap</li>
+        <li>Beans, bulbs or seeds inside pods</li>
+        <li>A bitter or soapy taste</li>
+        <li>Spines, fine hairs or thorns</li>
+        <li>Carrot-, parsley- or dill-like leaves</li>
+        <li>An almond smell in the leaves or wood</li>
+        <li>Grain heads with pink, purple or black spurs</li>
+        <li>Leaves in groups of three</li>
+      </ul>
+      {{fig:plant-warnings|Warning signs only. These drawings are not for identifying plants.}}
+      <p>A few well-known edibles break these rules (blackberry canes have thorns), which is why positive identification matters more than any rule. Skip wild mushrooms entirely: almost no calories, and deadly lookalikes.</p>
+      <p class="hint">There are deliberately no drawings of edible plants here. Identify plants with a regional field guide that has real photographs, ideally after learning them from someone local.</p>
+      <h3>Widespread, easier options</h3>
+      <ul>
+        <li>Cattail: young shoots, starchy roots and pollen. Grows in wet ground across much of the world.</li>
+        <li>Dandelion: leaves, flowers and roots are all edible.</li>
+        <li>Acorns: shell and chop them, then soak or boil in several changes of water until they’re no longer bitter.</li>
+        <li>Blackberries and raspberries: clustered berries with few toxic lookalikes.</li>
+        <li>Insects: grasshoppers, crickets, grubs and ants. Remove legs and wings and cook them. Skip brightly coloured, hairy or smelly insects, caterpillars, and flies, ticks and mosquitoes.</li>
+        <li>Fish: all freshwater fish can be eaten if cooked thoroughly.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Traps and fishing</summary>
+    <div class="body">
+      <p class="hint">Outside a genuine emergency, trapping, snaring and set lines are regulated or illegal in most places. Check your state’s rules before practising.</p>
+      <ul>
+        <li>Set traps on active game trails, at spots where the trail narrows, and near water, dens or feeding signs.</li>
+        <li>Set many. Most traps catch nothing, so a dozen beats one.</li>
+        <li>Handle them as little as possible and leave the trail undisturbed. Check them at least once a day.</li>
+      </ul>
+      <h3>Traps</h3>
+      <ul>
+        <li>Simple snare: a loop of wire or strong cord with a sliding noose, anchored firmly. For rabbits, make the loop about fist-sized with its bottom about 3 inches above the trail.</li>
+      </ul>
+      {{fig:trap-snare|Simple snare across a trail. Disturb the trail as little as possible.}}
+      <ul>
+        <li>Squirrel pole: lean a long pole against a tree squirrels use and fix several small snares along it.</li>
+      </ul>
+      {{fig:trap-squirrel|Squirrels take the easy route up a leaning pole.}}
+      <ul>
+        <li>Figure-4 deadfall: three notched sticks hold up a heavy rock or log, and bait on the trigger stick drops it. Keep your hands and body out from under the weight while setting it.</li>
+      </ul>
+      {{fig:trap-fig4|Figure-4 deadfall. Disturbing the bait trips the trigger and drops the weight.}}
+      <h3>Fishing</h3>
+      <ul>
+        <li>Gorge hook: a short sliver of bone or hardwood, sharpened at both ends and tied at the middle. Bait it; it lodges crosswise when swallowed.</li>
+        <li>Fish trap: a funnel of stakes in shallow water that fish swim into but struggle to find their way out of.</li>
+        <li>Several baited lines left out overnight catch more than one rod you have to watch.</li>
+        <li>Fish feed most around dawn and dusk.</li>
+      </ul>
+      {{fig:fishing|Gorge hook and a stake fish trap, seen from above.}}
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Field dressing game</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Deer-sized game</h3>
+      <ol class="steps">
+        <li>Make sure it’s dead: approach from behind and touch the open eye with a stick. No blink, no movement.</li>
+        <li>Tag it if the law requires, and put on gloves.</li>
+        <li>Lay it on its back with the head slightly uphill.</li>
+        <li>Pinch up the belly skin and make a shallow cut. With two fingers inside guiding the blade edge-up, open the belly from the pelvis to the breastbone without puncturing the stomach or intestines.</li>
+        <li>Cut around the anus to free it, and tie it off to keep waste off the meat.</li>
+        <li>Cut the diaphragm away from the ribs, reach up into the chest, and cut the windpipe and gullet as far forward as you can.</li>
+        <li>Roll the animal onto its side and pull the organs out. Keep the heart and liver if they look healthy.</li>
+        <li>Drain the cavity and cool the carcass fast: prop it open, get it off the ground and into shade, and skin it in warm weather.</li>
+      </ol>
+      {{fig:dress-deer|Seen from above with the animal on its back. The dashed line is the belly cut.}}
+      <h3>Small game and fish</h3>
+      <ul>
+        <li>Rabbits and squirrels: pinch the back skin, cut a slit, and pull the hide apart toward the head and feet. Open the belly and remove the organs.</li>
+        <li>Wear gloves with rabbits. If the liver has white spots, throw the whole animal away (tularemia).</li>
+        <li>Fish: cut from the vent to the gills, pull out the guts, then scale or skin.</li>
+      </ul>
+      {{fig:dress-fish|The vent is the small opening on the belly toward the tail.}}
+      <ul>
+        <li>Birds: pluck or skin, then open the body cavity and remove the organs.</li>
+      </ul>
+      <p>Cook all wild game thoroughly. Bear and wild pig must be cooked through to kill trichinella parasites.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Navigation without a compass</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Shadow stick (works in both hemispheres)</h3>
+      <ol class="steps">
+        <li>Push a straight stick upright into level ground and mark the tip of its shadow.</li>
+        <li>Wait at least 15 minutes and mark the new shadow tip.</li>
+        <li>A line from the first mark to the second runs roughly west to east. Stand with the first mark on your left and the second on your right, and you’re facing north.</li>
+      </ol>
+      {{fig:nav-shadow|The shadow tip moves east as the sun moves west. Most accurate around midday.}}
+      <h3>Analog watch</h3>
+      <ul>
+        <li>Northern Hemisphere: point the hour hand at the sun. South is halfway between the hour hand and 12 o’clock. During daylight saving time, use 1 o’clock instead of 12.</li>
+        <li>Southern Hemisphere: point 12 o’clock at the sun. North is halfway between 12 and the hour hand.</li>
+      </ul>
+      {{fig:nav-watch|A rough method; least reliable near midday and close to the equator.}}
+      <h3>Night sky</h3>
+      <ul>
+        <li>North Star: follow the two stars at the end of the Big Dipper’s cup about five times the gap between them. Polaris is within about a degree of true north, and its height above the horizon roughly equals your latitude.</li>
+      </ul>
+      {{fig:nav-polaris|The Big Dipper turns around Polaris through the night, but the pointers always point to it.}}
+      <ul>
+        <li>Southern Cross: extend the long axis of the cross about four and a half times its length, then drop straight down to the horizon for south.</li>
+      </ul>
+      {{fig:nav-cross|The two bright Pointers beside the cross help confirm you have the real one, not the dimmer “false cross.”}}
+      <ul>
+        <li>Moon: if it rises before the sun sets, its lit side faces west. If it rises after midnight, the lit side faces east.</li>
+      </ul>
+      <h3>Staying on course</h3>
+      <ul>
+        <li>Pace count: count each time your left foot lands. Most adults take 60 to 70 per 100 m on flat ground; measure yours on a known distance.</li>
+        <li>Pick a landmark on your bearing, walk to it, then pick the next.</li>
+        <li>Follow handrails like streams, ridges and roads, and pick a catching feature past your goal so you know when you’ve overshot.</li>
+        <li>Aim off: to hit a spot on a river, aim deliberately to one side so you know which way to turn when you reach it.</li>
+      </ul>
+      {{fig:nav-aimoff|Aiming straight at a point usually misses it, and then you don’t know which way to turn.}}
+      <ul>
+        <li>Daylight left: hold your hand out at arm’s length. Each finger between the sun and the horizon is roughly 15 minutes.</li>
+      </ul>
+      {{fig:nav-hand|Stop and make camp while you still have light to work with.}}
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Signal for rescue</summary>
+    <div class="body">
+      <p>Three of anything is a distress signal: three fires in a triangle, three whistle blasts, three flashes. Repeat at intervals.</p>
+      <p>Ground-to-air symbols, as large as you can make them with high contrast: V means you need assistance, X means you need medical help.</p>
+      {{fig:signal-ground|Use logs, rocks, clothing or trampled snow against a contrasting background, in an open area.}}
+      <p>Use a mirror or your phone screen to flash sunlight at aircraft. Aim with two fingers in a V toward the target.</p>
+      {{fig:signal-mirror|Tilt the mirror until the spot of light falls on your fingers, then it’s hitting the aircraft too.}}
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Weather and lightning</summary>
+    <div class="body">
+      <ul>
+        <li>Tall, building clouds by early afternoon mean thunderstorms are likely. In summer mountains, be off peaks and ridges by early afternoon.</li>
+        <li>Clouds that lower and thicken through the day usually mean rain within hours. A sudden wind shift with a drop in temperature means a front is arriving.</li>
+      </ul>
+      {{fig:lightning|Sound travels about a mile every 5 seconds; light arrives almost instantly.}}
+      <ul>
+        <li>If you can hear thunder, get inside a building or hard-topped vehicle. Tents and open shelters don’t protect you.</li>
+        <li>No place outside is safe. If you’re caught out, get off peaks and ridges and away from lone tall trees, water and metal. Don’t lie flat on the ground, and spread a group out.</li>
+        <li>Wait 30 minutes after the last thunder before going back out.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Dangerous animals</summary>
+    <div class="body">
+      <h3 style="margin-top:0">Bears</h3>
+      <ul>
+        <li>In bear country, carry bear spray where you can reach it fast, and store food and scented items away from where you sleep.</li>
+        <li>Never run. Talk calmly, stand your ground, and back away slowly.</li>
+        <li>Grizzly (brown) bear attack: leave your pack on, lie flat on your stomach with your hands clasped behind your neck, and play dead. If the attack continues, fight back hard.</li>
+        <li>Black bear attack: don’t play dead. Get to safety if you can; if you can’t, fight back, aiming for the face.</li>
+        <li>Any bear that stalks you or attacks at night in your tent: fight back.</li>
+      </ul>
+      <h3>Mountain lions</h3>
+      <p>Don’t run or crouch. Make yourself look big, keep eye contact and back away slowly. If attacked, fight back.</p>
+      <h3>Snakes</h3>
+      <ul>
+        <li>Watch where you put your hands and feet. Step onto logs and rocks, not over them.</li>
+        <li>If bitten: stay calm and still, take off rings and watches before swelling starts, and get to a hospital. Don’t cut, suck, ice or put a tourniquet on the bite.</li>
+      </ul>
+      <h3>Ticks</h3>
+      <p>Check your whole body daily, including scalp and skin folds.</p>
+      {{fig:tick|Use fine-tipped tweezers. Afterward, clean the bite and your hands.}}
+      <p>See a doctor if a rash or fever appears in the weeks after a bite.</p>
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>River crossings</summary>
+    <div class="body">
+      <ul>
+        <li>Look for a wide, shallow, slow section. Never cross just above rapids, falls or strainers (fallen trees and brush the current flows through).</li>
+        <li>Snowmelt rivers run lowest early in the morning.</li>
+        <li>Unbuckle your pack’s hip belt and chest strap so you can shed it if you fall.</li>
+        <li>Face upstream, plant a sturdy pole upstream as a third leg, and shuffle sideways, moving one point at a time and angling slightly downstream.</li>
+        <li>Fast water above the knee can knock you over. If in doubt, don’t cross; look elsewhere or wait.</li>
+        <li>If you’re swept away, float on your back with your feet downstream and up, and angle toward shore.</li>
+      </ul>
+      {{fig:river|Seen from above. The current runs left to right.}}
+    </div>
+  </details>
+
+  <details class="ref">
+    <summary>Knots</summary>
+    <div class="body">
+      <div class="knot"><b>Bowline: a fixed loop that won’t slip or jam</b>Make a small loop in the standing part. Pass the end up through it, around behind the standing part, and back down through the small loop. “The rabbit comes out of the hole, around the tree, and back down the hole.”</div>
+      {{fig:knot-bowline|Leave a tail at least a hand’s width long, and pull all four strands tight to set it.}}
+      <div class="knot"><b>Clove hitch: quick tie-off to a pole</b>Wrap around the pole, cross over your first wrap, wrap again, and tuck the end under that second wrap.</div>
+      <div class="knot"><b>Taut-line hitch: adjustable tent and tarp lines</b>Pass the end around the anchor. Make two turns around the standing line inside the loop, then one more turn outside the loop. Slide the knot to tighten.</div>
+      <div class="knot"><b>Trucker’s hitch: cinch a load or ridgeline tight</b>Tie a fixed loop partway along the line, pass the end around the anchor and back through the loop, pull tight, and lock it with two half hitches.</div>
+      {{fig:knot-trucker|The loop works like a pulley, multiplying your pull.}}
+      <div class="knot"><b>Square knot: join two ends of the same size</b>Right over left and under, then left over right and under. Not for critical loads.</div>
+      <div class="knot"><b>Sheet bend: join two ropes of different sizes</b>Fold a bight in the thicker rope. Pass the thinner rope up through it, around behind both legs, and tuck it under itself.</div>
+    </div>
+  </details>
+  <p class="empty-msg" id="survEmpty" hidden>No topics match that search.</p>
+  </div>
+
+  <p class="foot">Tap any diagram to enlarge it. Sources: US Army survival manual (FM 21-76), CDC, National Weather Service, National Park Service, USDA. Practise skills before you need them.</p>
+</section>

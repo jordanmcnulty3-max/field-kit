@@ -1,0 +1,27 @@
+/* Diagrams: original line drawings that follow the theme (and turn red in night mode) */
+.fig{margin:12px 0 16px;padding:0}
+.fig button{display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:zoom-in}
+.fig figcaption{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4}
+.dg{display:block;width:100%;height:auto;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dg text{font-size:12px;fill:var(--ink);stroke:none;font-family:inherit}
+.dg text.tm{fill:var(--muted)}
+.dg text.tb{font-weight:700}
+.dg text.tl{font-size:15px;font-weight:700}
+.dg .k{stroke:var(--ink)} .dg .m{stroke:var(--muted)} .dg .st{stroke:var(--muted)}
+.dg .w{stroke:var(--coyote)} .dg .wf{fill:var(--coyote);fill-opacity:.22} .dg .wfs{fill:var(--coyote);stroke:none}
+.dg .g{stroke:var(--od)} .dg .gf{fill:var(--od);fill-opacity:.18}
+.dg .h{stroke:var(--blaze)} .dg .hf{fill:var(--blaze);stroke:none} .dg .hfl{fill:var(--blaze);fill-opacity:.25}
+.dg .a{stroke:var(--me)} .dg .af{fill:var(--me);fill-opacity:.14;stroke:none} .dg .afs{fill:var(--me);stroke:none}
+.dg .kf{fill:var(--ink);stroke:none} .dg .gr{fill:var(--muted);fill-opacity:.14}
+.dg .rock{fill:var(--muted);fill-opacity:.4}
+.dg .snow{fill:var(--me);fill-opacity:.1;stroke:var(--muted);stroke-width:1}
+.dg .bag{fill:var(--me);fill-opacity:.05;stroke-dasharray:6 4}
+.dg .bed{stroke:var(--coyote);stroke-opacity:.18;stroke-width:34}
+.dg .milk{fill:var(--surface)}
+.dg .skin{fill:var(--coyote);fill-opacity:.22;stroke:var(--coyote);stroke-width:1.5}
+.dg .skin-s{stroke:var(--coyote);stroke-width:9}
+.dg .ro{stroke:var(--ink)} .dg .rof{fill:var(--ink)} .dg .rp{stroke:var(--coyote)} .dg .rpf{fill:var(--coyote)}
+:root[data-theme="night"] .dg .rp{stroke:#000} :root[data-theme="night"] .dg .rpf{fill:#000}
+.dg .d{stroke-dasharray:5 5} .dg .t1{stroke-width:1.25} .dg .t3{stroke-width:3} .dg .t5{stroke-width:5}
+#dlgFig{width:calc(100vw - 16px);max-width:900px;padding:12px}
+#dlgFig .dg{max-height:calc(100dvh - 140px)}

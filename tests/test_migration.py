@@ -1,5 +1,5 @@
 """Backup, restore and v5 -> current migration."""
-import json, os
+import json, os, re
 
 from .test_tools import T0
 
@@ -201,6 +201,23 @@ def test_restore_refuses_newer_backup_and_accepts_older(page, app_url, tmp_path)
     assert ls(page, 'night') == 'true'
 
 
+def test_restore_accepts_dotted_versions_and_compares_them_as_numbers(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false'})
+    src = open(os.path.join(os.path.dirname(__file__), '..', 'src', 'app.js'), encoding='utf-8').read()
+    mine = re.search(r"APP_VERSION = '([\d.]+)'", src).group(1)
+    major, _, minor = mine.partition('.')
+    newer = f'{major}.{int(minor or 0) + 1}'
+    pick(page, tmp_path, backup_file({'fk.night': 'true'}, version=newer))   # one point release ahead: refused
+    page.wait_for_function("document.getElementById('bkMsg').textContent")
+    assert page.inner_text('#bkMsg') == 'This backup is from a newer version of Field Kit. Update the app first.'
+    page.click('#menuClose')
+    for v in (mine, '6.1', '5.10'):   # the app's own version, the first dotted release, and an older dotted one
+        page.evaluate("localStorage.setItem('fk.night', 'false')")
+        pick(page, tmp_path, backup_file({'fk.night': 'true'}, version=v))
+        restore_now(page)
+        assert ls(page, 'night') == 'true', v
+
+
 # ---------- Migration: a phone carrying v5 data ----------
 
 def test_v5_localstorage_boots_with_no_console_errors(page, app_url):
@@ -264,7 +281,7 @@ def test_restore_refuses_a_backup_with_nothing_to_restore(page, app_url, tmp_pat
 
 def test_restore_version_missing_is_older_and_garbage_is_not_a_backup(page, app_url, tmp_path):
     boot(page, app_url, {'fk.night': 'false'})
-    for v in ('abc', '5.1', '', None):
+    for v in ('abc', '5.x', '5.1.2', '.5', '', None):
         pick(page, tmp_path, backup_file({'fk.night': 'true'}, version=v))
         page.wait_for_function("document.getElementById('bkMsg').textContent")
         assert 'isn’t a Field Kit backup' in page.inner_text('#bkMsg'), v

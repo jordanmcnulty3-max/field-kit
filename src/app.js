@@ -3,7 +3,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
-  const APP_VERSION = '6.1';
+  const APP_VERSION = '6.2';
   const FULL_MSG = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.';
   let warnedAt = 0;
   const store = {
@@ -576,6 +576,9 @@
       return clean ? 'undone' : 'partial';
     }
   }
+  /* Versions are 'major' or 'major.minor' (6, 6.1, 6.10); each part compares as a whole number, so 6.10 is newer than 6.9. */
+  const versionParts = v => { const [a, b] = String(v).split('.'); return [parseInt(a, 10), parseInt(b || '0', 10)]; };
+  const newerVersion = (a, b) => { const [a1, a2] = versionParts(a), [b1, b2] = versionParts(b); return a1 > b1 || (a1 === b1 && a2 > b2); };
   $('#bkFile').addEventListener('change', async e => {
     const f = e.target.files && e.target.files[0]; e.target.value = '';
     cancelRestore();
@@ -585,8 +588,8 @@
     try { b = JSON.parse(await f.text()); } catch { msg.textContent = NOT_BACKUP; return; }
     const d = b && b.data;
     if (!b || b.app !== 'Field Kit' || !d || typeof d !== 'object' || Array.isArray(d) || !Object.values(d).every(v => typeof v === 'string')) { msg.textContent = NOT_BACKUP; return; }
-    if (b.version !== undefined && !/^\d+$/.test(String(b.version))) { msg.textContent = NOT_BACKUP; return; }   // a missing version counts as older
-    if (b.version !== undefined && parseInt(b.version, 10) > parseInt(APP_VERSION, 10)) { msg.textContent = 'This backup is from a newer version of Field Kit. Update the app first.'; return; }
+    if (b.version !== undefined && !/^\d+(\.\d+)?$/.test(String(b.version))) { msg.textContent = NOT_BACKUP; return; }   // a missing version counts as older
+    if (b.version !== undefined && newerVersion(b.version, APP_VERSION)) { msg.textContent = 'This backup is from a newer version of Field Kit. Update the app first.'; return; }
     const file = {};
     Object.entries(d).forEach(([k, v]) => { if (backedUp(k)) file[k] = v; });
     if (!Object.keys(file).length) { msg.textContent = 'That backup is empty, so nothing was restored.'; return; }

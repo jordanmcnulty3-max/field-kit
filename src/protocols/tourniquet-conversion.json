@@ -25,7 +25,8 @@
     "Shock (TCCC 2026).",
     "The wound cannot be watched closely for bleeding (TCCC 2026).",
     "Amputation (TCCC 2026).",
-    "On for more than 6 hours: do not remove unless close monitoring and laboratory capability are available (TCCC 2026). Off-grid they are not.",
+    "On for more than 6 hours (counted from the first tourniquet): do not remove unless close monitoring and laboratory capability are available (TCCC 2026). Off-grid they are not. The app also does not reposition after 6 hours (app’s caution).",
+    "A wound that bled again after a conversion: the app leaves the tourniquet on and does not retry (app’s caution; TCCC allows one retry within 2 hours if under 6 hours).",
     "More than 2 hours after it went on: TCCC 2026 says All Service Member and Combat Lifesaver level personnel should not convert unless directed by a combat medic, paramedic or other advanced medical personnel. Without medical oversight, keep it on and monitor until a higher level of care.",
     "Tactical or medical factors that make conversion unwise: consider leaving it (TCCC Combat Lifesaver notes 2024)."
   ],
@@ -103,10 +104,10 @@
     },
     {
       "id": "s12",
-      "text": "Has the tourniquet been on for more than 6 hours?",
-      "detail": "TCCC 2026: do not remove a tourniquet that has been in place more than 6 hours unless close monitoring and laboratory capability are available. TCCC notes (2024): do not attempt conversion after six or more hours. Off-grid there is no laboratory, so the answer leads to leaving it on.\n\nThis question comes before repositioning too. TCCC 2026 and the 2026 reposition skill set no time limit on repositioning; repositioning loosens the original tourniquet, and the 2026 summary names reperfusion injury among its concerns. Asking first is the app’s caution (see open questions).",
+      "text": "Has it been more than 6 hours since the first tourniquet went on?",
+      "detail": "Count from when the first tourniquet on this limb went on, not from a newer one.\n\nTCCC 2026: do not remove a tourniquet that has been in place more than 6 hours unless close monitoring and laboratory capability are available. TCCC notes (2024): do not attempt conversion after six or more hours. Off-grid there is no laboratory, so the answer leads to leaving it on.\n\nThis question comes before repositioning too. TCCC 2026 and the 2026 reposition skill set no time limit on repositioning; repositioning loosens the original tourniquet, and the 2026 summary names reperfusion injury among its concerns. Asking first is the app’s caution (see open questions).",
       "ask": {
-        "q": "On for more than 6 hours?",
+        "q": "More than 6 hours since the first tourniquet went on?",
         "yes": "s40",
         "no": "s6"
       }
@@ -175,8 +176,8 @@
     },
     {
       "id": "s11",
-      "text": "Slide the original down to just above the new one, loose with the slack taken up. Write the time on the new tourniquet.",
-      "detail": "TCCC skill (2024): confirm there is no pulse below and the bleeding is still controlled; slide the original down and leave it in place above the new one. It should not be fully tightened: remove excess slack so it does not catch during moves. TCCC notes 2024: leaving the original tight above the new one can cause compartment syndrome between them.",
+      "text": "Slide the original down to just above the new one, loose with the slack taken up. Write the new time, and keep the original application time.",
+      "detail": "TCCC skill (2024): confirm there is no pulse below and the bleeding is still controlled; slide the original down and leave it in place above the new one. It should not be fully tightened: remove excess slack so it does not catch during moves. TCCC notes 2024: leaving the original tight above the new one can cause compartment syndrome between them.\n\nTimes: the TCCC reposition skill (CPP 2026 step 9) annotates the time of the new tourniquet position on the casualty card; the TCCC CLS notes (2024) say to mark all tourniquets with their time of application. Write both times, original application and repositioning, on the card or the casualty (and in the app’s log). Every later time question counts from the original application.",
       "log": "Original tourniquet loosened and left in place"
     },
     {
@@ -211,10 +212,10 @@
     },
     {
       "id": "s16",
-      "text": "Has the tourniquet been on for more than 2 hours?",
-      "detail": "TCCC 2026: every effort should be made to convert in less than 2 hours if bleeding can be controlled other ways. All Service Member and Combat Lifesaver level personnel should not convert beyond 2 hours after application unless directed by combat medic, paramedic or other advanced medical personnel.\n\nThe Wilderness Medical Society (2014) says a tourniquet left on longer than 2 hours should stay in place until definitive medical evaluation. This app follows TCCC 2026 (see open questions).",
+      "text": "Has it been more than 2 hours since the first tourniquet went on (not the new one)?",
+      "detail": "Count from when the first tourniquet on this limb went on. A repositioned tourniquet does not restart the clock: TCCC 2026 counts 2 hours post-application, and the TCCC CLS notes (2024) count the 6 hours since the original tourniquet was applied.\n\nTCCC 2026: every effort should be made to convert in less than 2 hours if bleeding can be controlled other ways. All Service Member and Combat Lifesaver level personnel should not convert beyond 2 hours after application unless directed by combat medic, paramedic or other advanced medical personnel.\n\nThe Wilderness Medical Society (2014) says a tourniquet left on longer than 2 hours should stay in place until definitive medical evaluation. This app follows TCCC 2026 (see open questions).",
       "ask": {
-        "q": "On for more than 2 hours?",
+        "q": "More than 2 hours since the first tourniquet went on?",
         "yes": "s17",
         "no": "s18a"
       }
@@ -324,8 +325,8 @@
     },
     {
       "id": "s26y",
-      "text": "Controlled: leave the tourniquet tight. Do not try conversion again. Keep watching and evacuate urgently.",
-      "detail": "Group judgement: a wound that rebled after conversion is not converted again in the field. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Controlled: leave the tourniquet tight. Do not try conversion again (app’s caution, see detail). Keep watching and evacuate urgently.",
+      "detail": "TCCC CLS speaker notes (17 Apr 2024): after a failed conversion it is appropriate to try again within the next two hours, as long as it has not been more than six hours since the original tourniquet was applied. This app does not offer that retry: it leaves the tourniquet on after a rebleed. That is the app’s caution, not TCCC (see open questions). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },
     {
@@ -349,7 +350,9 @@
   ],
   "donts": [
     "Do not convert a casualty in shock, a tourniquet on an amputation, or a wound nobody can watch closely.",
-    "Do not remove a tourniquet that has been on more than 6 hours.",
+    "Do not remove or reposition a tourniquet when it has been more than 6 hours since the first one went on (repositioning: app’s caution).",
+    "Do not restart the 2-hour or 6-hour clock when you reposition: count from the first tourniquet.",
+    "Do not try conversion again after a rebleed (app’s caution).",
     "Do not convert after 2 hours unless you are, or are directed by, a combat medic or higher.",
     "Do not take the loosened tourniquet off the limb; leave it loose in place, ready to retighten.",
     "Do not leave the original tourniquet tight above a new one.",

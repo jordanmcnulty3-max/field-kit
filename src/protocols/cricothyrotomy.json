@@ -135,11 +135,21 @@
     },
     {
       "id": "s10c",
-      "text": "Slide the tube over the bougie into the windpipe, at least a quarter to 1 inch beyond the cuff. Then remove the bougie.",
-      "detail": "TCCC CMC bougie-aided skill instructions (2021) steps 14-15 (checklist 18-19): advance the tracheostomy tube over the bougie into the trachea at least a quarter to 1 inch beyond the cuff (the same depth for an ET tube); remove the bougie from the tube.",
+      "text": "Slide the tube over the bougie into the windpipe, at least a quarter to 1 inch beyond the cuff. Keep the bougie in for now.",
+      "detail": "TCCC CMC bougie-aided skill instructions (2021) step 14 (checklist 18, critical): advance the tracheostomy tube over the bougie into the trachea at least a quarter to 1 inch beyond the cuff (the same depth for an ET tube). The bougie still controls the opening until you remove it on the next screen (step 15).",
+      "ask": {
+        "q": "Is the tube in the windpipe opening?",
+        "yes": "s10d",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s10d",
+      "text": "Remove the bougie from the tube, holding the tube in place.",
+      "detail": "TCCC CMC bougie-aided skill instructions (2021) step 15 (checklist 19).",
       "log": "Surgical cricothyroidotomy (bougie-aided), tube placed",
       "ask": {
-        "q": "Is the tube in place through the opening?",
+        "q": "Did the tube stay in place?",
         "yes": "s14",
         "no": "s13"
       }
@@ -151,24 +161,39 @@
     },
     {
       "id": "s12",
-      "text": "Insert the tube through the opening toward the lungs. Then angle the hook toward the shoulder and remove it. Remove the stylet if there is one.",
-      "detail": "TCCC CMC open surgical skill instructions (2021) steps 13-15 (checklist 17-19): insert the tracheostomy tube and direct it toward the lungs (critical); angle the tracheal hook toward the shoulder and remove it gently; remove the stylet if applicable, leaving the tube in place. With an ET tube, insert it a quarter to 1 inch beyond the cuff.",
-      "log": "Surgical cricothyroidotomy (open), tube placed",
+      "text": "Insert the tube through the opening toward the lungs. Keep the hook in for now.",
+      "detail": "TCCC CMC open surgical skill instructions (2021) step 13 (checklist 17, critical): insert the tracheostomy tube and direct it toward the lungs. With an ET tube, insert it a quarter to 1 inch beyond the cuff. The hook still controls the opening until you remove it on the next screen (step 14).",
       "ask": {
-        "q": "Is the tube in place through the opening?",
-        "yes": "s14",
+        "q": "Is the tube in the windpipe opening?",
+        "yes": "s12b",
         "no": "s13"
       }
     },
     {
       "id": "s13",
-      "text": "Tube will not go in: keep the hook or bougie controlling the opening, recheck the opening with your finger, and try again as trained.",
-      "detail": "The TCCC skill instructions and checklist give no separate failure procedure. They describe reconfirming the membrane with the index finger and directing the tube through the opening toward the lungs. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Tube not in: open technique, keep the hook in; bougie technique, keep the bougie in or pass it through the opening again. Recheck with your finger and try again as trained.",
+      "detail": "The TCCC skill instructions and checklist give no separate failure procedure. They describe reconfirming the membrane with the index finger and directing the tube through the opening toward the lungs. In the bougie technique the hook is already out (step 13), so the bougie controls the opening; if the tube came out with the bougie, pass the bougie toward the lungs again as in step 12 and slide the tube over it. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "ask": {
-        "q": "Is the tube in place now?",
-        "yes": "s14",
+        "q": "Is the tube in the windpipe opening now?",
+        "yes": "s13b",
         "no": "s25"
       }
+    },
+    {
+      "id": "s13b",
+      "text": "Are you using a bougie?",
+      "detail": "The next removal step differs: the bougie comes out of the tube (bougie technique), or the hook comes out of the opening (open technique).",
+      "ask": {
+        "q": "Are you using a bougie?",
+        "yes": "s10d",
+        "no": "s12b"
+      }
+    },
+    {
+      "id": "s12b",
+      "text": "Angle the hook toward the shoulder and remove it. Remove the stylet if there is one, leaving the tube in place.",
+      "detail": "TCCC CMC open surgical skill instructions (2021) steps 14-15 (checklist 18-19).",
+      "log": "Surgical cricothyroidotomy (open), tube placed"
     },
     {
       "id": "s14",
@@ -188,7 +213,7 @@
     {
       "id": "s16",
       "text": "Are there breath sounds on the right side only?",
-      "detail": "TCCC CMC skill instructions (2021) step 18 note: if breath sounds are absent on the left side only, the tube is in the right main airway.\n\nIf there is no chest rise and no breath sound on either side, answer no.",
+      "detail": "TCCC CMC skill instructions (2021) step 18 note: if breath sounds are absent on the left side only, the tube is in the right main airway.\n\nAny other unequal finding (sounds on the left only, or unequal rise): the sources give no remedy; recheck the tube depth and the chest as trained, then answer the question again. If there is no misting, no chest rise and no breath sound on either side, answer no.",
       "ask": {
         "q": "Breath sounds on the right side only?",
         "yes": "s16a",
@@ -223,7 +248,7 @@
     },
     {
       "id": "s25",
-      "text": "Group judgement: no misting, chest rise or breath sounds means the tube is not in the windpipe. Do not keep bagging through it. Keep the opening controlled. Start evacuating now.",
+      "text": "Group judgement: if there is no misting, chest rise or breath sounds on either side, the tube is not in the windpipe. Do not keep bagging through it. Keep the opening controlled. Evacuate now.",
       "detail": "Group judgement: no TCCC document read (2021 CMC skill instructions and checklist, 2023 skill cards, TCCC 2026) gives a procedure for a failed cric. This app says: do not keep ventilating through a tube with no misting, chest rise or breath sounds (air forced into the wrong place goes into the neck tissues); keep the opening controlled; if the face allows, ventilate with the bag-valve-mask over the mouth and nose; start evacuating now. See open questions: this wording needs a medical adviser’s review. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they have no signs of life, use the CPR, adult protocol (the Trauma check (MARCH) protocol states the TCCC position on CPR after trauma).",
       "end": true
     },

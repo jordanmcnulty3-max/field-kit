@@ -249,7 +249,7 @@
     },
     {
       "id": "s31",
-      "text": "No torso trauma or blast: TCCC does not call for needle decompression. Use the Trauma check (MARCH). Unresponsive and not breathing normally: CPR, adult protocol.",
+      "text": "No torso trauma or blast: no needle (TCCC). Use the Trauma check (MARCH); evacuate urgently if breathing is bad. Unresponsive and not breathing normally: CPR, adult protocol.",
       "detail": "TCCC 2026 suspects tension pneumothorax only after significant torso trauma or primary blast injury. Breathing trouble without these needs other care. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },

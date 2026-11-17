@@ -76,7 +76,7 @@
     {
       "id": "s4",
       "text": "Is at least one present: pelvic pain, a leg amputation or near amputation, visible signs of a broken pelvis (see detail), unconsciousness, or shock?",
-      "detail": "TCCC 2026 indications: pelvic pain; any major lower limb amputation or near amputation; physical exam findings suggestive of a pelvic fracture; unconsciousness; shock. Signs you can see without pressing (TCCC Combat Lifesaver notes 2025; JTS CPG 34 2026): deformity, bruising or swelling of the pelvis, one leg shorter or turned out, bruising between the legs or of the scrotum. TCCC also lists instability or grating; those are found by a trained examiner palpating (CPP skill 2026 step 3), never by rocking or springing the pelvis.\n\nShock (TCCC): altered mental status without brain injury and/or a weak or absent pulse at the wrist.\n\nDo not rock or press the pelvis to test it.",
+      "detail": "TCCC 2026 indications: pelvic pain; any major lower limb amputation or near amputation; physical exam findings suggestive of a pelvic fracture; unconsciousness; shock. Signs you can see without pressing: deformity, wounds or bruising near the pelvis (TCCC Combat Lifesaver notes 2025); one leg shorter and turned inward, and bruising between the legs or of the scrotum (JTS CPG 34 2026). TCCC also lists instability or grating; those are found by a trained examiner palpating (CPP skill 2026 step 3), never by rocking or springing the pelvis.\n\nShock (TCCC): altered mental status without brain injury and/or a weak or absent pulse at the wrist.\n\nDo not rock or press the pelvis to test it.",
       "warn": "Do not rock or press the pelvis to test it.",
       "ask": {
         "q": "Is at least one of these present?",
@@ -125,12 +125,12 @@
     {
       "id": "s11",
       "text": "Keep them lying still and warm. Carry them on a rigid litter. Recheck the binder, their skin and signs of shock often. Evacuate urgently.",
-      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nBSA Wilderness First Aid: secure the whole person on a rigid litter before carrying them out, and watch for shock from internal bleeding. Keep them warm (Shock protocol).\n\nJTS CPG 34 (2026): if a binder has been on for more than 6 hours, the skin under it is checked at least every 12 hours (by medical staff, holding the pelvis reduced while the binder is removed and reapplied), and binders or sheets should not be left in place for more than 24 hours if possible. Do not loosen or remove the binder yourself in the field; evacuate so this can be done by medical personnel (see open questions).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nBSA Wilderness First Aid: secure the whole person on a rigid litter before carrying them out, and watch for shock from internal bleeding. Keep them warm (Shock protocol).\n\nJTS CPG 34 (2026): if a binder has been on for more than 6 hours, the skin under it is checked at least every 12 hours, holding the pelvis reduced while the binder is taken down and reapplied, and binders or sheets should not be left in place for more than 24 hours if possible. The app’s caution: those skin checks are for medical personnel; do not loosen or remove the binder yourself in the field; evacuate so this can be done by medical personnel (see open questions).",
       "end": true
     },
     {
       "id": "s30",
-      "text": "Do not apply a tight binder. You may tie a wide sheet or blanket snugly around the hips for support. Keep them still, carry on a rigid litter, and evacuate urgently.",
+      "text": "Do not apply a tight binder. If you have or can find a wide sheet or blanket, you may tie it snugly around the hips for support. Keep them still, rigid litter, evacuate urgently.",
       "detail": "American Red Cross Wilderness and Remote First Aid (2014, p. 36): place wide conforming wraps, such as a sheet or blanket, and tie them around the pelvis to give some support and security; secure the person on a rigid litter before a carry-out; watch for shock. BSA Wilderness First Aid: conforming wraps give support, and the legs can be secured to each other. Do not rock or press the pelvis. The Broken bone (fracture) protocol covers keeping them still. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },

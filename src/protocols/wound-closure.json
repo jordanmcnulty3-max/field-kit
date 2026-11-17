@@ -230,7 +230,7 @@
       "id": "s18",
       "text": "Infection or opening: if trained and equipped, remove the strips or glue so it can drain; otherwise leave it covered. Evacuate (urgently with fever, confusion or a red streak).",
       "detail": "WMS 2014: wounds with signs of infection after closure should be opened and any abscess drained, if equipment and training allow; raise the limb if the skin around is red and spreading. Evacuate early infection if suitable antibiotics are not available, and infection getting worse despite antibiotics (1C). Antibiotics are outside this app. Urgently if there is fever, confusion or a red streak. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "log": "Closed wound reopened for infection",
+      "log": "Infection or reopening after closure",
       "end": true
     },
     {

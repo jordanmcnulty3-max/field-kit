@@ -1,0 +1,316 @@
+{
+  "id": "needle-decompression",
+  "title": "Needle decompression of the chest",
+  "category": "advanced",
+  "tier": "advanced",
+  "keywords": [
+    "needle decompression",
+    "ndc",
+    "tension pneumothorax",
+    "collapsed lung",
+    "chest needle",
+    "needle thoracostomy",
+    "trapped air chest",
+    "cant breathe chest wound"
+  ],
+  "summary": "Letting trapped air out of the chest (suspected tension pneumothorax) with a 14 or 10 gauge, 3.25-inch needle/catheter. TCCC teaches it from Combat Lifesaver level up (TCCC skill sets 2024).",
+  "indications": [
+    "TCCC 2026: suspected tension pneumothorax. That means significant torso trauma or primary blast injury, PLUS one or more of the signs below.",
+    "Severe or progressive breathing distress.",
+    "Severe or progressive fast breathing (skill sheets: a breathing rate below 8 or above 20 a minute).",
+    "Breath sounds absent or much quieter on one side of the chest.",
+    "Oxygen saturation below 90% on a pulse oximeter.",
+    "Shock.",
+    "Traumatic cardiac arrest without obviously fatal wounds. With torso trauma or primary blast injury and cardiac arrest, TCCC decompresses both sides before stopping treatment.",
+    "If a chest seal is on: only if the signs remain after the seal has been burped or removed (TCCC)."
+  ],
+  "contraindications": [
+    "No significant torso trauma or primary blast injury: the TCCC trigger is not met.",
+    "Never insert at the front site closer to the breastbone than the nipple line (TCCC): the heart and large arteries are there (TCCC Combat Lifesaver course: watch placement to avoid the heart and arteries).",
+    "Never through a chest seal: use the other site (TCCC Combat Lifesaver course).",
+    "A chest seal or dressing that has not yet been burped or removed: do that first and reassess (TCCC).",
+    "The TCCC sources read give no other contraindication."
+  ],
+  "equipment": [
+    "14-gauge or 10-gauge, 3.25-inch needle/catheter unit, a new one for each attempt (TCCC).",
+    "Antiseptic solution or pad, if available.",
+    "Gloves; somewhere safe for the used needle (sharps container).",
+    "Pulse oximeter, if available."
+  ],
+  "complications": [
+    "No improvement: the needle may not have reached the air, or the wrong side was done. TCCC: second attempt at the other site on the same side, and consider the other side.",
+    "Breathing trouble returns after success: the air is building up again. TCCC: repeat at the same site with a new needle/catheter.",
+    "Injury to the heart or large blood vessels if inserted closer to the breastbone than the nipple line (TCCC).",
+    "Injury to the blood vessels and nerve that run under each rib (StatPearls, chest procedures): this is why the needle goes over the top of the lower rib.",
+    "Oxygen readings can take several minutes to improve and may not improve at altitude (TCCC). Do not rely on them alone.",
+    "The chest wall can be thicker than the needle is long; StatPearls recommends catheters longer than 8 cm. TCCC specifies 3.25 inches."
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Advanced procedure for people trained hands-on in needle decompression. Have you been trained hands-on to do this?",
+      "detail": "Reading this is not training. A needle in the wrong place, or in someone who does not need it, can kill. TCCC teaches it from the Combat Lifesaver level up (TCCC Skill Sets by Responder Level, 2024).",
+      "ask": {
+        "q": "Have you been trained hands-on in needle decompression?",
+        "yes": "s2",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Do you have a 14 or 10 gauge, 3.25-inch needle/catheter unit?",
+      "detail": "TCCC 2026 specifies a 14-gauge or 10-gauge, 3.25-inch needle/catheter unit, and a new unit for each attempt. Do not improvise with a shorter or thinner needle.",
+      "ask": {
+        "q": "Do you have a 14 or 10 gauge, 3.25-inch needle/catheter?",
+        "yes": "s3",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Was there significant chest or body (torso) trauma, or a blast?",
+      "detail": "TCCC 2026 suspects tension pneumothorax only after significant torso trauma or primary blast injury, together with the signs on the next screens. Torso means the chest, belly, back and sides.",
+      "ask": {
+        "q": "Significant torso trauma or blast injury?",
+        "yes": "s4",
+        "no": "s31"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Is a chest seal or dressing on the chest?",
+      "detail": "If one is on, it must be burped or removed first.",
+      "ask": {
+        "q": "Is a chest seal or dressing on the chest?",
+        "yes": "s5",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Burp the seal (lift one edge) or remove it, and replace it if it was put on badly. Then reassess breathing.",
+      "detail": "TCCC 2026: burp or remove any chest seal first. Skill sheets: if a vented seal is on, burp it; replace it if it was put on improperly; then reassess. The Open chest wound protocol covers burping.",
+      "ask": {
+        "q": "After burping: are the signs of trapped air still there (see the next screen)?",
+        "yes": "s6",
+        "no": "s32"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Check for the signs: severe or worsening breathing trouble, very fast breathing, quiet breath sounds on one side, oxygen below 90%, shock, or no signs of life.",
+      "detail": "TCCC 2026 signs (one or more, after significant torso trauma or primary blast injury): severe or progressive breathing distress; severe or progressive fast breathing; breath sounds absent or much quieter on one side of the chest; oxygen saturation below 90% on a pulse oximeter; shock; traumatic cardiac arrest without obviously fatal wounds.\n\nThe TCCC Combat Paramedic skill sheets put numbers on the breathing distress: a breathing rate below 8 or above 20 a minute, or saturation below 90%.\n\nShock (TCCC): altered mental status without a brain injury, and/or a weak or absent pulse at the wrist.",
+      "ask": {
+        "q": "Is at least one of these signs present?",
+        "yes": "s7",
+        "no": "s33"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Are they in cardiac arrest (no signs of life)?",
+      "detail": "TCCC 2026: if a casualty with significant torso trauma or primary blast injury is in traumatic cardiac arrest, decompress both sides of the chest before stopping treatment.",
+      "ask": {
+        "q": "Are they in cardiac arrest?",
+        "yes": "s20",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s8",
+      "text": "Lay them on their back or in the recovery position, unless they are awake and need to sit up to keep the airway clear because of face injuries.",
+      "detail": "TCCC 2026: place the casualty supine or in the recovery position, unless they are conscious and need to sit up to keep the airway clear because of injuries to the face and jaw. Start pulse oximetry if you have it."
+    },
+    {
+      "id": "s9",
+      "text": "Choose the side: the injured side, or the side with quieter breath sounds. Choose the site: side of the chest (5th rib space, front armpit line) or front (2nd rib space, mid-collarbone line).",
+      "detail": "TCCC 2026: decompress the side of the injury. Either site may be used; use whichever is more easily reached (skill sheets).\n\nSide site: the 5th intercostal space (the gap between ribs) in the anterior axillary line, a line running down the side of the chest from the front edge of the armpit. TCCC 2026 lists this site first.\n\nFront site: the 2nd intercostal space in the mid-clavicular line, a line straight down from the middle of the collarbone. Never insert closer to the breastbone than the nipple line.\n\nFinding the right rib space by counting ribs is taught hands-on; the sources read do not describe it in words.",
+      "warn": "Front site: never insert closer to the breastbone than the nipple line.",
+      "ask": {
+        "q": "Is it the right side of the chest?",
+        "yes": "s10",
+        "no": "s11"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Insert just over the top of the lower rib, at 90 degrees to the chest wall, all the way to the hub. Hold 5 to 10 seconds. Remove the needle, leave the catheter.",
+      "detail": "TCCC 2026 and skill sheets: remove the Luer lock cap if your unit has one. Clean the skin with antiseptic if you have it. Insert the needle/catheter unit perpendicular (90 degrees) to the chest wall, just over the top edge of the lower rib at the site (the blood vessels and nerve run along the underside of each rib; StatPearls notes injury to them as a complication of chest procedures). Push it all the way in until the hub reaches the skin. Hold it there for 5 to 10 seconds to let the air out. Then pull the needle out and leave the plastic catheter in place. Put the needle in a sharps container or somewhere it cannot stick anyone.\n\nDo not go through a chest seal: use the other site (TCCC Combat Lifesaver course).\n\nNote the time.",
+      "warn": "At the front site, never insert closer to the breastbone than the nipple line.",
+      "log": "Needle decompression, right side",
+      "timer": {
+        "seconds": 10,
+        "label": "Hold 5 to 10 seconds"
+      },
+      "ask": {
+        "q": "Did it work (any sign of success in the detail)?",
+        "yes": "s12",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Insert just over the top of the lower rib, at 90 degrees to the chest wall, all the way to the hub. Hold 5 to 10 seconds. Remove the needle, leave the catheter.",
+      "detail": "TCCC 2026 and skill sheets: remove the Luer lock cap if your unit has one. Clean the skin with antiseptic if you have it. Insert the needle/catheter unit perpendicular (90 degrees) to the chest wall, just over the top edge of the lower rib at the site (the blood vessels and nerve run along the underside of each rib; StatPearls notes injury to them as a complication of chest procedures). Push it all the way in until the hub reaches the skin. Hold it there for 5 to 10 seconds to let the air out. Then pull the needle out and leave the plastic catheter in place. Put the needle in a sharps container or somewhere it cannot stick anyone.\n\nDo not go through a chest seal: use the other site (TCCC Combat Lifesaver course).\n\nNote the time.",
+      "warn": "At the front site, never insert closer to the breastbone than the nipple line.",
+      "log": "Needle decompression, left side",
+      "timer": {
+        "seconds": 10,
+        "label": "Hold 5 to 10 seconds"
+      },
+      "ask": {
+        "q": "Did it work (any sign of success in the detail)?",
+        "yes": "s12",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "It worked: leave the catheter in. Sit them up, or recovery position with the injured side down. Keep watching their breathing.",
+      "detail": "TCCC 2026: needle decompression is successful if breathing distress improves, OR there is an obvious hiss of air escaping from the chest as it is done (hard to hear in noise), OR oxygen saturation rises to 90% or more (this can take several minutes and may not happen at altitude, so do not rely on it alone), OR a casualty with no vital signs regains consciousness and/or a pulse at the wrist.\n\nTCCC skill sheets: place the casualty sitting or in the recovery position with the injured side down, and keep reassessing for breathing trouble that comes back.",
+      "ask": {
+        "q": "Watching now: has the breathing trouble come back?",
+        "yes": "s14",
+        "no": "s15"
+      }
+    },
+    {
+      "id": "s14",
+      "text": "Breathing trouble is back: decompress again at the same site, with a new needle/catheter unit.",
+      "detail": "TCCC 2026: if the first decompression worked but the symptoms recur, perform another needle decompression at the same site that was used before (TCCC Combat Lifesaver course: right beside the original). Use a new needle/catheter unit, and the same technique.",
+      "log": "Needle decompression repeated, same site",
+      "ask": {
+        "q": "Did it work again (any sign of success)?",
+        "yes": "s12",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s13",
+      "text": "Not better: decompress the same side again at the other site with a new needle/catheter. Consider whether the other side needs it too.",
+      "detail": "TCCC 2026: if the first needle decompression is not successful, perform a second one on the same side of the chest at whichever of the two sites was not used. Consider, based on how they were injured and what you find, whether the opposite side also needs decompression.\n\nTCCC 2026: needle decompression is successful if breathing distress improves, OR there is an obvious hiss of air escaping from the chest as it is done (hard to hear in noise), OR oxygen saturation rises to 90% or more (this can take several minutes and may not happen at altitude, so do not rely on it alone), OR a casualty with no vital signs regains consciousness and/or a pulse at the wrist.",
+      "log": "Second needle decompression, other site",
+      "ask": {
+        "q": "Did the second one work?",
+        "yes": "s12",
+        "no": "s16"
+      }
+    },
+    {
+      "id": "s16",
+      "text": "Second attempt failed: move on to circulation. Use the Trauma check (MARCH) from circulation, and the Shock protocol. Evacuate urgently.",
+      "detail": "TCCC 2026: if the second needle decompression is also not successful, continue on to the circulation step. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nTCCC 2026 (refractory shock): untreated tension pneumothorax can still be the cause; it is treated with repeated needle decompression or finger thoracostomy or chest tube, according to the skills, experience and authorizations of the treating medical provider. Finger thoracostomy and chest tubes are Combat Paramedic/Provider skills and are outside this app.",
+      "end": true
+    },
+    {
+      "id": "s15",
+      "text": "Keep the catheter in and keep reassessing, every time you move them. Evacuate urgently.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nTCCC skill sheets: keep reassessing for breathing trouble that comes back; if it does, decompress again at the same site with a new unit. Keep them sitting or on the injured side, keep them warm, and watch for shock (Shock protocol).\n\nRecord the time, side and site of every decompression.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Cardiac arrest after torso trauma or blast: decompress both sides. Lay them on their back. Right side first.",
+      "detail": "TCCC 2026: decompress both sides of the chest before stopping treatment. Use the side site (5th rib space, front armpit line) or the front site (2nd rib space, mid-collarbone line, never closer to the breastbone than the nipple line), just over the top of the lower rib, at 90 degrees to the chest wall, to the hub; hold 5 to 10 seconds; remove the needle and leave the catheter. A new unit for each side.",
+      "warn": "Front site: never insert closer to the breastbone than the nipple line.",
+      "log": "Needle decompression, right side",
+      "timer": {
+        "seconds": 10,
+        "label": "Hold 5 to 10 seconds"
+      }
+    },
+    {
+      "id": "s21",
+      "text": "Now the left side, the same way, with a new needle/catheter unit.",
+      "detail": "Same site choice and technique as the right side.",
+      "warn": "Front site: never insert closer to the breastbone than the nipple line.",
+      "log": "Needle decompression, left side",
+      "timer": {
+        "seconds": 10,
+        "label": "Hold 5 to 10 seconds"
+      },
+      "ask": {
+        "q": "Have they regained consciousness or a pulse at the wrist?",
+        "yes": "s12",
+        "no": "s22"
+      }
+    },
+    {
+      "id": "s22",
+      "text": "No signs of life after both sides: use the CPR, adult protocol (see detail for the TCCC position).",
+      "detail": "AHA: CPR for anyone unresponsive and not breathing normally. TCCC 2026: CPR on the battlefield for a victim of blast or penetrating trauma who has no pulse, no breathing and no other signs of life will not be successful and should not be attempted; both sides of the chest are decompressed first. The Trauma check (MARCH) protocol states both positions. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s30",
+      "text": "Do not use a needle. Use the Open chest wound protocol (burp or lift any seal or dressing), let them take the position that helps breathing, and evacuate urgently.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are unresponsive and not breathing normally, use the CPR, adult protocol.",
+      "end": true
+    },
+    {
+      "id": "s31",
+      "text": "No torso trauma or blast: TCCC does not call for needle decompression. Use the Trauma check (MARCH) and evacuate urgently if breathing is bad.",
+      "detail": "TCCC 2026 suspects tension pneumothorax only after significant torso trauma or primary blast injury. Breathing trouble without these needs other care. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s32",
+      "text": "Breathing better after burping: no needle now. Keep watching; burp again if it worsens. If burping stops working, come back here. Evacuate urgently.",
+      "detail": "TCCC skill sheets: if signs persist after burping, perform needle decompression. Keep monitoring with the Open chest wound protocol. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s33",
+      "text": "No signs now: do not decompress. Keep watching breathing; come back if any sign appears. Evacuate urgently if there is a chest wound or breathing trouble.",
+      "detail": "TCCC 2026 signs (one or more, after significant torso trauma or primary blast injury): severe or progressive breathing distress; severe or progressive fast breathing; breath sounds absent or much quieter on one side of the chest; oxygen saturation below 90% on a pulse oximeter; shock; traumatic cardiac arrest without obviously fatal wounds.\n\nThe TCCC Combat Paramedic skill sheets put numbers on the breathing distress: a breathing rate below 8 or above 20 a minute, or saturation below 90%.\n\nShock (TCCC): altered mental status without a brain injury, and/or a weak or absent pulse at the wrist.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not decompress without significant torso trauma or primary blast injury plus a TCCC sign.",
+    "Do not insert at the front site closer to the breastbone than the nipple line.",
+    "Do not go through a chest seal; use the other site.",
+    "Do not reuse a needle/catheter unit; use a new one for each attempt.",
+    "Do not stop watching after it works: the air can build up again."
+  ],
+  "evacuate": [
+    "Evacuate urgently every casualty who needed, or was considered for, needle decompression.",
+    "Most urgent: no improvement after two attempts, breathing trouble that keeps coming back, signs of shock, or a decompression done for cardiac arrest."
+  ],
+  "notes": [
+    "TCCC 2026: 14 or 10 gauge, 3.25-inch needle/catheter; 5th rib space front armpit line, or 2nd rib space mid-collarbone line (not closer to the breastbone than the nipple line); over the top of the lower rib; 90 degrees; to the hub; hold 5 to 10 seconds."
+  ],
+  "sources": [
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026 (dated 01 May 2026), Tactical Field Care 5a Respiration/Breathing (tension pneumothorax) and 6f refractory shock",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "Committee on TCCC, TCCC Skill Sets by Responder Level, master list 25 Jan 2024 (Deployed Medicine)",
+      "year": 2024,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/e146d4b1-5e8e-4efd-b0d0-c74555ffe319/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Paramedic/Provider, Module 08 Respiration Assessment and Management in TFC, Skill Instructions #TCCC-CPP-08-01 (19 Aug 2022): Needle Decompression of the Chest",
+      "year": 2022,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/42d1f4e0-f71c-4645-9553-d3b5e9ee7402/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Paramedic/Provider MARCH job aid, Needle Decompression of the Chest #TCCC-CPP-SC-26 (07 May 2023)",
+      "year": 2023,
+      "url": "https://learning-media.allogy.com:443/api/v1/pdf/262d9280-c78d-4411-892e-685aebef120b/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Lifesaver course, Module 08 Respiration: Speaker Notes #TCCC-CLS-14-01 and slides #TCCC-CLS-PPT-08 (25 Jan 2020)",
+      "year": 2020,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/b1cd68d8-8970-4d54-abfe-ec5ec5be1888/contents"
+    },
+    {
+      "name": "StatPearls, Tension Pneumothorax (last updated 7 Jul 2025), second source for complications",
+      "year": 2025,
+      "url": "https://www.statpearls.com:443/point-of-care/27373"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

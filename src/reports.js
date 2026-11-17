@@ -11,19 +11,20 @@
      kind: text | area (free text); counts (a number for each option); multi (any of the options); one (at most one option, then optional details).
      While `draft` is true the screen says so, and build.py --release refuses to build: it looks for the marker line below.
      Flip draft to false and delete the marker line once the wording is checked against its source. */
-  /* REPORT_WORDING_DRAFT */
+  /* Wording checked against TCCC Combat Medic/Corpsman skill card #TCCC-CMC-SC-60, 9-Line MEDEVAC and MIST Preparation (14 May 2021).
+     Line 6 carries the wartime options only; the peacetime line 6 (number and type of wound, injury or illness) has no field. */
   const NINE_LINE = {
-    draft: true,
+    draft: false,
     lines: [
-      { n: 1, label: 'Location of pickup site (MGRS)', kind: 'text' },
-      { n: 2, label: 'Radio frequency and call sign', kind: 'text' },
-      { n: 3, label: 'Patients by precedence', kind: 'counts', options: [['A', 'Urgent'], ['B', 'Urgent surgical'], ['C', 'Priority'], ['D', 'Routine'], ['E', 'Convenience']] },
-      { n: 4, label: 'Special equipment', kind: 'multi', options: [['A', 'None'], ['B', 'Hoist'], ['C', 'Extraction equipment'], ['D', 'Ventilator']], exclusive: 'A' },
-      { n: 5, label: 'Patients by type', kind: 'counts', options: [['L', 'Litter'], ['A', 'Ambulatory']] },
-      { n: 6, label: 'Security at pickup site', kind: 'one', options: [['N', 'No enemy troops in area'], ['P', 'Possible enemy troops'], ['E', 'Enemy troops in area'], ['X', 'Armed escort required']] },
+      { n: 1, label: 'Location of the pickup site (grid coordinates)', kind: 'text' },
+      { n: 2, label: 'Radio frequency, call sign and suffix', kind: 'text' },
+      { n: 3, label: 'Number of patients by precedence', kind: 'counts', options: [['A', 'Urgent'], ['B', 'Urgent surgical'], ['C', 'Priority'], ['D', 'Routine'], ['E', 'Convenience']] },
+      { n: 4, label: 'Special equipment required', kind: 'multi', options: [['A', 'None'], ['B', 'Hoist'], ['C', 'Extraction equipment'], ['D', 'Ventilator']], exclusive: 'A' },
+      { n: 5, label: 'Number of patients by type', kind: 'counts', options: [['L', 'Litter'], ['A', 'Ambulatory']] },
+      { n: 6, label: 'Security of the pickup site (wartime)', kind: 'one', options: [['N', 'No enemy troops in the area'], ['P', 'Possible enemy troops in the area'], ['E', 'Enemy troops in the area; approach with caution'], ['X', 'Enemy troops in area; armed escort required']] },
       { n: 7, label: 'Method of marking pickup site', kind: 'one', detail: 'Details (colour, signal)', options: [['A', 'Panels'], ['B', 'Pyrotechnic signal'], ['C', 'Smoke signal'], ['D', 'None'], ['E', 'Other']] },
-      { n: 8, label: 'Patient nationality and status', kind: 'one', detail: 'Details', options: [['A', 'US military'], ['B', 'US civilian'], ['C', 'Non-US military'], ['D', 'Non-US civilian'], ['E', 'Enemy prisoner of war']] },
-      { n: 9, label: 'Terrain or hazards at pickup site', kind: 'area' }
+      { n: 8, label: 'Patient nationality and status', kind: 'one', detail: 'Details', options: [['A', 'US Military'], ['B', 'US Civilian'], ['C', 'Non-US Military'], ['D', 'Non-US Civilian'], ['E', 'Enemy Prisoner']] },
+      { n: 9, label: 'Wartime: NBC contamination (N nuclear, B biological, C chemical; only if applicable). Peacetime: terrain description (features in and around the landing site)', kind: 'area' }
     ]
   };
   const line = n => NINE_LINE.lines[n - 1];

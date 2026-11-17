@@ -1,0 +1,285 @@
+{
+  "id": "hemostatic-packing",
+  "title": "Hemostatic gauze wound packing",
+  "category": "advanced",
+  "tier": "advanced",
+  "keywords": [
+    "hemostatic gauze",
+    "combat gauze",
+    "quikclot",
+    "celox",
+    "chitogauze",
+    "xstat",
+    "wound packing",
+    "clotting gauze",
+    "pack wound"
+  ],
+  "summary": "Packing a deep bleeding wound with hemostatic (clotting) gauze and pressing for at least 3 minutes. TCCC teaches it to all service members (TCCC skill sets 2024).",
+  "indications": [
+    "TCCC 2026: bleeding that pressure can reach (compressible) but a limb tourniquet cannot treat, such as the neck, armpit, groin or a deep wound where a tourniquet will not fit.",
+    "TCCC 2026: together with removing a tourniquet (see the Tourniquet reassessment and conversion protocol).",
+    "TCCC skill (2024): a major bleed where a tourniquet cannot be applied or has not controlled the bleeding.",
+    "TCCC 2026: junctional bleeding while a junctional tourniquet is being readied, or when none is available."
+  ],
+  "contraindications": [
+    "Chest wounds: not packed in this app. Use the Open chest wound protocol.",
+    "Belly wounds, and organs showing through any wound: not packed in this app. Press only, and use the Belly (abdominal) injury protocol. (The existing open question on packing belly wounds applies.)",
+    "An object stuck in the wound: do not remove it; bandage it in place (TCCC).",
+    "Life-threatening bleeding from an arm or leg with room for a tourniquet: the tourniquet comes first (TCCC 2026; Severe bleeding protocol).",
+    "XStat: do not remove it in the field (TCCC 2026)."
+  ],
+  "equipment": [
+    "Hemostatic dressing. TCCC 2026: Combat Gauze is the CoTCCC hemostatic dressing of choice; alternatives are Celox Gauze or ChitoGauze; XStat is best for deep, narrow-tract junctional wounds.",
+    "If no hemostatic dressing: plain gauze or clean, dry cloth, packed the same way (TCCC skill).",
+    "Pressure bandage (an elastic bandage, ideally with a pressure bar); 3-inch tape and a cravat for neck or armpit wraps.",
+    "Gloves."
+  ],
+  "complications": [
+    "Bleeding continues through or around the packing: repack (TCCC).",
+    "Bleeding returns later, especially after moving the casualty (TCCC 2024 speaker notes: recheck every time they are moved).",
+    "Bandage too tight: skin below it cool, bluish or numb, or the pulse below it gone. Loosen and rewrap (TCCC).",
+    "Bleeding inside the chest or belly cannot be packed or seen, and shows only as shock (Shock protocol)."
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Advanced procedure for people trained hands-on in wound packing with hemostatic gauze. Have you been trained hands-on to do this?",
+      "detail": "Reading this is not training. TCCC teaches it to all service members (TCCC Skill Sets by Responder Level, 2024). Without hands-on training, the Severe bleeding protocol shows how to pack with plain gauze and press.",
+      "ask": {
+        "q": "Have you been trained hands-on in hemostatic wound packing?",
+        "yes": "s2",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Do you have hemostatic gauze (Combat Gauze, Celox, ChitoGauze) or XStat?",
+      "detail": "TCCC 2026: Combat Gauze is the CoTCCC hemostatic dressing of choice; Celox Gauze or ChitoGauze are alternatives; XStat is best for deep, narrow-tract junctional wounds. Without one, plain gauze or clean cloth packed tightly with hard pressure still works: the Severe bleeding protocol covers it.",
+      "ask": {
+        "q": "Do you have a hemostatic dressing?",
+        "yes": "s3",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Is the wound on an arm, leg, neck, armpit or groin?",
+      "detail": "This app packs wounds of the arms, legs, neck, armpits and groin only. Chest and belly wounds are handled differently: see the next screen if you answer no.",
+      "ask": {
+        "q": "Is the wound on an arm, leg, neck, armpit or groin?",
+        "yes": "s4",
+        "no": "s31"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Is it life-threatening bleeding from an arm or leg, with room for a tourniquet above the wound?",
+      "detail": "TCCC 2026: a limb tourniquet is the first treatment for life-threatening bleeding from an arm or leg. Packing is for bleeding a tourniquet cannot treat, a tourniquet that has not controlled it, or replacing a tourniquet later.\n\nAnswer no for the neck, armpit or groin, for a limb wound too high for a tourniquet, and for limb bleeding that is heavy but not life-threatening.",
+      "ask": {
+        "q": "Life-threatening arm or leg bleeding with room for a tourniquet?",
+        "yes": "s5",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Is a tourniquet already on, and is the wound still bleeding?",
+      "detail": "TCCC skill: packing is used where a tourniquet cannot be applied or has not adequately controlled the bleeding. TCCC 2026: if the first tourniquet does not stop it, a second goes on side by side with the first (Severe bleeding protocol).",
+      "ask": {
+        "q": "Still bleeding with a tourniquet on?",
+        "yes": "s6",
+        "no": "s32"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Is an object stuck in the wound?",
+      "detail": "TCCC: if an object is lodged in the body, bandage it in place. Do not remove it.",
+      "ask": {
+        "q": "Is an object stuck in the wound?",
+        "yes": "s33",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Expose the wound. Find where the blood is coming from fastest and press directly on it.",
+      "detail": "TCCC skill: expose the wound, removing clothing and equipment as needed, find the most actively bleeding point, and apply direct pressure. Armpit: sitting is best, with the arm out at 90 degrees resting on your shoulder (TCCC 2020 skill)."
+    },
+    {
+      "id": "s8",
+      "text": "Open the hemostatic gauze. Pack it tightly into the wound right onto the bleeding point, filling the whole cavity while keeping pressure on. Use more than one if needed.",
+      "detail": "TCCC skill (2024): pack the dressing tightly into the wound directly over the most active bleeding, filling the entire cavity while keeping firm pressure. More than one dressing may be needed. Neck, armpit and groin: finish packing within 90 seconds (TCCC 2020 skill standard).\n\nXStat (TCCC 2026): best for deep, narrow-tract junctional wounds. Pressure is optional with XStat, and XStat is not removed in the field; more XStat, other dressings or trauma dressings may go on top of it.",
+      "log": "Wound packed with hemostatic gauze"
+    },
+    {
+      "id": "s9",
+      "text": "Make sure the packing stands 1 to 2 inches above the skin; add more if not. Then press hard for at least 3 minutes.",
+      "detail": "TCCC 2026: hemostatic dressings are applied with at least 3 minutes of direct pressure (optional for XStat). TCCC skill: the packing must extend 1 to 2 inches above the skin; hold firm manual pressure until the bleeding stops, for at least 3 continuous minutes.\n\nThe Wilderness Medical Society (2014) says at least 5 minutes of pressure for hemostatic agents. The timer uses the TCCC minimum; pressing longer does no harm (see open questions).",
+      "timer": {
+        "seconds": 180,
+        "label": "Hold pressure"
+      },
+      "ask": {
+        "q": "After at least 3 minutes, still pressing: is blood seeping through or around the packing?",
+        "yes": "s10",
+        "no": "s11"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Still bleeding: pull the hemostatic gauze out and repack with a fresh one, then press at least 3 more minutes. Plain gauze or cloth: leave it, add more and press.",
+      "detail": "TCCC skill: if packed with a hemostatic dressing, remove it and repack; if packed with gauze or other material, add more and press for another 3 minutes. TCCC 2026: each dressing works differently, so if one fails, it may be removed and a fresh dressing of the same or a different type applied. XStat is never removed in the field.",
+      "log": "Wound repacked",
+      "timer": {
+        "seconds": 180,
+        "label": "Hold pressure"
+      },
+      "ask": {
+        "q": "After those 3 minutes: is it still bleeding?",
+        "yes": "s12",
+        "no": "s11"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "Still bleeding after repacking: keep pressing hard and do not let up. Arm or leg: add a tourniquet. Groin, armpit, neck: junctional device if trained. Evacuate urgently.",
+      "detail": "Keep both hands on the packing with your body weight on it until help takes over. Arm or leg: a tourniquet 2 to 3 inches above the wound (Severe bleeding protocol). Groin, armpit or neck: the Junctional bleeding protocol covers junctional tourniquets and wraps, for those trained. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWatch for shock (Shock protocol).",
+      "end": true
+    },
+    {
+      "id": "s11",
+      "text": "Bleeding stopped: leave the packing in. Keep pressing while you get the bandage ready.",
+      "detail": "TCCC skill: if the bleeding has stopped, leave the packing in place and keep pressure on. Do not pull it out to look.",
+      "ask": {
+        "q": "Is the wound on an arm or leg?",
+        "yes": "s13",
+        "no": "s14"
+      }
+    },
+    {
+      "id": "s13",
+      "text": "Put the pressure bandage pad on the packing and wrap it tightly around the limb, covering the pad edges. Use the pressure bar if it has one. Fasten it.",
+      "detail": "TCCC skill: place the pad directly over the packing while keeping pressure on; wrap the bandage tightly around the limb, focusing pressure over the wound and covering the edges of the pad. If the bandage has a pressure bar, feed the wrap fully into the bar, pull it tight, and reverse it back over the bar so it presses down on the pad. Fasten the hook-and-loop ends or closure bar to the last wrap.",
+      "log": "Pressure bandage applied"
+    },
+    {
+      "id": "s15",
+      "text": "Check below the bandage: feel for a pulse, and look at the skin.",
+      "detail": "TCCC skill: check circulation below the bandage by feeling for a pulse. If the skin below becomes cool, bluish or numb, or the pulse is gone, the bandage may be too tight.",
+      "ask": {
+        "q": "Is the skin below cool, bluish or numb, or the pulse gone?",
+        "yes": "s16",
+        "no": "s17"
+      }
+    },
+    {
+      "id": "s16",
+      "text": "Too tight: loosen it and rewrap it, keeping pressure on the packing.",
+      "detail": "TCCC skill: loosen and reapply it. Then check again.",
+      "ask": {
+        "q": "After rewrapping: is the skin below warm, pink and with feeling?",
+        "yes": "s17",
+        "no": "s16"
+      }
+    },
+    {
+      "id": "s14",
+      "text": "Neck, armpit or groin: keep pressing, then wrap firmly over the packing (see detail). Never use a pressure bar on the neck.",
+      "detail": "Neck (TCCC 2020 skill): lay a 6-inch elastic bandage over the packing leaving a tail, wrap at least 1 to 1.5 times over the packing, then diagonally across the chest, under the opposite armpit, around the back and back over the wound; continue around the neck and under the arm on alternating sides, keeping tension, until the packing is covered. Tie a non-slip knot, tape it, and strap the upper arm on the injured side to the chest. Do not use a pressure bar on the neck. Watch the airway: TCCC 2026 warns that an expanding swelling in the neck may need an airway.\n\nArmpit (TCCC 2020 skill): with the arm out at 90 degrees, wrap the elastic bandage twice around the injured shoulder, covering the packing, then across the chest, around the back and under the other armpit, and anchor it around the other shoulder in a figure of 8. Fasten or knot and tape it, and strap the upper arm to the side of the chest with a cravat.\n\nGroin: keep pressing by hand. TCCC uses an improvised pressure device under a tourniquet around the hips, or a junctional tourniquet, for life-threatening groin bleeding: the Junctional bleeding protocol covers these, for those trained.",
+      "log": "Packed wound bandaged or held"
+    },
+    {
+      "id": "s17",
+      "text": "Recheck the dressing for bleeding often, and every time you move them. Watch for shock.",
+      "detail": "TCCC 2024 speaker notes: reassess dressings and bandages at frequent intervals and every time the casualty is moved or their condition changes, and reassess for shock by checking the pulse at the wrist. Use the Shock protocol and keep them warm.",
+      "ask": {
+        "q": "While you watch and move: has the bleeding come back?",
+        "yes": "s18",
+        "no": "s19"
+      }
+    },
+    {
+      "id": "s18",
+      "text": "Bleeding is back: arm or leg, put a tourniquet 2 to 3 inches above the wound. Otherwise, repack with a new hemostatic dressing, pressing all the time.",
+      "detail": "TCCC 2024 speaker notes: if the pressure bandage or hemostatic dressing does not work, apply a tourniquet 2 to 3 inches above the bleeding site if possible (Severe bleeding protocol). If a tourniquet cannot be used and the bandage is ineffective or soaked, replace the dressing with a new hemostatic dressing, packing the wound within 90 seconds while keeping constant direct pressure, then press at least 3 minutes. If bleeding still continues, keep pressing hard and evacuate urgently. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "log": "Wound bleeding again: retreated",
+      "end": true
+    },
+    {
+      "id": "s19",
+      "text": "Keep watching, keep them warm, and evacuate urgently. Leave the packing in place for the medical team.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nDo not remove the packing to clean the wound (the Wound cleaning and care protocol leaves packed wounds alone). Record the time the packing went in and what dressing was used.",
+      "end": true
+    },
+    {
+      "id": "s30",
+      "text": "Use the Severe bleeding protocol: press hard, and pack with plain gauze or clean cloth where it says to.",
+      "detail": "Plain gauze or clean cloth packed tightly with hard pressure still works. TCCC skill: if no hemostatic dressing is available, use clean, dry cloth packed the same way. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s31",
+      "text": "Not packed in this app. Chest: Open chest wound protocol. Belly or organs showing: Belly (abdominal) injury protocol, press only. Other body wounds: press hard (Severe bleeding protocol).",
+      "detail": "The Severe bleeding protocol presses belly and other body wounds rather than packing them, and leaves chest wounds unsealed. This protocol follows the same rule. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s32",
+      "text": "Use a tourniquet first: Severe bleeding protocol. To replace a tourniquet with packing later, use the Tourniquet reassessment and conversion protocol.",
+      "detail": "TCCC 2026: apply a limb tourniquet for life-threatening bleeding from an arm or leg, and a second side by side if the first does not control it. Packing as part of removing a tourniquet is done when TCCC’s conditions are met.",
+      "end": true
+    },
+    {
+      "id": "s33",
+      "text": "Do not remove it. Pack around it only if you can without moving it, bandage it in place, and use the Impaled object protocol. Evacuate urgently.",
+      "detail": "TCCC: if an object is lodged in the body, bandage it in place; do not remove it. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not pack chest or belly wounds, or press on organs showing; this app presses or leaves them as their protocols say.",
+    "Do not pull out an object stuck in a wound.",
+    "Do not ease off pressure before 3 minutes.",
+    "Do not remove XStat in the field.",
+    "Do not use a pressure bar on the neck.",
+    "Do not pack a wound instead of using a tourniquet on life-threatening arm or leg bleeding."
+  ],
+  "evacuate": [
+    "Evacuate urgently anyone whose wound needed packing.",
+    "Most urgent: bleeding that will not stop or comes back, signs of shock, or a neck wound with swelling or breathing trouble."
+  ],
+  "sources": [
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026 (dated 01 May 2026), Tactical Field Care 3 Massive Hemorrhage",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "Committee on TCCC, TCCC Skill Sets by Responder Level, master list 25 Jan 2024 (Deployed Medicine)",
+      "year": 2024,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/e146d4b1-5e8e-4efd-b0d0-c74555ffe319/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Lifesaver course, Module 09 Circulation/Hemorrhage Control in TFC, Skill Instructions #TCCC-CLS-09-01 (17 Apr 2024): Wound Packing and Pressure Bandage",
+      "year": 2024,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/dc3d090d-4b44-4025-abbc-cb827a15413a/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Lifesaver course, Module 09 Hemorrhage Control in TFC, Speaker Notes #TCCC-CLS-14-01 (17 Apr 2024)",
+      "year": 2024,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/1bcf4a6f-90c2-4efb-8f28-f5e4ca8f6372/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Lifesaver course, Module 06 Massive Hemorrhage Control in TFC, Skill Instructions #TCCC-CLS-09-01 (30 Jun 2020): neck and armpit wraps",
+      "year": 2020,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/5b775216-5bdd-48ae-b21d-4a55dd40b915/contents"
+    },
+    {
+      "name": "Wilderness Medical Society, Practice Guidelines for Basic Wound Management in the Austere Environment: 2014 Update (Quinn et al., Wilderness Environ Med 2014;25:295-310)",
+      "year": 2014,
+      "url": "https://apps.dtic.mil/sti/pdfs/ADA614573.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

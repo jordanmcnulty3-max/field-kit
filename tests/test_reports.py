@@ -98,9 +98,9 @@ def test_nine_line_text_has_nine_numbered_lines_in_order(page, app_url):
     assert lines[2] == '3. A Urgent 2, C Priority 1'
     assert lines[3] == '4. B Hoist, D Ventilator'
     assert lines[4] == '5. L Litter 2, A Ambulatory 1'
-    assert lines[5] == '6. N No enemy troops in area'
+    assert lines[5] == '6. N No enemy troops in the area'
     assert lines[6] == '7. C Smoke signal, red'
-    assert lines[7] == '8. A US military'
+    assert lines[7] == '8. A US Military'
     assert lines[8] == '9. Slope / rocky'
 
 
@@ -125,7 +125,7 @@ def test_form_is_filled_by_tapping_and_survives_reload(page, app_url):
     page.click('.rp-opt[data-n="6"][data-c="P"]')   # one choice only
     page.fill('#nl9', 'Open field')
     out = page.input_value('#nlOut').split('\n')
-    assert out[1] == '2. 146.520 Dustoff' and out[2] == '3. A Urgent 2' and out[3] == '4. A None' and out[5] == '6. P Possible enemy troops' and out[8] == '9. Open field'
+    assert out[1] == '2. 146.520 Dustoff' and out[2] == '3. A Urgent 2' and out[3] == '4. A None' and out[5] == '6. P Possible enemy troops in the area' and out[8] == '9. Open field'
     page.click('.rp-opt[data-n="6"][data-c="P"]')   # tap again to unset
     assert page.input_value('#nlOut').split('\n')[5] == '6.'
     page.reload()
@@ -165,9 +165,10 @@ def test_stored_nine_line_is_sanitised(page, app_url):
     assert out[3] == '4. B Hoist' and out[5] == '6.' and len(out[1]) == 3 + 200
 
 
-def test_nine_line_screen_marks_draft_wording(page, app_url):
+def test_nine_line_wording_is_source_checked_so_no_draft_note(page, app_url):
     boot(page, app_url, hash_=NINE, init=geo_stub())
-    assert 'Draft wording, not source-checked' in page.inner_text('.rp-draft')
+    page.wait_for_selector('#nlOut')
+    assert page.locator('.rp-draft').count() == 0
 
 
 def test_touch_targets_are_at_least_56px(page, app_url):
@@ -329,9 +330,9 @@ def test_backup_includes_the_form(page, app_url):
     assert 'fk.nineLine' in keys   # backup copies every fk.-prefixed key
 
 
-def test_release_build_fails_while_wording_is_draft(tmp_path):
+def test_release_gate_no_longer_blocks_on_report_wording(tmp_path):
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'build.py'), '--release', str(tmp_path)], capture_output=True, text=True)
-    assert r.returncode != 0 and 'REPORT_WORDING_DRAFT' in r.stderr + r.stdout
+    assert 'REPORT_WORDING_DRAFT' not in r.stderr + r.stdout
 
 
 def test_normal_build_still_works_while_draft(tmp_path):

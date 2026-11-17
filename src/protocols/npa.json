@@ -1,0 +1,233 @@
+{
+  "id": "npa",
+  "title": "Nasopharyngeal airway (NPA)",
+  "category": "advanced",
+  "tier": "advanced",
+  "keywords": [
+    "npa",
+    "nasopharyngeal airway",
+    "nose tube",
+    "nasal airway",
+    "airway adjunct",
+    "trumpet",
+    "snoring",
+    "gurgling"
+  ],
+  "summary": "A soft tube through the nose that helps keep the airway open. TCCC teaches it from Combat Lifesaver level up (TCCC skill sets 2024); the 2026 guidelines use it with bag-valve-mask breathing.",
+  "indications": [
+    "TCCC 2026 (Respiration/Breathing 5e): breathing is impaired and low oxygen cannot be corrected. Consider a properly sized NPA while ventilating with a 1000 mL bag-valve-mask.",
+    "TCCC Combat Lifesaver course (2020): a casualty who is breathing but unconscious or semi-conscious, with no airway obstruction. The 2024 and 2026 guidelines no longer list the NPA in the airway step; they put such a casualty in the recovery position (see open questions).",
+    "Either way, only when the casualty cannot keep their own airway open. An awake person talking normally has an open airway (TCCC)."
+  ],
+  "contraindications": [
+    "Clear fluid coming from the nose or ears: it may be brain fluid from a skull fracture. Do not use an NPA (TCCC Combat Lifesaver course, 2020).",
+    "StatPearls (second source), absolute: a fracture at the base of the skull; facial trauma; disruption of the middle of the face, the back of the nose or the roof of the mouth.",
+    "StatPearls, relative: suspected epiglottitis, large nasal polyps, recent nose surgery, a bleeding disorder, or blood-thinning medicine.",
+    "An awake casualty who is breathing in a position of their own choosing: do not force another position or an airway procedure that makes breathing harder (TCCC Combat Lifesaver course, 2020).",
+    "Something blocking the nostril on inspection, or an NPA that will not pass without force: never force it (TCCC)."
+  ],
+  "equipment": [
+    "NPA. TCCC standard size is 32 Fr, which fits an average adult service member. TCCC gives no child size.",
+    "Sterile water-based lubricating jelly, or water. If neither: the casualty’s own saliva. Never blood, petroleum jelly or any non-water-based substance (TCCC).",
+    "Gloves.",
+    "For the current TCCC indication: a 1000 mL bag-valve-mask, and a pulse oximeter if available."
+  ],
+  "complications": [
+    "Nosebleed from damage to the lining of the nose (StatPearls).",
+    "The tube passing up into the skull through a fracture at the base of the skull (StatPearls). This is why clear fluid from the nose or ears rules it out.",
+    "Gagging or choking after it is in: it is in too far for this person. Pull it back slightly (TCCC).",
+    "A tube that is too large can push air into the stomach, which can cause vomiting and breathing vomit into the lungs (StatPearls).",
+    "Tearing of the back of the throat (StatPearls).",
+    "The airway can still block with the NPA in. Keep watching breathing (TCCC: if positioning and an NPA cannot keep the airway open, get medical help immediately)."
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Advanced procedure for people trained hands-on to insert an NPA. Have you been trained hands-on to do this?",
+      "detail": "Reading this is not training. If you have not inserted NPAs in hands-on training, do not try now: open the airway and position the casualty instead (next screen if you answer no).\n\nTCCC teaches the NPA from the Combat Lifesaver level up (TCCC Skill Sets by Responder Level, 2024).",
+      "ask": {
+        "q": "Have you been trained hands-on to insert an NPA?",
+        "yes": "s2",
+        "no": "s20"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Do you have an NPA?",
+      "detail": "TCCC standard size is 32 Fr, which fits an average adult. You also want water-based lubricant or water; if you have none, the casualty’s own saliva can be used.",
+      "ask": {
+        "q": "Do you have an NPA?",
+        "yes": "s3",
+        "no": "s20"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Is the casualty awake and talking in a normal voice?",
+      "detail": "TCCC: if the casualty is conscious and speaking normally, there is no airway obstruction. An awake casualty should be allowed to take any position that best protects the airway, including sitting up or leaning forward. Do not force them into another position or do an airway procedure that makes breathing harder.",
+      "ask": {
+        "q": "Is the casualty awake and talking in a normal voice?",
+        "yes": "s22",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Is clear, watery fluid coming from the nose or ears?",
+      "detail": "TCCC Combat Lifesaver course: do not use an NPA if there is clear fluid coming from the ears or nose. It may be fluid from around the brain, which means a possible skull fracture. StatPearls lists a fracture at the base of the skull as an absolute contraindication: the tube can pass into the skull.",
+      "ask": {
+        "q": "Is clear fluid coming from the nose or ears?",
+        "yes": "s21",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Is the middle of the face (nose, cheekbones, upper jaw) badly injured?",
+      "detail": "StatPearls (second source) lists facial trauma and disruption of the middle of the face, the back of the nose or the roof of the mouth as absolute contraindications. Relative ones (think hard before using it): suspected epiglottitis, large nasal polyps, recent nose surgery, a bleeding disorder, or blood-thinning medicine.",
+      "ask": {
+        "q": "Is the middle of the face badly injured?",
+        "yes": "s21",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Lay them on their back, head in a neutral position. Look into the nostrils for anything blocking them.",
+      "detail": "TCCC: place the casualty on their back with the head neutral, and inspect the nose and nasal passages for anything that would stop the tube going in. Start with the right nostril.\n\nIf you are already ventilating with a bag-valve-mask, the NPA goes in before you start (TCCC BVM skill: insert an NPA, then assemble the BVM)."
+    },
+    {
+      "id": "s7",
+      "text": "Check the size, then coat the tip with water-based jelly or water.",
+      "detail": "Size: TCCC uses the standard 32 Fr NPA, which fits an average adult. StatPearls (second source) describes checking the length against the face: with the flange at the tip of the nose and the bevelled tip pointing to the ear, the right size just reaches the earlobe; another check is that it just reaches the angle of the jaw. Adult lengths are 6 to 9 cm (StatPearls). TCCC gives no child size, and this app does not cover NPAs in children.\n\nLubricant (TCCC): sterile water-based lubricating jelly, or water. If you have neither, use the casualty’s own saliva, not yours. Never use blood, petroleum jelly or any other non-water-based substance."
+    },
+    {
+      "id": "s8",
+      "text": "Push the nose tip up. Bevel toward the middle of the nose. Insert at 90 degrees to the face, toward the ground (not the top of the head), until the flange sits at the nostril.",
+      "detail": "TCCC skill: expose the right nostril by gently pushing the tip of the nose upward. Turn the tube so the bevelled (open) end faces the septum, the wall in the middle of the nose. Insert it into the right nostril at a 90-degree angle to the face, and advance it in one smooth movement until the flange is flush with the nostril. The tube goes straight back along the floor of the nose, toward the ground when they lie on their back, not up toward the top of the head (StatPearls: along the floor of the nose toward the back of the head).\n\nNever force it.",
+      "warn": "Never force the NPA.",
+      "log": "Nasopharyngeal airway inserted",
+      "ask": {
+        "q": "Did it go all the way in, flange at the nostril, without force?",
+        "yes": "s10",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Resistance: twist it slightly and gently try again. Still stuck: take it out and use the left nostril, turning the curve to face down after about 2 inches.",
+      "detail": "TCCC: if you meet resistance, try a slight twisting motion and gently reinsert. If it still will not go, remove it completely and insert it into the left nostril; after about 2 inches, rotate the NPA so its curve faces downward. Never force it.",
+      "warn": "Never force the NPA.",
+      "ask": {
+        "q": "Is it in now, with the flange at the nostril?",
+        "yes": "s10",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Are they gagging or choking on it?",
+      "detail": "TCCC: if the casualty starts to gag or choke after the NPA is in, pull it out slightly and leave it in place.",
+      "ask": {
+        "q": "Are they gagging or choking on it?",
+        "yes": "s11",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Pull the NPA back out slightly and leave it in place.",
+      "detail": "TCCC. Then check breathing on the next screen."
+    },
+    {
+      "id": "s13",
+      "text": "Check breathing: look for the chest rising, listen and feel for air at the tube and mouth.",
+      "detail": "TCCC: reassess breathing using look, listen and feel. Watch the chest and stomach rise and fall, listen for air moving, feel it on your cheek, and count the breaths.",
+      "ask": {
+        "q": "Is air moving freely in and out?",
+        "yes": "s14",
+        "no": "s16"
+      }
+    },
+    {
+      "id": "s14",
+      "text": "Position them: unconscious in the recovery position; awake, sitting or the position they find most comfortable. Leave the NPA in.",
+      "detail": "TCCC: an unconscious casualty goes in the recovery position (head tilted back, chin away from the chest) to stop them breathing in blood, mucus or vomit. An awake casualty may sit or recline in whichever position is most comfortable. The Recovery position protocol shows how. If a neck or back injury is possible, use the Neck or back (spine) injury protocol for how to move them."
+    },
+    {
+      "id": "s15",
+      "text": "Keep checking breathing and the tube often, and every time you move them. Evacuate urgently.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nRecheck breathing (look, listen, feel) and the position of the tube often, and every time the casualty is moved. If breathing becomes noisy, slow or stops, or the airway blocks again, go back to the breathing check.\n\nRecord the time the NPA went in. TCCC 2026 asks for frequent reassessment of oxygen saturation and airway patency because airway status can change over time.",
+      "end": true
+    },
+    {
+      "id": "s16",
+      "text": "Not breathing normally: start CPR (CPR, adult protocol). Breathing but still blocked: reposition, recheck the tube, and get medical help now.",
+      "detail": "TCCC: if positioning and/or an NPA cannot keep the airway open, notify medical personnel immediately. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are not breathing normally, use the CPR, adult protocol.\n\nIf you have a bag-valve-mask and are trained to use it: TCCC ventilates with the NPA in, squeezing the bag for 1 to 2 seconds once every 5 to 6 seconds (10 to 12 breaths a minute), watching the chest rise, and checking for breathing of their own and the pulse periodically.\n\nA blockage from injury to the face or airway that positioning cannot clear is what the Cricothyroidotomy (surgical airway) protocol is for, for those trained at that level.",
+      "end": true
+    },
+    {
+      "id": "s12",
+      "text": "Both sides failed: take it out and do not force it. Keep the airway open by position (Recovery position protocol) and evacuate urgently.",
+      "detail": "TCCC: never force the NPA. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are not breathing normally, use the CPR, adult protocol.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Do not insert an NPA. Keep the airway open by position: use the Recovery position protocol. Not breathing normally: start CPR (CPR, adult protocol).",
+      "detail": "Without hands-on training or an NPA, the airway is kept open by position. For an injured casualty, the Trauma check (MARCH) covers the airway step. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Do not use an NPA. Awake: let them sit up and lean forward. Unconscious: Recovery position protocol. Evacuate urgently.",
+      "detail": "TCCC: let a conscious casualty take any position that best protects the airway, including sitting up or leaning forward. Place an unconscious casualty in the recovery position. Clear fluid from the nose or ears means a possible skull fracture: also use the Head injury and concussion protocol. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are not breathing normally, use the CPR, adult protocol.",
+      "end": true
+    },
+    {
+      "id": "s22",
+      "text": "No NPA needed: an awake person talking normally has an open airway. Let them take the position that helps them breathe.",
+      "detail": "TCCC: if the casualty is conscious and speaking normally, there is no airway obstruction. Allow them to sit up or lean forward if that helps. Keep watching: if they stop answering or breathing becomes noisy, come back to this protocol.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not force an NPA into the nose.",
+    "Do not use an NPA if clear fluid comes from the nose or ears, or the middle of the face is badly injured.",
+    "Do not lubricate with blood, petroleum jelly or anything that is not water-based.",
+    "Do not put an NPA in an awake person who is talking normally, and do not force an awake casualty to lie flat.",
+    "Do not leave a casualty with an NPA unwatched."
+  ],
+  "evacuate": [
+    "Evacuate urgently every casualty who needed an NPA: they could not keep their own airway open.",
+    "Most urgent: breathing that stays noisy, slow or blocked with the NPA in, low oxygen readings, or a head or face injury."
+  ],
+  "sources": [
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026 (dated 01 May 2026), Tactical Field Care 4 Airway Management and 5e Respiration/Breathing; Summary of Jan 2024 Changes",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "Committee on TCCC, TCCC Skill Sets by Responder Level, master list 25 Jan 2024 (Deployed Medicine)",
+      "year": 2024,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/e146d4b1-5e8e-4efd-b0d0-c74555ffe319/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Lifesaver course, Module 07 Airway Management in TFC: Skill Instructions #TCCC-CLS-09-01 (25 Jan 2020) and Speaker Notes #TCCC-CLS-14-01 (25 Jan 2020)",
+      "year": 2020,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/55ba1e5d-95f6-4cc8-a8e1-5fc2768a1075/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Medic/Corpsman skill card, Nasopharyngeal Airway (NPA) #TCCC-CMC-SC-29 (30 Apr 2025)",
+      "year": 2025,
+      "url": "https://learning-media.allogy.com:443/api/v1/pdf/ea699d09-458e-46bd-b5de-b1f744f58839/contents"
+    },
+    {
+      "name": "StatPearls, Nasopharyngeal Airway (last updated 30 Jan 2024), second source for sizing, contraindications and complications",
+      "year": 2024,
+      "url": "https://www.statpearls.com/point-of-care/25566"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

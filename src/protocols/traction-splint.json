@@ -1,0 +1,76 @@
+{
+  "id": "traction-splint",
+  "title": "Traction splint (broken thigh bone)",
+  "category": "advanced",
+  "tier": "advanced",
+  "keywords": [
+    "traction splint",
+    "femur",
+    "broken thigh",
+    "thigh bone",
+    "sager",
+    "hare traction",
+    "femur fracture"
+  ],
+  "summary": "A splint that pulls a broken thigh bone (femur) straight. Not detailed in this app: TCCC removed traction splinting from its skill sets in 2024 (it was a Combat Medic/Corpsman and Combat Paramedic skill), and no source opened gives the steps.",
+  "indications": [
+    "JTS Clinical Practice Guideline 56 (2026): traction splints may be used for femur (thigh bone) fractures; other splinting methods may be more expedient and equally effective.",
+    "StatPearls (second source): a suspected or obvious isolated fracture of the middle of the thigh bone shaft."
+  ],
+  "contraindications": [
+    "StatPearls: a fracture of the ankle or foot on the same leg (the splint pulls from the ankle).",
+    "StatPearls: a partial amputation or avulsion where the bone is separated and only a little tissue still connects the lower limb.",
+    "StatPearls: the Hare splint does not work for fractures high on the thigh bone shaft, because its pad may sit under the break.",
+    "StatPearls: an unstable casualty: splint the injured leg to the uninjured leg instead of applying traction at the scene."
+  ],
+  "equipment": [
+    "A commercial traction splint (JTS). StatPearls describes the Hare (two-rod) and Sager (single-rod) types."
+  ],
+  "complications": [
+    "Pressure sores with long use: traction splints are temporary (StatPearls).",
+    "Sager splint: injury to the genitals if it shifts during transport (StatPearls).",
+    "Soft-tissue damage from traction on the skin (StatPearls).",
+    "A broken thigh bone itself can cause heavy bleeding, fat embolism, infection, shortening, misalignment and blood clots (StatPearls).",
+    "JTS 2026: splints must not be constrictive or encourage compartment syndrome, especially before long evacuations."
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Traction splinting is not detailed in this app. Use the Broken bone (fracture) protocol: keep the leg still, check circulation, and evacuate urgently.",
+      "detail": "Why: TCCC removed traction splinting from its skill sets in 2024, and none of the sources opened (TCCC 2026, JTS Clinical Practice Guideline 56, the Wilderness First Aid guidelines, StatPearls) gives the steps in enough detail to write them here. If you have been trained hands-on on a specific traction splint, follow that device’s instructions and your training.\n\nMeanwhile (BSA Wilderness First Aid guidelines, written with Wilderness Medical Society input): a broken thigh bone needs rapid evacuation. Secure the leg on a well-padded rigid support that also holds the ankle and foot still; sleeping pads or a lightweight camp chair can serve as splints; pad behind the knee. Check circulation, feeling and colour beyond the injury before and after splinting (Broken bone (fracture) protocol). A broken thigh bone can bleed heavily inside: watch for shock (Shock protocol). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not apply traction without hands-on training on that device.",
+    "Do not use a traction splint with an ankle or foot fracture on the same leg (StatPearls)."
+  ],
+  "evacuate": [
+    "Evacuate urgently every suspected broken thigh bone, lying down and splinted.",
+    "Most urgent: signs of shock, a cold, pale or blue foot, or bone through the skin."
+  ],
+  "sources": [
+    {
+      "name": "Committee on TCCC, TCCC Skill Sets by Responder Level, master list 25 Jan 2024 (Deployed Medicine)",
+      "year": 2024,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/e146d4b1-5e8e-4efd-b0d0-c74555ffe319/contents"
+    },
+    {
+      "name": "Joint Trauma System Clinical Practice Guideline ID 56, Orthopaedic Trauma: Extremity Fractures (22 Jun 2026)",
+      "year": 2026,
+      "url": "https://jts.health.mil/assets/docs/cpgs/Orthopaedic_Trauma_Extremity_Fractures_ID56_22_Jun_2026.pdf"
+    },
+    {
+      "name": "StatPearls, EMS Traction Splint (last updated 24 Jul 2023), second source for indications, contraindications, equipment and complications",
+      "year": 2023,
+      "url": "https://www.statpearls.com/point-of-care/31855"
+    },
+    {
+      "name": "Boy Scouts of America (with Wilderness Medical Society input), Wilderness First Aid Curriculum and Doctrine Guidelines, 2017 edition (2019 printing): femur fractures",
+      "year": 2017,
+      "url": "https://FortDrum.iSportsman.net/files/Documents%2FSafety%20Links%2FBSA%20-%20Wilderness%20First%20Aid%202017.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

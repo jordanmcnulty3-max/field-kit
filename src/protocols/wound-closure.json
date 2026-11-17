@@ -1,0 +1,287 @@
+{
+  "id": "wound-closure",
+  "title": "Wound closure (strips, skin glue)",
+  "category": "advanced",
+  "tier": "advanced",
+  "keywords": [
+    "wound closure",
+    "close wound",
+    "steri strips",
+    "butterfly",
+    "skin glue",
+    "liquid bandage",
+    "superglue cut",
+    "stitches",
+    "gaping cut",
+    "laceration"
+  ],
+  "summary": "Closing a clean, fresh cut in the field with wound closure strips or skin glue, after thorough cleaning. From the Wilderness Medical Society 2014 guideline, which assigns no training level; strips are taught in Wilderness First Aid. Stitches and staples are not described here.",
+  "indications": [
+    "WMS 2014 (1B): most wounds can be treated safely by closing them straight away.",
+    "WMS 2014 (1C): most clean wounds can be closed up to 6 hours after injury, and face and scalp wounds up to 10 hours.",
+    "WMS 2014 (1A): tissue adhesive (skin glue) gives an acceptable result for most simple wounds.",
+    "BSA Wilderness First Aid (2017): a deep cut that had to be held open to irrigate it should be held closed after cleaning, with closure strips or thin tape.",
+    "MedlinePlus (second source): liquid bandage (skin glue) is for minor cuts; large cuts need prompt medical attention."
+  ],
+  "contraindications": [
+    "Grossly contaminated wounds: pack open for later closure (WMS 1B).",
+    "Wounds with a lot of dead or crushed tissue: leave open (WMS 1C).",
+    "Animal or human bites anywhere but the face count as contaminated (WMS); BSA leaves animal bites open. Possible rabies exposure: delay closure 4 days (WMS 1C).",
+    "Scrapes (abrasions): do not close; cover with a non-stick dressing (WMS 1C).",
+    "Older than 6 hours (10 hours on the face or scalp) (WMS 1C).",
+    "Gaping more than half an inch, large dirty wounds, or bone, tendon or ligament showing: do not close in the field; evacuate for closure by a physician (BSA).",
+    "Puncture wounds and any wound that needed a tourniquet, packing or a pressure bandage: leave as the Wound cleaning and care protocol says.",
+    "Skin glue: not around the eyes, in the ears or nose, or inside the mouth, and never inside the wound (MedlinePlus)."
+  ],
+  "equipment": [
+    "At least 1 litre of drinkable water and a syringe or squeeze bottle to irrigate (WMS; Wound cleaning and care protocol).",
+    "Wound closure strips (surgical tape). WMS: the weakest closure aid, with the highest rate of reopening.",
+    "Skin glue (tissue adhesive, octyl cyanoacrylate, sold as liquid bandage).",
+    "Clean gauze, a non-stick dressing and bandage; scissors to clip (not shave) hair.",
+    "WMS 2014 also describes stitches and staples (preferred for complex wounds; staples never on the face). Their technique and the local anaesthetic they need are outside this app."
+  ],
+  "complications": [
+    "Infection: 1% to 12% even with proper care (WMS). Closing a dirty wound traps the dirt in.",
+    "The wound splitting open: highest with strips (WMS); glue has a higher rate in wounds under high tension (WMS).",
+    "Blistering from adhesive aids such as tincture of benzoin (WMS).",
+    "Glue in the eye, ear, nose or mouth (MedlinePlus: get medical help)."
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Advanced procedure for people trained hands-on in wound closure. Have you been trained hands-on to close wounds?",
+      "detail": "Reading this is not training. Closing the wrong wound traps infection inside it. The Wilderness Medical Society guideline assigns no training level; closure strips are taught in Wilderness First Aid courses (BSA 2017).",
+      "ask": {
+        "q": "Have you been trained hands-on to close wounds?",
+        "yes": "s2",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Do you have wound closure strips or skin glue?",
+      "detail": "Stitches and staples are not described in this app.",
+      "ask": {
+        "q": "Do you have closure strips or skin glue?",
+        "yes": "s3",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Did this wound need a tourniquet, packing or a pressure bandage to stop heavy bleeding?",
+      "detail": "Wounds that needed these are left alone, with the dressing in place (Wound cleaning and care protocol; MedlinePlus: do not try to clean a major wound).",
+      "ask": {
+        "q": "Did it need a tourniquet, packing or a pressure bandage?",
+        "yes": "s31",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Is it an animal or human bite?",
+      "detail": "WMS 2014: animal or human bites to any area other than the face should be considered contaminated, which means delayed closure; wounds with a possible rabies exposure have closure delayed for 4 days (1C). BSA Wilderness First Aid: animal bites should be left open. This app leaves every bite open (see open questions about face bites).",
+      "ask": {
+        "q": "Is it a bite?",
+        "yes": "s32",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Is the wound more than 6 hours old (more than 10 hours on the face or scalp)?",
+      "detail": "WMS 2014 (1C): most clean wounds can be safely closed up to 6 hours after injury, up to 10 hours for face and scalp wounds.",
+      "ask": {
+        "q": "Is it older than that?",
+        "yes": "s33",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Is it heavily contaminated, crushed, or full of dead or mangled tissue?",
+      "detail": "WMS 2014: grossly contaminated wounds should be packed open to heal from the bottom or be closed later (1B); wounds with significant dead tissue should be left open (1C). BSA: large dirty wounds are left open, covered with sterile gauze.",
+      "ask": {
+        "q": "Is it contaminated, crushed or full of dead tissue?",
+        "yes": "s33",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Does it gape more than half an inch, or show bone, tendon or ligament?",
+      "detail": "BSA Wilderness First Aid: wounds that gape more than half an inch should not be closed in the field and should be evacuated for closure by a physician; wounds exposing bone, tendon or ligament are left open, covered with sterile gauze. WMS: evacuate wounds with damage to the tendon, joint, nerve or blood vessel underneath (1C).",
+      "ask": {
+        "q": "Does it gape over half an inch or show bone, tendon or ligament?",
+        "yes": "s33",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s8",
+      "text": "Is it a puncture wound or a scrape (abrasion)?",
+      "detail": "WMS 2014 (1C): abrasions are not closed; cover them with a non-stick dressing. The Wound cleaning and care protocol leaves punctures open.",
+      "ask": {
+        "q": "Is it a puncture or a scrape?",
+        "yes": "s34",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Irrigate it thoroughly first, as the Wound cleaning and care protocol describes, then come back here.",
+      "detail": "WMS 2014: irrigate with at least 1 litre (1C) of drinkable water (1A) under high pressure (1A), as early as practical (1B), with no soap, antiseptic or antibiotic added except for rabies-prone wounds (1A). Clip hair if needed; do not shave it. Remove loose dirt that comes away easily. The Wound cleaning and care protocol gives the method. Bleeding should be stopped with pressure first.",
+      "ask": {
+        "q": "Is the wound now clean, with no dirt you can see?",
+        "yes": "s10",
+        "no": "s33"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Dry the skin around the cut completely.",
+      "detail": "MedlinePlus (liquid bandage): wash the cut and the skin around it, then dry the area with a clean towel or gauze; make sure it is completely dry. Strips and glue do not stick to wet skin.",
+      "ask": {
+        "q": "Are you using skin glue?",
+        "yes": "s11",
+        "no": "s14"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Is the cut near the eye, or in the ear, nose or mouth?",
+      "detail": "MedlinePlus: do not use liquid bandage around the eyes, in the ear or nose, or inside the mouth. If it gets into these areas, get medical help.",
+      "ask": {
+        "q": "Is the cut near the eye, or in the ear, nose or mouth?",
+        "yes": "s14",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "Hold the edges together with your fingers. Spread the glue over the top of the closed cut from end to end, never inside it. Hold the cut closed for about 1 minute.",
+      "detail": "MedlinePlus: gently bring the edges of the cut together with your fingers; apply the liquid bandage over the cut, spreading it from one end to the other so the whole cut is covered; hold the cut closed for about 1 minute while it dries. Apply it on top of the skin where the cut closes, not inside the wound.\n\nScalp (WMS 2014): the hair apposition technique has been described and validated for scalp wounds: twist or knot a few hairs on each side of the cut together and secure them with tissue adhesive. It works best in small wounds and only holds the surface.\n\nWMS: glue suits most simple wounds; wounds under high tension reopen more often with glue.",
+      "log": "Wound closed with skin glue",
+      "timer": {
+        "seconds": 60,
+        "label": "Hold closed while it dries"
+      },
+      "ask": {
+        "q": "Are the edges held together along the whole cut?",
+        "yes": "s16",
+        "no": "s15"
+      }
+    },
+    {
+      "id": "s14",
+      "text": "Strips: stick one end of a strip on one side of the cut and another on the opposite side, then use them as handles to pull the edges together. Add strips along the cut.",
+      "detail": "BSA Wilderness First Aid: when using closure strips, apply one end of one strip to one side of the wound and another to the opposite side, then use them as handles to draw the edges together. Thin tape can be used if you have no strips.\n\nWMS 2014: surgical tapes have the lowest strength of any closure aid and the highest rate of the wound reopening; avoid shear stress on the skin. Adhesive aids such as tincture of benzoin may cause blistering.\n\nIf you have no strips (you chose strips because glue is not suitable here), leave the wound open, cover it and evacuate.",
+      "log": "Wound closed with closure strips",
+      "ask": {
+        "q": "Are the edges held together along the whole cut?",
+        "yes": "s16",
+        "no": "s15"
+      }
+    },
+    {
+      "id": "s15",
+      "text": "Edges will not stay together: leave it open, cover it with a moist dressing, and evacuate for closure.",
+      "detail": "WMS 2014: evacuate all complex wounds not closed primarily (1C). Cover with a dressing that keeps the wound moist (Wound cleaning and care protocol). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s16",
+      "text": "Cover it. Over glue, no ointment. Over strips, a clean dressing. Keep it clean and limit movement so it does not reopen.",
+      "detail": "MedlinePlus (liquid bandage): do not put ointments on top, because they weaken the bond; the person may shower once it is dry but should not scrub it; wash daily with soap and water and pat dry; do not scratch or pick at it; keep activity to a minimum so the wound does not reopen; the glue lasts 5 to 10 days and falls off on its own.\n\nBSA (strips): a thin layer of antibiotic ointment if not allergic, then a dressing and bandage; a thin film dressing is used without ointment. WMS: a moist wound environment helps healing (1C) and a clean protective bandage is helpful in the outdoors (2C). The Wound cleaning and care protocol states the differing advice on antibiotic ointment.\n\nTetanus: see the last step of the Wound cleaning and care protocol.",
+      "log": "Closed wound dressed"
+    },
+    {
+      "id": "s17",
+      "text": "Check the wound every day until it heals.",
+      "detail": "WMS 2014: monitor all wounds closely; complications can develop quickly or slowly. MedlinePlus: get care right away for redness, pain or yellow pus around the wound, bleeding that does not stop after 10 minutes of direct pressure, new numbness or tingling, a fever of 100 F (37.7 C) or higher, pain that does not go away after pain medicine, or the wound splitting open.",
+      "ask": {
+        "q": "Any redness, swelling, warmth, pus, more pain, a red streak, fever, or the wound opening?",
+        "yes": "s18",
+        "no": "s19"
+      }
+    },
+    {
+      "id": "s18",
+      "text": "Infection or opening: open the wound so it can drain, leave it open, cover it with a moist dressing, and evacuate.",
+      "detail": "WMS 2014: if equipment and training allow, open wounds that show infection after closure and drain any abscess; raise the limb if the skin around is red and spreading. Evacuate early infection if suitable antibiotics are not available, and infection getting worse despite antibiotics (1C). Antibiotics are outside this app. Urgently if there is fever, confusion or a red streak. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "log": "Closed wound reopened for infection",
+      "end": true
+    },
+    {
+      "id": "s19",
+      "text": "Healing well: keep checking daily. Have it seen by a health care provider when you are back, sooner if anything changes.",
+      "detail": "MedlinePlus: follow up with your provider to confirm the wound is healing. WMS 2014 evacuation list (1C): complex wounds not closed primarily; wounds with tendon, joint, nerve or vessel damage; mammal bites; early infection without suitable antibiotics; infection getting worse despite antibiotics; significant dead tissue; gas in the tissues; tetanus-prone wounds needing immunisation; any possible rabies exposure.",
+      "end": true
+    },
+    {
+      "id": "s30",
+      "text": "Do not close it. Use the Wound cleaning and care protocol: clean it, cover it, and leave it open.",
+      "detail": "Leaving a wound open is the safe default (Wound cleaning and care protocol).",
+      "end": true
+    },
+    {
+      "id": "s31",
+      "text": "Do not close or clean it. Leave the dressing, packing or tourniquet in place, use the Severe bleeding protocol, and evacuate.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s32",
+      "text": "Do not close a bite. Use the Animal or human bite (and rabies risk) protocol and get them to medical care.",
+      "detail": "WMS 2014: bites outside the face are contaminated; possible rabies exposure delays closure 4 days. BSA: animal bites should be left open.",
+      "end": true
+    },
+    {
+      "id": "s33",
+      "text": "Do not close it. Clean it as the Wound cleaning and care protocol says, cover it with a moist dressing, and evacuate for closure later.",
+      "detail": "WMS 2014: contaminated wounds are packed open to heal from the bottom or be closed later (delayed primary closure, the lowest-infection-risk choice); wounds with significant dead tissue are left open; complex wounds not closed primarily are evacuated (1C). BSA: wounds gaping more than half an inch are evacuated for closure by a physician. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s34",
+      "text": "Do not close it. Use the Wound cleaning and care protocol.",
+      "detail": "WMS 2014 (1C): abrasions are covered with a non-stick dressing rather than closed. The Wound cleaning and care protocol leaves punctures open.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not close bites, punctures, scrapes, dirty, crushed or old wounds.",
+    "Do not close a wound that gapes more than half an inch or shows bone, tendon or ligament.",
+    "Do not close a wound before it has been thoroughly irrigated.",
+    "Do not put glue inside the wound, near the eye, or in the ear, nose or mouth.",
+    "Do not put ointment over skin glue."
+  ],
+  "evacuate": [
+    "Evacuate: a wound that could not be closed or reopened, signs of infection, or any wound in the Wound cleaning and care protocol’s evacuation list.",
+    "Urgently: infection with fever, confusion or a spreading red streak.",
+    "Every wound closed in the field: have a health care provider check it (MedlinePlus)."
+  ],
+  "sources": [
+    {
+      "name": "Wilderness Medical Society, Practice Guidelines for Basic Wound Management in the Austere Environment: 2014 Update (Quinn et al., Wilderness Environ Med 2014;25:295-310), lacerations and wound closure; supplement version 2014;25:S118-S133 also read",
+      "year": 2014,
+      "url": "https://apps.dtic.mil/sti/pdfs/ADA614573.pdf"
+    },
+    {
+      "name": "Wilderness Medical Society, Basic Wound Management 2014 Update, supplement version (Wilderness Environ Med 2014;25:S118-S133), copy hosted by FEMECV",
+      "year": 2014,
+      "url": "https://www.femecv.com/sites/default/files/uploads/files/WMS%20heridas_2014.pdf"
+    },
+    {
+      "name": "Boy Scouts of America (with Wilderness Medical Society input), Wilderness First Aid Curriculum and Doctrine Guidelines, 2017 edition (2019 printing): wounds, closure strips",
+      "year": 2017,
+      "url": "https://FortDrum.iSportsman.net/files/Documents%2FSafety%20Links%2FBSA%20-%20Wilderness%20First%20Aid%202017.pdf"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Lacerations - liquid bandage, reviewed 2026-01-01 (outside the top tier: tissue adhesive technique and aftercare)",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/patientinstructions/000497.htm"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

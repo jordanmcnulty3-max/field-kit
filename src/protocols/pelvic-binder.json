@@ -1,0 +1,191 @@
+{
+  "id": "pelvic-binder",
+  "title": "Pelvic binder",
+  "category": "advanced",
+  "tier": "advanced",
+  "keywords": [
+    "pelvic binder",
+    "pelvis",
+    "broken pelvis",
+    "pelvic fracture",
+    "hip fracture",
+    "sam pelvic sling",
+    "pelvic sling",
+    "pelvic compression"
+  ],
+  "summary": "Binding a suspected broken pelvis at the level of the greater trochanters (the bony points at the top of the outer thighs). TCCC: Combat Medic/Corpsman and Combat Paramedic (pelvic compression device, TCCC skill sets 2024).",
+  "indications": [
+    "TCCC 2026: suspected pelvic fracture after severe blunt force or blast injury, with one or more of the following.",
+    "Pelvic pain.",
+    "Any major leg amputation or near amputation.",
+    "Physical exam findings suggestive of a pelvic fracture (TCCC Combat Lifesaver notes 2025: pelvic deformity or bruising, instability or grating).",
+    "Unconsciousness.",
+    "Shock."
+  ],
+  "contraindications": [
+    "The TCCC sources read list no formal contraindication. Their cautions follow.",
+    "Do not rock, spring or press the pelvis to test for a fracture: it is a poor test, may dislodge clot and hurts (TCCC proposed change 1602; BSA Wilderness First Aid: avoid rocking the pelvis).",
+    "Do not place it at the hip-bone crests or the front points of the hip bones: high placement is common and makes it less effective (TCCC proposed change 1602).",
+    "Improvised: do not simply tie a single cravat or linked tourniquets around the pelvis; they may not achieve enough tension (TCCC proposed change 1602).",
+    "Not under fire or immediate threat (TCCC proposed change 1602: pelvic immobilization is precluded in Care Under Fire)."
+  ],
+  "equipment": [
+    "A commercial pelvic binder (TCCC proposed change 1602 names cut-to-fit types, the SAM Pelvic Sling and the T-POD; JTS: commercial or SAM-style).",
+    "Improvised (TCCC proposed change 1602): a sheet or blanket, or the casualty’s trouser legs, secured with zip ties or clamps; a SAM splint with a CAT tourniquet; or trouser legs cut and tightened with a windlass stick. Improvised methods must be trained and planned in advance.",
+    "Tape or cravats to bind the ankles or feet; a rigid litter for carrying.",
+    "Two or more people to lift without log-rolling."
+  ],
+  "complications": [
+    "Pressure sores from long use or over-tightening (TCCC proposed change 1602). Check the skin.",
+    "Placed too high: little effect (TCCC proposed change 1602).",
+    "A broken pelvis can bleed heavily inside. Shock that appears or worsens may mean internal bleeding (TCCC skill card 2025).",
+    "Theoretical worsening of some fracture patterns; TCCC proposed change 1602 found no clinical evidence of significant harm."
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Advanced procedure for people trained hands-on to apply a pelvic binder. Have you been trained hands-on to do this?",
+      "detail": "Reading this is not training. TCCC teaches the pelvic compression device at Combat Medic/Corpsman and Combat Paramedic level (TCCC Skill Sets by Responder Level, 2024). Combat Lifesavers are taught to suspect it and tell medical personnel (CLS notes 2025).",
+      "ask": {
+        "q": "Have you been trained hands-on to apply a pelvic binder?",
+        "yes": "s2",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Do you have a pelvic binder, or a sheet or blanket to make one?",
+      "detail": "TCCC proposed change 1602: commercial binders, or improvised with a sheet, blanket or trouser legs secured with zip ties or clamps, a SAM splint with a CAT tourniquet, or trouser legs tightened with a windlass stick.",
+      "ask": {
+        "q": "Do you have a binder or a sheet or blanket?",
+        "yes": "s3",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Was there a severe blunt or blast injury (a bad fall, crash, crush or explosion)?",
+      "detail": "TCCC 2026 applies a pelvic binder for suspected pelvic fracture after severe blunt force or blast injury.",
+      "ask": {
+        "q": "Was there a severe blunt or blast injury?",
+        "yes": "s4",
+        "no": "s31"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Is at least one present: pelvic pain, a leg amputation or near amputation, signs of a broken pelvis, unconsciousness, or shock?",
+      "detail": "TCCC 2026 indications: pelvic pain; any major lower limb amputation or near amputation; physical exam findings suggestive of a pelvic fracture; unconsciousness; shock. TCCC Combat Lifesaver notes (2025) list as signs: pelvic deformity or bruising, pelvic instability or grating.\n\nShock (TCCC): altered mental status without brain injury and/or a weak or absent pulse at the wrist.\n\nDo not rock or press the pelvis to test it.",
+      "warn": "Do not rock or press the pelvis to test it.",
+      "ask": {
+        "q": "Is at least one of these present?",
+        "yes": "s5",
+        "no": "s31"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Keep them still on their back. Do not log-roll them. Empty their pockets and clear everything from the belt and hips.",
+      "detail": "TCCC proposed change 1602: apply the binder before moving the casualty if possible; avoid log-rolling and unnecessary movement; lift gently with two or more people or use a scoop litter. Empty the pockets and remove gear from the belt. Ideally the binder goes on skin, not over clothing.\n\nIf a neck or back injury is possible, also follow the Neck or back (spine) injury protocol for how to move them."
+    },
+    {
+      "id": "s6",
+      "text": "Pass the binder under the thighs (not the lower back) and slide it up to the level of the greater trochanters and pubic bone. Not up at the hip-bone crests.",
+      "detail": "TCCC: pass the binder behind the thighs and slide it upward to the level of the greater trochanters, the bony bumps at the top of the outer thighs (skill card 2025). Proposed change 1602: centre it at the level of the greater trochanters and pubic symphysis, not at the front points of the hip bones (anterior superior iliac spine); placing it too high is common and reduces its effect. If it was passed under the lower back and slid down, check that it sits over the trochanters. Lift gently from behind the back and thighs if needed.",
+      "warn": "Not at the hip-bone crests: too high is the common mistake."
+    },
+    {
+      "id": "s7",
+      "text": "Tighten it firmly, enough to hold the pelvis, not overtight. Commercial binder: pull the straps in opposite directions until the buckle clicks, then secure the strap.",
+      "detail": "TCCC skill card (2025): pull the opposing straps firmly in opposite directions until you hear and feel the buckle click; keep the tension and press the free end onto the binder; the binder may not always click when properly applied, and a second click is not a concern.\n\nImprovised (proposed change 1602): sheet, blanket or trouser legs pulled tight and secured with zip ties or clamps, best done by two people, one pulling tight and the other securing. Tighten enough to reduce the fracture without overtightening; it must be wide enough to spread the pressure. Do not simply tie a single cravat or linked tourniquets round the pelvis.",
+      "log": "Pelvic binder applied"
+    },
+    {
+      "id": "s8",
+      "text": "Tie the ankles or feet together loosely (thighs together if a leg is amputated) and secure the toes so the legs do not roll outward.",
+      "detail": "TCCC proposed change 1602: loosely strap or tape the ankles or feet together; with an amputation, bind the thighs together; securing the toes prevents the legs rotating outward. TCCC skill card: secure the legs together to minimise outward rotation of the thighs. BSA Wilderness First Aid: secure the legs to each other."
+    },
+    {
+      "id": "s9",
+      "text": "Check it: centred over the trochanters and pubic bone, tight but not excessive, skin not pinched. Look for shock.",
+      "detail": "TCCC proposed change 1602 checks: centred at the trochanters and pubic symphysis, adequate but not excessive tension, ankles or thighs secured, skin checked for pressure injury. TCCC skill card: assess for shock, which may mean internal bleeding.",
+      "ask": {
+        "q": "Are there signs of shock, or are they getting worse?",
+        "yes": "s10",
+        "no": "s11"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Shock: recheck the binder position and tightness and reapply it if needed. Use the Shock protocol and evacuate immediately.",
+      "detail": "TCCC skill card (2025): reapply the binder if signs of shock appear or worsen. A binder does not rule out a junctional tourniquet if one is needed. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "log": "Pelvic binder rechecked for shock"
+    },
+    {
+      "id": "s11",
+      "text": "Keep them lying still and warm. Carry them on a rigid litter. Recheck the binder, their skin and signs of shock often. Evacuate urgently.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nBSA Wilderness First Aid: secure the whole person on a rigid litter before carrying them out, and watch for shock from internal bleeding. Keep them warm (Shock protocol).\n\nTCCC proposed change 1602: if definitive care is delayed beyond about 8 to 12 hours, the need for the binder should be reassessed, and it should be loosened if the casualty remains stable. That decision belongs to medical personnel; off-grid, ask a medical adviser if you can reach one (see open questions).",
+      "end": true
+    },
+    {
+      "id": "s30",
+      "text": "Do not bind. Use the Broken bone (fracture) protocol: keep them lying still, do not move them unless you must, and evacuate urgently.",
+      "detail": "Do not rock or press the pelvis. BSA Wilderness First Aid: wraps that conform around the pelvis give support, the legs can be secured to each other, and the casualty is carried on a rigid litter. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s31",
+      "text": "TCCC’s trigger for a binder is not met. Use the Broken bone (fracture) protocol and watch for shock.",
+      "detail": "TCCC 2026 applies a binder after severe blunt force or blast injury with pelvic pain, a leg amputation, signs of fracture, unconsciousness or shock. If any of these appear later, come back here.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not rock, spring or press the pelvis to test it.",
+    "Do not put the binder at the hip-bone crests; it goes at the greater trochanters.",
+    "Do not log-roll a casualty with a suspected broken pelvis; lift with two or more people.",
+    "Do not overtighten, and do not use a single cravat or linked tourniquets as a binder."
+  ],
+  "evacuate": [
+    "Evacuate urgently every casualty with a suspected broken pelvis, on a rigid litter.",
+    "Most urgent: signs of shock, unconsciousness, or a leg amputation."
+  ],
+  "sources": [
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026 (dated 01 May 2026), Tactical Field Care 6a Circulation (pelvic binder)",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "Committee on TCCC, TCCC Skill Sets by Responder Level, master list 25 Jan 2024 (Deployed Medicine)",
+      "year": 2024,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/e146d4b1-5e8e-4efd-b0d0-c74555ffe319/contents"
+    },
+    {
+      "name": "Committee on TCCC, TCCC Guidelines Proposed Change 1602, The Use of Pelvic Binders in Tactical Combat Casualty Care (7 Nov 2016)",
+      "year": 2016,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/c9fd6fc7-e177-4a49-a86b-8d356739a9e0/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Paramedic/Provider skill card, Pelvic Compression Device (PCD) #TCCC-CPP-SC-38 (15 May 2025)",
+      "year": 2025,
+      "url": "https://learning-media.allogy.com:443/api/v1/pdf/12fb0085-d020-497d-9b59-da3bca7e5002/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Lifesaver course, Module 09 Hemorrhage Control in TFC, Speaker Notes #TCCC-CLS-14-02 (29 Apr 2025): signs of pelvic fracture",
+      "year": 2025,
+      "url": "https://learning-media.allogy.com:443/api/v1/pdf/2b190647-e0bc-455e-b437-09838e06fee2/contents"
+    },
+    {
+      "name": "Joint Trauma System Clinical Practice Guideline ID 56, Orthopaedic Trauma: Extremity Fractures (22 Jun 2026)",
+      "year": 2026,
+      "url": "https://jts.health.mil/assets/docs/cpgs/Orthopaedic_Trauma_Extremity_Fractures_ID56_22_Jun_2026.pdf"
+    },
+    {
+      "name": "Boy Scouts of America (with Wilderness Medical Society input), Wilderness First Aid Curriculum and Doctrine Guidelines, 2017 edition (2019 printing): pelvic and hip fractures",
+      "year": 2017,
+      "url": "https://FortDrum.iSportsman.net/files/Documents%2FSafety%20Links%2FBSA%20-%20Wilderness%20First%20Aid%202017.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

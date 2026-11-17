@@ -1,6 +1,6 @@
 # Field Kit overhaul: design
 
-Date: 2026-11-16. Status: awaiting Jordan's approval. Baseline: v5 (commit 1775938).
+Date: 2026-11-16. Status: approved by Jordan 2026-11-16 with two changes (advanced procedures included; no hard text cap). Baseline: v5 (commit 1775938).
 
 ## 1. Intent
 
@@ -27,18 +27,19 @@ Phases 2 to 4 each get their own short design before they are built.
 
 **Goals (phase 1)**
 - From opening the app to the first instruction of any emergency protocol in 2 taps or one search.
-- About 40 emergency protocols (section 6) instead of 4 topics.
+- About 50 emergency protocols and procedures (section 6) instead of 4 topics.
 - Every protocol is guided: one step per screen, with timers, branches and tools built in.
 - Everything works with no network, in night mode, one-handed.
 - Every protocol names its published source and review date.
 
 **Non-goals (phase 1)**
 - Survival restructure, iPhone fixes, QR sharing (phase 2). Mesh features (phase 3).
-- Diagnosis, prescription dosing, or invasive procedures (needle decompression, surgical airway, nasal airways).
+- Diagnosis or prescription dosing.
 - Mass-casualty triage (START), team medical cards. Backlog.
 
 **Anti-goals (failure even if it works)**
-- A step that needs scrolling to read, or a wall of text.
+- An action that is buried: the thing to do right now must be readable at a glance, with depth available beneath it.
+- Cutting relevant information to save space. Jordan: "More is better."
 - Any feature that needs a connection after install.
 - A medical instruction that cannot be traced to a named published guideline.
 - Losing running tourniquet timers or saved data when v5 updates to v6.
@@ -79,6 +80,7 @@ and phase 2 Situations and phase 3 report-sharing reuse the same data.
 │ Heat, cold, environment ›    │
 │ Bites, stings, poison   ›    │
 │ Sudden illness          ›    │
+│ Advanced procedures     ›    │
 │ Tools                   ›    │
 │ Reports (MEDEVAC, MIST) ›    │
 └──────────────────────────────┘
@@ -107,8 +109,12 @@ Category rows expand in place to a grid of protocol buttons. No protocol is more
 └──────────────────────────────┘
 ```
 
-- One step per screen. Step text is at least 20px and must fit without scrolling on a 360×640 screen;
-  the build fails a step whose text exceeds 280 characters.
+- One step per screen. Each step has two layers:
+  - **Action**: the thing to do now, in large type (at least 20px), written as one or two short sentences.
+  - **Detail**: everything else relevant to that step (how, why, what to watch for, variations, common
+    mistakes), with no length limit. Shown directly under the action and scrolls if long.
+  Nothing is cut to fit. The build warns, but does not fail, if an action runs past about 200 characters,
+  as a prompt to move the extra into detail.
 - A step may carry: a warning, a diagram, a countdown or stopwatch, a tool (metronome, tourniquet timer,
   rate counter), or a yes/no question that branches.
 - NEXT is full width at the bottom for one-handed use. Screen stays awake while a protocol is open.
@@ -160,6 +166,11 @@ Category rows expand in place to a grid of protocol buttons. No protocol is more
 - **Sudden illness:** chest pain or heart attack; stroke; seizure; low blood sugar; asthma attack;
   opioid overdose; fainting; severe vomiting or diarrhoea.
 
+- **Advanced procedures (Jordan's decision to include):** nasal airway (NPA); needle decompression of the
+  chest; surgical airway (cricothyrotomy); hemostatic gauze wound packing; junctional bleeding; pelvic
+  binder; traction splint; tourniquet conversion; improvised wound closure; dislocation reduction where
+  wilderness guidelines describe it. See section 7 for how these are presented.
+
 Final count may move by a few if sources do not support a safe lay-responder protocol for an item.
 
 ## 7. Medical content rules
@@ -169,8 +180,16 @@ Final count may move by a few if sources do not support a safe lay-responder pro
    level only); Wilderness Medical Society clinical practice guidelines. Use the current edition at build time;
    look it up, do not write from memory.
 2. Every protocol stores its sources and a review date, shown in the "All steps" view.
-3. Lay-responder level only. Medicines appear only where those guidelines give them to lay responders
-   (aspirin for chest pain, epinephrine auto-injector, naloxone, sugar for low blood sugar).
+3. Standard protocols are written at lay-responder level. Medicines appear only where those guidelines give
+   them to lay responders (aspirin for chest pain, epinephrine auto-injector, naloxone, sugar for low blood sugar).
+3a. Advanced procedures are a separate category, written from the TCCC guidelines and skill sheets and the
+   Wilderness Medical Society guidelines, at the highest tier those sources publish. Each one:
+   - opens with **When to do this** and **When not to** before any step, taken from the source;
+   - states the equipment required and the training level the source assigns it;
+   - lists what goes wrong and how to recognise it;
+   - is reachable from the related standard protocol (open chest wound links to needle decompression) and
+     from search, behind a one-time acknowledgement that these can kill if done wrong or when not indicated.
+   No drug dosing beyond rule 3. No procedure is included that the sources do not describe.
 4. Where two sources disagree, do not pick silently: list the item for Jordan with both positions.
 5. After drafting, a second pass checks every number (depths, rates, times, temperatures) against the source.
 6. The footer stays: reference only, not a substitute for training.
@@ -197,7 +216,7 @@ Final count may move by a few if sources do not support a safe lay-responder pro
   "keywords": ["tourniquet", "hemorrhage", "blood"],
   "summary": "Stop the bleeding before anything else.",
   "steps": [
-    { "id": "s1", "text": "…", "warn": "…", "fig": "tq-placement",
+    { "id": "s1", "text": "…action…", "detail": "…unlimited…", "warn": "…", "fig": "tq-placement",
       "timer": { "seconds": 600, "label": "Hold pressure" },
       "tool": "tq",
       "ask": { "q": "Is the wound on an arm or leg?", "yes": "s3", "no": "s5" },
@@ -209,9 +228,11 @@ Final count may move by a few if sources do not support a safe lay-responder pro
 ```
 
 Only `id`, `title`, `category`, `steps[].id`, `steps[].text`, `sources` and `reviewed` are required.
+Advanced procedures add `"tier": "advanced"`, `"indications"`, `"contraindications"`, `"equipment"` and
+`"complications"`, all required for that tier.
 
 **Build-time validation (build fails on any):** duplicate ids; branch target that does not exist; step
-unreachable from the first step; step text over 280 characters; missing sources or review date; `fig` name
+unreachable from the first step; missing sources or review date; `fig` name
 not in `figs.F`; unknown `tool`.
 
 **Storage (localStorage via the existing `store`):** `pins`, `recent`, `proto.active` (protocol id, step,
@@ -242,6 +263,9 @@ text-only until verified. OpenTopoMap online-only. Edit `src/` and `figs/` only;
 
 ## 10. Known risks
 
+- **Advanced procedures performed without hands-on training can kill** (a misplaced chest needle or a failed
+  surgical airway). The app can describe them accurately; it cannot make anyone competent. Mitigation is
+  rule 3a and the footer; the residual risk is Jordan's accepted decision.
 - **Medical accuracy** is the highest-stakes part. Mitigation is section 7; residual risk is real and the
   app must not present itself as more than a reference.
 - **"Closed system" is not true today.** The app is served from a public address and public repo. No personal
@@ -259,8 +283,11 @@ internal structure of the engine.
 
 1. Protocols stored as JSON and rendered by one engine.
 2. App-wide search and back-button navigation ship in phase 1, not phase 2, because finding things fast was the first complaint.
-3. Lay-responder level only; invasive procedures excluded.
+3. ~~Lay-responder level only; invasive procedures excluded.~~ Overruled by Jordan: advanced procedures are
+   included. Claude's call within that: they sit in their own category with indications first and a one-time
+   acknowledgement.
 4. Off-grid help wording replaces "Call 911" as the automatic first step.
 5. Mass-casualty triage and team medical cards deferred.
 6. Simple positioning diagrams added for Emergency; no anatomy or wound illustrations.
-7. 280-character limit per step, enforced by the build.
+7. ~~280-character limit per step.~~ Overruled by Jordan: no cap. Claude's call within that: each step
+   splits into a short action and unlimited detail.

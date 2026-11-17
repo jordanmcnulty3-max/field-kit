@@ -2,57 +2,131 @@
   "id": "bleeding",
   "title": "Severe bleeding",
   "category": "life",
-  "draft": true,
   "keywords": [
+    "bleeding",
+    "blood",
     "tourniquet",
     "hemorrhage",
-    "blood",
+    "haemorrhage",
+    "bleed",
+    "cut",
     "wound",
-    "bleed"
+    "gunshot",
+    "stab",
+    "amputation",
+    "spurting",
+    "wound packing",
+    "stop the bleed"
   ],
-  "summary": "Stop the bleeding before anything else.",
+  "summary": "Life-threatening bleeding: press hard, then tourniquet on an arm or leg, or pack the wound in the neck, armpit or groin.",
   "steps": [
     {
       "id": "s1",
-      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty."
+      "text": "Make sure the scene is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Your own safety comes first. If you get hurt you cannot help anyone. If the situation becomes unsafe, stop, move to safety, and take the casualty with you if you can.\n\nWear gloves if you have them. If blood gets on you, wash it off afterwards and tell a health care provider you were exposed.\n\nBleeding is the number one cause of preventable death after injury, so this protocol comes before almost everything else. If someone else is free, have them make the call or go for help while you start on the bleeding."
     },
     {
       "id": "s2",
-      "text": "Find where the blood is coming from. Open or cut away clothing to see the wound."
+      "text": "Find where the blood is coming from. Open, cut or pull away clothing so you can see the wound.",
+      "detail": "Clothing can soak up and hide a large amount of blood, and there may be more than one wound. Check the arms and legs, the neck, armpits and groin, and the body front and back.\n\nSigns that bleeding is life-threatening: blood that keeps flowing steadily or spurts, a large amount of blood, blood pooling on the ground, or bleeding that will not stop when you press on it. As a rough guide, Stop the Bleed teaches that about half a can of soda (6 ounces) of blood loss, or a continuous steady flow, should be treated as serious. People are poor at judging blood volume, so if in doubt treat it as life-threatening.\n\nAlso treat it as life-threatening if the casualty becomes drowsy, dizzy, confused, or passes out."
     },
     {
       "id": "s3",
-      "text": "Is the wound on an arm or leg?",
+      "text": "Press hard, directly on the bleeding spot, with gauze or clean cloth under your hands.",
+      "detail": "Put the pad right on the place the blood is coming from, not beside it, and push down hard with both hands. Lock your arms and lean your body weight onto it. Use just enough gauze or cloth to cover the wound; a big pile spreads your pressure out.\n\nDirect pressure is the first step for bleeding anywhere on the body, and it is what you do with your hands while someone gets a tourniquet or packing ready.\n\nIf you have no gauze or cloth, press with your gloved or bare hands. Do not waste time looking for the perfect dressing.",
       "ask": {
-        "q": "Is the wound on an arm or leg?",
+        "q": "Is the bleeding life-threatening (spurting, steady flow, pooling, or not slowing with hard pressure)?",
         "yes": "s4",
-        "no": "s6"
+        "no": "s11"
       }
     },
     {
       "id": "s4",
-      "text": "Put a tourniquet 2 to 3 inches above the wound, not on a joint. Tighten until the bleeding stops, then start a timer.",
+      "text": "Decide where the wound is.",
+      "detail": "A tourniquet works only on an arm or leg, and only when it can go on above the wound, between the wound and the body.\n\nWounds in the neck, armpit, groin, or high on the thigh or shoulder where a tourniquet cannot go above the wound are called junctional wounds. They are treated by packing the wound and pressing hard.\n\nFor a wound to the chest, use this protocol to control bleeding, then the Open chest wound protocol.",
+      "ask": {
+        "q": "Is the wound on an arm or leg, with room for a tourniquet above it?",
+        "yes": "s5",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Put a tourniquet on 2 to 3 inches above the wound, not over the elbow or knee. Tighten it until the bleeding stops.",
+      "detail": "A manufactured tourniquet is the first choice for life-threatening bleeding from an arm or leg, and it should go on as soon as possible. Place the band 2 to 3 inches above the wound, between the wound and the heart. Never place it over a joint. If you cannot see exactly where the bleeding is coming from, put it high on the limb.\n\nPull the strap tight, then turn the windlass rod (or work the ratchet) until the bleeding stops. Lock the rod in place. Military guidance applies it directly on the skin; Stop the Bleed notes it can go over clothes.\n\nTourniquets hurt. That is expected and does not mean it is wrong. Keep tightening until the bleeding stops.\n\nLeave the tourniquet where everyone can see it. Do not cover it with clothing or a blanket. Write the time of application on the casualty's skin or the tourniquet. The app's tourniquet tool asks which limb, starts a timer and logs it.\n\nChildren: a manufactured windlass or ratchet tourniquet can be used on children from about 2 years old, or when the limb is about 5 inches (13 cm) around or more. For a baby or very small child where the tourniquet will not tighten, press hard directly on the wound instead (step 3), and pack large deep wounds the same way as adults.\n\nNo manufactured tourniquet: press hard on the wound (step 3) and keep pressing. Only if that fails, and only if you have been trained, consider an improvised tourniquet. Use a broad, flat band that does not stretch, at least 2 inches wide (a folded cravat or strip of clothing), twist it tight with a rigid stick or tool handle as a windlass, and tie the windlass so it cannot unwind. Improvised tourniquets fail often, so watch it closely. Do not use thin cord or wire: narrow bands cause more pain and tissue damage.",
+      "warn": "Do not loosen or remove a tourniquet to check the wound.",
       "tool": "tq",
       "log": "Tourniquet applied"
     },
     {
-      "id": "s5",
-      "text": "If bleeding continues, add a second tourniquet above the first. Do not loosen or remove a tourniquet; leave that to medical staff.",
-      "end": true
-    },
-    {
       "id": "s6",
-      "text": "Neck, shoulder or groin: pack the wound tightly with gauze or clean cloth, then press hard with both hands."
+      "text": "Still bleeding? Tighten more. If it still bleeds, put a second tourniquet on side by side with the first.",
+      "detail": "A second tourniquet is needed when the first does not stop the bleeding, when bleeding starts again, or on a large or very muscular limb. Place it side by side with the first and tighten it until the bleeding stops. Log it with the tourniquet tool as well."
     },
     {
       "id": "s7",
-      "text": "No gauze or cloth: press firmly and steadily on the wound with both hands and do not let up.",
+      "text": "Leave tourniquets on. Keep the casualty warm and watch for shock. Get them to medical care.",
+      "detail": "Do not remove the tourniquet. Taking a tourniquet off or converting it to a dressing is an advanced procedure: see Advanced procedures (tourniquet conversion). Without someone trained to do that, leave it on and keep monitoring until the casualty reaches medical care.\n\nBlood loss causes shock. Keep the casualty lying down, protect them from the cold ground and wind, and follow the Shock protocol.\n\nKeep checking the wound below the tourniquet for new bleeding, and keep checking the rest of the body for wounds you missed.",
+      "end": true
+    },
+    {
+      "id": "s8",
+      "text": "Neck, armpit or groin: pack the wound. Push gauze or clean cloth deep into it until it is full.",
+      "detail": "For a large or deep wound, pressing on the surface does not reach the bleeding. Packing puts the pressure where the blood is coming from.\n\nHow: find the bleeding spot inside the wound. Push the end of the gauze in with one or two fingers, right onto that spot. Keep feeding gauze in, pressing it down as you go, until the wound is packed tightly and no more will go in. If you run out of gauze, use clean cloth (a T-shirt, bandanna).\n\nThis works for deep wounds of the neck, armpits and groin, and for deep arm and leg wounds where a tourniquet is not available. It can be done on children the same way as adults.\n\nHemostatic (clotting) gauze is packed the same way and helps stop bleeding; see Advanced procedures (hemostatic gauze). Plain gauze or cloth packed tightly with hard pressure still works.\n\nChest wound: control the bleeding with pressure, then use the Open chest wound protocol for how to cover it.",
+      "log": "Wound packed"
+    },
+    {
+      "id": "s9",
+      "text": "Press hard on the packed wound with both hands and do not let up until help takes over.",
+      "detail": "Put both hands on top of the packing and push down with your body weight. Keep pressing. Stop the Bleed teaches holding pressure until help arrives.\n\nIf blood soaks through, do not pull the packing out. Press harder on the same spot, or pack more on top and press. Piling on more gauze is not a substitute for pressure.\n\nIf another person can take over, swap without releasing pressure: their hands go on as yours come off."
+    },
+    {
+      "id": "s10",
+      "text": "Once the bleeding has stopped, wrap a pressure bandage firmly over the packing. Keep watching it and treat for shock.",
+      "detail": "A pressure dressing (an elastic trauma bandage wrapped firmly) can hold the packing in and keep the bleeding stopped, which frees your hands. If bleeding starts again through the bandage, press directly on the wound again with your hands until it stops.\n\nPressure bandages or devices may be used when holding manual pressure is not possible, for example when you have to move the casualty or treat someone else.\n\nFollow the Shock protocol: keep the casualty lying down and warm, and get them to medical care.",
+      "end": true
+    },
+    {
+      "id": "s11",
+      "text": "Keep pressing until the bleeding stops, then wrap a firm bandage over the dressing.",
+      "detail": "Most bleeding that is not life-threatening stops with steady direct pressure on the wound.\n\nOnce it has stopped, a pressure dressing can keep it stopped while you move. If bleeding comes back through the dressing, press directly on the wound again until it stops; do not just add more layers.\n\nIf at any point the bleeding becomes heavy, spurts, or will not stop with pressure, go back and treat it as life-threatening.",
       "end": true
     }
   ],
+  "donts": [
+    "Do not loosen or remove a tourniquet to look at the wound. Removal and conversion are advanced procedures.",
+    "Do not cover a tourniquet with clothing or blankets; it must stay visible.",
+    "Do not put a tourniquet over the elbow or knee.",
+    "Do not use pressure points (pressing on an artery away from the wound) instead of pressing on the wound.",
+    "Do not rely on raising the limb or on ice to stop bleeding; there is no evidence they work.",
+    "Do not pull out packing or a soaked dressing; press harder or add more on top.",
+    "Do not make an improvised tourniquet from thin cord or wire; use a flat band at least 2 inches wide."
+  ],
+  "evacuate": [
+    "Evacuate urgently anyone who needed a tourniquet or wound packing.",
+    "Evacuate urgently anyone with life-threatening bleeding, even if it is now controlled.",
+    "Evacuate urgently if there are signs of shock: confusion, pale cool skin, fast weak pulse, fast breathing."
+  ],
   "sources": [
     {
-      "name": "Stop the Bleed (American College of Surgeons)"
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.1 Bleeding control (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross Scientific Advisory Council, First Aid Guidelines database: Wounds and Bleeding (direct pressure, tourniquets, improvised and pediatric tourniquets, sequence of interventions), 2025 updates",
+      "year": 2025,
+      "url": "https://firstaidguide.wpenginepowered.com/first-aid/bleeding-and-wounds/"
+    },
+    {
+      "name": "American College of Surgeons, STOP THE BLEED course, lay public presentation, version 2",
+      "year": 2019,
+      "url": "https://www.stopthebleed.org/media/omalhrif/lay-public-stop-the-bleed-presentation-pdf.pdf"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Massive hemorrhage and tourniquet reassessment",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
     }
   ],
   "reviewed": "2026-11-16"

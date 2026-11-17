@@ -1,0 +1,107 @@
+{
+  "id": "cpr-child",
+  "title": "CPR, child",
+  "category": "life",
+  "keywords": [
+    "child cpr",
+    "kid",
+    "not breathing",
+    "cardiac arrest",
+    "unresponsive",
+    "collapsed",
+    "toddler",
+    "aed",
+    "compressions",
+    "drowning",
+    "cpr"
+  ],
+  "summary": "Child from about 1 year old until puberty who is unresponsive and not breathing normally: compressions and breaths, and an AED.",
+  "coach": {
+    "compressions": 30,
+    "breaths": 2
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check the scene is safe. Tap and shout. Look at the chest: is the child breathing normally?",
+      "detail": "Child CPR is for children from about 1 year old until puberty (breast development in girls, underarm hair in boys). After puberty use CPR, adult. Under about 1 year use CPR, infant.\n\nGasping is not normal breathing. If the child is unresponsive and not breathing normally, with no signs of life, start CPR. A lay rescuer does not check for a pulse.\n\nIn children the heart usually stops because of a breathing problem (choking, drowning, illness) rather than a heart problem. That is why breaths matter so much in child CPR.",
+      "ask": {
+        "q": "Unresponsive and not breathing normally (or only gasping)?",
+        "yes": "s2",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Send someone for an AED.",
+      "detail": "If you have a phone with signal, call on speaker and start CPR at the same time. If others are present, send one for help and one for an AED.\n\nIf you are alone and there is no signal, start CPR straight away and shout for help as you work."
+    },
+    {
+      "id": "s3",
+      "text": "Lay the child on their back on a firm, flat surface. Kneel beside them.",
+      "detail": "A firm surface such as the floor or ground is best. If you find the child face down, roll them onto their back. Bare the chest if it is quick to do."
+    },
+    {
+      "id": "s4",
+      "text": "Push hard and fast on the lower half of the breastbone: about 2 inches deep (one third of the chest), 100 to 120 a minute.",
+      "detail": "Hand position: heel of one hand on the lower half of the breastbone in the centre of the chest, avoiding the very bottom tip of the breastbone. For a larger child put your other hand on top with the fingers interlaced and off the chest. For a small child one hand is enough. Either one or two hands is acceptable; use whatever gets you to the right depth.\n\nDepth: at least one third of the depth of the chest, about 2 inches (5 cm).\n\nRate: 100 to 120 a minute. The CPR coach clicks the beat.\n\nLet the chest come all the way back up after each push. Keep pauses under 10 seconds.\n\nKeep your shoulders over your hands and your arms straight.",
+      "tool": "cpr",
+      "log": "CPR started"
+    },
+    {
+      "id": "s5",
+      "text": "After every 30 pushes, give 2 breaths. Tilt the head, lift the chin, and blow for about 1 second until the chest rises.",
+      "detail": "Breaths improve survival in children, so give them if you are able and willing. If you truly cannot or will not give breaths, compression-only CPR is still far better than nothing.\n\nOpen the airway: tilt the head back slightly past the neutral position and lift the chin. If you suspect a neck injury, a jaw thrust can be used if you have been taught it; if that does not open the airway, use the head tilt and chin lift anyway.\n\nPinch the nose, seal your mouth over the child's mouth, and blow for about 1 second, just enough to make the chest rise. Let the air out before the second breath. Avoid big, forceful breaths.\n\nIf the first breath does not make the chest rise, re-tilt the head and check your seal before the second breath. If the second breath still does not go in, something may be blocking the airway: go straight back to compressions, and each time you open the airway look in the mouth and remove any object you can see. Never do blind finger sweeps.\n\nTwo rescuers: the ratio changes to 15 compressions to 2 breaths. The coach uses the single-rescuer ratio of 30:2.\n\nDrowning: give CPR with breaths. A trained rescuer may start with breaths before compressions."
+    },
+    {
+      "id": "s6",
+      "text": "When the AED arrives, turn it on and follow its prompts. Use child pads if it has them.",
+      "detail": "For children under 8, use child (pediatric) pads or the AED's child setting if it has one. If there are no child pads, use the adult pads; an AED without a child setting may still be used.\n\nUse the largest pads that fit on the chest without touching each other. If they would touch, put one in the middle of the chest and the other on the back between the shoulder blades.\n\nMake sure nobody touches the child when the AED analyses or shocks. After a shock, or if no shock is advised, start compressions again immediately.\n\nAfter drowning, start CPR with breaths before putting the AED on.",
+      "log": "AED applied"
+    },
+    {
+      "id": "s7",
+      "text": "Keep going. Swap the person doing compressions about every 2 minutes if anyone can help.",
+      "detail": "Keep going until:\n- the child shows an obvious sign of life, such as breathing normally or moving;\n- an AED is ready to use;\n- another trained person takes over;\n- medical help arrives and takes over;\n- you are alone and too exhausted to continue;\n- the scene becomes unsafe."
+    },
+    {
+      "id": "s8",
+      "text": "If the child starts breathing normally, roll them onto their side (recovery position) and keep watching their breathing.",
+      "detail": "Use the Recovery position protocol and stay with the child. If breathing becomes abnormal or stops, roll them onto their back and restart CPR.",
+      "end": true
+    },
+    {
+      "id": "s9",
+      "text": "The child is breathing normally. Do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "If the child is unresponsive but breathing normally and there is no reason to suspect a neck, back, hip or pelvis injury, use the Recovery position protocol.\n\nIf the child is breathing but very poorly (very slow, struggling), a trained rescuer gives breaths at about 1 breath every 2 to 3 seconds.\n\nWatch the breathing continuously. If it stops or becomes only gasping, come back to this protocol and start CPR.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not skip breaths if you are able to give them; most child arrests start with a breathing problem.",
+    "Do not do blind finger sweeps in the mouth; remove only an object you can see.",
+    "Do not give big, forceful breaths; just enough to make the chest rise.",
+    "Do not touch the child while the AED analyses or shocks."
+  ],
+  "evacuate": [
+    "Any child who needed CPR must get to hospital urgently, even if they recover."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Academy of Pediatrics, Part 6: Pediatric Basic Life Support, 2025 Guidelines for CPR and ECC (Circulation 2025;152(suppl 2):S424-S447)",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/pediatric-basic-life-support"
+    },
+    {
+      "name": "American Heart Association, Part 10: Adult and Pediatric Special Circumstances of Resuscitation (drowning), 2025 AHA Guidelines for CPR and ECC",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation"
+    },
+    {
+      "name": "American Red Cross, How to perform child and baby CPR; AED steps (lay pages)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/cpr/performing-cpr/child-baby-cpr"
+    }
+  ],
+  "reviewed": "2026-11-16"
+}

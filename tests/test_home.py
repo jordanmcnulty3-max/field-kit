@@ -30,8 +30,8 @@ IDS = [p['id'] for p in FIXTURES]
 
 
 def boot(page, app_url, fixtures=FIXTURES, storage=None, hash_='#/emergency'):
-    """Load the app on the Emergency tab with fixtures and optional pre-seeded storage."""
-    inject_protocols(page, fixtures)
+    """Load the app on the Emergency tab with only the fixtures (no shipped protocols) and optional pre-seeded storage."""
+    inject_protocols(page, fixtures, only=True)
     seed = {'advAck': True, **(storage or {})}
     page.add_init_script(
         "if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1');"

@@ -1,0 +1,152 @@
+{
+  "id": "choking",
+  "title": "Choking, adult and child",
+  "category": "life",
+  "keywords": [
+    "choking",
+    "heimlich",
+    "cant breathe",
+    "food stuck",
+    "airway blocked",
+    "back blows",
+    "abdominal thrusts",
+    "something stuck in throat",
+    "choke"
+  ],
+  "summary": "Adult or child over 1 year who cannot cough, speak or breathe: 5 back blows, then 5 abdominal thrusts, repeated.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Is the person a baby under 1 year old?",
+      "detail": "Babies under about 1 year are treated differently: back blows and chest thrusts, never abdominal thrusts. Use the Choking, infant protocol.\n\nThis protocol is for adults and for children from about 1 year old.",
+      "ask": {
+        "q": "Is it a baby under 1 year old?",
+        "yes": "s2",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Use the Choking, infant protocol.",
+      "detail": "Go back to the Emergency screen or search for Choking, infant. Abdominal thrusts are not used on babies because they can injure the organs in the belly.",
+      "end": true
+    },
+    {
+      "id": "s3",
+      "text": "Ask: \"Are you choking?\" Can they cough forcefully, speak, or cry?",
+      "detail": "Signs of a severe blockage: a weak cough or no cough, not able to cough, cry or speak, or a panicked, confused or surprised look.\n\nIf they can cough, cry or speak, air is still moving. Encourage them to keep coughing and watch them closely instead of hitting or squeezing.",
+      "ask": {
+        "q": "Can they cough forcefully, speak or cry?",
+        "yes": "s4",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Encourage them to keep coughing. Stay with them and watch closely.",
+      "detail": "Do not slap their back or do thrusts while they can cough strongly.\n\nWatch for the cough becoming weak or silent, breathing getting harder, or the person no longer able to speak. If that happens, start back blows and thrusts.",
+      "ask": {
+        "q": "Has the cough become weak or silent, or can they no longer speak or breathe?",
+        "yes": "s5",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Start helping right away.",
+      "detail": "Severe choking can quickly lead to the heart stopping, so act immediately. Send someone else to get help; do not leave the person to do it yourself.\n\nIf you are alone and choking yourself: do abdominal thrusts on yourself with your fist, or lean over the back of a chair or the edge of a table and press your upper belly hard inward and upward against it."
+    },
+    {
+      "id": "s6",
+      "text": "Give 5 firm back blows: stand to the side and slightly behind, lean them forward, and strike between the shoulder blades with the heel of your hand.",
+      "detail": "Stand to the side and slightly behind them, with them leaning forward. Support their chest with one hand.\n\nStrike firmly between the shoulder blades with the heel of your other hand, up to 5 times.\n\nFor a small child, kneel behind them rather than stand.\n\nThe current guideline (AHA 2025) starts with back blows: in a study of 709 choking cases, back blows were linked with clearing the blockage more often and with fewer injuries than abdominal thrusts. Earlier editions started with abdominal thrusts.",
+      "ask": {
+        "q": "Can you reach around their belly, and are they not in late pregnancy?",
+        "yes": "s7",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Give 5 abdominal thrusts: from behind, fist just above the belly button, other hand over it, pull sharply in and up.",
+      "detail": "Stand behind them and wrap your arms around their waist. For a child, kneel behind them.\n\nMake a fist. Put the thumb side of the fist against the belly just above the belly button, well below the bottom tip of the breastbone. Grab the fist with your other hand.\n\nPull sharply inward and upward. Make each thrust forceful and separate from the last. Give up to 5.\n\nThis is the Heimlich maneuver.",
+      "ask": {
+        "q": "Is the object out, or are they coughing, speaking or breathing again?",
+        "yes": "s11",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s8",
+      "text": "Give 5 chest thrusts instead: from behind, fist on the lower half of the breastbone, other hand over it, pull straight back.",
+      "detail": "Use chest thrusts instead of abdominal thrusts if you cannot get your arms around their belly, if they are in late pregnancy, or if they are in a wheelchair.\n\nStand behind them. Place the thumb side of your fist on the lower half of the breastbone, grab it with your other hand, and pull straight back sharply. Give up to 5, each forceful and separate.",
+      "ask": {
+        "q": "Is the object out, or are they coughing, speaking or breathing again?",
+        "yes": "s11",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Not cleared? Keep repeating 5 back blows and 5 thrusts until it comes out or they collapse.",
+      "detail": "Keep going in cycles: 5 back blows, then 5 abdominal (or chest) thrusts, until the object comes out and they can cough, speak or breathe, or until they become unresponsive.",
+      "ask": {
+        "q": "Are they still awake (responsive)?",
+        "yes": "s6",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "They collapsed: lower them to the ground on their back and start CPR, beginning with chest compressions.",
+      "detail": "Ease them down to a firm, flat surface so they do not hit their head. Start CPR straight away with compressions (use CPR, adult or CPR, child). Do not check for a pulse first.\n\nEach time you open the airway to give breaths, look in the mouth. If you can see the object, take it out. Never sweep a finger blindly in the mouth; that can push the object further in.\n\nIf help has not been called yet, do it now: call 911 if you have signal; if not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s11",
+      "text": "Cleared. Stay with them, let them rest, and watch their breathing.",
+      "detail": "Keep watching their breathing and how alert they are. If breathing gets worse again, start this protocol again.\n\nThrusts can cause injuries. Anyone who needed thrusts, or who still has trouble breathing or pain after the object came out, should be checked by a medical professional.",
+      "end": true
+    },
+    {
+      "id": "s12",
+      "text": "Keep encouraging coughing and stay with them until they breathe easily.",
+      "detail": "If at any point the cough becomes weak or silent, or they cannot speak or breathe, start this protocol again and go straight to back blows.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not hit the back or do thrusts on someone who can cough strongly.",
+    "Do not do abdominal thrusts on a baby under 1 year; use the Choking, infant protocol.",
+    "Do not do abdominal thrusts on someone in late pregnancy or whom you cannot reach around; use chest thrusts.",
+    "Do not do blind finger sweeps in the mouth; only remove an object you can see.",
+    "Do not leave a choking person alone to go for help."
+  ],
+  "evacuate": [
+    "Evacuate urgently anyone who lost consciousness or needed CPR.",
+    "Get medical evaluation for anyone who needed abdominal or chest thrusts, or who has ongoing cough, pain or trouble breathing."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association, Part 7: Adult Basic Life Support, 2025 AHA Guidelines for CPR and ECC, Foreign-body airway obstruction (Circulation 2025;152(suppl 2):S448-S478)",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-basic-life-support"
+    },
+    {
+      "name": "American Heart Association and American Academy of Pediatrics, Part 6: Pediatric Basic Life Support, 2025 Guidelines for CPR and ECC, Foreign-body airway obstruction",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/pediatric-basic-life-support"
+    },
+    {
+      "name": "American Heart Association, Highlights of the 2025 AHA Guidelines for CPR and ECC (choking changes)",
+      "year": 2025,
+      "url": "https://cpr.heart.org/-/media/CPR-Files/2025-documents-for-cpr-heart-edits-posting/Resuscitation-Science/252500_Hghlghts_2025ECCGuidelines.pdf?sc_lang=en"
+    },
+    {
+      "name": "American Red Cross, Adult and child choking (lay page)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/adult-child-choking"
+    }
+  ],
+  "reviewed": "2026-11-16"
+}

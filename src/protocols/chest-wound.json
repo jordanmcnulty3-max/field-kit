@@ -1,0 +1,105 @@
+{
+  "id": "chest-wound",
+  "title": "Open chest wound",
+  "category": "life",
+  "keywords": [
+    "chest wound",
+    "sucking chest wound",
+    "stab chest",
+    "gunshot chest",
+    "chest seal",
+    "punctured lung",
+    "pneumothorax",
+    "hole in chest",
+    "shot"
+  ],
+  "summary": "Wound through the chest wall (sucking chest wound): get help, control bleeding, leave it open or loosely covered, and watch breathing.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "An open chest wound (also called a sucking chest wound) goes through the chest wall into the space around the lung. It usually comes from a gunshot, stab or shrapnel. Air can be drawn in through the hole when they breathe in and pushed out when they breathe out, which stops the lung working properly.\n\nIt is a medical emergency: get help coming straight away."
+    },
+    {
+      "id": "s2",
+      "text": "Expose the chest and back. Look for every wound, including the back and armpits.",
+      "detail": "Clothing can hide wounds and there may be more than one, for example an entry and an exit wound. Check front, back and sides."
+    },
+    {
+      "id": "s3",
+      "text": "Control heavy bleeding with firm pressure using gauze or clean cloth, without sealing the hole airtight.",
+      "detail": "Life-threatening bleeding comes first: use the Severe bleeding protocol for how to press and pack.\n\nWhen you use a dressing over an active bleed on the chest, take care that it does not end up blocking the hole partly or completely and trapping air."
+    },
+    {
+      "id": "s4",
+      "text": "Do you have a vented chest seal and have you been trained to use it?",
+      "detail": "Current first aid guidance (AHA and Red Cross 2024) says it is reasonable to leave an open chest wound open to the air, or to cover it with a clean, dry dressing that does not seal (for example gauze or a piece of T-shirt). A trained rescuer may use a vented chest seal, especially for a large hole or when the casualty is struggling to breathe. Routine chest seals by untrained lay rescuers are not recommended.\n\nAny dressing or seal over a hole in the chest can trap air and cause a tension pneumothorax, a life-threatening build-up of air that squashes the lungs and heart. A vented seal has a one-way valve to let air out.\n\nMilitary guidance (TCCC 2026) differs: apply a vented chest seal to every open or sucking chest wound immediately, and if no vented seal is available use an unvented one, then watch closely and burp or remove it if breathing worsens. This app follows the civilian first aid guidance for lay rescuers.",
+      "ask": {
+        "q": "Vented chest seal available and you are trained to use it?",
+        "yes": "s5",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Wipe the skin dry around the wound and apply the vented chest seal over the hole. Then watch their breathing closely.",
+      "detail": "Wipe away blood and moisture so the seal sticks, then apply it over the hole as the instructions on the package show. Treat every open chest wound you found, including on the back.\n\nNote the time.",
+      "log": "Vented chest seal applied",
+      "ask": {
+        "q": "Is their breathing getting worse?",
+        "yes": "s7",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Leave the wound open to the air, or cover it loosely with a clean, dry dressing that does not seal.",
+      "detail": "Use gauze or clean cloth (a piece of T-shirt) laid over the wound. Do not tape it down on all sides and do not use plastic or anything airtight.\n\nThe aim is to keep the wound clean and control bleeding while letting trapped air escape. Small stab and handgun wounds often do not affect breathing much.\n\nNote the time.",
+      "log": "Chest wound left open or loosely dressed",
+      "ask": {
+        "q": "Is their breathing getting worse?",
+        "yes": "s7",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Breathing worse after a dressing or seal: loosen or lift it off the wound (burp it) to let trapped air out.",
+      "detail": "Increasing difficulty breathing, very fast breathing, or signs of shock after a dressing or seal goes on can mean air is trapped inside the chest (tension pneumothorax). Lift one edge of the seal or dressing, or remove it, to let air escape. If breathing improves, keep watching and repeat if it worsens again.\n\nIf breathing keeps getting worse with the wound open, the casualty needs needle decompression, which is an advanced procedure: see Advanced procedures (needle decompression). Do not attempt it unless trained.",
+      "log": "Chest dressing loosened or removed"
+    },
+    {
+      "id": "s8",
+      "text": "Let them sit up or take the position that helps their breathing. Keep watching breathing and treat for shock.",
+      "detail": "A person who is awake and struggling to breathe should be allowed to sit up or take whatever position is most comfortable for breathing.\n\nKeep checking breathing all the time. Signs of trouble: breathing gets harder or faster, they become anxious, confused or drowsy, or show signs of shock. If breathing worsens and there is a dressing or seal on, go back and loosen it.\n\nKeep them warm and follow the Shock protocol. If they become unresponsive and are not breathing normally, start CPR.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not seal the wound airtight with plastic or tape unless you are trained and have a vented chest seal.",
+    "Do not leave a dressing or seal on if breathing is getting worse; loosen or remove it.",
+    "Do not attempt needle decompression unless trained (see Advanced procedures)."
+  ],
+  "evacuate": [
+    "Evacuate every open chest wound urgently.",
+    "Most urgent: worsening breathing, signs of shock, or more than one wound."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.2 Open chest wounds (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross Scientific Advisory Council, First Aid Guidelines database: Open chest wounds (last full review 2023)",
+      "year": 2025,
+      "url": "https://firstaidguide.wpenginepowered.com/first-aid/bleeding-and-wounds/"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Respiration/Breathing (chest seals, tension pneumothorax)",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    }
+  ],
+  "reviewed": "2026-11-16"
+}

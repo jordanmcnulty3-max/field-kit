@@ -1,0 +1,110 @@
+{
+  "id": "shock",
+  "title": "Shock",
+  "category": "life",
+  "keywords": [
+    "shock",
+    "pale",
+    "clammy",
+    "cold sweat",
+    "weak pulse",
+    "blood loss",
+    "faint",
+    "confused",
+    "thirsty",
+    "collapse"
+  ],
+  "summary": "Circulation failing after serious injury, blood loss or illness: treat the cause, lie them down, keep them warm, give nothing by mouth.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Look for signs of shock: fast weak pulse, fast breathing, pale or grey cool clammy skin, confusion or restlessness.",
+      "detail": "Shock means the circulation is not getting enough oxygen-rich blood to the organs. Organs start to fail and it gets worse over time. Common causes are severe bleeding and severe allergic reactions, but shock can follow any serious injury or illness.\n\nSigns:\n- rapid, weak heartbeat;\n- rapid breathing;\n- pale, grey, cool or moist skin;\n- confused, restless or irritable, or unresponsive;\n- nausea or vomiting;\n- excessive thirst.\n\nA person showing signs of shock needs immediate medical attention.\n\nThe military check for blood-loss shock: confusion without a head injury, and a weak or absent pulse at the wrist."
+    },
+    {
+      "id": "s2",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "A person in shock needs medical care urgently. First aid can slow shock down but cannot fix it."
+    },
+    {
+      "id": "s3",
+      "text": "Treat the cause if you can: stop bleeding first; give epinephrine for a severe allergic reaction.",
+      "detail": "Severe bleeding: use the Severe bleeding protocol (pressure, tourniquet, packing).\n\nSevere allergic reaction: use the Anaphylaxis protocol.\n\nIf they are unresponsive and not breathing normally, start CPR instead."
+    },
+    {
+      "id": "s4",
+      "text": "Are they alert, not vomiting, and can someone watch them all the time?",
+      "detail": "The best position depends on whether they can protect their own airway and whether someone can watch them continuously.",
+      "ask": {
+        "q": "Alert, not vomiting, and can be watched continuously?",
+        "yes": "s5",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Lay them flat on their back.",
+      "detail": "Lying flat on the back is the recommended position for someone in shock who is alert.\n\nIf they are struggling to breathe and want to sit up, let them take the position that is most comfortable for their breathing.\n\nInsulate them from the ground if it is cold or wet.",
+      "ask": {
+        "q": "Is there any injury (fall, crash, blow, wound)?",
+        "yes": "s7",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "No injury: you may raise their feet about 6 to 12 inches, unless they are more comfortable flat.",
+      "detail": "Raising the legs about 6 to 12 inches (an angle of roughly 30 to 45 degrees) may help briefly when there is no injury. The benefit lasts only a few minutes and is uncertain, so it is optional. Do not do it if it causes pain or makes breathing harder.\n\nDo not raise the legs if there is any injury."
+    },
+    {
+      "id": "s7",
+      "text": "Keep their body temperature normal: cover them if cold, remove a layer if hot.",
+      "detail": "Put a blanket or jacket over them and something between them and the cold ground. Keep wind and rain off them. If they are overheated, loosen or remove a layer.\n\nMilitary trauma guidance (TCCC) is to take early steps to prevent heat loss in every injured casualty: insulate from the ground, replace wet clothing with dry if possible, and shield from wind and rain."
+    },
+    {
+      "id": "s8",
+      "text": "Give nothing to eat or drink. Reassure them and keep watching breathing and alertness.",
+      "detail": "Food or drink raises the risk of vomiting and breathing it into the lungs, even if they are very thirsty.\n\nAnxiety and pain make shock worse. Stay calm, talk to them, tell them help is coming.\n\nKeep checking how alert they are and how they are breathing. If they become drowsy or start to vomit, roll them onto their side (recovery position). If they stop breathing normally, start CPR.",
+      "end": true
+    },
+    {
+      "id": "s9",
+      "text": "Roll them onto their side (recovery position). Keep them warm, give nothing to eat or drink, and watch their breathing.",
+      "detail": "Someone in shock who is drowsy, vomiting, or who cannot be watched all the time is at risk of a blocked airway. The recovery position helps keep the airway clear and lets vomit drain. See the Recovery position protocol.\n\nIf there could be a neck, back, hip or pelvis injury, leave them as found unless you must move them; see the Recovery position protocol.\n\nCover them to stop heat loss and insulate them from the ground. Give nothing by mouth. Reassure them.\n\nIf they stop breathing normally, roll them onto their back and start CPR.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not give food or drink.",
+    "Do not raise the legs if there is any injury.",
+    "Do not let them get cold.",
+    "Do not leave them alone."
+  ],
+  "evacuate": [
+    "Evacuate urgently: shock is life-threatening and needs hospital treatment.",
+    "Most urgent: confusion or unresponsiveness, a weak or absent wrist pulse, or ongoing bleeding."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 5.2 Position for shock (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross Scientific Advisory Council, First Aid Guidelines database: Positioning, Position for shock (last update 2024)",
+      "year": 2025,
+      "url": "https://firstaidguide.wpenginepowered.com/first-aid/positioning/"
+    },
+    {
+      "name": "American Red Cross, Shock (lay page)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/shock"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026 (hemorrhagic shock assessment, hypothermia prevention)",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    }
+  ],
+  "reviewed": "2026-11-16"
+}

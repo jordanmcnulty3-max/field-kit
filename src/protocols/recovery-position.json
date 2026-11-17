@@ -1,0 +1,108 @@
+{
+  "id": "recovery-position",
+  "title": "Recovery position",
+  "category": "life",
+  "keywords": [
+    "recovery position",
+    "unconscious",
+    "passed out",
+    "fainted",
+    "unresponsive",
+    "breathing",
+    "side",
+    "vomiting",
+    "drunk",
+    "seizure"
+  ],
+  "summary": "Someone who is not fully awake but is breathing normally: roll them onto their side to keep the airway clear, and watch their breathing.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check: do they respond to your voice or a tap? Are they breathing normally?",
+      "detail": "The recovery position is for a person with reduced responsiveness (drowsy, confused or unresponsive) who is breathing normally. Lying on the side helps keep the airway open and lets vomit, blood or saliva drain out of the mouth instead of into the lungs.\n\nGasping or occasional breaths are not normal breathing.",
+      "ask": {
+        "q": "Are they breathing normally?",
+        "yes": "s3",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Not breathing normally: roll them onto their back and start CPR now.",
+      "detail": "Anyone who needs CPR or rescue breathing must lie on their back. Use CPR, adult, CPR, child or CPR, infant.\n\nIf you found them face down, or folded forward at the neck or waist, roll them onto their back first so you can check them properly.",
+      "end": true
+    },
+    {
+      "id": "s3",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Stay with the person. Someone with reduced responsiveness can lose their airway or stop breathing without warning."
+    },
+    {
+      "id": "s4",
+      "text": "Could they have a neck, back, hip or pelvis injury (fall, crash, blow to the head, diving)?",
+      "detail": "Think about how they got this way. A fall, vehicle crash, hit to the head or body, or a diving or wave injury can injure the spine.\n\nIf there is no injury, for example they fainted, had a seizure, are very ill or drank or took too much, the recovery position is appropriate.",
+      "ask": {
+        "q": "Could they have a neck, back, hip or pelvis injury?",
+        "yes": "s5",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Possible spine injury: leave them in the position you found them. Keep them still and watch their breathing.",
+      "detail": "Do not roll them or move the head and neck unless you must: to get them away from danger, to start CPR, or to control serious bleeding.\n\nIf they are awake, ask them to keep as still as possible.\n\nDo not put a neck collar on, move the neck, or strap the head down unless you are trained to; untrained use can cause harm.\n\nWatch the breathing continuously. If they stop breathing normally, roll them onto their back and start CPR.",
+      "end": true
+    },
+    {
+      "id": "s6",
+      "text": "Roll them onto their side: one arm up with the head resting on it, the other hand against the cheek, one or both knees bent to steady them.",
+      "detail": "Kneel beside them. Place one of their arms up so their head can rest on it. Roll them onto their side, facing out, so vomit, blood or saliva can run out of the mouth. Place their other hand against their face, like sleeping on a pillow. Bend one or both knees to stop them rolling.\n\nThe left side is preferred where possible, and lying on the left side improves blood flow for someone in late pregnancy.",
+      "log": "Placed in recovery position"
+    },
+    {
+      "id": "s7",
+      "text": "Watch their breathing all the time. If it stops or becomes gasping, roll them onto their back and start CPR.",
+      "detail": "Keep watching for:\n- noisy or blocked breathing;\n- breathing that becomes gasping or stops;\n- becoming less responsive.\n\nIf the side position makes it hard to see whether they are breathing, roll them onto their back straight away and check again.",
+      "warn": "If breathing stops or becomes gasping, start CPR at once."
+    },
+    {
+      "id": "s8",
+      "text": "Stay with them until help takes over or they are fully awake.",
+      "detail": "Do not leave a person who may be seriously ill or injured. Reassure them as they come round, and keep watching.\n\nIf they wake up and are struggling to breathe, let them sit up or take whatever position is most comfortable for their breathing.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not use the recovery position for someone who is not breathing normally; they need CPR on their back.",
+    "Do not roll someone with a possible neck, back, hip or pelvis injury unless you must for safety, CPR or bleeding control.",
+    "Do not put on a neck collar or tie down the head unless trained.",
+    "Do not leave the person alone."
+  ],
+  "evacuate": [
+    "Evacuate anyone who was unresponsive for an unknown or non-obvious reason.",
+    "Evacuate urgently anyone whose breathing becomes abnormal, or who has a possible spine injury."
+  ],
+  "sources": [
+    {
+      "name": "American Red Cross Scientific Advisory Council, First Aid Guidelines database: Positioning the ill or injured person (last full review 2024)",
+      "year": 2025,
+      "url": "https://firstaidguide.wpenginepowered.com/first-aid/positioning/"
+    },
+    {
+      "name": "American Red Cross Scientific Advisory Council, First Aid Guidelines database: Spinal injury (last full review ILCOR 2025)",
+      "year": 2025,
+      "url": "https://firstaidguide.wpenginepowered.com/first-aid/head-and-spine-injury/"
+    },
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 5.1 Positioning",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, First aid for someone unresponsive and breathing (lay page)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/unresponsive-and-breathing-person"
+    }
+  ],
+  "reviewed": "2026-11-16"
+}

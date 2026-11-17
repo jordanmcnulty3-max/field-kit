@@ -1,0 +1,111 @@
+{
+  "id": "cpr-infant",
+  "title": "CPR, infant",
+  "category": "life",
+  "keywords": [
+    "baby cpr",
+    "infant",
+    "newborn",
+    "not breathing",
+    "unresponsive",
+    "limp baby",
+    "baby",
+    "aed",
+    "compressions",
+    "cpr"
+  ],
+  "summary": "Baby under about 1 year who is unresponsive and not breathing normally: two-thumb or one-hand compressions with breaths.",
+  "coach": {
+    "compressions": 30,
+    "breaths": 2
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check the scene is safe. Tap the baby and shout. Look at the chest: is the baby breathing normally?",
+      "detail": "Infant CPR is for babies younger than about 1 year. (Care of a newborn at birth is different and is not covered here.) From about 1 year use CPR, child.\n\nGasping is not normal breathing. If the baby is unresponsive and not breathing normally, with no signs of life, start CPR. A lay rescuer does not check for a pulse.\n\nIn babies the heart usually stops because of a breathing problem, so breaths are an essential part of infant CPR.",
+      "ask": {
+        "q": "Unresponsive and not breathing normally (or only gasping)?",
+        "yes": "s2",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "If you have a phone with signal, call on speaker and start CPR at the same time. If someone else is there, send them for help and an AED while you start CPR.\n\nIf you are alone and need to leave to get help, first give about 2 minutes of CPR (about 5 rounds of 30 compressions and 2 breaths)."
+    },
+    {
+      "id": "s3",
+      "text": "Lay the baby on their back on a firm, flat surface. Stand or kneel at the baby's side.",
+      "detail": "A table, the floor or firm ground. A soft bed or mattress absorbs your pushes. Bare the chest if it is quick to do."
+    },
+    {
+      "id": "s4",
+      "text": "Push on the centre of the chest just below the nipple line, with two thumbs or the heel of one hand: about 1.5 inches deep, 100 to 120 a minute.",
+      "detail": "Two-thumb method: put both thumbs side by side on the centre of the chest, on the lower half of the breastbone just below the nipple line. Wrap your fingers around the baby's chest toward the back to support it. Push down with both thumbs together.\n\nOne-hand method: if you cannot wrap your hands around the chest, or cannot reach the depth with your thumbs, push with the heel of one hand in the same spot.\n\nThe old two-finger method is no longer recommended; it usually does not push deep enough.\n\nDepth: at least one third of the depth of the chest, about 1.5 inches (4 cm). Avoid the very bottom tip of the breastbone.\n\nRate: 100 to 120 a minute. The CPR coach clicks the beat.\n\nLet the chest come all the way back up after each push. Keep pauses under 10 seconds.",
+      "tool": "cpr",
+      "log": "CPR started"
+    },
+    {
+      "id": "s5",
+      "text": "After every 30 pushes, give 2 gentle breaths. Head in a neutral position, chin lifted; blow for about 1 second until the chest rises.",
+      "detail": "Breaths improve survival in babies; give them if you are able and willing. If you truly cannot, compression-only CPR is better than nothing.\n\nOpen the airway: a baby's head goes to a neutral position. Lift the chin.\n\nMake a seal and blow gently for about 1 second, just enough to see the chest rise. Let the air out before the next breath. Avoid big breaths.\n\nIf the first breath does not make the chest rise, re-tilt the head and improve the seal before the second breath. If the chest still does not rise, something may be blocking the airway: go back to compressions, and each time you open the airway look in the mouth and remove any object you can see. Never do blind finger sweeps.\n\nTwo rescuers: the ratio changes to 15 compressions to 2 breaths. The coach uses the single-rescuer ratio of 30:2.\n\nDrowning: give CPR with breaths. A trained rescuer may start with breaths before compressions."
+    },
+    {
+      "id": "s6",
+      "text": "If an AED arrives, turn it on and follow its prompts. Use child pads if it has them.",
+      "detail": "For infants, use child (pediatric) pads or the AED's child setting. If there are none, an AED without a child setting may still be used.\n\nUse the largest pads that fit without touching. If they would touch, put one on the middle of the chest and the other on the back between the shoulder blades.\n\nMake sure nobody touches the baby when the AED analyses or shocks. Restart compressions immediately after the shock or if no shock is advised.",
+      "log": "AED applied"
+    },
+    {
+      "id": "s7",
+      "text": "Keep going until the baby shows signs of life or help takes over. Swap rescuers about every 2 minutes if you can.",
+      "detail": "Keep going until:\n- the baby shows an obvious sign of life, such as breathing normally or moving;\n- an AED is ready to use;\n- another trained person takes over;\n- medical help arrives and takes over;\n- you are alone and too exhausted to continue;\n- the scene becomes unsafe;\n- you are alone, have done about 2 minutes of CPR, and must go to call for help."
+    },
+    {
+      "id": "s8",
+      "text": "If the baby starts breathing normally, stay with them and keep watching their breathing.",
+      "detail": "Stay with the baby and watch the breathing continuously. If breathing becomes abnormal or stops, lay them on their back and restart CPR.",
+      "end": true
+    },
+    {
+      "id": "s9",
+      "text": "The baby is breathing normally. Do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Stay with the baby and watch the breathing continuously.\n\nIf the baby is breathing but very poorly (very slow, struggling), a trained rescuer gives breaths at about 1 breath every 2 to 3 seconds.\n\nIf breathing stops or becomes only gasping, come back to this protocol and start CPR.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not use the old two-finger method; use two thumbs or the heel of one hand.",
+    "Do not tip a baby's head far back; keep it in a neutral position.",
+    "Do not do blind finger sweeps in the mouth; remove only an object you can see.",
+    "Do not do CPR on a soft surface such as a bed."
+  ],
+  "evacuate": [
+    "Any baby who needed CPR must get to hospital urgently, even if they recover."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Academy of Pediatrics, Part 6: Pediatric Basic Life Support, 2025 Guidelines for CPR and ECC (Circulation 2025;152(suppl 2):S424-S447)",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/pediatric-basic-life-support"
+    },
+    {
+      "name": "American Heart Association, Highlights of the 2025 AHA Guidelines for CPR and ECC (infant compression technique)",
+      "year": 2025,
+      "url": "https://cpr.heart.org/-/media/CPR-Files/2025-documents-for-cpr-heart-edits-posting/Resuscitation-Science/252500_Hghlghts_2025ECCGuidelines.pdf?sc_lang=en"
+    },
+    {
+      "name": "American Heart Association, Part 10: Adult and Pediatric Special Circumstances of Resuscitation (drowning), 2025 AHA Guidelines for CPR and ECC",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation"
+    },
+    {
+      "name": "American Red Cross, How to perform child and baby CPR (lay page)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/cpr/performing-cpr/child-baby-cpr"
+    }
+  ],
+  "reviewed": "2026-11-16"
+}

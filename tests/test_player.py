@@ -238,17 +238,17 @@ def test_timer_counts_down_and_announces_completion(page, app_url):
 
 def test_tool_button_only_when_tools_exist_and_calls_start(page, app_url):
     page.goto(app_url + '#/emergency')
-    page.evaluate("delete FK.tools; FK.protocol.open('bleeding', 's4')")
+    page.evaluate("delete FK.tools; FK.protocol.open('bleeding', 's5')")
     assert page.locator('#player [data-act="tool"]').count() == 0   # no tools module: no button
     page.evaluate("window.__t = []; FK.tools = { start: (n, o) => window.__t.push([n, o]) }")
     page.goto(app_url + '#/emergency')
-    page.evaluate("FK.protocol.open('bleeding', 's4')")
+    page.evaluate("FK.protocol.open('bleeding', 's5')")
     page.click('#player [data-act="tool"]')
     assert page.evaluate('window.__t') == [['tq', {'protocol': 'bleeding'}]]
 
 
 def test_log_hook_called_on_next(page, app_url):
-    page.goto(app_url + '#/emergency/bleeding/s4')
+    page.goto(app_url + '#/emergency/bleeding/s5')   # the tourniquet step
     page.evaluate("window.__l = []; FK.log = s => window.__l.push(s); 0")
     page.click('#player [data-act="next"]')
     assert page.evaluate('window.__l') == ['Tourniquet applied']
@@ -451,7 +451,7 @@ def test_double_tap_on_header_back_does_not_overshoot(page, app_url):
 def test_bad_deep_link_repaired_at_boot_is_a_deep_link_entry(page, app_url):
     page.goto(app_url + '#/emergency/bleeding/zzz')
     assert page.url.endswith('#/emergency/bleeding')
-    assert action(page).startswith('Call 911')
+    assert action(page) == page.evaluate("FK.protocol.get('bleeding').steps[0].text")   # repaired to the first step
     page.click('#player [data-act="home"]')
     wait_hash(page, '#/emergency')
     page.wait_for_timeout(200)

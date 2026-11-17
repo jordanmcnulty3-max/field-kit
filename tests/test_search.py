@@ -29,8 +29,8 @@ FIXTURES = [
 ]
 
 
-def boot(page, app_url, fixtures=FIXTURES, storage=None, hash_='#/emergency'):
-    inject_protocols(page, fixtures)
+def boot(page, app_url, fixtures=FIXTURES, storage=None, hash_='#/emergency', only=False):
+    inject_protocols(page, fixtures, only)
     seed = {'advAck': False, **(storage or {})}
     page.add_init_script(
         "if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1');"
@@ -72,7 +72,7 @@ def test_every_protocol_found_by_first_keyword(page, app_url):
 
 
 def test_title_match_ranks_above_body_match(page, app_url):
-    boot(page, app_url)
+    boot(page, app_url, only=True)   # shipped data has its own Shock protocol
     ks = [r['key'] for r in q(page, 'heimlich')]
     assert ks[0] == 'p:choking'            # keyword match
     assert 'p:body-hit' in ks              # step-text match

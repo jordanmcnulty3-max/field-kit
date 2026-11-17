@@ -16,10 +16,10 @@ FIXTURES = [proto('bleeding', 'Severe bleeding'), proto('cpr-adult', 'CPR adult'
             proto('cpr-child', 'CPR child', coach={'compressions': 15, 'breaths': 2})]
 
 
-def boot(page, app_url, storage=None, hash_='#/emergency', fixtures=FIXTURES, clock=True, strip_apis=False, init=''):
+def boot(page, app_url, storage=None, hash_='#/emergency', fixtures=FIXTURES, clock=True, strip_apis=False, init='', only=False):
     if clock:
         page.clock.install(time=T0 // 1000)   # Python API takes seconds
-    inject_protocols(page, fixtures)
+    inject_protocols(page, fixtures, only)
     if strip_apis:
         page.add_init_script("""
           delete window.AudioContext; delete window.webkitAudioContext;
@@ -303,7 +303,7 @@ def test_cpr_swap_counts_only_compression_time_when_breaths_are_given(page, app_
 
 
 def test_cpr_modes_and_open_steps(page, app_url):
-    boot(page, app_url, hash_='#/emergency/tool/cpr')
+    boot(page, app_url, hash_='#/emergency/tool/cpr', only=True)
     assert [b.inner_text() for b in page.locator('[data-mode]').all()] == ['Adult', 'Child', 'Infant']
     assert page.locator('[data-mode="adult"]').get_attribute('aria-pressed') == 'true'
     page.click('[data-mode="infant"]')

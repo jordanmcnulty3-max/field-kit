@@ -2,43 +2,114 @@
   "id": "cpr-adult",
   "title": "CPR, adult",
   "category": "life",
-  "draft": true,
   "keywords": [
-    "cardiac arrest",
-    "heart",
+    "cpr",
     "not breathing",
+    "cardiac arrest",
+    "heart attack",
+    "unresponsive",
+    "collapsed",
+    "no pulse",
     "aed",
+    "defibrillator",
     "compressions",
-    "unresponsive"
+    "chest compressions",
+    "hands only",
+    "drowning",
+    "overdose"
   ],
-  "summary": "Push hard and fast in the centre of the chest.",
+  "summary": "Adult (anyone with signs of puberty) who is unresponsive and not breathing normally: push hard and fast in the centre of the chest and use an AED.",
+  "coach": {
+    "compressions": 30,
+    "breaths": 2
+  },
   "steps": [
     {
       "id": "s1",
-      "text": "Tap and shout. If they do not respond and are not breathing normally, call 911 if you have signal and send someone for an AED. If no signal, send someone for help."
+      "text": "Check the scene is safe. Tap their shoulder and shout. Look at the chest: are they breathing normally?",
+      "detail": "Use this protocol for adults and for anyone who shows signs of puberty (breast development, or underarm hair). For younger children use CPR, child; under about 1 year use CPR, infant.\n\nOnly gasping, or occasional noisy breaths, is not normal breathing. A lay rescuer who finds an unresponsive person who is not breathing, or only gasping, should assume the heart has stopped and start CPR. You do not need to check for a pulse.\n\nIf you are not sure whether they are breathing normally, treat it as not breathing normally.",
+      "ask": {
+        "q": "Unresponsive and not breathing normally (or only gasping)?",
+        "yes": "s2",
+        "no": "s9"
+      }
     },
     {
       "id": "s2",
-      "text": "Push hard and fast in the centre of the chest: at least 2 inches deep, 100 to 120 times a minute. Let the chest fully rise between pushes.",
-      "tool": "cpr"
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Send someone for an AED.",
+      "detail": "If you are alone with a phone that has signal, call and put it on speaker so you can start compressions at nearly the same time. If you are alone with no signal, start CPR straight away; there is no one to call.\n\nIf anyone else is there, give clear jobs: one person goes for help, one fetches an AED (defibrillator) if there is one, and someone gets ready to take over compressions.\n\nDo not leave the person to go looking for help yourself if someone else can go."
     },
     {
       "id": "s3",
-      "text": "If you are trained, give 30 compressions, then 2 breaths. If not, keep doing compressions only."
+      "text": "Lay them on their back on a firm, flat surface. Kneel beside their chest.",
+      "detail": "A firm surface such as the ground or floor is best. Do not waste time moving them if the surface is already reasonable; CPR is done where the person is found if it is safe.\n\nIf they are face down, roll them onto their back.\n\nKneel so their chest is about level with your knees. Bare the chest if you can do it quickly; it helps hand placement and you will need bare skin for AED pads."
     },
     {
       "id": "s4",
-      "text": "Turn on the AED as soon as it arrives and follow its voice prompts."
+      "text": "Push hard and fast in the centre of the chest: at least 2 inches deep, 100 to 120 a minute. Let the chest come all the way back up.",
+      "detail": "Hand position: heel of one hand on the lower half of the breastbone, in the centre of the chest. Put your other hand on top. Keep your arms straight and your shoulders over your hands, and push straight down using your body weight.\n\nDepth: at least 2 inches (5 cm) for an average adult, but not more than about 2.4 inches (6 cm).\n\nRate: 100 to 120 compressions a minute. The app's CPR coach clicks the beat for you.\n\nRecoil: let the chest rise fully between pushes. Do not lean on the chest.\n\nKeep pauses as short as possible. Every pause stops blood flow to the brain.\n\nLarger body size: use the same technique. You may need to push harder to reach the depth.",
+      "tool": "cpr",
+      "log": "CPR started"
     },
     {
       "id": "s5",
-      "text": "Keep going until help takes over or the person starts breathing.",
+      "text": "If you are trained and willing, give 2 breaths after every 30 pushes. If not, keep pushing without stopping.",
+      "detail": "Untrained, or not willing to give breaths: do compression-only (hands-only) CPR. Push continuously at 100 to 120 a minute. This is the right thing to do and is what dispatchers coach for adults.\n\nTrained: give cycles of 30 compressions, then 2 breaths. To give a breath: tilt the head back and lift the chin to open the airway, pinch the nose, seal your mouth over theirs, and blow for about 1 second, just enough to see the chest rise. Then let the air out and give the second breath. Get straight back to compressions.\n\nDrowning: breaths matter more, because the heart stopped from lack of oxygen. Give CPR with breaths if you possibly can. A trained rescuer may start with breaths before compressions. If you are untrained or unable to give breaths, compression-only CPR is still reasonable until help arrives. Start CPR with breaths before putting on an AED.\n\nSuspected opioid overdose: if naloxone (Narcan) is available, it may be given, but only if it does not interrupt CPR. Good CPR with breaths comes first.\n\nWith two trained rescuers the ratio stays 30 compressions to 2 breaths. The coach also has a compression-only mode."
+    },
+    {
+      "id": "s6",
+      "text": "When the AED arrives, turn it on and follow its voice prompts. Keep CPR going while the pads go on.",
+      "detail": "Bare and dry the chest. Put the pads on as the pictures on them show: usually one on the upper right side of the chest, and one on the left side a few inches below the armpit. Front-and-back placement (one in the middle of the chest, one between the shoulder blades) is also acceptable. On a woman, it may be reasonable to move a bra aside rather than take it off.\n\nWhen the AED says it is analysing or about to shock, make sure nobody is touching the person and shout CLEAR. Press the shock button if it tells you to.\n\nRight after a shock, or if no shock is advised, start compressions again immediately. Do not stop to check for breathing or a pulse; follow the AED's prompts.",
+      "log": "AED applied"
+    },
+    {
+      "id": "s7",
+      "text": "Keep going. Swap the person doing compressions about every 2 minutes.",
+      "detail": "Compressions get shallow when you tire, often without you noticing. If anyone else can help, swap about every 2 minutes (about 5 cycles of 30:2). Keep the pause for the swap as short as possible. The coach prompts swaps.\n\nKeep going until:\n- the person shows an obvious sign of life, such as breathing normally or moving;\n- an AED is ready to use (then follow its prompts);\n- another trained person takes over;\n- medical help arrives and takes over;\n- you are alone and too exhausted to continue;\n- the scene becomes unsafe."
+    },
+    {
+      "id": "s8",
+      "text": "If they start breathing normally, roll them onto their side (recovery position) and keep watching their breathing.",
+      "detail": "Use the Recovery position protocol. Stay with them and watch the breathing continuously. If breathing becomes abnormal again or stops, roll them onto their back and restart CPR straight away.",
+      "end": true
+    },
+    {
+      "id": "s9",
+      "text": "They are breathing normally. Do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "If they are unresponsive but breathing normally and there is no reason to suspect an injury to the neck, back, hip or pelvis, use the Recovery position protocol.\n\nWatch their breathing continuously. If it stops or becomes only gasping, come back to this protocol and start CPR.",
       "end": true
     }
   ],
+  "donts": [
+    "Do not check for a pulse before starting; a lay rescuer starts CPR if the person is unresponsive and not breathing normally.",
+    "Do not lean on the chest between compressions.",
+    "Do not push deeper than about 2.4 inches (6 cm).",
+    "Do not stop compressions for long; keep every pause short, including around AED shocks.",
+    "Do not touch the person while the AED analyses or shocks."
+  ],
+  "evacuate": [
+    "Anyone who needed CPR must get to hospital urgently, even if they recover."
+  ],
   "sources": [
     {
-      "name": "American Heart Association, Guidelines for CPR and Emergency Cardiovascular Care"
+      "name": "American Heart Association, Part 7: Adult Basic Life Support, 2025 AHA Guidelines for CPR and ECC (Circulation 2025;152(suppl 2):S448-S478)",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-basic-life-support"
+    },
+    {
+      "name": "American Heart Association, Part 10: Adult and Pediatric Special Circumstances of Resuscitation (drowning, opioids), 2025 AHA Guidelines for CPR and ECC",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation"
+    },
+    {
+      "name": "American Heart Association, Highlights of the 2025 AHA Guidelines for CPR and ECC",
+      "year": 2025,
+      "url": "https://cpr.heart.org/-/media/CPR-Files/2025-documents-for-cpr-heart-edits-posting/Resuscitation-Science/252500_Hghlghts_2025ECCGuidelines.pdf?sc_lang=en"
+    },
+    {
+      "name": "American Red Cross, CPR steps and AED steps (lay pages)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/cpr/performing-cpr/cpr-steps"
     }
   ],
   "reviewed": "2026-11-16"

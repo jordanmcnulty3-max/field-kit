@@ -1,0 +1,118 @@
+# Content review record
+
+One section per protocol. Every number in a protocol is listed with where it was checked. "Checked twice" means it was read when drafting and confirmed again from the source after drafting (second pass, 2026-11-16/17).
+
+Source keys used below:
+- AHA-ABLS: American Heart Association, Part 7: Adult Basic Life Support, 2025 AHA Guidelines for CPR and ECC, Circulation 2025;152(suppl 2):S448-S478. https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-basic-life-support (full text also read at https://www.ahajournals.org/doi/full/10.1161/CIR.0000000000001369)
+- AHA-PBLS: AHA and American Academy of Pediatrics, Part 6: Pediatric Basic Life Support, 2025, Circulation 2025;152(suppl 2):S424-S447. https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/pediatric-basic-life-support (full text also read at https://www.ahajournals.org/doi/full/10.1161/CIR.0000000000001370)
+- AHA-SPEC: AHA, Part 10: Adult and Pediatric Special Circumstances of Resuscitation, 2025. https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation
+- AHA-HL: AHA, Highlights of the 2025 Guidelines for CPR and ECC. https://cpr.heart.org/-/media/CPR-Files/2025-documents-for-cpr-heart-edits-posting/Resuscitation-Science/252500_Hghlghts_2025ECCGuidelines.pdf
+- AHA-FA: AHA and American Red Cross, 2024 Guidelines for First Aid, Circulation 2024;150:e519. https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines (the current joint first aid edition; the older cpr.heart.org "First Aid Guidelines" landing page still shows 2020 text)
+- ARC-DB: American Red Cross Scientific Advisory Council, First Aid Guidelines database (pages modified Oct-Nov 2025). https://firstaidguide.wpenginepowered.com/ (linked from https://www.redcross.org/take-a-class/resources/guidelines)
+- ARC-LAY: American Red Cross lay "learn first aid" / CPR / AED pages on redcross.org (read 2026-11-16).
+- STB: American College of Surgeons, STOP THE BLEED course, lay public presentation, version 2 (2019). https://www.stopthebleed.org/media/omalhrif/lay-public-stop-the-bleed-presentation-pdf.pdf
+- TCCC: Joint Trauma System / CoTCCC, TCCC Guidelines 2026 (focused update of 2024). https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/
+
+## Open questions for Jordan
+
+- **Improvised tourniquet width (bleeding).** AHA-FA (2024, 9.1, Class 2a C-EO) says at least 2 inches wide; ARC-DB (Improvised tourniquets, 2025 update) says at least 1.5 inches. Used AHA (higher authority): 2 inches.
+- **Open chest wound cover (chest-wound).** AHA-FA 2024 (9.2) and ARC-DB: reasonable to leave the wound open to air or cover with a clean non-sealing dry dressing; vented chest seal only by trained responders; routine chest seal by untrained lay responders not recommended. TCCC 2026: every open/sucking chest wound gets a vented chest seal immediately, and an unvented seal if no vented one is available. Used AHA/Red Cross for the main path; the protocol offers a vented seal only to trained users with one, explains the TCCC position in the detail, and does not tell lay users to use an unvented seal. If your group carries vented seals and is TCCC-trained, you may want the seal path to be the default.
+- **Infant chest thrust technique (choking-infant).** AHA-PBLS 2025 uses the heel of one hand for infant chest thrusts (the two-finger technique was dropped for CPR compressions and replaced for thrusts). The Red Cross lay infant choking page (read 2026-11-16) still shows two fingers in the centre of the chest just below the nipple line. Used AHA: heel of one hand. Red Cross gives the depth (about 1.5 inches) and the positioning, which AHA does not contradict; kept those.
+- **Choking sequence edition (choking, choking-infant).** Recorded for clarity: AHA 2025 (AHA-ABLS, AHA-PBLS, AHA-HL) starts adults and children with 5 back blows alternating with 5 abdominal thrusts; earlier AHA editions started with abdominal thrusts. Red Cross lay page also uses 5 back blows and 5 abdominal thrusts. No disagreement now; noted because users trained before 2025 on AHA may expect abdominal thrusts first.
+- **Second epinephrine dose timing (anaphylaxis).** ARC-LAY: second dose if signs persist 5 to 10 minutes after the first and EMS has not arrived. ARC-DB: second dose may be considered for continued signs within 5 to 15 minutes. AHA-FA: repeat dose may be considered if no response and EMS will be more than 5 to 10 minutes. Used 5 to 10 minutes (AHA and Red Cross lay agree); the timer is set to 5 minutes as the earliest point. Off-grid, EMS will always be more than 10 minutes away, so in practice the second dose is given at 5 to 10 minutes if signs continue.
+- **Discoloured auto-injector (anaphylaxis).** ARC-DB says a cloudy or discoloured solution should be discarded. It does not say what to do when it is the only dose available in the field. The protocol states the Red Cross position only. You may want medical advice on this for your group.
+- **Spine injury with a compromised airway (recovery-position).** Sources say leave a possible spine injury as found unless moving is needed for safety, CPR or bleeding control. They do not address an unresponsive trauma casualty who is breathing but vomiting. The protocol does not invent an answer; it says to roll for CPR if breathing stops. Consider asking a medical adviser.
+- **Lone rescuer with no signal (CPR child/infant).** AHA-PBLS text does not state the lone-rescuer "2 minutes then call" rule (it is in the algorithm figures, which could not be read as text). ARC-LAY child and baby CPR says: alone with a baby, give about 2 minutes (5 sets of 30:2) before leaving to call. Used that in cpr-infant only, attributed to Red Cross wording.
+
+## bleeding
+- Sources read: AHA-FA 2024 section 9.1; ARC-DB Wounds and Bleeding (direct pressure ILCOR 2020/2023 update; hemostatic dressings 2025 update; tourniquets 2021; improvised tourniquets 2025 update; pediatric tourniquets 2022 update; sequence of interventions 2024/2025); STB lay presentation v2 (2019); TCCC 2026 Massive Hemorrhage and Tourniquet Reassessment.
+- Numbers checked:
+  - 2 to 3 inches above the wound, not over a joint — tourniquet placement — ARC-DB Tourniquets "Insights"; STB "Apply 2 to 3 inches above wound, do not place over elbow or knee"; TCCC 3a "2-3 inches above the bleeding site". Checked twice.
+  - Second tourniquet side by side with the first — TCCC 3a and 6g; ARC-DB tourniquet insights (first ineffective, bleeding resumes, large or muscular limb). Checked twice.
+  - About 2 years, limb 13 cm (about 5 inches) — pediatric tourniquet threshold — ARC-DB Pediatric Tourniquets guidelines; AHA-FA "children as young as 2 years". Checked twice.
+  - At least 2 inches wide — improvised tourniquet — AHA-FA 9.1 (Class 2a). ARC-DB says 1.5 inches (see open questions). Checked twice.
+  - Half a can of soda, 6 ounces — blood-loss guide — ARC-DB Identification of life-threatening bleeding (citing the Stop the Bleed Education Consortium, consensus-based). Checked once on drafting and again in the saved page text.
+- Notes: Hemostatic gauze (ARC-DB/TCCC: at least 3 minutes of pressure) and tourniquet conversion (TCCC 2026: within 2 hours, not by ASM/CLS beyond 2 hours without direction) are deliberately not detailed; both point to "see Advanced procedures" per the task. Pressure points, elevation and cryotherapy are in the don'ts per AHA-FA/ARC-DB. Direct pressure has no timer: sources say hold until help arrives, not a fixed duration. Tourniquet on skin (TCCC) vs over clothes allowed (STB) both stated.
+
+## cpr-adult
+- Sources read: AHA-ABLS 2025 (cpr.heart.org page and ahajournals full text); AHA-SPEC 2025 drowning and opioid sections; AHA-HL 2025; ARC-LAY CPR steps and AED steps.
+- Numbers checked:
+  - At least 2 inches (5 cm), not more than 2.4 inches (6 cm) — compression depth — AHA-ABLS (Class 1). Checked twice.
+  - 100 to 120 per minute — rate — AHA-ABLS (Class 2a). Checked twice.
+  - 30:2 — single and two lay rescuers, coach ratio — AHA-ABLS (Class 2a). Checked twice.
+  - About 1 second per breath, visible chest rise — AHA-ABLS (Class 2b / 2a). Checked twice.
+  - Swap about every 2 minutes (about 5 cycles) — AHA-ABLS (Class 2a). Checked twice.
+  - Lower half of the sternum — hand position — AHA-ABLS (Class 1). Checked twice.
+  - Torso at about the rescuer's knee level — AHA-ABLS (Class 1). Checked twice.
+- Notes: Compression-only for untrained or unwilling rescuers (AHA-ABLS, Class 1 for compressions; dispatcher hands-only for adults in AHA-HL). Drowning: CPR with breaths (Class 1); trained may start with breaths (2b); compression-only reasonable for adults if unable/unwilling (2a); CPR with breaths before AED (Class 1) — AHA-SPEC. Naloxone during arrest may be reasonable if it does not interfere with CPR (AHA-HL). Bra adjust rather than remove (2b). Pad positions from ARC-LAY AED steps and AHA-ABLS (anterolateral or anteroposterior).
+
+## cpr-child
+- Sources read: AHA-PBLS 2025 (cpr.heart.org page and ahajournals full text); AHA-SPEC 2025 drowning; ARC-LAY child and baby CPR.
+- Numbers checked:
+  - At least one third of chest depth, about 2 inches (5 cm) — AHA-PBLS (Class 2a). Checked twice.
+  - 100 to 120 per minute — AHA-PBLS (Class 2a). Checked twice.
+  - 30:2 single rescuer (coach), 15:2 two rescuers — AHA-PBLS (Class 2a). Checked twice.
+  - Pauses under 10 seconds — AHA-PBLS (Class 1). Checked twice.
+  - Under 8 years: pediatric attenuator/pads — AHA-PBLS (Class 1). Checked twice.
+  - 1 breath every 2 to 3 seconds — breathing inadequate with a pulse (trained rescuers) — AHA-PBLS (Class 2a). Checked twice.
+  - About 1 year to puberty — age range — AHA-PBLS. Checked twice.
+  - About 1 second per breath — ARC-LAY child and baby CPR. Checked once on drafting (lay page).
+- Notes: Conventional CPR with breaths should be given to children (Class 1); compression-only if unable or unwilling (2a). One- or two-hand technique (2b). Head tilt-chin lift (Class 1); jaw thrust if c-spine injury suspected, head tilt-chin lift if jaw thrust fails. Blind finger sweeps Class 3: Harm.
+
+## cpr-infant
+- Sources read: AHA-PBLS 2025; AHA-HL 2025 (infant technique change); AHA-SPEC drowning; ARC-LAY child and baby CPR.
+- Numbers checked:
+  - At least one third of chest depth, about 1.5 inches (4 cm) — AHA-PBLS (Class 2a); ARC-LAY "about 1 1/2 inches". Checked twice.
+  - 100 to 120 per minute — AHA-PBLS. Checked twice.
+  - 30:2 single rescuer (coach), 15:2 two rescuers — AHA-PBLS. Checked twice.
+  - Under 10-second pauses — AHA-PBLS. Checked twice.
+  - Younger than about 1 year — AHA-PBLS. Checked twice.
+  - About 2 minutes (5 sets of 30:2) before a lone rescuer leaves — ARC-LAY child and baby CPR. Checked once (lay page); see open questions.
+  - 1 breath every 2 to 3 seconds — AHA-PBLS (with a pulse, trained). Checked twice.
+- Notes: Two-thumb encircling or heel of one hand (Class 1); two-finger technique eliminated (AHA-PBLS, AHA-HL). Thumbs "just below the nipple line" from ARC-LAY; "lower half of the sternum, avoiding the xiphoid" from AHA-PBLS Table 7. Infant airway to neutral position from ARC-LAY.
+
+## choking
+- Sources read: AHA-ABLS 2025 FBAO (recommendations and supporting text in ahajournals full text); AHA-PBLS 2025 FBAO (children); AHA-HL 2025; ARC-LAY adult and child choking.
+- Numbers checked:
+  - 5 back blows then 5 abdominal thrusts, repeated — AHA-ABLS (Class 1, B-NR); AHA-PBLS for children (Class 1); ARC-LAY. Checked twice.
+  - 5 chest thrusts instead if cannot encircle or late pregnancy — AHA-ABLS (Class 1, C-EO). Checked twice.
+  - Fist thumb-side just above navel, well below the xiphoid; pull inward and upward — AHA-ABLS supporting text (ahajournals). Read once on drafting; the cpr.heart.org summary page does not include the hand position (second pass "not found" there), so it rests on the full-text read.
+  - Chest thrusts: fist on lower half of the sternum, pull straight back — AHA-ABLS supporting text. Read once (full text).
+  - 709 persons cohort — reason back blows come first — AHA-ABLS supporting text. Read once (full text).
+- Notes: Edition 2025. Self-treatment (own fist or chair back) from AHA-ABLS supporting text. Unresponsive: CPR starting with compressions, remove visible object only, no blind sweeps (Class 3: Harm). Infant branch ends with "Use the Choking, infant protocol".
+
+## choking-infant
+- Sources read: AHA-PBLS 2025 FBAO (recommendations and supporting text); AHA-HL 2025; ARC-LAY infant choking.
+- Numbers checked:
+  - 5 back blows alternating with 5 chest thrusts — AHA-PBLS (Class 1). Checked twice.
+  - Heel of one hand for chest thrusts — AHA-PBLS supporting text and AHA-HL. Checked twice.
+  - About 1.5 inches deep — chest thrust depth — ARC-LAY infant choking. Read once (AHA gives no thrust depth).
+  - Under about 1 year — AHA-PBLS. Checked twice.
+- Notes: No abdominal thrusts in infants (AHA-PBLS, AHA-HL). Positioning (face down on forearm braced on thigh, head lower than chest, jaw supported; face up for thrusts) from ARC-LAY. See open questions for the two-finger vs heel-of-hand difference.
+
+## recovery-position
+- Sources read: ARC-DB Positioning (last full review 2024, page modified 2025-11-25); ARC-DB Spinal injury (ILCOR 2025); AHA-FA 2024 section 5.1; ARC-LAY unresponsive and breathing person.
+- Numbers checked: none (no numeric values in this protocol).
+- Notes: Recovery position for decreased responsiveness of nontraumatic cause with normal breathing (AHA-FA Class 2a). Continuous monitoring (good practice). Reposition supine if the position prevents assessment. Suspected neck, back, hip or pelvis injury: leave in position found unless unsafe (AHA-FA Class 1 for responsive persons; ARC-LAY: unless moving for safety, CPR or bleeding). Lay responders should not apply collars, manipulate the neck or strap the head (ARC-DB). Technique (one arm up under head, other hand to face, knees bent, left side preferred) from ARC-LAY instructor description; left side in late pregnancy from ARC-DB evidence summary.
+
+## anaphylaxis
+- Sources read: AHA-FA 2024 section 6.5; ARC-DB Anaphylaxis (page modified 2025-11-21); ARC-LAY allergic reaction/anaphylaxis.
+- Numbers checked:
+  - 5 to 10 minutes — second dose timing — ARC-LAY; AHA-FA (EMS more than 5 to 10 min). Checked twice.
+  - 5 to 15 minutes; 18 to 35 percent need a second dose — ARC-DB evidence summary. Checked once on drafting and once more in the scraped page text. Written as "about 1 in 5 to 1 in 3".
+  - 90 degrees, hold 3 seconds after click, massage 10 seconds — auto-injector technique — ARC-LAY. Read once (lay page); detail tells users to follow the device's printed instructions if different.
+  - Over about 20 minutes delay linked to more deaths — ARC-DB background (Kemp 2008). Not in the visible AHA-FA text (second pass "not found" there).
+  - Timer 300 seconds — earliest second dose, from the 5-minute lower bound.
+- Notes: Dose amounts are not stated; the user gives the device as prescribed (rule 5). Intranasal epinephrine (neffy) mentioned per ARC-DB/ARC-LAY. Positioning: sit comfortably, lie down if signs of shock (ARC-LAY).
+
+## chest-wound
+- Sources read: AHA-FA 2024 section 9.2 (recommendations and supporting text); ARC-DB Open chest wounds (last full review 2023); TCCC 2026 Respiration/Breathing 5a-5b.
+- Numbers checked: none numeric in the protocol.
+- Notes: Open chest wound is a medical emergency requiring EMS activation (AHA-FA Class 1). Leave open, clean nonocclusive dry dressing, or vented chest seal (AHA-FA Class 2a). Monitor and loosen or remove dressing if breathing worsens (AHA-FA Class 1). Small stab/handgun wounds often do not impair breathing (AHA-FA supporting text). TCCC tension pneumothorax signs (progressive respiratory distress, rapid breathing, shock) used for the "breathing worse" check. Needle decompression: "see Advanced procedures". See open questions for vented vs unvented and open-wound guidance.
+
+## shock
+- Sources read: AHA-FA 2024 section 5.2; ARC-DB Position for shock (ILCOR 2015, update 2024); ARC-LAY Shock; TCCC 2026 (hemorrhagic shock check, hypothermia prevention).
+- Numbers checked:
+  - Raise feet about 6 to 12 inches (about 30 to 45 degrees), only with no trauma — AHA-FA (Class 2b); ARC-DB; ARC-LAY "about 6 to 12 inches". Checked twice.
+  - Leg-raise benefit transient, under 7 minutes — ARC-DB evidence summary. Written as "only a few minutes". Read once.
+- Notes: Supine if alert (AHA-FA 2a); recovery position if at risk of airway obstruction or cannot be continuously watched (AHA-FA 2a). Nothing by mouth, keep temperature normal, reassure (ARC-LAY). Leg raising was once routine; current guidance makes it optional and only without injury.

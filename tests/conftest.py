@@ -63,19 +63,21 @@ def page(browser):
     assert errors == [], 'browser errors:\n' + '\n'.join(errors)
 
 
-def inject_protocols(page, fixtures):
+def inject_protocols(page, fixtures, only=False):
     """FK_DATA is assigned by an inline script after init scripts run, so trap the assignment and
-    add the fixtures to its protocols. A fixture with the same id as a real protocol replaces it."""
+    add the fixtures to its protocols. A fixture with the same id as a real protocol replaces it.
+    only=True drops every shipped protocol, so the page sees the fixtures alone (for tests whose
+    expectations depend on exactly which protocols exist)."""
     page.add_init_script(f"""
       (() => {{
-        const extra = {json.dumps(fixtures)};
+        const extra = {json.dumps(fixtures)}, ONLY = {json.dumps(bool(only))};
         let val;
         Object.defineProperty(window, 'FK_DATA', {{
           configurable: true,
           get() {{ return val; }},
           set(v) {{
             const ids = new Set(extra.map(p => p.id));
-            v.protocols = v.protocols.filter(p => !ids.has(p.id)).concat(extra);
+            v.protocols = (ONLY ? [] : v.protocols.filter(p => !ids.has(p.id))).concat(extra);
             val = v;
           }}
         }});

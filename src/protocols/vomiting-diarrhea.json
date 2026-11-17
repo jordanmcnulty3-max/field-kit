@@ -20,7 +20,7 @@
     "bloody stool",
     "travelers diarrhea"
   ],
-  "summary": "Severe vomiting or diarrhoea: screen for danger signs and other causes, start small sips (Dehydration protocol), protect the rest of the group with hand, food and water hygiene, and evacuate for blood, bad belly pain, dehydration or the other warning signs.",
+  "summary": "Severe vomiting or diarrhoea: screen for danger signs and other causes, start small sips (Dehydration protocol), protect the rest of the group with hand, food and water hygiene, and evacuate for blood, bad belly pain, signs of dehydration (Red Cross list) or the other warning signs.",
   "steps": [
     {
       "id": "s1",
@@ -34,10 +34,10 @@
     },
     {
       "id": "s2",
-      "text": "Are they confused, very drowsy or hard to wake?",
-      "detail": "Someone who is not fully alert must not be given drinks (AHA 2024) and needs urgent care; confusion can be a sign of severe dehydration or another serious problem (MedlinePlus, Dehydration protocol).",
+      "text": "Are they confused, very drowsy or hard to wake, or have they had a seizure?",
+      "detail": "Someone who is not fully alert must not be given drinks (AHA 2024) and needs urgent care; confusion, seizures or unconsciousness can be signs of severe dehydration or another serious problem (MedlinePlus, as in the Dehydration protocol). For a seizure, use the Seizure protocol as well.",
       "ask": {
-        "q": "Are they confused, very drowsy or hard to wake?",
+        "q": "Confused, very drowsy or hard to wake, or had a seizure?",
         "yes": "s21",
         "no": "s3"
       }
@@ -64,10 +64,10 @@
     },
     {
       "id": "s5",
-      "text": "Is there severe or sudden sharp belly pain, a belly that is hard or very tender to touch, or pain that settles in the lower right of the belly?",
-      "detail": "MedlinePlus (Abdominal pain): get medical help right away for sudden, sharp belly pain, or a belly that is tender or rigid and hard to touch. MedlinePlus (Nausea and vomiting): severe stomach or belly pain needs medical care right away. Red Cross (Dehydration): sharp or persistent belly pain needs emergency care.\n\nAppendicitis (MedlinePlus): pain often starts around the belly button or upper middle belly and moves to the lower right, usually 12 to 24 hours after the illness starts; it becomes sharper and more severe, and may be worse when walking, coughing or moving suddenly. Loss of appetite, nausea, vomiting and a low fever are common. MedlinePlus says to contact a provider for pain in the lower right of the belly or other appendicitis symptoms.",
+      "text": "Severe or sudden sharp belly pain, a hard or very tender belly, pain settling in the lower right, belly pain with possible pregnancy, or unable to pass stool (especially with vomiting)?",
+      "detail": "MedlinePlus (Abdominal pain): get medical help right away for sudden, sharp belly pain, or a belly that is tender or rigid and hard to touch. MedlinePlus (Nausea and vomiting): severe stomach or belly pain needs medical care right away. Red Cross (Dehydration): sharp or persistent belly pain needs emergency care.\n\nAppendicitis (MedlinePlus): pain often starts around the belly button or upper middle belly and moves to the lower right, usually 12 to 24 hours after the illness starts; it becomes sharper and more severe, and may be worse when walking, coughing or moving suddenly. Loss of appetite, nausea, vomiting and a low fever are common. MedlinePlus says to contact a provider for pain in the lower right of the belly or other appendicitis symptoms.\n\nMedlinePlus (Abdominal pain) also lists, for getting medical help right away: being pregnant or possibly pregnant, and being unable to pass stool, especially if also vomiting. MedlinePlus (Diarrhea): stomach pain that does not go away after a bowel movement needs a provider right away; count that as Yes.",
       "ask": {
-        "q": "Severe, sharp or lower-right belly pain, or a hard or very tender belly?",
+        "q": "Is any of these belly problems present?",
         "yes": "s24",
         "no": "s6"
       }
@@ -84,22 +84,22 @@
     },
     {
       "id": "s7",
-      "text": "If they are fully alert, start small, frequent sips of oral rehydration solution, a sports drink or safe water. Use the Dehydration protocol for what to give and how to make it.",
+      "text": "If they are fully alert, start small, frequent sips: oral rehydration solution (best for heavy diarrhoea), or a sports drink or safe water. Use the Dehydration protocol for what to give.",
       "warn": "No drinks if they are drowsy, confused, in shock, or cannot swallow.",
-      "detail": "Keep trying small amounts even if they are vomiting, and increase them as they keep them down (Red Cross Dehydration; MedlinePlus: small amounts of clear liquids often). The Dehydration protocol covers what to drink, oral rehydration salts and the home-made recipe, and the signs to watch.\n\nFood: none of the sources opened gives an adult diet rule. MedlinePlus (Abdominal pain) suggests avoiding solid food for the first few hours. Very sweet drinks such as soda in large amounts can make diarrhoea worse (CDC).\n\nAnti-diarrhoeal medicine: the AHA and Red Cross first aid guidelines do not cover it. MedlinePlus (Diarrhea) says over-the-counter anti-diarrhoeal medicines can be used unless there is a fever or bloody diarrhoea. CDC Yellow Book (written for clinicians advising travellers): loperamide (Imodium) may be used for mild to moderate diarrhoea, but not on its own with bloody diarrhoea or with fever, and it is rarely given to children under 6. Bismuth subsalicylate (Pepto-Bismol) should not be taken by anyone allergic to aspirin, with gout or kidney problems, or taking blood thinners, methotrexate or probenecid; it is not recommended in pregnancy or for children under 3, is not generally recommended under 12, and needs caution up to age 18 with a viral illness such as flu or chickenpox (Reye's syndrome); it commonly turns the tongue and stool black. If someone takes one of these, follow the packet directions. This protocol gives no dose.",
+      "detail": "Keep trying small amounts even if they are vomiting, and increase them as they keep them down (Red Cross Dehydration; MedlinePlus: small amounts of clear liquids often). The Dehydration protocol covers what to drink, oral rehydration salts and the home-made recipe, and the signs to watch; for heavy fluid loss from diarrhoea it gives packaged oral rehydration salts as best (CDC).\n\nSports drinks: the Red Cross Dehydration page lists sports drinks with water and oral rehydration solutions. MedlinePlus (Viral gastroenteritis, reviewed 2026-04-27) says older children and adults can drink sports beverages such as Gatorade but that these should be avoided, and to use electrolyte and fluid replacement solutions instead; it also says not to use fruit juice, soda or cola, fruit-flavoured gelatin or broth, and to drink small amounts (2 to 4 ounces, 60 to 120 ml) every 30 to 60 minutes rather than large amounts at once. Where you have oral rehydration solution, use it first (see the open question).\n\nFood: none of the sources opened gives an adult diet rule. MedlinePlus (Abdominal pain) suggests avoiding solid food for the first few hours. Very sweet drinks such as soda in large amounts can make diarrhoea worse (CDC).\n\nAnti-diarrhoeal medicine: the AHA and Red Cross first aid guidelines do not cover it. MedlinePlus (Diarrhea) says over-the-counter anti-diarrhoeal medicines can be used unless there is a fever or bloody diarrhoea. CDC Yellow Book (written for clinicians advising travellers): loperamide (Imodium) may be used for mild to moderate diarrhoea, but not on its own with bloody diarrhoea or with fever, and it is rarely given to children under 6. Bismuth subsalicylate (Pepto-Bismol) should not be taken by anyone allergic to aspirin, with gout or kidney problems, or taking blood thinners, methotrexate or probenecid; it is not recommended in pregnancy or for children under 3, is not generally recommended under 12, and CDC says to avoid giving it to children aged 18 or under with viral infections such as flu or chickenpox (Reye's syndrome); it commonly turns the tongue and stool black. If someone takes one of these, follow the packet directions. This protocol gives no dose.",
       "log": "Oral fluids started"
     },
     {
       "id": "s8",
       "text": "Protect the group: everyone washes hands with soap and water, the sick person does not handle food or water for others, and everyone drinks only boiled or treated water.",
-      "detail": "Hands (CDC): wash with soap and water for at least 20 seconds, especially after using the toilet or cleaning up, and before eating or preparing food. Hand sanitizer does not work well against norovirus (a common cause of vomiting outbreaks); it is not a replacement for washing. Where there is no soap and water, a sanitizer with at least 60% alcohol before eating is better than nothing (CDC Yellow Book).\n\nFood and caring for others (CDC norovirus): a sick person should not prepare or handle food, or care for others, until at least 2 days (48 hours) after their symptoms stop.\n\nCleaning up vomit or diarrhoea (CDC norovirus): wear rubber or disposable gloves; wipe up the whole area with paper towels and bag them; disinfect with a bleach solution of 5 to 25 tablespoons of household bleach (5 to 8%) per gallon of water, left on for at least 5 minutes, then clean again with soap and hot water; wash your hands. Take off soiled clothing or bedding with gloves, without shaking it, and wash it hot and long if you can.\n\nWater (CDC): bring clear water to a rolling boil for 1 minute (3 minutes above 6,500 feet), or treat it with bleach as CDC directs (for 5 to 9% bleach, 8 drops per gallon, wait at least 30 minutes). Food (CDC Yellow Book): boil it, cook it, peel it, or forget it.\n\nCDC Yellow Book also advises against shortcuts when cleaning produce and utensils."
+      "detail": "Hands (CDC): wash with soap and water for at least 20 seconds, especially after using the toilet or cleaning up, and before eating or preparing food. Hand sanitizer does not work well against norovirus (a common cause of vomiting outbreaks); it is not a replacement for washing. Where there is no soap and water, a sanitizer with at least 60% alcohol before eating is better than nothing (CDC Yellow Book).\n\nFood and caring for others (CDC norovirus): a sick person should not prepare or handle food, or care for others, until at least 2 days (48 hours) after their symptoms stop.\n\nCleaning up vomit or diarrhoea (CDC norovirus): wear rubber or disposable gloves; wipe up the whole area with paper towels and bag them; disinfect with a bleach solution of 5 to 25 tablespoons of household bleach (5 to 8%) per gallon of water, left on for at least 5 minutes, then clean again with soap and hot water; wash your hands. Take off soiled clothing or bedding with gloves, without shaking it, and wash it hot and long if you can.\n\nWater (CDC): bring clear water to a rolling boil for 1 minute (3 minutes above 6,500 feet), or treat it with bleach as CDC directs (for 5 to 9% bleach, 8 drops per gallon, wait at least 30 minutes). Food: the CDC Yellow Book gives \"boil it, cook it, peel it, or forget it\" as the traditional rule, and notes that people who follow it can still get ill; it does not replace hand washing and safe water."
     },
     {
       "id": "s9",
-      "text": "Watch for: cannot keep fluids down, vomiting over 24 hours, 3 or more vomits in a day, no urine for 8 hours, dizziness, sunken eyes, or headache with a stiff neck.",
-      "detail": "MedlinePlus (Nausea and vomiting) says to get medical care right away for: vomiting for longer than 24 hours; unable to keep any fluids down for 12 hours or more; a headache or stiff neck; no urine for 8 or more hours; severe belly pain; vomiting 3 or more times in 1 day. MedlinePlus (Diarrhea) says to get care right away for signs of dehydration: less urine, dizziness or lightheadedness, dry mouth, sunken eyes, few tears; and for diarrhoea after recent travel abroad. Red Cross (Dehydration) marks these as needing immediate emergency care: being unable to keep fluids down (no time given), very little or no urine, no tears, vomiting or diarrhoea for more than a few days, sunken eyes or cheeks, skin that stays tented when pinched, sweet-smelling breath, bloody or black stool, sharp or persistent belly pain, signs of shock.\n\nOff-grid, getting medical care means evacuating. The 3-vomits-in-a-day trigger is MedlinePlus's; many stomach bugs reach it, so the group may decide how to apply it (see the open question).\n\nKeeping fluids down: Red Cross marks being unable to keep fluids down as needing immediate emergency care and gives no time; MedlinePlus says 12 hours or more. This protocol follows Red Cross (higher authority): if drinks keep coming back up despite small, frequent sips, answer Yes.",
+      "text": "Any of these: cannot keep fluids down, dizziness, little or no urine, no tears, sunken eyes, tented skin, sweet-smelling breath, headache or stiff neck, or ill for more than a few days?",
+      "detail": "Red Cross (Dehydration, the higher-authority source) marks these as needing immediate emergency care: unable to keep fluids down; dizziness; severely decreased or no urination; no tears; vomiting or diarrhoea for more than a few days; sunken eyes or cheeks; skin that stays tented when pinched; sweet breath odour; bloody or black stool; sharp or persistent belly pain; signs of shock. \"Cannot keep fluids down\" means drinks keep coming back up despite small, frequent sips.\n\nMedlinePlus (Nausea and vomiting) says to get medical care right away for a headache or stiff neck (either one), and gives figures that can help you judge: vomiting for longer than 24 hours, unable to keep any fluids down for 12 hours or more, no urine for 8 or more hours, vomiting 3 or more times in 1 day. MedlinePlus (Viral gastroenteritis, 2026) says to contact a provider if diarrhoea lasts more than several days or dehydration occurs, or for blood in the stool, confusion, dizziness, dry mouth, feeling faint, no tears, no urine for 8 hours or more, or sunken eyes; it has no count of vomits. MedlinePlus (Diarrhea): diarrhoea after recent travel abroad also needs a provider.\n\nOff-grid, getting medical care means evacuating. The MedlinePlus figures are given as information, not as the trigger (see the open question).",
       "ask": {
-        "q": "Is any of these signs present?",
+        "q": "Is any of these present?",
         "yes": "s26",
         "no": "s10"
       }
@@ -107,7 +107,7 @@
     {
       "id": "s10",
       "text": "Keep up small, frequent drinks and rest. Recheck the warning signs every few hours. Evacuate if diarrhoea is worse or no better after 5 days, or any warning sign appears.",
-      "detail": "MedlinePlus (Diarrhea): contact a provider if an adult's diarrhoea gets worse or does not improve in 5 days (2 days for a child). Most stomach bugs get better on their own in a few days (MedlinePlus, Dehydration protocol).\n\nRecheck regularly: alertness, urine (pale means enough fluid), whether drinks stay down, belly pain, blood, fever. Any of the earlier warning signs, at any time, means evacuate. Rechecking every few hours is a group judgement; no source gives an interval.\n\nKeep the hygiene rules going for the whole group until at least 2 days after the last person's symptoms stop (CDC).",
+      "detail": "MedlinePlus (Diarrhea): contact a provider if an adult's diarrhoea gets worse or does not improve in 5 days (2 days for a child). Most stomach bugs get better on their own in a few days (MedlinePlus, Dehydration protocol).\n\nRecheck regularly: alertness, urine (pale means enough fluid), whether drinks stay down, belly pain, blood, fever. Any of the earlier warning signs (including the Red Cross dehydration list), at any time, means evacuate. Rechecking every few hours is a group judgement; no source gives an interval.\n\nKeep the hygiene rules going for the whole group until at least 2 days after the last person's symptoms stop (CDC).",
       "end": true
     },
     {
@@ -143,9 +143,9 @@
     },
     {
       "id": "s25",
-      "text": "Start evacuating now. Keep up small sips if they are fully alert and keeping them down. Keep watching for shock and confusion.",
-      "warn": "No drinks if they are drowsy, confused, in shock, or cannot swallow.",
-      "detail": "MedlinePlus: blood or coffee-ground material in the vomit needs 911 or an emergency room; blood or pus in the stool, black stool, or diarrhoea with fever above 101°F (38.3°C) needs a provider right away. Red Cross: bloody or black stool needs emergency care.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nUse the Dehydration protocol for drinks on the way. If signs of shock appear (pale, cool, clammy skin, fast weak pulse), stop drinks and use the Shock protocol. Keep the hygiene rules for the group (CDC).",
+      "text": "Start evacuating now. Vomiting blood or coffee-ground material: nothing by mouth. Otherwise, small sips if fully alert and keeping them down. Watch for shock and confusion.",
+      "warn": "No drinks if they are vomiting blood, drowsy, confused, in shock, or cannot swallow.",
+      "detail": "MedlinePlus: blood or coffee-ground material in the vomit needs 911 or an emergency room; blood or pus in the stool, black stool, or diarrhoea with fever above 101°F (38.3°C) needs a provider right away. Red Cross: bloody or black stool needs emergency care.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nNothing by mouth for someone vomiting blood or coffee-ground material is a group judgement (they may need a procedure or surgery; the Dehydration protocol withholds drinks when surgery may be needed); no source opened covers drinks in this case. For blood only in the stool, or fever, use the Dehydration protocol for drinks on the way. If signs of shock appear (pale, cool, clammy skin, fast weak pulse), stop drinks and use the Shock protocol. Keep the hygiene rules for the group (CDC).",
       "end": true
     },
     {
@@ -158,16 +158,17 @@
   ],
   "donts": [
     "Do not give drinks to anyone who is confused, very drowsy, in shock, or unable to swallow.",
+    "Do not give drinks to someone vomiting blood or coffee-ground material (group judgement).",
     "Do not give food or pain medicine to someone with severe belly pain (MedlinePlus: no medicine without a provider).",
     "Do not let a sick person prepare food or water, or care for others, until 2 days after their symptoms stop (CDC).",
     "Do not rely on hand sanitizer alone; wash with soap and water (CDC).",
     "Do not drink untreated water."
   ],
   "evacuate": [
-    "Evacuate urgently: confusion or drowsiness, or signs of shock. A possible poison or fumes: use the Poisoning (swallowed, inhaled, skin or eye) or Carbon monoxide poisoning protocol.",
-    "Start evacuating now: blood or coffee-ground material in the vomit, blood or pus in the stool, black stool, fever over 101°F (38.3°C), severe or sudden sharp belly pain, a hard or very tender belly, or pain in the lower right of the belly (MedlinePlus, Red Cross).",
-    "Evacuate (Red Cross, MedlinePlus): cannot keep fluids down (Red Cross gives no time; MedlinePlus 12 hours), vomiting over 24 hours, 3 or more vomits in a day, no urine for 8 hours, dizziness or other signs of dehydration, headache with a stiff neck, or vomiting or diarrhoea for more than a few days.",
-    "Evacuate (MedlinePlus): an adult's diarrhoea worse or no better after 5 days."
+    "Evacuate urgently: confusion, drowsiness or a seizure, or signs of shock. A possible poison or fumes: use the Poisoning (swallowed, inhaled, skin or eye) protocol or the Carbon monoxide poisoning protocol.",
+    "Start evacuating now: blood or coffee-ground material in the vomit, blood or pus in the stool, black stool, fever over 101°F (38.3°C), severe or sudden sharp belly pain, a hard or very tender belly, pain in the lower right of the belly, belly pain with possible pregnancy, or unable to pass stool (MedlinePlus, Red Cross).",
+    "Evacuate (Red Cross Dehydration): cannot keep fluids down, dizziness, little or no urine, no tears, sunken eyes, skin that stays tented, sweet-smelling breath, or vomiting or diarrhoea for more than a few days. Also headache or stiff neck (MedlinePlus).",
+    "Evacuate (MedlinePlus): an adult's diarrhoea worse or no better after 5 days. MedlinePlus's figures (vomiting over 24 hours, no fluids kept down for 12 hours, no urine for 8 hours, 3 or more vomits in a day) are given in the detail as information."
   ],
   "notes": [
     "Sick person: no food handling or caring for others until 2 days after symptoms stop. Wash hands with soap and water; boil water 1 minute (3 minutes above 6,500 feet) (CDC)."
@@ -192,6 +193,11 @@
       "name": "MedlinePlus, Appendicitis, reviewed 2025-04-21",
       "year": 2025,
       "url": "https://medlineplus.gov/ency/article/000256.htm"
+    },
+    {
+      "name": "MedlinePlus, Viral gastroenteritis (stomach flu), reviewed 2026-04-27",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/article/000252.htm"
     },
     {
       "name": "US CDC, Preventing Norovirus, last reviewed 2025-01-13",

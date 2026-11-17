@@ -35,7 +35,7 @@
     {
       "id": "s2",
       "text": "Look for signs of low blood sugar: shaky, sweaty, dizzy, hungry, pale, fast heartbeat, irritable, confused, slurred speech, or acting drunk. Especially in someone with diabetes.",
-      "detail": "Signs (AHA 2024, Red Cross, CDC, MedlinePlus): dizziness, tiredness, feeling shaky or jittery, sweating, fast or pounding heartbeat, hunger, headache, nervousness, irritability or aggression, confusion, slurred speech, blurred or double vision, tingling, trouble walking, appearing drunk, cool clammy skin; in severe cases seizures and loss of consciousness. Some people have no warning signs at all (CDC).\n\nCommon causes in someone with diabetes (Red Cross): a missed or small meal, more exercise than usual, vomiting, or too much diabetes medicine.\n\nLow blood sugar is below 70 mg/dL (AHA 2024, MedlinePlus). If they have a meter, a reading helps, but do not delay sugar for an awake person to find one.\n\nIf you cannot tell whether their sugar is low or high, giving sugar is the safer choice: it will not do major harm if it is high (Red Cross).\n\nLook-alikes: low blood sugar can look like a stroke (AHA 2024). If they have stroke signs (face drooping, arm drifting, slurred speech), use the Stroke protocol as well. If they are having a seizure, use the Seizure protocol."
+      "detail": "Signs (AHA 2024, Red Cross, CDC, MedlinePlus): dizziness, tiredness, feeling shaky or jittery, sweating, fast or pounding heartbeat, hunger, headache, nervousness, irritability or aggression, confusion, slurred speech, blurred or double vision, tingling, trouble walking, appearing drunk, cool clammy skin; in severe cases seizures and loss of consciousness. Some people have no warning signs at all (CDC).\n\nCommon causes in someone with diabetes (Red Cross): a missed or small meal, more exercise than usual, vomiting, or too much diabetes medicine.\n\nLow blood sugar is below 70 mg/dL (AHA 2024, MedlinePlus). If they have a meter, a reading helps, but do not delay sugar for an awake person to find one.\n\nIf you cannot tell whether their sugar is low or high, giving sugar is the safer choice: it will not do major harm if it is high (Red Cross).\n\nLook-alikes: low blood sugar is a common stroke look-alike (AHA 2024). If they have stroke signs (face drooping, arm drifting, slurred speech), start evacuating as the Stroke protocol says; the sugar step here still applies to someone fully awake who can swallow safely (the Stroke protocol uses the same rule). If they are having a seizure, use the Seizure protocol."
     },
     {
       "id": "s3",
@@ -114,9 +114,13 @@
     },
     {
       "id": "s22",
-      "text": "Glucagon: if someone trained to use their kit is there, they give it. Otherwise help with it, following the kit's printed instructions.",
-      "detail": "Red Cross: some people with diabetes carry a glucagon kit for severe low blood sugar; you can assist them with it, and family, friends or co-workers may have been trained to give it. If someone trained is there, encourage them to give it when the person meets the signs they were taught. No dose is given here: use the person's own prescribed kit as its instructions say.\n\nCDC: a person who passes out from very low blood sugar usually wakes within about 15 minutes after glucagon. Contact a doctor for emergency treatment straight after a glucagon injection.\n\nKeep them on their side; vomiting is possible.",
-      "log": "Own glucagon given"
+      "text": "Glucagon: if someone trained to use their kit is there, they give it. Otherwise help with it, following the kit's printed instructions. Not awake after 15 minutes: one more dose if their kit has one.",
+      "detail": "Red Cross: some people with diabetes carry a glucagon kit for severe low blood sugar; you can assist them with it, and family, friends or co-workers may have been trained to give it. If someone trained is there, encourage them to give it when the person meets the signs they were taught. No dose is given here: use the person's own prescribed kit as its instructions say.\n\nCDC: a person who passes out from very low blood sugar usually wakes within 15 minutes after glucagon; if they don't wake up within 15 minutes, they should receive one more dose. Give that second dose only from their own kit (or a second kit of theirs), as the kit directs. Contact a doctor for emergency treatment straight after a glucagon injection (CDC).\n\nKeep them on their side; vomiting is possible.",
+      "log": "Own glucagon given",
+      "timer": {
+        "seconds": 900,
+        "label": "Awake within 15 min of glucagon?"
+      }
     },
     {
       "id": "s23",

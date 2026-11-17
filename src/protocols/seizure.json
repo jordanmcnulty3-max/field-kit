@@ -91,7 +91,7 @@
     },
     {
       "id": "s9",
-      "text": "Emergency if: first seizure ever (or not known), over 5 minutes, another before waking, in water, injured, trouble breathing or choking, pregnant, diabetes, or under 6 months old.",
+      "text": "Emergency if: first seizure ever (or unknown), over 5 minutes, another before waking, in water, injured, trouble breathing or choking, pregnant, diabetes with loss of consciousness, or under 6 months.",
       "detail": "AHA 2024 (Class 1) lists when to activate EMS: a first-time seizure; a seizure lasting more than 5 minutes; more than one seizure without returning to their normal self in between; a seizure in water; a seizure with injury, trouble breathing or choking; a seizure in an infant under 6 months or a pregnant person; or not returning to their normal self within 5 to 10 minutes after the seizure stops (the next step checks that).\n\nCDC adds: trouble waking up after the seizure, and a person with diabetes who loses consciousness. Red Cross also marks loss of consciousness, whole-body convulsions and cardiac arrest after the seizure as needing immediate emergency care, and says to call if you do not know whether they have had seizures before.",
       "ask": {
         "q": "Is any of these true?",
@@ -133,9 +133,9 @@
     },
     {
       "id": "s30",
-      "text": "Seizure in water: keep their face out of the water and get them out as soon as you safely can. Then use the Drowning protocol.",
+      "text": "Seizure in water: support them with the head above water, tilted back if you can, and get them out as soon as you safely can. Then use the Drowning protocol.",
       "warn": "Do not become a second casualty: go into deep or moving water only if you can do it safely.",
-      "detail": "A seizure in water is always an emergency (AHA 2024, CDC, Red Cross). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nNone of the sources opened says how to support someone having a seizure in water. Holding their head and face above the water and bringing them out when it is safe is a group judgement.\n\nOnce out, the Drowning protocol checks breathing (CPR with breaths if needed) and covers watching for breathing problems afterwards. Put nothing in their mouth and do not hold the limbs down.",
+      "detail": "A seizure in water is always an emergency (AHA 2024, CDC, Red Cross). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nHow: Michigan Medicine (Seizure First Aid and Safety, revised 11/2019; an academic medical centre, outside the AHA/Red Cross tier): support the person with their head above water, tilted back if possible, and send them to an emergency department for evaluation whether or not they seem to fully recover. None of the top-tier sources gives a technique. Bringing them out of the water once it is safe for you is a group judgement.\n\nOnce out, the Drowning protocol checks breathing (CPR with breaths if needed) and covers watching for breathing problems afterwards. Put nothing in their mouth and do not hold the limbs down.",
       "end": true
     },
     {
@@ -154,7 +154,8 @@
   "evacuate": [
     "Get help and evacuate (AHA 2024): a first seizure, a seizure over 5 minutes, more than one without waking in between, a seizure in water, injury, trouble breathing or choking, pregnancy, an infant under 6 months, or not back to normal within 5 to 10 minutes.",
     "Also (CDC): trouble waking after the seizure, or a person with diabetes who loses consciousness.",
-    "Evacuate urgently if the seizure does not stop."
+    "Evacuate urgently if the seizure does not stop.",
+    "A seizure in water: emergency department evaluation even if they seem to recover fully (Michigan Medicine)."
   ],
   "notes": [
     "Seizure: protect from injury, nothing in the mouth, no restraint, time it; over 5 minutes is an emergency. Side position afterwards."
@@ -174,6 +175,11 @@
       "name": "US CDC, First Aid for Seizures, last reviewed 2024-02-08",
       "year": 2024,
       "url": "https://www.cdc.gov/epilepsy/first-aid-for-seizures/index.html"
+    },
+    {
+      "name": "Michigan Medicine Comprehensive Epilepsy Center, Seizure First Aid and Safety (last revised 11/2019)",
+      "year": 2019,
+      "url": "https://www.med.umich.edu/1libr/Neurology/Epilepsy/SeizureFirstAidandSafety.pdf"
     }
   ],
   "reviewed": "2026-11-17"

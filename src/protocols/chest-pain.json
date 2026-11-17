@@ -54,8 +54,8 @@
     },
     {
       "id": "s5",
-      "text": "Before aspirin, check: allergic to aspirin, told by a health professional not to take it, a bleeding problem, not fully alert, or unable to chew and swallow? Or are you unsure?",
-      "detail": "Answer Yes if any one of these is true, or if you are not sure. Then skip the aspirin.\n\nAHA 2024 (Class 2b): an alert adult with chest pain not caused by injury may be encouraged to chew and swallow aspirin while waiting for help, unless they have a known aspirin allergy or have been told by a health care professional not to take aspirin. AHA also names a bleeding risk as a reason some people should not take it, and says that if there is any doubt about whether aspirin should be taken, it is reasonable not to give it.\n\nRed Cross: only if they are awake, can follow simple commands, can chew and swallow, and are allowed to have aspirin. MedlinePlus: not if they are allergic to aspirin or have any condition that could make aspirin dangerous for them.\n\nAspirin is never a reason to delay getting help (MedlinePlus).",
+      "text": "Before aspirin, check: under 18, allergic to aspirin, told by a health professional not to take it, a bleeding problem, not fully alert, or unable to chew and swallow? Or are you unsure?",
+      "detail": "Answer Yes if any one of these is true, or if you are not sure. Then skip the aspirin.\n\nAHA 2024 (Class 2b) is for adults only: an alert adult with chest pain not caused by injury may be encouraged to chew and swallow aspirin while waiting for help, unless they have a known aspirin allergy or have been told by a health care professional not to take aspirin. AHA also names a bleeding risk as a reason some people should not take it, and says that if there is any doubt about whether aspirin should be taken, it is reasonable not to give it.\n\nRed Cross: only if they are awake, can follow simple commands, can chew and swallow, and are allowed to have aspirin. MedlinePlus: not if they are allergic to aspirin or have any condition that could make aspirin dangerous for them.\n\nAspirin is never a reason to delay getting help (MedlinePlus).",
       "ask": {
         "q": "Does any of these apply, or are you unsure?",
         "yes": "s7",
@@ -72,9 +72,9 @@
     {
       "id": "s7",
       "text": "If they have their own prescribed nitroglycerin, help them take it as their prescription directs.",
-      "detail": "Red Cross and MedlinePlus: if the person has prescribed nitroglycerin (or other chest pain medicine for a known heart condition), help them take it. Neither gives a dose; follow the directions on their own prescription.\n\nThe guidelines speak only of the person's own prescribed nitroglycerin. Do not give anyone else's.\n\nMedlinePlus: give nothing else by mouth except a prescribed heart medicine (and aspirin as in the earlier step).",
+      "detail": "Red Cross and MedlinePlus: if the person has prescribed nitroglycerin (or other chest pain medicine for a known heart condition), help them take it. Neither gives a dose; follow the directions on their own prescription.\n\nThe guidelines speak only of the person's own prescribed nitroglycerin. Do not give anyone else's.\n\nMedlinePlus: give nothing else by mouth except a prescribed heart medicine (and aspirin as in the earlier step).\n\nMedlinePlus (Nitroglycerin Sublingual, revised 2024-06-20): the doctor will usually tell the patient to sit down and take one dose when an attack begins; nitroglycerin may cause dizziness, lightheadedness and fainting, especially when getting up quickly from lying down.",
       "log": "Own nitroglycerin taken",
-      "warn": "Only if they are fully alert and can swallow."
+      "warn": "Only if fully alert. Have them sit or lie down first: nitroglycerin can make them dizzy or faint (MedlinePlus)."
     },
     {
       "id": "s8",
@@ -88,7 +88,7 @@
     },
     {
       "id": "s9",
-      "text": "Evacuate now, even if the pain eases. They must not walk or carry anything if it can be avoided. Wait with them for a rescue or a carry if one can reach you (see detail).",
+      "text": "Get them to hospital now, without exertion: if a rescue or carry can reach you, keep them resting and wait; walking is the last option (see detail). Even if the pain eases.",
       "warn": "If pain comes back or gets worse on the move, stop, rest them and reassess.",
       "detail": "What the guidelines say: AHA 2024 says a person with chest pain should be taken by EMS to the closest emergency department; EMS shortens the time the heart is starved of blood compared with a private car, and in one study about 1 in 300 people taken by private vehicle had a cardiac arrest on the way. Red Cross: never drive the person to hospital yourself; have them stop activity and rest. MedlinePlus: the sooner they reach the emergency room, the better the chance of survival.\n\nOff-grid, walking out versus waiting (group judgement, not from a source): none of these sources covers a place where EMS cannot come. If you have signal, or someone has gone for help and a rescue (vehicle, helicopter, stretcher team) can reach you, keep the casualty resting where they are and wait. If no rescue can come, the casualty still needs hospital care as soon as possible: carry them or use a vehicle if you can, so they do not exert themselves. Walking out under their own power is the last option; if it is the only one, go slowly, carry nothing, rest often, never leave them alone, and stop if pain, breathlessness, faintness or sweating returns.\n\nKeep the CPR, adult protocol ready on the way. Watch breathing and responsiveness the whole time.",
       "end": true
@@ -109,7 +109,7 @@
   "donts": [
     "Do not let them walk, climb or carry loads if it can be avoided; rest is part of the treatment.",
     "Do not wait to see if the pain goes away, and do not let them talk you out of getting help (MedlinePlus).",
-    "Do not give aspirin to anyone allergic to it, told by a health professional not to take it, with a bleeding problem, not fully alert, unable to swallow, or with chest pain from an injury; if unsure, do not give it (AHA 2024).",
+    "Do not give aspirin to anyone under 18, allergic to it, told by a health professional not to take it, with a bleeding problem, not fully alert, unable to swallow, or with chest pain from an injury; if unsure, do not give it (AHA 2024).",
     "Do not give ibuprofen, acetaminophen or other pain medicine in place of aspirin.",
     "Do not give nitroglycerin that was not prescribed to them.",
     "Do not leave them alone except to get help (MedlinePlus)."
@@ -120,7 +120,7 @@
     "Anyone who needed CPR must get to hospital urgently, even if they recover."
   ],
   "notes": [
-    "Aspirin for possible heart attack (AHA 2024): an alert adult whose chest pain is not from an injury, with no aspirin allergy, no bleeding problem and not told to avoid aspirin, chews and swallows 162 to 325 mg. If in doubt, do not give it."
+    "Aspirin for possible heart attack (AHA 2024): an alert adult (18 or over) whose chest pain is not from an injury, with no aspirin allergy, no bleeding problem and not told to avoid aspirin, chews and swallows 162 to 325 mg. If in doubt, do not give it."
   ],
   "sources": [
     {
@@ -137,6 +137,11 @@
       "name": "MedlinePlus (US National Library of Medicine), Heart attack first aid, reviewed 2024-10-07",
       "year": 2024,
       "url": "https://medlineplus.gov/ency/article/000063.htm"
+    },
+    {
+      "name": "MedlinePlus, Nitroglycerin Sublingual (drug information), last revised 2024-06-20",
+      "year": 2024,
+      "url": "https://medlineplus.gov/druginfo/meds/a601086.html"
     }
   ],
   "reviewed": "2026-11-17"

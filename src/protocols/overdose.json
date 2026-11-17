@@ -20,7 +20,7 @@
     "slow breathing",
     "drug overdose"
   ],
-  "summary": "Possible opioid overdose: CPR with breaths if they are not breathing normally (naloxone must not delay it); if breathing slowly or hard to wake, give naloxone nasal spray, side position, repeat every 2 to 3 minutes if needed, and watch for hours because naloxone wears off.",
+  "summary": "Possible opioid overdose: CPR with breaths if they are not breathing normally (naloxone must not delay it); if breathing slowly or hard to wake, give naloxone nasal spray, side position, repeat every 2 to 3 minutes if needed, then evacuate now while watching for at least 4 hours, because naloxone wears off.",
   "steps": [
     {
       "id": "s1",
@@ -125,9 +125,9 @@
     },
     {
       "id": "s11",
-      "text": "Awake and breathing: keep them on their side or sitting, stay with them and watch for at least 4 hours. Naloxone can wear off before the opioid does and the overdose can come back.",
-      "warn": "Keep a naloxone device ready. If they get drowsy or breathe slowly again, give another dose.",
-      "detail": "Naloxone works for only 30 to 90 minutes, and many opioids last longer in the body (NIDA). Red Cross: the effect of naloxone is often shorter than that of most opioids, so they still need immediate medical care even after it. AHA 2025: people who respond to naloxone need to be watched in a health care setting until the risk of breathing problems coming back is low; repeat doses can help if breathing slows again.\n\nHow long to watch: CDC says keep watching for at least 4 hours to make sure their breathing stays normal; NIDA says monitor for 2 hours after the last dose. This protocol uses the longer time. Long-acting or extended-release opioids may need longer (AHA 2025).\n\nOn waking they may have withdrawal symptoms within minutes, such as headache, a fast heartbeat, sweating, nausea, vomiting and tremors (NIDA). These are uncomfortable but usually not life-threatening (NIDA, CDC). Keep them on their side if they feel sick. Explain calmly what happened.\n\nOther drugs: naloxone reverses only opioids. Other sedatives, such as alcohol or sleeping and anxiety pills, often add to slowed breathing and are not reversed by naloxone (AHA 2025). With mixed drugs, give naloxone first (AHA 2025) and keep watching closely.",
+      "text": "Awake and breathing: start evacuating now, or wait with them for the rescue already called. Keep naloxone ready and watch them the whole time, for at least 4 hours.",
+      "warn": "Withdrawal can make them agitated: stay calm, comfort them, and do not let them go off alone (see detail). If they get drowsy or breathe slowly again, give another dose.",
+      "detail": "They still need medical care now, even though they woke up: Red Cross says a person given naloxone also needs immediate medical care, because the blocking effect of naloxone is often shorter than the effect of most opioids. AHA 2025: people who respond to naloxone should be observed in a health care setting until the risk of breathing problems coming back is low; repeat doses can help if breathing slows again. SAMHSA (2013 toolkit): get them to an emergency department or other medical care as quickly as possible, even if they revive and seem to feel better.\n\nWhy watch: naloxone works for only 30 to 90 minutes, and many opioids stay in the body longer (NIDA); after that time the overdose signs may come back (SAMHSA) and breathing can slow or stop again.\n\nHow long: CDC says stay with them until emergency help arrives or for at least four hours. SAMHSA says monitor for at least 4 hours from the last dose of naloxone, longer for long-acting opioids; NIDA says 2 hours after the last dose. This protocol uses at least 4 hours from the last dose: the timer restarts each time you come back here after another dose. The timer is for the watch, not a reason to delay leaving; the watch continues on the move.\n\nWaking up: withdrawal can start within minutes, with headache, a fast heartbeat, sweating, nausea, vomiting and tremors (NIDA); it can feel unpleasant (SAMHSA) but is usually not life-threatening (NIDA, CDC). Some people become agitated or combative and need help to stay calm (SAMHSA). Stay calm, comfort them, and explain plainly what happened: they overdosed, naloxone brought them round, and it will wear off within 30 to 90 minutes, so the overdose can come back (NIDA, SAMHSA). Keep them on their side if they feel sick.\n\nIf they want to leave (group judgement; no source opened covers this): do not let them go off alone. If they will not wait or come with you, someone stays with them carrying naloxone and this protocol. Do not restrain them or put yourself at risk.\n\nOther drugs: naloxone reverses only opioids. Other sedatives, such as alcohol or sleeping and anxiety pills, often add to slowed breathing and are not reversed by naloxone (AHA 2025). With mixed opioid and benzodiazepine use, give naloxone first (AHA 2025) and keep watching closely.",
       "timer": {
         "seconds": 14400,
         "label": "Watch for at least 4 hours"
@@ -140,8 +140,8 @@
     },
     {
       "id": "s13",
-      "text": "Get them to medical care even though they have recovered. Keep watching their breathing on the way.",
-      "detail": "Red Cross: they still need immediate medical care after naloxone. AHA 2025: observe in a health care setting until the risk of breathing problems coming back is low.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nGive any used naloxone devices, and anything you know about what they took and when, to medical staff.\n\nOthers who took the same drugs may also be at risk: check them and keep naloxone ready (group judgement).",
+      "text": "4 hours with no return of signs: keep going to medical care. They still need it, even though they seem well. Keep watching their breathing.",
+      "detail": "Red Cross: they still need immediate medical care after naloxone. SAMHSA: even if they revive and seem to feel better. AHA 2025: observe in a health care setting until the risk of breathing problems coming back is low.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nGive any used naloxone devices, and anything you know about what they took and when, to medical staff.\n\nOthers who took the same drugs may also be at risk: check them and keep naloxone ready (group judgement).",
       "end": true
     },
     {
@@ -181,12 +181,13 @@
     "Do not delay CPR or calling for help to give naloxone (AHA 2025).",
     "Do not leave someone alone after naloxone; it can wear off before the opioid does.",
     "Do not prime a naloxone nasal spray before use; each device holds one dose (MedlinePlus).",
-    "Do not assume they are safe because they woke up; they still need medical care (Red Cross)."
+    "Do not assume they are safe because they woke up; they still need medical care (Red Cross).",
+    "Do not let someone who has just been revived go off alone (group judgement)."
   ],
   "evacuate": [
-    "Get medical care for anyone who needed naloxone or CPR, even if they recover (Red Cross; AHA 2025: observe in a health care setting).",
+    "Get medical care now for anyone who needed naloxone or CPR, even if they recover and seem well (Red Cross; SAMHSA; AHA 2025: observe in a health care setting). Start at once; do not wait out the watch first.",
     "Evacuate urgently if they do not wake and breathe normally after naloxone, if signs come back, or if you have no naloxone.",
-    "Off-grid, while waiting or travelling, watch them for at least 4 hours after the last naloxone dose (CDC) with naloxone ready."
+    "Watch them the whole way, with naloxone ready, for at least 4 hours (CDC: at least four hours; SAMHSA: from the last dose of naloxone)."
   ],
   "notes": [
     "Naloxone nasal spray: on their back, one spray in one nostril; another with a new device in the other nostril every 2 to 3 minutes if they do not wake and breathe normally (MedlinePlus). Not breathing normally: CPR with breaths first (AHA 2025)."
@@ -230,6 +231,11 @@
       "name": "National Institute on Drug Abuse, Naloxone DrugFacts (January 2022, modified 2026-03-06)",
       "year": 2022,
       "url": "https://nida.nih.gov/publications/drugfacts/naloxone"
+    },
+    {
+      "name": "SAMHSA, Opioid Overdose Prevention Toolkit, HHS Publication No. (SMA) 13-4742 (2013), read via the Connecticut DMHAS mirror",
+      "year": 2013,
+      "url": "https://portal.ct.gov/-/media/dmhas/forms/mat/samhsaoverdosetoolkitpdf.pdf"
     }
   ],
   "reviewed": "2026-11-17"

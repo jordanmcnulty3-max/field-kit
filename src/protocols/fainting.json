@@ -18,7 +18,7 @@
     "keeled over",
     "vasovagal"
   ],
-  "summary": "Fainting or about to faint: lie them down (or sit) before they fall, leg-crossing and muscle tensing if they still feel faint and have no heart attack or stroke signs, raise the legs after a faint if uninjured, and get help if they do not recover in 1 to 2 minutes or a warning sign is present.",
+  "summary": "Fainting or about to faint: lie them down (or sit) before they fall; leg-crossing and muscle tensing if they still feel faint and have no heart attack or stroke signs; get help if it does not improve in 1 to 2 minutes; anyone who actually passed out lies flat (legs raised if uninjured) and needs medical care.",
   "steps": [
     {
       "id": "s1",
@@ -32,9 +32,14 @@
     },
     {
       "id": "s2",
-      "text": "Are they unresponsive but breathing normally (not waking up)?",
+      "text": "Breathing but not responding? If they have just gone down, watch their breathing for up to about a minute while they come round. Not breathing normally at any point: start CPR.",
+      "detail": "Red Cross: if a person suddenly loses consciousness and then comes to after about a minute, they may simply have fainted. Lie them flat on their back meanwhile.\n\nIf at any moment they are not breathing normally (no breathing, or only gasping), do not wait: start CPR now (CPR, adult protocol). If you are not sure, treat it as not breathing normally.\n\nIf they never lost consciousness, or are already awake and talking, answer No straight away.",
+      "timer": {
+        "seconds": 60,
+        "label": "Coming round? (about 1 min)"
+      },
       "ask": {
-        "q": "Are they unresponsive but breathing?",
+        "q": "After about a minute: are they still not responding?",
         "yes": "s21",
         "no": "s3"
       }
@@ -78,34 +83,40 @@
       }
     },
     {
+      "id": "s7",
+      "text": "Better: let them get up slowly when ready, sitting first, then standing. Stay beside them in case they feel faint again.",
+      "detail": "MedlinePlus: get up slowly from lying or sitting. If the faint feeling comes back, lie them down again."
+    },
+    {
+      "id": "s10",
+      "text": "Recovered without passing out: let them rest and keep an eye on them for the rest of the day. If the faint feeling comes back or gets worse, or they pass out, get help.",
+      "detail": "AHA 2024 (Class 2b): activate the emergency response system if there is no improvement within 1 to 2 minutes, if they faint, or if symptoms get worse or come back. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nThe Red Cross Fainting page also marks pale skin or sweating, and weakness or dizziness, as needing immediate emergency treatment. This protocol follows AHA 2024 (higher authority, and more specific) for someone who improves within 1 to 2 minutes without passing out; see the open question.\n\nLook for a cause: if they are hot after exertion or in hot weather, use the Heat illness (heat stroke, heat exhaustion, cramps) protocol. If they may be short of fluids (vomiting, diarrhoea, heavy sweating), use the Dehydration protocol. If they have diabetes, check for low blood sugar (Low blood sugar protocol).",
+      "end": true
+    },
+    {
       "id": "s8",
-      "text": "After a faint: keep them lying flat for at least 10 to 15 minutes. If they were not hurt in the fall, raise their feet about 6 to 12 inches. Turn them on their side if they vomit.",
+      "text": "They passed out: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Keep them lying flat for at least 10 to 15 minutes; raise the feet if uninjured.",
       "warn": "Do not raise the legs if they are injured, or if it causes pain or makes them feel worse.",
-      "detail": "AHA 2024 (section 5.2, Class 2b): for someone in shock without injury, for example after a simple faint or dehydration, raising the feet about 6 to 12 inches (15 to 30 cm) may be reasonable while waiting for help; if it causes pain or makes them worse, lower them flat again. MedlinePlus: raise the feet about 12 inches (30 cm) above the level of the heart, keep them lying down for at least 10 to 15 minutes, preferably somewhere cool and quiet, and turn them on their side if they vomit. Red Cross does not mention raising the legs.\n\nIf they cannot lie down, sit them leaning forward with the head between the knees (MedlinePlus).\n\nCheck for injuries from the fall. A blow to the head: use the Head injury and concussion protocol.\n\nWatch their breathing and alertness. If they stop responding and are still breathing, roll them onto their side (Recovery position protocol).",
+      "detail": "AHA 2024 (6.8, Class 2b): if a faint (syncope) actually occurs, activate the emergency response system. Red Cross Fainting marks loss of consciousness, then coming to in about a minute, as needing immediate emergency treatment. Off-grid, this means getting them to medical care even if they seem fully recovered; the steps below say how urgently. Whether the group wants a narrower rule is an open question for the group; the app follows the guidelines.\n\nLegs: AHA 2024 (section 5.2, Class 2b): with no injury, for example after a simple faint or dehydration, raising the feet about 6 to 12 inches (15 to 30 cm) may be reasonable while waiting for help; if it causes pain or makes them worse, lower them flat again. MedlinePlus: raise the feet about 12 inches (30 cm) above the level of the heart, keep them lying down for at least 10 to 15 minutes, preferably somewhere cool and quiet, and turn them on their side if they vomit. Red Cross does not mention raising the legs.\n\nIf they cannot lie down, sit them leaning forward with the head between the knees (MedlinePlus).\n\nCheck for injuries from the fall. A blow to the head: use the Head injury and concussion protocol.\n\nWatch their breathing and alertness. If they stop responding and are still breathing, roll them onto their side (Recovery position protocol).",
       "timer": {
         "seconds": 600,
         "label": "Lie down at least 10 minutes"
       }
     },
     {
-      "id": "s7",
-      "text": "When they feel better, let them get up slowly: sit first, then stand. Stay beside them in case they feel faint again.",
-      "detail": "MedlinePlus: get up slowly from lying or sitting. If the faint feeling comes back, lie them down again; AHA 2024 says to get help if symptoms come back or get worse.\n\nIf they are hot after exertion or in hot weather, use the Heat illness (heat stroke, heat exhaustion, cramps) protocol. If they may be short of fluids (vomiting, diarrhoea, heavy sweating), use the Dehydration protocol. If they have diabetes, check for low blood sugar (Low blood sugar protocol)."
-    },
-    {
       "id": "s9",
-      "text": "Warning signs? Fell from a height or injured, slow to come round, over 50, pregnant, diabetes, irregular or pounding heartbeat, fit-like jerking, a bitten tongue, or wet themselves.",
-      "detail": "MedlinePlus lists these as reasons to call 911 after a faint: a fall from a height, especially if injured or bleeding; not becoming alert within a couple of minutes; pregnancy; age over 50; diabetes; chest pain, pressure or discomfort; a pounding or irregular heartbeat; loss of speech, vision problems or being unable to move a limb; convulsions, a tongue injury, or loss of bladder or bowel control.\n\nRed Cross and AHA 2024: also get help if the faint feeling does not improve within 1 to 2 minutes, or comes back or gets worse.\n\nChest pain, trouble breathing or stroke signs at any point: use the Chest pain or heart attack protocol, or the Stroke protocol.",
+      "text": "Is any of these true: fell from a height or injured, slow to come round, over 50, pregnant, diabetes, chest pain, irregular or pounding heartbeat, fit-like jerking, a bitten tongue, or wet themselves?",
+      "detail": "MedlinePlus lists these as reasons to call 911 for a person who fainted: a fall from a height, especially if injured or bleeding; not becoming alert quickly (within a couple of minutes); pregnancy; age over 50; diabetes; chest pain, pressure or discomfort; a pounding or irregular heartbeat; loss of speech, vision problems or being unable to move a limb; convulsions, a tongue injury, or loss of bladder or bowel control.\n\nChest pain or stroke signs: also use the Chest pain or heart attack protocol, or the Stroke protocol. Diabetes: check for low blood sugar (Low blood sugar protocol).",
       "ask": {
-        "q": "Is any warning sign present?",
+        "q": "Is any of these true?",
         "yes": "s23",
-        "no": "s10"
+        "no": "s11"
       }
     },
     {
-      "id": "s10",
-      "text": "Recovered: let them rest and keep an eye on them for the rest of the day. A first-ever faint, repeated faints, or new symptoms need a medical check as soon as you can arrange it.",
-      "detail": "MedlinePlus: see a provider as soon as possible if you have never fainted before, faint often, or have new symptoms with fainting.\n\nIf they faint again, or the faint feeling keeps coming back, start this protocol again and treat it as needing help (AHA 2024, Red Cross: symptoms that come back or get worse).\n\nOff-grid, whether they carry on with the trip, and whether they avoid heights, water or driving for a while, is for the group to decide with them; the sources opened give no rule for this.",
+      "id": "s11",
+      "text": "No warning signs: they still need medical care, because they passed out (AHA 2024, Red Cross). Evacuate. Let them get up slowly, never walk alone, and lie down at once if they feel faint again.",
+      "detail": "AHA 2024 (6.8) and Red Cross call for emergency help whenever a faint actually occurs. MedlinePlus: also see a provider for a first-ever faint, frequent faints, or new symptoms with fainting.\n\nGetting up: slowly, sitting first, then standing (MedlinePlus). If the faint feeling comes back, lie them down again at once.\n\nOff-grid (group judgement): with none of the warning signs in the previous step, this is less urgent than those cases, but they still go out to a medical check. They should not walk alone, carry heavy loads, or go near drops or water until checked. Whether the group wants a narrower rule for a typical faint in a young, healthy member is an open question.\n\nLook for a cause: heat (Heat illness (heat stroke, heat exhaustion, cramps) protocol), lack of fluids (Dehydration protocol), diabetes (Low blood sugar protocol).",
       "end": true
     },
     {
@@ -122,14 +133,14 @@
     },
     {
       "id": "s22",
-      "text": "Keep them lying or sitting, whichever is easier for breathing. Do not use the muscle-tensing manoeuvres. Use the Chest pain or heart attack protocol, or the Stroke protocol, now.",
-      "detail": "AHA 2024 (Class 3: Harm): physical counterpressure manoeuvres are not recommended when signs of a heart attack or stroke come with the faint feeling.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Keep them lying or sitting, whichever is easier for breathing. No muscle-tensing manoeuvres. Use the protocol that fits now (see detail): heart attack, stroke, asthma or allergic reaction.",
+      "detail": "Use the matching protocol by its title:\n- chest pain: Chest pain or heart attack protocol;\n- face drooping, arm drifting, slurred speech: Stroke protocol;\n- wheezing in someone with asthma: Asthma attack protocol;\n- swelling of the face, lips or tongue, hives, or a throat closing: Anaphylaxis (severe allergic reaction) protocol.\n\nAHA 2024 (Class 3: Harm): physical counterpressure manoeuvres are not recommended when signs of a heart attack or stroke come with the faint feeling.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },
     {
       "id": "s23",
       "text": "Get help: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Keep them lying down and watch their breathing.",
-      "detail": "AHA 2024: activate the emergency response system if the faint feeling does not improve within 1 to 2 minutes, if they faint, or if symptoms get worse or come back. MedlinePlus: the warning signs in this protocol need a 911 call.\n\nKeep them lying flat (raise the feet 6 to 12 inches only if they are not injured and it does not make them worse). If they vomit or stop responding but are breathing, roll them onto their side (Recovery position protocol). If they stop breathing normally, start CPR (CPR, adult protocol).\n\nPlan their evacuation: they should not walk out alone, and should lie down at once if the faint feeling returns.",
+      "detail": "AHA 2024: activate the emergency response system if the faint feeling does not improve within 1 to 2 minutes, if they faint, or if symptoms get worse or come back. MedlinePlus: the warning signs in this protocol (for someone who fainted) need a 911 call.\n\nKeep them lying flat (raise the feet 6 to 12 inches only if they are not injured and it does not make them worse). If they vomit or stop responding but are breathing, roll them onto their side (Recovery position protocol). If they stop breathing normally, start CPR (CPR, adult protocol).\n\nPlan their evacuation: they should not walk out alone, and should lie down at once if the faint feeling returns.",
       "end": true
     }
   ],
@@ -141,12 +152,12 @@
     "Do not give anything by mouth until they are fully awake."
   ],
   "evacuate": [
-    "Get help (AHA 2024, Red Cross): the faint feeling does not improve within 1 to 2 minutes, they actually faint, or symptoms come back or get worse.",
-    "Get help (MedlinePlus): a fall from a height or injury, not alert within a couple of minutes, pregnancy, over 50, diabetes, chest pain, pounding or irregular heartbeat, speech, vision or limb problems, convulsions, a bitten tongue, or loss of bladder or bowel control.",
-    "Medical check as soon as you can arrange it (MedlinePlus): a first-ever faint, repeated faints, or new symptoms."
+    "Get help and evacuate (AHA 2024, Red Cross): anyone who actually passed out, even if they recover; and a faint feeling that does not improve within 1 to 2 minutes, or comes back or gets worse.",
+    "Get help urgently (MedlinePlus, for someone who fainted): a fall from a height or injury, not alert within a couple of minutes, pregnancy, over 50, diabetes, chest pain, pounding or irregular heartbeat, speech, vision or limb problems, convulsions, a bitten tongue, or loss of bladder or bowel control.",
+    "Medical check (MedlinePlus): a first-ever faint, repeated faints, or new symptoms."
   ],
   "notes": [
-    "Feeling faint: lie or sit down first, then cross the legs and tense the leg muscles (AHA 2024, Red Cross). Not if there are heart attack or stroke signs."
+    "Feeling faint: lie or sit down first, then cross the legs and tense the leg muscles (AHA 2024, Red Cross); not if there are heart attack or stroke signs. Anyone who actually passed out needs medical care (AHA 2024, Red Cross)."
   ],
   "sources": [
     {

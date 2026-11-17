@@ -19,7 +19,7 @@
     "tight chest",
     "breathless"
   ],
-  "summary": "Asthma attack: sit them up, move away from the trigger, help them use their own reliever inhaler (with a spacer if they have one), a second dose after 10 to 15 minutes if needed, and get help.",
+  "summary": "Asthma attack: sit them up, move away from the trigger, help them use their own reliever inhaler (with a spacer if they have one), a second dose after 10 to 15 minutes if needed, get help, and evacuate urgently if they are not clearly better after the second dose.",
   "steps": [
     {
       "id": "s1",
@@ -63,13 +63,13 @@
     },
     {
       "id": "s6",
-      "text": "Help them use it: shake it, attach their spacer if they have one, breathe out fully, seal lips on the mouthpiece, press once while breathing in slowly and deeply, hold 5 to 10 seconds.",
-      "detail": "AHA 2024 (Class 1): help a person with asthma who is having trouble breathing to use their own prescribed bronchodilator (reliever) as needed. Using it with a spacer (or a nebulizer) is better than the inhaler alone (Class 2a). If they have no spacer, AHA says an improvised one is reasonable; it cites a 500 ml (about 16 oz) plastic drink bottle or a 150 ml (about 5 oz) paper cup, but does not say how to make one, so this protocol does not either.\n\nHow (Red Cross): check it is their reliever, shake the inhaler, take off the mouthpiece cover, attach a spacer if available. Have them breathe out as much as they can, put their lips tightly around the mouthpiece, press the canister firmly, take a slow deep breath and hold it for 5 to 10 seconds. If they cannot take a deep breath, or are using a spacer with a face mask, they take several normal breaths from the spacer instead.\n\nHow many puffs: none of the sources gives a number. Red Cross: let them use it as their health care provider directed; follow their own asthma action plan if they have one. If you are untrained, hand it to them ready to use and let them take it.\n\nNote the time and any change (Red Cross).",
+      "text": "Help them use it: shake it, attach their spacer if they have one, breathe out fully, seal lips on the mouthpiece, press the canister firmly as they breathe in slowly and deeply, hold 5 to 10 seconds.",
+      "detail": "AHA 2024 (Class 1): help a person with asthma who is having trouble breathing to use their own prescribed bronchodilator (reliever) as needed. Using it with a spacer (or a nebulizer) is better than the inhaler alone (Class 2a). If they have no spacer, AHA says an improvised one is reasonable; it cites a 500 ml (about 16 oz) plastic drink bottle or a 150 ml (about 5 oz) paper cup, but does not say how to make one, so this protocol does not either.\n\nHow (Red Cross): check it is their reliever, shake the inhaler, take off the mouthpiece cover, attach a spacer if available. Have them breathe out as much as they can, put their lips tightly around the mouthpiece, press the canister firmly, take a slow deep breath and hold it for 5 to 10 seconds. If they cannot take a deep breath, or are using a spacer with a face mask, they take several normal breaths from the spacer instead.\n\nHow many puffs: none of the sources gives a number; Red Cross says only to press the canister firmly. Puffs as their own prescription or asthma action plan says. Red Cross: let them use it as their health care provider directed; follow their own asthma action plan if they have one. If you are untrained, hand it to them ready to use and let them take it.\n\nNote the time and any change (Red Cross).",
       "log": "Reliever inhaler used"
     },
     {
       "id": "s7",
-      "text": "Watch them. If they are still struggling 10 to 15 minutes after the first dose and help has not arrived, they take a second dose the same way.",
+      "text": "Watch them. Still struggling 10 to 15 minutes after the first dose, with help not yet there: a second dose. Blue lips, drowsy or cannot speak: evacuate urgently now (see detail).",
       "detail": "Red Cross: if symptoms persist 10 to 15 minutes after the first dose and EMS has not arrived, give (or help them take) a second dose.\n\nIf life-threatening signs appear before then (blue or grey lips, drowsy or confused, unable to speak), do not wait for the timer to start evacuating urgently: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Keep the timer running for the second dose.",
       "timer": {
         "seconds": 600,
@@ -84,23 +84,18 @@
     {
       "id": "s8",
       "text": "Help them take a second dose the same way. Note the time.",
-      "detail": "Same technique as the first dose: spacer if they have one, slow deep breath, hold 5 to 10 seconds (Red Cross). Further doses only as their own prescription or asthma action plan says; the sources opened give no dosing beyond a second dose.",
-      "log": "Second reliever dose"
-    },
-    {
-      "id": "s9",
-      "text": "Check for life-threatening signs: blue or grey lips or face, drowsy or confused, unable to speak, extreme difficulty breathing, or breathing stops for moments.",
-      "detail": "MedlinePlus lists emergency signs during an asthma attack: bluish lips and face; reduced alertness such as severe drowsiness or confusion; extreme difficulty breathing; rapid pulse; severe anxiety from breathlessness; sweating; difficulty speaking; breathing that stops for moments. Red Cross adds: no improvement after medicine.",
+      "detail": "Same technique as the first dose: spacer if they have one, slow deep breath, hold 5 to 10 seconds (Red Cross). Further doses only as their own prescription or asthma action plan says; the sources opened give no dosing beyond a second dose.\n\nRed Cross marks \"unimproved after medication\" as needing immediate emergency care. If you are not sure they are clearly better, answer No.",
+      "log": "Second reliever dose",
       "ask": {
-        "q": "Is any life-threatening sign present?",
-        "yes": "s10",
-        "no": "s11"
+        "q": "After the second dose: are they clearly better?",
+        "yes": "s11",
+        "no": "s10"
       }
     },
     {
       "id": "s10",
-      "text": "Evacuate urgently. Keep them sitting up and with you. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "detail": "Keep them in the position they find easiest for breathing, usually sitting up; do not make them lie flat or walk. Keep their inhaler with them for use as their prescription or action plan says.\n\nWatch breathing and responsiveness all the time (Red Cross). If they become unresponsive and stop breathing normally, start CPR (CPR, adult protocol).\n\nIf they show signs of shock, use the Shock protocol.",
+      "text": "Not clearly better, or getting worse: evacuate urgently. Keep them sitting up and with you. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Red Cross: no improvement after medicine needs immediate emergency care. MedlinePlus emergency signs during an asthma attack: bluish lips and face; decreased alertness, such as severe drowsiness or confusion; extreme difficulty breathing; rapid pulse; severe anxiety from breathlessness; sweating; difficulty speaking; breathing that stops for moments.\n\nKeep them in the position they find easiest for breathing, usually sitting up; do not make them lie flat or walk. Keep their inhaler with them for use as their prescription or action plan says.\n\nWatch breathing and responsiveness all the time (Red Cross). If they become unresponsive and stop breathing normally, start CPR (CPR, adult protocol).\n\nIf they show signs of shock, use the Shock protocol.",
       "end": true
     },
     {
@@ -135,7 +130,7 @@
     "Do not leave them alone."
   ],
   "evacuate": [
-    "Evacuate urgently: no improvement after their inhaler, blue or grey lips, drowsiness or confusion, unable to speak, extreme difficulty breathing, or no inhaler with them (Red Cross, MedlinePlus).",
+    "Evacuate urgently: not clearly better after the second dose of their inhaler (Red Cross: unimproved after medication), blue or grey lips or face, drowsiness or confusion, difficulty speaking, extreme difficulty breathing (MedlinePlus), or no inhaler with them.",
     "Red Cross treats any asthma attack with wheezing or trouble breathing as needing emergency care. After a mild attack that settles fully with one dose, the group decides with the person whether to continue (group judgement)."
   ],
   "notes": [

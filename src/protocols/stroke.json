@@ -18,7 +18,7 @@
     "sudden headache",
     "cva"
   ],
-  "summary": "Possible stroke: check FAST, write down when the signs started, get help and start evacuating now, no aspirin and nothing by mouth (except sugar for a measured low blood sugar), side position if drowsy or drooling.",
+  "summary": "Possible stroke: check FAST, write down when the signs started, get help and start evacuating now, no aspirin, sugar only for possible low blood sugar in someone fully awake who swallows safely, side position if drowsy or drooling.",
   "steps": [
     {
       "id": "s1",
@@ -47,9 +47,9 @@
     },
     {
       "id": "s5",
-      "text": "Give nothing to eat or drink and no medicine. No aspirin. The only exception is sugar for a measured low blood sugar (next steps).",
+      "text": "No aspirin. Give no other food, drink or medicine for now (see detail). Sugar for possible low blood sugar is covered in the next steps.",
       "warn": "No aspirin: some strokes are bleeding in the brain, and aspirin can make a bleeding stroke worse.",
-      "detail": "Aspirin: the American Stroke Association advises against taking aspirin during a stroke, because some strokes are caused by a burst blood vessel rather than a clot, and aspirin could make those bleeding strokes more severe. The aspirin advice in the Chest pain or heart attack protocol does not apply here.\n\nNothing by mouth: drooling and trouble swallowing are stroke signs (Red Cross), so food, drink or tablets could be choked on. None of the sources opened states a nothing-by-mouth rule for stroke; this is a group judgement based on that risk.\n\nThe exception for a measured low blood sugar follows AHA 2024, which names low blood sugar as a common stroke look-alike; the Low blood sugar protocol gives sugar only to someone fully awake who can swallow safely. Applying it here is a group judgement."
+      "detail": "Aspirin: the American Stroke Association advises against taking aspirin during a stroke, because some strokes are caused by a burst blood vessel rather than a clot, and aspirin could make those bleeding strokes more severe. The aspirin advice in the Chest pain or heart attack protocol does not apply here.\n\nOther food, drink and medicine: none of the sources opened (AHA 2024, Red Cross Stroke, MedlinePlus Stroke, American Stroke Association) states a nothing-by-mouth rule for stroke. Drooling and trouble swallowing are stroke signs (Red Cross), so anything by mouth could be choked on; holding back other food, drink and medicine is a group judgement based on that risk.\n\nSugar is the exception, because low blood sugar is a common stroke look-alike (AHA 2024): the next steps give it to someone with diabetes, or with a measured low reading, who is fully awake and can swallow safely."
     },
     {
       "id": "s6",
@@ -58,13 +58,35 @@
       "ask": {
         "q": "Is a blood glucose meter available?",
         "yes": "s7",
-        "no": "s8"
+        "no": "s6b"
       }
     },
     {
       "id": "s7",
-      "text": "Check their blood sugar, without delaying help. Below 70 mg/dL: also use the Low blood sugar protocol, and keep evacuating.",
-      "detail": "AHA 2024 defines low blood sugar (hypoglycaemia) as below 70 mg/dL. The Low blood sugar protocol gives sugar by mouth only to someone fully awake who can swallow safely; follow its checks.\n\nA normal reading does not rule out anything: keep treating this as a stroke and keep evacuating. A low reading that is corrected does not rule out a stroke either; if stroke signs remain after their sugar is treated, keep evacuating as for a stroke."
+      "text": "Check their blood sugar, without delaying help. Is it below 70 mg/dL?",
+      "detail": "AHA 2024 (6.2, Class 2a): it is reasonable to check blood sugar in an adult with suspected stroke if a meter is available and it does not delay activating EMS. AHA 2024 (6.7) defines low blood sugar as below 70 mg/dL.\n\nA normal reading does not change anything: keep treating this as a stroke and keep evacuating.",
+      "ask": {
+        "q": "Is the reading below 70 mg/dL?",
+        "yes": "s6c",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s6b",
+      "text": "Do they have diabetes treated with insulin or diabetes pills?",
+      "detail": "Low blood sugar is a common stroke look-alike (AHA 2024), and in someone with diabetes it can come from a missed meal, more exercise than usual, vomiting, or too much diabetes medicine (Red Cross). Red Cross: if you cannot tell whether their sugar is low or high, it is good to give some sugar; it can be lifesaving if low and will not do major harm if high. Check their pockets and kit, and look for a medical ID.",
+      "ask": {
+        "q": "Do they have diabetes treated with insulin or pills?",
+        "yes": "s6c",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s6c",
+      "text": "If they are fully awake and swallow safely, give at least 20 grams of sugar: glucose tablets or gel, 7 oz orange juice, 20 to 25 Skittles or 10 to 20 jellybeans. Keep evacuating as a stroke.",
+      "warn": "Not fully awake, or choking, coughing on swallowing or drooling: nothing by mouth. Lie them on their side.",
+      "detail": "This is the same rule as the sugar step of the Low blood sugar protocol. AHA 2024 (6.7, Class 1): encourage oral glucose for a person with suspected low blood sugar who is awake and able to swallow; Class 3 (Harm): never for someone who is not fully awake or cannot swallow. The amounts that give about 20 grams are from the Red Cross Diabetic Emergencies page; glucose tablets or gel are preferred (AHA 2024); check the packet for 20 grams. No diet drinks.\n\nKeep evacuating as for a stroke whatever happens: even if the signs improve after sugar, a stroke has not been ruled out. Tell the people taking over that sugar was given and when.",
+      "log": "Sugar given (about 20 g)"
     },
     {
       "id": "s8",
@@ -83,7 +105,7 @@
     {
       "id": "s10",
       "text": "Keep evacuating, even if the signs get better. Keep watching their breathing and alertness on the way.",
-      "detail": "Signs that fade or go away still need medical care now (Red Cross, American Stroke Association).\n\nIf they become drowsy or start vomiting, lie them on their side (Recovery position protocol). If they stop breathing normally, start CPR (CPR, adult protocol). If they have a seizure, use the Seizure protocol.\n\nTell the people who take over the time the signs started (or when they were last seen well), and any blood sugar reading.",
+      "detail": "Signs that fade or go away still need medical care now (Red Cross, American Stroke Association).\n\nIf they become drowsy or start vomiting, lie them on their side (Recovery position protocol). If they stop breathing normally, start CPR (CPR, adult protocol). If they have a seizure, use the Seizure protocol.\n\nTell the people who take over the time the signs started (or when they were last seen well), any blood sugar reading, and any sugar given and when.",
       "end": true
     },
     {
@@ -95,7 +117,7 @@
   ],
   "donts": [
     "Do not give aspirin; some strokes are bleeding strokes (American Stroke Association).",
-    "Do not give food, drink or medicine by mouth, except sugar for a measured low blood sugar (group judgement: drooling and trouble swallowing are stroke signs).",
+    "Do not give food, drink or medicine by mouth other than sugar for possible low blood sugar (group judgement: drooling and trouble swallowing are stroke signs); never anything by mouth if they are not fully awake or cannot swallow safely (AHA 2024).",
     "Do not wait to see whether the signs go away; signs that go away still need care now.",
     "Do not let them walk alone."
   ],
@@ -104,7 +126,7 @@
     "Tell the receiving team when the signs started, or when the person was last seen well."
   ],
   "notes": [
-    "FAST: Face drooping, Arm drifting down, Speech slurred or wrong, Time to get help and note when the signs began. No aspirin. Nothing by mouth, except sugar for a measured low blood sugar in someone fully awake who can swallow."
+    "FAST: Face drooping, Arm drifting down, Speech slurred or wrong, Time to get help and note when the signs began. No aspirin. Sugar only if they have diabetes or a low reading and are fully awake and swallow safely."
   ],
   "sources": [
     {
@@ -131,6 +153,11 @@
       "name": "MedlinePlus (US National Library of Medicine), Stroke, reviewed 2025-04-16",
       "year": 2025,
       "url": "https://medlineplus.gov/ency/article/000726.htm"
+    },
+    {
+      "name": "American Red Cross, Diabetic Emergencies: How To Help (lay first aid page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/diabetic-emergencies"
     }
   ],
   "reviewed": "2026-11-17"

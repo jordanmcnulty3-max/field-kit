@@ -1,0 +1,146 @@
+{
+  "id": "tick",
+  "title": "Tick bite",
+  "category": "bites",
+  "keywords": [
+    "tick",
+    "tick bite",
+    "deer tick",
+    "dog tick",
+    "lyme",
+    "lyme disease",
+    "bullseye rash",
+    "bulls eye rash",
+    "rocky mountain spotted fever",
+    "remove tick",
+    "tick head stuck",
+    "embedded tick"
+  ],
+  "summary": "Tick attached to the skin (US): pull it out at once with fine-tipped tweezers, clean the bite, keep or note the tick, and watch for rash or fever for several weeks.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Is the person unresponsive and not breathing normally?",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are there signs of a severe allergic reaction: swelling of the face, lips or tongue, trouble breathing, or a throat that feels like it is closing?",
+      "detail": "Rare, but AHA 2024 notes some evidence linking squeezing a tick's body during removal to anaphylaxis.",
+      "ask": {
+        "q": "Signs of a severe allergic reaction (face, lips or tongue swelling, trouble breathing)?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Remove the tick now. Grip it with fine-tipped tweezers as close to the skin as you can, by the head, without squeezing its body.",
+      "detail": "Remove the tick as soon as possible (AHA 2024, Class 1): the longer it is attached, the higher the chance of infection (Red Cross, CDC, AHA). CDC: the risk of Lyme disease is very low if the tick was attached for less than 24 hours.\n\nTools: fine-tipped tweezers (CDC, AHA) or a commercial tick remover such as a tick key (AHA, Red Cross). Red Cross: fine-tipped, pointed tweezers with a smooth inner surface. If you have no tweezers, CDC says regular tweezers or your fingers can be used.\n\nGrip the tick's head as close to the skin surface as possible (AHA, Red Cross, CDC). Do not squeeze the swollen body: CDC says grasp without squeezing it, and AHA notes some evidence linking squeezing the body to anaphylaxis.\n\nWear gloves if you have them and wash your hands before you start."
+    },
+    {
+      "id": "s4",
+      "text": "Pull straight up, away from the skin, with steady, even pressure. Do not twist or jerk. Keep pulling until it lets go.",
+      "detail": "Steady, even upward pressure (AHA 2024, CDC). Red Cross: pull straight up slowly and steadily, without twisting, until the tick releases. Twisting or jerking can leave the mouthparts in the skin (CDC).\n\nDo not try to make the tick back out with petroleum jelly, nail polish, a hot match, heat, gasoline, alcohol or anything else. These are less effective (AHA), can take hours while the tick keeps feeding (Red Cross), and may make the tick push infected fluid into the skin (CDC).",
+      "warn": "No petroleum jelly, nail polish, heat or matches on the tick.",
+      "log": "Tick removed"
+    },
+    {
+      "id": "s5",
+      "text": "Mouthparts left in the skin: try once to lift them out with clean tweezers. If they do not come out easily, leave them.",
+      "detail": "CDC: if you cannot remove the mouthparts easily with tweezers, leave them alone and let the skin heal; the skin will usually push them out.\n\nRed Cross: see a healthcare provider if you cannot remove the whole tick or if mouthparts remain in the skin. Do not dig at the skin with a needle or knife."
+    },
+    {
+      "id": "s6",
+      "text": "Clean the bite and your hands with soap and water, or with rubbing alcohol or hand sanitizer.",
+      "detail": "CDC: clean the bite area and your hands with rubbing alcohol or soap and water (hand sanitizer is also listed on the CDC page). Red Cross: wash the area with soap and warm water, then put a small amount of antibiotic ointment on it if they have no known allergy to it. AHA: wash hands and clean the wound after removal.",
+      "log": "Tick bite cleaned"
+    },
+    {
+      "id": "s7",
+      "text": "Put the tick in a sealed bag or container (or in rubbing alcohol). Write down the date and where they were when bitten. Never crush a tick with your fingers.",
+      "detail": "Red Cross: put the tick in a sealed container so a healthcare provider can see it. CDC: you can keep it in rubbing alcohol or a sealed bag or container if you want a provider to identify it; otherwise dispose of it by sealing it in a container or bag, wrapping it tightly in tape, or flushing it. Do not crush it with your fingers (CDC).\n\nIf they get ill later, CDC says to tell the doctor about the bite, when it happened and where the tick was most likely picked up.\n\nCDC strongly discourages using commercial tick testing to decide on antibiotics: a positive result does not prove infection and a negative result does not rule it out.\n\nCheck the rest of the body for more ticks: scalp, in and around the ears, under the arms, inside the navel, the waistline, behind the knees and between the legs (Red Cross). A tick that has not attached cannot pass on germs, but finding one means others may be nearby (CDC)."
+    },
+    {
+      "id": "s8",
+      "text": "Was the tick swollen with blood, in an area where Lyme disease is common?",
+      "detail": "Lyme disease is spread by the deer (blacklegged) tick, which is about the size of a poppy seed or pin head, much smaller than a dog tick (Red Cross).",
+      "ask": {
+        "q": "Was it a blood-swollen tick in an area where Lyme disease is common?",
+        "yes": "s9",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Talk to a health care provider within 72 hours of removing the tick, by phone or radio if you can reach one, about whether a preventive antibiotic is right.",
+      "detail": "AHA 2024 (Class 1): a bite in an area with a lot of Lyme disease should get prompt consultation with a health care professional within 72 hours after an engorged tick is removed. A single dose of an antibiotic, prescribed by a clinician, can lower the chance of Lyme disease in some situations (AHA, CDC); only a clinician can decide this. CDC generally does not advise antibiotics after every tick bite.\n\nThe app gives no antibiotic doses. If you cannot reach anyone within 72 hours, keep watching for symptoms (next step)."
+    },
+    {
+      "id": "s10",
+      "text": "Watch for several weeks. Rash (including a bull's-eye rash), fever, headache, tiredness, muscle aches or swollen, painful joints: get medical care and tell them about the bite.",
+      "detail": "CDC: if a rash or fever develops within several days to weeks after removing a tick, see a doctor. The CDC Tick Bite fact sheet (2021) says watch for 30 days and lists rash, fever, fatigue, headache, muscle pain, and joint swelling and pain. Red Cross: monitor for several days for rash or bull's-eye rash, fever, muscle or joint aches, and fatigue.\n\nA bull's-eye rash may start as a small red spot at the bite and can appear days or weeks later; on fair skin the centre may be paler with a red, raised edge (Red Cross). Red Cross marks a bull's-eye rash as needing immediate emergency medical treatment; CDC says to see a doctor (see open questions).\n\nFever, headache and rash after a tick bite can be Rocky Mountain spotted fever, which can become life-threatening quickly and can kill if not treated early (CDC). The rash often appears only 2 to 4 days after the fever starts (CDC), so do not wait for a rash. Group judgement, not from a source: off-grid, treat fever or headache in the weeks after a tick bite as a reason to evacuate, because care cannot wait for the rash.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now. Remove the tick later, once they are stable.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not use petroleum jelly, nail polish, heat, a match, gasoline or alcohol to make the tick let go (AHA 2024, Red Cross, CDC).",
+    "Do not squeeze the tick's body, and do not twist or jerk it out (CDC, AHA 2024).",
+    "Do not crush a tick with your fingers (CDC).",
+    "Do not dig deep into the skin for leftover mouthparts.",
+    "Do not rely on a commercial tick test to decide on treatment (CDC)."
+  ],
+  "evacuate": [
+    "Evacuate: a bull's-eye rash after a tick bite (Red Cross: needs immediate emergency medical treatment).",
+    "Get medical care: rash (including a bull's-eye rash), fever, headache, tiredness, muscle aches or joint swelling in the weeks after a tick bite (CDC, Red Cross).",
+    "Evacuate urgently (group judgement based on CDC: Rocky Mountain spotted fever can become life-threatening quickly): fever or headache, with or without a rash, in the weeks after a tick bite.",
+    "Get advice within 72 hours: a blood-swollen tick removed in an area where Lyme disease is common (AHA 2024)."
+  ],
+  "notes": [
+    "Tick: fine-tipped tweezers close to the skin, pull straight up steadily, no twisting. Keep it sealed, note date and place, watch for rash or fever for several weeks."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 7.2 Tick Bites (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, What to Do After a Tick Bite, last reviewed 9 Jun 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/ticks/after-a-tick-bite/index.html"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, Tick Bite: What to Do (fact sheet CS310465-A, 3 Nov 2021)",
+      "year": 2021,
+      "url": "https://www.cdc.gov/ticks/pdfs/FS_TickBite-508.pdf"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, About Rocky Mountain Spotted Fever, last reviewed 15 May 2024",
+      "year": 2024,
+      "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/about/index.html"
+    },
+    {
+      "name": "American Red Cross, Tick Bites (lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/tick-bites"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

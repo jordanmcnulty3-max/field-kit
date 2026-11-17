@@ -1,0 +1,234 @@
+{
+  "id": "poisoning",
+  "title": "Poisoning (swallowed, inhaled, skin or eye)",
+  "category": "bites",
+  "keywords": [
+    "poison",
+    "poisoning",
+    "poison control",
+    "swallowed",
+    "ate something",
+    "drank something",
+    "overdose",
+    "pills",
+    "medicine overdose",
+    "chemical",
+    "bleach",
+    "cleaner",
+    "fuel",
+    "gasoline",
+    "antifreeze",
+    "mushroom",
+    "berries",
+    "poisonous plant",
+    "fumes",
+    "gas",
+    "chemical in eye",
+    "chemical on skin",
+    "pesticide"
+  ],
+  "summary": "Poison swallowed, breathed in, on the skin or in the eyes: check breathing, rinse skin and eyes for 15 minutes, do not make them vomit, and call Poison Control if you have signal.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe. Do not go into fumes, gas or smoke yourself. Move the person away from the poison if you can do it safely.",
+      "detail": "Red Cross: move the person away from the source of the poison if you can do so without endangering yourself. MedlinePlus: before going into an area with fumes or gas, call for help and tell others; once it is safe, get the person out and open windows and doors. Do not use matches or lighters, because some gases catch fire. Hold your breath going in and cover your nose and mouth with a wet cloth (MedlinePlus).\n\nFumes from a stove, heater, lantern, generator or engine in a tent, shelter or vehicle: use the Carbon monoxide poisoning protocol.\n\nClues that someone may be poisoned (Red Cross, MedlinePlus): an open or spilled container, an unusual smell, burns around the mouth, chemical-smelling breath, several people ill at once, vomiting, trouble breathing."
+    },
+    {
+      "id": "s2",
+      "text": "Is the person unresponsive and not breathing normally?",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Is the person breathing but not fully awake (drowsy, confused, hard to wake)?",
+      "ask": {
+        "q": "Are they breathing but not fully awake?",
+        "yes": "s21",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Are there signs of a severe allergic reaction: swelling of the face, lips or tongue, hives, or a throat that feels like it is closing?",
+      "detail": "Some poisons and medicines can also cause a severe allergic reaction. Burns or swelling inside the mouth from a caustic chemical can also make breathing hard: if breathing is getting worse for any reason, get help now (next steps).",
+      "ask": {
+        "q": "Signs of a severe allergic reaction (face, lips or tongue swelling, hives, throat closing)?",
+        "yes": "s22",
+        "no": "s4b"
+      }
+    },
+    {
+      "id": "s4b",
+      "text": "Trouble breathing, a seizure, or getting worse: get help now. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Poison Control (poison.org): call 911 right away if the person collapses, has a seizure, has trouble breathing or cannot be woken. Red Cross also lists headache or dizziness, weakness, a very fast or slow heartbeat, unusual skin colour, burns around the mouth and several people ill at once as needing immediate emergency care.\n\nIf someone else is free, they make the calls (911, and Poison Control at 1-800-222-1222) while you rinse the eyes or skin in the next steps. If none of these signs are present, carry on: Poison Control comes after rinsing."
+    },
+    {
+      "id": "s5",
+      "text": "Did the poison get into an eye?",
+      "ask": {
+        "q": "Did poison get into an eye?",
+        "yes": "s6",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Rinse the eye now with lots of clean running water for 15 minutes. Take out contact lenses. Keep the eyelids open and do not let the water run into the other eye.",
+      "detail": "AHA 2024 (Class 1): rinse right away, with a large amount of tap water for 15 minutes, unless chemical-specific advice says otherwise; avoid contaminating the uninjured eye. Saline or eyewash is reasonable if it is right there (AHA 2024). Poison Control (poison.org): rinse with lots of room-temperature water for at least 15 to 20 minutes; remove contact lenses; encourage blinking. Adults can stand in a shower. For a child, pour water slowly from a jug onto the bridge of the nose so it runs into the eye.\n\nSome people need help to hold their eyelids open (AHA 2024). Tilt the head so the poisoned eye is lower.\n\nStop after 15 minutes (AHA 2024); Poison Control gives 15 to 20 minutes. If pain, redness, blurred vision, swelling or tearing are still there an hour after you started rinsing, they need an urgent eye check; for severe symptoms go straight to care (poison.org). The Eye injury protocol covers chemical eye injuries too.",
+      "timer": {
+        "seconds": 900,
+        "label": "Rinse the eye"
+      },
+      "log": "Eye rinsed for poison"
+    },
+    {
+      "id": "s7",
+      "text": "Is poison on the skin or clothes?",
+      "ask": {
+        "q": "Is poison on the skin or clothes?",
+        "yes": "s8",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s8",
+      "text": "Take off soaked clothing and jewellery. Brush off any dry powder first. Then rinse the skin with lots of running water for at least 15 minutes.",
+      "detail": "AHA 2024: remove contaminated clothing, jewellery and nearby material (Class 1); brush off dry chemical before rinsing (Class 2a); then rinse with running water for at least 15 minutes unless chemical-specific advice says otherwise (Class 1). Rinsing within the first few minutes leads to fewer deep burns (AHA 2024). Poison Control (poison.org): room-temperature running water for at least 15 minutes; a shower for large spills; mild hand soap can help remove sticky material.\n\nWear gloves if you have them and do not get the chemical on yourself.\n\nSome chemicals (hydrofluoric acid and phenol; dry sodium hydroxide and sodium or potassium metal can react with water, so brush them off first) need special treatment (AHA 2024): read the label and follow Poison Control's advice if you can reach them.\n\nStop after 15 minutes. Burns, blisters, or pain, redness or swelling that get worse or do not go away need medical care (poison.org). Use the Burns protocol for a chemical burn.\n\nGroup judgement, not from a source: in the cold, rinsing for 15 minutes can chill someone; rinse in the warmest place you can and dry and warm them straight afterwards (see the Hypothermia protocol).",
+      "timer": {
+        "seconds": 900,
+        "label": "Rinse the skin"
+      },
+      "log": "Skin rinsed for poison"
+    },
+    {
+      "id": "s9",
+      "text": "Was the poison swallowed?",
+      "ask": {
+        "q": "Was the poison swallowed?",
+        "yes": "s10",
+        "no": "s11"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Do not make them vomit. Give nothing to eat or drink unless Poison Control tells you to. Keep the container, the plant or a sample of any vomit.",
+      "detail": "Do not induce vomiting: it often causes more harm (Red Cross); caustic substances do more damage coming back up (MedlinePlus). Only do it if Poison Control specifically tells you to (Red Cross, MedlinePlus).\n\nSyrup of ipecac is no longer recommended and is no longer made or sold (poison.org). Do not give activated charcoal at home: a poisoning serious enough to need it needs a hospital (poison.org); most poison centers do not recommend keeping it at home. Do not try to neutralise the poison with lemon juice, vinegar or any other 'antidote' (MedlinePlus).\n\nDrinks: Red Cross says do not give food or drink unless advised to. Poison Control (poison.org) says a small amount of water or milk may be given only if the substance burns or irritates the mouth or throat, and only if the person is awake, not having a seizure, and able to swallow. Never give anything by mouth to someone who is not fully awake (MedlinePlus). See the open questions for the no-signal case.\n\nIf they vomit: turn them onto their side and wipe out their mouth with a cloth over your fingers (MedlinePlus). If the poison is unknown, or it was a plant or mushroom, keep a sample of the vomit (Red Cross, MedlinePlus).\n\nFind out what it was, how much, when, and roughly what they weigh (Red Cross). Keep the container or label.",
+      "warn": "Do not make them vomit. No ipecac, no charcoal, no 'antidotes'."
+    },
+    {
+      "id": "s11",
+      "text": "Did they breathe in fumes, gas or smoke?",
+      "ask": {
+        "q": "Did they breathe in fumes, gas or smoke?",
+        "yes": "s12",
+        "no": "s14"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "Could the fumes be from a stove, heater, lantern, generator, charcoal or engine?",
+      "ask": {
+        "q": "Fumes from a stove, heater, lantern, generator, charcoal or engine?",
+        "yes": "s23",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s13",
+      "text": "Keep them in fresh air, away from the fumes. Air out the space. Nobody goes back in until it is clear.",
+      "detail": "Poison Control (poison.org): move to fresh air right away, stay away from the fumes, and air out the area. MedlinePlus: open windows and doors; get medical care even if the person seems fine after breathing fumes or gas.\n\nWatch breathing. Coughing, wheezing, chest tightness or trouble breathing need medical care.",
+      "log": "Moved to fresh air"
+    },
+    {
+      "id": "s14",
+      "text": "Call Poison Control at 1-800-222-1222 if you have signal, and do what they say. Trouble breathing, a seizure or collapse: Call 911 if you have signal (see detail).",
+      "detail": "Poison Control (1-800-222-1222) is free, open 24 hours, and reaches the regional poison center from anywhere in the US (Red Cross, poison.org). poison.org also runs an online tool, webPOISONCONTROL (triage.webpoisoncontrol.org), if you have data but not voice. Red Cross: if the person is alert, call the Poison Help line and follow its advice.\n\nCall 911 right away (poison.org) if the person collapses, has a seizure, has trouble breathing, or cannot be woken. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nTell them: what the poison was (read the label), how much, when, how it got in (swallowed, breathed, skin, eye), the person's age and weight, and how they are now.\n\nNo signal at all (group judgement, not from a source; see open questions): you cannot get the poison-specific advice that the sources rely on. Follow this protocol, do not give anything by mouth, write down what was taken and when, and decide on evacuation using the next step. Do not wait for symptoms: they may appear late (MedlinePlus)."
+    },
+    {
+      "id": "s15",
+      "text": "Watch breathing and alertness. Keep them warm and lying on their side if they feel sick. Evacuate if the evacuation list applies or Poison Control says so.",
+      "detail": "Red Cross: keep checking the person, keep them comfortable and reassure them, and watch for changes in breathing and responsiveness. MedlinePlus: keep the person lying on their left side until help arrives.\n\nSigns that need emergency care (Red Cross): headache or dizziness, weakness, trouble breathing, a very fast or slow heartbeat, unusual skin colour, a strange smell on the breath, burns around the mouth, low body temperature (hypothermia), becoming less responsive, unresponsiveness, seizures; several people ill at once. Nausea, vomiting, diarrhoea, belly pain and sweating are also signs of poisoning (Red Cross).\n\nIf they become drowsy, use the Recovery position protocol. If they stop breathing normally, start CPR (CPR, adult protocol). A seizure is an emergency sign (Red Cross): evacuate urgently, and once it stops, roll them onto their side (Recovery position protocol).\n\nIf an opioid overdose is possible (opioid pills, heroin, fentanyl, or a pill of unknown origin) and they get sleepy or breathe slowly, use the Opioid overdose protocol.\n\nPeople at highest risk: children under 5, and older adults who are confused or cannot see well (Red Cross).",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant). Possible opioid overdose: give naloxone if you have it.",
+      "detail": "Red Cross: if the person is unresponsive and not breathing, start CPR right away and use an AED if one is available. AHA 2024 (Class 1): for someone unresponsive and not breathing normally after a suspected opioid overdose, give CPR with breaths and give naloxone; see the Opioid overdose protocol.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nMake sure you are not breathing in the same fumes.\n\nIf others were exposed to the same poison, check them with this protocol as soon as someone is free.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Roll them onto their side (Recovery position protocol) and watch their breathing. Give nothing by mouth. Possible opioid overdose: use the Opioid overdose protocol.",
+      "detail": "Red Cross: if the person is unresponsive or not fully alert but breathing, put them in the recovery position. MedlinePlus: never give anything by mouth to someone who is not fully awake; keep them on their left side.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty. Call Poison Control at 1-800-222-1222 if you have signal.\n\nIf poison is on their skin or in their eyes, rinse it while they lie on their side, if you can do it without blocking their airway (see the skin and eye steps of this protocol).\n\nIf they stop breathing normally, roll them onto their back and start CPR (CPR, adult protocol).",
+      "end": true
+    },
+    {
+      "id": "s22",
+      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now. Afterwards, rinse any poison off the skin or eyes and call Poison Control if you have signal.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s23",
+      "text": "Use the Carbon monoxide poisoning protocol now. Get everyone out into fresh air first.",
+      "detail": "Carbon monoxide has no smell or colour. Everyone who shared the space needs checking. If poison also got on the skin or in the eyes, rinse it there too.\n\nIf they also swallowed a poison or have it on the skin or in the eyes, come back to this protocol for that once everyone is in fresh air, and call Poison Control at 1-800-222-1222 if you have signal.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not make them vomit unless Poison Control tells you to (Red Cross, MedlinePlus).",
+    "Do not use syrup of ipecac (poison.org: no longer recommended).",
+    "Do not give activated charcoal at home (poison.org).",
+    "Do not try to neutralise a poison with lemon juice, vinegar or 'antidotes' (MedlinePlus).",
+    "Do not give food or drink unless Poison Control advises it (Red Cross), and never to someone who is not fully awake (MedlinePlus).",
+    "Do not go into fumes, gas or smoke without making it safe; no matches or lighters near gas (MedlinePlus).",
+    "Do not wait for symptoms if you suspect poisoning (MedlinePlus)."
+  ],
+  "evacuate": [
+    "Evacuate urgently: unresponsive, hard to wake, confused, seizures, trouble breathing, very fast or slow heartbeat, unusual skin colour, or burns around the mouth (Red Cross, poison.org).",
+    "Evacuate: anyone who breathed fumes or gas, even if they seem fine (MedlinePlus).",
+    "Evacuate: an eye still painful, red or blurred an hour after rinsing began; skin burns or blisters (poison.org).",
+    "With no signal (group judgement): evacuate anyone who swallowed a medicine overdose, a caustic or burning substance, fuel, a pesticide, a wild mushroom or plant, or anything unknown, and anyone who has any symptom."
+  ],
+  "notes": [
+    "Poisoning: rinse eye or skin 15 minutes. Do not induce vomiting. No ipecac or charcoal. Poison Control 1-800-222-1222 (if you have signal). Unresponsive and breathing: recovery position."
+  ],
+  "sources": [
+    {
+      "name": "American Red Cross, Poison Exposure: Signs, Symptoms, and First Aid (lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/poison-exposure"
+    },
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, sections 8.1 Opioid Overdose, 8.2 Chemical Exposure to the Skin, 8.3 Chemical Exposure to the Eye (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "National Capital Poison Center (Poison Control), First aid: Act fast!",
+      "year": 2026,
+      "url": "https://www.poison.org/first-aid-for-poisonings"
+    },
+    {
+      "name": "National Capital Poison Center (Poison Control), Ipecac: Don't use it",
+      "year": 2026,
+      "url": "https://www.poison.org/articles/ipecac-do-not-use-it"
+    },
+    {
+      "name": "National Capital Poison Center (Poison Control), Activated charcoal: An effective treatment for poisonings",
+      "year": 2026,
+      "url": "https://www.poison.org/articles/activated-charcoal"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Poisoning first aid, reviewed 2025-01-08",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/007579.htm"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

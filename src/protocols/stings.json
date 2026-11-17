@@ -1,0 +1,205 @@
+{
+  "id": "stings",
+  "title": "Stings (bees, wasps, hornets, fire ants, jellyfish)",
+  "category": "bites",
+  "keywords": [
+    "sting",
+    "stung",
+    "bee",
+    "bee sting",
+    "wasp",
+    "hornet",
+    "yellow jacket",
+    "yellowjacket",
+    "fire ant",
+    "ants",
+    "stinger",
+    "swarm",
+    "jellyfish",
+    "man of war",
+    "sea nettle",
+    "stingray",
+    "sea urchin"
+  ],
+  "summary": "Bee, wasp, hornet and fire ant stings, and jellyfish and other sea stings (North America): check for a severe allergic reaction first, get the stinger out fast, wash, cool, and watch them.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Is the person unresponsive and not breathing normally?",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are there signs of a severe allergic reaction: swelling of the face, lips or tongue, trouble breathing or swallowing, a tight throat, hives spreading, or feeling faint?",
+      "detail": "Signs that need emergency care after a sting (MedlinePlus): trouble breathing, wheezing or shortness of breath; swelling of the face or mouth; throat tightness or trouble swallowing; feeling weak; turning blue. Red Cross: severe allergic reaction, anaphylaxis and shock need immediate emergency care.\n\nA known severe allergy to stings plus any of these signs: answer Yes. Do not wait for them to collapse.\n\nSwelling, redness, itching and pain only around the sting (even a large area) are a local reaction: answer No.",
+      "ask": {
+        "q": "Any sign of a severe allergic reaction?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Was it a jellyfish or another sea creature (stingray, sea urchin, spiny fish)?",
+      "ask": {
+        "q": "Was it a jellyfish or other sea creature?",
+        "yes": "s30",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Move away from the insects. Fire ants: rub or brush them off quickly; they hold on with their jaws.",
+      "detail": "Wasps, hornets and yellow jackets have smooth stingers and can sting again and again (AHA 2024). Fire ants attach to the skin with their jaws, so rub them off briskly (CDC/NIOSH).\n\nHave someone stay with the stung person to watch for an allergic reaction (CDC/NIOSH)."
+    },
+    {
+      "id": "s5",
+      "text": "Was the eyeball itself stung (not the eyelid or the skin around the eye)?",
+      "ask": {
+        "q": "Was the eyeball itself stung?",
+        "yes": "s22",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "If a stinger is still in the skin, get it out right away: scrape it off with a fingernail or card, or pluck it out. Speed matters more than the method.",
+      "detail": "Honeybee stingers are barbed and stay in the skin, and they keep pumping venom for up to about 60 seconds (AHA 2024). The longer it stays in, the bigger the reaction, so remove it as soon as possible (AHA 2024, Class 2a: plucking or scraping). In a volunteer study the reaction was the same whether the stinger was plucked or scraped (AHA 2024).\n\nSources differ on how:\n- AHA 2024: plucking or scraping.\n- Red Cross: use a clean fingernail or tweezers to grasp and pull out the stinger.\n- MedlinePlus and CDC/NIOSH: scrape it off with a straight edge such as a credit card, gauze or a fingernail; do not use tweezers or squeeze it, which may push in more venom.\nUse whatever is quickest.\n\nWasp, hornet and fire ant stings usually leave no stinger.",
+      "log": "Stinger removed"
+    },
+    {
+      "id": "s7",
+      "text": "Was the person stung many times (20 or more hornet stings, or a very large number of bee stings)?",
+      "detail": "Massive stinging can kill even without an allergy: AHA 2024 gives at least 20 stings by large hornets, or hundreds of honeybee stings, as amounts that have been fatal.",
+      "ask": {
+        "q": "Were they stung many times (20 or more hornet stings, or very many bee stings)?",
+        "yes": "s8",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s8",
+      "text": "Many stings: evacuate urgently, even if they seem well now. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Carry on with the care below.",
+      "detail": "AHA 2024 gives at least 20 large hornet stings or hundreds of honeybee stings as amounts that have killed. AHA does not give a number at which to evacuate; evacuating at these numbers is the group's judgement (see open questions).\n\nWatch closely for a severe allergic reaction, vomiting, weakness, confusion or trouble breathing, and keep them warm and resting."
+    },
+    {
+      "id": "s9",
+      "text": "Wash the stings with soap and water.",
+      "detail": "AHA 2024 (Class 2a): it is reasonable to wash the area with soap and water. Red Cross: soap and warm water, then a small amount of antibiotic cream or gel if they have no known allergy to it.\n\nDo not scratch: it can make swelling and itching worse and lead to infection (CDC/NIOSH). Fire ant stings form red bumps that can turn into white, fluid-filled pustules within a day or two (CDC/NIOSH).",
+      "log": "Sting washed"
+    },
+    {
+      "id": "s10",
+      "text": "Put a cold pack or ice wrapped in a thin cloth on the sting: 10 minutes on, 10 minutes off. Stop when the pain and swelling ease.",
+      "detail": "AHA 2024 (Class 2b): ice or cold packs may be considered for local pain. Red Cross: cold pack wrapped in a thin, dry towel. MedlinePlus: ice wrapped in a washcloth, 10 minutes on and 10 minutes off, repeated as needed. Do not put ice straight on the skin.\n\nMedlinePlus (in its care for severe reactions) says to remove rings and tight items because the area may swell; doing the same for a swelling hand or arm is sensible.",
+      "timer": {
+        "seconds": 600,
+        "label": "Cold pack on"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "For itching or pain, an over-the-counter antihistamine tablet, hydrocortisone cream, acetaminophen or ibuprofen can help. Follow the package directions.",
+      "detail": "AHA 2024: over-the-counter oral antihistamines can be used for local itching (Class 2a); topical corticosteroids (such as hydrocortisone cream) can be used for itching (Class 2a); over-the-counter acetaminophen or anti-inflammatory pain medicine (such as ibuprofen) may be considered for local pain (Class 2b). AHA notes the itching studies were done on mosquito bites.\n\nMedlinePlus says not to give aspirin or other pain medicine unless a provider prescribed it; this differs from AHA (see open questions). CDC/NIOSH: antihistamines can make people drowsy.\n\nAntihistamines do not treat a severe allergic reaction: that needs epinephrine (Anaphylaxis (severe allergic reaction) protocol).",
+      "warn": "Nothing by mouth if they are drowsy or confused, vomiting, in shock, may have a head injury, or may need surgery. Use the package dose."
+    },
+    {
+      "id": "s12",
+      "text": "Stay with them and watch for a severe allergic reaction for at least the next hour. Check the sting over the next days for infection.",
+      "detail": "Have someone stay with the stung person to watch for an allergic reaction (CDC/NIOSH). Anaphylaxis can start within minutes of a sting. The watch period is the group's judgement; no source opened gives one.\n\nIf swelling of the face, lips or tongue, trouble breathing or swallowing, or faintness starts at any time: use the Anaphylaxis (severe allergic reaction) protocol now.\n\nWatch for infection over the next several days: increasing redness, swelling or pain (MedlinePlus).\n\nSomeone who has had a severe, body-wide reaction to a sting should see a doctor afterwards about allergy testing and carrying epinephrine (MedlinePlus).",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nMove away from the insects first if you can do it quickly.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now: help them use their epinephrine auto-injector. Remove any stinger quickly afterwards.",
+      "detail": "AHA 2024 (Class 1): a person with anaphylaxis from a bee, wasp or hornet sting who has an epinephrine auto-injector should use it, and a first aid provider should help if needed. Activate emergency services for anaphylaxis after a sting (AHA 2024, Class 1).\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s22",
+      "text": "Sting on the eyeball: do not rub it or press on it, and do not try to pull a stinger out of the eye. Use the Eye injury protocol and get medical care urgently.",
+      "detail": "AHA 2024 (Class 1): stings to the eye should be evaluated by a trained medical professional. Stings to the eyeball itself, not the eyelid or face, can cause permanent loss of vision (AHA 2024).\n\nNo source opened describes removing a stinger from the eyeball; the Eye injury protocol says to leave objects in the eye in place and tape a shield or cup over it.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWash and cool any other stings on the skin as in this protocol's washing and cold pack steps.",
+      "end": true
+    },
+    {
+      "id": "s30",
+      "text": "Get them out of the water. Lift or pull off any tentacles without touching them with bare skin: gloves, a towel or plastic over your hand, a stick or plastic utensil. Otherwise rinse with seawater.",
+      "detail": "AHA 2024 (Class 2a): remove remaining tentacles by lifting or pulling them off while avoiding contact with your skin; if that is not possible, rinsing with seawater is a reasonable alternative. In a model study, scraping caused more damage than pulling tentacles off or rinsing with seawater (AHA 2024), so do not scrape.\n\nRed Cross: move the person out of the water as soon as possible; remove tentacles with a gloved hand, a hand wrapped in plastic or a towel, a blunt stick or a plastic utensil; if none is available, rinse with seawater. Do not rub the area.\n\nStingray, sea urchin or spiny fish (Red Cross): flush the wound with tap water or ocean water and keep the injured part still.\n\nThis guidance is written for North American waters (AHA 2024).",
+      "log": "Tentacles removed"
+    },
+    {
+      "id": "s31",
+      "text": "Soak the area in water as hot as they can stand, but not scalding, for at least 20 minutes or until the pain eases. No hot water: a wrapped heat pack or hot sand.",
+      "detail": "AHA 2024 (Class 2a): after tentacles are removed, hot water immersion or rinsing that does not scald, or another heat source, relieves pain. Hot water worked better than cold packs, vinegar, meat tenderiser or no treatment in human studies; the temperature most often studied was 40 C (104 F) (AHA 2024). Test the water with your own hand or elbow first.\n\nRed Cross: water as hot as the person can tolerate, for at least 20 minutes or until the pain goes away; it must not scald. With no hot water, use a chemical heat pack or another warm object (hot sand, a hot rock) wrapped in a thin, dry towel. Same soak for stingray, sea urchin and spiny fish wounds.\n\nIf there is no heat, or after heat, lidocaine gel or cream can help the pain (AHA 2024, Class 2b; Red Cross).\n\nDo not put an elastic bandage on a jellyfish sting (Red Cross). AHA 2024 makes no recommendation for vinegar and found it did not consistently help.",
+      "warn": "Test the water first: hot, not scalding. Do not rub the sting.",
+      "timer": {
+        "seconds": 1200,
+        "label": "Hot water soak"
+      },
+      "log": "Hot water soak for sting"
+    },
+    {
+      "id": "s32",
+      "text": "Watch them closely. Trouble breathing, signs of shock, severe pain, a sting to the face or neck, or an unknown sea creature: get help now.",
+      "detail": "AHA 2024 (Class 1): watch a person with a jellyfish sting for a body-wide reaction, and activate emergency services for trouble breathing, signs of shock or severe pain. Severe reactions usually happen soon after the sting (AHA).\n\nRed Cross also calls 911 for: a sting from a known lethal jellyfish, a sting from an unknown sea creature, someone with a history of allergic reactions to marine stings, or a sting to the face or neck.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nSigns of a severe allergic reaction: use the Anaphylaxis (severe allergic reaction) protocol. Stingray, sea urchin and spiny fish wounds: ask a provider about a tetanus shot and watch for infection (Red Cross); the Wound cleaning and care protocol covers cleaning.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not wait to remove a bee stinger; get it out within seconds by any quick method (AHA 2024).",
+    "Do not scratch stings or fire ant pustules (CDC/NIOSH).",
+    "Do not put ice straight on the skin; wrap it.",
+    "Do not give antihistamines instead of epinephrine for a severe allergic reaction.",
+    "Do not touch jellyfish tentacles with bare hands, scrape them off, or rub the area (AHA 2024, Red Cross).",
+    "Do not put an elastic bandage on a jellyfish sting (Red Cross).",
+    "Do not soak in scalding water; test it first."
+  ],
+  "evacuate": [
+    "Evacuate urgently: any sign of a severe allergic reaction, even after epinephrine (Anaphylaxis (severe allergic reaction) protocol).",
+    "Evacuate urgently: very many stings (20 or more large hornet stings, or a very large number of bee stings), even if they seem well (group judgement based on AHA 2024).",
+    "Evacuate: a sting to the eyeball (AHA 2024).",
+    "Evacuate: jellyfish or sea stings with trouble breathing, shock, severe pain, a sting to the face or neck, a known lethal jellyfish, or an unknown sea creature (AHA 2024, Red Cross).",
+    "Get medical care: signs of infection over the following days (MedlinePlus)."
+  ],
+  "notes": [
+    "Sting: check for anaphylaxis first. Bee stinger out within seconds (scrape or pluck). Wash, cold pack 10 on/10 off. Jellyfish: lift tentacles off without bare skin, hot (not scalding) soak 20 minutes."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, sections 7.1 Bee and Wasp Stings and 7.5 Jellyfish Stings (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Insect Bites and Stings (lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/insect-bites-and-stings"
+    },
+    {
+      "name": "American Red Cross, Jellyfish Stings (lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/jellyfish-stings"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Insect bites and stings, reviewed 2025-10-14",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000033.htm"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention (NIOSH), Insects and Scorpions at Work, last reviewed 28 Sep 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/niosh/outdoor-workers/about/insects-and-scorpions.html"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

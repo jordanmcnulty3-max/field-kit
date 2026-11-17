@@ -1,0 +1,172 @@
+{
+  "id": "spider-scorpion",
+  "title": "Spider bite or scorpion sting",
+  "category": "bites",
+  "keywords": [
+    "spider",
+    "spider bite",
+    "black widow",
+    "brown recluse",
+    "recluse",
+    "fiddleback",
+    "violin spider",
+    "hourglass",
+    "scorpion",
+    "scorpion sting",
+    "bark scorpion",
+    "bitten by spider",
+    "muscle cramps after bite"
+  ],
+  "summary": "Spider bites (black widow, brown recluse) and scorpion stings (bark scorpion) in North America: wash, cool, keep still, and watch for body-wide signs. Children stung by scorpions need care urgently.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Is the person unresponsive and not breathing normally?",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are there signs of a severe allergic reaction: swelling of the face, lips or tongue, hives spreading, or a throat that feels like it is closing?",
+      "detail": "A severe allergic reaction needs epinephrine. Muscle cramps, sweating and trouble breathing without face or throat swelling or hives are more likely the venom itself: answer No and the next question covers them.",
+      "ask": {
+        "q": "Signs of a severe allergic reaction (face, lips or tongue swelling, hives, throat closing)?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Any body-wide signs: stiff or cramping muscles in the belly, chest, back or shoulders, trouble breathing, heavy sweating, dizziness, confusion, drooling, slurred speech or a seizure?",
+      "detail": "AHA 2024 (Class 1): call emergency services if someone bitten by a spider or stung by a scorpion has symptoms throughout the body, such as trouble breathing, muscle rigidity, dizziness or confusion.\n\nRed Cross marks these as needing immediate emergency care after a spider bite or scorpion sting: rigid shoulder, chest, back or belly muscles; anxiety or restlessness; headache or dizziness; heavy sweating; weakness; drooping or swollen eyelids; numbness all over the body; trouble breathing; seizures.\n\nBark scorpion stings (CDC/NIOSH) can also cause restlessness, roving eyes, staggering, thick tongue or slurred speech, drooling, muscle twitches and belly cramps.\n\nBlack widow bites cause severe crampy pain, rigid muscles, sweating and high blood pressure (AHA 2024).",
+      "ask": {
+        "q": "Any body-wide signs (cramping or stiff muscles, trouble breathing, heavy sweating, confusion, drooling, seizure)?",
+        "yes": "s22",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Was it a scorpion sting?",
+      "detail": "Scorpions live in dry regions such as the southwestern United States and Mexico, hide under rocks, logs and bark, and are most active at night (Red Cross). It is very hard to tell a dangerous scorpion from a harmless one (Red Cross). The bark scorpion is the one whose sting can be life-threatening (CDC/NIOSH).",
+      "ask": {
+        "q": "Was it a scorpion sting?",
+        "yes": "s10",
+        "no": "s30"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Is the person stung a child?",
+      "ask": {
+        "q": "Is the person stung a child?",
+        "yes": "s11",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Child stung by a scorpion: get them to medical care urgently, even if they seem well. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "AHA 2024: bark scorpion stings can cause severe local pain and muscle cramping that may impair breathing in children. Red Cross treats all scorpion stings as medical emergencies.\n\nWatch the child's breathing all the time. Carry on with the care below while you prepare to move."
+    },
+    {
+      "id": "s12",
+      "text": "Wash the sting with soap and water. Put ice or a cold pack wrapped in a thin cloth on it. Do not put the hand or foot in ice water.",
+      "detail": "Red Cross: wash with soap and water; apply a cold pack wrapped in a thin, dry towel. AHA 2024 (Class 2a): ice can be useful for local pain from scorpion stings. CDC/NIOSH: apply ice, but do not submerge the area in ice water.\n\nIf the skin is not broken, lidocaine cream or gel can relieve the pain (AHA 2024, Class 2a).\n\nKeep them calm and still. CDC/NIOSH: avoid sedatives. Do not try to catch the scorpion; CDC/NIOSH says capture it for identification only if that is safe.",
+      "log": "Scorpion sting washed and cooled"
+    },
+    {
+      "id": "s13",
+      "text": "For pain, over-the-counter acetaminophen or ibuprofen can help. Follow the package directions.",
+      "detail": "AHA 2024 (Class 2a): over-the-counter acetaminophen and anti-inflammatory pain medicines (such as ibuprofen) can be used for local pain from scorpion stings. AHA bases this on studies of scorpion stings outside the US.",
+      "warn": "Nothing by mouth if they are drowsy or confused, vomiting, have trouble swallowing or breathing, are in shock, or may have a head injury. Use the package dose."
+    },
+    {
+      "id": "s14",
+      "text": "Get medical care, and watch them closely. Any body-wide sign, or pain that spreads, gets severe or is not helped by pain medicine: evacuate urgently.",
+      "detail": "Red Cross: have a person stung by a scorpion seek medical care immediately; treat all scorpion stings as medical emergencies. AHA 2024 (Class 1): seek medical care if pain spreads beyond the sting, is severe or is not controlled by over-the-counter medicine, or if body-wide symptoms appear; call emergency services for body-wide symptoms. The two differ for a sting with only local pain (see open questions); the app follows Red Cross here, as a group judgement: off-grid, start moving towards care rather than waiting for symptoms to spread.\n\nMost scorpion stings cause only local pain, tingling, burning or numbness (AHA 2024, Red Cross). Other symptoms usually settle within 48 hours (CDC/NIOSH).\n\nIf body-wide signs appear (cramping or stiff muscles, trouble breathing, heavy sweating, drooling, slurred speech, confusion, a seizure): Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s30",
+      "text": "Spider bite: wash it with soap and water and put a cold pack wrapped in a thin cloth on it.",
+      "detail": "Red Cross: wash the area with soap and water; apply a cold pack wrapped in a thin, dry towel; for a harmless bite, a small amount of antibiotic ointment if they have no known allergy to it. CDC/NIOSH: wash with soap and water, apply a cold wet cloth or a cloth filled with ice to reduce swelling. AHA 2024 found no studies of ice for spider bites.\n\nMost spider bites are harmless and cause a reaction like a bee sting: swelling, redness and stinging pain (Red Cross). Few spiders in the United States can cause serious illness or death (Red Cross). Symptoms can look like other conditions, and the only certain way to know a spider bit someone is to have seen it happen (Red Cross).",
+      "log": "Spider bite washed and cooled"
+    },
+    {
+      "id": "s31",
+      "text": "If it may be a black widow or brown recluse bite (spider seen, or signs in the detail), keep the bitten area still and raised, and get medical care.",
+      "detail": "Recognition (Red Cross, CDC/NIOSH):\n- Black widow: black, brown or red with a reddish hourglass on the underside of the belly; builds webs between objects. The bite feels like a sharp pinprick, then dull pain; the pain can spread to the chest, belly or whole body. Two small puncture marks.\n- Brown recluse (violin or fiddleback spider): brown, with a dark violin-shaped mark on the front body section; six eyes instead of eight. The bite may be painless at first, with pain about an hour later, often a blister (white or blood-filled).\nBoth live in dark, undisturbed places: woodpiles, rock and brush piles, garages and attics; bites are often on hands and arms reaching into these places (Red Cross).\n\nRed Cross: for a black widow or brown recluse bite, keep the area elevated and as still as possible until EMS arrives. CDC/NIOSH: raise the bitten area if possible, and get professional medical care. Brown recluse venom can destroy skin (CDC/NIOSH); the wound can become a painful ulcer that gets worse over days to weeks (AHA 2024).\n\nDo not try to remove the venom (CDC/NIOSH). If it is safe and quick, note what the spider looked like; do not hunt for it."
+    },
+    {
+      "id": "s32",
+      "text": "Watch for several days. Pain spreading or getting severe, an open sore, a spreading target-shaped wound, or any body-wide sign: get medical care urgently.",
+      "detail": "AHA 2024 (Class 1): seek medical care if pain spreads beyond the bite, is severe or not controlled by over-the-counter medicine, an open wound develops, or body-wide symptoms appear. Call emergency services for body-wide symptoms such as trouble breathing, muscle rigidity, dizziness or confusion.\n\nRed Cross emergency signs also include a blood-filled blister, an expanding target or bull's-eye pattern with tissue loss and a black scab, and little early pain that develops more than an hour later.\n\nIf any body-wide sign appears: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWatch for infection: increasing redness, swelling, warmth, pus or fever.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Wash and cool the bite later, once they are stable.",
+      "end": true
+    },
+    {
+      "id": "s22",
+      "text": "Body-wide signs after a bite or sting: evacuate urgently. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "AHA 2024 (Class 1): activate emergency services for body-wide symptoms after a spider bite or scorpion sting. Severe cases can affect breathing, or cause muscle breakdown and kidney failure, which need hospital care (AHA 2024).\n\nWhile you wait or move:\n- Keep them calm and still, and the bitten part still (Red Cross: elevated and still for black widow and brown recluse bites).\n- Wash the bite or sting with soap and water and put on a wrapped cold pack (Red Cross; AHA for scorpion stings).\n- Keep them from getting too cold or too hot, and treat for shock if needed (Shock protocol).\n- Watch breathing all the time. If they become unresponsive and stop breathing normally, start CPR (CPR, adult protocol). If they vomit or become drowsy but are breathing, use the Recovery position protocol.\n- Give nothing by mouth if they have trouble breathing or swallowing, drool, or are drowsy or confused.\n- Avoid sedatives (CDC/NIOSH, scorpion stings).",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not use a tourniquet, cut the wound, use suction, or apply electricity to try to slow the venom (Red Cross).",
+    "Do not put ice straight on the skin or put a stung hand or foot in ice water (CDC/NIOSH); wrap the cold pack.",
+    "Do not give sedatives after a scorpion sting (CDC/NIOSH).",
+    "Do not try to remove the venom (CDC/NIOSH).",
+    "Do not handle or hunt for the spider or scorpion; capture it only if that is safe (CDC/NIOSH)."
+  ],
+  "evacuate": [
+    "Evacuate urgently: any body-wide sign, such as cramping or stiff muscles, trouble breathing, heavy sweating, dizziness, confusion, drooling or seizures (AHA 2024).",
+    "Evacuate urgently: any child stung by a scorpion (AHA 2024: breathing can be affected in children; Red Cross treats all scorpion stings as emergencies).",
+    "Get medical care: any scorpion sting (Red Cross); suspected black widow or brown recluse bites (Red Cross, CDC/NIOSH); pain that spreads, is severe or not controlled by over-the-counter medicine; an open or spreading wound (AHA 2024)."
+  ],
+  "notes": [
+    "Spider bite or scorpion sting: wash, wrapped cold pack, keep still. Body-wide signs (cramps, rigid muscles, sweating, breathing trouble) or a child stung by a scorpion: evacuate urgently."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 7.6 Spider and Scorpion Envenomation (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Spider Bites (lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/spider-bites"
+    },
+    {
+      "name": "American Red Cross, Scorpion Bites (lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/scorpion-bites"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention (NIOSH), Venomous Spiders at Work, last reviewed 28 Sep 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/niosh/outdoor-workers/about/venomous-spiders.html"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention (NIOSH), Insects and Scorpions at Work, last reviewed 28 Sep 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/niosh/outdoor-workers/about/insects-and-scorpions.html"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

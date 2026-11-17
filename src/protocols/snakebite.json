@@ -1,0 +1,161 @@
+{
+  "id": "snakebite",
+  "title": "Snakebite",
+  "category": "bites",
+  "keywords": [
+    "snakebite",
+    "snake bite",
+    "snake",
+    "rattlesnake",
+    "rattler",
+    "copperhead",
+    "cottonmouth",
+    "water moccasin",
+    "coral snake",
+    "pit viper",
+    "venom",
+    "fang marks",
+    "bitten by snake",
+    "antivenom"
+  ],
+  "summary": "Venomous or possibly venomous snakebite in the US or Canada (rattlesnakes, copperheads, cottonmouths, coral snakes): keep them still, take off rings, mark the swelling, evacuate. No cutting, sucking, ice or tourniquet.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Move the casualty and everyone else away from the snake. Do not try to catch or kill it.",
+      "detail": "Get out of striking range first so nobody else is bitten (WMS). Trying to kill or catch the snake can create a second casualty (WMS), and Red Cross says not to spend time looking for it or catching it. Never handle a venomous snake, even a dead one or a cut-off head: it can still bite by reflex (CDC, WMS).\n\nIf it is safe, a photo taken from a distance can help identify the snake later (CDC, WMS). Do not go looking for it to get one.\n\nNorth American venomous snakes: pit vipers (rattlesnakes, copperheads and cottonmouths, also called water moccasins) cause more than 95 in every 100 venomous bites; coral snakes are the other group (AHA 2024). This protocol follows guidance written for snakes native to the United States and Canada (AHA 2024, WMS 2015). Bites from snakes kept as pets or from other parts of the world may need different care."
+    },
+    {
+      "id": "s2",
+      "text": "Is the casualty unresponsive and not breathing normally?",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Are there signs of a severe allergic reaction: swelling of the face, lips or tongue, hives, or a throat that feels like it is closing?",
+      "detail": "Red Cross lists anaphylaxis among the signs of a severe snakebite, along with shock, coma and paralysis. Wheezing and signs of shock (pale, cool, clammy skin; fast weak pulse; confusion) can come with an allergic reaction too.\n\nWeak breathing, drooping eyelids or slurred speech without swelling or hives can be the venom itself (coral snakes affect the nerves, AHA 2024): answer No, and keep going here; the evacuation steps cover it.",
+      "ask": {
+        "q": "Signs of a severe allergic reaction (face, lips or tongue swelling, hives, throat closing)?",
+        "yes": "s21",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Treat every bite from a venomous or possibly venomous snake as an emergency. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "AHA 2024 (Class 1): activate emergency services for anyone bitten by a venomous or possibly venomous snake. Antivenom is the real treatment and it is only given in hospital (AHA 2024, WMS 2015). Nothing done in the field changes the outcome of a serious bite much, so first aid must not delay getting them to care (WMS 2015).\n\nDo not wait for symptoms before getting help (CDC). Signs can be slow to start, and a coral snake bite may cause little pain or swelling at the bite yet cause paralysis within minutes to hours (AHA 2024).\n\nA bitten person should not drive themselves: the bite can make them dizzy or faint (CDC).\n\nWhen help is called, ask for a hospital that has antivenom: evacuating to a place without it may do little good (WMS 2015). Poison Control can help find one (WMS 2015). Call Poison Control at 1-800-222-1222 if you have signal."
+    },
+    {
+      "id": "s5",
+      "text": "Keep them calm and still, sitting or lying down. Keep a bitten arm or leg still and below the level of the heart. Do not raise it.",
+      "detail": "Rest and keep the bitten limb still, and keep their effort to a minimum, as long as this does not delay getting them to medical care (AHA 2024, Class 2a). Moving the muscles spreads venom faster: in one human study, walking for 10 minutes or more increased the spread of an injected tracer (AHA 2024).\n\nHow high to hold the limb: the sources differ.\n- Red Cross: keep the injured area still and below the level of the heart.\n- WMS 2015 (grade 2C): keep it at the level of the heart; raising it above the heart may spread venom through the body, and lowering it may increase swelling.\n- CDC: sit or lie down with the bite in a comfortable, neutral position.\nAll agree: do not raise it above the heart. The app uses the Red Cross wording.\n\nA splint can help keep the limb still, but it must not squeeze the limb (WMS 2015: splinting without compression; keep joints in a comfortable working position). Splinting must not delay leaving.\n\nDo not wrap the limb tightly with a pressure bandage (see the don'ts and the detail of the next step).",
+      "warn": "No tourniquet, no tight or pressure bandage, no cutting, no sucking, no ice.",
+      "log": "Bitten limb kept still"
+    },
+    {
+      "id": "s6",
+      "text": "Take off rings, watches, bracelets and anything tight on the bitten limb now, before it swells.",
+      "detail": "Swelling can make rings tight enough to damage the finger (AHA 2024, Class 2a: remove rings and other constricting objects). Remove jewellery and tight clothing near the bite (WMS 2015). CDC: remove rings and watches before swelling starts.\n\nPressure immobilization bandaging (a firm elastic wrap of the whole limb) is not recommended in North America (AHA 2024, Class 3: Harm). It may worsen tissue damage from pit viper venom, and it is often put on wrongly even by trained people (AHA 2024). WMS 2015 also advises against pressure bandaging for pit viper bites; it is used for some Australian snakes. The Red Cross lay page gives one exception for trained responders only (a coral snake bite with a long transport); the app follows AHA and does not use it (see open questions in the review record).",
+      "log": "Rings and tight items removed"
+    },
+    {
+      "id": "s7",
+      "text": "Note the time of the bite. With a pen, mark the edge of the swelling or tenderness on the skin and write the time next to it. Mark it again later the same way.",
+      "detail": "Record the time of the bite and mark the leading edge of redness or swelling so medical staff can see how fast it is spreading (WMS 2015, grade 1C). CDC: mark the leading edge of tenderness or swelling and write the time alongside it.\n\nWMS also measures the limb's circumference above and below the bite; do this if you have a tape and it does not slow you down.\n\nNote any symptoms and when they started: nausea, vomiting, tingling (moderate envenomation, Red Cross); trouble breathing, drooping eyelids, slurred speech or weakness; bleeding from the gums or the bite. Tell the medical team.",
+      "log": "Swelling edge marked with time"
+    },
+    {
+      "id": "s8",
+      "text": "Wash the bite with soap and water and cover it with a clean, dry dressing. Do not let this delay leaving.",
+      "detail": "Red Cross and CDC: wash the wound with soap and water and cover it with a clean, dry dressing. WMS 2015 (grade 1C): clean it in the usual way and put on a sterile dressing, without delaying transport.\n\nDo not cut the bite, suck it or use a suction device: suction, with or without cutting, does not remove venom and may injure the tissue (AHA 2024, Class 3: Harm; WMS 2015). Do not put ice on it or put it in water (AHA 2024, CDC).",
+      "log": "Bite washed and covered"
+    },
+    {
+      "id": "s9",
+      "text": "Keep them from getting cold or overheated. Treat for shock if needed. No alcohol, aspirin, ibuprofen or naproxen.",
+      "detail": "Red Cross: keep the person from getting too cold or too hot, give care for shock if needed, reassure them, and watch for changes in breathing and responsiveness.\n\nSigns of shock: pale, cool, clammy skin; a fast, weak pulse; confusion or fainting. If you see them, use the Shock protocol, and keep the bitten limb still.\n\nCDC: do not drink alcohol as a painkiller, and avoid pain relievers such as aspirin, ibuprofen and naproxen. WMS 2015 also lists aspirin and similar medicines as relatively unsafe after pit viper bites.\n\nIf breathing becomes weak or stops, start CPR (CPR, adult protocol)."
+    },
+    {
+      "id": "s10",
+      "text": "Will they have to walk to reach help, because nobody can carry them and no vehicle or rescue can reach them?",
+      "detail": "AHA 2024: rest and limit their effort, but only as long as this does not delay medical care; first aid providers have to balance limiting exertion against delay. Red Cross: do not let the person walk unless it is absolutely necessary.",
+      "ask": {
+        "q": "Will they have to walk to reach help?",
+        "yes": "s11",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Only if there is no other way: walk out together, slowly, with rests. They carry nothing. Keep the limb splinted and keep marking the swelling. If help can come to you, wait instead.",
+      "detail": "What the sources say: walking for 10 minutes or more increased the spread of a tracer injected under the skin, which suggests faster venom absorption (AHA 2024); limiting exertion must be balanced against delaying care (AHA 2024). Red Cross: no walking unless absolutely necessary.\n\nThe off-grid trade-off: walking may speed up the venom, but sitting in the backcountry for many hours or days without antivenom may be worse. If someone can go for help and a carry-out, vehicle or helicopter can reach the casualty, keeping them still and waiting is closer to the guidance. If the only way out is on foot, walking out is the 'absolutely necessary' case.\n\nThe how-to in the action line (walk slowly, rest often, carry nothing, someone always with them) is the group's judgement, not from a source: it aims to keep effort as low as possible. Never let them walk out alone. If they become faint, confused, short of breath or weak, or start vomiting, stop: they now need to be carried or rescued. Send someone ahead for help if you can.",
+      "warn": "Never let a bitten person walk out alone.",
+      "log": "Walking out after snakebite"
+    },
+    {
+      "id": "s12",
+      "text": "Get them to a hospital with antivenom as fast as possible, even if they feel well. Keep watching breathing and alertness on the way.",
+      "detail": "Every venomous snakebite should be taken to an emergency department (WMS 2015; AHA 2024 Class 1). Choose a hospital that has antivenom if you can (WMS 2015).\n\nNever assume the bite was harmless. 25 or more in every 100 pit viper bites inject no venom ('dry bites'), but you cannot tell at first. In a long evacuation, having no swelling, pain or other symptoms 8 hours after the bite may point to a dry bite (WMS 2015), but keep going to medical care.\n\nCoral snake venom mainly affects the nerves and can cause paralysis within minutes to hours (AHA 2024). Watch for drooping eyelids, slurred speech, trouble swallowing and weak breathing.\n\nKeep marking the swelling edge with the time. If they become unresponsive and stop breathing normally, start CPR (CPR, adult protocol). If they vomit, roll them onto their side (Recovery position protocol).",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nMake sure the snake is not near before you kneel down. If someone else is free, they can take off rings on the bitten limb; do not let that delay CPR.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now. Afterwards, keep the bitten limb still and below the heart, remove rings, and evacuate.",
+      "detail": "Give epinephrine first if they have an auto-injector. The snakebite still needs antivenom in hospital: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nDo not use a tourniquet, cut, suck or put ice on the bite.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not cut the bite or suck out venom, by mouth or with a suction device (AHA 2024, Red Cross, CDC, WMS).",
+    "Do not use a tourniquet (AHA 2024: potentially harmful).",
+    "Do not use a pressure immobilization (tight elastic) bandage (AHA 2024: potentially harmful, not recommended in North America).",
+    "Do not put ice on the bite or soak it in water (AHA 2024, CDC).",
+    "Do not use electric shock (AHA 2024, Red Cross, CDC).",
+    "Do not give alcohol, aspirin, ibuprofen or naproxen (CDC).",
+    "Do not try to catch, kill or pick up the snake, even a dead one (Red Cross, CDC, WMS).",
+    "Do not wait for symptoms before getting help (CDC).",
+    "Do not raise the bitten limb above the heart.",
+    "Do not let the bitten person drive (CDC) or walk unless absolutely necessary (Red Cross)."
+  ],
+  "evacuate": [
+    "Evacuate every bite from a venomous or possibly venomous snake, even if they feel well (AHA 2024, WMS 2015).",
+    "Evacuate urgently: swelling spreading up the limb, vomiting, trouble breathing, drooping eyelids, slurred speech, weakness, bleeding, confusion or signs of shock.",
+    "Head for a hospital that has antivenom (WMS 2015)."
+  ],
+  "notes": [
+    "Snakebite: still and calm, limb below heart level, rings off, mark the swelling with the time, evacuate. No cutting, sucking, ice, tourniquet or pressure bandage."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 7.4 Snake Bite (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Snake Bites: Symptoms, Causes, and Treatment (lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/venomous-snake-bites"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention (NIOSH), Venomous Snakes at Work, last reviewed 23 Sep 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/niosh/outdoor-workers/about/venomous-snakes.html"
+    },
+    {
+      "name": "Wilderness Medical Society Practice Guidelines for the Treatment of Pitviper Envenomations in the United States and Canada (Kanaan et al., Wilderness Environ Med 2015;26:472-487)",
+      "year": 2015,
+      "url": "https://core.ac.uk/download/323383135.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

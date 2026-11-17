@@ -1,0 +1,136 @@
+{
+  "id": "poison-plants",
+  "title": "Poison ivy, oak and sumac",
+  "category": "bites",
+  "keywords": [
+    "poison ivy",
+    "poison oak",
+    "poison sumac",
+    "urushiol",
+    "itchy rash",
+    "rash",
+    "leaves of three",
+    "blisters from plant",
+    "plant rash",
+    "itching",
+    "burning poison ivy",
+    "smoke from poison ivy"
+  ],
+  "summary": "Skin contact with poison ivy, oak or sumac (North America): wash the oil off as soon as possible, clean clothes and gear, ease the itch, and know when the rash or smoke exposure needs care.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Is the person unresponsive and not breathing normally?",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are there signs of a severe allergic reaction: swelling of the face, lips or tongue, trouble breathing or swallowing, or a throat that feels like it is closing?",
+      "detail": "CDC/NIOSH and MedlinePlus: call 911 or go to an emergency room for a severe allergic reaction, such as swelling or trouble breathing. American Academy of Dermatology (AAD): go to the emergency room for trouble breathing or swallowing, or facial swelling, especially if an eye swells shut.",
+      "ask": {
+        "q": "Signs of a severe allergic reaction (face, lips or tongue swelling, trouble breathing or swallowing)?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Did they breathe smoke from burning brush that may have included poison ivy, oak or sumac?",
+      "ask": {
+        "q": "Did they breathe smoke from burning plants that may include poison ivy, oak or sumac?",
+        "yes": "s22",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Wash the skin now with soap or dish soap and plenty of water, or rubbing alcohol then water. Rinse often. Scrub under the fingernails. The sooner the better.",
+      "detail": "AHA 2024 (Class 1): as soon as exposure is recognised, wash the area with soap and water or a commercial poison plant wash.\n\nWhy speed matters (AHA 2024): washing straight away removes nearly all the plant oil (urushiol); after 10 minutes only about half comes off, after 15 minutes about a quarter, and after 30 minutes about 10 percent. Still wash if time has passed: washing with dish soap, a hand cleaner or a commercial wash reduced symptoms by 55 to 70 percent even when used 2 hours after contact (AHA 2024). MedlinePlus: try to wash within 30 minutes.\n\nCDC/NIOSH: rinse the skin right away with rubbing alcohol, a poison plant wash, or dishwashing soap, and lots of water; rinse often so the wash does not dry on the skin and spread the oil; scrub under the nails. AAD: soapy water, rubbing alcohol or dish soap.\n\nWear gloves if you have them while you help.",
+      "log": "Skin washed after poison plant contact"
+    },
+    {
+      "id": "s5",
+      "text": "Wash the clothes, boots, gloves, tools and any pet that touched the plants. Wear gloves to handle them.",
+      "detail": "The oil stays on clothes, tools and pet fur and causes new rashes when touched (MedlinePlus, CDC/NIOSH). It can stay active on objects for up to 5 years (CDC/NIOSH).\n\nCDC/NIOSH: wash contaminated clothing separately in hot water; clean tools with rubbing alcohol or soap and lots of water, wearing disposable gloves. MedlinePlus: wash clothes and shoes with soap and hot water; bathe pets; clean tools with dilute bleach or rubbing alcohol. AAD: wear gloves to handle anything that may have the oil on it.\n\nNever burn brush that may contain these plants (CDC/NIOSH)."
+    },
+    {
+      "id": "s6",
+      "text": "For the rash: cool, wet cloths, an oatmeal bath, or calamine lotion on unbroken skin. Do not scratch, and leave blisters alone. Blister fluid does not spread the rash.",
+      "detail": "The rash usually appears within a few days (CDC/NIOSH): red, itchy, sometimes with streaks, bumps or weeping blisters and swelling. The worst is often on days 4 to 7, and it may last 1 to 3 weeks (MedlinePlus).\n\nFluid from the blisters does not spread the rash to other places or other people (CDC/NIOSH, MedlinePlus). New patches come from oil still on the skin, clothes, pets or tools.\n\nItch relief:\n- Cool compresses and oatmeal baths may be considered (AHA 2024, Class 2b; little evidence). CDC/NIOSH, MedlinePlus and AAD also list them; AAD also lists short cool showers.\n- Calamine lotion or hydrocortisone cream (CDC/NIOSH, MedlinePlus, AAD). AHA 2024 (Class 2b): the benefit of over-the-counter steroid creams is uncertain; the stronger ones that work are prescription only. Do not put creams or lotions on broken skin (CDC/NIOSH). Do not put antihistamine creams on the rash: they can make it worse (AAD).\n- Avoid scratching, which can cause infection, and leave blisters intact: the blister roof protects the skin underneath (AAD).",
+      "log": "Rash care given"
+    },
+    {
+      "id": "s7",
+      "text": "An over-the-counter antihistamine tablet may help them sleep with the itch, but it can make them drowsy. Follow the package directions.",
+      "detail": "AHA 2024 (Class 2b): the benefit of over-the-counter oral antihistamines is uncertain; experts mainly suggest them to help with sleep. CDC/NIOSH: an antihistamine such as diphenhydramine can reduce itching but may cause drowsiness. MedlinePlus: antihistamines may help if creams and baths do not control the itch.\n\nGroup caution: a drowsy person should not be the one navigating, driving or on watch.",
+      "warn": "Nothing by mouth if they are drowsy or confused, vomiting, have trouble swallowing, or may have a head injury. Use the package dose."
+    },
+    {
+      "id": "s8",
+      "text": "Get medical care if the rash is on the face, eyes, lips or genitals, covers most of the body, comes with fever, the itch is out of control, or there are signs of infection.",
+      "detail": "Go to an emergency room right away (AAD): trouble breathing or swallowing; rash around the eyes, mouth or genitals; facial swelling, especially an eye swollen shut; itching that keeps getting worse or stops them sleeping; a rash over most of the body; fever.\n\nSee a provider (MedlinePlus): itching that is severe and cannot be controlled; a rash on the face, lips, eyes or genitals; signs of infection such as pus, yellow fluid from blisters, a bad smell or more tenderness. CDC/NIOSH: seek care for severe cases or a rash on the face or genitals. A provider may prescribe steroid pills or injections for severe cases (MedlinePlus).\n\nAnyone who has had a severe reaction to these plants before should get medical care after a new exposure (CDC/NIOSH, MedlinePlus).",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now. Wash the skin afterwards, once they are stable.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nCDC/NIOSH and MedlinePlus: severe swelling or trouble breathing after contact with these plants needs emergency care.",
+      "end": true
+    },
+    {
+      "id": "s22",
+      "text": "Smoke from burning poison ivy, oak or sumac can seriously harm the lungs. Get medical care now, even if breathing seems fine. Move them away from the smoke.",
+      "detail": "CDC/NIOSH: burning these plants can cause serious lung irritation. MedlinePlus: get emergency treatment after exposure to smoke from burning these plants.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWatch their breathing. If they become unresponsive and stop breathing normally, start CPR (CPR, adult protocol). Wash any skin that touched the plants or ash (the washing step of this protocol) once they are out of the smoke.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not burn brush that may contain poison ivy, oak or sumac, and do not stand in its smoke (CDC/NIOSH).",
+    "Do not wait to wash: the sooner the better (AHA 2024).",
+    "Do not let washing products dry on the skin; rinse often (CDC/NIOSH).",
+    "Do not scratch or break blisters (AAD).",
+    "Do not put creams or lotions on broken skin (CDC/NIOSH) or antihistamine creams on the rash (AAD).",
+    "Do not touch contaminated clothes, gear or pets with bare hands before they are washed."
+  ],
+  "evacuate": [
+    "Evacuate urgently: trouble breathing or swallowing, face swelling, or any breathing of smoke from burning poison ivy, oak or sumac (MedlinePlus, CDC/NIOSH, AAD).",
+    "Evacuate: a rash around the eyes, mouth or genitals, a rash over most of the body, fever, or itching that keeps getting worse (AAD).",
+    "Get medical care: signs of infection (pus, yellow fluid, bad smell, more tenderness) or uncontrolled itching (MedlinePlus)."
+  ],
+  "notes": [
+    "Poison ivy/oak/sumac: wash with soap or dish soap and lots of water at once (after 10 minutes only about half the oil comes off). Wash clothes and tools. Blister fluid does not spread it. Smoke from burning plants: get care."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 7.3 Rash from Poison Ivy, Poison Oak, and Poison Sumac (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention (NIOSH), Poisonous Plants and Work, reviewed 1 Oct 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/niosh/outdoor-workers/about/poisonous-plants.html"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Poison ivy - oak - sumac rash, reviewed 2025-07-03",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000027.htm"
+    },
+    {
+      "name": "American Academy of Dermatology, Poison ivy, oak, and sumac: How to treat the rash, last updated 1 Jun 2026",
+      "year": 2026,
+      "url": "https://www.aad.org/public/everyday-care/itchy-skin/poison-ivy/treat-rash"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

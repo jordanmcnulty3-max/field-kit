@@ -1,0 +1,223 @@
+{
+  "id": "animal-bite",
+  "title": "Animal or human bite (and rabies risk)",
+  "category": "bites",
+  "keywords": [
+    "animal bite",
+    "dog bite",
+    "cat bite",
+    "bitten",
+    "bite",
+    "human bite",
+    "bat",
+    "bat bite",
+    "raccoon",
+    "skunk",
+    "fox",
+    "coyote",
+    "rabies",
+    "scratch",
+    "bear attack",
+    "rabies shot"
+  ],
+  "summary": "Bites and scratches from animals or people: control bleeding, wash the wound well, leave it open, and get rabies care quickly after any bat contact or a bite from a wild, stray or strange-acting animal.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the animal cannot attack again. Is the casualty unresponsive and not breathing normally?",
+      "detail": "Keep your distance from an animal that is acting strangely or aggressively, and do not try to catch it yourself (MedlinePlus).",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are there signs of a severe allergic reaction: swelling of the face, lips or tongue, trouble breathing, or a throat that feels like it is closing?",
+      "ask": {
+        "q": "Signs of a severe allergic reaction (face, lips or tongue swelling, trouble breathing)?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Is there heavy bleeding: spurting, flowing, or soaking through cloth?",
+      "detail": "Red Cross: a deep, open or extensive wound, continuous or spurting bleeding, or blood loss of about half a soda can (less for a small child) needs immediate emergency care.",
+      "ask": {
+        "q": "Is there heavy bleeding?",
+        "yes": "s22",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Was it a mauling, with many or deep wounds, or is there a deep bite or puncture on the neck, chest or belly?",
+      "detail": "A large animal (dog pack, bear, cougar) can cause deep wounds, broken bones and injuries inside the chest or belly. These need the full Trauma check, not just wound cleaning.\n\nA scratch or shallow nip on the body that has not gone deeper than the skin: answer No and wash it here.",
+      "ask": {
+        "q": "Was it a mauling, or is there a deep bite on the neck, chest or belly?",
+        "yes": "s23",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Wash your hands and put on gloves if you have them. Press on the bite with a clean cloth until minor bleeding stops.",
+      "detail": "MedlinePlus (animal and human bites): wash your hands with soap and water before touching the wound and wear gloves if you have them; stop bleeding with firm, direct pressure using a clean, dry cloth. Red Cross: stop minor bleeding with direct pressure.\n\nIf bleeding does not stop after a few minutes of pressure, MedlinePlus says go to the emergency room or call 911: use the Severe bleeding protocol."
+    },
+    {
+      "id": "s6",
+      "text": "Wash the bite now with soap and plenty of clean running water for at least 3 to 5 minutes, until no dirt is left. Use drinkable water.",
+      "detail": "Cleaning straight away greatly lowers the chance of rabies and infection (CDC Yellow Book). CDC: wash every bite or scratch immediately with soap and water; use plenty of soap and water. MedlinePlus (animal and human bites): wash with mild soap and warm running water, and rinse the bite for 3 to 5 minutes. Red Cross: clean and flush the wound with soap and water.\n\nIn the backcountry (WMS, as in the Wound cleaning and care protocol): use drinkable water, at least 1 litre, pushed in a stream from a syringe or squeezed bag rather than poured; rinse until no dirt is left.\n\nIf rabies is possible and you have povidone-iodine, rinse the wound with it after the soap and water (CDC; WMS). AHA 2024 found tap water, boiled water and saline equally good for ordinary wounds.",
+      "timer": {
+        "seconds": 300,
+        "label": "Wash the bite"
+      },
+      "log": "Bite wound washed"
+    },
+    {
+      "id": "s7",
+      "text": "Leave the bite open: do not close it with tape, glue or stitches. Cover it with a clean dressing.",
+      "detail": "Most bites are left open and closed later, if at all, by a professional (WMS; Wound cleaning and care protocol). CDC Yellow Book: where rabies is possible, stitching is delayed for a few days.\n\nMedlinePlus: apply antibacterial ointment and cover with a clean, dry, sterile bandage. The Wound cleaning and care protocol has more on dressings.\n\nDo not put your mouth on a wound (MedlinePlus).",
+      "log": "Bite dressed"
+    },
+    {
+      "id": "s8",
+      "text": "Was it a human bite?",
+      "ask": {
+        "q": "Was it a human bite?",
+        "yes": "s9",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Could the animal have rabies: any bat contact, a wild animal (raccoon, skunk, fox, coyote), a stray or unvaccinated dog or cat, or any animal acting strangely?",
+      "detail": "In the US, bats, raccoons, skunks and foxes carry rabies most often, and bats cause at least 7 in 10 US rabies deaths (CDC). Rabies is in wildlife in every state except Hawaii (CDC). Signs of rabies in an animal: aggressive or unusually quiet, drooling, or partly paralysed (Red Cross); bats flying in daytime, found in odd places, unable to fly or easy to approach (CDC).\n\nBats: their teeth are tiny and a bite may not be seen or felt (CDC). Any contact between a bat and bare skin, or a bat caught in someone's hair, counts as a possible bite (CDC Yellow Book). Answer Yes for any bat contact unless a bite or scratch can be definitely ruled out (CDC).",
+      "ask": {
+        "q": "Could the animal have rabies (bat, wild, stray or acting strangely)?",
+        "yes": "s11",
+        "no": "s15"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Possible rabies: get them to a medical provider for rabies shots promptly, even if the wound is tiny. Rabies shots must start before any symptoms appear.",
+      "detail": "Once rabies symptoms appear it is nearly always fatal; shots started after an exposure are nearly 100 percent effective (CDC). CDC: wash the wound and get medical care urgently; most exposures need prompt medical attention but not an emergency room visit unless the wound itself needs urgent care, and the shots must start before symptoms. Symptoms can take weeks to months to appear (CDC).\n\nTime window: CDC gives no fixed deadline. Start as soon as possible; CDC says the treatment is still given however long ago the exposure was, as long as no symptoms have appeared, so a delay is never a reason to skip it. The Wound cleaning and care protocol quotes WMS: start within 24 to 48 hours if you can.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty. Red Cross advises calling 911 for a bite from an animal that may have rabies. Tell the health department or animal control about the animal (CDC, MedlinePlus).",
+      "warn": "Rabies is nearly always fatal once symptoms start. Do not wait for symptoms.",
+      "log": "Possible rabies exposure"
+    },
+    {
+      "id": "s12",
+      "text": "Note what the animal looked like, how it behaved and where it went. Do not try to catch it. Bat: keep it for testing only if you can trap it safely.",
+      "detail": "Red Cross: remember the animal's appearance, behaviour and where you last saw it. MedlinePlus: do not try to catch an animal that is acting strangely; report it to animal control so they can decide whether to capture and watch it.\n\nBat (CDC): do not release a bat that had contact with someone until you have talked to public health. If you can do it safely, wear leather work gloves, wait for it to land, put a box or jar over it, slide cardboard under it, and tape it shut so it can be tested. If you cannot catch it safely, leave it. Never touch a bat with bare hands.\n\nIf a pet dog, cat or ferret bit them, note the owner and whether its rabies shots are up to date."
+    },
+    {
+      "id": "s13",
+      "text": "Evacuate for rabies shots, and keep checking the wound on the way.",
+      "detail": "Rabies treatment is given by a medical provider: a wound injection and a series of vaccine shots (CDC). If the evacuation will take days, start it now. Tell the medical team about the animal, the date and time, and where it happened."
+    },
+    {
+      "id": "s15",
+      "text": "Tetanus: a booster is needed if their last tetanus shot was more than 5 years ago. Watch the bite for infection and get care for any sign of it.",
+      "detail": "MedlinePlus (animal and human bites): ask about a tetanus shot if they have not had one in about 5 years. Bites are tetanus-prone wounds (CDC); the Wound cleaning and care protocol has the full tetanus table.\n\nInfection signs: swelling, redness, warmth, pus, more pain, red streaks spreading from the wound, or fever (MedlinePlus, Red Cross). Bites become infected more often than other wounds (AHA 2024).\n\nEvery bite that breaks the skin should be seen by a medical provider, within 24 hours for animal bites (MedlinePlus), and as soon as possible (AHA 2024).",
+      "end": true
+    },
+    {
+      "id": "s9",
+      "text": "Human bite that broke the skin: get medical care soon, and right away if it is on the hand, fingers, face, head, neck or feet. Tetanus booster if over 5 years since the last.",
+      "detail": "MedlinePlus: any human bite that breaks the skin needs medical attention as soon as possible; contact a provider right away if the bite is on the head, face, neck, hands, fingers or feet, or is deep or large, or you can see muscle or bone. AHA 2024: bites from people should be checked at a medical facility as soon as possible; early antibiotics appear to prevent infection after high-risk human bites to the hand.\n\nPeople with diabetes, poor circulation or a weak immune system are at higher risk of infection (MedlinePlus).\n\nTetanus: ask about a tetanus shot if they have not had one in 5 years (MedlinePlus); the Wound cleaning and care protocol has the full table.\n\nWatch for infection: swelling, redness, warmth, pus, more pain, red streaks spreading from the wound, or fever (MedlinePlus). Get medical care for any of these.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nMake sure the animal cannot attack again first. If others were bitten too, check them with this protocol as soon as someone is free.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now. Clean the bite later, once they are stable.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s22",
+      "text": "Use the Severe bleeding protocol now. Do not clean a wound that needed a tourniquet, packing or pressure bandage. Evacuate, and tell the medical team about the animal.",
+      "detail": "Red Cross: give care for life-threatening bleeding first. Do not remove packing or a pressure dressing to clean the wound (Wound cleaning and care protocol, MedlinePlus).\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nRabies: if the animal could have rabies (bat, wild animal, stray or acting strangely), the medical team must know so rabies shots can start before symptoms (CDC). Note what the animal looked like and where it went.",
+      "end": true
+    },
+    {
+      "id": "s23",
+      "text": "Use the Trauma check (MARCH) protocol now. Evacuate urgently, and tell the medical team about the animal for rabies care.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nAfter the trauma check, smaller bites can be washed using this protocol (from the washing step). Do not rinse wounds that needed a tourniquet, packing or a pressure bandage, chest wounds, or belly wounds with organs showing.\n\nRabies: a bite from a wild or strange-acting animal needs rabies shots before symptoms appear (CDC).",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not close a bite with tape, glue or stitches; leave it open (WMS, CDC Yellow Book).",
+    "Do not put your mouth on a bite wound (MedlinePlus).",
+    "Do not try to catch an animal that may have rabies (MedlinePlus); only trap a bat if it is safe, with gloves and a container (CDC).",
+    "Do not touch a bat with bare hands, and do not release one that touched someone until public health has been asked (CDC).",
+    "Do not wait for symptoms of rabies; treatment must start before them (CDC).",
+    "Do not clean a wound that needed a tourniquet, packing or a pressure bandage."
+  ],
+  "evacuate": [
+    "Evacuate for rabies shots: any bat contact, or any bite or scratch from a wild animal, a stray or unvaccinated dog or cat, or an animal acting strangely (CDC). Start as soon as possible.",
+    "Evacuate urgently: heavy bleeding, a mauling, deep wounds, or bites on the neck, chest or belly.",
+    "Get medical care: any human bite that breaks the skin, right away if on the hand, fingers, face, head, neck or feet (MedlinePlus); any animal bite that breaks the skin, within 24 hours (MedlinePlus).",
+    "Get medical care: signs of infection, or no tetanus shot in the last 5 years (MedlinePlus)."
+  ],
+  "notes": [
+    "Bite: bleeding control, wash with soap and plenty of running water (at least 3 to 5 minutes), leave open, rabies shots promptly after any bat contact or wild, stray or strange-acting animal."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.3 Superficial wounds (bites) (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Animal Bites: Symptoms and First Aid (lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/animal-bites"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, About Rabies, updated 27 Jan 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/rabies/about/index.html"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, Clinical Screening for Rabies PEP, last reviewed 11 Sep 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/rabies/hcp/diagnosis/index.html"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, Rabies Post-exposure Prophylaxis Guidance, reviewed 10 Sep 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/rabies/hcp/clinical-care/post-exposure-prophylaxis.html"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, Preventing Rabies from Bats, last reviewed 1 Jul 2025",
+      "year": 2025,
+      "url": "https://www.cdc.gov/rabies/prevention/bats.html"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, CDC Yellow Book, Rabies (page dated 23 Apr 2025)",
+      "year": 2025,
+      "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/rabies.html"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Animal bites - self-care, reviewed 2026-04-13",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/patientinstructions/000734.htm"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Human bites - self-care, reviewed 2026-04-13",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/patientinstructions/000736.htm"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

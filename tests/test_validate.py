@@ -1,7 +1,8 @@
 import copy
 import unittest
 
-from tools.validate import draft_ids, validate
+from tools.validate import (RESERVED_TOPIC_IDS, TOPIC_CATEGORIES, WHEN, WHERE, draft_ids, topic_draft_ids,
+                            validate, validate_checklists, validate_topics)
 
 
 def ok(**step_over):
@@ -323,3 +324,236 @@ def test_no_figure_id_is_defined_twice():
     src = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'figs', 'figs.py'), encoding='utf-8').read()
     ids = re.findall(r"^svg\('([\w-]+)'", src, re.M)
     assert len(ids) > 30 and len(ids) == len(set(ids)), sorted({i for i in ids if ids.count(i) > 1})
+
+
+def topic(**over):
+    t = {
+        'id': 'surv-water', 'title': 'Water', 'category': 'water', 'keywords': ['drink'], 'summary': 'Find water.',
+        'where': ['town', 'coast'], 'when': ['cold'], 'doFirst': ['Stop.'],
+        'sections': [{'h': 'Basics', 'blocks': [
+            {'p': 'Text.'}, {'list': ['a', 'b']}, {'steps': ['one', 'two']}, {'warn': 'Careful.'},
+            {'table': {'head': ['A', 'B'], 'rows': [['1', '2']]}},
+            {'fig': 'f1', 'cap': 'A figure.'}, {'link': 's:surv-other', 'label': 'Other'}]}],
+        'sources': [{'name': 'CDC', 'used': 'Boil times'}], 'reviewed': '2026-11-17', 'asOf': '2026-10-01',
+    }
+    t.update(over)
+    return t
+
+
+def terrs(topics, figs=('f1',), links=('s:surv-other',)):
+    return validate_topics(topics, set(figs), set(links))[0]
+
+
+def checklist(**over):
+    c = {'id': 'go-bag', 'title': 'Go bag', 'category': 'basics', 'summary': 'Pack.',
+         'items': [{'id': 'i1', 'text': 'Water'}, {'id': 'i2', 'text': 'Radio', 'note': 'Hand crank'}],
+         'sources': [{'name': 'Ready.gov', 'used': 'List'}], 'reviewed': '2026-11-17'}
+    c.update(over)
+    return c
+
+
+def cerrs(lists):
+    return validate_checklists(lists, set())[0]
+
+
+class TopicValidation(unittest.TestCase):
+    def has(self, errors, *parts):
+        self.assertTrue(any(all(x in e for x in parts) for e in errors), (parts, errors))
+
+    def test_constants(self):
+        self.assertEqual(RESERVED_TOPIC_IDS, {'tool', 'list'})
+        self.assertEqual(WHERE, {'town', 'rural', 'woods', 'coast'})
+        self.assertEqual(WHEN, {'cold', 'warm'})
+        self.assertEqual(TOPIC_CATEGORIES, {'basics', 'water', 'heat', 'radiation', 'food', 'comms', 'staying', 'moving', 'town'})
+
+    def test_valid_topic_has_no_errors(self):
+        self.assertEqual(validate_topics([topic()], {'f1'}, {'s:surv-other'}), ([], []))
+
+    def test_minimal_topic_is_valid(self):
+        t = topic()
+        for k in ('where', 'when', 'doFirst', 'asOf'):
+            del t[k]
+        self.assertEqual(terrs([t]), [])
+
+    def test_bad_ids(self):
+        for bad in ('water', 'surv-', 'surv-Water', 'surv-' + 'a' * 56, 'surv-a b'):
+            self.has(terrs([topic(id=bad)]), repr(bad), 'surv-')
+        self.has(terrs([topic(), topic()]), "'surv-water'", 'duplicate')
+
+    def test_reserved_ids_are_listed(self):
+        # 'tool' and 'list' can never match surv-*, so the pattern error carries the point; the set stays for the router.
+        self.assertTrue(terrs([topic(id='tool')]))
+
+    def test_reserved_id_check_runs_on_its_own(self):
+        import tools.validate as v
+        old = v.RESERVED_TOPIC_IDS
+        v.RESERVED_TOPIC_IDS = old | {'surv-x'}
+        try:
+            self.has(terrs([topic(id='surv-x')]), "'surv-x'", 'reserved')
+        finally:
+            v.RESERVED_TOPIC_IDS = old
+
+    def test_unknown_keys(self):
+        self.has(terrs([topic(extra=1)]), "'surv-water'", "unknown key 'extra'")
+        t = topic(); t['sections'][0]['blocks'][0]['zz'] = 1
+        self.has(terrs([t]), "'surv-water'", "unknown key 'zz'")
+        t = topic(); t['sections'][0]['bad'] = 1
+        self.has(terrs([t]), "unknown key 'bad'")
+
+    def test_build_added_fig_keys_are_unknown_in_source(self):
+        t = topic(); t['sections'][0]['blocks'][5]['figSvg'] = '<svg/>'
+        self.has(terrs([t]), "unknown key 'figSvg'")
+        t = topic(); t['sections'][0]['blocks'][5]['figLabel'] = 'x'
+        self.has(terrs([t]), "unknown key 'figLabel'")
+
+    def test_block_with_two_shapes(self):
+        t = topic(); t['sections'][0]['blocks'] = [{'p': 'a', 'warn': 'b'}]
+        self.has(terrs([t]), "'surv-water'", 'exactly one')
+        t['sections'][0]['blocks'] = [{}]
+        self.has(terrs([t]), 'exactly one')
+        t['sections'][0]['blocks'] = ['text']
+        self.has(terrs([t]), 'must be an object')
+
+    def test_sections(self):
+        self.has(terrs([topic(sections=[])]), "'surv-water'", 'sections')
+        self.has(terrs([topic(sections=None)]), 'sections')
+        t = topic(); del t['sections'][0]['h']
+        self.has(terrs([t]), 'missing h')
+        t = topic(); t['sections'][0]['blocks'] = []
+        self.has(terrs([t]), 'blocks')
+        self.has(terrs([topic(sections=['x'])]), 'must be an object')
+
+    def test_category_where_when(self):
+        self.has(terrs([topic(category='nope')]), "'surv-water'", "unknown category 'nope'")
+        self.has(terrs([topic(category=None)]), 'missing category')
+        self.has(terrs([topic(where=['moon'])]), "'surv-water'", "where", "'moon'")
+        self.has(terrs([topic(when=['spring'])]), "when", "'spring'")
+        self.has(terrs([topic(where='town')]), 'where must be a list')
+
+    def test_fig_and_link_references(self):
+        self.has(terrs([topic()], figs=()), "'surv-water'", "unknown figure 'f1'")
+        t = topic(); del t['sections'][0]['blocks'][5]['cap']
+        self.has(terrs([t]), 'fig', 'cap')
+        self.has(terrs([topic()], links=()), "'surv-water'", "unknown link 's:surv-other'")
+        t = topic(); del t['sections'][0]['blocks'][6]['label']
+        self.has(terrs([t]), 'link', 'label')
+
+    def test_block_value_types(self):
+        for blk in ({'p': ''}, {'warn': ' '}, {'list': []}, {'list': ['']}, {'steps': 'x'}, {'steps': [1]},
+                    {'table': 'x'}, {'table': {'head': [], 'rows': [['a']]}}, {'table': {'head': ['A'], 'rows': []}}):
+            t = topic(); t['sections'][0]['blocks'] = [blk]
+            self.assertTrue(terrs([t]), blk)
+
+    def test_table_row_length(self):
+        t = topic(); t['sections'][0]['blocks'] = [{'table': {'head': ['A', 'B'], 'rows': [['1', '2'], ['3']]}}]
+        self.has(terrs([t]), "'surv-water'", 'row 2', 'head')
+        t['sections'][0]['blocks'] = [{'table': {'head': ['A'], 'rows': [['1']], 'x': 1}}]
+        self.has(terrs([t]), "unknown key 'x'")
+
+    def test_sources(self):
+        for bad in (None, [], 'x'):
+            t = topic(sources=bad)
+            self.has(terrs([t]), "'surv-water'", 'sources')
+        t = topic(); del t['sources']
+        self.has(terrs([t]), 'sources')
+        self.has(terrs([topic(sources=[{'used': 'x'}])]), 'name')
+        self.has(terrs([topic(sources=[{'name': 'x'}])]), 'used')
+        self.has(terrs([topic(sources=['x'])]), 'name')
+
+    def test_dates(self):
+        t = topic(); del t['reviewed']
+        self.has(terrs([t]), "'surv-water'", 'missing reviewed')
+        self.has(terrs([topic(reviewed='17/11/2026')]), 'reviewed', 'YYYY-MM-DD')
+        self.has(terrs([topic(asOf='2026-13-01')]), 'asOf', 'YYYY-MM-DD')
+        self.has(terrs([topic(asOf='Oct 2026')]), 'asOf', 'YYYY-MM-DD')
+        self.has(terrs([topic(asOf=None)]), 'asOf', 'YYYY-MM-DD')
+
+    def test_other_field_types(self):
+        self.has(terrs([topic(title='')]), 'missing title')
+        self.has(terrs([topic(keywords='x')]), 'keywords')
+        self.has(terrs([topic(doFirst=[''])]), 'doFirst')
+        self.has(terrs([topic(summary=3)]), 'summary')
+        self.has(terrs([topic(draft='yes')]), 'draft')
+
+    def test_draft_is_warning_not_error(self):
+        errors, warnings = validate_topics([topic(draft=True)], {'f1'}, {'s:surv-other'})
+        self.assertEqual(errors, [])
+        self.assertEqual(len(warnings), 1)
+        self.assertIn('surv-water', warnings[0])
+        self.assertEqual(topic_draft_ids([topic(draft=True), topic(id='surv-b'), 'x', {'draft': True}]), ['surv-water'])
+
+    def test_non_dict_inputs_do_not_raise(self):
+        for bad in ('x', None, 5, ['x'], [None], {'a': 1}):
+            r = validate_topics(bad, set(), set())
+            self.assertTrue(r[0], bad)
+        self.assertTrue(validate_topics([topic(sections=[None])], set(), set())[0])
+
+    def test_input_not_mutated(self):
+        t = topic(draft=True); before = copy.deepcopy(t)
+        validate_topics([t], {'f1'}, {'s:surv-other'}); validate_topics([t], set(), set())
+        self.assertEqual(t, before)
+        fig, links = {'f1'}, {'s:surv-other'}
+        validate_topics([t], fig, links)
+        self.assertEqual((fig, links), ({'f1'}, {'s:surv-other'}))
+
+
+class ChecklistValidation(unittest.TestCase):
+    def has(self, errors, *parts):
+        self.assertTrue(any(all(x in e for x in parts) for e in errors), (parts, errors))
+
+    def test_valid_checklist(self):
+        self.assertEqual(validate_checklists([checklist()], set()), ([], []))
+
+    def test_minimal_checklist_is_valid(self):
+        c = checklist(); del c['summary']
+        self.assertEqual(cerrs([c]), [])
+
+    def test_id_rules(self):
+        self.has(cerrs([checklist(id='Bad Id')]), "'Bad Id'", 'id')
+        self.has(cerrs([checklist(), checklist()]), "'go-bag'", 'duplicate')
+
+    def test_unknown_keys(self):
+        self.has(cerrs([checklist(extra=1)]), "'go-bag'", "unknown key 'extra'")
+        c = checklist(); c['items'][0]['zz'] = 1
+        self.has(cerrs([c]), "unknown key 'zz'")
+
+    def test_category(self):
+        self.has(cerrs([checklist(category='nope')]), "'go-bag'", "unknown category 'nope'")
+
+    def test_items(self):
+        self.has(cerrs([checklist(items=[])]), "'go-bag'", 'items')
+        self.has(cerrs([checklist(items=None)]), 'items')
+        c = checklist(); c['items'][1]['id'] = 'i1'
+        self.has(cerrs([c]), "'go-bag'", 'duplicate item id', "'i1'")
+        c = checklist(); c['items'][0]['text'] = '  '
+        self.has(cerrs([c]), "'go-bag'", 'text')
+        c = checklist(); c['items'][0]['id'] = 'Bad'
+        self.has(cerrs([c]), 'item id')
+        c = checklist(); c['items'][1]['note'] = ''
+        self.has(cerrs([c]), 'note')
+        self.has(cerrs([checklist(items=['x'])]), 'must be an object')
+
+    def test_sources_and_reviewed(self):
+        self.has(cerrs([checklist(sources=[])]), "'go-bag'", 'sources')
+        self.has(cerrs([checklist(sources=[{'name': 'x'}])]), 'used')
+        c = checklist(); del c['reviewed']
+        self.has(cerrs([c]), 'missing reviewed')
+        self.has(cerrs([checklist(reviewed='yesterday')]), 'YYYY-MM-DD')
+        self.has(cerrs([checklist(title='')]), 'missing title')
+        self.has(cerrs([checklist(summary=4)]), 'summary')
+
+    def test_draft(self):
+        errors, warnings = validate_checklists([checklist(draft=True)], set())
+        self.assertEqual(errors, [])
+        self.assertIn('go-bag', warnings[0])
+        self.assertEqual(topic_draft_ids([checklist(draft=True), checklist(id='b')]), ['go-bag'])
+        self.has(cerrs([checklist(draft=1)]), 'draft')
+
+    def test_non_dict_inputs_do_not_raise(self):
+        for bad in ('x', None, ['x'], [None], [5]):
+            self.assertTrue(validate_checklists(bad, set())[0], bad)
+
+    def test_input_not_mutated(self):
+        c = checklist(draft=True); before = copy.deepcopy(c)
+        validate_checklists([c], set())
+        self.assertEqual(c, before)

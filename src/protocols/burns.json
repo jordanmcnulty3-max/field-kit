@@ -54,8 +54,8 @@
     },
     {
       "id": "s5",
-      "text": "Cool the burn under clean, cool running water right away, for 5 to 20 minutes (electrical burns: at least 15). Stop if a child starts shivering.",
-      "detail": "Cool thermal burns immediately, preferably with clean running water (AHA, Class 1). Cooling for 5 to 20 minutes may be reasonable (AHA); Red Cross also says 5 to 20 minutes. There is no agreed best duration. For an electrical burn, Red Cross says cool for at least 15 minutes.\n\nWater temperature: cool or cold clean running water (AHA, Red Cross). If you have no cool water, lukewarm water is acceptable (Red Cross).\n\nNo running water: use a cool or cold compress, such as a clean cloth soaked in cool water (Red Cross). AHA (2024) also allows ice wrapped in a cloth, for no more than 10 minutes, but only on a superficial burn where the skin is not broken; Red Cross says do not use ice.\n\nWatch for getting cold: children (before their teens) cool down fast and can become hypothermic while a burn is cooled, so watch them for shivering or feeling cold (AHA). With a large burn, watch any casualty for hypothermia (Red Cross, WMS). Cool the burn, not the whole person, and keep the rest of them covered and warm.\n\nDo not try to clean a severe burn (Red Cross).",
+      "text": "Cool the burn under clean, cool running water right away, for 5 to 20 minutes (electrical burns: at least 15). Watch children for shivering.",
+      "detail": "Cool thermal burns immediately, preferably with clean running water (AHA, Class 1). Cooling for 5 to 20 minutes may be reasonable (AHA); Red Cross also says 5 to 20 minutes. There is no agreed best duration. For an electrical burn, Red Cross says cool for at least 15 minutes.\n\nWater temperature: cool or cold clean running water (AHA, Red Cross). If you have no cool water, lukewarm water is acceptable (Red Cross).\n\nNo running water: use a cool or cold compress, such as a clean cloth soaked in cool water (Red Cross). AHA (2024) also allows ice wrapped in a cloth, for no more than 10 minutes, but only on a superficial burn where the skin is not broken; Red Cross says do not use ice.\n\nWatch for getting cold: children (before their teens) cool down fast and can become hypothermic while a burn is cooled, so watch them for shivering or feeling cold (AHA). AHA and Red Cross say to monitor for hypothermia but give no rule for when to stop. A reasonable judgement, not from a source: if a child starts shivering, stop cooling, dry and cover them, and keep them warm. With a large burn, watch any casualty for hypothermia (Red Cross, WMS). Cool the burn, not the whole person, and keep the rest of them covered and warm.\n\nDo not try to clean a severe burn (Red Cross).",
       "warn": "No ice on blistered, broken or deep burns. Keep the rest of the body warm, especially children.",
       "timer": {
         "seconds": 1200,
@@ -83,8 +83,9 @@
     },
     {
       "id": "s9",
-      "text": "Keep them warm, watch their breathing, and treat for shock if the burn is large. Over-the-counter pain medicine is reasonable.",
-      "detail": "Burn casualties lose heat quickly: keep them covered and off cold ground (TCCC, Red Cross).\n\nWatch breathing closely after a burn to the face or a fire in an enclosed space; it can get worse (TCCC, AHA).\n\nLarge burns can cause shock: use the Shock protocol and evacuate urgently.\n\nPain: over-the-counter acetaminophen or ibuprofen-type medicine is reasonable for burn pain (AHA). Use it as the package directs.\n\nKeep checking the burn for signs of infection while you wait or travel: spreading redness, swelling, pus, worse pain, or fever.",
+      "text": "Keep them warm, watch their breathing, and treat for shock if the burn is large. For a small burn, over-the-counter pain medicine is reasonable (see warning).",
+      "warn": "No pain medicine by mouth if there are signs of shock, the burn needs evacuation, a head injury is possible, or they are less alert than normal.",
+      "detail": "Burn casualties lose heat quickly: keep them covered and off cold ground (TCCC, Red Cross).\n\nWatch breathing closely after a burn to the face or a fire in an enclosed space; it can get worse (TCCC, AHA).\n\nLarge burns can cause shock: use the Shock protocol and evacuate urgently.\n\nPain: over-the-counter acetaminophen or ibuprofen-type medicine is reasonable for burn pain (AHA), taken as the package directs. Do not give it when the Shock protocol applies (nothing by mouth), for a burn large or serious enough to need evacuation, or when a head injury is possible or they are less alert than normal: Red Cross advises against painkillers after a head injury because they can hide the signs of a serious injury.\n\nKeep checking the burn for signs of infection while you wait or travel: spreading redness, swelling, pus, worse pain, or fever.",
       "end": true
     },
     {
@@ -151,7 +152,7 @@
   "notes": [
     "Count only blistered (partial-thickness) and deeper (full-thickness: white, brown, black or leathery, often little pain) burns. Leave out skin that is only red.",
     "Small or scattered burns: the casualty's whole hand, palm and fingers together, is about 1% of their body.",
-    "The child figure uses a baby's proportions. For each year of age, about 1% comes off the head and about 0.5% goes onto each leg; from about age 9, use the adult figure.",
+    "The child figure shows a baby's proportions (age 0). For every year of age, take 1% from the head and add 0.5% to each leg (NSW ACI); for example at age 5, head 13% and each leg 16.5%. From age 9, use the adult figure.",
     "Field estimates are rough. TCCC rounds to the nearest 10%."
   ],
   "sources": [

@@ -33,8 +33,8 @@
     },
     {
       "id": "s3",
-      "text": "Large blister: WMS advises draining it. Wash it, pierce it with a sterilised needle, let the fluid out, and leave the roof of skin in place.",
-      "detail": "WMS (2014 update): blisters larger than 5 mm should be drained but not unroofed, then covered (next step).\n\nThe NHS (UK) advises the public not to burst a blister themselves and says a doctor may drain a large or painful one with a sterilised needle. Off-grid, with walking to do, the WMS advice applies; use a needle that is as clean as you can make it, and wash the skin first.\n\nKeep the roof of skin: do not peel it off or pick at the edges (NHS, WMS). If the blister has already burst, let the fluid drain, gently wash and pat dry, and leave the loose skin in place (NHS).",
+      "text": "Large blister: WMS advises draining it. Wipe a small needle with rubbing alcohol, pierce one edge, let the fluid out, and leave the roof of skin on.",
+      "detail": "WMS (2014 update): blisters larger than 5 mm should be drained but not unroofed, then covered (next step).\n\nThe NHS (UK) advises the public not to burst a blister themselves and says a doctor may drain a large or painful one with a sterilised needle. The American Academy of Dermatology drains only a blister that is large and very painful, and gives the method used here: sterilise a small needle with rubbing alcohol, pierce one edge so the fluid drains, leave the roof in place, wash with soap and water, apply petroleum jelly, and cover loosely; on the sole of the foot, put a doughnut pad around it first. This protocol uses the WMS size threshold.\n\nKeep the roof of skin: do not peel it off or pick at the edges (NHS, WMS). If the blister has already burst, let the fluid drain, gently wash and pat dry, and leave the loose skin in place (NHS).",
       "log": "Blister drained"
     },
     {
@@ -74,6 +74,11 @@
       "name": "NHS (UK National Health Service), Blisters, last reviewed 22 Nov 2023",
       "year": 2023,
       "url": "https://www.nhs.uk/conditions/blisters/"
+    },
+    {
+      "name": "American Academy of Dermatology, How to prevent and treat blisters (draining technique), updated 6 Jul 2026",
+      "year": 2026,
+      "url": "https://www.aad.org/public/skin-hair-nails/injured-skin/blisters"
     }
   ],
   "reviewed": "2026-11-17"

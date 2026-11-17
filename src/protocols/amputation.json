@@ -25,7 +25,7 @@
     },
     {
       "id": "s2",
-      "text": "Stop the bleeding first with the Severe bleeding protocol: a tourniquet high above the wound for an arm or leg; firm direct pressure for a finger or toe.",
+      "text": "Stop the bleeding first with the Severe bleeding protocol: a tourniquet 2 to 3 inches above the wound for an arm or leg; firm direct pressure for a finger or toe.",
       "detail": "TCCC (2026) puts a limb tourniquet on for any traumatic amputation of an arm or leg, 2 to 3 inches above the wound, directly on the skin, and a second one beside it if the first does not stop the bleeding.\n\nMedlinePlus (US National Library of Medicine) says to use a tourniquet only if the bleeding is life-threatening, because a tourniquet left on too long can harm the whole limb. For a finger or toe, firm direct pressure on the wound with gauze or clean cloth is the first step (AHA).\n\nKeep checking: bleeding can start again.\n\nOnce the bleeding is controlled, check for other injuries and do not overlook less obvious ones (MedlinePlus).",
       "warn": "Saving the person comes before saving the part.",
       "log": "Bleeding controlled after amputation"

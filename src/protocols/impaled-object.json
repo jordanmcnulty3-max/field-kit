@@ -25,9 +25,28 @@
       "detail": "An object stuck in the body (a knife, stick, arrow, metal rod or similar) should stay where it is until a hospital removes it: pulling it out can make bleeding much worse. Use the Trauma check (MARCH) if there are other injuries.\n\nObject in the eye: use the Eye injury protocol. Small splinters and loose dirt in a minor wound: use the Wound cleaning and care protocol."
     },
     {
+      "id": "s6",
+      "text": "Is it a fishhook?",
+      "ask": {
+        "q": "Is it a fishhook?",
+        "yes": "s7",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Is the hook in deep, or in or near an eye, eyelid, joint, tendon or artery?",
+      "detail": "MedlinePlus: get medical help for a hook that is deeply embedded or is in or near a joint, tendon, eye, eyelid or artery. Leave it in place and treat it like any other impaled object. A hook in the eye: use the Eye injury protocol (cup over the eye, nothing touching the hook).",
+      "ask": {
+        "q": "Is the hook deep, or near an eye, joint, tendon or artery?",
+        "yes": "s2",
+        "no": "s8"
+      }
+    },
+    {
       "id": "s2",
       "text": "Do not pull the object out. Leave it in place. Object in the eye: use the Eye injury protocol instead.",
-      "detail": "Removing an embedded object can make the bleeding much worse (Red Cross). Do not remove a long or deeply stuck object yourself; get medical help (MedlinePlus).\n\nTry not to move the object at all while you work around it.",
+      "detail": "Removing an embedded object can make the bleeding much worse (Red Cross). Do not remove a long or deeply stuck object yourself; get medical help (MedlinePlus).\n\nTry not to move the object at all while you work around it.\n\nObject blocking the airway so they cannot breathe: EMS-level teaching (Oregon EMS Psychomotor Skills Lab Manual, 2023, below the authority level of the other sources here) allows removal only when the object blocks the airway so that breathing for the casualty does not work. No source opened gives any other exception.",
       "warn": "Pulling it out can cause severe bleeding."
     },
     {
@@ -48,10 +67,17 @@
       "text": "Keep them still, treat for shock, and get them to medical care.",
       "detail": "Keep the casualty as still as possible so the object does not shift. Keep them warm and watch for shock (Shock protocol). Keep checking for bleeding around the padding.\n\nEvacuate urgently. For an object in the chest, also watch breathing (Open chest wound protocol). For an object in the belly, use the Belly (abdominal) injury protocol.",
       "end": true
+    },
+    {
+      "id": "s8",
+      "text": "Hook just under the skin: wash, then remove it. If the barb is not in, back it out. If it is, push the tip through, cut it off behind the barb, and back the rest out.",
+      "detail": "MedlinePlus Fishhook removal: a hook that is only just under the skin can be removed by a lay person. Wash your hands and the skin around it first.\n\nBarb not in the skin: pull the tip back out the way it went in.\n\nWire-cutting method: push the tip of the hook on through the skin, cut it off just behind the barb with wire cutters, then pull the rest of the hook back out the way it went in.\n\nFishing-line method (MedlinePlus): loop fishing line through the bend of the hook, hold the shank and press the hook slightly down and in to free the barb, keep that pressure, and give a quick firm jerk on the line so the hook comes straight back out.\n\nAfterwards: wash the wound well with soap and water and cover it loosely with a clean dressing. Do not close it with tape. Watch for infection (redness, swelling, pain, drainage) and check tetanus: the Wound cleaning and care protocol covers both.",
+      "log": "Fishhook removed",
+      "end": true
     }
   ],
   "donts": [
-    "Do not pull out or move an impaled object.",
+    "Do not pull out or move an impaled object (a fishhook just under the skin, away from the eye, joints, tendons and arteries, is the exception).",
     "Do not press directly on the object; press around it."
   ],
   "evacuate": [
@@ -73,6 +99,16 @@
       "name": "American Red Cross, Abdominal Injury (lay first aid page, read 2026-11-17)",
       "year": 2026,
       "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/abdominal-injury"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Fishhook removal, reviewed 2025-10-14",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000055.htm"
+    },
+    {
+      "name": "Hamper et al., Oregon EMS Psychomotor Skills Lab Manual, Impaled objects (EMS level; airway exception)",
+      "year": 2023,
+      "url": "https://openoregon.pressbooks.pub/emslabmanual/chapter/impaled-objects/"
     }
   ],
   "reviewed": "2026-11-17"

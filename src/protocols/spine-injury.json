@@ -45,7 +45,7 @@
     {
       "id": "s4",
       "text": "Move them only as far as you must. To roll them, use two or more people and turn the head, neck and body together as one unit.",
-      "detail": "AHA and Red Cross: move a person with a possible spine injury only when safety requires it, or to give CPR or control bleeding.\n\nHow to roll (MedlinePlus): one person holds the head; the other kneels at the side. Turn the person onto their side as one piece, keeping the head, neck and back in a straight line, without letting the head move relative to the body. MedlinePlus advises rolling only if they are vomiting or choking on blood, or so you can check breathing.\n\nFor CPR, roll them onto their back the same way and use the CPR, adult protocol. If you have been taught the jaw thrust, TCCC uses it when a neck injury is possible; if it does not open the airway, tilt the head anyway, because breathing comes first. (MedlinePlus says to give compressions only without changing the neck position; AHA guidance includes breaths.)\n\nAfter moving them, keep them as still as possible again.",
+      "detail": "AHA and Red Cross: move a person with a possible spine injury only when safety requires it, or to give CPR or control bleeding.\n\nHow to roll (MedlinePlus, Mayo Clinic): one person holds the head; the other kneels at the side. Turn the person onto their side as one piece, keeping the head, neck and back in a straight line, without letting the head move relative to the body. MedlinePlus advises rolling only if they are vomiting or choking on blood, or so you can check breathing.\n\nFor CPR, roll them onto their back the same way and use the CPR, adult protocol. If you have been taught the jaw thrust, TCCC uses it when a neck injury is possible; if it does not open the airway, tilt the head anyway, because breathing comes first. (MedlinePlus says to give compressions only without changing the neck position; AHA guidance includes breaths.)\n\nAfter moving them, keep them as still as possible again.",
       "log": "Moved with spine precautions"
     },
     {
@@ -56,7 +56,7 @@
     {
       "id": "s6",
       "text": "Get them to medical care, keeping them as still as you can. Do not let them get up or walk while a spine injury is possible.",
-      "detail": "Wilderness Medical Society (2024): spinal care in the field should aim to protect the spinal cord and spine while keeping the casualty and rescuers safe, rather than following a fixed technique, and suspected spine injuries should not be immobilized with rigid collars or backboards.\n\nThe WMS guideline also describes how trained rescuers decide in the field whether a spine injury can be ruled out, which matters for whether someone can walk out. This protocol does not teach that. If you are not sure, treat it as a spine injury.\n\nPlan the evacuation so they can stay lying still. Keep them warm and padded, and keep watching breathing.",
+      "detail": "Wilderness Medical Society (2024): spinal care in the field should aim to protect the spinal cord and spine while keeping the casualty and rescuers safe, rather than following a fixed technique, and suspected spine injuries should not be immobilized with rigid collars or backboards.\n\nThis protocol does not teach how to rule out a spine injury. If you are not sure, treat it as a spine injury.\n\nPlan the evacuation so they can stay lying still. Keep them warm and padded, and keep watching breathing.",
       "end": true
     }
   ],
@@ -97,6 +97,11 @@
       "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: section 4 Airway (no cervical stabilization for penetrating trauma alone)",
       "year": 2026,
       "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "Mayo Clinic, Spinal injury: First aid (rolling only for vomiting, choking on blood or breathing check; two people)",
+      "year": 2026,
+      "url": "https://www.mayoclinic.org/first-aid/first-aid-spinal-injury/basics/art-20056677"
     }
   ],
   "reviewed": "2026-11-17"

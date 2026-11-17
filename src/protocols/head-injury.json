@@ -36,13 +36,23 @@
     {
       "id": "s3",
       "text": "Unresponsive after a head injury: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Check their breathing now.",
-      "detail": "If they are not breathing normally, start CPR (CPR, adult protocol).\n\nIf they are breathing, a neck or back injury is possible: leave them in the position found unless you must move them, and keep watching their breathing all the time. The Recovery position and Neck or back (spine) injury protocols cover when and how to move them.\n\nKeep them from getting cold or overheated and care for shock if needed. Any loss of consciousness after a head injury, even a short one, is a danger sign: get them to medical care urgently.",
+      "detail": "If they are not breathing normally, start CPR (CPR, adult protocol, or CPR, child or CPR, infant).\n\nIf they are breathing, a neck or back injury is possible: leave them in the position found unless you must move them, and keep watching their breathing all the time. If they vomit or choke on blood, roll them onto their side as one unit with a helper, as in the Neck or back (spine) injury protocol.\n\nKeep them from getting cold or overheated and care for shock if needed. Any loss of consciousness after a head injury, even a short one, is a danger sign: get them to medical care urgently.",
       "end": true
     },
     {
       "id": "s4",
       "text": "Have them stop what they are doing and rest. If a neck or back injury is possible, tell them not to move.",
       "detail": "Anyone with signs of a concussion should stop their activity (work, sport, play) straight away and not go back to it until a health care professional has checked them (AHA and Red Cross). Another blow before the brain has recovered is more dangerous.\n\nRed Cross: leave them in the position found until help arrives if they may have hurt their neck or back. Use the Neck or back (spine) injury protocol if you suspect one: neck or back pain, numbness, tingling or weakness, or a fall, crash or dive as above.\n\nCommon concussion symptoms (CDC): headache, dizziness or balance problems, nausea, sensitivity to light or noise, blurred vision, tiredness, feeling slowed down or foggy, trouble concentrating or remembering, irritability, anxiety or sadness, and sleeping more or less than usual."
+    },
+    {
+      "id": "s10",
+      "text": "Were they knocked out at all, even for a moment?",
+      "detail": "Any loss of consciousness after a head injury, even brief, is a danger sign (CDC, AHA, Red Cross). If they do not remember the injury, or someone saw them go limp or not respond, answer Yes.",
+      "ask": {
+        "q": "Were they knocked out, even briefly?",
+        "yes": "s6",
+        "no": "s5"
+      }
     },
     {
       "id": "s5",
@@ -114,6 +124,11 @@
       "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: section 8 Traumatic brain injury",
       "year": 2026,
       "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Spinal injury, reviewed 2025-06-04",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000029.htm"
     }
   ],
   "reviewed": "2026-11-17"

@@ -38,7 +38,7 @@
     },
     {
       "id": "s3",
-      "text": "Stop it now with the Severe bleeding protocol: tourniquet high on an arm or leg; pack and press a neck, armpit or groin wound. Then go on to Airway.",
+      "text": "Stop it now with the Severe bleeding protocol: tourniquet 2 to 3 inches above an arm or leg wound; pack and press a neck, armpit or groin wound. Then go to Airway.",
       "detail": "TCCC for all service members: put a tourniquet on any massive bleeding from an arm or leg, pack wounds where a tourniquet cannot go (groin, armpit, neck) and hold pressure, then put a pressure bandage on. If the first tourniquet does not stop the bleeding, put a second one on beside it.\n\nThe Severe bleeding protocol has the full steps, including how to pack a wound and what to do for a chest or belly wound. Note the time of every tourniquet.\n\nWhen the bleeding is controlled, carry on with this check at A, Airway.",
       "warn": "Organs showing through a belly wound: do not press on them or push them back. Cover loosely with a clean, moist dressing.",
       "log": "Massive bleeding treated"
@@ -66,8 +66,8 @@
     },
     {
       "id": "s6",
-      "text": "Breathing but unresponsive: use the Recovery position protocol (it covers a possible spine injury). Keep watching their breathing, then go on to Respiration.",
-      "detail": "TCCC places an unresponsive casualty who is breathing in the recovery position, on their side with the head tilted back so blood or vomit can drain from the mouth.\n\nCivilian first aid guidance (the Recovery position protocol) leaves a casualty who may have a neck or back injury in the position found unless you must move them. Follow that protocol for how to roll them and when not to.\n\nIf breathing stops or becomes gasping, roll them onto their back and start CPR."
+      "text": "Breathing but unresponsive: use the Recovery position protocol, or the Neck or back (spine) injury protocol if a spine injury is possible. Then go on to Respiration.",
+      "detail": "TCCC places an unresponsive casualty who is breathing in the recovery position, on their side with the head tilted back so blood or vomit can drain from the mouth.\n\nCivilian first aid guidance (the Recovery position protocol) leaves a casualty who may have a neck or back injury in the position found unless you must move them. If a spine injury is possible, use the Neck or back (spine) injury protocol: it rolls them onto their side as one unit, with a helper holding the head, if they vomit or choke on blood (MedlinePlus, Mayo Clinic).\n\nIf breathing stops or becomes gasping, roll them onto their back and start CPR."
     },
     {
       "id": "s7",
@@ -113,7 +113,7 @@
     {
       "id": "s13",
       "text": "H, hypothermia: get them off the cold ground onto insulation, replace wet clothing with dry, and cover them against wind and rain.",
-      "detail": "Injured people lose heat fast, even in mild weather, and cold makes bleeding worse. TCCC: start early and act firmly. Put insulation (a sleeping pad, pack, branches, clothing) between the casualty and the ground as soon as you can. Replace wet clothing with dry if possible. Cover them with whatever keeps them warm and dry: blankets, a poncho liner, a sleeping bag, an emergency blanket. Protect them from wind and rain.\n\nIf you have a heat source such as a heating blanket or heat packs, put it on the front of the chest and in the armpits, never directly on the skin, and do not wrap it around the body.\n\nIf a neck or back injury is possible, roll them as one unit to get insulation underneath (Neck or back (spine) injury protocol).\n\nKeep them covered when you move them.",
+      "detail": "Injured people lose heat fast, even in mild weather, and cold makes bleeding worse. TCCC: start early and act firmly. Put insulation (a sleeping pad, pack, branches, clothing) between the casualty and the ground as soon as you can. Replace wet clothing with dry if possible. Cover them with whatever keeps them warm and dry: blankets, a poncho liner, a sleeping bag, an emergency blanket. Protect them from wind and rain.\n\nIf you have a heat source such as a heating blanket or heat packs, put it on the front of the chest and in the armpits, never directly on the skin, and do not wrap it around the body (TCCC 2026 TFC 7d).\n\nIf a neck or back injury is possible, roll them as one unit to get insulation underneath (Neck or back (spine) injury protocol).\n\nKeep them covered when you move them.",
       "log": "Hypothermia prevention started"
     },
     {
@@ -179,6 +179,16 @@
       "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.4 Spinal motion restriction and 9.5 Concussion (Circulation 2024;150:e519)",
       "year": 2024,
       "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Spinal injury, reviewed 2025-06-04",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000029.htm"
+    },
+    {
+      "name": "Mayo Clinic, Spinal injury: First aid (rolling only for vomiting, choking on blood or breathing check; two people)",
+      "year": 2026,
+      "url": "https://www.mayoclinic.org/first-aid/first-aid-spinal-injury/basics/art-20056677"
     }
   ],
   "reviewed": "2026-11-17"

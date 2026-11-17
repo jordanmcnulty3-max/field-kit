@@ -26,7 +26,17 @@
     {
       "id": "s1",
       "text": "Stop any bleeding first with firm pressure. For heavy bleeding, use the Severe bleeding protocol.",
-      "detail": "Do not try to clean a major wound before the bleeding is under control (MedlinePlus).\n\nWash your hands with soap and water before you start, and wear gloves if you have them (MedlinePlus, CDC)."
+      "detail": "MedlinePlus: do not try to clean a major wound, especially once the bleeding is under control; get medical help instead. This protocol is for minor and moderate wounds.\n\nWash your hands with soap and water before you start, and wear gloves if you have them (MedlinePlus, CDC).",
+      "warn": "Organs showing through a belly wound: do not press on them or push them back. Cover loosely with a clean, moist dressing."
+    },
+    {
+      "id": "s10",
+      "text": "Did this wound need a tourniquet, wound packing or a pressure bandage to stop heavy bleeding?",
+      "ask": {
+        "q": "Did it need a tourniquet, packing or a pressure bandage?",
+        "yes": "s11",
+        "no": "s2"
+      }
     },
     {
       "id": "s2",
@@ -44,8 +54,8 @@
     },
     {
       "id": "s4",
-      "text": "Rinse the wound with plenty of clean running tap water or saline until no dirt is left. Use drinkable water; at least 1 litre for a dirty wound.",
-      "detail": "Rinse superficial wounds and scrapes until there is no visible dirt or debris left in them (AHA). Running tap water or sterile saline is reasonable; boiled or distilled water gives similar results; antiseptics such as povidone-iodine add nothing over water for ordinary wounds (AHA).\n\nIn the wilderness (WMS): use drinkable (potable) water. Irrigate as early as you can, with at least 1 litre, under pressure: a stream pushed from a syringe works much better than gently pouring. WMS gives a 35 mL syringe with a 19-gauge needle as an example (about 8 psi). Do not add soap, antiseptic or antibiotics to the rinsing water (WMS), except povidone-iodine for a possible rabies bite.\n\nMinor cuts can be washed with mild soap and water (MedlinePlus). Minor punctures: rinse under running water for 5 minutes, then wash with soap (MedlinePlus).\n\nIf hair is in the way, clip it rather than shaving (WMS).",
+      "text": "Minor or moderate wound: rinse it with plenty of clean running tap water or saline until no dirt is left. Use drinkable water, at least 1 litre.",
+      "detail": "Rinse superficial wounds and scrapes until there is no visible dirt or debris left in them (AHA). Running tap water or sterile saline is reasonable; boiled or distilled water gives similar results; antiseptics such as povidone-iodine add nothing over water for ordinary wounds (AHA).\n\nIn the wilderness (WMS): use drinkable (potable) water. Irrigate as early as you can, with at least 1 litre of water for wound irrigation in general, under pressure: a stream pushed from a syringe works much better than gently pouring. WMS gives a 35 mL syringe with a 19-gauge needle as an example (about 8 psi). Do not add soap, antiseptic or antibiotics to the rinsing water (WMS), except povidone-iodine for a possible rabies bite.\n\nMinor cuts can be washed with mild soap and water (MedlinePlus). Minor punctures: rinse under running water for 5 minutes, then wash with soap (MedlinePlus).\n\nIf hair is in the way, clip it rather than shaving (WMS).",
       "log": "Wound irrigated"
     },
     {
@@ -74,10 +84,17 @@
       "text": "Tetanus: get a booster soon if their last tetanus shot was more than 10 years ago, or more than 5 years ago for a dirty or deep wound.",
       "detail": "Tetanus bacteria enter through broken skin. Higher-risk wounds (CDC, WMS): punctures and deep wounds (such as stepping on a nail); wounds with dirt, soil, faeces or saliva (such as animal bites); and wounds with dead tissue from burns, crush injuries, fractures or frostbite.\n\nWMS table, for someone who has had at least 3 tetanus doses: a clean minor wound needs a booster if the last dose was more than 10 years ago; any other wound needs a booster if the last dose was more than 5 years ago. Someone with fewer than 3 doses, or who does not know, needs a booster, and for a dirty wound also tetanus immune globulin from a health care provider.\n\nCDC: adults need a tetanus booster every 10 years. Symptoms usually start 3 to 21 days after the injury, most often with jaw muscle spasm (lockjaw).\n\nA tetanus-prone wound that needs a booster is a reason to evacuate (WMS).",
       "end": true
+    },
+    {
+      "id": "s11",
+      "text": "Leave the dressing, packing or tourniquet in place. Do not clean or rinse this wound. Cover it, use the Severe bleeding protocol, and evacuate.",
+      "detail": "MedlinePlus: do not try to clean a major wound, especially once the bleeding is under control. Taking off packing or a pressure dressing to rinse the wound can start heavy bleeding again.\n\nKeep the dressing covered and clean, keep checking it for fresh bleeding, and follow the Severe bleeding protocol if it bleeds through. Do not remove a tourniquet: that is an advanced procedure (see Advanced procedures).\n\nA wound that needed a tourniquet, packing or a pressure bandage needs medical care urgently. Keep the casualty warm and watch for shock (Shock protocol).",
+      "warn": "Do not remove packing or a pressure dressing to clean the wound.",
+      "end": true
     }
   ],
   "donts": [
-    "Do not try to clean a major wound before bleeding is controlled.",
+    "Do not try to clean a major wound, especially once the bleeding is under control (MedlinePlus); leave its dressing, packing or tourniquet in place.",
     "Do not add soap, antiseptic or antibiotics to the water you irrigate with.",
     "Do not close bites, punctures or dirty wounds.",
     "Do not dig or widen a wound to find a hidden object, or poke around in a puncture.",

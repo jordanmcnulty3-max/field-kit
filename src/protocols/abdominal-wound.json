@@ -21,7 +21,7 @@
   "steps": [
     {
       "id": "s1",
-      "text": "Make sure the scene is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Make sure the scene is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. If they are unresponsive, use the Trauma check (MARCH) first.",
       "detail": "Every belly injury with any of these signs needs emergency care (Red Cross): severe pain; an open wound; organs showing; an object stuck in the belly; severe bleeding; a tender, swollen or rigid belly; bruising of the belly; nausea or vomiting (sometimes with blood); signs of shock.\n\nA closed injury (a blow, a fall, a crash, a kick) can bleed heavily inside without any wound. Use the Trauma check (MARCH) if there are other injuries."
     },
     {
@@ -61,7 +61,7 @@
     },
     {
       "id": "s7",
-      "text": "Leave it in place. Pad around it with bulky dressings so it cannot move. Use the Impaled object protocol.",
+      "text": "Leave it in place. Pad around it with bulky dressings so it cannot move (the Impaled object protocol has more detail). Then continue here.",
       "detail": "Do not remove an embedded object: removing it can make the bleeding much worse (Red Cross). Place dressings around it, build up bulky padding, and bandage the padding in place.",
       "warn": "Do not pull the object out.",
       "log": "Impaled object stabilized"

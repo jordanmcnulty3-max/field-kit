@@ -50,7 +50,7 @@
     {
       "id": "s5",
       "text": "Possible spine injury: leave them in the position you found them. Keep them still and watch their breathing.",
-      "detail": "Do not roll them or move the head and neck unless you must: to get them away from danger, to start CPR, or to control serious bleeding.\n\nIf they are awake, ask them to keep as still as possible.\n\nDo not put a neck collar on, move the neck, or strap the head down unless you are trained to; untrained use can cause harm.\n\nWatch the breathing continuously. If they stop breathing normally, roll them onto their back and start CPR.",
+      "detail": "Do not roll them or move the head and neck unless you must: to get them away from danger, to start CPR, or to control serious bleeding.\n\nIf they are awake, ask them to keep as still as possible.\n\nDo not put a neck collar on, move the neck, or strap the head down unless you are trained to; untrained use can cause harm.\n\nIf they vomit or choke on blood, roll them onto their side as one unit with a helper holding the head, keeping head, neck and back in line (MedlinePlus Spinal injury; Mayo Clinic). The Neck or back (spine) injury protocol has the steps.\n\nWatch the breathing continuously. If they stop breathing normally, roll them onto their back and start CPR.",
       "end": true
     },
     {
@@ -107,6 +107,16 @@
       "name": "International Liaison Committee on Resuscitation, 2026 Consensus on Science with Treatment Recommendations (preprint, May 2026), First Aid FA 7040 Recovery position evidence update",
       "year": 2026,
       "url": "https://ilcor.org/uploads/MERGED-2026_ILCOR-CoSTR_May-2026-for-Preprint.pdf"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Spinal injury, reviewed 2025-06-04",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000029.htm"
+    },
+    {
+      "name": "Mayo Clinic, Spinal injury: First aid (rolling only for vomiting, choking on blood or breathing check; two people)",
+      "year": 2026,
+      "url": "https://www.mayoclinic.org/first-aid/first-aid-spinal-injury/basics/art-20056677"
     }
   ],
   "reviewed": "2026-11-16"

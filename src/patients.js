@@ -118,7 +118,8 @@
     return [head, ...lines].join('\n');
   }
 
-  FK.patients = { all: read, current, setCurrent, create, rename, remove, add, text, setMist };
+  const currentId = () => { const p = pickCurrent(read()); return p ? p.id : null; };   // which casualty add() writes to; null: none yet (add() creates one)
+  FK.patients = { all: read, current, currentId, setCurrent, create, rename, remove, add, text, setMist };
   FK.log = t => typeof t === 'string' ? add({ kind: 'event', text: t }) : false;   // true once written
 
   /* ================= The "log" tool ================= */

@@ -31,7 +31,7 @@
 
   /* ---------- Saved progress: { id, step, started, timer?, logged? } for the one protocol run in progress.
      timer = { step, label, end, done } (a started step timer, so it survives a reload);
-     logged = ids of steps already written to the patient log in this run. ---------- */
+     logged = { casualtyId: [stepId, ...] }: the steps this run has written to each casualty's log. ---------- */
   const rawActive = () => { const a = FK.store.get('proto.active', null); return a && typeof a === 'object' && !Array.isArray(a) ? a : null; };
   function active() {
     const a = rawActive();
@@ -44,31 +44,47 @@
   function writeActive(p, stepId) {
     const raw = rawActive(), same = !!raw && raw.id === p.id;
     const rec = { id: p.id, step: stepId, started: same && Number.isFinite(raw.started) ? raw.started : Date.now() };
-    const logged = run.id === p.id ? [...run.logged] : [];
-    if (logged.length) rec.logged = logged;
+    const logged = run.id === p.id ? [...run.logged].filter(([, ids]) => ids.size) : [];
+    if (logged.length) rec.logged = Object.fromEntries(logged.map(([c, ids]) => [c, [...ids]]));
     if (timer && timer.id === p.id) rec.timer = { step: timer.step, label: timer.label, end: timer.end, done: timer.done };
     FK.store.set('proto.active', rec);
   }
   function saveProgress(p, i) {
-    if (run.id !== p.id) run = { id: p.id, logged: new Set() };   // a different protocol: a new run
+    if (run.id !== p.id) run = newRunOf(p);   // a different protocol: a new run
     writeActive(p, p.steps[i].id);
+  }
+  /* Opened again from outside the player at its start (home, search, a pin, a recent): the same protocol's earlier run
+     ends, as with End protocol, so this walk logs again. Resume, a reload and Back stay in the run. */
+  function restartRun(p) {
+    if (timer && timer.id === p.id) stopTimer();
+    const raw = rawActive();
+    if (run.id === p.id || (raw && raw.id === p.id)) clearProgress();
   }
   function syncActive() {   // after the timer or the logged steps changed
     const raw = rawActive();
     const p = raw && typeof raw.id === 'string' ? get(raw.id) : null;
     if (p && stepIndex(p, raw.step) >= 0) writeActive(p, raw.step);
   }
-  const clearProgress = () => { run = { id: null, logged: new Set() }; if (FK.store.get('proto.active', null) !== null) FK.store.set('proto.active', null); };
-  let run = { id: null, logged: new Set() };   // the run in progress: which steps it has logged
+  const newRunOf = p => ({ id: p ? p.id : null, logged: new Map() });   // logged: casualty id -> Set of step ids
+  const clearProgress = () => { run = newRunOf(null); if (FK.store.get('proto.active', null) !== null) FK.store.set('proto.active', null); };
+  let run = newRunOf(null);   // the run in progress: which steps it has logged, to which casualty
+  /* A saved logged record: only { casualtyId: [stepId] } counts. An older flat list (or anything else) belongs to no casualty. */
+  const loadLogged = v => new Map(v && typeof v === 'object' && !Array.isArray(v)
+    ? Object.entries(v).filter(([, ids]) => Array.isArray(ids)).map(([c, ids]) => [c, new Set(ids.filter(x => typeof x === 'string'))]).filter(([, ids]) => ids.size)
+    : []);
+  /* The casualty the patient log writes to: null when there is none yet; '' when there is no patient list to ask. */
+  const casualty = () => FK.patients && typeof FK.patients.currentId === 'function' ? FK.patients.currentId() : '';
 
-  /* One patient-log entry per step per run, with a short toast so the user knows it was written. */
+  /* One patient-log entry per step per run per casualty, with a short toast so the user knows it was written. */
   function logStep(p, i) {
     const s = p.steps[i];
     if (typeof s.log !== 'string' || !s.log.trim() || typeof FK.log !== 'function') return;
-    if (run.id !== p.id) run = { id: p.id, logged: new Set() };
-    if (run.logged.has(s.id)) return;
+    if (run.id !== p.id) run = newRunOf(p);
+    const before = casualty();
+    if (before !== null && run.logged.has(before) && run.logged.get(before).has(s.id)) return;   // already in this casualty's log
     if (FK.log(s.log) === false) return;   // the log said why (storage full, log full)
-    run.logged.add(s.id);
+    const to = casualty();   // the casualty it went to (the log creates one when there is none)
+    if (to !== null) { if (!run.logged.has(to)) run.logged.set(to, new Set()); run.logged.get(to).add(s.id); }
     syncActive();
     FK.toast('Logged: ' + s.log);
   }
@@ -277,6 +293,7 @@
      entry. Leaving is a jump by the difference of two numbers, so a duplicated entry, a same-address search result or a
      reload cannot throw the count off. ---------- */
   let curState = null, curIdx = 0, pendingStamp = null, pendingDeep = false, pendingLeave = false, leaving = false, leaveT = null, booted = false;
+  let openedFresh = false;   // the last stamp was a new entry opened from elsewhere in the app (not Back/Forward, a reload or a deep link)
   const LEAVE_FALLBACK_MS = 500;
   const okStamp = (st, idx) => !!st && typeof st === 'object' && Number.isInteger(st.root) && st.root <= idx &&
     (st.from === null || (Number.isInteger(st.from) && st.from < st.root)) && 'at' in st;
@@ -285,11 +302,12 @@
     const idx = FK.route.index();
     const own = history.state && history.state.pp;
     let st;
+    openedFresh = false;
     if (pendingStamp) { st = { ...pendingStamp, at: key }; pendingStamp = null; }                       // a replace inside the player keeps the entry's place in the run
     else if (okStamp(own, idx)) st = own.at === key ? own : { ...own, at: key };                     // an entry of this run, reached by Back/Forward or after a reload
     else if (isOpen && curState) st = { from: curState.from, root: curState.root, prev: idx > curIdx ? curState.at : curState.prev, at: key };
     else if (!booted || pendingDeep) st = { from: null, root: idx, prev: null, at: key };             // deep link: nothing in the app before it
-    else st = { from: idx - 1, root: idx, prev: null, at: key };                                      // opened from the entry before this one
+    else { st = { from: idx - 1, root: idx, prev: null, at: key }; openedFresh = true; }              // opened from the entry before this one
     pendingDeep = false;
     if (st !== own) writeStamp(st);
     curState = st; curIdx = idx;
@@ -326,6 +344,7 @@
     cur = { p, mode, i: mode === 'step' ? (sub ? stepIndex(p, sub) : 0) : -1, open: { donts: false, evacuate: false } };
     if (!was) opener = FK.opener(document.activeElement);
     stamp(mode === 'step' ? cur.i : mode);
+    if (!was && !sub && openedFresh) restartRun(p);   // opened at its start from outside the player: a new run
     render();                      // render first: the player is only shown with something in it
     isOpen = true;
     root.hidden = false;
@@ -440,7 +459,7 @@
   FK.on('history', onHistory);
   if (active()) {                // drop stale progress at startup, then pick the run back up
     const raw = rawActive();
-    run = { id: raw.id, logged: new Set(Array.isArray(raw.logged) ? raw.logged.filter(x => typeof x === 'string') : []) };
+    run = { id: raw.id, logged: loadLogged(raw.logged) };
     restoreTimer();
   }
   onRoute(FK.route.current());   // the router's first route ran before this file loaded

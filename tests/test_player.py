@@ -1,3 +1,4 @@
+import pytest
 from playwright.sync_api import expect
 import json
 import re
@@ -828,7 +829,8 @@ def test_step_log_written_once_per_run_with_a_toast(page, app_url):
     page.click('#player [data-act="next"]')
     texts = page.evaluate('FK.patients.all()[0].entries.map(e => e.text)')
     assert texts == ['Burn covered']
-    assert page.evaluate("JSON.parse(localStorage.getItem('fk.proto.active')).logged") == ['c']
+    cid = page.evaluate('FK.patients.all()[0].id')
+    assert page.evaluate("JSON.parse(localStorage.getItem('fk.proto.active')).logged") == {cid: ['c']}   # per casualty
     page.reload()   # the run survives a reload, and so does what it logged
     page.wait_for_function('window.FK && FK.protocol')
     page.evaluate("FK.route.go('/emergency/timed/c')")
@@ -910,3 +912,160 @@ def test_focus_goes_to_heading_when_opener_is_gone(page, app_url):
     expect(page).to_have_url(re.compile(r'#/emergency$'))
     page.wait_for_function("document.activeElement && document.activeElement.id === 'title'")
     assert page.inner_text('#title') == 'Emergency'
+
+
+# R1: the automatic patient log is kept per casualty, and a protocol opened again from outside starts a new run
+
+TQ = 'Tourniquet applied'
+
+
+def bleeding_home(page, app_url, storage=None):
+    inject(page)
+    if storage:
+        page.add_init_script(
+            "if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1');"
+            + ''.join(f"localStorage.setItem('fk.{k}', {json.dumps(json.dumps(v))});" for k, v in storage.items()) + '}')
+    page.goto(app_url + '#/emergency')
+    page.wait_for_function('window.FK && FK.protocol && FK.patients')
+
+
+def open_bleeding_from_home(page):
+    page.click('#emLife [data-open="bleeding"]')
+    expect(page.locator('#player .pp-count')).to_have_text(re.compile(r'^1 of '))
+
+
+def walk_s1_to_s6(page):
+    for act in ['next', 'next', 'yes', 'yes', 'next']:
+        page.click(f'#player [data-act="{act}"]')
+    expect(page.locator('#player .pp-action')).to_have_text(re.compile(r'^Still bleeding'))
+
+
+def clear_toast(page):
+    page.evaluate("document.querySelector('#toast').textContent = ''; 0")
+
+
+def entries_of(page):
+    return page.evaluate('FK.patients.all().map(p => [p.name, p.entries.map(e => e.text)])')
+
+
+def android_back_home(page):
+    while page.evaluate('location.hash') != '#/emergency':
+        go_back_settled(page)
+    expect(page.locator('#player')).to_be_hidden()
+
+
+def test_r1_same_protocol_opened_again_from_home_logs_again(page, app_url):
+    bleeding_home(page, app_url)
+    open_bleeding_from_home(page)
+    walk_s1_to_s6(page)
+    expect(page.locator('#toast')).to_have_text('Logged: ' + TQ)
+    page.click('#player [data-act="back"]')   # guard: Back then NEXT over the same step logs once
+    page.click('#player [data-act="next"]')
+    assert entries_of(page) == [['Casualty 1', [TQ]]]
+    android_back_home(page)
+    clear_toast(page)
+    open_bleeding_from_home(page)   # a new run
+    walk_s1_to_s6(page)
+    expect(page.locator('#toast')).to_have_text('Logged: ' + TQ)
+    assert entries_of(page) == [['Casualty 1', [TQ, TQ]]]
+
+
+def test_r1_second_casualty_made_current_gets_the_entry(page, app_url):
+    bleeding_home(page, app_url)
+    open_bleeding_from_home(page)
+    walk_s1_to_s6(page)
+    page.evaluate('FK.patients.create(); 0')   # Casualty 2 is now current
+    clear_toast(page)
+    page.click('#player [data-act="back"]')   # continue the same run over the same step
+    page.click('#player [data-act="next"]')
+    expect(page.locator('#toast')).to_have_text('Logged: ' + TQ)
+    page.click('#player [data-act="back"]')
+    page.click('#player [data-act="next"]')
+    assert entries_of(page) == [['Casualty 1', [TQ]], ['Casualty 2', [TQ]]]
+    logged = page.evaluate("JSON.parse(localStorage.getItem('fk.proto.active')).logged")
+    ids = page.evaluate('FK.patients.all().map(p => p.id)')
+    assert logged == {ids[0]: ['s5'], ids[1]: ['s5']}
+    android_back_home(page)   # and a re-walk from home logs to Casualty 2 again (new run)
+    open_bleeding_from_home(page)
+    walk_s1_to_s6(page)
+    assert entries_of(page) == [['Casualty 1', [TQ]], ['Casualty 2', [TQ, TQ]]]
+
+
+def test_r1_reviewer_reproduction_delete_casualty_reload_and_walk_again(page, app_url):
+    bleeding_home(page, app_url)
+    open_bleeding_from_home(page)
+    walk_s1_to_s6(page)
+    go_back_settled(page)   # Android Back to s5
+    page.evaluate('FK.patients.remove(FK.patients.all()[0].id); 0')
+    assert entries_of(page) == []
+    page.reload()
+    page.wait_for_function('window.FK && FK.protocol && FK.patients')
+    page.evaluate("FK.route.go('/emergency')")
+    expect(page.locator('#player')).to_be_hidden()
+    clear_toast(page)
+    open_bleeding_from_home(page)
+    walk_s1_to_s6(page)
+    expect(page.locator('#toast')).to_have_text('Logged: ' + TQ)
+    assert entries_of(page) == [['Casualty 1', [TQ]]]
+
+
+def test_r1_resume_reload_and_return_from_tool_do_not_relog(page, app_url):
+    bleeding_home(page, app_url)
+    open_bleeding_from_home(page)
+    walk_s1_to_s6(page)
+    page.click('#player [data-act="home"]')   # leave, then Resume
+    expect(page.locator('#player')).to_be_hidden()
+    page.click('#emResume [data-resume="bleeding"]')
+    expect(page.locator('#player .pp-action')).to_have_text(re.compile(r'^Still bleeding'))
+    page.click('#player [data-act="back"]')
+    page.click('#player [data-act="next"]')
+    assert entries_of(page) == [['Casualty 1', [TQ]]]
+    page.click('#player [data-act="back"]')   # reload mid-protocol
+    page.reload()
+    page.wait_for_function('window.FK && FK.protocol && FK.patients')
+    expect(page.locator('#player .pp-action')).to_have_text(re.compile(r'^Put a tourniquet'))
+    page.click('#player [data-act="next"]')
+    assert entries_of(page) == [['Casualty 1', [TQ]]]
+    page.click('#player [data-act="back"]')   # out to a tool and back
+    page.click('#player [data-act="tool"]')
+    expect(page.locator('#toolPane')).to_be_visible()
+    page.click('#toolClose')
+    expect(page.locator('#player .pp-action')).to_have_text(re.compile(r'^Put a tourniquet'))
+    page.click('#player [data-act="next"]')
+    page.click('#player [data-act="back"]')   # out to search and back
+    page.click('#player [data-act="search"]')
+    go_back_settled(page)
+    expect(page.locator('#player .pp-action')).to_have_text(re.compile(r'^Put a tourniquet'))
+    page.click('#player [data-act="next"]')
+    assert entries_of(page) == [['Casualty 1', [TQ]]]
+
+
+@pytest.mark.parametrize('logged', [['s5'], 's5', None, {'junk': 5, 'x': ['s5', 3], '': 'a'}, 7])
+def test_r1_old_or_malformed_logged_record_loads_and_logs(page, app_url, logged):
+    rec = {'id': 'bleeding', 'step': 's5', 'started': 1}
+    if logged is not None:
+        rec['logged'] = logged
+    bleeding_home(page, app_url, storage={'proto.active': rec, 'patients': [
+        {'id': 'x', 'name': 'Casualty 1', 'created': 1, 'used': 1, 'entries': []}]})
+    page.evaluate("FK.route.go('/emergency/bleeding/s5')")   # Resume-like: the same run
+    expect(page.locator('#player .pp-action')).to_have_text(re.compile(r'^Put a tourniquet'))
+    page.click('#player [data-act="next"]')
+    # an old flat list belongs to no casualty; junk is ignored
+    expected = [] if isinstance(logged, dict) else [TQ]
+    assert entries_of(page) == [['Casualty 1', expected]]
+
+
+def test_r1_new_run_from_home_stops_the_same_protocols_step_timer(page, app_url):
+    boot_timed(page, app_url)
+    start_cooling(page)
+    go_back_settled(page)   # Android Back keeps the run and its timer
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    assert page.evaluate('FK.protocol.timer()')['label'] == 'Cooling'
+    old = page.evaluate("JSON.parse(localStorage.getItem('fk.proto.active')).started")
+    page.clock.run_for(5000)
+    page.evaluate("FK.protocol.open('timed')")   # opened again from outside: a new run
+    expect(page.locator('#player .pp-action')).to_have_text('Cool the burn')
+    assert page.evaluate('FK.protocol.timer()') is None
+    expect(page.locator('#player .pp-timerbar')).to_be_hidden()
+    rec = page.evaluate("JSON.parse(localStorage.getItem('fk.proto.active'))")
+    assert rec['step'] == 'a' and 'timer' not in rec and 'logged' not in rec and rec['started'] >= old + 5000

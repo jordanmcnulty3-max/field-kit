@@ -421,3 +421,42 @@ def test_starting_timer_keeps_focus_inside_player(page, app_url):
     page.goto(app_url + '#/emergency/branchy/n')
     page.click('#player [data-act="timer"]')
     assert page.evaluate("document.activeElement.id") == 'ppTimerBar'
+
+
+def test_wake_lock_rejection_does_not_hang_page(page, app_url):
+    page.add_init_script("""
+      window.__req = 0;
+      Object.defineProperty(navigator, 'wakeLock', { configurable: true, value: {
+        request: () => { window.__req++; return Promise.reject(new DOMException('denied', 'NotAllowedError')); } } });
+    """)
+    page.goto(app_url + '#/emergency/bleeding')
+    page.wait_for_timeout(200)
+    page.click('#player [data-act="next"]', timeout=3000)
+    assert page.url.endswith('/bleeding/s2')
+    assert page.evaluate('window.__req') <= 3
+
+
+def test_double_tap_on_header_back_does_not_overshoot(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/survival')
+    page.goto(app_url + '#/tactical/map')   # earlier entries an overshoot would land on
+    page.goto(app_url + '#/emergency')
+    page.evaluate("FK.protocol.open('branchy')")
+    page.click('#player [data-act="next"]')
+    # history.go is asynchronous; widen the window in which the player is still showing
+    page.evaluate("const g = history.go.bind(history); history.go = n => setTimeout(() => g(n), 150)")
+    page.evaluate("const b = document.querySelector('#player [data-act=\"home\"]'); b.click(); setTimeout(() => b.click(), 0)")
+    page.wait_for_timeout(500)
+    assert page.url.endswith('#/emergency')
+    assert page.locator('#tab-emergency').is_visible()
+
+
+def test_bad_deep_link_repaired_at_boot_is_a_deep_link_entry(page, app_url):
+    page.goto(app_url + '#/emergency/bleeding/zzz')
+    assert page.url.endswith('#/emergency/bleeding')
+    assert action(page).startswith('Call 911')
+    page.click('#player [data-act="home"]')
+    wait_hash(page, '#/emergency')
+    page.wait_for_timeout(200)
+    assert page.url.startswith(app_url)
+    assert not page.locator('#player').is_visible()

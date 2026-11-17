@@ -55,7 +55,6 @@
       l.addEventListener('release', () => { if (lock === l) lock = null; });
     } catch { /* denied or unsupported: the screen just times out as usual */ }
     finally { lockPending = false; }
-    if (isOpen && !lock) wakeOn();   // closed and reopened while the request was in flight
   }
   function wakeOff() { if (lock) { const l = lock; lock = null; l.release().catch(() => {}); } }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) wakeOn(); });
@@ -180,7 +179,7 @@
   /* ---------- History depth: each player entry carries { pp, out, prev, at } in history.state.
      pp = player entries pushed since the first one, out = first one was pushed from outside the player
      (so there is an entry before it to unwind to), at/prev = screen on this/the previous entry. ---------- */
-  let curState = null, pendingState = null, pendingLeave = false, booted = false;
+  let curState = null, pendingState = null, pendingLeave = false, leaving = false, booted = false;
   function stamp(key) {
     let st = history.state;
     if (pendingState) { st = { ...pendingState, at: key }; pendingState = null; }
@@ -194,6 +193,8 @@
   }
   /* Leave the player without ever landing back inside it. */
   function leave() {
+    if (leaving) return;   // history.go is asynchronous: a second tap must not unwind twice
+    leaving = true;
     const st = curState;
     if (!st) { FK.route.go('/' + SECTION, { replace: true }); return; }
     if (st.out) history.go(-(st.pp + 1));
@@ -217,16 +218,23 @@
   }
   function hide() {
     if (!isOpen) return;
-    isOpen = false; cur = null; curState = null;
+    isOpen = false; cur = null; curState = null; leaving = false;
     stopTimer(); wakeOff();
     root.hidden = true; root.innerHTML = '';
     document.body.classList.remove('playing');
   }
   /* Fix a bad address after the router has finished with it (it re-writes the address after its event). */
   function redirect(r, path) {
-    queueMicrotask(() => { if (FK.route.current() === r) FK.route.go(path, { replace: true }); });
+    const atBoot = !booted;   // a repaired deep link has nothing before it in the app
+    queueMicrotask(() => {
+      if (FK.route.current() !== r) return;
+      if (atBoot) pendingState = { pp: 0, out: false, prev: null, at: null };
+      FK.route.go(path, { replace: true });
+      pendingState = null;
+    });
   }
   function onRoute(r) {
+    leaving = false;
     try { route(r); } finally { booted = true; }
   }
   function route(r) {

@@ -67,7 +67,7 @@
       "detail": "AHA 2024 (6.2, Class 2a): it is reasonable to check blood sugar in an adult with suspected stroke if a meter is available and it does not delay activating EMS. AHA 2024 (6.7) defines low blood sugar as below 70 mg/dL.\n\nA normal reading does not change anything: keep treating this as a stroke and keep evacuating.",
       "ask": {
         "q": "Is the reading below 70 mg/dL?",
-        "yes": "s6c",
+        "yes": "s6d",
         "no": "s8"
       }
     },
@@ -77,20 +77,40 @@
       "detail": "Low blood sugar is a common stroke look-alike (AHA 2024), and in someone with diabetes it can come from a missed meal, more exercise than usual, vomiting, or too much diabetes medicine (Red Cross). Red Cross: if you cannot tell whether their sugar is low or high, it is good to give some sugar; it can be lifesaving if low and will not do major harm if high. Check their pockets and kit, and look for a medical ID.",
       "ask": {
         "q": "Do they have diabetes treated with insulin or pills?",
+        "yes": "s6d",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s6d",
+      "text": "Are they fully awake, answering you and following simple requests?",
+      "detail": "AHA 2024 (6.7, Class 3: Harm): no sugar by mouth for someone who is not awake or cannot swallow; they could choke or inhale it. \"Fully awake\" is the app's stricter wording, as in the Low blood sugar protocol.",
+      "ask": {
+        "q": "Are they fully awake?",
+        "yes": "s6e",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s6e",
+      "text": "Can they swallow safely: no choking, coughing on swallowing or drooling?",
+      "detail": "Drooling and trouble swallowing are stroke signs (Red Cross). If in doubt, answer No: nothing by mouth.",
+      "ask": {
+        "q": "Can they swallow safely?",
         "yes": "s6c",
         "no": "s8"
       }
     },
     {
       "id": "s6c",
-      "text": "If they are fully awake and swallow safely, give at least 20 grams of sugar: glucose tablets or gel, 7 oz orange juice, 20 to 25 Skittles or 10 to 20 jellybeans. Keep evacuating as a stroke.",
-      "warn": "Not fully awake, or choking, coughing on swallowing or drooling: nothing by mouth. Lie them on their side.",
-      "detail": "This is the same rule as the sugar step of the Low blood sugar protocol. AHA 2024 (6.7, Class 1): encourage oral glucose for a person with suspected low blood sugar who is awake and able to swallow; Class 3 (Harm): never for someone who is not fully awake or cannot swallow. The amounts that give about 20 grams are from the Red Cross Diabetic Emergencies page; glucose tablets or gel are preferred (AHA 2024); check the packet for 20 grams. No diet drinks.\n\nKeep evacuating as for a stroke whatever happens: even if the signs improve after sugar, a stroke has not been ruled out. Tell the people taking over that sugar was given and when.",
+      "text": "Give at least 20 grams of sugar: glucose tablets or gel, 7 oz orange juice, 20 to 25 Skittles or 10 to 20 jellybeans. Keep evacuating as a stroke.",
+      "warn": "Stop giving anything by mouth if they become drowsy, choke or start drooling: lie them on their side.",
+      "detail": "This is the same rule as the sugar step of the Low blood sugar protocol. AHA 2024 (6.7, Class 1): encourage oral glucose for a person with suspected low blood sugar who is awake and able to swallow; Class 3 (Harm): not for someone who is not awake or cannot swallow. The previous two questions use the app's stricter \"fully awake\", as the Low blood sugar protocol does. The amounts that give about 20 grams are from the Red Cross Diabetic Emergencies page; glucose tablets or gel are preferred (AHA 2024); check the packet for 20 grams. No diet drinks.\n\nKeep evacuating as for a stroke whatever happens: even if the signs improve after sugar, a stroke has not been ruled out. Tell the people taking over that sugar was given and when.",
       "log": "Sugar given (about 20 g)"
     },
     {
       "id": "s8",
-      "text": "If they are not fully awake, drooling or having trouble swallowing, lie them on their side (Recovery position protocol). Keep them warm or cool as needed and reassure them.",
+      "text": "Nothing by mouth if they are not fully awake or cannot swallow safely. If not fully awake, drooling or having trouble swallowing, lie them on their side (Recovery position protocol). Reassure them.",
       "detail": "Red Cross: place them in the recovery position if they are responsive but not fully awake, are drooling or have trouble swallowing. Keep them from getting cold or overheated, and give care for shock if needed (Shock protocol).\n\nA person having a stroke may not be able to speak but may still understand you. Speak slowly and calmly, tell them what you are doing, and tell them help is coming (Red Cross).\n\nOtherwise let them rest in a comfortable position. Watch for changes in breathing and responsiveness."
     },
     {

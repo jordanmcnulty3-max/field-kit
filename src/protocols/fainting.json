@@ -33,7 +33,7 @@
     {
       "id": "s2",
       "text": "Breathing but not responding? If they have just gone down, watch their breathing for up to about a minute while they come round. Not breathing normally at any point: start CPR.",
-      "detail": "Red Cross: if a person suddenly loses consciousness and then comes to after about a minute, they may simply have fainted. Lie them flat on their back meanwhile.\n\nIf at any moment they are not breathing normally (no breathing, or only gasping), do not wait: start CPR now (CPR, adult protocol). If you are not sure, treat it as not breathing normally.\n\nIf they never lost consciousness, or are already awake and talking, answer No straight away.",
+      "detail": "Red Cross: if a person suddenly loses consciousness and then comes to after about a minute, they may simply have fainted. Lie them flat on their back meanwhile.\n\nIf at any moment they are not breathing normally (no breathing, or only gasping), do not wait: start CPR now (CPR, adult protocol). If you are not sure, treat it as not breathing normally.\n\nIf they never lost consciousness, or are already awake and talking, answer No straight away.\n\nIf they vomit while you wait, turn them onto their side at once (MedlinePlus Fainting: to prevent choking). If their breathing sounds gurgling, turn them onto their side too; the Red Cross Fainting page does not mention gurgling, so this is a group judgement in line with its recovery position for someone breathing but unresponsive.",
       "timer": {
         "seconds": 60,
         "label": "Coming round? (about 1 min)"
@@ -127,7 +127,7 @@
     },
     {
       "id": "s21",
-      "text": "Not waking: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. If they are not injured, roll them onto their side (Recovery position protocol).",
+      "text": "Not waking: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Uninjured: on their side. Not breathing normally: start CPR (CPR, adult protocol).",
       "detail": "Red Cross: if they are unresponsive but breathing and not injured, call for help and place them in the recovery position. MedlinePlus: call 911 if they do not become alert within a couple of minutes.\n\nIf they may have hurt their head, neck or back in the fall, use the Head injury and concussion protocol or the Neck or back (spine) injury protocol.\n\nWatch their breathing all the time. If they stop breathing normally, start CPR (CPR, adult protocol). Give nothing by mouth.",
       "end": true
     },

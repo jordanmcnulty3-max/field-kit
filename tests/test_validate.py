@@ -234,3 +234,10 @@ class ReportDraftMarkerTests(unittest.TestCase):
         from tools.validate import report_wording_is_draft
         src = open(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'src', 'reports.js'), encoding='utf-8').read()
         self.assertEqual(report_wording_is_draft(src), 'draft: true,' in src)
+
+
+def test_no_figure_id_is_defined_twice():
+    import re, os
+    src = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'figs', 'figs.py'), encoding='utf-8').read()
+    ids = re.findall(r"^svg\('([\w-]+)'", src, re.M)
+    assert len(ids) > 30 and len(ids) == len(set(ids)), sorted({i for i in ids if ids.count(i) > 1})

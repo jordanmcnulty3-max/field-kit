@@ -5,7 +5,7 @@
   const root = document.getElementById('player');
   const SECTION = 'emergency';
   const RESERVED = ['tool', 'report'];   // addresses owned by other features; the player stays out of them
-  const LISTS = [['donts', 'Do not', 'Do not'], ['evacuate', 'Evacuate when', 'Evacuate when']];   // [protocol key, button label, heading]
+  const LISTS = [['donts', 'Do not'], ['evacuate', 'Evacuate when']];   // [protocol key, button label and list heading]
   const TOOL_LABEL = { tq: 'Tourniquet timer', cpr: 'CPR metronome', rate: 'Rate counter', burn: 'Burn area' };
   const ACK_TEXT = 'These procedures can kill if done wrong or when they are not needed. They are a reference for people who have trained on them hands-on. Reading this is not training.';
   const OPENING = [['indications', 'When to do this'], ['contraindications', 'When not to'],
@@ -121,40 +121,43 @@
     const tools = FK.tools && typeof FK.tools.start === 'function' && s.tool;
     return '<p class="pp-action" id="ppAction" tabindex="-1">' + esc(s.text) + '</p>' +
       (s.warn ? '<p class="pp-warn"><span aria-hidden="true">⚠ </span>' + esc(s.warn) + '</p>' : '') +
-      (s.detail ? '<div class="pp-detail">' + paras(s.detail) + '</div>' : '') +
       (s.figSvg ? '<figure class="pp-fig">' + s.figSvg + '</figure>' : '') +
+      listRow(p) + '<div id="ppListPanels">' + listPanels(p) + '</div>' +
+      (s.detail ? '<div class="pp-detail">' + paras(s.detail) + '</div>' : '') +
       (tools ? '<button class="btn pp-wide" data-act="tool">' + esc((Object.hasOwn(TOOL_LABEL, s.tool) ? TOOL_LABEL[s.tool] : 'Open tool')) + '</button>' : '') +
       (s.timer && Number.isFinite(s.timer.seconds) && s.timer.seconds > 0
         ? '<button class="btn ghost pp-wide" data-act="timer">Start timer: ' + esc(s.timer.label || 'Timer') + ' (' + mmss(s.timer.seconds * 1000) + ')</button>' : '') +
-      (isAsk(s) && s.ask.q && s.ask.q !== s.text ? '<p class="pp-q">' + esc(s.ask.q) + '</p>' : '') +
-      listPanels(p);
+      (isAsk(s) && s.ask.q && s.ask.q !== s.text ? '<p class="pp-q">' + esc(s.ask.q) + '</p>' : '');
   }
 
-  /* Do not / Evacuate when: one tap from every step. The buttons sit above the step; an open list shows below it. */
+  /* Do not / Evacuate when: one tap from every step. The buttons sit in the step body after the figure; an open list shows directly below them. */
+  const marker = open => open ? '▴' : '▾';
   function listRow(p) {
     const ks = LISTS.filter(([k]) => hasList(p, k));
     if (!ks.length) return '';
     return '<div class="pp-lists" id="ppLists">' + ks.map(([k, label]) =>
-      '<button type="button" class="btn ghost" data-act="list" data-list="' + k + '" aria-expanded="' + !!cur.open[k] + '" aria-controls="ppList-' + k + '">' + esc(label) + '</button>').join('') + '</div>';
+      '<button type="button" class="pp-listbtn" data-act="list" data-list="' + k + '" aria-expanded="' + !!cur.open[k] + '" aria-controls="ppList-' + k + '">' + esc(label) +
+      ' <span aria-hidden="true">' + marker(cur.open[k]) + '</span></button>').join('') + '</div>';
   }
   function listPanels(p) {
-    return LISTS.filter(([k]) => hasList(p, k) && cur.open[k]).map(([k, label, h]) =>
-      '<section class="pp-list" id="ppList-' + k + '" data-list="' + k + '" tabindex="-1" aria-label="' + esc(h) + '"><h3>' + esc(h) + '</h3>' + list(listItems(p, k), 'ul') +
-      '<button type="button" class="btn ghost pp-wide" data-act="list" data-list="' + k + '" aria-label="Close the ' + esc(label) + ' list">Close</button></section>').join('');
+    return LISTS.filter(([k]) => hasList(p, k) && cur.open[k]).map(([k, label]) =>
+      '<section class="pp-list" id="ppList-' + k + '" data-list="' + k + '" tabindex="-1" aria-label="' + esc(label) + '"><h3>' + esc(label) + '</h3>' + list(listItems(p, k), 'ul') +
+      '<button type="button" class="pp-listbtn pp-wide" data-act="list" data-list="' + k + '" aria-label="Close the ' + esc(label) + ' list">Close ▴</button></section>').join('');
   }
   function toggleList(k) {
-    const body = root.querySelector('#ppBody');
+    const body = root.querySelector('#ppBody'), box = root.querySelector('#ppListPanels');
     const was = body ? body.scrollTop : 0;
     cur.open[k] = !cur.open[k];
     const opening = cur.open[k];
-    root.querySelectorAll('#ppLists [data-list="' + k + '"]').forEach(b => b.setAttribute('aria-expanded', String(opening)));
-    root.querySelectorAll('.pp-list').forEach(n => n.remove());
-    if (body) {
-      body.insertAdjacentHTML('beforeend', listPanels(cur.p));
-      const panel = body.querySelector('.pp-list[data-list="' + k + '"]');
-      if (opening && panel) { panel.scrollIntoView({ block: 'start' }); panel.focus({ preventScroll: true }); }
-      else { body.scrollTop = was; const b = root.querySelector('#ppLists [data-list="' + k + '"]'); if (b) b.focus({ preventScroll: true }); }
-    }
+    root.querySelectorAll('#ppLists [data-list="' + k + '"]').forEach(b => {
+      b.setAttribute('aria-expanded', String(opening));
+      b.querySelector('span').textContent = marker(opening);
+    });
+    if (!box) return;
+    box.innerHTML = listPanels(cur.p);
+    const panel = box.querySelector('.pp-list[data-list="' + k + '"]');
+    if (opening && panel) { panel.scrollIntoView({ block: 'nearest' }); panel.focus({ preventScroll: true }); }
+    else { body.scrollTop = was; const b = root.querySelector('#ppLists [data-list="' + k + '"]'); if (b) b.focus({ preventScroll: true }); }
   }
 
   function stepFoot(p, i) {
@@ -193,7 +196,7 @@
     } else if (mode === 'all') {
       body = allView(p);
     } else {
-      prog = progress(p, i) + listRow(p);
+      prog = progress(p, i);
       body = stepBody(p, i);
       foot = stepFoot(p, i);
     }

@@ -2,6 +2,8 @@ from rope import rope_svg
 import math
 F = {}
 def svg(name, h, label, body, w=340):
+    if name in F:
+        raise ValueError(f'duplicate figure id: {name}')
     F[name] = (f'<svg class="dg" viewBox="0 0 {w} {h}" role="img" aria-label="{label}">\n{body}\n</svg>', label)
 
 def sun(cx, cy, r=11):
@@ -277,20 +279,6 @@ svg('fishing', 175, 'Gorge hook sharpened at both ends lodges crosswise when swa
 {lbl(262,90,'Trap','tb','middle')}''')
 
 # ---------------- FIELD DRESSING ----------------
-svg('dress-deer', 240, 'Field dressing from above, animal on its back: cut from pelvis to breastbone, free the diaphragm, cut the windpipe, cut around and tie off the anus', f'''
-<ellipse cx="170" cy="20" rx="13" ry="15" class="k"/>
-<path d="M162 34 L158 46 M178 34 L182 46" class="k"/>
-<path d="M150 44 C118 62 112 112 118 160 C122 196 140 210 170 212 C200 210 218 196 222 160 C228 112 222 62 190 44 Z" class="k"/>
-<path d="M134 72 L100 54 M206 72 L240 54 M130 188 L98 216 M210 188 L242 216" class="k t3"/>
-{arrow(30,80,30,26,'k','aK')}{lbl(40,56,'Head uphill','tb')}
-<line x1="170" y1="190" x2="170" y2="72" class="h t3 d"/>
-<path d="M128 100 Q170 84 212 100" class="a"/>
-<circle cx="170" cy="203" r="5" class="h"/>
-<line x1="170" y1="36" x2="170" y2="46" class="h t3"/>
-{lbl(232,40,'Windpipe: cut as','')}{lbl(232,54,'far forward as you can','')}{lead(230,46,176,42)}
-{lbl(232,96,'Diaphragm: cut it','')}{lbl(232,110,'away from the ribs','')}{lead(230,102,212,100)}
-{lbl(232,144,'Shallow cut, blade','tb')}{lbl(232,158,'edge up, breastbone','')}{lbl(232,172,'to pelvis','')}{lead(230,150,174,140)}
-{lbl(232,206,'Cut around, tie off','')}{lead(230,204,176,203)}''')
 
 svg('dress-fish', 110, 'Gut a fish by cutting from the vent to the gills', f'''
 <path d="M40 55 C70 20 200 16 260 50 L310 24 L300 55 L310 86 L260 60 C200 94 70 90 40 55 Z" class="k"/>
@@ -310,16 +298,6 @@ svg('nav-shadow', 195, 'Shadow-stick method: first shadow-tip mark is west, seco
 <line x1="168" y1="80" x2="170" y2="18" class="a" marker-end="url(#aA)"/>{lbl(178,26,'North','tl')}''')
 
 ticks = ''.join(f'<line x1="{110+66*math.sin(math.radians(a)):.1f}" y1="{105-66*math.cos(math.radians(a)):.1f}" x2="{110+74*math.sin(math.radians(a)):.1f}" y2="{105-74*math.cos(math.radians(a)):.1f}" class="k {"t3" if a%90==0 else "t1"}"/>' for a in range(0, 360, 30))
-svg('nav-watch', 210, 'Watch method, Northern Hemisphere: point the hour hand at the sun; south is halfway to 12 o’clock', f'''
-<circle cx="110" cy="105" r="78" class="k"/>{ticks}
-{lbl(110,52,'12','tb','middle')}
-<line x1="110" y1="105" x2="157.6" y2="132.5" class="k t5"/>
-<line x1="110" y1="105" x2="110" y2="44" class="m t1 d"/>
-<line x1="160" y1="134" x2="200" y2="157" class="h d t1"/>{sun(208,162,9)}
-<line x1="36" y1="148" x2="186" y2="61" class="a" marker-end="url(#aA)"/>
-{lbl(190,56,'South','tl')}{lbl(28,166,'North','tm')}
-{lbl(222,96,'Northern','tb')}{lbl(222,110,'Hemisphere:','tb')}{lbl(222,128,'hour hand at the sun,')}{lbl(222,142,'south is halfway')}{lbl(222,156,'to 12 o’clock.')}
-{lbl(222,176,'In daylight saving','tm')}{lbl(222,190,'time, use 1 o’clock.','tm')}''')
 
 stars = [(35,140),(65,128),(92,135),(120,145),(178,152),(150,165),(115,170)]
 svg('nav-polaris', 222, 'Find Polaris by extending the Big Dipper’s pointer stars about five times their spacing', f'''
@@ -346,45 +324,10 @@ svg('nav-cross', 290, 'Southern Cross: extend the long axis about four and a hal
 <line x1="0" y1="270" x2="340" y2="270" class="m"/><line x1="232" y1="212" x2="232" y2="270" class="m d t1"/>
 {lbl(232,286,'South','tl','middle')}''')
 
-svg('nav-hand', 180, 'Daylight left: each finger width between the sun and horizon at arm’s length is about 15 minutes', f'''
-<rect x="0" y="150" width="340" height="30" class="gr"/><line x1="0" y1="150" x2="340" y2="150" class="m"/>
-{sun(232,38,12)}
-{''.join(f'<rect x="168" y="{56+i*23.5:.1f}" width="126" height="21" rx="10" class="skin"/>' for i in range(4))}
-{''.join(lbl(300, 70+i*23.5, f'{(i+1)*15}', 'tm') for i in range(3))}{lbl(300,140.5,'60 min','tm')}
-{lbl(16,84,'Arm’s length:','tb')}{lbl(16,100,'each finger ≈ 15 min')}{lbl(16,116,'4 fingers ≈ 1 hour')}''')
 
-svg('nav-aimoff', 200, 'Aiming off: aim to one side of a point on a river so you know which way to turn when you reach it', f'''
-<path d="M0 56 C60 40 100 72 170 54 S280 40 340 56" class="a t5"/>
-<rect x="196" y="38" width="12" height="12" class="hf"/>{lbl(202,30,'Camp','tb','middle')}
-<circle cx="200" cy="180" r="6" class="kf"/>{lbl(212,186,'You','tb')}
-<line x1="200" y1="174" x2="202" y2="56" class="m d t1"/>
-<line x1="198" y1="174" x2="134" y2="66" class="k" marker-end="url(#aK)"/>
-<path d="M140 60 C160 58 172 54 190 50" class="h t3" marker-end="url(#aH)"/>
-{lbl(150,132,'Aim off to one side','tb','end')}
-{lbl(212,98,'Hit the river,','')}{lbl(212,112,'then turn toward camp','')}''')
 
 # ---------------- SIGNALS ----------------
-svg('signal-ground', 150, 'Ground-to-air signals: V means need assistance, X means need medical help; three fires in a triangle means distress', f'''
-<rect x="0" y="34" width="168" height="94" class="gr"/>
-<path d="M22 46 L48 118 L74 46" class="k" style="stroke-width:10"/>
-<path d="M98 46 L150 118 M150 46 L98 118" class="k" style="stroke-width:10"/>
-{lbl(48,144,'V: need help','tb','middle')}{lbl(124,144,'X: medical','tb','middle')}
-{lbl(84,22,'Big, high contrast','tm','middle')}
-<line x1="178" y1="20" x2="178" y2="140" class="m t1 d"/>
-{flame(220,120,0.6)}{flame(306,120,0.6)}{flame(263,68,0.6)}
-<path d="M220 112 L306 112 L263 60 Z" class="m d t1"/>
-{lbl(262,144,'3 fires in a triangle','tb','middle')}''')
 
-svg('signal-mirror', 170, 'Signal mirror: hold it under your eye, sight the aircraft through a V of two fingers, tilt until the light hits your fingers', f'''
-{sun(30,28,10)}
-<line x1="40" y1="40" x2="62" y2="106" class="h d t1"/>
-<polygon points="52,110 70,104 74,118 56,124" class="k af"/>
-<line x1="64" y1="113" x2="290" y2="57" class="h" marker-end="url(#aH)"/>
-<path d="M193 132 L182 78 M193 132 L206 80" class="skin-s"/>
-<circle cx="194" cy="138" r="9" class="skin"/>
-<path d="M286 58 L322 49 M300 40 L308 68" class="k t3"/>
-{lbl(84,146,'Mirror under your eye','tb')}
-{lbl(214,128,'Sight the aircraft','')}{lbl(214,142,'through 2 fingers','')}''')
 
 # ---------------- KNOTS ----------------
 def offset(pts, dx, dy=0):
@@ -397,23 +340,8 @@ p1 = S + [(86,85,0),(88,140,0),(86,170,0)]
 p2 = S + BIG + UP[:-1] + [(45,46,1)]
 p3 = S + BIG + UP + COLLAR
 body = rope_svg([(offset(p1, 0, 10), 'rp')]) + rope_svg([(offset(p2, 113, 10), 'rp')]) + rope_svg([(offset(p3, 226, 10), 'rp')])
-svg('knot-bowline', 245, 'Bowline in three steps: small loop with the working side on top; end up through the loop; around behind the standing part and back down through the loop', f'''
-{body}
-{''.join(f'<circle cx="{14+113*i}" cy="20" r="10" class="k"/>' + lbl(14+113*i, 24, str(i+1), 'tb', 'middle') for i in range(3))}
-{lbl(56,236,'Small loop,','','middle')}{lbl(56,222,'','')}
-{lbl(169,236,'Up through it','','middle')}{lbl(282,236,'Around, back down','','middle')}
-{lbl(56,222,'Working side on top','tm','middle')}''')
 
 trk = rope_svg([([(40,22,0),(120,48,0),(196,74,0),(212,86,1),(205,100,0),(196,92,-1),(194,104,0),(214,140,0),(246,168,0),(262,160,-1),(256,140,0),(222,100,0),(204,86,-1),(194,70,0),(214,62,2),(240,96,1),(282,150,0),(300,170,0)], 'rp')])
-svg('knot-trucker', 190, 'Trucker’s hitch: a fixed loop in the line, the end around the anchor point and back up through the loop, then pulled down and tied off', f'''
-<circle cx="34" cy="20" r="9" class="k"/>
-<path d="M240 172 q6 -10 14 -4 q10 8 -2 18" class="k t3"/><line x1="226" y1="186" x2="290" y2="186" class="k t3"/>
-{trk}
-{arrow(310,150,326,180,'h','aH')}
-{lbl(14,46,'Anchor','tb')}
-{lbl(232,40,'Fixed loop','tb')}{lbl(232,54,'in the line','')}
-{lbl(110,150,'Around the hook,','','start')}{lbl(110,164,'back up through','')}{lbl(110,178,'the loop','')}
-{lbl(336,140,'Pull,','tb','end')}{lbl(336,154,'then tie off','','end')}''')
 
 # ---------------- NEW SECTIONS ----------------
 svg('lightning', 150, 'Count from flash to thunder: every 5 seconds is about 1 mile. If you can hear thunder you can be struck. Wait 30 minutes after the last thunder.', f'''
@@ -424,17 +352,6 @@ svg('lightning', 150, 'Count from flash to thunder: every 5 seconds is about 1 m
 {lbl(160,76,'Hear thunder? You’re','tb')}{lbl(160,92,'close enough to be struck.')}
 {lbl(160,118,'Wait 30 minutes after','tb')}{lbl(160,134,'the last thunder.')}''')
 
-svg('tick', 150, 'Remove a tick with fine-tipped tweezers gripped at the skin, pulling straight up with steady pressure', f'''
-<rect x="0" y="102" width="340" height="48" class="skin"/>
-<path d="M0 102 C60 98 120 106 170 102 S280 98 340 102" class="w"/>
-<ellipse cx="170" cy="84" rx="18" ry="13" class="kf"/>
-<path d="M156 80 l-12 -6 M156 88 l-14 2 M184 80 l12 -6 M184 88 l14 2 M160 94 l-8 8 M180 94 l8 8" class="k t1"/>
-<line x1="170" y1="96" x2="170" y2="106" class="k t3"/>
-<path d="M112 14 L166 100 M146 8 L174 100" class="st t3"/>
-{arrow(226,92,226,26,'h','aH')}
-{lbl(236,44,'Pull straight up,','tb')}{lbl(236,58,'steady pressure')}
-{lbl(236,128,'Grip right at the skin','tb')}{lead(234,124,176,102)}
-{lbl(10,128,'Don’t twist or','tm')}{lbl(10,142,'squeeze the body','tm')}''')
 
 svg('river', 200, 'River crossing: face upstream, pole planted upstream, shuffle across angling slightly downstream, away from strainers', f'''
 <rect x="0" y="40" width="340" height="128" class="af"/>
@@ -464,7 +381,6 @@ grid = ''
 for i, (name, ic) in enumerate(icons):
     cx, cy = 34 + 68*(i % 5), 34 + 92*(i // 5)
     grid += f'<g transform="translate({cx} {cy})">{ic}</g>' + lbl(cx, cy + 40, name, '', 'middle')
-svg('kit', 186, 'The ten essentials: navigation, headlamp, sun protection, first aid, knife, fire, shelter, extra food, extra water, extra layers', grid)
 
 # ---------------- REVISIONS (override earlier drafts) ----------------
 svg('dress-deer', 240, 'Field dressing from above, animal on its back: cut from pelvis to breastbone, free the diaphragm, cut the windpipe, cut around and tie off the anus', f'''
@@ -553,15 +469,6 @@ ring = [(206+11*math.cos(math.radians(a)), 92+11*math.sin(math.radians(a)), (1 i
 trk = rope_svg([([(40,28,0),(120,52,0),(194,76,0)], 'rp'),
                 ([(196,76,0),(214,108,0),(236,150,0),(240,168,0),(248,176,0),(256,170,0),(254,152,0),(228,118,0),(210,100,1),(205,88,0),(204,78,-1),(212,72,0),(222,80,0),(256,120,0),(296,162,0)], 'rp'),
                 (ring, 'rp')], width=6)
-svg('knot-trucker', 205, 'Trucker’s hitch: a fixed loop in the line, the end around the hook and back up through the loop, then pulled tight and tied off', f'''
-<circle cx="34" cy="22" r="9" class="k"/>
-<path d="M232 186 h40 M252 186 v-10 q0 -8 -6 -8" class="k t3"/>
-{trk}
-{arrow(298,166,316,192,'h','aH')}
-{lbl(14,48,'Anchor','tb')}
-{lbl(226,48,'Fixed loop','tb')}{lbl(226,62,'in the line','')}{lead(224,58,212,84)}
-{lbl(80,132,'Down around the hook,','')}{lbl(80,146,'back up through the loop','')}
-{lbl(336,128,'Pull,','tb','end')}{lbl(336,142,'then tie off','','end')}''')
 
 svg('tick', 150, 'Remove a tick with fine-tipped tweezers gripped at the skin, pulling straight up with steady pressure', f'''
 <rect x="0" y="102" width="340" height="48" class="skin"/>
@@ -606,7 +513,7 @@ def arm_limb():
 
 svg('tq-placement', 160, 'Arm seen from the side: the tourniquet band 2 to 3 inches above the wound, toward the heart, and not over the elbow', f'''
 {arm_limb()}
-<circle cx="126" cy="76" r="27" class="h d"/>
+<circle cx="126" cy="76" r="27" class="m d"/>
 <rect x="190" y="56" width="18" height="50" rx="4" class="k kf"/>
 <path d="M234 75 l12 12 m0 -12 l-12 12" class="h t3"/>
 {arrow(118,26,14,26,'m','aM')}{lbl(14,16,'Toward the heart','tm')}
@@ -616,34 +523,37 @@ svg('tq-placement', 160, 'Arm seen from the side: the tourniquet band 2 to 3 inc
 {lbl(224,140,'2 to 3 inches','tb','middle')}{lbl(224,154,'above the wound','','middle')}
 {lbl(14,128,'Not over the elbow','tb')}{lbl(14,142,'or knee','tb')}{lead(70,114,106,94)}''')
 
-svg('recovery-position', 190, 'Person lying on their side, seen from above: one arm up with the head resting on it, the other hand against the cheek, one knee bent to steady them', f'''
-<line x1="100" y1="100" x2="14" y2="100" class="w t5"/>
-<rect x="96" y="82" width="124" height="40" rx="18" class="k"/>
-<circle cx="62" cy="100" r="20" class="k milk"/>
-<path d="M118 84 L104 60 L78 82" class="k t3"/>
-<path d="M214 94 L260 64 L312 98" class="k t3"/>
-<path d="M214 110 L312 114" class="k t3"/>
-{lbl(14,26,'Lower arm up,','tb')}{lbl(14,40,'head rests on it','tb')}{lead(34,46,34,96)}
-{lbl(122,26,'Other hand','tb')}{lbl(122,40,'against the','tb')}{lbl(122,54,'cheek','tb')}{lead(120,52,104,60)}
-{lbl(336,26,'One or both','tb','end')}{lbl(336,40,'knees bent to','tb','end')}{lbl(336,54,'steady them','tb','end')}{lead(290,60,264,64)}
-{lbl(170,170,'Seen from above, lying on their side','tm','middle')}''')
+svg('recovery-position', 200, 'Person lying on their side, seen from above: one arm up with the head resting on it, the other hand against the cheek, one knee bent forward to steady them', f'''
+<line x1="100" y1="96" x2="14" y2="96" class="k" style="stroke-width:9"/>
+<rect x="96" y="72" width="124" height="48" rx="22" class="skin"/>
+<circle cx="70" cy="96" r="21" class="skin"/>
+<path d="M62 115 L70 128 L78 115" class="k"/>
+<path d="M114 112 L100 144 L76 124" class="k" style="stroke-width:9"/>
+<path d="M214 90 L318 100" class="k" style="stroke-width:9"/>
+<path d="M212 108 L262 152 L318 120" class="k" style="stroke-width:9"/>
+<line x1="150" y1="72" x2="150" y2="120" class="m t1 d"/>
+{lbl(14,26,'Lower arm up,','tb')}{lbl(14,40,'head rests on it','tb')}{lead(32,46,32,86)}
+{lbl(124,26,'Other hand','tb')}{lbl(124,40,'against the','tb')}{lbl(124,54,'cheek','tb')}{lead(122,50,88,128)}
+{lbl(336,26,'One or both','tb','end')}{lbl(336,40,'knees bent to','tb','end')}{lbl(336,54,'steady them','tb','end')}{lead(300,60,268,148)}
+{lbl(170,186,'Seen from above, lying on their side, face turned out','tm','middle')}''')
 
 svg('cpr-hands-adult', 256, 'Adult CPR hand position: heel of one hand on the lower half of the breastbone in the centre of the chest, other hand on top, arms straight with shoulders over the hands, pushing straight down', f'''
 <path d="M46 40 Q80 54 114 40 L134 52 Q146 60 146 76 V170 H14 V76 Q14 60 26 52 Z" class="k"/>
 <line x1="80" y1="60" x2="80" y2="132" class="m t1 d"/>
-<rect x="60" y="100" width="40" height="30" rx="8" class="a af"/>
+<rect x="60" y="100" width="40" height="30" rx="8" class="h t3 hfl"/>
 <rect x="56" y="80" width="48" height="34" rx="8" class="k milk"/>
 <path d="M66 80 v-8 M76 80 v-10 M86 80 v-10 M96 80 v-8" class="k"/>
 {lbl(80,192,'Centre of the chest','tb','middle')}{lbl(80,206,'Heel of one hand on','','middle')}{lbl(80,220,'the lower half of the','','middle')}{lbl(80,234,'breastbone, other hand','','middle')}{lbl(80,248,'on top','','middle')}
 <line x1="168" y1="170" x2="336" y2="170" class="m t1"/>
-<circle cx="190" cy="158" r="12" class="skin"/>
-<rect x="206" y="148" width="80" height="22" rx="8" class="skin"/>
-<rect x="238" y="136" width="24" height="12" rx="4" class="a af"/>
-<line x1="246" y1="136" x2="246" y2="74" class="k t5"/><line x1="256" y1="136" x2="256" y2="74" class="k t5"/>
-<circle cx="251" cy="42" r="14" class="k"/>
-<line x1="251" y1="64" x2="304" y2="112" class="k t5"/>
-<path d="M304 112 L300 168 L336 168" class="k t3"/>
-{arrow(218,76,218,132,'h','aH')}
+<circle cx="186" cy="156" r="13" class="skin"/>
+<rect x="202" y="146" width="70" height="24" rx="8" class="skin"/>
+<rect x="272" y="152" width="64" height="18" rx="8" class="skin"/>
+<rect x="214" y="134" width="36" height="12" rx="4" class="h t3 hfl"/>
+<line x1="224" y1="134" x2="224" y2="76" class="k t5"/><line x1="240" y1="134" x2="240" y2="76" class="k t5"/>
+<circle cx="232" cy="46" r="14" class="k"/>
+<path d="M232 66 L262 104" class="m t3 d"/>
+{arrow(232,78,232,130,'h','aH')}
+{lbl(237,164,'chest','tm','middle')}
 {lbl(250,192,'Arms straight,','tb','middle')}{lbl(250,206,'shoulders over your','','middle')}{lbl(250,220,'hands, push straight','','middle')}{lbl(250,234,'down','','middle')}''')
 
 def infant_chest(cx):
@@ -654,51 +564,52 @@ def infant_chest(cx):
 
 svg('cpr-infant', 245, 'Infant CPR hand positions on the centre of the chest, lower half of the breastbone just below the nipple line: two thumbs side by side with the fingers wrapped around the chest, or the heel of one hand', f'''
 {infant_chest(84)}
-<ellipse cx="76" cy="96" rx="8" ry="15" class="a af"/><ellipse cx="92" cy="96" rx="8" ry="15" class="a af"/>
+<ellipse cx="76" cy="96" rx="8" ry="15" class="h t3 hfl"/><ellipse cx="92" cy="96" rx="8" ry="15" class="h t3 hfl"/>
 <path d="M66 108 C46 120 30 118 14 104 M102 108 C122 120 138 118 154 104" class="k t3"/>
 {lbl(14,22,'Nipple line','tm')}{lead(48,26,58,64)}
 {lbl(84,172,'Two thumbs side by side','tb','middle')}{lbl(84,186,'just below the nipple line.','','middle')}{lbl(84,200,'Fingers wrap around the','','middle')}{lbl(84,214,'chest toward the back','','middle')}
 <line x1="170" y1="30" x2="170" y2="222" class="m t1 d"/>
 {infant_chest(256)}
-<rect x="236" y="80" width="40" height="30" rx="9" class="a af"/>
+<rect x="236" y="80" width="40" height="30" rx="9" class="h t3 hfl"/>
 {lbl(256,172,'Or the heel of one hand','tb','middle')}{lbl(256,186,'in the same spot','','middle')}''')
 
-svg('back-blows', 250, 'Back blows: the person bent forward at the waist so the upper body is about level with the ground, one of your arms across their chest, the heel of your other hand striking between the shoulder blades', f'''
+svg('back-blows', 250, 'Back blows: the person bent forward at the waist so the upper body is about level with the ground, one of your arms across their chest, the heel of your other hand striking between the shoulder blades, you standing to the side and slightly behind', f'''
 <line x1="20" y1="196" x2="330" y2="196" class="m t1"/>
 <circle cx="76" cy="112" r="13" class="k"/>
 <line x1="90" y1="104" x2="172" y2="114" class="k t5"/>
-<path d="M172 114 L166 194 L150 194" class="k t3"/>
+<path d="M172 114 L186 194 L170 194" class="k t3"/>
 <path d="M104 106 L100 156" class="k t3"/>
 <ellipse cx="128" cy="105" rx="22" ry="8" class="h d"/>
-<circle cx="214" cy="40" r="14" class="m"/>
-<path d="M212 56 L218 140 L222 194 L236 194" class="m t5"/>
-<path d="M206 70 L170 62 L130 90" class="a t5"/>
-<path d="M212 78 L158 124 L106 122" class="m t3 d"/>
-{arrow(112,60,122,92,'h','aH')}
-{lbl(10,22,'Heel of your other hand,','tb')}{lbl(10,36,'between the shoulder blades','tb')}
-{lbl(330,126,'Stand to the','tb','end')}{lbl(330,140,'side and slightly','tb','end')}{lbl(330,154,'behind','tb','end')}{lead(292,148,226,148)}
+<circle cx="164" cy="42" r="14" class="m t3 d"/>
+<path d="M164 58 L168 134 L164 194 L180 194" class="m t3 d"/>
+<path d="M166 72 L134 94" class="m t3 d"/>
+<path d="M168 80 L134 122 L106 120" class="m t3 d"/>
+{arrow(118,50,122,92,'h','aH')}
+{lbl(10,22,'Heel of your other hand,','tb')}{lbl(10,36,'between the shoulder','tb')}{lbl(10,50,'blades','tb')}
+{lbl(330,100,'Stand to the','tb','end')}{lbl(330,114,'side and slightly','tb','end')}{lbl(330,128,'behind','tb','end')}{lead(268,122,174,112)}
 {lbl(10,216,'One arm across the chest. Bend them','')}{lbl(10,230,'forward at the waist, upper body about','')}{lbl(10,244,'level with the ground','')}''')
 
 svg('abdominal-thrusts', 210, 'Abdominal thrusts: stand behind the person with your arms around their waist, one fist just above the belly button with the thumb side against the belly and your other hand over it, pulling sharply in and up', f'''
 <line x1="20" y1="196" x2="330" y2="196" class="m t1"/>
 <circle cx="150" cy="40" r="14" class="k"/>
 <path d="M150 56 L156 124 L152 194 L132 194" class="k t5"/>
-<circle cx="196" cy="34" r="14" class="m"/>
-<path d="M194 50 L202 126 L206 194 L224 194" class="m t5"/>
-<path d="M190 74 L162 96 L132 104" class="m t3"/>
-<circle cx="143" cy="104" r="9" class="a afs"/>
-<circle cx="144" cy="104" r="12" class="a"/>
+<circle cx="196" cy="34" r="14" class="m t3 d"/>
+<path d="M194 50 L202 126 L206 194 L224 194" class="m t3 d"/>
+<path d="M190 74 L162 96 L132 104" class="m t3 d"/>
+<circle cx="143" cy="104" r="9" class="h hfl t3"/>
+<circle cx="144" cy="104" r="13" class="h t3"/>
 <circle cx="148" cy="126" r="3" class="kf"/>
-{arrow(100,150,134,120,'h','aH')}
+{arrow(88,162,126,134,'h','aH')}
 {lbl(10,22,'Stand behind them,','tb')}{lbl(10,36,'arms around the waist','tb')}
-{lbl(330,100,'Fist just above','tb','end')}{lbl(330,114,'the belly button,','tb','end')}{lbl(330,128,'other hand over it','tb','end')}{lead(244,116,158,106)}
-{lbl(10,172,'Belly button','')}{lead(66,168,144,128)}
-{lbl(10,128,'Pull sharply','tb')}{lbl(10,142,'in and up','tb')}''')
+{lbl(10,62,'Fist just above','tb')}{lbl(10,76,'the belly button,','tb')}{lbl(10,90,'other hand over it','tb')}{lead(100,84,128,100)}
+{lbl(10,158,'Pull sharply','tb')}{lbl(10,172,'in and up','tb')}
+{lbl(10,126,'Belly button','')}{lead(74,122,144,126)}''')
 
 svg('splint-forearm', 190, 'Forearm splint: a padded rigid splint along the forearm that reaches past the joint above and the joint below, tied above and below the injury and not over it', f'''
 <path d="M34 54 H250 C268 54 276 58 296 60 V100 C276 102 268 104 250 104 H34 Q24 104 24 94 V64 Q24 54 34 54 Z" class="skin"/>
-<rect x="14" y="108" width="296" height="12" rx="4" class="k"/>
-<rect x="18" y="104" width="288" height="4" class="w wfs"/>
+<rect x="14" y="112" width="296" height="10" rx="4" class="k"/>
+<rect x="18" y="102" width="288" height="10" rx="3" class="w wf"/>
+<path d="M26 107 H300" class="w t1 d"/>
 <circle cx="40" cy="79" r="20" class="m d"/><circle cx="262" cy="79" r="18" class="m d"/>
 <circle cx="150" cy="79" r="16" class="h d"/>
 <rect x="98" y="48" width="12" height="78" rx="4" class="k wf t3"/><rect x="196" y="48" width="12" height="78" rx="4" class="k wf t3"/>
@@ -706,18 +617,17 @@ svg('splint-forearm', 190, 'Forearm splint: a padded rigid splint along the fore
 {lbl(150,20,'Injury','tb','middle')}{lead(150,24,150,60)}
 {lbl(104,146,'Tie above','tb','middle')}{lbl(202,146,'and below','tb','middle')}
 {lbl(170,164,'not over the injury','tb','middle')}
-{lbl(14,184,'Padded rigid splint reaches past both joints','')}''')
+{lbl(14,184,'Padded rigid splint reaches past both joints','')}{lbl(326,146,'Padding','tb','end')}{lead(300,138,284,110)}''')
 
-svg('pressure-dressing', 236, 'Pressure dressing: first press hard with both hands on gauze or clean cloth placed on the bleeding spot, then wrap a firm bandage over the dressing', f'''
+svg('pressure-dressing', 236, 'Pressure dressing: keep pressing hard with both hands on the dressing until the bleeding stops, then wrap a firm bandage over the dressing', f'''
 <path d="M14 90 H326 V122 H14 Z" class="skin"/>
 <rect x="136" y="82" width="68" height="8" rx="3" class="k milk"/>
-<rect x="144" y="66" width="52" height="16" rx="6" class="a af"/>
-<line x1="156" y1="66" x2="156" y2="14" class="k t5"/><line x1="184" y1="66" x2="184" y2="14" class="k t5"/>
+<rect x="144" y="64" width="52" height="18" rx="6" class="h t3 hfl"/>
+<line x1="156" y1="64" x2="156" y2="14" class="k t5"/><line x1="184" y1="64" x2="184" y2="14" class="k t5"/>
 {arrow(232,24,232,76,'h','aH')}
-{lbl(14,22,'1. Press hard,','tb')}{lbl(14,36,'both hands','tb')}
-{lbl(14,64,'Gauze or cloth right','')}{lbl(14,78,'on the bleeding spot','')}{lead(122,70,138,84)}
+{lbl(14,22,'Keep pressing','tb')}{lbl(14,36,'until the bleeding','tb')}{lbl(14,50,'stops','tb')}
+{lbl(14,78,'Dressing','')}{lead(66,76,134,85)}
 <line x1="20" y1="132" x2="320" y2="132" class="m t1 d"/>
-{lbl(14,156,'2. Then wrap a firm bandage','tb')}{lbl(14,170,'over the dressing','tb')}
+{lbl(14,156,'Then wrap a firm bandage','tb')}{lbl(14,170,'over the dressing','tb')}
 <path d="M14 188 H326 V220 H14 Z" class="skin"/>
-<path d="M118 184 L152 184 L140 224 L106 224 Z M146 184 L180 184 L168 224 L134 224 Z M174 184 L208 184 L196 224 L162 224 Z M202 184 L236 184 L224 224 L190 224 Z" class="k wf"/>
-''')
+<path d="M118 184 L152 184 L140 224 L106 224 Z M146 184 L180 184 L168 224 L134 224 Z M174 184 L208 184 L196 224 L162 224 Z M202 184 L236 184 L224 224 L190 224 Z" class="k wf"/>''')

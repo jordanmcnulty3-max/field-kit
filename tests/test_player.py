@@ -531,18 +531,44 @@ def test_shipped_protocols_have_no_draft_flag(page, app_url):
     assert page.evaluate("FK_DATA.protocols.filter(p => p.draft === true).map(p => p.id)") == []
 
 
-def test_first_step_shows_donts_expanded_below_the_detail_and_later_steps_collapsed(page, app_url):
+def test_first_step_shows_donts_expanded_directly_below_the_row_and_later_steps_collapsed(page, app_url):
     inject_listy(page)
     page.goto(app_url + '#/emergency/listy')
-    assert page.locator('#player .pp-list[data-list="donts"]').is_visible()
-    assert 'Do not wait' in page.locator('#player').inner_text()
-    assert top(page, '#player .pp-list[data-list="donts"]') > page.locator('#player .pp-detail').bounding_box()['y'] + page.locator('#player .pp-detail').bounding_box()['height'] - 1
-    assert page.get_attribute('#player [data-act="list"][data-list="donts"]', 'aria-expanded') == 'true'
+    panel = page.locator('#player .pp-list[data-list="donts"]')
+    assert panel.is_visible() and 'Do not wait' in panel.inner_text()
+    row, det = page.locator('#ppLists').bounding_box(), page.locator('#player .pp-detail').bounding_box()
+    pb = panel.bounding_box()
+    assert row['y'] + row['height'] <= pb['y'] + 1 and pb['y'] + pb['height'] <= det['y'] + 1   # row, then the list, then the detail
+    assert page.get_attribute('#ppLists [data-list="donts"]', 'aria-expanded') == 'true'
     assert page.locator('#player .pp-list[data-list="evacuate"]').count() == 0
     page.click('#player [data-act="next"]')
     assert page.locator('#player .pp-list').count() == 0
     assert 'Do not wait' not in page.locator('#player').inner_text()
-    assert page.get_attribute('#player [data-act="list"][data-list="donts"]', 'aria-expanded') == 'false'
+    assert page.get_attribute('#ppLists [data-list="donts"]', 'aria-expanded') == 'false'
+    page.click('#player [data-act="back"]')   # back on the first step the default is expanded again
+    assert action(page) == 'First action'
+    assert page.locator('#player .pp-list[data-list="donts"]').is_visible()
+
+
+def test_step_body_order_action_warn_figure_list_row_detail(page, app_url):
+    page.goto(app_url + '#/emergency/bleeding/s5')
+    order = [top(page, f'#player {sel}') for sel in ('.pp-action', '.pp-warn', '.pp-fig', '#ppLists', '.pp-detail')]
+    assert order == sorted(order) and len(set(order)) == 5, order
+    fig = page.locator('#player .pp-fig').bounding_box()
+    assert fig['y'] < 640   # the picture starts inside the first screen
+
+
+def test_action_is_the_first_content_and_nothing_above_it_is_taller_than_the_progress_bar(page, app_url):
+    inject_listy(page)
+    for path in ('#/emergency/listy', '#/emergency/listy/b', '#/emergency/bleeding/s5'):
+        page.goto(app_url + path)
+        assert top(page, '#player .pp-action') < top(page, '#ppLists'), path
+        assert page.evaluate("document.querySelector('#ppBody').firstElementChild.id") == 'ppAction'
+        limit = page.eval_on_selector('#player .pp-prog', 'e => e.getBoundingClientRect().height')
+        heights = page.evaluate("""[...document.querySelectorAll('#player > *')].filter(e => e.id !== 'ppBody' && e.getBoundingClientRect().top < document.querySelector('#ppAction').getBoundingClientRect().top
+          && !e.classList.contains('pp-head')).map(e => e.getBoundingClientRect().height)""")
+        assert all(h <= limit + 0.5 for h in heights), (path, heights, limit)
+        assert page.locator('#ppLists [aria-expanded]').first.evaluate("e => getComputedStyle(e).backgroundColor") != page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ink')")
 
 
 def test_donts_and_evacuate_open_and_close_from_any_step_without_history_or_step_change(page, app_url):
@@ -566,10 +592,16 @@ def test_donts_and_evacuate_open_and_close_from_any_step_without_history_or_step
         assert btn.get_attribute('aria-expanded') == 'false'
         assert action(page) == 'Second action' and page.url == url and page.evaluate('history.length') == hist
         assert page.evaluate("localStorage.getItem('fk.proto.active')") == stored
-    # both can be open at once, and Android Back still leaves the step, not a list
-    page.click('#player [data-act="list"][data-list="donts"]')
-    page.click('#player [data-act="list"][data-list="evacuate"]')
+    # both can be open at once
+    page.click('#ppLists [data-list="donts"]')
+    page.click('#ppLists [data-list="evacuate"]')
     assert page.locator('#player .pp-list').count() == 2
+    # opening a list pushed no entry, so Android Back leaves the protocol rather than a list
+    page.goto(app_url + '#/emergency')
+    page.evaluate("FK.protocol.open('listy', 'b')")
+    page.click('#ppLists [data-list="donts"]')
+    page.go_back()
+    expect(page.locator('#player')).to_be_hidden()
 
 
 def test_list_content_is_escaped_and_close_button_inside_panel_is_big(page, app_url):
@@ -577,7 +609,7 @@ def test_list_content_is_escaped_and_close_button_inside_panel_is_big(page, app_
     page.goto(app_url + '#/emergency/listy')
     assert page.locator('#player .pp-list b').count() == 0
     assert 'Do not <b>press</b> here' in page.locator('#player .pp-list').inner_text()
-    page.click('#player [data-act="list"][data-list="evacuate"]')
+    page.click('#ppLists [data-list="evacuate"]')
     assert page.locator('#player .pp-list i').count() == 0
     assert 'Evacuate <i>now</i> if worse' in page.locator('#player').inner_text()
     close = page.locator('#player .pp-list[data-list="evacuate"] [data-act="list"]')
@@ -593,10 +625,10 @@ def test_no_list_controls_when_the_protocol_has_no_lists(page, app_url):
     assert page.locator('#player .pp-list').count() == 0
 
 
-def test_lists_collapse_again_on_the_first_step_only_by_default_after_leaving_it(page, app_url):
+def test_user_can_collapse_the_first_step_list(page, app_url):
     inject_listy(page)
     page.goto(app_url + '#/emergency/listy')
-    page.click('#player [data-act="list"][data-list="donts"]')   # user collapses it
+    page.click('#ppLists [data-list="donts"]')
     assert page.locator('#player .pp-list').count() == 0
     assert action(page) == 'First action'
 

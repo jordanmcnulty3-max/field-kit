@@ -487,29 +487,77 @@
   }
   $('#menuBtn').addEventListener('click', () => { $('#bkMsg').textContent = ''; diag(); $('#dlgMenu').showModal(); });
   $('#menuClose').addEventListener('click', () => $('#dlgMenu').close());
+  /* Session-only keys are never written to a backup and never touched by a restore: a half-finished
+     protocol must not reappear on another phone, and a stale position must not pass as current. */
+  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix'];
+  const backedUp = k => k.startsWith('fk.') && !SESSION_ONLY.includes(k);
+  const phoneKeys = () => { const ks = []; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (backedUp(k)) ks.push(k); } return ks; };
+  const hasPatients = data => { try { const v = JSON.parse(data['fk.patients']); return Array.isArray(v) && v.length > 0; } catch { return false; } };
   $('#bkSave').addEventListener('click', () => {
     const data = {};
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k.startsWith('fk.')) data[k] = localStorage.getItem(k);
-    }
+    phoneKeys().forEach(k => { data[k] = localStorage.getItem(k); });
     const day = new Date().toISOString().slice(0, 10);
     download(`fieldkit-backup-${day}.json`, JSON.stringify({ app: 'Field Kit', version: APP_VERSION, saved: new Date().toISOString(), data }, null, 1), 'application/json');
-    $('#bkMsg').textContent = `Saved ${Object.keys(data).length} items to Downloads. Saved map tiles aren’t included; re-download those areas on a new phone.`;
+    $('#bkMsg').textContent = `Saved ${Object.keys(data).length} items to Downloads. Saved map tiles aren’t included; re-download those areas on a new phone.` +
+      (hasPatients(data) ? ' This file includes patient logs. Keep it private.' : '');
   });
+
+  /* Restore: pick a file, read the two-step confirm timing at click time (emergency-tools.js loads after this file),
+     then replace every backed-up key on this phone with the file's. All or nothing. */
+  const NOT_BACKUP = 'That file isn’t a Field Kit backup. Pick the .json file the Back up button saved.';
+  let pendingRestore = null, restoreSure = false, restoreAt = 0, restoreT = null;
+  const confirmTiming = () => (window.FK && FK.tools && FK.tools.confirm) || { ignoreMs: 700, revertMs: 5000 };
+  function paintRestore() {
+    $('#bkConfirm').hidden = !pendingRestore;
+    $('#bkGo').textContent = restoreSure ? 'Confirm restore' : 'Restore';
+    $('#bkGo').classList.toggle('ghost', !restoreSure);
+  }
+  function setRestoreSure(on) {
+    clearTimeout(restoreT); restoreSure = on; restoreAt = performance.now();
+    if (on) restoreT = setTimeout(() => { restoreSure = false; paintRestore(); }, confirmTiming().revertMs);
+    paintRestore();
+  }
+  function cancelRestore() { pendingRestore = null; setRestoreSure(false); }
+  function applyRestore(file) {
+    const before = new Map(phoneKeys().map(k => [k, localStorage.getItem(k)]));
+    const touched = new Set();
+    try {
+      before.forEach((_, k) => { if (!(k in file)) { touched.add(k); localStorage.removeItem(k); } });
+      Object.entries(file).forEach(([k, v]) => { touched.add(k); localStorage.setItem(k, v); });
+      return true;
+    } catch {
+      touched.forEach(k => { try { if (before.has(k)) localStorage.setItem(k, before.get(k)); else localStorage.removeItem(k); } catch {} });
+      return false;
+    }
+  }
   $('#bkFile').addEventListener('change', async e => {
     const f = e.target.files && e.target.files[0]; e.target.value = '';
+    cancelRestore();
     if (!f) return;
+    const msg = $('#bkMsg');
     let b;
-    try { b = JSON.parse(await f.text()); } catch { $('#bkMsg').textContent = 'That file isn’t a Field Kit backup. Pick the .json file the Back up button saved.'; return; }
-    if (!b || b.app !== 'Field Kit' || typeof b.data !== 'object') { $('#bkMsg').textContent = 'That file isn’t a Field Kit backup. Pick the .json file the Back up button saved.'; return; }
+    try { b = JSON.parse(await f.text()); } catch { msg.textContent = NOT_BACKUP; return; }
+    const d = b && b.data;
+    if (!b || b.app !== 'Field Kit' || !d || typeof d !== 'object' || Array.isArray(d) || !Object.values(d).every(v => typeof v === 'string')) { msg.textContent = NOT_BACKUP; return; }
+    if (parseInt(b.version, 10) > parseInt(APP_VERSION, 10)) { msg.textContent = 'This backup is from a newer version of Field Kit. Update the app first.'; return; }
+    const file = {};
+    Object.entries(d).forEach(([k, v]) => { if (backedUp(k)) file[k] = v; });
     const when = new Date(b.saved);
-    if (!confirm(`Restore the backup${isNaN(when) ? '' : ' from ' + when.toLocaleString()}? It replaces the waypoints, tracks, profiles and settings on this phone.`)) return;
-    try {
-      Object.entries(b.data).forEach(([k, v]) => { if (k.startsWith('fk.')) localStorage.setItem(k, v); });
-    } catch { $('#bkMsg').textContent = 'Phone storage is full, so the backup couldn’t be restored. Free some space and try again.'; return; }
+    pendingRestore = file;
+    msg.textContent = '';
+    $('#bkAsk').textContent = `Restore the backup${isNaN(when) ? '' : ' from ' + when.toLocaleString()}? It replaces the waypoints, tracks, profiles, patient logs and settings on this phone.`;
+    paintRestore();
+  });
+  $('#bkGo').addEventListener('click', () => {
+    if (!pendingRestore) return;
+    if (!restoreSure) { setRestoreSure(true); return; }
+    if (performance.now() - restoreAt < confirmTiming().ignoreMs) return;   // a bounced second tap must not replace everything
+    const file = pendingRestore;
+    if (!applyRestore(file)) { cancelRestore(); $('#bkMsg').textContent = 'Phone storage is full, so nothing was changed. Free some space and try again.'; return; }
     location.reload();
   });
+  $('#bkNo').addEventListener('click', cancelRestore);
+  $('#dlgMenu').addEventListener('close', cancelRestore);
 
   /* ---------- Updates: tell the user instead of making them relaunch twice ---------- */
   if ('serviceWorker' in navigator && window.isSecureContext) {

@@ -1,0 +1,25 @@
+{
+ "app": "Field Kit",
+ "version": "5",
+ "saved": "2026-11-10T14:30:00.000Z",
+ "data": {
+  "fk.night": "false",
+  "fk.tab": "\"tactical\"",
+  "fk.view": "\"ballistics\"",
+  "fk.region": "\"desert\"",
+  "fk.wps": "[{\"id\": \"k3a9x0\", \"name\": \"Truck\", \"lat\": 38.8977, \"lon\": -77.0365, \"alt\": 12.5, \"t\": 1799913600000}, {\"id\": \"k3a9x1\", \"name\": \"Water cache\", \"lat\": 38.9031, \"lon\": -77.0442, \"alt\": null, \"t\": 1799996400000}]",
+  "fk.target": "\"k3a9x1\"",
+  "fk.track": "[[38.8977, -77.0365, 12.5, 1799992800000], [38.8991, -77.0391, 13.0, 1799993000000], [38.9031, -77.0442, 14.2, 1799993200000]]",
+  "fk.recording": "false",
+  "fk.mapView": "{\"lat\": 38.9, \"lon\": -77.04, \"z\": 14}",
+  "fk.mapLayer": "\"topo\"",
+  "fk.mapFollow": "true",
+  "fk.lastFix": "{\"lat\": 38.9031, \"lon\": -77.0442, \"alt\": 14.2, \"acc\": 8, \"t\": 1799999940000}",
+  "fk.llFormat": "\"dec\"",
+  "fk.decl": "-10.5",
+  "fk.unit": "\"moa\"",
+  "fk.tq": "[{\"id\": \"abc123\", \"limb\": \"Left leg\", \"start\": 1799999128000}]",
+  "fk.profiles": "[{\"id\": \"u1k2j3x\", \"name\": \"My 6mm ARC\", \"bc\": 0.31, \"model\": \"G7\", \"w\": 105, \"mv\": 2850, \"sight\": 1.9, \"zero\": 100}]",
+  "fk.bal": "{\"profile\": \"u1k2j3x\", \"bRange\": \"650\", \"bAngle\": \"0\", \"bWind\": \"8\", \"bClock\": \"3\", \"bBC\": \"0.31\", \"bModel\": \"G7\", \"bW\": \"105\", \"bMV\": \"2850\", \"bSH\": \"1.9\", \"bZero\": \"100\", \"bTemp\": \"59\", \"bAlt\": \"0\", \"bPress\": \"29.92\", \"bRH\": \"50\", \"bMax\": \"1000\", \"bStep\": \"50\"}"
+ }
+}

@@ -681,10 +681,14 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 
 <dialog id="dlgMenu">
   <h2>Settings and backup</h2>
-  <p class="hint">Waypoints, tracks, rifle profiles and timers live only on this phone. Back them up now and then, and before clearing Chrome’s data.</p>
+  <p class="hint">Waypoints, tracks, rifle profiles, patient logs and timers live only on this phone. Back them up now and then, and before clearing Chrome’s data.</p>
   <div class="row"><button class="btn" id="bkSave">Back up data</button><label class="btn ghost" for="bkFile" style="display:inline-flex;align-items:center">Restore backup</label></div>
   <input type="file" id="bkFile" accept="application/json,.json" hidden>
   <p class="hint" id="bkMsg" aria-live="polite"></p>
+  <div id="bkConfirm" hidden>
+    <p id="bkAsk" role="alert"></p>
+    <div class="row"><button class="btn ghost" id="bkGo">Restore</button><button class="btn ghost" id="bkNo">Cancel</button></div>
+  </div>
   <h3>This phone</h3>
   <p class="hint" id="diag"></p>
   <div class="row"><button class="btn ghost" id="updBtn">Check for update</button><button class="btn ghost" id="menuClose">Close</button></div>

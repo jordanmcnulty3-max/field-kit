@@ -1,0 +1,227 @@
+"""Backup, restore and v5 -> current migration."""
+import json, os
+
+from .test_tools import T0
+
+FIX = os.path.join(os.path.dirname(__file__), 'fixtures')
+V5_LS = json.load(open(os.path.join(FIX, 'v5-localstorage.json')))
+V5_BACKUP_PATH = os.path.join(FIX, 'v5-backup.json')
+
+
+def seed(page, raw):
+    """Write raw localStorage strings once, before the app boots (the guard keeps the reload after a restore from re-seeding)."""
+    page.add_init_script("if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1'); const d = %s;"
+                         " for (const k in d) localStorage.setItem(k, d[k]); }" % json.dumps(raw))
+
+
+def boot(page, app_url, raw=None, hash_='', clock=False):
+    if clock:
+        page.clock.install(time=T0 // 1000)
+    seed(page, {'fk.advAck': 'true', **(raw or {})})
+    page.goto(app_url + hash_)
+    page.wait_for_function('window.FK && FK.tools && FK.tools.cpr')
+
+
+def ls(page, key):
+    return page.evaluate('k => localStorage.getItem(k)', 'fk.' + key)
+
+
+def open_menu(page):
+    page.click('#menuBtn')
+    page.wait_for_selector('#dlgMenu[open]')
+
+
+def backup(page, tmp_path):
+    open_menu(page)
+    with page.expect_download() as d:
+        page.click('#bkSave')
+    path = tmp_path / 'b.json'
+    d.value.save_as(path)
+    return json.loads(path.read_text())
+
+
+def pick(page, tmp_path, obj):
+    path = tmp_path / 'pick.json'
+    path.write_text(obj if isinstance(obj, str) else json.dumps(obj))
+    open_menu(page)
+    page.set_input_files('#bkFile', str(path))
+
+
+def restore_now(page):
+    """Two-step confirm, then wait for the reload the restore ends with."""
+    page.wait_for_selector('#bkConfirm:not([hidden])')
+    page.click('#bkGo')
+    assert page.inner_text('#bkGo') == 'Confirm restore'
+    page.wait_for_timeout(800)
+    with page.expect_navigation():
+        page.click('#bkGo')
+    page.wait_for_function('window.FK && FK.tools && FK.tools.cpr')
+
+
+def backup_file(data, version='5'):
+    return {'app': 'Field Kit', 'version': version, 'saved': '2026-11-10T14:30:00.000Z', 'data': data}
+
+
+# ---------- Backup ----------
+
+def test_backup_includes_pins_recent_patients_advAck(page, app_url, tmp_path):
+    raw = {'fk.pins': json.dumps(['p:bleeding']), 'fk.recent': json.dumps(['p:cpr-adult']),
+           'fk.patients': json.dumps([{'id': 'p1', 'name': 'Casualty 1', 'created': T0, 'entries': []}]),
+           'fk.nineLine': json.dumps({'view': 'form', 'form': {}}), 'fk.tq': json.dumps([])}
+    boot(page, app_url, raw)
+    b = backup(page, tmp_path)
+    assert b['app'] == 'Field Kit'
+    for k in ('fk.pins', 'fk.recent', 'fk.patients', 'fk.advAck', 'fk.nineLine', 'fk.tq'):
+        assert k in b['data'], k
+    assert json.loads(b['data']['fk.pins']) == ['p:bleeding']
+    msg = page.inner_text('#bkMsg')
+    assert 'This file includes patient logs. Keep it private.' in msg
+
+
+def test_backup_message_omits_patient_note_when_no_logs(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.patients': '[]'})
+    backup(page, tmp_path)
+    assert 'patient' not in page.inner_text('#bkMsg')
+
+
+def test_backup_excludes_proto_active_and_lastFix(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.proto.active': json.dumps({'id': 'bleeding', 'step': 1}), 'fk.lastFix': V5_LS['fk.lastFix'], 'fk.night': 'true'})
+    b = backup(page, tmp_path)
+    assert 'fk.proto.active' not in b['data'] and 'fk.lastFix' not in b['data']
+    assert 'fk.night' in b['data']
+
+
+# ---------- Restore ----------
+
+def test_restore_v5_backup_loads_waypoints_tq_profiles_and_leaves_new_keys_empty(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.pins': json.dumps(['p:bleeding'])})
+    pick(page, tmp_path, json.load(open(V5_BACKUP_PATH)))
+    page.wait_for_selector('#bkConfirm:not([hidden])')
+    assert 'Restore the backup from' in page.inner_text('#bkAsk')
+    assert 'patient logs' in page.inner_text('#bkAsk')
+    restore_now(page)
+    assert [w['name'] for w in json.loads(ls(page, 'wps'))] == ['Truck', 'Water cache']
+    assert ls(page, 'target') == '"k3a9x1"'
+    assert json.loads(ls(page, 'tq'))[0]['limb'] == 'Left leg'
+    assert json.loads(ls(page, 'profiles'))[0]['name'] == 'My 6mm ARC'
+    for k in ('pins', 'recent', 'patients', 'nineLine', 'proto.active'):
+        assert ls(page, k) is None, k
+    assert page.evaluate('FK.pins.all().length + FK.recent.all().length + FK.patients.all().length') == 0
+
+
+def test_restore_ignores_session_only_keys_in_file_and_leaves_phone_ones(page, app_url, tmp_path):
+    boot(page, app_url)
+    here = page.evaluate('''() => { const p = FK_DATA.protocols[0]; return JSON.stringify({ id: p.id, step: p.steps[0].id, started: 1 }); }''')
+    page.evaluate('([a, f]) => { localStorage.setItem("fk.proto.active", a); localStorage.setItem("fk.lastFix", f); }', [here, '{"lat":1,"lon":2,"t":3}'])
+    pick(page, tmp_path, backup_file({'fk.proto.active': '{"id":"x"}', 'fk.lastFix': V5_LS['fk.lastFix'], 'fk.night': 'true'}))
+    restore_now(page)
+    assert ls(page, 'proto.active') == here
+    assert ls(page, 'lastFix') == '{"lat":1,"lon":2,"t":3}'
+    assert ls(page, 'night') == 'true'
+
+
+def test_restore_replaces_keys_missing_from_file(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.pins': json.dumps(['p:bleeding']), 'fk.wps': '[]', 'fk.night': 'false', 'other.key': 'keep'})
+    pick(page, tmp_path, backup_file({'fk.night': 'true'}))
+    restore_now(page)
+    assert ls(page, 'night') == 'true'
+    assert ls(page, 'pins') is None and ls(page, 'wps') is None
+    assert page.evaluate("localStorage.getItem('other.key')") == 'keep'
+
+
+def test_restore_cancel_changes_nothing(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false'})
+    pick(page, tmp_path, backup_file({'fk.night': 'true'}))
+    page.wait_for_selector('#bkConfirm:not([hidden])')
+    page.click('#bkGo')
+    page.click('#bkNo')
+    assert page.is_hidden('#bkConfirm')
+    assert page.inner_text('#bkGo') == 'Restore'
+    assert ls(page, 'night') == 'false'
+
+
+def test_restore_second_tap_too_fast_is_ignored(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false'})
+    pick(page, tmp_path, backup_file({'fk.night': 'true'}))
+    page.wait_for_selector('#bkConfirm:not([hidden])')
+    page.click('#bkGo'); page.click('#bkGo')
+    page.wait_for_timeout(100)
+    assert ls(page, 'night') == 'false'
+    assert page.inner_text('#bkGo') == 'Confirm restore'
+
+
+def test_restore_is_atomic_when_storage_fills(page, app_url, tmp_path):
+    before = {'fk.night': 'false', 'fk.wps': '[]', 'fk.pins': json.dumps(['p:bleeding'])}
+    boot(page, app_url, before)
+    pick(page, tmp_path, backup_file({'fk.night': 'true', 'fk.wps': V5_LS['fk.wps'], 'fk.tq': V5_LS['fk.tq']}))
+    page.wait_for_selector('#bkConfirm:not([hidden])')
+    page.click('#bkGo')
+    page.wait_for_timeout(800)
+    # The third write of the restore fails once, as a full phone would; the rollback writes then succeed.
+    page.evaluate("""() => {
+      const orig = Storage.prototype.setItem; let n = 0;
+      Storage.prototype.setItem = function (k, v) { if (++n === 3) throw new DOMException('full', 'QuotaExceededError'); return orig.call(this, k, v); };
+    }""")
+    page.click('#bkGo')
+    assert 'nothing was changed' in page.inner_text('#bkMsg')
+    for k, v in before.items():
+        assert page.evaluate('k => localStorage.getItem(k)', k) == v, k
+    assert ls(page, 'tq') is None
+    assert page.evaluate('performance.getEntriesByType("navigation").length') == 1
+
+
+def test_restore_rejects_bad_files_and_writes_nothing(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false'})
+    bad = [backup_file({'fk.night': True}), backup_file(['fk.night']), backup_file(None), backup_file({'fk.night': 5}),
+           {'app': 'Other', 'version': '5', 'data': {}}, '{not json']
+    for obj in bad:
+        pick(page, tmp_path, obj)
+        page.wait_for_function("document.getElementById('bkMsg').textContent")
+        assert 'isn’t a Field Kit backup' in page.inner_text('#bkMsg'), obj
+        assert page.is_hidden('#bkConfirm')
+        page.click('#menuClose')
+        assert ls(page, 'night') == 'false'
+
+
+def test_restore_refuses_newer_backup_and_accepts_older(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false'})
+    pick(page, tmp_path, backup_file({'fk.night': 'true'}, version='999'))
+    page.wait_for_function("document.getElementById('bkMsg').textContent")
+    assert page.inner_text('#bkMsg') == 'This backup is from a newer version of Field Kit. Update the app first.'
+    assert page.is_hidden('#bkConfirm') and ls(page, 'night') == 'false'
+    page.click('#menuClose')
+    pick(page, tmp_path, backup_file({'fk.night': 'true'}, version='1'))
+    restore_now(page)
+    assert ls(page, 'night') == 'true'
+
+
+# ---------- Migration: a phone carrying v5 data ----------
+
+def test_v5_localstorage_boots_with_no_console_errors(page, app_url):
+    snapshot = dict(V5_LS)
+    boot(page, app_url, snapshot, clock=True)
+    # Stored tab and view are honoured (no hash given)
+    assert page.evaluate('[FK.tab(), FK.view()]') == ['tactical', 'ballistics']
+    assert page.evaluate("document.querySelector('.tabbar [aria-current=page]').dataset.tab") == 'tactical'
+    # Rifle profile is selectable and fills the load fields
+    assert page.input_value('#bProfile') == 'u1k2j3x'
+    page.select_option('#bProfile', 'p308')
+    assert page.input_value('#bMV') == '2600'
+    page.select_option('#bProfile', 'u1k2j3x')
+    assert page.input_value('#bMV') == '2850' and page.input_value('#bW') == '105'
+    assert page.input_value('#bRange') == '650'
+    # Waypoints are listed and the target is still the target
+    page.click('#tacSeg [data-view=position]')
+    names = page.locator('#wpList li .wname').all_inner_texts()
+    assert names == ['Truck', 'Water cache']
+    assert page.locator('#wpList li.target .wname').all_inner_texts() == ['Water cache']
+    # Tourniquet timer: running, 14:32 elapsed at the fixed clock, listed on the Emergency home
+    page.goto(page.url.split('#')[0] + '#/emergency')
+    page.wait_for_selector('#emActive .em-active')
+    assert 'TQ left leg' in page.inner_text('#emActive')
+    assert page.inner_text('#emActive b') == '0:14:32'
+    # Nothing was rewritten in a different shape
+    for k, v in snapshot.items():
+        if k in ('fk.tab', 'fk.view', 'fk.night', 'fk.bal', 'fk.lastFix'):
+            continue   # the app legitimately re-saves these on start
+        assert page.evaluate('k => localStorage.getItem(k)', k) == v, k

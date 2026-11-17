@@ -6,9 +6,11 @@
   const hashOf = r => '#/' + [r.tab, ...r.parts].join('/');
   let route = null;
 
+  const safeDecode = x => { try { return decodeURIComponent(x); } catch { return x; } };
+
   /* '#/<tab>/<part>/<part>' -> { tab, parts }. An empty or unknown tab means the stored tab. */
   function parse(hash) {
-    const segs = String(hash || '').replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
+    const segs = String(hash || '').replace(/^#\/?/, '').split('/').filter(Boolean).map(safeDecode);
     return TABS.includes(segs[0]) ? { tab: segs[0], parts: segs.slice(1) } : { tab: storedTab(), parts: [] };
   }
 

@@ -29,7 +29,7 @@ def test_deep_link_opens_tab(page, app_url):
 def test_unknown_tab_falls_back(page, app_url):
     page.goto(app_url + '#/nonsense/x')
     visible = [t for t in ('survival', 'tactical', 'emergency') if tab_visible(page, t)]
-    assert len(visible) == 1
+    assert visible == ['tactical']
     assert 'nonsense' not in page.url
 
 
@@ -78,3 +78,9 @@ def test_route_event_and_go_replace(page, app_url):
     assert page.evaluate('seen') == ['emergency', 'survival']
     page.go_back()  # replace left no entry for emergency, so this returns to the initial tactical route
     assert tab_visible(page, 'tactical')
+
+
+def test_malformed_address_does_not_break_startup(page, app_url):
+    page.goto(app_url + '#/emergency/%E0%A4%A')
+    assert tab_visible(page, 'emergency')
+    assert page.evaluate("typeof FK.route.go === 'function' && !!document.querySelector('#mLocate')")

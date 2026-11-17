@@ -3,7 +3,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
-  const APP_VERSION = '5';
+  const APP_VERSION = '6';
   const FULL_MSG = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.';
   let warnedAt = 0;
   const store = {

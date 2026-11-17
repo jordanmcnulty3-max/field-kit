@@ -272,10 +272,13 @@
     return Math.floor(b / cfg.compressions) * period + (b % cfg.compressions) * iv;
   }
   /* Queue one click on the audio clock, offsetMs from now. Late by more than a moment: drop it rather than bunch it.
-     Every click of a run goes through that run's own gain node, so Stop can silence what is already queued ahead. */
+     Nothing is queued while the audio is suspended (a call, a screen lock): its clock stands still, so everything queued
+     then would sound at once on resume. Every click of a run goes through that run's own gain node, so Stop can
+     silence what is already queued ahead. */
+  const audioLive = () => !!ac && ac.state === 'running';
   function click(offsetMs, high) {
     try {
-      if (!ac || !cpr.bus || offsetMs < -CPR_LATE_MS) return;
+      if (!audioLive() || !cpr.bus || offsetMs < -CPR_LATE_MS) return;
       const when = ac.currentTime + Math.max(0, offsetMs) / 1000;
       cpr.nodes = cpr.nodes.filter(n => n.end > ac.currentTime);
       const o = ac.createOscillator(), g = ac.createGain();
@@ -321,7 +324,10 @@
   function cprTick() {
     const cfg = cprCfg(), e = performance.now() - cpr.t0;
     // Sounds go onto the audio clock a moment ahead, so a late or throttled tick cannot drop or bunch beats.
+    // While the audio is suspended only the beats already past go by, so on resume the clicks start again on the beat.
+    const live = audioLive();
     for (let ms = beatMs(cpr.next, cfg); ms <= e + CPR_LOOKAHEAD_MS; ms = beatMs(cpr.next, cfg)) {
+      if (!live && ms >= e) break;
       click(ms - e, cpr.next % cfg.compressions === 0);
       cpr.next++;
     }

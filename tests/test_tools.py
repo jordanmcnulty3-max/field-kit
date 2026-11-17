@@ -727,3 +727,33 @@ def test_focus_returns_to_the_tool_button_after_close(page, app_url):
     page.click('#toolClose')
     page.wait_for_function("location.hash === '#/emergency'")
     page.wait_for_function("document.activeElement && document.activeElement.dataset.tool === 'rate'")
+
+
+# R3: nothing is queued while the audio is suspended, so resuming does not sound a burst of stacked clicks
+
+CAPTURE_AC = "(() => { const B = window.AudioContext; window.AudioContext = class extends B { constructor() { super(); window.__ac = this; } }; })();"
+
+
+def test_cpr_queues_no_clicks_while_audio_is_suspended_and_resumes_on_the_beat(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', init=FAKE_AUDIO + CAPTURE_AC)
+    page.click('#cprBtn')
+    page.clock.run_for(2000)
+    start = page.evaluate('__starts[0][0]')   # beat 0 sounds at the start of the run
+    page.evaluate("__ac.state = 'suspended'; 0")   # a phone call
+    n = page.evaluate('__starts.length')
+    page.clock.run_for(10_000)
+    assert page.evaluate('__starts.length') == n   # nothing queued for the suspended period
+    # the on-screen count kept going from elapsed time
+    elapsed = (page.evaluate('performance.now() / 1000') - start) * 1000
+    want = page.evaluate('e => FK.tools.cpr.state(e, { compressions: 30, breaths: 2, compressionOnly: false })', elapsed)
+    shown = count_text(page)
+    assert shown == '2 breaths' if want['phase'] == 'breaths' else abs(int(shown) - want['count']) <= 1
+    resumed = page.evaluate("__ac.state = 'running'; performance.now() / 1000")
+    page.clock.run_for(3000)
+    whens = [w for w, _, _ in page.evaluate('__starts')[n:]]
+    assert len(whens) >= 4                                        # scheduling continues afterwards
+    assert all(w >= resumed - 0.001 for w in whens)               # none in the past, none stacked at resume
+    assert min(b - a for a, b in zip(whens, whens[1:])) > 0.4     # no burst
+    iv, period = 60 / 110, 30 * 60 / 110 + 4
+    grid = [c * period + k * iv for c in range(3) for k in range(30)]
+    assert all(min(abs((w - start) - g) for g in grid) < 0.06 for w in whens)   # each lands on a beat

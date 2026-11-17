@@ -28,17 +28,18 @@
     {
       "id": "s2",
       "text": "Find where the blood is coming from. Open, cut or pull away clothing so you can see the wound.",
-      "detail": "Clothing can soak up and hide a large amount of blood, and there may be more than one wound. Check the arms and legs, the neck, armpits and groin, and the body front and back.\n\nSigns that bleeding is life-threatening: blood that keeps flowing steadily or spurts, a large amount of blood, blood pooling on the ground, or bleeding that will not stop when you press on it. As a rough guide, Stop the Bleed teaches that about half a can of soda (6 ounces) of blood loss, or a continuous steady flow, should be treated as serious. People are poor at judging blood volume, so if in doubt treat it as life-threatening.\n\nAlso treat it as life-threatening if the casualty becomes drowsy, dizzy, confused, or passes out."
+      "detail": "Clothing can soak up and hide a large amount of blood, and there may be more than one wound. Check the arms and legs, the neck, armpits and groin, and the body front and back.\n\nSigns that bleeding is life-threatening: blood that keeps flowing steadily or spurts, a large amount of blood, blood pooling on the ground, or bleeding that will not stop when you press on it. As a rough guide, Stop the Bleed teaches that about half a can of soda (6 ounces) of blood loss, or a continuous steady flow, should be treated as serious. People are poor at judging blood volume, so if in doubt treat it as life-threatening.\n\nAlso treat it as life-threatening if the casualty becomes drowsy, dizzy, confused, or passes out.\n\nIf you see organs (such as bowel) showing through a belly wound, do not press on them or push them back: cover them loosely with a clean, moist dressing (see the warning on the next step)."
     },
     {
       "id": "s3",
-      "text": "Press hard, directly on the bleeding spot, with gauze or clean cloth under your hands.",
-      "detail": "Put the pad right on the place the blood is coming from, not beside it, and push down hard with both hands. Lock your arms and lean your body weight onto it. Use just enough gauze or cloth to cover the wound; a big pile spreads your pressure out.\n\nDirect pressure is the first step for bleeding anywhere on the body, and it is what you do with your hands while someone gets a tourniquet or packing ready.\n\nIf you have no gauze or cloth, press with your gloved or bare hands. Do not waste time looking for the perfect dressing.",
+      "text": "Press hard, directly on the bleeding spot, with gauze or clean cloth under your hands. Not on organs showing through a belly wound: see the warning.",
+      "detail": "Put the pad right on the place the blood is coming from, not beside it, and push down hard with both hands. Lock your arms and lean your body weight onto it. Use just enough gauze or cloth to cover the wound; a big pile spreads your pressure out.\n\nDirect pressure is the first step for bleeding almost anywhere on the body (the exception is organs showing through a belly wound), and it is what you do with your hands while someone gets a tourniquet or packing ready.\n\nIf you have no gauze or cloth, press with your gloved or bare hands. Do not waste time looking for the perfect dressing.",
       "ask": {
         "q": "Is the bleeding life-threatening (spurting, steady flow, pooling, or not slowing with hard pressure)?",
         "yes": "s4",
         "no": "s11"
-      }
+      },
+      "warn": "Organs showing through a belly wound: do not press on them or push them back. Cover loosely with a clean, moist dressing."
     },
     {
       "id": "s4",
@@ -89,8 +90,9 @@
     {
       "id": "s11",
       "text": "Keep pressing until the bleeding stops, then wrap a firm bandage over the dressing.",
-      "detail": "Most bleeding that is not life-threatening stops with steady direct pressure on the wound.\n\nOnce it has stopped, a pressure dressing can keep it stopped while you move. If bleeding comes back through the dressing, press directly on the wound again until it stops; do not just add more layers.\n\nIf at any point the bleeding becomes heavy, spurts, or will not stop with pressure, go back and treat it as life-threatening.",
-      "end": true
+      "detail": "Most bleeding that is not life-threatening stops with steady direct pressure on the wound.\n\nOnce it has stopped, a pressure dressing can keep it stopped while you move. If bleeding comes back through the dressing, press directly on the wound again until it stops; do not just add more layers.\n\nIf at any point the bleeding becomes heavy, spurts, or will not stop with pressure, go back and treat it as life-threatening.\n\nOrgans showing through a belly wound (Red Cross): do not push them back in and do not press on them. Remove clothing from around the wound, wet clean dressings with clean warm water or saline, and lay them loosely over the wound; cover loosely with plastic wrap or foil if you have it. Lay the casualty on their back with knees bent unless that hurts (leave them as found if a head, neck or back injury is possible, unless you must move them). Keep them from getting cold or overheated, care for shock, and get them to medical care urgently.",
+      "end": true,
+      "warn": "Organs showing through a belly wound: do not press on them or push them back. Cover loosely with a clean, moist dressing."
     },
     {
       "id": "s12",
@@ -139,8 +141,8 @@
     },
     {
       "id": "s17",
-      "text": "Organs showing: do not push them back or press on them. Cover loosely with a clean, moist dressing. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "detail": "Remove clothing from around the wound. Do not push the organs back in and do not press on them.\n\nWet clean dressings (gauze or cloth) with clean, warm water or saline and lay them loosely over the wound and organs. If you have plastic wrap or aluminium foil, lay it loosely over the wet dressings.\n\nLay the casualty on their back with knees bent, unless that hurts. If a head, neck or back injury is possible, leave them as found unless you must move them for safety, CPR or to control bleeding.\n\nKeep them from getting cold or overheated, give care for shock (Shock protocol), and keep watching breathing and responsiveness. Stay with them.",
+      "text": "Organs showing: do not push them back or press on them. Cover loosely with a clean, moist dressing.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nRemove clothing from around the wound. Do not push the organs back in and do not press on them.\n\nWet clean dressings (gauze or cloth) with clean, warm water or saline and lay them loosely over the wound and organs. If you have plastic wrap or aluminium foil, lay it loosely over the wet dressings.\n\nLay the casualty on their back with knees bent, unless that hurts. If a head, neck or back injury is possible, leave them as found unless you must move them for safety, CPR or to control bleeding.\n\nKeep them from getting cold or overheated, give care for shock (Shock protocol), and keep watching breathing and responsiveness. Stay with them.",
       "warn": "Do not push organs back in. Do not press on them.",
       "log": "Abdominal wound covered with moist dressing",
       "end": true

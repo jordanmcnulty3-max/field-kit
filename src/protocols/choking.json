@@ -69,7 +69,7 @@
     {
       "id": "s7",
       "text": "Give 5 abdominal thrusts: from behind, fist just above the belly button, other hand over it, pull sharply in and up.",
-      "detail": "Have them stand up straight. Find their belly button with two fingers. Move behind them and wrap your arms around their waist; for a child, kneel behind them.\n\nMake a fist with your other hand and put the thumb side against the belly just above your fingers (just above the belly button). Cover the fist with your first hand.\n\nPull sharply inward and upward. Make each thrust forceful and separate from the last. Give up to 5.\n\nThis is the Heimlich maneuver.",
+      "detail": "Have them stand up straight. Find their belly button with two fingers. Move behind them and wrap your arms around their waist; for a child, kneel behind them. If they are in a wheelchair, give abdominal thrusts as usual; you may need to kneel behind the wheelchair, and remove the armrests if they are in the way (Red Cross).\n\nMake a fist with your other hand and put the thumb side against the belly just above your fingers (just above the belly button). Cover the fist with your first hand.\n\nPull sharply inward and upward. Make each thrust forceful and separate from the last. Give up to 5.\n\nThis is the Heimlich maneuver.",
       "ask": {
         "q": "Is the object out, or are they coughing, speaking or breathing again?",
         "yes": "s11",
@@ -79,7 +79,7 @@
     {
       "id": "s8",
       "text": "Give 5 chest thrusts instead: from behind, arms around the chest, fist on the middle of the breastbone, thrust firmly backward.",
-      "detail": "When: AHA 2025 says chest thrusts instead of abdominal thrusts in late pregnancy or when you cannot get your arms around the belly. Red Cross says use them for anyone obviously or known to be pregnant, too large to wrap your arms around, or in a wheelchair.\n\nHow (MedlinePlus, US National Library of Medicine): stand behind them and wrap your arms around their chest. Put the thumb side of your fist on the middle of the breastbone, level with the nipples, and cover it with your other hand. Give firm thrusts straight backward. Give up to 5, each forceful and separate.",
+      "detail": "When: AHA 2025 says chest thrusts instead of abdominal thrusts in late pregnancy or when you cannot get your arms around the belly. Red Cross says use them for anyone obviously or known to be pregnant, or too large to wrap your arms around. For someone in a wheelchair, Red Cross says give abdominal thrusts as usual and use chest thrusts only if abdominal thrusts are difficult.\n\nHow (MedlinePlus, US National Library of Medicine): stand behind them and wrap your arms around their chest. Put the thumb side of your fist on the middle of the breastbone, level with the nipples, and cover it with your other hand. Give firm thrusts straight backward. Give up to 5, each forceful and separate.",
       "ask": {
         "q": "Is the object out, or are they coughing, speaking or breathing again?",
         "yes": "s11",

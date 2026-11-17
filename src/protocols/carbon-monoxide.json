@@ -56,8 +56,8 @@
     },
     {
       "id": "s10",
-      "text": "Start CPR now, in fresh air: use the CPR, adult protocol (or CPR, child or CPR, infant).",
-      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nGet the casualty out of the fumes before starting CPR if you can do it quickly and safely.",
+      "text": "Start CPR now, in fresh air: use the CPR, adult protocol (or CPR, child or CPR, infant). Others exposed: come back to this protocol for them (see detail).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nGet the casualty out of the fumes before starting CPR if you can do it quickly and safely.\n\nEveryone else who shared the space also needs checking and medical care: anyone free to help should go through this protocol for them from the question \"Is anyone unresponsive and not breathing normally?\".",
       "end": true
     }
   ],

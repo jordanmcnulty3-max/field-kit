@@ -47,9 +47,19 @@
     {
       "id": "s4",
       "text": "Feel the cold skin gently. Is it hard, firm or waxy?",
-      "detail": "Frostnip (MedlinePlus) is the early stage: the skin is red and cold, and may turn white, but stays soft. It may prickle, tingle, sting or go numb.\n\nFrostbite (CDC, Red Cross, MedlinePlus): the skin is numb, white, greyish-yellow, blue or red, and feels unusually firm, hard or waxy. Blisters or black skin mean frostbite that needs emergency care (Red Cross). Most often the nose, ears, cheeks, chin, fingers and toes (CDC).\n\nNot sure? Answer Yes.",
+      "detail": "Frostnip: WMS (2019, AAFP summary) calls it a superficial, non-freezing cold injury of exposed skin. MedlinePlus: the early stage of frostbite: the skin is red and cold, and may turn white, but stays soft. It may prickle, tingle, sting or go numb.\n\nFrostbite (CDC, Red Cross, MedlinePlus): the skin is numb, white, greyish-yellow, blue or red, and feels unusually firm, hard or waxy. Blisters or black skin mean frostbite that needs emergency care (Red Cross). Most often the nose, ears, cheeks, chin, fingers and toes (CDC).\n\nNot sure? Answer Yes.",
       "ask": {
         "q": "Is the skin hard, firm or waxy?",
+        "yes": "s6",
+        "no": "s4b"
+      }
+    },
+    {
+      "id": "s4b",
+      "text": "Are there blisters, or black or dark skin?",
+      "detail": "Blisters and black skin are signs of frostbite that need emergency medical care (Red Cross). Soft skin with blisters or dark patches may be frostbite that has already thawed: treat it as frostbite, not frostnip.",
+      "ask": {
+        "q": "Are there blisters, or black or dark skin?",
         "yes": "s6",
         "no": "s5"
       }
@@ -81,15 +91,25 @@
       "detail": "Thawing and then refreezing does much more damage than leaving the part frozen a while longer (AHA, Red Cross, MedlinePlus). AHA: rewarm at the earliest opportunity, but only where there is no risk of refreezing.\n\nAnswer No if they must go back out into the cold, or walk out on the feet, before reaching shelter.",
       "ask": {
         "q": "Can you keep it from freezing again?",
-        "yes": "s9",
+        "yes": "s8b",
         "no": "s13"
       }
     },
     {
+      "id": "s8b",
+      "text": "Will they have to walk out on frostbitten feet afterwards, with nobody able to carry them?",
+      "detail": "Answer No if the feet are not frostbitten, if someone can carry them out, or if only the tips of the toes are affected.\n\nWMS 2019 (summarised by Medical Dialogues, 2019): avoid walking on a thawed foot unless only the tips of the toes are affected. WMS 2019 (summarised by AAFP, 2020): a frozen limb should not be used for walking or climbing until care has been reached. AHA 2024: avoid walking on frozen feet when possible. MedlinePlus: move thawed parts as little as possible.\n\nWMS 2019 (AAFP, Medical Dialogues) also says rapid rewarming in the field is for when definitive care is more than 2 hours away; otherwise let it thaw on the way.",
+      "ask": {
+        "q": "Will they have to walk out on frostbitten feet, with nobody to carry them?",
+        "yes": "s8c",
+        "no": "s9"
+      }
+    },
+    {
       "id": "s9",
-      "text": "Rewarm the part in clean water at 99 to 104°F (37 to 40°C): on your wrist, just slightly warmer than body heat. Keep it in until the skin is soft and colour returns, about 20 to 30 minutes.",
-      "warn": "Never use water above 104°F (40°C), a fire, stove, heater, hair dryer or heating pad: numb skin burns easily.",
-      "detail": "Lukewarm water at 99 to 104°F (37 to 40°C) is the preferred way to rewarm frostbite (AHA, Red Cross). No thermometer: the water should feel slightly warmer than body temperature on the inside of your wrist (AHA), warm, about body temperature, not hot (Red Cross); CDC: warm to the touch. Animal studies found water at 113°F (45°C) harmful (AHA).\n\nKeep the water moving (MedlinePlus) and top it up with warm water as it cools, stirring it in away from the frozen part, so it stays in the range.\n\nHow long: until the skin is soft and normal colour and feeling return (Red Cross, MedlinePlus). Studies used 20 to 30 minutes (AHA). Rewarming is often very painful, and the part may swell and change colour (MedlinePlus).\n\nNo way to use water: let it thaw in warm air, or against the casualty's own warm skin, such as in an armpit (AHA, Red Cross). For ears, nose and cheeks, hold a warm wet cloth on them, changing it often (MedlinePlus).",
+      "text": "Rewarm the part in clean water at 99 to 102°F (37 to 39°C). Keep it in until the skin is soft and colour returns, usually 20 to 30 minutes.",
+      "warn": "Water at 113°F (45°C) harmed tissue in studies. Never use hot water, a fire, stove, heater, hair dryer or heating pad: numb skin burns easily.",
+      "detail": "Water temperature: AHA 2024 (Class 1) and the Red Cross give 99 to 104°F (37 to 40°C). WMS 2019 (AAFP summary) gives 98.6 to 102.2°F (37 to 39°C), kept in range with a thermometer. 99 to 102°F (37 to 39°C) fits both. Animal studies found water at 113°F (45°C) harmful (AHA).\n\nNo thermometer: AHA: the water should feel slightly warmer than body temperature on the inside of your wrist. WMS (AAFP summary): put an uninjured hand or foot in the water for 30 seconds to test it. Red Cross: warm, about body temperature, not hot; CDC: warm to the touch.\n\nKeep the water moving (MedlinePlus) and top it up with warm water as it cools, stirring it in away from the frozen part, so it stays in the range.\n\nHow long: until the skin is soft and normal colour and feeling return (Red Cross, MedlinePlus); WMS: until soft and pliable, red or purple, typically within 30 minutes. Studies used 20 to 30 minutes (AHA). Rewarming is often very painful, and the part may swell and change colour (MedlinePlus).\n\nNo way to use water: let it thaw in warm air, or against the casualty's own warm skin, such as in an armpit (AHA, Red Cross). For ears, nose and cheeks, hold a warm wet cloth on them, changing it often (MedlinePlus).",
       "timer": {
         "seconds": 1800,
         "label": "Rewarm frostbite (20 to 30 min)"
@@ -116,8 +136,14 @@
     },
     {
       "id": "s13",
-      "text": "Do not thaw it yet. Pad and cover it, keep the rest of the body warm, and move to a place where it can stay warm. Then rewarm it as this protocol describes.",
-      "detail": "AHA: rewarm in the field only where there is no risk of refreezing. MedlinePlus: if refreezing cannot be prevented, it may be better to wait until the person reaches a warm, safe place.\n\nAvoid walking on frozen feet where you can (AHA). Once the feet are thawed, move them as little as possible (MedlinePlus): a casualty with thawed frostbitten feet should be carried.\n\nThe part may thaw on its own on the way. Keep it covered and protect it from refreezing.\n\nWhen you reach shelter, open this protocol again and rewarm the part in lukewarm water.",
+      "text": "Do not thaw it yet. Pad and cover it, keep the rest of the body warm, move to a place where it can stay warm, and get them to medical care.",
+      "detail": "AHA: rewarm in the field only where there is no risk of refreezing. MedlinePlus: if refreezing cannot be prevented, it may be better to wait until the person reaches a warm, safe place.\n\nAvoid walking on frozen feet where you can (AHA). Once the feet are thawed, move them as little as possible (MedlinePlus): a casualty with thawed frostbitten feet should be carried.\n\nThe part may thaw on its own on the way. Keep it covered and protect it from refreezing.\n\nWhen you reach shelter, open this protocol again and rewarm the part in lukewarm water. Frostbite needs prompt medical care (AHA).",
+      "end": true
+    },
+    {
+      "id": "s8c",
+      "text": "Do not rewarm the feet before the walk out: pad and protect them, keep the rest of the body warm, and get to medical care. Rewarm once they can be carried or reach care.",
+      "detail": "WMS 2019 (Medical Dialogues summary): avoid walking on a thawed foot unless only the tips of the toes are affected. AHA 2024 also says to avoid walking on frozen feet when possible, so walking out on them is a trade-off, not a safe choice; do it only when there is no other way out.\n\nKeep the feet dry, padded and protected from knocks and further cold. Do not let them thaw and refreeze on the way (AHA, Red Cross).\n\nIf the feet have already thawed on their own, keep them padded and protected and avoid walking on them wherever you can (Medical Dialogues summary of WMS 2019; MedlinePlus: move thawed parts as little as possible).\n\nFrostbitten hands or face can still be rewarmed in lukewarm water as this protocol describes, if they will not refreeze.\n\nOnce they reach a place where they can rest and be carried, or reach care, rewarm the feet as this protocol describes.",
       "end": true
     },
     {
@@ -136,7 +162,7 @@
   "donts": [
     "Do not rub or massage frostbitten or frostnipped skin.",
     "Do not thaw frostbite if it could freeze again.",
-    "Do not rewarm with water hotter than 104°F (40°C), or with a fire, stove, heater, heating pad or hair dryer.",
+    "Do not rewarm with water hotter than 102°F (39°C), or with a fire, stove, heater, heating pad or hair dryer.",
     "Do not break, drain or remove blisters.",
     "Do not walk on frozen feet if you can avoid it, and carry someone whose frostbitten feet have been thawed.",
     "Do not give alcohol."
@@ -172,6 +198,16 @@
       "name": "MedlinePlus (US National Library of Medicine), How to prevent frostbite and hypothermia (frostnip), reviewed 2026-07-15",
       "year": 2026,
       "url": "https://medlineplus.gov/ency/patientinstructions/000866.htm"
+    },
+    {
+      "name": "American Family Physician, Frostbite: Recommendations for Prevention and Treatment from the Wilderness Medical Society (Armstrong, AFP 2020;101(7):440-442), summarising the WMS frostbite guideline 2019 update (WEM 2019;30(4 suppl):S19-S32)",
+      "year": 2020,
+      "url": "https://www.aafp.org/pubs/afp/issues/2020/0401/p440.html"
+    },
+    {
+      "name": "Speciality Medical Dialogues, Frostbite treatment and prevention: New Practice Guidelines (30 Jul 2019), summarising the WMS frostbite guideline 2019 update",
+      "year": 2019,
+      "url": "https://speciality.medicaldialogues.in/frostbite-treatment-and-prevention-new-practice-guidelines"
     }
   ],
   "reviewed": "2026-11-17"

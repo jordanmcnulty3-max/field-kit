@@ -52,8 +52,8 @@
     },
     {
       "id": "s6",
-      "text": "Start CPR with rescue breaths now: use the CPR, adult protocol (or CPR, child or CPR, infant). Keep going as long as you can.",
-      "detail": "WMS: for a lightning casualty without a pulse, support the airway and breathing and do CPR. AHA 2025: cardiac arrest from electrical injury gets standard resuscitation, including rapid use of an AED; some people have recovered well after up to 70 minutes of CPR. CDC: if they are not breathing and you are trained, give rescue breaths; if you cannot, do compressions.\n\nOn cold or wet ground, put a jacket, blanket or plastic sheet under them to reduce heat loss (CDC).\n\nIf they may have been thrown or fallen, move the head and neck as little as you can: lightning injuries can look like spinal injuries (WMS).\n\nWhen the others are seen to, and if this casualty recovers, come back to this protocol to check for other injuries.",
+      "text": "Start CPR with rescue breaths now: use the CPR, adult protocol (or CPR, child or CPR, infant). Keep going as long as you can. Others struck: come back to this protocol for them (see detail).",
+      "detail": "WMS: for a lightning casualty without a pulse, support the airway and breathing and do CPR. AHA 2025: cardiac arrest from electrical injury gets standard resuscitation, including rapid use of an AED; some people have recovered well after up to 70 minutes of CPR. CDC: if they are not breathing and you are trained, give rescue breaths; if you cannot, do compressions.\n\nOn cold or wet ground, put a jacket, blanket or plastic sheet under them to reduce heat loss (CDC).\n\nIf they may have been thrown or fallen, move the head and neck as little as you can: lightning injuries can look like spinal injuries (WMS).\n\nOther people struck: anyone else who can help should check them using this protocol (from the question \"Is anyone unresponsive and not breathing normally?\"), treating anyone else who looks dead first. If this casualty recovers, come back to this protocol to check them for other injuries.",
       "end": true
     },
     {

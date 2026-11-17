@@ -95,7 +95,7 @@
       "id": "s11",
       "text": "Handle them very gently and keep them lying flat. Do not let them stand, walk or exert themselves. Move their arms and legs as little as possible.",
       "detail": "Rough handling, sitting or standing them up, walking, and moving the limbs can trigger a dangerous heart rhythm and cardiac arrest in a very cold person, and send cold blood from the limbs to the core (WMS). Keep them horizontal, especially when lifting them out of water or a crevasse (WMS).\n\nThe core temperature can keep falling for a while after they are out of the cold (afterdrop, WMS).",
-      "warn": "Do not rub or massage them. No warm shower or bath."
+      "warn": "Do not rub or massage them. No warm shower or bath. If they are unresponsive but breathing, lie them on their side (Recovery position protocol)."
     },
     {
       "id": "s12",
@@ -116,11 +116,11 @@
     },
     {
       "id": "s15",
-      "text": "Keep checking their breathing while you warm and move them. Has their breathing stopped?",
+      "text": "Keep checking their breathing while you warm and move them. Has their breathing stopped, or are they only gasping?",
       "detail": "Check for up to 1 minute each time: breathing can be very slow (WMS).",
       "tool": "rate",
       "ask": {
-        "q": "Has their breathing stopped?",
+        "q": "Has their breathing stopped, or are they only gasping?",
         "yes": "s2",
         "no": "s16"
       }

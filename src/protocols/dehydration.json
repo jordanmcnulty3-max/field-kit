@@ -36,7 +36,7 @@
       "text": "Are they confused, very drowsy or hard to wake, or have they had a seizure?",
       "detail": "Confusion, seizures, delirium or unconsciousness are signs of severe dehydration or another serious problem (MedlinePlus). Someone who is not fully alert must not be given drinks (AHA 2024).",
       "ask": {
-        "q": "Are they confused, very drowsy or hard to wake?",
+        "q": "Are they confused, very drowsy or hard to wake, or have they had a seizure?",
         "yes": "s21",
         "no": "s3"
       }
@@ -82,7 +82,7 @@
     {
       "id": "s8",
       "text": "Evacuate if they cannot keep fluids down, are getting worse, pass little or no urine, or have dizziness, bloody or black stool, or bad belly pain.",
-      "detail": "Red Cross lists these as needing emergency care: signs of shock; no tears; vomiting or diarrhoea for more than a few days; unable to keep fluids down; dizziness; very little or no urine; bloody or black stool; sharp or persistent belly pain; sweet-smelling breath; sunken eyes, cheeks or belly (or a baby's soft spot); skin that stays tented when pinched.\n\nChild or baby: a child with no urine for more than 6 hours, or a baby with no wet diaper for 3 hours or more, needs a health care provider (Red Cross).\n\nMedlinePlus: get emergency help for loss of consciousness, a change in alertness, fever over 102°F (38.8°C), signs of heat stroke such as a rapid pulse or rapid breathing, or no improvement despite treatment. Severe dehydration may need IV fluids.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Red Cross lists these as needing emergency care: signs of shock; no tears; vomiting or diarrhoea for more than a few days; unable to keep fluids down; dizziness; very little or no urine; bloody or black stool; sharp or persistent belly pain; sweet-smelling breath; sunken eyes, cheeks or belly (or a baby's soft spot); skin that stays tented when pinched.\n\nChild or baby: a child with no urine for more than 6 hours, or a baby with no wet diaper for 3 hours or more, needs a health care provider (Red Cross).\n\nMedlinePlus: get emergency help for loss of consciousness, a change in alertness, fever over 102°F (38.9°C), signs of heat stroke such as a rapid pulse or rapid breathing, or no improvement despite treatment. Severe dehydration may need IV fluids.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },
     {
@@ -120,7 +120,7 @@
     "Evacuate urgently: confusion, seizures, drowsiness or unresponsiveness, or signs of shock.",
     "Evacuate urgently: unable to keep fluids down, or vomiting or diarrhoea for more than a few days.",
     "Evacuate: very little or no urine (a child with none for more than 6 hours, a baby with no wet diaper for 3 hours), bloody or black stool, or sharp or persistent belly pain (Red Cross).",
-    "Evacuate: fever over 102°F (38.8°C), or not improving despite drinking (MedlinePlus)."
+    "Evacuate: fever over 102°F (38.9°C), or not improving despite drinking (MedlinePlus)."
   ],
   "sources": [
     {

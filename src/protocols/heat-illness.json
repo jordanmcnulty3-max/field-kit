@@ -60,22 +60,27 @@
       "id": "s5",
       "text": "Put them in the coldest water you have, up to the neck, holding their head above water. Stop after 15 minutes or as soon as they are thinking clearly, whichever comes first.",
       "warn": "Someone must hold them the whole time so their head cannot go under. Never leave them alone in the water.",
-      "detail": "Cold-water immersion of the whole body from the neck down, for 15 minutes or until their thinking returns to normal, whichever comes first, is the best cooling method (AHA 2024, Red Cross; WMS: the gold standard). AHA gives the same advice for children.\n\nWater: use the coldest you have (WMS). AHA: water anywhere from 36 to 79°F (2 to 26°C) cooled at similar rates, so getting them into water matters more than how cold it is. A calm, shallow stream, lake edge, tub, or a tarp or groundsheet held up at the edges and filled with water all work (AHA 2025 lists tarp-assisted cooling for professionals).\n\nIf they become unresponsive or stop breathing normally, take them out and start CPR (CPR, adult protocol, or CPR, child).\n\nTrained users with a rectal thermometer: AHA 2024 gives a target of 102.2°F (39°C); AHA 2025 (professionals) stops active cooling at 101.5°F (38.6°C).",
+      "detail": "Cold-water immersion of the whole body from the neck down, for 15 minutes or until their thinking returns to normal, whichever comes first, is the best cooling method (AHA 2024, Red Cross; WMS: the gold standard). AHA gives the same advice for children.\n\nWater: use the coldest you have (WMS). AHA: water anywhere from 36 to 79°F (2 to 26°C) cooled at similar rates, so getting them into water matters more than how cold it is. A calm, shallow stream, lake edge, tub, or a tarp or groundsheet held up at the edges and filled with water all work. AHA 2025 (Part 10, section 16, recommendation 3, Class 2a, written for professionals) lists tarp-assisted ice-water cooling for life-threatening hyperthermia when ice-water immersion is not available.\n\nIf they become unresponsive or stop breathing normally, take them out and start CPR (CPR, adult protocol, or CPR, child).\n\nTrained users with a rectal thermometer: AHA 2024 gives a target of 102.2°F (39°C); AHA 2025 (professionals) stops active cooling at 101.5°F (38.6°C).",
       "timer": {
         "seconds": 900,
         "label": "Cold-water immersion (15 min max)"
       },
-      "log": "Cooled in cold water"
+      "log": "Cooled in cold water",
+      "ask": {
+        "q": "Are they thinking clearly now?",
+        "yes": "s7",
+        "no": "s5b"
+      }
     },
     {
       "id": "s7",
-      "text": "Once they are thinking clearly, take them out, dry them and lie them in the shade. Watch them closely: if confusion comes back, cool them again.",
-      "detail": "After cooling, keep watching their alertness and breathing (Red Cross). Confusion that returns means heat stroke is back, and the cooling steps apply again (AHA 2024: cool until neurological symptoms resolve).\n\nIf they are unresponsive but breathing, or vomiting, lie them on their side (Recovery position protocol)."
+      "text": "Thinking clearly: stop cooling, take them out of any water, dry them and lie them in the shade. Watch closely. If confusion comes back, cool again: soak and fan, or immerse for up to 15 minutes.",
+      "detail": "After cooling, keep watching their alertness and breathing (Red Cross). Confusion that returns means heat stroke is back, and the cooling steps apply again (AHA 2024: immerse for 15 minutes or until neurological symptoms resolve, whichever comes first). No source states this re-cooling rule; it follows from the AHA definition of heat stroke.\n\nIf they are unresponsive but breathing, or vomiting, lie them on their side (Recovery position protocol)."
     },
     {
       "id": "s8",
       "text": "Once fully alert and not vomiting, let them sip cool drinks: a sports drink or water. Evacuate, even if they recover.",
-      "warn": "No drinks if they are drowsy or confused, vomiting, or cannot swallow.",
+      "warn": "No drinks if they are drowsy or confused, vomiting, or cannot swallow. If they have drunk large amounts of plain water and are getting worse, give no more plain water and evacuate.",
       "detail": "AHA 2024: give cool liquids to an overheated person who can swallow. WMS: people with heat stroke need IV fluids, so drinks are a stopgap.\n\nEvacuation: AHA 2024 says to get emergency help for anyone with heat stroke. WMS (field guideline) allows a healthy person with exertional heat stroke who is back to normal mental state and moving normally within 2 hours of treatment to be released to self-care, but says heat stroke that was not caused by exertion (for example an older or ill person in a heat wave) always needs transport to hospital.\n\nHeat stroke can damage muscles, kidneys, blood clotting and other organs even after the person seems better (AHA 2024).",
       "end": true
     },
@@ -95,9 +100,14 @@
       }
     },
     {
+      "id": "s5b",
+      "text": "15 minutes up and still confused: take them out of the water. Keep cooling by soaking and fanning (see detail) and evacuate urgently.",
+      "detail": "AHA 2024 and Red Cross limit cold-water immersion to 15 minutes or until thinking returns to normal, whichever comes first. Neither says what to do when confusion persists after 15 minutes; continuing with the non-immersion cooling methods (AHA 2024, Red Cross) while evacuating is a judgement, not a source rule.\n\nSoaking and fanning: loosen or remove clothing, wet all the skin with the coldest water you have, and fan hard; add ice or cold packs on the cheeks, palms and soles, or all over (WMS).\n\nThe next step has the stop rule."
+    },
+    {
       "id": "s9",
-      "text": "Still confused: keep cooling without a break, and evacuate urgently. Look again for any water deep enough to put them in.",
-      "detail": "Keep soaking and fanning (and ice or cold packs) all the way, including while you move them. If you reach water deep enough, immerse them as in the cold-water step (15 minutes or until they are thinking clearly).\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are unresponsive but breathing, or vomiting, lie them on their side (Recovery position protocol). If they stop breathing normally, start CPR.",
+      "text": "Still confused: keep soaking and fanning, and evacuate urgently. Stop when they are thinking clearly or start shivering, then watch and re-cool if confusion returns.",
+      "detail": "Keep soaking and fanning (and ice or cold packs) on the way out. If they have not yet been in cold water and you reach water deep enough, immerse them as in the cold-water step (15 minutes or until they are thinking clearly).\n\nThe stop rule (thinking clearly, or shivering) is a judgement: none of the sources opened gives a field stop rule for cooling without a thermometer when immersion is not used. Red Cross: continue cooling for 20 minutes, or until their condition improves or EMS personnel arrive. Off-grid, EMS will not arrive.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are unresponsive but breathing, or vomiting, lie them on their side (Recovery position protocol). If they stop breathing normally, start CPR.",
       "end": true
     },
     {
@@ -108,7 +118,7 @@
     {
       "id": "s11",
       "text": "If they are fully alert, can swallow and are not vomiting, give a cool sports drink, milk or coconut water to sip, or water. Not too fast. No salt tablets.",
-      "warn": "No drinks if they vomit, become drowsy or confused, or cannot swallow: lie them on their side, keep cooling, and treat it as getting worse.",
+      "warn": "No drinks if they vomit, become drowsy or confused, or cannot swallow: lie them on their side, keep cooling, and treat it as getting worse. If they have drunk large amounts of plain water and are getting worse, give no more plain water and evacuate.",
       "detail": "AHA 2024: help an overheated or dehydrated person drink if they are not in shock, not confused and able to swallow. A drink with carbohydrate and electrolytes, such as a sports drink, is preferred to plain water, but water is fine if that is all you have (AHA 2024, Red Cross). Red Cross also lists coconut water and milk. Do not let them drink too quickly (Red Cross).\n\nDrink to thirst (WMS). Forcing large amounts of water on a schedule can cause exercise-associated hyponatremia (low blood sodium), which can look like heat exhaustion (WMS). Suspect it if they have been drinking a lot and are getting worse.\n\nSalt tablets do not help and can make dehydration worse (Red Cross; NIOSH: avoid).\n\nHeat cramps: once they have drunk, lightly stretch the muscle and gently massage it (Red Cross). NIOSH: water plus a sports drink or snack every 15 to 20 minutes.\n\nStop drinks, lie them on their side (Recovery position protocol) and get help if they vomit, cannot take fluids, or their alertness changes (Red Cross).",
       "log": "Oral fluids given"
     },

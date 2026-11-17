@@ -73,18 +73,18 @@
     },
     {
       "id": "s7",
-      "text": "Was the person stung many times (20 or more hornet stings, or a very large number of bee stings)?",
-      "detail": "Massive stinging can kill even without an allergy: AHA 2024 gives at least 20 stings by large hornets, or hundreds of honeybee stings, as amounts that have been fatal.",
+      "text": "Were they stung dozens of times (bees, wasps, yellow jackets or hornets), or is it a child with several stings?",
+      "detail": "Group judgement, not from a source (see open questions): no source opened gives a number of stings at which to seek care, or a separate number for children. The app evacuates at dozens of stings from any of these insects, or any child with several stings, because a child's smaller body reaches a dangerous amount of venom with fewer stings.\n\nFor context only, not as the trigger: AHA 2024 says death from massive envenomation can occur, generally from at least 20 stings by large hornets or hundreds of honeybee stings. Wasps, yellow jackets and hornets can sting again and again (AHA 2024).",
       "ask": {
-        "q": "Were they stung many times (20 or more hornet stings, or very many bee stings)?",
+        "q": "Stung dozens of times, or a child with several stings?",
         "yes": "s8",
         "no": "s9"
       }
     },
     {
       "id": "s8",
-      "text": "Many stings: evacuate urgently, even if they seem well now. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Carry on with the care below.",
-      "detail": "AHA 2024 gives at least 20 large hornet stings or hundreds of honeybee stings as amounts that have killed. AHA does not give a number at which to evacuate; evacuating at these numbers is the group's judgement (see open questions).\n\nWatch closely for a severe allergic reaction, vomiting, weakness, confusion or trouble breathing, and keep them warm and resting."
+      "text": "Many stings: evacuate, even if they seem well now. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Carry on with the care below.",
+      "detail": "Evacuating at this number is the group's judgement (see the previous step and open questions).\n\nWatch closely for a severe allergic reaction (Anaphylaxis (severe allergic reaction) protocol), and for headache, fever, nausea or dizziness, which poison.org lists after multiple stings. Vomiting, weakness or confusion: evacuate urgently. Keep them warm and resting."
     },
     {
       "id": "s9",
@@ -109,8 +109,8 @@
     },
     {
       "id": "s12",
-      "text": "Stay with them and watch for a severe allergic reaction for at least the next hour. Check the sting over the next days for infection.",
-      "detail": "Have someone stay with the stung person to watch for an allergic reaction (CDC/NIOSH). Anaphylaxis can start within minutes of a sting. The watch period is the group's judgement; no source opened gives one.\n\nIf swelling of the face, lips or tongue, trouble breathing or swallowing, or faintness starts at any time: use the Anaphylaxis (severe allergic reaction) protocol now.\n\nWatch for infection over the next several days: increasing redness, swelling or pain (MedlinePlus).\n\nSomeone who has had a severe, body-wide reaction to a sting should see a doctor afterwards about allergy testing and carrying epinephrine (MedlinePlus).",
+      "text": "Stay with them and watch for a severe allergic reaction for at least an hour. Headache, fever, nausea, dizziness, vomiting, weakness or confusion after several stings: evacuate.",
+      "detail": "Have someone stay with the stung person to watch for an allergic reaction (CDC/NIOSH). Anaphylaxis can start within minutes of a sting. The watch period is the group's judgement; no source opened gives one.\n\nIf swelling of the face, lips or tongue, trouble breathing or swallowing, or faintness starts at any time: use the Anaphylaxis (severe allergic reaction) protocol now.\n\nAfter multiple stings: poison.org says a person stung several times can develop headache, fever, nausea and dizziness. Vomiting, weakness and confusion are added by the group as worse signs. Any of these: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWatch for infection over the next several days: increasing redness, swelling or pain (MedlinePlus).\n\nSomeone who has had a severe, body-wide reaction to a sting should see a doctor afterwards about allergy testing and carrying epinephrine (MedlinePlus).",
       "end": true
     },
     {
@@ -128,13 +128,13 @@
     {
       "id": "s22",
       "text": "Sting on the eyeball: do not rub it or press on it, and do not try to pull a stinger out of the eye. Use the Eye injury protocol and get medical care urgently.",
-      "detail": "AHA 2024 (Class 1): stings to the eye should be evaluated by a trained medical professional. Stings to the eyeball itself, not the eyelid or face, can cause permanent loss of vision (AHA 2024).\n\nNo source opened describes removing a stinger from the eyeball; the Eye injury protocol says to leave objects in the eye in place and tape a shield or cup over it.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWash and cool any other stings on the skin as in this protocol's washing and cold pack steps.",
+      "detail": "AHA 2024 (Class 1): stings to the eye should be evaluated by a trained medical professional. Stings to the eyeball itself, not the eyelid or face, can cause permanent loss of vision (AHA 2024).\n\nNo source opened describes removing a stinger from the eyeball; the Eye injury protocol says to leave objects in the eye in place and tape a shield or cup over it.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWash and cool any other stings on the skin as in this protocol's washing and cold pack steps.\n\nIf they were also stung dozens of times, or it is a child with several stings, or they develop headache, fever, nausea, dizziness, vomiting, weakness or confusion, treat the evacuation as urgent (see the evacuate list).",
       "end": true
     },
     {
       "id": "s30",
-      "text": "Get them out of the water. Lift or pull off any tentacles without touching them with bare skin: gloves, a towel or plastic over your hand, a stick or plastic utensil. Otherwise rinse with seawater.",
-      "detail": "AHA 2024 (Class 2a): remove remaining tentacles by lifting or pulling them off while avoiding contact with your skin; if that is not possible, rinsing with seawater is a reasonable alternative. In a model study, scraping caused more damage than pulling tentacles off or rinsing with seawater (AHA 2024), so do not scrape.\n\nRed Cross: move the person out of the water as soon as possible; remove tentacles with a gloved hand, a hand wrapped in plastic or a towel, a blunt stick or a plastic utensil; if none is available, rinse with seawater. Do not rub the area.\n\nStingray, sea urchin or spiny fish (Red Cross): flush the wound with tap water or ocean water and keep the injured part still.\n\nThis guidance is written for North American waters (AHA 2024).",
+      "text": "Get them out of the water. Tentacles: lift them off without bare skin (glove, towel, stick) or rinse with seawater. Stingray, urchin or spiny fish: flush with tap or sea water, keep it still.",
+      "detail": "AHA 2024 (Class 2a): remove remaining tentacles by lifting or pulling them off while avoiding contact with your skin; if that is not possible, rinsing with seawater is a reasonable alternative. In a model study, scraping caused more damage than pulling tentacles off or rinsing with seawater (AHA 2024), so do not scrape.\n\nRed Cross: move the person out of the water as soon as possible; remove tentacles with a gloved hand, a hand wrapped in plastic or a towel, a blunt stick or a plastic utensil; if none is available, rinse with seawater. Do not rub the area.\n\nStingray, sea urchin or spiny fish (Red Cross): flush the wound with tap water or ocean water and keep the injured part still.\n\nThis guidance is written for North American waters (AHA 2024).\n\nHeavy bleeding from a stingray or other wound: use the Severe bleeding protocol. A deep wound to the chest or belly (stingray barbs can go deep): use the Trauma check (MARCH) protocol and evacuate urgently.",
       "log": "Tentacles removed"
     },
     {
@@ -166,7 +166,8 @@
   ],
   "evacuate": [
     "Evacuate urgently: any sign of a severe allergic reaction, even after epinephrine (Anaphylaxis (severe allergic reaction) protocol).",
-    "Evacuate urgently: very many stings (20 or more large hornet stings, or a very large number of bee stings), even if they seem well (group judgement based on AHA 2024).",
+    "Evacuate: dozens of stings from bees, wasps, yellow jackets or hornets, or a child with several stings, even if they seem well (group judgement; AHA 2024 gives at least 20 large hornet stings or hundreds of honeybee stings as amounts that have killed).",
+    "Evacuate: headache, fever, nausea, dizziness, vomiting, weakness or confusion after several stings (poison.org lists the first four).",
     "Evacuate: a sting to the eyeball (AHA 2024).",
     "Evacuate: jellyfish or sea stings with trouble breathing, shock, severe pain, a sting to the face or neck, a known lethal jellyfish, or an unknown sea creature (AHA 2024, Red Cross).",
     "Get medical care: signs of infection over the following days (MedlinePlus)."
@@ -199,6 +200,11 @@
       "name": "US Centers for Disease Control and Prevention (NIOSH), Insects and Scorpions at Work, last reviewed 28 Sep 2026",
       "year": 2026,
       "url": "https://www.cdc.gov/niosh/outdoor-workers/about/insects-and-scorpions.html"
+    },
+    {
+      "name": "National Capital Poison Center (Poison Control), Bee stings: is it an allergic reaction?",
+      "year": 2026,
+      "url": "https://www.poison.org/articles/2012-jun/bee-stings-is-it-an-allergic-reaction"
     }
   ],
   "reviewed": "2026-11-17"

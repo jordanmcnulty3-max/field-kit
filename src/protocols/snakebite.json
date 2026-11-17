@@ -52,7 +52,7 @@
     {
       "id": "s5",
       "text": "Keep them calm and still, sitting or lying down. Keep a bitten arm or leg still and below the level of the heart. Do not raise it.",
-      "detail": "Rest and keep the bitten limb still, and keep their effort to a minimum, as long as this does not delay getting them to medical care (AHA 2024, Class 2a). Moving the muscles spreads venom faster: in one human study, walking for 10 minutes or more increased the spread of an injected tracer (AHA 2024).\n\nHow high to hold the limb: the sources differ.\n- Red Cross: keep the injured area still and below the level of the heart.\n- WMS 2015 (grade 2C): keep it at the level of the heart; raising it above the heart may spread venom through the body, and lowering it may increase swelling.\n- CDC: sit or lie down with the bite in a comfortable, neutral position.\nAll agree: do not raise it above the heart. The app uses the Red Cross wording.\n\nA splint can help keep the limb still, but it must not squeeze the limb (WMS 2015: splinting without compression; keep joints in a comfortable working position). Splinting must not delay leaving.\n\nDo not wrap the limb tightly with a pressure bandage (see the don'ts and the detail of the next step).",
+      "detail": "Rest and keep the bitten limb still, and keep their effort to a minimum, as long as this does not delay getting them to medical care (AHA 2024, Class 2a). Moving the muscles spreads venom faster: in one human study, walking for 10 minutes or more increased the spread of an injected tracer (AHA 2024).\n\nHow high to hold the limb: the sources differ.\n- Red Cross: keep the injured area still and below the level of the heart.\n- WMS 2015 (grade 2C): keep it at the level of the heart; raising it above the heart may spread venom through the body, and lowering it may increase swelling.\n- CDC: sit or lie down with the bite in a comfortable, neutral position.\nAll agree: do not raise it above the heart. The app uses the Red Cross wording.\n\nA splint can help keep the limb still, but it must not squeeze the limb (WMS 2015: splinting without compression; keep joints in a comfortable working position). Splinting must not delay leaving.\n\nDo not wrap the limb tightly with a pressure bandage (see the don'ts and the detail of the next step).\n\nBite on the face, neck or body (not a limb): there is no limb to position. Keep them still and calm; swelling of the face or neck can threaten the airway, so evacuate urgently and watch their breathing all the time (group judgement; the sources give no separate advice).",
       "warn": "No tourniquet, no tight or pressure bandage, no cutting, no sucking, no ice.",
       "log": "Bitten limb kept still"
     },
@@ -76,8 +76,8 @@
     },
     {
       "id": "s9",
-      "text": "Keep them from getting cold or overheated. Treat for shock if needed. No alcohol, aspirin, ibuprofen or naproxen.",
-      "detail": "Red Cross: keep the person from getting too cold or too hot, give care for shock if needed, reassure them, and watch for changes in breathing and responsiveness.\n\nSigns of shock: pale, cool, clammy skin; a fast, weak pulse; confusion or fainting. If you see them, use the Shock protocol, and keep the bitten limb still.\n\nCDC: do not drink alcohol as a painkiller, and avoid pain relievers such as aspirin, ibuprofen and naproxen. WMS 2015 also lists aspirin and similar medicines as relatively unsafe after pit viper bites.\n\nIf breathing becomes weak or stops, start CPR (CPR, adult protocol)."
+      "text": "Keep them from getting cold or overheated. Treat for shock if needed, but do not raise a bitten leg. No alcohol, aspirin, ibuprofen or naproxen.",
+      "detail": "Red Cross: keep the person from getting too cold or too hot, give care for shock if needed, reassure them, and watch for changes in breathing and responsiveness.\n\nSigns of shock: pale, cool, clammy skin; a fast, weak pulse; confusion or fainting. If you see them, use the Shock protocol, but do not raise a bitten leg (the Shock protocol's leg raise would lift it above the heart), and keep the bitten limb still.\n\nCDC: do not drink alcohol as a painkiller, and avoid pain relievers such as aspirin, ibuprofen and naproxen. WMS 2015 also lists aspirin and similar medicines as relatively unsafe after pit viper bites.\n\nIf breathing becomes weak or stops, start CPR (CPR, adult protocol)."
     },
     {
       "id": "s10",
@@ -110,7 +110,7 @@
     },
     {
       "id": "s21",
-      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now. Afterwards, keep the bitten limb still and below the heart, remove rings, and evacuate.",
+      "text": "Use the Anaphylaxis (severe allergic reaction) protocol now. Do not raise a bitten leg. Afterwards, keep the bitten limb still and below the heart, remove rings, and evacuate.",
       "detail": "Give epinephrine first if they have an auto-injector. The snakebite still needs antivenom in hospital: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nDo not use a tourniquet, cut, suck or put ice on the bite.",
       "end": true
     }
@@ -130,6 +130,7 @@
   "evacuate": [
     "Evacuate every bite from a venomous or possibly venomous snake, even if they feel well (AHA 2024, WMS 2015).",
     "Evacuate urgently: swelling spreading up the limb, vomiting, trouble breathing, drooping eyelids, slurred speech, weakness, bleeding, confusion or signs of shock.",
+    "Evacuate urgently: a bite on the face or neck (swelling may threaten the airway; group judgement).",
     "Head for a hospital that has antivenom (WMS 2015)."
   ],
   "notes": [

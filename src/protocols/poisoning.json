@@ -31,8 +31,9 @@
   "steps": [
     {
       "id": "s1",
-      "text": "Make sure the scene is safe. Do not go into fumes, gas or smoke yourself. Move the person away from the poison if you can do it safely.",
-      "detail": "Red Cross: move the person away from the source of the poison if you can do so without endangering yourself. MedlinePlus: before going into an area with fumes or gas, call for help and tell others; once it is safe, get the person out and open windows and doors. Do not use matches or lighters, because some gases catch fire. Hold your breath going in and cover your nose and mouth with a wet cloth (MedlinePlus).\n\nFumes from a stove, heater, lantern, generator or engine in a tent, shelter or vehicle: use the Carbon monoxide poisoning protocol.\n\nClues that someone may be poisoned (Red Cross, MedlinePlus): an open or spilled container, an unusual smell, burns around the mouth, chemical-smelling breath, several people ill at once, vomiting, trouble breathing."
+      "text": "Get them away from the poison only if you can do it without breathing fumes yourself (a quick reach into a tent or vehicle on a held breath). Tell others before you try.",
+      "detail": "Red Cross: remove the person from the source of the poison, if possible, without endangering yourself. MedlinePlus Poisoning first aid: call for emergency help and never attempt a rescue without notifying others first; if it is safe, rescue the person from the gas, fumes or smoke; open windows and doors; take several deep breaths of fresh air, then hold your breath as you go in, with a wet cloth over your nose and mouth; do not light a match or use a lighter, because some gases catch fire.\n\nThe app's rule (group judgement, see open questions): a quick reach into a tent, shelter or vehicle on a held breath is the most to attempt. Gas that collects in a pit, tank, well, cave or similar enclosed space can overcome a rescuer in a few breaths; do not go in, and wait for rescuers with breathing equipment.\n\nFumes from a stove, heater, lantern, generator or engine in a tent, shelter or vehicle: use the Carbon monoxide poisoning protocol.\n\nClues that someone may be poisoned (Red Cross, MedlinePlus): an open or spilled container, an unusual smell, burns around the mouth, chemical-smelling breath, several people ill at once, vomiting, trouble breathing.",
+      "warn": "Never go into an enclosed space full of gas, such as a pit, tank, well or cave."
     },
     {
       "id": "s2",
@@ -64,8 +65,8 @@
     },
     {
       "id": "s4b",
-      "text": "Trouble breathing, a seizure, or getting worse: get help now. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "detail": "Poison Control (poison.org): call 911 right away if the person collapses, has a seizure, has trouble breathing or cannot be woken. Red Cross also lists headache or dizziness, weakness, a very fast or slow heartbeat, unusual skin colour, burns around the mouth and several people ill at once as needing immediate emergency care.\n\nIf someone else is free, they make the calls (911, and Poison Control at 1-800-222-1222) while you rinse the eyes or skin in the next steps. If none of these signs are present, carry on: Poison Control comes after rinsing."
+      "text": "Trouble breathing, a seizure, burns around the mouth, several people ill, a large area of skin soaked with chemical, or getting worse: get help now (see detail).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nPoison Control (poison.org): call 911 right away if the person collapses, has a seizure, has trouble breathing or cannot be woken. AHA 2024 8.2 (Class 1): call EMS for a chemical exposure with breathing symptoms, body-wide symptoms, or a large exposure. Red Cross also marks as needing immediate emergency care: headache or dizziness, weakness, a very fast or slow heartbeat, unusual skin colour, a strange smell on the breath, burns around the mouth, low body temperature, changes in responsiveness, and several people ill at once.\n\nIf someone else is free, they make the calls (911, and Poison Control at 1-800-222-1222) while you rinse the eyes or skin in the next steps. If none of these signs are present, carry on: Poison Control comes after rinsing."
     },
     {
       "id": "s5",
@@ -78,13 +79,9 @@
     },
     {
       "id": "s6",
-      "text": "Rinse the eye now with lots of clean running water for 15 minutes. Take out contact lenses. Keep the eyelids open and do not let the water run into the other eye.",
-      "detail": "AHA 2024 (Class 1): rinse right away, with a large amount of tap water for 15 minutes, unless chemical-specific advice says otherwise; avoid contaminating the uninjured eye. Saline or eyewash is reasonable if it is right there (AHA 2024). Poison Control (poison.org): rinse with lots of room-temperature water for at least 15 to 20 minutes; remove contact lenses; encourage blinking. Adults can stand in a shower. For a child, pour water slowly from a jug onto the bridge of the nose so it runs into the eye.\n\nSome people need help to hold their eyelids open (AHA 2024). Tilt the head so the poisoned eye is lower.\n\nStop after 15 minutes (AHA 2024); Poison Control gives 15 to 20 minutes. If pain, redness, blurred vision, swelling or tearing are still there an hour after you started rinsing, they need an urgent eye check; for severe symptoms go straight to care (poison.org). The Eye injury protocol covers chemical eye injuries too.",
-      "timer": {
-        "seconds": 900,
-        "label": "Rinse the eye"
-      },
-      "log": "Eye rinsed for poison"
+      "text": "Start rinsing the eye now with lots of clean running water, eyelids open, contact lenses out. Use the Eye injury protocol for how long to rinse and for getting care.",
+      "detail": "Rinse immediately (AHA 2024 8.3, Class 1). Tilt the head so the poisoned eye is lower and the water does not run into the other eye (AHA: avoid contaminating the other eye). Remove contact lenses (poison.org). For a child, pour water slowly from a jug onto the bridge of the nose so it runs into the eye (poison.org).\n\nThe Eye injury protocol (chemical in the eye) is the one place for rinse time and evacuation, so the two protocols cannot disagree: every chemical eye injury needs medical care. The sources differ on time: AHA 2024 8.3, 15 minutes of copious tap water; poison.org, at least 15 to 20 minutes, an urgent eye exam if symptoms last an hour after rinsing started, and straight to an emergency room for severe symptoms; MedlinePlus (via the Eye injury protocol), any chemical in the eye needs emergency care; Red Cross, keep flushing until EMS takes over.\n\nIf someone else can keep rinsing the eye, carry on here (NEXT) for poison on the skin, swallowed or breathed in. If you are alone, rinse the eye first as the Eye injury protocol says, then come back to this protocol.",
+      "log": "Eye rinse started for poison"
     },
     {
       "id": "s7",
@@ -98,12 +95,13 @@
     {
       "id": "s8",
       "text": "Take off soaked clothing and jewellery. Brush off any dry powder first. Then rinse the skin with lots of running water for at least 15 minutes.",
-      "detail": "AHA 2024: remove contaminated clothing, jewellery and nearby material (Class 1); brush off dry chemical before rinsing (Class 2a); then rinse with running water for at least 15 minutes unless chemical-specific advice says otherwise (Class 1). Rinsing within the first few minutes leads to fewer deep burns (AHA 2024). Poison Control (poison.org): room-temperature running water for at least 15 minutes; a shower for large spills; mild hand soap can help remove sticky material.\n\nWear gloves if you have them and do not get the chemical on yourself.\n\nSome chemicals (hydrofluoric acid and phenol; dry sodium hydroxide and sodium or potassium metal can react with water, so brush them off first) need special treatment (AHA 2024): read the label and follow Poison Control's advice if you can reach them.\n\nStop after 15 minutes. Burns, blisters, or pain, redness or swelling that get worse or do not go away need medical care (poison.org). Use the Burns protocol for a chemical burn.\n\nGroup judgement, not from a source: in the cold, rinsing for 15 minutes can chill someone; rinse in the warmest place you can and dry and warm them straight afterwards (see the Hypothermia protocol).",
+      "detail": "AHA 2024: remove contaminated clothing, jewellery and nearby material (Class 1); brush off dry chemical before rinsing (Class 2a); then rinse with running water for at least 15 minutes unless chemical-specific advice says otherwise (Class 1). Rinsing within the first few minutes leads to fewer deep burns (AHA 2024). Poison Control (poison.org): room-temperature running water for at least 15 minutes; a shower for large spills; mild hand soap can help remove sticky material.\n\nWear gloves if you have them and do not get the chemical on yourself.\n\nSome chemicals (hydrofluoric acid and phenol; dry sodium hydroxide and sodium or potassium metal can react with water, so brush them off first) need special treatment (AHA 2024): read the label and follow Poison Control's advice if you can reach them.\n\nRinse for at least 15 minutes (AHA 2024, poison.org), longer if the skin still burns or chemical is still on it. A large area of skin soaked with a chemical needs EMS (AHA 2024 8.2, Class 1): get help now if you have not already. Burns, blisters, or pain, redness or swelling that get worse or do not go away need medical care (poison.org). Use the Burns protocol for a chemical burn.\n\nGroup judgement, not from a source: in the cold, rinsing for 15 minutes can chill someone; rinse in the warmest place you can and dry and warm them straight afterwards (see the Hypothermia protocol).",
       "timer": {
         "seconds": 900,
         "label": "Rinse the skin"
       },
-      "log": "Skin rinsed for poison"
+      "log": "Skin rinsed for poison",
+      "warn": "A large area of skin soaked with chemical: get help now (AHA 2024)."
     },
     {
       "id": "s9",
@@ -117,7 +115,7 @@
     {
       "id": "s10",
       "text": "Do not make them vomit. Give nothing to eat or drink unless Poison Control tells you to. Keep the container, the plant or a sample of any vomit.",
-      "detail": "Do not induce vomiting: it often causes more harm (Red Cross); caustic substances do more damage coming back up (MedlinePlus). Only do it if Poison Control specifically tells you to (Red Cross, MedlinePlus).\n\nSyrup of ipecac is no longer recommended and is no longer made or sold (poison.org). Do not give activated charcoal at home: a poisoning serious enough to need it needs a hospital (poison.org); most poison centers do not recommend keeping it at home. Do not try to neutralise the poison with lemon juice, vinegar or any other 'antidote' (MedlinePlus).\n\nDrinks: Red Cross says do not give food or drink unless advised to. Poison Control (poison.org) says a small amount of water or milk may be given only if the substance burns or irritates the mouth or throat, and only if the person is awake, not having a seizure, and able to swallow. Never give anything by mouth to someone who is not fully awake (MedlinePlus). See the open questions for the no-signal case.\n\nIf they vomit: turn them onto their side and wipe out their mouth with a cloth over your fingers (MedlinePlus). If the poison is unknown, or it was a plant or mushroom, keep a sample of the vomit (Red Cross, MedlinePlus).\n\nFind out what it was, how much, when, and roughly what they weigh (Red Cross). Keep the container or label.",
+      "detail": "Do not induce vomiting: it often causes more harm (Red Cross); caustic substances do more damage coming back up (MedlinePlus). Only do it if Poison Control specifically tells you to (Red Cross, MedlinePlus).\n\nSyrup of ipecac is no longer recommended and is no longer made or sold (poison.org). Do not give activated charcoal at home: poison.org says do not try to treat a poisoning with activated charcoal at home; a poisoning serious enough to need it needs a hospital. Do not try to neutralise the poison with lemon juice, vinegar or any other 'antidote' (MedlinePlus).\n\nDrinks: Red Cross says do not give food or drink unless advised to. Poison Control (poison.org) says: if the product is burning, irritating or caustic, drink a small amount of water or milk immediately, provided the person is conscious, not having convulsions, and able to swallow. Never give anything by mouth to someone who is not fully awake (MedlinePlus). See the open questions for the no-signal case.\n\nIf they vomit: turn them onto their side and wipe out their mouth with a cloth over your fingers (MedlinePlus). If the poison is unknown, or it was a plant or mushroom, keep a sample of the vomit (Red Cross, MedlinePlus).\n\nFind out what it was, how much, when, and roughly what they weigh (Red Cross). Keep the container or label.",
       "warn": "Do not make them vomit. No ipecac, no charcoal, no 'antidotes'."
     },
     {
@@ -146,7 +144,7 @@
     },
     {
       "id": "s14",
-      "text": "Call Poison Control at 1-800-222-1222 if you have signal, and do what they say. Trouble breathing, a seizure or collapse: Call 911 if you have signal (see detail).",
+      "text": "Call Poison Control at 1-800-222-1222 if you have signal, and do what they say. Trouble breathing, a seizure or collapse: get help now (see detail).",
       "detail": "Poison Control (1-800-222-1222) is free, open 24 hours, and reaches the regional poison center from anywhere in the US (Red Cross, poison.org). poison.org also runs an online tool, webPOISONCONTROL (triage.webpoisoncontrol.org), if you have data but not voice. Red Cross: if the person is alert, call the Poison Help line and follow its advice.\n\nCall 911 right away (poison.org) if the person collapses, has a seizure, has trouble breathing, or cannot be woken. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nTell them: what the poison was (read the label), how much, when, how it got in (swallowed, breathed, skin, eye), the person's age and weight, and how they are now.\n\nNo signal at all (group judgement, not from a source; see open questions): you cannot get the poison-specific advice that the sources rely on. Follow this protocol, do not give anything by mouth, write down what was taken and when, and decide on evacuation using the next step. Do not wait for symptoms: they may appear late (MedlinePlus)."
     },
     {
@@ -192,7 +190,8 @@
   "evacuate": [
     "Evacuate urgently: unresponsive, hard to wake, confused, seizures, trouble breathing, very fast or slow heartbeat, unusual skin colour, or burns around the mouth (Red Cross, poison.org).",
     "Evacuate: anyone who breathed fumes or gas, even if they seem fine (MedlinePlus).",
-    "Evacuate: an eye still painful, red or blurred an hour after rinsing began; skin burns or blisters (poison.org).",
+    "Evacuate: any chemical in the eye (Eye injury protocol, MedlinePlus); skin burns or blisters (poison.org).",
+    "Get help now: a large area of skin soaked with a chemical (AHA 2024 8.2, Class 1).",
     "With no signal (group judgement): evacuate anyone who swallowed a medicine overdose, a caustic or burning substance, fuel, a pesticide, a wild mushroom or plant, or anything unknown, and anyone who has any symptom."
   ],
   "notes": [

@@ -64,7 +64,7 @@
     {
       "id": "s5",
       "text": "Wash your hands and put on gloves if you have them. Press on the bite with a clean cloth until minor bleeding stops.",
-      "detail": "MedlinePlus (animal and human bites): wash your hands with soap and water before touching the wound and wear gloves if you have them; stop bleeding with firm, direct pressure using a clean, dry cloth. Red Cross: stop minor bleeding with direct pressure.\n\nIf bleeding does not stop after a few minutes of pressure, MedlinePlus says go to the emergency room or call 911: use the Severe bleeding protocol."
+      "detail": "MedlinePlus (animal and human bites): wash your hands with soap and water before touching the wound and wear gloves if you have them; stop bleeding with firm, direct pressure using a clean, dry cloth. Red Cross: stop minor bleeding with direct pressure.\n\nIf bleeding does not stop after a few minutes of pressure, MedlinePlus says go to the emergency room or call 911: use the Severe bleeding protocol.\n\nBat contact with no visible wound: wash the area of contact with soap and water (CDC) and move on to the rabies question."
     },
     {
       "id": "s6",
@@ -94,7 +94,7 @@
     {
       "id": "s10",
       "text": "Could the animal have rabies: any bat contact, a wild animal (raccoon, skunk, fox, coyote), a stray or unvaccinated dog or cat, or any animal acting strangely?",
-      "detail": "In the US, bats, raccoons, skunks and foxes carry rabies most often, and bats cause at least 7 in 10 US rabies deaths (CDC). Rabies is in wildlife in every state except Hawaii (CDC). Signs of rabies in an animal: aggressive or unusually quiet, drooling, or partly paralysed (Red Cross); bats flying in daytime, found in odd places, unable to fly or easy to approach (CDC).\n\nBats: their teeth are tiny and a bite may not be seen or felt (CDC). Any contact between a bat and bare skin, or a bat caught in someone's hair, counts as a possible bite (CDC Yellow Book). Answer Yes for any bat contact unless a bite or scratch can be definitely ruled out (CDC).",
+      "detail": "In the US, bats, raccoons, skunks and foxes carry rabies most often, and bats cause at least 7 in 10 US rabies deaths (CDC). Rabies is in wildlife in every state except Hawaii (CDC). Signs of rabies in an animal: aggressive or unusually quiet, drooling, or partly paralysed (Red Cross); bats flying in daytime, found in odd places, unable to fly or easy to approach (CDC).\n\nBats: their teeth are tiny and a bite may not be seen or felt (CDC). Any contact between a bat and bare skin, or a bat caught in someone's hair, counts as a possible bite (CDC Yellow Book). Answer Yes for any bat contact unless a bite or scratch can be definitely ruled out (CDC).\n\nBat contact with no wound you can see: go straight on (answer Yes); the pressing and washing steps only apply where there is a wound.",
       "ask": {
         "q": "Could the animal have rabies (bat, wild, stray or acting strangely)?",
         "yes": "s11",
@@ -103,8 +103,8 @@
     },
     {
       "id": "s11",
-      "text": "Possible rabies: get them to a medical provider for rabies shots promptly, even if the wound is tiny. Rabies shots must start before any symptoms appear.",
-      "detail": "Once rabies symptoms appear it is nearly always fatal; shots started after an exposure are nearly 100 percent effective (CDC). CDC: wash the wound and get medical care urgently; most exposures need prompt medical attention but not an emergency room visit unless the wound itself needs urgent care, and the shots must start before symptoms. Symptoms can take weeks to months to appear (CDC).\n\nTime window: CDC gives no fixed deadline. Start as soon as possible; CDC says the treatment is still given however long ago the exposure was, as long as no symptoms have appeared, so a delay is never a reason to skip it. The Wound cleaning and care protocol quotes WMS: start within 24 to 48 hours if you can.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty. Red Cross advises calling 911 for a bite from an animal that may have rabies. Tell the health department or animal control about the animal (CDC, MedlinePlus).",
+      "text": "Start evacuating now for rabies care if: any bat contact, a raccoon, skunk or fox, several bites, a bite on the head or neck, or a young child. Others: get rabies care promptly (see detail).",
+      "detail": "CDC (Clinical Screening for Rabies PEP): a patient should be immediately assessed for rabies-related care if they had direct contact with bats unless a bite or scratch can be definitively ruled out; exposure to high-risk animals, typically bats, raccoons, skunks, foxes and mongoose; severe exposures, such as multiple bite wounds or exposures to the head and neck; or they are a young child. Off-grid, \"immediately\" means start the evacuation now, not at the end of the trip.\n\nEveryone else who answered Yes (for example a stray or unvaccinated dog or cat, or another wild animal acting strangely): CDC says most rabies exposures need medical attention quickly but not an immediate trip to the emergency room, unless the wound itself needs urgent care. Still go promptly.\n\nOnce rabies symptoms appear it is nearly always fatal; shots started after an exposure are nearly 100 percent effective (CDC). Symptoms can take weeks to months to appear (CDC). CDC gives no fixed deadline: the treatment is still given however long ago the exposure was, as long as no symptoms have appeared, so a delay is never a reason to skip it. The Wound cleaning and care protocol quotes WMS: start within 24 to 48 hours if you can.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty. Red Cross advises calling 911 for a bite from an animal that may have rabies. Tell the health department or animal control about the animal (CDC, MedlinePlus).",
       "warn": "Rabies is nearly always fatal once symptoms start. Do not wait for symptoms.",
       "log": "Possible rabies exposure"
     },
@@ -164,7 +164,7 @@
     "Do not clean a wound that needed a tourniquet, packing or a pressure bandage."
   ],
   "evacuate": [
-    "Evacuate for rabies shots: any bat contact, or any bite or scratch from a wild animal, a stray or unvaccinated dog or cat, or an animal acting strangely (CDC). Start as soon as possible.",
+    "Start evacuating now for rabies care: any bat contact, a raccoon, skunk or fox, several bites, a bite on the head or neck, or a young child (CDC: immediately assessed). Other possible rabies exposures (stray or unvaccinated dog or cat, wild animal acting strangely): prompt care (CDC).",
     "Evacuate urgently: heavy bleeding, a mauling, deep wounds, or bites on the neck, chest or belly.",
     "Get medical care: any human bite that breaks the skin, right away if on the hand, fingers, face, head, neck or feet (MedlinePlus); any animal bite that breaks the skin, within 24 hours (MedlinePlus).",
     "Get medical care: signs of infection, or no tetanus shot in the last 5 years (MedlinePlus)."

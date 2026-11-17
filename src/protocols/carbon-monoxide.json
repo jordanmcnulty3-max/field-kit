@@ -21,8 +21,9 @@
   "steps": [
     {
       "id": "s1",
-      "text": "Get everyone out of the tent, shelter or vehicle into fresh air now. Do not stay inside yourself while the fumes are there.",
-      "detail": "Move the person to fresh air immediately (MedlinePlus).\n\nSuspect carbon monoxide when people in the same tent, shelter or vehicle with a stove, heater, lantern, generator, charcoal or running engine get a headache, dizziness, weakness, nausea or vomiting, chest pain, confusion or drowsiness (CDC, MedlinePlus, CPSC). It is often mistaken for flu or a virus (CDC, MedlinePlus). Pets may be affected first (MedlinePlus). Children may only be fussy or feed poorly (MedlinePlus).\n\nPeople who are asleep or drunk can die before they notice anything (CDC)."
+      "text": "Get everyone out of the tent, shelter or vehicle into fresh air now, without breathing the fumes yourself: hold your breath for a quick reach in, and open it up to air.",
+      "detail": "Move the person to fresh air immediately (MedlinePlus). Red Cross: remove the person from the area if it is safe to do so, and get them into fresh air as soon as possible. MedlinePlus Poisoning first aid: never attempt a rescue without notifying others first; take several deep breaths of fresh air, hold your breath as you go in, hold a wet cloth over your nose and mouth, and open windows and doors.\n\nSuspect carbon monoxide when people in the same tent, shelter or vehicle with a stove, heater, lantern, generator, charcoal or running engine get a headache, dizziness, weakness, nausea or vomiting, chest pain, confusion or drowsiness (CDC, MedlinePlus, CPSC). It is often mistaken for flu or a virus (CDC, MedlinePlus). Pets may be affected first (MedlinePlus). Children may only be fussy or feed poorly (MedlinePlus).\n\nPeople who are asleep or drunk can die before they notice anything (CDC).",
+      "warn": "Do not stay inside, or go back in, while the fumes are there. Tell others before you try a rescue."
     },
     {
       "id": "s2",
@@ -96,6 +97,16 @@
       "name": "Wilderness Medical Society, Accidental Hypothermia 2019 Update (charcoal heat packs and carbon monoxide)",
       "year": 2019,
       "url": "https://www.femecv.com/sites/default/files/WMS%20hipotermia_2019.pdf"
+    },
+    {
+      "name": "American Red Cross, Poison Exposure: Signs, Symptoms, and First Aid (carbon monoxide section; lay page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/poison-exposure"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Poisoning first aid, reviewed 2025-01-08",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/007579.htm"
     }
   ],
   "reviewed": "2026-11-17"

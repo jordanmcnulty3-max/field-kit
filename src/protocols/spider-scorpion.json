@@ -65,7 +65,8 @@
         "q": "Is the person stung a child?",
         "yes": "s11",
         "no": "s12"
-      }
+      },
+      "detail": "No source opened gives an age: AHA 2024 says only \"children\" (bark scorpion stings may impair breathing in children). If in doubt, answer Yes."
     },
     {
       "id": "s11",

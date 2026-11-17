@@ -14,9 +14,9 @@
     "inguinal",
     "femoral bleeding"
   ],
-  "summary": "Life-threatening bleeding where a limb tourniquet cannot go: groin, armpit, neck. Pack and press, then a junctional tourniquet (TCCC: Combat Medic/Corpsman and Combat Paramedic, skill sets 2024) or the improvised groin device (TCCC Combat Lifesaver course 2020).",
+  "summary": "Life-threatening bleeding where a limb tourniquet cannot go: groin, armpit, neck. Pack, then a groin junctional tourniquet as soon as it is ready (TCCC: Combat Medic/Corpsman and Combat Paramedic, skill sets 2024); otherwise press 3 minutes and wrap, or use the improvised groin device (TCCC Combat Lifesaver course 2020).",
   "indications": [
-    "TCCC 2026: if the bleeding site can take a junctional tourniquet, apply one immediately. Hemostatic dressings with direct pressure while it is being readied, or if none is available.",
+    "TCCC 2026: if the bleeding site can take a junctional tourniquet, apply one immediately and do not delay once it is ready. Hemostatic dressings with direct pressure while it is being readied, or if none is available. TCCC CMC skill (2021): it goes on after the wound is packed, before the 3-minute hold.",
     "TCCC skill (2021): life-threatening bleeding from a groin wound that a limb tourniquet cannot control. The junctional tourniquet skill sheets cover the groin only.",
     "TCCC Combat Lifesaver skill (2020): life-threatening bleeding from the neck or armpit (pack and wrap), or from the groin (pack, then an improvised pressure device under a tourniquet around the hips).",
     "TCCC 2026 names no junctional tourniquet products (CoTCCC 2021: no specific products recommended). The TCCC skill sheets describe the SAM Junctional Tourniquet, Combat Ready Clamp (CRoC) and JETT."
@@ -37,7 +37,7 @@
   "complications": [
     "Bleeding returns when the casualty is moved: monitor often during movement and adjust the device (TCCC skill).",
     "The pulse in the leg below a groin device should be gone (TCCC skill); the leg is without blood flow, as with a tourniquet. Record the time it went on.",
-    "Neck: a swelling that keeps growing can block the airway (TCCC 2026).",
+    "Neck: a swelling that keeps growing can block the airway (TCCC 2026, after a neck clamp; the app applies it to any neck wound).",
     "A device placed off the pressure point does not stop the bleeding: recheck placement (TCCC skill).",
     "Bandage too tight below the wound: cool, bluish or numb skin (TCCC skill)."
   ],
@@ -79,9 +79,45 @@
     },
     {
       "id": "s5",
-      "text": "Pack hemostatic gauze (or plain gauze or cloth) tightly into the wound onto the bleeding point until it is full. Finish within 90 seconds.",
-      "detail": "TCCC skill: remove your fist if you used one and immediately press and pack. Pack the wound tightly until the cavity is filled, within 90 seconds. More than one dressing may be needed. The packing must stand 1 to 2 inches above the skin; add more if it does not. The Hemostatic gauze wound packing protocol has more detail on dressings.",
-      "log": "Junctional wound packed"
+      "text": "Pack hemostatic gauze (or plain gauze or cloth) tightly into the wound onto the bleeding point until full, standing 1 to 2 inches above the skin. Finish within 90 seconds.",
+      "detail": "TCCC skill: remove your fist if you used one and immediately press and pack. Pack the wound tightly until the cavity is filled, within 90 seconds. More than one dressing may be needed. The packing must stand 1 to 2 inches above the skin; add more if it does not (wound packing steps 1 to 5). The Hemostatic gauze wound packing protocol has more detail on dressings.\n\nIf you have a junctional tourniquet, have a helper get it ready while you pack (TCCC 2026: hemostatic dressings with direct pressure while the junctional tourniquet is being readied).",
+      "log": "Junctional wound packed",
+      "ask": {
+        "q": "Is the wound in the groin?",
+        "yes": "s10",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Do you have a junctional tourniquet (SAM, CRoC or JETT) that you are trained to use?",
+      "detail": "TCCC 2026: if the bleeding site can take a junctional tourniquet, apply one immediately; do not delay once it is ready. TCCC CMC skill instructions (2021): the device goes on after the wound is packed (wound packing steps 1 to 5), before the 3-minute hold. Without one, press for 3 minutes and then use the improvised device (TCCC Combat Lifesaver method).",
+      "ask": {
+        "q": "Do you have a junctional tourniquet you are trained on?",
+        "yes": "s11",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Keep pressing on the packing. Apply the device as soon as it is ready: casualty on their back, pockets and hips cleared, pressure over the femoral pulse just below the groin ligament (see detail).",
+      "detail": "TCCC CMC skill instructions (2021) steps 1-5 for each device: expose, press on the most active bleeding, empty the pockets and clear the hip area, place the casualty supine, and keep direct pressure over the femoral pulse just below the groin (inguinal) ligament while you prepare the device. Standard: control the bleeding within 90 seconds.\n\nSAM Junctional Tourniquet (TCCC 2021 skill): pass the belt behind the thighs and slide it up; put the Target Compression Device (TCD) over the femoral pulse just below the groin ligament (with packing under it if the wound is open), or, if you cannot feel the pulse, just below the midpoint of a line between the front point of the hip bone (anterior superior iliac spine) and the pubic tubercle. Snap the buckle, pull the handles apart firmly until it locks (a click), press the excess belt onto the hook-and-loop, then pump up the TCD until the bleeding stops and the pulse below is gone. Both sides injured: a second TCD the same way.\n\nCombat Ready Clamp (CRoC): assemble it (vertical arm up and locked, rotated 90 degrees; horizontal arm in and locked; T handle in; pressure disc clicked on). Baseplate under the casualty beneath the pressure point, vertical arm on the wounded side close to the wound, horizontal arm over the femoral pressure point (same landmark as above). Lower the arm until the disc touches, then turn the T handle clockwise until the bleeding stops. If it has not stopped after 20 full turns, release and reposition the disc. Attach the securing strap.\n\nJETT: unroll it with the side marked toward the casualty facing up, slide the belt under the small of the back or buttocks and centre the buttock pad. Put the pressure pads over the femoral pulse just below the groin ligament, parallel to it, the lower end pointing in toward the midline at about 30 degrees. Keep the genitals clear of the compression area. Buckle it (a click), pull the strap tight to remove all slack, recheck pad position, then turn the threaded T handle clockwise until the bleeding stops and, if the leg is intact, the pulse below is gone. Lock the toggle. Both sides injured: repeat on the other side.",
+      "log": "Junctional tourniquet applied",
+      "ask": {
+        "q": "Has the bleeding stopped?",
+        "yes": "s14",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "Not stopped: SAM, pump more. CRoC, after 20 full turns, release and reposition the disc. JETT, recheck the pads and tighten. Keep pressing on the packing.",
+      "detail": "TCCC skill (2021). Recheck that the pressure point is over the femoral pulse just below the groin ligament.",
+      "ask": {
+        "q": "Has the bleeding stopped now?",
+        "yes": "s14",
+        "no": "s16"
+      }
     },
     {
       "id": "s6",
@@ -92,7 +128,7 @@
         "label": "Hold pressure"
       },
       "ask": {
-        "q": "After at least 3 minutes, still pressing: is it still bleeding?",
+        "q": "After the full 3 minutes, still pressing: is it still bleeding?",
         "yes": "s7",
         "no": "s9"
       }
@@ -115,7 +151,7 @@
     {
       "id": "s8",
       "text": "Still bleeding: keep pressing as hard as you can and go on to the next step to secure it. Evacuate urgently.",
-      "detail": "Do not let up pressure. The groin device on the following steps adds pressure; for the neck and armpit, keep your hands on the packing while someone else wraps. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty."
+      "detail": "Do not let up pressure. For the groin, the improvised device adds pressure; for the neck and armpit, keep your hands on the packing while someone else wraps. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty."
     },
     {
       "id": "s9",
@@ -123,39 +159,8 @@
       "detail": "The next steps differ for the groin, armpit and neck.",
       "ask": {
         "q": "Is the wound in the groin?",
-        "yes": "s10",
+        "yes": "s15",
         "no": "s20"
-      }
-    },
-    {
-      "id": "s10",
-      "text": "Do you have a junctional tourniquet (SAM, CRoC or JETT) that you are trained to use?",
-      "detail": "TCCC 2026: if the bleeding site can take a junctional tourniquet, apply one immediately. Without one, the improvised device on the following steps is the TCCC Combat Lifesaver method.",
-      "ask": {
-        "q": "Do you have a junctional tourniquet you are trained on?",
-        "yes": "s11",
-        "no": "s15"
-      }
-    },
-    {
-      "id": "s11",
-      "text": "Keep pressing. Lay them on their back, empty their pockets and clear gear from the hips. Apply the device over the femoral pulse just below the groin ligament (see detail).",
-      "detail": "TCCC skill (2021). Keep direct pressure over the femoral pulse just below the groin (inguinal) ligament while you prepare the device. Standard: control the bleeding within 90 seconds.\n\nSAM Junctional Tourniquet (TCCC 2021 skill): pass the belt behind the thighs and slide it up; put the Target Compression Device (TCD) over the femoral pulse just below the groin ligament (with packing under it if the wound is open), or, if you cannot feel the pulse, just below the midpoint of a line between the front point of the hip bone (anterior superior iliac spine) and the pubic tubercle. Snap the buckle, pull the handles apart firmly until it locks (a click), press the excess belt onto the hook-and-loop, then pump up the TCD until the bleeding stops and the pulse below is gone. Both sides injured: a second TCD the same way.\n\nCombat Ready Clamp (CRoC): assemble it (vertical arm up and locked, rotated 90 degrees; horizontal arm in and locked; T handle in; pressure disc clicked on). Baseplate under the casualty beneath the pressure point, vertical arm on the wounded side close to the wound, horizontal arm over the femoral pressure point (same landmark as above). Lower the arm until the disc touches, then turn the T handle clockwise until the bleeding stops. If it has not stopped after 20 full turns, release and reposition the disc. Attach the securing strap.\n\nJETT: unroll it with the side marked toward the casualty facing up, slide the belt under the small of the back or buttocks and centre the buttock pad. Put the pressure pads over the femoral pulse just below the groin ligament, parallel to it, the lower end pointing in toward the midline at about 30 degrees. Keep the genitals clear of the compression area. Buckle it (a click), pull the strap tight to remove all slack, recheck pad position, then turn the threaded T handle clockwise until the bleeding stops and, if the leg is intact, the pulse below is gone. Lock the toggle. Both sides injured: repeat on the other side.",
-      "log": "Junctional tourniquet applied",
-      "ask": {
-        "q": "Has the bleeding stopped?",
-        "yes": "s14",
-        "no": "s12"
-      }
-    },
-    {
-      "id": "s12",
-      "text": "Not stopped: SAM, pump more. CRoC, after 20 full turns, release and reposition the disc. JETT, recheck the pads and tighten. Keep pressing on the packing.",
-      "detail": "TCCC skill (2021). Recheck that the pressure point is over the femoral pulse just below the groin ligament.",
-      "ask": {
-        "q": "Has the bleeding stopped now?",
-        "yes": "s14",
-        "no": "s16"
       }
     },
     {
@@ -192,8 +197,8 @@
     },
     {
       "id": "s14",
-      "text": "Write the time it went on: on the forehead (SAM, CRoC, improvised) or on the JETT loop handle. Recheck it often, especially when you move them.",
-      "detail": "TCCC skill: document the time of placement on the casualty’s forehead (SAM, CRoC) or in the space on the JETT loop handle, and record the device type and time. Monitor often during movement and transport, and adjust to keep the bleeding controlled."
+      "text": "Write down the time it went on: SAM or CRoC, on the forehead; JETT, on its loop handle; improvised, in the log (and on the forehead if you like). Recheck it often, especially when moving them.",
+      "detail": "TCCC skill: document the time of placement on the casualty’s forehead (SAM, CRoC) or in the space on the JETT loop handle, and record the device type and time on the casualty card (CMC card SC-12 for the improvised device says only the card). Writing it on the forehead for the improvised device is the app’s choice. Monitor often during movement and transport, and adjust to keep the bleeding controlled."
     },
     {
       "id": "s17",
@@ -236,7 +241,7 @@
     {
       "id": "s26",
       "text": "Tie a non-slip knot, tape it, and strap the upper arm on the injured side to the chest. Watch the airway: a growing neck swelling can block it.",
-      "detail": "TCCC skill (2020): tie a non-slip knot with the bandage end and its tail, and tape the tails at least 1 to 1.5 times around the knot with 3-inch tape. Swathe the upper arm on the injured side to the chest. TCCC 2026: monitor the airway after treating a neck wound; an expanding swelling may need a definitive airway (see the Cricothyroidotomy (surgical airway) protocol, for those trained at that level).",
+      "detail": "TCCC skill (2020): tie a non-slip knot with the bandage end and its tail, and tape the tails at least 1 to 1.5 times around the knot with 3-inch tape. Swathe the upper arm on the injured side to the chest. TCCC 2026 (after applying a clamp to the neck): monitor the airway; an expanding swelling may need a definitive airway (the app applies the same caution after any neck wound) (see the Cricothyroidotomy (surgical airway) protocol, for those trained at that level).",
       "log": "Neck pressure bandage applied",
       "ask": {
         "q": "Is it bleeding through the bandage?",

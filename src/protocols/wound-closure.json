@@ -15,7 +15,7 @@
     "gaping cut",
     "laceration"
   ],
-  "summary": "Closing a clean, fresh cut in the field with wound closure strips or skin glue, after thorough cleaning. From the Wilderness Medical Society 2014 guideline, which assigns no training level; strips are taught in Wilderness First Aid. Stitches and staples are not described here.",
+  "summary": "Closing a clean, fresh, simple cut in the field with skin glue (preferred by WMS for simple wounds) or wound closure strips, after thorough cleaning. From the Wilderness Medical Society 2014 guideline, which assigns no training level; strips are taught in Wilderness First Aid. Stitches and staples are not described here.",
   "indications": [
     "WMS 2014 (1B): most wounds can be treated safely by closing them straight away.",
     "WMS 2014 (1C): most clean wounds can be closed up to 6 hours after injury, and face and scalp wounds up to 10 hours.",
@@ -31,7 +31,8 @@
     "Older than 6 hours (10 hours on the face or scalp) (WMS 1C).",
     "Gaping more than half an inch, large dirty wounds, or bone, tendon or ligament showing: do not close in the field; evacuate for closure by a physician (BSA).",
     "Puncture wounds and any wound that needed a tourniquet, packing or a pressure bandage: leave as the Wound cleaning and care protocol says.",
-    "Skin glue: not around the eyes, in the ears or nose, or inside the mouth, and never inside the wound (MedlinePlus)."
+    "Skin glue: not around the eyes, in the ears or nose, or inside the mouth, and never inside the wound (MedlinePlus).",
+    "Wounds in the armpit or groin (WMS: consider them dirty; the app leaves them open as a caution), and wounds with numbness or weakness beyond them, into a joint, or over a possible broken bone (WMS evacuation list)."
   ],
   "equipment": [
     "At least 1 litre of drinkable water and a syringe or squeeze bottle to irrigate (WMS; Wound cleaning and care protocol).",
@@ -90,7 +91,7 @@
     {
       "id": "s5",
       "text": "Is the wound more than 6 hours old (more than 10 hours on the face or scalp)?",
-      "detail": "WMS 2014 (1C): most clean wounds can be safely closed up to 6 hours after injury, up to 10 hours for face and scalp wounds.",
+      "detail": "WMS 2014 (1C): most clean wounds can be safely closed up to 6 hours after injury, up to 10 hours for face and scalp wounds. The WMS wound table also says any wound presenting after 8 to 12 hours (24 hours on the face) should be considered contaminated; the app uses the stricter 6 and 10 hours (see open questions).",
       "ask": {
         "q": "Is it older than that?",
         "yes": "s33",
@@ -99,10 +100,10 @@
     },
     {
       "id": "s6",
-      "text": "Is it heavily contaminated, crushed, or full of dead or mangled tissue?",
-      "detail": "WMS 2014: grossly contaminated wounds should be packed open to heal from the bottom or be closed later (1B); wounds with significant dead tissue should be left open (1C). BSA: large dirty wounds are left open, covered with sterile gauze.",
+      "text": "Is it heavily contaminated, crushed, full of dead or mangled tissue, or in the armpit or groin?",
+      "detail": "WMS 2014: grossly contaminated wounds should be packed open to heal from the bottom or be closed later (1B); wounds with significant dead tissue should be left open (1C). BSA: large dirty wounds are left open, covered with sterile gauze.\n\nArmpit and groin: WMS 2014 (Table 3 note) says to consider these wounds dirty. Its table still closes dirty wounds primarily; this app leaves armpit and groin wounds open as a caution (see open questions).",
       "ask": {
-        "q": "Is it contaminated, crushed or full of dead tissue?",
+        "q": "Is it contaminated, crushed, full of dead tissue, or in the armpit or groin?",
         "yes": "s33",
         "no": "s7"
       }
@@ -124,6 +125,16 @@
       "ask": {
         "q": "Is it a puncture or a scrape?",
         "yes": "s34",
+        "no": "s8b"
+      }
+    },
+    {
+      "id": "s8b",
+      "text": "Is there numbness, tingling or weakness beyond the cut, is it over or into a joint, or could a bone under it be broken?",
+      "detail": "WMS 2014 evacuation list (1C): open fractures, and wounds with underlying tendon, joint, nerve or vessel damage. These are not closed in the field.",
+      "ask": {
+        "q": "Any of these: numbness or weakness beyond it, a joint involved, or a possible broken bone?",
+        "yes": "s33",
         "no": "s9"
       }
     },
@@ -140,7 +151,7 @@
     {
       "id": "s10",
       "text": "Dry the skin around the cut completely.",
-      "detail": "MedlinePlus (liquid bandage): wash the cut and the skin around it, then dry the area with a clean towel or gauze; make sure it is completely dry. Strips and glue do not stick to wet skin.",
+      "detail": "MedlinePlus (liquid bandage): wash the cut and the skin around it, then dry the area with a clean towel or gauze; make sure it is completely dry.\n\nWhich method (WMS 2014, 1A): tissue adhesive gives an acceptable outcome for most simple wounds; tapes (strips) have the lowest strength of any closure aid and the highest rate of reopening; sutures or staples are preferred for more complex wounds closed under some tension (not described in this app). So glue first for a simple wound where it can be used, strips otherwise.",
       "ask": {
         "q": "Are you using skin glue?",
         "yes": "s11",
@@ -153,8 +164,18 @@
       "detail": "MedlinePlus: do not use liquid bandage around the eyes, in the ear or nose, or inside the mouth. If it gets into these areas, get medical help.",
       "ask": {
         "q": "Is the cut near the eye, or in the ear, nose or mouth?",
-        "yes": "s14",
+        "yes": "s13s",
         "no": "s12"
+      }
+    },
+    {
+      "id": "s13s",
+      "text": "Glue is not used here. Do you have closure strips?",
+      "detail": "MedlinePlus: no liquid bandage around the eyes, in the ear or nose, or in the mouth. Strips are the other method; without them, leave the wound open.",
+      "ask": {
+        "q": "Do you have closure strips?",
+        "yes": "s14",
+        "no": "s33"
       }
     },
     {
@@ -175,7 +196,7 @@
     {
       "id": "s14",
       "text": "Strips: stick one end of a strip on one side of the cut and another on the opposite side, then use them as handles to pull the edges together. Add strips along the cut.",
-      "detail": "BSA Wilderness First Aid: when using closure strips, apply one end of one strip to one side of the wound and another to the opposite side, then use them as handles to draw the edges together. Thin tape can be used if you have no strips.\n\nWMS 2014: surgical tapes have the lowest strength of any closure aid and the highest rate of the wound reopening; avoid shear stress on the skin. Adhesive aids such as tincture of benzoin may cause blistering.\n\nIf you have no strips (you chose strips because glue is not suitable here), leave the wound open, cover it and evacuate.",
+      "detail": "BSA Wilderness First Aid: when using closure strips, apply one end of one strip to one side of the wound and another to the opposite side, then use them as handles to draw the edges together. Thin tape can be used if you have no strips.\n\nWMS 2014: surgical tapes have the lowest strength of any closure aid and the highest rate of the wound reopening; avoid shear stress on the skin. Adhesive aids such as tincture of benzoin may cause blistering.",
       "log": "Wound closed with closure strips",
       "ask": {
         "q": "Are the edges held together along the whole cut?",
@@ -192,7 +213,7 @@
     {
       "id": "s16",
       "text": "Cover it. Over glue, no ointment. Over strips, a clean dressing. Keep it clean and limit movement so it does not reopen.",
-      "detail": "MedlinePlus (liquid bandage): do not put ointments on top, because they weaken the bond; the person may shower once it is dry but should not scrub it; wash daily with soap and water and pat dry; do not scratch or pick at it; keep activity to a minimum so the wound does not reopen; the glue lasts 5 to 10 days and falls off on its own.\n\nBSA (strips): a thin layer of antibiotic ointment if not allergic, then a dressing and bandage; a thin film dressing is used without ointment. WMS: a moist wound environment helps healing (1C) and a clean protective bandage is helpful in the outdoors (2C). The Wound cleaning and care protocol states the differing advice on antibiotic ointment.\n\nTetanus: see the last step of the Wound cleaning and care protocol.",
+      "detail": "MedlinePlus (liquid bandage): do not put ointments on top, because they weaken the bond; the person may shower once it is dry but should not scrub it; wash daily with soap and water and pat dry; do not scratch or pick at it; keep activity to a minimum so the wound does not reopen; the glue lasts 5 to 10 days and falls off on its own.\n\nBSA (strips): a thin layer of antibiotic ointment if not allergic, then a dressing and bandage; a thin film dressing is used without ointment. WMS: a moist wound environment helps healing (1C) and a clean protective bandage is helpful in the outdoors (2C). The Wound cleaning and care protocol states the differing advice on antibiotic ointment.\n\nTetanus: see the tetanus step of the Wound cleaning and care protocol (a booster if the last one was more than 10 years ago, or 5 for a dirty or deep wound).",
       "log": "Closed wound dressed"
     },
     {
@@ -207,8 +228,8 @@
     },
     {
       "id": "s18",
-      "text": "Infection or opening: open the wound so it can drain, leave it open, cover it with a moist dressing, and evacuate.",
-      "detail": "WMS 2014: if equipment and training allow, open wounds that show infection after closure and drain any abscess; raise the limb if the skin around is red and spreading. Evacuate early infection if suitable antibiotics are not available, and infection getting worse despite antibiotics (1C). Antibiotics are outside this app. Urgently if there is fever, confusion or a red streak. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Infection or opening: if trained and equipped, remove the strips or glue so it can drain; otherwise leave it covered. Evacuate (urgently with fever, confusion or a red streak).",
+      "detail": "WMS 2014: wounds with signs of infection after closure should be opened and any abscess drained, if equipment and training allow; raise the limb if the skin around is red and spreading. Evacuate early infection if suitable antibiotics are not available, and infection getting worse despite antibiotics (1C). Antibiotics are outside this app. Urgently if there is fever, confusion or a red streak. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "log": "Closed wound reopened for infection",
       "end": true
     },
@@ -250,7 +271,8 @@
     }
   ],
   "donts": [
-    "Do not close bites, punctures, scrapes, dirty, crushed or old wounds.",
+    "Do not close bites, punctures, scrapes, dirty, crushed or old wounds, or wounds in the armpit or groin.",
+    "Do not close a wound with numbness or weakness beyond it, into a joint, or over a possible broken bone.",
     "Do not close a wound that gapes more than half an inch or shows bone, tendon or ligament.",
     "Do not close a wound before it has been thoroughly irrigated.",
     "Do not put glue inside the wound, near the eye, or in the ear, nose or mouth.",

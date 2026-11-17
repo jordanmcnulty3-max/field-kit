@@ -17,18 +17,18 @@
   "indications": [
     "TCCC 2026 (Respiration/Breathing 5e): breathing is impaired and low oxygen cannot be corrected. Consider a properly sized NPA while ventilating with a 1000 mL bag-valve-mask.",
     "TCCC Combat Lifesaver course (2020): a casualty who is breathing but unconscious or semi-conscious, with no airway obstruction. The 2024 and 2026 guidelines no longer list the NPA in the airway step; they put such a casualty in the recovery position (see open questions).",
-    "Either way, only when the casualty cannot keep their own airway open. An awake person talking normally has an open airway (TCCC)."
+    "TCCC CMC skill instructions (2021): for an unconscious or semiconscious casualty who needs an open airway. An awake person talking normally has an open airway (TCCC)."
   ],
   "contraindications": [
     "Clear fluid coming from the nose or ears: it may be brain fluid from a skull fracture. Do not use an NPA (TCCC Combat Lifesaver course, 2020).",
-    "StatPearls (second source), absolute: a fracture at the base of the skull; facial trauma; disruption of the middle of the face, the back of the nose or the roof of the mouth.",
+    "StatPearls (second source; current TCCC lists none), absolute: a fracture at the base of the skull; facial trauma; disruption of the middle of the face, the back of the nose or the roof of the mouth.",
     "StatPearls, relative: suspected epiglottitis, large nasal polyps, recent nose surgery, a bleeding disorder, or blood-thinning medicine.",
     "An awake casualty who is breathing in a position of their own choosing: do not force another position or an airway procedure that makes breathing harder (TCCC Combat Lifesaver course, 2020).",
     "Something blocking the nostril on inspection, or an NPA that will not pass without force: never force it (TCCC)."
   ],
   "equipment": [
     "NPA. TCCC standard size is 32 Fr, which fits an average adult service member. TCCC gives no child size.",
-    "Sterile water-based lubricating jelly, or water. If neither: the casualty’s own saliva. Never blood, petroleum jelly or any non-water-based substance (TCCC).",
+    "Sterile water-based lubricating jelly, or water. If neither: the casualty’s own saliva. Never blood, petroleum-based or any other non-water-based substance (TCCC).",
     "Gloves.",
     "For the current TCCC indication: a 1000 mL bag-valve-mask, and a pulse oximeter if available."
   ],
@@ -68,7 +68,17 @@
       "ask": {
         "q": "Is the casualty awake and talking in a normal voice?",
         "yes": "s22",
-        "no": "s4"
+        "no": "s3b"
+      }
+    },
+    {
+      "id": "s3b",
+      "text": "Is the casualty unconscious or only partly responsive?",
+      "detail": "TCCC CMC skill instructions (2021): the NPA is for an unconscious or semiconscious casualty who needs an open airway. An awake casualty, even one who cannot talk normally because of a jaw or mouth injury, is not laid flat for an NPA: TCCC 2026 (4c) lets a conscious casualty take any position that best protects the airway.",
+      "ask": {
+        "q": "Is the casualty unconscious or only partly responsive?",
+        "yes": "s4",
+        "no": "s23"
       }
     },
     {
@@ -99,7 +109,7 @@
     {
       "id": "s7",
       "text": "Check the size, then coat the tip with water-based jelly or water.",
-      "detail": "Size: TCCC uses the standard 32 Fr NPA, which fits an average adult. StatPearls (second source) describes checking the length against the face: with the flange at the tip of the nose and the bevelled tip pointing to the ear, the right size just reaches the earlobe; another check is that it just reaches the angle of the jaw. Adult lengths are 6 to 9 cm (StatPearls). TCCC gives no child size, and this app does not cover NPAs in children.\n\nLubricant (TCCC): sterile water-based lubricating jelly, or water. If you have neither, use the casualty’s own saliva, not yours. Never use blood, petroleum jelly or any other non-water-based substance."
+      "detail": "Size: TCCC uses the standard 32 Fr NPA, which fits an average adult. StatPearls (second source) describes checking the length against the face: with the flange at the tip of the nose and the bevelled tip pointing to the ear, the right size just reaches the earlobe; another check is that it just reaches the angle of the jaw. Adult lengths are 6 to 9 cm (StatPearls). TCCC gives no child size, and this app does not cover NPAs in children.\n\nLubricant (TCCC): sterile water-based lubricating jelly, or water. If you have neither, use the casualty’s own saliva, not yours. Never use blood, petroleum-based or any other non-water-based substance."
     },
     {
       "id": "s8",
@@ -185,6 +195,12 @@
       "end": true
     },
     {
+      "id": "s23",
+      "text": "Awake: no NPA. Let them take the position that best protects the airway, including sitting up or leaning forward. Watch the airway and evacuate urgently.",
+      "detail": "TCCC 2026 (4c): allow a conscious casualty to assume any position that best protects the airway, to include sitting up and/or leaning forward. Do not force them to lie flat (TCCC Combat Lifesaver course). Remove what you can see from the mouth; never sweep blindly. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they become unresponsive, come back to this protocol.",
+      "end": true
+    },
+    {
       "id": "s22",
       "text": "No NPA needed: an awake person talking normally has an open airway. Let them take the position that helps them breathe.",
       "detail": "TCCC: if the casualty is conscious and speaking normally, there is no airway obstruction. Allow them to sit up or lean forward if that helps. Keep watching: if they stop answering or breathing becomes noisy, come back to this protocol.",
@@ -193,8 +209,8 @@
   ],
   "donts": [
     "Do not force an NPA into the nose.",
-    "Do not use an NPA if clear fluid comes from the nose or ears, or the middle of the face is badly injured.",
-    "Do not lubricate with blood, petroleum jelly or anything that is not water-based.",
+    "Do not use an NPA if clear fluid comes from the nose or ears (TCCC Combat Lifesaver course 2020), or if the middle of the face is badly injured (StatPearls; current TCCC lists none).",
+    "Do not lubricate with blood, petroleum-based or any other non-water-based substance.",
     "Do not put an NPA in an awake person who is talking normally, and do not force an awake casualty to lie flat.",
     "Do not leave a casualty with an NPA unwatched."
   ],
@@ -217,6 +233,11 @@
       "name": "Committee on TCCC, Combat Lifesaver course, Module 07 Airway Management in TFC: Skill Instructions #TCCC-CLS-09-01 (25 Jan 2020) and Speaker Notes #TCCC-CLS-14-01 (25 Jan 2020)",
       "year": 2020,
       "url": "https://learning-media.allogy.com/api/v1/pdf/55ba1e5d-95f6-4cc8-a8e1-5fc2768a1075/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Medic/Corpsman, Module 07 Airway Management in TFC, Skill Instructions #TCCC-CMC-09-01 (30 Apr 2021) and Skills Assessment Checklist #TCCC-CMC-12-01 (23 Sep 2021): NPA (numbered steps used for the order)",
+      "year": 2021,
+      "url": "https://learning-media.allogy.com:443/api/v1/pdf/a1eaea5f-8f53-47c6-a79e-94c175a6b895/contents"
     },
     {
       "name": "Committee on TCCC, Combat Medic/Corpsman skill card, Nasopharyngeal Airway (NPA) #TCCC-CMC-SC-29 (30 Apr 2025)",

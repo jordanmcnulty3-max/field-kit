@@ -18,7 +18,7 @@
   "indications": [
     "TCCC 2026: bleeding that pressure can reach (compressible) but a limb tourniquet cannot treat, such as the neck, armpit, groin or a deep wound where a tourniquet will not fit.",
     "TCCC 2026: together with removing a tourniquet (see the Tourniquet reassessment and conversion protocol).",
-    "TCCC skill (2024): a major bleed where a tourniquet cannot be applied or has not controlled the bleeding.",
+    "TCCC skill (2024): a major bleed where a tourniquet cannot be applied or has not controlled the bleeding (after tightening and a second tourniquet side by side, TCCC 2026).",
     "TCCC 2026: junctional bleeding while a junctional tourniquet is being readied, or when none is available."
   ],
   "contraindications": [
@@ -83,10 +83,20 @@
     },
     {
       "id": "s5",
-      "text": "Is a tourniquet already on, and is the wound still bleeding?",
+      "text": "Is a tourniquet already on this limb?",
       "detail": "TCCC skill: packing is used where a tourniquet cannot be applied or has not adequately controlled the bleeding. TCCC 2026: if the first tourniquet does not stop it, a second goes on side by side with the first (Severe bleeding protocol).",
       "ask": {
-        "q": "Still bleeding with a tourniquet on?",
+        "q": "Is a tourniquet already on this limb?",
+        "yes": "s5b",
+        "no": "s32"
+      }
+    },
+    {
+      "id": "s5b",
+      "text": "Tighten the tourniquet. If it still bleeds, put a second tourniquet side by side with the first (Severe bleeding protocol).",
+      "detail": "TCCC 2026 (3a): if bleeding is not controlled with the first tourniquet, apply a second tourniquet side by side with the first. The Severe bleeding protocol and the Trauma check (MARCH) say the same. Pack only if both tourniquets together do not control it.",
+      "ask": {
+        "q": "With both tourniquets tight: is it still bleeding?",
         "yes": "s6",
         "no": "s32"
       }
@@ -143,8 +153,8 @@
     },
     {
       "id": "s12",
-      "text": "Still bleeding after repacking: keep pressing hard and do not let up. Arm or leg: add a tourniquet. Groin, armpit, neck: junctional device if trained. Evacuate urgently.",
-      "detail": "Keep both hands on the packing with your body weight on it until help takes over. Arm or leg: a tourniquet 2 to 3 inches above the wound (Severe bleeding protocol). Groin, armpit or neck: the Junctional bleeding protocol covers junctional tourniquets and wraps, for those trained. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWatch for shock (Shock protocol).",
+      "text": "Still bleeding after repacking: keep pressing hard. Arm or leg: add a tourniquet. Groin: junctional tourniquet if trained. Armpit or neck: Junctional bleeding protocol. Evacuate urgently.",
+      "detail": "Keep both hands on the packing with your body weight on it until help takes over. Arm or leg: a tourniquet 2 to 3 inches above the wound (Severe bleeding protocol). Groin: a junctional tourniquet if you have one and are trained (Junctional bleeding protocol). Armpit or neck: the Junctional bleeding protocol covers packing and wrapping; no junctional device is used there in the sources read. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWatch for shock (Shock protocol).",
       "end": true
     },
     {
@@ -164,6 +174,16 @@
       "log": "Pressure bandage applied"
     },
     {
+      "id": "s15a",
+      "text": "Is a tourniquet on this limb?",
+      "detail": "With a tourniquet on, the pulse below will be gone because of the tourniquet; skip the pulse check below the bandage.",
+      "ask": {
+        "q": "Is a tourniquet on this limb?",
+        "yes": "s17",
+        "no": "s15"
+      }
+    },
+    {
       "id": "s15",
       "text": "Check below the bandage: feel for a pulse, and look at the skin.",
       "detail": "TCCC skill: check circulation below the bandage by feeling for a pulse. If the skin below becomes cool, bluish or numb, or the pulse is gone, the bandage may be too tight.",
@@ -180,13 +200,19 @@
       "ask": {
         "q": "After rewrapping: is the skin below warm, pink and with feeling?",
         "yes": "s17",
-        "no": "s16"
+        "no": "s16x"
       }
+    },
+    {
+      "id": "s16x",
+      "text": "Still cool, pale or pulseless after one rewrap: keep the bandage firm enough to control the bleeding, and evacuate urgently.",
+      "detail": "Group judgement: the TCCC skill says only to loosen and reapply. If the limb stays cool or pulseless after one rewrap, the injury itself may have cut the blood supply; loosening further risks the bleeding returning. Keep the bandage firm enough to control bleeding, recheck it often, and evacuate urgently (see open questions). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
     },
     {
       "id": "s14",
       "text": "Neck, armpit or groin: keep pressing, then wrap firmly over the packing (see detail). Never use a pressure bar on the neck.",
-      "detail": "Neck (TCCC 2020 skill): lay a 6-inch elastic bandage over the packing leaving a tail, wrap at least 1 to 1.5 times over the packing, then diagonally across the chest, under the opposite armpit, around the back and back over the wound; continue around the neck and under the arm on alternating sides, keeping tension, until the packing is covered. Tie a non-slip knot, tape it, and strap the upper arm on the injured side to the chest. Do not use a pressure bar on the neck. Watch the airway: TCCC 2026 warns that an expanding swelling in the neck may need an airway.\n\nArmpit (TCCC 2020 skill): with the arm out at 90 degrees, wrap the elastic bandage twice around the injured shoulder, covering the packing, then across the chest, around the back and under the other armpit, and anchor it around the other shoulder in a figure of 8. Fasten or knot and tape it, and strap the upper arm to the side of the chest with a cravat.\n\nGroin: keep pressing by hand. TCCC uses an improvised pressure device under a tourniquet around the hips, or a junctional tourniquet, for life-threatening groin bleeding: the Junctional bleeding protocol covers these, for those trained.",
+      "detail": "Neck (TCCC 2020 skill): lay a 6-inch elastic bandage over the packing leaving a tail, wrap at least 1 to 1.5 times over the packing, then diagonally across the chest, under the opposite armpit, around the back and back over the wound; continue around the neck and under the arm on alternating sides, keeping tension, until the packing is covered. Tie a non-slip knot, tape it, and strap the upper arm on the injured side to the chest. Do not use a pressure bar on the neck. Watch the airway: TCCC 2026 (after applying a clamp to the neck) warns that an expanding swelling in the neck may need a definitive airway; the same caution applies after any neck wound (app’s caution).\n\nArmpit (TCCC 2020 skill): with the arm out at 90 degrees, wrap the elastic bandage twice around the injured shoulder, covering the packing, then across the chest, around the back and under the other armpit, and anchor it around the other shoulder in a figure of 8. Fasten or knot and tape it, and strap the upper arm to the side of the chest with a cravat.\n\nGroin: keep pressing by hand. TCCC uses an improvised pressure device under a tourniquet around the hips, or a junctional tourniquet, for life-threatening groin bleeding: the Junctional bleeding protocol covers these, for those trained.",
       "log": "Packed wound bandaged or held"
     },
     {
@@ -232,7 +258,7 @@
     },
     {
       "id": "s33",
-      "text": "Do not remove it. Pack around it only if you can without moving it, bandage it in place, and use the Impaled object protocol. Evacuate urgently.",
+      "text": "Do not remove it. Press around it, not on it, pad around it, bandage it in place, and use the Impaled object protocol. Evacuate urgently.",
       "detail": "TCCC: if an object is lodged in the body, bandage it in place; do not remove it. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     }

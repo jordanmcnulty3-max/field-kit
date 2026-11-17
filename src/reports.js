@@ -24,7 +24,7 @@
       { n: 6, label: 'Security of the pickup site (wartime)', kind: 'one', options: [['N', 'No enemy troops in the area'], ['P', 'Possible enemy troops in the area'], ['E', 'Enemy troops in the area; approach with caution'], ['X', 'Enemy troops in area; armed escort required']] },
       { n: 7, label: 'Method of marking pickup site', kind: 'one', detail: 'Details (colour, signal)', options: [['A', 'Panels'], ['B', 'Pyrotechnic signal'], ['C', 'Smoke signal'], ['D', 'None'], ['E', 'Other']] },
       { n: 8, label: 'Patient nationality and status', kind: 'one', detail: 'Details', options: [['A', 'US Military'], ['B', 'US Civilian'], ['C', 'Non-US Military'], ['D', 'Non-US Civilian'], ['E', 'Enemy Prisoner']] },
-      { n: 9, label: 'Wartime: NBC contamination (N nuclear, B biological, C chemical; only if applicable). Peacetime: terrain description (features in and around the landing site)', kind: 'area' }
+      { n: 9, label: 'Wartime: NBC contamination (N nuclear, B biological, C chemical; include only when applicable). Peacetime: terrain description (features in and around the landing site)', kind: 'area' }
     ]
   };
   const line = n => NINE_LINE.lines[n - 1];

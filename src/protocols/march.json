@@ -72,7 +72,7 @@
     {
       "id": "s7",
       "text": "R, respiration: expose the chest and back. Look for wounds, watch both sides of the chest rise, and notice fast or struggling breathing.",
-      "detail": "TCCC: look, listen and feel for breathing, check that both sides of the chest rise equally, and listen for gurgling or wheezing. Expose the chest and back to find wounds, including small ones in the armpits and back.\n\nSigns of a wound through the chest wall: a sucking or hissing sound when they breathe in, froth or bubbles at the wound, difficulty breathing, chest or shoulder pain, coughing or spitting blood.\n\nLet an awake casualty sit up or take whatever position eases their breathing.\n\nBreathing that keeps getting harder after a chest injury can mean air is trapped inside the chest. Treating that with a needle is an advanced procedure: see Advanced procedures (needle decompression). Without it, evacuate urgently."
+      "detail": "TCCC: look, listen and feel for breathing, check that both sides of the chest rise equally, and listen for gurgling or wheezing. Expose the chest and back to find wounds, including small ones in the armpits and back.\n\nSigns of a wound through the chest wall: a sucking or hissing sound when they breathe in, froth or bubbles at the wound, difficulty breathing, chest or shoulder pain, coughing or spitting blood.\n\nLet an awake casualty sit up or take whatever position eases their breathing.\n\nBreathing that keeps getting harder after a chest injury can mean air is trapped inside the chest. Treating that with a needle is an advanced procedure: use the Needle decompression of the chest protocol. Without it, evacuate urgently."
     },
     {
       "id": "s8",
@@ -141,7 +141,7 @@
     {
       "id": "s16",
       "text": "Not breathing normally: start CPR now. Use the CPR, adult protocol (or CPR, child or CPR, infant).",
-      "detail": "Civilian guidance (American Heart Association) is to start CPR on anyone who is unresponsive and not breathing normally.\n\nTCCC (military, on the battlefield) says CPR will not succeed and should not be attempted for a casualty of blast or penetrating injury who has no pulse, no breathing and no other signs of life. It also says a casualty with chest or multiple injuries and no pulse or breathing should first have both sides of the chest decompressed with a needle by someone trained, to rule out trapped air, before care stops (see Advanced procedures).\n\nIf the injury was minor and they collapsed for another reason (for example drowning, lightning or a medical problem), CPR is more likely to help.",
+      "detail": "Civilian guidance (American Heart Association) is to start CPR on anyone who is unresponsive and not breathing normally.\n\nTCCC (military, on the battlefield) says CPR will not succeed and should not be attempted for a casualty of blast or penetrating injury who has no pulse, no breathing and no other signs of life. It also says a casualty with chest or multiple injuries and no pulse or breathing should first have both sides of the chest decompressed with a needle by someone trained, to rule out trapped air, before care stops (Needle decompression of the chest protocol).\n\nIf the injury was minor and they collapsed for another reason (for example drowning, lightning or a medical problem), CPR is more likely to help.",
       "end": true
     }
   ],

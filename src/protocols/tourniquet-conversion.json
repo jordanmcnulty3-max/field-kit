@@ -13,11 +13,11 @@
     "reposition tourniquet",
     "replace tourniquet"
   ],
-  "summary": "Rechecking a tourniquet, moving it onto the skin, and replacing it with packing and a pressure bandage within 2 hours when TCCC’s conditions are met. TCCC: Combat Lifesaver and above (skill sets 2024); the 2026 guidelines expect All Service Members and Combat Lifesavers to reposition and convert.",
+  "summary": "Rechecking a tourniquet, moving it onto the skin, and replacing it with packing and a pressure bandage when TCCC’s conditions are met (aim: within 2 hours). TCCC: Combat Lifesaver and above (skill sets 2024); the 2026 guidelines expect All Service Members and Combat Lifesavers to reposition and convert.",
   "indications": [
     "TCCC 2026: reassess every tourniquet already on, including hasty or high-and-tight ones. Expose the wound and decide whether it is still needed.",
     "Reposition: a tourniquet over clothing, or high and tight, that is still needed: put a second one on the skin 2 to 3 inches above the bleeding site, then loosen the first (TCCC 2026).",
-    "Remove: if reassessment shows the tourniquet was not needed. Note the time (TCCC 2026).",
+    "Remove: if reassessment shows the tourniquet was not needed. Note the time (TCCC 2026). This app does not guide removal of an unneeded tourniquet: it follows the conversion steps, which keep the loosened tourniquet in place.",
     "Convert to a hemostatic or pressure dressing as soon as possible when all three are true: the casualty is not in shock; the wound can be watched closely for bleeding; it is not controlling bleeding from an amputation (TCCC 2026).",
     "TCCC 2026: every effort should be made to convert in less than 2 hours if bleeding can be controlled by other means. TCCC skill (2024): conversion fits especially when a long evacuation is expected."
   ],
@@ -39,7 +39,8 @@
     "Bleeding comes back, at once or later (the 2026 TCCC summary names delayed recognition of rebleeding as a concern). Retighten the tourniquet.",
     "Shock from blood loss.",
     "Compartment syndrome between two tourniquets if the original is left tight above a new one (TCCC Combat Lifesaver notes 2024).",
-    "Prolonged tourniquet syndrome: the 2026 TCCC summary gives it, with delayed evacuation, as the reason for these rules; the guideline does not describe it further."
+    "Prolonged tourniquet syndrome: the 2026 TCCC summary gives it, with delayed evacuation, as a reason for these rules; the guideline does not describe it further.",
+    "The 2026 TCCC summary also names reperfusion injury, recurrent haemorrhage, clot destabilisation and delayed recognition of rebleeding as risks."
   ],
   "steps": [
     {
@@ -66,7 +67,12 @@
       "id": "s3",
       "text": "Still bleeding: tighten it more. If it still bleeds, put a second tourniquet side by side with the first.",
       "detail": "TCCC 2026: if bleeding persists or a pulse below is still present, tighten further or add a second tourniquet side by side to stop both the bleeding and the pulse. The Severe bleeding protocol covers tightening and a second tourniquet.",
-      "log": "Tourniquet tightened on reassessment"
+      "log": "Tourniquet tightened on reassessment",
+      "ask": {
+        "q": "After tightening (and a second tourniquet if needed): has the bleeding stopped?",
+        "yes": "s4",
+        "no": "s41"
+      }
     },
     {
       "id": "s4",
@@ -75,14 +81,35 @@
       "ask": {
         "q": "Can you feel a pulse below the tourniquet?",
         "yes": "s5",
-        "no": "s6"
+        "no": "s12"
       }
     },
     {
       "id": "s5",
       "text": "Pulse present: tighten until it is gone, or add a second tourniquet side by side.",
       "detail": "TCCC 2026: eliminate both the bleeding and the pulse below.",
-      "log": "Tourniquet tightened to stop pulse"
+      "log": "Tourniquet tightened to stop pulse",
+      "ask": {
+        "q": "Is the pulse below gone now?",
+        "yes": "s12",
+        "no": "s41"
+      }
+    },
+    {
+      "id": "s41",
+      "text": "Bleeding or pulse not controlled: leave both tourniquets tight. Do not reposition or convert. Use the Severe bleeding protocol and evacuate urgently.",
+      "detail": "TCCC 2026 (6g): the aim is to eliminate both the bleeding and the pulse below; TCCC skill (2026): confirm the pulse is absent and bleeding controlled before going further. Keep the tourniquets visible, keep tightening as needed, and watch for shock. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s12",
+      "text": "Has the tourniquet been on for more than 6 hours?",
+      "detail": "TCCC 2026: do not remove a tourniquet that has been in place more than 6 hours unless close monitoring and laboratory capability are available. TCCC notes (2024): do not attempt conversion after six or more hours. Off-grid there is no laboratory, so the answer leads to leaving it on.\n\nThis question comes before repositioning too. TCCC 2026 and the 2026 reposition skill set no time limit on repositioning; repositioning loosens the original tourniquet, and the 2026 summary names reperfusion injury among its concerns. Asking first is the app’s caution (see open questions).",
+      "ask": {
+        "q": "On for more than 6 hours?",
+        "yes": "s40",
+        "no": "s6"
+      }
     },
     {
       "id": "s6",
@@ -91,7 +118,7 @@
       "ask": {
         "q": "Is it over clothing or high above the wound?",
         "yes": "s7",
-        "no": "s12"
+        "no": "s13"
       }
     },
     {
@@ -101,7 +128,7 @@
       "ask": {
         "q": "Do you have a second tourniquet?",
         "yes": "s8",
-        "no": "s12"
+        "no": "s13"
       }
     },
     {
@@ -119,7 +146,7 @@
         "label": "Loosen over one minute"
       },
       "ask": {
-        "q": "Has bleeding come back?",
+        "q": "After the full minute: has bleeding come back?",
         "yes": "s10",
         "no": "s11"
       }
@@ -151,16 +178,6 @@
       "text": "Slide the original down to just above the new one, loose with the slack taken up. Write the time on the new tourniquet.",
       "detail": "TCCC skill (2024): confirm there is no pulse below and the bleeding is still controlled; slide the original down and leave it in place above the new one. It should not be fully tightened: remove excess slack so it does not catch during moves. TCCC notes 2024: leaving the original tight above the new one can cause compartment syndrome between them.",
       "log": "Original tourniquet loosened and left in place"
-    },
-    {
-      "id": "s12",
-      "text": "Has the tourniquet been on for more than 6 hours?",
-      "detail": "TCCC 2026: do not remove a tourniquet that has been in place more than 6 hours unless close monitoring and laboratory capability are available. TCCC notes (2024): do not attempt conversion after six or more hours. Off-grid there is no laboratory, so the answer leads to leaving it on.",
-      "ask": {
-        "q": "On for more than 6 hours?",
-        "yes": "s40",
-        "no": "s13"
-      }
     },
     {
       "id": "s13",
@@ -199,7 +216,7 @@
       "ask": {
         "q": "On for more than 2 hours?",
         "yes": "s17",
-        "no": "s18"
+        "no": "s18a"
       }
     },
     {
@@ -208,6 +225,16 @@
       "detail": "TCCC 2026: ASM/CLS trained personnel should not attempt conversion beyond 2 hours post-application unless directed by CMC/CPP or other advanced medical personnel. In the absence of medical oversight, maintain the tourniquet and keep monitoring.",
       "ask": {
         "q": "Are you, or is the person directing you, trained at combat medic level or above?",
+        "yes": "s18a",
+        "no": "s40"
+      }
+    },
+    {
+      "id": "s18a",
+      "text": "Is the wound one you can pack and cover with a pressure bandage?",
+      "detail": "TCCC conversion skill (2024; CPP 2026): the wound must be assessed as suitable for a hemostatic dressing and pressure bandage. A wound you cannot pack and wrap stays under the tourniquet.",
+      "ask": {
+        "q": "Can this wound be packed and pressure-bandaged?",
         "yes": "s18",
         "no": "s40"
       }
@@ -251,7 +278,7 @@
         "label": "Loosen over one minute"
       },
       "ask": {
-        "q": "Has bleeding come back?",
+        "q": "After the full minute: has bleeding come back?",
         "yes": "s23",
         "no": "s24"
       }
@@ -287,20 +314,36 @@
     {
       "id": "s26",
       "text": "Bleeding is back: retighten the tourniquet now (2 to 3 inches above the wound). If a tourniquet cannot be used, repack with a new hemostatic dressing and press hard.",
-      "detail": "TCCC notes (2024): if the pressure bandage or hemostatic dressing is ineffective, apply a tourniquet 2 to 3 inches above the bleeding site if possible. If a tourniquet cannot be placed and the bandage is ineffective or soaked, replace it with a new hemostatic dressing, packing the wound within 90 seconds while keeping constant direct pressure.",
+      "detail": "TCCC notes (2024): if the pressure bandage or hemostatic dressing is ineffective, apply a tourniquet 2 to 3 inches above the bleeding site if possible. If a tourniquet cannot be placed and the bandage is ineffective or soaked, replace it with a new hemostatic dressing, packing the wound within 90 seconds while keeping constant direct pressure (Hemostatic gauze wound packing protocol).",
       "log": "Bleeding after conversion: tourniquet retightened",
+      "ask": {
+        "q": "Is the bleeding controlled now?",
+        "yes": "s26y",
+        "no": "s26n"
+      }
+    },
+    {
+      "id": "s26y",
+      "text": "Controlled: leave the tourniquet tight. Do not try conversion again. Keep watching and evacuate urgently.",
+      "detail": "Group judgement: a wound that rebled after conversion is not converted again in the field. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s26n",
+      "text": "Still bleeding: keep pressing hard on the wound, use the Severe bleeding protocol, and evacuate urgently.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nWatch for shock (Shock protocol).",
       "end": true
     },
     {
       "id": "s27",
-      "text": "Keep watching all the way to care, keep them warm, and evacuate.",
+      "text": "Keep watching all the way to care, keep them warm, and evacuate urgently.",
       "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nKeep the loosened tourniquet in place. Recheck the dressing every time they are moved. Record every application, repositioning, conversion and removal time.",
       "end": true
     },
     {
       "id": "s30",
-      "text": "Do not loosen or remove it. Leave it on and visible, and follow the last step of the Severe bleeding protocol. Evacuate urgently.",
-      "detail": "The Severe bleeding protocol leaves tourniquets on until the casualty reaches medical care. TCCC 2026: in the absence of medical oversight, keep the tourniquet in place and monitor until a higher level of care. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Do not loosen or remove it. Leave it on, tight and visible, keep watching for bleeding and shock, and evacuate urgently.",
+      "detail": "The Severe bleeding protocol leaves tourniquets on until the casualty reaches medical care. American Red Cross Wilderness and Remote First Aid (2014): keep the tourniquet tight and in place until the person reaches advanced medical care; do not remove it unless a health care provider advises it. TCCC 2026: in the absence of medical oversight, keep the tourniquet in place and monitor until a higher level of care. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     }
   ],
@@ -331,6 +374,16 @@
       "url": "https://learning-media.allogy.com/api/v1/pdf/e146d4b1-5e8e-4efd-b0d0-c74555ffe319/contents"
     },
     {
+      "name": "Committee on TCCC, Module 09 Circulation/Hemorrhage Control in TFC, Skill Instructions #TCCC-CPP-09-03 and Skills Assessment Checklist #TCCC-CPP-09-04 (30 May 2026): Tourniquet Reposition, Tourniquet Conversion (numbered steps)",
+      "year": 2026,
+      "url": "https://learning-media.allogy.com:443/api/v1/pdf/f054fe51-0f58-4693-be9e-37c350ab6c70/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Medic/Corpsman skill card, Tourniquet Reposition #TCCC-CMC-SC-37 (30 May 2026)",
+      "year": 2026,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/d4125772-82b5-4861-ab1e-8b1d42edfa66/contents"
+    },
+    {
       "name": "Committee on TCCC, Combat Lifesaver course, Module 09 Circulation/Hemorrhage Control in TFC, Skill Instructions #TCCC-CLS-09-01 (17 Apr 2024): Tourniquet Replacement, Tourniquet Conversion",
       "year": 2024,
       "url": "https://learning-media.allogy.com/api/v1/pdf/dc3d090d-4b44-4025-abbc-cb827a15413a/contents"
@@ -349,6 +402,11 @@
       "name": "Wilderness Medical Society, Practice Guidelines for Basic Wound Management in the Austere Environment: 2014 Update (Quinn et al., Wilderness Environ Med 2014;25:295-310): tourniquets",
       "year": 2014,
       "url": "https://apps.dtic.mil/sti/pdfs/ADA614573.pdf"
+    },
+    {
+      "name": "American Red Cross, Wilderness and Remote First Aid Emergency Reference Guide (2014): tourniquets",
+      "year": 2014,
+      "url": "https://www.redcross.org/content/dam/redcross/training-services/no-index/wilderness-remote-first-aid-erg.pdf"
     }
   ],
   "reviewed": "2026-11-17"

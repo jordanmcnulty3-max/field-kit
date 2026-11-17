@@ -13,23 +13,23 @@
     "stimson",
     "put joint back"
   ],
-  "summary": "Putting back a dislocated shoulder (front), kneecap, finger or toe far from care. From the BSA Wilderness First Aid guidelines, written with Wilderness Medical Society input and taught in Wilderness First Aid courses; the source names no other training level.",
+  "summary": "Putting back a dislocated shoulder (front), kneecap, finger or toe far from care. From the American Red Cross Wilderness and Remote First Aid guide (2014) and the BSA Wilderness First Aid guidelines (written with Wilderness Medical Society input), taught in wilderness first aid courses; no other training level is assigned.",
   "indications": [
-    "BSA Wilderness First Aid (2017): with some dislocations a field reduction may be attempted. The ones it describes are the shoulder (front dislocation), the kneecap, and fingers and toes.",
-    "Signs of a dislocation (BSA): pain at the joint, loss of the normal range of movement, and a joint that looks abnormal.",
-    "BSA: work quickly but calmly; an earlier attempt is easier on the casualty and the rescuer."
+    "Red Cross Wilderness and Remote First Aid (2014) and BSA (2017): some dislocations may be reduced in the field when it is safe: the shoulder (front dislocation), the kneecap, and fingers and toes.",
+    "Signs of a dislocation (Red Cross, BSA): pain at the joint, loss of the normal range of movement, and a joint that looks abnormal.",
+    "Work calmly and quickly; an earlier attempt is easier (Red Cross, BSA)."
   ],
   "contraindications": [
-    "Any other joint (elbow, hip, knee, ankle, wrist and others): BSA describes no field reduction; many dislocations can only be splinted in the most comfortable position.",
+    "Any other joint (elbow, hip, knee, ankle, wrist and others): Red Cross and BSA describe no field reduction; splint it in the most comfortable position.",
     "A possible broken bone at or near the joint: StatPearls (second source) lists fractures of the neck of the upper arm bone as a contraindication to shoulder reduction; about 25% of shoulder dislocations come with a significant fracture. BSA: when in doubt, splint.",
     "StatPearls (shoulder): poor circulation or nerve damage where prompt reduction is not possible without further injury, or a suspected artery injury. Avoid repeated attempts.",
-    "Pain that increases dramatically during the attempt: stop (BSA).",
+    "Pain that increases sharply during the attempt: stop (Red Cross, BSA).",
     "Shoulder self-reduction delayed more than a few minutes: muscle spasm will probably stop it working (BSA).",
     "StatPearls: the Kocher and Hippocratic (foot in the armpit) shoulder techniques are no longer recommended because of more complications. They are not in this app.",
-    "A possible neck or back injury: do not move them for a reduction (Neck or back (spine) injury protocol)."
+    "A possible neck or back injury: do not move them for a shoulder or kneecap reduction (Neck or back (spine) injury protocol)."
   ],
   "equipment": [
-    "Shoulder (Stimson): a rock, log or similar to lie face down over, about 5 to 10 pounds of weight, and soft cloth to tie it to the wrist (BSA).",
+    "Shoulder (Stimson): a rock, log or similar to lie face down over, and a weight of about 5 to 10 pounds to tie to the wrist (Red Cross, BSA).",
     "Shoulder: sling and swathe (triangular bandages or cravats).",
     "Finger or toe: tape and gauze to buddy-tape it to its neighbour.",
     "Kneecap: a splint and padding that keep pressure off the kneecap."
@@ -38,38 +38,48 @@
     "Nerve injury: StatPearls reports axillary nerve problems in over 40% of shoulder dislocations, usually recovering after reduction (numb patch on the outer shoulder).",
     "An unseen fracture: about 25% of shoulder dislocations have a significant fracture (StatPearls).",
     "Failure: the Stimson method takes time and sometimes fails; too much weight increases muscle spasm and stops it working (BSA).",
-    "Worse circulation or feeling after the attempt: evacuate urgently.",
+    "Circulation or feeling beyond the joint poor or worse after the attempt: evacuate rapidly (Red Cross).",
     "The joint dislocating again (StatPearls: recurrence)."
   ],
   "steps": [
     {
       "id": "s1",
       "text": "Advanced procedure for people trained hands-on in reducing dislocations. Have you been trained hands-on to do this?",
-      "detail": "Reading this is not training. The source is the BSA Wilderness First Aid Curriculum and Doctrine Guidelines (2017), developed with Wilderness Medical Society input; reduction of these joints is taught in Wilderness First Aid courses. It assigns no other training level.",
+      "detail": "Reading this is not training. Sources: the American Red Cross Wilderness and Remote First Aid Emergency Reference Guide (2014) and the BSA Wilderness First Aid Curriculum and Doctrine Guidelines (2017), developed with Wilderness Medical Society input. Both are wilderness first aid course materials and assign no other training level.",
       "ask": {
         "q": "Have you been trained hands-on to reduce dislocations?",
-        "yes": "s2",
+        "yes": "s3",
         "no": "s30"
-      }
-    },
-    {
-      "id": "s2",
-      "text": "Could the neck or back be injured?",
-      "detail": "The Stimson shoulder method needs the casualty face down over a rock or log. Never move someone with a possible neck or back injury for a reduction.",
-      "ask": {
-        "q": "Could the neck or back be injured?",
-        "yes": "s31",
-        "no": "s3"
       }
     },
     {
       "id": "s3",
       "text": "Is the dislocated joint a shoulder, kneecap, finger or toe?",
-      "detail": "BSA describes field reduction only for the shoulder (front dislocation), kneecap, and fingers and toes. Other dislocations (elbow, hip, knee, ankle, wrist) are splinted in the most comfortable position and evacuated.",
+      "detail": "Red Cross and BSA describe field reduction only for the shoulder (front dislocation), kneecap, and fingers and toes. Other dislocations (elbow, hip, knee, ankle, wrist) are splinted in the most comfortable position and evacuated.",
       "ask": {
         "q": "Is it a shoulder, kneecap, finger or toe?",
-        "yes": "s4",
+        "yes": "s2",
         "no": "s32"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Could the neck or back be injured?",
+      "detail": "A finger or toe can be reduced where the casualty lies. A shoulder (face down over a rock or log) or kneecap (straightening the leg) means moving them: never do that with a possible neck or back injury.",
+      "ask": {
+        "q": "Could the neck or back be injured?",
+        "yes": "s2b",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s2b",
+      "text": "Is it a finger or toe?",
+      "detail": "Fingers and toes can be done where they lie, without moving the casualty.",
+      "ask": {
+        "q": "Is it a finger or toe?",
+        "yes": "s4",
+        "no": "s31"
       }
     },
     {
@@ -85,7 +95,7 @@
     {
       "id": "s5",
       "text": "Check and note circulation, feeling and movement beyond the joint before you start.",
-      "detail": "Check circulation, sensation and movement beyond the joint: colour and warmth of the hand, foot, finger or toe; any numbness or tingling; can they wiggle the fingers or toes. Shoulder: StatPearls (second source) notes the axillary nerve is the nerve most often injured; it gives feeling to the skin over the outer shoulder, so check that patch too. Record what you find before you start.",
+      "detail": "Check circulation, sensation and movement (CSM) beyond the joint: colour and warmth of the hand, foot, finger or toe; any numbness or tingling; can they wiggle the fingers or toes. Red Cross Wilderness and Remote First Aid: check CSM before and after. Shoulder: StatPearls (second source) notes the axillary nerve is the nerve most often injured; it gives feeling to the skin over the outer shoulder, so check that patch too, and record the findings before and after.",
       "ask": {
         "q": "Is the hand or foot beyond it pale, blue, cold or numb?",
         "yes": "s6",
@@ -94,13 +104,28 @@
     },
     {
       "id": "s6",
-      "text": "Poor circulation or feeling: this is urgent. Start the evacuation now. One gentle attempt only (next steps); if it does not go back, splint and keep moving.",
-      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nBSA: go fast for injuries that reduce circulation or sensation beyond the injury. StatPearls (shoulder, hospital setting): poor circulation or nerve damage where prompt reduction is not possible without further injury, or a suspected artery injury, are reasons not to reduce, and repeated attempts should be avoided.\n\nGroup judgement, not from a source: neither source says whether to attempt a reduction in the field when circulation beyond the joint is poor. This app allows one gentle attempt by a trained person while the evacuation starts, and no repeat (see open questions)."
+      "text": "Poor circulation or feeling: start the evacuation now, rapidly. One gentle attempt only (next steps); if it does not go back, splint it and keep moving.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nRed Cross: evacuate rapidly for injuries that reduce circulation, sensation or movement beyond the injury. StatPearls (shoulder, hospital setting): poor circulation or nerve damage where prompt reduction is not possible without further injury, or a suspected artery injury, are reasons not to reduce, and repeated attempts should be avoided.\n\nGroup judgement, not from a source: neither wilderness source says whether to try a reduction first when circulation is poor. This app allows one quick, gentle attempt by a trained person while the evacuation starts; no 20 to 30 minute Stimson method, and no repeat (see open questions).",
+      "ask": {
+        "q": "Is it the shoulder?",
+        "yes": "s6b",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s6b",
+      "text": "Did the shoulder come out only a few minutes ago?",
+      "detail": "BSA: self-reduction rarely works if delayed more than a few minutes. With poor circulation, the slower Stimson method is not used here.",
+      "ask": {
+        "q": "Only a few minutes ago?",
+        "yes": "s11",
+        "no": "s14"
+      }
     },
     {
       "id": "s7",
       "text": "Is it the shoulder?",
-      "detail": "BSA describes the front (anterior) shoulder dislocation only.",
+      "detail": "Red Cross and BSA describe the front (anterior) shoulder dislocation only.",
       "ask": {
         "q": "Is it the shoulder?",
         "yes": "s10",
@@ -119,7 +144,7 @@
     },
     {
       "id": "s10",
-      "text": "Did it happen only a few minutes ago, with the casualty able to grip their wrist?",
+      "text": "Did the shoulder come out only a few minutes ago?",
       "detail": "BSA: a person can often pull their own shoulder back into place, but if they delay more than a few minutes, chest muscle spasm will probably prevent success.",
       "ask": {
         "q": "Only a few minutes ago?",
@@ -130,19 +155,29 @@
     {
       "id": "s11",
       "text": "Self-reduction: sitting or standing, they grip the wrist of the injured arm with the other hand and pull the arm straight forward, relaxing the shoulder.",
-      "detail": "BSA: the person stands or sits and pulls the injured arm straight forward, gripping the wrist with the other hand. Have them relax, especially the injured shoulder. Reduction may hurt, but stop if pain increases dramatically.",
-      "warn": "Stop if pain increases dramatically.",
+      "detail": "BSA and Red Cross: the person stands or sits and pulls the injured arm straight forward, gripping the wrist with the other hand. Have them relax, especially the injured shoulder. Reduction may hurt, but stop if pain increases sharply.\n\nHow to tell it is back: no source read gives an explicit check. Red Cross and BSA list the signs of a dislocation as pain, loss of normal range of movement and a joint that looks abnormal; when it is back, the joint looks like the other side again and movement returns. StatPearls: a reduction may be subtle, without an obvious clunk.",
+      "warn": "Stop if pain increases sharply.",
       "ask": {
         "q": "Did the shoulder go back in (see detail)?",
         "yes": "s15",
+        "no": "s11n"
+      }
+    },
+    {
+      "id": "s11n",
+      "text": "Is the hand still pale, blue, cold or numb (the poor-circulation case)?",
+      "detail": "With poor circulation, only one attempt is made (group judgement): go to the splint-and-evacuate step. Otherwise the Stimson method may be tried next.",
+      "ask": {
+        "q": "Is circulation or feeling beyond it poor?",
+        "yes": "s14",
         "no": "s12"
       }
     },
     {
       "id": "s12",
-      "text": "Stimson: lay them face down across a rock or log, injured arm hanging straight down. Tie 5 to 10 pounds of weight to the wrist with soft cloth. Wait 20 to 30 minutes.",
-      "detail": "BSA: position the patient face down across a rock or log with the injured arm hanging straight down; tie something of about 5 to 10 pounds to the dangling wrist with a soft cloth; wait, because it takes 20 to 30 minutes to work. The casualty must stay relaxed so the pull slowly tires the chest and back muscles and the joint slips back in. Too much weight increases spasm and stops it working. It takes time and sometimes fails.\n\nHow to tell it worked: BSA gives the signs of a dislocation as an abnormal-looking joint and loss of the normal range of movement. Back in place, the shoulder looks like the other one again and movement returns; the joint often slips back noticeably.",
-      "warn": "Stop if pain increases dramatically.",
+      "text": "Stimson: lay them face down across a rock or log, injured arm hanging straight down. Tie about 5 to 10 pounds of weight to the wrist. Wait 20 to 30 minutes.",
+      "detail": "Red Cross and BSA: the person lies face down across a rock, log or similar with the injured arm hanging straight down; tie a weight of about 5 to 10 pounds to the dangling wrist; wait, because it takes about 20 to 30 minutes to work. The casualty must stay relaxed so the pull slowly tires the chest and back muscles and the joint slips back in. Too much weight increases spasm and stops it working (BSA). It takes time and sometimes fails. StatPearls gives 5 to 15 pounds and says reduction usually comes within 30 minutes; this app uses the 5 to 10 pounds of the wilderness sources (see open questions).\n\nHow to tell it is back: no source read gives an explicit check. Red Cross and BSA list the signs of a dislocation as pain, loss of normal range of movement and a joint that looks abnormal; when it is back, the joint looks like the other side again and movement returns. StatPearls: a reduction may be subtle, without an obvious clunk.",
+      "warn": "Stop if pain increases sharply.",
       "timer": {
         "seconds": 1800,
         "label": "Stimson: up to 30 minutes"
@@ -156,10 +191,10 @@
     {
       "id": "s15",
       "text": "Back in: put the arm in a sling and swathe. Leave out the swathe if they may need the arm in an emergency.",
-      "detail": "BSA: once the shoulder is reduced, place the arm in a sling and swathe. Do not swathe it if the person may need to use the arm in an emergency, and allow use of the arm when needed.",
+      "detail": "Red Cross and BSA: once the shoulder is reduced, place the arm in a sling and swathe; do not bind the arm if the person may need it in an emergency.",
       "log": "Shoulder dislocation reduced",
       "ask": {
-        "q": "Now recheck beyond the joint: is circulation or feeling worse than before?",
+        "q": "Now recheck beyond the joint: is it still pale, blue, cold or numb, or worse than before?",
         "yes": "s41",
         "no": "s42"
       }
@@ -167,8 +202,8 @@
     {
       "id": "s20",
       "text": "Kneecap: gently straighten the leg with gentle traction. If it does not pop back, massage the thigh and gently push the kneecap back into line.",
-      "detail": "BSA: kneecap dislocations are typically very easy to reduce. Apply gentle traction to the leg to straighten it out; the kneecap often pops back on its own. If it does not, massage the thigh and gently push the kneecap back into alignment. Stop if pain increases dramatically.",
-      "warn": "Stop if pain increases dramatically.",
+      "detail": "Red Cross and BSA: kneecap dislocations are typically easy to reduce. Apply gentle traction to straighten the leg; the kneecap often pops back on its own. If it does not, massage the thigh and gently push the kneecap back into alignment. Stop if pain increases sharply. One attempt only if circulation is poor (group judgement).\n\nHow to tell it is back: no source read gives an explicit check. Red Cross and BSA list the signs of a dislocation as pain, loss of normal range of movement and a joint that looks abnormal; when it is back, the joint looks like the other side again and movement returns. StatPearls: a reduction may be subtle, without an obvious clunk.",
+      "warn": "Stop if pain increases sharply.",
       "ask": {
         "q": "Is the kneecap back in place?",
         "yes": "s21",
@@ -178,10 +213,10 @@
     {
       "id": "s21",
       "text": "Splint the leg so the splint does not press on the kneecap. They may then be able to walk out.",
-      "detail": "BSA: splint it so the splint keeps pressure off the kneecap; the patient may then be able to walk out.",
+      "detail": "Red Cross and BSA: splint it so the splint keeps pressure off the kneecap; BSA: the patient may then be able to walk out.",
       "log": "Kneecap dislocation reduced",
       "ask": {
-        "q": "Now recheck beyond the joint: is circulation or feeling worse than before?",
+        "q": "Now recheck beyond the joint: is it still pale, blue, cold or numb, or worse than before?",
         "yes": "s41",
         "no": "s42"
       }
@@ -189,8 +224,8 @@
     {
       "id": "s25",
       "text": "Finger or toe: keep the joint partly bent. Pull gently on the end while pressing the joint back into place with your other thumb.",
-      "detail": "BSA: keeping the injured finger partially flexed, pull on the end while gently pressing the joint back into place with your thumb. Toes are treated the same way. Stop if pain increases dramatically.",
-      "warn": "Stop if pain increases dramatically.",
+      "detail": "BSA and Red Cross: keeping the injured finger partially flexed, pull on the end while gently pressing the joint back into place with your thumb. Toes are treated the same way. Stop if pain increases sharply. One attempt only if circulation is poor (group judgement).\n\nHow to tell it is back: no source read gives an explicit check. Red Cross and BSA list the signs of a dislocation as pain, loss of normal range of movement and a joint that looks abnormal; when it is back, the joint looks like the other side again and movement returns. StatPearls: a reduction may be subtle, without an obvious clunk.",
+      "warn": "Stop if pain increases sharply.",
       "ask": {
         "q": "Is it back in place?",
         "yes": "s26",
@@ -200,30 +235,31 @@
     {
       "id": "s26",
       "text": "Tape it to the next finger or toe with gauze between them. Do not tape directly over the joint.",
-      "detail": "BSA: tape the injured finger to a neighbour with a gauze pad between them; do not tape directly over the joint itself. Toes the same.",
+      "detail": "Red Cross and BSA: tape the injured finger to a neighbour with padding between them; do not tape directly over the joint itself. Toes the same.",
       "log": "Finger or toe dislocation reduced",
       "ask": {
-        "q": "Now recheck beyond the joint: is circulation or feeling worse than before?",
+        "q": "Now recheck beyond the joint: is it still pale, blue, cold or numb, or worse than before?",
         "yes": "s41",
         "no": "s42"
       }
     },
     {
       "id": "s14",
-      "text": "Not back in: stop. Do not keep pulling or try other methods. Splint it in the most comfortable position and evacuate.",
-      "detail": "BSA: many dislocations can only be splinted in the most comfortable position; the Stimson method sometimes fails. StatPearls: avoid repeated attempts. Use the Sprain, strain or dislocation protocol for splinting and circulation checks. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Urgently if circulation or feeling beyond the joint is poor.",
+      "text": "Not back in: stop. Do not keep pulling or try other methods. Splint it in the most comfortable position and evacuate (rapidly if circulation or feeling is poor).",
+      "detail": "Red Cross and BSA: dislocations that cannot be reduced are splinted in the most comfortable position; the Stimson method sometimes fails. StatPearls: avoid repeated attempts. Use the Sprain, strain or dislocation protocol for splinting and circulation checks. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "log": "Reduction attempted, not successful",
       "end": true
     },
     {
       "id": "s41",
-      "text": "Worse after the reduction: keep it splinted, and evacuate urgently.",
-      "detail": "BSA: go fast for injuries that reduce circulation or sensation beyond the injury. StatPearls: record the nerve and circulation checks before and after reduction. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Circulation or feeling still poor or worse: keep it splinted and evacuate rapidly.",
+      "detail": "Red Cross: evacuate rapidly for injuries with decreased circulation, sensation or movement beyond the injury. StatPearls: record the nerve and circulation checks before and after reduction. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },
     {
       "id": "s42",
       "text": "Recheck circulation, feeling and movement often, keep it splinted, and evacuate.",
-      "detail": "BSA: evacuate any patient with an unusable injury and every first-time dislocation, except perhaps dislocations of the outer joints of the fingers and toes. Recheck circulation, sensation and movement often, and make sure wraps are not too tight (BSA). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Red Cross: evacuate (not urgently) for a first-time dislocation or an injured part that cannot be used; rapidly if circulation, sensation or movement beyond it decreases. BSA: except perhaps dislocations of the outer joints of the fingers and toes. Recheck often and make sure wraps are not too tight. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },
     {
@@ -241,30 +277,36 @@
     {
       "id": "s32",
       "text": "Do not reduce it. Splint it in the most comfortable position (Sprain, strain or dislocation protocol) and evacuate.",
-      "detail": "BSA: many dislocations can only be splinted in the most comfortable position in the field. When in doubt, splint. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Red Cross and BSA: dislocations that cannot be reduced in the field are splinted in the most comfortable position. When in doubt, splint (BSA). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     }
   ],
   "donts": [
     "Do not try to reduce any joint other than a front shoulder dislocation, kneecap, finger or toe.",
     "Do not reduce a joint you suspect is also broken.",
-    "Do not keep going if pain increases dramatically, and do not make repeated attempts.",
+    "Do not keep going if pain increases sharply, and do not make repeated attempts.",
     "Do not use the foot-in-the-armpit (Hippocratic) or Kocher shoulder methods.",
     "Do not tape directly over a finger or toe joint.",
-    "Do not hang more than 5 to 10 pounds from the wrist."
+    "Do not hang more than about 5 to 10 pounds from the wrist (Red Cross, BSA).",
+    "With poor circulation beyond the joint, make one quick attempt at most, and no Stimson method."
   ],
   "evacuate": [
-    "Evacuate every first-time dislocation and every unusable joint, reduced or not (except perhaps the outer joints of fingers and toes) (BSA).",
-    "Evacuate urgently: poor circulation or feeling beyond the joint, before or after reduction, or a dislocation that would not go back."
+    "Evacuate every first-time dislocation and every injured part that cannot be used, reduced or not (Red Cross; BSA: except perhaps the outer joints of fingers and toes).",
+    "Evacuate rapidly: poor circulation, feeling or movement beyond the joint, before or after reduction, or a dislocation that would not go back with poor circulation."
   ],
   "sources": [
+    {
+      "name": "American Red Cross, Wilderness and Remote First Aid Emergency Reference Guide (2014), pp. 37-39: dislocations",
+      "year": 2014,
+      "url": "https://www.redcross.org/content/dam/redcross/training-services/no-index/wilderness-remote-first-aid-erg.pdf"
+    },
     {
       "name": "Boy Scouts of America (with Wilderness Medical Society input), Wilderness First Aid Curriculum and Doctrine Guidelines, 2017 edition (2019 printing), p. 20 Guidelines for Assessment and Treatment of Dislocations",
       "year": 2017,
       "url": "https://FortDrum.iSportsman.net/files/Documents%2FSafety%20Links%2FBSA%20-%20Wilderness%20First%20Aid%202017.pdf"
     },
     {
-      "name": "StatPearls, Shoulder Dislocations Overview (last updated 8 Aug 2023), second source for contraindications, nerve checks and complications",
+      "name": "StatPearls, Shoulder Dislocations Overview (last updated 8 Aug 2023), second source for contraindications, nerve checks, Stimson weight and complications",
       "year": 2023,
       "url": "https://www.statpearls.com/point-of-care/20596"
     }

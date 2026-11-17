@@ -65,7 +65,7 @@
     {
       "id": "s7",
       "text": "Breathing worse after a dressing or seal: loosen or lift it off the wound (burp it) to let trapped air out.",
-      "detail": "Increasing difficulty breathing, very fast breathing, or signs of shock after a dressing or seal goes on can mean air is trapped inside the chest (tension pneumothorax). Lift one edge of the seal or dressing, or remove it, to let air escape. If breathing improves, keep watching and repeat if it worsens again.\n\nIf breathing keeps getting worse with the wound open, the casualty needs needle decompression, which is an advanced procedure: see Advanced procedures (needle decompression). Do not attempt it unless trained.",
+      "detail": "Increasing difficulty breathing, very fast breathing, or signs of shock after a dressing or seal goes on can mean air is trapped inside the chest (tension pneumothorax). Lift one edge of the seal or dressing, or remove it, to let air escape. If breathing improves, keep watching and repeat if it worsens again.\n\nIf breathing keeps getting worse with the wound open, the casualty needs needle decompression, which is an advanced procedure: use the Needle decompression of the chest protocol. Do not attempt it unless trained.",
       "log": "Chest dressing loosened or removed"
     },
     {
@@ -78,7 +78,7 @@
   "donts": [
     "Do not seal the wound airtight with plastic or tape unless you are trained and have a vented chest seal.",
     "Do not leave a dressing or seal on if breathing is getting worse; loosen or remove it.",
-    "Do not attempt needle decompression unless trained (see Advanced procedures)."
+    "Do not attempt needle decompression unless trained (Needle decompression of the chest protocol)."
   ],
   "evacuate": [
     "Evacuate every open chest wound urgently.",

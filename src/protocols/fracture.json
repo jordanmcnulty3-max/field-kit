@@ -16,7 +16,10 @@
     "broken wrist",
     "broken ankle",
     "cracked rib",
-    "deformed limb"
+    "deformed limb",
+    "traction splint",
+    "sager",
+    "hare"
   ],
   "summary": "Suspected broken bone: control bleeding, keep it still, check circulation, splint in the position found, and get to care.",
   "steps": [
@@ -58,7 +61,7 @@
     {
       "id": "s6",
       "text": "Hip, pelvis or thigh: keep them lying still and do not move them unless you must. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "detail": "A broken pelvis is life-threatening because of the risk of heavy bleeding inside and damage to organs (Red Cross). A broken thigh bone can also bleed heavily. Watch closely for shock and use the Shock protocol.\n\nMedlinePlus: do not move someone with an injured hip, pelvis or upper leg unless it is absolutely necessary; if you must, pull them by their clothes rather than lifting.\n\nA thigh can be splinted as in the next steps. Binding a pelvis and traction splints for the thigh are not covered here."
+      "detail": "A broken pelvis is life-threatening because of the risk of heavy bleeding inside and damage to organs (Red Cross). A broken thigh bone can also bleed heavily. Watch closely for shock and use the Shock protocol.\n\nMedlinePlus: do not move someone with an injured hip, pelvis or upper leg unless it is absolutely necessary; if you must, pull them by their clothes rather than lifting.\n\nA thigh can be splinted as in the next steps. Traction splints for the thigh are not covered in this app. Binding a pelvis is an advanced procedure: use the Pelvic binder protocol."
     },
     {
       "id": "s7",

@@ -67,13 +67,13 @@
     {
       "id": "s7",
       "text": "Leave tourniquets on. Keep the casualty warm and watch for shock. Get them to medical care.",
-      "detail": "Do not remove the tourniquet. Taking a tourniquet off or converting it to a dressing is an advanced procedure: see Advanced procedures (tourniquet conversion). Without someone trained to do that, leave it on and keep monitoring until the casualty reaches medical care.\n\nBlood loss causes shock. Keep the casualty lying down, protect them from the cold ground and wind, and follow the Shock protocol.\n\nKeep checking the wound below the tourniquet for new bleeding, and keep checking the rest of the body for wounds you missed.",
+      "detail": "Do not remove the tourniquet. Taking a tourniquet off or converting it to a dressing is an advanced procedure: use the Tourniquet reassessment and conversion protocol. Without someone trained to do that, leave it on and keep monitoring until the casualty reaches medical care.\n\nBlood loss causes shock. Keep the casualty lying down, protect them from the cold ground and wind, and follow the Shock protocol.\n\nKeep checking the wound below the tourniquet for new bleeding, and keep checking the rest of the body for wounds you missed.",
       "end": true
     },
     {
       "id": "s8",
       "text": "Neck, armpit, groin, or a deep arm or leg wound with no tourniquet: pack the wound. Push gauze or clean cloth deep into it until it is full.",
-      "detail": "For a large or deep wound, pressing on the surface does not reach the bleeding. Packing puts the pressure where the blood is coming from.\n\nHow: find the bleeding spot inside the wound. Push the end of the gauze in with one or two fingers, right onto that spot. Keep feeding gauze in, pressing it down as you go, until the wound is packed tightly and no more will go in. If you run out of gauze, use clean cloth (a T-shirt, bandanna).\n\nThis works for deep wounds of the neck, armpits and groin, and for deep arm and leg wounds where a tourniquet is not available. It can be done on children the same way as adults.\n\nHemostatic (clotting) gauze is packed the same way and helps stop bleeding; see Advanced procedures (hemostatic gauze). Plain gauze or cloth packed tightly with hard pressure still works.",
+      "detail": "For a large or deep wound, pressing on the surface does not reach the bleeding. Packing puts the pressure where the blood is coming from.\n\nHow: find the bleeding spot inside the wound. Push the end of the gauze in with one or two fingers, right onto that spot. Keep feeding gauze in, pressing it down as you go, until the wound is packed tightly and no more will go in. If you run out of gauze, use clean cloth (a T-shirt, bandanna).\n\nThis works for deep wounds of the neck, armpits and groin, and for deep arm and leg wounds where a tourniquet is not available. It can be done on children the same way as adults.\n\nHemostatic (clotting) gauze is packed the same way and helps stop bleeding; use the Hemostatic gauze wound packing protocol. Plain gauze or cloth packed tightly with hard pressure still works.",
       "log": "Wound packed"
     },
     {

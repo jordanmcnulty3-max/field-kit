@@ -36,7 +36,7 @@
   "complications": [
     "Bleeding: the most common complication; StatPearls reports significant bleeding in up to 50% of cases.",
     "Cutting deeper than half an inch from the skin can perforate the oesophagus (gullet) behind the windpipe (TCCC skill cards).",
-    "Tube too far down the right main airway: breath sounds on the right only. Reposition it (TCCC skill cards).",
+    "Tube too far down the right main airway: breath sounds on the right only. Deflate the cuff, pull the tube back a few centimetres, reinflate (TCCC CMC skill instructions 2021).",
     "Tube outside the windpipe (false passage), injury to the back wall of the windpipe or other neck structures, low oxygen, infection (StatPearls).",
     "Missing the membrane: landmarks are harder to find in women, with obesity, neck injury or previous neck surgery (StatPearls).",
     "Late: scarring, narrowing below the voice box, swallowing trouble and voice changes (StatPearls)."
@@ -45,7 +45,7 @@
     {
       "id": "s1",
       "text": "Advanced procedure for people trained hands-on in surgical cricothyroidotomy. Have you been trained hands-on to do this?",
-      "detail": "Reading this is not training. This is the highest-risk procedure in the app. TCCC teaches it only at Combat Medic/Corpsman and Combat Paramedic/Provider level (TCCC Skill Sets by Responder Level, 2024).",
+      "detail": "Reading this is not training. This is the highest-risk procedure in the app. TCCC teaches it only at Combat Medic/Corpsman and Combat Paramedic/Provider level (TCCC Skill Sets by Responder Level, 2024). TCCC CMC skill instructions (2021): used when manual methods, an NPA or an extraglottic airway cannot keep the airway open; standard, an effective airway in 4 minutes or less.",
       "ask": {
         "q": "Have you been trained hands-on in surgical cricothyroidotomy?",
         "yes": "s2",
@@ -74,8 +74,8 @@
     },
     {
       "id": "s4",
-      "text": "Is the airway blocked by injury: broken face or jaw, a wound to the airway, blood, swelling or deformity, or burns?",
-      "detail": "TCCC 2026 gives these as examples of the airway obstruction a cric is for: facial fractures, direct airway injury, blood, deformation or burns.\n\nIf the blockage is a swallowed or inhaled object (choking), answer no.",
+      "text": "Is the airway blocked by injury: broken face or jaw, a wound to the airway, blood, deformity, or burns?",
+      "detail": "TCCC 2026 gives these as examples of the airway obstruction a cric is for: facial fractures, direct airway injury, blood, deformation or burns.\n\nIf the blockage is a swallowed or inhaled object (choking), or swelling of the face or throat from an allergy, answer no.",
       "ask": {
         "q": "Is the airway blocked by injury to the face or airway?",
         "yes": "s5",
@@ -95,34 +95,49 @@
     {
       "id": "s6",
       "text": "Lay them on their back, neck in a neutral position. Stand on the side of your dominant hand. Assemble and test all the equipment.",
-      "detail": "TCCC skill cards: position the casualty supine with the neck neutral. Right-handed: stand on their right; left-handed: on their left. Gather, assemble and test all equipment (check the cuff inflates). Have a helper ready to ventilate with the bag-valve-mask.\n\nTCCC 2026: cervical spine stabilisation is not needed for casualties with only penetrating trauma."
+      "detail": "TCCC CMC skill instructions (2021) steps 02-03 (checklist 3-5): gather, assemble and test all equipment (check the cuff inflates); place the casualty supine with the neck neutral; right-handed, stand on their right, left-handed on their left. Have a helper ready to ventilate with the bag-valve-mask.\n\nTCCC 2026: cervical spine stabilisation is not needed for casualties with only penetrating trauma."
     },
     {
       "id": "s7",
-      "text": "Find the cricothyroid membrane: the V-shaped hollow between the thyroid cartilage (Adam’s apple) and the cricoid cartilage below it.",
-      "detail": "TCCC skill cards: the cricothyroid membrane lies in the hollow, or V, between the cricoid and thyroid cartilages. Steady the larynx with your non-dominant hand, confirm the landmarks with your dominant index finger, and then reconfirm the membrane.\n\nStatPearls (second source): the membrane is about 2 cm below the laryngeal prominence (Adam’s apple), just above the cricoid cartilage. One method (the laryngeal handshake) finds it by moving up from the notch at the top of the breastbone to the cricoid cartilage, then feeling the membrane above it with the index finger. Landmarks are harder to feel in women, with obesity, after neck injury or neck surgery; extending the neck helps.\n\nClean the skin with alcohol or povidone-iodine if time permits."
+      "text": "Find the cricothyroid membrane: the V-shaped hollow between the thyroid cartilage (Adam’s apple) and the cricoid cartilage below it. Clean the skin if time permits.",
+      "detail": "TCCC CMC skill instructions (2021) steps 04-05 (checklist 6-7): locate the membrane in the V between the cricoid and thyroid cartilages; clean the site with alcohol or povidone-iodine if time permits.\n\nStatPearls (second source): the membrane is about 2 cm below the laryngeal prominence (Adam’s apple), just above the cricoid cartilage. One method (the laryngeal handshake) finds it by moving up from the notch at the top of the breastbone to the cricoid cartilage, then feeling the membrane above it with the index finger. Landmarks are harder to feel in women, with obesity, after neck injury or neck surgery; extending the neck helps."
     },
     {
       "id": "s8",
-      "text": "Holding the larynx steady, make a 1-inch vertical (up-and-down) cut through the skin over the membrane.",
-      "detail": "TCCC skill cards: stabilise the larynx with the non-dominant hand and make a 1-inch vertical skin incision over the membrane. Expect bleeding (StatPearls: the most common complication)."
+      "text": "Steady the larynx with your non-dominant hand and confirm the landmarks with your dominant index finger. Make a 1-inch vertical (up-and-down) cut through the skin over the membrane.",
+      "detail": "TCCC CMC skill instructions (2021) steps 06-08 (checklist 8-10, all critical): stabilise the larynx with the non-dominant hand, confirm the landmarks with the dominant index finger, make a 1-inch vertical skin incision over the membrane. Expect bleeding (StatPearls: the most common complication)."
+    },
+    {
+      "id": "s8b",
+      "text": "Feel through the cut with your index finger to find the membrane again.",
+      "detail": "TCCC CMC skill instructions (2021) step 09 (checklist 11, critical): reconfirm the membrane with the index finger."
     },
     {
       "id": "s9",
-      "text": "Put the tracheal hook through the membrane and gently lift the cricoid cartilage. Turn the scalpel sideways and cut through the membrane, half an inch wide.",
-      "detail": "TCCC skill cards: insert the tracheal hook through the membrane and gently lift the cricoid cartilage. Turn the scalpel horizontally and poke through the membrane, making a half-inch horizontal incision. A rush of air may be heard or felt. Then withdraw the scalpel and put it in a sharps container.\n\nDo not cut more than half an inch deep from the surface of the skin: deeper can perforate the oesophagus.",
+      "text": "Turn the scalpel sideways and push it through the membrane, cutting half an inch wide. Keep the blade in place for now.",
+      "detail": "TCCC CMC skill instructions (2021) step 10 (checklist 12, critical): turn the scalpel horizontally and puncture the membrane, making a half-inch incision. A rush of air may be heard or felt.\n\nDo not cut more than half an inch deep from the surface of the skin: deeper can perforate the oesophagus.",
       "warn": "Never cut deeper than half an inch from the skin surface.",
       "ask": {
         "q": "Are you using a bougie?",
-        "yes": "s10",
-        "no": "s12"
+        "yes": "s10a",
+        "no": "s11"
       }
     },
     {
+      "id": "s10a",
+      "text": "Put the tracheal hook through the opening and gently lift the cricoid cartilage. Then withdraw the scalpel.",
+      "detail": "TCCC CMC bougie-aided skill instructions (2021) step 11 (checklist 13-15): insert the tracheal hook through the membrane, gently lift the cricoid cartilage, withdraw the scalpel and put it in a sharps container."
+    },
+    {
       "id": "s10",
-      "text": "Bougie: pass the bougie through the opening toward the lungs; you should feel the windpipe rings. Slide the tube over it, then remove the bougie and the hook.",
-      "detail": "TCCC bougie-aided skill card: insert the bougie through the opening and direct it toward the lungs; you should feel the tracheal rings along it. Insert the tube over the bougie. With an ET tube, advance it a quarter to 1 inch beyond the cuff. Remove the bougie from the tube. Angle the tracheal hook toward the shoulder and gently remove it.",
-      "log": "Surgical cricothyroidotomy, tube placed",
+      "text": "Pass the bougie through the opening toward the lungs; you should feel the windpipe rings. Then angle the hook toward the shoulder and remove it.",
+      "detail": "TCCC CMC bougie-aided skill instructions (2021) steps 12-13 (checklist 16-17, both critical): insert the bougie through the membrane opening and direct it toward the lungs; you should feel the tracheal rings along it as you advance it. Angle the tracheal hook toward the shoulder and remove it gently."
+    },
+    {
+      "id": "s10c",
+      "text": "Slide the tube over the bougie into the windpipe, at least a quarter to 1 inch beyond the cuff. Then remove the bougie.",
+      "detail": "TCCC CMC bougie-aided skill instructions (2021) steps 14-15 (checklist 18-19): advance the tracheostomy tube over the bougie into the trachea at least a quarter to 1 inch beyond the cuff (the same depth for an ET tube); remove the bougie from the tube.",
+      "log": "Surgical cricothyroidotomy (bougie-aided), tube placed",
       "ask": {
         "q": "Is the tube in place through the opening?",
         "yes": "s14",
@@ -130,10 +145,15 @@
       }
     },
     {
+      "id": "s11",
+      "text": "Open technique: open the cut with a Kelly hemostat if you have one. Put the tracheal hook through the opening, lift the cricoid gently, then withdraw the scalpel.",
+      "detail": "TCCC CMC open surgical skill instructions (2021) steps 11-12 (checklist 13-16): if a Kelly hemostat is available, use it to open the incision; insert the tracheal hook through the membrane (critical), gently lift the cricoid cartilage, withdraw the scalpel and put it in a sharps container."
+    },
+    {
       "id": "s12",
-      "text": "Open technique: open the cut with a Kelly hemostat if you have one. Angle the hook toward the shoulder and remove it. Insert the tube toward the lungs.",
-      "detail": "TCCC open surgical skill card: open the incision with a Kelly hemostat if available. Angle the tracheal hook toward the shoulder and gently remove it. Insert the tracheostomy tube and direct it toward the lungs. With an ET tube, insert it a quarter to 1 inch beyond the cuff; remove the stylet if there is one, leaving the tube in place.",
-      "log": "Surgical cricothyroidotomy, tube placed",
+      "text": "Insert the tube through the opening toward the lungs. Then angle the hook toward the shoulder and remove it. Remove the stylet if there is one.",
+      "detail": "TCCC CMC open surgical skill instructions (2021) steps 13-15 (checklist 17-19): insert the tracheostomy tube and direct it toward the lungs (critical); angle the tracheal hook toward the shoulder and remove it gently; remove the stylet if applicable, leaving the tube in place. With an ET tube, insert it a quarter to 1 inch beyond the cuff.",
+      "log": "Surgical cricothyroidotomy (open), tube placed",
       "ask": {
         "q": "Is the tube in place through the opening?",
         "yes": "s14",
@@ -142,8 +162,8 @@
     },
     {
       "id": "s13",
-      "text": "Tube will not go in: recheck the landmarks and the opening with your finger, and try again as trained.",
-      "detail": "The TCCC skill cards give no separate failure procedure. They describe confirming the landmarks with the index finger and directing the tube through the opening toward the lungs. Keep the hook or bougie in control of the opening while you try again. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Tube will not go in: keep the hook or bougie controlling the opening, recheck the opening with your finger, and try again as trained.",
+      "detail": "The TCCC skill instructions and checklist give no separate failure procedure. They describe reconfirming the membrane with the index finger and directing the tube through the opening toward the lungs. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "ask": {
         "q": "Is the tube in place now?",
         "yes": "s14",
@@ -152,49 +172,59 @@
     },
     {
       "id": "s14",
-      "text": "Inflate the cuff with 10 mL of air. Ventilate with the bag-valve-mask and look for misting in the tube.",
-      "detail": "TCCC skill cards: inflate the cuff with 10 mL of air and look for misting in the tube. Have a helper ventilate with the bag-valve-mask.\n\nTCCC 2026: verify placement with continuous end-tidal CO2 capnography if you have it."
+      "text": "Inflate the cuff with 10 mL of air and look for misting in the tube. Have a helper ventilate with the bag-valve-mask.",
+      "detail": "TCCC CMC skill instructions (2021) steps 16-17 (checklist 20-22): inflate the cuff with 10 mL of air (critical) and look for misting in the tube; when appropriate, direct a helper to ventilate with a bag-valve-mask.\n\nTCCC 2026: verify placement with continuous end-tidal CO2 capnography if you have it."
     },
     {
       "id": "s15",
       "text": "Listen to both sides of the chest and watch both sides rise and fall equally.",
-      "detail": "TCCC skill cards: auscultate (listen to) both lungs for breath sounds while watching for equal chest rise and fall. With an ET tube, also listen over the upper belly if you can: sounds there mean the tube is not in the windpipe.",
+      "detail": "TCCC CMC skill instructions (2021) step 18 (checklist 23, critical): auscultate both lungs and watch for equal chest rise to confirm placement. With an ET tube, also listen over the upper belly if you can: sounds there mean the tube is not in the windpipe.",
       "ask": {
         "q": "Is air going into both lungs (both sides rise, breath sounds on both sides)?",
-        "yes": "s17",
+        "yes": "s18",
         "no": "s16"
       }
     },
     {
       "id": "s16",
-      "text": "Breath sounds on the right only: an ET tube is too far in. Pull it back a little and listen again. No air at all: see detail.",
-      "detail": "TCCC skill cards: if breath sounds are absent on the left side only, the tube has gone into the right main airway. Reposition it, then listen again.\n\nIf there is no chest rise or breath sound on either side, the tube is not in the windpipe. The TCCC skill cards give no further failure procedure. Recheck the opening and the tube as you were trained.",
+      "text": "Are there breath sounds on the right side only?",
+      "detail": "TCCC CMC skill instructions (2021) step 18 note: if breath sounds are absent on the left side only, the tube is in the right main airway.\n\nIf there is no chest rise and no breath sound on either side, answer no.",
       "ask": {
-        "q": "After repositioning: is air going into both lungs?",
-        "yes": "s17",
+        "q": "Breath sounds on the right side only?",
+        "yes": "s16a",
         "no": "s25"
       }
     },
     {
-      "id": "s17",
-      "text": "Put a dressing around the tube and secure it around the neck with a strap or tape.",
-      "detail": "TCCC skill cards. A tube that slips out loses the airway: secure it firmly and recheck it every time the casualty is moved."
+      "id": "s16a",
+      "text": "Right side only: let the air out of the cuff, pull the tube back a few centimetres, reinflate the cuff with 10 mL, and listen again.",
+      "detail": "TCCC CMC skill instructions (2021) step 18 note: deflate the cuff, pull the tube back a few centimetres, and reinflate the cuff.",
+      "ask": {
+        "q": "Now: is air going into both lungs?",
+        "yes": "s18",
+        "no": "s25"
+      }
     },
     {
       "id": "s18",
       "text": "Count their own breaths for at least 10 seconds. Ventilate with the bag-valve-mask if below 8 or above 30 a minute, or oxygen below 90%.",
-      "detail": "TCCC skill cards: assess spontaneous breathing for at least 10 seconds and attach a pulse oximeter if available. Ventilate with a bag-valve-mask if the breathing rate is below 8 or above 30 a minute, or the oximeter reads below 90%.\n\nBag-valve-mask (TCCC Combat Lifesaver skill): squeeze the bag for 1 to 2 seconds, once every 5 to 6 seconds (10 to 12 breaths a minute), watching the chest rise."
+      "detail": "TCCC CMC skill instructions (2021) steps 19-20 (checklist 24-25): check for spontaneous breathing for at least 10 seconds and attach a pulse oximeter if available; ventilate with a bag-valve-mask if the rate is below 8 or above 30 a minute, or the oximeter reads below 90% (critical).\n\nBag-valve-mask (TCCC Combat Lifesaver skill): squeeze the bag for 1 to 2 seconds, once every 5 to 6 seconds (10 to 12 breaths a minute), watching the chest rise."
+    },
+    {
+      "id": "s17",
+      "text": "Put a dressing around the tube and secure it around the neck with a strap or tape.",
+      "detail": "TCCC CMC skill instructions (2021) steps 21-22 (checklist 26-27, both critical). A tube that slips out loses the airway: secure it firmly and recheck it every time the casualty is moved."
     },
     {
       "id": "s19",
       "text": "Keep watching breathing, the tube and bleeding at every moment, and evacuate urgently.",
-      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nTCCC: continually assess and monitor. TCCC 2026: frequently reassess oxygen saturation, end-tidal CO2 and airway patency, because airway status may change over time. Watch for bleeding around the tube (StatPearls: the most common complication), the tube slipping, and breathing getting worse. Record the time.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nTCCC CMC skill instructions (2021) step 23: continually assess and monitor. TCCC 2026: frequently reassess oxygen saturation, end-tidal CO2 and airway patency, because airway status may change over time. Watch for bleeding around the tube (StatPearls: the most common complication), the tube slipping, and breathing getting worse. Record the time.",
       "end": true
     },
     {
       "id": "s25",
-      "text": "Still no working airway: keep trying to ventilate, keep the opening controlled, and evacuate immediately.",
-      "detail": "The TCCC skill cards give no failure procedure beyond rechecking position and ventilating with a bag-valve-mask. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they have no signs of life, use the CPR, adult protocol (the Trauma check (MARCH) protocol states the TCCC position on CPR after trauma).",
+      "text": "Group judgement: no misting, chest rise or breath sounds means the tube is not in the windpipe. Do not keep bagging through it. Keep the opening controlled. Start evacuating now.",
+      "detail": "Group judgement: no TCCC document read (2021 CMC skill instructions and checklist, 2023 skill cards, TCCC 2026) gives a procedure for a failed cric. This app says: do not keep ventilating through a tube with no misting, chest rise or breath sounds (air forced into the wrong place goes into the neck tissues); keep the opening controlled; if the face allows, ventilate with the bag-valve-mask over the mouth and nose; start evacuating now. See open questions: this wording needs a medical adviser’s review. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they have no signs of life, use the CPR, adult protocol (the Trauma check (MARCH) protocol states the TCCC position on CPR after trauma).",
       "end": true
     },
     {
@@ -211,7 +241,7 @@
     },
     {
       "id": "s32",
-      "text": "Not an injury blockage: use the Choking, adult and child protocol. Not breathing normally: CPR, adult protocol.",
+      "text": "Not an injury blockage: use the Choking, adult and child protocol. Allergic swelling: Anaphylaxis (severe allergic reaction) protocol. Not breathing normally: CPR, adult protocol.",
       "detail": "A surgical airway in TCCC is for airway obstruction from injury (facial fractures, direct airway injury, blood, deformation or burns) that cannot be managed any other way.",
       "end": true
     },
@@ -243,6 +273,11 @@
       "name": "Committee on TCCC, TCCC Skill Sets by Responder Level, master list 25 Jan 2024 (Deployed Medicine)",
       "year": 2024,
       "url": "https://learning-media.allogy.com/api/v1/pdf/e146d4b1-5e8e-4efd-b0d0-c74555ffe319/contents"
+    },
+    {
+      "name": "Committee on TCCC, Combat Medic/Corpsman, Module 07 Airway Management in TFC, Skill Instructions #TCCC-CMC-09-01 (30 Apr 2021) and Skills Assessment Checklist #TCCC-CMC-12-01 (23 Sep 2021): open and bougie-aided cricothyroidotomy (numbered steps used for the order)",
+      "year": 2021,
+      "url": "https://learning-media.allogy.com:443/api/v1/pdf/a1eaea5f-8f53-47c6-a79e-94c175a6b895/contents"
     },
     {
       "name": "Committee on TCCC, Combat Medic/Corpsman, Cricothyroidotomy Instruction (Bougie Aided) #TCCC-CMC-SC-67 (14 Aug 2023)",

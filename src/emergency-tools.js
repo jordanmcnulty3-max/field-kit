@@ -437,9 +437,9 @@
       { id: 'legL', name: 'Left leg', pct: 14 }, { id: 'legR', name: 'Right leg', pct: 14 }
     ]
   };
-  /* Figure layout in a 340 x 352 box: [region, view, x offset from the figure centre, y, width, height, short label, true if drawn only as a non-focusable duplicate of the region's main shape].
+  /* Figure layout, one 160 x 352 box per view (front above back): [region, view, x offset from the figure centre, y, width, height, short label, true if drawn only as a non-focusable duplicate of the region's main shape].
      A casualty's left is on the viewer's right in the front view and on the viewer's left in the back view. */
-  const BURN_CX = { front: 80, back: 260 };
+  const BURN_CX = 80;
   const burnBody = torso => {
     const arm = (id, view, label) => [id, view, (id === 'armL') === (view === 'front') ? 31 : -79, 54, 48, 146, label, view === 'back'];
     const leg = (id, view, label) => [id, view, (id === 'legL') === (view === 'front') ? 2 : -52, 230, 50, 122, label, view === 'back'];
@@ -461,21 +461,27 @@
   const burnTotal = () => BURN_TABLES[burn.mode].reduce((n, r) => n + (burn.sel.has(r.id) ? r.pct : 0), 0);
   function burnFigure() {
     const table = BURN_TABLES[burn.mode];
-    const shapes = BURN_LAYOUT[burn.mode].map(([id, view, dx, y, w, h, label, dup]) => {
-      const r = table.find(t => t.id === id), x = BURN_CX[view] + dx, cx = x + w / 2, cy = y + h / 2;
-      const body = '<rect class="bz" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="8"/>' +
-        '<text class="bz-t" x="' + cx + '" y="' + (cy - 9) + '" text-anchor="middle">' + esc(label) + '</text>' +
-        '<text class="bz-t" x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle">' + r.pct + '%</text>' +
-        '<text class="bz-c" x="' + cx + '" y="' + (cy + 20) + '" text-anchor="middle">✓</text>';
-      return dup
-        ? '<g class="bz-g dup" data-r="' + id + '" aria-hidden="true">' + body + '</g>'
-        : '<g class="bz-g" data-r="' + id + '" role="button" tabindex="0" aria-pressed="false" aria-label="' + esc(r.name) + ', ' + r.pct + ' percent">' + body + '</g>';
-    }).join('');
-    return '<svg id="burnSvg" viewBox="0 0 340 352" role="group" aria-label="Body outline, front on the left and back on the right">' +
-      '<defs><pattern id="burnHatch" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" style="fill:var(--surface)"/>' +
-      '<path d="M-2 2L2 -2M0 8L8 0M6 10L10 6" style="stroke:var(--blaze);stroke-width:2.5"/></pattern></defs>' +
-      shapes + '</svg>' +
-      '<p class="burn-cap"><span>Front</span><span>Back</span></p>';
+    const svg = (view, first) => {
+      const shapes = BURN_LAYOUT[burn.mode].filter(r => r[1] === view).map(([id, , dx, y, w, h, label, dup]) => {
+        const r = table.find(t => t.id === id), x = BURN_CX + dx, cx = x + w / 2, cy = y + h / 2;
+        const body = '<rect class="bz" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="8"/>' +
+          '<text class="bz-t" x="' + cx + '" y="' + (cy - 9) + '" text-anchor="middle">' + esc(label) + '</text>' +
+          '<text class="bz-t" x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle">' + r.pct + '%</text>' +
+          '<text class="bz-c" x="' + cx + '" y="' + (cy + 20) + '" text-anchor="middle">✓</text>';
+        return dup
+          ? '<g class="bz-g dup" data-r="' + id + '" aria-hidden="true">' + body + '</g>'
+          : '<g class="bz-g" data-r="' + id + '" role="button" tabindex="0" aria-pressed="false" aria-label="' + esc(r.name) + ', ' + r.pct + ' percent">' + body + '</g>';
+      }).join('');
+      return '<p class="burn-cap">' + (view === 'front' ? 'Front' : 'Back') + '</p><svg class="burn-svg" viewBox="0 0 160 352" role="group" aria-label="Body outline, ' + view + ' view">' +
+        (first ? '<defs><pattern id="burnHatch" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" style="fill:var(--surface)"/>' +
+        '<path d="M-2 2L2 -2M0 8L8 0M6 10L10 6" style="stroke:var(--blaze);stroke-width:2.5"/></pattern></defs>' : '') + shapes + '</svg>';
+    };
+    return svg('front', true) + svg('back', false);
+  }
+  function burnNotes() {
+    const p = FK.protocol && FK.protocol.get ? FK.protocol.get('burns') : null;
+    const n = p && Array.isArray(p.notes) ? p.notes.filter(x => typeof x === 'string' && x.trim()) : [];
+    return n.map(x => '<p>' + esc(x) + '</p>').join('');
   }
   function burnGuide() {
     const p = FK.protocol && FK.protocol.get ? FK.protocol.get('burns') : null;
@@ -498,7 +504,7 @@
   }
   function burnSet(mode) {
     burn.mode = mode; burn.sel = new Set();
-    burn.el.querySelector('#burnFig').innerHTML = burnFigure();
+    burn.el.querySelector('#burnSvg').innerHTML = burnFigure();
     burnPaint();
   }
   function burnToggle(id) {
@@ -513,15 +519,14 @@
       el.innerHTML =
         '<div class="seg cpr-modes" id="burnMode" role="group" aria-label="Who is burned">' +
         '<button type="button" data-mode="adult" aria-pressed="false">Adult</button><button type="button" data-mode="child" aria-pressed="false">Child</button></div>' +
-        '<div class="burn-total"><b id="burnTotal" aria-live="polite">0%</b><span>of the body surface</span></div>' +
-        '<div id="burnFig"></div><p id="burnList" class="burn-list"></p>' +
+        '<div class="burn-total"><b id="burnTotal" aria-live="polite">0%</b><span>of the body surface (estimate)</span></div>' +
+        '<div id="burnNotes" class="burn-notes">' + burnNotes() + '</div><div id="burnSvg"></div><p id="burnList" class="burn-list"></p>' +
         '<div class="burn-act"><button type="button" class="btn pp-wide" id="burnSave">Save to patient log</button>' +
         '<button type="button" class="btn ghost pp-wide" id="burnClear">Clear</button></div>' +
-        '<p class="hint">Estimate only. Do not count first-degree (red, not blistered) skin.</p>' +
         '<div id="burnGuide" class="pp-sec">' + burnGuide() + '</div>';
-      el.querySelector('#burnFig').innerHTML = burnFigure();
-      el.querySelector('#burnFig').addEventListener('click', e => { const g = e.target.closest('[data-r]'); if (g) burnToggle(g.dataset.r); });
-      el.querySelector('#burnFig').addEventListener('keydown', e => {
+      el.querySelector('#burnSvg').innerHTML = burnFigure();
+      el.querySelector('#burnSvg').addEventListener('click', e => { const g = e.target.closest('[data-r]'); if (g) burnToggle(g.dataset.r); });
+      el.querySelector('#burnSvg').addEventListener('keydown', e => {
         const g = e.target.closest('[role="button"][data-r]');
         if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); burnToggle(g.dataset.r); }
       });

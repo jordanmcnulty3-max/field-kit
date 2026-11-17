@@ -139,6 +139,8 @@ def validate(protocols, fig_names):
             c = p['coach']
             if not (isinstance(c, dict) and all(_pos_int(c.get(k)) for k in ('compressions', 'breaths'))):
                 errors.append(f'{where}: coach must be an object with whole numbers 1 to 99 for compressions and breaths')
+        if 'notes' in p and not (isinstance(p['notes'], list) and p['notes'] and all(isinstance(n, str) and n.strip() for n in p['notes'])):
+            errors.append(f'{where}: notes must be a non-empty list of non-blank strings')
         if p.get('draft') is True:
             warnings.append(f'{pid if isinstance(pid, str) else where}: draft, not source-checked')
 

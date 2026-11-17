@@ -29,6 +29,13 @@ class ValidateTests(unittest.TestCase):
     def test_valid_protocol_has_no_errors(self):
         self.assertEqual(validate([ok()], set()), ([], []))
 
+    def test_notes_optional_list_of_non_blank_strings(self):
+        good = ok(); good['notes'] = ['A note']
+        self.assertEqual(errs([good]), [])
+        for bad in ('text', [], [''], ['  '], [5], None):
+            p = ok(); p['notes'] = bad
+            self.assertTrue(any('notes' in e for e in errs([p])), bad)
+
     def test_duplicate_protocol_id(self):
         other = ok()
         self.assertTrue(any('duplicate' in e for e in errs([ok(), other])))

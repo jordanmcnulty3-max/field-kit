@@ -2,7 +2,8 @@ import json
 
 from .test_tools import T0, boot, proto
 
-BURNS = proto('burns', 'Burns', category='injury', evacuate=['Burn bigger than the casualty palm', '<b>Face</b> or hands burned'])
+BURNS = proto('burns', 'Burns', category='injury', evacuate=['Burn bigger than the casualty palm', '<b>Face</b> or hands burned'],
+              notes=['Count <i>only</i> this', 'Second note'])
 LOG_STEP = proto('logged', 'Logged', steps=[{'id': 's1', 'text': 'First.', 'log': 'Pressure applied'}, {'id': 's2', 'text': 'Second.'}])
 
 
@@ -100,13 +101,31 @@ def test_burn_child_head_reads_18_and_child_table_totals_100(page, app_url):
     assert page.inner_text('#burnTotal').strip() == '100%'
 
 
-def test_burn_regions_are_big_enough_and_guidance_comes_from_protocol(page, app_url):
+def test_burn_regions_are_at_least_56px_in_both_dimensions_in_both_modes(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/burn')
+    for mode in ('adult', 'child'):
+        page.click(f'#burnMode [data-mode="{mode}"]')
+        regions = page.locator('#burnSvg [role=button]').all()
+        assert len(regions) == (10 if mode == 'adult' else 7)
+        for loc in regions:
+            loc.scroll_into_view_if_needed()
+            b = loc.bounding_box()
+            assert min(b['width'], b['height']) >= 56, (mode, loc.get_attribute('aria-label'), b)
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+
+
+def test_burn_guidance_and_notes_come_from_protocol_escaped(page, app_url):
     boot(page, app_url, fixtures=[BURNS], hash_='#/emergency/tool/burn')
-    for loc in page.locator('#burnSvg [role=button]').all():
-        b = loc.bounding_box()
-        assert min(b['width'], b['height']) >= 44, (loc.get_attribute('aria-label'), b)
     assert 'Burn bigger than the casualty palm' in page.inner_text('#burnGuide')
-    assert page.locator('#burnGuide b').count() == 0   # escaped
+    assert page.locator('#burnGuide b').count() == 0
+    assert 'Count <i>only</i> this' in page.inner_text('#burnNotes') and 'Second note' in page.inner_text('#burnNotes')
+    assert page.locator('#burnNotes i').count() == 0
+
+
+def test_burn_has_no_hard_coded_medical_wording(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/burn')
+    assert page.inner_text('#burnNotes').strip() == ''
+    assert 'first-degree' not in page.inner_text('#toolBody').lower()
 
 
 def test_burn_without_burns_protocol_shows_no_guidance(page, app_url):
@@ -230,7 +249,7 @@ def test_copy_and_share(page, app_url):
 
 def test_share_hidden_without_navigator_share(page, app_url):
     boot(page, app_url, hash_='#/emergency/tool/log', init="delete Navigator.prototype.share; delete navigator.share;")
-    assert page.locator('#ptShare').count() == 0 or not page.locator('#ptShare').is_visible()
+    assert page.locator('#ptShare').count() == 0
 
 
 def test_cpr_coach_logs_start_and_stop(page, app_url):
@@ -260,3 +279,32 @@ def test_new_controls_are_at_least_56px(page, app_url):
     page.evaluate("FK.tools.start('rate')")
     page.wait_for_selector('#rateTap')
     assert page.locator('#rateTap').bounding_box()['height'] >= 56
+
+
+def test_set_current_works_when_clock_is_behind_stored_values(page, app_url):
+    seed = [pts(id='p1', used=T0 + 10**9), pts(id='p2', name='Two', used=T0 + 5)]
+    boot(page, app_url, storage={'patients': seed})
+    assert page.evaluate('FK.patients.current().id') == 'p1'
+    assert page.evaluate("FK.patients.setCurrent('p2')") is True
+    assert page.evaluate('FK.patients.current().id') == 'p2'
+    page.evaluate("FK.patients.create('Three')")
+    assert page.evaluate('FK.patients.current().name') == 'Three'
+
+
+def test_avpu_buttons_show_their_names_and_are_56px(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/log')
+    for b in page.locator('#ptAvpu button').all():
+        txt = b.inner_text().replace('\n', ' ')
+        assert txt in ('A Alert', 'V Voice', 'P Pain', 'U Unresponsive'), txt
+        assert b.get_attribute('aria-label') is None
+        assert b.bounding_box()['height'] >= 56
+
+
+def test_rename_with_full_storage_shows_storage_message(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/log')
+    page.click('#ptRename'); page.fill('#ptRenameIn', 'Sam')
+    page.evaluate("Storage.prototype.setItem = () => { throw new DOMException('full', 'QuotaExceededError'); }; 0")
+    page.click('#ptRenameSave')
+    assert 'storage' in page.inner_text('#ptMsg').lower() and 'type a name' not in page.inner_text('#ptMsg').lower()
+    page.fill('#ptRenameIn', '  '); page.click('#ptRenameSave')
+    assert 'type a name' in page.inner_text('#ptMsg').lower()

@@ -32,8 +32,9 @@
     FK.toast(FK.FULL_MSG);
     return false;
   }
-  let seq = 0, lastUsed = 0;
-  const stamp = () => (lastUsed = Math.max(Date.now(), lastUsed + 1));   // strictly increasing, so the latest pick always wins
+  let seq = 0;
+  /* Always later than every stored value, so the latest pick wins even if this phone's clock is behind. */
+  const stamp = list => Math.max(Date.now(), ...list.map(p => p.used + 1));
   const newId = () => Date.now().toString(36) + (seq++ % 36).toString(36) + Math.floor(Math.random() * 1296).toString(36);
   const nextName = list => 'Casualty ' + (list.reduce((m, p) => { const r = /^Casualty (\d{1,6})$/.exec(p.name); return r ? Math.max(m, +r[1]) : m; }, 0) + 1);
   const pickCurrent = list => list.reduce((best, p) => (!best || p.used >= best.used ? p : best), null);
@@ -42,7 +43,7 @@
   function create(name) {
     const list = read();
     if (list.length >= MAX_PATIENTS) { FK.toast('Patient log is full (' + MAX_PATIENTS + ' casualties). Delete one first.'); return null; }
-    const now = stamp();
+    const now = stamp(list);
     const p = { id: newId(), name: typeof name === 'string' && name.trim() ? name.trim().slice(0, MAX_NAME) : nextName(list), created: now, used: now, entries: [] };
     list.push(p);
     if (!write(list)) return null;
@@ -55,7 +56,7 @@
   function setCurrent(id) {
     const list = read(), p = list.find(x => x.id === id);
     if (!p) return false;
-    p.used = stamp();
+    p.used = stamp(list);
     if (!write(list)) return false;
     FK.emit('patients');
     return true;
@@ -106,8 +107,7 @@
 
   /* ================= The "log" tool ================= */
   let view = null, confirmT = null, confirmAt = 0, confirming = false, renaming = false, avpu = '', msg = '';
-  const CONFIRM_IGNORE_MS = 700, CONFIRM_REVERT_MS = 5000;
-  const confirmTimes = () => (FK.tools && FK.tools.confirm) || { ignoreMs: CONFIRM_IGNORE_MS, revertMs: CONFIRM_REVERT_MS };
+  const confirmTimes = () => FK.tools.confirm;
   const q = s => view && view.querySelector(s);
   const setConfirm = on => {
     clearTimeout(confirmT); confirming = on; confirmAt = performance.now();
@@ -172,7 +172,7 @@
         '<div class="pt-vit"><label class="f">Pulse<input id="ptPulse" type="number" inputmode="numeric" min="1" max="300"></label>' +
         '<label class="f">Breathing<input id="ptResp" type="number" inputmode="numeric" min="1" max="120"></label></div>' +
         '<div class="seg pt-avpu" id="ptAvpu" role="group" aria-label="Level of response">' +
-        AVPU.map(([k, n]) => '<button type="button" data-avpu="' + k + '" aria-pressed="false" aria-label="' + n + '">' + k + '</button>').join('') + '</div>' +
+        AVPU.map(([k, n]) => '<button type="button" data-avpu="' + k + '" aria-pressed="false"><b>' + k + '</b><small>' + n + '</small></button>').join('') + '</div>' +
         '<button type="button" class="btn pp-wide" id="ptAddVitals">Add vitals</button>' +
         '<p class="hint" id="ptMsg" role="status"></p>' +
         '<ul class="pt-list" id="ptList"></ul>' +
@@ -195,7 +195,11 @@
           case 'ptNew': setConfirm(false); renaming = false; if (create()) say(''); break;
           case 'ptRename': renaming = true; paint(); q('#ptRenameIn').value = cur ? cur.name : ''; q('#ptRenameIn').focus(); break;
           case 'ptRenameCancel': renaming = false; paint(); break;
-          case 'ptRenameSave': if (cur && rename(cur.id, q('#ptRenameIn').value)) { renaming = false; paint(); } else say('Type a name.'); break;
+          case 'ptRenameSave':
+            if (!q('#ptRenameIn').value.trim()) say('Type a name.');
+            else if (cur && rename(cur.id, q('#ptRenameIn').value)) { renaming = false; say(''); paint(); }
+            else say(FK.FULL_MSG);
+            break;
           case 'ptCopy': copy(cur); break;
           case 'ptShare': share(cur); break;
           case 'ptDelete':

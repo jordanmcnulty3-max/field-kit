@@ -282,12 +282,13 @@ body.playing,body.tooling{overflow:hidden}
 .burn-total{display:flex;align-items:baseline;gap:12px;margin:0 0 8px}
 .burn-total b{font-size:72px;line-height:1.1;font-variant-numeric:tabular-nums}
 .burn-total span{font-size:16px;color:var(--muted)}
-#burnSvg{display:block;width:100%;max-width:420px;height:auto;margin:0 auto}
-.burn-cap{display:flex;justify-content:space-around;max-width:420px;margin:0 auto 12px;font-size:14px;color:var(--muted)}
+.burn-svg{display:block;width:100%;max-width:200px;height:auto;margin:0 auto 12px}
+.burn-cap{margin:8px 0 4px;text-align:center;font-size:14px;color:var(--muted)}
+.burn-notes p{margin:0 0 8px;font-size:17px}
 .bz{fill:var(--surface);stroke:var(--ink);stroke-width:1.5}
 .bz-g{cursor:pointer;outline:none}
 .bz-g:focus-visible .bz{stroke:var(--blaze);stroke-width:4}
-.bz-t{font-size:10px;font-weight:700;fill:var(--ink);stroke:var(--surface);stroke-width:3px;paint-order:stroke;pointer-events:none}
+.bz-t{font-size:9.5px;font-weight:700;fill:var(--ink);stroke:var(--surface);stroke-width:3px;paint-order:stroke;pointer-events:none}
 .bz-c{display:none;font-size:14px;font-weight:700;fill:var(--ink);pointer-events:none}
 .bz-g.on .bz{fill:url(#burnHatch);stroke:var(--blaze);stroke-width:3}
 .bz-g.on .bz-c{display:block}
@@ -303,7 +304,9 @@ textarea{width:100%;min-height:72px;padding:8px 12px;border:1px solid var(--line
 .pt-vit{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 8px}
 .pt-vit input{min-height:56px}
 .pt-avpu{margin:0 0 12px}
-.pt-avpu button{min-height:56px;font-size:18px;font-weight:600}
+.pt-avpu button{min-height:56px;padding:0 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15}
+.pt-avpu b{font-size:20px}
+.pt-avpu small{font-size:12px}
 .pt-avpu button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 .pt-list{list-style:none;margin:12px 0;padding:0}
 .pt-list li{padding:10px 0;border-top:1px solid var(--line);font-size:17px;overflow-wrap:anywhere;white-space:pre-line}

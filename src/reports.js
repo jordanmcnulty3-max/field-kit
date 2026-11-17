@@ -208,8 +208,9 @@
   function autoFill() {
     if (!nl || !nl.form.l1auto) return;
     const fix = bestFix();
-    nl.form.l1 = fix ? fixText(fix, Date.now()) : '';
-    saveForm(); paintForm();
+    const t = fix ? fixText(fix, Date.now()) : '';
+    if (t !== nl.form.l1) { nl.form.l1 = t; saveForm(); }   // storage is written only when the text changed
+    paintForm();
   }
   /* Re-run the age logic: re-labels the app's own prefill only; typed text is never touched. The status line always updates. */
   function refresh() {

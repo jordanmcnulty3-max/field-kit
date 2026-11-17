@@ -9,6 +9,10 @@ import glob, html, json, os, re, shutil, sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 ARGS = [a for a in sys.argv[1:] if a != '--release']
 RELEASE = '--release' in sys.argv[1:]
+_unknown = [a for a in ARGS if a.startswith('-')]
+if _unknown or len(ARGS) > 1:
+    sys.exit(f'Unknown option {_unknown[0]!r}. Usage: python3 build.py [--release] [output-dir]' if _unknown
+             else 'Too many arguments. Usage: python3 build.py [--release] [output-dir]')
 OUT = os.path.abspath(ARGS[0]) if ARGS else ROOT
 os.chdir(ROOT)
 sys.path.insert(0, 'figs')
@@ -74,13 +78,18 @@ for p in protocols:
             s['figSvg'], _ = figs.F[s['fig']]
 fk_data = json.dumps({'protocols': protocols}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 
+# Every check runs before the output file is opened, so a failure cannot leave an empty index.html behind.
+marker = '<script>\n/*__SCRIPTS__*/'
+if marker not in shell:
+    sys.exit('src/shell.html: scripts marker missing')
+shell = shell.replace(marker, '<script>window.FK_DATA=' + fk_data + ';</script>\n' + marker, 1)
+if shell.count('window.FK_DATA=') != 1:
+    sys.exit('FK_DATA script was not inserted exactly once')
+page = shell.replace('/*__SCRIPTS__*/', js)
+
 os.makedirs(OUT, exist_ok=True)
 with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
-    marker = '<script>\n/*__SCRIPTS__*/'
-    assert marker in shell, 'scripts marker missing from shell.html'
-    shell = shell.replace(marker, '<script>window.FK_DATA=' + fk_data + ';</script>\n' + marker, 1)
-    assert shell.count('window.FK_DATA=') == 1, 'FK_DATA script was not inserted'
-    f.write(shell.replace('/*__SCRIPTS__*/', js))
+    f.write(page)
 for f in ['manifest.json', 'sw.js']:
     shutil.copyfile('src/' + f, os.path.join(OUT, f))
 for f in ['leaflet.js', 'leaflet.css']:

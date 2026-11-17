@@ -8,6 +8,13 @@ ID_PATTERN = re.compile(r'[a-z0-9][a-z0-9-]{0,59}')
 RESERVED_PROTOCOL_IDS = {'tool', 'report', 'all'}
 RESERVED_STEP_IDS = {'all'}
 ADVANCED_FIELDS = ('indications', 'contraindications', 'equipment', 'complications')
+# Every key the shipped data and the app use. Anything else is an error, so a misspelt key cannot be dropped silently.
+PROTOCOL_KEYS = {'id', 'title', 'category', 'tier', 'draft', 'keywords', 'summary', 'steps', 'donts', 'evacuate', 'notes',
+                 'sources', 'reviewed', 'coach', *ADVANCED_FIELDS}
+STEP_KEYS = {'id', 'text', 'detail', 'warn', 'fig', 'tool', 'timer', 'ask', 'end', 'log'}
+PROTOCOL_STRINGS = ('summary',)
+PROTOCOL_LISTS = ('donts', 'evacuate', 'keywords', 'notes', *ADVANCED_FIELDS)
+STEP_STRINGS = ('detail', 'warn', 'log')
 
 
 def _reachable(steps):
@@ -40,6 +47,20 @@ def _blank(v):
 
 def _pos_int(v):
     return isinstance(v, int) and not isinstance(v, bool) and 0 < v <= 99
+
+
+def _bad_list(v):
+    """Not a list of non-blank strings."""
+    return not (isinstance(v, list) and all(isinstance(x, str) and x.strip() for x in v))
+
+
+def _pos_num(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool) and v == v and v > 0 and v != float('inf')
+
+
+def _unknown_keys(where, obj, allowed, errors):
+    for k in sorted(set(obj) - allowed, key=str):
+        errors.append(f'{where}: unknown key {k!r}')
 
 
 def draft_ids(protocols):
@@ -80,6 +101,16 @@ def _validate_steps(where, steps, fig_names, errors, warnings):
             seen.add(sid)
             if sid in RESERVED_STEP_IDS:
                 errors.append(f'{swhere}: step id is reserved')
+        _unknown_keys(swhere, s, STEP_KEYS, errors)
+        for k in STEP_STRINGS:
+            if k in s and not isinstance(s[k], str):
+                errors.append(f'{swhere}: {k} must be a string')
+        if 'end' in s and not isinstance(s['end'], bool):
+            errors.append(f'{swhere}: end must be true or false')
+        if 'timer' in s:
+            t = s['timer']
+            if not (isinstance(t, dict) and _pos_num(t.get('seconds')) and not _blank(t.get('label'))):
+                errors.append(f'{swhere}: timer must be an object with a positive number of seconds and a label')
         if _blank(s.get('text')):
             errors.append(f'{swhere}: missing text')
         elif len(s['text']) > ACTION_WARN_LEN:
@@ -128,8 +159,19 @@ def validate(protocols, fig_names):
                 errors.append(f'{where}: id is reserved')
             if not ID_PATTERN.fullmatch(pid):
                 errors.append(f'{where}: id must be lowercase letters, digits and hyphens, starting with a letter or digit, at most 60 characters')
+        _unknown_keys(where, p, PROTOCOL_KEYS, errors)
         if _blank(p.get('title')):
             errors.append(f'{where}: missing title')
+        for k in PROTOCOL_STRINGS:
+            if k in p and not isinstance(p[k], str):
+                errors.append(f'{where}: {k} must be a string')
+        for k in PROTOCOL_LISTS:
+            if k in p and _bad_list(p[k]):
+                errors.append(f'{where}: {k} must be a list of non-blank strings')
+        if 'draft' in p and not isinstance(p['draft'], bool):
+            errors.append(f'{where}: draft must be true or false')
+        if 'tier' in p and p['tier'] != 'advanced':
+            errors.append(f'{where}: tier can only be "advanced"')
         cat = p.get('category')
         if _blank(cat):
             errors.append(f'{where}: missing category')
@@ -137,6 +179,8 @@ def validate(protocols, fig_names):
             errors.append(f'{where}: unknown category {cat!r}')
         if not isinstance(p.get('sources'), list) or not p['sources']:
             errors.append(f'{where}: sources must be a non-empty list')
+        elif not all(isinstance(x, dict) and not _blank(x.get('name')) for x in p['sources']):
+            errors.append(f'{where}: every source must be an object with a name')
         if _blank(p.get('reviewed')):
             errors.append(f'{where}: missing reviewed date')
         if p.get('tier') == 'advanced':

@@ -236,6 +236,88 @@ class ReportDraftMarkerTests(unittest.TestCase):
         self.assertEqual(report_wording_is_draft(src), 'draft: true,' in src)
 
 
+class ShapeTests(unittest.TestCase):
+    """Unknown keys and field shapes (final review, Important 5)."""
+
+    def has(self, p, words):
+        es = errs([p])
+        self.assertTrue(any(all(w in e for w in words) for e in es), (words, es))
+
+    def test_unknown_protocol_key_is_an_error(self):
+        for k in ('dont', 'evacaute', 'warn', 'figSvg'):
+            p = ok(); p[k] = ['x']
+            self.has(p, ['unknown key', repr(k)])
+
+    def test_unknown_step_key_is_an_error(self):
+        for k in ('warning', 'donts', 'timers', 'figSvg'):
+            self.has(ok(**{k: 'x'}), ['unknown key', repr(k)])
+
+    def test_every_allowed_key_passes_with_a_good_value(self):
+        p = advanced()
+        p.update({'keywords': ['k'], 'summary': 'S', 'donts': ['d'], 'evacuate': ['e'], 'notes': ['n'],
+                  'draft': False, 'coach': {'compressions': 30, 'breaths': 2}})
+        p['steps'][0].update({'detail': 'D', 'warn': 'W', 'log': 'L', 'timer': {'seconds': 60, 'label': 'T'},
+                              'tool': 'tq', 'fig': 'f', 'end': False})
+        self.assertEqual(validate([p], {'f'})[0], [])
+
+    def test_step_strings(self):
+        for k in ('detail', 'warn', 'log'):
+            for bad in (5, ['a'], None, {'a': 1}):
+                self.has(ok(**{k: bad}), [k, 'must be a string'])
+
+    def test_protocol_summary_and_title_are_strings(self):
+        p = ok(); p['summary'] = ['not', 'a string']
+        self.has(p, ['summary', 'must be a string'])
+        p = ok(); p['title'] = 5
+        self.has(p, ['missing title'])
+
+    def test_step_text_must_be_a_string(self):
+        self.has(ok(text=['Do it']), ['missing text'])
+
+    def test_timer_shape(self):
+        self.assertEqual(errs([ok(timer={'seconds': 1.5, 'label': 'T'})]), [])
+        for bad in (60, 'one minute', {'seconds': 0, 'label': 'T'}, {'seconds': -5, 'label': 'T'}, {'seconds': '60', 'label': 'T'},
+                    {'seconds': True, 'label': 'T'}, {'seconds': float('nan'), 'label': 'T'}, {'seconds': 60}, {'seconds': 60, 'label': ' '},
+                    {'seconds': 60, 'label': 7}):
+            self.has(ok(timer=bad), ['timer'])
+
+    def test_lists_of_non_blank_strings(self):
+        for k in ('donts', 'evacuate', 'keywords', 'notes', 'indications', 'contraindications', 'equipment', 'complications'):
+            for bad in ('a string', [''], ['ok', '  '], [5], ['ok', None], {'a': 'b'}):
+                p = advanced() if k in ('indications', 'contraindications', 'equipment', 'complications') else ok()
+                p[k] = bad
+                self.has(p, [k])
+
+    def test_empty_lists_are_allowed_where_optional(self):
+        p = ok(); p.update({'donts': [], 'evacuate': [], 'keywords': []})
+        self.assertEqual(errs([p]), [])
+
+    def test_sources_items_need_a_name(self):
+        for bad in ([{'year': 2020}], [{'name': ' '}], ['Some Source'], [None], [{'name': 'ok'}, {'url': 'x'}]):
+            p = ok(); p['sources'] = bad
+            self.has(p, ['source'])
+
+    def test_end_and_draft_are_booleans(self):
+        for bad in ('true', 1, None):
+            self.has(ok(end=bad), ['end', 'true or false'])
+            p = ok(); p['draft'] = bad
+            self.has(p, ['draft', 'true or false'])
+
+    def test_tier_only_advanced(self):
+        for bad in ('basic', 'Advanced', True, None):
+            p = advanced(); p['tier'] = bad
+            self.has(p, ['tier'])
+
+    def test_shipped_protocols_pass_unchanged(self):
+        import glob, json, os, sys
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sys.path.insert(0, os.path.join(root, 'figs'))
+        import figs
+        data = [json.load(open(f, encoding='utf-8')) for f in sorted(glob.glob(os.path.join(root, 'src', 'protocols', '*.json')))]
+        self.assertGreater(len(data), 40)
+        self.assertEqual(validate(data, set(figs.F)), ([], []))
+
+
 def test_no_figure_id_is_defined_twice():
     import re, os
     src = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'figs', 'figs.py'), encoding='utf-8').read()

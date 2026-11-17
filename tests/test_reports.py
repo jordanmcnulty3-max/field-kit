@@ -431,6 +431,32 @@ def test_normal_build_still_works_while_draft(tmp_path):
     assert r.returncode == 0, r.stderr
 
 
+def test_build_rejects_unknown_flags(tmp_path):
+    for bad in ('--relase', '-r', '--Release'):
+        r = subprocess.run([sys.executable, os.path.join(ROOT, 'build.py'), bad, str(tmp_path)], capture_output=True, text=True)
+        assert r.returncode != 0, bad
+        assert 'Unknown option' in r.stderr and bad in r.stderr, r.stderr
+        assert not (tmp_path / 'index.html').exists()
+        assert not os.path.exists(bad)   # not taken as an output directory
+
+
+def test_build_failure_leaves_no_empty_index_html(tmp_path):
+    """A check that fails after validation must stop the build before the output file is opened."""
+    import shutil
+    src = tmp_path / 'repo'
+    for d in ('src', 'figs', 'vendor', 'tools'):
+        shutil.copytree(os.path.join(ROOT, d), src / d, ignore=shutil.ignore_patterns('__pycache__'))
+    shutil.copy(os.path.join(ROOT, 'build.py'), src / 'build.py')
+    shell = (src / 'src' / 'shell.html').read_text(encoding='utf-8')
+    (src / 'src' / 'shell.html').write_text(shell.replace('/*__SCRIPTS__*/', '/* scripts */'), encoding='utf-8')
+    out = tmp_path / 'out'
+    r = subprocess.run([sys.executable, str(src / 'build.py'), str(out)], capture_output=True, text=True)
+    assert r.returncode != 0 and 'marker' in r.stderr, r.stderr
+    assert not (out / 'index.html').exists()
+    r = subprocess.run([sys.executable, str(src / 'build.py')], capture_output=True, text=True, cwd=str(src))   # default output: the repo root
+    assert r.returncode != 0
+    assert not (src / 'index.html').exists()
+
 CLIP = "window.__copied = null; Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async t => { window.__copied = t; } } });"
 
 
@@ -467,13 +493,24 @@ def test_refresh_stops_when_the_screen_closes(page, app_url):
     boot(page, app_url, storage={'lastFix': fix(10_000)}, hash_=NINE, init=geo_stub())
     page.evaluate("""() => { window.__w = 0; const o = Storage.prototype.setItem;
       Storage.prototype.setItem = function (k, v) { if (k === 'fk.nineLine') window.__w++; return o.call(this, k, v); }; }""")
-    page.clock.run_for(40_000)
-    assert page.evaluate('window.__w') >= 2   # it was refreshing while open
+    page.clock.run_for(3 * 60_000)
+    assert page.evaluate('window.__w') >= 1   # it was re-ageing while open (the text changed, so it was saved)
     page.click('#toolClose')
     page.wait_for_selector('#toolPane', state='hidden')
     n = page.evaluate('window.__w')
-    page.clock.run_for(120_000)
+    page.clock.run_for(5 * 60_000)
     assert page.evaluate('window.__w') == n
+
+
+def test_reaging_writes_storage_only_when_line_one_changes(page, app_url):
+    boot(page, app_url, storage={'lastFix': fix(10_000)}, hash_=NINE, init=geo_stub())
+    page.evaluate("""() => { window.__w = 0; const o = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { if (k === 'fk.nineLine') window.__w++; return o.call(this, k, v); }; }""")
+    page.clock.run_for(60_000)   # four refreshes, the fix still under two minutes old: line 1 is unchanged
+    assert page.evaluate('window.__w') == 0
+    page.clock.run_for(2 * 60_000)   # now it reads "(fix 2 min old)": one write for that change
+    assert page.input_value('#nl1').endswith('min old)')
+    assert page.evaluate('window.__w') >= 1
 
 
 def test_future_fix_time_is_unknown_and_treated_as_old(page, app_url):

@@ -309,3 +309,21 @@ def test_update_bar_waits_for_a_running_step_timer(page, app_url):
     assert page.locator('#updBar').is_hidden()
     page.wait_for_function("!!FK.protocol.timer() && FK.protocol.timer().done")
     page.wait_for_function("!document.getElementById('updBar').hidden")
+
+
+def test_clear_recent_button_empties_the_list_and_storage(page, app_url):
+    boot(page, app_url, storage={'recent': ['p:burns', 'p:splint'], 'pins': ['p:shock']})
+    assert page.locator('#emRecent [data-open]').count() == 2
+    page.click('#emRecent [data-act="clear-recent"]')
+    assert page.locator('#emRecent').inner_html() == ''
+    assert page.evaluate("FK.recent.all()") == []
+    assert json.loads(page.evaluate("localStorage.getItem('fk.recent')")) == []
+    assert page.evaluate("FK.pins.all()") == ['p:shock']          # pins are untouched
+    assert page.locator('#emPinned [data-act="clear-recent"]').count() == 0
+    assert page.evaluate("location.hash") == '#/emergency'
+    assert page.evaluate("document.activeElement && document.activeElement.closest('#emLife') !== null")
+
+
+def test_clear_recent_button_absent_when_nothing_recent(page, app_url):
+    boot(page, app_url)
+    assert page.locator('[data-act="clear-recent"]').count() == 0

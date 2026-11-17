@@ -26,8 +26,8 @@ def read(p):
 
 
 # App version and service-worker cache name must move together, or installed phones never update.
-app_v = re.search(r"APP_VERSION = '(\d+)'", read('src/app.js')).group(1)
-sw_v = re.search(r"VERSION = 'fieldkit-v(\d+)'", read('src/sw.js')).group(1)
+app_v = re.search(r"APP_VERSION = '(\d+(?:\.\d+)?)'", read('src/app.js')).group(1)
+sw_v = re.search(r"VERSION = 'fieldkit-v(\d+(?:\.\d+)?)'", read('src/sw.js')).group(1)
 if app_v != sw_v:
     sys.exit(f'Version mismatch: src/app.js APP_VERSION = {app_v}, src/sw.js VERSION = fieldkit-v{sw_v}. Set both to the same number.')
 

@@ -36,7 +36,8 @@
       if (cur[0] === key) return;
       FK.store.set('recent', [key, ...cur.filter(k => k !== key)].slice(0, RECENT_MAX));
       FK.emit('recent');
-    }
+    },
+    clear() { FK.store.set('recent', []); FK.emit('recent'); }
   };
 
   /* ---------- Data ---------- */
@@ -67,7 +68,8 @@
   /* Redraw a block only when its markup changed, so a button that opened a screen is still there to take focus back. */
   const drawn = new WeakMap();   // element -> markup last written into it
   const setHTML = (el, html) => { if (drawn.get(el) !== html) { el.innerHTML = html; drawn.set(el, html); } };
-  const group = (id, title, btns) => setHTML($(id), btns.length ? '<h3 class="em-h">' + title + '</h3><div class="em-grid">' + btns.join('') + '</div>' : '');
+  const group = (id, title, btns, extra) => setHTML($(id), btns.length ? '<div class="em-hrow"><h3 class="em-h">' + title + '</h3>' + (extra || '') + '</div><div class="em-grid">' + btns.join('') + '</div>' : '');
+  const CLEAR_RECENT = '<button type="button" class="em-clear" data-act="clear-recent" aria-label="Clear recent list">Clear</button>';
 
   function renderResume() {
     const a = FK.protocol && FK.protocol.active();
@@ -115,7 +117,7 @@
     renderResume();
     renderLife();
     group('emPinned', '★ Pinned', keyBtns(FK.pins.all()));
-    group('emRecent', 'Recent', keyBtns(FK.recent.all()));
+    group('emRecent', 'Recent', keyBtns(FK.recent.all()), CLEAR_RECENT);
     renderCats();
   }
 
@@ -130,7 +132,12 @@
     const res = e.target.closest('[data-resume]');
     if (res) { FK.protocol.open(res.dataset.resume, res.dataset.step); return; }
     const breathing = e.target.closest('[data-act="breathing"]');
-    if (breathing) toggleChooser(breathing);
+    if (breathing) { toggleChooser(breathing); return; }
+    if (e.target.closest('[data-act="clear-recent"]')) {   // the button goes with the list, so hand focus to the first life-threat button
+      FK.recent.clear();
+      const first = $('emLife').querySelector('button');
+      if (first) first.focus();
+    }
   });
   FK.on('pins', render);
   FK.on('recent', render);

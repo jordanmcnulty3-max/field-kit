@@ -522,21 +522,6 @@ svg('tq-placement', 160, 'Arm seen from the side: the tourniquet band 2 to 3 inc
 <path d="M208 116 v8 M240 116 v8 M208 120 H240" class="k"/>
 {lbl(224,140,'2 to 3 inches','tb','middle')}{lbl(224,154,'above the wound','','middle')}
 {lbl(14,128,'Not over the elbow','tb')}{lbl(14,142,'or knee','tb')}{lead(70,114,106,94)}''')
-
-svg('recovery-position', 200, 'Person lying on their side, seen from above: one arm up with the head resting on it, the other hand against the cheek, one knee bent forward to steady them', f'''
-<line x1="100" y1="96" x2="14" y2="96" class="k" style="stroke-width:9"/>
-<rect x="96" y="72" width="124" height="48" rx="22" class="skin"/>
-<circle cx="70" cy="96" r="21" class="skin"/>
-<path d="M62 115 L70 128 L78 115" class="k"/>
-<path d="M114 112 L100 144 L76 124" class="k" style="stroke-width:9"/>
-<path d="M214 90 L318 100" class="k" style="stroke-width:9"/>
-<path d="M212 108 L262 152 L318 120" class="k" style="stroke-width:9"/>
-<line x1="150" y1="72" x2="150" y2="120" class="m t1 d"/>
-{lbl(14,26,'Lower arm up,','tb')}{lbl(14,40,'head rests on it','tb')}{lead(32,46,32,86)}
-{lbl(124,26,'Other hand','tb')}{lbl(124,40,'against the','tb')}{lbl(124,54,'cheek','tb')}{lead(122,50,88,128)}
-{lbl(336,26,'One or both','tb','end')}{lbl(336,40,'knees bent to','tb','end')}{lbl(336,54,'steady them','tb','end')}{lead(300,60,268,148)}
-{lbl(170,186,'Seen from above, lying on their side, face turned out','tm','middle')}''')
-
 svg('cpr-hands-adult', 256, 'Adult CPR hand position: heel of one hand on the lower half of the breastbone in the centre of the chest, other hand on top, arms straight with shoulders over the hands, pushing straight down', f'''
 <path d="M46 40 Q80 54 114 40 L134 52 Q146 60 146 76 V170 H14 V76 Q14 60 26 52 Z" class="k"/>
 <line x1="80" y1="60" x2="80" y2="132" class="m t1 d"/>

@@ -462,7 +462,7 @@ def test_bad_deep_link_repaired_at_boot_is_a_deep_link_entry(page, app_url):
 def test_every_fig_step_renders_an_svg(page, app_url):
     page.goto(app_url)
     pairs = page.evaluate("FK_DATA.protocols.flatMap(p => p.steps.filter(s => s.fig).map(s => [p.id, s.id, s.fig]))")
-    assert len(pairs) >= 9, pairs
+    assert len(pairs) >= 8, pairs
     for pid, sid, fig in pairs:
         page.evaluate(f"location.hash = '#/emergency/{pid}/{sid}'")
         svg = page.locator('#player .pp-fig svg')

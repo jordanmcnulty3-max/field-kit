@@ -4,13 +4,15 @@ Reads src/, figs/ and vendor/ and writes the deployable files to the repo root:
 index.html, sw.js, manifest.json, leaflet.js, leaflet.css. Those root files are build
 output -- edit src/ instead. (Optional: python3 build.py some/dir writes there instead.)
 """
-import html, os, re, shutil, sys
+import glob, html, json, os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else ROOT
 os.chdir(ROOT)
 sys.path.insert(0, 'figs')
+sys.path.insert(0, ROOT)
 import figs
+from tools.validate import validate
 
 
 def read(p):
@@ -43,8 +45,28 @@ shell = shell.replace('</style>', read('figs/figs.css') + '\n</style>', 1)
 shell = shell.replace('<body>\n', '<body>\n' + read('figs/markers.html'), 1)
 js = '\n'.join(read('src/' + f) for f in ['geo.js', 'ballistics.js', 'app.js', 'map.js', 'survival.js'])
 
+# Protocols: validate every src/protocols/*.json, then inline as window.FK_DATA (sorted by id).
+protocols = []
+for path in sorted(glob.glob('src/protocols/*.json')):
+    try:
+        protocols.append(json.loads(read(path)))
+    except ValueError as e:
+        sys.exit(f'{path}: invalid JSON: {e}')
+errors, warnings = validate(protocols, set(figs.F))
+for w in warnings:
+    print('warning:', w)
+if errors:
+    sys.exit('Protocol validation failed:\n  ' + '\n  '.join(errors))
+protocols.sort(key=lambda p: p['id'])
+for p in protocols:
+    for s in p['steps']:
+        if 'fig' in s:
+            s['figSvg'], _ = figs.F[s['fig']]
+fk_data = json.dumps({'protocols': protocols}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+
 os.makedirs(OUT, exist_ok=True)
 with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
+    shell = shell.replace('<script>\n/*__SCRIPTS__*/', '<script>window.FK_DATA=' + fk_data + ';</script>\n<script>\n/*__SCRIPTS__*/', 1)
     f.write(shell.replace('/*__SCRIPTS__*/', js))
 for f in ['manifest.json', 'sw.js']:
     shutil.copyfile('src/' + f, os.path.join(OUT, f))

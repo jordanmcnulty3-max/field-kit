@@ -1,0 +1,46 @@
+{
+  "id": "bleeding",
+  "title": "Severe bleeding",
+  "category": "life",
+  "keywords": ["tourniquet", "hemorrhage", "blood", "wound", "bleed"],
+  "summary": "Stop the bleeding before anything else.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty."
+    },
+    {
+      "id": "s2",
+      "text": "Find where the blood is coming from. Open or cut away clothing to see the wound."
+    },
+    {
+      "id": "s3",
+      "text": "Is the wound on an arm or leg?",
+      "ask": { "q": "Is the wound on an arm or leg?", "yes": "s4", "no": "s6" }
+    },
+    {
+      "id": "s4",
+      "text": "Put a tourniquet 2 to 3 inches above the wound, not on a joint. Tighten until the bleeding stops, then start a timer.",
+      "tool": "tq",
+      "log": "Tourniquet applied"
+    },
+    {
+      "id": "s5",
+      "text": "If bleeding continues, add a second tourniquet above the first. Do not loosen or remove a tourniquet; leave that to medical staff.",
+      "end": true
+    },
+    {
+      "id": "s6",
+      "text": "Neck, shoulder or groin: pack the wound tightly with gauze or clean cloth, then press hard with both hands."
+    },
+    {
+      "id": "s7",
+      "text": "No gauze or cloth: press firmly and steadily on the wound with both hands and do not let up.",
+      "end": true
+    }
+  ],
+  "sources": [
+    { "name": "Stop the Bleed (American College of Surgeons, Committee on Trauma)", "url": "https://www.stopthebleed.org" }
+  ],
+  "reviewed": "2026-11-16"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "cpr-adult",
+  "title": "CPR, adult",
+  "category": "life",
+  "keywords": ["cardiac arrest", "heart", "not breathing", "aed", "compressions", "unresponsive"],
+  "summary": "Push hard and fast in the centre of the chest.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Tap and shout. If they do not respond and are not breathing normally, call 911 if you have signal and send someone for an AED. If no signal, send someone for help."
+    },
+    {
+      "id": "s2",
+      "text": "Push hard and fast in the centre of the chest: at least 2 inches deep, 100 to 120 times a minute. Let the chest fully rise between pushes.",
+      "tool": "cpr"
+    },
+    {
+      "id": "s3",
+      "text": "If you are trained, give 30 compressions, then 2 breaths. If not, keep doing compressions only."
+    },
+    {
+      "id": "s4",
+      "text": "Turn on the AED as soon as it arrives and follow its voice prompts."
+    },
+    {
+      "id": "s5",
+      "text": "Keep going until help takes over or the person starts breathing.",
+      "end": true
+    }
+  ],
+  "sources": [
+    { "name": "American Heart Association, Guidelines for CPR and Emergency Cardiovascular Care", "year": 2020, "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines" }
+  ],
+  "reviewed": "2026-11-16"
+}

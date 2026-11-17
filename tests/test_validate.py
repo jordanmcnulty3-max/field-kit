@@ -1,0 +1,133 @@
+import copy
+import unittest
+
+from tools.validate import validate
+
+
+def ok(**step_over):
+    step = {'id': 's1', 'text': 'Do the thing.'}
+    step.update(step_over)
+    return {
+        'id': 'p1', 'title': 'Proto', 'category': 'life',
+        'steps': [step, {'id': 's2', 'text': 'Then this.'}],
+        'sources': [{'name': 'Some Source'}], 'reviewed': '2026-11-16',
+    }
+
+
+def advanced():
+    p = ok()
+    p.update({'tier': 'advanced', 'indications': ['a'], 'contraindications': ['b'],
+              'equipment': ['c'], 'complications': ['d']})
+    return p
+
+
+def errs(protocols, figs=frozenset()):
+    return validate(protocols, set(figs))[0]
+
+
+class ValidateTests(unittest.TestCase):
+    def test_valid_protocol_has_no_errors(self):
+        self.assertEqual(validate([ok()], set()), ([], []))
+
+    def test_duplicate_protocol_id(self):
+        other = ok()
+        self.assertTrue(any('duplicate' in e for e in errs([ok(), other])))
+
+    def test_duplicate_step_id(self):
+        p = ok()
+        p['steps'][1]['id'] = 's1'
+        self.assertTrue(any('duplicate' in e for e in errs([p])))
+
+    def test_branch_target_missing(self):
+        p = ok(ask={'q': 'Q?', 'yes': 'nope', 'no': 's2'})
+        self.assertTrue(any('nope' in e for e in errs([p])))
+
+    def test_branch_no_target_missing(self):
+        p = ok(ask={'q': 'Q?', 'yes': 's2', 'no': 'gone'})
+        self.assertTrue(any('gone' in e for e in errs([p])))
+
+    def test_unreachable_step(self):
+        p = ok(end=True)  # s1 ends, so s2 can never be reached
+        self.assertTrue(any('unreachable' in e and 's2' in e for e in errs([p])))
+
+    def test_branch_makes_step_reachable(self):
+        p = ok(ask={'q': 'Q?', 'yes': 's3', 'no': 's3'})
+        p['steps'].append({'id': 's3', 'text': 'Third.'})
+        p['steps'][1]['end'] = True  # s2 is skipped by both branches
+        self.assertTrue(any('s2' in e and 'unreachable' in e for e in errs([p])))
+        p['steps'][0]['ask']['no'] = 's2'
+        self.assertEqual(errs([p]), [])
+
+    def test_missing_sources(self):
+        for bad in (None, []):
+            p = ok()
+            if bad is None:
+                del p['sources']
+            else:
+                p['sources'] = bad
+            self.assertTrue(any('sources' in e for e in errs([p])), bad)
+
+    def test_missing_reviewed(self):
+        p = ok()
+        del p['reviewed']
+        self.assertTrue(any('reviewed' in e for e in errs([p])))
+
+    def test_missing_required_fields(self):
+        for field in ('id', 'title', 'category'):
+            p = ok()
+            del p[field]
+            self.assertTrue(any(field in e for e in errs([p])), field)
+        p = ok()
+        del p['steps'][0]['text']
+        self.assertTrue(any('text' in e for e in errs([p])))
+        p = ok()
+        del p['steps'][0]['id']
+        self.assertTrue(any('id' in e for e in errs([p])))
+
+    def test_unknown_fig(self):
+        self.assertTrue(any('fig' in e for e in errs([ok(fig='nope')], {'other'})))
+        self.assertEqual(errs([ok(fig='known')], {'known'}), [])
+
+    def test_unknown_tool(self):
+        self.assertTrue(any('tool' in e for e in errs([ok(tool='bogus')])))
+        self.assertEqual(errs([ok(tool='tq')]), [])
+
+    def test_unknown_category(self):
+        p = ok()
+        p['category'] = 'nope'
+        self.assertTrue(any('category' in e for e in errs([p])))
+
+    def test_advanced_requires_indications_contraindications_equipment_complications(self):
+        self.assertEqual(errs([advanced()]), [])
+        for field in ('indications', 'contraindications', 'equipment', 'complications'):
+            p = advanced()
+            del p[field]
+            self.assertTrue(any(field in e for e in errs([p])), field)
+
+    def test_reserved_protocol_ids(self):
+        for rid in ('tool', 'report', 'all'):
+            p = ok()
+            p['id'] = rid
+            self.assertTrue(any('reserved' in e for e in errs([p])), rid)
+
+    def test_reserved_step_id_all(self):
+        p = ok()
+        p['steps'][0]['id'] = 'all'
+        self.assertTrue(any('reserved' in e for e in errs([p])))
+
+    def test_long_action_is_warning_not_error(self):
+        e, w = validate([ok(text='x' * 201)], set())
+        self.assertTrue(e == [] and len(w) == 1)
+
+    def test_long_detail_is_fine(self):
+        self.assertEqual(validate([ok(detail='x' * 5000)], set()), ([], []))
+
+    def test_does_not_mutate_input(self):
+        p = ok()
+        before = copy.deepcopy(p)
+        validate([p], set())
+        self.assertEqual(p, before)
+
+
+if __name__ == '__main__':
+    unittest.main()

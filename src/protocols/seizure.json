@@ -1,0 +1,180 @@
+{
+  "id": "seizure",
+  "title": "Seizure",
+  "category": "illness",
+  "keywords": [
+    "seizure",
+    "fit",
+    "fitting",
+    "convulsion",
+    "convulsing",
+    "epilepsy",
+    "epileptic",
+    "shaking",
+    "jerking",
+    "twitching",
+    "staring spell",
+    "status epilepticus",
+    "febrile seizure",
+    "aura"
+  ],
+  "summary": "Seizure: protect them from injury, time it, nothing in the mouth and no holding down, side position afterwards, and get help if it is a first seizure, lasts over 5 minutes, happens in water or any other emergency sign is present.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Is the seizure happening now (jerking, stiffening, or staring and not responding)?",
+      "detail": "Seizures look different: whole-body jerking, stiffening, jerking of one part of the body, staring (often to one side), lip smacking, chewing or odd sounds (Red Cross). Some people feel an unusual sensation (aura) first and may be able to sit down before it starts.\n\nIf they are lying still and you cannot see them breathing, answer No: the next steps check breathing.",
+      "ask": {
+        "q": "Is the seizure happening now?",
+        "yes": "s2",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are they in water (swimming, wading, in a stream or bath)?",
+      "ask": {
+        "q": "Are they in water?",
+        "yes": "s30",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Ease them to the ground. Move hard or sharp things away and put something soft under their head. If you can do it safely, turn them onto one side.",
+      "warn": "Do not hold them down. Put nothing in their mouth.",
+      "detail": "AHA 2024 (Class 1): reduce the risk of injury by helping them to the ground, placing them in the recovery position and clearing the area. Red Cross: let the seizure run its course; turn them onto their side only if you can do it without injuring yourself or them. CDC: turn them gently onto one side with the mouth pointing to the ground; put something soft and flat (such as a folded jacket) under the head; take off eyeglasses; loosen anything tight around the neck.\n\nDo not restrain them (AHA 2024, Class 3: Harm): holding someone down does not stop a seizure and can injure them or you.\n\nPut nothing in their mouth (AHA 2024, Class 3: Harm). It is impossible to swallow your own tongue (Red Cross); objects in the mouth can break teeth, cause choking, or get your fingers bitten. Do not try to give breaths during the seizure (CDC). Give no food, drink or tablets during the seizure.\n\nStay with them the whole time (AHA 2024)."
+    },
+    {
+      "id": "s4",
+      "text": "Stay with them and time the seizure from when it started.",
+      "detail": "Most seizures stop on their own within 1 to 2 minutes (AHA 2024). A seizure lasting more than 5 minutes is a critical emergency (status epilepticus) (AHA 2024, CDC, Red Cross).\n\nIf it started before you began the timer, count that time too.",
+      "timer": {
+        "seconds": 300,
+        "label": "Seizure: 5 minutes"
+      },
+      "ask": {
+        "q": "Within 5 minutes of it starting: has the seizure stopped?",
+        "yes": "s6",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Over 5 minutes: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Keep protecting them.",
+      "detail": "A seizure over 5 minutes needs emergency care (AHA 2024, CDC, Red Cross).\n\nSome people with epilepsy carry their own prescribed rescue medicine. Red Cross: assist with or give medication only according to your level of training. Follow their written seizure plan if they have one.\n\nKeep the area clear, do not hold them down, and put nothing in their mouth. When the jerking stops, go on to the next step.",
+      "ask": {
+        "q": "Has the seizure stopped now?",
+        "yes": "s6",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Seizure over: check. Do they respond? Are they breathing normally?",
+      "detail": "Breathing can be noisy for a short time after a seizure. Red Cross and AHA: if they are unresponsive and not breathing normally (only gasping, or not at all), their heart may have stopped: start CPR. If you are not sure, treat it as not breathing normally.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "If they are not fully awake, roll them onto their side (Recovery position protocol). Stay with them until they are fully awake. Nothing to eat or drink until then.",
+      "detail": "Red Cross: recovery position if they are unresponsive but breathing, or responsive but not fully awake. They may be drowsy and confused for up to 20 minutes. Keep them from getting cold or overheated; give care for shock if needed. Reassure them and tell them what happened as they come round.\n\nAHA 2024 (Class 3: Harm): no food, drink or medicine by mouth while their responsiveness is reduced after a seizure; they could choke or inhale it. CDC: no water or food until fully alert.\n\nCheck them for injuries from the fall or the jerking, including a bitten tongue. Look for a medical ID bracelet (CDC)."
+    },
+    {
+      "id": "s8",
+      "text": "Look for a cause you can treat: hot and overheated, a blow to the head, diabetes, or a possible poison or overdose.",
+      "detail": "Use the matching protocol as well as this one:\n- overheated, after exertion or in hot weather: a seizure in the heat can be heat stroke; use the Heat illness (heat stroke, heat exhaustion, cramps) protocol now and start cooling;\n- a blow to the head or a fall: use the Head injury and concussion protocol;\n- diabetes (CDC lists diabetes with loss of consciousness as a reason to call 911): use the Low blood sugar protocol, which gives sugar only once they are fully awake and can swallow;\n- a possible poison, drug or overdose: use the Poisoning (swallowed, inhaled, skin or eye) protocol or the Opioid overdose protocol;\n- several people with headache, confusion or nausea in a tent, cabin or vehicle with a stove, heater or engine: use the Carbon monoxide poisoning protocol."
+    },
+    {
+      "id": "s9",
+      "text": "Emergency if: first seizure ever (or not known), over 5 minutes, another before waking, in water, injured, trouble breathing or choking, pregnant, diabetes, or under 6 months old.",
+      "detail": "AHA 2024 (Class 1) lists when to activate EMS: a first-time seizure; a seizure lasting more than 5 minutes; more than one seizure without returning to their normal self in between; a seizure in water; a seizure with injury, trouble breathing or choking; a seizure in an infant under 6 months or a pregnant person; or not returning to their normal self within 5 to 10 minutes after the seizure stops (the next step checks that).\n\nCDC adds: trouble waking up after the seizure, and a person with diabetes who loses consciousness. Red Cross also marks loss of consciousness, whole-body convulsions and cardiac arrest after the seizure as needing immediate emergency care, and says to call if you do not know whether they have had seizures before.",
+      "ask": {
+        "q": "Is any of these true?",
+        "yes": "s10",
+        "no": "s11"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Keep them on their side and resting. Within 5 to 10 minutes of the seizure stopping, are they back to their normal selves?",
+      "detail": "AHA 2024: activate EMS if they have not returned to their normal state within 5 to 10 minutes after the seizure stops.\n\nAnswer No if they are still confused, very drowsy, hard to wake, or not acting like themselves. If another seizure starts, protect them and time it as before; that is an emergency.",
+      "timer": {
+        "seconds": 600,
+        "label": "Back to normal within 5 to 10 min?"
+      },
+      "ask": {
+        "q": "Within 10 minutes of the seizure stopping: are they back to normal?",
+        "yes": "s12",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "Back to normal: let them rest, and stay with them until they are fully recovered. Follow their own seizure plan. If another seizure starts, start this protocol again.",
+      "detail": "Red Cross: stay with them until they are fully recovered and aware of their surroundings. CDC: once they are alert, help them sit somewhere safe, comfort them and explain what happened.\n\nThis branch is for someone with known seizures whose seizure was short, without injury or other emergency signs. Even then, the CDC suggests someone helps them get home safely. Whether they carry on with the trip, and whether they swim, climb or do anything where a seizure would be dangerous, is for the group to decide with them; the sources opened give no rule for this.\n\nA second seizure, or any emergency sign in the previous step appearing later, means get help (Call 911 if you have signal. If not, send someone for help and prepare to move the casualty).",
+      "end": true
+    },
+    {
+      "id": "s10",
+      "text": "Emergency: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Keep them on their side and watch their breathing.",
+      "detail": "Stay with them. Keep them on their side (Recovery position protocol), warm or cool as needed, with nothing by mouth until fully awake.\n\nIf another seizure starts, protect them from injury and time it; do not hold them down or put anything in their mouth. If they stop breathing normally, start CPR (CPR, adult protocol).\n\nIf they were injured, use the Head injury and concussion protocol or the Trauma check (MARCH) protocol as needed.",
+      "end": true
+    },
+    {
+      "id": "s13",
+      "text": "Still seizing: keep protecting them and get them to medical care as fast as it can safely be done. When it stops, roll them onto their side and watch their breathing.",
+      "detail": "A seizure that does not stop is a critical emergency (AHA 2024: over 5 minutes is status epilepticus). Keep the area clear, do not hold them down, put nothing in their mouth.\n\nWhen the jerking stops: check breathing. If they are unresponsive and not breathing normally, start CPR (CPR, adult protocol). If they are breathing, roll them onto their side (Recovery position protocol) and stay with them. Nothing by mouth until fully awake.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s30",
+      "text": "Seizure in water: keep their face out of the water and get them out as soon as you safely can. Then use the Drowning protocol.",
+      "warn": "Do not become a second casualty: go into deep or moving water only if you can do it safely.",
+      "detail": "A seizure in water is always an emergency (AHA 2024, CDC, Red Cross). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nNone of the sources opened says how to support someone having a seizure in water. Holding their head and face above the water and bringing them out when it is safe is a group judgement.\n\nOnce out, the Drowning protocol checks breathing (CPR with breaths if needed) and covers watching for breathing problems afterwards. Put nothing in their mouth and do not hold the limbs down.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Red Cross: if they are unresponsive and not breathing after a seizure, begin CPR straight away and use an AED if one is available.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not hold them down or try to stop the movements (AHA 2024: harm).",
+    "Do not put anything in their mouth; nobody swallows their own tongue (AHA 2024, Red Cross).",
+    "Do not give food, drink or medicine by mouth during the seizure or until they are fully awake afterwards (AHA 2024).",
+    "Do not leave them alone during or after the seizure."
+  ],
+  "evacuate": [
+    "Get help and evacuate (AHA 2024): a first seizure, a seizure over 5 minutes, more than one without waking in between, a seizure in water, injury, trouble breathing or choking, pregnancy, an infant under 6 months, or not back to normal within 5 to 10 minutes.",
+    "Also (CDC): trouble waking after the seizure, or a person with diabetes who loses consciousness.",
+    "Evacuate urgently if the seizure does not stop."
+  ],
+  "notes": [
+    "Seizure: protect from injury, nothing in the mouth, no restraint, time it; over 5 minutes is an emergency. Side position afterwards."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 6.6 Seizures (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Seizures (lay first aid page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/seizures"
+    },
+    {
+      "name": "US CDC, First Aid for Seizures, last reviewed 2024-02-08",
+      "year": 2024,
+      "url": "https://www.cdc.gov/epilepsy/first-aid-for-seizures/index.html"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

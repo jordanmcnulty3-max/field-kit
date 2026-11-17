@@ -1,0 +1,236 @@
+{
+  "id": "overdose",
+  "title": "Opioid overdose",
+  "category": "illness",
+  "keywords": [
+    "overdose",
+    "opioid",
+    "opioids",
+    "naloxone",
+    "narcan",
+    "fentanyl",
+    "heroin",
+    "oxycodone",
+    "morphine",
+    "pills",
+    "od",
+    "nodding off",
+    "pinpoint pupils",
+    "wont wake up",
+    "slow breathing",
+    "drug overdose"
+  ],
+  "summary": "Possible opioid overdose: CPR with breaths if they are not breathing normally (naloxone must not delay it); if breathing slowly or hard to wake, give naloxone nasal spray, side position, repeat every 2 to 3 minutes if needed, and watch for hours because naloxone wears off.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check the scene is safe; watch for needles. Shout their name and shake their shoulder. Look for: hard to wake, slow or no breathing, gurgling or snoring, blue or grey lips.",
+      "detail": "Signs of opioid overdose (CDC, Red Cross, AHA 2024): cannot be woken or very hard to wake; limp body; slow, shallow breathing, only a few breaths a minute, or no breathing; choking, gurgling or snoring sounds from someone who cannot be woken; blue, grey or discoloured lips, nails or skin; small, pinpoint pupils. Signs of use nearby (pill bottles, pipes, needles, syringes, powder) make it more likely (Red Cross).\n\nIf you are not sure whether someone is very high or overdosing, treat it as an overdose (CDC).\n\nWear gloves if you have them (Red Cross: personal protective equipment as appropriate). Do not pick up needles with bare hands."
+    },
+    {
+      "id": "s2",
+      "text": "Are they unresponsive and not breathing normally (no breathing, or only gasping)?",
+      "detail": "Gasping or occasional breaths are not normal breathing. If you are not sure, treat it as not breathing normally.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s3",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Start CPR with rescue breaths now: use the CPR, adult protocol. Do not delay CPR to give naloxone. If someone else is free, they give naloxone (see detail).",
+      "detail": "AHA 2025 (Class 1): lay rescuers give CPR with breaths to anyone unresponsive and not breathing normally after a suspected opioid overdose. Rescuers should not delay standard resuscitation or calling for help while giving naloxone or waiting for it to work. In cardiac arrest, naloxone may be reasonable if it does not interrupt high-quality CPR (Class 2b). AHA 2024 first aid (Class 1): activate emergency help, give high-quality CPR (compressions plus breaths), and give naloxone. Red Cross: give naloxone without delaying CPR or AED use. If you are untrained or unwilling to give breaths, compression-only CPR is still better than nothing (Red Cross: CPR or compression-only CPR based on training).\n\nNaloxone by a second person: one spray into one nostril, as in this protocol's naloxone step. Another spray with a new device into the other nostril every 2 to 3 minutes if they do not wake and breathe normally (MedlinePlus). Do not stop compressions for it.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they start breathing normally, roll them onto their side (Recovery position protocol) and watch them for hours: naloxone can wear off before the opioid does.\n\nOthers at the scene who took the same drugs may also be overdosing: check each of them as soon as someone is free (group judgement).",
+      "end": true
+    },
+    {
+      "id": "s4",
+      "text": "Are they hard to wake, or breathing slowly or shallowly, or making gurgling or snoring sounds?",
+      "detail": "Red Cross: if they are breathing slowly or irregularly, or are not fully awake, assist with or give naloxone and stay with them. AHA 2024: a person who is breathing normally does not need naloxone.",
+      "ask": {
+        "q": "Are they hard to wake, or breathing slowly or noisily?",
+        "yes": "s5",
+        "no": "s15"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Do you have naloxone (Narcan or another naloxone nasal spray)?",
+      "detail": "Naloxone nasal spray is sold over the counter in the US without a prescription (AHA 2024, CDC). Ask others at the scene.",
+      "ask": {
+        "q": "Is naloxone available?",
+        "yes": "s6",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Lay them on their back and tilt the head back. Put the nozzle tip into one nostril and press the plunger firmly. One device gives one dose. Note the time.",
+      "warn": "Do not prime the spray before use; each device holds one dose.",
+      "detail": "How (MedlinePlus, naloxone nasal spray): lay the person on their back and support the back of the neck so the head tilts back. Take the spray out of the box and peel back the tab; do not prime it. Hold it with your thumb on the bottom of the plunger and your first and middle fingers either side of the nozzle. Gently put the nozzle tip into one nostril until your fingers touch the bottom of the nose. Press the plunger firmly, then take it out.\n\nInjectable naloxone: follow the instructions on the device.\n\nNaloxone is very unlikely to harm someone who has not taken an opioid (AHA 2024, CDC). Through the nose it takes several minutes to work (AHA 2024), so watch their breathing closely meanwhile. It does not reverse other drugs.\n\nKeep the used device to give to medical staff, out of reach of children (MedlinePlus).",
+      "log": "Naloxone nasal spray given"
+    },
+    {
+      "id": "s7",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Roll them onto their side (Recovery position protocol) and stay with them.",
+      "detail": "MedlinePlus: call for emergency help straight after the first dose, then turn them onto their side (recovery position). CDC: lay them on their side to prevent choking, try to keep them awake and breathing, and stay with them.\n\nAHA 2025: opening the airway and giving breaths may be all that is needed to stop slow breathing turning into cardiac arrest. That recommendation is for trained rescuers who are sure the person has a pulse; if you are trained in rescue breathing, give breaths while the naloxone takes effect. Anyone else: if they stop breathing normally, start CPR with breaths.\n\nMost US states have Good Samaritan laws that may protect the person who overdosed and the person who calls for help from criminal penalties (CDC)."
+    },
+    {
+      "id": "s8",
+      "text": "Watch their breathing. Wait 2 to 3 minutes.",
+      "detail": "MedlinePlus: give another dose if they do not wake up to voice or touch, do not breathe normally, or wake up and then become drowsy again. Repeat every 2 to 3 minutes until help arrives. More than one dose may be needed with strong opioids such as fentanyl (CDC, NIDA).\n\nIf they stop breathing normally before the time is up, answer No now.",
+      "timer": {
+        "seconds": 120,
+        "label": "Next naloxone dose due (2 to 3 min)"
+      },
+      "ask": {
+        "q": "After 2 to 3 minutes: are they awake and breathing normally?",
+        "yes": "s11",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Check: are they unresponsive and not breathing normally?",
+      "detail": "Gasping or occasional breaths are not normal breathing. If you are not sure, treat it as not breathing normally.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s3",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Do you have another naloxone device?",
+      "ask": {
+        "q": "Is another naloxone device available?",
+        "yes": "s10b",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s10b",
+      "text": "Give another dose with a new device, into the other nostril. Put them back on their side. Repeat every 2 to 3 minutes until they wake and breathe normally, or help takes over.",
+      "detail": "MedlinePlus: alternate nostrils, using a new nasal spray each time; each device holds one dose. Repeat every 2 to 3 minutes until emergency help arrives.\n\nIf they stop breathing normally at any point, start CPR with breaths (CPR, adult protocol).",
+      "log": "Another naloxone dose given",
+      "timer": {
+        "seconds": 120,
+        "label": "Next naloxone dose due (2 to 3 min)"
+      },
+      "ask": {
+        "q": "After 2 to 3 minutes: are they awake and breathing normally?",
+        "yes": "s11",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s11",
+      "text": "Awake and breathing: keep them on their side or sitting, stay with them and watch for at least 4 hours. Naloxone can wear off before the opioid does and the overdose can come back.",
+      "warn": "Keep a naloxone device ready. If they get drowsy or breathe slowly again, give another dose.",
+      "detail": "Naloxone works for only 30 to 90 minutes, and many opioids last longer in the body (NIDA). Red Cross: the effect of naloxone is often shorter than that of most opioids, so they still need immediate medical care even after it. AHA 2025: people who respond to naloxone need to be watched in a health care setting until the risk of breathing problems coming back is low; repeat doses can help if breathing slows again.\n\nHow long to watch: CDC says keep watching for at least 4 hours to make sure their breathing stays normal; NIDA says monitor for 2 hours after the last dose. This protocol uses the longer time. Long-acting or extended-release opioids may need longer (AHA 2025).\n\nOn waking they may have withdrawal symptoms within minutes, such as headache, a fast heartbeat, sweating, nausea, vomiting and tremors (NIDA). These are uncomfortable but usually not life-threatening (NIDA, CDC). Keep them on their side if they feel sick. Explain calmly what happened.\n\nOther drugs: naloxone reverses only opioids. Other sedatives, such as alcohol or sleeping and anxiety pills, often add to slowed breathing and are not reversed by naloxone (AHA 2025). With mixed drugs, give naloxone first (AHA 2025) and keep watching closely.",
+      "timer": {
+        "seconds": 14400,
+        "label": "Watch for at least 4 hours"
+      },
+      "ask": {
+        "q": "At any time in the 4 hours: are they hard to wake or breathing slowly again?",
+        "yes": "s9",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s13",
+      "text": "Get them to medical care even though they have recovered. Keep watching their breathing on the way.",
+      "detail": "Red Cross: they still need immediate medical care after naloxone. AHA 2025: observe in a health care setting until the risk of breathing problems coming back is low.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nGive any used naloxone devices, and anything you know about what they took and when, to medical staff.\n\nOthers who took the same drugs may also be at risk: check them and keep naloxone ready (group judgement).",
+      "end": true
+    },
+    {
+      "id": "s12",
+      "text": "No naloxone: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Roll them onto their side, try to keep them awake, and stay with them.",
+      "detail": "CDC: try to keep the person awake and breathing, lay them on their side to prevent choking, and stay with them. Ask everyone nearby for naloxone.\n\nAHA 2025: for trained rescuers who are sure there is a pulse, giving breaths may be all that is needed to prevent cardiac arrest. If they stop breathing normally, anyone should start CPR with breaths.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s3",
+        "no": "s14"
+      }
+    },
+    {
+      "id": "s14",
+      "text": "Keep them on their side and watch their breathing all the time. Evacuate urgently. If breathing stops or becomes only gasping, start CPR with breaths (CPR, adult protocol).",
+      "detail": "If someone arrives with naloxone, give it as in this protocol's naloxone step (one spray in one nostril; another with a new device in the other nostril every 2 to 3 minutes if needed, MedlinePlus).\n\nOthers who took the same drugs may also be at risk: check them (group judgement).",
+      "end": true
+    },
+    {
+      "id": "s15",
+      "text": "Awake and breathing normally: naloxone is not needed now. Stay with them and keep watching. If they become hard to wake or breathe slowly or noisily, give naloxone.",
+      "detail": "AHA 2024: a person who is breathing normally does not need naloxone. Opioids can take effect over time, so keep watching their alertness and breathing, and keep naloxone ready.\n\nIf they took something unknown, or a swallowed medicine overdose, also use the Poisoning (swallowed, inhaled, skin or eye) protocol.",
+      "ask": {
+        "q": "Have they become hard to wake, or is their breathing slow or noisy?",
+        "yes": "s5",
+        "no": "s16"
+      }
+    },
+    {
+      "id": "s16",
+      "text": "Keep watching them. Do not leave them alone. If they become hard to wake or their breathing slows, start this protocol again.",
+      "detail": "If they become unresponsive and stop breathing normally, start CPR with breaths (CPR, adult protocol).\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty, if they get worse or you are not sure what or how much they took (Poison Control can advise on a swallowed overdose: see the Poisoning (swallowed, inhaled, skin or eye) protocol).",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not delay CPR or calling for help to give naloxone (AHA 2025).",
+    "Do not leave someone alone after naloxone; it can wear off before the opioid does.",
+    "Do not prime a naloxone nasal spray before use; each device holds one dose (MedlinePlus).",
+    "Do not assume they are safe because they woke up; they still need medical care (Red Cross)."
+  ],
+  "evacuate": [
+    "Get medical care for anyone who needed naloxone or CPR, even if they recover (Red Cross; AHA 2025: observe in a health care setting).",
+    "Evacuate urgently if they do not wake and breathe normally after naloxone, if signs come back, or if you have no naloxone.",
+    "Off-grid, while waiting or travelling, watch them for at least 4 hours after the last naloxone dose (CDC) with naloxone ready."
+  ],
+  "notes": [
+    "Naloxone nasal spray: on their back, one spray in one nostril; another with a new device in the other nostril every 2 to 3 minutes if they do not wake and breathe normally (MedlinePlus). Not breathing normally: CPR with breaths first (AHA 2025)."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association, Part 10: Adult and Pediatric Special Circumstances of Resuscitation, section 21.11 Opioid Overdose (with 21.3 Benzodiazepines), 2025 AHA Guidelines for CPR and ECC",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation"
+    },
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 8.1 Opioid Overdose (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Opioid Overdose (lay first aid page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/opioid-overdose"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Naloxone Nasal Spray (drug information), last revised 2026-09-15",
+      "year": 2026,
+      "url": "https://medlineplus.gov/druginfo/meds/a616003.html"
+    },
+    {
+      "name": "US CDC, Lifesaving Naloxone, last reviewed 2025-06-11",
+      "year": 2025,
+      "url": "https://www.cdc.gov/stop-overdose/caring/naloxone.html"
+    },
+    {
+      "name": "US CDC, What to Do If You Think Someone Is Overdosing, last reviewed 2024-04-02",
+      "year": 2024,
+      "url": "https://www.cdc.gov/stop-overdose/response/index.html"
+    },
+    {
+      "name": "US CDC, Fact Sheet: How and When to Use Naloxone (family and caregivers, undated)",
+      "url": "https://cdc.gov/overdose-prevention/media/pdfs/2024/04/FactSheet-How-and-When-to-Use-Naloxone.pdf"
+    },
+    {
+      "name": "National Institute on Drug Abuse, Naloxone DrugFacts (January 2022, modified 2026-03-06)",
+      "year": 2022,
+      "url": "https://nida.nih.gov/publications/drugfacts/naloxone"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

@@ -1,0 +1,177 @@
+{
+  "id": "low-blood-sugar",
+  "title": "Low blood sugar",
+  "category": "illness",
+  "keywords": [
+    "low blood sugar",
+    "hypoglycemia",
+    "hypoglycaemia",
+    "hypo",
+    "diabetic",
+    "diabetes",
+    "insulin",
+    "sugar",
+    "glucose",
+    "glucose tablets",
+    "glucagon",
+    "shaky",
+    "sweaty",
+    "acting drunk",
+    "insulin reaction",
+    "diabetic emergency"
+  ],
+  "summary": "Low blood sugar: if they are fully awake and can swallow, give at least 20 grams of sugar and recheck after 10 minutes, then food; if not, nothing by mouth, side position, their own glucagon if someone knows how, and get help.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check: do they respond? Are they breathing normally?",
+      "detail": "Gasping or occasional breaths are not normal breathing. If you are not sure, treat it as not breathing normally.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Look for signs of low blood sugar: shaky, sweaty, dizzy, hungry, pale, fast heartbeat, irritable, confused, slurred speech, or acting drunk. Especially in someone with diabetes.",
+      "detail": "Signs (AHA 2024, Red Cross, CDC, MedlinePlus): dizziness, tiredness, feeling shaky or jittery, sweating, fast or pounding heartbeat, hunger, headache, nervousness, irritability or aggression, confusion, slurred speech, blurred or double vision, tingling, trouble walking, appearing drunk, cool clammy skin; in severe cases seizures and loss of consciousness. Some people have no warning signs at all (CDC).\n\nCommon causes in someone with diabetes (Red Cross): a missed or small meal, more exercise than usual, vomiting, or too much diabetes medicine.\n\nLow blood sugar is below 70 mg/dL (AHA 2024, MedlinePlus). If they have a meter, a reading helps, but do not delay sugar for an awake person to find one.\n\nIf you cannot tell whether their sugar is low or high, giving sugar is the safer choice: it will not do major harm if it is high (Red Cross).\n\nLook-alikes: low blood sugar can look like a stroke (AHA 2024). If they have stroke signs (face drooping, arm drifting, slurred speech), use the Stroke protocol as well. If they are having a seizure, use the Seizure protocol."
+    },
+    {
+      "id": "s3",
+      "text": "Are they fully awake, answering you and following simple requests?",
+      "detail": "AHA 2024 (Class 3: Harm): do not give anything by mouth to someone who is not fully awake or cannot swallow; they could choke or inhale it.",
+      "ask": {
+        "q": "Are they fully awake?",
+        "yes": "s4",
+        "no": "s21"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Can they swallow safely: no choking, coughing on swallowing or drooling?",
+      "ask": {
+        "q": "Can they swallow safely?",
+        "yes": "s5",
+        "no": "s21"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Give at least 20 grams of sugar: glucose tablets or gel (check the label), or 7 oz orange juice, or 20 to 25 Skittles, or 10 to 20 jellybeans. Not diet drinks.",
+      "warn": "Only if fully awake and able to swallow. Nothing by mouth during or just after a seizure.",
+      "detail": "AHA 2024: encourage an awake person who can swallow to take sugar by mouth (Class 1). Glucose tablets are preferred over gel or ordinary foods (Class 2a); if there are no tablets or gel, ordinary sugary foods and drinks are a reasonable alternative (Class 2a). At least 20 grams of glucose, or the same amount in sugary food, can quickly restore blood sugar.\n\nWhat gives about 20 grams (Red Cross): glucose tablets, liquid or gel; 7 ounces (about 200 ml) of orange juice; 14 ounces (about 400 ml) of milk; 20 to 25 Skittles; 2 strips of fruit rolls; 10 to 20 jellybeans. Glucose tablets and gels vary by brand: read the packet and give 20 grams or more.\n\nDo not use a diet drink or sugar-free sweets: they contain no sugar (Red Cross).\n\nSwallowed tablets or gel work better than gel or spray held in the cheek (AHA 2024).",
+      "log": "Sugar given (about 20 g)"
+    },
+    {
+      "id": "s6",
+      "text": "Sit them down and stay with them. Wait 10 minutes, then check: are they clearly better?",
+      "detail": "AHA 2024 (Class 1): if they do not improve within 10 minutes of taking sugar, activate the emergency response system.\n\nAnswer No if they are no better, worse, or more drowsy or confused. If they become drowsy or stop answering you before the 10 minutes are up, answer No now.",
+      "timer": {
+        "seconds": 600,
+        "label": "Recheck after sugar (10 min)"
+      },
+      "ask": {
+        "q": "After 10 minutes: are they clearly better?",
+        "yes": "s7",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Better: give a snack or meal with carbohydrate and protein, such as crackers and cheese. Stay with them and watch for signs coming back.",
+      "detail": "CDC: after treating a low, eat a balanced snack or meal with protein and carbohydrate.\n\nIf they have a meter, recheck their sugar; CDC repeats sugar while the reading is still below 70 mg/dL.\n\nIf signs come back, start this protocol again. Find out why it happened (a missed meal, more exercise than usual, vomiting, or a medicine dose) and plan food and activity for the rest of the day; this advice is a group judgement, not from a source.\n\nIf they are vomiting and cannot keep food down, they cannot keep their sugar up: get help (Call 911 if you have signal. If not, send someone for help and prepare to move the casualty).",
+      "end": true
+    },
+    {
+      "id": "s8",
+      "text": "Not better after 10 minutes: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "AHA 2024 (Class 1): activate the emergency response system if they do not improve within 10 minutes of oral sugar, cannot swallow, or have a seizure. MedlinePlus: if signs do not improve after a sugary snack, call 911; do not let them drive.",
+      "ask": {
+        "q": "Are they still fully awake?",
+        "yes": "s9",
+        "no": "s21"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Give another 20 grams of sugar the same way, if they can still swallow safely. Keep evacuating and keep watching them.",
+      "warn": "Stop giving anything by mouth if they become drowsy, confused, or cannot swallow: lie them on their side.",
+      "detail": "AHA 2024 does not say whether to repeat sugar. CDC repeats the sugar dose while blood sugar is still low (CDC uses a smaller 15 gram dose and a 15 minute wait; this protocol uses the AHA amounts). Giving a second dose while help is on the way is drawn from CDC.\n\nIf they improve, give a snack or meal with carbohydrate and protein (CDC). If they stop answering you or cannot swallow, give nothing more by mouth and lie them on their side (Recovery position protocol).\n\nIf they become unresponsive and stop breathing normally, start CPR (CPR, adult protocol).",
+      "log": "Second sugar dose given (about 20 g)",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Put nothing in their mouth. Lie them on their side (Recovery position protocol). Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "warn": "No food, drink, sugar or tablets by mouth for anyone not fully awake or unable to swallow.",
+      "detail": "AHA 2024 (Class 3: Harm): giving sugar by mouth to someone who is not fully awake or cannot swallow can cause choking and inhaling it into the lungs. They need emergency help (AHA 2024, Class 1). Severe low blood sugar can cause seizures, brain injury and death (AHA 2024).\n\nChildren: for an awake child who will not or cannot swallow, AHA 2024 (Class 2b) says a slurry of about 1 teaspoon of granulated sugar with a little water placed under the tongue may be reasonable. Never for anyone who is not awake.\n\nIf they have a seizure, use the Seizure protocol.",
+      "ask": {
+        "q": "Do they have their own glucagon kit with them?",
+        "yes": "s22",
+        "no": "s23"
+      }
+    },
+    {
+      "id": "s22",
+      "text": "Glucagon: if someone trained to use their kit is there, they give it. Otherwise help with it, following the kit's printed instructions.",
+      "detail": "Red Cross: some people with diabetes carry a glucagon kit for severe low blood sugar; you can assist them with it, and family, friends or co-workers may have been trained to give it. If someone trained is there, encourage them to give it when the person meets the signs they were taught. No dose is given here: use the person's own prescribed kit as its instructions say.\n\nCDC: a person who passes out from very low blood sugar usually wakes within about 15 minutes after glucagon. Contact a doctor for emergency treatment straight after a glucagon injection.\n\nKeep them on their side; vomiting is possible.",
+      "log": "Own glucagon given"
+    },
+    {
+      "id": "s23",
+      "text": "Stay with them on their side and watch their breathing. Once they are fully awake and can swallow, give sugar (20 grams), then a snack with carbohydrate and protein.",
+      "warn": "Nothing by mouth until they are fully awake and can swallow safely.",
+      "detail": "CDC: once they are awake and able to swallow after glucagon, give a fast-acting sugar such as regular (not diet) soda or fruit juice, then a longer-acting carbohydrate with protein such as crackers and cheese. Use the amounts in the sugar step of this protocol (AHA 2024: at least 20 grams).\n\nThey still need medical care: keep evacuating (AHA 2024; CDC after glucagon). If they stop breathing normally, start CPR (CPR, adult protocol).",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Give nothing by mouth.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not give anything by mouth to someone who is not fully awake or cannot swallow (AHA 2024: harm).",
+    "Do not use diet drinks or sugar-free sweets; they contain no sugar (Red Cross).",
+    "Do not wait for a meter reading before giving sugar to an awake person who can swallow.",
+    "Do not leave them alone until they have recovered and eaten."
+  ],
+  "evacuate": [
+    "Get help (AHA 2024): not better within 10 minutes of sugar, cannot swallow, not fully awake, or has a seizure.",
+    "Get help after any glucagon injection (CDC).",
+    "Evacuate if they cannot keep food down (group judgement: they cannot keep their sugar up)."
+  ],
+  "notes": [
+    "Low blood sugar, fully awake and able to swallow: at least 20 g of sugar (glucose tablets best), recheck after 10 minutes, then a snack (AHA 2024, CDC)."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 6.7 Hypoglycemia (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Diabetic Emergencies: How To Help (lay first aid page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/diabetic-emergencies"
+    },
+    {
+      "name": "US CDC, Treatment of Low Blood Sugar (Hypoglycemia), last reviewed 2024-05-15",
+      "year": 2024,
+      "url": "https://www.cdc.gov/diabetes/treatment/treatment-low-blood-sugar-hypoglycemia.html"
+    },
+    {
+      "name": "US CDC, Low Blood Sugar (Hypoglycemia), last reviewed 2024-05-16",
+      "year": 2024,
+      "url": "https://www.cdc.gov/diabetes/about/low-blood-sugar-hypoglycemia.html"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Low blood sugar, reviewed 2026-01-25",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/article/000386.htm"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

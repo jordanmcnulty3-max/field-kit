@@ -1,0 +1,143 @@
+{
+  "id": "chest-pain",
+  "title": "Chest pain or heart attack",
+  "category": "illness",
+  "keywords": [
+    "chest pain",
+    "heart attack",
+    "chest pressure",
+    "chest tightness",
+    "crushing chest",
+    "angina",
+    "cardiac",
+    "heart",
+    "aspirin",
+    "nitroglycerin",
+    "nitro",
+    "jaw pain",
+    "arm pain",
+    "indigestion",
+    "short of breath",
+    "mi"
+  ],
+  "summary": "Possible heart attack: stop all activity and rest, get help, aspirin to chew if they are alert and nothing rules it out, their own nitroglycerin if prescribed, CPR if they collapse, and evacuate without exertion.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check: do they respond? Are they breathing normally?",
+      "detail": "Gasping or occasional breaths are not normal breathing. If you are not sure, treat it as not breathing normally.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Did the chest pain start after a blow, a fall or a wound to the chest?",
+      "detail": "The aspirin advice in this protocol is for chest pain that was not caused by an injury (AHA 2024 recommends it only for non-traumatic chest pain).\n\nIf the pain came first and they then fell or collapsed, answer No.",
+      "ask": {
+        "q": "Did the pain start after an injury to the chest?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Look for heart attack signs: chest pain, pressure, squeezing or heaviness lasting more than a few minutes or coming back; pain spreading to an arm, neck, jaw, back or stomach.",
+      "detail": "If you suspect a heart attack, treat it as one (Red Cross). Do not wait to see if the pain goes away, and do not let the person talk you out of getting help (MedlinePlus).\n\nCommon signs (Red Cross, MedlinePlus, AHA 2024):\n- chest pain, pressure, squeezing, fullness, tightness or heaviness, usually in the centre of the chest, lasting more than 3 to 5 minutes, or going away and coming back;\n- pain or discomfort spreading to the arms (often the left), shoulder, neck, jaw, back or stomach;\n- shortness of breath or trouble breathing;\n- cold sweat, nausea or vomiting, indigestion, lightheadedness or dizziness;\n- pale, grey or bluish skin; a feeling of anxiety or that something terrible is happening;\n- numbness, aching or tingling in an arm.\n\nLess typical signs: women, older adults and people with diabetes more often have unusual or milder symptoms (AHA 2024, MedlinePlus, Red Cross). They may have shortness of breath, pain in the back, neck, jaw or stomach, sweating, nausea, lightheadedness, or extreme tiredness or weakness, with little or no chest pain. In older adults, a change in mental state can be the sign (MedlinePlus). Women may have symptoms for hours, days or weeks before (Red Cross). Someone who has had a heart attack before may have different symptoms the second time (Red Cross).\n\nMost people who die of a heart attack die within the first 2 hours of symptoms (Red Cross)."
+    },
+    {
+      "id": "s4",
+      "text": "Stop all activity. Sit or lie them in the position they find most comfortable and keep them still. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Getting help started is the most important action (AHA 2024: activate the emergency response system so EMS can take them to the closest emergency department). Do not worry about a false alarm (Red Cross).\n\nRest (Red Cross, MedlinePlus): have them stop what they are doing and rest in a comfortable position; keep them calm and reassure them. Loosen tight clothing. Keep them from getting cold or overheated. If they show signs of shock, use the Shock protocol.\n\nDo not leave them alone except to get help (MedlinePlus). If anyone is free, send them to fetch an AED (defibrillator) if one exists."
+    },
+    {
+      "id": "s5",
+      "text": "Before aspirin, check: allergic to aspirin, told by a health professional not to take it, a bleeding problem, not fully alert, or unable to chew and swallow? Or are you unsure?",
+      "detail": "Answer Yes if any one of these is true, or if you are not sure. Then skip the aspirin.\n\nAHA 2024 (Class 2b): an alert adult with chest pain not caused by injury may be encouraged to chew and swallow aspirin while waiting for help, unless they have a known aspirin allergy or have been told by a health care professional not to take aspirin. AHA also names a bleeding risk as a reason some people should not take it, and says that if there is any doubt about whether aspirin should be taken, it is reasonable not to give it.\n\nRed Cross: only if they are awake, can follow simple commands, can chew and swallow, and are allowed to have aspirin. MedlinePlus: not if they are allergic to aspirin or have any condition that could make aspirin dangerous for them.\n\nAspirin is never a reason to delay getting help (MedlinePlus).",
+      "ask": {
+        "q": "Does any of these apply, or are you unsure?",
+        "yes": "s7",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Have them chew and swallow aspirin: 162 to 325 mg. That is two to four low-dose 81 mg tablets, or one regular 325 mg tablet. Note the time.",
+      "warn": "Only aspirin. Not ibuprofen, acetaminophen or other pain medicine. No aspirin if any check in the last step applied.",
+      "detail": "Dose: AHA 2024 gives 162 to 325 mg, chewed and swallowed. Red Cross gives 2 to 4 low-dose (81 mg) tablets (162 to 324 mg) or one regular-strength (325 mg) tablet.\n\nEarlier aspirin is linked to better survival: in observational studies, people who got aspirin a median of 1.6 hours after their pain began did better than those who got it at 3.5 hours (AHA 2024).\n\nOnly aspirin is recommended here; MedlinePlus says to give nothing by mouth except a prescribed heart medicine (and lists aspirin separately).",
+      "log": "Aspirin given (chewed and swallowed)"
+    },
+    {
+      "id": "s7",
+      "text": "If they have their own prescribed nitroglycerin, help them take it as their prescription directs.",
+      "detail": "Red Cross and MedlinePlus: if the person has prescribed nitroglycerin (or other chest pain medicine for a known heart condition), help them take it. Neither gives a dose; follow the directions on their own prescription.\n\nThe guidelines speak only of the person's own prescribed nitroglycerin. Do not give anyone else's.\n\nMedlinePlus: give nothing else by mouth except a prescribed heart medicine (and aspirin as in the earlier step).",
+      "log": "Own nitroglycerin taken",
+      "warn": "Only if they are fully alert and can swallow."
+    },
+    {
+      "id": "s8",
+      "text": "Keep them resting and warm or cool as needed. Watch breathing and responsiveness all the time.",
+      "detail": "Stay with them and reassure them (Red Cross). Watch for changes in breathing and responsiveness. If they lose responsiveness and stop breathing normally, their heart may have stopped (cardiac arrest): start CPR at once.\n\nIf they become unresponsive but are still breathing normally, roll them onto their side (Recovery position protocol) and keep watching their breathing.",
+      "ask": {
+        "q": "Have they become unresponsive and stopped breathing normally?",
+        "yes": "s20",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Evacuate now, even if the pain eases. They must not walk or carry anything if it can be avoided. Wait with them for a rescue or a carry if one can reach you (see detail).",
+      "warn": "If pain comes back or gets worse on the move, stop, rest them and reassess.",
+      "detail": "What the guidelines say: AHA 2024 says a person with chest pain should be taken by EMS to the closest emergency department; EMS shortens the time the heart is starved of blood compared with a private car, and in one study about 1 in 300 people taken by private vehicle had a cardiac arrest on the way. Red Cross: never drive the person to hospital yourself; have them stop activity and rest. MedlinePlus: the sooner they reach the emergency room, the better the chance of survival.\n\nOff-grid, walking out versus waiting (group judgement, not from a source): none of these sources covers a place where EMS cannot come. If you have signal, or someone has gone for help and a rescue (vehicle, helicopter, stretcher team) can reach you, keep the casualty resting where they are and wait. If no rescue can come, the casualty still needs hospital care as soon as possible: carry them or use a vehicle if you can, so they do not exert themselves. Walking out under their own power is the last option; if it is the only one, go slowly, carry nothing, rest often, never leave them alone, and stop if pain, breathlessness, faintness or sweating returns.\n\nKeep the CPR, adult protocol ready on the way. Watch breathing and responsiveness the whole time.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol. Send someone for an AED if one exists.",
+      "detail": "A heart attack can lead to cardiac arrest (Red Cross). If they are unresponsive and not breathing normally, start CPR (compression-only if you are not trained to give breaths) and use an AED as soon as one arrives.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nGive nothing by mouth to someone who is not fully alert.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Chest pain after an injury: no aspirin. Use the Trauma check (MARCH) protocol.",
+      "detail": "AHA 2024 recommends aspirin only for chest pain that is not caused by injury.\n\nFor a wound to the chest that bubbles or sucks air, use the Open chest wound protocol. For heavy bleeding, use the Severe bleeding protocol.\n\nIf they become unresponsive and stop breathing normally, start CPR (CPR, adult protocol).",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not let them walk, climb or carry loads if it can be avoided; rest is part of the treatment.",
+    "Do not wait to see if the pain goes away, and do not let them talk you out of getting help (MedlinePlus).",
+    "Do not give aspirin to anyone allergic to it, told by a health professional not to take it, with a bleeding problem, not fully alert, unable to swallow, or with chest pain from an injury; if unsure, do not give it (AHA 2024).",
+    "Do not give ibuprofen, acetaminophen or other pain medicine in place of aspirin.",
+    "Do not give nitroglycerin that was not prescribed to them.",
+    "Do not leave them alone except to get help (MedlinePlus)."
+  ],
+  "evacuate": [
+    "Evacuate now anyone with possible heart attack signs, even if the pain eases. AHA 2024: transport by EMS to the closest emergency department.",
+    "Without exertion: wait for a rescue or carry them if you can; walking out is the last option (group judgement; see the evacuation step).",
+    "Anyone who needed CPR must get to hospital urgently, even if they recover."
+  ],
+  "notes": [
+    "Aspirin for possible heart attack (AHA 2024): an alert adult whose chest pain is not from an injury, with no aspirin allergy, no bleeding problem and not told to avoid aspirin, chews and swallows 162 to 325 mg. If in doubt, do not give it."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 6.4 Chest Pain in Adults (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Heart Attack (lay first aid page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/heart-attack"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Heart attack first aid, reviewed 2024-10-07",
+      "year": 2024,
+      "url": "https://medlineplus.gov/ency/article/000063.htm"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

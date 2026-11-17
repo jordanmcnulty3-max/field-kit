@@ -1,0 +1,137 @@
+{
+  "id": "stroke",
+  "title": "Stroke",
+  "category": "illness",
+  "keywords": [
+    "stroke",
+    "fast",
+    "face drooping",
+    "drooping face",
+    "slurred speech",
+    "arm weakness",
+    "numb one side",
+    "weak one side",
+    "cant talk",
+    "tia",
+    "mini stroke",
+    "brain attack",
+    "sudden headache",
+    "cva"
+  ],
+  "summary": "Possible stroke: check FAST, write down when the signs started, get help and start evacuating now, no aspirin and nothing by mouth (except sugar for a measured low blood sugar), side position if drowsy or drooling.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check: do they respond? Are they breathing normally?",
+      "detail": "Gasping or occasional breaths are not normal breathing. If you are not sure, treat it as not breathing normally.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Check FAST. Face: ask them to smile; does one side droop? Arms: ask them to raise both; does one drift down? Speech: ask them to repeat a simple sentence; is it slurred or wrong?",
+      "detail": "AHA 2024 (Class 1) recommends a stroke recognition scale such as FAST (Face, Arms, Speech, Time). The Red Cross lay page and MedlinePlus also use FAST; none of the sources opened uses BE-FAST. How to check each part is from MedlinePlus.\n\nTime: any one of these signs, appearing suddenly, means act now.\n\nOther sudden signs of stroke (Red Cross, American Stroke Association): numbness or weakness of the face, arm or leg, especially on one side; confusion or trouble understanding others; trouble seeing in one or both eyes; dizziness, loss of balance or trouble walking; a sudden severe headache with no known cause; drooling or trouble swallowing; loss of responsiveness.\n\nSigns that go away within minutes still count. They may be a transient ischaemic attack (TIA, a warning stroke); more than 10 percent of people with a TIA have a stroke within 3 months, so they need medical care now even if they feel normal again (Red Cross; American Stroke Association: call 911 even if the symptoms go away).\n\nChildren: adult stroke checks such as FAST are not proven in children (AHA 2024); suspect stroke in a child with sudden new nervous-system signs, and get help the same way. In children a stroke can show up as seizures, especially under 1 year of age (AHA 2024)."
+    },
+    {
+      "id": "s3",
+      "text": "Note the time the signs started, or the last time they were seen well. Write it down.",
+      "detail": "Red Cross: note when the signs started, or when the person was last known to be well. Hospital treatments depend on this time: clot-dissolving medicine must be started within 4 1/2 hours of the first symptoms, and sooner is better (MedlinePlus).\n\nIf they woke up with the signs, the time is when they were last seen well before sleep. Give the time to whoever takes over their care."
+    },
+    {
+      "id": "s4",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Start evacuating now: stroke treatment works only within hours.",
+      "detail": "AHA 2024 (Class 1): if stroke is suspected, activate the emergency response system immediately. Prompt medical care may reduce disability (Red Cross).\n\nOff-grid, every hour counts. Plan the fastest way to a hospital and start now. A person with stroke signs may be weak on one side, dizzy or unsteady: do not let them walk alone, and expect to carry them or use a vehicle."
+    },
+    {
+      "id": "s5",
+      "text": "Give nothing to eat or drink and no medicine. No aspirin. The only exception is sugar for a measured low blood sugar (next steps).",
+      "warn": "No aspirin: some strokes are bleeding in the brain, and aspirin can make a bleeding stroke worse.",
+      "detail": "Aspirin: the American Stroke Association advises against taking aspirin during a stroke, because some strokes are caused by a burst blood vessel rather than a clot, and aspirin could make those bleeding strokes more severe. The aspirin advice in the Chest pain or heart attack protocol does not apply here.\n\nNothing by mouth: drooling and trouble swallowing are stroke signs (Red Cross), so food, drink or tablets could be choked on. None of the sources opened states a nothing-by-mouth rule for stroke; this is a group judgement based on that risk.\n\nThe exception for a measured low blood sugar follows AHA 2024, which names low blood sugar as a common stroke look-alike; the Low blood sugar protocol gives sugar only to someone fully awake who can swallow safely. Applying it here is a group judgement."
+    },
+    {
+      "id": "s6",
+      "text": "Do you have a blood glucose meter (for example, theirs if they have diabetes)?",
+      "detail": "Low blood sugar is a common look-alike of stroke (AHA 2024). AHA 2024 (Class 2a): if a meter is available and using it does not delay getting help, it is reasonable to check the blood sugar of an adult with suspected stroke.",
+      "ask": {
+        "q": "Is a blood glucose meter available?",
+        "yes": "s7",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Check their blood sugar, without delaying help. Below 70 mg/dL: also use the Low blood sugar protocol, and keep evacuating.",
+      "detail": "AHA 2024 defines low blood sugar (hypoglycaemia) as below 70 mg/dL. The Low blood sugar protocol gives sugar by mouth only to someone fully awake who can swallow safely; follow its checks.\n\nA normal reading does not rule out anything: keep treating this as a stroke and keep evacuating. A low reading that is corrected does not rule out a stroke either; if stroke signs remain after their sugar is treated, keep evacuating as for a stroke."
+    },
+    {
+      "id": "s8",
+      "text": "If they are not fully awake, drooling or having trouble swallowing, lie them on their side (Recovery position protocol). Keep them warm or cool as needed and reassure them.",
+      "detail": "Red Cross: place them in the recovery position if they are responsive but not fully awake, are drooling or have trouble swallowing. Keep them from getting cold or overheated, and give care for shock if needed (Shock protocol).\n\nA person having a stroke may not be able to speak but may still understand you. Speak slowly and calmly, tell them what you are doing, and tell them help is coming (Red Cross).\n\nOtherwise let them rest in a comfortable position. Watch for changes in breathing and responsiveness."
+    },
+    {
+      "id": "s9",
+      "text": "Stay with them and keep watching breathing and responsiveness.",
+      "ask": {
+        "q": "Have they become unresponsive and stopped breathing normally?",
+        "yes": "s20",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Keep evacuating, even if the signs get better. Keep watching their breathing and alertness on the way.",
+      "detail": "Signs that fade or go away still need medical care now (Red Cross, American Stroke Association).\n\nIf they become drowsy or start vomiting, lie them on their side (Recovery position protocol). If they stop breathing normally, start CPR (CPR, adult protocol). If they have a seizure, use the Seizure protocol.\n\nTell the people who take over the time the signs started (or when they were last seen well), and any blood sugar reading.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not give aspirin; some strokes are bleeding strokes (American Stroke Association).",
+    "Do not give food, drink or medicine by mouth, except sugar for a measured low blood sugar (group judgement: drooling and trouble swallowing are stroke signs).",
+    "Do not wait to see whether the signs go away; signs that go away still need care now.",
+    "Do not let them walk alone."
+  ],
+  "evacuate": [
+    "Start evacuating now for any sudden stroke sign, even if it goes away (AHA 2024: activate EMS immediately). Hospital clot-dissolving treatment must start within 4 1/2 hours of the first symptoms (MedlinePlus).",
+    "Tell the receiving team when the signs started, or when the person was last seen well."
+  ],
+  "notes": [
+    "FAST: Face drooping, Arm drifting down, Speech slurred or wrong, Time to get help and note when the signs began. No aspirin. Nothing by mouth, except sugar for a measured low blood sugar in someone fully awake who can swallow."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, sections 6.2 Recognition of Stroke in Adults and 6.3 Recognition of Stroke in Children, with 6.7 Hypoglycemia for the low blood sugar definition (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Stroke (lay first aid page, undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/stroke"
+    },
+    {
+      "name": "American Stroke Association, Aspirin and Stroke (undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://stroke.org/en/life-after-stroke/preventing-another-stroke/aspirin-and-stroke"
+    },
+    {
+      "name": "American Stroke Association, Stroke Symptoms (copyright 2021-2023, read 2026-11-17)",
+      "year": 2023,
+      "url": "https://www.stroke.org/en/about-stroke/stroke-symptoms"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Stroke, reviewed 2025-04-16",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000726.htm"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

@@ -46,8 +46,8 @@
     },
     {
       "id": "s5",
-      "text": "Give 5 firm back blows between the shoulder blades with the heel of your hand.",
-      "detail": "Use the heel of your free hand. Strike firmly between the shoulder blades, up to 5 times."
+      "text": "Give 5 firm back blows between the shoulder blades with the heel of your hand. Stop as soon as the object comes out.",
+      "detail": "Use the heel of your free hand. Strike firmly between the shoulder blades, up to 5 times. If the object comes out and the baby can cough, cry or breathe, stop."
     },
     {
       "id": "s6",
@@ -72,7 +72,7 @@
     {
       "id": "s8",
       "text": "The baby is unresponsive: lay them on a firm, flat surface and start infant CPR, beginning with chest compressions.",
-      "detail": "Use the CPR, infant protocol. Start with compressions; do not check for a pulse.\n\nEach time you open the airway to give breaths, look in the mouth. If you can see the object, take it out. Never sweep a finger blindly in the baby's mouth.\n\nIf help has not been called yet: call 911 if you have signal; if not, send someone for help and prepare to move the casualty.",
+      "detail": "Use the CPR, infant protocol. Start with compressions; do not check for a pulse.\n\nEach time you open the airway to give breaths, look in the mouth. If you can see the object, take it out. Never sweep a finger blindly in the baby's mouth.\n\nIf help has not been called yet, do it now. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },
     {

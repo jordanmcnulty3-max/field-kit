@@ -19,7 +19,7 @@
     {
       "id": "s1",
       "text": "Check: do they respond to your voice or a tap? Are they breathing normally?",
-      "detail": "The recovery position is for a person with reduced responsiveness (drowsy, confused or unresponsive) who is breathing normally. Lying on the side helps keep the airway open and lets vomit, blood or saliva drain out of the mouth instead of into the lungs.\n\nGasping or occasional breaths are not normal breathing.",
+      "detail": "The recovery position is for a person with reduced responsiveness (drowsy, confused or unresponsive) who is breathing normally. Lying on the side helps keep the airway open and lets vomit, blood or saliva drain out of the mouth instead of into the lungs.\n\nGasping or occasional breaths are not normal breathing.\n\nFound face down, or folded forward at the neck or waist: roll them onto their back first to check them properly (ILCOR 2026 good-practice statement; Red Cross guidelines). Those positions can block breathing. If a spine injury is possible, Red Cross lay guidance is to leave them as found unless you need to move them for safety, CPR or bleeding; this conflicts with rolling to reassess and is recorded as an open question.",
       "ask": {
         "q": "Are they breathing normally?",
         "yes": "s3",
@@ -102,6 +102,11 @@
       "name": "American Red Cross, First aid for someone unresponsive and breathing (lay page)",
       "year": 2026,
       "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/unresponsive-and-breathing-person"
+    },
+    {
+      "name": "International Liaison Committee on Resuscitation, 2026 Consensus on Science with Treatment Recommendations (preprint, May 2026), First Aid FA 7040 Recovery position evidence update",
+      "year": 2026,
+      "url": "https://ilcor.org/uploads/MERGED-2026_ILCOR-CoSTR_May-2026-for-Preprint.pdf"
     }
   ],
   "reviewed": "2026-11-16"

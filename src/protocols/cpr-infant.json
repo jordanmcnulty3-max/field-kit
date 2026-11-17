@@ -33,7 +33,7 @@
     {
       "id": "s2",
       "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "detail": "If you have a phone with signal, call on speaker and start CPR at the same time. If someone else is there, send them for help and an AED while you start CPR.\n\nIf you are alone and need to leave to get help, first give about 2 minutes of CPR (about 5 rounds of 30 compressions and 2 breaths)."
+      "detail": "If you have a phone with signal, call on speaker and start CPR at the same time. If someone else is there, send them for help and an AED while you start CPR.\n\nIf you are alone with no signal (AHA 2025 pediatric single-rescuer algorithm):\n- If you saw the baby suddenly collapse, go for help and an AED first if one can be reached, then start CPR.\n- If you did not see the collapse, give CPR first. After about 2 minutes (about 5 rounds of 30 compressions and 2 breaths), if you are still alone, go for help and get an AED.\nOff-grid, going for help may mean leaving for a long time. Shout for help as you work, and decide whether leaving is worth it."
     },
     {
       "id": "s3",
@@ -61,7 +61,7 @@
     {
       "id": "s7",
       "text": "Keep going until the baby shows signs of life or help takes over. Swap rescuers about every 2 minutes if you can.",
-      "detail": "Keep going until:\n- the baby shows an obvious sign of life, such as breathing normally or moving;\n- an AED is ready to use;\n- another trained person takes over;\n- medical help arrives and takes over;\n- you are alone and too exhausted to continue;\n- the scene becomes unsafe;\n- you are alone, have done about 2 minutes of CPR, and must go to call for help."
+      "detail": "Keep going until:\n- the baby shows an obvious sign of life, such as breathing normally or moving;\n- an AED is ready to use;\n- another trained person takes over;\n- medical help arrives and takes over;\n- you are alone and too exhausted to continue;\n- the scene becomes unsafe;\n- you are alone, have done about 2 minutes of CPR, and decide to go for help (AHA 2025 pediatric single-rescuer algorithm)."
     },
     {
       "id": "s8",
@@ -71,8 +71,8 @@
     },
     {
       "id": "s9",
-      "text": "The baby is breathing normally. Do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "detail": "Stay with the baby and watch the breathing continuously.\n\nIf the baby is breathing but very poorly (very slow, struggling), a trained rescuer gives breaths at about 1 breath every 2 to 3 seconds.\n\nIf breathing stops or becomes only gasping, come back to this protocol and start CPR.",
+      "text": "Responsive, or breathing normally: do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Stay with the baby and watch the breathing continuously.\n\nIf the baby is breathing but very poorly (very slow, struggling), a trained rescuer gives breaths at about 1 breath every 2 to 3 seconds.\n\nIf the baby is awake but struggling to breathe, use the Choking, infant protocol (if something is stuck) or the Anaphylaxis protocol (severe allergic reaction).\n\nIf breathing stops or becomes only gasping, come back to this protocol and start CPR.",
       "end": true
     }
   ],

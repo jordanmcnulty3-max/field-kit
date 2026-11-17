@@ -43,11 +43,11 @@
     {
       "id": "s4",
       "text": "Decide where the wound is.",
-      "detail": "A tourniquet works only on an arm or leg, and only when it can go on above the wound, between the wound and the body.\n\nWounds in the neck, armpit, groin, or high on the thigh or shoulder where a tourniquet cannot go above the wound are called junctional wounds. They are treated by packing the wound and pressing hard.\n\nFor a wound to the chest, use this protocol to control bleeding, then the Open chest wound protocol.",
+      "detail": "A tourniquet works only on an arm or leg, and only when it can go on above the wound, between the wound and the body.\n\nWounds in the neck, armpit, groin, or high on the thigh or shoulder where a tourniquet cannot go above the wound are called junctional wounds. They are treated by packing the wound and pressing hard.\n\nWounds of the chest, belly or back are handled differently; the next questions sort them out.",
       "ask": {
         "q": "Is the wound on an arm or leg, with room for a tourniquet above it?",
         "yes": "s5",
-        "no": "s8"
+        "no": "s12"
       }
     },
     {
@@ -71,8 +71,8 @@
     },
     {
       "id": "s8",
-      "text": "Neck, armpit or groin: pack the wound. Push gauze or clean cloth deep into it until it is full.",
-      "detail": "For a large or deep wound, pressing on the surface does not reach the bleeding. Packing puts the pressure where the blood is coming from.\n\nHow: find the bleeding spot inside the wound. Push the end of the gauze in with one or two fingers, right onto that spot. Keep feeding gauze in, pressing it down as you go, until the wound is packed tightly and no more will go in. If you run out of gauze, use clean cloth (a T-shirt, bandanna).\n\nThis works for deep wounds of the neck, armpits and groin, and for deep arm and leg wounds where a tourniquet is not available. It can be done on children the same way as adults.\n\nHemostatic (clotting) gauze is packed the same way and helps stop bleeding; see Advanced procedures (hemostatic gauze). Plain gauze or cloth packed tightly with hard pressure still works.\n\nChest wound: control the bleeding with pressure, then use the Open chest wound protocol for how to cover it.",
+      "text": "Neck, armpit, groin, or a deep arm or leg wound with no tourniquet: pack the wound. Push gauze or clean cloth deep into it until it is full.",
+      "detail": "For a large or deep wound, pressing on the surface does not reach the bleeding. Packing puts the pressure where the blood is coming from.\n\nHow: find the bleeding spot inside the wound. Push the end of the gauze in with one or two fingers, right onto that spot. Keep feeding gauze in, pressing it down as you go, until the wound is packed tightly and no more will go in. If you run out of gauze, use clean cloth (a T-shirt, bandanna).\n\nThis works for deep wounds of the neck, armpits and groin, and for deep arm and leg wounds where a tourniquet is not available. It can be done on children the same way as adults.\n\nHemostatic (clotting) gauze is packed the same way and helps stop bleeding; see Advanced procedures (hemostatic gauze). Plain gauze or cloth packed tightly with hard pressure still works.",
       "log": "Wound packed"
     },
     {
@@ -90,6 +90,40 @@
       "id": "s11",
       "text": "Keep pressing until the bleeding stops, then wrap a firm bandage over the dressing.",
       "detail": "Most bleeding that is not life-threatening stops with steady direct pressure on the wound.\n\nOnce it has stopped, a pressure dressing can keep it stopped while you move. If bleeding comes back through the dressing, press directly on the wound again until it stops; do not just add more layers.\n\nIf at any point the bleeding becomes heavy, spurts, or will not stop with pressure, go back and treat it as life-threatening.",
+      "end": true
+    },
+    {
+      "id": "s12",
+      "text": "Is the wound in the neck, armpit or groin, or a deep arm or leg wound where a tourniquet cannot be used?",
+      "detail": "Packing is the Stop the Bleed technique for deep wounds of the neck, armpits and groin, and for deep limb wounds when a tourniquet is not available or will not fit.\n\nIf the wound is on the chest, belly, back or elsewhere on the body, answer no.",
+      "ask": {
+        "q": "Neck, armpit, groin, or a deep limb wound with no tourniquet?",
+        "yes": "s8",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s13",
+      "text": "Is the wound on the chest (front, side or back of the ribcage)?",
+      "detail": "A wound to the chest can let air into the space around the lung. It needs different handling from other body wounds.",
+      "ask": {
+        "q": "Is the wound on the chest?",
+        "yes": "s14",
+        "no": "s15"
+      }
+    },
+    {
+      "id": "s14",
+      "text": "Chest wound: press firmly on the bleeding with gauze or cloth, but do not seal the hole airtight. Then use the Open chest wound protocol.",
+      "detail": "Control heavy bleeding with direct pressure. Take care that the dressing does not end up blocking the hole partly or completely, which can trap air inside the chest.\n\nCurrent first aid guidance (AHA and Red Cross 2024) is to leave an open chest wound open to the air or loosely covered with a clean dry dressing that does not seal, and to watch breathing. The Open chest wound protocol covers this step by step.",
+      "log": "Pressure on chest wound",
+      "end": true
+    },
+    {
+      "id": "s15",
+      "text": "Belly or other body wound: press hard and steadily on the bleeding with gauze or clean cloth, and keep pressing until help takes over.",
+      "detail": "Direct manual pressure is the first treatment for life-threatening bleeding that a tourniquet cannot reach (AHA and Red Cross). Push down hard with both hands on the bleeding spot and do not let up.\n\nIf blood soaks through, press harder on the same spot rather than lifting the dressing. Once the bleeding has stopped, a firm pressure bandage can hold the dressing in place.\n\nThe Red Cross bleeding algorithm lists wound packing for head, neck and trunk wounds by trained responders. This app does not guide packing of belly or chest wounds; press instead.\n\nBleeding inside the belly cannot be controlled from outside. Follow the Shock protocol and get the casualty to medical care urgently.",
+      "log": "Pressure held on body wound",
       "end": true
     }
   ],

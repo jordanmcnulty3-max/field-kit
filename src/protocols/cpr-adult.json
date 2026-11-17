@@ -37,7 +37,7 @@
     {
       "id": "s2",
       "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Send someone for an AED.",
-      "detail": "If you are alone with a phone that has signal, call and put it on speaker so you can start compressions at nearly the same time. If you are alone with no signal, start CPR straight away; there is no one to call.\n\nIf anyone else is there, give clear jobs: one person goes for help, one fetches an AED (defibrillator) if there is one, and someone gets ready to take over compressions.\n\nDo not leave the person to go looking for help yourself if someone else can go."
+      "detail": "If you are alone with a phone that has signal, call and put it on speaker so you can start compressions at nearly the same time.\n\nIf you are alone with no signal and help can only be reached by leaving: AHA 2025's advice for a lone rescuer is to get help first (activate the emergency response), then start CPR immediately. The guideline adds that local circumstances decide whether to delay CPR to get help. Off-grid, going for help may mean leaving for a long time, possibly hours, with nobody doing CPR. Decide whether to go for help first or start CPR now.\n\nIf anyone else is there, give clear jobs: one person goes for help, one fetches an AED (defibrillator) if there is one, and someone gets ready to take over compressions. Do not leave the person yourself if someone else can go."
     },
     {
       "id": "s3",
@@ -75,8 +75,8 @@
     },
     {
       "id": "s9",
-      "text": "They are breathing normally. Do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "detail": "If they are unresponsive but breathing normally and there is no reason to suspect an injury to the neck, back, hip or pelvis, use the Recovery position protocol.\n\nWatch their breathing continuously. If it stops or becomes only gasping, come back to this protocol and start CPR.",
+      "text": "Responsive, or breathing normally: do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "If they are unresponsive but breathing normally and there is no reason to suspect an injury to the neck, back, hip or pelvis, use the Recovery position protocol.\n\nIf they are awake but struggling to breathe, use the Choking protocol (if something is stuck) or the Anaphylaxis protocol (severe allergic reaction), and let them sit in whatever position helps their breathing.\n\nWatch their breathing continuously. If they become unresponsive and stop breathing or only gasp, come back to this protocol and start CPR.",
       "end": true
     }
   ],

@@ -55,14 +55,14 @@
     },
     {
       "id": "s6",
-      "text": "Watch them closely. If signs are still there 5 to 10 minutes after the first dose and help has not arrived, a second dose may be given.",
-      "detail": "Between about 1 in 5 and 1 in 3 people need a second dose, usually 5 to 15 minutes after the first. Use a new auto-injector or nasal spray, in the same way as the first.\n\nThe Red Cross lay guidance gives 5 to 10 minutes after the first dose, if symptoms continue and help has not arrived. The AHA and Red Cross 2024 guidelines say a repeat dose may be considered if there is no response and help is more than 5 to 10 minutes away.",
+      "text": "Watch closely. If signs are still there 5 to 10 minutes after the first dose and help has not arrived, a second dose may be given. Under 5 minutes: wait for the timer.",
+      "detail": "AHA (2024 First Aid guidelines) estimates that between 7 and 18 percent of people with anaphylaxis need more than one dose. A second dose uses a new auto-injector or nasal spray, given the same way as the first.\n\nThe Red Cross lay guidance gives 5 to 10 minutes after the first dose, if symptoms continue and help has not arrived. The AHA and Red Cross 2024 guidelines say a repeat dose may be considered if there is no response and help is more than 5 to 10 minutes away.\n\nIf less than 5 minutes have passed, wait for the timer, then answer the question.",
       "timer": {
         "seconds": 300,
         "label": "Earliest second dose"
       },
       "ask": {
-        "q": "Are signs still present 5 to 10 minutes after the first dose, with help not yet arrived?",
+        "q": "5 to 10 minutes after the first dose, are signs still present, with help not yet arrived?",
         "yes": "s7",
         "no": "s8"
       }
@@ -86,7 +86,7 @@
     {
       "id": "s9",
       "text": "Start CPR now.",
-      "detail": "Lay them on their back and use CPR, adult, CPR, child or CPR, infant. If help has not been called: call 911 if you have signal; if not, send someone for help and prepare to move the casualty.",
+      "detail": "Lay them on their back and use CPR, adult, CPR, child or CPR, infant. If help has not been called yet, do it now. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },
     {
@@ -125,7 +125,7 @@
       "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
     },
     {
-      "name": "American Red Cross Scientific Advisory Council, First Aid Guidelines database: Anaphylaxis (updated 2025)",
+      "name": "American Red Cross Scientific Advisory Council, First Aid Guidelines database: Anaphylaxis (last full review 2020; intranasal epinephrine review 2025)",
       "year": 2025,
       "url": "https://firstaidguide.wpenginepowered.com/first-aid/allergic-reactions/"
     },

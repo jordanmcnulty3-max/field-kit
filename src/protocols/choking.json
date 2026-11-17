@@ -54,22 +54,22 @@
     {
       "id": "s5",
       "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Start helping right away.",
-      "detail": "Severe choking can quickly lead to the heart stopping, so act immediately. Send someone else to get help; do not leave the person to do it yourself.\n\nIf you are alone and choking yourself: do abdominal thrusts on yourself with your fist, or lean over the back of a chair or the edge of a table and press your upper belly hard inward and upward against it."
+      "detail": "Severe choking can quickly lead to the heart stopping, so act immediately. Send someone else to get help; do not leave the person to do it yourself.\n\nIf you are alone and choking yourself (Red Cross): give yourself abdominal thrusts with your hands, the same way as for another person, or bend over and press your belly hard against a firm object such as the back of a chair. Do not use anything with a sharp edge or corner."
     },
     {
       "id": "s6",
-      "text": "Give 5 firm back blows: stand to the side and slightly behind, lean them forward, and strike between the shoulder blades with the heel of your hand.",
-      "detail": "Stand to the side and slightly behind them, with them leaning forward. Support their chest with one hand.\n\nStrike firmly between the shoulder blades with the heel of your other hand, up to 5 times.\n\nFor a small child, kneel behind them rather than stand.\n\nThe current guideline (AHA 2025) starts with back blows: in a study of 709 choking cases, back blows were linked with clearing the blockage more often and with fewer injuries than abdominal thrusts. Earlier editions started with abdominal thrusts.",
+      "text": "Give 5 firm back blows between the shoulder blades with the heel of your hand. Stop as soon as the object comes out.",
+      "detail": "Stand to the side and slightly behind them. Put one arm diagonally across their chest and bend them forward at the waist so the upper body is about level with the ground.\n\nStrike firmly between the shoulder blades with the heel of your other hand, up to 5 times, each blow separate. If the object comes out and they can cough, speak or breathe, stop.\n\nFor a small child, kneel behind them rather than stand.\n\nThe current guideline (AHA 2025) starts with back blows: in a study of 709 choking cases, back blows were linked with clearing the blockage more often and with fewer injuries than abdominal thrusts. Earlier editions started with abdominal thrusts.",
       "ask": {
-        "q": "Can you reach around their belly, and are they not in late pregnancy?",
-        "yes": "s7",
-        "no": "s8"
+        "q": "Are they in late pregnancy, or too large to reach around?",
+        "yes": "s8",
+        "no": "s7"
       }
     },
     {
       "id": "s7",
       "text": "Give 5 abdominal thrusts: from behind, fist just above the belly button, other hand over it, pull sharply in and up.",
-      "detail": "Stand behind them and wrap your arms around their waist. For a child, kneel behind them.\n\nMake a fist. Put the thumb side of the fist against the belly just above the belly button, well below the bottom tip of the breastbone. Grab the fist with your other hand.\n\nPull sharply inward and upward. Make each thrust forceful and separate from the last. Give up to 5.\n\nThis is the Heimlich maneuver.",
+      "detail": "Have them stand up straight. Find their belly button with two fingers. Move behind them and wrap your arms around their waist; for a child, kneel behind them.\n\nMake a fist with your other hand and put the thumb side against the belly just above your fingers (just above the belly button). Cover the fist with your first hand.\n\nPull sharply inward and upward. Make each thrust forceful and separate from the last. Give up to 5.\n\nThis is the Heimlich maneuver.",
       "ask": {
         "q": "Is the object out, or are they coughing, speaking or breathing again?",
         "yes": "s11",
@@ -78,8 +78,8 @@
     },
     {
       "id": "s8",
-      "text": "Give 5 chest thrusts instead: from behind, fist on the lower half of the breastbone, other hand over it, pull straight back.",
-      "detail": "Use chest thrusts instead of abdominal thrusts if you cannot get your arms around their belly, if they are in late pregnancy, or if they are in a wheelchair.\n\nStand behind them. Place the thumb side of your fist on the lower half of the breastbone, grab it with your other hand, and pull straight back sharply. Give up to 5, each forceful and separate.",
+      "text": "Give 5 chest thrusts instead of abdominal thrusts.",
+      "detail": "Use chest thrusts instead of abdominal thrusts if they are in late pregnancy, if you cannot get your arms around their belly, or if they are in a wheelchair (AHA 2025, Red Cross).\n\nThe sources available to this app do not describe the hand position for chest thrusts. If you have been trained in chest thrusts, use that technique. Give up to 5, each forceful and separate.",
       "ask": {
         "q": "Is the object out, or are they coughing, speaking or breathing again?",
         "yes": "s11",
@@ -99,7 +99,7 @@
     {
       "id": "s10",
       "text": "They collapsed: lower them to the ground on their back and start CPR, beginning with chest compressions.",
-      "detail": "Ease them down to a firm, flat surface so they do not hit their head. Start CPR straight away with compressions (use CPR, adult or CPR, child). Do not check for a pulse first.\n\nEach time you open the airway to give breaths, look in the mouth. If you can see the object, take it out. Never sweep a finger blindly in the mouth; that can push the object further in.\n\nIf help has not been called yet, do it now: call 911 if you have signal; if not, send someone for help and prepare to move the casualty.",
+      "detail": "Ease them down to a firm, flat surface so they do not hit their head. Start CPR straight away with compressions (use CPR, adult or CPR, child). Do not check for a pulse first.\n\nEach time you open the airway to give breaths, look in the mouth. If you can see the object, take it out. Never sweep a finger blindly in the mouth; only remove an object you can see.\n\nIf help has not been called yet, do it now. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     },
     {

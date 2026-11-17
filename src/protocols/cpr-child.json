@@ -34,7 +34,7 @@
     {
       "id": "s2",
       "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Send someone for an AED.",
-      "detail": "If you have a phone with signal, call on speaker and start CPR at the same time. If others are present, send one for help and one for an AED.\n\nIf you are alone and there is no signal, start CPR straight away and shout for help as you work."
+      "detail": "If you have a phone with signal, call on speaker and start CPR at the same time. If others are present, send one for help and one for an AED.\n\nIf you are alone with no signal (AHA 2025 pediatric single-rescuer algorithm):\n- If you saw the child suddenly collapse, go for help and an AED first if one can be reached, then start CPR.\n- If you did not see the collapse, give CPR first. After about 2 minutes (about 5 rounds of 30 compressions and 2 breaths), if you are still alone, go for help and get an AED.\nOff-grid, going for help may mean leaving for a long time. Shout for help as you work, and decide whether leaving is worth it."
     },
     {
       "id": "s3",
@@ -62,7 +62,7 @@
     {
       "id": "s7",
       "text": "Keep going. Swap the person doing compressions about every 2 minutes if anyone can help.",
-      "detail": "Keep going until:\n- the child shows an obvious sign of life, such as breathing normally or moving;\n- an AED is ready to use;\n- another trained person takes over;\n- medical help arrives and takes over;\n- you are alone and too exhausted to continue;\n- the scene becomes unsafe."
+      "detail": "Keep going until:\n- the child shows an obvious sign of life, such as breathing normally or moving;\n- an AED is ready to use;\n- another trained person takes over;\n- medical help arrives and takes over;\n- you are alone and too exhausted to continue;\n- the scene becomes unsafe;\n- you are alone, have done about 2 minutes of CPR, and decide to go for help (AHA 2025 pediatric single-rescuer algorithm)."
     },
     {
       "id": "s8",
@@ -72,8 +72,8 @@
     },
     {
       "id": "s9",
-      "text": "The child is breathing normally. Do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
-      "detail": "If the child is unresponsive but breathing normally and there is no reason to suspect a neck, back, hip or pelvis injury, use the Recovery position protocol.\n\nIf the child is breathing but very poorly (very slow, struggling), a trained rescuer gives breaths at about 1 breath every 2 to 3 seconds.\n\nWatch the breathing continuously. If it stops or becomes only gasping, come back to this protocol and start CPR.",
+      "text": "Responsive, or breathing normally: do not start CPR. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "If the child is unresponsive but breathing normally and there is no reason to suspect a neck, back, hip or pelvis injury, use the Recovery position protocol.\n\nIf the child is breathing but very poorly (very slow, struggling), a trained rescuer gives breaths at about 1 breath every 2 to 3 seconds.\n\nIf the child is awake but struggling to breathe, use the Choking, adult and child protocol (if something is stuck) or the Anaphylaxis protocol (severe allergic reaction).\n\nWatch the breathing continuously. If it stops or becomes only gasping, come back to this protocol and start CPR.",
       "end": true
     }
   ],

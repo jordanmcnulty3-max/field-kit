@@ -1,0 +1,141 @@
+{
+  "id": "altitude",
+  "title": "Altitude sickness",
+  "category": "environment",
+  "keywords": [
+    "altitude sickness",
+    "mountain sickness",
+    "acute mountain sickness",
+    "ams",
+    "hace",
+    "hape",
+    "high altitude",
+    "altitude",
+    "elevation",
+    "headache at altitude",
+    "breathless at altitude",
+    "mountain",
+    "descend",
+    "gamow bag"
+  ],
+  "summary": "Illness after going up high: stop going up, check for brain swelling (HACE) and fluid on the lungs (HAPE), and descend; mild mountain sickness can rest in place.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check: do they respond? Are they breathing normally?",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Stop going up. Nobody with symptoms of altitude illness should go higher to sleep.",
+      "detail": "CDC: never ascend to sleep at a higher altitude when you have symptoms of altitude illness.\n\nAltitude illness usually starts 2 to 12 hours after arriving at a new height, often during or after the first night (CDC); JTS gives 1 to 6 hours, sometimes up to 48. It is a risk for anyone not used to the height who sleeps at 8,000 feet (2,450 meters) or above (CDC). Symptoms that start after 3 days at the same height, without going higher, are probably something else (CDC).\n\nOther things look like altitude illness: dehydration, a head injury, carbon monoxide from a stove in a tent, hypothermia, heat illness, a hangover, caffeine withdrawal, migraine or a virus (JTS). Consider the Carbon monoxide poisoning, Dehydration and Hypothermia protocols."
+    },
+    {
+      "id": "s3",
+      "text": "Are they confused, very drowsy, behaving oddly, or unsteady on their feet (stumbling, cannot walk in a straight line)?",
+      "detail": "These are signs of high-altitude cerebral edema (HACE, swelling of the brain): confusion, drowsiness, unsteadiness and loss of coordination (ataxia), personality or behaviour change, apathy, withdrawal (CDC, JTS). It usually follows mountain sickness and is rare below 14,000 feet (4,300 meters), but can lead to coma within 24 hours (CDC).\n\nNot sure? Answer Yes.",
+      "ask": {
+        "q": "Are they confused, drowsy or unsteady on their feet?",
+        "yes": "s10",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Are they short of breath while resting?",
+      "detail": "Breathlessness at rest is a sign of high-altitude pulmonary edema (HAPE, fluid on the lungs) (CDC, JTS). Early HAPE (CDC, JTS): much more breathless than others on exertion, unable to keep up, a cough, chest tightness or congestion. Later: breathless at rest, fast heart rate and breathing, bluish lips, cough with frothy or bloody spit, fever. It often starts on the second night at a new height, and about half of people with HAPE have no mountain sickness first (JTS).\n\nNot sure? Answer Yes.",
+      "ask": {
+        "q": "Are they short of breath at rest?",
+        "yes": "s11",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Probably acute mountain sickness: headache plus tiredness, nausea, dizziness or poor appetite. Rest at this height and do not go higher.",
+      "detail": "Acute mountain sickness (AMS) (CDC, JTS): a headache plus at least one of loss of appetite, nausea or vomiting, tiredness or weakness, dizziness or light-headedness; it feels like a hangover. It usually develops and settles over 1 to 3 days (CDC).\n\nWithout signs of HACE or HAPE, a person with AMS can stay at the same height and rest (CDC); JTS: stop going up and rest at the current height for 1 to 2 days.\n\nPeople who carry altitude medicines prescribed for them should take them as their prescription says.\n\nAvoid alcohol, and do not use alcohol or sleeping pills to sleep: they slow breathing (CDC).\n\nWatch them closely, including at night: untreated mountain sickness can progress to HACE (JTS). Early HAPE can look mild: someone much more breathless on exertion than the others, who cannot keep up or has a new cough, needs close watching; if they become short of breath at rest, treat it as HAPE (CDC, JTS)."
+    },
+    {
+      "id": "s6",
+      "text": "Are the symptoms getting worse despite resting at this height?",
+      "ask": {
+        "q": "Are the symptoms getting worse?",
+        "yes": "s7",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Getting worse: go down now, at least 1,000 feet (300 meters), more if you can, until the symptoms improve.",
+      "detail": "Mountain sickness improves quickly with descent of at least 1,000 feet (300 meters) (CDC); symptoms usually resolve after going down 1,000 to 3,300 feet (300 to 1,000 meters) from where they started (JTS). Going down is required if symptoms get worse despite rest (CDC). The worse the symptoms, the more urgent the descent (JTS).\n\nGo with them; do not send a sick person down alone. If they develop confusion, unsteadiness or breathlessness at rest, treat it as HACE or HAPE (start this protocol again).",
+      "log": "Descended for altitude sickness",
+      "end": true
+    },
+    {
+      "id": "s8",
+      "text": "Rest. Go higher only once all symptoms are gone, and then slowly. Check on them often, day and night.",
+      "detail": "Resume going up only once they have no symptoms, and limit the climb to about 1,650 feet (500 meters) a day (JTS).\n\nPrevention for the whole group (CDC): above 9,800 feet (3,000 meters), raise your sleeping height by no more than about 1,650 feet (500 meters) a day, and add an extra rest day for every 3,300 feet (1,000 meters) gained. Only light exercise for the first 48 hours at a new height. JTS recommends a buddy system so people watch each other for early signs.",
+      "end": true
+    },
+    {
+      "id": "s10",
+      "text": "Possible HACE (brain swelling): go down now, as low as you can, as fast as is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "HACE and HAPE: descend to the lowest possible altitude as quickly as possible, until the symptoms are fully gone; do not delay evacuation for other treatment (JTS). CDC: start descent for suspected HACE, especially in remote areas.\n\nThey may soon be unable to walk: get them down while they still can, with someone holding them, or carry them.\n\nPeople who carry altitude medicines prescribed for them should take them as their prescription says.",
+      "log": "Descent started for HACE"
+    },
+    {
+      "id": "s12",
+      "text": "On the way down: keep them warm, give oxygen if you have it, and watch breathing and alertness. If descent is impossible, use a portable pressure bag if you have one.",
+      "detail": "Oxygen (if your group carries it and knows how to use it): aim for an oxygen saturation above 90% (JTS). Do not delay going down to get oxygen (JTS).\n\nPortable pressure bag (Gamow-type bag): only a stopgap until descent (JTS). It simulates going down about 5,000 to 6,000 feet (1,500 to 1,800 meters) (CDC). Inflate until the relief valve hisses, then keep pumping about 10 to 20 times a minute to keep fresh air in; sessions are usually 1 to 2 hours (JTS). Keep organising the evacuation while they are inside.\n\nIf they become unresponsive but are breathing, lie them on their side (Recovery position protocol). If they stop breathing normally, start CPR.\n\nAfter recovery (JTS): go back up only once they have no symptoms at all, slowly, and watch for any return.",
+      "end": true
+    },
+    {
+      "id": "s11",
+      "text": "Possible HAPE (fluid on the lungs): go down now, at least 3,300 feet (1,000 meters), with as little effort as possible: take their pack, or carry them.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nHAPE: descent is urgent and essential (CDC). Oxygen and going down 3,300 feet (1,000 meters) can resolve symptoms; descend with as little exertion as possible, ideally by vehicle, and take any heavy load off them if they walk (JTS). Go as low as you can until the symptoms are gone (JTS).\n\nPeople who carry altitude medicines prescribed for them should take them as their prescription says.",
+      "log": "Descent started for HAPE"
+    },
+    {
+      "id": "s13",
+      "text": "On the way down: keep them warm, give oxygen if you have it, and watch breathing and alertness. If descent is impossible, use a portable pressure bag if you have one.",
+      "detail": "Oxygen (if your group carries it and knows how to use it): aim for an oxygen saturation above 90% (JTS). Do not delay going down to get oxygen (JTS).\n\nPortable pressure bag (Gamow-type bag): only a stopgap until descent (JTS). It simulates going down about 5,000 to 6,000 feet (1,500 to 1,800 meters) (CDC). Inflate until the relief valve hisses, then keep pumping about 10 to 20 times a minute to keep fresh air in; sessions are usually 1 to 2 hours (JTS). Keep organising the evacuation while they are inside.\n\nIf they become unresponsive but are breathing, lie them on their side (Recovery position protocol). If they stop breathing normally, start CPR.\n\nAfter recovery (JTS): go back up only once they have no symptoms at all, slowly, and watch for any return.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are very cold, the Hypothermia protocol explains how CPR differs.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not go higher to sleep with any symptoms of altitude sickness.",
+    "Do not leave someone with altitude sickness alone or send them down alone.",
+    "Do not wait to see if HACE or HAPE gets better: go down.",
+    "Do not let someone with HAPE carry a load or exert themselves.",
+    "Do not use alcohol or sleeping pills at altitude."
+  ],
+  "evacuate": [
+    "Evacuate urgently, going down: confusion, drowsiness, odd behaviour or unsteadiness (possible HACE).",
+    "Evacuate urgently, going down: breathless at rest, or cough with frothy or bloody spit (possible HAPE).",
+    "Go down at least 1,000 feet (300 meters): mountain sickness getting worse despite rest.",
+    "Get medical help: any new weakness, numbness or other one-sided sign at altitude (JTS)."
+  ],
+  "sources": [
+    {
+      "name": "US CDC, Yellow Book 2026, High-Altitude Travel and Altitude Illness (Hackett and Shlim), page dated 23 Apr 2025",
+      "year": 2025,
+      "url": "https://www.cdc.gov/yellow-book/hcp/environmental-hazards-risks/high-altitude-travel-and-altitude-illness.html"
+    },
+    {
+      "name": "Joint Trauma System, Clinical Practice Guideline: Altitude Emergencies in the Prehospital Environment (CPG ID 95), 05 Mar 2024",
+      "year": 2024,
+      "url": "https://jts.health.mil/assets/docs/cpgs/Altitude_Emergencies_Prehospital_Environment_05_Mar_2024_ID95_v1.2.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

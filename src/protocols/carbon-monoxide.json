@@ -1,0 +1,102 @@
+{
+  "id": "carbon-monoxide",
+  "title": "Carbon monoxide poisoning",
+  "category": "environment",
+  "keywords": [
+    "carbon monoxide",
+    "co poisoning",
+    "fumes",
+    "stove in tent",
+    "heater in tent",
+    "generator",
+    "exhaust",
+    "car exhaust",
+    "headache in tent",
+    "gas poisoning",
+    "lantern",
+    "charcoal",
+    "snow cave"
+  ],
+  "summary": "Fumes from stoves, heaters, generators or engines in an enclosed space: get to fresh air, CPR if needed, evacuate everyone affected, and prevent it.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Get everyone out of the tent, shelter or vehicle into fresh air now. Do not stay inside yourself while the fumes are there.",
+      "detail": "Move the person to fresh air immediately (MedlinePlus).\n\nSuspect carbon monoxide when people in the same tent, shelter or vehicle with a stove, heater, lantern, generator, charcoal or running engine get a headache, dizziness, weakness, nausea or vomiting, chest pain, confusion or drowsiness (CDC, MedlinePlus, CPSC). It is often mistaken for flu or a virus (CDC, MedlinePlus). Pets may be affected first (MedlinePlus). Children may only be fussy or feed poorly (MedlinePlus).\n\nPeople who are asleep or drunk can die before they notice anything (CDC)."
+    },
+    {
+      "id": "s2",
+      "text": "Is anyone unresponsive and not breathing normally?",
+      "ask": {
+        "q": "Is anyone unresponsive and not breathing normally?",
+        "yes": "s10",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Carbon monoxide poisoning needs medical care, even if they feel better in fresh air. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "MedlinePlus: get medical attention right away for anyone exposed. Hospitals treat it with oxygen, sometimes in a high-pressure (hyperbaric) chamber."
+    },
+    {
+      "id": "s4",
+      "text": "If someone is unresponsive but breathing, lie them on their side (Recovery position protocol). Keep everyone warm, resting and in fresh air, and watch their breathing.",
+      "detail": "Check everyone who shared the space, not just the person who looks ill. Watch for breathing that slows or stops, confusion, seizures and chest pain (MedlinePlus).\n\nIf anyone stops breathing normally, start CPR."
+    },
+    {
+      "id": "s5",
+      "text": "Evacuate anyone who passed out, was confused, had chest pain or a seizure, is still unwell, is pregnant, or is a child, older, or has heart or lung disease.",
+      "detail": "Higher-risk people (MedlinePlus, CDC): unborn babies (pregnancy), infants and young children, older adults, people with heart or lung disease or anaemia, smokers, and people at high altitude.\n\nCarbon monoxide can cause lasting brain damage, and memory or thinking problems can appear 1 to 2 weeks later even after a person seems recovered (MedlinePlus). Everyone exposed should be checked by a medical provider (MedlinePlus)."
+    },
+    {
+      "id": "s6",
+      "text": "Do not go back in or relight the stove, heater or engine until the space is aired out and the cause is fixed. Never run fuel-burning equipment where people sleep.",
+      "detail": "Camp sources (CDC, CPSC): camp stoves, lanterns, portable heaters, charcoal and grills, generators and running engines. CDC also says not to use portable flameless chemical heaters indoors.\n\nNever use fuel-burning portable heaters or lanterns while sleeping in an enclosed space such as a tent, camper or vehicle (CPSC); the risk is higher at high altitude (CPSC). A snow shelter is an enclosed space too. Never use a portable camp stove or burn charcoal inside a home or other enclosed space (CDC). Charcoal heat packs used for warming: only outdoors or with good ventilation (WMS hypothermia guideline).\n\nGenerators: never inside, even with doors and windows open; run them outdoors more than 20 feet from windows, doors and vents (CDC).\n\nVehicle stuck in snow (CDC): keep the exhaust pipe clear of snow, run the engine and heater for only about 10 minutes an hour, and open a window slightly.\n\nA battery carbon monoxide alarm near where people sleep gives warning (CDC).",
+      "end": true
+    },
+    {
+      "id": "s10",
+      "text": "Start CPR now, in fresh air: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nGet the casualty out of the fumes before starting CPR if you can do it quickly and safely.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not stay in, or go back into, a space with fumes.",
+    "Do not run a stove, heater, lantern, generator or engine inside a tent, snow shelter, camper or vehicle where people are sleeping.",
+    "Do not assume someone is fine because they feel better in fresh air.",
+    "Do not run a vehicle stuck in snow with the exhaust pipe blocked."
+  ],
+  "evacuate": [
+    "Evacuate urgently: anyone who was unresponsive, needed CPR, was confused, had a seizure or chest pain, or is still unwell.",
+    "Evacuate: anyone exposed who is pregnant, a child, older, or has heart or lung disease (higher risk).",
+    "Get medical care: everyone exposed, even if they feel well, and anyone with memory or thinking problems in the weeks after (MedlinePlus)."
+  ],
+  "sources": [
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Carbon monoxide poisoning, reviewed 2025-01-08",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/002804.htm"
+    },
+    {
+      "name": "US CDC, Carbon Monoxide (CO) Poisoning Basics, last reviewed 26 Oct 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/carbon-monoxide/about/index.html"
+    },
+    {
+      "name": "US Consumer Product Safety Commission, Portable Heaters and Camping Equipment (Carbon Monoxide Information Center), undated, read 2026-11-17",
+      "url": "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center/Portable-Heaters--Camping-Equipment"
+    },
+    {
+      "name": "US CDC, Safety Guidelines: During and After a Winter Storm, last reviewed 25 Aug 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/winter-weather/safety/stay-safe-during-after-a-winter-storm-safety.html"
+    },
+    {
+      "name": "Wilderness Medical Society, Accidental Hypothermia 2019 Update (charcoal heat packs and carbon monoxide)",
+      "year": 2019,
+      "url": "https://www.femecv.com/sites/default/files/WMS%20hipotermia_2019.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

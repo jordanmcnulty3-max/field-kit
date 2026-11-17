@@ -1,0 +1,137 @@
+{
+  "id": "lightning",
+  "title": "Lightning strike",
+  "category": "environment",
+  "keywords": [
+    "lightning",
+    "struck by lightning",
+    "lightning strike",
+    "thunderstorm",
+    "thunder",
+    "storm",
+    "electric storm",
+    "lightning safety",
+    "lightning position",
+    "reverse triage"
+  ],
+  "summary": "Someone struck by lightning: make the scene safer, treat the apparently dead first, CPR with breaths, check for other injuries; plus what to do in a storm.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Has someone been struck, or hurt near a lightning strike?",
+      "detail": "Answer No to see what to do when a storm is coming.",
+      "ask": {
+        "q": "Has someone been struck or hurt?",
+        "yes": "s2",
+        "no": "s20"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "The storm may still be overhead. Move yourself and the casualties to a safer spot if you can. Struck people carry no charge: they are safe to touch.",
+      "detail": "Lightning victims carry no electrical charge and are safe to touch once the scene is otherwise safe (WMS, CDC).\n\nStay aware that lightning can strike again near you and the casualty (CDC). If you are on an exposed ridge, by a lone tree or in an open field, move to a safer place if you need to; move the casualty too if it is safe to do so (CDC).\n\nAvoid moving someone who is bleeding heavily or may have broken bones unless you must; major broken bones are unusual unless they fell or were thrown a long way (CDC)."
+    },
+    {
+      "id": "s3",
+      "text": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Say how many people were struck.",
+      "detail": "Tell the emergency service how many people were struck, where, and whether the storm is still going on (CDC). Mobile phones are safe to use in a storm (CDC)."
+    },
+    {
+      "id": "s4",
+      "text": "More than one casualty? Treat the ones who look dead first: unresponsive and not breathing. Those who are moving, talking or breathing come after.",
+      "detail": "Reverse triage (WMS): when lightning injures several people, those with no pulse or breathing get help first, because they have a good chance of survival with prompt care.\n\nLightning stops the heart and breathing at the same moment. The heart may restart on its own, but breathing can stay stopped, and the heart then stops again if nobody breathes for them (WMS 2012: ventilation support is needed early). That is why rescue breaths matter."
+    },
+    {
+      "id": "s5",
+      "text": "Is anyone unresponsive and not breathing normally?",
+      "ask": {
+        "q": "Is anyone unresponsive and not breathing normally?",
+        "yes": "s6",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Start CPR with rescue breaths now: use the CPR, adult protocol (or CPR, child or CPR, infant). Keep going as long as you can.",
+      "detail": "WMS: for a lightning casualty without a pulse, support the airway and breathing and do CPR. AHA 2025: cardiac arrest from electrical injury gets standard resuscitation, including rapid use of an AED; some people have recovered well after up to 70 minutes of CPR. CDC: if they are not breathing and you are trained, give rescue breaths; if you cannot, do compressions.\n\nOn cold or wet ground, put a jacket, blanket or plastic sheet under them to reduce heat loss (CDC).\n\nIf they may have been thrown or fallen, move the head and neck as little as you can: lightning injuries can look like spinal injuries (WMS).\n\nWhen the others are seen to, and if this casualty recovers, come back to this protocol to check for other injuries.",
+      "end": true
+    },
+    {
+      "id": "s7",
+      "text": "Check each casualty for burns, broken bones, and head, neck or back injury, especially anyone thrown. Keep them still if a spine injury is possible.",
+      "detail": "Check for burns, shock and injuries from being thrown, and give first aid for each (CDC). Use the Burns, Broken bone (fracture), Head injury and concussion, and Neck or back (spine) injury protocols.\n\nLightning can cause temporary paralysis, often with cold, pale, blue or pulseless arms or legs, that wears off within several hours. It can look like a spinal injury, so protect the spine (WMS).\n\nBurns may be feathery red patterns that fade within a day, lines where sweat collected, small round burns on the soles, or deeper burns where metal or synthetic fabric touched the skin (WMS). Remove watches, belt buckles and other metal (WMS 2012).\n\nOn cold or wet ground, insulate them from the ground (CDC); use the Hypothermia protocol if they are cold."
+    },
+    {
+      "id": "s8",
+      "text": "Evacuate anyone hit directly, knocked out, with chest pain, shortness of breath, weakness or numbness, major injuries, burns on the head or legs, or who is pregnant.",
+      "detail": "WMS high-risk signs, each needing evacuation and medical assessment: suspected direct strike; loss of consciousness; a focal neurological complaint (such as weakness, numbness or tingling in part of the body); chest pain or shortness of breath; major trauma; burns on the head or legs, or over more than 10% of the body; pregnancy.\n\nEveryone struck should have their ears and eyes checked: eardrums often burst, with hearing loss, and cataracts can appear from 2 days to 4 years later (WMS). Watch for headaches, seizures, and later mood or memory problems (WMS).\n\nKeep watching breathing and alertness until they are handed over. Use the Shock protocol if needed.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Storm coming: get to safe shelter as soon as you hear thunder: a large enclosed building or a hard-top vehicle with windows closed. Tents and open shelters do not protect you.",
+      "detail": "When thunder roars, go indoors (CDC): lightning can strike more than 10 miles from a storm, even under blue sky.\n\nSafe (CDC, WMS): the largest enclosed building, away from doors and windows; a hard-top vehicle with windows and doors closed. Not safe: tents, picnic shelters, gazebos and other open shelters (CDC).\n\nIn the mountains, storms are most common on summer afternoons (CDC): plan to be off summits and ridges early in the day (WMS)."
+    },
+    {
+      "id": "s21",
+      "text": "No shelter: get off peaks, ridges and open ground, out of and away from water, and away from lone trees, wire fences and power lines.",
+      "detail": "CDC: leave hills, ridges and peaks immediately; never shelter under an isolated tree; never use a cliff or rocky overhang; get out of and away from ponds and lakes; stay away from barbed wire fences, power lines and windmills.\n\nSafer than open ground (WMS): dense forest (away from isolated trees and the edge of the trees) or a deep cave (not a shallow one). In a forest, shelter near lower trees (CDC).\n\nOn the water: get to shore at once and move at least 100 yards from the water (CDC). In a small open boat, drop anchor and get as low as you can (CDC)."
+    },
+    {
+      "id": "s22",
+      "text": "Spread the group out, at least 20 feet apart. Put down metal objects such as poles, ice axes and metal-frame packs.",
+      "detail": "WMS: keep at least 20 feet between group members, so one strike does not injure everyone and others can help. CDC: separate from each other.\n\nPut down metal, especially anything held above shoulder height (CDC, WMS). Climbers tie in individually: lightning can travel along wet ropes (WMS)."
+    },
+    {
+      "id": "s23",
+      "text": "Last resort if lightning is very close: crouch with your feet together, or sit on an insulating pad, pack or coiled rope with your feet off the ground. Never lie flat.",
+      "detail": "The lightning position (WMS) lowers your height and keeps ground contact to one small point. It is a last resort, hard to hold for long, and no substitute for getting to safety. If you sit on an insulating, non-metal pad, pack or rope coil, lift your feet off the ground. CDC: never lie flat on the ground."
+    },
+    {
+      "id": "s24",
+      "text": "Wait at least 30 minutes after the last thunder before going back out.",
+      "detail": "Wait at least 30 minutes after the storm passes before resuming outdoor activity (WMS, CDC). The start and end of a storm are the most dangerous times (CDC).",
+      "timer": {
+        "seconds": 1800,
+        "label": "Wait after last thunder (30 min)"
+      },
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not wait for a struck casualty to recover before helping them: they are safe to touch.",
+    "Do not leave the apparently dead until last: treat them first.",
+    "Do not shelter in a tent, a shallow cave, under an overhang or under a lone tree.",
+    "Do not lie flat on the ground in a storm.",
+    "Do not huddle together: stay at least 20 feet apart.",
+    "Do not go back out until 30 minutes after the last thunder."
+  ],
+  "evacuate": [
+    "Evacuate urgently: anyone who needed CPR or was unresponsive.",
+    "Evacuate: suspected direct strike, loss of consciousness, weakness, numbness or tingling, chest pain or shortness of breath, major injuries, burns on the head or legs or over 10% of the body, or pregnancy (WMS).",
+    "Get medical care: hearing loss, ear pain or vision problems after a strike (WMS)."
+  ],
+  "sources": [
+    {
+      "name": "Wilderness Medical Society, A Summary: WMS Practice Guidelines for the Prevention and Treatment of Lightning Injuries (Engeln), summarising the 2014 update (Davis et al., Wilderness Environ Med 2014;25:S86-S95)",
+      "year": 2014,
+      "url": "https://wms.org/common/Uploaded%20files/Magazine/Lightning%20summary%20post%20edit.pdf"
+    },
+    {
+      "name": "US CDC, Safety Guidelines: Lightning (including first aid), last reviewed 16 Jun 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/lightning/safety/"
+    },
+    {
+      "name": "American Heart Association, Part 10: Adult and Pediatric Special Circumstances of Resuscitation, section 12 Electrocution, 2025 AHA Guidelines for CPR and ECC",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation"
+    },
+    {
+      "name": "Wilderness Medical Society, Practice Guidelines for the Prevention and Treatment of Lightning Injuries (Davis et al., Wilderness Environ Med 2012;23:260-269), superseded by the 2014 update; used only where the 2014 summary is silent",
+      "year": 2012,
+      "url": "https://clinicalmonster.com/wp-content/uploads/2013/04/lightning.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

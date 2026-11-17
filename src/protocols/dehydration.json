@@ -1,0 +1,152 @@
+{
+  "id": "dehydration",
+  "title": "Dehydration",
+  "category": "environment",
+  "keywords": [
+    "dehydration",
+    "dehydrated",
+    "thirsty",
+    "thirst",
+    "dark urine",
+    "not peeing",
+    "no urine",
+    "diarrhea",
+    "vomiting",
+    "fluids",
+    "electrolytes",
+    "oral rehydration",
+    "ors",
+    "rehydration salts",
+    "sports drink",
+    "dry mouth"
+  ],
+  "summary": "Too little fluid from sweating, vomiting or diarrhoea: screen for danger signs, give small frequent drinks or oral rehydration solution, and decide on evacuation.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check: do they respond? Are they breathing normally?",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are they confused, very drowsy or hard to wake, or have they had a seizure?",
+      "detail": "Confusion, seizures, delirium or unconsciousness are signs of severe dehydration or another serious problem (MedlinePlus). Someone who is not fully alert must not be given drinks (AHA 2024).",
+      "ask": {
+        "q": "Are they confused, very drowsy or hard to wake?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Are there signs of shock: pale or grey, cool, clammy skin, a fast weak pulse, fast breathing?",
+      "detail": "Signs of shock need emergency care (Red Cross, MedlinePlus), and a person in shock gets nothing by mouth (AHA 2024, Shock protocol).",
+      "ask": {
+        "q": "Are there signs of shock?",
+        "yes": "s22",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Are they overheated, after hard work or in hot weather?",
+      "detail": "Heat illness and dehydration often come together. The Heat illness (heat stroke, heat exhaustion, cramps) protocol checks for heat stroke and covers cooling and drinks.",
+      "ask": {
+        "q": "Are they overheated?",
+        "yes": "s23",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Give small, frequent sips of oral rehydration solution, a sports drink, or water, and increase the amount as they keep it down. Even if they are vomiting, try small sips.",
+      "warn": "Only if fully alert and able to swallow. No drinks if a head injury is possible or an injury may need surgery. No alcohol or caffeine.",
+      "detail": "Signs of dehydration (Red Cross, MedlinePlus): thirst, dry or sticky mouth, dark yellow urine or little urine, tiredness, irritability, headache, muscle cramps, dry cool skin.\n\nAHA 2024: if there is no shock or confusion and they can swallow, help them drink any rehydration drink or clean drinking water. Where available, a carbohydrate-electrolyte drink with 4 to 9% carbohydrate (check the label) is reasonable in preference to water, weaker drinks, coconut water or low-fat milk.\n\nRed Cross: water, ice pops, oral rehydration solution or sports drinks, in small frequent amounts, especially for children and babies, increasing gradually as tolerated. MedlinePlus: sip water or suck ice.\n\nOral rehydration salts (CDC): mix 1 packet with the amount of boiled or treated water on the packet, usually 1 litre (about 1 quart). For heavy fluid loss from diarrhoea, packaged oral rehydration salts are best (CDC).\n\nAvoid alcohol and caffeinated drinks (Red Cross). Very sweet drinks such as sodas can make diarrhoea worse if drunk in large amounts (CDC). Do not take salt tablets (MedlinePlus).\n\nBabies: keep breastfeeding (WHO).",
+      "log": "Oral fluids given"
+    },
+    {
+      "id": "s6",
+      "text": "No ready-made drink: make oral rehydration solution with 1 litre of clean drinking water, 6 teaspoons of sugar and half a teaspoon of salt. Stir until dissolved.",
+      "detail": "Recipe from WHO: half a teaspoon of salt and six teaspoons of sugar in one litre (about 1 quart) of clean, safe drinking water (lightly salted rice water also works). WHO does not say whether the teaspoons are level or heaped; measure carefully with a real teaspoon.\n\nThe water must be safe to drink: boiled, filtered and treated, or bottled (CDC).",
+      "log": "Oral rehydration solution made"
+    },
+    {
+      "id": "s7",
+      "text": "Rest them in the shade or shelter, neither cold nor overheated. Check urine: pale means they are drinking enough.",
+      "detail": "Keep the person from getting cold or overheated (Red Cross). Pale urine means enough fluid; dark yellow-brown, strong-smelling urine means drink now (Red Cross).\n\nChildren and babies lose fluid faster than adults and cannot get drinks for themselves (Red Cross). After 12 to 24 hours with no vomiting, slowly restart a child's normal diet (Red Cross).\n\nDehydration from a stomach bug usually gets better on its own in a few days (MedlinePlus)."
+    },
+    {
+      "id": "s8",
+      "text": "Evacuate if they cannot keep fluids down, are getting worse, pass little or no urine, or have dizziness, bloody or black stool, or bad belly pain.",
+      "detail": "Red Cross lists these as needing emergency care: signs of shock; no tears; vomiting or diarrhoea for more than a few days; unable to keep fluids down; dizziness; very little or no urine; bloody or black stool; sharp or persistent belly pain; sweet-smelling breath; sunken eyes, cheeks or belly (or a baby's soft spot); skin that stays tented when pinched.\n\nChild or baby: a child with no urine for more than 6 hours, or a baby with no wet diaper for 3 hours or more, needs a health care provider (Red Cross).\n\nMedlinePlus: get emergency help for loss of consciousness, a change in alertness, fever over 102°F (38.8°C), signs of heat stroke such as a rapid pulse or rapid breathing, or no improvement despite treatment. Severe dehydration may need IV fluids.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Give nothing by mouth. If they are breathing, lie them on their side (Recovery position protocol), keep them at a comfortable temperature, and evacuate urgently.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are hot, they may have heat stroke: use the Heat illness (heat stroke, heat exhaustion, cramps) protocol, which starts with cooling.\n\nWatch their breathing all the time. If they stop breathing normally, start CPR.",
+      "end": true
+    },
+    {
+      "id": "s22",
+      "text": "Signs of shock: give nothing by mouth. Use the Shock protocol and evacuate urgently.",
+      "detail": "Severe dehydration can cause shock, which needs IV fluids (MedlinePlus).\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s23",
+      "text": "Use the Heat illness (heat stroke, heat exhaustion, cramps) protocol now. It checks for heat stroke and covers cooling and drinks.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not give drinks to anyone who is confused, very drowsy, in shock, or unable to swallow.",
+    "Do not give alcohol or caffeinated drinks.",
+    "Do not give salt tablets.",
+    "Do not guess the amounts in homemade rehydration solution; measure them.",
+    "Do not use water that is not safe to drink."
+  ],
+  "evacuate": [
+    "Evacuate urgently: confusion, seizures, drowsiness or unresponsiveness, or signs of shock.",
+    "Evacuate urgently: unable to keep fluids down, or vomiting or diarrhoea for more than a few days.",
+    "Evacuate: very little or no urine (a child with none for more than 6 hours, a baby with no wet diaper for 3 hours), bloody or black stool, or sharp or persistent belly pain (Red Cross).",
+    "Evacuate: fever over 102°F (38.8°C), or not improving despite drinking (MedlinePlus)."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 7.10 Oral rehydration for exertional dehydration (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Dehydration (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/dehydration"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Dehydration, reviewed 2025-07-01",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000982.htm"
+    },
+    {
+      "name": "US CDC, Yellow Book 2026, Travelers' Diarrhea (oral rehydration salts), page dated 24 Mar 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/travelers-diarrhea.html"
+    },
+    {
+      "name": "World Health Organization Regional Office for the Eastern Mediterranean, Information for the general public on oral rehydration solution (WHO-EM/CSR/594/E, undated; read 2026-11-17)",
+      "url": "https://applications.emro.who.int/docs/WHOEMCSR594E-eng.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

@@ -1,0 +1,186 @@
+{
+  "id": "hypothermia",
+  "title": "Hypothermia",
+  "category": "environment",
+  "keywords": [
+    "hypothermia",
+    "cold",
+    "too cold",
+    "freezing",
+    "shivering",
+    "chilled",
+    "wet and cold",
+    "cold water",
+    "exposure",
+    "frozen",
+    "stopped shivering",
+    "mumbling",
+    "stumbling",
+    "rewarming",
+    "heat pack"
+  ],
+  "summary": "A casualty who is cold all over: check breathing, handle gently, insulate and wrap, add heat to the trunk, and decide on evacuation.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure you are safe from the cold, water and weather. Check if they respond. Watch and feel for breathing for up to 1 minute: in a very cold person it can be very slow.",
+      "detail": "Your safety comes first (WMS): decide to rescue only once the scene is safe for you.\n\nIn a very cold person, breathing and pulse can be very slow, weak and hard to detect (AHA 2025, WMS). WMS (2019) advises feeling for a pulse at the side of the neck for 1 minute before starting CPR. Breathing may be very slow but still there. The rate counter can help you count breaths over the minute.\n\nIf you cannot tell whether they are breathing normally after checking, treat it as not breathing normally.\n\nSigns that look like death, such as wide fixed pupils, stiff muscles or a stiff body, do not reliably mean the person cannot be saved (AHA 2025, WMS).",
+      "tool": "rate",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s2",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Are they less alert than normal: confused, drowsy, mumbling, stumbling, or unable to help with their wet clothes?",
+      "detail": "These are the warning signs of serious (moderate or severe) hypothermia (AHA 2024, Red Cross, WMS). Other warning signs: a glassy stare, slurred speech, fumbling hands, very pale or blue-grey skin, frozen skin, and shivering that stops while they are still cold (Red Cross, CDC, AHA).\n\nShivering on its own, with clear thinking, usually means cold stress or mild hypothermia (WMS: shivering, clear consciousness). WMS: a shivering person whose alertness is reduced should be treated as moderate hypothermia, not mild.\n\nNot sure? Answer Yes. WMS: if in doubt, assume hypothermia and treat it.\n\nOther things can also make a cold person confused or stop shivering, such as a head injury, alcohol or drugs, or serious illness (WMS). Treat the cold anyway and look for the other cause.\n\nBabies with hypothermia may have bright red, cold skin and very low energy (CDC).",
+      "ask": {
+        "q": "Are they less alert than normal?",
+        "yes": "s10",
+        "no": "s3b"
+      }
+    },
+    {
+      "id": "s3b",
+      "text": "Have they stopped shivering while they are still cold?",
+      "detail": "Shivering that stops while the person is still cold is a sign that hypothermia is getting worse, and needs emergency care (Red Cross). WMS: shivering can stop at a core temperature of around 86°F (30°C).\n\nAnswer No if they are not shivering because they have warmed up, or were never very cold.",
+      "ask": {
+        "q": "Have they stopped shivering while still cold?",
+        "yes": "s10",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Get them out of the wind and wet: into a tent, vehicle, shelter or behind a windbreak. Put insulation under them, such as a sleeping pad or pack.",
+      "detail": "Stop further heat loss first (AHA, WMS). Move them to a warmer place if you can (AHA, Red Cross). Insulate them from the ground with sleeping pads, packs, branches or spare clothing (AHA, WMS).\n\nIf they are injured as well, also use the Trauma check (MARCH) protocol; if a neck or back injury is possible, roll them as one unit to get insulation underneath (Neck or back (spine) injury protocol)."
+    },
+    {
+      "id": "s5",
+      "text": "Once sheltered, replace wet clothing with dry. Cover the head and neck. Wrap them: plastic or foil next to them, then a sleeping bag or blankets, then a windproof layer.",
+      "detail": "Wet clothing: take it off once they are out of the wind and cold, not before (WMS, AHA). Help them into dry clothing including a hat, gloves and socks (Red Cross). Clothing that is only damp can stay on if you cannot change it (AHA).\n\nCover the head and neck: a lot of heat is lost there (AHA, WMS).\n\nThe wrap (AHA, WMS): a vapour barrier (plastic sheet, foil emergency blanket, bubble wrap, or a large garbage bag with a hole for the face) stops heat loss by evaporation. Over it, insulation: a sleeping bag zipped up, blankets, spare clothing. WMS: two vapour barriers, one against the person and one outside the insulation, work best, with a windproof outer layer.\n\nNo blankets: use extra clothing, towels, plastic sheeting, newspaper or cardboard (Red Cross).",
+      "log": "Insulated and wrapped"
+    },
+    {
+      "id": "s6",
+      "text": "If you have heat packs, warm water bottles or a heating pad, wrap each in cloth and put them on the armpits, chest and back. Not on the arms or legs, and never on bare skin.",
+      "detail": "WMS: put heat on the armpits, chest and back, in that order; a large heat pad goes over the chest and into the armpits. TCCC (and the Trauma check (MARCH) protocol) uses the front of the chest and the armpits. CDC: warm the centre of the body: chest, neck, head and groin.\n\nAlways put cloth or insulation between the heat source and the skin, follow the product's instructions, and check the skin every 20 to 30 minutes for burns or pressure marks, especially on the back (AHA, WMS). Cold skin burns easily.\n\nDo not put heat on the arms and legs, and do not rub or massage them (AHA: harmful). Small hand and foot warmers are too small to rewarm a person on their own (AHA, WMS).\n\nHot water bottles: filled with warm water and wrapped in thin, dry cloth (Red Cross).\n\nCharcoal heat packs give off carbon monoxide: use them only outdoors or with good ventilation (WMS).\n\nShivering is the body making its own heat. In a mild case it rewarms them well if they are insulated (WMS). Rewarm slowly (Red Cross).\n\nBody-to-body warming (sharing a sleeping bag) is acceptable for mild hypothermia if it does not delay getting out (WMS); AHA found it no better than heat packs.",
+      "log": "Heat packs applied to trunk"
+    },
+    {
+      "id": "s7",
+      "text": "If they are fully alert and can swallow safely, give warm (not hot) sweet drinks or high-energy food. No alcohol (see warning).",
+      "warn": "Nothing by mouth if they are drowsy or confused, vomiting, may have a head injury, show signs of shock, or have an injury that may need surgery.",
+      "detail": "Warm food and drink fuel shivering. AHA: give high-calorie food or drinks to a cold or mildly hypothermic person who is alert and can swallow safely, at a temperature that will not burn the mouth or throat. WMS: high-carbohydrate drinks or food, warmed but not hot, for an alert, shivering person who is not at risk of choking on it. Red Cross: small sips of a warm drink without caffeine, such as broth or warm water.\n\nNever give alcohol: it feels warming but increases heat loss (Red Cross, CDC). Red Cross also advises avoiding caffeine."
+    },
+    {
+      "id": "s8",
+      "text": "Let them rest, wrapped, for about 30 minutes before they stand or walk. Then start with gentle activity and watch them closely.",
+      "detail": "WMS: keep a shivering person insulated and warm for about 30 minutes before letting them stand or walk, adjusted to the situation, and start exercise at low intensity. Standing and walking too soon send cold blood from the limbs to the core.\n\nA person who is only cold, shivering, and thinking clearly can sit up, eat, drink, change their own clothes and move as needed, with someone keeping an eye on them (WMS)."
+    },
+    {
+      "id": "s9",
+      "text": "Keep checking them. If they become less alert, stop shivering while still cold, or do not warm up, treat it as serious: start this protocol again.",
+      "detail": "Mild hypothermia can get worse, especially in wind, rain or wet clothing, or if they are exhausted or hungry.\n\nWMS: an alert, mildly hypothermic person with no injury may be treated without evacuation.\n\nEvacuate if they get worse, cannot be rewarmed, are injured, or the group cannot keep them warm and dry. See When to evacuate.",
+      "end": true
+    },
+    {
+      "id": "s10",
+      "text": "Serious hypothermia. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Decreased alertness, confusion, mumbling, pale or blue skin, or frozen skin mean life-threatening hypothermia: get emergency help while you rewarm them by any means you have (AHA 2024).\n\nIn the field, the casualty will usually need to be carried out, lying down and wrapped (WMS)."
+    },
+    {
+      "id": "s11",
+      "text": "Handle them very gently and keep them lying flat. Do not let them stand, walk or exert themselves. Move their arms and legs as little as possible.",
+      "detail": "Rough handling, sitting or standing them up, walking, and moving the limbs can trigger a dangerous heart rhythm and cardiac arrest in a very cold person, and send cold blood from the limbs to the core (WMS). Keep them horizontal, especially when lifting them out of water or a crevasse (WMS).\n\nThe core temperature can keep falling for a while after they are out of the cold (afterdrop, WMS).",
+      "warn": "Do not rub or massage them. No warm shower or bath."
+    },
+    {
+      "id": "s12",
+      "text": "Insulate them from the ground and wrap them: plastic or foil next to them, then sleeping bag or blankets, then a windproof layer. Cover the head and neck.",
+      "detail": "Protect them from further heat loss until they reach a warm place (WMS). Insulate from the ground with pads, cover the head and neck, and add a vapour barrier and insulation (AHA, WMS). WMS: two vapour barriers, one against the person and one outside the insulation, are best.\n\nWet clothing (AHA, WMS): cut soaked clothing off only once they are sheltered from wind and cold; cutting avoids moving their limbs. Clothing that is only damp can stay on under the wrap. AHA: for a less alert person in damp clothing that cannot be removed straight away, warming through the clothing inside a hypothermia wrap is reasonable.\n\nIf a neck or back injury is possible, roll them as one unit (Neck or back (spine) injury protocol).",
+      "log": "Insulated and wrapped"
+    },
+    {
+      "id": "s13",
+      "text": "Add heat: large heat packs, warm water bottles or a heating pad, wrapped in cloth, on the armpits, chest and back. Not on arms or legs, never on bare skin.",
+      "detail": "Most casualties with reduced alertness need active rewarming with outside heat inside the wrap (WMS). Concentrate heat on the armpits, chest and back, in that order (WMS); TCCC and the Trauma check (MARCH) protocol use the front of the chest and the armpits.\n\nPut insulation between the heat source and skin, follow the product instructions, and check the skin every 20 to 30 minutes for burns, especially on the back (AHA, WMS). Never put heat on the arms or legs, and do not rub or massage them (AHA: harmful).\n\nDo not use a warm shower or bath: in a less alert person it can drop the blood pressure and core temperature (AHA: harmful; WMS).\n\nSmall hand and foot warmers are too small to rewarm a person (AHA, WMS). Charcoal heat packs only outdoors or with good ventilation (carbon monoxide, WMS).",
+      "log": "Heat packs applied to trunk"
+    },
+    {
+      "id": "s14",
+      "text": "Give nothing to eat or drink. If they are unresponsive but breathing, lie them on their side (Recovery position protocol), still wrapped.",
+      "detail": "Drinks and food are only for someone who is alert and can swallow safely (AHA, WMS). CDC: do not give drinks to an unconscious person.\n\nThe recovery position keeps the airway clear if they vomit. Roll them gently, keeping the wrap and the insulation underneath."
+    },
+    {
+      "id": "s15",
+      "text": "Keep checking their breathing while you warm and move them. Has their breathing stopped?",
+      "detail": "Check for up to 1 minute each time: breathing can be very slow (WMS).",
+      "tool": "rate",
+      "ask": {
+        "q": "Has their breathing stopped?",
+        "yes": "s2",
+        "no": "s16"
+      }
+    },
+    {
+      "id": "s16",
+      "text": "Evacuate: carry them lying flat and wrapped, with the heat on the trunk. Do not let them walk out, even if they seem better.",
+      "detail": "Casualties with moderate or severe hypothermia need hospital care; those who are severely hypothermic or unstable need a hospital that can rewarm the blood directly with a heart-lung machine (ECMO) (WMS). For someone in cardiac arrest from hypothermia, AHA 2025 says taking them to such a centre may be reasonable if it can be reached within 6 hours.\n\nKeep them horizontal and handle them gently on the way (WMS). Keep the heat sources on the trunk and keep checking the skin under them.",
+      "end": true
+    },
+    {
+      "id": "s2",
+      "text": "Start CPR now with rescue breaths: use the CPR, adult protocol (or CPR, child or CPR, infant). Keep them on insulation and keep warming them.",
+      "detail": "WMS: if you feel no pulse after 1 minute, start CPR with rescue breaths. AHA 2025: start full resuscitation straight away and continue it while rewarming, unless there is an obviously fatal injury. Use the same compression rate as usual (WMS). CDC: perform CPR even if the person appears dead.\n\nDo not start CPR if there is an obviously fatal injury, or the chest is frozen so stiff it cannot be pushed down (WMS). Fixed, wide pupils, stiffness and blotchy skin are not reasons to withhold CPR (AHA 2025, WMS).\n\nHandle them gently. If the chest is taken up by CPR, put the heat on the upper back instead (WMS).\n\nAED: use it if you have one and follow its prompts (WMS: if it advises a shock, shock and continue CPR). Professionals limit shocks until the person is warmer (AHA 2025, WMS).\n\nCarrying them out (WMS): if continuous CPR is impossible or unsafe while you move them, the first delay should be no more than 10 minutes, then give at least 5 minutes of CPR between pauses of no more than 5 minutes. AHA 2025: delayed or intermittent CPR may be reasonable when conditions do not allow continuous CPR.\n\nWhen to stop: WMS says to keep resuscitating whatever the body temperature. People have recovered fully after very long CPR in severe hypothermia (WMS reports up to 6.5 hours). WMS calls the saying no one is dead until warm and dead a rule of thumb that reflects how hard it is to tell death in the field, and notes that some people really are cold and dead. Stop when the CPR protocol says to (for example, you are exhausted or the scene becomes unsafe).",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not rub or massage a cold person, and do not put heat on the arms or legs.",
+    "Do not put a heat pack or hot water bottle directly on the skin.",
+    "Do not use a warm shower or bath for someone who is drowsy or confused.",
+    "Do not sit up, stand up or walk a person with serious hypothermia; keep them lying flat and handle them gently.",
+    "Do not give alcohol.",
+    "Do not give food or drink to anyone who is drowsy, confused, vomiting or unable to swallow safely.",
+    "Do not rely on small hand or foot warmers to rewarm a person.",
+    "Do not use a charcoal heat pack in a tent, vehicle or other enclosed space."
+  ],
+  "evacuate": [
+    "Evacuate urgently: unresponsive, after any CPR, or breathing very slowly.",
+    "Evacuate urgently: less alert than normal (confused, drowsy, mumbling, stumbling), or shivering has stopped while still cold. Carry them lying flat and wrapped.",
+    "Evacuate: hypothermia in someone who is also injured (WMS: rewarm actively throughout) or ill.",
+    "Evacuate: they do not warm up, or the group cannot keep them warm and dry.",
+    "May stay (WMS): an alert, shivering, uninjured person who warms up fully, with someone watching them."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, sections 7.7 Hypothermia and 7.8 Frostbite (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Heart Association, Part 10: Adult and Pediatric Special Circumstances of Resuscitation, section 17 Hypothermia, 2025 AHA Guidelines for CPR and ECC",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation"
+    },
+    {
+      "name": "Wilderness Medical Society, Clinical Practice Guidelines for the Out-of-Hospital Evaluation and Treatment of Accidental Hypothermia: 2019 Update (Dow et al., Wilderness Environ Med 2019;30(4S):S47-S69)",
+      "year": 2019,
+      "url": "https://www.femecv.com/sites/default/files/WMS%20hipotermia_2019.pdf"
+    },
+    {
+      "name": "American Red Cross, Hypothermia (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/hypothermia"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, Preventing Hypothermia (Winter Weather), last reviewed 25 Aug 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/winter-weather/prevention/index.html"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

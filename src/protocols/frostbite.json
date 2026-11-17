@@ -1,0 +1,178 @@
+{
+  "id": "frostbite",
+  "title": "Frostbite",
+  "category": "environment",
+  "keywords": [
+    "frostbite",
+    "frostnip",
+    "frozen fingers",
+    "frozen toes",
+    "frozen feet",
+    "numb fingers",
+    "white skin",
+    "waxy skin",
+    "cold injury",
+    "frozen skin",
+    "cold hands",
+    "cold feet",
+    "thaw"
+  ],
+  "summary": "Frozen skin and tissue: treat hypothermia first, warm frostnip against skin, rewarm frostbite in lukewarm water only if it cannot refreeze, protect and evacuate.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check the whole person first. Are they unresponsive and not breathing normally?",
+      "detail": "Frostbite often comes with hypothermia. A cold, unresponsive person may breathe very slowly: the Hypothermia protocol explains how to check.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are they less alert than normal: confused, drowsy, mumbling or stumbling?",
+      "detail": "These are signs of serious hypothermia. Warming the whole body comes before the frostbite (AHA 2024: rewarm the core first in moderate to severe hypothermia; MedlinePlus: check for hypothermia and treat it first).",
+      "ask": {
+        "q": "Are they less alert than normal?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Get them out of the cold and wind. Take off wet clothing, rings, watches and anything tight on the cold part. Keep the rest of the body warm.",
+      "detail": "Remove jewellery and anything tight as soon as possible, before swelling makes it impossible (AHA). Remove wet clothing from the area (Red Cross, MedlinePlus).\n\nIf they are shivering and cold all over, also follow the Hypothermia protocol to warm them."
+    },
+    {
+      "id": "s4",
+      "text": "Feel the cold skin gently. Is it hard, firm or waxy?",
+      "detail": "Frostnip (MedlinePlus) is the early stage: the skin is red and cold, and may turn white, but stays soft. It may prickle, tingle, sting or go numb.\n\nFrostbite (CDC, Red Cross, MedlinePlus): the skin is numb, white, greyish-yellow, blue or red, and feels unusually firm, hard or waxy. Blisters or black skin mean frostbite that needs emergency care (Red Cross). Most often the nose, ears, cheeks, chin, fingers and toes (CDC).\n\nNot sure? Answer Yes.",
+      "ask": {
+        "q": "Is the skin hard, firm or waxy?",
+        "yes": "s6",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Frostnip: warm the part against warm skin, such as fingers in their armpits or a warm palm over a cold nose, cheek or ear. Do not rub it.",
+      "detail": "MedlinePlus: get out of the cold, add warm layers, eat carbohydrates and drink fluids, and move the body to warm the core. Put cold fingers in the armpits, or hold a warm palm over a cold nose or cheek. Do not rub.\n\nAHA and Red Cross also allow thawing against the person's own warm skin.",
+      "ask": {
+        "q": "Has the skin gone back to normal colour and feeling?",
+        "yes": "s7",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Frostnip is recovering. Keep them warm, dry and fed, and protect the part from the cold. Check it again later for blisters or hard skin.",
+      "detail": "Get medical help if frostnip does not improve or gets worse after warming (MedlinePlus).",
+      "end": true
+    },
+    {
+      "id": "s6",
+      "text": "Frostbite: avoid walking on frozen feet or using frozen hands if you can. Protect the part from further cold and from knocks.",
+      "detail": "Frozen tissue is numb and cannot feel new injury, so walking or climbing on frostbitten feet should be avoided when possible (AHA, CDC: unless necessary). Pad and cover the part.\n\nNever rub or massage frostbite: it damages the tissue (Red Cross, CDC, MedlinePlus)."
+    },
+    {
+      "id": "s8",
+      "text": "Can you keep the part warm from now on, with no chance of it freezing again?",
+      "detail": "Thawing and then refreezing does much more damage than leaving the part frozen a while longer (AHA, Red Cross, MedlinePlus). AHA: rewarm at the earliest opportunity, but only where there is no risk of refreezing.\n\nAnswer No if they must go back out into the cold, or walk out on the feet, before reaching shelter.",
+      "ask": {
+        "q": "Can you keep it from freezing again?",
+        "yes": "s9",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Rewarm the part in clean water at 99 to 104°F (37 to 40°C): on your wrist, just slightly warmer than body heat. Keep it in until the skin is soft and colour returns, about 20 to 30 minutes.",
+      "warn": "Never use water above 104°F (40°C), a fire, stove, heater, hair dryer or heating pad: numb skin burns easily.",
+      "detail": "Lukewarm water at 99 to 104°F (37 to 40°C) is the preferred way to rewarm frostbite (AHA, Red Cross). No thermometer: the water should feel slightly warmer than body temperature on the inside of your wrist (AHA), warm, about body temperature, not hot (Red Cross); CDC: warm to the touch. Animal studies found water at 113°F (45°C) harmful (AHA).\n\nKeep the water moving (MedlinePlus) and top it up with warm water as it cools, stirring it in away from the frozen part, so it stays in the range.\n\nHow long: until the skin is soft and normal colour and feeling return (Red Cross, MedlinePlus). Studies used 20 to 30 minutes (AHA). Rewarming is often very painful, and the part may swell and change colour (MedlinePlus).\n\nNo way to use water: let it thaw in warm air, or against the casualty's own warm skin, such as in an armpit (AHA, Red Cross). For ears, nose and cheeks, hold a warm wet cloth on them, changing it often (MedlinePlus).",
+      "timer": {
+        "seconds": 1800,
+        "label": "Rewarm frostbite (20 to 30 min)"
+      },
+      "log": "Frostbite rewarmed"
+    },
+    {
+      "id": "s10",
+      "text": "Let it dry in the air or pat it very gently. Leave blisters alone. Cover loosely with dry, bulky dressings, with gauze or cotton between fingers and toes.",
+      "detail": "Do not break, drain or remove blisters (AHA, Red Cross, MedlinePlus).\n\nUse bulky, clean, dry gauze or cotton dressings, wrapped loosely so the part can swell (AHA). Put cotton or gauze between frostbitten fingers or toes before bandaging (Red Cross, MedlinePlus).\n\nMove thawed parts as little as possible (MedlinePlus), and keep them from refreezing.",
+      "log": "Frostbite dressed"
+    },
+    {
+      "id": "s11",
+      "text": "Keep them warm. Ibuprofen may be reasonable for pain and to limit damage (see warning), taken as the package directs.",
+      "warn": "No ibuprofen by mouth if they are drowsy or confused, vomiting, may have a head injury, show signs of shock, or have an injury that may need surgery.",
+      "detail": "AHA (2024, Class 2b): ibuprofen may be reasonable to help prevent tissue damage and to treat pain in frostbite. AHA gives no dose; follow the package.\n\nWarm drinks help replace lost fluids in severe frostbite (MedlinePlus), if they are alert and can swallow. No alcohol or smoking during recovery (MedlinePlus).\n\nWatch for shock (Red Cross): use the Shock protocol if needed."
+    },
+    {
+      "id": "s12",
+      "text": "Get them to medical care. Carry them if their feet were frostbitten. Keep the thawed parts covered, warm and protected.",
+      "detail": "Frostbite needs prompt medical care (AHA). Blisters, black skin and signs of hypothermia need emergency care (Red Cross).\n\nWatch for infection later: fever, feeling unwell, spreading discoloration, or fluid draining from the area (MedlinePlus).\n\nFrostbite counts as a tetanus-prone wound: see the tetanus step of the Wound cleaning and care protocol.",
+      "end": true
+    },
+    {
+      "id": "s13",
+      "text": "Do not thaw it yet. Pad and cover it, keep the rest of the body warm, and move to a place where it can stay warm. Then rewarm it as this protocol describes.",
+      "detail": "AHA: rewarm in the field only where there is no risk of refreezing. MedlinePlus: if refreezing cannot be prevented, it may be better to wait until the person reaches a warm, safe place.\n\nAvoid walking on frozen feet where you can (AHA). Once the feet are thawed, move them as little as possible (MedlinePlus): a casualty with thawed frostbitten feet should be carried.\n\nThe part may thaw on its own on the way. Keep it covered and protect it from refreezing.\n\nWhen you reach shelter, open this protocol again and rewarm the part in lukewarm water.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant). If they are very cold, the Hypothermia protocol explains how CPR differs.",
+      "detail": "Leave the frostbite until breathing and circulation are dealt with and the person is being rewarmed.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Use the Hypothermia protocol now: warm the whole body first. Treat the frostbite once they are being rewarmed and are more alert.",
+      "detail": "AHA 2024: in moderate to severe hypothermia, rewarm the core first. MedlinePlus: treat hypothermia first.\n\nWhile you deal with the hypothermia, protect the frozen part from knocks and do not rub it.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not rub or massage frostbitten or frostnipped skin.",
+    "Do not thaw frostbite if it could freeze again.",
+    "Do not rewarm with water hotter than 104°F (40°C), or with a fire, stove, heater, heating pad or hair dryer.",
+    "Do not break, drain or remove blisters.",
+    "Do not walk on frozen feet if you can avoid it, and carry someone whose frostbitten feet have been thawed.",
+    "Do not give alcohol."
+  ],
+  "evacuate": [
+    "Evacuate urgently: frostbite with signs of hypothermia, blisters, or black skin (Red Cross).",
+    "Get medical care: any frostbite (hard, firm, waxy, white or greyish skin), even after successful rewarming (AHA).",
+    "Get medical care: frostnip that does not improve or gets worse after warming (MedlinePlus).",
+    "Get medical care: fever, feeling unwell, spreading colour change or fluid draining from a frostbitten area in the days after (MedlinePlus)."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, sections 7.7 Hypothermia and 7.8 Frostbite (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Frostbite (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/frostbite"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, Preventing Hypothermia (Winter Weather), last reviewed 25 Aug 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/winter-weather/prevention/index.html"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Frostbite, reviewed 2025-10-14",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000057.htm"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), How to prevent frostbite and hypothermia (frostnip), reviewed 2026-07-15",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/patientinstructions/000866.htm"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

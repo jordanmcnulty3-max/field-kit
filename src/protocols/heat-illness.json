@@ -1,0 +1,205 @@
+{
+  "id": "heat-illness",
+  "title": "Heat illness (heat stroke, heat exhaustion, cramps)",
+  "category": "environment",
+  "keywords": [
+    "heat stroke",
+    "heatstroke",
+    "heat exhaustion",
+    "heat cramps",
+    "overheated",
+    "too hot",
+    "hyperthermia",
+    "sunstroke",
+    "hot weather",
+    "collapsed in heat",
+    "cramps",
+    "confused in heat",
+    "cooling",
+    "cold water immersion",
+    "hyponatremia"
+  ],
+  "summary": "Heat cramps, heat exhaustion and heat stroke: get out of the heat, check for confusion, cool fast (cold water up to the neck for heat stroke), fluids if alert, and decide on evacuation.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check: do they respond? Are they breathing normally?",
+      "detail": "Gasping or occasional breaths are not normal breathing. If you are not sure, treat it as not breathing normally.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Move them out of the heat into the coolest shade you can find. Stop all exertion. Loosen or take off extra clothing, including shoes and socks.",
+      "detail": "First steps for anyone overheated (AHA 2024): move them out of the heat, take off excess clothing, and stop them exerting themselves. NIOSH also removes shoes and socks. Moving air helps (Red Cross).\n\nIf they are also injured, use the Trauma check (MARCH) protocol for the injuries."
+    },
+    {
+      "id": "s3",
+      "text": "Is their thinking or behaviour abnormal: confused, acting strangely, slurring, very drowsy, had a seizure, or passed out?",
+      "detail": "Heat illness with any change in mental state (confusion, strange behaviour, slurred speech, seizures, collapse, unresponsiveness) is heat stroke, a life-threatening emergency (AHA 2024, WMS, NIOSH).\n\nThe skin may be hot and dry or sweaty (NIOSH); sweating does not rule out heat stroke. Other signs: rapid shallow breathing, rapid weak heartbeat, headache, dizziness, nausea or vomiting (Red Cross).\n\nWMS: if an overheated person has altered mental status and you cannot measure their core temperature, start cooling anyway.\n\nNot sure? Answer Yes. Heat stroke can start without any earlier heat exhaustion (WMS).",
+      "ask": {
+        "q": "Is their thinking or behaviour abnormal?",
+        "yes": "s4",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Heat stroke: cool them now, before anything else. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Heat stroke kills if cooling is delayed (NIOSH). Faster cooling is linked to better survival (AHA 2024). WMS: after airway, breathing and circulation, cold-water immersion is the most important treatment.\n\nDo not delay cooling to give fluids (WMS).",
+      "ask": {
+        "q": "Can you get them into cold water up to the neck now?",
+        "yes": "s5",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Put them in the coldest water you have, up to the neck, holding their head above water. Stop after 15 minutes or as soon as they are thinking clearly, whichever comes first.",
+      "warn": "Someone must hold them the whole time so their head cannot go under. Never leave them alone in the water.",
+      "detail": "Cold-water immersion of the whole body from the neck down, for 15 minutes or until their thinking returns to normal, whichever comes first, is the best cooling method (AHA 2024, Red Cross; WMS: the gold standard). AHA gives the same advice for children.\n\nWater: use the coldest you have (WMS). AHA: water anywhere from 36 to 79°F (2 to 26°C) cooled at similar rates, so getting them into water matters more than how cold it is. A calm, shallow stream, lake edge, tub, or a tarp or groundsheet held up at the edges and filled with water all work (AHA 2025 lists tarp-assisted cooling for professionals).\n\nIf they become unresponsive or stop breathing normally, take them out and start CPR (CPR, adult protocol, or CPR, child).\n\nTrained users with a rectal thermometer: AHA 2024 gives a target of 102.2°F (39°C); AHA 2025 (professionals) stops active cooling at 101.5°F (38.6°C).",
+      "timer": {
+        "seconds": 900,
+        "label": "Cold-water immersion (15 min max)"
+      },
+      "log": "Cooled in cold water"
+    },
+    {
+      "id": "s7",
+      "text": "Once they are thinking clearly, take them out, dry them and lie them in the shade. Watch them closely: if confusion comes back, cool them again.",
+      "detail": "After cooling, keep watching their alertness and breathing (Red Cross). Confusion that returns means heat stroke is back, and the cooling steps apply again (AHA 2024: cool until neurological symptoms resolve).\n\nIf they are unresponsive but breathing, or vomiting, lie them on their side (Recovery position protocol)."
+    },
+    {
+      "id": "s8",
+      "text": "Once fully alert and not vomiting, let them sip cool drinks: a sports drink or water. Evacuate, even if they recover.",
+      "warn": "No drinks if they are drowsy or confused, vomiting, or cannot swallow.",
+      "detail": "AHA 2024: give cool liquids to an overheated person who can swallow. WMS: people with heat stroke need IV fluids, so drinks are a stopgap.\n\nEvacuation: AHA 2024 says to get emergency help for anyone with heat stroke. WMS (field guideline) allows a healthy person with exertional heat stroke who is back to normal mental state and moving normally within 2 hours of treatment to be released to self-care, but says heat stroke that was not caused by exertion (for example an older or ill person in a heat wave) always needs transport to hospital.\n\nHeat stroke can damage muscles, kidneys, blood clotting and other organs even after the person seems better (AHA 2024).",
+      "end": true
+    },
+    {
+      "id": "s6",
+      "text": "No water to get them into: strip off clothing, soak all their skin with the coldest water you have and fan hard. Add ice or cold packs to cheeks, palms and soles if you have them.",
+      "detail": "When immersion is not possible (AHA 2024, Red Cross): ice packs, cold showers, ice-soaked sheets or towels, cooling vests, soaking the skin and fanning (evaporative cooling), or a combination. These are slower than immersion but much better than nothing.\n\nWMS ranks soaking and fanning as the next best method (about half as fast as immersion): loosen or remove clothing, douse them so all the skin is wet, and fan. If ice or cold packs are all you have, cover the whole body with them. If there are not enough, WMS puts them on the cheeks, palms and soles of the feet, which cooled about twice as fast as the neck, armpits and groin in a small study. NIOSH still lists the head, neck, armpits and groin.\n\nKeep re-wetting the skin and keep the air moving.\n\nHow long: Red Cross continues cooling for 20 minutes or until their condition improves. Keep going until they are thinking clearly again.",
+      "timer": {
+        "seconds": 1200,
+        "label": "Cool with water and fanning (20 min)"
+      },
+      "log": "Cooled by soaking and fanning",
+      "ask": {
+        "q": "Are they thinking clearly now?",
+        "yes": "s7",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Still confused: keep cooling without a break, and evacuate urgently. Look again for any water deep enough to put them in.",
+      "detail": "Keep soaking and fanning (and ice or cold packs) all the way, including while you move them. If you reach water deep enough, immerse them as in the cold-water step (15 minutes or until they are thinking clearly).\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they are unresponsive but breathing, or vomiting, lie them on their side (Recovery position protocol). If they stop breathing normally, start CPR.",
+      "end": true
+    },
+    {
+      "id": "s10",
+      "text": "Lie them down to rest in the shade with moving air. Wet their skin with cool water or cool wet cloths and fan them.",
+      "detail": "Heat exhaustion (Red Cross, WMS, NIOSH): heavy sweating; cool, moist skin that may be pale, grey or flushed; headache, nausea, dizziness, weakness, tiredness, thirst, irritability, little urine. Thinking is normal.\n\nHeat cramps (Red Cross, NIOSH): painful muscle spasms in the legs, arms or belly during or after hard work in the heat. Heat cramps can also be a sign of heat exhaustion (NIOSH).\n\nCooling (Red Cross, NIOSH): move to a cooler place with moving air, loosen or remove clothing, put cool wet cloths on them or spray them with cool water, and fan them. NIOSH puts cold compresses or cold water on the head, face and neck.\n\nFainting in the heat (heat syncope, NIOSH): sit or lie down in a cool place and slowly drink water or a sports drink once fully awake."
+    },
+    {
+      "id": "s11",
+      "text": "If they are fully alert, can swallow and are not vomiting, give a cool sports drink, milk or coconut water to sip, or water. Not too fast. No salt tablets.",
+      "warn": "No drinks if they vomit, become drowsy or confused, or cannot swallow: lie them on their side, keep cooling, and treat it as getting worse.",
+      "detail": "AHA 2024: help an overheated or dehydrated person drink if they are not in shock, not confused and able to swallow. A drink with carbohydrate and electrolytes, such as a sports drink, is preferred to plain water, but water is fine if that is all you have (AHA 2024, Red Cross). Red Cross also lists coconut water and milk. Do not let them drink too quickly (Red Cross).\n\nDrink to thirst (WMS). Forcing large amounts of water on a schedule can cause exercise-associated hyponatremia (low blood sodium), which can look like heat exhaustion (WMS). Suspect it if they have been drinking a lot and are getting worse.\n\nSalt tablets do not help and can make dehydration worse (Red Cross; NIOSH: avoid).\n\nHeat cramps: once they have drunk, lightly stretch the muscle and gently massage it (Red Cross). NIOSH: water plus a sports drink or snack every 15 to 20 minutes.\n\nStop drinks, lie them on their side (Recovery position protocol) and get help if they vomit, cannot take fluids, or their alertness changes (Red Cross).",
+      "log": "Oral fluids given"
+    },
+    {
+      "id": "s12",
+      "text": "Rest and cool them for 15 minutes, then check. Are they getting worse, or no better?",
+      "detail": "WMS: if mild heat illness does not improve within 15 minutes, transport them urgently; think of other causes too (such as low blood sodium, an infection, or a heart problem).\n\nRed Cross: call for emergency help for heat exhaustion with fainting, a fast heart rate, inability to walk or stand, nausea or vomiting, or signs of dehydration.",
+      "timer": {
+        "seconds": 900,
+        "label": "Rest and cool, then recheck (15 min)"
+      },
+      "ask": {
+        "q": "Are they getting worse, or no better?",
+        "yes": "s14",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s13",
+      "text": "Improving: keep them resting in the shade and drinking to thirst. No more hard work until several hours after all symptoms have gone.",
+      "detail": "Heat exhaustion: wait several hours after the symptoms stop before resuming activity (Red Cross).\n\nHeat cramps only: they may go back to activity once the cramps stop and there are no other symptoms, and should keep drinking (Red Cross). Get medical help if cramps last more than 1 hour, or for someone with heart problems or on a low-sodium diet (NIOSH).\n\nWatch them for the rest of the day. If confusion or other new symptoms appear, start this protocol again.",
+      "end": true
+    },
+    {
+      "id": "s14",
+      "text": "Not improving: keep cooling and evacuate urgently. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Lie them down, keep cooling, and watch for heat stroke, breathing problems or shock (Red Cross). If they cannot keep fluids down, stop drinks.",
+      "ask": {
+        "q": "Are they now confused, acting strangely or very drowsy?",
+        "yes": "s4",
+        "no": "s15"
+      }
+    },
+    {
+      "id": "s15",
+      "text": "Keep them lying down and cooling on the way out. If they vomit or become drowsy, lie them on their side. If they become confused, cool them as for heat stroke.",
+      "detail": "Use the Shock protocol if they show signs of shock (fast weak pulse, pale cool clammy skin). Watch breathing and alertness the whole time.",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant). If others are there, cool the person at the same time.",
+      "detail": "AHA 2025: start active cooling at the same time as resuscitation. Soak the skin and fan, or use cold packs, without interrupting compressions.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not wait to cool someone with heat stroke: cool first, fluids later.",
+    "Do not leave anyone alone in cooling water, or let their head go under.",
+    "Do not give drinks to anyone who is confused, drowsy, vomiting or unable to swallow.",
+    "Do not give salt tablets.",
+    "Do not push large amounts of plain water on a schedule; let them drink to thirst.",
+    "Do not let someone with heat exhaustion go back to hard work the same day."
+  ],
+  "evacuate": [
+    "Evacuate urgently: heat stroke (confusion, strange behaviour, seizure, collapse), even if they recover (AHA). WMS allows a healthy person with exertional heat stroke who is back to normal within 2 hours to stay; heat stroke not caused by exertion always goes to hospital.",
+    "Evacuate urgently: heat exhaustion that is not better after 15 minutes of rest and cooling, or is getting worse (WMS).",
+    "Evacuate urgently: fainting, inability to walk or stand, repeated vomiting, or unable to keep fluids down (Red Cross).",
+    "Get medical help: heat cramps lasting more than 1 hour, or cramps in someone with heart problems or on a low-sodium diet (NIOSH)."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 7.9 Heat stroke and exertional hyperthermia (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Heart Association, Part 10: Adult and Pediatric Special Circumstances of Resuscitation, section 16 Hyperthermia, 2025 AHA Guidelines for CPR and ECC",
+      "year": 2025,
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation"
+    },
+    {
+      "name": "Wilderness Medical Society, Heat Illness CPG: summary of the WMS Clinical Practice Guidelines for the Prevention and Treatment of Heat Illness, 2024 update (WMS magazine, read 2026-11-17)",
+      "year": 2024,
+      "url": "https://wms.imiscloud.com/magazine/1540/Heat-Illness-CPG/default.aspx"
+    },
+    {
+      "name": "American Red Cross, Heat Stroke (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/heat-stroke"
+    },
+    {
+      "name": "American Red Cross, Heat Exhaustion (lay first aid page, including heat cramps, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/heat-exhaustion"
+    },
+    {
+      "name": "US CDC / NIOSH, Heat-related Illnesses, last reviewed 3 Mar 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/niosh/heat-stress/about/illnesses.html"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

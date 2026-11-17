@@ -57,7 +57,7 @@
     {
       "id": "s5",
       "text": "Probably acute mountain sickness: headache plus tiredness, nausea, dizziness or poor appetite. Rest at this height and do not go higher.",
-      "detail": "Acute mountain sickness (AMS) (CDC, JTS): a headache plus at least one of loss of appetite, nausea or vomiting, tiredness or weakness, dizziness or light-headedness; it feels like a hangover. It usually develops and settles over 1 to 3 days (CDC).\n\nWithout signs of HACE or HAPE, a person with AMS can stay at the same height and rest (CDC); JTS: stop going up and rest at the current height for 1 to 2 days.\n\nPeople who carry altitude medicines prescribed for them should take them as their prescription says.\n\nCDC: avoid alcohol, especially for the first 48 hours at a new height, and do not use drugs that slow breathing, such as alcohol or opiates, to help sleep. Do not take sedating medicines to sleep unless they were prescribed for use at altitude.\n\nWatch them closely, including at night: untreated mountain sickness can progress to HACE (JTS). Early HAPE can look mild: someone much more breathless on exertion than the others, who cannot keep up or has a new cough, needs close watching; if they become short of breath at rest, treat it as HAPE (CDC, JTS)."
+      "detail": "Acute mountain sickness (AMS) (CDC, JTS): a headache plus at least one of loss of appetite, nausea or vomiting, tiredness or weakness, dizziness or light-headedness; it feels like a hangover. It usually develops and settles over 1 to 3 days (CDC).\n\nWithout signs of HACE or HAPE, a person with AMS can stay at the same height and rest (CDC); JTS: stop going up and rest at the current height for 1 to 2 days.\n\nPeople who carry altitude medicines prescribed for them should take them as their prescription says.\n\nCDC: avoid alcohol, especially for the first 48 hours at a new height, and do not use drugs that slow breathing, such as alcohol or opiates, to help sleep.\n\nGroup caution, not a CDC rule: CDC considers some short-acting prescription sleeping pills generally safe; do not take any sedating medicine to sleep unless a prescriber has said it is safe at altitude.\n\nWatch them closely, including at night: untreated mountain sickness can progress to HACE (JTS). Early HAPE can look mild: someone much more breathless on exertion than the others, who cannot keep up or has a new cough, needs close watching; if they become short of breath at rest, treat it as HAPE (CDC, JTS)."
     },
     {
       "id": "s6",
@@ -117,7 +117,7 @@
     "Do not leave someone with altitude sickness alone or send them down alone.",
     "Do not wait to see if HACE or HAPE gets better: go down.",
     "Do not let someone with HAPE carry a load or exert themselves.",
-    "Do not drink alcohol in the first 48 hours at a new height, and do not take sedating medicines to sleep unless they were prescribed for use at altitude."
+    "Do not drink alcohol in the first 48 hours at a new height. Group caution: do not take any sedating medicine to sleep unless a prescriber has said it is safe at altitude."
   ],
   "evacuate": [
     "Evacuate urgently, going down: confusion, drowsiness, odd behaviour or unsteadiness (possible HACE).",

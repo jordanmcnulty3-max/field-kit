@@ -67,7 +67,7 @@
       },
       "log": "Cooled in cold water",
       "ask": {
-        "q": "Are they thinking clearly now?",
+        "q": "After up to 15 minutes: are they thinking clearly now?",
         "yes": "s7",
         "no": "s5b"
       }
@@ -94,7 +94,7 @@
       },
       "log": "Cooled by soaking and fanning",
       "ask": {
-        "q": "Are they thinking clearly now?",
+        "q": "After up to 20 minutes: are they thinking clearly now?",
         "yes": "s7",
         "no": "s9"
       }

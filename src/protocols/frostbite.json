@@ -130,8 +130,8 @@
     },
     {
       "id": "s12",
-      "text": "Get them to medical care. Carry them if their feet were frostbitten. Keep the thawed parts covered, warm and protected.",
-      "detail": "Frostbite needs prompt medical care (AHA). Blisters, black skin and signs of hypothermia need emergency care (Red Cross).\n\nWatch for infection later: fever, feeling unwell, spreading discoloration, or fluid draining from the area (MedlinePlus).\n\nFrostbite counts as a tetanus-prone wound: see the tetanus step of the Wound cleaning and care protocol.",
+      "text": "Get them to medical care. Carry them if their feet were frostbitten, unless only the toe tips were affected (see detail). Keep thawed parts covered and warm.",
+      "detail": "Frostbite needs prompt medical care (AHA). Carrying: MedlinePlus says to move thawed parts as little as possible. The exception for frostbite of the toe tips only comes from one summary of the WMS 2019 guideline (Medical Dialogues 2019: avoid walking on a thawed foot unless only the tips of the toes are affected); the AAFP summary does not give it.\n\nBlisters, black skin and signs of hypothermia need emergency care (Red Cross).\n\nWatch for infection later: fever, feeling unwell, spreading discoloration, or fluid draining from the area (MedlinePlus).\n\nFrostbite counts as a tetanus-prone wound: see the tetanus step of the Wound cleaning and care protocol.",
       "end": true
     },
     {
@@ -142,7 +142,7 @@
     },
     {
       "id": "s8c",
-      "text": "Do not rewarm the feet before the walk out: pad and protect them, keep the rest of the body warm, and get to medical care. Rewarm once they can be carried or reach care.",
+      "text": "Do not rewarm the feet before the walk out: pad and protect them, keep the body warm, get to medical care. Frostbitten hands or face: rewarm them now (see detail).",
       "detail": "WMS 2019 (Medical Dialogues summary): avoid walking on a thawed foot unless only the tips of the toes are affected. AHA 2024 also says to avoid walking on frozen feet when possible, so walking out on them is a trade-off, not a safe choice; do it only when there is no other way out.\n\nKeep the feet dry, padded and protected from knocks and further cold. Do not let them thaw and refreeze on the way (AHA, Red Cross).\n\nIf the feet have already thawed on their own, keep them padded and protected and avoid walking on them wherever you can (Medical Dialogues summary of WMS 2019; MedlinePlus: move thawed parts as little as possible).\n\nFrostbitten hands or face can still be rewarmed in lukewarm water as this protocol describes, if they will not refreeze.\n\nOnce they reach a place where they can rest and be carried, or reach care, rewarm the feet as this protocol describes.",
       "end": true
     },

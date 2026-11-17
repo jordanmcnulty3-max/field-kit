@@ -2,7 +2,14 @@
   "id": "bleeding",
   "title": "Severe bleeding",
   "category": "life",
-  "keywords": ["tourniquet", "hemorrhage", "blood", "wound", "bleed"],
+  "draft": true,
+  "keywords": [
+    "tourniquet",
+    "hemorrhage",
+    "blood",
+    "wound",
+    "bleed"
+  ],
   "summary": "Stop the bleeding before anything else.",
   "steps": [
     {
@@ -16,7 +23,11 @@
     {
       "id": "s3",
       "text": "Is the wound on an arm or leg?",
-      "ask": { "q": "Is the wound on an arm or leg?", "yes": "s4", "no": "s6" }
+      "ask": {
+        "q": "Is the wound on an arm or leg?",
+        "yes": "s4",
+        "no": "s6"
+      }
     },
     {
       "id": "s4",
@@ -40,7 +51,9 @@
     }
   ],
   "sources": [
-    { "name": "Stop the Bleed (American College of Surgeons, Committee on Trauma)", "url": "https://www.stopthebleed.org" }
+    {
+      "name": "Stop the Bleed (American College of Surgeons)"
+    }
   ],
   "reviewed": "2026-11-16"
 }

@@ -7,12 +7,14 @@ output -- edit src/ instead. (Optional: python3 build.py some/dir writes there i
 import glob, html, json, os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else ROOT
+ARGS = [a for a in sys.argv[1:] if a != '--release']
+RELEASE = '--release' in sys.argv[1:]
+OUT = os.path.abspath(ARGS[0]) if ARGS else ROOT
 os.chdir(ROOT)
 sys.path.insert(0, 'figs')
 sys.path.insert(0, ROOT)
 import figs
-from tools.validate import validate
+from tools.validate import draft_ids, validate
 
 
 def read(p):
@@ -55,6 +57,8 @@ for path in sorted(glob.glob('src/protocols/*.json')):
 errors, warnings = validate(protocols, set(figs.F))
 for w in warnings:
     print('warning:', w)
+if RELEASE:
+    errors += [f'{pid}: draft protocol not allowed in a --release build' for pid in draft_ids(protocols)]
 if errors:
     sys.exit('Protocol validation failed:\n  ' + '\n  '.join(errors))
 protocols.sort(key=lambda p: p['id'])
@@ -66,7 +70,10 @@ fk_data = json.dumps({'protocols': protocols}, ensure_ascii=False, separators=('
 
 os.makedirs(OUT, exist_ok=True)
 with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
-    shell = shell.replace('<script>\n/*__SCRIPTS__*/', '<script>window.FK_DATA=' + fk_data + ';</script>\n<script>\n/*__SCRIPTS__*/', 1)
+    marker = '<script>\n/*__SCRIPTS__*/'
+    assert marker in shell, 'scripts marker missing from shell.html'
+    shell = shell.replace(marker, '<script>window.FK_DATA=' + fk_data + ';</script>\n' + marker, 1)
+    assert shell.count('window.FK_DATA=') == 1, 'FK_DATA script was not inserted'
     f.write(shell.replace('/*__SCRIPTS__*/', js))
 for f in ['manifest.json', 'sw.js']:
     shutil.copyfile('src/' + f, os.path.join(OUT, f))

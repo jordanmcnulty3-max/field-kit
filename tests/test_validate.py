@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from tools.validate import validate
+from tools.validate import draft_ids, validate
 
 
 def ok(**step_over):
@@ -127,6 +127,59 @@ class ValidateTests(unittest.TestCase):
         before = copy.deepcopy(p)
         validate([p], set())
         self.assertEqual(p, before)
+
+    def test_draft_is_warning_not_error(self):
+        p = ok()
+        p['draft'] = True
+        e, w = validate([p], set())
+        self.assertEqual(e, [])
+        self.assertEqual(w, ['p1: draft, not source-checked'])
+
+    def test_draft_ids(self):
+        d = ok()
+        d['draft'] = True
+        other = ok()
+        other['id'] = 'p2'
+        self.assertEqual(draft_ids([d, other, None, 'x']), ['p1'])
+
+
+class MalformedInputTests(unittest.TestCase):
+    def check(self, protocols, needle):
+        e, _ = validate(protocols, set())
+        self.assertTrue(any(needle in x for x in e), e)
+
+    def test_protocol_is_string(self):
+        self.check(['oops'], 'protocol #0')
+
+    def test_protocol_is_none(self):
+        self.check([None], 'protocol #0')
+
+    def test_steps_is_dict(self):
+        p = ok()
+        p['steps'] = {'s1': {}}
+        self.check([p], 'steps must be')
+
+    def test_step_is_none(self):
+        p = ok()
+        p['steps'][1] = None
+        self.check([p], 'step #1')
+
+    def test_protocol_id_is_list(self):
+        p = ok()
+        p['id'] = ['a']
+        self.check([p], 'id')
+
+    def test_step_id_is_list(self):
+        p = ok()
+        p['steps'][0]['id'] = ['a']
+        self.check([p], 'step #0')
+
+    def test_unhashable_fields_do_not_raise(self):
+        p = ok(fig=['x'], tool={'a': 1}, ask={'q': 'q', 'yes': ['s2'], 'no': {}})
+        self.check([p], 'fig')
+
+    def test_protocols_not_a_list(self):
+        self.assertEqual(validate({'a': 1}, set())[0], ['protocols must be a list'])
 
 
 if __name__ == '__main__':

@@ -136,7 +136,7 @@
     const ks = LISTS.filter(([k]) => hasList(p, k));
     if (!ks.length) return '';
     return '<div class="pp-lists" id="ppLists">' + ks.map(([k, label]) =>
-      '<button type="button" class="pp-listbtn" data-act="list" data-list="' + k + '" aria-expanded="' + !!cur.open[k] + '" aria-controls="ppList-' + k + '">' + esc(label) +
+      '<button type="button" class="pp-listbtn" data-act="list" data-list="' + k + '" aria-expanded="' + !!cur.open[k] + '" aria-controls="ppList-' + k + '">' + esc(label) + ' (' + listItems(p, k).length + ')' +
       ' <span aria-hidden="true">' + marker(cur.open[k]) + '</span></button>').join('') + '</div>';
   }
   function listPanels(p) {
@@ -243,7 +243,6 @@
     if (cur && cur.p.id !== p.id) stopTimer();
     const mode = needsAck(p) ? 'ack' : sub === 'all' ? 'all' : (sub || !hasIntro(p)) ? 'step' : 'intro';
     cur = { p, mode, i: mode === 'step' ? (sub ? stepIndex(p, sub) : 0) : -1, open: { donts: false, evacuate: false } };
-    if (cur.i === 0 && hasList(p, 'donts')) cur.open.donts = true;   // the first step shows the Do not list; later steps keep it one tap away
     stamp(mode === 'step' ? cur.i : mode);
     isOpen = true;
     root.hidden = false;

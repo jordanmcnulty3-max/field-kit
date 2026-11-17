@@ -571,7 +571,7 @@ svg('back-blows', 250, 'Back blows: the person bent forward at the waist so the 
 <path d="M168 80 L134 122 L106 120" class="m t3 d"/>
 {arrow(118,50,122,92,'h','aH')}
 {lbl(10,22,'Heel of your other hand,','tb')}{lbl(10,36,'between the shoulder','tb')}{lbl(10,50,'blades','tb')}
-{lbl(330,100,'Stand to the','tb','end')}{lbl(330,114,'side and slightly','tb','end')}{lbl(330,128,'behind','tb','end')}{lead(268,122,174,112)}
+{lbl(330,100,'Stand to the','tb','end')}{lbl(330,114,'side and slightly','tb','end')}{lbl(330,128,'behind','tb','end')}{lead(268,104,171,68)}
 {lbl(10,216,'One arm across the chest. Bend them','')}{lbl(10,230,'forward at the waist, upper body about','')}{lbl(10,244,'level with the ground','')}''')
 
 svg('abdominal-thrusts', 210, 'Abdominal thrusts: stand behind the person with your arms around their waist, one fist just above the belly button with the thumb side against the belly and your other hand over it, pulling sharply in and up', f'''
@@ -586,7 +586,7 @@ svg('abdominal-thrusts', 210, 'Abdominal thrusts: stand behind the person with y
 <circle cx="148" cy="126" r="3" class="kf"/>
 {arrow(88,162,126,134,'h','aH')}
 {lbl(10,22,'Stand behind them,','tb')}{lbl(10,36,'arms around the waist','tb')}
-{lbl(10,62,'Fist just above','tb')}{lbl(10,76,'the belly button,','tb')}{lbl(10,90,'other hand over it','tb')}{lead(100,84,128,100)}
+{lbl(10,62,'Fist just above','tb')}{lbl(10,76,'the belly button,','tb')}{lbl(10,90,'other hand over it','tb')}{lead(116,90,132,100)}
 {lbl(10,158,'Pull sharply','tb')}{lbl(10,172,'in and up','tb')}
 {lbl(10,126,'Belly button','')}{lead(74,122,144,126)}''')
 

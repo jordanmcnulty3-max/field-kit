@@ -462,7 +462,10 @@ def test_bad_deep_link_repaired_at_boot_is_a_deep_link_entry(page, app_url):
 def test_every_fig_step_renders_an_svg(page, app_url):
     page.goto(app_url)
     pairs = page.evaluate("FK_DATA.protocols.flatMap(p => p.steps.filter(s => s.fig).map(s => [p.id, s.id, s.fig]))")
-    assert len(pairs) >= 8, pairs
+    assert sorted(map(tuple, pairs)) == sorted([
+        ('bleeding', 's5', 'tq-placement'), ('bleeding', 's11', 'pressure-dressing'), ('choking', 's6', 'back-blows'),
+        ('choking', 's7', 'abdominal-thrusts'), ('cpr-infant', 's4', 'cpr-infant'), ('cpr-adult', 's4', 'cpr-hands-adult'),
+        ('tick', 's4', 'tick'), ('fracture', 's11', 'splint-forearm')]), pairs
     for pid, sid, fig in pairs:
         page.evaluate(f"location.hash = '#/emergency/{pid}/{sid}'")
         svg = page.locator('#player .pp-fig svg')
@@ -531,23 +534,30 @@ def test_shipped_protocols_have_no_draft_flag(page, app_url):
     assert page.evaluate("FK_DATA.protocols.filter(p => p.draft === true).map(p => p.id)") == []
 
 
-def test_first_step_shows_donts_expanded_directly_below_the_row_and_later_steps_collapsed(page, app_url):
+def test_lists_are_collapsed_by_default_on_every_step_and_buttons_show_item_counts(page, app_url):
     inject_listy(page)
     page.goto(app_url + '#/emergency/listy')
+    assert page.locator('#player .pp-list').count() == 0
+    assert page.inner_text('#ppLists [data-list="donts"]').replace('\n', ' ').startswith('Do not (2)')
+    assert page.inner_text('#ppLists [data-list="evacuate"]').startswith('Evacuate when (2)')
+    assert page.get_attribute('#ppLists [data-list="donts"]', 'aria-expanded') == 'false'
+    page.click('#ppLists [data-list="donts"]')   # opens directly below the row, before the detail
     panel = page.locator('#player .pp-list[data-list="donts"]')
-    assert panel.is_visible() and 'Do not wait' in panel.inner_text()
-    row, det = page.locator('#ppLists').bounding_box(), page.locator('#player .pp-detail').bounding_box()
-    pb = panel.bounding_box()
-    assert row['y'] + row['height'] <= pb['y'] + 1 and pb['y'] + pb['height'] <= det['y'] + 1   # row, then the list, then the detail
-    assert page.get_attribute('#ppLists [data-list="donts"]', 'aria-expanded') == 'true'
-    assert page.locator('#player .pp-list[data-list="evacuate"]').count() == 0
+    row, det, pb = page.locator('#ppLists').bounding_box(), page.locator('#player .pp-detail').bounding_box(), panel.bounding_box()
+    assert 'Do not wait' in panel.inner_text()
+    assert row['y'] + row['height'] <= pb['y'] + 1 and pb['y'] + pb['height'] <= det['y'] + 1
     page.click('#player [data-act="next"]')
     assert page.locator('#player .pp-list').count() == 0
-    assert 'Do not wait' not in page.locator('#player').inner_text()
-    assert page.get_attribute('#ppLists [data-list="donts"]', 'aria-expanded') == 'false'
-    page.click('#player [data-act="back"]')   # back on the first step the default is expanded again
+    page.click('#player [data-act="back"]')   # leaving and returning does not leave it open
     assert action(page) == 'First action'
-    assert page.locator('#player .pp-list[data-list="donts"]').is_visible()
+    assert page.locator('#player .pp-list').count() == 0
+
+
+def test_shipped_bleeding_buttons_show_counts(page, app_url):
+    page.goto(app_url + '#/emergency/bleeding')
+    n = page.evaluate("[FK_DATA.protocols.find(p => p.id === 'bleeding').donts.length, FK_DATA.protocols.find(p => p.id === 'bleeding').evacuate.length]")
+    assert page.inner_text('#ppLists [data-list="donts"]').startswith(f'Do not ({n[0]})')
+    assert page.inner_text('#ppLists [data-list="evacuate"]').startswith(f'Evacuate when ({n[1]})')
 
 
 def test_step_body_order_action_warn_figure_list_row_detail(page, app_url):
@@ -564,11 +574,16 @@ def test_action_is_the_first_content_and_nothing_above_it_is_taller_than_the_pro
         page.goto(app_url + path)
         assert top(page, '#player .pp-action') < top(page, '#ppLists'), path
         assert page.evaluate("document.querySelector('#ppBody').firstElementChild.id") == 'ppAction'
-        limit = page.eval_on_selector('#player .pp-prog', 'e => e.getBoundingClientRect().height')
-        heights = page.evaluate("""[...document.querySelectorAll('#player > *')].filter(e => e.id !== 'ppBody' && e.getBoundingClientRect().top < document.querySelector('#ppAction').getBoundingClientRect().top
-          && !e.classList.contains('pp-head')).map(e => e.getBoundingClientRect().height)""")
-        assert all(h <= limit + 0.5 for h in heights), (path, heights, limit)
-        assert page.locator('#ppLists [aria-expanded]').first.evaluate("e => getComputedStyle(e).backgroundColor") != page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ink')")
+        heights = page.evaluate("""[...document.querySelectorAll('#player > *')].filter(e => e.id !== 'ppBody' && !e.classList.contains('pp-head') && !e.classList.contains('pp-prog')
+          && e.getBoundingClientRect().top < document.querySelector('#ppAction').getBoundingClientRect().top).map(e => e.getBoundingClientRect().height)""")
+        assert all(h <= 16 for h in heights), (path, heights)   # besides the header and progress bar, nothing above the action is taller than 16px
+        assert page.eval_on_selector('#player .pp-prog', 'e => e.getBoundingClientRect().height') <= 40
+        bad = page.evaluate("""(() => {
+          const probe = document.createElement('i'); probe.style.color = 'var(--ink)'; document.body.appendChild(probe);
+          const ink = getComputedStyle(probe).color; probe.remove();
+          return [...document.querySelectorAll('#ppLists button')].filter(b => getComputedStyle(b).backgroundColor === ink).length;
+        })()""")
+        assert bad == 0, path   # no list control has a solid ink background
 
 
 def test_donts_and_evacuate_open_and_close_from_any_step_without_history_or_step_change(page, app_url):
@@ -607,6 +622,7 @@ def test_donts_and_evacuate_open_and_close_from_any_step_without_history_or_step
 def test_list_content_is_escaped_and_close_button_inside_panel_is_big(page, app_url):
     inject_listy(page)
     page.goto(app_url + '#/emergency/listy')
+    page.click('#ppLists [data-list="donts"]')
     assert page.locator('#player .pp-list b').count() == 0
     assert 'Do not <b>press</b> here' in page.locator('#player .pp-list').inner_text()
     page.click('#ppLists [data-list="evacuate"]')
@@ -625,9 +641,11 @@ def test_no_list_controls_when_the_protocol_has_no_lists(page, app_url):
     assert page.locator('#player .pp-list').count() == 0
 
 
-def test_user_can_collapse_the_first_step_list(page, app_url):
+def test_user_can_open_and_collapse_the_first_step_list(page, app_url):
     inject_listy(page)
     page.goto(app_url + '#/emergency/listy')
+    page.click('#ppLists [data-list="donts"]')
+    assert page.locator('#player .pp-list').count() == 1
     page.click('#ppLists [data-list="donts"]')
     assert page.locator('#player .pp-list').count() == 0
     assert action(page) == 'First action'

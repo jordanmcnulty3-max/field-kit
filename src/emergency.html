@@ -1,0 +1,38 @@
+<!-- ============ EMERGENCY ============ -->
+<section class="tab" id="tab-emergency" hidden>
+  <div id="emHome">
+    <div id="emResume"></div>
+    <div class="em-life" id="emLife"></div>
+    <div class="em-chooser" id="emChooser" role="group" aria-label="Who is not breathing?" hidden></div>
+    <div id="emPinned"></div>
+    <div id="emRecent"></div>
+    <div id="emCats">
+      <div id="emCatsDyn"></div>
+      <details class="ref" data-cat="tools">
+        <summary data-cat="tools">Tools</summary>
+        <div class="body">
+          <h3>Tourniquet timers</h3>
+          <div class="row" style="margin-top:0">
+            <select id="tqLimb" aria-label="Limb">
+              <option>Left arm</option><option>Right arm</option><option>Left leg</option><option>Right leg</option><option>Other</option>
+            </select>
+            <button class="btn" id="tqStart">Start timer</button>
+          </div>
+          <div id="tqList"></div>
+          <p class="hint" style="margin-top:8px">Timers keep running if you close the app. Tell responders the time each tourniquet went on, and write it on the tourniquet or casualty if you can.</p>
+          <h3>CPR metronome</h3>
+          <div class="cpr">
+            <div class="beat" id="beat" aria-live="off">0</div>
+            <button class="btn" id="cprBtn">Start metronome</button>
+          </div>
+          <p class="hint" style="margin-top:8px">Clicks at 110 per minute and counts to 30. Turn your volume up.</p>
+        </div>
+      </details>
+      <details class="ref" data-cat="reports">
+        <summary data-cat="reports">Reports (MEDEVAC, MIST)</summary>
+        <div class="body" id="emReports"><p class="hint">No reports yet.</p></div>
+      </details>
+    </div>
+    <p class="foot">Reference only, not a substitute for training. Take a Stop the Bleed, CPR and wilderness first aid course.</p>
+  </div>
+</section>

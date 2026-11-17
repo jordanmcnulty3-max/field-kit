@@ -3,7 +3,7 @@
 Any console error or uncaught page error fails the test at teardown. Requests to non-localhost
 hosts (map tiles) are aborted, and the console noise those aborts cause is ignored.
 """
-import functools, http.server, os, subprocess, sys, threading
+import functools, http.server, json, os, subprocess, sys, threading
 from urllib.parse import urlparse
 
 import pytest
@@ -61,3 +61,23 @@ def page(browser):
     yield pg
     ctx.close()
     assert errors == [], 'browser errors:\n' + '\n'.join(errors)
+
+
+def inject_protocols(page, fixtures):
+    """FK_DATA is assigned by an inline script after init scripts run, so trap the assignment and
+    add the fixtures to its protocols. A fixture with the same id as a real protocol replaces it."""
+    page.add_init_script(f"""
+      (() => {{
+        const extra = {json.dumps(fixtures)};
+        let val;
+        Object.defineProperty(window, 'FK_DATA', {{
+          configurable: true,
+          get() {{ return val; }},
+          set(v) {{
+            const ids = new Set(extra.map(p => p.id));
+            v.protocols = v.protocols.filter(p => !ids.has(p.id)).concat(extra);
+            val = v;
+          }}
+        }});
+      }})();
+    """)

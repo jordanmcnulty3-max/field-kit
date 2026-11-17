@@ -177,9 +177,6 @@ details.ref .body{padding:0 0 16px}
 ol.steps{margin:0;padding-left:24px}
 ol.steps li{margin:0 0 8px;padding-left:4px}
 ol.steps li::marker{font-weight:700;color:var(--c)}
-dl.march{margin:0;display:grid;grid-template-columns:40px 1fr;gap:8px 8px}
-dl.march dt{font-size:28px;font-weight:700;line-height:1;color:var(--c)}
-dl.march dd{margin:0}
 .timer{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 12px;padding:12px 0;border-top:1px solid var(--line)}
 .timer b{font-size:32px;font-weight:700;line-height:1.1}
 .timer .lbl{font-size:14px;color:var(--muted)}
@@ -192,6 +189,26 @@ dl.march dd{margin:0}
 .signals b{display:block;font-size:48px;line-height:1.1;color:var(--ink)}
 .next{columns:2;gap:16px;padding-left:20px;margin:8px 0;color:var(--muted)}
 .foot{margin-top:24px;font-size:13px;color:var(--muted)}
+
+/* Emergency home: only the three life-threat buttons use the danger colour */
+#emHome{--c:var(--ink)}
+.em-life{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin:0 0 16px}
+.em-life button{min-height:96px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  border:2px solid var(--blaze);border-radius:8px;background:var(--blaze);color:var(--on-accent);cursor:pointer;
+  font-size:15px;font-weight:700;line-height:1.2;text-transform:uppercase;letter-spacing:.02em;overflow-wrap:anywhere}
+.em-chooser{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin:-8px 0 16px}
+.em-btn,.em-resume{min-height:56px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;
+  border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer;font-size:16px;font-weight:600;line-height:1.25}
+.em-resume{width:100%;margin:0 0 16px;border:2px solid var(--ink);font-size:17px}
+.em-draft{font-size:12px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0}
+.em-life .em-draft{color:inherit}
+.em-h{margin:0 0 8px}
+.em-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#emPinned,#emRecent{margin:0 0 16px}
+#emPinned:empty,#emRecent:empty{display:none}
+#emHome .beat{border-color:var(--ink)}
+#emHome .beat.on{background:var(--ink);color:var(--paper)}
+#emHome h3{margin-top:12px}
 
 .update{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;gap:12px;align-items:center;justify-content:space-between;
   background:var(--ink);color:var(--paper);padding:10px 12px 10px 16px;border-radius:8px;font-size:15px}
@@ -502,69 +519,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 </section>
 
 <!-- ============ EMERGENCY ============ -->
-<section class="tab" id="tab-emergency" hidden>
-
-  <details class="ref" open>
-    <summary>Life-threatening bleeding</summary>
-    <div class="body">
-      <ol class="steps">
-        <li>Call 911, or have someone call.</li>
-        <li>Find where the blood is coming from. Open or cut away clothing to see the wound.</li>
-        <li>Arm or leg: put a tourniquet 2–3 inches above the wound, not on a joint. Tighten until the bleeding stops, then start a timer below.</li>
-        <li>Neck, shoulder or groin: pack the wound tightly with gauze or clean cloth, then press hard with both hands.</li>
-        <li>No tourniquet or gauze: press firmly and steadily on the wound with both hands and don’t let up.</li>
-        <li>If bleeding continues, add a second tourniquet above the first. Don’t loosen or remove a tourniquet; leave that to medical staff.</li>
-      </ol>
-    </div>
-  </details>
-
-  <details class="ref" open>
-    <summary>Tourniquet timers</summary>
-    <div class="body">
-      <div class="row" style="margin-top:0">
-        <select id="tqLimb" aria-label="Limb">
-          <option>Left arm</option><option>Right arm</option><option>Left leg</option><option>Right leg</option><option>Other</option>
-        </select>
-        <button class="btn" id="tqStart">Start timer</button>
-      </div>
-      <div id="tqList"></div>
-      <p class="hint" style="margin-top:8px">Timers keep running if you close the app. Tell responders the time each tourniquet went on, and write it on the tourniquet or casualty if you can.</p>
-    </div>
-  </details>
-
-  <details class="ref">
-    <summary>CPR, adult</summary>
-    <div class="body">
-      <ol class="steps">
-        <li>Tap and shout. If they don’t respond and aren’t breathing normally, call 911 and send someone for an AED.</li>
-        <li>Push hard and fast in the centre of the chest: at least 2 inches deep, 100–120 times a minute. Let the chest fully rise between pushes.</li>
-        <li>If you’re trained, give 30 compressions, then 2 breaths. If not, keep doing compressions only.</li>
-        <li>Turn on the AED as soon as it arrives and follow its voice prompts.</li>
-        <li>Keep going until help takes over or the person starts breathing.</li>
-      </ol>
-      <div class="cpr">
-        <div class="beat" id="beat" aria-live="off">0</div>
-        <button class="btn" id="cprBtn">Start metronome</button>
-      </div>
-      <p class="hint" style="margin-top:8px">Clicks at 110 per minute and counts to 30. Turn your volume up.</p>
-    </div>
-  </details>
-
-  <details class="ref">
-    <summary>Trauma priorities (MARCH)</summary>
-    <div class="body">
-      <dl class="march">
-        <dt>M</dt><dd>Massive bleeding. Stop it first, before anything else.</dd>
-        <dt>A</dt><dd>Airway. Open it. Roll an unresponsive, breathing casualty onto their side.</dd>
-        <dt>R</dt><dd>Respiration. Seal open chest wounds with a vented chest seal. Watch for breathing that gets worse.</dd>
-        <dt>C</dt><dd>Circulation. Check for other bleeding and signs of shock: pale, cold, clammy skin and a fast pulse.</dd>
-        <dt>H</dt><dd>Hypothermia and head injury. Insulate the casualty from the ground and keep them warm, even in warm weather.</dd>
-      </dl>
-    </div>
-  </details>
-
-  <p class="foot">Reference only, not a substitute for training. Take a Stop the Bleed, CPR and wilderness first aid course.</p>
-</section>
+<section class="tab" id="tab-emergency" hidden></section>
 <section id="player" hidden role="region" aria-label="Protocol player"></section>
 </main>
 

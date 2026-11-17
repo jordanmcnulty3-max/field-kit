@@ -97,7 +97,7 @@
 
   function head(p) {
     const pins = FK.pins;
-    const pinned = !!(pins && pins.has && pins.has(p.id));
+    const pinned = !!(pins && pins.has && pins.has('p:' + p.id));
     return '<header class="pp-head"><div class="pp-row">' +
       '<button class="pp-btn" data-act="home" aria-label="Close protocol and go back to Emergency">‹</button>' +
       '<h2 class="pp-title" id="ppTitle" tabindex="-1">' + esc(p.title) + '</h2>' +
@@ -298,7 +298,7 @@
       case 'open': FK.route.go(stepPath(p, +b.dataset.i)); break;
       case 'tool': if (FK.tools && FK.tools.start) FK.tools.start(p.steps[i].tool, { protocol: p.id }); break;
       case 'timer': startTimer(p.steps[i].timer); root.querySelector('#ppTimerBar').focus({ preventScroll: true }); break;
-      case 'pin': if (FK.pins && FK.pins.toggle) { FK.pins.toggle(p.id); const on = !!(FK.pins.has && FK.pins.has(p.id)); b.setAttribute('aria-pressed', String(on)); b.textContent = on ? '★' : '☆'; } break;
+      case 'pin': if (FK.pins && FK.pins.toggle) { FK.pins.toggle('p:' + p.id); const on = !!(FK.pins.has && FK.pins.has('p:' + p.id)); b.setAttribute('aria-pressed', String(on)); b.textContent = on ? '★' : '☆'; } break;
     }
   });
 

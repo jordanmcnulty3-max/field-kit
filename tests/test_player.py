@@ -1,5 +1,7 @@
 import json
 
+from .conftest import inject_protocols
+
 LONG = ('word ' * 600).strip()  # 2999 chars
 
 FIXTURES = [
@@ -31,19 +33,7 @@ FIXTURES = [
 
 
 def inject(page):
-    """FK_DATA is assigned by an inline script after init scripts run, so trap the assignment
-    and append fixtures to its protocols."""
-    page.add_init_script(f"""
-      (() => {{
-        const extra = {json.dumps(FIXTURES)};
-        let val;
-        Object.defineProperty(window, 'FK_DATA', {{
-          configurable: true,
-          get() {{ return val; }},
-          set(v) {{ val = v; v.protocols.push(...extra); }}
-        }});
-      }})();
-    """)
+    inject_protocols(page, FIXTURES)
 
 
 def action(page):

@@ -29,6 +29,7 @@ if app_v != sw_v:
 
 shell = read('src/shell.html')
 surv = read('src/survival.html').strip()
+emerg = read('src/emergency.html').strip()
 
 
 def fig(m):
@@ -43,9 +44,12 @@ assert '{{fig' not in surv
 a = shell.index('<section class="tab" id="tab-survival" hidden>')
 b = shell.index('</section>', a) + len('</section>')
 shell = shell[:a] + surv + shell[b:]
+a = shell.index('<section class="tab" id="tab-emergency" hidden>')
+b = shell.index('</section>', a) + len('</section>')
+shell = shell[:a] + emerg + shell[b:]
 shell = shell.replace('</style>', read('figs/figs.css') + '\n</style>', 1)
 shell = shell.replace('<body>\n', '<body>\n' + read('figs/markers.html'), 1)
-js = '\n'.join(read('src/' + f) for f in ['geo.js', 'ballistics.js', 'app.js', 'router.js', 'protocol.js', 'map.js', 'survival.js'])
+js = '\n'.join(read('src/' + f) for f in ['geo.js', 'ballistics.js', 'app.js', 'router.js', 'emergency.js', 'protocol.js', 'map.js', 'survival.js'])
 
 # Protocols: validate every src/protocols/*.json, then inline as window.FK_DATA (sorted by id).
 protocols = []

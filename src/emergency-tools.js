@@ -13,19 +13,22 @@
   /* ---------- Registry. A tool is { label, render(el, opts), stop() }; Task 6 adds rate and burn through register(). ---------- */
   const tools = Object.create(null);
   let openName = null, pushed = false;
+  const cpr = { mode: 'adult', compressionOnly: false, running: false, t0: 0, next: 0, iv: null, lastBeat: 0, lastPhase: 'compress', swapAck: 0, swapsSeen: 0, armed: 0, from: null };
 
-  /* ---------- Screen wake lock (own lock; silent where unsupported) ---------- */
-  let lock = null, lockPending = false;
+  /* ---------- Screen wake lock (own lock; held while a tool is open or the CPR coach runs) ---------- */
+  let lock = null, lockPending = false, wakeFailed = false;
+  const wakeWanted = () => !!openName || cpr.running;
   async function wakeOn() {
-    if (lock || lockPending || !openName || document.hidden || !navigator.wakeLock) return;
+    if (lock || lockPending || !wakeWanted() || document.hidden) return;
+    if (!navigator.wakeLock) { wakeFailed = true; return; }
     lockPending = true;
     try {
       const l = await navigator.wakeLock.request('screen');
-      if (!openName) { l.release().catch(() => {}); return; }
-      lock = l;
+      if (!wakeWanted()) { l.release().catch(() => {}); return; }
+      lock = l; wakeFailed = false;
       l.addEventListener('release', () => { if (lock === l) lock = null; });
-    } catch { /* denied or unsupported: the screen just times out as usual */ }
-    finally { lockPending = false; }
+    } catch { wakeFailed = true; /* denied: the coach tells the user */ }
+    finally { lockPending = false; cprPaint(); }
   }
   function wakeOff() { if (lock) { const l = lock; lock = null; l.release().catch(() => {}); } }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) wakeOn(); sync(); });
@@ -52,7 +55,7 @@
     const t = tools[openName];
     openName = null; pushed = false;
     try { t.stop(); } finally {
-      wakeOff();
+      if (!cpr.running) wakeOff();
       pane.hidden = true; body.innerHTML = '';
       document.body.classList.remove('tooling');
       sync();
@@ -66,6 +69,7 @@
     const inTool = r.tab === SECTION && r.parts[0] === 'tool';
     if (!inTool) pushed = true;
     FK.route.go('/' + SECTION + '/tool/' + name, inTool ? { replace: true } : undefined);
+    delete toolOpts[name];   // the route handler took them if it ran; if the address was unchanged they must not linger
     return true;
   }
   /* Close button: step back to wherever the tool was opened from. A tool reached by a typed or reloaded address has nothing to go back to. */
@@ -113,7 +117,8 @@
   /* ================= Tourniquet timers ================= */
   const LIMBS = ['Left arm', 'Right arm', 'Left leg', 'Right leg', 'Other'];
   let tqs = FK.list('tq', t => FK.okId(t.id) && FK.fin(t.start)).map(t => ({ ...t, limb: String(t.limb ?? 'Tourniquet') }));
-  let tqSeq = 0, tqInt = null, confirmId = null, confirmT = null;
+  let tqSeq = 0, tqInt = null, confirmId = null, confirmT = null, confirmAt = 0, lastStart = { limb: '', at: 0 };
+  const CONFIRM_IGNORE_MS = 700, CONFIRM_REVERT_MS = 5000;   // a bounced second tap must not delete or stop anything
   const hms = ms => {
     const s = Math.max(0, Math.floor(ms / 1000));
     return Math.floor(s / 3600) + ':' + String(Math.floor(s / 60) % 60).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
@@ -136,8 +141,9 @@
   }
   function paintStrip() {
     if (!strip) return;
-    strip.innerHTML = tqs.map(t => '<button type="button" class="em-btn em-active" data-tool="tq" aria-label="Open tourniquet timer: ' +
-      esc(t.limb) + '"><span>TQ ' + esc(t.limb.toLowerCase()) + '</span><b data-t="' + t.start + '">' + hms(Date.now() - t.start) + '</b></button>').join('');
+    const row = (label, time) => '<button type="button" class="em-btn em-active" data-tool="' + time.tool + '"><span>' + label + '</span>' + time.html + '</button>';
+    strip.innerHTML = tqs.map(t => row('TQ ' + esc(t.limb.toLowerCase()), { tool: 'tq', html: '<b data-t="' + t.start + '">' + hms(Date.now() - t.start) + '</b>' })).join('') +
+      (cpr.running ? row('CPR running, cycle ' + cprCycle(), { tool: 'cpr', html: '' }) : '');
   }
   /* Per-second update touches only the time text, so a focused button or open select is never rebuilt. */
   function tickTq() {
@@ -150,21 +156,22 @@
     if (!want && tqInt) { clearInterval(tqInt); tqInt = null; }
   }
   function setConfirm(id) {
-    confirmId = id; clearTimeout(confirmT);
-    if (id) confirmT = setTimeout(() => { confirmId = null; paintTq(); }, 6000);
+    confirmId = id; confirmAt = Date.now(); clearTimeout(confirmT);
+    if (id) confirmT = setTimeout(() => { confirmId = null; paintTq(); }, CONFIRM_REVERT_MS);
   }
 
   tools.tq = {
     label: 'Tourniquet timers',
     render(el, opts) {
-      const pick = LIMBS.includes(opts.limb) ? opts.limb : LIMBS[0];
-      el.innerHTML = '<div class="row" style="margin-top:0"><select id="tqLimb" aria-label="Limb">' +
-        LIMBS.map(l => '<option' + (l === pick ? ' selected' : '') + '>' + l + '</option>').join('') + '</select>' +
-        '<button type="button" class="btn" id="tqStart">Start timer</button></div><div id="tqList"></div>' +
+      el.innerHTML = '<p class="tq-ask">Which limb? Tap one to start its timer.</p><div class="em-grid">' +
+        LIMBS.map(l => '<button type="button" class="btn pp-wide" data-limb="' + l + '">' + l + '</button>').join('') + '</div><div id="tqList"></div>' +
         '<p class="hint" style="margin-top:8px">Timers keep running if you close the app. Tell responders the time each tourniquet went on, and write it on the tourniquet or casualty if you can.</p>';
-      el.querySelector('#tqStart').addEventListener('click', () => {
-        const limb = el.querySelector('#tqLimb').value;
-        tqs.push({ id: Date.now().toString(36) + (tqSeq++ % 36).toString(36), limb, start: Date.now() });
+      el.querySelector('.em-grid').addEventListener('click', e => {
+        const b = e.target.closest('[data-limb]'); if (!b) return;
+        const limb = b.dataset.limb, now = Date.now();
+        if (limb === lastStart.limb && now - lastStart.at < CONFIRM_IGNORE_MS) return;   // double tap: one timer
+        lastStart = { limb, at: now };
+        tqs.push({ id: now.toString(36) + (tqSeq++ % 36).toString(36), limb, start: now });
         saveTq(); paintTq(); sync();
         if (typeof FK.log === 'function') FK.log('Tourniquet applied: ' + limb);
       });
@@ -172,6 +179,7 @@
         const b = e.target.closest('button[data-act]'); if (!b) return;
         const id = b.closest('.timer').dataset.id;
         if (b.dataset.act === 'clear') { setConfirm(id); paintTq(); return; }
+        if (Date.now() - confirmAt < CONFIRM_IGNORE_MS) return;
         tqs = tqs.filter(x => x.id !== id); setConfirm(null);
         saveTq(); paintTq(); sync();
       });
@@ -208,42 +216,111 @@
     const c = p && p.coach;
     return c && posInt(c.compressions) && posInt(c.breaths) ? { compressions: c.compressions, breaths: c.breaths } : { ...CPR_DEFAULT };
   }
-  let cpr = null;   // live state of the open coach, or null
-  let ac = null;
-  function beep(high) {
+  /* The coach is session state, like the tourniquet timers: it keeps running (sound, count, cycles, swap timing)
+     when its overlay closes, and only an explicit, confirmed Stop ends it. */
+  const CPR_LOOKAHEAD_MS = 1500, CPR_LATE_MS = 200;
+  let ac = null, cprView = null, armT = null, stripCycle = 0;
+  function cprCfg() { return { ...cprRatio(cpr.mode), compressionOnly: cpr.compressionOnly }; }
+  const cprCycle = () => cprState(performance.now() - cpr.t0, cprCfg()).cycle;
+  /* Time in ms since the start at which beat number b (0-based) sounds. */
+  function beatMs(b, cfg) {
+    const iv = 60000 / CPR_RATE, work = cfg.compressions * iv, period = cfg.compressionOnly ? work : work + CPR_HOLD_MS;
+    return Math.floor(b / cfg.compressions) * period + (b % cfg.compressions) * iv;
+  }
+  /* Queue one click on the audio clock, offsetMs from now. Late by more than a moment: drop it rather than bunch it. */
+  function click(offsetMs, high) {
     try {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return;
-      ac = ac || new AC();
-      if (ac.state === 'suspended' && ac.resume) ac.resume().catch(() => {});
+      if (!ac || offsetMs < -CPR_LATE_MS) return;
+      const when = ac.currentTime + Math.max(0, offsetMs) / 1000;
       const o = ac.createOscillator(), g = ac.createGain();
       o.frequency.value = high ? 1320 : 880;
-      g.gain.setValueAtTime(0.0001, ac.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.6, ac.currentTime + 0.005);
-      g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.08);
-      o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime + 0.09);
+      g.gain.setValueAtTime(0.0001, when);
+      g.gain.exponentialRampToValueAtTime(0.6, when + 0.005);
+      g.gain.exponentialRampToValueAtTime(0.0001, when + 0.08);
+      o.connect(g).connect(ac.destination); o.start(when); o.stop(when + 0.09);
     } catch { /* audio is optional */ }
   }
   const buzz = p => { try { if (navigator.vibrate) navigator.vibrate(p); } catch { /* optional */ } };
   const setText = (el, t) => { if (el.textContent !== t) el.textContent = t; };
   const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+  const announce = t => { if (cprView) cprView.el.querySelector('#cprLive').textContent = t; };
 
+  function cprPaint() {
+    if (!cprView) return null;
+    const q = s => cprView.el.querySelector(s);
+    if (!q('#cprBtn')) return null;
+    const r = cprRatio(cpr.mode);
+    const s = cpr.running ? cprState(performance.now() - cpr.t0, cprCfg()) : null;
+    const breathing = s && s.phase === 'breaths';
+    setText(q('#cprCount'), !s ? '0' : breathing ? plural(r.breaths, 'breath') : String(s.count));
+    q('#cprCount').classList.toggle('breaths', !!breathing);
+    setText(q('#cprCycle'), s ? 'Cycle ' + s.cycle : '');
+    setText(q('#cprBtn'), !cpr.running ? 'Start' : cpr.armed ? 'Confirm stop' : 'Stop');
+    cprView.el.querySelectorAll('[data-mode]').forEach(b => { b.disabled = cpr.running; b.setAttribute('aria-pressed', String(b.dataset.mode === cpr.mode)); });
+    q('#cprOnly').disabled = cpr.running;
+    q('#cprOnly').setAttribute('aria-pressed', String(cpr.compressionOnly));
+    q('#cprSwap').hidden = !(s && s.swaps > cpr.swapAck);
+    q('#cprWake').hidden = !(cpr.running && wakeFailed);
+    q('#cprSteps').hidden = !(FK.protocol && FK.protocol.get && FK.protocol.get('cpr-' + cpr.mode));
+    return s;
+  }
+  function cprTick() {
+    const cfg = cprCfg(), e = performance.now() - cpr.t0;
+    // Sounds go onto the audio clock a moment ahead, so a late or throttled tick cannot drop or bunch beats.
+    for (let ms = beatMs(cpr.next, cfg); ms <= e + CPR_LOOKAHEAD_MS; ms = beatMs(cpr.next, cfg)) {
+      click(ms - e, cpr.next % cfg.compressions === 0);
+      cpr.next++;
+    }
+    const s = cprPaint() || cprState(e, cfg);
+    if (s.beats > cpr.lastBeat) { cpr.lastBeat = s.beats; if (s.phase === 'compress') buzz(25); }
+    if (s.phase !== cpr.lastPhase) { cpr.lastPhase = s.phase; announce(s.phase === 'breaths' ? plural(cfg.breaths, 'breath') : 'Compressions'); buzz([120, 80, 120]); }
+    if (s.swaps > cpr.swapsSeen) { cpr.swapsSeen = s.swaps; announce('Swap rescuers now'); click(0, true); buzz([300, 150, 300]); }
+    if (s.cycle !== stripCycle) { stripCycle = s.cycle; paintStrip(); }
+  }
+  const cprDisarm = () => { clearTimeout(armT); cpr.armed = 0; };
+  function cprStart() {
+    cprDisarm();
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) { ac = ac || new AC(); if (ac.resume) ac.resume().catch(() => {}); }
+    } catch { ac = null; }
+    Object.assign(cpr, { running: true, t0: performance.now(), next: 0, lastBeat: 0, lastPhase: 'compress', swapAck: 0, swapsSeen: 0 });
+    stripCycle = 0;
+    wakeFailed = false;
+    wakeOn();
+    cprTick();
+    cpr.iv = setInterval(cprTick, 50);
+    paintStrip();
+  }
   function cprStop() {
-    if (!cpr) return;
-    clearInterval(cpr.iv);
+    clearInterval(cpr.iv); cprDisarm();
     cpr.running = false;
+    if (!openName) wakeOff();
+    paintStrip(); cprPaint();
+  }
+  /* Stop takes two taps: a stray or bounced tap must never end the metronome. */
+  function cprStopTap() {
+    if (!cpr.armed) {
+      cpr.armed = Date.now();
+      armT = setTimeout(() => { cpr.armed = 0; cprPaint(); }, CONFIRM_REVERT_MS);
+      cprPaint();
+    } else if (Date.now() - cpr.armed >= CONFIRM_IGNORE_MS) cprStop();
   }
 
   tools.cpr = {
     label: 'CPR coach',
     render(el, opts) {
-      const fromProto = /^cpr-(adult|child|infant)$/.exec(opts.protocol || '');
-      const mode = CPR_MODES.some(m => m[0] === opts.mode) ? opts.mode : fromProto ? fromProto[1] : 'adult';
-      cpr = { mode, compressionOnly: false, running: false, t0: 0, iv: null, lastBeat: 0, lastPhase: 'compress', swapAck: 0, swapsSeen: 0, from: opts.protocol || null };
+      if (!cpr.running) {
+        const fromProto = /^cpr-(adult|child|infant)$/.exec(opts.protocol || '');
+        cpr.mode = CPR_MODES.some(m => m[0] === opts.mode) ? opts.mode : fromProto ? fromProto[1] : cpr.mode;
+      }
+      cpr.from = opts.protocol || null;
+      cprView = { el };
       el.innerHTML =
         '<div class="seg cpr-modes" role="group" aria-label="Who is it for">' +
-        CPR_MODES.map(([id, label]) => '<button type="button" data-mode="' + id + '" aria-pressed="' + (id === mode) + '">' + label + '</button>').join('') + '</div>' +
+        CPR_MODES.map(([id, label]) => '<button type="button" data-mode="' + id + '" aria-pressed="false">' + label + '</button>').join('') + '</div>' +
         '<button type="button" class="cpr-opt" id="cprOnly" aria-pressed="false">Compression only (no breaths)</button>' +
+        '<p class="cpr-swap cpr-wake" id="cprWake" hidden>This phone may turn its screen off and stop the clicks. Keep the screen awake.</p>' +
         '<div class="cpr-face" id="cprFace" aria-hidden="true"><div class="cpr-count" id="cprCount">0</div><div class="cpr-cycle" id="cprCycle"></div></div>' +
         '<p class="cpr-swap" id="cprSwap" hidden><span>Swap rescuers now</span><button type="button" class="btn" id="cprSwapped">Swapped</button></p>' +
         '<button type="button" class="btn pp-wide" id="cprBtn">Start</button>' +
@@ -251,50 +328,23 @@
         '<p class="hint">Clicks at ' + CPR_RATE + ' per minute. Turn your volume up. If the casualty is not breathing, call 911 if you have signal. If not, send someone for help.</p>' +
         '<div class="sr-live" id="cprLive" role="status" aria-live="polite"></div>';
       const q = s => el.querySelector(s);
-      const paint = () => {
-        const r = cprRatio(cpr.mode), cfg = { ...r, compressionOnly: cpr.compressionOnly };
-        const s = cpr.running ? cprState(performance.now() - cpr.t0, cfg) : null;
-        const breathing = s && s.phase === 'breaths';
-        setText(q('#cprCount'), !s ? '0' : breathing ? plural(r.breaths, 'breath') : String(s.count));
-        q('#cprCount').classList.toggle('breaths', !!breathing);
-        setText(q('#cprCycle'), s ? 'Cycle ' + s.cycle : '');
-        setText(q('#cprBtn'), cpr.running ? 'Stop' : 'Start');
-        el.querySelectorAll('[data-mode]').forEach(b => { b.disabled = cpr.running; b.setAttribute('aria-pressed', String(b.dataset.mode === cpr.mode)); });
-        q('#cprOnly').disabled = cpr.running;
-        q('#cprOnly').setAttribute('aria-pressed', String(cpr.compressionOnly));
-        q('#cprSwap').hidden = !(s && s.swaps > cpr.swapAck);
-        q('#cprSteps').hidden = !(FK.protocol && FK.protocol.get && FK.protocol.get('cpr-' + cpr.mode));
-        return s;
-      };
-      const tick = () => {
-        const s = paint(); if (!s) return;
-        const live = q('#cprLive');
-        if (s.beats > cpr.lastBeat) { cpr.lastBeat = s.beats; if (s.phase === 'compress') { beep(s.count === 1); buzz(25); } }
-        if (s.phase !== cpr.lastPhase) { cpr.lastPhase = s.phase; live.textContent = s.phase === 'breaths' ? plural(cprRatio(cpr.mode).breaths, 'breath') : 'Compressions'; buzz([120, 80, 120]); }
-        if (s.swaps > cpr.swapsSeen) { cpr.swapsSeen = s.swaps; live.textContent = 'Swap rescuers now'; beep(true); buzz([300, 150, 300]); }
-      };
-      q('#cprBtn').addEventListener('click', () => {
-        if (cpr.running) { cprStop(); paint(); return; }
-        Object.assign(cpr, { running: true, t0: performance.now(), lastBeat: 0, lastPhase: 'compress', swapAck: 0, swapsSeen: 0 });
-        tick();
-        cpr.iv = setInterval(tick, 50);
-      });
+      q('#cprBtn').addEventListener('click', () => { if (cpr.running) cprStopTap(); else cprStart(); cprPaint(); });
       el.addEventListener('click', e => {
         const m = e.target.closest('[data-mode]');
-        if (m && !cpr.running) { cpr.mode = m.dataset.mode; paint(); }
+        if (m && !cpr.running) { cpr.mode = m.dataset.mode; cprPaint(); }
       });
-      q('#cprOnly').addEventListener('click', () => { if (!cpr.running) { cpr.compressionOnly = !cpr.compressionOnly; paint(); } });
-      q('#cprSwapped').addEventListener('click', () => { cpr.swapAck = cpr.swapsSeen; paint(); });
+      q('#cprOnly').addEventListener('click', () => { if (!cpr.running) { cpr.compressionOnly = !cpr.compressionOnly; cprPaint(); } });
+      q('#cprSwapped').addEventListener('click', () => { cpr.swapAck = cpr.swapsSeen; cprPaint(); });
       q('#cprSteps').addEventListener('click', () => {
         const id = 'cpr-' + cpr.mode;
         if (cpr.from === id) close();   // came here from these steps: Back returns to the same step
         else FK.protocol.open(id);
       });
-      paint();
+      cprPaint();
     },
-    stop() { cprStop(); cpr = null; }
+    stop() { cprView = null; }   // closing the overlay never stops the coach
   };
-  FK.tools.cpr = { state: cprState };
+  FK.tools.cpr = { state: cprState, running: () => cpr.running };
 
   /* ---------- Start ---------- */
   FK.on('route', r => { onRoute(r); sync(); });

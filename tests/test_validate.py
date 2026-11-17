@@ -121,13 +121,14 @@ class ValidateTests(unittest.TestCase):
             self.assertEqual(errs([p]), [], good)
 
     def test_coach_is_optional_object_of_two_positive_ints(self):
-        for good in ({'compressions': 30, 'breaths': 2}, {'compressions': 15, 'breaths': 1}):
+        for good in ({'compressions': 30, 'breaths': 2}, {'compressions': 15, 'breaths': 1}, {'compressions': 99, 'breaths': 99}):
             p = ok()
             p['coach'] = good
             self.assertEqual(errs([p]), [])
         for bad in (5, 'x', [], {}, {'compressions': 30}, {'compressions': 0, 'breaths': 2},
                     {'compressions': 30, 'breaths': -1}, {'compressions': 30.5, 'breaths': 2},
-                    {'compressions': '30', 'breaths': 2}, {'compressions': True, 'breaths': 2}):
+                    {'compressions': '30', 'breaths': 2}, {'compressions': True, 'breaths': 2}, {'compressions': 100, 'breaths': 2},
+                    {'compressions': 30, 'breaths': 100}):
             p = ok()
             p['coach'] = bad
             self.assertTrue(any('coach' in e for e in errs([p])), repr(bad))

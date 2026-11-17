@@ -39,7 +39,7 @@ def _blank(v):
 
 
 def _pos_int(v):
-    return isinstance(v, int) and not isinstance(v, bool) and v > 0
+    return isinstance(v, int) and not isinstance(v, bool) and 0 < v <= 99
 
 
 def draft_ids(protocols):
@@ -138,7 +138,7 @@ def validate(protocols, fig_names):
         if 'coach' in p:
             c = p['coach']
             if not (isinstance(c, dict) and all(_pos_int(c.get(k)) for k in ('compressions', 'breaths'))):
-                errors.append(f'{where}: coach must be an object with positive whole numbers compressions and breaths')
+                errors.append(f'{where}: coach must be an object with whole numbers 1 to 99 for compressions and breaths')
         if p.get('draft') is True:
             warnings.append(f'{pid if isinstance(pid, str) else where}: draft, not source-checked')
 

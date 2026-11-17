@@ -16,7 +16,7 @@ FIXTURES = [proto('bleeding', 'Severe bleeding'), proto('cpr-adult', 'CPR adult'
             proto('cpr-child', 'CPR child', coach={'compressions': 15, 'breaths': 2})]
 
 
-def boot(page, app_url, storage=None, hash_='#/emergency', fixtures=FIXTURES, clock=True, strip_apis=False):
+def boot(page, app_url, storage=None, hash_='#/emergency', fixtures=FIXTURES, clock=True, strip_apis=False, init=''):
     if clock:
         page.clock.install(time=T0 // 1000)   # Python API takes seconds
     inject_protocols(page, fixtures)
@@ -24,6 +24,8 @@ def boot(page, app_url, storage=None, hash_='#/emergency', fixtures=FIXTURES, cl
         page.add_init_script("""
           delete window.AudioContext; delete window.webkitAudioContext;
           delete Navigator.prototype.vibrate; delete Navigator.prototype.wakeLock;""")
+    if init:
+        page.add_init_script(init)
     seed = {'advAck': True, **(storage or {})}
     page.add_init_script(
         "if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1');"
@@ -53,8 +55,7 @@ def test_v5_running_tourniquet_timer_survives_update(page, app_url):
 def test_start_timer_adds_row_and_persists(page, app_url):
     boot(page, app_url, hash_='#/emergency/tool/tq')
     page.evaluate("window.logged = []; FK.log = m => logged.push(m); 0")
-    page.select_option('#tqLimb', 'Right arm')
-    page.click('#tqStart')
+    page.click('[data-limb="Right arm"]')
     assert page.locator('#tqList .timer').count() == 1
     assert 'Right arm' in page.inner_text('#tqList .timer')
     assert page.evaluate('logged') == ['Tourniquet applied: Right arm']
@@ -70,7 +71,7 @@ def test_start_timer_adds_row_and_persists(page, app_url):
 def test_start_without_fk_log_does_not_fail(page, app_url):
     boot(page, app_url, hash_='#/emergency/tool/tq')
     assert page.evaluate('typeof FK.log') == 'undefined'
-    page.click('#tqStart')
+    page.click('[data-limb="Left leg"]')
     assert page.locator('#tqList .timer').count() == 1
 
 
@@ -81,6 +82,7 @@ def test_clear_needs_inline_second_tap_and_no_browser_dialog(page, app_url):
     page.click('#tqList [data-act="clear"]')
     assert 'Only clear once responders have the time' in page.inner_text('#tqList .timer')
     assert page.evaluate('FK.tools.tq.active().length') == 1
+    page.clock.run_for(800)
     page.click('#tqList [data-act="confirm"]')
     assert page.locator('#tqList .timer').count() == 0
     assert json.loads(page.evaluate("localStorage.getItem('fk.tq')")) == []
@@ -90,7 +92,7 @@ def test_clear_needs_inline_second_tap_and_no_browser_dialog(page, app_url):
 def test_clear_confirmation_expires(page, app_url):
     boot(page, app_url, storage={'tq': [{'id': 'a', 'limb': 'Left arm', 'start': T0 - 1000}]}, hash_='#/emergency/tool/tq')
     page.click('#tqList [data-act="clear"]')
-    page.clock.run_for(7000)
+    page.clock.run_for(5100)
     assert page.locator('#tqList [data-act="clear"]').count() == 1
     assert page.evaluate('FK.tools.tq.active().length') == 1
 
@@ -340,25 +342,14 @@ def test_cpr_malformed_coach_falls_back_to_30_2(page, app_url):
     assert count_text(page) == '30'
 
 
-def test_cpr_stops_when_overlay_closes(page, app_url):
-    boot(page, app_url)
-    page.evaluate("FK.tools.start('cpr')")
-    page.click('#cprBtn')
-    page.clock.run_for(2000)
-    page.go_back()
-    page.wait_for_function("location.hash === '#/emergency'")
-    page.clock.run_for(30_000)
-    page.click('#emCats summary[data-cat="tools"]')
-    page.click('#emCats [data-tool="cpr"]')
-    assert count_text(page) == '0' and page.inner_text('#cprBtn') == 'Start'
-
-
 def test_cpr_works_without_audio_vibrate_wakelock(page, app_url):
     boot(page, app_url, hash_='#/emergency/tool/cpr', strip_apis=True)
     assert page.evaluate("[typeof AudioContext, typeof webkitAudioContext, typeof navigator.vibrate, typeof navigator.wakeLock]") == ['undefined'] * 4
     page.click('#cprBtn')
     page.clock.run_for(20_600)
     assert count_text(page) == '1' and page.inner_text('#cprCycle') == 'Cycle 2'
+    page.click('#cprBtn')
+    page.clock.run_for(800)
     page.click('#cprBtn')
     assert page.inner_text('#cprBtn') == 'Start'
     page.click('#toolClose')
@@ -369,3 +360,175 @@ def test_cpr_touch_targets_at_least_56px(page, app_url):
     boot(page, app_url, hash_='#/emergency/tool/cpr')
     heights = page.evaluate("[...document.querySelectorAll('#toolPane button')].filter(e => e.offsetParent !== null).map(e => e.getBoundingClientRect().height)")
     assert heights and min(heights) >= 56
+
+
+# ---------- Review fixes ----------
+
+def test_clear_confirm_ignores_a_bounced_second_tap(page, app_url):
+    boot(page, app_url, storage={'tq': [{'id': 'a', 'limb': 'Left arm', 'start': T0 - 1000}]}, hash_='#/emergency/tool/tq')
+    page.evaluate("""document.querySelector('#tqList [data-act="clear"]').click();
+        document.querySelector('#tqList [data-act="confirm"]').click(); 0""")
+    assert page.evaluate('FK.tools.tq.active().length') == 1
+    page.clock.run_for(800)
+    page.click('#tqList [data-act="confirm"]')
+    assert page.evaluate('FK.tools.tq.active().length') == 0
+
+
+def test_limb_is_a_required_choice_one_tap_each_with_big_buttons(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/tq')
+    limbs = [b.get_attribute('data-limb') for b in page.locator('#toolBody [data-limb]').all()]
+    assert limbs == ['Left arm', 'Right arm', 'Left leg', 'Right leg', 'Other']
+    assert page.locator('#toolBody select').count() == 0
+    assert page.evaluate('FK.tools.tq.active().length') == 0
+    assert min(b['height'] for b in [x.bounding_box() for x in page.locator('#toolBody [data-limb]').all()]) >= 56
+    page.click('[data-limb="Left leg"]')
+    assert [t['limb'] for t in page.evaluate('FK.tools.tq.active()')] == ['Left leg']
+
+
+def test_stale_open_options_do_not_apply_to_the_next_open(page, app_url):
+    boot(page, app_url)
+    page.evaluate("FK.tools.start('cpr')")
+    page.wait_for_function("location.hash === '#/emergency/tool/cpr'")
+    page.evaluate("FK.tools.start('cpr', { mode: 'child' })")   # already open: nothing to do
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    page.evaluate("FK.route.go('/emergency/tool/cpr')")     # opened by address, not through start(): no options at all
+    assert page.locator('[data-mode="adult"]').get_attribute('aria-pressed') == 'true'
+
+
+def running_cpr(page, app_url, **kw):
+    boot(page, app_url, **kw)
+    page.evaluate("FK.tools.start('cpr')")
+    page.wait_for_function("location.hash === '#/emergency/tool/cpr'")
+    page.click('#cprBtn')
+
+
+def reopen_cpr(page):
+    page.evaluate("FK.tools.start('cpr')")
+    page.wait_for_function("location.hash === '#/emergency/tool/cpr'")
+
+
+def test_cpr_keeps_running_when_overlay_closes_by_every_route(page, app_url):
+    running_cpr(page, app_url)
+    page.clock.run_for(2000)
+    for how in ('back', 'close', 'escape'):
+        before = count_text(page)
+        if how == 'back':
+            page.go_back()
+        elif how == 'close':
+            page.click('#toolClose')
+        else:
+            page.keyboard.press('Escape')
+        page.wait_for_function("location.hash === '#/emergency'")
+        assert not tool_open(page)
+        page.clock.run_for(2000)
+        reopen_cpr(page)
+        assert page.inner_text('#cprBtn') == 'Stop', how
+        assert count_text(page) != before and page.inner_text('#cprCycle').startswith('Cycle'), how
+    assert page.evaluate("FK.tools.cpr.running()") is True
+
+
+def test_cpr_reopened_shows_live_state_not_a_fresh_one(page, app_url):
+    running_cpr(page, app_url)
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    page.clock.run_for(22_000)
+    reopen_cpr(page)
+    assert page.inner_text('#cprCycle') == 'Cycle 2'
+
+
+def test_cpr_stop_is_two_step_with_ignore_window_and_revert(page, app_url):
+    running_cpr(page, app_url)
+    page.click('#cprBtn')
+    assert page.inner_text('#cprBtn') == 'Confirm stop'
+    page.evaluate("document.querySelector('#cprBtn').click(); 0")   # bounced second tap
+    assert page.evaluate("FK.tools.cpr.running()") is True
+    page.clock.run_for(5100)
+    assert page.inner_text('#cprBtn') == 'Stop'
+    page.click('#cprBtn')
+    page.clock.run_for(800)
+    page.click('#cprBtn')
+    assert page.evaluate("FK.tools.cpr.running()") is False
+    assert page.inner_text('#cprBtn') == 'Start' and count_text(page) == '0'
+
+
+def test_cpr_mode_toggles_stay_disabled_while_running(page, app_url):
+    running_cpr(page, app_url)
+    assert page.locator('#cprOnly').is_disabled() and page.locator('[data-mode="child"]').is_disabled()
+
+
+def test_active_strip_shows_running_cpr_and_opens_the_tool(page, app_url):
+    running_cpr(page, app_url)
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    page.clock.run_for(22_000)
+    b = page.locator('#emActive button')
+    assert b.count() == 1 and b.inner_text().strip() == 'CPR running, cycle 2'
+    b.click()
+    page.wait_for_function("location.hash === '#/emergency/tool/cpr'")
+    assert page.inner_text('#cprBtn') == 'Stop'
+
+
+def test_cpr_keeps_running_while_steps_are_open_and_back_returns_to_live_tool(page, app_url):
+    running_cpr(page, app_url)
+    page.click('#cprSteps')
+    page.wait_for_function("location.hash === '#/emergency/cpr-adult'")
+    page.clock.run_for(22_000)
+    assert page.evaluate("FK.tools.cpr.running()") is True
+    page.go_back()
+    page.wait_for_function("location.hash === '#/emergency/tool/cpr'")
+    assert page.inner_text('#cprBtn') == 'Stop' and page.inner_text('#cprCycle') == 'Cycle 2'
+
+
+NOTICE = 'This phone may turn its screen off and stop the clicks. Keep the screen awake.'
+
+
+def test_cpr_warns_when_wake_lock_is_missing(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', strip_apis=True)
+    assert page.locator('#cprWake').is_hidden()
+    page.click('#cprBtn')
+    assert page.inner_text('#cprWake') == NOTICE
+
+
+def test_cpr_warns_when_wake_lock_request_is_rejected(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', init="""
+        Object.defineProperty(navigator, 'wakeLock', { configurable: true, value: { request: () => Promise.reject(new DOMException('no', 'NotAllowedError')) } });""")
+    page.click('#cprBtn')
+    page.wait_for_function("document.querySelector('#cprWake') && !document.querySelector('#cprWake').hidden")
+    assert page.inner_text('#cprWake') == NOTICE
+
+
+FAKE_AUDIO = """
+  (() => {
+    window.__starts = [];
+    window.AudioContext = class {
+      constructor() { this.state = 'running'; }
+      get currentTime() { return performance.now() / 1000; }
+      resume() { return Promise.resolve(); }
+      get destination() { return {}; }
+      createGain() { return { gain: { setValueAtTime() {}, exponentialRampToValueAtTime() {} }, connect(n) { return n; } }; }
+      createOscillator() { const o = { frequency: {}, connect(n) { return n; }, start(w) { window.__starts.push([w, performance.now() / 1000, o.frequency.value]); }, stop() {} }; return o; }
+    };
+  })();"""
+
+
+def test_cpr_clicks_are_scheduled_ahead_on_the_audio_clock(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', init=FAKE_AUDIO)
+    page.click('#cprBtn')
+    page.clock.run_for(3000)
+    starts = page.evaluate('__starts')
+    whens = [w for w, _, _ in starts]
+    assert any(w > now + 0.5 for w, now, _ in starts)            # sounds are queued ahead of the tick that queued them
+    gaps = [b - a for a, b in zip(whens, whens[1:])]
+    assert all(abs(g - 60 / 110) < 0.01 for g in gaps)            # evenly spaced, none bunched or doubled
+    assert starts[0][2] == 1320 and starts[1][2] == 880          # accent on the first compression of a cycle
+
+
+def test_cpr_late_tick_does_not_bunch_clicks(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', init=FAKE_AUDIO)
+    page.click('#cprBtn')
+    page.clock.fast_forward(5000)                                # page was throttled: one very late tick
+    page.clock.run_for(2000)
+    whens = [w for w, _, _ in page.evaluate('__starts')]
+    gaps = [b - a for a, b in zip(whens, whens[1:])]
+    assert gaps and min(gaps) > 0.4   # one beat may land up to 200 ms late, never doubled up

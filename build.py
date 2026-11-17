@@ -49,7 +49,7 @@ b = shell.index('</section>', a) + len('</section>')
 shell = shell[:a] + emerg + shell[b:]
 shell = shell.replace('</style>', read('figs/figs.css') + '\n</style>', 1)
 shell = shell.replace('<body>\n', '<body>\n' + read('figs/markers.html'), 1)
-js = '\n'.join(read('src/' + f) for f in ['geo.js', 'ballistics.js', 'app.js', 'router.js', 'emergency.js', 'emergency-tools.js', 'protocol.js', 'map.js', 'survival.js'])
+js = '\n'.join(read('src/' + f) for f in ['geo.js', 'ballistics.js', 'app.js', 'router.js', 'emergency.js', 'emergency-tools.js', 'patients.js', 'protocol.js', 'map.js', 'survival.js'])
 
 # Protocols: validate every src/protocols/*.json, then inline as window.FK_DATA (sorted by id).
 protocols = []

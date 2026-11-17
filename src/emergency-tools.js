@@ -105,6 +105,7 @@
 
   FK.tools = {
     start,
+    confirm: { ignoreMs: 700, revertMs: 5000 },   // shared two-step confirm timing (second tap ignored for ignoreMs, reverts after revertMs)
     register(name, def) {
       if (typeof name !== 'string' || !NAME.test(name) || !def || typeof def.render !== 'function') return;
       tools[name] = { label: String(def.label || name), render: def.render, stop: typeof def.stop === 'function' ? def.stop : () => {} };
@@ -118,7 +119,7 @@
   const LIMBS = ['Left arm', 'Right arm', 'Left leg', 'Right leg', 'Other'];
   let tqs = FK.list('tq', t => FK.okId(t.id) && FK.fin(t.start)).map(t => ({ ...t, limb: String(t.limb ?? 'Tourniquet') }));
   let tqSeq = 0, tqInt = null, confirmId = null, confirmT = null, confirmAt = 0, lastStart = { limb: '', at: 0 };
-  const CONFIRM_IGNORE_MS = 700, CONFIRM_REVERT_MS = 5000;   // a bounced second tap must not delete or stop anything
+  const CONFIRM_IGNORE_MS = FK.tools.confirm.ignoreMs, CONFIRM_REVERT_MS = FK.tools.confirm.revertMs;   // a bounced second tap must not delete or stop anything
   const hms = ms => {
     const s = Math.max(0, Math.floor(ms / 1000));
     return Math.floor(s / 3600) + ':' + String(Math.floor(s / 60) % 60).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
@@ -302,12 +303,15 @@
     cprTick();
     cpr.iv = setInterval(cprTick, 50);
     paintStrip();
+    if (typeof FK.log === 'function') FK.log('CPR started (' + cpr.mode + ')');
   }
   function cprStop() {
+    const done = cprState(performance.now() - cpr.t0, cprCfg()).cycle - 1;   // whole cycles finished
     clearInterval(cpr.iv); cprDisarm(); silence();
     cpr.running = false;
     if (!openName) wakeOff();
     paintStrip(); cprPaint();
+    if (typeof FK.log === 'function') FK.log('CPR stopped after ' + plural(done, 'cycle'));
   }
   /* Stop takes two taps: a stray or bounced tap must never end the metronome. */
   function cprStopTap() {
@@ -360,6 +364,179 @@
     stop() { cprView = null; }   // closing the overlay never stops the coach
   };
   FK.tools.cpr = { state: cprState, running: () => cpr.running };
+
+  /* ================= Rate counter: tap each beat or breath for 15 seconds, result = taps x 4 ================= */
+  const RATE_WINDOW_MS = 15000;
+  const rate = { t0: null, taps: 0, iv: null, el: null };
+  const rateDone = () => rate.t0 !== null && performance.now() - rate.t0 >= RATE_WINDOW_MS;
+  function ratePaint() {
+    const el = rate.el; if (!el || !el.querySelector('#rateTap')) return;
+    const done = rateDone();
+    if (done && rate.iv) { clearInterval(rate.iv); rate.iv = null; }
+    const left = rate.t0 === null ? RATE_WINDOW_MS : Math.max(0, RATE_WINDOW_MS - (performance.now() - rate.t0));
+    setText(el.querySelector('#rateClock'), done ? 'Time is up' : Math.ceil(left / 1000) + ' seconds left');
+    setText(el.querySelector('#rateCount'), rate.taps + (rate.taps === 1 ? ' tap' : ' taps'));
+    setText(el.querySelector('#rateResult'), done ? String(rate.taps * 4) : '');
+    el.querySelector('#rateUnit').hidden = !done;
+    el.querySelector('#rateTap').disabled = done;
+    el.querySelector('#rateSave').hidden = !done || rate.taps === 0;
+  }
+  function rateReset() {
+    clearInterval(rate.iv); rate.iv = null; rate.t0 = null; rate.taps = 0;
+    ratePaint();
+  }
+  function rateTap() {
+    const now = performance.now();
+    if (rate.t0 === null) { rate.t0 = now; rate.iv = setInterval(ratePaint, 100); }
+    else if (now - rate.t0 >= RATE_WINDOW_MS) { ratePaint(); return; }   // after the window: ignored
+    rate.taps++;
+    ratePaint();
+  }
+  function rateSave(kind) {
+    if (!FK.patients || !rateDone() || !rate.taps) return;
+    const n = rate.taps * 4;
+    const ok = kind === 'pulse' ? n <= 300 : n <= 120;
+    if (!ok) { FK.toast('That rate is too high to save. Count again.'); return; }
+    const e = kind === 'pulse' ? { kind: 'vitals', text: 'Vitals: pulse ' + n + ' (counted for 15 seconds)', pulse: n } : { kind: 'vitals', text: 'Vitals: breathing ' + n + ' (counted for 15 seconds)', resp: n };
+    if (FK.patients.add(e)) FK.toast('Saved to ' + FK.patients.current().name);
+  }
+  FK.tools.register('rate', {
+    label: 'Rate counter',
+    render(el) {
+      rate.el = el; rate.t0 = null; rate.taps = 0;
+      el.innerHTML =
+        '<p class="tq-ask">Tap once for every beat or breath. The 15 seconds start on your first tap.</p>' +
+        '<button type="button" class="rate-tap" id="rateTap">TAP</button>' +
+        '<p class="rate-clock" id="rateClock" role="timer"></p><p class="rate-count" id="rateCount"></p>' +
+        '<p class="rate-out"><b id="rateResult" aria-live="polite"></b> <span id="rateUnit" hidden>per minute</span></p>' +
+        '<div id="rateSave" hidden><button type="button" class="btn pp-wide" id="rateSavePulse">Save as pulse</button>' +
+        '<button type="button" class="btn pp-wide" id="rateSaveResp">Save as breathing</button></div>' +
+        '<button type="button" class="btn ghost pp-wide" id="rateRestart">Restart</button>';
+      el.querySelector('#rateTap').addEventListener('click', rateTap);
+      el.querySelector('#rateRestart').addEventListener('click', rateReset);
+      el.querySelector('#rateSavePulse').addEventListener('click', () => rateSave('pulse'));
+      el.querySelector('#rateSaveResp').addEventListener('click', () => rateSave('resp'));
+      ratePaint();
+    },
+    stop() { clearInterval(rate.iv); rate.iv = null; rate.el = null; }
+  });
+
+  /* ================= Burn area ================= */
+  /* Region percentages by age group. Kept as one constant so it can be corrected from the medical source in one place.
+     Every table must add up to 100. */
+  const BURN_TABLES = {
+    adult: [
+      { id: 'head', name: 'Head', pct: 9 }, { id: 'armL', name: 'Left arm', pct: 9 }, { id: 'armR', name: 'Right arm', pct: 9 },
+      { id: 'chest', name: 'Chest', pct: 9 }, { id: 'abdomen', name: 'Abdomen', pct: 9 },
+      { id: 'upperBack', name: 'Upper back', pct: 9 }, { id: 'lowerBack', name: 'Lower back', pct: 9 },
+      { id: 'legL', name: 'Left leg', pct: 18 }, { id: 'legR', name: 'Right leg', pct: 18 }, { id: 'groin', name: 'Groin', pct: 1 }
+    ],
+    child: [
+      { id: 'head', name: 'Head', pct: 18 }, { id: 'armL', name: 'Left arm', pct: 9 }, { id: 'armR', name: 'Right arm', pct: 9 },
+      { id: 'torsoF', name: 'Front of body', pct: 18 }, { id: 'torsoB', name: 'Back of body', pct: 18 },
+      { id: 'legL', name: 'Left leg', pct: 14 }, { id: 'legR', name: 'Right leg', pct: 14 }
+    ]
+  };
+  /* Figure layout in a 340 x 352 box: [region, view, x offset from the figure centre, y, width, height, short label, true if drawn only as a non-focusable duplicate of the region's main shape].
+     A casualty's left is on the viewer's right in the front view and on the viewer's left in the back view. */
+  const BURN_CX = { front: 80, back: 260 };
+  const burnBody = torso => {
+    const arm = (id, view, label) => [id, view, (id === 'armL') === (view === 'front') ? 31 : -79, 54, 48, 146, label, view === 'back'];
+    const leg = (id, view, label) => [id, view, (id === 'legL') === (view === 'front') ? 2 : -52, 230, 50, 122, label, view === 'back'];
+    return [
+      ['head', 'front', -24, 4, 48, 48, 'Head'], ['head', 'back', -24, 4, 48, 48, 'Head', true],
+      arm('armL', 'front', 'L arm'), arm('armR', 'front', 'R arm'), arm('armL', 'back', 'L arm'), arm('armR', 'back', 'R arm'),
+      leg('legL', 'front', 'L leg'), leg('legR', 'front', 'R leg'), leg('legL', 'back', 'L leg'), leg('legR', 'back', 'R leg'),
+      ...torso
+    ];
+  };
+  const BURN_LAYOUT = {
+    adult: burnBody([
+      ['chest', 'front', -28, 54, 56, 60, 'Chest'], ['abdomen', 'front', -28, 114, 56, 60, 'Abdomen'], ['groin', 'front', -24, 176, 48, 48, 'Groin'],
+      ['upperBack', 'back', -28, 54, 56, 60, 'Upper back'], ['lowerBack', 'back', -28, 114, 56, 60, 'Lower back']
+    ]),
+    child: burnBody([['torsoF', 'front', -28, 54, 56, 170, 'Front'], ['torsoB', 'back', -28, 54, 56, 170, 'Back']])
+  };
+  const burn = { mode: 'adult', sel: new Set(), el: null };
+  const burnTotal = () => BURN_TABLES[burn.mode].reduce((n, r) => n + (burn.sel.has(r.id) ? r.pct : 0), 0);
+  function burnFigure() {
+    const table = BURN_TABLES[burn.mode];
+    const shapes = BURN_LAYOUT[burn.mode].map(([id, view, dx, y, w, h, label, dup]) => {
+      const r = table.find(t => t.id === id), x = BURN_CX[view] + dx, cx = x + w / 2, cy = y + h / 2;
+      const body = '<rect class="bz" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="8"/>' +
+        '<text class="bz-t" x="' + cx + '" y="' + (cy - 9) + '" text-anchor="middle">' + esc(label) + '</text>' +
+        '<text class="bz-t" x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle">' + r.pct + '%</text>' +
+        '<text class="bz-c" x="' + cx + '" y="' + (cy + 20) + '" text-anchor="middle">✓</text>';
+      return dup
+        ? '<g class="bz-g dup" data-r="' + id + '" aria-hidden="true">' + body + '</g>'
+        : '<g class="bz-g" data-r="' + id + '" role="button" tabindex="0" aria-pressed="false" aria-label="' + esc(r.name) + ', ' + r.pct + ' percent">' + body + '</g>';
+    }).join('');
+    return '<svg id="burnSvg" viewBox="0 0 340 352" role="group" aria-label="Body outline, front on the left and back on the right">' +
+      '<defs><pattern id="burnHatch" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" style="fill:var(--surface)"/>' +
+      '<path d="M-2 2L2 -2M0 8L8 0M6 10L10 6" style="stroke:var(--blaze);stroke-width:2.5"/></pattern></defs>' +
+      shapes + '</svg>' +
+      '<p class="burn-cap"><span>Front</span><span>Back</span></p>';
+  }
+  function burnGuide() {
+    const p = FK.protocol && FK.protocol.get ? FK.protocol.get('burns') : null;
+    const ev = p && Array.isArray(p.evacuate) ? p.evacuate.filter(x => typeof x === 'string' && x.trim()) : [];
+    return ev.length ? '<h3>Evacuate when</h3><ul>' + ev.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '';
+  }
+  function burnPaint() {
+    const el = burn.el; if (!el || !el.querySelector('#burnSvg')) return;
+    el.querySelectorAll('#burnSvg [data-r]').forEach(g => {
+      const on = burn.sel.has(g.dataset.r);
+      g.classList.toggle('on', on);
+      if (g.hasAttribute('role')) g.setAttribute('aria-pressed', String(on));
+    });
+    el.querySelectorAll('#burnMode [data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === burn.mode)));
+    const picked = BURN_TABLES[burn.mode].filter(r => burn.sel.has(r.id));
+    el.querySelector('#burnTotal').textContent = burnTotal() + '%';
+    el.querySelector('#burnList').textContent = picked.length ? 'Selected: ' + picked.map(r => r.name + ' ' + r.pct + '%').join(', ') : 'Nothing selected. Tap the burned areas.';
+    el.querySelector('#burnSave').disabled = !picked.length;
+    el.querySelector('#burnClear').disabled = !picked.length;
+  }
+  function burnSet(mode) {
+    burn.mode = mode; burn.sel = new Set();
+    burn.el.querySelector('#burnFig').innerHTML = burnFigure();
+    burnPaint();
+  }
+  function burnToggle(id) {
+    if (!BURN_TABLES[burn.mode].some(r => r.id === id)) return;
+    if (!burn.sel.delete(id)) burn.sel.add(id);
+    burnPaint();
+  }
+  FK.tools.register('burn', {
+    label: 'Burn area',
+    render(el) {
+      burn.el = el; burn.sel = new Set(); burn.mode = 'adult';
+      el.innerHTML =
+        '<div class="seg cpr-modes" id="burnMode" role="group" aria-label="Who is burned">' +
+        '<button type="button" data-mode="adult" aria-pressed="false">Adult</button><button type="button" data-mode="child" aria-pressed="false">Child</button></div>' +
+        '<div class="burn-total"><b id="burnTotal" aria-live="polite">0%</b><span>of the body surface</span></div>' +
+        '<div id="burnFig"></div><p id="burnList" class="burn-list"></p>' +
+        '<div class="burn-act"><button type="button" class="btn pp-wide" id="burnSave">Save to patient log</button>' +
+        '<button type="button" class="btn ghost pp-wide" id="burnClear">Clear</button></div>' +
+        '<p class="hint">Estimate only. Do not count first-degree (red, not blistered) skin.</p>' +
+        '<div id="burnGuide" class="pp-sec">' + burnGuide() + '</div>';
+      el.querySelector('#burnFig').innerHTML = burnFigure();
+      el.querySelector('#burnFig').addEventListener('click', e => { const g = e.target.closest('[data-r]'); if (g) burnToggle(g.dataset.r); });
+      el.querySelector('#burnFig').addEventListener('keydown', e => {
+        const g = e.target.closest('[role="button"][data-r]');
+        if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); burnToggle(g.dataset.r); }
+      });
+      el.querySelector('#burnMode').addEventListener('click', e => { const b = e.target.closest('[data-mode]'); if (b && b.dataset.mode !== burn.mode) burnSet(b.dataset.mode); });
+      el.querySelector('#burnClear').addEventListener('click', () => { burn.sel = new Set(); burnPaint(); });
+      el.querySelector('#burnSave').addEventListener('click', () => {
+        const picked = BURN_TABLES[burn.mode].filter(r => burn.sel.has(r.id));
+        if (!picked.length || !FK.patients) return;
+        const t = 'Burn area about ' + burnTotal() + '% (' + burn.mode + '): ' + picked.map(r => r.name.toLowerCase()).join(', ');
+        if (FK.patients.add({ kind: 'note', text: t })) FK.toast('Saved to ' + FK.patients.current().name);
+      });
+      burnPaint();
+    },
+    stop() { burn.el = null; }
+  });
 
   /* ---------- Start ---------- */
   FK.on('route', r => { onRoute(r); sync(); });

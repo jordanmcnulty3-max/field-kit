@@ -70,6 +70,7 @@ def test_start_timer_adds_row_and_persists(page, app_url):
 
 def test_start_without_fk_log_does_not_fail(page, app_url):
     boot(page, app_url, hash_='#/emergency/tool/tq')
+    page.evaluate('delete FK.log')   # the patient log defines it; the timers must work without it
     assert page.evaluate('typeof FK.log') == 'undefined'
     page.click('[data-limb="Left leg"]')
     assert page.locator('#tqList .timer').count() == 1
@@ -174,11 +175,11 @@ def test_reloaded_tool_address_closes_to_home(page, app_url):
 
 def test_unknown_or_unbuilt_tool_does_nothing(page, app_url):
     boot(page, app_url)
-    assert page.evaluate("FK.tools.start('rate')") is False
-    assert page.evaluate("FK.tools.start('burn')") is False
+    assert page.evaluate("FK.tools.start('ghost')") is False
+    assert page.evaluate("FK.tools.start('phantom')") is False
     assert page.evaluate("FK.tools.start('../x')") is False
     assert page.evaluate("location.hash") == '#/emergency' and not tool_open(page)
-    page.goto(app_url + '#/emergency/tool/rate')
+    page.goto(app_url + '#/emergency/tool/ghost')
     page.wait_for_function("location.hash === '#/emergency'")
     assert not tool_open(page)
 
@@ -186,10 +187,10 @@ def test_unknown_or_unbuilt_tool_does_nothing(page, app_url):
 def test_register_adds_a_tool_that_can_open(page, app_url):
     boot(page, app_url)
     page.evaluate("""window.stopped = 0;
-        FK.tools.register('rate', { label: 'Rate counter', render(el, opts) { el.textContent = 'hello ' + (opts.n || ''); }, stop() { stopped++; } })""")
-    assert page.evaluate("FK.tools.start('rate', { n: 7 })") is True
-    page.wait_for_function("location.hash === '#/emergency/tool/rate'")
-    assert page.inner_text('#toolBody') == 'hello 7' and page.inner_text('#toolTitle') == 'Rate counter'
+        FK.tools.register('gauge', { label: 'Gauge', render(el, opts) { el.textContent = 'hello ' + (opts.n || ''); }, stop() { stopped++; } })""")
+    assert page.evaluate("FK.tools.start('gauge', { n: 7 })") is True
+    page.wait_for_function("location.hash === '#/emergency/tool/gauge'")
+    assert page.inner_text('#toolBody') == 'hello 7' and page.inner_text('#toolTitle') == 'Gauge'
     page.go_back()
     page.wait_for_function("location.hash === '#/emergency'")
     assert page.evaluate('stopped') == 1
@@ -212,7 +213,7 @@ def test_opening_a_tool_adds_recent_and_pinned_and_recent_render_and_open_it(pag
 
 
 def test_pinned_key_for_unbuilt_tool_is_not_rendered(page, app_url):
-    boot(page, app_url, storage={'pins': ['t:rate', 't:cpr']})
+    boot(page, app_url, storage={'pins': ['t:ghost', 't:cpr']})
     assert [b.get_attribute('data-tool') for b in page.locator('#emPinned [data-tool]').all()] == ['cpr']
 
 

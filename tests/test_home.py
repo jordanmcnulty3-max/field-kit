@@ -98,7 +98,7 @@ def test_categories_are_data_driven_empty_ones_hidden_tools_and_reports_stay(pag
     boot(page, app_url, fixtures=[p for p in FIXTURES if p['category'] in ('life', 'injury')])
     cats = [s.get_attribute('data-cat') for s in page.locator('#emCats summary').all()]
     assert cats == ['life', 'injury', 'tools', 'reports']
-    assert [b.get_attribute('data-tool') for b in page.locator('#emCats details[data-cat="tools"] [data-tool]').all()] == ['tq', 'cpr']
+    assert [b.get_attribute('data-tool') for b in page.locator('#emCats details[data-cat="tools"] [data-tool]').all()] == ['tq', 'cpr', 'rate', 'burn', 'log']
     assert 'Reports' in page.inner_text('#emCats summary[data-cat="reports"]')
 
 

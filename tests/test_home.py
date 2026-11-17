@@ -98,7 +98,7 @@ def test_categories_are_data_driven_empty_ones_hidden_tools_and_reports_stay(pag
     boot(page, app_url, fixtures=[p for p in FIXTURES if p['category'] in ('life', 'injury')])
     cats = [s.get_attribute('data-cat') for s in page.locator('#emCats summary').all()]
     assert cats == ['life', 'injury', 'tools', 'reports']
-    assert page.locator('#tqStart').count() == 1 and page.locator('#cprBtn').count() == 1
+    assert [b.get_attribute('data-tool') for b in page.locator('#emCats details[data-cat="tools"] [data-tool]').all()] == ['tq', 'cpr']
     assert 'Reports' in page.inner_text('#emCats summary[data-cat="reports"]')
 
 
@@ -199,11 +199,9 @@ def test_emergency_touch_targets_at_least_56px(page, app_url):
     assert heights and min(heights) >= 56
 
 
-def test_footer_copy_and_tool_markup_kept(page, app_url):
+def test_footer_copy_kept(page, app_url):
     boot(page, app_url)
     assert 'Reference only, not a substitute for training. Take a Stop the Bleed, CPR and wilderness first aid course.' in page.inner_text('#tab-emergency')
-    for sel in ('#tqLimb', '#tqStart', '#tqList', '#beat', '#cprBtn'):
-        assert page.locator(sel).count() == 1
 
 
 def test_open_category_stays_open_when_home_rerenders(page, app_url):

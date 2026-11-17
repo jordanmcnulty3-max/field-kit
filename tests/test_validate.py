@@ -110,6 +110,28 @@ class ValidateTests(unittest.TestCase):
             p['id'] = rid
             self.assertTrue(any('reserved' in e for e in errs([p])), rid)
 
+    def test_protocol_id_pattern(self):
+        for bad in ('Bleeding', 'a_b', '-x', 'a b', 'x' * 61, 'a\n', 'é'):
+            p = ok()
+            p['id'] = bad
+            self.assertTrue(any('id must be' in e for e in errs([p])), repr(bad))
+        for good in ('a', '0a', 'cpr-adult', 'x' * 60):
+            p = ok()
+            p['id'] = good
+            self.assertEqual(errs([p]), [], good)
+
+    def test_coach_is_optional_object_of_two_positive_ints(self):
+        for good in ({'compressions': 30, 'breaths': 2}, {'compressions': 15, 'breaths': 1}):
+            p = ok()
+            p['coach'] = good
+            self.assertEqual(errs([p]), [])
+        for bad in (5, 'x', [], {}, {'compressions': 30}, {'compressions': 0, 'breaths': 2},
+                    {'compressions': 30, 'breaths': -1}, {'compressions': 30.5, 'breaths': 2},
+                    {'compressions': '30', 'breaths': 2}, {'compressions': True, 'breaths': 2}):
+            p = ok()
+            p['coach'] = bad
+            self.assertTrue(any('coach' in e for e in errs([p])), repr(bad))
+
     def test_reserved_step_id_all(self):
         p = ok()
         p['steps'][0]['id'] = 'all'

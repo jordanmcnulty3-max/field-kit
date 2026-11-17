@@ -313,7 +313,6 @@
   function sensors() {
     if (gpsWanted()) startGps(); else stopGps();
     if (navVisible()) startCompass(); else stopCompass();
-    tqTick();
   }
   document.addEventListener('visibilitychange', () => {
     sensors();
@@ -431,65 +430,6 @@
     $$('#unitSeg button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
     calc();
   }));
-
-  /* ---------- Tourniquet timers ---------- */
-  let tqs = list('tq', t => okId(t.id) && fin(t.start)).map(t => ({ ...t, limb: String(t.limb ?? 'Tourniquet') })), tqInt = null;
-  const hms = ms => {
-    const s = Math.max(0, Math.floor(ms / 1000));
-    return `${Math.floor(s / 3600)}:${String(Math.floor(s / 60) % 60).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
-  };
-  function renderTq() {
-    $('#tqList').innerHTML = tqs.map(t => `<div class="timer" data-id="${t.id}">
-      <b>${hms(Date.now() - t.start)}</b>
-      <button class="btn small ghost x" data-act="clear">Clear</button>
-      <span class="lbl">${esc(t.limb)}, on at ${new Date(t.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-    </div>`).join('');
-  }
-  function tqTick() {
-    const want = root.dataset.tab === 'emergency' && tqs.length && !document.hidden;
-    if (want && !tqInt) { renderTq(); tqInt = setInterval(renderTq, 1000); }
-    if (!want && tqInt) { clearInterval(tqInt); tqInt = null; }
-  }
-  $('#tqStart').addEventListener('click', () => {
-    tqs.push({ id: Date.now().toString(36), limb: $('#tqLimb').value, start: Date.now() });
-    store.set('tq', tqs); renderTq(); tqTick();
-  });
-  $('#tqList').addEventListener('click', e => {
-    const b = e.target.closest('button[data-act="clear"]'); if (!b) return;
-    const id = b.closest('.timer').dataset.id, t = tqs.find(x => x.id === id);
-    if (!t || !confirm(`Clear the ${t.limb} timer? Only do this once responders have the time.`)) return;
-    tqs = tqs.filter(x => x.id !== id); store.set('tq', tqs); renderTq(); tqTick();
-  });
-
-  /* ---------- CPR metronome ---------- */
-  let ac = null, cprInt = null, count = 0;
-  function click() {
-    const o = ac.createOscillator(), g = ac.createGain();
-    o.frequency.value = count % 30 === 0 ? 1320 : 880;
-    g.gain.setValueAtTime(0.0001, ac.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.6, ac.currentTime + 0.005);
-    g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.08);
-    o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime + 0.09);
-  }
-  $('#cprBtn').addEventListener('click', async () => {
-    const beat = $('#beat');
-    if (cprInt) {
-      clearInterval(cprInt); cprInt = null; beat.classList.remove('on'); beat.textContent = '0';
-      $('#cprBtn').textContent = 'Start metronome';
-      if (!wakeWanted && wakeLock) { await wakeLock.release(); wakeLock = null; }
-      return;
-    }
-    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
-    await ac.resume();
-    count = 0;
-    if ('wakeLock' in navigator && !wakeLock) { try { wakeLock = await navigator.wakeLock.request('screen'); } catch { /* ignore */ } }
-    cprInt = setInterval(() => {
-      count = count % 30 + 1; click();
-      beat.textContent = count; beat.classList.add('on'); setTimeout(() => beat.classList.remove('on'), 120);
-      if (navigator.vibrate) navigator.vibrate(25);
-    }, 60000 / 110);
-    $('#cprBtn').textContent = 'Stop metronome';
-  });
 
   /* ---------- Online status, install, offline cache ---------- */
   const net = () => { $('#netChip').hidden = navigator.onLine; };

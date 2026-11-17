@@ -1,8 +1,10 @@
 """Build-time validation for src/protocols/*.json (schema: design spec section 8)."""
+import re
 
 CATEGORIES = {'life', 'injury', 'environment', 'bites', 'illness', 'advanced'}
 TOOLS = {'tq', 'cpr', 'rate', 'burn'}
 ACTION_WARN_LEN = 200
+ID_PATTERN = re.compile(r'[a-z0-9][a-z0-9-]{0,59}')
 RESERVED_PROTOCOL_IDS = {'tool', 'report', 'all'}
 RESERVED_STEP_IDS = {'all'}
 ADVANCED_FIELDS = ('indications', 'contraindications', 'equipment', 'complications')
@@ -34,6 +36,10 @@ def _reachable(steps):
 
 def _blank(v):
     return not isinstance(v, str) or not v.strip()
+
+
+def _pos_int(v):
+    return isinstance(v, int) and not isinstance(v, bool) and v > 0
 
 
 def draft_ids(protocols):
@@ -112,6 +118,8 @@ def validate(protocols, fig_names):
             seen_ids.add(pid)
             if pid in RESERVED_PROTOCOL_IDS:
                 errors.append(f'{where}: id is reserved')
+            if not ID_PATTERN.fullmatch(pid):
+                errors.append(f'{where}: id must be lowercase letters, digits and hyphens, starting with a letter or digit, at most 60 characters')
         if _blank(p.get('title')):
             errors.append(f'{where}: missing title')
         cat = p.get('category')
@@ -127,6 +135,10 @@ def validate(protocols, fig_names):
             for f in ADVANCED_FIELDS:
                 if not p.get(f):
                     errors.append(f'{where}: advanced protocol missing {f}')
+        if 'coach' in p:
+            c = p['coach']
+            if not (isinstance(c, dict) and all(_pos_int(c.get(k)) for k in ('compressions', 'breaths'))):
+                errors.append(f'{where}: coach must be an object with positive whole numbers compressions and breaths')
         if p.get('draft') is True:
             warnings.append(f'{pid if isinstance(pid, str) else where}: draft, not source-checked')
 

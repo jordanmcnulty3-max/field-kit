@@ -154,11 +154,15 @@ def test_unknown_protocol_id_via_back_is_replaced(page, app_url):
 
 
 def test_reserved_segments_leave_emergency_showing(page, app_url):
-    for seg in ('tool/tq', 'report/x'):
-        page.goto(app_url + '#/emergency/' + seg)
-        assert not page.locator('#player').is_visible()
-        assert page.locator('#tab-emergency').is_visible()
-        assert page.url.endswith('#/emergency/' + seg)  # not redirected away
+    # Tool addresses are owned by the tools overlay (tests/test_tools.py): the player just stays out of them.
+    page.goto(app_url + '#/emergency/tool/tq')
+    assert not page.locator('#player').is_visible()
+    assert page.locator('#toolPane').is_visible()
+    assert page.url.endswith('#/emergency/tool/tq')
+    page.goto(app_url + '#/emergency/report/x')
+    assert not page.locator('#player').is_visible()
+    assert page.locator('#tab-emergency').is_visible()
+    assert page.url.endswith('#/emergency/report/x')  # not redirected away
 
 
 def test_stale_active_step_is_cleared(page, app_url):
@@ -231,8 +235,9 @@ def test_timer_counts_down_and_announces_completion(page, app_url):
 
 
 def test_tool_button_only_when_tools_exist_and_calls_start(page, app_url):
-    page.goto(app_url + '#/emergency/bleeding/s4')
-    assert page.locator('#player [data-act="tool"]').count() == 0  # FK.tools undefined (Task 5)
+    page.goto(app_url + '#/emergency')
+    page.evaluate("delete FK.tools; FK.protocol.open('bleeding', 's4')")
+    assert page.locator('#player [data-act="tool"]').count() == 0   # no tools module: no button
     page.evaluate("window.__t = []; FK.tools = { start: (n, o) => window.__t.push([n, o]) }")
     page.goto(app_url + '#/emergency')
     page.evaluate("FK.protocol.open('bleeding', 's4')")

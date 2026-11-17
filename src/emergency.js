@@ -47,8 +47,15 @@
   let chooserOpen = false;
   const draft = p => p.draft === true ? '<small class="em-draft">Draft</small>' : '';
   const protoBtn = p => '<button type="button" class="em-btn" data-open="' + esc(p.id) + '"><span>' + esc(p.title) + '</span>' + draft(p) + '</button>';
-  const protoKeys = list => list.filter(k => k[0] === 'p').map(k => get(k.slice(2))).filter(Boolean);
-  const group = (id, title, ps) => { $(id).innerHTML = ps.length ? '<h3 class="em-h">' + title + '</h3><div class="em-grid">' + ps.map(protoBtn).join('') + '</div>' : ''; };
+  const toolLabel = name => FK.tools && FK.tools.label ? FK.tools.label(name) : null;
+  const toolBtn = name => '<button type="button" class="em-btn" data-tool="' + esc(name) + '"><span>' + esc(toolLabel(name)) + '</span></button>';
+  /* Pinned and recent keys: p:<protocol> and t:<tool>. Anything that no longer exists is skipped. */
+  const keyBtns = list => list.map(k => {
+    if (k[0] === 'p') { const p = get(k.slice(2)); return p ? protoBtn(p) : ''; }
+    if (k[0] === 't') return toolLabel(k.slice(2)) ? toolBtn(k.slice(2)) : '';
+    return '';
+  }).filter(Boolean);
+  const group = (id, title, btns) => { $(id).innerHTML = btns.length ? '<h3 class="em-h">' + title + '</h3><div class="em-grid">' + btns.join('') + '</div>' : ''; };
 
   function renderResume() {
     const a = FK.protocol && FK.protocol.active();
@@ -85,8 +92,8 @@
   function render() {
     renderResume();
     renderLife();
-    group('emPinned', '★ Pinned', protoKeys(FK.pins.all()));
-    group('emRecent', 'Recent', protoKeys(FK.recent.all()));
+    group('emPinned', '★ Pinned', keyBtns(FK.pins.all()));
+    group('emRecent', 'Recent', keyBtns(FK.recent.all()));
     renderCats();
   }
 
@@ -94,6 +101,8 @@
   $('emHome').addEventListener('click', e => {
     const open = e.target.closest('[data-open]');
     if (open) { FK.protocol.open(open.dataset.open); return; }
+    const tool = e.target.closest('[data-tool]');
+    if (tool) { FK.tools.start(tool.dataset.tool); return; }
     const res = e.target.closest('[data-resume]');
     if (res) { FK.protocol.open(res.dataset.resume, res.dataset.step); return; }
     if (e.target.closest('[data-act="breathing"]')) { chooserOpen = !chooserOpen; render(); }

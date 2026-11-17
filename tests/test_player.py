@@ -270,3 +270,154 @@ def test_works_without_wake_lock_api(page, app_url):
     page.add_init_script("Object.defineProperty(navigator, 'wakeLock', {value: undefined})")
     page.goto(app_url + '#/emergency/bleeding')
     assert page.locator('#player').is_visible()
+
+
+def hash_of(page):
+    return page.evaluate('location.hash')
+
+
+def wait_hash(page, h):
+    page.wait_for_function(f"location.hash === {json.dumps(h)}")
+
+
+def open_from_home(page, app_url, path='branchy'):
+    inject(page)
+    page.goto(app_url + '#/emergency')
+    page.evaluate(f"FK.protocol.open('{path}')")
+
+
+def assert_back_leaves_for_good(page):
+    """After leaving, one Android Back must not land in a protocol."""
+    page.go_back()
+    page.wait_for_timeout(150)
+    assert not page.locator('#player').is_visible()
+
+
+def test_header_back_then_android_back_does_not_reenter(page, app_url):
+    open_from_home(page, app_url)
+    page.click('#player [data-act="next"]')
+    page.click('#player [data-act="home"]')
+    wait_hash(page, '#/emergency')
+    assert not page.locator('#player').is_visible()
+    assert page.evaluate('history.length') >= 2
+    page.go_back()
+    page.wait_for_timeout(150)
+    assert '/branchy' not in hash_of(page)
+    assert not page.locator('#player').is_visible()
+
+
+def test_android_back_after_done_does_not_reenter(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/emergency')
+    page.evaluate("FK.protocol.open('drafty')")
+    page.click('#player [data-act="done"]')
+    wait_hash(page, '#/emergency')
+    page.go_back()
+    page.wait_for_timeout(150)
+    assert 'drafty' not in hash_of(page)
+    assert not page.locator('#player').is_visible()
+
+
+def test_android_back_after_end_protocol_does_not_reenter(page, app_url):
+    open_from_home(page, app_url)
+    page.click('#player [data-act="next"]')
+    page.click('#player [data-act="toggleAll"]')
+    page.click('#player [data-act="end"]')
+    wait_hash(page, '#/emergency')
+    assert page.evaluate('FK.protocol.active()') is None
+    page.go_back()
+    page.wait_for_timeout(150)
+    assert 'branchy' not in hash_of(page)
+
+
+def test_all_steps_toggle_adds_no_history(page, app_url):
+    open_from_home(page, app_url)
+    n = page.evaluate('history.length')
+    page.click('#player [data-act="toggleAll"]')
+    page.click('#player [data-act="toggleAll"]')
+    assert page.evaluate('history.length') == n
+
+
+def test_ui_back_then_android_back_does_not_return_to_left_step(page, app_url):
+    open_from_home(page, app_url)
+    page.click('#player [data-act="next"]')        # q
+    page.click('#player [data-act="yes"]')         # y
+    page.click('#player [data-act="back"]')        # UI back -> q
+    assert action(page) == 'Is it yes?'
+    page.go_back()                                 # Android back -> first step, not y
+    assert action(page) == 'Step A action'
+    page.go_back()
+    page.wait_for_timeout(150)
+    assert not page.locator('#player').is_visible()
+
+
+def test_first_step_back_leaves_player_cleanly(page, app_url):
+    open_from_home(page, app_url, 'drafty')
+    page.click('#player [data-act="back"]')
+    wait_hash(page, '#/emergency')
+    page.go_back()
+    page.wait_for_timeout(150)
+    assert 'drafty' not in hash_of(page)
+
+
+def test_deep_link_then_header_back_then_android_back_does_not_reenter(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/emergency/branchy')
+    page.click('#player [data-act="next"]')
+    page.click('#player [data-act="home"]')
+    wait_hash(page, '#/emergency')
+    assert not page.locator('#player').is_visible()
+    page.go_back()
+    page.wait_for_timeout(150)
+    assert 'branchy' not in hash_of(page)
+    assert not page.locator('#player').is_visible()
+
+
+WAKE_STUB = """
+  window.__wake = { req: 0, rel: 0 };
+  Object.defineProperty(navigator, 'wakeLock', { configurable: true, value: {
+    request: () => new Promise(res => setTimeout(() => {
+      window.__wake.req++;
+      const l = { release: () => { window.__wake.rel++; return Promise.resolve(); }, addEventListener() {} };
+      res(l);
+    }, 30)) } });
+"""
+
+
+def test_wake_lock_requested_on_open_and_released_on_close(page, app_url):
+    page.add_init_script(WAKE_STUB)
+    page.goto(app_url + '#/emergency')
+    page.evaluate("FK.protocol.open('bleeding')")
+    page.wait_for_function('window.__wake.req === 1')
+    page.evaluate('FK.protocol.close()')
+    page.wait_for_function('window.__wake.rel === 1')
+
+
+def test_wake_lock_survives_quick_open_close_open(page, app_url):
+    page.add_init_script(WAKE_STUB)
+    page.goto(app_url + '#/emergency')
+    page.evaluate("FK.protocol.open('bleeding')")
+    page.evaluate('FK.protocol.close()')            # closes while the request is pending
+    page.wait_for_function('window.__wake.rel >= 1')
+    page.evaluate("FK.protocol.open('cpr-adult')")
+    page.wait_for_function('window.__wake.req >= 2')
+    page.wait_for_timeout(100)
+    assert page.evaluate('window.__wake.rel') == 1   # the second lock is still held
+    page.evaluate('FK.protocol.close()')
+    page.wait_for_function('window.__wake.rel === 2')
+
+
+def test_focus_goes_to_heading_on_intro_and_all_steps(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/emergency/adv')
+    page.click('text=I understand, show procedures')
+    assert page.evaluate("document.activeElement.id") == 'ppTitle'
+    page.goto(app_url + '#/emergency/branchy/all')
+    assert page.evaluate("document.activeElement.id") == 'ppTitle'
+
+
+def test_starting_timer_keeps_focus_inside_player(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/emergency/branchy/n')
+    page.click('#player [data-act="timer"]')
+    assert page.evaluate("document.activeElement.id") == 'ppTimerBar'

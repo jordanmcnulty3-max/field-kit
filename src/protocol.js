@@ -54,7 +54,8 @@
       lock = l;
       l.addEventListener('release', () => { if (lock === l) lock = null; });
     } catch { /* denied or unsupported: the screen just times out as usual */ }
-    lockPending = false;
+    finally { lockPending = false; }
+    if (isOpen && !lock) wakeOn();   // closed and reopened while the request was in flight
   }
   function wakeOff() { if (lock) { const l = lock; lock = null; l.release().catch(() => {}); } }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) wakeOn(); });
@@ -100,7 +101,7 @@
     const pinned = !!(pins && pins.has && pins.has(p.id));
     return '<header class="pp-head"><div class="pp-row">' +
       '<button class="pp-btn" data-act="home" aria-label="Close protocol and go back to Emergency">‹</button>' +
-      '<h2 class="pp-title">' + esc(p.title) + '</h2>' +
+      '<h2 class="pp-title" id="ppTitle" tabindex="-1">' + esc(p.title) + '</h2>' +
       (pins ? '<button class="pp-btn" data-act="pin" aria-pressed="' + pinned + '" aria-label="Pin this protocol">' + (pinned ? '★' : '☆') + '</button>' : '') +
       '<button class="pp-btn" data-act="toggleAll" aria-pressed="' + (cur.mode === 'all') + '" aria-label="All steps on one page">☰</button>' +
       '</div>' + (p.draft === true ? '<p class="pp-draft">Draft, not source-checked</p>' : '') + '</header>';
@@ -119,7 +120,7 @@
       (s.detail ? '<div class="pp-detail">' + paras(s.detail) + '</div>' : '') +
       (s.warn ? '<p class="pp-warn"><span aria-hidden="true">⚠ </span>' + esc(s.warn) + '</p>' : '') +
       (s.figSvg ? '<figure class="pp-fig">' + s.figSvg + '</figure>' : '') +
-      (tools ? '<button class="btn pp-wide" data-act="tool">' + esc(TOOL_LABEL[s.tool] || 'Open tool') + '</button>' : '') +
+      (tools ? '<button class="btn pp-wide" data-act="tool">' + esc((Object.hasOwn(TOOL_LABEL, s.tool) ? TOOL_LABEL[s.tool] : 'Open tool')) + '</button>' : '') +
       (s.timer && Number.isFinite(s.timer.seconds) && s.timer.seconds > 0
         ? '<button class="btn ghost pp-wide" data-act="timer">Start timer: ' + esc(s.timer.label || 'Timer') + ' (' + mmss(s.timer.seconds * 1000) + ')</button>' : '') +
       (isAsk(s) && s.ask.q && s.ask.q !== s.text ? '<p class="pp-q">' + esc(s.ask.q) + '</p>' : '');
@@ -166,21 +167,47 @@
       foot = stepFoot(p, i);
     }
     root.innerHTML = head(p) + prog + '<div class="pp-body" id="ppBody">' + body + '</div>' +
-      '<div class="pp-timerbar" hidden><span class="grow pp-timerlabel"></span><b class="pp-timerval"></b></div>' +
+      '<div class="pp-timerbar" id="ppTimerBar" tabindex="-1" hidden><span class="grow pp-timerlabel"></span><b class="pp-timerval"></b></div>' +
       (foot ? '<div class="pp-foot">' + foot + '</div>' : '') +
       '<div class="sr-live" id="ppLive" role="status" aria-live="polite"></div>';
     paintTimer();
     const body_ = root.querySelector('#ppBody');
     if (body_) body_.scrollTop = 0;
-    const a = root.querySelector('#ppAction');
+    const a = root.querySelector('#ppAction') || root.querySelector('#ppTitle');
     if (a) a.focus({ preventScroll: true });
   }
+
+  /* ---------- History depth: each player entry carries { pp, out, prev, at } in history.state.
+     pp = player entries pushed since the first one, out = first one was pushed from outside the player
+     (so there is an entry before it to unwind to), at/prev = screen on this/the previous entry. ---------- */
+  let curState = null, pendingState = null, pendingLeave = false, booted = false;
+  function stamp(key) {
+    let st = history.state;
+    if (pendingState) { st = { ...pendingState, at: key }; pendingState = null; }
+    else if (!st || typeof st.pp !== 'number') {
+      st = isOpen && curState ? { pp: curState.pp + 1, out: curState.out, prev: curState.at, at: key }
+        : { pp: 0, out: booted, prev: null, at: key };
+    } else if (st.at !== key) st = { ...st, at: key };
+    else { curState = st; return; }
+    history.replaceState(st, '', location.href);
+    curState = st;
+  }
+  /* Leave the player without ever landing back inside it. */
+  function leave() {
+    const st = curState;
+    if (!st) { FK.route.go('/' + SECTION, { replace: true }); return; }
+    if (st.out) history.go(-(st.pp + 1));
+    else if (st.pp > 0) { pendingLeave = true; history.go(-st.pp); }   // deep link: unwind to its first entry, then replace it
+    else FK.route.go('/' + SECTION, { replace: true });
+  }
+  function goReplace(path) { pendingState = curState; FK.route.go(path, { replace: true }); pendingState = null; }
 
   /* ---------- Open / close ---------- */
   function show(p, sub) {
     if (cur && cur.p.id !== p.id) stopTimer();
     const mode = needsAck(p) ? 'ack' : sub === 'all' ? 'all' : (sub || !hasIntro(p)) ? 'step' : 'intro';
     cur = { p, mode, i: mode === 'step' ? (sub ? stepIndex(p, sub) : 0) : -1 };
+    stamp(mode === 'step' ? cur.i : mode);
     isOpen = true;
     root.hidden = false;
     document.body.classList.add('playing');
@@ -190,7 +217,7 @@
   }
   function hide() {
     if (!isOpen) return;
-    isOpen = false; cur = null;
+    isOpen = false; cur = null; curState = null;
     stopTimer(); wakeOff();
     root.hidden = true; root.innerHTML = '';
     document.body.classList.remove('playing');
@@ -200,6 +227,13 @@
     queueMicrotask(() => { if (FK.route.current() === r) FK.route.go(path, { replace: true }); });
   }
   function onRoute(r) {
+    try { route(r); } finally { booted = true; }
+  }
+  function route(r) {
+    if (pendingLeave) {
+      pendingLeave = false;
+      if (r.tab === SECTION && r.parts[0]) { hide(); return redirect(r, '/' + SECTION); }
+    }
     const id = r.tab === SECTION ? r.parts[0] : undefined;
     if (!id || RESERVED.includes(id)) return hide();
     const p = get(id);
@@ -224,38 +258,38 @@
     from[p.id + ':' + to] = i;
     FK.route.go(stepPath(p, to));
   }
-  const leave = replace => FK.route.go('/' + SECTION, { replace });
-
+  
   root.addEventListener('click', e => {
     const b = e.target.closest('[data-act]');
     if (!b || !cur) return;
     const { p, i } = cur;
     switch (b.dataset.act) {
-      case 'home': leave(false); break;
+      case 'home': leave(); break;
       case 'start': from[p.id + ':0'] = 'intro'; FK.route.go(stepPath(p, 0)); break;
       case 'ack': FK.store.set('advAck', true); onRoute(FK.route.current()); break;
       case 'next': advance(p, i, successors(p, i)[0]); break;
       case 'yes': case 'no': { const to = stepIndex(p, p.steps[i].ask[b.dataset.act]); if (to >= 0) advance(p, i, to); break; }
       case 'back': {
         const prev = prevOf(p, i);
-        if (prev === null) leave(false);
+        if (prev === null) leave();
+        else if (curState && curState.pp > 0 && curState.prev === prev) history.back();   // same as Android Back
         else FK.route.go(prev === 'intro' ? base(p) : stepPath(p, prev));
         break;
       }
       case 'done': {
         const log = p.steps[i].log;
         if (log && typeof FK.log === 'function') FK.log(log);
-        clearProgress(); leave(true); break;
+        clearProgress(); leave(); break;
       }
-      case 'end': clearProgress(); leave(true); break;
+      case 'end': clearProgress(); leave(); break;
       case 'toggleAll': {
-        if (cur.mode === 'all') { const a = active(); const j = a && a.id === p.id ? stepIndex(p, a.step) : 0; FK.route.go(stepPath(p, j)); }
-        else FK.route.go(base(p) + '/all');
+        if (cur.mode === 'all') { const a = active(); const j = a && a.id === p.id ? stepIndex(p, a.step) : 0; goReplace(stepPath(p, j)); }
+        else goReplace(base(p) + '/all');
         break;
       }
       case 'open': FK.route.go(stepPath(p, +b.dataset.i)); break;
       case 'tool': if (FK.tools && FK.tools.start) FK.tools.start(p.steps[i].tool, { protocol: p.id }); break;
-      case 'timer': startTimer(p.steps[i].timer); b.blur(); break;
+      case 'timer': startTimer(p.steps[i].timer); root.querySelector('#ppTimerBar').focus({ preventScroll: true }); break;
       case 'pin': if (FK.pins && FK.pins.toggle) { FK.pins.toggle(p.id); const on = !!(FK.pins.has && FK.pins.has(p.id)); b.setAttribute('aria-pressed', String(on)); b.textContent = on ? '★' : '☆'; } break;
     }
   });
@@ -263,7 +297,7 @@
   FK.protocol = {
     get,
     open: (id, stepId) => { const p = get(id); if (p) FK.route.go(stepId && stepIndex(p, stepId) >= 0 ? base(p) + '/' + enc(stepId) : base(p)); },
-    close: () => { if (isOpen) leave(false); },
+    close: () => { if (isOpen) leave(); },
     active
   };
   FK.on('route', onRoute);

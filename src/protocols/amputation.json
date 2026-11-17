@@ -1,0 +1,88 @@
+{
+  "id": "amputation",
+  "title": "Amputation (severed body part)",
+  "category": "injury",
+  "keywords": [
+    "amputation",
+    "amputated",
+    "severed",
+    "cut off",
+    "finger cut off",
+    "lost finger",
+    "toe cut off",
+    "limb torn off",
+    "chainsaw",
+    "reattach",
+    "severed finger",
+    "blast injury"
+  ],
+  "summary": "Body part cut or torn off: stop the bleeding first, treat for shock, then save the part wrapped, bagged and cooled.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "A severed finger, toe, limb or other part is an emergency: get help coming straight away (MedlinePlus). The person's life comes before the part."
+    },
+    {
+      "id": "s2",
+      "text": "Stop the bleeding first with the Severe bleeding protocol: a tourniquet high above the wound for an arm or leg; firm direct pressure for a finger or toe.",
+      "detail": "TCCC (2026) puts a limb tourniquet on for any traumatic amputation of an arm or leg, 2 to 3 inches above the wound, directly on the skin, and a second one beside it if the first does not stop the bleeding.\n\nMedlinePlus (US National Library of Medicine) says to use a tourniquet only if the bleeding is life-threatening, because a tourniquet left on too long can harm the whole limb. For a finger or toe, firm direct pressure on the wound with gauze or clean cloth is the first step (AHA).\n\nKeep checking: bleeding can start again.\n\nOnce the bleeding is controlled, check for other injuries and do not overlook less obvious ones (MedlinePlus).",
+      "warn": "Saving the person comes before saving the part.",
+      "log": "Bleeding controlled after amputation"
+    },
+    {
+      "id": "s3",
+      "text": "Treat for shock: keep them lying down, warm and calm. Use the Shock protocol.",
+      "detail": "Amputation is painful and frightening. Reassure them and stay with them. Cover them to keep them warm (MedlinePlus), and use the Shock protocol for positioning and what to watch for."
+    },
+    {
+      "id": "s4",
+      "text": "Save the part: remove visible dirt, rinse it gently, wrap it in a clean damp cloth, and seal it in a plastic bag.",
+      "detail": "MedlinePlus: if the part is dirty, remove any visible debris that could contaminate the wound and rinse it gently. Wrap it in a clean, damp cloth (gauze or a clean cloth wetted with clean water), then seal it inside a plastic bag.\n\nDo not decide that a part is too small to save. Save every part you find.\n\nDo not try to push any part or bone back into place.",
+      "log": "Amputated part wrapped and bagged"
+    },
+    {
+      "id": "s5",
+      "text": "Put the sealed bag in ice and water so the part stays cold without touching the ice. Keep it with the casualty.",
+      "detail": "Cooling the part makes reattachment possible for longer. Without cooling, a part can usually be reattached only within about 4 to 6 hours (MedlinePlus).\n\nPut the sealed bag into a container of ice and water. The part must not touch ice directly, must not go straight into water without the bag, and must never go on dry ice, which can freeze and damage it (MedlinePlus).\n\nNo ice or cold water: keep the part away from heat as much as you can, and keep it with the casualty.",
+      "warn": "Never put the part directly on ice or in water, and never use dry ice.",
+      "log": "Amputated part cooled"
+    },
+    {
+      "id": "s6",
+      "text": "Keep checking the wound and any tourniquet for bleeding, and get them to medical care with the part.",
+      "detail": "Write down the time of injury and the time any tourniquet went on, and send that information with the casualty and the part.\n\nDo not promise the person that the part can be reattached (MedlinePlus).\n\nWhile you wait or travel, keep them warm, watch for shock, and keep checking the tourniquet or dressing.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not put the part directly on ice or straight into water, and never use dry ice.",
+    "Do not push any part or bone back into place.",
+    "Do not assume a part is too small to save.",
+    "Do not let care of the part delay controlling bleeding or treating shock.",
+    "Do not raise false hopes that the part can be reattached."
+  ],
+  "evacuate": [
+    "Evacuate every amputation urgently, with the part cooled and kept with the casualty.",
+    "Most urgent: a tourniquet in place, signs of shock, or other serious injuries.",
+    "Cooled parts can sometimes be reattached for longer; uncooled parts usually only within about 4 to 6 hours."
+  ],
+  "sources": [
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Amputation - traumatic, reviewed 2024-08-27",
+      "year": 2024,
+      "url": "https://medlineplus.gov/ency/article/000006.htm"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: section 3 Massive hemorrhage (tourniquet for any traumatic amputation)",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.1 Bleeding control (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

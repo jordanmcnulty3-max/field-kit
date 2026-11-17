@@ -1,0 +1,185 @@
+{
+  "id": "march",
+  "title": "Trauma check (MARCH)",
+  "category": "injury",
+  "keywords": [
+    "march",
+    "trauma",
+    "trauma check",
+    "injured",
+    "casualty",
+    "assessment",
+    "primary survey",
+    "accident",
+    "crash",
+    "fall",
+    "blast",
+    "shot",
+    "tccc",
+    "head to toe",
+    "check injured person"
+  ],
+  "summary": "Check an injured person in MARCH order: massive bleeding, airway, respiration (breathing), circulation (shock), then hypothermia and head injury.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "MARCH is the order that Tactical Combat Casualty Care (TCCC) teaches every service member for checking an injured person. It puts the things that kill fastest first:\n\nM: Massive bleeding.\nA: Airway.\nR: Respiration (breathing).\nC: Circulation (bleeding you missed, and shock).\nH: Hypothermia and Head injury.\n\nWork through the letters in order and fix each problem as you find it before moving on. Do not stop to treat small wounds until the check is done.\n\nWear gloves if you have them. If the scene becomes unsafe, stop and move to safety with the casualty if you can.\n\nThe app keeps one protocol open at a time. If you leave this check to open another protocol, open Trauma check (MARCH) again afterwards and tap through the letters you have already dealt with."
+    },
+    {
+      "id": "s2",
+      "text": "M, massive bleeding: run your hands and eyes over the whole body, front and back, looking for heavy bleeding.",
+      "detail": "TCCC calls this a blood sweep. Check the neck, armpits, arms, groin, legs and back, and look at your gloves or hands for blood as you go. Clothing can hide a lot of blood: open or cut it away where you need to see.\n\nTreat bleeding as life-threatening if it spurts, flows steadily, pools on the ground, soaks through clothing quickly, or will not slow when you press on it, or if the casualty is drowsy, confused or passing out.",
+      "ask": {
+        "q": "Is there heavy bleeding?",
+        "yes": "s3",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Stop it now with the Severe bleeding protocol: tourniquet high on an arm or leg; pack and press a neck, armpit or groin wound. Then go on to Airway.",
+      "detail": "TCCC for all service members: put a tourniquet on any massive bleeding from an arm or leg, pack wounds where a tourniquet cannot go (groin, armpit, neck) and hold pressure, then put a pressure bandage on. If the first tourniquet does not stop the bleeding, put a second one on beside it.\n\nThe Severe bleeding protocol has the full steps, including how to pack a wound and what to do for a chest or belly wound. Note the time of every tourniquet.\n\nWhen the bleeding is controlled, carry on with this check at A, Airway.",
+      "warn": "Organs showing through a belly wound: do not press on them or push them back. Cover loosely with a clean, moist dressing.",
+      "log": "Massive bleeding treated"
+    },
+    {
+      "id": "s4",
+      "text": "A, airway: if they answer you in a normal voice, their airway is open. Listen for snoring or gurgling and look for blood or damage in the mouth and face.",
+      "detail": "TCCC teaches look, listen and feel: trouble breathing, snoring or gurgling sounds, something visibly blocking the mouth, or a badly injured face all mean the airway is at risk.\n\nDo not sweep a finger blindly in the mouth. Remove only what you can see.\n\nAn awake casualty can take whatever position keeps their airway clear and lets them breathe most easily, including sitting up or leaning forward. Do not force them to lie down.",
+      "ask": {
+        "q": "Are they unresponsive (not awake, not answering you)?",
+        "yes": "s5",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Open the airway: tilt the head back and lift the chin. Then check: are they breathing normally?",
+      "detail": "If a neck injury is possible and you have been taught the jaw thrust, TCCC uses the jaw thrust instead of tilting the head. If the jaw thrust does not open the airway, tilt the head and lift the chin anyway: breathing comes first.\n\nLook, listen and feel for breathing. Occasional gasps are not normal breathing.",
+      "warn": "Possible neck injury: use a jaw thrust if you have been taught it. If the airway stays blocked, tilt the head anyway.",
+      "ask": {
+        "q": "Are they breathing normally?",
+        "yes": "s6",
+        "no": "s16"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Breathing but unresponsive: use the Recovery position protocol (it covers a possible spine injury). Keep watching their breathing, then go on to Respiration.",
+      "detail": "TCCC places an unresponsive casualty who is breathing in the recovery position, on their side with the head tilted back so blood or vomit can drain from the mouth.\n\nCivilian first aid guidance (the Recovery position protocol) leaves a casualty who may have a neck or back injury in the position found unless you must move them. Follow that protocol for how to roll them and when not to.\n\nIf breathing stops or becomes gasping, roll them onto their back and start CPR."
+    },
+    {
+      "id": "s7",
+      "text": "R, respiration: expose the chest and back. Look for wounds, watch both sides of the chest rise, and notice fast or struggling breathing.",
+      "detail": "TCCC: look, listen and feel for breathing, check that both sides of the chest rise equally, and listen for gurgling or wheezing. Expose the chest and back to find wounds, including small ones in the armpits and back.\n\nSigns of a wound through the chest wall: a sucking or hissing sound when they breathe in, froth or bubbles at the wound, difficulty breathing, chest or shoulder pain, coughing or spitting blood.\n\nLet an awake casualty sit up or take whatever position eases their breathing.\n\nBreathing that keeps getting harder after a chest injury can mean air is trapped inside the chest. Treating that with a needle is an advanced procedure: see Advanced procedures (needle decompression). Without it, evacuate urgently."
+    },
+    {
+      "id": "s8",
+      "text": "Is there a wound on the chest or back (anywhere over the ribcage)?",
+      "ask": {
+        "q": "Is there a wound on the chest or back?",
+        "yes": "s9",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Use the Open chest wound protocol: control bleeding without sealing the hole airtight, and watch their breathing. Then go on to Circulation.",
+      "detail": "Civilian first aid guidance leaves an open chest wound open to the air or loosely covered with a clean dry dressing, with a vented chest seal only for trained rescuers. TCCC applies a vented chest seal to every open chest wound. The Open chest wound protocol explains both and what to do if breathing gets worse.",
+      "log": "Chest wound treated"
+    },
+    {
+      "id": "s10",
+      "text": "C, circulation: recheck every wound and tourniquet for bleeding. Feel the pulse at the wrist and look for signs of shock.",
+      "detail": "TCCC: make sure every tourniquet and pressure bandage is still working, and look again for bleeding you missed. Mark each tourniquet with the time it went on.\n\nShock means the body is not getting enough blood. In an injured person, TCCC treats it as caused by blood loss until proven otherwise. Signs: a weak or absent pulse at the wrist, confusion or drowsiness without a head injury to explain it, losing focus or struggling to engage, fast breathing, sweaty, cool, clammy skin, and pale or grey skin.\n\nA badly broken thigh bone or pelvis can bleed heavily inside: treat it as urgent and use the Broken bone (fracture) protocol after this check.\n\nThe rate counter helps you count pulse and breathing rates for your notes.",
+      "tool": "rate"
+    },
+    {
+      "id": "s11",
+      "text": "Are there signs of shock?",
+      "detail": "Weak or absent wrist pulse; confused, drowsy or losing focus; fast breathing; pale, grey, cool, sweaty skin.",
+      "ask": {
+        "q": "Are there signs of shock?",
+        "yes": "s12",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "Use the Shock protocol: keep them lying down (unless they need to sit up to breathe) and warm, give nothing to eat or drink, and evacuate urgently.",
+      "detail": "TCCC: preventing shock by stopping bleeding is far better than treating it. Recheck the bleeding. Keep the casualty warm: cold makes bleeding worse and shock harder to survive.\n\nThe Shock protocol covers positioning and what to watch for."
+    },
+    {
+      "id": "s13",
+      "text": "H, hypothermia: get them off the cold ground onto insulation, replace wet clothing with dry, and cover them against wind and rain.",
+      "detail": "Injured people lose heat fast, even in mild weather, and cold makes bleeding worse. TCCC: start early and act firmly. Put insulation (a sleeping pad, pack, branches, clothing) between the casualty and the ground as soon as you can. Replace wet clothing with dry if possible. Cover them with whatever keeps them warm and dry: blankets, a poncho liner, a sleeping bag, an emergency blanket. Protect them from wind and rain.\n\nIf you have a heat source such as a heating blanket or heat packs, put it on the front of the chest and in the armpits, never directly on the skin, and do not wrap it around the body.\n\nIf a neck or back injury is possible, roll them as one unit to get insulation underneath (Neck or back (spine) injury protocol).\n\nKeep them covered when you move them.",
+      "log": "Hypothermia prevention started"
+    },
+    {
+      "id": "s14",
+      "text": "H, head injury: look for a blow to the head, confusion, vomiting, headache, dizziness, double vision, or trouble following simple instructions.",
+      "detail": "TCCC for all service members: note whether the casualty was knocked out or awake, and any headache, vomiting, ringing in the ears, double vision, dizziness, or a feeling that something is wrong.\n\nTCCC treats a casualty who still cannot follow simple instructions (show a thumbs up, hold up two fingers, blink) more than 10 minutes after the injury as a possible moderate or severe brain injury.",
+      "ask": {
+        "q": "Is there any sign of a head injury?",
+        "yes": "s15",
+        "no": "s17"
+      }
+    },
+    {
+      "id": "s15",
+      "text": "Use the Head injury and concussion protocol for danger signs and monitoring. Keep them still if a neck or back injury is possible.",
+      "detail": "TCCC: a casualty who cannot follow simple instructions more than 10 minutes after a head injury, with no other cause, should be evacuated as soon as possible to a hospital that can operate on the brain; outcomes are better with surgery within 5 hours of injury.\n\nIf they were confused or drowsy and you are not sure whether it is from the head injury or from blood loss, treat for shock as well.",
+      "log": "Head injury noted"
+    },
+    {
+      "id": "s17",
+      "text": "Check the whole body again for wounds you missed. Then dress wounds, splint fractures and treat burns. Repeat this check often.",
+      "detail": "TCCC: after MARCH, check for more wounds, then inspect and dress the wounds you know about, splint fractures and check pulses beyond the splint, and treat burns. Use the Broken bone (fracture), Burns, and Wound cleaning and care protocols.\n\nThe casualty can change quickly. Repeat MARCH from the top whenever something changes, after you move them, and regularly while you wait or travel.\n\nWrite down what you found and did, with times. The patient log and casualty report tools help with this.",
+      "end": true
+    },
+    {
+      "id": "s16",
+      "text": "Not breathing normally: start CPR now. Use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Civilian guidance (American Heart Association) is to start CPR on anyone who is unresponsive and not breathing normally.\n\nTCCC (military, on the battlefield) says CPR will not succeed and should not be attempted for a casualty of blast or penetrating injury who has no pulse, no breathing and no other signs of life. It also says a casualty with chest or multiple injuries and no pulse or breathing should first have both sides of the chest decompressed with a needle by someone trained, to rule out trapped air, before care stops (see Advanced procedures).\n\nIf the injury was minor and they collapsed for another reason (for example drowning, lightning or a medical problem), CPR is more likely to help.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not stop to treat small wounds before you have checked M, A, R and C.",
+    "Do not sweep a finger blindly in the mouth; remove only what you can see.",
+    "Do not force an awake casualty with a face or airway injury to lie flat; let them sit up or lean forward.",
+    "Do not seal an open chest wound airtight unless you are trained and have a vented chest seal.",
+    "Do not let an injured casualty get cold, even in mild weather."
+  ],
+  "evacuate": [
+    "Evacuate urgently anyone who needed a tourniquet, wound packing or a chest dressing.",
+    "Evacuate urgently anyone with signs of shock, breathing that is getting worse, or who is unresponsive.",
+    "Evacuate as soon as possible a casualty with a head injury who cannot follow simple instructions 10 minutes after the injury (TCCC: brain surgery within 5 hours improves outcomes).",
+    "Evacuate urgently a suspected broken pelvis or thigh bone: these can bleed heavily inside.",
+    "Evacuate anyone with burns, fractures or wounds that meet the conditions in those protocols."
+  ],
+  "sources": [
+    {
+      "name": "Joint Trauma System / CoTCCC, TCCC All Service Members (ASM) course, Skill Instructions TCCC-ASM-09-01, Rapid Casualty Assessment (1 Aug 2019)",
+      "year": 2019,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/4e2f071d-f5a3-4b9a-837c-4f191cdb34ea/contents"
+    },
+    {
+      "name": "Joint Trauma System / CoTCCC, Combat Lifesaver TCCC Speaker Notes TCCC-CLS-14-01, Module 05 Tactical Trauma Assessment (25 Jan 2020)",
+      "year": 2020,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/7b9eb915-741a-45ab-a178-a8096c385b31/contents"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: sections 3 Massive hemorrhage, 4 Airway, 5 Respiration, 6 Circulation, 7 Hypothermia prevention, 8 Traumatic brain injury, 14 Check for additional wounds, 17 CPR",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.4 Spinal motion restriction and 9.5 Concussion (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

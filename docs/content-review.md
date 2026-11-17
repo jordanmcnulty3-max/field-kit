@@ -30,6 +30,20 @@ Source keys used below:
 - **Abdominal and other torso wounds (bleeding).** The bleeding protocol now sends belly and other body wounds to firm direct pressure only (AHA-FA 9.1 Class 1 direct pressure). ARC-DB's bleeding algorithm lists "wound packing, if trained" for head, neck and trunk wounds; STB v2 lists packing locations without excluding the body. Should the group pack a heavily bleeding belly wound, or press only?
 - **Adult chest-thrust hand position (choking) — round 2.** No AHA or Red Cross page that could be opened gives a hand position (AHA-ABLS cpr.heart.org page and the AHA adult FBAO algorithm give indications only; ARC-LAY gives indications only; the AHA full text on ahajournals could not be reached). The technique in choking s8 now comes from MedlinePlus (US National Library of Medicine, https://medlineplus.gov/ency/article/000047.htm, review date 2026-02-17), which is outside the AHA/Red Cross tier: arms around the chest, fist on the middle of the breastbone between the nipples, firm backward thrusts. Mayo Clinic (https://www.mayoclinic.org/first-aid/first-aid-choking/basics/art-20056637, not on the authority list) gives a lower landmark: hands at the base of the breastbone, just above the joining of the lowest ribs. Which landmark should the group train?
 - **Chest-thrust trigger in pregnancy (choking).** AHA-ABLS 2025: chest thrusts in the "late stages of pregnancy". ARC-LAY: anyone "obviously pregnant or known to be pregnant" (a broader trigger). The step states both. Which should the group use?
+- **Spine injury with a compromised airway (recovery-position, spine-injury) — Task 11 addition.** MedlinePlus Spinal injury (https://medlineplus.gov/ency/article/000029.htm, reviewed 2025-06-04, outside the AHA/Red Cross tier) answers part of the earlier question: roll a person with a possible spine injury only if they are vomiting or choking on blood, or to check breathing; use at least two people, one holding the head, and turn them as one unit keeping head, neck and back in line. AHA-FA 2024 9.4 (stay as still as possible unless safety warrants movement) and the Red Cross lay page (unless moving for CPR or bleeding control) do not mention vomiting. spine-injury s3/s4 now use the MedlinePlus technique, attributed. MedlinePlus also says CPR on a possible spine injury should be compressions only without moving the neck; AHA includes breaths and the cpr protocols allow a jaw thrust. The spine protocol states both. Is the MedlinePlus roll acceptable to you as the group's method?
+- **Straightening a broken limb with poor circulation (fracture).** AHA-FA 2024 9.7 (Class 2b, C-EO): treat a deformed broken limb in the position found unless straightening is needed for safe and prompt transport; no evidence that first aid providers can reduce fractures safely. MedlinePlus Broken bone and How to make a splint (outside the tier): if circulation is poor and trained help is not quickly available, gently return the limb to a normal resting position. fracture s8 states AHA first, then the MedlinePlus off-grid option. Should the group be trained to realign a pulseless limb, or follow AHA strictly?
+- **Cold on a sprain: 20 to 30 minutes or 20 on, 20 off (sprain-dislocation, fracture).** AHA-FA 2024 9.6: limit cold to 20 to 30 minutes per application (supportive text: 3 to 4 times a day). Red Cross lay pages (Fractures, Muscle Bone and Joint Injury, Wounds): no more than 20 minutes, then wait 20 minutes; 10 on/10 off if 20 minutes is not tolerated. The timers are set to 20 minutes (inside both); sprain-dislocation states both; fracture states the Red Cross rule (AHA 9.7 says nothing about cold on fractures).
+- **Ice on burns (burns).** AHA-FA 2024 9.8 (Class 2b, C-LD): if clean running water is unavailable, superficial burns with intact skin may be cooled with ice wrapped in cloth, for no more than 10 minutes. Red Cross lay Burns page: do not use ice ("may further damage the skin"); use a cold, non-freezing compress. burns s5 gives the Red Cross compress first and the AHA ice option with its limits.
+- **Petroleum jelly on a burn (burns).** AHA-FA 2024 9.8 (Class 2b, B-R): after cooling, small partial-thickness burns managed at home may be dressed with petrolatum, petrolatum-based antibiotic ointment, honey or aloe under a non-stick dressing. Red Cross lay Burns page: do not put butter, mayonnaise or petroleum jelly on a burn (traps heat). burns s8 says no grease on a fresh burn and gives the AHA option for later care of small burns, attributed.
+- **Chemical in the eye: how long to flush (eye-injury, burns).** AHA-FA 2024 8.3 (Class 1, C-LD): 15 minutes of tap water. MedlinePlus Eye emergencies: at least 15 minutes. Red Cross lay Eye Injury and Burns pages: keep flushing until EMS arrives. Off-grid EMS may be hours away. The timer is 15 minutes; eye-injury s2 states all three.
+- **Covering both eyes (eye-injury).** MedlinePlus Eye emergencies: loosely bandage both eyes for an embedded object, and cover both eyes if blood pools in the eye, to limit eye movement. TCCC CLS Module 05 (2020): do not cover both eyes unless both are injured (military reason: the casualty can keep functioning). AHA-FA 9.10 says only to tape a shield or cup over the eye. eye-injury s5 states both.
+- **Tourniquet for every limb amputation (amputation).** TCCC 2026 TFC 3a: apply a limb tourniquet for any traumatic amputation. MedlinePlus Amputation - traumatic: do not use a tourniquet unless bleeding is life-threatening. MedlinePlus also says to raise the injured area, which AHA-FA 9.1 and ARC say does not help (bleeding protocol don'ts). amputation s2 uses TCCC (higher on the authority list) for arm or leg amputations and direct pressure for fingers and toes, and leaves out elevation.
+- **Impaled object exceptions (impaled-object).** The task asked for the exceptions the source gives to "leave it in place". None of the sources that could be opened give any: Red Cross lay (Life-threatening external bleeding, embedded objects) and MedlinePlus (Cuts and puncture wounds) say only do not remove. EMS and military teaching often allows removal when the object blocks the airway or prevents CPR, but no source for that was opened, so the protocol gives no exception. Do you want one, and from which source?
+- **Antibiotic ointment on wounds (wound-care).** AHA-FA 2024 9.3 supportive text: antibiotic or antibacterial dressings have not been shown to improve healing or reduce infection in clean wounds. WMS 2014 update (grade 2C): topical antibiotics may help, with little downside in people who are not allergic. MedlinePlus: apply antibacterial ointment. wound-care s7 states all three without choosing.
+- **Draining blisters (blisters).** WMS 2014 update (grade 1C): drain blisters larger than 5 mm but leave the roof on. NHS Blisters (UK, not on the authority list): do not burst a blister yourself; a doctor may drain a large or painful one with a sterilised needle. blisters s3 follows WMS and states the NHS position. No source opened describes how a lay person should drain one; the step says sterilised needle (from the NHS description of what a doctor does) and leaves the roof in place.
+- **Sleep after a concussion when no provider can check them (head-injury).** Red Cross Concussion: sleeping is generally considered safe once a health care provider has checked the person; the provider may recommend periodic waking. CDC: being very drowsy or impossible to wake is a danger sign. No source gives a waking schedule for someone who has not been checked. head-injury s8 lets them sleep with someone watching and treats difficulty waking as a danger sign. Do you want a waking interval, and from which medical adviser?
+- **CPR in traumatic cardiac arrest (march).** AHA: CPR for anyone unresponsive and not breathing normally. TCCC 2026 TFC 17: battlefield CPR for blast or penetrating trauma with no pulse, no breathing and no signs of life will not succeed and should not be attempted; torso or polytrauma casualties first get bilateral needle decompression. march s16 sends the user to CPR and states the TCCC position. Off-grid, which should the group follow?
+- **MARCH source level (march).** The newest All Service Members (ASM) curriculum document that could be opened is the 2019 ASM Rapid Casualty Assessment skill sheet; the TCCC 2026 guidelines no longer name the MARCH sequence or an ASM tier (they refer to ASM/CLS personnel). march follows the 2019 ASM sheet for the order and lay-level actions and TCCC 2026 for the clinical content. If a newer ASM course is in use, it should be compared.
 
 ## bleeding
 - Sources read: AHA-FA 2024 section 9.1; ARC-DB Wounds and Bleeding (direct pressure ILCOR 2020/2023 update; hemostatic dressings 2025 update; tourniquets 2021; improvised tourniquets 2025 update; pediatric tourniquets 2022 update; sequence of interventions 2024/2025); STB lay presentation v2 (2019); TCCC 2026 Massive Hemorrhage and Tourniquet Reassessment.
@@ -132,3 +146,131 @@ Source keys used below:
   - Raise feet about 6 to 12 inches (about 30 to 45 degrees), only with no trauma — AHA-FA (Class 2b); ARC-DB; ARC-LAY "about 6 to 12 inches". Checked twice.
   - Leg-raise benefit transient, under 7 minutes — ARC-DB evidence summary. Written as "only a few minutes". Read once.
 - Notes: Supine if alert (AHA-FA 2a); recovery position if at risk of airway obstruction or cannot be continuously watched (AHA-FA 2a). Nothing by mouth, keep temperature normal, reassure (ARC-LAY). Leg raising was once routine; current guidance makes it optional and only without injury.
+
+# Task 11: Injuries (written and source-checked 2026-11-17)
+
+Source keys added for this batch (all opened with WebFetch in this session on 2026-11-17; curl to these hosts is blocked by the proxy):
+- AHA-FA (as above), sections 8.2, 8.3, 9.1, 9.3 to 9.8 and 9.10. Read twice: once for the recommendations and supportive text, once for a figure-by-figure check.
+- ARC-LAY pages: Burns, Concussion, Head Neck and Spinal Injury, Fractures, Muscle Bone and Joint Injury, Eye Injury, Wounds, Abdominal Injury, Bleeding - Life-Threatening External (https://www.redcross.org/take-a-class/resources/learn-first-aid/<page>). ARC-DB (firstaidguide.wpenginepowered.com) refused the fetch (robots), so nothing from ARC-DB is used in this batch.
+- TCCC 2026 guidelines (allogy book, as above): TFC 3, 4, 5, 6, 7, 8, 9, 14, 15, 16, 17. Read twice.
+- TCCC-ASM: TCCC All Service Members Skill Instructions TCCC-ASM-09-01, Rapid Casualty Assessment, 1 Aug 2019. https://learning-media.allogy.com/api/v1/pdf/4e2f071d-f5a3-4b9a-837c-4f191cdb34ea/contents
+- TCCC-CLS: Combat Lifesaver TCCC Speaker Notes TCCC-CLS-14-01, Module 05 Tactical Trauma Assessment, 25 Jan 2020. https://learning-media.allogy.com/api/v1/pdf/7b9eb915-741a-45ab-a178-a8096c385b31/contents
+- WMS-WOUND: Quinn et al., WMS Practice Guidelines for Basic Wound Management in the Austere Environment: 2014 Update, Wilderness Environ Med 2014;25:S118-S133 (copy at https://www.femecv.com/sites/default/files/uploads/files/WMS%20heridas_2014.pdf); the June 2014 version (25:295-310) at https://apps.dtic.mil/sti/pdfs/ADA614573.pdf was read as the second pass. Same recommendations and numbers in both.
+- WMS-SPINE: Hawkins et al., WMS Clinical Practice Guidelines for Spinal Cord Protection: 2024 Update, Wilderness Environ Med 2024;35(1 suppl):78S-93S. Abstract only (PubMed 38379496); the SAGE full text, Europe PMC and wms.org could not be opened.
+- CDC-TBI: CDC, Symptoms of Mild TBI and Concussion, last reviewed 2025-09-15. https://www.cdc.gov/traumatic-brain-injury/signs-symptoms/index.html
+- CDC-TET: CDC, About Tetanus, last reviewed 2026-09-08. https://www.cdc.gov/tetanus/about/index.html
+- MLP (MedlinePlus, US National Library of Medicine; outside the AHA/Red Cross tier, used where the tier gives no technique): Amputation - traumatic (000006, reviewed 2024-08-27); Broken bone (000001, 2026-01-14); How to make a splint (000040, 2025-06-04); Spinal injury (000029, 2025-06-04); Eye emergencies (000054, 2025-04-29); Cuts and puncture wounds (000043, 2025-10-14).
+- SP-BURN: StatPearls (NCBI Bookshelf content), Burn Evaluation and Management, last updated 2023-08-08. https://statpearls.com/point-of-care/18712 (the ncbi.nlm.nih.gov copy is behind a reCAPTCHA).
+- ACI-BURN: NSW Agency for Clinical Innovation (NSW Health), ECAT paediatric assessment: Burn, Dec 2023. https://aci.health.nsw.gov.au/ecat/paediatric/assessment/burn
+- NHS-BLISTER: NHS, Blisters, last reviewed 2023-11-22. https://www.nhs.uk/conditions/blisters/ (not on the authority list; used only to record a disagreement and for basic hygiene points).
+
+Not used, could not be opened: WMS Clinical Practice Guideline on Care of Burns in the Wilderness, 2025 (Bitter et al., Wilderness Environ Med 2025;36(4):549-558, PMID 40534479) — PubMed returned an empty page and SAGE refused; any newer WMS friction-blister guideline (SAGE refused); StatPearls Rule of Nines (NBK513287, reCAPTCHA).
+
+## Burn-area tool tables (BURN_TABLES in src/emergency-tools.js)
+- Adult table in the app: head 9, left arm 9, right arm 9, chest 9, abdomen 9, upper back 9, lower back 9, left leg 18, right leg 18, groin 1 (total 100).
+  - SP-BURN: head 9%, each arm 9%, anterior chest and abdomen 18%, posterior chest and back 18%, each leg 18%, perineum 1%. ACI-BURN: head 9, each arm 9, front torso 18, back torso 18, each leg 18, perineum 1.
+  - Result: MATCHES both. The sources give the front and back of the trunk as 18% each; the app's split into chest 9 + abdomen 9 and upper back 9 + lower back 9 is the conventional halving and sums to the same. No change needed.
+- Child table in the app: head 18, each arm 9, front of body 18, back of body 18, each leg 14 (total 100).
+  - ACI-BURN, chart labelled "For children less than 9 years": head 18, each arm 9, front torso 18, back torso 18, each leg 14. Per-year adjustment: for every year of life, take 1% from the head and add 0.5% to each leg. Result: MATCHES ACI exactly.
+  - SP-BURN: "For children, the head is 18%, and the legs are 13.5% each" (no arm or trunk values given). Differs from the app by 0.5% per leg; ACI (which gives the complete table) is used.
+  - Age: the app's child numbers are the proportions at birth to about 1 year. ACI says to adjust by 1% head and 0.5% per leg per year of age, and labels the chart for children under 9. At age 5, for example, ACI gives head 13 and each leg 16.5. The app does not adjust by age; the burns protocol `notes` (shown above the figure) now tell the user this. Suggested code change for the controller, optional: either label the child mode "baby (under 1)" or add an age adjustment; no table numbers need correcting.
+- Palm method: ACI-BURN and SP-BURN: the patient's whole hand (palm and fingers) is about 1%; SP-BURN: palm without fingers about 0.5%.
+- Depths counted: SP-BURN: only partial-thickness and full-thickness burns are counted; ACI-BURN: ignore simple erythema (epidermal burns). Both used in `notes`.
+- Checked twice (second fetch of each page on 2026-11-17 quoted the same figures).
+
+## march
+- Sources read: TCCC-ASM (2019); TCCC-CLS (2020); TCCC 2026 TFC 3, 4, 5, 6, 7, 8, 14, 17; AHA-FA 9.4, 9.5.
+- Numbers checked:
+  - 10 minutes — cannot follow simple instructions after head injury = possible moderate/severe TBI — TCCC 2026 TFC 8b. Checked twice.
+  - 5 hours — surgery within 5 hours improves TBI outcome — TCCC 2026 TFC 8b. Checked twice.
+  - 2 to 3 inches (in Severe bleeding, referred to) — TCCC TFC 3a. Checked twice.
+- Notes: Order M-A-R-C-H and the lay actions at each letter from TCCC-ASM (blood sweep; head tilt-chin lift or jaw thrust; seated or recovery position; check shock and bleeding; keep warm and dry; head injury signs). The ASM sheet puts head injury as a separate step 5; the CLS notes and the task brief put it under H, as here. TCCC 2026 TFC 4c/4d: conscious casualty any position, unconscious recovery position. Shock signs: TCCC TFC 6b (altered mental status without brain injury, weak or absent radial pulse) and TCCC-ASM (fast breathing, losing focus, cool clammy skin, pale or grey). Hypothermia: TCCC TFC 7a-d. CPR: TCCC TFC 17 vs AHA, open question. Each letter refers by exact title to Severe bleeding, Recovery position, CPR adult/child/infant, Open chest wound, Shock, Head injury and concussion, Broken bone (fracture), Burns, Wound cleaning and care. No blind finger sweeps (TCCC-CLS).
+
+## head-injury
+- Sources read: AHA-FA 9.5; CDC-TBI; ARC-LAY Concussion; ARC-LAY Head Neck and Spinal Injury; TCCC 2026 TFC 8.
+- Numbers checked:
+  - 10 minutes, 5 hours — TCCC TFC 8b. Checked twice.
+  - "within a couple of weeks" — most people feel better — CDC-TBI. Checked twice.
+- Notes: Remove from activity, no return until evaluated by a health care professional (AHA 9.5, Class 1 B-NR). Activate EMS for loss of consciousness, worsening headache, vomiting, altered mental status, seizures, visual changes, scalp swelling or deformity (AHA 9.5, Class 1 C-EO). Adult and child danger signs from CDC-TBI (re-read word for word on the second pass). Bruising around eyes or behind ears, blood or fluid from nose or ears: ARC-LAY Head Neck and Spinal. No painkillers for the headache: ARC-LAY (both pages). Sleep: ARC-LAY Concussion FAQ, open question. The sources give no interval for repeat checks; the protocol says so rather than inventing one.
+
+## spine-injury
+- Sources read: AHA-FA 9.4; ARC-LAY Head Neck and Spinal Injury; WMS-SPINE (abstract only); MLP Spinal injury; TCCC 2026 TFC 4h.
+- Numbers checked: none numeric.
+- Notes: Change in guidance recorded as asked: AHA-FA 2024 9.4 — stay as still as possible unless safety warrants movement, activate EMS (Class 1, C-EO); routine rigid cervical collars and long spine boards by first aid providers are not recommended (Class 3: Harm, C-LD); routine spinal immobilization not recommended for penetrating trauma (Class 3: Harm, C-LD). WMS-SPINE abstract: goal-oriented care, no rigid collars or backboards for suspected spine injuries. TCCC TFC 4h: no cervical stabilization for penetrating trauma only. Moving and rolling: AHA (safety), ARC-LAY (CPR, bleeding), MLP (vomiting or choking on blood, two or more people, roll as a unit); see open questions. Helmet on and child in car seat unless CPR: ARC-LAY. The WMS field spine-clearance criteria could not be read and are not included.
+
+## fracture
+- Sources read: AHA-FA 9.7; ARC-LAY Fractures; ARC-LAY Muscle Bone and Joint Injury; MLP Broken bone; MLP How to make a splint; TCCC 2026 TFC 16; TCCC-CLS; WMS-WOUND (open fractures).
+- Numbers checked:
+  - 20 minutes on, 20 minutes off; 10 on, 10 off if not tolerated — cold pack — ARC-LAY Fractures, Muscle Bone and Joint, Wounds. Checked three times.
+  - About 2 seconds — capillary refill — MLP Broken bone. Checked twice.
+- Notes: Blue, purple or pale limb → activate EMS immediately (AHA 9.7, Class 1 C-EO; checked twice). Splinting useful (2a), position found unless straightening needed for transport (2b), cover open wounds with clean dressing (2b). Joints above and below: TCCC-CLS and MLP splint page. Check circulation before and after: TCCC-CLS ("check pulses before and after splinting"); TCCC 2026 TFC 16 says only "re-check pulses". Pelvis is life-threatening; rib care with a pillow: ARC-LAY. Hip/pelvis/thigh move by clothes only if necessary: MLP Broken bone. Open fractures need antibiotics (WMS-WOUND 1A) and are an evacuation criterion (WMS 1C); antibiotics themselves are not given (content rule 5). Realignment: open question.
+
+## sprain-dislocation
+- Sources read: AHA-FA 9.6, 9.7; ARC-LAY Muscle Bone and Joint Injury, Fractures, Wounds; MLP Broken bone (sling).
+- Numbers checked:
+  - 20 to 30 minutes per application — AHA 9.6 (Class 2a, C-LD). Checked twice.
+  - 3 to 4 times a day — AHA 9.6 supportive text (expert suggestion). Checked twice.
+  - 20 minutes on, 20 off (10/10 if not tolerated) — ARC-LAY. Checked three times.
+  - About half the width overlap — compression wrap — ARC-LAY Muscle Bone and Joint. Read once.
+- Notes: Current wording used as asked: AHA/Red Cross 2024 do not use RICE; they recommend avoiding activity that causes pain and seeking medical attention (Class 1), cold for pain and swelling (2a), compression wrap for an acute ankle sprain for comfort (2b, no evidence it reduces swelling or speeds recovery), and say nothing about elevation. Ice-and-water bag in a damp cloth cools best (AHA supportive text). No heat on a fresh injury: ARC-LAY. Reduction: "see Advanced procedures".
+
+## burns
+- Sources read: AHA-FA 9.8, 8.2; ARC-LAY Burns; TCCC 2026 TFC 7, 15; WMS-WOUND (burn section, evacuation criteria); SP-BURN; ACI-BURN.
+- Numbers checked:
+  - 5 to 20 minutes — cooling time — AHA 9.8 (Class 2b, B-NR); ARC-LAY. Checked twice in each.
+  - Cool or cold clean running water; lukewarm only if cool not available — water temperature — AHA 9.8 supportive text; ARC-LAY. Checked twice. Neither gives degrees.
+  - At least 15 minutes — chemical skin flushing — AHA 8.2 (Class 1, B-NR); ARC-LAY. Checked twice.
+  - At least 15 minutes — electrical burn cooling — ARC-LAY. Checked twice.
+  - 10 minutes maximum — wrapped ice, superficial burns with intact skin only — AHA 9.8 (2b, C-LD) and supportive text. Checked twice.
+  - Preadolescent children — hypothermia monitoring during cooling — AHA 9.8 (Class 1, C-LD). Checked twice.
+  - More than 10% adults, 5% children — usually burn centre care — AHA 9.8 supportive text. Checked twice.
+  - Larger than the person's palm — partial-thickness burn needing evaluation — AHA 9.8 (Class 1, B-NR). Checked twice.
+  - 20% — TCCC threshold for heat-reflective shell and IV fluids — TCCC TFC 15d/e. Checked twice.
+  - Nearest 10% — TCCC TBSA estimate — TCCC TFC 15c. Checked twice.
+  - 1% whole hand, 0.5% palm only — SP-BURN, ACI-BURN. Checked twice.
+- Notes: `tool: "burn"` on s6 (size estimate). `evacuate` holds the AHA criteria (full-thickness; partial-thickness larger than palm or on face, hands, feet, genitals; smoke inhalation signs; burn centre thresholds), ARC-LAY 911 and hospital lists (joints, circumferential, electrical, chemical, radiation, explosion, very young or old, other conditions, any burn on a child), WMS-WOUND (infected burns, uncontrolled pain) and TCCC (over 20%). `notes` hold which depths count, the hand rule, the child-figure age note and TCCC rounding. What not to put on a burn: ARC-LAY (butter, mayonnaise, petroleum jelly, adhesive bandages, ice). Jewellery removal: AHA (Class 1, C-EO) and ARC-LAY. Do not clean a severe burn: ARC-LAY. Dry chemicals brushed off first (AHA 2a); hydrofluoric acid and phenol need other agents (AHA supportive). Electrical: power off, cool at least 15 minutes, evaluate even small burns, be ready for CPR and AED (ARC-LAY). Over-the-counter pain medicine reasonable (AHA 9.8, 2a); no dose given, "as the package directs". WMS burn guideline 2025 not read (see above).
+
+## eye-injury
+- Sources read: AHA-FA 8.3, 9.10; ARC-LAY Eye Injury; MLP Eye emergencies; TCCC 2026 TFC 9; TCCC-CLS.
+- Numbers checked:
+  - 15 minutes — chemical eye irrigation with copious tap water — AHA 8.3 (Class 1, C-LD); MLP "at least 15 minutes". Checked twice.
+- Notes: Irrigate immediately (AHA Class 1); saline, Ringer's or eyewash if immediately available (2a); avoid contaminating other eye and others (Class 1). Head tilted so injured eye is lower: ARC-LAY, MLP. Penetrating or high-velocity injury, irregular pupil, bleeding, vision loss → immediate care (AHA 9.10 Class 1). Do not rub (Class 1); tape a hard shield or paper cup (Class 1, C-EO). TCCC: rigid shield, not a pressure patch; rapid visual acuity check. Low-energy particles: tears or rinse (2a). Contact lens with foreign-body sensation: remove, stop, seek care (Class 1). Blow or cut: cool compress, no pressure on the eyeball (MLP). Eyelid cuts may reach the eyeball (MLP).
+
+## amputation
+- Sources read: MLP Amputation - traumatic; TCCC 2026 TFC 3a; AHA-FA 9.1.
+- Numbers checked:
+  - About 4 to 6 hours — reattachment window without cooling — MLP. Checked twice.
+  - 2 to 3 inches above the wound — TCCC TFC 3a. Checked twice.
+- Notes: Part care exactly per MLP: remove visible debris, rinse gently, wrap in clean damp cloth, seal in plastic bag, place bag in ice water bath; not directly on ice, not in water without a bag, no dry ice; if no cold water keep away from heat. No AHA or Red Cross page that could be opened covers the amputated part, so MLP (outside the tier) is the only source for it. Elevation (MLP) left out: AHA/ARC say elevation does not help control bleeding. Tourniquet: open question.
+
+## impaled-object
+- Sources read: ARC-LAY Bleeding - Life-Threatening External (embedded or impaled objects); MLP Cuts and puncture wounds; ARC-LAY Abdominal Injury.
+- Numbers checked: none numeric.
+- Notes: Do not remove (removal can make bleeding much worse); pressure around the object; several dressings around it, bulky dressings or roller bandages, bandaged in place; tourniquet above the object if needed (ARC-LAY). MLP: do not remove a long or deeply stuck object. No source opened gives exceptions (open question).
+
+## abdominal-wound
+- Sources read: ARC-LAY Abdominal Injury; ARC-LAY Bleeding - Life-Threatening External; ARC-LAY Shock (nothing by mouth, via the Shock protocol); AHA-FA 9.1.
+- Numbers checked: none numeric.
+- Notes: Consistent with bleeding s17: no pushing organs back, no direct pressure on them, moist dressings with clean warm tap water or saline laid loosely, plastic wrap or foil loosely over them, back with knees bent unless painful, leave as found with possible spine injury, shock care, stay with them. Packing is not instructed (no lay-level source supports packing a belly wound; ARC lists packing "if trained" for the trunk — existing open question). Signs list from ARC-LAY Abdominal Injury.
+
+## wound-care
+- Sources read: AHA-FA 9.3; WMS-WOUND; MLP Cuts and puncture wounds; CDC-TET.
+- Numbers checked:
+  - At least 1 litre — irrigation volume — WMS-WOUND (1C). Checked twice (both WMS copies).
+  - About 8 psi from a 35 mL syringe with a 19-gauge needle — WMS-WOUND. Checked twice.
+  - 5 minutes — rinse a minor puncture under running water — MLP. Checked twice.
+  - A quarter inch (0.64 cm) deep — may need stitches — MLP. Checked twice.
+  - 1 to 12% — infection rate with proper care — WMS-WOUND. Checked twice.
+  - 24 to 48 hours — start rabies prophylaxis — WMS-WOUND. Checked twice.
+  - 10 years / 5 years — tetanus booster for clean / other wounds after 3 or more doses — WMS-WOUND table; CDC-TET 10-year boosters. Checked twice.
+  - 3 to 21 days — tetanus symptom onset — CDC-TET. Checked twice.
+- Notes: Irrigate until no visible debris (AHA Class 1); tap water or saline (2a); occlusive dressing (2a); signs to remove dressing and seek care (2a); bites to a medical facility (Class 1). WMS: potable water, high pressure, no additives except povidone-iodine for rabies-prone wounds, clip not shave, remove easy organic foreign bodies, leave contaminated wounds open, moist dressing, evacuation list. Wound closure (WMS time limits 6 h, 10 h face and scalp) is mentioned only as "see Advanced procedures"; the time limits are not in the protocol. Antibiotics are not given (rule 5).
+
+## blisters
+- Sources read: WMS-WOUND (friction blisters); NHS-BLISTER.
+- Numbers checked:
+  - 5 mm — threshold for draining — WMS-WOUND (1C). Checked twice.
+- Notes: Prevention (footwear, dry feet, wicking socks, 1C; antiperspirant one study; weak evidence for moleskin, tape, benzoin, lubricants, powders), hot spots and small blisters padded or covered with hydrocolloid or hydrogel, large blisters drained not unroofed and covered, no tissue glue — all WMS-WOUND. Infection signs and hygiene: NHS. A newer WMS blister guideline could not be opened. Red Cross lay pages have no blister topic.
+
+## Task 11 path check
+Every path through every protocol was listed with a script (34 paths in march, 9 in fracture, 8 in abdominal-wound, 5 in burns, 4 in eye-injury, 3 in head-injury, 2 each in spine-injury, sprain-dislocation, wound-care, blisters, 1 each in amputation and impaled-object) and each instruction was checked against the casualties who can reach it. Changes made from that check: march s5 warn (jaw thrust with possible neck injury); march s12 (sit up if needed to breathe); march s13 detail (roll as a unit to insulate a possible spine injury); fracture s8/s11 (no "position found" contradiction after the poor-circulation step; ribs and pelvis excluded from splinting in the action); impaled-object s2 (object in the eye goes to the Eye injury protocol before any pressure); blisters s4 (ointment under gauze only for drained blisters). Belly-organ warnings are on every pressure step reachable with an evisceration (march s3, impaled-object s3, abdominal-wound s9).

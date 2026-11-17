@@ -1,0 +1,190 @@
+{
+  "id": "burns",
+  "title": "Burns",
+  "category": "injury",
+  "keywords": [
+    "burn",
+    "burns",
+    "scald",
+    "fire",
+    "flame",
+    "hot water",
+    "boiling water",
+    "chemical burn",
+    "acid",
+    "lye",
+    "electric shock",
+    "electrical burn",
+    "electrocution",
+    "smoke",
+    "blistered skin",
+    "rule of nines",
+    "campfire",
+    "stove"
+  ],
+  "summary": "Thermal, chemical and electrical burns: stop the burning, cool with running water, estimate size, cover loosely, and decide on evacuation.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe and stop the burning. Get the person away from the heat source if you can do it safely.",
+      "detail": "Your safety first: do not become a second casualty. Move the person away from flames, hot surfaces or hot liquid if it is safe to do so. If it is safe, move them to clean running water.\n\nElectrical injury: do not touch the person until you are sure the power is off.\n\nChemical burn: protect yourself with gloves and eye protection if you have them, and do not spread the chemical onto yourself, others, or unburned skin.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty."
+    },
+    {
+      "id": "s2",
+      "text": "Is it a chemical burn (acid, lye, cleaner, fuel or other chemical)?",
+      "ask": {
+        "q": "Is it a chemical burn?",
+        "yes": "s10",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Is it an electrical burn (electric shock or lightning)?",
+      "ask": {
+        "q": "Is it an electrical burn?",
+        "yes": "s12",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Remove rings, watches, belts and tight clothing from the burned area now, before it swells. Leave anything that is stuck to the skin.",
+      "detail": "Burned areas swell, and jewellery or tight clothing can then cut off circulation (AHA). Remove clothing near the burn unless it is stuck to the skin (Red Cross)."
+    },
+    {
+      "id": "s5",
+      "text": "Cool the burn under clean, cool running water right away, for 5 to 20 minutes (electrical burns: at least 15). Stop if a child starts shivering.",
+      "detail": "Cool thermal burns immediately, preferably with clean running water (AHA, Class 1). Cooling for 5 to 20 minutes may be reasonable (AHA); Red Cross also says 5 to 20 minutes. There is no agreed best duration. For an electrical burn, Red Cross says cool for at least 15 minutes.\n\nWater temperature: cool or cold clean running water (AHA, Red Cross). If you have no cool water, lukewarm water is acceptable (Red Cross).\n\nNo running water: use a cool or cold compress, such as a clean cloth soaked in cool water (Red Cross). AHA (2024) also allows ice wrapped in a cloth, for no more than 10 minutes, but only on a superficial burn where the skin is not broken; Red Cross says do not use ice.\n\nWatch for getting cold: children (before their teens) cool down fast and can become hypothermic while a burn is cooled, so watch them for shivering or feeling cold (AHA). With a large burn, watch any casualty for hypothermia (Red Cross, WMS). Cool the burn, not the whole person, and keep the rest of them covered and warm.\n\nDo not try to clean a severe burn (Red Cross).",
+      "warn": "No ice on blistered, broken or deep burns. Keep the rest of the body warm, especially children.",
+      "timer": {
+        "seconds": 1200,
+        "label": "Cool the burn (5 to 20 min)"
+      },
+      "log": "Burn cooled with water"
+    },
+    {
+      "id": "s6",
+      "text": "Estimate the burn size: count only blistered or deeper burns, not skin that is just red. Their whole hand (palm and fingers) is about 1%.",
+      "detail": "Burn depth (AHA, Red Cross):\n- Superficial: red and painful, no blisters, only the outer layer of skin. Usually heals without a scar.\n- Partial-thickness: blisters, which may ooze; the outer and second layers of skin are damaged.\n- Full-thickness: through all the skin and possibly into fat, muscle or bone. The skin may look white, brown, black or charred, and there may be little or no pain.\nAny burn deeper than superficial needs medical care (Red Cross).\n\nOnly partial-thickness and full-thickness burns count towards the size; skin that is only red is left out (StatPearls; NSW Agency for Clinical Innovation).\n\nUse the burn area tool: tap each body region that is burned. For small or scattered burns, count how many of the casualty's own whole hands (palm and fingers together) would cover them: each is about 1% of their body. The palm alone, without fingers, is about 0.5%.\n\nField estimates are rough. TCCC estimates to the nearest 10% using the rule of nines.",
+      "tool": "burn",
+      "log": "Burn size estimated"
+    },
+    {
+      "id": "s7",
+      "text": "Decide on evacuation using the list: deep burns, blistered burns bigger than their palm, burns of the face, hands, feet, genitals or joints, or smoke breathed in.",
+      "detail": "Get medical care (AHA): any full-thickness burn; a partial-thickness (blistered) burn larger than the casualty's palm; a partial-thickness burn on the face, hands, feet or genitals.\n\nGet help urgently for signs that hot smoke or gases were breathed in: burns to the face, singed nose hairs, soot around the nose or mouth, or difficulty breathing (AHA). TCCC: facial burns, especially from a fire in an enclosed space, may come with injury to the airway, so watch breathing closely.\n\nBurns on the face, hands, feet or genitals, or over more than 10% of the body (5% in a child), are usually treated in a burn centre (AHA). Large burns can cause major fluid loss and organ failure.\n\nRed Cross also lists: burns all the way around an arm, leg, the chest or the neck; electrical, chemical, radiation or explosion burns; burns in a young child, an older person, or someone with other injuries or medical conditions; and any burn on a child.\n\nOff-grid (WMS): also evacuate burns that become infected or whose pain you cannot control.\n\nThe full list is under When to evacuate, and the burn area tool shows it beside the total."
+    },
+    {
+      "id": "s8",
+      "text": "Cover the burn loosely with a clean, dry, non-stick dressing or clean cloth. No butter, grease, oils or adhesive bandages on it.",
+      "detail": "Cover burned skin and intact blisters loosely with a clean cloth or a non-stick dry dressing (AHA, Red Cross, TCCC). This protects the burn, eases pain, and does not trap heat. Do not use adhesive bandages on the burn (Red Cross).\n\nChemical and electrical burns: Red Cross leaves them uncovered while waiting for EMS, and covers them loosely if EMS is delayed or the person has to be moved. Off-grid that usually means covering them loosely.\n\nDo not put butter, mayonnaise, petroleum jelly or other greasy substances on a burn: they trap heat (Red Cross).\n\nLater, for a small partial-thickness burn you are looking after yourself (not one that needs evacuation), AHA says petroleum jelly, an antibiotic ointment in petroleum jelly, honey, or aloe vera under a clean non-stick dressing may be reasonable, after the burn has been cooled. Red Cross says not to put petroleum jelly on a burn.\n\nLarge burns: TCCC wraps a casualty with burns over 20% of the body in an emergency blanket or heat-reflective shell, which covers the burns and helps prevent hypothermia.",
+      "log": "Burn dressed"
+    },
+    {
+      "id": "s9",
+      "text": "Keep them warm, watch their breathing, and treat for shock if the burn is large. Over-the-counter pain medicine is reasonable.",
+      "detail": "Burn casualties lose heat quickly: keep them covered and off cold ground (TCCC, Red Cross).\n\nWatch breathing closely after a burn to the face or a fire in an enclosed space; it can get worse (TCCC, AHA).\n\nLarge burns can cause shock: use the Shock protocol and evacuate urgently.\n\nPain: over-the-counter acetaminophen or ibuprofen-type medicine is reasonable for burn pain (AHA). Use it as the package directs.\n\nKeep checking the burn for signs of infection while you wait or travel: spreading redness, swelling, pus, worse pain, or fever.",
+      "end": true
+    },
+    {
+      "id": "s10",
+      "text": "Brush off any dry chemical, then flush with plenty of running water for at least 15 minutes. Remove contaminated clothing and jewellery.",
+      "detail": "Get the chemical off the skin straight away (AHA). Flush the skin with running water for at least 15 minutes, unless the chemical's own instructions or a poison centre say otherwise (AHA, Red Cross).\n\nDry chemicals: brush off as much as you can first, with a gloved hand or a cloth, without spreading it (AHA, Red Cross). Some dry chemicals (for example lye powder, or sodium or potassium metal) react with water.\n\nRemove contaminated clothing, jewellery and anything else touching the area so the chemical is not held against the skin (AHA).\n\nSome chemicals, such as hydrofluoric acid and phenol, need special treatment other than water; follow the product label, safety data sheet, or a poison centre if you can reach one.\n\nCall for help (EMS) for a large exposure, breathing problems, or if the person feels unwell all over (AHA).",
+      "timer": {
+        "seconds": 900,
+        "label": "Flush chemical (15 min)"
+      },
+      "log": "Chemical flushed with water"
+    },
+    {
+      "id": "s11",
+      "text": "Did the chemical also get into an eye?",
+      "ask": {
+        "q": "Did the chemical get into an eye?",
+        "yes": "s14",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "Electrical: make sure the power is off before you touch them. Check breathing; be ready to give CPR.",
+      "detail": "Electricity can stop the heart and breathing (Red Cross). Do not touch the person until the power source is off.\n\nEvery electrical burn needs to be checked by a health care provider, even a small one, because the injury inside can be much worse than the skin shows (Red Cross).",
+      "ask": {
+        "q": "Are they breathing normally?",
+        "yes": "s4",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s13",
+      "text": "Not breathing normally: start CPR now. Use the CPR, adult protocol (or CPR, child or CPR, infant), and an AED if you have one.",
+      "detail": "Red Cross: be ready to give CPR and use an AED after an electrical injury. Treat the burns once breathing and circulation are dealt with.",
+      "end": true
+    },
+    {
+      "id": "s14",
+      "text": "Chemical in the eye: use the Eye injury protocol now and flush the eye for 15 minutes. Treat the skin burn afterwards.",
+      "detail": "Flush the eye immediately with plenty of clean water (AHA). Red Cross: keep flushing the eye until help takes over. The Eye injury protocol has the steps.\n\nAfter the eye has been flushed, come back to this protocol for the burn size and dressing.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not put ice on a blistered, broken or deep burn, or leave wrapped ice on any burn for more than 10 minutes.",
+    "Do not put butter, mayonnaise, grease, oil or petroleum jelly on a fresh burn.",
+    "Do not use adhesive bandages on a burn.",
+    "Do not pull off clothing that is stuck to the burn.",
+    "Do not try to clean a severe burn.",
+    "Do not touch someone after an electric shock until the power is off.",
+    "Do not let a child or someone with a large burn get cold while you cool the burn."
+  ],
+  "evacuate": [
+    "Evacuate urgently: signs of breathing in smoke or hot gases (burns to the face, singed nose hairs, soot around nose or mouth, difficulty breathing).",
+    "Evacuate urgently: burns over 10% of the body in an adult or 5% in a child (usually treated in a burn centre). Over 20%: needs IV fluids (TCCC); go as fast as possible and keep them warm.",
+    "Evacuate urgently: a burn that goes all the way around an arm, leg, the chest or the neck.",
+    "Get medical care: any full-thickness burn (white, brown, black or charred, little pain), or a blistered burn larger than the casualty's palm.",
+    "Get medical care: burns of the face, hands, feet, genitals or a joint.",
+    "Get medical care: every electrical, lightning, chemical, radiation or explosion burn, even a small one.",
+    "Get medical care: any burn on a child, an older person, or someone with other injuries or illnesses.",
+    "Off-grid: also evacuate a burn that becomes infected or pain you cannot control (WMS)."
+  ],
+  "notes": [
+    "Count only blistered (partial-thickness) and deeper (full-thickness: white, brown, black or leathery, often little pain) burns. Leave out skin that is only red.",
+    "Small or scattered burns: the casualty's whole hand, palm and fingers together, is about 1% of their body.",
+    "The child figure uses a baby's proportions. For each year of age, about 1% comes off the head and about 0.5% goes onto each leg; from about age 9, use the adult figure.",
+    "Field estimates are rough. TCCC rounds to the nearest 10%."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, sections 9.8 Burns: cooling thermal burns and 8.2 Chemical exposure to the skin (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Burns (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/burns"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: section 15 Burns and section 7 Hypothermia prevention",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "Wilderness Medical Society, Practice Guidelines for Basic Wound Management in the Austere Environment: 2014 Update (Quinn et al., Wilderness Environ Med 2014;25:S118-S133)",
+      "year": 2014,
+      "url": "https://www.femecv.com/sites/default/files/uploads/files/WMS%20heridas_2014.pdf"
+    },
+    {
+      "name": "StatPearls (NCBI Bookshelf), Burn Evaluation and Management (rule of nines, palm method, depths counted), last updated 8 Aug 2023",
+      "year": 2023,
+      "url": "https://statpearls.com/point-of-care/18712"
+    },
+    {
+      "name": "NSW Agency for Clinical Innovation (NSW Health), ECAT paediatric assessment: Burn (rule of nines, adult and under 9 years, per-year adjustment), Dec 2023",
+      "year": 2023,
+      "url": "https://aci.health.nsw.gov.au/ecat/paediatric/assessment/burn"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

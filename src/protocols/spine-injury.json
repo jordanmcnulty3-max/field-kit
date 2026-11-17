@@ -1,0 +1,103 @@
+{
+  "id": "spine-injury",
+  "title": "Neck or back (spine) injury",
+  "category": "injury",
+  "keywords": [
+    "spine",
+    "spinal",
+    "neck injury",
+    "back injury",
+    "broken neck",
+    "broken back",
+    "paralysed",
+    "paralyzed",
+    "numb legs",
+    "cant move legs",
+    "fall from height",
+    "diving",
+    "cervical collar",
+    "neck brace",
+    "backboard"
+  ],
+  "summary": "Possible neck or back injury: keep them still, no rigid collar or board, move only when you must, and evacuate.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Suspect a neck or back injury after: a vehicle crash or being thrown from a vehicle, a fall from higher than the person's own height, a dive headfirst into shallow water, or a hard blow to the head or body (Red Cross).\n\nSigns (Red Cross): neck or back pain or visible injury; weakness, tingling, numbness, or being unable to move part of the body; a change in alertness or confusion; trouble with breathing, vision or balance; bruising around the eyes or behind the ears; blood or fluid from the nose or ears; a damaged helmet.\n\nSpinal injuries often come with serious head, chest or belly injuries (AHA). Use the Trauma check (MARCH) for the whole casualty: bleeding and breathing come first."
+    },
+    {
+      "id": "s2",
+      "text": "Tell them not to move and to answer you by speaking, not nodding. Leave them in the position you found them.",
+      "detail": "Current first aid guidance (AHA and Red Cross 2024) is for the person to stay as still as possible, unless they must be moved for safety. This replaced the older practice of strapping people to boards and putting on neck collars.\n\nIf they cannot keep still, MedlinePlus (US National Library of Medicine) advises holding the head and neck in the position found: do not try to straighten the neck, and do not let it bend or twist. Do not let them get up or walk.\n\nLeave a helmet on unless you need to give CPR, and keep a baby or child in their car seat unless you need to take them out for CPR (Red Cross).\n\nGunshot or stab wounds with no fall or blow: routine immobilization is not recommended for penetrating injuries (AHA, Class 3: Harm; TCCC). Do not let worry about the spine delay treating bleeding or breathing.",
+      "warn": "Do not put on a rigid neck collar or strap them to a board."
+    },
+    {
+      "id": "s3",
+      "text": "Do you have to move or roll them now?",
+      "detail": "Move them only when you must: the scene is dangerous (fire, traffic, rising water, rockfall); you need to give CPR; you need to reach and stop heavy bleeding; or they are vomiting or choking on blood and need to be on their side.\n\nOtherwise, answer No and keep them still.",
+      "ask": {
+        "q": "Do you have to move or roll them now?",
+        "yes": "s4",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Move them only as far as you must. To roll them, use two or more people and turn the head, neck and body together as one unit.",
+      "detail": "AHA and Red Cross: move a person with a possible spine injury only when safety requires it, or to give CPR or control bleeding.\n\nHow to roll (MedlinePlus): one person holds the head; the other kneels at the side. Turn the person onto their side as one piece, keeping the head, neck and back in a straight line, without letting the head move relative to the body. MedlinePlus advises rolling only if they are vomiting or choking on blood, or so you can check breathing.\n\nFor CPR, roll them onto their back the same way and use the CPR, adult protocol. If you have been taught the jaw thrust, TCCC uses it when a neck injury is possible; if it does not open the airway, tilt the head anyway, because breathing comes first. (MedlinePlus says to give compressions only without changing the neck position; AHA guidance includes breaths.)\n\nAfter moving them, keep them as still as possible again.",
+      "log": "Moved with spine precautions"
+    },
+    {
+      "id": "s5",
+      "text": "Keep them still, reassured, and neither cold nor overheated. Watch their breathing and responsiveness all the time.",
+      "detail": "Red Cross: keep checking the person, care for other injuries, keep them from getting cold or overheated, treat for shock if needed, and reassure them.\n\nIf they become unresponsive, check breathing. If they are not breathing normally, start CPR. If they vomit, roll them onto their side as a unit (step above).\n\nNote any numbness, weakness, or loss of movement and when it started, and check again regularly. Write it down."
+    },
+    {
+      "id": "s6",
+      "text": "Get them to medical care, keeping them as still as you can. Do not let them get up or walk while a spine injury is possible.",
+      "detail": "Wilderness Medical Society (2024): spinal care in the field should aim to protect the spinal cord and spine while keeping the casualty and rescuers safe, rather than following a fixed technique, and suspected spine injuries should not be immobilized with rigid collars or backboards.\n\nThe WMS guideline also describes how trained rescuers decide in the field whether a spine injury can be ruled out, which matters for whether someone can walk out. This protocol does not teach that. If you are not sure, treat it as a spine injury.\n\nPlan the evacuation so they can stay lying still. Keep them warm and padded, and keep watching breathing.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not put on a rigid cervical collar or strap them to a long spine board (AHA Class 3: Harm; WMS 2024).",
+    "Do not bend, twist or lift the head or body, or try to straighten the neck.",
+    "Do not let them get up or walk while a spine injury is possible.",
+    "Do not remove a helmet unless you need to give CPR.",
+    "Do not delay treating bleeding or breathing problems because of a possible spine injury.",
+    "Do not immobilize someone just because they have a gunshot or stab wound."
+  ],
+  "evacuate": [
+    "Evacuate anyone with a suspected neck or back injury.",
+    "Most urgent: numbness, tingling, weakness or loss of movement; trouble breathing; reduced responsiveness; or other serious injuries."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.4 Spinal motion restriction (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Head, Neck, and Spinal Injury (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/head-neck-spinal-injury"
+    },
+    {
+      "name": "Wilderness Medical Society, Clinical Practice Guidelines for Spinal Cord Protection: 2024 Update (Hawkins et al., Wilderness Environ Med 2024;35(1 suppl):78S-93S), abstract only",
+      "year": 2024,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38379496/"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Spinal injury, reviewed 2025-06-04",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000029.htm"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: section 4 Airway (no cervical stabilization for penetrating trauma alone)",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

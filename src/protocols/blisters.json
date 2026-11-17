@@ -1,0 +1,80 @@
+{
+  "id": "blisters",
+  "title": "Blisters",
+  "category": "injury",
+  "keywords": [
+    "blister",
+    "blisters",
+    "hot spot",
+    "foot blister",
+    "heel blister",
+    "rubbing",
+    "boots",
+    "moleskin",
+    "hydrocolloid",
+    "popped blister",
+    "friction"
+  ],
+  "summary": "Friction blisters: pad hot spots early, drain large blisters but keep the roof, cover, watch for infection, and prevent the next one.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "At the first sore or rubbing spot (hot spot), stop and protect it: a ring of moleskin around it, or a hydrocolloid or gel blister dressing over it.",
+      "detail": "Hot spots and small blisters do best when the pressure is taken off them: a doughnut-shaped pad of moleskin with a hole over the sore spot, or a hydrogel or hydrocolloid dressing (WMS).\n\nThis protocol is for friction blisters. Blisters from burns: use the Burns protocol. Blisters that appear for no reason, or with a rash: get medical advice."
+    },
+    {
+      "id": "s2",
+      "text": "Is the blister bigger than about 5 mm (1/5 inch) across?",
+      "ask": {
+        "q": "Is the blister bigger than about 5 mm across?",
+        "yes": "s3",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Large blister: WMS advises draining it. Wash it, pierce it with a sterilised needle, let the fluid out, and leave the roof of skin in place.",
+      "detail": "WMS (2014 update): blisters larger than 5 mm should be drained but not unroofed, then covered (next step).\n\nThe NHS (UK) advises the public not to burst a blister themselves and says a doctor may drain a large or painful one with a sterilised needle. Off-grid, with walking to do, the WMS advice applies; use a needle that is as clean as you can make it, and wash the skin first.\n\nKeep the roof of skin: do not peel it off or pick at the edges (NHS, WMS). If the blister has already burst, let the fluid drain, gently wash and pat dry, and leave the loose skin in place (NHS).",
+      "log": "Blister drained"
+    },
+    {
+      "id": "s4",
+      "text": "Cover it with a hydrocolloid or gel blister dressing, or pad around it with a moleskin ring. A drained blister can instead have ointment under gauze or moleskin.",
+      "detail": "WMS: cover a drained blister with a hydrocolloid or hydrogel dressing, or with petroleum jelly or antibacterial ointment under gauze or moleskin. Small blisters and hot spots: a moleskin doughnut around the blister, or a hydrocolloid or hydrogel dressing over it.\n\nKeep it clean: wash gently and pat dry, and wash your hands before touching a burst blister (NHS). Tissue glue is not recommended for blisters (WMS).",
+      "log": "Blister dressed"
+    },
+    {
+      "id": "s5",
+      "text": "Watch for infection: heat, green or yellow pus, or redness spreading around it. Get medical care if it looks infected.",
+      "detail": "An infected blister can spread to the skin or blood if ignored (NHS). Redness can be harder to see on brown or black skin.\n\nOff-grid (WMS): evacuate if infection is starting and you have no suitable antibiotics, or if it gets worse despite them. The Wound cleaning and care protocol lists more warning signs of a spreading infection."
+    },
+    {
+      "id": "s6",
+      "text": "Prevent the next one: well-fitting boots, moisture-wicking socks, dry feet, and fresh socks when they get sweaty.",
+      "detail": "WMS: properly fitting footwear and keeping the feet dry, including a moisture-wicking sock system, help prevent blisters. One study found an aluminium-based antiperspirant applied to the soles for several days reduced blisters. Evidence for moleskin, tape, tincture of benzoin, lubricants and powders as prevention is weak.\n\nNHS: break in new boots or shoes with short periods of wear, wear thick moisture-wicking socks for exercise, change socks often if your feet sweat, and wear gloves when using tools.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not peel off the roof of a blister or pick at its edges.",
+    "Do not ignore hot spots; pad them before they blister.",
+    "Do not use tissue glue on blisters."
+  ],
+  "evacuate": [
+    "Get medical care for a blister that looks infected (heat, pus, spreading redness).",
+    "Off-grid: evacuate early infection if you have no suitable antibiotics, or infection that worsens despite them (WMS)."
+  ],
+  "sources": [
+    {
+      "name": "Wilderness Medical Society, Practice Guidelines for Basic Wound Management in the Austere Environment: 2014 Update (Quinn et al., Wilderness Environ Med 2014;25:S118-S133)",
+      "year": 2014,
+      "url": "https://www.femecv.com/sites/default/files/uploads/files/WMS%20heridas_2014.pdf"
+    },
+    {
+      "name": "NHS (UK National Health Service), Blisters, last reviewed 22 Nov 2023",
+      "year": 2023,
+      "url": "https://www.nhs.uk/conditions/blisters/"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

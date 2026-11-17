@@ -1,0 +1,131 @@
+{
+  "id": "abdominal-wound",
+  "title": "Belly (abdominal) injury",
+  "category": "injury",
+  "keywords": [
+    "abdominal",
+    "abdomen",
+    "belly",
+    "stomach wound",
+    "gut",
+    "evisceration",
+    "intestines out",
+    "bowel",
+    "stabbed belly",
+    "shot in stomach",
+    "internal bleeding",
+    "kicked in stomach",
+    "hard belly"
+  ],
+  "summary": "Open or closed belly injury: organs showing get a loose moist cover, objects stay in, press only on bleeding, care for shock, evacuate.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Every belly injury with any of these signs needs emergency care (Red Cross): severe pain; an open wound; organs showing; an object stuck in the belly; severe bleeding; a tender, swollen or rigid belly; bruising of the belly; nausea or vomiting (sometimes with blood); signs of shock.\n\nA closed injury (a blow, a fall, a crash, a kick) can bleed heavily inside without any wound. Use the Trauma check (MARCH) if there are other injuries."
+    },
+    {
+      "id": "s2",
+      "text": "Expose the belly, sides and back and look for wounds, bruising, swelling and anything stuck in.",
+      "detail": "Remove clothing from around any wound (Red Cross). Check the back and sides too: there may be an exit wound or a second wound."
+    },
+    {
+      "id": "s3",
+      "text": "Are organs (such as bowel) showing through a wound?",
+      "ask": {
+        "q": "Are organs showing through a wound?",
+        "yes": "s4",
+        "no": "s6"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Do not push organs back in or press on them. Lay clean dressings wetted with clean warm water or saline loosely over them.",
+      "detail": "Red Cross: remove clothing from around the wound, do not push the organs back in, and do not apply direct pressure. Wet clean dressings (gauze or clean cloth) with clean, warm tap water or saline and lay them loosely over the wound.\n\nThis is the same care as in the Severe bleeding protocol.",
+      "warn": "Do not push organs back in. Do not press on them.",
+      "log": "Abdominal wound covered with moist dressing"
+    },
+    {
+      "id": "s5",
+      "text": "If you have plastic wrap or aluminium foil, lay it loosely over the wet dressings.",
+      "detail": "Red Cross: loosely cover the moist dressings with plastic wrap or aluminium foil, if available. Lay it on loosely; do not wrap it tightly."
+    },
+    {
+      "id": "s6",
+      "text": "Is an object stuck in the belly?",
+      "ask": {
+        "q": "Is an object stuck in the belly?",
+        "yes": "s7",
+        "no": "s8"
+      }
+    },
+    {
+      "id": "s7",
+      "text": "Leave it in place. Pad around it with bulky dressings so it cannot move. Use the Impaled object protocol.",
+      "detail": "Do not remove an embedded object: removing it can make the bleeding much worse (Red Cross). Place dressings around it, build up bulky padding, and bandage the padding in place.",
+      "warn": "Do not pull the object out.",
+      "log": "Impaled object stabilized"
+    },
+    {
+      "id": "s8",
+      "text": "Is a wound bleeding heavily?",
+      "ask": {
+        "q": "Is a wound bleeding heavily?",
+        "yes": "s9",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s9",
+      "text": "Press firmly on the bleeding with gauze or clean cloth, but never on organs showing or on a stuck object. Keep pressing until it stops.",
+      "detail": "Direct pressure is the first treatment for bleeding (AHA). Push down on the bleeding spot with gauze or clean cloth, and if blood soaks through, press harder rather than lifting the dressing.\n\nPress around an impaled object, not on it. Do not press on organs that are showing.\n\nThis app does not guide packing of belly wounds; press instead. Bleeding inside the belly cannot be controlled from outside: evacuate urgently.",
+      "warn": "Organs showing through a belly wound: do not press on them or push them back. Cover loosely with a clean, moist dressing.",
+      "log": "Pressure held on belly wound"
+    },
+    {
+      "id": "s10",
+      "text": "Lay them on their back with knees bent, unless that hurts. If a neck or back injury is possible, leave them as found.",
+      "detail": "Red Cross: position the person on their back with knees bent, unless it causes pain. If a head, neck or back injury is suspected, leave them in the position found unless you must move them for safety, CPR, or to control bleeding.\n\nIf they are vomiting, the Shock protocol explains when to turn them onto their side, and the Neck or back (spine) injury protocol covers how to roll someone who may have a spine injury."
+    },
+    {
+      "id": "s11",
+      "text": "Keep them warm, give nothing to eat or drink, care for shock, and stay with them. Watch breathing, alertness, and the belly.",
+      "detail": "Red Cross: stay with the person, keep checking them, watch for changes in breathing and responsiveness, keep them from getting too cold or too hot, and give care for shock (Shock protocol, which includes giving nothing by mouth).\n\nA closed injury can bleed inside. Watch for the belly becoming more tender, swollen or hard, new bruising, vomiting blood, and signs of shock: fast weak pulse, fast breathing, pale, grey, cool, moist skin, confusion, excessive thirst.\n\nEvery belly wound, and any closed belly injury with these signs, needs urgent evacuation.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not push organs back in or press on them.",
+    "Do not remove an object stuck in the belly.",
+    "Do not pack a belly wound; press on bleeding instead.",
+    "Do not give food or drink.",
+    "Do not wrap plastic wrap or foil tightly."
+  ],
+  "evacuate": [
+    "Evacuate urgently: every open belly wound, especially with organs showing or an object stuck in.",
+    "Evacuate urgently: a closed belly injury with severe pain, a tender, swollen or hard belly, bruising, vomiting (especially blood), or signs of shock."
+  ],
+  "sources": [
+    {
+      "name": "American Red Cross, Abdominal Injury (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/abdominal-injury"
+    },
+    {
+      "name": "American Red Cross, Bleeding - Life-Threatening External (embedded objects) (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/bleeding-life-threatening-external"
+    },
+    {
+      "name": "American Red Cross, Shock (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/shock"
+    },
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.1 Bleeding control (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

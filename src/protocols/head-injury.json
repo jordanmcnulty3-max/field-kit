@@ -1,0 +1,120 @@
+{
+  "id": "head-injury",
+  "title": "Head injury and concussion",
+  "category": "injury",
+  "keywords": [
+    "head injury",
+    "concussion",
+    "hit head",
+    "bump on head",
+    "knocked out",
+    "tbi",
+    "brain injury",
+    "skull",
+    "dizzy",
+    "blow to the head",
+    "fall",
+    "passed out",
+    "headache after fall"
+  ],
+  "summary": "Blow to the head: recognise concussion and the danger signs that mean evacuate now, and keep watching for hours to days.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe. Deal with heavy bleeding first, using the Severe bleeding protocol.",
+      "detail": "A concussion is a brain injury caused by a bump, blow or jolt to the head or body that shakes the brain. It can be hard to recognise and the signs may not show straight away.\n\nScalp wounds often bleed heavily. Control life-threatening bleeding before anything else.\n\nA blow hard enough to injure the head can also injure the neck. Think of a neck or back injury after a fall from higher than the person's own height, a vehicle crash, a dive into shallow water, or a hard hit in sport."
+    },
+    {
+      "id": "s2",
+      "text": "Are they unresponsive (not awake, not answering you)?",
+      "ask": {
+        "q": "Are they unresponsive?",
+        "yes": "s3",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Unresponsive after a head injury: Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Check their breathing now.",
+      "detail": "If they are not breathing normally, start CPR (CPR, adult protocol).\n\nIf they are breathing, a neck or back injury is possible: leave them in the position found unless you must move them, and keep watching their breathing all the time. The Recovery position and Neck or back (spine) injury protocols cover when and how to move them.\n\nKeep them from getting cold or overheated and care for shock if needed. Any loss of consciousness after a head injury, even a short one, is a danger sign: get them to medical care urgently.",
+      "end": true
+    },
+    {
+      "id": "s4",
+      "text": "Have them stop what they are doing and rest. If a neck or back injury is possible, tell them not to move.",
+      "detail": "Anyone with signs of a concussion should stop their activity (work, sport, play) straight away and not go back to it until a health care professional has checked them (AHA and Red Cross). Another blow before the brain has recovered is more dangerous.\n\nRed Cross: leave them in the position found until help arrives if they may have hurt their neck or back. Use the Neck or back (spine) injury protocol if you suspect one: neck or back pain, numbness, tingling or weakness, or a fall, crash or dive as above.\n\nCommon concussion symptoms (CDC): headache, dizziness or balance problems, nausea, sensitivity to light or noise, blurred vision, tiredness, feeling slowed down or foggy, trouble concentrating or remembering, irritability, anxiety or sadness, and sleeping more or less than usual."
+    },
+    {
+      "id": "s5",
+      "text": "Check for danger signs: worsening headache, repeated vomiting, confusion, very drowsy, seizure, unequal pupils, slurred speech, weakness or numbness.",
+      "detail": "Danger signs (CDC, AHA and Red Cross):\n- a headache that gets worse and does not go away\n- vomiting more than once\n- confusion, restlessness or agitation, not recognising people or places, or unusual behaviour\n- very drowsy, or cannot be woken\n- any loss of consciousness, even brief\n- a seizure (fit)\n- slurred speech, weakness, numbness, or poor coordination\n- one pupil (the black centre of the eye) larger than the other, or a change in vision\n- swelling or a dent in the skull\n- blood or clear fluid from the nose or ears, or bruising around the eyes or behind the ears\n- in a child, also: crying that cannot be soothed, or refusing to feed or eat.\n\nTCCC also treats someone who cannot follow simple instructions (thumbs up, show two fingers, blink) more than 10 minutes after the injury as having a possible moderate or severe brain injury.",
+      "ask": {
+        "q": "Is any danger sign present?",
+        "yes": "s6",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Danger sign: a serious brain injury is possible. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Evacuate now.",
+      "detail": "These signs can mean bleeding or swelling inside the skull, which can kill and needs a hospital. TCCC: outcomes are better when brain surgery happens within 5 hours of the injury, so do not wait to see if it improves.\n\nWhile you wait or travel: keep them still, warm and calm, keep a neck or back injury in mind, and watch their breathing and responsiveness all the time. If they become unresponsive and stop breathing normally, start CPR.\n\nDo not give painkillers for the headache: the Red Cross notes they can hide the signs of a serious head injury.\n\nWrite down what you see and when (the patient log helps): the time of injury, any loss of consciousness, vomiting, and changes in how alert they are.",
+      "end": true
+    },
+    {
+      "id": "s7",
+      "text": "No danger signs now: still treat it as a concussion. Keep someone with them and check again for danger signs often, for hours and days.",
+      "detail": "Some signs appear straight away and others take hours or days to show (CDC). Keep watching them, and evacuate if any danger sign appears: a change in behaviour, vomiting, a headache that will not go away, a change in vision, or becoming hard to wake or unresponsive (Red Cross).\n\nMost people feel better within a couple of weeks (CDC). Headache and nausea tend to come first; mood and sleep changes can appear a week or two later.\n\nThe sources do not give a set interval for these checks. Check whenever you can and every time something changes."
+    },
+    {
+      "id": "s8",
+      "text": "Sleep: they may sleep, but someone must stay with them. If you cannot wake them normally, that is a danger sign: evacuate now.",
+      "detail": "Red Cross: sleeping after a concussion is generally considered safe once a health care provider has checked the person; the provider may recommend waking them from time to time to check that they are not getting worse.\n\nOff-grid there may be no provider to check them first. Being very drowsy or impossible to wake is a danger sign (CDC). The sources do not give a waking schedule for someone who has not been checked. Watch them while they sleep, and treat difficulty waking them as a danger sign."
+    },
+    {
+      "id": "s9",
+      "text": "No painkillers for the headache, and no return to sport, heavy work or risky activity until a health care provider has checked them.",
+      "detail": "Red Cross: do not give painkillers for a headache after a head injury, because they can hide the signs of a serious injury.\n\nAHA and Red Cross: no return to activity until a health care professional has checked them; the provider decides when normal activity can resume. Someone who has had one concussion is at higher risk from another.\n\nOff-grid, rest and avoid anything that risks another blow to the head. Arrange for them to see a health care provider as soon as it is practical, even if they seem better.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not give painkillers for a headache after a head injury; they can hide signs of a serious injury (Red Cross).",
+    "Do not let them return to sport, heavy work or risky activity until a health care provider has checked them.",
+    "Do not leave someone with a head injury alone.",
+    "Do not move them if a neck or back injury is possible, unless you must."
+  ],
+  "evacuate": [
+    "Evacuate now for any danger sign: worsening headache, repeated vomiting, confusion or unusual behaviour, very drowsy or cannot be woken, any loss of consciousness, seizure, slurred speech, weakness or numbness, unequal pupils, change in vision, skull swelling or dent, blood or fluid from nose or ears.",
+    "Evacuate now a child with a head injury who cannot be soothed or refuses to feed or eat.",
+    "Evacuate as soon as possible anyone who cannot follow simple instructions 10 minutes after a head injury (TCCC).",
+    "Anyone with a concussion should see a health care provider when practical, even without danger signs."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.5 Concussion (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, Symptoms of Mild TBI and Concussion (danger signs), last reviewed 15 Sep 2025",
+      "year": 2025,
+      "url": "https://www.cdc.gov/traumatic-brain-injury/signs-symptoms/index.html"
+    },
+    {
+      "name": "American Red Cross, Concussion (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/concussion"
+    },
+    {
+      "name": "American Red Cross, Head, Neck, and Spinal Injury (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/head-neck-spinal-injury"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: section 8 Traumatic brain injury",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

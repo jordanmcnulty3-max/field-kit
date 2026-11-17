@@ -1,0 +1,175 @@
+{
+  "id": "fracture",
+  "title": "Broken bone (fracture)",
+  "category": "injury",
+  "keywords": [
+    "fracture",
+    "broken bone",
+    "broken arm",
+    "broken leg",
+    "break",
+    "splint",
+    "sling",
+    "bone sticking out",
+    "open fracture",
+    "compound fracture",
+    "broken wrist",
+    "broken ankle",
+    "cracked rib",
+    "deformed limb"
+  ],
+  "summary": "Suspected broken bone: control bleeding, keep it still, check circulation, splint in the position found, and get to care.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Make sure the scene is safe. If there is heavy bleeding, use the Severe bleeding protocol first.",
+      "detail": "A fracture with an open wound and severe bleeding is treated with the bleeding steps first (AHA). Broken long bones (thigh, upper arm) and open fractures can lose a lot of blood, enough to cause shock.\n\nUse the Trauma check (MARCH) if the person has more than one injury."
+    },
+    {
+      "id": "s2",
+      "text": "If in doubt, treat it as broken. Keep the injured part still and do not try to straighten it.",
+      "detail": "Sprains, strains, dislocations and fractures can be hard to tell apart without an X-ray, so treat every bone, joint or muscle injury as a possible fracture (Red Cross). Being able to move the limb or put weight on it does not rule out a break.\n\nSigns: pain, swelling, bruising; the person cannot or will not move it; the part is bent, crooked or deformed; a snap or pop at the time of injury; grating when it moves; coldness, numbness or tingling beyond the injury; bleeding or bone through the skin; signs of shock.\n\nHave them rest without moving or straightening the injured part (Red Cross). Do not test whether it moves."
+    },
+    {
+      "id": "s3",
+      "text": "Could the neck or back be injured?",
+      "detail": "Think of it after a fall from height, a vehicle crash, a dive into shallow water or a hard blow, or if they have neck or back pain, numbness, tingling or weakness.",
+      "ask": {
+        "q": "Could the neck or back be injured?",
+        "yes": "s4",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "Possible neck or back injury: keep them still where they are and use the Neck or back (spine) injury protocol.",
+      "detail": "Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nDo not move a person who may have a spine injury unless you must (MedlinePlus, Red Cross). Splint other broken bones where they lie only if you can do it without moving the head, neck or back.",
+      "end": true
+    },
+    {
+      "id": "s5",
+      "text": "Is the hip, pelvis or thigh (upper leg) hurt?",
+      "ask": {
+        "q": "Is the hip, pelvis or thigh hurt?",
+        "yes": "s6",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s6",
+      "text": "Hip, pelvis or thigh: keep them lying still and do not move them unless you must. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "A broken pelvis is life-threatening because of the risk of heavy bleeding inside and damage to organs (Red Cross). A broken thigh bone can also bleed heavily. Watch closely for shock and use the Shock protocol.\n\nMedlinePlus: do not move someone with an injured hip, pelvis or upper leg unless it is absolutely necessary; if you must, pull them by their clothes rather than lifting.\n\nA thigh can be splinted as in the next steps. Binding a pelvis and traction splints for the thigh are not covered here."
+    },
+    {
+      "id": "s7",
+      "text": "Check circulation beyond the injury: colour and warmth of the hand or foot, and ask about numbness or tingling.",
+      "detail": "How to check circulation (Red Cross): look at the skin on the far side of the injury from the heart, such as the hand or foot. Is it a normal colour and warm? Can they feel you touch it? Ask about numbness or tingling. MedlinePlus adds a quick test: press firmly on the skin beyond the injury (for a leg, the foot) until it goes white; it should turn pink again within about 2 seconds after you let go.",
+      "ask": {
+        "q": "Is the hand or foot blue, purple, pale or cold?",
+        "yes": "s8",
+        "no": "s9"
+      }
+    },
+    {
+      "id": "s8",
+      "text": "Poor circulation: this limb needs urgent care. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "A blue, purple or pale limb beyond a fracture means poor blood flow and needs urgent professional care (AHA).\n\nStraightening a bent limb: AHA (2024) says it may be reasonable to treat a deformed broken limb in the position found, unless straightening it is needed for safe and prompt transport. Straightening can damage nerves, blood vessels and soft tissue and can push a bone end through the skin, and there is no evidence that first aid providers can do it safely.\n\nOff-grid, help may be hours or days away. MedlinePlus (US National Library of Medicine) says that if circulation is poor and trained help is not quickly available, you may try gently returning the limb to a normal resting position to improve blood flow. That goes further than AHA, which allows straightening only when it is needed for safe and prompt transport. If you decide to try, do it gently, and recheck circulation afterwards.",
+      "warn": "Do not force a bent limb straight."
+    },
+    {
+      "id": "s9",
+      "text": "Is there a wound over the break, or bone showing through the skin?",
+      "ask": {
+        "q": "Is there a wound over the break, or bone showing?",
+        "yes": "s10",
+        "no": "s11"
+      }
+    },
+    {
+      "id": "s10",
+      "text": "Open fracture: cover the wound with a clean dressing. Do not push bone back in or poke into the wound.",
+      "detail": "Covering the wound with a clean dressing may lower the risk of contamination and infection (AHA). Use a sterile dressing if you have one. Do not breathe on the wound or probe it, and do not try to line up the bone ends (MedlinePlus).\n\nIf it bleeds heavily, use the Severe bleeding protocol: a tourniquet goes on above the wound.\n\nOpen fractures need antibiotics and surgery: evacuate (WMS).",
+      "warn": "Do not push bone ends back under the skin.",
+      "log": "Open fracture dressed"
+    },
+    {
+      "id": "s11",
+      "text": "Splint it as it lies (not ribs or pelvis: see detail). Pad it well, include the joints above and below, and tie above and below, not over, the injury.",
+      "detail": "Splinting can reduce pain, lower the risk of further injury, and make moving the casualty easier (AHA).\n\nMaterials (MedlinePlus): something rigid such as sticks, boards, a trekking pole, or rolled-up newspaper or a sleeping pad. If you have nothing rigid, use a rolled blanket or clothing. Tie with belts, strips of cloth, or tape.\n\nHow: make the splint long enough to reach past the joint above and the joint below the break (TCCC, MedlinePlus). Pad it well so it does not press on the limb. Secure it with ties above and below the injury, with the knots away from the injury, and not so tight that they cut off blood flow.\n\nArm: a sling can hold a splinted arm against the body. Finger: tape it to the finger beside it (buddy taping).\n\nPelvis: do not splint; keep them lying still (hip, pelvis or thigh step).\n\nRibs: do not splint. Have them hold a pillow or folded blanket against the injury and let them rest in the position that makes breathing easiest (Red Cross).",
+      "log": "Splint applied"
+    },
+    {
+      "id": "s12",
+      "text": "Recheck circulation beyond the splint. Loosen the ties if fingers or toes turn pale or blue, go numb, or swell.",
+      "detail": "Check circulation after splinting (TCCC: recheck pulses; MedlinePlus: check often), and keep checking, because swelling can make a splint too tight over time. Look for swelling, paleness, numbness, coldness, or blue fingers or toes, and loosen the splint if needed.\n\nIf the injury becomes more painful after splinting, take the splint off and get medical help (MedlinePlus).\n\nHow to check circulation (Red Cross): look at the skin on the far side of the injury from the heart, such as the hand or foot. Is it a normal colour and warm? Can they feel you touch it? Ask about numbness or tingling. MedlinePlus adds a quick test: press firmly on the skin beyond the injury (for a leg, the foot) until it goes white; it should turn pink again within about 2 seconds after you let go."
+    },
+    {
+      "id": "s13",
+      "text": "On a closed injury, use a cold pack wrapped in a thin towel for up to 20 minutes, then leave it off 20 minutes. Treat for shock and get them to care.",
+      "detail": "Red Cross: for an injury without an open wound, apply a cold pack wrapped in a thin, dry towel for no more than 20 minutes, and wait 20 minutes before putting it back on. If they cannot tolerate 20 minutes, use 10 minutes on and 10 minutes off.\n\nKeep them from getting cold or overheated, watch their breathing and alertness, and care for shock if needed (Shock protocol).\n\nEvery suspected fracture needs to be checked by a health care provider. See the evacuation list for which ones are urgent.",
+      "timer": {
+        "seconds": 1200,
+        "label": "Cold pack on"
+      },
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not try to straighten a bent limb unless circulation is poor and care is far away (see the poor-circulation step).",
+    "Do not push a bone end back under the skin or probe an open fracture.",
+    "Do not test whether the injured part can move.",
+    "Do not tie a splint so tight that it cuts off circulation, and do not tie knots over the injury.",
+    "Do not put ice directly on the skin.",
+    "Do not move someone with a possible neck, back, hip, pelvis or thigh injury unless you must."
+  ],
+  "evacuate": [
+    "Evacuate urgently: a limb that is blue, purple, pale or cold beyond the injury.",
+    "Evacuate urgently: suspected pelvis or thigh fracture, an open fracture (bone through the skin or a wound over the break), or signs of shock.",
+    "Evacuate urgently: suspected neck or back injury, severe or multiple injuries, or a person you cannot move safely.",
+    "Rib injury with trouble breathing or signs of shock: evacuate urgently. In a child, a rib injury can bruise the lung badly.",
+    "Every suspected fracture should be checked by a health care provider."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.7 Fractures (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Fractures (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/fractures"
+    },
+    {
+      "name": "American Red Cross, Muscle, Bone and Joint Injury (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/muscle-bone-joint-injury"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Broken bone, reviewed 2026-01-14",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/article/000001.htm"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), How to make a splint, reviewed 2025-06-04",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000040.htm"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: section 16 Splints",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "Joint Trauma System / CoTCCC, Combat Lifesaver TCCC Speaker Notes TCCC-CLS-14-01, Module 05 (splint joints above and below, check pulses before and after) (25 Jan 2020)",
+      "year": 2020,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/7b9eb915-741a-45ab-a178-a8096c385b31/contents"
+    },
+    {
+      "name": "Wilderness Medical Society, Practice Guidelines for Basic Wound Management in the Austere Environment: 2014 Update (Quinn et al., Wilderness Environ Med 2014;25:S118-S133)",
+      "year": 2014,
+      "url": "https://www.femecv.com/sites/default/files/uploads/files/WMS%20heridas_2014.pdf"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

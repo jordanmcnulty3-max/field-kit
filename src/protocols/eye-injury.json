@@ -1,0 +1,145 @@
+{
+  "id": "eye-injury",
+  "title": "Eye injury",
+  "category": "injury",
+  "keywords": [
+    "eye",
+    "eye injury",
+    "chemical in eye",
+    "something in eye",
+    "grit in eye",
+    "splinter in eye",
+    "black eye",
+    "poked eye",
+    "eye cut",
+    "eye wash",
+    "flush eye",
+    "metal in eye",
+    "blurred vision after injury"
+  ],
+  "summary": "Chemical splash, object stuck in the eye, blow or cut, or grit: what to do and what not to do.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Did a chemical get in the eye?",
+      "detail": "Signs that need urgent care for any eye injury (Red Cross, AHA): blurred or lost vision, bleeding in the eye, a chemical or object in the eye, pain that will not go away, an odd-shaped pupil.",
+      "ask": {
+        "q": "Did a chemical get in the eye?",
+        "yes": "s2",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Flush the eye now with plenty of clean running water for 15 minutes. Tilt the head so the injured eye is lower, and hold the eyelids open.",
+      "detail": "Start flushing immediately (AHA). Use plenty of tap water for 15 minutes, unless instructions for that specific chemical say otherwise (AHA). Saline, Ringer's lactate or a commercial eyewash is reasonable if it is right at hand, but do not delay to find it (AHA).\n\nHow: use a gentle stream of cool water. Tilt the head so the injured eye is lower than the other eye and the water runs away from the other eye (Red Cross, MedlinePlus). Hold the eyelids apart; many people need help to keep them open (AHA). If both eyes are affected, or the chemical is also on the body, a shower works (MedlinePlus).\n\nDo not let the run-off reach the other eye, your own eyes, or other people (AHA).\n\nContact lenses: if they did not wash out, try to remove them after flushing (MedlinePlus).\n\nWhen to stop: AHA gives 15 minutes; MedlinePlus says at least 15 minutes; Red Cross says keep flushing until EMS takes over.",
+      "timer": {
+        "seconds": 900,
+        "label": "Flush the eye (15 min)"
+      },
+      "log": "Eye flushed with water"
+    },
+    {
+      "id": "s3",
+      "text": "Every chemical eye injury needs medical care. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty. Do not rub the eye.",
+      "detail": "Any chemical in the eye needs emergency care (MedlinePlus), even if it feels better after flushing. Workplace and industrial chemicals may need special treatment: follow the product's safety data sheet or a poison centre if you can reach one (AHA).\n\nKeep them from rubbing the eye. If the eye still hurts, keep flushing while you wait.",
+      "end": true
+    },
+    {
+      "id": "s4",
+      "text": "Could the eyeball be pierced: an object stuck in it, a fast-flying fragment (hammering, grinding, a blast), or a cut to the eye?",
+      "detail": "High-speed fragments (from hammering metal on metal, grinding, or an explosion) can go into the eye and leave only a tiny mark. Treat any of these as a possible penetrating eye injury (AHA).",
+      "ask": {
+        "q": "Could the eyeball be pierced?",
+        "yes": "s5",
+        "no": "s7"
+      }
+    },
+    {
+      "id": "s5",
+      "text": "Leave any object in place. Do not press on the eye. Tape a rigid shield or a paper or plastic cup over the eye so nothing touches it.",
+      "detail": "Do not try to remove an object stuck in the eye, do not touch it, and do not put pressure on the eye (MedlinePlus).\n\nTape a hard plastic shield, or a paper or plastic cup, over the eye; this stops the person touching or rubbing it (AHA). TCCC uses a rigid eye shield, not a pressure patch.\n\nCovering both eyes: MedlinePlus advises loosely covering both eyes, because the eyes move together and covering both limits movement. TCCC (military) covers only the injured eye unless both are injured, so the casualty can still see.\n\nTCCC also records a quick check of vision before covering the eye (for example, can they read a name tag or label?). Write it down.",
+      "warn": "Do not pull out an object stuck in the eye.",
+      "log": "Eye shield applied"
+    },
+    {
+      "id": "s6",
+      "text": "Evacuate urgently. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "A possible penetrating eye injury needs immediate medical care (AHA). Keep the casualty calm and still, and keep them from rubbing or pressing on the eye.",
+      "end": true
+    },
+    {
+      "id": "s7",
+      "text": "Was it a blow to the eye or a cut near it?",
+      "ask": {
+        "q": "Was it a blow to the eye or a cut near it?",
+        "yes": "s8",
+        "no": "s10"
+      }
+    },
+    {
+      "id": "s8",
+      "text": "Hold a clean, cool compress gently over the eye to ease swelling. Do not press on the eyeball.",
+      "detail": "A cool compress helps reduce swelling and can help stop bleeding; do not apply pressure to the eye to control bleeding (MedlinePlus).\n\nEyelid cut: wash it carefully, and if it bleeds, press gently with a clean dry cloth on the bone around the eye, not on the eyeball, until it stops. Then cover with a clean dressing and a cool compress (MedlinePlus).\n\nBlood pooling in the eye: cover both eyes loosely with a clean cloth (MedlinePlus).",
+      "log": "Cool compress on eye"
+    },
+    {
+      "id": "s9",
+      "text": "Check their vision. Blurred, double or lost vision, blood inside the eye, an odd-shaped pupil, or pain that does not ease: get medical care urgently.",
+      "detail": "Loss of vision, bleeding, or an irregular pupil after an injury can mean a serious injury to the eyeball and needs immediate medical care (AHA). An eyelid cut also needs medical care, because it may reach into the eyeball (MedlinePlus).\n\nIf none of these signs are present, keep checking. Get medical care if pain, redness or blurred vision continues.",
+      "end": true
+    },
+    {
+      "id": "s10",
+      "text": "Grit, dust or an eyelash: do not rub. Let tears wash it out, or rinse the eye with clean tap water or eyewash.",
+      "detail": "For small, low-energy particles, it is reasonable to let tears wash it out or to rinse with tap water or eyewash (AHA). Rinsing with a gentle stream, with the head tilted to the injured side, works well; someone may need to hold the lids open (AHA).\n\nDo not rub the eye: rubbing can scratch it or make an injury worse (AHA).\n\nTo look for it (MedlinePlus): in good light, without pressing on the eye, have them look up, down and side to side. Gently pull the lower lid down. If it is on the eyelid, rinse it off, or lift it off gently with a cotton swab. Never use a swab, tweezers or anything else on the coloured part of the eye.\n\nContact lens wearers with a feeling of something in the eye: remove the lens, stop wearing lenses, and get medical care (AHA)."
+    },
+    {
+      "id": "s11",
+      "text": "Still feels like something is in the eye, or vision is blurred? Tape a shield or cup over it and get medical care.",
+      "detail": "A feeling that something is still in the eye after rinsing needs medical care: the particle may still be there, or the eye may be scratched (AHA). A shield or cup over the eye stops them rubbing it (AHA).\n\nA scratchy feeling can last a day or two after the particle is out (MedlinePlus). Over-the-counter pain medicine such as acetaminophen or ibuprofen is reasonable for leftover discomfort once the particle is out (AHA); use it as the package directs.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not rub or press on an injured eye.",
+    "Do not try to remove an object stuck in the eye.",
+    "Do not use cotton swabs, tweezers or anything else on the coloured part of the eye.",
+    "Do not put a pressure patch on a possibly pierced eye; use a rigid shield or cup.",
+    "Do not let chemical run-off reach the other eye, your eyes, or anyone else."
+  ],
+  "evacuate": [
+    "Evacuate urgently: an object stuck in the eye, a possible pierced eyeball, or a fast-flying fragment injury.",
+    "Get medical care urgently: any chemical in the eye, even after flushing.",
+    "Get medical care urgently: blurred, double or lost vision, blood in the eye, an odd-shaped pupil, or pain that does not ease.",
+    "Get medical care: an eyelid cut, or a feeling that something is still in the eye after rinsing."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, sections 8.3 Chemical exposure to the eye and 9.10 Suspected foreign body in the eye (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Eye Injury (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/eye-injury"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Eye emergencies, reviewed 2025-04-29",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000054.htm"
+    },
+    {
+      "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Tactical Field Care: section 9 Penetrating eye trauma",
+      "year": 2026,
+      "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "Joint Trauma System / CoTCCC, Combat Lifesaver TCCC Speaker Notes TCCC-CLS-14-01, Module 05 (eye shield, do not cover both eyes unless both injured) (25 Jan 2020)",
+      "year": 2020,
+      "url": "https://learning-media.allogy.com/api/v1/pdf/7b9eb915-741a-45ab-a178-a8096c385b31/contents"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

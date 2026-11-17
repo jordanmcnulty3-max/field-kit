@@ -1,0 +1,118 @@
+{
+  "id": "sprain-dislocation",
+  "title": "Sprain, strain or dislocation",
+  "category": "injury",
+  "keywords": [
+    "sprain",
+    "strain",
+    "dislocation",
+    "twisted ankle",
+    "rolled ankle",
+    "pulled muscle",
+    "dislocated shoulder",
+    "dislocated finger",
+    "joint",
+    "ice",
+    "rice",
+    "compression wrap",
+    "swollen ankle",
+    "knee injury"
+  ],
+  "summary": "Joint or muscle injury: treat as a possible fracture, splint a deformed joint as found, and rest, cool and wrap a sprain.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Treat it as a possible broken bone. If the limb is deformed, numb, cold or pale, or bone shows, use the Broken bone (fracture) protocol.",
+      "detail": "A sprain is a stretched or torn ligament at a joint. A strain is a stretched or torn muscle or tendon. A dislocation is a bone pushed out of its normal place in a joint, usually by a violent force. They can be hard to tell from a fracture without an X-ray, so treat every one as a possible fracture (Red Cross).\n\nSigns that need urgent care (Red Cross): the area is bent or deformed, or grates when it moves; coldness, numbness or tingling at or beyond the injury; bleeding or bone through the skin; injury to the head, neck, back, pelvis or thigh; a serious cause of injury; signs of shock."
+    },
+    {
+      "id": "s2",
+      "text": "Does a joint look out of place or deformed?",
+      "ask": {
+        "q": "Does a joint look out of place or deformed?",
+        "yes": "s3",
+        "no": "s5"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Possible dislocation: support and splint it in the position found. Do not try to push it back in: that is an advanced procedure, see Advanced procedures.",
+      "detail": "Treat a deformed joint in the position you find it (AHA) and do not move or straighten it (Red Cross). Putting a dislocated joint back (reduction) is an advanced procedure: see Advanced procedures.\n\nSplint as in the Broken bone (fracture) protocol: pad well, include the bones above and below the joint, tie above and below the injury, not over it, and not tight. An injured arm can be held still in a sling (MedlinePlus).\n\nA cold pack wrapped in a thin towel can ease pain and swelling (next steps give the timing).",
+      "log": "Joint splinted"
+    },
+    {
+      "id": "s4",
+      "text": "Check colour, warmth and feeling beyond the joint before and after splinting. Get them to medical care; urgently if the hand or foot is pale, blue or numb.",
+      "detail": "Look at the skin beyond the injury (hand or foot): is it a normal colour and warm, can they feel your touch, any numbness or tingling (Red Cross)? Recheck after splinting and loosen ties if needed.\n\nA limb that is blue, purple or pale beyond the injury needs urgent professional care (AHA). The Broken bone (fracture) protocol explains what the sources say about straightening a limb with poor circulation when help is far away.\n\nEvery dislocation needs to be checked and treated by a health care provider.",
+      "end": true
+    },
+    {
+      "id": "s5",
+      "text": "Rest it: avoid any movement or activity that causes pain.",
+      "detail": "Resting and limiting use of the injured limb is the main treatment, and it avoids making things worse if it is actually a fracture (AHA). Anyone with a painful limb injury that limits use should avoid painful activity and seek medical attention (AHA).\n\nCurrent guidance (AHA and Red Cross 2024) does not use the older RICE (rest, ice, compression, elevation) wording. It recommends rest, cold for pain and swelling, and a compression wrap for an ankle for comfort; it does not address raising the limb.",
+      "log": "Injured limb rested"
+    },
+    {
+      "id": "s6",
+      "text": "Cool it with a bag of ice and water wrapped in a damp cloth, for 20 minutes at a time. Never put ice directly on the skin.",
+      "detail": "Cold can ease acute pain and swelling (AHA). It has not been shown to speed recovery.\n\nHow: a plastic bag of ice and water, wrapped in a damp cloth, cools best; gel packs or ice alone cool less well (AHA). Do not let ice touch the skin.\n\nHow long: AHA (2024) limits each application to 20 to 30 minutes, and experts suggest 3 to 4 times a day. Red Cross says no more than 20 minutes, then wait 20 minutes before putting it back on; if 20 minutes is too uncomfortable, 10 minutes on and 10 off. The timer is set to 20 minutes, which fits both.\n\nDo not use heat on a fresh injury (Red Cross).",
+      "timer": {
+        "seconds": 1200,
+        "label": "Cold pack on"
+      },
+      "log": "Cold applied"
+    },
+    {
+      "id": "s7",
+      "text": "Ankle: you may wrap it with an elastic bandage for comfort, firm but not tight. Check the toes stay warm, pink and with feeling.",
+      "detail": "A compression wrap may be considered after an acute ankle sprain or strain, for comfort (AHA). It has not been shown to reduce swelling or speed recovery, and there are no data for other joints. Do not wrap so tightly that it cuts off circulation.\n\nRed Cross wrapping tips: overlap each turn by about half the width of the wrap, use a little more tension near the toes and less towards the calf, and leave the toes uncovered so you can check them.\n\nLoosen it if the toes become cold, pale or blue, numb or tingling.",
+      "log": "Compression wrap applied"
+    },
+    {
+      "id": "s8",
+      "text": "Have it checked by a health care provider, especially if pain limits use or does not settle. Being able to walk on it does not rule out a break.",
+      "detail": "AHA: a painful limb injury that limits use should be seen by a health care provider. Red Cross: being able to move it or bear weight does not rule out a fracture; an X-ray is usually needed.\n\nIf pain, swelling or deformity gets worse, or numbness, coldness or colour change appears, treat it as a fracture and use the Broken bone (fracture) protocol.",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not try to put a dislocated joint back in unless trained: see Advanced procedures.",
+    "Do not move or straighten a deformed joint.",
+    "Do not put ice directly on the skin, and do not leave cold on for more than 20 to 30 minutes at a time.",
+    "Do not use heat on a fresh injury.",
+    "Do not wrap so tightly that the toes or fingers go cold, pale, blue or numb."
+  ],
+  "evacuate": [
+    "Evacuate urgently: a hand or foot that is cold, pale, blue or numb beyond the injury.",
+    "Get medical care for every suspected dislocation.",
+    "Get medical care for a joint or muscle injury whose pain limits use or does not settle."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, sections 9.6 Sprains and strains and 9.7 Fractures (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "American Red Cross, Muscle, Bone and Joint Injury (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/muscle-bone-joint-injury"
+    },
+    {
+      "name": "American Red Cross, Fractures (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/fractures"
+    },
+    {
+      "name": "American Red Cross, Wounds (cold pack timing for bruises) (lay first aid page, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/wounds"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Broken bone, reviewed 2026-01-14",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/article/000001.htm"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

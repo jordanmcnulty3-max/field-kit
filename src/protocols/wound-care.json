@@ -1,0 +1,117 @@
+{
+  "id": "wound-care",
+  "title": "Wound cleaning and care",
+  "category": "injury",
+  "keywords": [
+    "wound",
+    "cut",
+    "laceration",
+    "scrape",
+    "graze",
+    "abrasion",
+    "road rash",
+    "clean wound",
+    "infection",
+    "infected cut",
+    "stitches",
+    "tetanus",
+    "puncture",
+    "splinter",
+    "dressing",
+    "bandage",
+    "bite"
+  ],
+  "summary": "Minor and moderate wounds: stop bleeding, irrigate well, leave closure to the trained, dress, watch for infection, and check tetanus.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Stop any bleeding first with firm pressure. For heavy bleeding, use the Severe bleeding protocol.",
+      "detail": "Do not try to clean a major wound before the bleeding is under control (MedlinePlus).\n\nWash your hands with soap and water before you start, and wear gloves if you have them (MedlinePlus, CDC)."
+    },
+    {
+      "id": "s2",
+      "text": "Is it an animal or human bite?",
+      "ask": {
+        "q": "Is it an animal or human bite?",
+        "yes": "s3",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Bite: clean it well (next step), then get to medical care as soon as possible, even if it looks small.",
+      "detail": "Bites from animals or humans, and wounds licked or soaked by saliva, should be checked at a medical facility as soon as possible (AHA): they get infected more often and may need antibiotics.\n\nWhere rabies is possible, WMS advises cleaning with a virus-killing solution such as povidone-iodine if you have it, and leaving the wound open. Rabies treatment should start within 24 to 48 hours, but it is never too late to start before symptoms appear (WMS)."
+    },
+    {
+      "id": "s4",
+      "text": "Rinse the wound with plenty of clean running tap water or saline until no dirt is left. Use drinkable water; at least 1 litre for a dirty wound.",
+      "detail": "Rinse superficial wounds and scrapes until there is no visible dirt or debris left in them (AHA). Running tap water or sterile saline is reasonable; boiled or distilled water gives similar results; antiseptics such as povidone-iodine add nothing over water for ordinary wounds (AHA).\n\nIn the wilderness (WMS): use drinkable (potable) water. Irrigate as early as you can, with at least 1 litre, under pressure: a stream pushed from a syringe works much better than gently pouring. WMS gives a 35 mL syringe with a 19-gauge needle as an example (about 8 psi). Do not add soap, antiseptic or antibiotics to the rinsing water (WMS), except povidone-iodine for a possible rabies bite.\n\nMinor cuts can be washed with mild soap and water (MedlinePlus). Minor punctures: rinse under running water for 5 minutes, then wash with soap (MedlinePlus).\n\nIf hair is in the way, clip it rather than shaving (WMS).",
+      "log": "Wound irrigated"
+    },
+    {
+      "id": "s5",
+      "text": "Pick out loose dirt and splinters that come away easily. Leave anything large, deep or firmly stuck, and get it to medical care.",
+      "detail": "WMS: remove foreign material that is easy and low-risk to remove, especially organic material (wood, plant matter, contaminated clothing) and anything in the foot. Leave inert or hidden objects alone rather than digging or widening the wound to find them, and leave large objects near important structures in place.\n\nDo not poke around in a puncture wound. If you see something in it, leave it and get medical care (MedlinePlus).\n\nAn object firmly stuck in the body: use the Impaled object protocol."
+    },
+    {
+      "id": "s6",
+      "text": "Do not close the wound unless you are trained: wound closure is an advanced procedure, see Advanced procedures. Leave bites, punctures and dirty wounds open.",
+      "detail": "Closing a wound with tape, glue, staples or stitches is an advanced procedure: see Advanced procedures.\n\nWMS: grossly contaminated wounds (soil, faeces, already infected) and most bites are left open, packed lightly with a moist dressing and closed later by a professional.\n\nWounds that probably need stitches (MedlinePlus): deeper than about a quarter inch (0.64 cm), on the face, or reaching bone. Get these checked by a health care provider."
+    },
+    {
+      "id": "s7",
+      "text": "Cover it with a clean dressing that keeps the wound moist, such as a non-stick pad or a film dressing.",
+      "detail": "Covering a clean wound with a dressing that keeps it moist (plastic film, petroleum jelly, hydrogel and similar) helps it heal better than a dry dressing (AHA, WMS). Scrapes are covered with a non-stick dressing, not closed (WMS). A clean protective bandage keeps out dirt and soaks up fluid (WMS).\n\nAntibiotic ointment: AHA (2024) says antibiotic or antibacterial dressings have not been shown to improve healing or prevent infection in clean wounds. WMS (2014) says topical antibiotics may help with little downside in people who are not allergic, and MedlinePlus advises applying antibacterial ointment.",
+      "log": "Wound dressed"
+    },
+    {
+      "id": "s8",
+      "text": "Check the wound regularly. Redness, swelling, warmth, pus or bad smell, more pain, a red streak, or fever: open it, look, and get medical care.",
+      "detail": "If redness, swelling, foul-smelling drainage, increased pain, or fever develop, it is reasonable to remove the dressing, look at the wound, and get medical care (AHA). A red streak spreading from the wound is another warning sign (MedlinePlus).\n\nEven with good care, 1 to 12 in every 100 wounds become infected (WMS). Bites carry a higher risk of infection (AHA).\n\nOff-grid (WMS): evacuate a wound with early signs of infection if you do not have the right antibiotics, or if infection is getting worse despite antibiotics. Evacuate urgently if a wound infection comes with fever, confusion or signs of shock (WMS)."
+    },
+    {
+      "id": "s9",
+      "text": "Tetanus: get a booster soon if their last tetanus shot was more than 10 years ago, or more than 5 years ago for a dirty or deep wound.",
+      "detail": "Tetanus bacteria enter through broken skin. Higher-risk wounds (CDC, WMS): punctures and deep wounds (such as stepping on a nail); wounds with dirt, soil, faeces or saliva (such as animal bites); and wounds with dead tissue from burns, crush injuries, fractures or frostbite.\n\nWMS table, for someone who has had at least 3 tetanus doses: a clean minor wound needs a booster if the last dose was more than 10 years ago; any other wound needs a booster if the last dose was more than 5 years ago. Someone with fewer than 3 doses, or who does not know, needs a booster, and for a dirty wound also tetanus immune globulin from a health care provider.\n\nCDC: adults need a tetanus booster every 10 years. Symptoms usually start 3 to 21 days after the injury, most often with jaw muscle spasm (lockjaw).\n\nA tetanus-prone wound that needs a booster is a reason to evacuate (WMS).",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not try to clean a major wound before bleeding is controlled.",
+    "Do not add soap, antiseptic or antibiotics to the water you irrigate with.",
+    "Do not close bites, punctures or dirty wounds.",
+    "Do not dig or widen a wound to find a hidden object, or poke around in a puncture.",
+    "Do not shave hair around a wound; clip it.",
+    "Do not assume a wound is clean because you cannot see dirt; always rinse it."
+  ],
+  "evacuate": [
+    "Evacuate: wounds that are complex, gaping or were not closed; open fractures; wounds involving a tendon, joint, nerve or blood vessel (WMS).",
+    "Evacuate: animal and human bites, and any bite with possible rabies exposure.",
+    "Evacuate: early infection with no suitable antibiotics, infection getting worse despite antibiotics, or infection with fever, confusion or shock.",
+    "Evacuate: large foreign bodies (especially wood or plant matter) and wounds with a lot of dead or crushed tissue.",
+    "Evacuate: a tetanus-prone wound in someone who needs a booster."
+  ],
+  "sources": [
+    {
+      "name": "American Heart Association and American Red Cross, 2024 Guidelines for First Aid, section 9.3 Superficial wounds and abrasions (Circulation 2024;150:e519)",
+      "year": 2024,
+      "url": "https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines"
+    },
+    {
+      "name": "Wilderness Medical Society, Practice Guidelines for Basic Wound Management in the Austere Environment: 2014 Update (Quinn et al., Wilderness Environ Med 2014;25:S118-S133)",
+      "year": 2014,
+      "url": "https://www.femecv.com/sites/default/files/uploads/files/WMS%20heridas_2014.pdf"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Cuts and puncture wounds, reviewed 2025-10-14",
+      "year": 2025,
+      "url": "https://medlineplus.gov/ency/article/000043.htm"
+    },
+    {
+      "name": "US Centers for Disease Control and Prevention, About Tetanus, last reviewed 8 Sep 2026",
+      "year": 2026,
+      "url": "https://www.cdc.gov/tetanus/about/index.html"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

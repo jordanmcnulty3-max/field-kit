@@ -123,13 +123,13 @@ def test_burn_guidance_and_notes_come_from_protocol_escaped(page, app_url):
 
 
 def test_burn_has_no_hard_coded_medical_wording(page, app_url):
-    boot(page, app_url, hash_='#/emergency/tool/burn')
+    boot(page, app_url, hash_='#/emergency/tool/burn', only=True)   # shipped data has its own Burns protocol
     assert page.inner_text('#burnNotes').strip() == ''
     assert 'first-degree' not in page.inner_text('#toolBody').lower()
 
 
 def test_burn_without_burns_protocol_shows_no_guidance(page, app_url):
-    boot(page, app_url, hash_='#/emergency/tool/burn')
+    boot(page, app_url, hash_='#/emergency/tool/burn', only=True)   # shipped data has its own Burns protocol
     assert page.inner_text('#burnGuide').strip() == ''
 
 

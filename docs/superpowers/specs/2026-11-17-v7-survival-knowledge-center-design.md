@@ -1,6 +1,7 @@
 # Field Kit v7: Survival knowledge center (design)
 
-Date: 2026-11-17. Status: awaiting Jordan's approval.
+Date: 2026-11-17. Status: approved by Jordan 2026-11-17 with two changes (section 12): check all existing
+topics before v7 ships, and cover the whole Northeast, not only Central New York.
 Builds on `2026-11-16-emergency-survival-overhaul-design.md` (the v6 design); where the two disagree about
 Survival, this document wins.
 
@@ -8,8 +9,10 @@ Survival, this document wins.
 
 Survival today is 14 text topics written for a lost hiker anywhere in the world. Jordan wants it to become the
 group's **knowledge center for surviving a long grid-down, wartime or "apocalypse" period**, solo or as a group,
-in town and in the woods, written for **Central New York** (everyone who will use it lives in or around
-Liverpool, NY). It must work whether the group stays home or has to move.
+in town and in the woods, written for **New York and the Northeast United States**. Everyone who will use it
+lives in or around Liverpool, NY, so Central New York is the home case, but the content must still be right
+however far the group travels: the Adirondacks, Catskills and New England mountains, the Great Lakes and
+Finger Lakes, the big cities, and the Atlantic coast. It must work whether the group stays home or has to move.
 
 His standing complaints about Survival still apply: "difficult to find something fast", content that "isn't deep
 or broad enough", and "there needs to be interactive elements". "More is better": no length cap on text.
@@ -24,8 +27,8 @@ The job is far bigger than v6's content job (roughly 80 or more topics against 1
 - A Survival home built around what you need: categories, tools, checklists, pinned and recent.
 - Topics are checked data files (like Emergency protocols): every one has sources, a review date, and is
   validated at build time.
-- Content written for Central New York: real winters and lake-effect snow, local water, local game and plants,
-  ticks, town and rural settings.
+- Content written for the Northeast, Central New York first: real winters and lake-effect snow, local water,
+  local game and plants, ticks, mountains, lakes and coast, town and rural settings.
 - Interactive tools and tick-off checklists that scale to the group's size.
 - Diagrams wherever a diagram is recognisable without its caption.
 - Everything works with no connection after install.
@@ -35,7 +38,7 @@ The job is far bigger than v6's content job (roughly 80 or more topics against 1
   sighting reports).
 - iPhone support (v7.1) and QR hand-off (later). Team map (v8).
 - Guided one-step-per-screen "Situations" in the framework release (see section 5.6).
-- Content for deserts, jungles and coasts.
+- Content for deserts, jungles and the Southern Hemisphere.
 
 **Anti-goals (failure even if it works)**
 - A wrong or unsourced number in water treatment, food safety, radiation or medicine.
@@ -62,7 +65,7 @@ Version numbers are taken in the order things ship; `build.py` already accepts d
 
 | Release | What |
 |---|---|
-| **v7** | Survival framework (section 5), existing 14 topics migrated, three tools, checklists, the v6 backlog fixes (section 9) |
+| **v7** | Survival framework (section 5), existing 14 topics migrated **and source-checked**, two tools, checklists, the v6 backlog fixes (section 9) |
 | **v7.1** | iPhone support (own short design). Ships as soon as a friend with a real iPhone can test; if no tester is ready it waits and the packs go ahead. |
 | Packs, next free numbers | In this order: 1 Water and sanitation · 2 Heat, shelter and winter · 3 Radiation and fallout · 4 Food: storage, hunting, trapping, fishing, plants · 5 Comms: Meshtastic, radios, signals · 6 Staying put: home, group roles, watch schedule · 7 Moving: bags, routes, rally points, travelling on foot · 8 Town hazards and long-term health |
 | Later | QR hand-off, Recce under Tactical, v8 team map |
@@ -78,7 +81,7 @@ shown to Jordan only if it raises a decision that is his.
 ```
 ┌──────────────────────────────┐
 │ Survival               🔍  ☾ │
-│ Where: [Any][Town][Rural][Woods]
+│ Where: [Any][Town][Rural][Woods][Coast]
 │ When:  [Any][Cold][Warm]     │  filters; remembered
 │ ★ Pinned                     │  survival items only
 │ [Make water safe] [Knots]    │
@@ -96,9 +99,9 @@ shown to Jordan only if it raises a decision that is his.
 └──────────────────────────────┘
 ```
 
-- The old "Your environment" picker (Forest, Desert, Cold and snow, Jungle, Coast) is removed. The Forest and
-  Cold-and-snow advice is kept inside the migrated topics; desert, jungle and coast text is dropped.
-- **Filters:** Where (Any, Town, Rural, Woods) and When (Any, Cold, Warm). A topic lists the settings and
+- The old "Your environment" picker (Forest, Desert, Cold and snow, Jungle, Coast) is removed. The Forest,
+  Cold-and-snow and Coast advice is kept inside the migrated topics; desert and jungle text is dropped.
+- **Filters:** Where (Any, Town, Rural, Woods, Coast) and When (Any, Cold, Warm). A topic lists the settings and
   seasons it applies to; a topic with none listed always shows. Filters hide non-matching topics in the home
   lists only. **Search ignores the filters** (finding fast beats filtering). A category with nothing left shows
   "No topics for this filter" rather than vanishing.
@@ -110,8 +113,8 @@ shown to Jordan only if it raises a decision that is his.
   5 to 20 entries, the Emergency home shows the newest 5 of all kinds (unchanged), and the Survival home shows
   the newest 5 survival items. Clear on either home empties the whole list.
 - "Priorities" (rule of threes, STOP) becomes a new topic, `surv-priorities`, listed first in Basics. The old
-  picker's Forest and Cold-and-snow bullets move into it under their own headings; its frostbite line becomes
-  a link to the Emergency frostbite protocol.
+  picker's Forest, Cold-and-snow and Coast bullets move into it under their own headings; its frostbite line
+  becomes a link to the Emergency frostbite protocol.
 
 ### 5.2 Topic page
 
@@ -137,7 +140,7 @@ One file per topic, `src/survival/<id>.json`, validated at build and inlined wit
 ```
 id          "surv-<slug>"   existing ids are kept exactly, so current pins, recents and search keys still work
 title, category, keywords[], summary
-where[]     any of town, rural, woods   (optional)
+where[]     any of town, rural, woods, coast   (optional)
 when[]      any of cold, warm           (optional)
 doFirst[]   optional short actions
 sections[]  { h, blocks[] }   block = { p } | { list[] } | { steps[] } | { warn } | { table: { head[], rows[][] } }
@@ -153,15 +156,24 @@ from protocol ids; category, where and when from fixed lists; every `fig` exists
 resolves to a real protocol, topic, tool, checklist or screen (wrong cross-references were a repeated v6
 defect); at least one source; a draft topic fails `--release`.
 
-**Migration.** The 14 existing topics are converted to this format word for word, then tagged with
-where/when. The only changes allowed are deletions of content that does not apply to Central New York, each
-listed in `docs/v7-migration.md` with the reason: the desert half of Shelter's "Snow and desert" section and
-the `shelter-desert` diagram, Southern Hemisphere and Southern Cross navigation text, grizzly-bear and
-mountain-lion sections of Dangerous animals, and the seawater line in Find water. A test checks that each
-migrated topic's text equals the old text minus exactly the listed deletions.
+**Migration, in two steps.**
 
-**Sources for migrated topics.** The existing topics have no recorded sources. See section 12 (open question
-for Jordan).
+1. *Convert.* The 14 existing topics are converted to this format word for word and tagged with where/when.
+   The only changes allowed at this step are deletions of content that does not apply to the Northeast, each
+   listed in `docs/v7-migration.md` with the reason: the desert half of Shelter's "Snow and desert" section and
+   the `shelter-desert` diagram, Southern Hemisphere and Southern Cross navigation text, and the grizzly-bear
+   and mountain-lion sections of Dangerous animals (neither animal has a population in the Northeast; the
+   checker confirms this against a wildlife-agency source and adds moose if the source supports it). The
+   seawater line and coastal advice stay. A test checks that each converted topic's text equals the old text
+   minus exactly the listed deletions.
+2. *Check.* Every converted topic (and the new Priorities topic) is then source-checked under the rules in
+   section 6: each number and each instruction is traced to an opened source, corrected where the source
+   disagrees, recorded in `docs/content-review.md`, and reviewed by an independent reviewer. A topic is draft
+   until it passes, and v7 cannot be released with a draft topic. Corrections are listed in
+   `docs/v7-migration.md` so Jordan can see what changed. The word-for-word test from step 1 is replaced, once
+   checking starts, by a test that every topic has sources and no draft flag.
+
+Checking covers what the topics say today. Broadening and deepening each subject is the job of its pack.
 
 ### 5.4 Tools (v7)
 
@@ -219,8 +231,10 @@ No decorative animation. Text selectable. Tables scroll sideways inside their ow
 
 ## 6. Content rules for every pack
 
-1. **Central New York first.** Cold-season content assumes real winter. Hunting, trapping and fishing topics
-   name local species and state that New York seasons, licences and trap rules apply in normal times.
+1. **The Northeast, Central New York first.** Cold-season content assumes real winter. Where advice differs
+   across the region (mountains, big lakes, coast, city), the topic says so and is tagged. Hunting, trapping
+   and fishing topics name Northeastern species and state that each state's seasons, licences and trap rules
+   apply in normal times, with New York's named.
 2. **Every number comes from a source that was actually opened**, recorded in `docs/content-review.md` with
    the page or section. Preferred sources: FEMA and Ready.gov, CDC, EPA (water disinfection), HHS REMM, NRC
    and FDA (radiation, potassium iodide), Red Cross, National Weather Service, NYS DEC, Cornell Cooperative
@@ -263,8 +277,11 @@ No decorative animation. Text selectable. Tables scroll sideways inside their ow
 
 ## 8. Risks
 
-- **Scale.** Eight packs is many releases, and content review is the slow part. The order in section 4 puts
-  the things that kill fastest in a Central New York grid-down first (water, cold, fallout).
+- **Scale.** Eight packs is many releases, and content review is the slow part. Checking the 14 existing topics
+  makes v7 itself a content job about the size of a pack, and several of those topics (water, shelter, fire,
+  food) will be checked now and then expanded again when their pack arrives. The order in section 4 puts the
+  things that kill fastest in a Northeast grid-down first (water, cold, fallout).
+- **Regional breadth.** Covering the whole Northeast adds coast, mountain and big-city cases to every pack.
 - **Fix rounds create new defects** (v6 experience). Fix scopes stay tight and every fix is re-reviewed.
 - **Radiation and potassium iodide numbers** are medical. They follow the Emergency sourcing rules and go on
   the list of questions for a medical professional.
@@ -294,7 +311,7 @@ names; whether checklists and topics share one renderer.
 1. No guided step-by-step flows in v7; a "Do first" box instead (5.6). Cost if wrong: urgent survival actions
    read as a short list rather than one step per screen until a pack adds the player.
 2. v7 ships only three tools; planners wait for the pack that sources their numbers (5.4).
-3. Desert, jungle and coast advice is deleted, not hidden (5.1).
+3. Desert and jungle advice is deleted, not hidden; coast advice stays (5.1).
 4. The Survival tab's own search box is removed in favour of the header search (5.1).
 5. Survival home shows only survival pins and recents; Emergency home is unchanged (5.1).
 6. Filters do not affect search (5.1).
@@ -307,13 +324,9 @@ names; whether checklists and topics share one renderer.
 13. No group-size setting until pack 1 (5.4).
 14. Migrated topics lose their non-local content (5.3).
 
-## 12. Open question for Jordan
+## 12. Jordan's decisions on this document (2026-11-17)
 
-The 14 existing topics have never been source-checked, and some carry numbers (water treatment above all).
-Two ways to handle them in v7:
-
-- **A (recommended):** move them over as they are, each showing a visible "Not yet source-checked" label, and
-  let a release build ship them with that label. Each one is checked, corrected and loses the label when its
-  pack arrives (water first). v7 stays a framework release.
-- **B:** source-check and independently review all 14 before v7 ships. Nothing unchecked survives, but v7
-  becomes a content job about the size of a pack and arrives much later.
+- **All 14 existing topics are source-checked and independently reviewed before v7 ships** (he chose this over
+  shipping them with a "not yet checked" label). Section 5.3 reflects it.
+- **Region widened to all of New York and the Northeast US**, "to make sure information is available depending
+  on distance traveled". Sections 1, 2, 5.1, 5.3 and 6 reflect it.

@@ -109,13 +109,13 @@
       "ask": {
         "q": "Is the wound on the chest?",
         "yes": "s14",
-        "no": "s15"
+        "no": "s16"
       }
     },
     {
       "id": "s14",
       "text": "Chest wound: press firmly on the bleeding with gauze or cloth, but do not seal the hole airtight. Then use the Open chest wound protocol.",
-      "detail": "Control heavy bleeding with direct pressure. Take care that the dressing does not end up blocking the hole partly or completely, which can trap air inside the chest.\n\nCurrent first aid guidance (AHA and Red Cross 2024) is to leave an open chest wound open to the air or loosely covered with a clean dry dressing that does not seal, and to watch breathing. The Open chest wound protocol covers this step by step.",
+      "detail": "Control heavy bleeding with direct pressure. Any dressing over a chest wound can trap air inside the chest (AHA/Red Cross 2024), so keep it loose and watch breathing.\n\nCurrent first aid guidance (AHA and Red Cross 2024) is to leave an open chest wound open to the air or loosely covered with a clean dry dressing that does not seal. The Open chest wound protocol covers this step by step.",
       "log": "Pressure on chest wound",
       "end": true
     },
@@ -124,6 +124,25 @@
       "text": "Belly or other body wound: press hard and steadily on the bleeding with gauze or clean cloth, and keep pressing until help takes over.",
       "detail": "Direct manual pressure is the first treatment for life-threatening bleeding that a tourniquet cannot reach (AHA and Red Cross). Push down hard with both hands on the bleeding spot and do not let up.\n\nIf blood soaks through, press harder on the same spot rather than lifting the dressing. Once the bleeding has stopped, a firm pressure bandage can hold the dressing in place.\n\nThe Red Cross bleeding algorithm lists wound packing for head, neck and trunk wounds by trained responders. This app does not guide packing of belly or chest wounds; press instead.\n\nBleeding inside the belly cannot be controlled from outside. Follow the Shock protocol and get the casualty to medical care urgently.",
       "log": "Pressure held on body wound",
+      "end": true,
+      "warn": "If organs are showing, do not press on them or push them back. Cover them loosely with a clean, moist dressing."
+    },
+    {
+      "id": "s16",
+      "text": "Are organs (such as bowel) showing through the wound?",
+      "detail": "With a deep belly wound, loops of bowel or other organs can push out through the opening. These must not be pressed on.",
+      "ask": {
+        "q": "Are organs showing through the wound?",
+        "yes": "s17",
+        "no": "s15"
+      }
+    },
+    {
+      "id": "s17",
+      "text": "Organs showing: do not push them back or press on them. Cover loosely with a clean, moist dressing. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "detail": "Remove clothing from around the wound. Do not push the organs back in and do not press on them.\n\nWet clean dressings (gauze or cloth) with clean, warm water or saline and lay them loosely over the wound and organs. If you have plastic wrap or aluminium foil, lay it loosely over the wet dressings.\n\nLay the casualty on their back with knees bent, unless that hurts. If a head, neck or back injury is possible, leave them as found unless you must move them for safety, CPR or to control bleeding.\n\nKeep them from getting cold or overheated, give care for shock (Shock protocol), and keep watching breathing and responsiveness. Stay with them.",
+      "warn": "Do not push organs back in. Do not press on them.",
+      "log": "Abdominal wound covered with moist dressing",
       "end": true
     }
   ],
@@ -134,12 +153,14 @@
     "Do not use pressure points (pressing on an artery away from the wound) instead of pressing on the wound.",
     "Do not rely on raising the limb or on ice to stop bleeding; there is no evidence they work.",
     "Do not pull out packing or a soaked dressing; press harder or add more on top.",
-    "Do not make an improvised tourniquet from thin cord or wire; use a flat band at least 2 inches wide."
+    "Do not make an improvised tourniquet from thin cord or wire; use a flat band at least 2 inches wide.",
+    "Do not press on, or push back, organs showing through a belly wound; cover them loosely with a moist dressing."
   ],
   "evacuate": [
     "Evacuate urgently anyone who needed a tourniquet or wound packing.",
     "Evacuate urgently anyone with life-threatening bleeding, even if it is now controlled.",
-    "Evacuate urgently if there are signs of shock: confusion, pale cool skin, fast weak pulse, fast breathing."
+    "Evacuate urgently if there are signs of shock: confusion, pale cool skin, fast weak pulse, fast breathing.",
+    "Evacuate urgently anyone with a belly wound, especially with organs showing."
   ],
   "sources": [
     {
@@ -161,6 +182,11 @@
       "name": "Joint Trauma System / Committee on TCCC, Tactical Combat Casualty Care Guidelines 2026, Massive hemorrhage and tourniquet reassessment",
       "year": 2026,
       "url": "https://books.allogy.com/web/tenant/8/books/b729b76a-1a34-4bf7-b76b-66bb2072b2a7/"
+    },
+    {
+      "name": "American Red Cross, Abdominal injury (lay page, open abdominal injury care)",
+      "year": 2026,
+      "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/abdominal-injury"
     }
   ],
   "reviewed": "2026-11-16"

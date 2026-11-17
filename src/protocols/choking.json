@@ -78,8 +78,8 @@
     },
     {
       "id": "s8",
-      "text": "Give 5 chest thrusts instead of abdominal thrusts.",
-      "detail": "Use chest thrusts instead of abdominal thrusts if they are in late pregnancy, if you cannot get your arms around their belly, or if they are in a wheelchair (AHA 2025, Red Cross).\n\nThe sources available to this app do not describe the hand position for chest thrusts. If you have been trained in chest thrusts, use that technique. Give up to 5, each forceful and separate.",
+      "text": "Give 5 chest thrusts instead: from behind, arms around the chest, fist on the middle of the breastbone, thrust firmly backward.",
+      "detail": "When: AHA 2025 says chest thrusts instead of abdominal thrusts in late pregnancy or when you cannot get your arms around the belly. Red Cross says use them for anyone obviously or known to be pregnant, too large to wrap your arms around, or in a wheelchair.\n\nHow (MedlinePlus, US National Library of Medicine): stand behind them and wrap your arms around their chest. Put the thumb side of your fist on the middle of the breastbone, level with the nipples, and cover it with your other hand. Give firm thrusts straight backward. Give up to 5, each forceful and separate.",
       "ask": {
         "q": "Is the object out, or are they coughing, speaking or breathing again?",
         "yes": "s11",
@@ -146,6 +146,11 @@
       "name": "American Red Cross, Adult and child choking (lay page)",
       "year": 2026,
       "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/adult-child-choking"
+    },
+    {
+      "name": "MedlinePlus (US National Library of Medicine), Choking - adult or child over 1 year (review date 2026-02-17)",
+      "year": 2026,
+      "url": "https://medlineplus.gov/ency/article/000047.htm"
     }
   ],
   "reviewed": "2026-11-16"

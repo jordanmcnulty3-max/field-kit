@@ -33,8 +33,26 @@
       "id": "s10",
       "text": "Did this wound need a tourniquet, wound packing or a pressure bandage to stop heavy bleeding?",
       "ask": {
-        "q": "Did it need a tourniquet, packing or a pressure bandage?",
+        "q": "Did it need a tourniquet, packing or a pressure bandage to stop heavy bleeding?",
         "yes": "s11",
+        "no": "s12"
+      }
+    },
+    {
+      "id": "s12",
+      "text": "Are organs (such as bowel) showing through the wound?",
+      "ask": {
+        "q": "Are organs showing through the wound?",
+        "yes": "s14",
+        "no": "s13"
+      }
+    },
+    {
+      "id": "s13",
+      "text": "Is the wound on the chest or back, over the ribs?",
+      "ask": {
+        "q": "Is the wound on the chest or back, over the ribs?",
+        "yes": "s15",
         "no": "s2"
       }
     },
@@ -90,6 +108,19 @@
       "text": "Leave the dressing, packing or tourniquet in place. Do not clean or rinse this wound. Cover it, use the Severe bleeding protocol, and evacuate.",
       "detail": "MedlinePlus: do not try to clean a major wound, especially once the bleeding is under control. Taking off packing or a pressure dressing to rinse the wound can start heavy bleeding again.\n\nKeep the dressing covered and clean, keep checking it for fresh bleeding, and follow the Severe bleeding protocol if it bleeds through. Do not remove a tourniquet: that is an advanced procedure (see Advanced procedures).\n\nA wound that needed a tourniquet, packing or a pressure bandage needs medical care urgently. Keep the casualty warm and watch for shock (Shock protocol).",
       "warn": "Do not remove packing or a pressure dressing to clean the wound.",
+      "end": true
+    },
+    {
+      "id": "s14",
+      "text": "Organs showing: do not rinse or clean the wound. Use the Belly (abdominal) injury protocol and evacuate urgently.",
+      "detail": "MedlinePlus: do not try to clean a major wound. Red Cross: organs showing through a belly wound get clean dressings moistened with clean warm tap water or saline laid loosely over them, with plastic wrap or foil loosely on top; do not push the organs back and do not press on them. The water is only for wetting the dressings, not for rinsing the wound.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "warn": "Do not rinse, press on, or push back organs showing through a wound.",
+      "end": true
+    },
+    {
+      "id": "s15",
+      "text": "Chest or back wound over the ribs: do not rinse or clean it. Use the Open chest wound protocol and evacuate urgently.",
+      "detail": "MedlinePlus: do not try to clean a major wound. A wound over the ribs may go through the chest wall; the Open chest wound protocol covers bleeding control without sealing the hole and what to watch for in breathing.\n\nCall 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "end": true
     }
   ],

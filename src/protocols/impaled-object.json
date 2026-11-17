@@ -70,8 +70,8 @@
     },
     {
       "id": "s8",
-      "text": "Hook just under the skin: wash, then remove it. If the barb is not in, back it out. If it is, push the tip through, cut it off behind the barb, and back the rest out.",
-      "detail": "MedlinePlus Fishhook removal: a hook that is only just under the skin can be removed by a lay person. Wash your hands and the skin around it first.\n\nBarb not in the skin: pull the tip back out the way it went in.\n\nWire-cutting method: push the tip of the hook on through the skin, cut it off just behind the barb with wire cutters, then pull the rest of the hook back out the way it went in.\n\nFishing-line method (MedlinePlus): loop fishing line through the bend of the hook, hold the shank and press the hook slightly down and in to free the barb, keep that pressure, and give a quick firm jerk on the line so the hook comes straight back out.\n\nAfterwards: wash the wound well with soap and water and cover it loosely with a clean dressing. Do not close it with tape. Watch for infection (redness, swelling, pain, drainage) and check tetanus: the Wound cleaning and care protocol covers both.",
+      "text": "Hook just under the skin: wash, then remove it. Barb not in: back it out. Barb in, tip near the surface: push the tip through, cut off the barb, back it out.",
+      "detail": "MedlinePlus Fishhook removal: a hook that is only just under the skin can be removed by a lay person. Wash your hands and the skin around it first.\n\nBarb not in the skin: pull the tip back out the way it went in.\n\nWire-cutting method, only if the tip of the hook lies near the surface of the skin: push the tip of the hook on through the skin, cut it off just behind the barb with wire cutters, then pull the rest of the hook back out the way it went in.\n\nFishing-line method (MedlinePlus), for a hook just under the skin whose tip is not near the surface: loop fishing line through the bend of the hook, hold the shank and press the hook slightly down and in to free the barb, keep that pressure, and give a quick firm jerk on the line so the hook comes straight back out.\n\nAfterwards: wash the wound well with soap and water and cover it loosely with a clean dressing. Do not close it with tape. Watch for infection (redness, swelling, pain, drainage) and check tetanus: the Wound cleaning and care protocol covers both.",
       "log": "Fishhook removed",
       "end": true
     }
@@ -81,7 +81,7 @@
     "Do not press directly on the object; press around it."
   ],
   "evacuate": [
-    "Evacuate every impaled object urgently.",
+    "Evacuate every impaled object urgently (except a superficial fishhook removed as in the fishhook step).",
     "Most urgent: heavy bleeding, trouble breathing, or signs of shock."
   ],
   "sources": [

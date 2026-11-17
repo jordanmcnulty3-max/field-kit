@@ -201,6 +201,47 @@ dl.march dd{margin:0}
   opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.show{opacity:1}
 
+/* Protocol player: full-screen, one step per screen */
+body.playing .top,body.playing .tabbar,body.playing .tab{display:none}
+body.playing{overflow:hidden}
+#player{position:fixed;inset:0;z-index:15;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);
+  padding-top:env(safe-area-inset-top,0px)}
+.pp-head{border-bottom:1px solid var(--line)}
+.pp-row{display:flex;align-items:center;gap:8px;padding:8px 12px}
+.pp-title{flex:1;min-width:0;margin:0;font-size:18px;line-height:1.25;font-weight:700;color:var(--c)}
+.pp-btn{min-width:56px;min-height:56px;display:grid;place-items:center;border:1px solid var(--line);background:var(--surface);
+  border-radius:8px;padding:0 12px;cursor:pointer;font-size:24px;line-height:1}
+.pp-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pp-draft{margin:0;padding:0 16px 8px;font-size:14px;font-weight:600;color:var(--blaze)}
+.pp-prog{padding:8px 16px 0}
+.pp-count{font-size:14px;color:var(--muted);margin:0 0 4px;text-align:right}
+.pp-bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.pp-bar>i{display:block;height:100%;background:var(--c)}
+.pp-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px;max-width:640px;width:100%;margin:0 auto}
+.pp-action{margin:0 0 16px;font-size:24px;line-height:1.35;font-weight:700}
+.pp-action:focus{outline:none}
+.pp-detail{font-size:17px;line-height:1.5}
+.pp-detail p{margin:0 0 12px;white-space:pre-line}
+.pp-warn{margin:0 0 16px;padding:12px;border:2px solid var(--blaze);border-radius:8px;font-weight:600}
+.pp-fig{margin:0 0 16px}
+.pp-fig svg{display:block;max-width:100%;height:auto;margin:0 auto}
+.pp-q{font-size:18px;font-weight:600;margin:0 0 12px}
+.pp-wide{display:flex;width:100%;align-items:center;justify-content:center;min-height:56px;margin:0 0 12px;font-size:18px}
+.pp-timerbar{display:flex;align-items:center;gap:12px;padding:8px 16px;border-top:1px solid var(--line);background:var(--surface);font-size:18px}
+.pp-timerbar b{font-size:24px;font-variant-numeric:tabular-nums}
+.pp-timerbar .grow{flex:1;min-width:0}
+.pp-foot{display:flex;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--paper)}
+.pp-foot .btn{min-height:64px;font-size:20px;flex:1}
+.pp-foot .btn.back{flex:0 0 28%}
+.pp-sec{margin:0 0 20px}
+.pp-sec h3{margin:0 0 6px;font-size:18px}
+.pp-sec ul,.pp-sec ol{margin:0;padding-left:22px}
+.pp-sec li{margin:0 0 6px}
+.pp-step{padding:12px 0;border-top:1px solid var(--line)}
+.pp-step .pp-stepbtn{display:flex;min-height:56px;width:100%;text-align:left;align-items:center;gap:12px;border:0;background:none;padding:0;cursor:pointer;font-size:18px;font-weight:650}
+.pp-step .pp-stepbtn span:first-child{color:var(--c);min-width:2ch}
+.sr-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
 @media (min-width:600px){.mgrs{font-size:52px}}
 
 /* Map */
@@ -524,6 +565,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 
   <p class="foot">Reference only, not a substitute for training. Take a Stop the Bleed, CPR and wilderness first aid course.</p>
 </section>
+<section id="player" hidden role="region" aria-label="Protocol player"></section>
 </main>
 
 <nav class="tabbar" aria-label="Sections">

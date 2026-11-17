@@ -49,9 +49,10 @@
     },
     {
       "id": "s13",
-      "text": "Is the wound on the chest or back, over the ribs?",
+      "text": "Could the wound go through the chest wall?",
+      "detail": "Answer Yes for a wound on the chest or back over the ribs that is a stab or gunshot wound, has something stuck in or through it, is deep, or bubbles or makes a sucking or hissing sound when they breathe (TCCC ASM signs of an open chest wound).\n\nA graze, scrape or shallow cut on the chest or back: answer No and clean it as below. AHA 2024: superficial wounds and abrasions should be rinsed thoroughly.",
       "ask": {
-        "q": "Is the wound on the chest or back, over the ribs?",
+        "q": "Could the wound go through the chest wall?",
         "yes": "s15",
         "no": "s2"
       }

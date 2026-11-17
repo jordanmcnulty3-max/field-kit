@@ -294,3 +294,7 @@ Re-review: task-11-content-rereview.md (N1 Important, N2 to N5 Minor). Pages re-
 - N3/N4 fracture s8: action "Do not try to reposition a hip, pelvis or thigh injury"; warn includes the thigh; detail credits both MedlinePlus pages with each page's own wording of the exception.
 - N5 impaled-object: s8 wire-cutting only when the tip lies near the surface of the skin (MedlinePlus), otherwise the fishing-line method; evacuate list now excepts a superficial fishhook removed as in the fishhook step.
 - Path check redone on wound-care (5 paths), fracture (9) and impaled-object (3): irrigation is now reachable only by wounds that needed no haemorrhage control, have no organs showing, and are not over the ribs; repositioning is excluded on the hip, pelvis and thigh path; wire-cutting is reachable only for a superficial hook with its tip near the surface.
+
+## Task 11 review fixes, round 3 (2026-11-17)
+- M1 wound-care s13: the question is now "Could the wound go through the chest wall?" The cues are in the detail: stab, gunshot, something stuck in or through it, deep, bubbling or sucking. A graze or shallow cut on the trunk goes on to irrigation (AHA-FA 9.3: irrigate superficial wounds and abrasions thoroughly). s15 is unchanged.
+- M2 impaled-object s8: the action now ends "Otherwise: fishing-line method (see detail)." (187 characters).

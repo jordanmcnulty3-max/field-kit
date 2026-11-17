@@ -439,6 +439,7 @@ def test_cpr_reopened_shows_live_state_not_a_fresh_one(page, app_url):
 
 def test_cpr_stop_is_two_step_with_ignore_window_and_revert(page, app_url):
     running_cpr(page, app_url)
+    page.clock.run_for(800)
     page.click('#cprBtn')
     assert page.inner_text('#cprBtn') == 'Confirm stop'
     page.evaluate("document.querySelector('#cprBtn').click(); 0")   # bounced second tap
@@ -463,7 +464,7 @@ def test_active_strip_shows_running_cpr_and_opens_the_tool(page, app_url):
     page.wait_for_function("location.hash === '#/emergency'")
     page.clock.run_for(22_000)
     b = page.locator('#emActive button')
-    assert b.count() == 1 and b.inner_text().strip() == 'CPR running, cycle 2'
+    assert b.count() == 1 and b.inner_text().strip().startswith('CPR running, cycle 2')   # headless may also add the wake-lock warning
     b.click()
     page.wait_for_function("location.hash === '#/emergency/tool/cpr'")
     assert page.inner_text('#cprBtn') == 'Stop'
@@ -500,15 +501,28 @@ def test_cpr_warns_when_wake_lock_request_is_rejected(page, app_url):
 
 FAKE_AUDIO = """
   (() => {
-    window.__starts = [];
+    window.__starts = []; window.__oscs = [];
+    const dest = { dest: true };
+    const now = () => performance.now() / 1000;
+    const node = () => ({ out: null, connect(n) { this.out = n; return n; }, disconnect() { this.out = null; } });
     window.AudioContext = class {
       constructor() { this.state = 'running'; }
-      get currentTime() { return performance.now() / 1000; }
+      get currentTime() { return now(); }
       resume() { return Promise.resolve(); }
-      get destination() { return {}; }
-      createGain() { return { gain: { setValueAtTime() {}, exponentialRampToValueAtTime() {} }, connect(n) { return n; } }; }
-      createOscillator() { const o = { frequency: {}, connect(n) { return n; }, start(w) { window.__starts.push([w, performance.now() / 1000, o.frequency.value]); }, stop() {} }; return o; }
+      get destination() { return dest; }
+      createGain() { return Object.assign(node(), { gain: { setValueAtTime() {}, exponentialRampToValueAtTime() {} } }); }
+      createOscillator() {
+        const o = Object.assign(node(), { frequency: {}, when: null, stopAt: null,
+          start(w) { this.when = w; window.__starts.push([w, now(), this.frequency.value]); },
+          stop(w) { this.stopAt = w === undefined ? now() : w; } });
+        window.__oscs.push(o); return o;
+      }
     };
+    // Starts later than `after` (seconds) that would still be heard: wired to the speaker and not stopped first.
+    window.__audibleAfter = after => window.__oscs.filter(o => {
+      let n = o, hops = 0; while (n && !n.dest && hops++ < 10) n = n.out;
+      return n && n.dest && o.when > after && !(o.stopAt !== null && o.stopAt <= o.when);
+    }).map(o => o.when);
   })();"""
 
 
@@ -532,3 +546,67 @@ def test_cpr_late_tick_does_not_bunch_clicks(page, app_url):
     whens = [w for w, _, _ in page.evaluate('__starts')]
     gaps = [b - a for a, b in zip(whens, whens[1:])]
     assert gaps and min(gaps) > 0.4   # one beat may land up to 200 ms late, never doubled up
+
+
+def stop_cpr(page):
+    page.click('#cprBtn')
+    page.clock.run_for(800)
+    page.click('#cprBtn')
+    assert page.evaluate('FK.tools.cpr.running()') is False
+
+
+def test_cpr_stop_silences_clicks_already_queued_ahead(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', init=FAKE_AUDIO)
+    page.click('#cprBtn')
+    page.clock.run_for(3000)
+    stop_cpr(page)
+    stopped_at = page.evaluate('performance.now() / 1000')
+    assert page.evaluate('__starts.filter(s => s[0] > performance.now() / 1000).length') > 0   # something was queued ahead
+    assert page.evaluate('after => __audibleAfter(after)', stopped_at) == []
+    page.clock.run_for(3000)
+    assert page.evaluate('after => __audibleAfter(after)', stopped_at) == []
+
+
+def test_cpr_restart_right_after_stop_does_not_overlap_the_old_run(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', init=FAKE_AUDIO)
+    page.click('#cprBtn')
+    page.clock.run_for(3000)
+    stop_cpr(page)
+    stopped_at = page.evaluate('performance.now() / 1000')
+    page.click('#cprBtn')
+    page.clock.run_for(2500)
+    whens = page.evaluate('after => __audibleAfter(after)', stopped_at)
+    assert len(whens) >= 4
+    assert all(b - a > 0.5 for a, b in zip(whens, whens[1:]))
+    assert abs(whens[0] - stopped_at) < 1.0     # the first audible click belongs to the new run
+
+
+def test_cpr_stop_during_breaths_hold_plays_nothing_afterwards(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', init=FAKE_AUDIO)
+    page.click('#cprBtn')
+    page.clock.run_for(17_000)                   # in the 4 s hold
+    page.click('#cprBtn')
+    page.clock.run_for(2000)                     # next cycle's first click is now queued ahead
+    assert count_text(page) == '2 breaths'
+    page.click('#cprBtn')
+    stopped_at = page.evaluate('performance.now() / 1000')
+    page.clock.run_for(5000)
+    assert page.evaluate('after => __audibleAfter(after)', stopped_at) == []
+
+
+def test_cpr_bounced_tap_on_start_does_not_arm_confirm_stop(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/cpr')
+    page.evaluate("document.querySelector('#cprBtn').click(); document.querySelector('#cprBtn').click(); 0")
+    assert page.inner_text('#cprBtn') == 'Stop'
+    page.clock.run_for(800)
+    page.click('#cprBtn')
+    assert page.inner_text('#cprBtn') == 'Confirm stop'
+
+
+def test_active_strip_cpr_line_carries_the_wake_lock_warning(page, app_url):
+    boot(page, app_url, strip_apis=True)
+    page.evaluate("FK.tools.start('cpr')")
+    page.click('#cprBtn')
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert page.inner_text('#emActive button').strip() == 'CPR running, cycle 1, screen may sleep'

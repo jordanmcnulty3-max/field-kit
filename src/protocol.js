@@ -5,6 +5,7 @@
   const root = document.getElementById('player');
   const SECTION = 'emergency';
   const RESERVED = ['tool', 'report'];   // addresses owned by other features; the player stays out of them
+  const LISTS = [['donts', 'Do not', 'Do not'], ['evacuate', 'Evacuate when', 'Evacuate when']];   // [protocol key, button label, heading]
   const TOOL_LABEL = { tq: 'Tourniquet timer', cpr: 'CPR metronome', rate: 'Rate counter', burn: 'Burn area' };
   const ACK_TEXT = 'These procedures can kill if done wrong or when they are not needed. They are a reference for people who have trained on them hands-on. Reading this is not training.';
   const OPENING = [['indications', 'When to do this'], ['contraindications', 'When not to'],
@@ -88,11 +89,13 @@
   }
 
   /* ---------- Rendering ---------- */
-  let cur = null;                // { p, mode: 'ack' | 'intro' | 'step' | 'all', i }
+  let cur = null;                // { p, mode: 'ack' | 'intro' | 'step' | 'all', i, open: { donts, evacuate } }
   const from = {};               // 'protocolId:stepIndex' -> where the user came from, so Back follows branches
 
   const paras = t => String(t).split(/\n\s*\n/).map(x => x.trim()).filter(Boolean).map(x => '<p>' + esc(x) + '</p>').join('');
   const list = (items, tag) => '<' + tag + '>' + items.map(x => '<li>' + esc(x) + '</li>').join('') + '</' + tag + '>';
+  const listItems = (p, k) => (Array.isArray(p[k]) ? p[k].filter(x => typeof x === 'string' && x.trim()) : []);
+  const hasList = (p, k) => listItems(p, k).length > 0;
   const blocks = p => openingBlocks(p).map(([k, h]) => '<section class="pp-sec"><h3>' + h + '</h3>' + list(p[k], 'ul') + '</section>').join('');
 
   function head(p) {
@@ -117,13 +120,41 @@
     const s = p.steps[i];
     const tools = FK.tools && typeof FK.tools.start === 'function' && s.tool;
     return '<p class="pp-action" id="ppAction" tabindex="-1">' + esc(s.text) + '</p>' +
-      (s.detail ? '<div class="pp-detail">' + paras(s.detail) + '</div>' : '') +
       (s.warn ? '<p class="pp-warn"><span aria-hidden="true">⚠ </span>' + esc(s.warn) + '</p>' : '') +
+      (s.detail ? '<div class="pp-detail">' + paras(s.detail) + '</div>' : '') +
       (s.figSvg ? '<figure class="pp-fig">' + s.figSvg + '</figure>' : '') +
       (tools ? '<button class="btn pp-wide" data-act="tool">' + esc((Object.hasOwn(TOOL_LABEL, s.tool) ? TOOL_LABEL[s.tool] : 'Open tool')) + '</button>' : '') +
       (s.timer && Number.isFinite(s.timer.seconds) && s.timer.seconds > 0
         ? '<button class="btn ghost pp-wide" data-act="timer">Start timer: ' + esc(s.timer.label || 'Timer') + ' (' + mmss(s.timer.seconds * 1000) + ')</button>' : '') +
-      (isAsk(s) && s.ask.q && s.ask.q !== s.text ? '<p class="pp-q">' + esc(s.ask.q) + '</p>' : '');
+      (isAsk(s) && s.ask.q && s.ask.q !== s.text ? '<p class="pp-q">' + esc(s.ask.q) + '</p>' : '') +
+      listPanels(p);
+  }
+
+  /* Do not / Evacuate when: one tap from every step. The buttons sit above the step; an open list shows below it. */
+  function listRow(p) {
+    const ks = LISTS.filter(([k]) => hasList(p, k));
+    if (!ks.length) return '';
+    return '<div class="pp-lists" id="ppLists">' + ks.map(([k, label]) =>
+      '<button type="button" class="btn ghost" data-act="list" data-list="' + k + '" aria-expanded="' + !!cur.open[k] + '" aria-controls="ppList-' + k + '">' + esc(label) + '</button>').join('') + '</div>';
+  }
+  function listPanels(p) {
+    return LISTS.filter(([k]) => hasList(p, k) && cur.open[k]).map(([k, label, h]) =>
+      '<section class="pp-list" id="ppList-' + k + '" data-list="' + k + '" tabindex="-1" aria-label="' + esc(h) + '"><h3>' + esc(h) + '</h3>' + list(listItems(p, k), 'ul') +
+      '<button type="button" class="btn ghost pp-wide" data-act="list" data-list="' + k + '" aria-label="Close the ' + esc(label) + ' list">Close</button></section>').join('');
+  }
+  function toggleList(k) {
+    const body = root.querySelector('#ppBody');
+    const was = body ? body.scrollTop : 0;
+    cur.open[k] = !cur.open[k];
+    const opening = cur.open[k];
+    root.querySelectorAll('#ppLists [data-list="' + k + '"]').forEach(b => b.setAttribute('aria-expanded', String(opening)));
+    root.querySelectorAll('.pp-list').forEach(n => n.remove());
+    if (body) {
+      body.insertAdjacentHTML('beforeend', listPanels(cur.p));
+      const panel = body.querySelector('.pp-list[data-list="' + k + '"]');
+      if (opening && panel) { panel.scrollIntoView({ block: 'start' }); panel.focus({ preventScroll: true }); }
+      else { body.scrollTop = was; const b = root.querySelector('#ppLists [data-list="' + k + '"]'); if (b) b.focus({ preventScroll: true }); }
+    }
   }
 
   function stepFoot(p, i) {
@@ -139,8 +170,8 @@
     h += p.steps.map((s, i) => {
       const ask = isAsk(s) ? '<p><b>' + esc(s.ask.q || s.text) + '</b> Yes: ' + label(stepIndex(p, s.ask.yes)) + '. No: ' + label(stepIndex(p, s.ask.no)) + '.</p>' : '';
       return '<div class="pp-step"><button class="pp-stepbtn" data-act="open" data-i="' + i + '"><span>' + (i + 1) + '</span><span>' + esc(s.text) + '</span></button>' +
-        (s.detail ? '<div class="pp-detail">' + paras(s.detail) + '</div>' : '') +
-        (s.warn ? '<p class="pp-warn"><span aria-hidden="true">⚠ </span>' + esc(s.warn) + '</p>' : '') + ask + '</div>';
+        (s.warn ? '<p class="pp-warn"><span aria-hidden="true">⚠ </span>' + esc(s.warn) + '</p>' : '') +
+        (s.detail ? '<div class="pp-detail">' + paras(s.detail) + '</div>' : '') + ask + '</div>';
     }).join('');
     if (Array.isArray(p.donts) && p.donts.length) h += '<section class="pp-sec"><h3>Do not</h3>' + list(p.donts, 'ul') + '</section>';
     if (Array.isArray(p.evacuate) && p.evacuate.length) h += '<section class="pp-sec"><h3>Evacuate when</h3>' + list(p.evacuate, 'ul') + '</section>';
@@ -162,7 +193,7 @@
     } else if (mode === 'all') {
       body = allView(p);
     } else {
-      prog = progress(p, i);
+      prog = progress(p, i) + listRow(p);
       body = stepBody(p, i);
       foot = stepFoot(p, i);
     }
@@ -208,7 +239,8 @@
   function show(p, sub) {
     if (cur && cur.p.id !== p.id) stopTimer();
     const mode = needsAck(p) ? 'ack' : sub === 'all' ? 'all' : (sub || !hasIntro(p)) ? 'step' : 'intro';
-    cur = { p, mode, i: mode === 'step' ? (sub ? stepIndex(p, sub) : 0) : -1 };
+    cur = { p, mode, i: mode === 'step' ? (sub ? stepIndex(p, sub) : 0) : -1, open: { donts: false, evacuate: false } };
+    if (cur.i === 0 && hasList(p, 'donts')) cur.open.donts = true;   // the first step shows the Do not list; later steps keep it one tap away
     stamp(mode === 'step' ? cur.i : mode);
     isOpen = true;
     root.hidden = false;
@@ -298,6 +330,7 @@
         break;
       }
       case 'open': FK.route.go(stepPath(p, +b.dataset.i)); break;
+      case 'list': if (LISTS.some(([k]) => k === b.dataset.list)) toggleList(b.dataset.list); break;
       case 'tool': if (FK.tools && FK.tools.start) FK.tools.start(p.steps[i].tool, { protocol: p.id }); break;
       case 'timer': startTimer(p.steps[i].timer); root.querySelector('#ppTimerBar').focus({ preventScroll: true }); break;
       case 'pin': if (FK.pins && FK.pins.toggle) { FK.pins.toggle('p:' + p.id); const on = !!(FK.pins.has && FK.pins.has('p:' + p.id)); b.setAttribute('aria-pressed', String(on)); b.textContent = on ? '★' : '☆'; } break;

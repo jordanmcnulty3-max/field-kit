@@ -445,6 +445,13 @@
       { id: 'legL', name: 'Left leg', pct: 14 }, { id: 'legR', name: 'Right leg', pct: 14 }
     ]
   };
+  /* The child table is the proportions of a child under 1 year. For every year of age, 1 percent comes off the head and
+     0.5 percent goes onto each leg (rule recorded in the burns protocol notes). The chart is for under 9; from 9 use the adult one. */
+  const BURN_MAX_CHILD_AGE = 8;
+  const burnPct = n => String(Math.round(n * 10) / 10);
+  const burnRows = () => BURN_TABLES[burn.mode].map(r => burn.mode !== 'child' ? r
+    : r.id === 'head' ? { ...r, pct: r.pct - burn.age } : /^leg[LR]$/.test(r.id) ? { ...r, pct: r.pct + 0.5 * burn.age } : r);
+  const burnWho = () => burn.mode === 'child' ? 'child, ' + (burn.age === 0 ? 'under 1' : 'age ' + burn.age) : 'adult';
   /* Figure layout, one 160 x 352 box per view (front above back): [region, view, x offset from the figure centre, y, width, height, short label, true if drawn only as a non-focusable duplicate of the region's main shape].
      A casualty's left is on the viewer's right in the front view and on the viewer's left in the back view. */
   const BURN_CX = 80;
@@ -465,20 +472,20 @@
     ]),
     child: burnBody([['torsoF', 'front', -28, 54, 56, 170, 'Front'], ['torsoB', 'back', -28, 54, 56, 170, 'Back']])
   };
-  const burn = { mode: 'adult', sel: new Set(), el: null };
-  const burnTotal = () => BURN_TABLES[burn.mode].reduce((n, r) => n + (burn.sel.has(r.id) ? r.pct : 0), 0);
+  const burn = { mode: 'adult', age: 0, sel: new Set(), el: null };
+  const burnTotal = () => burnRows().reduce((n, r) => n + (burn.sel.has(r.id) ? r.pct : 0), 0);
   function burnFigure() {
-    const table = BURN_TABLES[burn.mode];
+    const table = burnRows();
     const svg = (view, first) => {
       const shapes = BURN_LAYOUT[burn.mode].filter(r => r[1] === view).map(([id, , dx, y, w, h, label, dup]) => {
         const r = table.find(t => t.id === id), x = BURN_CX + dx, cx = x + w / 2, cy = y + h / 2;
         const body = '<rect class="bz" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="8"/>' +
           '<text class="bz-t" x="' + cx + '" y="' + (cy - 9) + '" text-anchor="middle">' + esc(label) + '</text>' +
-          '<text class="bz-t" x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle">' + r.pct + '%</text>' +
+          '<text class="bz-t" x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle">' + burnPct(r.pct) + '%</text>' +
           '<text class="bz-c" x="' + cx + '" y="' + (cy + 20) + '" text-anchor="middle">✓</text>';
         return dup
           ? '<g class="bz-g dup" data-r="' + id + '" aria-hidden="true">' + body + '</g>'
-          : '<g class="bz-g" data-r="' + id + '" role="button" tabindex="0" aria-pressed="false" aria-label="' + esc(r.name) + ', ' + r.pct + ' percent">' + body + '</g>';
+          : '<g class="bz-g" data-r="' + id + '" role="button" tabindex="0" aria-pressed="false" aria-label="' + esc(r.name) + ', ' + burnPct(r.pct) + ' percent' + (burn.mode === 'child' ? ' (' + burnWho() + ')' : '') + '">' + body + '</g>';
       }).join('');
       return '<p class="burn-cap">' + (view === 'front' ? 'Front' : 'Back') + '</p><svg class="burn-svg" viewBox="0 0 160 352" role="group" aria-label="Body outline, ' + view + ' view">' +
         (first ? '<defs><pattern id="burnHatch" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" style="fill:var(--surface)"/>' +
@@ -504,14 +511,20 @@
       if (g.hasAttribute('role')) g.setAttribute('aria-pressed', String(on));
     });
     el.querySelectorAll('#burnMode [data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === burn.mode)));
-    const picked = BURN_TABLES[burn.mode].filter(r => burn.sel.has(r.id));
-    el.querySelector('#burnTotal').textContent = burnTotal() + '%';
-    el.querySelector('#burnList').textContent = picked.length ? 'Selected: ' + picked.map(r => r.name + ' ' + r.pct + '%').join(', ') : 'Nothing selected. Tap the burned areas.';
+    el.querySelector('#burnAgeRow').hidden = burn.mode !== 'child';
+    const picked = burnRows().filter(r => burn.sel.has(r.id));
+    el.querySelector('#burnTotal').textContent = burnPct(burnTotal()) + '%';
+    el.querySelector('#burnList').textContent = picked.length ? 'Selected: ' + picked.map(r => r.name + ' ' + burnPct(r.pct) + '%').join(', ') : 'Nothing selected. Tap the burned areas.';
     el.querySelector('#burnSave').disabled = !picked.length;
     el.querySelector('#burnClear').disabled = !picked.length;
   }
   function burnSet(mode) {
     burn.mode = mode; burn.sel = new Set();
+    burn.el.querySelector('#burnSvg').innerHTML = burnFigure();
+    burnPaint();
+  }
+  function burnSetAge(age) {   // the same regions stay selected; only the percentages change
+    burn.age = age;
     burn.el.querySelector('#burnSvg').innerHTML = burnFigure();
     burnPaint();
   }
@@ -523,10 +536,12 @@
   FK.tools.register('burn', {
     label: 'Burn area',
     render(el) {
-      burn.el = el; burn.sel = new Set(); burn.mode = 'adult';
+      burn.el = el; burn.sel = new Set(); burn.mode = 'adult'; burn.age = 0;
       el.innerHTML =
         '<div class="seg cpr-modes" id="burnMode" role="group" aria-label="Who is burned">' +
-        '<button type="button" data-mode="adult" aria-pressed="false">Adult</button><button type="button" data-mode="child" aria-pressed="false">Child</button></div>' +
+        '<button type="button" data-mode="adult" aria-pressed="false">Adult (9 and over)</button><button type="button" data-mode="child" aria-pressed="false">Child (under 9)</button></div>' +
+        '<div class="burn-age" id="burnAgeRow" hidden><label for="burnAge">Age</label><select id="burnAge">' +
+        Array.from({ length: BURN_MAX_CHILD_AGE + 1 }, (_, a) => '<option value="' + a + '">' + (a === 0 ? 'Under 1 year' : a + (a === 1 ? ' year' : ' years')) + '</option>').join('') + '</select></div>' +
         '<div class="burn-total"><b id="burnTotal" aria-live="polite">0%</b><span>of the body surface (estimate)</span></div>' +
         '<div id="burnNotes" class="burn-notes">' + burnNotes() + '</div><div id="burnSvg"></div><p id="burnList" class="burn-list"></p>' +
         '<div class="burn-act"><button type="button" class="btn pp-wide" id="burnSave">Save to patient log</button>' +
@@ -539,11 +554,12 @@
         if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); burnToggle(g.dataset.r); }
       });
       el.querySelector('#burnMode').addEventListener('click', e => { const b = e.target.closest('[data-mode]'); if (b && b.dataset.mode !== burn.mode) burnSet(b.dataset.mode); });
+      el.querySelector('#burnAge').addEventListener('change', e => { const a = Number(e.target.value); if (Number.isInteger(a) && a >= 0 && a <= BURN_MAX_CHILD_AGE) burnSetAge(a); });
       el.querySelector('#burnClear').addEventListener('click', () => { burn.sel = new Set(); burnPaint(); });
       el.querySelector('#burnSave').addEventListener('click', () => {
-        const picked = BURN_TABLES[burn.mode].filter(r => burn.sel.has(r.id));
+        const picked = burnRows().filter(r => burn.sel.has(r.id));
         if (!picked.length || !FK.patients) return;
-        const t = 'Burn area about ' + burnTotal() + '% (' + burn.mode + '): ' + picked.map(r => r.name.toLowerCase()).join(', ');
+        const t = 'Burn area about ' + burnPct(burnTotal()) + '% (' + burnWho() + '): ' + picked.map(r => r.name.toLowerCase()).join(', ');
         if (FK.patients.add({ kind: 'note', text: t })) FK.toast('Saved to ' + FK.patients.current().name);
       });
       burnPaint();

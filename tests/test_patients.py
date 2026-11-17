@@ -114,6 +114,81 @@ def test_burn_regions_are_at_least_56px_in_both_dimensions_in_both_modes(page, a
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
 
 
+def burn_child(page, age):
+    page.click('#burnMode [data-mode="child"]')
+    page.select_option('#burnAge', str(age))
+
+
+def burn_pct(page, name):
+    label = page.get_attribute(f'#burnSvg [aria-label^="{name}, "]', 'aria-label')
+    return label
+
+
+def test_burn_mode_labels_and_age_selector_only_in_child_mode(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/burn')
+    assert page.inner_text('#burnMode [data-mode="adult"]').strip() == 'Adult (9 and over)'
+    assert page.inner_text('#burnMode [data-mode="child"]').strip() == 'Child (under 9)'
+    assert not page.locator('#burnAge').is_visible()
+    page.click('#burnMode [data-mode="child"]')
+    assert page.locator('#burnAge').is_visible()
+    assert page.locator('label[for="burnAge"]').count() == 1
+    opts = page.eval_on_selector_all('#burnAge option', 'os => os.map(o => [o.value, o.textContent.trim()])')
+    assert [v for v, _ in opts] == [str(i) for i in range(9)]
+    assert opts[0][1] == 'Under 1 year'
+    assert page.eval_on_selector('#burnAge', 'e => e.getBoundingClientRect().height') >= 56
+
+
+def test_burn_child_age_0_is_head_18_leg_14(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/burn')
+    page.click('#burnMode [data-mode="child"]')
+    assert page.input_value('#burnAge') == '0'
+    assert burn_pct(page, 'Head') == 'Head, 18 percent (child, under 1)'
+    assert burn_pct(page, 'Left leg') == 'Left leg, 14 percent (child, under 1)'
+    assert burn_pct(page, 'Left arm') == 'Left arm, 9 percent (child, under 1)'
+
+
+def test_burn_child_age_5_is_head_13_leg_16_5_and_note_names_age(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/burn')
+    burn_child(page, 5)
+    assert burn_pct(page, 'Head') == 'Head, 13 percent (child, age 5)'
+    assert burn_pct(page, 'Right leg') == 'Right leg, 16.5 percent (child, age 5)'
+    burn(page, 'Left leg')
+    assert page.inner_text('#burnTotal').strip() == '16.5%'
+    page.click('#burnSave')
+    assert stored(page)[0]['entries'][-1]['text'] == 'Burn area about 16.5% (child, age 5): left leg'
+
+
+def test_burn_child_age_8_is_head_10_leg_18(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/burn')
+    burn_child(page, 8)
+    assert burn_pct(page, 'Head') == 'Head, 10 percent (child, age 8)'
+    assert burn_pct(page, 'Left leg') == 'Left leg, 18 percent (child, age 8)'
+    assert 'Head 10%' not in page.inner_text('#burnList')   # nothing selected yet
+    assert '10%' in page.inner_text('#burnSvg')
+
+
+def test_burn_child_total_is_100_at_every_age(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/burn')
+    page.click('#burnMode [data-mode="child"]')
+    for age in range(9):
+        page.select_option('#burnAge', str(age))
+        page.evaluate("document.querySelectorAll('#burnSvg [role=button]').forEach(b => { if (b.getAttribute('aria-pressed') !== 'true') b.dispatchEvent(new MouseEvent('click', {bubbles: true})) })")
+        assert page.inner_text('#burnTotal').strip() == '100%', age
+        page.click('#burnClear')
+
+
+def test_burn_changing_age_keeps_selection_and_updates_total(page, app_url):
+    boot(page, app_url, hash_='#/emergency/tool/burn')
+    page.click('#burnMode [data-mode="child"]')
+    burn(page, 'Head', 'Left leg')
+    assert page.inner_text('#burnTotal').strip() == '32%'
+    page.select_option('#burnAge', '4')
+    assert page.get_attribute('#burnSvg [aria-label^="Head, "]', 'aria-pressed') == 'true'
+    assert page.get_attribute('#burnSvg [aria-label^="Left leg, "]', 'aria-pressed') == 'true'
+    assert page.inner_text('#burnTotal').strip() == '30%'   # head 14 + leg 16
+    assert 'Head 14%' in page.inner_text('#burnList') and 'Left leg 16%' in page.inner_text('#burnList')
+
+
 def test_burn_guidance_and_notes_come_from_protocol_escaped(page, app_url):
     boot(page, app_url, fixtures=[BURNS], hash_='#/emergency/tool/burn')
     assert 'Burn bigger than the casualty palm' in page.inner_text('#burnGuide')

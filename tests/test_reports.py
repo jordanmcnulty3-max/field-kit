@@ -121,6 +121,7 @@ def test_form_is_filled_by_tapping_and_survives_reload(page, app_url):
     page.click('.rp-opt[data-n="4"][data-c="B"]')
     page.click('.rp-opt[data-n="4"][data-c="D"]')
     page.click('.rp-opt[data-n="4"][data-c="A"]')   # None replaces the others
+    page.click('#nlMode [data-mode="wartime"]')   # the form opens in peacetime mode
     page.click('.rp-opt[data-n="6"][data-c="N"]')
     page.click('.rp-opt[data-n="6"][data-c="P"]')   # one choice only
     page.fill('#nl9', 'Open field')
@@ -157,6 +158,95 @@ def test_clear_form_prefills_location_again(page, app_url):
     page.fill('#nl1', 'typed')
     page.click('#nlClear'); page.clock.run_for(800); page.click('#nlClear')
     assert page.input_value('#nl1') == mgrs(page)
+
+
+def mode_of(page):
+    return page.get_attribute('#nlMode [aria-pressed="true"]', 'data-mode')
+
+
+def test_nine_line_opens_in_peacetime_with_free_text_lines_6_and_9(page, app_url):
+    boot(page, app_url, hash_=NINE, init=geo_stub())
+    page.wait_for_selector('#nlOut')
+    assert mode_of(page) == 'peacetime'
+    assert [b.inner_text() for b in page.locator('#nlMode button').all()] == ['Peacetime', 'Wartime']
+    legends = page.locator('#toolBody fieldset:visible legend').all_inner_texts()
+    assert '6. Number and type of wound, injury, or illness' in legends
+    assert '9. Terrain description (features in and around the landing site)' in legends
+    assert not any('Security' in l or 'NBC' in l for l in legends)
+    assert page.locator('.rp-opt[data-n="6"]').first.is_hidden() and page.locator('#nl9').is_hidden()
+    page.fill('#nl6p', 'Two, leg fracture\nand burns')
+    page.fill('#nl9p', 'Meadow, trees to the north')
+    out = page.input_value('#nlOut').split('\n')
+    assert len(out) == 9 and out[5] == '6. Two, leg fracture / and burns' and out[8] == '9. Meadow, trees to the north'
+    assert page.evaluate("FK.reports.nineLine({ mode: 'peacetime', l6p: 'a', l9p: 'b', l6: 'N', l9: 'x' })").split('\n')[5] == '6. a'
+
+
+def test_nine_line_wartime_mode_offers_security_codes_and_contamination(page, app_url):
+    boot(page, app_url, hash_=NINE, init=geo_stub())
+    page.click('#nlMode [data-mode="wartime"]')
+    assert mode_of(page) == 'wartime'
+    legends = page.locator('#toolBody fieldset:visible legend').all_inner_texts()
+    assert '6. Security of the pickup site (wartime)' in legends
+    assert '9. NBC contamination (N nuclear, B biological, C chemical; include only when applicable)' in legends
+    assert page.locator('.rp-opt[data-n="6"]').count() == 4 and page.locator('.rp-opt[data-n="6"]').first.is_visible()
+    assert page.locator('#nl6p').is_hidden() and page.locator('#nl9p').is_hidden()
+    page.click('.rp-opt[data-n="6"][data-c="X"]')
+    page.fill('#nl9', 'C')
+    out = page.input_value('#nlOut').split('\n')
+    assert out[5] == '6. X Enemy troops in area; armed escort required' and out[8] == '9. C'
+    assert page.evaluate("FK.reports.nineLine({ mode: 'wartime', l6p: 'a', l9p: 'b', l6: 'N', l9: 'x' })").split('\n')[8] == '9. x'
+
+
+def test_switching_nine_line_mode_keeps_the_other_lines_and_each_modes_own_text(page, app_url):
+    boot(page, app_url, hash_=NINE, init=geo_stub())
+    page.fill('#nl2', '146.520 Dustoff')
+    page.click('.rp-count[data-n="3"][data-c="A"] [data-step="1"]')
+    page.fill('#nl6p', 'Two wounds')
+    page.fill('#nl9p', 'Open meadow')
+    page.click('#nlMode [data-mode="wartime"]')
+    page.click('.rp-opt[data-n="6"][data-c="E"]')
+    page.fill('#nl9', 'B')
+    page.click('#nlMode [data-mode="peacetime"]')
+    out = page.input_value('#nlOut').split('\n')
+    assert out[1] == '2. 146.520 Dustoff' and out[2] == '3. A Urgent 1'
+    assert out[5] == '6. Two wounds' and out[8] == '9. Open meadow'
+    page.click('#nlMode [data-mode="wartime"]')
+    out = page.input_value('#nlOut').split('\n')
+    assert out[1] == '2. 146.520 Dustoff' and out[5].startswith('6. E ') and out[8] == '9. B'
+    page.reload()
+    page.wait_for_selector('#nlOut')
+    assert mode_of(page) == 'wartime'
+    stored = json.loads(page.evaluate("localStorage.getItem('fk.nineLine')"))
+    assert stored['mode'] == 'wartime' and stored['l6p'] == 'Two wounds' and stored['l9p'] == 'Open meadow' and stored['l6'] == 'E'
+
+
+def test_nine_line_from_before_modes_loads_as_wartime_only_with_wartime_values(page, app_url):
+    boot(page, app_url, storage={'nineLine': {'l2': 'keep me', 'l6': 'P'}}, hash_=NINE, init=geo_stub())
+    assert mode_of(page) == 'wartime'
+    out = page.input_value('#nlOut').split('\n')
+    assert out[1] == '2. keep me' and out[5] == '6. P Possible enemy troops in the area'
+
+
+def test_nine_line_from_before_modes_with_line_9_text_is_wartime(page, app_url):
+    boot(page, app_url, storage={'nineLine': {'l9': 'C'}}, hash_=NINE, init=geo_stub())
+    assert mode_of(page) == 'wartime'
+    assert page.input_value('#nlOut').split('\n')[8] == '9. C'
+
+
+def test_nine_line_from_before_modes_without_wartime_values_is_peacetime(page, app_url):
+    boot(page, app_url, storage={'nineLine': {'l2': 'keep me', 'l9': '   '}}, hash_=NINE, init=geo_stub())
+    assert mode_of(page) == 'peacetime'
+    assert page.input_value('#nl2') == 'keep me'
+    assert page.evaluate("FK.reports.nineLine({ l2: 'a' })").split('\n')[1] == '2. a'
+    assert page.evaluate("FK.reports.nineLine({ l9: 'N' })").split('\n')[8] == '9. N'   # wartime value, no mode: wartime
+
+
+def test_clear_form_keeps_the_mode_and_empties_both_variants(page, app_url):
+    boot(page, app_url, hash_=NINE, init=geo_stub())
+    page.click('#nlMode [data-mode="wartime"]')
+    page.fill('#nl9', 'N')
+    page.click('#nlClear'); page.clock.run_for(800); page.click('#nlClear')
+    assert mode_of(page) == 'wartime' and page.input_value('#nl9') == ''
 
 
 def test_stored_nine_line_is_sanitised(page, app_url):

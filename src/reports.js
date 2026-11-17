@@ -12,7 +12,7 @@
      While `draft` is true the screen says so, and build.py --release refuses to build: it looks for the marker line below.
      Flip draft to false and delete the marker line once the wording is checked against its source. */
   /* Wording checked against TCCC Combat Medic/Corpsman skill card #TCCC-CMC-SC-60, 9-Line MEDEVAC and MIST Preparation (14 May 2021).
-     Line 6 carries the wartime options only; the peacetime line 6 (number and type of wound, injury or illness) has no field. */
+     Lines 6 and 9 differ between wartime and peacetime. `label` is the wartime wording and `peace` the peacetime one (both from SC-60, see docs/content-review.md, nine-line). */
   const NINE_LINE = {
     draft: false,
     lines: [
@@ -21,10 +21,10 @@
       { n: 3, label: 'Number of patients by precedence', kind: 'counts', options: [['A', 'Urgent'], ['B', 'Urgent surgical'], ['C', 'Priority'], ['D', 'Routine'], ['E', 'Convenience']] },
       { n: 4, label: 'Special equipment required', kind: 'multi', options: [['A', 'None'], ['B', 'Hoist'], ['C', 'Extraction equipment'], ['D', 'Ventilator']], exclusive: 'A' },
       { n: 5, label: 'Number of patients by type', kind: 'counts', options: [['L', 'Litter'], ['A', 'Ambulatory']] },
-      { n: 6, label: 'Security of the pickup site (wartime)', kind: 'one', options: [['N', 'No enemy troops in the area'], ['P', 'Possible enemy troops in the area'], ['E', 'Enemy troops in the area; approach with caution'], ['X', 'Enemy troops in area; armed escort required']] },
+      { n: 6, label: 'Security of the pickup site (wartime)', peace: { label: 'Number and type of wound, injury, or illness', kind: 'area' }, kind: 'one', options: [['N', 'No enemy troops in the area'], ['P', 'Possible enemy troops in the area'], ['E', 'Enemy troops in the area; approach with caution'], ['X', 'Enemy troops in area; armed escort required']] },
       { n: 7, label: 'Method of marking pickup site', kind: 'one', detail: 'Details (colour, signal)', options: [['A', 'Panels'], ['B', 'Pyrotechnic signal'], ['C', 'Smoke signal'], ['D', 'None'], ['E', 'Other']] },
       { n: 8, label: 'Patient nationality and status', kind: 'one', detail: 'Details', options: [['A', 'US Military'], ['B', 'US Civilian'], ['C', 'Non-US Military'], ['D', 'Non-US Civilian'], ['E', 'Enemy Prisoner']] },
-      { n: 9, label: 'Wartime: NBC contamination (N nuclear, B biological, C chemical; include only when applicable). Peacetime: terrain description (features in and around the landing site)', kind: 'area' }
+      { n: 9, label: 'NBC contamination (N nuclear, B biological, C chemical; include only when applicable)', peace: { label: 'Terrain description (features in and around the landing site)', kind: 'area' }, kind: 'area' }
     ]
   };
   const line = n => NINE_LINE.lines[n - 1];
@@ -35,12 +35,17 @@
   const codeOf = (v, n) => line(n).options.some(o => o[0] === v) ? v : '';
   const countsOf = (v, n) => Object.fromEntries(line(n).options.map(([c]) => [c, count(v && typeof v === 'object' ? v[c] : 0)]));
   /* Anything stored (old version, hand-edited backup) or passed in is reduced to this shape. l1auto: line 1 is still the app's own prefill. */
+  const MODES = ['peacetime', 'wartime'];
   function clean(f) {
     f = f && typeof f === 'object' ? f : {};
+    /* A form stored before the mode existed is wartime only if it holds a wartime value (a line 6 code or line 9 text). */
+    const wartimeValues = !!codeOf(f.l6, 6) || str(f.l9, MAX_TEXT).trim() !== '';
     const multi = Array.isArray(f.l4) ? [...new Set(f.l4.map(c => codeOf(c, 4)).filter(Boolean))] : [];
     return {
+      mode: MODES.includes(f.mode) ? f.mode : wartimeValues ? 'wartime' : 'peacetime',
       l1: str(f.l1, MAX_SHORT), l1auto: f.l1auto !== false, l2: str(f.l2, MAX_SHORT), l3: countsOf(f.l3, 3), l4: multi, l5: countsOf(f.l5, 5),
-      l6: codeOf(f.l6, 6), l7: codeOf(f.l7, 7), l7x: str(f.l7x, MAX_SHORT), l8: codeOf(f.l8, 8), l8x: str(f.l8x, MAX_SHORT), l9: str(f.l9, MAX_TEXT)
+      l6: codeOf(f.l6, 6), l7: codeOf(f.l7, 7), l7x: str(f.l7x, MAX_SHORT), l8: codeOf(f.l8, 8), l8x: str(f.l8x, MAX_SHORT), l9: str(f.l9, MAX_TEXT),
+      l6p: str(f.l6p, MAX_TEXT), l9p: str(f.l9p, MAX_TEXT)   // the peacetime versions of lines 6 and 9; the wartime values stay as they are when the mode is switched
     };
   }
   const oneLine = s => s.replace(/\s*\n\s*/g, ' / ').trim();
@@ -54,7 +59,7 @@
     const text = [
       oneLine(f.l1), oneLine(f.l2), countText(3, f.l3),
       line(4).options.filter(([c]) => f.l4.includes(c)).map(([c, name]) => c + ' ' + name).join(', '),
-      countText(5, f.l5), pick(6, f.l6), pick(7, f.l7, f.l7x), pick(8, f.l8, f.l8x), oneLine(f.l9)
+      countText(5, f.l5), f.mode === 'peacetime' ? oneLine(f.l6p) : pick(6, f.l6), pick(7, f.l7, f.l7x), pick(8, f.l8, f.l8x), oneLine(f.mode === 'peacetime' ? f.l9p : f.l9)
     ];
     return text.map((t, i) => (i + 1) + '.' + (t ? ' ' + t : '')).join('\n');
   }
@@ -146,7 +151,6 @@
   const nq = s => nl && nl.view.querySelector(s);
   let clearAt = 0, clearT = null, clearing = false;
   const saveForm = () => { if (!FK.store.set(KEY, nl.form)) FK.toast(FK.FULL_MSG); };
-  const defaultForm = () => clean({});
 
   function optionBtns(n) {
     const l = line(n);
@@ -159,15 +163,20 @@
       '<button type="button" class="btn ghost" data-step="-1" aria-label="One fewer ' + esc(name) + '">−</button><output aria-live="polite"></output>' +
       '<button type="button" class="btn ghost" data-step="1" aria-label="One more ' + esc(name) + '">+</button></div>').join('');
   }
+  /* Lines 6 and 9 come in two variants; both are in the page and the mode decides which one shows. */
   function lineHtml(l) {
-    const id = 'nl' + l.n, head = '<legend>' + l.n + '. ' + esc(l.label) + '</legend>';
+    if (!l.peace) return lineBody(l, '');
+    return lineBody(l, 'war') + lineBody({ ...l, ...l.peace, id: 'nl' + l.n + 'p' }, 'peace');
+  }
+  function lineBody(l, variant) {
+    const id = l.id || 'nl' + l.n, head = '<legend>' + l.n + '. ' + esc(l.label) + '</legend>';
     let body = '';
     if (l.n === 1) body = '<div class="rp-loc"><input id="nl1" type="text" maxlength="' + MAX_SHORT + '" autocomplete="off" aria-label="Line 1, location"></div><p class="rp-stat" id="nlStat"></p>';
     else if (l.kind === 'text') body = '<input id="' + id + '" type="text" maxlength="' + MAX_SHORT + '" autocomplete="off" aria-label="Line ' + l.n + ', ' + esc(l.label) + '">';
     else if (l.kind === 'area') body = '<textarea id="' + id + '" rows="2" maxlength="' + MAX_TEXT + '" aria-label="Line ' + l.n + ', ' + esc(l.label) + '"></textarea>';
     else if (l.kind === 'counts') body = countRows(l.n);
     else body = optionBtns(l.n) + (l.detail ? '<input id="' + id + 'x" type="text" maxlength="' + MAX_SHORT + '" autocomplete="off" aria-label="Line ' + l.n + ', ' + esc(l.detail) + '" placeholder="' + esc(l.detail) + '">' : '');
-    return '<fieldset class="rp-line">' + head + body + '</fieldset>';
+    return '<fieldset class="rp-line"' + (variant ? ' data-variant="' + variant + '"' : '') + '>' + head + body + '</fieldset>';
   }
 
   function paintLine1() {
@@ -178,7 +187,9 @@
   function paintForm() {
     const f = nl.form;
     paintLine1();
-    ['l2', 'l9'].forEach(k => { const el = nq('#nl' + k[1]); if (el.value !== f[k]) el.value = f[k]; });
+    ['l2', 'l9', 'l6p', 'l9p'].forEach(k => { const el = nq('#nl' + k.slice(1)); if (el.value !== f[k]) el.value = f[k]; });
+    nl.view.querySelectorAll('#nlMode [data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === f.mode)));
+    nl.view.querySelectorAll('[data-variant]').forEach(fs => { fs.hidden = (fs.dataset.variant === 'peace') !== (f.mode === 'peacetime'); });
     ['l7x', 'l8x'].forEach(k => { const el = nq('#nl' + k[1] + 'x'); if (el.value !== f[k]) el.value = f[k]; });
     nl.view.querySelectorAll('.rp-count').forEach(r => { r.querySelector('output').textContent = String(f['l' + r.dataset.n][r.dataset.c]); });
     nl.view.querySelectorAll('.rp-opt').forEach(b => {
@@ -226,15 +237,17 @@
         f[key] = f[key].includes(c) ? f[key].filter(x => x !== c) : (c === ex ? [c] : [...f[key].filter(x => x !== ex), c]);
       } else f[key] = f[key] === c ? '' : c;
     }
+    const md = e.target.closest('#nlMode [data-mode]');
+    if (md) { if (md.dataset.mode !== f.mode) { f.mode = md.dataset.mode; setClear(false); saveForm(); paintForm(); } return; }
     if (e.target.closest('#nlClear')) {
       if (!clearing) setClear(true);
-      else if (performance.now() - clearAt >= FK.tools.confirm.ignoreMs) { setClear(false); nl.form = defaultForm(); saveForm(); autoFill(); }
+      else if (performance.now() - clearAt >= FK.tools.confirm.ignoreMs) { setClear(false); nl.form = clean({ mode: f.mode }); saveForm(); autoFill(); }
       paintForm(); return;
     }
     if (st || op) { setClear(false); saveForm(); paintForm(); }
   }
   function onNineInput(e) {
-    const m = /^nl(1|2|9|7x|8x)$/.exec(e.target.id); if (!m) return;
+    const m = /^nl(1|2|9|6p|9p|7x|8x)$/.exec(e.target.id); if (!m) return;
     const key = 'l' + m[1];
     nl.form[key] = e.target.value;
     if (key === 'l1') nl.form.l1auto = false;   // typed by the user: never overwritten again
@@ -253,6 +266,8 @@
       nl = { view, form: clean(FK.store.get(KEY, null)) };
       view.innerHTML =
         (NINE_LINE.draft ? '<p class="rp-draft" role="note">Draft wording, not source-checked</p>' : '') +
+        '<div class="seg cpr-modes" id="nlMode" role="group" aria-label="Report mode"><button type="button" data-mode="peacetime" aria-pressed="false">Peacetime</button>' +
+        '<button type="button" data-mode="wartime" aria-pressed="false">Wartime</button></div>' +
         '<p class="hint">Fill in what you know and read the lines out in order. Line 1 fills in from GPS; you can type over it.</p>' +
         NINE_LINE.lines.map(lineHtml).join('') +
         outBlock('nlOut', 'Report text, read it out line by line', true) +

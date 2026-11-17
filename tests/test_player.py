@@ -472,3 +472,140 @@ def test_every_fig_step_renders_an_svg(page, app_url):
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (pid, sid, fig)
         assert page.evaluate("(() => { const b = document.querySelector('#player .pp-body'); return b.scrollWidth <= b.clientWidth; })()"), (pid, sid, fig)
         assert box['x'] >= 0 and box['x'] + box['width'] <= 360, (pid, sid, fig, box)
+
+
+# ---------- Warnings are seen; Do not / Evacuate when reachable from every step; no dial links ----------
+
+LISTY = {
+    'id': 'listy', 'title': 'List test', 'category': 'life', 'reviewed': '2026-11-16',
+    'sources': [{'name': 'Fixture'}],
+    'steps': [
+        {'id': 'a', 'text': 'First action', 'detail': 'First detail para one\n\nFirst detail para two', 'warn': 'First warn'},
+        {'id': 'b', 'text': 'Second action', 'detail': LONG, 'warn': 'Second warn'},
+        {'id': 'c', 'text': 'Third action', 'end': True},
+    ],
+    'donts': ['Do not <b>press</b> here', 'Do not wait'],
+    'evacuate': ['Evacuate <i>now</i> if worse', 'Evacuate if blue'],
+}
+BARE = {'id': 'bare', 'title': 'Bare', 'category': 'life', 'reviewed': '2026-11-16', 'sources': [{'name': 'Fixture'}],
+        'steps': [{'id': 'a', 'text': 'Only step'}, {'id': 'b', 'text': 'Other step'}]}
+
+
+def inject_listy(page):
+    inject_protocols(page, FIXTURES + [LISTY, BARE])
+
+
+def top(page, sel):
+    return page.eval_on_selector(sel, 'e => e.getBoundingClientRect().top')
+
+
+def test_warn_is_above_detail_and_inside_first_640px_in_step_mode(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/emergency/branchy/n')
+    assert len(page.locator('#player .pp-detail').inner_text()) >= 3000
+    assert top(page, '#player .pp-warn') < top(page, '#player .pp-detail')
+    assert top(page, '#player .pp-action') < top(page, '#player .pp-warn')
+    warn = page.locator('#player .pp-warn').bounding_box()
+    assert 0 <= warn['y'] and warn['y'] + warn['height'] <= 640, warn
+
+
+def test_warn_is_above_detail_in_all_steps_view(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/emergency/branchy/all')
+    step = page.locator('#player .pp-step', has_text='No branch')
+    assert step.locator('.pp-warn').bounding_box()['y'] < step.locator('.pp-detail').bounding_box()['y']
+
+
+def test_no_draft_label_when_no_protocol_is_a_draft(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/emergency/branchy')
+    assert page.locator('#player .pp-draft').count() == 0
+    page.click('#player [data-act="toggleAll"]')
+    assert page.locator('#player .pp-draft').count() == 0
+    page.goto(app_url + '#/emergency/drafty')
+    assert page.locator('#player .pp-draft').count() == 1
+
+
+def test_shipped_protocols_have_no_draft_flag(page, app_url):
+    page.goto(app_url)
+    assert page.evaluate("FK_DATA.protocols.filter(p => p.draft === true).map(p => p.id)") == []
+
+
+def test_first_step_shows_donts_expanded_below_the_detail_and_later_steps_collapsed(page, app_url):
+    inject_listy(page)
+    page.goto(app_url + '#/emergency/listy')
+    assert page.locator('#player .pp-list[data-list="donts"]').is_visible()
+    assert 'Do not wait' in page.locator('#player').inner_text()
+    assert top(page, '#player .pp-list[data-list="donts"]') > page.locator('#player .pp-detail').bounding_box()['y'] + page.locator('#player .pp-detail').bounding_box()['height'] - 1
+    assert page.get_attribute('#player [data-act="list"][data-list="donts"]', 'aria-expanded') == 'true'
+    assert page.locator('#player .pp-list[data-list="evacuate"]').count() == 0
+    page.click('#player [data-act="next"]')
+    assert page.locator('#player .pp-list').count() == 0
+    assert 'Do not wait' not in page.locator('#player').inner_text()
+    assert page.get_attribute('#player [data-act="list"][data-list="donts"]', 'aria-expanded') == 'false'
+
+
+def test_donts_and_evacuate_open_and_close_from_any_step_without_history_or_step_change(page, app_url):
+    inject_listy(page)
+    page.goto(app_url + '#/emergency/listy/b')
+    for kind, text in (('donts', 'Do not wait'), ('evacuate', 'Evacuate if blue')):
+        btn = page.locator(f'#ppLists [data-list="{kind}"]')
+        box = btn.bounding_box()
+        assert box['height'] >= 56 and box['width'] >= 56 and 0 <= box['y'] < 640, box   # in view without scrolling
+        assert text not in page.locator('#player').inner_text()
+        hist, url = page.evaluate('history.length'), page.url
+        stored = page.evaluate("localStorage.getItem('fk.proto.active')")
+        btn.click()
+        assert page.locator(f'#player .pp-list[data-list="{kind}"]').is_visible()
+        assert text in page.locator('#player .pp-list').inner_text()
+        assert btn.get_attribute('aria-expanded') == 'true'
+        assert action(page) == 'Second action'
+        assert page.evaluate('history.length') == hist and page.url == url
+        btn.click()
+        assert page.locator('#player .pp-list').count() == 0
+        assert btn.get_attribute('aria-expanded') == 'false'
+        assert action(page) == 'Second action' and page.url == url and page.evaluate('history.length') == hist
+        assert page.evaluate("localStorage.getItem('fk.proto.active')") == stored
+    # both can be open at once, and Android Back still leaves the step, not a list
+    page.click('#player [data-act="list"][data-list="donts"]')
+    page.click('#player [data-act="list"][data-list="evacuate"]')
+    assert page.locator('#player .pp-list').count() == 2
+
+
+def test_list_content_is_escaped_and_close_button_inside_panel_is_big(page, app_url):
+    inject_listy(page)
+    page.goto(app_url + '#/emergency/listy')
+    assert page.locator('#player .pp-list b').count() == 0
+    assert 'Do not <b>press</b> here' in page.locator('#player .pp-list').inner_text()
+    page.click('#player [data-act="list"][data-list="evacuate"]')
+    assert page.locator('#player .pp-list i').count() == 0
+    assert 'Evacuate <i>now</i> if worse' in page.locator('#player').inner_text()
+    close = page.locator('#player .pp-list[data-list="evacuate"] [data-act="list"]')
+    assert close.bounding_box()['height'] >= 56
+    close.click()
+    assert page.locator('#player .pp-list[data-list="evacuate"]').count() == 0
+
+
+def test_no_list_controls_when_the_protocol_has_no_lists(page, app_url):
+    inject_listy(page)
+    page.goto(app_url + '#/emergency/bare')
+    assert page.locator('#player [data-act="list"]').count() == 0
+    assert page.locator('#player .pp-list').count() == 0
+
+
+def test_lists_collapse_again_on_the_first_step_only_by_default_after_leaving_it(page, app_url):
+    inject_listy(page)
+    page.goto(app_url + '#/emergency/listy')
+    page.click('#player [data-act="list"][data-list="donts"]')   # user collapses it
+    assert page.locator('#player .pp-list').count() == 0
+    assert action(page) == 'First action'
+
+
+def test_format_detection_meta_and_no_tel_links_anywhere(page, app_url):
+    page.goto(app_url)
+    assert page.get_attribute('meta[name="format-detection"]', 'content') == 'telephone=no'
+    src = page.request.get(app_url).text()
+    assert 'href="tel:' not in src.lower() and "href='tel:" not in src.lower()
+    assert page.evaluate("document.querySelectorAll('[href^=\"tel:\" i]').length") == 0
+    page.goto(app_url + '#/emergency/choking')
+    assert page.evaluate("document.querySelectorAll('[href^=\"tel:\" i]').length") == 0

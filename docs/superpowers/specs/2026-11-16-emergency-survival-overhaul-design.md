@@ -182,6 +182,8 @@ Final count may move by a few if sources do not support a safe lay-responder pro
 2. Every protocol stores its sources and a review date, shown in the "All steps" view.
 3. Standard protocols are written at lay-responder level. Medicines appear only where those guidelines give
    them to lay responders (aspirin for chest pain, epinephrine auto-injector, naloxone, sugar for low blood sugar).
+   That list is illustrative: v6 also names over-the-counter pain medicine, without a dose, where the AHA
+   2024 first aid guideline recommends it to lay responders (ruling recorded in `docs/v6-rulings.md`).
 3a. Advanced procedures are a separate category, written from the TCCC guidelines and skill sheets and the
    Wilderness Medical Society guidelines, at the highest tier those sources publish. Each one:
    - opens with **When to do this** and **When not to** before any step, taken from the source;

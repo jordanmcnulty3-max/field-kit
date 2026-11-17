@@ -81,8 +81,9 @@
     sensors();
     emit('shown', { tab: root.dataset.tab, view });
   }
-  $$('.tabbar button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
-  $$('#tacSeg button').forEach(b => b.addEventListener('click', () => showView(b.dataset.view)));
+  /* Taps change the address; the router (router.js) calls showTab / showView, so Back works. */
+  $$('.tabbar button').forEach(b => b.addEventListener('click', () => FK.route.go('/' + b.dataset.tab + (b.dataset.tab === 'tactical' ? '/' + view : ''))));
+  $$('#tacSeg button').forEach(b => b.addEventListener('click', () => FK.route.go('/tactical/' + b.dataset.view)));
 
   /* ---------- GPS ---------- */
   let watchId = null, fix = store.get('lastFix', null), llFormat = store.get('llFormat', 'dec') === 'dms' ? 'dms' : 'dec';
@@ -511,7 +512,7 @@
     getFix: () => fix, getWps: () => wps, getTarget: () => targetId,
     toggleTarget(id) { targetId = targetId === id ? null : id; saveWps(); renderWps(); renderTarget(); },
     addWp, trueHeading, setWake, wakeOn: () => wakeWanted,
-    tab: () => root.dataset.tab, view: () => view
+    tab: () => root.dataset.tab, view: () => view, showTab, showView
   };
 
   /* ---------- Segmented controls: arrow keys move between options ---------- */

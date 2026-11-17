@@ -312,6 +312,24 @@ textarea{width:100%;min-height:72px;padding:8px 12px;border:1px solid var(--line
 .pt-list li{padding:10px 0;border-top:1px solid var(--line);font-size:17px;overflow-wrap:anywhere;white-space:pre-line}
 .pt-list b{font-variant-numeric:tabular-nums;margin-right:6px}
 
+/* Reports: 9-line and MIST */
+.rp-draft{margin:0 0 12px;padding:8px 12px;border:2px solid var(--blaze);border-radius:8px;font-size:17px;font-weight:700}
+.rp-line{margin:0 0 12px;padding:8px 12px 12px;border:1px solid var(--line);border-radius:8px;min-width:0}
+.rp-line legend{padding:0 4px;font-size:17px;font-weight:700}
+.rp-line input,.rp-line textarea{min-height:56px;margin:0 0 4px}
+.rp-loc{display:flex;align-items:center;gap:8px}
+.rp-loc input{flex:1;min-width:0}
+.rp-acc{font-size:17px;font-weight:600;color:var(--muted);white-space:nowrap}
+.rp-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 8px}
+.rp-opt{min-height:56px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:16px;text-align:left;cursor:pointer}
+.rp-opt[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rp-count{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:17px}
+.rp-count span{flex:1;min-width:0}
+.rp-count .btn{min-width:56px;min-height:56px;padding:0;font-size:24px}
+.rp-count output{min-width:2ch;text-align:center;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.rp-out{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:17px;line-height:1.4;white-space:pre-wrap;min-height:120px}
+#msSel{width:100%;min-height:56px;margin:0 0 12px}
+
 @media (min-width:600px){.mgrs{font-size:52px}}
 
 /* Map */

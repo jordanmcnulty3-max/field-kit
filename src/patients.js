@@ -22,11 +22,16 @@
     return o;
   };
   /* used = when the casualty was last selected or created; the largest is the current casualty. It survives reloads without a new storage key. */
-  const read = () => FK.list(KEY, p => FK.okId(p.id) && typeof p.name === 'string').map(p => ({
-    id: p.id, name: p.name.slice(0, MAX_NAME), created: FK.fin(p.created) ? p.created : 0,
-    used: FK.fin(p.used) ? p.used : (FK.fin(p.created) ? p.created : 0),
-    entries: Array.isArray(p.entries) ? p.entries.filter(okEntry).map(cleanEntry) : []
-  }));
+  /* mech and inj are the MIST report's free-text Mechanism and Injuries; they are only present when non-empty. */
+  const read = () => FK.list(KEY, p => FK.okId(p.id) && typeof p.name === 'string').map(p => {
+    const o = {
+      id: p.id, name: p.name.slice(0, MAX_NAME), created: FK.fin(p.created) ? p.created : 0,
+      used: FK.fin(p.used) ? p.used : (FK.fin(p.created) ? p.created : 0),
+      entries: Array.isArray(p.entries) ? p.entries.filter(okEntry).map(cleanEntry) : []
+    };
+    ['mech', 'inj'].forEach(k => { if (typeof p[k] === 'string' && p[k].trim() !== '') o[k] = p[k].slice(0, MAX_TEXT); });
+    return o;
+  });
   function write(list) {
     if (FK.store.set(KEY, list)) return true;
     FK.toast(FK.FULL_MSG);
@@ -77,6 +82,17 @@
     FK.emit('patients');
     return true;
   }
+  /* Remembers the MIST Mechanism and Injuries text for one casualty (either may be omitted; '' clears it). Silent on success. */
+  function setMist(id, fields) {
+    const list = read(), p = list.find(x => x.id === id);
+    if (!p || !fields || typeof fields !== 'object') return false;
+    ['mech', 'inj'].forEach(k => {
+      if (typeof fields[k] !== 'string') return;
+      const v = fields[k].slice(0, MAX_TEXT);
+      if (v.trim() === '') delete p[k]; else p[k] = v;
+    });
+    return write(list);
+  }
   /* Adds to the current casualty. False: invalid entry, full limits (with a toast saying so), or storage full (toast). Nothing is dropped silently. */
   function add(entry) {
     if (!entry || typeof entry !== 'object' || !okEntry({ ...entry, t: Date.now() })) return false;
@@ -102,7 +118,7 @@
     return [head, ...lines].join('\n');
   }
 
-  FK.patients = { all: read, current, setCurrent, create, rename, remove, add, text };
+  FK.patients = { all: read, current, setCurrent, create, rename, remove, add, text, setMist };
   FK.log = t => { if (typeof t === 'string') add({ kind: 'event', text: t }); };
 
   /* ================= The "log" tool ================= */

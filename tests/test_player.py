@@ -159,10 +159,10 @@ def test_reserved_segments_leave_emergency_showing(page, app_url):
     assert not page.locator('#player').is_visible()
     assert page.locator('#toolPane').is_visible()
     assert page.url.endswith('#/emergency/tool/tq')
-    page.goto(app_url + '#/emergency/report/x')
+    page.goto(app_url + '#/emergency/report/mist')   # reports share the tools overlay (tests/test_reports.py); an unknown report goes home there
     assert not page.locator('#player').is_visible()
-    assert page.locator('#tab-emergency').is_visible()
-    assert page.url.endswith('#/emergency/report/x')  # not redirected away
+    assert page.locator('#toolPane').is_visible()
+    assert page.url.endswith('#/emergency/report/mist')  # not redirected away
 
 
 def test_stale_active_step_is_cleared(page, app_url):

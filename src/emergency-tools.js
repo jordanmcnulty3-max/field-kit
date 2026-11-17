@@ -9,6 +9,7 @@
   const strip = document.getElementById('emActive');
   const SECTION = 'emergency';
   const NAME = /^[\w-]{1,30}$/;
+  const SEGMENTS = ['tool', 'report'];   // address segment a tool lives under: #/emergency/tool/<name> or #/emergency/report/<name>
 
   /* ---------- Registry. A tool is { label, render(el, opts), stop() }; Task 6 adds rate and burn through register(). ---------- */
   const tools = Object.create(null);
@@ -45,7 +46,7 @@
     pane.hidden = false;
     document.body.classList.add('tooling');
     syncPin();
-    if (FK.recent) FK.recent.add('t:' + name);
+    if (FK.recent) FK.recent.add(keyOf(name));
     titleEl.focus({ preventScroll: true });
     wakeOn();
     sync();
@@ -61,14 +62,16 @@
       sync();
     }
   }
+  const segOf = name => tools[name].segment || 'tool';   // tools defined directly (tq, cpr) have no segment field
+  const keyOf = name => (segOf(name) === 'report' ? 'r:' : 't:') + name;   // pins and recent
   const toolOpts = {};   // options for the open that the route handler is about to do (the address cannot carry them)
   function start(name, opts) {
     if (typeof name !== 'string' || !NAME.test(name) || !Object.hasOwn(tools, name)) return false;
     toolOpts[name] = opts || {};
     const r = FK.route.current();
-    const inTool = r.tab === SECTION && r.parts[0] === 'tool';
+    const inTool = r.tab === SECTION && SEGMENTS.includes(r.parts[0]);
     if (!inTool) pushed = true;
-    FK.route.go('/' + SECTION + '/tool/' + name, inTool ? { replace: true } : undefined);
+    FK.route.go('/' + SECTION + '/' + segOf(name) + '/' + name, inTool ? { replace: true } : undefined);
     delete toolOpts[name];   // the route handler took them if it ran; if the address was unchanged they must not linger
     return true;
   }
@@ -79,10 +82,10 @@
     else FK.route.go('/' + SECTION, { replace: true });
   }
   function onRoute(r) {
-    const isTool = r.tab === SECTION && r.parts[0] === 'tool';
+    const isTool = r.tab === SECTION && SEGMENTS.includes(r.parts[0]);
     if (!isTool) { hide(); return; }
     const name = r.parts[1];
-    if (!name || !Object.hasOwn(tools, name)) {   // unknown or not-yet-built tool: go home without adding history
+    if (!name || !Object.hasOwn(tools, name) || segOf(name) !== r.parts[0]) {   // unknown or not-yet-built tool: go home without adding history
       hide();
       queueMicrotask(() => { if (FK.route.current() === r) FK.route.go('/' + SECTION, { replace: true }); });
       return;
@@ -94,12 +97,12 @@
 
   /* ---------- Overlay controls ---------- */
   function syncPin() {
-    const pinned = !!(FK.pins && openName && FK.pins.has('t:' + openName));
+    const pinned = !!(FK.pins && openName && FK.pins.has(keyOf(openName)));
     pinBtn.hidden = !FK.pins;
     pinBtn.setAttribute('aria-pressed', String(pinned));
     pinBtn.textContent = pinned ? '★' : '☆';
   }
-  pinBtn.addEventListener('click', () => { if (openName && FK.pins) { FK.pins.toggle('t:' + openName); syncPin(); } });
+  pinBtn.addEventListener('click', () => { if (openName && FK.pins) { FK.pins.toggle(keyOf(openName)); syncPin(); } });
   document.getElementById('toolClose').addEventListener('click', close);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && openName && !e.defaultPrevented) close(); });
 
@@ -108,10 +111,11 @@
     confirm: { ignoreMs: 700, revertMs: 5000 },   // shared two-step confirm timing (second tap ignored for ignoreMs, reverts after revertMs)
     register(name, def) {
       if (typeof name !== 'string' || !NAME.test(name) || !def || typeof def.render !== 'function') return;
-      tools[name] = { label: String(def.label || name), render: def.render, stop: typeof def.stop === 'function' ? def.stop : () => {} };
+      tools[name] = { label: String(def.label || name), segment: def.segment === 'report' ? 'report' : 'tool', render: def.render, stop: typeof def.stop === 'function' ? def.stop : () => {} };
     },
     has: name => Object.hasOwn(tools, name),
     label: name => Object.hasOwn(tools, name) ? tools[name].label : null,
+    segment: name => Object.hasOwn(tools, name) ? segOf(name) : null,
     close
   };
 

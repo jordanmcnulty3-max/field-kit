@@ -214,3 +214,23 @@ class MalformedInputTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class ReportDraftMarkerTests(unittest.TestCase):
+    def test_marker_line_is_detected(self):
+        from tools.validate import report_wording_is_draft
+        self.assertTrue(report_wording_is_draft('a\n  /* REPORT_WORDING_DRAFT */\nb'))
+        self.assertTrue(report_wording_is_draft('/* REPORT_WORDING_DRAFT */'))
+
+    def test_marker_only_counts_as_a_whole_line(self):
+        from tools.validate import report_wording_is_draft
+        self.assertFalse(report_wording_is_draft(''))
+        self.assertFalse(report_wording_is_draft('const x = 1;'))
+        self.assertFalse(report_wording_is_draft('// mentions REPORT_WORDING_DRAFT in a sentence'))
+        self.assertFalse(report_wording_is_draft('x /* REPORT_WORDING_DRAFT */'))
+
+    def test_marker_and_draft_flag_in_reports_js_agree(self):
+        import os
+        from tools.validate import report_wording_is_draft
+        src = open(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'src', 'reports.js'), encoding='utf-8').read()
+        self.assertEqual(report_wording_is_draft(src), 'draft: true,' in src)

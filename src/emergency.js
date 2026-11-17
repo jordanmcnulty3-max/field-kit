@@ -4,7 +4,7 @@
   const esc = FK.esc;
   const $ = id => document.getElementById(id);
   const RESERVED = ['tool', 'report'];   // addresses owned by other features, not protocols
-  const KEY = /^[pts]:[\w-]{1,60}$/;     // p:<protocolId>, t:<toolName>, s:<survivalTopicId>
+  const KEY = /^[ptsr]:[\w-]{1,60}$/;    // p:<protocolId>, t:<toolName>, r:<reportName>, s:<survivalTopicId>
   const RECENT_MAX = 5;
   const LIFE = [['bleeding', 'Bleeding'], ['choking', 'Choking']];
   const CHOOSER = [['cpr-adult', 'Adult'], ['cpr-child', 'Child'], ['cpr-infant', 'Infant']];
@@ -49,10 +49,13 @@
   const protoBtn = p => '<button type="button" class="em-btn" data-open="' + esc(p.id) + '"><span>' + esc(p.title) + '</span>' + draft(p) + '</button>';
   const toolLabel = name => FK.tools && FK.tools.label ? FK.tools.label(name) : null;
   const toolBtn = name => '<button type="button" class="em-btn" data-tool="' + esc(name) + '"><span>' + esc(toolLabel(name)) + '</span></button>';
-  /* Pinned and recent keys: p:<protocol> and t:<tool>. Anything that no longer exists is skipped. */
+  /* Pinned and recent keys: p:<protocol>, t:<tool> and r:<report>. Anything that no longer exists is skipped. */
   const keyBtns = list => list.map(k => {
     if (k[0] === 'p') { const p = get(k.slice(2)); return p ? protoBtn(p) : ''; }
-    if (k[0] === 't') return toolLabel(k.slice(2)) ? toolBtn(k.slice(2)) : '';
+    if (k[0] === 't' || k[0] === 'r') {   // a tool or a report; the key must match where the name lives
+      const name = k.slice(2);
+      return toolLabel(name) && FK.tools.segment(name) === (k[0] === 'r' ? 'report' : 'tool') ? toolBtn(name) : '';
+    }
     return '';
   }).filter(Boolean);
   const group = (id, title, btns) => { $(id).innerHTML = btns.length ? '<h3 class="em-h">' + title + '</h3><div class="em-grid">' + btns.join('') + '</div>' : ''; };

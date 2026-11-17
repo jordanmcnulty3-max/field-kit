@@ -48,6 +48,14 @@ def draft_ids(protocols):
             if isinstance(p, dict) and p.get('draft') is True and isinstance(p.get('id'), str)]
 
 
+REPORT_DRAFT_MARKER = '/* REPORT_WORDING_DRAFT */'
+
+
+def report_wording_is_draft(source):
+    """True while src/reports.js carries the marker line, i.e. the 9-line wording is not yet checked against its source."""
+    return any(line.strip() == REPORT_DRAFT_MARKER for line in str(source).splitlines())
+
+
 def _validate_steps(where, steps, fig_names, errors, warnings):
     step_ids, dup, bad = set(), False, False
     for s in steps:

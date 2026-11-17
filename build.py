@@ -14,7 +14,7 @@ os.chdir(ROOT)
 sys.path.insert(0, 'figs')
 sys.path.insert(0, ROOT)
 import figs
-from tools.validate import draft_ids, validate
+from tools.validate import draft_ids, report_wording_is_draft, validate
 
 
 def read(p):
@@ -49,7 +49,7 @@ b = shell.index('</section>', a) + len('</section>')
 shell = shell[:a] + emerg + shell[b:]
 shell = shell.replace('</style>', read('figs/figs.css') + '\n</style>', 1)
 shell = shell.replace('<body>\n', '<body>\n' + read('figs/markers.html'), 1)
-js = '\n'.join(read('src/' + f) for f in ['geo.js', 'ballistics.js', 'app.js', 'router.js', 'emergency.js', 'emergency-tools.js', 'patients.js', 'protocol.js', 'map.js', 'survival.js'])
+js = '\n'.join(read('src/' + f) for f in ['geo.js', 'ballistics.js', 'app.js', 'router.js', 'emergency.js', 'emergency-tools.js', 'patients.js', 'reports.js', 'protocol.js', 'map.js', 'survival.js'])
 
 # Protocols: validate every src/protocols/*.json, then inline as window.FK_DATA (sorted by id).
 protocols = []
@@ -63,6 +63,8 @@ for w in warnings:
     print('warning:', w)
 if RELEASE:
     errors += [f'{pid}: draft protocol not allowed in a --release build' for pid in draft_ids(protocols)]
+if RELEASE and report_wording_is_draft(read('src/reports.js')):
+    errors.append('src/reports.js: report wording is still marked draft (REPORT_WORDING_DRAFT); check it against its source, then remove the marker line and set draft: false')
 if errors:
     sys.exit('Protocol validation failed:\n  ' + '\n  '.join(errors))
 protocols.sort(key=lambda p: p['id'])

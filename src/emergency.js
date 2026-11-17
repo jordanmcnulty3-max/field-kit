@@ -4,7 +4,7 @@
   const esc = FK.esc;
   const $ = id => document.getElementById(id);
   const RESERVED = ['tool', 'report'];   // addresses owned by other features, not protocols
-  const KEY = /^[ptsr]:[\w-]{1,60}$/;    // p:<protocolId>, t:<toolName>, r:<reportName>, s:<survivalTopicId>
+  const KEY = /^[ptsra]:[\w-]{1,60}$/;   // p:<protocolId>, t:<toolName>, r:<reportName>, s:<survivalTopicId>, a:<appScreen>
   const RECENT_MAX = 5;
   const LIFE = [['bleeding', 'Bleeding'], ['choking', 'Choking']];
   const CHOOSER = [['cpr-adult', 'Adult'], ['cpr-child', 'Child'], ['cpr-infant', 'Infant']];
@@ -49,12 +49,16 @@
   const protoBtn = p => '<button type="button" class="em-btn" data-open="' + esc(p.id) + '"><span>' + esc(p.title) + '</span>' + draft(p) + '</button>';
   const toolLabel = name => FK.tools && FK.tools.label ? FK.tools.label(name) : null;
   const toolBtn = name => '<button type="button" class="em-btn" data-tool="' + esc(name) + '"><span>' + esc(toolLabel(name)) + '</span></button>';
-  /* Pinned and recent keys: p:<protocol>, t:<tool> and r:<report>. Anything that no longer exists is skipped. */
+  /* Pinned and recent keys: p:<protocol>, t:<tool>, r:<report>, s:<survival topic>, a:<app screen>. Anything that no longer exists is skipped. */
   const keyBtns = list => list.map(k => {
     if (k[0] === 'p') { const p = get(k.slice(2)); return p ? protoBtn(p) : ''; }
     if (k[0] === 't' || k[0] === 'r') {   // a tool or a report; the key must match where the name lives
       const name = k.slice(2);
       return toolLabel(name) && FK.tools.segment(name) === (k[0] === 'r' ? 'report' : 'tool') ? toolBtn(name) : '';
+    }
+    if (k[0] === 's' || k[0] === 'a') {   // a survival topic or an app screen: search knows its label and how to open it
+      const d = FK.search && FK.search.describe(k);
+      return d ? '<button type="button" class="em-btn" data-key="' + esc(k) + '"><span>' + esc(d.title) + '</span></button>' : '';
     }
     return '';
   }).filter(Boolean);
@@ -104,6 +108,8 @@
   $('emHome').addEventListener('click', e => {
     const open = e.target.closest('[data-open]');
     if (open) { FK.protocol.open(open.dataset.open); return; }
+    const key = e.target.closest('[data-key]');
+    if (key) { FK.search.go(key.dataset.key); return; }
     const tool = e.target.closest('[data-tool]');
     if (tool) { FK.tools.start(tool.dataset.tool); return; }
     const res = e.target.closest('[data-resume]');

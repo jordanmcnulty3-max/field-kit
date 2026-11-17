@@ -65,13 +65,15 @@
   const segOf = name => tools[name].segment || 'tool';   // tools defined directly (tq, cpr) have no segment field
   const keyOf = name => (segOf(name) === 'report' ? 'r:' : 't:') + name;   // pins and recent
   const toolOpts = {};   // options for the open that the route handler is about to do (the address cannot carry them)
+  /* opts.replace: take over the current address entry instead of adding one (search uses it, so Back skips the search entry). Not passed on to the tool. */
   function start(name, opts) {
     if (typeof name !== 'string' || !NAME.test(name) || !Object.hasOwn(tools, name)) return false;
-    toolOpts[name] = opts || {};
+    const { replace, ...toolArgs } = opts || {};
+    toolOpts[name] = toolArgs;
     const r = FK.route.current();
     const inTool = r.tab === SECTION && SEGMENTS.includes(r.parts[0]);
     if (!inTool) pushed = true;
-    FK.route.go('/' + SECTION + '/' + segOf(name) + '/' + name, inTool ? { replace: true } : undefined);
+    FK.route.go('/' + SECTION + '/' + segOf(name) + '/' + name, inTool || replace ? { replace: true } : undefined);
     delete toolOpts[name];   // the route handler took them if it ran; if the address was unchanged they must not linger
     return true;
   }
@@ -114,6 +116,7 @@
       tools[name] = { label: String(def.label || name), segment: def.segment === 'report' ? 'report' : 'tool', render: def.render, stop: typeof def.stop === 'function' ? def.stop : () => {} };
     },
     has: name => Object.hasOwn(tools, name),
+    list: () => Object.keys(tools).map(name => ({ name, label: tools[name].label, segment: segOf(name) })),
     label: name => Object.hasOwn(tools, name) ? tools[name].label : null,
     segment: name => Object.hasOwn(tools, name) ? segOf(name) : null,
     close

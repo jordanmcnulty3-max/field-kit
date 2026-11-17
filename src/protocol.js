@@ -304,7 +304,7 @@
 
   FK.protocol = {
     get,
-    open: (id, stepId) => { const p = get(id); if (p) FK.route.go(stepId && stepIndex(p, stepId) >= 0 ? base(p) + '/' + enc(stepId) : base(p)); },
+    open: (id, stepId, opts) => { const p = get(id); if (p) FK.route.go(stepId && stepIndex(p, stepId) >= 0 ? base(p) + '/' + enc(stepId) : base(p), opts && opts.replace ? { replace: true } : undefined); },
     close: () => { if (isOpen) leave(); },
     active
   };

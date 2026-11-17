@@ -146,10 +146,10 @@
   }
 
   /* ---------- Opening a result the way a user would. Inside the overlay the address entry is replaced, so Back returns to where the user was. ---------- */
-  const here = () => { const r = FK.route.current(); return '/' + [r.tab, ...r.parts.map(encodeURIComponent)].join('/'); };
   function whenMap(fn, tries = 30) {
     if (FK.leafletMap && FK.leafletMap()) fn();
     else if (tries > 0) requestAnimationFrame(() => whenMap(fn, tries - 1));
+    else FK.toast('Open the map to see saved areas');
   }
   function go(key) {
     const d = describe(key);
@@ -171,7 +171,7 @@
         break;
       }
       case 'a':
-        if (id === 'settings') { if (replace) FK.route.go(here(), { replace: true }); $('menuBtn').click(); }
+        if (id === 'settings') { if (replace) FK.route.closeSearch(); $('menuBtn').click(); }
         else if (id === 'areas') { nav('/tactical/map'); whenMap(() => $('mSave').click()); }   // the Saved areas list is in the Save map dialog
         else if (id === 'waypoints') { nav('/tactical/position'); $('blkWaypoints').scrollIntoView({ block: 'start' }); }
         else nav('/tactical/' + id);

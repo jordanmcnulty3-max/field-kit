@@ -102,6 +102,7 @@
       '<button class="pp-btn" data-act="home" aria-label="Close protocol and go back to Emergency">‹</button>' +
       '<h2 class="pp-title" id="ppTitle" tabindex="-1">' + esc(p.title) + '</h2>' +
       (pins ? '<button class="pp-btn" data-act="pin" aria-pressed="' + pinned + '" aria-label="Pin this protocol">' + (pinned ? '★' : '☆') + '</button>' : '') +
+      '<button class="pp-btn" data-act="search" aria-label="Search">⌕</button>' +
       '<button class="pp-btn" data-act="toggleAll" aria-pressed="' + (cur.mode === 'all') + '" aria-label="All steps on one page">☰</button>' +
       '</div>' + (p.draft === true ? '<p class="pp-draft">Draft, not source-checked</p>' : '') + '</header>';
   }
@@ -273,6 +274,7 @@
     const { p, i } = cur;
     switch (b.dataset.act) {
       case 'home': leave(); break;
+      case 'search': FK.route.go('/search'); break;
       case 'start': from[p.id + ':0'] = 'intro'; FK.route.go(stepPath(p, 0)); break;
       case 'ack': FK.store.set('advAck', true); onRoute(FK.route.current()); break;
       case 'next': advance(p, i, successors(p, i)[0]); break;

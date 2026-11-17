@@ -106,6 +106,7 @@
   }
   pinBtn.addEventListener('click', () => { if (openName && FK.pins) { FK.pins.toggle(keyOf(openName)); syncPin(); } });
   document.getElementById('toolClose').addEventListener('click', close);
+  document.getElementById('toolSearch').addEventListener('click', () => FK.route.go('/search'));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && openName && !e.defaultPrevented) close(); });
 
   FK.tools = {

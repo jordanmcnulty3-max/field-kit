@@ -371,3 +371,72 @@ def test_first_open_is_fast_with_sixty_protocols(page, app_url):
     assert ms < 50, ms
     ms = page.evaluate("(() => { const t = performance.now(); FK.search.query('protocol 7'); return performance.now() - t; })()")
     assert ms < 10, ms
+
+
+def test_real_shipped_data_found_by_title_and_first_keyword(page, app_url):
+    page.goto(app_url + '#/emergency')   # no fixtures: whatever protocols ship
+    page.wait_for_function('window.FK && FK.search')
+    bad = page.evaluate("""FK_DATA.protocols.flatMap(p => {
+      const out = [];
+      if (!FK.search.query(p.title).some(r => r.key === 'p:' + p.id)) out.push(p.id + ' by title');
+      if (p.keywords && p.keywords.length && !FK.search.query(p.keywords[0]).some(r => r.key === 'p:' + p.id)) out.push(p.id + ' by keyword');
+      return out; })""")
+    assert page.evaluate('FK_DATA.protocols.length') >= 1
+    assert bad == []
+
+
+def test_search_button_inside_protocol_returns_to_the_step(page, app_url):
+    boot(page, app_url, storage={'advAck': True})
+    page.evaluate("FK.protocol.open('choking')")
+    page.wait_for_selector('#player [data-act="search"]')
+    assert page.locator('#player [data-act="search"]').bounding_box()['height'] >= 56
+    url = page.url
+    page.click('#player [data-act="search"]')
+    page.wait_for_selector('#searchPane', state='visible')
+    assert page.url.endswith('#/search')
+    page.keyboard.press('Escape')
+    assert page.url == url and page.locator('#player').is_visible()
+    assert page.evaluate("document.activeElement.dataset.act") == 'search'   # focus returns to that button
+    page.click('#player [data-act="search"]')
+    type_q(page, 'stings')
+    page.click('#searchBody .sr-item')
+    assert page.url.endswith('/emergency/stings')
+    page.go_back()
+    assert page.url == url and page.locator('#player').is_visible()
+
+
+def test_search_button_inside_tool_and_cpr_keeps_running(page, app_url):
+    boot(page, app_url)
+    page.evaluate("FK.tools.start('cpr')")
+    page.wait_for_selector('#cprBtn')
+    page.click('#cprBtn')
+    page.wait_for_function('FK.tools.cpr.running()')
+    assert page.locator('#toolSearch').bounding_box()['height'] >= 56
+    url = page.url
+    page.click('#toolSearch')
+    page.wait_for_selector('#searchPane', state='visible')
+    page.keyboard.press('Escape')
+    assert page.url == url and page.locator('#toolPane').is_visible()
+    assert page.evaluate("document.activeElement.id") == 'toolSearch'
+    page.click('#toolSearch')
+    type_q(page, 'ballistics')
+    page.click('#searchBody .sr-item')
+    assert page.locator('#view-ballistics').is_visible()
+    assert page.evaluate('FK.tools.cpr.running()') is True
+    page.evaluate('FK.tools.start("cpr")')   # leave the coach running; the page closes at teardown
+
+
+def test_toast_is_above_search_pane(page, app_url):
+    boot(page, app_url)
+    z = page.evaluate("[getComputedStyle(document.getElementById('toast')).zIndex, getComputedStyle(document.getElementById('searchPane')).zIndex].map(Number)")
+    assert z[0] > z[1]
+
+
+def test_settings_from_search_does_not_reemit_route(page, app_url):
+    boot(page, app_url, storage={'advAck': True})
+    page.evaluate("FK.protocol.open('choking'); window.routes = 0; FK.on('route', () => window.routes++)")
+    page.evaluate("FK.route.go('/search')")
+    type_q(page, 'backup')
+    page.click('#searchBody .sr-item[data-key="a:settings"]')
+    assert page.evaluate('window.routes') == 0
+    assert page.locator('#dlgMenu').is_visible() and page.url.endswith('/emergency/choking')

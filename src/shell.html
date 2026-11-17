@@ -212,7 +212,7 @@ ol.steps li::marker{font-weight:700;color:var(--c)}
   background:var(--ink);color:var(--paper);padding:10px 12px 10px 16px;border-radius:8px;font-size:15px}
 .update .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
-  background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:15px;z-index:20;
+  background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:15px;z-index:40;
   opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.show{opacity:1}
 
@@ -614,6 +614,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <header class="pp-head"><div class="pp-row">
     <button type="button" class="pp-btn" id="toolClose" aria-label="Close tool">‹</button>
     <h2 class="pp-title" id="toolTitle" tabindex="-1"></h2>
+    <button type="button" class="pp-btn" id="toolSearch" aria-label="Search">⌕</button>
     <button type="button" class="pp-btn" id="toolPin" aria-pressed="false" aria-label="Pin this tool">☆</button>
   </div></header>
   <div class="pp-body" id="toolBody"></div>

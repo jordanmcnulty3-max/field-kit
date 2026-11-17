@@ -58,7 +58,9 @@
     apply(full);
   }
 
-  FK.route = { parse, go, current: () => route || parse(location.hash), isSearch: () => searching };
+  FK.route = { parse, go, current: () => route || parse(location.hash), isSearch: () => searching,
+    /* Close the overlay by replacing '#/search' with the underlying screen's address. The screen underneath is already showing, so nothing is re-applied. */
+    closeSearch() { if (searching && route) { history.replaceState(history.state, '', hashOf(route)); setSearching(false); } } };
   addEventListener('popstate', onNavigate);
   addEventListener('hashchange', onNavigate);
   // First route replaces the entry, so opening the app adds no history. A reload on '#/search' lands on the tab underneath.

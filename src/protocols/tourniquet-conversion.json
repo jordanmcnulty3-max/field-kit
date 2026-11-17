@@ -177,7 +177,7 @@
     {
       "id": "s11",
       "text": "Slide the original down to just above the new one, loose with the slack taken up. Write the new time, and keep the original application time.",
-      "detail": "TCCC skill (2024): confirm there is no pulse below and the bleeding is still controlled; slide the original down and leave it in place above the new one. It should not be fully tightened: remove excess slack so it does not catch during moves. TCCC notes 2024: leaving the original tight above the new one can cause compartment syndrome between them.\n\nTimes: the TCCC reposition skill (CPP 2026 step 9) annotates the time of the new tourniquet position on the casualty card; the TCCC CLS notes (2024) say to mark all tourniquets with their time of application. Write both times, original application and repositioning, on the card or the casualty (and in the app’s log). Every later time question counts from the original application.",
+      "detail": "TCCC skill (2024): confirm there is no pulse below and the bleeding is still controlled; slide the original down and leave it in place above the new one. It should not be fully tightened: remove excess slack so it does not catch during moves. TCCC notes 2024: leaving the original tight above the new one can cause compartment syndrome between them.\n\nTimes: TCCC 2026 (6g) says to note the tourniquets applied and the time of application, time of re-application, time of conversion and time of removal. The TCCC reposition skill (CPP 2026 step 9) annotates the time of the new tourniquet position on the casualty card; the TCCC CLS notes (2024) say to mark all tourniquets with their time of application. Write both times, original application and repositioning, on the card or the casualty (and in the app’s log). Every later time question counts from the original application.",
       "log": "Original tourniquet loosened and left in place"
     },
     {
@@ -360,10 +360,10 @@
   ],
   "evacuate": [
     "Evacuate urgently every casualty who has or had a tourniquet, converted or not.",
-    "Most urgent: bleeding again after conversion, signs of shock, or a tourniquet on for more than 2 hours."
+    "Most urgent: bleeding again after conversion, signs of shock, or more than 2 hours since the first tourniquet went on."
   ],
   "notes": [
-    "TCCC 2026: convert within 2 hours if not in shock, the wound can be watched, and not an amputation; never remove after 6 hours without monitoring and lab capability; ASM/CLS level not beyond 2 hours without medic direction."
+    "TCCC 2026: convert within 2 hours since the first tourniquet went on if not in shock, the wound can be watched, and not an amputation; never remove after 6 hours since the first tourniquet went on without monitoring and lab capability; ASM/CLS level not beyond 2 hours since the first tourniquet went on without medic direction."
   ],
   "sources": [
     {

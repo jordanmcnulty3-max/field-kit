@@ -36,8 +36,8 @@
     },
     {
       "id": "s3",
-      "text": "Possible dislocation: support and splint it in the position found. Do not try to push it back in: that is an advanced procedure, see Advanced procedures.",
-      "detail": "Treat a deformed joint in the position you find it (AHA) and do not move or straighten it (Red Cross). Putting a dislocated joint back (reduction) is an advanced procedure: see Advanced procedures.\n\nSplint as in the Broken bone (fracture) protocol: pad well, include the bones above and below the joint, tie above and below the injury, not over it, and not tight. An injured arm can be held still in a sling (MedlinePlus).\n\nA cold pack wrapped in a thin towel can ease pain and swelling (next steps give the timing).",
+      "text": "Possible dislocation: support and splint it in the position found. Do not push it back in unless trained: use the Dislocation reduction (shoulder, kneecap, finger, toe) protocol.",
+      "detail": "Treat a deformed joint in the position you find it (AHA) and do not move or straighten it (Red Cross). Putting a dislocated joint back (reduction) is an advanced procedure: use the Dislocation reduction (shoulder, kneecap, finger, toe) protocol.\n\nSplint as in the Broken bone (fracture) protocol: pad well, include the bones above and below the joint, tie above and below the injury, not over it, and not tight. An injured arm can be held still in a sling (MedlinePlus).\n\nA cold pack wrapped in a thin towel can ease pain and swelling (next steps give the timing).",
       "log": "Joint splinted"
     },
     {
@@ -76,7 +76,7 @@
     }
   ],
   "donts": [
-    "Do not try to put a dislocated joint back in unless trained: see Advanced procedures.",
+    "Do not try to put a dislocated joint back in unless trained: use the Dislocation reduction (shoulder, kneecap, finger, toe) protocol.",
     "Do not move or straighten a deformed joint.",
     "Do not put ice directly on the skin, and do not leave cold on for more than 20 to 30 minutes at a time.",
     "Do not use heat on a fresh injury.",

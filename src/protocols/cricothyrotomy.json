@@ -155,6 +155,17 @@
       }
     },
     {
+      "id": "s10e",
+      "text": "Remove the bougie from the tube, holding the tube in place (second attempt).",
+      "detail": "TCCC CMC bougie-aided skill instructions (2021) step 15 (checklist 19). Group judgement: if the tube comes out again, there is no third attempt; go to the failure step.",
+      "log": "Surgical cricothyroidotomy (bougie-aided), tube placed on second attempt",
+      "ask": {
+        "q": "Did the tube stay in place?",
+        "yes": "s14",
+        "no": "s25"
+      }
+    },
+    {
       "id": "s11",
       "text": "Open technique: open the cut with a Kelly hemostat if you have one. Put the tracheal hook through the opening, lift the cricoid gently, then withdraw the scalpel.",
       "detail": "TCCC CMC open surgical skill instructions (2021) steps 11-12 (checklist 13-16): if a Kelly hemostat is available, use it to open the incision; insert the tracheal hook through the membrane (critical), gently lift the cricoid cartilage, withdraw the scalpel and put it in a sharps container."
@@ -171,8 +182,8 @@
     },
     {
       "id": "s13",
-      "text": "Tube not in: open technique, keep the hook in; bougie technique, keep the bougie in or pass it through the opening again. Recheck with your finger and try again as trained.",
-      "detail": "The TCCC skill instructions and checklist give no separate failure procedure. They describe reconfirming the membrane with the index finger and directing the tube through the opening toward the lungs. In the bougie technique the hook is already out (step 13), so the bougie controls the opening; if the tube came out with the bougie, pass the bougie toward the lungs again as in step 12 and slide the tube over it. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
+      "text": "Tube not in: open technique, keep the hook in; bougie, keep the bougie in or pass it again. Recheck with your finger and make one more attempt as trained.",
+      "detail": "The TCCC skill instructions and checklist give no separate failure procedure. They describe reconfirming the membrane with the index finger and directing the tube through the opening toward the lungs. Group judgement: one more attempt only; a second failure goes to the failure step. TCCC CMC skill instructions (2021) standard: an effective airway in 4 minutes or less (see open questions). In the bougie technique the hook is already out (step 13), so the bougie controls the opening; if the tube came out with the bougie, pass the bougie toward the lungs again as in step 12 and slide the tube over it. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.",
       "ask": {
         "q": "Is the tube in the windpipe opening now?",
         "yes": "s13b",
@@ -185,7 +196,7 @@
       "detail": "The next removal step differs: the bougie comes out of the tube (bougie technique), or the hook comes out of the opening (open technique).",
       "ask": {
         "q": "Are you using a bougie?",
-        "yes": "s10d",
+        "yes": "s10e",
         "no": "s12b"
       }
     },
@@ -248,8 +259,8 @@
     },
     {
       "id": "s25",
-      "text": "Group judgement: if there is no misting, chest rise or breath sounds on either side, the tube is not in the windpipe. Do not keep bagging through it. Keep the opening controlled. Evacuate now.",
-      "detail": "Group judgement: no TCCC document read (2021 CMC skill instructions and checklist, 2023 skill cards, TCCC 2026) gives a procedure for a failed cric. This app says: do not keep ventilating through a tube with no misting, chest rise or breath sounds (air forced into the wrong place goes into the neck tissues); keep the opening controlled; if the face allows, ventilate with the bag-valve-mask over the mouth and nose; start evacuating now. See open questions: this wording needs a medical adviser’s review. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they have no signs of life, use the CPR, adult protocol (the Trauma check (MARCH) protocol states the TCCC position on CPR after trauma).",
+      "text": "Group judgement: no misting, chest rise or breath sounds on either side: the tube is not in the windpipe; do not bag through it, control the opening, evacuate now. Otherwise: see detail.",
+      "detail": "Group judgement: if there is misting or chest rise (for example breath sounds unequal after rechecking), the tube is working: keep ventilating through it as needed and evacuate now.\n\nGroup judgement: no TCCC document read (2021 CMC skill instructions and checklist, 2023 skill cards, TCCC 2026) gives a procedure for a failed cric. This app says: do not keep ventilating through a tube with no misting, chest rise or breath sounds (air forced into the wrong place goes into the neck tissues); keep the opening controlled; if the face allows, ventilate with the bag-valve-mask over the mouth and nose; start evacuating now. See open questions: this wording needs a medical adviser’s review. Call 911 if you have signal. If not, send someone for help and prepare to move the casualty.\n\nIf they have no signs of life, use the CPR, adult protocol (the Trauma check (MARCH) protocol states the TCCC position on CPR after trauma).",
       "end": true
     },
     {

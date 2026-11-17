@@ -84,8 +84,8 @@
     },
     {
       "id": "s6",
-      "text": "Do not close the wound unless you are trained: wound closure is an advanced procedure, see Advanced procedures. Leave bites, punctures and dirty wounds open.",
-      "detail": "Closing a wound with tape, glue, staples or stitches is an advanced procedure: see Advanced procedures.\n\nWMS: grossly contaminated wounds (soil, faeces, already infected) and most bites are left open, packed lightly with a moist dressing and closed later by a professional.\n\nWounds that probably need stitches (MedlinePlus): deeper than about a quarter inch (0.64 cm), on the face, or reaching bone. Get these checked by a health care provider."
+      "text": "Do not close the wound unless you are trained: wound closure is an advanced procedure: use the Wound closure (strips, skin glue) protocol. Leave bites, punctures and dirty wounds open.",
+      "detail": "Closing a wound with tape, glue, staples or stitches is an advanced procedure: use the Wound closure (strips, skin glue) protocol.\n\nWMS: grossly contaminated wounds (soil, faeces, already infected) and most bites are left open, packed lightly with a moist dressing and closed later by a professional.\n\nWounds that probably need stitches (MedlinePlus): deeper than about a quarter inch (0.64 cm), on the face, or reaching bone. Get these checked by a health care provider."
     },
     {
       "id": "s7",
@@ -107,7 +107,7 @@
     {
       "id": "s11",
       "text": "Leave the dressing, packing or tourniquet in place. Do not clean or rinse this wound. Cover it, use the Severe bleeding protocol, and evacuate.",
-      "detail": "MedlinePlus: do not try to clean a major wound, especially once the bleeding is under control. Taking off packing or a pressure dressing to rinse the wound can start heavy bleeding again.\n\nKeep the dressing covered and clean, keep checking it for fresh bleeding, and follow the Severe bleeding protocol if it bleeds through. Do not remove a tourniquet: that is an advanced procedure (see Advanced procedures).\n\nA wound that needed a tourniquet, packing or a pressure bandage needs medical care urgently. Keep the casualty warm and watch for shock (Shock protocol).",
+      "detail": "MedlinePlus: do not try to clean a major wound, especially once the bleeding is under control. Taking off packing or a pressure dressing to rinse the wound can start heavy bleeding again.\n\nKeep the dressing covered and clean, keep checking it for fresh bleeding, and follow the Severe bleeding protocol if it bleeds through. Do not remove a tourniquet: that is an advanced procedure (use the Tourniquet reassessment and conversion protocol).\n\nA wound that needed a tourniquet, packing or a pressure bandage needs medical care urgently. Keep the casualty warm and watch for shock (Shock protocol).",
       "warn": "Do not remove packing or a pressure dressing to clean the wound.",
       "end": true
     },

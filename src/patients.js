@@ -119,7 +119,7 @@
   }
 
   FK.patients = { all: read, current, setCurrent, create, rename, remove, add, text, setMist };
-  FK.log = t => { if (typeof t === 'string') add({ kind: 'event', text: t }); };
+  FK.log = t => typeof t === 'string' ? add({ kind: 'event', text: t }) : false;   // true once written
 
   /* ================= The "log" tool ================= */
   let view = null, confirmT = null, confirmAt = 0, confirming = false, renaming = false, avpu = '', msg = '';

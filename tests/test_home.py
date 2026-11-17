@@ -213,3 +213,99 @@ def test_open_category_stays_open_when_home_rerenders(page, app_url):
     page.evaluate("FK.protocol.close()")
     page.wait_for_function("location.hash === '#/emergency'")
     assert page.locator('#emCats details[data-cat="injury"]').get_attribute('open') is not None
+
+
+# ---------- Final review fixes ----------
+
+FULL_STORAGE = "Storage.prototype.setItem = function () { throw new DOMException('full', 'QuotaExceededError'); }; 0"
+
+
+def test_pin_failure_is_reported_every_time_storage_is_full(page, app_url):
+    boot(page, app_url)
+    page.evaluate(FULL_STORAGE)
+    for _ in range(2):   # the general storage toast repeats only once a minute; the pin says so every time
+        page.evaluate("document.getElementById('toast').textContent = ''; FK.pins.toggle('p:burns')")
+        page.wait_for_function("document.getElementById('toast').textContent.includes('pin')")
+        assert 'storage' in page.inner_text('#toast')
+        assert page.evaluate("FK.pins.has('p:burns')") is False
+    page.evaluate("FK.protocol.open('burns')")
+    page.click('#player [data-act="pin"]')
+    page.wait_for_function("document.getElementById('toast').textContent.includes('pin')")
+    assert page.get_attribute('#player [data-act="pin"]', 'aria-pressed') == 'false'
+
+
+def test_not_breathing_chooser_toggles_in_place_and_keeps_focus(page, app_url):
+    boot(page, app_url)
+    btn = page.locator('#emLife [data-act="breathing"]')
+    page.evaluate("document.querySelector('#emLife [data-act=\"breathing\"]').__mark = 1")
+    btn.focus()
+    page.keyboard.press('Enter')
+    assert page.locator('#emChooser').is_visible() and btn.get_attribute('aria-expanded') == 'true'
+    assert page.evaluate("document.activeElement.dataset.act") == 'breathing'
+    assert page.evaluate("document.activeElement.__mark") == 1   # the same element: nothing was redrawn
+    page.keyboard.press('Enter')
+    assert page.locator('#emChooser').is_hidden() and btn.get_attribute('aria-expanded') == 'false'
+    assert page.evaluate("document.activeElement.__mark") == 1
+    page.keyboard.press('Enter')
+    page.evaluate("FK.pins.toggle('p:burns')")   # a later redraw shows the open state it really has
+    assert btn.get_attribute('aria-expanded') == 'true' and page.locator('#emChooser').is_visible()
+
+
+def test_focus_returns_to_chooser_option_after_leaving_the_protocol(page, app_url):
+    boot(page, app_url)
+    page.click('#emLife [data-act="breathing"]')
+    page.click('#emChooser [data-open="cpr-child"]')
+    page.wait_for_function("location.hash === '#/emergency/cpr-child'")
+    page.click('#player [data-act="home"]')
+    page.wait_for_function("location.hash === '#/emergency'")
+    page.wait_for_function("document.activeElement && document.activeElement.dataset.open === 'cpr-child'")
+
+
+def test_update_bar_waits_while_an_emergency_screen_or_timer_is_running(page, app_url):
+    boot(page, app_url)
+    bar = page.locator('#updBar')
+    page.evaluate('FK.updateAvailable()')
+    assert bar.is_visible()
+    page.evaluate("FK.protocol.open('burns')")
+    page.wait_for_selector('#player:not([hidden])')
+    assert bar.is_hidden()
+    page.click('#player [data-act="home"]')
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert bar.is_visible()
+    page.evaluate("FK.tools.start('cpr')")
+    page.wait_for_function("location.hash === '#/emergency/tool/cpr'")
+    assert bar.is_hidden()
+    page.click('#cprBtn')
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert bar.is_hidden()   # the coach runs on: its Reload would end it
+    page.evaluate("FK.tools.start('cpr')")
+    page.wait_for_function("location.hash === '#/emergency/tool/cpr'")
+    page.wait_for_timeout(800)   # Stop is two taps, each past the bounce window
+    page.click('#cprBtn')
+    page.wait_for_timeout(800)
+    page.click('#cprBtn')
+    assert page.evaluate('FK.tools.cpr.running()') is False
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert bar.is_visible()
+    page.evaluate("FK.tools.start('tq')")
+    page.wait_for_function("location.hash === '#/emergency/tool/tq'")
+    page.click('[data-limb="Left leg"]')
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert bar.is_hidden()   # a tourniquet timer is running
+
+
+def test_update_bar_waits_for_a_running_step_timer(page, app_url):
+    timed = proto('timed', 'Timed', 'injury')
+    timed['steps'][0]['timer'] = {'seconds': 1, 'label': 'Wait'}
+    boot(page, app_url, fixtures=FIXTURES + [timed])
+    page.evaluate("FK.protocol.open('timed')")
+    page.click('#player [data-act="timer"]')
+    page.evaluate('FK.updateAvailable()')
+    page.go_back()
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert page.locator('#updBar').is_hidden()
+    page.wait_for_function("!!FK.protocol.timer() && FK.protocol.timer().done")
+    page.wait_for_function("!document.getElementById('updBar').hidden")

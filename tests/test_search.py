@@ -441,11 +441,27 @@ def test_toast_is_above_search_pane(page, app_url):
     assert z[0] > z[1]
 
 
-def test_settings_from_search_does_not_reemit_route(page, app_url):
+def test_settings_from_search_over_a_protocol_opens_settings_and_leaving_still_works(page, app_url):
+    """Behaviour, not mechanism: Settings opens over the step, and the protocol is left in one tap afterwards."""
     boot(page, app_url, storage={'advAck': True})
-    page.evaluate("FK.protocol.open('choking'); window.routes = 0; FK.on('route', () => window.routes++)")
+    page.evaluate("FK.protocol.open('choking')")
+    page.wait_for_selector('#player:not([hidden])')
     page.evaluate("FK.route.go('/search')")
     type_q(page, 'backup')
     page.click('#searchBody .sr-item[data-key="a:settings"]')
-    assert page.evaluate('window.routes') == 0
-    assert page.locator('#dlgMenu').is_visible() and page.url.endswith('/emergency/choking')
+    page.wait_for_selector('#dlgMenu[open]')
+    assert page.url.endswith('/emergency/choking') and page.locator('#searchPane').is_hidden()
+    page.click('#menuClose')
+    page.click('#player [data-act="home"]')
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert page.locator('#player').is_hidden()
+
+
+def test_protocol_notes_are_indexed_like_the_summary(page, app_url):
+    noted = {**proto('noted', 'Noted thing'), 'notes': ['Rule of palms zanzibarite']}
+    summed = proto('summed', 'Summed thing', summary='zanzibarite in the summary')
+    body = proto('bodied', 'Bodied thing', steps=[{'id': 's1', 'text': 'zanzibarite in a step'}])
+    boot(page, app_url, FIXTURES + [body, noted, summed])
+    ks = [r['key'] for r in q(page, 'zanzibarite')]
+    assert set(ks) == {'p:noted', 'p:summed', 'p:bodied'}
+    assert ks.index('p:noted') < ks.index('p:bodied') and ks.index('p:summed') < ks.index('p:bodied')

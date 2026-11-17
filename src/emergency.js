@@ -6,6 +6,7 @@
   const RESERVED = ['tool', 'report'];   // addresses owned by other features, not protocols
   const KEY = /^[ptsra]:[\w-]{1,60}$/;   // p:<protocolId>, t:<toolName>, r:<reportName>, s:<survivalTopicId>, a:<appScreen>
   const RECENT_MAX = 5;
+  const PIN_FULL = 'Couldn’t change the pin: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.';
   const LIFE = [['bleeding', 'Bleeding'], ['choking', 'Choking']];
   const CHOOSER = [['cpr-adult', 'Adult'], ['cpr-child', 'Child'], ['cpr-infant', 'Infant']];
   const CATS = [['life', 'More life threats'], ['injury', 'Injuries'], ['environment', 'Heat, cold, environment'],
@@ -22,7 +23,8 @@
     toggle(key) {
       if (typeof key !== 'string' || !KEY.test(key)) return;
       const cur = keys('pins');
-      FK.store.set('pins', cur.includes(key) ? cur.filter(k => k !== key) : [...cur, key]);
+      // A failed pin says so every time (the storage toast alone repeats only once a minute).
+      if (!FK.store.set('pins', cur.includes(key) ? cur.filter(k => k !== key) : [...cur, key])) setTimeout(() => FK.toast(PIN_FULL), 0);
       FK.emit('pins');
     }
   };
@@ -38,7 +40,7 @@
   };
 
   /* ---------- Data ---------- */
-  const protocols = () => (window.FK_DATA && Array.isArray(FK_DATA.protocols)) ? FK_DATA.protocols : [];
+  const protocols = () => FK.protocols();   // well-formed protocols only (app.js)
   const get = id => protocols().find(p => p.id === id);
   const fixed = new Set([...LIFE.map(x => x[0]), ...CHOOSER.map(x => x[0])]);
 
@@ -62,38 +64,51 @@
     }
     return '';
   }).filter(Boolean);
-  const group = (id, title, btns) => { $(id).innerHTML = btns.length ? '<h3 class="em-h">' + title + '</h3><div class="em-grid">' + btns.join('') + '</div>' : ''; };
+  /* Redraw a block only when its markup changed, so a button that opened a screen is still there to take focus back. */
+  const drawn = new WeakMap();   // element -> markup last written into it
+  const setHTML = (el, html) => { if (drawn.get(el) !== html) { el.innerHTML = html; drawn.set(el, html); } };
+  const group = (id, title, btns) => setHTML($(id), btns.length ? '<h3 class="em-h">' + title + '</h3><div class="em-grid">' + btns.join('') + '</div>' : '');
 
   function renderResume() {
     const a = FK.protocol && FK.protocol.active();
     const p = a && get(a.id);
-    if (!p) { $('emResume').innerHTML = ''; return; }
+    if (!p) { setHTML($('emResume'), ''); return; }
     const i = p.steps.findIndex(s => s.id === a.step);
-    $('emResume').innerHTML = '<button type="button" class="em-resume" data-resume="' + esc(a.id) + '" data-step="' + esc(a.step) +
-      '">Resume: ' + esc(p.title) + ', ' + (i + 1) + '/' + p.steps.length + '</button>';
+    setHTML($('emResume'), '<button type="button" class="em-resume" data-resume="' + esc(a.id) + '" data-step="' + esc(a.step) +
+      '">Resume: ' + esc(p.title) + ', ' + (i + 1) + '/' + p.steps.length + '</button>');
   }
 
-  function renderLife() {
+  function lifeHTML() {
     const fixedBtn = id => {
       const p = get(id), label = LIFE.find(x => x[0] === id)[1];
       return p ? '<button type="button" data-open="' + esc(id) + '"><span>' + label + '</span>' + draft(p) + '</button>' : '';
     };
-    const opts = CHOOSER.filter(([id]) => get(id));
-    const breathing = opts.length ? '<button type="button" data-act="breathing" aria-expanded="' + chooserOpen +
+    const breathing = CHOOSER.some(([id]) => get(id)) ? '<button type="button" data-act="breathing" aria-expanded="' + chooserOpen +
       '" aria-controls="emChooser"><span>Not breathing</span></button>' : '';
-    $('emLife').innerHTML = fixedBtn('bleeding') + breathing + fixedBtn('choking');
+    return fixedBtn('bleeding') + breathing + fixedBtn('choking');
+  }
+  function renderLife() {
+    const opts = CHOOSER.filter(([id]) => get(id));
+    setHTML($('emLife'), lifeHTML());
     $('emChooser').hidden = !(chooserOpen && opts.length);
-    $('emChooser').innerHTML = opts.map(([id, label]) => '<button type="button" class="em-btn" data-open="' + esc(id) + '"><span>' + label + '</span>' + draft(get(id)) + '</button>').join('');
+    setHTML($('emChooser'), opts.map(([id, label]) => '<button type="button" class="em-btn" data-open="' + esc(id) + '"><span>' + label + '</span>' + draft(get(id)) + '</button>').join(''));
+  }
+  /* Open or close the "Not breathing" chooser in place: nothing is redrawn, so the button keeps focus. */
+  function toggleChooser(btn) {
+    chooserOpen = !chooserOpen;
+    btn.setAttribute('aria-expanded', String(chooserOpen));
+    $('emChooser').hidden = !(chooserOpen && CHOOSER.some(([id]) => get(id)));
+    drawn.set($('emLife'), lifeHTML());   // the markup now on screen
   }
 
   function renderCats() {
     document.querySelectorAll('#emCatsDyn details').forEach(d => { if (d.open) openCats.add(d.dataset.cat); else openCats.delete(d.dataset.cat); });   // keep what the user opened
-    $('emCatsDyn').innerHTML = CATS.map(([cat, label]) => {
+    setHTML($('emCatsDyn'), CATS.map(([cat, label]) => {
       const ps = protocols().filter(p => p.category === cat && !(cat === 'life' && fixed.has(p.id)));
       if (!ps.length) return '';
       return '<details class="ref" data-cat="' + cat + '"' + (openCats.has(cat) ? ' open' : '') + '><summary data-cat="' + cat + '">' + label +
         '</summary><div class="body em-grid">' + ps.map(protoBtn).join('') + '</div></details>';
-    }).join('');
+    }).join(''));
   }
 
   function render() {
@@ -114,7 +129,8 @@
     if (tool) { FK.tools.start(tool.dataset.tool); return; }
     const res = e.target.closest('[data-resume]');
     if (res) { FK.protocol.open(res.dataset.resume, res.dataset.step); return; }
-    if (e.target.closest('[data-act="breathing"]')) { chooserOpen = !chooserOpen; render(); }
+    const breathing = e.target.closest('[data-act="breathing"]');
+    if (breathing) toggleChooser(breathing);
   });
   FK.on('pins', render);
   FK.on('recent', render);

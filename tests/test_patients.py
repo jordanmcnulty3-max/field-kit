@@ -22,7 +22,7 @@ def e(t, text, kind='note', **kw):
 def test_first_log_creates_casualty_1(page, app_url):
     boot(page, app_url)
     assert page.evaluate('FK.patients.all().length') == 0
-    assert page.evaluate("FK.log('Tourniquet applied: Left leg')") is None
+    assert page.evaluate("FK.log('Tourniquet applied: Left leg')") is True
     s = stored(page)
     assert len(s) == 1 and s[0]['name'] == 'Casualty 1'
     assert [x['text'] for x in s[0]['entries']] == ['Tourniquet applied: Left leg']

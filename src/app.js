@@ -446,8 +446,43 @@
     navigator.serviceWorker.register('sw.js').catch(() => { /* offline cache unavailable */ });
   }
 
+  /* ---------- Protocol data: one accessor for the player, Emergency home and search. Only well-formed protocols
+     come out of it (an object with an id, a title and at least one step, every step an object with string id and text),
+     so a malformed entry is skipped instead of drawing an empty screen. ---------- */
+  const filled = v => typeof v === 'string' && v.trim() !== '';
+  const okStep = s => !!s && typeof s === 'object' && filled(s.id) && typeof s.text === 'string';
+  const okProtocol = p => !!p && typeof p === 'object' && filled(p.id) && filled(p.title) && Array.isArray(p.steps) && p.steps.length > 0 && p.steps.every(okStep);
+  let protoSrc = null, protoLen = -1, protoList = [];
+  function protocols() {
+    const src = window.FK_DATA && Array.isArray(window.FK_DATA.protocols) ? window.FK_DATA.protocols : null;
+    if (src !== protoSrc || (src && src.length !== protoLen)) { protoSrc = src; protoLen = src ? src.length : -1; protoList = src ? src.filter(okProtocol) : []; }
+    return protoList;
+  }
+
+  /* ---------- Focus after an overlay closes: back to the control that opened it, else the screen heading ---------- */
+  const visible = el => !!el && el.isConnected && el.getClientRects().length > 0 && !el.closest('[hidden],[inert]');
+  const OPENER_KEYS = ['data-open', 'data-tool', 'data-resume', 'data-key', 'data-act'];
+  /* Remember an opener so it can be found again after its list is redrawn. */
+  function opener(el) {
+    if (!el || el === document.body || !(el instanceof Element)) return null;
+    const k = OPENER_KEYS.find(a => el.hasAttribute(a));
+    return { el, sel: k ? '[' + k + '="' + CSS.escape(el.getAttribute(k)) + '"]' : null };
+  }
+  /* Runs after the current navigation has settled, and only if nothing else has taken focus. */
+  function refocus(o) {
+    setTimeout(() => {
+      const a = document.activeElement;
+      if (a && a !== document.body && visible(a)) return;
+      let t = o && visible(o.el) ? o.el : null;
+      if (!t && o && o.sel) t = [...document.querySelectorAll('main ' + o.sel)].find(visible) || null;
+      if (!t) { t = $('#title'); if (!visible(t)) return; }
+      t.focus({ preventScroll: true });
+    }, 0);
+  }
+
   /* ---------- Shared API for the map module ---------- */
   window.FK = {
+    protocols, opener, refocus, updateAvailable,
     $, $$, store, toast, esc, on, emit, download, sensors, fin, okId, list, okLatLon, FULL_MSG,
     getFix: () => fix, getWps: () => wps, getTarget: () => targetId,
     toggleTarget(id) { targetId = targetId === id ? null : id; saveWps(); renderWps(); renderTarget(); },
@@ -487,9 +522,10 @@
   }
   $('#menuBtn').addEventListener('click', () => { $('#bkMsg').textContent = ''; diag(); $('#dlgMenu').showModal(); });
   $('#menuClose').addEventListener('click', () => $('#dlgMenu').close());
-  /* Session-only keys are never written to a backup and never touched by a restore: a half-finished
-     protocol must not reappear on another phone, and a stale position must not pass as current. */
-  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix'];
+  /* Keys that stay on this phone: never written to a backup and never touched by a restore. A half-finished
+     protocol must not reappear on another phone, a stale position must not pass as current, and a backup handed
+     to someone else must not skip their advanced-procedures warning. */
+  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck'];
   const backedUp = k => k.startsWith('fk.') && !SESSION_ONLY.includes(k);
   const phoneKeys = () => { const ks = []; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (backedUp(k)) ks.push(k); } return ks; };
   const hasPatients = data => { try { const v = JSON.parse(data['fk.patients']); return Array.isArray(v) && v.length > 0; } catch { return false; } };
@@ -518,6 +554,7 @@
     paintRestore();
   }
   function cancelRestore() { pendingRestore = null; setRestoreSure(false); }
+  const tqArray = raw => { try { const v = JSON.parse(raw); return Array.isArray(v) ? v.filter(t => t && typeof t === 'object' && okId(t.id)) : []; } catch { return []; } };
   /* Returns 'ok', 'undone' (a write failed and every key was put back) or 'partial' (a put-back failed too). */
   function applyRestore(file) {
     const before = new Map(phoneKeys().map(k => [k, localStorage.getItem(k)]));
@@ -525,6 +562,13 @@
     try {
       before.forEach((_, k) => { if (!(k in file)) { touched.add(k); localStorage.removeItem(k); } });
       Object.entries(file).forEach(([k, v]) => { touched.add(k); localStorage.setItem(k, v); });
+      // A tourniquet timer running on this phone is never deleted: merge by id, this phone's entries win.
+      const mine = tqArray(before.get('fk.tq'));
+      if (mine.length) {
+        const ids = new Set(mine.map(t => t.id));
+        touched.add('fk.tq');
+        localStorage.setItem('fk.tq', JSON.stringify([...mine, ...tqArray(file['fk.tq']).filter(t => !ids.has(t.id))]));
+      }
       return 'ok';
     } catch {
       let clean = true;
@@ -549,7 +593,7 @@
     const when = new Date(b.saved);
     pendingRestore = file;
     msg.textContent = '';
-    $('#bkAsk').textContent = `Restore the backup${isNaN(when) ? '' : ' from ' + when.toLocaleString()}? It replaces the waypoints, tracks, profiles, patient logs and settings on this phone.`;
+    $('#bkAsk').textContent = `Restore the backup${isNaN(when) ? '' : ' from ' + when.toLocaleString()}? It replaces the waypoints, tracks, profiles, patient logs and settings on this phone. Running tourniquet timers on this phone are kept.`;
     paintRestore();
   });
   $('#bkGo').addEventListener('click', () => {
@@ -571,10 +615,24 @@
   $('#dlgMenu').addEventListener('close', cancelRestore);
 
   /* ---------- Updates: tell the user instead of making them relaunch twice ---------- */
+  /* The bar never covers or interrupts an emergency: it waits while a protocol, tool or report is open, or while
+     the CPR coach, a tourniquet timer or a step timer runs (its Reload would end the coach), then shows again. */
+  let updateReady = false;
+  const emergencyBusy = () => {
+    const F = window.FK, b = document.body.classList;
+    if (b.contains('playing') || b.contains('tooling')) return true;
+    if (!F) return false;
+    const st = F.protocol && F.protocol.timer && F.protocol.timer();
+    return !!((F.tools && F.tools.cpr && F.tools.cpr.running()) || (F.tools && F.tools.tq && F.tools.tq.active().length) || (st && !st.done));
+  };
+  function paintUpdate() { $('#updBar').hidden = !(updateReady && !emergencyBusy()); }
+  function updateAvailable() { updateReady = true; paintUpdate(); }
+  on('activity', paintUpdate);
+  on('route', paintUpdate);
   if ('serviceWorker' in navigator && window.isSecureContext) {
     let hadController = !!navigator.serviceWorker.controller;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (hadController) $('#updBar').hidden = false;
+      if (hadController) updateAvailable();
       hadController = true;
     });
   }
@@ -586,7 +644,7 @@
     await reg.update().catch(() => {});
     if (reg.installing || reg.waiting) { toast('Downloading the update. A Reload bar appears when it’s ready.'); return; }
     setTimeout(() => {
-      if (!$('#updBar').hidden) return;
+      if (updateReady) return;
       toast(reg.installing || reg.waiting ? 'Downloading the update. A Reload bar appears when it’s ready.' : 'You have the latest version.');
     }, 2500);
   });

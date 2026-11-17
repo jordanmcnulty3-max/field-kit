@@ -611,3 +611,119 @@ def test_active_strip_cpr_line_carries_the_wake_lock_warning(page, app_url):
     page.click('#toolClose')
     page.wait_for_function("location.hash === '#/emergency'")
     assert page.inner_text('#emActive button').strip() == 'CPR running, cycle 1, screen may sleep'
+
+
+# ---------- Final review fixes ----------
+
+SUSPENDED_AUDIO = """
+  (() => {
+    window.__resumes = 0; window.__allowResume = false;
+    const node = () => ({ connect(n) { return n; }, disconnect() {} });
+    window.AudioContext = class {
+      constructor() { this.state = 'suspended'; this._l = []; }
+      get currentTime() { return performance.now() / 1000; }
+      get destination() { return {}; }
+      addEventListener(t, f) { if (t === 'statechange') this._l.push(f); }
+      resume() {
+        window.__resumes++;
+        if (window.__allowResume && this.state !== 'running') { this.state = 'running'; this._l.forEach(f => f()); }
+        return Promise.resolve();
+      }
+      createGain() { return Object.assign(node(), { gain: { setValueAtTime() {}, exponentialRampToValueAtTime() {} } }); }
+      createOscillator() { return Object.assign(node(), { frequency: {}, start() {}, stop() {} }); }
+    };
+  })();"""
+
+
+def test_cpr_says_when_sound_is_off_and_a_tap_turns_it_back_on(page, app_url):
+    running_cpr(page, app_url, init=SUSPENDED_AUDIO)
+    page.clock.run_for(1500)
+    notice = page.locator('#cprSound')
+    assert notice.is_visible() and notice.inner_text() == 'Sound is off. Tap to turn it back on.'
+    assert notice.bounding_box()['height'] >= 56
+    assert page.evaluate('window.__resumes') >= 2   # it keeps asking the audio to resume on its own
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert page.inner_text('#emActive [data-tool="cpr"]').strip().endswith(', no sound')
+    reopen_cpr(page)
+    page.evaluate('window.__allowResume = true')   # a tap is a user gesture: now it may resume
+    page.click('#cprSound')
+    page.clock.run_for(100)
+    assert page.locator('#cprSound').is_hidden()
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert 'no sound' not in page.inner_text('#emActive [data-tool="cpr"]')
+
+
+def test_cpr_resumes_sound_when_the_page_becomes_visible(page, app_url):
+    running_cpr(page, app_url, init=SUSPENDED_AUDIO)
+    page.evaluate('window.__allowResume = true; window.__resumes = 0')
+    page.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+    assert page.evaluate('window.__resumes') >= 1
+    page.clock.run_for(100)
+    assert page.locator('#cprSound').is_hidden()
+
+
+def test_cpr_sets_playback_audio_session_where_it_exists_and_hint_mentions_silent_switch(page, app_url):
+    running_cpr(page, app_url, init="Object.defineProperty(navigator, 'audioSession', { configurable: true, value: { type: 'auto' } });")
+    assert page.evaluate('navigator.audioSession.type') == 'playback'
+    assert 'On an iPhone, the ring/silent switch must be off silent.' in page.inner_text('#toolBody .hint')
+
+
+def test_cpr_starts_without_audio_session(page, app_url):
+    running_cpr(page, app_url)
+    assert page.evaluate("'audioSession' in navigator") is False
+    assert page.evaluate('FK.tools.cpr.running()') is True
+
+
+def test_cpr_uses_webkit_audio_context_when_it_is_the_only_one(page, app_url):
+    running_cpr(page, app_url, init="window.__wk = 0; window.webkitAudioContext = class extends AudioContext { constructor() { super(); window.__wk++; } }; delete window.AudioContext;")
+    assert page.evaluate('window.__wk') == 1
+
+
+def test_tourniquet_clear_and_confirm_buttons_are_at_least_56px(page, app_url):
+    boot(page, app_url, storage={'tq': [{'id': 'a', 'limb': 'Left arm', 'start': T0 - 1000}]}, hash_='#/emergency/tool/tq')
+    for sel in ('clear', 'confirm'):
+        if sel == 'confirm':
+            page.click('#tqList [data-act="clear"]')
+        box = page.locator(f'#tqList [data-act="{sel}"]').bounding_box()
+        assert box['height'] >= 56 and box['width'] >= 56, (sel, box)
+
+
+def test_selecting_the_open_tool_again_keeps_its_state(page, app_url):
+    boot(page, app_url, clock=False)
+    page.evaluate("FK.tools.start('burn')")
+    page.wait_for_function("location.hash === '#/emergency/tool/burn'")
+    page.click('#burnSvg [data-r="chest"][role="button"]')
+    assert page.inner_text('#burnTotal') == '9%'
+    page.evaluate("document.querySelector('#toolBody').dataset.mark = 'same'")
+    page.evaluate("FK.tools.start('burn')")
+    assert page.inner_text('#burnTotal') == '9%'
+    page.click('#toolSearch')   # and picking it from search over itself
+    page.fill('#searchInput', 'burn area')
+    page.click('#searchBody .sr-item[data-key="t:burn"]')
+    page.wait_for_selector('#searchPane', state='hidden')
+    assert page.inner_text('#burnTotal') == '9%'
+    assert page.locator('#burnSvg [data-r="chest"].on').count() >= 1
+    page.click('#toolClose')   # close still lands where the tool was opened from, in one press
+    page.wait_for_function("location.hash === '#/emergency'")
+    assert not tool_open(page)
+
+
+def test_rate_count_survives_selecting_rate_again(page, app_url):
+    boot(page, app_url, clock=False)
+    page.evaluate("FK.tools.start('rate')")
+    page.wait_for_function("location.hash === '#/emergency/tool/rate'")
+    page.click('#rateTap'); page.click('#rateTap')
+    page.evaluate("FK.tools.start('rate')")
+    assert page.inner_text('#rateCount') == '2 taps'
+
+
+def test_focus_returns_to_the_tool_button_after_close(page, app_url):
+    boot(page, app_url, clock=False)
+    page.click('#emCats summary[data-cat="tools"]')
+    page.click('#emCats [data-tool="rate"]')
+    page.wait_for_function("location.hash === '#/emergency/tool/rate'")
+    page.click('#toolClose')
+    page.wait_for_function("location.hash === '#/emergency'")
+    page.wait_for_function("document.activeElement && document.activeElement.dataset.tool === 'rate'")

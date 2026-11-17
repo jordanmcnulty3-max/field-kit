@@ -36,34 +36,75 @@
     FK.emit('search', { open: on });
   }
 
+  /* ---------- History index: every entry the app is on carries its position in history.state[IDX].
+     A push is one more than the entry it was pushed from, a replace keeps the number, and a reload keeps
+     the entry's state, so the difference between two numbers is always the distance between their entries.
+     Fields other modules keep in history.state survive: the router never writes null over them. ---------- */
+  const IDX = 'fkIdx';
+  let index = 0;
+  const stateIndex = () => (history.state && Number.isInteger(history.state[IDX])) ? history.state[IDX] : null;
+  const withIndex = (st, i) => ({ ...(st && typeof st === 'object' ? st : {}), [IDX]: i });
+  const push = hash => { index += 1; history.pushState(withIndex(null, index), '', hash); };
+  const replace = hash => history.replaceState(withIndex(history.state, index), '', hash);
+  /* Back/Forward land on an entry with its number; an edited address or a script-pushed entry has none and
+     was added after the entry the app was on. */
+  function readIndex() {
+    const i = stateIndex();
+    if (i === null) { index += 1; history.replaceState(withIndex(history.state, index), '', location.href); }
+    else index = i;
+  }
+
   /* Browser-driven change (Back/Forward, edited address). Fix up a bad address without a new entry. */
+  let afterPop = [];
   function onNavigate() {
-    if (isSearchHash(location.hash)) { if (route) setSearching(true); return; }
-    setSearching(false);
-    if (route && location.hash === hashOf(route)) return;
-    const r = apply(parse(location.hash));
-    if (location.hash !== hashOf(r)) history.replaceState(null, '', hashOf(r));
+    const was = index;
+    readIndex();
+    const waiting = afterPop; afterPop = [];
+    try {
+      if (isSearchHash(location.hash)) { if (route) setSearching(true); return; }
+      setSearching(false);
+      if (route && location.hash === hashOf(route)) {
+        if (index !== was) FK.emit('history', { index });   // same screen, another entry: screens that track entries resync
+        return;
+      }
+      const r = apply(parse(location.hash));
+      if (location.hash !== hashOf(r)) replace(hashOf(r));
+    } finally { waiting.forEach(fn => { try { fn(); } catch (e) { console.error(e); } }); }
   }
 
   function go(path, opts) {
     if (isSearchHash('#' + path)) {
-      if (!searching) { history.pushState(null, '', '#/search'); setSearching(true); }
+      if (!searching) { push('#/search'); setSearching(true); }
       return;
     }
     setSearching(false);   // any other destination closes the search overlay first
     const r = parse('#' + path);
     const full = r.tab === 'tactical' && !r.parts.length ? { tab: 'tactical', parts: [FK.view()] } : r;
     if (location.hash === hashOf(full) && route) return;
-    history[opts && opts.replace ? 'replaceState' : 'pushState'](null, '', hashOf(full));
+    if (opts && opts.replace) replace(hashOf(full)); else push(hashOf(full));
     apply(full);
   }
 
-  FK.route = { parse, go, current: () => route || parse(location.hash), isSearch: () => searching,
-    /* Close the overlay by replacing '#/search' with the underlying screen's address. The screen underneath is already showing, so nothing is re-applied. */
-    closeSearch() { if (searching && route) { history.replaceState(history.state, '', hashOf(route)); setSearching(false); } } };
+  /* Close the search overlay and step back off its entry, so history is exactly as it was before search opened;
+     then(), if given, runs once the screen underneath is current again (or after a short wait if Back does nothing). */
+  function closeSearch(then) {
+    const done = typeof then === 'function' ? then : () => {};
+    if (!searching || !route || !isSearchHash(location.hash)) { setSearching(false); done(); return; }
+    setSearching(false);
+    let ran = false;
+    const once = () => { if (!ran) { ran = true; done(); } };
+    afterPop.push(once);
+    history.back();
+    setTimeout(() => { afterPop = afterPop.filter(f => f !== once); once(); }, 500);
+  }
+
+  FK.route = { parse, go, closeSearch, current: () => route || parse(location.hash), isSearch: () => searching,
+    index: () => index };   // this entry's position: leave a screen with history.go(openedAt - FK.route.index())
   addEventListener('popstate', onNavigate);
   addEventListener('hashchange', onNavigate);
   // First route replaces the entry, so opening the app adds no history. A reload on '#/search' lands on the tab underneath.
+  // A reload keeps the entry's number and any other state stored on it.
+  index = stateIndex() ?? 0;
   const first = apply(isSearchHash(location.hash) ? { tab: storedTab(), parts: [] } : parse(location.hash));
-  history.replaceState(null, '', hashOf(first));
+  replace(hashOf(first));
 })();

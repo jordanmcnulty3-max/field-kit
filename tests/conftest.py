@@ -76,7 +76,7 @@ def inject_protocols(page, fixtures, only=False):
           configurable: true,
           get() {{ return val; }},
           set(v) {{
-            const ids = new Set(extra.map(p => p.id));
+            const ids = new Set(extra.map(p => p && p.id));
             v.protocols = (ONLY ? [] : v.protocols.filter(p => !ids.has(p.id))).concat(extra);
             val = v;
           }}

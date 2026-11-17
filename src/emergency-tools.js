@@ -13,7 +13,7 @@
 
   /* ---------- Registry. A tool is { label, render(el, opts), stop() }; Task 6 adds rate and burn through register(). ---------- */
   const tools = Object.create(null);
-  let openName = null, pushed = false;
+  let openName = null;
   const cpr = { mode: 'adult', compressionOnly: false, running: false, t0: 0, next: 0, iv: null, lastBeat: 0, lastPhase: 'compress', swapAck: 0, swapsSeen: 0, armedAt: null, from: null, bus: null, nodes: [] };
 
   /* ---------- Screen wake lock (own lock; held while a tool is open or the CPR coach runs) ---------- */
@@ -32,13 +32,25 @@
     finally { lockPending = false; cprPaint(); if (cpr.running) paintStrip(); }
   }
   function wakeOff() { if (lock) { const l = lock; lock = null; l.release().catch(() => {}); } }
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) wakeOn(); sync(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) { wakeOn(); checkSound(true); } sync(); });
 
-  /* ---------- Open / close ---------- */
+  /* ---------- Open / close. Like the player, the overlay remembers the history entry it was opened from
+     (history.state.tool = { from }, from = FK.route.index() of that entry, or null when nothing in the app is before it)
+     and closes by the difference, so duplicated entries and reloads cannot make Close land in the wrong place. ---------- */
+  let toolFrom = null, startFrom, opener = null, closing = false, closeT = null;
+  const CLOSE_FALLBACK_MS = 500;
+  const okFrom = (v, idx) => v === null || (Number.isInteger(v) && v < idx);
+  function stampTool() {
+    const idx = FK.route.index(), own = history.state && history.state.tool;
+    if (startFrom !== undefined) { toolFrom = okFrom(startFrom, idx) ? startFrom : null; startFrom = undefined; }
+    else if (own && typeof own === 'object' && okFrom(own.from, idx)) toolFrom = own.from;
+    else if (!openName) toolFrom = null;   // typed or reloaded address with no record: nothing to go back to
+    if (!own || own.from !== toolFrom) history.replaceState({ ...(history.state && typeof history.state === 'object' ? history.state : {}), tool: { from: toolFrom } }, '', location.href);
+  }
   function show(name, opts) {
     const t = tools[name];
     if (openName && openName !== name) tools[openName].stop();
-    else if (openName === name) t.stop();
+    else if (!openName) opener = FK.opener(document.activeElement);
     openName = name;
     titleEl.textContent = t.label;
     body.innerHTML = '';
@@ -50,16 +62,19 @@
     titleEl.focus({ preventScroll: true });
     wakeOn();
     sync();
+    FK.emit('activity');
   }
   function hide() {
     if (!openName) return;
     const t = tools[openName];
-    openName = null; pushed = false;
+    openName = null; toolFrom = null; closing = false; clearTimeout(closeT);
     try { t.stop(); } finally {
       if (!cpr.running) wakeOff();
       pane.hidden = true; body.innerHTML = '';
       document.body.classList.remove('tooling');
       sync();
+      FK.emit('activity');
+      FK.refocus(opener); opener = null;
     }
   }
   const segOf = name => tools[name].segment || 'tool';   // tools defined directly (tq, cpr) have no segment field
@@ -69,33 +84,44 @@
   function start(name, opts) {
     if (typeof name !== 'string' || !NAME.test(name) || !Object.hasOwn(tools, name)) return false;
     const { replace, ...toolArgs } = opts || {};
-    toolOpts[name] = toolArgs;
     const r = FK.route.current();
     const inTool = r.tab === SECTION && SEGMENTS.includes(r.parts[0]);
-    if (!inTool) pushed = true;
+    const searching = FK.route.isSearch && FK.route.isSearch();
+    if (!inTool) startFrom = replace && searching ? FK.route.index() - 1 : replace ? null : FK.route.index();   // a search entry is replaced: its screen underneath is the one before it
+    toolOpts[name] = toolArgs;
     FK.route.go('/' + SECTION + '/' + segOf(name) + '/' + name, inTool || replace ? { replace: true } : undefined);
     delete toolOpts[name];   // the route handler took them if it ran; if the address was unchanged they must not linger
+    startFrom = undefined;
     return true;
   }
-  /* Close button: step back to wherever the tool was opened from. A tool reached by a typed or reloaded address has nothing to go back to. */
+  /* Close button: back to the entry the tool was opened from; with nothing to go back to, replace this entry with Emergency home. */
+  function goHome() { FK.route.go('/' + SECTION, { replace: true }); }
   function close() {
-    if (!openName) return;
-    if (pushed) history.back();
-    else FK.route.go('/' + SECTION, { replace: true });
+    if (!openName || closing) return;
+    const idx = FK.route.index();
+    if (toolFrom === null || toolFrom >= idx) { goHome(); return; }
+    closing = true;
+    clearTimeout(closeT);
+    closeT = setTimeout(() => { if (closing && openName) { closing = false; goHome(); } }, CLOSE_FALLBACK_MS);   // history did not move
+    history.go(toolFrom - idx);
   }
   function onRoute(r) {
+    closing = false;
     const isTool = r.tab === SECTION && SEGMENTS.includes(r.parts[0]);
     if (!isTool) { hide(); return; }
     const name = r.parts[1];
     if (!name || !Object.hasOwn(tools, name) || segOf(name) !== r.parts[0]) {   // unknown or not-yet-built tool: go home without adding history
       hide();
-      queueMicrotask(() => { if (FK.route.current() === r) FK.route.go('/' + SECTION, { replace: true }); });
+      queueMicrotask(() => { if (FK.route.current() === r) goHome(); });
       return;
     }
     const opts = toolOpts[name]; delete toolOpts[name];
-    if (openName === name && !opts) return;
+    stampTool();
+    if (openName === name) return;   // already open: keep its state (a burn selection, a rate count)
     show(name, opts);
   }
+  /* Same address, another entry (Back off a duplicate or a search entry): take that entry's record. */
+  FK.on('history', () => { if (openName) { closing = false; stampTool(); } });
 
   /* ---------- Overlay controls ---------- */
   function syncPin() {
@@ -132,7 +158,7 @@
     const s = Math.max(0, Math.floor(ms / 1000));
     return Math.floor(s / 3600) + ':' + String(Math.floor(s / 60) % 60).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
   };
-  const saveTq = () => { if (!FK.store.set('tq', tqs)) FK.toast(FK.FULL_MSG); };
+  const saveTq = () => { if (!FK.store.set('tq', tqs)) FK.toast(FK.FULL_MSG); FK.emit('activity'); };
 
   function tqRows() {
     return tqs.map(t => {
@@ -148,19 +174,28 @@
     if (list && openName === 'tq') list.innerHTML = tqRows();
     paintStrip();
   }
+  const stepTimer = () => FK.protocol && FK.protocol.timer ? FK.protocol.timer() : null;
+  const mmss = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  const stepLeft = t => t.done ? 'Done' : mmss(t.end - Date.now());
+  /* Active strip on Emergency home: tourniquet timers, a running protocol step timer, the CPR coach. */
   function paintStrip() {
     if (!strip) return;
     const row = (label, time) => '<button type="button" class="em-btn em-active" data-tool="' + time.tool + '"><span>' + label + '</span>' + time.html + '</button>';
+    const st = stepTimer();
     strip.innerHTML = tqs.map(t => row('TQ ' + esc(t.limb.toLowerCase()), { tool: 'tq', html: '<b data-t="' + t.start + '">' + hms(Date.now() - t.start) + '</b>' })).join('') +
-      (cpr.running ? row('CPR running, cycle ' + cprCycle() + (wakeFailed ? ', screen may sleep' : ''), { tool: 'cpr', html: '' }) : '');
+      (st ? '<button type="button" class="em-btn em-active" data-resume="' + esc(st.id) + '" data-step="' + esc(st.step) + '"><span>' + esc(st.title + ': ' + st.label) + '</span>' +
+        '<b data-end="' + st.end + '"' + (st.done ? ' data-done=""' : '') + '>' + stepLeft(st) + '</b></button>' : '') +
+      (cpr.running ? row('CPR running, cycle ' + cprCycle() + (wakeFailed ? ', screen may sleep' : '') + (soundOff() ? ', no sound' : ''), { tool: 'cpr', html: '' }) : '');
   }
   /* Per-second update touches only the time text, so a focused button or open select is never rebuilt. */
   function tickTq() {
     document.querySelectorAll('#emActive b[data-t], #tqList b[data-t]').forEach(b => { b.textContent = hms(Date.now() - Number(b.dataset.t)); });
+    document.querySelectorAll('#emActive b[data-end]:not([data-done])').forEach(b => { b.textContent = mmss(Number(b.dataset.end) - Date.now()); });
   }
   /* Run the per-second update only while a timer is on screen, the tab is showing and the page is visible (battery). */
   function sync() {
-    const want = tqs.length && !document.hidden && FK.tab() === SECTION;
+    const st = stepTimer();
+    const want = (tqs.length || (st && !st.done)) && !document.hidden && FK.tab() === SECTION;
     if (want && !tqInt) { tickTq(); tqInt = setInterval(tickTq, 1000); }
     if (!want && tqInt) { clearInterval(tqInt); tqInt = null; }
   }
@@ -279,6 +314,7 @@
     q('#cprOnly').setAttribute('aria-pressed', String(cpr.compressionOnly));
     q('#cprSwap').hidden = !(s && s.swaps > cpr.swapAck);
     q('#cprWake').hidden = !(cpr.running && wakeFailed);
+    q('#cprSound').hidden = !soundOff();
     q('#cprSteps').hidden = !(FK.protocol && FK.protocol.get && FK.protocol.get('cpr-' + cpr.mode));
     return s;
   }
@@ -289,19 +325,39 @@
       click(ms - e, cpr.next % cfg.compressions === 0);
       cpr.next++;
     }
+    checkSound();
     const s = cprPaint() || cprState(e, cfg);
     if (s.beats > cpr.lastBeat) { cpr.lastBeat = s.beats; if (s.phase === 'compress') buzz(25); }
     if (s.phase !== cpr.lastPhase) { cpr.lastPhase = s.phase; announce(s.phase === 'breaths' ? plural(cfg.breaths, 'breath') : 'Compressions'); buzz([120, 80, 120]); }
     if (s.swaps > cpr.swapsSeen) { cpr.swapsSeen = s.swaps; announce('Swap rescuers now'); click(0, true); buzz([300, 150, 300]); }
     if (s.cycle !== stripCycle) { stripCycle = s.cycle; paintStrip(); }
   }
+  /* Sound: a phone call, an app switch or a screen lock can suspend the audio context. Ask it to resume, and while it
+     is not running say so on screen (iPhone also mutes it with the ring/silent switch). */
+  let resumedAt = -Infinity, wasSoundOff = false;
+  const soundOff = () => !!(cpr.running && ac && ac.state !== 'running');
+  function resumeAudio() {
+    try { const r = ac && ac.resume ? ac.resume() : null; if (r && typeof r.then === 'function') r.then(onSoundChange, () => {}); } catch { /* optional */ }
+  }
+  function checkSound(now) {
+    if (soundOff() && (now === true || performance.now() - resumedAt >= 1000)) { resumedAt = performance.now(); resumeAudio(); }
+    onSoundChange();
+  }
+  function onSoundChange() {
+    const off = soundOff();
+    if (off === wasSoundOff) return;
+    wasSoundOff = off;
+    cprPaint(); paintStrip();
+  }
   const cprDisarm = () => { clearTimeout(armT); cpr.armedAt = null; };
   function cprStart() {
     cprDisarm();
     try {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (AC) { ac = ac || new AC(); if (ac.resume) ac.resume().catch(() => {}); }
+      const AC = window.AudioContext || window.webkitAudioContext;   // older iPhones have only the prefixed one
+      if (AC && !ac) { ac = new AC(); if (ac.addEventListener) ac.addEventListener('statechange', onSoundChange); }
+      if (ac) resumeAudio();
     } catch { ac = null; }
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch { /* iPhone: play even with the silent switch on, where supported */ }
     silence();
     try { if (ac) { cpr.bus = ac.createGain(); cpr.bus.connect(ac.destination); } } catch { cpr.bus = null; }
     Object.assign(cpr, { running: true, t0: performance.now(), next: 0, lastBeat: 0, lastPhase: 'compress', swapAck: 0, swapsSeen: 0 });
@@ -311,6 +367,7 @@
     cprTick();
     cpr.iv = setInterval(cprTick, 50);
     paintStrip();
+    FK.emit('activity');
     if (typeof FK.log === 'function') FK.log('CPR started (' + cpr.mode + ')');
   }
   function cprStop() {
@@ -318,7 +375,9 @@
     clearInterval(cpr.iv); cprDisarm(); silence();
     cpr.running = false;
     if (!openName) wakeOff();
+    wasSoundOff = false;
     paintStrip(); cprPaint();
+    FK.emit('activity');
     if (typeof FK.log === 'function') FK.log('CPR stopped after ' + plural(done, 'cycle'));
   }
   /* Stop takes two taps: a stray or bounced tap must never end the metronome. */
@@ -344,11 +403,12 @@
         CPR_MODES.map(([id, label]) => '<button type="button" data-mode="' + id + '" aria-pressed="false">' + label + '</button>').join('') + '</div>' +
         '<button type="button" class="cpr-opt" id="cprOnly" aria-pressed="false">Compression only (no breaths)</button>' +
         '<p class="cpr-swap cpr-wake" id="cprWake" hidden>This phone may turn its screen off and stop the clicks. Keep the screen awake.</p>' +
+        '<button type="button" class="cpr-swap cpr-wake cpr-sound" id="cprSound" hidden>Sound is off. Tap to turn it back on.</button>' +
         '<div class="cpr-face" id="cprFace" aria-hidden="true"><div class="cpr-count" id="cprCount">0</div><div class="cpr-cycle" id="cprCycle"></div></div>' +
         '<p class="cpr-swap" id="cprSwap" hidden><span>Swap rescuers now</span><button type="button" class="btn" id="cprSwapped">Swapped</button></p>' +
         '<button type="button" class="btn pp-wide" id="cprBtn">Start</button>' +
         '<button type="button" class="btn ghost pp-wide" id="cprSteps" hidden>Open steps</button>' +
-        '<p class="hint">Clicks at ' + CPR_RATE + ' per minute. Turn your volume up. If the casualty is not breathing, call 911 if you have signal. If not, send someone for help.</p>' +
+        '<p class="hint">Clicks at ' + CPR_RATE + ' per minute. Turn your volume up. On an iPhone, the ring/silent switch must be off silent. If the casualty is not breathing, call 911 if you have signal. If not, send someone for help.</p>' +
         '<div class="sr-live" id="cprLive" role="status" aria-live="polite"></div>';
       const q = s => el.querySelector(s);
       q('#cprBtn').addEventListener('click', () => {
@@ -362,6 +422,7 @@
       });
       q('#cprOnly').addEventListener('click', () => { if (!cpr.running) { cpr.compressionOnly = !cpr.compressionOnly; cprPaint(); } });
       q('#cprSwapped').addEventListener('click', () => { cpr.swapAck = cpr.swapsSeen; cprPaint(); });
+      q('#cprSound').addEventListener('click', () => { resumedAt = performance.now(); resumeAudio(); });
       q('#cprSteps').addEventListener('click', () => {
         const id = 'cpr-' + cpr.mode;
         if (cpr.from === id) close();   // came here from these steps: Back returns to the same step
@@ -569,5 +630,6 @@
 
   /* ---------- Start ---------- */
   FK.on('route', r => { onRoute(r); sync(); });
+  FK.on('activity', () => { paintStrip(); sync(); });   // a step timer started, finished or stopped
   queueMicrotask(() => { onRoute(FK.route.current()); paintStrip(); sync(); });   // after every module has loaded and registered its tools
 })();

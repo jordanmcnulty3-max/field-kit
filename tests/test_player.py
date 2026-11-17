@@ -1,5 +1,6 @@
 from playwright.sync_api import expect
 import json
+import re
 
 from .conftest import inject_protocols
 
@@ -283,10 +284,16 @@ def open_from_home(page, app_url, path='branchy'):
     page.evaluate(f"FK.protocol.open('{path}')")
 
 
+def go_back_settled(page):
+    """Android Back, then wait until the address has changed (instead of a fixed wait)."""
+    before = page.url
+    page.go_back()
+    page.wait_for_function('h => location.href !== h', arg=before, timeout=5000)
+
+
 def assert_back_leaves_for_good(page):
     """After leaving, one Android Back must not land in a protocol."""
-    page.go_back()
-    page.wait_for_timeout(150)
+    go_back_settled(page)
     assert not page.locator('#player').is_visible()
 
 
@@ -297,8 +304,7 @@ def test_header_back_then_android_back_does_not_reenter(page, app_url):
     wait_hash(page, '#/emergency')
     assert not page.locator('#player').is_visible()
     assert page.evaluate('history.length') >= 2
-    page.go_back()
-    page.wait_for_timeout(150)
+    go_back_settled(page)
     assert '/branchy' not in hash_of(page)
     assert not page.locator('#player').is_visible()
 
@@ -309,8 +315,7 @@ def test_android_back_after_done_does_not_reenter(page, app_url):
     page.evaluate("FK.protocol.open('drafty')")
     page.click('#player [data-act="done"]')
     wait_hash(page, '#/emergency')
-    page.go_back()
-    page.wait_for_timeout(150)
+    go_back_settled(page)
     assert 'drafty' not in hash_of(page)
     assert not page.locator('#player').is_visible()
 
@@ -322,8 +327,7 @@ def test_android_back_after_end_protocol_does_not_reenter(page, app_url):
     page.click('#player [data-act="end"]')
     wait_hash(page, '#/emergency')
     assert page.evaluate('FK.protocol.active()') is None
-    page.go_back()
-    page.wait_for_timeout(150)
+    go_back_settled(page)
     assert 'branchy' not in hash_of(page)
 
 
@@ -343,8 +347,7 @@ def test_ui_back_then_android_back_does_not_return_to_left_step(page, app_url):
     assert action(page) == 'Is it yes?'
     page.go_back()                                 # Android back -> first step, not y
     expect(page.locator('#player .pp-action')).to_have_text('Step A action')
-    page.go_back()
-    page.wait_for_timeout(150)
+    go_back_settled(page)
     assert not page.locator('#player').is_visible()
 
 
@@ -352,8 +355,7 @@ def test_first_step_back_leaves_player_cleanly(page, app_url):
     open_from_home(page, app_url, 'drafty')
     page.click('#player [data-act="back"]')
     wait_hash(page, '#/emergency')
-    page.go_back()
-    page.wait_for_timeout(150)
+    go_back_settled(page)
     assert 'drafty' not in hash_of(page)
 
 
@@ -364,8 +366,7 @@ def test_deep_link_then_header_back_then_android_back_does_not_reenter(page, app
     page.click('#player [data-act="home"]')
     wait_hash(page, '#/emergency')
     assert not page.locator('#player').is_visible()
-    page.go_back()
-    page.wait_for_timeout(150)
+    go_back_settled(page)
     assert 'branchy' not in hash_of(page)
     assert not page.locator('#player').is_visible()
 
@@ -441,9 +442,11 @@ def test_double_tap_on_header_back_does_not_overshoot(page, app_url):
     page.evaluate("FK.protocol.open('branchy')")
     page.click('#player [data-act="next"]')
     # history.go is asynchronous; widen the window in which the player is still showing
-    page.evaluate("const g = history.go.bind(history); history.go = n => setTimeout(() => g(n), 150)")
+    page.evaluate("window.__gos = 0; const g = history.go.bind(history); history.go = n => { window.__gos++; setTimeout(() => g(n), 150); }; 0")
     page.evaluate("const b = document.querySelector('#player [data-act=\"home\"]'); b.click(); setTimeout(() => b.click(), 0)")
-    page.wait_for_timeout(500)
+    wait_hash(page, '#/emergency')
+    expect(page.locator('#player')).to_be_hidden()
+    assert page.evaluate('window.__gos') == 1   # the second tap did not unwind again
     assert page.url.endswith('#/emergency')
     assert page.locator('#tab-emergency').is_visible()
 
@@ -452,9 +455,10 @@ def test_bad_deep_link_repaired_at_boot_is_a_deep_link_entry(page, app_url):
     page.goto(app_url + '#/emergency/bleeding/zzz')
     assert page.url.endswith('#/emergency/bleeding')
     assert action(page) == page.evaluate("FK.protocol.get('bleeding').steps[0].text")   # repaired to the first step
+    page.evaluate("window.__gos = 0; const g = history.go.bind(history); history.go = n => { window.__gos++; g(n); }; 0")
     page.click('#player [data-act="home"]')
     wait_hash(page, '#/emergency')
-    page.wait_for_timeout(200)
+    assert page.evaluate('window.__gos') == 0   # replaced in place: nothing before it to jump to
     assert page.url.startswith(app_url)
     assert not page.locator('#player').is_visible()
 
@@ -659,3 +663,250 @@ def test_format_detection_meta_and_no_tel_links_anywhere(page, app_url):
     assert page.evaluate("document.querySelectorAll('[href^=\"tel:\" i]').length") == 0
     page.goto(app_url + '#/emergency/choking')
     assert page.evaluate("document.querySelectorAll('[href^=\"tel:\" i]').length") == 0
+
+
+# ---------- Final review fixes ----------
+
+T0 = 1_800_000_000_000
+FULL_STORAGE = "Storage.prototype.setItem = function () { throw new DOMException('full', 'QuotaExceededError'); }; 0"
+TIMED = {
+    'id': 'timed', 'title': 'Timed test', 'category': 'injury', 'reviewed': '2026-11-16', 'sources': [{'name': 'Fixture'}],
+    'steps': [
+        {'id': 'a', 'text': 'Cool the burn', 'timer': {'seconds': 60, 'label': 'Cooling'}},
+        {'id': 'b', 'text': 'Count the rate', 'tool': 'rate'},
+        {'id': 'c', 'text': 'Cover it', 'log': 'Burn covered'},
+        {'id': 'd', 'text': 'Last step', 'end': True},
+    ],
+    'notes': ['First <b>note</b>', 'Second note'],
+}
+OTHER = {'id': 'other', 'title': 'Other test', 'category': 'injury', 'reviewed': '2026-11-16', 'sources': [{'name': 'Fixture'}],
+         'steps': [{'id': 'a', 'text': 'Other one'}, {'id': 'b', 'text': 'Other two'}]}
+
+
+def boot_timed(page, app_url, hash_='#/emergency', clock=True):
+    if clock:
+        page.clock.install(time=T0 // 1000)
+    inject_protocols(page, FIXTURES + [TIMED, OTHER])
+    page.goto(app_url + hash_)
+    page.wait_for_function('window.FK && FK.protocol && FK.tools && FK.tools.cpr')
+
+
+def timer_text(page):
+    return page.locator('#player .pp-timerval').inner_text()
+
+
+def start_cooling(page):
+    page.evaluate("FK.protocol.open('timed')")
+    expect(page.locator('#player .pp-action')).to_have_text('Cool the burn')
+    page.click('#player [data-act="timer"]')
+    expect(page.locator('#player .pp-timerbar')).to_be_visible()
+
+
+# Important 2: the acknowledgement works with storage full
+
+def test_advanced_acknowledgement_opens_procedures_when_storage_is_full(page, app_url):
+    inject(page)
+    page.goto(app_url + '#/emergency/adv')
+    expect(page.locator('#player [data-act="ack"]')).to_be_visible()
+    page.evaluate(FULL_STORAGE)
+    page.click('text=I understand, show procedures')
+    expect(page.locator('#player [data-act="start"]')).to_be_visible()
+    assert 'Ind one' in page.locator('#player').inner_text()
+    page.click('#player [data-act="start"]')
+    assert action(page) == 'Adv step one'
+    page.go_back()   # and it stays acknowledged for the session
+    expect(page.locator('#player [data-act="ack"]')).to_have_count(0)
+
+
+# Important 3: the step timer belongs to the protocol run
+
+def test_step_timer_survives_opening_and_closing_a_tool(page, app_url):
+    boot_timed(page, app_url)
+    start_cooling(page)
+    page.click('#player [data-act="next"]')
+    expect(page.locator('#player .pp-action')).to_have_text('Count the rate')
+    assert timer_text(page) == '1:00'
+    page.click('#player [data-act="tool"]')
+    expect(page).to_have_url(re.compile(r'#/emergency/tool/rate$'))
+    page.clock.run_for(10_000)
+    page.click('#toolClose')
+    expect(page).to_have_url(re.compile(r'#/emergency/timed/b$'))
+    expect(page.locator('#player .pp-timerbar')).to_be_visible()
+    assert page.locator('#player .pp-timerlabel').inner_text() == 'Cooling'
+    assert timer_text(page) == '0:50'
+    page.clock.run_for(51_000)
+    assert timer_text(page) == 'Done'
+    assert 'Cooling finished' in page.inner_text('#ppLive')
+
+
+def test_step_timer_survives_search_and_next_then_back(page, app_url):
+    boot_timed(page, app_url)
+    start_cooling(page)
+    page.click('#player [data-act="search"]')
+    page.wait_for_selector('#searchPane', state='visible')
+    page.keyboard.press('Escape')
+    page.wait_for_selector('#searchPane', state='hidden')
+    page.click('#player [data-act="next"]')
+    page.clock.run_for(5_000)
+    page.click('#player [data-act="back"]')
+    expect(page.locator('#player .pp-action')).to_have_text('Cool the burn')
+    expect(page.locator('#player .pp-timerbar')).to_be_visible()
+    assert timer_text(page) == '0:55'
+
+
+def test_step_timer_survives_reload(page, app_url):
+    boot_timed(page, app_url)
+    start_cooling(page)
+    page.clock.run_for(20_000)
+    saved = page.evaluate("JSON.parse(localStorage.getItem('fk.proto.active'))")
+    assert saved['timer']['label'] == 'Cooling' and saved['timer']['step'] == 'a' and saved['timer']['done'] is False
+    page.reload()
+    page.wait_for_function('window.FK && FK.protocol')
+    expect(page.locator('#player .pp-timerbar')).to_be_visible()
+    assert timer_text(page) in ('0:40', '0:39')
+    page.clock.run_for(41_000)
+    assert timer_text(page) == 'Done'
+
+
+def test_step_timer_shows_in_home_strip_and_announces_there(page, app_url):
+    boot_timed(page, app_url)
+    start_cooling(page)
+    page.go_back()   # Android Back off the first step: home, the run is not ended
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    row = page.locator('#emActive [data-resume="timed"]')
+    expect(row).to_be_visible()
+    assert row.inner_text().replace('\n', ' ') == 'Timed test: Cooling 1:00'
+    assert row.bounding_box()['height'] >= 56
+    page.clock.run_for(12_000)
+    assert page.inner_text('#emActive [data-resume="timed"] b') == '0:48'
+    page.clock.run_for(49_000)
+    assert 'Timed test: Cooling finished' in page.inner_text('#toast')
+    assert page.get_attribute('#toast', 'role') == 'status'
+    row.click()   # back to the step that started it
+    expect(page).to_have_url(re.compile(r'#/emergency/timed(/a)?$'))
+    assert action(page) == 'Cool the burn'
+    assert timer_text(page) == 'Done'
+
+
+def test_step_timer_is_stopped_by_header_back_done_and_end(page, app_url):
+    boot_timed(page, app_url)
+    for how in ('home', 'end', 'done', 'other'):
+        start_cooling(page)
+        if how == 'home':
+            page.click('#player [data-act="home"]')
+        elif how == 'end':
+            page.click('#player [data-act="toggleAll"]')
+            page.click('#player [data-act="end"]')
+        elif how == 'done':
+            page.evaluate("FK.route.go('/emergency/timed/d')")
+            page.click('#player [data-act="done"]')
+        else:
+            page.go_back()
+            expect(page).to_have_url(re.compile(r'#/emergency$'))
+            page.evaluate("FK.protocol.open('other')")   # a different protocol ends the run's timer
+            expect(page.locator('#player .pp-action')).to_have_text('Other one')
+            assert page.evaluate('FK.protocol.timer()') is None, how
+            page.click('#player [data-act="home"]')
+        expect(page).to_have_url(re.compile(r'#/emergency$'))
+        assert page.evaluate('FK.protocol.timer()') is None, how
+        assert page.locator('#emActive [data-resume]').count() == 0, how
+        page.clock.run_for(70_000)
+        assert 'finished' not in page.inner_text('#toast'), how
+
+
+# Minor 4: one log entry per step per run, with a toast
+
+def test_step_log_written_once_per_run_with_a_toast(page, app_url):
+    boot_timed(page, app_url, clock=False)
+    page.evaluate("FK.protocol.open('timed', 'c')")
+    page.click('#player [data-act="next"]')
+    expect(page.locator('#toast')).to_have_text('Logged: Burn covered')
+    page.click('#player [data-act="back"]')
+    page.click('#player [data-act="next"]')
+    page.go_back()   # Android Back over the logged step, then NEXT again
+    expect(page.locator('#player .pp-action')).to_have_text('Cover it')
+    page.click('#player [data-act="next"]')
+    texts = page.evaluate('FK.patients.all()[0].entries.map(e => e.text)')
+    assert texts == ['Burn covered']
+    assert page.evaluate("JSON.parse(localStorage.getItem('fk.proto.active')).logged") == ['c']
+    page.reload()   # the run survives a reload, and so does what it logged
+    page.wait_for_function('window.FK && FK.protocol')
+    page.evaluate("FK.route.go('/emergency/timed/c')")
+    page.click('#player [data-act="next"]')
+    assert page.evaluate('FK.patients.all()[0].entries.length') == 1
+    page.click('#player [data-act="done"]')   # a new run may log again
+    page.evaluate("FK.protocol.open('timed', 'c')")
+    page.click('#player [data-act="next"]')
+    assert page.evaluate('FK.patients.all()[0].entries.map(e => e.text)') == ['Burn covered', 'Burn covered']
+
+
+def test_step_log_not_marked_when_the_log_write_fails(page, app_url):
+    boot_timed(page, app_url, clock=False)
+    page.evaluate("FK.protocol.open('timed', 'c')")
+    page.evaluate("window.__n = 0; FK.log = () => { window.__n++; return false; }; 0")
+    page.click('#player [data-act="next"]')
+    page.click('#player [data-act="back"]')
+    page.click('#player [data-act="next"]')
+    assert page.evaluate('window.__n') == 2   # not counted as logged, so it is tried again
+    assert 'Logged' not in page.inner_text('#toast')
+
+
+# Important 5: notes in the all-steps view
+
+def test_notes_shown_in_all_steps_view_escaped(page, app_url):
+    boot_timed(page, app_url, '#/emergency/timed/all', clock=False)
+    sec = page.locator('#player .pp-notes')
+    assert sec.locator('h3').inner_text() == 'Notes'
+    assert 'First <b>note</b>' in sec.inner_text() and 'Second note' in sec.inner_text()
+    assert sec.locator('b').count() == 0
+    page.goto(app_url + '#/emergency/branchy/all')   # no notes, no heading
+    assert page.locator('#player .pp-notes').count() == 0
+
+
+# Minor 10: tool button labels come from the tool registry
+
+def test_tool_button_label_is_the_registry_label(page, app_url):
+    page.goto(app_url + '#/emergency/bleeding/s5')
+    assert page.inner_text('#player [data-act="tool"]') == page.evaluate("FK.tools.label('tq')") == 'Tourniquet timers'
+
+
+# Minor 9: only well-formed protocols reach the player, home and search
+
+def test_malformed_protocols_are_skipped_everywhere(page, app_url):
+    bad = [None, {'id': 'nosteps', 'title': 'Zxqv no steps', 'category': 'injury'},
+           {'id': 'emptysteps', 'title': 'Zxqv empty steps', 'category': 'injury', 'steps': []},
+           {'id': 'nullstep', 'title': 'Zxqv null step', 'category': 'injury', 'steps': [None]},
+           {'id': '', 'title': 'Zxqv blank id', 'category': 'injury', 'steps': [{'id': 'a', 'text': 'x'}]}]
+    inject_protocols(page, FIXTURES + bad)
+    page.goto(app_url + '#/emergency/nosteps')
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    expect(page.locator('#player')).to_be_hidden()
+    assert page.locator('.tabbar').is_visible()
+    page.evaluate("location.hash = '#/emergency/emptysteps'")
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    expect(page.locator('#player')).to_be_hidden()
+    page.click('#emCats summary[data-cat="injury"]')
+    assert 'Zxqv' not in page.inner_text('#emHome')
+    assert page.locator('#emCats [data-open]').count() > 0   # the good ones still list
+    assert [r['key'] for r in page.evaluate("FK.search.query('zxqv')")] == []
+    assert page.evaluate("FK.protocol.get('nullstep')") is None
+    assert page.evaluate("FK.protocols().every(p => p && p.steps.length)") is True
+
+
+# Minor 2: focus goes back to the control that opened the screen
+
+def test_focus_returns_to_opener_after_header_back(page, app_url):
+    page.goto(app_url + '#/emergency')
+    page.click('#emLife [data-open="bleeding"]')
+    expect(page.locator('#player')).to_be_visible()
+    page.click('#player [data-act="home"]')
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    page.wait_for_function("document.activeElement && document.activeElement.dataset.open === 'bleeding'")
+
+
+def test_focus_goes_to_heading_when_opener_is_gone(page, app_url):
+    page.goto(app_url + '#/emergency/bleeding')   # deep link: nothing opened it
+    page.click('#player [data-act="home"]')
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    page.wait_for_function("document.activeElement && document.activeElement.id === 'title'")
+    assert page.inner_text('#title') == 'Emergency'

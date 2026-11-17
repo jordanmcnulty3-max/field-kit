@@ -34,13 +34,12 @@
 
   function build() {
     const out = [];
-    const protocols = (window.FK_DATA && Array.isArray(FK_DATA.protocols)) ? FK_DATA.protocols : [];
-    for (const p of protocols) {
-      if (!p || typeof p.id !== 'string' || typeof p.title !== 'string') continue;
+    for (const p of FK.protocols()) {   // well-formed protocols only (app.js)
       const adv = p.tier === 'advanced' || p.category === 'advanced';
       const f = [field(W.title, p.title)];
       if (Array.isArray(p.keywords)) f.push(field(W.keywords, p.keywords.join(' ')));
-      if (p.summary) f.push(field(W.summary, p.summary));
+      if (typeof p.summary === 'string' && p.summary) f.push(field(W.summary, p.summary));
+      if (Array.isArray(p.notes)) f.push(field(W.summary, p.notes.filter(n => typeof n === 'string').join(' ')));   // notes count as much as the summary
       for (const s of Array.isArray(p.steps) ? p.steps : []) {
         if (s && s.text) f.push(field(W.body, s.text, true));
         if (s && s.detail) f.push(field(W.body, Array.isArray(s.detail) ? s.detail.join(' ') : s.detail, true));
@@ -171,7 +170,7 @@
         break;
       }
       case 'a':
-        if (id === 'settings') { if (replace) FK.route.closeSearch(); $('menuBtn').click(); }
+        if (id === 'settings') { const open = () => $('menuBtn').click(); if (replace) FK.route.closeSearch(open); else open(); }
         else if (id === 'areas') { nav('/tactical/map'); whenMap(() => $('mSave').click()); }   // the Saved areas list is in the Save map dialog
         else if (id === 'waypoints') { nav('/tactical/position'); $('blkWaypoints').scrollIntoView({ block: 'start' }); }
         else nav('/tactical/' + id);
@@ -230,6 +229,7 @@
     BEHIND.forEach(s => document.querySelectorAll(s).forEach(n => { n.inert = false; }));
     const back = magnifier.offsetParent ? magnifier : (opener && opener.isConnected && opener.offsetParent ? opener : null);   // the header is hidden behind a protocol or tool
     if (back) back.focus({ preventScroll: true });
+    else FK.refocus(null);   // nothing to go back to: the screen heading
     opener = null;
   }
 

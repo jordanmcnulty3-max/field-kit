@@ -68,15 +68,17 @@ def backup_file(data, version='5'):
 
 # ---------- Backup ----------
 
-def test_backup_includes_pins_recent_patients_advAck(page, app_url, tmp_path):
+def test_backup_includes_pins_recent_patients_but_not_advAck(page, app_url, tmp_path):
     raw = {'fk.pins': json.dumps(['p:bleeding']), 'fk.recent': json.dumps(['p:cpr-adult']),
            'fk.patients': json.dumps([{'id': 'p1', 'name': 'Casualty 1', 'created': T0, 'entries': []}]),
            'fk.nineLine': json.dumps({'view': 'form', 'form': {}}), 'fk.tq': json.dumps([])}
     boot(page, app_url, raw)
     b = backup(page, tmp_path)
     assert b['app'] == 'Field Kit'
-    for k in ('fk.pins', 'fk.recent', 'fk.patients', 'fk.advAck', 'fk.nineLine', 'fk.tq'):
+    for k in ('fk.pins', 'fk.recent', 'fk.patients', 'fk.nineLine', 'fk.tq'):
         assert k in b['data'], k
+    assert 'fk.advAck' not in b['data']   # a backup handed to someone else must not skip their advanced warning
+    assert not {'fk.advAck', 'fk.proto.active', 'fk.lastFix'} & set(b['data'])   # the keys that stay on the phone
     assert json.loads(b['data']['fk.pins']) == ['p:bleeding']
     msg = page.inner_text('#bkMsg')
     assert 'This file includes patient logs. Keep it private.' in msg
@@ -294,3 +296,38 @@ def test_restore_is_not_overwritten_by_a_pending_mist_note(page, app_url, tmp_pa
           m.dispatchEvent(new Event('input', { bubbles: true })); document.getElementById('bkGo').click(); }""")
     page.wait_for_function('window.FK && FK.tools && FK.tools.cpr')
     assert json.loads(ls(page, 'patients')) == theirs
+
+
+def test_restore_ignores_advAck_in_the_file_and_keeps_the_phones(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false'})
+    page.evaluate("localStorage.removeItem('fk.advAck')")
+    pick(page, tmp_path, backup_file({'fk.advAck': 'true', 'fk.night': 'true'}))
+    restore_now(page)
+    assert ls(page, 'night') == 'true'
+    assert ls(page, 'advAck') is None   # this phone has not seen the warning, so it still shows
+    page.evaluate("localStorage.setItem('fk.advAck', 'true')")
+    pick(page, tmp_path, backup_file({'fk.night': 'false'}))
+    restore_now(page)
+    assert ls(page, 'advAck') == 'true'   # and a restore never takes this phone's own acknowledgement away
+
+
+def test_restore_keeps_tourniquet_timers_running_on_this_phone(page, app_url, tmp_path):
+    mine = [{'id': 'mine1', 'limb': 'Left leg', 'start': T0 - 60_000}, {'id': 'both', 'limb': 'Right arm', 'start': T0 - 30_000}]
+    boot(page, app_url, {'fk.tq': json.dumps(mine), 'fk.night': 'false'})
+    theirs = [{'id': 'both', 'limb': 'Other', 'start': 1}, {'id': 'file1', 'limb': 'Right leg', 'start': T0 - 90_000}]
+    pick(page, tmp_path, backup_file({'fk.tq': json.dumps(theirs), 'fk.night': 'true'}))
+    page.wait_for_selector('#bkConfirm:not([hidden])')
+    assert 'Running tourniquet timers on this phone are kept.' in page.inner_text('#bkAsk')
+    restore_now(page)
+    got = json.loads(ls(page, 'tq'))
+    assert got == mine + [theirs[1]]   # merged by id, this phone's entry wins
+    assert ls(page, 'night') == 'true'
+    assert sorted(t['id'] for t in page.evaluate('FK.tools.tq.active()')) == ['both', 'file1', 'mine1']
+
+
+def test_restore_of_a_file_without_tq_keeps_the_phones_timers(page, app_url, tmp_path):
+    mine = [{'id': 'mine1', 'limb': 'Left leg', 'start': T0 - 60_000}]
+    boot(page, app_url, {'fk.tq': json.dumps(mine)})
+    pick(page, tmp_path, backup_file({'fk.night': 'true'}))
+    restore_now(page)
+    assert json.loads(ls(page, 'tq')) == mine

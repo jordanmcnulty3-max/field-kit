@@ -27,13 +27,13 @@
     "chemical on skin",
     "pesticide"
   ],
-  "summary": "Poison swallowed, breathed in, on the skin or in the eyes: check breathing, rinse skin and eyes for 15 minutes, do not make them vomit, and call Poison Control if you have signal.",
+  "summary": "Poison swallowed, breathed in, on the skin or in the eyes: check breathing, rinse skin for at least 15 minutes, start rinsing an eye and use the Eye injury protocol, do not make them vomit, and call Poison Control if you have signal.",
   "steps": [
     {
       "id": "s1",
       "text": "Get them away from the poison only if you can do it without breathing fumes yourself (a quick reach into a tent or vehicle on a held breath). Tell others before you try.",
-      "detail": "Red Cross: remove the person from the source of the poison, if possible, without endangering yourself. MedlinePlus Poisoning first aid: call for emergency help and never attempt a rescue without notifying others first; if it is safe, rescue the person from the gas, fumes or smoke; open windows and doors; take several deep breaths of fresh air, then hold your breath as you go in, with a wet cloth over your nose and mouth; do not light a match or use a lighter, because some gases catch fire.\n\nThe app's rule (group judgement, see open questions): a quick reach into a tent, shelter or vehicle on a held breath is the most to attempt. Gas that collects in a pit, tank, well, cave or similar enclosed space can overcome a rescuer in a few breaths; do not go in, and wait for rescuers with breathing equipment.\n\nFumes from a stove, heater, lantern, generator or engine in a tent, shelter or vehicle: use the Carbon monoxide poisoning protocol.\n\nClues that someone may be poisoned (Red Cross, MedlinePlus): an open or spilled container, an unusual smell, burns around the mouth, chemical-smelling breath, several people ill at once, vomiting, trouble breathing.",
-      "warn": "Never go into an enclosed space full of gas, such as a pit, tank, well or cave."
+      "detail": "Red Cross: remove the person from the source of the poison, if possible, without endangering yourself. MedlinePlus Poisoning first aid: call for emergency help and never attempt a rescue without notifying others first; if it is safe, rescue the person from the gas, fumes or smoke; open windows and doors; take several deep breaths of fresh air, then hold your breath as you go in, with a wet cloth over your nose and mouth; do not light a match or use a lighter, because some gases catch fire.\n\nThe app's rule (group judgement, see open questions): a quick reach into a tent, shelter or vehicle on a held breath is the most to attempt. Gas that collects in a pit, tank, well, rock cave, mine or similar enclosed space can overcome a rescuer in a few breaths; do not go in, and wait for rescuers with breathing equipment.\n\nFumes from a stove, heater, lantern, generator or engine in a tent, shelter or vehicle: use the Carbon monoxide poisoning protocol.\n\nClues that someone may be poisoned (Red Cross, MedlinePlus): an open or spilled container, an unusual smell, burns around the mouth, chemical-smelling breath, several people ill at once, vomiting, trouble breathing.",
+      "warn": "Never go into an enclosed space full of gas, such as a pit, tank, well, rock cave or mine (snow shelters: use the Carbon monoxide poisoning protocol)."
     },
     {
       "id": "s2",
@@ -184,7 +184,7 @@
     "Do not give activated charcoal at home (poison.org).",
     "Do not try to neutralise a poison with lemon juice, vinegar or 'antidotes' (MedlinePlus).",
     "Do not give food or drink unless Poison Control advises it (Red Cross), and never to someone who is not fully awake (MedlinePlus).",
-    "Do not go into fumes, gas or smoke without making it safe; no matches or lighters near gas (MedlinePlus).",
+    "Never go into an enclosed space full of gas (pit, tank, well, rock cave or mine); at most a quick reach into a tent or vehicle on a held breath, after telling others (Red Cross; group judgement). No matches or lighters near gas (MedlinePlus).",
     "Do not wait for symptoms if you suspect poisoning (MedlinePlus)."
   ],
   "evacuate": [
@@ -195,7 +195,7 @@
     "With no signal (group judgement): evacuate anyone who swallowed a medicine overdose, a caustic or burning substance, fuel, a pesticide, a wild mushroom or plant, or anything unknown, and anyone who has any symptom."
   ],
   "notes": [
-    "Poisoning: rinse eye or skin 15 minutes. Do not induce vomiting. No ipecac or charcoal. Poison Control 1-800-222-1222 (if you have signal). Unresponsive and breathing: recovery position."
+    "Poisoning: rinse skin at least 15 minutes; chemical in the eye: start rinsing and use the Eye injury protocol. Do not induce vomiting. No ipecac or charcoal. Poison Control 1-800-222-1222 (if you have signal). Unresponsive and breathing: recovery position."
   ],
   "sources": [
     {

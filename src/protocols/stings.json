@@ -73,10 +73,10 @@
     },
     {
       "id": "s7",
-      "text": "Were they stung dozens of times (bees, wasps, yellow jackets or hornets), or is it a child with several stings?",
-      "detail": "Group judgement, not from a source (see open questions): no source opened gives a number of stings at which to seek care, or a separate number for children. The app evacuates at dozens of stings from any of these insects, or any child with several stings, because a child's smaller body reaches a dangerous amount of venom with fewer stings.\n\nFor context only, not as the trigger: AHA 2024 says death from massive envenomation can occur, generally from at least 20 stings by large hornets or hundreds of honeybee stings. Wasps, yellow jackets and hornets can sting again and again (AHA 2024).",
+      "text": "Were they stung dozens of times by bees, wasps, yellow jackets or hornets, or is it a child with several bee, wasp, yellow jacket or hornet stings?",
+      "detail": "Group judgement, not from a source (see open questions): no source opened gives a number of stings at which to seek care, or a separate number for children. The app evacuates at dozens of stings from bees, wasps, yellow jackets or hornets, or a child with several stings from these insects, because a child's smaller body reaches a dangerous amount of venom with fewer stings.\n\nFor context only, not as the trigger: AHA 2024 says death from massive envenomation can occur, generally from at least 20 stings by large hornets or hundreds of honeybee stings. Wasps, yellow jackets and hornets can sting again and again (AHA 2024).\n\nFire ant stings are not counted in this trigger (group judgement; no source gives a number for them): a few fire ant stings are common and usually local. Fire ant stings still lead to evacuation through the allergy screen and the body-wide signs in the last step.",
       "ask": {
-        "q": "Stung dozens of times, or a child with several stings?",
+        "q": "Dozens of bee, wasp, yellow jacket or hornet stings, or a child with several of them?",
         "yes": "s8",
         "no": "s9"
       }
@@ -166,7 +166,7 @@
   ],
   "evacuate": [
     "Evacuate urgently: any sign of a severe allergic reaction, even after epinephrine (Anaphylaxis (severe allergic reaction) protocol).",
-    "Evacuate: dozens of stings from bees, wasps, yellow jackets or hornets, or a child with several stings, even if they seem well (group judgement; AHA 2024 gives at least 20 large hornet stings or hundreds of honeybee stings as amounts that have killed).",
+    "Evacuate: dozens of stings from bees, wasps, yellow jackets or hornets, or a child with several stings from these insects (fire ants not counted), even if they seem well (group judgement; AHA 2024 gives at least 20 large hornet stings or hundreds of honeybee stings as amounts that have killed).",
     "Evacuate: headache, fever, nausea, dizziness, vomiting, weakness or confusion after several stings (poison.org lists the first four).",
     "Evacuate: a sting to the eyeball (AHA 2024).",
     "Evacuate: jellyfish or sea stings with trouble breathing, shock, severe pain, a sting to the face or neck, a known lethal jellyfish, or an unknown sea creature (AHA 2024, Red Cross).",

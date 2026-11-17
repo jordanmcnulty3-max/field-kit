@@ -1,4 +1,4 @@
-import json, os, subprocess, sys
+import json, os, re, subprocess, sys
 
 from .test_tools import T0, boot
 
@@ -38,7 +38,7 @@ def e(t, text, kind='note', **kw):
 def test_fresh_fix_prefills_mgrs(page, app_url):
     boot(page, app_url, storage={'lastFix': fix(30_000)}, hash_=NINE, init=geo_stub())
     assert page.input_value('#nl1') == mgrs(page)
-    assert page.inner_text('#nlAcc') == '±12 m'
+    assert re.fullmatch(r'GPS fix 3\d s ago, ±12 m', page.inner_text('#nlStat'))
     assert page.input_value('#nlOut').split('\n')[0] == '1. ' + mgrs(page)   # accuracy is shown beside the field, never copied
 
 
@@ -61,7 +61,7 @@ def test_no_fix_leaves_location_blank(page, app_url):
     boot(page, app_url, hash_=NINE, init=geo_stub())
     assert page.input_value('#nl1') == ''
     assert page.input_value('#nlOut').split('\n')[0] == '1.'
-    assert page.inner_text('#nlAcc') == ''
+    assert page.inner_text('#nlStat') == 'No GPS fix'
 
 
 def test_screen_asks_for_its_own_fix_and_refreshes_line_one(page, app_url):
@@ -69,7 +69,7 @@ def test_screen_asks_for_its_own_fix_and_refreshes_line_one(page, app_url):
     assert 'min old' in page.input_value('#nl1')
     page.clock.run_for(1500)
     assert page.input_value('#nl1') == mgrs(page, 51.5, -0.12)
-    assert page.inner_text('#nlAcc') == '±5 m'
+    assert '±5 m' in page.inner_text('#nlStat')
 
 
 def test_own_fix_works_without_any_stored_fix(page, app_url):
@@ -337,3 +337,91 @@ def test_release_build_fails_while_wording_is_draft(tmp_path):
 def test_normal_build_still_works_while_draft(tmp_path):
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'build.py'), str(tmp_path)], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
+
+
+CLIP = "window.__copied = null; Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async t => { window.__copied = t; } } });"
+
+
+def test_line_one_is_reaged_while_the_screen_stays_open(page, app_url):
+    boot(page, app_url, storage={'lastFix': fix(10_000)}, hash_=NINE, init=geo_stub() + CLIP)
+    assert page.input_value('#nl1') == mgrs(page)
+    page.clock.run_for(6 * 60_000)
+    assert page.input_value('#nl1') == mgrs(page) + ' (fix 6 min old)'
+    assert page.input_value('#nlOut').split('\n')[0] == '1. ' + mgrs(page) + ' (fix 6 min old)'
+    assert page.inner_text('#nlStat') == 'GPS fix 6 min old, ±12 m at fix time'
+    page.click('[data-rp="copy"]')
+    page.wait_for_function('window.__copied !== null')
+    assert page.evaluate('window.__copied').split('\n')[0] == '1. ' + mgrs(page) + ' (fix 6 min old)'
+
+
+def test_copy_rebuilds_the_text_at_press_time(page, app_url):
+    boot(page, app_url, storage={'lastFix': fix(110_000)}, hash_=NINE, init=geo_stub() + CLIP)
+    page.clock.run_for(12_000)   # past two minutes, but before the next 15 s refresh
+    page.click('[data-rp="copy"]')
+    page.wait_for_function('window.__copied !== null')
+    assert '(fix 2 min old)' in page.evaluate('window.__copied').split('\n')[0]
+
+
+def test_reaging_never_touches_typed_text_but_status_still_ages(page, app_url):
+    boot(page, app_url, storage={'lastFix': fix(10_000)}, hash_=NINE, init=geo_stub())
+    page.fill('#nl1', 'Trailhead lot')
+    page.clock.run_for(6 * 60_000)
+    assert page.input_value('#nl1') == 'Trailhead lot'
+    assert page.input_value('#nlOut').split('\n')[0] == '1. Trailhead lot'
+    assert page.inner_text('#nlStat') == 'GPS fix 6 min old, ±12 m at fix time'
+
+
+def test_refresh_stops_when_the_screen_closes(page, app_url):
+    boot(page, app_url, storage={'lastFix': fix(10_000)}, hash_=NINE, init=geo_stub())
+    page.evaluate("""() => { window.__w = 0; const o = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { if (k === 'fk.nineLine') window.__w++; return o.call(this, k, v); }; }""")
+    page.clock.run_for(40_000)
+    assert page.evaluate('window.__w') >= 2   # it was refreshing while open
+    page.click('#toolClose')
+    page.wait_for_selector('#toolPane', state='hidden')
+    n = page.evaluate('window.__w')
+    page.clock.run_for(120_000)
+    assert page.evaluate('window.__w') == n
+
+
+def test_future_fix_time_is_unknown_and_treated_as_old(page, app_url):
+    boot(page, app_url, storage={'lastFix': fix(-600_000)}, hash_=NINE, init=geo_stub())
+    assert page.inner_text('#nlStat') == 'GPS fix time unknown'
+    assert page.input_value('#nl1') == mgrs(page) + ' (fix time unknown)'
+
+
+def test_typing_in_a_field_cancels_the_armed_clear(page, app_url):
+    boot(page, app_url, hash_=NINE, init=geo_stub())
+    page.click('#nlClear')
+    assert page.inner_text('#nlClear') == 'Confirm clear'
+    page.fill('#nl2', 'x')
+    assert page.inner_text('#nlClear') == 'Clear form'
+    page.clock.run_for(800)
+    page.click('#nlClear')
+    assert page.input_value('#nl2') == 'x'   # that tap only armed it again
+
+
+def test_mist_text_survives_a_full_storage_and_says_it_is_not_saved(page, app_url):
+    boot(page, app_url)
+    page.evaluate("""() => { const o = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { if (k === 'fk.patients') throw new DOMException('full', 'QuotaExceededError'); return o.call(this, k, v); }; }""")
+    page.evaluate("FK.tools.start('mist')")
+    page.wait_for_selector('#msM')
+    assert page.locator('#msUnsaved').is_visible()
+    page.fill('#msM', 'Fell from a ledge')
+    page.clock.run_for(500)
+    assert page.input_value('#msM') == 'Fell from a ledge'
+    assert page.input_value('#msOut').startswith('M: Fell from a ledge')
+    assert page.locator('#msUnsaved').is_visible()
+    assert 'full' in page.inner_text('#toast')
+
+
+def test_mist_save_is_flushed_on_pagehide_and_when_hidden(page, app_url):
+    boot(page, app_url, storage={'patients': seed_patient([])}, hash_=MIST)
+    page.fill('#msM', 'one')
+    page.evaluate("window.dispatchEvent(new Event('pagehide'))")
+    assert json.loads(page.evaluate("localStorage.getItem('fk.patients')"))[0]['mech'] == 'one'
+    page.fill('#msI', 'two')
+    page.evaluate("Object.defineProperty(document, 'hidden', { configurable: true, value: true }); document.dispatchEvent(new Event('visibilitychange'))")
+    assert json.loads(page.evaluate("localStorage.getItem('fk.patients')"))[0]['inj'] == 'two'
+    page.evaluate("Object.defineProperty(document, 'hidden', { configurable: true, value: false })")

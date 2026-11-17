@@ -4,6 +4,7 @@
   const esc = FK.esc;
   const KEY = 'nineLine';
   const FRESH_MS = 2 * 60 * 1000;   // a fix older than this is labelled with its age
+  const REAGE_MS = 15000;           // while the 9-line is open, line 1 and its status are re-aged this often
   const MAX_TEXT = 2000, MAX_SHORT = 200, MAX_COUNT = 99;
 
   /* All 9-line wording lives here so it can be corrected from the published source in one place.
@@ -96,8 +97,9 @@
     if (!navigator.share) return;
     try { await navigator.share({ title, text: ta.value }); } catch { /* cancelled */ }
   }
-  function outClick(e, ta, what, title) {
+  function outClick(e, ta, what, title, before) {
     const b = e.target.closest('[data-rp]'); if (!b) return false;
+    if (before) before();   // rebuild the text now, so it carries the age the screen shows at this moment
     if (b.dataset.rp === 'copy') copyOut(ta, what); else if (b.dataset.rp === 'share') shareOut(ta, title);
     return true;
   }
@@ -115,7 +117,16 @@
     const g = GEO.toMGRS(f.lat, f.lon);
     const grid = g ? g.text : f.lat.toFixed(6) + ', ' + f.lon.toFixed(6);
     const age = now - f.t;
+    if (age < 0) return grid + ' (fix time unknown)';   // a fix stamped in the future (clock skew) cannot be trusted
     return age < FRESH_MS ? grid : grid + ' (fix ' + Math.floor(age / 60000) + ' min old)';
+  }
+  /* The line beside line 1: always derived from the fix, whether or not the user typed over the field. */
+  function fixStatus(f, now) {
+    if (!f) return 'No GPS fix';
+    const age = now - f.t, acc = FK.fin(f.acc) ? '±' + Math.round(f.acc) + ' m' : '';
+    if (age < 0) return 'GPS fix time unknown';
+    if (age < FRESH_MS) return 'GPS fix ' + Math.floor(age / 1000) + ' s ago' + (acc ? ', ' + acc : '');
+    return 'GPS fix ' + Math.floor(age / 60000) + ' min old' + (acc ? ', ' + acc + ' at fix time' : '');
   }
   function requestFix(done) {
     try {
@@ -150,7 +161,7 @@
   function lineHtml(l) {
     const id = 'nl' + l.n, head = '<legend>' + l.n + '. ' + esc(l.label) + '</legend>';
     let body = '';
-    if (l.n === 1) body = '<div class="rp-loc"><input id="nl1" type="text" maxlength="' + MAX_SHORT + '" autocomplete="off" aria-label="Line 1, location"><span class="rp-acc" id="nlAcc"></span></div>';
+    if (l.n === 1) body = '<div class="rp-loc"><input id="nl1" type="text" maxlength="' + MAX_SHORT + '" autocomplete="off" aria-label="Line 1, location"></div><p class="rp-stat" id="nlStat"></p>';
     else if (l.kind === 'text') body = '<input id="' + id + '" type="text" maxlength="' + MAX_SHORT + '" autocomplete="off" aria-label="Line ' + l.n + ', ' + esc(l.label) + '">';
     else if (l.kind === 'area') body = '<textarea id="' + id + '" rows="2" maxlength="' + MAX_TEXT + '" aria-label="Line ' + l.n + ', ' + esc(l.label) + '"></textarea>';
     else if (l.kind === 'counts') body = countRows(l.n);
@@ -161,8 +172,7 @@
   function paintLine1() {
     const f = nl.form, fix = bestFix();
     const el = nq('#nl1'); if (el && el.value !== f.l1) el.value = f.l1;
-    const acc = nq('#nlAcc');
-    acc.textContent = f.l1auto && fix && FK.fin(fix.acc) ? '±' + Math.round(fix.acc) + ' m' : '';
+    nq('#nlStat').textContent = fixStatus(fix, Date.now());
   }
   function paintForm() {
     const f = nl.form;
@@ -189,13 +199,18 @@
     nl.form.l1 = fix ? fixText(fix, Date.now()) : '';
     saveForm(); paintForm();
   }
+  /* Re-run the age logic: re-labels the app's own prefill only; typed text is never touched. The status line always updates. */
+  function refresh() {
+    if (!nl) return;
+    if (nl.form.l1auto) autoFill(); else { paintLine1(); paintOut(); }
+  }
   const setClear = on => {
     clearTimeout(clearT); clearing = on; clearAt = performance.now();
     if (on) clearT = setTimeout(() => { clearing = false; if (nl) paintForm(); }, FK.tools.confirm.revertMs);
   };
 
   function onNineClick(e) {
-    if (outClick(e, nq('#nlOut'), '9-line', 'MEDEVAC 9-line')) return;
+    if (outClick(e, nq('#nlOut'), '9-line', 'MEDEVAC 9-line', refresh)) return;
     const f = nl.form;
     const st = e.target.closest('[data-step]');
     if (st) {
@@ -223,6 +238,7 @@
     nl.form[key] = e.target.value;
     if (key === 'l1') nl.form.l1auto = false;   // typed by the user: never overwritten again
     saveForm();
+    if (clearing) { setClear(false); paintForm(); return; }   // typing cancels an armed Clear form
     if (key === 'l1') paintLine1();
     paintOut();
   }
@@ -245,8 +261,9 @@
       view.addEventListener('input', onNineInput);
       autoFill();           // also paints
       requestFix(autoFill);
+      nl.iv = setInterval(refresh, REAGE_MS);
     },
-    stop() { clearTimeout(clearT); clearing = false; nl = null; }
+    stop() { if (nl) clearInterval(nl.iv); clearTimeout(clearT); clearing = false; nl = null; }
   });
   FK.on('fix', () => { if (nl) autoFill(); });
 
@@ -255,15 +272,19 @@
   const mq = s => ms && ms.view.querySelector(s);
   function flushMist() {
     if (!ms) return;
+    if (!ms.timer && ms.saved !== false) return;   // nothing typed since the last save
     clearTimeout(ms.timer); ms.timer = null;
-    if (ms.id) FK.patients.setMist(ms.id, { mech: mq('#msM').value, inj: mq('#msI').value });
+    if (ms.id) ms.saved = FK.patients.setMist(ms.id, { mech: mq('#msM').value, inj: mq('#msI').value });
+    else { ms.saved = false; FK.toast(FK.FULL_MSG); }   // storage was full when this casualty was made: nothing can be saved
+    paintUnsaved();
   }
+  const paintUnsaved = () => { if (ms) mq('#msUnsaved').hidden = ms.saved !== false; };
   function paintMist() {
     if (!ms) return;
     const list = FK.patients.all(), cur = FK.patients.current();
     if (cur.id !== ms.id) {   // switched casualty: load theirs
       if (ms.timer) flushMist();
-      ms.id = cur.id;
+      ms.id = cur.id; ms.saved = cur.id ? true : false; paintUnsaved();
       mq('#msM').value = cur.mech || ''; mq('#msI').value = cur.inj || '';
     }
     mq('#msWho').textContent = cur.name;
@@ -278,10 +299,11 @@
     render(el) {
       const cur = FK.patients.current();
       const view = el.appendChild(document.createElement('div'));
-      ms = { view, id: cur.id, timer: null };
+      ms = { view, id: cur.id, timer: null, saved: cur.id ? true : false };
       view.innerHTML =
         '<div class="pt-top"><h3 id="msWho"></h3></div>' +
         '<select id="msSel" aria-label="Switch casualty" hidden></select>' +
+        '<p class="rp-draft" id="msUnsaved" role="status" hidden>Not saved: phone storage is full. The text stays here; copy it before you leave.</p>' +
         '<label class="f" for="msM">M: Mechanism (what happened)</label><textarea id="msM" rows="2" maxlength="' + MAX_TEXT + '"></textarea>' +
         '<label class="f" for="msI">I: Injuries found</label><textarea id="msI" rows="2" maxlength="' + MAX_TEXT + '"></textarea>' +
         '<p class="hint">S (signs) and T (treatment) come from the Patient log for this casualty: vitals and timed events such as tourniquets.</p>' +
@@ -295,8 +317,12 @@
       });
       view.addEventListener('change', e => { if (e.target.id === 'msSel') { flushMist(); FK.patients.setCurrent(e.target.value); } });
       paintMist();
+      paintUnsaved();
+      if (!cur.id) FK.toast(FK.FULL_MSG);
     },
     stop() { flushMist(); ms = null; }
   });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) flushMist(); });
+  addEventListener('pagehide', flushMist);
   FK.on('patients', paintMist);
 })();

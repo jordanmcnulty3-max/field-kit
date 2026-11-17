@@ -198,7 +198,7 @@ def test_no_tel_links_or_dial_buttons                          # page.locator('a
 
 **Files:**
 - Create: `src/emergency-tools.js`, `tests/test_tools.py`
-- Modify: `src/app.js` (delete the tourniquet and CPR blocks, lines 434 to 491), `src/emergency.html`
+- Modify: `src/app.js` (delete the blocks under the `Tourniquet timers` and `CPR metronome` comment headers), `src/emergency.html`
 
 **Interfaces:**
 - Consumes: `FK.store`, `FK.list`, `FK.okId`, `FK.fin`, `FK.setWake`.
@@ -319,7 +319,7 @@ def test_v5_localstorage_boots_with_no_console_errors
 
 - [ ] **Step 2 to 5:** run failing, implement, run passing, commit.
 
-### Tasks 10 to 15: Content
+## Content procedure (Tasks 10 to 15)
 
 Each content task follows the same steps. Protocol ids are fixed here so search keywords, cross-links and tests agree.
 
@@ -330,17 +330,29 @@ Each content task follows the same steps. Protocol ids are fixed here so search 
 - [ ] **Step 5:** `python3 build.py /tmp/fk` with zero errors, then `python3 -m pytest tests -q`. Expected: pass (search and two-tap tests iterate over all protocols).
 - [ ] **Step 6:** Commit.
 
-**Task 10: Life threats.** `bleeding`, `cpr-adult`, `cpr-child`, `cpr-infant`, `choking`, `choking-infant`, `recovery-position`, `anaphylaxis`, `chest-wound`, `shock`. `bleeding` uses tool `tq`; the three CPR protocols use tool `cpr`; `chest-wound` links to `needle-decompression`.
+### Task 10: Life threats
 
-**Task 11: Injuries.** `march`, `head-injury`, `spine-injury`, `fracture`, `sprain-dislocation`, `burns`, `eye-injury`, `amputation`, `impaled-object`, `abdominal-wound`, `wound-care`, `blisters`. `burns` uses tool `burn`; confirm the Task 6 burn tables here.
+Follow the Content procedure (Tasks 10 to 15) steps 1 to 6. Protocols: `bleeding`, `cpr-adult`, `cpr-child`, `cpr-infant`, `choking`, `choking-infant`, `recovery-position`, `anaphylaxis`, `chest-wound`, `shock`. `bleeding` uses tool `tq`; the three CPR protocols use tool `cpr`; `chest-wound` links to `needle-decompression`.
 
-**Task 12: Heat, cold, environment.** `hypothermia`, `frostbite`, `heat-illness`, `dehydration`, `altitude`, `lightning`, `drowning`, `carbon-monoxide`.
+### Task 11: Injuries
 
-**Task 13: Bites, stings, poison.** `snakebite`, `tick`, `stings`, `spider-scorpion`, `animal-bite`, `poisoning`, `poison-plants`.
+Follow the Content procedure (Tasks 10 to 15) steps 1 to 6. Protocols: `march`, `head-injury`, `spine-injury`, `fracture`, `sprain-dislocation`, `burns`, `eye-injury`, `amputation`, `impaled-object`, `abdominal-wound`, `wound-care`, `blisters`. `burns` uses tool `burn`; confirm the Task 6 burn tables here.
 
-**Task 14: Sudden illness.** `chest-pain`, `stroke`, `seizure`, `low-blood-sugar`, `asthma`, `overdose`, `fainting`, `vomiting-diarrhea`.
+### Task 12: Heat, cold, environment
 
-**Task 15: Advanced procedures.** `npa`, `needle-decompression`, `cricothyrotomy`, `hemostatic-packing`, `junctional-bleeding`, `pelvic-binder`, `traction-splint`, `tourniquet-conversion`, `wound-closure`, `dislocation-reduction`. All `tier: "advanced"` with `indications`, `contraindications`, `equipment`, `complications`. Sources: current TCCC guidelines and skill sheets, Wilderness Medical Society guidelines. A procedure the sources do not describe at any published tier is left out and noted in `docs/content-review.md`. Confirm the Task 7 nine-line wording here.
+Follow the Content procedure (Tasks 10 to 15) steps 1 to 6. Protocols: `hypothermia`, `frostbite`, `heat-illness`, `dehydration`, `altitude`, `lightning`, `drowning`, `carbon-monoxide`.
+
+### Task 13: Bites, stings, poison
+
+Follow the Content procedure (Tasks 10 to 15) steps 1 to 6. Protocols: `snakebite`, `tick`, `stings`, `spider-scorpion`, `animal-bite`, `poisoning`, `poison-plants`.
+
+### Task 14: Sudden illness
+
+Follow the Content procedure (Tasks 10 to 15) steps 1 to 6. Protocols: `chest-pain`, `stroke`, `seizure`, `low-blood-sugar`, `asthma`, `overdose`, `fainting`, `vomiting-diarrhea`.
+
+### Task 15: Advanced procedures
+
+Follow the Content procedure (Tasks 10 to 15) steps 1 to 6. Protocols: `npa`, `needle-decompression`, `cricothyrotomy`, `hemostatic-packing`, `junctional-bleeding`, `pelvic-binder`, `traction-splint`, `tourniquet-conversion`, `wound-closure`, `dislocation-reduction`. All `tier: "advanced"` with `indications`, `contraindications`, `equipment`, `complications`. Sources: current TCCC guidelines and skill sheets, Wilderness Medical Society guidelines. A procedure the sources do not describe at any published tier is left out and noted in `docs/content-review.md`. Confirm the Task 7 nine-line wording here.
 
 ### Task 16: Emergency diagrams
 

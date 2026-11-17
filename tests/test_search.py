@@ -172,7 +172,7 @@ def test_tool_and_report_results(page, app_url):
     assert page.locator('#toolPane').is_visible()
     assert page.url.endswith('#/emergency/report/9line')
     page.go_back()   # straight back to the Emergency home, no search entry in between
-    assert page.url.endswith('#/emergency')
+    page.wait_for_url('**/index.html#/emergency')
     page.evaluate("FK.route.go('/search')")
     type_q(page, 'tourniquet timers')
     assert keys(page)[0] == 't:tq'
@@ -214,8 +214,8 @@ def test_back_closes_search(page, app_url):
     open_search(page)
     assert page.url.endswith('#/search')
     page.go_back()
-    assert not page.locator('#searchPane').is_visible()
-    assert page.url.endswith('#/emergency')
+    page.wait_for_url('**/index.html#/emergency')
+    page.wait_for_selector('#searchPane', state='hidden')
     assert page.locator('#tab-emergency').is_visible()
     assert page.evaluate('document.activeElement.id') == 'searchBtn'
 
@@ -224,10 +224,11 @@ def test_close_button_and_escape(page, app_url):
     boot(page, app_url)
     open_search(page)
     page.click('#searchClose')
-    assert not page.locator('#searchPane').is_visible() and page.url.endswith('#/emergency')
+    page.wait_for_selector('#searchPane', state='hidden')
+    page.wait_for_url('**/index.html#/emergency')
     open_search(page)
     page.keyboard.press('Escape')
-    assert not page.locator('#searchPane').is_visible()
+    page.wait_for_selector('#searchPane', state='hidden')
     assert page.evaluate('document.activeElement.id') == 'searchBtn'
 
 
@@ -252,15 +253,16 @@ def test_search_over_open_protocol_and_back_returns_to_it(page, app_url):
     page.wait_for_selector('#searchPane', state='visible')
     assert page.locator('#searchInput').evaluate('e => document.activeElement === e')
     page.go_back()
-    assert page.url == url and page.locator('#player').is_visible()
-    assert not page.locator('#searchPane').is_visible()
+    page.wait_for_url(url)
+    page.wait_for_selector('#searchPane', state='hidden')
+    assert page.locator('#player').is_visible()
     # open another protocol from search, then leave it: back where the first one was
     page.evaluate("FK.route.go('/search')")
     type_q(page, 'stings')
     page.click('#searchBody .sr-item')
     assert page.url.endswith('/emergency/stings')
     page.go_back()
-    assert page.url == url
+    page.wait_for_url(url)
 
 
 def test_search_over_open_tool(page, app_url):
@@ -269,7 +271,9 @@ def test_search_over_open_tool(page, app_url):
     page.evaluate("FK.route.go('/search')")
     page.wait_for_selector('#searchPane', state='visible')
     page.keyboard.press('Escape')
-    assert page.locator('#toolPane').is_visible() and page.url.endswith('#/emergency/tool/tq')
+    page.wait_for_selector('#searchPane', state='hidden')
+    page.wait_for_url('**#/emergency/tool/tq')
+    assert page.locator('#toolPane').is_visible()
 
 
 def test_advanced_result_labelled_and_goes_through_acknowledgement(page, app_url):
@@ -395,14 +399,17 @@ def test_search_button_inside_protocol_returns_to_the_step(page, app_url):
     page.wait_for_selector('#searchPane', state='visible')
     assert page.url.endswith('#/search')
     page.keyboard.press('Escape')
-    assert page.url == url and page.locator('#player').is_visible()
+    page.wait_for_selector('#searchPane', state='hidden')
+    page.wait_for_url(url)
+    assert page.locator('#player').is_visible()
     assert page.evaluate("document.activeElement.dataset.act") == 'search'   # focus returns to that button
     page.click('#player [data-act="search"]')
     type_q(page, 'stings')
     page.click('#searchBody .sr-item')
     assert page.url.endswith('/emergency/stings')
     page.go_back()
-    assert page.url == url and page.locator('#player').is_visible()
+    page.wait_for_url(url)
+    assert page.locator('#player').is_visible()
 
 
 def test_search_button_inside_tool_and_cpr_keeps_running(page, app_url):
@@ -416,7 +423,9 @@ def test_search_button_inside_tool_and_cpr_keeps_running(page, app_url):
     page.click('#toolSearch')
     page.wait_for_selector('#searchPane', state='visible')
     page.keyboard.press('Escape')
-    assert page.url == url and page.locator('#toolPane').is_visible()
+    page.wait_for_selector('#searchPane', state='hidden')
+    page.wait_for_url(url)
+    assert page.locator('#toolPane').is_visible()
     assert page.evaluate("document.activeElement.id") == 'toolSearch'
     page.click('#toolSearch')
     type_q(page, 'ballistics')

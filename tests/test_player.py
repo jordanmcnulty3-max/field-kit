@@ -1,3 +1,4 @@
+from playwright.sync_api import expect
 import json
 
 from .conftest import inject_protocols
@@ -69,9 +70,9 @@ def test_android_back_steps_back_then_leaves_player(page, app_url):
     page.click('#player [data-act="next"]')
     assert action(page) == 'Is it yes?'
     page.go_back()
-    assert action(page) == 'Step A action'
+    expect(page.locator('#player .pp-action')).to_have_text('Step A action')
     page.go_back()
-    assert not page.locator('#player').is_visible()
+    expect(page.locator('#player')).to_be_hidden()
     assert page.locator('#tab-emergency').is_visible()
     assert page.locator('.tabbar').is_visible()
 
@@ -84,6 +85,7 @@ def test_branch_yes_and_no_go_to_named_steps(page, app_url):
     assert action(page) == 'Yes branch'
     assert page.locator('#player [data-act="done"]').is_visible()  # end:true -> Done, not NEXT
     page.go_back()
+    page.wait_for_url('**/branchy/q')
     page.click('#player [data-act="no"]')
     assert page.url.endswith('/branchy/n')
     # UI Back after a branch returns to the question, not the previous array item
@@ -340,7 +342,7 @@ def test_ui_back_then_android_back_does_not_return_to_left_step(page, app_url):
     page.click('#player [data-act="back"]')        # UI back -> q
     assert action(page) == 'Is it yes?'
     page.go_back()                                 # Android back -> first step, not y
-    assert action(page) == 'Step A action'
+    expect(page.locator('#player .pp-action')).to_have_text('Step A action')
     page.go_back()
     page.wait_for_timeout(150)
     assert not page.locator('#player').is_visible()

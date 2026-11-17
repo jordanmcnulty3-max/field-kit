@@ -270,8 +270,9 @@
   /* ================= The MIST tool ================= */
   let ms = null;   // { view, id, timer } while open
   const mq = s => ms && ms.view.querySelector(s);
+  let frozen = false;   // a backup restore is replacing storage: nothing may be written until it ends
   function flushMist() {
-    if (!ms) return;
+    if (!ms || frozen) return;
     if (!ms.timer && ms.saved !== false) return;   // nothing typed since the last save
     clearTimeout(ms.timer); ms.timer = null;
     if (ms.id) ms.saved = FK.patients.setMist(ms.id, { mech: mq('#msM').value, inj: mq('#msI').value });
@@ -322,6 +323,8 @@
     },
     stop() { flushMist(); ms = null; }
   });
+  FK.on('restoring', () => { frozen = true; if (ms) { clearTimeout(ms.timer); ms.timer = null; } });
+  FK.on('restoreFailed', () => { frozen = false; });
   document.addEventListener('visibilitychange', () => { if (document.hidden) flushMist(); });
   addEventListener('pagehide', flushMist);
   FK.on('patients', paintMist);

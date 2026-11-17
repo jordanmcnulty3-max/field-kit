@@ -47,12 +47,16 @@ def pick(page, tmp_path, obj):
     page.set_input_files('#bkFile', str(path))
 
 
+def wait_out_ignore(page):
+    page.wait_for_timeout(page.evaluate('FK.tools.confirm.ignoreMs') + 100)
+
+
 def restore_now(page):
     """Two-step confirm, then wait for the reload the restore ends with."""
     page.wait_for_selector('#bkConfirm:not([hidden])')
     page.click('#bkGo')
     assert page.inner_text('#bkGo') == 'Confirm restore'
-    page.wait_for_timeout(800)
+    wait_out_ignore(page)
     with page.expect_navigation():
         page.click('#bkGo')
     page.wait_for_function('window.FK && FK.tools && FK.tools.cpr')
@@ -156,7 +160,7 @@ def test_restore_is_atomic_when_storage_fills(page, app_url, tmp_path):
     pick(page, tmp_path, backup_file({'fk.night': 'true', 'fk.wps': V5_LS['fk.wps'], 'fk.tq': V5_LS['fk.tq']}))
     page.wait_for_selector('#bkConfirm:not([hidden])')
     page.click('#bkGo')
-    page.wait_for_timeout(800)
+    wait_out_ignore(page)
     # The third write of the restore fails once, as a full phone would; the rollback writes then succeed.
     page.evaluate("""() => {
       const orig = Storage.prototype.setItem; let n = 0;
@@ -225,3 +229,68 @@ def test_v5_localstorage_boots_with_no_console_errors(page, app_url):
         if k in ('fk.tab', 'fk.view', 'fk.night', 'fk.bal', 'fk.lastFix'):
             continue   # the app legitimately re-saves these on start
         assert page.evaluate('k => localStorage.getItem(k)', k) == v, k
+
+
+# ---------- Review fixes ----------
+
+def test_restore_reports_when_rollback_also_fails(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false', 'fk.wps': '[]', 'fk.pins': json.dumps(['p:bleeding'])})
+    pick(page, tmp_path, backup_file({'fk.night': 'true', 'fk.wps': V5_LS['fk.wps'], 'fk.tq': V5_LS['fk.tq']}))
+    page.wait_for_selector('#bkConfirm:not([hidden])')
+    page.click('#bkGo')
+    wait_out_ignore(page)
+    page.evaluate("""() => {
+      const orig = Storage.prototype.setItem; let n = 0;
+      Storage.prototype.setItem = function (k, v) { if (++n >= 3) throw new DOMException('full', 'QuotaExceededError'); return orig.call(this, k, v); };
+    }""")
+    page.click('#bkGo')
+    msg = page.inner_text('#bkMsg')
+    assert msg == 'Restore failed and some data on this phone may have changed. Back up now if you can, then try again.'
+    assert 'nothing was changed' not in msg
+
+
+def test_restore_refuses_a_backup_with_nothing_to_restore(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false', 'fk.pins': json.dumps(['p:bleeding'])})
+    for data in ({}, {'fk.proto.active': '{}', 'fk.lastFix': '{}'}, {'other.key': 'x'}):
+        pick(page, tmp_path, backup_file(data))
+        page.wait_for_function("document.getElementById('bkMsg').textContent")
+        assert page.inner_text('#bkMsg') == 'That backup is empty, so nothing was restored.'
+        assert page.is_hidden('#bkConfirm')
+        page.click('#menuClose')
+        assert ls(page, 'night') == 'false' and ls(page, 'pins') == json.dumps(['p:bleeding'])
+
+
+def test_restore_version_missing_is_older_and_garbage_is_not_a_backup(page, app_url, tmp_path):
+    boot(page, app_url, {'fk.night': 'false'})
+    for v in ('abc', '5.1', '', None):
+        pick(page, tmp_path, backup_file({'fk.night': 'true'}, version=v))
+        page.wait_for_function("document.getElementById('bkMsg').textContent")
+        assert 'isn’t a Field Kit backup' in page.inner_text('#bkMsg'), v
+        assert page.is_hidden('#bkConfirm')
+        page.click('#menuClose')
+    assert ls(page, 'night') == 'false'
+    f = backup_file({'fk.night': 'true'})
+    del f['version']
+    pick(page, tmp_path, f)
+    restore_now(page)
+    assert ls(page, 'night') == 'true'
+
+
+def test_restore_is_not_overwritten_by_a_pending_mist_note(page, app_url, tmp_path):
+    phone = [{'id': 'p1', 'name': 'Casualty 1', 'created': T0, 'entries': []}]
+    theirs = [{'id': 'p1', 'name': 'Casualty 1', 'created': T0 + 1, 'entries': [{'t': T0, 'kind': 'note', 'text': 'from file'}]}]
+    boot(page, app_url, {'fk.patients': json.dumps(phone)}, hash_='#/emergency/report/mist')
+    page.wait_for_selector('#msM')
+    path = tmp_path / 'p.json'
+    path.write_text(json.dumps(backup_file({'fk.patients': json.dumps(theirs)})))
+    page.evaluate("document.getElementById('dlgMenu').showModal()")
+    page.set_input_files('#bkFile', str(path))
+    page.wait_for_selector('#bkConfirm:not([hidden])')
+    page.click('#bkGo')
+    wait_out_ignore(page)
+    with page.expect_navigation():
+        # type and confirm in one synchronous step, so the 300 ms save timer is still pending when the restore runs
+        page.evaluate("""() => { const m = document.getElementById('msM'); m.value = 'half-typed note';
+          m.dispatchEvent(new Event('input', { bubbles: true })); document.getElementById('bkGo').click(); }""")
+    page.wait_for_function('window.FK && FK.tools && FK.tools.cpr')
+    assert json.loads(ls(page, 'patients')) == theirs

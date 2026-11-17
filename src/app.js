@@ -518,16 +518,18 @@
     paintRestore();
   }
   function cancelRestore() { pendingRestore = null; setRestoreSure(false); }
+  /* Returns 'ok', 'undone' (a write failed and every key was put back) or 'partial' (a put-back failed too). */
   function applyRestore(file) {
     const before = new Map(phoneKeys().map(k => [k, localStorage.getItem(k)]));
     const touched = new Set();
     try {
       before.forEach((_, k) => { if (!(k in file)) { touched.add(k); localStorage.removeItem(k); } });
       Object.entries(file).forEach(([k, v]) => { touched.add(k); localStorage.setItem(k, v); });
-      return true;
+      return 'ok';
     } catch {
-      touched.forEach(k => { try { if (before.has(k)) localStorage.setItem(k, before.get(k)); else localStorage.removeItem(k); } catch {} });
-      return false;
+      let clean = true;
+      touched.forEach(k => { try { if (before.has(k)) localStorage.setItem(k, before.get(k)); else localStorage.removeItem(k); } catch { clean = false; } });
+      return clean ? 'undone' : 'partial';
     }
   }
   $('#bkFile').addEventListener('change', async e => {
@@ -539,9 +541,11 @@
     try { b = JSON.parse(await f.text()); } catch { msg.textContent = NOT_BACKUP; return; }
     const d = b && b.data;
     if (!b || b.app !== 'Field Kit' || !d || typeof d !== 'object' || Array.isArray(d) || !Object.values(d).every(v => typeof v === 'string')) { msg.textContent = NOT_BACKUP; return; }
-    if (parseInt(b.version, 10) > parseInt(APP_VERSION, 10)) { msg.textContent = 'This backup is from a newer version of Field Kit. Update the app first.'; return; }
+    if (b.version !== undefined && !/^\d+$/.test(String(b.version))) { msg.textContent = NOT_BACKUP; return; }   // a missing version counts as older
+    if (b.version !== undefined && parseInt(b.version, 10) > parseInt(APP_VERSION, 10)) { msg.textContent = 'This backup is from a newer version of Field Kit. Update the app first.'; return; }
     const file = {};
     Object.entries(d).forEach(([k, v]) => { if (backedUp(k)) file[k] = v; });
+    if (!Object.keys(file).length) { msg.textContent = 'That backup is empty, so nothing was restored.'; return; }
     const when = new Date(b.saved);
     pendingRestore = file;
     msg.textContent = '';
@@ -553,7 +557,14 @@
     if (!restoreSure) { setRestoreSure(true); return; }
     if (performance.now() - restoreAt < confirmTiming().ignoreMs) return;   // a bounced second tap must not replace everything
     const file = pendingRestore;
-    if (!applyRestore(file)) { cancelRestore(); $('#bkMsg').textContent = 'Phone storage is full, so nothing was changed. Free some space and try again.'; return; }
+    emit('restoring');   // let screens drop pending saves so they can't land on top of the restored data
+    const r = applyRestore(file);
+    if (r !== 'ok') {
+      cancelRestore(); emit('restoreFailed');
+      $('#bkMsg').textContent = r === 'undone' ? 'Phone storage is full, so nothing was changed. Free some space and try again.'
+        : 'Restore failed and some data on this phone may have changed. Back up now if you can, then try again.';
+      return;
+    }
     location.reload();
   });
   $('#bkNo').addEventListener('click', cancelRestore);

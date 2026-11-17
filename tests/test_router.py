@@ -1,3 +1,4 @@
+from playwright.sync_api import expect
 import json
 
 
@@ -16,7 +17,7 @@ def test_back_returns_to_previous_tab(page, app_url):
     page.click('.tabbar button[data-tab="survival"]')
     page.click('.tabbar button[data-tab="emergency"]')
     page.go_back()
-    assert tab_visible(page, 'survival')
+    expect(page.locator('#tab-survival')).to_be_visible()
     assert not tab_visible(page, 'emergency')
 
 
@@ -55,10 +56,10 @@ def test_tactical_views_have_addresses_and_back_works(page, app_url):
     page.click('#tacSeg button[data-view="ballistics"]')
     assert page.url.endswith('#/tactical/ballistics')
     page.go_back()
-    assert page.locator('#view-position').is_visible()
+    expect(page.locator('#view-position')).to_be_visible()
     assert not page.locator('#view-ballistics').is_visible()
     page.go_back()
-    assert page.locator('#view-map').is_visible()
+    expect(page.locator('#view-map')).to_be_visible()
 
 
 def test_v5_stored_view_honoured_with_no_hash(page, app_url):
@@ -77,7 +78,7 @@ def test_route_event_and_go_replace(page, app_url):
     page.evaluate("FK.route.go('/survival', { replace: true })")
     assert page.evaluate('seen') == ['emergency', 'survival']
     page.go_back()  # replace left no entry for emergency, so this returns to the initial tactical route
-    assert tab_visible(page, 'tactical')
+    expect(page.locator('#tab-tactical')).to_be_visible()
 
 
 def test_malformed_address_does_not_break_startup(page, app_url):

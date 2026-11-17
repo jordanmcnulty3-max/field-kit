@@ -597,3 +597,127 @@ svg('knot-trucker', 205, 'Trucker’s hitch: a fixed loop in the line, the end a
 {lbl(214,48,'Fixed loop','tb')}{lbl(214,62,'in the line','')}{lead(212,58,198,86)}
 {lbl(14,142,'Down around the hook,','')}{lbl(14,156,'back up through the loop','')}{lead(166,148,214,140)}
 {lbl(336,124,'Pull down,','tb','end')}{lbl(336,138,'then tie off','','end')}''')
+
+# ---------------- EMERGENCY (positioning only: no wounds, no blood, no cross-sections) ----------------
+def arm_limb():
+    """Straight arm from the shoulder side (left) to the hand (right); the left edge is left open."""
+    return ('<path d="M12 52 L120 52 C150 54 190 62 262 66 L262 96 C190 102 150 102 120 98 L12 98" class="skin"/>'
+            '<ellipse cx="288" cy="81" rx="28" ry="15" class="skin"/>')
+
+svg('tq-placement', 160, 'Arm seen from the side: the tourniquet band 2 to 3 inches above the wound, toward the heart, and not over the elbow', f'''
+{arm_limb()}
+<circle cx="126" cy="76" r="27" class="h d"/>
+<rect x="190" y="56" width="18" height="50" rx="4" class="k kf"/>
+<path d="M234 75 l12 12 m0 -12 l-12 12" class="h t3"/>
+{arrow(118,26,14,26,'m','aM')}{lbl(14,16,'Toward the heart','tm')}
+{lbl(199,40,'Tourniquet','tb','middle')}{lead(199,44,199,54)}
+{lbl(272,40,'Wound','tb','middle')}{lead(266,46,248,72)}
+<path d="M208 116 v8 M240 116 v8 M208 120 H240" class="k"/>
+{lbl(224,140,'2 to 3 inches','tb','middle')}{lbl(224,154,'above the wound','','middle')}
+{lbl(14,128,'Not over the elbow','tb')}{lbl(14,142,'or knee','tb')}{lead(70,114,106,94)}''')
+
+svg('recovery-position', 190, 'Person lying on their side, seen from above: one arm up with the head resting on it, the other hand against the cheek, one knee bent to steady them', f'''
+<line x1="100" y1="100" x2="14" y2="100" class="w t5"/>
+<rect x="96" y="82" width="124" height="40" rx="18" class="k"/>
+<circle cx="62" cy="100" r="20" class="k milk"/>
+<path d="M118 84 L104 60 L78 82" class="k t3"/>
+<path d="M214 94 L260 64 L312 98" class="k t3"/>
+<path d="M214 110 L312 114" class="k t3"/>
+{lbl(14,26,'Lower arm up,','tb')}{lbl(14,40,'head rests on it','tb')}{lead(34,46,34,96)}
+{lbl(122,26,'Other hand','tb')}{lbl(122,40,'against the','tb')}{lbl(122,54,'cheek','tb')}{lead(120,52,104,60)}
+{lbl(336,26,'One or both','tb','end')}{lbl(336,40,'knees bent to','tb','end')}{lbl(336,54,'steady them','tb','end')}{lead(290,60,264,64)}
+{lbl(170,170,'Seen from above, lying on their side','tm','middle')}''')
+
+svg('cpr-hands-adult', 256, 'Adult CPR hand position: heel of one hand on the lower half of the breastbone in the centre of the chest, other hand on top, arms straight with shoulders over the hands, pushing straight down', f'''
+<path d="M46 40 Q80 54 114 40 L134 52 Q146 60 146 76 V170 H14 V76 Q14 60 26 52 Z" class="k"/>
+<line x1="80" y1="60" x2="80" y2="132" class="m t1 d"/>
+<rect x="60" y="100" width="40" height="30" rx="8" class="a af"/>
+<rect x="56" y="80" width="48" height="34" rx="8" class="k milk"/>
+<path d="M66 80 v-8 M76 80 v-10 M86 80 v-10 M96 80 v-8" class="k"/>
+{lbl(80,192,'Centre of the chest','tb','middle')}{lbl(80,206,'Heel of one hand on','','middle')}{lbl(80,220,'the lower half of the','','middle')}{lbl(80,234,'breastbone, other hand','','middle')}{lbl(80,248,'on top','','middle')}
+<line x1="168" y1="170" x2="336" y2="170" class="m t1"/>
+<circle cx="190" cy="158" r="12" class="skin"/>
+<rect x="206" y="148" width="80" height="22" rx="8" class="skin"/>
+<rect x="238" y="136" width="24" height="12" rx="4" class="a af"/>
+<line x1="246" y1="136" x2="246" y2="74" class="k t5"/><line x1="256" y1="136" x2="256" y2="74" class="k t5"/>
+<circle cx="251" cy="42" r="14" class="k"/>
+<line x1="251" y1="64" x2="304" y2="112" class="k t5"/>
+<path d="M304 112 L300 168 L336 168" class="k t3"/>
+{arrow(218,76,218,132,'h','aH')}
+{lbl(250,192,'Arms straight,','tb','middle')}{lbl(250,206,'shoulders over your','','middle')}{lbl(250,220,'hands, push straight','','middle')}{lbl(250,234,'down','','middle')}''')
+
+def infant_chest(cx):
+    return (f'<path d="M{cx-40} 40 Q{cx} 52 {cx+40} 40 L{cx+56} 52 Q{cx+64} 60 {cx+64} 76 V150 H{cx-64} V76 Q{cx-64} 60 {cx-56} 52 Z" class="k"/>'
+            f'<line x1="{cx-50}" y1="68" x2="{cx+50}" y2="68" class="m t1 d"/>'
+            f'<circle cx="{cx-26}" cy="68" r="2.5" class="kf"/><circle cx="{cx+26}" cy="68" r="2.5" class="kf"/>'
+            f'<line x1="{cx}" y1="56" x2="{cx}" y2="124" class="m t1"/>')
+
+svg('cpr-infant', 245, 'Infant CPR hand positions on the centre of the chest, lower half of the breastbone just below the nipple line: two thumbs side by side with the fingers wrapped around the chest, or the heel of one hand', f'''
+{infant_chest(84)}
+<ellipse cx="76" cy="96" rx="8" ry="15" class="a af"/><ellipse cx="92" cy="96" rx="8" ry="15" class="a af"/>
+<path d="M66 108 C46 120 30 118 14 104 M102 108 C122 120 138 118 154 104" class="k t3"/>
+{lbl(14,22,'Nipple line','tm')}{lead(48,26,58,64)}
+{lbl(84,172,'Two thumbs side by side','tb','middle')}{lbl(84,186,'just below the nipple line.','','middle')}{lbl(84,200,'Fingers wrap around the','','middle')}{lbl(84,214,'chest toward the back','','middle')}
+<line x1="170" y1="30" x2="170" y2="222" class="m t1 d"/>
+{infant_chest(256)}
+<rect x="236" y="80" width="40" height="30" rx="9" class="a af"/>
+{lbl(256,172,'Or the heel of one hand','tb','middle')}{lbl(256,186,'in the same spot','','middle')}''')
+
+svg('back-blows', 250, 'Back blows: the person bent forward at the waist so the upper body is about level with the ground, one of your arms across their chest, the heel of your other hand striking between the shoulder blades', f'''
+<line x1="20" y1="196" x2="330" y2="196" class="m t1"/>
+<circle cx="76" cy="112" r="13" class="k"/>
+<line x1="90" y1="104" x2="172" y2="114" class="k t5"/>
+<path d="M172 114 L166 194 L150 194" class="k t3"/>
+<path d="M104 106 L100 156" class="k t3"/>
+<ellipse cx="128" cy="105" rx="22" ry="8" class="h d"/>
+<circle cx="214" cy="40" r="14" class="m"/>
+<path d="M212 56 L218 140 L222 194 L236 194" class="m t5"/>
+<path d="M206 70 L170 62 L130 90" class="a t5"/>
+<path d="M212 78 L158 124 L106 122" class="m t3 d"/>
+{arrow(112,60,122,92,'h','aH')}
+{lbl(10,22,'Heel of your other hand,','tb')}{lbl(10,36,'between the shoulder blades','tb')}
+{lbl(330,126,'Stand to the','tb','end')}{lbl(330,140,'side and slightly','tb','end')}{lbl(330,154,'behind','tb','end')}{lead(292,148,226,148)}
+{lbl(10,216,'One arm across the chest. Bend them','')}{lbl(10,230,'forward at the waist, upper body about','')}{lbl(10,244,'level with the ground','')}''')
+
+svg('abdominal-thrusts', 210, 'Abdominal thrusts: stand behind the person with your arms around their waist, one fist just above the belly button with the thumb side against the belly and your other hand over it, pulling sharply in and up', f'''
+<line x1="20" y1="196" x2="330" y2="196" class="m t1"/>
+<circle cx="150" cy="40" r="14" class="k"/>
+<path d="M150 56 L156 124 L152 194 L132 194" class="k t5"/>
+<circle cx="196" cy="34" r="14" class="m"/>
+<path d="M194 50 L202 126 L206 194 L224 194" class="m t5"/>
+<path d="M190 74 L162 96 L132 104" class="m t3"/>
+<circle cx="143" cy="104" r="9" class="a afs"/>
+<circle cx="144" cy="104" r="12" class="a"/>
+<circle cx="148" cy="126" r="3" class="kf"/>
+{arrow(100,150,134,120,'h','aH')}
+{lbl(10,22,'Stand behind them,','tb')}{lbl(10,36,'arms around the waist','tb')}
+{lbl(330,100,'Fist just above','tb','end')}{lbl(330,114,'the belly button,','tb','end')}{lbl(330,128,'other hand over it','tb','end')}{lead(244,116,158,106)}
+{lbl(10,172,'Belly button','')}{lead(66,168,144,128)}
+{lbl(10,128,'Pull sharply','tb')}{lbl(10,142,'in and up','tb')}''')
+
+svg('splint-forearm', 190, 'Forearm splint: a padded rigid splint along the forearm that reaches past the joint above and the joint below, tied above and below the injury and not over it', f'''
+<path d="M34 54 H250 C268 54 276 58 296 60 V100 C276 102 268 104 250 104 H34 Q24 104 24 94 V64 Q24 54 34 54 Z" class="skin"/>
+<rect x="14" y="108" width="296" height="12" rx="4" class="k"/>
+<rect x="18" y="104" width="288" height="4" class="w wfs"/>
+<circle cx="40" cy="79" r="20" class="m d"/><circle cx="262" cy="79" r="18" class="m d"/>
+<circle cx="150" cy="79" r="16" class="h d"/>
+<rect x="98" y="48" width="12" height="78" rx="4" class="k wf t3"/><rect x="196" y="48" width="12" height="78" rx="4" class="k wf t3"/>
+{lbl(40,36,'Joint above','tb','middle')}{lbl(262,36,'Joint below','tb','middle')}
+{lbl(150,20,'Injury','tb','middle')}{lead(150,24,150,60)}
+{lbl(104,146,'Tie above','tb','middle')}{lbl(202,146,'and below','tb','middle')}
+{lbl(170,164,'not over the injury','tb','middle')}
+{lbl(14,184,'Padded rigid splint reaches past both joints','')}''')
+
+svg('pressure-dressing', 236, 'Pressure dressing: first press hard with both hands on gauze or clean cloth placed on the bleeding spot, then wrap a firm bandage over the dressing', f'''
+<path d="M14 90 H326 V122 H14 Z" class="skin"/>
+<rect x="136" y="82" width="68" height="8" rx="3" class="k milk"/>
+<rect x="144" y="66" width="52" height="16" rx="6" class="a af"/>
+<line x1="156" y1="66" x2="156" y2="14" class="k t5"/><line x1="184" y1="66" x2="184" y2="14" class="k t5"/>
+{arrow(232,24,232,76,'h','aH')}
+{lbl(14,22,'1. Press hard,','tb')}{lbl(14,36,'both hands','tb')}
+{lbl(14,64,'Gauze or cloth right','')}{lbl(14,78,'on the bleeding spot','')}{lead(122,70,138,84)}
+<line x1="20" y1="132" x2="320" y2="132" class="m t1 d"/>
+{lbl(14,156,'2. Then wrap a firm bandage','tb')}{lbl(14,170,'over the dressing','tb')}
+<path d="M14 188 H326 V220 H14 Z" class="skin"/>
+<path d="M118 184 L152 184 L140 224 L106 224 Z M146 184 L180 184 L168 224 L134 224 Z M174 184 L208 184 L196 224 L162 224 Z M202 184 L236 184 L224 224 L190 224 Z" class="k wf"/>
+''')

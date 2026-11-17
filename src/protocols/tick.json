@@ -45,6 +45,7 @@
     {
       "id": "s4",
       "text": "Pull straight up, away from the skin, with steady, even pressure. Do not twist or jerk. Keep pulling until it lets go.",
+      "fig": "tick",
       "detail": "Steady, even upward pressure (AHA 2024, CDC). Red Cross: pull straight up slowly and steadily, without twisting, until the tick releases. Twisting or jerking can leave the mouthparts in the skin (CDC).\n\nDo not try to make the tick back out with petroleum jelly, nail polish, a hot match, heat, gasoline, alcohol or anything else. These are less effective (AHA), can take hours while the tick keeps feeding (Red Cross), and may make the tick push infected fluid into the skin (CDC).",
       "warn": "No petroleum jelly, nail polish, heat or matches on the tick.",
       "log": "Tick removed"

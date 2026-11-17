@@ -457,3 +457,18 @@ def test_bad_deep_link_repaired_at_boot_is_a_deep_link_entry(page, app_url):
     page.wait_for_timeout(200)
     assert page.url.startswith(app_url)
     assert not page.locator('#player').is_visible()
+
+
+def test_every_fig_step_renders_an_svg(page, app_url):
+    page.goto(app_url)
+    pairs = page.evaluate("FK_DATA.protocols.flatMap(p => p.steps.filter(s => s.fig).map(s => [p.id, s.id, s.fig]))")
+    assert len(pairs) >= 9, pairs
+    for pid, sid, fig in pairs:
+        page.evaluate(f"location.hash = '#/emergency/{pid}/{sid}'")
+        svg = page.locator('#player .pp-fig svg')
+        expect(svg).to_have_count(1)
+        box = svg.bounding_box()
+        assert box['width'] > 100 and box['height'] > 50, (pid, sid, fig, box)
+        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (pid, sid, fig)
+        assert page.evaluate("(() => { const b = document.querySelector('#player .pp-body'); return b.scrollWidth <= b.clientWidth; })()"), (pid, sid, fig)
+        assert box['x'] >= 0 and box['x'] + box['width'] <= 360, (pid, sid, fig, box)

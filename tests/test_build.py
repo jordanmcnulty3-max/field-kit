@@ -40,7 +40,7 @@ def test_normal_build_inlines_all_topics(tree):
     text = index.read_text(encoding='utf-8')
     assert '"topics":[' in text and '"checklists":[{' in text and '"id":"ten-essentials"' in text
     ids = topic_ids()
-    assert len(ids) == 15
+    assert len(ids) >= 15   # the 15 migrated topics plus any content-pack topics
     for tid in ids:
         assert f'"id":"{tid}"' in text
     assert re.search(r'"figSvg":"<svg', text) and '"figLabel":"' in text

@@ -1693,3 +1693,148 @@ Source keys:
 - Ready.gov Pets (https://ready.gov/pets): site error. No per-animal water figure found.
 - NIST SP 811 Appendix B.8 web page (2008 edition): the fetch needed an approval nobody answered, so it was not retried. NIST Handbook 44 appendices (nist.gov/document/... PDFs): site error. NIST SP 811 Appendix B intro page (nist.gov/node/777686) and footnotes page (nist.gov/node/777646) opened but hold no gallon row. The withdrawn 1995 edition was used; USGS-FW agrees with it to the four decimal places USGS prints. A reviewer may want to confirm the figure against the 2008 edition.
 - UNT web archive copies of NIST Weights and Measures appendices: only the archive wrapper loaded, no content.
+
+## Water pack Task 4: amounts, storage, water in the house (2026-11-18)
+
+Files (all draft): src/survival/surv-water-how-much.json, surv-water-store.json, surv-water-in-the-house.json,
+src/checklists/home-water-store.json. Every source below was found by web search and opened by web fetch on
+2026-11-18; the page title (and date where printed) was checked after each fetch. Fetches return excerpts capped at
+about 125 characters per quote, so long sentences were read as consecutive pieces and checked for gaps.
+
+Source keys:
+- CDC-EWS: CDC, How to Create an Emergency Water Supply, reviewed June 27, 2025. https://cdc.gov/water-emergency/about/how-to-create-and-store-an-emergency-water-supply.html (headings: Bottled water; How much emergency water to store; Choosing a container; Don't use unsafe containers; Cleaning the container before use; Storing the water)
+- CDC-FCW: CDC, How to Find Clean Water in an Emergency, reviewed June 25, 2025. https://www.cdc.gov/water-emergency/about/how-to-find-clean-water-in-an-emergency.html
+- CDC-MWS: CDC, How to Make Water Safe in an Emergency, reviewed September 19, 2024. https://cdc.gov/water-emergency/about
+- CDC-BL: CDC, How to Safely Clean and Sanitize with Bleach, reviewed August 26, 2026. https://www.cdc.gov/natural-disasters/safety/how-to-safely-clean-and-sanitize-with-bleach.html
+- CDC-CO: CDC, Carbon Monoxide (CO) Poisoning Basics, dated Oct. 26, 2026. https://www.cdc.gov/co/faqs.htm
+- EPA-ED: US EPA, Emergency Disinfection of Drinking Water. https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water
+- RG-W: Ready.gov (FEMA), Water. https://www.ready.gov/water
+- RG-SODA: Ready.gov, Storing Water in Plastic Soda Bottles, last updated 09/18/2011. https://www.ready.gov/storing-water-plastic-soda-bottles
+- RG-KIT: Ready.gov, Emergency Supply List. https://www.ready.gov/kit
+- FW: FEMA with the American Red Cross and USDA, Food and Water in an Emergency (county-hosted copy, as in Task 3). https://henrycounty.in.gov/DocumentCenter/View/295/Food-and-Water-in-an-Emergency-PDF
+- FEMA-FS: FEMA, Fact Sheet: How to Make Your Water Safe to Drink, released October 8, 2017. https://www.fema.gov/print/pdf/node/318019
+- FEMA-Q: FEMA, Where can I find clean drinking water after a disaster? (no date; the page credits EPA). https://www.fema.gov/node/what-are-emergency-water-sources-if-im-running-out-clean-water
+- ARC-KIT: American Red Cross, What Do You Need In a Survival Kit. https://redcross.org/get-help/how-to-prepare-for-emergencies/survival-kit-supplies.html
+- ARC-MU: American Red Cross, Disaster Supplies Kit, reproduced by University of Missouri Extension (EMW1012, reviewed July 2025). https://extension.missouri.edu/emw1012
+- NDEC: National Disaster Education Coalition (American Red Cross, FEMA, IAEM, IBHS, NFPA, NWS, USDA/CSREES, USGS), Talking About Disaster: Guide for Standard Messages, Disaster Supplies Kit section (no date printed; hosted by energy.gov). https://www.energy.gov/sites/prod/files/Disaster_Supplies_Kit.pdf
+- WADOH: Washington State Department of Health, Treating Drinking Water for Emergency Use, DOH 331-115, July 2022. https://DOH.WA.gov/sites/default/files/legacy/Documents/Pubs/331-115.pdf
+- OSU: Ohio State University Extension, Food Preservation: Preserving Water for Emergency Use, HYG-5354, 2017. https://ohioline.osu.edu/factsheet/hyg-5354
+- UAF: University of Alaska Fairbanks Cooperative Extension, Emergency Water Supply, SAL-00006, February 2021. https://www.uaf.edu/ces/publications/database/housing/emergency-water-supply.php
+- GOHSEP: Louisiana Governor's Office of Homeland Security and Emergency Preparedness, Locating Safe Drinking Water (no date). https://gohsep.la.gov/divisions/hazard-mitigation-assistance/fact-sheet-index/locating-safe-drinking-water
+- NC-MW: "Managing Water in a Disaster Situation" (no publisher or date printed; hosted by NC Risk Management; its wording matches the old Ready.gov Managing Water page). https://rmp.nc.gov/LCF/Publications/AL_Resources/Loss Of Water/Managing Water.pdf. Read for comparison only; not cited in topics.
+- USGS-FW: USGS Water Science School, Facts About Water. https://www.usgs.gov/water-science-school/science/facts-about-water
+- FDA-HM: FDA, Guidance for Industry: Guidelines for Determining Metric Equivalents of Household Measures. https://www.fda.gov/food/guidance-documents-regulatory-information-topic/guidance-industry-guidelines-determining-metric-equivalents-household-measures
+
+Conversions: litres from USGS-FW (1 gal = 3.7854 L, 1 kg/L) and NIST-811 (Task 3); teaspoon from FDA-HM ("1 teaspoon means 5 mL"); °F to °C and inches to cm by the definitions (°C = (°F − 32) × 5/9; 1 in = 2.54 cm). Rounded figures noted below.
+
+### surv-water-how-much
+
+- At least 1 gallon (3.8 L) per person per day — CDC-EWS ("Store at least 1 gallon of water per person, per day"); RG-W; FW; ARC-KIT. Same as src/tooldata/water.json. Matches.
+- What it covers: CDC "drinking, cooking, brushing teeth, and other uses" (CDC-EWS); "for drinking and sanitation" (RG-W); food preparation and hygiene (FW); half a gallon drinking and half a gallon cooking and sanitation — NDEC ("Use one-half gallon per day for drinking, and one-half gallon for cooking and sanitation"). Matches.
+- About three quarters of a gallon (2.8 L) of fluid a day — RG-W ("A normally active person needs about three quarters of a gallon of fluid daily, from water and other beverages"). 0.75 × 3.785 = 2.84 L. Matches.
+- Drink at least 2 quarts (1.9 L) a day — FW ("A normally active person needs to drink at least two quarts of water each day"). 0.5 × 3.785 = 1.89 L. Matches.
+- Gallon does not cover flushing, bathing, laundry — none of CDC-EWS, RG-W, FW, ARC-KIT, NDEC counts water for these (absence, as Task 3 recorded). "Use water not fit to drink for it" — CDC-FCW (pool and spa water for hygiene and cleaning). Outcome: stated as an absence plus the CDC use.
+- At least 2 weeks at home; CDC 3 days, 2 weeks if possible; Red Cross and FEMA 2 weeks at home — CDC-EWS ("Try to store a 2-week supply if possible"); ARC-KIT ("2-week supply for home"); FW ("at least a two-week supply"). 3 days to take if you leave — ARC-KIT ("3-day supply for evacuation"). Matches the planner (D15).
+- 4 people for 2 weeks = 56 gallons (212 L) — arithmetic 4 × 14 × 1; 56 × 3.785 = 212.0 L.
+- Children, nursing mothers, sick people; medical emergency — RG-W. Pregnant women, pets — CDC-EWS ("pregnant women, people who are sick, pets, or if you live in a hot climate"). Matches.
+- Very hot temperatures can double needs — RG-W ("In very hot temperatures, water needs can double"); FW ("Hot environments can double that amount"). Planner adds 1 gallon per person per day — src/tooldata/water.json (D16). Matches.
+- No amount for the others — CDC-EWS, RG-W, FW give none. But OSU gives "1 quart per small pet" (see Disagreements).
+- Rationing quote — RG-W verbatim: "Never ration drinking water unless ordered to do so by authorities." "Drink the amount you need today and try to find more for tomorrow." FW: "If supplies run low, never ration water. Drink the amount you need today, and try to find more for tomorrow." Matches.
+- Reduce activity and stay cool — RG-W ("Minimize the amount of water your body needs by reducing activity and staying cool"). Matches.
+- Pool or spa water for washing and cleaning, never drinking — CDC-FCW. Matches.
+- Dehydration signs — not restated; linked p:dehydration.
+- 8.33 lb per gallon; 1 kg per litre — USGS-FW ("Weight: 8.33 pounds/gallon; 1 kilogram/liter"). Table: 1 gal 8.3 lb (3.8 kg); 5 gal = 41.65 lb, "about 42 lb", 18.9 L / 19 kg; 14 gal = 116.6 lb "about 117 lb", 53.0 L / 53 kg; 56 gal = 466.5 lb "about 467 lb", 212 L / 212 kg. Arithmetic checked by hand.
+- Fill jugs only as full as can be carried; movable containers; round 3 to 6 gallon jugs work best — UAF ("These containers should be moveable in case you have to take them with you", "Round 3-to 6-gallon jugs tend to work best", "When calculating how much you want to fill jugs for portability, remember that water weighs a bit over 8 pounds per gallon"). 3 gal = 11.4 L, 6 gal = 22.7 L: "11 to 23 L". Matches (extension, below the preferred agencies; no safety number rests on it).
+- 3-day supply in easy-to-carry containers — ARC-KIT ("Keep your supplies in an easy-to-carry emergency preparedness kit ... in case you must evacuate"). Matches.
+
+### surv-water-store
+
+- Unopened commercially bottled water safest and most reliable — CDC-EWS verbatim. Matches.
+- Sealed original container, cool dark place — RG-W ("store it in the sealed original container in cool, dark place"). Matches.
+- Expiration date — CDC-EWS ("Observe the expiration date for store-bought water"). Replace at least once a year — ARC-MU ("Change and replace the water at least once a year"). Disagreement: whichever comes first (more cautious). D20.
+- Once opened, use it, do not store — ARC-MU ("Once opened, use it and do not store it further"). Matches.
+- Food-grade water storage containers — CDC-EWS ("FDA-approved food-grade water storage containers"); RG-W. Matches. Soft drink bottles — FW ("Plastic containers, such as soft drink bottles, are best"); NDEC. Matches.
+- If not food-grade: tight top; durable, unbreakable, not glass; narrow neck if possible — CDC-EWS verbatim list. Matches.
+- No paper in the lid — OSU ("Be sure that lids do not contain paper components"). Matches.
+- Never a container that held toxic chemicals (bleach, pesticides, chemicals, oil); tiny amounts remain — CDC-EWS ("toxic chemicals, such as bleach or pesticides"); WADOH ("pesticides, chemicals, or oil"); OSU ("because tiny amounts may remain in the container's pores"). Matches.
+- Milk jugs and cartons: don't seal well, break down — ARC-MU ("Milk containers are not recommended because they do not seal well"; "Avoid using containers that will decompose or break, such as milk cartons or glass bottles"); NDEC (same sentence). Matches. Juice jugs: no opened source names them; not added (the dispatch suggested them).
+- Not glass — CDC-EWS ("not glass"); ARC-MU and NDEC (glass bottles break). FW, OSU and WADOH allow glass. More cautious (CDC) used. D20.
+- Wash with soap, rinse completely — CDC-EWS ("Wash the storage container with soap and rinse completely with water"); RG-SODA ("so there is no residual soap"). Matches.
+- Sanitizing solution: 1 teaspoon of unscented liquid household chlorine bleach in 1 quart (4 cups) of water; bleach 5%–9% sodium hypochlorite — CDC-EWS (read in two pieces: "...mixing 1 teaspoon of unscented liquid household chlorine bleach" ... "in 1 quart (4 cups) of water"; "Use bleach that contains 5%–9% sodium hypochlorite"). RG-W and RG-SODA give the same 1 teaspoon per quart without a strength. "the usual strength in the US" — CDC-BL ("this is the most common concentration in the United States"). 5 mL — FDA-HM. 0.95 L — USGS-FW (3.7854 / 4 = 0.946). Matches.
+- Cover tightly, shake well, touch all inside surfaces; wait at least 30 seconds, pour out; air-dry — CDC-EWS (step order checked by hand against the page's "Steps to take": wash, sanitize, cover and shake, wait 30 seconds and pour out, air-dry, fill). Matches. RG-SODA instead rinses the solution out with clean water; CDC's order kept (D20).
+- Never mix bleach with ammonia or any other cleaner; open windows and doors indoors; try not to breathe fumes — CDC-BL verbatim. Matches.
+- Chlorinated public supply: nothing to add — RG-SODA ("If the tap water has been commercially treated from a water utility with chlorine, you do not need to add anything else"); ARC-MU ("you do not have to treat the water before storing it"). Matches.
+- Well or unchlorinated water: treat with bleach before storing, dose as in Make water safe — RG-SODA says "add two drops of non-scented liquid household chlorine bleach to the water" without saying how much water (a soda bottle of unstated size); WADOH says one or two drops per gallon "to maintain water quality while in storage". Both are lower than the v7 dose (8 drops per gallon of 5% to 9% bleach); the v7 dose (EPA, CDC) is used by linking surv-make-water-safe, not restated. D18.
+- Fill to the top — RG-SODA ("Fill the bottle to the top"). Matches; "unless it may freeze" from OSU (below).
+- Cap tightly, don't touch inside the cap — RG-SODA verbatim meaning. Matches.
+- Label "drinking water" with the date — CDC-EWS ("Label container as "drinking water" and include storage date"). Grease pencil or crayon on the lid — UAF. Matches.
+- 50°F to 70°F (10°C to 21°C) — CDC-EWS ("Keep containers in a place with a cool temperature (50°F –70°F)"). 70°F = 21.1°C. Matches.
+- Out of direct sunlight — CDC-EWS; dark place — RG-W, FW. Matches.
+- Away from gasoline, pesticides — CDC-EWS; household cleaners — UAF. Matches.
+- Safe from flooding and freezing — WADOH ("Store in a cool place, safe from flooding, freezing, and earthquake damage"). Matches. Northeast: no opened source says more about stored water in an unheated house; the detail is left for surv-water-winter.
+- Freezing: leave 2 to 3 inches of air space; plastic preferred, some glass breaks regardless; frozen bottles help keep food frozen in an outage — OSU verbatim meaning. 2 in = 5.1 cm, 3 in = 7.6 cm: "5 to 8 cm" (rounded up so the space is not understated). Matches.
+- Replace home-filled water every 6 months — CDC-EWS; RG-W; FW ("Rotate water every six months"). Matches.
+- Use bottled water for drinking, cooking, brushing teeth — CDC-EWS. Matches.
+- Boiled or treated water in clean sanitized containers with tight covers — CDC-MWS. Matches.
+
+### surv-water-in-the-house
+
+- Know the incoming water valve — FW ("Do you know the location of your incoming water valve?"). "where the water pipe enters the house": plain description of an incoming valve, no source wording. Accepted as description.
+- Shut it if you hear of broken water or sewage lines, to stop contaminated water entering — FW ("You'll need to shut it off to stop contaminated water from entering your home" "if you hear reports of broken water or sewage lines"); "or if officials say there is a problem" — CDC-FCW ("Listen to reports from local officials ... You may need to shut off the main water valve to your home to prevent contaminants from entering pipes in your home"); FEMA-FS. Matches.
+- Pipes: highest tap to let air in, a small amount trickles out, then the lowest tap — FW verbatim order ("let air into the plumbing by turning on the faucet in your house at the highest level." "A small amount of water will trickle out." "Then obtain water from the lowest faucet in the house."). NC-MW identical. "With the main valve shut" — FW's preceding instruction. Matches; order checked by hand.
+- Use the tap water heater tank, not the radiator tank of older homes — CDC-FCW. Only if undamaged — NDEC ("use water from undamaged hot water tanks"); NC-MW agrees. Matches.
+- On-demand (tankless) heater holds no tank of water — UAF ("Hot water heaters that are not "on demand" and have typical cylindrical tanks probably have this amount in storage"). Inference from UAF; low risk. UAF's "60 gallons" not used (it says "probably").
+- Water heater steps, order checked by hand:
+  1. Electricity or gas off — FW ("be sure the electricity or gas is off,"); GOHSEP ("Turn off the power that heats it").
+  2. Let the tank cool — GOHSEP ("and let the tank cool"). FW does not say this; added as the cautious step (burn hazard).
+  3. Container under the drain — GOHSEP ("Then place a container underneath and open the drain valve at the bottom of the tank").
+  4. Open the drain at the bottom — FW ("and open the drain at the bottom of the tank"); GOHSEP.
+  5. Start the flow by turning off the water intake valve and turning on a hot-water faucet — FW verbatim ("Start the water flowing by turning off the water intake valve" "and turning on a hot-water faucet"). NC-MW: "at the tank".
+  6. Do not turn on gas or electricity when the tank is empty — FW verbatim; leave it off until the water supply is back — GOHSEP ("Don't turn the tank on again until water services are restored"). NC-MW: refill first; if the gas was turned off, a professional is needed to turn it back on (unattributed; not used).
+  FW gives steps 1, 4, 5, 6 in that order; GOHSEP gives 1, 2, 3, 4 in that order. The merged order keeps both. Outcome: matches both.
+- Melted ice made with uncontaminated water — CDC-FCW; FEMA-FS; keep the ice storage clean — FEMA-Q ("Make sure your storage area is clean before storing ice that will be consumed"). Matches.
+- Liquid from canned fruit and vegetables — CDC-FCW; FEMA-FS. Matches.
+- Toilet tank, not the bowl, clear and not treated with cleaners that change the color — CDC-FCW; FEMA-FS; no hanging deodorizer — UAF; "as a last resort" — FW. "Treat it before you drink it" — group judgement, cautious (NC-MW lists the flush tank as unsafe). D17.
+- If warned, fill large pots, sinks and bathtubs — OSU ("If you have been warned ahead of time, fill large pots and pans, sinks and bathtubs with water"). "Treat sink and bathtub water before you drink it" — group judgement, cautious (tubs and sinks are not sanitized containers; CDC-MWS wants treated water in sanitized containers). Logged here.
+- CDC counts heater, ice, toilet tank, canned liquid as clean and safe — CDC-FCW ("other sources of clean and safe water that can be found inside your home include"). Treat only if questionable — NDEC ("Water needs to be treated only if it is of questionable purity"). Matches.
+- "Treat it if you are not sure: boil-water notice, lines broke before the valve was shut, looks or smells wrong, don't know" — group judgement built on FW (contaminated water enters through broken lines) and NDEC (questionable purity). Cautious; logged here.
+- Radiators and hot-water boilers: don't use — FEMA-FS (listed under sources not to use: "Radiators", "Hot water boilers (part of your home heating system)"); FEMA-Q ("Do NOT drink water from radiators or boilers in a home heating system"). Matches. No source gives another use.
+- Waterbeds: don't use; fungicides in the water and chemicals in the vinyl — FEMA-FS ("Water beds (fungicides added to the water and/or chemicals in the vinyl may make water unsafe for use)"). GOHSEP allows hand washing and laundry. More cautious (FEMA) used. D19.
+- Pools and spas: not for drinking; washing yourself, cleaning and related uses — CDC-FCW; FEMA-FS; FEMA-Q. Matches.
+- Toilet bowl: don't use — FW and CDC-FCW ("not the bowl"). Matches.
+- Flood water: don't drink — FW ("You should not drink floodwater"); NDEC ("Do NOT drink flood water"). Matches.
+- Links p:burns (water heater), s:surv-make-water-safe, s:surv-find-water. p:carbon-monoxide not linked: no opened source ties the water-heater steps to CO.
+
+### home-water-store (checklist)
+
+- stored-water, qty 1 gal per person per day — CDC-EWS, RG-W, ARC-KIT, FW. Note (who needs more) — RG-W, CDC-EWS.
+- bottled-water — CDC-EWS (safest; expiration date); RG-W (sealed original container).
+- containers — CDC-EWS, FW, NDEC; note: milk, glass, chemicals — ARC-MU, NDEC, CDC-EWS.
+- carry-jugs — UAF (movable jugs); 42 lb (19 kg) — USGS-FW arithmetic.
+- spare-lids — UAF ("buy an extra pack of lids to have on hand in case they crack").
+- dish-soap — CDC-EWS, RG-SODA.
+- bleach: plain unscented, 5% to 9%, room temperature, under one year — CDC-MWS (5% to 9%), EPA-ED ("stored at room temperatures for less than one year"; unscented, no color safe or added cleaners); ARC-KIT ("Household liquid bleach"); NDEC ("household liquid bleach to treat drinking water"). Never mix — CDC-BL.
+- dropper — NDEC ("medicine dropper"); EPA-ED ("Locate a clean dropper from your medicine cabinet or emergency supply kit").
+- measuring-spoon — CDC-EWS (1 teaspoon per quart for sanitizing).
+- labels — CDC-EWS; UAF.
+- pot-and-stove — CDC-MWS ("Boiling is the best way to kill germs in water"); note — CDC-CO ("Never use a portable gas camp stove indoors." "Never burn charcoal indoors.").
+- strainer — CDC-MWS ("filter it through a clean cloth, paper towel, or coffee filter"); EPA-ED.
+- filter, 1 micron absolute; does not remove viruses, disinfect after — CDC-MWS ("Must have an absolute pore size of 1 micron or smaller to remove parasites"; "Will not remove viruses"). Matches v7 surv-make-water-safe.
+- main-valve and wrench — FW (incoming valve); NDEC ("shut-off wrench").
+- 14 items. Only stored-water has qty (the only per-person figure in any source).
+
+### Disagreements and things read that differ from src/tooldata/water.json
+
+- Pets: OSU says "Store 1 gallon per person per day, and 1 quart per small pet." Task 3 recorded that no opened source gives a pet figure (CDC-EWS: none; ready.gov/pets would not open). The planner has no pet value; reported for the Task 3 reviewer. Not added to topics (extension, below FEMA/CDC, which give none).
+- NC-MW (unattributed, matches the old Ready.gov Managing Water text) says "Many people need even more than the average of one-half gallon, per day" and "Under no circumstances should a person drink less than one quart (four cups) of water each day". Not used (no publisher); consistent with the planner's 1 gallon as a minimum.
+- NDEC: "a minimum of three gallons per person" for 3 days — same 1 gallon per day.
+- FEMA-Q says not to drink "collected rainwater"; FEMA-FS says rainwater is for hygiene and cleaning, not drinking; CDC-FCW lists rainwater as a source that can be made safe by treatment (as surv-find-water says). For Task 5 (surv-find-water); not in this batch.
+- OSU's bleach chart (16 drops per gallon of 5.25% bleach, and a text/chart conflict on a quart) and UAF's bleach text (a drop per quart; its table and its "half teaspoon per 10 gallons" disagree) differ from the v7 dose; neither is used.
+
+### Task 4 pages that would not open or were not used
+
+- henrycounty.in.gov FW PDF by curl: refused by the proxy; read through web fetch in short consecutive quotes instead.
+- archive.org / webharvest.gov copies of FEMA "Are You Ready?" shelter.pdf and fema.gov/rrr/waterf.shtm: rate-limited.
+- UNT web archive copies of Ready.gov Managing Water (2012, 2013): wrapper only, no content.
+- cahf.org "fema guidelines managing water supply" PDF: site error.
+- dem.nv.gov FEMA checklist 2014 PDF: site error. The current Ready.gov kit page no longer lists bleach or a dropper; NDEC and EPA-ED were used for those items.

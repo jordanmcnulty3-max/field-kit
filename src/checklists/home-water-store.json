@@ -1,0 +1,120 @@
+{
+  "id": "home-water-store",
+  "title": "Home water store",
+  "category": "water",
+  "summary": "What a household needs to hold, carry and treat its water for the planning period.",
+  "items": [
+    {
+      "id": "stored-water",
+      "text": "Stored drinking water: at least 1 gallon (3.8 L) per person per day",
+      "note": "Store more for children, nursing mothers, pregnant women, sick people, pets and hot weather.",
+      "qty": {
+        "amount": 1,
+        "unit": "gal",
+        "per": "personDay"
+      }
+    },
+    {
+      "id": "bottled-water",
+      "text": "Unopened bottled water, sealed in its original containers",
+      "note": "The safest stored water. Counts toward the total above. Use before its expiration date."
+    },
+    {
+      "id": "containers",
+      "text": "Food-grade water storage containers or clean plastic soft drink bottles, with tight lids",
+      "note": "Never milk jugs, glass, or anything that held chemicals."
+    },
+    {
+      "id": "carry-jugs",
+      "text": "Jugs small enough to carry when full, for fetching water and for leaving",
+      "note": "A full 5-gallon jug weighs about 42 lb (19 kg)."
+    },
+    {
+      "id": "spare-lids",
+      "text": "Spare lids for your jugs"
+    },
+    {
+      "id": "dish-soap",
+      "text": "Dish soap, to wash containers before filling"
+    },
+    {
+      "id": "bleach",
+      "text": "Plain, unscented household chlorine bleach (5% to 9%), stored at room temperature and less than a year old",
+      "note": "For sanitizing containers and treating water. Never mix bleach with ammonia or any other cleaner."
+    },
+    {
+      "id": "dropper",
+      "text": "Medicine dropper, for measuring bleach drops"
+    },
+    {
+      "id": "measuring-spoon",
+      "text": "Teaspoon measure, for the container sanitizing solution"
+    },
+    {
+      "id": "labels",
+      "text": "Labels, grease pencil or crayon, to mark each container “Drinking water” with the date"
+    },
+    {
+      "id": "pot-and-stove",
+      "text": "A pot to boil water and a stove with fuel",
+      "note": "Never use a portable gas camp stove or burn charcoal indoors."
+    },
+    {
+      "id": "strainer",
+      "text": "Clean cloths, paper towels or coffee filters, to strain cloudy water"
+    },
+    {
+      "id": "filter",
+      "text": "Portable water filter with an absolute pore size of 1 micron or smaller",
+      "note": "Filters do not remove viruses: disinfect the water after filtering."
+    },
+    {
+      "id": "main-valve",
+      "text": "Know where the main water valve is, and keep a wrench by it if it needs one"
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, How to Create an Emergency Water Supply (reviewed June 27, 2025)",
+      "used": "1 gallon per person per day; store more for pregnant women, sick people, pets, hot climate; bottled water safest, observe expiration date; food-grade containers, not glass; never containers that held toxic chemicals; wash with soap; 1 teaspoon bleach per quart sanitizing solution; label “drinking water” with date"
+    },
+    {
+      "name": "Ready.gov (FEMA), Water",
+      "used": "1 gallon per person per day; children, nursing mothers and sick people need more; very hot temperatures can double needs; bottled water sealed in its original container"
+    },
+    {
+      "name": "American Red Cross, Survival Kit Supplies; American Red Cross, Disaster Supplies Kit (University of Missouri Extension EMW1012)",
+      "used": "One gallon per person per day; household liquid bleach; easy-to-carry kit; milk containers do not seal well"
+    },
+    {
+      "name": "National Disaster Education Coalition (American Red Cross, FEMA and others), Talking About Disaster: Disaster Supplies Kit",
+      "used": "Soft drink bottles; avoid milk cartons and glass bottles; household liquid bleach to treat drinking water; medicine dropper; shut-off wrench"
+    },
+    {
+      "name": "US EPA, Emergency Disinfection of Drinking Water; CDC, How to Make Water Safe in an Emergency (reviewed September 19, 2024)",
+      "used": "Bleach 5% to 9%, unscented, less than a year old at room temperature (as in surv-make-water-safe); boiling the best way to kill germs; strain cloudy water through a clean cloth, paper towel or coffee filter; portable filters need an absolute pore size of 1 micron or smaller for parasites and will not remove viruses, disinfect after filtering"
+    },
+    {
+      "name": "CDC, How to Safely Clean and Sanitize with Bleach (reviewed August 26, 2026)",
+      "used": "Never mix bleach with ammonia or any other cleaner"
+    },
+    {
+      "name": "CDC, Carbon Monoxide (CO) Poisoning Basics",
+      "used": "Never use a portable gas camp stove indoors; never burn charcoal indoors"
+    },
+    {
+      "name": "University of Alaska Fairbanks Cooperative Extension, Emergency Water Supply (SAL-00006, 2021)",
+      "used": "Movable 3 to 6 gallon jugs; spare lids; mark the fill date with a crayon or grease pencil"
+    },
+    {
+      "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency",
+      "used": "Know the location of the incoming water valve"
+    },
+    {
+      "name": "USGS Water Science School, Facts About Water",
+      "used": "8.33 lb per gallon (weight of a 5-gallon jug worked from it)"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

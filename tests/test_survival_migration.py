@@ -10,7 +10,7 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, 'figs'))
 
 import figs  # noqa: E402
-from tools.validate import validate_topics  # noqa: E402
+from tools.validate import TOOL_NAMES, validate_topics  # noqa: E402
 
 FIXTURE = os.path.join(ROOT, 'tests', 'fixtures', 'survival-v6.html')
 FIG_RE = re.compile(r'\{\{fig:([a-z0-9-]+)\|(.*?)\}\}', re.S)
@@ -18,6 +18,13 @@ FIG_RE = re.compile(r'\{\{fig:([a-z0-9-]+)\|(.*?)\}\}', re.S)
 
 def v6():
     return open(FIXTURE, encoding='utf-8').read()
+
+
+# The 15 topics migrated in v7 (Task 2); content packs add new topics beside them.
+MIGRATED = {'surv-dangerous-animals', 'surv-field-dressing-game', 'surv-find-water', 'surv-fire', 'surv-food-and-wild-plants',
+            'surv-knots', 'surv-make-water-safe', 'surv-navigation-without-a-compass', 'surv-priorities',
+            'surv-river-crossings', 'surv-shelter', 'surv-signal-for-rescue', 'surv-ten-essentials',
+            'surv-traps-and-fishing', 'surv-weather-and-lightning'}
 
 
 def new_topics():
@@ -28,7 +35,7 @@ def test_every_topic_has_real_sources():
     """Replaces the word-for-word conversion check once source-checking started (Task 13): every topic is either
     still a draft or has no placeholder source."""
     topics = new_topics()
-    assert len(topics) == 15
+    assert len(MIGRATED) == 15 and MIGRATED <= set(topics)
     for tid, t in topics.items():
         assert t['sources'], tid
         if t.get('draft') is True:
@@ -61,15 +68,17 @@ def test_figures_used_equal_old_set_minus_shelter_desert_and_nav_cross():
 def test_draft_topics_keep_placeholder_source_and_all_topics_validate():
     """Topics not yet source-checked keep the placeholder; every topic validates against the real link keys."""
     topics = list(new_topics().values())
-    assert len(topics) == 15
-    for t in topics:
+    migrated = [t for t in topics if t['id'] in MIGRATED]
+    assert len(migrated) == 15
+    for t in migrated:
         assert t['category'] == 'basics'
         if t.get('draft') is True:
             assert t['reviewed'] == '2026-11-17'
             assert t['sources'] == [{'name': 'Not yet source-checked', 'used': 'Converted from v6 text; checked in Tasks 13 to 16'}]
     keys = {'p:' + os.path.splitext(os.path.basename(p))[0] for p in glob.glob(os.path.join(ROOT, 'src', 'protocols', '*.json'))}
     keys |= {'c:' + os.path.splitext(os.path.basename(p))[0] for p in glob.glob(os.path.join(ROOT, 'src', 'checklists', '*.json'))}
-    keys |= {'u:daylight', 'u:sos'}   # survival tool keys, as build.py allows them
+    keys |= {'u:' + n for n in TOOL_NAMES}   # survival tool keys, as build.py allows them
+    keys |= {'s:' + t['id'] for t in topics}
     errors, _warnings = validate_topics(topics, set(figs.F), keys)
     assert errors == []
 

@@ -191,3 +191,21 @@ Source disagreements found while checking the Survival topics. Each says what th
    gallon). Today: the planner adds 1 gallon per person per day when "Very hot weather" is ticked (the most cautious
    reading). Say if the group wants the smaller figure. No source opened gives an amount for children, nursing or
    pregnant women, sick people or pets; the planner only says they need more.
+17. **Toilet tank water (surv-water-in-the-house) — Water pack Task 4.** CDC and FEMA (2017 fact sheet): the toilet
+   tank (not the bowl) is a usable source if the water is clear and has no toilet cleaner in it; FEMA, the Red
+   Cross and USDA call it a last resort. An unattributed copy of the old Ready.gov "Managing Water" text lists
+   "water from the toilet bowl or flush tank" as unsafe. Today: the topic allows the tank as a last resort and says
+   to treat it before drinking (more cautious than CDC). Say if the group wants it ruled out, or allowed untreated.
+18. **Bleach for stored well water (surv-water-store) — Water pack Task 4.** Ready.gov (Storing Water in Plastic Soda
+   Bottles): add two drops of bleach to well or unchlorinated water, without saying how much water (a soda bottle of
+   unstated size). Washington State DOH: one or two drops per gallon to keep stored water fresh. The v7 dose (EPA,
+   CDC) is 8 drops of 5% to 9% bleach per gallon. Today: the topic sends well water to Make water safe for the full
+   v7 dose before storing. Say if the group wants a lower "storage" dose for water already known to be safe.
+19. **Waterbed water (surv-water-in-the-house) — Water pack Task 4.** FEMA (2017 fact sheet): waterbeds are a source
+   not to use (fungicides in the water, chemicals in the vinyl). Louisiana's emergency office: not for drinking, but
+   safe for hand washing and laundry. Today: "Don't use it" (FEMA). Say if the group wants to allow it for laundry.
+20. **Containers and bottled water (surv-water-store) — Water pack Task 4.** Glass: CDC says not glass; FEMA, Red Cross
+   and USDA, Ohio State and Washington State DOH allow glass. Today: no glass (CDC; also Red Cross: glass breaks).
+   Bottled water: CDC says observe the expiration date; the Red Cross says replace it at least once a year. Today:
+   whichever comes first. Sanitizing: CDC pours the bleach solution out and lets the container air-dry; Ready.gov
+   rinses it out with clean water. Today: CDC's steps (no rinse). Say if any of these should change.

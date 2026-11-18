@@ -1,7 +1,7 @@
 {
   "id": "surv-fire",
   "title": "Fire",
-  "category": "basics",
+  "category": "heat",
   "keywords": [
     "fire",
     "tinder",
@@ -9,7 +9,17 @@
     "ferro rod",
     "teepee",
     "log cabin",
-    "wet weather"
+    "wet weather",
+    "fire on snow",
+    "reflector",
+    "long fire",
+    "star fire",
+    "pyramid fire",
+    "cooking fire",
+    "matches",
+    "lighter",
+    "fire kit",
+    "campfire"
   ],
   "summary": "Gather all your tinder, kindling and fuel first, then build and light the fire. Never leave it unattended.",
   "sections": [
@@ -54,6 +64,55 @@
       ]
     },
     {
+      "h": "Fire on snow",
+      "blocks": [
+        {
+          "list": [
+            "In the cold, green logs up to about the thickness of a soda can break easily, so you can gather them by hand for the base. Make the base big enough to hold the whole fire, so the coals can’t melt a hole down through the snow (Army ATP 3-50.21).",
+            "In extreme cold, green wood dries out and becomes a usable fuel (Army ATP 3-50.21).",
+            "In extreme cold, lighter fuel can freeze and the lighter won’t work. Warm it with your body heat first (Army ATP 3-50.21)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Fire lays for heat and cooking",
+      "blocks": [
+        {
+          "p": "The teepee lights fast and the log cabin makes coals for cooking (above). Other lays the Army uses:"
+        },
+        {
+          "list": [
+            "Long fire, for heat and cooking: lay two logs, green if you can, at least 6 inches (15 cm) thick, side by side to hold the coals between them, and close enough that pots can rest on them. Put a 1-inch (2.5 cm) stick under both logs at each end so the coals get more air. More people can sit near the heat, and you can rake coals to one end to cook while the fire burns at the other (Army ATP 3-50.21).",
+            "Star fire, to save fuel: lay logs like the spokes of a wheel with their inner ends in the fire, and push each one in as its end burns. It lets you burn logs too big to break up. It must be tended all the time. Hardwood works best (Army ATP 3-50.21).",
+            "Pyramid, a long, slow fire: lay two small logs side by side on the ground and a solid layer of small logs across them. Add three or four more layers, each smaller than the last and crosswise to the one below. Light a small fire on top; it burns down through the layers (Army ATP 3-50.21). The Army says it needs no attention overnight. This app still says never leave a fire unattended, and asleep counts as unattended (see Put it out).",
+            "Cross-ditch, for a draft: scrape an X about 12 inches (30 cm) across and 3 inches (8 cm) deep. Put the tinder in the middle and a small pyramid of kindling over it. Air flows along the ditch under the tinder (Army ATP 3-50.21)."
+          ]
+        },
+        {
+          "p": "For heat and less smoke, burn dry, split hardwood such as oak, hickory or ash. Softwoods such as pine, spruce and fir burn faster and make more smoke unless you keep a large flame going, but are easier to split (Army ATP 3-50.21)."
+        }
+      ]
+    },
+    {
+      "h": "Reflectors",
+      "blocks": [
+        {
+          "list": [
+            "A reflector throws the fire’s heat where you want it and keeps the wind from carrying the heat away (Army ATP 3-50.21). Use it to send heat into the open side of a lean-to (below), not into an enclosed shelter.",
+            "Build it before you light the fire: that is much harder once the fire is hot (Army ATP 3-50.21).",
+            "Make it of green logs or dry, solid rock. Never use wet, porous or riverbed rocks: they can explode when heated (Army ATP 3-50.21).",
+            "With a lean-to, the fire goes in front of the open side and the reflector on the far side of the fire, so the heat comes back into the shelter (Shelter).",
+            "Reflector wall for a lean-to in cold weather: drive four stakes about 5 feet (1.5 m) long into the ground. Stack green logs between them in two rows, with a gap between the rows, and fill the gap with dirt. Tie the tops of the stakes together so the logs and dirt stay in place. The dirt makes the wall stronger and reflect more heat (Army ATP 3-50.21)."
+          ]
+        },
+        {
+          "link": "s:surv-shelter",
+          "label": "Shelter"
+        }
+      ]
+    },
+    {
       "h": "Ways to light it",
       "blocks": [
         {
@@ -69,6 +128,40 @@
       ]
     },
     {
+      "h": "Wet weather",
+      "blocks": [
+        {
+          "list": [
+            "Keep tinder and kindling off wet ground: build on a dry base, such as a flat piece of wood or dry, solid rock (Army ATP 3-50.21).",
+            "Dry damp tinder by carrying it between layers of your clothes, where your body heat reaches it (Army ATP 3-50.21).",
+            "Fuel doesn’t have to be completely dry once the fire is going well enough to dry it before it burns. The wetter the fuel, the more white smoke (Army ATP 3-50.21).",
+            "As a last resort, green wood will burn if it is finely split and mixed evenly with dry, dead wood (Army ATP 3-50.21).",
+            "Shield a lit match from the wind. Hold it head down at an angle so the flame climbs the stick, then hold it at the bottom edge of the tinder without pushing it in and smothering it (Army ATP 3-50.21).",
+            "Never burn wood with poison ivy or poison oak on it: the smoke can cause breathing problems (Army ATP 3-50.21)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Carry a fire kit",
+      "blocks": [
+        {
+          "list": [
+            "Carry matches (waterproof if you can) or a lighter, and fire starters: things that catch fire quickly and keep a flame going (National Park Service).",
+            "Keep matches in a waterproof container with a striker. Matches with wax-coated tips are sold, or dip the heads in melted wax yourself (Army ATP 3-50.21).",
+            "A butane lighter stands up to wind better and burns hotter than a liquid-fuel lighter (Army ATP 3-50.21).",
+            "A ferro rod works wet or dry, hot or cold, and doesn’t go off with age. Quality varies, so try yours before you need it, and keep it from rusting (Army ATP 3-50.21).",
+            "Pack man-made tinder, such as cotton balls coated with petroleum jelly (see Gather everything first).",
+            "Learn the local fire rules before you go (National Park Service). New York’s are below."
+          ]
+        },
+        {
+          "link": "s:surv-ten-essentials",
+          "label": "Ten essentials"
+        }
+      ]
+    },
+    {
       "h": "Put it out",
       "blocks": [
         {
@@ -76,6 +169,9 @@
         },
         {
           "p": "In normal times, New York allows campfires less than 3 feet high and 4 feet across, burning only charcoal or dry, clean, untreated wood, and they must never be left unattended. On New York state land in normal times, use only dead and down wood; cutting standing trees is prohibited."
+        },
+        {
+          "p": "Asleep counts as unattended. If a fire must burn while people sleep, one person stays awake to watch it; otherwise put it out before you sleep (Army TC 21-3 gives this rule for fires while people sleep)."
         },
         {
           "link": "p:burns",
@@ -87,7 +183,7 @@
   "sources": [
     {
       "name": "US Army ATP 3-50.21, Survival (2018), chapter 5",
-      "used": "Fire site flat, dry, protected from wind, away from snow laden trees; expose at least 3 feet of soil; green log base on deep snow; porous rocks explode; tinder and manmade tinder examples (birch bark, dry grass, cattail and milkweed seed down, pitch wood shavings, lint, cotton balls coated with petroleum-based paste) and a cupped handful minimum; skipping a phase makes the fire fail; kindling pencil-lead to thumb size, 12 to 18 inches, a soda can diameter of each size, dead conifer lower branches; fuel forearm diameter minimum; dead branches snap; rotten wood smolders; standing or leaning dead wood sheds rain; split wood exposes dry inner wood; tepee burns with wet wood; log cabin makes a quick large bed of coals for cooking; light from the upwind side; metal match striker at 90 degrees driven down the stick with even pressure; steel wool across battery posts makes a coal, hydrogen gas warning; bow and drill"
+      "used": "Fire site flat, dry, protected from wind, away from snow laden trees; expose at least 3 feet of soil; green log base on deep snow; porous rocks explode; tinder and manmade tinder examples (birch bark, dry grass, cattail and milkweed seed down, pitch wood shavings, lint, cotton balls coated with petroleum-based paste) and a cupped handful minimum; skipping a phase makes the fire fail; kindling pencil-lead to thumb size, 12 to 18 inches, a soda can diameter of each size, dead conifer lower branches; fuel forearm diameter minimum; dead branches snap; rotten wood smolders; standing or leaning dead wood sheds rain; split wood exposes dry inner wood; tepee burns with wet wood; log cabin makes a quick large bed of coals for cooking; light from the upwind side; metal match striker at 90 degrees driven down the stick with even pressure; steel wool across battery posts makes a coal, hydrogen gas warning; bow and drill; heat pack: green logs up to soda-can size break easily in the cold, base sized to the whole fire, stops coals melting through the snow (5-6); reflectors direct heat, shield from wind, heat into a shelter opening (used for a lean-to only), built before the fire is hot, nonporous rock or green logs (5-6, 5-7); dry base keeps tinder off wet ground (5-8, 5-13); damp tinder dried between clothing layers (5-12); damp fuel dries once established, more white smoke (5-20); dry split hardwood (oak, hickory, ash) more heat, less smoke than softwood (pine, spruce, fir), harder to split; softwood faster and smokier unless a large flame is kept (5-20); green wood finely split and mixed with dry dead wood as a last resort, dries in extreme cold; no poison ivy or poison oak (5-22); cross-ditch X 12 inches across, 3 inches deep (5-26); pyramid burns downward, needs no attention overnight per the Army (5-27); long fire, logs at least 6 inches, 1-inch sticks under each end, more people near the heat, coals to one end for cooking (5-29); star fire saves fuel, constantly tended, hardwood best (5-30); waterproof matches, waterproof container, striker, wax-dipped heads (5-34); shield the match, head down, bottom edge of tinder, do not smother (5-35); butane lighter better in wind and hotter, lighter fuel freezes in extreme cold, warm with body heat (5-36); metal match not affected by wet or dry, cold or hot, or age, quality varies, test it, protect from corrosion (5-37); lean-to reflector wall of four 5-foot stakes, two rows of green logs filled with dirt, tops bound (6-33)"
     },
     {
       "name": "US Army FM 21-76, Survival Manual, chapter 7",
@@ -96,6 +192,10 @@
     {
       "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapter VI",
       "used": "Do not use porous rocks or riverbed rock, they may explode when heated"
+    },
+    {
+      "name": "US Army TC 21-3, Soldier's Handbook for Individual Operations and Survival in Cold-Weather Areas (1986), chapter 10",
+      "used": "Fires put out while personnel sleep (danger of fire, asphyxiation, carbon monoxide); if a fire is necessary while sleeping, an alert fire guard must be posted"
     },
     {
       "name": "USDA Forest Service, Intermountain Region, Fire Safety",
@@ -112,7 +212,11 @@
     {
       "name": "NYS DEC, Camping, primitive (Fire Safety at Campsites)",
       "used": "Cutting standing trees is prohibited; use only dead and down wood for fires (state land, normal times)"
+    },
+    {
+      "name": "National Park Service, Ten Essentials (updated May 28, 2026)",
+      "used": "Fire: matches (preferably waterproof) or a lighter and fire starters, items that catch fire quickly and sustain a flame; learn local fire regulations before heading out"
     }
   ],
-  "reviewed": "2026-11-17"
+  "reviewed": "2026-11-18"
 }

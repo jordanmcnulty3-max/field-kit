@@ -86,24 +86,28 @@
           "table": {
             "head": [
               "Mix",
-              "Bleach",
-              "Water",
-              "Leave it wet",
-              "Source"
+              "Strong mix: door handles, taps, toilet seats and everything a sick person touches; vomit or diarrhea after cleaning it up",
+              "Food mix: dishes, cutlery, cups, and counters where food is made"
             ],
             "rows": [
               [
-                "Strong mix: door handles, taps, toilet seats and everything a sick person touches; vomit or diarrhea after cleaning it up",
+                "Bleach",
                 "1/3 cup (5 tablespoons, 75 mL) of 5% to 9% bleach",
-                "1 gallon",
-                "Surfaces: at least 1 minute. After vomit or diarrhea: 10 minutes if you can, never less than 5",
-                "CDC; Minnesota Department of Health"
+                "1 tablespoon (15 mL) of 5% to 9% bleach"
               ],
               [
-                "Food mix: dishes, cutlery, cups, and counters where food is made",
-                "1 tablespoon (15 mL) of 5% to 9% bleach",
+                "Water",
                 "1 gallon",
-                "Dishes: rinse or soak 1 minute. Counters: wipe on and leave wet. Then air dry completely",
+                "1 gallon"
+              ],
+              [
+                "Leave it wet",
+                "Surfaces: at least 1 minute. After vomit or diarrhea: 10 minutes if you can, never less than 5",
+                "Dishes: rinse or soak 1 minute. Counters: wipe on and leave wet. Then air dry completely"
+              ],
+              [
+                "Source",
+                "CDC; Minnesota Department of Health",
                 "CDC; New York State Department of Health"
               ]
             ]

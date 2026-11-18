@@ -2533,3 +2533,33 @@ Changes from the cross-pack consistency review (task-9-review.md). All wording m
 - M18 find-water summary: covers treating wild water and rain.
 - N2 surv-garbage-and-greywater, West Hants `used` line: reduce water use immediately when the power goes out.
 - M19 see Task 10 (tests/test_survival_home.py); surv-water-in-the-house also added to the always-visible list.
+
+## Water pack final review fixes (2026-11-18)
+
+### Tables on a phone (final review, Important 1)
+
+Layout only, in src/shell.html and src/survival.js: topic table cells now have a 3.5em minimum width (was 8em), 5 px side padding, word wrapping and 14 px cell text (13 px headers, as before). A table still wider than its box at the phone's width scrolls inside it, shows "Swipe sideways to see more columns" above it, and keeps its first column in place with an opaque background. Tables that fit show neither. tests/test_survival_topic.py::test_shipped_topic_tables_fit_or_scroll_with_cue_and_sticky_first_column_at_360 checks every shipped topic table at 360 x 640, day and night.
+
+At 360 px every table now fits except the two CDC well bleach tables (Wells without power), which scroll with the cue and a sticky "Depth of water" column. Their rows and columns are in CDC's order, unchanged.
+
+One table was reshaped. No value changed: every cell, number, unit, source name and warning is the same text as before, with nothing added and nothing dropped (checked by script: the 15 cells before equal the 15 cells after, and cell [row i][column j] before is cell [row j][column i] after).
+
+surv-clean-and-disinfect, "Which mix for which job": transposed (rows become columns), so it is 3 columns instead of 5.
+
+Before (head, then rows):
+
+| Mix | Bleach | Water | Leave it wet | Source |
+|---|---|---|---|---|
+| Strong mix: door handles, taps, toilet seats and everything a sick person touches; vomit or diarrhea after cleaning it up | 1/3 cup (5 tablespoons, 75 mL) of 5% to 9% bleach | 1 gallon | Surfaces: at least 1 minute. After vomit or diarrhea: 10 minutes if you can, never less than 5 | CDC; Minnesota Department of Health |
+| Food mix: dishes, cutlery, cups, and counters where food is made | 1 tablespoon (15 mL) of 5% to 9% bleach | 1 gallon | Dishes: rinse or soak 1 minute. Counters: wipe on and leave wet. Then air dry completely | CDC; New York State Department of Health |
+
+After (head, then rows):
+
+| Mix | Strong mix: door handles, taps, toilet seats and everything a sick person touches; vomit or diarrhea after cleaning it up | Food mix: dishes, cutlery, cups, and counters where food is made |
+|---|---|---|
+| Bleach | 1/3 cup (5 tablespoons, 75 mL) of 5% to 9% bleach | 1 tablespoon (15 mL) of 5% to 9% bleach |
+| Water | 1 gallon | 1 gallon |
+| Leave it wet | Surfaces: at least 1 minute. After vomit or diarrhea: 10 minutes if you can, never less than 5 | Dishes: rinse or soak 1 minute. Counters: wipe on and leave wet. Then air dry completely |
+| Source | CDC; Minnesota Department of Health | CDC; New York State Department of Health |
+
+The method table in Make water safe ("Which method first") was not reshaped: with the smaller minimum width all four columns, Viruses included, fit at 360 px.

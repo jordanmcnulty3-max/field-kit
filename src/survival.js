@@ -154,7 +154,17 @@
     const cell = (tag, c) => '<' + tag + '>' + esc(c == null ? '' : c) + '</' + tag + '>';
     const head = Array.isArray(tb.head) && tb.head.length ? '<thead><tr>' + tb.head.map(c => cell('th', c)).join('') + '</tr></thead>' : '';
     const rows = tb.rows.filter(Array.isArray).map(r => '<tr>' + r.map(c => cell('td', c)).join('') + '</tr>').join('');
-    return '<div class="tablewrap" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table>' + head + '<tbody>' + rows + '</tbody></table></div>';
+    return '<p class="sv-swipe" hidden>Swipe sideways to see more columns</p>' +
+      '<div class="tablewrap" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table>' + head + '<tbody>' + rows + '</tbody></table></div>';
+  }
+  /* Only a table wider than its box shows the swipe cue and a sticky first column; measured once the page is visible and again on resize. */
+  function fitTables(el) {
+    for (const w of el.querySelectorAll('.sv-page .tablewrap')) {
+      w.classList.remove('wide');   // measure the table as it would be drawn without the wider scrolling cells
+      const wide = w.scrollWidth > w.clientWidth + 1, cue = w.previousElementSibling;
+      w.classList.toggle('wide', wide);
+      if (cue && cue.classList.contains('sv-swipe')) cue.hidden = !wide;
+    }
   }
   function block(b) {
     if (!b || typeof b !== 'object') return '';
@@ -406,7 +416,9 @@
     return shown;
   }
   function drawTopic(t) {
-    showPage(el => { el.innerHTML = topicHTML(t); });
+    const fit = () => fitTables(pageEl);
+    showPage(el => { el.innerHTML = topicHTML(t); addEventListener('resize', fit); return () => removeEventListener('resize', fit); });
+    fit();
     FK.recent.add('s:' + t.id);
     $('svTitle').focus({ preventScroll: true });
   }

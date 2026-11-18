@@ -149,10 +149,11 @@ Source disagreements found while checking the Survival topics. Each says what th
    most common on "summer afternoons"; CDC's Safety Guidelines: Lightning says late afternoon or evening (NWS says
    early afternoon). Today: the protocol is unchanged. Should the crouch stay as a last resort, and should the
    timing line be corrected to the sources?
-10. **Cooking temperature for wild game.** CDC (MMWR 2024, bear meat trichinellosis) and NYS Department of Health:
-   cook all game and birds to 165°F. Missouri Department of Conservation: 160°F. Penn State Extension: whole venison
+10. **Cooking temperature for wild game.** CDC (MMWR 2024, bear meat trichinellosis): wild game meat to 165°F or
+   more. NYS Department of Health: all game and birds to 165°F. USDA FSIS ("Roasting Those 'Other' Holiday Meats"):
+   venison roasts 160°F, whole game birds 165°F (and all poultry 165°F on its chart). Missouri Department of Conservation: 160°F. Penn State Extension: whole venison
    cuts 145°F, ground 160°F. Pennsylvania Game Commission (tularemia page): at least 135°F. Army ATP 3-50.21: 180°F.
-   Today: 165°F for all wild game and birds, fish 145°F (CDC, NYS DOH, USDA FSIS), and freezing is not treated as
+   Today: 165°F for all wild game (CDC, NYS DOH) and birds (NYS DOH, USDA FSIS), fish 145°F (USDA FSIS), and freezing is not treated as
    killing trichinella in wild game (CDC; Penn State says three weeks of freezing works, which CDC says is not
    reliable for wild game). Say if the group wants the Army's 180°F.
 11. **Wild plants removed for lack of a source.** Dandelion: University of Vermont and University of Maine Extension

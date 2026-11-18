@@ -71,9 +71,9 @@
       "blocks": [
         {
           "list": [
-            "Cattail: in wet ground. Young shoots can be eaten like asparagus, and the starchy roots and the pollen can be made into flour. Look-alike: yellow flag iris grows on the same pond, lake and stream shores in New York, and every part of it is poisonous. Its leaves look very like cattail leaves when it is not in flower; cattail leaf bases are round, iris leaf bases are flat.",
+            "Cattail: in wet ground. Young shoots can be eaten like asparagus, and the starchy roots and the pollen can be made into flour. Look-alikes: two poisonous irises grow in the same wet ground: yellow flag iris (invasive, on pond, lake and stream shores in New York) and the native blue flag iris (pond margins, wet meadows and marshes in the Northeast). Yellow flag iris is easily mistaken for cattail when it is not in flower. Cattail leaf bases are round; iris leaf bases are flat.",
             "Wild blackberries and raspberries: if it looks like a store-bought blackberry or raspberry, it is one. They have no poisonous look-alikes.",
-            "Insects: grasshoppers, crickets, grubs and ants. Remove wings and barbed legs, and cook them fully. Skip insects that bite or sting, hairy or brightly coloured insects, caterpillars, smelly insects, spiders, and flies, ticks and mosquitoes.",
+            "Insects: grasshoppers, crickets, grubs and ants. Remove legs, wings and heads, and cook them fully. Skip insects that bite or sting, hairy or brightly coloured insects, caterpillars, smelly insects, spiders, and flies, ticks and mosquitoes.",
             "Freshwater fish: cook them thoroughly, to 145°F inside, to kill parasites."
           ]
         },
@@ -110,7 +110,7 @@
     },
     {
       "name": "US Army ATP 3-50.21, Survival (2018), chapter 4",
-      "used": "Plant warning signs (4-61) and that they only often help (4-57, 4-62); no field test for mushrooms; insects to avoid and cooking (4-133, 4-23); cook freshwater fish to kill parasites (4-148)"
+      "used": "Plant warning signs (4-61) and that they only often help (4-57, 4-62); no field test for mushrooms; insects to avoid, remove legs, wings and heads, cook (4-133, 4-136, 4-23); cook freshwater fish to kill parasites (4-148)"
     },
     {
       "name": "US Army FM 21-76, Survival Manual (2006 copy), chapters 8 and 9",
@@ -131,6 +131,10 @@
     {
       "name": "Alberta Agriculture, Pale Yellow Iris weed sheet; Montana Department of Agriculture, Yellowflag Iris",
       "used": "Yellow iris confused with cattail when not in bloom; cattail leaf bases round, iris flat"
+    },
+    {
+      "name": "Cornell Botanic Gardens, Wild Iris (Iris versicolor); NC State Extension Plant Toolbox, Iris versicolor",
+      "used": "Blue flag iris poisonous (roots, sap, seeds); native to the northeastern US; pond margins, wet meadows, marshes"
     },
     {
       "name": "University of Illinois Extension, Brambles: Pesky Garden Weed or Delicious Summer Treat (2021)",

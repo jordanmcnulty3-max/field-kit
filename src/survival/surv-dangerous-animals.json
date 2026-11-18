@@ -16,6 +16,7 @@
   ],
   "summary": "Never run from a bear, fight back if a black bear attacks, check yourself for ticks, and get a snakebite to a hospital.",
   "where": [
+    "town",
     "rural",
     "woods"
   ],
@@ -30,7 +31,7 @@
           "list": [
             "Store food and every scented item (toiletries, medicine, garbage, pet food) away from where you sleep. In the Adirondacks, “overnight campers in the Eastern High Peaks Wilderness Area are required by regulation to use a bear-resistant canister between April 1 and November 30”. Keep the canister on level ground at least 100 feet from your campsite and cooking area.",
             "Bear spray can work against an aggressive bear if you have practised with it. Local rules may restrict carrying it.",
-            "Never run, and don’t climb a tree. Talk in a calm voice while you back away slowly.",
+            "Never run, and don’t climb a tree. Talk in a calm voice while you back away slowly. If a bear charges, stand your ground, raise your arms, keep talking calmly and use bear spray if you have it; if it keeps following you, stand your ground, look bigger, shout and bang a stick on the ground.",
             "If a black bear attacks: don’t play dead. Fight back at once with everything you have, aiming punches and kicks at its face, and use sticks or rocks."
           ]
         }
@@ -48,13 +49,13 @@
       "h": "Snakes",
       "blocks": [
         {
-          "p": "New York has three venomous snakes: the timber rattlesnake and the copperhead, both found mostly on rocky slopes in hardwood forest, and the eastern massasauga, left at only two wetland sites in the state."
+          "p": "New York has three venomous snakes: the timber rattlesnake and the copperhead, both found mostly on rocky slopes in hardwood forest, and the eastern massasauga, left at only two wetland sites in the state. One of them is Cicero Swamp in Onondaga County."
         },
         {
           "list": [
             "Leave every snake alone. If you can see the pit on its face, you are too close.",
             "Stay out of tall grass and leaf piles when you can, avoid climbing on rocks or woodpiles where a snake may hide, and wear boots and long pants.",
-            "If bitten: keep calm, take off rings and watches before swelling starts, and get to a hospital. Don’t cut, suck, ice or put a tourniquet on the bite."
+            "If bitten: keep calm and still, take off rings and watches before swelling starts, and get to a hospital. Don’t cut, suck, ice or put a tourniquet on the bite."
           ]
         },
         {
@@ -109,11 +110,11 @@
     },
     {
       "name": "Northeast Black Bear Technical Committee, Recommendations for Human-Black Bear Encounters (via mass.gov)",
-      "used": "Don't run or climb trees; talk calmly while backing away; fight back immediately if attacked; bear spray effective with practice, local rules may restrict"
+      "used": "Don't run or climb trees; curious bear: talk calmly while backing away; charged: stand your ground, arms above head, bear pepper spray; following: stand your ground, look bigger, shout, bang a stick, prepare spray; fight back immediately if attacked; bear spray effective with practice, local rules may restrict"
     },
     {
       "name": "National Park Service, Bear Attacks",
-      "used": "Black bear attack: fight back, don't play dead, punches and kicks to the face; fight back against a predatory bear of any species; never run"
+      "used": "Black bear attack: fight back, don't play dead, punches and kicks to the face; bluff charge: hold your ground, do not run; fight back against a predatory bear of any species; never run"
     },
     {
       "name": "NYS DEC, New York State Black Bear Response Manual (3rd ed., 2011)",
@@ -126,6 +127,10 @@
     {
       "name": "NYS DEC, Snakes of New York (Conservationist reprint); NYS DEC, Eastern Massasauga",
       "used": "Three venomous species; timber rattlesnake and copperhead on rocky hardwood slopes; massasauga at two known sites, boggy wetlands; leave snakes alone; pit too close"
+    },
+    {
+      "name": "Oneida Lake Education Initiative (NY Sea Grant site), Massasauga Rattlesnake",
+      "used": "One of the two New York massasauga sites is Cicero Swamp, Onondaga County"
     },
     {
       "name": "CDC/NIOSH, Venomous Snakes at Work",

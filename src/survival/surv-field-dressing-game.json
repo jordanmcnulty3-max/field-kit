@@ -26,7 +26,10 @@
           "warn": "Don’t shoot, handle or eat an animal that looks sick or acts strangely, and don’t touch or eat one you find dead. Wear rubber, nitrile or latex gloves, and don’t use your kitchen knives."
         },
         {
-          "p": "Chronic wasting disease is in New York deer: in November 2026 DEC announced it in a wild deer from Livingston County, the first wild case since 2005 in Oneida County. Avoid handling the internal organs, especially the brain and spinal cord; DEC treats the brain, spinal cord, spleen and eyes as high-risk parts. In normal times, strongly consider having a deer tested before you eat it, and never eat meat from a deer that tests positive."
+          "p": "Chronic wasting disease is in New York deer: in November 2026 DEC announced it in a wild deer from Livingston County, the first wild case since 2005 in Oneida County. Avoid handling the internal organs, especially the brain, spinal cord and lymph nodes; DEC treats the brain, spinal cord, spleen and eyes as high-risk parts. Cooking does not remove the risk of chronic wasting disease. In normal times, strongly consider having a deer tested before you eat it, and never eat meat from a deer that tests positive."
+        },
+        {
+          "p": "Rabies is occasionally found in New York deer. It spreads through nervous tissue and saliva: avoid handling an animal that may be rabid, and never eat its meat."
         },
         {
           "link": "p:animal-bite",
@@ -99,7 +102,7 @@
     },
     {
       "name": "NYS Department of Health, Harvesting, Preparing, and Eating Wild Game",
-      "used": "Gloves; remove intestines soon; cook all game and birds to 165°F in the thickest part; don't eat sick, strange-acting or found-dead game; lead: trim away from wound channels, discard bruised meat, children and people who can get pregnant avoid lead-shot game"
+      "used": "Gloves; remove intestines soon; cook all game and birds to 165°F in the thickest part; don't eat sick, strange-acting or found-dead game; rabies occasionally in NY deer, spread by nervous tissue and saliva, never eat infected game; CWD parts include brain, spinal cord, lymph nodes; cooking does not remove CWD risk; lead: trim away from wound channels, discard bruised meat, children and people who can get pregnant avoid lead-shot game"
     },
     {
       "name": "Ohio DNR Division of Wildlife, Field Dressing Your Deer (Pub. 111)",

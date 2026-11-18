@@ -1480,3 +1480,30 @@ Source keys (opened 2026-11-17 by web fetch from search results; title checked a
 - Utah Poison Control water hemlock page: no publisher printed; western species; not used.
 - eRegulations furbearer page: third party; replaced by the DEC guide PDF.
 - CT hunter safety chapter 13 (Outdoor Roadmap): opened; not cited (commercial course text).
+
+### Task 15 fix round 1 (2026-11-17)
+
+New sources opened (from search results; titles confirmed):
+- OLEI-MASS: Oneida Lake Education Initiative (NY Sea Grant site), Massasauga Rattlesnake. https://seagrant.sunysb.edu/OLI/olei-rattlesnake.htm ("Found in only two New York State locations including Cicero Swamp"; "one is located in Onondaga County's Cicero Swamp"). NYS DEC's Cicero Swamp WMA page (https://dec.ny.gov/places/cicero-swamp-wildlife-management-area) was also opened: it places the WMA in Onondaga County but does not mention the massasauga.
+- CBG-IRIS: Cornell Botanic Gardens, Wild Iris (Iris versicolor). https://cornellbotanicgardens.org/plant/wild-iris ("Poisonous: Yes"; irisin in rhizomes; moist to wet; no publisher printed in the extracted text; cornellbotanicgardens.org domain).
+- NCSU-IRIS: NC State Extension Plant Toolbox, Iris versicolor. https://plants.ces.ncsu.edu/plants/iris-versicolor (roots, sap, seeds poisonous; native south from Nova Scotia through the northeastern US; pond margins, wet meadows, marshes).
+- FSIS-OTHER: USDA, Roasting Those "Other" Holiday Meats (fsis.usda.gov; the page names USDA, not FSIS). https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/meat/roasting-those-other-holiday-meats (venison roasts 160 °F; whole game birds 165 °F).
+- Re-opened: NEBBTC (curious, charged, following, attack cases), NPS-BEAR (bluff charge: hold your ground, do not run), DOH-GAME (rabies, CWD parts, cooking), ATP 4-136 (insects).
+
+Statements changed:
+- F1 surv-dangerous-animals, bears: added "If a bear charges, stand your ground, raise your arms, keep talking calmly and use bear spray if you have it; if it keeps following you, stand your ground, look bigger, shout and bang a stick on the ground." — NEBBTC ("If charged, stand your ground, talk to the bear in a calm voice and use bear pepper spray when available"; "Make yourself look bigger by putting your arms above your head"; following: "stand your ground, make yourself look bigger, shout at the bear, threaten the bear with whatever is at hand (bang a stick on the ground, clap your hands)"); NPS-BEAR bluff charge ("hold your ground and stay calm"; "Do NOT run during a bluff charge"). The back-away sentence stays for a curious bear (NEBBTC case a).
+- F2 surv-food-and-wild-plants, cattail look-alikes: now names yellow flag iris and the native blue flag iris, both poisonous (CCE-IRIS; CBG-IRIS; NCSU-IRIS). "when it is not in flower" kept for yellow flag iris only: AB-IRIS states "Iris pseudacorus especially when not in bloom might be confused with: Common Cattail". No opened source says the same of blue flag iris, so the sentence names yellow flag iris. Leaf-base sentence kept (MT-IRIS, stated for yellowflag iris). "in New York" kept only for yellow flag iris (CCE-IRIS); blue flag iris is placed "in the Northeast" (NCSU-IRIS range).
+- F3 surv-dangerous-animals, snakes: appended "One of them is Cicero Swamp in Onondaga County." — OLEI-MASS.
+- F4 surv-dangerous-animals: where tags now town, rural, woods (ticks and rabies apply in town: CDC-TICK says check after your own backyard; DOH-RABIES covers unusual animals on your property).
+- F5 surv-dangerous-animals, snakebite: "keep calm" now "keep calm and still", matching the snakebite protocol it links to.
+- F6 surv-field-dressing-game: added "Rabies is occasionally found in New York deer. It spreads through nervous tissue and saliva: avoid handling an animal that may be rabid, and never eat its meat." — DOH-GAME ("only found occasionally in New York State deer"; "particularly nervous tissue and saliva"; "Avoid handling rabid animals and do not eat meat from infected game"). Lymph nodes added to the parts to avoid — DOH-GAME (CWD list: brain, spinal cord and other nervous tissue, spleen, pancreas, eyes, tonsils, lymph nodes). Added "Cooking does not remove the risk of chronic wasting disease." — DOH-GAME verbatim.
+- F8 surv-food-and-wild-plants, insects: "Remove wings and barbed legs" now "Remove legs, wings and heads" — ATP 4-136 ("remove their legs, wings, and heads before eating them"). FM p. 73 says wings and barbed legs; ATP (newer) used.
+- F11 docs/decisions-for-jordan.md D10: CDC MMWR now credited with wild game meat only; birds credited to NYS DOH and USDA FSIS; FSIS-OTHER figures added (venison roasts 160 °F, whole game birds 165 °F).
+
+Diagrams removed in this batch (record; figs/ not edited):
+- plant-warnings: standing rule (no plant drawings); stays out.
+- trap-snare: label-only fix possible. Delete the "≈ 3 in" dimension marker and label; relabel "Loop about fist size" as "Loop big enough to pass over its head"; fix the alt text to match. A later small task makes the change.
+- dress-deer: label-only fix possible. Remove the "Head uphill" arrow and label; "breastbone to pelvis" should read "pelvis to breastbone". A later small task makes the change.
+- fishing: the right half draws a stake funnel where the text now describes a lashed-stick basket trap; needs a new drawing, waits for the food pack.
+
+F7 (record): the trapping check intervals (Southern Zone 24 hours; Northern Zone 24 or 48 hours by WMU and trap) come from the 2023-2024 NYS DEC Hunting & Trapping Guide. Recheck against the current edition in the food pack.

@@ -628,10 +628,13 @@
     const st = F.protocol && F.protocol.timer && F.protocol.timer();
     return !!((F.tools && F.tools.cpr && F.tools.cpr.running()) || (F.tools && F.tools.tq && F.tools.tq.active().length) || (st && !st.done));
   };
-  function paintUpdate() { $('#updBar').hidden = !(updateReady && !emergencyBusy()); }
+  /* Search is a full-screen overlay: the bar would sit on top of it, so it waits there and shows again when search closes. */
+  const searchOpen = () => !!(window.FK && FK.route && FK.route.isSearch && FK.route.isSearch());
+  function paintUpdate() { $('#updBar').hidden = !(updateReady && !emergencyBusy() && !searchOpen()); }
   function updateAvailable() { updateReady = true; paintUpdate(); }
   on('activity', paintUpdate);
   on('route', paintUpdate);
+  on('search', paintUpdate);
   if ('serviceWorker' in navigator && window.isSecureContext) {
     let hadController = !!navigator.serviceWorker.controller;
     navigator.serviceWorker.addEventListener('controllerchange', () => {

@@ -599,3 +599,18 @@ def test_protocol_notes_are_indexed_like_the_summary(page, app_url):
     ks = [r['key'] for r in q(page, 'zanzibarite')]
     assert set(ks) == {'p:noted', 'p:summed', 'p:bodied'}
     assert ks.index('p:noted') < ks.index('p:bodied') and ks.index('p:summed') < ks.index('p:bodied')
+
+
+def test_update_banner_does_not_cover_search_and_returns_when_search_closes(page, app_url):
+    boot(page, app_url)
+    page.evaluate('FK.updateAvailable()')
+    assert page.locator('#updBar').is_visible()
+    open_search(page)
+    type_q(page, 'bleeding')
+    page.wait_for_selector('#searchBody .sr-item')
+    bar = page.locator('#updBar')
+    assert bar.is_hidden()
+    page.click('#searchClose')
+    page.wait_for_selector('#searchPane', state='hidden')
+    assert bar.is_visible()
+    assert page.locator('#updReload').is_enabled()

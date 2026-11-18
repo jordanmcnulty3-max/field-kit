@@ -1094,3 +1094,102 @@ of their values is in the fixture now.
 
 An intermediate version of the fixture labelled Utqiagvik 2026-12-21 as a geometric inference. That row now has
 USNO's own "continuously below the Horizon".
+
+## Task 13: Survival topics, water and priorities (2026-11-17)
+
+Source keys (all opened 2026-11-17 by web fetch; title checked after each fetch):
+- EPA-ED: US EPA, Emergency Disinfection of Drinking Water. https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water
+- CDC-MWS: CDC, How to Make Water Safe in an Emergency. https://cdc.gov/water-emergency/about
+- CDC-FCW: CDC, How to Find Clean Water in an Emergency. https://www.cdc.gov/water-emergency/about/how-to-find-clean-water-in-an-emergency.html
+- NYSDOH-HAB: New York State Department of Health, Harmful Blue-Green Algae Blooms. https://healthweb-back.health.ny.gov/environmental/water/drinking/bluegreenalgae/ (the page itself does not print its publisher; the health.ny.gov domain is NYS DOH)
+- ATP: US Army ATP 3-50.21, Survival, September 2018, chapter 3 (paragraph numbers below). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- FM1: FM 21-76-1 / MCRP 3-02H / NWP 3-50.3 / AFTTP(I) 3-2.26, Survival, Evasion, and Recovery, 29 June 1999 (page numbers below). https://rmp.nc.gov/LCF/Publications/AL_Resources/Survival/Multi Service Survival Manual.pdf
+- FM21-76: US Army FM 21-76, Survival Manual (2006 PDF copy, chapter 6 text; figures 6-1 and 6-2 are images and did not extract). https://northernbush.com/wp-content/downloads/woodcraft/US-Army-Survival-Manual.pdf and https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- PHX: City of Phoenix Fire Department, Desert survival (page prints no publisher; phoenix.gov fire department section). https://phoenix.gov/fire/safety-information/outdoor/desert-survival
+- TOOELE: Tooele County Health Department (Utah), Rule of Three. https://tooelehealth.org/?p=4919 and the PDF https://tooelehealth.org/wp-content/uploads/2016/06/Rule-of-3-Emerg.-Plan-English.pdf
+- DEC-LOST: NYS DEC, Lost in the woods leaflet. https://extapps.dec.ny.gov/docs/legal_protection_pdf/lostinwoods.pdf
+- DEC-CAMP: NYS DEC, State Land Camping Rules. https://dec.ny.gov/things-to-do/camping/state-land-rules
+- NPS-OEP: National Park Service, Outdoor Emergency Plan (PDF). https://www.nps.gov/subjects/healthandsafety/upload/NPS-Outdoor-Emergency-Plan-508c.pdf
+- AK-HYPO: Alaska State Parks (Alaska DNR), Hypothermia. https://dnr.alaska.gov/parks/safety/hypother.htm
+- USFS-HYPO: US Forest Service, Hypothermia. https://www.fs.usda.gov/visit/know-before-you-go/hypothermia
+- CDC-TICK: CDC, Preventing Tick Bites. https://cdc.gov/ticks/prevention/index.html
+- ARMY-COLD: army.mil, Fight the Freeze (B. Minchhoff, Fort Drum, 3 Oct 2011). https://www.army.mil/article/66527/fight_the_freeze
+- CPSC: US CPSC, Portable Heaters & Camping Equipment. https://www.cpsc.gov/es/node/12866 (English content)
+- NOAA-SW: NOAA National Ocean Service, Can humans drink seawater? https://oceanservice.noaa.gov/facts/drinksw.html
+- FDA-SEA: FDA, Selecting and Serving Fresh and Frozen Seafood Safely. https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-fresh-and-frozen-seafood-safely
+- MA-PSP: Massachusetts DPH, Red Tide (Paralytic Shellfish Poisoning). https://www.mass.gov/info-details/red-tide-paralytic-shellfish-poisoning
+- NPS-TIDE: National Park Service, How Tides Work at Acadia. https://www.nps.gov/articles/000/tides-acadia.htm
+- EPA-SUN: US EPA, Sun Safety Tips. https://www.epa.gov/sunsafety/action-steps-sun-safety
+
+### surv-make-water-safe
+
+- Settle, then filter through clean cloth, paper towel or coffee filter — EPA-ED ("let it settle and filter it through a clean cloth, paper towel, or coffee filter"); CDC-MWS. Corrected (added paper towel, coffee filter).
+- "Boiling is the best way to kill germs in water" — CDC-MWS verbatim. Replaces the removed figure caption "Boiling is the most reliable method".
+- Rolling boil at least 1 minute — EPA-ED ("rolling boil for at least one minute"); CDC-MWS (1 minute); ATP 3-41 (1 minute). Matches.
+- 3 minutes above 5,000 ft — EPA-ED ("above 5,000 feet (1,000 meters), boil water for three minutes"). CDC-MWS: above 6,500 feet. ATP 3-41: above 8,000 feet. Old text said 6,500 ft. Corrected to the most cautious (EPA). Feet only: EPA's metric figure (1,000 m) does not equal 5,000 ft, so no metric is given.
+- Boil time disagreement — NYS DEC State Land Camping Rules: boil 5 minutes; ATP 2-3 and FM1 chapter V also say 5 minutes. EPA and CDC (the water-treatment authorities named for this task) say 1 minute. The text follows EPA/CDC. Open question added to docs/decisions-for-jordan.md.
+- Bleach type: regular unscented chlorine bleach; not scented, color-safe or with added cleaners; 6 or 8.25% — EPA-ED. Corrected (added).
+- Bleach age: stored at room temperature for less than one year — EPA-ED. Matches the old caption's "not expired", made specific.
+- 8 drops per gallon of 6% — EPA-ED table; CDC-MWS (8 drops for 5% to 9%). Matches.
+- 8.25% bleach: old text 6 drops per gallon — EPA-ED table gives 6 drops per gallon for 8.25%; CDC-MWS gives 8 drops per gallon for any 5% to 9%. Sources disagree; the larger dose (CDC) is used for both strengths. Corrected. Open question added.
+- 2 drops per quart or liter — EPA-ED (both strengths); CDC-MWS (5% to 9%). Added.
+- Double for cloudy, colored or very cold — EPA-ED; CDC-MWS ("cloudy, murky, colored, or very cold"). Old text "cloudy or very cold": corrected (colored added).
+- Stir and stand 30 minutes — EPA-ED; CDC-MWS ("at least 30 minutes"). Matches.
+- Slight chlorine smell; if none, repeat dose and stand another 15 minutes — EPA-ED. Added.
+- Tablets: follow the label, products differ in strength — EPA-ED. Matches.
+- Iodine and chlorine tablets do not kill Cryptosporidium; chlorine dioxide does if instructions followed — CDC-MWS. ATP 3-36 note agrees that chemical disinfectants are not fully effective against Cryptosporidium. Added.
+- Iodine: avoid if pregnant or thyroid problems; no one more than a few weeks — CDC-MWS. Added (CDC also lists iodine hypersensitivity; not added to keep the step short — consider for pack 1).
+- Portable filters do not remove viruses; disinfect after filtering — CDC-MWS ("Will not remove viruses"). ATP 3-45 says "most filters do not remove viruses". Old text "Most filters don't stop viruses": corrected to CDC (more cautious).
+- Fuel, toxic chemicals, radioactive material cannot be made safe by boiling or disinfecting — CDC-MWS verbatim meaning; CDC-FCW. Added.
+- Heavy metals, salts, most other chemicals not destroyed by boiling or disinfection — EPA-ED. Added.
+- Harmful algal blooms: appearance (strongly colored water in the listed colors, paint-like, floating mats or scums); do not drink, prepare food or make ice with surface water during a bloom even if treated; boiling does not remove the algae or toxins — NYSDOH-HAB. Added. No opened source says what home or camping filters do for bloom toxins, so filters are covered only by "even if you treat it yourself".
+- Figure `water-safe`: removed (drawn text says 3 minutes above 6,500 ft, wrong against the corrected text). Figure file left in figs/.
+- Solar disinfection, "clear water is safe": not in the topic; nothing to check. Not added (FM1 VII-4 mentions sun disinfection without a time; adding it would expand the topic and needs a time from CDC or WHO).
+- Tags: none set (applies everywhere). Unchanged.
+
+### surv-find-water
+
+- Water runs downhill; valley bottoms and low ground — FM1 VII-1 ("Drainages and low-lying areas"). Matches.
+- Foot of cliffs or rocks — ATP 3-34 ("the foot of cliffs or rocks"); PHX ("at the base of rock cliffs"). Matches.
+- Dry stream beds, dig on the outside of bends — ATP 3-34 ("Outside bends of a dry riverbed"); PHX ("digging three to six feet at the outside edge of a sharp bend in a dry stream bed"). Matches. The depth is not added.
+- `water-bend` caption: wet sand, dig into it for seeping water — PHX; ATP Table 3-1 (dig deep enough for water to seep in). Corrected; old explanation removed-unsourced. Figure kept (matches).
+- Signs: lush green vegetation, swarming insects, V-intersecting game trails, bird flight in early morning or late afternoon may indicate the direction — FM1 VII-1. Corrected ("low and straight at dawn and dusk" not found in any opened source; the FM 21-76 figure that may hold it did not extract).
+- Rain on a tarp, poncho or leaves — ATP 3-11 (improvised nonporous items), ATP 3-10 (rain off leaves should be purified). Matches.
+- Rain needs treatment — CDC-FCW (rainwater is a source "that could be made safe by treatment"; outside water "must be treated"). ATP 3-10: fresh rain collected into containers needs no purification. Sources disagree; CDC (more cautious) used: "Treat all wild water, rain included".
+- Dew: cloth around ankles before sunrise, walk through grass, wring out — FM21-76 chapter 6 ("Tie rags or tufts of fine grass around your ankles and walk through dew-covered grass before sunrise"); ATP 3-15. Matches.
+- Transpiration bag: clear bag, non-poisonous plant, tied over a leafy branch and sealed — FM1 VII-6 (clear; no poisonous/toxic plants); ATP 3-27 (sealed airtight). Corrected ("and seal it" added).
+- `water-bag` caption: collect before sundown; same limb 3 or 5 days; water tastes like the plant — ATP 3-27; FM1 VII-6. Corrected ("move it to a fresh branch daily" contradicted ATP; "a little water over several hours" unsourced). Figure kept (matches).
+- Never drink seawater or urine — ATP 3-2; FM1 VII-1. Matches.
+- Harmful algal blooms bullet — NYSDOH-HAB. Added.
+- Tags: none set. Unchanged.
+
+### surv-priorities
+
+- Rule of threes — TOOELE ("about three minutes in unsafe air", "about three hours at a dangerous temperature", "about three days without water", "about three weeks without food"; "Although it is not absolute, the rule of three gives good general direction"). Kept as a rough guide; "without shelter" changed to "at a dangerous temperature" to match. No federal or military source opened states the rule (FM1 and ATP were checked: not found). County health department is below the preferred tier; noted as a concern.
+- STOP — DEC-LOST: "S is for Sit Down", Think, Observe, Plan. Corrected (old: Stop).
+- Stay put if lost — NPS-OEP ("Stay put – Changing location will make it difficult for authorities to find you"; move only if life is under immediate threat; leave a trip plan with a trusted contact). Corrected.
+- Hypothermia above freezing — DEC-LOST. Most cases 30 to 50°F — AK-HYPO ("Most cases occur when temperatures are between 30 and 50 degrees F"); wind and wet clothes — AK-HYPO, USFS-HYPO. Corrected (superlative removed).
+- Treat all stream, pond and lake water — CDC-FCW; DEC-LOST ("filter or treat"). Matches; "usually plentiful" removed-unsourced.
+- Dead and down wood only; cutting standing trees prohibited on state land — DEC-CAMP. Corrected; "fire usually achievable" and "standing dead wood" removed-unsourced. This is the normal-times rule; whether it should yield in a real emergency is for the Fire topic (Task 14) and Jordan.
+- Tick check, body areas — CDC-TICK. Corrected ("every day" not in the source).
+- COLD — ARMY-COLD (Clean, avoid Overheating, Loose and Layered, Dry); FM1 (clean, dry, loose and layered, remove layers before strenuous activity); AK-HYPO (remove layers when you start to sweat). Matches; explanation reworded.
+- Cover head, hands and feet — FM1 (hat regulates body heat); ARMY-COLD (layering applies to boots, gloves, headgear); DEC-LOST (hat covering ears). Matches.
+- Eat and drink regularly, fuel to make heat — USFS-HYPO ("Water helps turn calories into heat and food high in carbohydrates helps keep you powered"). Matches.
+- Don't eat snow or ice, lowers body temperature; melt it — FM1 VII-1, VII-3. Treat melted snow — ATP 3-13, Table 3-1. Corrected.
+- No stove, heater or lantern while sleeping in a tent — CPSC; air vent for any flame in an enclosed shelter — FM1 VI-4; people die every year — CPSC. Corrected. Consistent with the carbon-monoxide protocol s6.
+- Sunglasses; thin horizontal slits in bark or cloth — FM1 VI-3 ("small horizontal slits in webbing, bark, or similar materials"); snow blindness — FM1 V-10. Matches ("horizontal" added).
+- Never drink seawater, deadly, dehydration — NOAA-SW. Corrected wording.
+- Beach well behind the first group of dunes, deep enough to hit the water table — ATP 3-33, Table 3-1; treat — CDC-FCW. Corrected.
+- Shellfish: cracked shells, tap test, discard unopened after cooking — FDA-SEA; closed areas, cooking does not destroy red tide toxin, toxic without discolored water — MA-PSP. Corrected. (MA-PSP also lists oysters, whelks and moon snails as affected; not added.)
+- Tide chart; land bridge trap; Acadia range about 12 feet — NPS-TIDE. Corrected. No metric given (the topic has none elsewhere).
+- Water and sand reflect the sun, increase sunburn chance; cover up — EPA-SUN. Matches.
+- Links: `p:frostbite` kept; added `p:hypothermia` (Forest), `p:tick` (Forest), `p:carbon-monoxide` (Cold and snow). `p:dehydration` and `p:heat-illness` not linked: the topic restates no dehydration or heat-illness treatment.
+- Tags: none set at topic level (sections cover several settings). Unchanged.
+
+### Task 13 pages that would not open
+
+- CDC page https://www.cdc.gov/water-emergency/about/how-to-make-water-safe-in-an-emergency.html (permission request unanswered; the same content was read at https://cdc.gov/water-emergency/about, titled "How to Make Water Safe in an Emergency").
+- archive.org Aviation Survival Part 3 (redirect needed approval; not used).
+- biotech.law.lsu.edu FM 3-05.70 (error page).
+- FM 21-76 figures 6-1 and 6-2 (images; text did not extract from either PDF copy).
+- survivalmanual.github.io/06 opened but is an unofficial transcription; not used as a source.

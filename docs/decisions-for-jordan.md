@@ -114,3 +114,17 @@ medic, nurse, paramedic or doctor, these are the ones to show them.
 - **Impaled objects:** left in place, except a small fishhook near the surface; an object blocking the airway is
   mentioned with its lower-tier source. [24, 35]
 - **Diagrams:** eight are in. The recovery-position drawing was removed because it did not read clearly.
+
+## D. v7 Survival content (Tasks 13 to 16)
+
+Source disagreements found while checking the Survival topics. Each says what the app does today.
+
+1. **How long to boil water.** EPA and CDC: a rolling boil for 1 minute (3 minutes higher up). NYS DEC's state
+   land camping rules and the Army survival manuals (ATP 3-50.21, FM 21-76-1) say 5 minutes. Today: 1 minute,
+   following EPA and CDC. Say if the group should boil 5 minutes.
+2. **Altitude for the 3-minute boil.** EPA: above 5,000 ft. CDC: above 6,500 ft. Army ATP 3-50.21: above 8,000 ft.
+   Today: 5,000 ft (most cautious; several Adirondack High Peaks are above it).
+3. **Bleach dose for 8.25% bleach.** EPA: 6 drops per gallon. CDC: 8 drops per gallon for any 5% to 9% bleach.
+   Today: 8 drops per gallon for both 6% and 8.25% (the larger dose).
+4. **Rainwater.** Army ATP 3-50.21: fresh rain caught straight into clean containers needs no treatment. CDC:
+   rainwater must be treated. Today: treat it (CDC).

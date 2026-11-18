@@ -11,16 +11,16 @@
     "frostbite",
     "seawater"
   ],
-  "summary": "Work the problem in order: air, shelter, water, food. If you’re lost, STOP: Stop, Think, Observe, Plan.",
+  "summary": "Work the problem in order: air, shelter, water, food. If you’re lost, STOP: Sit down, Think, Observe, Plan.",
   "sections": [
     {
       "h": "Priorities",
       "blocks": [
         {
-          "p": "In harsh conditions a person can last roughly 3 minutes without air, 3 hours without shelter, 3 days without water and 3 weeks without food. Work the problem in that order."
+          "p": "A rough guide, not an exact limit: a person can survive about 3 minutes in unsafe air, about 3 hours at a dangerous temperature, about 3 days without water and about 3 weeks without food. Work the problem in that order."
         },
         {
-          "p": "If you’re lost, STOP: Stop, Think, Observe, Plan. If someone knows your route and when you’re due back, staying put usually gets you found faster than wandering."
+          "p": "If you’re lost, STOP: Sit down and stay calm, Think, Observe, Plan. If you left a trip plan with someone, stay put: moving makes it harder for searchers to find you. Move only if your life is under immediate threat."
         }
       ]
     },
@@ -29,11 +29,19 @@
       "blocks": [
         {
           "list": [
-            "The biggest killer here is hypothermia in wet, windy weather between 30 and 50°F, not extreme cold. Get out of wind and rain early, before you’re soaked.",
-            "Water is usually plentiful. Treat all of it.",
-            "Dead and downed wood is everywhere, so fire is usually achievable. Look for standing dead wood when the ground is wet.",
-            "Check your skin for ticks every day."
+            "Hypothermia can kill above freezing. Most cases happen between 30 and 50°F, and wind and wet clothes chill you fast. Get out of wind and rain early, before you’re soaked.",
+            "Treat all water from streams, ponds and lakes before drinking.",
+            "Burn dead and down wood. On New York state land, cutting standing trees is prohibited.",
+            "Check your whole body for ticks after time in the woods: under the arms, in and around the ears, belly button, backs of the knees, hair, between the legs and around the waist."
           ]
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia care"
+        },
+        {
+          "link": "p:tick",
+          "label": "Tick bite"
         }
       ]
     },
@@ -42,17 +50,21 @@
       "blocks": [
         {
           "list": [
-            "Remember COLD: keep clothing Clean, avoid Overheating (sweat soaks insulation), wear it Loose and in layers, and keep it Dry.",
+            "Remember COLD: keep clothing Clean, avoid Overheating (take layers off before hard work so sweat doesn’t soak them), wear it Loose and in layers, and keep it Dry.",
             "Cover head, hands and feet.",
             "Eat and drink regularly. Your body needs fuel to make heat.",
-            "Melt snow before drinking it. Eating it lowers your core temperature.",
-            "Never run a stove or fire in a sealed tent or snow shelter. Carbon monoxide kills without warning.",
-            "Wear sunglasses, or cut thin slits in bark or cloth, to prevent snow blindness."
+            "Don’t eat snow or ice: it lowers your body temperature. Melt it, then treat it like any other wild water.",
+            "Never use a stove, heater or lantern while sleeping in a tent or snow shelter. Any flame inside an enclosed shelter needs an air vent. Carbon monoxide kills people every year this way.",
+            "Wear sunglasses, or cut thin horizontal slits in bark or cloth, to prevent snow blindness."
           ]
         },
         {
           "link": "p:frostbite",
           "label": "Frostbite care"
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
         }
       ]
     },
@@ -61,11 +73,11 @@
       "blocks": [
         {
           "list": [
-            "Never drink seawater. It dehydrates you faster.",
-            "Collect rain and dew. On a beach, dig behind the first dune where plants grow; fresh water often collects there.",
-            "Only eat mussels and clams that were alive and closed before cooking, and skip them entirely during red tide warnings.",
-            "Know the tide times. Rising water can cut you off on points and tidal flats.",
-            "Cover up. Sun reflected off water and sand burns fast."
+            "Never drink seawater. It can kill you: you dehydrate even as you get thirstier.",
+            "Collect rain and dew. On a beach, dig a hole behind the first group of sand dunes, deep enough to reach the water table, and treat what collects.",
+            "Only eat clams and mussels with unbroken shells that close when tapped, and throw out any that don’t open in cooking. Never take shellfish from an area closed to shellfishing or during a red tide: cooking does not destroy the toxin, and the water may look normal.",
+            "Check a tide chart before you go out. The rising tide can trap you, for example on a land bridge out to an island; at Acadia in Maine the tide range reaches about 12 ft.",
+            "Cover up. Water and sand reflect the sun and increase your chance of sunburn."
           ]
         }
       ]
@@ -73,10 +85,73 @@
   ],
   "sources": [
     {
-      "name": "Not yet source-checked",
-      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+      "name": "Tooele County Health Department (Utah), Rule of Three",
+      "used": "About 3 minutes in unsafe air, 3 hours at a dangerous temperature, 3 days without water, 3 weeks without food; not absolute, a general direction"
+    },
+    {
+      "name": "NYS Department of Environmental Conservation, Lost in the woods (leaflet)",
+      "used": "STOP: Sit down, Think, Observe, Plan; hypothermia can kill above freezing"
+    },
+    {
+      "name": "National Park Service, Outdoor Emergency Plan",
+      "used": "If lost, stay put (moving makes you harder to find); move only if life is under immediate threat; leave a trip plan with a trusted contact"
+    },
+    {
+      "name": "Alaska State Parks (Alaska DNR), Hypothermia",
+      "used": "Most cases occur between 30 and 50°F; wind and wet clothes chill even in summer; remove layers when you start to sweat"
+    },
+    {
+      "name": "US Forest Service, Hypothermia",
+      "used": "Hypothermia above 40°F; avoid wet clothes, find shelter from wind; drink fluids and eat, water and carbohydrates help make heat"
+    },
+    {
+      "name": "CDC, How to Find Clean Water in an Emergency",
+      "used": "Streams, rivers, ponds and lakes must be treated"
+    },
+    {
+      "name": "NYS Department of Environmental Conservation, State Land Camping Rules",
+      "used": "Cutting standing trees is prohibited; use only dead and down wood for fires"
+    },
+    {
+      "name": "CDC, Preventing Tick Bites",
+      "used": "Full body check after tick areas, and the body areas to check"
+    },
+    {
+      "name": "US Army, Fight the Freeze (army.mil, 2011)",
+      "used": "COLD: keep clothing Clean, avoid Overheating, wear clothing Loose and Layered, keep clothing Dry; applies to gloves, boots and headgear"
+    },
+    {
+      "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapters V to VII",
+      "used": "Keep clothing clean and dry, loose and layered, remove layers before strenuous activity; hat; do not eat ice or snow (lowers body temperature), melt it; air vent for open flame in enclosed shelters; sunglasses in sun or snow, slits in webbing or bark"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (2018), chapter 3",
+      "used": "Snow and ice no purer than their source, melt and purify; beach well behind the first group of sand dunes, deep enough to hit the water table"
+    },
+    {
+      "name": "US Consumer Product Safety Commission, Portable Heaters & Camping Equipment",
+      "used": "Never use fuel-burning heaters or lanterns while sleeping in tents; people die every year from heaters, lanterns or stoves inside tents"
+    },
+    {
+      "name": "NOAA National Ocean Service, Can humans drink seawater?",
+      "used": "Drinking seawater can be deadly; you die of dehydration even as you become thirstier"
+    },
+    {
+      "name": "FDA, Selecting and Serving Fresh and Frozen Seafood Safely",
+      "used": "Discard clams and mussels with cracked shells or that do not close when tapped; throw out ones that do not open in cooking"
+    },
+    {
+      "name": "Massachusetts Department of Public Health, Red Tide (Paralytic Shellfish Poisoning)",
+      "used": "Cooking does not destroy the red tide toxin; toxic levels without discolored water; never harvest from closed areas"
+    },
+    {
+      "name": "National Park Service, How Tides Work at Acadia",
+      "used": "Consult a tide chart; Bar Island land bridge trap; tidal range about 12 feet"
+    },
+    {
+      "name": "US EPA, Sun Safety Tips",
+      "used": "Water, snow and sand reflect the sun and increase the chance of sunburn; protective clothing"
     }
   ],
-  "reviewed": "2026-11-17",
-  "draft": true
+  "reviewed": "2026-11-17"
 }

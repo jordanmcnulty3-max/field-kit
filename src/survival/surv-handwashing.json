@@ -58,7 +58,7 @@
           "steps": [
             "Wet your hands with clean water, warm or cold. Turn the water off while you lather, to save water (CDC).",
             "Put on soap and rub your hands together. Lather the backs of your hands, between your fingers and under your nails (CDC).",
-            "Scrub for at least 20 seconds: hum a short song from start to finish twice (CDC).",
+            "Scrub for at least 20 seconds. Need a timer? Hum “Happy Birthday” from beginning to end twice (CDC).",
             "Turn the water on again and rinse well under clean, running water (CDC).",
             "Dry your hands completely with a clean towel, or let them air dry. Germs spread more easily from wet hands (CDC).",
             "Turn the tap off with a paper towel, your elbow or another hands-free way if you can (CDC)."
@@ -70,8 +70,7 @@
             "Plain soap works. Bar or liquid soap both work, and antibacterial soap has shown no added benefit at home (CDC).",
             "Don’t wash in a shared basin of standing water. Water that others have washed in has germs in it; use clean, running water, even if it is only a trickle from a jug (CDC).",
             "Use a single-use towel if you have them (CDC). Change cloth towels every day (Oregon State University Extension).",
-            "No soap? Use hand sanitizer (below). Only water? Rub your hands together under the water and dry them with a clean towel or air dry. This is less effective than soap and water, but better than nothing (CDC).",
-            "Where there is no bar or liquid soap, a soapy solution can be made from laundry detergent (UNICEF)."
+            "No soap? Use hand sanitizer (below). Only water? Rub your hands together under the water and dry them with a clean towel or air dry. This is less effective than soap and water, but better than nothing (CDC)."
           ]
         }
       ]
@@ -132,8 +131,16 @@
             "Indoors: stand the jug at a sink and let it drain into a basin set in the sink, or put a bucket under the sink and disconnect the drain pipe so the sink drains into the bucket (Oregon State University Extension).",
             "Outdoors: set the jug on a table or counter with a bucket below to catch the used water, or tie a jug with a handle to a tree branch (Oregon State University Extension).",
             "Put soap and towels within reach. You can put a bar of soap in the toe of a tube sock or nylon stocking and tie it to the jug’s handle (Oregon State University Extension).",
-            "Clean the spigot handle often, so hands don’t pass germs to each other through it (Oregon State University Extension)."
+            "Sanitize the spigot handle regularly, so hands don’t pass germs to each other through it (Oregon State University Extension). Use the strong mix in Clean and disinfect. If you can, use a disposable paper towel to turn the spigot off when you have rinsed (Oregon State University Extension)."
           ]
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
         },
         {
           "p": "Set up two if you can: one where food is prepared and one next to the toilet (Oregon State University Extension). Put them where people can’t miss them (UNICEF)."
@@ -148,7 +155,8 @@
             "Push one end of a long rope through the hole in the cap and knot it on the inside. Tie the other end of the rope to one end of a long stick. Put the cap back on.",
             "Make a hole in the middle of a bar of soap with the nail. Thread a short rope through it and tie it to a short stick, close to the soap. Hang the soap near the container.",
             "Fill the container with treated water.",
-            "Hang the container by its handle, high enough that the rope holds the end of the long stick off the ground. Hang it where people wash their hands often, and use soap every time."
+            "Hang the container by its handle, high enough that the rope holds the end of the long stick off the ground. Hang it where people wash their hands often, and use soap every time.",
+            "To use it: step on the end of the long stick. The rope pulls the cap and tips water out of the hole. Wet your hands, let go, soap, then step again to rinse (the app’s reading of CDC’s sheet and WHO’s description)."
           ]
         },
         {
@@ -218,7 +226,7 @@
   "sources": [
     {
       "name": "CDC, About Handwashing (Clean Hands), reviewed February 16, 2024",
-      "used": "Key times list (verbatim); five steps (wet with clean running water warm or cold, turn off tap, lather backs, between fingers, under nails, scrub at least 20 seconds, hum a short song twice, rinse, dry); soap and water best in most situations; sanitizer with at least 60% alcohol when soap and water are not available"
+      "used": "Key times list (verbatim); five steps (wet with clean running water warm or cold, turn off tap, lather backs, between fingers, under nails, scrub at least 20 seconds, hum \"Happy Birthday\" from beginning to end twice, rinse, dry); soap and water best in most situations; sanitizer with at least 60% alcohol when soap and water are not available"
     },
     {
       "name": "CDC, Hand Hygiene Frequently Asked Questions, reviewed March 14, 2024",
@@ -266,11 +274,11 @@
     },
     {
       "name": "UNICEF, Handwashing Stations and Supplies for the COVID-19 response, May 2020",
-      "used": "Tippy tap materials; soapy solution from laundry detergent; soakaway pits with rocks or coarse gravel where there is no drainage; gloves when emptying collection containers by hand; place stations where they can't be missed, near toilets"
+      "used": "Tippy tap materials; soakaway pits with rocks or coarse gravel where there is no drainage; gloves when emptying collection containers by hand; place stations where they can't be missed, near toilets"
     },
     {
       "name": "Oregon State University Extension, Survival Basics: Sanitation and Waste Management, EM 9334 (2021)",
-      "used": "Jug of potable water with on/off spigot, soap, towels, catch bucket; sink and outdoor set-ups; jug tied to a branch; soap in a sock; sanitize the spigot handle; two stations (food area and toilet); change cloth towels daily; use catch water to dilute urine; do not treat it for reuse"
+      "used": "Jug of potable water with on/off spigot, soap, towels, catch bucket; sink and outdoor set-ups; jug tied to a branch; soap in a sock; sanitize the spigot handle; two stations (food area and toilet); change cloth towels daily; use catch water to dilute urine; do not treat it for reuse; disposable paper towel to turn off the spigot"
     },
     {
       "name": "North Carolina State Extension (local Environmental Health Department sheet), Boil Water Advisory: Handwashing Station Requirements, updated 8.2.21",
@@ -285,6 +293,5 @@
       "used": "Insulated containers allow warm water and slow cooling or freezing of the supply water"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

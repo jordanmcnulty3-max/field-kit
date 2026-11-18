@@ -300,27 +300,40 @@ Source disagreements found while checking the Survival topics. Each says what th
    garbage, if necessary", no depth or distance. The Army: a 4 x 4 x 4 ft pit at least 100 yards downstream of any
    water in use (Army alone). Leave No Trace: buried garbage still draws animals. Today: no burying instructions;
    bag, lid and store. Say if the group wants the Army's pit described.
-32. **How long a sick person stays away from food and the group (surv-stomach-illness-in-a-group) — Water pack Task 7.**
-   CDC (norovirus): don't prepare or handle food or care for others; "Wait at least 2 days (48 hours) after symptoms
-   stop." CDC (evacuation centers): separate the sick, and keep ill workers off, until 24 hours after symptoms stop.
-   Minnesota Department of Health (shelters) and University of Minnesota Extension: 72 hours, for food handling and
-   for isolation. Today: the topic uses 3 days (72 hours) for food, water handling and keeping apart; the Emergency
-   protocol Severe vomiting or diarrhea says 2 days (it was not changed: medical content). Say if the protocol should
-   move to 3 days too, or the topic back to 2.
-33. **Bleach for vomit and diarrhea (surv-clean-and-disinfect) — Water pack Task 7.** CDC (norovirus): 5 to 25
-   tablespoons of household bleach (5% to 8%) per gallon (1,000 to 5,000 ppm), at least 5 minutes. CDC (evacuation
-   centers): 1,000 ppm, 5 tablespoons of 6% per gallon, keep wet 10 minutes if possible. Minnesota: 1/3 cup per gallon.
-   Today: CDC's range, wet 10 minutes if you can and never under 5. Say if the group wants one fixed amount instead
-   of a range (for example 1/3 cup, which is CDC's lowest).
-34. **Bleach rinse for dishes (surv-clean-and-disinfect) — Water pack Task 7.** CDC (drinking water advisories): 1
-   teaspoon of unscented bleach per gallon, soak at least 1 minute, air dry (no strength printed). New York State
-   Department of Health: 1 tablespoon per gallon, rinse a minute, air dry (no strength). CDC (bleach after a flood):
-   1 tablespoon of 5% to 9% bleach per gallon for food-contact surfaces, air dry. Today: 1 tablespoon of 5% to 9%, 1
-   minute, air dry completely. Say if the group prefers the weaker teaspoon.
-35. **Everyday surface mix when someone is sick (surv-clean-and-disinfect) — Water pack Task 7.** CDC (hygiene): 5
-   tablespoons (1/3 cup) of 5% to 9% bleach per gallon, or 4 teaspoons per quart, wet at least 1 minute. CDC
-   (evacuation centers): 1 teaspoon per quart (about a quarter as strong), no strength. CDC (after a flood): 1 cup per
-   5 gallons for non-food items. Today: the 5-tablespoon mix for a sick household; the 1-cup-in-5-gallons mix only for
-   emptied buckets and things that don't touch food, as in Toilets when the water is off; the strong vomit mix for a
-   sick person's toilet or bucket. Diluted bleach is mixed fresh every day (CDC; CDC's evacuation guidance allows a
-   week in a lightproof bottle). Say if this is more mixes than the group will use.
+32. **How long a sick person stays away from food, water and the group (surv-stomach-illness-in-a-group,
+   p:vomiting-diarrhea) — Water pack Task 7.** CDC (norovirus): don't prepare or handle food or care for others; "Wait
+   at least 2 days (48 hours) after symptoms stop." CDC (evacuation centers, archived 2019): separate the sick, and keep
+   ill workers off, "until 24 hours after diarrhea and vomiting stop". Minnesota Department of Health (shelters,
+   2025) and University of Minnesota Extension: 72 hours, for food handling and for isolation. The Emergency protocol
+   Severe vomiting or diarrhea says 2 days (CDC) and was not changed (medical content). Today: the topic agrees with
+   the protocol: at least 2 days after symptoms stop (CDC), and 3 days if the group can manage it (Minnesota); the
+   24-hour figure is not in the text. The reviewer recommends 3 days (72 hours) everywhere, protocol included, as the
+   more cautious figure that meets both CDC and Minnesota. Say whether to move the whole app, protocol and topic, to
+   3 days.
+33. **Bleach for vomit and diarrhea (surv-clean-and-disinfect) — Water pack Task 7.** CDC (norovirus): 1,000 to 5,000
+   ppm, "5 to 25 tablespoons of household bleach [5% to 8%] per gallon", at least 5 minutes. CDC (evacuation centers,
+   archived 2019): 1,000 ppm, 5 tablespoons of 6% per gallon, keep wet 10 minutes if possible. Minnesota Department of
+   Health: 1/3 cup per gallon (1,000 ppm, no strength printed). University of Minnesota Extension: about 1,000 ppm is
+   1/3 cup of 5.25%, 1/4 cup of 6%, or 2 1/2 tablespoons of 8.25% per gallon. 1/3 cup (5 tablespoons) of 5% to 9% per
+   gallon is also CDC's everyday surface mix (Cleaning and Disinfecting with Bleach), so choosing one fixed amount
+   merges the two rows. Arithmetic (not a source): 1/3 cup gives about 960 ppm at 5% and about 1,700 ppm at 9%; 25
+   tablespoons of 9% would be about 8,000 ppm, above CDC's 5,000 ceiling. Today: one strong mix, 1/3 cup of 5% to 9% per
+   gallon; surfaces wet at least 1 minute, after vomit or diarrhea 10 minutes if you can, never under 5. Say if the
+   group wants a stronger amount for vomit and diarrhea.
+34. **Bleach rinse for dishes (surv-clean-and-disinfect) — Water pack Task 7.** CDC (Drinking Water Advisories: An
+   Overview): 1 teaspoon of unscented bleach per gallon, soak at least 1 minute, air dry (no strength printed). New York
+   State Department of Health (boil water FAQ, Q17): 1 tablespoon per gallon, rinse a minute, air dry (no strength).
+   CDC (How to Safely Clean and Sanitize with Bleach): 1 tablespoon of 5% to 9% bleach per gallon for food-contact
+   surfaces, air dry. Today: the food mix, 1 tablespoon of 5% to 9%, 1 minute, air dry completely. Say if the group
+   prefers the weaker teaspoon.
+35. **How many bleach mixes (surv-clean-and-disinfect, surv-toilet-no-water) — Water pack Task 7.** CDC (Cleaning and
+   Disinfecting with Bleach, 2024): 5 tablespoons (1/3 cup) of 5% to 9% per gallon, wet at least 1 minute. CDC
+   (Infection Control Guidance for Community Evacuation Centers Following Disasters, archived 2017): "1 teaspoon of
+   household bleach in 1 quart of clean water (mixed fresh daily)" (about a quarter as strong; no strength, no contact
+   time). CDC (How to Safely Clean and Sanitize with Bleach): 1 cup per 5 gallons for flood-touched non-food items
+   (about 630 ppm at 5%, arithmetic). Today: two household mixes in Clean and disinfect, the strong mix (1/3 cup per
+   gallon) and the food mix (1 tablespoon per gallon); emptied waste buckets keep the toilet topic's 1 cup in 5 gallons
+   after emptying, washing and rinsing; drinking-water containers keep 1 teaspoon per quart (Store water at home).
+   Diluted bleach is mixed fresh every day (CDC; the 2019 evacuation-center page allows a week in a lightproof bottle).
+   Say whether the toilet topic's bucket mix should become the strong mix (one fewer mix, stronger), and whether it
+   should add "if anyone has vomiting or diarrhea, use the strong mix after emptying, washing and rinsing".

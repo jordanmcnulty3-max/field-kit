@@ -14,11 +14,11 @@
     "food handling",
     "hygiene"
   ],
-  "summary": "Treat the sick person with the Emergency protocols, and protect everyone else: keep them apart with one carer and their own toilet, keep them away from food and water, wash hands with soap, and check the water.",
+  "summary": "Treat the sick person with the Emergency protocols, and protect everyone else: keep them apart with one carer and their own toilet, keep them away from food and water for at least 2 days after symptoms stop, wash hands with soap, and check the water.",
   "doFirst": [
     "Care for the sick person with the Severe vomiting or diarrhea and Dehydration protocols.",
     "Keep them apart from the others, with their own toilet or bucket and one carer.",
-    "They prepare no food and handle no water for others until 3 days after their symptoms stop.",
+    "They prepare no food, handle no water and care for no one else until at least 2 days after their symptoms stop; 3 days if you can manage it.",
     "Everyone washes hands with soap and water. Hand sanitizer does not work well against norovirus.",
     "Check that every drop the group drinks is being treated."
   ],
@@ -87,7 +87,7 @@
             "Several sick people can share one area, but keep beds or cots at least 3 feet (90 cm) apart (CDC, evacuation centers).",
             "Give them their own toilet or bucket toilet that only sick people use (CDC, Minnesota Department of Health). See Toilets when the water is off.",
             "Serve their food away from people who are not sick, if you can (CDC).",
-            "Keep them apart until 3 days (72 hours) after their vomiting and diarrhea stop (Minnesota Department of Health). CDC’s evacuation-center guidance says at least 24 hours; this app uses the longer time."
+            "Keep them apart for as long as the food rule below lasts: at least 2 days after their vomiting and diarrhea stop, 3 days (72 hours) if you can (Minnesota Department of Health isolates for 72 hours)."
           ]
         },
         {
@@ -101,7 +101,7 @@
       "blocks": [
         {
           "list": [
-            "CDC asks that a sick child be looked after by only one adult, the same one until 24 hours after symptoms stop. Do the same for any sick person if you can, so fewer people are exposed.",
+            "CDC asks that a sick child be looked after by only one adult, the same one each time. Do the same for any sick person if you can, for as long as you keep them apart, so fewer people are exposed.",
             "The carer washes hands with soap and water before and after caring for the sick person (CDC), and wears gloves to clean up vomit or diarrhea and to handle soiled laundry (CDC).",
             "Someone who is ill does not care for others (CDC)."
           ]
@@ -112,7 +112,7 @@
       "h": "Food and water",
       "blocks": [
         {
-          "warn": "Anyone who has had vomiting or diarrhea must not prepare or handle food, or handle the group’s water, until 3 days (72 hours) after their symptoms stop (Minnesota Department of Health; University of Minnesota Extension). CDC says: “Wait at least 2 days (48 hours) after symptoms stop.” This app uses the longer time."
+          "warn": "Anyone who has had vomiting or diarrhea must not prepare or handle food, handle the group’s water, or care for others. CDC: “Wait at least 2 days (48 hours) after symptoms stop.” Wait 3 days (72 hours) if the group can manage it (Minnesota Department of Health; University of Minnesota Extension)."
         },
         {
           "list": [
@@ -145,14 +145,18 @@
       "blocks": [
         {
           "list": [
-            "Clean up vomit or diarrhea straight away (Minnesota Department of Health): gloves, soak it up, bag it, wash with soap and water, then disinfect with the strong bleach mix and leave it wet (CDC). The full steps and the mix are in Clean and disinfect.",
+            "Clean up vomit or diarrhea straight away (Minnesota Department of Health): gloves and eye protection, soak it up, bag it, wash with soap and water, then disinfect with the strong mix and leave it wet (CDC). Never mix bleach with other cleaners. The full steps and the mix are in Clean and disinfect.",
             "Wash soiled clothes and bedding at once, with gloves, without shaking them (CDC).",
-            "Clean door handles and other things the sick person touches often, with the surface mix. Use the strong vomit and diarrhea mix on their toilet seat or bucket and on anything soiled with vomit or diarrhea (CDC)."
+            "Clean door handles and other things the sick person touches often with the strong mix (see Clean and disinfect). Use it on their toilet seat and on anything soiled with vomit or diarrhea (the app’s reading of CDC). Empty, wash and rinse their bucket before any bleach goes in, as in Toilets when the water is off. Never put bleach in a bucket with pee in it (Washington State Department of Health)."
           ]
         },
         {
           "link": "s:surv-clean-and-disinfect",
           "label": "Clean and disinfect"
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
         }
       ]
     },
@@ -160,7 +164,7 @@
       "h": "How long to keep it up",
       "blocks": [
         {
-          "p": "Keep the separate toilet, the food rule and strict hand washing going until 3 days after the last person’s symptoms stop (Minnesota Department of Health). Norovirus can stay in poop for 2 weeks or more after someone feels better (CDC), so keep washing hands with soap after the toilet."
+          "p": "Keep the separate toilet, the food rule and strict hand washing going until at least 2 days after the last person’s symptoms stop (CDC), 3 days if you can (Minnesota Department of Health). Norovirus can stay in poop for 2 weeks or more after someone feels better (CDC), so keep washing hands with soap after the toilet."
         }
       ]
     },
@@ -188,7 +192,7 @@
     },
     {
       "name": "CDC, Infection Control Recommendations for Prevention of Transmission of Diarrheal Diseases in Evacuation Centers (archived; reviewed January 29, 2019)",
-      "used": "Separate sick persons in a separate section until 24 hours after symptoms stop; designated toilets for the sick; serve their food away from others; one responsible adult, the same one, for a sick child; ill workers not back until 24 hours after symptoms stop"
+      "used": "Separate sick persons in a separate section; designated toilets for the sick; serve their food away from others; one responsible adult, the same one, for a sick child (its 24-hour figures are not used: see content-review)"
     },
     {
       "name": "CDC, Infection Control Guidance for Community Evacuation Centers Following Disasters (archived; reviewed September 5, 2017)",
@@ -224,9 +228,12 @@
     },
     {
       "name": "CDC, Cleaning and Disinfecting with Bleach, reviewed April 24, 2024",
-      "used": "Surface mix used for things the sick person touches (via Clean and disinfect)"
+      "used": "Strong mix (1/3 cup per gallon of 5% to 9% bleach) used for things the sick person touches (via Clean and disinfect)"
+    },
+    {
+      "name": "Washington State Department of Health, Dangers of Mixing Bleach with Cleaners",
+      "used": "Ammonia is found in urine; bleach mixed with ammonia makes toxic chloramines (never bleach in a bucket with pee)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

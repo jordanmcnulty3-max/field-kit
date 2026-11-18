@@ -2338,7 +2338,7 @@ Conversions: 1 gallon = 3.8 L and 1 cup = 240 mL as CDC-BL prints them; 1 quart 
 - Soap and water best in most situations — CDC-HW ("Washing hands with soap and water is the best way to get rid of germs in most situations"). Matches.
 - Key times, ten items — CDC-HW, copied verbatim in the order printed. Matches (also reproduced in OSU-SAN).
 - Extra times: before feeding children — CDC-DI; before giving medicine — CDC-NORO; visibly dirty or greasy — CDC-POST ("When hands are visibly dirty or greasy"). Matches.
-- Steps: wet with clean water warm or cold, turn off, soap; lather backs, between fingers, under nails; at least 20 seconds, short song twice; rinse under clean running water; dry with clean towel or air dryer — CDC-HW verbatim meaning ("a short song from start to finish twice"; no song named). Turn off the tap while lathering to reduce water use, turn on to rinse — CDC-FAQ. Paper towel or elbow to turn off — CDC-FAQ. Dry completely, germs spread more easily when hands are wet — CDC-FAQ. Matches.
+- Steps: wet with clean water warm or cold, turn off, soap; lather backs, between fingers, under nails; at least 20 seconds, short song twice; rinse under clean running water; dry with clean towel or air dryer — CDC-HW verbatim meaning (corrected in fix round 1: the page says "Hum the "Happy Birthday" song from beginning to end twice"). Turn off the tap while lathering to reduce water use, turn on to rinse — CDC-FAQ. Paper towel or elbow to turn off — CDC-FAQ. Dry completely, germs spread more easily when hands are wet — CDC-FAQ. Matches.
 - Warm and cold water remove the same number of germs — CDC-FAQ verbatim. Plain soap, bar or liquid, no added benefit of antibacterial soap outside healthcare — CDC-FAQ. Standing water with germs from previous use; use clean running water — CDC-FAQ. Matches ("even if it is only a trickle from a jug" is ours, following CDC-PH's large-jug station).
 - Single-use towel or air dry — CDC-POST. Change cloth towels daily — OSU-SAN ("If using cloth towels, replace them daily"). Matches.
 - Water only: rub under water, dry, less effective than soap — CDC-FAQ. Sanitizer before water-only — CDC-FAQ (use 60% sanitizer first). Matches.
@@ -2382,7 +2382,7 @@ Conversions: 1 gallon = 3.8 L and 1 cup = 240 mL as CDC-BL prints them; 1 quart 
 - Separate section away from people who are not sick; designated toilets; serve food away from them — CDC-EVD. Designated bathrooms, cohort — MDH-NORO. Similar symptoms housed together, cots at least 3 feet apart — CDC-EVC. Matches.
 - How long apart: CDC-EVD "until 24 hours after diarrhea and vomiting stop"; MDH-NORO "isolate guests while they are ill and for 72 hours after symptoms have stopped". 72 hours used (more cautious). Decisions D, Task 7.
 - One carer: CDC-EVD ("Sick children should be accompanied by only one responsible adult." "The same adult should stay with the child until 24 hours after symptoms stop."). Extending it to adults is our judgement, said so in the text ("Do the same for any sick person if you can"). Carer washes before and after caring — CDC-HW key times. Gloves for clean-up and laundry — CDC-NORO. Ill person does not care for others — CDC-NORO. Matches.
-- Food: CDC-NORO "Do not prepare, handle food, or care for others. Wait at least 2 days (48 hours) after symptoms stop." quoted exactly. MDH-NORO: ill staff restricted from food handling "until 72 hours after their vomiting/diarrhea has ended" (Minnesota Food Code); UMN-NORO: don't prepare or serve food until 72 hours after. CDC-EVD: workers not back until at least 24 hours. 72 hours used. "Or handle the group's water" — agrees with p:vomiting-diarrhea step s8 ("does not handle food or water for others"); the 72-hour figure applied to water is our extension. Decisions D, Task 7; Conflicts with p:vomiting-diarrhea reported (it says 2 days).
+- Food: CDC-NORO "Do not prepare, handle food, or care for others. Wait at least 2 days (48 hours) after symptoms stop." quoted exactly. MDH-NORO: ill staff restricted from food handling "until 72 hours after their vomiting/diarrhea has ended" (Minnesota Food Code); UMN-NORO: don't prepare or serve food until 72 hours after. CDC-EVD: workers not back until at least 24 hours. 72 hours used. "Or handle the group's water" — agrees with p:vomiting-diarrhea step s8 ("does not handle food or water for others") and its donts line ("prepare food or water ... until 2 days"); corrected in fix round 1 (the protocol does give a time limit). Decisions D, Task 7; Conflicts with p:vomiting-diarrhea reported (it says 2 days).
 - Cooks wash with soap, no gel substitute — CDC-EVC. No bare-hand contact with ready-to-eat food — UMN-NORO. Wash fruit and vegetables — CDC-NORO. Matches.
 - Hand washing 20 seconds, after toilet and before food — CDC-NORO. Sanitizer not effective against norovirus, not a substitute — CDC-NORO; MDH-NORO ("Do not use hand sanitizer as an alternative to handwashing"). Stations by the toilet and where food is made — OSU-SAN. Matches.
 - Clean-up and laundry: summaries of the clean-and-disinfect steps (above); link. Door handles with the surface mix (CDC-DB, CDC-HOME high-touch surfaces); sick person's toilet and soiled things with the strong mix (CDC-NORO). Matches.
@@ -2402,6 +2402,55 @@ Conversions: 1 gallon = 3.8 L and 1 cup = 240 mL as CDC-BL prints them; 1 quart 
 - CDC tippy tap PDF (UNT web archive copy of cdc.gov/safewater): returned only the archive viewer. CDC-TT (CDC Stacks) used instead.
 - CDC, What to Do During a Boil Water Advisory (NC State copy): fetch failed (client error). CDC-ADV used instead.
 - No EPA page with a household bleach dilution for surfaces was found; EPA Region 2's flood sheet gives only 1 teaspoon per gallon for drinking-water containers, with no strength (read for comparison; not used).
+
+### Task 7 fix round 1 (2026-11-18)
+
+Sources re-opened by the writer for this round (built-in WebFetch only): MDH-NORO (strong solution "1 gallon water +
+1/3 cup bleach", 1000 ppm, mixed fresh daily, no bleach percentage and no contact time printed; 72-hour sentences),
+CDC-EVD ("1000 ppm sodium hypochlorite or 5 tablespoons of 6% household bleach to 1 gallon of water"; "remain wet for
+10 minutes, if possible"; eye protection when diluting; "only one responsible adult"), UMN-NORO ("Throw away food and
+packaging materials within a 25-foot circle of the vomit or stool"; "the surrounding 25-foot circle"; "Wait 72 hours";
+1/3 cup of 5.25% ~1000 ppm), CDC-HW ("Hum the "Happy Birthday" song from beginning to end twice"), WADOH-MIX
+("ammonia can be found in ... urine"; chloramines). Also read: the final surv-toilet-no-water "Clean the buckets"
+(gloves and eye protection, empty, wash and rinse so no pee is left, 1 cup in 5 gallons, air dry) and surv-water-store
+(never use a container that held bleach). CDC-DB, CDC-NORO, CDC-HOME, CDC-BL and OSU-SAN were relied on as opened
+earlier this day (quotes above).
+
+- C1. Strong mix on a sick person's toilet seat and soiled things (marked "the app's reading of CDC"); the bucket is
+  emptied, washed and rinsed so no pee is left (CDC-BL) and then sanitized as in surv-toilet-no-water (link, no second
+  figure, per the controller's ruling); never bleach where there is pee (WADOH-MIX). In both topics.
+- I1. Stomach topic gives one answer agreeing with p:vomiting-diarrhea: at least 2 days after symptoms stop (CDC-NORO,
+  quoted), 3 days if the group can manage it (MDH-NORO, UMN-NORO). CDC-EVD's 24 hours removed from the text (kept here
+  and in D32). One-carer line: "the same one each time ... for as long as you keep them apart". doFirst adds "care for
+  no one else" (CDC-NORO "or care for others"). D32 rewritten. Protocol not edited.
+- I2. One strong mix: 1/3 cup (5 tablespoons, 75 mL) of 5% to 9% per gallon. Strength from CDC-DB (5% to 9%, 1/3 cup,
+  at least 1 minute visibly wet). CDC-EVD: 5 tablespoons of 6% = 1000 ppm. MDH-NORO: 1/3 cup, 1000 ppm, no strength.
+  CDC-NORO's range (5 to 25 tablespoons of 5% to 8%) kept in this record and D33; the topic says CDC allows up to 25
+  tablespoons and the app uses the low end. Arithmetic (not a source): 1/3 cup is about 960 ppm at 5% and about 1,700
+  ppm at 9%; 25 tablespoons of 9% about 8,000 ppm. Separate 5-tablespoon row and the 4-teaspoons-per-quart variant
+  removed (M9); 1 cup in 5 gallons row removed (emptied waste buckets now link to surv-toilet-no-water).
+- I3. Warning block first in "Which mix for which job" (CDC-BL, CDC-DB, WADOH-MIX; links s:surv-make-water-safe).
+  Vomit steps: eye protection added to step 1 (CDC-BL, CDC-EVD) and "Use only bleach and water: nothing else in the
+  bucket" in step 5. Stomach topic clean-up line: eye protection and "Never mix bleach with other cleaners".
+- I4. UMN-NORO's rule restored: food and food packaging within 25 feet of the vomit or stool. "Keep the group's food
+  covered and stored away from the sick person" marked as the app's advice. No question added on sealed cans.
+- M1. Mixing container: "kept only for bleach, and mark it BLEACH (marking it is the app's advice). Never put food or
+  drinking water in a container that has held bleach (CDC; see Store water at home)."
+- M2. Laundry without a machine: CDC-HOME (warmest water, dry completely), CDC-EVD (bleach in rinse water), wash water
+  out as dirty wash water (surv-garbage-and-greywater, checked in Task 6); link added; the "no source" sentence removed
+  from the text.
+- M3. Tippy tap: marked "To use it" step added (CDC-TT and WHO-KI's caption, "the app's reading").
+- M4. Spigot: OSU-SAN "Regularly sanitize the spigot handle"; strong mix; paper towel to turn the spigot off.
+- M5. s:surv-water-store and s:surv-clean-and-disinfect links added after the station steps.
+- M6. Vomit step 5: "the whole area, well past the edge of the mess" (CDC-NORO "entire area"; UMN-NORO 25-foot circle).
+- M7. Covered by I1.
+- M8. Song record corrected (above); water-handling record corrected (above); the report's toilet line now sits in D35.
+- M9. Done with I2.
+- M10. D32 to D35 rewritten: the evacuation-center pages named (2017 Community Evacuation Centers vs 2019 Diarrheal
+  Diseases); D33 says the 1/3 cup is also CDC-DB's surface mix; D32 carries the 3-day recommendation as a question.
+- M11. Not changed: the titles were set by the dispatch; the content plan is not a Task 7 file. Reported.
+- Also: UNICEF's "soapy solution from laundry detergent" dropped (no method or amount; reviewer's suggestion).
+- Draft removed from all three topics.
 
 ## Water pack Task 8: diagrams (2026-11-18)
 

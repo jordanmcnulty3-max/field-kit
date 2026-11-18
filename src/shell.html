@@ -459,6 +459,15 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 .sv-link{display:flex;width:100%;min-height:48px;align-items:center;justify-content:space-between;gap:8px;margin:0 0 8px;padding:8px 12px;
   border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--c);font-weight:600;text-align:left;cursor:pointer}
 .sv-link::after{content:"›";font-size:22px;line-height:1}
+.sv-checkbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 12px}
+.sv-count{margin:0;font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}
+.sv-checkbar .btn[aria-disabled="true"]{opacity:.5}
+.sv-page .sv-checks{margin:0 0 12px;padding:0;list-style:none;display:grid;gap:8px}
+.sv-page .sv-checks li{margin:0}
+.sv-check{display:flex;align-items:flex-start;gap:12px;min-height:48px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer}
+.sv-check input{flex:none;width:28px;height:28px;margin:0;accent-color:var(--c)}
+.sv-check:has(input:checked) .sv-ctext{text-decoration:line-through;color:var(--muted)}
+.sv-cnote{display:block;margin-top:2px;font-size:14px;color:var(--muted)}
 .sv-foot{margin-top:16px;padding-top:8px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 .sv-foot h3{font-size:14px;margin:8px 0 4px}
 .sv-foot p{margin:4px 0}

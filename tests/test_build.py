@@ -38,7 +38,7 @@ def test_normal_build_inlines_all_topics(tree):
     r, index = build(tree)
     assert r.returncode == 0, r.stderr
     text = index.read_text(encoding='utf-8')
-    assert '"topics":[' in text and '"checklists":[]' in text
+    assert '"topics":[' in text and '"checklists":[{' in text and '"id":"ten-essentials"' in text
     ids = topic_ids()
     assert len(ids) == 15
     for tid in ids:
@@ -83,7 +83,7 @@ def test_topic_id_equal_to_protocol_id_fails(tree):
 
 def test_checklists_are_inlined_sorted_and_release_checked(tree):
     d = tree / 'src' / 'checklists'
-    d.mkdir()
+    d.mkdir(exist_ok=True)   # the shipped Ten essentials is already there
     for cid in ('zeta', 'alpha'):
         (d / f'{cid}.json').write_text(json.dumps({
             'id': cid, 'title': cid, 'category': 'basics', 'draft': True, 'reviewed': '2026-11-17',

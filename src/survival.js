@@ -1,4 +1,4 @@
-/* ---------- Survival: topics from FK_DATA.topics, the Survival home and pages (#/survival/<topicId>, /list/<id>, /tool/<name>) ---------- */
+/* ---------- Survival: topics and checklists from FK_DATA, the Survival home and pages (#/survival/<topicId>, /list/<id>, /tool/<name>) ---------- */
 (() => {
   const FK = window.FK;
   const esc = FK.esc;
@@ -19,6 +19,36 @@
     return list;
   }
   const topic = id => topics().find(t => t.id === id) || null;
+
+  /* Checklists: an object with a string id and title and at least one item that has a string id and text. Bad items are dropped. */
+  const okItem = it => !!it && typeof it === 'object' && filled(it.id) && filled(it.text);
+  let lsrc = null, llen = -1, lists = [];
+  function checklists() {
+    const s = window.FK_DATA && Array.isArray(window.FK_DATA.checklists) ? window.FK_DATA.checklists : null;
+    if (s !== lsrc || (s && s.length !== llen)) {
+      lsrc = s; llen = s ? s.length : -1;
+      lists = s ? s.filter(c => !!c && typeof c === 'object' && filled(c.id) && filled(c.title) && Array.isArray(c.items))
+        .map(c => ({ ...c, items: c.items.filter(okItem) })).filter(c => c.items.length) : [];
+    }
+    return lists;
+  }
+  const checklist = id => checklists().find(c => c.id === id) || null;
+
+  /* Ticks live in store 'checks' = { [checklistId]: [itemId, ...] }. Anything that is not that shape counts as no ticks. */
+  const plain = v => !!v && typeof v === 'object' && !Array.isArray(v);
+  const allChecks = () => { const v = FK.store.get('checks', null); return plain(v) ? v : {}; };
+  function ticks(id) {   // the ticked item ids of a checklist, in item order; ids that are not items of it are ignored
+    const c = checklist(id), v = allChecks();
+    if (!c || !Object.hasOwn(v, id) || !Array.isArray(v[id])) return [];
+    const on = new Set(v[id].filter(x => typeof x === 'string'));
+    return c.items.filter(it => on.has(it.id)).map(it => it.id);
+  }
+  function saveTicks(id, ids) {   // false when the phone's storage is full; other lists' valid ticks are kept as they are
+    const out = {}, v = allChecks();
+    for (const k of Object.keys(v)) if (k !== id && Array.isArray(v[k])) out[k] = v[k].filter(x => typeof x === 'string');
+    if (ids.length) out[id] = ids;
+    return FK.store.set('checks', out);
+  }
 
   /* ---------- Page providers: Tasks 8 to 10 draw checklists and tools at #/survival/list/<id> and #/survival/tool/<name> ---------- */
   const providers = { list: [], tool: [] };
@@ -54,22 +84,81 @@
     return '';
   }
 
+  /* Title, Draft tag and pin star: the same on a topic page and a checklist page. */
+  function headHTML(key, t) {
+    const pinned = FK.pins.has(key);
+    return '<div class="sv-head"><h2 class="sv-title" id="svTitle" tabindex="-1">' + esc(t.title) + '</h2>' + draftTag(t) +
+      '<button type="button" class="sv-pin" data-act="pin" aria-pressed="' + pinned + '" aria-label="Pin this ' + (key[0] === 'c' ? 'checklist' : 'topic') + '">' + (pinned ? '★' : '☆') + '</button></div>';
+  }
+  function footHTML(t) {
+    const sources = (Array.isArray(t.sources) ? t.sources : []).filter(s => s && filled(s.name));
+    return '<footer class="sv-foot">' +
+      (sources.length ? '<h3>Sources</h3><ul>' + sources.map(s => '<li><b>' + esc(s.name) + '</b>' + (filled(s.used) ? ': ' + esc(s.used) : '') + '</li>').join('') + '</ul>' : '') +
+      (filled(t.reviewed) ? '<p>Reviewed ' + esc(t.reviewed) + '</p>' : '') +
+      (filled(t.asOf) ? '<p>As of ' + esc(t.asOf) + '</p>' : '') + '</footer>';
+  }
+
   function topicHTML(t) {
     const secs = t.sections.filter(s => s && typeof s === 'object');
-    const pinned = FK.pins.has('s:' + t.id);
-    const head = '<div class="sv-head"><h2 class="sv-title" id="svTitle" tabindex="-1">' + esc(t.title) + '</h2>' + draftTag(t) +
-      '<button type="button" class="sv-pin" data-act="pin" aria-pressed="' + pinned + '" aria-label="Pin this topic">' + (pinned ? '★' : '☆') + '</button></div>';
+    const head = headHTML('s:' + t.id, t);
     const first = strs(t.doFirst).length ? '<div class="sv-first"><h3>Do first</h3><ol class="steps">' + items(t.doFirst) + '</ol></div>' : '';
     const jump = secs.length >= JUMP_MIN ? '<nav class="sv-jump" aria-label="Sections in this topic">' +
       secs.map((s, i) => '<button type="button" data-jump="' + i + '">' + esc(typeof s.h === 'string' ? s.h : '') + '</button>').join('') + '</nav>' : '';
     const body = secs.map((s, i) => '<section class="sv-sec"><h3 id="svSec' + i + '" tabindex="-1">' + esc(typeof s.h === 'string' ? s.h : '') + '</h3>' +
       (Array.isArray(s.blocks) ? s.blocks.map(block).join('') : '') + '</section>').join('');
-    const sources = (Array.isArray(t.sources) ? t.sources : []).filter(s => s && filled(s.name));
-    const foot = '<footer class="sv-foot">' +
-      (sources.length ? '<h3>Sources</h3><ul>' + sources.map(s => '<li><b>' + esc(s.name) + '</b>' + (filled(s.used) ? ': ' + esc(s.used) : '') + '</li>').join('') + '</ul>' : '') +
-      (filled(t.reviewed) ? '<p>Reviewed ' + esc(t.reviewed) + '</p>' : '') +
-      (filled(t.asOf) ? '<p>As of ' + esc(t.asOf) + '</p>' : '') + '</footer>';
-    return '<article class="sv-page">' + head + first + jump + body + foot + '</article>';
+    return '<article class="sv-page">' + head + first + jump + body + footHTML(t) + '</article>';
+  }
+
+  /* ---------- Checklist pages (#/survival/list/<id>): native checkboxes, a count, Clear ticks with an in-page second tap ---------- */
+  const countOf = id => ticks(id).length + '/' + checklist(id).items.length;
+  function checklistHTML(c) {
+    const on = new Set(ticks(c.id));
+    const rows = c.items.map((it, i) => '<li><label class="sv-check"><input type="checkbox" data-item="' + esc(it.id) + '" aria-labelledby="svCt' + i + '"' +
+      (filled(it.note) ? ' aria-describedby="svCn' + i + '"' : '') + (on.has(it.id) ? ' checked' : '') + '><span><span id="svCt' + i + '" class="sv-ctext">' + esc(it.text) + '</span>' +
+      (filled(it.note) ? '<small id="svCn' + i + '" class="sv-cnote">' + esc(it.note) + '</small>' : '') + '</span></label></li>').join('');
+    return '<article class="sv-page" data-list="' + esc(c.id) + '">' + headHTML('c:' + c.id, c) +
+      (filled(c.summary) ? '<p>' + esc(c.summary) + '</p>' : '') +
+      '<div class="sv-checkbar"><p class="sv-count" role="status">' + esc(countOf(c.id)) + '</p>' +
+      '<button type="button" class="btn ghost" data-act="clear-ticks" aria-disabled="' + (on.size ? 'false' : 'true') + '">Clear ticks</button></div>' +
+      '<ul class="sv-checks">' + rows + '</ul>' + footHTML(c) + '</article>';
+  }
+  /* Draws a checklist into the page; false for an id that is not one. The returned function stops the Clear ticks timer. */
+  function drawChecklist(id, el) {
+    const c = checklist(id);
+    if (!c) return false;
+    el.innerHTML = checklistHTML(c);
+    FK.recent.add('c:' + id);
+    return () => { clearTimeout(clearT); clearT = null; clearSure = false; };
+  }
+  let clearT = null, clearSure = false;
+  function paintClear(c) {
+    const btn = pageEl.querySelector('[data-act="clear-ticks"]');
+    if (!btn) return;
+    const n = ticks(c.id).length;
+    pageEl.querySelector('.sv-count').textContent = countOf(c.id);
+    btn.setAttribute('aria-disabled', String(n === 0));
+    btn.textContent = clearSure ? 'Confirm clear' : 'Clear ticks';
+    btn.classList.toggle('ghost', !clearSure);
+  }
+  function setClearSure(c, on) {
+    clearTimeout(clearT); clearT = null; clearSure = on;
+    if (on) clearT = setTimeout(() => { clearSure = false; clearT = null; paintClear(c); }, FK.tools.confirm.revertMs);
+    paintClear(c);
+  }
+  function onChecklistClick(e, c) {
+    if (!e.target.closest('[data-act="clear-ticks"]') || !ticks(c.id).length) return;
+    if (!clearSure) { setClearSure(c, true); return; }
+    if (!saveTicks(c.id, [])) { FK.toast(FK.FULL_MSG); return; }
+    pageEl.querySelectorAll('input[data-item]').forEach(b => { b.checked = false; });
+    setClearSure(c, false);
+  }
+  function onChecklistChange(e, c) {
+    const b = e.target.closest('input[data-item]');
+    if (!b) return;
+    const next = new Set(ticks(c.id));
+    if (b.checked) next.add(b.dataset.item); else next.delete(b.dataset.item);
+    if (!saveTicks(c.id, c.items.filter(it => next.has(it.id)).map(it => it.id))) { b.checked = !b.checked; FK.toast(FK.FULL_MSG); return; }
+    setClearSure(c, false);   // a tick since the first tap: ask again
   }
 
   /* ---------- Home: filters, Pinned, Recent, Topics by category, then Tools and Checklists from homeItems providers ---------- */
@@ -101,6 +190,9 @@
     }
     return out;
   }
+
+  registerPage('list', drawChecklist);
+  homeItems('list', () => checklists().map(c => ({ key: 'c:' + c.id, title: c.title, badge: countOf(c.id) })));
 
   /* Redraw a block only when its markup changed, so focus and opened categories survive. */
   const drawn = new WeakMap();
@@ -192,7 +284,7 @@
     return true;
   }
   function drawProvided(segment, id) {
-    return showPage(el => {
+    const shown = showPage(el => {
       for (const fn of providers[segment]) {
         let out = false;
         try { out = fn(id, el); } catch (e) { console.warn('Survival page provider failed', e); }   // a broken provider counts as "unknown id"
@@ -201,6 +293,9 @@
       }
       return false;
     });
+    const h = shown && $('svTitle');
+    if (h) h.focus({ preventScroll: true });
+    return shown;
   }
   function drawTopic(t) {
     showPage(el => { el.innerHTML = topicHTML(t); });
@@ -223,11 +318,12 @@
     if (t) drawTopic(t); else redirect(r);
   }
 
-  /* Open a key: s:<topicId> (c: and u: arrive with Tasks 8 to 10). Returns false for anything it cannot open. */
+  /* Open a key: s:<topicId> or c:<checklistId> (u: arrives with Tasks 9 and 10). Returns false for anything it cannot open. */
   function open(key, opts) {
     const m = typeof key === 'string' ? KEY.exec(key) : null;
-    if (!m || m[1] !== 's' || !topic(m[2])) return false;
-    FK.route.go('/survival/' + m[2], opts && opts.replace ? { replace: true } : undefined);
+    const path = !m ? null : m[1] === 's' && topic(m[2]) ? '/survival/' + m[2] : m[1] === 'c' && checklist(m[2]) ? '/survival/list/' + m[2] : null;
+    if (!path) return false;
+    FK.route.go(path, opts && opts.replace ? { replace: true } : undefined);
     return true;
   }
   function openLink(key) {
@@ -268,20 +364,31 @@
     }
     const pin = e.target.closest('.sv-head [data-act="pin"]');
     if (pin) {
-      const r = FK.route.current();
-      if (r.tab === 'survival' && topic(r.parts[0])) FK.pins.toggle('s:' + r.parts[0]);
+      const key = pageKey(FK.route.current());
+      if (key) FK.pins.toggle(key);
+      return;
     }
+    const c = shownChecklist();
+    if (c) onChecklistClick(e, c);
   });
+  pageEl.addEventListener('change', e => { const c = shownChecklist(); if (c) onChecklistChange(e, c); });
+  /* The key of the topic or checklist the page shows, or null. */
+  function pageKey(r) {
+    if (r.tab !== 'survival') return null;
+    if (r.parts[0] === 'list') return r.parts.length === 2 && checklist(r.parts[1]) ? 'c:' + r.parts[1] : null;
+    return r.parts.length === 1 && topic(r.parts[0]) ? 's:' + r.parts[0] : null;
+  }
+  const shownChecklist = () => { const k = pageKey(FK.route.current()); return k && k[0] === 'c' ? checklist(k.slice(2)) : null; };
   FK.on('pins', () => {
-    const star = pageEl.querySelector('.sv-head [data-act="pin"]'), r = FK.route.current();
-    if (!star || r.tab !== 'survival' || !topic(r.parts[0])) return;
-    const on = FK.pins.has('s:' + r.parts[0]);
+    const star = pageEl.querySelector('.sv-head [data-act="pin"]'), key = pageKey(FK.route.current());
+    if (!star || !key) return;
+    const on = FK.pins.has(key);
     star.setAttribute('aria-pressed', String(on));
     star.textContent = on ? '★' : '☆';
   });
   FK.on('route', onRoute);
 
-  FK.survival = { topics, topic, open, renderHome, refreshHome: renderHome, registerPage, homeItems, filter };
+  FK.survival = { topics, topic, checklists, checklist, ticks, open, renderHome, refreshHome: renderHome, registerPage, homeItems, filter };
   // The router's first route ran before this file loaded; wait until the rest of the script (page providers) has loaded too.
   queueMicrotask(() => onRoute(FK.route.current()));
 })();

@@ -1,0 +1,65 @@
+{
+  "id": "ten-essentials",
+  "title": "Ten essentials",
+  "category": "basics",
+  "summary": "Tick off the ten things to pack for every trip into the backcountry.",
+  "items": [
+    {
+      "id": "navigation",
+      "text": "Navigation",
+      "note": "Map, compass, and a charged phone or GPS."
+    },
+    {
+      "id": "headlamp",
+      "text": "Headlamp",
+      "note": "With spare batteries."
+    },
+    {
+      "id": "sun-protection",
+      "text": "Sun protection",
+      "note": "Sunglasses, sunscreen and a hat."
+    },
+    {
+      "id": "first-aid-kit",
+      "text": "First aid kit",
+      "note": "Including a tourniquet."
+    },
+    {
+      "id": "knife",
+      "text": "Knife or multi-tool"
+    },
+    {
+      "id": "fire",
+      "text": "Fire",
+      "note": "Lighter, ferro rod or waterproof matches, plus tinder."
+    },
+    {
+      "id": "shelter",
+      "text": "Emergency shelter",
+      "note": "Space blanket, bivy sack or tarp."
+    },
+    {
+      "id": "food",
+      "text": "Extra food",
+      "note": "A day’s worth beyond the plan."
+    },
+    {
+      "id": "water",
+      "text": "Extra water",
+      "note": "And a way to treat more."
+    },
+    {
+      "id": "layers",
+      "text": "Extra layers",
+      "note": "Insulation and rain gear."
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Taken from the Ten essentials topic; checked in Task 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

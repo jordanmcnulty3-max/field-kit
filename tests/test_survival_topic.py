@@ -39,7 +39,7 @@ TOPICS = [FIX, OTHER, EVIL, WIDE]
 
 
 def boot(page, app_url, hash_='#/survival', topics=TOPICS, storage=None):
-    inject_data(page, topics=topics, only=True)
+    inject_data(page, topics=topics, checklists=[], only=True)
     page.add_init_script('window.__len0 = history.length;')
     if storage:
         page.add_init_script(

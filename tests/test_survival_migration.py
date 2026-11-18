@@ -125,5 +125,5 @@ def test_every_topic_is_a_draft_with_placeholder_source_and_validates():
     for t in topics:
         assert t['draft'] is True and t['reviewed'] == '2026-11-17' and t['category'] == 'basics'
         assert t['sources'] == [{'name': 'Not yet source-checked', 'used': 'Converted from v6 text; checked in Tasks 13 to 16'}]
-    errors, _warnings = validate_topics(topics, set(figs.F), {'p:frostbite'})
+    errors, _warnings = validate_topics(topics, set(figs.F), {'p:frostbite', 'c:ten-essentials'})   # the Ten essentials topic links to its checklist
     assert errors == []

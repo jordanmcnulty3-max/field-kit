@@ -43,6 +43,10 @@
         },
         {
           "p": "Tell someone your route and when you’ll be back, and add a whistle: three blasts carries farther than shouting."
+        },
+        {
+          "link": "c:ten-essentials",
+          "label": "Ten essentials checklist"
         }
       ]
     }

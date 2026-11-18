@@ -56,7 +56,7 @@
       if (!str(c && c.id) || !str(c.title)) continue;
       const f = [field(W.title, c.title)];
       for (const it of Array.isArray(c.items) ? c.items : []) if (it && str(it.text)) f.push(field(W.body, it.text, true));
-      out.push({ key: 'c:' + c.id, title: c.title, kind: 'Checklist', draft: false, fields: f });
+      out.push({ key: 'c:' + c.id, title: c.title, kind: 'Checklist', draft: c.draft === true, fields: f });
     }
     for (const u of survList('tools')) {
       if (!str(u && u.name) || !str(u.label)) continue;
@@ -175,7 +175,7 @@
       }
       case 'c': {
         const c = survList('checklists').find(x => x && x.id === id && str(x.title));
-        return c ? { key, title: c.title, where: 'Checklist', draft: false } : null;
+        return c ? { key, title: c.title, where: 'Checklist', draft: c.draft === true } : null;
       }
       case 'u': {
         const u = survList('tools').find(x => x && x.name === id && str(x.label));
@@ -203,7 +203,7 @@
     switch (key[0]) {
       case 'p': FK.protocol.open(id, undefined, { replace }); break;   // an advanced one still shows its one-time acknowledgement
       case 't': case 'r': FK.tools.start(id, { replace }); break;
-      case 's': case 'c': case 'u': FK.survival.open(key, { replace }); break;   // survival.js draws the page and adds it to Recent
+      case 's': case 'c': case 'u': return FK.survival.open(key, { replace });   // survival.js draws the page and adds it to Recent; false if it cannot open it
       case 'a':
         if (id === 'settings') { const open = () => $('menuBtn').click(); if (replace) FK.route.closeSearch(open); else open(); }
         else if (id === 'areas') { nav('/tactical/map'); whenMap(() => $('mSave').click()); }   // the Saved areas list is in the Save map dialog

@@ -423,9 +423,9 @@ def test_backup_includes_the_form(page, app_url):
 def test_release_gate_no_longer_blocks_on_report_wording(tmp_path):
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'build.py'), '--release', str(tmp_path)], capture_output=True, text=True)
     assert 'REPORT_WORDING_DRAFT' not in r.stderr + r.stdout
-    # Draft topics (all 15 until the content tasks finish) legitimately fail --release; nothing else may.
+    # Draft topics (all 15 until the content tasks finish) and the draft Ten essentials checklist legitimately fail --release; nothing else may.
     errs = [l.strip() for l in r.stderr.splitlines()[1:] if l.strip()]
-    assert all('draft topic not allowed' in l for l in errs), r.stderr
+    assert all('draft topic not allowed' in l or 'draft checklist not allowed' in l for l in errs), r.stderr
 
 
 def test_normal_build_still_works_while_draft(tmp_path):

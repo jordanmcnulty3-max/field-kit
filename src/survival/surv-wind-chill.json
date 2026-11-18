@@ -83,7 +83,7 @@
           ]
         },
         {
-          "p": "The last two have almost the same wind chill on the National Weather Service chart (-57°F and -58°F), yet the windier one freezes skin faster (NOAA JetStream). Colder or windier always means less time."
+          "p": "The last two have almost the same wind chill on the National Weather Service chart (-57°F and -58°F), yet the windier one freezes skin faster (NOAA JetStream). Colder or windier means less time."
         },
         {
           "warn": "These tests were done on adults. Use the chart as a starting point and be even more cautious with children, older people and anyone in poor health (National Weather Service)."
@@ -219,6 +219,5 @@
       "used": "Hypothermia most cases between 30 and 50°F; get out of wind and rain early"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

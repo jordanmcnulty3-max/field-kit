@@ -3116,3 +3116,54 @@ Conversions: 5 ft = 1.52 m, "1.5 m"; 12 in = 30.5 cm, "30 cm"; 100 yd = 91.4 m, 
 - p:hypothermia, p:frostbite, p:carbon-monoxide, p:chest-pain: linked, not restated; danger signs named only as pointers in the protocols' own words. Stranded-car engine rule equals p:carbon-monoxide's CDC line. No protocol edited.
 - Batch A: surv-carbon-monoxide, surv-portable-heaters (never while asleep), surv-generators and surv-store-fuel are linked or untouched; no fuel-burning rule restated differently. Batch B (draft): surv-heat-out (sheltering in a building, babies, family bed) linked; home-heat-kit linked; surv-wood-stoves-fireplaces linked for overnight.
 - windchill.json: same cells and wording as above; the topic gives no per-cell frostbite table (ruling).
+
+### Task 6 fix round (2026-11-18), from task-6-review.md
+
+Sources re-opened by built-in search and fetch: Red Cross 2023 winter storm page; FM 21-76-1 (VI 2g, 2h); CPSC Carbon
+Monoxide Questions and Answers ("Never operate unvented fuel-burning appliances in any room where people are sleeping.").
+New: NWS La Crosse, Power Outage Preparedness, https://www.weather.gov/arx/powerprep (search, then fetch; title "NWS La
+Crosse - Power Outage Preparedness"); NWS Service Change Notice 26-52, June 8, 2026,
+https://www.weather.gov/media/notification/pdf_2026/scn26-52_PDS_Wording_in_Blizzard_Warnings_and_IceStormWarnings.pdf.
+Ready.gov Winter Weather retried: client error again. `draft` removed from all five files.
+
+- I1 surv-winter-storms, stranded: new step after the engine step. Red Cross, same stranded list as the engine and
+  exhaust lines: "If more than one person is in the vehicle, take turns sleeping."; "Leave the overhead light on when the
+  engine is running so that you can be seen" (dome-light step now credits both). p:carbon-monoxide donts: "Do not run
+  a stove, heater, lantern, generator or engine inside a ... vehicle where people are sleeping"; s6 "Never run
+  fuel-burning equipment where people sleep." Text: someone awake whenever the engine runs; wake sleepers before
+  starting it; off before anyone sleeps again (strict reading, D53). doFirst and summary say "only while someone is
+  awake" / "never while everyone is asleep". surv-sleep-warm "Never sleep with a flame" adds the vehicle line and links
+  s:surv-winter-storms.
+- I2 surv-dress-for-cold, wet clothes: FM 21-76-1 VI 2g order restored: "(1) Build fire. (2) Remove wet clothing and
+  rewarm by fire. (3) Finish drying clothing by fire." Wet clothing off "once they are out of the wind and cold, not
+  before" (p:hypothermia s5). "Don't warm frozen fingers, toes or skin at the fire" (p:frostbite donts: "Do not rewarm ...
+  with a fire"). 2h kept with "get out of the wind" first (p:hypothermia s5). Hypothermia link sits beside it, Frostbite
+  link added; no care restated.
+- I3 surv-sleep-warm summary: "... in a tent, vehicle or any room where people are sleeping" (CPSC, re-opened).
+- I4 surv-winter-storms, downed lines, NWS La Crosse: "Never touch anything or anyone in contact with a power line."; "You
+  could be shocked by contact with the line or a secondary object or person."; "When a live wire touches the ground,
+  electricity fans out in a pool"; "You can be shocked when in this area."; under "When Vehicles Comes in Contact with a
+  Power Lines": "Stay inside the vehicle and warn others to keep away."; "Wait inside the vehicle until rescue personnel
+  arrive."; "Do not make contact with metal parts in the vehicle."; "Call 911 and report it to local Sheriff or Police"
+  (text: "Call 911 if you can", no dial control); "If you have to get out of the vehicle because of a fire or other
+  danger:" "Jump out so that you do not touch the vehicle and ground at the same time." "Don't run." "Hop away keeping
+  your feet together." No distance given (none on the page).
+- M1: SCN 26-52 ("on or about October 1, 2026"; "high confidence of a blizzard or ice storm that is of extreme and
+  historic severity"; "an exceptional threat that is above and beyond the typical blizzard or ice storm"). One line added
+  under the alerts table.
+- M2 and M3: flashlight line credited as the app's choice (D51), Red Cross line noted as under Power Outage Safety;
+  checklist melt-snow note "Never burn anything inside the car (D51; Carbon monoxide)", from CPSC's "Never burn charcoal
+  inside a home, garage, vehicle, or tent" as checked in surv-carbon-monoxide, widened by the app.
+- M4: metric added in surv-winter-storms (35 mph = 56 km/h; 1/4 mile = 402 m, "400 m"; a mile or two = 1.6 to 3.2 km,
+  "2 to 3 km"). surv-wind-chill stays °F and mph: ruling in v7.3-rulings.md.
+- M5: "Colder or windier means less time" ("always" removed).
+- M6: "Before you get in" is a list, not numbered steps.
+- M7: the clothing line says "Adults" and points babies to surv-heat-out.
+- M8: hot water bottle wrapped in cloth, never directly on skin (p:hypothermia donts: "Do not put a heat pack or hot water
+  bottle directly on the skin").
+- M9: s:surv-wood-stoves-fireplaces and s:surv-portable-heaters linked under During the storm.
+- M10: CDC-DUR "Dress babies in warmer clothing such as footed pajamas, one-piece wearable blankets, or sleep sacks." added
+  beside the never-a-cold-room line in surv-dress-for-cold (agrees with Safe to Sleep, D43).
+- M11: Ready.gov failed again; ruling. M12: tags left to the whole-pack reviewer; ruling. M13: test
+  test_wc_links_lead_with_the_shipped_wind_chill_topic added (shipped data: first link s:surv-wind-chill, label "Wind
+  chill and cold danger").

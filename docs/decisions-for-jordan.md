@@ -447,3 +447,11 @@ Source disagreements found while checking the Survival topics. Each says what th
    Cities (Winter Hazard Awareness Week, November 7, 2023): "Run the engine a few minutes every hour, or every half hour in
    extreme cold." Today: about 10 minutes each hour (three national sources and the protocol). Running more often in
    extreme cold means more warmth but more exhaust; say if the group wants the Twin Cities line added.
+53. **Sleeping in a stranded car while the engine runs (surv-winter-storms, surv-sleep-warm) — Heat pack Task 6 fix
+   round.** The Red Cross (February 21, 2023): "If more than one person is in the vehicle, take turns sleeping." CDC: "Stay
+   awake." The checked Carbon monoxide poisoning protocol: "Do not run a stove, heater, lantern, generator or engine
+   inside a tent, snow shelter, camper or vehicle where people are sleeping." Read strictly, the protocol means no one may
+   be asleep while the engine runs, which the Red Cross does not say. Today: someone is always awake; anyone asleep is
+   woken before the engine is started for its 10 minutes and the engine is off before anyone goes back to sleep (the
+   strictest reading). Waking everyone hourly costs sleep on a long night; say if the group would rather allow sleepers
+   while one person stays awake and watches the clock.

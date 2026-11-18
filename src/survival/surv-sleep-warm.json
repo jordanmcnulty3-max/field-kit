@@ -18,7 +18,7 @@
     "winter camping",
     "heater at night"
   ],
-  "summary": "Insulate from the ground first, keep your bag or blankets dry and fluffed, eat a snack and go to the bathroom before bed, and add a bottle of warm water. Never sleep with a fuel-burning heater, stove or lantern running in a tent, vehicle or closed room.",
+  "summary": "Insulate from the ground first, keep your bag or blankets dry and fluffed, eat a snack and go to the bathroom before bed, and add a wrapped bottle of warm water. Never sleep with a fuel-burning heater, stove, lantern or engine running in a tent, vehicle or any room where people are sleeping.",
   "sections": [
     {
       "h": "Never sleep with a flame",
@@ -29,6 +29,7 @@
         {
           "list": [
             "Indoors: never run an unvented fuel-burning appliance in any room where people are sleeping (CPSC). Turn heaters off when you go to bed (US Fire Administration). See Carbon monoxide and Kerosene and propane heaters.",
+            "In a vehicle: never run the engine while people are sleeping (Carbon monoxide protocol). Run it only while someone is awake, and take turns sleeping (Red Cross). See Winter storms.",
             "Wood stove or fireplace overnight: follow its topic.",
             "Keep battery carbon monoxide alarms near where people sleep (Carbon monoxide)."
           ]
@@ -44,6 +45,10 @@
         {
           "link": "s:surv-wood-stoves-fireplaces",
           "label": "Wood stoves and fireplaces"
+        },
+        {
+          "link": "s:surv-winter-storms",
+          "label": "Winter storms"
         }
       ]
     },
@@ -74,7 +79,7 @@
           "list": [
             "Shake the sleeping bag out and fluff it up before and after use (Walter Reed Army Institute of Research), especially at the foot (Army FM 21-76-1).",
             "Keep it dry: carry it in a waterproof bag (Walter Reed Army Institute of Research), and air and dry it every day to remove body moisture (Army FM 21-76-1). Open it wide or turn it inside out so sun and wind can dry it, and remove any frost that builds up overnight (Walter Reed Army Institute of Research).",
-            "Sleep in dry wool or synthetic clothing, socks and a hat, not cotton. Don’t overdress: you shouldn’t sweat (Walter Reed Army Institute of Research).",
+            "Adults: sleep in dry wool or synthetic clothing, socks and a hat, not cotton. Don’t overdress: you shouldn’t sweat (Walter Reed Army Institute of Research). Babies sleep by different rules: see Stay warm when the heat is out.",
             "If there is room, put dry boots and clothes inside the bag with you (Walter Reed Army Institute of Research).",
             "Once you are in bed, try not to get out of the bag (Walter Reed Army Institute of Research).",
             "Not enough bag: add dry grass, leaves or dry moss (Army FM 21-76-1)."
@@ -89,12 +94,12 @@
       "h": "Before you get in",
       "blocks": [
         {
-          "steps": [
+          "list": [
             "Eat plenty through the day, with warm meals and warm sugary drinks (Walter Reed Army Institute of Research). Your body needs fuel to make heat (Priorities).",
             "Have an easy-to-digest or warm snack just before you get into the bag: it can help you stay warmer longer while you sleep (Walter Reed Army Institute of Research).",
             "Go to the bathroom (Walter Reed Army Institute of Research).",
             "Warm up with a few exercises, but don’t break a sweat (Walter Reed Army Institute of Research).",
-            "If you can heat water, fill a bottle that closes tightly with warmed water and put it in the bag (Walter Reed Army Institute of Research)."
+            "If you can heat water, fill a bottle that closes tightly with warmed water and put it in the bag (Walter Reed Army Institute of Research). Wrap it in cloth: never put a hot water bottle directly on the skin (Hypothermia protocol)."
           ]
         },
         {
@@ -160,7 +165,7 @@
     },
     {
       "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide), Kerosene and propane heaters (surv-portable-heaters), Wood stoves and fireplaces (surv-wood-stoves-fireplaces)",
-      "used": "CPSC: never operate unvented fuel-burning appliances in any room where people are sleeping; US Fire Administration: turn heaters off when you go to bed; battery CO alarms near sleeping areas; overnight wood stove rule (linked, not restated)"
+      "used": "CPSC: never operate unvented fuel-burning appliances in any room where people are sleeping; US Fire Administration: turn heaters off when you go to bed; battery CO alarms near sleeping areas; overnight wood stove rule (linked, not restated); vehicle: never run an engine in a vehicle where people are sleeping (p:carbon-monoxide)"
     },
     {
       "name": "Stay warm when the heat is out (surv-heat-out)",
@@ -169,8 +174,15 @@
     {
       "name": "Water in winter (surv-water-winter, checked)",
       "used": "Cold weather dulls thirst; drink often"
+    },
+    {
+      "name": "American Red Cross, Giant Winter Storm Threatens Millions; Follow these Safety Steps (February 21, 2023)",
+      "used": "If more than one person is in the vehicle, take turns sleeping"
+    },
+    {
+      "name": "Hypothermia (p:hypothermia, checked protocol)",
+      "used": "Do not put a heat pack or hot water bottle directly on the skin"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

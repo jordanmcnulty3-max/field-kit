@@ -121,16 +121,20 @@
           "list": [
             "Change wet clothing often to prevent losing body heat (Red Cross). Keep extra clothing, including underwear, handy in case you get wet (OSHA).",
             "Keep clothing dry so it keeps insulating. Dry damp clothing in the sun or by a fire, and dry it before dark (Army FM 21-76-1).",
-            "Fell into water in winter: take off the wet clothing, rewarm by a fire, and finish drying the clothing by the fire (Army FM 21-76-1).",
-            "No fire: take off the clothing and get into a sleeping bag if you have one. Let the wet clothes freeze, then break the ice out of them (Army FM 21-76-1)."
+            "Fell into water in winter: build a fire first (Army FM 21-76-1). Take the wet clothing off once you are out of the wind and cold, not before (Hypothermia protocol), then dry it by the fire (Army FM 21-76-1). Don’t warm frozen fingers, toes or skin at the fire (Frostbite protocol).",
+            "No fire: get out of the wind, take the wet clothing off and get into a sleeping bag if you have one. Let the wet clothes freeze, then break the ice out of them (Army FM 21-76-1; Hypothermia protocol)."
           ]
         },
         {
-          "p": "Anyone soaked and cold all over: open the Hypothermia protocol."
+          "p": "Anyone soaked in winter water, or soaked and cold all over: open the Hypothermia protocol now. For frozen skin, the Frostbite protocol."
         },
         {
           "link": "p:hypothermia",
           "label": "Hypothermia"
+        },
+        {
+          "link": "p:frostbite",
+          "label": "Frostbite"
         }
       ]
     },
@@ -146,7 +150,7 @@
           ]
         },
         {
-          "p": "Babies asleep: infants under 1 year should never sleep in a cold room (CDC). Safe sleep rules for keeping a baby warm are in Stay warm when the heat is out."
+          "p": "Babies asleep: infants under 1 year should never sleep in a cold room (CDC). CDC: dress babies in warmer clothing such as footed pajamas, one-piece wearable blankets or sleep sacks. The rest of the safe sleep rules are in Stay warm when the heat is out."
         },
         {
           "link": "s:surv-heat-out",
@@ -189,7 +193,7 @@
     },
     {
       "name": "CDC, Safety Guidelines: During & After a Winter Storm (reviewed August 25, 2026)",
-      "used": "Sleeves snug at the wrist; mittens warmer than gloves; water-resistant coat and boots; several layers of loose-fitting clothing; fabrics that hold heat and don’t absorb moisture, wool, silk or polypropylene over cotton; insulation layer traps air; outer layer protects from wind, rain and snow; stay dry, wet clothing chills quickly; excess sweating, remove layers when too warm; don’t leave skin exposed, avoid getting wet; try not to sweat or become too tired; wrap the whole body including the head in extra clothing, blankets or newspapers (stranded in a car); infants under one year never sleep in a cold room"
+      "used": "Sleeves snug at the wrist; mittens warmer than gloves; water-resistant coat and boots; several layers of loose-fitting clothing; fabrics that hold heat and don’t absorb moisture, wool, silk or polypropylene over cotton; insulation layer traps air; outer layer protects from wind, rain and snow; stay dry, wet clothing chills quickly; excess sweating, remove layers when too warm; don’t leave skin exposed, avoid getting wet; try not to sweat or become too tired; wrap the whole body including the head in extra clothing, blankets or newspapers (stranded in a car); infants under one year never sleep in a cold room; dress babies in warmer clothing such as footed pajamas, one-piece wearable blankets or sleep sacks"
     },
     {
       "name": "CDC, Preventing Frostbite (Winter Weather, reviewed August 25, 2026)",
@@ -201,7 +205,7 @@
     },
     {
       "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapters II and VI",
-      "used": "Layers create more dead air space; dry damp clothing in the sun or by a fire, dry it before dark; fell in water: remove wet clothing, rewarm and finish drying by fire; no fire: remove clothing, get into a sleeping bag, let wet clothes freeze, break the ice out; keep clothing clean, dirt reduces insulation; change socks regularly; improvise sleeping bag insulation with dry grass, leaves, dry moss"
+      "used": "Layers create more dead air space; dry damp clothing in the sun or by a fire, dry it before dark; fell in water: build fire, then remove wet clothing and rewarm by fire, finish drying by fire; no fire: remove clothing, get into a sleeping bag, let wet clothes freeze, break the ice out; keep clothing clean, dirt reduces insulation; change socks regularly; improvise sleeping bag insulation with dry grass, leaves, dry moss"
     },
     {
       "name": "Walter Reed Army Institute of Research, Cold Weather Sleep in the Arctic Environment (with the Northern Warfare Training Center)",
@@ -218,8 +222,11 @@
     {
       "name": "Priorities (surv-priorities, checked)",
       "used": "COLD: Clean, avoid Overheating (take layers off before hard work), Loose and in layers, Dry"
+    },
+    {
+      "name": "Hypothermia (p:hypothermia) and Frostbite (p:frostbite), checked protocols",
+      "used": "Wet clothing off once out of the wind and cold, not before; do not rewarm frostbite with a fire"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

@@ -963,6 +963,13 @@ def test_wc_links_include_the_topic_once_it_exists_and_open_it(page, app_url):
     expect(page.locator('#survPage h2')).to_have_text('Wind chill and cold exposure')
 
 
+def test_wc_links_lead_with_the_shipped_wind_chill_topic(page, app_url):
+    wc_boot(page, app_url)   # shipped topics: batch C's surv-wind-chill resolves
+    links = page.locator('#survPage .sv-link')
+    assert links.evaluate_all('els => els.map(e => e.dataset.link)') == ['s:surv-wind-chill', 'p:hypothermia', 'p:frostbite']
+    assert 'Wind chill and cold danger' in links.first.inner_text()
+
+
 def test_wc_link_opens_the_emergency_protocol(page, app_url):
     wc_boot(page, app_url)
     page.locator('#survPage button[data-link="p:frostbite"]').click()

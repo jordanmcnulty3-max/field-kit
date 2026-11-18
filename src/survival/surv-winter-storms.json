@@ -26,12 +26,12 @@
     "downed power line",
     "power lines down"
   ],
-  "summary": "Know what the National Weather Service alerts mean, get ready before the storm and stay off the roads. Shovel slowly. Never touch a fallen power line. If you’re stranded in a car, stay with it, keep the exhaust pipe clear of snow, and run the engine and heater about 10 minutes each hour with one window slightly open.",
+  "summary": "Know what the National Weather Service alerts mean, get ready before the storm and stay off the roads. Shovel slowly. Never touch a fallen power line. If you’re stranded in a car, stay with it, keep the exhaust pipe clear of snow, and run the engine and heater about 10 minutes each hour with one window slightly open, and never while everyone is asleep.",
   "when": [
     "cold"
   ],
   "doFirst": [
-    "Stranded in your car? Stay in it (National Weather Service). Clear snow from the exhaust pipe, then run the engine and heater about 10 minutes each hour with one window slightly open (National Weather Service, CDC, Red Cross).",
+    "Stranded in your car? Stay in it (National Weather Service). Clear snow from the exhaust pipe, then run the engine and heater about 10 minutes each hour with one window slightly open, and only while someone is awake (National Weather Service, CDC, Red Cross; Carbon monoxide protocol).",
     "Never touch a fallen power line (CDC).",
     "Blizzard or Winter Storm Warning: don’t travel, or delay your trip until conditions improve. If you must travel, carry a winter survival kit (National Weather Service).",
     "Heart disease or high blood pressure? Follow your doctor’s advice about shoveling. Everyone else: dress warmly and work slowly (CDC)."
@@ -43,9 +43,9 @@
         {
           "list": [
             "Nor’easter: a storm along the East Coast, most frequent and most violent between September and April. Nor’easters nearly always bring heavy rain or snow and gale-force winds, and sometimes coastal flooding (National Weather Service).",
-            "Lake-effect snow: cold air, often from Canada, crosses the open water of the Great Lakes and builds narrow bands that can drop 2 to 3 inches (5 to 8 cm) of snow an hour or more. Heavy snow can fall in one place while the sun shines a mile or two away (National Weather Service). The bands can bring sudden drops in visibility (National Weather Service).",
+            "Lake-effect snow: cold air, often from Canada, crosses the open water of the Great Lakes and builds narrow bands that can drop 2 to 3 inches (5 to 8 cm) of snow an hour or more. Heavy snow can fall in one place while the sun shines a mile or two (2 to 3 km) away (National Weather Service). The bands can bring sudden drops in visibility (National Weather Service).",
             "Ice storm: freezing rain coats roads, walkways, trees and power lines with ice. Enough ice makes travel dangerous or impossible and is likely to snap power lines and bring down tree branches (National Weather Service).",
-            "Blizzard: frequent gusts of 35 mph or more with falling or blowing snow, frequently cutting visibility to under 1/4 mile for three hours or more. Whiteouts make travel extremely difficult (National Weather Service).",
+            "Blizzard: frequent gusts of 35 mph (56 km/h) or more with falling or blowing snow, frequently cutting visibility to under 1/4 mile (400 m) for three hours or more. Whiteouts make travel extremely difficult (National Weather Service).",
             "Snow squall: a short burst of moderate to heavy snow with gusty winds, low visibility and whiteouts, dangerous for drivers (National Weather Service, New York State definitions)."
           ]
         }
@@ -96,6 +96,9 @@
           }
         },
         {
+          "p": "From about October 1, 2026, a Blizzard or Ice Storm Warning may say Particularly Dangerous Situation. That means high confidence of a storm of extreme and historic severity, an exceptional threat beyond a typical blizzard or ice storm (National Weather Service)."
+        },
+        {
           "p": "Cold alerts (Extreme Cold Warning, Extreme Cold Watch, Cold Weather Advisory) are in Wind chill and cold danger."
         },
         {
@@ -143,6 +146,14 @@
           "label": "Carbon monoxide and burning fuel indoors"
         },
         {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        },
+        {
+          "link": "s:surv-portable-heaters",
+          "label": "Kerosene and propane heaters"
+        },
+        {
           "p": "Sheltering in your house or another building with the heat out: pick one small room and close it off. See Stay warm when the heat is out."
         },
         {
@@ -165,7 +176,7 @@
           "list": [
             "Avoid travel if you can (CDC, New York State). Don’t travel in low visibility, and avoid ice-covered roads, overpasses and bridges if at all possible (CDC).",
             "Before you go, clear all ice and snow from the vehicle, tell someone where you are going and your route, and take a fully charged phone, a car charger and an emergency kit (National Weather Service).",
-            "Snowplows travel at up to 35 mph. Never pass a plow while it is working; stay well behind it, where the road is clear and salted (New York State).",
+            "Snowplows travel at up to 35 mph (56 km/h). Never pass a plow while it is working; stay well behind it, where the road is clear and salted (New York State).",
             "Never pour water on the windshield to clear ice or snow: it can shatter the glass (CDC)."
           ]
         },
@@ -186,10 +197,11 @@
             "Make the car easy to see: tie a brightly colored cloth (red is best) to the antenna, and raise the hood once snow stops falling (CDC, Red Cross, National Weather Service).",
             "Clear snow from the exhaust pipe before you run the engine, and keep it clear, to lower the risk of carbon monoxide poisoning (National Weather Service, CDC, Red Cross).",
             "Run the engine and heater for about 10 minutes each hour, with one window slightly open for fresh air, the downwind one if you can (National Weather Service, CDC, Red Cross).",
-            "At night, turn on the dome light while the engine runs (National Weather Service).",
+            "Someone must be awake whenever the engine runs. If more than one person is in the car, take turns sleeping (Red Cross), and wake anyone asleep before you start the engine. Turn it off before anyone goes back to sleep: never run an engine in a vehicle where people are sleeping (Carbon monoxide protocol).",
+            "At night, turn on the dome light while the engine runs, so you can be seen (National Weather Service, Red Cross).",
             "Move anything you need from the trunk into the passenger area. Wrap your whole body, including your head, in extra clothing, blankets or newspapers. Huddle with others for warmth (CDC).",
             "Keep moving your arms and legs as you sit, and stay awake: you will be less vulnerable to cold-related health problems (CDC).",
-            "Use flashlights in the dark, not candles (Red Cross). Don’t eat snow: it lowers your body temperature (CDC)."
+            "For light, use a flashlight, not a candle (the app’s choice, D51; the Red Cross and CPSC say flashlights, not candles, at home in an outage). Don’t eat snow: it lowers your body temperature (CDC)."
           ]
         },
         {
@@ -227,6 +239,14 @@
       "blocks": [
         {
           "warn": "Heavy snow and ice can bring down power lines and cause gas leaks. Both can be deadly but are not obvious at first glance (National Weather Service). Never touch a fallen power line, and never drive through standing water with downed lines in it (CDC)."
+        },
+        {
+          "list": [
+            "Never touch anything or anyone in contact with a power line: you could be shocked through the line, an object or the person (National Weather Service La Crosse).",
+            "A live wire on the ground spreads electricity through the ground around it, so you can be shocked near it (National Weather Service La Crosse). Keep away.",
+            "A line falls on your vehicle: stay inside and warn others to keep away. Wait inside until rescuers arrive, and don’t touch metal parts of the vehicle. Call 911 if you can (National Weather Service La Crosse).",
+            "If fire or other danger forces you out, jump clear so you never touch the vehicle and the ground at the same time. Don’t run: hop away with your feet together (National Weather Service La Crosse)."
+          ]
         },
         {
           "list": [
@@ -282,7 +302,7 @@
     },
     {
       "name": "American Red Cross, Giant Winter Storm Threatens Millions; Follow these Safety Steps (February 21, 2023)",
-      "used": "Stretch before going out; avoid overexertion (shoveling heavy snow, pushing a vehicle, walking in deep snow), strain may cause a heart attack; cover your mouth; if stranded stay in the vehicle; don’t leave unless help is visible within 100 yards (91 meters); brightly colored cloth, preferably red, on the antenna and raise the hood after snow stops; engine about 10 minutes each hour, heater while running; exhaust pipe clear, slightly open a downwind window; flashlights, not candles"
+      "used": "Stretch before going out; avoid overexertion (shoveling heavy snow, pushing a vehicle, walking in deep snow), strain may cause a heart attack; cover your mouth; if stranded stay in the vehicle; don’t leave unless help is visible within 100 yards (91 meters); brightly colored cloth, preferably red, on the antenna and raise the hood after snow stops; engine about 10 minutes each hour, heater while running; exhaust pipe clear, slightly open a downwind window; overhead light on while the engine runs so you can be seen; if more than one person is in the vehicle, take turns sleeping; flashlights, not candles (under Power Outage Safety)"
     },
     {
       "name": "New York State Governor’s Office, Governor Hochul Urges Caution Ahead of Ice and Lake Effect Snow Systems (December 28, 2025): Winter Driving Safety Tips",
@@ -291,8 +311,19 @@
     {
       "name": "New York State Department of Health, Urges New Yorkers to Follow Winter Safety Tips (January 15, 2025)",
       "used": "People with heart problems, breathing disorders like asthma, or high blood pressure should follow their doctor’s advice about shoveling or strenuous outdoor exercise"
+    },
+    {
+      "name": "National Weather Service La Crosse, Power Outage Preparedness (weather.gov/arx/powerprep)",
+      "used": "Never touch anything or anyone in contact with a power line; shock through a secondary object or person; electricity fans out in a pool around a live wire on the ground; line on a vehicle: stay inside, warn others, wait for rescue, no contact with metal parts, call 911; if you must get out because of fire or other danger, jump so you don't touch the vehicle and ground at the same time, don't run, hop with feet together"
+    },
+    {
+      "name": "National Weather Service, Service Change Notice 26-52, Implementation of Particularly Dangerous Situation Wording in Blizzard Warnings and Ice Storm Warnings (June 8, 2026)",
+      "used": "On or about October 1, 2026; high confidence of a blizzard or ice storm of extreme and historic severity; exceptional threat above and beyond the typical blizzard or ice storm"
+    },
+    {
+      "name": "Carbon monoxide poisoning (p:carbon-monoxide, checked protocol)",
+      "used": "Do not run a stove, heater, lantern, generator or engine inside a tent, snow shelter, camper or vehicle where people are sleeping; never run fuel-burning equipment where people sleep"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

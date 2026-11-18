@@ -20,7 +20,7 @@
     {
       "id": "flashlight",
       "text": "Flashlight with extra batteries",
-      "note": "Use a flashlight in the dark, not candles."
+      "note": "Use a flashlight in the dark, not candles (the app’s choice, D51)."
     },
     {
       "id": "radio",
@@ -45,7 +45,7 @@
     {
       "id": "melt-snow",
       "text": "Waterproof matches and a small can to melt snow for drinking water",
-      "note": "Don’t eat snow: it lowers your body temperature."
+      "note": "Don’t eat snow: it lowers your body temperature. Never burn anything inside the car (D51; Carbon monoxide)."
     },
     {
       "id": "toilet",
@@ -117,13 +117,16 @@
     },
     {
       "name": "American Red Cross, Giant Winter Storm Threatens Millions; Follow these Safety Steps (February 21, 2023)",
-      "used": "Use flashlights in the dark, not candles"
+      "used": "Use flashlights in the dark, not candles (under Power Outage Safety; applied to the car by the app, D51)"
     },
     {
       "name": "FEMA, Ahead of Expected Nor’easter, FEMA Encourages Communities in the Storm’s Path to be #WinterReady (January 5, 2024)",
       "used": "Food and water, a shovel, windshield scraper, blankets, tow chains, reflectors (confirms items above)"
+    },
+    {
+      "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide)",
+      "used": "Never burn charcoal inside a home, garage, vehicle or tent (CPSC)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

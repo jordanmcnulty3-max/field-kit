@@ -2500,4 +2500,4 @@ Cat hole only; the group latrine (3 ft deep, 100 ft, 5 ft above groundwater) doe
 
 - "Jug with an on/off spigot", "Catch bucket", "Towel": "All you need is a jug of clean drinking water with an on/off spigot, soap, towels, and a catch bucket for the used water."
 - "Soap in a sock": step 4, "put a bar of soap in the toe of a tube sock or nylon stocking and tie it to the jug's handle".
-- Not drawn: the soakaway pit (the topic's "Where the dirty water goes" section), the tippy tap, any numbers. The jug stands on a table with the bucket below, as in the outdoors step.
+- Not drawn: the soakaway pit (the topic's "Where the dirty water goes" section), the tippy tap, any numbers. The jug stands on a table with its spigot reaching past the table edge and the bucket on the ground beside the table, directly under the stream (the outdoors step's "a bucket below to catch the used water").

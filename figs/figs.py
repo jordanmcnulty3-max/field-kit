@@ -127,21 +127,22 @@ svg('latrine', 200, 'Cat hole in side view: a hole 6 to 8 inches (15 to 20 cm) d
 
 
 svg('handwash-station', 226, 'Hand-washing station: a jug of treated water with an on/off spigot on a table, a bar of soap in a sock tied to its handle, a towel, and a catch bucket on the ground under the spigot', f'''
-<line x1="6" y1="198" x2="176" y2="198" class="m"/>
-<line x1="14" y1="122" x2="14" y2="198" class="k t3"/><line x1="166" y1="122" x2="166" y2="198" class="k t3"/>
-<line x1="8" y1="122" x2="172" y2="122" class="k t5"/>
-<rect x="58" y="52" width="60" height="70" rx="8" class="k"/><rect x="61" y="76" width="54" height="43" rx="6" class="af"/>
-<rect x="78" y="42" width="20" height="10" rx="2" class="k kf"/>
-<path d="M58 108 H44 V116" class="k t3"/><path d="M36 102 H52" class="k t3"/>
-<line x1="44" y1="122" x2="44" y2="158" class="a t3 d"/>
-<path d="M118 62 H132 V88 H118" class="k t3"/>
-<path d="M132 88 V92" class="k t1"/><rect x="122" y="92" width="18" height="18" rx="7" class="k milk"/>
-<rect x="144" y="106" width="26" height="16" rx="2" class="k milk"/><path d="M150 106 V122 M156 106 V122" class="m t1"/>
-<path d="M22 160 L26 198 H70 L74 160 Z" class="k"/><path d="M24 178 H72" class="a"/>
-{lbl(186,40,'Jug with an on/off','')}{lbl(186,54,'spigot','')}{lead(184,46,119,60)}
-{lbl(186,104,'Soap in a sock','')}{lead(184,100,141,100)}
-{lbl(186,130,'Towel','')}{lead(184,126,171,118)}
+<line x1="6" y1="198" x2="180" y2="198" class="m"/>
+<line x1="98" y1="122" x2="98" y2="198" class="k t3" data-part="leg"/><line x1="168" y1="122" x2="168" y2="198" class="k t3" data-part="leg"/>
+<line x1="90" y1="122" x2="176" y2="122" class="k t5" data-part="table"/>
+<rect x="100" y="52" width="46" height="70" rx="8" class="k"/><rect x="103" y="76" width="40" height="43" rx="6" class="af"/>
+<rect x="114" y="42" width="18" height="10" rx="2" class="k kf"/>
+<path d="M100 108 H49 V118" class="k t3"/><path d="M76 108 V98 M70 98 H82" class="k t3"/>
+<line x1="49" y1="124" x2="49" y2="158" class="a t3 d" data-part="stream"/>
+<path d="M146 62 H158 V84 H146" class="k t3"/>
+<path d="M158 84 V88" class="k t1"/><path d="M151 88 H165 V104 Q165 112 158 112 Q151 112 151 104 Z" class="k milk"/><path d="M151 94 H165" class="m t1"/>
+<path d="M162 118 H178 Q184 118 184 124 V150 Q181 155 178 150 Q175 155 172 150 V126 H162 Z" class="k milk"/>
+<path d="M22 160 L27 198 H71 L76 160 Z" class="k" data-part="bucket"/><path d="M24 178 H74" class="a"/>
+{lbl(190,40,'Jug with an on/off','')}{lbl(190,54,'spigot','')}{lead(188,46,138,60)}
+{lbl(190,100,'Soap in a sock','')}{lead(188,96,166,96)}
+{lbl(190,140,'Towel','')}{lead(188,136,185,136)}
 {lbl(48,216,'Catch bucket','','middle')}''')
+
 # ---------------- SHELTER ----------------
 svg('shelter-site', 200, 'Valley cross-section: wind on ridgetops, cold air and floods in the valley floor, a level bench as the best site', f'''
 <path d="M0 55 L45 28 L85 62 L125 112 L155 150 L190 154 L218 130 L236 112 L264 110 L282 84 L305 48 L340 58 L340 200 L0 200 Z" class="gr m"/>

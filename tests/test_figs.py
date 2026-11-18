@@ -217,3 +217,38 @@ def test_handwash_station_uses_the_topics_words():
         assert word in topic, word
     assert 'bleach' not in d and '911' not in d
     assert not re.search(r'\d', d), f'no numbers expected: {d}'
+
+
+def parts(name):
+    root = ET.fromstring(figs.F[name][0])
+    return {e.get('data-part'): e for e in root.iter() if e.get('data-part')}
+
+
+def xs_of(el):
+    if el.tag.endswith('line'):
+        return [float(el.get('x1')), float(el.get('x2'))]
+    return [float(n) for n in re.findall(r'[MLHl] ?(-?\d+(?:\.\d+)?)', el.get('d'))]
+
+
+def test_handwash_stream_falls_past_the_table_edge_into_the_bucket():
+    p = parts('handwash-station')
+    assert {'table', 'stream', 'bucket'} <= set(p)
+    t0, t1 = min(xs_of(p['table'])), max(xs_of(p['table']))
+    sx = xs_of(p['stream'])[0]
+    b0, b1 = min(xs_of(p['bucket'])), max(xs_of(p['bucket']))
+    assert sx < t0 - 6, f'stream x {sx} is over the tabletop {t0}-{t1}'
+    assert b0 < sx < b1, 'bucket must span the stream'
+    assert b1 < t0, 'bucket sits beside the table, not under it'
+    legs = [xs_of(e)[0] for e in ET.fromstring(figs.F['handwash-station'][0]).iter() if e.get('data-part') == 'leg']
+    assert all(abs(sx - l) > 10 for l in legs), 'stream clear of the legs'
+
+
+def test_handwash_station_alt_and_caption_carry_the_topic_words():
+    alt = alt_of('handwash-station')
+    for word in ('jug', 'on/off spigot', 'soap', 'sock', 'towel', 'catch bucket'):
+        assert word in alt, word
+    cap = topic_caption('surv-handwashing', 'handwash-station')
+    topic = topic_json('surv-handwashing').lower()
+    for word in ('on/off spigot', 'soap', 'towels', 'catch bucket', 'sock', "jug's handle"):
+        assert word in cap, word
+        assert word in topic, word

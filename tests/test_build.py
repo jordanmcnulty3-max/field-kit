@@ -118,7 +118,7 @@ def fk_data(index):
 
 
 def test_tooldata_is_an_empty_object_with_no_files(tree):
-    assert not (tree / 'src' / 'tooldata').exists() or not list((tree / 'src' / 'tooldata').glob('*.json'))
+    shutil.rmtree(tree / 'src' / 'tooldata', ignore_errors=True)   # the shipped tree now has src/tooldata/water.json
     r, index = build(tree)
     assert r.returncode == 0, r.stderr
     assert fk_data(index)['tooldata'] == {}

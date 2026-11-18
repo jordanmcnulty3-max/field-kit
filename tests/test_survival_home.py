@@ -215,7 +215,7 @@ def test_throwing_page_provider_goes_home_without_history_entry(page, app_url):
 from .conftest import inject_data
 from .test_home import FIXTURES as PROTOS
 
-KEY_TOPICS = [B(f'surv-t{i}', f'Topic {i}') for i in range(1, 7)]
+KEY_TOPICS = [B(f'surv-t{i}', f'Topic {i}', **({'where': ['woods']} if i == 1 else {})) for i in range(1, 7)]   # one tag, so the Where row is shown
 OPEN_ORDER = ['p:burns', 's:surv-t1', 'p:splint', 's:surv-t2', 'p:frostbite', 's:surv-t3',
               'p:snakebite', 's:surv-t4', 'p:fever', 's:surv-t5', 'p:iv', 's:surv-t6']
 
@@ -328,3 +328,108 @@ def test_open_category_keeps_focus_when_recent_changes(page, app_url):
     assert page.evaluate("document.activeElement === document.querySelector('#survCats summary')")
     assert page.evaluate("document.activeElement.dataset.mark") == 'same'
     assert page.locator('#survCats details[open]').count() == 1
+
+
+# ---------- Final fix wave ----------
+
+def shipped_home(page, app_url, storage=None):
+    """The Survival home with the shipped topics and checklists (no fixtures)."""
+    seed = {'advAck': True, **(storage or {})}
+    page.add_init_script(
+        "if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1');"
+        + ''.join(f"localStorage.setItem('fk.{k}', {json.dumps(json.dumps(v))});" for k, v in seed.items()) + '}')
+    page.goto(app_url + '#/survival')
+    expect(page.locator('#survHome')).to_be_visible()
+
+
+def listed(page):
+    return page.evaluate("[...document.querySelectorAll('#survCats button[data-key]')].map(b => b.dataset.key)")
+
+
+ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-safe', 's:surv-find-water']
+
+
+def test_f1_safety_topics_are_never_filtered_out_of_the_shipped_home(page, app_url):
+    shipped_home(page, app_url)
+    for where in ('any', 'town', 'rural', 'woods', 'coast'):
+        for when in ('any', 'cold', 'warm'):
+            page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
+            keys = listed(page)
+            for k in ALWAYS:
+                assert k in keys, f'{k} hidden by where={where} when={when}'
+            if where == 'coast':
+                assert 's:surv-shelter' in keys and 's:surv-river-crossings' in keys, f'Coast hides shelter or river crossings (when={when})'
+
+
+def test_f2_when_row_shows_only_when_a_topic_has_a_when_tag(page, app_url):
+    home(page, app_url)   # the fixtures include a topic tagged when: cold
+    assert page.locator('#survFilters [role="group"]').evaluate_all('g => g.map(e => e.getAttribute("aria-label"))') == ['Where', 'When']
+
+
+def test_f2_when_row_hidden_when_no_fixture_has_a_when_tag(page, app_url):
+    no_when = [t for t in TOPICS if 'when' not in t]
+    home(page, app_url, topics=no_when, storage={'survFilter': {'where': 'any', 'when': 'warm'}})
+    assert page.locator('#survFilters [role="group"]').evaluate_all('g => g.map(e => e.getAttribute("aria-label"))') == ['Where']
+    assert page.locator('#survFilters button[data-dim="when"]').count() == 0
+    assert page.evaluate('FK.survival.filter()') == {'where': 'any', 'when': 'any'}   # a stored When value counts as Any while the row is hidden
+    open_cat(page, 'Basics')
+    assert len(titles(page, 'Basics')) == 4
+
+
+def test_f2_shipped_data_has_no_when_row(page, app_url):
+    shipped_home(page, app_url)
+    assert page.locator('#survFilters [role="group"]').evaluate_all('g => g.map(e => e.getAttribute("aria-label"))') == ['Where']
+
+
+def test_f5_survival_recent_clear_is_at_least_48px(page, app_url):
+    boot_both(page, app_url, storage={'recent': ['s:surv-t1']})
+    b = page.locator('#survRecent [data-act="clear-recent"]').bounding_box()
+    assert b['height'] >= 48 and b['width'] >= 48
+
+
+def test_f6_focus_returns_to_the_topic_button_after_a_detour_through_emergency(page, app_url):
+    from .test_survival_topic import TOPICS as PAGE_TOPICS
+    boot(page, app_url, topics=PAGE_TOPICS)
+    expect(page.locator('#survHome')).to_be_visible()
+    open_cat(page, 'Basics')
+    page.click('#survCats [data-key="s:surv-fix"]')
+    wait_hash(page, '#/survival/surv-fix')
+    page.click('#survPage [data-link="p:bleeding"]')
+    page.wait_for_function("location.hash.startsWith('#/emergency/bleeding')")
+    page.go_back()
+    wait_hash(page, '#/survival/surv-fix')
+    page.go_back()
+    wait_hash(page, '#/survival')
+    page.wait_for_function("document.activeElement && document.activeElement.dataset.key === 's:surv-fix'")
+    assert page.evaluate("document.activeElement.closest('#survCats') !== null")
+
+
+def test_f11_dead_recent_keys_do_not_shrink_either_home(page, app_url):
+    live = [f's:surv-t{i}' for i in range(1, 7)]
+    boot_both(page, app_url, storage={'recent': ['s:surv-gone', 'c:nope', 'u:nope'] + live})
+    assert shown(page, 'survRecent') == live[:5]
+    page.evaluate("FK.route.go('/emergency')")
+    wait_hash(page, '#/emergency')
+    assert shown(page, 'emRecent') == live[:5]
+
+
+def test_f12_survival_uses_the_shared_key_pattern(page, app_url):
+    import os
+    src = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src', 'survival.js'), encoding='utf-8').read()
+    assert '[scu]' not in src and 'FK.keyPattern' in src
+    home(page, app_url)
+    assert page.evaluate("FK.survival.open('u:bad key')") is False
+    assert page.evaluate("FK.survival.open('x:surv-alpha')") is False
+    assert page.evaluate("FK.survival.open('s:surv-alpha')") is True
+    wait_hash(page, '#/survival/surv-alpha')
+
+
+def test_f14_not_found_message_is_cleared_when_the_home_is_next_shown(page, app_url):
+    boot(page, app_url, '#/survival/nope', topics=TOPICS)
+    wait_hash(page, '#/survival')
+    expect(page.locator('#survLive')).to_have_text('That Survival page was not found.')
+    page.evaluate("FK.route.go('/emergency')")
+    wait_hash(page, '#/emergency')
+    page.evaluate("FK.route.go('/survival')")
+    wait_hash(page, '#/survival')
+    expect(page.locator('#survLive')).to_have_text('')

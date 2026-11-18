@@ -5,7 +5,8 @@
   const $ = id => document.getElementById(id);
   const CATS = [['basics', 'Basics'], ['water', 'Water and sanitation'], ['heat', 'Heat, shelter and winter'], ['radiation', 'Radiation and fallout'],
     ['food', 'Food'], ['comms', 'Comms'], ['staying', 'Staying put'], ['moving', 'Moving'], ['town', 'Town hazards and health']];
-  const KEY = /^([scu]):([\w-]{1,60})$/;
+  /* A key's kind letter and id, or null; which keys are valid is decided once, by FK.keyPattern (emergency.js). */
+  const parseKey = k => (typeof k === 'string' && FK.keyPattern.test(k) ? { kind: k[0], id: k.slice(2) } : null);
   const JUMP_MIN = 4;   // a topic with this many sections gets a jump list
   const homeEl = $('survHome'), pageEl = $('survPage'), live = $('survLive');
 
@@ -166,11 +167,13 @@
   const WHEN = [['any', 'Any'], ['cold', 'Cold'], ['warm', 'Warm']];
   const DIMS = [['where', 'Where', WHERE], ['when', 'When', WHEN]];
   const ANY = () => ({ where: 'any', when: 'any' });
-  /* A stored filter that is not an object, or has an unknown value, counts as Any (per dimension). */
+  /* A filter row is shown only when at least one topic is tagged for that dimension. */
+  const shownDims = () => DIMS.filter(([dim]) => topics().some(t => Array.isArray(t[dim]) && t[dim].length));
+  /* A stored filter that is not an object, or has an unknown value, counts as Any (per dimension); so does a hidden dimension. */
   function filter() {
     const v = FK.store.get('survFilter', null), out = ANY();
     if (!v || typeof v !== 'object' || Array.isArray(v)) return out;
-    for (const [dim, , opts] of DIMS) if (typeof v[dim] === 'string' && opts.some(o => o[0] === v[dim])) out[dim] = v[dim];
+    for (const [dim, , opts] of shownDims()) if (typeof v[dim] === 'string' && opts.some(o => o[0] === v[dim])) out[dim] = v[dim];
     return out;
   }
   const tagged = (t, dim, val) => val === 'any' || !Array.isArray(t[dim]) || !t[dim].length || t[dim].includes(val);
@@ -186,7 +189,7 @@
     for (const fn of homeItemFns[kind]) {
       let r;
       try { r = fn(); } catch (e) { console.warn('Survival home provider failed', e); continue; }
-      if (Array.isArray(r)) for (const it of r) if (it && typeof it === 'object' && typeof it.key === 'string' && KEY.test(it.key) && filled(it.title)) out.push(it);
+      if (Array.isArray(r)) for (const it of r) if (it && typeof it === 'object' && parseKey(it.key) && filled(it.title)) out.push(it);
     }
     return out;
   }
@@ -225,23 +228,25 @@
     if (!built) return;
     const row = (title, its, extra) => its.length ? '<div class="em-hrow"><h2 class="sv-cat">' + title + '</h2>' + (extra || '') + '</div><div class="sv-list">' + its.map(itemBtn).join('') + '</div>' : '';
     setHTML($('survPinned'), row('★ Pinned', keyed(FK.pins.forSection('survival'))));
-    setHTML($('survRecent'), row('Recent', keyed(FK.recent.forSection('survival')), CLEAR_RECENT));
+    setHTML($('survRecent'), row('Recent', keyed(FK.recent.forSection('survival', key => !!(FK.search && FK.search.describe(key)))), CLEAR_RECENT));
   }
   function markFilters(f) {   // toggle state in place: the buttons are never redrawn, so the one just pressed keeps focus
     for (const b of $('survFilters').querySelectorAll('button[data-dim]')) b.setAttribute('aria-pressed', String(f[b.dataset.dim] === b.dataset.val));
   }
+  /* The filter rows are redrawn only when which dimensions are shown changes. */
+  const filtersHTML = () => shownDims().map(([dim, label, opts]) =>
+    '<div class="sv-frow" role="group" aria-label="' + label + '"><span class="sv-flabel" aria-hidden="true">' + label + ':</span>' +
+    opts.map(([v, l]) => '<button type="button" data-dim="' + dim + '" data-val="' + v + '" aria-pressed="false">' + l + '</button>').join('') + '</div>').join('');
   let built = false;
   function build() {
-    homeEl.innerHTML = '<div id="survFilters" class="sv-filters">' + DIMS.map(([dim, label, opts]) =>
-      '<div class="sv-frow" role="group" aria-label="' + label + '"><span class="sv-flabel" aria-hidden="true">' + label + ':</span>' +
-      opts.map(([v, l]) => '<button type="button" data-dim="' + dim + '" data-val="' + v + '" aria-pressed="false">' + l + '</button>').join('') + '</div>').join('') +
-      '</div><div id="survPinned"></div><div id="survRecent"></div><div id="survTopics"><h2 class="sv-cat">Topics</h2><div id="survCats"></div></div>' +
+    homeEl.innerHTML = '<div id="survFilters" class="sv-filters"></div><div id="survPinned"></div><div id="survRecent"></div><div id="survTopics"><h2 class="sv-cat">Topics</h2><div id="survCats"></div></div>' +
       '<div id="survTools"></div><div id="survLists"></div>';
     built = true;
   }
   function renderHome() {
     if (!built) build();
     const f = filter();
+    setHTML($('survFilters'), filtersHTML());
     markFilters(f);
     const cats = $('survCats');
     cats.querySelectorAll('details').forEach(d => { if (d.open) openCats.add(d.dataset.cat); else openCats.delete(d.dataset.cat); });   // keep what the user opened
@@ -254,7 +259,7 @@
   }
 
   /* ---------- Showing home or a page, decided only from the route ---------- */
-  let cleanup = null, opener = null, homeY = 0, onPage = false;
+  let cleanup = null, opener = null, homeY = 0, onPage = false, fromHome = false, prevRoute = null, holdLive = false;
   function closePage() {
     const fn = cleanup;
     cleanup = null;
@@ -265,13 +270,14 @@
     closePage();
     const back = onPage;
     onPage = false;
+    if (!holdLive) live.textContent = '';   // a "not found" message is for the redirect that set it, not for later visits
     pageEl.hidden = true;
     homeEl.hidden = false;
     renderHome();
     if (back) { window.scrollTo(0, homeY); FK.refocus(opener); opener = null; }
   }
   function showPage(draw) {
-    if (!onPage) { homeY = window.scrollY; opener = FK.opener(document.activeElement); }
+    if (fromHome) { homeY = window.scrollY; opener = FK.opener(document.activeElement); }   // only a page opened from the home itself; a Back from another tab keeps them
     closePage();
     const out = draw(pageEl);
     if (out === false) return false;
@@ -307,10 +313,16 @@
   function redirect(r) {
     showHome();
     live.textContent = 'That Survival page was not found.';
-    queueMicrotask(() => { if (FK.route.current() === r) FK.route.go('/survival', { replace: true }); });
+    queueMicrotask(() => {
+      if (FK.route.current() !== r) return;
+      holdLive = true;
+      try { FK.route.go('/survival', { replace: true }); } finally { holdLive = false; }
+    });
   }
   function onRoute(r) {
-    if (r.tab !== 'survival') { if (onPage) { closePage(); onPage = false; opener = null; } return; }
+    fromHome = !!prevRoute && prevRoute.tab === 'survival' && !prevRoute.parts.length;
+    prevRoute = r;
+    if (r.tab !== 'survival') { if (onPage) { closePage(); onPage = false; } return; }
     const [a, b, ...rest] = r.parts;
     if (!a) { showHome(); return; }
     if (Object.hasOwn(providers, a)) { if (b && !rest.length && drawProvided(a, b)) return; return redirect(r); }
@@ -321,9 +333,9 @@
   /* Open a key: s:<topicId>, c:<checklistId> or u:<toolName>. Returns false for anything it cannot open. */
   const toolNamed = name => FK.survival.tools().some(t => t.name === name);
   function open(key, opts) {
-    const m = typeof key === 'string' ? KEY.exec(key) : null;
-    const path = !m ? null : m[1] === 's' && topic(m[2]) ? '/survival/' + m[2] : m[1] === 'c' && checklist(m[2]) ? '/survival/list/' + m[2]
-      : m[1] === 'u' && toolNamed(m[2]) ? '/survival/tool/' + m[2] : null;
+    const m = parseKey(key);
+    const path = !m ? null : m.kind === 's' && topic(m.id) ? '/survival/' + m.id : m.kind === 'c' && checklist(m.id) ? '/survival/list/' + m.id
+      : m.kind === 'u' && toolNamed(m.id) ? '/survival/tool/' + m.id : null;
     if (!path) return false;
     FK.route.go(path, opts && opts.replace ? { replace: true } : undefined);
     return true;
@@ -346,7 +358,7 @@
     }
     if (e.target.closest('[data-act="clear-recent"]')) {   // the button goes with the list, so hand focus to the first filter button
       FK.recent.clear();
-      const first = $('survFilters').querySelector('button');
+      const first = $('survFilters').querySelector('button') || homeEl.querySelector('button, summary');   // no filter rows when no topic is tagged
       if (first) first.focus();
       return;
     }

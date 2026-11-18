@@ -14,7 +14,8 @@
   "summary": "Look for a wide, shallow, slow section, don’t cross water above your knees, and if in doubt, don’t cross.",
   "where": [
     "rural",
-    "woods"
+    "woods",
+    "coast"
   ],
   "sections": [
     {

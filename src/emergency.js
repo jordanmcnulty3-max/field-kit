@@ -35,7 +35,8 @@
   };
   FK.recent = {
     all: () => keys('recent').slice(0, RECENT_MAX),
-    forSection: section => forSection(keys('recent'), section).slice(0, SHOWN),
+    /* ok, if given, drops keys before the list is cut to SHOWN, so keys that no longer open anything do not shorten it. */
+    forSection: (section, ok) => forSection(keys('recent'), section).filter(k => !ok || ok(k)).slice(0, SHOWN),
     add(key) {
       if (typeof key !== 'string' || !KEY.test(key)) return;
       const cur = keys('recent');
@@ -123,7 +124,7 @@
     renderResume();
     renderLife();
     group('emPinned', '★ Pinned', keyBtns(FK.pins.forSection('emergency')));
-    group('emRecent', 'Recent', keyBtns(FK.recent.forSection('emergency')), CLEAR_RECENT);
+    group('emRecent', 'Recent', keyBtns(FK.recent.forSection('emergency', k => keyBtns([k]).length > 0)), CLEAR_RECENT);
     renderCats();
   }
 

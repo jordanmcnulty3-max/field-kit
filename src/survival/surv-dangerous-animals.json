@@ -18,7 +18,8 @@
   "where": [
     "town",
     "rural",
-    "woods"
+    "woods",
+    "coast"
   ],
   "sections": [
     {

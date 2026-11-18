@@ -1,6 +1,6 @@
 {
   "id": "water",
-  "title": "Water to store for the group at one gallon per person per day, the amount FEMA, CDC and the Red Cross give for drinking, cooking and basic hygiene; no source opened says it covers flushing toilets, bathing or laundry, so plan water for those separately.",
+  "title": "Water to store for the group at one gallon per person per day, the amount FEMA, CDC and the Red Cross give for drinking, cooking and basic hygiene. This does not cover flushing toilets, bathing or laundry: plan that water separately.",
   "values": {
     "drinkPerPersonDay": {
       "value": 1,

@@ -121,7 +121,7 @@
             "If the well feeds the house plumbing, close the valves to any water softener.",
             "Find the amount of bleach in the table for your kind of well below.",
             "In a 5-gallon bucket, mix that bleach with 3 to 5 gallons (12 to 19 liters) of water.",
-            "If the bleach and water won’t fit in one bucket, mix and pour it in several batches until all the bleach from the table is in. Don’t use less bleach to make it fit (the app’s reading; CDC does not say).",
+            "If the bleach and water won’t fit in one bucket, mix and pour it in several batches until all the bleach from the table is in. Don’t use less bleach to make it fit (CDC does not cover this).",
             "Drilled or driven well: remove the vent cap and pour the mixture in through a funnel. Bored or dug well: add the mixture to the well. Keep it away from all electrical connections.",
             "Mix it: attach a clean hose to the nearest outside faucet and run water back into the well. No pump: pour water back into the well with a bucket.",
             "Rinse the inside of the well casing with a garden hose or bucket for 5 to 10 minutes.",
@@ -136,7 +136,7 @@
           "p": "Steps from CDC. NYS Department of Health says to let the well stand preferably 12 to 24 hours, and not to drain the chlorinated water into a septic system or sewer. Above 5,000 ft, boil for 3 minutes (EPA)."
         },
         {
-          "p": "With no pump, the faucet steps can’t be done. CDC gives no other no-pump steps; the app’s reading is: let the solution stand in the well at least 12 hours, then bail water out, away from plants and open water, until the chlorine smell is gone. Wear goggles or a face shield while you bail: the water is a strong chlorine solution (CDC)."
+          "p": "With no pump, the faucet steps can’t be done. CDC gives no other no-pump steps. Do this: let the solution stand in the well at least 12 hours, then bail water out, away from plants and open water, until the chlorine smell is gone. Wear goggles or a face shield while you bail: the water is a strong chlorine solution (CDC)."
         },
         {
           "p": "Bored and dug wells are hard to disinfect: they are shallow and poorly protected, so flood water can carry dirt back in (CDC)."

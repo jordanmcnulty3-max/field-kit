@@ -44,14 +44,14 @@
       "h": "Melt it",
       "blocks": [
         {
+          "warn": "Melt snow on a camp stove, grill or charcoal only outdoors. Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC), or inside a snow shelter. Never burn charcoal indoors (CDC). Carbon monoxide can kill."
+        },
+        {
           "steps": [
             "Put a little water in the pot first, then add the snow. It melts faster and the pot won’t scorch (Scout Life; Army ATP 3-50.21: adding water to snow helps it melt faster).",
             "Plan fuel for it: in winter you may need a stove to melt drinking water, because streams may be frozen over or buried (Yosemite National Park, National Park Service: streams may not be accessible).",
             "On a sunny day, snow or ice spread on a dark cloth or sheet in the sun melts with no fuel (Army ATP 3-50.21). Catch the water in a container."
           ]
-        },
-        {
-          "warn": "Melt snow on a camp stove, grill or charcoal only outdoors. Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC), or inside a snow shelter. Never burn charcoal indoors (CDC). Carbon monoxide can kill."
         },
         {
           "link": "p:carbon-monoxide",
@@ -100,20 +100,20 @@
             "Open all the faucets until they drain completely.",
             "Drain the toilet flush tanks and spray hoses.",
             "Empty the drain traps of sinks, tubs, showers, toilets, washtubs and floor drains, or pour in propylene-glycol antifreeze, as much as the water in the trap: 1 pint to 1 quart (0.47 to 0.95 L), depending on the size of the trap.",
-            "Turn off the power or fuel to the water heater and other appliances that use water, and drain them, including the pumps of the washing machine and dishwasher. Don’t put antifreeze in appliances or in the water supply pipes, only in drain traps."
+            "Turn off the power or fuel to the water heater and other appliances that use water, and drain them, including the pumps of the washing machine and dishwasher. Don’t put antifreeze in appliances or in the water supply pipes, only in drain traps. To drain the water heater, use the steps in Water already in your house."
           ]
         },
         {
           "warn": "Never put car antifreeze (ethylene glycol) in any part of a home water system (Purdue Extension)."
         },
         {
+          "warn": "Never thaw pipes with a blowtorch, a kerosene or propane heater, a charcoal stove or any other open flame. They are a serious fire hazard and give off deadly carbon monoxide (Texas A&M AgriLife Extension, adapted from the Red Cross)."
+        },
+        {
           "p": "Before you thaw a pipe, know where the main water valve is: the pipe may already be broken and leak as it thaws. If it does, shut the main valve until the leak is repaired. Keep electric cords away from water (Texas A&M AgriLife Extension, adapted from the Red Cross)."
         },
         {
           "p": "Then keep its faucet open and warm the frozen part with a heating pad, a hair dryer, an electric portable space heater or towels soaked in hot water, until full water pressure is back (Texas A&M AgriLife Extension, adapted from the Red Cross)."
-        },
-        {
-          "warn": "Never thaw pipes with a blowtorch, a kerosene or propane heater, a charcoal stove or any other open flame. They are a serious fire hazard and give off deadly carbon monoxide (Texas A&M AgriLife Extension, adapted from the Red Cross)."
         },
         {
           "link": "s:surv-toilet-no-water",

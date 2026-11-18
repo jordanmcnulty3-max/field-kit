@@ -243,6 +243,37 @@ def test_handwash_stream_falls_past_the_table_edge_into_the_bucket():
     assert all(abs(sx - l) > 10 for l in legs), 'stream clear of the legs'
 
 
+def path_end(d):
+    """Last point of a path drawn with absolute M, L, H and V commands."""
+    x = y = None
+    for cmd, args in re.findall(r'([MLHV])\s*([-\d.\s,]+)', d):
+        n = [float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', args)]
+        if cmd in 'ML':
+            x, y = n[-2], n[-1]
+        elif cmd == 'H':
+            x = n[-1]
+        else:
+            y = n[-1]
+    return x, y
+
+
+def test_handwash_stream_starts_at_the_spigot_outlet():
+    """Final review, Minor 14: the stream is tied to the spigot pipe, so moving the pipe back over the table fails."""
+    root = ET.fromstring(figs.F['handwash-station'][0])
+    stream = parts('handwash-station')['stream']
+    sx, sy = float(stream.get('x1')), min(float(stream.get('y1')), float(stream.get('y2')))
+    jug = max((e for e in root.iter() if e.tag.endswith('rect')), key=lambda e: float(e.get('width')) * float(e.get('height')))
+    j0, j1 = float(jug.get('x')), float(jug.get('x')) + float(jug.get('width'))
+    pipes = []
+    for e in root.iter():
+        if e.tag.endswith('path') and re.fullmatch(r'M[\d.]+ [\d.]+(?: [HV][\d.]+)+', e.get('d')):
+            x0 = float(re.match(r'M([\d.]+)', e.get('d')).group(1))
+            ex, ey = path_end(e.get('d'))
+            if j0 <= x0 <= j1 and ex == sx and 0 <= sy - ey <= 8:
+                pipes.append(e.get('d'))
+    assert pipes, 'no pipe runs from the jug to the top of the stream'
+
+
 def test_handwash_station_alt_and_caption_carry_the_topic_words():
     alt = alt_of('handwash-station')
     for word in ('jug', 'on/off spigot', 'soap', 'sock', 'towel', 'catch bucket'):

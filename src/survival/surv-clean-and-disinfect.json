@@ -37,7 +37,7 @@
             "Some laundry bleach and splashless bleach are not suitable for disinfecting (CDC). No scented bleach (CDC).",
             "Mix with room-temperature water (CDC).",
             "Mix a fresh batch every day. Diluted bleach is not as effective after 24 hours (CDC).",
-            "Mix it in a bucket or bottle kept only for bleach, and mark it BLEACH (marking it is the app’s advice). Never put food or drinking water in a container that has held bleach (CDC; see Store water at home)."
+            "Mix it in a bucket or bottle kept only for bleach, and mark it BLEACH (no source says to mark it). Never put food or drinking water in a container that has held bleach (CDC; see Store water at home)."
           ]
         },
         {
@@ -128,7 +128,7 @@
           "label": "Toilets when the water is off"
         },
         {
-          "warn": "If anyone in the group has vomiting or diarrhea, use the strong mix on their toilet seat and on anything they have soiled (the app’s reading of CDC). Their bucket: empty it, wash it with soap and water and rinse it so no pee is left (CDC), then sanitize it as in Toilets when the water is off. Never pour bleach into a bucket or bag that still has pee in it: it makes a toxic gas (Washington State Department of Health)."
+          "warn": "If anyone in the group has vomiting or diarrhea, use the strong mix on their toilet seat and on anything they have soiled (worked out from CDC). Their bucket: empty it, wash it with soap and water and rinse it so no pee is left (CDC), then sanitize it as in Toilets when the water is off. Never pour bleach into a bucket or bag that still has pee in it: it makes a toxic gas (Washington State Department of Health)."
         }
       ]
     },
@@ -192,7 +192,7 @@
         },
         {
           "list": [
-            "Throw away food and food packaging within 25 feet (7.6 m) of the vomit or stool (University of Minnesota Extension). Keep the group’s food covered and stored away from where the sick person is, so there is less to lose (the app’s advice).",
+            "Throw away food and food packaging within 25 feet (7.6 m) of the vomit or stool (University of Minnesota Extension). Keep the group’s food covered and stored away from where the sick person is, so there is less to lose (no source says this).",
             "Keep people out of the room for 2 hours if you can; norovirus can stay in the air that long after someone vomits (University of Minnesota Extension).",
             "Carpet or rugs: don’t vacuum first. Cover the spot with kitty litter or baking soda to soak it up (University of Minnesota Extension)."
           ]

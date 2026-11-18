@@ -288,7 +288,7 @@ def test_checklist_rows_show_scaled_totals_after_the_text_and_junk_quantities_ar
     assert row.inner_text().replace('\n', ' ').startswith('Drinking water')   # the total comes after the item text
     box = page.get_by_role('checkbox', name='Drinking water', exact=True)   # the quantity is a description, not part of the name
     desc = ' '.join(page.locator('#' + i).inner_text() for i in box.get_attribute('aria-describedby').split())
-    assert '30 gal' in desc
+    assert 'For your group: 30 gal' in desc   # a lead keeps the total from running into the item text
     cups = page.get_by_role('checkbox', name='Cups', exact=True)
     desc = ' '.join(page.locator('#' + i).inner_text() for i in cups.get_attribute('aria-describedby').split())
     assert '3 cups' in desc and 'One each' in desc
@@ -553,3 +553,20 @@ def test_checklist_title_and_quantity_unit_markup_is_text(page, app_url):
     assert page.locator('#survPage img').count() == 0
     assert page.inner_text('#survPage h2') == 'T ' + XSS
     assert qty(page, 'w') == '9\u00a0U ' + XSS
+
+
+def test_planner_on_the_shipped_water_data_gives_the_pack_figures(page, app_url):
+    """Final review, Minor 2: the planner run on src/tooldata/water.json as shipped (no fixture), so a renamed value
+    or changed unit there cannot ship a planner that says "not available" while --release passes."""
+    page.add_init_script("localStorage.setItem('fk.advAck', 'true')")
+    page.goto(app_url + WATER_URL)
+    page.wait_for_function('window.FK && FK.survival && FK.survival.group')
+    expect(page.locator('#survPage [data-k="gal"]')).to_be_visible()
+    t = no_bad_numbers(page)
+    assert NOT_AVAILABLE not in t
+    assert group(page) == {'people': 1, 'days': 14}
+    assert page.locator('#survPage [data-k="gal"]').inner_text() == '14 gallons'
+    assert page.locator('#survPage [data-k="litres"]').inner_text() == '53 litres'
+    assert page.locator('#survPage [data-k="lb"]').inner_text() == '117 lb'
+    assert 'This does not cover flushing toilets, bathing or laundry: plan that water separately.' in t
+    no_overflow(page)

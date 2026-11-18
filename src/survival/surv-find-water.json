@@ -63,7 +63,7 @@
           ]
         },
         {
-          "warn": "FEMA (Where can I find clean drinking water after a disaster?) says not to drink collected rainwater, and Lake Champlain Sea Grant says the same of roof water. This app applies FEMA’s rule to rain off a roof. CDC says rainwater is not necessarily safe to drink without first removing germs and chemicals. Use roof water for flushing toilets and for cleaning. Lake Champlain Sea Grant says it is not safe even for washing: treat it before you wash hands, dishes or food with it. Drink it only if you have nothing safer, and then filter it and boil or disinfect it. Boiling does not remove metals from the roof."
+          "warn": "Use roof water for flushing toilets and for cleaning. Treat it before you wash hands, dishes or food with it: Lake Champlain Sea Grant says it is not safe even for washing. Drink it only if you have nothing safer, and then filter it and boil or disinfect it. Boiling does not remove metals from the roof. FEMA (Where can I find clean drinking water after a disaster?) says not to drink collected rainwater, and Lake Champlain Sea Grant says the same of roof water. This app applies FEMA’s rule to rain off a roof. CDC says rainwater is not necessarily safe to drink without first removing germs and chemicals."
         },
         {
           "link": "s:surv-make-water-safe",

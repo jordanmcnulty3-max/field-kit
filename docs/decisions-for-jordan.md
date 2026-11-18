@@ -115,7 +115,7 @@ medic, nurse, paramedic or doctor, these are the ones to show them.
   mentioned with its lower-tier source. [24, 35]
 - **Diagrams:** eight are in. The recovery-position drawing was removed because it did not read clearly.
 
-## D. v7 Survival content (Tasks 13 to 16)
+## D. Survival content (v7 Tasks 13 to 16; the water and sanitation pack from D15)
 
 Source disagreements found while checking the Survival topics. Each says what the app does today.
 
@@ -255,12 +255,13 @@ Source disagreements found while checking the Survival topics. Each says what th
    12 to 24 noted. (c) NYS DOH's own leaflet uses a fixed amount (2 quarts of bleach in 10 gallons of water,
    recirculated with the pump for an hour, then 2 more quarts) instead of a table; it needs a working pump. Today:
    CDC's table and steps. (d) With no pump, CDC gives only "bail with a bucket" and "pour water back with a bucket";
-   the topic adds: let it stand 12 hours, then bail until the chlorine smell is gone (the app's reading), with goggles
+   the topic adds: let it stand 12 hours, then bail until the chlorine smell is gone ("CDC gives no other no-pump
+   steps. Do this:"), with goggles
    or a face shield (CDC) and never climbing into the well (WHO). (e) Fix round 1: CDC's step mixes the bleach with 3
    to 5 gallons of water in a 5-gallon bucket, but its tables reach 10 gallons (drilled) and 13 3/4 gallons (dug) of
    bleach alone; CDC does not say what to do then, and no opened source does. Fix round 2: the topic now says to
    mix and pour in several batches until all the bleach from the table is in, and not to use less bleach to make it
-   fit, marked as the app's reading. Say if a well
+   fit, marked "CDC does not cover this". Say if a well
    contractor or the health department should check (d) and (e) before the group relies on them.
 26. **Springs (surv-find-water, surv-wells-without-power) — Water pack Task 5.** Army ATP 3-50.21: springs are
    "typically the safest open source". Penn State Extension: springs are highly susceptible to contamination and most
@@ -311,8 +312,9 @@ Source disagreements found while checking the Survival topics. Each says what th
    the protocol: at least 2 days after symptoms stop (CDC), and 3 days if the group can manage it (Minnesota); the
    24-hour figure is not in the text. The reviewer recommends 3 days (72 hours) everywhere, protocol included, as the
    more cautious figure that meets both CDC and Minnesota. Say whether to move the whole app, protocol and topic, to
-   3 days. (Places to change: surv-stomach-illness-in-a-group summary, doFirst, the warning in section 5 and the whole-group rule
-   in section 8 (section 3 now points to the food rule without a number); and p:vomiting-diarrhea steps 8 and 10 and its don'ts.)
+   3 days. (Places to change: surv-stomach-illness-in-a-group summary, doFirst, the warning in "Food and water" and the
+   whole-group rule in "How long to keep it up" ("Keep the sick person apart" points to the food rule and gives Minnesota's
+   72 hours as its isolation period); and p:vomiting-diarrhea steps 8 and 10 and its don'ts.)
 33. **Bleach for vomit and diarrhea (surv-clean-and-disinfect) — Water pack Task 7.** CDC (norovirus): 1,000 to 5,000
    ppm, "5 to 25 tablespoons of household bleach [5% to 8%] per gallon", at least 5 minutes. CDC (evacuation centers,
    archived 2019): 1,000 ppm, 5 tablespoons of 6% per gallon, keep wet 10 minutes if possible. Minnesota Department of

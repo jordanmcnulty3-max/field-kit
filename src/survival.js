@@ -217,7 +217,7 @@
       const desc = [has ? 'svCq' + i : '', filled(it.note) ? 'svCn' + i : ''].filter(Boolean).join(' ');
       return '<li><label class="sv-check"><input type="checkbox" data-item="' + esc(it.id) + '" aria-labelledby="svCt' + i + '"' +
         (desc ? ' aria-describedby="' + desc + '"' : '') + (on.has(it.id) ? ' checked' : '') + '><span><span id="svCt' + i + '" class="sv-ctext">' + esc(it.text) + '</span>' +
-        (has ? ' <span id="svCq' + i + '" class="sv-qty" data-qty="' + esc(it.id) + '"' + (q ? '' : ' hidden') + '>' + esc(q) + '</span>' : '') +
+        (has ? '<span id="svCq' + i + '" class="sv-qline"' + (q ? '' : ' hidden') + '>For your group: <span class="sv-qty" data-qty="' + esc(it.id) + '">' + esc(q) + '</span></span>' : '') +
         (filled(it.note) ? '<small id="svCn' + i + '" class="sv-cnote">' + esc(it.note) + '</small>' : '') + '</span></label></li>';
     }).join('');
     return '<article class="sv-page" data-list="' + esc(c.id) + '">' + headHTML('c:' + c.id, c) +
@@ -238,7 +238,7 @@
       const spans = new Map([...el.querySelectorAll('[data-qty]')].map(x => [x.dataset.qty, x]));
       for (const it of c.items) {
         const s = okQty(it.qty) && spans.get(it.id);
-        if (s) { const t = qtyText(it.qty, g); s.textContent = t; s.hidden = !t; }
+        if (s) { const t = qtyText(it.qty, g); s.textContent = t; s.parentElement.hidden = !t; }
       }
     });
     return () => { clearTimeout(clearT); clearT = null; clearSure = false; if (ed) ed.stop(); };

@@ -72,10 +72,9 @@ def inject_data(page, protocols=None, topics=None, checklists=None, tooldata=Non
     into the shipped ones, or replace them all with only=True."""
     extra = {'protocols': protocols, 'topics': topics, 'checklists': checklists}
     extra = {k: v for k, v in extra.items() if v is not None}
-    extra_tool = tooldata
     page.add_init_script(f"""
       (() => {{
-        const extra = {json.dumps(extra)}, extraTool = {json.dumps(extra_tool)}, ONLY = {json.dumps(bool(only))};
+        const extra = {json.dumps(extra)}, extraTool = {json.dumps(tooldata)}, ONLY = {json.dumps(bool(only))};
         let val;
         Object.defineProperty(window, 'FK_DATA', {{
           configurable: true,

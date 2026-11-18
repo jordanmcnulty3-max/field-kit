@@ -26,10 +26,10 @@ Existing topics move from Basics to this category and are deepened; their ids do
 | `surv-wells-without-power` (new) | Wells without power | Getting water from a private well with no electricity; disinfecting a well after a flood; tagged `where: rural` |
 | `surv-toilet-no-water` (new) | Toilets when the water is off | Do first; when you can still flush with carried water; when you must not (sewer backup); twin-bucket and bag toilets; storing and disposing of waste; septic systems |
 | `surv-latrines` (new) | Latrines and cat holes | For camps and for moving: cat holes, trench latrines, distances from water, camp and trail, depth, closing them; group camps; winter ground |
-| `surv-handwashing` (new) | Wash hands without running water | When, how, how long; a handwashing station from a jug; hand sanitizer and its limits; soap and water over sanitizer after the toilet |
+| `surv-handwashing` (new) | Washing hands with little water | When, how, how long; a handwashing station from a jug; hand sanitizer and its limits; soap and water over sanitizer after the toilet |
 | `surv-clean-and-disinfect` (new) | Clean and disinfect | Washing dishes with little water; bleach solutions for surfaces and for water containers (strengths from sources, never mixed with ammonia or acids); laundry and bedding of a sick person |
 | `surv-garbage-and-greywater` (new) | Garbage and dirty water | Storing garbage when there is no collection; pests; greywater; burning (state rule in normal times); diapers and medical waste |
-| `surv-stomach-illness-in-a-group` (new) | Stop stomach illness spreading | Why it follows bad water and sanitation; isolating the sick person's toilet and washing; who must not prepare food; fluids; links to the Emergency protocols for vomiting and diarrhoea and dehydration instead of restating treatment |
+| `surv-stomach-illness-in-a-group` (new) | Stomach illness in a group | Why it follows bad water and sanitation; isolating the sick person's toilet and washing; who must not prepare food; fluids; links to the Emergency protocols for vomiting and diarrhoea and dehydration instead of restating treatment |
 
 Each topic carries `where`/`when` tags only where it truly applies to some settings and not others; anything
 safety-critical stays visible under every filter (the v7 test enforces this for the core topics; this pack adds

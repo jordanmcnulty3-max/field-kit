@@ -2563,3 +2563,17 @@ After (head, then rows):
 | Source | CDC; Minnesota Department of Health | CDC; New York State Department of Health |
 
 The method table in Make water safe ("Which method first") was not reshaped: with the smaller minimum width all four columns, Viruses included, fit at 360 px.
+
+### Wording and order (final review Minors)
+
+Re-ordering and rewording with words and figures already in the topics. No fact, number, step or caution was added, no figure changed and no warning was removed.
+
+- Minor 6 (surv-make-water-safe, Sunlight step 4). Old: "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy. WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud. No source gives a time for New York: there, treat sunlight as unreliable." New step: "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy (WHO). No source gives a time for New York: there, treat sunlight as unreliable." New paragraph after the steps: "WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud." The step now states one set of times; the CDC figures and the New York caution are unchanged.
+- Minor 7 (surv-find-water, roof-rain warning). The same sentences, re-ordered so the instruction comes first: flushing and cleaning; treat before washing hands, dishes or food (Lake Champlain Sea Grant: not safe even for washing); drink only if nothing safer, filtered and boiled or disinfected; boiling does not remove metals; then FEMA, Lake Champlain Sea Grant, the app's use of FEMA's rule, and CDC.
+- Minor 9 ("the app's reading / advice"): handwashing tippy-tap step and stomach-illness and clean-and-disinfect strong-mix lines now say "worked out from CDC" (or "from CDC's sheet and WHO's description"); the BLEACH label says "no source says to mark it"; keeping food away from the sick person says "no source says this"; the well batch step says "CDC does not cover this"; the no-pump well paragraph says "CDC gives no other no-pump steps. Do this:" followed by the same steps. D25 updated to quote the new wording.
+- Minor 10 (surv-water-winter, Purdue plumbing step 6): adds the pointer "To drain the water heater, use the steps in Water already in your house." No new step; the heater steps are the ones already in that topic.
+- Minor 12 (surv-water-winter): the indoor-stove warning now comes before the melting steps, and the blowtorch / open-flame warning before the thawing paragraphs. Wording unchanged.
+- Minor 5 (src/tooldata/water.json `title`). Old ending: "; no source opened says it covers flushing toilets, bathing or laundry, so plan water for those separately." New: ". This does not cover flushing toilets, bathing or laundry: plan that water separately." No figure changed.
+- Minor 4 (checklist quantities): the group total now sits on its own line after the item, led by "For your group:".
+
+Not changed: Minor 8 (EPA's 6% / 8.25% comparison table stays in Make water safe; removing sourced content is the owner's call, D3); Minor 11 (rodent droppings: CDC's page gives "a disinfectant or a 1:10 chlorine solution (1 1/2 cups of household bleach mixed with 1 gallon of water)", which is not the strong mix, so pointing to the strong mix would change the dose; left as "a disinfectant").

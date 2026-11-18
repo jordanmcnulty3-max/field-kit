@@ -139,6 +139,7 @@ def test_home_lists_topics_back_from_topic_returns_home_and_history_grew_by_one(
     expect(page.locator('#survHome')).to_be_visible()
     expect(page.locator('#survPage')).to_be_hidden()
     assert 'Basics' in page.inner_text('#survHome')
+    page.click('#survHome summary')   # categories open in place
     n = page.evaluate('history.length')
     page.click('#survHome [data-key="s:surv-fix"]')
     wait_hash(page, '#/survival/surv-fix')
@@ -189,6 +190,7 @@ def test_markup_in_text_renders_as_text(page, app_url):
         assert p + ' ' + XSS in t, p
     assert page.get_attribute('#survPage figure.fig button', 'aria-label') == 'Enlarge diagram: A ' + XSS
     page.goto(app_url + '#/survival')
+    page.click('#survHome summary')
     assert page.locator('#survHome img').count() == 0 and 'Evil ' + XSS in page.inner_text('#survHome')
 
 

@@ -72,16 +72,76 @@
     return '<article class="sv-page">' + head + first + jump + body + foot + '</article>';
   }
 
-  /* Stub home: category names with their topics as buttons (Task 5 builds the real home). Redrawn only when the markup changes,
-     so the button that opened a page is still there to take focus back. */
-  let homeHTML = null;
-  function renderHome() {
-    const html = CATS.map(([cat, label]) => {
-      const ts = topics().filter(t => t.category === cat);
-      return ts.length ? '<h2 class="sv-cat">' + label + '</h2><div class="sv-list">' + ts.map(t =>
-        '<button type="button" class="em-btn" data-key="s:' + esc(t.id) + '"><span>' + esc(t.title) + '</span>' + draftTag(t) + '</button>').join('') + '</div>' : '';
+  /* ---------- Home: filters, Pinned, Recent (Task 6 fills both), Topics by category, then Tools and Checklists from homeItems providers ---------- */
+  const WHERE = [['any', 'Any'], ['town', 'Town'], ['rural', 'Rural'], ['woods', 'Woods'], ['coast', 'Coast']];
+  const WHEN = [['any', 'Any'], ['cold', 'Cold'], ['warm', 'Warm']];
+  const DIMS = [['where', 'Where', WHERE], ['when', 'When', WHEN]];
+  const ANY = () => ({ where: 'any', when: 'any' });
+  /* A stored filter that is not an object, or has an unknown value, counts as Any (per dimension). */
+  function filter() {
+    const v = FK.store.get('survFilter', null), out = ANY();
+    if (!v || typeof v !== 'object' || Array.isArray(v)) return out;
+    for (const [dim, , opts] of DIMS) if (typeof v[dim] === 'string' && opts.some(o => o[0] === v[dim])) out[dim] = v[dim];
+    return out;
+  }
+  const tagged = (t, dim, val) => val === 'any' || !Array.isArray(t[dim]) || !t[dim].length || t[dim].includes(val);
+  const matches = (t, f) => tagged(t, 'where', f.where) && tagged(t, 'when', f.when);
+  const byTitle = (a, b) => (a.id === 'surv-priorities' ? -1 : b.id === 'surv-priorities' ? 1 : a.title.localeCompare(b.title));
+
+  const homeItemFns = { tool: [], list: [] };
+  function homeItems(kind, fn) {
+    if (Object.hasOwn(homeItemFns, kind) && typeof fn === 'function') homeItemFns[kind].push(fn);
+  }
+  function itemsFor(kind) {
+    const out = [];
+    for (const fn of homeItemFns[kind]) {
+      let r;
+      try { r = fn(); } catch (e) { console.warn('Survival home provider failed', e); continue; }
+      if (Array.isArray(r)) for (const it of r) if (it && typeof it === 'object' && typeof it.key === 'string' && KEY.test(it.key) && filled(it.title)) out.push(it);
+    }
+    return out;
+  }
+
+  /* Redraw a block only when its markup changed, so focus and opened categories survive. */
+  const drawn = new WeakMap();
+  const setHTML = (el, html) => { if (drawn.get(el) !== html) { el.innerHTML = html; drawn.set(el, html); } };
+  const openCats = new Set();
+
+  const itemBtn = it => '<button type="button" class="em-btn" data-key="' + esc(it.key) + '"><span>' + esc(it.title) + '</span>' +
+    (filled(it.badge) ? '<span class="sv-badge">' + esc(it.badge) + '</span>' : '') + '</button>';
+  const section = (el, title, its) => setHTML(el, its.length ? '<h2 class="sv-cat">' + title + '</h2><div class="sv-list">' + its.map(itemBtn).join('') + '</div>' : '');
+
+  function catsHTML(f) {
+    return CATS.map(([cat, label]) => {
+      const all = topics().filter(t => t.category === cat);
+      if (!all.length) return '';
+      const ts = all.filter(t => matches(t, f)).sort(byTitle);
+      return '<details class="ref" data-cat="' + cat + '"' + (openCats.has(cat) ? ' open' : '') + '><summary>' + label + '</summary><div class="body">' +
+        (ts.length ? '<div class="sv-list">' + ts.map(t => '<button type="button" class="em-btn" data-key="s:' + esc(t.id) + '"><span>' + esc(t.title) + '</span>' + draftTag(t) + '</button>').join('') + '</div>'
+          : '<p class="sv-none">No topics for this filter</p>') + '</div></details>';
     }).join('');
-    if (html !== homeHTML) { homeEl.innerHTML = html; homeHTML = html; }
+  }
+  function markFilters(f) {   // toggle state in place: the buttons are never redrawn, so the one just pressed keeps focus
+    for (const b of $('survFilters').querySelectorAll('button[data-dim]')) b.setAttribute('aria-pressed', String(f[b.dataset.dim] === b.dataset.val));
+  }
+  let built = false;
+  function build() {
+    homeEl.innerHTML = '<div id="survFilters" class="sv-filters">' + DIMS.map(([dim, label, opts]) =>
+      '<div class="sv-frow" role="group" aria-label="' + label + '"><span class="sv-flabel" aria-hidden="true">' + label + ':</span>' +
+      opts.map(([v, l]) => '<button type="button" data-dim="' + dim + '" data-val="' + v + '" aria-pressed="false">' + l + '</button>').join('') + '</div>').join('') +
+      '</div><div id="survPinned"></div><div id="survRecent"></div><div id="survTopics"><h2 class="sv-cat">Topics</h2><div id="survCats"></div></div>' +
+      '<div id="survTools"></div><div id="survLists"></div>';
+    built = true;
+  }
+  function renderHome() {
+    if (!built) build();
+    const f = filter();
+    markFilters(f);
+    const cats = $('survCats');
+    cats.querySelectorAll('details').forEach(d => { if (d.open) openCats.add(d.dataset.cat); else openCats.delete(d.dataset.cat); });   // keep what the user opened
+    setHTML(cats, catsHTML(f));
+    section($('survTools'), 'Tools', itemsFor('tool'));
+    section($('survLists'), 'Checklists', itemsFor('list'));
   }
 
   /* ---------- Showing home or a page, decided only from the route ---------- */
@@ -117,7 +177,8 @@
   function drawProvided(segment, id) {
     return showPage(el => {
       for (const fn of providers[segment]) {
-        const out = fn(id, el);
+        let out = false;
+        try { out = fn(id, el); } catch (e) { console.warn('Survival page provider failed', e); }   // a broken provider counts as "unknown id"
         if (out !== false) return out;
         el.innerHTML = '';
       }
@@ -160,8 +221,16 @@
 
   /* ---------- Events ---------- */
   homeEl.addEventListener('click', e => {
+    const fb = e.target.closest('button[data-dim]');
+    if (fb) {
+      const f = filter();
+      f[fb.dataset.dim] = fb.dataset.val;
+      if (!FK.store.set('survFilter', f)) FK.toast(FK.FULL_MSG);
+      renderHome();
+      return;
+    }
     const b = e.target.closest('[data-key]');
-    if (b) open(b.dataset.key);
+    if (b) FK.survival.open(b.dataset.key);
   });
   pageEl.addEventListener('click', e => {
     const link = e.target.closest('[data-link]');
@@ -187,7 +256,7 @@
   });
   FK.on('route', onRoute);
 
-  FK.survival = { topics, topic, open, renderHome, registerPage };
+  FK.survival = { topics, topic, open, renderHome, refreshHome: renderHome, registerPage, homeItems, filter };
   // The router's first route ran before this file loaded; wait until the rest of the script (page providers) has loaded too.
   queueMicrotask(() => onRoute(FK.route.current()));
 })();

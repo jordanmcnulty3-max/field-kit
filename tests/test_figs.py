@@ -287,8 +287,26 @@ def test_handwash_station_alt_and_caption_carry_the_topic_words():
 
 # ---- Heat pack Task 8: diagrams carry only what their topic carries ----
 def topic_text(tid):
-    """The topic's whole text, lower-cased, apostrophes straightened."""
-    return topic_json(tid).lower()
+    """The topic's own words, lower-cased, apostrophes straightened: summary, doFirst, headings and every block's text, but
+    not the figure captions (written with the figures), keywords or source notes, so a drawn phrase cannot pass on the
+    strength of its own caption (review M7)."""
+    t = json.load(open(os.path.join(ROOT, 'src', 'survival', f'{tid}.json'), encoding='utf-8'))
+
+    def strings(v):
+        if isinstance(v, str):
+            yield v
+        elif isinstance(v, list):
+            for x in v:
+                yield from strings(x)
+        elif isinstance(v, dict):
+            for k, x in v.items():
+                if k not in ('fig', 'cap'):
+                    yield from strings(x)
+    parts = [t.get('summary', '')] + list(strings(t.get('doFirst', [])))
+    for sec in t['sections']:
+        parts.append(sec['h'])
+        parts += list(strings(sec['blocks']))
+    return re.sub(r'\s+', ' ', ' '.join(parts).replace('’', "'")).lower()
 
 
 def fig_section(tid, name):
@@ -311,7 +329,7 @@ HEAT_FIGS = {
                    ['tip at the tinder', 'right angle', 'down the rod']),
     'generator-placement': ('surv-generators', 'Where to run it',
                             ['outside only', 'more than 20 feet (6 m)', 'window, door or vent', 'exhaust',
-                             'away from your home', 'never in an attached garage, even with the door open'],
+                             'away from your home', 'never inside a home, garage, basement, crawlspace or shed'],
                             [r'\b15\b', r'\b25\b', r'\b10\b', r'carport is (ok|fine)'],
                             ['more than 20 feet (6 m)', 'exhaust', 'away from your home', 'attached garage']),
     'heater-clearance': ('surv-wood-stoves-fireplaces', 'Before you light it',
@@ -325,9 +343,8 @@ HEAT_FIGS = {
                   ['smallest space', 'sheltered side', 'close']),
     'quinzhee': ('surv-shelter', 'Quinzhee (snow mound)',
                  ['at least 5 feet (1.5 m) high', 'a foot (30 cm) deep', 'at least 1 foot (30 cm) thick',
-                  'ventilation hole', 'raised beds', 'trench', 'down to the ground', 'cold air drains out',
-                  'entrance', 'downwind side'],
-                 [r'\b2 feet\b', r'\b3 feet\b', r'\b10 feet\b', r'7 to 8', r'90 minutes', r'stove', r'candle'],
+                  'ventilation hole', 'raised beds', 'trench', 'down to the ground', 'cold air drains out'],
+                 [r'\b2 feet\b', r'\b3 feet\b', r'\b10 feet\b', r'7 to 8', r'90 minutes', r'stove', r'candle', r'entrance'],
                  ['vent', 'raised beds', 'cold air']),
 }
 NUM_PHRASE = re.compile(r'(?:a|\d[\d,.]*(?: to \d[\d,.]*)?) (?:inches|inch|feet|foot|ft|in|cm|m)\b(?: \([^)]*\))?')
@@ -365,9 +382,8 @@ def test_heat_figure_numbers_all_come_from_the_topic(name):
     topic = topic_text(tid)
     for t in (drawn_of(name), alt_of(name)):
         phrases = NUM_PHRASE.findall(t)
-        for p in phrases:
-            if p[0].isdigit():
-                assert p in topic, f'{name}: {p!r} drawn but not in {tid}'
+        for p in phrases:   # 'a foot (30 cm)' too (review M8)
+            assert p in topic, f'{name}: {p!r} drawn but not in {tid}'
         rest = NUM_PHRASE.sub('', t)
         assert not re.search(r'\d', rest), f'{name}: a number outside a stated distance: {rest}'
 
@@ -418,3 +434,72 @@ def test_ferro_striker_is_square_to_the_rod_and_pushed_toward_the_tip():
     tin = p['tinder']
     cx, cy, ex, ey = (float(tin.get(k)) for k in ('cx', 'cy', 'rx', 'ry'))
     assert ((tip[0] - cx) / ex) ** 2 + ((tip[1] - cy) / ey) ** 2 <= 1.2, 'rod tip is at the tinder'
+
+
+def bbox(el):
+    """Bounding box of a line, rect, or path drawn with absolute M/L/H/V commands."""
+    tag = el.tag.split('}')[-1]
+    if tag == 'line':
+        xs, ys = [float(el.get('x1')), float(el.get('x2'))], [float(el.get('y1')), float(el.get('y2'))]
+    elif tag == 'rect':
+        x, y = float(el.get('x')), float(el.get('y'))
+        xs, ys = [x, x + float(el.get('width'))], [y, y + float(el.get('height'))]
+    else:
+        xs, ys, x, y = [], [], 0.0, 0.0
+        for cmd, args in re.findall(r'([MLHVA])\s*([-\d.\s,]*)', el.get('d')):
+            n = [float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', args)]
+            if cmd in 'ML':
+                for i in range(0, len(n), 2):
+                    x, y = n[i], n[i + 1]
+                    xs.append(x); ys.append(y)
+            elif cmd == 'H':
+                x = n[-1]; xs.append(x); ys.append(y)
+            elif cmd == 'V':
+                y = n[-1]; xs.append(x); ys.append(y)
+            elif cmd == 'A':
+                x, y = n[5], n[6]; xs.append(x); ys.append(y)
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+def test_quinzhee_draws_no_entrance_above_the_beds():
+    """Review C1: the topic's rule is a sleeping platform higher than the top of the entrance, and the quinzhee steps give
+    no entrance height, so the cut-away draws no entrance; any dashed line sits above the dome (the height mark) only."""
+    svg, _ = figs.F['quinzhee']
+    root = ET.fromstring(svg)
+    assert 'entrance' not in drawn_of('quinzhee') and 'entrance' not in alt_of('quinzhee')
+    bed_top = bbox(parts('quinzhee')['beds'])[1]
+    for el in root.iter():
+        if 'd' in (el.get('class') or '').split():
+            assert bbox(el)[3] < bed_top - 60, f'dashed element reaches down to the beds: {ET.tostring(el)[:80]}'
+
+
+def test_quinzhee_walls_are_at_least_a_foot_at_the_drawn_scale():
+    """Review M5: the height mark is 5 feet, so the wall (outer minus inner radius) must be at least a fifth of it."""
+    d = parts('quinzhee')['walls'].get('d')
+    (orx, ory), (irx, iry) = [tuple(float(v) for v in m) for m in re.findall(r'A(\d+(?:\.\d+)?) (\d+(?:\.\d+)?)', d)]
+    foot = ory / 5
+    assert ory - iry >= foot and orx - irx >= foot, (orx, ory, irx, iry)
+    beds = bbox(parts('quinzhee')['beds'])
+    assert abs((196 - beds[1]) - foot) <= 2, 'beds are the last foot of snow'
+
+
+def test_generator_geometry():
+    """Review M9: the garage generator is crossed out, the distance runs from the house wall to the generator, and the
+    exhaust arrow starts past the generator and points away from the house."""
+    p = parts('generator-placement')
+    assert {'garage', 'house', 'never', 'distance', 'exhaust', 'generator'} <= set(p)
+    house, never, dist, ex = bbox(p['house']), bbox(p['never']), bbox(p['distance']), p['exhaust']
+    gx0, _, gx1, _ = bbox(p['garage'])
+    assert gx0 <= never[0] and never[2] <= gx1 + 2 and gx1 <= house[0], 'X over the garage beside the house'
+    gen = [float(r.get('x')) for r in p['generator'].iter() if r.tag.split('}')[-1] == 'rect']
+    assert dist[0] == house[2], 'distance starts at the house wall'
+    assert abs(dist[2] - min(gen)) <= 1, 'distance ends at the generator'
+    x1, x2 = float(ex.get('x1')), float(ex.get('x2'))
+    assert x1 >= max(gen) and x2 > x1, 'exhaust points away from the house'
+    assert ex.get('marker-end')
+
+
+def test_warm_room_towel_is_its_own_shape_beside_the_door():
+    """Review M4: the towel is not a straight bar that merges with the door leaf at night."""
+    towel = parts('warm-room')['towel']
+    assert towel.tag.split('}')[-1] == 'path' and towel.get('d').count('l') >= 4

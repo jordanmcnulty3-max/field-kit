@@ -517,3 +517,12 @@ Source disagreements found while checking the Survival topics. Each says what th
    while one person stays awake and watches the clock. Fix round 2: the doFirst, summary and Sleep warm lines now
    say the same (everyone awake while the engine runs; off before anyone sleeps); CDC's "stay awake" is kept as
    "as much as you can", sleeping only in turns with the engine off.
+64. **Quinzhee entrance and the raised beds (surv-shelter) — Heat pack Task 8 fix round.** Shelter's Snow section says
+   "build the sleeping platform higher than the entrance", and its Snow cave steps (Army TC 21-3, ATP 3-50.21) say "Make
+   the sleeping platform higher than the top of the entrance, where the air is warmer". The quinzhee steps (Appalachian
+   Mountain Club, Scout Life) say "Dig a small entrance at the base ... just big enough to crawl through" and "Leave the
+   last foot of snow as raised beds", with no entrance height. A crawl-through entrance is likely taller than one foot,
+   so read literally the beds would sit below the top of the entrance, against the platform rule. Today: the quinzhee
+   diagram draws no entrance, and the text is unchanged. Say if the quinzhee steps should add a line (for example "keep
+   the beds higher than the top of the entrance, as in Snow cave"), which would need a source that says it for a
+   quinzhee, or should point to the Snow rule.

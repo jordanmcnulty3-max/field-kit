@@ -3117,7 +3117,7 @@ Redrawn: the old figure was an A-frame over a ridgeline with the low end into th
 - "High front edge": step 3, "This edge is the high front edge."
 - "Drip stick" (one on each rope, next to the tarp): step 4, "Tie a drip stick ... to each rope about 1 inch (2.5 cm) from the tarp." Sizes not labelled.
 - "Low, staked edge: back into the wind", stakes along the low edge, wind arrows on that side: step 6, "stake its other long edge to the ground with sharpened sticks through the grommets. The low, staked edge is the back of the lean-to, facing into the wind"; step 1, "The back of the lean-to must face into the wind."
-- "Open side faces away from the wind", arrow out of the open side: step 6, "The open side, under the high edge, faces away from it."
+- "Open side faces away from the wind", a leader to the open side: step 6, "The open side, under the high edge, faces away from it." (Review M1: the first version had an arrow out of the open side that could read as wind; replaced by the leader.)
 - Not drawn: the hood tie-off, the centre pole or hood line, brush at the sides, bedding.
 - Caption: "Tarp lean-to. The ropes hold the high front edge between the trees; the low back edge is staked down, into the wind." Step 5, "The ropes and the tarp's high edge are the line between two trees"; step 6.
 
@@ -3134,7 +3134,7 @@ Redrawn: the old figure held the striker still and pulled the rod back. Now the 
 
 - "Outside only", "More than 20 feet (6 m) from any window, door or vent" (dimension from the house wall beside a window to the generator): "Outside only, more than 20 feet (6 m) from any window, door or vent (CDC, New York State Division of Consumer Protection)."
 - "Exhaust pointed away from your home" (exhaust arrow pointing away from the house): "Point the exhaust away from your home and from any other building someone can go into (CPSC)."
-- "Never in an attached garage, even with the door open" (crossed-out generator in a garage built onto the house, door up): "Never in an attached garage, even with the door open (NFPA)"; the same list, "Never inside a home, garage ...".
+- "Never inside a home, garage, basement, crawlspace or shed" (heavy cross over a generator in a garage built onto the house, door up): "Never inside a home, garage, basement, crawlspace or shed, or in any other enclosed or partly enclosed space (CPSC, FEMA)"; the attached garage with its door up also shows "Never in an attached garage, even with the door open (NFPA)", which the alt text and caption carry. (Review M2: the first label said only "attached", which could suggest a detached garage is fine. M3: the cross is drawn heavier so it stays the strongest mark at night.)
 - Not drawn: porch and carport, the 3 to 4 feet (0.9 to 1.2 m) clear space, rain cover.
 - Caption: the same three statements in the list's words.
 
@@ -3153,7 +3153,7 @@ House plan, no numbers.
 - "Sheltered side of the house" (bracket under that side): same sentence. No wind is drawn: the topic does not name what the side is sheltered from.
 - One window in the warm room, two in each other room: "few windows".
 - "Blankets over the windows at night" (a blanket along the warm room's window): "Close the drapes or cover the windows with blankets at night (CDC)."
-- Closed door into the warm room, "Towels in the cracks under doors": "It should close off from the cold rooms with doors"; "Stuff towels or rags in the cracks under doors (CDC)."
+- Closed door into the warm room, "Towels in the cracks under doors" (the towel a bunched zigzag beside the door, so it stays distinct from the door at night, review M4): "It should close off from the cold rooms with doors"; "Stuff towels or rags in the cracks under doors (CDC)."
 - "Close off rooms you don't need", "Cold room" (grey): "Close off rooms you don't need (CDC, FEMA)"; "close off from the cold rooms".
 - "Heating ducts blocked off" (crossed duct in a cold room): "Block off the heating ducts to rooms you are not heating (University of Missouri Extension)."
 - No heater is drawn: the topic sends each heat source to its own topic.
@@ -3163,10 +3163,10 @@ House plan, no numbers.
 
 Cross-section of the mound. The sizes are the topic's, which it credits to the Appalachian Mountain Club and Scout Life.
 - "At least 5 feet (1.5 m) high" (dimension to the top): step 1, "a mound at least 5 feet (1.5 m) high". The ideal 7 to 8 feet is not drawn.
-- "Sticks a foot (30 cm) deep: walls at least 1 foot (30 cm) thick" (sticks reach exactly through the wall): step 3, "Push sticks a foot (30 cm) deep into the mound all over, from the outside"; step 4, "Stop wherever you reach the end of a stick, so the walls stay at least 1 foot (30 cm) thick".
+- "Sticks a foot (30 cm) deep: walls at least 1 foot (30 cm) thick" (sticks reach exactly through the wall; the wall is drawn just over 1 foot at the 5-foot height mark's scale, review M5): step 3, "Push sticks a foot (30 cm) deep into the mound all over, from the outside"; step 4, "Stop wherever you reach the end of a stick, so the walls stay at least 1 foot (30 cm) thick".
 - "Ventilation hole" near the top: step 5, "Poke a small ventilation hole near the top of the dome."
-- "Raised beds", "Trench down to the ground so cold air drains out" (arrow down into the trench): step 6, "Leave the last foot of snow as raised beds, and dig a narrow trench between them down to the ground so cold air drains out."
-- "Entrance at the base on the downwind side" (dashed, in the far wall, since the cut runs across the beds): step 4, "Dig a small entrance at the base on the downwind side". No wind arrow: the cut is across the wind.
+- "Raised beds" (one foot high), "Trench down to the ground so cold air drains out" (label inside the shelter, arrow down into the trench, review M6): step 6, "Leave the last foot of snow as raised beds, and dig a narrow trench between them down to the ground so cold air drains out."
+- Entrance not drawn (review C1). The first version drew a dashed entrance in the far wall about 1.6 ft high, taller than the 1-foot beds. The same topic says "build the sleeping platform higher than the entrance" (Snow) and "Make the sleeping platform higher than the top of the entrance, where the air is warmer" (Snow cave); the quinzhee steps give only "a small entrance at the base ... just big enough to crawl through" and beds of "the last foot of snow", no entrance height. A drawing cannot place the entrance without showing a height the text does not give, so it is left out of the figure, alt text and pinned words; checked against the platform rule: nothing drawn now shows an entrance at or above the beds. Whether the quinzhee steps agree with the platform rule is D64.
 - Not drawn: settling time, marking the entrance, the shovel.
 - Caption: "Quinzhee cut in half. Stop digging wherever you reach the end of a stick. Leave a ventilation hole near the top, and raised beds with a trench between them so cold air drains out." Steps 4 to 6.
 
@@ -3362,3 +3362,9 @@ No new source; wording only.
 - N3: surv-winter-storms: "Stay awake as much as you can" (CDC: "Stay awake. You will be less vulnerable to cold-related
   health problems.") and "If you must sleep, sleep in turns with the engine off" (Red Cross: "take turns sleeping";
   p:carbon-monoxide), each credited for what it says.
+
+### Heat pack Task 8 fix round (review C1, M1 to M9)
+
+- C1 quinzhee: entrance removed from the cut-away (see the quinzhee entry); D64 logged. Test `test_quinzhee_draws_no_entrance_above_the_beds`.
+- M1 shelter-tarp: open-side arrow replaced by a leader. M2, M3 generator-placement: label in the list's own words, heavier cross. M4 warm-room: towel drawn as a bunched zigzag. M5 quinzhee: wall 24 px at 23.6 px a foot; beds one foot. M6 quinzhee: trench label inside the shelter.
+- M7 tests: the topic-text check now reads the topic's summary, doFirst, headings and blocks, without figure captions, keywords or source notes. M8: every distance phrase, including "a foot (30 cm)", must be in the topic. M9: geometry tests for generator-placement (cross over the garage generator, distance from the house wall to the generator, exhaust pointing away) and quinzhee (no entrance, wall at least a foot, beds a foot).

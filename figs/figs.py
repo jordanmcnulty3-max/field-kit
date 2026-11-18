@@ -198,12 +198,11 @@ svg('shelter-tarp', 222, 'Tarp lean-to: a rope from each corner of the high fron
 <line x1="124" y1="113" x2="124" y2="123" class="w t3"/><line x1="276" y1="83" x2="276" y2="93" class="w t3"/>
 <line x1="90" y1="184" x2="90" y2="44" class="w t5"/><line x1="310" y1="140" x2="310" y2="20" class="w t5"/>
 {arrow(4,122,40,131,'m','aM').replace('<line', '<line data-part="wind"', 1)}{arrow(4,142,32,149,'m','aM')}{lbl(4,112,'Wind','tm')}
-{arrow(206,124,248,135,'m','aM')}
 {lbl(4,16,'Each rope tied to its','')}{lbl(4,30,'tree about waist high','')}{lead(100,35,110,118)}
 {lbl(196,40,'Drip stick','')}{lead(232,44,274,82)}
 <text x="150" y="104" transform="rotate(-11.3 150 104)" class="tb">High front edge</text>
 {lbl(4,200,'Low, staked edge:','tb')}{lbl(4,214,'back into the wind','')}{lead(48,188,84,150)}
-{lbl(336,186,'Open side faces','tb','end')}{lbl(336,200,'away from the wind','','end')}''')
+{lbl(336,186,'Open side faces','tb','end')}{lbl(336,200,'away from the wind','','end')}{lead(262,178,226,132)}''')
 
 svg('shelter-snow', 200, 'Snow trench cross-section: roof with a vent hole, raised sleeping shelf, cold air sinking to a lower trench', f'''
 <path d="M0 60 H100 V140 H190 V175 H240 V60 H340 V200 H0 Z" class="snow"/>
@@ -217,25 +216,24 @@ svg('shelter-snow', 200, 'Snow trench cross-section: roof with a vent hole, rais
 {lbl(170,194,'Snow','tm','middle')}''')
 
 # Quinzhee cut across the middle: walls the depth of the sticks, a vent near the top, two raised beds with a trench between them
-# down to the ground, and the entrance (dashed) at the base of the far wall.
+# down to the ground. Scale: 118 px = 5 ft, so the 24 px wall is just over 1 ft. No entrance is drawn: the steps give it no
+# height, and the topic's rule (sleeping platform higher than the top of the entrance) cannot be shown from them (review C1, D64).
 quin_sticks = ''.join(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" class="w t3"/>' for x1, y1, x2, y2 in
-                      [(294.2, 150.3, 270.1, 160), (264.8, 109.7, 246.4, 128.1), (228.7, 86.3, 217.3, 109.7),
-                       (111.3, 86.3, 122.7, 109.7), (75.2, 109.7, 93.6, 128.1), (45.8, 150.3, 69.9, 160)])
-svg('quinzhee', 236, 'Quinzhee cut in half: a snow mound at least 5 feet (1.5 m) high, sticks pushed a foot (30 cm) deep so the walls stay at least 1 foot (30 cm) thick, a ventilation hole near the top, raised beds with a trench down to the ground between them so cold air drains out, and the entrance at the base on the downwind side', f'''
-<rect x="0" y="196" width="340" height="40" class="gr"/><line x1="0" y1="196" x2="340" y2="196" class="m"/>
-<path d="M40 196 A130 118 0 0 1 300 196 H278 A108 96 0 0 0 62 196 Z" class="snow"/>
-<path d="M62 196 L64.9 174 H158 V196 Z M182 196 V174 H275.1 L278 196 Z" class="snow"/>
-<rect x="182" y="76" width="8" height="27" class="milk"/><path d="M182 78.5 V101 M190 79 V101" class="k t1"/>
-<path d="M151 196 V178 A19 20 0 0 1 189 178 V196" class="k t1 d"/>
+                      [(294.2, 150.3, 268.3, 160.8), (264.8, 109.7, 245.0, 129.5), (228.7, 86.3, 216.5, 111.5),
+                       (111.3, 86.3, 123.5, 111.5), (75.2, 109.7, 95.0, 129.5), (45.8, 150.3, 71.7, 160.8)])
+svg('quinzhee', 212, 'Quinzhee cut in half: a snow mound at least 5 feet (1.5 m) high, sticks pushed a foot (30 cm) deep so the walls stay at least 1 foot (30 cm) thick, a ventilation hole near the top, and raised beds with a trench down to the ground between them so cold air drains out', f'''
+<rect x="0" y="196" width="340" height="16" class="gr"/><line x1="0" y1="196" x2="340" y2="196" class="m"/>
+<path d="M40 196 A130 118 0 0 1 300 196 H276 A106 94 0 0 0 64 196 Z" class="snow" data-part="walls"/>
+<path d="M64 196 L67.5 172 H158 V196 Z M182 196 V172 H272.5 L276 196 Z" class="snow" data-part="beds"/>
+<rect x="182" y="76" width="8" height="29" class="milk"/><path d="M182 78.5 V103 M190 79 V103" class="k t1"/>
 {quin_sticks}
-{arrow(170,160,170,192,'a','aA')}
+{arrow(170,166,170,193,'a','aA')}
 <line x1="24" y1="80" x2="24" y2="194" class="m" marker-start="url(#aM)" marker-end="url(#aM)"/><line x1="18" y1="78" x2="164" y2="78" class="m t1 d"/>
 {lbl(30,30,'At least 5 feet','tb')}{lbl(30,44,'(1.5 m) high','')}
-{lbl(336,20,'Sticks a foot (30 cm) deep:','tb','end')}{lbl(336,34,'walls at least 1 foot (30 cm) thick','','end')}{lead(296,38,256,117)}
+{lbl(336,20,'Sticks a foot (30 cm) deep:','tb','end')}{lbl(336,34,'walls at least 1 foot (30 cm) thick','','end')}{lead(296,38,256,118)}
 {lbl(150,64,'Ventilation hole','','end')}{lead(152,62,180,82)}
-{lbl(170,122,'Entrance at the base','','middle')}{lbl(170,136,'on the downwind side','','middle')}{lead(204,140,188,172)}
-{lbl(108,190,'Raised beds','tb','middle')}{lbl(232,190,'Raised beds','tb','middle')}
-{lbl(170,216,'Trench down to the ground','tb','middle')}{lbl(170,230,'so cold air drains out','','middle')}''')
+{lbl(170,144,'Trench down to the ground','tb','middle')}{lbl(170,158,'so cold air drains out','','middle')}
+{lbl(108,188,'Raised beds','tb','middle')}{lbl(232,188,'Raised beds','tb','middle')}''')
 
 svg('shelter-desert', 190, 'Desert shade shelter: two layers with an air gap over a shallow trench', f'''
 {sun(34,28)}
@@ -256,20 +254,20 @@ def generator(x, y):
             f'<circle cx="{x+12}" cy="{y+18}" r="5" class="k"/><rect x="{x+22}" y="{y+13}" width="9" height="9" class="k t1"/>'
             f'<circle cx="{x+30}" cy="{y+31}" r="4" class="k"/><line x1="{x+4}" y1="{y+28}" x2="{x+4}" y2="{y+35}" class="k t3"/>')
 
-svg('generator-placement', 206, 'Generator outside only, more than 20 feet (6 m) from any window, door or vent, with its exhaust pointed away from your home; never in an attached garage, even with the door open', f'''
+svg('generator-placement', 206, 'Generator outside only, more than 20 feet (6 m) from any window, door or vent, with its exhaust pointed away from your home; never inside a home, garage, basement, crawlspace or shed, and never in an attached garage, even with the door open', f'''
 <line x1="0" y1="180" x2="340" y2="180" class="m"/>
-<path d="M2 118 L66 102" class="k t3"/><path d="M6 115 V180 M66 104 V180" class="k"/>
+<path d="M2 118 L66 102" class="k t3"/><path d="M6 115 V180 M66 104 V180" class="k" data-part="garage"/>
 <rect x="14" y="124" width="44" height="8" class="k kf"/><path d="M14 132 V180 M58 132 V180" class="k t1"/>
 <g transform="translate(18 146) scale(0.8)">{generator(0, 0)}</g>
-<path d="M14 142 L56 182 M56 142 L14 182" class="h t5"/>
-<path d="M60 94 L108 52 L156 94" class="k t3"/><rect x="66" y="92" width="84" height="88" class="k"/>
+<path d="M14 142 L56 182 M56 142 L14 182" class="h" style="stroke-width:7" data-part="never"/>
+<path d="M60 94 L108 52 L156 94" class="k t3"/><rect x="66" y="92" width="84" height="88" class="k" data-part="house"/>
 <rect x="122" y="104" width="22" height="22" class="k"/><path d="M133 104 V126 M122 115 H144" class="k t1"/>
 <rect x="80" y="136" width="20" height="44" class="k"/>
-<line x1="150" y1="128" x2="264" y2="128" class="m" marker-start="url(#aM)" marker-end="url(#aM)"/>
+<line x1="150" y1="128" x2="264" y2="128" class="m" data-part="distance" marker-start="url(#aM)" marker-end="url(#aM)"/>
 <line x1="264" y1="120" x2="264" y2="144" class="m t1"/>
-{generator(264, 145)}
-{arrow(302,166,334,166,'h','aH')}<path d="M308 156 q4 -4 8 0 t8 0 M314 176 q4 -4 8 0 t8 0" class="m t1"/>
-{lbl(4,16,'Never in an attached garage,','tb')}{lbl(4,30,'even with the door open','')}{lead(36,35,36,106)}
+<g data-part="generator">{generator(264, 145)}</g>
+{arrow(302,166,334,166,'h','aH').replace('<line', '<line data-part="exhaust"', 1)}<path d="M308 156 q4 -4 8 0 t8 0 M314 176 q4 -4 8 0 t8 0" class="m t1"/>
+{lbl(4,16,'Never inside a home, garage,','tb')}{lbl(4,30,'basement, crawlspace or shed','tb')}{lead(36,35,36,106)}
 {lbl(207,102,'More than','tb','middle')}{lbl(207,116,'20 feet (6 m)','tb','middle')}
 {lbl(207,146,'from any window,','','middle')}{lbl(207,160,'door or vent','','middle')}
 {lbl(336,60,'Exhaust pointed','tb','end')}{lbl(336,74,'away from your home','','end')}{lead(320,78,320,148)}
@@ -301,7 +299,7 @@ svg('warm-room', 214, 'House plan: one small warm room on the sheltered side of 
 <rect x="10" y="100" width="130" height="80" class="hfl"/>
 <rect x="10" y="20" width="320" height="160" class="k t3"/>
 <path d="M170 20 V100 M10 100 H330 M140 100 V120 M140 156 V180" class="k t3"/>
-<line x1="140" y1="120" x2="140" y2="156" class="w t3"/><path d="M140 156 A36 36 0 0 0 176 120" class="m t1 d"/><line x1="147" y1="121" x2="147" y2="155" class="w t5"/>
+<line x1="140" y1="120" x2="140" y2="156" class="w t3"/><path d="M140 156 A36 36 0 0 0 176 120" class="m t1 d"/><path d="M149 121 l6 4 l-6 4 l6 4 l-6 4 l6 4 l-6 4 l6 4 l-6 4" class="w t3" data-part="towel"/>
 {window(40, 20, 80, 20)}{window(110, 20, 150, 20)}{window(220, 20, 260, 20)}{window(330, 40, 330, 70)}
 {window(330, 122, 330, 152)}{window(270, 180, 310, 180)}{window(55, 180, 95, 180)}
 <line x1="56" y1="174" x2="94" y2="174" class="w t5"/>

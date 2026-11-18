@@ -2,27 +2,23 @@
   "id": "ten-essentials",
   "title": "Ten essentials",
   "category": "basics",
-  "summary": "Tick off the ten things to pack for every trip into the backcountry.",
+  "summary": "Pack these on every trip into the backcountry, even a short one.",
   "items": [
     {
       "id": "navigation",
-      "text": "Navigation",
-      "note": "Map, compass, and a charged phone or GPS."
+      "text": "Navigation: map and compass, plus a phone with a GPS app or a GPS unit, and a spare battery"
     },
     {
       "id": "headlamp",
-      "text": "Headlamp",
-      "note": "With spare batteries."
+      "text": "Headlamp and spare batteries"
     },
     {
       "id": "sun-protection",
-      "text": "Sun protection",
-      "note": "Sunglasses, sunscreen and a hat."
+      "text": "Sun protection: sunglasses, sunscreen and a hat"
     },
     {
       "id": "first-aid-kit",
-      "text": "First aid kit",
-      "note": "Including a tourniquet."
+      "text": "First aid kit"
     },
     {
       "id": "knife",
@@ -30,36 +26,34 @@
     },
     {
       "id": "fire",
-      "text": "Fire",
-      "note": "Lighter, ferro rod or waterproof matches, plus tinder."
+      "text": "Fire: waterproof matches or a lighter, and fire starter"
     },
     {
       "id": "shelter",
-      "text": "Emergency shelter",
-      "note": "Space blanket, bivy sack or tarp."
+      "text": "Emergency shelter: space blanket, bivy sack or tarp"
     },
     {
       "id": "food",
-      "text": "Extra food",
-      "note": "A day’s worth beyond the plan."
+      "text": "Extra food: a day’s worth beyond your plan"
     },
     {
       "id": "water",
-      "text": "Extra water",
-      "note": "And a way to treat more."
+      "text": "Extra water, and a way to treat more"
     },
     {
       "id": "layers",
-      "text": "Extra layers",
-      "note": "Insulation and rain gear."
+      "text": "Extra layers: insulation and rain gear"
     }
   ],
   "sources": [
     {
-      "name": "Not yet source-checked",
-      "used": "Taken from the Ten essentials topic; checked in Task 16"
+      "name": "Field Kit topic The ten essentials (surv-ten-essentials), source-checked 2026-11-17",
+      "used": "Every item and the summary are the topic's own words; the topic's sources are The Mountaineers' Ten Essential Systems, the National Park Service's Ten Essentials and NYS DEC's 10 Hiking Essentials"
+    },
+    {
+      "name": "The Mountaineers, Ten Essential Systems (Freedom of the Hills, 9th edition), Olympia Branch handout",
+      "used": "The ten items"
     }
   ],
-  "reviewed": "2026-11-17",
-  "draft": true
+  "reviewed": "2026-11-17"
 }

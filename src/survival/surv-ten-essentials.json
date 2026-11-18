@@ -25,24 +25,27 @@
         },
         {
           "fig": "kit",
-          "cap": "Ten things that turn a bad night out into a survivable one."
+          "cap": "The ten essential systems, as The Mountaineers list them."
         },
         {
           "list": [
-            "Navigation: map, compass, and a charged phone or GPS.",
-            "Headlamp, with spare batteries.",
+            "Navigation: map and compass, plus a phone with a GPS app or a GPS unit, and a spare battery.",
+            "Headlamp and spare batteries.",
             "Sun protection: sunglasses, sunscreen and a hat.",
-            "First aid kit, including a tourniquet.",
+            "First aid kit.",
             "Knife or multi-tool.",
-            "Fire: lighter, ferro rod or waterproof matches, plus tinder.",
+            "Fire: waterproof matches or a lighter, and fire starter.",
             "Emergency shelter: space blanket, bivy sack or tarp.",
-            "Extra food: a day’s worth beyond the plan.",
-            "Extra water and a way to treat more.",
+            "Extra food: a day’s worth beyond your plan.",
+            "Extra water, and a way to treat more.",
             "Extra layers: insulation and rain gear."
           ]
         },
         {
-          "p": "Tell someone your route and when you’ll be back, and add a whistle: three blasts carries farther than shouting."
+          "p": "This list follows The Mountaineers’ Ten Essential Systems. The NYS DEC list for New York hikers also adds a whistle, a signal mirror and insect protection."
+        },
+        {
+          "p": "Tell someone where you’re going and when you’ll be back. Carry a whistle: it carries farther than your voice and takes less effort, and three blasts is a distress signal."
         },
         {
           "link": "c:ten-essentials",
@@ -53,10 +56,25 @@
   ],
   "sources": [
     {
-      "name": "Not yet source-checked",
-      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+      "name": "The Mountaineers, Ten Essentials: The Classic List and the Ten Essential Systems (citing Mountaineering: The Freedom of the Hills, 9th edition), Olympia Branch handout",
+      "used": "The ten systems this list follows: navigation (map, compass, GPS device or phone with GPS app, extra batteries or battery pack), headlamp plus extra batteries, sun protection (sunglasses, sunscreen), first aid, knife, fire (matches, lighter and tinder), shelter carried at all times, extra food, extra water or the means to purify, extra clothes"
+    },
+    {
+      "name": "National Park Service, Ten Essentials",
+      "used": "Paper map and compass or GPS, extra battery for your phone; sunglasses, sunscreen and hats; extra clothing such as a rain shell and jacket; headlamp and extra batteries; first-aid kit; waterproof matches or lighter and fire starters; knife or multi-tool; an extra day's supply of food; water and knowing where to find water you can treat; tent, tarp, bivy sack or emergency space blanket; tell someone where you're going and when to expect you back"
+    },
+    {
+      "name": "NYS DEC press release, 27 June 2024, DEC Reminds Visitors to Focus on Safety as Summer Hiking Season Begins (10 Hiking Essentials)",
+      "used": "New York list: navigation, insulation and rain gear, light, first aid, emergency kit (whistle, signal mirror, duct tape, knife or multi-tool, bright cloth), fire, nutrition, water, sun and insect protection, emergency shelter; let someone know where you are going and when you plan to return"
+    },
+    {
+      "name": "NYS DEC, Hike Smart NY Ten Essentials card (extapps.dec.ny.gov; OCR text, publisher inferred from the DEC domain)",
+      "used": "Carry these essentials on all hikes"
+    },
+    {
+      "name": "Be Ready Utah (State of Utah), Emergency Signaling; Iowa Hunter Safety Course, Signaling for Help",
+      "used": "A whistle carries farther than a voice and takes less effort; three whistle blasts is a distress signal"
     }
   ],
-  "reviewed": "2026-11-17",
-  "draft": true
+  "reviewed": "2026-11-17"
 }

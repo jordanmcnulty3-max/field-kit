@@ -343,13 +343,13 @@ def test_search_go_returns_what_survival_open_returns(page, app_url):
 
 # ---------- The shipped Ten essentials checklist ----------
 
-def test_shipped_ten_essentials_matches_the_topic_and_is_a_draft_with_the_placeholder_source(page, app_url):
+def test_shipped_ten_essentials_matches_the_topic_and_is_source_checked(page, app_url):
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.survival')
     c = page.evaluate("FK_DATA.checklists.find(c => c.id === 'ten-essentials')")
     t = page.evaluate("FK_DATA.topics.find(t => t.id === 'surv-ten-essentials')")
-    assert c['title'] == 'Ten essentials' and c['category'] == 'basics' and c['draft'] is True and c['reviewed'] == '2026-11-17'
-    assert c['sources'] == [{'name': 'Not yet source-checked', 'used': 'Taken from the Ten essentials topic; checked in Task 16'}]
+    assert c['title'] == 'Ten essentials' and c['category'] == 'basics' and 'draft' not in c and c['reviewed'] == '2026-11-17'
+    assert c['sources'] and not any('Not yet source-checked' in s['name'] for s in c['sources'])
     lines = [x for s in t['sections'] for b in s['blocks'] for x in b.get('list', [])]
     assert len(lines) == 10 and len(c['items']) == 10
     norm = lambda s: re.sub(r'[^a-z0-9]+', ' ', s.lower()).strip()
@@ -371,4 +371,4 @@ def test_topic_link_opens_the_shipped_checklist(page, app_url):
     wait_hash(page, LIST)
     expect(page.locator('#survPage h2')).to_have_text('Ten essentials')
     assert page.locator('#survPage input[type=checkbox]').count() == 10
-    assert page.locator('#survPage .sv-draft').inner_text() == 'Draft'
+    assert page.locator('#survPage .sv-draft').count() == 0

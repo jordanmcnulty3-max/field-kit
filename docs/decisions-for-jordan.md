@@ -166,3 +166,15 @@ Source disagreements found while checking the Survival topics. Each says what th
    and that local rules may restrict carrying it. Whether New York law allows carrying bear spray was not checked
    (no law page was opened). Today: the topic says local rules may restrict it. Say if the group carries bear
    spray, so pack 2 can check the law.
+13. **Tourniquet in the ten essentials.** The old Ten essentials topic said "First aid kit, including a tourniquet".
+   None of the lists opened (The Mountaineers, National Park Service, NYS DEC) names a tourniquet, and no
+   authoritative hiking source was found that does. Today: the topic and checklist say "First aid kit". The
+   Emergency section still has the tourniquet protocols. Say if the group wants a tourniquet listed as its own kit
+   rule (it would be the group's choice, recorded as such, not a sourced Ten essentials item).
+14. **Knots: joining ropes and holding people.** Army ATP 3-50.21 and Scout Life give the square knot as a way to
+   join two ropes of equal size; Animated Knots (citing Ashley) says never use it to join ropes for anything that
+   matters, because it can capsize. Scout Life also calls the bowline the knot for tying a rope around someone
+   needing rescue; Animated Knots says a bowline shakes loose and needs a safety knot for climbing. Today: the more
+   cautious sources are used. The square knot is for bandages and bundles only, and the Knots topic says it does
+   not teach knots for climbing, rappelling or holding a person's weight. Say if the group wants a life-safety
+   knot section; it would need its own sourced pack (and verified diagrams).

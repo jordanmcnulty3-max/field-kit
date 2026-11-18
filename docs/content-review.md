@@ -1507,3 +1507,127 @@ Diagrams removed in this batch (record; figs/ not edited):
 - fishing: the right half draws a stake funnel where the text now describes a lashed-stick basket trap; needs a new drawing, waits for the food pack.
 
 F7 (record): the trapping check intervals (Southern Zone 24 hours; Northern Zone 24 or 48 hours by WMU and trap) come from the 2023-2024 NYS DEC Hunting & Trapping Guide. Recheck against the current edition in the food pack.
+
+## Task 16: Survival topics, navigation, signals, knots, ten essentials (2026-11-17)
+
+Source keys (opened 2026-11-17 by web fetch from search results; title checked after each fetch). PDF text was read through the fetch tool's extraction and summary, which quotes short passages and paraphrases the rest; paragraph and page numbers are as the tool reported them. Statements that rest on an Army manual alone are marked "Army only"; none of them is a safety number.
+- TC: US Army TC 3-25.26, Map Reading and Land Navigation, November 2013 (characters 100,000 to 200,000 read). https://www.armywriter.com/board/references/TC3-25x26-Part1.pdf (armywriter.com copy; title page and date confirmed)
+- FM: US Army FM 21-76, Survival Manual (2006 PDF copy), chapters 18 and 19 (characters 400,000 to 500,000). https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- ATP: US Army ATP 3-50.21, Survival, September 2018, chapter 7 and appendix A (characters 300,000 to 500,000). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- STARDATE: StarDate (University of Texas McDonald Observatory), "Directions", 18 September 2021. https://legacy.stardate.org/print/20362
+- UCD: "Outdoor Lab 1 - A First Look at the Stars" (lage.physics.ucdavis.edu; no publisher printed). https://lage.physics.ucdavis.edu/support_files/obs_astro/labs/outdoor_1.pdf (Polaris within 1 degree of the pole; finger and fist widths. Used only as a cross-check.)
+- OIE: Orienteering Ireland, Skills and Techniques in Orienteering. https://www.orienteering.ie/skills-and-techniques-in-orienteering/
+- UTAH: Be Ready Utah (State of Utah), Emergency Signaling. https://beready.utah.gov/?p=4067
+- IOWA: Iowa Hunter Safety Course, Signaling for Help (hunter-ed.com, Kalkomey, "official state-delegated provider", produced with the Iowa DNR). https://www.hunter-ed.com/iowa/studyGuide/Signaling-for-Help/202013_13141/
+- AIM: FAA Aeronautical Information Manual 6-2-6, Search and Rescue (faa.gov page; the ground-air code is only an image there). https://www.faa.gov/air_traffic/publications/atpubs/aim/aim0602.html
+- AIM-TXT: text copy of the same AIM section (faraim.org, third party): message labels, "Symbols should be at least 10 feet high or larger", contrast, fabric/wood/stones, tramped snow. https://www.faraim.org/faa/aim/500/pdf.txt
+- AIP: FAA AIP GEN 3.6, Search and Rescue (faa.gov): code shown only as figures. https://www.faa.gov/air_traffic/publications/atpubs/aip_html/part1_gen_section_3.6.html
+- AIRCAV: aircav.com, Codes and Signals, ch. 19 p. 4 (third party; reproduces FM 21-76 Figure 19-6 with the same figure number and the same 1 m by 6 m size text): V "Require assistance", X "Require medical assistance". https://aircav.com/survival/asch19/asch19p04.html
+- AK: Animated Knots by Grog (animatedknots.com): Bowline Knot (ABOK #1010) https://www.animatedknots.com/bowline-knot ; Clove Hitch (Rope-End) https://www.animatedknots.com/clove-hitch-knot-rope-end ; Midshipman's Hitch (alternate name Taut Line Hitch) https://www.animatedknots.com/midshipmans-hitch-knot ; Trucker's Hitch https://www.animatedknots.com/truckers-hitch-knot ; Square Knot (ABOK #1402) https://animatedknots.com/square-knot ; Sheet Bend https://www.animatedknots.com/sheet-bend-knot
+- SL: Scout Life (Scouting America), How to Tie the 7 Basic Scout Knots. https://scoutlife.org/outdoors/176401/how-to-tie-the-7-basic-scout-knots/
+- SM: Scouting magazine (Scouting America), How to tie 10 essential Scouting knots (C. Jacobson; web post 10 April 2017). https://scoutingmagazine.org/2017/04/tie-essential-scouting-knots/
+- WEB: Scouting America filestore, Webelos Let's Camp requirement 5, Bowline Knot (no publisher printed; scouting.org domain). https://filestore.scouting.org/filestore/cubscouts/adventure-resources/webelos/Webelos%20Let%27s%20Camp%205%20Bowline%20Knot.pdf
+- PION: Scout Pioneering, Knot-Tying Terminology (quotes the BSA Pioneering merit badge pamphlet, 1993/1998). https://scoutpioneering.com/2013/02/11/knot-tying-terminology/ ("An overhand loop is formed when a loop is made so that the running end of the rope is on top of the standing part.")
+- MTN: The Mountaineers, "Ten Essentials: The Classic List" and Ten Essential Systems (Olympia Branch handout citing Freedom of the Hills, 9th ed., rev. 2017). https://www.mountaineers.org/locations-lodges/olympia-branch/events/hiking-committee-meeting-2020-01-20-2022-12-05-2023-02-07/ten-essentials.pdf
+- NPS-10: National Park Service, Ten Essentials. https://www.nps.gov/articles/10essentials.htm
+- DEC-10: NYS DEC press release, 27 June 2024, DEC Reminds Visitors to Focus on Safety as Summer Hiking Season Begins (10 Hiking Essentials). https://dec.ny.gov/news/press-releases/2024/6/dec-reminds-visitors-to-focus-on-safety-as-summer-hiking-season-begins
+- DEC-CARD: Hike Smart NY Ten Essentials card (extapps.dec.ny.gov; OCR text, title and publisher not printed). https://extapps.dec.ny.gov/docs/lands_forests_pdf/hikesmarttenessentials.pdf
+
+### surv-navigation-without-a-compass
+
+- Heading "Shadow stick (works in both hemispheres)" now "Shadow stick" (the Southern Hemisphere text was deleted at conversion). FM p. 194 and TC 8-18 say the first mark is west "everywhere on earth"; the heading no longer needs to say so.
+- Stick upright on level ground, clear shadow, mark the tip — FM p. 194; ATP 7-22. Matches; "where it casts a clear shadow" added from FM.
+- First mark is west — FM p. 194; TC 8-17, 8-18. Added to step 1 (it was only in the figure).
+- Wait at least 15 minutes — FM p. 194 and TC 8-17: "10 to 15 minutes until the shadow tip moves a few" centimeters/inches. Matches (15 minutes is the top of the range; kept so the drawn label "15+ min later" agrees); "until the tip has moved a few inches" added (TC).
+- Roughly west to east; first mark left, second right, facing north — FM p. 194 ("approximate east-west line"; "Stand with the first mark (west) to your left"). Matches.
+- `nav-shadow` caption "The shadow tip moves east as the sun moves west. Most accurate around midday." — "most accurate around midday": no opened source (TC calls the method "simple and accurate"; FM says the arc method is more accurate). Removed-unsourced. New caption from FM/TC: first mark always west, the line is only approximate. Figure kept: stick, first mark W, second mark E, north perpendicular on the side away from the stick, all match FM p. 194.
+- Accuracy limits at high latitudes or near sunrise and sunset: no opened source states them. Nothing added (the Northeast is a mid-latitude region).
+- Watch method: hour hand at the sun, south halfway to 12, 1 o'clock on daylight saving time — FM p. 195 ("hold the watch horizontal"); TC 8-19. Matches; "hold the watch flat" added (FM).
+- `nav-watch` caption "A rough method; least reliable near midday and close to the equator." — "close to the equator": FM p. 195 ("the further you are from the equator, the more accurate"); TC 8-21 ("can be in error, especially in the lower latitudes, and may cause circling"). "near midday": no opened source. Corrected to TC/FM. Figure kept: hour hand at 4 o'clock toward the sun, south line at 2 o'clock bisecting hour hand and 12, north opposite; checked against the drawing code (hour hand at 120 degrees, south line at 60 degrees). The side note "Daylight saving: use 1 o'clock" matches the text.
+- Pointer stars about five times the gap — FM p. 196 ("Extend this line about five times the distance between the pointer stars"); TC 8-24; STARDATE (Merak and Dubhe at the outer edge of the bowl). Corrected "at the end of the Big Dipper's cup" to "at the outer edge" (FM "outer lip", STARDATE "outer edge").
+- Within about a degree of true north — TC 8-24 ("less than 1 degree off the true north"); UCD ("within 1° of the North celestial pole"). Corrected to "less than a degree".
+- Height above the horizon equals latitude — STARDATE; ATP 7-33/7-35. Matches.
+- `nav-polaris` caption "turns around Polaris through the night, but the pointers always point to it" — FM p. 196 (Big Dipper and Cassiopeia "rotate counterclockwise around Polaris"; the outer-lip stars "point to the North Star"). Reworded without "always". Figure kept: drawing code checked; the arrow runs from the inner bowl-edge star (150,165) through the outer bowl-edge star (178,152) and on to Polaris at 5 times that gap (318,87); the handle is on the other side of the bowl, as in STARDATE's description.
+- Cassiopeia: not in the topic; FM p. 197 and ATP 7-36 cover it. Not added (do not expand).
+- Moon: rises before sunset, lit side west; after midnight, lit side east — FM p. 196. Matches. "Use this only as a rough check" added as a caution (brief: state the roughness); no source gives an accuracy.
+- Moss and other folklore: not in the topic. FM p. 198 and ATP 7-44 say moss is not a reliable sign of north. Nothing to remove.
+- Pace count "count each time your left foot lands. Most adults take 60 to 70 per 100 m" — ATP 7-83 (a pace is "the distance covered every time the same foot touches the ground"; pace a measured course many times and average; slopes, sand, gravel, mud, snow change it; pace counts give only approximate distances). TC 5-20 instead counts every step (about 30 inches) with an example of 120 per 100 m. No opened source gives "60 to 70". Removed-unsourced; replaced by ATP's method. The ATP definition (same foot) is the one the topic already used. Mountaineering Ireland's pacing page was refused by the site (robots).
+- Landmark to landmark — ATP 7-54, 7-55 (steering marks, the most distant object on the line of march, chosen as you move). Matches; made specific.
+- Handrails and catching features — OIE ("linear features we follow"; "an obvious feature beyond the control that will let you know that you have gone too far"). Streams, ridges and roads as linear features — ATP 7-58. Matches.
+- Aim off — OIE; ATP 7-58 (about 10 degrees, to a road, ridge or stream, turn in the direction of the offset); TC 8-15 (ten degrees adequate). Matches; "about 10 degrees" added.
+- `nav-aimoff` caption "Aiming straight at a point usually misses it" — no source says "usually". ATP 7-52 (errors compound over distance) and 7-59 (better than an aimless search). Corrected. Figure kept: aim to one side, hit the river, turn toward camp, matches ATP 7-58 and OIE.
+- Daylight left, "each finger ... is roughly 15 minutes" — search found only blogs and commercial pages; no authoritative source. Removed-unsourced, with the `nav-hand` figure. (UCD and STARDATE give finger and fist widths in degrees, not minutes of daylight; working minutes out from degrees would be arithmetic the rules do not allow, and the sun's slanting path in New York makes a fixed per-finger time unreliable.) Replaced by a link to the app's Daylight and moon tool (`u:daylight`), which computes sunset and last light on the phone. The caption "Stop and make camp while you still have light to work with" went with the figure.
+- Magnetic declination: the topic gives no figure. Nothing to check; NOAA not needed.
+- Tags: where rural, woods. Unchanged.
+
+### surv-signal-for-rescue
+
+- Three of anything — IOWA ("The international emergency sign for distress is three of any signal": three blasts on a whistle, three flashes with a mirror, three fires evenly spaced); UTAH (a repeated series of three). Matches. Six blasts: no opened US source mentions it; US sources say three. Not added.
+- Three fires in a triangle — FM p. 201 ("Build three fires in a triangle (the international distress signal) or in a straight line"); UTAH. Matches.
+- Repeat at intervals — FM p. 205 (three shots "at distinct intervals"); UTAH (repeat every one to two minutes, for tapping). Matches.
+- Ground-to-air V and X — AIRCAV reproducing FM Figure 19-6 (V "Require assistance", X "Require medical assistance"); AIM-TXT (the same two message labels exist in the FAA code; the symbols are images). The faa.gov AIM and AIP pages and the FM PDF show the symbols only as images, so the letter-to-meaning pairing rests on a third-party copy of the Army figure. Kept; flagged for the reviewer.
+- Size — FM p. 206 ("a minimum of 1 meter wide and 6 meters long"); AIM-TXT ("at least 10 feet high"). FM is the larger; added "at least 6 m (about 20 ft) long and 1 m (about 3 ft) wide" (conversions only). Open area — FM p. 206. Contrast — FM p. 206; AIM-TXT. Matches.
+- `signal-ground` caption "logs, rocks, clothing or trampled snow" — AIM-TXT (fabric strips, wood, stones; tramped snow); UTAH (bright colored items, contrasting rocks, dirt or branches). Corrected ("clothing" to "bright fabric", "logs" to "branches"). Figure kept: V = help, X = medical, big and high contrast, three fires in a triangle; all match.
+- Mirror "or your phone screen" — no opened source. Removed-unsourced; replaced with FM p. 203 ("polish your canteen cup, your belt buckle, or a similar object"). V of two fingers — UTAH ("Form a 'V' with two fingers as a sight, aim the reflected light through it at the target, and flash in threes"). Matches; "flash in threes" added (UTAH). Added (safety): don't keep the beam on the cockpit for more than a few seconds, it may blind the pilot — FM p. 203. FM's "do not flash rapidly ... enemy fire" was not added (military).
+- `signal-mirror` caption "Tilt the mirror until the spot of light falls on your fingers, then it's hitting the aircraft too" — the spot-on-fingers rule is in no opened text (FM shows the aiming only in figures 19-4 and 19-5, not extracted). Corrected to UTAH's wording. Figure kept: sun, mirror, beam through a V of two fingers to the aircraft, matches UTAH. The label "Mirror under your eye" is not in an opened text source but does not contradict one.
+- Hostile setting: the topic was silent. Added one sentence — FM ch. 19 ("Keep in mind that signals to your friends may alert the enemy of your presence and location"). No tactics added.
+- Phone, 911 text, PLB: not in the topic; nothing added (UTAH has plain 911 advice if a later pack wants it). No dial control.
+- Smoke colour, bright clothing: not in the topic; not added (FM p. 201 and NPS-10 have them for a later pack).
+- Link `u:sos` (the app's SOS light) added after the hostile-setting sentence; the tool carries its own warning that a flashing screen shows your position.
+- Tags: none. Unchanged.
+
+### surv-knots
+
+Standing decision confirmed: the clove hitch, taut-line hitch, square knot and sheet bend sections have no `fig` block (text only), before and after this check. Diagrams exist only for the bowline and the trucker's hitch.
+
+- Added warn (brief): these are camp knots; the topic does not teach knots for climbing, rappelling or holding a person's weight — AK bowline ("A Bowline should be used with great care when climbing"; "too easily tied incorrectly and can also shake loose"; a safety knot is essential) and every AK page's disclaimer. SL says a bowline is "just what you want for tying a rope around your waist or around someone requiring rescue"; the more cautious source is used (open question D14).
+- Bowline heading "won't slip or jam" — AK ("Under load, it does not slip or bind"; but unloaded "it can very readily work its way untied"). Corrected to "doesn't slip under load".
+- Bowline steps — ATP A-13; WEB (small overhand loop in the standing part; end up through, around behind the standing part, back down); SL; AK (steps in the same order). Matches. "with the end side on top" added: WEB and SL say "overhand loop", and PION defines an overhand loop as the running end on top of the standing part; the figure already shows it. Rabbit saying — SM ("goes up through the hole, around the tree, then back down the hole"). Matches.
+- `knot-bowline` checked against the drawing code (figs/figs.py, `S`, `BIG`, `UP`, `COLLAR` with rope crossing flags) and a rendered image: (1) small loop in the standing part with the end side crossing over (+1 at the crossing); (2) the end comes up under the bottom of the small loop and over its top (-1 then +2), i.e. up through from below; (3) it goes behind the standing part (-2) and back down over the top and under the bottom of the small loop, finishing inside the big loop. This is the AK/ATP/WEB sequence and ABOK #1010. Kept. Caption "Leave a tail at least a hand's width long, and pull all four strands tight to set it" — no opened source (AK quotes a rule of thumb of 12 times the circumference, "rarely seen in practice"; SM: "allow a long working end"). Removed-unsourced; new caption from AK (tie it before it takes a load; unloaded it can work loose).
+- Clove hitch steps — AK ("Pass the end of the rope around the pole. Continue over the standing end and around the pole a second time. Thread the end under itself"); SL (X shape, tuck under the X). Matches. Added "It can slip, so use it only for a temporary hold" — AK ("it slips and can also bind"; "should be deeply distrusted when used by itself"; "a temporary hold").
+- Taut-line hitch steps — SL (around the stake; turns around the standing part inside the loop; then a half hitch outside the loop). Matches. AK (Midshipman's Hitch, alternate name Taut Line Hitch): slides up and down, holds when tightened; on Spectra, Dyneema and polypropylene "assume that a Midshipman's Hitch will just slide". Added "On slippery synthetic cord it may slide."
+- Trucker's hitch — AK (fixed loop in the standing part; tail round the hook below and through the loop; two half hitches below the loop); SM (secure with half hitches). Corrected: "around the anchor" now "around a second anchor such as a hook or stake" (the drawing labels the far end "Anchor" and the turn point a hook), "back up through", "below the loop". `knot-trucker` kept: anchor, fixed loop in the line, down around the hook, back up through the loop, pull down and tie off; matches AK. Caption "The loop works like a pulley, multiplying your pull" — AK: theoretical 3:1 but "rope is running over rope with considerable friction", real perhaps 1.6:1. Corrected.
+- Square knot steps — SL (right end over and under the left, then left end over and under the right). Matches. Heading "join two ends of the same size" and "Not for critical loads" — AK ("more lives lost as a result of using a Square Knot as a bend ... than from the failure of any other half dozen knots combined"; "Never use it for critical loads"; a stack of square knots "can capsize and pull undone"); SL and SM ("should not be used to hold a heavy load"). ATP A-8 and SL also give joining two ropes as a use; the more cautious source is used (D14). Corrected: heading now "bandages and bundles" (SL: bandages and packages), warn never to join two ropes that will take a load.
+- Sheet bend steps — AK (bight in the thicker rope; thinner rope through the bight and behind the tail and standing ends; tuck under itself); SL (bight in the thicker rope). Matches. Added: both short ends on the same side (AK; SL, SM "otherwise, the knot might be unreliable") and leave them long (AK: "For critical loads the ends must be left much longer"). ATP A-10: the single sheet bend may loosen when tension is released (not added; covered by "leave them long" and the warn).
+- Tags: none. Unchanged.
+
+### surv-ten-essentials and the ten-essentials checklist
+
+The app follows The Mountaineers' Ten Essential Systems (MTN): the topic's ten items were already that list. The topic now says so and names NYS DEC's additions.
+
+- Every trip, even a short one — DEC-CARD ("Carry these essentials on all hikes"); MTN (shelter "carried at all times"). Matches.
+- Navigation "map, compass, and a charged phone or GPS" — MTN (map, altimeter, compass, GPS device: phone with GPS app or dedicated GPS; PLB or satellite communicator; extra batteries or battery pack); NPS-10 (paper map as a backup; "Pack an extra battery for your phone"); DEC-10 (map, compass, GPS, extra batteries). Corrected to "map and compass, plus a phone with a GPS app or a GPS unit, and a spare battery". MTN's PLB or satellite communicator not added (do not expand); noted for the reviewer.
+- Headlamp with spare batteries — MTN; NPS-10 ("Headlamps are the recommended light source"). Matches.
+- Sun protection — NPS-10 (sunglasses, sunscreen, hats); MTN; DEC-10. Matches.
+- First aid kit "including a tourniquet" — MTN, NPS-10 and DEC-10 do not name a tourniquet; search found only retail and blog pages. Removed-unsourced. Open question D13.
+- Knife or multi-tool — MTN (knife plus repair kit); NPS-10 (knife, multi-tool). Matches.
+- Fire "lighter, ferro rod or waterproof matches, plus tinder" — MTN (matches, lighter and tinder or stove); NPS-10 (waterproof matches or lighter, fire starters); DEC-10. Ferro rod is in none of the lists. Corrected to "waterproof matches or a lighter, and fire starter". (The Fire topic covers the ferro rod.)
+- Emergency shelter — NPS-10 (tent, tarp, bivy sack or emergency space blanket); MTN. Matches.
+- Extra food, a day's worth — NPS-10 ("Pack an extra day's supply of food"). Matches.
+- Extra water and a way to treat more — MTN ("beyond minimum expectation or the means to purify"); NPS-10 (identify water you could treat). Matches (the topic keeps both, the more cautious reading of MTN's "or"). No treatment detail is given, so nothing to reconcile with surv-make-water-safe. DEC-10's "at least 2 liters per person" not added (do not expand).
+- Extra layers, insulation and rain gear — NPS-10 (rain shell, jacket, hat, gloves); DEC-10 (insulation/rain gear); MTN (extra clothes). Matches.
+- Tell someone your route — NPS-10; DEC-10. Matches, reworded to the sources ("where you're going and when you'll be back").
+- Whistle "three blasts carries farther than shouting" — UTAH ("A whistle carries farther than a voice and takes less effort"); IOWA (three blasts is a distress signal); DEC-10 (whistle in the emergency kit). Corrected wording: the source compares the whistle with the voice, not three blasts with shouting.
+- `kit` figure: ten icons labelled Navigation, Headlamp, Sun, First aid, Knife, Fire, Shelter, Food, Water, Layers; matches the list. Kept. Caption "Ten things that turn a bad night out into a survivable one" — no source. Removed-unsourced; new caption names the list it follows.
+- Link `c:ten-essentials` kept.
+- Checklist: item ids unchanged (saved ticks keep working). Each item's text is now the topic's list line without its full stop, so the items match the topic one to one and read on their own; the notes (capitalised copies, and the "Extra water" / "And a way to treat more." split) are gone. Summary now the topic's own summary sentence (the old "Tick off the ten things ..." was new copy). Sources: the topic and MTN. Draft flag removed.
+- Tags: where rural, woods. Unchanged.
+
+### Task 16 pages that would not open or were not used
+
+- armyrotc.mst.edu TC 3-25.26 PDF: client error; the armywriter.com copy of the same TC was used.
+- mountaineers.org "What Are The Ten Essentials" (three URLs from search): client error each time; the Mountaineers Olympia Branch PDF was used.
+- mountaineering.ie "Measuring Distance on the Ground": robots disallowed.
+- animatedknots.com/tautline-hitch-knot: client error; the Midshipman's Hitch page (alternate name Taut Line Hitch) was used.
+- faa.gov AIM change PDF (faa.gov/media/70471): opened; its extracted text did not include chapter 6. The AIM 6-2-6 web page and AIP GEN 3.6 show the ground-air code only as images.
+- skills.orienteering.ca skill 27: no title or publisher in the text, no pacing content; not cited.
+- sandiego.gov CERT "Knots" handout: copied from animatedknots.com, no publisher; not cited.
+- NYS DEC Hike Smart NY card: garbled OCR; used only for "Carry these essentials on all hikes".
+- Search for a source on the hand-width daylight method found only blogs and commercial pages (offgridweb, backpacker.com, artofmanliness and others); none used.
+
+### Task 16 diagrams removed in this batch
+
+Figure files are unchanged in figs/; only the topic fig block was removed.
+- nav-hand: the statement it draws (each finger between the sun and the horizon is about 15 minutes; four fingers about 1 hour) has no authoritative source, so the text and the figure were both removed. Not a label fix: it would need a sourced method first.
+
+No other diagram in this batch was removed. Kept: nav-shadow, nav-watch, nav-polaris, nav-aimoff, signal-ground, signal-mirror, knot-bowline, knot-trucker, kit.

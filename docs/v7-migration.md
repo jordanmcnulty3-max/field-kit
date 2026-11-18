@@ -271,3 +271,62 @@ every statement is in `docs/content-review.md`.
 - surv-dangerous-animals, snakebite. Old: "keep calm". New: "keep calm and still" (matches the snakebite protocol).
 - surv-dangerous-animals, tags. Old: rural, woods. New: town, rural, woods.
 - surv-field-dressing-game. "especially the brain and spinal cord" now "especially the brain, spinal cord and lymph nodes"; added "Cooking does not remove the risk of chronic wasting disease." and "Rabies is occasionally found in New York deer. It spreads through nervous tissue and saliva: avoid handling an animal that may be rabid, and never eat its meat." Source: NYS DOH, Harvesting, Preparing, and Eating Wild Game.
+
+### Task 16: navigation, signals, knots, ten essentials (2026-11-17)
+
+**surv-navigation-without-a-compass**
+
+- Heading. Old: "Shadow stick (works in both hemispheres)". New: "Shadow stick". The Southern Hemisphere text was deleted at conversion.
+- Shadow stick step 1. Old: "Push a straight stick upright into level ground and mark the tip of its shadow." New: "Push a straight stick upright into level ground where it casts a clear shadow, and mark the tip of its shadow. This first mark is always west." Sources: FM 21-76 p. 194; TC 3-25.26 8-17, 8-18.
+- Shadow stick step 2. Old: "Wait at least 15 minutes and mark the new shadow tip." New: "Wait at least 15 minutes, until the tip has moved a few inches, and mark the new shadow tip." Source: TC 3-25.26 8-17 (10 to 15 minutes, a few inches).
+- `nav-shadow` caption (corrected). Old: "The shadow tip moves east as the sun moves west. Most accurate around midday." New: "The first mark is always west. The line it gives is only approximate." Sources: FM 21-76 p. 194; TC 3-25.26. "Most accurate around midday": removed-unsourced.
+- Watch. Old: "Northern Hemisphere: point the hour hand at the sun. ..." New: "Northern Hemisphere: hold the watch flat and point the hour hand at the sun. ..." Source: FM 21-76 p. 195.
+- `nav-watch` caption (corrected). Old: "A rough method; least reliable near midday and close to the equator." New: "A rough method. It can be in error, more so the closer you are to the equator, and following it can lead you in circles." Sources: TC 3-25.26 8-21; FM 21-76 p. 195. "near midday": removed-unsourced.
+- North Star (corrected). Old: "follow the two stars at the end of the Big Dipper's cup ... Polaris is within about a degree of true north ..." New: "follow the two stars at the outer edge of the Big Dipper's cup ... Polaris is less than a degree from true north ..." Sources: FM 21-76 p. 196 (outer lip); StarDate (outer edge); TC 3-25.26 8-24 (less than 1 degree).
+- `nav-polaris` caption. Old: "The Big Dipper turns around Polaris through the night, but the pointers always point to it." New: "The Big Dipper turns around Polaris through the night. Its two pointer stars still point to it." Source: FM 21-76 p. 196.
+- Moon. Added: "Use this only as a rough check." (brief: say the method is rough). Rest matches FM 21-76 p. 196.
+- Pace count (corrected). Old: "Pace count: count each time your left foot lands. Most adults take 60 to 70 per 100 m on flat ground; measure yours on a known distance." New: "Pace count: count each time the same foot lands. Learn how many paces you take per 100 m by walking a measured course several times and taking the average. Your count changes on slopes and on sand, mud or snow, and it only ever gives an approximate distance." Source: ATP 3-50.21 7-83. "60 to 70 per 100 m": removed-unsourced.
+- Landmarks. Old: "Pick a landmark on your bearing, walk to it, then pick the next." New: "Pick a landmark on your line of travel, as far ahead as you can see, walk to it, then pick the next. Choose them as you go." Source: ATP 3-50.21 7-54, 7-55.
+- Aim off. Adds "by about 10 degrees". Sources: ATP 3-50.21 7-58; TC 3-25.26 8-15. Handrail and catching feature lines match Orienteering Ireland.
+- `nav-aimoff` caption (corrected). Old: "Aiming straight at a point usually misses it, and then you don't know which way to turn." New: "Small errors add up over distance. Aiming off tells you which way to turn when you reach the river." Source: ATP 3-50.21 7-52, 7-58. "usually misses": removed-unsourced.
+- Daylight left removed. Old: "Daylight left: hold your hand out at arm's length. Each finger between the sun and the horizon is roughly 15 minutes." and figure `nav-hand` with caption "Stop and make camp while you still have light to work with." Reason: removed-unsourced (no authoritative source found). New: "To see how much daylight is left, check today's sunset and last light in the Daylight and moon tool." with link `u:daylight`.
+
+**surv-signal-for-rescue**
+
+- Ground-to-air (corrected). Old: "Ground-to-air symbols, as large as you can make them with high contrast: V means you need assistance, X means you need medical help." New: "Ground-to-air symbols, in an open area and as large as you can make them, at least 6 m (about 20 ft) long and 1 m (about 3 ft) wide, in strong contrast with the ground: V means you need assistance, X means you need medical help." Sources: FM 21-76 p. 206 and Figure 19-6 (via aircav.com copy); FAA AIM 6-2-6 text (at least 10 ft).
+- `signal-ground` caption. Old: "Use logs, rocks, clothing or trampled snow against a contrasting background, in an open area." New: "Use branches, rocks, bright fabric or trampled snow against a contrasting background, in an open area." Sources: FAA AIM 6-2-6 text; Be Ready Utah.
+- Mirror (corrected). Old: "Use a mirror or your phone screen to flash sunlight at aircraft. Aim with two fingers in a V toward the target." New: "Flash sunlight at aircraft with a signal mirror, or with any shiny object such as a polished belt buckle. Aim through a V of two fingers held out toward the aircraft, and flash in threes. Don't keep the beam on the cockpit for more than a few seconds: it can blind the pilot." Sources: Be Ready Utah; FM 21-76 p. 203. "or your phone screen": removed-unsourced.
+- `signal-mirror` caption (corrected). Old: "Tilt the mirror until the spot of light falls on your fingers, then it's hitting the aircraft too." New: "Sight the aircraft through the V of your fingers and aim the reflected light through the V." Source: Be Ready Utah. The spot-on-fingers rule: removed-unsourced.
+- Added (brief, hostile setting): "In a hostile situation, remember that any signal can also show your position to people you don't want to find you." Source: FM 21-76 ch. 19.
+- Link `u:sos` (SOS light) added.
+
+**surv-knots**
+
+- Added section "Before you start" with warn: "These are camp knots. This topic does not teach knots for climbing, rappelling or holding a person's weight. Don't use these instructions for that." Source: Animated Knots (bowline climbing warning; rope disclaimer). Brief requirement; D14.
+- Bowline heading (corrected). Old: "Bowline: a fixed loop that won't slip or jam". New: "Bowline: a fixed loop that doesn't slip under load". Source: Animated Knots (does not slip or bind under load; unloaded it can work loose).
+- Bowline. Old: "Make a small loop in the standing part." New: "Make a small loop in the standing part, with the end side on top." Sources: Scouting America Webelos sheet and Scout Life ("overhand loop"); Pioneering merit badge terminology (overhand loop = running end on top).
+- `knot-bowline` caption (corrected). Old: "Leave a tail at least a hand's width long, and pull all four strands tight to set it." New: "Tie it before the rope takes a load. With no load on it, a bowline can work itself loose." Source: Animated Knots. The old caption: removed-unsourced.
+- Clove hitch. Added: "It can slip, so use it only for a temporary hold." Source: Animated Knots.
+- Taut-line hitch. Added: "On slippery synthetic cord it may slide." Source: Animated Knots (Midshipman's Hitch).
+- Trucker's hitch (corrected). Old: "Tie a fixed loop partway along the line, pass the end around the anchor and back through the loop, pull tight, and lock it with two half hitches." New: "Tie one end to an anchor. Tie a fixed loop partway along the line, pass the end around a second anchor such as a hook or stake and back up through the loop, pull tight, and lock it with two half hitches below the loop." Source: Animated Knots; matches the drawing's labels.
+- `knot-trucker` caption (corrected). Old: "The loop works like a pulley, multiplying your pull." New: "The loop works like a pulley and adds pulling power, but rope rubbing on rope loses much of it." Source: Animated Knots (theoretical 3:1, considerable friction).
+- Square knot (corrected). Old heading: "Square knot: join two ends of the same size"; old text ends "Not for critical loads." New heading: "Square knot: bandages and bundles"; text "... Use it to tie off bandages and bundles." and warn "Never use a square knot to join two ropes that will take a load. It can capsize and pull undone." Sources: Animated Knots; Scout Life. D14.
+- Sheet bend. Added: "Both short ends should finish on the same side of the knot, and leave them long." Sources: Animated Knots; Scout Life; Scouting magazine.
+
+**surv-ten-essentials**
+
+- Navigation (corrected). Old: "Navigation: map, compass, and a charged phone or GPS." New: "Navigation: map and compass, plus a phone with a GPS app or a GPS unit, and a spare battery." Sources: The Mountaineers; NPS Ten Essentials.
+- Headlamp. Old: "Headlamp, with spare batteries." New: "Headlamp and spare batteries." Wording only.
+- First aid (corrected). Old: "First aid kit, including a tourniquet." New: "First aid kit." "including a tourniquet": removed-unsourced (not in the Mountaineers, NPS or NYS DEC lists). D13.
+- Fire (corrected). Old: "Fire: lighter, ferro rod or waterproof matches, plus tinder." New: "Fire: waterproof matches or a lighter, and fire starter." Sources: NPS; The Mountaineers; NYS DEC. "ferro rod": not in any of the three lists.
+- Extra food. Old: "a day's worth beyond the plan." New: "a day's worth beyond your plan." Source: NPS (extra day's supply). Wording only.
+- Extra water. Old: "Extra water and a way to treat more." New: "Extra water, and a way to treat more." Wording only (comma so the checklist item reads on its own).
+- `kit` caption. Old: "Ten things that turn a bad night out into a survivable one." New: "The ten essential systems, as The Mountaineers list them." The old caption: removed-unsourced.
+- Added: "This list follows The Mountaineers' Ten Essential Systems. The NYS DEC list for New York hikers also adds a whistle, a signal mirror and insect protection." Sources: The Mountaineers; NYS DEC press release 27 June 2024.
+- Tell someone and whistle (corrected). Old: "Tell someone your route and when you'll be back, and add a whistle: three blasts carries farther than shouting." New: "Tell someone where you're going and when you'll be back. Carry a whistle: it carries farther than your voice and takes less effort, and three blasts is a distress signal." Sources: NPS; NYS DEC; Be Ready Utah; Iowa Hunter Safety Course.
+
+**ten-essentials checklist**
+
+- Summary. Old: "Tick off the ten things to pack for every trip into the backcountry." New: "Pack these on every trip into the backcountry, even a short one." (the topic's summary; the old line was new copy).
+- Items. Old: short item text plus a note copied from the topic ("Navigation" / "Map, compass, and a charged phone or GPS.", ..., "Extra water" / "And a way to treat more."). New: each item's text is the topic's list line without its full stop, and there are no notes. Item ids unchanged.
+- Sources: placeholder replaced by the topic and The Mountaineers; draft removed.

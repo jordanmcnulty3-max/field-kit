@@ -148,5 +148,6 @@ def test_draft_topics_keep_placeholder_source_and_all_topics_validate():
             assert t['sources'] == [{'name': 'Not yet source-checked', 'used': 'Converted from v6 text; checked in Tasks 13 to 16'}]
     keys = {'p:' + os.path.splitext(os.path.basename(p))[0] for p in glob.glob(os.path.join(ROOT, 'src', 'protocols', '*.json'))}
     keys |= {'c:' + os.path.splitext(os.path.basename(p))[0] for p in glob.glob(os.path.join(ROOT, 'src', 'checklists', '*.json'))}
+    keys |= {'u:daylight', 'u:sos'}   # survival tool keys, as build.py allows them
     errors, _warnings = validate_topics(topics, set(figs.F), keys)
     assert errors == []

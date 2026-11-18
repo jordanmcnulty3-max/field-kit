@@ -14,14 +14,22 @@
   "summary": "Bowline, clove hitch, taut-line hitch, trucker’s hitch, square knot and sheet bend.",
   "sections": [
     {
-      "h": "Bowline: a fixed loop that won’t slip or jam",
+      "h": "Before you start",
       "blocks": [
         {
-          "p": "Make a small loop in the standing part. Pass the end up through it, around behind the standing part, and back down through the small loop. “The rabbit comes out of the hole, around the tree, and back down the hole.”"
+          "warn": "These are camp knots. This topic does not teach knots for climbing, rappelling or holding a person’s weight. Don’t use these instructions for that."
+        }
+      ]
+    },
+    {
+      "h": "Bowline: a fixed loop that doesn’t slip under load",
+      "blocks": [
+        {
+          "p": "Make a small loop in the standing part, with the end side on top. Pass the end up through it, around behind the standing part, and back down through the small loop. “The rabbit comes out of the hole, around the tree, and back down the hole.”"
         },
         {
           "fig": "knot-bowline",
-          "cap": "Leave a tail at least a hand’s width long, and pull all four strands tight to set it."
+          "cap": "Tie it before the rope takes a load. With no load on it, a bowline can work itself loose."
         }
       ]
     },
@@ -29,7 +37,7 @@
       "h": "Clove hitch: quick tie-off to a pole",
       "blocks": [
         {
-          "p": "Wrap around the pole, cross over your first wrap, wrap again, and tuck the end under that second wrap."
+          "p": "Wrap around the pole, cross over your first wrap, wrap again, and tuck the end under that second wrap. It can slip, so use it only for a temporary hold."
         }
       ]
     },
@@ -37,7 +45,7 @@
       "h": "Taut-line hitch: adjustable tent and tarp lines",
       "blocks": [
         {
-          "p": "Pass the end around the anchor. Make two turns around the standing line inside the loop, then one more turn outside the loop. Slide the knot to tighten."
+          "p": "Pass the end around the anchor. Make two turns around the standing line inside the loop, then one more turn outside the loop. Slide the knot to tighten. On slippery synthetic cord it may slide."
         }
       ]
     },
@@ -45,19 +53,22 @@
       "h": "Trucker’s hitch: cinch a load or ridgeline tight",
       "blocks": [
         {
-          "p": "Tie a fixed loop partway along the line, pass the end around the anchor and back through the loop, pull tight, and lock it with two half hitches."
+          "p": "Tie one end to an anchor. Tie a fixed loop partway along the line, pass the end around a second anchor such as a hook or stake and back up through the loop, pull tight, and lock it with two half hitches below the loop."
         },
         {
           "fig": "knot-trucker",
-          "cap": "The loop works like a pulley, multiplying your pull."
+          "cap": "The loop works like a pulley and adds pulling power, but rope rubbing on rope loses much of it."
         }
       ]
     },
     {
-      "h": "Square knot: join two ends of the same size",
+      "h": "Square knot: bandages and bundles",
       "blocks": [
         {
-          "p": "Right over left and under, then left over right and under. Not for critical loads."
+          "p": "Right over left and under, then left over right and under. Use it to tie off bandages and bundles."
+        },
+        {
+          "warn": "Never use a square knot to join two ropes that will take a load. It can capsize and pull undone."
         }
       ]
     },
@@ -65,17 +76,28 @@
       "h": "Sheet bend: join two ropes of different sizes",
       "blocks": [
         {
-          "p": "Fold a bight in the thicker rope. Pass the thinner rope up through it, around behind both legs, and tuck it under itself."
+          "p": "Fold a bight in the thicker rope. Pass the thinner rope up through it, around behind both legs, and tuck it under itself. Both short ends should finish on the same side of the knot, and leave them long."
         }
       ]
     }
   ],
   "sources": [
     {
-      "name": "Not yet source-checked",
-      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+      "name": "Animated Knots by Grog: Bowline Knot (ABOK #1010), Clove Hitch (Rope-End), Midshipman's Hitch (also called Taut Line Hitch), Trucker's Hitch, Square Knot (ABOK #1402), Sheet Bend",
+      "used": "Bowline steps; does not slip or bind under load; tied or untied only with no load; unloaded it can work its way untied; use with great care when climbing. Clove hitch steps; it slips and can bind, not to be used alone. Taut-line hitch slides on slippery modern rope. Trucker's hitch: fixed loop in the standing part, tail round the hook below and through the loop, two half hitches below the loop; theoretical 3:1 but rope over rope has considerable friction. Square knot: never for critical loads, more lives lost using it as a bend than any other knots, it can capsize and pull undone. Sheet bend: bight in the thicker rope, thinner rope through and behind both ends, tuck under itself; tails on the same side; ends much longer for critical loads; rope activities are hazardous"
+    },
+    {
+      "name": "Scout Life (Scouting America), How to Tie the 7 Basic Scout Knots",
+      "used": "Square knot right end over and under, then left end over and under; for bandages and packages; not for heavy loads. Taut-line hitch: around the stake, turns around the standing part inside the loop, then a half hitch outside the loop. Clove hitch wraps crossing in an X. Bowline from a small overhand loop in the standing part. Sheet bend from a bight in the thicker rope; working ends on the same side"
+    },
+    {
+      "name": "Scouting America: Webelos Let's Camp requirement 5, Bowline Knot; Scouting magazine, How to Tie 10 Essential Scouting Knots (2017); Pioneering merit badge pamphlet terminology (scoutpioneering.com)",
+      "used": "Bowline: small overhand loop in the standing part, end up through, around behind the standing part and back down; rabbit, hole and tree saying; an overhand loop has the running end on top of the standing part. Trucker's hitch secured with half hitches; square knot not for heavy loads"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (September 2018), appendix A",
+      "used": "Bowline: loop in the standing part, running end up through, around the standing part and back down (A-13); single sheet bend may loosen when tension is released (A-10)"
     }
   ],
-  "reviewed": "2026-11-17",
-  "draft": true
+  "reviewed": "2026-11-17"
 }

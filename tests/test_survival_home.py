@@ -24,6 +24,7 @@ CAT_LABELS = ['Basics', 'Water and sanitation', 'Heat, shelter and winter', 'Com
 def home(page, app_url, storage=None, topics=TOPICS):
     boot(page, app_url, '#/survival', topics=topics, storage=storage)
     expect(page.locator('#survHome')).to_be_visible()
+    page.evaluate('FK.survival.tools = () => []; FK.survival.refreshHome()')   # the shipped SOS tool would add a Tools section; these tests are about the providers they add
 
 
 def cats(page):

@@ -60,7 +60,7 @@
     }
     for (const u of survList('tools')) {
       if (!str(u && u.name) || !str(u.label)) continue;
-      out.push({ key: 'u:' + u.name, title: u.label, kind: 'Tool', draft: false, fields: [field(W.title, u.label)] });
+      out.push({ key: 'u:' + u.name, title: u.label, kind: 'Tool', draft: false, fields: [field(W.title, u.label), ...(str(u.keywords) ? [field(W.keywords, u.keywords)] : [])] });
     }
     for (const [id, s] of Object.entries(SCREENS)) {
       out.push({ key: 'a:' + id, title: s.title, kind: 'App', draft: false, fields: [field(W.title, s.title), field(W.keywords, s.keywords)] });

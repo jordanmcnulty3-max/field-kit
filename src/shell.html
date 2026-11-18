@@ -468,6 +468,13 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 .sv-check input{flex:none;width:28px;height:28px;margin:0;accent-color:var(--c)}
 .sv-check:has(input:checked) .sv-ctext{text-decoration:line-through;color:var(--muted)}
 .sv-cnote{display:block;margin-top:2px;font-size:14px;color:var(--muted)}
+.sv-sos-btns{display:grid;gap:8px;margin:0 0 12px}
+.sv-sos-btns .btn{min-height:56px}
+.sv-light{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center;width:100%;margin:0;padding:0 16px calc(24px + env(safe-area-inset-bottom,0px));
+  border:0;border-radius:0;font:inherit;font-size:18px;font-weight:700;cursor:pointer}
+.sv-light[hidden]{display:none}
+.sv-light[data-on="1"]{background:#fff;color:#000}
+.sv-light[data-on="0"]{background:#000;color:#fff}
 .sv-foot{margin-top:16px;padding-top:8px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 .sv-foot h3{font-size:14px;margin:8px 0 4px}
 .sv-foot p{margin:4px 0}

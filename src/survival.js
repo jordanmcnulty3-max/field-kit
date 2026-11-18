@@ -50,7 +50,7 @@
     return FK.store.set('checks', out);
   }
 
-  /* ---------- Page providers: Tasks 8 to 10 draw checklists and tools at #/survival/list/<id> and #/survival/tool/<name> ---------- */
+  /* ---------- Page providers: checklists are drawn here, tools by src/survival-tools.js (#/survival/list/<id>, #/survival/tool/<name>) ---------- */
   const providers = { list: [], tool: [] };
   function registerPage(segment, fn) {
     if (Object.hasOwn(providers, segment) && typeof fn === 'function') providers[segment].push(fn);
@@ -88,7 +88,7 @@
   function headHTML(key, t) {
     const pinned = FK.pins.has(key);
     return '<div class="sv-head"><h2 class="sv-title" id="svTitle" tabindex="-1">' + esc(t.title) + '</h2>' + draftTag(t) +
-      '<button type="button" class="sv-pin" data-act="pin" aria-pressed="' + pinned + '" aria-label="Pin this ' + (key[0] === 'c' ? 'checklist' : 'topic') + '">' + (pinned ? '★' : '☆') + '</button></div>';
+      '<button type="button" class="sv-pin" data-act="pin" aria-pressed="' + pinned + '" aria-label="Pin this ' + (key[0] === 'c' ? 'checklist' : key[0] === 'u' ? 'tool' : 'topic') + '">' + (pinned ? '★' : '☆') + '</button></div>';
   }
   function footHTML(t) {
     const sources = (Array.isArray(t.sources) ? t.sources : []).filter(s => s && filled(s.name));
@@ -318,10 +318,12 @@
     if (t) drawTopic(t); else redirect(r);
   }
 
-  /* Open a key: s:<topicId> or c:<checklistId> (u: arrives with Tasks 9 and 10). Returns false for anything it cannot open. */
+  /* Open a key: s:<topicId>, c:<checklistId> or u:<toolName>. Returns false for anything it cannot open. */
+  const toolNamed = name => FK.survival.tools().some(t => t.name === name);
   function open(key, opts) {
     const m = typeof key === 'string' ? KEY.exec(key) : null;
-    const path = !m ? null : m[1] === 's' && topic(m[2]) ? '/survival/' + m[2] : m[1] === 'c' && checklist(m[2]) ? '/survival/list/' + m[2] : null;
+    const path = !m ? null : m[1] === 's' && topic(m[2]) ? '/survival/' + m[2] : m[1] === 'c' && checklist(m[2]) ? '/survival/list/' + m[2]
+      : m[1] === 'u' && toolNamed(m[2]) ? '/survival/tool/' + m[2] : null;
     if (!path) return false;
     FK.route.go(path, opts && opts.replace ? { replace: true } : undefined);
     return true;
@@ -376,6 +378,7 @@
   function pageKey(r) {
     if (r.tab !== 'survival') return null;
     if (r.parts[0] === 'list') return r.parts.length === 2 && checklist(r.parts[1]) ? 'c:' + r.parts[1] : null;
+    if (r.parts[0] === 'tool') return r.parts.length === 2 && toolNamed(r.parts[1]) ? 'u:' + r.parts[1] : null;
     return r.parts.length === 1 && topic(r.parts[0]) ? 's:' + r.parts[0] : null;
   }
   const shownChecklist = () => { const k = pageKey(FK.route.current()); return k && k[0] === 'c' ? checklist(k.slice(2)) : null; };
@@ -388,7 +391,9 @@
   });
   FK.on('route', onRoute);
 
-  FK.survival = { topics, topic, checklists, checklist, ticks, open, renderHome, refreshHome: renderHome, registerPage, homeItems, filter };
+  /* tools() and the tool pages come from src/survival-tools.js, which loads after this file; headHTML and recent are shared with it. */
+  FK.survival = { topics, topic, checklists, checklist, ticks, open, renderHome, refreshHome: renderHome, registerPage, homeItems, filter,
+    tools: () => [], headHTML };
   // The router's first route ran before this file loaded; wait until the rest of the script (page providers) has loaded too.
   queueMicrotask(() => onRoute(FK.route.current()));
 })();

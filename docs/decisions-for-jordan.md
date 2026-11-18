@@ -311,8 +311,8 @@ Source disagreements found while checking the Survival topics. Each says what th
    the protocol: at least 2 days after symptoms stop (CDC), and 3 days if the group can manage it (Minnesota); the
    24-hour figure is not in the text. The reviewer recommends 3 days (72 hours) everywhere, protocol included, as the
    more cautious figure that meets both CDC and Minnesota. Say whether to move the whole app, protocol and topic, to
-   3 days. (Places to change: surv-stomach-illness-in-a-group doFirst, the warning in section 5 and the whole-group rule
-   in section 8; and p:vomiting-diarrhea steps 8 and 10 and its don'ts.)
+   3 days. (Places to change: surv-stomach-illness-in-a-group summary, doFirst, the warning in section 5 and the whole-group rule
+   in section 8 (section 3 now points to the food rule without a number); and p:vomiting-diarrhea steps 8 and 10 and its don'ts.)
 33. **Bleach for vomit and diarrhea (surv-clean-and-disinfect) — Water pack Task 7.** CDC (norovirus): 1,000 to 5,000
    ppm, "5 to 25 tablespoons of household bleach [5% to 8%] per gallon", at least 5 minutes. CDC (evacuation centers,
    archived 2019): 1,000 ppm, 5 tablespoons of 6% per gallon, keep wet 10 minutes if possible. Minnesota Department of

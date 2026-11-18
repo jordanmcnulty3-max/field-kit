@@ -20,8 +20,8 @@
     },
     {
       "id": "heat-source",
-      "text": "At least one emergency heat source that is vented to the outside, such as a fireplace or wood stove",
-      "note": "Never an oven, gas range, grill or camp stove. Have the chimney inspected each year."
+      "text": "At least one emergency heat source, such as a fireplace or wood stove vented to the outside",
+      "note": "CDC: combustion heaters only if properly vented. Kerosene and propane space heaters are not vented: see Kerosene and propane heaters for the only conditions to run one. Never an oven, gas range, grill or camp stove. Have the chimney inspected each year."
     },
     {
       "id": "firewood",
@@ -69,7 +69,7 @@
     {
       "id": "flashlights",
       "text": "Flashlights or battery lanterns, with extra batteries",
-      "note": "Not candles."
+      "note": "Not candles, and never a fuel lantern indoors."
     },
     {
       "id": "radio",
@@ -125,8 +125,15 @@
     {
       "name": "Store fuel safely (surv-store-fuel, checked)",
       "used": "Approved, labelled containers outside the house; kerosene only in a kerosene can, never one that held gasoline (CPSC); A-B-C extinguisher (US Fire Administration)"
+    },
+    {
+      "name": "American Red Cross, Winter Storm Preparedness Checklist (November 2022)",
+      "used": "Consider using an indoor thermometer"
+    },
+    {
+      "name": "Kerosene and propane heaters (surv-portable-heaters, checked); Carbon monoxide and burning fuel indoors (surv-carbon-monoxide, checked)",
+      "used": "Unvented heaters only under that topic's conditions; never a fuel lantern indoors (CDC)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

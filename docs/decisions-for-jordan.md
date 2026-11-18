@@ -393,27 +393,36 @@ Source disagreements found while checking the Survival topics. Each says what th
    30 days without a stabilizer (one made for ethanol gasoline). NYS DOH: don't burn last season's kerosene. Today: the
    topic says no New York limit was found and gives Maine's 30 days as the only figure. Say if someone in the group can
    ask the local fire marshal or code office for the limit, so it can be added from that source.
-43. **Babies in a cold house (surv-heat-out, home-heat-kit) — Heat pack Task 5.** CDC: infants under 1 year "should
-   never sleep in a cold room". University of Missouri Extension (GH5117): "Bed is the warmest place to be with other
-   family members and lots of covers." Safe to Sleep (NICHD): only a fitted sheet in the baby's sleep area, no
-   comforters, quilts, pillows or blankets; a wearable blanket or extra layer instead; too many layers overheat a baby
-   (higher SIDS risk); couches and armchairs never; room sharing near but not in your bed is safer than bed-sharing.
-   No source opened says how to keep a baby warm at night in a house with no heat. Today: the baby sleeps in the warm
-   room, in its own sleep space, in a wearable blanket or extra layer, never in an adult bed under the family's covers
-   (Missouri's line says "Not for babies"). Worth asking a medical professional what the group should do if the warm
-   room itself gets cold overnight.
-44. **Wood stove overnight (surv-wood-stoves-fireplaces) — Heat pack Task 5.** US Fire Administration (Fireplace and
-   Wood Stove Safety card): "Put the fire out before you go to sleep or leave your home." Indiana Department of Homeland
-   Security: extinguish fireplace fires before going to bed. CSIA: be sure the fire is fully extinguished before turning
-   in. Penn State Extension describes banking a wood stove overnight on a bed of coals with the damper partly closed, and
-   the US Department of Energy says oak, hickory and pine "will burn overnight". Today: put it out before sleep (USFA,
-   the most cautious), and the text names Penn State's banking as described but not followed. With a stove as the only
-   heat for weeks, this rule makes the nights cold. Say if the group wants a banked stove allowed overnight, and on what
-   conditions (CO and smoke alarms, someone awake, damper never fully closed).
+43. **Babies in a cold house (surv-heat-out, home-heat-kit) — Heat pack Task 5, revised in the fix round.** CDC (During &
+   After a Winter Storm): infants under 1 year "should never sleep in a cold room"; remove pillows and other soft bedding;
+   dress babies in footed pajamas, one-piece wearable blankets or sleep sacks; keep the home warm or stay elsewhere; "In
+   an emergency, you can keep your baby warm using your own body heat. If you must sleep, take precautions to prevent
+   rolling on or smothering your baby." Safe to Sleep (NICHD): only a fitted sheet in the sleep area; room sharing near
+   but not in your bed is safer than bed-sharing; bed-sharing is very high risk on a soft surface (waterbed, old
+   mattress, couch, armchair), with a very tired, drowsy, drinking or impaired adult, or an adult who smokes; high risk
+   under 4 months or with a non-parent caregiver; higher than normal if born before 37 weeks or small, or with pillows or
+   blankets. University of Missouri Extension: bed is warmest "with other family members and lots of covers". The two
+   federal sources pull against each other in exactly the no-heat case. Today: the baby sleeps in the warm room in its
+   own space, in warmer sleepwear, no soft bedding; stay elsewhere if the room can't be kept warm (CDC); CDC's body-heat
+   line is quoted as the emergency fallback with Safe to Sleep's risk list beside it. Worth asking a medical professional
+   which the group should follow when the warm room itself gets cold overnight.
+44. **Wood stove overnight (surv-wood-stoves-fireplaces) — Heat pack Task 5, revised in the fix round.** US Fire
+   Administration card and FEMA (Chimney Fire Precautions, 2020): "Put the fire out before you go to sleep or leave your
+   home." Indiana Department of Homeland Security and CSIA say the same. Penn State Extension describes banking a wood
+   stove overnight on a bed of coals with the damper partly closed; DOE says oak, hickory and pine "will burn overnight";
+   CSIA warns that closing the damper or air inlets too soon or too much, or overloading the firebox for a longer burn,
+   builds creosote. No source opened gives a method for putting a stove fire out; the text says stop adding wood well
+   before bed so it burns down (Oklahoma State Extension: make sure it has died down), keep the damper open until the
+   embers are cold (MA DFS), never water in the chimney (Missouri), sleep in the warm room with sleeping bags, and stay
+   elsewhere if a baby or older person can't be kept warm (CDC). Today: put it out (USFA, the most cautious); banking is
+   described and not followed. With a stove as the only heat for weeks, the nights will be cold. If the group wants a
+   banked stove allowed, it would need to agree conditions, for example: working CO alarm where people sleep and smoke
+   alarm in the room, an adult awake, the flue damper never fully closed, no overloading the firebox, and the chimney
+   checked often for creosote (Missouri: airtight stoves at least monthly). Suggest asking a local fire safety officer.
 45. **When the house is too cold to stay (surv-heat-out) — Heat pack Task 5.** No source opened gives an indoor
    temperature at which to leave. CDC: "If you're not able to keep your home warm, make temporary arrangements to stay
    elsewhere"; infants under 1 never sleep in a cold room; over 65, check the temperature often. National Institute on
-   Aging (2009): homes at 60 to 65°F can trigger hypothermia in older people. NYS Department of Health: keep indoor
+   Aging (2009): homes at 60 to 65°F can trigger hypothermia in older people; set the thermostat to at least 68 to 70°F. NYS Department of Health: keep indoor
    temperatures above 68°F for the very young, the elderly and people with health problems (and the heat no lower than
    55°F for pipes). Today: the topic gives CDC's rule and quotes those figures, and says no source gives a leave-at
    temperature. Say if the group wants its own line (for example, move babies and older people out when the warm room
@@ -427,3 +436,15 @@ Source disagreements found while checking the Survival topics. Each says what th
    the doors and air intakes only if safe; never water into the chimney; have it checked; no reuse until inspected. The
    extinguisher and baking soda step is left out, in line with Store fuel safely's extinguisher rule (only a small fire in
    one object, with a clear way out). Say if the group wants Missouri's extinguisher step added.
+47. **Paper to start a fire (surv-wood-stoves-fireplaces) — Heat pack Task 5 fix round.** EPA Burn Wise: start fires with
+   "newspaper, dry kindling, or all natural fire starters". US Fire Administration card: "Do not burn paper in your
+   fireplace or wood stove." CDC: "Do not burn paper in a fireplace." Today: dry kindling or natural fire starters, no
+   paper even to start it (USFA and CDC, the more cautious). Say if the group wants a little newspaper allowed to light
+   kindling, never as fuel.
+48. **Restarting a drained hot-water heating system (surv-unheated-house) — Heat pack Task 5 fix round.** Purdue
+   Extension explains draining the heating pipes and says "Consult a heating contractor about adding antifreeze to your
+   system"; it gives no restart steps. University of Wisconsin Extension warns of an explosion if a water heater is left
+   on without water, but says nothing of boilers. No agency or extension source on refilling or restarting a boiler was
+   found (searches returned only trade forums). Today: the app's own reading, said as such: don't fire the boiler until
+   the system has been refilled, and have a heating contractor refill and restart it. Say if someone in the group knows
+   the group's boilers well enough to write restart steps from their manuals.

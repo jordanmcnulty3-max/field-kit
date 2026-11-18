@@ -27,7 +27,7 @@
   "summary": "Pick one small room, close it off and heat only that. Dress in layers, use blankets and sleeping bags, and never heat with an oven, grill or generator indoors. Babies must never sleep in a cold room, and older people chill faster. If you can’t keep the house warm, go somewhere with heat.",
   "doFirst": [
     "Pick one small room on the sheltered side of the house, with few windows, and heat only that. Close off the rest (University of Missouri Extension, CDC).",
-    "Never heat the house with an oven or gas range, and never run a generator, grill or camp stove indoors (CDC). See Carbon monoxide.",
+    "Never heat the house with an oven or gas range, and never run a generator, grill, camp stove, charcoal or a fuel lantern indoors (CDC). See Carbon monoxide.",
     "Babies under 1 year must never sleep in a cold room (CDC). Check older people often: they make less body heat (CDC).",
     "Put on layers, a hat and socks, and use blankets and sleeping bags (FEMA, National Institute on Aging).",
     "Can’t keep the house warm? Go somewhere with heat: a relative’s or friend’s home, or a public building or warming center (CDC, FEMA, Red Cross)."
@@ -47,11 +47,15 @@
           ]
         },
         {
-          "p": "Any fireplace, wood stove or other fuel-burning heater you use there must be vented to the outside (CDC). Read its topic before you light it."
+          "p": "CDC: use fireplaces, wood stoves or other combustion heaters only if they are properly vented to the outside. Kerosene and propane space heaters are not vented: federal and New York agencies advise against using them indoors. If one is all you have, use it only under every condition in Kerosene and propane heaters. Read the topic for any heat source before you light it."
         },
         {
           "link": "s:surv-carbon-monoxide",
           "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "link": "s:surv-portable-heaters",
+          "label": "Kerosene and propane heaters"
         }
       ]
     },
@@ -63,7 +67,7 @@
             "Wear several layers of loose-fitting, lightweight, warm clothing rather than one heavy layer (FEMA).",
             "Indoors, wear long underwear under your clothes, socks and slippers, and a hat or cap. Put a blanket or afghan over your legs and shoulders (National Institute on Aging).",
             "Keep extra clothing, blankets or sleeping bags ready (FEMA).",
-            "Bed is the warmest place, with other family members and lots of covers (University of Missouri Extension). Not for babies: see below.",
+            "Bed is the warmest place, with other family members and lots of covers (University of Missouri Extension). Babies are different: see below.",
             "Drink plenty of warm fluids, but avoid caffeine and alcohol (Red Cross). Eat and drink regularly: your body needs fuel to make heat (Priorities).",
             "Change out of wet clothes into dry ones (New York State Division of Homeland Security and Emergency Services)."
           ]
@@ -84,7 +88,7 @@
         {
           "list": [
             "Babies: infants less than 1 year old should never sleep in a cold room, because they lose body heat more easily than adults (CDC). CDC lists babies sleeping in cold bedrooms among those most at risk of hypothermia. A baby with hypothermia may have bright red, cold skin and very low energy (New York State Division of Homeland Security and Emergency Services; Hypothermia protocol).",
-            "Older adults make less body heat (CDC). Older adults without enough food, clothing or heating are among those most at risk (CDC). Even mildly cool homes, 60 to 65°F (16 to 18°C), can bring on hypothermia in older people; diabetes and some medicines, including some over-the-counter cold remedies, raise the risk (National Institute on Aging).",
+            "Older adults make less body heat (CDC). Older adults without enough food, clothing or heating are among those most at risk (CDC). Even mildly cool homes, 60 to 65°F (16 to 18°C), can bring on hypothermia in older people; diabetes and some medicines, including some over-the-counter cold remedies, raise the risk. Set the thermostat to at least 68 to 70°F (20 to 21°C) (National Institute on Aging).",
             "If you are over 65, keep an easy-to-read thermometer where you see it often, and check the temperature in your home often during very cold weather (CDC).",
             "New York State Department of Health: keep indoor temperatures above 68°F (20°C) to protect the very young, the elderly and people with health problems.",
             "Check on family and neighbors to make sure they are staying warm, especially anyone older or living alone (Red Cross)."
@@ -100,15 +104,18 @@
       "h": "Babies: warm and safe asleep",
       "blocks": [
         {
-          "warn": "Keep the baby in the warm room, but in their own sleep space. Never let a baby sleep on a couch or armchair (Safe to Sleep, National Institutes of Health)."
+          "p": "CDC: infants less than 1 year old should never sleep in a cold room. Keep the baby in the warm room, and keep that room warm. If you can’t keep it warm, make temporary arrangements to stay elsewhere (CDC)."
         },
         {
           "list": [
-            "Nothing in the baby’s sleep area but a fitted sheet: keep comforters, quilts, pillows and blankets out of it (Safe to Sleep).",
-            "Dress the baby in a wearable blanket or an extra layer of clothing to keep them warm without adding anything to the sleep area (Safe to Sleep).",
+            "Remove pillows and other soft bedding: they raise the risk of smothering and SIDS (CDC). Nothing in the baby’s sleep area but a fitted sheet: no comforters, quilts, pillows or blankets (Safe to Sleep, National Institutes of Health).",
+            "Dress the baby in warmer clothing such as footed pajamas, a one-piece wearable blanket or a sleep sack (CDC), to keep them warm without adding anything to the sleep area (Safe to Sleep).",
             "Don’t overdo it: too many layers of clothes and bedding for the room can overheat a baby, and overheated babies are at higher risk of SIDS. No hat indoors while asleep (Safe to Sleep).",
-            "Room sharing, with the baby’s sleep space near but not in your bed, is safer than sharing your bed. Sharing an adult bed, couch or armchair with a baby can be risky (Safe to Sleep)."
+            "The baby’s own sleep space, near but not in your bed, is safer than sharing your bed (Safe to Sleep)."
           ]
+        },
+        {
+          "warn": "In an emergency, CDC says, you can keep your baby warm using your own body heat; if you must sleep, take precautions so you don’t roll onto or smother the baby. Safe to Sleep says sharing an adult bed with a baby is very high risk on a soft surface (a waterbed, an old mattress, a couch or an armchair), when the adult is very tired, drowsy from medicine, has been drinking or is otherwise less able to respond, or smokes or uses tobacco at all. It is high risk if the baby is under 4 months old or the adult is not the baby’s parent, and higher than normal if the baby was born early (before 37 weeks) or small, or there are pillows or blankets in the bed. Never sleep with a baby on a couch or armchair."
         }
       ]
     },
@@ -126,7 +133,7 @@
           ]
         },
         {
-          "p": "No source opened gives an indoor temperature at which to leave. The figures above are what they give: hypothermia in older people at 60 to 65°F (16 to 18°C) (National Institute on Aging), and above 68°F (20°C) for babies, older people and people with health problems (New York State Department of Health). Babies under 1 year should never sleep in a cold room (CDC)."
+          "p": "No source opened gives an indoor temperature at which to leave. The figures above are what they give: hypothermia in older people at 60 to 65°F (16 to 18°C), and a thermostat at least 68 to 70°F (20 to 21°C) (National Institute on Aging), and above 68°F (20°C) for babies, older people and people with health problems (New York State Department of Health). Babies under 1 year should never sleep in a cold room (CDC)."
         },
         {
           "link": "s:surv-unheated-house",
@@ -138,11 +145,15 @@
       "h": "In another building",
       "blocks": [
         {
-          "p": "The same rules hold in any building you shelter in: one small room on the sheltered side, with few windows, closed off from the rest (University of Missouri Extension). Anything that burns fuel must be vented outside the building (University of Missouri Extension, CDC)."
+          "p": "The same rules hold in any building you shelter in: one small room on the sheltered side, with few windows, closed off from the rest (University of Missouri Extension). University of Missouri Extension: any device that burns fuel must be vented outside. CDC: use fireplaces, wood stoves or other combustion heaters only if they are properly vented to the outside. For a kerosene or propane space heater, see Kerosene and propane heaters."
         },
         {
           "link": "s:surv-carbon-monoxide",
           "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "link": "s:surv-portable-heaters",
+          "label": "Kerosene and propane heaters"
         }
       ]
     },
@@ -164,6 +175,7 @@
             "Any fuel you have delivered: refill before you run out. Fuel carriers may not reach you for days after a winter storm (National Weather Service).",
             "Oil: dealers advise not letting the tank drop below a quarter. Running low can pull sediment from the bottom of the tank into the fuel line and burner and clog them (Massachusetts Department of Energy Resources).",
             "Propane: don’t run out. When the tank runs out, pilot lights go out, and serious hazards, including fire or explosion, can result (propane safety sheet from Mississippi’s State Fire Marshal’s office).",
+            "Oil burner that ran out of fuel: no source opened says how to restart it. Call your oil dealer or a heating technician.",
             "Natural gas comes by pipe. Gas leaks and shutting off gas are not covered in this topic."
           ]
         },
@@ -194,7 +206,7 @@
       "h": "Heat sources",
       "blocks": [
         {
-          "warn": "Turning on the stove for heat is not safe (CDC). Use fireplaces, wood stoves and other fuel-burning heaters only if they are vented to the outside (CDC)."
+          "warn": "Turning on the stove for heat is not safe (CDC). CDC: use fireplaces, wood stoves or other combustion heaters only if they are properly vented to the outside. Kerosene and propane space heaters are not vented: federal and New York agencies advise against using them indoors, and Kerosene and propane heaters gives the only conditions under which to run one."
         },
         {
           "p": "Each heat source has its own topic. Read it before you use it."
@@ -233,7 +245,7 @@
   "sources": [
     {
       "name": "CDC, Safety Guidelines: During & After a Winter Storm (last reviewed August 25, 2026)",
-      "used": "Close off unneeded rooms; towels or rags in cracks under doors; avoid opening doors or windows; close draperies or cover windows with blankets at night; turning on the stove for heat is not safe; fireplaces, wood stoves or other combustion heaters only if vented outside; never generators, grills or camp stoves inside; infants under 1 should never sleep in a cold room; older adults make less body heat; over 65 check the temperature often; if you can't keep your home warm, stay elsewhere"
+      "used": "Close off unneeded rooms; towels or rags in cracks under doors; avoid opening doors or windows; close draperies or cover windows with blankets at night; turning on the stove for heat is not safe; fireplaces, wood stoves or other combustion heaters only if vented outside; never generators, grills or camp stoves inside; infants under 1 should never sleep in a cold room; older adults make less body heat; over 65 check the temperature often; if you can't keep your home warm, stay elsewhere; remove pillows and other soft bedding (smothering, SIDS); dress babies in footed pajamas, one-piece wearable blankets or sleep sacks; in an emergency keep your baby warm with your own body heat, taking precautions against rolling on or smothering the baby; use fireplaces, wood stoves or other combustion heaters only if properly vented"
     },
     {
       "name": "CDC, Preventing Hypothermia (last reviewed August 25, 2026)",
@@ -265,7 +277,7 @@
     },
     {
       "name": "National Institute on Aging (NIH), Hypothermia: A Cold Weather Risk for Older People (news release, January 16, 2009)",
-      "used": "Mildly cool homes at 60 to 65 degrees can trigger hypothermia in older people; diabetes and some medicines, including some over-the-counter cold remedies; long underwear, socks and slippers, hat indoors, blanket or afghan over legs and shoulders"
+      "used": "Mildly cool homes at 60 to 65 degrees can trigger hypothermia in older people; diabetes and some medicines, including some over-the-counter cold remedies; long underwear, socks and slippers, hat indoors, blanket or afghan over legs and shoulders; set your thermostat to at least 68 to 70 degrees"
     },
     {
       "name": "New York State Department of Health, Cold Weather Tips (undated)",
@@ -277,7 +289,7 @@
     },
     {
       "name": "Safe to Sleep (Eunice Kennedy Shriver National Institute of Child Health and Human Development, NIH), Ways to Reduce Baby's Risk (undated)",
-      "used": "Only a fitted sheet in the sleep area; no comforters, quilts, pillows or blankets; wearable blanket or extra layer instead; overheating from too many layers raises SIDS risk; no hats indoors; couches and armchairs never safe; room sharing near but not in your bed safer than bed-sharing"
+      "used": "Only a fitted sheet in the sleep area; no comforters, quilts, pillows or blankets; wearable blanket or extra layer instead; overheating from too many layers raises SIDS risk; no hats indoors; couches and armchairs never safe; room sharing near but not in your bed safer than bed-sharing; bed-sharing very high risk on soft surfaces, with a very tired, drowsy, drinking or impaired adult, or an adult who smokes or uses tobacco; high risk under 4 months or with a caregiver other than a parent; higher-than-normal risk if born preterm (before 37 weeks) or at low birth weight, or with pillows or blankets"
     },
     {
       "name": "National Weather Service, Prepare! Don't Let a Winter Storm Take You by Surprise",
@@ -296,14 +308,17 @@
       "used": "Never turn the gas on at the propane tank yourself; a qualified professional must check for leaks when turning the gas on"
     },
     {
-      "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide, checked), quoting the New York State Division of Consumer Protection (December 21, 2022)",
-      "used": "Keep furnace vents clear of ice and snow; a blocked vent can let CO build up and newer furnaces may shut off completely"
+      "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide, checked)",
+      "used": "New York State Division of Consumer Protection (December 21, 2022): keep furnace vents clear of ice and snow; a blocked vent can let CO build up and newer furnaces may shut off completely. CDC, CPSC: never charcoal or a fuel lantern indoors"
     },
     {
       "name": "Priorities (surv-priorities, checked)",
       "used": "Eat and drink regularly: your body needs fuel to make heat"
+    },
+    {
+      "name": "Kerosene and propane heaters (surv-portable-heaters, checked)",
+      "used": "Federal and New York agencies advise against unvented heaters indoors; the conditions under which to run one"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

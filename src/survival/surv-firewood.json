@@ -177,9 +177,10 @@
           "list": [
             "Untreated firewood may not be moved more than 50 miles (80 km), in a straight line, from where it was cut.",
             "Firewood heat-treated to 160°F (71°C) for 75 minutes and labelled “New York Approved Heat-Treated Firewood/Pest Free” can be moved anywhere.",
-            "Wood you cut for your own use needs a Self-Issued Certificate of Origin (a form from DEC).",
+            "Wood burned on the property where it was cut needs no papers, unless it is carried on public roads from one part of the property to another. Untreated wood you cut for your own use and move elsewhere, within 50 miles, needs a Self-Issued Certificate of Origin (a form from DEC).",
             "Bought untreated firewood needs a receipt or label that shows where it came from.",
-            "Untreated firewood may not be brought into New York from another state or country."
+            "Untreated firewood may not be brought into New York from another state or country.",
+            "Where a pest quarantine is stricter than this rule, the stricter one applies."
           ]
         },
         {
@@ -223,7 +224,7 @@
     },
     {
       "name": "New York State Department of Environmental Conservation, Firewood and Invasive Pests (undated; regulation of 2009)",
-      "used": "Covers all wood destined for fuel; untreated firewood no more than 50 miles (linear) from its source; heat treatment 71°C (160°F) for 75 minutes; label wording; Self-Issued Certificate of Origin for personal use; receipt or label for purchased firewood; no untreated firewood imported into New York"
+      "used": "Covers all wood destined for fuel; untreated firewood no more than 50 miles (linear) from its source; heat treatment 71°C (160°F) for 75 minutes; label wording; Self-Issued Certificate of Origin for personal use; receipt or label for purchased firewood; no untreated firewood imported into New York; no documentation for firewood used on the property where it was cut unless transported on public roads; follow the more restrictive of a quarantine and the regulation"
     },
     {
       "name": "US Fire Administration, Fireplace and Wood Stove Safety (card, undated)",
@@ -234,6 +235,5 @@
       "used": "On New York state land, only dead and down wood"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

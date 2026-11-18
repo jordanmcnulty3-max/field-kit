@@ -20,15 +20,19 @@
     "bank the fire",
     "stovepipe",
     "what not to burn",
-    "kindling"
+    "kindling",
+    "smoke in house",
+    "stove smoking",
+    "fire in chimney",
+    "put out stove"
   ],
-  "summary": "Have the chimney checked, open the damper before you light it, keep anything that can burn 3 feet away, and burn only dry, seasoned wood, never trash or liquids. Put ashes in a lidded metal can outside. Fire safety agencies say to put the fire out before you sleep. A chimney fire roars: get everyone out and call for help.",
+  "summary": "Have the chimney checked, open the damper before you light it, keep anything that can burn 3 feet away, and burn only dry, seasoned wood, never trash, paper or liquids. Put ashes in a lidded metal can outside. Fire safety agencies say to put the fire out before you sleep. A chimney fire roars: get everyone out and call for help.",
   "doFirst": [
     "Chimney fire (a loud roar, or flames and sparks from the top of the chimney)? Get everyone out and call 911 or the fire department if you can (Crystal Lakes Fire Protection District, University of Missouri Extension).",
-    "Open the damper before you light a fire, and never close it until the fire is out and the embers are cold (Massachusetts Department of Fire Services).",
+    "Open the damper before you light a fire, and never close it until the fire is out and the embers are cold (Massachusetts Department of Fire Services). In a chimney fire, see the steps below.",
     "Keep anything that can burn at least 3 feet (1 m) from the fireplace or stove (US Fire Administration).",
     "Never start or revive a fire with gasoline, kerosene, lighter fluid or any other flammable liquid (EPA, University of Missouri Extension).",
-    "Put ashes in a metal can with a lid, outside, at least 10 feet (3 m) from the house (US Fire Administration)."
+    "Put ashes in a metal can with a tight metal lid, outside, at least 10 feet (3 m) from the house, never in the garage or on a porch (US Fire Administration, Massachusetts Department of Fire Services)."
   ],
   "sections": [
     {
@@ -62,7 +66,7 @@
       "blocks": [
         {
           "list": [
-            "Start the fire with newspaper, dry kindling or natural fire starters (EPA). Never use gasoline, kerosene, charcoal lighter or any other flammable liquid (EPA, University of Missouri Extension, Massachusetts Department of Fire Services, Chimney Safety Institute of America).",
+            "Start the fire with dry kindling or natural fire starters (EPA). Don’t burn paper, not even to start it (US Fire Administration, CDC). Never use gasoline, kerosene, charcoal lighter or any other flammable liquid (EPA, University of Missouri Extension, Massachusetts Department of Fire Services, Chimney Safety Institute of America).",
             "Burn hot fires. Never let the fire smolder (EPA, Cornell Cooperative Extension of Tompkins County).",
             "Keep the stove doors closed except when you load or stoke the fire (EPA, US Fire Administration). Open the stove door slowly, so smoke doesn’t puff into the room (Cornell Cooperative Extension of Tompkins County).",
             "Build a fire that fits the fireplace or stove, and don’t overload it (New York State Division of Homeland Security and Emergency Services).",
@@ -88,7 +92,7 @@
         {
           "list": [
             "Never household trash: cardboard, plastics, foam, or the colored ink on magazines, boxes and wrappers (EPA). Cornell Cooperative Extension of Tompkins County: New York’s Department of Environmental Conservation says burning household trash in a wood stove is illegal.",
-            "Never paper in a fireplace or wood stove (US Fire Administration, CDC).",
+            "Never paper in a fireplace or wood stove (US Fire Administration, CDC). EPA allows newspaper to start a fire; this app follows the US Fire Administration and CDC.",
             "Never coated, painted or pressure-treated wood, plywood, particle board, or any wood with glue on or in it (EPA).",
             "Never wet, rotted, diseased or moldy wood, or ocean driftwood (EPA).",
             "Never plastic, rubber, asbestos, manure or animal remains (EPA).",
@@ -109,16 +113,24 @@
       "h": "At night",
       "blocks": [
         {
-          "warn": "Put the fire out before you go to sleep or leave the house (US Fire Administration). Indiana’s Department of Homeland Security and the Chimney Safety Institute of America say the same."
-        },
-        {
-          "p": "Penn State Extension describes banking a wood stove for the night: letting it burn down to a bed of coals and partly closing the damper. The fire safety bodies above say to put it out, and this app follows them."
+          "warn": "Put the fire out before you go to sleep or leave the house (US Fire Administration, FEMA). Indiana’s Department of Homeland Security and the Chimney Safety Institute of America say the same."
         },
         {
           "list": [
-            "Never close the damper until the fire is out and the embers are cold (Massachusetts Department of Fire Services). Keep a fireplace damper open while hot ashes are still in it (Indiana Department of Homeland Security).",
+            "How: no source opened gives a method for putting out a wood stove fire. Stop adding wood well before bed so the fire burns down (Oklahoma State University Extension: make sure the fire has died down before you leave), and keep the damper open until the fire is out and the embers are cold (Massachusetts Department of Fire Services).",
+            "Never pour water into the chimney (University of Missouri Extension).",
             "Keep working carbon monoxide and smoke alarms near the room and where people sleep (CDC, CPSC)."
           ]
+        },
+        {
+          "p": "The room will cool overnight. Sleep in the warm room with sleeping bags and blankets, and keep babies dressed as in Stay warm when the heat is out. If the room can’t be kept warm enough for a baby or an older person through the night, CDC says to make arrangements to stay somewhere else."
+        },
+        {
+          "link": "s:surv-heat-out",
+          "label": "Stay warm when the heat is out"
+        },
+        {
+          "p": "Penn State Extension describes banking a wood stove for the night: letting it burn down to a bed of coals and partly closing the damper. The fire safety bodies above say to put it out, and this app follows them. The Chimney Safety Institute of America warns that closing down the damper or air inlets too soon or too much, or overloading the firebox for a longer burn, builds up creosote."
         },
         {
           "link": "s:surv-carbon-monoxide",
@@ -145,7 +157,7 @@
         {
           "steps": [
             "Get everyone out, pets too, and call 911 or the fire department if you can (Crystal Lakes Fire Protection District, University of Missouri Extension).",
-            "Only if you can do it safely, close the stove’s doors and air intakes to starve the fire of air (Crystal Lakes Fire Protection District; University of Missouri Extension: close all openings and draft controls).",
+            "On your way out, and only if you can do it safely, close the stove’s doors and air intakes to starve the fire of air (Crystal Lakes Fire Protection District; University of Missouri Extension: close all openings and draft controls). Don’t go back in to do it.",
             "Never pour water into the chimney: it can damage the hot flue liner (University of Missouri Extension).",
             "Even if the fire seems out, have the fire department check it (Crystal Lakes Fire Protection District).",
             "Don’t use the stove or fireplace again until the whole chimney has been inspected and repaired (University of Missouri Extension, Chimney Safety Institute of America)."
@@ -162,7 +174,7 @@
       "blocks": [
         {
           "list": [
-            "Put ashes in a metal container with a lid. Put the container outside, at least 10 feet (3 m) from the house (US Fire Administration), on the ground or another surface that can’t burn (Massachusetts Department of Fire Services, EPA).",
+            "Put ashes in a metal container with a tight metal lid (US Fire Administration, Massachusetts Department of Fire Services, University of Missouri Extension). Put it outside, at least 10 feet (3 m) from the house (US Fire Administration), on the ground or another surface that can’t burn (Massachusetts Department of Fire Services, EPA), away from the garage and porch as well (Massachusetts Department of Fire Services).",
             "Never put ashes in a paper bag or cardboard box (Massachusetts Department of Fire Services).",
             "Ashes and embers can stay hot for days (Massachusetts Department of Fire Services). Ashes that seem cool may still hold a smoldering coal (New York State Division of Homeland Security and Emergency Services).",
             "Don’t let ash build up in the stove or fireplace: too much blocks the air the fire needs (New York State Division of Homeland Security and Emergency Services)."
@@ -207,7 +219,7 @@
     },
     {
       "name": "US EPA, Burn Wise, Best Wood-Burning Practices (last updated October 13, 2026; EPA stopped updating Burn Wise content October 30, 2025)",
-      "used": "Dry, split, well-seasoned wood; start with newspaper, dry kindling or natural fire starters, never gasoline, kerosene or charcoal starter; build hot fires, not smoldering; doors closed except loading or stoking; full never-burn list; manufactured logs only 100 percent compressed sawdust and only if the appliance instructions allow; ashes into a covered metal container stored outdoors on a nonflammable surface; fire extinguisher nearby"
+      "used": "Dry, split, well-seasoned wood; start with dry kindling or natural fire starters (EPA also names newspaper; not followed, since US Fire Administration and CDC say not to burn paper), never gasoline, kerosene or charcoal starter; build hot fires, not smoldering; doors closed except loading or stoking; full never-burn list; manufactured logs only 100 percent compressed sawdust and only if the appliance instructions allow; ashes into a covered metal container stored outdoors on a nonflammable surface; fire extinguisher nearby"
     },
     {
       "name": "Massachusetts Department of Fire Services, Chimney & Woodstove Fire Safety (10/23)",
@@ -219,7 +231,7 @@
     },
     {
       "name": "University of Missouri Extension, Wood Stove Maintenance and Operation (G1731, revised January 2023)",
-      "used": "Never flammable liquids to start a fire; creosote from wet wood, incomplete combustion, cool surfaces, prevented by a brisk fire with dry wood; inspect stovepipe and chimney frequently in the season, airtight stoves at least monthly; chimney fire signs (roaring, flames and sparks from the top); call the fire department; close all openings and draft controls; avoid introducing water into the chimney; inspect the complete chimney and repair before restarting; keep children away and supervise; no clothing on or near the heater"
+      "used": "Never flammable liquids to start a fire; creosote from wet wood, incomplete combustion, cool surfaces, prevented by a brisk fire with dry wood; inspect stovepipe and chimney frequently in the season, airtight stoves at least monthly; chimney fire signs (roaring, flames and sparks from the top); call the fire department; close all openings and draft controls; avoid introducing water into the chimney; inspect the complete chimney and repair before restarting; keep children away and supervise; no clothing on or near the heater; ashes in a non-combustible metal container with a tight lid"
     },
     {
       "name": "University of Missouri Extension, Home Heating in an Emergency (GH5117, 1993, reviewed 2017)",
@@ -231,7 +243,7 @@
     },
     {
       "name": "Chimney Safety Institute of America, The Facts About Chimney Fires (undated; used as a second source)",
-      "used": "Creosote in all forms highly combustible; restricted air and unseasoned wood encourage creosote; slow-burning chimney fires often go undetected; have the chimney evaluated after a chimney fire"
+      "used": "Creosote in all forms highly combustible; restricted air and unseasoned wood encourage creosote; slow-burning chimney fires often go undetected; have the chimney evaluated after a chimney fire; closing down the stove damper or air inlets too soon or too much, or overloading the firebox for a longer burn, contributes to creosote"
     },
     {
       "name": "Chimney Safety Institute of America, Top 10 Tips (undated copy on a Cornell Cooperative Extension energy CD archive; used as a second source)",
@@ -268,8 +280,19 @@
     {
       "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide, checked)",
       "used": "Never burn charcoal indoors (CDC, CPSC); CO alarms where people sleep (CPSC)"
+    },
+    {
+      "name": "Massachusetts Department of Fire Services, Keep Warm, Keep Safe: When Heating your Home this Winter (1/23)",
+      "used": "Dispose of ashes in a metal container with a lid, away from the house, garage and porch"
+    },
+    {
+      "name": "FEMA, Chimney Fire Precautions (December 8, 2020)",
+      "used": "Put the fire out before you go to sleep or leave your home"
+    },
+    {
+      "name": "Oklahoma State University Extension, Home Heating Safety Important in Winter (undated)",
+      "used": "Before leaving the house, make sure the fire has died down"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

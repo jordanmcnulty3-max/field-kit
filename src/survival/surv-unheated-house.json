@@ -28,8 +28,8 @@
   ],
   "summary": "Keep any heat you have at 55°F (13°C) or more and let faucets drip. If the house will freeze, shut the main valve and drain the water system, toilets, traps and water heater before the pipes freeze. Keep stored water and canned food from freezing. Watch the roof under heavy snow.",
   "doFirst": [
-    "Still have some heat? Keep it at 55°F (13°C) or higher, let faucets drip, and open the cabinet doors under sinks (New York State Department of Health, Red Cross, CDC).",
-    "Heat off in freezing weather? Shut the main water valve, or the well pump if it is in the house, and drain the system before the pipes freeze (Purdue Extension). Save the water first.",
+    "Still have some heat? Keep it at 55°F (13°C) or higher, open the cabinet doors under sinks, and if water is still running, let faucets drip (New York State Department of Health, Red Cross, CDC).",
+    "Heat off in freezing weather? Save the water first, then shut the main water valve, or the well pump if it is in the house, and drain the system before the pipes freeze (Purdue Extension).",
     "Never thaw pipes with a torch, a kerosene or propane heater, a charcoal stove or any open flame (Red Cross, CDC).",
     "Roof sagging, creaking or cracking, or doors that suddenly stick? Get everyone out (FEMA)."
   ],
@@ -66,15 +66,15 @@
           "label": "Water in winter"
         },
         {
-          "p": "Purdue Extension adds:"
+          "p": "Purdue Extension adds these to the steps in Water in winter:"
         },
         {
           "list": [
             "To drain the whole system, disconnect pipe unions or joints as close to the main valve as you can. Compressed air can blow water out of the pipes.",
             "Wrap pipes you can’t drain, around their main valves, in blankets, house insulation or newspaper.",
             "Disconnect a water softener so the hard and soft water pipes and its controls can drain.",
-            "Drain traps by taking out drain plugs or disconnecting the traps. Otherwise blow them out with compressed air, or pour in propylene-glycol antifreeze equal to the water in the trap: 1 pint to 1 quart (0.47 to 0.95 L), depending on its size. Check kitchen and bathroom sinks, tubs, showers, toilets, washtubs, floor drains and sump pumps.",
-            "Turn off the power or fuel to every appliance that uses water, shut its water supply, and drain it: the water heater, humidifiers, the refrigerator’s ice maker, the washing machine and the dishwasher, and their pumps. Don’t put antifreeze in appliances."
+            "Traps you can reach: take out the drain plugs or disconnect the traps. Traps you can’t reach: blow them out with compressed air, or use antifreeze as in Water in winter.",
+            "Also drain humidifiers and the refrigerator’s ice maker, and check sump pumps."
           ]
         },
         {
@@ -93,7 +93,8 @@
             "If the heat will be off for several hours or more below freezing, keep exposed heating pipes from freezing (Purdue Extension).",
             "If you still have power, keep the circulator pump running. If the room falls below 40°F (4°C), you should probably start draining the pipes (Purdue Extension).",
             "Most hot-water heating systems are not easy to drain. Open the radiator vents to let air in so the pipes can drain (Purdue Extension).",
-            "Ask a heating contractor before adding antifreeze to the heating system (Purdue Extension)."
+            "Ask a heating contractor before adding antifreeze to the heating system (Purdue Extension).",
+            "Once it is drained, don’t fire the boiler again until the system is refilled: see Coming back."
           ]
         },
         {
@@ -129,6 +130,7 @@
         },
         {
           "list": [
+            "Don’t go up on the roof. Clear snow only from the ground, with a rake that is not metal (FEMA: snow removal only by qualified people; University of Minnesota Extension: contact professionals).",
             "Snow removal is dangerous work for trained people (FEMA). Anyone on the roof in winter, or working on it from below, risks injury (University of Minnesota Extension).",
             "From the ground, use a long-handled snow rake that is not metal, and stay well away from the eaves: roof snow can slide without warning. Metal rakes can damage the roof and carry a risk of electric shock (FEMA).",
             "Leave at least a couple of inches (5 cm) of snow on the roof (FEMA).",
@@ -148,11 +150,16 @@
             "Before you turn the water back on or thaw a pipe, know where the main valve is: a pipe may already be broken and leak as it thaws. If it does, shut the main valve until it is repaired (Water in winter, from the Red Cross).",
             "If one pipe froze, others may have too. Check every faucet (Red Cross).",
             "If you can’t find the frozen part, can’t reach it or can’t thaw it, call a licensed plumber (Red Cross). Get an expert for plumbing repairs whenever you can (University of Wisconsin Extension).",
-            "Warm a frozen pipe only with gentle heat, such as an electric heating pad, a hair dryer, an electric space heater kept away from anything that can burn, or towels soaked in hot water, with the faucet open, until full pressure is back (Red Cross).",
+            "Warm a frozen pipe only with gentle heat, such as an electric heating pad, a hair dryer, an electric space heater kept away from anything that can burn (plugged straight into a wall outlet: see Generators), or towels soaked in hot water, with the faucet open, until full pressure is back (Red Cross).",
             "If pipes burst, stay out of standing water: you could get an electric shock (New York State Department of Health). Keep electric cords away from water (Water in winter).",
             "Refill the water heater before you turn its power or gas back on (FEMA, in Water already in your house).",
+            "If you drained the hot-water heating system, don’t fire the boiler until the system has been refilled. Have a heating contractor refill and restart it (Purdue Extension: consult a heating contractor). No source opened gives the steps.",
             "Getting the furnace going again: see Stay warm when the heat is out."
           ]
+        },
+        {
+          "link": "s:surv-generators",
+          "label": "Generators"
         },
         {
           "link": "s:surv-water-winter",
@@ -204,7 +211,7 @@
     },
     {
       "name": "FEMA, Snow Load Safety Guidance (flyer summarizing FEMA P-957, undated)",
-      "used": "Warning signs of an overstressed roof; promptly evacuate and get an inspection; snow removal hazardous, qualified people; long-handled non-metallic rake from the ground; avoid metal rakes (damage, electrocution); stay away from the eave, snow can slide without warning; leave at least a couple of inches of snow; falling icicles"
+      "used": "Warning signs of an overstressed roof; promptly evacuate and get an inspection; snow removal hazardous, qualified people; long-handled non-metallic rake from the ground; avoid metal rakes (damage, electrocution); stay away from the eave, snow can slide without warning; leave at least a couple of inches of snow; falling icicles; roof work under OSHA protocol with fall-arrest harnesses"
     },
     {
       "name": "University of Minnesota Extension, Dealing with and preventing ice dams (Huelman, Stone, Larson, Hendricks; reviewed 2022)",
@@ -217,8 +224,11 @@
     {
       "name": "Water already in your house (surv-water-in-the-house, checked)",
       "used": "Water heater: power or gas off before draining, refill before turning it back on (FEMA); never drink radiator or boiler water (FEMA)"
+    },
+    {
+      "name": "Generators (surv-generators, checked)",
+      "used": "Electric heaters on a generator: plugged straight into a wall outlet through a transfer switch (US Fire Administration)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

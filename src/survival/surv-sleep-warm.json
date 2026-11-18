@@ -1,0 +1,188 @@
+{
+  "id": "surv-sleep-warm",
+  "title": "Sleep warm",
+  "category": "heat",
+  "keywords": [
+    "sleep",
+    "sleeping",
+    "sleeping bag",
+    "sleeping pad",
+    "cold at night",
+    "warm at night",
+    "blankets",
+    "bed",
+    "hot water bottle",
+    "insulation",
+    "ground",
+    "tent",
+    "winter camping",
+    "heater at night"
+  ],
+  "summary": "Insulate from the ground first, keep your bag or blankets dry and fluffed, eat a snack and go to the bathroom before bed, and add a wrapped bottle of warm water. Never sleep with a fuel-burning heater, stove or lantern in a tent, snow shelter, camper or vehicle, and never sleep in a vehicle with its engine running. Indoors, an unvented fuel-burning heater: turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping.",
+  "sections": [
+    {
+      "h": "Never sleep with a flame",
+      "blocks": [
+        {
+          "warn": "Never use a charcoal grill, lantern or portable camping stove inside a tent or snow shelter, and never use fuel-burning heaters or lanterns while sleeping in one. Carbon monoxide kills people every year this way (Shelter, Priorities)."
+        },
+        {
+          "list": [
+            "Indoors, an unvented fuel-burning heater (Kerosene and propane heaters): “Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol).” See Carbon monoxide and Kerosene and propane heaters.",
+            "In a vehicle: never run the engine while anyone is sleeping (Carbon monoxide protocol). Everyone is awake while it runs, and it is off before anyone sleeps. With more than one person, take turns sleeping (Red Cross), only while the engine is off. See Winter storms.",
+            "Wood stove or fireplace overnight: follow its topic.",
+            "Keep battery carbon monoxide alarms near where people sleep (Carbon monoxide)."
+          ]
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "link": "s:surv-portable-heaters",
+          "label": "Kerosene and propane heaters"
+        },
+        {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        },
+        {
+          "link": "s:surv-winter-storms",
+          "label": "Winter storms"
+        }
+      ]
+    },
+    {
+      "h": "Ground first",
+      "blocks": [
+        {
+          "p": "At rest you can lose as much as 80 percent of your body heat to the ground (Shelter). Insulate under you before you add anything on top."
+        },
+        {
+          "list": [
+            "Don’t sleep directly on the ground: use a sleeping pad. Put a tarp or poncho on the ground under the pad and bag (Walter Reed Army Institute of Research).",
+            "No pad: build a bed from foam rubber from vehicle seats, or boughs, leaves or dry moss (Army FM 21-76-1). A bed of dry leaves, grass or boughs should be at least 12 inches (30 cm) thick, because it packs down when you lie on it (Shelter).",
+            "On snow, remove snow down toward ground level or pack it down, so you have a comfortable shelf to sleep on (Walter Reed Army Institute of Research). In a snow trench or cave, sleep on a platform higher than the entrance (Shelter).",
+            "Use a waterproof cover (bivy) over the sleeping bag if there is rain or snow (Walter Reed Army Institute of Research)."
+          ]
+        },
+        {
+          "link": "s:surv-shelter",
+          "label": "Shelter"
+        }
+      ]
+    },
+    {
+      "h": "Bags and blankets",
+      "blocks": [
+        {
+          "list": [
+            "Shake the sleeping bag out and fluff it up before and after use (Walter Reed Army Institute of Research), especially at the foot (Army FM 21-76-1).",
+            "Keep it dry: carry it in a waterproof bag (Walter Reed Army Institute of Research), and air and dry it every day to remove body moisture (Army FM 21-76-1). Open it wide or turn it inside out so sun and wind can dry it, and remove any frost that builds up overnight (Walter Reed Army Institute of Research).",
+            "Adults: sleep in dry wool or synthetic clothing, socks and a hat, not cotton. Don’t overdress: you shouldn’t sweat (Walter Reed Army Institute of Research). Babies sleep by different rules: see Stay warm when the heat is out.",
+            "If there is room, put dry boots and clothes inside the bag with you (Walter Reed Army Institute of Research).",
+            "Once you are in bed, try not to get out of the bag (Walter Reed Army Institute of Research).",
+            "Not enough bag: add dry grass, leaves or dry moss (Army FM 21-76-1)."
+          ]
+        },
+        {
+          "p": "Indoors with no heat, use blankets and sleeping bags, with lots of covers (Stay warm when the heat is out)."
+        }
+      ]
+    },
+    {
+      "h": "Before you get in",
+      "blocks": [
+        {
+          "list": [
+            "Eat plenty through the day, with warm meals and warm sugary drinks (Walter Reed Army Institute of Research). Your body needs fuel to make heat (Priorities).",
+            "Have an easy-to-digest or warm snack just before you get into the bag: it can help you stay warmer longer while you sleep (Walter Reed Army Institute of Research).",
+            "Go to the bathroom (Walter Reed Army Institute of Research).",
+            "Warm up with a few exercises, but don’t break a sweat (Walter Reed Army Institute of Research).",
+            "If you can heat water, fill a bottle that closes tightly with warmed water and put it in the bag (Walter Reed Army Institute of Research). Wrap it in cloth: never put a hot water bottle directly on the skin (Hypothermia protocol)."
+          ]
+        },
+        {
+          "p": "Keep drinking through the day: cold weather dulls your thirst (Water in winter)."
+        },
+        {
+          "link": "s:surv-water-winter",
+          "label": "Water in winter"
+        }
+      ]
+    },
+    {
+      "h": "Sharing warmth",
+      "blocks": [
+        {
+          "list": [
+            "Huddle with other people for warmth (CDC, said of people stranded in a car).",
+            "At home with no heat, bed with other family members and lots of covers is the warmest place, but not for babies (Stay warm when the heat is out)."
+          ]
+        },
+        {
+          "warn": "Babies: “Infants less than one year old should never sleep in a cold room because they lose body heat more easily than adults” (CDC). The family bed is not for babies: follow Babies: warm and safe asleep in Stay warm when the heat is out."
+        },
+        {
+          "link": "s:surv-heat-out",
+          "label": "Stay warm when the heat is out"
+        }
+      ]
+    },
+    {
+      "h": "Too cold to sleep",
+      "blocks": [
+        {
+          "p": "Someone who is cold and confused, drowsy, mumbling or fumbling needs more than a better bed: open the Hypothermia protocol."
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        },
+        {
+          "link": "s:surv-dress-for-cold",
+          "label": "Dress for the cold"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Walter Reed Army Institute of Research (Behavioral Biology Branch, with the Northern Warfare Training Center), Cold Weather Sleep in the Arctic Environment (undated; cites TC 21-3, 1986)",
+      "used": "Don’t sleep directly on the ground, use your sleeping pad; tarp or poncho under pad and bag; bivy cover in rain or snow; pack snow down for a shelf; carry the bag in its waterproof bag; shake out and fluff before and after use; don’t get out after going to bed; dry boots and clothes inside the bag; dry wool or synthetics, avoid cotton; socks and hat; don’t overdress, no sweating; lots of calories, warm meals and warm sugary fluids through the day; easy-to-digest or warm snack before getting in helps you stay warmer longer; go to the bathroom first; a few exercises without breaking a sweat; closable container of warmed water in the bag; remove frost; open wide or turn inside out to dry"
+    },
+    {
+      "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapter VI",
+      "used": "Fluff the sleeping bag before use, especially at the foot; air and dry daily; improvise with dry grass, leaves, dry moss; bed from raft or foam rubber from vehicle seats, or boughs, leaves or dry moss"
+    },
+    {
+      "name": "CDC, Safety Guidelines: During & After a Winter Storm (reviewed August 25, 2026)",
+      "used": "Huddle with other people for warmth (stranded in a car); infants less than one year old should never sleep in a cold room"
+    },
+    {
+      "name": "Shelter and Priorities (other topics in this app)",
+      "used": "Up to 80 percent of body heat to the ground at rest; bed at least 12 inches thick; sleeping platform higher than the entrance; never a grill, lantern or camp stove in a tent or snow shelter, never fuel-burning heaters or lanterns while sleeping in one; eat and drink regularly, your body needs fuel to make heat"
+    },
+    {
+      "name": "Carbon monoxide and burning fuel indoors, Kerosene and propane heaters, Wood stoves and fireplaces (other topics in this app)",
+      "used": "heater sleep rule quoted word for word from Kerosene and propane heaters (CPSC, US Fire Administration; Carbon monoxide protocol); tent, snow shelter, camper or vehicle (Kerosene and propane heaters; Carbon monoxide protocol); battery CO alarms near sleeping areas; overnight wood stove rule (linked, not restated); vehicle: never run an engine in a vehicle where people are sleeping (Carbon monoxide protocol)"
+    },
+    {
+      "name": "Stay warm when the heat is out (another topic in this app)",
+      "used": "Blankets and sleeping bags; bed with other family members and lots of covers, not for babies; Babies: warm and safe asleep (Safe to Sleep)"
+    },
+    {
+      "name": "Water in winter (another topic in this app)",
+      "used": "Cold weather dulls thirst; drink often"
+    },
+    {
+      "name": "American Red Cross, Giant Winter Storm Threatens Millions; Follow these Safety Steps (February 21, 2023)",
+      "used": "If more than one person is in the vehicle, take turns sleeping"
+    },
+    {
+      "name": "Hypothermia (Emergency protocol in this app)",
+      "used": "Do not put a heat pack or hot water bottle directly on the skin"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

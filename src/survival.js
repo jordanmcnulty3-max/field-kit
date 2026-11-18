@@ -290,7 +290,10 @@
   }
   const tagged = (t, dim, val) => val === 'any' || !Array.isArray(t[dim]) || !t[dim].length || t[dim].includes(val);
   const matches = (t, f) => tagged(t, 'where', f.where) && tagged(t, 'when', f.when);
-  const byTitle = (a, b) => (a.id === 'surv-priorities' ? -1 : b.id === 'surv-priorities' ? 1 : a.title.localeCompare(b.title));
+  /* Each category's hub topic leads its list (Priorities in Basics, the heat hub in Heat); the rest go by title. */
+  const LEADS = ['surv-priorities', 'surv-heat-out'];
+  const lead = t => (LEADS.includes(t.id) ? 0 : 1);
+  const byTitle = (a, b) => lead(a) - lead(b) || a.title.localeCompare(b.title);
 
   const homeItemFns = { tool: [], list: [] };
   function homeItems(kind, fn) {

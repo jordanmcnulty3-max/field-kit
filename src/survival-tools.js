@@ -7,7 +7,8 @@
   const TOOLS = {
     sos: { label: 'SOS light', keywords: 'morse signal distress flash flashlight rescue screen light', draw: drawSos },
     daylight: { label: 'Daylight and moon', keywords: 'sunrise sunset sun moon moonrise moonset moon phase full moon new moon daylight day length twilight first light last light dawn dusk almanac', draw: drawDaylight },
-    water: { label: 'Water planner', keywords: 'water how much water drinking water gallons litres liters storage store stock up emergency supply jugs containers drums barrels group people days calculator', draw: drawWater }
+    water: { label: 'Water planner', keywords: 'water how much water drinking water gallons litres liters storage store stock up emergency supply jugs containers drums barrels group people days calculator', draw: drawWater },
+    windchill: { label: 'Wind chill', keywords: 'wind chill windchill feels like how cold frostbite frostbite time exposed skin cold weather temperature wind speed mph freezing winter exposure chart national weather service', draw: drawWindChill }
   };
 
   /* ---------- Water planner ----------
@@ -72,6 +73,94 @@
     });
     render(S.group());
     return ed.stop;
+  }
+
+  /* ---------- Wind chill ----------
+     Air temperature (whole °F) and wind (whole mph) in; "feels like" out, with the frostbite time the chart shades for that cell.
+     Every number comes from FK_DATA.tooldata.windchill (src/tooldata/windchill.json, sourced and release-gated) and is checked
+     again here: missing, draft or damaged data shows no figure at all. */
+  const NO_WC_DATA = 'The wind chill tool’s numbers are not available yet. Nothing is shown until they have been checked against sources.';
+  const OFF_CHART = 'Off the National Weather Service chart. No figure is shown.';
+  const WHOLE = 'Enter a whole number.';
+  const WC_CONSTS = ['c0', 'cT', 'cV', 'cTV', 'exp'];
+  const numArr = a => Array.isArray(a) && a.length > 0 && a.every(FK.fin);
+  const rising = a => a.every((x, i) => i === 0 || x > a[i - 1]);
+  function windChillData() {
+    const all = window.FK_DATA && plain(window.FK_DATA.tooldata) ? window.FK_DATA.tooldata : null;
+    const w = all && Object.hasOwn(all, 'windchill') ? all.windchill : null;
+    if (!plain(w) || w.draft === true || !plain(w.values) || !plain(w.grid)) return null;
+    const c = {};
+    for (const k of WC_CONSTS) {
+      const v = Object.hasOwn(w.values, k) ? w.values[k] : null;
+      if (!plain(v) || !FK.fin(v.value)) return null;
+      c[k] = v.value;
+    }
+    const g = w.grid, { temps, winds, chill, bands, bandMinutes } = g;
+    if (!numArr(temps) || !numArr(winds) || !numArr(bandMinutes)) return null;
+    if (!rising(temps.slice().reverse()) || !rising(winds) || winds[0] <= 0) return null;   // temps strictly descending, winds strictly ascending and above 0
+    if (!rising(bandMinutes) || bandMinutes[0] <= 0) return null;
+    const grid = x => Array.isArray(x) && x.length === winds.length && x.every(r => Array.isArray(r) && r.length === temps.length);
+    if (!grid(chill) || !grid(bands) || !chill.every(r => r.every(FK.fin))) return null;
+    if (!bands.every(r => r.every(b => b === 0 || bandMinutes.includes(b)))) return null;
+    return { w, c, temps, winds, bands };
+  }
+  /* A typed field: an optional minus (- or the typographic −, U+2212) and digits, after trimming. Anything else (blank, 12.7, 1e9, abc) is null. */
+  const wholeNumber = text => { const t = String(text).trim().replace(/^\u2212/, '-'); return /^-?\d+$/.test(t) ? Number(t) : null; };
+
+  function drawWindChill(el) {
+    const S = FK.survival, esc = FK.esc, d = windChillData();
+    if (!d) { el.innerHTML = '<p class="sv-warn">' + esc(NO_WC_DATA) + '</p>'; return; }
+    const { c, temps, winds, bands } = d;
+    const hi = temps[0], lo = temps[temps.length - 1];
+    /* Temperature gets the ordinary keyboard: iPhone number pads have no minus key. Wind is never negative, so it keeps the number pad. */
+    const field = (k, id, label, less, more, mode) => '<div class="wc-row"><div class="sv-gfield"><label for="' + id + '">' + label + '</label><div class="sv-step">' +
+      '<button type="button" data-wstep="' + k + '" data-d="-1" aria-label="' + less + '">−</button>' +
+      '<input id="' + id + '" type="text" inputmode="' + mode + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-wfield="' + k + '" aria-describedby="' + id + 'Err">' +
+      '<button type="button" data-wstep="' + k + '" data-d="1" aria-label="' + more + '">+</button></div></div>' +
+      '<p class="dl-err wc-err" id="' + id + 'Err" role="status"></p></div>';
+    const sources = (Array.isArray(d.w.sources) ? d.w.sources : []).filter(s => plain(s) && filled(s.name)).map(s => s.name);
+    const links = ['s:surv-wind-chill', 'p:hypothermia', 'p:frostbite'].map(k => [k, FK.search && FK.search.describe(k)]).filter(([, t]) => t && filled(t.title))
+      .map(([k, t]) => '<button type="button" class="sv-link" data-link="' + esc(k) + '"><span>' + esc(t.title) + '</span></button>').join('');
+    el.innerHTML = '<fieldset class="sv-group"><legend>Conditions</legend>' +
+      field('temp', 'wcT', 'Air temperature (°F)', 'One degree colder', 'One degree warmer', 'text') + field('wind', 'wcV', 'Wind (mph)', 'One mph less', 'One mph more', 'numeric') + '</fieldset>' +
+      '<section class="wp-out" aria-labelledby="wcTitle"><h3 id="wcTitle">Result</h3><div class="wc-res" role="status"></div></section>' +
+      (links ? '<div class="wc-links">' + links + '</div>' : '') + S.footHTML(d.w);
+    const input = k => el.querySelector('[data-wfield="' + k + '"]');
+    const res = el.querySelector('.wc-res');
+    const touched = { temp: false, wind: false };
+
+    function compute(T, V) {
+      if (T > hi || T < lo || V > winds[winds.length - 1] || V < winds[0]) return null;
+      const e = Math.pow(V, c.exp);
+      const chill = Math.round(c.c0 + c.cT * T - c.cV * e + c.cTV * T * e);
+      const ti = temps.findIndex(x => x <= T), wi = winds.findIndex(x => x >= V);   // the next colder chart temperature, the next higher chart wind
+      return Number.isFinite(chill) && ti >= 0 && wi >= 0 ? { chill, band: bands[wi][ti] } : null;
+    }
+    function render() {
+      const v = { temp: wholeNumber(input('temp').value), wind: wholeNumber(input('wind').value) };
+      for (const k of ['temp', 'wind']) {
+        const bad = touched[k] && v[k] === null, i = input(k);
+        el.querySelector('#' + i.id + 'Err').textContent = bad ? WHOLE : '';
+        if (bad) i.setAttribute('aria-invalid', 'true'); else i.removeAttribute('aria-invalid');
+      }
+      if (v.temp === null || v.wind === null) { res.innerHTML = ''; return; }
+      const r = compute(v.temp, v.wind);
+      if (!r) { res.innerHTML = '<p class="sv-warn">' + esc(OFF_CHART) + '</p>'; return; }
+      const line = r.band ? 'Frostbite possible in about ' + r.band + ' minutes on exposed skin' : d.w.title;   // no band: the data's own wording
+      if (!filled(line)) { res.innerHTML = '<p class="sv-warn">' + esc(NO_WC_DATA) + '</p>'; return; }
+      res.innerHTML = '<p class="wp-big" data-k="chill">' + esc('Feels like ' + r.chill + '°F') + '</p><p data-k="band">' + esc(line) + '</p>' +
+        (sources.length ? '<p class="wp-basis">' + esc('Source: ' + sources[0]) + '</p>' : '');
+    }
+    const touch = k => { touched[k] = true; render(); };
+    el.addEventListener('input', e => { const i = e.target.closest('[data-wfield]'); if (i) touch(i.dataset.wfield); });
+    el.addEventListener('change', e => { const i = e.target.closest('[data-wfield]'); if (i) touch(i.dataset.wfield); });
+    el.addEventListener('click', e => {
+      const b = e.target.closest('[data-wstep]');
+      if (!b) return;
+      const i = input(b.dataset.wstep), n = wholeNumber(i.value);
+      i.value = String((n === null ? 0 : n) + Number(b.dataset.d));   // a blank or unreadable field starts from 0
+      touch(b.dataset.wstep);
+    });
   }
 
   /* ---------- SOS light ---------- */

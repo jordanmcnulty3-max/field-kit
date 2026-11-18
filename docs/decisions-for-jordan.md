@@ -118,6 +118,7 @@ medic, nurse, paramedic or doctor, these are the ones to show them.
 ## D. Survival content (v7 Tasks 13 to 16; the water and sanitation pack from D15)
 
 Source disagreements found while checking the Survival topics. Each says what the app does today.
+Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. Next free: 68.
 
 1. **How long to boil water.** EPA and CDC: a rolling boil for 1 minute (3 minutes higher up). NYS DEC's state
    land camping rules and the Army survival manuals (ATP 3-50.21, FM 21-76-1) say 5 minutes. Today: 1 minute,
@@ -346,3 +347,215 @@ Source disagreements found while checking the Survival topics. Each says what th
    page gives a bleach mix of 1 part bleach to 10 parts water (1 1/2 cups per gallon) but prints no bleach strength,
    so it was left out. Today: the topic says to soak droppings with "a disinfectant" for 5 minutes, CDC's own word,
    with no mix. Say whether to add CDC's 1:10 mix as printed, with a note that CDC gives no strength.
+37. **Generator distance from the house (surv-generators) — Heat pack Task 4.** CDC: more than 20 feet from windows,
+   doors and vents. CPSC: at least 20 feet from the house, exhaust pointed away. FEMA and the NYS Division of Consumer
+   Protection: at least 20 feet. NFPA's 2017 generator tip sheet: at least 5 feet from doors, windows and vent openings.
+   Today: 20 feet (6 m) from windows, doors and vents, exhaust away from the house, as in Wells without power and the
+   Carbon monoxide protocol; NFPA's 5 feet is not in the text. Say if the group wants a larger distance.
+38. **Generators in rain and snow (surv-generators) — Heat pack Task 4.** OSHA (2005): "Keep a generator dry; do not use
+   it in the rain or wet conditions." University of Illinois Extension: in wet weather use it only when necessary, under
+   an open, canopy-like structure on a dry surface. Cornell: keep it dry; a canopy for a tractor-driven unit. NYS
+   Division of Consumer Protection: where rain and snow can't reach it, if possible. CPSC: follow the maker's
+   instructions. Today: OSHA's rule first, then the open canopy, with "never a shed, garage, porch or carport". A Central
+   New York winter outage often means snow. Say whether the group wants a plain "don't run it in rain or snow" instead,
+   or a sourced canopy design (none was found).
+39. **Unvented heaters and fireplaces indoors (surv-portable-heaters, surv-carbon-monoxide) — Heat pack Task 4.** Agencies
+   that advise against them: US Department of Energy (unvented combustion space heaters "not recommended for use inside
+   your home"); NFPA (all fuel-burning equipment should be vented outside); NYS Department of Health (not your main heat
+   source even in a power failure; a generator outdoors is better); New York City bans kerosene and propane space
+   heaters (FDNY Foundation). New York law allows only approved kerosene heaters in a home, and none in a building with
+   three or more families. CDC: "Don't cook or burn anything on a stove or fireplace that isn't vented," which read
+   literally rules out a vent-free gas fireplace; NYS DOH only says it is a supplemental, not a primary, heat source.
+   Ventilation: CPSC asks for the room's door open, and a window open about an inch when the door is closed or the house
+   is tight or winterized; the app says always do both. Today: the topics give operating guidance under the strictest
+   conditions found rather than a plain "don't use them indoors", with these agencies named first, in the heaters
+   topic's first section, "What safety bodies say first". That choice is ruling 1 in docs/v7.3-rulings.md; say there if
+   the group wants a plain "don't" instead (the heaters topic would then become a list of what to use instead). The
+   sleep rule is written one strict way in every place, owned by Kerosene and propane heaters and quoted word for word
+   in Carbon monoxide and Sleep warm: "Turn it off when you go to sleep or leave the room, and never run it where anyone
+   is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol)." CPSC's own words are "in any room where people
+   are sleeping"; the app's sentence does not say room or house, and this file reads it as anywhere in the house.
+   Question: does the heater sleep rule mean the room where someone is sleeping, or the whole house while anyone in it
+   is asleep?
+40. **Electric heaters on a generator: extension cords (surv-generators) — Heat pack Task 4, revised in the fix round.**
+   US Fire Administration (Heater Fire Safety card): "Plug portable heaters directly into outlets. Never use an extension
+   cord or power strip." and "Do not plug anything else into the same circuit". CPSC: wall outlet, never a power strip.
+   NYS DOH and NYS DHSES: avoid extension cords with electric heaters. US Department of Energy: if a cord is necessary,
+   the shortest heavy-duty cord of 14-gauge wire or larger. With a generator outside and the heater inside, a cord is the
+   usual way people would do it. Today: only through a transfer switch, heater in a wall outlet, nothing else on that
+   circuit (USFA, the most cautious); DOE's cord is not in the text. Say whether the group wants DOE's 14-gauge cord
+   allowed as a fallback when there is no transfer switch.
+41. **Propane cylinders indoors (surv-portable-heaters, surv-store-fuel) — Heat pack Task 4, revised in the fix round.**
+   North Carolina's LP-gas regulator (state law there) and the National Propane Gas Association: no propane cylinders
+   indoors, nor in a garage or basement. CPSC: heaters with an oxygen depletion sensor, on 1 lb. cylinders, are designed
+   for indoor use (it names tents, cabins and campers, not homes). Minnesota's State Fire Marshal, reading NFPA 58 (the
+   national model code; found via Minnesota, not a New York source): in a home, garages included, no cylinder over 1 lb.
+   and no more than 2 lb. in all, a connected cylinder counts as in use, and empties count as full. A 2003 NYS Department
+   of State bulletin said LP-gas containers are prohibited inside buildings; its 2017 replacement does not say this, and
+   the Fire Code of New York State's LP-gas chapter was not found in an opened source. Today: indoors only a 1 lb.
+   cylinder screwed onto the heater, never a 20 lb. or larger tank and never one on a hose, empties back outside, spares
+   outside; Minnesota's limit is quoted as another state's reading. Whole-pack review: the heaters topic now also says never a
+   hose run into the house from a tank outside (no opened source covers that set-up; it is the app's reading of the 1 lb.
+   rule), and Store fuel safely, which says never store propane indoors, quotes the 1 lb. exception word for word with a link. Say if the group wants no cylinder indoors at all
+   (which means no indoor propane heater).
+42. **How much fuel to store, and for how long (surv-store-fuel) — Heat pack Task 4.** No New York household limit for
+   gasoline, kerosene or propane was found in an opened source. The only storage time found is Maine DEP's: no more than
+   30 days without a stabilizer (one made for ethanol gasoline). NYS DOH: don't burn last season's kerosene. Today: the
+   topic says no New York limit was found and gives Maine's 30 days as the only figure. Say if someone in the group can
+   ask the local fire marshal or code office for the limit, so it can be added from that source.
+43. **Babies in a cold house (surv-heat-out, home-heat-kit) — Heat pack Task 5, revised in the fix round.** CDC (During &
+   After a Winter Storm): infants under 1 year "should never sleep in a cold room"; remove pillows and other soft bedding;
+   dress babies in footed pajamas, one-piece wearable blankets or sleep sacks; keep the home warm or stay elsewhere; "In
+   an emergency, you can keep your baby warm using your own body heat. If you must sleep, take precautions to prevent
+   rolling on or smothering your baby." Safe to Sleep (NICHD): only a fitted sheet in the sleep area; room sharing near
+   but not in your bed is safer than bed-sharing; bed-sharing is very high risk on a soft surface (waterbed, old
+   mattress, couch, armchair), with a very tired, drowsy, drinking or impaired adult, or an adult who smokes; high risk
+   under 4 months or with a non-parent caregiver; higher than normal if born before 37 weeks or small, or with pillows or
+   blankets. University of Missouri Extension: bed is warmest "with other family members and lots of covers". The two
+   federal sources pull against each other in exactly the no-heat case. Today: the baby sleeps in the warm room in its
+   own space, in warmer sleepwear, no soft bedding; stay elsewhere if the room can't be kept warm (CDC); CDC's body-heat
+   line is quoted as the emergency fallback with Safe to Sleep's risk list beside it. Worth asking a medical professional
+   which the group should follow when the warm room itself gets cold overnight.
+44. **Wood stove overnight (surv-wood-stoves-fireplaces) — Heat pack Task 5, revised in the fix round.** US Fire
+   Administration card and FEMA (Chimney Fire Precautions, 2020): "Put the fire out before you go to sleep or leave your
+   home." Indiana Department of Homeland Security and CSIA say the same. Penn State Extension describes banking a wood
+   stove overnight on a bed of coals with the damper partly closed; DOE says oak, hickory and pine "will burn overnight";
+   CSIA warns that closing the damper or air inlets too soon or too much, or overloading the firebox for a longer burn,
+   builds creosote. No source opened gives a method for putting a stove fire out; the text says stop adding wood well
+   before bed so it burns down (Oklahoma State Extension: make sure it has died down), keep the damper open until the
+   embers are cold (MA DFS), never water in the chimney (Missouri), sleep in the warm room with sleeping bags, and stay
+   elsewhere if a baby or older person can't be kept warm (CDC). Today: put it out (USFA, the most cautious); banking is
+   described and not followed. With a stove as the only heat for weeks, the nights will be cold. If the group wants a
+   banked stove allowed, it would need to agree conditions, for example: working CO alarm where people sleep and smoke
+   alarm in the room, an adult awake, the flue damper never fully closed, no overloading the firebox, and the chimney
+   checked often for creosote (Missouri: airtight stoves at least monthly). Suggest asking a local fire safety officer. Whole-pack review (I1): the text now says plainly that there is no fire watch for a
+   stove or fireplace, even with someone awake, and that Fire's drown-and-stir steps are for outdoor fires; Fire's "Put it
+   out" is scoped to outdoor fires and points here.
+45. **When the house is too cold to stay (surv-heat-out) — Heat pack Task 5.** No source opened gives an indoor
+   temperature at which to leave. CDC: "If you're not able to keep your home warm, make temporary arrangements to stay
+   elsewhere"; infants under 1 never sleep in a cold room; over 65, check the temperature often. National Institute on
+   Aging (2009): homes at 60 to 65°F can trigger hypothermia in older people; set the thermostat to at least 68 to 70°F. NYS Department of Health: keep indoor
+   temperatures above 68°F for the very young, the elderly and people with health problems (and the heat no lower than
+   55°F for pipes). Today: the topic gives CDC's rule and quotes those figures, and says no source gives a leave-at
+   temperature. Say if the group wants its own line (for example, move babies and older people out when the warm room
+   cannot be kept above a set temperature).
+46. **Chimney fire: what to do (surv-wood-stoves-fireplaces) — Heat pack Task 5.** Crystal Lakes Fire Protection
+   District (Colorado): call 911, get everyone out including pets, close stove doors and intake vents if you can safely,
+   use a chimney-fire suppressant if you have one, have the fire department confirm it is out. University of Missouri
+   Extension (G1731): call the fire department, close all openings and draft controls, "squirt a multi-purpose dry
+   chemical extinguisher or throw baking soda onto the fire in the stove", never water into the chimney. No US Fire
+   Administration, NFPA or New York page on chimney fires was found. Today: get everyone out and call if you can; close
+   the doors and air intakes only if safe; never water into the chimney; have it checked; no reuse until inspected. The
+   extinguisher and baking soda step is left out, in line with Store fuel safely's extinguisher rule (only a small fire in
+   one object, with a clear way out). Say if the group wants Missouri's extinguisher step added.
+47. **Paper to start a fire (surv-wood-stoves-fireplaces) — Heat pack Task 5 fix round.** EPA Burn Wise: start fires with
+   "newspaper, dry kindling, or all natural fire starters". US Fire Administration card: "Do not burn paper in your
+   fireplace or wood stove." CDC: "Do not burn paper in a fireplace." Today: dry kindling or natural fire starters, no
+   paper even to start it (USFA and CDC, the more cautious). Say if the group wants a little newspaper allowed to light
+   kindling, never as fuel.
+48. **Restarting a drained hot-water heating system (surv-unheated-house) — Heat pack Task 5 fix round.** Purdue
+   Extension explains draining the heating pipes and says "Consult a heating contractor about adding antifreeze to your
+   system"; it gives no restart steps. University of Wisconsin Extension warns of an explosion if a water heater is left
+   on without water, but says nothing of boilers. No agency or extension source on refilling or restarting a boiler was
+   found (searches returned only trade forums). Today: the app's own reading, said as such: don't fire the boiler until
+   the system has been refilled, and have a heating contractor refill and restart it; both places in the topic now label it
+   "this app's own caution" (whole-pack review). Say if someone in the group knows
+   the group's boilers well enough to write restart steps from their manuals.
+
+50. **How fast skin freezes at 0°F with a 15 mph wind (surv-wind-chill, wind chill tool) — Heat pack Task 6.** National
+   Weather Service, Understanding Wind Chill (weather.gov/safety/cold-wind-chill-chart): at 0°F and 15 mph the wind chill
+   is -19°F and "exposed skin can freeze in 30 minutes". NOAA JetStream, Wind Chill (noaa.gov/jetstream/synoptic/wind-chill),
+   same conditions: "exposed skin can freeze in just a few minutes." NWS Peachtree City prints "less than 30 minutes" and
+   the NWS Alaska legend "30 minutes or less" (wind chill record, Task 3). Today: the tool's title says "30 minutes or less ... and faster when colder
+   or windier" and does not quote JetStream; the Wind chill topic quotes both, NWS first, and says "Plan on the shorter
+   time." Say if the tool's title should also quote JetStream's "just a few minutes".
+51. **Candle in the car kit (vehicle-winter-kit, surv-winter-storms) — Heat pack Task 6.** National Weather Service
+   (Prepare! Don't Let a Winter Storm Take You by Surprise) lists "Candle and matches to provide light and in an emergency,
+   lifesaving heat" in its car kit, and NWS Twin Cities lists "candles/matches/metal cup to melt snow". The Red Cross
+   (February 21, 2023): "Use flashlights in the dark — not candles"; CPSC (as in Carbon monoxide): flashlights or
+   battery-operated candles instead of candles. Today: no candle in the checklist or the topic; flashlight with spare
+   batteries instead. The NWS and CDC "waterproof matches and a can to melt snow" item is kept; its note says never burn
+   anything inside the car (the app's choice). Say if the group wants a candle in the car kit, and whether the note should
+   say where to light it (outside the car, away from the exhaust: no opened source says this, so it is not in the text).
+52. **How long to run the engine when stranded (surv-winter-storms) — Heat pack Task 6.** NWS brochure (Winter Weather
+   Safety for You and Your Family), CDC (During & After a Winter Storm) and the Red Cross: about 10 minutes each hour, one
+   window slightly open, exhaust pipe clear. This matches the checked Carbon monoxide poisoning protocol (CDC). NWS Twin
+   Cities (Winter Hazard Awareness Week, November 7, 2023): "Run the engine a few minutes every hour, or every half hour in
+   extreme cold." Today: about 10 minutes each hour (three national sources and the protocol). Running more often in
+   extreme cold means more warmth but more exhaust; say if the group wants the Twin Cities line added.
+53. **Sleeping in a stranded car while the engine runs (surv-winter-storms, surv-sleep-warm) — Heat pack Task 6 fix
+   round.** The Red Cross (February 21, 2023): "If more than one person is in the vehicle, take turns sleeping." CDC: "Stay
+   awake." The checked Carbon monoxide poisoning protocol: "Do not run a stove, heater, lantern, generator or engine
+   inside a tent, snow shelter, camper or vehicle where people are sleeping." Read strictly, the protocol means no one may
+   be asleep while the engine runs, which the Red Cross does not say. Today: someone is always awake; anyone asleep is
+   woken before the engine is started for its 10 minutes and the engine is off before anyone goes back to sleep (the
+   strictest reading). Waking everyone hourly costs sleep on a long night; say if the group would rather allow sleepers
+   while one person stays awake and watches the clock. Fix round 2: the doFirst, summary and Sleep warm lines now
+   say the same (everyone awake while the engine runs; off before anyone sleeps); CDC's "stay awake" is kept as
+   "as much as you can", sleeping only in turns with the engine off.
+
+60. **Fire beside a shelter: which way it faces and how far (surv-shelter, surv-fire) — Heat pack Task 7.** Army ATP
+   3-50.21 (6-16, 6-32) puts the back of every lean-to into the wind, with the fire in front and a reflector behind it
+   (5-7, 6-33). The same manual (6-40) says that when a fire is outside a shelter, the shelter's opening should face 90
+   degrees to the prevailing wind, so sparks and smoke are not blown in when the wind reverses morning and evening (common
+   in mountains), and that the best fire-to-shelter distance is about 3 feet. Smokey Bear: campfires at least 15 feet
+   from tents (D8). Army TC 21-3: keep a lean-to fire from burning too hot and burning the shelter down. Today: the
+   checked lean-to text stays (back into the wind, fire in front, reflector behind it); no distance is given; the new
+   "Fire and stoves in and near shelters" section carries TC 21-3's warning. Say if the group wants the 90-degree
+   opening or a distance added.
+61. **Heating or cooking inside a snow shelter (surv-shelter) — Heat pack Task 7.** Army TC 21-3 (1986) heats snow caves
+   and igloos with a one-burner gasoline stove or candles, puts them out while people sleep, and posts an awake fire guard
+   if a fire is needed while sleeping. Army ATP 3-50.21 says to cook in the lower entrance area of a snow cave (6-27) and
+   that candles, fuel gel and small oil lamps make carbon monoxide, so vent holes must stay open (6-39). The US Antarctic
+   Program's 2024 field manual says ventilation is critical if a stove is run in any snow shelter. CDC: never use a
+   charcoal grill, lantern or portable camping stove inside a tent; CPSC: never use fuel-burning heaters or lanterns while
+   sleeping in an enclosed area. Today: no stove, grill or lantern inside a tent or snow shelter at all, and no heater or
+   lantern while sleeping in one (the checked Shelter and Priorities line, CDC and CPSC), and, added in the fix round, no
+   fire, candle, fuel gel or oil lamp inside a tent or snow shelter (ATP 6-39: they make carbon monoxide; CDC: burn
+   nothing that isn't vented). The topic says the Army manuals differ and that the app does not follow them. Melting
+   snow for water stays outdoors (Water in winter). Say if anyone in the group has trained to heat or cook in a snow
+   shelter and wants the Army's way (stove out while people sleep, an awake fire guard) allowed.
+62. **Pyramid fire overnight (surv-fire) — Heat pack Task 7.** Army ATP 3-50.21 (5-27): a pyramid fire burns downward,
+   "requiring no attention during the night." USDA Forest Service, Smokey Bear and NYS DEC: never leave a fire
+   unattended (the checked Fire text). Army TC 21-3 (snow caves): put fires out while people sleep, or post an alert fire
+   guard if a fire is needed while sleeping. Today (fix round): the pyramid lay is described, the Army's claim is named,
+   and both Fire and Shelter say asleep counts as unattended: if a fire must burn while people sleep, one person stays
+   awake to watch it, otherwise put it out (TC 21-3's rule, applied to an open fire). This applies to outdoor fires only; a
+   fireplace or stove follows D44 (put out, no fire watch). TC 21-3 gives the rule for snow caves in severe weather, and the
+   topics now say so. Say if the group wants something different for a survival camp.
+63. **Snow cave and quinzhee sizes from non-agency sources (surv-shelter) — Heat pack Task 7.** Snow cave figures come
+   from Army TC 21-3 and ATP 3-50.21 (drift at least 10 feet deep, walls and roof at least 1 foot, two vents, check them
+   every 2 or 3 hours). No agency source opened gives quinzhee sizes; they come from Scout Life (Boy Scouts of America)
+   and the Appalachian Mountain Club, which differ slightly: settle 60 to 90 minutes (AMC) or about 90 (Scout Life);
+   walls at least 1 foot (AMC) or 1 to 2 feet (Scout Life); entrance on the downwind (AMC) or downhill (Scout Life)
+   side. Today: about 90 minutes, at least 1 foot, downwind, with both named. Fix round: AMC's warning that very cold,
+   granular snow takes longer and may not bond at all, its snowball test (don't build from snow that won't make a
+   snowball) and "light through a wall means it's too thin" are added. The snow trench size (3 feet deep,
+   shoulder-wide) is the US Antarctic Program's; no source gives its vent, so the app's existing vent-hole rule applies.
+   Say if anyone in the group has trained on these and wants different figures (they would need a source).
+64. **Quinzhee entrance and the raised beds (surv-shelter) — Heat pack Task 8 fix round.** Shelter's Snow section says
+   "build the sleeping platform higher than the entrance", and its Snow cave steps (Army TC 21-3, ATP 3-50.21) say "Make
+   the sleeping platform higher than the top of the entrance, where the air is warmer". The quinzhee steps (Appalachian
+   Mountain Club, Scout Life) say "Dig a small entrance at the base ... just big enough to crawl through" and "Leave the
+   last foot of snow as raised beds", with no entrance height. A crawl-through entrance is likely taller than one foot,
+   so read literally the beds would sit below the top of the entrance, against the platform rule. Today: the quinzhee
+   diagram draws no entrance, and the text is unchanged. Say if the quinzhee steps should add a line (for example "keep
+   the beds higher than the top of the entrance, as in Snow cave"), which would need a source that says it for a
+   quinzhee, or should point to the Snow rule.
+65. **Ash can distance from the house (surv-wood-stoves-fireplaces) — Heat pack Task 9 (whole-pack review).** US Fire
+   Administration (Fireplace and Wood Stove Safety card): ashes in a metal container with a lid, outside, at least 10
+   feet from the home. FEMA (Chimney Fire Precautions, December 8, 2020): "Put ashes in a metal container with a lid,
+   outside, at least 3 feet from your home." Today: 10 feet (3 m), the more cautious; FEMA's 3 feet is not in the text.
+   Say if the group wants the shorter distance where 10 feet is hard to reach (for example in deep snow).
+66. **The Carbon monoxide poisoning protocol names only tents, shelters and vehicles (p:carbon-monoxide) — Heat pack Task 9
+   (whole-pack review).** Its first step says "Get everyone out of the tent, shelter or vehicle", and its search keywords
+   have no "house", "CO alarm" or "furnace". In the heat pack the common case is a house: the Carbon monoxide topic sends a
+   person with symptoms indoors to this protocol, and its own steps cover leaving a house. Nobody is harmed today. The
+   protocol is checked and was not edited in this pack. Say if the protocol's first step and keywords should name a house
+   (that is a protocol change, to be checked like any other).
+67. **"Fuel-burning equipment where people sleep" in the Carbon monoxide poisoning protocol (p:carbon-monoxide) — Heat
+   pack Task 9 (whole-pack review).** Its sixth step says never to run fuel-burning equipment where people sleep. Read
+   literally that covers a vented furnace and a vented wood stove too. The heat pack treats a vented furnace as normal
+   overnight, and puts a wood stove out before sleep for fire reasons (D44). The app reads the protocol's words as meaning
+   unvented or camp equipment; nobody is harmed (the literal reading is stricter). The protocol was not edited. Say if its
+   wording should say "unvented" (a protocol change, to be checked like any other).

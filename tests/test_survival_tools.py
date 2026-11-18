@@ -1,12 +1,18 @@
 """Task 9: Survival tools registry and the SOS light page (#/survival/tool/sos).
 Task 10: the Daylight and moon page (#/survival/tool/daylight)."""
 import json
+import math
+import re
+import zlib
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from playwright.sync_api import expect
 
-from .test_survival_topic import wait_hash
+import pytest
+
+from .conftest import inject_data
+from .test_survival_topic import XSS, topic, wait_hash
 from .test_tools import T0, boot as tools_boot
 from .test_astro import ROWS, ak_page, ny_page   # noqa: F401  (pytest fixtures with a fixed time zone)
 
@@ -48,7 +54,7 @@ def sample_units(page, n):
 
 def test_registry_lists_sos_and_home_shows_it_under_tools(page, app_url):
     boot(page, app_url)
-    assert page.evaluate('FK.survival.tools().map(t => [t.name, t.label])') == [['sos', 'SOS light'], ['daylight', 'Daylight and moon'], ['water', 'Water planner']]
+    assert page.evaluate('FK.survival.tools().map(t => [t.name, t.label])') == [['sos', 'SOS light'], ['daylight', 'Daylight and moon'], ['water', 'Water planner'], ['windchill', 'Wind chill']]
     assert page.locator('#survTools h2').inner_text() == 'Tools'
     page.locator('#survTools button[data-key="u:sos"]').click()
     wait_hash(page, SOS)
@@ -559,3 +565,513 @@ def test_f14_position_screen_is_a_button_that_opens_it(ny_page, app_url):
     assert btn.bounding_box()['height'] >= 48
     btn.click()
     page.wait_for_function("location.hash === '#/tactical/position'")
+
+
+# ---------- Wind chill (#/survival/tool/windchill) ----------
+WC = '#/survival/tool/windchill'
+OFF_CHART = 'Off the National Weather Service chart. No figure is shown.'
+WC_MISSING = 'The wind chill tool’s numbers are not available yet. Nothing is shown until they have been checked against sources.'
+WHOLE = 'Enter a whole number.'
+NO_BAND = 'Fixture: no frostbite time is shaded at this wind chill.'
+CONSTS = {k: {'value': v, 'unit': u, 'note': 'fixture'} for k, v, u in
+          (('c0', 35.74, '°F'), ('cT', 0.6215, ''), ('cV', 35.75, ''), ('cTV', 0.4275, ''), ('exp', 0.16, ''))}
+
+
+def js_round(x):
+    return math.floor(x + 0.5)
+
+
+def formula(t, v, c=CONSTS):
+    e = v ** c['exp']['value']
+    return js_round(c['c0']['value'] + c['cT']['value'] * t - c['cV']['value'] * e + c['cTV']['value'] * t * e)
+
+
+def make_wc(temps, winds, bands, **extra):
+    chill = [[formula(t, v) for t in temps] for v in winds]
+    d = {'id': 'windchill', 'title': NO_BAND, 'values': CONSTS,
+         'grid': {'temps': temps, 'winds': winds, 'chill': chill, 'bands': bands, 'bandMinutes': [5, 10, 30]},
+         'sources': [{'name': 'Fixture weather service', 'used': 'formula'}, {'name': 'Second source', 'used': 'chart'}],
+         'reviewed': '2026-11-18'}
+    d.update(extra)
+    return d
+
+
+SMALL = make_wc([10, 0, -10], [5, 15, 30], [[0, 0, 30], [0, 30, 10], [30, 10, 5]])
+REAL_T = list(range(40, -50, -5))
+REAL_V = list(range(5, 65, 5))
+
+
+def real_band(t, v):
+    c = formula(t, v)
+    return 0 if c > -19 else 30 if c > -35 else 10 if c > -48 else 5
+
+
+REAL = make_wc(REAL_T, REAL_V, [[real_band(t, v) for t in REAL_T] for v in REAL_V])
+
+
+def wc_boot(page, app_url, data=SMALL, hash_=WC, storage=None, topics=None, night=False):
+    page.set_default_timeout(4000)
+    kw = {'topics': topics} if topics is not None else {}
+    inject_data(page, tooldata={'windchill': data} if data is not None else {'other': {'id': 'other'}}, only=True, **kw)
+    seed = {'fk.advAck': 'true', **({'fk.night': 'true'} if night else {}), **{'fk.' + k: json.dumps(v) for k, v in (storage or {}).items()}}
+    page.add_init_script("if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1'); const d = %s;"
+                         " for (const k in d) localStorage.setItem(k, d[k]); }" % json.dumps(seed))
+    page.goto(app_url + hash_)
+    page.wait_for_function('window.FK && FK.survival && FK.survival.tools')
+
+
+def wc_in(page, temp, wind):
+    t = page.locator('#survPage').get_by_label('Air temperature (°F)', exact=True)
+    w = page.locator('#survPage').get_by_label('Wind (mph)', exact=True)
+    for f, v in ((t, str(temp)), (w, str(wind))):
+        if v == '':
+            f.fill('0')   # a field that was never typed in has nothing to say; typing and then clearing it does
+        f.fill(v)
+    return t, w
+
+
+def wc_out(page):
+    return page.locator('#survPage .wc-res').inner_text()
+
+
+def wc_clean(page):
+    t = page.inner_text('#survPage')
+    assert 'NaN' not in t and 'Infinity' not in t and 'undefined' not in t, t
+    return t
+
+
+def wc_nothing(page):
+    """No figure, no band."""
+    t = wc_clean(page)
+    assert 'Feels like' not in t and 'Frostbite possible' not in t
+    assert page.locator('#survPage [data-k="chill"], #survPage [data-k="band"]').count() == 0
+    return t
+
+
+def wc_expect(page, chill, band):
+    expect(page.locator('#survPage [data-k="chill"]')).to_have_text(f'Feels like {chill}°F')
+    if band:
+        expect(page.locator('#survPage [data-k="band"]')).to_have_text(f'Frostbite possible in about {band} minutes on exposed skin')
+    else:
+        expect(page.locator('#survPage [data-k="band"]')).to_have_text(NO_BAND)
+
+
+def test_wc_initial_state_has_two_empty_labelled_fields_no_result_no_error(page, app_url):
+    wc_boot(page, app_url)
+    expect(page.locator('#survPage h2')).to_have_text('Wind chill')
+    for name in ('Air temperature (°F)', 'Wind (mph)'):
+        f = page.locator('#survPage').get_by_label(name, exact=True)
+        assert f.input_value() == ''
+    t = wc_nothing(page)
+    assert WHOLE not in t and OFF_CHART not in t and WC_MISSING not in t
+    assert page.locator('#survPage .wc-err').all_inner_texts() == ['', '']
+    assert page.evaluate('FK.recent.all()') == ['u:windchill']
+
+
+def test_wc_one_filled_field_shows_nothing_for_the_other(page, app_url):
+    wc_boot(page, app_url)
+    page.locator('#survPage').get_by_label('Air temperature (°F)', exact=True).fill('0')
+    t = wc_nothing(page)
+    assert WHOLE not in t and OFF_CHART not in t
+
+
+@pytest.mark.parametrize('fx', [SMALL, REAL], ids=['small', 'real-shape'])
+def test_wc_every_cell_returns_its_own_chill_and_band(page, app_url, fx):
+    wc_boot(page, app_url, fx)
+    g = fx['grid']
+    for wi, v in enumerate(g['winds']):
+        for ti, t in enumerate(g['temps']):
+            wc_in(page, t, v)
+            wc_expect(page, g['chill'][wi][ti], g['bands'][wi][ti])
+            wc_clean(page)
+
+
+def test_wc_the_four_corners_and_every_edge_cell_return_their_own_band(page, app_url):
+    wc_boot(page, app_url)
+    # (temp, wind) -> band, read off SMALL by hand: rows are winds 5, 15, 30; columns temps 10, 0, -10
+    for (t, v), band in {(10, 5): 0, (-10, 5): 30, (10, 30): 30, (-10, 30): 5,   # corners
+                         (0, 5): 0, (10, 15): 0, (-10, 15): 10, (0, 30): 10}.items():   # edge middles
+        wc_in(page, t, v)
+        wc_expect(page, formula(t, v), band)
+
+
+def test_wc_between_cells_the_band_is_the_next_colder_temp_and_higher_wind_but_the_formula_uses_the_real_inputs(page, app_url):
+    wc_boot(page, app_url)
+    # T=-3 is between 0 and -10: use -10. V=10 is between 5 and 15: use 15. Band = bands[15][-10] = 10
+    wc_in(page, -3, 10)
+    wc_expect(page, formula(-3, 10), 10)
+    assert formula(-3, 10) not in (formula(-10, 15), formula(0, 5))
+    # T=9 uses 0, V=6 uses 15: bands[15][0] = 30
+    wc_in(page, 9, 6)
+    wc_expect(page, formula(9, 6), 30)
+    # on a chart temperature, between winds: V=16 uses 30
+    wc_in(page, 10, 16)
+    wc_expect(page, formula(10, 16), 30)
+    # on a chart wind, between temperatures: T=-1 uses -10, V=15 uses 15
+    wc_in(page, -1, 15)
+    wc_expect(page, formula(-1, 15), 10)
+
+
+def test_wc_between_cells_on_the_real_shape_chart(page, app_url):
+    wc_boot(page, app_url, REAL)
+    g = REAL['grid']
+    for t, v in ((-12, 13), (7, 59), (39, 6), (-44, 1 + 5)):
+        ti = min(i for i, x in enumerate(g["temps"]) if x <= t)   # largest chart temp <= t
+        wi = min(i for i, x in enumerate(g['winds']) if x >= v)
+        wc_in(page, t, v)
+        wc_expect(page, formula(t, v), g['bands'][wi][ti])
+
+
+def test_wc_a_band_of_zero_shows_the_wind_chill_and_the_datas_own_no_band_sentence(page, app_url):
+    wc_boot(page, app_url)
+    wc_in(page, 10, 5)
+    wc_expect(page, formula(10, 5), 0)
+    assert 'Frostbite possible' not in wc_out(page)
+    assert NO_BAND in wc_out(page)
+
+
+def test_wc_source_name_is_the_first_source_under_the_result(page, app_url):
+    wc_boot(page, app_url)
+    wc_in(page, 0, 15)
+    out = wc_out(page)
+    assert out.rstrip().endswith('Source: Fixture weather service'), out
+    assert 'Second source' not in out
+
+
+@pytest.mark.parametrize('temp,wind', [
+    ('', ''), ('abc', '10'), ('0', 'abc'), ('12.7', '10'), ('0', '12.7'), ('1e9', '10'), ('0', '1e9'), ('', '10'), ('0', ''),
+    ('--5', '10'), ('5-', '10'), (' ', '10'), ('0x10', '10'), ('+5', '10'), ('1,5', '10'), ('Infinity', '10'), ('NaN', '10'),
+], ids=repr)
+def test_review_focus_1_invalid_fields_show_a_plain_message_and_no_figure(page, app_url, temp, wind):
+    wc_boot(page, app_url)
+    wc_in(page, temp, wind)
+    t = wc_nothing(page)
+    assert OFF_CHART not in t
+    # every typed field that is not a whole number (a blank one included) says so under itself
+    expected = [WHOLE if not re.fullmatch(r'-?\d+', v.strip()) else '' for v in (temp, wind)]
+    assert page.locator('#survPage .wc-err').all_inner_texts() == expected
+
+
+@pytest.mark.parametrize('wind', ['-5', '0', '-1', '4', '61', '1000000000', '99999999999999999999999999'])
+def test_review_focus_1_wind_outside_the_chart_is_off_chart_with_no_figure(page, app_url, wind):
+    wc_boot(page, app_url, REAL)
+    wc_in(page, 0, wind)
+    t = wc_nothing(page)
+    assert OFF_CHART in t and WHOLE not in t
+
+
+@pytest.mark.parametrize('temp', ['41', '-46', '1000000000', '-1000000000'])
+def test_review_focus_1_temperature_outside_the_chart_is_off_chart_with_no_figure(page, app_url, temp):
+    wc_boot(page, app_url, REAL)
+    wc_in(page, temp, 10)
+    t = wc_nothing(page)
+    assert OFF_CHART in t and WHOLE not in t
+
+
+def test_review_focus_2_one_step_outside_every_edge_is_off_chart(page, app_url):
+    wc_boot(page, app_url)
+    for t, v in ((11, 15), (-11, 15), (0, 4), (0, 31), (11, 4), (-11, 31)):   # SMALL spans -10..10 and 5..30
+        wc_in(page, t, v)
+        assert OFF_CHART in wc_nothing(page), (t, v)
+    for t, v in ((10, 5), (-10, 30), (-10, 5), (10, 30)):   # and the edges themselves are on the chart
+        wc_in(page, t, v)
+        assert OFF_CHART not in wc_clean(page)
+        assert page.locator('#survPage [data-k="chill"]').count() == 1
+
+
+def test_wc_whitespace_around_a_whole_number_is_accepted_and_a_minus_sign_is_allowed(page, app_url):
+    wc_boot(page, app_url)
+    wc_in(page, ' -10 ', ' 30 ')
+    wc_expect(page, formula(-10, 30), 5)
+
+
+def test_wc_typographic_minus_is_a_minus_sign(page, app_url):
+    # U+2212 is what the stepper button shows and what some keyboards and pasted text produce
+    wc_boot(page, app_url)
+    wc_in(page, '\u22125', '10')
+    wc_expect(page, formula(-5, 10), SMALL['grid']['bands'][1][2])   # -5 -> chart -10, 10 -> 15
+    wc_in(page, ' \u221210 ', '30')
+    wc_expect(page, formula(-10, 30), 5)
+    page.get_by_role('button', name='One degree warmer', exact=True).click()
+    assert page.locator('#survPage').get_by_label('Air temperature (°F)', exact=True).input_value() == '-9'
+
+
+@pytest.mark.parametrize('temp', ['\u2212', '\u2212\u22125', '-\u22125', '5\u2212', '\u2212 5', '\u22125.5', '\u2013 5', '\u20135'], ids=repr)
+def test_wc_typographic_minus_does_not_let_other_malformed_input_through(page, app_url, temp):
+    wc_boot(page, app_url)
+    wc_in(page, temp, '10')
+    wc_nothing(page)
+    assert page.locator('#survPage .wc-err').all_inner_texts() == [WHOLE, '']
+
+
+def test_wc_temperature_field_gets_a_keyboard_with_a_minus_and_wind_stays_numeric(page, app_url):
+    # iPhone number pads (numeric and decimal) have no minus key; temperatures below zero are what the tool is for
+    wc_boot(page, app_url)
+    t = page.locator('#survPage').get_by_label('Air temperature (°F)', exact=True)
+    w = page.locator('#survPage').get_by_label('Wind (mph)', exact=True)
+    assert t.get_attribute('type') == 'text' and t.get_attribute('inputmode') == 'text'
+    assert (t.get_attribute('autocapitalize'), t.get_attribute('autocorrect'), t.get_attribute('spellcheck')) == ('off', 'off', 'false')
+    assert w.get_attribute('type') == 'text' and w.get_attribute('inputmode') == 'numeric'
+
+
+def test_wc_error_sits_under_its_own_field_and_marks_it_invalid(page, app_url):
+    wc_boot(page, app_url)
+    t, w = wc_in(page, 'abc', '10')
+    assert t.get_attribute('aria-invalid') == 'true' and w.get_attribute('aria-invalid') != 'true'
+    err = page.locator('#survPage .wc-err').first
+    assert err.inner_text() == WHOLE
+    desc = t.get_attribute('aria-describedby')
+    assert err.get_attribute('id') in desc.split()
+    assert err.bounding_box()['y'] > t.bounding_box()['y']
+    t.fill('0')
+    assert page.locator('#survPage .wc-err').all_inner_texts() == ['', '']
+    assert t.get_attribute('aria-invalid') != 'true'
+
+
+def test_wc_steppers_step_by_one_across_zero_and_are_48px(page, app_url):
+    wc_boot(page, app_url)
+    wc_in(page, 1, 10)
+    colder = page.get_by_role('button', name='One degree colder', exact=True)
+    warmer = page.get_by_role('button', name='One degree warmer', exact=True)
+    for b in (colder, warmer, page.get_by_role('button', name='One mph more', exact=True), page.get_by_role('button', name='One mph less', exact=True)):
+        box = b.bounding_box()
+        assert box['width'] >= 48 and box['height'] >= 48
+    colder.click()
+    colder.click()
+    t = page.locator('#survPage').get_by_label('Air temperature (°F)', exact=True)
+    assert t.input_value() == '-1'
+    wc_expect(page, formula(-1, 10), SMALL['grid']['bands'][1][2])   # -1 -> chart -10, 10 -> 15
+    warmer.click()
+    assert t.input_value() == '0'
+    page.get_by_role('button', name='One mph more', exact=True).click()
+    assert page.locator('#survPage').get_by_label('Wind (mph)', exact=True).input_value() == '11'
+    wc_expect(page, formula(0, 11), SMALL['grid']['bands'][1][1])
+
+
+def test_wc_a_stepper_on_an_invalid_field_starts_from_zero(page, app_url):
+    wc_boot(page, app_url)
+    t, w = wc_in(page, 'abc', '')
+    page.get_by_role('button', name='One degree warmer', exact=True).click()
+    page.get_by_role('button', name='One mph more', exact=True).click()
+    assert t.input_value() == '1' and w.input_value() == '1'
+    assert page.locator('#survPage .wc-err').all_inner_texts() == ['', '']
+
+
+def test_wc_keyboard_only_use(page, app_url):
+    wc_boot(page, app_url)
+    assert page.evaluate('document.activeElement.id') == 'svTitle'
+    names = []
+    for _ in range(6):
+        page.keyboard.press('Tab')
+        names.append(page.evaluate('document.activeElement.getAttribute("aria-label") || document.activeElement.dataset.act || document.activeElement.id'))
+    assert names[:6] == ['Pin this tool', 'One degree colder', 'wcT', 'One degree warmer', 'One mph less', 'wcV'], names
+    page.keyboard.press('Shift+Tab'); page.keyboard.press('Shift+Tab'); page.keyboard.press('Shift+Tab')   # back to the temperature field
+    assert page.evaluate('document.activeElement.id') == 'wcT'
+    page.keyboard.type('-3')
+    page.keyboard.press('Tab'); page.keyboard.press('Tab'); page.keyboard.press('Tab')
+    assert page.evaluate('document.activeElement.id') == 'wcV'
+    page.keyboard.type('10')
+    page.keyboard.press('Tab')
+    assert page.evaluate('document.activeElement.getAttribute("aria-label")') == 'One mph more'
+    page.keyboard.press('Space')   # 11
+    wc_expect(page, formula(-3, 11), 10)
+
+
+def test_wc_result_is_announced_politely(page, app_url):
+    wc_boot(page, app_url)
+    assert page.locator('#survPage .wc-res').get_attribute('role') == 'status' or page.locator('#survPage .wc-res').get_attribute('aria-live') == 'polite'
+
+
+def test_wc_nothing_is_saved(page, app_url):
+    wc_boot(page, app_url)
+    before = page.evaluate('JSON.stringify(Object.entries(localStorage).sort())')
+    wc_in(page, -3, 10)
+    page.get_by_role('button', name='One mph more', exact=True).click()
+    assert page.evaluate('JSON.stringify(Object.entries(localStorage).sort())') == before
+    page.reload()
+    page.wait_for_function('window.FK && FK.survival && FK.survival.tools')
+    assert page.locator('#survPage').get_by_label('Wind (mph)', exact=True).input_value() == ''
+    wc_nothing(page)
+
+
+@pytest.mark.parametrize('night', [False, True])
+def test_wc_fits_360px_in_day_and_night_with_every_state(page, app_url, night):
+    wc_boot(page, app_url, REAL, night=night)
+    assert (page.evaluate("document.documentElement.dataset.theme") == 'night') is night
+
+    def fits():
+        assert page.evaluate('document.documentElement.scrollWidth') <= 360
+        over = page.evaluate("""[...document.querySelectorAll('#survPage *')].filter(el => {
+            const r = el.getBoundingClientRect(); return r.width && (r.right > innerWidth + 0.5 || r.left < -0.5); }).map(el => el.outerHTML.slice(0, 80))""")
+        assert over == []
+    fits()
+    wc_in(page, -45, 60)
+    wc_expect(page, formula(-45, 60), real_band(-45, 60))
+    fits()
+    wc_in(page, 40, 5)
+    fits()
+    wc_in(page, 'abc', 1000000000)
+    fits()
+    wc_in(page, 99, 99)
+    fits()
+    if night:   # text stays readable: result text is not the same colour as its panel
+        res = page.evaluate("(() => { const c = getComputedStyle(document.querySelector('#survPage .wp-out')); return [c.color, c.backgroundColor]; })()")
+        assert res[0] != res[1]
+
+
+@pytest.mark.parametrize('data', [
+    None,
+    {**SMALL, 'draft': True},
+    {k: v for k, v in SMALL.items() if k != 'grid'},
+    {k: v for k, v in SMALL.items() if k != 'values'},
+    {**SMALL, 'values': {**CONSTS, 'exp': {'value': 'x'}}},
+    {**SMALL, 'values': {**CONSTS, 'c0': {'value': None}}},
+    {**SMALL, 'values': {k: v for k, v in CONSTS.items() if k != 'cTV'}},
+    {**SMALL, 'values': {**CONSTS, 'cV': 35.75}},
+    {**SMALL, 'grid': {**SMALL['grid'], 'chill': SMALL['grid']['chill'][:2]}},
+    {**SMALL, 'grid': {**SMALL['grid'], 'chill': [r[:2] if i == 1 else r for i, r in enumerate(SMALL['grid']['chill'])]}},   # ragged chill row
+    {**SMALL, 'grid': {**SMALL['grid'], 'bands': [r[:2] if i == 1 else r for i, r in enumerate(SMALL['grid']['bands'])]}},   # ragged band row
+    {**SMALL, 'grid': {**SMALL['grid'], 'bands': SMALL['grid']['bands'] + [[0, 0, 0]]}},
+    {**SMALL, 'grid': {**SMALL['grid'], 'bands': [[0, 0, 7], [0, 30, 10], [30, 10, 5]]}},   # band not in the allowed set
+    {**SMALL, 'grid': {**SMALL['grid'], 'bands': [[0, 0, '30'], [0, 30, 10], [30, 10, 5]]}},
+    {**SMALL, 'grid': {**SMALL['grid'], 'temps': [10, -10, 0]}},   # not descending
+    {**SMALL, 'grid': {**SMALL['grid'], 'temps': [10, 10, -10]}},   # not strictly
+    {**SMALL, 'grid': {**SMALL['grid'], 'temps': [-10, 0, 10]}},   # ascending
+    {**SMALL, 'grid': {**SMALL['grid'], 'winds': [5, 30, 15]}},   # not ascending
+    {**SMALL, 'grid': {**SMALL['grid'], 'winds': [0, 15, 30]}},   # wind must be above zero
+    {**SMALL, 'grid': {**SMALL['grid'], 'winds': [-5, 15, 30]}},
+    {**SMALL, 'grid': {**SMALL['grid'], 'winds': [5, 15, 15]}},
+    {**SMALL, 'grid': {k: v for k, v in SMALL['grid'].items() if k != 'bandMinutes'}},
+    {**SMALL, 'grid': {**SMALL['grid'], 'bandMinutes': []}},
+    {**SMALL, 'grid': {**SMALL['grid'], 'temps': []}},
+    {**SMALL, 'grid': 'grid'},
+    {**SMALL, 'grid': {**SMALL['grid'], 'temps': [10, 0, None]}},
+    {**SMALL, 'grid': {**SMALL['grid'], 'chill': [[None, 1, 2], [0, 0, 0], [0, 0, 0]]}},
+], ids=lambda d: 'none' if d is None else format(zlib.crc32(json.dumps(d, sort_keys=True).encode()), 'x'))
+def test_review_focus_3_missing_draft_or_damaged_data_shows_only_the_not_available_message(page, app_url, data):
+    wc_boot(page, app_url, data)
+    t = wc_nothing(page)
+    assert WC_MISSING in t
+    assert page.locator('#survPage input, #survPage .sv-step, #survPage .wc-res, #survPage .sv-link').count() == 0
+    assert OFF_CHART not in t and WHOLE not in t
+
+
+def test_wc_a_band_of_zero_with_no_sentence_in_the_data_is_not_shown_as_a_figure(page, app_url):
+    wc_boot(page, app_url, {**SMALL, 'title': ' '})
+    wc_in(page, 10, 5)
+    t = wc_clean(page)
+    assert WC_MISSING in t and 'Feels like' not in t
+    wc_in(page, -10, 30)   # a banded cell does not need the sentence
+    wc_expect(page, formula(-10, 30), 5)
+
+
+def test_wc_data_text_is_shown_as_text(page, app_url):
+    wc_boot(page, app_url, {**SMALL, 'title': 'T ' + XSS, 'sources': [{'name': 'S ' + XSS, 'used': 'U ' + XSS}]})
+    wc_in(page, 10, 5)
+    page.evaluate('new Promise(r => setTimeout(r, 50))')
+    assert page.evaluate('window.__xss') is None
+    assert page.locator('#survPage img').count() == 0
+    out = wc_out(page)
+    assert 'T ' + XSS in out and 'S ' + XSS in out
+
+
+def test_wc_links_appear_only_for_keys_that_resolve(page, app_url):
+    wc_boot(page, app_url, topics=[])   # no surv-wind-chill topic (one ships from batch C): the hypothermia and frostbite protocols are shipped
+    links = page.locator('#survPage .sv-link')
+    assert links.evaluate_all('els => els.map(e => e.dataset.link)') == ['p:hypothermia', 'p:frostbite']
+    assert page.locator('#survPage button[data-link="s:surv-wind-chill"]').count() == 0
+    assert all(links.nth(i).bounding_box()['height'] >= 48 for i in range(2))
+
+
+def test_wc_links_include_the_topic_once_it_exists_and_open_it(page, app_url):
+    wc_boot(page, app_url, topics=[topic('surv-wind-chill', 'Wind chill and cold exposure', [{'h': 'Only', 'blocks': [{'p': 'Body.'}]}])])
+    links = page.locator('#survPage .sv-link')
+    assert links.evaluate_all('els => els.map(e => e.dataset.link)') == ['s:surv-wind-chill', 'p:hypothermia', 'p:frostbite']
+    links.first.click()
+    wait_hash(page, '#/survival/surv-wind-chill')
+    expect(page.locator('#survPage h2')).to_have_text('Wind chill and cold exposure')
+
+
+def test_wc_links_lead_with_the_shipped_wind_chill_topic(page, app_url):
+    wc_boot(page, app_url)   # shipped topics: batch C's surv-wind-chill resolves
+    links = page.locator('#survPage .sv-link')
+    assert links.evaluate_all('els => els.map(e => e.dataset.link)') == ['s:surv-wind-chill', 'p:hypothermia', 'p:frostbite']
+    assert 'Wind chill and cold danger' in links.first.inner_text()
+
+
+def test_wc_link_opens_the_emergency_protocol(page, app_url):
+    wc_boot(page, app_url)
+    page.locator('#survPage button[data-link="p:frostbite"]').click()
+    page.wait_for_function("location.hash.includes('frostbite')")
+
+
+def test_wc_is_on_the_survival_home_and_search_finds_it_by_wind_chill_and_frostbite(page, app_url):
+    wc_boot(page, app_url, hash_='#/survival')
+    assert page.locator('#survTools button[data-key="u:windchill"]').inner_text().startswith('Wind chill')
+    page.locator('#survTools button[data-key="u:windchill"]').click()
+    wait_hash(page, WC)
+    page.go_back()
+    wait_hash(page, '#/survival')
+    page.click('#searchBtn')
+    for words in ('wind chill', 'frostbite', 'windchill', 'feels like'):
+        page.fill('#searchInput', words)
+        expect(page.locator('#searchBody .sr-item[data-key="u:windchill"]')).to_have_count(1)
+    page.click('#searchBody .sr-item[data-key="u:windchill"]')
+    wait_hash(page, WC)
+    expect(page.locator('#survPage h2')).to_have_text('Wind chill')
+
+
+def test_wc_pin_star_pins_the_tool(page, app_url):
+    wc_boot(page, app_url)
+    page.click('#survPage .sv-head [data-act="pin"]')
+    assert page.evaluate("FK.pins.has('u:windchill')") is True
+
+
+def test_wc_leaving_the_page_leaves_no_listeners_that_break(page, app_url):
+    errors = []
+    page.on('pageerror', lambda e: errors.append(str(e)))
+    page.on('console', lambda m: errors.append(m.text) if m.type == 'error' else None)
+    wc_boot(page, app_url)
+    wc_in(page, 0, 10)
+    page.evaluate("FK.route.go('/survival')")
+    wait_hash(page, '#/survival')
+    assert errors == []
+
+
+# ---------- Wind chill: the shipped NWS chart (src/tooldata/windchill.json) ----------
+SHIPPED_WC = json.loads((__import__('pathlib').Path(__file__).resolve().parent.parent / 'src' / 'tooldata' / 'windchill.json').read_text(encoding='utf-8'))
+
+
+def test_wc_shipped_every_chart_cell_is_the_nws_formula_with_the_files_constants():
+    """Every transcribed cell is reproduced by the formula, with the file's own constants and JS Math.round."""
+    g = SHIPPED_WC['grid']
+    assert len(g['chill']) == len(g['winds']) and all(len(r) == len(g['temps']) for r in g['chill'])
+    wrong = [(v, t, g['chill'][wi][ti], formula(t, v, SHIPPED_WC['values']))
+             for wi, v in enumerate(g['winds']) for ti, t in enumerate(g['temps'])
+             if g['chill'][wi][ti] != formula(t, v, SHIPPED_WC['values'])]
+    assert wrong == [], 'cells (wind, temp, chart, formula) that the formula does not reproduce: %r' % wrong
+    assert len(g['winds']) * len(g['temps']) == 216
+
+
+def test_wc_shipped_build_shows_nothing_while_the_file_is_a_draft_and_a_figure_once_it_is_not(page, app_url):
+    """The built app with no injected data, at 0°F and 15 mph."""
+    page.set_default_timeout(4000)
+    page.add_init_script("localStorage.setItem('fk.advAck', 'true')")
+    page.goto(app_url + WC)
+    page.wait_for_function('window.FK && FK.survival && FK.survival.tools')
+    if SHIPPED_WC.get('draft') is True:
+        expect(page.locator('#survPage')).to_contain_text(WC_MISSING)
+        assert 'Feels like' not in wc_clean(page)
+    else:
+        wc_in(page, 0, 15)
+        expect(page.locator('#survPage [data-k="chill"]')).to_have_text('Feels like -19°F')
+
+
+def test_wc_shipped_file_undrafted_shows_a_figure_for_a_mid_chart_input(page, app_url):
+    """0°F and 15 mph, the NWS example: -19°F, with the file's own no-band sentence and first source."""
+    wc_boot(page, app_url, {k: v for k, v in SHIPPED_WC.items() if k != 'draft'})
+    wc_in(page, 0, 15)
+    expect(page.locator('#survPage [data-k="chill"]')).to_have_text('Feels like -19°F')
+    expect(page.locator('#survPage [data-k="band"]')).to_have_text(SHIPPED_WC['title'])
+    assert wc_out(page).rstrip().endswith('Source: ' + SHIPPED_WC['sources'][0]['name'])
+    wc_clean(page)

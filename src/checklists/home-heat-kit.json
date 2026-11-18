@@ -1,0 +1,139 @@
+{
+  "id": "home-heat-kit",
+  "title": "Home heat kit",
+  "category": "heat",
+  "summary": "What a household needs to stay warm and safe when the furnace or the power is out.",
+  "items": [
+    {
+      "id": "co-alarms",
+      "text": "Carbon monoxide alarms that run on batteries or have battery backup, on every level and outside each sleeping area",
+      "note": "Put one near the area you heat with a fireplace, wood stove or kerosene heater. Test monthly."
+    },
+    {
+      "id": "smoke-alarms",
+      "text": "Smoke alarms, including one near the area you heat",
+      "note": "Test them every month."
+    },
+    {
+      "id": "extinguisher",
+      "text": "Multipurpose (A-B-C) dry-chemical fire extinguisher, kept near the heat source"
+    },
+    {
+      "id": "heat-source",
+      "text": "At least one emergency heat source, such as a fireplace or wood stove vented to the outside",
+      "note": "CDC: combustion heaters only if properly vented. Kerosene and propane space heaters are not vented: see Kerosene and propane heaters for the only conditions to run one. Never an oven, gas range, grill or camp stove. Have the chimney inspected each year."
+    },
+    {
+      "id": "firewood",
+      "text": "Plenty of dry, seasoned firewood, if you heat with wood"
+    },
+    {
+      "id": "heating-fuel",
+      "text": "Delivered heating fuel (oil, propane) refilled before you run low",
+      "note": "Refill before you run out: deliveries may not reach you for days after a winter storm."
+    },
+    {
+      "id": "fuel-cans",
+      "text": "Fuel in containers made and labelled for it, stored outside the house",
+      "note": "Kerosene in its own can, never one that held gasoline. See Store fuel safely."
+    },
+    {
+      "id": "ash-can",
+      "text": "Metal ash container with a lid"
+    },
+    {
+      "id": "fire-screen",
+      "text": "Glass or metal fireplace screen"
+    },
+    {
+      "id": "blankets",
+      "text": "Extra blankets or sleeping bags"
+    },
+    {
+      "id": "warm-clothes",
+      "text": "Extra warm clothing: layers, long underwear, socks, slippers and hats"
+    },
+    {
+      "id": "baby-sleep",
+      "text": "Wearable blankets or extra sleep layers for any baby",
+      "note": "No loose blankets in a baby’s sleep area."
+    },
+    {
+      "id": "thermometer",
+      "text": "Easy-to-read indoor thermometer"
+    },
+    {
+      "id": "window-plastic",
+      "text": "Plastic to cover windows from the inside, and towels or rags for the cracks under doors"
+    },
+    {
+      "id": "flashlights",
+      "text": "Flashlights or battery lanterns, with extra batteries",
+      "note": "Not candles, and never a fuel lantern indoors."
+    },
+    {
+      "id": "radio",
+      "text": "Battery-powered radio with extra batteries"
+    },
+    {
+      "id": "pipe-antifreeze",
+      "text": "Propylene-glycol antifreeze for drain traps, if you may have to drain the house",
+      "note": "Never car antifreeze (ethylene glycol)."
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Preparing for a Winter Storm (last reviewed December 2, 2025)",
+      "used": "Smoke detector and battery-operated CO detector near the area heated by a fireplace, wood stove or kerosene heater, test monthly; multipurpose dry-chemical fire extinguisher nearby; chimney inspected each year; easy-to-read indoor thermometer; cover windows with plastic from the inside"
+    },
+    {
+      "name": "CDC, Safety Guidelines: During & After a Winter Storm (last reviewed August 25, 2026)",
+      "used": "At least one heat source; a fireplace up to code with plenty of dry firewood; vented to the outside; turning on the stove for heat is not safe; towels or rags in cracks under doors"
+    },
+    {
+      "name": "US Consumer Product Safety Commission (CPSC), Carbon Monoxide Questions and Answers (as used in Carbon monoxide and burning fuel indoors)",
+      "used": "Battery-operated or battery-backup CO alarms on every level and outside sleeping areas"
+    },
+    {
+      "name": "National Weather Service, Prepare! Don't Let a Winter Storm Take You by Surprise",
+      "used": "Flashlight and extra batteries; battery-powered radio; heating fuel, refuel before you are empty, carriers may not reach you for days; emergency heat source properly ventilated; fire extinguisher, smoke alarm, test monthly"
+    },
+    {
+      "name": "FEMA, Keep Warm During a Winter Power Outage and Avoid Hypothermia (January 18, 2018)",
+      "used": "Extra clothing, blankets or sleeping bags"
+    },
+    {
+      "name": "National Institute on Aging (NIH), Hypothermia: A Cold Weather Risk for Older People (January 16, 2009)",
+      "used": "Long underwear, socks and slippers, hat indoors"
+    },
+    {
+      "name": "Safe to Sleep (NICHD, NIH), Ways to Reduce Baby's Risk",
+      "used": "Wearable blanket or an extra layer instead of blankets in the sleep area"
+    },
+    {
+      "name": "American Red Cross, news article on extreme cold safety steps (February 20, 2025)",
+      "used": "Flashlights or battery-operated lanterns, not candles"
+    },
+    {
+      "name": "US Fire Administration, Fireplace and Wood Stove Safety (card)",
+      "used": "Metal ash container with a lid; glass or metal fireplace screen"
+    },
+    {
+      "name": "Purdue University Extension (INPREP), Protect Your Plumbing and Appliances during a Winter Power Failure (2022)",
+      "used": "Propylene-glycol antifreeze for traps; ethylene glycol never in a home water system"
+    },
+    {
+      "name": "Store fuel safely (another topic in this app)",
+      "used": "Approved, labelled containers outside the house; kerosene only in a kerosene can, never one that held gasoline (CPSC); A-B-C extinguisher (US Fire Administration)"
+    },
+    {
+      "name": "American Red Cross, Winter Storm Preparedness Checklist (November 2022)",
+      "used": "Consider using an indoor thermometer"
+    },
+    {
+      "name": "Kerosene and propane heaters; Carbon monoxide and burning fuel indoors (other topics in this app)",
+      "used": "Unvented heaters only under that topic's conditions; never a fuel lantern indoors (CDC)"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

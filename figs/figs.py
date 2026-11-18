@@ -186,17 +186,23 @@ svg('shelter-leanto', 190, 'Lean-to with boughs on the windward side and a fire 
 {lbl(336,40,'Log wall','tb','end')}{lbl(336,54,'reflects heat','','end')}{lbl(336,68,'back in','','end')}{lead(300,72,262,112)}
 {lbl(197,184,'Fire','','middle')}''')
 
-svg('shelter-tarp', 180, 'Tarp pitched as an A-frame over a ridgeline, with the low end facing the wind', f'''
-<line x1="0" y1="160" x2="340" y2="160" class="m"/>
-<line x1="22" y1="6" x2="22" y2="160" class="w t5"/><line x1="318" y1="6" x2="318" y2="160" class="w t5"/>
-<line x1="22" y1="40" x2="318" y2="86" class="k t1"/>
-<path d="M44 43 L296 82 L284 158 L66 158 Z" class="g gf"/>
-<path d="M44 43 L20 158 M44 43 L70 158" class="g d t1"/>
-<path d="M66 158 l-6 8 M284 158 l6 8" class="k"/>
-{arrow(338,118,306,118,'m','aM')}{arrow(338,134,306,134,'m','aM')}{lbl(334,108,'Wind','tm','end')}
-{lbl(110,26,'Ridgeline tied between trees','')}
-{lbl(296,40,'Low end','tb','end')}{lbl(296,54,'into the wind','','end')}{lead(286,58,290,80)}
-{lbl(110,132,'Open, high end','','start')}''')
+# Tarp lean-to in a three-quarter view from the open side: the wind comes from the left onto the low, staked back edge.
+svg('shelter-tarp', 222, 'Tarp lean-to: a rope from each corner of the high front edge tied to its tree about waist high, with a drip stick on each rope; the other long edge staked to the ground as the back, into the wind; the open side faces away from the wind', f'''
+<path d="M50 156 L130 176 L270 148 L190 128" class="m t1"/>
+<path d="M130 116 V176 M270 88 V148" class="m t1 d"/>
+<path d="M130 116 L270 88 L190 128 L50 156 Z" class="g gf"/>
+<line x1="130" y1="116" x2="270" y2="88" class="g t3" data-part="high-edge"/>
+<line x1="50" y1="156" x2="190" y2="128" class="g t3" data-part="low-edge"/>
+<path d="M50 156 l-5 10 M120 142 l-5 10 M190 128 l-5 10" class="w t3"/>
+<line x1="90" y1="124" x2="130" y2="116" class="k t1"/><line x1="270" y1="88" x2="310" y2="80" class="k t1"/>
+<line x1="124" y1="113" x2="124" y2="123" class="w t3"/><line x1="276" y1="83" x2="276" y2="93" class="w t3"/>
+<line x1="90" y1="184" x2="90" y2="44" class="w t5"/><line x1="310" y1="140" x2="310" y2="20" class="w t5"/>
+{arrow(4,122,40,131,'m','aM').replace('<line', '<line data-part="wind"', 1)}{arrow(4,142,32,149,'m','aM')}{lbl(4,112,'Wind','tm')}
+{lbl(4,16,'Each rope tied to its','')}{lbl(4,30,'tree about waist high','')}{lead(100,35,110,118)}
+{lbl(196,40,'Drip stick','')}{lead(232,44,274,82)}
+<text x="150" y="104" transform="rotate(-11.3 150 104)" class="tb">High front edge</text>
+{lbl(4,200,'Low, staked edge:','tb')}{lbl(4,214,'back into the wind','')}{lead(48,188,84,150)}
+{lbl(336,186,'Open side faces','tb','end')}{lbl(336,200,'away from the wind','','end')}{lead(262,178,226,132)}''')
 
 svg('shelter-snow', 200, 'Snow trench cross-section: roof with a vent hole, raised sleeping shelf, cold air sinking to a lower trench', f'''
 <path d="M0 60 H100 V140 H190 V175 H240 V60 H340 V200 H0 Z" class="snow"/>
@@ -209,6 +215,26 @@ svg('shelter-snow', 200, 'Snow trench cross-section: roof with a vent hole, rais
 {lbl(336,140,'Cold air sinks','tb','end')}{lbl(336,154,'to the low end','','end')}{lead(270,158,228,168)}
 {lbl(170,194,'Snow','tm','middle')}''')
 
+# Quinzhee cut across the middle: walls the depth of the sticks, a vent near the top, two raised beds with a trench between them
+# down to the ground. Scale: 118 px = 5 ft, so the 24 px wall is just over 1 ft. No entrance is drawn: the steps give it no
+# height, and the topic's rule (sleeping platform higher than the top of the entrance) cannot be shown from them (review C1, D64).
+quin_sticks = ''.join(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" class="w t3"/>' for x1, y1, x2, y2 in
+                      [(294.2, 150.3, 268.3, 160.8), (264.8, 109.7, 245.0, 129.5), (228.7, 86.3, 216.5, 111.5),
+                       (111.3, 86.3, 123.5, 111.5), (75.2, 109.7, 95.0, 129.5), (45.8, 150.3, 71.7, 160.8)])
+svg('quinzhee', 212, 'Quinzhee cut in half: a snow mound at least 5 feet (1.5 m) high, sticks pushed a foot (30 cm) deep so the walls stay at least 1 foot (30 cm) thick, a ventilation hole near the top, and raised beds with a trench down to the ground between them so cold air drains out', f'''
+<rect x="0" y="196" width="340" height="16" class="gr"/><line x1="0" y1="196" x2="340" y2="196" class="m"/>
+<path d="M40 196 A130 118 0 0 1 300 196 H276 A106 94 0 0 0 64 196 Z" class="snow" data-part="walls"/>
+<path d="M64 196 L67.5 172 H158 V196 Z M182 196 V172 H272.5 L276 196 Z" class="snow" data-part="beds"/>
+<rect x="182" y="76" width="8" height="29" class="milk"/><path d="M182 78.5 V103 M190 79 V103" class="k t1"/>
+{quin_sticks}
+{arrow(170,166,170,193,'a','aA')}
+<line x1="24" y1="80" x2="24" y2="194" class="m" marker-start="url(#aM)" marker-end="url(#aM)"/><line x1="18" y1="78" x2="164" y2="78" class="m t1 d"/>
+{lbl(30,30,'At least 5 feet','tb')}{lbl(30,44,'(1.5 m) high','')}
+{lbl(336,20,'Sticks a foot (30 cm) deep:','tb','end')}{lbl(336,34,'walls at least 1 foot (30 cm) thick','','end')}{lead(296,38,256,118)}
+{lbl(150,64,'Ventilation hole','','end')}{lead(152,62,180,82)}
+{lbl(170,144,'Trench down to the ground','tb','middle')}{lbl(170,158,'so cold air drains out','','middle')}
+{lbl(108,188,'Raised beds','tb','middle')}{lbl(232,188,'Raised beds','tb','middle')}''')
+
 svg('shelter-desert', 190, 'Desert shade shelter: two layers with an air gap over a shallow trench', f'''
 {sun(34,28)}
 <path d="M0 110 H80 L90 150 H190 L200 110 H340 V190 H0 Z" class="gr m"/>
@@ -220,6 +246,71 @@ svg('shelter-desert', 190, 'Desert shade shelter: two layers with an air gap ove
 <path d="M220 66 v14" class="m"/>{lbl(226,77,'Air gap','tb')}
 {lbl(226,92,'Shade layer','')}
 {lbl(170,176,'Dig in: deeper sand is cooler','','middle')}''')
+
+# ---------------- HEAT ----------------
+def generator(x, y):
+    """Portable generator, about 36 x 30, top-left corner at x, y."""
+    return (f'<rect x="{x+6}" y="{y}" width="22" height="8" rx="2" class="k"/><rect x="{x}" y="{y+8}" width="36" height="20" rx="3" class="k milk"/>'
+            f'<circle cx="{x+12}" cy="{y+18}" r="5" class="k"/><rect x="{x+22}" y="{y+13}" width="9" height="9" class="k t1"/>'
+            f'<circle cx="{x+30}" cy="{y+31}" r="4" class="k"/><line x1="{x+4}" y1="{y+28}" x2="{x+4}" y2="{y+35}" class="k t3"/>')
+
+svg('generator-placement', 206, 'Generator outside only, more than 20 feet (6 m) from any window, door or vent, with its exhaust pointed away from your home; never inside a home, garage, basement, crawlspace or shed, and never in an attached garage, even with the door open', f'''
+<line x1="0" y1="180" x2="340" y2="180" class="m"/>
+<path d="M2 118 L66 102" class="k t3"/><path d="M6 115 V180 M66 104 V180" class="k" data-part="garage"/>
+<rect x="14" y="124" width="44" height="8" class="k kf"/><path d="M14 132 V180 M58 132 V180" class="k t1"/>
+<g transform="translate(18 146) scale(0.8)">{generator(0, 0)}</g>
+<path d="M14 142 L56 182 M56 142 L14 182" class="h" style="stroke-width:7" data-part="never"/>
+<path d="M60 94 L108 52 L156 94" class="k t3"/><rect x="66" y="92" width="84" height="88" class="k" data-part="house"/>
+<rect x="122" y="104" width="22" height="22" class="k"/><path d="M133 104 V126 M122 115 H144" class="k t1"/>
+<rect x="80" y="136" width="20" height="44" class="k"/>
+<line x1="150" y1="128" x2="264" y2="128" class="m" data-part="distance" marker-start="url(#aM)" marker-end="url(#aM)"/>
+<line x1="264" y1="120" x2="264" y2="144" class="m t1"/>
+<g data-part="generator">{generator(264, 145)}</g>
+{arrow(302,166,334,166,'h','aH').replace('<line', '<line data-part="exhaust"', 1)}<path d="M308 156 q4 -4 8 0 t8 0 M314 176 q4 -4 8 0 t8 0" class="m t1"/>
+{lbl(4,16,'Never inside a home, garage,','tb')}{lbl(4,30,'basement, crawlspace or shed','tb')}{lead(36,35,36,106)}
+{lbl(207,102,'More than','tb','middle')}{lbl(207,116,'20 feet (6 m)','tb','middle')}
+{lbl(207,146,'from any window,','','middle')}{lbl(207,160,'door or vent','','middle')}
+{lbl(336,60,'Exhaust pointed','tb','end')}{lbl(336,74,'away from your home','','end')}{lead(320,78,320,148)}
+{lbl(283,198,'Outside only','tb','middle')}''')
+
+svg('heater-clearance', 210, 'Wood stove vented to the outside, with anything that can burn kept at least 3 feet (1 m) from it: an armchair on one side and curtains on the other', f'''
+<line x1="0" y1="176" x2="340" y2="176" class="m"/><line x1="0" y1="44" x2="340" y2="44" class="m"/>
+<rect x="164" y="10" width="12" height="104" class="k milk"/>
+<rect x="138" y="114" width="64" height="54" rx="3" class="k"/><path d="M142 168 V176 M198 168 V176" class="k t3"/>
+<rect x="150" y="124" width="40" height="36" rx="2" class="k t1"/>{flame(170,158,0.55)}
+<path d="M8 118 Q8 104 20 104 H44 Q56 104 56 118 V138 H8 Z" class="k"/><path d="M4 134 H60 V160 H4 Z" class="k"/><path d="M8 160 V176 M56 160 V176" class="k t3"/>
+<line x1="290" y1="56" x2="338" y2="56" class="k t3"/>
+<path d="M294 58 Q290 110 296 172 H326 Q332 110 328 58" class="w wf"/><path d="M304 60 V170 M318 60 V170" class="w t1"/>
+<line x1="60" y1="98" x2="136" y2="98" class="m" marker-start="url(#aM)" marker-end="url(#aM)"/>
+<line x1="204" y1="98" x2="290" y2="98" class="m" marker-start="url(#aM)" marker-end="url(#aM)"/>
+{lbl(98,74,'At least','tb','middle')}{lbl(98,88,'3 feet (1 m)','tb','middle')}
+{lbl(247,74,'At least','tb','middle')}{lbl(247,88,'3 feet (1 m)','tb','middle')}
+{lbl(184,26,'Vented to the outside','','start')}
+{lbl(170,198,'Anything that can burn','','middle')}{lead(102,194,48,170)}{lead(238,194,296,170)}''')
+
+def window(x1, y1, x2, y2):
+    """A window in a plan-view wall: a gap with a thin double line."""
+    if y1 == y2:
+        return f'<rect x="{x1}" y="{y1-3}" width="{x2-x1}" height="6" class="milk"/><path d="M{x1} {y1-2} H{x2} M{x1} {y1+2} H{x2}" class="m t1"/>'
+    return f'<rect x="{x1-3}" y="{y1}" width="6" height="{y2-y1}" class="milk"/><path d="M{x1-2} {y1} V{y2} M{x1+2} {y1} V{y2}" class="m t1"/>'
+
+svg('warm-room', 214, 'House plan: one small warm room on the sheltered side of the house, with one window covered with a blanket at night and towels in the crack under its closed door; the other rooms are closed off and cold, with their heating ducts blocked off', f'''
+<rect x="10" y="20" width="320" height="160" class="gr"/>
+<rect x="10" y="100" width="130" height="80" class="hfl"/>
+<rect x="10" y="20" width="320" height="160" class="k t3"/>
+<path d="M170 20 V100 M10 100 H330 M140 100 V120 M140 156 V180" class="k t3"/>
+<line x1="140" y1="120" x2="140" y2="156" class="w t3"/><path d="M140 156 A36 36 0 0 0 176 120" class="m t1 d"/><path d="M149 121 l6 4 l-6 4 l6 4 l-6 4 l6 4 l-6 4 l6 4 l-6 4" class="w t3" data-part="towel"/>
+{window(40, 20, 80, 20)}{window(110, 20, 150, 20)}{window(220, 20, 260, 20)}{window(330, 40, 330, 70)}
+{window(330, 122, 330, 152)}{window(270, 180, 310, 180)}{window(55, 180, 95, 180)}
+<line x1="56" y1="174" x2="94" y2="174" class="w t5"/>
+<rect x="286" y="78" width="18" height="10" class="k milk"/><path d="M286 78 L304 88 M304 78 L286 88" class="h t3"/>
+{lbl(75,127,'Warm room','tl','middle')}
+{lbl(75,146,'Blankets over the','','middle')}{lbl(75,160,'windows at night','','middle')}
+{lbl(90,56,'Close off rooms','tb','middle')}{lbl(90,70,'you don’t need','','middle')}
+{lbl(250,46,'Cold room','tm','middle')}{lbl(278,72,'Heating ducts','','end')}{lbl(278,86,'blocked off','','end')}
+{lbl(184,134,'Towels in the cracks','')}{lbl(184,148,'under doors','')}{lbl(320,170,'Cold room','tm','end')}
+<path d="M10 186 V190 H330 V186" class="m t1"/>
+{lbl(170,206,'Sheltered side of the house','tb','middle')}''')
 
 # ---------------- FIRE ----------------
 svg('fire-sizes', 142, 'Fire materials: dry, fine tinder; kindling from pencil lead to thumb thick; fuel forearm thick and up', f'''
@@ -247,17 +338,23 @@ svg('fire-lays', 190, 'Two fire lays: a teepee that lights fast, and a log cabin
 <line x1="212" y1="96" x2="300" y2="96" style="stroke-width:12" class="w"/>
 {lbl(255,166,'Log cabin','tb','middle')}{lbl(255,182,'steady heat, coals','tm','middle')}''')
 
-svg('fire-ferro', 160, 'Ferro rod technique: hold the striker still in the tinder and pull the rod back', f'''
-<line x1="0" y1="142" x2="340" y2="142" class="m"/>
-<ellipse cx="232" cy="130" rx="34" ry="12" class="w wf"/>
-<path d="M216 128 c6 -8 18 -10 30 -2 M222 136 c10 4 22 2 28 -6" class="w t1"/>
-<line x1="234" y1="120" x2="112" y2="40" class="st t5"/>
-<line x1="112" y1="40" x2="90" y2="26" style="stroke-width:11" class="w"/>
-<line x1="197" y1="115" x2="213" y2="91" class="k t5"/>
-<path d="M226 118 l-6 9 M233 119 l4 10 M229 121 l0 10" class="h t1"/>
-{arrow(160,100,118,72,'h','aH')}
-{lbl(20,100,'Pull the rod back','tb')}
-{lbl(336,40,'Striker held still,','tb','end')}{lbl(336,54,'tip in the tinder','','end')}{lead(290,58,214,94)}''')
+# Ferro rod, Army method: rod tip at the tinder, striker square to the rod and driven down it toward the tip.
+svg('fire-ferro', 190, 'Ferro rod: the rod held with its tip at the tinder; the striker at a right angle to the rod, driven down the rod with firm, even pressure so the sparks land in the tinder', f'''
+<line x1="0" y1="150" x2="340" y2="150" class="m"/>
+<ellipse cx="234" cy="138" rx="38" ry="12" class="w wf" data-part="tinder"/>
+<path d="M214 136 c6 -8 18 -10 30 -2 M220 144 c10 4 22 2 28 -6" class="w t1"/>
+<line x1="96" y1="30" x2="240" y2="130" class="st t5" data-part="rod"/>
+<line x1="96" y1="30" x2="74" y2="15" style="stroke-width:11" class="w"/>
+<line x1="153.6" y1="70" x2="173" y2="42.1" class="k t5" data-part="striker"/>
+<path d="M157.6 64.3 L163.4 68.2 L159.4 74" class="k t1"/>
+<line x1="166.1" y1="51.9" x2="215.4" y2="86.1" class="h t3" marker-end="url(#aH)" data-part="push"/>
+<path d="M236 134 l-8 5 M242 135 l3 8 M246 131 l10 3 M234 128 l-10 0" class="h t1"/>
+<circle cx="226" cy="128" r="1.6" class="hf"/><circle cx="250" cy="126" r="1.6" class="hf"/><circle cx="220" cy="134" r="1.6" class="hf"/>
+{lbl(8,40,'Ferro rod','tb')}
+{lbl(176,18,'Striker at a right angle','tb')}{lbl(176,32,'to the rod','')}
+{lbl(336,60,'Drive it down the rod','tb','end')}{lbl(336,74,'firm, even pressure','','end')}
+{lbl(8,128,'Rod tip at the tinder','')}{lead(128,126,224,132)}
+{lbl(234,174,'Sparks land in the tinder','tb','middle')}''')
 
 svg('fire-platform', 150, 'A base of green logs in two crosswise layers keeps a fire off deep snow', f'''
 <rect x="0" y="112" width="340" height="38" class="snow"/>

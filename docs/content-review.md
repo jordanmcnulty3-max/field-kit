@@ -1325,8 +1325,8 @@ Figure files are unchanged in figs/; only the topic fig blocks were removed.
 - fire-sizes: label fixes (later small task). Kindling is pencil-lead to thumb thick; fuel is forearm thick (not "wrist-thick and up"). Done in Task 16b: kindling "pencil lead to thumb thick", fuel "forearm thick and up", tinder "dry, fine material"; figure restored to surv-fire.
 - fire-platform: label fixes (later small task). Drop "or flat rocks"; the base is for deep snow, not "snow or wet ground". Done in Task 16b: "Green logs only, two layers, crosswise" and "Deep snow"; figure restored to surv-fire after the build steps.
 - river: label and drawing fix (later small task). "Angle slightly downstream" and the drawn path (about 21 degrees) should show about 45 degrees downstream. Done in Task 16b: label "About 45 degrees downstream", path redrawn at 45 degrees; figure restored to surv-river-crossings.
-- shelter-tarp: needs a new drawing (waits for its pack). Drawn as an A-frame with the low end into the wind; the text is now a poncho lean-to with its back into the wind.
-- fire-ferro: needs a new drawing (waits for its pack). Drawn as the pull-back method; the text is now the Army method (striker driven down the rod).
+- shelter-tarp: needs a new drawing (waits for its pack). Drawn as an A-frame with the low end into the wind; the text is now a poncho lean-to with its back into the wind. Done in heat pack Task 8: redrawn as the tarp lean-to and restored to surv-shelter.
+- fire-ferro: needs a new drawing (waits for its pack). Drawn as the pull-back method; the text is now the Army method (striker driven down the rod). Done in heat pack Task 8: redrawn as the push-the-striker-down method and restored to surv-fire.
 
 ### Task 14 fix round 1 (2026-11-17)
 
@@ -2577,3 +2577,871 @@ Re-ordering and rewording with words and figures already in the topics. No fact,
 - Minor 4 (checklist quantities): the group total now sits on its own line after the item, led by "For your group:".
 
 Not changed: Minor 8 (EPA's 6% / 8.25% comparison table stays in Make water safe; removing sourced content is the owner's call, D3); Minor 11 (rodent droppings: CDC's page gives "a disinfectant or a 1:10 chlorine solution (1 1/2 cups of household bleach mixed with 1 gallon of water)", which is not the strong mix, so pointing to the strong mix would change the dose; left as "a disinfectant").
+
+## Heat pack Task 4 (batch A): carbon monoxide, generators, kerosene and propane heaters, fuel storage (2026-11-18)
+
+Files (all draft): src/survival/surv-carbon-monoxide.json, surv-generators.json, surv-portable-heaters.json,
+surv-store-fuel.json. Every source below was found by built-in web search and opened by web fetch on 2026-11-18; the
+page title (and date where printed) was checked after each fetch. Fetches return excerpts capped at about 125
+characters per quote, so long sentences were read as consecutive pieces. No Firecrawl.
+
+Source keys:
+- CDC-CO: CDC, Carbon Monoxide Poisoning Basics, last reviewed October 26, 2026. https://www.cdc.gov/carbon-monoxide/about/index.html (opened twice; also a source of p:carbon-monoxide)
+- CPSC-QA: CPSC, Carbon Monoxide Questions and Answers (CO Information Center; no date). https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center/Carbon-Monoxide-Questions-and-Answers
+- CPSC-26: CPSC news release 26-149, As Winter Storms Threaten Millions in the US CPSC Issues Safety Tips to Help Families Prevent Carbon Monoxide Poisoning and Fires, December 12, 2025. https://cpsc.gov/Newsroom/News-Releases/2026/As-Winter-Storms-Threaten-Millions-in-the-US-CPSC-Issues-Safety-Tips-to-Help-Families-Prevent-Carbon-Monoxide-Poisoning-and-Fires
+- CPSC-GEN: CPSC, What to Know About Generators and Carbon Monoxide (CO), CPSC468 0322. https://cpsc.gov/s3fs-public/468-WhattoKnowGenerators_2022.pdf
+- CPSC-KERO: CPSC, CPSC Stresses Kerosene Heater Safety, publication 5052, revised 4/2011. https://www.cpsc.gov/s3fs-public/5052.pdf (opened three times)
+- CPSC-PHC: CPSC, Portable Heaters and Camping Equipment (CO Information Center; no date). https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center/Portable-Heaters--Camping-Equipment (also a source of p:carbon-monoxide)
+- CPSC-ODS: CPSC release 03-021, CPSC Alerts Outdoor Enthusiasts: New Portable Heaters Can Save Campers' Lives, October 18, 2002. https://www.cpsc.gov/Newsroom/News-Releases/2003/CPSC-Alerts-Outdoor-Enthusiasts-New-Portable-Heaters-Can-Save-Campers-Lives
+- CPSC-USFA: CPSC and USFA, Winter Weather Warning: CPSC and USFA Issue Home Heating Safety Alert (2011 release; page prints no date, cites 2005-2007 data). https://www.cpsc.gov/Newsroom/News-Releases/2011/Winter-Weather-Warning-CPSC-and-USFA-Issue-Home-Heating-Safety-Alert
+- OSHA-GEN: OSHA, Using Portable Generators Safely, fact sheet DTSEM FS-3286, 09/2005. https://www.osha.gov/Publications/OSHA3286.pdf
+- FEMA-PO: FEMA, Be Safe During a Power Outage, released August 31, 2020 (printed September 13, 2025). https://www.fema.gov/print/pdf/node/548808
+- NFPA-GEN: NFPA generator safety sheet (heading "Generator", nfpa.org/education, ©NFPA 2017), copy hosted by the Village of Penn Yan, NY. https://www.villageofpennyan.gov/uploads/1/2/3/8/123892065/nfpa-generator-safety.pdf
+- NFPA-HEAT: NFPA, Heating Safety (nfpa.org/education, ©NFPA 2017), copy hosted by the State of Michigan. https://www.michigan.gov/documents/lara/NFPA._Heating_safety_tips._7._2019._MIPLogo._ECS._Final__663826_7.pdf
+- ILL-GEN: University of Illinois Extension, Generator Safety ("Use a generator safely"; no date). https://extension.illinois.edu/energy/generator-safety
+- CCE-GEN: Cornell Agricultural Health and Safety Program via Cornell Cooperative Extension, Safe Operation of Emergency Generators, Eric Hallman and Richard Peterson, CU 2/06 (Chautauqua County CCE copy). https://chautauqua.cce.cornell.edu/resources/safe-operation-of-emergency-generators (opened twice)
+- DOE-SSH: US Department of Energy, Energy Saver, Small Space Heaters (no date). https://www.energy.gov/energysaver/small-space-heaters (opened twice)
+- USFA-HEAT: US Fire Administration, Heating fire safety, last reviewed May 4, 2023. https://www.usfa.fema.gov/prevention/home-fires/prevent-fires/heating
+- USFA-CARD: US Fire Administration, Heater Fire Safety (card; no date). https://www.usfa.fema.gov/downloads/pdf/publications/heater_fire_safety_card.pdf
+- USFA-EXT: US Fire Administration, Fire extinguishers, last reviewed April 1, 2023. https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/fire-extinguishers/
+- NYSDOH-SSH: New York State Department of Health, Supplemental Space Heaters (no date; healthweb-back.health.ny.gov host, as for NYSDOH-BW in the water pack). https://healthweb-back.health.ny.gov/environmental/indoors/air/heaters/
+- NYSDOH-VF: New York State Department of Health, letter "Re: Selling Vent-Free Gas Space Heating Appliances in New York State", Edward Horn, PhD, March 1, 2006. https://Health.ny.gov/environmental/indoors/heaters/gas/vent-free/docs/seller_requirements.pdf
+- GBL-322C: New York General Business Law 322-c (NY Senate, revision 2014-09-22). https://www.nysenate.gov/legislation/laws/GBS/322-C
+- RPP-7A: New York Real Property Law Article 7-A, Portable Kerosene Heaters: 239 (legislative findings, Justia 2018) https://law.justia.com/codes/new-york/2018/rpp/article-7a/239/; 239-a (definitions, Justia 2018, opened twice) https://law.justia.com/codes/new-york/2018/rpp/article-7a/239-a/; 239-b (NY Senate, revision 2014-09-22) https://www.nysenate.gov/legislation/laws/RPP/239-B; 239-c (Justia 2018) https://law.justia.com/codes/new-york/2018/rpp/article-7a/239-c/; 239-e (NY Senate, revision 2014-09-22) https://www.nysenate.gov/legislation/laws/RPP/239-E
+- DHSES-HEAT: NYS Division of Homeland Security and Emergency Services, Home Heating Fire Safety (no date). https://www.dhses.ny.gov/home-heating-fire-safety (opened twice)
+- DHSES-CO: NYS DHSES Office of Fire Prevention and Control, Carbon Monoxide Virtual Toolbox (no date; "This summary is not authoritative", refers to NY Law 2009, Ch. 367). https://www.dhses.ny.gov/carbon-monoxide-virtual-toolbox
+- NYDCP-22: NYS Department of State, Division of Consumer Protection, consumer alert on carbon monoxide and fire hazards, December 21, 2022. https://dos.ny.gov/news/consumer-alert-nys-division-consumer-protection-warns-new-yorkers-about-dangers-carbon
+- FDNY-F: FDNY Foundation (FDNY Smart), Don't use kerosene or propane space heaters, last modified July 21, 2016. https://fdnysmart.org/safetytips/dont-use-kerosene-propane-space-heaters/
+- NC-LP: North Carolina Department of Agriculture and Consumer Services, Standards Division, LP-Gas Section, Proper Storage of Propane Containers, last modified 09/03/2025. https://www.ncagr.gov/divisions/standards/lp-gas/lp-gas-faq-and-interests-consumers/standards-proper-storage-propane-containers
+- NPGA: National Propane Gas Association, Propane Gas Grill and Range Safety Tips (no date), copy hosted by the New Jersey Department of Community Affairs. https://www.nj.gov/dca/divisions/codes/alerts/pdfs/p_gas_g_dos_donts.pdf (industry body; used only for "don't bring cylinders indoors" and storage lines that NC-LP also carries, plus the vehicle line)
+- ME-DEP: Maine Department of Environmental Protection (maine.gov/dep; the page says only "the Department"), Tips for Handling Gasoline (no date). https://www.maine.gov/dep/homeowner/gas_tips.html
+- ABA-GAS: American Burn Association, Don't Fuel the Fire: Gasoline (no date), copy hosted by Upstate Medical University Burn Center. https://www.upstate.edu/burncenter/pdf/gasoline-safety.pdf
+- DEC-OIL: NYS DEC press release, DEC Reminds Homeowners and Landlords to Prioritize Home Heating Safety This Fall and Winter, October 16, 2023. https://dec.ny.gov/news/press-releases/2023/10/dec-reminds-homeowners-and-landlords-to-prioritize-home-heating-safety-this-fall-and-winter
+- DOS-TB03: NYS Department of State, Technical Bulletin, Prohibition of barbeque grills on combustible balconies and decks, effective January 1, 2003 (copy hosted by the City of Norwich, NY). https://www.norwichnewyork.gov/pdfs/code/BBQgrill.pdf (read; not cited: superseded, see below)
+- DOS-TB3005: NYS Department of State, TB-3005-FCNYS, Open flame cooking devices on combustible balconies and decks, code effective October 31, 2017. https://dos.ny.gov/tb-3005-fcnys-open-flame-cooking-devices-combustible-balconies-and-decks (read; not cited)
+
+Opened and not used, or failed:
+- Ready.gov Power Outages, https://www.ready.gov/power-outages: fetch failed at the site (client error). FEMA-PO used instead.
+- NYS DOH publication 3104, https://Health.NY.Gov/publications/3104.pdf: fetch failed (client error).
+- Michigan State University Extension generator article (canr.msu.edu): blocked by the site's bot protection; nothing read.
+- CPSC publication 463 (UNT web archive, html and pdf): only the archive viewer came back, no text.
+- WPDH radio article on New York gasoline limits: opened to see what it cited; it gives no home-storage limit, only NYSDOT transport limits and an unattributed DEC line. Not used. Its NYSDOT link was not fetched (not a search result; the site disallows robots in any case).
+
+Conversions: 1 ft = 0.3048 m, 1 in = 2.54 cm by definition. 20 ft = 6.1 m, "6 m" (as in surv-wells-without-power);
+3 ft = 0.91 m, "1 m" (NFPA-HEAT prints "three-feet (one metre)"); 3 to 4 ft = 0.9 to 1.2 m, "about 1 m"; 36 in = 3 ft;
+1 in = 2.5 cm; 2 gal = 7.57 L, "7.6 L".
+
+### surv-carbon-monoxide
+
+- Summary and doFirst restate checked lines below.
+- doFirst 1 / "When an alarm sounds" steps, in CPSC-QA's order: never ignore; don't try to find the source; (1) "Immediately move outside to fresh air." (2) "Call your emergency services, fire department, or 911." (3) "After calling 911, do a head count to check that all persons are accounted for." (4) "DO NOT reenter the premises until the emergency services responders have given you permission." (5) malfunctioning appliance: "DO NOT operate that appliance until it has been properly serviced by trained personnel." (6) alarm "reactivates within a 24 hour period": repeat steps 1-3 and call a qualified technician. CPSC-26 and CPSC-GEN: "Get outside immediately, then call 911." Matches. Step 4's second sentence ("If no responders can come, don't go back in until the house has aired out and the cause is fixed") is p:carbon-monoxide step s6 ("until the space is aired out and the cause is fixed"), credited to the protocol. "Call 911 ... if you can" is text only; no dial control.
+- doFirst 2 points to p:carbon-monoxide; symptoms are not treated here.
+- What makes it: CPSC-QA ("produced by the incomplete burning of various fuels, including coal, wood, charcoal, oil, kerosene, propane, and natural gas"; "internal combustion engines such as portable generators, cars, lawn mowers, and power washers also produce CO"; "odorless, colorless and otherwise undetectable to the human senses"); CDC-CO (furnaces, generators, charcoal grills, vehicles, small engines, stoves, lanterns, fireplaces, gas ranges). "Even with open doors and windows, these spaces can trap CO and allow it to quickly build to lethal levels" — CPSC-QA (said of generators in or near enclosed spaces); CPSC-26 ("Opening doors or windows will not provide enough ventilation"). Matches.
+- Never indoors (each "never"):
+  - Generator: CDC-CO ("Never run a generator inside your home or garage, even with doors and windows open"; "more than 20 feet away from any windows, doors, and vents"); CPSC-26 ("NEVER ... inside a home, garage, basement, crawlspace, shed"; "Don't operate a generator on a porch or in a carport"). Matches surv-wells-without-power and p:carbon-monoxide (20 ft, CDC).
+  - Charcoal: CPSC-QA ("Never burn charcoal inside a home, garage, vehicle, or tent"); CDC-CO ("Never burn charcoal indoors"); CPSC-26 ("Do not cook on a charcoal grill in a garage, even with the garage door open"). Matches surv-water-winter and surv-shelter.
+  - Camp stoves, flameless chemical heaters: CDC-CO ("Do not use portable flameless chemical heaters indoors"; no portable gas camp stoves indoors). Matches p:carbon-monoxide.
+  - Oven, range, dryer: CDC-CO ("Never heat your house with a gas oven"); CPSC-QA ("Never use gas appliances such as ranges, ovens, or clothes dryers to heat your home"); USFA-HEAT ("Never use an oven to heat your home"). Matches.
+  - Outdoor heat sources: DHSES-HEAT ("Avoid using heat sources that are designed for outside use"; "produce harmful carbon monoxide"). The topic says "don't use ... indoors": DHSES says "avoid"; reviewer, please judge the strengthening.
+  - Unvented stove or fireplace: CDC-CO ("Don't cook or burn anything on a stove or fireplace that isn't vented"). Matches.
+  - Vehicle in attached garage: CDC-CO; CPSC-QA ("Never leave a car running in an attached garage, even with the garage door open"). Matches.
+  - Warn block: "Opening doors and windows does not make these safe inside" — CDC-CO and CPSC-26 say this of generators, CPSC-QA of generators and engine tools; applied here to the whole list (reviewer, please judge).
+  - Unvented appliance where people sleep: CPSC-QA ("Never operate unvented fuel-burning appliances in any room where people are sleeping"). Matches p:carbon-monoxide s6 ("Never run fuel-burning equipment where people sleep").
+- Furnaces, vents, chimneys: CPSC-26 ("Clear snow away from the outside vents for fuel-burning appliances such as furnaces"); NYDCP-22 ("Keep furnace and dryer vents clear of ice and snow"; check during and after heavy snowfall; a blocked vent can let CO build up and newer furnaces may shut off completely; "Make sure that all gas heaters are properly vented to the outside"); CDC-CO (yearly service by a qualified technician; chimneys checked or cleaned yearly). "In normal times" is the app's framing for yearly service. Matches.
+- Vent-free gas fireplaces and heaters (content plan 9.12): NYSDOH-SSH ("Portable kerosene and unvented gas heaters release combustion products directly into your home"; connected to the house fuel supply, natural gas or propane; "may be wall-mounted, free-standing or inserted in a fireplace"; "Don't use these heaters as your main heat source, even during power failures"; "A better option is to run a generator outdoors during power failures for heating"); NYSDOH-VF (required caution label: "is a supplemental heat source and should not be the primary heat source"; 10 NYCRR Part 71, GBL 322-c); DOE-SSH ("Unvented combustion small space heaters are not recommended for use inside your home"; "Install a carbon monoxide detector if you use a small space heater"); CPSC-QA (rooms where people sleep); CDC-CO quoted verbatim. "Gas log set" is the app's word for a fireplace insert. GBL-322C (automatic shutoff if the flame or pilot goes out; covers natural and manufactured gas heaters in residences) was read and is not quoted in the text. Conflict: CDC's sentence, read literally, rules out using a vent-free gas fireplace at all; NYSDOH regulates their sale and says only "not the main heat source". Logged D39.
+- CO alarms:
+  - Battery or battery backup: CPSC-QA ("Install battery-operated CO alarms or CO alarms with battery backup"; "Hard wired or plug-in CO alarms should have battery backup"); CDC-CO ("battery-operated or battery back-up CO detectors"). Matches.
+  - Where: CPSC-QA ("on every level of the home and outside sleeping areas"); CPSC-26 ("on each level and outside separate sleeping areas"); DHSES-CO (NFPA: "in a central location outside each sleeping area" "and on every level of the home"); CDC-CO ("near every sleeping area"). Interconnected best — CPSC-QA, CPSC-26. Matches.
+  - Not near heating vents, not where furniture or draperies cover them, not in kitchens or above fuel-burning appliances — CPSC-QA. Matches.
+  - UL 2034 — CPSC-QA; UL 2034 or CSA 6.19 — DHSES-CO. Matches.
+  - Test monthly — CPSC-26 ("Test CO and smoke alarms monthly"); test button checks circuitry, not the sensor — CPSC-QA; batteries at the spring and fall clock change — CDC-CO. Matches.
+  - Replace at the maker's age, or every 5 years — CDC-CO ("following the manufacturer's instructions or every 5 years"); CPSC-QA (replacement age from the manufacturer). Matches.
+  - Amanda's Law: DHSES-CO ("Beginning February 22, 2010"; "CO alarms must be installed in all new and existing one and two-family dwellings, multifamily dwellings and rentals" "having a fuel-burning appliance, system or attached garage"). The page calls itself not authoritative and points to NY Law 2009, Ch. 367; the law itself was not opened.
+- Signs of poisoning: CDC-CO ("headache, dizziness, weakness, upset stomach, vomiting, chest pain, and confusion"); CPSC-QA ("similar to the flu (but without the fever)"); people asleep or drunk can die first — CDC-CO via p:carbon-monoxide s1 (same CDC page). Kept to a pointer; treatment is the protocol's.
+- Looked for, not found: CO alarm placement height (CPSC-QA only says plug-in receptacle or high on the wall; not used); a New York rule on vent-free fireplaces beyond sale and labelling (10 NYCRR Part 71 not opened).
+
+### surv-generators
+
+- Summary and doFirst restate checked lines below.
+- Distance: "more than 20 feet (6 m) from any window, door or vent" — CDC-CO; NYDCP-22 ("at least 20 feet from any window, door, or vent"); CPSC-26 and CPSC-GEN ("at least 20 feet away from the house"); FEMA-PO ("at least 20 feet away from windows"). NFPA-GEN says "at least 5 feet away from all doors, windows, and vent openings". Conflict: 20 ft used (more cautious, and it is the checked figure in surv-wells-without-power and p:carbon-monoxide). Logged D37.
+- Exhaust away from the home and any building someone can enter; close windows and seal vents near it or in the exhaust path — CPSC-26 (verbatim meaning), CPSC-GEN, NFPA-GEN ("The exhaust must be directed away from the building"). Matches.
+- Never in home, garage, basement, crawlspace, shed — CPSC-26, CPSC-GEN; partly enclosed spaces even with partial ventilation — FEMA-PO; attached garage even with the door open — NFPA-GEN; porch, carport — CPSC-26, CPSC-GEN (porch). Matches.
+- As far as possible from your home and neighbors' homes — CPSC-USFA. Matches.
+- 3 to 4 feet clear on all sides and above — OSHA-GEN ("Make sure a generator has 3 to 4 feet of clear space on all sides and above it"). Matches.
+- Children and pets away; parts hot enough to burn — ILL-GEN. Link p:burns.
+- About 100 deaths a year — CPSC-26 ("An average of about 100 consumers die in the U.S. each year from CO poisoning from portable generators"; no year printed). Matches.
+- CO shut-off — CPSC-26, CPSC-GEN. Matches.
+- Rain and snow: OSHA-GEN ("Keep a generator dry; do not use it in the rain or wet conditions"); ILL-GEN ("operating it under an open, canopy-like structure on a dry surface", "where water cannot form puddles or drain under it", "Use a generator only when necessary when the weather creates wet or moist conditions", dry hands); CCE-GEN ("Keep the generator dry to reduce danger of electrical shock"; canopy for a PTO unit); NYDCP-22 (where rain and snow can't reach it, if possible); CPSC-26 ("Follow the portable generator manufacturer's instructions about electrical shock hazards in inclement weather"). Conflict: OSHA says don't use it in wet conditions; Illinois and Cornell describe a canopy. Text gives OSHA's rule first, then the canopy with the open-cover limit from CPSC-26 and FEMA-PO (partly enclosed spaces). Logged D38.
+- Back-feeding: CCE-GEN (power "can travel back through the utility service wires and onto the utility power lines"; "Unsuspecting linemen working on a supposedly dead power line can be killed or seriously injured"); ILL-GEN ("Do not plug a generator into the wall to avoid back feed"; transfer switch "prevents energy from leaving your generator and going back onto the utility electrical equipment"; "A qualified electrician should install your generator and transfer switch"); OSHA-GEN ("Never attach a generator directly to the electrical system of a structure" "without a properly installed transfer switch"); NFPA-GEN (qualified electrician, properly rated transfer switch). Switch in the auxiliary position before starting — CCE-GEN. Matches surv-wells-without-power.
+- Furnace and well pump: running them needs a transfer switch by a qualified electrician — ILL-GEN, OSHA-GEN (the topic applies their rule to the furnace and pump; the sources do not name them). Size: CCE-GEN ("If you are only concerned about pumping water, running the furnace, operating a refrigerator and a few lights", "a 4,000 to 6,000 watt portable, pull start generator would be adequate"; "You may need a 12,000 to 15,000 watt generator" for near-normal living). Ask a vendor or electrician — ILL-GEN; ratings differ by maker — CCE-GEN. Motors 3 to 5 times the current to start — CCE-GEN ("Electric motors draw three to five times as much electric current to start as they do to run"). Decide which circuits — CCE-GEN. Link s:surv-wells-without-power.
+- Cords and loads, step order: (1) start with nothing plugged in — ILL-GEN ("Turn the generator on before plugging appliances to it"), CCE-GEN (starting under no load); (2) plug into the generator or a heavy-duty outdoor-rated cord — NFPA-GEN, ILL-GEN; (3) one at a time — ILL-GEN; largest first — CCE-GEN ("Start largest loads first whenever possible"); (4) never overload, fire — OSHA-GEN, CCE-GEN; (5) shut off all loads and let it spin a few minutes before stopping — CCE-GEN. Cords rated in watts or amps, heavier gauge — OSHA-GEN; cuts, tears, three prongs, grounding pin — NFPA-GEN; frayed or damaged — OSHA-GEN; hot cord, larger wire — CCE-GEN; tripping — CCE-GEN; grounding — OSHA-GEN. Matches.
+- Electric heaters on a generator (content plan 9.12): NYSDOH-SSH (generator outdoors is the better option for heat; "Avoid using ungrounded wiring or extension cords"); DHSES-HEAT ("Avoid the use of extension cords with electric heaters"); DOE-SSH ("Electric heaters should be plugged directly into the wall outlet. If an extension cord is necessary, use the shortest possible heavy-duty cord of 14-gauge wire or larger. Always check and follow any manufacturer's instructions pertaining to the use of extension cords"; tip-over switch); CPSC-26 (wall outlet, never a power strip; never under rugs; 3 feet all sides; stable level surface); USFA-HEAT (3 feet; off when leaving the room or going to bed); ILL-GEN (one at a time). The transfer-switch route as "best" is the app's reading: it is the only way the heater can be in a wall outlet as DOE and CPSC ask. Logged D40 (cords).
+- Refuel, step order: off — OSHA-GEN, FEMA-PO; never while running — CCE-GEN; cool — OSHA-GEN, FEMA-PO, NFPA-GEN; spilled fuel on hot parts can ignite — FEMA-PO; check fluids and leaks — CCE-GEN. Vapor along the ground, pilot light or switch arc — FEMA-PO. Fuel container made and labelled for the purpose, outside living areas, never in the home — NFPA-GEN, OSHA-GEN; away from the unit — CCE-GEN; keep the tank filled — CCE-GEN. Matches surv-wells-without-power ("Turn it off and let it cool before you refuel it").
+- Ration run time: ILL-GEN ("generators are for temporary usage; prioritize your needs"); CCE-GEN (not built for "continuous operation for days on end"; "In the event of a prolonged outage (more than 8 hours), it is wise to shut down the generator two or three times per day"; elsewhere "shut the generator down at least once every 24 hours"). Cornell's own two figures differ; two or three times a day used (meets both), said in the text. Inspect yearly, replace worn parts — FEMA-PO; read and follow the manual — CPSC-GEN, ILL-GEN.
+- Looked for, not found: fuel burned per hour (none of the agency sources gives one; content plan 9.4 has no fuel planner); refrigerator and freezer run-time schedules (Food pack); CO alarm specific to generators beyond CDC's line; a New York rule on portable generators.
+
+### surv-portable-heaters
+
+- Ruling: operating guidance under the strictest conditions any opened agency source sets (content plan 9.10; progress ledger). Agencies that advise against indoor use are named first.
+- What the agencies say: DOE-SSH ("Unvented combustion small space heaters are not recommended for use inside your home"; "Most states have banned unvented kerosene heaters for use in the home" — not quoted, New York's actual rule is given instead); NFPA-HEAT ("All fuel-burning equipment should be vented to the outside to avoid carbon monoxide (CO) poisoning"); NYSDOH-SSH (combustion products directly into the home; not the main heat source, even during power failures; generator outdoors a better option); FDNY-F ("The use of kerosene or propane space heaters is strictly prohibited and illegal in New York City"; FDNY Foundation page, not FDNY itself). Logged D39.
+- Indoor-rated only: CPSC-USFA ("Do not use portable propane space heaters indoors or in any confined space," "unless they are designed specifically for indoor use"); CPSC-ODS (ODS "automatically shuts down the heater before it can produce dangerous levels of CO"; "senses when the oxygen level in a tent or camper drops below 18 percent"; standard for "1 lb. portable heaters"; older heaters without an ODS "are intended for outdoor use only and must never be used indoors"); DHSES-HEAT (outdoor heat sources). Matches.
+- New York kerosene law (normal times): RPP-7A 239-b (title "Only approved portable kerosene heaters permitted in structures"; unlawful to use a non-approved heater in any part of a structure); 239-a(1) structure includes private dwellings, excludes multiple dwellings; 239-a(7): listed; "fuel capacity of not more than two gallons"; tip-over shut-off "in not more than ten seconds"; "a pump or siphon for refueling"; labels on ventilation, fuel, refuelling, placement and handling, lighting; 239-a(2) multiple dwelling: "three or more families living independently"; 239-e "It shall be unlawful to use any portable kerosene heater in a multiple dwelling." 239-a was read on Justia's 2018 edition (Justia notes a newer version exists); 239-b and 239-e on the NY Senate site show their latest revision as 2014-09-22. Tipping angle (33 degrees) and CO emission limits read, not used in text.
+- Won't tip easily, fuel gauge; oversized or overused heater raises CO — NYSDOH-SSH. Matches.
+- Fuel: CPSC-KERO ("Use only water-clear 1-K grade kerosene. Never use gasoline."; dealer who can certify 1-K; "Even small amounts of gasoline or other volatile fuels or solvents mixed with kerosene can substantially increase the risk of a fire or an explosion"; separate kerosene container, not a gasoline can or one that held gasoline; blue for kerosene, red for gasoline); CPSC-PHC (1-K, never gasoline); NYSDOH-SSH ("Use ONLY grade K-1 kerosene"; K-2 higher sulfur "even if it looks as clear as K-1"; not last season's kerosene); NFPA-HEAT (fuel the manufacturer specifies); NYDCP-22 (only the fuel the heater is designed for, no substitutes). 1-K and K-1 name the same grade in these two sources. Matches.
+- Fresh air, step order: (1) door open to the rest of the house — CPSC-KERO ("Operate your heater in a room with a door open to the rest of the house"); (2) outside window about one inch — CPSC-KERO ("Open an outside window approximately one inch to permit fresh air to effectively dilute the pollutants: if you must operate your heater in a room with the door closed to the rest of the house, or if your home is relatively new and tight, or older but has been winterized to reduce air infiltration from the outside"). Doing both always is the app's choice (strictest reading); said in the text; logged D39. (3) CO alarms — DOE-SSH, NYSDOH-SSH; (4) propane: follow the instructions for adequate ventilation — CPSC-ODS; adequate ventilation for kerosene, propane or other fuel heaters — NYDCP-22. No agency figure for propane ventilation was found. Low levels of CO and NO2; "especially to individuals with chronic respiratory or circulatory health problems" — CPSC-KERO. Matches.
+- Never while asleep or alone: CPSC-QA (unvented appliances, rooms where people sleep); CPSC-USFA ("NEVER leave a space heater on when you go to sleep or place a space heater close to any sleeping person"; "Turn the heater off when you leave the area"); USFA-CARD ("Turn heaters off when you go to bed or leave the room"); NFPA-HEAT; DHSES-HEAT. Tents, campers, vehicles — CPSC-PHC; surv-shelter (checked, unchanged); shut off any camping heater before sleep — CPSC-ODS. Agrees with surv-shelter, surv-priorities and p:carbon-monoxide; the Shelter line is quoted in meaning, not softened.
+- Clearances: 3 feet all sides from beds, clothes, curtains, papers, sofas — CPSC-26; bedding, drapes, furniture — CPSC-USFA; "at least three-feet (one metre)" and "three-foot (one metre) 'kid-free zone'" — NFPA-HEAT; USFA-HEAT, USFA-CARD; 36 inches — DHSES-HEAT; kerosene "at least three feet from furniture or clothing" — CPSC-KERO. Children and pets — DHSES-HEAT. Flat level floor, not rugs or carpets — CPSC-USFA; stable level surface — CPSC-26. Flame height and minimum wick-stop — CPSC-KERO. Matches.
+- Refuel, step order: off and cool — CPSC-KERO ("only after the heater has been turned off" and cooled), DHSES-HEAT ("Let the heater cool down before refueling"; "Adding fuel to a hot heater can start a dangerous fire"), NYSDOH-SSH; outdoors, never inside — CPSC-KERO ("Never refuel the heater inside the home"; "Fill the tank outdoors, away from combustible materials"), USFA-CARD ("Refuel your heater outside once it has cooled"); not above the full mark — CPSC-KERO. Propane cylinder change per the instructions — CPSC-USFA ("Always follow the manufacturer's directions for proper use"; the manual only as "follow the manual").
+- Propane cylinders: NC-LP (outdoors; not indoors, not under the house or in a crawl space; upright; valve closed; away from flame or ignition; can't fall or be pulled over; marked as North Carolina law); NPGA ("Do not bring propane cylinders indoors or into an enclosed space such as a garage or basement"; "Do not leave the cylinder in your vehicle"). Conflict: these say no cylinder indoors; CPSC-ODS and CPSC-USFA describe 1 lb. heaters designed for indoor use. Text: spares outside; indoors only the small cylinder the heater's instructions allow, attached to it, marked as the app's reading. DOS-TB03 (2003) says in commentary "LP-gas containers are prohibited from being inside a building or on the roof"; its 2017 replacement DOS-TB3005 does not say this and points to the fire code's LP-gas chapter, which was not found in an opened source. So the topic says no current New York rule was found. Logged D41.
+- Care: DHSES-HEAT (inspect shut-off and wick; replace batteries; fresh fuel; follow the manufacturer for installation, venting, fueling, maintenance, repair); NYSDOH-SSH ("Check the wick weekly. Clean it if it's dirty and replace it if it's worn."); smoke alarms, test monthly — CPSC-KERO, NFPA-HEAT. Matches.
+- Flare-up, step order — CPSC-KERO ("do not attempt to move or carry the heater"; "If the heater is equipped with a manual shut-off switch, activate the switch"; "If this does not put out the fire, leave the house immediately, and call the fire department"). Matches. Link p:burns.
+- Never for these jobs: pipes — surv-water-winter (checked: "Never thaw pipes with a blowtorch, a kerosene or propane heater ... serious fire hazard and give off deadly carbon monoxide"); sleeping shelters — surv-shelter. Matches.
+- Looked for, not found: an agency room-size or BTU rule for kerosene or propane heaters; a propane ventilation figure; a current New York rule on propane cylinders or propane heaters in one- and two-family homes.
+
+### surv-store-fuel
+
+- Gasoline containers: ABA-GAS ("Use containers that have been listed, labeled or approved for gasoline"); OSHA-GEN ("approved containers"); ME-DEP ("Store gasoline in UL- approved (red for gasoline, blue for kerosene and diesel) containers", labelled, spout, spill-proof cans; "Never store gasoline in inappropriate containers such as glass jars or plastic milk jugs"). Matches.
+- Where: ABA-GAS ("store in cool, well-ventilated areas"; "Store gasoline in the house" listed as a don't; "Keep gasoline locked up, and out of the reach of children"); ME-DEP ("preferably in a well ventilated shed or detached garage, away from the reach of children"; "as far away and downslope from your drinking water well as possible"); OSHA-GEN ("Store fuels away from living areas"; "Do not store generator fuels in your home"; "Keep fuel containers away from flame producing and heat generating devices", water heaters named); FEMA-PO (vapors along the ground, pilot light, switch arcs). Buy only what you use; monthly leak check — ME-DEP. Matches.
+- How much: no New York household limit found (searched the Fire Code of New York State and NYS agency pages; results were New York City code, Utah towns and radio stories). Stated as not found. Logged D42.
+- How long: ME-DEP ("Do not store gasoline for more than 30 days unless a stabilizer" is added; stabilizer compatible with ethanol gasoline; "keep the container or tank 95% full"; old gas 1 part to 5 parts new in a car; household hazardous waste drop-off; never mix two-cycle leftovers with crankcase oil). Single source; said in the text. Logged D42.
+- Handling: ABA-GAS (outdoors only; fill engines when cool; don't fill a can inside a vehicle or truck bed; don't siphon by mouth; not near flame, burning leaves or brush; not as a cleaning fluid or solvent); ME-DEP (never burn brush with gasoline); OSHA-GEN, FEMA-PO (generator refuel); CPSC-KERO (no gasoline in a kerosene heater). Matches.
+- Kerosene: CPSC-KERO (own container, not a gasoline can or one that held gasoline; blue/red; gasoline in kerosene; 1-K from a certifying dealer); NYSDOH-SSH ("Store kerosene outdoors, in a container used only for kerosene"; not last season's); ME-DEP (blue for kerosene and diesel). Matches surv-portable-heaters.
+- Propane: NC-LP and NPGA as in surv-portable-heaters; spares away from a grill in use — NC-LP, NPGA; out of hot sun — NC-LP. "North Carolina rule, used as guidance" and "no current New York rule found" said in the text.
+- Heating oil: DEC-OIL (inspect before ordering; annual inspections; each above-ground and underground warning sign as listed in the topic; "Fully or partially blocked tank vent from snow, ice, or insect nests"; "Silent overfill whistle while tank is being filled - ask fuel delivery person"; contact your fuel oil service provider; "Fuel oil spills or leaks should be reported to the DEC Spills Hotline at 1-800-457-7362"). The phone number is text only, no dial link. Matches.
+- Fire extinguisher: USFA-EXT (classes A, B, C; multipurpose B-C or A-B-C for most home fires; UL or ULC Listed; largest you can operate; nothing blocking it; use only if others alerted, fire department called, physically able, small and contained to one object or surface, protected from smoke, clear escape route; young children and older adults should not; otherwise leave; PASS in order: pull the pin with the nozzle away from you, aim low at the base, squeeze slowly and evenly, sweep side to side; check the gauge, damage, manufacturer's guidance on shaking and replacement). Matches.
+- Looked for, not found: New York's household limit for gasoline, kerosene or propane; a federal or New York shelf life for gasoline or kerosene beyond NYSDOH's "not last season's"; how far apart to keep different fuels (no opened source gives one; the topic says only separate containers and spares away from a grill).
+
+### Agreement with checked topics and protocols
+
+- p:carbon-monoxide: 20 ft from windows, doors and vents (CDC); battery CO alarm near where people sleep; no fuel-burning equipment where people sleep; no camp stove or charcoal indoors; flameless chemical heaters — all agree. Treatment is linked, not restated.
+- surv-wells-without-power Generator list: transfer switch by a qualified electrician; never into a wall outlet; never in home or garage; 20 ft (6 m); battery CO detector; off and cool before refuelling; keep dry — all agree.
+- surv-shelter / surv-priorities: never fuel-burning heaters or lanterns while sleeping in a tent or snow shelter — repeated, not softened.
+- surv-water-winter: never a kerosene or propane heater to thaw pipes; never a camp stove or charcoal indoors — repeated.
+- surv-water-in-the-house: water heater gas or power off before draining — not touched by this batch.
+- p:burns: linked from Generators, Kerosene and propane heaters, Store fuel safely; not restated.
+
+### Batch A fix round (2026-11-18), from task-4-review.md
+
+Re-opened 2026-11-18 before relying on new wording: USFA-CARD, CPSC-KERO, ME-DEP, NC-LP; newly opened (found by search
+by the reviewer, opened by the writer): MN-SFM, Minnesota Department of Public Safety, State Fire Marshal Division, LP Gas
+Inside Buildings (no date; "These quantity limits can be found in ... NFPA ... 58").
+https://dps.mn.gov/divisions/sfm/fire-code/fire-code-information-topic/lp-gas-inside-buildings
+
+- C1 surv-generators, Electric heaters on a generator: now "Only through a transfer switch ... Never through an extension
+  cord or power strip (US Fire Administration; CPSC)" and "Plug nothing else into the circuit the heater is on: it can
+  overheat" — USFA-CARD ("Plug portable heaters directly into outlets." "Never use an extension cord or power strip." "Do
+  not plug anything else into the same circuit as the one you are using for your space heater." "This can cause
+  overheating."); CPSC-26 (wall outlet, never a power strip). DOE's 14-gauge cord moved out of the text to D40. Conflict
+  USFA vs DOE: USFA used (more cautious). D40 rewritten.
+- I1 surv-carbon-monoxide: lanterns and hibachis added to Never indoors and doFirst, wording of the checked surv-water-winter
+  and surv-shelter line ("Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or
+  camper", CDC), credited to those topics; CDC-CO lists lanterns as a CO source. Flashlights or battery lanterns for light:
+  CPSC-26 ("Use flashlights or battery-operated candles instead", said of candles; the text says so). Keywords "lantern",
+  "hibachi".
+- I2 surv-portable-heaters, If it flares up: CPSC-KERO label, in its order: "If Fire Occurs:" "Exit Quickly and Warn Others:"
+  "Call Fire Department." "Do Not: Move Heater, Try to Smother Fire, or Put Water on the Fire". Steps now: don't move it;
+  don't throw water on it or smother it; manual shut-off; if still burning get out quickly warning everyone, call the fire
+  department. doFirst mirrors it.
+- I3 surv-portable-heaters: "Any heater: tested by a recognized testing laboratory, with an automatic shut-off that turns it
+  off if it tips over (US Fire Administration)" — USFA-CARD ("Make sure your heater has been tested by a recognized testing
+  laboratory." "Make sure your heater has an automatic shutoff, so if it tips over, it shuts off."). The earlier not-found
+  line was wrong and is removed.
+- I4 surv-portable-heaters, Propane cylinders: "Indoors, only a 1 lb. cylinder screwed onto the heater. Never a 20 lb.
+  (grill-size) or larger tank inside the house or garage, and never one brought in on a hose. Empty cylinders go back
+  outside too." — CPSC-ODS (standard for "1 lb. portable heaters"); MN-SFM (residential, "Includes attached and detached
+  garages": maximum container "1 lb.", "2 lbs. (per dwelling unit)"; "cylinders larger than 1 pound must not be stored or
+  used indoors at a residential property"; connected = in use; "the codes treat all cylinders as being full, whether they
+  are full, partially full, or empty"). "20 lb. (grill-size)" names the common size larger than 1 lb.; the rule is MN-SFM's
+  "larger than 1 pound". Marked in the text as another state's reading of NFPA 58. D41 rewritten.
+- I5 surv-carbon-monoxide, Vent-free section: opens with a warn quoting CDC-CO and saying the cautious rule is not to use it,
+  and "only under every condition below" if run anyway. Added conditions: installed by a professional such as your gas
+  supplier, not oversized (NYSDOH-SSH: "Have the heater installed by a professional (such as your gas supplier)", "Don't buy
+  an oversized heater"); off when going to bed or leaving the room (USFA-CARD, NFPA-HEAT).
+- I6 surv-portable-heaters: one sleep rule everywhere (summary, doFirst, section warn): "Turn it off when you go to sleep or
+  leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol)" —
+  CPSC-USFA ("NEVER leave a space heater on when you go to sleep"), CPSC-QA (rooms where people sleep), USFA-CARD,
+  p:carbon-monoxide s6. Noted in D39.
+- M1 generators, Rain and snow: "OSHA says not to run it in the rain or wet conditions. If you must run it in wet weather
+  anyway, ..." (conflict visible; D38).
+- M2 "3 to 4 feet (0.9 to 1.2 m)". M3 "36 inches (1 m)" (0.91 m).
+- M4 heaters, The right fuel: "Store kerosene outdoors, in its own container made for kerosene (NYSDOH-SSH, CPSC), away from
+  other fuel containers (CPSC)" — CPSC-KERO label "Always Store Kerosene Away From Other Fuel Containers." Same line added to
+  surv-store-fuel, Kerosene.
+- M5 store-fuel: ME-DEP "if you are storing the gasoline over the winter or more than a month keep the container or tank
+  95% full" — condition added.
+- M6 store-fuel: ME-DEP "Unmixed 'old' gas can be burned in your car by diluting one part old fuel with five parts new
+  fuel" — "plain gasoline (not two-stroke gas and oil mix)" added.
+- M7 store-fuel: NC-LP does say "Check to be sure the valve closes completely. Then make sure the valve is closed."; credit
+  kept. Added NC-LP's plug line: plug in POL valves ("only internal, counter-clockwise threads") when disconnected;
+  "Do NOT put a plug in Acme valves, the type with external threads, as this disables a safety feature."
+- M8 store-fuel: A-B-C first; class A from USFA-EXT's class list ("ordinary materials such as cloth, wood, and paper"); "A B-C
+  unit does not cover class A" follows from USFA-EXT's classes.
+- M9 store-fuel: "Not an attached garage: Maine names a detached one, and this app reads that strictly" (the app's reading,
+  said in the text).
+- M10 keywords "mr heater" (heaters), "lantern", "hibachi" (CO).
+- M11 heaters: section heading "What safety bodies say first"; "strictest that any source opened"; FDNY credited as "FDNY's
+  safety education site, run by the FDNY Foundation".
+- surv-generators: the DHSES source dropped (no longer cited there); DOE's used line now the tip-over switch only.
+- draft removed from all four topics.
+## Heat pack Task 3: wind chill numbers (src/tooldata/windchill.json, 2026-11-18)
+
+Writer's record. Independent review (task-3-review.md) passed every number (216 cells, constants, axes, bandMinutes); `draft` removed after the title and record fixes below.
+
+### Sources opened (search, then fetch of a page the search returned)
+
+1. National Weather Service, Wind Chill Chart — https://www.weather.gov/safety/cold-wind-chill-chart
+2. National Weather Service, Cold FAQs — https://www.weather.gov/safety/cold-faqs
+3. NWS Peachtree City (Atlanta), "The New Improved Wind Chill Index" — https://www.weather.gov/ffc/wci
+4. NWS La Crosse, wind chill — https://weather.gov/arx/wind_chill
+5. NWS Grand Junction, Wind Chill — https://www.weather.gov/gjt/windchill
+6. NWS Alaska Region, Wind Chill Temperature Index brochure — https://www.weather.gov/media/arh/brochures/WindChillTempIndexBro.pdf
+7. NWS, Wind Chill Temperature Index brochure — https://www.weather.gov/media/owlie/wind-chill-brochure.pdf
+8. NWS Albany, New York State cold fact sheet — https://www.weather.gov/media/aly/FactSheets/NYSCold.pdf
+9. NWS Amarillo, Wind Chill — https://www.weather.gov/ama/WindChill (chart is an image, windchill.gif)
+10. NOAA JetStream, Wind Chill — https://www.noaa.gov/jetstream/synoptic/wind-chill (the search also returns https://noaa.gov/jetstream/global/wind-chill, which resolves to it; not used for cells or times; see conflicts)
+
+Each page was confirmed to be the NWS/NOAA page asked for (title and office name in the fetched text).
+
+### Formula and constants
+
+Source 1, sentence: "Wind chill (ºF) = 35.74 + 0.6215T - 35.75(V^0.16) + 0.4275T(V^0.16)", T = air temperature (°F), V = wind speed (mph). Source 2 prints the same formula and adds "Wind chill Temperature is only defined for temperatures at or below 50°F and wind speeds above 3 mph." Sources 3 and 5 print the same constants.
+
+| Name | Value | From |
+|---|---|---|
+| c0 | 35.74 | the constant term |
+| cT | 0.6215 | "+ 0.6215T" |
+| cV | 35.75 | "- 35.75(V^0.16)" (stored positive; the tool subtracts it) |
+| cTV | 0.4275 | "+ 0.4275T(V^0.16)" |
+| exp | 0.16 | "V^0.16" |
+
+### Axes
+
+- `temps`: 40, 35, … -45 °F (18 columns, descending), the national chart's columns as printed by source 3 (header "Calm 40 35 … -45"; the Calm column has no cells).
+- `winds`: 5, 10, … 60 mph (12 rows, ascending). The "Calm" row is left out.
+
+### Cells (`grid.chill`)
+
+All 216 cells transcribed from source 3's text table (rows 5 to 60 mph, 18 values each; the page puts no value under Calm, so the first value is under 40°F — confirmed by sources 4 and 5, whose 5 mph row starts 31 under 35°F and 36 under 40°F). Cross-checked cell by cell: source 4 (35°F to -45°F, 5 to 55 mph, 187 cells), source 5 (40°F to -25°F, 5 to 45 mph, 126 cells) and source 6 (30°F to -45°F of its 30°F to -55°F, 5 to 60 mph, 192 cells): every overlapping cell agrees. All 216 cells are also reproduced by the formula with the constants above and JS Math.round (tests/test_survival_tools.py::test_wc_shipped_every_chart_cell_is_the_nws_formula_with_the_files_constants). The text tables were read through WebFetch's text extraction, not from the chart image.
+
+### Frostbite bands (`grid.bands`, `grid.bandMinutes`)
+
+- Legend: source 7, "Each shaded area shows how long (30, 10 and 5 minutes) a person can be exposed before frostbite develops."; source 8 says the same. `bandMinutes` = [5, 10, 30].
+- Boundaries: not confirmed, so every band is `0` (ruling in docs/v7.3-rulings.md). Looked for and not found: any NWS/NOAA text stating which cells are in each shaded area. Sources 1 and 9 show the chart as an image; the image link on source 9 (https://www.weather.gov/images/ama/Wind_Chill/windchill.gif) returned a server error twice; source 1 lists only a slider graphic. Sources 3, 5 and 4 print the cells as text with no shading (source 4 bolds some cells but does not say what bolding means). Sources 7 and 8 give the legend without the cells. Archived NOAA pages (UNT web archive crh.noaa.gov/grb, weather.gov/om/windchill; webharvest erh.noaa.gov windchill_sheet.pdf) returned only the archive wrapper or a rate-limit page.
+- Single cells stated in text (recorded, not used as boundaries): 0°F, 15 mph, -19°F, "exposed skin can freeze in 30 minutes" (sources 1, 2, 7, 9); 0°F, 20 mph, -22°F, 30 minutes (source 8).
+
+### Title (shown for every cell, since every band is 0)
+
+"Wind chill only: no frostbite time is shown. That does not mean it is safe. The National Weather Service says exposed skin can freeze in 30 minutes or less at 0°F with a 15 mph wind (wind chill -19°F), and faster when colder or windier. Hypothermia is possible even above freezing." (51 words.)
+
+- -19°F at 0°F / 15 mph: source 1, "If the temperature is 0°F and the wind is blowing at 15 mph, the wind chill is -19°F."
+- "30 minutes or less": source 1 says "exposed skin can freeze in 30 minutes"; source 3 prints under its table "Frostbite occurs in less than 30 minutes"; source 6's legend says "Frostbite occurs in 30 minutes or less". The more cautious "or less" is used (see conflicts: source 10 says "just a few minutes" for the same cell).
+- "faster when colder or windier": source 7, the shaded areas show 30, 10 and 5 minutes, the shorter times over the colder, windier cells; source 10's examples (10 minutes or less at -40°F / 5 mph, 5 minutes or less at -20°F / 45 mph).
+- Hypothermia above freezing: source 1, "you might get hypothermia from exposure to cold" when the thermometer is above freezing.
+
+### Conflicts
+
+- Legend minutes: source 5 lists "Frostbite Time for Exposed Skin (minutes)" 30, 15, 10, 5 and source 6 (Alaska) lists 30, 15, 10, 5 and 2 minutes; the national chart (sources 7, 8, and source 4's 30, 10, 5) uses 30, 10 and 5. The national legend is used; no band is shown either way.
+- Source 10 (NOAA JetStream) differs from the NWS chart in several cells as extracted (10 mph/20°F 11 vs 9; 5 mph/-40°F -58 vs -57; 25 mph/-10°F -38 vs -37; 35 mph/-40°F -83 vs -82; its 55 mph row from -15°F repeats the 50 mph row). Not used; the NWS chart, its four copies and the formula agree.
+- Frostbite time at 0°F / 15 mph (-19°F): source 1 says exposed skin "can freeze in 30 minutes"; source 10 (re-opened 2026-11-18) says of the same conditions "At this level, exposed skin can freeze in just a few minutes."; source 3 says "Frostbite occurs in less than 30 minutes" (the line under its table). The title uses the more cautious "30 minutes or less ... and faster when colder or windier"; it does not state "a few minutes", which no NWS page says. Question for Jordan (D number to be assigned by the controller): whether the title should also quote JetStream's "just a few minutes".
+- Source 10, re-opened: "For example, at -40°F and wind speed of just 5 mph, the wind chill is -58°F and frostbite can occur in 10 minutes or less." and at -20°F with a 45 mph wind the "wind chill is also -58°F, yet frostbite is a threat in 5 minutes or less." The same wind chill falls in different frostbite times, so the chart's shaded areas are not a pure wind chill threshold: one more reason no band was derived from wind chill values (NWS Milwaukee's regional "-18 / -32 / -48 or colder" thresholds, found by the reviewer, were likewise not used).
+
+## Heat pack Task 5 (batch B): heat out, wood stoves and fireplaces, firewood, unheated house, home heat kit (2026-11-18)
+
+Files (all draft): src/survival/surv-heat-out.json, surv-wood-stoves-fireplaces.json, surv-firewood.json,
+surv-unheated-house.json, src/checklists/home-heat-kit.json. Every source below was found by built-in web search and
+opened by web fetch on 2026-11-18 (no Firecrawl); the page title and date were checked after each fetch. Fetches return
+excerpts with quotes capped near 125 characters, so long sentences were read in pieces. Batch A topics are linked
+(`s:`) rather than restated; where a batch A or checked line is repeated it is credited to that topic.
+
+Source keys:
+- CDC-WSD: CDC, Safety Guidelines: During & After a Winter Storm, last reviewed August 25, 2026. https://www.cdc.gov/winter-weather/safety/stay-safe-during-after-a-winter-storm-safety.html
+- CDC-HYP: CDC, Preventing Hypothermia, last reviewed August 25, 2026. https://cdc.gov/winter-weather/prevention/index.html
+- CDC-PREP: CDC, Preparing for a Winter Storm, last reviewed December 2, 2025. https://cdc.gov/winter-weather/safety/index.html
+- FEMA-EB: FEMA Individual and Community Preparedness eBrief, Keep Warm During a Winter Power Outage and Avoid Hypothermia, January 18, 2018. https://content.govdelivery.com/accounts/USDHSFEMA/bulletins/1d413aa
+- FEMA-P2143: FEMA, Be Prepared for a Power Outage (FEMA P-2143, August 2023; Ready.gov sheet, copy hosted by Dallas County). https://dallascounty.org/Assets/uploads/docs/hsem/be-prepared/printable-resources/en/ready-gov_power-outage-en.pdf
+- RC-NEWS: American Red Cross news article (page title "Blood Donations Continue to Drop as Icy Temperatures Grip the U.S.", February 20, 2025; URL slug "millions face extremely cold january follow these safety steps"). https://www.redcross.org/about-us/news-and-events/news/2025/millions-face-extremely-cold-january-follow-these-safety-steps.html
+- RC-CHK: American Red Cross, Winter Storm Preparedness Checklist, November 1, 2022. https://RedCross.org/content/dam/redcross/get-help/pdfs/winter-storm/EN_Winter-Storm-Preparedness-Checklist.pdf (most bullets come back cut off; only whole sentences used)
+- RC-PIPES: Fact Sheet: Preventing and Thawing Frozen Pipes (written in the Red Cross's voice, links redcross.org; undated; copy hosted by Outagamie County, Wisconsin). https://www.outagamie.gov/files/assets/county/v/1/hhs-ph/documents/preventing-and-thawing-frozen-pipes.pdf
+- MU-EMG: University of Missouri Extension, Preparing for an Emergency: Home Heating in an Emergency, GH5117 (adapted from University of New Hampshire Cooperative Extension; October 1993, reviewed September 2017). https://extension.missouri.edu/publications/gh5117 (opened twice)
+- MU-STOVE: University of Missouri Extension, Wood Stove Maintenance and Operation, G1731 (David E. Baker; revised January 2023). https://extension.missouri.edu/publications/g1731
+- NIA-09: National Institute on Aging (NIH) news release, Hypothermia: A Cold Weather Risk for Older People, January 16, 2009. https://www.nih.gov/node/16481
+- NYSDOH-COLD: New York State Department of Health, Cold Weather Tips (undated; healthweb-back host as in earlier packs). https://healthweb-back.health.ny.gov/environmental/emergency/weather/cold/
+- DHSES-COLD: NYS DHSES, Extreme Cold Health & Safety (undated). https://www.dhses.ny.gov/extreme-cold-health-safety
+- DHSES-HEAT: NYS DHSES, Home Heating Fire Safety (undated; also a batch A source, re-opened). https://www.dhses.ny.gov/home-heating-fire-safety
+- STS: Safe to Sleep (NICHD, NIH), Ways to Reduce Baby's Risk (undated). https://safetosleep.nichd.nih.gov/reduce-risk/reduce
+- NWS-PREP: National Weather Service, Prepare! Don't Let a Winter Storm Take You by Surprise (page metadata July 31, 2019). https://weather.gov/safety/winter-before
+- MA-DOER: Massachusetts Department of Energy Resources, Oil Heat Maintenance consumer tip sheet, 07/07/17. https://www.mass.gov/doc/consumer-tip-sheet-oil-heat-maintenance/download
+- MS-SFM: Propane safety information sheet (no title or date printed), hosted on the Mississippi State Fire Marshal's site (apps.mid.ms.gov/sfm). https://apps.mid.ms.gov/sfm/pdf/PropaneSafetyInformation.pdf
+- PERC: Propane Education & Research Council (propane.com), Important Propane Safety Information (no publisher or date printed on the page; industry body). https://propane.com/safety/important-propane-safety-information/
+- USFA-FWS: US Fire Administration, Fireplace and Wood Stove Safety card (undated). https://www.usfa.fema.gov/downloads/pdf/publications/fireplace_woodstove_safety_card.pdf
+- READY-HFS: Ready.gov WinterReady "Heating Fire Safety" handout (no publisher printed; refers to usfa.fema.gov). https://www.ready.gov/sites/default/files/2023-12/ready-gov_winterready_heating-fire-safety-handout_0.pdf (read; its lines duplicate USFA-FWS; not cited)
+- EPA-BW: US EPA Burn Wise, Best Wood-Burning Practices, last updated October 13, 2026 (EPA stopped updating Burn Wise October 30, 2025). https://www.epa.gov/burnwise/best-wood-burning-practices?
+- MA-DFS: Massachusetts Department of Fire Services, Chimney & Woodstove Fire Safety, 10/23. https://www.mass.gov/doc/chimney-and-wood-stove-safety/download
+- CLFPD: Crystal Lakes Fire Protection District (Colorado), Preventing Chimney Fires (©2025). https://www.crystallakesfireco.gov/preventing-chimney-fires
+- CSIA-CF: Chimney Safety Institute of America, The Facts About Chimney Fires (undated). https://www.csia.org/chimneyfires.html (second source only)
+- CSIA-10: CSIA, Top 10 Tips (undated copy in a Cornell Cooperative Extension Tompkins County "Cut Your Energy Bills" CD archive on discmaster.textfiles.com; the page names only CSIA). https://discmaster.textfiles.com/file/6895/Cut%20Your%20Energy%20Bills%20(Cooperative%20Extension%20Tompkins%20County).ISO/pdf/chimney-safety-tips.pdf (second source only)
+- IN-DHS: "Alternative Heating" sheet on in.gov/dhs (Indiana Department of Homeland Security site; no publisher or date printed; cites NFPA statistics). https://www.in.gov/dhs/get-prepared/files/alternative-heating-safety.pdf
+- PSU-STOVE: Penn State Extension, Using Your Wood Stove Efficiently and Effectively (Daniel Ciolkosz, updated July 8, 2024). https://extension.psu.edu/using-your-wood-stove-efficiently-and-effectively
+- PSU-WOOD: Penn State Extension, Heating with Wood: An Introduction (Calvin Norman, updated June 15, 2026). https://extension.psu.edu/heating-with-wood-an-introduction (opened twice; second time for all of Table 1)
+- DOE-WP: US Department of Energy, Energy Saver, Wood and Pellet Heating (no title or date printed; first heading "Choosing and Installing Wood- and Pellet-Burning Appliances"). https://www.energy.gov/energysaver/wood-and-pellet-heating (opened twice)
+- DOE-FP: US Department of Energy, Energy Saver article on fireplace and chimney efficiency (no title, author or date in the fetched text). https://www.Energy.gov/energysaver/articles/brrr-5-ways-maximize-your-fireplace-and-chimney-efficiency (read; only "keep the damper closed unless you have a fire burning", which DOE-WP also says; not cited)
+- CCE-TOMP: Cornell Cooperative Extension of Tompkins County, Your Guide to Heating with Wood (with NYSERDA support; ©2010, Guillermo Metz). https://ccetompkins.org/resources/learn-to-burn
+- CCE-WARREN: Cornell Cooperative Extension of Warren County, Buying Firewood (June 3, 2014; updated January 28, 2025). https://warren.cce.cornell.edu/natural-resources/heating-with-wood/buying-firewood
+- ISU-FW: Iowa State University Extension and Outreach, Yard and Garden, Firewood Insects (February 2020). https://yardandgarden.extension.iastate.edu/encyclopedia/firewood-insects
+- DEC-FW: NYS DEC, Firewood and Invasive Pests ("Protect Our Trees by Using Local Firewood"; undated; regulation enacted 2009). https://dec.ny.gov/nature/animals-fish-plants/invasive-species/help-prevent/firewood
+- PURDUE: Purdue University Extension INPREP, Protect Your Plumbing and Appliances during a Winter Power Failure (Edward J. Sheldon, February 1, 2022). https://www.purdue.edu/engineering/ABE/INPREPared/protect-your-plumbing-and-appliances-during-a-winter-power-failure (also the source of the drain-down steps in surv-water-winter)
+- UWEX: University of Wisconsin-Extension, Protecting Plumbing During a Winter Storm (undated; from Penn State and North Carolina Cooperative Extension; nasdonline.org copy). https://nasdonline.org/static_content/documents/2010/d001478.pdf
+- FSIS-SS: USDA Food Safety and Inspection Service, Shelf-Stable Food Safety (undated). https://www.fsis.usda.gov/es/node/3296 (opened twice; the second time for the frozen-can paragraphs word for word)
+- FEMA-SNOW: FEMA, Snow Load Safety Guidance flyer summarising FEMA P-957 (Building Science Branch; undated; copy attached to a bulletin of the govdelivery account MIOETROY). https://content.govdelivery.com/attachments/MIOETROY/2019/11/20/file_attachments/1328803/2.%20FEMA%20Snow%20Load%20Safety%20Guidance%20Fact%20Sheet%20%282013%29.pdf
+- UMN-ICE: University of Minnesota Extension, Dealing with and preventing ice dams (Huelman, Stone, Larson, Hendricks; reviewed 2022). https://extension.umn.edu/garden-and-home/home-maintenance/caring-for-a-home/dealing-with-and-preventing-ice-dams
+
+Opened and not used, or failed:
+- Ready.gov Winter Weather, https://ready.gov/winter-weather: fetch failed at the site (client error), as in batch A for Ready.gov Power Outages.
+- CDC Stay Safe and Healthy in Winter, https://www.cdc.gov/nceh/features/winterweather/index.html: fetch failed (client error). CDC-PREP and CDC-WSD used instead.
+- SAMHSA "Cold weather safety for older adults" (https://www.samhsa.gov/resource/dbhis/cold-weather-safety-older-adults): only navigation came back; NIA-09 used instead.
+- Clemson University Cooperative Extension, Home Heating with Wood: To Cope With Inflation (1988), https://nasdonline.org/static_content/documents/1435/d001235.pdf: gives 3.1, 3.6 and 6.5 cords a year only as worked examples tied to a household's previous oil or gas use, appliance and South Carolina conditions. Not used for "how much a winter takes".
+- Ask Extension #924060 (frozen canned dog food), https://ask.extension.org/kb/faq.php?id=924060: repeats FSIS-SS; not cited.
+- TexasReady winter storms fact sheet, https://www.texasready.gov/resources/assets/factsheet-winter-storms.pdf: no publisher or date printed. It says "Gas, kerosene, or propane heaters should not be used indoors because of the risk of carbon monoxide poisoning"; recorded here for D39 (batch A), not cited.
+- Health Canada archived plumbing sheet (bac-lac wayback): rate-limit page only.
+- Clinton County NY health WinterStorms.pdf: redirected to a general page; not followed.
+
+Conversions: 55°F = 12.8°C, "13°C"; 68°F = 20°C; 60 to 65°F = 15.6 to 18.3°C, "16 to 18°C"; 40°F = 4.4°C, "4°C";
+50 to 70°F = 10 to 21°C (as in surv-water-winter); 160°F = 71°C (DEC prints both); 3 ft = 0.91 m, "1 m"; 36 in, "1 m";
+10 ft = 3.05 m, "3 m"; 1/4 in = 6.4 mm, "6 mm"; 2 to 6 in = 5 to 15 cm; 14 to 18 in = 36 to 46 cm; 16 or 18 in = 41 to
+46 cm; 4 to 8 lb = 1.8 to 3.6 kg; 4 ft = 1.2 m, 8 ft = 2.4 m; 128 cu ft = 3.62 m³, "3.6 cubic meters"; 300 cu ft = 8.5 m³;
+50 miles = 80 km; 1 pint to 1 quart = 0.47 to 0.95 L (as in surv-water-winter); 2 to 3 in = 5 to 8 cm; "a couple of
+inches" = "5 cm" (two inches); 1 million BTU = 1.055 GJ, "about 1.06 gigajoules".
+
+### surv-heat-out
+
+- Tags: none (content plan section 4). Links: every heat-source topic of batches A and B, p:hypothermia, p:frostbite.
+- doFirst 1 / One warm room: MU-EMG ("Heat the smallest practical space", sheltered side, good insulation, few windows; "should be capable of being isolated from other unheated areas either by closing doors or blocking openings"; block off unneeded rooms and ducts). CDC-WSD ("Close off unneeded rooms."; "Stuff towels or rags in cracks under doors."; "Avoid unnecessarily opening doors or windows."; "Close draperies or cover windows with blankets at night."). FEMA-EB ("Close off unused rooms to consolidate and retain heat."). Plastic over windows from inside: CDC-PREP ("cover windows with plastic from the inside", a preparation item; "also helps" is the app's framing). Pets: CDC-PREP ("Bring your pets indoors."). Floors (content plan "windows, doors, floors"): looked for, nothing found in an opened source; not written.
+- doFirst 2: CDC-WSD ("Turning on the stove for heat is not safe!"; never generators, grills, camp stoves inside); FEMA-P2143 ("Do not use a gas stove to heat your home."). Matches surv-carbon-monoxide.
+- doFirst 3 / Who is most at risk: CDC-WSD ("Infants less than one year old should never sleep in a cold room because they lose body heat more easily than adults."; "Older adults often make less body heat because of a slower metabolism and less physical activity."; "If you are over 65 years of age, check the temperature in your home often during extremely cold weather."). CDC-HYP (at risk: "Older adults with inadequate food, clothing, or heating"; "Babies sleeping in cold bedrooms"). CDC-PREP (over 65: "easy-to-read thermometer"). NIA-09 ("Even mildly cool homes with temperatures from 60 to 65 degrees can trigger hypothermia in older people."; diabetes, some medicines including some over-the-counter cold remedies). NYSDOH-COLD ("Keep indoor temperatures between 64 and 75°F and above 68°F" "to protect the very young, the elderly, or people with health problems"; the 64 to 75 range is not quoted). Baby signs: DHSES-COLD (bright red, cold skin, very low energy), as in p:hypothermia (CDC). RC-NEWS (check on loved ones and neighbors, "particularly if they are older or live alone").
+- doFirst 4 / Keep your body warm: FEMA-EB ("Wearing several layers of loose-fitting, lightweight, warm clothing rather than one layer of heavy clothing."; "extra clothing, blankets or sleeping bags"). NIA-09 ("wear long underwear under your clothes, along with socks and slippers"; "Use a blanket or afghan to keep legs and shoulders warm and wear a hat or cap indoors."). MU-EMG ("bed is the warmest place to be with other family members and lots of covers"; the app adds "Not for babies", see D43). RC-CHK ("Drink plenty of warm fluids but avoid caffeine and alcohol."). surv-priorities (eat and drink regularly). DHSES-COLD (change into dry clothing).
+- Babies: STS ("Remove everything from baby's sleep area, except a fitted sheet"; "Keep comforters, quilts, pillows, and blankets out of baby's sleep area."; "Dress baby in a wearable blanket or an extra layer of clothing"; overheating, "Overheated babies are at higher risk for SIDS"; "Wearing hats while indoors can make baby too hot."; "Couches and armchairs are never safe places for babies to sleep."; "Room sharing by putting baby's sleep space near but not in your bed is safer than sharing your bed with baby."; "Sharing an adult bed, couch, or armchair with baby can be risky"). The warn's "Keep the baby in the warm room" joins CDC-WSD's rule to STS; logged D43.
+- doFirst 5 / Too cold to stay: CDC-WSD ("If you're not able to keep your home warm, make temporary arrangements to stay elsewhere."); FEMA-EB ("the home of a relative or friend, or a public facility"); RC-NEWS ("If your home becomes too cold, go to a public library, shopping mall or warming center."); MU-EMG (schools and municipal buildings may offer heat and lighting); DHSES-COLD (municipality, local social services district, 211), framed as normal times. No leave-at temperature found in any source: said in the text; logged D45.
+- In another building: MU-EMG (smallest practical space, sheltered side; "Any device that burns fuel must be vented outside the house"); CDC-WSD (vented). Content plan 9.11 pointer.
+- What a furnace needs: MU-EMG ("Oil burners usually have electrical fuel injectors and ignition."; oil burners, hot-air fans, hot-water circulator pumps; "Most thermostats require electricity."; "An electric generator could power furnace blowers, oil burners and some other appliances"); transfer switch per surv-generators (OSHA, Illinois). Fuel: NWS-PREP ("Heating fuel: refuel before you are empty; fuel carriers may not reach you for days after a winter storm"); MA-DOER ("Dealers advise customers to check their oil tanks" and not to let the level drop "below a 1/4 of a tank"; "Running low on oil can cause sediment that builds up in the bottom of your tank" to be pumped into the line and burner). MS-SFM ("DON'T RUN OUT OF GAS. SERIOUS SAFETY HAZARDS, INCLUDING FIRE OR EXPLOSION, CAN RESULT."; "If your propane tank runs out of gas, any pilot lights on your appliances will go out."). Natural gas: no supply source; gas leaks and shut-off left to a later pack as directed. Vents: NYDCP-22 through surv-carbon-monoxide (checked in batch A).
+- Bringing it back: RC-NEWS ("unplug appliances and electronics to avoid damage from power surges"; "Leave one light on, so you'll know when power is restored."); FEMA-P2143 (unplug). Vents: NYDCP-22 via surv-carbon-monoxide. Propane: MS-SFM ("A LEAK CHECK IS REQUIRED. In many states, a propane retailer or a qualified service technician must perform a leak check" "of your propane system before turning on the gas"; "It is strongly recommended that only a QUALIFIED SERVICE TECHNICIAN light any pilot light that has gone out."); PERC ("Never turn the gas on at the propane tank yourself."). Annual service: CDC-PREP. Looked for, not found: an agency page on restarting a gas or oil furnace after an outage or a run-out (only fuel dealers' and HVAC companies' blogs came back); not written.
+- Heat sources warn: CDC-WSD (stove not safe; vented only). No D question: agrees with surv-carbon-monoxide, surv-portable-heaters, surv-generators.
+- Not used from MU-EMG (1993 text): catalytic heaters, kerosene or gas lanterns for light, cooking on a camp stove or in a fireplace, storing fuel in a garage or carport. They conflict with the checked carbon monoxide and fuel topics (CDC: no camp stoves or lanterns indoors) and are left out.
+
+### surv-wood-stoves-fireplaces
+
+- Tags: none. Links: s:surv-carbon-monoxide, s:surv-store-fuel, s:surv-firewood, p:burns.
+- doFirst 1 / chimney fire steps (D46): CLFPD order: "Call 911!"; get everyone out, including pets ("can become a house fire with frightening speed"); "If you can safely do so, close any doors or intake vents on the stove to reduce the oxygen getting to the fire."; suppressant if you have one (not used); "even if you think it's put the fire out, still call the fire department to come confirm that." MU-STOVE order: "Call your local fire department immediately."; "Close all openings and draft controls on the stove."; extinguisher or baking soda onto the fire in the stove (not used, D46); "avoid introducing water into the chimney" (flue liner); inspect the complete chimney before restarting. CSIA-CF: after a chimney fire, have it evaluated by a certified sweep. The app's step 1 joins "get everyone out" and "call" in one step (sources put calling first; with phones possibly down, both are one action). Signs: CLFPD (loud roaring, popping and cracking, black smoke, ash and debris from the top); MU-STOVE ("a roaring noise, and flames and sparks shooting from the top of the chimney"); CSIA-CF (slow-burning fires may go undetected).
+- doFirst 2 / damper: MA-DFS ("Before lighting a fire, check that the damper is open."; "Do not close a damper before the fire has died out and the embers are cold."); CCE-TOMP ("always make sure the dampers are completely open"); IN-DHS ("Keep the fireplace damper open while hot ashes are still in the fireplace.").
+- doFirst 3 / clearance: USFA-FWS ("Keep anything that can burn at least 3 feet from your fireplace or wood stove."); MA-DFS ("Allow at least 36 inches of space around the appliance", read, not quoted); DHSES-HEAT ("Install woodstoves at least 36 inches away from the wall."; "Keep furnishings and other combustibles 36 inches from all heating sources"). Agree.
+- doFirst 4 / flammable liquids: EPA-BW (never gasoline, kerosene or charcoal starter); MU-STOVE ("Never use flammable liquids such as gasoline, lighting fluid or kerosene to start a fire."); MA-DFS; CSIA-10 ("Never use flammable liquids."). "or revive" is the app's: no source limits the rule to starting; reviewer, please judge.
+- doFirst 5 / ashes: USFA-FWS ("Put ashes in a metal container with a lid. Place the container outside at least 10 feet from your home."); MA-DFS ("shoveled into a metal bucket with a metal lid", "placed outside, on the ground, away from the building"; "Do not place ashes into a paper bag or cardboard box."; "Ashes and embers can stay hot for days"); EPA-BW ("covered, metal container"; "Store the container outdoors on a nonflammable surface."); DHSES-HEAT ("Ashes that seem cool may contain a smoldering charcoal"; "Keep wood stoves and fireplaces free of excess ash buildup."; "Excessive ash buildup prevents good circulation of air"). Cooling time: none found.
+- Before you light it: CDC-WSD (vented); USFA-FWS, CDC-PREP, CSIA-10 (yearly inspection); USFA-FWS ("tested by a qualified testing laboratory"); DOE-WP (professional install evaluates chimney to floor protection); MU-EMG ("Chimney flues are designed to accommodate a single heating device at a time."; gas flues cannot safely handle oil, coal or wood burners); MA-DFS ("Solid fuel heating appliances cannot share a common flue"); CDC-PREP (smoke detector and battery-operated CO detector near the area to be heated; "Test them monthly"); USFA-FWS (screen); EPA-BW (extinguisher). MA-DFS's permit, local inspection and CO-alarm requirements are Massachusetts law; not written.
+- Light it and run it: EPA-BW (starters; "Build hot fires."; doors closed except loading or stoking); USFA-FWS (doors closed); CCE-TOMP ("never let the fire smolder"; "Always open the wood stove door slowly"); DHSES-HEAT (fire fits the stove, don't overload; "Never leave a fire unattended."); CSIA-10 ("Never leave a fire unattended."); MU-STOVE (no clothing on or near; keep children away; supervise young children); MA-DFS ("Never leave children unattended near a stove or fireplace."); USFA-FWS ("Make sure fireplace 'on' switches and remote controls are out of the reach of children.").
+- Never burn: EPA-BW full list (household trash incl. cardboard, plastics, foam, colored ink on magazines, boxes and wrappers; coated, painted or pressure-treated wood; ocean driftwood, plywood, particle board, wood with glue; wet, rotted, diseased or moldy wood; plastic, asbestos, rubber, manure, animal remains; manufactured logs only 100 percent compressed sawdust and check the appliance instructions); USFA-FWS and CDC-WSD (no paper); CSIA-10 (no Christmas trees or treated wood); PSU-WOOD (no poison ivy, oak or sumac); CCE-TOMP citing DEC (household trash in a wood stove is illegal; DEC's own open-burning page was not opened, so the line is credited to CCE). CLFPD says artificial logs make more creosote than wood; EPA's "only if the instructions allow" is the narrower rule used.
+- At night (D44): USFA-FWS ("Put the fire out before you go to sleep or leave your home."); IN-DHS ("Extinguish fireplace fires before going to bed or leaving home."); CSIA-10 ("Before turning in for the evening, be sure that the fire is fully extinguished."). PSU-STOVE (partly close the damper on the bed of coals "at the end of the day before you go to sleep", "banking the fire") described and not followed; DOE-WP ("Woods like oak, hickory, and pine will burn overnight.") not used. Alarms: CDC-PREP, CPSC via surv-carbon-monoxide.
+- Creosote: MA-DFS ("Most chimney fires occur due to a buildup of creosote, a tarry by-product of burning wood."); DHSES-HEAT ("Creosote accumulation is the leading cause of chimney fires."); CSIA-CF ("All forms are highly combustible."; restricted air, unseasoned wood, cool chimney); MU-STOVE (wet wood, incomplete combustion, cool surfaces; "maintaining a briskly burning fire with dry wood"; inspect frequently in the season; airtight stoves "check the stovepipe at least once a month"). MU-STOVE's 250°F flue temperature not used (no stovepipe thermometer assumed).
+- A fireplace as heat: DOE-WP ("traditional open masonry fireplaces should not be considered heating devices"; "draw in as much as 300 cubic feet per minute of heated room air for combustion," "then send it straight up the chimney"; close the flue when not in use); MU-EMG (masonry fireplaces can lose more heat than they produce; stoves "better, more efficient heat producers"); CDC-WSD (fireplace up to code with plenty of dry firewood as a heat source). DOE-WP's "turn your heat down or off and open a window near the fireplace" is an energy tip for a house with other heat; not written.
+- Pellet stoves: DOE-WP ("require electricity to run fans, controls, and pellet feeders"; "Unless the stove has a back-up power supply, the loss of electric power results in no heat" "and possibly some smoke in the house"). Vent-free gas fireplaces: pointer to surv-carbon-monoxide (CDC's rule there).
+- Looked for, not found: a US Fire Administration, NFPA or New York page on what to do in a chimney fire; an ash cooling time; any agency rule for safe overnight burning.
+
+### surv-firewood
+
+- Tags: none. Links: s:surv-wood-stoves-fireplaces, s:surv-fire.
+- Moisture and seasoning: EPA-BW ("Burn only dry, split, well-seasoned wood."; "Wood burns best at a moisture content of less than 20 percent."; moisture meter; "Season wood for at least six months."; "Do not burn wet or green (unseasoned) wood."); DOE-WP ("moisture content of 20% or less by weight"; "even color, without any green"); CCE-TOMP (at least six months to about 20% or less; longer in shade or near water; end-grain splits, sharper sound; a meter reads about a quarter inch deep, split pieces to test; buy a season ahead); CCE-WARREN (green wood "could have a moisture content of 100% or more"; most dealers sell green; "many species of wood will drop to a moisture content below 20% within a year" if properly stacked in relatively low humidity; "some species, such as oak, however, can take two years or more of air drying"; wetter wood gives more smoke and creosote and less heat); PSU-WOOD ("6-12 months"; cut by April, split, stack by May, season at least six months; checks at the ends; shelf life of a few years, oldest first, keep years separate); PSU-STOVE ("one full year or even two is better"). Conflict (minor): EPA "less than 20" vs DOE and CCE "20 or less"; the text leads with EPA's and names both. PSU-WOOD's 60 to 80 percent for fresh red oak not used (CCE-WARREN's figure is the one about dealers' wood).
+- Splitting: PSU-WOOD (split after felling; "to 2-6 inches wide"; easiest frozen; wedges for knotty logs; block "between 14-18 inches tall"; 4 to 8 lb maul; "Safety glasses, pants, and boots should always be worn when splitting"). No other source gave splitting advice. Chainsaw work is out of scope (content plan section 2).
+- Stacking: EPA-BW ("store wood outdoors, off the ground, with only the top covered -- covering the sides traps in moisture"); CCE-TOMP ("Always stack firewood off the ground—pallets are a good first layer"; "loosely stack the wood no more than two layers deep"; cover only the top); PSU-WOOD (dry, sunny, windy, not against a building; pallets or metal tubes; roofing on top; "should never be fully covered in tarp, plastic, or canvas"; "stacked just loose enough to not fall over"); ISU-FW ("stack firewood off of the ground and away from your home"; termites; "leave firewood outside until a day or two before it will be burned"; "We strongly advise against using insecticides on firewood."). Indoor 3 ft: USFA-FWS (anything that can burn).
+- Species: CCE-TOMP (oak, hickory, black locust most heat per weight; poplar, aspen, spruce for mild weather); PSU-WOOD ("Ideally, conifers like pine, fir, and spruce should be limited"; resin, creosote). Table rows from PSU-WOOD Table 1 (MBTU per air-dried cord, about 20% moisture; values differ between reports, as the article says): hickory 28.0, black birch 26.8, white oak group 25.7, sugar maple 24, red oak group 24, white ash 23.6, yellow birch 23.6, birch paper/gray/river 20.3 (shown as "Paper and gray birch"), black cherry 19.9, red and silver maple 18.7. Rows left out: Osage orange 30.7 and honey locust 26.7 and hackberry 20.8 and black walnut 20.2 (less common in Central New York woodlots; not needed for a ranking), ironwood/hop hornbeam 27.3 and "Hornbeam/blue beech" 26.8 (the table gives both the same scientific name, Ostrya virginiana; left out rather than guess which is meant). American beech is not in the table. Warn: PSU-WOOD ("burning large amounts of high BTU-producing wood like Osage orange or ironwood can burn through the bottom of some stoves"). DOE-WP says all species have similar heat per pound when completely dry; not a conflict with a per-cord table (density differs).
+- Cords: CCE-WARREN ("A full cord is defined as a stack of firewood measuring 4ft x 8ft x 4ft"; "A face cord = 4ft x 8ft x 16 or 18in"); PSU-WOOD (cord 4 x 8 x 4 ft; multiply and divide by 128; a face cord roughly a quarter to a half of a full cord). 128 cubic feet is PSU-WOOD's divisor and 4 × 4 × 8.
+- How much a winter takes: no figure in any opened agency or extension source except CCE-TOMP's woodlot yield (half to one cord per acre per year, not a use figure), PSU-WOOD's comparison (a cord of seasoned northern red oak gives as much heat as 159 gallons of fuel oil; not a winter amount, appliance efficiency not stated) and the Clemson 1988 worked examples (above). Left out; the text says no source gives one (content plan 9.4).
+- New York rule (normal times): DEC-FW ("may not be transported more than 50 miles (linear distance) from its source or origin" unless heat-treated; "71° C (160° F) for 75 minutes"; label "New York Approved Heat-Treated Firewood/Pest Free"; Self-Issued Certificate of Origin for personal use; receipt or label for purchased firewood; untreated firewood "may not be imported into NY from any other state or country"; covers "all species of wood, cut or not cut, split or not split, that is destined for use as fuel"). CCE-WARREN agrees on 50 miles. EPA-BW (buy and burn local). PSU-WOOD says "not moved more than a few miles" (Pennsylvania advice; New York's rule is the one stated). State land: surv-fire (checked).
+
+### surv-unheated-house
+
+- Tags: `when: ["cold"]`, as the brief allows ("may carry"), pending the whole-pack reviewer's agreement (content plan section 4). No `where`.
+- Links: s:surv-water-in-the-house, s:surv-water-winter, s:surv-toilet-no-water, s:surv-heat-out.
+- doFirst 1 / Keep the pipes from freezing: NYSDOH-COLD ("Keep the heat on and set no lower than 55°F."; "Avoid pipes freezing by allowing faucets to drip when indoor temperatures are low."; "Open cabinet doors to allow more heat to get to uninsulated pipes"); RC-PIPES ("Water has a unique property in that it expands as it freezes."; pipes at risk; insulate hot and cold pipes in unheated areas; garage doors closed; cabinet doors, chemicals out of children's reach; "Running water through the pipe – even at a trickle – helps prevent pipes from freezing."; same thermostat setting day and night; away: "no lower than 55ºF"); CDC-WSD ("Leave all water taps slightly open so they drip continuously."; "Allow heated air to reach pipes."); CDC-PREP (insulate water lines along exterior walls).
+- doFirst 2 / Drain it: PURDUE, in its order (main valve or in-house well pump; pressure tank; faucets; whole system by unions or joints near the main valve, compressed air; insulate undrainable pipes; toilet tanks and spray hoses; water softener; traps by plugs or disconnecting, or compressed air, or propylene-glycol antifreeze "equal to the water in the trap" "(I pint to I quart is sufficient, depending on the size of the trap)"; fixtures to check; appliances: power or fuel off, water off, hoses off, drain, named appliances, "Do not put antifreeze in these appliances."; "NOT safe to use in any part of a home water system" of ethylene glycol). The steps already in surv-water-winter (checked) are linked, not repeated; the "Purdue Extension adds" list carries only the items surv-water-winter leaves out, and its order follows Purdue's. "Save the water first" points to surv-water-in-the-house, as surv-water-winter does. Water heater: surv-water-in-the-house (FEMA, power or gas off; refill before turning it back on; D21 "off" kept); UWEX ("Turn the water heater off. An explosion could result if the heater is left on without water in the system."). UWEX's "Open all the faucets on the lower level, then the upper level" is not used: it differs from surv-water-in-the-house's order for collecting water (highest tap first to let air in, then the lowest), and Purdue gives no order.
+- doFirst 3: RC-PIPES ("Do not use a blowtorch, kerosene or propane heater, charcoal stove, or other open flame device."); CDC-WSD ("do not thaw them with a torch"); NYSDOH-COLD ("Never use an open flame or torch to thaw frozen pipes."). Matches surv-water-winter.
+- Hot-water heat: PURDUE ("If electrical power is available, keep the circulator pump going."; room below 40°F, "you should probably start draining"; "Most hot water heating systems are not easily drained."; open radiator vents; "Consult a heating contractor about adding antifreeze to your system."). Radiator water: surv-water-in-the-house (FEMA).
+- Stored water and food (the item carried from v7.2): surv-water-winter (CDC 50°F to 70°F; Ohio State 2 to 3 inches of air space, plastic) is restated with credit. Nothing more was found: no opened source says anything else about stored water in an unheated house (searches for agency or extension guidance returned only retailers and preparedness blogs). The text says so. FSIS-SS: "Cans of food that freeze accidentally, such as those left in a car or basement in sub-zero temperatures, can present health problems."; "Frozen cans could swell"; "Do not use any swollen cans; discard them."; "Also, discard frozen cans that are not swollen but have been allowed to thaw at 40 degrees F or higher."; "Cans that have thawed and refrozen are not safe."; storage away from a damp garage or basement and temperature extremes. FSIS-SS's refrigerator-thaw-and-boil route (10 to 20 minutes) is left to the Food pack.
+- doFirst 4 / Roof: FEMA-SNOW (warning signs list; sprinkler and suspended-ceiling items left out as commercial; "the building should be promptly evacuated"; local building authority or qualified design professional; hazardous, qualified people; "a long-handled non-metallic snow rake can be used from the ground"; metal rakes damage roofing and risk electrocution; snow can slide without warning, stay away from the eave; "At least a couple of inches of snow should be left on the roof."; falling icicles). UMN-ICE ("An ice dam is a ridge of ice that forms at the edge of a roof and prevents melting snow (water) from draining off the roof."; "Nonuniform roof surface temperatures lead to ice dams."; water backs up into attic and home; "Remove snow from the roof. This eliminates one of the ingredients"; "Anyone on the roof during the winter or performing work on the roof from below risks injury."; dry wet parts right away to prevent mold). UMN-ICE's channel-with-tap-water and long-term fixes not used (need running water or work beyond an outage). No snow weight or depth figure found (FEMA-SNOW gives none); none written.
+- Coming back: surv-water-winter (know the main valve, a thawing pipe may leak, shut it until repaired; cords away from water); RC-PIPES (if one pipe freezes, others may; licensed plumber if you can't locate, reach or thaw it; gentle heat: heating pad, hair dryer, space heater kept away from flammables, hot towels; faucet open until full pressure); UWEX ("whenever possible, get an expert for plumbing work or repairs"); NYSDOH-COLD ("If pipes burst, avoid standing water to avoid electric shock."); surv-water-in-the-house (refill the water heater before power or gas). Looked for, not found: an agency or extension procedure for turning the water back on after a drain-down (the Health Canada sheet hit a rate limit; the rest were retailers or inspection sites).
+
+### home-heat-kit (checklist)
+
+- Category `heat`; draft (CHECKLIST_KEYS allows `draft`); no `qty`: no opened source gives a per-person figure for any item (blankets, clothing, fuel or alarms).
+- Items and sources: co-alarms (CPSC via surv-carbon-monoxide: battery or backup, every level, outside sleeping areas; CDC-PREP: near the area heated by a fireplace, wood stove or kerosene heater, test monthly); smoke-alarms (CDC-PREP, NWS-PREP: test monthly); extinguisher (CDC-PREP "multipurpose, dry-chemical fire extinguisher nearby"; A-B-C per surv-store-fuel/USFA); heat-source (CDC-WSD: at least one heat source, vented; stove not safe; CDC-PREP: chimney inspected yearly; NWS-PREP: emergency heat source properly ventilated; never oven, range, grill or camp stove per CDC-WSD and surv-carbon-monoxide); firewood (CDC-WSD "plenty of dry firewood"); heating-fuel (NWS-PREP); fuel-cans (surv-store-fuel: approved containers, outside, kerosene can rule from CPSC); ash-can and fire-screen (USFA-FWS); blankets (FEMA-EB); warm-clothes (FEMA-EB extra clothing; NIA-09 long underwear, socks, slippers, hat); baby-sleep (STS); thermometer (CDC-PREP; RC-CHK "Consider using an indoor thermometer"); window-plastic (CDC-PREP plastic from the inside; CDC-WSD towels or rags under doors); flashlights (NWS-PREP flashlight and extra batteries; RC-NEWS battery lanterns, not candles); radio (NWS-PREP); pipe-antifreeze (PURDUE).
+- Left out: spare kerosene wicks and mantles (no opened source lists them; NYSDOH, via surv-portable-heaters, says to replace a worn wick but does not list a spare); generator and transfer switch (no source list); plastic sheeting and tape as a shelter-in-place item (not in a cold-weather list); food, water, medicines and first aid (other kits).
+
+### Batch B disagreements (D43 to D46 in decisions-for-jordan.md)
+
+- D43 babies in a cold house: CDC's never-in-a-cold-room vs Safe to Sleep's no blankets and no bed-sharing vs Missouri's family bed. Safe to Sleep's rules kept whole; Missouri's line marked "Not for babies".
+- D44 wood stove overnight: USFA, Indiana DHS and CSIA put it out before sleep; Penn State banks it; DOE "will burn overnight". USFA used.
+- D45 no leave-at temperature: CDC rule plus NIA and NYSDOH figures quoted.
+- D46 chimney fire: Crystal Lakes vs Missouri order and Missouri's extinguisher step; extinguisher left out.
+- Minor, not logged: EPA "less than 20" vs DOE/CCE "20 or less" percent moisture (EPA first); firewood drying six months (EPA, CCE) vs 6 to 12 months (Penn State) vs oak two years (CCE Warren): all given.
+
+### Agreement with checked topics and protocols
+
+- surv-water-winter: same Purdue steps (linked, not reworded), same never-thaw-with-flame list, same 50°F to 70°F and air-space lines, same Red Cross thaw method. No conflict.
+- surv-water-in-the-house: water heater power or gas "off" before draining and refill before turning back on (D21 kept); radiator and boiler water not for drinking. No conflict; gas leaks and shut-off not written.
+- surv-fire: state land dead and down wood (linked). Nothing in batch B contradicts its campfire text; indoor stoves are a separate subject.
+- surv-shelter, surv-priorities: nothing contradicts; Priorities' "eat and drink regularly" credited.
+- p:hypothermia, p:frostbite, p:carbon-monoxide, p:burns: linked, not restated. The baby hypothermia signs line matches p:hypothermia (CDC). No protocol edited.
+- Batch A: surv-carbon-monoxide (never-indoors list, vent-free fireplaces, alarms, vents) linked from all four topics; surv-generators (transfer switch, furnace and well pump) linked from surv-heat-out; surv-portable-heaters and surv-store-fuel (extinguisher rule, fuel cans) linked. No batch A rule restated differently.
+
+### Batch B fix round (2026-11-18), from task-5-review.md
+
+New sources, each found by built-in search and opened by fetch (no Firecrawl), title checked:
+- FEMA-CFP: FEMA, Chimney Fire Precautions, released December 8, 2020. https://www.fema.gov/print/pdf/node/604847 ("Put the fire out before you go to sleep or leave your home."; also "Put ashes in a metal container with a lid, outside, at least 3 feet from your home": conflicts with USFA-FWS's 10 feet; the more cautious 10 feet kept, not logged as it changes nothing in the text).
+- OSU-HEAT: Oklahoma State University Extension, Home Heating Safety Important in Winter (undated). https://extension.okstate.edu/programs/emergency-and-disaster-preparedness/winter/wood-burning-stoves-offer-heating-alternative.html ("Before leaving the house, make sure the fire has died down" used. Not used: "When leaving a fire unattended, open the stove pipe damper and close the air inlet dampers" (contradicts never leaving a fire unattended) and the extinguisher step for a chimney fire (D46)).
+- MA-KWKS: Massachusetts Department of Fire Services, Keep Warm, Keep Safe: When Heating your Home this Winter (1/23). https://www.mass.gov/doc/abcs-of-home-heating-safety-english-1/download ("Dispose of the ashes in a metal container, with a lid, away from the house, garage, and porch.").
+Re-opened for new quotes: CDC-WSD (baby section word for word; flashlights rather than candles), STS (bed-sharing risk lists word for word), DEC-FW (same-property and quarantine lines), CSIA-CF (damper and overloading lines). NIA-09's "Set your thermostat to at least 68 to 70 degrees." was in the first fetch.
+Looked for, not found: a method for putting out a wood stove fire (searches returned stove retailers, UK fire services' general pages, forums); boiler refill or restart guidance from an agency or extension (trade forums only); oil burner restart after a run-out (dealers' blogs only).
+
+- I1 (surv-heat-out three places; home-heat-kit heat-source): CDC's sentence now attributed ("CDC: use ... only if they are properly vented"), followed by batch A's checked line in meaning ("Kerosene and propane space heaters are not vented: federal and New York agencies advise against using them indoors. If one is all you have, use it only under every condition in Kerosene and propane heaters.") and a s:surv-portable-heaters link. Missouri's "Any device that burns fuel must be vented outside" attributed. Batch A rule not restated or weakened; no new D.
+- I2 (wood stoves): cautious rule used: "Start the fire with dry kindling or natural fire starters (EPA). Don't burn paper, not even to start it (USFA, CDC)." The never-burn list names EPA's newspaper as not followed. D47.
+- I3 (heat-out, D43): CDC-WSD's lines added: remove pillows and soft bedding (smothering, SIDS); "footed pajamas, one-piece wearable blankets, or sleep sacks"; stay elsewhere; "In an emergency, you can keep your baby warm using your own body heat." / "If you must sleep, take precautions to prevent rolling on or smothering your baby." in a warn, with STS's "Very high risk" (soft surface incl. waterbed, old adult mattress, couch, armchair; very tired, drowsy medication, alcohol or impaired adult; adult smokes or uses tobacco), "High risk" (under 4 months; caregiver other than parent) and "Higher-than-normal risk" (preterm before 37 weeks or low birth weight; pillows or blankets). Missouri's bed line now says "Babies are different: see below." D43 rewritten.
+- I4 (wood stoves "At night", D44): warn now credits USFA and FEMA-CFP. How: "no source opened gives a method"; stop adding wood so it burns down (OSU-HEAT), damper open until embers cold (MA-DFS), never water in the chimney (MU-STOVE). Cold night: sleeping bags in the warm room, babies dressed as in heat-out, CDC's stay-elsewhere rule, s:surv-heat-out link (every line credited to sources already in the record). Penn State banking kept as "not followed" with CSIA-CF beside it ("A wood stove's air supply can be limited by closing down the stove damper or air inlets too soon or too much."; "overloading the firebox with wood in an attempt to get a longer burn time also contributes to creosote buildup"). D44 lists the conditions to agree and suggests a fire safety officer.
+- I5 (unheated house): "Coming back" adds "If you drained the hot-water heating system, don't fire the boiler until the system has been refilled. Have a heating contractor refill and restart it (Purdue Extension: consult a heating contractor). No source opened gives the steps." "Hot-water heat" points to it. The don't-fire rule is the app's reading (no source found); D48.
+- M1: heat-out doFirst 2 adds charcoal and a fuel lantern (CDC, via surv-carbon-monoxide); checklist flashlights note "Not candles, and never a fuel lantern indoors."
+- M2: firewood: DEC-FW "No documentation is needed for firewood that is used on the same property from where it is cut," "unless it is transported on public roads"; certificate "If your destination is within 50 miles"; "You must follow the more restrictive rules for firewood transport between the quarantine and the firewood regulation."
+- M3: wood stove doFirst 2 adds "In a chimney fire, see the steps below."; chimney step 2 now "On your way out, and only if you can do it safely ... Don't go back in to do it."
+- M4: unheated doFirst 2 starts "Save the water first".
+- M5: gentle-heat line adds "(plugged straight into a wall outlet: see Generators)" and a s:surv-generators link (surv-generators, USFA).
+- M6: the "Purdue Extension adds these to the steps in Water in winter" list now carries only items not in surv-water-winter: unions and compressed air, wrapping undrainable pipes, water softener, removing trap plugs or disconnecting traps (inaccessible traps by compressed air or antifreeze as in Water in winter), humidifiers, ice maker, sump pumps (all PURDUE).
+- M7: ashes "a metal container with a tight metal lid" (USFA-FWS lid; MA-DFS "metal bucket with a metal lid"; MU-STOVE "a non-combustible metal container with a tight lid"), away from the garage and porch (MA-KWKS). Deck not added (no source says deck).
+- M8: home-heat-kit sources now list the Red Cross checklist (thermometer).
+- M9: unheated doFirst 1: "if water is still running, let faucets drip".
+- M10: roof list starts "Don't go up on the roof. Clear snow only from the ground, with a rake that is not metal (FEMA: snow removal only by qualified people; University of Minnesota Extension: contact professionals)."
+- M11: heat-out: "Oil burner that ran out of fuel: no source opened says how to restart it. Call your oil dealer or a heating technician."
+- M12: NIA-09 "at least 68 to 70 degrees" added to heat-out (68 to 70°F = 20 to 21.1°C, "20 to 21°C") and D45.
+- Keywords: "smoke in house", "stove smoking", "fire in chimney", "put out stove" added to surv-wood-stoves-fireplaces.
+- Draft removed from the four topics and home-heat-kit.
+
+## Heat pack Task 7 (batch D): fire and shelter deepened (2026-11-18)
+
+Files (both draft): src/survival/surv-fire.json, src/survival/surv-shelter.json. Every source below was found by
+built-in web search and opened by web fetch on 2026-11-18 (no Firecrawl); the title and date were checked after each
+fetch. The fetch tool caps quotes near 125 characters, so long paragraphs were read as runs of consecutive short
+quotes, every sentence in order (paragraph order checked that way for the two-column Army PDFs). No v7-checked
+sentence in either topic was changed (docs/v7-migration.md, "Heat pack Task 7"). Both topics move to category `heat`.
+
+Source keys:
+- ATP: US Army ATP 3-50.21, Survival, September 2018 (cover read; chapter 5 complete and chapter 6 to 6-46 read at characters 250,000 to 435,000). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- FM: US Army FM 21-76, Survival Manual (2006 PDF copy, as in v7 Task 14), chapter 15 at characters 320,000 to 420,000, PDF pages 152 to 157. https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- TC: US Army TC 21-3, Soldier's Handbook for Individual Operations and Survival in Cold-Weather Areas, 17 March 1986 (archive.org redirect followed as in Task 14; this time all 116,289 characters read, including 10-3 Snow Caves). https://ia601500.us.archive.org/28/items/MManuals/Tc21-3UsArmySurvivalInColdWeather1986.pdf
+- USAP: USAP Continental Field Manual, Continental Version 2024, ASC-24-026, August 2024, prepared for the US National Science Foundation Office of Polar Programs; Emergency Shelters p. 72, stoves pp. 73-76. https://usap.gov/usapgov/travelAndDeployment/documents/Continental-Field-Manual-2024.pdf
+- SCOUT: Scout Life (Boy Scouts of America), How to Build a Quinzee Snow Shelter, published January 4, 2024, modified February 2, 2026 (article body only, reader comments ignored). https://scoutlife.org/outdoors/outdoorarticles/2992/how-to-build-a-quinzee-snow-shelter/
+- AMC: Appalachian Mountain Club, How to Build a Quinzee (aka Snow Cave), Matt Heid, March 28, 2015 (modified March 28, 2024). https://www.outdoors.org/resources/amc-outdoors/outdoor-resources/how-to-build-a-quinzee-aka-snow-cave/
+- NPS-10: National Park Service, Ten Essentials, last updated May 28, 2026. https://www.nps.gov/articles/10essentials.htm
+
+SCOUT and AMC are outside the preferred list (Scout Life is already a source in Water in winter and Knots). They are
+used only for the quinzhee, for which no agency source was found, and the topic says so.
+
+Opened and not used, or failed:
+- FM copy at characters 0 to 100,000 and 390,000 to 490,000: chapter 15 not in those ranges; 320,000 to 420,000 used.
+- USAP 2008 field manual chapter 11 (webarchive.library.unt.edu copy of usap.gov FieldManual-Chapt11SnowShelters.pdf): the fetch returned only the archive wrapper, no document text. A related URL was not constructed.
+- "Chapter 10, Snow Shelters" on corpora.tika.apache.org (govdocs1/428/428186.html): an Antarctic field guide chapter with trench, mound and cave sizes (tennis-ball vent before running a stove), but no publisher or date in the text. Not cited.
+- Conversions: 3 ft = 0.91 m, "1 m"; 1 ft = 30 cm; 2 ft = 61 cm, "60 cm"; 5 ft = 1.52 m, "1.5 m"; 7 to 8 ft = 2.1 to 2.4 m; 7 ft = 2.1 m, "2 m"; 10 ft = 3.05 m, "3 m"; 7 to 10 ft, "2 to 3 m"; 6 in = 15 cm; 4 in = 10 cm; 1 in = 2.5 cm; 12 in = 30 cm; 3 in = 7.6 cm, "8 cm"; 10 ft deep drift = ATP "three meters (10 feet)", TC "at least 3 meters".
+
+### surv-fire
+
+- Tags: none (unchanged). Links added: s:surv-shelter (Reflectors), s:surv-ten-essentials (Carry a fire kit). Kept: p:burns.
+- Fire on snow, base: ATP 5-6 ("In the cold green logs up to the size of a soda can are easily broken."; "Pieces are stacked in two layers, the top being perpendicular to the bottom" "to a size that contains the entirety of the intended fire."; base "to prevent the coals from melting a hole through the snow pack"). The checked step (two crosswise layers of green logs on deep snow) is unchanged; the new item adds the thickness, size and reason.
+- Green wood in extreme cold: ATP 5-22 ("In extremely cold weather, moisture is pulled from green wood, which then becomes a viable fuel.").
+- Lighter in extreme cold: ATP 5-36 ("Under extreme cold temperatures, lighter fuel can freeze up and not function." "body heat can be used to warm the lighter.").
+- Long fire: ATP 5-29 (logs, green better, "at least 6 inches in diameter and situated so cooking utensils can rest upon the logs"; "Two 1-inch-thick sticks can be placed under both logs, one at each end"; more air; "Long fires allow larger groups of personnel near the heat" "and enable coals to be moved to one end for cooking with a fire at the other."). Not used: "laid to take advantage of existing wind" (no direction given; a trench version not written).
+- Star fire: ATP 5-30 (spokes of a wheel, inner ends burn, pulled closer; conservation of fuel or a small fire; larger pieces that cannot be broken down; "This fire must be constantly tended."; "Hardwood fuels work best").
+- Pyramid: ATP 5-27 (two small logs parallel; solid layer across; "Three or four more layers of logs are added, each layer smaller than the last and perpendicular to the layer below it."; starter fire on top; "burns downward, requiring no attention during the night."). The "no attention" claim is named and overridden by the checked "never leave a fire unattended" (USFS, SMOKEY, DEC-BURN). Logged D62.
+- Cross-ditch: ATP 5-26 ("an 'X' about 12 inches in diameter, and 3 inches deep"; tinder in the middle; kindling pyramid above; "The shallow ditch allows air to sweep under the tinder to provide a draft."). "12 inches in diameter" written "12 inches (30 cm) across".
+- Lean-to fire lay (ATP 5-25): not added. "The end of the stick is pointed in the direction of the wind" can be read either way, and the name would be confused with the lean-to shelter.
+- Hardwood and softwood: ATP 5-20 (dry, split oak, hickory, ash less smoke, more heat than pine, spruce, fir; harder to split; softwood burns faster, more smoke).
+- Teepee and log cabin pointer line: the checked steps (ATP 5-24, 5-28).
+- Reflectors: ATP 5-7 ("maximize the heat produced from the fire by directing in a desired direction" "and protecting the heat from being displaced by the wind."; "nonporous rock or stack of logs most effectively made of green wood"; "When located at the opening of a shelter, the heat is directed into the enclosure"); ATP 5-6 ("Construct a fire reflector if desired; this task is more easily accomplished during the preparation phase" "before the fire becomes hot."). "Never use wet, porous or riverbed rocks" repeats the checked line (ATP 5-6, 5-8; FM ch 7; FM1 VI-11). Lean-to placement repeats checked Shelter ("Build a fire in front, with a wall ... behind it"). Reflector wall: ATP 6-33 ("In cold weather"; "Drive four 1.5-meter-long (5-foot-long) stakes"; "Stack green logs on top of one another between the support stakes."; "Form two rows of stacked logs to create an inner space within the wall that you can fill with dirt."; "strengthens the wall but also makes it more heat reflective."; "Bind the top of the support stakes"). The 6-34 drying rack is not added.
+- Wet weather: ATP 5-8 (base of wood or nonporous rock "to keep moisture susceptible tinder and kindling off the wet ground"), 5-13 (tinder on a dry base); 5-12 (damp tinder "between layers of clothing to use heat radiated by the body to dry it"); 5-20 (fuel "does not have to be kept completely dry if the fire is established well enough to dry the damp fuel"; "more white smoke"); 5-22 (green wood "can be made to burn if finely split and mixed evenly with dry, dead wood", "As a last resort"; poison ivy or poison oak "can cause respiratory distress if burned and inhaled"); 5-35 (match head pointing down at an angle, protect from wind, "held near the bottom edge of tinder", avoid smothering). The checked wet-weather paragraph is unchanged.
+- Carry a fire kit: NPS-10 ("Pack matches (preferably waterproof) or a lighter and fire starters - items that catch fire quickly and sustain a flame."; "Familiarize yourself with the local fire use regulations"). ATP 5-34 (waterproof, waterproof container, striker pad; wax-coated tips sold; dip heads in melted wax). ATP 5-36 (butane better wind resistance, hotter). ATP 5-37 (metal match "not effected by wet or dry conditionals, cold or hot weather, evaporation or age"; quality varies; "conduct operational tests"; "protected from corrosion"). Man-made tinder: the checked tinder list (ATP 5-11). Agrees with surv-ten-essentials ("waterproof matches or a lighter, and fire starter"). ATP gives no kit list (looked for: none in chapter 5).
+- Ferro rod line: unchanged, word for word (push the striker down, ATP 5-39). Its wording already gives what a drawing needs: rod tip at the tinder, striker or knife at a right angle, driven down the rod.
+- Fire bundle for carrying coals (ATP 5-55, 5-56): read, not added (not asked for; no step text needed).
+- Agreement: surv-firewood (dry, seasoned wood; New York firewood rule) not contradicted; ATP's survival advice on green wood is a last resort, outdoors. surv-carbon-monoxide and surv-portable-heaters: Fire has no indoor burning. p:burns linked, not restated.
+
+### surv-shelter
+
+- Tags: where rural, woods, coast (unchanged). Links added: s:surv-knots, s:surv-fire (twice), s:surv-carbon-monoxide, p:burns, p:carbon-monoxide (second link, in the new fire section). Kept: p:carbon-monoxide, p:hypothermia, p:frostbite.
+- Tarp lean-to, kit: ATP 6-16 ("a poncho, 7 to 10 feet of rope or parachute suspension line," "three stakes about 1 foot long, and two trees or two poles 7 to 10 feet apart."). The topic says "tarp or poncho", as the checked Tarp step already applies the poncho lean-to to a tarp; "(three for a poncho)" keeps ATP's count.
+- Tarp lean-to, step order: ATP 6-16 Steps 1 to 8 in the source's order, with the wind check (before selecting trees; "Ensure that the back of the lean-to will be into the wind") first: hood tie-off (Step 1, poncho only); rope cut in half, one half to each corner grommet of one long side (Step 2); 4-inch drip stick about 1 inch from the grommet, 4-inch strings on top-edge grommets (Step 3); "Tie the ropes about waist high on the trees." (Step 4); "Spread the poncho and anchor it to the ground, putting sharpened sticks through the grommets" (Step 5); centre support from the hood to an overhanging branch, no slack, or an upright stick that restricts space, "If the lean-to will be used for more than one night or rain is expected" (Step 6); brush, rucksack or equipment at the sides (Step 7); leaves or pine needles inside, 80 percent note (Step 8). Step 9 (knee-high silhouette, enemy observation) not used. ATP's knot ("a round turn and two half hitches with a quick-release knot") is not named or taught; the step points to Knots.
+- Diagram wording (for Task 8): the high edge is one long edge tied at both corners to the two trees about waist high; the other long edge is staked to the ground on the windward side; the open side is under the high edge, away from the wind. "This is the line between two trees in Build above" ties the steps to the checked Tarp step. "Spread the tarp down toward the wind" follows from Step 5 with the wind check before it (the source has no separate sentence).
+- Lean-to of poles and boughs: ATP 6-31 (no tools or only a knife; takes longer; two trees about 2 m (7 ft) apart; one pole 2 m (7 ft), 2.5 cm (1 in); five to eight poles 3 m (10 ft), 2.5 cm (1 in); cord or vines; saplings or vines), 6-32 (horizontal support "at waist to chest height"; bipod with Y-shaped sticks or two tripods; beams on one side; "be sure to place the lean-to's backside into the wind"; crisscross saplings; cover "starting at the bottom and working your way up like shingling"; bedding). Reflector wall pointer: 6-33 (detail in surv-fire).
+- Debris hut, more detail: ATP 6-38 Steps 1 to 8 (tripod of two short stakes and the ridgepole, or a sturdy base; ribbing "wide enough to accommodate the body"; finer sticks and brush crosswise as a latticework; "light, dry, soft debris"; "Place a 2-foot layer of insulating material inside the shelter."; shingling material or branches on top against wind). The checked debris hut step (waist height, steep ribs, 3 feet, entrance debris) is unchanged. The 2-foot bed is ATP's debris-hut figure; the checked general minimum (12 inches) stays in step 1 of Build.
+- Snow trench: USAP p. 72 ("The quickest emergency shelter to construct in snow is a trench."; "Dig a three-foot-deep, shoulder-width trench in the snow, making it long enough for a person to lie down," "with extra room for gear."; "Cover the trench with a tarp, and anchor the tarp with snow blocks, bamboo stakes, shovels, sleds, or other equipment."; "Snow blocks or slabs may also be used to cover the trench opening."; bell shape for two, "the surface opening should remain shoulder wide"). TC 10-3 ("A snow trench provides shelter quickly."; burrow into a drift or dig a trench; roof of ponchos or ice and snow blocks supported by skis, ski poles or snowshoes; "Boughs can be used for covering the roof and for the bed."; snow blocks leaned against each other, figure 10-6). FM ch 15 p. 154 (below the snow and wind level; "If you are in an area of compacted snow, cut snow blocks and use them as overhead cover."; "Build only one entrance and use a snow block or rucksack as a door."). Ventilation: no source gives a trench vent; step 5 points to the checked Snow line (ATP 6-39, FM ch 15).
+- Snow cave: ATP 6-25 (insulating; "it takes time and energy to build and that you will get wet while building it"; drift "about three meters (10 feet) deep"; roof arched for strength and so melt drains down the sides), 6-26 (platform higher than the entrance; separate it from the walls or dig a small trench; "Ensure the roof is high enough so that you can sit up"), 6-27 (block the entrance; "The walls and ceiling should be at least 30 centimeters (1 foot) thick."; ventilation shaft; mound variation), 6-39 ("if isolated persons cannot see their breath, the snow shelter is too warm" "and should be cooled down to preclude melting and dripping"; another vent may be required at the door). TC 10-3 (drift "at least 3 meters deep"; "Newly fallen, powdery, or loose snow should not be used."; "The entrance should be built so that it is about 45 degrees from the downwind side."; tunnel 1 m straight in, chamber at right angles; sleeping area "on a higher level than the highest point of the tunnel entrance, where there is warmer air"; roof arched, "at least 30 centimeters thick"; "At least two ventilator holes are used, one in the roof and one in the door."; "inspected every 2 or 3 hours"; ski pole through the roof vent to clear it; entrance blocked when not in use; "Walking on the roof may cause it to collapse."; mark the entrance with skis upright; diggers get wet). Step order: TC's (site, entrance and tunnel, chamber), then ATP's finishing points. "Change into dry clothes when it’s done" is the app's line from the "you will get wet" sentences; SCOUT says it for the quinzhee.
+- Quinzhee: ATP 6-27 (pile snow into a mound large enough to dig out). AMC ("at least five feet high and ideally seven to eight feet high"; "bond together in 60 to 90 minutes"; "Inserting sticks a foot deep from the outside"; "walls should be at least a foot thick"; small entrance at the base "slightly larger than what you need to crawl in"; downwind side; don't excavate through the wall). SCOUT (mound "7 to 8 feet high", "big enough around to hold two people once it is hollowed out"; dome, "about 90 minutes"; sticks from the outside, stop at their ends; "walls should be 1 to 2 feet thick"; small entrance on the downhill side; "Poke a small ventilation hole near the top of the dome."; last foot of snow as elevated beds, narrow trench to the ground; mark the entrance; small shovel inside; warm dry clothes). Conflicts (settle time, wall thickness, entrance side) resolved to the longer time and the shared minimum, both named; D63. The v7 removal of "keep your digging tool inside" (unsourced then) is not reversed for snow shelters in general: the shovel line is in the quinzhee steps only, credited to SCOUT.
+- Fire and stoves in and near shelters: warn first sentence repeats the checked Snow line (CDC-CO, CPSC). Army disagreement named: TC 10-3 (cave and igloo heated with a one-burner gasoline stove or candles; put out while sleeping; fire guard if a fire is needed while sleeping), ATP 6-27 (cook in the lower entrance), ATP 6-39 (candles, fuel gel, oil lamps make CO; vents), USAP p. 72 (ventilation critical if a stove is run in any snow shelter). Not followed; D61. FM ch 15 p. 153 ("Carbon monoxide poisoning can result from a fire burning in an unventilated shelter."), p. 157 ("excessive heat will melt the insulating layer of snow"; melting overhead snow "may get you wet, bury you and your equipment, and possibly extinguish your fire"; careless warming or drying "burn or scorch his clothing and equipment"). TC 10-3 ("Precautions must be taken to prevent the fire from burning too hot and burning down the shelter."). "Never leave a fire unattended" repeats checked Fire (USFS, SMOKEY, DEC-BURN). Not used: FM p. 153 "Never fall asleep without turning out your stove or lamp" and p. 152 "ventilate an enclosed shelter, especially if you intend to build a fire in it" (both read as allowing a flame inside while awake, which CDC does not); ATP 6-40 (opening 90 degrees to the wind, fire about 3 feet away; D60, with D8).
+- Looked for and not found: an agency (NPS, USFS, NYS DEC, extension) page with quinzhee sizes; a vent size for any snow shelter from a named publisher; snow trench vent; tree-pit sizes (ATP 6-28 gives "the depth and diameter you desire"; not added).
+- Not added (content plan, call 11): vehicle and building as shelter (in surv-heat-out and surv-winter-storms).
+- Agreement: surv-carbon-monoxide ("Never indoors": camp stoves, lanterns, charcoal in a tent) and surv-portable-heaters ("Never while asleep or alone": tent, snow shelter) repeated, not softened. surv-priorities CO line unchanged and matched. surv-water-winter (snow melted outdoors only) not contradicted. p:carbon-monoxide (no stove, heater or lantern where people sleep in a tent or snow shelter), p:hypothermia (insulate from the ground), p:frostbite (never rewarm by a fire) and p:burns linked, not restated. surv-knots: no knot taught; ATP's "round turn and two half hitches" not named in the app.
+
+### Batch D disagreements (D60 to D63 in decisions-for-jordan.md)
+
+- D60 fire beside a shelter (ATP 6-40 vs ATP 6-16/6-32 and Smokey Bear, with D8).
+- D61 heating or cooking in a snow shelter (TC 21-3, ATP, USAP vs CDC and CPSC).
+- D62 pyramid fire overnight (ATP 5-27 vs never unattended).
+- D63 quinzhee sizes from non-agency sources; trench vent not sourced.
+
+### Task 7 fix round 1 (2026-11-18), from task-7-review.md
+
+Sources re-opened 2026-11-18 (title checked): ATP (6-39, cover header), https://irp.fas.org/doddir/army/atp3-50-21.pdf;
+AMC, https://www.outdoors.org/resources/amc-outdoors/outdoor-resources/how-to-build-a-quinzee-aka-snow-cave/ (title and
+author confirmed); TC pp. 10-6 to 10-7, https://ia601500.us.archive.org/28/items/MManuals/Tc21-3UsArmySurvivalInColdWeather1986.pdf
+(TC 21-3 page headers; the date was confirmed in the first read).
+
+- I1 surv-shelter, Fire and stoves: added "No fire, candle, fuel gel or oil lamp inside a tent or snow shelter either" — ATP 6-39 ("Candles, fuel gel, or small oil lamps produce carbon monoxide."); CDC via surv-carbon-monoxide ("Don't cook or burn anything on a stove or fireplace that isn't vented"). Removed "A fire burning in a shelter without ventilation can cause carbon monoxide poisoning (FM)" (its condition implied a ventilated fire is safe). Melting-snow item recast without "put out your fire" — FM p. 157 ("excessive heat will melt the insulating layer of snow"; melting overhead snow "may get you wet, bury you and your equipment"). ATP and FM used lines updated.
+- I2 surv-shelter, quinzhee: step 2 adds AMC ("The rate this occurs varies depending on the temperature and moisture content of the snow."; "Wet snow just below the freezing point bonds quickly;" "more granular snow in low temperatures takes longer, and may not sinter together at all."; "In most conditions, the snow will sufficiently bond together in 60 to 90 minutes"; snowball test: "does the snow stick together or does it crumble apart?", crumble means "probably best to wait for next time"). Step 4 adds AMC ("if you can see light filtering through the wall, it's likely too thin."). The app's "don't build a quinzhee from that snow" is the more cautious reading of AMC's "wait for next time".
+- I3 surv-fire (Put it out, new paragraph; pyramid item) and surv-shelter (Fire and stoves list): "Asleep counts as unattended. If a fire must burn while people sleep, one person stays awake to watch it; otherwise put it out before you sleep." — TC p. 10-6 ("The fires should be put out when personnel inside the cave are sleeping," "thus reducing the danger of fire, asphyxiation, or carbon monoxide poisoning."; "If the weather is severe and it is necessary to have a fire while sleeping," "an alert fire guard must be posted in each cave."). TC writes it for snow caves; the topics credit it as TC's rule for fires while people sleep and apply it to an open fire. TC 21-3 added to Fire's sources. D62 updated.
+- M1 surv-shelter, tarp lean-to: kit paragraph now says the figures are the Army's for a poncho lean-to (ATP 6-16); step 5 now "The ropes and the tarp’s high edge are the line between two trees in Build above: you don’t need a separate line."; step 7 split into "Poncho:" (hood line to a branch) and "Any tarp:" (upright stick), both ATP 6-16 Step 6. No source for tarp-size rope lengths: none written.
+- M2 surv-fire, Fire on snow: "In the cold, green logs up to about the thickness of a soda can break easily, so you can gather them by hand for the base." — ATP 5-6 read as which logs break, not a maximum.
+- M3 surv-fire, Reflectors: the shelter-opening sentence now limited to the open side of a lean-to ("not into an enclosed shelter"; D60, CO rule). ATP 5-7 used line notes it.
+- M4 surv-shelter, snow cave intro: "Dig in as little clothing as you can, so you have dry clothes to change into when you finish (Army TC 21-3)." — TC p. 10-6 ("They should wear the minimum amount of clothing to ensure that they have a change of dry clothing when finished."); "from sweat and snow" — TC ("wet from perspiration and from the snow inside the cave").
+- M5 surv-fire, softwood: "burn faster and make more smoke unless you keep a large flame going" — ATP 5-20.
+- Draft removed from both topics.
+
+## Heat pack Task 8: diagrams (2026-11-18)
+
+Every drawn word and number below comes from the topic named, in the section the figure sits in unless another section is named; no figure adds a fact, and no figure opened a new source. Each was rendered in the built app at 360 x 640, day and night, and in the enlarged view. Not drawn in this task: `layers` and `car-exhaust-clear` (their topics are still in review), and `snow-trench` (Shelter already carries `shelter-snow`, a snow trench; the quinzhee was drawn instead because its section gives every size drawn).
+
+### shelter-tarp (surv-shelter, "Tarp lean-to, step by step", after the steps)
+
+Redrawn: the old figure was an A-frame over a ridgeline with the low end into the wind. Now a three-quarter view of the tarp lean-to, seen from the open side, wind from the left. It is a different drawing from `shelter-leanto` (poles and boughs with a fire and log wall, under Build): no fire, a flat tarp, ropes, drip sticks and stakes.
+- Two trees: "two trees or poles 7 to 10 feet (2 to 3 m) apart" (spacing not labelled).
+- "Each rope tied to its tree about waist high": step 5, "Tie each rope to its tree about waist high, so the high edge is stretched between the trees." Ropes run from the corners of the high edge (step 3, "Tie one half to each corner of one long edge of the tarp").
+- "High front edge": step 3, "This edge is the high front edge."
+- "Drip stick" (one on each rope, next to the tarp): step 4, "Tie a drip stick ... to each rope about 1 inch (2.5 cm) from the tarp." Sizes not labelled.
+- "Low, staked edge: back into the wind", stakes along the low edge, wind arrows on that side: step 6, "stake its other long edge to the ground with sharpened sticks through the grommets. The low, staked edge is the back of the lean-to, facing into the wind"; step 1, "The back of the lean-to must face into the wind."
+- "Open side faces away from the wind", a leader to the open side: step 6, "The open side, under the high edge, faces away from it." (Review M1: the first version had an arrow out of the open side that could read as wind; replaced by the leader.)
+- Not drawn: the hood tie-off, the centre pole or hood line, brush at the sides, bedding.
+- Caption: "Tarp lean-to. The ropes hold the high front edge between the trees; the low back edge is staked down, into the wind." Step 5, "The ropes and the tarp's high edge are the line between two trees"; step 6.
+
+### fire-ferro (surv-fire, "Ways to light it", after the list)
+
+Redrawn: the old figure held the striker still and pulled the rod back. Now the rod's tip sits in the tinder and the striker, square to the rod, is pushed down it.
+- "Ferro rod", "Rod tip at the tinder": "Ferro rod (metal match): hold the rod with its tip at the tinder."
+- "Striker at a right angle to the rod" (with a right-angle mark): "Hold the striker or a knife at a right angle to the rod".
+- "Drive it down the rod, firm, even pressure" (arrow along the rod toward the tip): "and drive it down the rod with firm, even pressure".
+- "Sparks land in the tinder": "so the sparks land in the tinder."
+- Caption: "Ferro rod. Hold the rod with its tip at the tinder and drive the striker down the rod, at a right angle to it." Same sentence.
+
+### generator-placement (surv-generators, "Where to run it", after the list)
+
+- "Outside only", "More than 20 feet (6 m) from any window, door or vent" (dimension from the house wall beside a window to the generator): "Outside only, more than 20 feet (6 m) from any window, door or vent (CDC, New York State Division of Consumer Protection)."
+- "Exhaust pointed away from your home" (exhaust arrow pointing away from the house): "Point the exhaust away from your home and from any other building someone can go into (CPSC)."
+- "Never inside a home, garage, basement, crawlspace or shed" (heavy cross over a generator in a garage built onto the house, door up): "Never inside a home, garage, basement, crawlspace or shed, or in any other enclosed or partly enclosed space (CPSC, FEMA)"; the attached garage with its door up also shows "Never in an attached garage, even with the door open (NFPA)", which the alt text and caption carry. (Review M2: the first label said only "attached", which could suggest a detached garage is fine. M3: the cross is drawn heavier so it stays the strongest mark at night.)
+- Not drawn: porch and carport, the 3 to 4 feet (0.9 to 1.2 m) clear space, rain cover.
+- Caption: the same three statements in the list's words.
+
+### heater-clearance (surv-wood-stoves-fireplaces, "Before you light it", after the list)
+
+Drawn as a wood stove, not a kerosene or propane heater: the agencies in Kerosene and propane heaters advise against those indoors, and the stove topic states the same 3 feet (1 m).
+- "At least 3 feet (1 m)" on each side, from the stove to an armchair and to curtains; "Anything that can burn": "Keep anything that can burn at least 3 feet (1 m) from the fireplace or stove (US Fire Administration)." The chair and curtains are things that burn; the topic names no kind of furniture for a stove (Kerosene and propane heaters lists sofas and curtains).
+- "Vented to the outside" (stovepipe up through the ceiling): "Use a fireplace or wood stove only if it is vented to the outside (CDC)."
+- Not drawn: the New York State Division of Homeland Security and Emergency Services 36 inches (1 m) from the wall (a separate rule; the test forbids "36" and "wall").
+- Caption: "Keep anything that can burn at least 3 feet (1 m) from the stove or fireplace. Use one only if it is vented to the outside."
+
+### warm-room (surv-heat-out, "One warm room", after the list)
+
+House plan, no numbers.
+- "Warm room", the smallest room, shaded: section heading "One warm room"; "Heat the smallest space you can live in, on the sheltered side of the house, with good insulation and few windows."
+- "Sheltered side of the house" (bracket under that side): same sentence. No wind is drawn: the topic does not name what the side is sheltered from.
+- One window in the warm room, two in each other room: "few windows".
+- "Blankets over the windows at night" (a blanket along the warm room's window): "Close the drapes or cover the windows with blankets at night (CDC)."
+- Closed door into the warm room, "Towels in the cracks under doors" (the towel a bunched zigzag beside the door, so it stays distinct from the door at night, review M4): "It should close off from the cold rooms with doors"; "Stuff towels or rags in the cracks under doors (CDC)."
+- "Close off rooms you don't need", "Cold room" (grey): "Close off rooms you don't need (CDC, FEMA)"; "close off from the cold rooms".
+- "Heating ducts blocked off" (crossed duct in a cold room): "Block off the heating ducts to rooms you are not heating (University of Missouri Extension)."
+- No heater is drawn: the topic sends each heat source to its own topic.
+- Caption: "Heat the smallest space you can live in, on the sheltered side of the house, and close it off from the cold rooms."
+
+### quinzhee (surv-shelter, "Quinzhee (snow mound)", after the steps)
+
+Cross-section of the mound. The sizes are the topic's, which it credits to the Appalachian Mountain Club and Scout Life.
+- "At least 5 feet (1.5 m) high" (dimension to the top): step 1, "a mound at least 5 feet (1.5 m) high". The ideal 7 to 8 feet is not drawn.
+- "Sticks a foot (30 cm) deep: walls at least 1 foot (30 cm) thick" (sticks reach exactly through the wall; the wall is drawn just over 1 foot at the 5-foot height mark's scale, review M5): step 3, "Push sticks a foot (30 cm) deep into the mound all over, from the outside"; step 4, "Stop wherever you reach the end of a stick, so the walls stay at least 1 foot (30 cm) thick".
+- "Ventilation hole" near the top: step 5, "Poke a small ventilation hole near the top of the dome."
+- "Raised beds" (one foot high), "Trench down to the ground so cold air drains out" (label inside the shelter, arrow down into the trench, review M6): step 6, "Leave the last foot of snow as raised beds, and dig a narrow trench between them down to the ground so cold air drains out."
+- Entrance not drawn (review C1). The first version drew a dashed entrance in the far wall about 1.6 ft high, taller than the 1-foot beds. The same topic says "build the sleeping platform higher than the entrance" (Snow) and "Make the sleeping platform higher than the top of the entrance, where the air is warmer" (Snow cave); the quinzhee steps give only "a small entrance at the base ... just big enough to crawl through" and beds of "the last foot of snow", no entrance height. A drawing cannot place the entrance without showing a height the text does not give, so it is left out of the figure, alt text and pinned words; checked against the platform rule: nothing drawn now shows an entrance at or above the beds. Whether the quinzhee steps agree with the platform rule is D64.
+- Not drawn: settling time, marking the entrance, the shovel.
+- Caption: "Quinzhee cut in half. Stop digging wherever you reach the end of a stick. Leave a ventilation hole near the top, and raised beds with a trench between them so cold air drains out." Steps 4 to 6.
+
+Test change: `tests/test_figs.py` pins each figure's drawn words to its topic (each phrase drawn is also in the topic text), forbids the old wording (A-frame, ridgeline, low end; pull, back, held still) and any number not part of a distance the topic states, checks each figure sits once in its section, and checks the tarp's geometry (wind onto the low, staked edge) and the ferro rod's (striker square to the rod, push toward the tip, tip in the tinder). `tests/test_survival_migration.py` `PINNED_FIGS`: surv-fire gains fire-ferro; surv-shelter gains shelter-tarp and quinzhee; surv-generators, surv-wood-stoves-fireplaces and surv-heat-out are pinned to their one figure.
+
+## Heat pack Task 6 (batch C): dress for the cold, sleep warm, wind chill, winter storms, vehicle winter kit (2026-11-18)
+
+Files (all draft): src/survival/surv-dress-for-cold.json, surv-sleep-warm.json, surv-wind-chill.json,
+surv-winter-storms.json; src/checklists/vehicle-winter-kit.json. Every source below was found by built-in web search
+and opened by web fetch on 2026-11-18; the title (and date where printed) was checked after each fetch. Fetches return
+quotes capped at about 125 characters, so long sentences were read as consecutive pieces. No Firecrawl.
+
+Source keys:
+- NWS-WC: National Weather Service, Understanding Wind Chill. https://www.weather.gov/safety/cold-wind-chill-chart (also source 1 of the wind chill record)
+- JS-WC: NOAA JetStream, Wind Chill. https://www.noaa.gov/jetstream/synoptic/wind-chill (source 10 of the wind chill record)
+- ALY-COLD: NWS (Albany), Extreme Cold, Definitions for New York State. https://www.weather.gov/media/aly/FactSheets/NYSCold.pdf
+- ALY-WIN: NWS (Albany), Winter Weather, Definitions for New York State. https://www.weather.gov/media/aly/FactSheets/NYSWinter.pdf (opened twice)
+- SCN23-44: NWS Service Change Notice 23-44 updated, Implementation of Consolidated NWS Public Weather Program Products Related to Cold, March 26, 2024. https://www.weather.gov/media/notification/pdf_2023_24/scn23-44_public_program_text_products_freeze_cold_aab.pdf
+- SCN17-77 and SCN19-63: NWS Hazard Simplification notices on the Lake Effect Snow Warning (2018 consolidation; reinstated October 1, 2019, optional at regional discretion). https://www.weather.gov/media/notification/pdfs/scn17-77winter_haz_simp_aab.pdf and https://www.weather.gov/media/notification/pdf2/scn19-63haz_simp_lake_snow_aab.pdf (read to confirm the product still exists; not cited in text)
+- NWS-WW: NWS, Winter Weather Warnings, Watches and Advisories. https://www.weather.gov/safety/winter-ww
+- NWS-NE: NWS, What is a Nor'easter? https://www.weather.gov/safety/winter-noreaster
+- NWS-LES: NWS, What is a Lake Effect Snow? https://www.weather.gov/safety/winter-lake-effect-snow
+- NWS-BRO: NWS, Winter Weather Safety for You and Your Family (brochure, NOAA PA 201855, file dated 11-06-25). https://www.weather.gov/media/owlie/3-fold-Brochure-Color-BG-Winter-Weather-11-06-25-FINAL.pdf (opened twice)
+- NWS-BEF: NWS, Prepare! Don't Let a Winter Storm Take You by Surprise. https://weather.gov/safety/winter-before
+- NWS-MPX: NWS Twin Cities, Winter Hazard Awareness Week in Minnesota, November 7, 2023. https://www.weather.gov/mpx/winterpns5
+- CDC-DUR: CDC, Safety Guidelines: During & After a Winter Storm, reviewed August 25, 2026. https://www.cdc.gov/winter-weather/safety/stay-safe-during-after-a-winter-storm-safety.html
+- CDC-PREP: CDC, Preparing for a Winter Storm, reviewed December 2, 2025. https://cdc.gov/winter-weather/safety/index.html (opened twice; the second fetch for the car kit list item by item)
+- CDC-ABOUT: CDC, Winter Weather: Before, During, and After, reviewed August 25, 2026. https://www.cdc.gov/winter-weather/about/index.html (index only; not cited)
+- CDC-HYP: CDC, Preventing Hypothermia, reviewed August 25, 2026. https://cdc.gov/winter-weather/prevention/index.html
+- CDC-FB: CDC, Preventing Frostbite, reviewed August 25, 2026. https://cdc.gov/winter-weather/prevention/preventing-frostbite.html
+- CDC-PO: CDC, What to Do to Protect Yourself During a Power Outage, reviewed August 26, 2026. https://www.cdc.gov/disasters/poweroutage/needtoknow.html (opened twice)
+- NIOSH: CDC/NIOSH, Cold Stress and Workers, reviewed November 17, 2026. https://cdc.gov/niosh/cold-stress/about
+- OSHA-PREP: OSHA, Winter Weather: Preparedness. https://www.osha.gov/winter-weather/preparedness
+- OSHA-CS: OSHA, Winter Weather: Cold Stress. https://osha.gov/winter-weather/cold-stress
+- RC-23: American Red Cross, Giant Winter Storm Threatens Millions; Follow these Safety Steps, February 21, 2023. https://www.redcross.org/about-us/news-and-events/news/2023/giant-winter-storm-threatens-millions-follow-these-safety-steps.html
+- NYGOV-25: NYS Governor's Office, Governor Hochul Urges Caution Ahead of Ice and Lake Effect Snow Systems, December 28, 2025. https://www.governor.ny.gov/news/governor-hochul-urges-caution-ahead-ice-and-lake-effect-snow-systems
+- NYSDOH-25: NYS Department of Health, Urges New Yorkers to Follow Winter Safety Tips, January 15, 2025. https://healthweb-back.health.ny.gov/press/releases/2025/2025-01-15_winter_safety_tips.htm
+- DHSES-W: NYS DHSES, Winter Weather Safety (ny.gov/winter-safety-tips redirects here). https://www.dhses.ny.gov/winter (navigation only: no kit list or tips; not cited)
+- FEMA-24: FEMA, Ahead of Expected Nor'easter, FEMA Encourages Communities in the Storm's Path to be #WinterReady, January 5, 2024. https://www.fema.gov/ht/print/pdf/node/672513 (English text despite the /ht/ path)
+- READY-G: Ready.gov, #WinterReady Safety Graphics. https://www.ready.gov/collection/winter-weather-safety?page=3 (image captions only; not cited)
+- AAP: American Academy of Pediatrics, HealthyChildren.org, Cold Weather Safety for Children, updated January 25, 2023. https://healthychildren.org/English/safety-prevention/at-play/Pages/Cold-Weather-Safety.aspx
+- FM21-76-1: US Army FM 21-76-1, Survival, Evasion, and Recovery, June 29, 1999. https://irp.fas.org/doddir/army/fm21-76-1.pdf (chapters II, V, VI)
+- WRAIR: Walter Reed Army Institute of Research, Behavioral Biology Branch, with the Northern Warfare Training Center, Cold Weather Sleep in the Arctic Environment (undated; cites TC 21-3, March 1986). https://wrair.health.mil/Portals/87/WRAIR_Sleep%20in%20the%20Arctic%20Environment.pdf
+
+Would not open: Ready.gov Winter Weather, https://ready.gov/winter-weather (client error, twice; the same failure as Ready.gov Power Outages in batch A). Ready.gov's car kit list is therefore not used; FEMA-24 and READY-G captions were read instead. NYS DHSES's "Winter Driving Tips" page was not returned by search; the NYS list is the Governor's release (NYGOV-25).
+
+Conversions: 5 ft = 1.52 m, "1.5 m"; 12 in = 30.5 cm, "30 cm"; 100 yd = 91.4 m, "91 m" (Red Cross prints 91 meters); 2 to 3 in = 5.1 to 7.6 cm, "5 to 8 cm"; 50°F = 10°C; 40°F = 4.4°C, "4°C"; 60°F = 15.6°C, "16°C".
+
+### surv-wind-chill
+
+- Tags: when cold (brief). Links: u:windchill, p:frostbite, p:hypothermia, s:surv-dress-for-cold.
+- What it is: NWS-WC ("The wind chill temperature is how cold people and animals feel when outside."; "based on the rate of heat loss from exposed skin caused by wind and cold"; "As the wind increases, it draws heat from the body, driving down skin temperature and eventually the internal body temperature."). 0°F / 15 mph = -19°F — NWS-WC; matches windchill.json (cell -19). 5 ft face height from 33 ft readings; "Assumes no impact from the sun, i.e., clear night sky."; "Bright sunshine may increase the wind chill temperature by 10°F to 18°F." — NWS-WC. Defined only at or below 50°F and above 3 mph — NWS-WC (and windchill.json exp note). Humidity "less than 1 degree" — NWS-WC. Chart range 40°F to -45°F, 5 to 60 mph — windchill.json grid (reviewed).
+- What it is not: NWS-WC FAQ ("wind chill applies only to people and animals"; inanimate objects cool "more quickly to the current air temperature" and "will NOT cool below the actual air temperature"; -5°F / -31°F radiator example — the chart cell at -5°F, 25 mph is -31, consistent). Frostbite needs actual air temperature below freezing; above freezing "you will not get frostbite" but "might get hypothermia" — NWS-WC. "Cold is dangerous with or without wind." — NWS-WC.
+- Frostbite times (ruling in docs/v7.3-rulings.md: no per-cell table; only times stated in words, quoted with their conditions):
+  - Shaded areas "(30, 10 and 5 minutes)" — ALY-COLD (also the brochure in the wind chill record). Stated that the app cannot show them, as in the tool title.
+  - 0°F / 15 mph / -19°F: "At this wind chill temperature, exposed skin can freeze in 30 minutes." — NWS-WC; "At this level, exposed skin can freeze in just a few minutes." — JS-WC. Both quoted; "Plan on the shorter time" is the cautious reading. D50.
+  - 0°F / 20 mph / -22°F: "exposed skin can freeze in 30 minutes" — ALY-COLD; cell -22 in windchill.json.
+  - -40°F / 5 mph: "frostbite can occur in 10 minutes or less" — JS-WC. -20°F / 45 mph: "frostbite is a threat in 5 minutes or less" — JS-WC. JS-WC prints -58°F for both; the NWS chart (windchill.json) has -57 at -40°F / 5 mph and -58 at -20°F / 45 mph. The topic gives the chart's -57°F and -58°F (agrees with the tool), not JetStream's -58 for both; recorded as in the wind chill record's conflicts.
+  - "Colder or windier always means less time" is the app's summary of the 30/10/5 legend and JS-WC ("Notice how the wind speed affects the onset of frostbite"); same as the tool title's "faster when colder or windier".
+  - Children, elderly, compromised health: NWS-WC ("Use the existing chart as a starting point and be even more cautious with children, the elderly, and persons with compromised health"; tests on adults).
+- Wet and wind: OSHA-CS ("Increased wind speed also causes heat to leave the body more rapidly (wind chill effect)."; "Wetness or dampness, even from body sweat, also facilitates heat loss from the body."; "wet feet lose heat 25-times faster than dry feet"; trench foot "as high as 60°F if feet are constantly wet"). CDC-HYP (above 40°F if chilled from rain, sweat or submersion). surv-priorities 30 to 50°F (checked): no conflict — CDC says "can occur", Priorities says "most cases".
+- Who is at risk: CDC-HYP (four groups as listed); CDC-FB (poor circulation; not properly dressed); OSHA-CS (wetness, dressing improperly, exhaustion; hypertension, hypothyroidism, diabetes; poor physical conditioning); NYSDOH-25 (infants, older adults, those who work or play outdoors); NWS-WC (children, elderly, compromised health).
+- Cold alerts: SCN23-44 (effective "On or about October 1, 2024"; Wind Chill Warning/Watch/Advisory consolidated into Extreme Cold Warning, Extreme Cold Watch, Cold Weather Advisory). Table wording — ALY-COLD verbatim in meaning ("dangerously cold temperatures and/or wind chill readings are expected"; "life-threatening ... possible"; "life-threatening ... expected"). Criteria set locally; Rochester, NY example (Extreme Cold Warning at or below -25°F apparent temperature; Cold Weather Advisory -15°F to -24°F air or wind chill) — NWS-WC FAQ. NWS-WW and OSHA-CS still describe Wind Chill Warnings and Advisories (pages older than the change); the topic follows SCN23-44 and ALY-COLD.
+- doFirst: CDC-HYP / CDC-DUR (stay indoors, trips brief, cover face, head, hands, feet); CDC-FB ("If you notice redness or pain in any skin area, get out of the cold or protect any exposed skin—frostbite may be beginning"; frostbite signs named only as a pointer: white or grayish-yellow, firm or waxy, numbness — matches p:frostbite's CDC line); hypothermia signs as pointer (p:hypothermia s3 lists confused, mumbling, fumbling, slurred speech); CDC-DUR (wet clothing chills the body quickly).
+- Agreement with windchill.json: same formula range, same -19°F/-22°F cells, same 30/10/5 legend, same "faster when colder or windier"; the tool still shows no band. The tool title says "30 minutes or less"; the topic quotes "30 minutes" (NWS) and "just a few minutes" (JetStream) and tells people to plan on the shorter: not weaker than the tool.
+- Looked for, not found: an NWS text giving the shaded cells (as in Task 3); any NWS page for the Binghamton or Buffalo offices' own cold criteria (the Rochester example is the one NWS-WC prints).
+
+### surv-winter-storms
+
+- Tags: when cold (brief). Links: s:surv-wind-chill, c:home-heat-kit, c:vehicle-winter-kit (twice), s:surv-carbon-monoxide, s:surv-heat-out, s:surv-shelter, p:carbon-monoxide, p:hypothermia, p:chest-pain.
+- Storm types: nor'easter — NWS-NE (East Coast; "most frequent and most violent between September and April"; "heavy rain or snow, as well as winds of gale force", "occasionally, coastal flooding"). Lake-effect — NWS-LES (cold air "often originating from Canada" over "the open waters of the Great Lakes"; "narrow band that produces 2 to 3 inches of snow per hour or more"; sun "a mile or two away"); NWS-WW ("sudden restrictions in visibility"). Ice storm — NWS-WW (freezing rain coats "roads, walkways, trees and power lines"; Ice Storm Warning: "travel dangerous or impossible and likely lead to snapped power lines and falling tree branches"). Blizzard — NWS-WW ("frequent gusts greater than or equal to 35 mph accompanied by falling and/or blowing snow, frequently reducing visibility to less than 1/4 mile for three hours or more"; "whiteout conditions making travel extremely difficult"). Snow squall — ALY-WIN.
+- Alerts: "Warnings: Take Action!", "Watches: Be Prepared", "Advisories: Be Aware" — NWS-BRO. Table rows: Winter Storm Watch — NWS-WW ("conditions are favorable for a significant winter storm event (heavy sleet, heavy snow, ice storm, heavy snow and blowing snow or a combination of events.)") plus ALY-WIN ("occurrence, location and timing is still uncertain"); Winter Storm Warning — NWS-WW (incl. "Delay your travel plans until conditions improve"); Blizzard Warning — NWS-WW ("expected or occurring"; "Do not travel."; "If you get stranded, stay with your vehicle"); Ice Storm Warning — NWS-WW ("Travel is strongly discouraged"); Lake Effect Snow Warning — NWS-WW, ALY-WIN; Snow Squall Warning — ALY-WIN (WEA when tagged "Significant"); Winter Weather Advisory — NWS-WW ("should not be hazardous enough to meet warning criteria"; "Use caution when driving"). The Lake Effect Snow Advisory row of NWS-WW was left out (SCN17-77/SCN19-63 history; not needed).
+- Thresholds not stated: ice — NWS-WW "usually ... around 1/4 inch or more"; ALY-WIN "½"+ of ice accretion". Snow amounts — ALY-WIN gives 7 in for central New York (6 in North Country, Lower Hudson, NYC, Long Island) for a warning and 4 to 6 in for an advisory (first, summarized fetch; not re-read verbatim). Criteria differ by office and change, and the action does not depend on them, so none is stated. Not a D question.
+- Before: NWS-BEF (stock home, office, vehicles; "loss of heat, power and telephone service and a shortage of supplies if storm conditions continue for more than a day"; refuel, "fuel carriers may not reach you for days after a winter storm" — same line as surv-heat-out; NOAA Weather Radio, flashlight, batteries; CO detector working, "outside vent is clear", "During or after the storm, make sure it is cleared of snow"; fluids, lights, heater, wipers; "Keep your gas tank near full to avoid ice in the tank and fuel lines"; winterize). Pets: NWS-BRO (move animals to sheltered areas, bring pets inside, water available); CDC-PREP (unfrozen water).
+- During: CDC-DUR (stay indoors; trips brief; rock salt, de-icer, sand). NWS-BRO (gas furnace and snowdrift; upstairs roof-vented gas furnace may need turning off until snow melts from the roof; "use fire safeguards and properly ventilate"; outside: lean-to, windbreak or snow cave; move arms, legs, fingers and toes vigorously). Sheltering in a building is a pointer to surv-heat-out (content plan 9.11), not restated.
+- If you must drive: CDC-PREP ("It is best to avoid traveling"); NYGOV-25 ("Avoid unnecessary travel"; snowplows "up to 35 mph"; "Never attempt to pass a snowplow while it's operating"; "well behind the snowplows where the roadway is clear and salted"); CDC-DUR (low visibility; ice-covered roads, overpasses, bridges; never pour water on the windshield); NWS-BRO (clear the vehicle, tell someone the route, charged phone, car charger, emergency kit).
+- Stranded, each "never" and step order:
+  - Stay with the vehicle — NWS-BRO ("If your car gets stuck during a storm, stay in the vehicle!"), NWS-WW (Blizzard Warning), NWS-MPX ("Do not attempt to walk in a winter storm. You can easily become lost and disoriented in blowing and drifting snow."; "Staying in your car decreases your risk of frostbite and increases the chance of being rescued."), CDC-DUR ("often the safest choice"). Leave only if help is visible within 100 yards (91 meters) — RC-23.
+  - Order of the steps is the app's (visible first, then exhaust pipe before engine, then engine, then light, warmth, movement); no source numbers them. Exhaust pipe before running the engine is the cautious order (NWS-BRO, CDC-DUR, RC-23 all pair the two).
+  - Visible: CDC-DUR (brightly colored cloth on the antenna, raise the hood "if it is not snowing"); RC-23 ("preferably red"; "raise the hood after snow stops falling"); NWS-BRO ("After snow stops falling, raise the hood"). Hood after snow stops: all three agree.
+  - Exhaust pipe: NWS-BRO ("Clear snow from the exhaust pipe to avoid gas poisoning"); CDC-DUR ("Make sure that snow is not blocking the exhaust pipe—this will reduce the risk of carbon monoxide poisoning"); RC-23 ("Keep the exhaust pipe clear of snow").
+  - Engine: NWS-BRO ("Run the motor about 10 minutes each hour for heat."; "open the window a little for fresh air to avoid carbon monoxide poisoning"); CDC-DUR ("Run the motor (and heater) for about 10 minutes per hour, opening one window slightly to let in air."); RC-23 ("Turn on the engine for about 10 minutes each hour."; "slightly open a downwind window"). Matches p:carbon-monoxide s6 detail (CDC: "keep the exhaust pipe clear of snow, run the engine and heater for only about 10 minutes an hour, and open a window slightly") and its don't ("Do not run a vehicle stuck in snow with the exhaust pipe blocked"). NWS-MPX differs ("a few minutes every hour, or every half hour in extreme cold"): D52.
+  - Dome light — NWS-BRO. Trunk, wrap whole body incl. head, huddle, keep moving, stay awake, don't eat snow, don't rely on the car — CDC-DUR. Flashlights not candles — RC-23.
+  - CO signs in the warn are a pointer only, words from p:carbon-monoxide s1 (headache, dizziness, confusion, drowsiness; "open it up to air").
+- Shoveling: CDC-DUR ("Cold weather puts an extra strain on the heart."; heart disease or high blood pressure, follow your doctor's advice; "dress warmly and work slowly to avoid excess sweating"; "your body is already working hard just to stay warm, so don't overdo it"); NYSDOH-25 (adds breathing disorders like asthma); RC-23 ("Stretch before you go out."; "Avoid overexertion, such as shoveling heavy snow, pushing a vehicle, or walking in deep snow."; "may cause a heart attack"; "Cover your mouth to protect your lungs from severely cold air"). Link p:chest-pain (exists).
+- Downed lines and after: NWS-BRO ("Heavy snow may have knocked down power lines and caused gas leaks, both of which can be deadly, but are not obvious at first glance"; floods from melting snow, creeks and rivers overflow; partially cleared roads icy or blocked; check home, family, isolated neighbors; black ice and potholes; avoid flooded roads). CDC-PO ("Never touch a fallen power line."; "Do not drive through standing water if downed power lines are in the water."). CDC-DUR (walking on ice). Gas leaks named only; shutting off gas waits for the Town hazards pack (content plan 9.12).
+- Not written (brief): walking on lake ice and winter travel on foot. Looked for, not found: an agency distance to keep from a downed line (none of the opened pages gives one; none stated).
+
+### surv-dress-for-cold
+
+- Tags: when cold (brief). Links: s:surv-heat-out (twice), p:frostbite, p:hypothermia, s:surv-sleep-warm, s:surv-wind-chill.
+- Layers table: OSHA-PREP ("Wear at least three layers of loose fitting clothing."; "Layering provides better insulation."; inner "wool, silk or synthetic (polypropylene) to keep moisture away from the body"; middle "wool or synthetic to provide insulation even when wet"; outer "wind and rain protection layer that allows some ventilation to prevent overheating"; "Tight clothing reduces blood circulation. Warm blood needs to be circulated to the extremities."); CDC-DUR ("An insulation layer will help you retain heat by trapping air close to your body."; "The outermost layer helps protect you from wind, rain, and snow."); FM21-76-1 VI 2b(2) ("Layers create more dead air space"), 2i (dirt reduces insulation). COLD — surv-priorities (checked), unchanged.
+- Cotton: CDC-DUR ("Wear fabrics that will hold more body heat and don't absorb moisture. Wool, silk, or polypropylene will hold more body heat than cotton."); OSHA-PREP (thermal wear ... more heat than cotton); WRAIR ("Wear dry clothing made of wool or synthetics; Avoid cotton clothing").
+- Head, face, hands, feet: OSHA-PREP (hat covering ears; "Hats reduce the amount of body heat that escapes from your head"; insulated gloves, water resistant if necessary; insulated and waterproof boots); NIOSH (ears, face, hands, feet; boots waterproof and insulated; hat; "Carry extra socks, gloves, hat, jacket, clothes, and blankets"); CDC-DUR ("mittens (they are warmer than gloves)"; "sleeves that are snug at the wrist"); CDC-HYP/CDC-FB (scarf or knit mask over face and mouth; nose, ears, toes, cheeks, chin, fingers covered); RC-23 (cover your mouth); FM21-76-1 II 3e ("change socks regularly"), V 2e(1)(c) ("Dry socks and shoes"); OSHA-CS (25 times). FM21-76-1's "majority of body heat escapes through the head and neck" was read and not used (OSHA's milder wording used instead).
+- Stay dry, vent: CDC-DUR ("Stay dry—wet clothing chills the body quickly."; "Excess sweating will cause your body to lose more heat, so remove extra layers of clothing whenever you feel too warm."; "Try not to sweat or become too tired."; "Do not leave any areas of your skin exposed to the cold, and avoid getting wet."); OSHA-PREP (moisture from sweating increases heat loss); RC-23 ("Sweating could lead to a chill and hypothermia."); surv-priorities ("take layers off before hard work").
+- Wet clothes, order of the two water steps is FM21-76-1's: VI 2g ("If you fall into the water in the winter-" (2) "Remove wet clothing and rewarm by fire." (3) "Finish drying clothing by fire."); 2h ("If no fire is available-" (1) "Remove clothing and get into sleeping bag (if available)." (2) "Allow wet clothes to freeze." (3) "Break ice out of clothing."); 2e(2) dry before dark; 2f dry in the sun or by a fire. RC-23 ("Change wet clothing frequently"); OSHA-PREP (extra clothing including underwear). Hypothermia care is the protocol's (linked).
+- Children: AAP (four sentences as quoted in sources); NWS-WC (more caution with children). Babies asleep: CDC-DUR's never-in-a-cold-room line and a pointer to surv-heat-out's Safe to Sleep section (D43), no bedding advice given here.
+- Improvise: CDC-DUR (wrap in clothing, blankets or newspapers — said of a stranded car; the topic says "stranded"); FM21-76-1 VI 3a(3) (improvise with dry grass, leaves, dry moss — said of the sleeping bag; the topic says so).
+- Looked for, not found: an agency figure for clothing by temperature (WRAIR's sleeping table is for issued Army bags and ECWCS levels; not used); stuffing dry leaves inside clothing (no opened source says it; not written).
+
+### surv-sleep-warm
+
+- No tags (brief). Links: s:surv-carbon-monoxide, s:surv-portable-heaters, s:surv-wood-stoves-fireplaces, s:surv-shelter, s:surv-water-winter, s:surv-heat-out, p:hypothermia, s:surv-dress-for-cold.
+- Never sleep with a flame: the warn is surv-shelter's and surv-priorities' checked line, word for word. CPSC (rooms where people sleep) and USFA (off when you go to bed) as checked in surv-carbon-monoxide; nothing added beyond batch A (brief). Wood stove overnight: pointer only (D44 stays with batch B).
+- Ground first: surv-shelter (80 percent; 12 inches; platform higher than the entrance). WRAIR ("Don't sleep directly on the ground, USE YOUR SLEEPING PAD"; "Put a tarp or poncho on the ground before sleeping pad and bag"; "remove snow towards ground level or pack snow down so you have a comfortable shelf"; bivy cover "if there is rain or snow"). FM21-76-1 VI 4e (raft or foam rubber from vehicle seats; boughs, leaves or dry moss).
+- Bags and blankets: WRAIR (waterproof carrying bag; shake out and fluff before and after use; do not get out after going to bed; dry boots and clothes inside; wool or synthetics, avoid cotton; socks, hat; "Don't overdress, no sweating"; remove frost; open wide or turn inside out to dry). FM21-76-1 VI 3a(1) ("Fluff before use, especially at foot of bag"), 3a(2) ("Air and dry daily to remove body moisture"), 3a(3) (dry grass, leaves, dry moss). Indoors: surv-heat-out (FEMA blankets and sleeping bags; Missouri lots of covers).
+- Before you get in, order is WRAIR's sections arranged eat, bathroom, exercise, bottle (no numbered order in the source): "Consume lots of calories throughout the day"; "Eat warm meals and drink warm sugary fluids throughout day"; "An easy to digest or warm snack before getting into your sleeping bag can help you stay warmer longer while you sleep"; "Go to the bathroom before getting into sleeping bag"; "Warm your body up before sleep with a few exercises but don't break a sweat"; "If able to heat water, fill a closable container (e.g., Nalgene bottle) with warmed water and place into sleeping bag". WRAIR's "Limit fluid intake after evening meal" left out: it would sit badly beside Water in winter's "drink often, before you feel thirsty" (checked); the topic links that instead. WRAIR's melatonin, vitamin D and light advice not used (not warmth).
+- Sharing: CDC-DUR ("Huddle with other people for warmth", said of a stranded car; the topic says so); surv-heat-out (Missouri family bed, "Not for babies"). Babies: CDC-DUR's sentence quoted whole; surv-heat-out's Safe to Sleep section linked, its rules not restated (D43).
+- Looked for, not found: an agency source on hot water bottles indoors or burn risk from them; how many blankets for a given temperature. FM21-76-1 had no text on eating, urinating or hot water before sleep (WRAIR has them).
+
+### vehicle-winter-kit (checklist)
+
+- Category heat; no qty (no source gives a per-person figure). Items, each with its lists: phone and charger (NWS-BEF, CDC-PREP; NYGOV-25 keep it charged, give your location); blankets or sleeping bags (NWS-BEF, CDC-PREP, NYGOV-25, FEMA-24); warm clothing (CDC-PREP hats, coats, mittens; NWS-BEF extra clothing to keep dry; NYGOV-25); flashlight and batteries (NWS-BEF, CDC-PREP, NYGOV-25); note "not candles" (RC-23); radio (CDC-PREP); first aid with medicines (NWS-BEF, CDC-PREP); knife (NWS-BEF, CDC-PREP); food (NWS-BEF high-calorie non-perishable, CDC-PREP snack food, NYGOV-25 quick energy foods, FEMA-24); water (NWS-BEF water container, CDC-PREP, FEMA-24); matches and can to melt snow (NWS-BEF small can and waterproof matches, CDC-PREP), note don't eat snow (CDC-DUR); toilet can and paper (NWS-BEF); traction (NWS-BEF sand or cat litter, CDC-PREP and road salt); shovel (NWS-BEF, CDC-PREP, NYGOV-25, FEMA-24); scraper and brush (NWS-BEF, CDC-PREP, FEMA-24); tool kit (NWS-BEF); tow rope or chains (NWS-BEF, CDC-PREP, FEMA-24); booster cables (NWS-BEF, CDC-PREP, NYGOV-25); tire chains (CDC-PREP, NYGOV-25); compressed air with sealant (CDC-PREP); reflectors (CDC-PREP, FEMA-24); cloth, flag, help signs, flares (CDC-PREP, NYGOV-25), note antenna (CDC-DUR); maps and compass (NWS-BEF, CDC-PREP), note "don't depend on mobile devices with limited battery life" (NWS-BEF). Summary's gas tank near full — NWS-BEF.
+- Left out: NWS-BEF's "Candle and matches to provide light and in an emergency, lifesaving heat" and NWS-MPX's candles: D51. NWS-MPX's coffee-can kit packing was read; its items are all covered above.
+
+### Batch C disagreements (D50 to D52 in decisions-for-jordan.md)
+
+- D50 frostbite time at 0°F / 15 mph: NWS 30 minutes vs JetStream "just a few minutes"; both quoted, plan on the shorter.
+- D51 candle in the car kit: NWS lists one; Red Cross and CPSC say flashlights, not candles. Left out.
+- D52 engine run time: NWS brochure, CDC, Red Cross about 10 minutes each hour (= p:carbon-monoxide) vs NWS Twin Cities "a few minutes every hour, or every half hour in extreme cold". 10 minutes used.
+- Minor, not logged: JetStream -58°F vs chart -57°F at -40°F / 5 mph (chart used); ice storm warning 1/4 in (national) vs 1/2 in (New York sheet) (no figure stated); NWS-WW and OSHA-CS still name Wind Chill products (SCN23-44 followed).
+
+### Agreement with checked topics and protocols
+
+- surv-priorities: COLD quoted unchanged; 30 to 50°F kept beside CDC's "above 40°F"; "eat and drink regularly" credited; its tent and snow-shelter heater line quoted word for word in surv-sleep-warm.
+- surv-shelter: 80 percent, 12 inches, raised platform, lean-to and snow shelter linked, not reworded; same heater line.
+- surv-water-winter: "don't eat snow" (CDC-DUR, same as its NWS line); "drink often" linked from surv-sleep-warm; WRAIR's fluid limit left out to avoid contradicting it.
+- surv-fire, surv-weather-and-lightning, surv-ten-essentials: nothing in batch C touches them; no conflict found.
+- p:hypothermia, p:frostbite, p:carbon-monoxide, p:chest-pain: linked, not restated; danger signs named only as pointers in the protocols' own words. Stranded-car engine rule equals p:carbon-monoxide's CDC line. No protocol edited.
+- Batch A: surv-carbon-monoxide, surv-portable-heaters (never while asleep), surv-generators and surv-store-fuel are linked or untouched; no fuel-burning rule restated differently. Batch B (draft): surv-heat-out (sheltering in a building, babies, family bed) linked; home-heat-kit linked; surv-wood-stoves-fireplaces linked for overnight.
+- windchill.json: same cells and wording as above; the topic gives no per-cell frostbite table (ruling).
+
+### Task 6 fix round (2026-11-18), from task-6-review.md
+
+Sources re-opened by built-in search and fetch: Red Cross 2023 winter storm page; FM 21-76-1 (VI 2g, 2h); CPSC Carbon
+Monoxide Questions and Answers ("Never operate unvented fuel-burning appliances in any room where people are sleeping.").
+New: NWS La Crosse, Power Outage Preparedness, https://www.weather.gov/arx/powerprep (search, then fetch; title "NWS La
+Crosse - Power Outage Preparedness"); NWS Service Change Notice 26-52, June 8, 2026,
+https://www.weather.gov/media/notification/pdf_2026/scn26-52_PDS_Wording_in_Blizzard_Warnings_and_IceStormWarnings.pdf.
+Ready.gov Winter Weather retried: client error again. `draft` removed from all five files.
+
+- I1 surv-winter-storms, stranded: new step after the engine step. Red Cross, same stranded list as the engine and
+  exhaust lines: "If more than one person is in the vehicle, take turns sleeping."; "Leave the overhead light on when the
+  engine is running so that you can be seen" (dome-light step now credits both). p:carbon-monoxide donts: "Do not run
+  a stove, heater, lantern, generator or engine inside a ... vehicle where people are sleeping"; s6 "Never run
+  fuel-burning equipment where people sleep." Text: someone awake whenever the engine runs; wake sleepers before
+  starting it; off before anyone sleeps again (strict reading, D53). doFirst and summary say "only while someone is
+  awake" / "never while everyone is asleep". surv-sleep-warm "Never sleep with a flame" adds the vehicle line and links
+  s:surv-winter-storms.
+- I2 surv-dress-for-cold, wet clothes: FM 21-76-1 VI 2g order restored: "(1) Build fire. (2) Remove wet clothing and
+  rewarm by fire. (3) Finish drying clothing by fire." Wet clothing off "once they are out of the wind and cold, not
+  before" (p:hypothermia s5). "Don't warm frozen fingers, toes or skin at the fire" (p:frostbite donts: "Do not rewarm ...
+  with a fire"). 2h kept with "get out of the wind" first (p:hypothermia s5). Hypothermia link sits beside it, Frostbite
+  link added; no care restated.
+- I3 surv-sleep-warm summary: "... in a tent, vehicle or any room where people are sleeping" (CPSC, re-opened).
+- I4 surv-winter-storms, downed lines, NWS La Crosse: "Never touch anything or anyone in contact with a power line."; "You
+  could be shocked by contact with the line or a secondary object or person."; "When a live wire touches the ground,
+  electricity fans out in a pool"; "You can be shocked when in this area."; under "When Vehicles Comes in Contact with a
+  Power Lines": "Stay inside the vehicle and warn others to keep away."; "Wait inside the vehicle until rescue personnel
+  arrive."; "Do not make contact with metal parts in the vehicle."; "Call 911 and report it to local Sheriff or Police"
+  (text: "Call 911 if you can", no dial control); "If you have to get out of the vehicle because of a fire or other
+  danger:" "Jump out so that you do not touch the vehicle and ground at the same time." "Don't run." "Hop away keeping
+  your feet together." No distance given (none on the page).
+- M1: SCN 26-52 ("on or about October 1, 2026"; "high confidence of a blizzard or ice storm that is of extreme and
+  historic severity"; "an exceptional threat that is above and beyond the typical blizzard or ice storm"). One line added
+  under the alerts table.
+- M2 and M3: flashlight line credited as the app's choice (D51), Red Cross line noted as under Power Outage Safety;
+  checklist melt-snow note "Never burn anything inside the car (D51; Carbon monoxide)", from CPSC's "Never burn charcoal
+  inside a home, garage, vehicle, or tent" as checked in surv-carbon-monoxide, widened by the app.
+- M4: metric added in surv-winter-storms (35 mph = 56 km/h; 1/4 mile = 402 m, "400 m"; a mile or two = 1.6 to 3.2 km,
+  "2 to 3 km"). surv-wind-chill stays °F and mph: ruling in v7.3-rulings.md.
+- M5: "Colder or windier means less time" ("always" removed).
+- M6: "Before you get in" is a list, not numbered steps.
+- M7: the clothing line says "Adults" and points babies to surv-heat-out.
+- M8: hot water bottle wrapped in cloth, never directly on skin (p:hypothermia donts: "Do not put a heat pack or hot water
+  bottle directly on the skin").
+- M9: s:surv-wood-stoves-fireplaces and s:surv-portable-heaters linked under During the storm.
+- M10: CDC-DUR "Dress babies in warmer clothing such as footed pajamas, one-piece wearable blankets, or sleep sacks." added
+  beside the never-a-cold-room line in surv-dress-for-cold (agrees with Safe to Sleep, D43).
+- M11: Ready.gov failed again; ruling. M12: tags left to the whole-pack reviewer; ruling. M13: test
+  test_wc_links_lead_with_the_shipped_wind_chill_topic added (shipped data: first link s:surv-wind-chill, label "Wind
+  chill and cold danger").
+
+### Task 6 fix round 2 (2026-11-18), from the re-review in task-6-review.md
+
+No new source; wording only.
+- N1: surv-winter-storms doFirst and summary, and surv-sleep-warm's vehicle line, now match the body and D53: everyone in
+  the car awake while the engine runs; engine off before anyone sleeps; turns sleeping (Red Cross) only with the engine
+  off (p:carbon-monoxide donts).
+- N2: surv-sleep-warm summary follows its sources: fuel-burning heaters, stoves and lanterns never while sleeping in a
+  tent or snow shelter (Shelter, Priorities); unvented fuel-burning heaters never in any room where people are sleeping
+  (CPSC, as in surv-portable-heaters); never sleep in a vehicle with the engine running (p:carbon-monoxide).
+- N3: surv-winter-storms: "Stay awake as much as you can" (CDC: "Stay awake. You will be less vulnerable to cold-related
+  health problems.") and "If you must sleep, sleep in turns with the engine off" (Red Cross: "take turns sleeping";
+  p:carbon-monoxide), each credited for what it says.
+
+### Heat pack Task 8 fix round (review C1, M1 to M9)
+
+- C1 quinzhee: entrance removed from the cut-away (see the quinzhee entry); D64 logged. Test `test_quinzhee_draws_no_entrance_above_the_beds`.
+- M1 shelter-tarp: open-side arrow replaced by a leader. M2, M3 generator-placement: label in the list's own words, heavier cross. M4 warm-room: towel drawn as a bunched zigzag. M5 quinzhee: wall 24 px at 23.6 px a foot; beds one foot. M6 quinzhee: trench label inside the shelter.
+- M7 tests: the topic-text check now reads the topic's summary, doFirst, headings and blocks, without figure captions, keywords or source notes. M8: every distance phrase, including "a foot (30 cm)", must be in the topic. M9: geometry tests for generator-placement (cross over the garage generator, distance from the house wall to the generator, exhaust pointing away) and quinzhee (no entrance, wall at least a foot, beds a foot).
+
+## Heat pack Task 9: consistency fixes (2026-11-18)
+
+From .superpowers/sdd/2026-11-18-heat-pack/task-9-review.md and the deferred batch minors. No new web source was opened:
+every new sentence quotes or restates text already in an approved topic (named on each line) or in the decisions file.
+No protocol was edited.
+
+- I1 (Fire vs Wood stoves): surv-fire "Put it out" gains a first paragraph scoping it to outdoor fires and pointing to Wood
+  stoves and fireplaces (its "At night" warn: put it out before you go to sleep, USFA, FEMA; Missouri: no water in the
+  chimney; D44: no fire watch); the checked paragraphs are unchanged; the asleep paragraph begins "Outdoors,"; links to Wood
+  stoves and fireplaces and Carbon monoxide added; summary says "outdoors" and points to the stove topic. Wood stoves "At
+  night": "The drown-and-stir steps in Fire are for outdoor fires, not a stove or fireplace (this app's reading)" before the
+  Missouri bullet, and "No fire watch: this app does not allow a stove or fireplace to burn while people sleep, even with
+  someone awake" (D44). Shelter's TC 21-3 used line no longer contradicts itself. D62 scoped to outdoor fires.
+- I2 (heater sleep rule): owner surv-portable-heaters unchanged. Carbon monoxide ("Never indoors" and the vent-free list) and
+  Sleep warm ("Never sleep with a flame") now quote its sentence word for word: "Turn it off when you go to sleep or leave the
+  room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol)." The CPSC "any
+  room" restatements were replaced (CPSC is credited in the quoted sentence). Sleep warm summary uses the same words. D39
+  corrected to quote the owner (it had "USFA," for "US Fire Administration;") and now asks room or house.
+- I3 (propane indoors): surv-store-fuel "Propane cylinders" gains a last bullet quoting surv-portable-heaters' 1 lb. bullet
+  word for word, Minnesota's reading of NFPA 58 "used here as guidance" included, plus a link and a source line.
+- I4 (tags): done in the Task 10 commit; `when: cold` removed from surv-winter-storms; v7.3-rulings and content plan
+  section 4 updated.
+- I5 (hub links): surv-heat-out "Heat sources" moved to second place, after "One warm room" (its two duplicate links
+  removed there); "Keep your body warm" links Dress for the cold and Sleep warm.
+- I6 (CO topic): "Never indoors" gains "A car stuck in snow: ..." quoted from Winter storms' Do first (NWS, CDC, Red Cross;
+  Carbon monoxide protocol) and links Wood stoves and fireplaces and Winter storms; source line added.
+- M1: "D51" removed from user text (vehicle-winter-kit flashlight and melt-snow notes, Red Cross used line; Winter storms
+  "Stranded in a vehicle" step). D51 Today corrected. "Light it only outside the car, away from the exhaust" not added
+  (v7.3-rulings). Also removed "see decisions D37" and "D40" from two Generators source lines (users see used lines).
+- M2: decisions D section reordered 37-48, 50-53, 60-64, 65-67, with a line that 49 and 54 to 59 are unused.
+- M3: Carbon monoxide Do first generator line now lists shed, porch and carport, as Generators (owner) does, "See Generators".
+- M4: Protect an unheated house Do first: "For the pipes, keep it at 55°F (13°C) or higher (people need more: see Stay warm
+  when the heat is out)" (heat-out: NIA 60 to 65°F, NYS DOH above 68°F); source line added.
+- M5: heat hub sorts first in its category (src/survival.js, Task 10 commit, tested).
+- M6: Fire link label "The ten essentials".
+- M7, M8: logged as D66 and D67 (no protocol edit).
+- M9 / batch B N3: logged as D65 (FEMA 3 ft vs USFA 10 ft; 10 ft kept). D64 was already taken by the diagram worker.
+- M10: links added: Store fuel "Handle it safely" to Generators; Protect an unheated house "Coming back" to Carbon monoxide;
+  Wind chill "National Weather Service cold alerts" to Winter storms.
+- M11: Stay warm when the heat is out Do first, sixth line: "Keep battery CO alarms near where people sleep (CDC, CPSC). If one
+  sounds, get everyone outside now (CPSC). See Carbon monoxide." (Carbon monoxide topic: CO alarms, When an alarm sounds.)
+- M12 / batch C N4: Sleep warm summary: "in a tent, snow shelter, camper or vehicle" (Kerosene and propane heaters; protocol).
+- Batch A N1: kerosene storage credit: "outdoors (New York State Department of Health), in its own container made for
+  kerosene (New York State Department of Health, CPSC)".
+- Batch A N2: portable-heaters: "or a hose run into the house from a tank outside (this app's reading of the 1 lb. rule)";
+  no source covers it; logged in D41.
+- Batch A N3: D39 now names the section "What safety bodies say first".
+- Batch B N1: boiler caution labelled "this app's own caution" in "Hot-water heat" and "Coming back" (Coming back uses the
+  batch B reviewer's wording: Purdue "also says to consult a heating contractor before adding antifreeze"); D48 updated.
+- Batch B N2: Indiana DHS used line trimmed to "Extinguish fireplace fires before going to bed or leaving home".
+- Batch B N3: D65 (as M9).
+- Batch B N4: Wood stoves water line scoped (as I1).
+- Batch D M6: quinzhee step "Very cold, granular snow" (AMC's words); D63 the same.
+- Batch D M7: TC 21-3 credited for snow caves in severe weather in Fire and Shelter text and in both used lines.
+- Batch D M8: Fire watcher option scoped to outdoor fires with a pointer (as I1).
+- Batch C M12: resolved by I4.
+
+## Heat pack final review fixes (2026-11-18)
+
+No new source was opened; no number or instruction changed.
+- Carbon monoxide, vent-free section: the older duplicate bullet "Turn it off when you go to bed or leave the room (US
+  Fire Administration, NFPA)." removed; the owner sentence from Kerosene and propane heaters stays word for word. The
+  NFPA tip sheet stays in Sources with its used line.
+- Sources footers in 15 topics, 3 checklists and the wind chill data: internal wording removed (topic ids, "checked",
+  "checked protocol", "as checked in water pack Task 4", "as in Task 4", "see the record", "see the record and
+  decisions", "see content-review", "src/tooldata/windchill.json", "bandMinutes", "the title's"). A cross-reference to
+  another page names it by title with "(another topic in this app)", "(other topics in this app)" or "(Emergency
+  protocol in this app)". What each source is credited for is unchanged. Full before and after list in the fix report.
+- Stay warm when the heat is out: "Heat sources" now links the Home heat kit checklist.
+- Search keywords added: "frost bite" (Wind chill), "snowed in" (Winter storms), "lost power" and "no electricity"
+  (Stay warm when the heat is out). Protocol keywords not touched.
+- Wind chill tool: the temperature box uses the ordinary keyboard (minus key on iPhone) and accepts the typographic
+  minus (−); the wind box keeps the number pad. Search: a one-word search of one or two letters that is a whole keyword
+  and not a common English word ranks higher ("CO"). Wind chill brochure used line: "the three times on the chart's legend".
+- Decisions: D39 points at docs/v7.3-rulings.md, not the build ledger, and ends with one question (room or house); D61
+  ends with a question. docs/v7.3-rulings.md lists every ruling and a Deferred section.

@@ -1,0 +1,232 @@
+{
+  "id": "surv-dress-for-cold",
+  "title": "Dress for the cold",
+  "category": "heat",
+  "keywords": [
+    "layers",
+    "layering",
+    "clothing",
+    "what to wear",
+    "base layer",
+    "wool",
+    "cotton",
+    "mittens",
+    "gloves",
+    "hat",
+    "boots",
+    "socks",
+    "wet clothes",
+    "sweating",
+    "children cold",
+    "kids winter clothes",
+    "COLD"
+  ],
+  "summary": "Wear several loose layers: a wool, silk or synthetic layer next to the skin, an insulating middle layer and a wind- and water-resistant outer layer. Skip cotton. Cover your head, face, hands and feet. Take layers off before you sweat, and change out of wet clothes.",
+  "when": [
+    "cold"
+  ],
+  "doFirst": [
+    "Wet? Change into dry clothes: wet clothing chills the body quickly (CDC, Red Cross).",
+    "Warming up while you work? Take a layer off before you sweat (CDC; Priorities).",
+    "Cover your nose, ears, cheeks, chin, fingers and toes: frostbite hits them most often (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "Layers",
+      "blocks": [
+        {
+          "p": "Wear at least three layers of loose-fitting clothing: layering gives better insulation (OSHA). Layers create more dead air space (Army FM 21-76-1)."
+        },
+        {
+          "table": {
+            "head": [
+              "Layer",
+              "What it does"
+            ],
+            "rows": [
+              [
+                "Inner: wool, silk or synthetic (polypropylene)",
+                "Keeps moisture away from the body (OSHA)"
+              ],
+              [
+                "Middle: wool or synthetic",
+                "Insulates even when wet (OSHA), by trapping air close to your body (CDC)"
+              ],
+              [
+                "Outer: wind and rain protection",
+                "Protects from wind, rain and snow (CDC), and lets some air through to prevent overheating (OSHA)"
+              ]
+            ]
+          }
+        },
+        {
+          "list": [
+            "Keep it loose: tight clothing reduces blood circulation, and warm blood needs to reach your hands and feet (OSHA).",
+            "Remember COLD: keep clothing Clean, avoid Overheating, wear it Loose and in layers, and keep it Dry (Priorities). Dirt reduces clothing’s insulation (Army FM 21-76-1).",
+            "Indoors with the heat out, the same rules apply: see Stay warm when the heat is out."
+          ]
+        },
+        {
+          "link": "s:surv-heat-out",
+          "label": "Stay warm when the heat is out"
+        }
+      ]
+    },
+    {
+      "h": "Skip cotton",
+      "blocks": [
+        {
+          "p": "Wear fabrics that hold more body heat and don’t absorb moisture. Wool, silk or polypropylene hold more body heat than cotton (CDC, OSHA). Wear dry clothing made of wool or synthetics; avoid cotton (Walter Reed Army Institute of Research)."
+        }
+      ]
+    },
+    {
+      "h": "Head, face, hands and feet",
+      "blocks": [
+        {
+          "list": [
+            "Head: a hat that covers your ears. Hats reduce the body heat that escapes from your head (OSHA, NIOSH).",
+            "Face: a scarf or knit mask over your face and mouth (CDC). Cover your mouth to protect your lungs from very cold air (Red Cross).",
+            "Hands: mittens are warmer than gloves (CDC). Sleeves should be snug at the wrist (CDC). Insulated gloves, water-resistant if needed (OSHA).",
+            "Feet: insulated, waterproof boots (OSHA, NIOSH). Keep socks dry and change them regularly (Army FM 21-76-1). Wet feet lose heat 25 times faster than dry feet (OSHA).",
+            "Carry spares: extra socks, gloves, hat, jacket, clothes and blankets (NIOSH)."
+          ]
+        },
+        {
+          "p": "The parts frostbite hits most often are the nose, ears, toes, cheeks, chin and fingers: keep them covered in warm, dry clothing (CDC)."
+        },
+        {
+          "link": "p:frostbite",
+          "label": "Frostbite"
+        }
+      ]
+    },
+    {
+      "h": "Stay dry: vent before you sweat",
+      "blocks": [
+        {
+          "list": [
+            "Stay dry: wet clothing chills the body quickly (CDC). Moisture, for example from sweat, increases the rate of heat loss from the body (OSHA).",
+            "Too much sweating makes your body lose more heat, so take off layers whenever you feel too warm (CDC). Take layers off before hard work so sweat doesn’t soak them (Priorities).",
+            "Try not to sweat or get too tired (CDC). Sweating can lead to a chill and hypothermia (Red Cross).",
+            "Avoid getting wet, and don’t leave any skin exposed to the cold (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Wet clothes",
+      "blocks": [
+        {
+          "list": [
+            "Change wet clothing often to prevent losing body heat (Red Cross). Keep extra clothing, including underwear, handy in case you get wet (OSHA).",
+            "Keep clothing dry so it keeps insulating. Dry damp clothing in the sun or by a fire, and dry it before dark (Army FM 21-76-1).",
+            "Fell into water in winter: build a fire first (Army FM 21-76-1). Take the wet clothing off once you are out of the wind and cold, not before (Hypothermia protocol), then dry it by the fire (Army FM 21-76-1). Don’t warm frozen fingers, toes or skin at the fire (Frostbite protocol).",
+            "No fire: get out of the wind, take the wet clothing off and get into a sleeping bag if you have one. Let the wet clothes freeze, then break the ice out of them (Army FM 21-76-1; Hypothermia protocol)."
+          ]
+        },
+        {
+          "p": "Anyone soaked in winter water, or soaked and cold all over: open the Hypothermia protocol now. For frozen skin, the Frostbite protocol."
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        },
+        {
+          "link": "p:frostbite",
+          "label": "Frostbite"
+        }
+      ]
+    },
+    {
+      "h": "Children",
+      "blocks": [
+        {
+          "list": [
+            "Dress babies and children warmly to go out. Several thin layers keep them dry and warm. Always remember warm boots, gloves or mittens and a hat (American Academy of Pediatrics).",
+            "For older babies and young children, the rule of thumb is one more layer of clothing than an adult would wear in the same conditions (American Academy of Pediatrics).",
+            "In the car, babies and children should wear thin, snug layers, not thick, bulky coats or snowsuits (American Academy of Pediatrics).",
+            "Wind chill tests were done on adults: be even more cautious with children (National Weather Service)."
+          ]
+        },
+        {
+          "p": "Babies asleep: infants under 1 year should never sleep in a cold room (CDC). CDC: dress babies in warmer clothing such as footed pajamas, one-piece wearable blankets or sleep sacks. The rest of the safe sleep rules are in Stay warm when the heat is out."
+        },
+        {
+          "link": "s:surv-heat-out",
+          "label": "Stay warm when the heat is out"
+        }
+      ]
+    },
+    {
+      "h": "Improvise",
+      "blocks": [
+        {
+          "list": [
+            "Stranded with too little clothing: wrap your whole body, including your head, in extra clothing, blankets or newspapers (CDC).",
+            "To add insulation to a sleeping bag, use what you have: dry grass, leaves or dry moss (Army FM 21-76-1)."
+          ]
+        },
+        {
+          "link": "s:surv-sleep-warm",
+          "label": "Sleep warm"
+        },
+        {
+          "link": "s:surv-wind-chill",
+          "label": "Wind chill and cold danger"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "OSHA, Winter Weather: Preparedness (dressing properly for the cold)",
+      "used": "At least three layers of loose-fitting clothing; layering gives better insulation; inner layer of wool, silk or synthetic (polypropylene) to keep moisture away; thermal wear, wool, silk or polypropylene hold more body heat than cotton; middle layer of wool or synthetic insulates even when wet; outer wind and rain layer that allows some ventilation to prevent overheating; tight clothing reduces circulation; hat that covers the ears, hats reduce heat escaping from the head; insulated gloves; insulated and waterproof boots; moisture from sweating increases heat loss; keep extra clothing, including underwear"
+    },
+    {
+      "name": "OSHA, Winter Weather: Cold Stress",
+      "used": "Wet feet lose heat 25 times faster than dry feet"
+    },
+    {
+      "name": "CDC/NIOSH, Cold Stress and Workers (reviewed November 17, 2026)",
+      "used": "Several layers of loose clothing; protect ears, face, hands and feet; boots waterproof and insulated; wear a hat; carry extra socks, gloves, hat, jacket, clothes and blankets"
+    },
+    {
+      "name": "CDC, Safety Guidelines: During & After a Winter Storm (reviewed August 25, 2026)",
+      "used": "Sleeves snug at the wrist; mittens warmer than gloves; water-resistant coat and boots; several layers of loose-fitting clothing; fabrics that hold heat and don’t absorb moisture, wool, silk or polypropylene over cotton; insulation layer traps air; outer layer protects from wind, rain and snow; stay dry, wet clothing chills quickly; excess sweating, remove layers when too warm; don’t leave skin exposed, avoid getting wet; try not to sweat or become too tired; wrap the whole body including the head in extra clothing, blankets or newspapers (stranded in a car); infants under one year never sleep in a cold room; dress babies in warmer clothing such as footed pajamas, one-piece wearable blankets or sleep sacks"
+    },
+    {
+      "name": "CDC, Preventing Frostbite (Winter Weather, reviewed August 25, 2026)",
+      "used": "Scarf or knit mask over face and mouth, hat, mittens, water-resistant coat and boots, several loose layers; cover nose, ears, toes, cheeks, chin and fingers in warm, dry clothing"
+    },
+    {
+      "name": "American Red Cross, Giant Winter Storm Threatens Millions; Follow these Safety Steps (February 21, 2023)",
+      "used": "Cover your mouth to protect your lungs from severely cold air; keep dry, change wet clothing frequently; sweating could lead to a chill and hypothermia"
+    },
+    {
+      "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapters II and VI",
+      "used": "Layers create more dead air space; dry damp clothing in the sun or by a fire, dry it before dark; fell in water: build fire, then remove wet clothing and rewarm by fire, finish drying by fire; no fire: remove clothing, get into a sleeping bag, let wet clothes freeze, break the ice out; keep clothing clean, dirt reduces insulation; change socks regularly; improvise sleeping bag insulation with dry grass, leaves, dry moss"
+    },
+    {
+      "name": "Walter Reed Army Institute of Research, Cold Weather Sleep in the Arctic Environment (with the Northern Warfare Training Center)",
+      "used": "Wear dry clothing made of wool or synthetics; avoid cotton"
+    },
+    {
+      "name": "American Academy of Pediatrics (HealthyChildren.org), Cold Weather Safety for Children (updated January 25, 2023)",
+      "used": "Dress infants and children warmly; several thin layers; warm boots, gloves or mittens and a hat; one more layer than an adult for older babies and young children; thin, snug layers in the car, not bulky coats or snowsuits"
+    },
+    {
+      "name": "National Weather Service, Understanding Wind Chill",
+      "used": "Tests were on adults; be even more cautious with children"
+    },
+    {
+      "name": "Priorities (another topic in this app)",
+      "used": "COLD: Clean, avoid Overheating (take layers off before hard work), Loose and in layers, Dry"
+    },
+    {
+      "name": "Hypothermia and Frostbite (Emergency protocols in this app)",
+      "used": "Wet clothing off once out of the wind and cold, not before; do not rewarm frostbite with a fire"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

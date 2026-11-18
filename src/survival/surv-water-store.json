@@ -72,6 +72,9 @@
           ]
         },
         {
+          "p": "This solution is only for the empty container: pour it all out, and never drink it. To make drinking water safe, use the much smaller dose and the 30-minute wait in Make water safe."
+        },
+        {
           "warn": "Never mix bleach with ammonia or any other cleaner (CDC). Indoors, open windows and doors, and try not to breathe the fumes."
         }
       ]
@@ -91,6 +94,10 @@
         {
           "link": "s:surv-make-water-safe",
           "label": "Make water safe"
+        },
+        {
+          "link": "s:surv-wells-without-power",
+          "label": "Wells without power"
         }
       ]
     },
@@ -116,6 +123,10 @@
             "Use plastic: some glass breaks however much space you leave (Ohio State University Extension).",
             "Jugs of water in a freezer that is not full help keep the food frozen longer when the power goes off (Ohio State University Extension)."
           ]
+        },
+        {
+          "link": "s:surv-water-winter",
+          "label": "Water in winter"
         }
       ]
     },

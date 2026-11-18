@@ -9,8 +9,8 @@
     "purify",
     "treat",
     "drinking water",
-    "tablets",
-    "algae",
+    "purification",
+    "chlorine",
     "algal bloom",
     "distill"
   ],
@@ -131,7 +131,7 @@
           "p": "Table from CDC; distillation from FEMA. To take salt out of water you need a reverse osmosis filter (CDC) or distillation (FEMA)."
         },
         {
-          "p": "Boiling, bleach, iodine, chlorine dioxide, filters, UV and sunlight don’t remove fuel, chemicals or algal toxins (CDC, WHO). Distillation removes salt, heavy metals and most, not all, other chemicals (FEMA), but don’t distill water that smells of fuel or chemicals. Reverse osmosis removes salt (CDC)."
+          "p": "Boiling, bleach, iodine, chlorine dioxide, filters, UV and sunlight don’t remove fuel, chemicals or algal toxins (CDC, WHO). Distillation removes salt, heavy metals and most, not all, other chemicals (FEMA). Water with fuel or toxic chemicals cannot be made safe (CDC): don’t try to distill it. Reverse osmosis removes salt (CDC)."
         }
       ]
     },
@@ -342,6 +342,10 @@
           ]
         },
         {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        },
+        {
           "link": "s:surv-water-store",
           "label": "Store water at home"
         }
@@ -351,7 +355,7 @@
       "h": "Well water and rain",
       "blocks": [
         {
-          "p": "Make water from a private well or collected rain safe as above before you store it to drink (see Store water at home). A flooded well needs disinfecting and testing first (EPA)."
+          "p": "Make water from a private well safe as above before you store it to drink (see Store water at home). A flooded well needs disinfecting and testing first (EPA)."
         },
         {
           "p": "Rain caught directly on a clean tarp or in a clean container: treat it like any wild water (CDC; FEMA, Food and Water in an Emergency). Rain off a roof: FEMA (Where can I find clean drinking water after a disaster?) says not to drink collected rainwater; read Find water outside first."
@@ -383,7 +387,11 @@
         },
         {
           "link": "p:vomiting-diarrhea",
-          "label": "Vomiting and diarrhea"
+          "label": "Severe vomiting or diarrhea"
+        },
+        {
+          "link": "s:surv-stomach-illness-in-a-group",
+          "label": "Stomach illness in a group"
         }
       ]
     }

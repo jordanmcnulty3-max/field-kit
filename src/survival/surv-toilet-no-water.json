@@ -6,7 +6,7 @@
     "toilet",
     "flush",
     "bucket toilet",
-    "two-bucket toilet",
+    "bathroom",
     "sewer",
     "septic",
     "poop",
@@ -19,7 +19,7 @@
     "Sewer lines broken, sewage backing up, or told not to flush? Don’t flush. Use the two-bucket toilet below.",
     "Power out across town? Use as little water as you can and flush only poo: sewer pumps need electricity. In a long blackout, switch to the bucket toilet.",
     "Sewer working but the water is off? Flush only when you need to, by pouring a gallon or two of water into the bowl.",
-    "Keep pee and poo in separate buckets. Cover each poo with sawdust or shredded paper. Wash your hands with soap and water after every visit.",
+    "Keep pee and poo in separate buckets. Cover each poo with sawdust or shredded paper, unless you will empty it into your septic tank. Wash your hands with soap and water after every visit.",
     "Never pour bleach into a bucket with pee in it."
   ],
   "sections": [
@@ -32,6 +32,10 @@
         {
           "link": "p:vomiting-diarrhea",
           "label": "Severe vomiting or diarrhea"
+        },
+        {
+          "link": "s:surv-stomach-illness-in-a-group",
+          "label": "Stomach illness in a group"
         }
       ]
     },
@@ -49,12 +53,12 @@
             "Pour a gallon or two (4 to 8 L) of water into the bowl. The amount varies by toilet (National Park Service; DC Water says a gallon).",
             "Pour slowly at first, then fast, to make it flush. Avoid splashing (DC Water, National Park Service).",
             "If the water rises without draining, stop (National Park Service).",
-            "If needed, slowly add a little water to bring the bowl back to its usual level. Don’t use the handle as well (National Park Service), and don’t empty the tank (DC Water): the clear water in the tank is emergency drinking water (see Water already in your house)."
+            "If needed, slowly add a little water to bring the bowl back to its usual level. Don’t use the handle as well (National Park Service), and don’t empty the tank (DC Water): tank water with no toilet cleaner in it is last-resort drinking water, to be treated first (see Water already in your house)."
           ]
         },
         {
           "list": [
-            "Carry only what you can lift safely (National Park Service). A gallon of water weighs about 8 lb (3.8 kg).",
+            "Carry only what you can lift safely (National Park Service). A gallon of water weighs about 8.3 lb (3.8 kg).",
             "You don’t need to disinfect water used for flushing (New York State Department of Health, for tap water under a boil-water notice). Water from a pool or spa can be used for washing, cleaning and similar uses, though never for drinking (CDC).",
             "Keep grease, food scraps, wipes and cleaning chemicals out of the flushing water (National Park Service).",
             "Save water: you can use the toilet several times for pee before you flush (DC Water)."
@@ -140,7 +144,7 @@
         },
         {
           "steps": [
-            "Shut off the water valve to the toilet (North Carolina Department of Health and Human Services). Don’t flush if the sewer is broken: bail the water out of the bowl with a cup into the pee bucket.",
+            "Shut off the water valve to the toilet (North Carolina Department of Health and Human Services). Don’t flush if the sewer is broken: bail the water out of the bowl with a cup into a bucket, and pour it out as you would pee.",
             "Line the bowl, or a bucket, with two heavy-duty plastic garbage bags (King County public health).",
             "Put cat litter, fireplace ashes or sawdust in the bottom of the bags (King County).",
             "At the end of each day, tie the bags securely and move them to a protected place such as a garage, basement or outbuilding until there is a safe way to get rid of them (King County)."
@@ -177,6 +181,10 @@
             "Sanitize it with CDC’s mix for household items: 1 cup (240 mL) of plain, unscented household bleach (5% to 9%) in 5 gallons (19 L) of water.",
             "Let it air dry. Indoors, open windows and doors (CDC)."
           ]
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
         }
       ]
     },
@@ -235,7 +243,11 @@
       "h": "Wash your hands",
       "blocks": [
         {
-          "p": "Wash with soap and water after every toilet visit and before eating (Washington County). Hand sanitizer with at least 60% alcohol will do when there is no water, but soap and water clean best (Oregon State University Extension; Wilsonville, Oregon)."
+          "p": "Wash with soap and water after every toilet visit and before eating (Washington County). Hand sanitizer with at least 60% alcohol will do when there is no water, but soap and water clean best (Oregon State University Extension; Wilsonville, Oregon). It does not work well against norovirus, a common cause of vomiting and diarrhea (CDC)."
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
         },
         {
           "link": "c:sanitation-kit",
@@ -336,6 +348,10 @@
     {
       "name": "USGS Water Science School, Facts About Water",
       "used": "8.33 lb per gallon (as in Task 4)"
+    },
+    {
+      "name": "CDC, How to Prevent Norovirus, reviewed January 13, 2025",
+      "used": "Hand sanitizer does not work well against norovirus and is not a substitute for handwashing"
     }
   ],
   "reviewed": "2026-11-18"

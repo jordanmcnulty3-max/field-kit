@@ -6,7 +6,7 @@
     "cat hole",
     "cathole",
     "latrine",
-    "pit latrine",
+    "outhouse",
     "toilet in the woods",
     "poop outdoors",
     "camp toilet",
@@ -167,6 +167,10 @@
       "blocks": [
         {
           "p": "Wash your hands with soap and water, or use hand sanitizer when there is none (Leave No Trace)."
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
         },
         {
           "link": "s:surv-garbage-and-greywater",

@@ -121,9 +121,11 @@ Source disagreements found while checking the Survival topics. Each says what th
 
 1. **How long to boil water.** EPA and CDC: a rolling boil for 1 minute (3 minutes higher up). NYS DEC's state
    land camping rules and the Army survival manuals (ATP 3-50.21, FM 21-76-1) say 5 minutes. Today: 1 minute,
-   following EPA and CDC. Say if the group should boil 5 minutes.
+   following EPA and CDC. Say if the group should boil 5 minutes. (To change it: surv-make-water-safe, surv-wells-without-power
+   and the protocol p:vomiting-diarrhea.)
 2. **Altitude for the 3-minute boil.** EPA: above 5,000 ft. CDC: above 6,500 ft. Army ATP 3-50.21: above 8,000 ft.
-   Today: 5,000 ft (most cautious; several Adirondack High Peaks are above it).
+   Today: 5,000 ft (most cautious; several Adirondack High Peaks are above it). (To change it: surv-make-water-safe,
+   surv-wells-without-power and p:vomiting-diarrhea.)
 3. **Bleach dose for 8.25% bleach.** EPA: 6 drops per gallon. CDC: 8 drops per gallon for any 5% to 9% bleach.
    Today: 8 drops per gallon for both 6% and 8.25% (the larger dose).
 4. **Rainwater.** Army ATP 3-50.21: fresh rain caught straight into clean containers needs no treatment. CDC:
@@ -309,7 +311,8 @@ Source disagreements found while checking the Survival topics. Each says what th
    the protocol: at least 2 days after symptoms stop (CDC), and 3 days if the group can manage it (Minnesota); the
    24-hour figure is not in the text. The reviewer recommends 3 days (72 hours) everywhere, protocol included, as the
    more cautious figure that meets both CDC and Minnesota. Say whether to move the whole app, protocol and topic, to
-   3 days.
+   3 days. (Places to change: surv-stomach-illness-in-a-group doFirst, the warning in section 5 and the whole-group rule
+   in section 8; and p:vomiting-diarrhea steps 8 and 10 and its don'ts.)
 33. **Bleach for vomit and diarrhea (surv-clean-and-disinfect) — Water pack Task 7.** CDC (norovirus): 1,000 to 5,000
    ppm, "5 to 25 tablespoons of household bleach [5% to 8%] per gallon", at least 5 minutes. CDC (evacuation centers,
    archived 2019): 1,000 ppm, 5 tablespoons of 6% per gallon, keep wet 10 minutes if possible. Minnesota Department of

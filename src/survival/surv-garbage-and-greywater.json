@@ -85,6 +85,10 @@
           ]
         },
         {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        },
+        {
           "link": "p:vomiting-diarrhea",
           "label": "Severe vomiting or diarrhea"
         }
@@ -103,7 +107,7 @@
         },
         {
           "link": "p:carbon-monoxide",
-          "label": "Carbon monoxide"
+          "label": "Carbon monoxide poisoning"
         }
       ]
     },
@@ -115,8 +119,8 @@
         },
         {
           "list": [
-            "At home while the sewer still works, pour it down the sink drain, not into the toilet (National Park Service).",
-            "When the sewer is not working, or is backing up, don’t pour anything down a drain: water run inside the house can back up into it (West Hants Regional Municipality, Nova Scotia).",
+            "At home while the sewer still works, pour it down the sink drain, not into the toilet (National Park Service). With the power out across town, send as little water down the drains as you can (West Hants Regional Municipality, Nova Scotia).",
+            "When the sewer (or your septic system) is not working, or is backing up, don’t pour anything down a drain: water run inside the house can back up into it (West Hants Regional Municipality, Nova Scotia).",
             "With a bucket toilet, use some of it to dilute the pee before you pour it out (Oregon State University Extension).",
             "Strain the rest and scatter it on the ground, away from the house and at least 200 feet (60 m) from wells, springs and streams where you can, as in camp below (Leave No Trace).",
             "Don’t try to treat it to use again (Oregon State University Extension).",

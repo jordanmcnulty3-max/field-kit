@@ -17,7 +17,7 @@
     {
       "id": "bottled-water",
       "text": "Unopened bottled water, sealed in its original containers",
-      "note": "The safest stored water. Counts toward the total above. Use before its expiration date."
+      "note": "The safest stored water. Counts toward the total above. Replace it before its expiration date or at least once a year, whichever comes first."
     },
     {
       "id": "containers",
@@ -84,7 +84,7 @@
     },
     {
       "name": "American Red Cross, Survival Kit Supplies; American Red Cross, Disaster Supplies Kit (University of Missouri Extension EMW1012)",
-      "used": "One gallon per person per day; household liquid bleach; easy-to-carry kit; milk containers do not seal well"
+      "used": "One gallon per person per day; household liquid bleach; easy-to-carry kit; milk containers do not seal well; replace bottled water at least once a year"
     },
     {
       "name": "National Disaster Education Coalition (American Red Cross, FEMA and others), Talking About Disaster: Disaster Supplies Kit",

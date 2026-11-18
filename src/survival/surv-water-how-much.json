@@ -34,6 +34,10 @@
           "warn": "No agency says the gallon covers flushing toilets, bathing or laundry. Plan that water separately, and use water that is not fit to drink for it where you can."
         },
         {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        },
+        {
           "link": "s:surv-water-in-the-house",
           "label": "Water already in your house"
         }
@@ -70,7 +74,7 @@
           ]
         },
         {
-          "p": "No agency gives an amount for any of these except hot weather. Store more than the minimum if anyone in the group is on this list."
+          "p": "No agency gives an amount for any of these except hot weather; Ohio State University Extension says to store 1 quart per small pet. Store more than the minimum if anyone in the group is on this list."
         }
       ]
     },
@@ -174,6 +178,10 @@
     {
       "name": "University of Alaska Fairbanks Cooperative Extension, Emergency Water Supply (SAL-00006, 2021)",
       "used": "Containers should be movable; round 3 to 6 gallon jugs work best; allow for the weight of water when deciding how full to fill jugs"
+    },
+    {
+      "name": "Ohio State University Extension, Food Preservation: Preserving Water for Emergency Use, HYG-5354 (2017)",
+      "used": "store 1 quart per small pet"
     }
   ],
   "reviewed": "2026-11-18"

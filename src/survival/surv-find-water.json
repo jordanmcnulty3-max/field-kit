@@ -14,7 +14,7 @@
     "snow",
     "rainwater"
   ],
-  "summary": "Water runs downhill: check low ground, the foot of cliffs and dry stream beds.",
+  "summary": "Water runs downhill: check low ground, the foot of cliffs and dry stream beds; treat all wild water, rain included, and keep roof rain for flushing and cleaning unless you have nothing safer.",
   "sections": [
     {
       "h": "Find water",
@@ -68,6 +68,10 @@
         {
           "link": "s:surv-make-water-safe",
           "label": "Make water safe"
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
         }
       ]
     },

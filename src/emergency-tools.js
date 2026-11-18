@@ -298,7 +298,10 @@
     if (!audioLive()) {
       if (!queuedDropped) {
         queuedDropped = true;
-        cpr.nodes.forEach(n => { try { n.o.stop(); n.o.disconnect(); } catch { /* already finished */ } });
+        cpr.nodes.forEach(n => {   // disconnect first, each in its own try: some engines throw on a second stop()
+          try { n.o.disconnect(); } catch { /* already disconnected */ }
+          try { n.o.stop(); } catch { /* already finished */ }
+        });
         cpr.nodes = [];
       }
     } else if (queuedDropped) {

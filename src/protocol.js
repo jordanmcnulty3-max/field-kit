@@ -164,7 +164,7 @@
     const p = get(a.id);
     if (stepIndex(p, t.step) < 0) return;
     if (t.done === true || t.end <= Date.now()) { syncActive(); return; }   // over while the app was closed: no alert, no Done entry
-    runTimer({ id: p.id, title: p.title, step: t.step, label: t.label, end: t.end, done: t.done === true });
+    runTimer({ id: p.id, title: p.title, step: t.step, label: t.label, end: t.end, done: false });   // a done timer returned above
   }
 
   /* ---------- Rendering ---------- */

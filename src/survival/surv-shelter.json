@@ -11,7 +11,7 @@
     "insulation",
     "bed"
   ],
-  "summary": "Pick flat, dry ground, insulate from the ground first and keep the shelter small.",
+  "summary": "Pick flat, dry ground out of the wind, insulate from the ground first and keep the shelter small.",
   "where": [
     "rural",
     "woods"
@@ -23,13 +23,14 @@
         {
           "list": [
             "Flat, dry ground above flood level, with no dead trees or hanging branches overhead.",
-            "Avoid valley floors on cold nights (cold air pools there) and exposed ridgetops (wind).",
-            "Close to water and building material, but never in a dry wash."
+            "Avoid low ground such as narrow valleys and creek beds: cold air collects there at night. Pick a spot out of the wind.",
+            "Near water and fuel, but never in a dry wash or stream bed: flash floods run there.",
+            "Stay out of the path of avalanches and rockslides. In the Adirondacks, avalanche-prone terrain is found on steep, open slopes, slides and gullies on mountains throughout the park, not only in the High Peaks."
           ]
         },
         {
           "fig": "shelter-site",
-          "cap": "A level spot partway up a slope beats both the valley floor and the ridgetop."
+          "cap": "Low ground collects cold air at night and floods. Pick level ground above flood level, out of the wind."
         }
       ]
     },
@@ -38,24 +39,16 @@
       "blocks": [
         {
           "steps": [
-            "Insulate from the ground first: a bed of dry leaves, grass or boughs at least a hand’s width thick once you lie on it. The ground pulls heat out of you faster than the air.",
-            "Keep it small, just big enough to lie in. Your body has to heat the space.",
-            "Debris hut: prop a long ridgepole on a stump or forked stick at about hip height. Lean sticks along both sides, then pile leaves and debris at least an arm’s length thick. Pull a pile of leaves into the entrance once you’re inside.",
-            "Lean-to: lash a pole between two trees, lean branches against it on the windward side, and cover with boughs or a tarp. Build a fire in front, with a wall of logs or rocks behind it to reflect heat in.",
-            "Tarp: tie a ridgeline between trees and drape the tarp over it as an A-frame, low end facing the wind."
+            "Insulate from the ground first: a bed of dry leaves, grass or boughs at least 12 inches thick, because it packs down when you lie on it. At rest you can lose as much as 80 percent of your body heat to the ground.",
+            "Keep it small, just big enough to lie in. A shelter that is too big wastes your body heat.",
+            "Debris hut: prop a long ridgepole on a stump or tree at about waist height. Lean sticks along both sides, steep enough to shed rain, then pile leaves and debris at least 3 feet thick, the thicker the better. Pile debris by the entrance that you can pull in to plug it once you're inside.",
+            "Lean-to: lash a pole between two trees, lean branches against it with the back of the lean-to into the wind, and cover with boughs or a tarp. Build a fire in front, with a wall of green logs or dry, solid rock behind it to reflect heat in. Never use wet, porous or riverbed rocks: they can explode when heated.",
+            "Tarp: tie a line between two trees about waist high and pitch the tarp from it as a lean-to, with its back into the wind."
           ]
-        },
-        {
-          "fig": "shelter-debris",
-          "cap": "Debris hut. More debris means more warmth; it should be thick enough that you can’t see light through it."
         },
         {
           "fig": "shelter-leanto",
           "cap": "Lean-to. The log wall throws the fire’s heat back into the shelter."
-        },
-        {
-          "fig": "shelter-tarp",
-          "cap": "Tarp A-frame. Pitch the end facing the wind lower to keep rain and wind out."
         }
       ]
     },
@@ -64,22 +57,63 @@
       "blocks": [
         {
           "list": [
-            "A snow trench or snow cave insulates well. Poke a ventilation hole, keep your digging tool inside with you, and never use a stove or fire in a sealed snow shelter."
+            "Snow insulates well, so a snow cave or snow trench can keep you alive. Make a ventilation hole in the roof and build the sleeping platform higher than the entrance.",
+            "Never use a charcoal grill, lantern or portable camping stove inside a tent or snow shelter, and never use fuel-burning heaters or lanterns while sleeping in one. Carbon monoxide kills people every year this way."
           ]
         },
         {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
+        },
+        {
           "fig": "shelter-snow",
-          "cap": "Snow trench. Sleeping above the floor keeps you out of the coldest air."
+          "cap": "Snow trench with a vent hole. Sleep on a platform higher than the entrance."
+        }
+      ]
+    },
+    {
+      "h": "Cold injuries",
+      "blocks": [
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        },
+        {
+          "link": "p:frostbite",
+          "label": "Frostbite"
         }
       ]
     }
   ],
   "sources": [
     {
-      "name": "Not yet source-checked",
-      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+      "name": "US Army ATP 3-50.21, Survival (2018), chapters 5 and 6",
+      "used": "Site free of dead trees, avalanches, rockslides, flash-flood areas and high-water marks; avoid low-lying cold sumps; up to 80 percent of body heat lost to the ground; natural insulation at least 12 inches thick as it compresses; debris hut ridgepole at about waist height, ribs steep enough to shed moisture, debris at least 3 feet thick, debris to drag across the entrance; lean-to backside into the wind; poncho lean-to ropes about waist high, back into the wind; fire reflector of green logs or nonporous rock; porous rocks explode when heated; snow cave insulating, sleeping platform higher than the entrance, openings sealed except ventilation holes"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual, chapters 5 and 15",
+      "used": "Shelter too large is the most common error, too large wastes body heat; avoid flash flood areas, avalanche or rockslide areas, sites below the high water mark, dead trees that might fall; low ground collects heavy cold air at night; winter site protects from cold and wind with fuel and water; ventilate an enclosed shelter; never sleep on the ground without insulation"
+    },
+    {
+      "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapter VI",
+      "used": "Avoid dead standing trees, drainages and dry riverbeds, avalanche areas; near water; fire reflectors of rocks or logs, no porous or riverbed rock"
+    },
+    {
+      "name": "US Army TC 21-3, Soldier's Handbook for Individual Operations and Survival in Cold-Weather Areas (1986), chapters 7 and 10",
+      "used": "Avalanches on steep slopes, avoid their likely path; deep valleys collect colder air; snow trench; snow cave entrance at the lowest level"
+    },
+    {
+      "name": "NYS DEC, DEC Advises Backcountry Downhill Skiers, Snowboarders, and Outdoor Adventurers of Avalanche Risk in Adirondack High Peaks Region (press release, 22 February 2023)",
+      "used": "Avalanche-prone terrain on mountains throughout the Adirondacks; steep, open terrain, slides and gullies"
+    },
+    {
+      "name": "CDC, Carbon Monoxide (CO) Poisoning Prevention",
+      "used": "Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper"
+    },
+    {
+      "name": "US Consumer Product Safety Commission, Portable Heaters & Camping Equipment",
+      "used": "Never use fuel-burning portable heaters or lanterns while sleeping in enclosed areas; people die every year from carbon monoxide"
     }
   ],
-  "reviewed": "2026-11-17",
-  "draft": true
+  "reviewed": "2026-11-17"
 }

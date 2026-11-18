@@ -47,6 +47,10 @@ def test_normal_build_inlines_all_topics(tree):
 
 
 def test_release_fails_on_draft_topic(tree):
+    p = tree / 'src' / 'survival' / 'surv-fire.json'
+    topic = json.loads(p.read_text(encoding='utf-8'))
+    topic['draft'] = True  # plant a draft: surv-fire itself is source-checked now
+    p.write_text(json.dumps(topic), encoding='utf-8')
     r, _ = build(tree, '--release')
     assert r.returncode != 0
     assert 'surv-fire' in r.stderr and 'draft topic' in r.stderr

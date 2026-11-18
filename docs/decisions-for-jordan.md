@@ -132,3 +132,12 @@ Source disagreements found while checking the Survival topics. Each says what th
    Cryptosporidium if you follow the instructions. CDC's hiking and camping page: they kill Giardia but are only
    somewhat effective against Cryptosporidium, and filtering first is safest. Today: the app says they work better
    than iodine or chlorine but not fully, follow the label exactly, and boil or filter first if you can.
+6. **When mountain thunderstorms start.** NWS: they typically develop in the early afternoon; be down the mountain
+   by noon. CDC: most common in the late afternoon or evening. Today: be down by noon (NWS, the earlier time).
+7. **Ferro rod technique.** The old Fire topic said to hold the striker still and pull the rod back. No
+   authoritative source opened says that; Army ATP 3-50.21 says to drive the striker down the rod with even
+   pressure. Today: the Army method. Say if the group trains the pull-back method and wants it back (it would need a
+   source).
+8. **Fire next to a shelter.** Smokey Bear: keep campfires at least 15 feet from tents, vegetation and low branches.
+   The Army manuals put a survival fire in front of a lean-to with a reflector wall (and about 3 feet from a snow
+   cave opening). Today: the Shelter topic keeps the Army lean-to fire; the 15-foot rule is not added.

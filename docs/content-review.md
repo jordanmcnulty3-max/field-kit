@@ -1212,3 +1212,108 @@ Statements changed:
 Boiling altitude elsewhere (grep of src/protocols, src/survival, src/checklists for 6,500 / 5,000 / altitude with boil, feet or ft): only src/protocols/vomiting-diarrhea.json (s8 detail and the final checklist line, both now 5,000 feet) and surv-make-water-safe (5,000 ft). altitude.json and carbon-monoxide.json mention altitude but not boiling. Other "boil" hits (burns keyword, acorns in surv-food-and-wild-plants, wound-care, animal-bite, dehydration) give no boiling time or altitude.
 
 Open item for the water pack (review M1, not acted on): filter pore rating. CDC-MWS and CDC-HIKE give absolute pore size 1 micron or smaller for parasites and 0.3 micron or smaller for bacteria (CDC-HIKE: "Most portable water filters will remove parasites, but not viruses or bacteria"). The topic now says only that portable filters do not remove viruses; the pack 1 water content should say what rating to look for and that most portable filters do not remove bacteria either.
+
+## Task 14: Survival topics, shelter, fire, weather, rivers (2026-11-17)
+
+Source keys (opened 2026-11-17 by web fetch from search results; title checked after each fetch). All PDF text was read through the fetch tool's extraction and summary, which quotes passages; nothing was downloaded. Paragraph and page numbers are as the tool reported them.
+- ATP: US Army ATP 3-50.21, Survival, September 2018 (chapters 5 and 6). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- FM: US Army FM 21-76, Survival Manual (2006 PDF copy; chapters 5, 7, 15, 17). https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- FM1: FM 21-76-1, Survival, Evasion, and Recovery, 29 June 1999, chapter VI. https://rmp.nc.gov/LCF/Publications/AL_Resources/Survival/Multi Service Survival Manual.pdf
+- TC: US Army TC 21-3, Soldier's Handbook for Individual Operations and Survival in Cold-Weather Areas, March 1986 (first 100,000 characters only). https://ia601500.us.archive.org/28/items/MManuals/Tc21-3UsArmySurvivalInColdWeather1986.pdf
+- DEC-AVAL: NYS DEC press release, 22 February 2023, avalanche risk in the Adirondack High Peaks region. https://dec.ny.gov/news/press-releases/2023/2/dec-advises-backcountry-downhill-skiers-snowboarders-and-outdoor-adventurers-of-avalanche-risk-in-adirondack-high-peaks-region
+- DEC-BURN: NYS DEC press release, 11 April 2023, annual residential brush burning prohibition (campfire rules). https://dec.ny.gov/news/press-releases/2023/4/with-increased-fire-danger-dec-reminds-new-yorkers-annual-residential-brush-burning-prohibition-in-effect-through-may-14
+- CDC-CO: CDC, Carbon Monoxide (CO) Poisoning Prevention. https://www.cdc.gov/nceh/features/copoisoning
+- CPSC: US CPSC, Portable Heaters & Camping Equipment. https://www.cpsc.gov/es/node/12866
+- USFS-FIRE: USDA Forest Service, Intermountain Region, Fire Safety. https://fs.usda.gov/r04/safety-ethics/fire-safety
+- SMOKEY: Smokey Bear (Ad Council with USDA Forest Service and NASF), Campfire Safety / How to Put Out a Campfire. https://smokeybear.com/en/prevention-how-tos/campfire-safety and .../how-to-maintain-and-extinguish-your-campfire (both fetches returned the page title "How to Put Out a Campfire"; the first gave the site-selection text, the second the extinguishing text)
+- NWS-OV: NWS, Overview: Lightning Safety. https://www.weather.gov/safety/lightning-safety-overview
+- NWS-BRO: NWS/NOAA lightning brochure "Lightning Safety for You and Your Family" (NOAA PA 201752). https://www.weather.gov/media/safety/Lightning-Brochure18.pdf
+- NWS-1P: NWS lightning one-pager. https://www.weather.gov/media/owlie/LightningSafety-OnePager-11-29-18.pdf
+- NWS-OUT: NWS, "When a Safe Building or Vehicle is Nearby". https://www.weather.gov/safety/lightning-outdoors
+- CDC-LTG: CDC, Safety Guidelines: Lightning. https://www.cdc.gov/lightning/safety/
+- NOAA-LTG: NOAA JetStream, Lightning Safety (updated 22 June 2026). https://noaa.gov/jetstream/lightning/lightning-safety
+- NOAA-MAPS: NOAA JetStream, How to read Surface Weather Maps. https://www.noaa.gov/jetstream/wxmaps
+- MWO: Mount Washington Observatory, Predicting Weather From the Clouds (M. Dorfman, 21 September 2012). https://mountwashington.org/predicting-weather-from-the-clouds (nonprofit observatory, outside the preferred list; used only for the cumulus sign)
+- NPS-MORA: NPS, Mount Rainier National Park, Backcountry Hikers Advised to Use Caution When Crossing Rivers (6 August 2018, archived). https://www.nps.gov/mora/learn/news/hikers-advised-to-use-caution-when-crossing-rivers.htm
+- MN-COLD: Minnesota DNR, Cold water dangers. https://dnr.state.mn.us/safety/boatwater/cold-water.html
+
+### surv-shelter
+
+- No dead trees overhead — ATP 6-9 ("free of dead trees that may fall"); FM p. 38; FM1 VI-3. Matches.
+- Above flood level, never in a dry wash — ATP 6-9 (flash-flood areas, high-water marks); FM p. 38; FM1 VI-3 (drainages and dry riverbeds). Matches; "stream bed" and "flash floods run there" added from FM1/FM.
+- Valley floors collect cold air — FM p. 47 ("Low areas collect the heavy cold air at night"); ATP 6-9 (cold sump); TC ch 7. Matches; reworded to the source ("low ground such as narrow valleys and creek beds").
+- Exposed ridgetops (wind) — not in ATP, FM, FM1 or TC shelter sections. Removed-unsourced. "Out of the wind" added from FM ch 5 (winter site protects from cold and wind).
+- Near water and building material — FM (winter: source of fuel and water); FM1 VI-3 (water). Corrected to "water and fuel".
+- Avalanches and rockslides — ATP 6-9; FM p. 38; TC ch 7. Adirondack terrain — DEC-AVAL ("avalanche-prone terrain is found on mountains throughout the Adirondacks", steep open terrain, slides, gullies). Added (Northeast safety).
+- `shelter-site` figure: valley cold air and floods, level site above flood level match; drawn label "Ridgetops: wind" is unsourced but not contradicted. Kept, caption replaced with sourced text (concern noted in the report).
+- Ground insulation thickness — ATP 6-46 (at least 12 inches, compresses); FM p. 48 (30 cm layer). ATP 6-38 step 6 gives 2 feet for the debris hut bed. Corrected from "a hand's width" to 12 inches (the general minimum).
+- Heat loss to the ground — ATP 6-16 note and FM p. 40 ("as much as 80 percent"). Corrected ("faster than the air" was not in a source).
+- Keep it small — FM p. 38 (most common error is too large); FM ch 15 (too large wastes body heat). Matches.
+- Debris hut: waist height (ATP 6-38, FM p. 48), ribbing steep enough to shed moisture (ATP 6-38), at least 3 feet thick (ATP 6-38; FM 1 meter), entrance material dragged in (ATP 6-38, FM). Corrected (hip height, arm's length).
+- `shelter-debris` figure removed (labels hip height and arm's length).
+- Lean-to back into the wind — ATP 6-32; FM p. 39, 46. Matches. Reflector of green logs (ATP 6-33, 5-7) or rocks (FM1 VI-11); porous or riverbed rock explodes (ATP 5-8, FM ch 7, FM1 VI-11). Corrected (warning added). `shelter-leanto` figure kept (windward branches, log wall reflects heat; matches).
+- Tarp A-frame, low end facing wind — not in any source (ATP 6-17 poncho tent gives no wind direction; FM1 VI-6 gives entrance 45 to 90 degrees from the wind). Replaced with ATP 6-16 poncho lean-to (ropes about waist high, back into the wind). `shelter-tarp` figure removed.
+- Snow insulates; snow cave — ATP 6-25; FM1 VI-4. Matches. Snow trench — TC ch 10. Matches.
+- Ventilation hole — ATP 6-39 ("All openings except ventilation holes should be sealed"); FM ch 15 ("Be sure to ventilate an enclosed shelter"). Kept, without any suggestion that a flame is then safe.
+- Sleeping platform higher than the entrance — ATP 6-26; FM ch 15. Added from the figure's existing content.
+- Keep your digging tool inside — not in ATP, FM, FM1 or TC (TC read only to 100,000 characters). Removed-unsourced.
+- Stoves and fires — CDC-CO ("Never use a charcoal grill, hibachi, lantern, or portable camping stove inside a home, tent, or camper"); CPSC ("Never use fuel-burning portable heaters or lanterns while sleeping in enclosed areas"; people die every year). Corrected to the surv-priorities wording (Task 13 review I3). "Snow shelter" is not named in either source; included as an enclosed space, as surv-priorities and the carbon-monoxide protocol do. ATP 6-39 says candles, fuel gel and oil lamps produce CO and need vent holes; not used, as it reads as permission CDC withholds.
+- `shelter-snow` figure kept: vent hole, raised sleeping shelf (ATP 6-26), cold air to the low end (FM p. 47 cold air is heavy). Caption reworded.
+- Links: `p:carbon-monoxide`, `p:hypothermia`, `p:frostbite`. No treatment was restated.
+- Tags: where rural, woods. Unchanged (snow and avalanche lines are mountain/woods; no town or coast advice).
+
+### surv-fire
+
+- Gather about twice what you think — no source. Removed-unsourced. Replaced by ATP minimums: tinder a cupped handful (5-12), kindling a soda can diameter of each size (5-19), fuel forearm thick (5-20); skipping a phase makes the fire fail (5-9).
+- Tinder examples — ATP 5-10 (birch bark, dead dry grass, cattail/milkweed seed down, pitch wood shavings), 5-11 (lint; cotton balls coated with petroleum-based paste). Corrected wording ("fatwood", "dryer lint" not in the source). ATP's birch bark line is garbled in the extraction ("Birch bark—shredded inner bark known as heartwood from cedar..."); birch bark is listed.
+- Kindling pencil-lead to pencil — ATP 5-19: pencil-lead to thumb, 12 to 18 inches. Corrected.
+- Fuel wrist-thick — ATP 5-20: forearm diameter at a minimum. Corrected. Snaps when broken — ATP 5-21. Rotten wood smolders — ATP 5-21. Added.
+- `fire-sizes` figure removed (label "wrist-thick and up"; caption unsourced).
+- 10-foot circle — USFS-FIRE (clear burnable material within a 10-foot diameter circle); ATP 5-6 (expose at least 3 feet of soil); FM ch 7 (at least 1 meter). Corrected (circle of burnables 10 ft, bare soil at least 3 ft in the middle).
+- Overhanging branches — USFS-FIRE. Matches. Snow-loaded trees, flat, dry, out of the wind — ATP 5-5. Added.
+- Platform of green sticks or flat rocks on snow or wet ground — ATP 5-6 and FM ch 7 give green logs on snow, in crosswise layers; rocks: ATP 5-8, FM ch 7, FM1 VI-11 warn porous, wet or riverbed rocks explode. Corrected. `fire-platform` figure removed.
+- Teepee, light from upwind — ATP 5-24, 5-32; FM ch 7. Matches. "Opening facing the wind", "blow gently at the base" — removed-unsourced (FM mentions blowing only for the lens method).
+- Log cabin — ATP 5-28 ("creates a quick and large bed of coals and can be used for cooking"). Corrected ("burns longer" not in the source). `fire-lays` figure kept; its labels "lights fast" and "steady heat" are not in a source but do not contradict one.
+- Ferro rod pull-back — not in ATP (5-39: striker at 90 degrees, driven down the stick with even pressure) or FM (scrape the knife on the metal match, tip under the tinder). Web search found only retail and blog pages for the pull-back method. Corrected to ATP. `fire-ferro` figure removed. Open question D7.
+- 9-volt battery and steel wool — ATP 5-40 (fine-grade steel wool stretched across the two posts heats and produces a coal; keep flame away, some batteries release explosive hydrogen). Corrected.
+- Bow drill — ATP 5-46 (significant preparation); FM (much effort, persistent). Matches.
+- Wet weather: standing dead wood (ATP 5-21, sheds rain), dead lower conifer branches (ATP 5-16), split to the dry inner wood (ATP 5-17), teepee burns with wet wood (ATP 5-24, FM). Matches/added. Birch bark burns when damp — no authoritative source found. Removed-unsourced.
+- Never leave unattended; drown, stir, feel — USFS-FIRE; SMOKEY (drown, stir, drown, feel; too hot to touch, too hot to leave); DEC-BURN. Matches, made specific.
+- New York campfire rule — DEC-BURN. Added (one sentence). Not added: Smokey's 15 feet from tents (conflicts with the Army lean-to fire; open question D8).
+- Fire in shelters: the topic has none, so no carbon monoxide change needed (checked as asked).
+- Links: `p:burns`. Tags: none. Unchanged.
+
+### surv-weather-and-lightning
+
+- Building clouds mean thunderstorms — MWO ("towering, growing cumulus clouds" on a summer morning, heavy rain and thunderstorms later in the day). Corrected. NOAA's cloud chart (https://www.weather.gov/media/owlie/cloud_chart.pdf) gives no forecast for cumulus; not used.
+- Off peaks by early afternoon — NWS-OUT (storms typically develop in the early afternoon; down the mountain by noon). CDC-LTG: late afternoon or evening. Corrected to the earlier (NWS). Open question D6.
+- Lowering, thickening clouds — NOAA-MAPS ("Clouds lower and thicken as the warm front approaches, bringing several hours of light to moderate rain"). Corrected ("within hours" not in the source).
+- Wind shift and temperature drop — NOAA-MAPS: after the cold front passes, winds shift and temperatures fall; thunderstorms just ahead of it. Corrected (old text said the shift means a front is arriving).
+- 5 seconds per mile — NOAA-LTG (divide seconds by five). Matches. "Light arrives almost instantly" — removed-unsourced (caption reworded). `lightning` figure kept.
+- Hear thunder, go indoors; building or hard-topped vehicle; windows closed — NWS-OV, NWS-BRO, NWS-1P ("If you can hear thunder, you are in danger"). Matches; windows added.
+- Tents and open shelters don't protect — NWS-BRO, NWS-1P, CDC-LTG. Matches. 10 miles — NWS-BRO ("as far as 10 miles from any rainfall"). Added.
+- No place outside is safe — NWS-OV, NWS-BRO. Matches. Peaks and ridges, lone tall trees, water, metal, never lie flat, spread out — CDC-LTG; NWS-OUT; NOAA-LTG. Matches.
+- Lightning crouch: not in the topic. NWS pages opened do not mention it; the lightning protocol keeps it as WMS's last resort. No change.
+- Wait 30 minutes — NWS-OV, NWS-BRO, CDC-LTG. Matches.
+- Wind chill, frostbite times, heat index: not in the topic; not added (do not expand). Links: `p:lightning` added; hypothermia, frostbite and heat-illness not linked (the topic restates none of them).
+- Tags: none. Unchanged.
+
+### surv-river-crossings
+
+- Wide, shallow, slow; braided channels — NPS-MORA; FM ch 17 (two or three narrow channels easier). Matches; channels added. Scout downstream for log jams and waterfalls — NPS-MORA. Added. Never just above rapids, falls, strainers — FM ch 17 (avoid deep or rapid waterfalls, ledges that signal rapids); NPS-MORA (strainers among the most dangerous). Matches.
+- Snowmelt lowest early morning — NPS-MORA ("typically"; up to a foot by late afternoon). Matches, made specific. FM ch 15: level changes can occur at any time of day; "usually" kept.
+- Hip belt and chest strap — NPS-MORA (unfasten the belt); FM ch 17 (be able to remove the pack quickly). Chest strap not found. Corrected.
+- Face upstream, pole upstream, one step at a time — NPS-MORA; FM ch 17. Matches. Two points of contact — NPS-MORA. Added. Angle slightly downstream — FM ch 17: about 45 degrees. Corrected. `river` figure removed.
+- Above the knee — NPS-MORA ("Do not try to cross water that comes above your knees"). Corrected. If in doubt, turn back — NPS-MORA. Matches.
+- Cold water — FM ch 17 (do not swim or wade in very cold water, could be fatal); MN-COLD (cold shock first 2 to 3 minutes: gasping, hyperventilation, panic, drowning). Added (Northeast snowmelt). 1-10-1 not added: MN-COLD gives it for people in a life jacket.
+- Swept away — FM ch 17: fast shallow rapids, on your back, feet downstream and up, fin with hands; deep rapids, on your stomach, head downstream, angle toward shore. Corrected (old text mixed the two).
+- Ice thickness: not in the topic; not added.
+- Links: `p:drowning`, `p:hypothermia`. Tags: where rural, woods. Unchanged.
+
+### Task 14 pages that would not open or were not used
+
+- curl to sjsu.edu (refused by the proxy; the same PDF was read with the fetch tool instead).
+- northernbush.com FM 21-76 copy: opened but extraction stopped before chapter 5; the sjsu.edu copy was used.
+- archive.org TC 21-3: needed a redirect; the redirect URL was fetched (title confirmed). Only the first 100,000 characters were read.
+- Colorado Parks and Wildlife survival shelter page (https://cpw.state.co.us/learn/Pages/SurvivalShelter.aspx): the fetched text showed no title or publisher, so it is not cited.
+- NWS cloud chart PDF: opened; gives no forecasts for the cloud signs in the topic.

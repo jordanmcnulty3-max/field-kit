@@ -3425,3 +3425,22 @@ No protocol was edited.
 - Batch D M7: TC 21-3 credited for snow caves in severe weather in Fire and Shelter text and in both used lines.
 - Batch D M8: Fire watcher option scoped to outdoor fires with a pointer (as I1).
 - Batch C M12: resolved by I4.
+
+## Heat pack final review fixes (2026-11-18)
+
+No new source was opened; no number or instruction changed.
+- Carbon monoxide, vent-free section: the older duplicate bullet "Turn it off when you go to bed or leave the room (US
+  Fire Administration, NFPA)." removed; the owner sentence from Kerosene and propane heaters stays word for word. The
+  NFPA tip sheet stays in Sources with its used line.
+- Sources footers in 15 topics, 3 checklists and the wind chill data: internal wording removed (topic ids, "checked",
+  "checked protocol", "as checked in water pack Task 4", "as in Task 4", "see the record", "see the record and
+  decisions", "see content-review", "src/tooldata/windchill.json", "bandMinutes", "the title's"). A cross-reference to
+  another page names it by title with "(another topic in this app)", "(other topics in this app)" or "(Emergency
+  protocol in this app)". What each source is credited for is unchanged. Full before and after list in the fix report.
+- Stay warm when the heat is out: "Heat sources" now links the Home heat kit checklist.
+- Search keywords added: "frost bite" (Wind chill), "snowed in" (Winter storms), "lost power" and "no electricity"
+  (Stay warm when the heat is out). Protocol keywords not touched.
+- Wind chill tool: the temperature box uses the ordinary keyboard (minus key on iPhone) and accepts the typographic
+  minus (−); the wind box keeps the number pad. Search: one- and two-letter whole keywords rank higher ("CO").
+- Decisions: D39 points at docs/v7.3-rulings.md, not the build ledger, and ends with one question (room or house); D61
+  ends with a question. docs/v7.3-rulings.md lists every ruling and a Deferred section.

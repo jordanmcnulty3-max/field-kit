@@ -17,7 +17,8 @@
     "below zero",
     "wind",
     "wet and cold",
-    "who is at risk"
+    "who is at risk",
+    "frost bite"
   ],
   "summary": "Wind chill is how cold it feels on exposed skin when wind and cold work together. It harms people and animals, not cars or pipes. At 0°F with a 15 mph wind, exposed skin can freeze in 30 minutes, and NOAA says in just a few minutes: plan on the shorter time. Wet clothes and wind chill you fast, and hypothermia can happen above freezing.",
   "when": [
@@ -195,7 +196,7 @@
       "used": "On or about October 1, 2024, Wind Chill Warning, Watch and Advisory consolidated into Extreme Cold Warning, Extreme Cold Watch and Cold Weather Advisory"
     },
     {
-      "name": "National Weather Service, Wind chill chart cells (src/tooldata/windchill.json, reviewed)",
+      "name": "National Weather Service, Wind chill chart cells (as used in the Wind chill tool)",
       "used": "-57°F at -40°F / 5 mph and -58°F at -20°F / 45 mph; chart range 40°F to -45°F and 5 to 60 mph"
     },
     {
@@ -219,7 +220,7 @@
       "used": "Those most at risk are infants, older adults and those who work or play outdoors"
     },
     {
-      "name": "Priorities (surv-priorities, checked)",
+      "name": "Priorities (another topic in this app)",
       "used": "Hypothermia most cases between 30 and 50°F; get out of wind and rain early"
     }
   ],

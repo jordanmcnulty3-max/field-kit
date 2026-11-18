@@ -24,7 +24,8 @@
     "shovelling",
     "snow shoveling heart attack",
     "downed power line",
-    "power lines down"
+    "power lines down",
+    "snowed in"
   ],
   "summary": "Know what the National Weather Service alerts mean, get ready before the storm and stay off the roads. Shovel slowly. Never touch a fallen power line. If you’re stranded in a car, stay with it, keep the exhaust pipe clear of snow, and run the engine and heater about 10 minutes each hour with one window slightly open, only while everyone in the car is awake: turn it off before anyone sleeps.",
   "doFirst": [
@@ -283,7 +284,7 @@
     },
     {
       "name": "National Weather Service Twin Cities, Winter Hazard Awareness Week in Minnesota (November 7, 2023)",
-      "used": "Stay in your vehicle; do not attempt to walk in a winter storm, you can easily become lost; staying in your car decreases the risk of frostbite and increases the chance of rescue (its engine-run advice differs; see the record)"
+      "used": "Stay in your vehicle; do not attempt to walk in a winter storm, you can easily become lost; staying in your car decreases the risk of frostbite and increases the chance of rescue (its engine-run advice differs and is not used here)"
     },
     {
       "name": "CDC, Safety Guidelines: During & After a Winter Storm (reviewed August 25, 2026)",
@@ -318,7 +319,7 @@
       "used": "On or about October 1, 2026; high confidence of a blizzard or ice storm of extreme and historic severity; exceptional threat above and beyond the typical blizzard or ice storm"
     },
     {
-      "name": "Carbon monoxide poisoning (p:carbon-monoxide, checked protocol)",
+      "name": "Carbon monoxide poisoning (Emergency protocol in this app)",
       "used": "Do not run a stove, heater, lantern, generator or engine inside a tent, snow shelter, camper or vehicle where people are sleeping; never run fuel-burning equipment where people sleep"
     }
   ],

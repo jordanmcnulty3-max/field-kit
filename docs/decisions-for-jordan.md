@@ -367,9 +367,16 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    three or more families. CDC: "Don't cook or burn anything on a stove or fireplace that isn't vented," which read
    literally rules out a vent-free gas fireplace; NYS DOH only says it is a supplemental, not a primary, heat source.
    Ventilation: CPSC asks for the room's door open, and a window open about an inch when the door is closed or the house
-   is tight or winterized; the app says always do both. Today: operating guidance under the strictest conditions found
-   (the ruling in the heat pack ledger), with these agencies named first, in the heaters topic's first section, "What safety bodies say first". The sleep rule is written one strict way in every place, owned by Kerosene and propane heaters and quoted word for word in Carbon monoxide and Sleep warm (whole-pack review, I2): "Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol)." CPSC's own words are "in any room where people are sleeping"; the app's sentence does not say room or house, and this file reads it as anywhere in the house. Say whether the group means the room or the house, and if the group wants to allow a heater tended by someone awake while others sleep elsewhere in the house. Say whether the group keeps that, or wants
-   the topics to say plainly "don't use them indoors" (then the heaters topic becomes a list of what to use instead).
+   is tight or winterized; the app says always do both. Today: the topics give operating guidance under the strictest
+   conditions found rather than a plain "don't use them indoors", with these agencies named first, in the heaters
+   topic's first section, "What safety bodies say first". That choice is ruling 1 in docs/v7.3-rulings.md; say there if
+   the group wants a plain "don't" instead (the heaters topic would then become a list of what to use instead). The
+   sleep rule is written one strict way in every place, owned by Kerosene and propane heaters and quoted word for word
+   in Carbon monoxide and Sleep warm: "Turn it off when you go to sleep or leave the room, and never run it where anyone
+   is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol)." CPSC's own words are "in any room where people
+   are sleeping"; the app's sentence does not say room or house, and this file reads it as anywhere in the house.
+   Question: does the heater sleep rule mean the room where someone is sleeping, or the whole house while anyone in it
+   is asleep?
 40. **Electric heaters on a generator: extension cords (surv-generators) — Heat pack Task 4, revised in the fix round.**
    US Fire Administration (Heater Fire Safety card): "Plug portable heaters directly into outlets. Never use an extension
    cord or power strip." and "Do not plug anything else into the same circuit". CPSC: wall outlet, never a power strip.
@@ -506,7 +513,8 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    lantern while sleeping in one (the checked Shelter and Priorities line, CDC and CPSC), and, added in the fix round, no
    fire, candle, fuel gel or oil lamp inside a tent or snow shelter (ATP 6-39: they make carbon monoxide; CDC: burn
    nothing that isn't vented). The topic says the Army manuals differ and that the app does not follow them. Melting
-   snow for water stays outdoors (Water in winter).
+   snow for water stays outdoors (Water in winter). Say if anyone in the group has trained to heat or cook in a snow
+   shelter and wants the Army's way (stove out while people sleep, an awake fire guard) allowed.
 62. **Pyramid fire overnight (surv-fire) — Heat pack Task 7.** Army ATP 3-50.21 (5-27): a pyramid fire burns downward,
    "requiring no attention during the night." USDA Forest Service, Smokey Bear and NYS DEC: never leave a fire
    unattended (the checked Fire text). Army TC 21-3 (snow caves): put fires out while people sleep, or post an alert fire

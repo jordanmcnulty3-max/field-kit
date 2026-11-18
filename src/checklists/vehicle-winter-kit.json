@@ -101,7 +101,7 @@
   "sources": [
     {
       "name": "National Weather Service, Prepare! Don’t Let a Winter Storm Take You by Surprise (weather.gov/safety/winter-before): Winter Storm Survival Kit",
-      "used": "Mobile phone, charger, batteries; blankets or sleeping bags; flashlight with extra batteries; first-aid kit; knife; high-calorie non-perishable food; extra clothing to keep dry; large empty can as emergency toilet, tissues, toilet paper, paper towels; small can and waterproof matches to melt snow; sack of sand or cat litter; shovel; windshield scraper and brush; tool kit; tow rope; battery booster cables; water container; compass and road maps, don’t depend on mobile devices; keep the gas tank near full. Its candle-and-matches item is left out (see the record and decisions)"
+      "used": "Mobile phone, charger, batteries; blankets or sleeping bags; flashlight with extra batteries; first-aid kit; knife; high-calorie non-perishable food; extra clothing to keep dry; large empty can as emergency toilet, tissues, toilet paper, paper towels; small can and waterproof matches to melt snow; sack of sand or cat litter; shovel; windshield scraper and brush; tool kit; tow rope; battery booster cables; water container; compass and road maps, don’t depend on mobile devices; keep the gas tank near full. Its candle-and-matches item is left out (the app’s choice)"
     },
     {
       "name": "CDC, Preparing for a Winter Storm (reviewed December 2, 2025): emergency kit for the car",
@@ -124,7 +124,7 @@
       "used": "Food and water, a shovel, windshield scraper, blankets, tow chains, reflectors (confirms items above)"
     },
     {
-      "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide)",
+      "name": "Carbon monoxide and burning fuel indoors (another topic in this app)",
       "used": "Never burn charcoal inside a home, garage, vehicle or tent (CPSC)"
     }
   ],

@@ -22,7 +22,9 @@
     "propane ran out",
     "boiler",
     "thermostat",
-    "blankets"
+    "blankets",
+    "lost power",
+    "no electricity"
   ],
   "summary": "Pick one small room, close it off and heat only that. Dress in layers, use blankets and sleeping bags, and never heat with an oven, grill or generator indoors. Babies must never sleep in a cold room, and older people chill faster. If you can’t keep the house warm, go somewhere with heat.",
   "doFirst": [
@@ -92,6 +94,10 @@
         {
           "link": "s:surv-unheated-house",
           "label": "Protect an unheated house"
+        },
+        {
+          "link": "c:home-heat-kit",
+          "label": "Home heat kit"
         }
       ]
     },
@@ -313,15 +319,15 @@
       "used": "Never turn the gas on at the propane tank yourself; a qualified professional must check for leaks when turning the gas on"
     },
     {
-      "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide, checked)",
+      "name": "Carbon monoxide and burning fuel indoors (another topic in this app)",
       "used": "New York State Division of Consumer Protection (December 21, 2022): keep furnace vents clear of ice and snow; a blocked vent can let CO build up and newer furnaces may shut off completely. CDC, CPSC: never charcoal or a fuel lantern indoors; battery CO alarms near where people sleep (CDC, CPSC); when one sounds, get everyone outside now (CPSC)"
     },
     {
-      "name": "Priorities (surv-priorities, checked)",
+      "name": "Priorities (another topic in this app)",
       "used": "Eat and drink regularly: your body needs fuel to make heat"
     },
     {
-      "name": "Kerosene and propane heaters (surv-portable-heaters, checked)",
+      "name": "Kerosene and propane heaters (another topic in this app)",
       "used": "Federal and New York agencies advise against unvented heaters indoors; the conditions under which to run one"
     }
   ],

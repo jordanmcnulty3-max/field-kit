@@ -160,19 +160,19 @@
       "used": "Huddle with other people for warmth (stranded in a car); infants less than one year old should never sleep in a cold room"
     },
     {
-      "name": "Shelter (surv-shelter, checked) and Priorities (surv-priorities, checked)",
+      "name": "Shelter and Priorities (other topics in this app)",
       "used": "Up to 80 percent of body heat to the ground at rest; bed at least 12 inches thick; sleeping platform higher than the entrance; never a grill, lantern or camp stove in a tent or snow shelter, never fuel-burning heaters or lanterns while sleeping in one; eat and drink regularly, your body needs fuel to make heat"
     },
     {
-      "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide), Kerosene and propane heaters (surv-portable-heaters), Wood stoves and fireplaces (surv-wood-stoves-fireplaces)",
-      "used": "heater sleep rule quoted word for word from Kerosene and propane heaters (CPSC, US Fire Administration; Carbon monoxide protocol); tent, snow shelter, camper or vehicle (Kerosene and propane heaters; p:carbon-monoxide); battery CO alarms near sleeping areas; overnight wood stove rule (linked, not restated); vehicle: never run an engine in a vehicle where people are sleeping (p:carbon-monoxide)"
+      "name": "Carbon monoxide and burning fuel indoors, Kerosene and propane heaters, Wood stoves and fireplaces (other topics in this app)",
+      "used": "heater sleep rule quoted word for word from Kerosene and propane heaters (CPSC, US Fire Administration; Carbon monoxide protocol); tent, snow shelter, camper or vehicle (Kerosene and propane heaters; Carbon monoxide protocol); battery CO alarms near sleeping areas; overnight wood stove rule (linked, not restated); vehicle: never run an engine in a vehicle where people are sleeping (Carbon monoxide protocol)"
     },
     {
-      "name": "Stay warm when the heat is out (surv-heat-out)",
+      "name": "Stay warm when the heat is out (another topic in this app)",
       "used": "Blankets and sleeping bags; bed with other family members and lots of covers, not for babies; Babies: warm and safe asleep (Safe to Sleep)"
     },
     {
-      "name": "Water in winter (surv-water-winter, checked)",
+      "name": "Water in winter (another topic in this app)",
       "used": "Cold weather dulls thirst; drink often"
     },
     {
@@ -180,7 +180,7 @@
       "used": "If more than one person is in the vehicle, take turns sleeping"
     },
     {
-      "name": "Hypothermia (p:hypothermia, checked protocol)",
+      "name": "Hypothermia (Emergency protocol in this app)",
       "used": "Do not put a heat pack or hot water bottle directly on the skin"
     }
   ],

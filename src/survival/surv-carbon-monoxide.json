@@ -108,8 +108,7 @@
             "New York State Department of Health: don’t use one as your main heat source, even during power failures. Running a generator outdoors for heat is a better option. The label New York requires on these heaters says it is a supplemental heat source and should not be the primary heat source.",
             "Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol).",
             "Have working CO alarms in the house if you use one (US Department of Energy: install a carbon monoxide detector if you use a small space heater).",
-            "Have it installed by a professional, such as your gas supplier, and don’t buy one too big for the room (New York State Department of Health).",
-            "Turn it off when you go to bed or leave the room (US Fire Administration, NFPA)."
+            "Have it installed by a professional, such as your gas supplier, and don’t buy one too big for the room (New York State Department of Health)."
           ]
         }
       ]
@@ -224,11 +223,11 @@
       "used": "Turn portable heaters off when leaving the room or going to bed"
     },
     {
-      "name": "Water in winter (surv-water-winter, checked) and Shelter (surv-shelter, checked)",
+      "name": "Water in winter and Shelter (other topics in this app)",
       "used": "Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC)"
     },
     {
-      "name": "Kerosene and propane heaters (surv-portable-heaters, checked) and Winter storms (surv-winter-storms, checked)",
+      "name": "Kerosene and propane heaters and Winter storms (other topics in this app)",
       "used": "Heater sleep rule quoted word for word from Kerosene and propane heaters (CPSC, US Fire Administration; Carbon monoxide protocol); stranded-car line quoted from Winter storms’ Do first (National Weather Service, CDC, Red Cross; Carbon monoxide protocol)"
     }
   ],

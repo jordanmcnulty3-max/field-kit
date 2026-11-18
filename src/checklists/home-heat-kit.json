@@ -91,7 +91,7 @@
       "used": "At least one heat source; a fireplace up to code with plenty of dry firewood; vented to the outside; turning on the stove for heat is not safe; towels or rags in cracks under doors"
     },
     {
-      "name": "US Consumer Product Safety Commission (CPSC), Carbon Monoxide Questions and Answers, as checked in surv-carbon-monoxide",
+      "name": "US Consumer Product Safety Commission (CPSC), Carbon Monoxide Questions and Answers (as used in Carbon monoxide and burning fuel indoors)",
       "used": "Battery-operated or battery-backup CO alarms on every level and outside sleeping areas"
     },
     {
@@ -123,7 +123,7 @@
       "used": "Propylene-glycol antifreeze for traps; ethylene glycol never in a home water system"
     },
     {
-      "name": "Store fuel safely (surv-store-fuel, checked)",
+      "name": "Store fuel safely (another topic in this app)",
       "used": "Approved, labelled containers outside the house; kerosene only in a kerosene can, never one that held gasoline (CPSC); A-B-C extinguisher (US Fire Administration)"
     },
     {
@@ -131,7 +131,7 @@
       "used": "Consider using an indoor thermometer"
     },
     {
-      "name": "Kerosene and propane heaters (surv-portable-heaters, checked); Carbon monoxide and burning fuel indoors (surv-carbon-monoxide, checked)",
+      "name": "Kerosene and propane heaters; Carbon monoxide and burning fuel indoors (other topics in this app)",
       "used": "Unvented heaters only under that topic's conditions; never a fuel lantern indoors (CDC)"
     }
   ],

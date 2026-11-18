@@ -72,7 +72,7 @@
     },
     {
       "name": "National Weather Service Peachtree City (Atlanta), The New Improved Wind Chill Index",
-      "used": "every chart cell: air temperatures 40°F to -45°F, winds 5 to 60 mph; under the chart: \"Frostbite occurs in less than 30 minutes\" (the title's \"or less\")"
+      "used": "every chart cell: air temperatures 40°F to -45°F, winds 5 to 60 mph; under the chart: \"Frostbite occurs in less than 30 minutes\" (the basis of this tool’s \"30 minutes or less\")"
     },
     {
       "name": "National Weather Service La Crosse, Grand Junction and Alaska Region wind chill chart pages",
@@ -80,7 +80,7 @@
     },
     {
       "name": "National Weather Service, Wind Chill Temperature Index brochure",
-      "used": "the chart's shaded areas show how long (30, 10 and 5 minutes) a person can be exposed before frostbite develops (the bandMinutes legend; shorter times in colder, windier conditions: the title's \"faster when colder or windier\")"
+      "used": "the chart's shaded areas show how long (30, 10 and 5 minutes) a person can be exposed before frostbite develops (the frostbite times this tool allows; shorter times in colder, windier conditions: the basis of this tool’s \"faster when colder or windier\")"
     },
     {
       "name": "National Weather Service Albany, New York State cold fact sheet",

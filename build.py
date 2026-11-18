@@ -4,7 +4,7 @@ Reads src/, figs/ and vendor/ and writes the deployable files to the repo root:
 index.html, sw.js, manifest.json, leaflet.js, leaflet.css. Those root files are build
 output -- edit src/ instead. (Optional: python3 build.py some/dir writes there instead.)
 """
-import glob, html, json, os, re, shutil, sys
+import glob, json, os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 ARGS = [a for a in sys.argv[1:] if a != '--release']
@@ -35,16 +35,6 @@ shell = read('src/shell.html')
 surv = read('src/survival.html').strip()
 emerg = read('src/emergency.html').strip()
 
-
-def fig(m):
-    name, cap = m.group(1), m.group(2)
-    svg, label = figs.F[name]
-    return (f'<figure class="fig"><button type="button" aria-label="Enlarge diagram: {html.escape(label)}">{svg}</button>'
-            f'<figcaption>{cap}</figcaption></figure>')
-
-
-surv = re.sub(r'\{\{fig:([\w-]+)\|([^}]*)\}\}', fig, surv)
-assert '{{fig' not in surv
 a = shell.index('<section class="tab" id="tab-survival" hidden>')
 b = shell.index('</section>', a) + len('</section>')
 shell = shell[:a] + surv + shell[b:]
@@ -126,4 +116,5 @@ for f in ['manifest.json', 'sw.js']:
     shutil.copyfile('src/' + f, os.path.join(OUT, f))
 for f in ['leaflet.js', 'leaflet.css']:
     shutil.copyfile('vendor/' + f, os.path.join(OUT, f))
-print(f'Built v{app_v} into {OUT}: {surv.count("<figure")} diagrams, index.html {os.path.getsize(os.path.join(OUT, "index.html")):,} bytes')
+fig_count = sum('fig' in blk for t in topics for sec in t['sections'] for blk in sec['blocks'])
+print(f'Built v{app_v} into {OUT}: {fig_count} diagrams, index.html {os.path.getsize(os.path.join(OUT, "index.html")):,} bytes')

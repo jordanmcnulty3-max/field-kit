@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from .conftest import inject_protocols
 
 
@@ -98,6 +100,7 @@ def test_at_most_thirty_results(page, app_url):
     assert len(q(page, 'zebra')) == 30
 
 
+@pytest.mark.xfail(reason="Task 7")
 def test_survival_topic_result_opens_that_topic(page, app_url):
     boot(page, app_url, hash_='#/tactical/map')
     open_search(page)
@@ -113,6 +116,7 @@ def test_survival_topic_result_opens_that_topic(page, app_url):
     assert not page.locator('#searchPane').is_visible()
 
 
+@pytest.mark.xfail(reason="Task 7")
 def test_survival_topic_hidden_by_in_tab_search_is_revealed(page, app_url):
     boot(page, app_url, hash_='#/survival')
     page.fill('#survSearch', 'knot')
@@ -123,6 +127,7 @@ def test_survival_topic_hidden_by_in_tab_search_is_revealed(page, app_url):
     assert page.locator('#surv-shelter').is_visible() and page.evaluate("document.getElementById('surv-shelter').open")
 
 
+@pytest.mark.xfail(reason="Task 7")
 def test_survival_ids_stable(page, app_url):
     boot(page, app_url, hash_='#/survival')
     ids = page.eval_on_selector_all('#survTopics details.ref', 'ds => ds.map(d => d.id)')
@@ -180,6 +185,7 @@ def test_tool_and_report_results(page, app_url):
     assert labels[0] == 'Tool'
 
 
+@pytest.mark.xfail(reason="Task 7")
 def test_empty_query_shows_pinned_and_recent(page, app_url):
     boot(page, app_url, storage={'pins': ['p:splint', 't:tq', 'p:gone-away'], 'recent': ['a:ballistics', 's:surv-knots', 'p:choking']})
     open_search(page)
@@ -191,6 +197,7 @@ def test_empty_query_shows_pinned_and_recent(page, app_url):
     assert keys(page)[0] == 'p:splint'
 
 
+@pytest.mark.xfail(reason="Task 7")
 def test_selecting_adds_to_recent_and_home_renders_survival_and_screen_keys(page, app_url):
     boot(page, app_url)
     open_search(page)

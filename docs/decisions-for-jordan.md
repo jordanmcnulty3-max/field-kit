@@ -243,7 +243,8 @@ Source disagreements found while checking the Survival topics. Each says what th
 24. **Sunlight (SODIS) time (surv-make-water-safe) — Water pack Task 5, revised in fix round 1.** CDC: 6 hours in sun,
    or 2 days if cloudy (no latitude given). WHO Technical Note 5: 24 hours on a sunny day or 48 hours if cloudy, "in
    areas near the equator". No opened source gives a time for New York's latitude. Today: at least WHO's times, sunlight
-   is a last resort, and the topic says it is unreliable in New York, most of all from fall to spring. Say if the
+   is a last resort, and the topic says no source gives a time for New York, so treat it as unreliable there
+   (fix round 2). Say if the
    group wants sunlight dropped altogether.
 25. **Disinfecting a well (surv-wells-without-power) — Water pack Task 5.** (a) CDC's current table prints 3 1/4 cups
    of bleach for 30 ft of water in a 10 in casing; CDC's earlier version and its own metric table (888 mL) give
@@ -255,7 +256,9 @@ Source disagreements found while checking the Survival topics. Each says what th
    the topic adds: let it stand 12 hours, then bail until the chlorine smell is gone (the app's reading), with goggles
    or a face shield (CDC) and never climbing into the well (WHO). (e) Fix round 1: CDC's step mixes the bleach with 3
    to 5 gallons of water in a 5-gallon bucket, but its tables reach 10 gallons (drilled) and 13 3/4 gallons (dug) of
-   bleach alone; CDC does not say what to do then, and no opened source does, so the topic is silent. Say if a well
+   bleach alone; CDC does not say what to do then, and no opened source does. Fix round 2: the topic now says to
+   mix and pour in several batches until all the bleach from the table is in, and not to use less bleach to make it
+   fit, marked as the app's reading. Say if a well
    contractor or the health department should check (d) and (e) before the group relies on them.
 26. **Springs (surv-find-water, surv-wells-without-power) — Water pack Task 5.** Army ATP 3-50.21: springs are
    "typically the safest open source". Penn State Extension: springs are highly susceptible to contamination and most

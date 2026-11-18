@@ -2061,6 +2061,15 @@ re-opened by web fetch on 2026-11-18 before writing. Draft removed from all four
 - M13: added to "Power off": "When the power comes back, make sure it is fully restored before you start the pump (Private Well Class)." PWC: "Make sure that the power has been fully restored before attempting to start your well pump."
 - Unverified items: CDC-FLOOD list re-opened: "Human and livestock waste"; "Household, medical, and industrial hazardous waste (chemical, biological, and radiological)"; "Floods can cause containers of chemicals to move from their normal storage spots." Matches the topic. FW credit re-opened: "This brochure was developed by the Federal Emergency Management Agency in cooperation with the American Red Cross" "and the U.S. Department of Agriculture." Matches. ARC-PIPES: see I4.
 
+### Task 5 fix round 2 (2026-11-18)
+
+Re-review "Re-review, fix round 1" (APPROVED with N1 to N5 and M7). No new source needed; wording only.
+- M7 (surv-wells-without-power, new step after the bucket step): "If the bleach and water won't fit in one bucket, mix and pour it in several batches until all the bleach from the table is in. Don't use less bleach to make it fit (the app's reading; CDC does not say)." Group judgement following CDC-WELL's table amounts; D25(e) updated.
+- N2 (surv-make-water-safe, under the method table). Old: "None of these methods removes fuel, chemicals or algal toxins (CDC, WHO). Distillation and reverse osmosis remove salt; distillation also removes heavy metals and most, not all, other chemicals (FEMA)." New: "Boiling, bleach, iodine, chlorine dioxide, filters, UV and sunlight don't remove fuel, chemicals or algal toxins (CDC, WHO). Distillation removes salt, heavy metals and most, not all, other chemicals (FEMA), but don't distill water that smells of fuel or chemicals. Reverse osmosis removes salt (CDC)." Sources as in fix round 1 (WHO-TN5, CDC-HIKE, FW).
+- N3 (sunlight step 4). Old: "No source gives a time for New York, where the sun is weaker, most of all from fall to spring: there, treat sunlight as unreliable." New: "No source gives a time for New York: there, treat sunlight as unreliable." Unsourced clause removed; D24 likewise.
+- N4 (surv-find-water roof warn). Old: "For rain collected off a roof, FEMA (Where can I find clean drinking water after a disaster?) and Lake Champlain Sea Grant say not to drink it." New: "FEMA (Where can I find clean drinking water after a disaster?) says not to drink collected rainwater, and Lake Champlain Sea Grant says the same of roof water. This app applies FEMA's rule to rain off a roof." FEMA-Q: "Do NOT drink water from swimming pools, spas and collected rainwater."; LCSG: "harvested rainwater is unsafe for drinking, cooking, or washing".
+- N5 (wells no-pump line). Old: "the water is strong bleach (CDC)". New: "the water is a strong chlorine solution (CDC)". CDC-WELL: "Wear protective goggles or a face shield when working with chlorine solutions."
+
 ## Water pack Task 6: toilets, latrines, garbage (2026-11-18)
 
 Files (all draft): src/survival/surv-toilet-no-water.json, surv-latrines.json, surv-garbage-and-greywater.json,

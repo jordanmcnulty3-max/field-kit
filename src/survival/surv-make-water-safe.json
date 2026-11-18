@@ -127,7 +127,7 @@
           "p": "Table from CDC; distillation from FEMA. To take salt out of water you need a reverse osmosis filter (CDC) or distillation (FEMA)."
         },
         {
-          "p": "None of these methods removes fuel, chemicals or algal toxins (CDC, WHO). Distillation and reverse osmosis remove salt; distillation also removes heavy metals and most, not all, other chemicals (FEMA)."
+          "p": "Boiling, bleach, iodine, chlorine dioxide, filters, UV and sunlight don’t remove fuel, chemicals or algal toxins (CDC, WHO). Distillation removes salt, heavy metals and most, not all, other chemicals (FEMA), but don’t distill water that smells of fuel or chemicals. Reverse osmosis removes salt (CDC)."
         }
       ]
     },
@@ -283,7 +283,7 @@
             "Use clear water only. If it is cloudy, filter it through a clean cloth, paper towel or coffee filter, or let it settle and draw off the clear water (CDC).",
             "Fill clean, clear plastic bottles of 1 or 2 liters (about 1 or 2 quarts) (CDC; WHO for the size).",
             "Lay the bottles on their side in direct sun, on a dark surface if you can (CDC).",
-            "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy. WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud. No source gives a time for New York, where the sun is weaker, most of all from fall to spring: there, treat sunlight as unreliable.",
+            "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy. WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud. No source gives a time for New York: there, treat sunlight as unreliable.",
             "Let the water cool and shake it hard before you drink it (WHO)."
           ]
         }

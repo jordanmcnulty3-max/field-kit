@@ -469,6 +469,29 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 .sv-check input{flex:none;width:28px;height:28px;margin:0;accent-color:var(--c)}
 .sv-check:has(input:checked) .sv-ctext{text-decoration:line-through;color:var(--muted)}
 .sv-cnote{display:block;margin-top:2px;font-size:14px;color:var(--muted)}
+.sv-qty{font-weight:700;font-variant-numeric:tabular-nums}
+.sv-check:has(input:checked) .sv-qty{color:var(--muted)}
+.sv-group{min-width:0;margin:0 0 12px;padding:4px 12px 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.sv-group legend{padding:0 4px;font-weight:700}
+.sv-gfield{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 8px}
+.sv-gfield label{min-width:0;font-weight:600}
+.sv-step{display:flex;flex:none;align-items:center;gap:4px}
+.sv-step button{min-width:48px;min-height:48px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:inherit;font-size:24px;line-height:1;cursor:pointer}
+.sv-step button[aria-disabled="true"]{opacity:.45;cursor:default}
+.sv-step input{width:4.5em;padding:8px 4px;text-align:center;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
+.sv-step input::-webkit-inner-spin-button,.sv-step input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.sv-gsum{margin:0 0 10px;font-size:15px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.wp-extras{display:grid;gap:8px;min-width:0;margin:0 0 12px;padding:0;border:0}
+.wp-extras legend{margin:0 0 8px;padding:0;font-weight:700}
+.wp-out{margin:0 0 12px;padding:12px;border:2px solid var(--c);border-radius:8px}
+.wp-out h3{margin:0 0 4px;font-size:18px}
+.wp-big{margin:0 0 8px;font-size:28px;line-height:1.2;font-weight:700;font-variant-numeric:tabular-nums}
+.wp-l{font-size:18px;font-weight:600;color:var(--muted)}
+.wp-res dl{margin:0;display:grid;gap:4px}
+.wp-res dl div{display:flex;justify-content:space-between;gap:12px}
+.wp-res dt{color:var(--muted)}
+.wp-res dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.wp-basis,.wp-note{margin:8px 0 0;font-size:14px;color:var(--muted)}
 .sv-sos-btns{display:grid;gap:8px;margin:0 0 12px}
 .sv-sos-btns .btn{min-height:56px}
 .sv-light{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center;width:100%;margin:0;padding:0 16px calc(24px + env(safe-area-inset-bottom,0px));

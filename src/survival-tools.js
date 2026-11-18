@@ -6,8 +6,69 @@
      survival.js calls that on every way of leaving the page (Back, tab switch, opening another page). */
   const TOOLS = {
     sos: { label: 'SOS light', keywords: 'morse signal distress flash flashlight rescue screen light', draw: drawSos },
-    daylight: { label: 'Daylight and moon', keywords: 'sunrise sunset sun moon moonrise moonset moon phase full moon new moon daylight day length twilight first light last light dawn dusk almanac', draw: drawDaylight }
+    daylight: { label: 'Daylight and moon', keywords: 'sunrise sunset sun moon moonrise moonset moon phase full moon new moon daylight day length twilight first light last light dawn dusk almanac', draw: drawDaylight },
+    water: { label: 'Water planner', keywords: 'water how much water drinking water gallons litres liters storage store stock up emergency supply jugs containers drums barrels group people days calculator', draw: drawWater }
   };
+
+  /* ---------- Water planner ----------
+     People and days (the saved group) in; the water to store out, in gallons and litres, pounds and container counts.
+     Every number comes from FK_DATA.tooldata.water (src/tooldata/water.json, sourced and release-gated). Missing, draft or
+     unusable data shows no totals at all: the planner never falls back to a number nobody sourced. */
+  const NO_WATER_DATA = 'The water planner’s numbers are not available yet. No totals are shown until they have been checked against sources.';
+  const GALLONS = /^gal(lons?)?$/i;
+  const EXTRA = /^extra[A-Z][A-Za-z0-9]*PerPersonDay$/;
+  const plain = v => !!v && typeof v === 'object' && !Array.isArray(v);
+  const filled = v => typeof v === 'string' && v.trim() !== '';
+  function waterData() {
+    const all = window.FK_DATA && plain(window.FK_DATA.tooldata) ? window.FK_DATA.tooldata : null;
+    const w = all && Object.hasOwn(all, 'water') ? all.water : null;
+    if (!plain(w) || w.draft === true || !plain(w.values)) return null;
+    const val = name => { const v = Object.hasOwn(w.values, name) ? w.values[name] : null; return plain(v) && FK.fin(v.value) && v.value > 0 ? v : null; };
+    const drink = val('drinkPerPersonDay'), lpg = val('litersPerGallon'), lbg = val('lbPerGallon');
+    if (!drink || !GALLONS.test(String(drink.unit)) || !lpg || !lbg) return null;
+    const extras = Object.keys(w.values).filter(k => EXTRA.test(k)).map(k => ({ k, v: val(k) }))
+      .filter(x => x.v && GALLONS.test(String(x.v.unit)) && filled(x.v.note));
+    return { w, drink, lpg: lpg.value, lbg: lbg.value, extras };
+  }
+
+  function drawWater(el) {
+    const S = FK.survival, esc = FK.esc, d = waterData();
+    if (!d) { el.innerHTML = '<p class="sv-warn">' + esc(NO_WATER_DATA) + '</p>'; return; }
+    const on = new Set();   // extras chosen for today: not saved, they describe the situation now
+    const perDay = () => d.extras.reduce((s, x) => s + (on.has(x.k) ? x.v.value : 0), d.drink.value);
+    const n = v => S.fmt(Number(v.toPrecision(12)));   // a figure from the data, shown as it is
+    const counted = (v, one, many) => S.fmt(v) + ' ' + (v === 1 ? one : many);
+    function totals(g) {
+      const gal = S.roundUp(g.people * g.days * perDay());
+      return { gal, litres: S.roundUp(gal * d.lpg), lb: S.roundUp(gal * d.lbg), jugs: gal, fives: Math.ceil(gal / 5), drums: Math.ceil(gal / 55) };
+    }
+    const sources = (Array.isArray(d.w.sources) ? d.w.sources : []).filter(s => plain(s) && filled(s.name)).map(s => s.name);
+    const row = (k, label, value) => '<div><dt>' + label + '</dt><dd data-k="' + k + '">' + esc(value) + '</dd></div>';
+    el.innerHTML = '<div class="sv-gwrap"></div>' +
+      (d.extras.length ? '<fieldset class="wp-extras"><legend>Add for today’s conditions</legend>' + d.extras.map(x =>
+        '<label class="sv-check"><input type="checkbox" data-extra="' + esc(x.k) + '"><span>' + esc(x.v.note) + '</span></label>').join('') + '</fieldset>' : '') +
+      '<section class="wp-out" aria-labelledby="wpTitle"><h3 id="wpTitle">Water to store</h3><div class="wp-res"></div><p class="wp-basis"></p>' +
+      [d.w.title, d.drink.note].filter(filled).map(t => '<p class="wp-note">' + esc(t) + '</p>').join('') + '</section>' + S.footHTML(d.w);   // what the total covers and does not, in the data's words
+    const res = el.querySelector('.wp-res'), basis = el.querySelector('.wp-basis');
+    function render(g) {
+      const t = totals(g), extra = perDay() - d.drink.value;
+      res.innerHTML = '<p class="wp-big"><span data-k="gal">' + esc(counted(t.gal, 'gallon', 'gallons')) + '</span> <span class="wp-l">(<span data-k="litres">' + esc(counted(t.litres, 'litre', 'litres')) + '</span>)</span></p>' +
+        '<dl>' + row('lb', 'Weight', S.fmt(t.lb) + ' lb') + row('jugs', '1-gallon jugs', counted(t.jugs, 'jug', 'jugs')) +
+        row('fives', '5-gallon containers', counted(t.fives, 'container', 'containers')) + row('drums', '55-gallon drums', counted(t.drums, 'drum', 'drums')) + '</dl>';
+      basis.textContent = 'Based on ' + n(d.drink.value) + ' gal per person per day' + (extra > 0 ? ', plus ' + n(extra) + ' gal for today’s conditions' : '') +
+        ', for ' + S.groupWords(g) + '.' + (sources.length ? ' Source: ' + sources[0] + (sources.length > 1 ? ', and ' + (sources.length - 1) + ' more under Sources.' : '.') : '');
+    }
+    const ed = S.mountGroup(el.querySelector('.sv-gwrap'), g => { const t = totals(g); return counted(t.gal, 'gallon', 'gallons') + ' (' + counted(t.litres, 'litre', 'litres') + ') for ' + S.groupWords(g); }, render);
+    el.addEventListener('change', e => {
+      const b = e.target.closest('[data-extra]');
+      if (!b) return;
+      if (b.checked) on.add(b.dataset.extra); else on.delete(b.dataset.extra);
+      render(S.group());
+      ed.refresh();
+    });
+    render(S.group());
+    return ed.stop;
+  }
 
   /* ---------- SOS light ---------- */
   const UNIT_MS = 200;

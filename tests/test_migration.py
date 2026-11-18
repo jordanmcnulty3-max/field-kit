@@ -348,3 +348,77 @@ def test_restore_of_a_file_without_tq_keeps_the_phones_timers(page, app_url, tmp
     pick(page, tmp_path, backup_file({'fk.night': 'true'}))
     restore_now(page)
     assert json.loads(ls(page, 'tq')) == mine
+
+
+# ---------- Water pack (v7.2): the saved group, and topics that moved category (plan Review Focus 4) ----------
+
+def _water_pack_boot(page, app_url, raw=None, hash_='#/survival'):
+    from .conftest import inject_data
+    from .test_survival_group import QCL, WATER
+    moved = [{'id': tid, 'title': title, 'category': 'water', 'keywords': [], 'summary': '',
+              'sections': [{'h': 'Fixture', 'blocks': [{'p': 'Fixture text.'}]}],
+              'sources': [{'name': 'Fixture source', 'used': 'everything'}], 'reviewed': '2026-11-18'}
+             for tid, title in (('surv-find-water', 'Find water'), ('surv-make-water-safe', 'Make water safe'))]
+    inject_data(page, topics=moved, checklists=[QCL], tooldata={'water': WATER})
+    boot(page, app_url, raw, hash_=hash_)
+
+
+def _app_version():
+    src = open(os.path.join(os.path.dirname(__file__), '..', 'src', 'app.js'), encoding='utf-8').read()
+    return re.search(r"APP_VERSION = '([\d.]+)'", src).group(1)
+
+
+def test_v7_backup_without_group_restores_with_the_default_group_and_old_water_pins_and_recents_open(page, app_url, tmp_path):
+    _water_pack_boot(page, app_url, {'fk.group': json.dumps({'people': 6, 'days': 30})})
+    v7 = backup_file({'fk.pins': json.dumps(['s:surv-find-water']), 'fk.recent': json.dumps(['s:surv-make-water-safe', 'c:ten-essentials']),
+                      'fk.checks': json.dumps({'ten-essentials': ['item1']}), 'fk.night': 'false'}, version='7')
+    pick(page, tmp_path, v7)
+    restore_now(page)
+    assert ls(page, 'group') is None   # a backup without a group means no saved group: the defaults apply
+    assert page.evaluate('FK.survival.group()') == {'people': 1, 'days': 14}
+    page.click('#survPinned button[data-key="s:surv-find-water"]')
+    page.wait_for_function("location.hash === '#/survival/surv-find-water'")
+    assert page.inner_text('#survPage h2') == 'Find water'
+    page.go_back()
+    page.wait_for_function("location.hash === '#/survival'")
+    page.click('#survRecent button[data-key="s:surv-make-water-safe"]')
+    page.wait_for_function("location.hash === '#/survival/surv-make-water-safe'")
+    assert page.inner_text('#survPage h2') == 'Make water safe'
+    assert page.evaluate("FK.survival.open('c:store-water')") is True
+    page.wait_for_function("location.hash === '#/survival/list/store-water'")
+    assert page.inner_text('#survPage [data-qty="water"]') == '14 gal'
+    assert page.locator('#survPage .sv-group').count() == 1
+
+
+def test_backup_with_group_round_trips_and_a_current_version_file_with_group_restores(page, app_url, tmp_path):
+    _water_pack_boot(page, app_url, hash_='#/survival/tool/water')
+    page.wait_for_function('FK.survival && FK.survival.group')
+    assert page.evaluate('FK.survival.setGroup({ people: 5, days: 21 })') is True
+    b = backup(page, tmp_path)
+    assert b['version'] == _app_version()
+    assert json.loads(b['data']['fk.group']) == {'people': 5, 'days': 21}
+    page.click('#menuClose')
+    page.evaluate("localStorage.removeItem('fk.group')")
+    pick(page, tmp_path, b)
+    restore_now(page)
+    assert json.loads(ls(page, 'group')) == {'people': 5, 'days': 21}
+    assert page.evaluate('FK.survival.group()') == {'people': 5, 'days': 21}
+    assert page.inner_text('#survPage [data-k="gal"]') == '105 gallons'
+    # a hand-made file at this version (7.2 once the pack ships) carrying a group and the pack's other keys
+    f = backup_file({'fk.group': json.dumps({'people': 3, 'days': 7}), 'fk.pins': json.dumps(['u:water', 'c:store-water']),
+                     'fk.checks': json.dumps({'store-water': ['water']})}, version=_app_version())
+    pick(page, tmp_path, f)
+    restore_now(page)
+    assert page.evaluate('FK.survival.group()') == {'people': 3, 'days': 7}
+    assert page.inner_text('#survPage [data-k="gal"]') == '21 gallons'
+    assert page.evaluate('FK.pins.all()') == ['u:water', 'c:store-water']
+
+
+def test_restored_junk_group_falls_back_to_defaults(page, app_url, tmp_path):
+    _water_pack_boot(page, app_url, hash_='#/survival/tool/water')
+    for junk in ('"x"', '{"people": 1e9, "days": -3}', '[]'):
+        pick(page, tmp_path, backup_file({'fk.group': junk}, version='7'))
+        restore_now(page)
+        g = page.evaluate('FK.survival.group()')
+        assert 1 <= g['people'] <= 50 and 1 <= g['days'] <= 365, junk
+        assert 'NaN' not in page.inner_text('#survPage')

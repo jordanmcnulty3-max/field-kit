@@ -51,6 +51,86 @@
     return FK.store.set('checks', out);
   }
 
+  /* ---------- The group: who checklists and the water planner count for. Store 'group' = { people: 1–50, days: 1–365 } ---------- */
+  const LIMITS = { people: [1, 50], days: [1, 365] }, DEFAULT_DAYS = 14;
+  /* Round a need up to the next whole unit, never down. toPrecision(12) first drops floating-point noise
+     (0.1 x 30 = 3.0000000000000004 is 3, 0.3 x 30 = 8.999999999999998 is 9) without touching any real fraction. */
+  const up = x => Math.ceil(Number(x.toPrecision(12)));
+  const own = (o, k) => (plain(o) && Object.hasOwn(o, k) ? o[k] : undefined);
+  /* The planning period a source gives (tooldata water.planDays), when there is reviewed water data; else 14 days. */
+  function defaultDays() {
+    const w = own(window.FK_DATA, 'tooldata'), water = own(w, 'water');
+    const v = water && water.draft !== true ? own(own(own(water, 'values'), 'planDays'), 'value') : undefined;
+    return FK.fin(v) && v >= 1 ? Math.min(LIMITS.days[1], up(v)) : DEFAULT_DAYS;
+  }
+  /* A field that is not a finite number keeps its fallback; a number is rounded up and clamped to its range. */
+  const fit = (v, [lo, hi], dflt) => (FK.fin(v) ? Math.min(hi, Math.max(lo, up(v))) : dflt);
+  const readGroup = (v, base) => ({ people: fit(own(v, 'people'), LIMITS.people, base.people), days: fit(own(v, 'days'), LIMITS.days, base.days) });
+  let keptGroup = null;   // a group this visit accepted but the phone's storage could not keep: used until a save works or the app reloads
+  function group() {
+    return keptGroup ? { ...keptGroup } : readGroup(FK.store.get('group', null), { people: 1, days: defaultDays() });
+  }
+  /* Clamps, stores integers and emits 'group' when the group changed. False when storage is full (the new group is still used). */
+  function setGroup(g) {
+    const before = group(), next = readGroup(g, before);
+    const ok = FK.store.set('group', next);
+    keptGroup = ok ? null : next;
+    if (next.people !== before.people || next.days !== before.days) FK.emit('group', { ...next });
+    return ok;
+  }
+  const watchers = new Set();
+  FK.on('group', g => watchers.forEach(fn => fn(g)));
+
+  const fmt = n => n.toLocaleString('en-US');
+  const counted = (n, one, many) => fmt(n) + ' ' + (n === 1 ? one : many);
+  const groupWords = g => counted(g.people, 'person', 'people') + ' for ' + counted(g.days, 'day', 'days');
+
+  /* The group editor: two labelled number fields with 48 px steppers and a status line. The fields commit on change
+     (leaving the field, Enter, a stepper, the arrow keys), never on each keystroke, so the status line speaks once per change.
+     host is filled with the editor; summary(group) gives the status line's text; onChange(group) runs after every change of
+     the group, from this editor or anywhere else, until stop() (call it when the page closes). refresh() redraws the status line. */
+  function mountGroup(host, summary, onChange) {
+    const field = (k, label, fewer, more) => {
+      const [lo, hi] = LIMITS[k];
+      return '<div class="sv-gfield"><label for="svG-' + k + '">' + label + '</label><div class="sv-step">' +
+        '<button type="button" data-gstep="' + k + '" data-d="-1" aria-label="' + fewer + '">−</button>' +
+        '<input id="svG-' + k + '" type="number" inputmode="numeric" min="' + lo + '" max="' + hi + '" step="1" data-gfield="' + k + '">' +
+        '<button type="button" data-gstep="' + k + '" data-d="1" aria-label="' + more + '">+</button></div></div>';
+    };
+    host.innerHTML = '<fieldset class="sv-group"><legend>Your group</legend>' + field('people', 'People', 'One fewer person', 'One more person') +
+      field('days', 'Days', 'One fewer day', 'One more day') + '<p class="sv-gsum" role="status"></p></fieldset>';
+    const fs = host.querySelector('.sv-group'), live = fs.querySelector('.sv-gsum');
+    const refresh = () => { const t = summary(group()); if (live.textContent !== t) live.textContent = t; };
+    function paint() {
+      const g = group();
+      for (const k of Object.keys(LIMITS)) {
+        const input = fs.querySelector('[data-gfield="' + k + '"]');
+        if (input.value !== String(g[k])) input.value = g[k];
+        for (const b of fs.querySelectorAll('[data-gstep="' + k + '"]')) b.setAttribute('aria-disabled', String(g[k] === LIMITS[k][b.dataset.d < 0 ? 0 : 1]));
+      }
+      refresh();
+    }
+    function commit(k, v) {   // a blank or unreadable field goes back to the saved value
+      if (FK.fin(v) && !setGroup({ ...group(), [k]: v })) FK.toast(FK.FULL_MSG);
+      paint();
+    }
+    const read = input => (input.value.trim() === '' ? NaN : Number(input.value));
+    fs.addEventListener('change', e => { const i = e.target.closest('[data-gfield]'); if (i) commit(i.dataset.gfield, read(i)); });
+    fs.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-gfield]')) { e.preventDefault(); commit(e.target.dataset.gfield, read(e.target)); } });
+    fs.addEventListener('click', e => { const b = e.target.closest('[data-gstep]'); if (b) commit(b.dataset.gstep, group()[b.dataset.gstep] + Number(b.dataset.d)); });
+    const watch = g => { paint(); onChange(g); };
+    watchers.add(watch);
+    paint();
+    return { refresh, stop: () => watchers.delete(watch) };
+  }
+
+  /* A checklist item's quantity for the group: { amount > 0, unit, per: 'person' | 'personDay' }. Anything else is ignored. */
+  const okQty = q => plain(q) && FK.fin(q.amount) && q.amount > 0 && filled(q.unit) && (q.per === 'person' || q.per === 'personDay');
+  function qtyText(q, g) {   // '' when the total would not be a sensible whole number
+    const n = up(q.amount * g.people * (q.per === 'personDay' ? g.days : 1));
+    return Number.isSafeInteger(n) && n > 0 ? fmt(n) + ' ' + q.unit : '';
+  }
+
   /* ---------- Page providers: checklists are drawn here, tools by src/survival-tools.js (#/survival/list/<id>, #/survival/tool/<name>) ---------- */
   const providers = { list: [], tool: [] };
   function registerPage(segment, fn) {
@@ -112,13 +192,19 @@
 
   /* ---------- Checklist pages (#/survival/list/<id>): native checkboxes, a count, Clear ticks with an in-page second tap ---------- */
   const countOf = id => ticks(id).length + '/' + checklist(id).items.length;
+  const scales = c => c.items.some(it => okQty(it.qty));
   function checklistHTML(c) {
-    const on = new Set(ticks(c.id));
-    const rows = c.items.map((it, i) => '<li><label class="sv-check"><input type="checkbox" data-item="' + esc(it.id) + '" aria-labelledby="svCt' + i + '"' +
-      (filled(it.note) ? ' aria-describedby="svCn' + i + '"' : '') + (on.has(it.id) ? ' checked' : '') + '><span><span id="svCt' + i + '" class="sv-ctext">' + esc(it.text) + '</span>' +
-      (filled(it.note) ? '<small id="svCn' + i + '" class="sv-cnote">' + esc(it.note) + '</small>' : '') + '</span></label></li>').join('');
+    const on = new Set(ticks(c.id)), g = group();
+    const rows = c.items.map((it, i) => {
+      const has = okQty(it.qty), q = has ? qtyText(it.qty, g) : '';
+      const desc = [has ? 'svCq' + i : '', filled(it.note) ? 'svCn' + i : ''].filter(Boolean).join(' ');
+      return '<li><label class="sv-check"><input type="checkbox" data-item="' + esc(it.id) + '" aria-labelledby="svCt' + i + '"' +
+        (desc ? ' aria-describedby="' + desc + '"' : '') + (on.has(it.id) ? ' checked' : '') + '><span><span id="svCt' + i + '" class="sv-ctext">' + esc(it.text) + '</span>' +
+        (has ? ' <span id="svCq' + i + '" class="sv-qty" data-qty="' + esc(it.id) + '"' + (q ? '' : ' hidden') + '>' + esc(q) + '</span>' : '') +
+        (filled(it.note) ? '<small id="svCn' + i + '" class="sv-cnote">' + esc(it.note) + '</small>' : '') + '</span></label></li>';
+    }).join('');
     return '<article class="sv-page" data-list="' + esc(c.id) + '">' + headHTML('c:' + c.id, c) +
-      (filled(c.summary) ? '<p>' + esc(c.summary) + '</p>' : '') +
+      (filled(c.summary) ? '<p>' + esc(c.summary) + '</p>' : '') + (scales(c) ? '<div class="sv-gwrap"></div>' : '') +
       '<div class="sv-checkbar"><p class="sv-count" role="status">' + esc(countOf(c.id)) + '</p>' +
       '<button type="button" class="btn ghost" data-act="clear-ticks" aria-disabled="' + (on.size ? 'false' : 'true') + '">Clear ticks</button></div>' +
       '<ul class="sv-checks">' + rows + '</ul>' + footHTML(c) + '</article>';
@@ -129,7 +215,15 @@
     if (!c) return false;
     el.innerHTML = checklistHTML(c);
     FK.recent.add('c:' + id);
-    return () => { clearTimeout(clearT); clearT = null; clearSure = false; };
+    const wrap = el.querySelector('.sv-gwrap');
+    /* Only the quantities change with the group: the rows, their ticks and focus stay as they are. */
+    const ed = wrap && mountGroup(wrap, g => 'Quantities for ' + groupWords(g), g => {
+      for (const it of c.items) {
+        const s = okQty(it.qty) && [...el.querySelectorAll('[data-qty]')].find(x => x.dataset.qty === it.id);
+        if (s) { const t = qtyText(it.qty, g); s.textContent = t; s.hidden = !t; }
+      }
+    });
+    return () => { clearTimeout(clearT); clearT = null; clearSure = false; if (ed) ed.stop(); };
   }
   let clearT = null, clearSure = false;
   function paintClear(c) {
@@ -403,9 +497,10 @@
   });
   FK.on('route', onRoute);
 
-  /* tools() and the tool pages come from src/survival-tools.js, which loads after this file; headHTML and recent are shared with it. */
+  /* tools() and the tool pages come from src/survival-tools.js, which loads after this file; headHTML, footHTML, the group
+     editor and the rounding and number helpers are shared with it. */
   FK.survival = { topics, topic, checklists, checklist, ticks, open, renderHome, refreshHome: renderHome, registerPage, homeItems, filter,
-    tools: () => [], headHTML };
+    tools: () => [], headHTML, footHTML, group, setGroup, mountGroup, groupWords, roundUp: up, fmt };
   // The router's first route ran before this file loaded; wait until the rest of the script (page providers) has loaded too.
   queueMicrotask(() => onRoute(FK.route.current()));
 })();

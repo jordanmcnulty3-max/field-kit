@@ -52,6 +52,10 @@
           ]
         },
         {
+          "fig": "heater-clearance",
+          "cap": "Keep anything that can burn at least 3 feet (1 m) from the stove or fireplace. Use one only if it is vented to the outside."
+        },
+        {
           "link": "s:surv-carbon-monoxide",
           "label": "Carbon monoxide and burning fuel indoors"
         },

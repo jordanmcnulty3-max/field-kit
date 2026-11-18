@@ -33,8 +33,12 @@ REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water', 'surv-f
 PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-safe': {'water-safe'},
                  'surv-water-in-the-house': {'water-heater-drain'}, 'surv-toilet-no-water': {'toilet-buckets'},
                  'surv-latrines': {'latrine'}, 'surv-handwashing': {'handwash-station'},
-                 # heat pack Task 7 deepens fire and shelter as drafts: they keep the figures restored in v7 Task 16b, no more
-                 'surv-fire': {'fire-sizes', 'fire-platform', 'fire-lays'}, 'surv-shelter': {'shelter-site', 'shelter-debris', 'shelter-leanto', 'shelter-snow'}}
+                 # heat pack Task 7 deepened fire and shelter; heat pack Task 8 restores fire-ferro (push the striker down) and
+                 # shelter-tarp (tarp lean-to) redrawn to the checked text, and adds the quinzhee, generator, stove and warm-room figures
+                 'surv-fire': {'fire-sizes', 'fire-platform', 'fire-lays', 'fire-ferro'},
+                 'surv-shelter': {'shelter-site', 'shelter-debris', 'shelter-leanto', 'shelter-snow', 'shelter-tarp', 'quinzhee'},
+                 'surv-generators': {'generator-placement'}, 'surv-wood-stoves-fireplaces': {'heater-clearance'},
+                 'surv-heat-out': {'warm-room'}}
 
 
 def new_topics():

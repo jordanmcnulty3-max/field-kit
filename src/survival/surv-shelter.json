@@ -83,6 +83,10 @@
           ]
         },
         {
+          "fig": "shelter-tarp",
+          "cap": "Tarp lean-to. The ropes hold the high front edge between the trees; the low back edge is staked down, into the wind."
+        },
+        {
           "p": "For tying the ropes, see Knots."
         },
         {
@@ -210,6 +214,10 @@
             "Leave the last foot of snow as raised beds, and dig a narrow trench between them down to the ground so cold air drains out (Scout Life).",
             "Mark the entrance, keep a small shovel inside in case you have to dig your way out, and change into warm, dry clothes once it’s built (Scout Life)."
           ]
+        },
+        {
+          "fig": "quinzhee",
+          "cap": "Quinzhee cut in half. Stop digging wherever you reach the end of a stick. Leave a ventilation hole near the top, and raised beds with a trench between them so cold air drains out."
         }
       ]
     },

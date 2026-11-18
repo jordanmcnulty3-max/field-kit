@@ -1325,8 +1325,8 @@ Figure files are unchanged in figs/; only the topic fig blocks were removed.
 - fire-sizes: label fixes (later small task). Kindling is pencil-lead to thumb thick; fuel is forearm thick (not "wrist-thick and up"). Done in Task 16b: kindling "pencil lead to thumb thick", fuel "forearm thick and up", tinder "dry, fine material"; figure restored to surv-fire.
 - fire-platform: label fixes (later small task). Drop "or flat rocks"; the base is for deep snow, not "snow or wet ground". Done in Task 16b: "Green logs only, two layers, crosswise" and "Deep snow"; figure restored to surv-fire after the build steps.
 - river: label and drawing fix (later small task). "Angle slightly downstream" and the drawn path (about 21 degrees) should show about 45 degrees downstream. Done in Task 16b: label "About 45 degrees downstream", path redrawn at 45 degrees; figure restored to surv-river-crossings.
-- shelter-tarp: needs a new drawing (waits for its pack). Drawn as an A-frame with the low end into the wind; the text is now a poncho lean-to with its back into the wind.
-- fire-ferro: needs a new drawing (waits for its pack). Drawn as the pull-back method; the text is now the Army method (striker driven down the rod).
+- shelter-tarp: needs a new drawing (waits for its pack). Drawn as an A-frame with the low end into the wind; the text is now a poncho lean-to with its back into the wind. Done in heat pack Task 8: redrawn as the tarp lean-to and restored to surv-shelter.
+- fire-ferro: needs a new drawing (waits for its pack). Drawn as the pull-back method; the text is now the Army method (striker driven down the rod). Done in heat pack Task 8: redrawn as the push-the-striker-down method and restored to surv-fire.
 
 ### Task 14 fix round 1 (2026-11-17)
 
@@ -3104,3 +3104,70 @@ author confirmed); TC pp. 10-6 to 10-7, https://ia601500.us.archive.org/28/items
 - M4 surv-shelter, snow cave intro: "Dig in as little clothing as you can, so you have dry clothes to change into when you finish (Army TC 21-3)." — TC p. 10-6 ("They should wear the minimum amount of clothing to ensure that they have a change of dry clothing when finished."); "from sweat and snow" — TC ("wet from perspiration and from the snow inside the cave").
 - M5 surv-fire, softwood: "burn faster and make more smoke unless you keep a large flame going" — ATP 5-20.
 - Draft removed from both topics.
+
+## Heat pack Task 8: diagrams (2026-11-18)
+
+Every drawn word and number below comes from the topic named, in the section the figure sits in unless another section is named; no figure adds a fact, and no figure opened a new source. Each was rendered in the built app at 360 x 640, day and night, and in the enlarged view. Not drawn in this task: `layers` and `car-exhaust-clear` (their topics are still in review), and `snow-trench` (Shelter already carries `shelter-snow`, a snow trench; the quinzhee was drawn instead because its section gives every size drawn).
+
+### shelter-tarp (surv-shelter, "Tarp lean-to, step by step", after the steps)
+
+Redrawn: the old figure was an A-frame over a ridgeline with the low end into the wind. Now a three-quarter view of the tarp lean-to, seen from the open side, wind from the left. It is a different drawing from `shelter-leanto` (poles and boughs with a fire and log wall, under Build): no fire, a flat tarp, ropes, drip sticks and stakes.
+- Two trees: "two trees or poles 7 to 10 feet (2 to 3 m) apart" (spacing not labelled).
+- "Each rope tied to its tree about waist high": step 5, "Tie each rope to its tree about waist high, so the high edge is stretched between the trees." Ropes run from the corners of the high edge (step 3, "Tie one half to each corner of one long edge of the tarp").
+- "High front edge": step 3, "This edge is the high front edge."
+- "Drip stick" (one on each rope, next to the tarp): step 4, "Tie a drip stick ... to each rope about 1 inch (2.5 cm) from the tarp." Sizes not labelled.
+- "Low, staked edge: back into the wind", stakes along the low edge, wind arrows on that side: step 6, "stake its other long edge to the ground with sharpened sticks through the grommets. The low, staked edge is the back of the lean-to, facing into the wind"; step 1, "The back of the lean-to must face into the wind."
+- "Open side faces away from the wind", arrow out of the open side: step 6, "The open side, under the high edge, faces away from it."
+- Not drawn: the hood tie-off, the centre pole or hood line, brush at the sides, bedding.
+- Caption: "Tarp lean-to. The ropes hold the high front edge between the trees; the low back edge is staked down, into the wind." Step 5, "The ropes and the tarp's high edge are the line between two trees"; step 6.
+
+### fire-ferro (surv-fire, "Ways to light it", after the list)
+
+Redrawn: the old figure held the striker still and pulled the rod back. Now the rod's tip sits in the tinder and the striker, square to the rod, is pushed down it.
+- "Ferro rod", "Rod tip at the tinder": "Ferro rod (metal match): hold the rod with its tip at the tinder."
+- "Striker at a right angle to the rod" (with a right-angle mark): "Hold the striker or a knife at a right angle to the rod".
+- "Drive it down the rod, firm, even pressure" (arrow along the rod toward the tip): "and drive it down the rod with firm, even pressure".
+- "Sparks land in the tinder": "so the sparks land in the tinder."
+- Caption: "Ferro rod. Hold the rod with its tip at the tinder and drive the striker down the rod, at a right angle to it." Same sentence.
+
+### generator-placement (surv-generators, "Where to run it", after the list)
+
+- "Outside only", "More than 20 feet (6 m) from any window, door or vent" (dimension from the house wall beside a window to the generator): "Outside only, more than 20 feet (6 m) from any window, door or vent (CDC, New York State Division of Consumer Protection)."
+- "Exhaust pointed away from your home" (exhaust arrow pointing away from the house): "Point the exhaust away from your home and from any other building someone can go into (CPSC)."
+- "Never in an attached garage, even with the door open" (crossed-out generator in a garage built onto the house, door up): "Never in an attached garage, even with the door open (NFPA)"; the same list, "Never inside a home, garage ...".
+- Not drawn: porch and carport, the 3 to 4 feet (0.9 to 1.2 m) clear space, rain cover.
+- Caption: the same three statements in the list's words.
+
+### heater-clearance (surv-wood-stoves-fireplaces, "Before you light it", after the list)
+
+Drawn as a wood stove, not a kerosene or propane heater: the agencies in Kerosene and propane heaters advise against those indoors, and the stove topic states the same 3 feet (1 m).
+- "At least 3 feet (1 m)" on each side, from the stove to an armchair and to curtains; "Anything that can burn": "Keep anything that can burn at least 3 feet (1 m) from the fireplace or stove (US Fire Administration)." The chair and curtains are things that burn; the topic names no kind of furniture for a stove (Kerosene and propane heaters lists sofas and curtains).
+- "Vented to the outside" (stovepipe up through the ceiling): "Use a fireplace or wood stove only if it is vented to the outside (CDC)."
+- Not drawn: the New York State Division of Homeland Security and Emergency Services 36 inches (1 m) from the wall (a separate rule; the test forbids "36" and "wall").
+- Caption: "Keep anything that can burn at least 3 feet (1 m) from the stove or fireplace. Use one only if it is vented to the outside."
+
+### warm-room (surv-heat-out, "One warm room", after the list)
+
+House plan, no numbers.
+- "Warm room", the smallest room, shaded: section heading "One warm room"; "Heat the smallest space you can live in, on the sheltered side of the house, with good insulation and few windows."
+- "Sheltered side of the house" (bracket under that side): same sentence. No wind is drawn: the topic does not name what the side is sheltered from.
+- One window in the warm room, two in each other room: "few windows".
+- "Blankets over the windows at night" (a blanket along the warm room's window): "Close the drapes or cover the windows with blankets at night (CDC)."
+- Closed door into the warm room, "Towels in the cracks under doors": "It should close off from the cold rooms with doors"; "Stuff towels or rags in the cracks under doors (CDC)."
+- "Close off rooms you don't need", "Cold room" (grey): "Close off rooms you don't need (CDC, FEMA)"; "close off from the cold rooms".
+- "Heating ducts blocked off" (crossed duct in a cold room): "Block off the heating ducts to rooms you are not heating (University of Missouri Extension)."
+- No heater is drawn: the topic sends each heat source to its own topic.
+- Caption: "Heat the smallest space you can live in, on the sheltered side of the house, and close it off from the cold rooms."
+
+### quinzhee (surv-shelter, "Quinzhee (snow mound)", after the steps)
+
+Cross-section of the mound. The sizes are the topic's, which it credits to the Appalachian Mountain Club and Scout Life.
+- "At least 5 feet (1.5 m) high" (dimension to the top): step 1, "a mound at least 5 feet (1.5 m) high". The ideal 7 to 8 feet is not drawn.
+- "Sticks a foot (30 cm) deep: walls at least 1 foot (30 cm) thick" (sticks reach exactly through the wall): step 3, "Push sticks a foot (30 cm) deep into the mound all over, from the outside"; step 4, "Stop wherever you reach the end of a stick, so the walls stay at least 1 foot (30 cm) thick".
+- "Ventilation hole" near the top: step 5, "Poke a small ventilation hole near the top of the dome."
+- "Raised beds", "Trench down to the ground so cold air drains out" (arrow down into the trench): step 6, "Leave the last foot of snow as raised beds, and dig a narrow trench between them down to the ground so cold air drains out."
+- "Entrance at the base on the downwind side" (dashed, in the far wall, since the cut runs across the beds): step 4, "Dig a small entrance at the base on the downwind side". No wind arrow: the cut is across the wind.
+- Not drawn: settling time, marking the entrance, the shovel.
+- Caption: "Quinzhee cut in half. Stop digging wherever you reach the end of a stick. Leave a ventilation hole near the top, and raised beds with a trench between them so cold air drains out." Steps 4 to 6.
+
+Test change: `tests/test_figs.py` pins each figure's drawn words to its topic (each phrase drawn is also in the topic text), forbids the old wording (A-frame, ridgeline, low end; pull, back, held still) and any number not part of a distance the topic states, checks each figure sits once in its section, and checks the tarp's geometry (wind onto the low, staked edge) and the ferro rod's (striker square to the rod, push toward the tip, tip in the tinder). `tests/test_survival_migration.py` `PINNED_FIGS`: surv-fire gains fire-ferro; surv-shelter gains shelter-tarp and quinzhee; surv-generators, surv-wood-stoves-fireplaces and surv-heat-out are pinned to their one figure.

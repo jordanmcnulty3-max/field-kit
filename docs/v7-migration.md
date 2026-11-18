@@ -411,3 +411,18 @@ Changes to existing fields:
 fixes change only text added in Task 7 (traced in docs/content-review.md, "Task 7 fix round 1"), add one paragraph to
 Fire's "Put it out" section after the New York rule ("Asleep counts as unattended ...", Army TC 21-3; the checked
 paragraphs are unchanged), and add TC 21-3 to Fire's sources. Draft. Old: `true`. New: removed from both topics.
+
+**Heat pack Task 9 consistency fixes (2026-11-18).** No v7-checked sentence reworded or removed; scope added around them
+(whole-pack review I1, traced in docs/content-review.md, "Heat pack Task 9: consistency fixes").
+
+- surv-fire, summary. Old: "Gather all your tinder, kindling and fuel first, then build and light the fire. Never leave it
+  unattended." New: "Gather all your tinder, kindling and fuel first, then build and light the fire outdoors. Never leave
+  it unattended. Fireplaces and wood stoves have their own topic." (scope word and pointer added).
+- surv-fire, "Put it out". New first paragraph: "These steps are for outdoor fires. A fire in a fireplace or wood stove has
+  its own rules: put it out before you go to sleep, with no fire watch, and never pour water into the chimney. See Wood
+  stoves and fireplaces." The checked paragraphs follow unchanged. The heat-pack paragraph (Task 7) now begins "Outdoors,"
+  and credits TC 21-3 for snow caves in severe weather. Links added: Wood stoves and fireplaces; Carbon monoxide and
+  burning fuel indoors. Source added: Wood stoves and fireplaces (checked). TC 21-3 "used" line extended.
+- surv-fire, "Carry a fire kit" link label. Old: "Ten essentials". New: "The ten essentials" (the topic's title).
+- surv-shelter: only heat-pack text changed (TC 21-3 credit in "Fire and stoves in and near shelters", "dry" dropped from
+  the quinzhee step, TC 21-3 "used" line).

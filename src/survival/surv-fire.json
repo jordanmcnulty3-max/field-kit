@@ -21,7 +21,7 @@
     "fire kit",
     "campfire"
   ],
-  "summary": "Gather all your tinder, kindling and fuel first, then build and light the fire. Never leave it unattended.",
+  "summary": "Gather all your tinder, kindling and fuel first, then build and light the fire outdoors. Never leave it unattended. Fireplaces and wood stoves have their own topic.",
   "sections": [
     {
       "h": "Gather everything first",
@@ -161,7 +161,7 @@
         },
         {
           "link": "s:surv-ten-essentials",
-          "label": "Ten essentials"
+          "label": "The ten essentials"
         }
       ]
     },
@@ -169,13 +169,24 @@
       "h": "Put it out",
       "blocks": [
         {
+          "p": "These steps are for outdoor fires. A fire in a fireplace or wood stove has its own rules: put it out before you go to sleep, with no fire watch, and never pour water into the chimney. See Wood stoves and fireplaces."
+        },
+        {
           "p": "Never leave a fire unattended. To put it out, drown it with water until every ember is wet, stir it and drown it again, then hold the back of your hand just above the ashes to feel for heat. If it’s too hot to touch, it’s too hot to leave."
         },
         {
           "p": "In normal times, New York allows campfires less than 3 feet high and 4 feet across, burning only charcoal or dry, clean, untreated wood, and they must never be left unattended. On New York state land in normal times, use only dead and down wood; cutting standing trees is prohibited."
         },
         {
-          "p": "Asleep counts as unattended. If a fire must burn while people sleep, one person stays awake to watch it; otherwise put it out before you sleep (Army TC 21-3 gives this rule for fires while people sleep)."
+          "p": "Outdoors, asleep counts as unattended. If a fire must burn while people sleep, one person stays awake to watch it; otherwise put it out before you sleep (Army TC 21-3 gives this rule for snow caves in severe weather; this app applies it to any outdoor fire)."
+        },
+        {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
         },
         {
           "link": "p:burns",
@@ -199,7 +210,7 @@
     },
     {
       "name": "US Army TC 21-3, Soldier's Handbook for Individual Operations and Survival in Cold-Weather Areas (1986), chapter 10",
-      "used": "Fires put out while personnel sleep (danger of fire, asphyxiation, carbon monoxide); if a fire is necessary while sleeping, an alert fire guard must be posted"
+      "used": "Fires put out while personnel sleep (danger of fire, asphyxiation, carbon monoxide); if a fire is necessary while sleeping, an alert fire guard must be posted (said of snow caves in severe weather; this app applies it to any outdoor fire)"
     },
     {
       "name": "USDA Forest Service, Intermountain Region, Fire Safety",
@@ -220,6 +231,10 @@
     {
       "name": "National Park Service, Ten Essentials (updated May 28, 2026)",
       "used": "Fire: matches (preferably waterproof) or a lighter and fire starters, items that catch fire quickly and sustain a flame; learn local fire regulations before heading out"
+    },
+    {
+      "name": "Wood stoves and fireplaces (surv-wood-stoves-fireplaces, checked)",
+      "used": "A fire in a fireplace or wood stove: put it out before you go to sleep (US Fire Administration, FEMA), no fire watch (this app’s choice there), never pour water into the chimney (University of Missouri Extension)"
     }
   ],
   "reviewed": "2026-11-18"

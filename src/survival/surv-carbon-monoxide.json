@@ -25,7 +25,7 @@
   "doFirst": [
     "CO alarm sounding? Don’t look for the cause. Get everyone outside into fresh air now, then call 911 or the fire department if you can. Count heads. Don’t go back in until responders say you can (CPSC).",
     "Someone has a headache, dizziness, sickness or confusion near something burning fuel? Get them and everyone else out into fresh air and open the Carbon monoxide poisoning protocol.",
-    "Never run a generator inside the house, garage, basement or crawlspace, even with doors and windows open (CDC, CPSC).",
+    "Never run a generator in the house, garage, basement, crawlspace, shed, porch or carport, even with doors and windows open (CDC, CPSC). See Generators.",
     "Never burn charcoal, or use a grill, hibachi, fuel lantern or camp stove indoors, and never heat the house with a gas oven or range (CDC, CPSC)."
   ],
   "sections": [
@@ -55,11 +55,12 @@
             "Oven, range or clothes dryer as a heater: never heat the house with a gas oven, range or dryer (CDC, CPSC). Never use an oven to heat your home (US Fire Administration).",
             "Anything made for outdoor use: don’t use heat sources designed for outside use indoors; they make carbon monoxide (New York State Division of Homeland Security and Emergency Services).",
             "Unvented stoves and fireplaces: don’t cook or burn anything on a stove or fireplace that isn’t vented (CDC).",
-            "A running vehicle: never run a car in an attached garage, even with the garage door open (CDC, CPSC)."
+            "A running vehicle: never run a car in an attached garage, even with the garage door open (CDC, CPSC).",
+            "A car stuck in snow: clear snow from the exhaust pipe, then run the engine and heater about 10 minutes each hour with one window slightly open. Everyone in the car stays awake while the engine runs; turn it off before anyone sleeps (National Weather Service, CDC, Red Cross; Carbon monoxide protocol). See Winter storms."
           ]
         },
         {
-          "p": "Fuel-burning heaters have their own rules: see Kerosene and propane heaters. CPSC: never run an unvented fuel-burning appliance in any room where people are sleeping."
+          "p": "Fuel-burning heaters have their own rules: see Kerosene and propane heaters. For an unvented fuel-burning heater: “Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol).”"
         },
         {
           "link": "s:surv-generators",
@@ -68,6 +69,14 @@
         {
           "link": "s:surv-portable-heaters",
           "label": "Kerosene and propane heaters"
+        },
+        {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        },
+        {
+          "link": "s:surv-winter-storms",
+          "label": "Winter storms"
         }
       ]
     },
@@ -97,7 +106,7 @@
           "list": [
             "US Department of Energy: unvented combustion space heaters are not recommended for use inside your home.",
             "New York State Department of Health: don’t use one as your main heat source, even during power failures. Running a generator outdoors for heat is a better option. The label New York requires on these heaters says it is a supplemental heat source and should not be the primary heat source.",
-            "Never run it in a room where anyone is sleeping (CPSC: never operate unvented fuel-burning appliances in any room where people are sleeping).",
+            "Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol).",
             "Have working CO alarms in the house if you use one (US Department of Energy: install a carbon monoxide detector if you use a small space heater).",
             "Have it installed by a professional, such as your gas supplier, and don’t buy one too big for the room (New York State Department of Health).",
             "Turn it off when you go to bed or leave the room (US Fire Administration, NFPA)."
@@ -217,6 +226,10 @@
     {
       "name": "Water in winter (surv-water-winter, checked) and Shelter (surv-shelter, checked)",
       "used": "Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC)"
+    },
+    {
+      "name": "Kerosene and propane heaters (surv-portable-heaters, checked) and Winter storms (surv-winter-storms, checked)",
+      "used": "Heater sleep rule quoted word for word from Kerosene and propane heaters (CPSC, US Fire Administration; Carbon monoxide protocol); stranded-car line quoted from Winter storms’ Do first (National Weather Service, CDC, Red Cross; Carbon monoxide protocol)"
     }
   ],
   "reviewed": "2026-11-18"

@@ -3368,3 +3368,60 @@ No new source; wording only.
 - C1 quinzhee: entrance removed from the cut-away (see the quinzhee entry); D64 logged. Test `test_quinzhee_draws_no_entrance_above_the_beds`.
 - M1 shelter-tarp: open-side arrow replaced by a leader. M2, M3 generator-placement: label in the list's own words, heavier cross. M4 warm-room: towel drawn as a bunched zigzag. M5 quinzhee: wall 24 px at 23.6 px a foot; beds one foot. M6 quinzhee: trench label inside the shelter.
 - M7 tests: the topic-text check now reads the topic's summary, doFirst, headings and blocks, without figure captions, keywords or source notes. M8: every distance phrase, including "a foot (30 cm)", must be in the topic. M9: geometry tests for generator-placement (cross over the garage generator, distance from the house wall to the generator, exhaust pointing away) and quinzhee (no entrance, wall at least a foot, beds a foot).
+
+## Heat pack Task 9: consistency fixes (2026-11-18)
+
+From .superpowers/sdd/2026-11-18-heat-pack/task-9-review.md and the deferred batch minors. No new web source was opened:
+every new sentence quotes or restates text already in an approved topic (named on each line) or in the decisions file.
+No protocol was edited.
+
+- I1 (Fire vs Wood stoves): surv-fire "Put it out" gains a first paragraph scoping it to outdoor fires and pointing to Wood
+  stoves and fireplaces (its "At night" warn: put it out before you go to sleep, USFA, FEMA; Missouri: no water in the
+  chimney; D44: no fire watch); the checked paragraphs are unchanged; the asleep paragraph begins "Outdoors,"; links to Wood
+  stoves and fireplaces and Carbon monoxide added; summary says "outdoors" and points to the stove topic. Wood stoves "At
+  night": "The drown-and-stir steps in Fire are for outdoor fires, not a stove or fireplace (this app's reading)" before the
+  Missouri bullet, and "No fire watch: this app does not allow a stove or fireplace to burn while people sleep, even with
+  someone awake" (D44). Shelter's TC 21-3 used line no longer contradicts itself. D62 scoped to outdoor fires.
+- I2 (heater sleep rule): owner surv-portable-heaters unchanged. Carbon monoxide ("Never indoors" and the vent-free list) and
+  Sleep warm ("Never sleep with a flame") now quote its sentence word for word: "Turn it off when you go to sleep or leave the
+  room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol)." The CPSC "any
+  room" restatements were replaced (CPSC is credited in the quoted sentence). Sleep warm summary uses the same words. D39
+  corrected to quote the owner (it had "USFA," for "US Fire Administration;") and now asks room or house.
+- I3 (propane indoors): surv-store-fuel "Propane cylinders" gains a last bullet quoting surv-portable-heaters' 1 lb. bullet
+  word for word, Minnesota's reading of NFPA 58 "used here as guidance" included, plus a link and a source line.
+- I4 (tags): done in the Task 10 commit; `when: cold` removed from surv-winter-storms; v7.3-rulings and content plan
+  section 4 updated.
+- I5 (hub links): surv-heat-out "Heat sources" moved to second place, after "One warm room" (its two duplicate links
+  removed there); "Keep your body warm" links Dress for the cold and Sleep warm.
+- I6 (CO topic): "Never indoors" gains "A car stuck in snow: ..." quoted from Winter storms' Do first (NWS, CDC, Red Cross;
+  Carbon monoxide protocol) and links Wood stoves and fireplaces and Winter storms; source line added.
+- M1: "D51" removed from user text (vehicle-winter-kit flashlight and melt-snow notes, Red Cross used line; Winter storms
+  "Stranded in a vehicle" step). D51 Today corrected. "Light it only outside the car, away from the exhaust" not added
+  (v7.3-rulings). Also removed "see decisions D37" and "D40" from two Generators source lines (users see used lines).
+- M2: decisions D section reordered 37-48, 50-53, 60-64, 65-67, with a line that 49 and 54 to 59 are unused.
+- M3: Carbon monoxide Do first generator line now lists shed, porch and carport, as Generators (owner) does, "See Generators".
+- M4: Protect an unheated house Do first: "For the pipes, keep it at 55°F (13°C) or higher (people need more: see Stay warm
+  when the heat is out)" (heat-out: NIA 60 to 65°F, NYS DOH above 68°F); source line added.
+- M5: heat hub sorts first in its category (src/survival.js, Task 10 commit, tested).
+- M6: Fire link label "The ten essentials".
+- M7, M8: logged as D66 and D67 (no protocol edit).
+- M9 / batch B N3: logged as D65 (FEMA 3 ft vs USFA 10 ft; 10 ft kept). D64 was already taken by the diagram worker.
+- M10: links added: Store fuel "Handle it safely" to Generators; Protect an unheated house "Coming back" to Carbon monoxide;
+  Wind chill "National Weather Service cold alerts" to Winter storms.
+- M11: Stay warm when the heat is out Do first, sixth line: "Keep battery CO alarms near where people sleep (CDC, CPSC). If one
+  sounds, get everyone outside now (CPSC). See Carbon monoxide." (Carbon monoxide topic: CO alarms, When an alarm sounds.)
+- M12 / batch C N4: Sleep warm summary: "in a tent, snow shelter, camper or vehicle" (Kerosene and propane heaters; protocol).
+- Batch A N1: kerosene storage credit: "outdoors (New York State Department of Health), in its own container made for
+  kerosene (New York State Department of Health, CPSC)".
+- Batch A N2: portable-heaters: "or a hose run into the house from a tank outside (this app's reading of the 1 lb. rule)";
+  no source covers it; logged in D41.
+- Batch A N3: D39 now names the section "What safety bodies say first".
+- Batch B N1: boiler caution labelled "this app's own caution" in "Hot-water heat" and "Coming back" (Coming back uses the
+  batch B reviewer's wording: Purdue "also says to consult a heating contractor before adding antifreeze"); D48 updated.
+- Batch B N2: Indiana DHS used line trimmed to "Extinguish fireplace fires before going to bed or leaving home".
+- Batch B N3: D65 (as M9).
+- Batch B N4: Wood stoves water line scoped (as I1).
+- Batch D M6: quinzhee step "Very cold, granular snow" (AMC's words); D63 the same.
+- Batch D M7: TC 21-3 credited for snow caves in severe weather in Fire and Shelter text and in both used lines.
+- Batch D M8: Fire watcher option scoped to outdoor fires with a pointer (as I1).
+- Batch C M12: resolved by I4.

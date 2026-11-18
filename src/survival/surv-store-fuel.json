@@ -77,6 +77,10 @@
           ]
         },
         {
+          "link": "s:surv-generators",
+          "label": "Generators"
+        },
+        {
           "link": "p:burns",
           "label": "Burns"
         }
@@ -110,11 +114,16 @@
             "Check that the valve closes completely, then close it before storing (North Carolina Department of Agriculture and Consumer Services; National Propane Gas Association). On a disconnected tank with an older valve that has only inside threads, screw in a plug; never put a plug in a valve with outside threads (Acme), which disables a safety feature (North Carolina Department of Agriculture and Consumer Services).",
             "Keep them away from flames and anything that could light them, out of hot sun, and where they can’t fall or be knocked over by children (North Carolina Department of Agriculture and Consumer Services).",
             "Keep spare cylinders away from a grill that is in use (North Carolina Department of Agriculture and Consumer Services; National Propane Gas Association).",
-            "Don’t leave a cylinder in a vehicle (National Propane Gas Association)."
+            "Don’t leave a cylinder in a vehicle (National Propane Gas Association).",
+            "One exception, while a heater is in use (Kerosene and propane heaters): indoors, only a 1 lb. cylinder screwed onto the heater. Never a 20 lb. (grill-size) or larger tank inside the house or garage, and never one brought in on a hose or a hose run into the house from a tank outside (this app’s reading of the 1 lb. rule). Empty cylinders go back outside too. CPSC’s indoor-use standard covers only heaters on 1 lb. cylinders. Minnesota’s State Fire Marshal, reading the national propane code (NFPA 58), allows no cylinder over 1 lb. and no more than 2 lb. in all inside a home, garages included, counts a connected cylinder as in use and an empty one as full. That is another state’s reading, used here as guidance."
           ]
         },
         {
           "p": "The North Carolina rules are that state’s law, used here as guidance. No current New York rule on storing propane cylinders at home was found in an opened source."
+        },
+        {
+          "link": "s:surv-portable-heaters",
+          "label": "Kerosene and propane heaters"
         }
       ]
     },
@@ -199,6 +208,10 @@
     {
       "name": "US Fire Administration, Fire extinguishers (last reviewed April 1, 2023)",
       "used": "Classes A, B, C; multipurpose B-C or A-B-C for most home fires; use only if others are alerted, the fire department called, you are able, the fire is small and contained, you are protected from smoke, you have a clear escape route; young children and older adults should not; otherwise leave; PASS: pull the pin (nozzle away), aim low at the base, squeeze slowly and evenly, sweep side to side; check the pressure gauge and for damage; follow the manufacturer; UL or ULC Listed; largest you can operate; nothing blocking it"
+    },
+    {
+      "name": "Kerosene and propane heaters (surv-portable-heaters, checked)",
+      "used": "The one exception, quoted word for word: indoors only a 1 lb. cylinder screwed onto the heater, no larger tank and no hose, empties outside; CPSC’s indoor-use standard covers only 1 lb. heaters; Minnesota State Fire Marshal’s reading of NFPA 58, another state’s reading used as guidance"
     }
   ],
   "reviewed": "2026-11-18"

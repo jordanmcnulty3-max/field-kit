@@ -122,7 +122,8 @@
         {
           "list": [
             "How: no source opened gives a method for putting out a wood stove fire. Stop adding wood well before bed so the fire burns down (Oklahoma State University Extension: make sure the fire has died down before you leave), and keep the damper open until the fire is out and the embers are cold (Massachusetts Department of Fire Services).",
-            "Never pour water into the chimney (University of Missouri Extension).",
+            "The drown-and-stir steps in Fire are for outdoor fires, not a stove or fireplace (this app’s reading). Never pour water into the chimney (University of Missouri Extension).",
+            "No fire watch: this app does not allow a stove or fireplace to burn while people sleep, even with someone awake.",
             "Keep working carbon monoxide and smoke alarms near the room and where people sleep (CDC, CPSC)."
           ]
         },
@@ -255,7 +256,7 @@
     },
     {
       "name": "Indiana Department of Homeland Security, Alternative Heating (undated sheet on in.gov/dhs)",
-      "used": "Keep the fireplace damper open while hot ashes are still in the fireplace; extinguish fireplace fires before going to bed or leaving home"
+      "used": "Extinguish fireplace fires before going to bed or leaving home"
     },
     {
       "name": "Penn State Extension, Using Your Wood Stove Efficiently and Effectively (Daniel Ciolkosz, updated July 8, 2024)",

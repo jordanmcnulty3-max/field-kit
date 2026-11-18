@@ -18,7 +18,7 @@
     "winter camping",
     "heater at night"
   ],
-  "summary": "Insulate from the ground first, keep your bag or blankets dry and fluffed, eat a snack and go to the bathroom before bed, and add a wrapped bottle of warm water. Never sleep with a fuel-burning heater, stove or lantern in a tent or snow shelter, never run an unvented fuel-burning heater in any room where people are sleeping, and never sleep in a vehicle with its engine running.",
+  "summary": "Insulate from the ground first, keep your bag or blankets dry and fluffed, eat a snack and go to the bathroom before bed, and add a wrapped bottle of warm water. Never sleep with a fuel-burning heater, stove or lantern in a tent, snow shelter, camper or vehicle, and never sleep in a vehicle with its engine running. Indoors, an unvented fuel-burning heater: turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping.",
   "sections": [
     {
       "h": "Never sleep with a flame",
@@ -28,7 +28,7 @@
         },
         {
           "list": [
-            "Indoors: never run an unvented fuel-burning appliance in any room where people are sleeping (CPSC). Turn heaters off when you go to bed (US Fire Administration). See Carbon monoxide and Kerosene and propane heaters.",
+            "Indoors, an unvented fuel-burning heater (Kerosene and propane heaters): “Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol).” See Carbon monoxide and Kerosene and propane heaters.",
             "In a vehicle: never run the engine while anyone is sleeping (Carbon monoxide protocol). Everyone is awake while it runs, and it is off before anyone sleeps. With more than one person, take turns sleeping (Red Cross), only while the engine is off. See Winter storms.",
             "Wood stove or fireplace overnight: follow its topic.",
             "Keep battery carbon monoxide alarms near where people sleep (Carbon monoxide)."
@@ -165,7 +165,7 @@
     },
     {
       "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide), Kerosene and propane heaters (surv-portable-heaters), Wood stoves and fireplaces (surv-wood-stoves-fireplaces)",
-      "used": "CPSC: never operate unvented fuel-burning appliances in any room where people are sleeping; US Fire Administration: turn heaters off when you go to bed; battery CO alarms near sleeping areas; overnight wood stove rule (linked, not restated); vehicle: never run an engine in a vehicle where people are sleeping (p:carbon-monoxide)"
+      "used": "heater sleep rule quoted word for word from Kerosene and propane heaters (CPSC, US Fire Administration; Carbon monoxide protocol); tent, snow shelter, camper or vehicle (Kerosene and propane heaters; p:carbon-monoxide); battery CO alarms near sleeping areas; overnight wood stove rule (linked, not restated); vehicle: never run an engine in a vehicle where people are sleeping (p:carbon-monoxide)"
     },
     {
       "name": "Stay warm when the heat is out (surv-heat-out)",

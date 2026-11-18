@@ -28,7 +28,7 @@
   ],
   "summary": "Keep any heat you have at 55°F (13°C) or more and let faucets drip. If the house will freeze, shut the main valve and drain the water system, toilets, traps and water heater before the pipes freeze. Keep stored water and canned food from freezing. Watch the roof under heavy snow.",
   "doFirst": [
-    "Still have some heat? Keep it at 55°F (13°C) or higher, open the cabinet doors under sinks, and if water is still running, let faucets drip (New York State Department of Health, Red Cross, CDC).",
+    "Still have some heat? For the pipes, keep it at 55°F (13°C) or higher (people need more: see Stay warm when the heat is out), open the cabinet doors under sinks, and if water is still running, let faucets drip (New York State Department of Health, Red Cross, CDC).",
     "Heat off in freezing weather? Save the water first, then shut the main water valve, or the well pump if it is in the house, and drain the system before the pipes freeze (Purdue Extension).",
     "Never thaw pipes with a torch, a kerosene or propane heater, a charcoal stove or any open flame (Red Cross, CDC).",
     "Roof sagging, creaking or cracking, or doors that suddenly stick? Get everyone out (FEMA)."
@@ -94,7 +94,7 @@
             "If you still have power, keep the circulator pump running. If the room falls below 40°F (4°C), you should probably start draining the pipes (Purdue Extension).",
             "Most hot-water heating systems are not easy to drain. Open the radiator vents to let air in so the pipes can drain (Purdue Extension).",
             "Ask a heating contractor before adding antifreeze to the heating system (Purdue Extension).",
-            "Once it is drained, don’t fire the boiler again until the system is refilled: see Coming back."
+            "Once it is drained, don’t fire the boiler again until the system is refilled (this app’s own caution): see Coming back."
           ]
         },
         {
@@ -153,13 +153,17 @@
             "Warm a frozen pipe only with gentle heat, such as an electric heating pad, a hair dryer, an electric space heater kept away from anything that can burn (plugged straight into a wall outlet: see Generators), or towels soaked in hot water, with the faucet open, until full pressure is back (Red Cross).",
             "If pipes burst, stay out of standing water: you could get an electric shock (New York State Department of Health). Keep electric cords away from water (Water in winter).",
             "Refill the water heater before you turn its power or gas back on (FEMA, in Water already in your house).",
-            "If you drained the hot-water heating system, don’t fire the boiler until the system has been refilled. Have a heating contractor refill and restart it (Purdue Extension: consult a heating contractor). No source opened gives the steps.",
+            "If you drained the hot-water heating system: no source opened covers this. This app’s own caution: don’t fire the boiler until the drained system has been refilled, and have a heating contractor refill and restart it (Purdue Extension also says to consult a heating contractor before adding antifreeze).",
             "Getting the furnace going again: see Stay warm when the heat is out."
           ]
         },
         {
           "link": "s:surv-generators",
           "label": "Generators"
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
         },
         {
           "link": "s:surv-water-winter",
@@ -228,6 +232,10 @@
     {
       "name": "Generators (surv-generators, checked)",
       "used": "Electric heaters on a generator: plugged straight into a wall outlet through a transfer switch (US Fire Administration)"
+    },
+    {
+      "name": "Stay warm when the heat is out (surv-heat-out, checked)",
+      "used": "People need more than the 55°F kept for pipes: hypothermia in older people at 60 to 65°F (National Institute on Aging), above 68°F for babies, older people and people with health problems (New York State Department of Health)"
     }
   ],
   "reviewed": "2026-11-18"

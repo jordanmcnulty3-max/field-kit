@@ -30,7 +30,8 @@
     "Never heat the house with an oven or gas range, and never run a generator, grill, camp stove, charcoal or a fuel lantern indoors (CDC). See Carbon monoxide.",
     "Babies under 1 year must never sleep in a cold room (CDC). Check older people often: they make less body heat (CDC).",
     "Put on layers, a hat and socks, and use blankets and sleeping bags (FEMA, National Institute on Aging).",
-    "Can’t keep the house warm? Go somewhere with heat: a relative’s or friend’s home, or a public building or warming center (CDC, FEMA, Red Cross)."
+    "Can’t keep the house warm? Go somewhere with heat: a relative’s or friend’s home, or a public building or warming center (CDC, FEMA, Red Cross).",
+    "Keep battery CO alarms near where people sleep (CDC, CPSC). If one sounds, get everyone outside now (CPSC). See Carbon monoxide."
   ],
   "sections": [
     {
@@ -52,14 +53,45 @@
         },
         {
           "p": "CDC: use fireplaces, wood stoves or other combustion heaters only if they are properly vented to the outside. Kerosene and propane space heaters are not vented: federal and New York agencies advise against using them indoors. If one is all you have, use it only under every condition in Kerosene and propane heaters. Read the topic for any heat source before you light it."
+        }
+      ]
+    },
+    {
+      "h": "Heat sources",
+      "blocks": [
+        {
+          "warn": "Turning on the stove for heat is not safe (CDC). CDC: use fireplaces, wood stoves or other combustion heaters only if they are properly vented to the outside. Kerosene and propane space heaters are not vented: federal and New York agencies advise against using them indoors, and Kerosene and propane heaters gives the only conditions under which to run one."
+        },
+        {
+          "p": "Each heat source has its own topic. Read it before you use it."
         },
         {
           "link": "s:surv-carbon-monoxide",
           "label": "Carbon monoxide and burning fuel indoors"
         },
         {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        },
+        {
+          "link": "s:surv-firewood",
+          "label": "Firewood"
+        },
+        {
           "link": "s:surv-portable-heaters",
           "label": "Kerosene and propane heaters"
+        },
+        {
+          "link": "s:surv-generators",
+          "label": "Generators"
+        },
+        {
+          "link": "s:surv-store-fuel",
+          "label": "Store fuel safely"
+        },
+        {
+          "link": "s:surv-unheated-house",
+          "label": "Protect an unheated house"
         }
       ]
     },
@@ -75,6 +107,14 @@
             "Drink plenty of warm fluids, but avoid caffeine and alcohol (Red Cross). Eat and drink regularly: your body needs fuel to make heat (Priorities).",
             "Change out of wet clothes into dry ones (New York State Division of Homeland Security and Emergency Services)."
           ]
+        },
+        {
+          "link": "s:surv-dress-for-cold",
+          "label": "Dress for the cold"
+        },
+        {
+          "link": "s:surv-sleep-warm",
+          "label": "Sleep warm"
         },
         {
           "link": "p:hypothermia",
@@ -205,45 +245,6 @@
           "label": "Protect an unheated house"
         }
       ]
-    },
-    {
-      "h": "Heat sources",
-      "blocks": [
-        {
-          "warn": "Turning on the stove for heat is not safe (CDC). CDC: use fireplaces, wood stoves or other combustion heaters only if they are properly vented to the outside. Kerosene and propane space heaters are not vented: federal and New York agencies advise against using them indoors, and Kerosene and propane heaters gives the only conditions under which to run one."
-        },
-        {
-          "p": "Each heat source has its own topic. Read it before you use it."
-        },
-        {
-          "link": "s:surv-carbon-monoxide",
-          "label": "Carbon monoxide and burning fuel indoors"
-        },
-        {
-          "link": "s:surv-wood-stoves-fireplaces",
-          "label": "Wood stoves and fireplaces"
-        },
-        {
-          "link": "s:surv-firewood",
-          "label": "Firewood"
-        },
-        {
-          "link": "s:surv-portable-heaters",
-          "label": "Kerosene and propane heaters"
-        },
-        {
-          "link": "s:surv-generators",
-          "label": "Generators"
-        },
-        {
-          "link": "s:surv-store-fuel",
-          "label": "Store fuel safely"
-        },
-        {
-          "link": "s:surv-unheated-house",
-          "label": "Protect an unheated house"
-        }
-      ]
     }
   ],
   "sources": [
@@ -313,7 +314,7 @@
     },
     {
       "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide, checked)",
-      "used": "New York State Division of Consumer Protection (December 21, 2022): keep furnace vents clear of ice and snow; a blocked vent can let CO build up and newer furnaces may shut off completely. CDC, CPSC: never charcoal or a fuel lantern indoors"
+      "used": "New York State Division of Consumer Protection (December 21, 2022): keep furnace vents clear of ice and snow; a blocked vent can let CO build up and newer furnaces may shut off completely. CDC, CPSC: never charcoal or a fuel lantern indoors; battery CO alarms near where people sleep (CDC, CPSC); when one sounds, get everyone outside now (CPSC)"
     },
     {
       "name": "Priorities (surv-priorities, checked)",

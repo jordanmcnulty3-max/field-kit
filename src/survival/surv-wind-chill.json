@@ -153,6 +153,10 @@
         },
         {
           "p": "Wording from the National Weather Service’s New York State cold fact sheet. Each local office sets its own trigger temperatures. For example, in the Rochester, NY area an Extreme Cold Warning is issued when the apparent temperature, with or without wind, is expected to fall to -25°F or below, and a Cold Weather Advisory when the air temperature or wind chill is expected to fall between -15°F and -24°F (National Weather Service)."
+        },
+        {
+          "link": "s:surv-winter-storms",
+          "label": "Winter storms"
         }
       ]
     },

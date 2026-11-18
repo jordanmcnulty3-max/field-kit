@@ -220,7 +220,7 @@
     },
     {
       "name": "NFPA, Generator safety tip sheet (©NFPA 2017; copy hosted by the Village of Penn Yan, NY)",
-      "used": "Plug appliances into the generator or a heavy-duty outdoor-rated cord; check cords for cuts and tears and three prongs with a grounding pin; qualified electrician and properly rated transfer switch; fuel in a container made and labelled for it, outside living areas; never in an attached garage even with the door open; exhaust away from the building; turn off and cool before refueling (its 5-foot distance is not used: see decisions D37)"
+      "used": "Plug appliances into the generator or a heavy-duty outdoor-rated cord; check cords for cuts and tears and three prongs with a grounding pin; qualified electrician and properly rated transfer switch; fuel in a container made and labelled for it, outside living areas; never in an attached garage even with the door open; exhaust away from the building; turn off and cool before refueling (its 5-foot distance is not used: the app follows the more cautious 20-foot sources)"
     },
     {
       "name": "University of Illinois Extension, Generator Safety (undated)",
@@ -240,7 +240,7 @@
     },
     {
       "name": "US Department of Energy, Energy Saver: Small Space Heaters",
-      "used": "Tip-over safety switch (its extension-cord allowance is not used: see decisions D40)"
+      "used": "Tip-over safety switch (its extension-cord allowance is not used: the app follows the US Fire Administration)"
     },
     {
       "name": "US Fire Administration, Heating fire safety (last reviewed May 4, 2023)",

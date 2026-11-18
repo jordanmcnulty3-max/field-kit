@@ -681,3 +681,16 @@ def test_heat_pack_hurried_searches_find_their_topic_in_the_first_three(page, ap
     page.wait_for_function('window.FK && FK.search')
     ks = [r['key'] for r in q(page, text)]
     assert expected in ks[:3], f'{text!r} did not list {expected} in the first three: {ks[:5]}'
+
+
+@pytest.mark.parametrize('text,first', [
+    ('in shock', ['p:shock']),
+    ('hit by car', ['p:head-injury', 'p:lightning']),
+    ('no pulse', ['p:cpr-adult', 'p:shock', 'p:cpr-child', 'p:cpr-infant']),   # order as in v7.2 and before the short-word bonus
+    ('no', ['p:cpr-adult', 'p:cpr-child', 'p:cpr-infant']),
+])
+def test_little_words_in_a_search_get_no_short_keyword_bonus(page, app_url, text, first):
+    # "in", "by", "no" are whole words inside unrelated pages' keyword phrases; they must not reorder what a frightened person types
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    assert [r['key'] for r in q(page, text)][:len(first)] == first

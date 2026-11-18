@@ -103,6 +103,7 @@
 
   /* ---------- Matching and ranking ---------- */
   const hits = (f, w) => f.toks.some(t => t.startsWith(w));
+  const COMMON = new Set('am an as at be by do go he if in is it me my no of on or so to up us we'.split(' '));   // little words that sit inside many keyword phrases
   function score(doc, words) {
     let total = 0;
     for (const w of words) {
@@ -114,8 +115,8 @@
       if (!best) return 0;   // every word must match something
       total += best;
       if (doc.fields[0].toks.includes(w)) total += 0.5;   // a whole title word beats a mere prefix
-      // A one- or two-letter query ("CO") that is a whole keyword beats titles that merely start with it.
-      else if (w.length < 3 && doc.fields.some(f => f.w === W.keywords && f.toks.includes(w))) total += 1.25;
+      // A one-word search of one or two letters ("CO") that is a whole keyword, and not a common English word, beats titles that merely start with it.
+      else if (words.length === 1 && w.length < 3 && !COMMON.has(w) && doc.fields.some(f => f.w === W.keywords && f.toks.includes(w))) total += 1.25;
     }
     return total;
   }

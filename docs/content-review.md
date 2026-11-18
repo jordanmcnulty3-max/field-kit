@@ -3441,6 +3441,7 @@ No new source was opened; no number or instruction changed.
 - Search keywords added: "frost bite" (Wind chill), "snowed in" (Winter storms), "lost power" and "no electricity"
   (Stay warm when the heat is out). Protocol keywords not touched.
 - Wind chill tool: the temperature box uses the ordinary keyboard (minus key on iPhone) and accepts the typographic
-  minus (−); the wind box keeps the number pad. Search: one- and two-letter whole keywords rank higher ("CO").
+  minus (−); the wind box keeps the number pad. Search: a one-word search of one or two letters that is a whole keyword
+  and not a common English word ranks higher ("CO"). Wind chill brochure used line: "the three times on the chart's legend".
 - Decisions: D39 points at docs/v7.3-rulings.md, not the build ledger, and ends with one question (room or house); D61
   ends with a question. docs/v7.3-rulings.md lists every ruling and a Deferred section.

@@ -115,7 +115,7 @@
     /* Temperature gets the ordinary keyboard: iPhone number pads have no minus key. Wind is never negative, so it keeps the number pad. */
     const field = (k, id, label, less, more, mode) => '<div class="wc-row"><div class="sv-gfield"><label for="' + id + '">' + label + '</label><div class="sv-step">' +
       '<button type="button" data-wstep="' + k + '" data-d="-1" aria-label="' + less + '">−</button>' +
-      '<input id="' + id + '" type="text" inputmode="' + mode + '" autocomplete="off" spellcheck="false" data-wfield="' + k + '" aria-describedby="' + id + 'Err">' +
+      '<input id="' + id + '" type="text" inputmode="' + mode + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-wfield="' + k + '" aria-describedby="' + id + 'Err">' +
       '<button type="button" data-wstep="' + k + '" data-d="1" aria-label="' + more + '">+</button></div></div>' +
       '<p class="dl-err wc-err" id="' + id + 'Err" role="status"></p></div>';
     const sources = (Array.isArray(d.w.sources) ? d.w.sources : []).filter(s => plain(s) && filled(s.name)).map(s => s.name);

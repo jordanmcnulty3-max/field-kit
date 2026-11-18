@@ -810,6 +810,7 @@ def test_wc_temperature_field_gets_a_keyboard_with_a_minus_and_wind_stays_numeri
     t = page.locator('#survPage').get_by_label('Air temperature (°F)', exact=True)
     w = page.locator('#survPage').get_by_label('Wind (mph)', exact=True)
     assert t.get_attribute('type') == 'text' and t.get_attribute('inputmode') == 'text'
+    assert (t.get_attribute('autocapitalize'), t.get_attribute('autocorrect'), t.get_attribute('spellcheck')) == ('off', 'off', 'false')
     assert w.get_attribute('type') == 'text' and w.get_attribute('inputmode') == 'numeric'
 
 

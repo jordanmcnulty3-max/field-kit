@@ -10,11 +10,11 @@
     "toilet in the woods",
     "poop outdoors",
     "camp toilet",
-    "human waste",
+    "trench latrine",
     "pack out",
     "Leave No Trace"
   ],
-  "summary": "On the move, dig a cat hole 6 to 8 inches deep at least 200 feet from water, trails and camp; for a group that stays put, dig a latrine at least as far from water, downhill and downwind of camp, cover each use with soil, and close it before it fills.",
+  "summary": "On the move, dig a cat hole 6 to 8 inches deep at least 200 feet from water, trails and camp; for a group that stays put, dig a pit or trench latrine at least as far from water, downhill and downwind of camp, cover the waste with soil, and close it before it fills.",
   "where": [
     "rural",
     "woods",
@@ -114,7 +114,8 @@
         {
           "list": [
             "Put it downhill from wells and springs (King County), never uphill or upwind of camp (Sphere handbook).",
-            "Where the groundwater is near the surface, a pit latrine is not suitable (CDC).",
+            "Where the groundwater is near the surface, a pit latrine is not suitable (CDC). If water seeps into the hole as you dig, it is too near: fill the hole and pick higher ground.",
+            "In limestone or broken (fissured) rock, go farther from water than the table says (Sphere handbook).",
             "Keep it away from where food is prepared and eaten (King County)."
           ]
         },
@@ -126,6 +127,9 @@
             "Put a place to wash hands with soap and water right next to it (King County, Sphere handbook, CDC).",
             "Watch small children when they use it (King County)."
           ]
+        },
+        {
+          "p": "A trench latrine is quick to dig: a narrow trench with a screen for privacy. Cover the waste with soil at least once every day, and dig a small ditch to steer rain water around it. It doesn’t last long, and rain can flood it (CDC). Use the same distances as the table above."
         }
       ]
     },
@@ -201,12 +205,12 @@
       "used": "Latrines not appropriate in urban locations; at least 100 feet from surface water and at least 100 feet downhill or away from any well, spring, home or campsite; away from food preparation and eating areas; hole at least 3 feet deep, bottom at least 1 foot above hard pan or water table; dirt, lime, mulch or ash after each use; cover between uses; keep covers closed; handwashing next to the toilet; supervise small children"
     },
     {
-      "name": "Sphere Handbook, Water Supply, Sanitation and Hygiene Promotion chapter (copy hosted by Universitas Sebelas Maret)",
-      "used": "At least 30 m from water sources and pit bottoms at least 1.5 m above the groundwater table without soil tests; not uphill or upwind of settlements; handwashing at toilets; 0.5 m at the top of the pit for backfill"
+      "name": "Sphere Handbook, 2018 edition (or later), Water Supply, Sanitation and Hygiene Promotion chapter (copy hosted by Universitas Sebelas Maret)",
+      "used": "At least 30 m from water sources and pit bottoms at least 1.5 m above the groundwater table without soil tests; not uphill or upwind of settlements; handwashing at toilets; 0.5 m at the top of the pit for backfill; increase the distances for fissured rock and limestone"
     },
     {
       "name": "CDC, Potential Sanitation Solutions During an Emergency Response (December 2021)",
-      "used": "Pit latrines unsuitable where the water table is high; waste covered with soil when near full; handwashing stations at every sanitation facility"
+      "used": "Trench latrines: narrow trenches with a temporary privacy structure, waste covered daily with soil, drainage to divert surface water, short life span, flooding in rain; pit latrines unsuitable where the water table is high; waste covered with soil when near full; handwashing stations at every sanitation facility"
     },
     {
       "name": "Oregon State University Extension Service, Survival Basics: Sanitation and Waste Management (EM 9334, October 2021)",
@@ -221,6 +225,5 @@
       "used": "Close a latrine pit when filled to within one foot of the top; fill to ground level packing the dirt; mound with soil to keep flies in or out; post a sign"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

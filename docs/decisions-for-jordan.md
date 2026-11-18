@@ -268,15 +268,23 @@ Source disagreements found while checking the Survival topics. Each says what th
    so people can reach it at night; not stated. Say if the group wants the Army's 100 yards from the kitchen or
    Sphere's 50 m maximum added.
 29. **Latrines and buried waste in town (surv-latrines, surv-toilet-no-water) — Water pack Task 6.** King County:
-   latrines are not appropriate in urban places, but bagged waste may be buried on your own property. Jefferson
-   County: do not dig a pit privy; germs spread to neighbours. Oregon State Extension: in more rural areas consider a
-   latrine. Today: surv-latrines is tagged rural, woods and coast (hidden under the town filter); in town, hold the
-   bagged waste and wait. Say if a backyard latrine in town should be allowed when the sewer will be dead for months.
+   latrines are not appropriate in urban places, but bagged waste may be buried on your own property (no depth or
+   distance given). Jefferson County: do not dig a pit privy; with seasonally saturated soils, germs spread to
+   neighbouring properties. Oregon State Extension: in more rural areas consider a latrine or hole and bury the poo.
+   Today: surv-latrines is tagged rural, woods and coast (hidden under the town filter); in town, don't bury or dig,
+   hold the bagged waste in its can and wait (surv-toilet-no-water says so). Outside town, bury it at least 3 ft deep
+   (King County's latrine depth; no source gives a depth for bagged waste) and at least 200 ft from water. Say if a
+   backyard latrine in town should be allowed when the sewer will be dead for months, or if a different burial depth
+   is wanted.
 30. **Flushing after a disaster (surv-toilet-no-water) — Water pack Task 6.** Oregon State Extension: avoid toilets even
    if your home sewer lines are not damaged; the street pipes may be broken. DC Water and NPS describe bucket
    flushing during a water outage. Jefferson County: don't flush after a disaster until officials say it is OK.
    Today: flush with a bucket only while the sewer works and nothing backs up; after an earthquake, flood or similar
-   damage, don't flush until officials say so. Say if the group wants "never flush in a long outage" instead.
+   damage, don't flush until officials say so. Town sewers often run on electric lift stations: West Hants Regional
+   Municipality (Nova Scotia) and Charlotte County Utilities (Florida) tell customers to cut water use at once when
+   the power goes out, because the sewer fills and backs up into basements. Fix round 1 added this, with "in a long
+   blackout, expect the sewer to stop and switch to the bucket toilet". Say if the group wants "never flush in a
+   long outage" instead.
 31. **Burying household garbage (surv-garbage-and-greywater) — Water pack Task 6.** FEMA (Are You Ready?): "Bury
    garbage, if necessary", no depth or distance. The Army: a 4 x 4 x 4 ft pit at least 100 yards downstream of any
    water in use (Army alone). Leave No Trace: buried garbage still draws animals. Today: no burying instructions;

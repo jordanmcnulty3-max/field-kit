@@ -17,10 +17,10 @@
   "summary": "Flush with a bucket of water only while the sewer works; if it is broken or backing up, use two buckets, one for pee and one for poo covered with sawdust, and store the bagged waste until it can be got rid of safely.",
   "doFirst": [
     "Sewer lines broken, sewage backing up, or told not to flush? Don’t flush. Use the two-bucket toilet below.",
+    "Power out across town? Use as little water as you can and flush only poo: sewer pumps need electricity. In a long blackout, switch to the bucket toilet.",
     "Sewer working but the water is off? Flush only when you need to, by pouring a gallon or two of water into the bowl.",
-    "Keep pee and poo in separate buckets. Cover each poo with sawdust or shredded paper.",
-    "Never pour bleach into a bucket with pee in it.",
-    "Wash your hands with soap and water after every toilet visit."
+    "Keep pee and poo in separate buckets. Cover each poo with sawdust or shredded paper. Wash your hands with soap and water after every visit.",
+    "Never pour bleach into a bucket with pee in it."
   ],
   "sections": [
     {
@@ -42,16 +42,20 @@
           "p": "Use this only while the sewer still works and nothing is backing up. It works for ordinary toilets with a tank, not for toilets with a sealed pressure tank inside (National Park Service)."
         },
         {
+          "warn": "Many town sewers use electric pumps (lift stations). With the power out across town, they stop, the sewer fills and sewage can back up into streets and basements. From the moment the power goes out, use as little water as you can and flush only poo (West Hants Regional Municipality, Nova Scotia; Charlotte County Utilities, Florida). If your house has its own sewage pump, that stops too (Charlotte County). In a long blackout, expect the sewer to stop working, and switch to the two-bucket toilet."
+        },
+        {
           "steps": [
             "Pour a gallon or two (4 to 8 L) of water into the bowl. The amount varies by toilet (National Park Service; DC Water says a gallon).",
             "Pour slowly at first, then fast, to make it flush. Avoid splashing (DC Water, National Park Service).",
             "If the water rises without draining, stop (National Park Service).",
-            "If needed, slowly add a little water to bring the bowl back to its usual level. Don’t use the handle as well (National Park Service)."
+            "If needed, slowly add a little water to bring the bowl back to its usual level. Don’t use the handle as well (National Park Service), and don’t empty the tank (DC Water): the clear water in the tank is emergency drinking water (see Water already in your house)."
           ]
         },
         {
           "list": [
-            "Water you would not drink is fine for flushing. New York State Department of Health: “There is no need to disinfect water used for flushing.”",
+            "Carry only what you can lift safely (National Park Service). A gallon of water weighs about 8 lb (3.8 kg).",
+            "You don’t need to disinfect water used for flushing (New York State Department of Health, for tap water under a boil-water notice). Water from a pool or spa can be used for washing, cleaning and similar uses, though never for drinking (CDC).",
             "Keep grease, food scraps, wipes and cleaning chemicals out of the flushing water (National Park Service).",
             "Save water: you can use the toilet several times for pee before you flush (DC Water)."
           ]
@@ -73,7 +77,7 @@
           ]
         },
         {
-          "p": "If you hear of broken water or sewer lines, also shut the main water valve to keep dirty water out of your pipes (FEMA)."
+          "p": "Listen to local officials. You may need to shut the main water valve to keep contaminants out of the pipes in your house (CDC)."
         },
         {
           "p": "Then use the two-bucket toilet, or line the toilet bowl with bags."
@@ -112,7 +116,7 @@
         {
           "steps": [
             "Pee bucket: empty it when it is about a quarter full, or before it gets too heavy to carry safely (Oregon State University Extension).",
-            "Add water you would not drink, if you have it, to dilute the pee, and pour it on the lawn or bare ground (Washington County, Oregon State University Extension). Pick a different spot each time (Oregon State University Extension). Keep it well away from any well, spring or stream.",
+            "Add water you would not drink, if you have it, to dilute the pee, and pour it on the lawn or bare ground (Washington County, Oregon State University Extension). Pick a different spot each time (Oregon State University Extension). Keep it at least 200 feet (60 m) from any well, spring or stream where you can (Leave No Trace).",
             "Poo bucket: fill it no more than half full (Oregon State University Extension, Washington County).",
             "Put on disposable gloves. Tie the bag shut, put it in a second bag and seal that too (Oregon State University Extension).",
             "Line the bucket with a new bag (Oregon State University Extension).",
@@ -132,7 +136,7 @@
         },
         {
           "steps": [
-            "Shut off the water valve to the toilet and get the water out of the bowl (North Carolina Department of Health and Human Services).",
+            "Shut off the water valve to the toilet (North Carolina Department of Health and Human Services). Don’t flush if the sewer is broken: bail the water out of the bowl with a cup into the pee bucket.",
             "Line the bowl, or a bucket, with two heavy-duty plastic garbage bags (King County public health).",
             "Put cat litter, fireplace ashes or sawdust in the bottom of the bags (King County).",
             "At the end of each day, tie the bags securely and move them to a protected place such as a garage, basement or outbuilding until there is a safe way to get rid of them (King County)."
@@ -159,10 +163,16 @@
       "h": "Clean the buckets",
       "blocks": [
         {
-          "p": "Wear gloves. Empty the bucket first. North Carolina’s health department says to disinfect a waste bucket with bleach or throw it away."
+          "p": "North Carolina’s health department says to disinfect a waste bucket with bleach or throw it away."
         },
         {
-          "p": "CDC’s bleach mix for household items: 1 cup (240 mL) of plain, unscented household bleach (5% to 9%) in 5 gallons (19 L) of water. Let the bucket air dry. Indoors, open windows and doors (CDC)."
+          "steps": [
+            "Wear rubber gloves and eye protection (CDC).",
+            "Empty the bucket.",
+            "Wash it with soap and water, then rinse it with clean water, so no pee is left in it (CDC).",
+            "Sanitize it with CDC’s mix for household items: 1 cup (240 mL) of plain, unscented household bleach (5% to 9%) in 5 gallons (19 L) of water.",
+            "Let it air dry. Indoors, open windows and doors (CDC)."
+          ]
         }
       ]
     },
@@ -188,8 +198,8 @@
         {
           "list": [
             "Into a working sewer or septic system, once it works again (King County).",
-            "Bury it on your own land (King County), but never within 100 feet (30 m) of a water source or where it can seep downhill into one (Oregon State University Extension). This app uses the more cautious 200 feet (60 m): see Latrines and cat holes.",
-            "In town, don’t dig pits: germs spread easily to neighboring properties (Jefferson County). King County says latrines are not right for urban places.",
+            "Outside town, you can bury it on your own land (King County, Oregon State University Extension). Dig the hole as deep as a latrine, at least 3 feet (90 cm) (King County’s latrine depth), at least 200 feet (60 m) from any water source, and never where it can seep downhill into one. Oregon State says at least 100 feet (30 m); this app uses 200. See Latrines and cat holes.",
+            "In town, don’t bury it or dig pits. King County says latrines are not right for urban places, and Jefferson County warns that in wet soils germs spread easily to neighboring properties. Hold the bagged waste in its can and wait for instructions.",
             "Never wash waste into a storm drain (Salt Lake County Health Department) or put it in a ditch or stream."
           ]
         },
@@ -210,7 +220,9 @@
             "Don’t use the system if the soil around it is flooded (New York State Department of Health, EPA). Don’t pump the tank while the ground is flooded (EPA).",
             "Signs of damage: slow plumbing, sewage backing up, the ground settling or washing out around the leach field (New York State Department of Health, EPA).",
             "After an earthquake, don’t assume the system works even if you have power and water (Clallam County).",
-            "If you will later empty the poo bucket into your own septic tank, don’t add cover material to it: it can’t go in a septic system (Clallam County)."
+            "If you plan to empty the buckets into your own septic tank, don’t add cover material to the poo bucket: it can damage the system (Clallam County).",
+            "Dump through the tank lid only if you can find it and lift it safely. Older concrete lids can be too heavy (Clallam County). Keep children and pets away while the tank is open, and put the lid back on right after (Clallam County).",
+            "Never lean into or enter a septic tank: it can hold dangerous gases (EPA). Don’t dig at the tank or leach field while the ground is wet or flooded (EPA)."
           ]
         }
       ]
@@ -235,15 +247,15 @@
   "sources": [
     {
       "name": "Oregon State University Extension Service, Survival Basics: Sanitation and Waste Management (EM 9334, October 2021)",
-      "used": "Flies, pests and rodents spread germs from waste; two 5-gallon buckets marked pee and poo; poo bucket lined with a heavy-duty 13-gallon bag, pee bucket unlined; try not to pee in the poo bucket (pee causes the smell); about half a cup of carbon material to completely cover; carbon materials listed; poo bucket no more than half full; gloves, double-bag, seal, store separately far from food and water, reline; pee bucket emptied at a quarter full or before too heavy, diluted, poured on lawn or ground, change location; separate garbage can; store until the public system is fixed; not in normal garbage; not within 100 feet of a water source or where it can leach downhill; home pipes may be fine while street pipes are broken; septic may be safe if no leaking or backing up; sanitizer with at least 60% alcohol"
+      "used": "Flies, pests and rodents spread germs from waste; two 5-gallon buckets marked pee and poo; poo bucket lined with a heavy-duty 13-gallon bag, pee bucket unlined; try not to pee in the poo bucket (pee causes the smell); about half a cup of carbon material to completely cover; carbon materials listed; poo bucket no more than half full; gloves, double-bag, seal, store separately far from food and water, reline; pee bucket emptied at a quarter full or before too heavy, diluted, poured on lawn or ground, change location; separate garbage can; store until the public system is fixed; not in normal garbage; not within 100 feet of a water source or where it can leach downhill; home pipes may be fine while street pipes are broken; septic may be safe if no leaking or backing up; sanitizer with at least 60% alcohol; in more rural areas, consider a latrine or hole and burying the poo"
     },
     {
       "name": "Jefferson County Department of Emergency Management with Clallam County Sheriff’s Emergency Management, Twin-Bucket Emergency Toilet, sanitary sewer version (updated March 2015)",
-      "used": "Do not flush until a local official says it is OK; private space with carbon material and a scoop; seat moved between buckets, lid that closes well; try not to mix, mistakes happen; toilet paper in the poo bucket; urine has almost no health risk; store and wait for disposal instructions; no diapers, pads or pet waste in the buckets; do not dig a pit privy, disease spreads to neighboring properties"
+      "used": "Do not flush until a local official says it is OK; private space with carbon material and a scoop; seat moved between buckets, lid that closes well; try not to mix, mistakes happen; toilet paper in the poo bucket; urine has almost no health risk; store and wait for disposal instructions; no diapers, pads or pet waste in the buckets; do not dig a pit privy, disease spreads to neighboring properties; reason: with seasonally saturated soils, disease organisms contaminate neighboring properties"
     },
     {
       "name": "Clallam County Environmental Health and Emergency Management, Twin-Bucket Emergency Toilet, septic system version (updated March 2015)",
-      "used": "Some septic systems need electricity for a pump; after an earthquake do not assume the septic system works; store pee and poo with tight lids and wait for instructions; no carbon material in a poo bucket that will be emptied into a septic tank"
+      "used": "Some septic systems need electricity for a pump; after an earthquake do not assume the septic system works; store pee and poo with tight lids and wait for instructions; no carbon material in a poo bucket that will be emptied into a septic tank; dump into your own tank only if you can safely locate and remove the lid; older concrete lids may be too heavy; children and pets away from the open tank; secure the lid right after; carbon will damage the septic system"
     },
     {
       "name": "Washington County, Oregon, Emergency Management (Take5), Disaster Sanitation",
@@ -255,19 +267,19 @@
     },
     {
       "name": "National Park Service, Grand Canyon, How to Flush a Toilet with a Bucket (October 13, 2026)",
-      "used": "A gallon or two, varies by toilet; pour steadily then faster; avoid splashes; stop if the water rises without draining; restore the standing level, do not also use the handle; gravity toilets only, not sealed pressure vessels; no grease, food scraps, wipes or cleaning chemicals; stop using a toilet that does not drain normally"
+      "used": "A gallon or two, varies by toilet; pour steadily then faster; avoid splashes; stop if the water rises without draining; restore the standing level, do not also use the handle; gravity toilets only, not sealed pressure vessels; no grease, food scraps, wipes or cleaning chemicals; stop using a toilet that does not drain normally; carry only what you can safely lift"
     },
     {
       "name": "DC Water, What’s on Tap, Preparedness Issue (2021)",
-      "used": "A gallon of water poured into the bowl, slowly then quickly; several uses for liquid waste before flushing"
+      "used": "A gallon of water poured into the bowl, slowly then quickly; several uses for liquid waste before flushing; no need to use the handle or empty the toilet tank"
     },
     {
       "name": "New York State Department of Health, Boil Water Notices: Frequently Asked Questions for Residents and Homeowners (question 24)",
       "used": "“There is no need to disinfect water used for flushing.”"
     },
     {
-      "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency",
-      "used": "Shut the incoming water valve if you hear of broken water or sewage lines"
+      "name": "CDC, How to Find Clean Water in an Emergency (June 25, 2025)",
+      "used": "Listen to local officials; you may need to shut off the main water valve to keep contaminants out of your pipes; pool and spa water for personal hygiene, cleaning and related uses, not drinking"
     },
     {
       "name": "North Carolina Department of Health and Human Services, Toilet Use During an Emergency (October 2024)",
@@ -275,7 +287,7 @@
     },
     {
       "name": "Public Health – Seattle & King County, How to create an emergency toilet",
-      "used": "Line the bowl or a pail with two heavy-duty bags; cat litter, fireplace ashes or sawdust in the bottom; tie and remove daily to a garage, basement or outbuilding; dispose into a working sewer or septic system or bury on your own property; bags in regular garbage only if officials announce it; latrines not appropriate in urban locations"
+      "used": "Line the bowl or a pail with two heavy-duty bags; cat litter, fireplace ashes or sawdust in the bottom; tie and remove daily to a garage, basement or outbuilding; dispose into a working sewer or septic system or bury on your own property; bags in regular garbage only if officials announce it; latrines not appropriate in urban locations; latrine hole at least 3 feet deep (used as the burial depth)"
     },
     {
       "name": "Municipality of Anchorage Office of Emergency Management, Sanitation and Hygiene in an Emergency",
@@ -287,11 +299,19 @@
     },
     {
       "name": "CDC, How to Safely Clean and Sanitize with Bleach (reviewed August 26, 2026)",
-      "used": "Plain unscented bleach 5% to 9%; 1 cup (240 mL) of bleach to 5 gallons of water for non-food household surfaces and items; air dry; open windows and doors indoors; never mix bleach with ammonia or any other cleaner"
+      "used": "Plain unscented bleach 5% to 9%; wash with soap and warm clean water, rinse with clean water, then sanitize with 1 cup (240 mL) of bleach to 5 gallons of water (non-food household surfaces and items); air dry; rubber or non-porous boots, gloves and eye protection; open windows and doors indoors; never mix bleach with ammonia or any other cleaner"
     },
     {
       "name": "Salt Lake County Health Department, Cleaning Up Bodily Fluids and Human Waste",
       "used": "Never wash waste into a storm drain"
+    },
+    {
+      "name": "West Hants Regional Municipality (Nova Scotia), Municipal Sewage Lift Stations and Power Outages (December 4, 2025)",
+      "used": "Lift stations rely on continuous power; reserve fills quickly, risking backups into streets, basements and waterways; reduce water use immediately when the power goes out; flush only solid waste; water run inside the home can back up within the dwelling"
+    },
+    {
+      "name": "Charlotte County Utilities, Florida, Charlotte County Utilities Urges Customers to Limit Water Usage (October 10, 2024)",
+      "used": "Wastewater lift stations without power; limit water use; low pressure sewer pumps at homes don’t work in a power outage"
     },
     {
       "name": "Texas A&M AgriLife Extension, Onsite Wastewater Treatment Systems: Responding to Electrical Power Outages and Floods (ER-001)",
@@ -299,13 +319,20 @@
     },
     {
       "name": "US EPA, Septic Systems: What to Do after the Flood (updated August 24, 2026)",
-      "used": "Don’t use the system while the soil is saturated and flooded; don’t pump the tank in flooded conditions; signs of damage: settling, can’t accept water"
+      "used": "Don’t use the system while the soil is saturated and flooded; don’t pump the tank in flooded conditions; signs of damage: settling, can’t accept water; tanks may contain dangerous gases, only trained specialists should clean or repair them; don’t dig into the tank or drainfield while wet or flooded"
     },
     {
       "name": "New York State Department of Health, Trash Disposal and Septic Systems after Weather Emergencies (revised October 2023)",
       "used": "Don’t use the septic system if the soil around it is flooded; signs of damage: sluggish plumbing, sewage backup, erosion around the drain field"
+    },
+    {
+      "name": "Leave No Trace Center for Outdoor Ethics, Principle 3: Dispose of Waste Properly",
+      "used": "Urinate 200 feet from water sources"
+    },
+    {
+      "name": "USGS Water Science School, Facts About Water",
+      "used": "8.33 lb per gallon (as in Task 4)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

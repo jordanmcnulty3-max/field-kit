@@ -15,8 +15,8 @@
     },
     {
       "id": "bags",
-      "text": "Several boxes of heavy-duty 3 to 5 mil black garbage or contractor bags",
-      "note": "To line the poo bucket and to double-bag full ones, diapers and pads."
+      "text": "Heavy-duty 13-gallon (49 L) garbage bags to line the poo bucket, and several boxes of heavy-duty 3 to 5 mil black garbage or contractor bags",
+      "note": "The 3 to 5 mil bags are for double-bagging full liners, diapers and pads."
     },
     {
       "id": "cover-material",
@@ -41,7 +41,7 @@
     },
     {
       "id": "gloves",
-      "text": "Disposable latex or nitrile gloves, for bagging waste"
+      "text": "Disposable latex or nitrile gloves, for bagging waste, and eye protection for cleaning with bleach"
     },
     {
       "id": "soap",
@@ -69,7 +69,7 @@
   "sources": [
     {
       "name": "Oregon State University Extension Service, Survival Basics: Sanitation and Waste Management (EM 9334, October 2021)",
-      "used": "Supply list: two 5-gallon buckets with lids labelled pee and poo; several boxes of 3 to 5 mil black garbage or contractor bags; water jug with on/off spigot; towels; soap; catch bucket; carbon material; toilet paper; closable bags for used toilet paper; latex or nitrile gloves; about half a cup of carbon material per use; sanitizer with at least 60% alcohol"
+      "used": "Supply list: two 5-gallon buckets with lids labelled pee and poo; several boxes of 3 to 5 mil black garbage or contractor bags; water jug with on/off spigot; towels; soap; catch bucket; carbon material; toilet paper; closable bags for used toilet paper; latex or nitrile gloves; about half a cup of carbon material per use; sanitizer with at least 60% alcohol; poo bucket lined with a heavy-duty 13-gallon garbage bag"
     },
     {
       "name": "Jefferson County Department of Emergency Management with Clallam County Sheriff’s Emergency Management, Twin-Bucket Emergency Toilet (updated March 2015)",
@@ -101,9 +101,8 @@
     },
     {
       "name": "CDC, How to Safely Clean and Sanitize with Bleach (reviewed August 26, 2026); North Carolina Department of Health and Human Services, Toilet Use During an Emergency (October 2024); Washington State Department of Health, Dangers of Mixing Bleach with Cleaners",
-      "used": "Plain unscented bleach 5% to 9%; never mix with ammonia or any other cleaner; disinfect the bucket with bleach; urine contains ammonia"
+      "used": "Plain unscented bleach 5% to 9%; never mix with ammonia or any other cleaner; disinfect the bucket with bleach; urine contains ammonia; gloves and eye protection"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

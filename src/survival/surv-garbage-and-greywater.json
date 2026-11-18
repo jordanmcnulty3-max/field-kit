@@ -12,7 +12,7 @@
     "diapers",
     "burning trash",
     "pests",
-    "waste"
+    "needles"
   ],
   "summary": "With no garbage collection, keep trash in heavy bags inside lidded cans, away from the house, the well and where people sleep; don’t burn it; strain dishwater and scatter it well away from water.",
   "sections": [
@@ -66,18 +66,21 @@
             "Close every hole in the walls. Some rodents get through holes the size of a dime (CDC).",
             "Catch them with spring-loaded snap traps (CDC).",
             "A dead rodent: wear rubber or plastic gloves, seal it in two plastic bags and throw it away (CDC).",
-            "Don’t sweep or vacuum droppings or urine. Spray them with disinfectant first (CDC).",
+            "Don’t sweep or vacuum droppings or urine (CDC). Wearing rubber or plastic gloves, spray them with a disinfectant until they are soaked through, and let it soak 5 minutes. Wipe them up with paper towels, and put the towels in a sealed garbage container outdoors (CDC).",
+            "Never mix bleach with ammonia or any other cleaner (CDC).",
+            "A building left empty a long time: air it out for 2 to 3 days before you go in (CDC).",
             "Don’t eat or drink anything rodents may have touched (CDC)."
           ]
         }
       ]
     },
     {
-      "h": "Diapers and sick waste",
+      "h": "Diapers, needles, sick waste",
       "blocks": [
         {
           "list": [
             "Diapers (baby and adult), sanitary pads and other menstrual products: bag them in heavy-duty 3 to 5 mil black plastic bags (Oregon State University Extension). Never put them in the toilet buckets (Jefferson County). Keep them with the bagged toilet waste until it can be got rid of (Oregon State University Extension).",
+            "Needles, lancets and other sharps: put each one straight into a heavy-duty plastic container that stays upright, doesn’t leak and has a tight, puncture-proof lid, such as a plastic laundry detergent bottle. Label it as dangerous waste. Stop at about three-quarters full, close it, and keep it with the bagged waste until it can be got rid of (FDA).",
             "Cleaning up vomit or diarrhea: wear disposable gloves, put the soiled things and the gloves in a plastic trash bag, seal it, and put on new gloves to carry it to a lidded trash can (University of Minnesota Extension). Then wash your hands."
           ]
         },
@@ -97,6 +100,10 @@
             "Burning household trash gives off dioxins, fine particles and carbon monoxide. The ash can hold mercury, lead, chromium and arsenic, which garden vegetables take up (EPA).",
             "Half-burned or buried garbage still draws animals (Leave No Trace)."
           ]
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide"
         }
       ]
     },
@@ -109,7 +116,9 @@
         {
           "list": [
             "At home while the sewer still works, pour it down the sink drain, not into the toilet (National Park Service).",
-            "With a bucket toilet, use it to dilute the pee before you pour it out (Oregon State University Extension).",
+            "When the sewer is not working, or is backing up, don’t pour anything down a drain: water run inside the house can back up into it (West Hants Regional Municipality, Nova Scotia).",
+            "With a bucket toilet, use some of it to dilute the pee before you pour it out (Oregon State University Extension).",
+            "Strain the rest and scatter it on the ground, away from the house and at least 200 feet (60 m) from wells, springs and streams where you can, as in camp below (Leave No Trace).",
             "Don’t try to treat it to use again (Oregon State University Extension).",
             "Keep it out of a latrine or pit toilet (Sphere handbook)."
           ]
@@ -154,7 +163,7 @@
     },
     {
       "name": "CDC, What to Do to Protect Yourself From Animals After a Disaster (August 26, 2026)",
-      "used": "Rodents spread disease and bite; secure food; throw out trash as soon as you can, in a covered can; clean up debris; store food and water in thick plastic, glass or metal with tight lids; close holes, some rodents fit through a dime-sized hole; snap traps; dead rodent sealed in two plastic bags with gloves; don’t sweep or vacuum droppings that have not been disinfected; don’t eat or drink what rodents may have touched; dead animals per local animal control (its 1:10 bleach solution, which gives no bleach strength, is not used)"
+      "used": "Rodents spread disease and bite; secure food; throw out trash as soon as you can, in a covered can; clean up debris; store food and water in thick plastic, glass or metal with tight lids; close holes, some rodents fit through a dime-sized hole; snap traps; dead rodent sealed in two plastic bags with rubber or plastic gloves; don’t sweep or vacuum droppings; spray with a disinfectant until thoroughly soaked, soak 5 minutes, remove with paper towels, discard towels outdoors in a sealed garbage container; air out long-abandoned buildings 2 to 3 days; don’t eat or drink what rodents may have touched; dead animals per local animal control (its 1:10 bleach solution, which gives no bleach strength, is not used)"
     },
     {
       "name": "NYS DEC, DEC Issues Guidance to Reduce Conflicts with Bears (April 7, 2023); NYS DEC, Be BearWise",
@@ -182,21 +191,32 @@
     },
     {
       "name": "Leave No Trace Center for Outdoor Ethics, Principle 3: Dispose of Waste Properly",
-      "used": "Plan meals to avoid messy, smelly garbage; pack out all trash, leftover food, grease and micro-trash including orange peels; burning trash never recommended, half-burned or buried garbage still attracts animals; wash 200 feet from streams or lakes, not in them; small amounts of soap; strain with a fine mesh strainer, scatter broadly, well away from camp especially with bears; pack out strainer contents"
+      "used": "Plan meals to avoid messy, smelly garbage; pack out all trash, leftover food, grease and micro-trash including orange peels; burning trash never recommended, half-burned or buried garbage still attracts animals; wash 200 feet from streams or lakes, not in them; small amounts of soap; strain with a fine mesh strainer, scatter broadly, well away from camp especially with bears; pack out strainer contents; 200 feet from water sources (applied to scattering greywater at home)"
     },
     {
       "name": "NYS DEC, State Land Camping Rules",
       "used": "No soap to wash yourself, clothing or dishes within 150 feet of water; carry out what you carry in"
     },
     {
+      "name": "CDC, How to Safely Clean and Sanitize with Bleach (reviewed August 26, 2026)",
+      "used": "Never mix bleach with ammonia or any other cleaner"
+    },
+    {
+      "name": "FDA, Sharps Disposal Containers (content current as of April 28, 2021)",
+      "used": "Place sharps immediately in a container; if no FDA-cleared container, a heavy-duty plastic household container such as a plastic laundry detergent container, leak-resistant, upright, tight-fitting puncture-resistant lid; labelled to warn of hazardous waste; stop at about three-quarters full"
+    },
+    {
+      "name": "West Hants Regional Municipality (Nova Scotia), Municipal Sewage Lift Stations and Power Outages (December 4, 2025)",
+      "used": "When the sewer is backing up, water run inside the home stays in the internal piping and can back up within the dwelling"
+    },
+    {
       "name": "National Park Service, Grand Canyon, How to Flush a Toilet with a Bucket (October 13, 2026)",
       "used": "Pour used dishwater down the sink drain, not into the toilet"
     },
     {
-      "name": "Sphere Handbook, Water Supply, Sanitation and Hygiene Promotion chapter (copy hosted by Universitas Sebelas Maret)",
+      "name": "Sphere Handbook, 2018 edition (or later), Water Supply, Sanitation and Hygiene Promotion chapter (copy hosted by Universitas Sebelas Maret)",
       "used": "Household wastewater should not enter excreta containment facilities"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

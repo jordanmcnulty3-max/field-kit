@@ -1,5 +1,5 @@
 {
-  "about": "Reference sun times and moon phases for tests/test_astro.py. Local clock times (24 h) in the row's time zone; null means the event does not happen that local day. Where each value came from, the date it was fetched, and which fetched values were left out and why (the March and June Syracuse rows, and all moonrise/moonset times) is in docs/content-review.md under 'Daylight and moon reference values'. USNO could not be fetched for this task; no value here is estimated.",
+  "about": "Reference sun times and moon phases for tests/test_astro.py. Local clock times (24 h) in the row's time zone; null means the event does not happen that local day. Where each value came from, the date it was fetched, and which fetched values were left out and why (the March and June Syracuse rows, and all moonrise/moonset times) is in docs/content-review.md under 'Daylight and moon reference values'. USNO could not be fetched for this task; no value here is estimated, except the Utqiagvik 2026-12-21 row, which is a geometric fact (see its sunSource). Rows marked 'confidence' rest on one source that is not confirmed and are to be replaced by USNO.",
   "rows": [
     {
       "place": "Syracuse, NY",
@@ -13,7 +13,8 @@
         "set": "19:01",
         "dusk": "19:30"
       },
-      "sunSource": "sunrisesunset.io"
+      "sunSource": "sunrisesunset.io",
+      "confidence": "single source; same page judged unreliable for other dates; to be replaced by USNO"
     },
     {
       "place": "Syracuse, NY",
@@ -27,7 +28,8 @@
         "set": "17:57",
         "dusk": "18:27"
       },
-      "sunSource": "sunrisesunset.io"
+      "sunSource": "sunrisesunset.io",
+      "confidence": "single source; same page judged unreliable for other dates; to be replaced by USNO"
     },
     {
       "place": "Syracuse, NY",
@@ -85,7 +87,8 @@
         "set": "16:32",
         "dusk": "17:05"
       },
-      "sunSource": "sunrisesunset.io"
+      "sunSource": "sunrisesunset.io",
+      "confidence": "single source; same page judged unreliable for other dates; to be replaced by USNO"
     },
     {
       "place": "Utqiagvik, AK",
@@ -109,7 +112,7 @@
         "rise": null,
         "set": null
       },
-      "sunSource": "sunrise-sunset.org: 'Does not rise' every day from 19 to 30 November 2026 (polar night); see content-review for the basis of the 21 December row"
+      "sunSource": "geometric: at 71.29 N with solar declination about -23.44 degrees the sun's highest altitude is about -4.7 degrees, below the -0.833 degree rise threshold; consistent with sunrise-sunset.org (polar night from 19 Nov)"
     }
   ]
 }

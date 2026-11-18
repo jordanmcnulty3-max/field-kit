@@ -1042,7 +1042,8 @@ Sources re-opened with WebFetch on 2026-11-17 for each change.
 
 Task 10 (2026-11-17). Reference values for `tests/fixtures/almanac-syracuse.json`, which `tests/test_astro.py` checks
 `FK_ASTRO` against (sun within 2 minutes, moon within 5 minutes). Every page below was opened with the WebFetch tool on
-2026-11-17. No value in the fixture is estimated.
+2026-11-17. No value in the fixture is estimated, except the Utqiagvik 2026-12-21 row, which is kept only as a geometric
+fact (see below).
 
 **USNO not reached.** The planned source was the US Naval Observatory API
 (`https://aa.usno.navy.mil/api/rstt/oneday?date=…&coords=43.05,-76.15&tz=-5`). The fetch tool held the first request
@@ -1051,7 +1052,10 @@ documentation page, https://aa.usno.navy.mil/data/api, was opened (fields: `sund
 `fracillum`; `null` when an object stays up or down). timeanddate.com (the brief's fallback for the moon) refused
 every request (client error). NOAA's Solar Calculator is a script page and gives no table to read.
 
-**Sun, Syracuse, NY: used.** https://sunrisesunset.io/us/new-york/syracuse/2026/ (America/New_York, "adjusted for
+**Sun, Syracuse, NY: used.** (22 September, 31 October and 21 December are single-source and unconfirmed: they rest on
+this page alone, which is judged unreliable for the March and June dates below, and were in effect kept because the
+computation agrees with them, so they cannot catch an error in the code. They are marked `confidence` in the fixture
+and are to be replaced by USNO.) https://sunrisesunset.io/us/new-york/syracuse/2026/ (America/New_York, "adjusted for
 daylight saving"; no coordinates stated), columns Sunrise, Sunset, Dawn, Dusk, Day length, opened twice:
 
 | Date | Dawn | Sunrise | Sunset | Dusk |
@@ -1086,7 +1090,8 @@ first quarter 17 November, full moon 24 November; moonset 1:00 PM and moonrise 1
 1:35 PM and no moonrise on 2 November, moonrise 12:01 AM on 3 November. sunrise-sunset.org (above) gives the moon as
 46% on 1 November with last quarter at 3:28 pm, and 35% on 2 November. The computation puts last quarter at 20:29 UTC
 (3:29 pm EST), new moon 9 November 07:03 UTC, first quarter 17 November 11:48 UTC and full moon 24 November 14:56 UTC,
-in line with both pages, so the phase names and a 0.03 band around the two pages' illuminated fractions are tested.
+in line with both pages, so the phase names (the 9, 17 and 24 November names rest on time-ok.com alone and are to be
+confirmed by USNO) and a 0.03 band around the two pages' illuminated fractions are tested.
 time-ok's moonrise and moonset times are 15 to 24 minutes from the computation (1 November rise 11:17 PM, set
 1:22 PM; 2 November set 1:50 PM). The computation's moon position was checked against Meeus, Astronomical
 Algorithms, Example 47.a (1992-04-12: apparent longitude within 0.01 degree, right ascension within 0.011 degree,
@@ -1104,8 +1109,9 @@ and moonset reference rows need USNO.
   Weather (https://www.foxweather.com/weather-news/polar-night-begins-alaska-darkness-sun-utqiagvik-barrow,
   18 November 2025) reported the previous polar night running to late January ("will not see the Sun again until
   Jan. 22, 2026"). 21 December lies between the start of the 2026 polar night and its end in the following January
-  (at 71.29 N with the sun at -23.44 degrees, the highest the sun gets is about -4.7 degrees). This row rests on that
-  reading of the two pages, not on a page that names 21 December 2026.
+  The row is kept only as a geometric fact: at 71.29 N with solar declination about -23.44 degrees the sun's highest
+  altitude is about -4.7 degrees, below the -0.833 degree rise threshold; consistent with sunrise-sunset.org (polar
+  night from 19 Nov). No page fetched names 21 December 2026.
 
 **What the fixture holds:** Syracuse 2026-09-22, 10-31, 11-01, 11-02, 12-21 (sun; phase and illumination on 11-01 and
 11-02); Utqiagvik 2026-06-21 and 12-21 (sunrise and sunset absent). The March clock-change days are tested for the

@@ -1343,3 +1343,140 @@ Statements changed:
 - surv-weather-and-lightning: "Lightning can strike as far as 10 miles from the rain." now "Lightning can strike 10 miles or more from the storm." — CDC-LTG ("Lightning can strike more than 10 miles from a storm"); matches the lightning protocol. Corrected (review F4).
 - surv-shelter, shelter-snow caption: "Snow trench with a vent hole. Sleep on a platform higher than the entrance." now "Snow trench with a vent hole. Sleep on a raised shelf: cold air sinks to the low end." — matches the drawn labels (no entrance is drawn). The text block keeps the ATP 6-26 platform rule. Corrected (review F6).
 - Recorded, not changed: lightning protocol crouch and "summer afternoons" timing, docs/decisions-for-jordan.md D9 (review F9).
+
+## Task 15: Survival topics, food, traps, game, animals (2026-11-17)
+
+Source keys (opened 2026-11-17 by web fetch from search results; title checked after each fetch). PDF text was read through the fetch tool's extraction and summary, which quotes passages; paragraph and page numbers are as the tool reported them. Army manual statements are marked; none is relied on for a safety number.
+- ATP: US Army ATP 3-50.21, Survival, September 2018, chapter 4 (characters 100,000 to 300,000 read). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- FM: US Army FM 21-76, Survival Manual (2006 copy), chapters 8 and 9 (characters 100,000 to 300,000). https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- TOOELE: Tooele County Health Department, Rule of Three. https://tooelehealth.org/rule-of-three-simple-rule-of-priorities-when-planning-for-an-emergency/
+- MDC-WH: Missouri Department of Conservation, Common Water Hemlock. https://mdc.mo.gov/discover-nature/field-guide/common-water-hemlock
+- NRCS-WH: USDA NRCS Illinois, Water Hemlock fact sheet (2006). https://www.nrcs.usda.gov/sites/default/files/2022-12/WaterHemlock.pdf
+- CU-PH: Cornell University Dept. of Animal Science, Plants Poisonous to Livestock: Poison Hemlock. https://poisonousplants.ansci.cornell.edu/conium.html
+- UA-PH: University of Arkansas Cooperative Extension, FSA2203. https://www.uaex.uada.edu/publications/pdf/FSA2203.pdf
+- MMWR-MUSH: CDC MMWR 2021;70(10), Accidental Poisonous Mushroom Ingestions. https://www.cdc.gov/mmwr/volumes/70/wr/mm7010a1.htm
+- MSU-CAT: Mississippi State University Extension, Cattail P3735-21. https://extension.msstate.edu/sites/default/files/publications/P3735-21_cattail.pdf
+- CCE-IRIS: Cornell Cooperative Extension (East Aurora), Invasives: Yellow Flag Iris (2016). https://erie.cce.cornell.edu/resources/article-1-invasive-yellow-flag-iris
+- AB-IRIS: Pale Yellow Iris weed sheet (open.alberta.ca; publisher not printed in the extracted text; Government of Alberta open data domain). https://open.alberta.ca/dataset/a4bf2d0a-6433-417f-a62e-64ec5304f4d2/resource/77ba17e0-ba72-4b3f-b499-38fedd9a572f/download/ard-weeds-pale-yellow-iris.pdf
+- MT-IRIS: Montana Department of Agriculture, Yellowflag Iris. https://prod-agr.mt.gov/Topics/N-P/Noxious-Weeds-Pages/Education/Current-Weeds/Yellowflag-Iris
+- UIUC-BRAMBLE: University of Illinois Extension, Brambles (2021). https://extension.illinois.edu/blogs/flowers-fruits-and-frass/2021-07-02-brambles-pesky-garden-weed-or-delicious-summer-treat
+- UVM-DAND: University of Vermont Extension, Dandelions: Foe or Friend? (2024). https://www.uvm.edu/extension/news/dandelions-foe-or-friend
+- UME-GREENS: University of Maine Extension, Bulletin 4060, Edible Wild Greens in Maine. https://extension.umaine.edu/publications/4060e/
+- FSIS: USDA FSIS, Safe Minimum Internal Temperature Chart (fsis.usda.gov domain; the extracted text does not print FSIS). https://www.fsis.usda.gov/es/node/3293
+- DEC-TRAP: NYS DEC, 2023-2024 New York Hunting & Trapping Guide, furbearers (extapps.dec.ny.gov; publisher inferred from the DEC domain and text). https://extapps.dec.ny.gov/docs/wildlife_pdf/huntguidefurbearers.pdf
+- DEC-FISHREG: NYS DEC, General Freshwater Fishing Regulations. https://dec.ny.gov/things-to-do/freshwater-fishing/regulations/general
+- DEC-FISHBASICS: NYS DEC, Freshwater Fishing Basics for Beginners. https://extapps.dec.ny.gov/docs/fish_marine_pdf/ifnybasics.pdf
+- DEC-CATCH: NYS DEC, Beginners' Guide to Freshwater Fishing, Care of Your Catch. https://extapps.dec.ny.gov/docs/fish_marine_pdf/gsfishing3.pdf
+- CDC-CWD: CDC, About Chronic Wasting Disease. https://www.cdc.gov/chronic-wasting/about
+- DEC-CWD: NYS DEC press release, 6 November 2026, CWD Found in Livingston County Wild Deer. https://dec.ny.gov/news/press-releases/2026/11/dec-announces-chronic-wasting-disease-found-in-livingston-county-wild-deer
+- DOH-GAME: NYS Department of Health, Harvesting, Preparing, and Eating Wild Game. https://healthweb-back.health.ny.gov/environmental/outdoors/venison_game/advice_on_eating_game.htm
+- OH-DRESS: Ohio DNR Division of Wildlife, Field Dressing Your Deer, Pub. 111. https://dam.assets.ohio.gov/image/upload/ohiodnr.gov/documents/wildlife/hunting-trapping/field%20dressing%20deer%20pub111.pdf
+- IN-DRESS: Indiana State Board of Animal Health, Deer Processing MC-1/9.03. https://www.in.gov/dnr/fish-and-wildlife/files/dressing.pdf
+- MSU-MT: Montana State University Extension, Field Care of Harvested Big Game. https://animalrangeextension.montana.edu/wildlife/hunting/field-care-of-big-game.html
+- PSU-VEN: Penn State Extension, Proper Care and Handling of Venison from Field to Table (2020). https://extension.psu.edu/proper-care-and-handling-of-venison-from-field-to-table
+- PSU-GAME: Penn State Extension, Proper Processing of Wild Game and Fish (2023; first 100,000 characters). https://extension.psu.edu/proper-processing-of-wild-game-and-fish
+- ODFW-RAB: Oregon Department of Fish and Wildlife, How to Rabbit Hunt. https://www.dfw.state.or.us/resources/hunting/docs/howtohuntrabbit.pdf
+- MDC-SQ: Missouri Department of Conservation, How to Clean a Squirrel. https://mdc.mo.gov/hunting-trapping/species/squirrel/how-clean-squirrel (fetched at the redirect target the search result's URL returned; see pages note)
+- MDC-RAB: Missouri Department of Conservation, Rabbit: Safety and Health. https://mdc.mo.gov/hunting-trapping/species/rabbit/rabbit-safety-health
+- PGC-TUL: Pennsylvania Game Commission, Tularemia. https://www.pa.gov/agencies/pgc/wildlife/wildlife-health/wildlife-diseases/tularemia.html
+- CDC-TUL: CDC, Preventing Tularemia. https://www.cdc.gov/tularemia/prevention
+- CLEM-BIRD: Clemson Cooperative Extension, Safe Handling of Wild Game Birds HGIC 3515 (2024). https://hgic.clemson.edu/factsheet/safe-handling-of-wild-game-birds/
+- CT-CH13: Hunter safety manual chapter 13, Care of Game (Outdoor Roadmap, hosted on ct.gov test domain). Opened; not cited.
+- MMWR-BEAR: CDC MMWR 2024;73(40), Trichinellosis and Undercooked Bear Meat, North Carolina. https://cdc.gov/mmwr/volumes/73/wr/pdfs/mm7340a4-H.pdf
+- CDC-TRICH: CDC, How to Prevent Trichinellosis. https://www.cdc.gov/trichinellosis/prevention/index.html
+- MDC-BEAR: Missouri Department of Conservation, Bear: Properly Cook All Game. https://mdc.mo.gov/node/254397
+- DEC-CAN: NYS DEC, Bear-Resistant Canisters. https://dec.ny.gov/nature/animals-fish-plants/black-bear/bearwise/bear-resistant-canisters
+- NEBBTC: Northeast Black Bear Technical Committee, Recommendations for Human-Black Bear Encounters (mass.gov). https://www.mass.gov/doc/what-to-do-if-you-encounter-a-black-bear/download
+- NPS-BEAR: National Park Service, Bear Attacks. https://nps.gov/articles/bearattacks.htm
+- DEC-BRM: NYS DEC, New York State Black Bear Response Manual, 3rd ed. (2011; first 100,000 characters). https://extapps.dec.ny.gov/docs/wildlife_pdf/bearsopm.pdf
+- DEC-COUGAR: NYS DEC, Eastern Cougar Sightings. https://dec.ny.gov/nature/animals-fish-plants/eastern-cougar/sightings
+- USFWS-GRIZ: USFWS press release, January 2025, Proposes Update to Grizzly Bear ESA Listing. https://fws.gov/press-release/2025-01/usfws-proposes-update-grizzly-bear-esa-listing-management
+- DEC-MOOSE: NYS Conservationist moose article (E. Stegemann, reprinted February 2006, extapps.dec.ny.gov). https://extapps.dec.ny.gov/docs/wildlife_pdf/moose1.pdf
+- DEC-MOOSE20: NYS DEC bulletin, 14 October 2020, DEC Advises Public to Be Alert for Moose in the Adirondacks. https://content.govdelivery.com/accounts/NYSDEC/bulletins/2a5d60f
+- DEC-SNAKES: Snakes of New York (Conservationist reprint, extapps.dec.ny.gov). https://extapps.dec.ny.gov/docs/administration_pdf/snakes.pdf
+- DEC-MASS: NYS DEC, Eastern Massasauga. https://dec.ny.gov/nature/animals-fish-plants/eastern-massasauga
+- NIOSH-SNAKE: CDC/NIOSH, Venomous Snakes at Work. https://www.cdc.gov/niosh/topics/snakes/
+- CDC-LYME: CDC, How Lyme Disease Spreads. https://www.cdc.gov/lyme/causes
+- CDC-TICK: CDC, Preventing Tick Bites. https://cdc.gov/ticks/prevention/index.html
+- CDC-AFTER: CDC, What to Do After a Tick Bite. https://cdc.gov/ticks/after-a-tick-bite
+- DOH-RABIES: NYS Department of Health press release, 17 June 2026, Prevent Exposure to Rabies. https://healthweb-back.health.ny.gov/press/releases/2026/2026-06-17_preventing_exposure_to_rabies.htm
+- CDC-RABUS: CDC, Rabies in the U.S. https://www.cdc.gov/rabies/location/usa/index.html
+
+### surv-food-and-wild-plants
+
+- About three weeks without food — TOOELE. Corrected ("weeks" made specific).
+- Water hemlock most toxic plant in North America; small amount kills; looks like Queen Anne's lace; poison hemlock a look-alike — MDC-WH (livestock dose; "poisoned people can suffer similarly"). Range covers New York — NRCS-WH (Quebec south to North Carolina). Human deaths from poison hemlock roots eaten as wild carrots or parsnips — CU-PH. Hard to tell from wild carrot; both most acutely toxic — UA-PH. Corrected (parsley not named as a look-alike by any source; parsnip is).
+- Warning-sign list — ATP 4-61; FM pp. 103-104. Matches (parsnip added). Not a safety rule: ATP 4-57 ("exceptions to every rule"), 4-62 ("will often help"). Warn added so no item reads as making a plant safe. Army only, as briefed; it is a list of reasons to reject a plant, never to accept one.
+- Universal Edibility Test: not in the topic. Nothing to check; not added. (ATP 4-57 to 4-60 were read: last resort only, more than 24 hours per plant part, 8-hour waits, cooked-edible does not mean raw-edible; smokers may not taste alkaloids.)
+- Mushrooms — MMWR-MUSH ("Wild mushrooms should not be consumed unless identified by an expert"; poisonous resemble nonpoisonous; cooking does not remove toxins); ATP (no field test). Corrected; "almost no calories" removed-unsourced. Nothing weaker than expert identification remains.
+- `plant-warnings` figure removed (standing decision: no plant drawings).
+- Cattail edible parts — MSU-CAT (Mississippi; Typha species also grow in the Northeast). Look-alike yellow flag iris: toxic, prohibited invasive in New York on pond, lake and stream shores — CCE-IRIS; confused with cattail when not in bloom — AB-IRIS; round vs flat leaf bases — MT-IRIS. Corrected. No Northeast extension page that names the iris look-alike was found; the iris facts for New York come from Cornell.
+- Dandelion — UVM-DAND and UME-GREENS confirm edibility; neither names look-alikes. Removed (plant rule). Open question D11.
+- Acorns — no extension, state or botanical source found (searches returned almanacs and blogs). Removed-unsourced. D11.
+- Blackberries and raspberries; no poisonous look-alikes — UIUC-BRAMBLE (Illinois, not Northeast; the brief allows a state extension). Corrected.
+- Insects — ATP 4-133, 4-23; FM pp. 72-73. Corrected (spiders, biting/stinging insects added; barbed legs). Army only.
+- Freshwater fish — ATP 4-148 (cook to kill parasites); FSIS 145°F. Corrected. ATP 4-147 "no poisonous freshwater fish" not used (Army only; contaminants).
+- Roads, pesticides, road salt; wash — UVM-DAND; UME-GREENS. Added.
+- Links: `p:poisoning`, `p:poison-plants`, `p:vomiting-diarrhea`. Tags: rural, woods. Unchanged.
+
+### surv-traps-and-fishing
+
+- New York rules — DEC-TRAP (licence; Southern Zone 24 hours; Northern Zone 24 or 48 hours by WMU and trap; "Snares may not be used for trapping"; body-gripping traps over 7½ inches never on land; water sets only in open seasons); DEC-FISHREG (immediate attendance of lines; minnow traps only for baitfish); DEC-FISHBASICS (licence from 16). Corrected. "Other states have their own rules": spec 6.1 requirement, not a sourced fact. An eRegulations copy of the same guide was opened first and not cited (third party).
+- Placement, channelization — FM pp. 78-79; ATP 4-15, 4-89, 4-90, 4-93. Corrected. Army only (mechanics).
+- Number of traps — ATP 4-86; FM p. 78. Corrected.
+- Sign and scent — FM p. 79; ATP 4-91. Corrected. Check interval: Army manuals give none (ATP 4-87); New York rule used.
+- Simple snare — FM p. 80; ATP 4-102. Corrected; fist size and 3 inches removed-unsourced. `trap-snare` removed.
+- Squirrel pole — FM p. 82; ATP 4-102. Matches. `trap-squirrel` kept.
+- Figure-4 — FM pp. 84-85; ATP 4-103. Corrected. The "keep your hands out from under the weight" caution is unsourced but only adds caution; kept and flagged. `trap-fig4` kept.
+- Gorge — FM p. 89; ATP 4-153. Corrected.
+- Fish trap — FM pp. 91-92; ATP 4-158. Corrected. `fishing` figure removed (drew a stake funnel).
+- Set lines overnight — removed-unsourced; illegal in New York in normal times (DEC-FISHREG).
+- Feeding — FM p. 75; ATP 4-146. Corrected (dawn and dusk unsourced).
+- Nothing aimed at people. Tags: rural, woods. Unchanged.
+
+### surv-field-dressing-game
+
+- Sick, strange-acting or found-dead animals; gloves; no kitchen knives — CDC-CWD; DOH-GAME. Added.
+- CWD in New York — DEC-CWD (Livingston County announced 6 November 2026; first wild case since 2005 Oneida County; high-risk parts brain, spinal cord, spleen, eyes); CDC-CWD (organs, especially brain or spine; test; never eat positive). Added. Lymph nodes: in no opened source, so not named.
+- Rabies — CDC-CWD and DOH-GAME (sick or strange-acting); link `p:animal-bite`.
+- Confirm dead — OH-DRESS; IN-DRESS. Corrected. Tag, gloves — OH-DRESS; DOH-GAME. Dress promptly — PSU-VEN; IN-DRESS.
+- Position — IN-DRESS (slight slope, braced). Corrected; head uphill unsourced. `dress-deer` removed.
+- Belly cut — MSU-MT (blade up, pelvis toward breastbone, two fingers); IN-DRESS; PSU-VEN (paunch and intestines carry foodborne bacteria). Corrected.
+- Anus and bladder — MSU-MT; OH-DRESS. Corrected. Diaphragm, windpipe, sharp objects — OH-DRESS; MSU-MT. Corrected.
+- Organs out, trim soiled meat — IN-DRESS; heart and liver — OH-DRESS; healthy liver — FM p. 96 (Army only). Corrected.
+- Cooling — OH-DRESS (prop, shade); IN-DRESS (40°F or less); MSU-MT (40°F within 24 hours; skin if above freezing the first night); DOH-GAME (below 45°F); PSU-VEN (35-40°F). Corrected to the colder 40°F within 24 hours. "off the ground" not in a source; removed.
+- Rabbit — ODFW-RAB. Squirrel — MDC-SQ. Corrected.
+- Tularemia — CDC-TUL (gloves, rabbits and rodents, cook thoroughly); MDC-RAB (numerous pinhead white lesions, discard; 165°F); ODFW-RAB (light spotting, do not eat). PGC-TUL says pale spots and "at least 135° F": the lower temperature is not used. Corrected.
+- Fish — DEC-CATCH. Corrected. `dress-fish` kept.
+- Birds — CLEM-BIRD. Corrected.
+- Cooking — DOH-GAME (165°F thickest part, game and birds); MMWR-BEAR (wild game 165°F kills Trichinella; freezing might not be sufficient); CDC-TRICH (bear, wild boar; freeze-resistant worms; thermometer); MDC-BEAR (160°F; freezing, smoking, curing do not kill all); PSU-VEN (venison whole cuts 145°F, ground 160°F); PSU-GAME (game bird breast 165°F; says freezing three weeks inactivates trichinella, which CDC says is not reliable for wild game); ATP 4-25 (180°F, Army). FSIS (fish 145°F). 165°F used (CDC, NYS DOH). Open question D10.
+- Lead — DOH-GAME. Added.
+- Tags: rural, woods. Unchanged.
+
+### surv-dangerous-animals
+
+- No grizzly or mountain lion population in the Northeast (confirms the step-1 deletions) — DEC-COUGAR ("do not have a native, self sustaining population in New York State"; absent since the late 1800s); USFWS-GRIZ (lower-48 grizzlies in Idaho, Montana, Washington and Wyoming). Recorded; "only bear is the black bear" added.
+- Canister rule — DEC-CAN, quoted exactly; scented items; 100 feet. Corrected.
+- Bear spray — NEBBTC. Corrected (D12).
+- Never run, don't climb, calm voice, back away — NEBBTC; DEC-BRM; NPS-BEAR. Corrected ("stand your ground" removed).
+- Fight back, don't play dead, face — NPS-BEAR; NEBBTC; DEC-BRM. Corrected; tent line removed.
+- Moose — DEC-MOOSE (unpredictable, little warning, protective cows, bulls in rut charge, northeastern New York, watch from a distance); DEC-MOOSE20 (Adirondacks and surrounding areas; do not approach; early fall breeding). Added. The 2006 population figure is not used. New England: no opened source; not named.
+- Three venomous snakes; habitats; massasauga at two sites — DEC-SNAKES; DEC-MASS. Added. Leave alone, pit — DEC-SNAKES. Prevention — NIOSH-SNAKE. Corrected ("step onto logs and rocks" contradicted NIOSH's advice not to climb rocks or woodpiles).
+- If bitten — NIOSH-SNAKE (rings and watches, keep calm, no tourniquet, cutting, sucking, ice). Matches the snakebite protocol; "and still" dropped (NIOSH says lie or sit comfortably; the protocol covers keeping still). Link `p:snakebite`.
+- Ticks — CDC-LYME (blacklegged tick in the Northeast; poppy-seed nymphs; more than 24 hours); CDC-TICK (check after outdoors; body areas; clothing, packs, pets); CDC-AFTER (tweezers; clean bite and hands; rash or fever within several weeks). Corrected ("daily" not in CDC). `tick` figure kept (its labels match CDC-AFTER). Link `p:tick`.
+- Rabies — DOH-RABIES (raccoons, skunks, bats, foxes, free-roaming cats; avoid unusual or aggressive animals; avoid all contact with bats; waking with a bat); CDC-RABUS (bats, raccoons, skunks, foxes; bat bites smaller than a pencil eraser). Added. Link `p:animal-bite`.
+- Coyotes: not in the topic; not added.
+- Tags: rural, woods. Unchanged (ticks and rabies also occur in towns: CDC says check after your own backyard; noted for the reviewer).
+
+### Task 15 pages that would not open or were not used
+
+- ATP 3-50.21 characters 0 to 100,000 (front matter and chapters 1-2) gave no food text; chapter 4 read from 100,000 to 300,000.
+- FM 21-76 characters 0 to 100,000 (to page 34) had no chapter 8; read from 100,000.
+- One fetch waited for approval (flagged by the controller); it was abandoned. The squirrel page was fetched at the redirect target that the search-result URL (huntfish.mdc.mo.gov) returned; it opened, title confirmed (How to Clean a Squirrel, Missouri Department of Conservation).
+- Cornell Botanic Gardens water hemlock result (cornellbotanicgardens.org/?p=22547): opened a generic page with no water hemlock text; not used.
+- CDC Animals and Rabies (cdc.gov/rabies/animals/): returned only metadata; not used.
+- Cornell Cooperative Extension Warren County, Wild Edibles: page text has no plant facts (details are in linked slide PDFs not opened).
+- MSU Extension Cattail (bluedynamo.msu.edu): no edibility or look-alike text.
+- Utah Poison Control water hemlock page: no publisher printed; western species; not used.
+- eRegulations furbearer page: third party; replaced by the DEC guide PDF.
+- CT hunter safety chapter 13 (Outdoor Roadmap): opened; not cited (commercial course text).

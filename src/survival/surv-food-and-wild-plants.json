@@ -9,7 +9,7 @@
     "hemlock",
     "poisonous",
     "cattail",
-    "acorns",
+    "mushrooms",
     "insects"
   ],
   "summary": "Food is the lowest priority, and you should only eat a plant you can identify with certainty.",
@@ -22,10 +22,14 @@
       "h": "Food and wild plants",
       "blocks": [
         {
-          "p": "Food is the lowest priority, since you can last weeks without it. Don’t spend energy or risk poisoning chasing it early."
+          "p": "Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early."
         },
         {
-          "p": "Only eat a plant you can identify with certainty. Water hemlock and poison hemlock, two of the deadliest plants in North America, look like wild carrot or parsley, and a small amount can kill."
+          "p": "Only eat a plant you can identify with certainty. Water hemlock and poison hemlock are among the most poisonous plants in North America. Both can look like wild carrot (Queen Anne’s lace) or wild parsnip, people have died after eating poison hemlock roots as wild carrots or parsnips, and a small amount of water hemlock can kill."
+        },
+        {
+          "link": "p:poisoning",
+          "label": "Ate a plant or mushroom that might be poisonous"
         }
       ]
     },
@@ -38,46 +42,108 @@
             "Beans, bulbs or seeds inside pods",
             "A bitter or soapy taste",
             "Spines, fine hairs or thorns",
-            "Carrot-, parsley- or dill-like leaves",
+            "Carrot-, parsnip-, parsley- or dill-like leaves",
             "An almond smell in the leaves or wood",
             "Grain heads with pink, purple or black spurs",
             "Leaves in groups of three"
           ]
         },
         {
-          "fig": "plant-warnings",
-          "cap": "Warning signs only. These drawings are not for identifying plants."
+          "warn": "These signs help you avoid many poisonous plants, not all of them. A plant that shows none of them is not safe to eat. Eat only a plant you have positively identified."
         },
         {
-          "p": "A few well-known edibles break these rules (blackberry canes have thorns), which is why positive identification matters more than any rule. Skip wild mushrooms entirely: almost no calories, and deadly lookalikes."
+          "p": "Some well-known edibles break these rules (blackberry canes have thorns), which is another reason positive identification matters more than any rule."
         },
         {
-          "p": "There are deliberately no drawings of edible plants here. Identify plants with a regional field guide that has real photographs, ideally after learning them from someone local."
+          "warn": "Never eat a wild mushroom unless an expert has identified it. Poisonous mushrooms can look like edible ones, there is no field test that shows a mushroom is safe, and cooking does not destroy the poisons."
+        },
+        {
+          "p": "There are deliberately no drawings of plants here. Identify plants with a regional field guide that has real photographs, ideally after learning them from someone local."
+        },
+        {
+          "link": "p:poison-plants",
+          "label": "Poison ivy, oak or sumac on the skin"
         }
       ]
     },
     {
-      "h": "Widespread, easier options",
+      "h": "Easier options",
       "blocks": [
         {
           "list": [
-            "Cattail: young shoots, starchy roots and pollen. Grows in wet ground across much of the world.",
-            "Dandelion: leaves, flowers and roots are all edible.",
-            "Acorns: shell and chop them, then soak or boil in several changes of water until they’re no longer bitter.",
-            "Blackberries and raspberries: clustered berries with few toxic lookalikes.",
-            "Insects: grasshoppers, crickets, grubs and ants. Remove legs and wings and cook them. Skip brightly coloured, hairy or smelly insects, caterpillars, and flies, ticks and mosquitoes.",
-            "Fish: all freshwater fish can be eaten if cooked thoroughly."
+            "Cattail: in wet ground. Young shoots can be eaten like asparagus, and the starchy roots and the pollen can be made into flour. Look-alike: yellow flag iris grows on the same pond, lake and stream shores in New York, and every part of it is poisonous. Its leaves look very like cattail leaves when it is not in flower; cattail leaf bases are round, iris leaf bases are flat.",
+            "Wild blackberries and raspberries: if it looks like a store-bought blackberry or raspberry, it is one. They have no poisonous look-alikes.",
+            "Insects: grasshoppers, crickets, grubs and ants. Remove wings and barbed legs, and cook them fully. Skip insects that bite or sting, hairy or brightly coloured insects, caterpillars, smelly insects, spiders, and flies, ticks and mosquitoes.",
+            "Freshwater fish: cook them thoroughly, to 145°F inside, to kill parasites."
           ]
+        },
+        {
+          "p": "Pick plants well away from roads and from ground treated with pesticides or road salt, and wash them well."
+        },
+        {
+          "link": "p:vomiting-diarrhea",
+          "label": "Vomiting or diarrhea"
         }
       ]
     }
   ],
   "sources": [
     {
-      "name": "Not yet source-checked",
-      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+      "name": "Tooele County Health Department (Utah), Rule of Three",
+      "used": "About three weeks without food"
+    },
+    {
+      "name": "Missouri Department of Conservation, Common Water Hemlock",
+      "used": "Water hemlock among the most toxic plants in North America; a small amount kills; looks like Queen Anne's lace; poison hemlock a deadly look-alike"
+    },
+    {
+      "name": "USDA NRCS Illinois, Water Hemlock fact sheet (2006)",
+      "used": "Water hemlock range from Quebec south through the eastern US (covers New York)"
+    },
+    {
+      "name": "Cornell University Department of Animal Science, Plants Poisonous to Livestock: Poison Hemlock",
+      "used": "Human deaths from eating poison hemlock roots as wild carrots or parsnips; confused with wild carrot"
+    },
+    {
+      "name": "University of Arkansas Cooperative Extension, FSA2203 Poison Hemlock Identification and Control",
+      "used": "Poison hemlock and water hemlock the most acutely toxic of the parsley family; hard to tell from wild carrot"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (2018), chapter 4",
+      "used": "Plant warning signs (4-61) and that they only often help (4-57, 4-62); no field test for mushrooms; insects to avoid and cooking (4-133, 4-23); cook freshwater fish to kill parasites (4-148)"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual (2006 copy), chapters 8 and 9",
+      "used": "Same plant warning list (pp. 103-104); do not eat mushrooms; insects: remove wings and barbed legs, cook (pp. 72-73)"
+    },
+    {
+      "name": "CDC MMWR 2021;70(10), Accidental Poisonous Mushroom Ingestions, United States 2016-2018",
+      "used": "Never eat wild mushrooms unless identified by an expert; poisonous resemble nonpoisonous; cooking does not remove toxins"
+    },
+    {
+      "name": "Mississippi State University Extension, Cattail (Typha spp.), P3735-21",
+      "used": "Cattail edible parts: young shoots like asparagus, starchy rhizome ground into meal, pollen as flour"
+    },
+    {
+      "name": "Cornell Cooperative Extension (Erie County), Invasives: Yellow Flag Iris (2016)",
+      "used": "All parts of yellow iris toxic; prohibited invasive in New York; colonies on shores of ponds, lakes and streams"
+    },
+    {
+      "name": "Alberta Agriculture, Pale Yellow Iris weed sheet; Montana Department of Agriculture, Yellowflag Iris",
+      "used": "Yellow iris confused with cattail when not in bloom; cattail leaf bases round, iris flat"
+    },
+    {
+      "name": "University of Illinois Extension, Brambles: Pesky Garden Weed or Delicious Summer Treat (2021)",
+      "used": "Wild blackberries and raspberries safe to eat; no poisonous look-alikes"
+    },
+    {
+      "name": "USDA FSIS, Safe Minimum Internal Temperature Chart",
+      "used": "Fish 145°F"
+    },
+    {
+      "name": "University of Vermont Extension, Dandelions: Foe or Friend? (2024); University of Maine Extension, Bulletin 4060",
+      "used": "Pick away from roads and treated areas (road salt, pesticides); wash greens"
     }
   ],
-  "reviewed": "2026-11-17",
-  "draft": true
+  "reviewed": "2026-11-17"
 }

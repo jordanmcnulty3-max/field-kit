@@ -149,3 +149,19 @@ Source disagreements found while checking the Survival topics. Each says what th
    most common on "summer afternoons"; CDC's Safety Guidelines: Lightning says late afternoon or evening (NWS says
    early afternoon). Today: the protocol is unchanged. Should the crouch stay as a last resort, and should the
    timing line be corrected to the sources?
+10. **Cooking temperature for wild game.** CDC (MMWR 2024, bear meat trichinellosis) and NYS Department of Health:
+   cook all game and birds to 165°F. Missouri Department of Conservation: 160°F. Penn State Extension: whole venison
+   cuts 145°F, ground 160°F. Pennsylvania Game Commission (tularemia page): at least 135°F. Army ATP 3-50.21: 180°F.
+   Today: 165°F for all wild game and birds, fish 145°F (CDC, NYS DOH, USDA FSIS), and freezing is not treated as
+   killing trichinella in wild game (CDC; Penn State says three weeks of freezing works, which CDC says is not
+   reliable for wild game). Say if the group wants the Army's 180°F.
+11. **Wild plants removed for lack of a source.** Dandelion: University of Vermont and University of Maine Extension
+   confirm it is edible, but no opened source names its look-alikes or says it has no dangerous ones, so under the
+   plant rule (each edible named with its dangerous look-alikes) it was removed. Acorns: only the Army manuals give
+   the leaching method; no extension or state source was found, so they were removed. Today: the topic names
+   cattail (with yellow flag iris as the poisonous look-alike) and wild blackberries and raspberries only. Say if
+   you want either back; it needs a source (or plant photos at pack 4).
+12. **Bear spray in New York.** The Northeast Black Bear Technical Committee says bear spray can work with practice
+   and that local rules may restrict carrying it. Whether New York law allows carrying bear spray was not checked
+   (no law page was opened). Today: the topic says local rules may restrict it. Say if the group carries bear
+   spray, so pack 2 can check the law.

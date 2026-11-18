@@ -11,7 +11,7 @@
     "fish trap",
     "squirrel"
   ],
-  "summary": "Set many traps on active game trails, and leave several baited lines out overnight.",
+  "summary": "Set several traps where animals clearly travel, and leave as little sign of yourself as you can.",
   "where": [
     "rural",
     "woods"
@@ -21,13 +21,13 @@
       "h": "Traps and fishing",
       "blocks": [
         {
-          "p": "Outside a genuine emergency, trapping, snaring and set lines are regulated or illegal in most places. Check your state’s rules before practising."
+          "warn": "In normal times New York requires a trapping licence, sets trapping seasons, bans snares for trapping, limits trap types, and requires traps to be checked at least once every 24 hours in the Southern Zone (every 24 or 48 hours in the Northern Zone, depending on area and trap). Fishing needs a licence from age 16, lines must not be left unattended, and fish traps may only be used for baitfish. Other states have their own rules."
         },
         {
           "list": [
-            "Set traps on active game trails, at spots where the trail narrows, and near water, dens or feeding signs.",
-            "Set many. Most traps catch nothing, so a dozen beats one.",
-            "Handle them as little as possible and leave the trail undisturbed. Check them at least once a day."
+            "Set traps where you can see animals pass: runs, trails, droppings, burrow openings, and feeding or watering spots. Set them where the trail narrows, or narrow it yourself with a funnel of sticks.",
+            "Set several. A few well-placed traps can catch more than one person hunting.",
+            "Leave as little sign of yourself as you can: clear away fresh dirt, don’t cut live plants nearby, and handle traps as little as possible. Human scent alarms animals; mud masks it. Don’t use urine."
           ]
         }
       ]
@@ -37,16 +37,12 @@
       "blocks": [
         {
           "list": [
-            "Simple snare: a loop of wire or strong cord with a sliding noose, anchored firmly. For rabbits, make the loop about fist-sized with its bottom about 3 inches above the trail."
+            "Simple snare: a noose of wire anchored firmly, big enough to slip over the animal’s head but never low enough for it to step a foot into. Wire works better than cord, which can loosen and slip off."
           ]
         },
         {
-          "fig": "trap-snare",
-          "cap": "Simple snare across a trail. Disturb the trail as little as possible."
-        },
-        {
           "list": [
-            "Squirrel pole: lean a long pole against a tree squirrels use and fix several small snares along it."
+            "Squirrel pole: lean a long pole against a tree squirrels use and fix several small wire nooses along it."
           ]
         },
         {
@@ -55,7 +51,7 @@
         },
         {
           "list": [
-            "Figure-4 deadfall: three notched sticks hold up a heavy rock or log, and bait on the trigger stick drops it. Keep your hands and body out from under the weight while setting it."
+            "Figure-4 deadfall: three notched sticks hold up a rock or log heavy enough to kill the animal at once, and bait on the trigger stick drops it. Practise setting the trigger first. Keep your hands and body out from under the weight while setting it."
           ]
         },
         {
@@ -69,25 +65,38 @@
       "blocks": [
         {
           "list": [
-            "Gorge hook: a short sliver of bone or hardwood, sharpened at both ends and tied at the middle. Bait it; it lodges crosswise when swallowed.",
-            "Fish trap: a funnel of stakes in shallow water that fish swim into but struggle to find their way out of.",
-            "Several baited lines left out overnight catch more than one rod you have to watch.",
-            "Fish feed most around dawn and dusk."
+            "Gorge hook: a short sliver of bone or hardwood, sharpened at both ends and tied at the middle. Bait it lengthwise. Let the fish swallow it deep before you pull, so it sets itself in the throat; don’t jerk the line.",
+            "Fish trap: a funnel-shaped basket of lashed sticks that fish swim into but struggle to find their way out of.",
+            "Fish often feed heavily before a storm and seldom just after one, while the water is muddy. Light often draws them at night."
           ]
         },
         {
-          "fig": "fishing",
-          "cap": "Gorge hook and a stake fish trap, seen from above."
+          "p": "Cleaning and cooking fish and game is in Field dressing game."
         }
       ]
     }
   ],
   "sources": [
     {
-      "name": "Not yet source-checked",
-      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+      "name": "NYS DEC, 2023-2024 New York Hunting & Trapping Guide (furbearers section)",
+      "used": "Trapping licence; Southern Zone 24-hour trap checks, Northern Zone 24 or 48 hours by WMU and trap; snares may not be used for trapping; body-gripping trap limits; season rules"
+    },
+    {
+      "name": "NYS DEC, General Freshwater Fishing Regulations",
+      "used": "Anglers must be in immediate attendance of lines; fish (minnow) traps only for baitfish"
+    },
+    {
+      "name": "NYS DEC, Freshwater Fishing Basics for Beginners",
+      "used": "Freshwater fishing licence from age 16"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8",
+      "used": "Trap placement, channelization, sign and scent (pp. 78-79); simple snare noose size and height, wire (p. 80); squirrel pole (p. 82); figure-4 deadfall (pp. 84-85); gorge (p. 89); fish traps (pp. 91-92); fish feeding (p. 75)"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (2018), chapter 4",
+      "used": "Several traps beat one hunter (4-86); traps at burrow openings (4-15); scent, mud, no urine (4-91); snare and squirrel pole (4-102); figure-4 weight (4-103); gorge set by swallowing, don't jerk (4-153); funnel basket trap (4-158); feeding before storms (4-146)"
     }
   ],
-  "reviewed": "2026-11-17",
-  "draft": true
+  "reviewed": "2026-11-17"
 }

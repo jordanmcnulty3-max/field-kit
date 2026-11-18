@@ -64,10 +64,10 @@
       "h": "Put it out",
       "blocks": [
         {
-          "p": "Never leave a fire unattended. To put it out, drown it with water until every ember is wet, stir it and drown it again, then feel everything with your bare hand. If it’s too hot to touch, it’s too hot to leave."
+          "p": "Never leave a fire unattended. To put it out, drown it with water until every ember is wet, stir it and drown it again, then hold the back of your hand just above the ashes to feel for heat. If it’s too hot to touch, it’s too hot to leave."
         },
         {
-          "p": "In normal times, New York allows campfires less than 3 feet high and 4 feet across, burning only charcoal or dry, clean, untreated wood, and they must never be left unattended."
+          "p": "In normal times, New York allows campfires less than 3 feet high and 4 feet across, burning only charcoal or dry, clean, untreated wood, and they must never be left unattended. On New York state land in normal times, use only dead and down wood; cutting standing trees is prohibited."
         },
         {
           "link": "p:burns",
@@ -95,11 +95,15 @@
     },
     {
       "name": "Smokey Bear (Ad Council, USDA Forest Service, National Association of State Foresters), Campfire Safety / How to Put Out a Campfire",
-      "used": "Drown, stir, drown, feel; if it is too hot to touch, it is too hot to leave"
+      "used": "Drown, stir, drown, feel: hover the back of your hand over the ashes to feel that the embers are cool; if it is too hot to touch, it is too hot to leave"
     },
     {
       "name": "NYS DEC, Annual Residential Brush Burning Prohibition press release (11 April 2023)",
       "used": "Campfires less than three feet high and four feet in length, width or diameter allowed; only charcoal or dry, clean, untreated or unpainted wood; never leave unattended, must extinguish"
+    },
+    {
+      "name": "NYS DEC, Camping, primitive (Fire Safety at Campsites)",
+      "used": "Cutting standing trees is prohibited; use only dead and down wood for fires (state land, normal times)"
     }
   ],
   "reviewed": "2026-11-17"

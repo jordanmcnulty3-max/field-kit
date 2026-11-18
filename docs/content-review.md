@@ -1317,3 +1317,29 @@ Source keys (opened 2026-11-17 by web fetch from search results; title checked a
 - archive.org TC 21-3: needed a redirect; the redirect URL was fetched (title confirmed). Only the first 100,000 characters were read.
 - Colorado Parks and Wildlife survival shelter page (https://cpw.state.co.us/learn/Pages/SurvivalShelter.aspx): the fetched text showed no title or publisher, so it is not cited.
 - NWS cloud chart PDF: opened; gives no forecasts for the cloud signs in the topic.
+
+### Task 14 diagrams removed in this batch
+
+Figure files are unchanged in figs/; only the topic fig blocks were removed.
+- shelter-debris: label fixes (later small task). "Ridgepole at hip height" should say waist height; "Debris an arm's length thick" should say at least 3 ft.
+- fire-sizes: label fixes (later small task). Kindling is pencil-lead to thumb thick; fuel is forearm thick (not "wrist-thick and up").
+- fire-platform: label fixes (later small task). Drop "or flat rocks"; the base is for deep snow, not "snow or wet ground".
+- river: label and drawing fix (later small task). "Angle slightly downstream" and the drawn path (about 21 degrees) should show about 45 degrees downstream.
+- shelter-tarp: needs a new drawing (waits for its pack). Drawn as an A-frame with the low end into the wind; the text is now a poncho lean-to with its back into the wind.
+- fire-ferro: needs a new drawing (waits for its pack). Drawn as the pull-back method; the text is now the Army method (striker driven down the rod).
+
+### Task 14 fix round 1 (2026-11-17)
+
+New sources opened:
+- DEC-PRIM: NYS DEC, Camping, primitive. https://dec.ny.gov/things-to-do/camping-primitive (title confirmed). Under "Rules and Guidelines > Fire Safety at Campsites": "Cutting standing trees is prohibited." "Use only dead and down wood for fires."
+- SMOKEY re-opened: https://smokeybear.com/en/prevention-how-tos/campfire-safety/how-to-maintain-and-extinguish-your-campfire, title "How to Put Out a Campfire | Smokey Bear". Step 07 (Drown, Stir, Drown, Feel): "Hover the back of your hand over the ashes to feel that the embers are cool". Under "Extinguish Your Campfire": "If it's too hot to touch, it's too hot to leave".
+- FM re-opened (same sjsu.edu PDF copy, chapter 15, p. 160, Travel; no paragraph numbers in this copy): "Normal freezing and thawing action may cause a stream level to vary as much as 2 to 2.5 meters per day." "This variance may occur any time during the day, depending on the distance from a glacier, the temperature, and the terrain." The HTML copy the reviewer used was not opened (the search returned an unofficial transcription, survivalmanual.github.io).
+- NWS-CROUCH: https://www.weather.gov/safety/lightning-crouch (for decisions-for-jordan D9 only).
+
+Statements changed:
+- surv-fire, NY rules: added "On New York state land in normal times, use only dead and down wood; cutting standing trees is prohibited." — DEC-PRIM. The wet-weather advice (standing or leaning dead wood, ATP 5-21) stays as survival advice. Corrected (review F1).
+- surv-fire, feel step: "then feel everything with your bare hand" now "then hold the back of your hand just above the ashes to feel for heat" — SMOKEY step 07 (more cautious than USFS "feel all materials with your bare hand"). Corrected (review F2).
+- surv-river-crossings, snowmelt: "can rise by as much as a foot by late afternoon" now "can rise by a foot or more by late afternoon" — NPS-MORA (as much as a foot, morning to late afternoon) and FM ch 15 p. 160 (2 to 2.5 meters a day, any time of day). Corrected (review F3).
+- surv-weather-and-lightning: "Lightning can strike as far as 10 miles from the rain." now "Lightning can strike 10 miles or more from the storm." — CDC-LTG ("Lightning can strike more than 10 miles from a storm"); matches the lightning protocol. Corrected (review F4).
+- surv-shelter, shelter-snow caption: "Snow trench with a vent hole. Sleep on a platform higher than the entrance." now "Snow trench with a vent hole. Sleep on a raised shelf: cold air sinks to the low end." — matches the drawn labels (no entrance is drawn). The text block keeps the ATP 6-26 platform rule. Corrected (review F6).
+- Recorded, not changed: lightning protocol crouch and "summer afternoons" timing, docs/decisions-for-jordan.md D9 (review F9).

@@ -178,3 +178,11 @@ every statement is in `docs/content-review.md`.
 - Links added: `p:drowning`, `p:hypothermia`.
 
 **Test change (Task 14).** `tests/test_build.py::test_release_fails_on_draft_topic` relied on `surv-fire` still being draft. It now plants `draft: true` in the copied tree's `surv-fire.json` before the release build, so it keeps testing the same rule.
+
+### Task 14 fix round 1 (2026-11-17)
+
+- surv-fire, NY rules. Added: "On New York state land in normal times, use only dead and down wood; cutting standing trees is prohibited." Source: NYS DEC, Camping, primitive (Fire Safety at Campsites).
+- surv-fire, put it out. Old: "then feel everything with your bare hand." New: "then hold the back of your hand just above the ashes to feel for heat." Source: Smokey Bear, How to Put Out a Campfire, step 07 (Feel).
+- surv-river-crossings, snowmelt. Old: "can rise by as much as a foot by late afternoon." New: "can rise by a foot or more by late afternoon." Sources: NPS Mount Rainier; FM 21-76 chapter 15 (freezing and thawing may vary a stream level as much as 2 to 2.5 meters a day).
+- surv-weather-and-lightning. Old: "Lightning can strike as far as 10 miles from the rain." New: "Lightning can strike 10 miles or more from the storm." Source: CDC, Safety Guidelines: Lightning.
+- surv-shelter, shelter-snow caption. Old: "Snow trench with a vent hole. Sleep on a platform higher than the entrance." New: "Snow trench with a vent hole. Sleep on a raised shelf: cold air sinks to the low end." Reason: the drawing shows no entrance; the caption now matches its labels.

@@ -141,3 +141,11 @@ Source disagreements found while checking the Survival topics. Each says what th
 8. **Fire next to a shelter.** Smokey Bear: keep campfires at least 15 feet from tents, vegetation and low branches.
    The Army manuals put a survival fire in front of a lean-to with a reflector wall (and about 3 feet from a snow
    cave opening). Today: the Shelter topic keeps the Army lean-to fire; the 15-foot rule is not added.
+9. **Lightning protocol: the crouch, and when mountain storms happen (question for a medical professional).**
+   src/protocols/lightning.json keeps the lightning crouch (feet together, or sitting on a pad with feet off the
+   ground) as a last resort, citing the Wilderness Medical Society. The NWS page "The National Weather Service
+   (NWS) stopped recommending the crouch in 2008" (https://www.weather.gov/safety/lightning-crouch) says it
+   "simply doesn't provide a significant level of protection." The same protocol credits CDC with storms being
+   most common on "summer afternoons"; CDC's Safety Guidelines: Lightning says late afternoon or evening (NWS says
+   early afternoon). Today: the protocol is unchanged. Should the crouch stay as a last resort, and should the
+   timing line be corrected to the sources?

@@ -19,7 +19,7 @@
     "diesel",
     "flammable"
   ],
-  "summary": "Keep gasoline out of the house, in approved cans, in a ventilated shed or detached garage away from anything with a flame. Kerosene goes in its own blue can, never a gasoline can. Propane cylinders stay outdoors and upright. Check the heating oil tank, and keep a multipurpose fire extinguisher you know how to use.",
+  "summary": "Keep gasoline out of the house, in approved cans, in a ventilated shed or detached garage away from anything with a flame. Kerosene goes in its own blue can, never a gasoline can. Propane cylinders stay outdoors and upright. Check the heating oil tank, and keep an A-B-C fire extinguisher you know how to use.",
   "doFirst": [
     "Never store gasoline in the house (OSHA, American Burn Association).",
     "Keep fuel away from anything with a flame or a pilot light, such as a water heater: gasoline vapor travels along the ground (OSHA, FEMA).",
@@ -35,7 +35,7 @@
           "list": [
             "Containers: use cans that are listed, labelled or approved for gasoline (American Burn Association; OSHA: approved containers). UL-approved, red for gasoline, labelled, with a spout so you can pour without spilling (Maine Department of Environmental Protection). The newer spill-proof cans are better than old ones (Maine DEP).",
             "Never in glass jars, plastic milk jugs or other makeshift containers (Maine DEP).",
-            "Where: outside the house, in a cool, well-ventilated place (American Burn Association), preferably a well-ventilated shed or detached garage, out of children’s reach (Maine DEP). Keep it locked up (American Burn Association). Store fuel away from living areas, never in your home (OSHA).",
+            "Where: outside the house, in a cool, well-ventilated place (American Burn Association), preferably a well-ventilated shed or detached garage, out of children’s reach (Maine DEP). Not an attached garage: Maine names a detached one, and this app reads that strictly. Keep it locked up (American Burn Association). Store fuel away from living areas, never in your home (OSHA).",
             "Away from flames and heat: keep fuel cans away from anything that makes a flame or heat, such as a water heater (OSHA). Gasoline vapor you can’t see can travel along the ground and be lit by a pilot light or a spark from a switch (FEMA).",
             "Away from your well: store gasoline and fuel equipment as far as you can from your drinking water well, and downhill of it (Maine DEP).",
             "Buy only what you will use (Maine DEP).",
@@ -53,8 +53,8 @@
         {
           "list": [
             "Don’t store gasoline for more than 30 days unless you add a fuel stabilizer, and use a stabilizer made for gasoline that contains ethanol (Maine DEP).",
-            "Keep a stored can or tank 95 percent full (Maine DEP).",
-            "Old gasoline can be used up in a car, mixed 1 part old to 5 parts fresh (Maine DEP). Otherwise take it to a household hazardous waste collection (Maine DEP).",
+            "If you store gasoline over the winter or for more than a month, keep the can or tank 95 percent full (Maine DEP).",
+            "Old plain gasoline (not two-stroke gas and oil mix) can be used up in a car, mixed 1 part old to 5 parts fresh (Maine DEP). Otherwise take it to a household hazardous waste collection (Maine DEP).",
             "Never mix leftover two-stroke gas and oil with used engine oil (Maine DEP)."
           ]
         },
@@ -87,7 +87,7 @@
       "blocks": [
         {
           "list": [
-            "Keep it in its own container made for kerosene, never in a gasoline can or a can that has ever held gasoline (CPSC). Kerosene cans are usually blue and gasoline cans red (CPSC; Maine DEP: blue for kerosene and diesel).",
+            "Keep it in its own container made for kerosene, never in a gasoline can or a can that has ever held gasoline (CPSC). Store kerosene away from other fuel containers (CPSC). Kerosene cans are usually blue and gasoline cans red (CPSC; Maine DEP: blue for kerosene and diesel).",
             "Store it outdoors, in a container used only for kerosene (New York State Department of Health).",
             "Even a little gasoline mixed into kerosene can cause a fire or explosion in a heater (CPSC).",
             "Buy water-clear 1-K kerosene from a dealer who can certify it is 1-K (CPSC). Don’t burn kerosene left from last heating season (New York State Department of Health)."
@@ -107,7 +107,7 @@
             "Store every cylinder that holds or has held propane outdoors (North Carolina Department of Agriculture and Consumer Services, LP-Gas Section).",
             "Never indoors, and never under the house or in a crawlspace (North Carolina Department of Agriculture and Consumer Services). Don’t bring cylinders into the house or into a garage or basement (National Propane Gas Association).",
             "Stand them upright on the foot ring, never on their side or upside down (North Carolina Department of Agriculture and Consumer Services).",
-            "Close the valve before storing (North Carolina Department of Agriculture and Consumer Services; National Propane Gas Association).",
+            "Check that the valve closes completely, then close it before storing (North Carolina Department of Agriculture and Consumer Services; National Propane Gas Association). On a disconnected tank with an older valve that has only inside threads, screw in a plug; never put a plug in a valve with outside threads (Acme), which disables a safety feature (North Carolina Department of Agriculture and Consumer Services).",
             "Keep them away from flames and anything that could light them, out of hot sun, and where they can’t fall or be knocked over by children (North Carolina Department of Agriculture and Consumer Services).",
             "Keep spare cylinders away from a grill that is in use (North Carolina Department of Agriculture and Consumer Services; National Propane Gas Association).",
             "Don’t leave a cylinder in a vehicle (National Propane Gas Association)."
@@ -140,7 +140,7 @@
       "h": "Fire extinguisher",
       "blocks": [
         {
-          "p": "Keep a multipurpose extinguisher (A-B-C or B-C). It works on most home fires, including burning liquids such as gasoline and oil (B) and plugged-in electrical equipment (C) (US Fire Administration). Get one with a UL or ULC Listed label, the largest you can handle easily, and keep it where nothing blocks your way to it (US Fire Administration)."
+          "p": "Keep a multipurpose A-B-C extinguisher. Multipurpose extinguishers work on most home fires; A-B-C also covers ordinary materials such as wood, paper and cloth (A), as well as burning liquids such as gasoline and oil (B) and plugged-in electrical equipment (C) (US Fire Administration). A B-C unit does not cover class A. Get one with a UL or ULC Listed label, the largest you can handle easily, and keep it where nothing blocks your way to it (US Fire Administration)."
         },
         {
           "warn": "Use it only if everyone else has been warned, the fire department has been called, the fire is small and in one object or surface, you are able to use it, you are protected from the smoke, and you have a clear way out. Otherwise get out (US Fire Administration). Young children and older adults should not use one (US Fire Administration)."
@@ -174,11 +174,11 @@
     },
     {
       "name": "Maine Department of Environmental Protection, Tips for Handling Gasoline (undated)",
-      "used": "UL-approved containers, red for gasoline, blue for kerosene and diesel, labeled, with a spout; spill-proof cans; never glass jars or milk jugs; buy only what you need; not more than 30 days without a stabilizer compatible with ethanol gasoline; keep containers or tanks 95% full; check monthly for leaks; well-ventilated shed or detached garage, away from children; far from and downslope of the drinking water well; old gas diluted 1 part to 5 in a car; household hazardous waste drop-off; never burn brush with gasoline; never mix two-cycle leftovers with crankcase oil"
+      "used": "UL-approved containers, red for gasoline, blue for kerosene and diesel, labeled, with a spout; spill-proof cans; never glass jars or milk jugs; buy only what you need; not more than 30 days without a stabilizer compatible with ethanol gasoline; keep containers or tanks 95% full when storing over winter or more than a month; check monthly for leaks; well-ventilated shed or detached garage, away from children; far from and downslope of the drinking water well; old unmixed gas diluted 1 part to 5 in a car; household hazardous waste drop-off; never burn brush with gasoline; never mix two-cycle leftovers with crankcase oil"
     },
     {
       "name": "CPSC, CPSC Stresses Kerosene Heater Safety (publication 5052, revised April 2011)",
-      "used": "Separate kerosene container, not a gasoline can or one that held gasoline; blue for kerosene, red for gasoline; gasoline mixed with kerosene raises fire or explosion risk; 1-K from a dealer who certifies it"
+      "used": "Separate kerosene container, not a gasoline can or one that held gasoline; blue for kerosene, red for gasoline; gasoline mixed with kerosene raises fire or explosion risk; 1-K from a dealer who certifies it; label: always store kerosene away from other fuel containers"
     },
     {
       "name": "New York State Department of Health, Supplemental Space Heaters (undated)",
@@ -186,7 +186,7 @@
     },
     {
       "name": "North Carolina Department of Agriculture and Consumer Services, LP-Gas Section, Proper Storage of Propane Containers (last modified September 3, 2025)",
-      "used": "Tanks that hold or held propane stored outdoors; not indoors; not under the house or in a crawl space; upright on the foot ring, not on the side or upside down; valve closed; away from flame and ignition; out of hot sun; where they can't fall or be pulled over, out of children's way; spares away from a grill in use"
+      "used": "Tanks that hold or held propane stored outdoors; not indoors; not under the house or in a crawl space; upright on the foot ring, not on the side or upside down; valve closed; away from flame and ignition; out of hot sun; where they can't fall or be pulled over, out of children's way; spares away from a grill in use; check the valve closes completely; plug in POL (inside-thread) valves when disconnected; never a plug in Acme valves"
     },
     {
       "name": "National Propane Gas Association, Propane Gas Grill and Range Safety Tips (copy hosted by the New Jersey Department of Community Affairs; undated)",
@@ -201,6 +201,5 @@
       "used": "Classes A, B, C; multipurpose B-C or A-B-C for most home fires; use only if others are alerted, the fire department called, you are able, the fire is small and contained, you are protected from smoke, you have a clear escape route; young children and older adults should not; otherwise leave; PASS: pull the pin (nozzle away), aim low at the base, squeeze slowly and evenly, sweep side to side; check the pressure gauge and for damage; follow the manufacturer; UL or ULC Listed; largest you can operate; nothing blocking it"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

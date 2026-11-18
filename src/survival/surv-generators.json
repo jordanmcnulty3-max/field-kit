@@ -42,7 +42,7 @@
             "Never inside a home, garage, basement, crawlspace or shed, or in any other enclosed or partly enclosed space, even one with some ventilation (CPSC, FEMA). Never in an attached garage, even with the door open (NFPA).",
             "Never on a porch or in a carport (CPSC).",
             "Keep it as far as you can from your home and from your neighbors’ homes (CPSC and US Fire Administration).",
-            "Leave 3 to 4 feet (about 1 m) of clear space on all sides and above it (OSHA).",
+            "Leave 3 to 4 feet (0.9 to 1.2 m) of clear space on all sides and above it (OSHA).",
             "Keep children and pets away. Parts get hot enough to burn you while it runs (University of Illinois Extension)."
           ]
         },
@@ -64,8 +64,8 @@
       "blocks": [
         {
           "list": [
-            "Keep it dry: a wet generator can give you an electric shock (OSHA, Cornell, University of Illinois Extension). OSHA: don’t use it in the rain or wet conditions.",
-            "In wet weather, use it only when you have to. Run it under an open, canopy-like cover, on a dry surface where water can’t puddle or run under it (University of Illinois Extension). Put it where rain and snow can’t reach it, if you can (New York State Division of Consumer Protection).",
+            "Keep it dry: a wet generator can give you an electric shock (OSHA, Cornell, University of Illinois Extension).",
+            "OSHA says not to run it in the rain or wet conditions. If you must run it in wet weather anyway, use it only when you have to, and run it under an open, canopy-like cover, on a dry surface where water can’t puddle or run under it (University of Illinois Extension). Put it where rain and snow can’t reach it, if you can (New York State Division of Consumer Protection).",
             "The cover must stay open. A shed, garage, porch or carport is not a cover: carbon monoxide builds up in partly enclosed spaces (CPSC, FEMA).",
             "Dry your hands before you touch it (University of Illinois Extension).",
             "Follow the maker’s instructions about electric shock in bad weather (CPSC)."
@@ -139,8 +139,8 @@
         },
         {
           "list": [
-            "Best: through a transfer switch, so the heater plugs straight into a wall outlet, as heater safety sources ask (US Department of Energy, CPSC). Never into a power strip (CPSC).",
-            "Avoid extension cords with electric heaters (New York State Department of Health, New York State Division of Homeland Security and Emergency Services). If one is needed, use the shortest heavy-duty cord you have, 14-gauge wire or heavier, and follow the heater maker’s rules on cords (US Department of Energy).",
+            "Only through a transfer switch, so the heater plugs straight into a wall outlet. Never through an extension cord or power strip (US Fire Administration; CPSC: wall outlet, never a power strip).",
+            "Plug nothing else into the circuit the heater is on: it can overheat (US Fire Administration).",
             "Never run a heater’s cord under a rug or carpet (CPSC).",
             "Keep everything that can burn at least 3 feet (1 m) from the heater (CPSC, US Fire Administration). Set it on a stable, level surface where it won’t be knocked over (CPSC). Buy one with a tip-over switch (US Department of Energy).",
             "Turn it off when you leave the room or go to bed (US Fire Administration).",
@@ -232,21 +232,20 @@
     },
     {
       "name": "New York State Department of Health, Supplemental Space Heaters (undated)",
-      "used": "A generator run outdoors during power failures is a better option for heating than kerosene or unvented gas heaters; avoid ungrounded wiring or extension cords with portable electric heaters"
-    },
-    {
-      "name": "New York State Division of Homeland Security and Emergency Services, Home Heating Fire Safety (undated)",
-      "used": "Avoid extension cords with electric heaters"
+      "used": "A generator run outdoors during power failures is a better option for heating than kerosene or unvented gas heaters"
     },
     {
       "name": "US Department of Energy, Energy Saver: Small Space Heaters",
-      "used": "Electric heaters plugged directly into the wall outlet; if an extension cord is necessary, the shortest heavy-duty cord of 14-gauge wire or larger; follow the manufacturer on cords; tip-over safety switch"
+      "used": "Tip-over safety switch (its extension-cord allowance is not used: see decisions D40)"
     },
     {
       "name": "US Fire Administration, Heating fire safety (last reviewed May 4, 2023)",
       "used": "Keep anything that can burn at least 3 feet from heating equipment; turn space heaters off when leaving the room or going to bed"
+    },
+    {
+      "name": "US Fire Administration, Heater Fire Safety (card, undated)",
+      "used": "Plug portable heaters directly into outlets; never use an extension cord or power strip; do not plug anything else into the same circuit as the space heater, it can overheat"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

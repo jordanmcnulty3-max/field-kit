@@ -17,14 +17,16 @@
     "vent-free fireplace",
     "gas logs",
     "furnace vent snow",
-    "headache"
+    "headache",
+    "lantern",
+    "hibachi"
   ],
   "summary": "Carbon monoxide comes from anything that burns fuel. You cannot see or smell it. Never run a generator, grill, camp stove or charcoal indoors or in a garage, never heat the house with an oven, keep battery CO alarms near where people sleep, and get everyone outside the moment one sounds.",
   "doFirst": [
     "CO alarm sounding? Don’t look for the cause. Get everyone outside into fresh air now, then call 911 or the fire department if you can. Count heads. Don’t go back in until responders say you can (CPSC).",
     "Someone has a headache, dizziness, sickness or confusion near something burning fuel? Get them and everyone else out into fresh air and open the Carbon monoxide poisoning protocol.",
     "Never run a generator inside the house, garage, basement or crawlspace, even with doors and windows open (CDC, CPSC).",
-    "Never burn charcoal, use a grill or a camp stove indoors, and never heat the house with a gas oven or range (CDC, CPSC)."
+    "Never burn charcoal, or use a grill, hibachi, fuel lantern or camp stove indoors, and never heat the house with a gas oven or range (CDC, CPSC)."
   ],
   "sections": [
     {
@@ -48,6 +50,7 @@
           "list": [
             "Generator: never inside a home, garage, basement, crawlspace or shed, or on a porch or in a carport, even with doors and windows open. Run it outside, more than 20 feet (6 m) from windows, doors and vents (CDC, CPSC). See Generators.",
             "Charcoal: never burn it inside a home, garage, vehicle or tent (CPSC, CDC). Don’t cook on a charcoal grill in a garage, even with the garage door open (CPSC).",
+            "Fuel lanterns, hibachis and camp stoves: never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC, as in Water in winter and Shelter). For light, use flashlights or battery lanterns (CPSC says the same of candles: use flashlights or battery-operated candles instead).",
             "Camp stoves and flameless chemical heaters: don’t use portable gas camp stoves or portable flameless chemical heaters indoors (CDC).",
             "Oven, range or clothes dryer as a heater: never heat the house with a gas oven, range or dryer (CDC, CPSC). Never use an oven to heat your home (US Fire Administration).",
             "Anything made for outdoor use: don’t use heat sources designed for outside use indoors; they make carbon monoxide (New York State Division of Homeland Security and Emergency Services).",
@@ -85,6 +88,9 @@
       "h": "Vent-free gas fireplaces and heaters",
       "blocks": [
         {
+          "warn": "CDC: “Don’t cook or burn anything on a stove or fireplace that isn’t vented.” A vent-free gas fireplace is not vented, so the cautious rule is not to use it. If you run one anyway, do it only under every condition below."
+        },
+        {
           "p": "A vent-free (unvented) gas fireplace, gas log set or wall heater has no chimney or flue. It runs on natural gas or propane from the house supply and may be wall-mounted, free-standing or set into a fireplace (New York State Department of Health). Unvented gas heaters release what they burn straight into your home (New York State Department of Health)."
         },
         {
@@ -93,7 +99,8 @@
             "New York State Department of Health: don’t use one as your main heat source, even during power failures. Running a generator outdoors for heat is a better option. The label New York requires on these heaters says it is a supplemental heat source and should not be the primary heat source.",
             "Never run it in a room where anyone is sleeping (CPSC: never operate unvented fuel-burning appliances in any room where people are sleeping).",
             "Have working CO alarms in the house if you use one (US Department of Energy: install a carbon monoxide detector if you use a small space heater).",
-            "CDC: “Don’t cook or burn anything on a stove or fireplace that isn’t vented.”"
+            "Have it installed by a professional, such as your gas supplier, and don’t buy one too big for the room (New York State Department of Health).",
+            "Turn it off when you go to bed or leave the room (US Fire Administration, NFPA)."
           ]
         }
       ]
@@ -165,7 +172,7 @@
     },
     {
       "name": "CPSC, As Winter Storms Threaten Millions in the US CPSC Issues Safety Tips to Help Families Prevent Carbon Monoxide Poisoning and Fires (release 26-149, December 12, 2025)",
-      "used": "Never a generator in a home, garage, basement, crawlspace, shed; not on a porch or in a carport; open doors and windows don't ventilate enough; alarms on each level and outside separate sleeping areas; interconnected best; test monthly; get outside, then call 911; clear snow from outside vents of fuel-burning appliances such as furnaces; no charcoal grill in a garage even with the door open"
+      "used": "Never a generator in a home, garage, basement, crawlspace, shed; not on a porch or in a carport; open doors and windows don't ventilate enough; alarms on each level and outside separate sleeping areas; interconnected best; test monthly; get outside, then call 911; clear snow from outside vents of fuel-burning appliances such as furnaces; no charcoal grill in a garage even with the door open; use flashlights or battery-operated candles instead of candles"
     },
     {
       "name": "CPSC, What to Know About Generators and Carbon Monoxide (CO) (CPSC468 0322)",
@@ -189,7 +196,7 @@
     },
     {
       "name": "New York State Department of Health, Supplemental Space Heaters (undated)",
-      "used": "Portable kerosene and unvented gas heaters release combustion products directly into your home; don't use them as your main heat source, even during power failures; a generator run outdoors is a better option; unvented gas heaters connect to natural gas or propane and may be wall-mounted, free-standing or inserted in a fireplace"
+      "used": "Portable kerosene and unvented gas heaters release combustion products directly into your home; don't use them as your main heat source, even during power failures; a generator run outdoors is a better option; unvented gas heaters connect to natural gas or propane and may be wall-mounted, free-standing or inserted in a fireplace; have the heater installed by a professional such as your gas supplier; don't buy an oversized heater"
     },
     {
       "name": "New York State Department of Health, letter Re: Selling Vent-Free Gas Space Heating Appliances in New York State (March 1, 2006)",
@@ -198,8 +205,19 @@
     {
       "name": "US Department of Energy, Energy Saver: Small Space Heaters",
       "used": "Unvented combustion small space heaters are not recommended for use inside your home; install a carbon monoxide detector if you use a small space heater"
+    },
+    {
+      "name": "US Fire Administration, Heater Fire Safety (card, undated)",
+      "used": "Turn heaters off when you go to bed or leave the room"
+    },
+    {
+      "name": "NFPA, Heating Safety tip sheet (©NFPA 2017; copy hosted by the State of Michigan)",
+      "used": "Turn portable heaters off when leaving the room or going to bed"
+    },
+    {
+      "name": "Water in winter (surv-water-winter, checked) and Shelter (surv-shelter, checked)",
+      "used": "Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

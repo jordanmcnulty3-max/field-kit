@@ -367,22 +367,27 @@ Source disagreements found while checking the Survival topics. Each says what th
    literally rules out a vent-free gas fireplace; NYS DOH only says it is a supplemental, not a primary, heat source.
    Ventilation: CPSC asks for the room's door open, and a window open about an inch when the door is closed or the house
    is tight or winterized; the app says always do both. Today: operating guidance under the strictest conditions found
-   (the ruling in the heat pack ledger), with these agencies named first. Say whether the group keeps that, or wants
+   (the ruling in the heat pack ledger), with these agencies named first. The sleep rule is written one strict way in every place: turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, USFA, Carbon monoxide protocol); say if the group wants to allow a heater tended by someone awake while others sleep elsewhere in the house. Say whether the group keeps that, or wants
    the topics to say plainly "don't use them indoors" (then the heaters topic becomes a list of what to use instead).
-40. **Electric heaters on a generator: extension cords (surv-generators) — Heat pack Task 4.** CPSC: electric heaters
-   in a wall outlet, never a power strip. NYS DOH and NYS DHSES: avoid extension cords with electric heaters. US
-   Department of Energy: if a cord is necessary, the shortest heavy-duty cord of 14-gauge wire or larger. Generator
-   sources: plug appliances into the generator or a heavy-duty outdoor-rated cord. Today: a transfer switch is "best"
-   (heater in a wall outlet; the app's reading); otherwise DOE's cord rule. Say if the group wants "only through a
-   transfer switch".
-41. **Propane cylinders indoors (surv-portable-heaters, surv-store-fuel) — Heat pack Task 4.** North Carolina's LP-gas
-   regulator (state law there) and the National Propane Gas Association: no propane cylinders indoors, nor in a garage
-   or basement. CPSC: heaters with an oxygen depletion sensor, on 1 lb. cylinders, are designed for indoor use. A 2003
-   NYS Department of State bulletin said LP-gas containers are prohibited inside buildings; its 2017 replacement does not
-   say this, and the Fire Code of New York State's LP-gas chapter was not found in an opened source. Today: spares
-   outside; indoors only the small cylinder the heater's instructions allow, attached to it, marked as the app's
-   reading; "no current New York rule was found". Say if the group wants no cylinder indoors at all (which means no
-   indoor propane heater).
+40. **Electric heaters on a generator: extension cords (surv-generators) — Heat pack Task 4, revised in the fix round.**
+   US Fire Administration (Heater Fire Safety card): "Plug portable heaters directly into outlets. Never use an extension
+   cord or power strip." and "Do not plug anything else into the same circuit". CPSC: wall outlet, never a power strip.
+   NYS DOH and NYS DHSES: avoid extension cords with electric heaters. US Department of Energy: if a cord is necessary,
+   the shortest heavy-duty cord of 14-gauge wire or larger. With a generator outside and the heater inside, a cord is the
+   usual way people would do it. Today: only through a transfer switch, heater in a wall outlet, nothing else on that
+   circuit (USFA, the most cautious); DOE's cord is not in the text. Say whether the group wants DOE's 14-gauge cord
+   allowed as a fallback when there is no transfer switch.
+41. **Propane cylinders indoors (surv-portable-heaters, surv-store-fuel) — Heat pack Task 4, revised in the fix round.**
+   North Carolina's LP-gas regulator (state law there) and the National Propane Gas Association: no propane cylinders
+   indoors, nor in a garage or basement. CPSC: heaters with an oxygen depletion sensor, on 1 lb. cylinders, are designed
+   for indoor use (it names tents, cabins and campers, not homes). Minnesota's State Fire Marshal, reading NFPA 58 (the
+   national model code; found via Minnesota, not a New York source): in a home, garages included, no cylinder over 1 lb.
+   and no more than 2 lb. in all, a connected cylinder counts as in use, and empties count as full. A 2003 NYS Department
+   of State bulletin said LP-gas containers are prohibited inside buildings; its 2017 replacement does not say this, and
+   the Fire Code of New York State's LP-gas chapter was not found in an opened source. Today: indoors only a 1 lb.
+   cylinder screwed onto the heater, never a 20 lb. or larger tank and never one on a hose, empties back outside, spares
+   outside; Minnesota's limit is quoted as another state's reading. Say if the group wants no cylinder indoors at all
+   (which means no indoor propane heater).
 42. **How much fuel to store, and for how long (surv-store-fuel) — Heat pack Task 4.** No New York household limit for
    gasoline, kerosene or propane was found in an opened source. The only storage time found is Maine DEP's: no more than
    30 days without a stabilizer (one made for ethanol gasoline). NYS DOH: don't burn last season's kerosene. Today: the

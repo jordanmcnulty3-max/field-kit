@@ -2696,7 +2696,7 @@ Conversions: 1 ft = 0.3048 m, 1 in = 2.54 cm by definition. 20 ft = 6.1 m, "6 m"
 - Care: DHSES-HEAT (inspect shut-off and wick; replace batteries; fresh fuel; follow the manufacturer for installation, venting, fueling, maintenance, repair); NYSDOH-SSH ("Check the wick weekly. Clean it if it's dirty and replace it if it's worn."); smoke alarms, test monthly — CPSC-KERO, NFPA-HEAT. Matches.
 - Flare-up, step order — CPSC-KERO ("do not attempt to move or carry the heater"; "If the heater is equipped with a manual shut-off switch, activate the switch"; "If this does not put out the fire, leave the house immediately, and call the fire department"). Matches. Link p:burns.
 - Never for these jobs: pipes — surv-water-winter (checked: "Never thaw pipes with a blowtorch, a kerosene or propane heater ... serious fire hazard and give off deadly carbon monoxide"); sleeping shelters — surv-shelter. Matches.
-- Looked for, not found: an agency room-size or BTU rule for kerosene or propane heaters; an agency tip-over requirement for propane heaters; a propane ventilation figure; a current New York rule on propane cylinders or propane heaters in one- and two-family homes.
+- Looked for, not found: an agency room-size or BTU rule for kerosene or propane heaters; a propane ventilation figure; a current New York rule on propane cylinders or propane heaters in one- and two-family homes.
 
 ### surv-store-fuel
 
@@ -2719,3 +2719,67 @@ Conversions: 1 ft = 0.3048 m, 1 in = 2.54 cm by definition. 20 ft = 6.1 m, "6 m"
 - surv-water-winter: never a kerosene or propane heater to thaw pipes; never a camp stove or charcoal indoors — repeated.
 - surv-water-in-the-house: water heater gas or power off before draining — not touched by this batch.
 - p:burns: linked from Generators, Kerosene and propane heaters, Store fuel safely; not restated.
+
+### Batch A fix round (2026-11-18), from task-4-review.md
+
+Re-opened 2026-11-18 before relying on new wording: USFA-CARD, CPSC-KERO, ME-DEP, NC-LP; newly opened (found by search
+by the reviewer, opened by the writer): MN-SFM, Minnesota Department of Public Safety, State Fire Marshal Division, LP Gas
+Inside Buildings (no date; "These quantity limits can be found in ... NFPA ... 58").
+https://dps.mn.gov/divisions/sfm/fire-code/fire-code-information-topic/lp-gas-inside-buildings
+
+- C1 surv-generators, Electric heaters on a generator: now "Only through a transfer switch ... Never through an extension
+  cord or power strip (US Fire Administration; CPSC)" and "Plug nothing else into the circuit the heater is on: it can
+  overheat" — USFA-CARD ("Plug portable heaters directly into outlets." "Never use an extension cord or power strip." "Do
+  not plug anything else into the same circuit as the one you are using for your space heater." "This can cause
+  overheating."); CPSC-26 (wall outlet, never a power strip). DOE's 14-gauge cord moved out of the text to D40. Conflict
+  USFA vs DOE: USFA used (more cautious). D40 rewritten.
+- I1 surv-carbon-monoxide: lanterns and hibachis added to Never indoors and doFirst, wording of the checked surv-water-winter
+  and surv-shelter line ("Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or
+  camper", CDC), credited to those topics; CDC-CO lists lanterns as a CO source. Flashlights or battery lanterns for light:
+  CPSC-26 ("Use flashlights or battery-operated candles instead", said of candles; the text says so). Keywords "lantern",
+  "hibachi".
+- I2 surv-portable-heaters, If it flares up: CPSC-KERO label, in its order: "If Fire Occurs:" "Exit Quickly and Warn Others:"
+  "Call Fire Department." "Do Not: Move Heater, Try to Smother Fire, or Put Water on the Fire". Steps now: don't move it;
+  don't throw water on it or smother it; manual shut-off; if still burning get out quickly warning everyone, call the fire
+  department. doFirst mirrors it.
+- I3 surv-portable-heaters: "Any heater: tested by a recognized testing laboratory, with an automatic shut-off that turns it
+  off if it tips over (US Fire Administration)" — USFA-CARD ("Make sure your heater has been tested by a recognized testing
+  laboratory." "Make sure your heater has an automatic shutoff, so if it tips over, it shuts off."). The earlier not-found
+  line was wrong and is removed.
+- I4 surv-portable-heaters, Propane cylinders: "Indoors, only a 1 lb. cylinder screwed onto the heater. Never a 20 lb.
+  (grill-size) or larger tank inside the house or garage, and never one brought in on a hose. Empty cylinders go back
+  outside too." — CPSC-ODS (standard for "1 lb. portable heaters"); MN-SFM (residential, "Includes attached and detached
+  garages": maximum container "1 lb.", "2 lbs. (per dwelling unit)"; "cylinders larger than 1 pound must not be stored or
+  used indoors at a residential property"; connected = in use; "the codes treat all cylinders as being full, whether they
+  are full, partially full, or empty"). "20 lb. (grill-size)" names the common size larger than 1 lb.; the rule is MN-SFM's
+  "larger than 1 pound". Marked in the text as another state's reading of NFPA 58. D41 rewritten.
+- I5 surv-carbon-monoxide, Vent-free section: opens with a warn quoting CDC-CO and saying the cautious rule is not to use it,
+  and "only under every condition below" if run anyway. Added conditions: installed by a professional such as your gas
+  supplier, not oversized (NYSDOH-SSH: "Have the heater installed by a professional (such as your gas supplier)", "Don't buy
+  an oversized heater"); off when going to bed or leaving the room (USFA-CARD, NFPA-HEAT).
+- I6 surv-portable-heaters: one sleep rule everywhere (summary, doFirst, section warn): "Turn it off when you go to sleep or
+  leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol)" —
+  CPSC-USFA ("NEVER leave a space heater on when you go to sleep"), CPSC-QA (rooms where people sleep), USFA-CARD,
+  p:carbon-monoxide s6. Noted in D39.
+- M1 generators, Rain and snow: "OSHA says not to run it in the rain or wet conditions. If you must run it in wet weather
+  anyway, ..." (conflict visible; D38).
+- M2 "3 to 4 feet (0.9 to 1.2 m)". M3 "36 inches (1 m)" (0.91 m).
+- M4 heaters, The right fuel: "Store kerosene outdoors, in its own container made for kerosene (NYSDOH-SSH, CPSC), away from
+  other fuel containers (CPSC)" — CPSC-KERO label "Always Store Kerosene Away From Other Fuel Containers." Same line added to
+  surv-store-fuel, Kerosene.
+- M5 store-fuel: ME-DEP "if you are storing the gasoline over the winter or more than a month keep the container or tank
+  95% full" — condition added.
+- M6 store-fuel: ME-DEP "Unmixed 'old' gas can be burned in your car by diluting one part old fuel with five parts new
+  fuel" — "plain gasoline (not two-stroke gas and oil mix)" added.
+- M7 store-fuel: NC-LP does say "Check to be sure the valve closes completely. Then make sure the valve is closed."; credit
+  kept. Added NC-LP's plug line: plug in POL valves ("only internal, counter-clockwise threads") when disconnected;
+  "Do NOT put a plug in Acme valves, the type with external threads, as this disables a safety feature."
+- M8 store-fuel: A-B-C first; class A from USFA-EXT's class list ("ordinary materials such as cloth, wood, and paper"); "A B-C
+  unit does not cover class A" follows from USFA-EXT's classes.
+- M9 store-fuel: "Not an attached garage: Maine names a detached one, and this app reads that strictly" (the app's reading,
+  said in the text).
+- M10 keywords "mr heater" (heaters), "lantern", "hibachi" (CO).
+- M11 heaters: section heading "What safety bodies say first"; "strictest that any source opened"; FDNY credited as "FDNY's
+  safety education site, run by the FDNY Foundation".
+- surv-generators: the DHSES source dropped (no longer cited there); DOE's used line now the tip-over switch only.
+- draft removed from all four topics.

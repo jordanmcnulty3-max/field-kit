@@ -17,33 +17,34 @@
     "tip-over switch",
     "refuel heater",
     "heater while sleeping",
-    "wick"
+    "wick",
+    "mr heater"
   ],
-  "summary": "Federal and New York agencies advise against unvented fuel-burning heaters indoors. If you use one anyway: only a heater made for indoor use, only the right fuel (water-clear 1-K kerosene, never gasoline), a CO alarm, fresh air from an open door and a window, 3 feet clear all round, refuel outside when cool, and never while anyone sleeps or the room is empty.",
+  "summary": "Federal and New York agencies advise against unvented fuel-burning heaters indoors. If you use one anyway: only a heater made for indoor use, only the right fuel (water-clear 1-K kerosene, never gasoline), a CO alarm, fresh air from an open door and a window, 3 feet clear all round, refuel outside when cool, and off when you go to sleep or leave the room, never running where anyone is sleeping.",
   "doFirst": [
-    "Never let it run while anyone is asleep in the room, or when you go to bed or leave the room (CPSC, US Fire Administration).",
+    "Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol).",
     "Only a heater made for indoor use. Never a propane heater meant for outdoors or one without a low-oxygen shut-off (CPSC).",
     "Kerosene heater: water-clear 1-K kerosene only. Never gasoline (CPSC).",
     "Keep CO alarms working in the house, and keep everything that can burn 3 feet (1 m) away (US Department of Energy, CPSC).",
-    "Flames out of control? Don’t move it. Turn its shut-off switch; if the fire doesn’t go out, get everyone out of the house (CPSC)."
+    "Flames out of control? Don’t move it, don’t throw water on it, don’t try to smother it. Turn its shut-off switch; if the fire doesn’t go out, get out fast, warn everyone, and call the fire department (CPSC)."
   ],
   "sections": [
     {
-      "h": "What the agencies say first",
+      "h": "What safety bodies say first",
       "blocks": [
         {
-          "p": "Portable kerosene heaters and unvented gas heaters release what they burn straight into your home (New York State Department of Health). These agencies say not to rely on them indoors:"
+          "p": "Portable kerosene heaters and unvented gas heaters release what they burn straight into your home (New York State Department of Health). These say not to rely on them indoors:"
         },
         {
           "list": [
             "US Department of Energy: unvented combustion space heaters are not recommended for use inside your home.",
             "NFPA: all fuel-burning equipment should be vented to the outside to avoid carbon monoxide poisoning.",
             "New York State Department of Health: don’t use portable kerosene or unvented gas heaters as your main heat source, even during power failures. Running a generator outdoors for heat is a better option.",
-            "New York City bans kerosene and propane space heaters outright (FDNY Foundation). That rule applies only in New York City."
+            "New York City bans kerosene and propane space heaters outright (FDNY’s safety education site, run by the FDNY Foundation). That rule applies only in New York City."
           ]
         },
         {
-          "p": "If the furnace is out and a kerosene or propane heater is what you have, run it only under every condition in this topic. Each is the strictest that any agency source opened for this app sets."
+          "p": "If the furnace is out and a kerosene or propane heater is what you have, run it only under every condition in this topic. Each is the strictest that any source opened for this app sets."
         },
         {
           "link": "s:surv-carbon-monoxide",
@@ -65,6 +66,7 @@
             "Never use a heater designed for outdoor use indoors: it makes carbon monoxide (New York State Division of Homeland Security and Emergency Services).",
             "Kerosene: in New York, only an approved portable kerosene heater may be used in a home (New York Real Property Law 239-b). Approved means listed by a testing agency, a fuel tank of no more than 2 gallons (7.6 L), a flame that goes out within 10 seconds if the heater tips over, a refuelling pump or siphon included, and labels on ventilation, fuel, refuelling and placement (Real Property Law 239-a).",
             "No portable kerosene heater may be used at all in a multiple dwelling: a building that is home to three or more families (New York Real Property Law 239-a and 239-e).",
+            "Any heater: tested by a recognized testing laboratory, with an automatic shut-off that turns it off if it tips over (US Fire Administration).",
             "Choose a kerosene heater that won’t tip easily and has a fuel gauge, so you don’t overfill it (New York State Department of Health).",
             "Don’t buy a heater too big for the room: an oversized heater, or one run too hard, can raise carbon monoxide (New York State Department of Health)."
           ]
@@ -85,7 +87,7 @@
             "Use only water-clear 1-K grade kerosene (CPSC). New York State Department of Health calls it K-1. K-2 has more sulfur and is for other uses, even if it looks as clear (New York State Department of Health).",
             "Buy 1-K only from a dealer who can certify that it is 1-K (CPSC).",
             "Don’t use kerosene left from last heating season: it can change and may not burn properly (New York State Department of Health).",
-            "Store kerosene in its own container made for kerosene, never in a gasoline can or a can that has ever held gasoline. Kerosene cans are usually blue, gasoline cans red (CPSC).",
+            "Store kerosene outdoors, in its own container made for kerosene (New York State Department of Health, CPSC), away from other fuel containers (CPSC), never in a gasoline can or a can that has ever held gasoline. Kerosene cans are usually blue, gasoline cans red (CPSC).",
             "Any heater: use only the fuel its maker specifies (NFPA), and never substitute another (New York State Division of Consumer Protection)."
           ]
         },
@@ -115,7 +117,7 @@
       "h": "Never while asleep or alone",
       "blocks": [
         {
-          "warn": "Never run a fuel-burning heater in a room where anyone is sleeping (CPSC). Never leave a space heater on when you go to sleep, or put one close to a sleeping person (CPSC and US Fire Administration). Turn it off when you go to bed or leave the room (US Fire Administration, NFPA, New York State Division of Homeland Security and Emergency Services)."
+          "warn": "Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol). Never put one close to a sleeping person (CPSC and US Fire Administration). NFPA and the New York State Division of Homeland Security and Emergency Services also say to turn it off when you go to bed or leave the room."
         },
         {
           "p": "In a tent, snow shelter, camper or vehicle: never use a fuel-burning heater or lantern while sleeping in one (Shelter; CPSC). Shut off any camping heater before going to sleep (CPSC)."
@@ -131,7 +133,7 @@
       "blocks": [
         {
           "list": [
-            "Keep it at least 3 feet (1 m) from beds, bedding, clothes, curtains, papers, sofas and anything else that can burn, on all sides (CPSC, US Fire Administration, NFPA). New York State Division of Homeland Security and Emergency Services: 36 inches from all heat sources.",
+            "Keep it at least 3 feet (1 m) from beds, bedding, clothes, curtains, papers, sofas and anything else that can burn, on all sides (CPSC, US Fire Administration, NFPA). New York State Division of Homeland Security and Emergency Services: 36 inches (1 m) from all heat sources.",
             "Keep a 3-foot (1 m) kid-free zone around it (NFPA). Don’t put it where small children or pets could fall against it (New York State Division of Homeland Security and Emergency Services).",
             "Put it on a flat, level, stable floor where it won’t be knocked over, not on a rug or carpet (CPSC).",
             "Run it only at the flame height the maker recommends, and never below the minimum wick-stop setting (CPSC)."
@@ -162,7 +164,7 @@
           "list": [
             "Keep spare cylinders outdoors, upright, with the valve closed, away from flames and anything that could light them, and where children can’t knock them over. Never indoors, never under the house or in a crawlspace (North Carolina Department of Agriculture and Consumer Services, LP-Gas Section; a North Carolina rule, used here as guidance).",
             "The National Propane Gas Association says not to bring propane cylinders into the house or an enclosed space such as a garage or basement, and not to leave one in a vehicle.",
-            "CPSC’s indoor-use standard is for portable heaters that run on 1 lb. cylinders. Indoors, have only the small cylinder the heater’s instructions allow, attached to the heater; every spare stays outside. No source says this in so many words: it is this app’s reading of CPSC and the propane sources.",
+            "Indoors, only a 1 lb. cylinder screwed onto the heater. Never a 20 lb. (grill-size) or larger tank inside the house or garage, and never one brought in on a hose. Empty cylinders go back outside too. CPSC’s indoor-use standard covers only heaters on 1 lb. cylinders. Minnesota’s State Fire Marshal, reading the national propane code (NFPA 58), allows no cylinder over 1 lb. and no more than 2 lb. in all inside a home, garages included, counts a connected cylinder as in use and an empty one as full. That is another state’s reading, used here as guidance.",
             "No current New York rule on propane cylinders inside a home was found in an opened source."
           ]
         }
@@ -187,8 +189,9 @@
         {
           "steps": [
             "Don’t try to move or carry the heater (CPSC).",
+            "Don’t throw water on it or try to smother it (CPSC).",
             "If it has a manual shut-off switch, turn it off with that (CPSC).",
-            "If that does not put the fire out, leave the house at once and call the fire department (CPSC)."
+            "If that does not put the fire out, get out quickly, warning everyone as you go, and call the fire department (CPSC)."
           ]
         },
         {
@@ -216,7 +219,7 @@
   "sources": [
     {
       "name": "CPSC, CPSC Stresses Kerosene Heater Safety (publication 5052, revised April 2011)",
-      "used": "Only water-clear 1-K kerosene, never gasoline; small amounts of gasoline or solvents greatly increase fire or explosion risk; buy 1-K from a dealer who certifies it; separate kerosene container, not a gasoline can or one that held gasoline; kerosene cans usually blue, gasoline red; never refuel inside; fill outdoors, away from combustibles, after it is off and cool; not above the full mark; at least three feet from furniture or clothing; door open to the rest of the house; outside window about one inch if the door is closed or the home is new and tight or winterized; not below minimum wick-stop setting; recommended flame height; flare-up: don't move it, manual shut-off, leave and call the fire department; low levels of CO and nitrogen dioxide; chronic respiratory or circulatory problems; smoke alarms, test monthly"
+      "used": "Only water-clear 1-K kerosene, never gasoline; small amounts of gasoline or solvents greatly increase fire or explosion risk; buy 1-K from a dealer who certifies it; separate kerosene container, not a gasoline can or one that held gasoline; kerosene cans usually blue, gasoline red; never refuel inside; fill outdoors, away from combustibles, after it is off and cool; not above the full mark; at least three feet from furniture or clothing; door open to the rest of the house; outside window about one inch if the door is closed or the home is new and tight or winterized; not below minimum wick-stop setting; recommended flame height; flare-up: don't move it, manual shut-off, leave and call the fire department; low levels of CO and nitrogen dioxide; chronic respiratory or circulatory problems; smoke alarms, test monthly; label: if fire occurs, exit quickly and warn others, call the fire department, do not move the heater, try to smother the fire or put water on it; store kerosene away from other fuel containers"
     },
     {
       "name": "CPSC, Portable Heaters and Camping Equipment (Carbon Monoxide Information Center, undated)",
@@ -240,7 +243,7 @@
     },
     {
       "name": "US Fire Administration, Heater Fire Safety (card, undated)",
-      "used": "Proper fuel; refuel outside once cooled; anything that can burn at least 3 feet away; turn heaters off when you go to bed or leave the room"
+      "used": "Tested by a recognized testing laboratory; automatic shutoff if it tips over; proper fuel; refuel outside once cooled; anything that can burn at least 3 feet away; turn heaters off when you go to bed or leave the room"
     },
     {
       "name": "NFPA, Heating Safety tip sheet (©NFPA 2017; copy hosted by the State of Michigan)",
@@ -267,7 +270,7 @@
       "used": "Only approved portable kerosene heaters in structures, including private dwellings; approved: listed, fuel capacity not more than two gallons, tip-over shut-off within ten seconds, pump or siphon, labels on ventilation, fuel, refueling, placement; unlawful to use any portable kerosene heater in a multiple dwelling (three or more families)"
     },
     {
-      "name": "FDNY Foundation (FDNY Smart), Don't use kerosene or propane space heaters (last modified July 21, 2016)",
+      "name": "FDNY Foundation (FDNY Smart, FDNY's safety education site), Don't use kerosene or propane space heaters (last modified July 21, 2016)",
       "used": "Use of kerosene or propane space heaters is strictly prohibited and illegal in New York City"
     },
     {
@@ -281,8 +284,11 @@
     {
       "name": "Shelter (surv-shelter, checked) and Water in winter (surv-water-winter, checked)",
       "used": "Never use fuel-burning heaters or lanterns while sleeping in a tent or snow shelter; never thaw pipes with a kerosene or propane heater (Texas A&M AgriLife Extension, adapted from the Red Cross)"
+    },
+    {
+      "name": "Minnesota Department of Public Safety, State Fire Marshal Division, LP Gas Inside Buildings (undated; reading of NFPA 58; another state, used as guidance)",
+      "used": "Residential, including attached and detached garages: maximum container 1 lb., maximum 2 lbs. per dwelling unit; cylinders larger than 1 pound must not be stored or used indoors at a residential property; a connected cylinder is in use; all cylinders treated as full, even empty"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

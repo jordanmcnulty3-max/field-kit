@@ -125,6 +125,7 @@ def test_tooldata_is_an_empty_object_with_no_files(tree):
 
 
 def test_tooldata_is_inlined_keyed_by_id(tree):
+    shutil.rmtree(tree / 'src' / 'tooldata', ignore_errors=True)   # only this test's two files (the shipped tree also has windchill.json)
     item = tooldata_file(tree)
     tooldata_file(tree, 'aaa')
     r, index = build(tree)
@@ -173,10 +174,28 @@ def test_topic_may_link_u_water_but_not_an_unknown_tool(tree):
 
 
 def test_every_tool_name_is_a_link_key(tree):
-    for name in ('daylight', 'sos', 'water'):
+    for name in ('daylight', 'sos', 'water', 'windchill'):
         link_topic(tree, f'u:{name}')
     r, _ = build(tree)
     assert r.returncode == 0, r.stderr
+
+
+def test_topic_may_link_u_windchill_and_a_gridded_tool_builds(tree):
+    link_topic(tree, 'u:windchill')
+    tooldata_file(tree, 'windchill', title='Wind chill', grid={
+        'temps': [10, 0], 'winds': [5, 10], 'chill': [[6, -5], [3, -10]], 'bands': [[0, 30], [0, 30]],
+        'bandMinutes': [30]})
+    r, index = build(tree)
+    assert r.returncode == 0, r.stderr
+    assert fk_data(index)['tooldata']['windchill']['grid']['bandMinutes'] == [30]
+
+
+def test_damaged_grid_fails_the_build_naming_the_tool(tree):
+    tooldata_file(tree, 'windchill', title='Wind chill', grid={
+        'temps': [0, 10], 'winds': [5, 10], 'chill': [[6, -5], [3, -10]], 'bands': [[0, 30], [0, 30]],
+        'bandMinutes': [30]})
+    r, _ = build(tree)
+    assert r.returncode != 0 and 'windchill' in r.stderr and 'temps' in r.stderr
 
 
 def test_checklist_quantity_is_validated_and_inlined(tree):

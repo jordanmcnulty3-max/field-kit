@@ -1000,3 +1000,42 @@ def test_wc_leaving_the_page_leaves_no_listeners_that_break(page, app_url):
     page.evaluate("FK.route.go('/survival')")
     wait_hash(page, '#/survival')
     assert errors == []
+
+
+# ---------- Wind chill: the shipped NWS chart (src/tooldata/windchill.json) ----------
+SHIPPED_WC = json.loads((__import__('pathlib').Path(__file__).resolve().parent.parent / 'src' / 'tooldata' / 'windchill.json').read_text(encoding='utf-8'))
+
+
+def test_wc_shipped_every_chart_cell_is_the_nws_formula_with_the_files_constants():
+    """Every transcribed cell is reproduced by the formula, with the file's own constants and JS Math.round."""
+    g = SHIPPED_WC['grid']
+    assert len(g['chill']) == len(g['winds']) and all(len(r) == len(g['temps']) for r in g['chill'])
+    wrong = [(v, t, g['chill'][wi][ti], formula(t, v, SHIPPED_WC['values']))
+             for wi, v in enumerate(g['winds']) for ti, t in enumerate(g['temps'])
+             if g['chill'][wi][ti] != formula(t, v, SHIPPED_WC['values'])]
+    assert wrong == [], 'cells (wind, temp, chart, formula) that the formula does not reproduce: %r' % wrong
+    assert len(g['winds']) * len(g['temps']) == 216
+
+
+def test_wc_shipped_build_shows_nothing_while_the_file_is_a_draft_and_a_figure_once_it_is_not(page, app_url):
+    """The built app with no injected data, at 0°F and 15 mph."""
+    page.set_default_timeout(4000)
+    page.add_init_script("localStorage.setItem('fk.advAck', 'true')")
+    page.goto(app_url + WC)
+    page.wait_for_function('window.FK && FK.survival && FK.survival.tools')
+    if SHIPPED_WC.get('draft') is True:
+        expect(page.locator('#survPage')).to_contain_text(WC_MISSING)
+        assert 'Feels like' not in wc_clean(page)
+    else:
+        wc_in(page, 0, 15)
+        expect(page.locator('#survPage [data-k="chill"]')).to_have_text('Feels like -19°F')
+
+
+def test_wc_shipped_file_undrafted_shows_a_figure_for_a_mid_chart_input(page, app_url):
+    """0°F and 15 mph, the NWS example: -19°F, with the file's own no-band sentence and first source."""
+    wc_boot(page, app_url, {k: v for k, v in SHIPPED_WC.items() if k != 'draft'})
+    wc_in(page, 0, 15)
+    expect(page.locator('#survPage [data-k="chill"]')).to_have_text('Feels like -19°F')
+    expect(page.locator('#survPage [data-k="band"]')).to_have_text(SHIPPED_WC['title'])
+    assert wc_out(page).rstrip().endswith('Source: ' + SHIPPED_WC['sources'][0]['name'])
+    wc_clean(page)

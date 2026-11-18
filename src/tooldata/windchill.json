@@ -1,0 +1,92 @@
+{
+  "id": "windchill",
+  "title": "Wind chill only. This tool gives no frostbite time for any conditions: the National Weather Service chart shades frostbite times (30, 10 and 5 minutes) for exposed skin, but those shaded areas could not be checked here, so none is shown. That does not mean these conditions are safe. The National Weather Service says exposed skin can freeze in 30 minutes at 0°F with a 15 mph wind (wind chill -19°F), and that you might get hypothermia from cold even when it is above freezing.",
+  "values": {
+    "c0": {
+      "value": 35.74,
+      "unit": "°F",
+      "note": "The constant term. NWS formula: Wind chill (°F) = 35.74 + 0.6215T - 35.75(V^0.16) + 0.4275T(V^0.16), T = air temperature (°F), V = wind speed (mph)."
+    },
+    "cT": {
+      "value": 0.6215,
+      "unit": "per °F of air temperature",
+      "note": "Multiplies T. NWS formula: Wind chill (°F) = 35.74 + 0.6215T - 35.75(V^0.16) + 0.4275T(V^0.16), T = air temperature (°F), V = wind speed (mph)."
+    },
+    "cV": {
+      "value": 35.75,
+      "unit": "per mph^0.16",
+      "note": "Multiplies V^0.16 and is subtracted. NWS formula: Wind chill (°F) = 35.74 + 0.6215T - 35.75(V^0.16) + 0.4275T(V^0.16), T = air temperature (°F), V = wind speed (mph)."
+    },
+    "cTV": {
+      "value": 0.4275,
+      "unit": "per °F per mph^0.16",
+      "note": "Multiplies T times V^0.16. NWS formula: Wind chill (°F) = 35.74 + 0.6215T - 35.75(V^0.16) + 0.4275T(V^0.16), T = air temperature (°F), V = wind speed (mph)."
+    },
+    "exp": {
+      "value": 0.16,
+      "unit": "power of wind speed (mph)",
+      "note": "The power V is raised to. NWS formula: Wind chill (°F) = 35.74 + 0.6215T - 35.75(V^0.16) + 0.4275T(V^0.16), T = air temperature (°F), V = wind speed (mph). Defined only for air temperatures at or below 50°F and wind speeds above 3 mph; the chart covers 40°F to -45°F and 5 to 60 mph."
+    }
+  },
+  "grid": {
+    "temps": [40, 35, 30, 25, 20, 15, 10, 5, 0, -5, -10, -15, -20, -25, -30, -35, -40, -45],
+    "winds": [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+    "chill": [
+      [36, 31, 25, 19, 13, 7, 1, -5, -11, -16, -22, -28, -34, -40, -46, -52, -57, -63],
+      [34, 27, 21, 15, 9, 3, -4, -10, -16, -22, -28, -35, -41, -47, -53, -59, -66, -72],
+      [32, 25, 19, 13, 6, 0, -7, -13, -19, -26, -32, -39, -45, -51, -58, -64, -71, -77],
+      [30, 24, 17, 11, 4, -2, -9, -15, -22, -29, -35, -42, -48, -55, -61, -68, -74, -81],
+      [29, 23, 16, 9, 3, -4, -11, -17, -24, -31, -37, -44, -51, -58, -64, -71, -78, -84],
+      [28, 22, 15, 8, 1, -5, -12, -19, -26, -33, -39, -46, -53, -60, -67, -73, -80, -87],
+      [28, 21, 14, 7, 0, -7, -14, -21, -27, -34, -41, -48, -55, -62, -69, -76, -82, -89],
+      [27, 20, 13, 6, -1, -8, -15, -22, -29, -36, -43, -50, -57, -64, -71, -78, -84, -91],
+      [26, 19, 12, 5, -2, -9, -16, -23, -30, -37, -44, -51, -58, -65, -72, -79, -86, -93],
+      [26, 19, 12, 4, -3, -10, -17, -24, -31, -38, -45, -52, -60, -67, -74, -81, -88, -95],
+      [25, 18, 11, 4, -3, -11, -18, -25, -32, -39, -46, -54, -61, -68, -75, -82, -89, -97],
+      [25, 17, 10, 3, -4, -11, -19, -26, -33, -40, -48, -55, -62, -69, -76, -84, -91, -98]
+    ],
+    "bands": [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ],
+    "bandMinutes": [5, 10, 30]
+  },
+  "sources": [
+    {
+      "name": "National Weather Service, Wind Chill Chart",
+      "used": "the wind chill formula and its constants; 0°F with a 15 mph wind gives a wind chill of -19°F, at which exposed skin can freeze in 30 minutes; you might get hypothermia from cold when it is above freezing; wind speed at 5 feet (face height) from 33-foot readings; assumes no sun (clear night sky)"
+    },
+    {
+      "name": "National Weather Service, Cold FAQs",
+      "used": "the same formula and constants; wind chill is defined only at or below 50°F and above 3 mph"
+    },
+    {
+      "name": "National Weather Service Peachtree City (Atlanta), The New Improved Wind Chill Index",
+      "used": "every chart cell: air temperatures 40°F to -45°F, winds 5 to 60 mph"
+    },
+    {
+      "name": "National Weather Service La Crosse, Grand Junction and Alaska Region wind chill chart pages",
+      "used": "cross-check of the chart cells (every overlapping cell agrees)"
+    },
+    {
+      "name": "National Weather Service, Wind Chill Temperature Index brochure",
+      "used": "the chart's shaded areas show how long (30, 10 and 5 minutes) a person can be exposed before frostbite develops (the bandMinutes legend)"
+    },
+    {
+      "name": "National Weather Service Albany, New York State cold fact sheet",
+      "used": "the same 30, 10 and 5 minute shaded areas; 0°F with a 20 mph wind gives -22°F, at which exposed skin can freeze in 30 minutes"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

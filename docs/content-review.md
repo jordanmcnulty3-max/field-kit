@@ -2577,3 +2577,58 @@ Re-ordering and rewording with words and figures already in the topics. No fact,
 - Minor 4 (checklist quantities): the group total now sits on its own line after the item, led by "For your group:".
 
 Not changed: Minor 8 (EPA's 6% / 8.25% comparison table stays in Make water safe; removing sourced content is the owner's call, D3); Minor 11 (rodent droppings: CDC's page gives "a disinfectant or a 1:10 chlorine solution (1 1/2 cups of household bleach mixed with 1 gallon of water)", which is not the strong mix, so pointing to the strong mix would change the dose; left as "a disinfectant").
+
+## Heat pack Task 3: wind chill numbers (src/tooldata/windchill.json, 2026-11-18)
+
+Writer's record. `draft: true` until an independent reviewer re-opens these sources and checks every cell.
+
+### Sources opened (search, then fetch of a page the search returned)
+
+1. National Weather Service, Wind Chill Chart — https://www.weather.gov/safety/cold-wind-chill-chart
+2. National Weather Service, Cold FAQs — https://www.weather.gov/safety/cold-faqs
+3. NWS Peachtree City (Atlanta), "The New Improved Wind Chill Index" — https://www.weather.gov/ffc/wci
+4. NWS La Crosse, wind chill — https://weather.gov/arx/wind_chill
+5. NWS Grand Junction, Wind Chill — https://www.weather.gov/gjt/windchill
+6. NWS Alaska Region, Wind Chill Temperature Index brochure — https://www.weather.gov/media/arh/brochures/WindChillTempIndexBro.pdf
+7. NWS, Wind Chill Temperature Index brochure — https://www.weather.gov/media/owlie/wind-chill-brochure.pdf
+8. NWS Albany, New York State cold fact sheet — https://www.weather.gov/media/aly/FactSheets/NYSCold.pdf
+9. NWS Amarillo, Wind Chill — https://www.weather.gov/ama/WindChill (chart is an image, windchill.gif)
+10. NOAA JetStream, Wind Chill — https://noaa.gov/jetstream/global/wind-chill (not used for cells; see conflicts)
+
+Each page was confirmed to be the NWS/NOAA page asked for (title and office name in the fetched text).
+
+### Formula and constants
+
+Source 1, sentence: "Wind chill (ºF) = 35.74 + 0.6215T - 35.75(V^0.16) + 0.4275T(V^0.16)", T = air temperature (°F), V = wind speed (mph). Source 2 prints the same formula and adds "Wind chill Temperature is only defined for temperatures at or below 50°F and wind speeds above 3 mph." Sources 3 and 5 print the same constants.
+
+| Name | Value | From |
+|---|---|---|
+| c0 | 35.74 | the constant term |
+| cT | 0.6215 | "+ 0.6215T" |
+| cV | 35.75 | "- 35.75(V^0.16)" (stored positive; the tool subtracts it) |
+| cTV | 0.4275 | "+ 0.4275T(V^0.16)" |
+| exp | 0.16 | "V^0.16" |
+
+### Axes
+
+- `temps`: 40, 35, … -45 °F (18 columns, descending), the national chart's columns as printed by source 3 (header "Calm 40 35 … -45"; the Calm column has no cells).
+- `winds`: 5, 10, … 60 mph (12 rows, ascending). The "Calm" row is left out.
+
+### Cells (`grid.chill`)
+
+All 216 cells transcribed from source 3's text table (rows 5 to 60 mph, 18 values each; the page puts no value under Calm, so the first value is under 40°F — confirmed by sources 4 and 5, whose 5 mph row starts 31 under 35°F and 36 under 40°F). Cross-checked cell by cell: source 4 (35°F to -45°F, 5 to 55 mph, 187 cells), source 5 (40°F to -25°F, 5 to 45 mph, 126 cells) and source 6 (30°F to -45°F of its 30°F to -55°F, 5 to 60 mph, 192 cells): every overlapping cell agrees. All 216 cells are also reproduced by the formula with the constants above and JS Math.round (tests/test_survival_tools.py::test_wc_shipped_every_chart_cell_is_the_nws_formula_with_the_files_constants). The text tables were read through WebFetch's text extraction, not from the chart image.
+
+### Frostbite bands (`grid.bands`, `grid.bandMinutes`)
+
+- Legend: source 7, "Each shaded area shows how long (30, 10 and 5 minutes) a person can be exposed before frostbite develops."; source 8 says the same. `bandMinutes` = [5, 10, 30].
+- Boundaries: not confirmed, so every band is `0` (ruling in docs/v7.3-rulings.md). Looked for and not found: any NWS/NOAA text stating which cells are in each shaded area. Sources 1 and 9 show the chart as an image; the image link on source 9 (https://www.weather.gov/images/ama/Wind_Chill/windchill.gif) returned a server error twice; source 1 lists only a slider graphic. Sources 3, 5 and 4 print the cells as text with no shading (source 4 bolds some cells but does not say what bolding means). Sources 7 and 8 give the legend without the cells. Archived NOAA pages (UNT web archive crh.noaa.gov/grb, weather.gov/om/windchill; webharvest erh.noaa.gov windchill_sheet.pdf) returned only the archive wrapper or a rate-limit page.
+- Single cells stated in text (recorded, not used as boundaries): 0°F, 15 mph, -19°F, "exposed skin can freeze in 30 minutes" (sources 1, 2, 7, 9); 0°F, 20 mph, -22°F, 30 minutes (source 8).
+
+### Title (shown for every cell, since every band is 0)
+
+Built from source 1: the -19°F example and its 30 minutes; "you might get hypothermia from exposure to cold" when the thermometer is above freezing. It says the tool gives no frostbite time, that this does not mean the conditions are safe, and names the chart's 30, 10 and 5 minute shaded areas.
+
+### Conflicts
+
+- Legend minutes: source 5 lists "Frostbite Time for Exposed Skin (minutes)" 30, 15, 10, 5 and source 6 (Alaska) lists 30, 15, 10, 5 and 2 minutes; the national chart (sources 7, 8, and source 4's 30, 10, 5) uses 30, 10 and 5. The national legend is used; no band is shown either way.
+- Source 10 (NOAA JetStream) differs from the NWS chart in several cells as extracted (10 mph/20°F 11 vs 9; 5 mph/-40°F -58 vs -57; 25 mph/-10°F -38 vs -37; 35 mph/-40°F -83 vs -82; its 55 mph row from -15°F repeats the 50 mph row). Not used; the NWS chart, its four copies and the formula agree.

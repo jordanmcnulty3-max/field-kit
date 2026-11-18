@@ -125,6 +125,7 @@ def test_tooldata_is_an_empty_object_with_no_files(tree):
 
 
 def test_tooldata_is_inlined_keyed_by_id(tree):
+    shutil.rmtree(tree / 'src' / 'tooldata', ignore_errors=True)   # only this test's two files (the shipped tree also has windchill.json)
     item = tooldata_file(tree)
     tooldata_file(tree, 'aaa')
     r, index = build(tree)

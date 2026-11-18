@@ -1631,3 +1631,29 @@ Figure files are unchanged in figs/; only the topic fig block was removed.
 - nav-hand: the statement it draws (each finger between the sun and the horizon is about 15 minutes; four fingers about 1 hour) has no authoritative source, so the text and the figure were both removed. Not a label fix: it would need a sourced method first.
 
 No other diagram in this batch was removed. Kept: nav-shadow, nav-watch, nav-polaris, nav-aimoff, signal-ground, signal-mirror, knot-bowline, knot-trucker, kit.
+
+### Task 16 fix round 1 (2026-11-17)
+
+Re-opened: NPS-10 (title "Ten Essentials (U.S. National Park Service)" confirmed) and DEC-10 (title and 27 June 2024 date confirmed). The reviewer confirmed V = require assistance and X = require medical assistance in first-party text: FM 21-76-1 (1999), chapter III, Figure III-4 Signal Key (irp.fas.org); this resolves Task 16 concern 1.
+
+- F1 surv-ten-essentials: the ten categories are MTN's; the item details are borrowed. Each detail and where it comes from:
+  - Navigation: "map and compass ... a phone with a GPS app or a GPS unit" — MTN (Navigation system); "a spare battery" — NPS-10 under Navigation ("Pack an extra battery for your phone"), MTN (extra batteries, battery pack).
+  - Headlamp and spare batteries — MTN ("Headlamp: plus extra batteries"); NPS-10 under Illumination ("extra batteries").
+  - "sunglasses, sunscreen and a hat" — NPS-10 under Sun Protection ("Sunglasses, sunscreen, and hat"); MTN has sunglasses and sunscreen, no hat.
+  - "Knife or multi-tool" — NPS-10 under Repair Kit and Tools (multi-tool); MTN (knife).
+  - "waterproof matches or a lighter, and fire starter" — NPS-10 under Fire ("matches (preferably waterproof)", lighter, "fire starters").
+  - "space blanket, bivy sack or tarp" — NPS-10 under Emergency Shelter ("A tent, tarp, bivy sack, or emergency space blanket").
+  - "a day's worth beyond your plan" — NPS-10 under Nutrition - Extra Food ("extra day's supply of food").
+  - "Extra water, and a way to treat more" — MTN ("beyond minimum expectation or the means to purify").
+  - "insulation and rain gear" — DEC-10 heading "INSULATION/RAIN GEAR".
+  Text now: "These are The Mountaineers' ten essential systems, with item details from the National Park Service and NYS DEC lists." `kit` caption now "The ten essential systems."
+- F2 surv-ten-essentials: MTN lists insect repellent under first aid, so DEC's insect protection is not an addition. Now "NYS DEC's list also includes a whistle and a signal mirror." — DEC-10 Emergency Kit ("Whistle", "Signal mirror").
+- F3 figs/figs.py `signal-mirror`: alt text now "Signal mirror: sight the aircraft through a V of two fingers and aim the reflected light through the V" (UTAH); drawn label "Mirror under your eye" now "Mirror" (in no source). Rendered at 360 px, day and night: all labels readable and inside the frame.
+- F4 surv-signal-for-rescue: size now "at least 20 ft (6 m) long and 3½ ft (1 m) wide" — FM p. 206 (1 m by 6 m); US units first, rounded up so the minimum is never understated.
+- F5 surv-signal-for-rescue: `u:sos` link moved to just after the signal-mirror figure, above the hostile-situation sentence.
+- F6 surv-knots: taut-line now "one more turn around the standing line outside the loop, wrapping the same way" — SL ("Going in the same direction, take the end around the standing part outside the loop").
+- F7 ten-essentials checklist: sources now MTN, NPS-10 and DEC-10 with what each supplied; the app's own topic is no longer listed.
+- C1 surv-dangerous-animals: "raise your arms" moved from the charge case to the following case — NEBBTC (charged: stand your ground, calm voice, bear spray; following: make yourself look bigger, arms above your head, shout, bang a stick).
+- C2 decisions-for-jordan D11: now names both poisonous irises (yellow flag and native blue flag), matching the Task 15 fix.
+- C3 figs/figs.py `river`: second hazard line "stay well upstream" now "never cross just above them", the surv-river-crossings wording (FM ch 17). tests/test_figs.py: "stay well upstream" added to the river case's forbidden wording, "never cross just above them" to its required wording. Rendered at 360 px, day and night: the right-aligned line fits inside the river band, nothing clipped.
+- C4 surv-fire: `fire-sizes` caption "Tinder, kindling and fuel. If you skip the tinder or kindling stage, the fire will likely fail." now "Tinder, kindling and fuel." (the sentence is in the paragraph above).

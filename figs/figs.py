@@ -360,7 +360,7 @@ svg('river', 200, 'River crossing: face upstream, pole planted upstream, shuffle
 <line x1="102" y1="100" x2="74" y2="92" class="w t3"/>
 <path d="M272 58 L330 122 M290 70 l-10 12 M306 88 l12 -8 M318 104 l-12 10" class="w t3"/>
 {lbl(150,112,'Face upstream,','tb')}{lbl(150,126,'pole upstream','')}
-{lbl(330,148,'Strainers and rapids:','tb','end')}{lbl(330,162,'stay well upstream','','end')}
+{lbl(330,148,'Strainers and rapids:','tb','end')}{lbl(330,162,'never cross just above them','','end')}
 {lbl(84,24,'About 45° downstream','tb')}''')
 
 icons = [
@@ -436,7 +436,7 @@ svg('signal-ground', 150, 'Ground-to-air signals: V means need assistance, X mea
 <path d="M220 112 L306 112 L263 60 Z" class="m d t1"/>
 {lbl(262,144,'3 fires in a triangle','tb','middle')}''')
 
-svg('signal-mirror', 170, 'Signal mirror: hold it under your eye, sight the aircraft through a V of two fingers, tilt until the light hits your fingers', f'''
+svg('signal-mirror', 170, 'Signal mirror: sight the aircraft through a V of two fingers and aim the reflected light through the V', f'''
 {sun(30,28,10)}
 <line x1="40" y1="40" x2="62" y2="106" class="h d t1"/>
 <polygon points="52,110 70,104 74,118 56,124" class="k af"/>
@@ -444,7 +444,7 @@ svg('signal-mirror', 170, 'Signal mirror: hold it under your eye, sight the airc
 <path d="M193 132 L182 78 M193 132 L206 80" class="skin-s"/>
 <circle cx="194" cy="138" r="9" class="skin"/>
 <path d="M286 58 L322 49 M300 40 L308 68" class="k t3"/>
-{lbl(10,152,'Mirror under your eye','tb')}
+{lbl(10,152,'Mirror','tb')}
 {lbl(216,128,'Sight the aircraft','')}{lbl(216,142,'through 2 fingers','')}''')
 
 S = [(55,8,0),(55,45,0),(55,64,-1),(74,84,0),(56,108,1),(30,94,0),(33,72,0),(55,64,1),(78,58,0)]

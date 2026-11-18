@@ -160,8 +160,8 @@ Source disagreements found while checking the Survival topics. Each says what th
    confirm it is edible, but no opened source names its look-alikes or says it has no dangerous ones, so under the
    plant rule (each edible named with its dangerous look-alikes) it was removed. Acorns: only the Army manuals give
    the leaching method; no extension or state source was found, so they were removed. Today: the topic names
-   cattail (with yellow flag iris as the poisonous look-alike) and wild blackberries and raspberries only. Say if
-   you want either back; it needs a source (or plant photos at pack 4).
+   cattail (with two poisonous look-alikes, yellow flag iris and the native blue flag iris) and wild blackberries
+   and raspberries only. Say if you want either back; it needs a source (or plant photos at pack 4).
 12. **Bear spray in New York.** The Northeast Black Bear Technical Committee says bear spray can work with practice
    and that local rules may restrict carrying it. Whether New York law allows carrying bear spray was not checked
    (no law page was opened). Today: the topic says local rules may restrict it. Say if the group carries bear

@@ -20,7 +20,7 @@
           "p": "Three of anything is a distress signal: three fires in a triangle, three whistle blasts, three flashes. Repeat at intervals."
         },
         {
-          "p": "Ground-to-air symbols, in an open area and as large as you can make them, at least 6 m (about 20 ft) long and 1 m (about 3 ft) wide, in strong contrast with the ground: V means you need assistance, X means you need medical help."
+          "p": "Ground-to-air symbols, in an open area and as large as you can make them, at least 20 ft (6 m) long and 3½ ft (1 m) wide, in strong contrast with the ground: V means you need assistance, X means you need medical help."
         },
         {
           "fig": "signal-ground",
@@ -34,11 +34,11 @@
           "cap": "Sight the aircraft through the V of your fingers and aim the reflected light through the V."
         },
         {
-          "p": "In a hostile situation, remember that any signal can also show your position to people you don’t want to find you."
-        },
-        {
           "link": "u:sos",
           "label": "SOS light"
+        },
+        {
+          "p": "In a hostile situation, remember that any signal can also show your position to people you don’t want to find you."
         }
       ]
     }

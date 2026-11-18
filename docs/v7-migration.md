@@ -330,3 +330,17 @@ every statement is in `docs/content-review.md`.
 - Summary. Old: "Tick off the ten things to pack for every trip into the backcountry." New: "Pack these on every trip into the backcountry, even a short one." (the topic's summary; the old line was new copy).
 - Items. Old: short item text plus a note copied from the topic ("Navigation" / "Map, compass, and a charged phone or GPS.", ..., "Extra water" / "And a way to treat more."). New: each item's text is the topic's list line without its full stop, and there are no notes. Item ids unchanged.
 - Sources: placeholder replaced by the topic and The Mountaineers; draft removed.
+
+### Task 16 fix round 1 (2026-11-17)
+
+- surv-ten-essentials. Old: "This list follows The Mountaineers' Ten Essential Systems. The NYS DEC list for New York hikers also adds a whistle, a signal mirror and insect protection." New: "These are The Mountaineers' ten essential systems, with item details from the National Park Service and NYS DEC lists. NYS DEC's list also includes a whistle and a signal mirror." Sources: The Mountaineers; NPS Ten Essentials; NYS DEC press release 27 June 2024.
+- surv-ten-essentials, `kit` caption. Old: "The ten essential systems, as The Mountaineers list them." New: "The ten essential systems."
+- surv-signal-for-rescue, size. Old: "at least 6 m (about 20 ft) long and 1 m (about 3 ft) wide". New: "at least 20 ft (6 m) long and 3½ ft (1 m) wide". Source: FM 21-76 p. 206.
+- surv-signal-for-rescue: SOS light link moved above the hostile-situation sentence.
+- surv-knots, taut-line. Old: "then one more turn outside the loop." New: "then one more turn around the standing line outside the loop, wrapping the same way." Source: Scout Life.
+- ten-essentials checklist, sources: the topic entry removed; NPS and NYS DEC added beside The Mountaineers.
+- figs `signal-mirror`: alt text "... hold it under your eye, sight the aircraft through a V of two fingers, tilt until the light hits your fingers" now "Signal mirror: sight the aircraft through a V of two fingers and aim the reflected light through the V"; drawn label "Mirror under your eye" now "Mirror". Source: Be Ready Utah.
+- surv-dangerous-animals, bears. Old: "If a bear charges, stand your ground, raise your arms, keep talking calmly and use bear spray if you have it; if it keeps following you, stand your ground, look bigger, shout and bang a stick on the ground." New: "If a bear charges, stand your ground, keep talking calmly and use bear spray if you have it; if it keeps following you, stand your ground, raise your arms to look bigger, shout and bang a stick on the ground." Source: Northeast Black Bear Technical Committee.
+- figs `river`: label "stay well upstream" now "never cross just above them" (matches surv-river-crossings).
+- surv-fire, `fire-sizes` caption. Old: "Tinder, kindling and fuel. If you skip the tinder or kindling stage, the fire will likely fail." New: "Tinder, kindling and fuel." (no repeat of the paragraph above).
+- docs/decisions-for-jordan.md D11 now names both irises.

@@ -23,7 +23,7 @@ CASES = {
     'shelter-debris': ([r'\bhip\b', r"arm's length"], ['waist height', '3 ft (1 m)']),
     'fire-sizes': ([r'pencil-thick', r'wrist'], ['pencil lead', 'thumb', 'forearm']),
     'fire-platform': ([r'flat rocks', r'wet ground', r'sticks'], ['green logs', 'deep snow']),
-    'river': ([r'slightly downstream'], ['45', 'downstream']),
+    'river': ([r'slightly downstream', r'stay well upstream'], ['45', 'downstream', 'never cross just above them']),
     'trap-snare': ([r'(?<!\d)3 in\b', r'fist'], ['head']),
     'dress-deer': ([r'head uphill', r'uphill', r'breastbone to pelvis'], ['pelvis to breastbone']),
 }

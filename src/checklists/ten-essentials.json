@@ -47,12 +47,16 @@
   ],
   "sources": [
     {
-      "name": "Field Kit topic The ten essentials (surv-ten-essentials), source-checked 2026-11-17",
-      "used": "Every item and the summary are the topic's own words; the topic's sources are The Mountaineers' Ten Essential Systems, the National Park Service's Ten Essentials and NYS DEC's 10 Hiking Essentials"
+      "name": "The Mountaineers, Ten Essentials: The Classic List and the Ten Essential Systems (citing Mountaineering: The Freedom of the Hills, 9th edition), Olympia Branch handout",
+      "used": "The ten systems; navigation with a GPS device or phone with a GPS app and extra batteries; headlamp plus extra batteries; sunglasses and sunscreen; knife; matches, lighter and tinder; extra water or the means to purify"
     },
     {
-      "name": "The Mountaineers, Ten Essential Systems (Freedom of the Hills, 9th edition), Olympia Branch handout",
-      "used": "The ten items"
+      "name": "National Park Service, Ten Essentials",
+      "used": "Extra battery for your phone; sunglasses, sunscreen and hats; first-aid kit; matches (preferably waterproof) or lighter and fire starters; knife or multi-tool; an extra day's supply of food; tent, tarp, bivy sack or emergency space blanket; rain shell and jacket"
+    },
+    {
+      "name": "NYS DEC press release, 27 June 2024, DEC Reminds Visitors to Focus on Safety as Summer Hiking Season Begins (10 Hiking Essentials)",
+      "used": "Insulation/rain gear"
     }
   ],
   "reviewed": "2026-11-17"

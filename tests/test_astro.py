@@ -131,3 +131,11 @@ def test_astro_is_first_script_and_has_no_dom_or_fk():
         assert word not in src, word
     build = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'build.py'), encoding='utf-8').read()
     assert "for f in ['astro.js', " in build
+
+
+def test_f12_sun_altitude_constants_are_exported_once(page, app_url):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK_ASTRO')
+    assert page.evaluate('[FK_ASTRO.SUN_RISE_ALT, FK_ASTRO.CIVIL_ALT]') == [-0.833, -6]
+    tools = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src', 'survival-tools.js'), encoding='utf-8').read()
+    assert '-0.833' not in tools and 'CIVIL_ALT = ' not in tools

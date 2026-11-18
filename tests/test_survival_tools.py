@@ -349,7 +349,7 @@ def test_daylight_without_fix_asks_and_accepts_a_typed_position(ny_page, app_url
     lat, lon = page.get_by_label('Latitude', exact=True), page.get_by_label('Longitude', exact=True)
     assert lat.bounding_box()['height'] >= 48 and lon.bounding_box()['height'] >= 48
     lat.fill('43.05')
-    lon.fill('-76.15')
+    lon.fill('76.15')   # W is the default: no minus key needed
     use = page.get_by_role('button', name='Use this position')
     assert use.bounding_box()['height'] >= 48
     use.click()
@@ -364,19 +364,22 @@ def test_daylight_refuses_latitude_91_with_an_announced_message(ny_page, app_url
     page = ny_page
     dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0))
     page.get_by_label('Latitude', exact=True).fill('91')
-    page.get_by_label('Longitude', exact=True).fill('-76.15')
+    page.get_by_label('Longitude', exact=True).fill('76.15')
     page.get_by_role('button', name='Use this position').click()
     alert = page.locator('#survPage [role="alert"]')
-    expect(alert).to_have_text('Latitude must be a number from -90 to 90.')
+    expect(alert).to_have_text('Latitude must be a number from 0 to 90.')
     expect(page.locator('#survPage .dl-day')).to_have_count(0)
     assert page.evaluate("localStorage.getItem('fk.daylightPos')") is None
     page.get_by_label('Longitude', exact=True).fill('181')
     page.get_by_label('Latitude', exact=True).fill('43')
     page.get_by_role('button', name='Use this position').click()
-    expect(alert).to_have_text('Longitude must be a number from -180 to 180.')
+    expect(alert).to_have_text('Longitude must be a number from 0 to 180.')
     page.get_by_label('Latitude', exact=True).fill('abc')
     page.get_by_role('button', name='Use this position').click()
-    expect(alert).to_have_text('Latitude must be a number from -90 to 90.')
+    expect(alert).to_have_text('Latitude must be a number from 0 to 90.')
+    page.get_by_label('Latitude', exact=True).fill('-43')   # the sign is chosen with N / S, not typed
+    page.get_by_role('button', name='Use this position').click()
+    expect(alert).to_have_text('Latitude must be a number from 0 to 90.')
 
 
 def test_daylight_typed_position_is_used_only_when_chosen(ny_page, app_url):
@@ -412,3 +415,147 @@ def test_search_finds_daylight_by_sunrise_and_moon(page, app_url):
     page.click('#searchBody .sr-item[data-key="u:daylight"]')
     wait_hash(page, DAYLIGHT)
     expect(page.locator('#survPage h2')).to_have_text('Daylight and moon')
+
+
+# ---------- Final fix wave ----------
+
+def test_f3_update_bar_waits_while_the_light_runs(page, app_url):
+    boot(page, app_url, SOS)
+    bar = page.locator('#updBar')
+    page.evaluate('FK.updateAvailable()')
+    expect(bar).to_be_visible()
+    assert page.evaluate('FK.survival.lightOn()') is False
+    start(page)
+    assert page.evaluate('FK.survival.lightOn()') is True
+    expect(bar).to_be_hidden()   # its Reload would end the light
+    page.locator(PANEL).click()
+    assert page.evaluate('FK.survival.lightOn()') is False
+    expect(bar).to_be_visible()
+    page.get_by_role('button', name='Steady light').click()
+    expect(bar).to_be_hidden()
+    page.evaluate("FK.route.go('/survival')")   # leaving the page ends the light
+    wait_hash(page, '#/survival')
+    assert page.evaluate('FK.survival.lightOn()') is False
+    expect(bar).to_be_visible()
+
+
+def test_f10_start_button_names_what_is_running(page, app_url):
+    boot(page, app_url, SOS)
+    page.get_by_role('button', name='Steady light').click()
+    assert page.locator('#svSosStart').inner_text() == 'Stop light'
+    page.locator(PANEL).click()
+    assert page.locator('#svSosStart').inner_text() == 'Start SOS'
+    start(page)
+    assert page.locator('#svSosStart').inner_text() == 'Stop SOS'
+
+
+def test_f10_escape_stops_the_light(page, app_url):
+    boot(page, app_url, SOS)
+    for which in ('Start SOS', 'Steady light'):
+        page.get_by_role('button', name=which).click()
+        expect(page.locator(PANEL)).to_be_visible()
+        page.keyboard.press('Escape')
+        expect(page.locator(PANEL)).to_be_hidden()
+        expect(page.get_by_role('button', name=which)).to_be_focused()
+    page.clock.run_for(UNIT * 40)
+    expect(page.locator(PANEL)).to_be_hidden()
+
+
+def test_f4_cards_move_on_when_midnight_passes_with_the_page_open(ny_page, app_url):
+    page = ny_page
+    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 23, 58), fix=SYR)
+    assert 'Nov 17' in card(page, 0).locator('h3').inner_text()
+    page.clock.run_for(3 * 60_000)
+    expect(card(page, 0).locator('h3')).to_contain_text('Nov 18')
+    assert card(page, 0).locator('h3').inner_text().startswith('Today')
+
+
+def test_f4_cards_move_on_when_the_page_becomes_visible_again(ny_page, app_url):
+    page = ny_page
+    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 23, 58), fix=SYR)
+    page.clock.pause_at(epoch_ms('America/New_York', 2026, 11, 17, 23, 59) / 1000)
+    page.clock.set_fixed_time(epoch_ms('America/New_York', 2026, 11, 18, 9, 0) / 1000)   # the phone slept: no timer ran
+    assert 'Nov 17' in card(page, 0).locator('h3').inner_text()
+    page.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+    expect(card(page, 0).locator('h3')).to_contain_text('Nov 18')
+
+
+def test_f4_leaving_the_page_stops_its_timer_and_listener(ny_page, app_url):
+    page = ny_page
+    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 23, 58), fix=SYR)
+    page.evaluate("FK.route.go('/survival')")
+    wait_hash(page, '#/survival')
+    page.evaluate("""() => { window.__redrawn = 0; const S = window.FK_ASTRO.sun;
+      window.FK_ASTRO.sun = (...a) => { window.__redrawn++; return S(...a); }; }""")
+    page.clock.run_for(3 * 60_000)
+    page.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+    assert page.evaluate('window.__redrawn') == 0
+
+
+FULL_POS = """() => {
+  const orig = Storage.prototype.setItem;
+  Storage.prototype.setItem = function (k, v) { if (k === 'fk.daylightPos') throw new DOMException('full', 'QuotaExceededError'); return orig.call(this, k, v); };
+}"""
+
+
+def test_f7_typed_position_is_used_even_when_storage_is_full(ny_page, app_url):
+    page = ny_page
+    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0))
+    page.evaluate(FULL_POS)
+    page.get_by_label('Latitude', exact=True).fill('43.05')
+    page.get_by_label('Longitude', exact=True).fill('76.15')
+    page.get_by_role('button', name='Use this position').click()
+    expect(page.locator('#survPage .dl-day')).to_have_count(7)
+    assert 'Typed position' in page.locator('#survPage .dl-pos').inner_text()
+    assert page.inner_text('#toast') == "Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or map areas."
+    assert page.evaluate("localStorage.getItem('fk.daylightPos')") is None
+
+
+def hem(page, name):
+    return page.get_by_role('radio', name=name, exact=True)
+
+
+def test_f8_position_is_typed_without_a_sign_and_chosen_with_n_s_and_w_e(ny_page, app_url):
+    page = ny_page
+    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0))
+    lat, lon = page.get_by_label('Latitude', exact=True), page.get_by_label('Longitude', exact=True)
+    for f in (lat, lon):
+        assert f.get_attribute('inputmode') == 'decimal'
+    expect(hem(page, 'North')).to_be_checked()
+    expect(hem(page, 'West')).to_be_checked()
+    for n in ('North', 'South', 'West', 'East'):
+        b = page.locator('#survPage label', has=hem(page, n)).bounding_box()
+        assert b['height'] >= 48 and b['width'] >= 48, n
+    assert page.locator('#survPage [role="radiogroup"]').evaluate_all('g => g.map(e => e.getAttribute("aria-label"))') == \
+        ['Latitude: north or south', 'Longitude: west or east']
+    lat.fill('33,87')   # a comma works as the decimal separator
+    lon.fill('151,21')
+    page.locator('#survPage label', has=hem(page, 'South')).click()
+    page.locator('#survPage label', has=hem(page, 'East')).click()
+    page.get_by_role('button', name='Use this position').click()
+    expect(page.locator('#survPage .dl-day')).to_have_count(7)
+    assert json.loads(page.evaluate("localStorage.getItem('fk.daylightPos')")) == {'lat': -33.87, 'lon': 151.21, 'on': True}
+    assert '33.8700° S, 151.2100° E' in page.locator('#survPage .dl-pos').inner_text()
+
+
+def test_f8_a_stored_signed_position_loads_with_the_right_directions(ny_page, app_url):
+    page = ny_page
+    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0), storage={'daylightPos': {'lat': 43.05, 'lon': -76.15, 'on': True}})
+    expect(page.locator('#survPage .dl-day')).to_have_count(7)
+    assert '43.0500° N, 76.1500° W' in page.locator('#survPage .dl-pos').inner_text()
+    page.get_by_role('button', name='Change position').click()
+    expect(page.get_by_label('Latitude', exact=True)).to_have_value('43.05')
+    expect(page.get_by_label('Longitude', exact=True)).to_have_value('76.15')
+    expect(hem(page, 'North')).to_be_checked()
+    expect(hem(page, 'West')).to_be_checked()
+    page.get_by_role('button', name='Use this position').click()
+    assert json.loads(page.evaluate("localStorage.getItem('fk.daylightPos')")) == {'lat': 43.05, 'lon': -76.15, 'on': True}
+
+
+def test_f14_position_screen_is_a_button_that_opens_it(ny_page, app_url):
+    page = ny_page
+    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0))
+    btn = page.get_by_role('button', name='Position screen')
+    assert btn.bounding_box()['height'] >= 48
+    btn.click()
+    page.wait_for_function("location.hash === '#/tactical/position'")

@@ -190,5 +190,5 @@
     return { rise: up, set: down, phase: mid.phase, illum: mid.illum, name };
   }
 
-  window.FK_ASTRO = { sun, moon, sunAlt, dayLength };
+  window.FK_ASTRO = { sun, moon, sunAlt, dayLength, SUN_RISE_ALT, CIVIL_ALT };
 })();

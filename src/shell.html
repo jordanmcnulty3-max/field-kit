@@ -480,6 +480,14 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 .dl-pos .row{flex-wrap:wrap;margin:0 0 12px}
 .dl-form .row{flex-wrap:wrap;margin:12px 0 0}
 .dl-form{margin:0 0 12px}
+.dl-coord{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin:0 0 12px}
+.dl-dir{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.dl-dir label{position:relative;display:flex;align-items:center;justify-content:center;min-width:52px;min-height:48px;cursor:pointer;color:var(--muted);font-size:17px}
+.dl-dir label+label{border-left:1px solid var(--line)}
+.dl-dir input{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;padding:0;border:0;opacity:0;cursor:pointer}
+.dl-dir label:has(input:checked){background:var(--c);color:var(--on-accent);font-weight:600}
+.dl-dir label:has(input:focus-visible){outline:3px solid var(--c);outline-offset:2px;z-index:1}
+.dl-inline{display:inline-block;min-height:0;padding:14px 0;margin:-14px 0;border:0;background:none;color:var(--c);font:inherit;text-decoration:underline;cursor:pointer}   /* padding makes a 48px target; the negative margin keeps the lines from spreading */
 .dl-err{margin:8px 0 0;color:var(--blaze);font-weight:600}
 .dl-err:empty{margin:0}
 .dl-days{display:grid;gap:12px;margin-top:8px}

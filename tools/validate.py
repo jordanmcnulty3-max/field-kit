@@ -499,6 +499,10 @@ def validate_tooldata(items):
             _unknown_keys(vw, v, TOOLDATA_VALUE_KEYS, errors)
             if not _finite_num(v.get('value')):
                 errors.append(f'{vw}: value must be a finite number')
+            elif v['value'] <= 0:
+                errors.append(f'{vw}: value must be greater than 0 (got {v["value"]!r})')
+            if isinstance(name, str) and name.startswith('extra') and _blank(v.get('note')):
+                errors.append(f'{vw}: an extra needs a note (the planner shows it as the toggle label)')
             if _blank(v.get('unit')):
                 errors.append(f'{vw}: unit must be non-blank text')
             if 'note' in v and _blank(v['note']):

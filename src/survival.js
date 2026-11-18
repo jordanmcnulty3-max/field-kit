@@ -63,16 +63,23 @@
     const v = water && water.draft !== true ? own(own(own(water, 'values'), 'planDays'), 'value') : undefined;
     return FK.fin(v) && v >= 1 ? Math.min(LIMITS.days[1], up(v)) : DEFAULT_DAYS;
   }
-  /* A field that is not a finite number keeps its fallback; a number is rounded up and clamped to its range. */
-  const fit = (v, [lo, hi], dflt) => (FK.fin(v) ? Math.min(hi, Math.max(lo, up(v))) : dflt);
-  const readGroup = (v, base) => ({ people: fit(own(v, 'people'), LIMITS.people, base.people), days: fit(own(v, 'days'), LIMITS.days, base.days) });
+  /* A field that is not a finite number keeps its fallback; a number is rounded up, then clamped to its maximum. Below the
+     minimum, a stored value (junk from an old or hand-edited backup) also takes the fallback, while a value the user typed
+     (clampLow) is raised to the minimum. */
+  const fit = (v, [lo, hi], dflt, clampLow) => {
+    if (!FK.fin(v)) return dflt;
+    const n = up(v);
+    return n < lo ? (clampLow ? lo : dflt) : Math.min(hi, n);
+  };
+  const readGroup = (v, base, clampLow) => ({ people: fit(own(v, 'people'), LIMITS.people, base.people, clampLow),
+    days: fit(own(v, 'days'), LIMITS.days, base.days, clampLow) });
   let keptGroup = null;   // a group this visit accepted but the phone's storage could not keep: used until a save works or the app reloads
   function group() {
     return keptGroup ? { ...keptGroup } : readGroup(FK.store.get('group', null), { people: 1, days: defaultDays() });
   }
   /* Clamps, stores integers and emits 'group' when the group changed. False when storage is full (the new group is still used). */
   function setGroup(g) {
-    const before = group(), next = readGroup(g, before);
+    const before = group(), next = readGroup(g, before, true);
     const ok = FK.store.set('group', next);
     keptGroup = ok ? null : next;
     if (next.people !== before.people || next.days !== before.days) FK.emit('group', { ...next });
@@ -218,8 +225,9 @@
     const wrap = el.querySelector('.sv-gwrap');
     /* Only the quantities change with the group: the rows, their ticks and focus stay as they are. */
     const ed = wrap && mountGroup(wrap, g => 'Quantities for ' + groupWords(g), g => {
+      const spans = new Map([...el.querySelectorAll('[data-qty]')].map(x => [x.dataset.qty, x]));
       for (const it of c.items) {
-        const s = okQty(it.qty) && [...el.querySelectorAll('[data-qty]')].find(x => x.dataset.qty === it.id);
+        const s = okQty(it.qty) && spans.get(it.id);
         if (s) { const t = qtyText(it.qty, g); s.textContent = t; s.hidden = !t; }
       }
     });
@@ -500,7 +508,8 @@
   /* tools() and the tool pages come from src/survival-tools.js, which loads after this file; headHTML, footHTML, the group
      editor and the rounding and number helpers are shared with it. */
   FK.survival = { topics, topic, checklists, checklist, ticks, open, renderHome, refreshHome: renderHome, registerPage, homeItems, filter,
-    tools: () => [], headHTML, footHTML, group, setGroup, mountGroup, groupWords, roundUp: up, fmt };
+    tools: () => [], headHTML, footHTML, group, setGroup, mountGroup, groupWords, roundUp: up, fmt,
+    _groupWatchers: () => watchers.size };   // read-only, for tests: how many open editors are listening for 'group'
   // The router's first route ran before this file loaded; wait until the rest of the script (page providers) has loaded too.
   queueMicrotask(() => onRoute(FK.route.current()));
 })();

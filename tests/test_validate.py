@@ -647,7 +647,20 @@ class ToolDataValidation(unittest.TestCase):
             self.has(derrs([t]), "'water'", 'boilMinutes', 'value')
         t = tooldata(); del t['values']['boilMinutes']['value']
         self.has(derrs([t]), 'boilMinutes', 'value')
-        t = tooldata(); t['values']['boilMinutes']['value'] = 0
+
+    def test_value_must_be_greater_than_zero(self):
+        for bad in (0, -1, -0.5, 0.0):
+            t = tooldata(); t['values']['boilMinutes']['value'] = bad
+            self.has(derrs([t]), "'water'", 'boilMinutes', 'greater than 0')
+        t = tooldata(); t['values']['boilMinutes']['value'] = 0.001
+        self.assertEqual(derrs([t]), [])
+
+    def test_extra_values_need_a_note(self):
+        t = tooldata(); t['values']['extraHotPerPersonDay'] = {'value': 1, 'unit': 'gal'}
+        self.has(derrs([t]), "'water'", 'extraHotPerPersonDay', 'note')
+        t['values']['extraHotPerPersonDay']['note'] = '  '
+        self.has(derrs([t]), 'extraHotPerPersonDay', 'note')
+        t['values']['extraHotPerPersonDay']['note'] = 'Hot weather'
         self.assertEqual(derrs([t]), [])
 
     def test_unit_is_required(self):

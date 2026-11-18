@@ -133,7 +133,9 @@ def test_default_days_are_fourteen_with_no_or_draft_water_data(page, app_url):
 @pytest.mark.parametrize('bad, want', [
     ('"x"', {'people': 1, 'days': 14}),
     ('{"people": 0}', {'people': 1, 'days': 14}),
-    ('{"people": 1e9, "days": -3}', {'people': 50, 'days': 1}),
+    ('{"days": 0}', {'people': 1, 'days': 14}),             # below range: the default, not the minimum
+    ('{"people": -3, "days": 30}', {'people': 1, 'days': 30}),
+    ('{"people": 1e9, "days": -3}', {'people': 50, 'days': 14}),   # above range clamps; below range falls back
     ('{"people": 2.5, "days": 3.2}', {'people': 3, 'days': 4}),
     ('{"people": 1e999, "days": -1e999}', {'people': 1, 'days': 14}),   # JSON.parse gives Infinity
     ('{"people": "5", "days": true}', {'people': 1, 'days': 14}),
@@ -348,12 +350,25 @@ def test_checklist_and_planner_update_live_on_the_group_event(page, app_url):
 
 
 def test_leaving_a_page_stops_its_group_watcher(page, app_url):
+    watchers = lambda: page.evaluate('FK.survival._groupWatchers()')
     boot(page, app_url, LIST_URL)
+    assert watchers() == 1   # the checklist's editor
     page.evaluate("FK.route.go('/survival/tool/water')")
     wait_hash(page, WATER_URL)
+    assert watchers() == 1   # the checklist's went with it; the planner's is the only one
     page.evaluate("FK.route.go('/survival')")
     wait_hash(page, '#/survival')
-    page.evaluate('FK.survival.setGroup({ people: 9, days: 9 })')   # no page open: nothing to update, and no error
+    assert watchers() == 0   # leaving the planner
+    page.evaluate("FK.route.go('/survival/list/store-water')")
+    wait_hash(page, LIST_URL)
+    assert watchers() == 1
+    page.go_back()
+    wait_hash(page, '#/survival')
+    assert watchers() == 0   # leaving a checklist
+    page.evaluate("FK.route.go('/survival/list/plain')")   # no quantities: no editor, no watcher
+    wait_hash(page, '#/survival/list/plain')
+    assert watchers() == 0
+    page.evaluate('FK.survival.setGroup({ people: 9, days: 9 })')
     settle(page)
 
 
@@ -456,10 +471,10 @@ def test_review_focus_2_planner_totals_round_up_and_never_understate(page, app_u
 
 def test_review_focus_2_awkward_fractions_round_up(page, app_url):
     w = {**WATER, 'values': {**WATER['values'], 'drinkPerPersonDay': {'value': 0.7, 'unit': 'gal', 'note': 'n'},
-                             'litersPerGallon': {'value': 3.7, 'unit': 'L'}, 'lbPerGallon': {'value': 8.3, 'unit': 'lb'}}}
+                             'litersPerGallon': {'value': 3.785, 'unit': 'L'}, 'lbPerGallon': {'value': 8.3, 'unit': 'lb'}}}
     boot(page, app_url, water=w, storage={'group': {'people': 3, 'days': 1}})
     assert res(page, 'gal') == 3          # 2.1 -> 3
-    assert res(page, 'litres') == 12      # 3 x 3.7 = 11.1 -> 12
+    assert res(page, 'litres') == 12      # 3 x 3.785 = 11.355 -> 12
     assert res(page, 'lb') == 25          # 3 x 8.3 = 24.9 -> 25
     page.evaluate('FK.survival.setGroup({ people: 10, days: 1 })')
     assert res(page, 'gal') == 7          # 0.7 x 10 is 7.000000000000001 in floating point: 7
@@ -471,6 +486,10 @@ def test_review_focus_2_awkward_fractions_round_up(page, app_url):
                                    {**WATER, 'values': {**WATER['values'], 'drinkPerPersonDay': {'value': 'lots', 'unit': 'gal'}}},
                                    {**WATER, 'values': {**WATER['values'], 'litersPerGallon': {'value': 0, 'unit': 'L'}}},
                                    {**WATER, 'values': {**WATER['values'], 'drinkPerPersonDay': {'value': 4, 'unit': 'L'}}},
+                                   {**WATER, 'values': {**WATER['values'], 'lbPerGallon': {'value': 0.0833, 'unit': 'lb'}}},
+                                   {**WATER, 'values': {**WATER['values'], 'litersPerGallon': {'value': 37.85, 'unit': 'L'}}},
+                                   {**WATER, 'values': {**WATER['values'], 'lbPerGallon': {'value': 8.5, 'unit': 'lb'}}},
+                                   {**WATER, 'values': {**WATER['values'], 'litersPerGallon': {'value': 3.77, 'unit': 'L'}}},
                                    'junk'])
 def test_planner_says_numbers_are_not_available_when_data_is_missing_draft_or_broken(page, app_url, water):
     boot(page, app_url, water=water)
@@ -504,3 +523,33 @@ def test_planner_and_scaling_checklist_fit_360px_in_day_and_night(page, app_url,
     page.evaluate("FK.route.go('/survival/list/store-water')")
     wait_hash(page, LIST_URL)
     no_overflow(page)
+
+
+def test_planner_totals_that_are_not_safe_integers_show_not_available(page, app_url):
+    w = {**WATER, 'values': {**WATER['values'], 'drinkPerPersonDay': {'value': 1e306, 'unit': 'gal', 'note': 'n'}}}
+    boot(page, app_url, water=w, storage={'group': {'people': 2, 'days': 3}})
+    t = no_bad_numbers(page)
+    assert NOT_AVAILABLE in t
+    assert page.locator('#survPage [data-k]').count() == 0
+    assert 'e+' not in t and 'gallons' not in t
+    w2 = {**WATER, 'values': {**WATER['values'], 'drinkPerPersonDay': {'value': 1e12, 'unit': 'gal', 'note': 'n'}}}
+    page2 = page.context.new_page()
+    boot(page2, app_url, water=w2, storage={'group': {'people': 1, 'days': 1}})
+    assert res(page2, 'gal') == 10 ** 12   # safe for 1 x 1 ...
+    page2.evaluate('FK.survival.setGroup({ people: 50, days: 365 })')   # ... not for 50 x 365 (its litres pass 2^53)
+    assert NOT_AVAILABLE in no_bad_numbers(page2)
+    assert page2.locator('#survPage [data-k]').count() == 0
+    page2.evaluate('FK.survival.setGroup({ people: 1, days: 1 })')
+    assert res(page2, 'gal') == 10 ** 12
+    page2.close()
+
+
+def test_checklist_title_and_quantity_unit_markup_is_text(page, app_url):
+    evil = {**QCL, 'title': 'T ' + XSS, 'items': [{'id': 'w', 'text': 'Water', 'qty': {'amount': 1, 'unit': 'U ' + XSS, 'per': 'personDay'}}]}
+    boot(page, app_url, LIST_URL, checklists=[evil], storage={'group': {'people': 2, 'days': 3}})
+    page.evaluate('FK.survival.setGroup({ people: 3, days: 3 })')   # the live update writes the unit too
+    settle(page)
+    assert page.evaluate('window.__xss') is None
+    assert page.locator('#survPage img').count() == 0
+    assert page.inner_text('#survPage h2') == 'T ' + XSS
+    assert qty(page, 'w') == '9\u00a0U ' + XSS

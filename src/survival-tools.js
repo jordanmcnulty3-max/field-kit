@@ -26,6 +26,8 @@
     const val = name => { const v = Object.hasOwn(w.values, name) ? w.values[name] : null; return plain(v) && FK.fin(v.value) && v.value > 0 ? v : null; };
     const drink = val('drinkPerPersonDay'), lpg = val('litersPerGallon'), lbg = val('lbPerGallon');
     if (!drink || !GALLONS.test(String(drink.unit)) || !lpg || !lbg) return null;
+    // physical constants: a slipped decimal point must not give a plausible, understated weight or volume
+    if (lbg.value < 8.2 || lbg.value > 8.4 || lpg.value < 3.78 || lpg.value > 3.79) return null;
     const extras = Object.keys(w.values).filter(k => EXTRA.test(k)).map(k => ({ k, v: val(k) }))
       .filter(x => x.v && GALLONS.test(String(x.v.unit)) && filled(x.v.note));
     return { w, drink, lpg: lpg.value, lbg: lbg.value, extras };
@@ -40,7 +42,8 @@
     const counted = (v, one, many) => S.fmt(v) + ' ' + (v === 1 ? one : many);
     function totals(g) {
       const gal = S.roundUp(g.people * g.days * perDay());
-      return { gal, litres: S.roundUp(gal * d.lpg), lb: S.roundUp(gal * d.lbg), jugs: gal, fives: Math.ceil(gal / 5), drums: Math.ceil(gal / 55) };
+      const t = { gal, litres: S.roundUp(gal * d.lpg), lb: S.roundUp(gal * d.lbg), jugs: gal, fives: Math.ceil(gal / 5), drums: Math.ceil(gal / 55) };
+      return Object.values(t).every(Number.isSafeInteger) ? t : null;   // null: too large to show exactly, so no totals
     }
     const sources = (Array.isArray(d.w.sources) ? d.w.sources : []).filter(s => plain(s) && filled(s.name)).map(s => s.name);
     const row = (k, label, value) => '<div><dt>' + label + '</dt><dd data-k="' + k + '">' + esc(value) + '</dd></div>';
@@ -52,13 +55,14 @@
     const res = el.querySelector('.wp-res'), basis = el.querySelector('.wp-basis');
     function render(g) {
       const t = totals(g), extra = perDay() - d.drink.value;
+      if (!t) { res.innerHTML = '<p class="sv-warn">' + esc(NO_WATER_DATA) + '</p>'; basis.textContent = ''; return; }
       res.innerHTML = '<p class="wp-big"><span data-k="gal">' + esc(counted(t.gal, 'gallon', 'gallons')) + '</span> <span class="wp-l">(<span data-k="litres">' + esc(counted(t.litres, 'litre', 'litres')) + '</span>)</span></p>' +
         '<dl>' + row('lb', 'Weight', S.fmt(t.lb) + ' lb') + row('jugs', '1-gallon jugs', counted(t.jugs, 'jug', 'jugs')) +
         row('fives', '5-gallon containers', counted(t.fives, 'container', 'containers')) + row('drums', '55-gallon drums', counted(t.drums, 'drum', 'drums')) + '</dl>';
       basis.textContent = 'Based on ' + n(d.drink.value) + ' gal per person per day' + (extra > 0 ? ', plus ' + n(extra) + ' gal for today’s conditions' : '') +
         ', for ' + S.groupWords(g) + '.' + (sources.length ? ' Source: ' + sources[0] + (sources.length > 1 ? ', and ' + (sources.length - 1) + ' more under Sources.' : '.') : '');
     }
-    const ed = S.mountGroup(el.querySelector('.sv-gwrap'), g => { const t = totals(g); return counted(t.gal, 'gallon', 'gallons') + ' (' + counted(t.litres, 'litre', 'litres') + ') for ' + S.groupWords(g); }, render);
+    const ed = S.mountGroup(el.querySelector('.sv-gwrap'), g => { const t = totals(g); return !t ? NO_WATER_DATA : counted(t.gal, 'gallon', 'gallons') + ' (' + counted(t.litres, 'litre', 'litres') + ') for ' + S.groupWords(g); }, render);
     el.addEventListener('change', e => {
       const b = e.target.closest('[data-extra]');
       if (!b) return;

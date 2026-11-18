@@ -5,7 +5,7 @@
     "drinkPerPersonDay": {
       "value": 1,
       "unit": "gal",
-      "note": "At least 1 gallon (3.8 L) per person per day: for drinking, cooking, brushing teeth and other uses (CDC); for drinking and sanitation (Ready.gov); for drinking plus food preparation and hygiene (FEMA). Store more for children, nursing mothers, pregnant women, sick people, a medical emergency, pets, or a warm climate; no source gives an amount for these."
+      "note": "At least 1 gallon (3.8 L) per person per day: for drinking, cooking, brushing teeth and other uses (CDC); for drinking and sanitation (Ready.gov); for drinking plus food preparation and hygiene (FEMA). Store more for children, nursing mothers, pregnant women, sick people, a medical emergency, pets, or a warm climate; CDC, FEMA and Ready.gov give no amount for these (Ohio State University Extension: store 1 quart per small pet)."
     },
     "planDays": {
       "value": 14,
@@ -36,6 +36,7 @@
     {"name": "American Red Cross, Survival Kit Supplies", "used": "one gallon per person per day; 3-day supply for evacuation, 2-week supply for home"},
     {"name": "NYS Division of Homeland Security and Emergency Services, Before an Emergency Happens", "used": "one gallon per person per day; be prepared to make it on your own for at least 10 days (its kit list says supplies to last up to 10 days); plan for pets' water"},
     {"name": "NYS Department of Health, family emergency preparedness leaflet (publication 7009, 11/14)", "used": "at least one gallon per person per day for three days, for drinking and household use"},
+    {"name": "Ohio State University Extension, Food Preservation: Preserving Water for Emergency Use, HYG-5354 (2017)", "used": "store 1 gallon per person per day, and 1 quart per small pet (quoted in the drinkPerPersonDay note; not a planner extra, because extras are applied per person)"},
     {"name": "USGS Water Science School, Facts About Water", "used": "a gallon of water weighs 8.33 pounds; 1 gallon is 3.7854 liters"},
     {"name": "NIST Special Publication 811, Guide for the Use of the International System of Units, 1995 edition, Appendix B.8 (withdrawn 2018; the value agrees with USGS)", "used": "gallon (U.S.) to liter: 3.785 412"}
   ],

@@ -1707,6 +1707,12 @@ Independent review confirmed all five values. Wording fixes only; `draft` remove
 - F4 `planDays` note now also lists NYS Department of Health (3 days) and Ready.gov (several days).
 - F6 NIST source name now ends "(withdrawn 2018; the value agrees with USGS)". The newer edition was not fetched.
 
+### Task 3 fix round 2 (2026-11-18)
+
+- Opened Ohio State University Extension, Food Preservation: Preserving Water for Emergency Use, HYG-5354 (K. Shumaker and N. Stehulak, 03/24/2017), https://ohioline.osu.edu/factsheet/hyg-5354, found by web search; title checked. It says: "Store 1 gallon per person per day, and 1 quart per small pet." (no figure for larger pets). Outcome: confirmed.
+- `drinkPerPersonDay` note: "no source gives an amount for these" now "CDC, FEMA and Ready.gov give no amount for these (Ohio State University Extension: store 1 quart per small pet)." The fact sheet is added to `sources`. The source pairs the quart with "per person per day" but does not repeat "per day" for pets, so the note quotes it as printed. Still not a planner extra, because extras are per person. No value changed.
+- D16 in decisions-for-jordan: the "no amount" sentence now excludes pets for Ohio State and gives its figure.
+
 ## Water pack Task 4: amounts, storage, water in the house (2026-11-18)
 
 Files (all draft): src/survival/surv-water-how-much.json, surv-water-store.json, surv-water-in-the-house.json,

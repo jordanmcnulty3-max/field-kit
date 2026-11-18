@@ -191,7 +191,9 @@ Source disagreements found while checking the Survival topics. Each says what th
    ambiguous one: it does not say which amount doubles, so its extra could be three quarters of a gallon (its fluid
    figure) or a whole gallon (the stored gallon). Today: the planner adds 1 gallon per person per day when "Very hot
    weather" is ticked (the largest reading). Say if the group wants the smaller figure. No source opened gives an amount for children, nursing or
-   pregnant women, sick people or pets; the planner only says they need more.
+   pregnant women or sick people, and CDC, FEMA and Ready.gov give none for pets; Ohio State University Extension
+   (HYG-5354) says to store 1 quart per small pet, which the planner quotes in its note but does not add, because
+   it applies extras per person.
 17. **Toilet tank water (surv-water-in-the-house) — Water pack Task 4.** CDC and FEMA (2017 fact sheet): the toilet
    tank (not the bowl) is a usable source if the water is clear and has no toilet cleaner in it; FEMA, the Red
    Cross and USDA call it a last resort. An unattributed copy of the old Ready.gov "Managing Water" text lists

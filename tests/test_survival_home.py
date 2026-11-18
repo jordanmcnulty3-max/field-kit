@@ -347,7 +347,9 @@ def listed(page):
 
 
 ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-safe', 's:surv-find-water',
-          's:surv-wells-without-power']   # untagged by ruling (Task 5 fix round 1): well shock, pit and CO warnings
+          's:surv-wells-without-power',   # untagged by ruling (Task 5 fix round 1): well shock, pit and CO warnings
+          's:surv-toilet-no-water', 's:surv-handwashing', 's:surv-water-how-much',   # water pack: protected, no tag may hide them
+          's:surv-clean-and-disinfect', 's:surv-stomach-illness-in-a-group']   # sanitation safety topics
 
 
 def test_f1_safety_topics_are_never_filtered_out_of_the_shipped_home(page, app_url):

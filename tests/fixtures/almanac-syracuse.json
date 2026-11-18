@@ -1,0 +1,115 @@
+{
+  "about": "Reference sun times and moon phases for tests/test_astro.py. Local clock times (24 h) in the row's time zone; null means the event does not happen that local day. Where each value came from, the date it was fetched, and which fetched values were left out and why (the March and June Syracuse rows, and all moonrise/moonset times) is in docs/content-review.md under 'Daylight and moon reference values'. USNO could not be fetched for this task; no value here is estimated.",
+  "rows": [
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-09-22",
+      "sun": {
+        "dawn": "06:23",
+        "rise": "06:51",
+        "set": "19:01",
+        "dusk": "19:30"
+      },
+      "sunSource": "sunrisesunset.io"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-10-31",
+      "sun": {
+        "dawn": "07:08",
+        "rise": "07:38",
+        "set": "17:57",
+        "dusk": "18:27"
+      },
+      "sunSource": "sunrisesunset.io"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-11-01",
+      "sun": {
+        "dawn": "06:09",
+        "rise": "06:39",
+        "set": "16:56",
+        "dusk": "17:26"
+      },
+      "sunSource": "sunrisesunset.io; sunrise-sunset.org agrees (06:09:42, 06:39:16, 16:56:25, 17:25:58)",
+      "phase": {
+        "name": "Last quarter",
+        "illumSources": [
+          0.52,
+          0.46
+        ]
+      },
+      "phaseSource": "time-ok.com 'Third quarter' 52%; sunrise-sunset.org 46%, last quarter at 3:28 pm"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-11-02",
+      "sun": {
+        "dawn": "06:10",
+        "rise": "06:40",
+        "set": "16:55",
+        "dusk": "17:24"
+      },
+      "sunSource": "sunrisesunset.io; sunrise-sunset.org agrees (06:10:54, 06:40:32, 16:55:07, 17:24:44)",
+      "phase": {
+        "name": "Waning crescent",
+        "illumSources": [
+          0.41,
+          0.35
+        ]
+      },
+      "phaseSource": "time-ok.com 41%; sunrise-sunset.org 35%"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-12-21",
+      "sun": {
+        "dawn": "07:00",
+        "rise": "07:32",
+        "set": "16:32",
+        "dusk": "17:05"
+      },
+      "sunSource": "sunrisesunset.io"
+    },
+    {
+      "place": "Utqiagvik, AK",
+      "lat": 71.29,
+      "lon": -156.79,
+      "tz": "America/Anchorage",
+      "date": "2026-06-21",
+      "sun": {
+        "rise": null,
+        "set": null
+      },
+      "sunSource": "Washington Times, 11 May 2026: the sun will not set again until 2 August"
+    },
+    {
+      "place": "Utqiagvik, AK",
+      "lat": 71.29,
+      "lon": -156.79,
+      "tz": "America/Anchorage",
+      "date": "2026-12-21",
+      "sun": {
+        "rise": null,
+        "set": null
+      },
+      "sunSource": "sunrise-sunset.org: 'Does not rise' every day from 19 to 30 November 2026 (polar night); see content-review for the basis of the 21 December row"
+    }
+  ]
+}

@@ -20,7 +20,7 @@
           "p": "A rough guide, not an exact limit: a person can survive about 3 minutes in unsafe air, about 3 hours at a dangerous temperature, about 3 days without water and about 3 weeks without food. Work the problem in that order."
         },
         {
-          "p": "If you’re lost, STOP: Sit down and stay calm, Think, Observe, Plan. If you left a trip plan with someone, stay put: moving makes it harder for searchers to find you. Move only if your life is under immediate threat."
+          "p": "If you’re lost, STOP: Sit down and stay calm, Think, Observe, Plan. Then stay put: moving makes it harder for searchers to find you. Move only if your life is under immediate threat. Before any trip, leave word with someone about where you’re going and when you’ll be back, so a search starts in the right place."
         }
       ]
     },
@@ -54,7 +54,7 @@
             "Cover head, hands and feet.",
             "Eat and drink regularly. Your body needs fuel to make heat.",
             "Don’t eat snow or ice: it lowers your body temperature. Melt it, then treat it like any other wild water.",
-            "Never use a stove, heater or lantern while sleeping in a tent or snow shelter. Any flame inside an enclosed shelter needs an air vent. Carbon monoxide kills people every year this way.",
+            "Never use a charcoal grill, lantern or portable camping stove inside a tent or snow shelter, and never use fuel-burning heaters or lanterns while sleeping in one. Carbon monoxide kills people every year this way.",
             "Wear sunglasses, or cut thin horizontal slits in bark or cloth, to prevent snow blindness."
           ]
         },
@@ -90,7 +90,7 @@
     },
     {
       "name": "NYS Department of Environmental Conservation, Lost in the woods (leaflet)",
-      "used": "STOP: Sit down, Think, Observe, Plan; hypothermia can kill above freezing"
+      "used": "STOP: Sit down, Think, Observe, Plan; hypothermia can kill above freezing; leave word with someone about your whereabouts and expected time of return"
     },
     {
       "name": "National Park Service, Outdoor Emergency Plan",
@@ -122,7 +122,7 @@
     },
     {
       "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapters V to VII",
-      "used": "Keep clothing clean and dry, loose and layered, remove layers before strenuous activity; hat; do not eat ice or snow (lowers body temperature), melt it; air vent for open flame in enclosed shelters; sunglasses in sun or snow, slits in webbing or bark"
+      "used": "Keep clothing clean and dry, loose and layered, remove layers before strenuous activity; hat; do not eat ice or snow (lowers body temperature), melt it; sunglasses in sun or snow, slits in webbing or bark"
     },
     {
       "name": "US Army ATP 3-50.21, Survival (2018), chapter 3",
@@ -131,6 +131,10 @@
     {
       "name": "US Consumer Product Safety Commission, Portable Heaters & Camping Equipment",
       "used": "Never use fuel-burning heaters or lanterns while sleeping in tents; people die every year from heaters, lanterns or stoves inside tents"
+    },
+    {
+      "name": "CDC, Carbon Monoxide (CO) Poisoning Prevention",
+      "used": "Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper"
     },
     {
       "name": "NOAA National Ocean Service, Can humans drink seawater?",

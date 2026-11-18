@@ -25,8 +25,8 @@
           "steps": [
             "If the water is cloudy, let it settle, then filter it through a clean cloth, paper towel or coffee filter.",
             "Bring it to a rolling boil for at least 1 minute. Above 5,000 ft, boil for 3 minutes.",
-            "No fire? Use plain, unscented household chlorine bleach (6% or 8.25%) stored at room temperature for less than a year. No scented, color-safe or added-cleaner bleach. Add 8 drops per gallon, or 2 drops per quart or liter. Double it if the water is cloudy, colored or very cold. Stir and let it stand 30 minutes. It should smell slightly of chlorine. If it doesn’t, repeat the dose and wait another 15 minutes.",
-            "Tablets: follow the label, as each product has a different strength. Iodine and chlorine tablets do not kill Cryptosporidium; chlorine dioxide tablets do if you follow the instructions. If you are pregnant or have thyroid problems, don’t drink iodine-treated water, and no one should drink it for more than a few weeks.",
+            "No fire? Use plain, unscented household chlorine bleach (5% to 9%, such as 6% or 8.25%) stored at room temperature for less than a year. No scented, color-safe or added-cleaner bleach. Add 8 drops per gallon, or 2 drops per quart or liter. Double it if the water is cloudy, colored or very cold. Stir and let it stand 30 minutes. It should smell slightly of chlorine. If it doesn’t, repeat the dose and wait another 15 minutes. Bleach, chlorine and iodine kill bacteria and viruses but do not work well against parasites such as Giardia and Cryptosporidium: boil if you can, or filter first.",
+            "Tablets: follow the label, as each product has a different strength. Iodine and chlorine tablets do not kill Cryptosporidium. Chlorine dioxide tablets kill Giardia and work better against Cryptosporidium, but not fully; follow the label exactly. If you are pregnant, have thyroid problems or are hypersensitive (allergic) to iodine, don’t drink iodine-treated water, and no one should drink it for more than a few weeks.",
             "Filters: portable filters do not remove viruses. After filtering, add a chemical disinfectant such as chlorine, iodine or chlorine dioxide."
           ]
         },
@@ -46,7 +46,11 @@
     },
     {
       "name": "CDC, How to Make Water Safe in an Emergency",
-      "used": "Boiling is the best way to kill germs; 8 drops per gallon for 5% to 9% bleach; iodine/chlorine tablets and Cryptosporidium, chlorine dioxide; iodine limits (pregnancy, thyroid, a few weeks); portable filters do not remove viruses, disinfect after filtering; fuel, toxic chemicals or radioactive material cannot be made safe"
+      "used": "Boiling is the best way to kill germs; 8 drops per gallon for 5% to 9% bleach; iodine/chlorine tablets and Cryptosporidium, chlorine dioxide; iodine limits (pregnancy, thyroid, hypersensitivity, a few weeks); portable filters do not remove viruses, disinfect after filtering; fuel, toxic chemicals or radioactive material cannot be made safe"
+    },
+    {
+      "name": "CDC, About Water Treatment Options When Hiking, Camping, or Traveling",
+      "used": "Chlorine bleach and iodine kill bacteria and viruses but do not work well to kill parasites; chlorine dioxide kills Giardia and is somewhat effective against Cryptosporidium, filtering first is safest; boiling kills all germs; iodine hypersensitivity"
     },
     {
       "name": "New York State Department of Health, Harmful Blue-Green Algae Blooms",

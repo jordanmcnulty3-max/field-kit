@@ -128,3 +128,7 @@ Source disagreements found while checking the Survival topics. Each says what th
    Today: 8 drops per gallon for both 6% and 8.25% (the larger dose).
 4. **Rainwater.** Army ATP 3-50.21: fresh rain caught straight into clean containers needs no treatment. CDC:
    rainwater must be treated. Today: treat it (CDC).
+5. **Chlorine dioxide tablets and Cryptosporidium.** CDC's emergency water page: chlorine dioxide tablets kill
+   Cryptosporidium if you follow the instructions. CDC's hiking and camping page: they kill Giardia but are only
+   somewhat effective against Cryptosporidium, and filtering first is safest. Today: the app says they work better
+   than iodine or chlorine but not fully, follow the label exactly, and boil or filter first if you can.

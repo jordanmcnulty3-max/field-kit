@@ -141,7 +141,7 @@ def test_recent_lists_last_five_newest_first(page, app_url):
     page.wait_for_function("location.hash === '#/emergency'")
     got = [b.get_attribute('data-open') for b in page.locator('#emRecent [data-open]').all()]
     assert got == ['iv', 'fever', 'snakebite', 'frostbite', 'splint']
-    assert json.loads(page.evaluate("localStorage.getItem('fk.recent')")) == ['p:' + g for g in got]
+    assert json.loads(page.evaluate("localStorage.getItem('fk.recent')")) == ['p:' + g for g in ['iv', 'fever', 'snakebite', 'frostbite', 'splint', 'burns']]
 
 
 def test_reopening_moves_protocol_to_front_without_duplicates(page, app_url):

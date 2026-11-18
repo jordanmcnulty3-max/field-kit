@@ -114,3 +114,67 @@ medic, nurse, paramedic or doctor, these are the ones to show them.
 - **Impaled objects:** left in place, except a small fishhook near the surface; an object blocking the airway is
   mentioned with its lower-tier source. [24, 35]
 - **Diagrams:** eight are in. The recovery-position drawing was removed because it did not read clearly.
+
+## D. v7 Survival content (Tasks 13 to 16)
+
+Source disagreements found while checking the Survival topics. Each says what the app does today.
+
+1. **How long to boil water.** EPA and CDC: a rolling boil for 1 minute (3 minutes higher up). NYS DEC's state
+   land camping rules and the Army survival manuals (ATP 3-50.21, FM 21-76-1) say 5 minutes. Today: 1 minute,
+   following EPA and CDC. Say if the group should boil 5 minutes.
+2. **Altitude for the 3-minute boil.** EPA: above 5,000 ft. CDC: above 6,500 ft. Army ATP 3-50.21: above 8,000 ft.
+   Today: 5,000 ft (most cautious; several Adirondack High Peaks are above it).
+3. **Bleach dose for 8.25% bleach.** EPA: 6 drops per gallon. CDC: 8 drops per gallon for any 5% to 9% bleach.
+   Today: 8 drops per gallon for both 6% and 8.25% (the larger dose).
+4. **Rainwater.** Army ATP 3-50.21: fresh rain caught straight into clean containers needs no treatment. CDC:
+   rainwater must be treated. Today: treat it (CDC).
+5. **Chlorine dioxide tablets and Cryptosporidium.** CDC's emergency water page: chlorine dioxide tablets kill
+   Cryptosporidium if you follow the instructions. CDC's hiking and camping page: they kill Giardia but are only
+   somewhat effective against Cryptosporidium, and filtering first is safest. Today: the app says they work better
+   than iodine or chlorine but not fully, follow the label exactly, and boil or filter first if you can.
+6. **When mountain thunderstorms start.** NWS: they typically develop in the early afternoon; be down the mountain
+   by noon. CDC: most common in the late afternoon or evening. Today: be down by noon (NWS, the earlier time).
+7. **Ferro rod technique.** The old Fire topic said to hold the striker still and pull the rod back. No
+   authoritative source opened says that; Army ATP 3-50.21 says to drive the striker down the rod with even
+   pressure. Today: the Army method. Say if the group trains the pull-back method and wants it back (it would need a
+   source).
+8. **Fire next to a shelter.** Smokey Bear: keep campfires at least 15 feet from tents, vegetation and low branches.
+   The Army manuals put a survival fire in front of a lean-to with a reflector wall (and about 3 feet from a snow
+   cave opening). Today: the Shelter topic keeps the Army lean-to fire; the 15-foot rule is not added.
+9. **Lightning protocol: the crouch, and when mountain storms happen (question for a medical professional).**
+   src/protocols/lightning.json keeps the lightning crouch (feet together, or sitting on a pad with feet off the
+   ground) as a last resort, citing the Wilderness Medical Society. The NWS page "The National Weather Service
+   (NWS) stopped recommending the crouch in 2008" (https://www.weather.gov/safety/lightning-crouch) says it
+   "simply doesn't provide a significant level of protection." The same protocol credits CDC with storms being
+   most common on "summer afternoons"; CDC's Safety Guidelines: Lightning says late afternoon or evening (NWS says
+   early afternoon). Today: the protocol is unchanged. Should the crouch stay as a last resort, and should the
+   timing line be corrected to the sources?
+10. **Cooking temperature for wild game.** CDC (MMWR 2024, bear meat trichinellosis): wild game meat to 165°F or
+   more. NYS Department of Health: all game and birds to 165°F. USDA FSIS ("Roasting Those 'Other' Holiday Meats"):
+   venison roasts 160°F, whole game birds 165°F (and all poultry 165°F on its chart). Missouri Department of Conservation: 160°F. Penn State Extension: whole venison
+   cuts 145°F, ground 160°F. Pennsylvania Game Commission (tularemia page): at least 135°F. Army ATP 3-50.21: 180°F.
+   Today: 165°F for all wild game (CDC, NYS DOH) and birds (NYS DOH, USDA FSIS), fish 145°F (USDA FSIS), and freezing is not treated as
+   killing trichinella in wild game (CDC; Penn State says three weeks of freezing works, which CDC says is not
+   reliable for wild game). Say if the group wants the Army's 180°F.
+11. **Wild plants removed for lack of a source.** Dandelion: University of Vermont and University of Maine Extension
+   confirm it is edible, but no opened source names its look-alikes or says it has no dangerous ones, so under the
+   plant rule (each edible named with its dangerous look-alikes) it was removed. Acorns: only the Army manuals give
+   the leaching method; no extension or state source was found, so they were removed. Today: the topic names
+   cattail (with two poisonous look-alikes, yellow flag iris and the native blue flag iris) and wild blackberries
+   and raspberries only. Say if you want either back; it needs a source (or plant photos at pack 4).
+12. **Bear spray in New York.** The Northeast Black Bear Technical Committee says bear spray can work with practice
+   and that local rules may restrict carrying it. Whether New York law allows carrying bear spray was not checked
+   (no law page was opened). Today: the topic says local rules may restrict it. Say if the group carries bear
+   spray, so pack 2 can check the law.
+13. **Tourniquet in the ten essentials.** The old Ten essentials topic said "First aid kit, including a tourniquet".
+   None of the lists opened (The Mountaineers, National Park Service, NYS DEC) names a tourniquet, and no
+   authoritative hiking source was found that does. Today: the topic and checklist say "First aid kit". The
+   Emergency section still has the tourniquet protocols. Say if the group wants a tourniquet listed as its own kit
+   rule (it would be the group's choice, recorded as such, not a sourced Ten essentials item).
+14. **Knots: joining ropes and holding people.** Army ATP 3-50.21 and Scout Life give the square knot as a way to
+   join two ropes of equal size; Animated Knots (citing Ashley) says never use it to join ropes for anything that
+   matters, because it can capsize. Scout Life also calls the bowline the knot for tying a rope around someone
+   needing rescue; Animated Knots says a bowline shakes loose and needs a safety knot for climbing. Today: the more
+   cautious sources are used. The square knot is for bandages and bundles only, and the Knots topic says it does
+   not teach knots for climbing, rappelling or holding a person's weight. Say if the group wants a life-safety
+   knot section; it would need its own sourced pack (and verified diagrams).

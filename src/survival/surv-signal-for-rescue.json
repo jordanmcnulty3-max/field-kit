@@ -1,0 +1,65 @@
+{
+  "id": "surv-signal-for-rescue",
+  "title": "Signal for rescue",
+  "category": "basics",
+  "keywords": [
+    "signal",
+    "rescue",
+    "whistle",
+    "mirror",
+    "ground symbols",
+    "distress",
+    "aircraft"
+  ],
+  "summary": "Three of anything is a distress signal: three fires, three whistle blasts, three flashes.",
+  "sections": [
+    {
+      "h": "Signal for rescue",
+      "blocks": [
+        {
+          "p": "Three of anything is a distress signal: three fires in a triangle, three whistle blasts, three flashes. Repeat at intervals."
+        },
+        {
+          "p": "Ground-to-air symbols, in an open area and as large as you can make them, at least 20 ft (6 m) long and 3½ ft (1 m) wide, in strong contrast with the ground: V means you need assistance, X means you need medical help."
+        },
+        {
+          "fig": "signal-ground",
+          "cap": "Use branches, rocks, bright fabric or trampled snow against a contrasting background, in an open area."
+        },
+        {
+          "p": "Flash sunlight at aircraft with a signal mirror, or with any shiny object such as a polished belt buckle. Aim through a V of two fingers held out toward the aircraft, and flash in threes. Don’t keep the beam on the cockpit for more than a few seconds: it can blind the pilot."
+        },
+        {
+          "fig": "signal-mirror",
+          "cap": "Sight the aircraft through the V of your fingers and aim the reflected light through the V."
+        },
+        {
+          "link": "u:sos",
+          "label": "SOS light"
+        },
+        {
+          "p": "In a hostile situation, remember that any signal can also show your position to people you don’t want to find you."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Be Ready Utah (State of Utah), Emergency Signaling",
+      "used": "A series of three is an international distress signal; mirror: form a V with two fingers as a sight, aim the reflected light through it at the target, flash in threes; three fires in a triangle signal distress; bright colored items or contrasting rocks, dirt or branches for ground signals; a whistle carries farther than a voice"
+    },
+    {
+      "name": "Iowa Hunter Safety Course (hunter-ed.com, Kalkomey, with the Iowa DNR), Signaling for Help",
+      "used": "The international emergency sign for distress is three of any signal: three whistle blasts, three mirror flashes, three fires evenly spaced; make an X as large as possible"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual, chapter 19 (pp. 200-208)",
+      "used": "Three fires in a triangle is the international distress signal; ground-to-air symbols at least 1 meter wide and 6 meters long, in contrast with the ground, in an open area easily spotted from the air; no mirror: polish a belt buckle or similar; do not keep the beam on the cockpit for more than a few seconds, it may blind the pilot; signals to friends may alert the enemy to your location"
+    },
+    {
+      "name": "Ground-to-air emergency code, FM 21-76 Figure 19-6 as reproduced on aircav.com (Codes and Signals, ch. 19 p. 4); FAA AIM 6-2-6 Ground-Air Visual Code text (faraim.org copy)",
+      "used": "V: require assistance; X: require medical assistance (figure labels, read from a third-party copy because the FAA and Army figures are images); AIM: symbols at least 10 feet high, maximum contrast with the background, made of fabric, wood, stones or tramped snow"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

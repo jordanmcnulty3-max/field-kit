@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from .conftest import inject_protocols
 
 T0 = 1_800_000_000_000   # fixed fake clock so stored start times are exact
@@ -757,3 +759,48 @@ def test_cpr_queues_no_clicks_while_audio_is_suspended_and_resumes_on_the_beat(p
     iv, period = 60 / 110, 30 * 60 / 110 + 4
     grid = [c * period + k * iv for c in range(3) for k in range(30)]
     assert all(min(abs((w - start) - g) for g in grid) < 0.06 for w in whens)   # each lands on a beat
+
+
+# Backlog fix: clicks already queued when the audio is interrupted are dropped, and the schedule restarts from the resume time
+
+# Some engines throw on a second stop() of an oscillator that already has a stop time; disconnect() must still run.
+THROWING_STOP = """
+  (() => {
+    window.__disconnects = 0;
+    const B = window.AudioContext;
+    window.AudioContext = class extends B {
+      createOscillator() {
+        const o = super.createOscillator(), stop = o.stop, disconnect = o.disconnect;
+        o.stop = function (w) { if (this.stopAt !== null) throw new DOMException('stopped', 'InvalidStateError'); return stop.call(this, w); };
+        o.disconnect = function () { window.__disconnects++; return disconnect.call(this); };
+        return o;
+      }
+    };
+  })();"""
+
+
+@pytest.mark.parametrize('stop_throws', [False, True], ids=['plain-stop', 'second-stop-throws'])
+def test_cpr_drops_queued_clicks_on_interruption_and_restarts_from_the_resume_time(page, app_url, stop_throws):
+    boot(page, app_url, hash_='#/emergency/tool/cpr', init=FAKE_AUDIO + (THROWING_STOP if stop_throws else '') + CAPTURE_AC)
+    page.click('#cprBtn')
+    page.clock.run_for(2000)
+    start = page.evaluate('__starts[0][0]')
+    suspended_at = page.evaluate("performance.now() / 1000")
+    assert page.evaluate('__audibleAfter(%f)' % suspended_at), 'precondition: clicks are queued ahead of the clock'
+    assert page.evaluate('FK.tools.cpr._scheduled().length') > 0
+    page.evaluate("__ac.state = 'suspended'; 0")   # a phone call
+    page.clock.run_for(100)
+    assert page.evaluate('__audibleAfter(%f)' % suspended_at) == []   # nothing queued would sound late on resume
+    if stop_throws:
+        assert page.evaluate('window.__disconnects') > 0   # disconnected even though stop() threw
+    assert page.evaluate('FK.tools.cpr._scheduled()') == []
+    page.clock.run_for(5000)
+    resumed = page.evaluate("__ac.state = 'running'; performance.now() / 1000")
+    page.clock.run_for(3000)
+    whens = page.evaluate('FK.tools.cpr._scheduled()') + page.evaluate('__audibleAfter(%f)' % suspended_at)
+    whens = sorted(set(round(w, 6) for w in whens))
+    assert len(whens) >= 4
+    assert all(w >= resumed - 0.001 for w in whens)               # none before the resume moment
+    iv, period = 60 / 110, 30 * 60 / 110 + 4
+    grid = [c * period + k * iv for c in range(4) for k in range(30)]
+    assert all(min(abs((w - start) - g) for g in grid) < 0.06 for w in whens)   # still on the original beat grid, in step with the count

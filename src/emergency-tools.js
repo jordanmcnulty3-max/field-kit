@@ -287,8 +287,28 @@
       g.gain.exponentialRampToValueAtTime(0.6, when + 0.005);
       g.gain.exponentialRampToValueAtTime(0.0001, when + 0.08);
       o.connect(g).connect(cpr.bus); o.start(when); o.stop(when + 0.09);
-      cpr.nodes.push({ o, end: when + 0.09 });
+      cpr.nodes.push({ o, when, end: when + 0.09 });
     } catch { /* audio is optional */ }
+  }
+  /* An interruption stops the audio clock, so clicks queued ahead would sound late and out of step with the count on resume.
+     Cancel them, and when the audio runs again pick the schedule up from the first beat that has not yet gone by. */
+  let queuedDropped = false;
+  function syncAudio() {
+    if (!cpr.running) return;
+    if (!audioLive()) {
+      if (!queuedDropped) {
+        queuedDropped = true;
+        cpr.nodes.forEach(n => {   // disconnect first, each in its own try: some engines throw on a second stop()
+          try { n.o.disconnect(); } catch { /* already disconnected */ }
+          try { n.o.stop(); } catch { /* already finished */ }
+        });
+        cpr.nodes = [];
+      }
+    } else if (queuedDropped) {
+      queuedDropped = false;
+      const cfg = cprCfg(), e = performance.now() - cpr.t0;
+      while (cpr.next > 0 && beatMs(cpr.next - 1, cfg) >= e) cpr.next--;
+    }
   }
   function silence() {
     const { nodes, bus } = cpr;
@@ -322,6 +342,7 @@
     return s;
   }
   function cprTick() {
+    syncAudio();
     const cfg = cprCfg(), e = performance.now() - cpr.t0;
     // Sounds go onto the audio clock a moment ahead, so a late or throttled tick cannot drop or bunch beats.
     // While the audio is suspended only the beats already past go by, so on resume the clicks start again on the beat.
@@ -350,6 +371,7 @@
     onSoundChange();
   }
   function onSoundChange() {
+    syncAudio();
     const off = soundOff();
     if (off === wasSoundOff) return;
     wasSoundOff = off;
@@ -364,7 +386,7 @@
       if (ac) resumeAudio();
     } catch { ac = null; }
     try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch { /* iPhone: play even with the silent switch on, where supported */ }
-    silence();
+    silence(); queuedDropped = false;
     try { if (ac) { cpr.bus = ac.createGain(); cpr.bus.connect(ac.destination); } } catch { cpr.bus = null; }
     Object.assign(cpr, { running: true, t0: performance.now(), next: 0, lastBeat: 0, lastPhase: 'compress', swapAck: 0, swapsSeen: 0 });
     stripCycle = 0;
@@ -438,7 +460,8 @@
     },
     stop() { cprView = null; }   // closing the overlay never stops the coach
   };
-  FK.tools.cpr = { state: cprState, running: () => cpr.running };
+  /* _scheduled: audio-clock start times of clicks still queued ahead (read-only, for tests). */
+  FK.tools.cpr = { state: cprState, running: () => cpr.running, _scheduled: () => ac ? cpr.nodes.filter(n => n.end > ac.currentTime).map(n => n.when) : [] };
 
   /* ================= Rate counter: tap each beat or breath for 15 seconds, result = taps x 4 ================= */
   const RATE_WINDOW_MS = 15000;

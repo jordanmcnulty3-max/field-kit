@@ -423,7 +423,7 @@ def test_backup_includes_the_form(page, app_url):
 def test_release_gate_no_longer_blocks_on_report_wording(tmp_path):
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'build.py'), '--release', str(tmp_path)], capture_output=True, text=True)
     assert 'REPORT_WORDING_DRAFT' not in r.stderr + r.stdout
-    assert r.returncode == 0, r.stdout + r.stderr
+    assert r.returncode == 0, r.stderr
 
 
 def test_normal_build_still_works_while_draft(tmp_path):

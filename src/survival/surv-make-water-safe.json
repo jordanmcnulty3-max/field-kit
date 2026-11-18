@@ -1,0 +1,65 @@
+{
+  "id": "surv-make-water-safe",
+  "title": "Make water safe",
+  "category": "basics",
+  "keywords": [
+    "boil",
+    "bleach",
+    "filter",
+    "purify",
+    "treat",
+    "drinking water",
+    "tablets",
+    "algae",
+    "algal bloom"
+  ],
+  "summary": "Strain cloudy water, then boil it for 1 minute (3 minutes above 5,000 ft), or treat it with unscented bleach.",
+  "sections": [
+    {
+      "h": "Make water safe",
+      "blocks": [
+        {
+          "p": "Boiling is the best way to kill germs in water."
+        },
+        {
+          "steps": [
+            "If the water is cloudy, let it settle, then filter it through a clean cloth, paper towel or coffee filter.",
+            "Bring it to a rolling boil for at least 1 minute. Above 5,000 ft, boil for 3 minutes.",
+            "No fire? Use plain, unscented household chlorine bleach (5% to 9%, such as 6% or 8.25%) stored at room temperature for less than a year. No scented, color-safe or added-cleaner bleach. Add 8 drops per gallon, or 2 drops per quart or liter. Double it if the water is cloudy, colored or very cold. Stir and let it stand 30 minutes. It should smell slightly of chlorine. If it doesn’t, repeat the dose and wait another 15 minutes. Bleach, chlorine and iodine kill bacteria and viruses but do not work well against parasites such as Giardia and Cryptosporidium: boil if you can, or filter first.",
+            "Tablets: follow the label, as each product has a different strength. Iodine and chlorine tablets do not kill Cryptosporidium. Chlorine dioxide tablets kill Giardia and work better against Cryptosporidium, but not fully; follow the label exactly. If you are pregnant, have thyroid problems or are hypersensitive (allergic) to iodine, don’t drink iodine-treated water, and no one should drink it for more than a few weeks.",
+            "Filters: portable filters do not remove viruses. After filtering, add a chemical disinfectant such as chlorine, iodine or chlorine dioxide."
+          ]
+        },
+        {
+          "warn": "Boiling, bleach and filters cannot make every water safe. Water with fuel, toxic chemicals or radioactive material cannot be made safe by boiling or disinfecting; find another source. Boiling and disinfecting also leave heavy metals, salts and most other chemicals in the water."
+        },
+        {
+          "warn": "Harmful algal blooms: in New York lakes and ponds, strongly colored water (blue-green, green, yellow, white, brown, purple or red), a paint-like look or floating scum can mean a bloom. During a bloom, don’t drink, cook with or make ice from that water, even if you treat it yourself. Boiling does not remove the algae or their toxins."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "US EPA, Emergency Disinfection of Drinking Water",
+      "used": "Settle and filter cloudy water; rolling boil at least 1 minute, 3 minutes above 5,000 ft; bleach type, under one year old, 8 drops of 6% per gallon and 2 drops per quart/liter, double for cloudy, colored or very cold, stand 30 minutes, chlorine smell, repeat and wait 15 minutes; tablets follow label; boiling and disinfection do not remove heavy metals, salts, most chemicals"
+    },
+    {
+      "name": "CDC, How to Make Water Safe in an Emergency",
+      "used": "Boiling is the best way to kill germs; 8 drops per gallon for 5% to 9% bleach; iodine/chlorine tablets and Cryptosporidium, chlorine dioxide; iodine limits (pregnancy, thyroid, hypersensitivity, a few weeks); portable filters do not remove viruses, disinfect after filtering; fuel, toxic chemicals or radioactive material cannot be made safe"
+    },
+    {
+      "name": "CDC, About Water Treatment Options When Hiking, Camping, or Traveling",
+      "used": "Chlorine bleach and iodine kill bacteria and viruses but do not work well to kill parasites; chlorine dioxide kills Giardia and is somewhat effective against Cryptosporidium, filtering first is safest; boiling kills all germs; iodine hypersensitivity"
+    },
+    {
+      "name": "New York State Department of Health, Harmful Blue-Green Algae Blooms",
+      "used": "What a bloom looks like; do not drink, prepare food or make ice with surface water during a bloom even if treated yourself; boiling does not remove the algae or toxins"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (2018), chapter 3",
+      "used": "Cross-check: 1-minute boil; tablets follow the manufacturer; most filters do not remove viruses; chemical disinfectants not fully effective against Cryptosporidium"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

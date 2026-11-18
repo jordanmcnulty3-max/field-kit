@@ -6,7 +6,7 @@
   const MAX_RESULTS = 30;
   const SNIPPET = 90, LEAD = 30;   // characters of snippet, and how many of them may come before the first match
   const W = { title: 5, keywords: 4, summary: 3, body: 1 };
-  const KINDS = ['Emergency', 'Advanced', 'Tool', 'Report', 'Survival', 'App'];   // order is only the tie-break for groups with equal rank
+  const KINDS = ['Emergency', 'Advanced', 'Tool', 'Report', 'Checklist', 'Survival', 'App'];   // order is only the tie-break for groups with equal rank
 
   /* App screens and what each opens. Keywords are fixed here; protocol synonyms live in each protocol's own keywords. */
   const SCREENS = {
@@ -51,19 +51,54 @@
       out.push({ key: (report ? 'r:' : 't:') + t.name, title: t.label, kind: report ? 'Report' : 'Tool', draft: false,
         fields: [field(W.title, t.label), field(W.keywords, TOOL_WORDS[t.name] || '')] });
     }
-    for (const d of topicEls()) {
-      const clone = d.cloneNode(true);
-      clone.querySelectorAll('summary,svg,figcaption').forEach(n => n.remove());
-      out.push({ key: 's:' + d.id, title: topicTitle(d), kind: 'Survival', draft: false,
-        fields: [field(W.title, topicTitle(d)), field(W.body, clone.textContent, true)] });
+    for (const t of FK.survival ? FK.survival.topics() : []) out.push(topicDoc(t));
+    for (const c of survList('checklists')) {
+      if (!str(c && c.id) || !str(c.title)) continue;
+      const f = [field(W.title, c.title)];
+      for (const it of Array.isArray(c.items) ? c.items : []) if (it && str(it.text)) f.push(field(W.body, it.text, true));
+      out.push({ key: 'c:' + c.id, title: c.title, kind: 'Checklist', draft: c.draft === true, fields: f });
+    }
+    for (const u of survList('tools')) {
+      if (!str(u && u.name) || !str(u.label)) continue;
+      out.push({ key: 'u:' + u.name, title: u.label, kind: 'Tool', draft: false, fields: [field(W.title, u.label), ...(str(u.keywords) ? [field(W.keywords, u.keywords)] : [])] });
     }
     for (const [id, s] of Object.entries(SCREENS)) {
       out.push({ key: 'a:' + id, title: s.title, kind: 'App', draft: false, fields: [field(W.title, s.title), field(W.keywords, s.keywords)] });
     }
     return out;
   }
-  const topicEls = () => [...document.querySelectorAll('#survTopics details.ref[id]')];
-  const topicTitle = d => flat(d.querySelector('summary').textContent);
+  const str = v => typeof v === 'string' && v.trim() !== '';
+  const strs = a => (Array.isArray(a) ? a.filter(x => typeof x === 'string') : []);
+  /* Checklists and survival tools arrive with later tasks; until FK.survival offers them there is nothing to index. */
+  const survList = name => { const r = FK.survival && typeof FK.survival[name] === 'function' ? FK.survival[name]() : null; return Array.isArray(r) ? r : []; };
+
+  /* Every string a topic page shows, one piece per block: paragraphs, list and step items, warnings, table cells, captions, link labels. */
+  function blockTexts(b) {
+    if (!b || typeof b !== 'object') return [];
+    if (typeof b.p === 'string') return [b.p];
+    if (Array.isArray(b.list)) return strs(b.list);
+    if (Array.isArray(b.steps)) return strs(b.steps);
+    if (typeof b.warn === 'string') return [b.warn];
+    if (b.table && typeof b.table === 'object') {
+      const cells = r => (Array.isArray(r) ? r.filter(c => c != null).map(String) : []);
+      return [cells(b.table.head).join(' '), ...(Array.isArray(b.table.rows) ? b.table.rows.map(r => cells(r).join(' ')) : [])];
+    }
+    if (typeof b.fig === 'string') return typeof b.cap === 'string' ? [b.cap] : [];
+    if (typeof b.link === 'string') return typeof b.label === 'string' ? [b.label] : [];
+    return [];
+  }
+  function topicDoc(t) {
+    const f = [field(W.title, t.title)];
+    if (strs(t.keywords).length) f.push(field(W.keywords, strs(t.keywords).join(' ')));
+    if (typeof t.summary === 'string' && t.summary) f.push(field(W.summary, t.summary));
+    if (strs(t.doFirst).length) f.push(field(W.summary, strs(t.doFirst).join(' ')));
+    for (const s of t.sections) {
+      if (!s || typeof s !== 'object') continue;
+      if (typeof s.h === 'string' && s.h) f.push(field(W.body, s.h, true));
+      for (const b of Array.isArray(s.blocks) ? s.blocks : []) for (const x of blockTexts(b)) if (x) f.push(field(W.body, x, true));
+    }
+    return { key: 's:' + t.id, title: t.title, kind: 'Survival', draft: t.draft === true, fields: f };
+  }
   const index = () => docs || (docs = build());
 
   /* ---------- Matching and ranking ---------- */
@@ -135,8 +170,16 @@
           ? { key, title: label, where: key[0] === 'r' ? 'Report' : 'Tool', draft: false } : null;
       }
       case 's': {
-        const d = /^surv-[\w-]+$/.test(id) ? document.querySelector('#survTopics details.ref[id="' + id + '"]') : null;
-        return d ? { key, title: topicTitle(d), where: 'Survival', draft: false } : null;
+        const t = FK.survival && FK.survival.topic(id);
+        return t ? { key, title: t.title, where: 'Survival', draft: t.draft === true } : null;
+      }
+      case 'c': {
+        const c = survList('checklists').find(x => x && x.id === id && str(x.title));
+        return c ? { key, title: c.title, where: 'Checklist', draft: c.draft === true } : null;
+      }
+      case 'u': {
+        const u = survList('tools').find(x => x && x.name === id && str(x.label));
+        return u ? { key, title: u.label, where: 'Tool', draft: false } : null;
       }
       case 'a':
         return Object.hasOwn(SCREENS, id) ? { key, title: SCREENS[id].title, where: 'App', draft: false } : null;
@@ -156,19 +199,11 @@
     const replace = FK.route.isSearch();
     const nav = path => FK.route.go(path, replace ? { replace: true } : undefined);
     const id = key.slice(2);
-    FK.recent.add(key);
+    if (!'scu'.includes(key[0])) FK.recent.add(key);
     switch (key[0]) {
       case 'p': FK.protocol.open(id, undefined, { replace }); break;   // an advanced one still shows its one-time acknowledgement
       case 't': case 'r': FK.tools.start(id, { replace }); break;
-      case 's': {
-        nav('/survival');
-        const el = document.getElementById(id);
-        if (el.hidden) { const box = $('survSearch'); box.value = ''; box.dispatchEvent(new Event('input')); }   // the in-tab search had filtered it out
-        el.open = true;
-        el.scrollIntoView({ block: 'start' });
-        el.querySelector('summary').focus({ preventScroll: true });
-        break;
-      }
+      case 's': case 'c': case 'u': return FK.survival.open(key, { replace });   // survival.js draws the page and adds it to Recent; false if it cannot open it
       case 'a':
         if (id === 'settings') { const open = () => $('menuBtn').click(); if (replace) FK.route.closeSearch(open); else open(); }
         else if (id === 'areas') { nav('/tactical/map'); whenMap(() => $('mSave').click()); }   // the Saved areas list is in the Save map dialog
@@ -193,15 +228,17 @@
     results.forEach(r => { if (!order.includes(r.where)) order.push(r.where); });
     return order.map(w => '<h3 class="sr-h">' + esc(w) + '</h3>' + results.filter(r => r.where === w).map(item).join('')).join('');
   }
+  const CLEAR_RECENT = '<button type="button" class="em-clear" data-act="clear-recent" aria-label="Clear recent list">Clear</button>';
   function render() {
     const q = input.value;
     clearBtn.hidden = !q;
     if (!tokens(q).length) {
-      const section = (title, keys) => {
+      const section = (title, keys, extra) => {
         const rs = keys.map(describe).filter(Boolean);
-        return rs.length ? '<h3 class="sr-h">' + title + '</h3>' + rs.map(item).join('') : '';
+        const head = extra ? '<div class="em-hrow"><h3 class="sr-h">' + title + '</h3>' + extra + '</div>' : '<h3 class="sr-h">' + title + '</h3>';
+        return rs.length ? head + rs.map(item).join('') : '';
       };
-      const html = section('Pinned', FK.pins.all()) + section('Recent', FK.recent.all());
+      const html = section('Pinned', FK.pins.all()) + section('Recent', FK.recent.all(), CLEAR_RECENT);
       bodyEl.innerHTML = html || '<p class="sr-empty">Type to find a protocol, survival topic, tool, report or screen.</p>';
       live.textContent = '';
       return;
@@ -240,6 +277,7 @@
   input.addEventListener('input', render);
 
   bodyEl.addEventListener('click', e => {
+    if (e.target.closest('[data-act="clear-recent"]')) { FK.recent.clear(); input.focus(); return; }   // the 'recent' event redraws the list
     const b = e.target.closest('.sr-item');
     if (b) go(b.dataset.key);
   });

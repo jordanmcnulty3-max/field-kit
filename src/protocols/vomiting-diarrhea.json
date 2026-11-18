@@ -92,7 +92,7 @@
     {
       "id": "s8",
       "text": "Protect the group: everyone washes hands with soap and water, the sick person does not handle food or water for others, and everyone drinks only boiled or treated water.",
-      "detail": "Hands (CDC): wash with soap and water for at least 20 seconds, especially after using the toilet or cleaning up, and before eating or preparing food. Hand sanitizer does not work well against norovirus (a common cause of vomiting outbreaks); it is not a replacement for washing. Where there is no soap and water, a sanitizer with at least 60% alcohol before eating is better than nothing (CDC Yellow Book).\n\nFood and caring for others (CDC norovirus): a sick person should not prepare or handle food, or care for others, until at least 2 days (48 hours) after their symptoms stop.\n\nCleaning up vomit or diarrhoea (CDC norovirus): wear rubber or disposable gloves; wipe up the whole area with paper towels and bag them; disinfect with a bleach solution of 5 to 25 tablespoons of household bleach (5 to 8%) per gallon of water, left on for at least 5 minutes, then clean again with soap and hot water; wash your hands. Take off soiled clothing or bedding with gloves, without shaking it, and wash it hot and long if you can.\n\nWater (CDC): bring clear water to a rolling boil for 1 minute (3 minutes above 6,500 feet), or treat it with bleach as CDC directs (for 5 to 9% bleach, 8 drops per gallon, wait at least 30 minutes). Food: the CDC Yellow Book gives \"boil it, cook it, peel it, or forget it\" as the traditional rule, and notes that people who follow it can still get ill; it does not replace hand washing and safe water."
+      "detail": "Hands (CDC): wash with soap and water for at least 20 seconds, especially after using the toilet or cleaning up, and before eating or preparing food. Hand sanitizer does not work well against norovirus (a common cause of vomiting outbreaks); it is not a replacement for washing. Where there is no soap and water, a sanitizer with at least 60% alcohol before eating is better than nothing (CDC Yellow Book).\n\nFood and caring for others (CDC norovirus): a sick person should not prepare or handle food, or care for others, until at least 2 days (48 hours) after their symptoms stop.\n\nCleaning up vomit or diarrhoea (CDC norovirus): wear rubber or disposable gloves; wipe up the whole area with paper towels and bag them; disinfect with a bleach solution of 5 to 25 tablespoons of household bleach (5 to 8%) per gallon of water, left on for at least 5 minutes, then clean again with soap and hot water; wash your hands. Take off soiled clothing or bedding with gloves, without shaking it, and wash it hot and long if you can.\n\nWater (CDC): bring clear water to a rolling boil for 1 minute (3 minutes above 5,000 feet: EPA; CDC says above 6,500 feet, and the app uses the lower height), or treat it with bleach as CDC directs (for 5 to 9% bleach, 8 drops per gallon, wait at least 30 minutes). Food: the CDC Yellow Book gives \"boil it, cook it, peel it, or forget it\" as the traditional rule, and notes that people who follow it can still get ill; it does not replace hand washing and safe water."
     },
     {
       "id": "s9",
@@ -171,7 +171,7 @@
     "Evacuate (MedlinePlus): an adult's diarrhoea worse or no better after 5 days. MedlinePlus's figures (vomiting over 24 hours, no fluids kept down for 12 hours, no urine for 8 hours, 3 or more vomits in a day) are given in the detail as information."
   ],
   "notes": [
-    "Sick person: no food handling or caring for others until 2 days after symptoms stop. Wash hands with soap and water; boil water 1 minute (3 minutes above 6,500 feet) (CDC)."
+    "Sick person: no food handling or caring for others until 2 days after symptoms stop. Wash hands with soap and water; boil water 1 minute (3 minutes above 5,000 feet) (CDC, EPA)."
   ],
   "sources": [
     {
@@ -208,6 +208,11 @@
       "name": "US CDC, How to Make Water Safe in an Emergency, last reviewed 2024-09-19",
       "year": 2024,
       "url": "https://www.cdc.gov/water-emergency/about/"
+    },
+    {
+      "name": "US EPA, Emergency Disinfection of Drinking Water (undated, read 2026-11-17)",
+      "year": 2026,
+      "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"
     },
     {
       "name": "US CDC, Yellow Book 2026, Travelers' Diarrhea, page dated 24 Mar 2026",

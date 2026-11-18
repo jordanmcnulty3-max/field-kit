@@ -56,7 +56,7 @@
   /* Opened again from outside the player at its start (home, search, a pin, a recent): the same protocol's earlier run
      ends, as with End protocol, so this walk logs again. Resume, a reload and Back stay in the run. */
   function restartRun(p) {
-    if (timer && timer.id === p.id) stopTimer();
+    if (timer && timer.id === p.id) discardTimer();
     const raw = rawActive();
     if (run.id === p.id || (raw && raw.id === p.id)) clearProgress();
   }
@@ -116,6 +116,12 @@
     clearInterval(timer.iv); timer = null;
     syncActive(); paintTimer(); FK.emit('activity');
   }
+  /* A run's timer dropped because another run took over: say so when it was still counting down. */
+  function discardTimer() {
+    const t = timer;
+    stopTimer();
+    if (t && !t.done) FK.toast('Timer stopped: ' + t.title);
+  }
   function paintTimer() {
     const bar = root.querySelector('.pp-timerbar');
     if (!bar) return;
@@ -157,7 +163,8 @@
     if (!t || typeof t !== 'object' || !Number.isFinite(t.end) || typeof t.label !== 'string' || typeof t.step !== 'string') return;
     const p = get(a.id);
     if (stepIndex(p, t.step) < 0) return;
-    runTimer({ id: p.id, title: p.title, step: t.step, label: t.label, end: t.end, done: t.done === true });
+    if (t.done === true || t.end <= Date.now()) { syncActive(); return; }   // over while the app was closed: no alert, no Done entry
+    runTimer({ id: p.id, title: p.title, step: t.step, label: t.label, end: t.end, done: false });   // a done timer returned above
   }
 
   /* ---------- Rendering ---------- */
@@ -338,7 +345,7 @@
   /* ---------- Open / close ---------- */
   let opener = null;
   function show(p, sub) {
-    if (timer && timer.id !== p.id) stopTimer();   // a different protocol ends the other run's timer
+    if (timer && timer.id !== p.id) discardTimer();   // a different protocol ends the other run's timer
     const mode = needsAck(p) ? 'ack' : sub === 'all' ? 'all' : (sub || !hasIntro(p)) ? 'step' : 'intro';
     const was = isOpen;
     cur = { p, mode, i: mode === 'step' ? (sub ? stepIndex(p, sub) : 0) : -1, open: { donts: false, evacuate: false } };

@@ -1,0 +1,63 @@
+{
+  "id": "ten-essentials",
+  "title": "Ten essentials",
+  "category": "basics",
+  "summary": "Pack these on every trip into the backcountry, even a short one.",
+  "items": [
+    {
+      "id": "navigation",
+      "text": "Navigation: map and compass, plus a phone with a GPS app or a GPS unit, and a spare battery"
+    },
+    {
+      "id": "headlamp",
+      "text": "Headlamp and spare batteries"
+    },
+    {
+      "id": "sun-protection",
+      "text": "Sun protection: sunglasses, sunscreen and a hat"
+    },
+    {
+      "id": "first-aid-kit",
+      "text": "First aid kit"
+    },
+    {
+      "id": "knife",
+      "text": "Knife or multi-tool"
+    },
+    {
+      "id": "fire",
+      "text": "Fire: waterproof matches or a lighter, and fire starter"
+    },
+    {
+      "id": "shelter",
+      "text": "Emergency shelter: space blanket, bivy sack or tarp"
+    },
+    {
+      "id": "food",
+      "text": "Extra food: a day’s worth beyond your plan"
+    },
+    {
+      "id": "water",
+      "text": "Extra water, and a way to treat more"
+    },
+    {
+      "id": "layers",
+      "text": "Extra layers: insulation and rain gear"
+    }
+  ],
+  "sources": [
+    {
+      "name": "The Mountaineers, Ten Essentials: The Classic List and the Ten Essential Systems (citing Mountaineering: The Freedom of the Hills, 9th edition), Olympia Branch handout",
+      "used": "The ten systems; navigation with a GPS device or phone with a GPS app and extra batteries; headlamp plus extra batteries; sunglasses and sunscreen; knife; matches, lighter and tinder; extra water or the means to purify"
+    },
+    {
+      "name": "National Park Service, Ten Essentials",
+      "used": "Extra battery for your phone; sunglasses, sunscreen and hats; first-aid kit; matches (preferably waterproof) or lighter and fire starters; knife or multi-tool; an extra day's supply of food; tent, tarp, bivy sack or emergency space blanket; rain shell and jacket"
+    },
+    {
+      "name": "NYS DEC press release, 27 June 2024, DEC Reminds Visitors to Focus on Safety as Summer Hiking Season Begins (10 Hiking Essentials)",
+      "used": "Insulation/rain gear"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

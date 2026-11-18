@@ -1,0 +1,158 @@
+{
+  "id": "surv-dangerous-animals",
+  "title": "Dangerous animals",
+  "category": "basics",
+  "keywords": [
+    "bear",
+    "bear spray",
+    "snake",
+    "tick",
+    "bite",
+    "animals",
+    "wildlife",
+    "moose",
+    "rattlesnake",
+    "rabies"
+  ],
+  "summary": "Never run from a bear, fight back if a black bear attacks, check yourself for ticks, and get a snakebite to a hospital.",
+  "where": [
+    "town",
+    "rural",
+    "woods",
+    "coast"
+  ],
+  "sections": [
+    {
+      "h": "Bears",
+      "blocks": [
+        {
+          "p": "The only bear in the Northeast is the black bear."
+        },
+        {
+          "list": [
+            "Store food and every scented item (toiletries, medicine, garbage, pet food) away from where you sleep. In the Adirondacks, “overnight campers in the Eastern High Peaks Wilderness Area are required by regulation to use a bear-resistant canister between April 1 and November 30”. Keep the canister on level ground at least 100 feet from your campsite and cooking area.",
+            "Bear spray can work against an aggressive bear if you have practised with it. Local rules may restrict carrying it.",
+            "Never run, and don’t climb a tree. Talk in a calm voice while you back away slowly. If a bear charges, stand your ground, keep talking calmly and use bear spray if you have it; if it keeps following you, stand your ground, raise your arms to look bigger, shout and bang a stick on the ground.",
+            "If a black bear attacks: don’t play dead. Fight back at once with everything you have, aiming punches and kicks at its face, and use sticks or rocks."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Moose",
+      "blocks": [
+        {
+          "p": "Moose live in northern New York, mostly in and around the Adirondacks. They usually avoid people but are unpredictable and can attack with little warning. Cows are fiercely protective of their calves, and bulls in the early-fall breeding season may charge. Watch them from a distance and never approach."
+        }
+      ]
+    },
+    {
+      "h": "Snakes",
+      "blocks": [
+        {
+          "p": "New York has three venomous snakes: the timber rattlesnake and the copperhead, both found mostly on rocky slopes in hardwood forest, and the eastern massasauga, left at only two wetland sites in the state. One of them is Cicero Swamp in Onondaga County."
+        },
+        {
+          "list": [
+            "Leave every snake alone. If you can see the pit on its face, you are too close.",
+            "Stay out of tall grass and leaf piles when you can, avoid climbing on rocks or woodpiles where a snake may hide, and wear boots and long pants.",
+            "If bitten: keep calm and still, take off rings and watches before swelling starts, and get to a hospital. Don’t cut, suck, ice or put a tourniquet on the bite."
+          ]
+        },
+        {
+          "link": "p:snakebite",
+          "label": "Snakebite"
+        }
+      ]
+    },
+    {
+      "h": "Ticks",
+      "blocks": [
+        {
+          "p": "In the Northeast the blacklegged (deer) tick spreads Lyme disease. Young ticks are about the size of a poppy seed and hard to see. In most cases a tick must be attached for more than 24 hours to pass on Lyme disease, so find and remove ticks fast."
+        },
+        {
+          "p": "After being outdoors, check your whole body: under the arms, in and around the ears, inside the belly button, behind the knees, in and around the hair, between the legs and around the waist. Check clothing, packs and pets too."
+        },
+        {
+          "fig": "tick",
+          "cap": "Use fine-tipped tweezers. Afterward, clean the bite and your hands."
+        },
+        {
+          "p": "See a doctor if a rash or fever appears in the weeks after a bite."
+        },
+        {
+          "link": "p:tick",
+          "label": "Tick bite"
+        }
+      ]
+    },
+    {
+      "h": "Rabies",
+      "blocks": [
+        {
+          "p": "In New York rabies is most often found in raccoons, skunks, bats, foxes and free-roaming cats. Don’t feed or touch wild animals, keep away from any that act unusual or aggressive, and avoid all contact with bats. A bat bite can be too small to see: if you wake up with a bat in the room, get medical care."
+        },
+        {
+          "link": "p:animal-bite",
+          "label": "Animal bite or scratch (rabies)"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "NYS DEC, Eastern Cougar Sightings; US Fish and Wildlife Service, Proposed update to grizzly bear ESA listing (January 2025)",
+      "used": "No native, self-sustaining mountain lion population in New York (absent since the late 1800s); grizzlies only in Idaho, Montana, Washington and Wyoming in the lower 48: black bear is the only bear in the Northeast"
+    },
+    {
+      "name": "NYS DEC, Bear-Resistant Canisters",
+      "used": "Eastern High Peaks canister regulation quoted exactly; scented items; at least 100 feet from campsite and cooking area"
+    },
+    {
+      "name": "Northeast Black Bear Technical Committee, Recommendations for Human-Black Bear Encounters (via mass.gov)",
+      "used": "Don't run or climb trees; curious bear: talk calmly while backing away; charged: stand your ground, arms above head, bear pepper spray; following: stand your ground, look bigger, shout, bang a stick, prepare spray; fight back immediately if attacked; bear spray effective with practice, local rules may restrict"
+    },
+    {
+      "name": "National Park Service, Bear Attacks",
+      "used": "Black bear attack: fight back, don't play dead, punches and kicks to the face; bluff charge: hold your ground, do not run; fight back against a predatory bear of any species; never run"
+    },
+    {
+      "name": "NYS DEC, New York State Black Bear Response Manual (3rd ed., 2011)",
+      "used": "Playing dead seldom helps with a black bear; fight back with sticks, rocks, fists or feet; don't climb a tree or run"
+    },
+    {
+      "name": "NYS Conservationist (reprinted by NYS DEC), moose article (2006); NYS DEC bulletin, 14 October 2020, Be Alert for Moose in the Adirondacks",
+      "used": "Moose in northeastern New York, the Adirondacks and surrounding areas; unpredictable, little warning; protective cows; bulls in rut charge; early fall breeding; enjoy from a distance, do not approach"
+    },
+    {
+      "name": "NYS DEC, Snakes of New York (Conservationist reprint); NYS DEC, Eastern Massasauga",
+      "used": "Three venomous species; timber rattlesnake and copperhead on rocky hardwood slopes; massasauga at two known sites, boggy wetlands; leave snakes alone; pit too close"
+    },
+    {
+      "name": "Oneida Lake Education Initiative (NY Sea Grant site), Massasauga Rattlesnake",
+      "used": "One of the two New York massasauga sites is Cicero Swamp, Onondaga County"
+    },
+    {
+      "name": "CDC/NIOSH, Venomous Snakes at Work",
+      "used": "Tall grass, leaf piles, rocks and woodpiles; boots and long pants; remove rings and watches; keep calm; no tourniquet, cutting, sucking or ice"
+    },
+    {
+      "name": "CDC, How Lyme Disease Spreads",
+      "used": "Blacklegged tick in the Northeast; nymphs poppy-seed size; usually more than 24 hours attached"
+    },
+    {
+      "name": "CDC, Preventing Tick Bites",
+      "used": "Full body check after being outdoors and the body areas; check clothing, packs and pets"
+    },
+    {
+      "name": "CDC, What to Do After a Tick Bite",
+      "used": "Fine-tipped tweezers; clean the bite and hands; see a doctor for rash or fever within several weeks"
+    },
+    {
+      "name": "NYS Department of Health press release, 17 June 2026, Prevent Exposure to Rabies; CDC, Rabies in the U.S.",
+      "used": "Raccoons, skunks, bats, foxes and free-roaming cats; avoid unusual or aggressive wild animals; avoid all contact with bats; waking with a bat; bat bites can be very small"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

@@ -750,6 +750,7 @@ Sources first read 2026-11-17 and re-opened for the second pass the same day; ea
 - Numbers checked: 12 to 24 hours — appendicitis pain moves to the lower right — MLP 000256.
 - Numbers checked: at least 20 seconds handwashing; at least 2 days (48 hours) after symptoms stop; 1,000 to 5,000 ppm = 5 to 25 tablespoons of household bleach (5% to 8%) per gallon; at least 5 minutes contact — CDC Preventing Norovirus.
 - Numbers checked: rolling boil 1 minute, 3 minutes above 6,500 feet; 8 drops per gallon of 5% to 9% bleach; stand at least 30 minutes — CDC water page.
+- Task 13 fix round 1 (2026-11-17, controller ruling): altitude for the 3-minute boil changed from above 6,500 feet (CDC) to above 5,000 feet (EPA Emergency Disinfection of Drinking Water: "At altitudes above 5,000 feet (1,000 meters), boil water for three minutes"), in s8 detail and the final checklist line, so the protocol agrees with surv-make-water-safe. EPA source added; reviewed stays 2026-11-17.
 - Numbers checked: at least 60% alcohol hand sanitizer; loperamide "rarely given to children aged <6 years"; BSS not under 3 or in pregnancy, not generally under 12, caution up to 18 with viral infections — CDC Yellow Book.
 - Notes: ARC-LAY Dehydration asterisked signs (shock, no tears, vomiting or diarrhoea more than a few days, unable to keep fluids down, little or no urine, bloody or black stool, sharp or persistent belly pain, sweet breath, sunken eyes/cheeks, tented skin). ARC-LAY Poison Exposure: multiple people affected marked for immediate emergency treatment. MLP Abdominal pain: sudden sharp pain, tender or rigid belly, blood in vomit or stool → help right away; no medicine without a provider; sips for mild pain; avoid solids first few hours. MLP Diarrhea: OTC anti-diarrhoeals unless fever or bloody diarrhoea. CDC Yellow Book: antimotility agents alone not for bloody diarrhoea or fever; BSS contraindications; black tongue and stool; sodas in quantity cause osmotic diarrhoea; "boil it, cook it, peel it, or forget it". No dose of any medicine is given (open question).
 
@@ -1037,3 +1038,622 @@ Sources re-opened with WebFetch on 2026-11-17 for each change.
 - cricothyrotomy P2: retry bounded. s13 says "make one more attempt as trained" (group judgement, citing the TCCC CMC 2021 standard of an effective airway in 4 minutes or less, already in s1). The bougie retry now goes through a separate removal step s10e whose "no" goes to s25. Path check: 43 paths, all end (s19, s25, s30 to s33), no loops; s13 is reached at most once, so the maximum is two tube attempts. Open question updated.
 - tourniquet-conversion: `evacuate` and `notes` now say "since the first tourniquet went on" for every 2-hour and 6-hour time. s11 detail cites TCCC 2026 item 6g (re-opened 2026-11-17): "Note tourniquets applied and time of application; time of re-application; time of conversion; and time of removal".
 - Cross-references (wording only, no flow change): wound-care s6 and its detail now say "use the Wound closure (strips, skin glue) protocol"; wound-care's tourniquet sentence says "use the Tourniquet reassessment and conversion protocol"; sprain-dislocation s3 (reworded to "Do not push it back in unless trained: use the ... protocol" to stay under 200 characters), its detail and its don't say "use the Dislocation reduction (shoulder, kneecap, finger, toe) protocol". A grep of src/protocols/ for "Advanced procedures" and "see Advanced" now finds nothing.
+
+## Daylight and moon reference values
+
+Task 10. `tests/fixtures/almanac-syracuse.json` holds the reference values that `tests/test_astro.py` checks
+`FK_ASTRO` against: sun times within 2 minutes, moon times within 5 minutes, illuminated fraction within 3 percentage
+points, and phase names by the rule below. `tests/test_survival_tools.py` also checks the Daylight and moon page's
+cards against the same rows.
+
+**Source.** US Naval Observatory, Astronomical Applications Department, "Complete Sun and Moon Data for One Day",
+one page per row:
+`https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data`.
+The controller fetched every row on 2026-11-17, after the user approved the fetch. The values are recorded in
+`.superpowers/sdd/2026-11-17-v7-survival-framework/usno-fetched.md`.
+- Syracuse, NY (43.05 N, 76.15 W): 2026-03-07, 03-08, 03-09, 03-20, 06-21, 09-22, 10-31, 11-01, 11-02, 11-09, 11-17,
+  11-24 and 12-21. Each row has civil twilight begin and end, sunrise, sunset, moonrise and moonset ("none listed"
+  is stored as null), the phase text with percent illuminated, and the closest primary phase.
+- Utqiagvik, AK (71.29 N, 156.79 W): 2026-06-21, sun "Object continuously above the Horizon" and "continuously above
+  the Twilight Limit", moonset 02:09, moonrise 15:00, First Quarter 50%. 2026-12-21, sun "Object continuously below
+  the Horizon", civil twilight begins 11:56 and ends 14:55, moon "Object continuously above the Horizon", Waxing
+  Gibbous 93%.
+- **Times are local wall-clock times as the page printed them.** On 2026-03-08 they are EDT. On 2026-11-01 they are
+  EST after the 2 a.m. change (sunrise 06:39), so they are the times a phone in America/New_York shows. The tests
+  turn each one into an instant with the browser's own America/New_York or America/Anchorage rules.
+- **Two oddities on the pages:**
+  - The 31 October page gives last quarter as 16:28 EDT, and the 1 and 2 November pages give 15:28 EST. This is
+    the same instant.
+  - The 1 November moonset of 13:22 is EST, which is 14:22 EDT, so it fits the usual daily delay.
+- **Phase names.** USNO's daily phase text names a primary phase on some days it happens, but not on others:
+  - It does name New Moon on 11-09, Full Moon on 11-24, and First Quarter on 06-21 at Utqiagvik.
+  - It does not on 11-17, which is the First Quarter day (06:48) but is printed "Waxing Gibbous with 52%".
+  - It does not on 06-21 at Syracuse ("Waxing Crescent, 48%"), nor on 11-01, the Last Quarter day ("Waning Gibbous,
+    52%").
+
+  The app names a primary phase on the local day it happens. The test's tolerance: the app's name must equal USNO's
+  text, or, on the local date of USNO's closest primary phase, equal that primary phase.
+
+**Discarded: the USNO JSON API.** `https://aa.usno.navy.mil/api/rstt/oneday?...` was also fetched for every date.
+The fetch tool returned the 2026-06-21 Syracuse answer for every query, from a cache keyed on the path, so those
+answers were thrown away. Only the "calculated" page values are used. For 2026-06-21 Syracuse, the API answer and the
+page agree.
+
+**Dropped: the earlier sources.** These were opened with WebFetch on 2026-11-17 before USNO could be fetched. None
+of their values is in the fixture now.
+- sunrisesunset.io (`/us/new-york/syracuse/2026/`), for sun times.
+  - Its March and June rows were 2 to 3.4 minutes from USNO, in the direction of a longer day: 20 March sunrise 7:05
+    against USNO 07:08, and 21 June sunset 8:50 PM against USNO 20:48.
+  - Its September to December rows were within a minute of USNO.
+- sunrise-sunset.org, for Syracuse in November 2026 and Utqiagvik in November 2026.
+- time-ok.com (`/moon/syracuse`), for moon times and phases.
+  - Its moonrise and moonset times were 15 to 24 minutes from USNO. For example, 1 November moonrise was 10:53 PM
+    against USNO 23:17.
+  - Its November phase days agree with USNO.
+- Washington Times (11 May 2026) and Fox Weather (18 November 2025), news reports of midnight sun and polar night at
+  Utqiagvik.
+
+An intermediate version of the fixture labelled Utqiagvik 2026-12-21 as a geometric inference. That row now has
+USNO's own "continuously below the Horizon".
+
+## Task 13: Survival topics, water and priorities (2026-11-17)
+
+Source keys (all opened 2026-11-17 by web fetch; title checked after each fetch):
+- EPA-ED: US EPA, Emergency Disinfection of Drinking Water. https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water
+- CDC-MWS: CDC, How to Make Water Safe in an Emergency. https://cdc.gov/water-emergency/about
+- CDC-FCW: CDC, How to Find Clean Water in an Emergency. https://www.cdc.gov/water-emergency/about/how-to-find-clean-water-in-an-emergency.html
+- NYSDOH-HAB: New York State Department of Health, Harmful Blue-Green Algae Blooms. https://healthweb-back.health.ny.gov/environmental/water/drinking/bluegreenalgae/ (the page itself does not print its publisher; the health.ny.gov domain is NYS DOH)
+- ATP: US Army ATP 3-50.21, Survival, September 2018, chapter 3 (paragraph numbers below). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- FM1: FM 21-76-1 / MCRP 3-02H / NWP 3-50.3 / AFTTP(I) 3-2.26, Survival, Evasion, and Recovery, 29 June 1999 (page numbers below). https://rmp.nc.gov/LCF/Publications/AL_Resources/Survival/Multi Service Survival Manual.pdf
+- FM21-76: US Army FM 21-76, Survival Manual (2006 PDF copy, chapter 6 text; figures 6-1 and 6-2 are images and did not extract). https://northernbush.com/wp-content/downloads/woodcraft/US-Army-Survival-Manual.pdf and https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- PHX: City of Phoenix Fire Department, Desert survival (page prints no publisher; phoenix.gov fire department section). https://phoenix.gov/fire/safety-information/outdoor/desert-survival
+- TOOELE: Tooele County Health Department (Utah), Rule of Three. https://tooelehealth.org/?p=4919 and the PDF https://tooelehealth.org/wp-content/uploads/2016/06/Rule-of-3-Emerg.-Plan-English.pdf
+- DEC-LOST: NYS DEC, Lost in the woods leaflet. https://extapps.dec.ny.gov/docs/legal_protection_pdf/lostinwoods.pdf
+- DEC-CAMP: NYS DEC, State Land Camping Rules. https://dec.ny.gov/things-to-do/camping/state-land-rules
+- NPS-OEP: National Park Service, Outdoor Emergency Plan (PDF). https://www.nps.gov/subjects/healthandsafety/upload/NPS-Outdoor-Emergency-Plan-508c.pdf
+- AK-HYPO: Alaska State Parks (Alaska DNR), Hypothermia. https://dnr.alaska.gov/parks/safety/hypother.htm
+- USFS-HYPO: US Forest Service, Hypothermia. https://www.fs.usda.gov/visit/know-before-you-go/hypothermia
+- CDC-TICK: CDC, Preventing Tick Bites. https://cdc.gov/ticks/prevention/index.html
+- ARMY-COLD: army.mil, Fight the Freeze (B. Minchhoff, Fort Drum, 3 Oct 2011). https://www.army.mil/article/66527/fight_the_freeze
+- CPSC: US CPSC, Portable Heaters & Camping Equipment. https://www.cpsc.gov/es/node/12866 (English content)
+- NOAA-SW: NOAA National Ocean Service, Can humans drink seawater? https://oceanservice.noaa.gov/facts/drinksw.html
+- FDA-SEA: FDA, Selecting and Serving Fresh and Frozen Seafood Safely. https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-fresh-and-frozen-seafood-safely
+- MA-PSP: Massachusetts DPH, Red Tide (Paralytic Shellfish Poisoning). https://www.mass.gov/info-details/red-tide-paralytic-shellfish-poisoning
+- NPS-TIDE: National Park Service, How Tides Work at Acadia. https://www.nps.gov/articles/000/tides-acadia.htm
+- EPA-SUN: US EPA, Sun Safety Tips. https://www.epa.gov/sunsafety/action-steps-sun-safety
+
+### surv-make-water-safe
+
+- Settle, then filter through clean cloth, paper towel or coffee filter — EPA-ED ("let it settle and filter it through a clean cloth, paper towel, or coffee filter"); CDC-MWS. Corrected (added paper towel, coffee filter).
+- "Boiling is the best way to kill germs in water" — CDC-MWS verbatim. Replaces the removed figure caption "Boiling is the most reliable method".
+- Rolling boil at least 1 minute — EPA-ED ("rolling boil for at least one minute"); CDC-MWS (1 minute); ATP 3-41 (1 minute). Matches.
+- 3 minutes above 5,000 ft — EPA-ED ("above 5,000 feet (1,000 meters), boil water for three minutes"). CDC-MWS: above 6,500 feet. ATP 3-41: above 8,000 feet. Old text said 6,500 ft. Corrected to the most cautious (EPA). Feet only: EPA's metric figure (1,000 m) does not equal 5,000 ft, so no metric is given.
+- Boil time disagreement — NYS DEC State Land Camping Rules: boil 5 minutes; ATP 2-3 and FM1 chapter V also say 5 minutes. EPA and CDC (the water-treatment authorities named for this task) say 1 minute. The text follows EPA/CDC. Open question added to docs/decisions-for-jordan.md.
+- Bleach type: regular unscented chlorine bleach; not scented, color-safe or with added cleaners; 6 or 8.25% — EPA-ED. Corrected (added).
+- Bleach age: stored at room temperature for less than one year — EPA-ED. Matches the old caption's "not expired", made specific.
+- 8 drops per gallon of 6% — EPA-ED table; CDC-MWS (8 drops for 5% to 9%). Matches.
+- 8.25% bleach: old text 6 drops per gallon — EPA-ED table gives 6 drops per gallon for 8.25%; CDC-MWS gives 8 drops per gallon for any 5% to 9%. Sources disagree; the larger dose (CDC) is used for both strengths. Corrected. Open question added.
+- 2 drops per quart or liter — EPA-ED (both strengths); CDC-MWS (5% to 9%). Added.
+- Double for cloudy, colored or very cold — EPA-ED; CDC-MWS ("cloudy, murky, colored, or very cold"). Old text "cloudy or very cold": corrected (colored added).
+- Stir and stand 30 minutes — EPA-ED; CDC-MWS ("at least 30 minutes"). Matches.
+- Slight chlorine smell; if none, repeat dose and stand another 15 minutes — EPA-ED. Added.
+- Tablets: follow the label, products differ in strength — EPA-ED. Matches.
+- Iodine and chlorine tablets do not kill Cryptosporidium; chlorine dioxide does if instructions followed — CDC-MWS. ATP 3-36 note agrees that chemical disinfectants are not fully effective against Cryptosporidium. Added.
+- Iodine: avoid if pregnant or thyroid problems; no one more than a few weeks — CDC-MWS. Added (CDC also lists iodine hypersensitivity; not added to keep the step short — consider for pack 1).
+- Portable filters do not remove viruses; disinfect after filtering — CDC-MWS ("Will not remove viruses"). ATP 3-45 says "most filters do not remove viruses". Old text "Most filters don't stop viruses": corrected to CDC (more cautious).
+- Fuel, toxic chemicals, radioactive material cannot be made safe by boiling or disinfecting — CDC-MWS verbatim meaning; CDC-FCW. Added.
+- Heavy metals, salts, most other chemicals not destroyed by boiling or disinfection — EPA-ED. Added.
+- Harmful algal blooms: appearance (strongly colored water in the listed colors, paint-like, floating mats or scums); do not drink, prepare food or make ice with surface water during a bloom even if treated; boiling does not remove the algae or toxins — NYSDOH-HAB. Added. No opened source says what home or camping filters do for bloom toxins, so filters are covered only by "even if you treat it yourself".
+- Figure `water-safe`: removed (drawn text says 3 minutes above 6,500 ft, wrong against the corrected text). Figure file left in figs/.
+- Solar disinfection, "clear water is safe": not in the topic; nothing to check. Not added (FM1 VII-4 mentions sun disinfection without a time; adding it would expand the topic and needs a time from CDC or WHO).
+- Tags: none set (applies everywhere). Unchanged.
+
+### surv-find-water
+
+- Water runs downhill; valley bottoms and low ground — FM1 VII-1 ("Drainages and low-lying areas"). Matches.
+- Foot of cliffs or rocks — ATP 3-34 ("the foot of cliffs or rocks"); PHX ("at the base of rock cliffs"). Matches.
+- Dry stream beds, dig on the outside of bends — ATP 3-34 ("Outside bends of a dry riverbed"); PHX ("digging three to six feet at the outside edge of a sharp bend in a dry stream bed"). Matches. The depth is not added.
+- `water-bend` caption: wet sand, dig into it for seeping water — PHX; ATP Table 3-1 (dig deep enough for water to seep in). Corrected; old explanation removed-unsourced. Figure kept (matches).
+- Signs: lush green vegetation, swarming insects, V-intersecting game trails, bird flight in early morning or late afternoon may indicate the direction — FM1 VII-1. Corrected ("low and straight at dawn and dusk" not found in any opened source; the FM 21-76 figure that may hold it did not extract).
+- Rain on a tarp, poncho or leaves — ATP 3-11 (improvised nonporous items), ATP 3-10 (rain off leaves should be purified). Matches.
+- Rain needs treatment — CDC-FCW (rainwater is a source "that could be made safe by treatment"; outside water "must be treated"). ATP 3-10: fresh rain collected into containers needs no purification. Sources disagree; CDC (more cautious) used: "Treat all wild water, rain included".
+- Dew: cloth around ankles before sunrise, walk through grass, wring out — FM21-76 chapter 6 ("Tie rags or tufts of fine grass around your ankles and walk through dew-covered grass before sunrise"); ATP 3-15. Matches.
+- Transpiration bag: clear bag, non-poisonous plant, tied over a leafy branch and sealed — FM1 VII-6 (clear; no poisonous/toxic plants); ATP 3-27 (sealed airtight). Corrected ("and seal it" added).
+- `water-bag` caption: collect before sundown; same limb 3 or 5 days; water tastes like the plant — ATP 3-27; FM1 VII-6. Corrected ("move it to a fresh branch daily" contradicted ATP; "a little water over several hours" unsourced). Figure kept (matches).
+- Never drink seawater or urine — ATP 3-2; FM1 VII-1. Matches.
+- Harmful algal blooms bullet — NYSDOH-HAB. Added.
+- Tags: none set. Unchanged.
+
+### surv-priorities
+
+- Rule of threes — TOOELE ("about three minutes in unsafe air", "about three hours at a dangerous temperature", "about three days without water", "about three weeks without food"; "Although it is not absolute, the rule of three gives good general direction"). Kept as a rough guide; "without shelter" changed to "at a dangerous temperature" to match. No federal or military source opened states the rule (FM1 and ATP were checked: not found). County health department is below the preferred tier; noted as a concern.
+- STOP — DEC-LOST: "S is for Sit Down", Think, Observe, Plan. Corrected (old: Stop).
+- Stay put if lost — NPS-OEP ("Stay put – Changing location will make it difficult for authorities to find you"; move only if life is under immediate threat; leave a trip plan with a trusted contact). Corrected.
+- Hypothermia above freezing — DEC-LOST. Most cases 30 to 50°F — AK-HYPO ("Most cases occur when temperatures are between 30 and 50 degrees F"); wind and wet clothes — AK-HYPO, USFS-HYPO. Corrected (superlative removed).
+- Treat all stream, pond and lake water — CDC-FCW; DEC-LOST ("filter or treat"). Matches; "usually plentiful" removed-unsourced.
+- Dead and down wood only; cutting standing trees prohibited on state land — DEC-CAMP. Corrected; "fire usually achievable" and "standing dead wood" removed-unsourced. This is the normal-times rule; whether it should yield in a real emergency is for the Fire topic (Task 14) and Jordan.
+- Tick check, body areas — CDC-TICK. Corrected ("every day" not in the source).
+- COLD — ARMY-COLD (Clean, avoid Overheating, Loose and Layered, Dry); FM1 (clean, dry, loose and layered, remove layers before strenuous activity); AK-HYPO (remove layers when you start to sweat). Matches; explanation reworded.
+- Cover head, hands and feet — FM1 (hat regulates body heat); ARMY-COLD (layering applies to boots, gloves, headgear); DEC-LOST (hat covering ears). Matches.
+- Eat and drink regularly, fuel to make heat — USFS-HYPO ("Water helps turn calories into heat and food high in carbohydrates helps keep you powered"). Matches.
+- Don't eat snow or ice, lowers body temperature; melt it — FM1 VII-1, VII-3. Treat melted snow — ATP 3-13, Table 3-1. Corrected.
+- No stove, heater or lantern while sleeping in a tent — CPSC; air vent for any flame in an enclosed shelter — FM1 VI-4; people die every year — CPSC. Corrected. Consistent with the carbon-monoxide protocol s6.
+- Sunglasses; thin horizontal slits in bark or cloth — FM1 VI-3 ("small horizontal slits in webbing, bark, or similar materials"); snow blindness — FM1 V-10. Matches ("horizontal" added).
+- Never drink seawater, deadly, dehydration — NOAA-SW. Corrected wording.
+- Beach well behind the first group of dunes, deep enough to hit the water table — ATP 3-33, Table 3-1; treat — CDC-FCW. Corrected.
+- Shellfish: cracked shells, tap test, discard unopened after cooking — FDA-SEA; closed areas, cooking does not destroy red tide toxin, toxic without discolored water — MA-PSP. Corrected. (MA-PSP also lists oysters, whelks and moon snails as affected; not added.)
+- Tide chart; land bridge trap; Acadia range about 12 feet — NPS-TIDE. Corrected. No metric given (the topic has none elsewhere).
+- Water and sand reflect the sun, increase sunburn chance; cover up — EPA-SUN. Matches.
+- Links: `p:frostbite` kept; added `p:hypothermia` (Forest), `p:tick` (Forest), `p:carbon-monoxide` (Cold and snow). `p:dehydration` and `p:heat-illness` not linked: the topic restates no dehydration or heat-illness treatment.
+- Tags: none set at topic level (sections cover several settings). Unchanged.
+
+### Task 13 pages that would not open
+
+- CDC page https://www.cdc.gov/water-emergency/about/how-to-make-water-safe-in-an-emergency.html (permission request unanswered; the same content was read at https://cdc.gov/water-emergency/about, titled "How to Make Water Safe in an Emergency").
+- archive.org Aviation Survival Part 3 (redirect needed approval; not used).
+- biotech.law.lsu.edu FM 3-05.70 (error page).
+- FM 21-76 figures 6-1 and 6-2 (images; text did not extract from either PDF copy).
+- survivalmanual.github.io/06 opened but is an unofficial transcription; not used as a source.
+
+### Task 13 fix round 1 (2026-11-17)
+
+New sources opened:
+- CDC-HIKE: CDC, About Water Treatment Options When Hiking, Camping, or Traveling. https://cdc.gov/drinking-water/prevention/water-treatment-hiking-camping-traveling.html (title confirmed). Disinfect section: "Chlorine bleach and iodine kill bacteria and viruses but do not work well to kill parasites."; "Chlorine dioxide tablets can kill the parasite Giardia and are somewhat effective at killing Cryptosporidium", filtering first still safest. Boil section: boiling kills all germs including Cryptosporidium and Giardia. Iodine section: avoid if pregnant, thyroid problems or hypersensitivity to iodine; no one for more than a few weeks.
+- CDC-CO: CDC, Carbon Monoxide (CO) Poisoning Prevention. https://www.cdc.gov/nceh/features/copoisoning (the extracted text shows the heading but no CDC attribution; cdc.gov domain). "Never use a charcoal grill, hibachi, lantern, or portable camping stove inside a home, tent, or camper."
+
+Statements changed:
+- surv-make-water-safe, bleach step: added "Bleach, chlorine and iodine kill bacteria and viruses but do not work well against parasites such as Giardia and Cryptosporidium: boil if you can, or filter first." — CDC-HIKE (Disinfect, Boil and Filter sections; "filter first" from its note that filtering first is safest). Added (review I1).
+- surv-make-water-safe, chlorine dioxide: was "chlorine dioxide tablets do if you follow the instructions" (CDC-MWS). Now "Chlorine dioxide tablets kill Giardia and work better against Cryptosporidium, but not fully; follow the label exactly." — CDC-HIKE ("somewhat effective"), the more cautious of the two CDC pages. Disagreement recorded in docs/decisions-for-jordan.md D5. Corrected (review I2).
+- surv-make-water-safe, bleach strength: "(6% or 8.25%)" now "(5% to 9%, such as 6% or 8.25%)" — CDC-MWS gives 8 drops per gallon and 2 drops per quart or liter for the whole 5% to 9% range, the dose the step gives. Corrected (review M2).
+- surv-make-water-safe, iodine: added "or are hypersensitive (allergic) to iodine" — CDC-MWS and CDC-HIKE ("hypersensitivity to iodine"). Added (review M3).
+- surv-priorities, carbon monoxide: was "Never use a stove, heater or lantern while sleeping in a tent or snow shelter. Any flame inside an enclosed shelter needs an air vent. ..." Now "Never use a charcoal grill, lantern or portable camping stove inside a tent or snow shelter, and never use fuel-burning heaters or lanterns while sleeping in one. ..." — CDC-CO (inside a tent, at any time) and CPSC (while sleeping). "Snow shelter" is not in either source; it is included because a snow shelter is an enclosed space, as the carbon-monoxide protocol s6 already says. Vent sentence removed: my earlier fetch of FM 21-76-1 returned the text "Air vent is required to prevent carbon monoxide poisoning when using an open flame inside enclosed shelters" (p. VI-4), but that came through a summarising fetch tool, not a page I could read myself; the reviewer's copy of VI-4 was garbled; and it reads as permission that CDC-CO forbids. Corrected (review I3).
+- surv-priorities, staying put: was "If you left a trip plan with someone, stay put: ..." Now "Then stay put: moving makes it harder for searchers to find you. Move only if your life is under immediate threat. Before any trip, leave word with someone about where you're going and when you'll be back, so a search starts in the right place." — NPS-OEP (stay put; move only under immediate threat to life); DEC-LOST ("Leave word with someone about your whereabouts and expected time of return"). "so a search starts in the right place" is the stated reason, not a quote. Corrected (review M4).
+
+Boiling altitude elsewhere (grep of src/protocols, src/survival, src/checklists for 6,500 / 5,000 / altitude with boil, feet or ft): only src/protocols/vomiting-diarrhea.json (s8 detail and the final checklist line, both now 5,000 feet) and surv-make-water-safe (5,000 ft). altitude.json and carbon-monoxide.json mention altitude but not boiling. Other "boil" hits (burns keyword, acorns in surv-food-and-wild-plants, wound-care, animal-bite, dehydration) give no boiling time or altitude.
+
+Open item for the water pack (review M1, not acted on): filter pore rating. CDC-MWS and CDC-HIKE give absolute pore size 1 micron or smaller for parasites and 0.3 micron or smaller for bacteria (CDC-HIKE: "Most portable water filters will remove parasites, but not viruses or bacteria"). The topic now says only that portable filters do not remove viruses; the pack 1 water content should say what rating to look for and that most portable filters do not remove bacteria either.
+
+## Task 14: Survival topics, shelter, fire, weather, rivers (2026-11-17)
+
+Source keys (opened 2026-11-17 by web fetch from search results; title checked after each fetch). All PDF text was read through the fetch tool's extraction and summary, which quotes passages; nothing was downloaded. Paragraph and page numbers are as the tool reported them.
+- ATP: US Army ATP 3-50.21, Survival, September 2018 (chapters 5 and 6). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- FM: US Army FM 21-76, Survival Manual (2006 PDF copy; chapters 5, 7, 15, 17). https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- FM1: FM 21-76-1, Survival, Evasion, and Recovery, 29 June 1999, chapter VI. https://rmp.nc.gov/LCF/Publications/AL_Resources/Survival/Multi Service Survival Manual.pdf
+- TC: US Army TC 21-3, Soldier's Handbook for Individual Operations and Survival in Cold-Weather Areas, March 1986 (first 100,000 characters only). https://ia601500.us.archive.org/28/items/MManuals/Tc21-3UsArmySurvivalInColdWeather1986.pdf
+- DEC-AVAL: NYS DEC press release, 22 February 2023, avalanche risk in the Adirondack High Peaks region. https://dec.ny.gov/news/press-releases/2023/2/dec-advises-backcountry-downhill-skiers-snowboarders-and-outdoor-adventurers-of-avalanche-risk-in-adirondack-high-peaks-region
+- DEC-BURN: NYS DEC press release, 11 April 2023, annual residential brush burning prohibition (campfire rules). https://dec.ny.gov/news/press-releases/2023/4/with-increased-fire-danger-dec-reminds-new-yorkers-annual-residential-brush-burning-prohibition-in-effect-through-may-14
+- CDC-CO: CDC, Carbon Monoxide (CO) Poisoning Prevention. https://www.cdc.gov/nceh/features/copoisoning
+- CPSC: US CPSC, Portable Heaters & Camping Equipment. https://www.cpsc.gov/es/node/12866
+- USFS-FIRE: USDA Forest Service, Intermountain Region, Fire Safety. https://fs.usda.gov/r04/safety-ethics/fire-safety
+- SMOKEY: Smokey Bear (Ad Council with USDA Forest Service and NASF), Campfire Safety / How to Put Out a Campfire. https://smokeybear.com/en/prevention-how-tos/campfire-safety and .../how-to-maintain-and-extinguish-your-campfire (both fetches returned the page title "How to Put Out a Campfire"; the first gave the site-selection text, the second the extinguishing text)
+- NWS-OV: NWS, Overview: Lightning Safety. https://www.weather.gov/safety/lightning-safety-overview
+- NWS-BRO: NWS/NOAA lightning brochure "Lightning Safety for You and Your Family" (NOAA PA 201752). https://www.weather.gov/media/safety/Lightning-Brochure18.pdf
+- NWS-1P: NWS lightning one-pager. https://www.weather.gov/media/owlie/LightningSafety-OnePager-11-29-18.pdf
+- NWS-OUT: NWS, "When a Safe Building or Vehicle is Nearby". https://www.weather.gov/safety/lightning-outdoors
+- CDC-LTG: CDC, Safety Guidelines: Lightning. https://www.cdc.gov/lightning/safety/
+- NOAA-LTG: NOAA JetStream, Lightning Safety (updated 22 June 2026). https://noaa.gov/jetstream/lightning/lightning-safety
+- NOAA-MAPS: NOAA JetStream, How to read Surface Weather Maps. https://www.noaa.gov/jetstream/wxmaps
+- MWO: Mount Washington Observatory, Predicting Weather From the Clouds (M. Dorfman, 21 September 2012). https://mountwashington.org/predicting-weather-from-the-clouds (nonprofit observatory, outside the preferred list; used only for the cumulus sign)
+- NPS-MORA: NPS, Mount Rainier National Park, Backcountry Hikers Advised to Use Caution When Crossing Rivers (6 August 2018, archived). https://www.nps.gov/mora/learn/news/hikers-advised-to-use-caution-when-crossing-rivers.htm
+- MN-COLD: Minnesota DNR, Cold water dangers. https://dnr.state.mn.us/safety/boatwater/cold-water.html
+
+### surv-shelter
+
+- No dead trees overhead — ATP 6-9 ("free of dead trees that may fall"); FM p. 38; FM1 VI-3. Matches.
+- Above flood level, never in a dry wash — ATP 6-9 (flash-flood areas, high-water marks); FM p. 38; FM1 VI-3 (drainages and dry riverbeds). Matches; "stream bed" and "flash floods run there" added from FM1/FM.
+- Valley floors collect cold air — FM p. 47 ("Low areas collect the heavy cold air at night"); ATP 6-9 (cold sump); TC ch 7. Matches; reworded to the source ("low ground such as narrow valleys and creek beds").
+- Exposed ridgetops (wind) — not in ATP, FM, FM1 or TC shelter sections. Removed-unsourced. "Out of the wind" added from FM ch 5 (winter site protects from cold and wind).
+- Near water and building material — FM (winter: source of fuel and water); FM1 VI-3 (water). Corrected to "water and fuel".
+- Avalanches and rockslides — ATP 6-9; FM p. 38; TC ch 7. Adirondack terrain — DEC-AVAL ("avalanche-prone terrain is found on mountains throughout the Adirondacks", steep open terrain, slides, gullies). Added (Northeast safety).
+- `shelter-site` figure: valley cold air and floods, level site above flood level match; drawn label "Ridgetops: wind" is unsourced but not contradicted. Kept, caption replaced with sourced text (concern noted in the report).
+- Ground insulation thickness — ATP 6-46 (at least 12 inches, compresses); FM p. 48 (30 cm layer). ATP 6-38 step 6 gives 2 feet for the debris hut bed. Corrected from "a hand's width" to 12 inches (the general minimum).
+- Heat loss to the ground — ATP 6-16 note and FM p. 40 ("as much as 80 percent"). Corrected ("faster than the air" was not in a source).
+- Keep it small — FM p. 38 (most common error is too large); FM ch 15 (too large wastes body heat). Matches.
+- Debris hut: waist height (ATP 6-38, FM p. 48), ribbing steep enough to shed moisture (ATP 6-38), at least 3 feet thick (ATP 6-38; FM 1 meter), entrance material dragged in (ATP 6-38, FM). Corrected (hip height, arm's length).
+- `shelter-debris` figure removed (labels hip height and arm's length).
+- Lean-to back into the wind — ATP 6-32; FM p. 39, 46. Matches. Reflector of green logs (ATP 6-33, 5-7) or rocks (FM1 VI-11); porous or riverbed rock explodes (ATP 5-8, FM ch 7, FM1 VI-11). Corrected (warning added). `shelter-leanto` figure kept (windward branches, log wall reflects heat; matches).
+- Tarp A-frame, low end facing wind — not in any source (ATP 6-17 poncho tent gives no wind direction; FM1 VI-6 gives entrance 45 to 90 degrees from the wind). Replaced with ATP 6-16 poncho lean-to (ropes about waist high, back into the wind). `shelter-tarp` figure removed.
+- Snow insulates; snow cave — ATP 6-25; FM1 VI-4. Matches. Snow trench — TC ch 10. Matches.
+- Ventilation hole — ATP 6-39 ("All openings except ventilation holes should be sealed"); FM ch 15 ("Be sure to ventilate an enclosed shelter"). Kept, without any suggestion that a flame is then safe.
+- Sleeping platform higher than the entrance — ATP 6-26; FM ch 15. Added from the figure's existing content.
+- Keep your digging tool inside — not in ATP, FM, FM1 or TC (TC read only to 100,000 characters). Removed-unsourced.
+- Stoves and fires — CDC-CO ("Never use a charcoal grill, hibachi, lantern, or portable camping stove inside a home, tent, or camper"); CPSC ("Never use fuel-burning portable heaters or lanterns while sleeping in enclosed areas"; people die every year). Corrected to the surv-priorities wording (Task 13 review I3). "Snow shelter" is not named in either source; included as an enclosed space, as surv-priorities and the carbon-monoxide protocol do. ATP 6-39 says candles, fuel gel and oil lamps produce CO and need vent holes; not used, as it reads as permission CDC withholds.
+- `shelter-snow` figure kept: vent hole, raised sleeping shelf (ATP 6-26), cold air to the low end (FM p. 47 cold air is heavy). Caption reworded.
+- Links: `p:carbon-monoxide`, `p:hypothermia`, `p:frostbite`. No treatment was restated.
+- Tags: where rural, woods. Unchanged (snow and avalanche lines are mountain/woods; no town or coast advice).
+
+### surv-fire
+
+- Gather about twice what you think — no source. Removed-unsourced. Replaced by ATP minimums: tinder a cupped handful (5-12), kindling a soda can diameter of each size (5-19), fuel forearm thick (5-20); skipping a phase makes the fire fail (5-9).
+- Tinder examples — ATP 5-10 (birch bark, dead dry grass, cattail/milkweed seed down, pitch wood shavings), 5-11 (lint; cotton balls coated with petroleum-based paste). Corrected wording ("fatwood", "dryer lint" not in the source). ATP's birch bark line is garbled in the extraction ("Birch bark—shredded inner bark known as heartwood from cedar..."); birch bark is listed.
+- Kindling pencil-lead to pencil — ATP 5-19: pencil-lead to thumb, 12 to 18 inches. Corrected.
+- Fuel wrist-thick — ATP 5-20: forearm diameter at a minimum. Corrected. Snaps when broken — ATP 5-21. Rotten wood smolders — ATP 5-21. Added.
+- `fire-sizes` figure removed (label "wrist-thick and up"; caption unsourced).
+- 10-foot circle — USFS-FIRE (clear burnable material within a 10-foot diameter circle); ATP 5-6 (expose at least 3 feet of soil); FM ch 7 (at least 1 meter). Corrected (circle of burnables 10 ft, bare soil at least 3 ft in the middle).
+- Overhanging branches — USFS-FIRE. Matches. Snow-loaded trees, flat, dry, out of the wind — ATP 5-5. Added.
+- Platform of green sticks or flat rocks on snow or wet ground — ATP 5-6 and FM ch 7 give green logs on snow, in crosswise layers; rocks: ATP 5-8, FM ch 7, FM1 VI-11 warn porous, wet or riverbed rocks explode. Corrected. `fire-platform` figure removed.
+- Teepee, light from upwind — ATP 5-24, 5-32; FM ch 7. Matches. "Opening facing the wind", "blow gently at the base" — removed-unsourced (FM mentions blowing only for the lens method).
+- Log cabin — ATP 5-28 ("creates a quick and large bed of coals and can be used for cooking"). Corrected ("burns longer" not in the source). `fire-lays` figure kept; its labels "lights fast" and "steady heat" are not in a source but do not contradict one.
+- Ferro rod pull-back — not in ATP (5-39: striker at 90 degrees, driven down the stick with even pressure) or FM (scrape the knife on the metal match, tip under the tinder). Web search found only retail and blog pages for the pull-back method. Corrected to ATP. `fire-ferro` figure removed. Open question D7.
+- 9-volt battery and steel wool — ATP 5-40 (fine-grade steel wool stretched across the two posts heats and produces a coal; keep flame away, some batteries release explosive hydrogen). Corrected.
+- Bow drill — ATP 5-46 (significant preparation); FM (much effort, persistent). Matches.
+- Wet weather: standing dead wood (ATP 5-21, sheds rain), dead lower conifer branches (ATP 5-16), split to the dry inner wood (ATP 5-17), teepee burns with wet wood (ATP 5-24, FM). Matches/added. Birch bark burns when damp — no authoritative source found. Removed-unsourced.
+- Never leave unattended; drown, stir, feel — USFS-FIRE; SMOKEY (drown, stir, drown, feel; too hot to touch, too hot to leave); DEC-BURN. Matches, made specific.
+- New York campfire rule — DEC-BURN. Added (one sentence). Not added: Smokey's 15 feet from tents (conflicts with the Army lean-to fire; open question D8).
+- Fire in shelters: the topic has none, so no carbon monoxide change needed (checked as asked).
+- Links: `p:burns`. Tags: none. Unchanged.
+
+### surv-weather-and-lightning
+
+- Building clouds mean thunderstorms — MWO ("towering, growing cumulus clouds" on a summer morning, heavy rain and thunderstorms later in the day). Corrected. NOAA's cloud chart (https://www.weather.gov/media/owlie/cloud_chart.pdf) gives no forecast for cumulus; not used.
+- Off peaks by early afternoon — NWS-OUT (storms typically develop in the early afternoon; down the mountain by noon). CDC-LTG: late afternoon or evening. Corrected to the earlier (NWS). Open question D6.
+- Lowering, thickening clouds — NOAA-MAPS ("Clouds lower and thicken as the warm front approaches, bringing several hours of light to moderate rain"). Corrected ("within hours" not in the source).
+- Wind shift and temperature drop — NOAA-MAPS: after the cold front passes, winds shift and temperatures fall; thunderstorms just ahead of it. Corrected (old text said the shift means a front is arriving).
+- 5 seconds per mile — NOAA-LTG (divide seconds by five). Matches. "Light arrives almost instantly" — removed-unsourced (caption reworded). `lightning` figure kept.
+- Hear thunder, go indoors; building or hard-topped vehicle; windows closed — NWS-OV, NWS-BRO, NWS-1P ("If you can hear thunder, you are in danger"). Matches; windows added.
+- Tents and open shelters don't protect — NWS-BRO, NWS-1P, CDC-LTG. Matches. 10 miles — NWS-BRO ("as far as 10 miles from any rainfall"). Added.
+- No place outside is safe — NWS-OV, NWS-BRO. Matches. Peaks and ridges, lone tall trees, water, metal, never lie flat, spread out — CDC-LTG; NWS-OUT; NOAA-LTG. Matches.
+- Lightning crouch: not in the topic. NWS pages opened do not mention it; the lightning protocol keeps it as WMS's last resort. No change.
+- Wait 30 minutes — NWS-OV, NWS-BRO, CDC-LTG. Matches.
+- Wind chill, frostbite times, heat index: not in the topic; not added (do not expand). Links: `p:lightning` added; hypothermia, frostbite and heat-illness not linked (the topic restates none of them).
+- Tags: none. Unchanged.
+
+### surv-river-crossings
+
+- Wide, shallow, slow; braided channels — NPS-MORA; FM ch 17 (two or three narrow channels easier). Matches; channels added. Scout downstream for log jams and waterfalls — NPS-MORA. Added. Never just above rapids, falls, strainers — FM ch 17 (avoid deep or rapid waterfalls, ledges that signal rapids); NPS-MORA (strainers among the most dangerous). Matches.
+- Snowmelt lowest early morning — NPS-MORA ("typically"; up to a foot by late afternoon). Matches, made specific. FM ch 15: level changes can occur at any time of day; "usually" kept.
+- Hip belt and chest strap — NPS-MORA (unfasten the belt); FM ch 17 (be able to remove the pack quickly). Chest strap not found. Corrected.
+- Face upstream, pole upstream, one step at a time — NPS-MORA; FM ch 17. Matches. Two points of contact — NPS-MORA. Added. Angle slightly downstream — FM ch 17: about 45 degrees. Corrected. `river` figure removed.
+- Above the knee — NPS-MORA ("Do not try to cross water that comes above your knees"). Corrected. If in doubt, turn back — NPS-MORA. Matches.
+- Cold water — FM ch 17 (do not swim or wade in very cold water, could be fatal); MN-COLD (cold shock first 2 to 3 minutes: gasping, hyperventilation, panic, drowning). Added (Northeast snowmelt). 1-10-1 not added: MN-COLD gives it for people in a life jacket.
+- Swept away — FM ch 17: fast shallow rapids, on your back, feet downstream and up, fin with hands; deep rapids, on your stomach, head downstream, angle toward shore. Corrected (old text mixed the two).
+- Ice thickness: not in the topic; not added.
+- Links: `p:drowning`, `p:hypothermia`. Tags: where rural, woods. Unchanged.
+
+### Task 14 pages that would not open or were not used
+
+- curl to sjsu.edu (refused by the proxy; the same PDF was read with the fetch tool instead).
+- northernbush.com FM 21-76 copy: opened but extraction stopped before chapter 5; the sjsu.edu copy was used.
+- archive.org TC 21-3: needed a redirect; the redirect URL was fetched (title confirmed). Only the first 100,000 characters were read.
+- Colorado Parks and Wildlife survival shelter page (https://cpw.state.co.us/learn/Pages/SurvivalShelter.aspx): the fetched text showed no title or publisher, so it is not cited.
+- NWS cloud chart PDF: opened; gives no forecasts for the cloud signs in the topic.
+
+### Task 14 diagrams removed in this batch
+
+Figure files are unchanged in figs/; only the topic fig blocks were removed.
+- shelter-debris: label fixes (later small task). "Ridgepole at hip height" should say waist height; "Debris an arm's length thick" should say at least 3 ft. Done in Task 16b: relabelled "waist height" and "3 ft (1 m) thick"; figure restored to surv-shelter.
+- fire-sizes: label fixes (later small task). Kindling is pencil-lead to thumb thick; fuel is forearm thick (not "wrist-thick and up"). Done in Task 16b: kindling "pencil lead to thumb thick", fuel "forearm thick and up", tinder "dry, fine material"; figure restored to surv-fire.
+- fire-platform: label fixes (later small task). Drop "or flat rocks"; the base is for deep snow, not "snow or wet ground". Done in Task 16b: "Green logs only, two layers, crosswise" and "Deep snow"; figure restored to surv-fire after the build steps.
+- river: label and drawing fix (later small task). "Angle slightly downstream" and the drawn path (about 21 degrees) should show about 45 degrees downstream. Done in Task 16b: label "About 45 degrees downstream", path redrawn at 45 degrees; figure restored to surv-river-crossings.
+- shelter-tarp: needs a new drawing (waits for its pack). Drawn as an A-frame with the low end into the wind; the text is now a poncho lean-to with its back into the wind.
+- fire-ferro: needs a new drawing (waits for its pack). Drawn as the pull-back method; the text is now the Army method (striker driven down the rod).
+
+### Task 14 fix round 1 (2026-11-17)
+
+New sources opened:
+- DEC-PRIM: NYS DEC, Camping, primitive. https://dec.ny.gov/things-to-do/camping-primitive (title confirmed). Under "Rules and Guidelines > Fire Safety at Campsites": "Cutting standing trees is prohibited." "Use only dead and down wood for fires."
+- SMOKEY re-opened: https://smokeybear.com/en/prevention-how-tos/campfire-safety/how-to-maintain-and-extinguish-your-campfire, title "How to Put Out a Campfire | Smokey Bear". Step 07 (Drown, Stir, Drown, Feel): "Hover the back of your hand over the ashes to feel that the embers are cool". Under "Extinguish Your Campfire": "If it's too hot to touch, it's too hot to leave".
+- FM re-opened (same sjsu.edu PDF copy, chapter 15, p. 160, Travel; no paragraph numbers in this copy): "Normal freezing and thawing action may cause a stream level to vary as much as 2 to 2.5 meters per day." "This variance may occur any time during the day, depending on the distance from a glacier, the temperature, and the terrain." The HTML copy the reviewer used was not opened (the search returned an unofficial transcription, survivalmanual.github.io).
+- NWS-CROUCH: https://www.weather.gov/safety/lightning-crouch (for decisions-for-jordan D9 only).
+
+Statements changed:
+- surv-fire, NY rules: added "On New York state land in normal times, use only dead and down wood; cutting standing trees is prohibited." — DEC-PRIM. The wet-weather advice (standing or leaning dead wood, ATP 5-21) stays as survival advice. Corrected (review F1).
+- surv-fire, feel step: "then feel everything with your bare hand" now "then hold the back of your hand just above the ashes to feel for heat" — SMOKEY step 07 (more cautious than USFS "feel all materials with your bare hand"). Corrected (review F2).
+- surv-river-crossings, snowmelt: "can rise by as much as a foot by late afternoon" now "can rise by a foot or more by late afternoon" — NPS-MORA (as much as a foot, morning to late afternoon) and FM ch 15 p. 160 (2 to 2.5 meters a day, any time of day). Corrected (review F3).
+- surv-weather-and-lightning: "Lightning can strike as far as 10 miles from the rain." now "Lightning can strike 10 miles or more from the storm." — CDC-LTG ("Lightning can strike more than 10 miles from a storm"); matches the lightning protocol. Corrected (review F4).
+- surv-shelter, shelter-snow caption: "Snow trench with a vent hole. Sleep on a platform higher than the entrance." now "Snow trench with a vent hole. Sleep on a raised shelf: cold air sinks to the low end." — matches the drawn labels (no entrance is drawn). The text block keeps the ATP 6-26 platform rule. Corrected (review F6).
+- Recorded, not changed: lightning protocol crouch and "summer afternoons" timing, docs/decisions-for-jordan.md D9 (review F9).
+
+## Task 15: Survival topics, food, traps, game, animals (2026-11-17)
+
+Source keys (opened 2026-11-17 by web fetch from search results; title checked after each fetch). PDF text was read through the fetch tool's extraction and summary, which quotes passages; paragraph and page numbers are as the tool reported them. Army manual statements are marked; none is relied on for a safety number.
+- ATP: US Army ATP 3-50.21, Survival, September 2018, chapter 4 (characters 100,000 to 300,000 read). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- FM: US Army FM 21-76, Survival Manual (2006 copy), chapters 8 and 9 (characters 100,000 to 300,000). https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- TOOELE: Tooele County Health Department, Rule of Three. https://tooelehealth.org/rule-of-three-simple-rule-of-priorities-when-planning-for-an-emergency/
+- MDC-WH: Missouri Department of Conservation, Common Water Hemlock. https://mdc.mo.gov/discover-nature/field-guide/common-water-hemlock
+- NRCS-WH: USDA NRCS Illinois, Water Hemlock fact sheet (2006). https://www.nrcs.usda.gov/sites/default/files/2022-12/WaterHemlock.pdf
+- CU-PH: Cornell University Dept. of Animal Science, Plants Poisonous to Livestock: Poison Hemlock. https://poisonousplants.ansci.cornell.edu/conium.html
+- UA-PH: University of Arkansas Cooperative Extension, FSA2203. https://www.uaex.uada.edu/publications/pdf/FSA2203.pdf
+- MMWR-MUSH: CDC MMWR 2021;70(10), Accidental Poisonous Mushroom Ingestions. https://www.cdc.gov/mmwr/volumes/70/wr/mm7010a1.htm
+- MSU-CAT: Mississippi State University Extension, Cattail P3735-21. https://extension.msstate.edu/sites/default/files/publications/P3735-21_cattail.pdf
+- CCE-IRIS: Cornell Cooperative Extension (East Aurora), Invasives: Yellow Flag Iris (2016). https://erie.cce.cornell.edu/resources/article-1-invasive-yellow-flag-iris
+- AB-IRIS: Pale Yellow Iris weed sheet (open.alberta.ca; publisher not printed in the extracted text; Government of Alberta open data domain). https://open.alberta.ca/dataset/a4bf2d0a-6433-417f-a62e-64ec5304f4d2/resource/77ba17e0-ba72-4b3f-b499-38fedd9a572f/download/ard-weeds-pale-yellow-iris.pdf
+- MT-IRIS: Montana Department of Agriculture, Yellowflag Iris. https://prod-agr.mt.gov/Topics/N-P/Noxious-Weeds-Pages/Education/Current-Weeds/Yellowflag-Iris
+- UIUC-BRAMBLE: University of Illinois Extension, Brambles (2021). https://extension.illinois.edu/blogs/flowers-fruits-and-frass/2021-07-02-brambles-pesky-garden-weed-or-delicious-summer-treat
+- UVM-DAND: University of Vermont Extension, Dandelions: Foe or Friend? (2024). https://www.uvm.edu/extension/news/dandelions-foe-or-friend
+- UME-GREENS: University of Maine Extension, Bulletin 4060, Edible Wild Greens in Maine. https://extension.umaine.edu/publications/4060e/
+- FSIS: USDA FSIS, Safe Minimum Internal Temperature Chart (fsis.usda.gov domain; the extracted text does not print FSIS). https://www.fsis.usda.gov/es/node/3293
+- DEC-TRAP: NYS DEC, 2023-2024 New York Hunting & Trapping Guide, furbearers (extapps.dec.ny.gov; publisher inferred from the DEC domain and text). https://extapps.dec.ny.gov/docs/wildlife_pdf/huntguidefurbearers.pdf
+- DEC-FISHREG: NYS DEC, General Freshwater Fishing Regulations. https://dec.ny.gov/things-to-do/freshwater-fishing/regulations/general
+- DEC-FISHBASICS: NYS DEC, Freshwater Fishing Basics for Beginners. https://extapps.dec.ny.gov/docs/fish_marine_pdf/ifnybasics.pdf
+- DEC-CATCH: NYS DEC, Beginners' Guide to Freshwater Fishing, Care of Your Catch. https://extapps.dec.ny.gov/docs/fish_marine_pdf/gsfishing3.pdf
+- CDC-CWD: CDC, About Chronic Wasting Disease. https://www.cdc.gov/chronic-wasting/about
+- DEC-CWD: NYS DEC press release, 6 November 2026, CWD Found in Livingston County Wild Deer. https://dec.ny.gov/news/press-releases/2026/11/dec-announces-chronic-wasting-disease-found-in-livingston-county-wild-deer
+- DOH-GAME: NYS Department of Health, Harvesting, Preparing, and Eating Wild Game. https://healthweb-back.health.ny.gov/environmental/outdoors/venison_game/advice_on_eating_game.htm
+- OH-DRESS: Ohio DNR Division of Wildlife, Field Dressing Your Deer, Pub. 111. https://dam.assets.ohio.gov/image/upload/ohiodnr.gov/documents/wildlife/hunting-trapping/field%20dressing%20deer%20pub111.pdf
+- IN-DRESS: Indiana State Board of Animal Health, Deer Processing MC-1/9.03. https://www.in.gov/dnr/fish-and-wildlife/files/dressing.pdf
+- MSU-MT: Montana State University Extension, Field Care of Harvested Big Game. https://animalrangeextension.montana.edu/wildlife/hunting/field-care-of-big-game.html
+- PSU-VEN: Penn State Extension, Proper Care and Handling of Venison from Field to Table (2020). https://extension.psu.edu/proper-care-and-handling-of-venison-from-field-to-table
+- PSU-GAME: Penn State Extension, Proper Processing of Wild Game and Fish (2023; first 100,000 characters). https://extension.psu.edu/proper-processing-of-wild-game-and-fish
+- ODFW-RAB: Oregon Department of Fish and Wildlife, How to Rabbit Hunt. https://www.dfw.state.or.us/resources/hunting/docs/howtohuntrabbit.pdf
+- MDC-SQ: Missouri Department of Conservation, How to Clean a Squirrel. https://mdc.mo.gov/hunting-trapping/species/squirrel/how-clean-squirrel (fetched at the redirect target the search result's URL returned; see pages note)
+- MDC-RAB: Missouri Department of Conservation, Rabbit: Safety and Health. https://mdc.mo.gov/hunting-trapping/species/rabbit/rabbit-safety-health
+- PGC-TUL: Pennsylvania Game Commission, Tularemia. https://www.pa.gov/agencies/pgc/wildlife/wildlife-health/wildlife-diseases/tularemia.html
+- CDC-TUL: CDC, Preventing Tularemia. https://www.cdc.gov/tularemia/prevention
+- CLEM-BIRD: Clemson Cooperative Extension, Safe Handling of Wild Game Birds HGIC 3515 (2024). https://hgic.clemson.edu/factsheet/safe-handling-of-wild-game-birds/
+- CT-CH13: Hunter safety manual chapter 13, Care of Game (Outdoor Roadmap, hosted on ct.gov test domain). Opened; not cited.
+- MMWR-BEAR: CDC MMWR 2024;73(40), Trichinellosis and Undercooked Bear Meat, North Carolina. https://cdc.gov/mmwr/volumes/73/wr/pdfs/mm7340a4-H.pdf
+- CDC-TRICH: CDC, How to Prevent Trichinellosis. https://www.cdc.gov/trichinellosis/prevention/index.html
+- MDC-BEAR: Missouri Department of Conservation, Bear: Properly Cook All Game. https://mdc.mo.gov/node/254397
+- DEC-CAN: NYS DEC, Bear-Resistant Canisters. https://dec.ny.gov/nature/animals-fish-plants/black-bear/bearwise/bear-resistant-canisters
+- NEBBTC: Northeast Black Bear Technical Committee, Recommendations for Human-Black Bear Encounters (mass.gov). https://www.mass.gov/doc/what-to-do-if-you-encounter-a-black-bear/download
+- NPS-BEAR: National Park Service, Bear Attacks. https://nps.gov/articles/bearattacks.htm
+- DEC-BRM: NYS DEC, New York State Black Bear Response Manual, 3rd ed. (2011; first 100,000 characters). https://extapps.dec.ny.gov/docs/wildlife_pdf/bearsopm.pdf
+- DEC-COUGAR: NYS DEC, Eastern Cougar Sightings. https://dec.ny.gov/nature/animals-fish-plants/eastern-cougar/sightings
+- USFWS-GRIZ: USFWS press release, January 2025, Proposes Update to Grizzly Bear ESA Listing. https://fws.gov/press-release/2025-01/usfws-proposes-update-grizzly-bear-esa-listing-management
+- DEC-MOOSE: NYS Conservationist moose article (E. Stegemann, reprinted February 2006, extapps.dec.ny.gov). https://extapps.dec.ny.gov/docs/wildlife_pdf/moose1.pdf
+- DEC-MOOSE20: NYS DEC bulletin, 14 October 2020, DEC Advises Public to Be Alert for Moose in the Adirondacks. https://content.govdelivery.com/accounts/NYSDEC/bulletins/2a5d60f
+- DEC-SNAKES: Snakes of New York (Conservationist reprint, extapps.dec.ny.gov). https://extapps.dec.ny.gov/docs/administration_pdf/snakes.pdf
+- DEC-MASS: NYS DEC, Eastern Massasauga. https://dec.ny.gov/nature/animals-fish-plants/eastern-massasauga
+- NIOSH-SNAKE: CDC/NIOSH, Venomous Snakes at Work. https://www.cdc.gov/niosh/topics/snakes/
+- CDC-LYME: CDC, How Lyme Disease Spreads. https://www.cdc.gov/lyme/causes
+- CDC-TICK: CDC, Preventing Tick Bites. https://cdc.gov/ticks/prevention/index.html
+- CDC-AFTER: CDC, What to Do After a Tick Bite. https://cdc.gov/ticks/after-a-tick-bite
+- DOH-RABIES: NYS Department of Health press release, 17 June 2026, Prevent Exposure to Rabies. https://healthweb-back.health.ny.gov/press/releases/2026/2026-06-17_preventing_exposure_to_rabies.htm
+- CDC-RABUS: CDC, Rabies in the U.S. https://www.cdc.gov/rabies/location/usa/index.html
+
+### surv-food-and-wild-plants
+
+- About three weeks without food — TOOELE. Corrected ("weeks" made specific).
+- Water hemlock most toxic plant in North America; small amount kills; looks like Queen Anne's lace; poison hemlock a look-alike — MDC-WH (livestock dose; "poisoned people can suffer similarly"). Range covers New York — NRCS-WH (Quebec south to North Carolina). Human deaths from poison hemlock roots eaten as wild carrots or parsnips — CU-PH. Hard to tell from wild carrot; both most acutely toxic — UA-PH. Corrected (parsley not named as a look-alike by any source; parsnip is).
+- Warning-sign list — ATP 4-61; FM pp. 103-104. Matches (parsnip added). Not a safety rule: ATP 4-57 ("exceptions to every rule"), 4-62 ("will often help"). Warn added so no item reads as making a plant safe. Army only, as briefed; it is a list of reasons to reject a plant, never to accept one.
+- Universal Edibility Test: not in the topic. Nothing to check; not added. (ATP 4-57 to 4-60 were read: last resort only, more than 24 hours per plant part, 8-hour waits, cooked-edible does not mean raw-edible; smokers may not taste alkaloids.)
+- Mushrooms — MMWR-MUSH ("Wild mushrooms should not be consumed unless identified by an expert"; poisonous resemble nonpoisonous; cooking does not remove toxins); ATP (no field test). Corrected; "almost no calories" removed-unsourced. Nothing weaker than expert identification remains.
+- `plant-warnings` figure removed (standing decision: no plant drawings).
+- Cattail edible parts — MSU-CAT (Mississippi; Typha species also grow in the Northeast). Look-alike yellow flag iris: toxic, prohibited invasive in New York on pond, lake and stream shores — CCE-IRIS; confused with cattail when not in bloom — AB-IRIS; round vs flat leaf bases — MT-IRIS. Corrected. No Northeast extension page that names the iris look-alike was found; the iris facts for New York come from Cornell.
+- Dandelion — UVM-DAND and UME-GREENS confirm edibility; neither names look-alikes. Removed (plant rule). Open question D11.
+- Acorns — no extension, state or botanical source found (searches returned almanacs and blogs). Removed-unsourced. D11.
+- Blackberries and raspberries; no poisonous look-alikes — UIUC-BRAMBLE (Illinois, not Northeast; the brief allows a state extension). Corrected.
+- Insects — ATP 4-133, 4-23; FM pp. 72-73. Corrected (spiders, biting/stinging insects added; barbed legs). Army only.
+- Freshwater fish — ATP 4-148 (cook to kill parasites); FSIS 145°F. Corrected. ATP 4-147 "no poisonous freshwater fish" not used (Army only; contaminants).
+- Roads, pesticides, road salt; wash — UVM-DAND; UME-GREENS. Added.
+- Links: `p:poisoning`, `p:poison-plants`, `p:vomiting-diarrhea`. Tags: rural, woods. Unchanged.
+
+### surv-traps-and-fishing
+
+- New York rules — DEC-TRAP (licence; Southern Zone 24 hours; Northern Zone 24 or 48 hours by WMU and trap; "Snares may not be used for trapping"; body-gripping traps over 7½ inches never on land; water sets only in open seasons); DEC-FISHREG (immediate attendance of lines; minnow traps only for baitfish); DEC-FISHBASICS (licence from 16). Corrected. "Other states have their own rules": spec 6.1 requirement, not a sourced fact. An eRegulations copy of the same guide was opened first and not cited (third party).
+- Placement, channelization — FM pp. 78-79; ATP 4-15, 4-89, 4-90, 4-93. Corrected. Army only (mechanics).
+- Number of traps — ATP 4-86; FM p. 78. Corrected.
+- Sign and scent — FM p. 79; ATP 4-91. Corrected. Check interval: Army manuals give none (ATP 4-87); New York rule used.
+- Simple snare — FM p. 80; ATP 4-102. Corrected; fist size and 3 inches removed-unsourced. `trap-snare` removed.
+- Squirrel pole — FM p. 82; ATP 4-102. Matches. `trap-squirrel` kept.
+- Figure-4 — FM pp. 84-85; ATP 4-103. Corrected. The "keep your hands out from under the weight" caution is unsourced but only adds caution; kept and flagged. `trap-fig4` kept.
+- Gorge — FM p. 89; ATP 4-153. Corrected.
+- Fish trap — FM pp. 91-92; ATP 4-158. Corrected. `fishing` figure removed (drew a stake funnel).
+- Set lines overnight — removed-unsourced; illegal in New York in normal times (DEC-FISHREG).
+- Feeding — FM p. 75; ATP 4-146. Corrected (dawn and dusk unsourced).
+- Nothing aimed at people. Tags: rural, woods. Unchanged.
+
+### surv-field-dressing-game
+
+- Sick, strange-acting or found-dead animals; gloves; no kitchen knives — CDC-CWD; DOH-GAME. Added.
+- CWD in New York — DEC-CWD (Livingston County announced 6 November 2026; first wild case since 2005 Oneida County; high-risk parts brain, spinal cord, spleen, eyes); CDC-CWD (organs, especially brain or spine; test; never eat positive). Added. Lymph nodes: in no opened source, so not named.
+- Rabies — CDC-CWD and DOH-GAME (sick or strange-acting); link `p:animal-bite`.
+- Confirm dead — OH-DRESS; IN-DRESS. Corrected. Tag, gloves — OH-DRESS; DOH-GAME. Dress promptly — PSU-VEN; IN-DRESS.
+- Position — IN-DRESS (slight slope, braced). Corrected; head uphill unsourced. `dress-deer` removed.
+- Belly cut — MSU-MT (blade up, pelvis toward breastbone, two fingers); IN-DRESS; PSU-VEN (paunch and intestines carry foodborne bacteria). Corrected.
+- Anus and bladder — MSU-MT; OH-DRESS. Corrected. Diaphragm, windpipe, sharp objects — OH-DRESS; MSU-MT. Corrected.
+- Organs out, trim soiled meat — IN-DRESS; heart and liver — OH-DRESS; healthy liver — FM p. 96 (Army only). Corrected.
+- Cooling — OH-DRESS (prop, shade); IN-DRESS (40°F or less); MSU-MT (40°F within 24 hours; skin if above freezing the first night); DOH-GAME (below 45°F); PSU-VEN (35-40°F). Corrected to the colder 40°F within 24 hours. "off the ground" not in a source; removed.
+- Rabbit — ODFW-RAB. Squirrel — MDC-SQ. Corrected.
+- Tularemia — CDC-TUL (gloves, rabbits and rodents, cook thoroughly); MDC-RAB (numerous pinhead white lesions, discard; 165°F); ODFW-RAB (light spotting, do not eat). PGC-TUL says pale spots and "at least 135° F": the lower temperature is not used. Corrected.
+- Fish — DEC-CATCH. Corrected. `dress-fish` kept.
+- Birds — CLEM-BIRD. Corrected.
+- Cooking — DOH-GAME (165°F thickest part, game and birds); MMWR-BEAR (wild game 165°F kills Trichinella; freezing might not be sufficient); CDC-TRICH (bear, wild boar; freeze-resistant worms; thermometer); MDC-BEAR (160°F; freezing, smoking, curing do not kill all); PSU-VEN (venison whole cuts 145°F, ground 160°F); PSU-GAME (game bird breast 165°F; says freezing three weeks inactivates trichinella, which CDC says is not reliable for wild game); ATP 4-25 (180°F, Army). FSIS (fish 145°F). 165°F used (CDC, NYS DOH). Open question D10.
+- Lead — DOH-GAME. Added.
+- Tags: rural, woods. Unchanged.
+
+### surv-dangerous-animals
+
+- No grizzly or mountain lion population in the Northeast (confirms the step-1 deletions) — DEC-COUGAR ("do not have a native, self sustaining population in New York State"; absent since the late 1800s); USFWS-GRIZ (lower-48 grizzlies in Idaho, Montana, Washington and Wyoming). Recorded; "only bear is the black bear" added.
+- Canister rule — DEC-CAN, quoted exactly; scented items; 100 feet. Corrected.
+- Bear spray — NEBBTC. Corrected (D12).
+- Never run, don't climb, calm voice, back away — NEBBTC; DEC-BRM; NPS-BEAR. Corrected ("stand your ground" removed).
+- Fight back, don't play dead, face — NPS-BEAR; NEBBTC; DEC-BRM. Corrected; tent line removed.
+- Moose — DEC-MOOSE (unpredictable, little warning, protective cows, bulls in rut charge, northeastern New York, watch from a distance); DEC-MOOSE20 (Adirondacks and surrounding areas; do not approach; early fall breeding). Added. The 2006 population figure is not used. New England: no opened source; not named.
+- Three venomous snakes; habitats; massasauga at two sites — DEC-SNAKES; DEC-MASS. Added. Leave alone, pit — DEC-SNAKES. Prevention — NIOSH-SNAKE. Corrected ("step onto logs and rocks" contradicted NIOSH's advice not to climb rocks or woodpiles).
+- If bitten — NIOSH-SNAKE (rings and watches, keep calm, no tourniquet, cutting, sucking, ice). Matches the snakebite protocol; "and still" dropped (NIOSH says lie or sit comfortably; the protocol covers keeping still). Link `p:snakebite`.
+- Ticks — CDC-LYME (blacklegged tick in the Northeast; poppy-seed nymphs; more than 24 hours); CDC-TICK (check after outdoors; body areas; clothing, packs, pets); CDC-AFTER (tweezers; clean bite and hands; rash or fever within several weeks). Corrected ("daily" not in CDC). `tick` figure kept (its labels match CDC-AFTER). Link `p:tick`.
+- Rabies — DOH-RABIES (raccoons, skunks, bats, foxes, free-roaming cats; avoid unusual or aggressive animals; avoid all contact with bats; waking with a bat); CDC-RABUS (bats, raccoons, skunks, foxes; bat bites smaller than a pencil eraser). Added. Link `p:animal-bite`.
+- Coyotes: not in the topic; not added.
+- Tags: rural, woods. Unchanged (ticks and rabies also occur in towns: CDC says check after your own backyard; noted for the reviewer).
+
+### Task 15 pages that would not open or were not used
+
+- ATP 3-50.21 characters 0 to 100,000 (front matter and chapters 1-2) gave no food text; chapter 4 read from 100,000 to 300,000.
+- FM 21-76 characters 0 to 100,000 (to page 34) had no chapter 8; read from 100,000.
+- One fetch waited for approval (flagged by the controller); it was abandoned. The squirrel page was fetched at the redirect target that the search-result URL (huntfish.mdc.mo.gov) returned; it opened, title confirmed (How to Clean a Squirrel, Missouri Department of Conservation).
+- Cornell Botanic Gardens water hemlock result (cornellbotanicgardens.org/?p=22547): opened a generic page with no water hemlock text; not used.
+- CDC Animals and Rabies (cdc.gov/rabies/animals/): returned only metadata; not used.
+- Cornell Cooperative Extension Warren County, Wild Edibles: page text has no plant facts (details are in linked slide PDFs not opened).
+- MSU Extension Cattail (bluedynamo.msu.edu): no edibility or look-alike text.
+- Utah Poison Control water hemlock page: no publisher printed; western species; not used.
+- eRegulations furbearer page: third party; replaced by the DEC guide PDF.
+- CT hunter safety chapter 13 (Outdoor Roadmap): opened; not cited (commercial course text).
+
+### Task 15 fix round 1 (2026-11-17)
+
+New sources opened (from search results; titles confirmed):
+- OLEI-MASS: Oneida Lake Education Initiative (NY Sea Grant site), Massasauga Rattlesnake. https://seagrant.sunysb.edu/OLI/olei-rattlesnake.htm ("Found in only two New York State locations including Cicero Swamp"; "one is located in Onondaga County's Cicero Swamp"). NYS DEC's Cicero Swamp WMA page (https://dec.ny.gov/places/cicero-swamp-wildlife-management-area) was also opened: it places the WMA in Onondaga County but does not mention the massasauga.
+- CBG-IRIS: Cornell Botanic Gardens, Wild Iris (Iris versicolor). https://cornellbotanicgardens.org/plant/wild-iris ("Poisonous: Yes"; irisin in rhizomes; moist to wet; no publisher printed in the extracted text; cornellbotanicgardens.org domain).
+- NCSU-IRIS: NC State Extension Plant Toolbox, Iris versicolor. https://plants.ces.ncsu.edu/plants/iris-versicolor (roots, sap, seeds poisonous; native south from Nova Scotia through the northeastern US; pond margins, wet meadows, marshes).
+- FSIS-OTHER: USDA, Roasting Those "Other" Holiday Meats (fsis.usda.gov; the page names USDA, not FSIS). https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/meat/roasting-those-other-holiday-meats (venison roasts 160 °F; whole game birds 165 °F).
+- Re-opened: NEBBTC (curious, charged, following, attack cases), NPS-BEAR (bluff charge: hold your ground, do not run), DOH-GAME (rabies, CWD parts, cooking), ATP 4-136 (insects).
+
+Statements changed:
+- F1 surv-dangerous-animals, bears: added "If a bear charges, stand your ground, raise your arms, keep talking calmly and use bear spray if you have it; if it keeps following you, stand your ground, look bigger, shout and bang a stick on the ground." — NEBBTC ("If charged, stand your ground, talk to the bear in a calm voice and use bear pepper spray when available"; "Make yourself look bigger by putting your arms above your head"; following: "stand your ground, make yourself look bigger, shout at the bear, threaten the bear with whatever is at hand (bang a stick on the ground, clap your hands)"); NPS-BEAR bluff charge ("hold your ground and stay calm"; "Do NOT run during a bluff charge"). The back-away sentence stays for a curious bear (NEBBTC case a).
+- F2 surv-food-and-wild-plants, cattail look-alikes: now names yellow flag iris and the native blue flag iris, both poisonous (CCE-IRIS; CBG-IRIS; NCSU-IRIS). "when it is not in flower" kept for yellow flag iris only: AB-IRIS states "Iris pseudacorus especially when not in bloom might be confused with: Common Cattail". No opened source says the same of blue flag iris, so the sentence names yellow flag iris. Leaf-base sentence kept (MT-IRIS, stated for yellowflag iris). "in New York" kept only for yellow flag iris (CCE-IRIS); blue flag iris is placed "in the Northeast" (NCSU-IRIS range).
+- F3 surv-dangerous-animals, snakes: appended "One of them is Cicero Swamp in Onondaga County." — OLEI-MASS.
+- F4 surv-dangerous-animals: where tags now town, rural, woods (ticks and rabies apply in town: CDC-TICK says check after your own backyard; DOH-RABIES covers unusual animals on your property).
+- F5 surv-dangerous-animals, snakebite: "keep calm" now "keep calm and still", matching the snakebite protocol it links to.
+- F6 surv-field-dressing-game: added "Rabies is occasionally found in New York deer. It spreads through nervous tissue and saliva: avoid handling an animal that may be rabid, and never eat its meat." — DOH-GAME ("only found occasionally in New York State deer"; "particularly nervous tissue and saliva"; "Avoid handling rabid animals and do not eat meat from infected game"). Lymph nodes added to the parts to avoid — DOH-GAME (CWD list: brain, spinal cord and other nervous tissue, spleen, pancreas, eyes, tonsils, lymph nodes). Added "Cooking does not remove the risk of chronic wasting disease." — DOH-GAME verbatim.
+- F8 surv-food-and-wild-plants, insects: "Remove wings and barbed legs" now "Remove legs, wings and heads" — ATP 4-136 ("remove their legs, wings, and heads before eating them"). FM p. 73 says wings and barbed legs; ATP (newer) used.
+- F11 docs/decisions-for-jordan.md D10: CDC MMWR now credited with wild game meat only; birds credited to NYS DOH and USDA FSIS; FSIS-OTHER figures added (venison roasts 160 °F, whole game birds 165 °F).
+
+Diagrams removed in this batch (record; the trap-snare and dress-deer fixes are done, Task 16b):
+- plant-warnings: standing rule (no plant drawings); stays out.
+- trap-snare: label-only fix possible. Delete the "≈ 3 in" dimension marker and label; relabel "Loop about fist size" as "Loop big enough to pass over its head"; fix the alt text to match. A later small task makes the change. Done in Task 16b: "3 in" marker and label deleted, loop relabelled "big enough to slip over the animal's head" (the topic's own wording), alt text fixed; figure restored to surv-traps-and-fishing.
+- dress-deer: label-only fix possible. Remove the "Head uphill" arrow and label; "breastbone to pelvis" should read "pelvis to breastbone". A later small task makes the change. Done in Task 16b: "Head uphill" arrow and label removed, "pelvis to breastbone"; figure restored to surv-field-dressing-game.
+- fishing: the right half draws a stake funnel where the text now describes a lashed-stick basket trap; needs a new drawing, waits for the food pack.
+
+F7 (record): the trapping check intervals (Southern Zone 24 hours; Northern Zone 24 or 48 hours by WMU and trap) come from the 2023-2024 NYS DEC Hunting & Trapping Guide. Recheck against the current edition in the food pack.
+
+## Task 16: Survival topics, navigation, signals, knots, ten essentials (2026-11-17)
+
+Source keys (opened 2026-11-17 by web fetch from search results; title checked after each fetch). PDF text was read through the fetch tool's extraction and summary, which quotes short passages and paraphrases the rest; paragraph and page numbers are as the tool reported them. Statements that rest on an Army manual alone are marked "Army only"; none of them is a safety number.
+- TC: US Army TC 3-25.26, Map Reading and Land Navigation, November 2013 (characters 100,000 to 200,000 read). https://www.armywriter.com/board/references/TC3-25x26-Part1.pdf (armywriter.com copy; title page and date confirmed)
+- FM: US Army FM 21-76, Survival Manual (2006 PDF copy), chapters 18 and 19 (characters 400,000 to 500,000). https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- ATP: US Army ATP 3-50.21, Survival, September 2018, chapter 7 and appendix A (characters 300,000 to 500,000). https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- STARDATE: StarDate (University of Texas McDonald Observatory), "Directions", 18 September 2021. https://legacy.stardate.org/print/20362
+- UCD: "Outdoor Lab 1 - A First Look at the Stars" (lage.physics.ucdavis.edu; no publisher printed). https://lage.physics.ucdavis.edu/support_files/obs_astro/labs/outdoor_1.pdf (Polaris within 1 degree of the pole; finger and fist widths. Used only as a cross-check.)
+- OIE: Orienteering Ireland, Skills and Techniques in Orienteering. https://www.orienteering.ie/skills-and-techniques-in-orienteering/
+- UTAH: Be Ready Utah (State of Utah), Emergency Signaling. https://beready.utah.gov/?p=4067
+- IOWA: Iowa Hunter Safety Course, Signaling for Help (hunter-ed.com, Kalkomey, "official state-delegated provider", produced with the Iowa DNR). https://www.hunter-ed.com/iowa/studyGuide/Signaling-for-Help/202013_13141/
+- AIM: FAA Aeronautical Information Manual 6-2-6, Search and Rescue (faa.gov page; the ground-air code is only an image there). https://www.faa.gov/air_traffic/publications/atpubs/aim/aim0602.html
+- AIM-TXT: text copy of the same AIM section (faraim.org, third party): message labels, "Symbols should be at least 10 feet high or larger", contrast, fabric/wood/stones, tramped snow. https://www.faraim.org/faa/aim/500/pdf.txt
+- AIP: FAA AIP GEN 3.6, Search and Rescue (faa.gov): code shown only as figures. https://www.faa.gov/air_traffic/publications/atpubs/aip_html/part1_gen_section_3.6.html
+- AIRCAV: aircav.com, Codes and Signals, ch. 19 p. 4 (third party; reproduces FM 21-76 Figure 19-6 with the same figure number and the same 1 m by 6 m size text): V "Require assistance", X "Require medical assistance". https://aircav.com/survival/asch19/asch19p04.html
+- AK: Animated Knots by Grog (animatedknots.com): Bowline Knot (ABOK #1010) https://www.animatedknots.com/bowline-knot ; Clove Hitch (Rope-End) https://www.animatedknots.com/clove-hitch-knot-rope-end ; Midshipman's Hitch (alternate name Taut Line Hitch) https://www.animatedknots.com/midshipmans-hitch-knot ; Trucker's Hitch https://www.animatedknots.com/truckers-hitch-knot ; Square Knot (ABOK #1402) https://animatedknots.com/square-knot ; Sheet Bend https://www.animatedknots.com/sheet-bend-knot
+- SL: Scout Life (Scouting America), How to Tie the 7 Basic Scout Knots. https://scoutlife.org/outdoors/176401/how-to-tie-the-7-basic-scout-knots/
+- SM: Scouting magazine (Scouting America), How to tie 10 essential Scouting knots (C. Jacobson; web post 10 April 2017). https://scoutingmagazine.org/2017/04/tie-essential-scouting-knots/
+- WEB: Scouting America filestore, Webelos Let's Camp requirement 5, Bowline Knot (no publisher printed; scouting.org domain). https://filestore.scouting.org/filestore/cubscouts/adventure-resources/webelos/Webelos%20Let%27s%20Camp%205%20Bowline%20Knot.pdf
+- PION: Scout Pioneering, Knot-Tying Terminology (quotes the BSA Pioneering merit badge pamphlet, 1993/1998). https://scoutpioneering.com/2013/02/11/knot-tying-terminology/ ("An overhand loop is formed when a loop is made so that the running end of the rope is on top of the standing part.")
+- MTN: The Mountaineers, "Ten Essentials: The Classic List" and Ten Essential Systems (Olympia Branch handout citing Freedom of the Hills, 9th ed., rev. 2017). https://www.mountaineers.org/locations-lodges/olympia-branch/events/hiking-committee-meeting-2020-01-20-2022-12-05-2023-02-07/ten-essentials.pdf
+- NPS-10: National Park Service, Ten Essentials. https://www.nps.gov/articles/10essentials.htm
+- DEC-10: NYS DEC press release, 27 June 2024, DEC Reminds Visitors to Focus on Safety as Summer Hiking Season Begins (10 Hiking Essentials). https://dec.ny.gov/news/press-releases/2024/6/dec-reminds-visitors-to-focus-on-safety-as-summer-hiking-season-begins
+- DEC-CARD: Hike Smart NY Ten Essentials card (extapps.dec.ny.gov; OCR text, title and publisher not printed). https://extapps.dec.ny.gov/docs/lands_forests_pdf/hikesmarttenessentials.pdf
+
+### surv-navigation-without-a-compass
+
+- Heading "Shadow stick (works in both hemispheres)" now "Shadow stick" (the Southern Hemisphere text was deleted at conversion). FM p. 194 and TC 8-18 say the first mark is west "everywhere on earth"; the heading no longer needs to say so.
+- Stick upright on level ground, clear shadow, mark the tip — FM p. 194; ATP 7-22. Matches; "where it casts a clear shadow" added from FM.
+- First mark is west — FM p. 194; TC 8-17, 8-18. Added to step 1 (it was only in the figure).
+- Wait at least 15 minutes — FM p. 194 and TC 8-17: "10 to 15 minutes until the shadow tip moves a few" centimeters/inches. Matches (15 minutes is the top of the range; kept so the drawn label "15+ min later" agrees); "until the tip has moved a few inches" added (TC).
+- Roughly west to east; first mark left, second right, facing north — FM p. 194 ("approximate east-west line"; "Stand with the first mark (west) to your left"). Matches.
+- `nav-shadow` caption "The shadow tip moves east as the sun moves west. Most accurate around midday." — "most accurate around midday": no opened source (TC calls the method "simple and accurate"; FM says the arc method is more accurate). Removed-unsourced. New caption from FM/TC: first mark always west, the line is only approximate. Figure kept: stick, first mark W, second mark E, north perpendicular on the side away from the stick, all match FM p. 194.
+- Accuracy limits at high latitudes or near sunrise and sunset: no opened source states them. Nothing added (the Northeast is a mid-latitude region).
+- Watch method: hour hand at the sun, south halfway to 12, 1 o'clock on daylight saving time — FM p. 195 ("hold the watch horizontal"); TC 8-19. Matches; "hold the watch flat" added (FM).
+- `nav-watch` caption "A rough method; least reliable near midday and close to the equator." — "close to the equator": FM p. 195 ("the further you are from the equator, the more accurate"); TC 8-21 ("can be in error, especially in the lower latitudes, and may cause circling"). "near midday": no opened source. Corrected to TC/FM. Figure kept: hour hand at 4 o'clock toward the sun, south line at 2 o'clock bisecting hour hand and 12, north opposite; checked against the drawing code (hour hand at 120 degrees, south line at 60 degrees). The side note "Daylight saving: use 1 o'clock" matches the text.
+- Pointer stars about five times the gap — FM p. 196 ("Extend this line about five times the distance between the pointer stars"); TC 8-24; STARDATE (Merak and Dubhe at the outer edge of the bowl). Corrected "at the end of the Big Dipper's cup" to "at the outer edge" (FM "outer lip", STARDATE "outer edge").
+- Within about a degree of true north — TC 8-24 ("less than 1 degree off the true north"); UCD ("within 1° of the North celestial pole"). Corrected to "less than a degree".
+- Height above the horizon equals latitude — STARDATE; ATP 7-33/7-35. Matches.
+- `nav-polaris` caption "turns around Polaris through the night, but the pointers always point to it" — FM p. 196 (Big Dipper and Cassiopeia "rotate counterclockwise around Polaris"; the outer-lip stars "point to the North Star"). Reworded without "always". Figure kept: drawing code checked; the arrow runs from the inner bowl-edge star (150,165) through the outer bowl-edge star (178,152) and on to Polaris at 5 times that gap (318,87); the handle is on the other side of the bowl, as in STARDATE's description.
+- Cassiopeia: not in the topic; FM p. 197 and ATP 7-36 cover it. Not added (do not expand).
+- Moon: rises before sunset, lit side west; after midnight, lit side east — FM p. 196. Matches. "Use this only as a rough check" added as a caution (brief: state the roughness); no source gives an accuracy.
+- Moss and other folklore: not in the topic. FM p. 198 and ATP 7-44 say moss is not a reliable sign of north. Nothing to remove.
+- Pace count "count each time your left foot lands. Most adults take 60 to 70 per 100 m" — ATP 7-83 (a pace is "the distance covered every time the same foot touches the ground"; pace a measured course many times and average; slopes, sand, gravel, mud, snow change it; pace counts give only approximate distances). TC 5-20 instead counts every step (about 30 inches) with an example of 120 per 100 m. No opened source gives "60 to 70". Removed-unsourced; replaced by ATP's method. The ATP definition (same foot) is the one the topic already used. Mountaineering Ireland's pacing page was refused by the site (robots).
+- Landmark to landmark — ATP 7-54, 7-55 (steering marks, the most distant object on the line of march, chosen as you move). Matches; made specific.
+- Handrails and catching features — OIE ("linear features we follow"; "an obvious feature beyond the control that will let you know that you have gone too far"). Streams, ridges and roads as linear features — ATP 7-58. Matches.
+- Aim off — OIE; ATP 7-58 (about 10 degrees, to a road, ridge or stream, turn in the direction of the offset); TC 8-15 (ten degrees adequate). Matches; "about 10 degrees" added.
+- `nav-aimoff` caption "Aiming straight at a point usually misses it" — no source says "usually". ATP 7-52 (errors compound over distance) and 7-59 (better than an aimless search). Corrected. Figure kept: aim to one side, hit the river, turn toward camp, matches ATP 7-58 and OIE.
+- Daylight left, "each finger ... is roughly 15 minutes" — search found only blogs and commercial pages; no authoritative source. Removed-unsourced, with the `nav-hand` figure. (UCD and STARDATE give finger and fist widths in degrees, not minutes of daylight; working minutes out from degrees would be arithmetic the rules do not allow, and the sun's slanting path in New York makes a fixed per-finger time unreliable.) Replaced by a link to the app's Daylight and moon tool (`u:daylight`), which computes sunset and last light on the phone. The caption "Stop and make camp while you still have light to work with" went with the figure.
+- Magnetic declination: the topic gives no figure. Nothing to check; NOAA not needed.
+- Tags: where rural, woods. Unchanged.
+
+### surv-signal-for-rescue
+
+- Three of anything — IOWA ("The international emergency sign for distress is three of any signal": three blasts on a whistle, three flashes with a mirror, three fires evenly spaced); UTAH (a repeated series of three). Matches. Six blasts: no opened US source mentions it; US sources say three. Not added.
+- Three fires in a triangle — FM p. 201 ("Build three fires in a triangle (the international distress signal) or in a straight line"); UTAH. Matches.
+- Repeat at intervals — FM p. 205 (three shots "at distinct intervals"); UTAH (repeat every one to two minutes, for tapping). Matches.
+- Ground-to-air V and X — AIRCAV reproducing FM Figure 19-6 (V "Require assistance", X "Require medical assistance"); AIM-TXT (the same two message labels exist in the FAA code; the symbols are images). The faa.gov AIM and AIP pages and the FM PDF show the symbols only as images, so the letter-to-meaning pairing rests on a third-party copy of the Army figure. Kept; flagged for the reviewer.
+- Size — FM p. 206 ("a minimum of 1 meter wide and 6 meters long"); AIM-TXT ("at least 10 feet high"). FM is the larger; added "at least 6 m (about 20 ft) long and 1 m (about 3 ft) wide" (conversions only). Open area — FM p. 206. Contrast — FM p. 206; AIM-TXT. Matches.
+- `signal-ground` caption "logs, rocks, clothing or trampled snow" — AIM-TXT (fabric strips, wood, stones; tramped snow); UTAH (bright colored items, contrasting rocks, dirt or branches). Corrected ("clothing" to "bright fabric", "logs" to "branches"). Figure kept: V = help, X = medical, big and high contrast, three fires in a triangle; all match.
+- Mirror "or your phone screen" — no opened source. Removed-unsourced; replaced with FM p. 203 ("polish your canteen cup, your belt buckle, or a similar object"). V of two fingers — UTAH ("Form a 'V' with two fingers as a sight, aim the reflected light through it at the target, and flash in threes"). Matches; "flash in threes" added (UTAH). Added (safety): don't keep the beam on the cockpit for more than a few seconds, it may blind the pilot — FM p. 203. FM's "do not flash rapidly ... enemy fire" was not added (military).
+- `signal-mirror` caption "Tilt the mirror until the spot of light falls on your fingers, then it's hitting the aircraft too" — the spot-on-fingers rule is in no opened text (FM shows the aiming only in figures 19-4 and 19-5, not extracted). Corrected to UTAH's wording. Figure kept: sun, mirror, beam through a V of two fingers to the aircraft, matches UTAH. The label "Mirror under your eye" is not in an opened text source but does not contradict one.
+- Hostile setting: the topic was silent. Added one sentence — FM ch. 19 ("Keep in mind that signals to your friends may alert the enemy of your presence and location"). No tactics added.
+- Phone, 911 text, PLB: not in the topic; nothing added (UTAH has plain 911 advice if a later pack wants it). No dial control.
+- Smoke colour, bright clothing: not in the topic; not added (FM p. 201 and NPS-10 have them for a later pack).
+- Link `u:sos` (the app's SOS light) added after the hostile-setting sentence; the tool carries its own warning that a flashing screen shows your position.
+- Tags: none. Unchanged.
+
+### surv-knots
+
+Standing decision confirmed: the clove hitch, taut-line hitch, square knot and sheet bend sections have no `fig` block (text only), before and after this check. Diagrams exist only for the bowline and the trucker's hitch.
+
+- Added warn (brief): these are camp knots; the topic does not teach knots for climbing, rappelling or holding a person's weight — AK bowline ("A Bowline should be used with great care when climbing"; "too easily tied incorrectly and can also shake loose"; a safety knot is essential) and every AK page's disclaimer. SL says a bowline is "just what you want for tying a rope around your waist or around someone requiring rescue"; the more cautious source is used (open question D14).
+- Bowline heading "won't slip or jam" — AK ("Under load, it does not slip or bind"; but unloaded "it can very readily work its way untied"). Corrected to "doesn't slip under load".
+- Bowline steps — ATP A-13; WEB (small overhand loop in the standing part; end up through, around behind the standing part, back down); SL; AK (steps in the same order). Matches. "with the end side on top" added: WEB and SL say "overhand loop", and PION defines an overhand loop as the running end on top of the standing part; the figure already shows it. Rabbit saying — SM ("goes up through the hole, around the tree, then back down the hole"). Matches.
+- `knot-bowline` checked against the drawing code (figs/figs.py, `S`, `BIG`, `UP`, `COLLAR` with rope crossing flags) and a rendered image: (1) small loop in the standing part with the end side crossing over (+1 at the crossing); (2) the end comes up under the bottom of the small loop and over its top (-1 then +2), i.e. up through from below; (3) it goes behind the standing part (-2) and back down over the top and under the bottom of the small loop, finishing inside the big loop. This is the AK/ATP/WEB sequence and ABOK #1010. Kept. Caption "Leave a tail at least a hand's width long, and pull all four strands tight to set it" — no opened source (AK quotes a rule of thumb of 12 times the circumference, "rarely seen in practice"; SM: "allow a long working end"). Removed-unsourced; new caption from AK (tie it before it takes a load; unloaded it can work loose).
+- Clove hitch steps — AK ("Pass the end of the rope around the pole. Continue over the standing end and around the pole a second time. Thread the end under itself"); SL (X shape, tuck under the X). Matches. Added "It can slip, so use it only for a temporary hold" — AK ("it slips and can also bind"; "should be deeply distrusted when used by itself"; "a temporary hold").
+- Taut-line hitch steps — SL (around the stake; turns around the standing part inside the loop; then a half hitch outside the loop). Matches. AK (Midshipman's Hitch, alternate name Taut Line Hitch): slides up and down, holds when tightened; on Spectra, Dyneema and polypropylene "assume that a Midshipman's Hitch will just slide". Added "On slippery synthetic cord it may slide."
+- Trucker's hitch — AK (fixed loop in the standing part; tail round the hook below and through the loop; two half hitches below the loop); SM (secure with half hitches). Corrected: "around the anchor" now "around a second anchor such as a hook or stake" (the drawing labels the far end "Anchor" and the turn point a hook), "back up through", "below the loop". `knot-trucker` kept: anchor, fixed loop in the line, down around the hook, back up through the loop, pull down and tie off; matches AK. Caption "The loop works like a pulley, multiplying your pull" — AK: theoretical 3:1 but "rope is running over rope with considerable friction", real perhaps 1.6:1. Corrected.
+- Square knot steps — SL (right end over and under the left, then left end over and under the right). Matches. Heading "join two ends of the same size" and "Not for critical loads" — AK ("more lives lost as a result of using a Square Knot as a bend ... than from the failure of any other half dozen knots combined"; "Never use it for critical loads"; a stack of square knots "can capsize and pull undone"); SL and SM ("should not be used to hold a heavy load"). ATP A-8 and SL also give joining two ropes as a use; the more cautious source is used (D14). Corrected: heading now "bandages and bundles" (SL: bandages and packages), warn never to join two ropes that will take a load.
+- Sheet bend steps — AK (bight in the thicker rope; thinner rope through the bight and behind the tail and standing ends; tuck under itself); SL (bight in the thicker rope). Matches. Added: both short ends on the same side (AK; SL, SM "otherwise, the knot might be unreliable") and leave them long (AK: "For critical loads the ends must be left much longer"). ATP A-10: the single sheet bend may loosen when tension is released (not added; covered by "leave them long" and the warn).
+- Tags: none. Unchanged.
+
+### surv-ten-essentials and the ten-essentials checklist
+
+The app follows The Mountaineers' Ten Essential Systems (MTN): the topic's ten items were already that list. The topic now says so and names NYS DEC's additions.
+
+- Every trip, even a short one — DEC-CARD ("Carry these essentials on all hikes"); MTN (shelter "carried at all times"). Matches.
+- Navigation "map, compass, and a charged phone or GPS" — MTN (map, altimeter, compass, GPS device: phone with GPS app or dedicated GPS; PLB or satellite communicator; extra batteries or battery pack); NPS-10 (paper map as a backup; "Pack an extra battery for your phone"); DEC-10 (map, compass, GPS, extra batteries). Corrected to "map and compass, plus a phone with a GPS app or a GPS unit, and a spare battery". MTN's PLB or satellite communicator not added (do not expand); noted for the reviewer.
+- Headlamp with spare batteries — MTN; NPS-10 ("Headlamps are the recommended light source"). Matches.
+- Sun protection — NPS-10 (sunglasses, sunscreen, hats); MTN; DEC-10. Matches.
+- First aid kit "including a tourniquet" — MTN, NPS-10 and DEC-10 do not name a tourniquet; search found only retail and blog pages. Removed-unsourced. Open question D13.
+- Knife or multi-tool — MTN (knife plus repair kit); NPS-10 (knife, multi-tool). Matches.
+- Fire "lighter, ferro rod or waterproof matches, plus tinder" — MTN (matches, lighter and tinder or stove); NPS-10 (waterproof matches or lighter, fire starters); DEC-10. Ferro rod is in none of the lists. Corrected to "waterproof matches or a lighter, and fire starter". (The Fire topic covers the ferro rod.)
+- Emergency shelter — NPS-10 (tent, tarp, bivy sack or emergency space blanket); MTN. Matches.
+- Extra food, a day's worth — NPS-10 ("Pack an extra day's supply of food"). Matches.
+- Extra water and a way to treat more — MTN ("beyond minimum expectation or the means to purify"); NPS-10 (identify water you could treat). Matches (the topic keeps both, the more cautious reading of MTN's "or"). No treatment detail is given, so nothing to reconcile with surv-make-water-safe. DEC-10's "at least 2 liters per person" not added (do not expand).
+- Extra layers, insulation and rain gear — NPS-10 (rain shell, jacket, hat, gloves); DEC-10 (insulation/rain gear); MTN (extra clothes). Matches.
+- Tell someone your route — NPS-10; DEC-10. Matches, reworded to the sources ("where you're going and when you'll be back").
+- Whistle "three blasts carries farther than shouting" — UTAH ("A whistle carries farther than a voice and takes less effort"); IOWA (three blasts is a distress signal); DEC-10 (whistle in the emergency kit). Corrected wording: the source compares the whistle with the voice, not three blasts with shouting.
+- `kit` figure: ten icons labelled Navigation, Headlamp, Sun, First aid, Knife, Fire, Shelter, Food, Water, Layers; matches the list. Kept. Caption "Ten things that turn a bad night out into a survivable one" — no source. Removed-unsourced; new caption names the list it follows.
+- Link `c:ten-essentials` kept.
+- Checklist: item ids unchanged (saved ticks keep working). Each item's text is now the topic's list line without its full stop, so the items match the topic one to one and read on their own; the notes (capitalised copies, and the "Extra water" / "And a way to treat more." split) are gone. Summary now the topic's own summary sentence (the old "Tick off the ten things ..." was new copy). Sources: the topic and MTN. Draft flag removed.
+- Tags: where rural, woods. Unchanged.
+
+### Task 16 pages that would not open or were not used
+
+- armyrotc.mst.edu TC 3-25.26 PDF: client error; the armywriter.com copy of the same TC was used.
+- mountaineers.org "What Are The Ten Essentials" (three URLs from search): client error each time; the Mountaineers Olympia Branch PDF was used.
+- mountaineering.ie "Measuring Distance on the Ground": robots disallowed.
+- animatedknots.com/tautline-hitch-knot: client error; the Midshipman's Hitch page (alternate name Taut Line Hitch) was used.
+- faa.gov AIM change PDF (faa.gov/media/70471): opened; its extracted text did not include chapter 6. The AIM 6-2-6 web page and AIP GEN 3.6 show the ground-air code only as images.
+- skills.orienteering.ca skill 27: no title or publisher in the text, no pacing content; not cited.
+- sandiego.gov CERT "Knots" handout: copied from animatedknots.com, no publisher; not cited.
+- NYS DEC Hike Smart NY card: garbled OCR; used only for "Carry these essentials on all hikes".
+- Search for a source on the hand-width daylight method found only blogs and commercial pages (offgridweb, backpacker.com, artofmanliness and others); none used.
+
+### Task 16 diagrams removed in this batch
+
+Figure files are unchanged in figs/; only the topic fig block was removed.
+- nav-hand: the statement it draws (each finger between the sun and the horizon is about 15 minutes; four fingers about 1 hour) has no authoritative source, so the text and the figure were both removed. Not a label fix: it would need a sourced method first.
+
+No other diagram in this batch was removed. Kept: nav-shadow, nav-watch, nav-polaris, nav-aimoff, signal-ground, signal-mirror, knot-bowline, knot-trucker, kit.
+
+### Task 16 fix round 1 (2026-11-17)
+
+Re-opened: NPS-10 (title "Ten Essentials (U.S. National Park Service)" confirmed) and DEC-10 (title and 27 June 2024 date confirmed). The reviewer confirmed V = require assistance and X = require medical assistance in first-party text: FM 21-76-1 (1999), chapter III, Figure III-4 Signal Key (irp.fas.org); this resolves Task 16 concern 1.
+
+- F1 surv-ten-essentials: the ten categories are MTN's; the item details are borrowed. Each detail and where it comes from:
+  - Navigation: "map and compass ... a phone with a GPS app or a GPS unit" — MTN (Navigation system); "a spare battery" — NPS-10 under Navigation ("Pack an extra battery for your phone"), MTN (extra batteries, battery pack).
+  - Headlamp and spare batteries — MTN ("Headlamp: plus extra batteries"); NPS-10 under Illumination ("extra batteries").
+  - "sunglasses, sunscreen and a hat" — NPS-10 under Sun Protection ("Sunglasses, sunscreen, and hat"); MTN has sunglasses and sunscreen, no hat.
+  - "Knife or multi-tool" — NPS-10 under Repair Kit and Tools (multi-tool); MTN (knife).
+  - "waterproof matches or a lighter, and fire starter" — NPS-10 under Fire ("matches (preferably waterproof)", lighter, "fire starters").
+  - "space blanket, bivy sack or tarp" — NPS-10 under Emergency Shelter ("A tent, tarp, bivy sack, or emergency space blanket").
+  - "a day's worth beyond your plan" — NPS-10 under Nutrition - Extra Food ("extra day's supply of food").
+  - "Extra water, and a way to treat more" — MTN ("beyond minimum expectation or the means to purify").
+  - "insulation and rain gear" — DEC-10 heading "INSULATION/RAIN GEAR".
+  Text now: "These are The Mountaineers' ten essential systems, with item details from the National Park Service and NYS DEC lists." `kit` caption now "The ten essential systems."
+- F2 surv-ten-essentials: MTN lists insect repellent under first aid, so DEC's insect protection is not an addition. Now "NYS DEC's list also includes a whistle and a signal mirror." — DEC-10 Emergency Kit ("Whistle", "Signal mirror").
+- F3 figs/figs.py `signal-mirror`: alt text now "Signal mirror: sight the aircraft through a V of two fingers and aim the reflected light through the V" (UTAH); drawn label "Mirror under your eye" now "Mirror" (in no source). Rendered at 360 px, day and night: all labels readable and inside the frame.
+- F4 surv-signal-for-rescue: size now "at least 20 ft (6 m) long and 3½ ft (1 m) wide" — FM p. 206 (1 m by 6 m); US units first, rounded up so the minimum is never understated.
+- F5 surv-signal-for-rescue: `u:sos` link moved to just after the signal-mirror figure, above the hostile-situation sentence.
+- F6 surv-knots: taut-line now "one more turn around the standing line outside the loop, wrapping the same way" — SL ("Going in the same direction, take the end around the standing part outside the loop").
+- F7 ten-essentials checklist: sources now MTN, NPS-10 and DEC-10 with what each supplied; the app's own topic is no longer listed.
+- C1 surv-dangerous-animals: "raise your arms" moved from the charge case to the following case — NEBBTC (charged: stand your ground, calm voice, bear spray; following: make yourself look bigger, arms above your head, shout, bang a stick).
+- C2 decisions-for-jordan D11: now names both poisonous irises (yellow flag and native blue flag), matching the Task 15 fix.
+- C3 figs/figs.py `river`: second hazard line "stay well upstream" now "never cross just above them", the surv-river-crossings wording (FM ch 17). tests/test_figs.py: "stay well upstream" added to the river case's forbidden wording, "never cross just above them" to its required wording. Rendered at 360 px, day and night: the right-aligned line fits inside the river band, nothing clipped.
+- C4 surv-fire: `fire-sizes` caption "Tinder, kindling and fuel. If you skip the tinder or kindling stage, the fire will likely fail." now "Tinder, kindling and fuel." (the sentence is in the paragraph above).

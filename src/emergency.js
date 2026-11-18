@@ -4,8 +4,12 @@
   const esc = FK.esc;
   const $ = id => document.getElementById(id);
   const RESERVED = ['tool', 'report'];   // addresses owned by other features, not protocols
-  const KEY = /^[ptsra]:[\w-]{1,60}$/;   // p:<protocolId>, t:<toolName>, r:<reportName>, s:<survivalTopicId>, a:<appScreen>
-  const RECENT_MAX = 5;
+  const KEY = /^[ptsracu]:[\w-]{1,60}$/;   // p:<protocolId>, t:<toolName>, r:<reportName>, s:<survivalTopicId>, a:<appScreen>, c:<checklistId>, u:<survivalTool>
+  const RECENT_MAX = 20;   // stored
+  const SHOWN = 5;         // listed on a home
+  const SECTION_KINDS = { emergency: 'ptsracu', survival: 'scu' };   // which key kinds each home lists
+  const forSection = (list, section) => Object.hasOwn(SECTION_KINDS, section) ? list.filter(k => SECTION_KINDS[section].includes(k[0])) : [];
+  FK.keyPattern = KEY;
   const PIN_FULL = 'Couldn’t change the pin: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.';
   const LIFE = [['bleeding', 'Bleeding'], ['choking', 'Choking']];
   const CHOOSER = [['cpr-adult', 'Adult'], ['cpr-child', 'Child'], ['cpr-infant', 'Infant']];
@@ -19,6 +23,7 @@
   };
   FK.pins = {
     all: () => keys('pins'),
+    forSection: section => forSection(keys('pins'), section),
     has: key => keys('pins').includes(key),
     toggle(key) {
       if (typeof key !== 'string' || !KEY.test(key)) return;
@@ -30,6 +35,8 @@
   };
   FK.recent = {
     all: () => keys('recent').slice(0, RECENT_MAX),
+    /* ok, if given, drops keys before the list is cut to SHOWN, so keys that no longer open anything do not shorten it. */
+    forSection: (section, ok) => forSection(keys('recent'), section).filter(k => !ok || ok(k)).slice(0, SHOWN),
     add(key) {
       if (typeof key !== 'string' || !KEY.test(key)) return;
       const cur = keys('recent');
@@ -52,14 +59,14 @@
   const protoBtn = p => '<button type="button" class="em-btn" data-open="' + esc(p.id) + '"><span>' + esc(p.title) + '</span>' + draft(p) + '</button>';
   const toolLabel = name => FK.tools && FK.tools.label ? FK.tools.label(name) : null;
   const toolBtn = name => '<button type="button" class="em-btn" data-tool="' + esc(name) + '"><span>' + esc(toolLabel(name)) + '</span></button>';
-  /* Pinned and recent keys: p:<protocol>, t:<tool>, r:<report>, s:<survival topic>, a:<app screen>. Anything that no longer exists is skipped. */
+  /* Pinned and recent keys: p:<protocol>, t:<tool>, r:<report>, s:<survival topic>, c:<checklist>, u:<survival tool>, a:<app screen>. Anything that no longer exists is skipped. */
   const keyBtns = list => list.map(k => {
     if (k[0] === 'p') { const p = get(k.slice(2)); return p ? protoBtn(p) : ''; }
     if (k[0] === 't' || k[0] === 'r') {   // a tool or a report; the key must match where the name lives
       const name = k.slice(2);
       return toolLabel(name) && FK.tools.segment(name) === (k[0] === 'r' ? 'report' : 'tool') ? toolBtn(name) : '';
     }
-    if (k[0] === 's' || k[0] === 'a') {   // a survival topic or an app screen: search knows its label and how to open it
+    if ('sacu'.includes(k[0])) {   // a survival topic, checklist or tool, or an app screen: search knows its label and how to open it
       const d = FK.search && FK.search.describe(k);
       return d ? '<button type="button" class="em-btn" data-key="' + esc(k) + '"><span>' + esc(d.title) + '</span></button>' : '';
     }
@@ -116,8 +123,8 @@
   function render() {
     renderResume();
     renderLife();
-    group('emPinned', '★ Pinned', keyBtns(FK.pins.all()));
-    group('emRecent', 'Recent', keyBtns(FK.recent.all()), CLEAR_RECENT);
+    group('emPinned', '★ Pinned', keyBtns(FK.pins.forSection('emergency')));
+    group('emRecent', 'Recent', keyBtns(FK.recent.forSection('emergency', k => keyBtns([k]).length > 0)), CLEAR_RECENT);
     renderCats();
   }
 

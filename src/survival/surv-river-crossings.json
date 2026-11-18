@@ -1,0 +1,65 @@
+{
+  "id": "surv-river-crossings",
+  "title": "River crossings",
+  "category": "basics",
+  "keywords": [
+    "river",
+    "crossing",
+    "ford",
+    "current",
+    "strainer",
+    "pole",
+    "swept away"
+  ],
+  "summary": "Look for a wide, shallow, slow section, don’t cross water above your knees, and if in doubt, don’t cross.",
+  "where": [
+    "rural",
+    "woods",
+    "coast"
+  ],
+  "sections": [
+    {
+      "h": "River crossings",
+      "blocks": [
+        {
+          "list": [
+            "Look for a wide, shallow, slow section, or a place where the river splits into several channels. Scout downstream first for log jams, waterfalls and other hazards that could trap you, and never cross just above rapids, falls or strainers (fallen trees and brush the current flows through).",
+            "Rivers fed by snowmelt are usually lowest in the early morning and can rise by a foot or more by late afternoon.",
+            "Unbuckle your pack’s hip belt so you can get it off fast if you fall. A pack you can’t get off can drag you under.",
+            "Face upstream. Plant a sturdy pole on the upstream side as a third leg and keep two points on the bottom at all times. Move one step at a time, crossing at an angle of about 45 degrees downstream.",
+            "Don’t cross water that comes above your knees. If in doubt, don’t cross: look elsewhere, wait, or turn back.",
+            "Very cold water, such as snowmelt, can kill. Falling in makes you gasp and panic for the first 2 to 3 minutes, and you can drown. Avoid wading or swimming in very cold water; look for another way across.",
+            "If you’re swept into fast, shallow rapids, lie on your back with your feet pointed downstream and up off the rocks, and paddle with your hands. In deep rapids, lie on your stomach, head downstream, and angle toward shore."
+          ]
+        },
+        {
+          "fig": "river",
+          "cap": "Seen from above; the current runs left to right. Face upstream, pole on the upstream side, cross at about 45 degrees downstream."
+        },
+        {
+          "link": "p:drowning",
+          "label": "Drowning"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "National Park Service, Mount Rainier National Park, Backcountry Hikers Advised to Use Caution When Crossing Rivers (news release, 6 August 2018)",
+      "used": "Do not cross water above your knees; early morning lowest, levels may change by as much as a foot by late afternoon; braided channels; scout downstream for log jams, waterfalls and hazards; strainers; unfasten the pack belt; face upstream; sturdy stick for two points of contact; turning back"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual, chapters 15 and 17",
+      "used": "Freezing and thawing may vary a stream level as much as 2 to 2.5 meters a day, at any time of day (chapter 15); several narrow channels easier to cross; cross at about 45 degrees downstream; pole planted on the upstream side, one step at a time; be able to remove the pack quickly, a pack that won't come off can drag a swimmer under; do not swim or wade in very cold water, it could be fatal; fast shallow rapids: on your back, feet downstream and up, fin with hands; deep rapids: on your stomach, head downstream, angle toward shore"
+    },
+    {
+      "name": "Minnesota Department of Natural Resources, Cold water dangers",
+      "used": "Cold shock in the first 2 to 3 minutes: gasping, hyperventilation, panic, drowning"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

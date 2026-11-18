@@ -3,7 +3,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
-  const APP_VERSION = '6.2';
+  const APP_VERSION = '7';
   const FULL_MSG = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.';
   let warnedAt = 0;
   const store = {
@@ -619,19 +619,23 @@
 
   /* ---------- Updates: tell the user instead of making them relaunch twice ---------- */
   /* The bar never covers or interrupts an emergency: it waits while a protocol, tool or report is open, or while
-     the CPR coach, a tourniquet timer or a step timer runs (its Reload would end the coach), then shows again. */
+     the CPR coach, a tourniquet timer, a step timer or the Survival SOS light runs (its Reload would end them), then shows again. */
   let updateReady = false;
   const emergencyBusy = () => {
     const F = window.FK, b = document.body.classList;
     if (b.contains('playing') || b.contains('tooling')) return true;
     if (!F) return false;
     const st = F.protocol && F.protocol.timer && F.protocol.timer();
-    return !!((F.tools && F.tools.cpr && F.tools.cpr.running()) || (F.tools && F.tools.tq && F.tools.tq.active().length) || (st && !st.done));
+    return !!((F.tools && F.tools.cpr && F.tools.cpr.running()) || (F.tools && F.tools.tq && F.tools.tq.active().length) || (st && !st.done) ||
+      (F.survival && F.survival.lightOn && F.survival.lightOn()));
   };
-  function paintUpdate() { $('#updBar').hidden = !(updateReady && !emergencyBusy()); }
+  /* Search is a full-screen overlay: the bar would sit on top of it, so it waits there and shows again when search closes. */
+  const searchOpen = () => !!(window.FK && FK.route && FK.route.isSearch && FK.route.isSearch());
+  function paintUpdate() { $('#updBar').hidden = !(updateReady && !emergencyBusy() && !searchOpen()); }
   function updateAvailable() { updateReady = true; paintUpdate(); }
   on('activity', paintUpdate);
   on('route', paintUpdate);
+  on('search', paintUpdate);
   if ('serviceWorker' in navigator && window.isSecureContext) {
     let hadController = !!navigator.serviceWorker.controller;
     navigator.serviceWorker.addEventListener('controllerchange', () => {

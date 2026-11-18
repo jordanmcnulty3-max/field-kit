@@ -1,0 +1,76 @@
+{
+  "id": "surv-find-water",
+  "title": "Find water",
+  "category": "basics",
+  "keywords": [
+    "water",
+    "dew",
+    "rain",
+    "transpiration",
+    "stream",
+    "thirst"
+  ],
+  "summary": "Water runs downhill: check low ground, the foot of cliffs and dry stream beds.",
+  "sections": [
+    {
+      "h": "Find water",
+      "blocks": [
+        {
+          "list": [
+            "Water runs downhill. Check valley bottoms and other low ground, the foot of cliffs or rocks, and dry stream beds; dig on the outside of bends."
+          ]
+        },
+        {
+          "fig": "water-bend",
+          "cap": "Dig on the outside of a bend in a dry stream bed. If you hit wet sand, dig down into it and let water seep in."
+        },
+        {
+          "list": [
+            "Signs of water nearby: lush green vegetation, swarming insects, game trails that meet in a V, and birds flying in the early morning or late afternoon, which may show the direction to water.",
+            "Catch rain on a tarp, poncho or large leaves.",
+            "Before sunrise, tie absorbent cloth around your ankles, walk through tall grass, and wring out the dew.",
+            "Tie a clear plastic bag over a leafy branch of a non-poisonous plant in full sun and seal it. Water collects in the bag as the leaves breathe."
+          ]
+        },
+        {
+          "fig": "water-bag",
+          "cap": "A transpiration bag. Collect the water before sundown. The same branch can be used for 3 to 5 days. The water tastes like the plant smells."
+        },
+        {
+          "list": [
+            "Never drink seawater or urine.",
+            "Skip lake or pond water that is strongly colored, looks like paint or has floating scum: it may be a harmful algal bloom, and treating it yourself does not make it safe (see Make water safe).",
+            "Treat all wild water, rain included, before drinking (see Make water safe)."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "US Army ATP 3-50.21, Survival (2018), chapter 3 (Table 3-1, paragraphs 3-2, 3-11, 3-15, 3-27, 3-34)",
+      "used": "Seepage wells at outside bends of a dry riverbed and the foot of cliffs or rocks; dig deep enough for water to seep in; rain on nonporous items, rain off leaves; dew with cloth around the lower legs; transpiration bag sealed over a leafy branch, collect before sundown, same limb 3 or 5 days; do not drink saltwater or urine"
+    },
+    {
+      "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapter VII",
+      "used": "Water indicators: lush green vegetation, drainages and low-lying areas, V-intersecting game trails, swarming insects, bird flight in early morning or late afternoon; transpiration bag must be clear, no poisonous plants, water tastes like the plant smells; do not drink urine or sea water"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual, chapter 6",
+      "used": "Dew: rags around the ankles, walk through dew-covered grass before sunrise"
+    },
+    {
+      "name": "City of Phoenix Fire Department, Desert survival",
+      "used": "Base of rock cliffs; dig at the outside edge of a sharp bend in a dry stream bed; dig into wet sand for seeping water"
+    },
+    {
+      "name": "CDC, How to Find Clean Water in an Emergency",
+      "used": "Rainwater, streams, rivers, ponds, lakes and springs must be treated to kill germs"
+    },
+    {
+      "name": "New York State Department of Health, Harmful Blue-Green Algae Blooms",
+      "used": "Bloom appearance; do not drink surface water during a bloom even if you treat it yourself"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

@@ -1,4 +1,5 @@
 """Build-time validation for src/protocols/*.json (schema: design spec section 8)."""
+import datetime
 import re
 
 CATEGORIES = {'life', 'injury', 'environment', 'bites', 'illness', 'advanced'}
@@ -201,4 +202,236 @@ def validate(protocols, fig_names):
             errors.append(f'{where}: steps must be a non-empty list')
             continue
         _validate_steps(where, steps, fig_names, errors, warnings)
+    return errors, warnings
+
+
+TOPIC_CATEGORIES = {'basics', 'water', 'heat', 'radiation', 'food', 'comms', 'staying', 'moving', 'town'}
+WHERE = {'town', 'rural', 'woods', 'coast'}
+WHEN = {'cold', 'warm'}
+RESERVED_TOPIC_IDS = {'tool', 'list'}
+TOPIC_ID_PATTERN = re.compile(r'surv-[a-z0-9-]{1,55}')
+DATE_PATTERN = re.compile(r'\d{4}-\d{2}-\d{2}')
+# fig blocks carry figSvg and figLabel only after the build has run, so they are not allowed in source files.
+TOPIC_KEYS = {'id', 'title', 'category', 'keywords', 'summary', 'where', 'when', 'doFirst', 'sections', 'sources',
+              'reviewed', 'asOf', 'draft'}
+SECTION_KEYS = {'h', 'blocks'}
+BLOCK_SHAPES = {'p', 'list', 'steps', 'warn', 'table', 'fig', 'link'}
+BLOCK_COMPANIONS = {'fig': 'cap', 'link': 'label'}
+TABLE_KEYS = {'head', 'rows'}
+CHECKLIST_KEYS = {'id', 'title', 'category', 'summary', 'items', 'sources', 'reviewed', 'draft'}
+ITEM_KEYS = {'id', 'text', 'note'}
+
+
+def _is_date(v):
+    if not (isinstance(v, str) and DATE_PATTERN.fullmatch(v)):
+        return False
+    try:
+        datetime.date.fromisoformat(v)
+    except ValueError:
+        return False
+    return True
+
+
+def _check_sources(where, item, errors):
+    src = item.get('sources')
+    if not isinstance(src, list) or not src:
+        errors.append(f'{where}: sources must be a non-empty list')
+    elif not all(isinstance(x, dict) and not _blank(x.get('name')) and not _blank(x.get('used')) for x in src):
+        errors.append(f'{where}: every source must be an object with a name and what it was used for (used)')
+
+
+def _check_reviewed(where, item, errors):
+    if _blank(item.get('reviewed')):
+        errors.append(f'{where}: missing reviewed date')
+    elif not _is_date(item['reviewed']):
+        errors.append(f'{where}: reviewed must be a date written YYYY-MM-DD')
+
+
+def _check_draft(where, item, ident, errors, warnings):
+    if 'draft' in item and not isinstance(item['draft'], bool):
+        errors.append(f'{where}: draft must be true or false')
+    if item.get('draft') is True:
+        warnings.append(f'{ident if isinstance(ident, str) else where}: draft, not source-checked')
+
+
+def _check_id(where, ident, seen, pattern, pattern_msg, reserved, errors):
+    if _blank(ident):
+        errors.append(f'{where}: missing or invalid id')
+        return
+    if ident in seen:
+        errors.append(f'{where}: duplicate id')
+    seen.add(ident)
+    if ident in reserved:
+        errors.append(f'{where}: id is reserved')
+    if not pattern.fullmatch(ident):
+        errors.append(f'{where}: {pattern_msg}')
+
+
+def topic_draft_ids(items):
+    """Ids of topics or checklists marked "draft": true. Same rule as draft_ids."""
+    return draft_ids(items)
+
+
+def _validate_block(where, block, fig_names, link_keys, errors):
+    if not isinstance(block, dict):
+        errors.append(f'{where}: block must be an object')
+        return
+    shapes = sorted(k for k in block if k in BLOCK_SHAPES)
+    if len(shapes) != 1:
+        errors.append(f'{where}: block must have exactly one of {", ".join(sorted(BLOCK_SHAPES))} (has {", ".join(shapes) or "none"})')
+        _unknown_keys(where, block, BLOCK_SHAPES | set(BLOCK_COMPANIONS.values()), errors)
+        return
+    shape = shapes[0]
+    companion = BLOCK_COMPANIONS.get(shape)
+    _unknown_keys(where, block, {shape} | ({companion} if companion else set()), errors)
+    v = block[shape]
+    if shape in ('p', 'warn'):
+        if _blank(v):
+            errors.append(f'{where}: {shape} must be non-blank text')
+    elif shape in ('list', 'steps'):
+        if not v or _bad_list(v):
+            errors.append(f'{where}: {shape} must be a non-empty list of non-blank strings')
+    elif shape == 'table':
+        if not isinstance(v, dict):
+            errors.append(f'{where}: table must be an object with head and rows')
+            return
+        _unknown_keys(f'{where} table', v, TABLE_KEYS, errors)
+        head, rows = v.get('head'), v.get('rows')
+        if not head or _bad_list(head):
+            errors.append(f'{where}: table head must be a non-empty list of non-blank strings')
+            head = None
+        if not isinstance(rows, list) or not rows:
+            errors.append(f'{where}: table rows must be a non-empty list')
+            return
+        for n, row in enumerate(rows, 1):
+            if _bad_list(row):
+                errors.append(f'{where}: table row {n} must be a list of non-blank strings')
+            elif head is not None and len(row) != len(head):
+                errors.append(f'{where}: table row {n} has {len(row)} cells but head has {len(head)}')
+    elif shape == 'fig':
+        if _blank(v) or v not in fig_names:
+            errors.append(f'{where}: unknown figure {v!r}')
+    elif shape == 'link':
+        if _blank(v) or v not in link_keys:
+            errors.append(f'{where}: unknown link {v!r}')
+    if companion and _blank(block.get(companion)):
+        errors.append(f'{where}: {shape} block missing {companion}')
+
+
+def _validate_sections(where, sections, fig_names, link_keys, errors):
+    if not isinstance(sections, list) or not sections:
+        errors.append(f'{where}: sections must be a non-empty list')
+        return
+    for sn, sec in enumerate(sections, 1):
+        sw = f'{where} section {sn}'
+        if not isinstance(sec, dict):
+            errors.append(f'{sw}: must be an object')
+            continue
+        _unknown_keys(sw, sec, SECTION_KEYS, errors)
+        if _blank(sec.get('h')):
+            errors.append(f'{sw}: missing h (heading)')
+        blocks = sec.get('blocks')
+        if not isinstance(blocks, list) or not blocks:
+            errors.append(f'{sw}: blocks must be a non-empty list')
+            continue
+        for bn, block in enumerate(blocks, 1):
+            _validate_block(f'{sw} block {bn}', block, fig_names, link_keys, errors)
+
+
+def validate_topics(topics, fig_names, link_keys):
+    """Return (errors, warnings) for src/survival/*.json topics (spec section 5.3). Never raises on JSON-decodable input."""
+    errors, warnings = [], []
+    if not isinstance(topics, list):
+        return ['topics must be a list'], warnings
+    seen = set()
+    for n, t in enumerate(topics):
+        if not isinstance(t, dict):
+            errors.append(f'topic #{n}: must be an object')
+            continue
+        tid = t.get('id')
+        where = f'topic {tid!r}' if not _blank(tid) else f'topic #{n}'
+        _check_id(where, tid, seen, TOPIC_ID_PATTERN,
+                  'id must be "surv-" followed by 1 to 55 lowercase letters, digits or hyphens', RESERVED_TOPIC_IDS, errors)
+        _unknown_keys(where, t, TOPIC_KEYS, errors)
+        if _blank(t.get('title')):
+            errors.append(f'{where}: missing title')
+        if 'summary' in t and not isinstance(t['summary'], str):
+            errors.append(f'{where}: summary must be a string')
+        for k in ('keywords', 'doFirst'):
+            if k in t and _bad_list(t[k]):
+                errors.append(f'{where}: {k} must be a list of non-blank strings')
+        cat = t.get('category')
+        if _blank(cat):
+            errors.append(f'{where}: missing category')
+        elif cat not in TOPIC_CATEGORIES:
+            errors.append(f'{where}: unknown category {cat!r}')
+        for k, allowed in (('where', WHERE), ('when', WHEN)):
+            if k not in t:
+                continue
+            if _bad_list(t[k]):
+                errors.append(f'{where}: {k} must be a list of non-blank strings')
+            else:
+                for x in t[k]:
+                    if x not in allowed:
+                        errors.append(f'{where}: unknown {k} value {x!r}')
+        _check_sources(where, t, errors)
+        _check_reviewed(where, t, errors)
+        if 'asOf' in t and not _is_date(t['asOf']):
+            errors.append(f'{where}: asOf must be a date written YYYY-MM-DD')
+        _check_draft(where, t, tid, errors, warnings)
+        _validate_sections(where, t.get('sections'), fig_names, link_keys, errors)
+    return errors, warnings
+
+
+def validate_checklists(lists, link_keys):
+    """Return (errors, warnings) for checklist files. link_keys is accepted for symmetry with validate_topics;
+    checklist items carry no links, so it is unused. Never raises on JSON-decodable input."""
+    errors, warnings = [], []
+    if not isinstance(lists, list):
+        return ['checklists must be a list'], warnings
+    seen = set()
+    for n, c in enumerate(lists):
+        if not isinstance(c, dict):
+            errors.append(f'checklist #{n}: must be an object')
+            continue
+        cid = c.get('id')
+        where = f'checklist {cid!r}' if not _blank(cid) else f'checklist #{n}'
+        _check_id(where, cid, seen, ID_PATTERN,
+                  'id must be lowercase letters, digits and hyphens, starting with a letter or digit, at most 60 characters',
+                  (), errors)
+        _unknown_keys(where, c, CHECKLIST_KEYS, errors)
+        if _blank(c.get('title')):
+            errors.append(f'{where}: missing title')
+        if 'summary' in c and not isinstance(c['summary'], str):
+            errors.append(f'{where}: summary must be a string')
+        cat = c.get('category')
+        if _blank(cat):
+            errors.append(f'{where}: missing category')
+        elif cat not in TOPIC_CATEGORIES:
+            errors.append(f'{where}: unknown category {cat!r}')
+        _check_sources(where, c, errors)
+        _check_reviewed(where, c, errors)
+        _check_draft(where, c, cid, errors, warnings)
+        items = c.get('items')
+        if not isinstance(items, list) or not items:
+            errors.append(f'{where}: items must be a non-empty list')
+            continue
+        seen_items = set()
+        for i, it in enumerate(items, 1):
+            iw = f'{where} item {i}'
+            if not isinstance(it, dict):
+                errors.append(f'{iw}: must be an object')
+                continue
+            _unknown_keys(iw, it, ITEM_KEYS, errors)
+            iid = it.get('id')
+            if _blank(iid) or not ID_PATTERN.fullmatch(iid):
+                errors.append(f'{iw}: missing or invalid item id')
+            elif iid in seen_items:
+                errors.append(f'{iw}: duplicate item id {iid!r}')
+            else:
+                seen_items.add(iid)
+            if _blank(it.get('text')):
+                errors.append(f'{iw}: text must be non-blank')
+            if 'note' in it and _blank(it['note']):
+                errors.append(f'{iw}: note must be non-blank text')
     return errors, warnings

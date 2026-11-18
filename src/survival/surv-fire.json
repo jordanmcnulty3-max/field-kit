@@ -1,0 +1,118 @@
+{
+  "id": "surv-fire",
+  "title": "Fire",
+  "category": "basics",
+  "keywords": [
+    "fire",
+    "tinder",
+    "kindling",
+    "ferro rod",
+    "teepee",
+    "log cabin",
+    "wet weather"
+  ],
+  "summary": "Gather all your tinder, kindling and fuel first, then build and light the fire. Never leave it unattended.",
+  "sections": [
+    {
+      "h": "Gather everything first",
+      "blocks": [
+        {
+          "list": [
+            "Tinder: dry, fine material that a spark can light. Birch bark, dead dry grass, cattail or milkweed fluff, fine shavings of pine pitch wood, lint, cotton balls coated with petroleum jelly. Collect at least a cupped handful.",
+            "Kindling: dead, dry twigs in several sizes, from pencil-lead to thumb thickness, about 12 to 18 inches long. Collect a bundle as thick as a soda can of each size.",
+            "Fuel: dead wood at least as thick as your forearm. Dry dead branches snap when broken. Skip rotten wood lying on the ground: it smolders."
+          ]
+        },
+        {
+          "p": "If you skip the tinder or kindling stage, the fire will likely fail."
+        },
+        {
+          "fig": "fire-sizes",
+          "cap": "Tinder, kindling and fuel."
+        }
+      ]
+    },
+    {
+      "h": "Build and light",
+      "blocks": [
+        {
+          "steps": [
+            "Pick a flat, dry spot out of the wind, away from overhanging branches and snow-loaded trees. Clear leaves, needles and anything else that burns from a 10-foot circle, and scrape at least the middle 3 feet down to bare soil.",
+            "On deep snow, build on a base of green logs laid in two layers, crosswise. Never use wet, porous or riverbed rocks: they can explode when heated.",
+            "Put the tinder in the centre and lean kindling around it like a teepee. Light it from the upwind side, then add kindling and fuel from small to large.",
+            "Once it’s going, a log cabin of fuel stacked in crosswise layers around it quickly makes a large bed of coals for cooking."
+          ]
+        },
+        {
+          "fig": "fire-platform",
+          "cap": "On deep snow, build on green logs in two crosswise layers. Never use wet, porous or riverbed rocks: they can explode when heated."
+        },
+        {
+          "fig": "fire-lays",
+          "cap": "Start with a teepee; build a log cabin around it once it catches."
+        }
+      ]
+    },
+    {
+      "h": "Ways to light it",
+      "blocks": [
+        {
+          "list": [
+            "Ferro rod (metal match): hold the rod with its tip at the tinder. Hold the striker or a knife at a right angle to the rod and drive it down the rod with firm, even pressure so the sparks land in the tinder.",
+            "Battery and fine steel wool: stretch fine steel wool across both posts of the battery. It heats up and makes a glowing coal to light the tinder. Keep flames away from the battery: some batteries give off explosive hydrogen gas.",
+            "Bow drill: it works, but it takes a lot of effort and practice. Learn it before you need it."
+          ]
+        },
+        {
+          "p": "In wet weather, use standing or leaning dead wood (it sheds rain), the dead lower branches under conifers, and split wood to reach the dry inner wood. A teepee fire burns well even with wet wood."
+        }
+      ]
+    },
+    {
+      "h": "Put it out",
+      "blocks": [
+        {
+          "p": "Never leave a fire unattended. To put it out, drown it with water until every ember is wet, stir it and drown it again, then hold the back of your hand just above the ashes to feel for heat. If it’s too hot to touch, it’s too hot to leave."
+        },
+        {
+          "p": "In normal times, New York allows campfires less than 3 feet high and 4 feet across, burning only charcoal or dry, clean, untreated wood, and they must never be left unattended. On New York state land in normal times, use only dead and down wood; cutting standing trees is prohibited."
+        },
+        {
+          "link": "p:burns",
+          "label": "Burns"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "US Army ATP 3-50.21, Survival (2018), chapter 5",
+      "used": "Fire site flat, dry, protected from wind, away from snow laden trees; expose at least 3 feet of soil; green log base on deep snow; porous rocks explode; tinder and manmade tinder examples (birch bark, dry grass, cattail and milkweed seed down, pitch wood shavings, lint, cotton balls coated with petroleum-based paste) and a cupped handful minimum; skipping a phase makes the fire fail; kindling pencil-lead to thumb size, 12 to 18 inches, a soda can diameter of each size, dead conifer lower branches; fuel forearm diameter minimum; dead branches snap; rotten wood smolders; standing or leaning dead wood sheds rain; split wood exposes dry inner wood; tepee burns with wet wood; log cabin makes a quick large bed of coals for cooking; light from the upwind side; metal match striker at 90 degrees driven down the stick with even pressure; steel wool across battery posts makes a coal, hydrogen gas warning; bow and drill"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual, chapter 7",
+      "used": "Clear a circle at least 1 meter across; green log base on snow; wet or porous rocks may explode; light from the upwind side; metal match tip under the tinder, scrape to throw sparks onto it; bow and drill needs effort and persistence; tepee burns with wet wood"
+    },
+    {
+      "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapter VI",
+      "used": "Do not use porous rocks or riverbed rock, they may explode when heated"
+    },
+    {
+      "name": "USDA Forest Service, Intermountain Region, Fire Safety",
+      "used": "Clear burnable material within a 10-foot circle; away from overhanging branches; never leave a campfire unattended; drown, stir, add water, feel with bare hand"
+    },
+    {
+      "name": "Smokey Bear (Ad Council, USDA Forest Service, National Association of State Foresters), Campfire Safety / How to Put Out a Campfire",
+      "used": "Drown, stir, drown, feel: hover the back of your hand over the ashes to feel that the embers are cool; if it is too hot to touch, it is too hot to leave"
+    },
+    {
+      "name": "NYS DEC, Annual Residential Brush Burning Prohibition press release (11 April 2023)",
+      "used": "Campfires less than three feet high and four feet in length, width or diameter allowed; only charcoal or dry, clean, untreated or unpainted wood; never leave unattended, must extinguish"
+    },
+    {
+      "name": "NYS DEC, Camping, primitive (Fire Safety at Campsites)",
+      "used": "Cutting standing trees is prohibited; use only dead and down wood for fires (state land, normal times)"
+    }
+  ],
+  "reviewed": "2026-11-17"
+}

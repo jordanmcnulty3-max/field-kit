@@ -1,6 +1,8 @@
 import json
 
-from .conftest import inject_protocols
+import pytest
+
+from .conftest import inject_data, inject_protocols
 
 
 def proto(pid, title, category='injury', keywords=None, summary=None, steps=None, tier=None, draft=False):
@@ -98,38 +100,141 @@ def test_at_most_thirty_results(page, app_url):
     assert len(q(page, 'zebra')) == 30
 
 
-def test_survival_topic_result_opens_that_topic(page, app_url):
-    boot(page, app_url, hash_='#/tactical/map')
+ORIGINAL_TOPIC_IDS = ['surv-dangerous-animals', 'surv-field-dressing-game', 'surv-find-water', 'surv-fire', 'surv-food-and-wild-plants', 'surv-knots',
+                      'surv-make-water-safe', 'surv-navigation-without-a-compass', 'surv-river-crossings', 'surv-shelter', 'surv-signal-for-rescue',
+                      'surv-ten-essentials', 'surv-traps-and-fishing', 'surv-weather-and-lightning']
+
+
+def stopic(tid, title, category='basics', keywords=None, summary='', do_first=None, sections=None, **extra):
+    t = {'id': tid, 'title': title, 'category': category, 'keywords': keywords or [], 'summary': summary,
+         'sections': sections or [{'h': 'Overview', 'blocks': [{'p': f'{title} overview text.'}]}],
+         'sources': [{'name': 'Fixture'}], 'reviewed': '2026-11-16'}
+    if do_first:
+        t['doFirst'] = do_first
+    t.update(extra)
+    return t
+
+
+TOPICS = [
+    stopic('surv-gizmo', 'Gizmo basics', sections=[
+        {'h': 'Amounts', 'blocks': [{'p': 'Intro.'}, {'table': {'head': ['Item', 'Amount'], 'rows': [['Quokkaberry', '1 tsp'], ['Water', '1 l']]}}]},
+        {'h': 'Cautions', 'blocks': [{'warn': 'Mind the narwhalrope.'}, {'list': ['Bullet A']}]}]),
+    stopic('surv-kw', 'Plain title', keywords=['zorblax'], summary='Nothing here.'),
+    stopic('surv-body', 'Other title', sections=[{'h': 'Text', 'blocks': [{'p': 'The zorblax appears only in the body.'}]}]),
+    stopic('surv-first', 'First thing', do_first=['Boil the frobnicate water'], summary='A summary about glimmerwort.'),
+    stopic('surv-heading', 'Heading holder', sections=[{'h': 'Wibblesprocket handling', 'blocks': [{'p': 'x'}]}]),
+    stopic('surv-townonly', 'Townonly topic', where=['town'], when=['warm'], keywords=['urbanzibar']),
+]
+
+
+def sboot(page, app_url, topics=TOPICS, hash_='#/emergency', storage=None, only=True):
+    inject_data(page, protocols=FIXTURES, topics=topics, only=only)
+    page.add_init_script(
+        "if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1');"
+        + ''.join(f"localStorage.setItem('fk.{k}', {json.dumps(json.dumps(v))});" for k, v in {'advAck': False, **(storage or {})}.items()) + '}')
+    page.goto(app_url + hash_)
+
+
+def test_word_only_in_a_table_cell_finds_the_topic_with_a_snippet(page, app_url):
+    sboot(page, app_url)
+    r = [x for x in q(page, 'quokkaberry') if x['key'] == 's:surv-gizmo']
+    assert r and r[0]['where'] == 'Survival'
+    assert '<mark>Quokkaberry</mark>' in r[0]['snippet']
+    r = [x for x in q(page, 'narwhalrope') if x['key'] == 's:surv-gizmo']   # a warning block counts too
+    assert r and '<mark>narwhalrope</mark>' in r[0]['snippet']
+
+
+def test_topic_keyword_outranks_body_text_and_summary_do_first_headings_are_found(page, app_url):
+    sboot(page, app_url)
+    ks = [r['key'] for r in q(page, 'zorblax')]
+    assert ks[:2] == ['s:surv-kw', 's:surv-body']
+    assert [r['key'] for r in q(page, 'frobnicate')] == ['s:surv-first']       # Do first
+    assert [r['key'] for r in q(page, 'glimmerwort')] == ['s:surv-first']      # summary
+    assert [r['key'] for r in q(page, 'wibblesprocket')] == ['s:surv-heading']  # section heading
+    assert [r['key'] for r in q(page, 'gizmo')][0] == 's:surv-gizmo'            # title
+
+
+def test_topic_weights_title_over_keywords_over_summary_over_body(page, app_url):
+    topics = [stopic('t-body', 'Aaa', sections=[{'h': 'H', 'blocks': [{'p': 'plimsoll'}]}]),
+              stopic('t-sum', 'Bbb', summary='plimsoll'),
+              stopic('t-kw', 'Ccc', keywords=['plimsoll']),
+              stopic('t-title', 'Plimsoll')]
+    sboot(page, app_url, topics)
+    assert [r['key'] for r in q(page, 'plimsoll')] == ['s:t-title', 's:t-kw', 's:t-sum', 's:t-body']
+
+
+def test_survival_topic_result_opens_that_topic_and_back_returns_to_the_screen_before_search(page, app_url):
+    sboot(page, app_url, hash_='#/survival')
     open_search(page)
-    type_q(page, 'bowline')
-    key = page.eval_on_selector('#searchBody .sr-item', 'e => e.dataset.key')
-    assert key.startswith('s:surv-')
+    type_q(page, 'quokkaberry')
+    assert keys(page)[0] == 's:surv-gizmo'
     page.click('#searchBody .sr-item')
-    assert page.locator('#tab-survival').is_visible()
-    topic = page.locator('#' + key[2:])
-    assert topic.evaluate('d => d.open') is True
-    assert topic.locator('summary').is_visible()
-    assert page.evaluate('FK.route.current().tab') == 'survival'
-    assert not page.locator('#searchPane').is_visible()
+    page.wait_for_function("location.hash === '#/survival/surv-gizmo'")
+    assert page.locator('#survPage').is_visible() and page.locator('#searchPane').is_hidden()
+    assert page.evaluate('FK.recent.all()')[0] == 's:surv-gizmo'
+    page.go_back()   # the search entry was replaced: straight back to the Survival home
+    page.wait_for_function("location.hash === '#/survival'")
+    assert page.locator('#survHome').is_visible() and page.locator('#searchPane').is_hidden()
 
 
-def test_survival_topic_hidden_by_in_tab_search_is_revealed(page, app_url):
-    boot(page, app_url, hash_='#/survival')
-    page.fill('#survSearch', 'knot')
-    assert page.locator('#surv-shelter').is_hidden()
+def test_search_results_ignore_the_survival_home_filter(page, app_url):
+    sboot(page, app_url, hash_='#/survival', storage={'survFilter': {'where': 'woods', 'when': 'cold'}})
+    ks = [r['key'] for r in q(page, 'urbanzibar')]
+    assert ks == ['s:surv-townonly']
     open_search(page)
-    type_q(page, 'shelter')
-    page.click('#searchBody .sr-item[data-key="s:surv-shelter"]')
-    assert page.locator('#surv-shelter').is_visible() and page.evaluate("document.getElementById('surv-shelter').open")
+    type_q(page, 'urbanzibar')
+    page.click('#searchBody .sr-item')
+    page.wait_for_function("location.hash === '#/survival/surv-townonly'")
+    assert page.locator('#survPage').inner_text().startswith('Townonly topic')
 
 
-def test_survival_ids_stable(page, app_url):
-    boot(page, app_url, hash_='#/survival')
-    ids = page.eval_on_selector_all('#survTopics details.ref', 'ds => ds.map(d => d.id)')
-    assert len(ids) == 14 and all(i.startswith('surv-') for i in ids) and len(set(ids)) == 14
-    page.fill('#survSearch', 'fire')   # the in-tab search still filters
-    assert page.locator('#survTopics details.ref:visible').count() >= 1
-    assert page.locator('#surv-knots').is_hidden() or page.evaluate("document.getElementById('surv-knots').textContent.toLowerCase().includes('fire')")
+def test_survival_ids_stable_in_the_shipped_data(page, app_url):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    ids = page.evaluate('FK_DATA.topics.map(t => t.id)')
+    assert set(ORIGINAL_TOPIC_IDS) <= set(ids) and len(ORIGINAL_TOPIC_IDS) == 14 and len(set(ids)) == len(ids)
+    for tid in ORIGINAL_TOPIC_IDS:   # every original topic is searchable by its title and opens through its old key
+        assert 's:' + tid in [r['key'] for r in page.evaluate('t => FK.search.query(t)', page.evaluate('id => FK.survival.topic(id).title', tid))], tid
+        assert page.evaluate('k => FK.search.describe(k)', 's:' + tid)['where'] == 'Survival'
+
+
+def test_checklists_and_survival_tools_are_indexed_when_they_exist(page, app_url):
+    sboot(page, app_url)
+    page.evaluate("""() => {
+      FK.survival.checklists = () => [{ id: 'cl-bag', title: 'Go bag', items: [{ text: 'Pack headlamp spares' }, { text: 'Water filter' }] }, { id: 'cl-bad' }, null];
+      FK.survival.tools = () => [{ name: 'sunmoon', label: 'Sun and moon' }, { name: 'bad' }];
+    }""")
+    r = {x['key']: x for x in q(page, 'go bag')}
+    assert r['c:cl-bag']['where'] == 'Checklist' and r['c:cl-bag']['title'] == 'Go bag'
+    r = {x['key']: x for x in q(page, 'headlamp')}
+    assert r['c:cl-bag']['snippet'].count('<mark>headlamp</mark>') == 1
+    r = {x['key']: x for x in q(page, 'sun moon')}
+    assert r['u:sunmoon']['where'] == 'Tool' and r['u:sunmoon']['title'] == 'Sun and moon'
+    assert not any(k in {'c:cl-bad', 'u:bad'} for k in [x['key'] for x in q(page, 'bad')])
+    assert page.evaluate("FK.search.describe('c:cl-bag')") == {'key': 'c:cl-bag', 'title': 'Go bag', 'where': 'Checklist', 'draft': False}
+    assert page.evaluate("FK.search.describe('u:sunmoon')")['where'] == 'Tool'
+    assert page.evaluate("FK.search.describe('c:nope')") is None and page.evaluate("FK.search.describe('u:nope')") is None
+    # results are grouped with their kind as the heading
+    open_search(page)
+    type_q(page, 'go bag')
+    assert page.eval_on_selector_all('#searchBody .sr-h', 'e => e.map(x => x.textContent)')[0] == 'Checklist'
+
+
+def test_checklist_result_goes_through_survival_open(page, app_url):
+    sboot(page, app_url, hash_='#/survival')
+    page.evaluate("""() => {
+      window.__opened = [];
+      FK.survival.checklists = () => [{ id: 'cl-bag', title: 'Go bag', items: [{ text: 'Water filter' }] }];
+      FK.survival.tools = () => [{ name: 'sunmoon', label: 'Sun and moon' }];
+      FK.survival.open = (key, opts) => { window.__opened.push([key, opts && opts.replace === true]); return true; };
+    }""")
+    open_search(page)
+    type_q(page, 'go bag')
+    page.click('#searchBody .sr-item[data-key="c:cl-bag"]')
+    page.evaluate("FK.route.go('/search')")
+    type_q(page, 'sun moon')
+    page.click('#searchBody .sr-item[data-key="u:sunmoon"]')
+    assert page.evaluate('window.__opened') == [['c:cl-bag', True], ['u:sunmoon', True]]
 
 
 def test_app_screen_result_opens_ballistics(page, app_url):
@@ -181,32 +286,61 @@ def test_tool_and_report_results(page, app_url):
 
 
 def test_empty_query_shows_pinned_and_recent(page, app_url):
-    boot(page, app_url, storage={'pins': ['p:splint', 't:tq', 'p:gone-away'], 'recent': ['a:ballistics', 's:surv-knots', 'p:choking']})
+    sboot(page, app_url, storage={'pins': ['p:splint', 't:tq', 'p:gone-away'], 'recent': ['a:ballistics', 's:surv-gizmo', 'p:choking']})
     open_search(page)
     heads = page.eval_on_selector_all('#searchBody .sr-h', 'e => e.map(x => x.textContent)')
     assert heads == ['Pinned', 'Recent']
-    assert keys(page) == ['p:splint', 't:tq', 'a:ballistics', 's:surv-knots', 'p:choking']
+    assert keys(page) == ['p:splint', 't:tq', 'a:ballistics', 's:surv-gizmo', 'p:choking']
     page.fill('#searchInput', 'x')
     page.fill('#searchInput', '')
     assert keys(page)[0] == 'p:splint'
 
 
 def test_selecting_adds_to_recent_and_home_renders_survival_and_screen_keys(page, app_url):
-    boot(page, app_url)
+    sboot(page, app_url)
     open_search(page)
-    type_q(page, 'bowline')
+    type_q(page, 'quokkaberry')
     page.click('#searchBody .sr-item')
+    page.wait_for_function("location.hash === '#/survival/surv-gizmo'")
     page.evaluate("FK.route.go('/emergency')")
-    assert page.evaluate('FK.recent.all()')[0].startswith('s:surv-')
+    assert page.evaluate('FK.recent.all()')[0] == 's:surv-gizmo'
     open_search(page)
     type_q(page, 'compass')
     page.click('#searchBody .sr-item[data-key="a:position"]')
     page.evaluate("FK.route.go('/emergency')")
     recent = page.locator('#emRecent .em-btn')
     texts = recent.all_inner_texts()
-    assert 'Position and compass' in texts and any('Knots' in t for t in texts)
+    assert 'Position and compass' in texts and any('Gizmo basics' in t for t in texts)
     recent.filter(has_text='Position and compass').click()
     assert page.locator('#view-position').is_visible()
+
+
+def test_pinned_and_recent_survival_buttons_on_the_emergency_home_open_the_topic(page, app_url):
+    sboot(page, app_url, storage={'pins': ['s:surv-gizmo'], 'recent': ['s:surv-kw']})
+    page.wait_for_selector('#emPinned .em-btn')
+    page.click('#emPinned [data-key="s:surv-gizmo"]')
+    page.wait_for_function("location.hash === '#/survival/surv-gizmo'")
+    assert page.locator('#survPage').is_visible()
+    page.evaluate("FK.route.go('/emergency')")
+    page.click('#emRecent [data-key="s:surv-kw"]')
+    page.wait_for_function("location.hash === '#/survival/surv-kw'")
+    assert page.locator('#survPage').inner_text().startswith('Plain title')
+
+
+def test_clear_in_the_search_screen_empties_recent_on_both_homes(page, app_url):
+    sboot(page, app_url, storage={'pins': ['p:splint'], 'recent': ['s:surv-gizmo', 'p:choking']})
+    open_search(page)
+    assert page.locator('#searchBody [data-act="clear-recent"]').count() == 1
+    assert page.locator('#searchBody [data-act="clear-recent"]').bounding_box()['height'] >= 44
+    page.click('#searchBody [data-act="clear-recent"]')
+    assert page.evaluate('FK.recent.all()') == []
+    heads = page.eval_on_selector_all('#searchBody .sr-h', 'e => e.map(x => x.textContent)')
+    assert heads == ['Pinned'] and page.locator('#searchBody [data-act="clear-recent"]').count() == 0
+    page.keyboard.press('Escape')
+    page.wait_for_selector('#searchPane', state='hidden')
+    assert page.locator('#emRecent .em-btn').count() == 0
+    page.evaluate("FK.route.go('/survival')")
+    assert page.locator('#survRecent .em-btn').count() == 0
 
 
 def test_back_closes_search(page, app_url):
@@ -465,3 +599,18 @@ def test_protocol_notes_are_indexed_like_the_summary(page, app_url):
     ks = [r['key'] for r in q(page, 'zanzibarite')]
     assert set(ks) == {'p:noted', 'p:summed', 'p:bodied'}
     assert ks.index('p:noted') < ks.index('p:bodied') and ks.index('p:summed') < ks.index('p:bodied')
+
+
+def test_update_banner_does_not_cover_search_and_returns_when_search_closes(page, app_url):
+    boot(page, app_url)
+    page.evaluate('FK.updateAvailable()')
+    assert page.locator('#updBar').is_visible()
+    open_search(page)
+    type_q(page, 'bleeding')
+    page.wait_for_selector('#searchBody .sr-item')
+    bar = page.locator('#updBar')
+    assert bar.is_hidden()
+    page.click('#searchClose')
+    page.wait_for_selector('#searchPane', state='hidden')
+    assert bar.is_visible()
+    assert page.locator('#updReload').is_enabled()

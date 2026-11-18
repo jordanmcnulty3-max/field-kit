@@ -199,16 +199,30 @@ Source disagreements found while checking the Survival topics. Each says what th
    Cross and USDA call it a last resort. An unattributed copy of the old Ready.gov "Managing Water" text lists
    "water from the toilet bowl or flush tank" as unsafe. Today: the topic allows the tank as a last resort and says
    to treat it before drinking (more cautious than CDC). Say if the group wants it ruled out, or allowed untreated.
+   Fix round 1: the Regional Water Providers Consortium (Emergency Water Sources) also lists "water from your toilet
+   bowl or tank" under "Do Not Drink", starred as a possible sanitation source.
 18. **Bleach for stored well water (surv-water-store) — Water pack Task 4.** Ready.gov (Storing Water in Plastic Soda
    Bottles): add two drops of bleach to well or unchlorinated water, without saying how much water (a soda bottle of
    unstated size). Washington State DOH: one or two drops per gallon to keep stored water fresh. The v7 dose (EPA,
    CDC) is 8 drops of 5% to 9% bleach per gallon. Today: the topic sends well water to Make water safe for the full
    v7 dose before storing. Say if the group wants a lower "storage" dose for water already known to be safe.
+   Fix round 1: the National Disaster Education Coalition (Red Cross, FEMA and others) gives a different dose again,
+   16 drops per gallon of 5.25% bleach, for water of questionable purity. The Red Cross (Disaster Supplies Kit, via
+   University of Missouri Extension) says some sources have contaminants bleach cannot neutralize and only the
+   local public health agency should advise on storing and treating them; the topic now says "make it safe" (not
+   "with bleach") and tells private-well owners to ask their health department in normal times.
 19. **Waterbed water (surv-water-in-the-house) — Water pack Task 4.** FEMA (2017 fact sheet): waterbeds are a source
    not to use (fungicides in the water, chemicals in the vinyl). Louisiana's emergency office: not for drinking, but
    safe for hand washing and laundry. Today: "Don't use it" (FEMA). Say if the group wants to allow it for laundry.
+   Fix round 1: the Regional Water Providers Consortium (Emergency Water Sources) also lists radiators and water beds
+   under "Do Not Drink"; it stars water beds (and toilet water) as possible sanitation sources.
 20. **Containers and bottled water (surv-water-store) — Water pack Task 4.** Glass: CDC says not glass; FEMA, Red Cross
    and USDA, Ohio State and Washington State DOH allow glass. Today: no glass (CDC; also Red Cross: glass breaks).
    Bottled water: CDC says observe the expiration date; the Red Cross says replace it at least once a year. Today:
    whichever comes first. Sanitizing: CDC pours the bleach solution out and lets the container air-dry; Ready.gov
    rinses it out with clean water. Today: CDC's steps (no rinse). Say if any of these should change.
+21. **Gas water heater before draining: off or pilot (surv-water-in-the-house) — Water pack Task 4 fix round 1.**
+   FEMA, the Red Cross and USDA (Food and Water in an Emergency): be sure the electricity or gas is off. The Regional
+   Water Providers Consortium water heater hanger: turn the gas knob "to the pilot setting — do not turn it
+   completely off". Today: "off" (FEMA), and relight by the heater's or gas company's instructions. Say if the group
+   wants "pilot" instead, which avoids relighting but leaves a flame under a tank being drained.

@@ -66,7 +66,7 @@
     {
       "id": "filter",
       "text": "Portable water filter with an absolute pore size of 1 micron or smaller",
-      "note": "Filters do not remove viruses: disinfect the water after filtering."
+      "note": "Removes parasites, not viruses or (unless 0.3 micron or smaller) bacteria: disinfect the water after filtering."
     },
     {
       "id": "main-valve",
@@ -92,7 +92,7 @@
     },
     {
       "name": "US EPA, Emergency Disinfection of Drinking Water; CDC, How to Make Water Safe in an Emergency (reviewed September 19, 2024)",
-      "used": "Bleach 5% to 9%, unscented, less than a year old at room temperature (as in surv-make-water-safe); boiling the best way to kill germs; strain cloudy water through a clean cloth, paper towel or coffee filter; portable filters need an absolute pore size of 1 micron or smaller for parasites and will not remove viruses, disinfect after filtering"
+      "used": "Bleach 5% to 9%, unscented, less than a year old at room temperature (as in surv-make-water-safe); boiling the best way to kill germs; strain cloudy water through a clean cloth, paper towel or coffee filter; portable filters need an absolute pore size of 1 micron or smaller for parasites and 0.3 micron or smaller for bacteria, and will not remove viruses, disinfect after filtering"
     },
     {
       "name": "CDC, How to Safely Clean and Sanitize with Bleach (reviewed August 26, 2026)",
@@ -115,6 +115,5 @@
       "used": "8.33 lb per gallon (weight of a 5-gallon jug worked from it)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

@@ -51,19 +51,20 @@
       "h": "Water heater",
       "blocks": [
         {
-          "p": "Use the tank that feeds your hot taps and showers, not the tank that feeds radiators in older homes (CDC). Use it only if it is not damaged (FEMA and Red Cross). An on-demand (tankless) heater does not hold a tank of water."
+          "p": "Use the tank that feeds your hot taps and showers, not the tank that feeds radiators in older homes (CDC). Use it only if it is not damaged (FEMA and Red Cross). An on-demand (tankless) heater does not hold a tank of water (Regional Water Providers Consortium)."
         },
         {
-          "warn": "Do these steps in this order. The power or gas must be off before you open the drain, and the water can be hot."
+          "warn": "Do these steps in this order. The power or gas must be off before you open the drain. The water may be very hot: wear gloves and eye protection (Regional Water Providers Consortium)."
         },
         {
           "steps": [
             "Make sure the electricity or gas to the water heater is off (FEMA).",
             "Let the tank cool (Louisiana emergency preparedness office).",
-            "Put a clean container under the drain valve at the bottom of the tank (Louisiana).",
+            "Close the water intake valve, usually on top of the tank: turn it clockwise until it stops (Regional Water Providers Consortium).",
+            "Turn on a hot-water tap in the house to let air into the tank (Regional Water Providers Consortium, FEMA).",
+            "Put a clean container under the drain valve at the bottom of the tank (Louisiana, Regional Water Providers Consortium).",
             "Open the drain at the bottom of the tank (FEMA).",
-            "Start the water flowing by turning off the water intake valve and turning on a hot-water tap (FEMA).",
-            "Do not turn on the gas or electricity while the tank is empty (FEMA). Leave it off until the water supply is back (Louisiana)."
+            "Do not turn on the gas or electricity while the tank is empty (FEMA). When the water supply is back, close the drain and refill the tank following the heater’s instructions before you turn the power or gas back on. For a gas heater, follow the heater’s or the gas company’s instructions to relight it."
           ]
         },
         {
@@ -172,6 +173,18 @@
       "used": "Do not drink water from radiators or boilers in a home heating system, or from swimming pools and spas; keep the ice storage area clean"
     },
     {
+      "name": "Regional Water Providers Consortium, How to access water from your water heater during an emergency (water heater hanger, 2022)",
+      "used": "Turn off the heater’s water supply at the shut-off valve usually on top of the tank, clockwise until it stops; let air in by opening a hot water faucet; clean container under the drain valve; the water may be very hot, gloves and safety glasses recommended; for gas heaters it says to set the knob to pilot (the app follows FEMA: off)"
+    },
+    {
+      "name": "Keep This With Your Water Heater (flyer, no publisher printed; hosted by Eugene Water & Electric Board)",
+      "used": "Shut off the water supply, cut power, let air in by running hot water, then drain into a clean container; wear gloves and eye protection; follow the manufacturer’s instructions when refilling the tank; gas heaters: see the gas utility’s safety measures"
+    },
+    {
+      "name": "Regional Water Providers Consortium, Emergency Water Sources",
+      "used": "Tankless heaters hold no tank of water; Do Not Drink: toilet bowl or tank, radiators, water beds (starred: may be sanitation sources), pool, hot tub, flood water"
+    },
+    {
       "name": "Louisiana Governor’s Office of Homeland Security and Emergency Preparedness, Locating Safe Drinking Water",
       "used": "Hot-water tank: turn off the power that heats it and let the tank cool, place a container underneath, open the drain valve at the bottom, don’t turn the tank on again until water services are restored"
     },
@@ -188,6 +201,5 @@
       "used": "If warned ahead of time, fill large pots and pans, sinks and bathtubs"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

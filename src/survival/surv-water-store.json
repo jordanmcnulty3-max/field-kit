@@ -22,7 +22,7 @@
           "list": [
             "Unopened, commercially bottled water is the safest and most reliable water in an emergency (CDC).",
             "Keep it sealed in its original container in a cool, dark place (Ready.gov).",
-            "Use it before its expiration date (CDC). The Red Cross says to replace it at least once a year. Do whichever comes first.",
+            "In normal times, replace it before its expiration date (CDC) or at least once a year (Red Cross), whichever comes first.",
             "Once a bottle is open, use it. Don’t store it again (Red Cross)."
           ]
         }
@@ -81,8 +81,8 @@
       "blocks": [
         {
           "steps": [
-            "Water from a public supply treated with chlorine: fill straight from the tap. You don’t need to add anything (Ready.gov, Red Cross).",
-            "Water from a well or any supply not treated with chlorine: make it safe with bleach before you store it, using the dose in Make water safe.",
+            "Water from a public supply treated with chlorine: fill straight from the tap, unless there is a boil-water notice. You don’t need to add anything (Ready.gov, Red Cross).",
+            "Water from a well or any supply not treated with chlorine: make it safe before you store it, as in Make water safe. Some water has contaminants that bleach cannot fix; if you have a private well, ask your health department in normal times how to store its water (Red Cross).",
             "Fill the container to the top, unless it may freeze (see Freezing).",
             "Cap it tightly. Don’t touch the inside of the cap with your fingers (Ready.gov).",
             "Label it “Drinking water” with the date you filled it (CDC). A grease pencil or crayon on the lid works (University of Alaska Fairbanks Extension)."
@@ -167,7 +167,7 @@
     },
     {
       "name": "American Red Cross, Disaster Supplies Kit (University of Missouri Extension EMW1012, reviewed July 2025)",
-      "used": "Food-grade containers with tight lids; milk containers do not seal well; avoid milk cartons and glass bottles; utility-treated water need not be treated before storing; keep bottled water sealed, replace at least once a year, once opened use it and do not store it"
+      "used": "Food-grade containers with tight lids; milk containers do not seal well; avoid milk cartons and glass bottles; utility-treated water need not be treated before storing; some sources have contaminants bleach cannot neutralize, and only the local public health agency should advise on storing and treating them; keep bottled water sealed, replace at least once a year, once opened use it and do not store it"
     },
     {
       "name": "National Disaster Education Coalition (American Red Cross, FEMA and others), Talking About Disaster: Disaster Supplies Kit",
@@ -190,6 +190,5 @@
       "used": "1 teaspoon means 5 mL (FDA); 1 gallon = 4 quarts = 3.7854 liters, so 1 quart is 0.95 L (USGS)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

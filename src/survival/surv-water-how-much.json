@@ -31,7 +31,7 @@
           "p": "Of that gallon, a normally active person needs about three quarters of a gallon (2.8 L) of fluid a day, from water and other drinks (Ready.gov). FEMA’s guide says to drink at least 2 quarts (1.9 L) a day."
         },
         {
-          "warn": "The gallon does not cover flushing toilets, bathing or laundry. None of the agencies counts water for these. Plan that water separately, and use water that is not fit to drink for it where you can."
+          "warn": "No agency says the gallon covers flushing toilets, bathing or laundry. Plan that water separately, and use water that is not fit to drink for it where you can."
         },
         {
           "link": "s:surv-water-in-the-house",
@@ -44,7 +44,7 @@
       "blocks": [
         {
           "list": [
-            "At home: at least 2 weeks. CDC: at least 3 days, and a 2-week supply if possible. The Red Cross and FEMA: a 2-week supply at home.",
+            "At home: at least 2 weeks. CDC: 3 days, and a 2-week supply if possible. The Red Cross and FEMA: a 2-week supply at home.",
             "To take with you if you leave: 3 days (Red Cross)."
           ]
         },
@@ -145,7 +145,7 @@
   "sources": [
     {
       "name": "CDC, How to Create an Emergency Water Supply (reviewed June 27, 2025)",
-      "used": "At least 1 gallon per person per day for drinking, cooking, brushing teeth and other uses; at least 3 days, a 2-week supply if possible; store more for pregnant women, sick people, pets or a hot climate"
+      "used": "At least 1 gallon per person per day for drinking, cooking, brushing teeth and other uses, for 3 days; try to store a 2-week supply if possible; store more for pregnant women, sick people, pets or a hot climate"
     },
     {
       "name": "Ready.gov (FEMA), Water",
@@ -176,6 +176,5 @@
       "used": "Containers should be movable; round 3 to 6 gallon jugs work best; allow for the weight of water when deciding how full to fill jugs"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

@@ -454,4 +454,6 @@ Source disagreements found while checking the Survival topics. Each says what th
    be asleep while the engine runs, which the Red Cross does not say. Today: someone is always awake; anyone asleep is
    woken before the engine is started for its 10 minutes and the engine is off before anyone goes back to sleep (the
    strictest reading). Waking everyone hourly costs sleep on a long night; say if the group would rather allow sleepers
-   while one person stays awake and watches the clock.
+   while one person stays awake and watches the clock. Fix round 2: the doFirst, summary and Sleep warm lines now
+   say the same (everyone awake while the engine runs; off before anyone sleeps); CDC's "stay awake" is kept as
+   "as much as you can", sleeping only in turns with the engine off.

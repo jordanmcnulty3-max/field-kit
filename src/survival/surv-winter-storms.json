@@ -26,12 +26,12 @@
     "downed power line",
     "power lines down"
   ],
-  "summary": "Know what the National Weather Service alerts mean, get ready before the storm and stay off the roads. Shovel slowly. Never touch a fallen power line. If you’re stranded in a car, stay with it, keep the exhaust pipe clear of snow, and run the engine and heater about 10 minutes each hour with one window slightly open, and never while everyone is asleep.",
+  "summary": "Know what the National Weather Service alerts mean, get ready before the storm and stay off the roads. Shovel slowly. Never touch a fallen power line. If you’re stranded in a car, stay with it, keep the exhaust pipe clear of snow, and run the engine and heater about 10 minutes each hour with one window slightly open, only while everyone in the car is awake: turn it off before anyone sleeps.",
   "when": [
     "cold"
   ],
   "doFirst": [
-    "Stranded in your car? Stay in it (National Weather Service). Clear snow from the exhaust pipe, then run the engine and heater about 10 minutes each hour with one window slightly open, and only while someone is awake (National Weather Service, CDC, Red Cross; Carbon monoxide protocol).",
+    "Stranded in your car? Stay in it (National Weather Service). Clear snow from the exhaust pipe, then run the engine and heater about 10 minutes each hour with one window slightly open. Everyone in the car stays awake while the engine runs; turn it off before anyone sleeps (National Weather Service, CDC, Red Cross; Carbon monoxide protocol).",
     "Never touch a fallen power line (CDC).",
     "Blizzard or Winter Storm Warning: don’t travel, or delay your trip until conditions improve. If you must travel, carry a winter survival kit (National Weather Service).",
     "Heart disease or high blood pressure? Follow your doctor’s advice about shoveling. Everyone else: dress warmly and work slowly (CDC)."
@@ -197,10 +197,10 @@
             "Make the car easy to see: tie a brightly colored cloth (red is best) to the antenna, and raise the hood once snow stops falling (CDC, Red Cross, National Weather Service).",
             "Clear snow from the exhaust pipe before you run the engine, and keep it clear, to lower the risk of carbon monoxide poisoning (National Weather Service, CDC, Red Cross).",
             "Run the engine and heater for about 10 minutes each hour, with one window slightly open for fresh air, the downwind one if you can (National Weather Service, CDC, Red Cross).",
-            "Someone must be awake whenever the engine runs. If more than one person is in the car, take turns sleeping (Red Cross), and wake anyone asleep before you start the engine. Turn it off before anyone goes back to sleep: never run an engine in a vehicle where people are sleeping (Carbon monoxide protocol).",
+            "Everyone in the car must be awake whenever the engine runs: wake anyone asleep before you start it, and turn it off before anyone goes back to sleep. Never run an engine in a vehicle where people are sleeping (Carbon monoxide protocol). If more than one person is in the car, take turns sleeping (Red Cross), only while the engine is off, so someone is always awake.",
             "At night, turn on the dome light while the engine runs, so you can be seen (National Weather Service, Red Cross).",
             "Move anything you need from the trunk into the passenger area. Wrap your whole body, including your head, in extra clothing, blankets or newspapers. Huddle with others for warmth (CDC).",
-            "Keep moving your arms and legs as you sit, and stay awake: you will be less vulnerable to cold-related health problems (CDC).",
+            "Keep moving your arms and legs as you sit (CDC). Stay awake as much as you can: you will be less vulnerable to cold-related health problems (CDC). If you must sleep, sleep in turns with the engine off (Red Cross; Carbon monoxide protocol).",
             "For light, use a flashlight, not a candle (the app’s choice, D51; the Red Cross and CPSC say flashlights, not candles, at home in an outage). Don’t eat snow: it lowers your body temperature (CDC)."
           ]
         },

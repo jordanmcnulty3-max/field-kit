@@ -3167,3 +3167,16 @@ Ready.gov Winter Weather retried: client error again. `draft` removed from all f
 - M11: Ready.gov failed again; ruling. M12: tags left to the whole-pack reviewer; ruling. M13: test
   test_wc_links_lead_with_the_shipped_wind_chill_topic added (shipped data: first link s:surv-wind-chill, label "Wind
   chill and cold danger").
+
+### Task 6 fix round 2 (2026-11-18), from the re-review in task-6-review.md
+
+No new source; wording only.
+- N1: surv-winter-storms doFirst and summary, and surv-sleep-warm's vehicle line, now match the body and D53: everyone in
+  the car awake while the engine runs; engine off before anyone sleeps; turns sleeping (Red Cross) only with the engine
+  off (p:carbon-monoxide donts).
+- N2: surv-sleep-warm summary follows its sources: fuel-burning heaters, stoves and lanterns never while sleeping in a
+  tent or snow shelter (Shelter, Priorities); unvented fuel-burning heaters never in any room where people are sleeping
+  (CPSC, as in surv-portable-heaters); never sleep in a vehicle with the engine running (p:carbon-monoxide).
+- N3: surv-winter-storms: "Stay awake as much as you can" (CDC: "Stay awake. You will be less vulnerable to cold-related
+  health problems.") and "If you must sleep, sleep in turns with the engine off" (Red Cross: "take turns sleeping";
+  p:carbon-monoxide), each credited for what it says.

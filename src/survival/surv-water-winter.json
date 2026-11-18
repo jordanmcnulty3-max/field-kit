@@ -1,0 +1,198 @@
+{
+  "id": "surv-water-winter",
+  "title": "Water in winter",
+  "category": "water",
+  "keywords": [
+    "snow",
+    "ice",
+    "melt snow",
+    "frozen pipes",
+    "freezing",
+    "winter",
+    "cold",
+    "thirst"
+  ],
+  "summary": "Melt snow and ice before you drink them and treat them, keep water and pipes from freezing, and drink before you feel thirsty.",
+  "when": [
+    "cold"
+  ],
+  "doFirst": [
+    "No heat and below freezing? Save the water in your pipes, then shut the main valve and drain the pipes.",
+    "Don’t eat snow or ice: melt it first, then treat it.",
+    "Never use a camp stove indoors, or inside a tent or snow shelter.",
+    "Drink often, before you feel thirsty."
+  ],
+  "sections": [
+    {
+      "h": "Snow and ice",
+      "blocks": [
+        {
+          "list": [
+            "Don’t eat snow or ice to quench thirst. It lowers your body temperature (National Weather Service), and your body has to use energy to melt it, which can lead to more dehydration (Army ATP 3-50.21).",
+            "Ice gives more water than the same amount of snow and needs less heat to melt (Army ATP 3-50.21).",
+            "Use fresh, clean snow (Army ATP 3-50.21). Skip yellow snow (urine, pollen or sand), pink or red snow (algae) and snow with dirt in it (Scout Life, Boy Scouts of America).",
+            "Snow and ice are no purer than the water they came from (Army ATP 3-50.21). Treat melted snow and ice like any other wild water."
+          ]
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        }
+      ]
+    },
+    {
+      "h": "Melt it",
+      "blocks": [
+        {
+          "steps": [
+            "Put a little water in the pot first, then add the snow. It melts faster and the pot won’t scorch (Scout Life; Army ATP 3-50.21: adding water to snow helps it melt faster).",
+            "Plan fuel for it: in winter you may need a stove to melt drinking water because streams can’t be reached (Yosemite National Park, National Park Service).",
+            "On a sunny day, snow or ice spread on a dark cloth or sheet in the sun melts with no fuel (Army ATP 3-50.21). Catch the water in a container."
+          ]
+        },
+        {
+          "warn": "Melt snow outdoors. Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC), or inside a snow shelter. Never burn charcoal indoors (CDC). Carbon monoxide can kill."
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
+        }
+      ]
+    },
+    {
+      "h": "Keep water from freezing",
+      "blocks": [
+        {
+          "list": [
+            "Keep stored water in the warmest part of the house you can, above freezing: CDC says to store it at 50°F to 70°F (10°C to 21°C).",
+            "Water expands when it freezes and can break its container. Leave 2 to 3 inches (5 to 8 cm) of air space at the top of anything that may freeze, and use plastic: some glass breaks even with the space (Ohio State University Extension).",
+            "Outdoors in the cold, store water containers upside down so you can still use them when the water freezes (Army ATP 3-50.21).",
+            "Keep your water filter from freezing: freezing can damage it (Colorado State University Extension).",
+            "Very cold water needs double the bleach (CDC, EPA). With iodine in icy water, wait at least 1 hour (Yosemite National Park)."
+          ]
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        }
+      ]
+    },
+    {
+      "h": "Frozen pipes",
+      "blocks": [
+        {
+          "p": "In an unheated house, pipes can freeze and burst, and a frozen pipe may already be broken and leak when it thaws (Texas A&M AgriLife Extension, from the American Red Cross)."
+        },
+        {
+          "p": "First save the water that is in the pipes and the water heater."
+        },
+        {
+          "link": "s:surv-water-in-the-house",
+          "label": "Water already in your house"
+        },
+        {
+          "p": "When the heat fails in freezing weather, Purdue Extension says to protect the plumbing like this:"
+        },
+        {
+          "steps": [
+            "Shut off the water at the main valve, or turn off the well pump if it is in the house.",
+            "Drain the pressure tank, if you have a well.",
+            "Open all the faucets until they drain completely.",
+            "Drain the toilet flush tanks and spray hoses.",
+            "Empty the drain traps of sinks, tubs, showers, toilets, washtubs and floor drains, or pour in propylene-glycol antifreeze, as much as the water in the trap: 1 pint to 1 quart (0.47 to 0.95 L), depending on the size of the trap."
+          ]
+        },
+        {
+          "warn": "Never put car antifreeze (ethylene glycol) in any part of a home water system (Purdue Extension)."
+        },
+        {
+          "p": "To thaw a frozen pipe, keep its faucet open and warm the frozen part with a heating pad, a hair dryer, an electric portable space heater or towels soaked in hot water (Texas A&M AgriLife Extension, from the Red Cross)."
+        },
+        {
+          "warn": "Never thaw pipes with a blowtorch, a kerosene or propane heater, a charcoal stove or any other open flame. They are a serious fire hazard and give off deadly carbon monoxide (Red Cross)."
+        }
+      ]
+    },
+    {
+      "h": "Drink enough",
+      "blocks": [
+        {
+          "list": [
+            "Cold weather dulls your thirst and makes you pass more urine, so you can become dehydrated without noticing (Human Performance Resources by CHAMP; Army ATP 3-50.21).",
+            "Staying hydrated is one of the best things you can do to prevent cold injury (Human Performance Resources by CHAMP).",
+            "Don’t wait to feel thirsty: drink often (Human Performance Resources by CHAMP). Dry winter air means you need more water; don’t forget to drink because it’s cold out (Yosemite National Park).",
+            "On long days out, take in salt and other minerals as well as water: too much plain water can cause dangerously low blood sodium (Human Performance Resources by CHAMP)."
+          ]
+        },
+        {
+          "link": "p:dehydration",
+          "label": "Dehydration"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "National Weather Service Alaska Region, Winter Weather Hazards",
+      "used": "Do not eat snow: it will lower your body temperature; melt it first"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (2018), chapter 3 (paragraphs 3-2, 3-4, 3-8, 3-12 to 3-14, Table 3-1)",
+      "used": "Second source, non-numeric only: do not eat snow (body must heat it, more dehydration); fresh clean snow; adding water helps snow melt; ice more concentrated and needs less heat; melt on dark material in sunlight; snow and ice no purer than their source; store containers upside down in cold; thirst response decreases in cold"
+    },
+    {
+      "name": "Scout Life (Boy Scouts of America), How to Melt Snow To Make Safe Drinking Water on a Camping Trip (2024)",
+      "used": "Pour some water in the pot before the snow to speed melting and prevent scorching; yellow, pink or red, and dirty snow"
+    },
+    {
+      "name": "National Park Service, Yosemite, Wilderness in Winter",
+      "used": "May need a stove to melt drinking water; dry winter air, drink although it is cold; iodine one hour in icy water"
+    },
+    {
+      "name": "CDC, Carbon Monoxide (CO) Poisoning Basics (Oct. 26, 2026)",
+      "used": "Never use a portable gas camp stove indoors; never burn charcoal indoors"
+    },
+    {
+      "name": "CDC, Carbon Monoxide (CO) Poisoning Prevention",
+      "used": "Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper"
+    },
+    {
+      "name": "CDC, How to Create an Emergency Water Supply (reviewed June 27, 2025)",
+      "used": "Keep containers at 50°F to 70°F"
+    },
+    {
+      "name": "Ohio State University Extension, Preserving Water for Emergency Use (HYG-5354, 2017)",
+      "used": "Leave 2 to 3 inches of air space before freezing; plastic preferred, some glass breaks regardless"
+    },
+    {
+      "name": "Colorado State University Extension, Guide to Treating Water in the Backcountry (2022)",
+      "used": "Avoid freezing temperatures for filters"
+    },
+    {
+      "name": "CDC, How to Make Water Safe in an Emergency; US EPA, Emergency Disinfection of Drinking Water",
+      "used": "Double the bleach for very cold water"
+    },
+    {
+      "name": "Texas A&M AgriLife Extension, Winter Storms: Preventing and Thawing Frozen Pipes (adapted from the American Red Cross)",
+      "used": "Pipes burst; frozen pipe may already be broken; keep faucet open, heat sources for thawing; never blowtorch, kerosene or propane heater, charcoal stove or open flame (fire, carbon monoxide)"
+    },
+    {
+      "name": "Purdue University Extension (INPREP), Protect Your Plumbing and Appliances during a Winter Power Failure (2022)",
+      "used": "Shut off main valve or well pump; drain pressure tank; open all faucets; drain toilet tanks and spray hoses; empty traps or add propylene-glycol antifreeze equal to the trap water (1 pint to 1 quart); ethylene glycol not safe in any part of a home water system"
+    },
+    {
+      "name": "Human Performance Resources by CHAMP (Uniformed Services University), How to prevent cold injuries (2020)",
+      "used": "Stay hydrated to prevent cold injury; cold decreases thirst and increases urine output; drink often before thirsty; electrolytes; too much plain water causes hyponatremia"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

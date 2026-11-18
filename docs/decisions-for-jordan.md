@@ -226,6 +226,32 @@ Source disagreements found while checking the Survival topics. Each says what th
    Water Providers Consortium water heater hanger: turn the gas knob "to the pilot setting — do not turn it
    completely off". Today: "off" (FEMA), and relight by the heater's or gas company's instructions. Say if the group
    wants "pilot" instead, which avoids relighting but leaves a flame under a tank being drained.
+22. **Rainwater for drinking (surv-find-water, surv-make-water-safe) — Water pack Task 5.** FEMA (Where can I find clean
+   drinking water after a disaster?): do not drink collected rainwater. Lake Champlain Sea Grant (2026): harvested
+   rainwater is unsafe for drinking, cooking or washing. CDC (Collecting Rainwater): not necessarily safe to drink
+   without first removing germs and chemicals; CDC (Find Clean Water) lists rain among sources treatment can make safe.
+   Virginia Cooperative Extension: water from wood, asphalt and tar shingle roofs may only suit irrigation. Today:
+   rain caught directly is treated like any wild water (v7, D4); roof water is for washing, cleaning and flushing, and
+   is drunk only if nothing safer is available, filtered and then boiled or disinfected. Say if the group wants roof
+   rainwater ruled out for drinking altogether, or wants a roof-washer and treatment set-up described (pack 6).
+23. **Filter size for bacteria (surv-make-water-safe) — Water pack Task 5.** CDC: an absolute pore size of 0.3 micron
+   or smaller removes bacteria. Colorado State University Extension: under 0.1 micron captures most bacteria. Today:
+   CDC's figure, "smaller is safer", and always disinfect after filtering.
+24. **Sunlight (SODIS) time (surv-make-water-safe) — Water pack Task 5.** CDC: 6 hours in sun, or 2 days if cloudy. WHO
+   Technical Note 5: near the equator, 24 hours on a sunny day or 48 hours if cloudy. Today: WHO's longer times, and
+   sunlight only as a last resort. Say if the group wants CDC's 6 hours.
+25. **Disinfecting a well (surv-wells-without-power) — Water pack Task 5.** (a) CDC's current table prints 3 1/4 cups
+   of bleach for 30 ft of water in a 10 in casing; CDC's earlier version and its own metric table (888 mL) give
+   3 3/4 cups, which fits the rest of the column. Today: 3 3/4 cups, with CDC's printed value noted. (b) Standing time:
+   CDC at least 12 hours; NYS DOH at least 8, preferably 12 to 24; EPA 6 to 24. Today: at least 12 hours, NYS DOH's
+   12 to 24 noted. (c) NYS DOH's own leaflet uses a fixed amount (2 quarts of bleach in 10 gallons of water,
+   recirculated with the pump for an hour, then 2 more quarts) instead of a table; it needs a working pump. Today:
+   CDC's table and steps. (d) With no pump, CDC gives only "bail with a bucket" and "pour water back with a bucket";
+   the topic adds: let it stand 12 hours, then bail until the chlorine smell is gone (the app's reading). Say if a
+   well contractor or the health department should check this before the group relies on it.
+26. **Springs (surv-find-water, surv-wells-without-power) — Water pack Task 5.** Army ATP 3-50.21: springs are
+   "typically the safest open source". Penn State Extension: springs are highly susceptible to contamination and most
+   need continuous disinfection. Today: treat spring water like any other (Penn State).
 27. **Bleach in toilet buckets (surv-toilet-no-water) — Water pack Task 6.** FEMA (Are You Ready?): after each use
    pour a small amount of household disinfectant such as chlorine bleach into the toilet container. Anchorage and
    Wayne County (Michigan) emergency management: bleach diluted 1 to 10, with no bleach strength. The two-bucket

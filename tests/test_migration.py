@@ -358,7 +358,7 @@ def _water_pack_boot(page, app_url, raw=None, hash_='#/survival'):
     moved = [{'id': tid, 'title': title, 'category': 'water', 'keywords': [], 'summary': '',
               'sections': [{'h': 'Fixture', 'blocks': [{'p': 'Fixture text.'}]}],
               'sources': [{'name': 'Fixture source', 'used': 'everything'}], 'reviewed': '2026-11-18'}
-             for tid, title in (('surv-find-water', 'Find water'), ('surv-make-water-safe', 'Make water safe'))]
+             for tid, title in (('surv-find-water', 'Find water outside'), ('surv-make-water-safe', 'Make water safe'))]
     inject_data(page, topics=moved, checklists=[QCL], tooldata={'water': WATER})
     boot(page, app_url, raw, hash_=hash_)
 
@@ -378,7 +378,7 @@ def test_v7_backup_without_group_restores_with_the_default_group_and_old_water_p
     assert page.evaluate('FK.survival.group()') == {'people': 1, 'days': 14}
     page.click('#survPinned button[data-key="s:surv-find-water"]')
     page.wait_for_function("location.hash === '#/survival/surv-find-water'")
-    assert page.inner_text('#survPage h2') == 'Find water'
+    assert page.inner_text('#survPage h2') == 'Find water outside'
     page.go_back()
     page.wait_for_function("location.hash === '#/survival'")
     page.click('#survRecent button[data-key="s:surv-make-water-safe"]')

@@ -1,0 +1,375 @@
+{
+  "id": "surv-wells-without-power",
+  "title": "Wells without power",
+  "category": "water",
+  "keywords": [
+    "well",
+    "private well",
+    "well pump",
+    "hand pump",
+    "generator",
+    "flooded well",
+    "disinfect well",
+    "shock chlorination",
+    "spring"
+  ],
+  "summary": "With no power an electric well pump stops: use stored water, the pressure tank, a hand pump or a safely run generator. After a flood, don’t use the well until it is disinfected and tested.",
+  "where": [
+    "rural"
+  ],
+  "doFirst": [
+    "Flood water reached the well? Don’t drink, cook, bathe or wash with its water.",
+    "Turn off the power to the well before you touch anything. Never step in water around a well unless you are sure the power is off.",
+    "Never enter a well pit.",
+    "Run a generator only outdoors, more than 20 ft (6 m) from windows, doors and vents."
+  ],
+  "sections": [
+    {
+      "h": "Power off",
+      "blocks": [
+        {
+          "list": [
+            "An electric well pump can’t pump water without power (Private Well Class, University of Illinois and RCAP, funded by EPA).",
+            "Turn off the power to the pump at the breaker so it doesn’t start on its own when the power comes back, and label that breaker (Private Well Class).",
+            "If your pressure tank has a faucet near the bottom, you can draw water from it (Private Well Class). Treat it before drinking if you are not sure the well is safe.",
+            "Use your stored water (Water Systems Council)."
+          ]
+        },
+        {
+          "link": "s:surv-water-in-the-house",
+          "label": "Water already in your house"
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        }
+      ]
+    },
+    {
+      "h": "Generator",
+      "blocks": [
+        {
+          "list": [
+            "A generator can run the well pump (Water Systems Council).",
+            "A qualified electrician should install the generator and a transfer switch. Never plug a generator into a wall outlet: power can feed back into the lines and endanger line workers and anyone near downed lines (University of Illinois Extension).",
+            "Never use a generator inside your home or garage, even with doors and windows open. Run it outside, more than 20 feet (6 m) from any window, door or vent (CDC).",
+            "Use a battery-powered or battery-backup carbon monoxide detector in the house while it runs (CDC).",
+            "Turn it off and let it cool before you refuel it (University of Illinois Extension).",
+            "Keep it dry: a generator is an electrical risk when wet (University of Illinois Extension)."
+          ]
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
+        }
+      ]
+    },
+    {
+      "h": "Hand pump or bucket",
+      "blocks": [
+        {
+          "list": [
+            "A hand pump fitted to the well keeps water coming in a long outage (Water Systems Council). Have it installed before you need it.",
+            "With no pump at all, water can be bailed out of a well with a bucket or other device (CDC, in its well disinfection steps). A drilled well’s casing can be only a few inches wide (CDC’s tables start at 2 inches), so the bucket must be narrow enough to fit.",
+            "Working on a well after a disaster can be hazardous; CDC says it should be done by a well or pump contractor."
+          ]
+        },
+        {
+          "warn": "Never enter a well pit: gases and vapors can build up in it (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "After a flood",
+      "blocks": [
+        {
+          "p": "If flood water reached the well, don’t drink, cook, bathe or wash with its water (EPA) until it has been disinfected and tested (CDC). A flooded well may not be safe for many months (EPA)."
+        },
+        {
+          "list": [
+            "Turn off all electricity to the well before you clear debris (CDC). Never step in water around a well unless you are sure the power is off (NYS Department of Health). Rubber boots and gloves do not protect you from electric shock (EPA).",
+            "Watch for power lines on the ground or in the water, sharp debris, open holes and slippery ground (CDC).",
+            "Don’t turn the pump on until a qualified electrician, well contractor or pump contractor has checked the wiring (CDC, EPA).",
+            "If the water smells of fuel or chemicals, don’t use it: boiling or disinfecting won’t make it safe (CDC, NYS Department of Health).",
+            "In normal times, call your local health department before using the well again (CDC, NYS Department of Health). In New York, NYS Department of Health says to use other water until the health department says otherwise."
+          ]
+        },
+        {
+          "link": "p:poisoning",
+          "label": "Poisoning"
+        }
+      ]
+    },
+    {
+      "h": "Disinfect the well",
+      "blocks": [
+        {
+          "p": "CDC says a well or pump contractor should do this. If none can come, these are CDC’s steps. Wear goggles or a face shield, work where there is fresh air and don’t breathe the vapors. Tell everyone not to drink or bathe in the water until every step is done (CDC)."
+        },
+        {
+          "p": "Use only plain, unscented household liquid chlorine bleach, usually 5% to 9% (CDC). No splashless, scented or gel bleach (NYS Department of Health)."
+        },
+        {
+          "warn": "Never mix bleach with ammonia or any other cleaner (CDC)."
+        },
+        {
+          "steps": [
+            "If the well has an electric pump, turn off all electricity and clear debris from around the top of the well.",
+            "Repair the electrical system and pump if needed. Get a qualified electrician, well contractor or pump contractor if you are not experienced with this work.",
+            "Start the pump and run water until it is clear, from the outside faucet closest to the well, to keep the unsafe water out of the house plumbing. No pump: bail water out of the well with a bucket until it is clear.",
+            "If the well feeds the house plumbing, close the valves to any water softener.",
+            "Find the amount of bleach in the table for your kind of well below.",
+            "In a 5-gallon bucket, mix that bleach with 3 to 5 gallons (12 to 19 liters) of water.",
+            "Drilled or driven well: remove the vent cap and pour the mixture in through a funnel. Bored or dug well: add the mixture to the well. Keep it away from all electrical connections.",
+            "Mix it: attach a clean hose to the nearest outside faucet and run water back into the well. No pump: pour water back into the well with a bucket.",
+            "Rinse the inside of the well casing with a garden hose or bucket for 5 to 10 minutes.",
+            "Open every faucet in the house until you smell a strong chlorine odor at each one, then turn them all off.",
+            "Leave the solution in the well and pipes for at least 12 hours.",
+            "Then drain it through a hose from an outside faucet onto ground with no plants, such as a driveway, until the chlorine smell is gone. Not into streams, ponds or other open water.",
+            "Run all the indoor faucets until the chlorine smell is gone.",
+            "Until the water has been tested, boil it (rolling boil for 1 minute) or use other water."
+          ]
+        },
+        {
+          "p": "Steps from CDC. NYS Department of Health says to let the well stand preferably 12 to 24 hours, and not to drain the chlorinated water into a septic system or sewer. Above 5,000 ft, boil for 3 minutes (EPA)."
+        },
+        {
+          "p": "With no pump, the faucet steps can’t be done. CDC gives no other no-pump steps; the app’s reading is: let the solution stand in the well at least 12 hours, then bail water out, away from plants and open water, until the chlorine smell is gone."
+        },
+        {
+          "p": "Bored and dug wells are hard to disinfect: they are shallow and poorly protected, so flood water can carry dirt back in (CDC)."
+        },
+        {
+          "p": "Bleach for a drilled or driven well (CDC). Depth of water in the well down the side, width of the casing across the top:"
+        },
+        {
+          "table": {
+            "head": [
+              "Depth of water",
+              "2 in (5 cm)",
+              "4 in (10 cm)",
+              "6 in (15 cm)",
+              "8 in (20 cm)",
+              "10 in (25 cm)",
+              "24 in (0.6 m)",
+              "36 in (0.9 m)"
+            ],
+            "rows": [
+              [
+                "10 ft (3 m)",
+                "3/4 tbsp",
+                "3 1/4 tbsp",
+                "1/2 cup",
+                "3/4 cup",
+                "1 1/4 cups",
+                "7 cups",
+                "1 gal"
+              ],
+              [
+                "20 ft (6 m)",
+                "1 1/2 tbsp",
+                "6 1/2 tbsp",
+                "1 cup",
+                "1 1/2 cups",
+                "2 1/2 cups",
+                "14 cups",
+                "2 gal"
+              ],
+              [
+                "30 ft (9 m)",
+                "2 1/4 tbsp",
+                "9 3/4 tbsp",
+                "1 1/2 cups",
+                "2 1/4 cups",
+                "3 3/4 cups*",
+                "1 1/4 gal",
+                "3 gal"
+              ],
+              [
+                "40 ft (12 m)",
+                "3 tbsp",
+                "13 tbsp",
+                "2 cups",
+                "3 cups",
+                "5 cups",
+                "1 3/4 gal",
+                "4 gal"
+              ],
+              [
+                "50 ft (15 m)",
+                "3 3/4 tbsp",
+                "1 cup",
+                "2 1/2 cups",
+                "3 3/4 cups",
+                "6 1/4 cups",
+                "2 1/4 gal",
+                "5 gal"
+              ],
+              [
+                "100 ft (30 m)",
+                "7 1/2 tbsp",
+                "2 cups",
+                "5 cups",
+                "7 1/2 cups",
+                "12 1/2 cups",
+                "4 1/2 gal",
+                "10 gal"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "*CDC’s current page prints 3 1/4 cups here. Its earlier version of the same table, its own metric table (888 mL) and the rows above and below all give 3 3/4 cups: use 3 3/4 cups."
+        },
+        {
+          "p": "Bleach for a bored or dug well (CDC). Depth of water down the side, width of the well across the top:"
+        },
+        {
+          "table": {
+            "head": [
+              "Depth of water",
+              "0.5 ft (0.15 m)",
+              "1 ft (0.3 m)",
+              "2 ft (0.6 m)",
+              "3 ft (0.9 m)",
+              "4 ft (1.2 m)",
+              "5 ft (1.5 m)"
+            ],
+            "rows": [
+              [
+                "10 ft (3 m)",
+                "1/2 cup",
+                "1 3/4 cups",
+                "7 cups",
+                "1 gal",
+                "1 3/4 gal",
+                "2 3/4 gal"
+              ],
+              [
+                "20 ft (6 m)",
+                "1 cup",
+                "3 1/2 cups",
+                "14 cups",
+                "2 gal",
+                "3 1/2 gal",
+                "5 1/2 gal"
+              ],
+              [
+                "30 ft (9 m)",
+                "1 1/2 cups",
+                "5 1/4 cups",
+                "1 1/4 gal",
+                "3 gal",
+                "5 1/4 gal",
+                "8 1/4 gal"
+              ],
+              [
+                "40 ft (12 m)",
+                "2 cups",
+                "7 cups",
+                "1 3/4 gal",
+                "4 gal",
+                "7 gal",
+                "11 gal"
+              ],
+              [
+                "50 ft (15 m)",
+                "2 1/2 cups",
+                "8 3/4 cups",
+                "2 1/4 gal",
+                "5 gal",
+                "8 3/4 gal",
+                "13 3/4 gal"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Amounts are approximate, rounded to a practical measure, and give a chlorine level above 100 mg/L. tbsp is tablespoon; 1 cup = 8 fl oz = 16 tbsp; gal is gallon; 1 gallon = 16 cups (CDC). 1 tbsp is about 15 mL, 1 cup about 237 mL, 1 gallon 3.8 L."
+        }
+      ]
+    },
+    {
+      "h": "Test the water",
+      "blocks": [
+        {
+          "list": [
+            "Wait 7 to 10 days after disinfecting, until every trace of chlorine has been flushed out, then have the water tested (CDC).",
+            "Test for total coliform and either E. coli or fecal coliform bacteria (CDC). In New York, use a NY State certified lab and its sterile bottle (NYS Department of Health).",
+            "No coliform found: the water can be considered safe to drink. Test again 2 to 4 weeks later and 3 to 4 months later (CDC).",
+            "Coliform found: disinfect the well again and test again (CDC).",
+            "If you can’t get a test, keep boiling or treating the well water before you drink it."
+          ]
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        }
+      ]
+    },
+    {
+      "h": "Springs",
+      "blocks": [
+        {
+          "list": [
+            "Springs are fed by shallow groundwater and are easily contaminated. Most springs used for drinking need constant disinfection (Penn State Extension): treat spring water before you drink it.",
+            "Fence livestock away from a spring, turn surface water away from it, and keep activities at least 100 feet (30 m) from the spring box (Penn State Extension).",
+            "A spring whose flow changes a lot through the year is unreliable and may be contaminated (Penn State Extension)."
+          ]
+        },
+        {
+          "link": "s:surv-find-water",
+          "label": "Find water outside"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, How to Disinfect Wells After an Emergency (reviewed May 29, 2025)",
+      "used": "Contractor should do it; do not drink after extensive flooding; fuel or chemicals not made safe by boiling or disinfection; safety (electricity, hazards, do not enter the well pit, goggles, ventilation, warn users); unscented bleach 5-9%; steps for drilled or driven and bored or dug wells including no-pump bailing and bucket mixing, 3-5 gallons in a 5-gallon bucket, 5-10 minute rinse, at least 12 hours, draining, boil 1 minute until tested; both bleach tables and notes; testing after 7-10 days for total coliform and E. coli or fecal coliform, retest 2-4 weeks and 3-4 months, repeat if coliform found"
+    },
+    {
+      "name": "CDC, Disinfecting of Drilled or Driven Wells After a Disaster (earlier version, copy hosted by New Mexico Department of Health)",
+      "used": "30 ft, 10 in cell: 3-3/4 cups"
+    },
+    {
+      "name": "US EPA, Emergency Disinfection of Wells that have been Flooded (EPA 816-F-05-021, updated October 2024)",
+      "used": "Do not drink, cook, bathe or wash with flooded well water; electrician checks wiring; rubber boots and gloves not adequate protection; may not be safe for many months"
+    },
+    {
+      "name": "New York State Department of Health, Restoring and Testing Your Private Well After a Flood (6562, 2/17)",
+      "used": "Never step in water around a well unless power is off; no splashless, scented or gel bleach; stand at least 8 hours, preferably 12 to 24; not into septic or sewer; fuel or chemicals: do not use, contact the health department; use other water until the health department says otherwise; NY State certified lab, sterile bottle"
+    },
+    {
+      "name": "Private Well Class (RCAP and University of Illinois, EPA-funded), What do I do if there is a power outage and my well won't work? (2026)",
+      "used": "No pumping without power; turn off power to the pump so it does not restart, label the breaker; pressure tank faucet near the bottom"
+    },
+    {
+      "name": "Water Systems Council (wellcare), Homeowner Emergency Localized Plan (HELP)",
+      "used": "Generator to run the well pump or rely on stored water; consider a hand pump for extended outages"
+    },
+    {
+      "name": "University of Illinois Extension, Use a generator safely",
+      "used": "Qualified electrician installs generator and transfer switch; do not plug into the wall (back feed endangers line workers); off and cool before fueling; electrical risk when wet"
+    },
+    {
+      "name": "CDC, Carbon Monoxide (CO) Poisoning Basics (Oct. 26, 2026)",
+      "used": "Never use a generator inside home or garage even with doors and windows open; outside more than 20 feet from windows, doors and vents; battery-powered or battery-backup CO detector"
+    },
+    {
+      "name": "CDC, How to Safely Clean and Sanitize with Bleach",
+      "used": "Never mix bleach with ammonia or any other cleaner"
+    },
+    {
+      "name": "US EPA, Emergency Disinfection of Drinking Water",
+      "used": "3 minutes boiling above 5,000 ft"
+    },
+    {
+      "name": "Penn State Extension, Spring Development and Protection (Water Facts #4)",
+      "used": "Springs susceptible to contamination, most need continuous disinfection; fence livestock, redirect surface water, activities at least 100 feet from the spring box; fluctuating flow unreliable"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

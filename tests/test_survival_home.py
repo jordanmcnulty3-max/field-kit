@@ -357,6 +357,8 @@ def test_f1_safety_topics_are_never_filtered_out_of_the_shipped_home(page, app_u
             keys = listed(page)
             for k in ALWAYS:
                 assert k in keys, f'{k} hidden by where={where} when={when}'
+            # Water in winter is tagged when: cold (water pack): listed under Any and Cold, hidden under Warm.
+            assert ('s:surv-water-winter' in keys) == (when != 'warm'), f'water-winter wrong for where={where} when={when}'
             if where == 'coast':
                 assert 's:surv-shelter' in keys and 's:surv-river-crossings' in keys, f'Coast hides shelter or river crossings (when={when})'
 
@@ -376,9 +378,9 @@ def test_f2_when_row_hidden_when_no_fixture_has_a_when_tag(page, app_url):
     assert len(titles(page, 'Basics')) == 4
 
 
-def test_f2_shipped_data_has_no_when_row(page, app_url):
-    shipped_home(page, app_url)
-    assert page.locator('#survFilters [role="group"]').evaluate_all('g => g.map(e => e.getAttribute("aria-label"))') == ['Where']
+def test_f2_shipped_data_shows_the_when_row(page, app_url):
+    shipped_home(page, app_url)   # surv-water-winter (water pack) is the first shipped topic with a when tag
+    assert page.locator('#survFilters [role="group"]').evaluate_all('g => g.map(e => e.getAttribute("aria-label"))') == ['Where', 'When']
 
 
 def test_f5_survival_recent_clear_is_at_least_48px(page, app_url):

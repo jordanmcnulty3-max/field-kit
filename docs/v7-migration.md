@@ -344,3 +344,29 @@ every statement is in `docs/content-review.md`.
 - figs `river`: label "stay well upstream" now "never cross just above them" (matches surv-river-crossings).
 - surv-fire, `fire-sizes` caption. Old: "Tinder, kindling and fuel. If you skip the tinder or kindling stage, the fire will likely fail." New: "Tinder, kindling and fuel." (no repeat of the paragraph above).
 - docs/decisions-for-jordan.md D11 now names both irises.
+
+### Water pack Task 5: find, treat, winter, wells (2026-11-18)
+
+No statement the v7 review checked was reworded or removed in `surv-make-water-safe` or `surv-find-water`; their first
+sections and the `water-bend` and `water-bag` figures are unchanged. New sections were added after them (traced in
+docs/content-review.md, "Water pack Task 5"). Changes to existing fields:
+
+**surv-make-water-safe**
+
+- Category. Old: "basics". New: "water". Source: water pack content plan, section 2.
+- Keywords. Old: boil, bleach, filter, purify, treat, drinking water, tablets, algae, algal bloom. New: the same plus "distill" (new Distillation section; FEMA, Food and Water in an Emergency).
+- Sources. The "used" lines of US EPA Emergency Disinfection of Drinking Water, CDC How to Make Water Safe in an Emergency and CDC About Water Treatment Options When Hiking, Camping, or Traveling were extended with what the new sections use (text kept, "; water pack: ..." appended). Eight sources added (CDC Safe Water Storage; CDC How to Safely Clean and Sanitize with Bleach; FEMA, Food and Water in an Emergency; WHO Technical Note 5; Colorado State University Extension; NPS Yosemite; Virginia Cooperative Extension; FEMA, Where can I find clean drinking water after a disaster?).
+- Reviewed. Old: "2026-11-17". New: "2026-11-18". Draft: added `true` until this batch's independent review passes.
+
+**surv-find-water**
+
+- Title. Old: "Find water". New: "Find water outside". Source: water pack content plan, section 2. The first section's heading stays "Find water" (an added heading, see "Added headings").
+- Category. Old: "basics". New: "water".
+- Keywords. Old: water, dew, rain, transpiration, stream, thirst. New: the same plus spring, lake, snow, rainwater.
+- Sources. The "used" lines of US Army ATP 3-50.21, CDC How to Find Clean Water in an Emergency and NYS Department of Health Harmful Blue-Green Algae Blooms were extended (text kept, "; water pack: ..." appended). Fourteen sources added (see the topic file and content-review).
+- Reviewed. Old: "2026-11-17". New: "2026-11-18". Draft: added `true` until this batch's independent review passes.
+
+**Not changed, noted for the reviewer**
+
+- The v7 list item "Treat all wild water, rain included, before drinking" stays. The new "Rain and roofs" warning adds the more cautious FEMA and Lake Champlain Sea Grant position for rain collected from roofs (decisions D22); the two agree that rain is treated before drinking.
+- The v7 list item "Never drink seawater or urine" stays; the new Distillation section in surv-make-water-safe says salt water is used only if distilled first (FEMA), and never as it is.

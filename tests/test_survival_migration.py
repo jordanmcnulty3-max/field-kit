@@ -25,6 +25,8 @@ MIGRATED = {'surv-dangerous-animals', 'surv-field-dressing-game', 'surv-find-wat
             'surv-knots', 'surv-make-water-safe', 'surv-navigation-without-a-compass', 'surv-priorities',
             'surv-river-crossings', 'surv-shelter', 'surv-signal-for-rescue', 'surv-ten-essentials',
             'surv-traps-and-fishing', 'surv-weather-and-lightning'}
+# Migrated topics a content pack moved to another category and reopened as drafts (water pack, Task 5).
+REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water'}
 
 
 def new_topics():
@@ -59,7 +61,7 @@ def test_figures_used_equal_old_set_minus_shelter_desert_and_nav_cross():
         figs_now = {b['fig'] for s in t['sections'] for b in s['blocks'] if 'fig' in b}
         if tid not in olds:
             assert figs_now == set(), tid
-        elif t.get('draft') is True:
+        elif t.get('draft') is True and tid not in REOPENED:
             assert figs_now == olds[tid], tid
         else:
             assert figs_now <= olds[tid], tid
@@ -71,8 +73,8 @@ def test_draft_topics_keep_placeholder_source_and_all_topics_validate():
     migrated = [t for t in topics if t['id'] in MIGRATED]
     assert len(migrated) == 15
     for t in migrated:
-        assert t['category'] == 'basics'
-        if t.get('draft') is True:
+        assert t['category'] == REOPENED.get(t['id'], 'basics')
+        if t.get('draft') is True and t['id'] not in REOPENED:
             assert t['reviewed'] == '2026-11-17'
             assert t['sources'] == [{'name': 'Not yet source-checked', 'used': 'Converted from v6 text; checked in Tasks 13 to 16'}]
     keys = {'p:' + os.path.splitext(os.path.basename(p))[0] for p in glob.glob(os.path.join(ROOT, 'src', 'protocols', '*.json'))}

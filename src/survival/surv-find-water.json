@@ -1,14 +1,18 @@
 {
   "id": "surv-find-water",
-  "title": "Find water",
-  "category": "basics",
+  "title": "Find water outside",
+  "category": "water",
   "keywords": [
     "water",
     "dew",
     "rain",
     "transpiration",
     "stream",
-    "thirst"
+    "thirst",
+    "spring",
+    "lake",
+    "snow",
+    "rainwater"
   ],
   "summary": "Water runs downhill: check low ground, the foot of cliffs and dry stream beds.",
   "sections": [
@@ -44,12 +48,127 @@
           ]
         }
       ]
+    },
+    {
+      "h": "Rain and roofs",
+      "blocks": [
+        {
+          "p": "Rain that runs off a roof picks up dirt, germs and chemicals: bird droppings, and asbestos, lead or copper from roofing, gutters and pipes. Rain after several dry days is the most likely to be dirty (CDC)."
+        },
+        {
+          "list": [
+            "Let the first rain of each storm run off before you collect: that first flow carries the most dirt, germs and chemicals (CDC). Virginia Cooperative Extension suggests diverting 10 to 50 gallons for every 1,000 sq ft of roof (38 to 190 L for every 93 m²).",
+            "Water from wood, asphalt or tar shingle roofs may only be fit for watering plants (Virginia Cooperative Extension).",
+            "Screen where the water goes into a barrel, to keep out bugs and debris, or empty open barrels at least every 10 days so mosquitoes can’t breed in them (CDC)."
+          ]
+        },
+        {
+          "warn": "FEMA and Lake Champlain Sea Grant say not to drink collected rainwater. CDC says rainwater is not necessarily safe to drink without first removing germs and chemicals. Use roof water for washing, cleaning and flushing. Drink it only if you have nothing safer, and then filter it and boil or disinfect it. Boiling does not remove metals from the roof."
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        }
+      ]
+    },
+    {
+      "h": "Snow and ice",
+      "blocks": [
+        {
+          "p": "Don’t eat snow or ice: it lowers your body temperature (National Weather Service). Melt it, then treat it like any other wild water."
+        },
+        {
+          "link": "s:surv-water-winter",
+          "label": "Water in winter"
+        }
+      ]
+    },
+    {
+      "h": "Lakes, streams, springs",
+      "blocks": [
+        {
+          "p": "Rain, streams, rivers and other moving water, ponds, lakes and natural springs can all be made safe by treatment (CDC, FEMA). Rivers, streams and lakes might carry livestock waste, human sewage and chemicals (CDC)."
+        },
+        {
+          "p": "Springs are fed by shallow groundwater and are easily contaminated. Most springs used for drinking need constant disinfection (Penn State Extension). Treat spring water like any other."
+        },
+        {
+          "p": "Wells can be contaminated by flooding (CDC)."
+        },
+        {
+          "link": "s:surv-wells-without-power",
+          "label": "Wells without power"
+        }
+      ]
+    },
+    {
+      "h": "Choose the cleanest",
+      "blocks": [
+        {
+          "list": [
+            "Choose moving water over still water: faster water usually carries fewer harmful germs (Army ATP 3-50.21). FEMA lists streams, rivers and other moving water as sources.",
+            "Don’t take water from puddles and other natural dips in the ground: it is stagnant and often heavily contaminated (Army ATP 3-50.21).",
+            "Avoid water with floating material, an odor or a dark color (FEMA).",
+            "Water near towns, farms and camps is the most likely to carry human and animal waste (Army ATP 3-50.21, CDC).",
+            "Pick the clearest water you can. Cloudy water needs a double dose of bleach, and UV light and sunlight don’t work well in it (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Water to avoid",
+      "blocks": [
+        {
+          "p": "Harmful algal blooms in New York look like pea soup, spilled green paint, long green streaks or scattered green dots, or turn the water blue-green or white (NYS DEC). They grow in warm, shallow, still, nutrient-rich water that gets a lot of sun (NYS Department of Health), and NYS DEC gets the most reports in August and September."
+        },
+        {
+          "warn": "Keep people, pets and livestock out of water that is discolored or has scum on it (NYS DEC). Filtering, chlorine or UV light at home may still not protect you from the toxins (NYS Department of Health). Showering, bathing or washing in bloom water also exposes you (NYS Department of Health)."
+        },
+        {
+          "p": "Flood water: don’t drink it (FEMA). It can carry human and livestock waste, household, medical and industrial hazardous waste, and chemicals from containers the flood moved (CDC). Wash your hands with soap and clean water after touching it, and keep open wounds out of it (CDC)."
+        },
+        {
+          "p": "Road salt can raise the sodium and chloride in water, which matters for anyone on a low-sodium diet or with high blood pressure or heart, kidney or liver disease (NYS Department of Health). Boiling and disinfecting leave salt in (EPA); a reverse osmosis filter (CDC, NYS Department of Health) or distillation (FEMA) takes it out."
+        },
+        {
+          "p": "Fuel and chemicals: avoid water that may carry toxins (Army ATP 3-50.21), such as water near old factories, mines, dumps or spills, or water that smells of fuel or chemicals. Boiling and disinfecting can’t make it safe (CDC): find another source."
+        },
+        {
+          "link": "p:poisoning",
+          "label": "Poisoning"
+        }
+      ]
+    },
+    {
+      "h": "Carry and settle",
+      "blocks": [
+        {
+          "list": [
+            "Carry water in clean containers with tight lids (CDC).",
+            "Keep the containers you fill with untreated water apart from your drinking-water containers, and mark them.",
+            "If the water is cloudy or muddy, let it stand so the dirt settles, then pour off the clear water (CDC, WHO). The Army says several hours; WHO says storing it for 2 days reduces contamination further.",
+            "Then filter it through a clean cloth, paper towel or coffee filter and treat it (CDC, EPA)."
+          ]
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        },
+        {
+          "link": "s:surv-water-in-the-house",
+          "label": "Water already in your house"
+        }
+      ]
     }
   ],
   "sources": [
     {
       "name": "US Army ATP 3-50.21, Survival (2018), chapter 3 (Table 3-1, paragraphs 3-2, 3-11, 3-15, 3-27, 3-34)",
-      "used": "Seepage wells at outside bends of a dry riverbed and the foot of cliffs or rocks; dig deep enough for water to seep in; rain on nonporous items, rain off leaves; dew with cloth around the lower legs; transpiration bag sealed over a leafy branch, collect before sundown, same limb 3 or 5 days; do not drink saltwater or urine"
+      "used": "Seepage wells at outside bends of a dry riverbed and the foot of cliffs or rocks; dig deep enough for water to seep in; rain on nonporous items, rain off leaves; dew with cloth around the lower legs; transpiration bag sealed over a leafy branch, collect before sundown, same limb 3 or 5 days; do not drink saltwater or urine; water pack: choose running over stagnant water, faster water has fewer harmful microorganisms; do not drink water in natural depressions; consider surface water contaminated with human and animal waste, especially near settlements; avoid water potentially contaminated with toxins; muddy water left standing several hours to settle (paragraphs 3-2, 3-9, 3-35, 3-38)"
     },
     {
       "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapter VII",
@@ -65,12 +184,69 @@
     },
     {
       "name": "CDC, How to Find Clean Water in an Emergency",
-      "used": "Rainwater, streams, rivers, ponds, lakes and springs must be treated to kill germs"
+      "used": "Rainwater, streams, rivers, ponds, lakes and springs must be treated to kill germs; water pack: rain, moving water, ponds, lakes and springs can be made safe by treatment; rivers, streams and lakes might carry livestock waste, human sewage, chemicals; well water contaminated in floods; fuel or toxic chemicals cannot be made safe"
     },
     {
       "name": "New York State Department of Health, Harmful Blue-Green Algae Blooms",
-      "used": "Bloom appearance; do not drink surface water during a bloom even if you treat it yourself"
+      "used": "Bloom appearance; do not drink surface water during a bloom even if you treat it yourself; water pack (FAQ, revised June 2024): blooms in warm, shallow, undisturbed, nutrient-rich water with a lot of sun; home filtration, chlorine or UV may not protect; exposure through showering, bathing or washing"
+    },
+    {
+      "name": "CDC, Collecting Rainwater and Your Health: An Overview",
+      "used": "Roof, gutter, piping chemicals (asbestos, lead, copper), bird droppings, worst after dry weather; first flush diverter and why; screens, empty barrels every 10 days; rainwater not necessarily safe to drink without removing germs and chemicals"
+    },
+    {
+      "name": "Virginia Cooperative Extension, Rainwater Harvesting Systems (BSE-265, 2019)",
+      "used": "First flush 10 to 50 gallons per 1,000 sq ft of roof; wood, asphalt and tar shingle roofs may only suit irrigation"
+    },
+    {
+      "name": "Lake Champlain Sea Grant, Rain Barrel Water Reuse (January 2026)",
+      "used": "Harvested rainwater unsafe for drinking; E. coli from animal droppings; metals from roofing"
+    },
+    {
+      "name": "FEMA, Where can I find clean drinking water after a disaster?",
+      "used": "Do not drink collected rainwater"
+    },
+    {
+      "name": "FEMA with the American Red Cross and USDA, Food and Water in an Emergency",
+      "used": "Outdoor sources (rainwater, moving water, ponds and lakes, springs); avoid water with floating material, an odor or dark color; do not drink floodwater; distillation removes salts"
+    },
+    {
+      "name": "National Weather Service Alaska Region, Winter Weather Hazards",
+      "used": "Do not eat snow: it lowers body temperature; melt it first"
+    },
+    {
+      "name": "Penn State Extension, Spring Development and Protection (Water Facts #4)",
+      "used": "Springs fed by shallow groundwater, highly susceptible to contamination; most need continuous disinfection"
+    },
+    {
+      "name": "NYS DEC, 2026 NYHABS announcement (May 22, 2026)",
+      "used": "Bloom appearance (green dots, streaks, pea soup, spilled green paint, blue-green or white); most reports in August and September; people, pets and livestock avoid discolored water or scums"
+    },
+    {
+      "name": "CDC, Safety Guidelines: Floodwater",
+      "used": "What floodwater can contain; wash hands after contact; avoid exposure with open wounds"
+    },
+    {
+      "name": "New York State Department of Health, Salt and Drinking Water (December 2019)",
+      "used": "Road salt raises sodium and chloride; concern for low-sodium diets, high blood pressure, heart, kidney, liver disease; reverse osmosis removes it"
+    },
+    {
+      "name": "US EPA, Emergency Disinfection of Drinking Water",
+      "used": "Boiling and disinfection do not remove salts; settle and filter through cloth, paper towel or coffee filter"
+    },
+    {
+      "name": "CDC, How to Make Water Safe in an Emergency",
+      "used": "Double bleach for cloudy water; UV and sunlight do not work well in cloudy water; settle and draw off clear water"
+    },
+    {
+      "name": "CDC, Safe Water Storage (Global WASH)",
+      "used": "Containers prevent contamination while water is transported and stored; tight cover"
+    },
+    {
+      "name": "WHO (prepared by WEDC), Technical Notes on Drinking-Water, Sanitation and Hygiene in Emergencies, note 5 (2013)",
+      "used": "Turbid water left to stand and settle; storage for two days reduces contamination further"
     }
   ],
-  "reviewed": "2026-11-17"
+  "reviewed": "2026-11-18",
+  "draft": true
 }

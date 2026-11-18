@@ -135,8 +135,8 @@
           ? { key, title: label, where: key[0] === 'r' ? 'Report' : 'Tool', draft: false } : null;
       }
       case 's': {
-        const d = /^surv-[\w-]+$/.test(id) ? document.querySelector('#survTopics details.ref[id="' + id + '"]') : null;
-        return d ? { key, title: topicTitle(d), where: 'Survival', draft: false } : null;
+        const t = FK.survival && FK.survival.topic(id);
+        return t ? { key, title: t.title, where: 'Survival', draft: t.draft === true } : null;
       }
       case 'a':
         return Object.hasOwn(SCREENS, id) ? { key, title: SCREENS[id].title, where: 'App', draft: false } : null;

@@ -207,3 +207,123 @@ def test_throwing_page_provider_goes_home_without_history_entry(page, app_url):
     assert page.inner_html('#survPage') == ''
     assert page.evaluate('history.length') == n
     assert warns == ['warning']
+
+
+# ---------- Task 6: keys, pins and recents across both homes ----------
+
+from .conftest import inject_data
+from .test_home import FIXTURES as PROTOS
+
+KEY_TOPICS = [B(f'surv-t{i}', f'Topic {i}') for i in range(1, 7)]
+OPEN_ORDER = ['p:burns', 's:surv-t1', 'p:splint', 's:surv-t2', 'p:frostbite', 's:surv-t3',
+              'p:snakebite', 's:surv-t4', 'p:fever', 's:surv-t5', 'p:iv', 's:surv-t6']
+
+
+def boot_both(page, app_url, storage=None, hash_='#/survival'):
+    inject_data(page, protocols=PROTOS, topics=KEY_TOPICS, only=True)
+    seed = {'advAck': True, **(storage or {})}
+    page.add_init_script(
+        "if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1');"
+        + ''.join(f"localStorage.setItem('fk.{k}', {json.dumps(json.dumps(v))});" for k, v in seed.items()) + '}')
+    page.goto(app_url + hash_)
+
+
+def shown(page, block):
+    return page.evaluate("""id => [...document.querySelectorAll('#' + id + ' button[data-open], #' + id + ' button[data-key]')]
+        .map(b => b.dataset.key || 'p:' + b.dataset.open)""", block)
+
+
+def open_key(page, key):
+    if key[0] == 'p':
+        page.evaluate(f"FK.protocol.open('{key[2:]}')")
+        wait_hash(page, '#/emergency/' + key[2:])
+    else:
+        page.evaluate(f"FK.survival.open('{key}')")
+        wait_hash(page, '#/survival/' + key[2:])
+
+
+def test_twelve_opens_store_twelve_and_each_home_shows_its_newest_five(page, app_url):
+    boot_both(page, app_url)
+    for k in OPEN_ORDER:
+        open_key(page, k)
+    newest = OPEN_ORDER[::-1]
+    assert json.loads(page.evaluate("localStorage.getItem('fk.recent')")) == newest
+    assert page.evaluate('FK.recent.all()') == newest
+    assert page.evaluate("FK.recent.forSection('emergency')") == newest[:5]
+    assert page.evaluate("FK.recent.forSection('survival')") == [k for k in newest if k[0] == 's'][:5]
+    page.evaluate("FK.route.go('/emergency')")
+    wait_hash(page, '#/emergency')
+    assert shown(page, 'emRecent') == newest[:5]
+    page.evaluate("FK.route.go('/survival')")
+    wait_hash(page, '#/survival')
+    assert shown(page, 'survRecent') == ['s:surv-t6', 's:surv-t5', 's:surv-t4', 's:surv-t3', 's:surv-t2']
+    assert page.locator('#survRecent h2').inner_text() == 'Recent'
+
+
+def test_recent_keeps_at_most_twenty(page, app_url):
+    boot_both(page, app_url)
+    page.evaluate("for (let i = 0; i < 25; i++) FK.recent.add('p:x' + i)")
+    got = page.evaluate('FK.recent.all()')
+    assert len(got) == 20 and got[0] == 'p:x24'
+    assert len(json.loads(page.evaluate("localStorage.getItem('fk.recent')"))) == 20
+
+
+def test_clear_on_survival_home_empties_storage_and_both_homes_and_moves_focus(page, app_url):
+    boot_both(page, app_url, storage={'recent': ['s:surv-t1', 'p:burns', 's:surv-t2'], 'pins': ['s:surv-t3']})
+    assert shown(page, 'survRecent') == ['s:surv-t1', 's:surv-t2']
+    page.click('#survRecent [data-act="clear-recent"]')
+    assert page.locator('#survRecent').inner_html() == ''
+    assert json.loads(page.evaluate("localStorage.getItem('fk.recent')")) == []
+    assert page.evaluate('FK.pins.all()') == ['s:surv-t3']
+    assert page.evaluate("document.activeElement === document.querySelector('#survFilters button')")
+    page.evaluate("FK.route.go('/emergency')")
+    wait_hash(page, '#/emergency')
+    assert page.locator('#emRecent').inner_html() == ''
+    assert page.locator('#survPinned [data-act="clear-recent"]').count() == 0
+
+
+def test_pinned_topic_on_both_homes_pinned_protocol_only_on_emergency(page, app_url):
+    boot_both(page, app_url, storage={'pins': ['s:surv-t3', 'p:burns', 'p:shock']})
+    assert shown(page, 'survPinned') == ['s:surv-t3']
+    assert page.locator('#survPinned h2').inner_text() == '★ Pinned'
+    assert page.evaluate("FK.pins.forSection('survival')") == ['s:surv-t3']
+    page.evaluate("FK.route.go('/emergency')")
+    wait_hash(page, '#/emergency')
+    assert shown(page, "emPinned") == ["s:surv-t3", "p:burns", "p:shock"]
+    page.evaluate("FK.route.go('/survival')")
+    wait_hash(page, '#/survival')
+    page.click('#survPinned [data-key="s:surv-t3"]')
+    wait_hash(page, '#/survival/surv-t3')
+
+
+def test_pinning_a_topic_updates_the_survival_home_live(page, app_url):
+    boot_both(page, app_url)
+    assert page.locator('#survPinned').inner_html() == ''
+    page.evaluate("FK.pins.toggle('s:surv-t2')")
+    assert shown(page, 'survPinned') == ['s:surv-t2']
+
+
+JUNK = ['s:surv-gone', 'c:nope', 'u:nope', 'z:what', 'p:bleeding']
+
+
+def test_unknown_stored_keys_are_skipped_on_both_homes_without_errors(page, app_url):
+    boot_both(page, app_url, storage={'pins': JUNK, 'recent': JUNK})
+    assert page.locator('#survPinned').inner_html() == '' and page.locator('#survRecent').inner_html() == ''
+    assert page.evaluate("FK.pins.all()") == [k for k in JUNK if k != 'z:what']
+    page.evaluate("FK.route.go('/emergency')")
+    wait_hash(page, '#/emergency')
+    assert shown(page, 'emPinned') == ['p:bleeding'] and shown(page, 'emRecent') == ['p:bleeding']
+    settle(page)   # any console error fails the test at teardown
+
+
+def test_open_category_keeps_focus_when_recent_changes(page, app_url):
+    boot_both(page, app_url)
+    page.focus('#survCats summary')
+    page.keyboard.press('Enter')
+    assert page.locator('#survCats details[open]').count() == 1
+    page.evaluate("document.querySelector('#survCats summary').dataset.mark = 'same'")
+    page.evaluate("FK.recent.add('s:surv-t1'); FK.survival.refreshHome()")   # a full redraw of the home
+    assert shown(page, 'survRecent') == ['s:surv-t1']
+    assert page.evaluate("document.activeElement === document.querySelector('#survCats summary')")
+    assert page.evaluate("document.activeElement.dataset.mark") == 'same'
+    assert page.locator('#survCats details[open]').count() == 1

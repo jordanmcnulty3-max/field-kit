@@ -72,7 +72,7 @@
     return '<article class="sv-page">' + head + first + jump + body + foot + '</article>';
   }
 
-  /* ---------- Home: filters, Pinned, Recent (Task 6 fills both), Topics by category, then Tools and Checklists from homeItems providers ---------- */
+  /* ---------- Home: filters, Pinned, Recent, Topics by category, then Tools and Checklists from homeItems providers ---------- */
   const WHERE = [['any', 'Any'], ['town', 'Town'], ['rural', 'Rural'], ['woods', 'Woods'], ['coast', 'Coast']];
   const WHEN = [['any', 'Any'], ['cold', 'Cold'], ['warm', 'Warm']];
   const DIMS = [['where', 'Where', WHERE], ['when', 'When', WHEN]];
@@ -111,15 +111,29 @@
     (filled(it.badge) ? '<span class="sv-badge">' + esc(it.badge) + '</span>' : '') + '</button>';
   const section = (el, title, its) => setHTML(el, its.length ? '<h2 class="sv-cat">' + title + '</h2><div class="sv-list">' + its.map(itemBtn).join('') + '</div>' : '');
 
-  function catsHTML(f) {
+  function catsHTML(f, withOpen) {
     return CATS.map(([cat, label]) => {
       const all = topics().filter(t => t.category === cat);
       if (!all.length) return '';
       const ts = all.filter(t => matches(t, f)).sort(byTitle);
-      return '<details class="ref" data-cat="' + cat + '"' + (openCats.has(cat) ? ' open' : '') + '><summary>' + label + '</summary><div class="body">' +
+      return '<details class="ref" data-cat="' + cat + '"' + (withOpen && openCats.has(cat) ? ' open' : '') + '><summary>' + label + '</summary><div class="body">' +
         (ts.length ? '<div class="sv-list">' + ts.map(t => '<button type="button" class="em-btn" data-key="s:' + esc(t.id) + '"><span>' + esc(t.title) + '</span>' + draftTag(t) + '</button>').join('') + '</div>'
           : '<p class="sv-none">No topics for this filter</p>') + '</div></details>';
     }).join('');
+  }
+  const CLEAR_RECENT = '<button type="button" class="em-clear" data-act="clear-recent" aria-label="Clear recent list">Clear</button>';
+  /* Pinned and Recent: survival keys only, titled by search; a key whose thing no longer exists is skipped. */
+  function keyed(list) {
+    return list.map(key => {
+      const d = FK.search && FK.search.describe(key);
+      return d ? { key, title: d.title, badge: d.draft ? 'Draft' : '' } : null;
+    }).filter(Boolean);
+  }
+  function renderKeyed() {
+    if (!built) return;
+    const row = (title, its, extra) => its.length ? '<div class="em-hrow"><h2 class="sv-cat">' + title + '</h2>' + (extra || '') + '</div><div class="sv-list">' + its.map(itemBtn).join('') + '</div>' : '';
+    setHTML($('survPinned'), row('★ Pinned', keyed(FK.pins.forSection('survival'))));
+    setHTML($('survRecent'), row('Recent', keyed(FK.recent.forSection('survival')), CLEAR_RECENT));
   }
   function markFilters(f) {   // toggle state in place: the buttons are never redrawn, so the one just pressed keeps focus
     for (const b of $('survFilters').querySelectorAll('button[data-dim]')) b.setAttribute('aria-pressed', String(f[b.dataset.dim] === b.dataset.val));
@@ -139,7 +153,10 @@
     markFilters(f);
     const cats = $('survCats');
     cats.querySelectorAll('details').forEach(d => { if (d.open) openCats.add(d.dataset.cat); else openCats.delete(d.dataset.cat); });   // keep what the user opened
-    setHTML(cats, catsHTML(f));
+    // Compare without the open state: a redraw that changes only which categories are open leaves the DOM (and focus) alone.
+    const base = catsHTML(f, false);
+    if (drawn.get(cats) !== base) { cats.innerHTML = catsHTML(f, true); drawn.set(cats, base); }
+    renderKeyed();
     section($('survTools'), 'Tools', itemsFor('tool'));
     section($('survLists'), 'Checklists', itemsFor('list'));
   }
@@ -229,9 +246,17 @@
       renderHome();
       return;
     }
+    if (e.target.closest('[data-act="clear-recent"]')) {   // the button goes with the list, so hand focus to the first filter button
+      FK.recent.clear();
+      const first = $('survFilters').querySelector('button');
+      if (first) first.focus();
+      return;
+    }
     const b = e.target.closest('[data-key]');
     if (b) FK.survival.open(b.dataset.key);
   });
+  FK.on('pins', renderKeyed);
+  FK.on('recent', renderKeyed);
   pageEl.addEventListener('click', e => {
     const link = e.target.closest('[data-link]');
     if (link) { openLink(link.dataset.link); return; }

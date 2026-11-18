@@ -422,3 +422,35 @@ def test_restored_junk_group_falls_back_to_defaults(page, app_url, tmp_path):
         g = page.evaluate('FK.survival.group()')
         assert 1 <= g['people'] <= 50 and 1 <= g['days'] <= 365, junk
         assert 'NaN' not in page.inner_text('#survPage')
+
+
+# ---------- Heat pack (v7.3): Fire and Shelter moved from Basics to "Heat, shelter and winter" (plan Review Focus 4) ----------
+
+def _open_from(page, sel, key, title):
+    page.click(f'{sel} button[data-key="{key}"]')
+    page.wait_for_function(f"location.hash === '#/survival/{key[2:]}'")
+    assert page.inner_text('#survPage h2') == title
+    page.go_back()
+    page.wait_for_function("location.hash === '#/survival'")
+
+
+def test_v72_pins_and_recents_for_fire_and_shelter_open_after_the_move(page, app_url):
+    """Shipped data: keys saved by v7.2, when Fire and Shelter were in Basics, still open them."""
+    boot(page, app_url, {'fk.pins': json.dumps(['s:surv-fire', 's:surv-shelter']),
+                         'fk.recent': json.dumps(['s:surv-shelter', 's:surv-fire'])}, hash_='#/survival')
+    page.wait_for_selector('#survHome')
+    for sel in ('#survPinned', '#survRecent'):
+        _open_from(page, sel, 's:surv-fire', 'Fire')
+        _open_from(page, sel, 's:surv-shelter', 'Shelter')
+
+
+def test_v72_backup_with_fire_and_shelter_keys_restores(page, app_url, tmp_path):
+    boot(page, app_url, hash_='#/survival')
+    v72 = backup_file({'fk.pins': json.dumps(['s:surv-fire']), 'fk.recent': json.dumps(['s:surv-shelter', 's:surv-fire']),
+                       'fk.survFilter': json.dumps({'where': 'any', 'when': 'any'}), 'fk.night': 'false'}, version='7.2')
+    pick(page, tmp_path, v72)
+    restore_now(page)
+    assert page.evaluate('FK.pins.all()') == ['s:surv-fire']
+    page.wait_for_function("location.hash === '#/survival'")
+    _open_from(page, '#survPinned', 's:surv-fire', 'Fire')
+    _open_from(page, '#survRecent', 's:surv-shelter', 'Shelter')

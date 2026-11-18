@@ -58,10 +58,11 @@ heaters, and generators. So every one of those gets its own full treatment; none
 
 **Tags.** Home-heating topics carry no `where` or `when` tag: a wrong filter must never hide them.
 `surv-shelter` keeps its existing `where` tags. `when: cold` is used only on `surv-wind-chill`,
-`surv-winter-storms`, `surv-dress-for-cold` and `surv-unheated-house`, and only if the whole-pack reviewer agrees
-nothing safety-critical is hidden under Warm. Added to the protected `ALWAYS` list in
+`surv-dress-for-cold` and `surv-unheated-house` (three topics; the whole-pack review, Task 9 I4, removed it from
+`surv-winter-storms`, whose downed-line rules apply in any season). Added to the protected `ALWAYS` list in
 `tests/test_survival_home.py`: `surv-heat-out`, `surv-carbon-monoxide`, `surv-wood-stoves-fireplaces`,
-`surv-portable-heaters`, `surv-generators`, `surv-store-fuel`.
+`surv-portable-heaters`, `surv-generators`, `surv-store-fuel`, and (Task 9 review) `surv-winter-storms` and
+`surv-sleep-warm`.
 
 **Batches** (writer, independent reviewer, fix, re-check; v7 design section 6):
 A carbon-monoxide, generators, portable-heaters, store-fuel ·

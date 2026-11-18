@@ -349,21 +349,78 @@ def listed(page):
 ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-safe', 's:surv-find-water',
           's:surv-wells-without-power',   # untagged by ruling (Task 5 fix round 1): well shock, pit and CO warnings
           's:surv-toilet-no-water', 's:surv-handwashing', 's:surv-water-how-much',   # water pack: protected, no tag may hide them
-          's:surv-clean-and-disinfect', 's:surv-stomach-illness-in-a-group', 's:surv-water-in-the-house']   # sanitation safety topics
+          's:surv-clean-and-disinfect', 's:surv-stomach-illness-in-a-group', 's:surv-water-in-the-house',   # sanitation safety topics
+          # heat pack (Task 10): the hub and every fuel-burning topic; winter storms (downed lines, stranded car) and
+          # sleep warm (heater and engine sleep rules) by ruling of the Task 9 review (I4)
+          's:surv-heat-out', 's:surv-carbon-monoxide', 's:surv-wood-stoves-fireplaces', 's:surv-portable-heaters',
+          's:surv-generators', 's:surv-store-fuel', 's:surv-winter-storms', 's:surv-sleep-warm']
+# Topics tagged when: cold: listed under Any and Cold, hidden under Warm, for every Where value.
+WHEN_COLD = ['s:surv-unheated-house', 's:surv-dress-for-cold', 's:surv-wind-chill', 's:surv-water-winter']
+WHERES = ('any', 'town', 'rural', 'woods', 'coast')
 
 
 def test_f1_safety_topics_are_never_filtered_out_of_the_shipped_home(page, app_url):
     shipped_home(page, app_url)
-    for where in ('any', 'town', 'rural', 'woods', 'coast'):
+    for where in WHERES:
         for when in ('any', 'cold', 'warm'):
             page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
             keys = listed(page)
             for k in ALWAYS:
                 assert k in keys, f'{k} hidden by where={where} when={when}'
-            # Water in winter is tagged when: cold (water pack): listed under Any and Cold, hidden under Warm.
-            assert ('s:surv-water-winter' in keys) == (when != 'warm'), f'water-winter wrong for where={where} when={when}'
+            for k in WHEN_COLD:
+                assert (k in keys) == (when != 'warm'), f'{k} wrong for where={where} when={when}'
             if where == 'coast':
                 assert 's:surv-shelter' in keys and 's:surv-river-crossings' in keys, f'Coast hides shelter or river crossings (when={when})'
+
+
+def test_heat_pack_when_cold_tags_are_exactly_the_four_cold_only_topics():
+    """Shipped data: no other topic carries a when tag, so nothing else can be hidden under Warm (Task 9 review I4)."""
+    import glob, os
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    tagged = set()
+    for p in glob.glob(os.path.join(root, 'src', 'survival', '*.json')):
+        t = json.load(open(p, encoding='utf-8'))
+        if t.get('when'):
+            assert t['when'] == ['cold'], t['id']
+            tagged.add('s:' + t['id'])
+    assert tagged == set(WHEN_COLD)
+
+
+HEAT = 'Heat, shelter and winter'
+
+
+def test_fire_and_shelter_are_listed_under_heat_with_the_hub_first(page, app_url):
+    shipped_home(page, app_url)
+    open_cat(page, HEAT)
+    heat = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"heat\"] button[data-key]')].map(b => b.dataset.key)")
+    basics = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"basics\"] button[data-key]')].map(b => b.dataset.key)")
+    assert 's:surv-fire' in heat and 's:surv-shelter' in heat
+    assert 's:surv-fire' not in basics and 's:surv-shelter' not in basics
+    assert basics[0] == 's:surv-priorities' and len(basics) >= 10   # Basics keeps its remaining topics
+    assert len(heat) == 14
+    assert heat[0] == 's:surv-heat-out'   # the hub leads its category, as Priorities leads Basics
+    page.click('#survCats [data-key="s:surv-fire"]')
+    wait_hash(page, '#/survival/surv-fire')
+
+
+def test_heat_category_header_and_its_fourteen_rows_fit_360px(page, app_url):
+    shipped_home(page, app_url)
+    open_cat(page, HEAT)
+    for night in (False, True):
+        if night:
+            page.click('#nightBtn')
+            assert page.evaluate('document.documentElement.dataset.theme') == 'night'
+        d = page.locator('#survCats details[data-cat="heat"]')
+        boxes = [d.locator('summary').bounding_box()] + [b.bounding_box() for b in d.locator('button[data-key]').all()]
+        assert len(boxes) == 15
+        for b in boxes:
+            assert b['x'] >= 0 and b['x'] + b['width'] <= 360, b
+        assert page.evaluate('document.documentElement.scrollWidth') <= 360
+        # each title's text stays inside its row (no clipped or spilled title)
+        spill = page.evaluate("""[...document.querySelectorAll('#survCats details[data-cat="heat"] button[data-key]')].filter(b => {
+            const r = b.getBoundingClientRect(), s = b.querySelector('span').getBoundingClientRect();
+            return s.left < r.left || s.right > r.right || b.scrollWidth > b.clientWidth + 1; }).map(b => b.textContent)""")
+        assert spill == []
 
 
 def test_f2_when_row_shows_only_when_a_topic_has_a_when_tag(page, app_url):

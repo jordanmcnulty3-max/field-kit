@@ -114,6 +114,8 @@
       if (!best) return 0;   // every word must match something
       total += best;
       if (doc.fields[0].toks.includes(w)) total += 0.5;   // a whole title word beats a mere prefix
+      // A one- or two-letter query ("CO") that is a whole keyword beats titles that merely start with it.
+      else if (w.length < 3 && doc.fields.some(f => f.w === W.keywords && f.toks.includes(w))) total += 1.25;
     }
     return total;
   }

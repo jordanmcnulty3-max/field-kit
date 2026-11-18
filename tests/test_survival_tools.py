@@ -785,6 +785,34 @@ def test_wc_whitespace_around_a_whole_number_is_accepted_and_a_minus_sign_is_all
     wc_expect(page, formula(-10, 30), 5)
 
 
+def test_wc_typographic_minus_is_a_minus_sign(page, app_url):
+    # U+2212 is what the stepper button shows and what some keyboards and pasted text produce
+    wc_boot(page, app_url)
+    wc_in(page, '\u22125', '10')
+    wc_expect(page, formula(-5, 10), SMALL['grid']['bands'][1][2])   # -5 -> chart -10, 10 -> 15
+    wc_in(page, ' \u221210 ', '30')
+    wc_expect(page, formula(-10, 30), 5)
+    page.get_by_role('button', name='One degree warmer', exact=True).click()
+    assert page.locator('#survPage').get_by_label('Air temperature (°F)', exact=True).input_value() == '-9'
+
+
+@pytest.mark.parametrize('temp', ['\u2212', '\u2212\u22125', '-\u22125', '5\u2212', '\u2212 5', '\u22125.5', '\u2013 5', '\u20135'], ids=repr)
+def test_wc_typographic_minus_does_not_let_other_malformed_input_through(page, app_url, temp):
+    wc_boot(page, app_url)
+    wc_in(page, temp, '10')
+    wc_nothing(page)
+    assert page.locator('#survPage .wc-err').all_inner_texts() == [WHOLE, '']
+
+
+def test_wc_temperature_field_gets_a_keyboard_with_a_minus_and_wind_stays_numeric(page, app_url):
+    # iPhone number pads (numeric and decimal) have no minus key; temperatures below zero are what the tool is for
+    wc_boot(page, app_url)
+    t = page.locator('#survPage').get_by_label('Air temperature (°F)', exact=True)
+    w = page.locator('#survPage').get_by_label('Wind (mph)', exact=True)
+    assert t.get_attribute('type') == 'text' and t.get_attribute('inputmode') == 'text'
+    assert w.get_attribute('type') == 'text' and w.get_attribute('inputmode') == 'numeric'
+
+
 def test_wc_error_sits_under_its_own_field_and_marks_it_invalid(page, app_url):
     wc_boot(page, app_url)
     t, w = wc_in(page, 'abc', '10')

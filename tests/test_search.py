@@ -638,3 +638,46 @@ def test_water_pack_hurried_searches_find_their_topic_in_the_shipped_data(page, 
     type_q(page, text)
     page.wait_for_selector('#searchBody .sr-item')
     assert expected in keys(page), f'{text!r} did not list {expected}: {keys(page)}'
+
+
+@pytest.mark.parametrize('text', ['CO', 'co'])
+def test_co_puts_the_carbon_monoxide_protocol_then_topic_first_in_the_shipped_data(page, app_url, text):
+    # "CO" is what the alarm and the packaging say. Both pages carry "co" as a whole keyword; at equal
+    # score the index order puts Emergency protocols before Survival topics.
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    assert [r['key'] for r in q(page, text)][:2] == ['p:carbon-monoxide', 's:surv-carbon-monoxide']
+
+
+def test_short_whole_keyword_bonus_needs_a_whole_keyword_and_a_short_word(page, app_url):
+    # A one- or two-letter query that is a whole keyword beats a title that merely starts with it;
+    # a prefix of a keyword, or a longer whole keyword, gets no such bonus.
+    fx = [proto('zq-title', 'Zqualm thing'), proto('zq-kw', 'Other thing', keywords=['zq alarm']),
+          proto('zqx-title', 'Zqxlong thing'), proto('zqx-kw', 'Another thing', keywords=['zqx'])]
+    boot(page, app_url, FIXTURES + fx)
+    assert [r['key'] for r in q(page, 'zq')][:2] == ['p:zq-kw', 'p:zq-title']
+    assert [r['key'] for r in q(page, 'ZQX')][:2] == ['p:zqx-title', 'p:zqx-kw']   # three letters: title prefix still first
+    assert [r['key'] for r in q(page, 'z')][:1] == ['p:zq-title']                 # "z" is no whole keyword anywhere
+
+
+@pytest.mark.parametrize('text,first', [('od', 'p:overdose'), ('no', 'p:cpr-adult'), ('mr', 's:surv-portable-heaters')])
+def test_other_short_shipped_queries_keep_their_first_result(page, app_url, text, first):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    assert [r['key'] for r in q(page, text)][0] == first
+
+
+HEAT_PACK_SEARCHES = [
+    ('frost bite', 's:surv-wind-chill'),
+    ('snowed in', 's:surv-winter-storms'),
+    ('lost power', 's:surv-heat-out'),
+    ('no electricity', 's:surv-heat-out'),
+]
+
+
+@pytest.mark.parametrize('text,expected', HEAT_PACK_SEARCHES)
+def test_heat_pack_hurried_searches_find_their_topic_in_the_first_three(page, app_url, text, expected):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    ks = [r['key'] for r in q(page, text)]
+    assert expected in ks[:3], f'{text!r} did not list {expected} in the first three: {ks[:5]}'

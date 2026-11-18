@@ -104,24 +104,25 @@
     if (!bands.every(r => r.every(b => b === 0 || bandMinutes.includes(b)))) return null;
     return { w, c, temps, winds, bands };
   }
-  /* A typed field: an optional minus and digits, after trimming. Anything else (blank, 12.7, 1e9, abc) is null. */
-  const wholeNumber = text => { const t = String(text).trim(); return /^-?\d+$/.test(t) ? Number(t) : null; };
+  /* A typed field: an optional minus (- or the typographic −, U+2212) and digits, after trimming. Anything else (blank, 12.7, 1e9, abc) is null. */
+  const wholeNumber = text => { const t = String(text).trim().replace(/^\u2212/, '-'); return /^-?\d+$/.test(t) ? Number(t) : null; };
 
   function drawWindChill(el) {
     const S = FK.survival, esc = FK.esc, d = windChillData();
     if (!d) { el.innerHTML = '<p class="sv-warn">' + esc(NO_WC_DATA) + '</p>'; return; }
     const { c, temps, winds, bands } = d;
     const hi = temps[0], lo = temps[temps.length - 1];
-    const field = (k, id, label, less, more) => '<div class="wc-row"><div class="sv-gfield"><label for="' + id + '">' + label + '</label><div class="sv-step">' +
+    /* Temperature gets the ordinary keyboard: iPhone number pads have no minus key. Wind is never negative, so it keeps the number pad. */
+    const field = (k, id, label, less, more, mode) => '<div class="wc-row"><div class="sv-gfield"><label for="' + id + '">' + label + '</label><div class="sv-step">' +
       '<button type="button" data-wstep="' + k + '" data-d="-1" aria-label="' + less + '">−</button>' +
-      '<input id="' + id + '" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" data-wfield="' + k + '" aria-describedby="' + id + 'Err">' +
+      '<input id="' + id + '" type="text" inputmode="' + mode + '" autocomplete="off" spellcheck="false" data-wfield="' + k + '" aria-describedby="' + id + 'Err">' +
       '<button type="button" data-wstep="' + k + '" data-d="1" aria-label="' + more + '">+</button></div></div>' +
       '<p class="dl-err wc-err" id="' + id + 'Err" role="status"></p></div>';
     const sources = (Array.isArray(d.w.sources) ? d.w.sources : []).filter(s => plain(s) && filled(s.name)).map(s => s.name);
     const links = ['s:surv-wind-chill', 'p:hypothermia', 'p:frostbite'].map(k => [k, FK.search && FK.search.describe(k)]).filter(([, t]) => t && filled(t.title))
       .map(([k, t]) => '<button type="button" class="sv-link" data-link="' + esc(k) + '"><span>' + esc(t.title) + '</span></button>').join('');
     el.innerHTML = '<fieldset class="sv-group"><legend>Conditions</legend>' +
-      field('temp', 'wcT', 'Air temperature (°F)', 'One degree colder', 'One degree warmer') + field('wind', 'wcV', 'Wind (mph)', 'One mph less', 'One mph more') + '</fieldset>' +
+      field('temp', 'wcT', 'Air temperature (°F)', 'One degree colder', 'One degree warmer', 'text') + field('wind', 'wcV', 'Wind (mph)', 'One mph less', 'One mph more', 'numeric') + '</fieldset>' +
       '<section class="wp-out" aria-labelledby="wcTitle"><h3 id="wcTitle">Result</h3><div class="wc-res" role="status"></div></section>' +
       (links ? '<div class="wc-links">' + links + '</div>' : '') + S.footHTML(d.w);
     const input = k => el.querySelector('[data-wfield="' + k + '"]');

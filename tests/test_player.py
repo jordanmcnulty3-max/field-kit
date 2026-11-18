@@ -1069,3 +1069,87 @@ def test_r1_new_run_from_home_stops_the_same_protocols_step_timer(page, app_url)
     expect(page.locator('#player .pp-timerbar')).to_be_hidden()
     rec = page.evaluate("JSON.parse(localStorage.getItem('fk.proto.active'))")
     assert rec['step'] == 'a' and 'timer' not in rec and 'logged' not in rec and rec['started'] >= old + 5000
+
+
+# ---------- Task 11: timer-stopped notice; no stale finished timer at startup ----------
+
+SPY_TOASTS = "(() => { window.__toasts = []; const t = FK.toast; FK.toast = m => { window.__toasts.push(m); return t(m); }; })(); 0"
+SPY_VIBRATE = "window.__vibes = []; navigator.vibrate = p => { window.__vibes.push(p); return true; };"
+
+
+def stopped_toasts(page):
+    return [m for m in page.evaluate('window.__toasts') if m.startswith('Timer stopped')]
+
+
+def test_t11_discarding_a_running_timer_says_so_once(page, app_url):
+    boot_timed(page, app_url)
+    page.evaluate(SPY_TOASTS)
+    # a different protocol opened while the timer runs
+    start_cooling(page)
+    go_back_settled(page)
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    page.evaluate("FK.protocol.open('other')")
+    expect(page.locator('#player .pp-action')).to_have_text('Other one')
+    assert stopped_toasts(page) == ['Timer stopped: Timed test']
+    assert page.evaluate('FK.protocol.timer()') is None
+    # the same protocol restarted from its home tile
+    page.click('#player [data-act="home"]')
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    page.evaluate('window.__toasts = []')
+    start_cooling(page)
+    go_back_settled(page)
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    page.click('#emHome [data-open="timed"]')
+    expect(page.locator('#player .pp-action')).to_have_text('Cool the burn')
+    assert stopped_toasts(page) == ['Timer stopped: Timed test']
+    assert page.evaluate('FK.protocol.timer()') is None
+
+
+def test_t11_resume_and_finished_timers_show_no_stopped_toast(page, app_url):
+    boot_timed(page, app_url)
+    page.evaluate(SPY_TOASTS)
+    start_cooling(page)
+    go_back_settled(page)
+    expect(page).to_have_url(re.compile(r'#/emergency$'))
+    page.click('#emResume [data-resume="timed"]')   # Resume keeps the run and its timer
+    expect(page.locator('#player .pp-action')).to_have_text('Cool the burn')
+    assert stopped_toasts(page) == []
+    assert page.evaluate('FK.protocol.timer()')['label'] == 'Cooling'
+    assert timer_text(page) != 'Done'
+    # a timer that already finished is not running: discarding it is silent
+    page.clock.run_for(61_000)
+    assert timer_text(page) == 'Done'
+    go_back_settled(page)
+    page.evaluate("FK.protocol.open('other')")
+    expect(page.locator('#player .pp-action')).to_have_text('Other one')
+    assert stopped_toasts(page) == []
+
+
+def seed_timed_run(page, end, done=False):
+    rec = {'id': 'timed', 'step': 'a', 'started': T0 - 90_000,
+           'timer': {'step': 'a', 'label': 'Cooling', 'end': end, 'done': done}}
+    page.add_init_script(f"localStorage.setItem('fk.proto.active', {json.dumps(json.dumps(rec))});")
+
+
+def test_t11_timer_that_ended_while_closed_is_over_without_vibration_or_done_entry(page, app_url):
+    page.add_init_script(SPY_VIBRATE)
+    seed_timed_run(page, T0 - 30_000)
+    boot_timed(page, app_url)
+    assert page.evaluate('window.__vibes') == []
+    assert page.evaluate('FK.protocol.timer()') is None
+    expect(page.locator('#emActive [data-resume="timed"]')).to_have_count(0)
+    assert 'Done' not in page.inner_text('#emActive')
+    assert 'finished' not in page.inner_text('#toast')
+    page.clock.run_for(2_000)
+    assert page.evaluate('window.__vibes') == []
+
+
+def test_t11_timer_still_running_at_startup_is_restored_and_vibrates_when_it_ends(page, app_url):
+    page.add_init_script(SPY_VIBRATE)
+    seed_timed_run(page, T0 + 20_000)
+    boot_timed(page, app_url)
+    assert page.evaluate('FK.protocol.timer()')['label'] == 'Cooling'
+    assert page.evaluate('window.__vibes') == []
+    page.clock.run_for(21_000)
+    assert page.evaluate('window.__vibes') == [[300, 150, 300]]
+    assert page.evaluate('FK.protocol.timer()')['done'] is True

@@ -178,18 +178,19 @@ Source disagreements found while checking the Survival topics. Each says what th
    cautious sources are used. The square knot is for bandages and bundles only, and the Knots topic says it does
    not teach knots for climbing, rappelling or holding a person's weight. Say if the group wants a life-safety
    knot section; it would need its own sourced pack (and verified diagrams).
-15. **How many days of water to store (water planner) — Water pack Task 3.** CDC: at least 3 days, a 2-week
+15. **How many days of water to store (water planner) — Water pack Task 3.** CDC: 3 days, and a 2-week
    supply if possible. Red Cross: 2 weeks at home, 3 days for evacuation. FEMA, Red Cross and USDA (Food and Water
-   in an Emergency): at least 2 weeks. NYS DHSES: supplies for up to 10 days. NYS DOH leaflet (2014): 3 days.
+   in an Emergency): at least 2 weeks. NYS DHSES: be prepared to make it on your own for at least 10 days
+   (its kit list says supplies to last up to 10 days). NYS DOH leaflet (2014): 3 days.
    Ready.gov: several days. Today: the planner's default is 14 days (the longest target; all agree on 1 gallon per
    person per day). Say if the group wants a longer default for a long grid-down period; no source opened gives one.
 16. **Extra water in very hot weather (water planner) — Water pack Task 3.** Ready.gov Water: a normally active
    person needs about three quarters of a gallon of fluid a day, and "in very hot temperatures, water needs can
    double". FEMA, Red Cross and USDA (Food and Water in an Emergency): at least two quarts of drinking water a day,
-   and hot environments can double that. Neither says plainly which amount doubles, so the extra could be read as
-   half a gallon (FEMA drinking water), three quarters of a gallon (Ready.gov fluid) or a whole gallon (the stored
-   gallon). Today: the planner adds 1 gallon per person per day when "Very hot weather" is ticked (the most cautious
-   reading). Say if the group wants the smaller figure. No source opened gives an amount for children, nursing or
+   and hot environments can double that amount, so FEMA's extra is two quarts (half a gallon). Ready.gov is the
+   ambiguous one: it does not say which amount doubles, so its extra could be three quarters of a gallon (its fluid
+   figure) or a whole gallon (the stored gallon). Today: the planner adds 1 gallon per person per day when "Very hot
+   weather" is ticked (the largest reading). Say if the group wants the smaller figure. No source opened gives an amount for children, nursing or
    pregnant women, sick people or pets; the planner only says they need more.
 17. **Toilet tank water (surv-water-in-the-house) — Water pack Task 4.** CDC and FEMA (2017 fact sheet): the toilet
    tank (not the bowl) is a usable source if the water is clear and has no toilet cleaner in it; FEMA, the Red

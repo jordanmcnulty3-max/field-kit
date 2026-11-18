@@ -2402,3 +2402,47 @@ Conversions: 1 gallon = 3.8 L and 1 cup = 240 mL as CDC-BL prints them; 1 quart 
 - CDC tippy tap PDF (UNT web archive copy of cdc.gov/safewater): returned only the archive viewer. CDC-TT (CDC Stacks) used instead.
 - CDC, What to Do During a Boil Water Advisory (NC State copy): fetch failed (client error). CDC-ADV used instead.
 - No EPA page with a household bleach dilution for surfaces was found; EPA Region 2's flood sheet gives only 1 teaspoon per gallon for drinking-water containers, with no strength (read for comparison; not used).
+
+## Water pack Task 8: diagrams (2026-11-18)
+
+Every drawn word and number below comes from the topic named; no figure adds a fact. `handwash-station` is not drawn yet (its topic is still under review).
+
+### water-safe (surv-make-water-safe, "Make water safe", steps block)
+
+Relabelled: the old figure said 6,500 feet and 6 percent bleach; now matches the checked topic.
+- "1 minute rolling boil": step 2, "Bring it to a rolling boil for at least 1 minute."
+- "3 min above 5,000 ft": step 2, "Above 5,000 ft, boil for 3 minutes."
+- "No fire? Bleach": step 3, "No fire? Use plain, unscented household chlorine bleach (5% to 9% ...)".
+- "8 drops of 5% to 9% bleach per gallon": step 3, "(5% to 9%, such as 6% or 8.25%) ... Add 8 drops per gallon".
+- "Stir, wait 30 minutes": step 3, "Stir and let it stand 30 minutes."
+- "1 gal": step 3, "per gallon". The bottle carries no strength label.
+- Alt text: same figures. Doubling for cloudy, coloured or very cold water is in the caption's step, not drawn.
+
+### water-heater-drain (surv-water-in-the-house, "Water heater", after the steps)
+
+Labels fixed by the content reviewer, numbered in this order; each is a step of the topic:
+- 1 "Power or gas OFF": "Make sure the electricity or gas to the water heater is off."
+- 2 "Let it cool": "Let the tank cool."
+- 3 "Close the water intake valve": "Close the water intake valve, usually on top of the tank."
+- 4 "Open a hot tap": "Turn on a hot-water tap in the house to let air into the tank."
+- 5 "Container here": "Put a clean container under the drain valve at the bottom of the tank."
+- 6 "Open the drain": "Open the drain at the bottom of the tank."
+- Footer "Refill the tank before turning power or gas back on": "close the drain and refill the tank following the heater's instructions before you turn the power or gas back on."
+- Drawing: tank, cold intake pipe with valve at the top, hot pipe to a tap, drain valve at the bottom with a container under it, a power/gas control box on the side. No other text.
+
+### toilet-buckets (surv-toilet-no-water, "Two-bucket toilet", after the steps)
+
+- "Pee", "Poo": step 1, "Mark one 'pee' and one 'poo'."
+- "Lid": step 1, "two 5-gallon (19 L) buckets with lids"; step 4, "put a lid on".
+- "Seat": step 4, "Move the toilet seat to whichever bucket you are using."
+- "Cover material, half a cup (120 mL) after each poo": step 7, "After each poo, sprinkle about half a cup (120 mL) of cover material so it covers the poo completely."
+- Not drawn: bag liner, toilet paper, fill lines, bleach. No task 6 suggestion wording was used that the topic does not carry.
+
+### latrine (surv-latrines, "Cat holes", after the steps)
+
+Cat hole only; the group latrine (3 ft deep, 100 ft, 5 ft above groundwater) does not fit clearly at 340 px wide beside the cat hole. Task 6's suggestions list the cat hole first.
+- "At least 200 feet (60 m) from water", "about 70 steps": step 1, "Walk at least 200 feet (60 m) from water, trails and camp: about 70 steps."
+- "Water, trails, camp": same step.
+- "6 to 8 inches (15 to 20 cm) deep" and "4 to 6 inches (10 to 15 cm) across": step 3.
+- "Soil you dug out": step 4, "fill the hole with the soil you dug out".
+- The New York rule of 150 feet is in the topic's next paragraph, not drawn.

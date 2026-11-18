@@ -45,7 +45,7 @@ svg('water-bag', 190, 'Clear plastic bag tied over a leafy branch in sun, with w
 {lbl(40,152,'Leafy, non-poisonous','')}{lbl(40,166,'branch in full sun','')}
 {lbl(336,186,'Water collects in the low corner','tb','end')}''')
 
-svg('water-safe', 175, 'Boil water for 1 minute, or 3 minutes above 6,500 feet; or add 8 drops of 6 percent bleach per gallon and wait 30 minutes', f'''
+svg('water-safe', 175, 'Boil water for 1 minute, or 3 minutes above 5,000 feet; or, with no fire, add 8 drops of 5% to 9% unscented bleach per gallon, stir and wait 30 minutes', f'''
 {lbl(80,22,'Boil','tb','middle')}
 <path d="M30 80 H130 V140 Q130 150 120 150 H40 Q30 150 30 140 Z" class="k"/>
 <path d="M30 90 H18 M130 90 H142" class="k t3"/>
@@ -53,17 +53,75 @@ svg('water-safe', 175, 'Boil water for 1 minute, or 3 minutes above 6,500 feet; 
 <circle cx="55" cy="115" r="4" class="a t1"/><circle cx="80" cy="108" r="3" class="a t1"/><circle cx="102" cy="121" r="5" class="a t1"/><circle cx="68" cy="133" r="3" class="a t1"/><circle cx="112" cy="138" r="3" class="a t1"/>
 <path d="M60 76 q-5 -6 0 -11 M100 76 q-5 -6 0 -11" class="m t1"/>
 {flame(55,170,0.42)}{flame(80,170,0.5)}{flame(105,170,0.42)}
-{lbl(80,46,'1 minute rolling boil','','middle')}{lbl(80,62,'3 min above 6,500 ft','tm','middle')}
+{lbl(80,46,'1 minute rolling boil','','middle')}{lbl(80,62,'3 min above 5,000 ft','tm','middle')}
 <line x1="170" y1="20" x2="170" y2="160" class="m t1 d"/>
-{lbl(260,22,'No fire? Bleach','tb','middle')}
+{lbl(260,20,'No fire? Bleach','tb','middle')}
 <rect x="196" y="76" width="40" height="66" rx="6" class="k"/><rect x="207" y="62" width="18" height="14" class="k"/><rect x="204" y="54" width="24" height="8" rx="2" class="k kf"/>
-{lbl(216,114,'6%','tb','middle')}
 <path d="M254 82 q6 9 0 14 q-6 -5 0 -14z M254 102 q6 9 0 14 q-6 -5 0 -14z M254 122 q6 9 0 14 q-6 -5 0 -14z" class="afs"/>
 <path d="M276 92 h44 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-44 a6 6 0 0 1 -6 -6 v-44 a6 6 0 0 1 6 -6z" class="k"/>
 <path d="M286 92 v-12 h20 v12" class="k"/><path d="M272 116 H324" class="a"/>
 {lbl(298,138,'1 gal','tm','middle')}
-{lbl(260,40,'8 drops of 6% per gallon','','middle')}
+{lbl(260,34,'8 drops of 5% to 9%','','middle')}{lbl(260,47,'bleach per gallon','','middle')}
 {lbl(260,168,'Stir, wait 30 minutes','tb','middle')}''')
+
+
+def badge(cx, cy, n):
+    return f'<circle cx="{cx}" cy="{cy}" r="9" class="k milk"/>{lbl(cx, cy+4, n, "tb", "middle")}'
+def dim(x1, y1, x2, y2):
+    return f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" class="m" marker-start="url(#aM)" marker-end="url(#aM)"/>'
+
+# Labels fixed by the content reviewer (water heater), in this order.
+heater_rows = [(40, ['Power or gas OFF']), (82, ['Let it cool']), (124, ['Close the water', 'intake valve']),
+               (172, ['Open a hot tap']), (214, ['Container here']), (256, ['Open the drain'])]
+heater_list = ''.join(badge(184, y - 4, i) + ''.join(lbl(200, y + 14 * j, t) for j, t in enumerate(rows))
+                      for i, (y, rows) in enumerate(heater_rows, 1))
+svg('water-heater-drain', 318, 'Water heater tank drained in six steps: 1 Power or gas OFF; 2 Let it cool; 3 Close the water intake valve; 4 Open a hot tap; 5 Container here; 6 Open the drain. Refill the tank before turning power or gas back on.', f'''
+<line x1="6" y1="268" x2="160" y2="268" class="m"/>
+<line x1="38" y1="216" x2="38" y2="232" class="k t3"/><line x1="86" y1="216" x2="86" y2="232" class="k t3"/>
+<rect x="28" y="66" width="68" height="150" rx="12" class="k t3"/>
+<rect x="31" y="150" width="62" height="63" rx="9" class="af"/>
+<path d="M44 90 q-5 -6 0 -11 M62 90 q-5 -6 0 -11 M80 90 q-5 -6 0 -11" class="h"/>
+<rect x="10" y="170" width="18" height="24" rx="3" class="k milk"/><circle cx="19" cy="182" r="4" class="k"/>
+<path d="M44 66 V12" class="k t5"/>
+<path d="M36 34 V50 L52 34 V50 Z" class="k milk"/>
+<path d="M80 66 V24 H128" class="k t5"/>
+<path d="M126 24 H150 V36 M139 24 V12 M131 12 H147" class="k t3"/>
+<line x1="150" y1="42" x2="150" y2="70" class="a t3 d"/>
+<path d="M96 200 H120 V214" class="k t3"/>
+<path d="M104 194 V206 L112 194 V206 Z" class="k milk"/>
+<circle cx="120" cy="226" r="3" class="afs"/>
+<path d="M96 240 L100 268 H142 L146 240 Z" class="k"/><path d="M98 254 H144" class="a"/>
+{badge(19, 158, 1)}{badge(62, 122, 2)}{badge(20, 42, 3)}{badge(128, 54, 4)}{badge(80, 252, 5)}{badge(128, 190, 6)}
+{heater_list}
+<line x1="6" y1="282" x2="334" y2="282" class="m t1"/>
+{lbl(6,300,'Refill the tank before turning','tb')}{lbl(6,314,'power or gas back on','tb')}''')
+
+svg('toilet-buckets', 186, 'Two-bucket toilet: a lidded pee bucket and a poo bucket with the toilet seat on it; cover material, about half a cup (120 mL), after each poo', f'''
+<line x1="6" y1="172" x2="334" y2="172" class="m"/>
+<path d="M24 98 L32 172 H88 L96 98" class="k t3"/>
+<path d="M20 98 H100 Q100 84 60 84 Q20 84 20 98 Z" class="k milk t3"/><path d="M52 84 H68" class="k t5"/>
+<path d="M134 98 L142 172 H198 L206 98" class="k t3"/>
+<ellipse cx="170" cy="94" rx="46" ry="10" class="k milk t3"/><ellipse cx="170" cy="94" rx="24" ry="4.5" class="k"/>
+{lbl(60,148,'Pee','tl','middle')}{lbl(170,148,'Poo','tl','middle')}
+{lbl(60,64,'Lid','tb','middle')}{lead(60,68,60,80)}
+{lbl(170,64,'Seat','tb','middle')}{lead(170,68,170,81)}
+<path d="M258 172 Q292 112 326 172 Z" class="w wf"/>
+<path d="M300 150 L322 118" class="w t3"/><ellipse cx="298" cy="152" rx="9" ry="5" transform="rotate(-50 298 152)" class="w wf"/>
+{arrow(254,158,214,158)}
+{lbl(336,24,'Cover material','tb','end')}{lbl(336,38,'half a cup (120 mL)','','end')}{lbl(336,52,'after each poo','','end')}{lead(282,58,284,142)}''')
+
+svg('latrine', 200, 'Cat hole in side view: a hole 6 to 8 inches (15 to 20 cm) deep and 4 to 6 inches (10 to 15 cm) across, at least 200 feet (60 m) from water, with the soil you dug out beside it', f'''
+<path d="M0 100 H20 Q28 124 50 124 Q72 124 80 100 H340 V200 H0 Z" class="gr m"/>
+<path d="M22 108 Q50 100 78 108 Q72 122 50 122 Q28 122 22 108 Z" class="af"/><path d="M26 112 q6 -4 12 0 t12 0 t12 0" class="a t1"/>
+<path d="M262 100 V138 H288 V100 Z" class="milk"/><path d="M262 100 V138 H288 V100" class="k t3"/>
+<path d="M294 100 Q312 78 330 100 Z" class="w wf"/>
+<path d="M232 62 L242 84" class="k t5"/><path d="M242 84 L252 82 L250 98 L240 100 Z" class="k kf"/>
+{dim(80,48,262,48)}<line x1="80" y1="40" x2="80" y2="56" class="m"/><line x1="262" y1="40" x2="262" y2="56" class="m"/>
+{lbl(171,22,'At least 200 feet (60 m) from water','tb','middle')}{lbl(171,36,'about 70 steps','tm','middle')}
+{lbl(45,150,'Water,','tb','middle')}{lbl(45,164,'trails, camp','','middle')}
+{dim(254,102,254,137)}{lbl(244,120,'6 to 8 inches','','end')}{lbl(244,134,'(15 to 20 cm) deep','','end')}
+{dim(262,150,288,150)}{lbl(275,168,'4 to 6 inches','','middle')}{lbl(275,182,'(10 to 15 cm) across','','middle')}
+{lbl(336,64,'Soil you','','end')}{lbl(336,76,'dug out','','end')}''')
 
 # ---------------- SHELTER ----------------
 svg('shelter-site', 200, 'Valley cross-section: wind on ridgetops, cold air and floods in the valley floor, a level bench as the best site', f'''

@@ -68,6 +68,10 @@
           ]
         },
         {
+          "fig": "water-heater-drain",
+          "cap": "Do the steps in this order: power or gas off, let the tank cool, close the water intake valve, open a hot tap, put a container under the drain valve, open the drain. Refill the tank before you turn the power or gas back on."
+        },
+        {
           "link": "p:burns",
           "label": "Burns"
         }

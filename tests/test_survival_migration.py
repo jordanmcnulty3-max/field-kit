@@ -27,8 +27,12 @@ MIGRATED = {'surv-dangerous-animals', 'surv-field-dressing-game', 'surv-find-wat
             'surv-traps-and-fishing', 'surv-weather-and-lightning'}
 # Migrated topics a content pack moved to another category and reopened as drafts (water pack, Task 5).
 REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water'}
-# Their figures are pinned: find-water keeps both v6 figures; make-water-safe's water-safe was removed in v7 (Task 13).
-REOPENED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-safe': set()}
+# Their figures are pinned: find-water keeps both v6 figures; make-water-safe's water-safe was removed in v7 (Task 13)
+# and restored with the 5,000 ft / 5% to 9% wording in the water pack's Task 8, which also adds the water-heater,
+# bucket-toilet and cat-hole figures to the new water topics.
+REOPENED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-safe': {'water-safe'},
+                 'surv-water-in-the-house': {'water-heater-drain'}, 'surv-toilet-no-water': {'toilet-buckets'},
+                 'surv-latrines': {'latrine'}}
 
 
 def new_topics():

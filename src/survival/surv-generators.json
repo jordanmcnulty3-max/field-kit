@@ -1,0 +1,252 @@
+{
+  "id": "surv-generators",
+  "title": "Generators",
+  "category": "heat",
+  "keywords": [
+    "generator",
+    "portable generator",
+    "backup power",
+    "transfer switch",
+    "backfeed",
+    "back-feeding",
+    "extension cord",
+    "refuel generator",
+    "generator in rain",
+    "generator in snow",
+    "furnace on generator",
+    "well pump generator",
+    "space heater on generator",
+    "power outage",
+    "watts"
+  ],
+  "summary": "Run a generator only outside, more than 20 feet (6 m) from windows, doors and vents, with the exhaust pointing away from buildings. Never in the garage, basement or on a porch. Never plug it into a wall outlet: anything wired into the house, like the furnace or well pump, needs a transfer switch put in by an electrician.",
+  "doFirst": [
+    "Run it only outside, more than 20 feet (6 m) from windows, doors and vents, with the exhaust pointing away from the house (CDC, CPSC).",
+    "Never in the house, garage, basement, crawlspace, shed, porch or carport, even with doors and windows open (CPSC).",
+    "Never plug the generator into a wall outlet. It can feed power back into the lines and kill line workers (University of Illinois Extension, Cornell).",
+    "Turn it off and let it cool before you refuel it (OSHA, FEMA).",
+    "Keep battery CO alarms working in the house while it runs (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "Where to run it",
+      "blocks": [
+        {
+          "warn": "A generator’s exhaust is full of carbon monoxide. Opening doors or windows will not let enough air in to stop it building up to deadly levels (CPSC). About 100 people in the US die each year from carbon monoxide from portable generators (CPSC)."
+        },
+        {
+          "list": [
+            "Outside only, more than 20 feet (6 m) from any window, door or vent (CDC, New York State Division of Consumer Protection). CPSC: at least 20 feet (6 m) from the house.",
+            "Point the exhaust away from your home and from any other building someone can go into (CPSC).",
+            "Close windows and seal off vent openings near the generator or in the path of its exhaust (CPSC).",
+            "Never inside a home, garage, basement, crawlspace or shed, or in any other enclosed or partly enclosed space, even one with some ventilation (CPSC, FEMA). Never in an attached garage, even with the door open (NFPA).",
+            "Never on a porch or in a carport (CPSC).",
+            "Keep it as far as you can from your home and from your neighbors’ homes (CPSC and US Fire Administration).",
+            "Leave 3 to 4 feet (about 1 m) of clear space on all sides and above it (OSHA).",
+            "Keep children and pets away. Parts get hot enough to burn you while it runs (University of Illinois Extension)."
+          ]
+        },
+        {
+          "p": "When you buy one, look for a generator with a CO shut-off that turns it off automatically (CPSC)."
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "link": "p:burns",
+          "label": "Burns"
+        }
+      ]
+    },
+    {
+      "h": "Rain and snow",
+      "blocks": [
+        {
+          "list": [
+            "Keep it dry: a wet generator can give you an electric shock (OSHA, Cornell, University of Illinois Extension). OSHA: don’t use it in the rain or wet conditions.",
+            "In wet weather, use it only when you have to. Run it under an open, canopy-like cover, on a dry surface where water can’t puddle or run under it (University of Illinois Extension). Put it where rain and snow can’t reach it, if you can (New York State Division of Consumer Protection).",
+            "The cover must stay open. A shed, garage, porch or carport is not a cover: carbon monoxide builds up in partly enclosed spaces (CPSC, FEMA).",
+            "Dry your hands before you touch it (University of Illinois Extension).",
+            "Follow the maker’s instructions about electric shock in bad weather (CPSC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Never back-feed the house",
+      "blocks": [
+        {
+          "warn": "Never plug a generator into a wall outlet. Power can flow back through the house wiring onto the utility lines and kill or injure line workers who think the line is dead (Cornell, University of Illinois Extension)."
+        },
+        {
+          "list": [
+            "Never attach a generator to the house’s electrical system without a properly installed transfer switch (OSHA).",
+            "A qualified electrician should install the generator and the transfer switch (University of Illinois Extension, OSHA, NFPA). The switch keeps the generator’s power from going back onto the utility lines (University of Illinois Extension).",
+            "Make sure the transfer switch is in the generator (auxiliary) position before you start the generator (Cornell)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Furnace and well pump",
+      "blocks": [
+        {
+          "p": "To run the furnace or a well pump from a generator, have a qualified electrician install a transfer switch, so the generator can feed the house wiring safely (University of Illinois Extension; OSHA: never attach a generator to a building’s electrical system without one)."
+        },
+        {
+          "list": [
+            "Size: Cornell Cooperative Extension says a 4,000 to 6,000 watt portable generator is enough for pumping water, running the furnace, a refrigerator and a few lights. Keeping close to normal living takes 12,000 to 15,000 watts (Cornell).",
+            "Choosing one: ask a qualified dealer or electrician which generator suits your house (University of Illinois Extension). Ratings differ between makers, so check what a rating means (Cornell).",
+            "Motors take 3 to 5 times as much current to start as to run (Cornell).",
+            "Decide ahead which circuits you really need in a long outage (Cornell)."
+          ]
+        },
+        {
+          "link": "s:surv-wells-without-power",
+          "label": "Wells without power"
+        }
+      ]
+    },
+    {
+      "h": "Cords and loads",
+      "blocks": [
+        {
+          "steps": [
+            "Start the generator with nothing plugged in (Cornell, University of Illinois Extension).",
+            "Plug appliances straight into the generator, or into a heavy-duty, outdoor-rated extension cord (NFPA, University of Illinois Extension).",
+            "Turn appliances and lights on one at a time, so you don’t overload it (University of Illinois Extension). Start the largest loads first (Cornell).",
+            "Never overload it: that can overheat it and start a fire (OSHA, Cornell).",
+            "Before you shut it off, switch off everything on it and let it run a few minutes with no load (Cornell)."
+          ]
+        },
+        {
+          "list": [
+            "Use cords rated, in watts or amps, for what they carry. Replace an underrated cord with one that has heavier-gauge wire (OSHA).",
+            "Check cords for cuts, tears and wear, and make sure the plug has all three prongs, including the grounding pin (NFPA). Never use a frayed or damaged cord (OSHA).",
+            "If a cord gets hot, replace it with a heavier one (Cornell).",
+            "Lay and fasten cords so nobody trips on them (Cornell).",
+            "Make sure the generator is properly grounded and the grounding connections are tight (OSHA)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Electric heaters on a generator",
+      "blocks": [
+        {
+          "p": "New York State Department of Health: running a generator outdoors for heat is a better option than a kerosene or unvented gas heater during power failures."
+        },
+        {
+          "list": [
+            "Best: through a transfer switch, so the heater plugs straight into a wall outlet, as heater safety sources ask (US Department of Energy, CPSC). Never into a power strip (CPSC).",
+            "Avoid extension cords with electric heaters (New York State Department of Health, New York State Division of Homeland Security and Emergency Services). If one is needed, use the shortest heavy-duty cord you have, 14-gauge wire or heavier, and follow the heater maker’s rules on cords (US Department of Energy).",
+            "Never run a heater’s cord under a rug or carpet (CPSC).",
+            "Keep everything that can burn at least 3 feet (1 m) from the heater (CPSC, US Fire Administration). Set it on a stable, level surface where it won’t be knocked over (CPSC). Buy one with a tip-over switch (US Department of Energy).",
+            "Turn it off when you leave the room or go to bed (US Fire Administration).",
+            "Turn it on by itself, like any other appliance: one at a time (University of Illinois Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Refuel safely",
+      "blocks": [
+        {
+          "steps": [
+            "Turn the generator off (OSHA, FEMA). Never refuel it while it runs (Cornell).",
+            "Let it cool down (OSHA, FEMA, NFPA). Fuel spilled on hot engine parts can catch fire (FEMA).",
+            "Fill it, then check the oil and other fluids and look for fuel leaks (Cornell)."
+          ]
+        },
+        {
+          "list": [
+            "Fuel vapor you can’t see can travel along the ground and be lit by a pilot light or a spark from a switch (FEMA).",
+            "Store fuel in a container made and labelled for it, away from the generator and outside where people live, never in the house (NFPA, OSHA, Cornell). See Store fuel safely.",
+            "Keep the generator’s tank filled when it is put away, so it starts when you need it (Cornell)."
+          ]
+        },
+        {
+          "link": "s:surv-store-fuel",
+          "label": "Store fuel safely"
+        }
+      ]
+    },
+    {
+      "h": "Ration its run time",
+      "blocks": [
+        {
+          "list": [
+            "Generators are for temporary use; decide what you need most (University of Illinois Extension).",
+            "Most household generators are not built to run nonstop for days (Cornell).",
+            "In an outage longer than 8 hours, shut it down two or three times a day to check fluids and let it cool (Cornell). Cornell’s list also says to shut it down at least once every 24 hours; two or three times a day meets both.",
+            "Have it inspected every year and replace worn parts (FEMA). Read and follow its manual (CPSC, University of Illinois Extension)."
+          ]
+        },
+        {
+          "p": "No source opened gives how much fuel a generator burns per hour. Check your generator’s manual."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Carbon Monoxide Poisoning Basics (last reviewed October 26, 2026)",
+      "used": "Never run a generator inside your home or garage, even with doors and windows open; only outside, more than 20 feet from windows, doors and vents; battery-powered or battery back-up CO detector in the home"
+    },
+    {
+      "name": "CPSC, As Winter Storms Threaten Millions in the US CPSC Issues Safety Tips to Help Families Prevent Carbon Monoxide Poisoning and Fires (release 26-149, December 12, 2025)",
+      "used": "Never inside a home, garage, basement, crawlspace, shed or other enclosed space; open doors or windows won't ventilate enough; outside only, at least 20 feet from the house; not on a porch or in a carport; exhaust away from the home and other buildings; close windows and seal vents near it or in the exhaust path; follow the manufacturer on shock hazards in inclement weather; check and maintain; CO shut-off feature; about 100 consumers die each year from portable-generator CO; electric heaters: wall outlet, never a power strip, cord never under rugs, 3 feet from things that burn, stable level surface"
+    },
+    {
+      "name": "CPSC, What to Know About Generators and Carbon Monoxide (CO) (CPSC468 0322)",
+      "used": "Outside only and far from windows, doors and vents; at least 20 feet from the house; exhaust away from the home and other buildings; not in a home, garage, basement, crawlspace, shed or on a porch; ask for an automatic CO shut-off; read and follow labels and instructions"
+    },
+    {
+      "name": "CPSC and US Fire Administration, Winter Weather Warning: CPSC and USFA Issue Home Heating Safety Alert (2011)",
+      "used": "Keep portable generators as far away from your home and your neighbors' homes as possible"
+    },
+    {
+      "name": "OSHA, Using Portable Generators Safely (fact sheet FS-3286, September 2005)",
+      "used": "Never attach to a structure's electrical system without a properly installed transfer switch; cords rated in watts or amps; heavier gauge for underrated cords; never frayed or damaged; properly grounded, tight connections; keep dry, don't use in rain or wet conditions; shut down and cool before refueling; approved fuel containers, away from living areas, not in the home; don't overload; not in garages, crawl spaces, basements; 3 to 4 feet of clear space on all sides and above"
+    },
+    {
+      "name": "FEMA, Be Safe During a Power Outage (August 31, 2020)",
+      "used": "Inspect yearly, replace worn parts; generators outdoors at least 20 feet from windows; not in homes, garages, crawl spaces or partially enclosed spaces, even with partial ventilation; turn off and cool before refueling; fuel on hot parts can ignite; vapors travel along the ground, lit by a pilot light or switch arcs"
+    },
+    {
+      "name": "NFPA, Generator safety tip sheet (©NFPA 2017; copy hosted by the Village of Penn Yan, NY)",
+      "used": "Plug appliances into the generator or a heavy-duty outdoor-rated cord; check cords for cuts and tears and three prongs with a grounding pin; qualified electrician and properly rated transfer switch; fuel in a container made and labelled for it, outside living areas; never in an attached garage even with the door open; exhaust away from the building; turn off and cool before refueling (its 5-foot distance is not used: see decisions D37)"
+    },
+    {
+      "name": "University of Illinois Extension, Generator Safety (undated)",
+      "used": "Outdoors with plenty of ventilation; open canopy-like structure, dry surface, no puddles or drainage under it; never in a home or garage; don't plug into the wall (back feed); transfer switch keeps power off utility equipment; qualified electrician installs generator and switch; heavy-duty cords to the generator's outlets; ask a vendor or electrician about size; read the manual; generator on before plugging in; appliances on one at a time; off and cool before fueling; in wet weather use only when necessary; dry hands; temporary use, prioritize needs; keep children and pets away; parts hot enough to burn"
+    },
+    {
+      "name": "Cornell Cooperative Extension (Cornell Agricultural Health and Safety Program), Safe Operation of Emergency Generators, E. Hallman and R. Peterson (CU 2/06), Chautauqua County CCE copy",
+      "used": "Back-feeding can kill linemen; transfer switch in the auxiliary position before starting; 4,000 to 6,000 watt portable for pumping water, furnace, refrigerator and a few lights; 12,000 to 15,000 watts for near-normal living; ratings differ by maker; motors draw 3 to 5 times the current to start; decide which circuits are needed; start with no load, largest loads first; never overload; switch off loads and let it spin before shutting off; no undersized or frayed cord; replace a hot cord with larger wire; secure cords against tripping; never in a basement or garage; never refuel while running; cool, check fluids and leaks at refuel; store fuel away from the unit; keep the tank filled; keep dry, canopy; not built for continuous operation for days; outage over 8 hours: shut down two or three times a day; at least once every 24 hours"
+    },
+    {
+      "name": "New York State Department of State, Division of Consumer Protection, Consumer Alert on the dangers of carbon monoxide (December 21, 2022)",
+      "used": "Not in a home, garage, basement or any enclosed space; at least 20 feet from any window, door or vent; place it where rain and snow can't reach it if possible"
+    },
+    {
+      "name": "New York State Department of Health, Supplemental Space Heaters (undated)",
+      "used": "A generator run outdoors during power failures is a better option for heating than kerosene or unvented gas heaters; avoid ungrounded wiring or extension cords with portable electric heaters"
+    },
+    {
+      "name": "New York State Division of Homeland Security and Emergency Services, Home Heating Fire Safety (undated)",
+      "used": "Avoid extension cords with electric heaters"
+    },
+    {
+      "name": "US Department of Energy, Energy Saver: Small Space Heaters",
+      "used": "Electric heaters plugged directly into the wall outlet; if an extension cord is necessary, the shortest heavy-duty cord of 14-gauge wire or larger; follow the manufacturer on cords; tip-over safety switch"
+    },
+    {
+      "name": "US Fire Administration, Heating fire safety (last reviewed May 4, 2023)",
+      "used": "Keep anything that can burn at least 3 feet from heating equipment; turn space heaters off when leaving the room or going to bed"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

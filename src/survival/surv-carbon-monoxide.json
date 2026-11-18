@@ -1,0 +1,205 @@
+{
+  "id": "surv-carbon-monoxide",
+  "title": "Carbon monoxide and burning fuel indoors",
+  "category": "heat",
+  "keywords": [
+    "carbon monoxide",
+    "co",
+    "co alarm",
+    "co detector",
+    "carbon monoxide detector",
+    "fumes",
+    "generator indoors",
+    "grill indoors",
+    "oven for heat",
+    "camp stove indoors",
+    "alarm going off",
+    "vent-free fireplace",
+    "gas logs",
+    "furnace vent snow",
+    "headache"
+  ],
+  "summary": "Carbon monoxide comes from anything that burns fuel. You cannot see or smell it. Never run a generator, grill, camp stove or charcoal indoors or in a garage, never heat the house with an oven, keep battery CO alarms near where people sleep, and get everyone outside the moment one sounds.",
+  "doFirst": [
+    "CO alarm sounding? Don’t look for the cause. Get everyone outside into fresh air now, then call 911 or the fire department if you can. Count heads. Don’t go back in until responders say you can (CPSC).",
+    "Someone has a headache, dizziness, sickness or confusion near something burning fuel? Get them and everyone else out into fresh air and open the Carbon monoxide poisoning protocol.",
+    "Never run a generator inside the house, garage, basement or crawlspace, even with doors and windows open (CDC, CPSC).",
+    "Never burn charcoal, use a grill or a camp stove indoors, and never heat the house with a gas oven or range (CDC, CPSC)."
+  ],
+  "sections": [
+    {
+      "h": "What makes it",
+      "blocks": [
+        {
+          "p": "Carbon monoxide (CO) is a deadly gas with no color and no smell. It comes from fuel that does not burn completely: coal, wood, charcoal, oil, kerosene, propane and natural gas, and from engines such as generators, cars, lawn mowers and power washers (CPSC). Furnaces, stoves, lanterns, fireplaces and gas ranges all make it (CDC)."
+        },
+        {
+          "p": "You cannot see, smell or taste it, so people may not know they are breathing it (CPSC). Even with doors and windows open, a closed or partly closed space can trap it and let it build to deadly levels quickly (CPSC)."
+        }
+      ]
+    },
+    {
+      "h": "Never indoors",
+      "blocks": [
+        {
+          "warn": "Opening doors and windows does not make these safe inside: carbon monoxide still builds up to deadly levels (CDC, CPSC)."
+        },
+        {
+          "list": [
+            "Generator: never inside a home, garage, basement, crawlspace or shed, or on a porch or in a carport, even with doors and windows open. Run it outside, more than 20 feet (6 m) from windows, doors and vents (CDC, CPSC). See Generators.",
+            "Charcoal: never burn it inside a home, garage, vehicle or tent (CPSC, CDC). Don’t cook on a charcoal grill in a garage, even with the garage door open (CPSC).",
+            "Camp stoves and flameless chemical heaters: don’t use portable gas camp stoves or portable flameless chemical heaters indoors (CDC).",
+            "Oven, range or clothes dryer as a heater: never heat the house with a gas oven, range or dryer (CDC, CPSC). Never use an oven to heat your home (US Fire Administration).",
+            "Anything made for outdoor use: don’t use heat sources designed for outside use indoors; they make carbon monoxide (New York State Division of Homeland Security and Emergency Services).",
+            "Unvented stoves and fireplaces: don’t cook or burn anything on a stove or fireplace that isn’t vented (CDC).",
+            "A running vehicle: never run a car in an attached garage, even with the garage door open (CDC, CPSC)."
+          ]
+        },
+        {
+          "p": "Fuel-burning heaters have their own rules: see Kerosene and propane heaters. CPSC: never run an unvented fuel-burning appliance in any room where people are sleeping."
+        },
+        {
+          "link": "s:surv-generators",
+          "label": "Generators"
+        },
+        {
+          "link": "s:surv-portable-heaters",
+          "label": "Kerosene and propane heaters"
+        }
+      ]
+    },
+    {
+      "h": "Furnaces, vents and chimneys",
+      "blocks": [
+        {
+          "list": [
+            "Clear snow away from the outside vents of furnaces and other fuel-burning appliances (CPSC). Keep furnace and dryer vents clear of ice and snow, and check them during and after heavy snow (New York State Division of Consumer Protection).",
+            "A blocked furnace or gas dryer vent can let carbon monoxide build up inside. Newer furnaces may shut off completely, leaving the house without heat (New York State Division of Consumer Protection).",
+            "Make sure every gas heater is vented to the outside (New York State Division of Consumer Protection).",
+            "In normal times, have the heating system and any gas, oil or coal appliance serviced every year by a qualified technician, and have chimneys checked or cleaned every year (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Vent-free gas fireplaces and heaters",
+      "blocks": [
+        {
+          "p": "A vent-free (unvented) gas fireplace, gas log set or wall heater has no chimney or flue. It runs on natural gas or propane from the house supply and may be wall-mounted, free-standing or set into a fireplace (New York State Department of Health). Unvented gas heaters release what they burn straight into your home (New York State Department of Health)."
+        },
+        {
+          "list": [
+            "US Department of Energy: unvented combustion space heaters are not recommended for use inside your home.",
+            "New York State Department of Health: don’t use one as your main heat source, even during power failures. Running a generator outdoors for heat is a better option. The label New York requires on these heaters says it is a supplemental heat source and should not be the primary heat source.",
+            "Never run it in a room where anyone is sleeping (CPSC: never operate unvented fuel-burning appliances in any room where people are sleeping).",
+            "Have working CO alarms in the house if you use one (US Department of Energy: install a carbon monoxide detector if you use a small space heater).",
+            "CDC: “Don’t cook or burn anything on a stove or fireplace that isn’t vented.”"
+          ]
+        }
+      ]
+    },
+    {
+      "h": "CO alarms",
+      "blocks": [
+        {
+          "list": [
+            "Use alarms that run on batteries or have battery backup (CPSC, CDC). Plug-in and hard-wired alarms should have battery backup (CPSC).",
+            "Put one on every level of the house and outside each sleeping area (CPSC; New York State Division of Homeland Security and Emergency Services, citing NFPA). CDC: near every sleeping area. Interconnected alarms are best: when one sounds, they all sound (CPSC).",
+            "Keep them away from heating vents and from places furniture or curtains can cover them. Don’t put one in the kitchen or above a fuel-burning appliance (CPSC).",
+            "Buy alarms that meet UL 2034 (CPSC). New York law accepts alarms listed to UL 2034 or CSA 6.19 (New York State Division of Homeland Security and Emergency Services).",
+            "Test them every month (CPSC). The test button checks the circuit, not whether the sensor still works (CPSC). Check the batteries when the clocks change in spring and fall (CDC).",
+            "Replace each alarm at the age its maker gives, or every 5 years (CDC, CPSC)."
+          ]
+        },
+        {
+          "p": "New York law (Amanda’s Law, in force since February 22, 2010) requires CO alarms in one- and two-family homes, multifamily homes and rentals that have a fuel-burning appliance or system, or an attached garage (New York State Division of Homeland Security and Emergency Services)."
+        }
+      ]
+    },
+    {
+      "h": "When an alarm sounds",
+      "blocks": [
+        {
+          "warn": "Never ignore a CO alarm. Don’t try to find where the gas is coming from (CPSC)."
+        },
+        {
+          "steps": [
+            "Get everyone outside into fresh air right away (CPSC).",
+            "Call 911 or the fire department if you can (CPSC).",
+            "Count heads: make sure everyone is out (CPSC).",
+            "Don’t go back inside until emergency responders say you can (CPSC). If no responders can come, don’t go back in until the house has aired out and the cause is fixed (Carbon monoxide poisoning protocol).",
+            "If an appliance caused it, don’t use that appliance again until a trained person has serviced it (CPSC).",
+            "If the alarm sounds again within 24 hours of going back in, get out again and repeat these steps, and have a qualified technician check the house (CPSC)."
+          ]
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
+        }
+      ]
+    },
+    {
+      "h": "Signs of poisoning",
+      "blocks": [
+        {
+          "p": "The most common signs are headache, dizziness, weakness, upset stomach, vomiting, chest pain and confusion (CDC). At first it feels like the flu without a fever (CPSC). People who are asleep or drunk can die before they notice anything (CDC)."
+        },
+        {
+          "p": "If several people in the same house, room or vehicle feel this way near something burning fuel, think carbon monoxide. What to do is in the Emergency protocol."
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Carbon Monoxide Poisoning Basics (last reviewed October 26, 2026)",
+      "used": "Odorless, colorless; sources include furnaces, generators, charcoal grills, vehicles, small engines, stoves, lanterns, fireplaces, gas ranges; battery-operated or battery back-up CO detectors near every sleeping area; check batteries when clocks change in spring and fall; replace following the manufacturer's instructions or every 5 years; yearly service of heating system and gas, oil or coal appliances; chimneys checked or cleaned yearly; never heat your house with a gas oven; don't cook or burn anything on a stove or fireplace that isn't vented; never burn charcoal indoors; no portable gas camp stoves or portable flameless chemical heaters indoors; generators only outside, more than 20 feet from windows, doors and vents; never run a vehicle in an attached garage; common symptoms; people asleep or drunk can die first"
+    },
+    {
+      "name": "US Consumer Product Safety Commission (CPSC), Carbon Monoxide Questions and Answers (Carbon Monoxide Information Center, undated)",
+      "used": "Produced by incomplete burning of coal, wood, charcoal, oil, kerosene, propane, natural gas, and by engines (generators, cars, lawn mowers, power washers); undetectable to the senses; battery-operated or battery-backup alarms on every level and outside sleeping areas; interconnected best; plug-in or hard-wired need battery backup; avoid heating vents and places covered by furniture or draperies; not in kitchens or above fuel-burning appliances; UL 2034; test button tests circuitry not sensor; replacement age from the manufacturer; when the alarm sounds: never ignore, don't look for the source, move outside, call emergency services, fire department or 911, head count, don't re-enter until responders allow, don't use a malfunctioning appliance until serviced, alarm again within 24 hours: repeat and call a qualified technician; flu-like without fever; generators not in or near enclosed spaces, open doors and windows don't help; never heat with ranges, ovens or clothes dryers; never operate unvented fuel-burning appliances in any room where people are sleeping; annual heating service; never burn charcoal in a home, garage, vehicle or tent; never leave a car running in an attached garage"
+    },
+    {
+      "name": "CPSC, As Winter Storms Threaten Millions in the US CPSC Issues Safety Tips to Help Families Prevent Carbon Monoxide Poisoning and Fires (release 26-149, December 12, 2025)",
+      "used": "Never a generator in a home, garage, basement, crawlspace, shed; not on a porch or in a carport; open doors and windows don't ventilate enough; alarms on each level and outside separate sleeping areas; interconnected best; test monthly; get outside, then call 911; clear snow from outside vents of fuel-burning appliances such as furnaces; no charcoal grill in a garage even with the door open"
+    },
+    {
+      "name": "CPSC, What to Know About Generators and Carbon Monoxide (CO) (CPSC468 0322)",
+      "used": "Never use inside a home or garage even if doors and windows are open; not in a basement, crawlspace, shed or on a porch; get outside immediately, then call 911"
+    },
+    {
+      "name": "US Fire Administration, Heating fire safety (last reviewed May 4, 2023)",
+      "used": "Never use an oven to heat your home"
+    },
+    {
+      "name": "New York State Division of Homeland Security and Emergency Services, Home Heating Fire Safety (undated)",
+      "used": "Avoid heat sources designed for outside use; they produce harmful carbon monoxide"
+    },
+    {
+      "name": "New York State Division of Homeland Security and Emergency Services, Office of Fire Prevention and Control, Carbon Monoxide Virtual Toolbox (undated; says it is not authoritative and points to NY Law 2009, Ch. 367)",
+      "used": "Amanda's Law from February 22, 2010: CO alarms in all new and existing one- and two-family dwellings, multifamily dwellings and rentals with a fuel-burning appliance, system or attached garage; UL 2034 or CSA 6.19; NFPA recommends a central location outside each sleeping area and on every level"
+    },
+    {
+      "name": "New York State Department of State, Division of Consumer Protection, Consumer Alert on the dangers of carbon monoxide (December 21, 2022)",
+      "used": "Keep furnace and dryer vents clear of ice and snow, check during and after heavy snowfall; a blocked vent can let CO build up and newer furnaces may shut off, leaving the home without heat; make sure all gas heaters are vented to the outside"
+    },
+    {
+      "name": "New York State Department of Health, Supplemental Space Heaters (undated)",
+      "used": "Portable kerosene and unvented gas heaters release combustion products directly into your home; don't use them as your main heat source, even during power failures; a generator run outdoors is a better option; unvented gas heaters connect to natural gas or propane and may be wall-mounted, free-standing or inserted in a fireplace"
+    },
+    {
+      "name": "New York State Department of Health, letter Re: Selling Vent-Free Gas Space Heating Appliances in New York State (March 1, 2006)",
+      "used": "Required caution label: the appliance is a supplemental heat source and should not be the primary heat source (10 NYCRR Part 71; General Business Law 322-c)"
+    },
+    {
+      "name": "US Department of Energy, Energy Saver: Small Space Heaters",
+      "used": "Unvented combustion small space heaters are not recommended for use inside your home; install a carbon monoxide detector if you use a small space heater"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

@@ -346,3 +346,45 @@ Source disagreements found while checking the Survival topics. Each says what th
    page gives a bleach mix of 1 part bleach to 10 parts water (1 1/2 cups per gallon) but prints no bleach strength,
    so it was left out. Today: the topic says to soak droppings with "a disinfectant" for 5 minutes, CDC's own word,
    with no mix. Say whether to add CDC's 1:10 mix as printed, with a note that CDC gives no strength.
+37. **Generator distance from the house (surv-generators) — Heat pack Task 4.** CDC: more than 20 feet from windows,
+   doors and vents. CPSC: at least 20 feet from the house, exhaust pointed away. FEMA and the NYS Division of Consumer
+   Protection: at least 20 feet. NFPA's 2017 generator tip sheet: at least 5 feet from doors, windows and vent openings.
+   Today: 20 feet (6 m) from windows, doors and vents, exhaust away from the house, as in Wells without power and the
+   Carbon monoxide protocol; NFPA's 5 feet is not in the text. Say if the group wants a larger distance.
+38. **Generators in rain and snow (surv-generators) — Heat pack Task 4.** OSHA (2005): "Keep a generator dry; do not use
+   it in the rain or wet conditions." University of Illinois Extension: in wet weather use it only when necessary, under
+   an open, canopy-like structure on a dry surface. Cornell: keep it dry; a canopy for a tractor-driven unit. NYS
+   Division of Consumer Protection: where rain and snow can't reach it, if possible. CPSC: follow the maker's
+   instructions. Today: OSHA's rule first, then the open canopy, with "never a shed, garage, porch or carport". A Central
+   New York winter outage often means snow. Say whether the group wants a plain "don't run it in rain or snow" instead,
+   or a sourced canopy design (none was found).
+39. **Unvented heaters and fireplaces indoors (surv-portable-heaters, surv-carbon-monoxide) — Heat pack Task 4.** Agencies
+   that advise against them: US Department of Energy (unvented combustion space heaters "not recommended for use inside
+   your home"); NFPA (all fuel-burning equipment should be vented outside); NYS Department of Health (not your main heat
+   source even in a power failure; a generator outdoors is better); New York City bans kerosene and propane space
+   heaters (FDNY Foundation). New York law allows only approved kerosene heaters in a home, and none in a building with
+   three or more families. CDC: "Don't cook or burn anything on a stove or fireplace that isn't vented," which read
+   literally rules out a vent-free gas fireplace; NYS DOH only says it is a supplemental, not a primary, heat source.
+   Ventilation: CPSC asks for the room's door open, and a window open about an inch when the door is closed or the house
+   is tight or winterized; the app says always do both. Today: operating guidance under the strictest conditions found
+   (the ruling in the heat pack ledger), with these agencies named first. Say whether the group keeps that, or wants
+   the topics to say plainly "don't use them indoors" (then the heaters topic becomes a list of what to use instead).
+40. **Electric heaters on a generator: extension cords (surv-generators) — Heat pack Task 4.** CPSC: electric heaters
+   in a wall outlet, never a power strip. NYS DOH and NYS DHSES: avoid extension cords with electric heaters. US
+   Department of Energy: if a cord is necessary, the shortest heavy-duty cord of 14-gauge wire or larger. Generator
+   sources: plug appliances into the generator or a heavy-duty outdoor-rated cord. Today: a transfer switch is "best"
+   (heater in a wall outlet; the app's reading); otherwise DOE's cord rule. Say if the group wants "only through a
+   transfer switch".
+41. **Propane cylinders indoors (surv-portable-heaters, surv-store-fuel) — Heat pack Task 4.** North Carolina's LP-gas
+   regulator (state law there) and the National Propane Gas Association: no propane cylinders indoors, nor in a garage
+   or basement. CPSC: heaters with an oxygen depletion sensor, on 1 lb. cylinders, are designed for indoor use. A 2003
+   NYS Department of State bulletin said LP-gas containers are prohibited inside buildings; its 2017 replacement does not
+   say this, and the Fire Code of New York State's LP-gas chapter was not found in an opened source. Today: spares
+   outside; indoors only the small cylinder the heater's instructions allow, attached to it, marked as the app's
+   reading; "no current New York rule was found". Say if the group wants no cylinder indoors at all (which means no
+   indoor propane heater).
+42. **How much fuel to store, and for how long (surv-store-fuel) — Heat pack Task 4.** No New York household limit for
+   gasoline, kerosene or propane was found in an opened source. The only storage time found is Maine DEP's: no more than
+   30 days without a stabilizer (one made for ethanol gasoline). NYS DOH: don't burn last season's kerosene. Today: the
+   topic says no New York limit was found and gives Maine's 30 days as the only figure. Say if someone in the group can
+   ask the local fire marshal or code office for the limit, so it can be added from that source.

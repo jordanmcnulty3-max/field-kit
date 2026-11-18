@@ -406,3 +406,8 @@ Changes to existing fields:
 **Figures.** None added or removed; `tests/test_survival_migration.py` now pins both topics' current figure sets (see the test change below). Redrawing `shelter-tarp` as a lean-to and `fire-ferro` as push-the-striker-down is Task 8's.
 
 **Test change (heat pack Task 7).** `tests/test_survival_migration.py`: `REOPENED` gains `surv-fire: heat` and `surv-shelter: heat` (category membership); `PINNED_FIGS` gains both topics with their current figures, because the draft branch of the figure test expects a draft migrated topic to carry all its v6 figures, and these two dropped `fire-ferro` and `shelter-tarp` in v7.
+
+**Heat pack Task 7 fix round 1 (2026-11-18).** Still no v7-checked sentence reworded or removed in either topic. The
+fixes change only text added in Task 7 (traced in docs/content-review.md, "Task 7 fix round 1"), add one paragraph to
+Fire's "Put it out" section after the New York rule ("Asleep counts as unattended ...", Army TC 21-3; the checked
+paragraphs are unchanged), and add TC 21-3 to Fire's sources. Draft. Old: `true`. New: removed from both topics.

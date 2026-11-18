@@ -67,7 +67,7 @@
       "h": "Tarp lean-to, step by step",
       "blocks": [
         {
-          "p": "You need a tarp or poncho, 7 to 10 feet (2 to 3 m) of rope or cord, stakes about 1 foot (30 cm) long (three for a poncho) and two trees or poles 7 to 10 feet (2 to 3 m) apart (Army ATP 3-50.21, poncho lean-to)."
+          "p": "You need a tarp or poncho, 7 to 10 feet (2 to 3 m) of rope or cord, stakes about 1 foot (30 cm) long (three for a poncho) and two trees or poles 7 to 10 feet (2 to 3 m) apart. These are the Army’s figures for a poncho lean-to (Army ATP 3-50.21)."
         },
         {
           "steps": [
@@ -75,9 +75,9 @@
             "Poncho: tie off the hood first. Pull the drawstring tight, roll the hood lengthwise, fold it in thirds and tie it with the drawstring.",
             "Cut the rope in half. Tie one half to each corner of one long edge of the tarp. This edge is the high front edge.",
             "Tie a drip stick, about 4 inches (10 cm) long, to each rope about 1 inch (2.5 cm) from the tarp. Rain running along the rope drips off the stick instead of into the shelter. Strings about 4 inches (10 cm) long tied to the grommets along the high edge help the water run off the same way.",
-            "Tie each rope to its tree about waist high, so the high edge is stretched between the trees. This is the line between two trees in Build above.",
+            "Tie each rope to its tree about waist high, so the high edge is stretched between the trees. The ropes and the tarp’s high edge are the line between two trees in Build above: you don’t need a separate line.",
             "Spread the tarp down toward the wind and stake its other long edge to the ground with sharpened sticks through the grommets. The low, staked edge is the back of the lean-to, facing into the wind. The open side, under the high edge, faces away from it.",
-            "Staying more than one night, or rain coming? Hold up the middle: tie a line from the poncho’s hood to an overhanging branch, with no slack, or stand a stick upright under the center (it takes up room inside).",
+            "Staying more than one night, or rain coming? Hold up the middle. Poncho: tie a line from the hood to an overhanging branch, with no slack. Any tarp: stand a stick upright under the center (it takes up room inside).",
             "Pile brush, a pack or other gear at the sides of the lean-to for more shelter from wind and rain.",
             "Put leaves or pine needles inside to lie on, to cut heat loss to the ground (see Build)."
           ]
@@ -173,7 +173,7 @@
       "h": "Snow cave",
       "blocks": [
         {
-          "p": "A snow cave takes time and energy, and you will get wet digging it (Army ATP 3-50.21, TC 21-3). Change into dry clothes when it’s done."
+          "p": "A snow cave takes time and energy, and you will get wet digging it from sweat and snow (Army ATP 3-50.21, TC 21-3). Dig in as little clothing as you can, so you have dry clothes to change into when you finish (Army TC 21-3)."
         },
         {
           "steps": [
@@ -203,9 +203,9 @@
         {
           "steps": [
             "Shovel snow into a mound at least 5 feet (1.5 m) high, ideally 7 to 8 feet (2.1 to 2.4 m), and wide enough to hold everyone who will sleep in it once it’s hollowed out (Appalachian Mountain Club; Scout Life).",
-            "Shape it into a dome and let it settle about 90 minutes so the snow bonds together (Scout Life; the Appalachian Mountain Club says 60 to 90 minutes).",
+            "Shape it into a dome and let it settle about 90 minutes so the snow bonds together (Scout Life; the Appalachian Mountain Club says 60 to 90 minutes in most conditions). Very cold, dry, granular snow takes longer and may not bond at all. Test it first: if a snowball won’t hold together, don’t build a quinzhee from that snow (Appalachian Mountain Club).",
             "Push sticks a foot (30 cm) deep into the mound all over, from the outside (Appalachian Mountain Club).",
-            "Dig a small entrance at the base on the downwind side, just big enough to crawl through (Appalachian Mountain Club; Scout Life says the downhill side). Hollow out the inside. Stop wherever you reach the end of a stick, so the walls stay at least 1 foot (30 cm) thick (Appalachian Mountain Club; Scout Life: 1 to 2 feet). Don’t dig through a wall.",
+            "Dig a small entrance at the base on the downwind side, just big enough to crawl through (Appalachian Mountain Club; Scout Life says the downhill side). Hollow out the inside. Stop wherever you reach the end of a stick, so the walls stay at least 1 foot (30 cm) thick (Appalachian Mountain Club; Scout Life: 1 to 2 feet). If you can see light through a wall, it’s too thin (Appalachian Mountain Club). Don’t dig through a wall.",
             "Poke a small ventilation hole near the top of the dome (Scout Life).",
             "Leave the last foot of snow as raised beds, and dig a narrow trench between them down to the ground so cold air drains out (Scout Life).",
             "Mark the entrance, keep a small shovel inside in case you have to dig your way out, and change into warm, dry clothes once it’s built (Scout Life)."
@@ -221,11 +221,11 @@
         },
         {
           "list": [
-            "A fire burning in a shelter without ventilation can cause carbon monoxide poisoning (Army FM 21-76).",
-            "In a snow shelter, heat melts the snow that insulates you. Melting snow overhead can soak you, bury you and your gear, and put out your fire (Army FM 21-76).",
+            "No fire, candle, fuel gel or oil lamp inside a tent or snow shelter either: candles, fuel gel and small oil lamps make carbon monoxide (Army ATP 3-50.21), and CDC says not to burn anything in a stove or fireplace that isn’t vented (see Carbon monoxide and burning fuel indoors).",
+            "Heat melts a snow shelter: it melts the snow that insulates you, and melting snow overhead can soak you and bury you and your gear (Army FM 21-76).",
             "Keep a fire in front of a lean-to from burning too hot and burning the shelter down (Army TC 21-3).",
             "People trying to get warm or dry clothes by a fire get careless and scorch or burn their clothes and gear (Army FM 21-76).",
-            "Never leave a fire unattended (Fire)."
+            "Never leave a fire unattended, and asleep counts as unattended: if the fire in front of a lean-to must burn while people sleep, one person stays awake to watch it; otherwise put it out before you sleep (Army TC 21-3; Fire)."
           ]
         },
         {
@@ -263,11 +263,11 @@
   "sources": [
     {
       "name": "US Army ATP 3-50.21, Survival (2018), chapters 5 and 6",
-      "used": "Site free of dead trees, avalanches, rockslides, flash-flood areas and high-water marks; avoid low-lying cold sumps; up to 80 percent of body heat lost to the ground; natural insulation at least 12 inches thick as it compresses; debris hut ridgepole at about waist height, ribs steep enough to shed moisture, debris at least 3 feet thick, debris to drag across the entrance; lean-to backside into the wind; poncho lean-to ropes about waist high, back into the wind; fire reflector of green logs or nonporous rock; porous rocks explode when heated; snow cave insulating, sleeping platform higher than the entrance, openings sealed except ventilation holes; heat pack: poncho lean-to (6-16): 7 to 10 feet of rope, three stakes about 1 foot, trees or poles 7 to 10 feet apart, check wind, back into the wind, tie off the hood, rope halves to the corner grommets of one long side, 4-inch drip sticks about 1 inch from the grommet, 4-inch strings on top-edge grommets, ropes about waist high on the trees, other side staked with sharpened sticks through the grommets, center support line from the hood to an overhanging branch or a stick, brush or gear at the sides, leaves or pine needles inside; field-expedient lean-to (6-31, 6-32): trees 7 feet apart, 7-foot 1-inch pole at waist to chest height, bipod or two tripods, five to eight 10-foot 1-inch beams, backside into the wind, crisscross saplings or vines, cover bottom up like shingling, bedding; reflector wall in cold weather (6-33); debris hut (6-38): tripod of two short stakes, ribbing wide enough for the body, lattice of finer sticks, light dry soft debris, 2-foot layer inside, shingling branches on top; snow cave (6-25 to 6-27): time, energy, get wet, drift about 10 feet deep, arched roof drains melt down the sides, platform higher than the entrance, trench between platform and wall, roof high enough to sit up, walls and ceiling at least 1 foot thick, block the entrance, ventilation shaft, mound variation; 6-39: cannot see breath means too warm (cooking in the entrance, 6-27, and candles with vents, 6-39, not used)"
+      "used": "Site free of dead trees, avalanches, rockslides, flash-flood areas and high-water marks; avoid low-lying cold sumps; up to 80 percent of body heat lost to the ground; natural insulation at least 12 inches thick as it compresses; debris hut ridgepole at about waist height, ribs steep enough to shed moisture, debris at least 3 feet thick, debris to drag across the entrance; lean-to backside into the wind; poncho lean-to ropes about waist high, back into the wind; fire reflector of green logs or nonporous rock; porous rocks explode when heated; snow cave insulating, sleeping platform higher than the entrance, openings sealed except ventilation holes; heat pack: poncho lean-to (6-16): 7 to 10 feet of rope, three stakes about 1 foot, trees or poles 7 to 10 feet apart, check wind, back into the wind, tie off the hood, rope halves to the corner grommets of one long side, 4-inch drip sticks about 1 inch from the grommet, 4-inch strings on top-edge grommets, ropes about waist high on the trees, other side staked with sharpened sticks through the grommets, center support line from the hood to an overhanging branch or a stick, brush or gear at the sides, leaves or pine needles inside; field-expedient lean-to (6-31, 6-32): trees 7 feet apart, 7-foot 1-inch pole at waist to chest height, bipod or two tripods, five to eight 10-foot 1-inch beams, backside into the wind, crisscross saplings or vines, cover bottom up like shingling, bedding; reflector wall in cold weather (6-33); debris hut (6-38): tripod of two short stakes, ribbing wide enough for the body, lattice of finer sticks, light dry soft debris, 2-foot layer inside, shingling branches on top; snow cave (6-25 to 6-27): time, energy, get wet, drift about 10 feet deep, arched roof drains melt down the sides, platform higher than the entrance, trench between platform and wall, roof high enough to sit up, walls and ceiling at least 1 foot thick, block the entrance, ventilation shaft, mound variation; 6-39: candles, fuel gel and small oil lamps produce carbon monoxide (used for the no-flame rule), cannot see breath means too warm (cooking in the entrance, 6-27, and vents for heat-producing devices, 6-39, not used)"
     },
     {
       "name": "US Army FM 21-76, Survival Manual, chapters 5 and 15",
-      "used": "Shelter too large is the most common error, too large wastes body heat; avoid flash flood areas, avalanche or rockslide areas, sites below the high water mark, dead trees that might fall; low ground collects heavy cold air at night; winter site protects from cold and wind with fuel and water; ventilate an enclosed shelter; never sleep on the ground without insulation; heat pack: snow trench below snow and wind level, snow blocks for overhead cover in compacted snow, one entrance with a snow block or rucksack as a door (ch 15); carbon monoxide from a fire in an unventilated shelter; excessive heat melts a snow shelter, melting overhead snow can wet, bury and put out the fire; careless warming or drying scorches clothing (ch 15)"
+      "used": "Shelter too large is the most common error, too large wastes body heat; avoid flash flood areas, avalanche or rockslide areas, sites below the high water mark, dead trees that might fall; low ground collects heavy cold air at night; winter site protects from cold and wind with fuel and water; ventilate an enclosed shelter; never sleep on the ground without insulation; heat pack: snow trench below snow and wind level, snow blocks for overhead cover in compacted snow, one entrance with a snow block or rucksack as a door (ch 15); excessive heat melts a snow shelter, melting overhead snow can wet and bury you and your equipment; careless warming or drying scorches clothing (ch 15)"
     },
     {
       "name": "US Army FM 21-76-1, Survival, Evasion, and Recovery (1999), chapter VI",
@@ -275,7 +275,7 @@
     },
     {
       "name": "US Army TC 21-3, Soldier's Handbook for Individual Operations and Survival in Cold-Weather Areas (1986), chapters 7 and 10",
-      "used": "Avalanches on steep slopes, avoid their likely path; deep valleys collect colder air; snow trench; snow cave entrance at the lowest level; heat pack: snow trench is quick, burrow or dig, roof of ponchos or snow blocks supported by skis, poles or snowshoes, boughs for roof and bed (10-3); snow cave: drift at least 3 meters, no newly fallen powdery or loose snow, entrance about 45 degrees from the downwind side, 1-meter tunnel then chamber at right angles, sleeping area above the highest point of the entrance, roof arched and at least 30 cm thick, at least two vents (roof and door), check every 2 or 3 hours, clear with a pole, block the entrance, mark it, walking on the roof may collapse it, diggers get wet; lean-to fire must not burn too hot and burn down the shelter (heating snow caves with a gasoline stove or candles and a fire guard while sleeping not used)"
+      "used": "Avalanches on steep slopes, avoid their likely path; deep valleys collect colder air; snow trench; snow cave entrance at the lowest level; heat pack: snow trench is quick, burrow or dig, roof of ponchos or snow blocks supported by skis, poles or snowshoes, boughs for roof and bed (10-3); snow cave: drift at least 3 meters, no newly fallen powdery or loose snow, entrance about 45 degrees from the downwind side, 1-meter tunnel then chamber at right angles, sleeping area above the highest point of the entrance, roof arched and at least 30 cm thick, at least two vents (roof and door), check every 2 or 3 hours, clear with a pole, block the entrance, mark it, walking on the roof may collapse it, diggers get wet and should wear minimal clothing to keep a dry change; fires put out while sleeping, or an alert fire guard if a fire is needed while sleeping (applied to a lean-to fire); lean-to fire must not burn too hot and burn down the shelter (heating snow caves with a gasoline stove or candles and a fire guard while sleeping not used)"
     },
     {
       "name": "NYS DEC, DEC Advises Backcountry Downhill Skiers, Snowboarders, and Outdoor Adventurers of Avalanche Risk in Adirondack High Peaks Region (press release, 22 February 2023)",
@@ -299,9 +299,8 @@
     },
     {
       "name": "Appalachian Mountain Club, How to Build a Quinzee (aka Snow Cave) (Matt Heid, March 28, 2015)",
-      "used": "Pile at least five feet, ideally seven to eight feet high; bonds in 60 to 90 minutes; sticks a foot deep from outside; walls at least a foot thick; small entrance at the base, on the downwind side; don't dig through the wall"
+      "used": "Snowball test (snow that crumbles is not suitable); pile at least five feet, ideally seven to eight feet high; bonds in 60 to 90 minutes in most conditions, wet snow just below freezing quickly, granular snow at low temperatures takes longer and may not bond at all; sticks a foot deep from outside; walls at least a foot thick, light through the wall means too thin; small entrance at the base, on the downwind side; don't dig through the wall"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

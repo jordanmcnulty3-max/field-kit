@@ -3058,3 +3058,20 @@ Opened and not used, or failed:
 - D61 heating or cooking in a snow shelter (TC 21-3, ATP, USAP vs CDC and CPSC).
 - D62 pyramid fire overnight (ATP 5-27 vs never unattended).
 - D63 quinzhee sizes from non-agency sources; trench vent not sourced.
+
+### Task 7 fix round 1 (2026-11-18), from task-7-review.md
+
+Sources re-opened 2026-11-18 (title checked): ATP (6-39, cover header), https://irp.fas.org/doddir/army/atp3-50-21.pdf;
+AMC, https://www.outdoors.org/resources/amc-outdoors/outdoor-resources/how-to-build-a-quinzee-aka-snow-cave/ (title and
+author confirmed); TC pp. 10-6 to 10-7, https://ia601500.us.archive.org/28/items/MManuals/Tc21-3UsArmySurvivalInColdWeather1986.pdf
+(TC 21-3 page headers; the date was confirmed in the first read).
+
+- I1 surv-shelter, Fire and stoves: added "No fire, candle, fuel gel or oil lamp inside a tent or snow shelter either" — ATP 6-39 ("Candles, fuel gel, or small oil lamps produce carbon monoxide."); CDC via surv-carbon-monoxide ("Don't cook or burn anything on a stove or fireplace that isn't vented"). Removed "A fire burning in a shelter without ventilation can cause carbon monoxide poisoning (FM)" (its condition implied a ventilated fire is safe). Melting-snow item recast without "put out your fire" — FM p. 157 ("excessive heat will melt the insulating layer of snow"; melting overhead snow "may get you wet, bury you and your equipment"). ATP and FM used lines updated.
+- I2 surv-shelter, quinzhee: step 2 adds AMC ("The rate this occurs varies depending on the temperature and moisture content of the snow."; "Wet snow just below the freezing point bonds quickly;" "more granular snow in low temperatures takes longer, and may not sinter together at all."; "In most conditions, the snow will sufficiently bond together in 60 to 90 minutes"; snowball test: "does the snow stick together or does it crumble apart?", crumble means "probably best to wait for next time"). Step 4 adds AMC ("if you can see light filtering through the wall, it's likely too thin."). The app's "don't build a quinzhee from that snow" is the more cautious reading of AMC's "wait for next time".
+- I3 surv-fire (Put it out, new paragraph; pyramid item) and surv-shelter (Fire and stoves list): "Asleep counts as unattended. If a fire must burn while people sleep, one person stays awake to watch it; otherwise put it out before you sleep." — TC p. 10-6 ("The fires should be put out when personnel inside the cave are sleeping," "thus reducing the danger of fire, asphyxiation, or carbon monoxide poisoning."; "If the weather is severe and it is necessary to have a fire while sleeping," "an alert fire guard must be posted in each cave."). TC writes it for snow caves; the topics credit it as TC's rule for fires while people sleep and apply it to an open fire. TC 21-3 added to Fire's sources. D62 updated.
+- M1 surv-shelter, tarp lean-to: kit paragraph now says the figures are the Army's for a poncho lean-to (ATP 6-16); step 5 now "The ropes and the tarp’s high edge are the line between two trees in Build above: you don’t need a separate line."; step 7 split into "Poncho:" (hood line to a branch) and "Any tarp:" (upright stick), both ATP 6-16 Step 6. No source for tarp-size rope lengths: none written.
+- M2 surv-fire, Fire on snow: "In the cold, green logs up to about the thickness of a soda can break easily, so you can gather them by hand for the base." — ATP 5-6 read as which logs break, not a maximum.
+- M3 surv-fire, Reflectors: the shelter-opening sentence now limited to the open side of a lean-to ("not into an enclosed shelter"; D60, CO rule). ATP 5-7 used line notes it.
+- M4 surv-shelter, snow cave intro: "Dig in as little clothing as you can, so you have dry clothes to change into when you finish (Army TC 21-3)." — TC p. 10-6 ("They should wear the minimum amount of clothing to ensure that they have a change of dry clothing when finished."); "from sweat and snow" — TC ("wet from perspiration and from the snow inside the cave").
+- M5 surv-fire, softwood: "burn faster and make more smoke unless you keep a large flame going" — ATP 5-20.
+- Draft removed from both topics.

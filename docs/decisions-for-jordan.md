@@ -443,18 +443,24 @@ Source disagreements found while checking the Survival topics. Each says what th
    Program's 2024 field manual says ventilation is critical if a stove is run in any snow shelter. CDC: never use a
    charcoal grill, lantern or portable camping stove inside a tent; CPSC: never use fuel-burning heaters or lanterns while
    sleeping in an enclosed area. Today: no stove, grill or lantern inside a tent or snow shelter at all, and no heater or
-   lantern while sleeping in one (the checked Shelter and Priorities line, CDC and CPSC); the topic says the Army
-   manuals differ and that the app does not follow them. Melting snow for water stays outdoors (Water in winter).
+   lantern while sleeping in one (the checked Shelter and Priorities line, CDC and CPSC), and, added in the fix round, no
+   fire, candle, fuel gel or oil lamp inside a tent or snow shelter (ATP 6-39: they make carbon monoxide; CDC: burn
+   nothing that isn't vented). The topic says the Army manuals differ and that the app does not follow them. Melting
+   snow for water stays outdoors (Water in winter).
 62. **Pyramid fire overnight (surv-fire) — Heat pack Task 7.** Army ATP 3-50.21 (5-27): a pyramid fire burns downward,
    "requiring no attention during the night." USDA Forest Service, Smokey Bear and NYS DEC: never leave a fire
-   unattended (the checked Fire text). Today: the pyramid lay is described, the Army's claim is named, and the text says
-   never leave a fire unattended. Say if the group wants a rule for a fire kept going overnight in a survival camp (for
-   example, one person awake at all times).
+   unattended (the checked Fire text). Army TC 21-3 (snow caves): put fires out while people sleep, or post an alert fire
+   guard if a fire is needed while sleeping. Today (fix round): the pyramid lay is described, the Army's claim is named,
+   and both Fire and Shelter say asleep counts as unattended: if a fire must burn while people sleep, one person stays
+   awake to watch it, otherwise put it out (TC 21-3's rule, applied to an open fire). Say if the group wants something
+   different for a survival camp.
 63. **Snow cave and quinzhee sizes from non-agency sources (surv-shelter) — Heat pack Task 7.** Snow cave figures come
    from Army TC 21-3 and ATP 3-50.21 (drift at least 10 feet deep, walls and roof at least 1 foot, two vents, check them
    every 2 or 3 hours). No agency source opened gives quinzhee sizes; they come from Scout Life (Boy Scouts of America)
    and the Appalachian Mountain Club, which differ slightly: settle 60 to 90 minutes (AMC) or about 90 (Scout Life);
    walls at least 1 foot (AMC) or 1 to 2 feet (Scout Life); entrance on the downwind (AMC) or downhill (Scout Life)
-   side. Today: about 90 minutes, at least 1 foot, downwind, with both named. The snow trench size (3 feet deep,
+   side. Today: about 90 minutes, at least 1 foot, downwind, with both named. Fix round: AMC's warning that very cold,
+   dry, granular snow takes longer and may not bond at all, its snowball test (don't build from snow that won't make a
+   snowball) and "light through a wall means it's too thin" are added. The snow trench size (3 feet deep,
    shoulder-wide) is the US Antarctic Program's; no source gives its vent, so the app's existing vent-hole rule applies.
    Say if anyone in the group has trained on these and wants different figures (they would need a source).

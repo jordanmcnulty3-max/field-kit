@@ -77,13 +77,14 @@ DELETIONS = {
                      'Desert shade. The air gap keeps the sun-heated top layer from heating the space below.'],
     'surv-navigation-without-a-compass': [
         'Southern Hemisphere: point 12 o’clock at the sun. North is halfway between 12 and the hour hand.',
-        'Southern Cross: extend the long axis of the cross about four and a half times its length, then drop straight down to the horizon for south.'],
+        'Southern Cross: extend the long axis of the cross about four and a half times its length, then drop straight down to the horizon for south.',
+        'The two bright Pointers beside the cross help confirm you have the real one, not the dimmer “false cross.”'],
     'surv-dangerous-animals': [
         'Grizzly (brown) bear attack: leave your pack on, lie flat on your stomach with your hands clasped behind your neck, and play dead. If the attack continues, fight back hard.',
         'Mountain lions',
         'Don’t run or crouch. Make yourself look big, keep eye contact and back away slowly. If attacked, fight back.'],
 }
-DROPPED_FIGS = {'shelter-desert'}
+DROPPED_FIGS = {'shelter-desert', 'nav-cross'}
 FROSTBITE_REMOVED = ('Check each other for frostbite: white or grey-yellow skin that feels hard or waxy. '
                      'Don’t rub it, and only rewarm it if it won’t freeze again.')
 

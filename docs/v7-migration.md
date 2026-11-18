@@ -14,12 +14,13 @@ from the old topic text exactly once; the test requires the rest to match word f
 - surv-shelter || "Desert shade. The air gap keeps the sun-heated top layer from heating the space below." || Caption of the `shelter-desert` diagram, which is removed with its text.
 - surv-navigation-without-a-compass || "Southern Hemisphere: point 12 o’clock at the sun. North is halfway between 12 and the hour hand." || Southern Hemisphere navigation text.
 - surv-navigation-without-a-compass || "Southern Cross: extend the long axis of the cross about four and a half times its length, then drop straight down to the horizon for south." || Southern Cross navigation text; the Southern Cross is not visible from the Northeast.
+- surv-navigation-without-a-compass || "The two bright Pointers beside the cross help confirm you have the real one, not the dimmer “false cross.”" || Caption of the `nav-cross` (Southern Cross) diagram, which is removed with the Southern Cross text. The figure file in figs/ is not deleted.
 - surv-dangerous-animals || "Grizzly (brown) bear attack: leave your pack on, lie flat on your stomach with your hands clasped behind your neck, and play dead. If the attack continues, fight back hard." || No grizzly population in the Northeast (to be confirmed against a wildlife-agency source in the checking tasks).
 - surv-dangerous-animals || "Mountain lions" || Heading of the mountain-lion section; no mountain-lion population in the Northeast (to be confirmed in the checking tasks).
 - surv-dangerous-animals || "Don’t run or crouch. Make yourself look big, keep eye contact and back away slowly. If attacked, fight back." || Body of the mountain-lion section.
 - surv-priorities || "Check each other for frostbite: white or grey-yellow skin that feels hard or waxy. Don’t rub it, and only rewarm it if it won’t freeze again." || Frostbite care removed from the Cold-and-snow picker bullet "Cover head, hands and feet. ..."; replaced by a link block to the Emergency frostbite protocol (`p:frostbite`). The rest of the bullet ("Cover head, hands and feet.") is kept.
 
-The `shelter-desert` figure is the only figure removed. The `nav-cross` figure and its caption stay (the brief's figure test allows only `shelter-desert` to go); see the task report.
+The `shelter-desert` and `nav-cross` figures are the only figures removed from topics; both remain in figs/.
 
 ## Dropped picker regions
 

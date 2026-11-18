@@ -112,15 +112,16 @@ def test_priorities_has_old_priorities_and_picker_bullets_with_frostbite_replace
     assert 'frostbite' not in json.dumps(cold['blocks'][:-1]).lower()
 
 
-def test_figures_used_equal_old_set_minus_shelter_desert():
+def test_figures_used_equal_old_set_minus_shelter_desert_and_nav_cross():
     old = {m[0] for m in FIG_RE.findall(v6())}
     new = {b['fig'] for t in new_topics().values() for s in t['sections'] for b in s['blocks'] if 'fig' in b}
-    assert 'shelter-desert' in old
-    assert new == old - {'shelter-desert'}
+    assert {'shelter-desert', 'nav-cross'} <= old
+    assert new == old - {'shelter-desert', 'nav-cross'}
 
 
 def test_every_topic_is_a_draft_with_placeholder_source_and_validates():
     topics = list(new_topics().values())
+    assert len(topics) == 15
     for t in topics:
         assert t['draft'] is True and t['reviewed'] == '2026-11-17' and t['category'] == 'basics'
         assert t['sources'] == [{'name': 'Not yet source-checked', 'used': 'Converted from v6 text; checked in Tasks 13 to 16'}]

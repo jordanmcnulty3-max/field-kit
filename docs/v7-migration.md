@@ -378,3 +378,31 @@ docs/content-review.md, "Water pack Task 5"). Changes to existing fields:
 - surv-wells-without-power tag. Old: `where: ["rural"]`. New: no `where` tag (coordinator's ruling): its flooded-well, well-pit and generator carbon monoxide warnings show under every filter value; tests/test_survival_home.py lists it among the always-visible topics.
 - surv-water-winter keeps `when: ["cold"]`.
 - Sources: "used" lines adjusted where the fixes changed what a source supports (FEMA Q&A applied to roof rain; FEMA booklet: rain as a source to purify; Colorado State: 0.1 micron clause dropped; WHO note 5: not chemical contamination, equator times; CDC Floodwater list; Texas A&M credit "adapted from the American Red Cross and the Institute for Business and Home Safety"; Purdue appliances; NYS DOH 6562 "revised April 2018"; WHO note 1 added).
+
+### Heat pack Task 7 (batch D): fire and shelter deepened (2026-11-18)
+
+No statement the v7 review checked was reworded, moved out of its section or removed in `surv-fire` or `surv-shelter`.
+Every existing section, list item, step, paragraph, link and figure block is unchanged and in its old order; the ferro
+rod line is word for word. New material is in new sections (traced in docs/content-review.md, "Heat pack Task 7").
+Changes to existing fields:
+
+**surv-fire**
+
+- Category. Old: "basics". New: "heat". Source: heat pack content plan, section 4. Id kept, so v7.2 pins, recents and the search key `s:surv-fire` still resolve. No tags (as before).
+- Keywords. Old: fire, tinder, kindling, ferro rod, teepee, log cabin, wet weather. New: the same plus fire on snow, reflector, long fire, star fire, pyramid fire, cooking fire, matches, lighter, fire kit, campfire.
+- New sections, in this order among the old ones: "Fire on snow", "Fire lays for heat and cooking" and "Reflectors" after "Build and light"; "Wet weather" and "Carry a fire kit" after "Ways to light it"; "Put it out" stays last.
+- Sources. The "used" line of US Army ATP 3-50.21 is extended (old text kept, "; heat pack: ..." appended). One source added: National Park Service, Ten Essentials.
+- Reviewed. Old: "2026-11-17". New: "2026-11-18". Draft: added `true` until this batch's independent review passes.
+
+**surv-shelter**
+
+- Category. Old: "basics". New: "heat". Id kept (`s:surv-shelter`). `where` tags unchanged: rural, woods, coast.
+- Keywords. Old: shelter, debris hut, lean-to, tarp, snow trench, insulation, bed. New: the same plus poncho, snow cave, quinzhee, quinzee, snow shelter, reflector.
+- New sections: "Tarp lean-to, step by step", "Lean-to of poles and boughs" and "Debris hut, more detail" after "Build"; "Snow trench", "Snow cave", "Quinzhee (snow mound)" and "Fire and stoves in and near shelters" after "Snow"; "Cold injuries" stays last.
+- Sources. The "used" lines of US Army ATP 3-50.21, FM 21-76 and TC 21-3 are extended (old text kept, "; heat pack: ..." appended). Three sources added: US Antarctic Program Continental Field Manual (2024), Scout Life (Boy Scouts of America) quinzee article, Appalachian Mountain Club quinzee article.
+- Reviewed. Old: "2026-11-17". New: "2026-11-18". Draft: added `true`.
+- Not added: sheltering in a vehicle or a building (content plan section 9, call 11: written in `surv-heat-out` and `surv-winter-storms`, which no filter hides).
+
+**Figures.** None added or removed; `tests/test_survival_migration.py` now pins both topics' current figure sets (see the test change below). Redrawing `shelter-tarp` as a lean-to and `fire-ferro` as push-the-striker-down is Task 8's.
+
+**Test change (heat pack Task 7).** `tests/test_survival_migration.py`: `REOPENED` gains `surv-fire: heat` and `surv-shelter: heat` (category membership); `PINNED_FIGS` gains both topics with their current figures, because the draft branch of the figure test expects a draft migrated topic to carry all its v6 figures, and these two dropped `fire-ferro` and `shelter-tarp` in v7.

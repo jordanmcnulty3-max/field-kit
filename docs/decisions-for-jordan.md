@@ -427,3 +427,34 @@ Source disagreements found while checking the Survival topics. Each says what th
    the doors and air intakes only if safe; never water into the chimney; have it checked; no reuse until inspected. The
    extinguisher and baking soda step is left out, in line with Store fuel safely's extinguisher rule (only a small fire in
    one object, with a clear way out). Say if the group wants Missouri's extinguisher step added.
+60. **Fire beside a shelter: which way it faces and how far (surv-shelter, surv-fire) — Heat pack Task 7.** Army ATP
+   3-50.21 (6-16, 6-32) puts the back of every lean-to into the wind, with the fire in front and a reflector behind it
+   (5-7, 6-33). The same manual (6-40) says that when a fire is outside a shelter, the shelter's opening should face 90
+   degrees to the prevailing wind, so sparks and smoke are not blown in when the wind reverses morning and evening (common
+   in mountains), and that the best fire-to-shelter distance is about 3 feet. Smokey Bear: campfires at least 15 feet
+   from tents (D8). Army TC 21-3: keep a lean-to fire from burning too hot and burning the shelter down. Today: the
+   checked lean-to text stays (back into the wind, fire in front, reflector behind it); no distance is given; the new
+   "Fire and stoves in and near shelters" section carries TC 21-3's warning. Say if the group wants the 90-degree
+   opening or a distance added.
+61. **Heating or cooking inside a snow shelter (surv-shelter) — Heat pack Task 7.** Army TC 21-3 (1986) heats snow caves
+   and igloos with a one-burner gasoline stove or candles, puts them out while people sleep, and posts an awake fire guard
+   if a fire is needed while sleeping. Army ATP 3-50.21 says to cook in the lower entrance area of a snow cave (6-27) and
+   that candles, fuel gel and small oil lamps make carbon monoxide, so vent holes must stay open (6-39). The US Antarctic
+   Program's 2024 field manual says ventilation is critical if a stove is run in any snow shelter. CDC: never use a
+   charcoal grill, lantern or portable camping stove inside a tent; CPSC: never use fuel-burning heaters or lanterns while
+   sleeping in an enclosed area. Today: no stove, grill or lantern inside a tent or snow shelter at all, and no heater or
+   lantern while sleeping in one (the checked Shelter and Priorities line, CDC and CPSC); the topic says the Army
+   manuals differ and that the app does not follow them. Melting snow for water stays outdoors (Water in winter).
+62. **Pyramid fire overnight (surv-fire) — Heat pack Task 7.** Army ATP 3-50.21 (5-27): a pyramid fire burns downward,
+   "requiring no attention during the night." USDA Forest Service, Smokey Bear and NYS DEC: never leave a fire
+   unattended (the checked Fire text). Today: the pyramid lay is described, the Army's claim is named, and the text says
+   never leave a fire unattended. Say if the group wants a rule for a fire kept going overnight in a survival camp (for
+   example, one person awake at all times).
+63. **Snow cave and quinzhee sizes from non-agency sources (surv-shelter) — Heat pack Task 7.** Snow cave figures come
+   from Army TC 21-3 and ATP 3-50.21 (drift at least 10 feet deep, walls and roof at least 1 foot, two vents, check them
+   every 2 or 3 hours). No agency source opened gives quinzhee sizes; they come from Scout Life (Boy Scouts of America)
+   and the Appalachian Mountain Club, which differ slightly: settle 60 to 90 minutes (AMC) or about 90 (Scout Life);
+   walls at least 1 foot (AMC) or 1 to 2 feet (Scout Life); entrance on the downwind (AMC) or downhill (Scout Life)
+   side. Today: about 90 minutes, at least 1 foot, downwind, with both named. The snow trench size (3 feet deep,
+   shoulder-wide) is the US Antarctic Program's; no source gives its vent, so the app's existing vent-hole rule applies.
+   Say if anyone in the group has trained on these and wants different figures (they would need a source).

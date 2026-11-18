@@ -1657,3 +1657,923 @@ Re-opened: NPS-10 (title "Ten Essentials (U.S. National Park Service)" confirmed
 - C2 decisions-for-jordan D11: now names both poisonous irises (yellow flag and native blue flag), matching the Task 15 fix.
 - C3 figs/figs.py `river`: second hazard line "stay well upstream" now "never cross just above them", the surv-river-crossings wording (FM ch 17). tests/test_figs.py: "stay well upstream" added to the river case's forbidden wording, "never cross just above them" to its required wording. Rendered at 360 px, day and night: the right-aligned line fits inside the river band, nothing clipped.
 - C4 surv-fire: `fire-sizes` caption "Tinder, kindling and fuel. If you skip the tinder or kindling stage, the fire will likely fail." now "Tinder, kindling and fuel." (the sentence is in the paragraph above).
+
+## Water pack Task 3: water planner numbers (2026-11-18)
+
+File: src/tooldata/water.json (draft). No topics in this task. Every source below was found by web search and
+opened by web fetch on 2026-11-18; the page title was checked after each fetch.
+
+Source keys:
+- RG-W: Ready.gov (FEMA), Water. https://ready.gov/water
+- RG-KIT: Ready.gov (FEMA), Emergency Supply List (page heading). https://www.ready.gov/kit
+- FW: FEMA in cooperation with the American Red Cross and USDA, Food and Water in an Emergency (no date printed; county-hosted copy of the FEMA booklet). https://henrycounty.in.gov/DocumentCenter/View/295/Food-and-Water-in-an-Emergency-PDF
+- CDC-EWS: CDC, How to Create an Emergency Water Supply, last reviewed June 27, 2025. https://cdc.gov/water-emergency/about/how-to-create-and-store-an-emergency-water-supply.html (the older cdc.gov/healthywater URL returned the same page, same date)
+- ARC-KIT: American Red Cross, Survival Kit Supplies ("What Do You Need In a Survival Kit"). https://redcross.org/get-help/how-to-prepare-for-emergencies/survival-kit-supplies.html
+- DHSES: NYS Division of Homeland Security and Emergency Services, Before an Emergency Happens. https://www.dhses.ny.gov/before-emergency
+- NYSDOH-7009: NYS Department of Health, family emergency preparedness leaflet, publication 7009, footer "11/14" (no title extracted). https://Health.NY.Gov/publications/7009.pdf
+- USGS-FW: USGS Water Science School, Facts About Water. https://www.usgs.gov/water-science-school/science/facts-about-water
+- NIST-811: NIST SP 811, Guide for the Use of the International System of Units (SI), 1995 edition, Appendix B.8. https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication811e1995.pdf (the PDF notes this edition was withdrawn in 2018 and superseded by the 2008 edition; the 2008 edition's B.8 web page needed an approval nobody gave, see below)
+
+### Values
+
+- `drinkPerPersonDay` = 1 gal. RG-W: "Store at least one gallon of water per person per day for several days, for drinking and sanitation." RG-KIT: "Water (one gallon per person per day for several days, for drinking and sanitation)". CDC-EWS: "Store at least 1 gallon of water per day for each person"; "You can use this water during an emergency for drinking, cooking, brushing teeth, and other uses." FW: "You will also need water for food preparation and hygiene. Store a total of at least one gallon per person, per day." ARC-KIT: "Water: one gallon per person, per day". DHSES: "one gallon per person per day". NYSDOH-7009: "at least one gallon per person per day ... for drinking and household use". All agree. Outcome: 1 gal.
+- `drinkPerPersonDay` note, what it covers: drinking, cooking, brushing teeth and other uses (CDC-EWS); drinking and sanitation (RG-W); drinking plus food preparation and hygiene (FW). Stated with each agency's wording. Outcome: matches.
+- `drinkPerPersonDay` note, who needs more (no figure in any source, so no extra value): children, nursing mothers, sick people (RG-W "may need more water"; FW "will need even more"); a medical emergency (RG-W "might require additional water"); warm climate (RG-W "If you live in a warm weather climate more water may be necessary"); pregnant women, people who are sick, pets, hot climate (CDC-EWS "Consider storing more water than this for ..."). Outcome: listed in the note, no number.
+- "3.8 L" in the note: 1 gal = 3.785412 L (NIST-811), rounded up. Outcome: arithmetic from NIST-811.
+- `planDays` = 14 days. CDC-EWS: "Store at least 1 gallon of water per person, per day for 3 days"; "Try to store a 2-week supply if possible." ARC-KIT: "3-day supply for evacuation, 2-week supply for home". FW: "You should store at least a two-week supply of water for each member of your family." DHSES: "Be prepared to make it on your own for at least 10 days." (under Four Steps to Preparedness; Develop a Plan also says "at least 10 days"); its Emergency Supplies list says "to last up to 10 days" (re-opened 2026-11-18 in fix round 1; "at least" used). NYSDOH-7009: "for three days". RG-W and RG-KIT: "several days" (no number). Agencies differ; the longest target (2 weeks: CDC goal, Red Cross home, FEMA booklet) is used, as the dispatch requires. Decisions D15. Outcome: 14 days; every figure above is in the note (CDC worded "3 days, and a 2-week supply if possible": "at least" in CDC belongs to the gallon).
+- `extraHotWeatherPerPersonDay` = 1 gal, label "Very hot weather". RG-W: "A normally active person needs about three quarters of a gallon of fluid daily, from water and other beverages." ... "In very hot temperatures, water needs can double." FW: "A normally active person needs to drink at least two quarts of water each day. Hot environments can double that amount." The sources quantify the hot-weather extra as a doubling but differ on the base: FW doubles 2 quarts (extra 0.5 gal); RG-W's base is ambiguous (its fluid figure gives 0.75 gal; its stored gallon gives 1 gal). Used the most cautious reading, 1 gal. Decisions D16. Outcome: 1 gal, flagged.
+- No other extras: no source opened gives a figure for children, nursing, pregnancy, illness, medical emergency or pets (CDC-EWS confirmed: no figure for pets; ready.gov/pets would not open). Outcome: no extra values; described in the base note.
+- `lbPerGallon` = 8.33 lb. USGS-FW: "Weight: 8.33 pounds/gallon; 1 kilogram/liter". Cross-check: NIST-811 B.9 gives 1 lb/gal = 0.1198264 kg/L, so USGS's 1 kg/L is 8.345 lb/gal; the 0.2% difference is the temperature of the water and does not change a planner total in practice. Outcome: 8.33 (USGS figure as printed).
+- `litersPerGallon` = 3.785412 L. NIST-811 B.8: "gallon (U.S.) (gal) liter (L) 3.785 412 E + 00". USGS-FW: "1 gallon = 4 quarts = 8 pints = 128 fluid ounces = 3.7854 liters". Agree. Outcome: 3.785412.
+- `title`: "one gallon per person per day ... for drinking, cooking and basic hygiene" summarises CDC-EWS, RG-W and FW above. "no source opened says it covers flushing toilets, bathing or laundry": none of the eight pages opened mentions toilet flushing, bathing or laundry water. Outcome: stated only as an absence.
+
+### Pages that would not open or were not used
+
+- FEMA's own copy of Food and Water in an Emergency (https://www.fema.gov:443/pdf/library/f&web.pdf): site error. The county-hosted copy (FW) was used; it names FEMA, the Red Cross and USDA as authors.
+- Ready.gov Pets (https://ready.gov/pets): site error. No per-animal water figure found.
+- NIST SP 811 Appendix B.8 web page (2008 edition): the fetch needed an approval nobody answered, so it was not retried. NIST Handbook 44 appendices (nist.gov/document/... PDFs): site error. NIST SP 811 Appendix B intro page (nist.gov/node/777686) and footnotes page (nist.gov/node/777646) opened but hold no gallon row. The withdrawn 1995 edition was used; USGS-FW agrees with it to the four decimal places USGS prints. A reviewer may want to confirm the figure against the 2008 edition.
+- UNT web archive copies of NIST Weights and Measures appendices: only the archive wrapper loaded, no content.
+
+### Possible future pet extra (not used)
+
+- The Task 4 content worker found Ohio State University Extension (HYG-5354, key OSU in Task 4) giving 1 quart of water per small pet. Not added as an extra: the planner applies every extra per person, not per animal. Pets stay in the `drinkPerPersonDay` note. Could become a per-pet input later.
+
+### Task 3 fix round 1 (2026-11-18)
+
+Independent review confirmed all five values. Wording fixes only; `draft` removed from water.json after review.
+- F1 DHSES re-opened: "Be prepared to make it on your own for at least 10 days." (Four Steps to Preparedness) and "at least 10 days" (Develop a Plan); only the Emergency Supplies list says "up to 10 days". `planDays` note, DHSES `used`, D15 and the line above now say at least 10 days.
+- F2 D16: FEMA booklet's doubling is stated plainly (2 quarts, so 0.5 gal extra); only Ready.gov is ambiguous (0.75 or 1 gal). The planner adds 1 gal, the largest reading. Value unchanged.
+- F3 CDC worded "3 days, and a 2-week supply if possible" in the `planDays` note and the CDC `used` field ("at least" belongs to the gallon). D15 likewise.
+- F4 `planDays` note now also lists NYS Department of Health (3 days) and Ready.gov (several days).
+- F6 NIST source name now ends "(withdrawn 2018; the value agrees with USGS)". The newer edition was not fetched.
+
+### Task 3 fix round 2 (2026-11-18)
+
+- Opened Ohio State University Extension, Food Preservation: Preserving Water for Emergency Use, HYG-5354 (K. Shumaker and N. Stehulak, 03/24/2017), https://ohioline.osu.edu/factsheet/hyg-5354, found by web search; title checked. It says: "Store 1 gallon per person per day, and 1 quart per small pet." (no figure for larger pets). Outcome: confirmed.
+- `drinkPerPersonDay` note: "no source gives an amount for these" now "CDC, FEMA and Ready.gov give no amount for these (Ohio State University Extension: store 1 quart per small pet)." The fact sheet is added to `sources`. The source pairs the quart with "per person per day" but does not repeat "per day" for pets, so the note quotes it as printed. Still not a planner extra, because extras are per person. No value changed.
+- D16 in decisions-for-jordan: the "no amount" sentence now excludes pets for Ohio State and gives its figure.
+
+## Water pack Task 4: amounts, storage, water in the house (2026-11-18)
+
+Files (all draft): src/survival/surv-water-how-much.json, surv-water-store.json, surv-water-in-the-house.json,
+src/checklists/home-water-store.json. Every source below was found by web search and opened by web fetch on
+2026-11-18; the page title (and date where printed) was checked after each fetch. Fetches return excerpts capped at
+about 125 characters per quote, so long sentences were read as consecutive pieces and checked for gaps.
+
+Source keys:
+- CDC-EWS: CDC, How to Create an Emergency Water Supply, reviewed June 27, 2025. https://cdc.gov/water-emergency/about/how-to-create-and-store-an-emergency-water-supply.html (headings: Bottled water; How much emergency water to store; Choosing a container; Don't use unsafe containers; Cleaning the container before use; Storing the water)
+- CDC-FCW: CDC, How to Find Clean Water in an Emergency, reviewed June 25, 2025. https://www.cdc.gov/water-emergency/about/how-to-find-clean-water-in-an-emergency.html
+- CDC-MWS: CDC, How to Make Water Safe in an Emergency, reviewed September 19, 2024. https://cdc.gov/water-emergency/about
+- CDC-BL: CDC, How to Safely Clean and Sanitize with Bleach, reviewed August 26, 2026. https://www.cdc.gov/natural-disasters/safety/how-to-safely-clean-and-sanitize-with-bleach.html
+- CDC-CO: CDC, Carbon Monoxide (CO) Poisoning Basics, dated Oct. 26, 2026. https://www.cdc.gov/co/faqs.htm
+- EPA-ED: US EPA, Emergency Disinfection of Drinking Water. https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water
+- RG-W: Ready.gov (FEMA), Water. https://www.ready.gov/water
+- RG-SODA: Ready.gov, Storing Water in Plastic Soda Bottles, last updated 09/18/2011. https://www.ready.gov/storing-water-plastic-soda-bottles
+- RG-KIT: Ready.gov, Emergency Supply List. https://www.ready.gov/kit
+- FW: FEMA with the American Red Cross and USDA, Food and Water in an Emergency (county-hosted copy, as in Task 3). https://henrycounty.in.gov/DocumentCenter/View/295/Food-and-Water-in-an-Emergency-PDF
+- FEMA-FS: FEMA, Fact Sheet: How to Make Your Water Safe to Drink, released October 8, 2017. https://www.fema.gov/print/pdf/node/318019
+- FEMA-Q: FEMA, Where can I find clean drinking water after a disaster? (no date; the page credits EPA). https://www.fema.gov/node/what-are-emergency-water-sources-if-im-running-out-clean-water
+- ARC-KIT: American Red Cross, What Do You Need In a Survival Kit. https://redcross.org/get-help/how-to-prepare-for-emergencies/survival-kit-supplies.html
+- ARC-MU: American Red Cross, Disaster Supplies Kit, reproduced by University of Missouri Extension (EMW1012, reviewed July 2025). https://extension.missouri.edu/emw1012
+- NDEC: National Disaster Education Coalition (American Red Cross, FEMA, IAEM, IBHS, NFPA, NWS, USDA/CSREES, USGS), Talking About Disaster: Guide for Standard Messages, Disaster Supplies Kit section (no date printed; hosted by energy.gov). https://www.energy.gov/sites/prod/files/Disaster_Supplies_Kit.pdf
+- WADOH: Washington State Department of Health, Treating Drinking Water for Emergency Use, DOH 331-115, July 2022. https://DOH.WA.gov/sites/default/files/legacy/Documents/Pubs/331-115.pdf
+- OSU: Ohio State University Extension, Food Preservation: Preserving Water for Emergency Use, HYG-5354, 2017. https://ohioline.osu.edu/factsheet/hyg-5354
+- UAF: University of Alaska Fairbanks Cooperative Extension, Emergency Water Supply, SAL-00006, February 2021. https://www.uaf.edu/ces/publications/database/housing/emergency-water-supply.php
+- GOHSEP: Louisiana Governor's Office of Homeland Security and Emergency Preparedness, Locating Safe Drinking Water (no date). https://gohsep.la.gov/divisions/hazard-mitigation-assistance/fact-sheet-index/locating-safe-drinking-water
+- NC-MW: "Managing Water in a Disaster Situation" (no publisher or date printed; hosted by NC Risk Management; its wording matches the old Ready.gov Managing Water page). https://rmp.nc.gov/LCF/Publications/AL_Resources/Loss Of Water/Managing Water.pdf. Read for comparison only; not cited in topics.
+- USGS-FW: USGS Water Science School, Facts About Water. https://www.usgs.gov/water-science-school/science/facts-about-water
+- FDA-HM: FDA, Guidance for Industry: Guidelines for Determining Metric Equivalents of Household Measures. https://www.fda.gov/food/guidance-documents-regulatory-information-topic/guidance-industry-guidelines-determining-metric-equivalents-household-measures
+
+Conversions: litres from USGS-FW (1 gal = 3.7854 L, 1 kg/L) and NIST-811 (Task 3); teaspoon from FDA-HM ("1 teaspoon means 5 mL"); °F to °C and inches to cm by the definitions (°C = (°F − 32) × 5/9; 1 in = 2.54 cm). Rounded figures noted below.
+
+### surv-water-how-much
+
+- At least 1 gallon (3.8 L) per person per day — CDC-EWS ("Store at least 1 gallon of water per person, per day"); RG-W; FW; ARC-KIT. Same as src/tooldata/water.json. Matches.
+- What it covers: CDC "drinking, cooking, brushing teeth, and other uses" (CDC-EWS); "for drinking and sanitation" (RG-W); food preparation and hygiene (FW); half a gallon drinking and half a gallon cooking and sanitation — NDEC ("Use one-half gallon per day for drinking, and one-half gallon for cooking and sanitation"). Matches.
+- About three quarters of a gallon (2.8 L) of fluid a day — RG-W ("A normally active person needs about three quarters of a gallon of fluid daily, from water and other beverages"). 0.75 × 3.785 = 2.84 L. Matches.
+- Drink at least 2 quarts (1.9 L) a day — FW ("A normally active person needs to drink at least two quarts of water each day"). 0.5 × 3.785 = 1.89 L. Matches.
+- Gallon does not cover flushing, bathing, laundry — none of CDC-EWS, RG-W, FW, ARC-KIT, NDEC counts water for these (absence, as Task 3 recorded). "Use water not fit to drink for it" — CDC-FCW (pool and spa water for hygiene and cleaning). Outcome: stated as an absence plus the CDC use.
+- At least 2 weeks at home; CDC 3 days, 2 weeks if possible; Red Cross and FEMA 2 weeks at home — CDC-EWS ("Try to store a 2-week supply if possible"); ARC-KIT ("2-week supply for home"); FW ("at least a two-week supply"). 3 days to take if you leave — ARC-KIT ("3-day supply for evacuation"). Matches the planner (D15).
+- 4 people for 2 weeks = 56 gallons (212 L) — arithmetic 4 × 14 × 1; 56 × 3.785 = 212.0 L.
+- Children, nursing mothers, sick people; medical emergency — RG-W. Pregnant women, pets — CDC-EWS ("pregnant women, people who are sick, pets, or if you live in a hot climate"). Matches.
+- Very hot temperatures can double needs — RG-W ("In very hot temperatures, water needs can double"); FW ("Hot environments can double that amount"). Planner adds 1 gallon per person per day — src/tooldata/water.json (D16). Matches.
+- No amount for the others — CDC-EWS, RG-W, FW give none. But OSU gives "1 quart per small pet" (see Disagreements).
+- Rationing quote — RG-W verbatim: "Never ration drinking water unless ordered to do so by authorities." "Drink the amount you need today and try to find more for tomorrow." FW: "If supplies run low, never ration water. Drink the amount you need today, and try to find more for tomorrow." Matches.
+- Reduce activity and stay cool — RG-W ("Minimize the amount of water your body needs by reducing activity and staying cool"). Matches.
+- Pool or spa water for washing and cleaning, never drinking — CDC-FCW. Matches.
+- Dehydration signs — not restated; linked p:dehydration.
+- 8.33 lb per gallon; 1 kg per litre — USGS-FW ("Weight: 8.33 pounds/gallon; 1 kilogram/liter"). Table: 1 gal 8.3 lb (3.8 kg); 5 gal = 41.65 lb, "about 42 lb", 18.9 L / 19 kg; 14 gal = 116.6 lb "about 117 lb", 53.0 L / 53 kg; 56 gal = 466.5 lb "about 467 lb", 212 L / 212 kg. Arithmetic checked by hand.
+- Fill jugs only as full as can be carried; movable containers; round 3 to 6 gallon jugs work best — UAF ("These containers should be moveable in case you have to take them with you", "Round 3-to 6-gallon jugs tend to work best", "When calculating how much you want to fill jugs for portability, remember that water weighs a bit over 8 pounds per gallon"). 3 gal = 11.4 L, 6 gal = 22.7 L: "11 to 23 L". Matches (extension, below the preferred agencies; no safety number rests on it).
+- 3-day supply in easy-to-carry containers — ARC-KIT ("Keep your supplies in an easy-to-carry emergency preparedness kit ... in case you must evacuate"). Matches.
+
+### surv-water-store
+
+- Unopened commercially bottled water safest and most reliable — CDC-EWS verbatim. Matches.
+- Sealed original container, cool dark place — RG-W ("store it in the sealed original container in cool, dark place"). Matches.
+- Expiration date — CDC-EWS ("Observe the expiration date for store-bought water"). Replace at least once a year — ARC-MU ("Change and replace the water at least once a year"). Disagreement: whichever comes first (more cautious). D20.
+- Once opened, use it, do not store — ARC-MU ("Once opened, use it and do not store it further"). Matches.
+- Food-grade water storage containers — CDC-EWS ("FDA-approved food-grade water storage containers"); RG-W. Matches. Soft drink bottles — FW ("Plastic containers, such as soft drink bottles, are best"); NDEC. Matches.
+- If not food-grade: tight top; durable, unbreakable, not glass; narrow neck if possible — CDC-EWS verbatim list. Matches.
+- No paper in the lid — OSU ("Be sure that lids do not contain paper components"). Matches.
+- Never a container that held toxic chemicals (bleach, pesticides, chemicals, oil); tiny amounts remain — CDC-EWS ("toxic chemicals, such as bleach or pesticides"); WADOH ("pesticides, chemicals, or oil"); OSU ("because tiny amounts may remain in the container's pores"). Matches.
+- Milk jugs and cartons: don't seal well, break down — ARC-MU ("Milk containers are not recommended because they do not seal well"; "Avoid using containers that will decompose or break, such as milk cartons or glass bottles"); NDEC (same sentence). Matches. Juice jugs: no opened source names them; not added (the dispatch suggested them).
+- Not glass — CDC-EWS ("not glass"); ARC-MU and NDEC (glass bottles break). FW, OSU and WADOH allow glass. More cautious (CDC) used. D20.
+- Wash with soap, rinse completely — CDC-EWS ("Wash the storage container with soap and rinse completely with water"); RG-SODA ("so there is no residual soap"). Matches.
+- Sanitizing solution: 1 teaspoon of unscented liquid household chlorine bleach in 1 quart (4 cups) of water; bleach 5%–9% sodium hypochlorite — CDC-EWS (read in two pieces: "...mixing 1 teaspoon of unscented liquid household chlorine bleach" ... "in 1 quart (4 cups) of water"; "Use bleach that contains 5%–9% sodium hypochlorite"). RG-W and RG-SODA give the same 1 teaspoon per quart without a strength. "the usual strength in the US" — CDC-BL ("this is the most common concentration in the United States"). 5 mL — FDA-HM. 0.95 L — USGS-FW (3.7854 / 4 = 0.946). Matches.
+- Cover tightly, shake well, touch all inside surfaces; wait at least 30 seconds, pour out; air-dry — CDC-EWS (step order checked by hand against the page's "Steps to take": wash, sanitize, cover and shake, wait 30 seconds and pour out, air-dry, fill). Matches. RG-SODA instead rinses the solution out with clean water; CDC's order kept (D20).
+- Never mix bleach with ammonia or any other cleaner; open windows and doors indoors; try not to breathe fumes — CDC-BL verbatim. Matches.
+- Chlorinated public supply: nothing to add — RG-SODA ("If the tap water has been commercially treated from a water utility with chlorine, you do not need to add anything else"); ARC-MU ("you do not have to treat the water before storing it"). Matches.
+- Well or unchlorinated water: treat with bleach before storing, dose as in Make water safe — RG-SODA says "add two drops of non-scented liquid household chlorine bleach to the water" without saying how much water (a soda bottle of unstated size); WADOH says one or two drops per gallon "to maintain water quality while in storage". Both are lower than the v7 dose (8 drops per gallon of 5% to 9% bleach); the v7 dose (EPA, CDC) is used by linking surv-make-water-safe, not restated. D18.
+- Fill to the top — RG-SODA ("Fill the bottle to the top"). Matches; "unless it may freeze" from OSU (below).
+- Cap tightly, don't touch inside the cap — RG-SODA verbatim meaning. Matches.
+- Label "drinking water" with the date — CDC-EWS ("Label container as "drinking water" and include storage date"). Grease pencil or crayon on the lid — UAF. Matches.
+- 50°F to 70°F (10°C to 21°C) — CDC-EWS ("Keep containers in a place with a cool temperature (50°F –70°F)"). 70°F = 21.1°C. Matches.
+- Out of direct sunlight — CDC-EWS; dark place — RG-W, FW. Matches.
+- Away from gasoline, pesticides — CDC-EWS; household cleaners — UAF. Matches.
+- Safe from flooding and freezing — WADOH ("Store in a cool place, safe from flooding, freezing, and earthquake damage"). Matches. Northeast: no opened source says more about stored water in an unheated house; the detail is left for surv-water-winter.
+- Freezing: leave 2 to 3 inches of air space; plastic preferred, some glass breaks regardless; frozen bottles help keep food frozen in an outage — OSU verbatim meaning. 2 in = 5.1 cm, 3 in = 7.6 cm: "5 to 8 cm" (rounded up so the space is not understated). Matches.
+- Replace home-filled water every 6 months — CDC-EWS; RG-W; FW ("Rotate water every six months"). Matches.
+- Use bottled water for drinking, cooking, brushing teeth — CDC-EWS. Matches.
+- Boiled or treated water in clean sanitized containers with tight covers — CDC-MWS. Matches.
+
+### surv-water-in-the-house
+
+- Know the incoming water valve — FW ("Do you know the location of your incoming water valve?"). "where the water pipe enters the house": plain description of an incoming valve, no source wording. Accepted as description.
+- Shut it if you hear of broken water or sewage lines, to stop contaminated water entering — FW ("You'll need to shut it off to stop contaminated water from entering your home" "if you hear reports of broken water or sewage lines"); "or if officials say there is a problem" — CDC-FCW ("Listen to reports from local officials ... You may need to shut off the main water valve to your home to prevent contaminants from entering pipes in your home"); FEMA-FS. Matches.
+- Pipes: highest tap to let air in, a small amount trickles out, then the lowest tap — FW verbatim order ("let air into the plumbing by turning on the faucet in your house at the highest level." "A small amount of water will trickle out." "Then obtain water from the lowest faucet in the house."). NC-MW identical. "With the main valve shut" — FW's preceding instruction. Matches; order checked by hand.
+- Use the tap water heater tank, not the radiator tank of older homes — CDC-FCW. Only if undamaged — NDEC ("use water from undamaged hot water tanks"); NC-MW agrees. Matches.
+- On-demand (tankless) heater holds no tank of water — UAF ("Hot water heaters that are not "on demand" and have typical cylindrical tanks probably have this amount in storage"). Inference from UAF; low risk. UAF's "60 gallons" not used (it says "probably").
+- Water heater steps, order checked by hand:
+  1. Electricity or gas off — FW ("be sure the electricity or gas is off,"); GOHSEP ("Turn off the power that heats it").
+  2. Let the tank cool — GOHSEP ("and let the tank cool"). FW does not say this; added as the cautious step (burn hazard).
+  3. Container under the drain — GOHSEP ("Then place a container underneath and open the drain valve at the bottom of the tank").
+  4. Open the drain at the bottom — FW ("and open the drain at the bottom of the tank"); GOHSEP.
+  5. Start the flow by turning off the water intake valve and turning on a hot-water faucet — FW verbatim ("Start the water flowing by turning off the water intake valve" "and turning on a hot-water faucet"). NC-MW: "at the tank".
+  6. Do not turn on gas or electricity when the tank is empty — FW verbatim; leave it off until the water supply is back — GOHSEP ("Don't turn the tank on again until water services are restored"). NC-MW: refill first; if the gas was turned off, a professional is needed to turn it back on (unattributed; not used).
+  FW gives steps 1, 4, 5, 6 in that order; GOHSEP gives 1, 2, 3, 4 in that order. The merged order keeps both. Outcome: matches both.
+- Melted ice made with uncontaminated water — CDC-FCW; FEMA-FS; keep the ice storage clean — FEMA-Q ("Make sure your storage area is clean before storing ice that will be consumed"). Matches.
+- Liquid from canned fruit and vegetables — CDC-FCW; FEMA-FS. Matches.
+- Toilet tank, not the bowl, clear and not treated with cleaners that change the color — CDC-FCW; FEMA-FS; no hanging deodorizer — UAF; "as a last resort" — FW. "Treat it before you drink it" — group judgement, cautious (NC-MW lists the flush tank as unsafe). D17.
+- If warned, fill large pots, sinks and bathtubs — OSU ("If you have been warned ahead of time, fill large pots and pans, sinks and bathtubs with water"). "Treat sink and bathtub water before you drink it" — group judgement, cautious (tubs and sinks are not sanitized containers; CDC-MWS wants treated water in sanitized containers). Logged here.
+- CDC counts heater, ice, toilet tank, canned liquid as clean and safe — CDC-FCW ("other sources of clean and safe water that can be found inside your home include"). Treat only if questionable — NDEC ("Water needs to be treated only if it is of questionable purity"). Matches.
+- "Treat it if you are not sure: boil-water notice, lines broke before the valve was shut, looks or smells wrong, don't know" — group judgement built on FW (contaminated water enters through broken lines) and NDEC (questionable purity). Cautious; logged here.
+- Radiators and hot-water boilers: don't use — FEMA-FS (listed under sources not to use: "Radiators", "Hot water boilers (part of your home heating system)"); FEMA-Q ("Do NOT drink water from radiators or boilers in a home heating system"). Matches. No source gives another use.
+- Waterbeds: don't use; fungicides in the water and chemicals in the vinyl — FEMA-FS ("Water beds (fungicides added to the water and/or chemicals in the vinyl may make water unsafe for use)"). GOHSEP allows hand washing and laundry. More cautious (FEMA) used. D19.
+- Pools and spas: not for drinking; washing yourself, cleaning and related uses — CDC-FCW; FEMA-FS; FEMA-Q. Matches.
+- Toilet bowl: don't use — FW and CDC-FCW ("not the bowl"). Matches.
+- Flood water: don't drink — FW ("You should not drink floodwater"); NDEC ("Do NOT drink flood water"). Matches.
+- Links p:burns (water heater), s:surv-make-water-safe, s:surv-find-water. p:carbon-monoxide not linked: no opened source ties the water-heater steps to CO.
+
+### home-water-store (checklist)
+
+- stored-water, qty 1 gal per person per day — CDC-EWS, RG-W, ARC-KIT, FW. Note (who needs more) — RG-W, CDC-EWS.
+- bottled-water — CDC-EWS (safest; expiration date); RG-W (sealed original container).
+- containers — CDC-EWS, FW, NDEC; note: milk, glass, chemicals — ARC-MU, NDEC, CDC-EWS.
+- carry-jugs — UAF (movable jugs); 42 lb (19 kg) — USGS-FW arithmetic.
+- spare-lids — UAF ("buy an extra pack of lids to have on hand in case they crack").
+- dish-soap — CDC-EWS, RG-SODA.
+- bleach: plain unscented, 5% to 9%, room temperature, under one year — CDC-MWS (5% to 9%), EPA-ED ("stored at room temperatures for less than one year"; unscented, no color safe or added cleaners); ARC-KIT ("Household liquid bleach"); NDEC ("household liquid bleach to treat drinking water"). Never mix — CDC-BL.
+- dropper — NDEC ("medicine dropper"); EPA-ED ("Locate a clean dropper from your medicine cabinet or emergency supply kit").
+- measuring-spoon — CDC-EWS (1 teaspoon per quart for sanitizing).
+- labels — CDC-EWS; UAF.
+- pot-and-stove — CDC-MWS ("Boiling is the best way to kill germs in water"); note — CDC-CO ("Never use a portable gas camp stove indoors." "Never burn charcoal indoors.").
+- strainer — CDC-MWS ("filter it through a clean cloth, paper towel, or coffee filter"); EPA-ED.
+- filter, 1 micron absolute; does not remove viruses, disinfect after — CDC-MWS ("Must have an absolute pore size of 1 micron or smaller to remove parasites"; "Will not remove viruses"). Matches v7 surv-make-water-safe.
+- main-valve and wrench — FW (incoming valve); NDEC ("shut-off wrench").
+- 14 items. Only stored-water has qty (the only per-person figure in any source).
+
+### Disagreements and things read that differ from src/tooldata/water.json
+
+- Pets: OSU says "Store 1 gallon per person per day, and 1 quart per small pet." Task 3 recorded that no opened source gives a pet figure (CDC-EWS: none; ready.gov/pets would not open). The planner has no pet value; reported for the Task 3 reviewer. Not added to topics (extension, below FEMA/CDC, which give none).
+- NC-MW (unattributed, matches the old Ready.gov Managing Water text) says "Many people need even more than the average of one-half gallon, per day" and "Under no circumstances should a person drink less than one quart (four cups) of water each day". Not used (no publisher); consistent with the planner's 1 gallon as a minimum.
+- NDEC: "a minimum of three gallons per person" for 3 days — same 1 gallon per day.
+- FEMA-Q says not to drink "collected rainwater"; FEMA-FS says rainwater is for hygiene and cleaning, not drinking; CDC-FCW lists rainwater as a source that can be made safe by treatment (as surv-find-water says). For Task 5 (surv-find-water); not in this batch.
+- OSU's bleach chart (16 drops per gallon of 5.25% bleach, and a text/chart conflict on a quart) and UAF's bleach text (a drop per quart; its table and its "half teaspoon per 10 gallons" disagree) differ from the v7 dose; neither is used.
+
+### Task 4 pages that would not open or were not used
+
+- henrycounty.in.gov FW PDF by curl: refused by the proxy; read through web fetch in short consecutive quotes instead.
+- archive.org / webharvest.gov copies of FEMA "Are You Ready?" shelter.pdf and fema.gov/rrr/waterf.shtm: rate-limited.
+- UNT web archive copies of Ready.gov Managing Water (2012, 2013): wrapper only, no content.
+- cahf.org "fema guidelines managing water supply" PDF: site error.
+- dem.nv.gov FEMA checklist 2014 PDF: site error. The current Ready.gov kit page no longer lists bleach or a dropper; NDEC and EPA-ED were used for those items.
+
+### Task 4 fix round 1 (2026-11-18)
+
+New sources opened 2026-11-18 by web fetch (found by web search; title checked):
+- RWPC-WH: Regional Water Providers Consortium, How to access water from your water heater during an emergency (water heater hanger, 2022). https://www.regionalh2o.org/sites/default/files/images/Water_Heater_Hanger_English.pdf
+- EWEB-WH: "Keep This With Your Water Heater" flyer (no publisher printed; hosted by Eugene Water & Electric Board; links to NW Natural for gas). https://www.eweb.org/documents/emergency-preparedness/keep-this-with-your-water-heater-flyer.pdf
+- RWPC-EWS: Regional Water Providers Consortium, Emergency Water Sources. https://www.regionalh2o.org/node/39
+- CDC-MWS re-opened for the filter sentences.
+
+- F1 (surv-water-in-the-house, water heater last step). Old: "Do not turn on the gas or electricity while the tank is empty (FEMA). Leave it off until the water supply is back (Louisiana)." New: "Do not turn on the gas or electricity while the tank is empty (FEMA). When the water supply is back, close the drain and refill the tank following the heater's instructions before you turn the power or gas back on. For a gas heater, follow the heater's or the gas company's instructions to relight it." Sources: FW ("Do not turn on the gas or electricity when the tank is empty."); EWEB-WH ("When you're ready to refill the tank with water, be sure to follow the manufacturer's instructions."); EWEB-WH gas ("For natural gas water heaters, visit www.nwnatural.com for important safety measures."). RWPC-WH does not mention refilling or restoring power (checked twice); it is not cited for this step. "Close the drain" before refilling: not stated by any source; it is what refilling a tank requires. Outcome: corrected.
+- F2 (step order). Old order (FEMA): power or gas off; let cool; container; open drain; close intake valve and open a hot tap. New order: power or gas off (FW); let cool (GOHSEP); close the water intake valve, usually on top of the tank, clockwise until it stops (RWPC-WH "This valve is typically located on the top of the water heater", "turn it clockwise until it stops"; RWPC-EWS "typically located on the top of the water heater"; EWEB-WH "typically located on the top of the unit"); open a hot-water tap to let air in (RWPC-WH "turn on a hot water faucet elsewhere in the home"; EWEB-WH; FW); container under the drain (GOHSEP; RWPC-WH "Place a clean container under the drain valve spigot to capture the water"); open the drain (FW, RWPC-WH). Why: FEMA opens the drain before closing the intake, which is safe only if the main valve is already shut; otherwise supply water, possibly contaminated, flows through the open drain. RWPC-WH and EWEB-WH close the heater's supply and let air in before draining. Both also say to shut the home's water supply first, as the topic's "Shut the main valve" section does. The warning that power or gas must be off before the drain is opened is kept. Order checked by hand against RWPC-WH steps 1 to 4. Outcome: corrected.
+- F2 gas setting. RWPC-WH: "turn the knob to the pilot setting — do not turn it completely off." FW: "be sure the electricity or gas is off". Kept "off" (FW); decisions D21.
+- F3. "Put a clean container under the drain": RWPC-WH added as second source. "Let the tank cool": RWPC-WH does not say this (checked twice: no instruction to let the tank cool), nor does EWEB-WH; it stays on GOHSEP alone. Warning: old "The power or gas must be off before you open the drain, and the water can be hot." New "... The water may be very hot: wear gloves and eye protection (Regional Water Providers Consortium)." RWPC-WH: "Be careful, because the water may be very hot." "Wearing gloves and safety glasses for your protection is recommended." EWEB-WH: "Wear gloves and eye protection and be careful as the water may be very hot." Outcome: corrected.
+- Tankless heater sentence: RWPC-EWS (tankless heaters do not offer this option) added as its source; it replaces the UAF inference.
+- F4. RWPC-EWS "Do Not Drink": "Water from your toilet bowl or tank, radiators, or water beds*"; "Starred (*) items may be good sources for sanitation." Added to D17 and D19 and to the topic's sources. Topic text unchanged (it already says don't drink radiator and waterbed water and treats tank water as a last resort).
+- F5 (home-water-store, filter note). Old: "Filters do not remove viruses: disinfect the water after filtering." New: "Removes parasites, not viruses or (unless 0.3 micron or smaller) bacteria: disinfect the water after filtering." CDC-MWS: "Must have an absolute pore (hole) size of 0.3 micron or smaller to remove bacteria"; "Must have an absolute pore size of 1 micron or smaller to remove parasites"; "Will not remove viruses"; "Most filters will remove parasites, but not viruses or bacteria." Outcome: corrected.
+- F6 (surv-water-store, bottled water). Old: "Use it before its expiration date (CDC). The Red Cross says to replace it at least once a year. Do whichever comes first." New: "In normal times, replace it before its expiration date (CDC) or at least once a year (Red Cross), whichever comes first." Sources unchanged (CDC-EWS, ARC-MU). Outcome: reworded as a rotation rule.
+- F7 (surv-water-store, well water). Old: "...make it safe with bleach before you store it, using the dose in Make water safe." New: "...make it safe before you store it, as in Make water safe. Some water has contaminants that bleach cannot fix; if you have a private well, ask your health department in normal times how to store its water (Red Cross)." ARC-MU: "Some water sources have contaminants (minerals or parasites)" "that cannot be neutralized by treatment with liquid household chlorine bleach." "Only your local public health agency should make recommendations about whether your local water can be safely stored, for how long, and how to treat it." WADOH agrees for private wells (ask the local health department about testing). D18 updated with this and NDEC's 16 drops per gallon. Outcome: corrected.
+- F8 (surv-water-how-much warning). Old: "The gallon does not cover flushing toilets, bathing or laundry. None of the agencies counts water for these." New: "No agency says the gallon covers flushing toilets, bathing or laundry." Outcome: reworded as an absence.
+- F9 (surv-water-store). Old: "Water from a public supply treated with chlorine: fill straight from the tap. You don't need to add anything" New: "...fill straight from the tap, unless there is a boil-water notice. You don't need to add anything" Consistent with the in-house topic's treat-it-or-not rule. Outcome: added.
+- N2 (surv-water-how-much list item and CDC source line). Old: "CDC: at least 3 days, and a 2-week supply if possible." New: "CDC: 3 days, and a 2-week supply if possible." CDC-EWS: "Store at least 1 gallon of water per person, per day for 3 days." "Try to store a 2-week supply if possible." Source "used" line reworded the same way. Outcome: corrected.
+- Draft removed from surv-water-how-much, surv-water-store, surv-water-in-the-house and home-water-store after this fix round, as instructed.
+
+## Water pack Task 5: find, treat, winter, wells (2026-11-18)
+
+Files (all draft): src/survival/surv-make-water-safe.json (deepened, moved to `water`), surv-find-water.json (deepened,
+retitled "Find water outside", moved to `water`), surv-water-winter.json (new, `when: cold`), surv-wells-without-power.json
+(new, `where: rural`). Every source below was found by web search and opened by web fetch on 2026-11-18; the page title
+(and date where printed) was checked after each fetch. Fetches return excerpts capped at about 125 characters per quote,
+so long sentences and tables were read in consecutive pieces and re-read where a value looked wrong. The text that v7
+checked in the two existing topics is unchanged (changes to it are in docs/v7-migration.md, "Water pack Task 5").
+
+Source keys (new in this task; CDC-MWS, CDC-FCW, CDC-EWS, CDC-BL, CDC-CO, EPA-ED, FW, FEMA-Q and OSU are as in Task 4 and
+were re-opened for this task):
+- CDC-HIKE: CDC, About Water Treatment Options When Hiking, Camping, or Traveling, reviewed November 10, 2026. https://cdc.gov/drinking-water/prevention/water-treatment-hiking-camping-traveling.html
+- CDC-SWS: CDC, Safe Water Storage (Global WASH), Apr. 22, 2024. https://cdc.gov/global-water-sanitation-hygiene/about/about-safe-water-storage.html
+- CDC-RAIN: CDC, Collecting Rainwater and Your Health: An Overview, reviewed November 10, 2026. https://www.cdc.gov/drinking-water/about/collecting-rainwater-and-your-health-an-overview.html
+- CDC-FLOOD: CDC, Safety Guidelines: Floodwater, Aug. 24, 2026. https://cdc.gov/floods/safety/floodwater-after-a-disaster-or-emergency-safety.html
+- CDC-COP: CDC, Carbon Monoxide (CO) Poisoning Prevention (no date). https://www.cdc.gov/nceh/features/copoisoning
+- CDC-WELL: CDC, How to Disinfect Wells After an Emergency, reviewed May 29, 2025. https://www.cdc.gov/water-emergency/about/how-to-disinfect-wells-after-an-emergency.html
+- CDC-WELL-OLD: CDC, Disinfecting of Drilled or Driven Wells After a Disaster (earlier CDC version, no date; copy hosted by New Mexico DOH). https://nmtrackverify.doh.nm.gov/contentfile/pdf/environment/water/wells/DisinfectingDrilledWells_CDC.pdf
+- EPA-WELL: US EPA Office of Water, Emergency Disinfection of Wells that have been Flooded, EPA 816-F-05-021, August 2005, updated October 2024. https://www.epa.gov/sites/default/files/2015-05/documents/epa816f05021.pdf
+- NYSDOH-HAB: NYS Department of Health, Harmful Blue-Green Algae: Frequently Asked Questions, revised June 2024. https://healthweb-back.health.ny.gov/environmental/water/drinking/bluegreenalgae/faq.htm
+- NYSDOH-SALT: NYS Department of Health, Salt and Drinking Water, December 2019. https://healthweb-back.health.ny.gov/environmental/water/drinking/docs/salt_and_drinkingwater.pdf
+- NYSDOH-WELL: NYS Department of Health, Restoring and Testing Your Private Well After a Flood (6562; the PDF footer reads 2/17, the HTML version reads Revised: April 2018). https://Health.NY.Gov/publications/6562.pdf and https://healthweb-back.health.ny.gov/publications/6562/index.htm
+- DEC-HAB: NYS DEC press release, DEC Announces Start of 2026 'NYHABS' Online Notification and Reporting System, May 22, 2026. https://dec.ny.gov/news/press-releases/2026/5/dec-announces-start-of-2026-nyhabs-online-notification-and-reporting-system-for-harmful-algal-blooms
+- WHO-TN5: WHO (prepared by WEDC), Technical Notes on Drinking-Water, Sanitation and Hygiene in Emergencies, note 5, Emergency treatment of drinking-water at the point of use, updated July 2013. https://wedc-knowledge.lboro.ac.uk/resources/who_notes/WHO_TNE_05_Emergency_treatment_of_drinking_water_at_the_point_of_use.pdf
+- CSU: Colorado State University Extension, Guide to Treating Water in the Backcountry, August 24, 2022 (modified February 20, 2026). https://extension.colostate.edu/resource/guide-to-treating-water-in-the-backcountry
+- VCE: Virginia Cooperative Extension, Rainwater Harvesting Systems, BSE-265NP, 2019. https://aaec.vt.edu/content/dam/pubs_ext_vt_edu/BSE/BSE-116/BSE-265.pdf
+- LCSG: Lake Champlain Sea Grant, Rain Barrel Water Reuse: Summary of Research and Recommendations, January 2026. https://www.uvm.edu/seagrant/sites/default/files/files/publication/LCSG_Rain%20Barrel%20Water%20White%20Paper_Jan2026_FINAL.pdf
+- PSU-SPRING: Penn State Extension, Spring Development and Protection (Water Facts #4), 2007. https://www.wellwater.bse.vt.edu/files/WF4%20spring%20devt%20and%20prot.PDF
+- NWS-AK: National Weather Service Alaska Region, Winter Weather Hazards (no date). https://www.weather.gov/media/arh/brochures/WinterWxHazardsBro.pdf
+- NPS-YOSE: National Park Service, Yosemite, Wilderness in Winter. https://www.nps.gov/yose/planyourvisit/wildwinter.htm
+- SCOUT: Scout Life (Boy Scouts of America), How to Melt Snow To Make Safe Drinking Water on a Camping Trip, November 15, 2024. https://scoutlife.org/outdoors/scout-essentials/183133/how-to-safely-melt-snow-to-use-as-drinking-water-on-a-camping-trip/
+- ATP: US Army ATP 3-50.21, Survival (2018), chapter 3 (as in v7). https://irp.fas.org/doddir/army/atp3-50-21.pdf. Second source only; where a statement rests on it alone this is said below (none of them is a number).
+- HPRC: Human Performance Resources by CHAMP (Uniformed Services University, DoD), How to prevent cold injuries, December 2, 2020. https://www.hprc-online.org/physical-fitness/environmental-extremes/how-prevent-cold-injuries. Military health source (not an Army manual).
+- TAMU: Texas A&M AgriLife Extension, Winter Storms: Preventing and Thawing Frozen Pipes (no date; "adapted from ... American Red Cross"). https://texashelp.tamu.edu/wp-content/uploads/2016/02/winter-storms-frozen-pipes.pdf
+- ARC-PIPES: Fact Sheet: Preventing and Thawing Frozen Pipes (no publisher or date printed; refers to the Red Cross; hosted by Outagamie County, WI). https://www.outagamie.gov/files/assets/county/v/1/hhs-ph/documents/preventing-and-thawing-frozen-pipes.pdf. Cross-check only.
+- PURDUE: Purdue University Extension (INPREP), Protect Your Plumbing and Appliances during a Winter Power Failure, February 1, 2022. https://www.purdue.edu/engineering/ABE/INPREPared/protect-your-plumbing-and-appliances-during-a-winter-power-failure
+- PWC: Private Well Class (RCAP and University of Illinois, EPA funded), What do I do if there is a power outage and my well won't work?, March 19, 2026. https://intercom.help/privatewellclassorg/en/articles/9047456-what-do-i-do-if-there-is-a-power-outage-and-my-well-won-t-work
+- WSC: Water Systems Council (wellcare), Homeowner Emergency Localized Plan (HELP) (no date). https://www.watersystemscouncil.org/wp-content/uploads/2025/04/HELP-for-Well-Owners.pdf
+- UIUC-GEN: University of Illinois Extension, Use a generator safely (no date; tips attributed to Safe Electricity). https://extension.illinois.edu/energy/generator-safety
+- CALTECH: Caltech Alpine Club, Melting Snow (no publisher printed). https://alpine.caltech.edu/resources/guidesadvice/melting-snow. Read for comparison only; not cited in topics.
+- NEHA: NEHA and Private Water Network, Private Wells and Natural Disasters: Power Outages (no date). https://www.neha.org/Images/resources/Power%20Outage%20Facts.pdf. Read; nothing used.
+
+Conversions: 1 gal = 3.785 L, 1 qt = 0.946 L, 1 pt = 0.473 L, 1 ft = 0.3048 m, 1 in = 2.54 cm, 1 sq ft = 0.0929 m², 1 US cup = 236.6 mL, 1 tbsp = 14.8 mL, °C = (°F − 32) × 5/9 (definitions); 1 teaspoon = 5 mL (FDA-HM, Task 4).
+
+### surv-make-water-safe (additions; the v7 section is unchanged)
+
+- Category `basics` -> `water`; keyword "distill" added; reviewed 2026-11-18; draft true (until this batch's review).
+- "Boil if you can. Boiling kills all types of germs, including viruses, bacteria and parasites" — CDC-HIKE ("Boiling kills all types of germs, including viruses, bacteria, and parasites (like Cryptosporidium and Giardia)"). Matches.
+- Next best is filter then disinfect — CDC-HIKE ("The next best option is to filter water and then disinfect the filtered water"). Why: filters remove parasites (CDC-HIKE), disinfectants kill viruses and bacteria but may not kill parasites (CDC-MWS). Matches.
+- UV and sunlight need clear water — CDC-MWS ("UV light does not work well in cloudy water"; "Solar disinfection does not work well in cloudy water"). "work only in clear water" is a slightly stronger, cautious wording. Sunlight only reduces germs — CDC-MWS ("improve the quality of your water by reducing the number of germs in it"). "Use it only when you have no other way": group judgement from that wording. Matches/judgement.
+- Method table. Boiling 1 minute, 3 above 5,000 ft: v7 decision (EPA). Bleach and iodine "Not well" against parasites, yes bacteria and viruses — CDC-HIKE ("Chlorine bleach and iodine kill bacteria and viruses but do not work well to kill parasites"). Chlorine dioxide: Giardia yes, Cryptosporidium "better, but not fully" — v7 decision D5 (CDC-HIKE "somewhat effective"); bacteria and viruses — CDC-HIKE ("You can kill bacteria and viruses ... chlorine dioxide tablets"). Filter 1 micron absolute or NSF 53/58 cyst reduction or removal: parasites yes, "not viruses or all bacteria" — CDC-HIKE. Filter 0.3 micron absolute: "bacteria and parasites, but not viruses" — CDC-HIKE; CDC-MWS same sizes. Reverse osmosis: parasites, bacteria, viruses and salt — CDC-HIKE. UV: "can kill parasites, bacteria, and viruses in small amounts of clear water" — CDC-HIKE. Sunlight: reduces — CDC-MWS. Distillation: removes microbes that resist boiling and bleach, heavy metals, salts, most other chemicals — FW. A chemicals column was not added: no opened source says whether portable filters remove chemicals. All rows match.
+- Salt removed only by reverse osmosis (CDC-HIKE) or distillation (FW) — matches; NYSDOH-SALT also names reverse osmosis.
+- Bleach: plain unscented household chlorine bleach, 5% to 9%, usual US strength — CDC-MWS ("typically be between 5% and 9% sodium hypochlorite"), CDC-BL ("most common concentration in the United States"). Matches.
+- CDC table (5% to 9%), read cell by cell: 1 quart or liter: "Add 2 drops", "Add 0.1 mL", "Add a tiny amount (too small to measure)"; 1 gallon: "Add 8 drops", "Add ½ mL", "Add a little less than ⅛ teaspoon"; 5 gallons: "Add 40 drops", "Add 2½ mL", "Add ½ teaspoon of bleach" — CDC-MWS. Reproduced exactly (fractions written 1/2, 1/8, 2 1/2). Metric in row labels: 3.785 L -> 3.8 L, 18.9 L -> 19 L. Matches.
+- Double for cloudy, murky, colored or very cold — CDC-MWS verbatim. Stir well, at least 30 minutes — CDC-MWS. Smell, repeat, 15 minutes — EPA-ED (v7). Matches.
+- More than 5 gallons: 1/2 teaspoon (2 1/2 mL) per 5 gallons — CDC-MWS 5-gallon amount repeated (proportional, as both agencies' tables are). Arithmetic; outcome: derived, logged here.
+- EPA table, reproduced exactly from EPA-ED (heading "Volume of Water | Amount of 6% Bleach to Add* | Amount of 8.25% Bleach to Add*"; rows "1 quart/liter | 2 drops | 2 drops", "1 gallon | 8 drops | 6 drops", "2 gallons | 16 drops (1/4 tsp) | 12 drops (1/8 teaspoon)", "4 gallons | 1/3 teaspoon | 1/4 teaspoon", "8 gallons | 2/3 teaspoon | 1/2 teaspoon"; footnote "*Bleach may contain 6 or 8.25% sodium hypochlorite."). Read twice. EPA-ED last updated February 24, 2026. Matches. Metric line: 0.95 L, 3.8 L, 7.6 L, 15.1 L -> 15 L, 30.3 L -> 30 L; 1 teaspoon 5 mL (FDA-HM).
+- Reconciliation: for 8.25% EPA gives 6 drops a gallon, CDC 8 for 5% to 9%; app uses CDC (v7 decision D3, the larger dose). For 6% the drops agree (2, 8, 16 for 1 qt, 1 gal, 2 gal). Note: EPA's spoon amounts do not scale exactly with its drops (16 drops = 1/4 tsp, but 4 gal = 1/3 tsp) and its 4 and 8 gallon 6% amounts (1/3, 2/3 tsp, about 0.42 mL a gallon) are slightly below CDC's 1/2 mL a gallon; the topic says to use EPA's table only to check. Outcome: agrees with v7.
+- Never mix bleach with ammonia or any other cleaner — CDC-BL verbatim. Matches.
+- Tablets made for set amounts, follow the label — CDC-MWS ("Chemical disinfectants are made to disinfect specific amounts of water"); EPA-ED ("each product may have a different strength"). Matches.
+- Chlorine dioxide 30 minutes for most bacteria and viruses, 4 hours for Cryptosporidium — CSU ("requires 30 minutes of contact time for most pathogens, bacteria, and viruses"; "requires four hours to inactivate Cryptosporidium"). "Even then CDC calls it only somewhat effective" — CDC-HIKE. Label if longer — group judgement (cautious). Outcome: matches; university extension, contact time only (no CDC or EPA time found).
+- Iodine in icy water at least 1 hour — NPS-YOSE ("iodine based purifier (let purify for one hour in icy water)"). Matches. (NPS-YOSE also says boil 5 minutes: not used, see D1.)
+- Filter ratings: label; 1 micron absolute or NSF 53 or 58 cyst reduction or removal; most portable filters remove parasites; 0.3 micron for bacteria; viruses not removed; reverse osmosis — CDC-HIKE and CDC-MWS verbatim. CSU: "<0.1 micron will usually capture most bacteria" — disagreement (D23); "smaller is safer" added, CDC figure kept. Matches.
+- Filter then disinfect — CDC-MWS ("After filtering, add a chemical disinfectant—such as iodine, chlorine, or chlorine dioxide"). Chlorination alone does not kill Giardia or Cryptosporidium cysts, 1-micron filter also needed — VCE verbatim. Matches.
+- Keep a filter from freezing — CSU ("avoid freezing temperatures which could affect poor [pore] structure"). Matches.
+- UV: kills germs in small amounts of clear water; cloudy blocks light; filter or settle first; follow the unit's instructions — CDC-MWS verbatim. Matches.
+- Sunlight steps: clear water, filter if cloudy and draw off clear water; clean, clear plastic bottles; on their side; dark surface — CDC-MWS verbatim. 1 or 2 litre size — WHO-TN5 ("Fill transparent one- or two-litre plastic containers"); 1 L = 1.06 qt, "about 1 or 2 quarts". Time: CDC-MWS "6 hours (if sunny) or 2 days (if cloudy)"; WHO-TN5 "In areas near the equator, on a sunny day 24 hours is likely sufficient or 48 hours for a cloudy day". Disagreement: WHO's longer times used (D24). Cool and shake before use — WHO-TN5 ("Cool the water and shake vigorously before use"). Matches/cautious.
+- Distillation: what it is, what it removes; fill a pot halfway; tie a cup to the lid handle so it hangs right-side-up when the lid is upside-down, not dangling in the water; boil 20 minutes; drips into the cup are distilled — FW verbatim, order checked by hand. Matches. Use salt water only if distilled first — FW ("Use saltwater only if you distill it first"); "Never drink salt water as it is" keeps the v7 find-water rule. Don't distill fuel- or chemical-smelling water — group judgement (CDC-MWS says boiling and disinfecting can't make it safe; no source opened says distilling can). Link p:burns: group judgement (boiling pot, steam).
+- Taste: pour between containers and let stand a few hours, or a pinch of salt per quart or liter — CDC-MWS; EPA-ED ("pour the water from one clean container to another several times"). Shake when cooled in a sealed container — WHO-TN5 ("vigorously shaking the water in a sealed container after it has cooled"). Matches.
+- Keep it clean: cool, clean sanitized containers with tight covers — CDC-MWS, EPA-ED. Small opening with tight cover, narrow neck so water is poured out without hands or objects entering — CDC-SWS verbatim. Tap — WHO-TN5 ("fit a tap to the storage container"). "Pour, don't dip cups, ladles or hands" — restates CDC-SWS. Wash hands with soap before handling drinking water — WHO-TN5. Label "drinking water" with treatment date — CDC-SWS. Clean regularly — CDC-SWS. Note: WHO-TN5 prefers wide-necked lidded buckets (easy to clean) where CDC wants a narrow neck; both agree on a tight cover and no hands inside; the topic gives CDC's narrow neck or WHO's tap. Matches.
+- Well water and rain: make it safe before storing, see Store water at home (follows Task 4 fix round wording, D18); flooded well disinfect and test — EPA-ED ("make sure to disinfect and test the well water after the flood"). FEMA says not to drink collected rainwater — FEMA-Q ("Do NOT drink water from swimming pools, spas and collected rainwater"); CDC rain can be made safe by treatment — CDC-FCW. D22 (more cautious wording in surv-find-water). Matches.
+- Not used: EPA-ED's calcium hypochlorite and tincture of iodine methods (outside this batch's brief; listed in the report). FW's 16 drops per gallon and 3 to 5 minute boil (older; v7 decisions D1 and D3 apply). CDC-MWS's 1% bleach column.
+
+### surv-find-water (additions; the v7 section and its two figures are unchanged)
+
+- Title "Find water" -> "Find water outside"; category -> `water`; keywords spring, lake, snow, rainwater added; reviewed 2026-11-18; draft true.
+- Roof rain picks up dirt, germs, chemicals; asbestos, lead or copper from roofing, gutters, piping; bird droppings; especially after several dry days — CDC-RAIN verbatim meaning. Matches.
+- First flush: first flow carries most dirt, germs, chemicals — CDC-RAIN. 10 to 50 gallons per 1,000 sq ft — VCE ("The suggested volume ranges from 10 to 50 gallons for every 1,000 ft2 of catchment surface"). 37.9 L -> 38 L, 189 L -> 190 L, 92.9 m² -> 93 m². Matches.
+- Wood, asphalt or tar shingle roofs may only suit irrigation — VCE verbatim. Matches.
+- Screen, or empty barrels at least every 10 days (mosquitoes) — CDC-RAIN ("Add a screen ... or" "Empty the rain barrel at least every 10 days"). Matches.
+- Warn: FEMA (FEMA-Q) and LCSG ("harvested rainwater is unsafe for drinking, cooking, or washing") say not to drink collected rainwater; CDC-RAIN "not necessarily safe to drink without first removing germs and chemicals". Use roof water for washing, cleaning, flushing — cautious reading; LCSG even says not for washing, CDC-RAIN says drinking water must be cleaner than garden water. Drink only if nothing safer, filter then boil or disinfect — group judgement keeping v7's "rain included, treat it" (CDC-FCW) with the more cautious agencies; boiling does not remove metals — EPA-ED and FW (heavy metals). D22.
+- Don't eat snow or ice, lowers body temperature — NWS-AK ("Do not eat snow – It will lower your body temperature"); melt then treat — v7 surv-priorities text (ATP). Matches.
+- Rain, moving water, ponds, lakes, springs can be made safe by treatment — CDC-FCW; FW. Rivers, streams, lakes might carry livestock waste, human sewage, chemicals — CDC-FCW verbatim. Matches.
+- Springs fed by shallow groundwater, highly susceptible; most need continuous disinfection — PSU-SPRING. ATP 3-35 calls springs "typically the safest open source" but also says open sources need purifying; more cautious PSU used (D26). Matches.
+- Wells contaminated by flooding — CDC-FCW ("During flood events, well water might also be contaminated"). Matches.
+- Moving over still; faster water fewer harmful microorganisms — ATP 3-2, 3-9 (rests on ATP; not a number); FW lists moving water. Don't take water from natural depressions, stagnant, heavily contaminated — ATP 3-2 (rests on ATP). Floating material, odor, dark color — FW verbatim. Near settlements, farms, camps: human and animal waste — ATP 3-2, 3-35 and CDC-FCW (livestock waste, sewage). Clearest water: double bleach for cloudy (CDC-MWS), UV and sunlight poor in cloudy water (CDC-MWS). Matches.
+- "Upstream of camps, farms, roads and towns" and "away from animal carcasses" (asked for in the brief): no opened source says so (searched NPS, USFS, Colorado State, WHO, CDC Yellow Book, ATP). Left out.
+- HAB appearance: green dots, long linear green streaks, pea soup, spilled green paint, blue-green or white — DEC-HAB. Warm, shallow, undisturbed, nutrient-rich water with a lot of sun — NYSDOH-HAB. Most reports in August and September — DEC-HAB ("the warmest months of August and September"). People, pets, livestock avoid discolored water or scums — DEC-HAB verbatim; NYSDOH-HAB same. Home filtration, chlorine or UV may not protect — NYSDOH-HAB ("Even if you are treating surface water yourself with water filtration, chlorine, ultraviolet (UV) light, or other treatment ... may not be protected"). Showering, bathing, washing — NYSDOH-HAB. Matches.
+- Flood water: don't drink — FW ("You should not drink floodwater"). Contents — CDC-FLOOD list (human and livestock waste; household, medical and industrial hazardous waste; containers of chemicals moved). Wash hands with soap and clean water after contact; avoid exposure with open wounds — CDC-FLOOD. Matches.
+- Road salt raises sodium and chloride; low-sodium diets, high blood pressure, heart, kidney, liver disease — NYSDOH-SALT. Boiling and disinfecting leave salt — EPA-ED (v7 warn). Reverse osmosis — CDC-HIKE, NYSDOH-SALT; distillation — FW. Matches.
+- Fuel and chemicals: avoid water potentially contaminated with toxins — ATP 3-9; examples (old factories, mines, dumps, spills): group judgement; smell of fuel or chemicals, can't be made safe, find another source — CDC-FCW, CDC-MWS. Matches/judgement. Link p:poisoning.
+- Carry in clean containers with tight lids — CDC-SWS (safe containers protect water "while the water is being transported and stored"; tight cover). Keep untreated-water containers apart and marked — group judgement (no source; cannot hurt). Settle and pour off clear water — CDC-MWS, WHO-TN5 ("allowed to 'stand and settle'"); several hours — ATP 3-38; 2 days reduces contamination further — WHO-TN5 ("Storage for two days reduces contamination further still"). Filter through cloth, paper towel or coffee filter, then treat — CDC-MWS, EPA-ED. Matches.
+
+### surv-water-winter (new)
+
+- Don't eat snow or ice to quench thirst; lowers body temperature — NWS-AK; body must heat and melt it, more dehydration — ATP 3-2, 3-12, Table 3-1 ("Eating snow or ice can reduce body temperature and lead to more dehydration"); SCOUT agrees ("Eating snow can lower your body temperature"). Matches.
+- Ice gives more water than the same amount of snow and needs less heat — ATP 3-14 ("Ice provides a more concentrated source of water than snow and requires less heat to do so"). Rests on ATP (CALTECH quotes a survival author saying the same; not cited). Not a number.
+- Fresh, clean snow — ATP 3-12. Yellow (urine, pollen, sand), pink or red (algae or cyanobacteria), dirt — SCOUT. Snow and ice no purer than their source — ATP 3-13. Treat it — v7 surv-priorities. Matches.
+- Little water in the pot first; faster and no scorching — SCOUT ("pour a cup of it into the pot before putting in the snow. That will speed the melting and prevent the snow from scorching"); ATP 3-12 ("Adding water to snow will help it melt faster"). Matches.
+- May need a stove to melt drinking water, streams not accessible — NPS-YOSE verbatim. "Plan fuel for it": judgement from that. Matches.
+- Dark material in sunlight melts snow or ice — ATP 3-14 (rests on ATP; no number). Catch the water: ATP 3-13 (container under the drip).
+- Warn: never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper — CDC-COP verbatim; "or inside a snow shelter" — keeps the v7 surv-priorities rule (CDC; CPSC, Task 13 fix round 1). Never burn charcoal indoors — CDC-CO. Matches; does not contradict surv-priorities. doFirst "Never use a camp stove indoors, or inside a tent or snow shelter" — CDC-CO ("Never use a portable gas camp stove indoors"), CDC-COP. Link p:carbon-monoxide.
+- Stored water at 50°F to 70°F (10°C to 21.1°C) — CDC-EWS. "warmest part of the house, above freezing": judgement from it. Matches.
+- 2 to 3 inches (5 to 8 cm) air space; plastic preferred, some glass breaks regardless; water expands when it freezes — OSU verbatim meaning. Matches (same rounding as Task 4).
+- Containers upside down in the cold to use them when frozen — ATP 3-8 ("Water containers in a cold weather environment should be stores upside down to enable its use when frozen"). Rests on ATP; not a number.
+- Filter freezing — CSU. Very cold water double bleach — CDC-MWS, EPA-ED. Iodine one hour in icy water — NPS-YOSE. Matches.
+- Pipes freeze and burst; frozen pipe may already be broken and leak when thawed — TAMU verbatim (adapted from the Red Cross). Matches.
+- Save water in pipes and heater first — link to surv-water-in-the-house (judgement: use it before draining it away).
+- Purdue steps, in its order: shut off at the main valve or turn off the well pump if in the house; drain the pressure tank; open all faucets until they drain completely; drain toilet flush tanks and spray hoses; empty drain traps or add propylene-glycol antifreeze equal to the water in the trap (1 pint to 1 quart) — PURDUE verbatim. Its list of traps (kitchen sinks, bathroom sinks, bathtub drains, toilets, washtubs, showers, floor drains, sump pumps) shortened. 0.473 L -> 0.47 L, 0.946 L -> 0.95 L. Purdue's "below 40°F, begin to drain" refers to hot-water heating pipes and was not used. Matches.
+- Ethylene glycol "is NOT safe to use in any part of a home water system" — PURDUE verbatim. Matches.
+- Thawing: keep the faucet open; heating pad, electric hair dryer, portable space heater, towels soaked in hot water — TAMU. "electric" added before space heater, so it cannot be read as the kerosene or propane heaters the next sentence forbids. Matches.
+- Never blowtorch, kerosene or propane heater, charcoal stove, other open flame; fire hazard and lethal carbon monoxide — TAMU verbatim; ARC-PIPES same list. Matches.
+- Cold dulls thirst and increases urine — HPRC ("decreases your body's thirst sensation"; "increasing your urine output"); ATP 3-4 ("the decrease in the thirst response in cold weather favors the development of dehydration"). Matches.
+- Staying hydrated one of the best ways to prevent cold injury — HPRC verbatim. Matches.
+- Drink often, before thirsty — HPRC. Dry winter air, more water, don't forget to drink — NPS-YOSE verbatim. Matches.
+- Electrolytes on long days; too much plain water can cause hyponatremia — HPRC (its 2-hour and 3 to 6 quart military figures not used). Matches.
+- `when: ["cold"]`: the whole topic is winter-only. Links: p:dehydration, p:hypothermia, p:carbon-monoxide, s:surv-make-water-safe, s:surv-water-store, s:surv-water-in-the-house, s:surv-water-how-much.
+
+### surv-wells-without-power (new)
+
+- No pumping without power; turn off the pump's power so it does not restart, label the breaker; pressure tank faucet near the bottom — PWC. "Treat it before drinking if you are not sure the well is safe" — group judgement (PWC advises bottled water when drawing from a storage tank that may not be disinfected; surv-water-in-the-house treats when unsure). Use stored water — WSC. Matches.
+- Generator can run the pump — WSC. Qualified electrician installs generator and transfer switch; never plug into the wall; back feed dangerous to line workers and others near downed lines — UIUC-GEN. Never inside home or garage even with doors and windows open; outside more than 20 feet from windows, doors, vents; battery-powered or battery-backup CO detector — CDC-CO verbatim. 20 ft = 6.1 m -> 6 m. Off and cool before fueling; electrical risk when wet — UIUC-GEN. Matches.
+- Hand pump for extended outages — WSC ("Consider installing a hand pump"); "before you need it": judgement. Bail with a bucket or other device — CDC-WELL step 3. Casing widths from 2 inches — CDC-WELL table. Working on a well after a disaster can be hazardous, should be done by a well or pump contractor — CDC-WELL verbatim. Never enter a well pit, gases and vapors build up — CDC-WELL verbatim. "Never enter a dug well" (asked for if sourced): no opened source says so (a NIOSH FACE report of a death in a 2-ft concrete-ring well left the cause unknown); left out.
+- Flooded well: don't drink, cook, bathe or wash — EPA-WELL; until disinfected and tested — CDC-WELL; may not be safe for many months — EPA-WELL. Turn off electricity before clearing debris; hazards list — CDC-WELL. Never step in water around a well unless sure the power is off — NYSDOH-WELL. Rubber boots and gloves not adequate — EPA-WELL. Wiring checked before power — CDC-WELL, EPA-WELL. Fuel or chemicals — CDC-WELL, NYSDOH-WELL. Health department in normal times, use other water until it advises — CDC-WELL, NYSDOH-WELL. Matches.
+- Disinfection: contractor should do it; goggles or face shield; ventilation; warn users — CDC-WELL verbatim. Unscented household liquid chlorine bleach, 5-9% — CDC-WELL notes; not splashless, scented or gel — NYSDOH-WELL. Never mix — CDC-BL.
+- Steps, against CDC-WELL's verbatim drilled-well steps 1 to 13 and dug-well steps 1 to 12 (order checked by hand; the two lists differ only in step 7, vent cap and funnel versus "add", and the no-pump bucket mixing in the dug-well list): electricity off and clear debris; repair (qualified electrician, well or pump contractor); run to clear from the outside faucet nearest the well to keep it out of the house plumbing, no pump bail with a bucket; close softener valves; table; 5-gallon bucket with 3-5 gallons (12-19 liters) of water; vent cap and funnel (drilled) or add (dug), avoid electrical connections; circulate with a clean hose from the nearest outside faucet, no pump pour back with a bucket (CDC gives this in the dug-well list; the topic applies it to both); rinse casing 5-10 minutes; open all faucets to a strong chlorine odor, turn off; at least 12 hours; drain through a hose onto an area without plants, such as a driveway, until the odor is gone, not into streams or ponds; run indoor faucets until the odor is gone; boil 1 minute or use other water until tested. Matches.
+- NYS DOH: stand at least 8 hours, preferably 12 to 24; not into septic or sewer — NYSDOH-WELL. EPA-WELL: wait 6 to 24 hours. CDC's at least 12 hours used (D25). 3 minutes above 5,000 ft — EPA-ED (v7 decision D2).
+- No-pump reading (stand 12 hours, bail until the chlorine smell is gone, away from plants and water): group judgement following CDC's steps; CDC gives no other no-pump step. Logged in D25.
+- Bored and dug wells hard to disinfect, shallow, inadequate protection, contaminants re-enter — CDC-WELL. Matches.
+- Drilled or driven table, every cell read twice from CDC-WELL ("Table 1: Approximate Amount of Bleach for Disinfection of a Drilled or Driven Well"): rows 10, 20, 30, 40, 50, 100 ft; columns 2, 4, 6, 8, 10, 24, 36 in. All cells reproduced as printed except 30 ft / 10 in: CDC-WELL prints "3 1/4 cups" (confirmed on a second fetch); CDC-WELL-OLD prints "3-3/4 cups"; CDC-WELL's own metric table gives 888 mL for 9 m / 25 cm (= 3.75 cups); the column runs 1 1/4, 2 1/2, ?, 5, 6 1/4 cups (proportional to depth). The topic prints "3 3/4 cups*" with a note giving CDC's printed value. Outcome: corrected to the larger, consistent value (D25).
+- Bored or dug table, every cell from CDC-WELL ("Table 2: Approximate Amount of Bleach for Disinfection of a Bored or Dug Well"): rows 10 to 50 ft, columns 0.5, 1, 2, 3, 4, 5 ft. All cells proportional to depth; reproduced as printed. Matches.
+- Metric headings from CDC-WELL's metric tables (3, 6, 9, 12, 15, 30 m; 5, 10, 15, 20, 25 cm, 0.6, 0.9 m; 0.15, 0.3, 0.6, 0.9, 1.2, 1.5 m). The metric cells themselves were not copied: CDC's bored-well metric table has cells that do not match its US table (12 m / 0.3 m "2.49 L" and 15 m / 0.3 m "3.72 L", where 7 cups and 8 3/4 cups are about 1.66 L and 2.07 L). Instead the note gives CDC's key and conversions (1 tbsp about 15 mL, 1 cup about 237 mL, 1 gallon 3.8 L).
+- Notes: approximate, rounded to the nearest practical measurement, >100 mg/L; 1 cup = 8 fluid ounces = 16 tablespoons; 1 gallon = 16 cups — CDC-WELL. Matches.
+- Testing: wait 7-10 days, all chlorine flushed — CDC-WELL; EPA-WELL 7 to 10 days. Total coliform and E. coli or fecal coliform; no coliform considered safe; retest 2-4 weeks and 3-4 months; coliform found repeat — CDC-WELL. NY State certified lab, sterile bottle — NYSDOH-WELL. "If you can't get a test, keep boiling or treating" — group judgement extending CDC-WELL ("Until well water has been tested, boil it"). Matches.
+- Springs: PSU-SPRING (shallow groundwater, susceptible; continuous disinfection; fence livestock; redirect surface water; activities at least 100 feet from the spring box; fluctuating flow unreliable, possible contamination). 100 ft = 30.5 m -> 30 m. Matches.
+- No `where` tag (fix round 1 ruling; was `where: ["rural"]`): the shock, well-pit and generator CO warnings show under every filter. Links: p:carbon-monoxide, p:poisoning, s:surv-water-in-the-house, s:surv-water-store, s:surv-make-water-safe, s:surv-find-water.
+
+### Task 5 disagreements (D22 to D26 added)
+
+- D22 Rainwater for drinking: FEMA-Q, LCSG: don't; CDC-RAIN: not necessarily safe; CDC-FCW: can be made safe by treatment; VCE: shingle roofs only for irrigation. Topic: roof water for washing, drink only if nothing safer, filter then boil or disinfect.
+- D23 Filter size for bacteria: withdrawn in fix round 1 (CSU's own table gives 0.3 micron, as CDC).
+- D24 Sunlight time: CDC 6 hours sunny or 2 days cloudy; WHO 24 or 48 hours near the equator; no source for New York. Topic (fix round 1): at least WHO's times, and unreliable in New York, most of all fall to spring.
+- D25 Well disinfection: CDC's printed 3 1/4 cups (30 ft, 10 in) vs 3 3/4; standing time CDC at least 12 hours, NYS DOH 8 (preferably 12 to 24), EPA 6 to 24; NYS DOH's own fixed method (2 quarts of bleach in 10 gallons of water, recirculated 1 hour with the pump, then 2 more quarts) needs a working pump and is not in the topic; no-pump reading.
+- D26 Springs: ATP "typically the safest open source" vs PSU "highly susceptible". Topic: treat spring water.
+- Not new questions: FW's 3 to 5 minute boil and 16 drops per gallon, and NPS-YOSE's 5 minute boil (D1, D3).
+
+### Task 5 pages that would not open or were not used
+
+- ATP 3-50.21 first part (characters 0 to 100,000) holds only the contents list for chapter 3; chapter 3 read from the second part.
+- NPS Yellowstone winter backcountry camping: no water text in the capture.
+- USFS Water System Operator's Guide (2006): nothing on choosing a source.
+- CDC Yellow Book Water Disinfection (2018, via Unbound Medicine): read; nothing used (no source-choice text; SODIS without bottle size or hours of sun).
+- NIOSH FACE 8759 (death in a well, 1987): cause unknown; not used. CDC MMWR on manure pits: not about wells.
+- NEHA power outage facts: nothing used.
+
+### Task 5 fix round 1 (2026-11-18)
+
+Review: .superpowers/sdd/2026-11-18-water-pack/task-5-review.md (6 Important, 13 Minor). Every source below was
+re-opened by web fetch on 2026-11-18 before writing. Draft removed from all four topics after these fixes.
+
+- I1 (surv-make-water-safe, sunlight step 4). Old: "Leave them 24 hours if it is sunny and 48 hours if it is cloudy (WHO). CDC says 6 hours of sun or 2 days of cloud; the app uses WHO's longer times." New: "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy. WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud. No source gives a time for New York, where the sun is weaker, most of all from fall to spring: there, treat sunlight as unreliable." WHO-TN5: "In areas near the equator, on a sunny day 24 hours is likely sufficient or 48 hours for a cloudy day." "The sun is weaker in New York, most of all from fall to spring": general fact, not from an opened source (reviewer's wording). D24 corrected.
+- I2 (surv-find-water, roof warn). Old: "Use roof water for washing, cleaning and flushing." New: "Use roof water for flushing toilets and for cleaning. Lake Champlain Sea Grant says it is not safe even for washing: treat it before you wash hands, dishes or food with it." LCSG: "harvested rainwater is unsafe for drinking, cooking, or washing". Outcome: corrected.
+- I3 (rain, both topics). find-water "Lakes, streams, springs": "Rain caught directly on a clean tarp or in a clean container, streams, ... can all be made safe by treatment (CDC; FEMA, Food and Water in an Emergency)." Roof warn first sentence: "For rain collected off a roof, FEMA (Where can I find clean drinking water after a disaster?) and Lake Champlain Sea Grant say not to drink it." make-water-safe "Well water and rain": "Rain caught directly on a clean tarp or in a clean container: treat it like any wild water (CDC; FEMA, Food and Water in an Emergency). Rain off a roof: FEMA (Where can I find clean drinking water after a disaster?) says not to drink collected rainwater; read Find water outside first." Sources: CDC-FCW ("Rainwater" among sources "that could be made safe by treatment"); FW ("If you need to find water outside your home, you can use these sources." "Rainwater"; "You should purify all water of uncertain purity"); FEMA-Q ("Do NOT drink water from swimming pools, spas and collected rainwater"). Note: FEMA-Q does not itself say "roof"; the app applies it to roof run-off, as D22 states. Source "used" lines reworded to match. D22 reworded.
+- I4 (surv-water-winter, thawing). Added before the heat sources: "Before you thaw a pipe, know where the main water valve is: the pipe may already be broken and leak as it thaws. If it does, shut the main valve until the leak is repaired. Keep electric cords away from water." TAMU verbatim: "Make sure you know where the main water valve is located outside of your home." "The frozen pipe may already be broken, and it will leak when the water is thawed." "If this is the case, you'll need to turn off the main water valve to your home until the leak is repaired." "Make sure that electrical cords do not come into contact with water." Added "until full water pressure is back" ("Apply heat until full water pressure is restored"). Attribution corrected: TAMU says "Adapted from" the American Red Cross and the Institute for Business and Home Safety; the never-open-flame warn now says "(Texas A&M AgriLife Extension, adapted from the Red Cross)". ARC-PIPES re-opened: title "Fact Sheet: Preventing and Thawing Frozen Pipes"; "Do not use a blowtorch, kerosene or propane heater, charcoal stove, or other open flame device."; no author line, it mentions the Red Cross ("Many people have asked the Red Cross..."); still cross-check only.
+- I5 (surv-wells-without-power). `where: ["rural"]` removed (coordinator's ruling): the topic is untagged and shows under every filter value; tests/test_survival_home.py ALWAYS now includes s:surv-wells-without-power (shipped data, every Where and When). The content plan's tag (section 2: "tagged `where: rural`") is overridden by this ruling.
+- I6 (surv-wells-without-power, "Disinfect the well"). Added warn: "Don't climb down into a well. Bleach gives off chlorine gas; WHO says anyone who must enter a well needs full protective clothing and a breathing apparatus, so clean the lining from the top with a long-handled brush (WHO)." WHO-TN1: WHO (prepared with WEDC), Technical Notes on Drinking-Water, Sanitation and Hygiene in Emergencies, Cleaning and disinfecting wells, 2011, https://old2019.sswm.info/sites/default/files/reference_attachments/GODFREY%20and%20REED%202011%20Cleaning%20and%20Disinfecting%20Wells.pdf: "HSCH and bleach give off chlorine gas which is a serious health hazard."; "If you must enter the well, wear full protective clothing and a breathing apparatus"; "Try to clean the well lining from outside the well using a long-handled brush." No-pump paragraph: added "Wear goggles or a face shield while you bail: the water is strong bleach (CDC)." CDC-WELL: "Wear protective goggles or a face shield when working with chlorine solutions." WHO-TN1 says nothing about goggles; the goggles line rests on CDC.
+- M1 / D23: CSU re-opened. Table 1: bacteria "Filtration with absolute pore size of 0.3-micron or smaller"; text: "Filters with a pore size of less than 0.1 micron will usually capture most bacteria." Topic now: "For bacteria too: an absolute pore size of 0.3 micron or smaller (CDC; Colorado State University Extension's table agrees)." D23 withdrawn.
+- M2: sunlight step 1 now "filter it ..., or let it settle and draw off the clear water (CDC)" (CDC-MWS UV/solar lines).
+- M3: winter doFirst now "No heat and below freezing? Shut the main valve, catch the water as you drain the pipes, then leave the faucets open." (FW order in surv-water-in-the-house; PURDUE "Open all faucets until they drain completely").
+- M4: "Melt snow outdoors." -> "Melt snow on a camp stove, grill or charcoal only outdoors." (CDC-COP, CDC-CO).
+- M5: Purdue step added: "Turn off the power or fuel to the water heater and other appliances that use water, and drain them, including the pumps of the washing machine and dishwasher. Don't put antifreeze in appliances or in the water supply pipes, only in drain traps." PURDUE: "Disconnect the electric power or shut off the fuel to all water-using units."; "Drain all water-using appliances."; "Drain the pumps on the washing machine and the dishwasher."; "Do not put antifreeze in these appliances."; propylene glycol "is still not recommended for use in water supply systems".
+- M6: table lead-ins now "Find the row for the depth of water standing in the well (not the total depth of the well) and the column for the width of the casing (well) across its inside (CDC)". CDC headings "Depth of Water", "Diameter of Well Casing" / "Diameter of Well".
+- M7: not put in the topic (CDC gives no instruction when the bleach and water exceed one 5-gallon bucket; no other source opened does); added to D25 as (e).
+- M8: EPA table kept (brief asked for it), lead-in now "EPA's table, for comparison only (6% and 8.25% bleach):".
+- M9: added after the method table: "None of these methods removes fuel, chemicals or algal toxins (CDC, WHO). Distillation and reverse osmosis remove salt; distillation also removes heavy metals and most, not all, other chemicals (FEMA)." WHO-TN5: "The methods described below will remove physical and microbiological pollution, but not chemical contamination."; CDC-HIKE: "You cannot make water containing harmful chemicals, toxins, or radioactive materials safe by boiling or disinfecting it."; NYSDOH-HAB (algal toxins); FW (distillation).
+- M10: tests/test_survival_migration.py pins REOPENED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-safe': set()} and asserts equality.
+- M11: "because streams can't be reached" -> "because streams may be frozen over or buried (... National Park Service: streams may not be accessible)". NPS-YOSE: "You may need a stove to melt drinking water; streams may not be accessible."
+- M12: NYSDOH-WELL re-opened as HTML (https://healthweb-back.health.ny.gov/publications/6562/index.htm), "Revised: April 2018"; wording used matches ("Never step in water around a well, unless you are sure the power is off."; "Do not use "splashless", scented, or gel variety bleach."; "at least 8 hours, preferably 12 to 24 hours"; "rather than into your septic system or public sewer"; "sterile "BacT" bottle from a NY State certified lab"). Source name updated.
+- M13: added to "Power off": "When the power comes back, make sure it is fully restored before you start the pump (Private Well Class)." PWC: "Make sure that the power has been fully restored before attempting to start your well pump."
+- Unverified items: CDC-FLOOD list re-opened: "Human and livestock waste"; "Household, medical, and industrial hazardous waste (chemical, biological, and radiological)"; "Floods can cause containers of chemicals to move from their normal storage spots." Matches the topic. FW credit re-opened: "This brochure was developed by the Federal Emergency Management Agency in cooperation with the American Red Cross" "and the U.S. Department of Agriculture." Matches. ARC-PIPES: see I4.
+
+### Task 5 fix round 2 (2026-11-18)
+
+Re-review "Re-review, fix round 1" (APPROVED with N1 to N5 and M7). No new source needed; wording only.
+- M7 (surv-wells-without-power, new step after the bucket step): "If the bleach and water won't fit in one bucket, mix and pour it in several batches until all the bleach from the table is in. Don't use less bleach to make it fit (the app's reading; CDC does not say)." Group judgement following CDC-WELL's table amounts; D25(e) updated.
+- N2 (surv-make-water-safe, under the method table). Old: "None of these methods removes fuel, chemicals or algal toxins (CDC, WHO). Distillation and reverse osmosis remove salt; distillation also removes heavy metals and most, not all, other chemicals (FEMA)." New: "Boiling, bleach, iodine, chlorine dioxide, filters, UV and sunlight don't remove fuel, chemicals or algal toxins (CDC, WHO). Distillation removes salt, heavy metals and most, not all, other chemicals (FEMA), but don't distill water that smells of fuel or chemicals. Reverse osmosis removes salt (CDC)." Sources as in fix round 1 (WHO-TN5, CDC-HIKE, FW).
+- N3 (sunlight step 4). Old: "No source gives a time for New York, where the sun is weaker, most of all from fall to spring: there, treat sunlight as unreliable." New: "No source gives a time for New York: there, treat sunlight as unreliable." Unsourced clause removed; D24 likewise.
+- N4 (surv-find-water roof warn). Old: "For rain collected off a roof, FEMA (Where can I find clean drinking water after a disaster?) and Lake Champlain Sea Grant say not to drink it." New: "FEMA (Where can I find clean drinking water after a disaster?) says not to drink collected rainwater, and Lake Champlain Sea Grant says the same of roof water. This app applies FEMA's rule to rain off a roof." FEMA-Q: "Do NOT drink water from swimming pools, spas and collected rainwater."; LCSG: "harvested rainwater is unsafe for drinking, cooking, or washing".
+- N5 (wells no-pump line). Old: "the water is strong bleach (CDC)". New: "the water is a strong chlorine solution (CDC)". CDC-WELL: "Wear protective goggles or a face shield when working with chlorine solutions."
+
+## Water pack Task 6: toilets, latrines, garbage (2026-11-18)
+
+Files (all draft): src/survival/surv-toilet-no-water.json, surv-latrines.json, surv-garbage-and-greywater.json,
+src/checklists/sanitation-kit.json. Every source below was found by web search and opened by web fetch on 2026-11-18;
+the page title (and date where printed) was checked after each fetch. Fetches return excerpts capped at about 125
+characters per quote, so long sentences were read as consecutive pieces. No Firecrawl.
+
+Source keys:
+- OSU-SAN: Oregon State University Extension Service, Survival Basics: Sanitation and Waste Management, EM 9334, October 2021 (page modified September 24, 2025). https://extension.oregonstate.edu/catalog/pub/em-9334-survival-basics-sanitation-waste-management (opened three times for the toilet, hand-washing, storage and supply-list passages)
+- JEFF-TB: Jefferson County Dept of Emergency Management with Clallam County Sheriff's Emergency Management, Twin-Bucket Emergency Toilet (sanitary sewer version), updated March 2015. https://www.clallamcountywa.gov/DocumentCenter/View/3435/Emergency-Toilets-If-You-Are-On-Sanitary-Sewer-PDF
+- CLAL-SEP: Clallam County Environmental Health and Emergency Management, Twin-Bucket Emergency Toilet (septic version), updated March 2015. https://www.clallamcountywa.gov/DocumentCenter/View/3436/Emergency-Toilets-If-You-Are-On-Septic-System-PDF
+- WACO: Washington County, Oregon, Take5, Disaster Sanitation (no date). https://washingtoncountyor.gov/take5/disaster-sanitation
+- WILS: City of Wilsonville, Oregon, The Two-Bucket Toilet Solution (credits the Regional Disaster Preparedness Organization; no date). https://www.wilsonvilleoregon.gov/ready/page/two-bucket-toilet-solution
+- KC-ET: Public Health – Seattle & King County, How to create an emergency toilet (no date). https://cd.kingcounty.gov/en/dept/dph/health-safety/safety-injury-prevention/emergency-preparedness/personal-preparedness/emergency-toilets (opened twice)
+- NCDHHS: North Carolina DHHS, Toilet Use During an Emergency, October 2024. https://www.ncdhhs.gov/toilet-use-during-emergency/open
+- ANC: Municipality of Anchorage OEM, Sanitation and Hygiene in an Emergency (no publisher printed in the text; muni.org OEM page). https://www.muni.org/Departments/OEM/Prepared/Pages/EmergencySanitation.aspx
+- WAYNE: Wayne County, Michigan, Homeland Security & Emergency Management, Sanitation in an Emergency. https://www.waynecountymi.gov/Government/Departments/Homeland-Security-Emergency-Management/Homeland-Security/Sanitation-in-an-Emergency (read for comparison; not cited in topics)
+- FEMA-AYR: FEMA, Are You Ready?, Shelter chapter (copy hosted by CERT Los Angeles; no date). https://www.cert-la.com/downloads/education/english/FEMA-Shelter.pdf (read for comparison; not cited in topics)
+- NPS-BF: National Park Service, Grand Canyon, How to Flush a Toilet with a Bucket (Water Conservation Alert), October 13, 2026. https://www.nps.gov/grca/getinvolved/upload/Grand-Canyon-Community-At-Home-Conservation-Guide-Bucket-Flush.pdf
+- DCW: DC Water, What's on Tap, Preparedness Issue 2021. https://www.dcwater.com/preparedness21
+- NYSDOH-BW: New York State Department of Health, Boil Water Notices: FAQ for Residents and Homeowners, question 24. https://healthweb-back.health.ny.gov/environmental/water/drinking/boilwater/faq_residents_and_homeowners.htm (opened twice)
+- NYSDOH-TS: New York State Department of Health, Trash Disposal and Septic Systems after Weather Emergencies, revised October 2023. https://healthweb-back.health.ny.gov/environmental/emergency/flood/trash_septic_systems.htm
+- WADOH-MIX: Washington State Department of Health, Dangers of Mixing Bleach with Cleaners. https://www.doh.wa.gov/YouandYourFamily/HealthyHome/Contaminants/BleachMixingDangers
+- CDC-BL: CDC, How to Safely Clean and Sanitize with Bleach, reviewed August 26, 2026 (as in Task 4). https://www.cdc.gov/natural-disasters/safety/how-to-safely-clean-and-sanitize-with-bleach.html
+- SLCO: Cleaning Up Bodily Fluids and Human Waste (saltlakehealth.org, Salt Lake County Health Department address; no date). https://www.saltlakecounty.gov/globalassets/1-site-files/health/print-materials/illness-prevention/human_waste_brochure.pdf
+- TAMU: Texas A&M AgriLife Extension, Onsite Wastewater Treatment Systems: Responding to Electrical Power Outages and Floods, ER-001 (no date). https://texashelp.tamu.edu/wp-content/uploads/2016/02/waste-systems-blackouts-floods-1.pdf
+- EPA-SEP: US EPA, Septic Systems - What to Do after the Flood, updated August 24, 2026. https://www.epa.gov/ground-water-and-drinking-water/septic-systems-what-do-after-flood
+- FW: FEMA, Red Cross and USDA, Food and Water in an Emergency (as in Task 4; not re-opened: the main-valve sentence is the one checked there).
+- LNT-3: Leave No Trace, Principle 3: Dispose of Waste Properly. https://lnt.org/learn/principle-3
+- LNT-W: Leave No Trace, Winter Recreation. https://lnt.org/winter-recreation/
+- USFS-GF: US Forest Service, Going in the Forest (no date). https://fs.usda.gov/media/241716
+- NPS-BR: National Park Service, Blue Ridge Parkway, Much Ado About Number Two, updated May 22, 2020. https://www.nps.gov/blri/planyourvisit/number-2.htm
+- DEC-SL: NYS DEC, State Land Camping Rules. https://dec.ny.gov/things-to-do/camping/state-land-rules
+- ADK-W: Adirondack Mountain Club, Winter Leave No Trace Tips (Amy Harff, 2018). https://adk.org/winter-leave-no-trace-tips/
+- SPHERE: Sphere Handbook, WASH chapter, 2018 edition or later (copy hosted by Universitas Sebelas Maret; file name Sphere-Handbook-2018-WATER-SUPPLY and it cites Null, C. et al. (2018), as the Task 6 reviewer established; not the 2011 edition). https://ksrpmi.uns.ac.id/wp-content/uploads/2019/09/Sphere-Handbook-2018-WATER-SUPPLY.pdf
+- CDC-SAN: CDC, Potential Sanitation Solutions During an Emergency Response, reviewed December 9, 2021 (archive.cdc.gov). https://archive.cdc.gov/www_cdc_gov/healthywater/global/sanitation/sanitation-emergency-response.html
+- ARMY-FS: NY Division of Military and Naval Affairs, Field Sanitation Team Certification Course, Lesson 6, Waste Disposal in the Field (MED153; no date; US Army field sanitation doctrine). https://dmna.ny.gov/foodservice/docs/Field_Sanitation_Team_Certification_Course/Student_Book/L006HO_Waste_Disposal.pdf. Second source only; marked below wherever a statement rests on it.
+- CDC-ANI: CDC, What to Do to Protect Yourself From Animals After a Disaster, August 26, 2026. https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-from-animals-after-a-disaster.html
+- DEC-BEAR: NYS DEC, DEC Issues Guidance to Reduce Conflicts with Bears, April 7, 2023. https://dec.ny.gov/news/press-releases/2023/4/dec-issues-guidance-to-reduce-conflicts-with-bears; NYS DEC, Be BearWise. https://dec.ny.gov/nature/animals-fish-plants/black-bear/management/bearwise
+- DEC-OB: NYS DEC, Open Burning. https://dec.ny.gov/environmental-protection/air-quality/open-burning
+- EPA-BB: US EPA (archived), Backyard Burning: Human Health. https://archive.epa.gov/epawaste/nonhaz/municipal/web/html/health.html
+- UMN-NORO: University of Minnesota Extension, Step-by-step guide to norovirus cleanup, reviewed 2025. https://extension.umn.edu/sanitation-and-preventing-illness/clean-vomit-and-diarrhea
+
+Conversions: 1 gal = 3.785 L (USGS, Task 4); 1 cup = 240 mL (CDC-BL prints it); half cup = 120 mL; 1 ft = 0.3048 m,
+1 in = 2.54 cm by definition. 200 ft = 61.0 m, written "60 m"; 150 ft = 45.7 m (not converted in text); 100 ft = 30.5 m,
+"30 m"; 3 ft = 0.91 m, "90 cm"; 1 ft = 30 cm; 6 to 8 in = 15 to 20 cm; 4 to 6 in = 10 to 15 cm; 1.5 m = 4.9 ft, "5 feet
+(1.5 m)"; 0.5 m = 19.7 in, "about 20 inches (0.5 m)"; 5 gal = 18.9 L, "19 L"; 13 gal = 49.2 L, "49 L"; 1 to 2 gal =
+3.8 to 7.6 L, "4 to 8 L"; 500°F = 260°C.
+
+### surv-toilet-no-water
+
+- Poop carries germs, pee usually does not — WILS ("Urine is (usually) sterile, while poop contains pathogens requiring special handling"); JEFF-TB ("Urine has almost no health risk"). Matches.
+- Flies, pests and rats carry germs from waste to food and water — OSU-SAN ("If human waste is not managed properly, flies, pests and rodents can spread germs or spores of feces" "to our food and the open water sources on which we may rely"). Matches. "That is how stomach illness spreads" — summary sentence; linked p:vomiting-diarrhea.
+- doFirst items — each restates a checked line below.
+- Bucket flush only for tank (gravity) toilets, not sealed pressure tanks — NPS-BF ("Standard gravity-fed toilets only. If the tank holds a sealed pressure vessel, ask your housing office"). Matches.
+- A gallon or two (4 to 8 L), varies by toilet — NPS-BF ("A gallon or two often works; the amount varies by toilet"); DCW ("It requires a gallon of water, poured directly into the toilet bowl"). Matches.
+- Pour slowly then fast; avoid splashing — DCW ("Start slowly at first, then quickly add the rest"); NPS-BF ("Pour steadily into the bowl, then faster to trigger a flush." "Avoid splashes."). Matches.
+- Stop if water rises without draining — NPS-BF verbatim meaning. Matches.
+- Restore the bowl level; don't also use the handle — NPS-BF ("Slowly add a little water if needed to restore the usual standing level. Do not use the handle as well."). Matches.
+- Water you would not drink is fine for flushing; quote — NYSDOH-BW Q24 ("There is no need to disinfect water used for flushing."). The question is about tap water under a boil-water notice; WACO ("Add non-drinking water" to the pee bucket) and CDC-FCW (Task 4: pool water for hygiene and cleaning) support using non-drinking water for sanitation. Outcome: matches, applied a little beyond its boil-notice context (reviewer, please judge).
+- No grease, food scraps, wipes or cleaning chemicals in flushing water — NPS-BF. Matches.
+- Several pee uses before flushing — DCW ("In most cases, several uses can be made of the toilet for liquid wastes before you need to flush"). Matches.
+- Don't flush after damage until officials say OK — JEFF-TB ("After a disaster, DO NOT flush a toilet until given the OK by a local official"); CLAL-SEP ("until told it is OK by county officials"). "After an earthquake, flood or similar damage" — JEFF-TB is written for earthquakes; ANC ("Do not flush the toilet if water lines are damaged"). Home pipes fine, street pipes broken — OSU-SAN ("Your home's pipes might be OK but pipes in the street may be broken"). Matches. OSU-SAN goes further ("Avoid using toilets even if your home sewer lines are not damaged"); the app allows bucket flushing only while the sewer works and nothing backs up (DCW, NPS-BF describe it for water outages). Disagreement logged (decisions D, Task 6).
+- Toilet doesn't drain normally, sewage comes back up: stop — NPS-BF ("Stop using a toilet that does not drain normally"); NYSDOH-TS (sewage backup as a sign of damage). Matches.
+- Septic flooded or soil around it flooded — NYSDOH-TS ("Do not use your septic system (toilets, washing machine, etc.) if the soil around the system is flooded"). Matches.
+- Shut the main valve if you hear of broken water or sewer lines — FW (checked in Task 4: "if you hear reports of broken water or sewage lines"). Matches surv-water-in-the-house.
+- Two-bucket: "Oregon and Washington emergency managers and Oregon State University Extension" — JEFF-TB, CLAL-SEP (Washington State counties), WACO, WILS (Oregon), OSU-SAN. Pee mixed with poo makes the smell — OSU-SAN ("the pee is the component that produces the strong smell in toilets that mix"). Matches.
+- Steps, order checked against OSU-SAN and JEFF-TB:
+  1. Two 5-gallon buckets marked pee and poo — OSU-SAN ("Get two 5-gallon buckets." "Mark the buckets "pee" and "poo""). Lids — JEFF-TB ("cover with a lid that closes well"), OSU-SAN supply list ("Two 5-gallon buckets with lids").
+  2. Poo bucket lined with a heavy-duty 13-gallon bag; pee bucket unlined — OSU-SAN verbatim meaning.
+  3. Private place, cover material and scoop nearby — JEFF-TB ("Put buckets in a private space with carbon covering material nearby, along with a plastic scoop"). Materials — OSU-SAN ("wood shavings, sawdust, shredded paper, bark chips or peat moss").
+  4. Seat moved between buckets, lid after use — CLAL-SEP ("The seat can be moved from one to the other."); JEFF-TB/CLAL-SEP ("After use, remove the seat from the bucket and cover with a lid that closes well").
+  5. Toilet paper in the poo bucket — WACO ("Place toilet paper in POO bucket"); JEFF-TB ("After using the pee bucket, you can put the toilet paper in the poo bucket"); WILS.
+  6. Try not to pee in the poo bucket; mistakes happen — OSU-SAN; JEFF-TB ("it's understandable that there will be mistakes").
+  7. About half a cup to cover completely — OSU-SAN ("sprinkle about a half cup of carbon material" "so that it completely covers the surface of the poo"). JEFF-TB says "1 to 2 scoops". OSU's measure used (it is a stated volume). Purpose: moisture, odor, flies — WILS ("to absorb moisture, reduce odor, and deter flies"). Matches.
+- No diapers, pads or pet waste in the buckets — JEFF-TB ("DO NOT place baby or adult diapers, sanitary pads, or bagged pet waste in pee or poo buckets"). Matches.
+- Pee bucket emptied at about a quarter full or before too heavy — OSU-SAN verbatim. Dilute with non-drinking water and pour on lawn or ground — WACO ("Add non-drinking water to contents if possible." "Pour on lawn, garden or ground."); OSU-SAN ("add some water to the contents if possible to dilute the urine and simply pour on the lawn or ground"). Change spot each time — OSU-SAN. "Keep it well away from any well, spring or stream" — group judgement, no distance given by any town source; cautious (LNT-3 asks 200 feet from water for urine in the backcountry). Logged here.
+- Poo bucket no more than half full — OSU-SAN ("Fill poo bucket no more than half-full of waste"); WACO; WILS ("When the bucket is half-full, double bag"). Gloves, double-bag, seal; reline — OSU-SAN verbatim meaning. "Take off gloves and wash your hands" — WACO ("Always clean your hands after toileting"); group judgement for the glove step.
+- Hold pee with a tight lid and wait if told to — JEFF-TB ("DO store pee and poo in the buckets and WAIT for disposal instructions from authorities"); CLAL-SEP ("you can store pee while waiting for disposal instructions"). Matches.
+- Bags in the bowl: shut off the toilet's water and get water out of the bowl — NCDHHS ("Turn off the water valve and flush out any water still in the bowl"). Two heavy-duty bags — KC-ET ("with two heavy-duty plastic garbage bags"); NCDHHS (a bag inside another kitchen bag). Cat litter, fireplace ashes or sawdust — KC-ET. Tie and remove daily to a garage, basement or outbuilding — KC-ET verbatim meaning. Matches.
+- No bleach in pee buckets: urine contains ammonia; bleach plus ammonia makes chloramines — WADOH-MIX ("ammonia can be found in ... urine (use caution when cleaning litter boxes, diaper pails, or toilet bowls)"; "When bleach is mixed with ammonia, toxic gases called chloramines are produced"). Never mix bleach with ammonia or any other cleaner — CDC-BL verbatim. Twin-bucket agencies use cover material, no chemicals — OSU-SAN, JEFF-TB, CLAL-SEP, WACO, WILS (none mentions bleach in the buckets; checked). Older guides add bleach — FEMA-AYR ("pour or sprinkle a small amount of regular household disinfectant, such as chlorine bleach, into the container"); ANC ("liquid bleach diluted 1 cup bleach to 10 cups of water", no strength); WAYNE ("one part liquid chlorine bleach to ten parts water", no strength); NCDHHS lists "bleach or disinfectant" as an absorbent, no dilution. None gives a bleach strength, so per the content contract no dilution is given. Outcome: more cautious path taken (no bleach in waste); decisions D, Task 6.
+- Clean the buckets: NCDHHS ("Disinfect the bucket with bleach or discard after use"). CDC mix — CDC-BL ("Sanitize using a mixture of 1 cup (240 mL) of bleach to 5 gallons of water" for non-food household surfaces and items that may have touched floodwater; "regular, unscented household bleach with a sodium hypochlorite concentration between 5% and 9%"; "Allow to air dry"; "open windows and doors"). A waste bucket is a non-food household item; CDC's context is floodwater. Outcome: used with its CDC label; reviewer, please judge. "Empty the bucket first" and gloves — group judgement following WADOH-MIX and OSU-SAN (gloves when handling waste).
+- Store waste: separate can, tight lid — OSU-SAN ("A dedicated and separate garbage can or roll cart"; "store separately from other garbage"); ANC ("large lined trash can with a tight fitting lid"). Far from food and water; children, pets, flies, rats — OSU-SAN; WACO ("away from food, kids and animals"; "Secure waste from pets, flies and rats"). Garage, basement or outbuilding — KC-ET. Not in normal garbage — OSU-SAN ("Do not put human waste into the normal garbage"); unless officials announce — KC-ET ("During a declared emergency, these bags may be included with the regular garbage if a public announcement has been made"). Matches.
+- Store until the sewer is fixed; listen for instructions — OSU-SAN ("You will likely have to store the waste until the public sanitary system is fixed"); WACO ("Listen for more information from your local waste disposal haulers"). Matches.
+- Disposal options: working sewer or septic, or bury on own property — KC-ET. Not within 100 feet of a water source or where it can leach downhill — OSU-SAN ("Do not bury waste within 100 feet of a water source or where the contaminants can leach downhill into a water source"). App uses 200 feet (LNT-3, USFS-GF, NPS-BR cat-hole distance) — more cautious; decisions D.
+- In town, don't dig pits — JEFF-TB ("DO NOT dig a pit privy." "disease organisms can easily contaminate neighboring properties"); KC-ET ("Latrines are not appropriate in urban locations"). KC-ET also allows burying bagged waste on one's own property; the app keeps burying to rural land (surv-latrines is tagged rural, woods, coast). Disagreement logged (decisions D).
+- Storm drain — SLCO ("it is against the law to wash waste into a storm drain"; Utah). "Or put it in a ditch or stream" — follows from the water-source distances above (OSU-SAN, KC-ET). No New York rule on disposing of bagged human waste was found; nothing stated as a New York rule.
+- Septic: gravity systems keep working — TAMU ("A gravity collection system that feeds into a septic tank and soil absorption area will continue to operate properly"). "You can flush it with a bucket" — inference from TAMU and OSU-SAN ("it may be safe to continue using as long as you do not see signs of leaking" or backing up). Pumps, aerobic units, sand filters need electricity; waste collects — TAMU. Short outage: water only for flushing and hand washing; extended: stop all water use — TAMU ("Limit water usage to essentials such as toilet flushing and hand washing"; "If you expect the power to be out for an extended time:" "Stop all water use."). Stop if plumbing drains slowly — TAMU. Don't use if soil flooded — NYSDOH-TS, EPA-SEP ("If possible, don't use the system if the soil is saturated and flooded"). Don't pump while flooded — EPA-SEP ("Do not pump the tank during flooded or saturated drainfield conditions"). Signs — NYSDOH-TS ("sluggish plumbing, sewage backup, and soil erosion around the drain field"); EPA-SEP ("settling or an inability to accept water"). After an earthquake don't assume it works — CLAL-SEP verbatim. No cover material if the poo bucket will go into a septic tank — CLAL-SEP ("DO NOT ADD CARBON MATERIAL of any kind to your poo bucket if you are going to dump it in your own septic tank"; JEFF-TB "Carbon can't be put in a septic system"). Matches.
+- Hand washing: soap and water after toileting and before eating — WACO. Sanitizer at least 60% alcohol when no water — OSU-SAN ("a hand sanitizer with at least 60% alcohol"); WACO ("60%+"). Soap and water clean better — WILS ("Hand sanitizer is fine in a pinch, but the most effective way to stay clean is using soap and water"). Matches. Full hand washing is for surv-handwashing (Task 7).
+- Links: p:vomiting-diarrhea, s:surv-water-in-the-house, s:surv-garbage-and-greywater, s:surv-latrines, p:poisoning (bleach fumes), c:sanitation-kit, s:surv-water-how-much.
+
+### surv-latrines
+
+- where: rural, woods, coast (not town) — KC-ET ("Latrines are not appropriate in urban locations"); JEFF-TB (no pit privy, neighboring properties); OSU-SAN ("If you live in a more rural area, consider digging a latrine"). Coast included: no source restricts cat holes or latrines on the coast. Logged in decisions D.
+- Cat holes on the move; latrines for young children or more than a few nights — LNT-3 ("there are times when latrines may be more applicable, such as when camping with young children or if staying in one camp for longer than a few nights"). Matches.
+- 200 feet from water, trails and camp; about 70 steps — USFS-GF ("Move at least 200 feet (about 70 steps) away from any water sources, trails, parking areas and campsites"); LNT-3 ("at least 200 feet (about 70 to 80 adult paces) from water, trails, and camp"); NPS-BR ("Two hundred feet away from water and trails (approximately 80 adult paces)"). Matches.
+- Inconspicuous site — LNT-3. Matches.
+- 6 to 8 inches deep, 4 to 6 inches across, small trowel — LNT-3 ("Dig a hole 6-8 inches deep and 4-6 inches in diameter with a small garden trowel"); USFS-GF; NPS-BR. Matches.
+- Fill with the original soil and disguise with leaves and debris — NPS-BR verbatim meaning; LNT-3. Matches.
+- Spread out; don't go to the same place twice — LNT-3; NPS-BR. Matches.
+- New York normal-times rule: 6 to 8 inches deep, at least 150 feet from water or campsites, cover with leaves and soil; pit privies where provided; LNT recommends 200 — DEC-SL verbatim meaning. Matches.
+- Toilet paper packed out in sealed bags — NPS-BR ("Always pack it out ... Don't put it in your cathole either"); USFS-GF ("Pack your toilet paper or wipes in a double ziploc bag"). LNT-3 allows burying it deep. Disagreement: pack out first (more cautious), LNT's option mentioned. Wipes always packed out; don't burn (wildfires); unscented — LNT-3 verbatim meaning. Matches.
+- Pee 200 feet from trails, campsites and water; rocks, pine needles, gravel; animals attracted to salts dig up plants and soil; diluting helps — LNT-3. LNT's "water sources with a water flow of less than 500 cubic feet per second" qualifier left out (the app asks 200 feet from all water; more cautious). Matches.
+- Packing out where required; ask land managers; sealed zipper bags or containers; commercial systems — LNT-3; NPS-BR. "in normal times" added (land managers will not be reachable in a long outage). Matches.
+- Latrine location matters, slow breakdown — LNT-3 ("Since this higher concentration of feces will decompose very slowly, location is especially important"). Matches.
+- From water: at least 200 feet — more cautious than KC-ET ("at least 100 feet away from surface water bodies such as lakes, rivers, streams, and at least 100 feet downhill or away from any drinking water source (well or spring)"), OSU-SAN (100 feet), SPHERE ("the distance between containment facilities and water sources should be at least 30 metres"), ARMY-FS ("100 feet away from any unit ground water source"), DEC-SL (150 feet, for human waste on state land). 200 feet is LNT-3, USFS-GF and NPS-BR's cat-hole figure. Outcome: more cautious used; decisions D.
+- From tents, homes and the kitchen: at least 100 feet — KC-ET ("100 feet downhill or away from any ... home, apartment, or campsite"); away from food preparation and eating areas — KC-ET ("Keep the toilet away from food preparation and eating areas"). ARMY-FS: "at least 100 yards downwind from the unit's field food service facility" and "30 yards from the edge of the unit area". The Army's 100 yards is more cautious for the kitchen but rests on the Army alone; not used; decisions D. SPHERE gives a maximum of 50 m from dwellings to a shared toilet (so people can reach it); not stated in the topic; decisions D.
+- Pit bottom at least 1.5 m above groundwater — SPHERE ("the bottom of pits should be at least 1.5 metres above the groundwater table"); KC-ET ("at least 1 foot above hard pan or the water table"). More cautious (Sphere) used, KC's figure shown.
+- Downhill from wells and springs — KC-ET ("100 feet downhill or away from any drinking water source"). Never uphill or upwind of camp — SPHERE ("Do not establish defaecation areas uphill or upwind of settlements"). Matches.
+- High water table unsuitable — CDC-SAN ("Unsuitable where water table is high"). Matches.
+- At least 3 feet deep — KC-ET ("The hole for a latrine must be at least 3 feet deep"). ARMY-FS deep pit: 1 foot per week of use plus 1 foot (not used; Army alone). Matches.
+- Soil, mulch or ash after each use — KC-ET ("throw dirt, lime, mulch, or ash in the latrine"); lime left out (WAYNE warns against quicklime; no source says which lime is safe). Handful of soil — LNT-3 ("toss in a handful of soil after each use"). Matches.
+- Cover between uses; keep covers and doors closed against insects and animals — KC-ET verbatim meaning. Matches.
+- Hand-washing next to it — KC-ET ("Provide a place next to the emergency toilet to wash hands that offers soap, running water, and paper towels"); SPHERE ("Ensure that the facility allows for handwashing, including water and soap (or an alternative such as ash)"); CDC-SAN ("Install handwashing stations at every sanitation facility"). Matches. Detail is for surv-handwashing (links to add later).
+- Supervise small children — KC-ET. Matches.
+- Close at about 20 inches (0.5 m) from the top — SPHERE ("Allow 0.5 metres at the top of the pit for backfill"); ARMY-FS ("When a latrine pit is filled to within one foot of the top"); CDC-SAN ("waste covered with soil when latrine is near-full"). More cautious (Sphere) used.
+- Fill to ground level packing the soil; mound on top against flies; mark the spot — ARMY-FS ("Fill the pit to ground level, packing the dirt after every three inches of dirt added." "Then mound the latrine with twelve inches of soil to prevent flies from entering or exiting the pit." sign with type and date). These rest on the Army alone (with CDC-SAN for covering with soil); no numbers from it are given in the text. Flagged for the reviewer.
+- Winter: frozen ground and snow make cat holes hard — ADK-W verbatim meaning. Pack out solid waste and toilet paper — ADK-W ("it is best to pack out all human solid waste and toilet paper"); LNT-W ("Pack out solid human waste."). Snow is not the place — LNT-W ("The snow may seem like an easy place to dispose of our trash and human waste" ... other options). Snow cat hole 200 feet from trails and water if unable to pack out — LNT-W verbatim meaning. Check your map for water — LNT-W ("Consult your map to make sure that you are camping 200 feet away from water"; said of camps, applied to the cat hole). Matches.
+- Hand washing or sanitizer afterward — LNT-3 ("Hand sanitizers that don't require rinsing allow you to wash your hands"). Matches.
+
+### surv-garbage-and-greywater
+
+- Garbage draws rats, mice, flies and black bears — CDC-ANI (rodents), OSU-SAN (flies), DEC-BEAR (bears and garbage). Rodents spread disease, bite — CDC-ANI ("They can spread diseases and can bite people or pets"). Flies carry germs to food and open water — OSU-SAN ("Flies can carry germs and spores of feces to human food and open water sources"). Matches.
+- Heavy-duty bags inside containers with tight lids; away from home and well — NYSDOH-TS ("storing garbage in heavy duty garbage bags inside containers with tight lids"; "Keep garbage in a convenient location, away from your drinking water well and home"). Matches. "Away from where people sleep" — agrees with surv-dangerous-animals (checked topic).
+- Bears: cans in a sturdy building; pet and livestock food indoors; clean grills — DEC-BEAR verbatim meaning. "such as a shed or garage" — example added. Matches.
+- Trash out as soon as you can; clean up debris — CDC-ANI ("Throw out trash as soon as you can." "Put trash in a covered trashcan or dumpster." "Clean up debris and trash as soon as possible outside your home."). Food and water in thick plastic, glass or metal with tight lids — CDC-ANI verbatim. Matches.
+- Bagged toilet waste in its own can — OSU-SAN. Matches.
+- In camp, garbage with food and scented items away from where you sleep — surv-dangerous-animals (DEC canister text, checked in v7). Matches.
+- Plan meals for little garbage; pack out leftover food, grease, scraps, orange peel — LNT-3 verbatim meaning. Matches. "At home, bag food scraps with the rest of the garbage in a lidded can" — follows NYSDOH-TS; no compost advice found in any opened source (DEC BearWise links out for it).
+- Rodents: close holes, dime — CDC-ANI ("Some rodents can squeeze through holes as small as a dime"); snap traps; dead rodent with gloves in two plastic bags; don't sweep or vacuum droppings not disinfected; don't eat or drink what rodents touched — CDC-ANI verbatim meaning. CDC-ANI's "1:10 chlorine solution" ("1½ cups of household bleach mixed with 1 gallon of water") is not given: the page prints no bleach strength (content contract). For surv-clean-and-disinfect (Task 7) to source. Matches otherwise.
+- Diapers and menstrual products in heavy-duty 3 to 5 mil black bags, disposed of with bagged poo — OSU-SAN verbatim meaning. Not in the toilet buckets — JEFF-TB. Matches. JEFF-TB says "Dispose of them in trash"; OSU keeps them with the bagged poo; OSU used (more cautious).
+- Vomit and diarrhea clean-up waste: gloves, plastic bag, sealed, new gloves to carry it to a secure container; wash hands — UMN-NORO verbatim meaning. Matches. Fuller cleaning is for surv-clean-and-disinfect and surv-stomach-illness-in-a-group (links to add later).
+- Sharps and medicines: no opened source covered household disposal in an emergency; left out.
+- Burning: quote "Burning trash is illegal statewide in all cases." — DEC-OB verbatim. Burn barrels included — DEC-OB ("This includes burning trash or other solid wastes in a burn barrel or similar device"). Wood stoves, fireplaces, outdoor wood boilers — DEC-OB ("Part 219 Incinerators prohibits burning trash in wood stoves, fireplaces, and outdoor wood boilers"). Stated as normal-times New York rule. Matches.
+- Burn barrels rarely hotter than 500°F; incomplete combustion; harmful smoke and soot — DEC-OB verbatim meaning. 500°F = 260°C. Matches.
+- Dioxins, particles, carbon monoxide; ash with mercury, lead, chromium, arsenic taken up by garden vegetables — EPA-BB verbatim meaning. Matches. No public agency instructions for burning trash in an emergency were found; none given. ARMY-FS gives burning at 50 yards downwind of camp but prefers burial; not used.
+- Half-burned or buried garbage still draws animals — LNT-3 verbatim meaning; "Burning trash is never recommended". Matches. Burying household garbage: FEMA-AYR says "Bury garbage, if necessary" with no depth or distance; ARMY-FS gives a 4 x 4 x 4 foot pit 100 yards downstream of water (Army alone). Not given in the topic; decisions D.
+- Greywater defined — plain description.
+- Sewer working: sink drain, not the toilet — NPS-BF ("Pour used dishwater down the sink drain, not into the toilet"). Matches.
+- With a bucket toilet, use it to dilute pee — OSU-SAN ("Water collected in the bucket or basin can be used to dilute urine before dumping outside"). Don't treat it for reuse — OSU-SAN verbatim. Matches.
+- Keep it out of a latrine — SPHERE (household water from cleaning, cooking, laundry or bathing should not "enter the containment facilities"). Matches.
+- Camp: carry water 200 feet from streams and lakes; never wash in them — LNT-3 verbatim meaning. Little soap; NY rule no soap within 150 feet of water — LNT-3; DEC-SL ("Do not use soap to wash yourself, clothing or dishes within 150 feet of water"). Strain with fine mesh; scatter broadly, well away from camp, especially with bears; pack out strainer contents — LNT-3 verbatim meaning. Order checked against LNT-3's dishwashing paragraph. Matches.
+- Dead animals per local animal control as soon as you can — CDC-ANI verbatim meaning. "Wear gloves" — CDC-ANI (gloves for dead rodents). "when you can reach them" added (phones may not work). Matches.
+
+### sanitation-kit (checklist)
+
+- buckets — OSU-SAN supply list ("Two 5-gallon buckets with lids; label buckets "Pee" and "Poo""); JEFF-TB (lid that closes well); WACO.
+- seat — WILS ("A toilet seat (optional, but highly recommended)"); JEFF-TB/CLAL-SEP.
+- bags — OSU-SAN ("Several boxes of 3–5 mil black plastic garbage/contractor bags"). Note: liner, double-bagging, diapers, pads — OSU-SAN. (WILS lists 13-gallon bags of 0.9 mil or thicker; OSU's heavier bag used.)
+- cover-material, note half a cup — OSU-SAN.
+- scoop — JEFF-TB ("along with a plastic scoop").
+- waste-can — OSU-SAN; ANC.
+- toilet-paper — OSU-SAN; WACO ("Toilet paper or wipes").
+- zip-bags — OSU-SAN ("Closable bags to hold used toilet paper"); NPS-BR; USFS-GF.
+- gloves — OSU-SAN ("Latex or nitrile gloves to wear when bagging poop"); WACO.
+- soap — OSU-SAN; WACO.
+- sanitizer, 60% — OSU-SAN; WACO. Note — WILS.
+- handwash-jug — OSU-SAN ("Full water jug with on/off spigot"; towels; "Catch bucket or basin").
+- bleach 5% to 9%, for cleaning the buckets; never into pee; never mix — CDC-BL; NCDHHS; WADOH-MIX.
+- trowel and shovel — LNT-3 (trowel); KC-ET (3-foot latrine); ARMY-FS (shovel at the latrine; second source, not a number).
+- 14 items. No qty: no opened source gives a per-person figure for any item (OSU-SAN's "multiply the number of humans and pets by 14" is gallons of water for two weeks, already covered by home-water-store).
+
+### Task 6 disagreements (summary; questions in decisions-for-jordan.md section D)
+
+- Bleach in toilet buckets: FEMA-AYR, ANC, WAYNE add it (no strength); twin-bucket agencies don't; WADOH-MIX warns urine contains ammonia. App: none.
+- Latrine and burial distance from water: 100 ft (KC-ET, OSU-SAN, ARMY-FS), 30 m (SPHERE), 150 ft (DEC-SL rule), 200 ft (LNT-3, USFS-GF, NPS-BR). App: 200 ft.
+- Pit bottom above groundwater: 1 ft (KC-ET) vs 1.5 m (SPHERE). App: 1.5 m.
+- Closing: 1 ft from top (ARMY-FS) vs 0.5 m (SPHERE). App: 0.5 m.
+- Kitchen: 100 ft (KC-ET) vs 100 yards (ARMY-FS, Army alone). App: 100 ft.
+- Burying in town: KC-ET allows on own property; JEFF-TB and KC-ET (latrines) say not in town. App: not in town.
+- Flushing after a disaster: OSU-SAN avoid toilets even if home lines are fine; NPS-BF and DCW describe bucket flushing in water outages. App: flush only while the sewer works and nothing backs up; don't flush after damage until officials say so.
+- Toilet paper: NPS-BR pack out always; LNT-3 bury deep or pack out. App: pack out, LNT option mentioned.
+- Diapers: JEFF-TB "in trash"; OSU-SAN with the bagged poo. App: OSU.
+
+### Task 6 pages that would not open or were not used
+
+- Seattle Public Utilities Emergency Sanitation trifold (seattle.gov PDF): site error.
+- UNT web archive copy of CDC healthywater/emergency/cleaning/sanitation.html (2012): wrapper only, no content.
+- PHLUSH, Twin Bucket Toilet FAQs (phlush.org, April 2025): opened; a non-profit, not an agency; nothing used (its "store urine 2 weeks" and "monitor bags for gas" are not from an agency).
+- Salt Lake County 9:1 bleach for body-fluid clean-up: no bleach strength; not used.
+- NYS DEC Be BearWise: only headings linking to bearwise.org; DEC press release used instead.
+- Ready.gov and Red Cross: no page found by search with a bleach dilution for toilet waste.
+
+### Task 6 fix round 1 (2026-11-18)
+
+Sources re-opened or newly opened on 2026-11-18 by web fetch (title checked after each fetch):
+- CDC-BL re-opened: "Wash surfaces with soap and warm, clean water to remove dirt and debris." "Rinse with clean water." "Sanitize using a mixture of 1 cup (240 mL) of bleach to 5 gallons of water." "Allow to air dry" "Wear rubber or other non-porous boots, gloves, and eye protection." "Never mix bleach with ammonia or any other cleaner."
+- CLAL-SEP re-opened: "Can safely locate and remove the septic tank lid." "Older tank lids may be concrete and too heavy to remove." "Keep all children and pets away from open septic tank during dumping." "Secure the septic tank lid immediately after dumping pee and poo." "Carbon will damage the septic system."
+- EPA-SEP re-opened: "Only trained specialists should clean or repair septic tanks because tanks may contain dangerous gases." "Do not dig into the tank or drainfield area while the soil is still wet or flooded."
+- WH-LS (new): West Hants Regional Municipality (Nova Scotia, not a US agency), Municipal Sewage Lift Stations and Power Outages, December 4, 2025. https://westhants.ca/municipal-sewage-lift-stations-and-power-outages.html. "These stations rely on continuous electrical power to run the pumps."; reserve "quickly fills up, posing a risk of sewage backups into streets, basements, and local waterways"; "residents must immediately and significantly reduce water use the moment the power goes out"; flush only solid waste; "Any internal water flow at that time will remain in the internal piping" and can back up within the dwelling.
+- CCU (new): Charlotte County Utilities, Florida, Charlotte County Utilities Urges Customers to Limit Water Usage, October 10, 2024. https://origin.charlottecountyfl.gov/news/charlotte-county-utilities-urges-customers-to-limit-water-usage.stml. "Numerous wastewater lift stations within the county are without power."; "In a power outage, low pressure sewer pumps will not function."
+- CDC-ANI re-opened: "Spray urine and droppings with a disinfectant or a 1:10 chlorine solution" "(1½ cups of household bleach mixed with 1 gallon of water) until thoroughly soaked." "Let it soak for 5 minutes." "Use a paper towel to remove urine and droppings." "Discard the paper towel outdoors in a sealed garbage container." Gloves ("wear rubber or plastic gloves") are in its trapping paragraph. Air out long-abandoned buildings "for 2-3 days before reentering". No bleach strength printed: the 1:10 mix is still not given.
+- CDC-SAN re-opened: trench latrines "Narrow trenches with temporary privacy structure; waste covered daily with soil"; "Drainage to divert surface water from trench required."; "Short life span."; "Flooding of trenches during rainy season."; no width or depth (only a digging rate).
+- FDA-SH (new): FDA, Sharps Disposal Containers, content current as of 04/28/2021. https://www.fda.gov/medical-devices/safely-using-sharps-needles-and-syringes-home-work-and-travel/sharps-disposal-containers. Sharps "immediately placed" in a container; "If an FDA-cleared container is not available," "some organizations and community guidelines recommend using a heavy-duty plastic household container as an alternative." "The container should be leak-resistant, remain upright during use and have a tight fitting, puncture-resistant lid, such as a plastic laundry detergent container."; "properly labeled to warn of hazardous waste inside the container"; "about three-quarters (3/4) full".
+- CDC-FCW (re-opened, Task 4 source): "Listen to reports from local officials for advice on water precautions in your home." "You may need to shut off the main water valve to your home to prevent contaminants from entering pipes in your home." "Water from swimming pools and spas can be used for personal hygiene, cleaning, and related uses, but not for drinking." (Flushing is not named.)
+- OSU-SAN re-opened: "peat moss" appears three times, e.g. "the carbon material (wood shavings, sawdust, shredded paper, bark chips or peat moss)" and "sprinkle about a half cup of carbon material (wood shavings, sawdust, shredded paper, bark chips or peat moss)". The supply list omits it. Kept (confirmed).
+- LNT-3 re-opened: "Plan meals to avoid generating messy, smelly garbage." "Several EPA-approved, commercially produced pack-out systems are available that are easy to use and sanitary for backpacking/hiking use." Both kept (confirmed).
+- DCW re-opened: "There's no need to use the handle or empty the toilet tank." NPS-BF re-opened: "Carry only what you can safely lift." "Do not use the handle as well."
+
+Changes:
+- I1 (surv-toilet-no-water, Clean the buckets). Old: "Wear gloves. Empty the bucket first. ..." / "CDC's bleach mix ... Let the bucket air dry. Indoors, open windows and doors (CDC)." New: NC DHHS sentence, then steps: gloves and eye protection (CDC-BL); empty; wash with soap and water, rinse with clean water so no pee is left (CDC-BL); sanitize with 1 cup (240 mL) plain unscented 5% to 9% bleach in 5 gallons (19 L) (CDC-BL); air dry, ventilate (CDC-BL). Checklist gloves item adds eye protection. Outcome: corrected to CDC's order.
+- I2 (Septic systems). Added: dump through the lid only if it can be found and lifted safely; concrete lids may be too heavy; children and pets away; lid back on right after (CLAL-SEP); never lean into or enter a tank, dangerous gases (EPA-SEP: only trained specialists clean or repair tanks because of gases; "lean into or enter" is the app's plain reading); don't dig at the tank or leach field while wet or flooded (EPA-SEP). Cover-material reason now "it can damage the system" (CLAL-SEP "Carbon will damage the septic system"). Outcome: added.
+- I3 (doFirst and Flush with a bucket). New doFirst item: "Power out across town? Use as little water as you can and flush only poo: sewer pumps need electricity. In a long blackout, switch to the bucket toilet." New warn block on lift stations, backups into streets and basements, cut water at once, flush only solid waste (WH-LS), house sewage pumps stop (CCU). "In a long blackout, expect the sewer to stop working" is the app's reading of WH-LS (limited reserve) and OSU-SAN (avoid toilets); D30 updated. doFirst kept at five items by merging hand washing into the buckets item. Outcome: added.
+- I4 (Get rid of it). Old: "Bury it on your own land (King County), but never within 100 feet ... This app uses the more cautious 200 feet" / "In town, don't dig pits ...". New: "Outside town, you can bury it on your own land (King County, Oregon State University Extension). Dig the hole as deep as a latrine, at least 3 feet (90 cm) (King County's latrine depth), at least 200 feet (60 m) from any water source, and never where it can seep downhill into one. Oregon State says at least 100 feet (30 m); this app uses 200." / "In town, don't bury it or dig pits ... in wet soils germs spread ... Hold the bagged waste in its can and wait for instructions." The 3 ft depth is King County's latrine depth applied to burial (no source gives a depth for bagged waste); D29 updated. Outcome: corrected.
+- I5 (surv-garbage-and-greywater, Rats and mice). New: don't sweep or vacuum; rubber or plastic gloves; spray with a disinfectant until soaked through; soak 5 minutes; wipe with paper towels; towels in a sealed garbage container outdoors (CDC-ANI); never mix bleach with ammonia or any other cleaner (CDC-BL); air out long-empty buildings 2 to 3 days (CDC-ANI). CDC's 1:10 mix still not given (no strength). The reviewer's "household disinfectant" shortened to CDC's own "a disinfectant". Outcome: corrected.
+- I6 (surv-latrines). Added a trench latrine paragraph from CDC-SAN: narrow trench, privacy screen, soil over the waste at least once every day, small ditch to steer rain water around, short life, can flood; same distances as the table. Summary and keywords ("trench latrine" replaces "human waste") updated. Outcome: added.
+- I7 (surv-garbage-and-greywater). Added sharps item from FDA-SH, with the laundry detergent container example (named by FDA). Keyword "needles" replaces "waste". Section heading now "Diapers, needles, sick waste". Medicines still left out: no opened source covers emergency household disposal. Outcome: added.
+- I8 (Dishwater and wash water). Added: when the sewer is not working or backing up, pour nothing down a drain (WH-LS); use some to dilute pee (OSU-SAN); strain the rest and scatter it on the ground away from the house and at least 200 feet from wells, springs and streams where you can (LNT-3's camp method applied to a house: group judgement). Outcome: added.
+- Unverified statements: "peat moss" and both LNT lines re-confirmed (above). The FEMA main-valve sentence (confirmed earlier only in a reprint) is replaced by CDC-FCW: "Listen to local officials. You may need to shut the main water valve to keep contaminants out of the pipes in your house (CDC)." FW removed from the topic's sources; CDC-FCW added.
+- M1. Old: "Water you would not drink is fine for flushing. New York State Department of Health: “There is no need to disinfect water used for flushing.”" New: "You don't need to disinfect water used for flushing (New York State Department of Health, for tap water under a boil-water notice). Water from a pool or spa can be used for washing, cleaning and similar uses, though never for drinking (CDC)." The reviewer's "Pool or rain water will do" and "Don't carry floodwater into the house" were not used: CDC-FCW names hygiene and cleaning, not flushing; no opened source covers rain water or floodwater for flushing.
+- M2. Pee "at least 200 feet (60 m) from any well, spring or stream where you can (Leave No Trace)". LNT-3 source added to the topic.
+- M3. Fixed by the I4 wording (200 ft leads).
+- M4. "Don't use the handle as well (National Park Service), and don't empty the tank (DC Water): the clear water in the tank is emergency drinking water (see Water already in your house)." The reason is the app's tie to surv-water-in-the-house.
+- M5. "Shut off the water valve to the toilet (NC DHHS). Don't flush if the sewer is broken: bail the water out of the bowl with a cup into the pee bucket." Bailing is a group judgement (NC DHHS says to flush it out, which a broken sewer rules out).
+- M6. Checklist bags item now names the heavy-duty 13-gallon (49 L) liners (OSU-SAN) as well as the 3 to 5 mil bags.
+- M7. Link p:carbon-monoxide added to "Don't burn it" (EPA-BB names carbon monoxide; DEC-OB names wood stoves and fireplaces).
+- M8. Added "If water seeps into the hole as you dig, it is too near: fill the hole and pick higher ground" (group judgement from CDC-SAN "Unsuitable where water table is high") and "In limestone or broken (fissured) rock, go farther from water than the table says (Sphere handbook)" (SPHERE: "Increase these distances for fissured rocks and limestone").
+- M9. Task 5 has now committed D22 to D26, so D27 follows D26. D29 now carries Jefferson's reason (seasonally saturated soils) and matches the toilet topic's I4 text.
+- M10. "Carry only what you can lift safely (National Park Service). A gallon of water weighs about 8 lb (3.8 kg)." (8.33 lb per gallon, USGS, Task 4.)
+- Sphere edition: source key updated to "2018 edition or later" as the reviewer established; topic source names updated.
+- Draft removed from surv-toilet-no-water, surv-latrines, surv-garbage-and-greywater and sanitation-kit after this fix round, as instructed.
+
+## Water pack Task 7: hand washing, clean and disinfect, stomach illness in a group (2026-11-18)
+
+Files (all draft): src/survival/surv-handwashing.json, surv-clean-and-disinfect.json, surv-stomach-illness-in-a-group.json.
+Every source below was found by web search and opened by web fetch on 2026-11-18 (no Firecrawl, no Bright Data); the
+page title and date were checked after each fetch. Fetches return excerpts capped at about 125 characters per quote,
+so long sentences were read as consecutive pieces.
+
+Source keys:
+- CDC-HW: CDC, About Handwashing (Clean Hands), reviewed February 16, 2024. https://www.cdc.gov/Clean-Hands/About/
+- CDC-FAQ: CDC, Hand Hygiene Frequently Asked Questions, reviewed March 14, 2024. https://www.cdc.gov/clean-hands/faq/index.html (opened twice)
+- CDC-HS: CDC, Hand Sanitizer Guidelines and Recommendations, reviewed March 12, 2024. https://www.cdc.gov/clean-hands/about/hand-sanitizer.html
+- CDC-HSF: CDC, Hand Sanitizer Facts, reviewed April 17, 2024. https://www.cdc.gov/clean-hands/data-research/facts-stats/hand-sanitizer-facts.html
+- CDC-PH: CDC, Guidelines for Personal Hygiene During an Emergency, reviewed August 5, 2024. https://www.cdc.gov/water-emergency/safety/guidelines-for-personal-hygiene-during-an-emergency.html (opened twice)
+- CDC-POST: CDC Global WASH, When and How to Clean Hands (poster, undated). https://cdc.gov/global-water-sanitation-hygiene/media/pdfs/When-and-how-to-clean-hands-poster-508.pdf
+- CDC-TT: How to Make a Tippy Tap (CDC Stacks, footer "CS 229310", no publisher or date printed; the French sibling 41618 carries www.cdc.gov/ebola). https://stacks.cdc.gov/view/cdc/41617/cdc_41617_DS1.pdf (opened twice)
+- WHO-KI: WHO Kiribati, Health topics (photo caption on tippy taps). https://www.who.int/kiribati/health-topics
+- WHO-DD: WHO, Diarrhoeal disease fact sheet, 7 March 2024. https://www.who.int/news-room/fact-sheets/detail/Diarrhoeal-Disease
+- UNICEF-HW: UNICEF, Handwashing Stations and Supplies for the COVID-19 response, May 2020. https://www.unicef.org/media/75706/file/Handwashing%2520Facility%2520Worksheet.pdf
+- OSU-SAN: Oregon State University Extension, EM 9334 (as in Task 6; re-opened for the hand-washing passages). https://extension.oregonstate.edu/catalog/pub/em-9334-survival-basics-sanitation-waste-management
+- NCSU-HWS: Boil Water Advisory, Handwashing Station Requirements (NC State Extension hosting; "Your local Environmental Health Department"), updated 8.2.21. https://www.ces.ncsu.edu/wp-content/uploads/2024/10/Boil-Water-Advisory_Handwashing-Station-2021.pdf
+- UVM-HWS: University of Vermont Extension Produce Safety Portal, Insulated Handwashing Station for Cold Weather Use, updated November 23, 2020. https://www.uvm.edu/extension/produceportal/node/218
+- NYSDOH-BW: New York State Department of Health, Boil Water Notices: FAQ for Residents and Homeowners, revised November 2018, questions 17, 18 and 21. https://healthweb-back.health.ny.gov/environmental/water/drinking/boilwater/faq_residents_and_homeowners.htm (opened twice)
+- CDC-HOME: CDC, When and How to Clean and Disinfect Your Home, reviewed January 31, 2025. https://www.cdc.gov/hygiene/about/when-and-how-to-clean-and-disinfect-your-home.html
+- CDC-DB: CDC, Cleaning and Disinfecting with Bleach, reviewed April 24, 2024. https://www.cdc.gov/hygiene/about/cleaning-and-disinfecting-with-bleach.html (opened twice)
+- CDC-BL: CDC, How to Safely Clean and Sanitize with Bleach, reviewed August 26, 2026 (as in Tasks 4 and 6; re-opened). https://www.cdc.gov/natural-disasters/safety/how-to-safely-clean-and-sanitize-with-bleach.html
+- CDC-NORO: CDC, How to Prevent Norovirus, reviewed January 13, 2025. https://www.cdc.gov/norovirus/prevention/index.html (opened twice; the URL is the one in src/protocols/vomiting-diarrhea.json)
+- CDC-EVD: CDC, Infection Control Recommendations for Prevention of Transmission of Diarrheal Diseases in Evacuation Centers, reviewed January 29, 2019 (archive.cdc.gov). https://archive.cdc.gov/www_cdc_gov/disasters/disease/diarrhea-evac.html
+- CDC-EVC: CDC, Infection Control Guidance for Community Evacuation Centers Following Disasters, reviewed September 5, 2017 (archive.cdc.gov). https://archive.cdc.gov/www_cdc_gov/disasters/commshelters.html (opened twice)
+- CDC-ADV: CDC, Drinking Water Advisories: An Overview, reviewed March 4, 2024. https://cdc.gov/water-emergency/about/drinking-water-advisories-an-overview.html
+- CDC-DI: CDC, What You Can Do to Prevent Diarrheal Illness After a Disaster, reviewed July 22, 2024. https://www.cdc.gov/water-emergency/safety/
+- CDC-FDOSS: CDC, Foodborne Disease Outbreak Surveillance System FAQ, September 6, 2024. https://www.cdc.gov/fdoss/faq.html
+- MDH-NORO: Minnesota Department of Health, Norovirus Toolkit for shelters, date stamp 1/21/2025. https://www.health.mn.gov/diseases/foodborne/outbreak/facility/shelternorovirus.pdf
+- UMN-NORO: University of Minnesota Extension, Step-by-step guide to norovirus cleanup, reviewed 2025 (as in Task 6; re-opened). https://extension.umn.edu/sanitation-and-preventing-illness/clean-vomit-and-diarrhea
+- WADOH-MIX: Washington State Department of Health, Dangers of Mixing Bleach with Cleaners (as in Task 6; re-opened). https://www.doh.wa.gov/YouandYourFamily/HealthyHome/Contaminants/BleachMixingDangers
+- Read for comparison, not cited in topics: NCDHHS shelter handout ("If a Norovirus Outbreak Occurs in Your Shelter", no publisher or date printed) https://www.dph.ncdhhs.gov/environmental-health/noro-shelter-handout/open; EPA Region 2, Cleaning Up After a Flood: Children's Health, November 2012 https://archive.epa.gov/region02/sandy/web/pdf/r2childrenshealth.pdf.
+
+Conversions: 1 gallon = 3.8 L and 1 cup = 240 mL as CDC-BL prints them; 1 quart = 0.95 L (Task 4); 1 tablespoon = 15 mL and
+1 teaspoon = 5 mL (FDA-HM, Task 4); so 5 tbsp = 75 mL, 25 tbsp = 375 mL, 4 tsp = 20 mL; 5 gal = 19 L (Task 6);
+3 ft = 0.91 m, written "90 cm"; 25 ft = 7.62 m, written "7.6 m".
+
+### surv-handwashing
+
+- WHO: spread through contaminated food or drinking-water or person to person through poor hygiene; hand washing with soap a key measure — WHO-DD ("Infection is spread through contaminated food or drinking-water, or from person-to-person as a result of poor hygiene"; "Key measures to prevent diarrhoea include: ... hand washing with soap"). Matches. Opening sentence ("dirty hands are how one sick person becomes a sick group") is framing, no number.
+- Soap and water best in most situations — CDC-HW ("Washing hands with soap and water is the best way to get rid of germs in most situations"). Matches.
+- Key times, ten items — CDC-HW, copied verbatim in the order printed. Matches (also reproduced in OSU-SAN).
+- Extra times: before feeding children — CDC-DI; before giving medicine — CDC-NORO; visibly dirty or greasy — CDC-POST ("When hands are visibly dirty or greasy"). Matches.
+- Steps: wet with clean water warm or cold, turn off, soap; lather backs, between fingers, under nails; at least 20 seconds, short song twice; rinse under clean running water; dry with clean towel or air dryer — CDC-HW verbatim meaning (corrected in fix round 1: the page says "Hum the "Happy Birthday" song from beginning to end twice"). Turn off the tap while lathering to reduce water use, turn on to rinse — CDC-FAQ. Paper towel or elbow to turn off — CDC-FAQ. Dry completely, germs spread more easily when hands are wet — CDC-FAQ. Matches.
+- Warm and cold water remove the same number of germs — CDC-FAQ verbatim. Plain soap, bar or liquid, no added benefit of antibacterial soap outside healthcare — CDC-FAQ. Standing water with germs from previous use; use clean running water — CDC-FAQ. Matches ("even if it is only a trickle from a jug" is ours, following CDC-PH's large-jug station).
+- Single-use towel or air dry — CDC-POST. Change cloth towels daily — OSU-SAN ("If using cloth towels, replace them daily"). Matches.
+- Water only: rub under water, dry, less effective than soap — CDC-FAQ. Sanitizer before water-only — CDC-FAQ (use 60% sanitizer first). Matches.
+- Soapy solution from laundry detergent — UNICEF-HW ("Where bar or liquid soap is unavailable, a soapy solution can be produced from laundry detergent"). Matches; no recipe given (none in source).
+- Cleanest water available — CDC-POST verbatim. CDC-PH quoted: "Wash your hands with soap and water that has been boiled or disinfected" ... "if local authorities or your doctor recommend extra caution." CDC-PH does not mention bottled water (checked). CDC-PH also says hand washing with tap water may be safe under a boil-water advisory (not used: there is no tap water in this topic's setting). Fill the jug with treated water — CDC-TT ("Fill the container with treated water"); NCSU-HWS ("Use treated or bottled water"). Before preparing food: boiled (then cooled), bottled or other acceptable water — NYSDOH-BW Q21. Water under a Do Not Use notice (sewage or chemical) not for any purpose — NYSDOH-BW Q21. Matches.
+- Sanitizer: at least 60% alcohol, check the label — CDC-HW, CDC-HS. Palm, label amount; rub all surfaces until dry, about 20 seconds — CDC-HS ("This should take around 20 seconds"). Wiping off before dry — CDC-HSF. Matches.
+- Not as effective on visibly dirty or greasy hands — CDC-HS, CDC-HSF, CDC-PH. Soap and water more effective against "Cryptosporidium, norovirus, and Clostridium difficile" — CDC-HSF (named as the source names them; C. difficile written in full as printed). Sanitizer does not work well against norovirus, not a substitute — CDC-NORO. Pesticides, heavy metals like lead — CDC-HS. Matches.
+- Food handlers: alcohol gel not substituted — CDC-EVC ("Alcohol hand gel should not be substituted in food handlers"). Matches.
+- Supervise young children, swallowing — CDC-HS. Matches.
+- Homemade sanitizer: "CDC does not recommend producing, using, or selling homemade hand sanitizer products" — CDC-FAQ. Warning written. No recipe given. FDA's consumer page (archived copy) would not render; not used.
+- Station: large water jug — CDC-PH. Jug of potable water with on/off spigot, soap, towels, catch bucket — OSU-SAN verbatim meaning. Sink basin, bucket under sink with plumbing disconnected, table and bucket outdoors, jug tied to a tree branch, soap in a sock or stocking tied to the handle, sanitize the spigot handle, two stations (food area and toilet) — OSU-SAN verbatim meaning. Can't be missed, near toilets — UNICEF-HW. Clean and sanitize the jug first: links to surv-water-store (CDC 1 tsp per quart, checked in Task 4); NCSU-HWS's "2 tbsp of unscented bleach in 1 gallon" for the jug is not used (no strength printed). Matches.
+- Tippy tap: hangs on a horizontal stick, tipped by stepping on a rope through the cap, only soap touched — WHO-KI photo caption. Steps — CDC-TT, in its numbered order (supplies: container with handle and cap, bar of soap, long and short rope, big nail, candle and matches, long and short stick, pliers; heat the nail with the candle; hole opposite the handle a finger length from the top; second hole in the cap; rope through cap, knot inside, other end to the long stick; cap on; hole through soap, short rope, tie to short stick; fill with treated water; hang by the handle so the rope holds the stick off the ground; hang where people wash often; soap every time). Materials list also UNICEF-HW ("Jerry can or bottle, rope, poles or timber, nails"). Note: CDC-TT has no text on stepping on the stick or what the container hangs from; WHO-KI supplies "hangs on a horizontal stick" and "stepping on a rope". The diagram is needed to make this clear (see report).
+- Dirty water: catch bucket — OSU-SAN; use it to dilute urine before dumping outside — OSU-SAN (agrees with surv-toilet-no-water); don't treat to reuse — OSU-SAN. Soakaway pit with rocks or coarse gravel where no drainage — UNICEF-HW. Gloves when emptying by hand — UNICEF-HW ("personal protective equipment such as impermeable apron, rubber gloves"). Matches; link to surv-garbage-and-greywater for greywater distances (checked in Task 6).
+- Winter: cold water works — CDC-FAQ. Insulated container allows warm water and slows cooling or freezing — UVM-HWS. Matches. No source on sanitizer in the cold was found; nothing said.
+
+### surv-clean-and-disinfect
+
+- Definitions; clean with soap and water before disinfecting; disinfect when someone is sick; high-touch surfaces regularly — CDC-HOME verbatim meaning. Vomit or stool must be cleaned up before disinfecting or the disinfectant will not work — CDC-EVD verbatim. Matches.
+- Regular unscented household bleach, 5% to 9%, not if outside or not specified; some laundry bleach and splashless bleach not appropriate — CDC-DB verbatim. "No scented bleach" — CDC-DB and CDC-BL specify unscented. Room-temperature water — CDC-DB. New solution daily; less effective after 24 hours — CDC-DB. CDC-EVD allows weekly in a lightproof bottle; the daily rule is used (more cautious, and simpler). Matches.
+- "Mix it in a container you never use for food or drinking water, and label it" — group judgement, no source; protective only.
+- Warning that surface mixes are not for drinking water — required by the dispatch. "Far too strong to drink": the surface mix is 5 tablespoons (75 mL) per gallon against 8 drops (about 1/2 mL, CDC-MWS as in surv-make-water-safe) for drinking water; arithmetic from the two CDC pages. Links s:surv-make-water-safe.
+- Never mix bleach with ammonia or any other cleaner — CDC-BL verbatim. Ammonia gives chloramines; acids (vinegar, toilet bowl cleaners, rust removal products, drain cleaners) give chlorine gas — WADOH-MIX. Urine contains ammonia — WADOH-MIX (as checked in Task 6; agrees with surv-toilet-no-water). Gloves, eye protection, rubber boots — CDC-BL ("Wear rubber or other non-porous boots, gloves, and eye protection"). Ventilate, avoid fumes — CDC-BL, CDC-DB. Follow the label — CDC-DB, CDC-BL. Exposure symptoms — WADOH-MIX list. Link p:poisoning at the mixing warning section. Matches.
+- Table row 1 (surfaces when someone is sick): 5 tablespoons (1/3 cup) per gallon, or 4 teaspoons per quart, room-temperature water, at least 1 minute, visibly wet, 5% to 9% — CDC-DB verbatim ("If your bottle does not have directions"). Applied to "when someone is sick" via CDC-HOME (disinfect when someone is sick). Matches.
+- Table row 2 (vomit or diarrhea): "1,000 to 5,000 ppm (5 to 25 tablespoons of household bleach [5% to 8%] per gallon of water)" — CDC-NORO verbatim; "at least 5 minutes" — CDC-NORO; "allow the area to remain wet for 10 minutes, if possible" — CDC-EVD (1,000 ppm = 5 tablespoons of 6% per gallon). Contact time: the longer (10 minutes if possible, never under 5) used. The strength range printed for this mix is 5% to 8% (CDC-NORO), not 5% to 9%; kept as printed. Disagreement logged (decisions D, Task 7).
+- Table row 3 (dishes and food-contact surfaces): 1 tablespoon of unscented bleach per gallon, rinse a minute, air dry completely — NYSDOH-BW Q17 (no strength printed); CDC-BL food-contact surfaces: 1 tablespoon (15 mL) per gallon (3.8 L) of 5% to 9% bleach after washing and rinsing, air dry (no contact time). CDC-ADV gives 1 teaspoon per gallon of warm water, soak at least one minute, air dry, with no strength. The tablespoon (stronger, and with CDC's strength) is used; disagreement logged (decisions D, Task 7). Disposable plates and cutlery if possible — CDC-ADV. Green dishwasher additives weak — NYSDOH-BW Q17. Matches.
+- Table row 4 (non-food items): 1 cup (240 mL) per 5 gallons, 5% to 9%, air dry, after washing with soap and water and rinsing — CDC-BL (non-food-contact surfaces that don't soak up water and may have touched floodwater). Agrees with surv-toilet-no-water's bucket cleaning. Matches.
+- "If anyone has vomiting or diarrhea, use the vomit mix for their toilet seat or bucket and anything soiled" — CDC-NORO (disinfect after someone vomits or has diarrhea); applying it to the sick person's toilet is our reading; reviewer please judge. Agrees with surv-toilet-no-water (the bucket is emptied and washed first; no bleach with pee).
+- Water containers: link to surv-water-store (not restated).
+- Surface steps: wash with soap and water; keep visibly wet for the contact time; air dry — CDC-DB, CDC-BL. Matches.
+- Dish steps: wash with detergent, rinse — CDC-ADV, NYSDOH-BW; boiled (then cooled) or alternate water — NYSDOH-BW; bleach basin — CDC-ADV ("In a separate basin"); 1 minute — NYSDOH-BW ("rinse for a minute"), CDC-ADV ("at least one minute"); air dry completely before use — both. "Don't dry them with a towel" — follows from "air dry completely" (both sources). Counters the same way — CDC-BL. Matches.
+- Vomit and diarrhea steps, order from CDC-NORO with detail from UMN-NORO and CDC-EVD: keep people and pets away, gloves (CDC-NORO), apron and mask (UMN-NORO); ventilate (CDC-BL/CDC-DB); paper towels into a plastic bag (CDC-NORO); kitty litter or baking soda, scrape with paper plates or cardboard (UMN-NORO); never vacuum vomit (MDH-NORO); wash with soapy water (UMN-NORO step 2), clean up before disinfecting (CDC-EVD); bleach range and contact (above); clean again with soap and hot water (CDC-NORO); bag the waste, gloves off into the bag, new gloves to carry it to the trash (UMN-NORO; agrees with surv-garbage-and-greywater); laundry, trash, wash hands (CDC-NORO). Matches. UMN-NORO also has a lower-strength "sanitize" step (2 teaspoons of 5.25% to 6.25% per gallon) before its disinfect step; not used (CDC's single strong step is simpler and stronger).
+- Norovirus on surfaces up to two weeks — UMN-NORO. Clean up immediately — MDH-NORO. Uncovered food within 25 feet thrown away — UMN-NORO (its "food and packaging within a 25-foot circle"; "uncovered" is ours, a narrowing: reviewer please judge). Area isolated 2 hours, airborne particles — UMN-NORO. Carpets: don't vacuum first; kitty litter or baking soda — UMN-NORO. UMN's steam cleaning (158°F for 5 minutes or 212°F for 1 minute) left out: needs equipment and power.
+- Laundry: remove at once, gloves, don't shake, detergent and hot water at the maximum cycle length, machine dry at highest heat, wash hands — CDC-NORO. Remove vomit and stool first, keep separate — UMN-NORO. Bleach in rinse water — CDC-EVD; per label — UMN-NORO ("1/2 cup of bleach ... according to label directions"; the 1/2 cup is not given because no strength is printed). Without a machine: warmest appropriate water, dry completely — CDC-HOME (written for soft items generally). No source opened gives a hand-washing method for soiled laundry; said so. "Wash where the water can't reach food or drinking water" is group judgement.
+
+### surv-stomach-illness-in-a-group
+
+- doFirst: each line restates a checked line below.
+- Treatment linked, not restated: p:vomiting-diarrhea and p:dehydration at the top and in "When it is beyond the group". No drug, dose or danger-sign list written.
+- Spread: WHO-DD (contaminated food or drinking water, person to person; faeces from sewage, septic tanks and latrines; food prepared or stored in unhygienic conditions). Norovirus in vomit or feces before symptoms; in poop 2 weeks or more after feeling better — CDC-NORO. On surfaces up to two weeks — UMN-NORO. Matches.
+- Several people sick: outbreak definition, two or more people, same illness, same contaminated food or drink — CDC-FDOSS. "Check the shared things first" is our wording; the dispatch asked to suspect water and food only as sources put it: we point to the shared food and drink (CDC-FDOSS, WHO-DD) and to what MDH-NORO investigators ask (whether kitchen or food staff were ill; food served). Water for drinking, cooking and brushing teeth — CDC-DI (bottled water for drinking and other uses, including brushing teeth; otherwise boil or disinfect). Food that might be contaminated thrown away, can look, smell and taste normal — CDC-NORO. Shared poison or fumes — the protocol's step s4 (Red Cross), referred to, not restated. Matches.
+- Separate section away from people who are not sick; designated toilets; serve food away from them — CDC-EVD. Designated bathrooms, cohort — MDH-NORO. Similar symptoms housed together, cots at least 3 feet apart — CDC-EVC. Matches.
+- How long apart: CDC-EVD "until 24 hours after diarrhea and vomiting stop"; MDH-NORO "isolate guests while they are ill and for 72 hours after symptoms have stopped". 72 hours used (more cautious). Decisions D, Task 7.
+- One carer: CDC-EVD ("Sick children should be accompanied by only one responsible adult." "The same adult should stay with the child until 24 hours after symptoms stop."). Extending it to adults is our judgement, said so in the text ("Do the same for any sick person if you can"). Carer washes before and after caring — CDC-HW key times. Gloves for clean-up and laundry — CDC-NORO. Ill person does not care for others — CDC-NORO. Matches.
+- Food: CDC-NORO "Do not prepare, handle food, or care for others. Wait at least 2 days (48 hours) after symptoms stop." quoted exactly. MDH-NORO: ill staff restricted from food handling "until 72 hours after their vomiting/diarrhea has ended" (Minnesota Food Code); UMN-NORO: don't prepare or serve food until 72 hours after. CDC-EVD: workers not back until at least 24 hours. 72 hours used. "Or handle the group's water" — agrees with p:vomiting-diarrhea step s8 ("does not handle food or water for others") and its donts line ("prepare food or water ... until 2 days"); corrected in fix round 1 (the protocol does give a time limit). Decisions D, Task 7; Conflicts with p:vomiting-diarrhea reported (it says 2 days).
+- Cooks wash with soap, no gel substitute — CDC-EVC. No bare-hand contact with ready-to-eat food — UMN-NORO. Wash fruit and vegetables — CDC-NORO. Matches.
+- Hand washing 20 seconds, after toilet and before food — CDC-NORO. Sanitizer not effective against norovirus, not a substitute — CDC-NORO; MDH-NORO ("Do not use hand sanitizer as an alternative to handwashing"). Stations by the toilet and where food is made — OSU-SAN. Matches.
+- Clean-up and laundry: summaries of the clean-and-disinfect steps (above); link. Door handles with the surface mix (CDC-DB, CDC-HOME high-touch surfaces); sick person's toilet and soiled things with the strong mix (CDC-NORO). Matches.
+- How long to keep it up: 3 days after the last person's symptoms stop — MDH-NORO's 72 hours, applied to the whole group's measures (the protocol says "at least 2 days after the last person's symptoms stop", CDC). Poop 2 weeks — CDC-NORO. Matches with the logged disagreement.
+- Not used: Sphere handbook hygiene chapter (not opened in this task; CDC and Minnesota shelter guidance covered camps and shelters); CDC-EVC "surfaces wiped hourly" (written for restrooms in non-residential centers).
+
+### Task 7 disagreements (D32 to D35 in decisions-for-jordan.md section D)
+
+- Time a sick person stays away from food and the group: CDC 48 hours, CDC evacuation centers 24 hours, Minnesota Department of Health and University of Minnesota Extension 72 hours. Topic uses 72 hours; the Emergency protocol p:vomiting-diarrhea says 2 days (not edited; reported).
+- Vomit and diarrhea bleach: contact time CDC 5 minutes, CDC evacuation centers 10 minutes if possible (10 used); strength CDC prints 5% to 8% for this mix, 5% to 9% elsewhere; Minnesota uses 1/3 cup per gallon (1,000 ppm), CDC's range is 5 to 25 tablespoons.
+- Dishes: CDC (advisories page) 1 teaspoon per gallon, no strength; New York State Department of Health 1 tablespoon per gallon, no strength; CDC (bleach page) 1 tablespoon of 5% to 9% for food-contact surfaces. 1 tablespoon used.
+- Everyday surfaces: CDC (hygiene) 5 tablespoons per gallon; CDC evacuation centers 1 teaspoon per quart (about a quarter of that); CDC bleach page 1 cup per 5 gallons for flood-touched non-food items. Stronger CDC hygiene mix used for a sick household.
+
+### Task 7 pages that would not open or were not used
+
+- FDA, Safely Using Hand Sanitizer (UNT web archive copy): the fetch returned only the archive viewer, no text. Not used; CDC-FAQ covers homemade sanitizer.
+- CDC tippy tap PDF (UNT web archive copy of cdc.gov/safewater): returned only the archive viewer. CDC-TT (CDC Stacks) used instead.
+- CDC, What to Do During a Boil Water Advisory (NC State copy): fetch failed (client error). CDC-ADV used instead.
+- No EPA page with a household bleach dilution for surfaces was found; EPA Region 2's flood sheet gives only 1 teaspoon per gallon for drinking-water containers, with no strength (read for comparison; not used).
+
+### Task 7 fix round 1 (2026-11-18)
+
+Sources re-opened by the writer for this round (built-in WebFetch only): MDH-NORO (strong solution "1 gallon water +
+1/3 cup bleach", 1000 ppm, mixed fresh daily, no bleach percentage and no contact time printed; 72-hour sentences),
+CDC-EVD ("1000 ppm sodium hypochlorite or 5 tablespoons of 6% household bleach to 1 gallon of water"; "remain wet for
+10 minutes, if possible"; eye protection when diluting; "only one responsible adult"), UMN-NORO ("Throw away food and
+packaging materials within a 25-foot circle of the vomit or stool"; "the surrounding 25-foot circle"; "Wait 72 hours";
+1/3 cup of 5.25% ~1000 ppm), CDC-HW ("Hum the "Happy Birthday" song from beginning to end twice"), WADOH-MIX
+("ammonia can be found in ... urine"; chloramines). Also read: the final surv-toilet-no-water "Clean the buckets"
+(gloves and eye protection, empty, wash and rinse so no pee is left, 1 cup in 5 gallons, air dry) and surv-water-store
+(never use a container that held bleach). CDC-DB, CDC-NORO, CDC-HOME, CDC-BL and OSU-SAN were relied on as opened
+earlier this day (quotes above).
+
+- C1. Strong mix on a sick person's toilet seat and soiled things (marked "the app's reading of CDC"); the bucket is
+  emptied, washed and rinsed so no pee is left (CDC-BL) and then sanitized as in surv-toilet-no-water (link, no second
+  figure, per the controller's ruling); never bleach where there is pee (WADOH-MIX). In both topics.
+- I1. Stomach topic gives one answer agreeing with p:vomiting-diarrhea: at least 2 days after symptoms stop (CDC-NORO,
+  quoted), 3 days if the group can manage it (MDH-NORO, UMN-NORO). CDC-EVD's 24 hours removed from the text (kept here
+  and in D32). One-carer line: "the same one each time ... for as long as you keep them apart". doFirst adds "care for
+  no one else" (CDC-NORO "or care for others"). D32 rewritten. Protocol not edited.
+- I2. One strong mix: 1/3 cup (5 tablespoons, 75 mL) of 5% to 9% per gallon. Strength from CDC-DB (5% to 9%, 1/3 cup,
+  at least 1 minute visibly wet). CDC-EVD: 5 tablespoons of 6% = 1000 ppm. MDH-NORO: 1/3 cup, 1000 ppm, no strength.
+  CDC-NORO's range (5 to 25 tablespoons of 5% to 8%) kept in this record and D33; the topic says CDC allows up to 25
+  tablespoons and the app uses the low end. Arithmetic (not a source): 1/3 cup is about 960 ppm at 5% and about 1,700
+  ppm at 9%; 25 tablespoons of 9% about 8,000 ppm. Separate 5-tablespoon row and the 4-teaspoons-per-quart variant
+  removed (M9); 1 cup in 5 gallons row removed (emptied waste buckets now link to surv-toilet-no-water).
+- I3. Warning block first in "Which mix for which job" (CDC-BL, CDC-DB, WADOH-MIX; links s:surv-make-water-safe).
+  Vomit steps: eye protection added to step 1 (CDC-BL, CDC-EVD) and "Use only bleach and water: nothing else in the
+  bucket" in step 5. Stomach topic clean-up line: eye protection and "Never mix bleach with other cleaners".
+- I4. UMN-NORO's rule restored: food and food packaging within 25 feet of the vomit or stool. "Keep the group's food
+  covered and stored away from the sick person" marked as the app's advice. No question added on sealed cans.
+- M1. Mixing container: "kept only for bleach, and mark it BLEACH (marking it is the app's advice). Never put food or
+  drinking water in a container that has held bleach (CDC; see Store water at home)."
+- M2. Laundry without a machine: CDC-HOME (warmest water, dry completely), CDC-EVD (bleach in rinse water), wash water
+  out as dirty wash water (surv-garbage-and-greywater, checked in Task 6); link added; the "no source" sentence removed
+  from the text.
+- M3. Tippy tap: marked "To use it" step added (CDC-TT and WHO-KI's caption, "the app's reading").
+- M4. Spigot: OSU-SAN "Regularly sanitize the spigot handle"; strong mix; paper towel to turn the spigot off.
+- M5. s:surv-water-store and s:surv-clean-and-disinfect links added after the station steps.
+- M6. Vomit step 5: "the whole area, well past the edge of the mess" (CDC-NORO "entire area"; UMN-NORO 25-foot circle).
+- M7. Covered by I1.
+- M8. Song record corrected (above); water-handling record corrected (above); the report's toilet line now sits in D35.
+- M9. Done with I2.
+- M10. D32 to D35 rewritten: the evacuation-center pages named (2017 Community Evacuation Centers vs 2019 Diarrheal
+  Diseases); D33 says the 1/3 cup is also CDC-DB's surface mix; D32 carries the 3-day recommendation as a question.
+- M11. Not changed: the titles were set by the dispatch; the content plan is not a Task 7 file. Reported.
+- Also: UNICEF's "soapy solution from laundry detergent" dropped (no method or amount; reviewer's suggestion).
+- Draft removed from all three topics.
+
+## Water pack Task 8: diagrams (2026-11-18)
+
+Every drawn word and number below comes from the topic named; no figure adds a fact. `handwash-station` was added in fix round 1 once its topic was final.
+
+### water-safe (surv-make-water-safe, "Make water safe", steps block)
+
+Relabelled: the old figure said 6,500 feet and 6 percent bleach; now matches the checked topic.
+- "Rolling boil", "At least 1 minute": step 2, "Bring it to a rolling boil for at least 1 minute."
+- "3 min above 5,000 ft": step 2, "Above 5,000 ft, boil for 3 minutes."
+- "No fire? Bleach": step 3, "No fire? Use plain, unscented household chlorine bleach (5% to 9% ...)".
+- "8 drops of 5% to 9% unscented bleach per gallon": step 3, "plain, unscented household chlorine bleach (5% to 9%, such as 6% or 8.25%) ... Add 8 drops per gallon".
+- "Stir, wait 30 minutes": step 3, "Stir and let it stand 30 minutes."
+- "1 gal": step 3, "per gallon". The bottle carries no strength label.
+- Alt text: same figures. Doubling is not drawn; the caption carries it in the topic's words: "Double it if the water is cloudy, colored or very cold."
+
+### water-heater-drain (surv-water-in-the-house, "Water heater", after the steps)
+
+Labels fixed by the content reviewer, numbered in this order; each is a step of the topic:
+- 1 "Power or gas OFF": "Make sure the electricity or gas to the water heater is off."
+- 2 "Let it cool": "Let the tank cool."
+- 3 "Close the water intake valve": "Close the water intake valve, usually on top of the tank."
+- 4 "Open a hot tap": "Turn on a hot-water tap in the house to let air into the tank."
+- 5 "Container here": "Put a clean container under the drain valve at the bottom of the tank."
+- 6 "Open the drain": "Open the drain at the bottom of the tank."
+- Footer "Refill the tank before turning power or gas back on": "close the drain and refill the tank following the heater's instructions before you turn the power or gas back on."
+- Drawing: tank, cold intake pipe with valve at the top, hot pipe to a tap, drain valve at the bottom with a container under it, a power/gas control box on the side. No other text.
+
+### toilet-buckets (surv-toilet-no-water, "Two-bucket toilet", after the steps)
+
+- "Pee", "Poo": step 1, "Mark one 'pee' and one 'poo'."
+- "Lid": step 1, "two 5-gallon (19 L) buckets with lids"; step 4, "put a lid on".
+- "Seat": step 4, "Move the toilet seat to whichever bucket you are using."
+- "Cover material, half a cup (120 mL) after each poo": step 7, "After each poo, sprinkle about half a cup (120 mL) of cover material so it covers the poo completely."
+- Not drawn: bag liner, toilet paper, fill lines, bleach. No task 6 suggestion wording was used that the topic does not carry.
+
+### latrine (surv-latrines, "Cat holes", after the steps)
+
+Cat hole only; the group latrine (3 ft deep, 100 ft, 5 ft above groundwater) does not fit clearly at 340 px wide beside the cat hole. Task 6's suggestions list the cat hole first.
+- "At least 200 feet (60 m) from water", "about 70 steps": step 1, "Walk at least 200 feet (60 m) from water, trails and camp: about 70 steps."
+- "Water, trails, camp": same step.
+- "6 to 8 inches (15 to 20 cm) deep" and "4 to 6 inches (10 to 15 cm) across": step 3.
+- "Soil you dug out": step 4, "fill the hole with the soil you dug out".
+- The New York rule of 150 feet is in the topic's next paragraph, not drawn.
+
+### handwash-station (surv-handwashing, "Hand-washing station", after the jug steps)
+
+- "Jug with an on/off spigot", "Catch bucket", "Towel": "All you need is a jug of clean drinking water with an on/off spigot, soap, towels, and a catch bucket for the used water."
+- "Soap in a sock": step 4, "put a bar of soap in the toe of a tube sock or nylon stocking and tie it to the jug's handle".
+- Not drawn: the soakaway pit (the topic's "Where the dirty water goes" section), the tippy tap, any numbers. The jug stands on a table with its spigot reaching past the table edge and the bucket on the ground beside the table, directly under the stream (the outdoors step's "a bucket below to catch the used water").
+
+## Water pack Task 9: consistency fixes (2026-11-18)
+
+Changes from the cross-pack consistency review (task-9-review.md). All wording moves, shortens or re-points text and figures already in the pack; no new source claims. The review did not re-open sources.
+
+- I1 surv-toilet-no-water, Flush with a bucket step 4: tank water is "last-resort drinking water, to be treated first" with no toilet cleaner in it, matching Water already in your house.
+- I2 surv-water-store, Clean and sanitize: new line that the solution is only for the empty container, never to be drunk, with a pointer to the smaller dose and 30-minute wait in Make water safe.
+- I3 Links L1 to L14 added as listed in the review (labels are the target titles).
+- I4 surv-clean-and-disinfect, Vomit and diarrhea step 5: "in your mixing bucket", so it cannot be read as the toilet bucket.
+- K1 surv-toilet-no-water, Bags in the toilet bowl: bail into "a bucket, and pour it out as you would pee".
+- K2 surv-garbage-and-greywater, dishwater: "(or your septic system)" added.
+- K3 surv-make-water-safe, Which method first: distillation and fuel or chemical water re-worded to the review's text.
+- K5 checked by the reviewer in re-review (both pages opened 2026-11-18): both Regional Water Providers Consortium pages say the valve is "typically located on the top of the water heater"; both are credited. The hanger `used` line is as before, and the topic text is unchanged.
+- M1 no change; reached through L2.
+- M2 toilet doFirst: cover material "unless you will empty it into your septic tank".
+- M3 garbage dishwater: with the power out across town, send as little water down the drains as you can (West Hants, already a source).
+- M4 wells, Springs: latrine, buried waste, pee and wash water at least 200 feet, as in Latrines and cat holes.
+- M5 how-much, Who needs more: Ohio State University Extension 1 quart per small pet; source added with the figure already recorded in Task 3 and Task 4.
+- M6 winter, Drink enough: food or an electrolyte drink, not salt tablets (Dehydration protocol).
+- M7 winter, Frozen pipes: save water from toilet tanks and a well's pressure tank as well.
+- M8 toilet, Wash your hands: sanitizer weak against norovirus; CDC How to Prevent Norovirus added to the topic's sources (as in Washing hands with little water).
+- M9 make-water-safe, Well water and rain: "or collected rain" removed (rain is covered by the next paragraph).
+- M10 home-water-store, bottled water note: before its expiration date or at least once a year, whichever comes first (matches Store water at home); Red Cross "used" line extended.
+- M11 sanitation-kit, gloves: disposable gloves for bagging waste; rubber gloves and eye protection for bleach cleaning.
+- M12 toilet: gallon weight "about 8.3 lb (3.8 kg)".
+- M13 link labels: "Severe vomiting or diarrhea" (make-water-safe), "Carbon monoxide poisoning" (garbage).
+- M14 surv-stomach-illness-in-a-group, Keep the sick person apart: last item now "Keep them apart for as long as the food rule below lasts (Minnesota Department of Health isolates for 72 hours)."; the days are stated only in the summary, doFirst, section 5 and section 8. D32 lists them.
+- M15 no text change; D1 and D2 now name the topics that repeat the boil figure. M16 no text change (D28 and D29 already name both topics).
+- M17 keywords: make-water-safe "tablets" to "purification", "algae" to "chlorine"; latrines "pit latrine" to "outhouse"; toilet "two-bucket toilet" to "bathroom". Checked in the app by tests/test_search.py::test_water_pack_hurried_searches_find_their_topic_in_the_shipped_data.
+- M18 find-water summary: covers treating wild water and rain.
+- N2 surv-garbage-and-greywater, West Hants `used` line: reduce water use immediately when the power goes out.
+- M19 see Task 10 (tests/test_survival_home.py); surv-water-in-the-house also added to the always-visible list.
+
+## Water pack final review fixes (2026-11-18)
+
+### Tables on a phone (final review, Important 1)
+
+Layout only, in src/shell.html and src/survival.js: topic table cells now have a 3.5em minimum width (was 8em), 5 px side padding, word wrapping and 14 px cell text (13 px headers, as before). A table still wider than its box at the phone's width scrolls inside it, shows "Swipe sideways to see more columns" above it, and keeps its first column in place with an opaque background. Tables that fit show neither. tests/test_survival_topic.py::test_shipped_topic_tables_fit_or_scroll_with_cue_and_sticky_first_column_at_360 checks every shipped topic table at 360 x 640, day and night.
+
+At 360 px every table now fits except the two CDC well bleach tables (Wells without power), which scroll with the cue and a sticky "Depth of water" column. Their rows and columns are in CDC's order, unchanged.
+
+One table was reshaped. No value changed: every cell, number, unit, source name and warning is the same text as before, with nothing added and nothing dropped (checked by script: the 15 cells before equal the 15 cells after, and cell [row i][column j] before is cell [row j][column i] after).
+
+surv-clean-and-disinfect, "Which mix for which job": transposed (rows become columns), so it is 3 columns instead of 5.
+
+Before (head, then rows):
+
+| Mix | Bleach | Water | Leave it wet | Source |
+|---|---|---|---|---|
+| Strong mix: door handles, taps, toilet seats and everything a sick person touches; vomit or diarrhea after cleaning it up | 1/3 cup (5 tablespoons, 75 mL) of 5% to 9% bleach | 1 gallon | Surfaces: at least 1 minute. After vomit or diarrhea: 10 minutes if you can, never less than 5 | CDC; Minnesota Department of Health |
+| Food mix: dishes, cutlery, cups, and counters where food is made | 1 tablespoon (15 mL) of 5% to 9% bleach | 1 gallon | Dishes: rinse or soak 1 minute. Counters: wipe on and leave wet. Then air dry completely | CDC; New York State Department of Health |
+
+After (head, then rows):
+
+| Mix | Strong mix: door handles, taps, toilet seats and everything a sick person touches; vomit or diarrhea after cleaning it up | Food mix: dishes, cutlery, cups, and counters where food is made |
+|---|---|---|
+| Bleach | 1/3 cup (5 tablespoons, 75 mL) of 5% to 9% bleach | 1 tablespoon (15 mL) of 5% to 9% bleach |
+| Water | 1 gallon | 1 gallon |
+| Leave it wet | Surfaces: at least 1 minute. After vomit or diarrhea: 10 minutes if you can, never less than 5 | Dishes: rinse or soak 1 minute. Counters: wipe on and leave wet. Then air dry completely |
+| Source | CDC; Minnesota Department of Health | CDC; New York State Department of Health |
+
+The method table in Make water safe ("Which method first") was not reshaped: with the smaller minimum width all four columns, Viruses included, fit at 360 px.
+
+### Wording and order (final review Minors)
+
+Re-ordering and rewording with words and figures already in the topics. No fact, number, step or caution was added, no figure changed and no warning was removed.
+
+- Minor 6 (surv-make-water-safe, Sunlight step 4). Old: "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy. WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud. No source gives a time for New York: there, treat sunlight as unreliable." New step: "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy (WHO). No source gives a time for New York: there, treat sunlight as unreliable." New paragraph after the steps: "WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud." The step now states one set of times; the CDC figures and the New York caution are unchanged.
+- Minor 7 (surv-find-water, roof-rain warning). The same sentences, re-ordered so the instruction comes first: flushing and cleaning; treat before washing hands, dishes or food (Lake Champlain Sea Grant: not safe even for washing); drink only if nothing safer, filtered and boiled or disinfected; boiling does not remove metals; then FEMA, Lake Champlain Sea Grant, the app's use of FEMA's rule, and CDC.
+- Minor 9 ("the app's reading / advice"): handwashing tippy-tap step and stomach-illness and clean-and-disinfect strong-mix lines now say "worked out from CDC" (or "from CDC's sheet and WHO's description"); the BLEACH label says "no source says to mark it"; keeping food away from the sick person says "no source says this"; the well batch step says "CDC does not cover this"; the no-pump well paragraph says "CDC gives no other no-pump steps. Do this:" followed by the same steps. D25 updated to quote the new wording.
+- Minor 10 (surv-water-winter, Purdue plumbing step 6): adds the pointer "To drain the water heater, use the steps in Water already in your house." No new step; the heater steps are the ones already in that topic.
+- Minor 12 (surv-water-winter): the indoor-stove warning now comes before the melting steps, and the blowtorch / open-flame warning before the thawing paragraphs. Wording unchanged.
+- Minor 5 (src/tooldata/water.json `title`). Old ending: "; no source opened says it covers flushing toilets, bathing or laundry, so plan water for those separately." New: ". This does not cover flushing toilets, bathing or laundry: plan that water separately." No figure changed.
+- Minor 4 (checklist quantities): the group total now sits on its own line after the item, led by "For your group:".
+
+Not changed: Minor 8 (EPA's 6% / 8.25% comparison table stays in Make water safe; removing sourced content is the owner's call, D3); Minor 11 (rodent droppings: CDC's page gives "a disinfectant or a 1:10 chlorine solution (1 1/2 cups of household bleach mixed with 1 gallon of water)", which is not the strong mix, so pointing to the strong mix would change the dose; left as "a disinfectant").

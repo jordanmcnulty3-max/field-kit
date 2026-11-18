@@ -1,0 +1,237 @@
+{
+  "id": "surv-latrines",
+  "title": "Latrines and cat holes",
+  "category": "water",
+  "keywords": [
+    "cat hole",
+    "cathole",
+    "latrine",
+    "outhouse",
+    "toilet in the woods",
+    "poop outdoors",
+    "camp toilet",
+    "trench latrine",
+    "pack out",
+    "Leave No Trace"
+  ],
+  "summary": "On the move, dig a cat hole 6 to 8 inches deep at least 200 feet from water, trails and camp; for a group that stays put, dig a pit or trench latrine at least as far from water, downhill and downwind of camp, cover the waste with soil, and close it before it fills.",
+  "where": [
+    "rural",
+    "woods",
+    "coast"
+  ],
+  "sections": [
+    {
+      "h": "Which one",
+      "blocks": [
+        {
+          "list": [
+            "Moving, or a night or two in one place: cat holes (Leave No Trace).",
+            "Staying in one camp longer than a few nights, or with young children: a latrine (Leave No Trace).",
+            "In town: don’t dig latrines. King County public health says they are not right for urban places, and Jefferson County warns that germs spread easily to neighboring properties. Use the bucket toilet."
+          ]
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        }
+      ]
+    },
+    {
+      "h": "Cat holes",
+      "blocks": [
+        {
+          "steps": [
+            "Walk at least 200 feet (60 m) from water, trails and camp: about 70 steps (US Forest Service; Leave No Trace says 70 to 80 adult paces).",
+            "Pick a spot where people are unlikely to walk or camp (Leave No Trace).",
+            "With a small trowel, dig a hole 6 to 8 inches (15 to 20 cm) deep and 4 to 6 inches (10 to 15 cm) across (Leave No Trace, US Forest Service, National Park Service).",
+            "When finished, fill the hole with the soil you dug out and cover it with leaves and debris (National Park Service).",
+            "With a group, or in one place for more than a night, spread the cat holes over a wide area. Don’t go to the same place twice (Leave No Trace, National Park Service)."
+          ]
+        },
+        {
+          "fig": "latrine",
+          "cap": "Cat hole: at least 200 feet (60 m) from water, trails and camp (about 70 steps); 6 to 8 inches (15 to 20 cm) deep and 4 to 6 inches (10 to 15 cm) across. Fill it with the soil you dug out."
+        },
+        {
+          "p": "On New York State land in normal times, the rule is a hole 6 to 8 inches deep at least 150 feet from water or campsites, covered with leaves and soil; use a pit privy where one is provided (NYS DEC). DEC notes that Leave No Trace recommends 200 feet."
+        }
+      ]
+    },
+    {
+      "h": "Toilet paper",
+      "blocks": [
+        {
+          "list": [
+            "Pack used toilet paper out in a sealed bag: a zipper bag inside another zipper bag (National Park Service, US Forest Service). Leave No Trace also allows burying it deep in the cat hole.",
+            "Always pack out wipes, even ones sold as biodegradable (Leave No Trace).",
+            "Don’t burn toilet paper: it can start a wildfire (Leave No Trace).",
+            "Unscented paper is better (Leave No Trace)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Pee",
+      "blocks": [
+        {
+          "p": "Pee at least 200 feet (60 m) from trails, campsites and water (Leave No Trace). Pee on rocks, pine needles or gravel: animals come for the salt and dig up plants and soil. Pouring some water over it helps (Leave No Trace)."
+        }
+      ]
+    },
+    {
+      "h": "Packing out",
+      "blocks": [
+        {
+          "p": "Some places require you to carry all solid waste out; land managers can tell you the rules for an area in normal times (Leave No Trace). Seal it tight in zipper bags or a plastic container (National Park Service), or use a commercial pack-out bag (Leave No Trace)."
+        }
+      ]
+    },
+    {
+      "h": "Latrine for a group",
+      "blocks": [
+        {
+          "p": "A latrine holds a lot of waste in one spot and it breaks down slowly, so where you put it matters most (Leave No Trace)."
+        },
+        {
+          "table": {
+            "head": [
+              "Keep the latrine",
+              "Distance"
+            ],
+            "rows": [
+              [
+                "From streams, lakes, ponds, springs and wells",
+                "At least 200 feet (60 m). This app uses the cat-hole distance (Leave No Trace, US Forest Service). King County, Oregon State Extension and the Sphere handbook give 100 feet (30 m)."
+              ],
+              [
+                "From tents, homes and the kitchen",
+                "At least 100 feet (30 m) (King County)."
+              ],
+              [
+                "Above the groundwater",
+                "Bottom of the pit at least 5 feet (1.5 m) above it (Sphere handbook). King County gives 1 foot (30 cm)."
+              ]
+            ]
+          }
+        },
+        {
+          "list": [
+            "Put it downhill from wells and springs (King County), never uphill or upwind of camp (Sphere handbook).",
+            "Where the groundwater is near the surface, a pit latrine is not suitable (CDC). If water seeps into the hole as you dig, it is too near: fill the hole and pick higher ground.",
+            "In limestone or broken (fissured) rock, go farther from water than the table says (Sphere handbook).",
+            "Keep it away from where food is prepared and eaten (King County)."
+          ]
+        },
+        {
+          "steps": [
+            "Dig the hole at least 3 feet (90 cm) deep (King County).",
+            "After each use, throw in soil, mulch or ash (King County). A handful of soil after each use speeds breakdown and cuts smell (Leave No Trace).",
+            "Cover the latrine between uses with plywood or something similar, and keep covers and doors closed to keep out insects and animals (King County).",
+            "Put a place to wash hands with soap and water right next to it (King County, Sphere handbook, CDC).",
+            "Watch small children when they use it (King County)."
+          ]
+        },
+        {
+          "p": "A trench latrine is quick to dig: a narrow trench with a screen for privacy. Cover the waste with soil at least once every day, and dig a small ditch to steer rain water around it. It doesn’t last long, and rain can flood it (CDC). Use the same distances as the table above."
+        }
+      ]
+    },
+    {
+      "h": "Close a latrine",
+      "blocks": [
+        {
+          "steps": [
+            "Close it when the waste is about 20 inches (0.5 m) from the top (Sphere handbook leaves 0.5 m for backfill; the US Army closes at 1 foot).",
+            "Fill it to ground level with soil, packing it down as you go (US Army field sanitation; CDC: cover with soil when near full).",
+            "Mound more soil on top to keep flies out (US Army field sanitation).",
+            "Mark the spot so nobody digs there (US Army field sanitation)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Winter",
+      "blocks": [
+        {
+          "list": [
+            "Frozen ground and snow make cat holes hard to dig (Adirondack Mountain Club).",
+            "Snow is not a place to leave waste. Pack out solid waste and toilet paper (Leave No Trace, Adirondack Mountain Club).",
+            "If you can’t pack it out, bury it in a snow cat hole at least 200 feet (60 m) from trails and water (Leave No Trace). Check your map to see where the water is (Leave No Trace)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Afterward",
+      "blocks": [
+        {
+          "p": "Wash your hands with soap and water, or use hand sanitizer when there is none (Leave No Trace)."
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        },
+        {
+          "link": "s:surv-garbage-and-greywater",
+          "label": "Garbage and dirty water"
+        },
+        {
+          "link": "p:vomiting-diarrhea",
+          "label": "Severe vomiting or diarrhea"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Leave No Trace Center for Outdoor Ethics, Principle 3: Dispose of Waste Properly",
+      "used": "Cat holes 6 to 8 inches deep, 4 to 6 inches across, at least 200 feet (about 70 to 80 adult paces) from water, trails and camp; inconspicuous site; disperse, don’t reuse; latrines for young children or more than a few nights; location especially important; handful of soil after each use; toilet paper buried deep or packed out, unscented, wipes packed out, don’t burn; urine 200 feet from trails, campsites and water, on rocks, pine needles or gravel, dilute; pack out where required, commercial pack-out systems; hand sanitizer"
+    },
+    {
+      "name": "Leave No Trace, Winter Recreation",
+      "used": "Snow seems easy but isn’t the place for waste; pack out solid human waste; if unable, a snow cat hole 200 feet from trails and water"
+    },
+    {
+      "name": "US Forest Service, Going in the Forest",
+      "used": "Hole 4 to 6 inches wide and 6 to 8 inches deep; at least 200 feet (about 70 steps) from water, trails, parking areas and campsites; pack toilet paper out in a double zipper bag"
+    },
+    {
+      "name": "National Park Service, Blue Ridge Parkway, Much Ado About Number Two (updated May 22, 2020)",
+      "used": "6 to 8 inches deep, 4 to 6 inches across; 200 feet from water and trails (about 80 adult paces); disperse, don’t go to the same place twice; refill with the original dirt and disguise; pack out toilet paper; zipper bags or plastic containers sealed tight to pack out waste"
+    },
+    {
+      "name": "NYS DEC, State Land Camping Rules",
+      "used": "Use pit privies where provided; otherwise a hole 6 to 8 inches deep at least 150 feet from water or campsites, covered with leaves and soil; DEC notes Leave No Trace recommends 200 feet"
+    },
+    {
+      "name": "Adirondack Mountain Club, Winter Leave No Trace Tips (2018)",
+      "used": "Frozen ground and snow make cat holes hard; pack out all solid human waste and toilet paper"
+    },
+    {
+      "name": "Public Health – Seattle & King County, How to create an emergency toilet",
+      "used": "Latrines not appropriate in urban locations; at least 100 feet from surface water and at least 100 feet downhill or away from any well, spring, home or campsite; away from food preparation and eating areas; hole at least 3 feet deep, bottom at least 1 foot above hard pan or water table; dirt, lime, mulch or ash after each use; cover between uses; keep covers closed; handwashing next to the toilet; supervise small children"
+    },
+    {
+      "name": "Sphere Handbook, 2018 edition (or later), Water Supply, Sanitation and Hygiene Promotion chapter (copy hosted by Universitas Sebelas Maret)",
+      "used": "At least 30 m from water sources and pit bottoms at least 1.5 m above the groundwater table without soil tests; not uphill or upwind of settlements; handwashing at toilets; 0.5 m at the top of the pit for backfill; increase the distances for fissured rock and limestone"
+    },
+    {
+      "name": "CDC, Potential Sanitation Solutions During an Emergency Response (December 2021)",
+      "used": "Trench latrines: narrow trenches with a temporary privacy structure, waste covered daily with soil, drainage to divert surface water, short life span, flooding in rain; pit latrines unsuitable where the water table is high; waste covered with soil when near full; handwashing stations at every sanitation facility"
+    },
+    {
+      "name": "Oregon State University Extension Service, Survival Basics: Sanitation and Waste Management (EM 9334, October 2021)",
+      "used": "Don’t bury waste within 100 feet of a water source; latrines for rural areas"
+    },
+    {
+      "name": "Jefferson County Department of Emergency Management with Clallam County Sheriff’s Emergency Management, Twin-Bucket Emergency Toilet (updated March 2015)",
+      "used": "Do not dig a pit privy in town: disease organisms contaminate neighboring properties"
+    },
+    {
+      "name": "NY Division of Military and Naval Affairs, Field Sanitation Team course, Lesson 6: Waste Disposal in the Field (US Army field sanitation; second source only)",
+      "used": "Close a latrine pit when filled to within one foot of the top; fill to ground level packing the dirt; mound with soil to keep flies in or out; post a sign"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

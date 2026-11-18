@@ -614,3 +614,27 @@ def test_update_banner_does_not_cover_search_and_returns_when_search_closes(page
     page.wait_for_selector('#searchPane', state='hidden')
     assert bar.is_visible()
     assert page.locator('#updReload').is_enabled()
+
+
+WATER_PACK_SEARCHES = [
+    ('water purification', 's:surv-make-water-safe'),
+    ('outhouse', 's:surv-latrines'),
+    ('bathroom', 's:surv-toilet-no-water'),
+    ('bleach', 's:surv-make-water-safe'),
+    ('bleach', 's:surv-clean-and-disinfect'),
+    ('boil', 's:surv-make-water-safe'),
+    ('frozen pipes', 's:surv-water-winter'),
+    ('wash hands', 's:surv-handwashing'),
+    ('diarrhea', 'p:vomiting-diarrhea'),
+    ('diarrhea', 's:surv-stomach-illness-in-a-group'),
+]
+
+
+@pytest.mark.parametrize('text,expected', WATER_PACK_SEARCHES)
+def test_water_pack_hurried_searches_find_their_topic_in_the_shipped_data(page, app_url, text, expected):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    type_q(page, text)
+    page.wait_for_selector('#searchBody .sr-item')
+    assert expected in keys(page), f'{text!r} did not list {expected}: {keys(page)}'

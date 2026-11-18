@@ -48,7 +48,7 @@ def sample_units(page, n):
 
 def test_registry_lists_sos_and_home_shows_it_under_tools(page, app_url):
     boot(page, app_url)
-    assert page.evaluate('FK.survival.tools().map(t => [t.name, t.label])') == [['sos', 'SOS light'], ['daylight', 'Daylight and moon']]
+    assert page.evaluate('FK.survival.tools().map(t => [t.name, t.label])') == [['sos', 'SOS light'], ['daylight', 'Daylight and moon'], ['water', 'Water planner']]
     assert page.locator('#survTools h2').inner_text() == 'Tools'
     page.locator('#survTools button[data-key="u:sos"]').click()
     wait_hash(page, SOS)

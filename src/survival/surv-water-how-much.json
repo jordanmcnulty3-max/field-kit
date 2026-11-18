@@ -1,0 +1,188 @@
+{
+  "id": "surv-water-how-much",
+  "title": "How much water you need",
+  "category": "water",
+  "keywords": [
+    "gallon",
+    "how much water",
+    "water per person",
+    "two weeks",
+    "ration",
+    "drinking water",
+    "water weight",
+    "store water"
+  ],
+  "summary": "Store at least 1 gallon (3.8 L) per person per day for 2 weeks, more for heat, illness, children, pregnancy and nursing, and never ration drinking water.",
+  "sections": [
+    {
+      "h": "One gallon a day",
+      "blocks": [
+        {
+          "p": "Store at least 1 gallon (3.8 L) of water per person per day."
+        },
+        {
+          "list": [
+            "CDC: the gallon is for drinking, cooking, brushing teeth and other uses.",
+            "Ready.gov (FEMA): for drinking and sanitation.",
+            "FEMA, the Red Cross and USDA: for drinking, plus food preparation and hygiene. An older FEMA and Red Cross guide splits it as half a gallon for drinking and half a gallon for cooking and sanitation."
+          ]
+        },
+        {
+          "p": "Of that gallon, a normally active person needs about three quarters of a gallon (2.8 L) of fluid a day, from water and other drinks (Ready.gov). FEMA’s guide says to drink at least 2 quarts (1.9 L) a day."
+        },
+        {
+          "warn": "No agency says the gallon covers flushing toilets, bathing or laundry. Plan that water separately, and use water that is not fit to drink for it where you can."
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        },
+        {
+          "link": "s:surv-water-in-the-house",
+          "label": "Water already in your house"
+        }
+      ]
+    },
+    {
+      "h": "How long to plan for",
+      "blocks": [
+        {
+          "list": [
+            "At home: at least 2 weeks. CDC: 3 days, and a 2-week supply if possible. The Red Cross and FEMA: a 2-week supply at home.",
+            "To take with you if you leave: 3 days (Red Cross)."
+          ]
+        },
+        {
+          "p": "For 4 people for 2 weeks, that is at least 56 gallons (212 L). The planner works out the total for your group and the days you set."
+        },
+        {
+          "link": "u:water",
+          "label": "Water planner"
+        }
+      ]
+    },
+    {
+      "h": "Who needs more",
+      "blocks": [
+        {
+          "list": [
+            "Children, nursing mothers and sick people (Ready.gov).",
+            "Pregnant women (CDC).",
+            "Anyone with a medical emergency (Ready.gov).",
+            "Pets (CDC).",
+            "Everyone in hot weather: in very hot temperatures, water needs can double (Ready.gov, FEMA). The planner adds 1 gallon per person per day for very hot weather."
+          ]
+        },
+        {
+          "p": "No agency gives an amount for any of these except hot weather; Ohio State University Extension says to store 1 quart per small pet. Store more than the minimum if anyone in the group is on this list."
+        }
+      ]
+    },
+    {
+      "h": "Don’t ration drinking water",
+      "blocks": [
+        {
+          "p": "Ready.gov: “Never ration drinking water unless ordered to do so by authorities. Drink the amount you need today and try to find more for tomorrow.”"
+        },
+        {
+          "list": [
+            "Drink what you need today, and start looking for more water while you still have some.",
+            "Lower how much your body needs: reduce activity and stay cool (Ready.gov).",
+            "Save drinking water for drinking and cooking. Use pool or spa water for washing and cleaning, never for drinking (CDC)."
+          ]
+        },
+        {
+          "p": "Signs that someone is not drinking enough, and what to do, are in the Dehydration protocol."
+        },
+        {
+          "link": "p:dehydration",
+          "label": "Dehydration"
+        }
+      ]
+    },
+    {
+      "h": "Weight and space",
+      "blocks": [
+        {
+          "p": "Water is heavy. A US gallon weighs 8.33 lb, and a litre weighs 1 kg (USGS)."
+        },
+        {
+          "table": {
+            "head": [
+              "Water",
+              "Weight"
+            ],
+            "rows": [
+              [
+                "1 gallon (3.8 L)",
+                "8.3 lb (3.8 kg)"
+              ],
+              [
+                "5 gallons (19 L)",
+                "about 42 lb (19 kg)"
+              ],
+              [
+                "14 gallons (53 L): 1 person for 2 weeks",
+                "about 117 lb (53 kg)"
+              ],
+              [
+                "56 gallons (212 L): 4 people for 2 weeks",
+                "about 467 lb (212 kg)"
+              ]
+            ]
+          }
+        },
+        {
+          "list": [
+            "Fill jugs only as full as the person who has to move them can carry. Round jugs of 3 to 6 gallons (11 to 23 L) work best, and they should be movable in case you have to take them with you (University of Alaska Fairbanks Extension).",
+            "Keep the 3-day supply for leaving in containers that are easy to carry (Red Cross).",
+            "Store the rest where it is cool and dark."
+          ]
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, How to Create an Emergency Water Supply (reviewed June 27, 2025)",
+      "used": "At least 1 gallon per person per day for drinking, cooking, brushing teeth and other uses, for 3 days; try to store a 2-week supply if possible; store more for pregnant women, sick people, pets or a hot climate"
+    },
+    {
+      "name": "Ready.gov (FEMA), Water",
+      "used": "1 gallon per person per day for drinking and sanitation; a normally active person needs about three quarters of a gallon of fluid daily; children, nursing mothers, sick people and a medical emergency need more; very hot temperatures can double water needs; the rationing rule quoted; reduce activity and stay cool"
+    },
+    {
+      "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency",
+      "used": "At least 1 gallon per person per day including food preparation and hygiene; at least a two-week supply; drink at least two quarts a day, hot environments can double it; never ration water, drink what you need today"
+    },
+    {
+      "name": "American Red Cross, Survival Kit Supplies",
+      "used": "One gallon per person per day; 3-day supply for evacuation, 2-week supply for home; an easy-to-carry kit"
+    },
+    {
+      "name": "National Disaster Education Coalition (American Red Cross, FEMA and others), Talking About Disaster: Disaster Supplies Kit",
+      "used": "Half a gallon a day for drinking and half a gallon for cooking and sanitation"
+    },
+    {
+      "name": "CDC, How to Find Clean Water in an Emergency (reviewed June 25, 2025)",
+      "used": "Swimming pool and spa water can be used for personal hygiene, cleaning and related uses, but not for drinking"
+    },
+    {
+      "name": "USGS Water Science School, Facts About Water",
+      "used": "A gallon of water weighs 8.33 pounds; 1 kilogram per liter; 1 gallon is 3.7854 liters (weights in the table are worked from these)"
+    },
+    {
+      "name": "University of Alaska Fairbanks Cooperative Extension, Emergency Water Supply (SAL-00006, 2021)",
+      "used": "Containers should be movable; round 3 to 6 gallon jugs work best; allow for the weight of water when deciding how full to fill jugs"
+    },
+    {
+      "name": "Ohio State University Extension, Food Preservation: Preserving Water for Emergency Use, HYG-5354 (2017)",
+      "used": "store 1 quart per small pet"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

@@ -1,0 +1,205 @@
+{
+  "id": "surv-water-store",
+  "title": "Store water at home",
+  "category": "water",
+  "keywords": [
+    "store water",
+    "water storage",
+    "containers",
+    "jugs",
+    "bottled water",
+    "sanitize",
+    "bleach",
+    "rotate",
+    "freeze"
+  ],
+  "summary": "Store water in food-grade or clean soda bottles, sanitize them with bleach first, label them with the date, keep them cool and dark, and replace the water every 6 months.",
+  "sections": [
+    {
+      "h": "Bottled water first",
+      "blocks": [
+        {
+          "list": [
+            "Unopened, commercially bottled water is the safest and most reliable water in an emergency (CDC).",
+            "Keep it sealed in its original container in a cool, dark place (Ready.gov).",
+            "In normal times, replace it before its expiration date (CDC) or at least once a year (Red Cross), whichever comes first.",
+            "Once a bottle is open, use it. Don’t store it again (Red Cross)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Containers",
+      "blocks": [
+        {
+          "p": "Best: food-grade water storage containers (CDC, Ready.gov). Clean plastic soft drink bottles also work (FEMA, Red Cross)."
+        },
+        {
+          "p": "If you can’t get food-grade containers, choose one that (CDC):"
+        },
+        {
+          "list": [
+            "Has a top that closes tightly.",
+            "Is durable and unbreakable. Not glass.",
+            "Has a narrow neck or opening if possible, so you can pour from it.",
+            "Has no paper in the lid (Ohio State University Extension)."
+          ]
+        },
+        {
+          "warn": "Never use a container that held a toxic chemical, such as bleach, pesticides, other chemicals or oil. Tiny amounts can stay in the container (CDC, Washington State Department of Health, Ohio State University Extension)."
+        },
+        {
+          "list": [
+            "Don’t use milk jugs or cartons: they don’t seal well and they break down (Red Cross).",
+            "Don’t use glass: it breaks (CDC, Red Cross)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Clean and sanitize",
+      "blocks": [
+        {
+          "p": "Do this before you fill any container (CDC)."
+        },
+        {
+          "steps": [
+            "Wash the container and cap with soap and water. Rinse until no soap is left.",
+            "Make the sanitizing solution: 1 teaspoon (5 mL) of plain, unscented liquid household chlorine bleach in 1 quart (4 cups, 0.95 L) of water. CDC gives this for bleach of 5% to 9% sodium hypochlorite, the usual strength in the US. Check the label.",
+            "Pour the solution into the container, cap it tightly and shake it well, so the solution touches every inside surface.",
+            "Wait at least 30 seconds, then pour the solution out.",
+            "Let the empty container air-dry before you fill it."
+          ]
+        },
+        {
+          "p": "This solution is only for the empty container: pour it all out, and never drink it. To make drinking water safe, use the much smaller dose and the 30-minute wait in Make water safe."
+        },
+        {
+          "warn": "Never mix bleach with ammonia or any other cleaner (CDC). Indoors, open windows and doors, and try not to breathe the fumes."
+        }
+      ]
+    },
+    {
+      "h": "Fill, cap and label",
+      "blocks": [
+        {
+          "steps": [
+            "Water from a public supply treated with chlorine: fill straight from the tap, unless there is a boil-water notice. You don’t need to add anything (Ready.gov, Red Cross).",
+            "Water from a well or any supply not treated with chlorine: make it safe before you store it, as in Make water safe. Some water has contaminants that bleach cannot fix; if you have a private well, ask your health department in normal times how to store its water (Red Cross).",
+            "Fill the container to the top, unless it may freeze (see Freezing).",
+            "Cap it tightly. Don’t touch the inside of the cap with your fingers (Ready.gov).",
+            "Label it “Drinking water” with the date you filled it (CDC). A grease pencil or crayon on the lid works (University of Alaska Fairbanks Extension)."
+          ]
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        },
+        {
+          "link": "s:surv-wells-without-power",
+          "label": "Wells without power"
+        }
+      ]
+    },
+    {
+      "h": "Where to keep it",
+      "blocks": [
+        {
+          "list": [
+            "Somewhere cool: 50°F to 70°F (10°C to 21°C) (CDC).",
+            "Out of direct sunlight, in a dark place (CDC, Ready.gov).",
+            "Away from gasoline, pesticides and household cleaners (CDC, University of Alaska Fairbanks Extension).",
+            "Safe from flooding and freezing (Washington State Department of Health)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Freezing",
+      "blocks": [
+        {
+          "list": [
+            "If you freeze water on purpose, leave 2 to 3 inches (5 to 8 cm) of air at the top so the container does not break as the water expands (Ohio State University Extension).",
+            "Use plastic: some glass breaks however much space you leave (Ohio State University Extension).",
+            "Jugs of water in a freezer that is not full help keep the food frozen longer when the power goes off (Ohio State University Extension)."
+          ]
+        },
+        {
+          "link": "s:surv-water-winter",
+          "label": "Water in winter"
+        }
+      ]
+    },
+    {
+      "h": "Replace and use",
+      "blocks": [
+        {
+          "list": [
+            "Replace water you filled yourself every 6 months (CDC, Ready.gov, FEMA).",
+            "In an emergency, use bottled water for drinking, cooking and brushing teeth (CDC).",
+            "Keep water you have boiled or treated in clean, sanitized containers with tight covers (CDC)."
+          ]
+        },
+        {
+          "link": "c:home-water-store",
+          "label": "Home water store checklist"
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        },
+        {
+          "link": "u:water",
+          "label": "Water planner"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, How to Create an Emergency Water Supply (reviewed June 27, 2025)",
+      "used": "Unopened commercially bottled water safest; expiration date; food-grade containers, or a tight top, durable unbreakable not glass, narrow neck; never containers that held toxic chemicals such as bleach or pesticides; wash with soap, rinse; 1 teaspoon unscented liquid household chlorine bleach in 1 quart (4 cups) of water, 5% to 9% sodium hypochlorite; cover, shake, touch all inside surfaces; wait at least 30 seconds, pour out; air-dry; label “drinking water” with the date; 50°F to 70°F; out of direct sunlight; away from gasoline or pesticides; replace every 6 months; use bottled water for drinking, cooking, brushing teeth"
+    },
+    {
+      "name": "CDC, How to Safely Clean and Sanitize with Bleach (reviewed August 26, 2026)",
+      "used": "Never mix bleach with ammonia or any other cleaner; open windows and doors indoors, try not to breathe fumes; 5% to 9% is the most common concentration in the US"
+    },
+    {
+      "name": "CDC, How to Make Water Safe in an Emergency (reviewed September 19, 2024)",
+      "used": "Store boiled or treated water in clean, sanitized containers with tight covers"
+    },
+    {
+      "name": "Ready.gov (FEMA), Water; Ready.gov, Storing Water in Plastic Soda Bottles (last updated 09/18/2011)",
+      "used": "Commercially bottled water sealed in its original container in a cool, dark place; food-grade containers; chlorinated utility tap water needs nothing added; well or unchlorinated water needs bleach; fill to the top; cap tightly without touching the inside of the cap; date the container; replace home-filled water every six months"
+    },
+    {
+      "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency",
+      "used": "Plastic containers such as soft drink bottles are best; never a container that held toxic substances; seal, label, store in a cool, dark place; rotate every six months"
+    },
+    {
+      "name": "American Red Cross, Disaster Supplies Kit (University of Missouri Extension EMW1012, reviewed July 2025)",
+      "used": "Food-grade containers with tight lids; milk containers do not seal well; avoid milk cartons and glass bottles; utility-treated water need not be treated before storing; some sources have contaminants bleach cannot neutralize, and only the local public health agency should advise on storing and treating them; keep bottled water sealed, replace at least once a year, once opened use it and do not store it"
+    },
+    {
+      "name": "National Disaster Education Coalition (American Red Cross, FEMA and others), Talking About Disaster: Disaster Supplies Kit",
+      "used": "Avoid containers that will decompose or break, such as milk cartons or glass bottles; soft drink bottles; replace every six months"
+    },
+    {
+      "name": "Washington State Department of Health, Treating Drinking Water for Emergency Use (DOH 331-115, July 2022)",
+      "used": "Never reuse a container that held pesticides, chemicals or oil; seal and label with the date; store safe from flooding and freezing"
+    },
+    {
+      "name": "Ohio State University Extension, Preserving Water for Emergency Use (HYG-5354, 2017)",
+      "used": "Never a container that held toxic substances, tiny amounts remain; lids without paper; leave 2 to 3 inches of air space before freezing; plastic preferred, some glass breaks; frozen water helps keep food frozen in an outage"
+    },
+    {
+      "name": "University of Alaska Fairbanks Cooperative Extension, Emergency Water Supply (SAL-00006, 2021)",
+      "used": "Mark the fill date on the lid with a red crayon or grease pencil; store away from household cleaners"
+    },
+    {
+      "name": "FDA, Guidelines for Determining Metric Equivalents of Household Measures; USGS, Facts About Water",
+      "used": "1 teaspoon means 5 mL (FDA); 1 gallon = 4 quarts = 3.7854 liters, so 1 quart is 0.95 L (USGS)"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

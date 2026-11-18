@@ -63,16 +63,18 @@ def page(browser):
     assert errors == [], 'browser errors:\n' + '\n'.join(errors)
 
 
-def inject_data(page, protocols=None, topics=None, checklists=None, only=False):
+def inject_data(page, protocols=None, topics=None, checklists=None, tooldata=None, only=False):
     """FK_DATA is assigned by an inline script after init scripts run, so trap the assignment and
     add the fixtures to each kind passed (None leaves that kind untouched). A fixture with the same id
     as a shipped item replaces it. only=True drops the shipped items of each kind passed, so the page
-    sees the fixtures alone (for tests whose expectations depend on exactly which items exist)."""
+    sees the fixtures alone (for tests whose expectations depend on exactly which items exist).
+    tooldata is a dict keyed by id (FK_DATA.tooldata is an object, not an array): its entries are merged
+    into the shipped ones, or replace them all with only=True."""
     extra = {'protocols': protocols, 'topics': topics, 'checklists': checklists}
     extra = {k: v for k, v in extra.items() if v is not None}
     page.add_init_script(f"""
       (() => {{
-        const extra = {json.dumps(extra)}, ONLY = {json.dumps(bool(only))};
+        const extra = {json.dumps(extra)}, extraTool = {json.dumps(tooldata)}, ONLY = {json.dumps(bool(only))};
         let val;
         Object.defineProperty(window, 'FK_DATA', {{
           configurable: true,
@@ -82,6 +84,7 @@ def inject_data(page, protocols=None, topics=None, checklists=None, only=False):
               const add = extra[kind], ids = new Set(add.map(x => x && x.id));
               v[kind] = (ONLY ? [] : (v[kind] || []).filter(x => !ids.has(x.id))).concat(add);
             }}
+            if (extraTool) v.tooldata = Object.assign(ONLY ? {{}} : (v.tooldata || {{}}), extraTool);
             val = v;
           }}
         }});

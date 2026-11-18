@@ -115,15 +115,17 @@ medic, nurse, paramedic or doctor, these are the ones to show them.
   mentioned with its lower-tier source. [24, 35]
 - **Diagrams:** eight are in. The recovery-position drawing was removed because it did not read clearly.
 
-## D. v7 Survival content (Tasks 13 to 16)
+## D. Survival content (v7 Tasks 13 to 16; the water and sanitation pack from D15)
 
 Source disagreements found while checking the Survival topics. Each says what the app does today.
 
 1. **How long to boil water.** EPA and CDC: a rolling boil for 1 minute (3 minutes higher up). NYS DEC's state
    land camping rules and the Army survival manuals (ATP 3-50.21, FM 21-76-1) say 5 minutes. Today: 1 minute,
-   following EPA and CDC. Say if the group should boil 5 minutes.
+   following EPA and CDC. Say if the group should boil 5 minutes. (To change it: surv-make-water-safe, surv-wells-without-power
+   and the protocol p:vomiting-diarrhea.)
 2. **Altitude for the 3-minute boil.** EPA: above 5,000 ft. CDC: above 6,500 ft. Army ATP 3-50.21: above 8,000 ft.
-   Today: 5,000 ft (most cautious; several Adirondack High Peaks are above it).
+   Today: 5,000 ft (most cautious; several Adirondack High Peaks are above it). (To change it: surv-make-water-safe,
+   surv-wells-without-power and p:vomiting-diarrhea.)
 3. **Bleach dose for 8.25% bleach.** EPA: 6 drops per gallon. CDC: 8 drops per gallon for any 5% to 9% bleach.
    Today: 8 drops per gallon for both 6% and 8.25% (the larger dose).
 4. **Rainwater.** Army ATP 3-50.21: fresh rain caught straight into clean containers needs no treatment. CDC:
@@ -178,3 +180,169 @@ Source disagreements found while checking the Survival topics. Each says what th
    cautious sources are used. The square knot is for bandages and bundles only, and the Knots topic says it does
    not teach knots for climbing, rappelling or holding a person's weight. Say if the group wants a life-safety
    knot section; it would need its own sourced pack (and verified diagrams).
+15. **How many days of water to store (water planner) — Water pack Task 3.** CDC: 3 days, and a 2-week
+   supply if possible. Red Cross: 2 weeks at home, 3 days for evacuation. FEMA, Red Cross and USDA (Food and Water
+   in an Emergency): at least 2 weeks. NYS DHSES: be prepared to make it on your own for at least 10 days
+   (its kit list says supplies to last up to 10 days). NYS DOH leaflet (2014): 3 days.
+   Ready.gov: several days. Today: the planner's default is 14 days (the longest target; all agree on 1 gallon per
+   person per day). Say if the group wants a longer default for a long grid-down period; no source opened gives one.
+16. **Extra water in very hot weather (water planner) — Water pack Task 3.** Ready.gov Water: a normally active
+   person needs about three quarters of a gallon of fluid a day, and "in very hot temperatures, water needs can
+   double". FEMA, Red Cross and USDA (Food and Water in an Emergency): at least two quarts of drinking water a day,
+   and hot environments can double that amount, so FEMA's extra is two quarts (half a gallon). Ready.gov is the
+   ambiguous one: it does not say which amount doubles, so its extra could be three quarters of a gallon (its fluid
+   figure) or a whole gallon (the stored gallon). Today: the planner adds 1 gallon per person per day when "Very hot
+   weather" is ticked (the largest reading). Say if the group wants the smaller figure. No source opened gives an amount for children, nursing or
+   pregnant women or sick people, and CDC, FEMA and Ready.gov give none for pets; Ohio State University Extension
+   (HYG-5354) says to store 1 quart per small pet, which the planner quotes in its note but does not add, because
+   it applies extras per person.
+17. **Toilet tank water (surv-water-in-the-house) — Water pack Task 4.** CDC and FEMA (2017 fact sheet): the toilet
+   tank (not the bowl) is a usable source if the water is clear and has no toilet cleaner in it; FEMA, the Red
+   Cross and USDA call it a last resort. An unattributed copy of the old Ready.gov "Managing Water" text lists
+   "water from the toilet bowl or flush tank" as unsafe. Today: the topic allows the tank as a last resort and says
+   to treat it before drinking (more cautious than CDC). Say if the group wants it ruled out, or allowed untreated.
+   Fix round 1: the Regional Water Providers Consortium (Emergency Water Sources) also lists "water from your toilet
+   bowl or tank" under "Do Not Drink", starred as a possible sanitation source.
+18. **Bleach for stored well water (surv-water-store) — Water pack Task 4.** Ready.gov (Storing Water in Plastic Soda
+   Bottles): add two drops of bleach to well or unchlorinated water, without saying how much water (a soda bottle of
+   unstated size). Washington State DOH: one or two drops per gallon to keep stored water fresh. The v7 dose (EPA,
+   CDC) is 8 drops of 5% to 9% bleach per gallon. Today: the topic sends well water to Make water safe for the full
+   v7 dose before storing. Say if the group wants a lower "storage" dose for water already known to be safe.
+   Fix round 1: the National Disaster Education Coalition (Red Cross, FEMA and others) gives a different dose again,
+   16 drops per gallon of 5.25% bleach, for water of questionable purity. The Red Cross (Disaster Supplies Kit, via
+   University of Missouri Extension) says some sources have contaminants bleach cannot neutralize and only the
+   local public health agency should advise on storing and treating them; the topic now says "make it safe" (not
+   "with bleach") and tells private-well owners to ask their health department in normal times.
+19. **Waterbed water (surv-water-in-the-house) — Water pack Task 4.** FEMA (2017 fact sheet): waterbeds are a source
+   not to use (fungicides in the water, chemicals in the vinyl). Louisiana's emergency office: not for drinking, but
+   safe for hand washing and laundry. Today: "Don't use it" (FEMA). Say if the group wants to allow it for laundry.
+   Fix round 1: the Regional Water Providers Consortium (Emergency Water Sources) also lists radiators and water beds
+   under "Do Not Drink"; it stars water beds (and toilet water) as possible sanitation sources.
+20. **Containers and bottled water (surv-water-store) — Water pack Task 4.** Glass: CDC says not glass; FEMA, Red Cross
+   and USDA, Ohio State and Washington State DOH allow glass. Today: no glass (CDC; also Red Cross: glass breaks).
+   Bottled water: CDC says observe the expiration date; the Red Cross says replace it at least once a year. Today:
+   whichever comes first. Sanitizing: CDC pours the bleach solution out and lets the container air-dry; Ready.gov
+   rinses it out with clean water. Today: CDC's steps (no rinse). Say if any of these should change.
+21. **Gas water heater before draining: off or pilot (surv-water-in-the-house) — Water pack Task 4 fix round 1.**
+   FEMA, the Red Cross and USDA (Food and Water in an Emergency): be sure the electricity or gas is off. The Regional
+   Water Providers Consortium water heater hanger: turn the gas knob "to the pilot setting — do not turn it
+   completely off". Today: "off" (FEMA), and relight by the heater's or gas company's instructions. Say if the group
+   wants "pilot" instead, which avoids relighting but leaves a flame under a tank being drained.
+22. **Rainwater for drinking (surv-find-water, surv-make-water-safe) — Water pack Task 5, revised in fix round 1.**
+   FEMA (Where can I find clean drinking water after a disaster?): do not drink collected rainwater. Lake Champlain
+   Sea Grant (2026): harvested rainwater is unsafe for drinking, cooking or washing. CDC (Collecting Rainwater): not
+   necessarily safe to drink without first removing germs and chemicals. CDC (Find Clean Water) and FEMA with the Red
+   Cross and USDA (Food and Water in an Emergency) list rainwater among sources to treat. Virginia Cooperative
+   Extension: water from wood, asphalt and tar shingle roofs may only suit irrigation. Today: rain caught directly on
+   a clean tarp or in a clean container is treated like any wild water (v7, D4); rain off a roof is for flushing
+   toilets and cleaning, is treated before washing hands, dishes or food, and is drunk only if nothing safer is
+   available, filtered and then boiled or disinfected. (The FEMA Q&A does not say "roof"; the app applies it to roof
+   run-off.) Say if the group wants roof rainwater ruled out for drinking altogether, or a roof-washer and treatment
+   set-up described (pack 6).
+23. **Filter size for bacteria (surv-make-water-safe) — Water pack Task 5. Withdrawn in fix round 1.** Colorado State
+   University Extension's own table gives 0.3 micron or smaller for bacteria, as CDC does (only its text says under
+   0.1 micron). No real disagreement; the topic gives CDC's 0.3 micron. Number kept so later items do not shift.
+24. **Sunlight (SODIS) time (surv-make-water-safe) — Water pack Task 5, revised in fix round 1.** CDC: 6 hours in sun,
+   or 2 days if cloudy (no latitude given). WHO Technical Note 5: 24 hours on a sunny day or 48 hours if cloudy, "in
+   areas near the equator". No opened source gives a time for New York's latitude. Today: at least WHO's times, sunlight
+   is a last resort, and the topic says no source gives a time for New York, so treat it as unreliable there
+   (fix round 2). Say if the
+   group wants sunlight dropped altogether.
+25. **Disinfecting a well (surv-wells-without-power) — Water pack Task 5.** (a) CDC's current table prints 3 1/4 cups
+   of bleach for 30 ft of water in a 10 in casing; CDC's earlier version and its own metric table (888 mL) give
+   3 3/4 cups, which fits the rest of the column. Today: 3 3/4 cups, with CDC's printed value noted. (b) Standing time:
+   CDC at least 12 hours; NYS DOH at least 8, preferably 12 to 24; EPA 6 to 24. Today: at least 12 hours, NYS DOH's
+   12 to 24 noted. (c) NYS DOH's own leaflet uses a fixed amount (2 quarts of bleach in 10 gallons of water,
+   recirculated with the pump for an hour, then 2 more quarts) instead of a table; it needs a working pump. Today:
+   CDC's table and steps. (d) With no pump, CDC gives only "bail with a bucket" and "pour water back with a bucket";
+   the topic adds: let it stand 12 hours, then bail until the chlorine smell is gone ("CDC gives no other no-pump
+   steps. Do this:"), with goggles
+   or a face shield (CDC) and never climbing into the well (WHO). (e) Fix round 1: CDC's step mixes the bleach with 3
+   to 5 gallons of water in a 5-gallon bucket, but its tables reach 10 gallons (drilled) and 13 3/4 gallons (dug) of
+   bleach alone; CDC does not say what to do then, and no opened source does. Fix round 2: the topic now says to
+   mix and pour in several batches until all the bleach from the table is in, and not to use less bleach to make it
+   fit, marked "CDC does not cover this". Say if a well
+   contractor or the health department should check (d) and (e) before the group relies on them.
+26. **Springs (surv-find-water, surv-wells-without-power) — Water pack Task 5.** Army ATP 3-50.21: springs are
+   "typically the safest open source". Penn State Extension: springs are highly susceptible to contamination and most
+   need continuous disinfection. Today: treat spring water like any other (Penn State).
+27. **Bleach in toilet buckets (surv-toilet-no-water) — Water pack Task 6.** FEMA (Are You Ready?): after each use
+   pour a small amount of household disinfectant such as chlorine bleach into the toilet container. Anchorage and
+   Wayne County (Michigan) emergency management: bleach diluted 1 to 10, with no bleach strength. The two-bucket
+   agencies (Oregon State Extension, Jefferson and Clallam counties, Washington County, Wilsonville) use only cover
+   material. Washington State Department of Health: urine contains ammonia, and bleach plus ammonia makes chloramine
+   gas. Today: no bleach in any waste bucket; bleach only to clean an emptied bucket (CDC's 1 cup in 5 gallons for
+   household items). Say if the group wants a disinfectant in the poo bucket.
+28. **Latrine distances (surv-latrines, surv-toilet-no-water) — Water pack Task 6.** From water: King County, Oregon
+   State Extension and the Army 100 ft; Sphere 30 m; NYS DEC (state land rule) 150 ft; Leave No Trace, US Forest
+   Service and NPS 200 ft for cat holes. Today: 200 ft for latrines and buried waste too. Pit bottom above
+   groundwater: King County 1 ft, Sphere 1.5 m; today 1.5 m. Close the pit: Army at 1 ft from the top, Sphere leaves
+   0.5 m; today 0.5 m. From the kitchen: King County 100 ft from homes and campsites; the Army 100 yards downwind of
+   its field kitchen (Army alone, so not used). Sphere also sets a maximum of 50 m from dwellings to a shared toilet,
+   so people can reach it at night; not stated. Say if the group wants the Army's 100 yards from the kitchen or
+   Sphere's 50 m maximum added.
+29. **Latrines and buried waste in town (surv-latrines, surv-toilet-no-water) — Water pack Task 6.** King County:
+   latrines are not appropriate in urban places, but bagged waste may be buried on your own property (no depth or
+   distance given). Jefferson County: do not dig a pit privy; with seasonally saturated soils, germs spread to
+   neighbouring properties. Oregon State Extension: in more rural areas consider a latrine or hole and bury the poo.
+   Today: surv-latrines is tagged rural, woods and coast (hidden under the town filter); in town, don't bury or dig,
+   hold the bagged waste in its can and wait (surv-toilet-no-water says so). Outside town, bury it at least 3 ft deep
+   (King County's latrine depth; no source gives a depth for bagged waste) and at least 200 ft from water. Say if a
+   backyard latrine in town should be allowed when the sewer will be dead for months, or if a different burial depth
+   is wanted.
+30. **Flushing after a disaster (surv-toilet-no-water) — Water pack Task 6.** Oregon State Extension: avoid toilets even
+   if your home sewer lines are not damaged; the street pipes may be broken. DC Water and NPS describe bucket
+   flushing during a water outage. Jefferson County: don't flush after a disaster until officials say it is OK.
+   Today: flush with a bucket only while the sewer works and nothing backs up; after an earthquake, flood or similar
+   damage, don't flush until officials say so. Town sewers often run on electric lift stations: West Hants Regional
+   Municipality (Nova Scotia) and Charlotte County Utilities (Florida) tell customers to cut water use at once when
+   the power goes out, because the sewer fills and backs up into basements. Fix round 1 added this, with "in a long
+   blackout, expect the sewer to stop and switch to the bucket toilet". Say if the group wants "never flush in a
+   long outage" instead.
+31. **Burying household garbage (surv-garbage-and-greywater) — Water pack Task 6.** FEMA (Are You Ready?): "Bury
+   garbage, if necessary", no depth or distance. The Army: a 4 x 4 x 4 ft pit at least 100 yards downstream of any
+   water in use (Army alone). Leave No Trace: buried garbage still draws animals. Today: no burying instructions;
+   bag, lid and store. Say if the group wants the Army's pit described.
+32. **How long a sick person stays away from food, water and the group (surv-stomach-illness-in-a-group,
+   p:vomiting-diarrhea) — Water pack Task 7.** CDC (norovirus): don't prepare or handle food or care for others; "Wait
+   at least 2 days (48 hours) after symptoms stop." CDC (evacuation centers, archived 2019): separate the sick, and keep
+   ill workers off, "until 24 hours after diarrhea and vomiting stop". Minnesota Department of Health (shelters,
+   2025) and University of Minnesota Extension: 72 hours, for food handling and for isolation. The Emergency protocol
+   Severe vomiting or diarrhea says 2 days (CDC) and was not changed (medical content). Today: the topic agrees with
+   the protocol: at least 2 days after symptoms stop (CDC), and 3 days if the group can manage it (Minnesota); the
+   24-hour figure is not in the text. The reviewer recommends 3 days (72 hours) everywhere, protocol included, as the
+   more cautious figure that meets both CDC and Minnesota. Say whether to move the whole app, protocol and topic, to
+   3 days. (Places to change: surv-stomach-illness-in-a-group summary, doFirst, the warning in "Food and water" and the
+   whole-group rule in "How long to keep it up" ("Keep the sick person apart" points to the food rule and gives Minnesota's
+   72 hours as its isolation period); and p:vomiting-diarrhea steps 8 and 10 and its don'ts.)
+33. **Bleach for vomit and diarrhea (surv-clean-and-disinfect) — Water pack Task 7.** CDC (norovirus): 1,000 to 5,000
+   ppm, "5 to 25 tablespoons of household bleach [5% to 8%] per gallon", at least 5 minutes. CDC (evacuation centers,
+   archived 2019): 1,000 ppm, 5 tablespoons of 6% per gallon, keep wet 10 minutes if possible. Minnesota Department of
+   Health: 1/3 cup per gallon (1,000 ppm, no strength printed). University of Minnesota Extension: about 1,000 ppm is
+   1/3 cup of 5.25%, 1/4 cup of 6%, or 2 1/2 tablespoons of 8.25% per gallon. 1/3 cup (5 tablespoons) of 5% to 9% per
+   gallon is also CDC's everyday surface mix (Cleaning and Disinfecting with Bleach), so choosing one fixed amount
+   merges the two rows. Arithmetic (not a source): 1/3 cup gives about 960 ppm at 5% and about 1,700 ppm at 9%; 25
+   tablespoons of 9% would be about 8,000 ppm, above CDC's 5,000 ceiling. Today: one strong mix, 1/3 cup of 5% to 9% per
+   gallon; surfaces wet at least 1 minute, after vomit or diarrhea 10 minutes if you can, never under 5. Say if the
+   group wants a stronger amount for vomit and diarrhea.
+34. **Bleach rinse for dishes (surv-clean-and-disinfect) — Water pack Task 7.** CDC (Drinking Water Advisories: An
+   Overview): 1 teaspoon of unscented bleach per gallon, soak at least 1 minute, air dry (no strength printed). New York
+   State Department of Health (boil water FAQ, Q17): 1 tablespoon per gallon, rinse a minute, air dry (no strength).
+   CDC (How to Safely Clean and Sanitize with Bleach): 1 tablespoon of 5% to 9% bleach per gallon for food-contact
+   surfaces, air dry. Today: the food mix, 1 tablespoon of 5% to 9%, 1 minute, air dry completely. Say if the group
+   prefers the weaker teaspoon.
+35. **How many bleach mixes (surv-clean-and-disinfect, surv-toilet-no-water) — Water pack Task 7.** CDC (Cleaning and
+   Disinfecting with Bleach, 2024): 5 tablespoons (1/3 cup) of 5% to 9% per gallon, wet at least 1 minute. CDC
+   (Infection Control Guidance for Community Evacuation Centers Following Disasters, archived 2017): "1 teaspoon of
+   household bleach in 1 quart of clean water (mixed fresh daily)" (about a quarter as strong; no strength, no contact
+   time). CDC (How to Safely Clean and Sanitize with Bleach): 1 cup per 5 gallons for flood-touched non-food items
+   (about 630 ppm at 5%, arithmetic). Today: two household mixes in Clean and disinfect, the strong mix (1/3 cup per
+   gallon) and the food mix (1 tablespoon per gallon); emptied waste buckets keep the toilet topic's 1 cup in 5 gallons
+   after emptying, washing and rinsing; drinking-water containers keep 1 teaspoon per quart (Store water at home).
+   Diluted bleach is mixed fresh every day (CDC; the 2019 evacuation-center page allows a week in a lightproof bottle).
+   Say whether the toilet topic's bucket mix should become the strong mix (one fewer mix, stronger), and whether it
+   should add "if anyone has vomiting or diarrhea, use the strong mix after emptying, washing and rinsing".
+36. **Bleach mix for rodent droppings (surv-garbage-and-greywater) — Water pack final review.** CDC's rodent clean-up
+   page gives a bleach mix of 1 part bleach to 10 parts water (1 1/2 cups per gallon) but prints no bleach strength,
+   so it was left out. Today: the topic says to soak droppings with "a disinfectant" for 5 minutes, CDC's own word,
+   with no mix. Say whether to add CDC's 1:10 mix as printed, with a note that CDC gives no strength.

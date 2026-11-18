@@ -94,3 +94,192 @@ def test_every_figure_a_topic_uses_exists():
     for tid, names in topic_figs().items():
         for n in names:
             assert n in figs.F, (tid, n)
+
+
+# ---- Water pack Task 8: diagrams carry only what their topic carries ----
+def drawn_of(name):
+    """Only the <text> content actually drawn on the figure (no alt label), lower-cased, apostrophes straightened."""
+    svg, _ = figs.F[name]
+    root = ET.fromstring(svg)
+    drawn = ' '.join(''.join(t.itertext()) for t in root.iter() if t.tag.split('}')[-1] == 'text')
+    return re.sub(r'\s+', ' ', drawn.replace('’', "'")).lower()
+
+
+def alt_of(name):
+    return re.sub(r'\s+', ' ', figs.F[name][1].replace('’', "'")).lower()
+
+
+def topic_json(tid):
+    return open(os.path.join(ROOT, 'src', 'survival', f'{tid}.json'), encoding='utf-8').read().replace('’', "'")
+
+
+def topic_caption(tid, name):
+    t = json.load(open(os.path.join(ROOT, 'src', 'survival', f'{tid}.json'), encoding='utf-8'))
+    return [b['cap'] for s in t['sections'] for b in s['blocks'] if b.get('fig') == name][0].replace('’', "'").lower()
+
+
+WATER_FIGS = {
+    'water-safe': 'surv-make-water-safe',
+    'water-heater-drain': 'surv-water-in-the-house',
+    'toilet-buckets': 'surv-toilet-no-water',
+    'latrine': 'surv-latrines',
+    'handwash-station': 'surv-handwashing',
+}
+
+
+@pytest.mark.parametrize('name', sorted(WATER_FIGS))
+def test_water_figure_exists_and_sits_once_in_its_topic(name):
+    assert name in figs.F
+    assert topic_figs()[WATER_FIGS[name]].count(name) == 1
+
+
+def test_drawn_text_helper_excludes_the_alt_label():
+    assert 'water heater tank drained' in alt_of('water-heater-drain')
+    assert 'water heater tank drained' not in drawn_of('water-heater-drain')
+
+
+def test_water_safe_carries_the_checked_figures_only():
+    d = drawn_of('water-safe')
+    topic = topic_json('surv-make-water-safe').lower()
+    for word in ('rolling boil', 'at least 1 minute', '3 min above 5,000 ft', '8 drops of 5% to 9%', 'unscented bleach',
+                 'per gallon', 'stir, wait 30 minutes'):
+        assert word in d, f'missing {word!r} in drawn text: {d}'
+    for fact in ('rolling boil for at least 1 minute', 'above 5,000 ft', '8 drops per gallon', '5% to 9%',
+                 'unscented', 'stir and let it stand 30 minutes'):
+        assert fact in topic, fact
+    for old in ('6,500', '6 percent', '6%'):
+        assert old not in d, f'still says {old!r}: {d}'
+    svg, _ = figs.F['water-safe']
+    alt = alt_of('water-safe')
+    assert '6,500' not in svg and '6 percent' not in svg and '6%' not in svg
+    for word in ('at least 1 minute', '5,000 feet', '8 drops', '5% to 9%', 'unscented', 'per gallon', '30 minutes'):
+        assert word in alt, f'alt label missing {word!r}'
+    cap = topic_caption('surv-make-water-safe', 'water-safe')
+    for word in ('at least 1 minute', '5,000 ft', '8 drops per gallon', 'unscented 5% to 9%',
+                 'double it if the water is cloudy, colored or very cold', '30 minutes'):
+        assert word in cap, f'caption missing {word!r}'
+
+
+HEATER_LABELS = ['Power or gas OFF', 'Let it cool', 'Close the water intake valve', 'Open a hot tap',
+                 'Container here', 'Open the drain']
+HEATER_FOOTER = 'Refill the tank before turning power or gas back on'
+
+
+def test_water_heater_drain_labels_numbered_in_order():
+    t = drawn_of('water-heater-drain')
+    pos = -1
+    for i, label in enumerate(HEATER_LABELS, 1):
+        want = f'{i} {label}'.lower()
+        at = t.find(want, pos + 1)
+        assert at > pos, f'{want!r} not found in order in drawn text: {t}'
+        pos = at
+    assert HEATER_FOOTER.lower() in t[pos:], t
+    alt = alt_of('water-heater-drain')
+    for i, label in enumerate(HEATER_LABELS, 1):
+        assert f'{i} {label}'.lower() in alt
+    assert HEATER_FOOTER.lower() in alt
+
+
+def test_toilet_buckets_uses_the_topics_words():
+    d = drawn_of('toilet-buckets')
+    topic = topic_json('surv-toilet-no-water').lower()
+    for word in ('pee', 'poo', 'lid', 'seat', 'cover material', 'half a cup (120 ml)', 'after each poo'):
+        assert word in d, f'missing {word!r} in drawn text: {d}'
+        assert word in topic, word
+    assert 'bleach' not in d and 'sawdust' not in d
+    alt = alt_of('toilet-buckets')
+    for word in ('pee', 'poo', 'seat', 'cover material', 'half a cup (120 ml)', 'after each poo'):
+        assert word in alt
+
+
+def test_latrine_numbers_all_come_from_the_topic():
+    d = drawn_of('latrine')
+    topic = topic_json('surv-latrines').lower()
+    for phrase in ('at least 200 feet (60 m) from water', 'about 70 steps', '6 to 8 inches (15 to 20 cm) deep',
+                   '4 to 6 inches (10 to 15 cm) across', 'soil you dug out'):
+        assert phrase in d, f'missing {phrase!r} in drawn text: {d}'
+    for phrase in ('200 feet (60 m)', 'about 70 steps', '6 to 8 inches (15 to 20 cm) deep',
+                   '4 to 6 inches (10 to 15 cm) across', 'soil you dug out'):
+        assert phrase in topic, phrase
+    # every number-with-unit drawn must appear in the topic text exactly as drawn
+    for m in re.finditer(r'\d[\d,.]*(?: to \d[\d,.]*)? (?:inches|feet|ft|in|cm|m)\b(?: \([^)]*\))?', d):
+        assert m.group(0) in topic, f'{m.group(0)!r} drawn but not in the topic'
+    assert '911' not in d and '150' not in d
+
+
+def test_handwash_station_uses_the_topics_words():
+    d = drawn_of('handwash-station')
+    topic = topic_json('surv-handwashing').lower()
+    for phrase in ('jug with an on/off spigot', 'soap in a sock', 'towel', 'catch bucket'):
+        assert phrase in d, f'missing {phrase!r} in drawn text: {d}'
+    for word in ('on/off spigot', 'soap', 'towel', 'catch bucket', 'sock'):
+        assert word in d, f'missing {word!r} in drawn text: {d}'
+        assert word in topic, word
+    assert 'bleach' not in d and '911' not in d
+    assert not re.search(r'\d', d), f'no numbers expected: {d}'
+
+
+def parts(name):
+    root = ET.fromstring(figs.F[name][0])
+    return {e.get('data-part'): e for e in root.iter() if e.get('data-part')}
+
+
+def xs_of(el):
+    if el.tag.endswith('line'):
+        return [float(el.get('x1')), float(el.get('x2'))]
+    return [float(n) for n in re.findall(r'[MLHl] ?(-?\d+(?:\.\d+)?)', el.get('d'))]
+
+
+def test_handwash_stream_falls_past_the_table_edge_into_the_bucket():
+    p = parts('handwash-station')
+    assert {'table', 'stream', 'bucket'} <= set(p)
+    t0, t1 = min(xs_of(p['table'])), max(xs_of(p['table']))
+    sx = xs_of(p['stream'])[0]
+    b0, b1 = min(xs_of(p['bucket'])), max(xs_of(p['bucket']))
+    assert sx < t0 - 6, f'stream x {sx} is over the tabletop {t0}-{t1}'
+    assert b0 < sx < b1, 'bucket must span the stream'
+    assert b1 < t0, 'bucket sits beside the table, not under it'
+    legs = [xs_of(e)[0] for e in ET.fromstring(figs.F['handwash-station'][0]).iter() if e.get('data-part') == 'leg']
+    assert all(abs(sx - l) > 10 for l in legs), 'stream clear of the legs'
+
+
+def path_end(d):
+    """Last point of a path drawn with absolute M, L, H and V commands."""
+    x = y = None
+    for cmd, args in re.findall(r'([MLHV])\s*([-\d.\s,]+)', d):
+        n = [float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', args)]
+        if cmd in 'ML':
+            x, y = n[-2], n[-1]
+        elif cmd == 'H':
+            x = n[-1]
+        else:
+            y = n[-1]
+    return x, y
+
+
+def test_handwash_stream_starts_at_the_spigot_outlet():
+    """Final review, Minor 14: the stream is tied to the spigot pipe, so moving the pipe back over the table fails."""
+    root = ET.fromstring(figs.F['handwash-station'][0])
+    stream = parts('handwash-station')['stream']
+    sx, sy = float(stream.get('x1')), min(float(stream.get('y1')), float(stream.get('y2')))
+    jug = max((e for e in root.iter() if e.tag.endswith('rect')), key=lambda e: float(e.get('width')) * float(e.get('height')))
+    j0, j1 = float(jug.get('x')), float(jug.get('x')) + float(jug.get('width'))
+    pipes = []
+    for e in root.iter():
+        if e.tag.endswith('path') and re.fullmatch(r'M[\d.]+ [\d.]+(?: [HV][\d.]+)+', e.get('d')):
+            x0 = float(re.match(r'M([\d.]+)', e.get('d')).group(1))
+            ex, ey = path_end(e.get('d'))
+            if j0 <= x0 <= j1 and ex == sx and 0 <= sy - ey <= 8:
+                pipes.append(e.get('d'))
+    assert pipes, 'no pipe runs from the jug to the top of the stream'
+
+
+def test_handwash_station_alt_and_caption_carry_the_topic_words():
+    alt = alt_of('handwash-station')
+    for word in ('jug', 'on/off spigot', 'soap', 'sock', 'towel', 'catch bucket'):
+        assert word in alt, word
+    cap = topic_caption('surv-handwashing', 'handwash-station')
+    topic = topic_json('surv-handwashing').lower()
+    for word in ('on/off spigot', 'soap', 'towels', 'catch bucket', 'sock', "jug's handle"):
+        assert word in cap, word
+        assert word in topic, word

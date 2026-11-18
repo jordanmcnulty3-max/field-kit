@@ -284,3 +284,65 @@ def test_register_page_unknown_id_goes_home_without_history_entry(page, app_url)
     expect(page.locator('#survHome')).to_be_visible()
     assert page.evaluate('history.length') == n
     assert page.evaluate("[FK.survival.registerPage('bogus', () => true), FK.survival.registerPage('list', 'x')]") == [None, None]
+
+
+# ---------- Shipped topic tables on a phone (final review, Important 1) ----------
+import glob, os
+
+_SURV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src', 'survival')
+SWIPE_CUE = 'Swipe sideways to see more columns'
+
+
+def _has_table(path):
+    with open(path, encoding='utf-8') as f:
+        t = json.load(f)
+    return any('table' in b for s in t.get('sections', []) for b in s.get('blocks', []))
+
+
+TABLE_TOPICS = sorted(os.path.basename(p)[:-5] for p in glob.glob(os.path.join(_SURV, '*.json')) if _has_table(p))
+
+TABLE_STATE = """i => {
+  const w = document.querySelectorAll('#survPage .tablewrap')[i], cue = w.previousElementSibling;
+  const shown = el => !!el && !el.hidden && getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().height > 0;
+  const sizes = [...w.querySelectorAll('th,td')].map(c => parseFloat(getComputedStyle(c).fontSize));
+  return { fits: w.scrollWidth <= w.clientWidth + 1, overflowX: getComputedStyle(w).overflowX,
+           cue: cue && cue.classList.contains('sv-swipe') && shown(cue) ? cue.textContent.trim() : null,
+           smallest: Math.min(...sizes) };
+}"""
+
+FIRST_COLUMN_AFTER_SCROLL = """i => {
+  const w = document.querySelectorAll('#survPage .tablewrap')[i];
+  w.scrollLeft = w.scrollWidth;
+  const box = w.getBoundingClientRect(), left = box.left + w.clientLeft, right = left + w.clientWidth;
+  return [...w.querySelectorAll('tr')].map(tr => {
+    const c = tr.firstElementChild, r = c.getBoundingClientRect(), bg = getComputedStyle(c).backgroundColor;
+    const alpha = bg.startsWith('rgba') ? parseFloat(bg.split(',')[3]) : (bg === 'transparent' ? 0 : 1);
+    return { text: c.textContent, inView: r.left >= left - 1 && r.right <= right + 1, opaque: alpha === 1,
+             onTop: document.elementFromPoint(r.left + 4, r.top + r.height / 2) === c || c.contains(document.elementFromPoint(r.left + 4, r.top + r.height / 2)) };
+  });
+}"""
+
+
+@pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
+@pytest.mark.parametrize('tid', TABLE_TOPICS)
+def test_shipped_topic_tables_fit_or_scroll_with_cue_and_sticky_first_column_at_360(page, app_url, tid, night):
+    """Every column of every shipped topic table can be found on a 360 px phone: the table fits its box, or it
+    scrolls sideways inside it with a visible "swipe" cue and a first column that stays in view over the scrolled cells."""
+    if night:
+        page.add_init_script("localStorage.setItem('fk.night', 'true')")
+    page.goto(app_url + '#/survival/' + tid)
+    expect(page.locator('#survPage table').first).to_be_visible()
+    assert page.evaluate('document.documentElement.scrollWidth') <= 360
+    n = page.locator('#survPage .tablewrap').count()
+    assert n >= 1
+    for i in range(n):
+        s = page.evaluate(TABLE_STATE, i)
+        assert s['smallest'] >= 13, (tid, i, 'text smaller than the app\'s small text', s)
+        if s['fits']:
+            assert s['cue'] is None, (tid, i, 'a table that fits shows no swipe cue')
+            continue
+        assert s['overflowX'] in ('auto', 'scroll'), (tid, i, s)
+        assert s['cue'] == SWIPE_CUE, (tid, i, 'a table wider than the phone needs a visible cue above it', s)
+        page.locator('#survPage .tablewrap').nth(i).scroll_into_view_if_needed()
+        for c in page.evaluate(FIRST_COLUMN_AFTER_SCROLL, i):
+            assert c['inView'] and c['opaque'] and c['onTop'], (tid, i, 'first column must stay readable when scrolled', c)

@@ -1,7 +1,7 @@
 {
   "id": "surv-make-water-safe",
   "title": "Make water safe",
-  "category": "basics",
+  "category": "water",
   "keywords": [
     "boil",
     "bleach",
@@ -9,9 +9,10 @@
     "purify",
     "treat",
     "drinking water",
-    "tablets",
-    "algae",
-    "algal bloom"
+    "purification",
+    "chlorine",
+    "algal bloom",
+    "distill"
   ],
   "summary": "Strain cloudy water, then boil it for 1 minute (3 minutes above 5,000 ft), or treat it with unscented bleach.",
   "sections": [
@@ -31,10 +32,369 @@
           ]
         },
         {
+          "fig": "water-safe",
+          "cap": "Boil for at least 1 minute (3 minutes above 5,000 ft). With no fire: 8 drops per gallon of plain, unscented 5% to 9% bleach. Double it if the water is cloudy, colored or very cold. Stir and let it stand 30 minutes."
+        },
+        {
           "warn": "Boiling, bleach and filters cannot make every water safe. Water with fuel, toxic chemicals or radioactive material cannot be made safe by boiling or disinfecting; find another source. Boiling and disinfecting also leave heavy metals, salts and most other chemicals in the water."
         },
         {
           "warn": "Harmful algal blooms: in New York lakes and ponds, strongly colored water (blue-green, green, yellow, white, brown, purple or red), a paint-like look or floating scum can mean a bloom. During a bloom, don’t drink, cook with or make ice from that water, even if you treat it yourself. Boiling does not remove the algae or their toxins."
+        }
+      ]
+    },
+    {
+      "h": "Which method first",
+      "blocks": [
+        {
+          "p": "Boil if you can. Boiling kills all types of germs, including viruses, bacteria and parasites such as Giardia and Cryptosporidium (CDC)."
+        },
+        {
+          "p": "If you can’t boil, the next best is to filter the water and then disinfect the filtered water (CDC). The filter takes out the parasites that bleach and iodine miss; the disinfectant kills the viruses and bacteria that get through the filter (CDC)."
+        },
+        {
+          "p": "UV light and sunlight work only in clear water (CDC). Sunlight only reduces the number of germs (CDC): use it only when you have no other way."
+        },
+        {
+          "table": {
+            "head": [
+              "Method",
+              "Parasites (Giardia, Cryptosporidium)",
+              "Bacteria",
+              "Viruses"
+            ],
+            "rows": [
+              [
+                "Boiling: 1 minute, 3 minutes above 5,000 ft",
+                "Yes",
+                "Yes",
+                "Yes"
+              ],
+              [
+                "Bleach (chlorine)",
+                "Not well",
+                "Yes",
+                "Yes"
+              ],
+              [
+                "Iodine tablets or drops",
+                "Not well",
+                "Yes",
+                "Yes"
+              ],
+              [
+                "Chlorine dioxide tablets",
+                "Giardia yes; Cryptosporidium better, but not fully",
+                "Yes",
+                "Yes"
+              ],
+              [
+                "Filter rated 1 micron absolute, or NSF 53 or 58 for cyst reduction or removal",
+                "Yes",
+                "Not all",
+                "No"
+              ],
+              [
+                "Filter rated 0.3 micron absolute or smaller",
+                "Yes",
+                "Yes",
+                "No"
+              ],
+              [
+                "Reverse osmosis filter",
+                "Yes",
+                "Yes",
+                "Yes"
+              ],
+              [
+                "UV light, clear water only",
+                "Yes",
+                "Yes",
+                "Yes"
+              ],
+              [
+                "Sunlight, clear water only",
+                "Fewer, not all",
+                "Fewer, not all",
+                "Fewer, not all"
+              ],
+              [
+                "Distillation",
+                "Yes",
+                "Yes",
+                "Yes"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Table from CDC; distillation from FEMA. To take salt out of water you need a reverse osmosis filter (CDC) or distillation (FEMA)."
+        },
+        {
+          "p": "Boiling, bleach, iodine, chlorine dioxide, filters, UV and sunlight don’t remove fuel, chemicals or algal toxins (CDC, WHO). Distillation removes salt, heavy metals and most, not all, other chemicals (FEMA). Water with fuel or toxic chemicals cannot be made safe (CDC): don’t try to distill it. Reverse osmosis removes salt (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "Bleach for more water",
+      "blocks": [
+        {
+          "p": "Use plain, unscented household chlorine bleach of 5% to 9% sodium hypochlorite, the usual strength in the US (CDC). These are CDC’s amounts for any bleach in that range. This app uses them."
+        },
+        {
+          "table": {
+            "head": [
+              "Water",
+              "With a dropper",
+              "With something that measures mL",
+              "With a measuring spoon"
+            ],
+            "rows": [
+              [
+                "1 quart or liter",
+                "2 drops",
+                "0.1 mL",
+                "A tiny amount (too small to measure)"
+              ],
+              [
+                "1 gallon (3.8 L)",
+                "8 drops",
+                "1/2 mL",
+                "A little less than 1/8 teaspoon"
+              ],
+              [
+                "5 gallons (19 L)",
+                "40 drops",
+                "2 1/2 mL",
+                "1/2 teaspoon"
+              ]
+            ]
+          }
+        },
+        {
+          "list": [
+            "Double it if the water is cloudy, murky, colored or very cold (CDC).",
+            "Stir well and let it stand at least 30 minutes before you drink it (CDC). It should smell slightly of chlorine; if it doesn’t, repeat the dose and wait another 15 minutes (EPA).",
+            "More than 5 gallons: add 1/2 teaspoon (2 1/2 mL) for each 5 gallons (19 L), from CDC’s 5-gallon amount."
+          ]
+        },
+        {
+          "p": "EPA’s table, for comparison only (6% and 8.25% bleach):"
+        },
+        {
+          "table": {
+            "head": [
+              "Volume of Water",
+              "Amount of 6% Bleach to Add*",
+              "Amount of 8.25% Bleach to Add*"
+            ],
+            "rows": [
+              [
+                "1 quart/liter",
+                "2 drops",
+                "2 drops"
+              ],
+              [
+                "1 gallon",
+                "8 drops",
+                "6 drops"
+              ],
+              [
+                "2 gallons",
+                "16 drops (1/4 tsp)",
+                "12 drops (1/8 teaspoon)"
+              ],
+              [
+                "4 gallons",
+                "1/3 teaspoon",
+                "1/4 teaspoon"
+              ],
+              [
+                "8 gallons",
+                "2/3 teaspoon",
+                "1/2 teaspoon"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "*Bleach may contain 6 or 8.25% sodium hypochlorite (EPA). 1 quart is 0.95 L, 1 gallon 3.8 L, 2 gallons 7.6 L, 4 gallons 15 L, 8 gallons 30 L; 1 teaspoon is 5 mL."
+        },
+        {
+          "p": "For 8.25% bleach, EPA uses less than CDC: 6 drops a gallon instead of 8. This app uses CDC’s amounts for all bleach from 5% to 9%, the larger dose. For 6% bleach the two agree on drops. Use EPA’s table only to check, not as a second dose."
+        },
+        {
+          "warn": "Never mix bleach with ammonia or any other cleaner (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "Tablets",
+      "blocks": [
+        {
+          "p": "Each product is made to treat a set amount of water: follow its label (CDC, EPA)."
+        },
+        {
+          "list": [
+            "Chlorine dioxide: about 30 minutes kills most bacteria and viruses, but Cryptosporidium needs 4 hours (Colorado State University Extension), and even then CDC calls it only somewhat effective against it. If the label gives a longer time, use the label’s.",
+            "Iodine in icy water: let it work at least 1 hour (Yosemite National Park, National Park Service)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Filters",
+      "blocks": [
+        {
+          "p": "Read the filter’s label for its rating (CDC)."
+        },
+        {
+          "list": [
+            "For parasites such as Giardia and Cryptosporidium: an absolute pore size of 1 micron or smaller, or certified to NSF standard 53 or 58 for cyst reduction or removal. Most portable filters remove parasites (CDC).",
+            "For bacteria too: an absolute pore size of 0.3 micron or smaller (CDC; Colorado State University Extension’s table agrees).",
+            "Viruses: most portable filters do not remove them (CDC).",
+            "Reverse osmosis filters remove parasites, bacteria and viruses, and also remove salt (CDC)."
+          ]
+        },
+        {
+          "p": "Filter first, then add bleach, iodine or chlorine dioxide to the filtered water to kill viruses and bacteria (CDC). Chlorine alone does not kill Giardia or Cryptosporidium cysts, so a 1-micron filter is needed as well (Virginia Cooperative Extension)."
+        },
+        {
+          "p": "Keep a filter from freezing: freezing can damage it (Colorado State University Extension)."
+        }
+      ]
+    },
+    {
+      "h": "UV light",
+      "blocks": [
+        {
+          "list": [
+            "Portable UV units kill germs in small amounts of clear water (CDC).",
+            "Cloudy water blocks the light. Filter it through a clean cloth, paper towel or coffee filter, or let it settle and draw off the clear water, before you use UV (CDC).",
+            "Follow the unit’s instructions (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Sunlight (last resort)",
+      "blocks": [
+        {
+          "p": "Sunlight only reduces the number of germs (CDC). Use it only when you have no other way."
+        },
+        {
+          "steps": [
+            "Use clear water only. If it is cloudy, filter it through a clean cloth, paper towel or coffee filter, or let it settle and draw off the clear water (CDC).",
+            "Fill clean, clear plastic bottles of 1 or 2 liters (about 1 or 2 quarts) (CDC; WHO for the size).",
+            "Lay the bottles on their side in direct sun, on a dark surface if you can (CDC).",
+            "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy (WHO). No source gives a time for New York: there, treat sunlight as unreliable.",
+            "Let the water cool and shake it hard before you drink it (WHO)."
+          ]
+        },
+        {
+          "p": "WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud."
+        }
+      ]
+    },
+    {
+      "h": "Distillation",
+      "blocks": [
+        {
+          "p": "Distilling boils water and collects the steam as it turns back into water. It removes germs that other methods miss, and salt, heavy metals and most other chemicals (FEMA)."
+        },
+        {
+          "steps": [
+            "Fill a pot halfway with water.",
+            "Tie a cup to the handle of the pot’s lid so the cup hangs right-side-up when the lid is upside-down on the pot. The cup must not dangle into the water.",
+            "Boil the water for 20 minutes.",
+            "The water that drips from the lid into the cup is distilled."
+          ]
+        },
+        {
+          "p": "Steps from FEMA, with the Red Cross and USDA. Never drink salt water as it is: use it only if you distill it first (FEMA). Don’t try to distill water that smells of fuel or chemicals; find another source."
+        },
+        {
+          "link": "p:burns",
+          "label": "Burns"
+        }
+      ]
+    },
+    {
+      "h": "Taste",
+      "blocks": [
+        {
+          "list": [
+            "Boiled water tastes flat. Pour it from one clean container to another a few times, then let it stand for a few hours (CDC, EPA).",
+            "Or add a pinch of salt to each quart or liter (CDC, EPA).",
+            "Or, once it has cooled, shake it hard in a closed container (WHO)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Keep it clean",
+      "blocks": [
+        {
+          "list": [
+            "Let boiled water cool, then keep it in clean, sanitized containers with tight covers (CDC, EPA).",
+            "Best is a container with a small opening and a tight cover, so the water can be poured out without hands or objects going in (CDC), or one with a tap (WHO).",
+            "Pour treated water out. Don’t dip cups, ladles or hands into it.",
+            "Wash your hands with soap before you handle drinking water (WHO).",
+            "Label it “drinking water” with the date you treated it (CDC).",
+            "Clean the containers regularly (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        }
+      ]
+    },
+    {
+      "h": "Well water and rain",
+      "blocks": [
+        {
+          "p": "Make water from a private well safe as above before you store it to drink (see Store water at home). A flooded well needs disinfecting and testing first (EPA)."
+        },
+        {
+          "p": "Rain caught directly on a clean tarp or in a clean container: treat it like any wild water (CDC; FEMA, Food and Water in an Emergency). Rain off a roof: FEMA (Where can I find clean drinking water after a disaster?) says not to drink collected rainwater; read Find water outside first."
+        },
+        {
+          "link": "s:surv-find-water",
+          "label": "Find water outside"
+        },
+        {
+          "link": "s:surv-wells-without-power",
+          "label": "Wells without power"
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-water-winter",
+          "label": "Water in winter"
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        },
+        {
+          "link": "c:home-water-store",
+          "label": "Home water store checklist"
+        },
+        {
+          "link": "p:vomiting-diarrhea",
+          "label": "Severe vomiting or diarrhea"
+        },
+        {
+          "link": "s:surv-stomach-illness-in-a-group",
+          "label": "Stomach illness in a group"
         }
       ]
     }
@@ -42,15 +402,15 @@
   "sources": [
     {
       "name": "US EPA, Emergency Disinfection of Drinking Water",
-      "used": "Settle and filter cloudy water; rolling boil at least 1 minute, 3 minutes above 5,000 ft; bleach type, under one year old, 8 drops of 6% per gallon and 2 drops per quart/liter, double for cloudy, colored or very cold, stand 30 minutes, chlorine smell, repeat and wait 15 minutes; tablets follow label; boiling and disinfection do not remove heavy metals, salts, most chemicals"
+      "used": "Settle and filter cloudy water; rolling boil at least 1 minute, 3 minutes above 5,000 ft; bleach type, under one year old, 8 drops of 6% per gallon and 2 drops per quart/liter, double for cloudy, colored or very cold, stand 30 minutes, chlorine smell, repeat and wait 15 minutes; tablets follow label; boiling and disinfection do not remove heavy metals, salts, most chemicals; water pack: bleach table for 6% and 8.25% (1 quart/liter to 8 gallons) reproduced; flat taste (pinch of salt, pour between containers); store in clean covered containers; tablets made for set amounts; flooded well disinfect and test"
     },
     {
       "name": "CDC, How to Make Water Safe in an Emergency",
-      "used": "Boiling is the best way to kill germs; 8 drops per gallon for 5% to 9% bleach; iodine/chlorine tablets and Cryptosporidium, chlorine dioxide; iodine limits (pregnancy, thyroid, hypersensitivity, a few weeks); portable filters do not remove viruses, disinfect after filtering; fuel, toxic chemicals or radioactive material cannot be made safe"
+      "used": "Boiling is the best way to kill germs; 8 drops per gallon for 5% to 9% bleach; iodine/chlorine tablets and Cryptosporidium, chlorine dioxide; iodine limits (pregnancy, thyroid, hypersensitivity, a few weeks); portable filters do not remove viruses, disinfect after filtering; fuel, toxic chemicals or radioactive material cannot be made safe; water pack: 5% to 9% bleach list (1 quart or liter, 1 gallon, 5 gallons; dropper, mL, spoon); stand at least 30 minutes; filter pore sizes (1 micron parasites, 0.3 micron bacteria); UV light on clear water; solar disinfection steps (clear plastic bottles, on their side, dark surface, 6 hours or 2 days); flat taste; sanitized containers with tight covers; label with date"
     },
     {
       "name": "CDC, About Water Treatment Options When Hiking, Camping, or Traveling",
-      "used": "Chlorine bleach and iodine kill bacteria and viruses but do not work well to kill parasites; chlorine dioxide kills Giardia and is somewhat effective against Cryptosporidium, filtering first is safest; boiling kills all germs; iodine hypersensitivity"
+      "used": "Chlorine bleach and iodine kill bacteria and viruses but do not work well to kill parasites; chlorine dioxide kills Giardia and is somewhat effective against Cryptosporidium, filtering first is safest; boiling kills all germs; iodine hypersensitivity; water pack: boiling kills all types of germs; next best filter then disinfect; filters rated 1 micron absolute or NSF 53 or 58 cyst reduction or removal remove parasites, not viruses or all bacteria; 0.3 micron removes bacteria; reverse osmosis removes parasites, bacteria, viruses and salt; UV kills parasites, bacteria and viruses in small amounts of clear water"
     },
     {
       "name": "New York State Department of Health, Harmful Blue-Green Algae Blooms",
@@ -59,7 +419,39 @@
     {
       "name": "US Army ATP 3-50.21, Survival (2018), chapter 3",
       "used": "Cross-check: 1-minute boil; tablets follow the manufacturer; most filters do not remove viruses; chemical disinfectants not fully effective against Cryptosporidium"
+    },
+    {
+      "name": "CDC, Safe Water Storage (Global WASH)",
+      "used": "Container with a small opening and a tight cover, narrow neck so water is poured out without hands or objects entering; clean containers regularly; label drinking water with treatment date"
+    },
+    {
+      "name": "CDC, How to Safely Clean and Sanitize with Bleach",
+      "used": "Never mix bleach with ammonia or any other cleaner; 5% to 9% the most common concentration in the US"
+    },
+    {
+      "name": "FEMA with the American Red Cross and USDA, Food and Water in an Emergency",
+      "used": "Distillation: what it removes (microbes that resist boiling and bleach, heavy metals, salts, most other chemicals) and the pot, upside-down lid and cup method, boil 20 minutes; use salt water only if distilled first; rainwater listed as an outdoor source to purify"
+    },
+    {
+      "name": "WHO (prepared by WEDC), Technical Notes on Drinking-Water, Sanitation and Hygiene in Emergencies, note 5 (2013)",
+      "used": "Solar disinfection: transparent 1 or 2 litre plastic containers, clear water, 24 hours sunny or 48 hours cloudy near the equator, cool and shake; aerate cooled boiled water by shaking; container with a tap; wash hands with soap before handling drinking water; methods remove physical and microbiological pollution, not chemical contamination; solar times given for areas near the equator only"
+    },
+    {
+      "name": "Colorado State University Extension, Guide to Treating Water in the Backcountry (2022)",
+      "used": "Chlorine dioxide 30 minutes for most pathogens, 4 hours for Cryptosporidium; avoid freezing filters"
+    },
+    {
+      "name": "National Park Service, Yosemite, Wilderness in Winter",
+      "used": "Iodine-based purifier: let it work one hour in icy water"
+    },
+    {
+      "name": "Virginia Cooperative Extension, Rainwater Harvesting Systems (BSE-265, 2019)",
+      "used": "Chlorination alone does not kill Giardia or Cryptosporidium cysts, so a 1-micron filter is also needed"
+    },
+    {
+      "name": "FEMA, Where can I find clean drinking water after a disaster?",
+      "used": "Do not drink collected rainwater (applied to rain collected off a roof)"
     }
   ],
-  "reviewed": "2026-11-17"
+  "reviewed": "2026-11-18"
 }

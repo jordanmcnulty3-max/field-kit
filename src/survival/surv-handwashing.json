@@ -1,0 +1,301 @@
+{
+  "id": "surv-handwashing",
+  "title": "Washing hands with little water",
+  "category": "water",
+  "keywords": [
+    "wash hands",
+    "handwashing",
+    "hand washing",
+    "soap",
+    "hand sanitizer",
+    "tippy tap",
+    "hygiene",
+    "germs",
+    "washing station"
+  ],
+  "summary": "Wash with soap and the cleanest water you have for at least 20 seconds, above all after the toilet and before food; sanitizer is a fallback, not a replacement.",
+  "sections": [
+    {
+      "h": "Why it matters",
+      "blocks": [
+        {
+          "p": "With no running water, dirty hands are how one sick person becomes a sick group. Diarrhea spreads through contaminated food or drinking water, or from person to person through poor hygiene (WHO). Washing hands with soap is one of the key ways to prevent it (WHO)."
+        },
+        {
+          "p": "Soap and water is the best way to get rid of germs in most situations (CDC). Hand sanitizer is a fallback when you have no soap and water, and it does not work well against some of the germs that cause stomach illness (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "When to wash",
+      "blocks": [
+        {
+          "p": "CDC’s key times to wash your hands:"
+        },
+        {
+          "list": [
+            "Before, during, and after preparing food",
+            "Before and after eating food",
+            "Before and after caring for someone at home who is sick with vomiting or diarrhea",
+            "Before and after treating a cut or wound",
+            "After using the toilet",
+            "After changing diapers or cleaning up a child who has used the toilet",
+            "After blowing your nose, coughing, or sneezing",
+            "After touching an animal, animal feed, or animal waste",
+            "After handling pet food or pet treats",
+            "After touching garbage"
+          ]
+        },
+        {
+          "p": "Also before feeding children (CDC, after a disaster), before giving medicine (CDC, norovirus), and whenever your hands are visibly dirty or greasy (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "How to wash",
+      "blocks": [
+        {
+          "steps": [
+            "Wet your hands with clean water, warm or cold. Turn the water off while you lather, to save water (CDC).",
+            "Put on soap and rub your hands together. Lather the backs of your hands, between your fingers and under your nails (CDC).",
+            "Scrub for at least 20 seconds. Need a timer? Hum “Happy Birthday” from beginning to end twice (CDC).",
+            "Turn the water on again and rinse well under clean, running water (CDC).",
+            "Dry your hands completely with a clean towel, or let them air dry. Germs spread more easily from wet hands (CDC).",
+            "Turn the tap off with a paper towel, your elbow or another hands-free way if you can (CDC)."
+          ]
+        },
+        {
+          "list": [
+            "Warm and cold water remove the same number of germs (CDC). Cold water is fine.",
+            "Plain soap works. Bar or liquid soap both work, and antibacterial soap has shown no added benefit at home (CDC).",
+            "Don’t wash in a shared basin of standing water. Water that others have washed in has germs in it; use clean, running water, even if it is only a trickle from a jug (CDC).",
+            "Use a single-use towel if you have them (CDC). Change cloth towels every day (Oregon State University Extension).",
+            "No soap? Use hand sanitizer (below). Only water? Rub your hands together under the water and dry them with a clean towel or air dry. This is less effective than soap and water, but better than nothing (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Which water to use",
+      "blocks": [
+        {
+          "list": [
+            "Use the cleanest water available to you (CDC).",
+            "CDC: “Wash your hands with soap and water that has been boiled or disinfected” “if local authorities or your doctor recommend extra caution.” In a long outage there may be no one to ask: fill your washing jug with treated water (CDC tippy tap sheet; North Carolina State Extension says treated or bottled water).",
+            "Before preparing food, wash with boiled (then cooled) water, bottled water, or water from another acceptable source (New York State Department of Health).",
+            "Don’t use water that has sewage or chemicals in it for washing at all (New York State Department of Health)."
+          ]
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        }
+      ]
+    },
+    {
+      "h": "Hand sanitizer",
+      "blocks": [
+        {
+          "p": "Use it only when you have no soap and water (CDC)."
+        },
+        {
+          "steps": [
+            "Check the label: it must contain at least 60% alcohol (CDC).",
+            "Put the amount the label gives on the palm of one hand (CDC).",
+            "Rub it over all surfaces of your hands and fingers until they are dry, about 20 seconds (CDC). Don’t wipe it off before it has dried (CDC)."
+          ]
+        },
+        {
+          "list": [
+            "It does not work well on hands that are visibly dirty or greasy (CDC). Wash those with soap and water.",
+            "Soap and water remove some germs better than sanitizer does: Cryptosporidium, norovirus and Clostridium difficile (CDC). Hand sanitizer does not work well against norovirus, a common cause of vomiting and diarrhea, and is not a substitute for handwashing (CDC).",
+            "It might not remove harmful chemicals, such as pesticides, or heavy metals like lead (CDC).",
+            "Anyone preparing food must wash with soap and water; sanitizer does not replace it for them (CDC, evacuation centers).",
+            "Watch young children when they use it, so they don’t swallow the alcohol (CDC)."
+          ]
+        },
+        {
+          "warn": "Don’t make your own hand sanitizer. CDC does not recommend producing or using homemade hand sanitizer."
+        }
+      ]
+    },
+    {
+      "h": "Hand-washing station",
+      "blocks": [
+        {
+          "p": "If clean tap water is not available, make a temporary hand-washing station from a large water jug (CDC). All you need is a jug of clean drinking water with an on/off spigot, soap, towels, and a catch bucket for the used water (Oregon State University Extension)."
+        },
+        {
+          "steps": [
+            "Clean and sanitize the jug as for storing drinking water (see Store water at home), then fill it with treated water (CDC).",
+            "Indoors: stand the jug at a sink and let it drain into a basin set in the sink, or put a bucket under the sink and disconnect the drain pipe so the sink drains into the bucket (Oregon State University Extension).",
+            "Outdoors: set the jug on a table or counter with a bucket below to catch the used water, or tie a jug with a handle to a tree branch (Oregon State University Extension).",
+            "Put soap and towels within reach. You can put a bar of soap in the toe of a tube sock or nylon stocking and tie it to the jug’s handle (Oregon State University Extension).",
+            "Sanitize the spigot handle regularly, so hands don’t pass germs to each other through it (Oregon State University Extension). Use the strong mix in Clean and disinfect. If you can, use a disposable paper towel to turn the spigot off when you have rinsed (Oregon State University Extension)."
+          ]
+        },
+        {
+          "fig": "handwash-station",
+          "cap": "A jug of treated water with an on/off spigot, set on a table, with soap and towels within reach and a catch bucket below to catch the used water. A bar of soap in the toe of a sock can be tied to the jug’s handle."
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        },
+        {
+          "p": "Set up two if you can: one where food is prepared and one next to the toilet (Oregon State University Extension). Put them where people can’t miss them (UNICEF)."
+        },
+        {
+          "p": "Tippy tap (no spigot needed). A tippy tap is a container that hangs on a horizontal stick and is tipped by stepping on a rope tied through its cap; only the soap is touched (WHO). CDC’s steps:"
+        },
+        {
+          "steps": [
+            "Take a plastic container with a handle and a cap. Heat a big nail over a candle and press its point into the side of the container, opposite the handle, about a finger’s length from the top, to make the pour hole.",
+            "Make a second hole in the top of the cap.",
+            "Push one end of a long rope through the hole in the cap and knot it on the inside. Tie the other end of the rope to one end of a long stick. Put the cap back on.",
+            "Make a hole in the middle of a bar of soap with the nail. Thread a short rope through it and tie it to a short stick, close to the soap. Hang the soap near the container.",
+            "Fill the container with treated water.",
+            "Hang the container by its handle, high enough that the rope holds the end of the long stick off the ground. Hang it where people wash their hands often, and use soap every time.",
+            "To use it: step on the end of the long stick. The rope pulls the cap and tips water out of the hole. Wet your hands, let go, soap, then step again to rinse (worked out from CDC’s sheet and WHO’s description)."
+          ]
+        },
+        {
+          "p": "Tippy tap steps from CDC; materials and design also from UNICEF (a jerry can or bottle, rope, poles or timber, nails)."
+        }
+      ]
+    },
+    {
+      "h": "Where the dirty water goes",
+      "blocks": [
+        {
+          "list": [
+            "Catch it in a bucket or basin (Oregon State University Extension).",
+            "You can use it to dilute urine before you pour the urine out (Oregon State University Extension; see Toilets when the water is off).",
+            "Don’t try to treat it to use again for anything else (Oregon State University Extension).",
+            "Where it can’t drain away, pour it into a soakaway pit filled with rocks or coarse gravel (UNICEF). Treat it like any dirty wash water (see Garbage and dirty water).",
+            "Wear rubber gloves when you empty catch buckets by hand (UNICEF)."
+          ]
+        },
+        {
+          "link": "s:surv-garbage-and-greywater",
+          "label": "Garbage and dirty water"
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        }
+      ]
+    },
+    {
+      "h": "In winter",
+      "blocks": [
+        {
+          "list": [
+            "Cold water cleans hands as well as warm (CDC).",
+            "An insulated drink cooler with a spigot lets you use warm water and slows the water cooling or freezing (University of Vermont Extension)."
+          ]
+        },
+        {
+          "link": "s:surv-water-winter",
+          "label": "Water in winter"
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-stomach-illness-in-a-group",
+          "label": "Stomach illness in a group"
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        },
+        {
+          "link": "c:sanitation-kit",
+          "label": "Sanitation kit checklist"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, About Handwashing (Clean Hands), reviewed February 16, 2024",
+      "used": "Key times list (verbatim); five steps (wet with clean running water warm or cold, turn off tap, lather backs, between fingers, under nails, scrub at least 20 seconds, hum \"Happy Birthday\" from beginning to end twice, rinse, dry); soap and water best in most situations; sanitizer with at least 60% alcohol when soap and water are not available"
+    },
+    {
+      "name": "CDC, Hand Hygiene Frequently Asked Questions, reviewed March 14, 2024",
+      "used": "Warm and cold water remove the same germs; plain soap, bar or liquid, no benefit from antibacterial soap at home; dry completely, germs spread more easily from wet hands; water only: rub under water and dry, less effective; turn tap off while lathering to save water; paper towel or elbow to turn off; don't wash in standing water others have used; CDC does not recommend homemade hand sanitizer"
+    },
+    {
+      "name": "CDC, Hand Sanitizer Guidelines and Recommendations, reviewed March 12, 2024",
+      "used": "At least 60% alcohol; apply to palm, label amount; rub until dry, about 20 seconds; not as effective on visibly dirty or greasy hands; might not remove pesticides or lead; supervise young children"
+    },
+    {
+      "name": "CDC, Hand Sanitizer Facts, reviewed April 17, 2024",
+      "used": "Soap and water more effective at removing Cryptosporidium, norovirus and Clostridium difficile; people wipe sanitizer off before it has dried"
+    },
+    {
+      "name": "CDC, How to Prevent Norovirus, reviewed January 13, 2025",
+      "used": "Hand sanitizer does not work well against norovirus and is not a substitute for handwashing; wash before giving medicine"
+    },
+    {
+      "name": "CDC, Guidelines for Personal Hygiene During an Emergency, reviewed August 5, 2024",
+      "used": "Soap and water boiled or disinfected if authorities or a doctor recommend extra caution (quoted); temporary handwashing station from a large water jug; sanitizer at least 60% alcohol, not as effective on visibly dirty or greasy hands"
+    },
+    {
+      "name": "CDC Global WASH, When and How to Clean Hands (poster)",
+      "used": "Use the cleanest water available; wash when hands are visibly dirty or greasy; single-use towel or air dry"
+    },
+    {
+      "name": "CDC, What You Can Do to Prevent Diarrheal Illness After a Disaster, reviewed July 22, 2024",
+      "used": "Wash before feeding children"
+    },
+    {
+      "name": "CDC, Infection Control Guidance for Community Evacuation Centers Following Disasters (archived; reviewed September 5, 2017)",
+      "used": "Food handlers wash with soap and water; alcohol gel not substituted for them"
+    },
+    {
+      "name": "CDC, How to Make a Tippy Tap (CDC Stacks, CS 229310, no date)",
+      "used": "Tippy tap materials and steps: heated nail, hole opposite the handle a finger length from the top, hole in cap, long rope to long stick, soap on short rope and stick, fill with treated water, hang by handle with the stick off the ground; use soap every time"
+    },
+    {
+      "name": "WHO Kiribati, Health topics (photo caption)",
+      "used": "Tippy tap hangs on a horizontal stick, tipped by stepping on a rope through the cap; only the soap is touched"
+    },
+    {
+      "name": "WHO, Diarrhoeal disease fact sheet, 7 March 2024",
+      "used": "Spread through contaminated food or drinking water or person to person through poor hygiene; hand washing with soap is a key prevention measure"
+    },
+    {
+      "name": "UNICEF, Handwashing Stations and Supplies for the COVID-19 response, May 2020",
+      "used": "Tippy tap materials; soakaway pits with rocks or coarse gravel where there is no drainage; gloves when emptying collection containers by hand; place stations where they can't be missed, near toilets"
+    },
+    {
+      "name": "Oregon State University Extension, Survival Basics: Sanitation and Waste Management, EM 9334 (2021)",
+      "used": "Jug of potable water with on/off spigot, soap, towels, catch bucket; sink and outdoor set-ups; jug tied to a branch; soap in a sock; sanitize the spigot handle; two stations (food area and toilet); change cloth towels daily; use catch water to dilute urine; do not treat it for reuse; disposable paper towel to turn off the spigot"
+    },
+    {
+      "name": "North Carolina State Extension (local Environmental Health Department sheet), Boil Water Advisory: Handwashing Station Requirements, updated 8.2.21",
+      "used": "Coolers or jugs with free-flow spigot and catch basin; treated or bottled water"
+    },
+    {
+      "name": "New York State Department of Health, Boil Water Notices: FAQ for Residents and Homeowners (revised November 2018), question 21",
+      "used": "Before preparing food wash with boiled (then cooled), bottled or other acceptable water; water under a Do Not Use notice (sewage or chemicals) not for any purpose"
+    },
+    {
+      "name": "University of Vermont Extension, Insulated Handwashing Station for Cold Weather Use (2020)",
+      "used": "Insulated containers allow warm water and slow cooling or freezing of the supply water"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

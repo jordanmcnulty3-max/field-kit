@@ -2580,7 +2580,7 @@ Not changed: Minor 8 (EPA's 6% / 8.25% comparison table stays in Make water safe
 
 ## Heat pack Task 3: wind chill numbers (src/tooldata/windchill.json, 2026-11-18)
 
-Writer's record. `draft: true` until an independent reviewer re-opens these sources and checks every cell.
+Writer's record. Independent review (task-3-review.md) passed every number (216 cells, constants, axes, bandMinutes); `draft` removed after the title and record fixes below.
 
 ### Sources opened (search, then fetch of a page the search returned)
 
@@ -2593,7 +2593,7 @@ Writer's record. `draft: true` until an independent reviewer re-opens these sour
 7. NWS, Wind Chill Temperature Index brochure — https://www.weather.gov/media/owlie/wind-chill-brochure.pdf
 8. NWS Albany, New York State cold fact sheet — https://www.weather.gov/media/aly/FactSheets/NYSCold.pdf
 9. NWS Amarillo, Wind Chill — https://www.weather.gov/ama/WindChill (chart is an image, windchill.gif)
-10. NOAA JetStream, Wind Chill — https://noaa.gov/jetstream/global/wind-chill (not used for cells; see conflicts)
+10. NOAA JetStream, Wind Chill — https://www.noaa.gov/jetstream/synoptic/wind-chill (the search also returns https://noaa.gov/jetstream/global/wind-chill, which resolves to it; not used for cells or times; see conflicts)
 
 Each page was confirmed to be the NWS/NOAA page asked for (title and office name in the fetched text).
 
@@ -2626,9 +2626,16 @@ All 216 cells transcribed from source 3's text table (rows 5 to 60 mph, 18 value
 
 ### Title (shown for every cell, since every band is 0)
 
-Built from source 1: the -19°F example and its 30 minutes; "you might get hypothermia from exposure to cold" when the thermometer is above freezing. It says the tool gives no frostbite time, that this does not mean the conditions are safe, and names the chart's 30, 10 and 5 minute shaded areas.
+"Wind chill only: no frostbite time is shown. That does not mean it is safe. The National Weather Service says exposed skin can freeze in 30 minutes or less at 0°F with a 15 mph wind (wind chill -19°F), and faster when colder or windier. Hypothermia is possible even above freezing." (51 words.)
+
+- -19°F at 0°F / 15 mph: source 1, "If the temperature is 0°F and the wind is blowing at 15 mph, the wind chill is -19°F."
+- "30 minutes or less": source 1 says "exposed skin can freeze in 30 minutes"; source 3 prints under its table "Frostbite occurs in less than 30 minutes"; source 6's legend says "Frostbite occurs in 30 minutes or less". The more cautious "or less" is used (see conflicts: source 10 says "just a few minutes" for the same cell).
+- "faster when colder or windier": source 7, the shaded areas show 30, 10 and 5 minutes, the shorter times over the colder, windier cells; source 10's examples (10 minutes or less at -40°F / 5 mph, 5 minutes or less at -20°F / 45 mph).
+- Hypothermia above freezing: source 1, "you might get hypothermia from exposure to cold" when the thermometer is above freezing.
 
 ### Conflicts
 
 - Legend minutes: source 5 lists "Frostbite Time for Exposed Skin (minutes)" 30, 15, 10, 5 and source 6 (Alaska) lists 30, 15, 10, 5 and 2 minutes; the national chart (sources 7, 8, and source 4's 30, 10, 5) uses 30, 10 and 5. The national legend is used; no band is shown either way.
 - Source 10 (NOAA JetStream) differs from the NWS chart in several cells as extracted (10 mph/20°F 11 vs 9; 5 mph/-40°F -58 vs -57; 25 mph/-10°F -38 vs -37; 35 mph/-40°F -83 vs -82; its 55 mph row from -15°F repeats the 50 mph row). Not used; the NWS chart, its four copies and the formula agree.
+- Frostbite time at 0°F / 15 mph (-19°F): source 1 says exposed skin "can freeze in 30 minutes"; source 10 (re-opened 2026-11-18) says of the same conditions "At this level, exposed skin can freeze in just a few minutes."; source 3 says "Frostbite occurs in less than 30 minutes" (the line under its table). The title uses the more cautious "30 minutes or less ... and faster when colder or windier"; it does not state "a few minutes", which no NWS page says. Question for Jordan (D number to be assigned by the controller): whether the title should also quote JetStream's "just a few minutes".
+- Source 10, re-opened: "For example, at -40°F and wind speed of just 5 mph, the wind chill is -58°F and frostbite can occur in 10 minutes or less." and at -20°F with a 45 mph wind the "wind chill is also -58°F, yet frostbite is a threat in 5 minutes or less." The same wind chill falls in different frostbite times, so the chart's shaded areas are not a pure wind chill threshold: one more reason no band was derived from wind chill values (NWS Milwaukee's regional "-18 / -32 / -48 or colder" thresholds, found by the reviewer, were likewise not used).

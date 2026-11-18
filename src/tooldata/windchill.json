@@ -1,6 +1,6 @@
 {
   "id": "windchill",
-  "title": "Wind chill only. This tool gives no frostbite time for any conditions: the National Weather Service chart shades frostbite times (30, 10 and 5 minutes) for exposed skin, but those shaded areas could not be checked here, so none is shown. That does not mean these conditions are safe. The National Weather Service says exposed skin can freeze in 30 minutes at 0°F with a 15 mph wind (wind chill -19°F), and that you might get hypothermia from cold even when it is above freezing.",
+  "title": "Wind chill only: no frostbite time is shown. That does not mean it is safe. The National Weather Service says exposed skin can freeze in 30 minutes or less at 0°F with a 15 mph wind (wind chill -19°F), and faster when colder or windier. Hypothermia is possible even above freezing.",
   "values": {
     "c0": {
       "value": 35.74,
@@ -72,21 +72,20 @@
     },
     {
       "name": "National Weather Service Peachtree City (Atlanta), The New Improved Wind Chill Index",
-      "used": "every chart cell: air temperatures 40°F to -45°F, winds 5 to 60 mph"
+      "used": "every chart cell: air temperatures 40°F to -45°F, winds 5 to 60 mph; under the chart: \"Frostbite occurs in less than 30 minutes\" (the title's \"or less\")"
     },
     {
       "name": "National Weather Service La Crosse, Grand Junction and Alaska Region wind chill chart pages",
-      "used": "cross-check of the chart cells (every overlapping cell agrees)"
+      "used": "cross-check of the chart cells (every overlapping cell agrees); the Alaska Region legend's \"Frostbite occurs in 30 minutes or less\""
     },
     {
       "name": "National Weather Service, Wind Chill Temperature Index brochure",
-      "used": "the chart's shaded areas show how long (30, 10 and 5 minutes) a person can be exposed before frostbite develops (the bandMinutes legend)"
+      "used": "the chart's shaded areas show how long (30, 10 and 5 minutes) a person can be exposed before frostbite develops (the bandMinutes legend; shorter times in colder, windier conditions: the title's \"faster when colder or windier\")"
     },
     {
       "name": "National Weather Service Albany, New York State cold fact sheet",
       "used": "the same 30, 10 and 5 minute shaded areas; 0°F with a 20 mph wind gives -22°F, at which exposed skin can freeze in 30 minutes"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

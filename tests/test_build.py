@@ -99,3 +99,96 @@ def test_checklists_are_inlined_sorted_and_release_checked(tree):
     assert text.index('"id":"alpha"') < text.index('"id":"zeta"')
     r, _ = build(tree, '--release')
     assert r.returncode != 0 and 'draft checklist' in r.stderr and 'alpha' in r.stderr
+
+
+def tooldata_file(tree, tid='water', **over):
+    d = tree / 'src' / 'tooldata'
+    d.mkdir(exist_ok=True)
+    item = {'id': tid, 'title': 'Water', 'values': {'boilMinutes': {'value': 1, 'unit': 'minute'}},
+            'sources': [{'name': 'Test', 'used': 'Test'}], 'reviewed': '2026-11-18'}
+    item.update(over)
+    (d / f'{tid}.json').write_text(json.dumps(item), encoding='utf-8')
+    return item
+
+
+def fk_data(index):
+    text = index.read_text(encoding='utf-8')
+    m = re.search(r'window\.FK_DATA=(.*?);</script>', text, re.S)
+    return json.loads(m.group(1).replace('<\\/', '</'))
+
+
+def test_tooldata_is_an_empty_object_with_no_files(tree):
+    assert not (tree / 'src' / 'tooldata').exists() or not list((tree / 'src' / 'tooldata').glob('*.json'))
+    r, index = build(tree)
+    assert r.returncode == 0, r.stderr
+    assert fk_data(index)['tooldata'] == {}
+
+
+def test_tooldata_is_inlined_keyed_by_id(tree):
+    item = tooldata_file(tree)
+    tooldata_file(tree, 'aaa')
+    r, index = build(tree)
+    assert r.returncode == 0, r.stderr
+    data = fk_data(index)['tooldata']
+    assert list(data) == ['aaa', 'water'] and data['water'] == item
+
+
+def test_invalid_tooldata_fails_the_build_naming_the_id(tree):
+    tooldata_file(tree, values={})
+    r, _ = build(tree)
+    assert r.returncode != 0 and 'water' in r.stderr and 'values' in r.stderr
+
+
+def test_release_fails_on_draft_tooldata(tree):
+    tooldata_file(tree, draft=True)
+    r, index = build(tree)
+    assert r.returncode == 0, r.stderr
+    r, _ = build(tree, '--release')
+    assert r.returncode != 0
+    assert 'water' in r.stderr and 'draft tool data' in r.stderr
+
+
+def test_invalid_tooldata_json_names_the_file(tree):
+    d = tree / 'src' / 'tooldata'
+    d.mkdir(exist_ok=True)
+    (d / 'broken.json').write_text('{nope', encoding='utf-8')
+    r, _ = build(tree)
+    assert r.returncode != 0 and 'broken.json' in r.stderr and 'invalid JSON' in r.stderr
+
+
+def link_topic(tree, link):
+    path = tree / 'src' / 'survival' / 'surv-fire.json'
+    t = json.loads(path.read_text(encoding='utf-8'))
+    t['sections'][0]['blocks'].append({'link': link, 'label': 'Tool'})
+    path.write_text(json.dumps(t), encoding='utf-8')
+
+
+def test_topic_may_link_u_water_but_not_an_unknown_tool(tree):
+    link_topic(tree, 'u:water')
+    r, _ = build(tree)
+    assert r.returncode == 0, r.stderr
+    link_topic(tree, 'u:nope')
+    r, _ = build(tree)
+    assert r.returncode != 0 and "unknown link 'u:nope'" in r.stderr
+
+
+def test_every_tool_name_is_a_link_key(tree):
+    for name in ('daylight', 'sos', 'water'):
+        link_topic(tree, f'u:{name}')
+    r, _ = build(tree)
+    assert r.returncode == 0, r.stderr
+
+
+def test_checklist_quantity_is_validated_and_inlined(tree):
+    path = tree / 'src' / 'checklists' / 'ten-essentials.json'
+    c = json.loads(path.read_text(encoding='utf-8'))
+    c['items'][0]['qty'] = {'amount': 1, 'unit': 'gallon', 'per': 'personDay'}
+    path.write_text(json.dumps(c), encoding='utf-8')
+    r, index = build(tree)
+    assert r.returncode == 0, r.stderr
+    got = [x for x in fk_data(index)['checklists'] if x['id'] == 'ten-essentials'][0]
+    assert got['items'][0]['qty'] == {'amount': 1, 'unit': 'gallon', 'per': 'personDay'}
+    c['items'][0]['qty']['per'] = 'week'
+    path.write_text(json.dumps(c), encoding='utf-8')
+    r, _ = build(tree)
+    assert r.returncode != 0 and 'qty' in r.stderr

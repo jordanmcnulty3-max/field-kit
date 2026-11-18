@@ -219,7 +219,14 @@ BLOCK_SHAPES = {'p', 'list', 'steps', 'warn', 'table', 'fig', 'link'}
 BLOCK_COMPANIONS = {'fig': 'cap', 'link': 'label'}
 TABLE_KEYS = {'head', 'rows'}
 CHECKLIST_KEYS = {'id', 'title', 'category', 'summary', 'items', 'sources', 'reviewed', 'draft'}
-ITEM_KEYS = {'id', 'text', 'note'}
+ITEM_KEYS = {'id', 'text', 'note', 'qty'}
+QTY_KEYS = {'amount', 'unit', 'per'}
+QTY_PER = ('person', 'personDay')
+# Survival tools the app registers (src/survival-tools.js); each one is a link target u:<name>.
+TOOL_NAMES = ('daylight', 'sos', 'water')
+TOOLDATA_KEYS = {'id', 'title', 'values', 'sources', 'reviewed', 'draft'}
+TOOLDATA_VALUE_KEYS = {'value', 'unit', 'note'}
+TOOLDATA_ID_PATTERN = re.compile(r'[a-z][a-z0-9-]{0,39}')
 
 
 def _is_date(v):
@@ -383,6 +390,20 @@ def validate_topics(topics, fig_names, link_keys):
     return errors, warnings
 
 
+def _check_qty(where, q, errors):
+    qw = f'{where} qty'
+    if not isinstance(q, dict):
+        errors.append(f'{qw}: must be an object with amount, unit and per')
+        return
+    _unknown_keys(qw, q, QTY_KEYS, errors)
+    if not _pos_num(q.get('amount')):
+        errors.append(f'{qw}: amount must be a number greater than 0')
+    if _blank(q.get('unit')):
+        errors.append(f'{qw}: unit must be non-blank text')
+    if q.get('per') not in QTY_PER:
+        errors.append(f'{qw}: per must be one of {", ".join(QTY_PER)} (got {q.get("per")!r})')
+
+
 def validate_checklists(lists, link_keys):
     """Return (errors, warnings) for checklist files. link_keys is accepted for symmetry with validate_topics;
     checklist items carry no links, so it is unused. Never raises on JSON-decodable input."""
@@ -434,4 +455,52 @@ def validate_checklists(lists, link_keys):
                 errors.append(f'{iw}: text must be non-blank')
             if 'note' in it and _blank(it['note']):
                 errors.append(f'{iw}: note must be non-blank text')
+            if 'qty' in it:
+                _check_qty(iw, it['qty'], errors)
+    return errors, warnings
+
+
+def _finite_num(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool) and v == v and v not in (float('inf'), float('-inf'))
+
+
+def validate_tooldata(items):
+    """Return (errors, warnings) for src/tooldata/*.json: the numbers the Survival tools use. Never raises on JSON-decodable input."""
+    errors, warnings = [], []
+    if not isinstance(items, list):
+        return ['tool data must be a list'], warnings
+    seen = set()
+    for n, t in enumerate(items):
+        if not isinstance(t, dict):
+            errors.append(f'tool data #{n}: must be an object')
+            continue
+        tid = t.get('id')
+        where = f'tool data {tid!r}' if not _blank(tid) else f'tool data #{n}'
+        _check_id(where, tid, seen, TOOLDATA_ID_PATTERN,
+                  'id must be lowercase letters, digits and hyphens, starting with a letter, at most 40 characters',
+                  (), errors)
+        _unknown_keys(where, t, TOOLDATA_KEYS, errors)
+        if _blank(t.get('title')):
+            errors.append(f'{where}: missing title')
+        _check_sources(where, t, errors)
+        _check_reviewed(where, t, errors)
+        _check_draft(where, t, tid, errors, warnings)
+        values = t.get('values')
+        if not isinstance(values, dict) or not values:
+            errors.append(f'{where}: values must be a non-empty object')
+            continue
+        for name, v in values.items():
+            vw = f'{where} value {name!r}'
+            if _blank(name):
+                errors.append(f'{where}: value name must be non-blank text')
+            if not isinstance(v, dict):
+                errors.append(f'{vw}: must be an object with value and unit')
+                continue
+            _unknown_keys(vw, v, TOOLDATA_VALUE_KEYS, errors)
+            if not _finite_num(v.get('value')):
+                errors.append(f'{vw}: value must be a finite number')
+            if _blank(v.get('unit')):
+                errors.append(f'{vw}: unit must be non-blank text')
+            if 'note' in v and _blank(v['note']):
+                errors.append(f'{vw}: note must be non-blank text')
     return errors, warnings

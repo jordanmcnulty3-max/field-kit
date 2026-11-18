@@ -1,8 +1,8 @@
 import copy
 import unittest
 
-from tools.validate import (RESERVED_TOPIC_IDS, TOPIC_CATEGORIES, WHEN, WHERE, draft_ids, topic_draft_ids,
-                            validate, validate_checklists, validate_topics)
+from tools.validate import (RESERVED_TOPIC_IDS, TOOL_NAMES, TOPIC_CATEGORIES, WHEN, WHERE, draft_ids, topic_draft_ids,
+                            validate, validate_checklists, validate_tooldata, validate_topics)
 
 
 def ok(**step_over):
@@ -557,3 +557,134 @@ class ChecklistValidation(unittest.TestCase):
         c = checklist(draft=True); before = copy.deepcopy(c)
         validate_checklists([c], set())
         self.assertEqual(c, before)
+
+
+def qty_item(**over):
+    q = {'amount': 1, 'unit': 'gallon', 'per': 'personDay'}
+    q.update(over)
+    return q
+
+
+class ChecklistQuantity(unittest.TestCase):
+    def has(self, errors, *parts):
+        self.assertTrue(any(all(x in e for x in parts) for e in errors), (parts, errors))
+
+    def with_qty(self, qty):
+        c = checklist(); c['items'][0]['qty'] = qty
+        return cerrs([c])
+
+    def test_valid_quantities(self):
+        for q in (qty_item(), qty_item(amount=0.5, unit='litre', per='person'), qty_item(amount=2.5)):
+            self.assertEqual(self.with_qty(q), [], q)
+
+    def test_amount_must_be_a_positive_number(self):
+        for bad in (0, -1, '2', None, True, float('nan'), float('inf')):
+            self.has(self.with_qty(qty_item(amount=bad)), "'go-bag'", 'qty', 'amount')
+        c = checklist(); c['items'][0]['qty'] = {'unit': 'gallon', 'per': 'person'}
+        self.has(cerrs([c]), 'qty', 'amount')
+
+    def test_unit_must_not_be_blank(self):
+        for bad in ('', '  ', None, 3):
+            self.has(self.with_qty(qty_item(unit=bad)), 'qty', 'unit')
+
+    def test_per_must_be_one_of_two_values(self):
+        for bad in ('day', 'Person', '', None, 1):
+            self.has(self.with_qty(qty_item(per=bad)), 'qty', 'per')
+        self.has(self.with_qty(qty_item(per='group')), "'group'")
+
+    def test_unknown_key_and_non_object(self):
+        self.has(self.with_qty(qty_item(extra=1)), 'qty', "unknown key 'extra'")
+        for bad in ('1 gallon', 4, None, ['x']):
+            self.has(self.with_qty(bad), 'qty', 'object')
+
+
+def tooldata(**over):
+    t = {'id': 'water', 'title': 'Water', 'values': {
+            'perPersonDay': {'value': 1, 'unit': 'gallon'},
+            'boilMinutes': {'value': 1, 'unit': 'minute', 'note': '3 above 5,000 ft'}},
+         'sources': [{'name': 'CDC', 'used': 'Daily water'}], 'reviewed': '2026-11-18'}
+    t.update(over)
+    return t
+
+
+def derrs(items):
+    return validate_tooldata(items)[0]
+
+
+class ToolDataValidation(unittest.TestCase):
+    def has(self, errors, *parts):
+        self.assertTrue(any(all(x in e for x in parts) for e in errors), (parts, errors))
+
+    def test_tool_names(self):
+        self.assertEqual(TOOL_NAMES, ('daylight', 'sos', 'water'))
+
+    def test_valid_and_empty(self):
+        self.assertEqual(validate_tooldata([tooldata()]), ([], []))
+        self.assertEqual(validate_tooldata([]), ([], []))
+
+    def test_id_rules(self):
+        for bad in ('Bad', '1water', 'a_b', 'w' * 41, '', None, 5):
+            self.assertTrue(derrs([tooldata(id=bad)]), bad)
+        self.has(derrs([tooldata(id='Bad')]), "'Bad'", 'id')
+        self.assertEqual(derrs([tooldata(id='w' * 40)]), [])
+        self.has(derrs([tooldata(), tooldata()]), "'water'", 'duplicate')
+
+    def test_unknown_keys(self):
+        self.has(derrs([tooldata(extra=1)]), "'water'", "unknown key 'extra'")
+        t = tooldata(); t['values']['boilMinutes']['zz'] = 1
+        self.has(derrs([t]), "'water'", 'boilMinutes', "unknown key 'zz'")
+
+    def test_values_must_not_be_empty(self):
+        self.has(derrs([tooldata(values={})]), "'water'", 'values')
+        self.has(derrs([tooldata(values=None)]), 'values')
+        self.has(derrs([tooldata(values=[1])]), 'values')
+        t = tooldata(); del t['values']
+        self.has(derrs([t]), 'values')
+
+    def test_value_must_be_a_finite_number(self):
+        for bad in ('1', None, True, float('nan'), float('inf'), float('-inf'), [1]):
+            t = tooldata(); t['values']['boilMinutes']['value'] = bad
+            self.has(derrs([t]), "'water'", 'boilMinutes', 'value')
+        t = tooldata(); del t['values']['boilMinutes']['value']
+        self.has(derrs([t]), 'boilMinutes', 'value')
+        t = tooldata(); t['values']['boilMinutes']['value'] = 0
+        self.assertEqual(derrs([t]), [])
+
+    def test_unit_is_required(self):
+        for bad in ('', '  ', None, 2):
+            t = tooldata(); t['values']['boilMinutes']['unit'] = bad
+            self.has(derrs([t]), "'water'", 'boilMinutes', 'unit')
+        t = tooldata(); del t['values']['boilMinutes']['unit']
+        self.has(derrs([t]), 'boilMinutes', 'unit')
+
+    def test_note_and_value_entry_shape(self):
+        t = tooldata(); t['values']['boilMinutes']['note'] = ''
+        self.has(derrs([t]), 'boilMinutes', 'note')
+        self.has(derrs([tooldata(values={'x': 5})]), "'x'", 'object')
+        self.has(derrs([tooldata(values={'': {'value': 1, 'unit': 'u'}})]), 'name')
+
+    def test_title_sources_reviewed(self):
+        self.has(derrs([tooldata(title='')]), "'water'", 'title')
+        self.has(derrs([tooldata(sources=[])]), "'water'", 'sources')
+        self.has(derrs([tooldata(sources=[{'name': 'x'}])]), 'used')
+        t = tooldata(); del t['sources']
+        self.has(derrs([t]), 'sources')
+        t = tooldata(); del t['reviewed']
+        self.has(derrs([t]), 'missing reviewed')
+        self.has(derrs([tooldata(reviewed='soon')]), 'YYYY-MM-DD')
+
+    def test_draft_is_a_warning(self):
+        errors, warnings = validate_tooldata([tooldata(draft=True)])
+        self.assertEqual(errors, [])
+        self.assertIn('water', warnings[0])
+        self.assertEqual(topic_draft_ids([tooldata(draft=True), tooldata(id='b')]), ['water'])
+        self.has(derrs([tooldata(draft=1)]), 'draft')
+
+    def test_non_dict_inputs_do_not_raise(self):
+        for bad in ('x', None, 5, {}, ['x'], [None], [5], [[]]):
+            self.assertTrue(derrs(bad), bad)
+
+    def test_input_not_mutated(self):
+        t = tooldata(draft=True); before = copy.deepcopy(t)
+        validate_tooldata([t])
+        self.assertEqual(t, before)

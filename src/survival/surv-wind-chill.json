@@ -1,0 +1,224 @@
+{
+  "id": "surv-wind-chill",
+  "title": "Wind chill and cold danger",
+  "category": "heat",
+  "keywords": [
+    "wind chill",
+    "windchill",
+    "feels like",
+    "wind chill chart",
+    "frostbite time",
+    "how long before frostbite",
+    "extreme cold warning",
+    "cold weather advisory",
+    "extreme cold watch",
+    "wind chill warning",
+    "cold snap",
+    "below zero",
+    "wind",
+    "wet and cold",
+    "who is at risk"
+  ],
+  "summary": "Wind chill is how cold it feels on exposed skin when wind and cold work together. It harms people and animals, not cars or pipes. At 0°F with a 15 mph wind, exposed skin can freeze in 30 minutes, and NOAA says in just a few minutes: plan on the shorter time. Wet clothes and wind chill you fast, and hypothermia can happen above freezing.",
+  "when": [
+    "cold"
+  ],
+  "doFirst": [
+    "Extreme Cold Warning or Cold Weather Advisory? Stay indoors if you can. If you must go out, keep the trip short and cover your face, head, hands and feet (CDC).",
+    "Redness or pain in any skin area? Get out of the cold or cover the skin: frostbite may be beginning (CDC). Numb, white, grey or waxy skin: open the Frostbite protocol.",
+    "Someone shivering hard, confused, fumbling or slurring? Open the Hypothermia protocol.",
+    "Wet? Get into dry clothes: wet clothing chills the body quickly (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "What wind chill is",
+      "blocks": [
+        {
+          "p": "The wind chill temperature is how cold people and animals feel when outside. It is based on the rate of heat loss from exposed skin caused by wind and cold. As the wind increases, it draws heat from the body, driving down skin temperature and eventually the internal body temperature (National Weather Service)."
+        },
+        {
+          "list": [
+            "Example: at 0°F with a 15 mph wind, the wind chill is -19°F (National Weather Service).",
+            "It is worked out for the wind at 5 feet (1.5 m), the height of an adult’s face, and assumes no sun, as on a clear night. Bright sunshine may raise the wind chill by 10°F to 18°F (National Weather Service). The chart and the tool give the no-sun figure.",
+            "Wind chill is defined only for air temperatures at or below 50°F (10°C) and wind speeds above 3 mph (National Weather Service).",
+            "Humidity changed the result by less than 1 degree in National Weather Service tests, so it is left out (National Weather Service)."
+          ]
+        },
+        {
+          "p": "The Wind chill tool works it out from the air temperature and wind speed with the National Weather Service formula, for the range the NWS chart covers: 40°F to -45°F and 5 to 60 mph."
+        },
+        {
+          "link": "u:windchill",
+          "label": "Wind chill"
+        }
+      ]
+    },
+    {
+      "h": "What it is not",
+      "blocks": [
+        {
+          "list": [
+            "It applies only to people and animals. Wind only makes things such as car radiators and water pipes cool to the air temperature faster; they will not cool below it. At -5°F with a wind chill of -31°F, your car’s radiator will not drop below -5°F (National Weather Service).",
+            "Frostbite on exposed skin needs the actual air temperature near your skin to be below freezing. When the thermometer is above freezing, wind chill cannot bring you below freezing, so you will not get frostbite, but you might get hypothermia from the cold (National Weather Service).",
+            "It is not a safe line. The National Weather Service says cold is dangerous with or without wind."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Frostbite times",
+      "blocks": [
+        {
+          "p": "The printed National Weather Service chart has three shaded areas that show how long (30, 10 and 5 minutes) a person can be exposed before frostbite develops (National Weather Service). The app can’t show those areas: no National Weather Service page opened gives them as text, so the Wind chill tool shows the wind chill only. That does not mean it is safe."
+        },
+        {
+          "p": "Times stated in words for exact conditions, for exposed skin:"
+        },
+        {
+          "list": [
+            "0°F with a 15 mph wind (wind chill -19°F): “exposed skin can freeze in 30 minutes” (National Weather Service). NOAA JetStream says of the same conditions: “exposed skin can freeze in just a few minutes.” Plan on the shorter time.",
+            "0°F with a 20 mph wind (wind chill -22°F): “exposed skin can freeze in 30 minutes” (National Weather Service, New York State cold fact sheet).",
+            "-40°F with a 5 mph wind: “frostbite can occur in 10 minutes or less” (NOAA JetStream).",
+            "-20°F with a 45 mph wind: “frostbite is a threat in 5 minutes or less” (NOAA JetStream)."
+          ]
+        },
+        {
+          "p": "The last two have almost the same wind chill on the National Weather Service chart (-57°F and -58°F), yet the windier one freezes skin faster (NOAA JetStream). Colder or windier always means less time."
+        },
+        {
+          "warn": "These tests were done on adults. Use the chart as a starting point and be even more cautious with children, older people and anyone in poor health (National Weather Service)."
+        }
+      ]
+    },
+    {
+      "h": "Wet and wind",
+      "blocks": [
+        {
+          "list": [
+            "Wind makes heat leave the body more rapidly. Wetness, even from sweat, also speeds heat loss (OSHA).",
+            "Wet feet lose heat 25 times faster than dry feet. Trench foot can happen at temperatures as high as 60°F (16°C) if the feet are constantly wet (OSHA).",
+            "Hypothermia is most likely at very cold temperatures, but it can happen even above 40°F (4°C) if a person is chilled from rain, sweat or cold water (CDC). Most cases happen between 30 and 50°F (Priorities).",
+            "Get out of wind and rain early, before you are soaked (Priorities). Take layers off before you sweat, and change out of wet clothes (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-dress-for-cold",
+          "label": "Dress for the cold"
+        }
+      ]
+    },
+    {
+      "h": "Who is at risk",
+      "blocks": [
+        {
+          "list": [
+            "Older adults without enough food, clothing or heating (CDC).",
+            "Babies sleeping in cold bedrooms (CDC). Infants are among those most at risk (New York State Department of Health).",
+            "People who stay outdoors for long periods, such as hikers and hunters, and people who work or play outdoors (CDC, New York State Department of Health).",
+            "People who drink alcohol or use drugs (CDC).",
+            "People with poor blood circulation, and anyone not dressed for the cold (CDC).",
+            "Health conditions such as high blood pressure, an underactive thyroid (hypothyroidism) and diabetes; poor physical condition; being wet, badly dressed or exhausted (OSHA).",
+            "Children, older people and people in poor health need more caution than the chart suggests (National Weather Service)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "National Weather Service cold alerts",
+      "blocks": [
+        {
+          "p": "Since about October 1, 2024 the National Weather Service no longer issues Wind Chill Warnings, Watches or Advisories. They became the Extreme Cold Warning, Extreme Cold Watch and Cold Weather Advisory (National Weather Service service change notice)."
+        },
+        {
+          "table": {
+            "head": [
+              "Alert",
+              "Means"
+            ],
+            "rows": [
+              [
+                "Extreme Cold Warning",
+                "Life-threatening cold temperatures and/or wind chill readings are expected"
+              ],
+              [
+                "Extreme Cold Watch",
+                "Life-threatening cold temperatures and/or wind chill readings are possible"
+              ],
+              [
+                "Cold Weather Advisory",
+                "Dangerously cold temperatures and/or wind chill readings are expected"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Wording from the National Weather Service’s New York State cold fact sheet. Each local office sets its own trigger temperatures. For example, in the Rochester, NY area an Extreme Cold Warning is issued when the apparent temperature, with or without wind, is expected to fall to -25°F or below, and a Cold Weather Advisory when the air temperature or wind chill is expected to fall between -15°F and -24°F (National Weather Service)."
+        }
+      ]
+    },
+    {
+      "h": "Danger signs",
+      "blocks": [
+        {
+          "p": "Signs of frostbite and hypothermia, and what to do, are in the Emergency protocols."
+        },
+        {
+          "link": "p:frostbite",
+          "label": "Frostbite"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "National Weather Service, Understanding Wind Chill (Wind Chill Chart page, weather.gov/safety/cold-wind-chill-chart)",
+      "used": "Wind chill is how cold people and animals feel; based on the rate of heat loss from exposed skin; wind drives down skin and then internal temperature; 0°F and 15 mph gives -19°F, at which exposed skin can freeze in 30 minutes; wind at 5 feet from 33-foot readings; assumes no sun, bright sunshine may raise it 10°F to 18°F; defined only at or below 50°F and above 3 mph; humidity under 1 degree, left out; alert criteria set locally, Rochester, NY example (-25°F; -15°F to -24°F); cold is dangerous with or without wind; applies only to people and animals, radiators and pipes cool only to air temperature (-5°F / -31°F example); frostbite needs air below freezing, hypothermia possible above; tests on adults, be more cautious with children, the elderly and persons with compromised health"
+    },
+    {
+      "name": "NOAA JetStream, Wind Chill",
+      "used": "0°F with a 15 mph wind (-19°F): exposed skin can freeze in just a few minutes; -40°F with 5 mph: frostbite in 10 minutes or less; -20°F with 45 mph: frostbite a threat in 5 minutes or less; wind speed affects the onset of frostbite"
+    },
+    {
+      "name": "National Weather Service (Albany), Extreme Cold: Definitions for New York State (fact sheet)",
+      "used": "Cold Weather Advisory, Extreme Cold Watch and Extreme Cold Warning wording; three shaded areas, 30, 10 and 5 minutes before frostbite develops; 0°F with 20 mph gives -22°F, exposed skin can freeze in 30 minutes"
+    },
+    {
+      "name": "National Weather Service, Service Change Notice 23-44 (updated), Implementation of Consolidated NWS Public Weather Program Products Related to Cold (March 26, 2024)",
+      "used": "On or about October 1, 2024, Wind Chill Warning, Watch and Advisory consolidated into Extreme Cold Warning, Extreme Cold Watch and Cold Weather Advisory"
+    },
+    {
+      "name": "National Weather Service, Wind chill chart cells (src/tooldata/windchill.json, reviewed)",
+      "used": "-57°F at -40°F / 5 mph and -58°F at -20°F / 45 mph; chart range 40°F to -45°F and 5 to 60 mph"
+    },
+    {
+      "name": "OSHA, Winter Weather: Cold Stress",
+      "used": "Increased wind speed makes heat leave the body more rapidly; wetness or dampness, even from sweat, speeds heat loss; risk factors: wetness, dressing improperly, exhaustion, hypertension, hypothyroidism, diabetes, poor physical conditioning; wet feet lose heat 25 times faster than dry feet; trench foot as high as 60°F"
+    },
+    {
+      "name": "CDC, Preventing Hypothermia (Winter Weather, reviewed August 25, 2026)",
+      "used": "Hypothermia can occur above 40°F if chilled from rain, sweat or cold water; often older adults with inadequate food, clothing or heating, babies sleeping in cold bedrooms, people outdoors for long periods (hikers, hunters), people who drink alcohol or use illicit drugs; stay indoors in extreme cold"
+    },
+    {
+      "name": "CDC, Preventing Frostbite (Winter Weather, reviewed August 25, 2026)",
+      "used": "Greater chance of frostbite with poor blood circulation or not properly dressed; redness or pain in any skin area: get out of the cold or protect exposed skin, frostbite may be beginning; cover nose, ears, toes, cheeks, chin and fingers"
+    },
+    {
+      "name": "CDC, Safety Guidelines: During & After a Winter Storm (reviewed August 25, 2026)",
+      "used": "Stay indoors in extreme cold, make trips outside brief; stay dry, wet clothing chills the body quickly; remove layers when too warm"
+    },
+    {
+      "name": "New York State Department of Health, Urges New Yorkers to Follow Winter Safety Tips (January 15, 2025)",
+      "used": "Those most at risk are infants, older adults and those who work or play outdoors"
+    },
+    {
+      "name": "Priorities (surv-priorities, checked)",
+      "used": "Hypothermia most cases between 30 and 50°F; get out of wind and rain early"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

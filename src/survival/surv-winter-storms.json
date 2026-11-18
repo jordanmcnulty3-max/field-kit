@@ -1,0 +1,298 @@
+{
+  "id": "surv-winter-storms",
+  "title": "Winter storms",
+  "category": "heat",
+  "keywords": [
+    "winter storm",
+    "snowstorm",
+    "blizzard",
+    "nor'easter",
+    "noreaster",
+    "lake effect",
+    "lake-effect snow",
+    "ice storm",
+    "freezing rain",
+    "snow squall",
+    "winter storm warning",
+    "winter storm watch",
+    "winter weather advisory",
+    "stranded",
+    "stuck in car",
+    "car stuck in snow",
+    "exhaust pipe",
+    "shoveling",
+    "shovelling",
+    "snow shoveling heart attack",
+    "downed power line",
+    "power lines down"
+  ],
+  "summary": "Know what the National Weather Service alerts mean, get ready before the storm and stay off the roads. Shovel slowly. Never touch a fallen power line. If you’re stranded in a car, stay with it, keep the exhaust pipe clear of snow, and run the engine and heater about 10 minutes each hour with one window slightly open.",
+  "when": [
+    "cold"
+  ],
+  "doFirst": [
+    "Stranded in your car? Stay in it (National Weather Service). Clear snow from the exhaust pipe, then run the engine and heater about 10 minutes each hour with one window slightly open (National Weather Service, CDC, Red Cross).",
+    "Never touch a fallen power line (CDC).",
+    "Blizzard or Winter Storm Warning: don’t travel, or delay your trip until conditions improve. If you must travel, carry a winter survival kit (National Weather Service).",
+    "Heart disease or high blood pressure? Follow your doctor’s advice about shoveling. Everyone else: dress warmly and work slowly (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "Northeast storm types",
+      "blocks": [
+        {
+          "list": [
+            "Nor’easter: a storm along the East Coast, most frequent and most violent between September and April. Nor’easters nearly always bring heavy rain or snow and gale-force winds, and sometimes coastal flooding (National Weather Service).",
+            "Lake-effect snow: cold air, often from Canada, crosses the open water of the Great Lakes and builds narrow bands that can drop 2 to 3 inches (5 to 8 cm) of snow an hour or more. Heavy snow can fall in one place while the sun shines a mile or two away (National Weather Service). The bands can bring sudden drops in visibility (National Weather Service).",
+            "Ice storm: freezing rain coats roads, walkways, trees and power lines with ice. Enough ice makes travel dangerous or impossible and is likely to snap power lines and bring down tree branches (National Weather Service).",
+            "Blizzard: frequent gusts of 35 mph or more with falling or blowing snow, frequently cutting visibility to under 1/4 mile for three hours or more. Whiteouts make travel extremely difficult (National Weather Service).",
+            "Snow squall: a short burst of moderate to heavy snow with gusty winds, low visibility and whiteouts, dangerous for drivers (National Weather Service, New York State definitions)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Watches, warnings and advisories",
+      "blocks": [
+        {
+          "p": "Warnings: take action. Watches: be prepared. Advisories: be aware (National Weather Service)."
+        },
+        {
+          "table": {
+            "head": [
+              "Alert",
+              "What the National Weather Service says"
+            ],
+            "rows": [
+              [
+                "Winter Storm Watch",
+                "Conditions are favorable for a significant winter storm: heavy sleet, heavy snow, ice storm, heavy snow and blowing snow, or a mix. Its occurrence, location and timing are still uncertain."
+              ],
+              [
+                "Winter Storm Warning",
+                "A significant winter storm with snow, ice, sleet or blowing snow. Travel will become difficult or impossible in some places. Delay travel until conditions improve."
+              ],
+              [
+                "Blizzard Warning",
+                "Severe winter weather is expected or occurring, with whiteouts. Do not travel. If you get stranded, stay with your vehicle."
+              ],
+              [
+                "Ice Storm Warning",
+                "Ice accumulation that will make travel dangerous or impossible and likely snap power lines and bring down branches. Travel is strongly discouraged."
+              ],
+              [
+                "Lake Effect Snow Warning",
+                "Lake-effect snow squalls or heavy showers are expected to bring significant snowfall, with sudden drops in visibility."
+              ],
+              [
+                "Snow Squall Warning",
+                "Advance notice of a short, intense burst of snow with gusty winds and whiteouts. Sent as a phone alert when squalls pose a substantial threat to travel."
+              ],
+              [
+                "Winter Weather Advisory",
+                "Snow, blowing snow, ice or sleet is expected but below warning level. Expect winter driving conditions and use caution."
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Cold alerts (Extreme Cold Warning, Extreme Cold Watch, Cold Weather Advisory) are in Wind chill and cold danger."
+        },
+        {
+          "link": "s:surv-wind-chill",
+          "label": "Wind chill and cold danger"
+        }
+      ]
+    },
+    {
+      "h": "Before the storm",
+      "blocks": [
+        {
+          "list": [
+            "Stock your home, workplace and vehicles with the supplies you might need. At home, the main worries are losing heat, power and phone service, and running short if the storm lasts more than a day (National Weather Service).",
+            "Refuel heating fuel before you run out: fuel carriers may not reach you for days after a winter storm (National Weather Service).",
+            "Have a battery-powered NOAA Weather Radio or other radio, a flashlight and extra batteries (National Weather Service).",
+            "Make sure your carbon monoxide alarm works and the outside vents are clear; clear them of snow during and after the storm (National Weather Service).",
+            "Winterize the vehicle before the season. Before a trip, fill all fluids, check the lights, heater and wipers, and keep the gas tank near full to avoid ice in the tank and fuel lines (National Weather Service).",
+            "Bring pets inside or move animals to sheltered areas, with water that isn’t frozen (National Weather Service, CDC)."
+          ]
+        },
+        {
+          "link": "c:home-heat-kit",
+          "label": "Home heat kit"
+        },
+        {
+          "link": "c:vehicle-winter-kit",
+          "label": "Vehicle winter kit"
+        }
+      ]
+    },
+    {
+      "h": "During the storm",
+      "blocks": [
+        {
+          "list": [
+            "Stay indoors as much as you can and keep trips outside short (CDC).",
+            "As soon as it is safe to go out, make sure snowdrifts aren’t blocking a gas furnace’s vent. If an upstairs gas furnace vents out the roof, you may need to turn it off until the snow melts off the roof (National Weather Service).",
+            "Any fireplace, wood stove or space heater: use fire safeguards and ventilate it properly (National Weather Service). Read its topic first.",
+            "Keep steps and walkways as free of ice as you can with rock salt, another de-icer or sand (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "p": "Sheltering in your house or another building with the heat out: pick one small room and close it off. See Stay warm when the heat is out."
+        },
+        {
+          "link": "s:surv-heat-out",
+          "label": "Stay warm when the heat is out"
+        },
+        {
+          "p": "Caught outside with no shelter nearby: build a lean-to, windbreak or snow cave to get out of the wind. From time to time, move your arms, legs, fingers and toes vigorously to keep blood moving (National Weather Service)."
+        },
+        {
+          "link": "s:surv-shelter",
+          "label": "Shelter"
+        }
+      ]
+    },
+    {
+      "h": "If you must drive",
+      "blocks": [
+        {
+          "list": [
+            "Avoid travel if you can (CDC, New York State). Don’t travel in low visibility, and avoid ice-covered roads, overpasses and bridges if at all possible (CDC).",
+            "Before you go, clear all ice and snow from the vehicle, tell someone where you are going and your route, and take a fully charged phone, a car charger and an emergency kit (National Weather Service).",
+            "Snowplows travel at up to 35 mph. Never pass a plow while it is working; stay well behind it, where the road is clear and salted (New York State).",
+            "Never pour water on the windshield to clear ice or snow: it can shatter the glass (CDC)."
+          ]
+        },
+        {
+          "link": "c:vehicle-winter-kit",
+          "label": "Vehicle winter kit"
+        }
+      ]
+    },
+    {
+      "h": "Stranded in a vehicle",
+      "blocks": [
+        {
+          "warn": "Stay with the vehicle. Don’t try to walk in a winter storm: you can easily get lost in blowing and drifting snow, and staying in your car lowers the risk of frostbite and raises the chance of rescue (National Weather Service). Leave only if help is visible within 100 yards (91 m) (Red Cross)."
+        },
+        {
+          "steps": [
+            "Make the car easy to see: tie a brightly colored cloth (red is best) to the antenna, and raise the hood once snow stops falling (CDC, Red Cross, National Weather Service).",
+            "Clear snow from the exhaust pipe before you run the engine, and keep it clear, to lower the risk of carbon monoxide poisoning (National Weather Service, CDC, Red Cross).",
+            "Run the engine and heater for about 10 minutes each hour, with one window slightly open for fresh air, the downwind one if you can (National Weather Service, CDC, Red Cross).",
+            "At night, turn on the dome light while the engine runs (National Weather Service).",
+            "Move anything you need from the trunk into the passenger area. Wrap your whole body, including your head, in extra clothing, blankets or newspapers. Huddle with others for warmth (CDC).",
+            "Keep moving your arms and legs as you sit, and stay awake: you will be less vulnerable to cold-related health problems (CDC).",
+            "Use flashlights in the dark, not candles (Red Cross). Don’t eat snow: it lowers your body temperature (CDC)."
+          ]
+        },
+        {
+          "warn": "Don’t rely on the car for heat: it could break down (CDC). If anyone in the car gets a headache, dizziness, drowsiness or confusion, think carbon monoxide: open it up to fresh air and open the protocol."
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        }
+      ]
+    },
+    {
+      "h": "Shoveling and hard work",
+      "blocks": [
+        {
+          "list": [
+            "Cold weather puts extra strain on the heart. If you have heart disease or high blood pressure, follow your doctor’s advice about shoveling snow or other hard work in the cold (CDC). The same goes for breathing problems such as asthma (New York State Department of Health).",
+            "Otherwise, dress warmly and work slowly so you don’t sweat too much. Your body is already working hard just to stay warm, so don’t overdo it (CDC).",
+            "Avoid overexertion: shoveling heavy snow, pushing a vehicle or walking in deep snow. The strain of the cold and hard work may cause a heart attack (Red Cross).",
+            "Stretch before you go out, and cover your mouth to protect your lungs from very cold air (Red Cross)."
+          ]
+        },
+        {
+          "link": "p:chest-pain",
+          "label": "Chest pain"
+        }
+      ]
+    },
+    {
+      "h": "Downed lines and after the storm",
+      "blocks": [
+        {
+          "warn": "Heavy snow and ice can bring down power lines and cause gas leaks. Both can be deadly but are not obvious at first glance (National Weather Service). Never touch a fallen power line, and never drive through standing water with downed lines in it (CDC)."
+        },
+        {
+          "list": [
+            "Check your home, and check on family and neighbors who live alone (National Weather Service).",
+            "Melting snow can flood roads, and creeks and rivers often overflow. Avoid flooded roads (National Weather Service).",
+            "Partly cleared roads may be icy or blocked. Watch for black ice and potholes (National Weather Service).",
+            "Walking on ice is extremely dangerous: many cold-weather injuries come from falls on icy sidewalks, steps, driveways and porches (CDC)."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "National Weather Service, Winter Weather Warnings, Watches and Advisories (weather.gov/safety/winter-ww)",
+      "used": "Blizzard Warning (gusts of 35 mph or more, falling or blowing snow, visibility under 1/4 mile for three hours or more; do not travel; winter survival kit; if stranded stay with your vehicle); Winter Storm Warning (delay travel); Ice Storm Warning (dangerous or impossible travel, snapped power lines, falling branches, travel strongly discouraged; usually around 1/4 inch, figure not used); Lake Effect Snow Warning; Winter Storm Watch; Winter Weather Advisory; freezing rain and sleet"
+    },
+    {
+      "name": "National Weather Service (Albany), Winter Weather: Definitions for New York State (fact sheet)",
+      "used": "Winter Storm Watch: occurrence, location and timing still uncertain; Snow Squall Warning: intense, limited-duration snow with gusty winds and whiteouts, Wireless Emergency Alert when tagged Significant"
+    },
+    {
+      "name": "National Weather Service, What is a Nor’easter? (weather.gov/safety/winter-noreaster)",
+      "used": "Storm along the East Coast; most frequent and violent September to April; heavy rain or snow, gale-force winds, rough seas, occasional coastal flooding"
+    },
+    {
+      "name": "National Weather Service, What is a Lake Effect Snow? (weather.gov/safety/winter-lake-effect-snow)",
+      "used": "Cold air often from Canada over open Great Lakes water; narrow bands of 2 to 3 inches an hour or more; sun a mile or two away"
+    },
+    {
+      "name": "National Weather Service, Winter Weather Safety for You and Your Family (brochure, NOAA PA 201855, 11-06-25 edition)",
+      "used": "Warnings take action, watches be prepared, advisories be aware; stock home, office and vehicles; slow down; clear the vehicle; tell someone your route; charged phone, car charger, emergency kit; if your car gets stuck stay in the vehicle; run the motor about 10 minutes each hour for heat; open the window a little; clear snow from the exhaust pipe; dome light at night while the engine runs; raise the hood after snow stops; outside: find shelter, lean-to, windbreak or snow cave, move arms, legs, fingers and toes; inside: fire safeguards and ventilation, gas furnace vent and snowdrifts, upstairs roof-vented furnace; after: floods, icy or blocked roads, downed power lines and gas leaks deadly but not obvious, check home, family and isolated neighbors, black ice and potholes"
+    },
+    {
+      "name": "National Weather Service, Prepare! Don’t Let a Winter Storm Take You by Surprise (weather.gov/safety/winter-before)",
+      "used": "Main concerns at home: loss of heat, power and phone service, shortage of supplies if the storm lasts more than a day; refuel heating fuel before empty, fuel carriers may not reach you for days; NOAA Weather Radio, flashlight and batteries; CO detector working, outside vent clear and cleared of snow; fluids, lights, heater, wipers; gas tank near full; winterize the vehicle"
+    },
+    {
+      "name": "National Weather Service Twin Cities, Winter Hazard Awareness Week in Minnesota (November 7, 2023)",
+      "used": "Stay in your vehicle; do not attempt to walk in a winter storm, you can easily become lost; staying in your car decreases the risk of frostbite and increases the chance of rescue (its engine-run advice differs; see the record)"
+    },
+    {
+      "name": "CDC, Safety Guidelines: During & After a Winter Storm (reviewed August 25, 2026)",
+      "used": "Stay indoors, trips brief; ice on steps and walkways, rock salt, de-icer or sand; walking on ice extremely dangerous; cold strains the heart, follow your doctor’s advice about shoveling, dress warmly and work slowly; don’t travel in low visibility, avoid ice-covered roads, overpasses and bridges; never pour water on the windshield; don’t rely on a car for heat, it could break down; staying in the car is often safest; brightly colored cloth on the antenna, raise the hood if not snowing; move items from the trunk; wrap the whole body including the head; stay awake; run the motor and heater about 10 minutes per hour with one window slightly open; snow not blocking the exhaust pipe; keep moving arms and legs; don’t eat snow; huddle"
+    },
+    {
+      "name": "CDC, Preparing for a Winter Storm (reviewed December 2, 2025)",
+      "used": "Avoid traveling if possible; pets indoors or sheltered with unfrozen water"
+    },
+    {
+      "name": "CDC, What to Do to Protect Yourself During a Power Outage (reviewed August 26, 2026)",
+      "used": "Never touch a fallen power line; do not drive through standing water if downed power lines are in the water"
+    },
+    {
+      "name": "American Red Cross, Giant Winter Storm Threatens Millions; Follow these Safety Steps (February 21, 2023)",
+      "used": "Stretch before going out; avoid overexertion (shoveling heavy snow, pushing a vehicle, walking in deep snow), strain may cause a heart attack; cover your mouth; if stranded stay in the vehicle; don’t leave unless help is visible within 100 yards (91 meters); brightly colored cloth, preferably red, on the antenna and raise the hood after snow stops; engine about 10 minutes each hour, heater while running; exhaust pipe clear, slightly open a downwind window; flashlights, not candles"
+    },
+    {
+      "name": "New York State Governor’s Office, Governor Hochul Urges Caution Ahead of Ice and Lake Effect Snow Systems (December 28, 2025): Winter Driving Safety Tips",
+      "used": "Avoid unnecessary travel; snowplows travel at up to 35 mph; never pass a snowplow while it is operating; safest place is well behind the plow where the road is clear and salted"
+    },
+    {
+      "name": "New York State Department of Health, Urges New Yorkers to Follow Winter Safety Tips (January 15, 2025)",
+      "used": "People with heart problems, breathing disorders like asthma, or high blood pressure should follow their doctor’s advice about shoveling or strenuous outdoor exercise"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

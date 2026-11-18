@@ -947,7 +947,7 @@ def test_wc_data_text_is_shown_as_text(page, app_url):
 
 
 def test_wc_links_appear_only_for_keys_that_resolve(page, app_url):
-    wc_boot(page, app_url)   # no surv-wind-chill topic: the hypothermia and frostbite protocols are shipped
+    wc_boot(page, app_url, topics=[])   # no surv-wind-chill topic (one ships from batch C): the hypothermia and frostbite protocols are shipped
     links = page.locator('#survPage .sv-link')
     assert links.evaluate_all('els => els.map(e => e.dataset.link)') == ['p:hypothermia', 'p:frostbite']
     assert page.locator('#survPage button[data-link="s:surv-wind-chill"]').count() == 0

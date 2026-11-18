@@ -63,7 +63,7 @@
           ]
         },
         {
-          "warn": "FEMA and Lake Champlain Sea Grant say not to drink collected rainwater. CDC says rainwater is not necessarily safe to drink without first removing germs and chemicals. Use roof water for washing, cleaning and flushing. Drink it only if you have nothing safer, and then filter it and boil or disinfect it. Boiling does not remove metals from the roof."
+          "warn": "For rain collected off a roof, FEMA (Where can I find clean drinking water after a disaster?) and Lake Champlain Sea Grant say not to drink it. CDC says rainwater is not necessarily safe to drink without first removing germs and chemicals. Use roof water for flushing toilets and for cleaning. Lake Champlain Sea Grant says it is not safe even for washing: treat it before you wash hands, dishes or food with it. Drink it only if you have nothing safer, and then filter it and boil or disinfect it. Boiling does not remove metals from the roof."
         },
         {
           "link": "s:surv-make-water-safe",
@@ -87,7 +87,7 @@
       "h": "Lakes, streams, springs",
       "blocks": [
         {
-          "p": "Rain, streams, rivers and other moving water, ponds, lakes and natural springs can all be made safe by treatment (CDC, FEMA). Rivers, streams and lakes might carry livestock waste, human sewage and chemicals (CDC)."
+          "p": "Rain caught directly on a clean tarp or in a clean container, streams, rivers and other moving water, ponds, lakes and natural springs can all be made safe by treatment (CDC; FEMA, Food and Water in an Emergency). Rivers, streams and lakes might carry livestock waste, human sewage and chemicals (CDC)."
         },
         {
           "p": "Springs are fed by shallow groundwater and are easily contaminated. Most springs used for drinking need constant disinfection (Penn State Extension). Treat spring water like any other."
@@ -204,11 +204,11 @@
     },
     {
       "name": "FEMA, Where can I find clean drinking water after a disaster?",
-      "used": "Do not drink collected rainwater"
+      "used": "Do not drink collected rainwater (applied to rain collected off a roof)"
     },
     {
       "name": "FEMA with the American Red Cross and USDA, Food and Water in an Emergency",
-      "used": "Outdoor sources (rainwater, moving water, ponds and lakes, springs); avoid water with floating material, an odor or dark color; do not drink floodwater; distillation removes salts"
+      "used": "Outdoor sources to purify (rainwater, moving water, ponds and lakes, springs); avoid water with floating material, an odor or dark color; do not drink floodwater; distillation removes salts"
     },
     {
       "name": "National Weather Service Alaska Region, Winter Weather Hazards",
@@ -224,7 +224,7 @@
     },
     {
       "name": "CDC, Safety Guidelines: Floodwater",
-      "used": "What floodwater can contain; wash hands after contact; avoid exposure with open wounds"
+      "used": "Floodwater can contain human and livestock waste and household, medical and industrial hazardous waste; floods move containers of chemicals; wash hands after contact; avoid exposure with open wounds"
     },
     {
       "name": "New York State Department of Health, Salt and Drinking Water (December 2019)",
@@ -247,6 +247,5 @@
       "used": "Turbid water left to stand and settle; storage for two days reduces contamination further"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

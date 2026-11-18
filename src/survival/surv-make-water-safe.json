@@ -125,6 +125,9 @@
         },
         {
           "p": "Table from CDC; distillation from FEMA. To take salt out of water you need a reverse osmosis filter (CDC) or distillation (FEMA)."
+        },
+        {
+          "p": "None of these methods removes fuel, chemicals or algal toxins (CDC, WHO). Distillation and reverse osmosis remove salt; distillation also removes heavy metals and most, not all, other chemicals (FEMA)."
         }
       ]
     },
@@ -172,7 +175,7 @@
           ]
         },
         {
-          "p": "EPA gives this table for 6% and 8.25% bleach:"
+          "p": "EPA’s table, for comparison only (6% and 8.25% bleach):"
         },
         {
           "table": {
@@ -244,7 +247,7 @@
         {
           "list": [
             "For parasites such as Giardia and Cryptosporidium: an absolute pore size of 1 micron or smaller, or certified to NSF standard 53 or 58 for cyst reduction or removal. Most portable filters remove parasites (CDC).",
-            "For bacteria too: an absolute pore size of 0.3 micron or smaller (CDC). Colorado State University Extension says under 0.1 micron, so smaller is safer.",
+            "For bacteria too: an absolute pore size of 0.3 micron or smaller (CDC; Colorado State University Extension’s table agrees).",
             "Viruses: most portable filters do not remove them (CDC).",
             "Reverse osmosis filters remove parasites, bacteria and viruses, and also remove salt (CDC)."
           ]
@@ -277,10 +280,10 @@
         },
         {
           "steps": [
-            "Use clear water only. If it is cloudy, filter it through a clean cloth, paper towel or coffee filter, then draw off the clear water (CDC).",
+            "Use clear water only. If it is cloudy, filter it through a clean cloth, paper towel or coffee filter, or let it settle and draw off the clear water (CDC).",
             "Fill clean, clear plastic bottles of 1 or 2 liters (about 1 or 2 quarts) (CDC; WHO for the size).",
             "Lay the bottles on their side in direct sun, on a dark surface if you can (CDC).",
-            "Leave them 24 hours if it is sunny and 48 hours if it is cloudy (WHO). CDC says 6 hours of sun or 2 days of cloud; the app uses WHO’s longer times.",
+            "Leave them in direct sun at least 24 hours if it is sunny and 48 hours if it is cloudy. WHO gives these times for places near the equator; CDC says 6 hours of sun or 2 days of cloud. No source gives a time for New York, where the sun is weaker, most of all from fall to spring: there, treat sunlight as unreliable.",
             "Let the water cool and shake it hard before you drink it (WHO)."
           ]
         }
@@ -347,7 +350,7 @@
           "p": "Make water from a private well or collected rain safe as above before you store it to drink (see Store water at home). A flooded well needs disinfecting and testing first (EPA)."
         },
         {
-          "p": "FEMA says not to drink collected rainwater; CDC says rain can be made safe by treatment. Read Find water outside before you drink rain from a roof."
+          "p": "Rain caught directly on a clean tarp or in a clean container: treat it like any wild water (CDC; FEMA, Food and Water in an Emergency). Rain off a roof: FEMA (Where can I find clean drinking water after a disaster?) says not to drink collected rainwater; read Find water outside first."
         },
         {
           "link": "s:surv-find-water",
@@ -412,15 +415,15 @@
     },
     {
       "name": "FEMA with the American Red Cross and USDA, Food and Water in an Emergency",
-      "used": "Distillation: what it removes (microbes that resist boiling and bleach, heavy metals, salts, most other chemicals) and the pot, upside-down lid and cup method, boil 20 minutes; use salt water only if distilled first"
+      "used": "Distillation: what it removes (microbes that resist boiling and bleach, heavy metals, salts, most other chemicals) and the pot, upside-down lid and cup method, boil 20 minutes; use salt water only if distilled first; rainwater listed as an outdoor source to purify"
     },
     {
       "name": "WHO (prepared by WEDC), Technical Notes on Drinking-Water, Sanitation and Hygiene in Emergencies, note 5 (2013)",
-      "used": "Solar disinfection: transparent 1 or 2 litre plastic containers, clear water, 24 hours sunny or 48 hours cloudy near the equator, cool and shake; aerate cooled boiled water by shaking; container with a tap; wash hands with soap before handling drinking water"
+      "used": "Solar disinfection: transparent 1 or 2 litre plastic containers, clear water, 24 hours sunny or 48 hours cloudy near the equator, cool and shake; aerate cooled boiled water by shaking; container with a tap; wash hands with soap before handling drinking water; methods remove physical and microbiological pollution, not chemical contamination; solar times given for areas near the equator only"
     },
     {
       "name": "Colorado State University Extension, Guide to Treating Water in the Backcountry (2022)",
-      "used": "Chlorine dioxide 30 minutes for most pathogens, 4 hours for Cryptosporidium; filters under 0.1 micron capture most bacteria; avoid freezing filters"
+      "used": "Chlorine dioxide 30 minutes for most pathogens, 4 hours for Cryptosporidium; avoid freezing filters"
     },
     {
       "name": "National Park Service, Yosemite, Wilderness in Winter",
@@ -432,9 +435,8 @@
     },
     {
       "name": "FEMA, Where can I find clean drinking water after a disaster?",
-      "used": "Do not drink collected rainwater"
+      "used": "Do not drink collected rainwater (applied to rain collected off a roof)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

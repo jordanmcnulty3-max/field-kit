@@ -346,7 +346,8 @@ def listed(page):
     return page.evaluate("[...document.querySelectorAll('#survCats button[data-key]')].map(b => b.dataset.key)")
 
 
-ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-safe', 's:surv-find-water']
+ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-safe', 's:surv-find-water',
+          's:surv-wells-without-power']   # untagged by ruling (Task 5 fix round 1): well shock, pit and CO warnings
 
 
 def test_f1_safety_topics_are_never_filtered_out_of_the_shipped_home(page, app_url):

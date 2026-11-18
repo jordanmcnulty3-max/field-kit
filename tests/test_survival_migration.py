@@ -27,6 +27,8 @@ MIGRATED = {'surv-dangerous-animals', 'surv-field-dressing-game', 'surv-find-wat
             'surv-traps-and-fishing', 'surv-weather-and-lightning'}
 # Migrated topics a content pack moved to another category and reopened as drafts (water pack, Task 5).
 REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water'}
+# Their figures are pinned: find-water keeps both v6 figures; make-water-safe's water-safe was removed in v7 (Task 13).
+REOPENED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-safe': set()}
 
 
 def new_topics():
@@ -59,9 +61,11 @@ def test_figures_used_equal_old_set_minus_shelter_desert_and_nav_cross():
         olds[tid] = {m[0] for m in FIG_RE.findall(chunk)} - {'shelter-desert', 'nav-cross'}
     for tid, t in new_topics().items():
         figs_now = {b['fig'] for s in t['sections'] for b in s['blocks'] if 'fig' in b}
-        if tid not in olds:
+        if tid in REOPENED_FIGS:
+            assert figs_now == REOPENED_FIGS[tid], tid
+        elif tid not in olds:
             assert figs_now == set(), tid
-        elif t.get('draft') is True and tid not in REOPENED:
+        elif t.get('draft') is True:
             assert figs_now == olds[tid], tid
         else:
             assert figs_now <= olds[tid], tid

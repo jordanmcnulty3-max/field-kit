@@ -368,5 +368,13 @@ docs/content-review.md, "Water pack Task 5"). Changes to existing fields:
 
 **Not changed, noted for the reviewer**
 
-- The v7 list item "Treat all wild water, rain included, before drinking" stays. The new "Rain and roofs" warning adds the more cautious FEMA and Lake Champlain Sea Grant position for rain collected from roofs (decisions D22); the two agree that rain is treated before drinking.
+- The v7 list items "Catch rain on a tarp, poncho or large leaves" and "Treat all wild water, rain included, before drinking" stay. After fix round 1 the topic says so explicitly: rain caught directly on a clean tarp or in a clean container is treated like any wild water (CDC; FEMA, Food and Water in an Emergency); rain collected off a roof is not for drinking unless nothing safer is available (FEMA Q&A, Lake Champlain Sea Grant; decisions D22).
 - The v7 list item "Never drink seawater or urine" stays; the new Distillation section in surv-make-water-safe says salt water is used only if distilled first (FEMA), and never as it is.
+
+**Task 5 fix round 1 (2026-11-18)**
+
+- Still no v7-checked statement reworded or removed in either topic. Changes are to the sections added in Task 5 (traced in docs/content-review.md, "Task 5 fix round 1").
+- Draft. Old: `true`. New: removed from surv-make-water-safe, surv-find-water, surv-water-winter and surv-wells-without-power after the review fixes.
+- surv-wells-without-power tag. Old: `where: ["rural"]`. New: no `where` tag (coordinator's ruling): its flooded-well, well-pit and generator carbon monoxide warnings show under every filter value; tests/test_survival_home.py lists it among the always-visible topics.
+- surv-water-winter keeps `when: ["cold"]`.
+- Sources: "used" lines adjusted where the fixes changed what a source supports (FEMA Q&A applied to roof rain; FEMA booklet: rain as a source to purify; Colorado State: 0.1 micron clause dropped; WHO note 5: not chemical contamination, equator times; CDC Floodwater list; Texas A&M credit "adapted from the American Red Cross and the Institute for Business and Home Safety"; Purdue appliances; NYS DOH 6562 "revised April 2018"; WHO note 1 added).

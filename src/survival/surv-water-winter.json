@@ -17,7 +17,7 @@
     "cold"
   ],
   "doFirst": [
-    "No heat and below freezing? Save the water in your pipes, then shut the main valve and drain the pipes.",
+    "No heat and below freezing? Shut the main valve, catch the water as you drain the pipes, then leave the faucets open.",
     "Don’t eat snow or ice: melt it first, then treat it.",
     "Never use a camp stove indoors, or inside a tent or snow shelter.",
     "Drink often, before you feel thirsty."
@@ -46,12 +46,12 @@
         {
           "steps": [
             "Put a little water in the pot first, then add the snow. It melts faster and the pot won’t scorch (Scout Life; Army ATP 3-50.21: adding water to snow helps it melt faster).",
-            "Plan fuel for it: in winter you may need a stove to melt drinking water because streams can’t be reached (Yosemite National Park, National Park Service).",
+            "Plan fuel for it: in winter you may need a stove to melt drinking water, because streams may be frozen over or buried (Yosemite National Park, National Park Service: streams may not be accessible).",
             "On a sunny day, snow or ice spread on a dark cloth or sheet in the sun melts with no fuel (Army ATP 3-50.21). Catch the water in a container."
           ]
         },
         {
-          "warn": "Melt snow outdoors. Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC), or inside a snow shelter. Never burn charcoal indoors (CDC). Carbon monoxide can kill."
+          "warn": "Melt snow on a camp stove, grill or charcoal only outdoors. Never use a charcoal grill, hibachi, lantern or portable camping stove inside a home, tent or camper (CDC), or inside a snow shelter. Never burn charcoal indoors (CDC). Carbon monoxide can kill."
         },
         {
           "link": "p:carbon-monoxide",
@@ -81,7 +81,7 @@
       "h": "Frozen pipes",
       "blocks": [
         {
-          "p": "In an unheated house, pipes can freeze and burst, and a frozen pipe may already be broken and leak when it thaws (Texas A&M AgriLife Extension, from the American Red Cross)."
+          "p": "In an unheated house, pipes can freeze and burst, and a frozen pipe may already be broken and leak when it thaws (Texas A&M AgriLife Extension, adapted from the American Red Cross)."
         },
         {
           "p": "First save the water that is in the pipes and the water heater."
@@ -99,17 +99,21 @@
             "Drain the pressure tank, if you have a well.",
             "Open all the faucets until they drain completely.",
             "Drain the toilet flush tanks and spray hoses.",
-            "Empty the drain traps of sinks, tubs, showers, toilets, washtubs and floor drains, or pour in propylene-glycol antifreeze, as much as the water in the trap: 1 pint to 1 quart (0.47 to 0.95 L), depending on the size of the trap."
+            "Empty the drain traps of sinks, tubs, showers, toilets, washtubs and floor drains, or pour in propylene-glycol antifreeze, as much as the water in the trap: 1 pint to 1 quart (0.47 to 0.95 L), depending on the size of the trap.",
+            "Turn off the power or fuel to the water heater and other appliances that use water, and drain them, including the pumps of the washing machine and dishwasher. Don’t put antifreeze in appliances or in the water supply pipes, only in drain traps."
           ]
         },
         {
           "warn": "Never put car antifreeze (ethylene glycol) in any part of a home water system (Purdue Extension)."
         },
         {
-          "p": "To thaw a frozen pipe, keep its faucet open and warm the frozen part with a heating pad, a hair dryer, an electric portable space heater or towels soaked in hot water (Texas A&M AgriLife Extension, from the Red Cross)."
+          "p": "Before you thaw a pipe, know where the main water valve is: the pipe may already be broken and leak as it thaws. If it does, shut the main valve until the leak is repaired. Keep electric cords away from water (Texas A&M AgriLife Extension, adapted from the Red Cross)."
         },
         {
-          "warn": "Never thaw pipes with a blowtorch, a kerosene or propane heater, a charcoal stove or any other open flame. They are a serious fire hazard and give off deadly carbon monoxide (Red Cross)."
+          "p": "Then keep its faucet open and warm the frozen part with a heating pad, a hair dryer, an electric portable space heater or towels soaked in hot water, until full water pressure is back (Texas A&M AgriLife Extension, adapted from the Red Cross)."
+        },
+        {
+          "warn": "Never thaw pipes with a blowtorch, a kerosene or propane heater, a charcoal stove or any other open flame. They are a serious fire hazard and give off deadly carbon monoxide (Texas A&M AgriLife Extension, adapted from the Red Cross)."
         }
       ]
     },
@@ -181,18 +185,17 @@
       "used": "Double the bleach for very cold water"
     },
     {
-      "name": "Texas A&M AgriLife Extension, Winter Storms: Preventing and Thawing Frozen Pipes (adapted from the American Red Cross)",
-      "used": "Pipes burst; frozen pipe may already be broken; keep faucet open, heat sources for thawing; never blowtorch, kerosene or propane heater, charcoal stove or open flame (fire, carbon monoxide)"
+      "name": "Texas A&M AgriLife Extension, Winter Storms: Preventing and Thawing Frozen Pipes (adapted from the American Red Cross and the Institute for Business and Home Safety)",
+      "used": "Pipes burst; frozen pipe may already be broken; keep faucet open, heat sources for thawing; never blowtorch, kerosene or propane heater, charcoal stove or open flame (fire, carbon monoxide); electrical cords must not touch water; a leaking thawed pipe: turn off the main water valve until repaired"
     },
     {
       "name": "Purdue University Extension (INPREP), Protect Your Plumbing and Appliances during a Winter Power Failure (2022)",
-      "used": "Shut off main valve or well pump; drain pressure tank; open all faucets; drain toilet tanks and spray hoses; empty traps or add propylene-glycol antifreeze equal to the trap water (1 pint to 1 quart); ethylene glycol not safe in any part of a home water system"
+      "used": "Shut off main valve or well pump; drain pressure tank; open all faucets; drain toilet tanks and spray hoses; empty traps or add propylene-glycol antifreeze equal to the trap water (1 pint to 1 quart); ethylene glycol not safe in any part of a home water system; disconnect power or shut off fuel to water-using units, drain them and the washing machine and dishwasher pumps, no antifreeze in appliances; propylene glycol not recommended in water supply systems"
     },
     {
       "name": "Human Performance Resources by CHAMP (Uniformed Services University), How to prevent cold injuries (2020)",
       "used": "Stay hydrated to prevent cold injury; cold decreases thirst and increases urine output; drink often before thirsty; electrolytes; too much plain water causes hyponatremia"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

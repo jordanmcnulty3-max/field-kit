@@ -226,20 +226,25 @@ Source disagreements found while checking the Survival topics. Each says what th
    Water Providers Consortium water heater hanger: turn the gas knob "to the pilot setting — do not turn it
    completely off". Today: "off" (FEMA), and relight by the heater's or gas company's instructions. Say if the group
    wants "pilot" instead, which avoids relighting but leaves a flame under a tank being drained.
-22. **Rainwater for drinking (surv-find-water, surv-make-water-safe) — Water pack Task 5.** FEMA (Where can I find clean
-   drinking water after a disaster?): do not drink collected rainwater. Lake Champlain Sea Grant (2026): harvested
-   rainwater is unsafe for drinking, cooking or washing. CDC (Collecting Rainwater): not necessarily safe to drink
-   without first removing germs and chemicals; CDC (Find Clean Water) lists rain among sources treatment can make safe.
-   Virginia Cooperative Extension: water from wood, asphalt and tar shingle roofs may only suit irrigation. Today:
-   rain caught directly is treated like any wild water (v7, D4); roof water is for washing, cleaning and flushing, and
-   is drunk only if nothing safer is available, filtered and then boiled or disinfected. Say if the group wants roof
-   rainwater ruled out for drinking altogether, or wants a roof-washer and treatment set-up described (pack 6).
-23. **Filter size for bacteria (surv-make-water-safe) — Water pack Task 5.** CDC: an absolute pore size of 0.3 micron
-   or smaller removes bacteria. Colorado State University Extension: under 0.1 micron captures most bacteria. Today:
-   CDC's figure, "smaller is safer", and always disinfect after filtering.
-24. **Sunlight (SODIS) time (surv-make-water-safe) — Water pack Task 5.** CDC: 6 hours in sun, or 2 days if cloudy. WHO
-   Technical Note 5: near the equator, 24 hours on a sunny day or 48 hours if cloudy. Today: WHO's longer times, and
-   sunlight only as a last resort. Say if the group wants CDC's 6 hours.
+22. **Rainwater for drinking (surv-find-water, surv-make-water-safe) — Water pack Task 5, revised in fix round 1.**
+   FEMA (Where can I find clean drinking water after a disaster?): do not drink collected rainwater. Lake Champlain
+   Sea Grant (2026): harvested rainwater is unsafe for drinking, cooking or washing. CDC (Collecting Rainwater): not
+   necessarily safe to drink without first removing germs and chemicals. CDC (Find Clean Water) and FEMA with the Red
+   Cross and USDA (Food and Water in an Emergency) list rainwater among sources to treat. Virginia Cooperative
+   Extension: water from wood, asphalt and tar shingle roofs may only suit irrigation. Today: rain caught directly on
+   a clean tarp or in a clean container is treated like any wild water (v7, D4); rain off a roof is for flushing
+   toilets and cleaning, is treated before washing hands, dishes or food, and is drunk only if nothing safer is
+   available, filtered and then boiled or disinfected. (The FEMA Q&A does not say "roof"; the app applies it to roof
+   run-off.) Say if the group wants roof rainwater ruled out for drinking altogether, or a roof-washer and treatment
+   set-up described (pack 6).
+23. **Filter size for bacteria (surv-make-water-safe) — Water pack Task 5. Withdrawn in fix round 1.** Colorado State
+   University Extension's own table gives 0.3 micron or smaller for bacteria, as CDC does (only its text says under
+   0.1 micron). No real disagreement; the topic gives CDC's 0.3 micron. Number kept so later items do not shift.
+24. **Sunlight (SODIS) time (surv-make-water-safe) — Water pack Task 5, revised in fix round 1.** CDC: 6 hours in sun,
+   or 2 days if cloudy (no latitude given). WHO Technical Note 5: 24 hours on a sunny day or 48 hours if cloudy, "in
+   areas near the equator". No opened source gives a time for New York's latitude. Today: at least WHO's times, sunlight
+   is a last resort, and the topic says it is unreliable in New York, most of all from fall to spring. Say if the
+   group wants sunlight dropped altogether.
 25. **Disinfecting a well (surv-wells-without-power) — Water pack Task 5.** (a) CDC's current table prints 3 1/4 cups
    of bleach for 30 ft of water in a 10 in casing; CDC's earlier version and its own metric table (888 mL) give
    3 3/4 cups, which fits the rest of the column. Today: 3 3/4 cups, with CDC's printed value noted. (b) Standing time:
@@ -247,8 +252,11 @@ Source disagreements found while checking the Survival topics. Each says what th
    12 to 24 noted. (c) NYS DOH's own leaflet uses a fixed amount (2 quarts of bleach in 10 gallons of water,
    recirculated with the pump for an hour, then 2 more quarts) instead of a table; it needs a working pump. Today:
    CDC's table and steps. (d) With no pump, CDC gives only "bail with a bucket" and "pour water back with a bucket";
-   the topic adds: let it stand 12 hours, then bail until the chlorine smell is gone (the app's reading). Say if a
-   well contractor or the health department should check this before the group relies on it.
+   the topic adds: let it stand 12 hours, then bail until the chlorine smell is gone (the app's reading), with goggles
+   or a face shield (CDC) and never climbing into the well (WHO). (e) Fix round 1: CDC's step mixes the bleach with 3
+   to 5 gallons of water in a 5-gallon bucket, but its tables reach 10 gallons (drilled) and 13 3/4 gallons (dug) of
+   bleach alone; CDC does not say what to do then, and no opened source does, so the topic is silent. Say if a well
+   contractor or the health department should check (d) and (e) before the group relies on them.
 26. **Springs (surv-find-water, surv-wells-without-power) — Water pack Task 5.** Army ATP 3-50.21: springs are
    "typically the safest open source". Penn State Extension: springs are highly susceptible to contamination and most
    need continuous disinfection. Today: treat spring water like any other (Penn State).
@@ -289,3 +297,27 @@ Source disagreements found while checking the Survival topics. Each says what th
    garbage, if necessary", no depth or distance. The Army: a 4 x 4 x 4 ft pit at least 100 yards downstream of any
    water in use (Army alone). Leave No Trace: buried garbage still draws animals. Today: no burying instructions;
    bag, lid and store. Say if the group wants the Army's pit described.
+32. **How long a sick person stays away from food and the group (surv-stomach-illness-in-a-group) — Water pack Task 7.**
+   CDC (norovirus): don't prepare or handle food or care for others; "Wait at least 2 days (48 hours) after symptoms
+   stop." CDC (evacuation centers): separate the sick, and keep ill workers off, until 24 hours after symptoms stop.
+   Minnesota Department of Health (shelters) and University of Minnesota Extension: 72 hours, for food handling and
+   for isolation. Today: the topic uses 3 days (72 hours) for food, water handling and keeping apart; the Emergency
+   protocol Severe vomiting or diarrhea says 2 days (it was not changed: medical content). Say if the protocol should
+   move to 3 days too, or the topic back to 2.
+33. **Bleach for vomit and diarrhea (surv-clean-and-disinfect) — Water pack Task 7.** CDC (norovirus): 5 to 25
+   tablespoons of household bleach (5% to 8%) per gallon (1,000 to 5,000 ppm), at least 5 minutes. CDC (evacuation
+   centers): 1,000 ppm, 5 tablespoons of 6% per gallon, keep wet 10 minutes if possible. Minnesota: 1/3 cup per gallon.
+   Today: CDC's range, wet 10 minutes if you can and never under 5. Say if the group wants one fixed amount instead
+   of a range (for example 1/3 cup, which is CDC's lowest).
+34. **Bleach rinse for dishes (surv-clean-and-disinfect) — Water pack Task 7.** CDC (drinking water advisories): 1
+   teaspoon of unscented bleach per gallon, soak at least 1 minute, air dry (no strength printed). New York State
+   Department of Health: 1 tablespoon per gallon, rinse a minute, air dry (no strength). CDC (bleach after a flood):
+   1 tablespoon of 5% to 9% bleach per gallon for food-contact surfaces, air dry. Today: 1 tablespoon of 5% to 9%, 1
+   minute, air dry completely. Say if the group prefers the weaker teaspoon.
+35. **Everyday surface mix when someone is sick (surv-clean-and-disinfect) — Water pack Task 7.** CDC (hygiene): 5
+   tablespoons (1/3 cup) of 5% to 9% bleach per gallon, or 4 teaspoons per quart, wet at least 1 minute. CDC
+   (evacuation centers): 1 teaspoon per quart (about a quarter as strong), no strength. CDC (after a flood): 1 cup per
+   5 gallons for non-food items. Today: the 5-tablespoon mix for a sick household; the 1-cup-in-5-gallons mix only for
+   emptied buckets and things that don't touch food, as in Toilets when the water is off; the strong vomit mix for a
+   sick person's toilet or bucket. Diluted bleach is mixed fresh every day (CDC; CDC's evacuation guidance allows a
+   week in a lightproof bottle). Say if this is more mixes than the group will use.

@@ -14,9 +14,6 @@
     "spring"
   ],
   "summary": "With no power an electric well pump stops: use stored water, the pressure tank, a hand pump or a safely run generator. After a flood, don’t use the well until it is disinfected and tested.",
-  "where": [
-    "rural"
-  ],
   "doFirst": [
     "Flood water reached the well? Don’t drink, cook, bathe or wash with its water.",
     "Turn off the power to the well before you touch anything. Never step in water around a well unless you are sure the power is off.",
@@ -32,7 +29,8 @@
             "An electric well pump can’t pump water without power (Private Well Class, University of Illinois and RCAP, funded by EPA).",
             "Turn off the power to the pump at the breaker so it doesn’t start on its own when the power comes back, and label that breaker (Private Well Class).",
             "If your pressure tank has a faucet near the bottom, you can draw water from it (Private Well Class). Treat it before drinking if you are not sure the well is safe.",
-            "Use your stored water (Water Systems Council)."
+            "Use your stored water (Water Systems Council).",
+            "When the power comes back, make sure it is fully restored before you start the pump (Private Well Class)."
           ]
         },
         {
@@ -107,6 +105,9 @@
           "p": "CDC says a well or pump contractor should do this. If none can come, these are CDC’s steps. Wear goggles or a face shield, work where there is fresh air and don’t breathe the vapors. Tell everyone not to drink or bathe in the water until every step is done (CDC)."
         },
         {
+          "warn": "Don’t climb down into a well. Bleach gives off chlorine gas; WHO says anyone who must enter a well needs full protective clothing and a breathing apparatus, so clean the lining from the top with a long-handled brush (WHO)."
+        },
+        {
           "p": "Use only plain, unscented household liquid chlorine bleach, usually 5% to 9% (CDC). No splashless, scented or gel bleach (NYS Department of Health)."
         },
         {
@@ -134,13 +135,13 @@
           "p": "Steps from CDC. NYS Department of Health says to let the well stand preferably 12 to 24 hours, and not to drain the chlorinated water into a septic system or sewer. Above 5,000 ft, boil for 3 minutes (EPA)."
         },
         {
-          "p": "With no pump, the faucet steps can’t be done. CDC gives no other no-pump steps; the app’s reading is: let the solution stand in the well at least 12 hours, then bail water out, away from plants and open water, until the chlorine smell is gone."
+          "p": "With no pump, the faucet steps can’t be done. CDC gives no other no-pump steps; the app’s reading is: let the solution stand in the well at least 12 hours, then bail water out, away from plants and open water, until the chlorine smell is gone. Wear goggles or a face shield while you bail: the water is strong bleach (CDC)."
         },
         {
           "p": "Bored and dug wells are hard to disinfect: they are shallow and poorly protected, so flood water can carry dirt back in (CDC)."
         },
         {
-          "p": "Bleach for a drilled or driven well (CDC). Depth of water in the well down the side, width of the casing across the top:"
+          "p": "Bleach for a drilled or driven well (CDC). Find the row for the depth of water standing in the well (not the total depth of the well) and the column for the width of the casing across its inside (CDC):"
         },
         {
           "table": {
@@ -222,7 +223,7 @@
           "p": "*CDC’s current page prints 3 1/4 cups here. Its earlier version of the same table, its own metric table (888 mL) and the rows above and below all give 3 3/4 cups: use 3 3/4 cups."
         },
         {
-          "p": "Bleach for a bored or dug well (CDC). Depth of water down the side, width of the well across the top:"
+          "p": "Bleach for a bored or dug well (CDC). Find the row for the depth of water standing in the well (not the total depth of the well) and the column for the width of the well across its inside (CDC):"
         },
         {
           "table": {
@@ -327,7 +328,7 @@
   "sources": [
     {
       "name": "CDC, How to Disinfect Wells After an Emergency (reviewed May 29, 2025)",
-      "used": "Contractor should do it; do not drink after extensive flooding; fuel or chemicals not made safe by boiling or disinfection; safety (electricity, hazards, do not enter the well pit, goggles, ventilation, warn users); unscented bleach 5-9%; steps for drilled or driven and bored or dug wells including no-pump bailing and bucket mixing, 3-5 gallons in a 5-gallon bucket, 5-10 minute rinse, at least 12 hours, draining, boil 1 minute until tested; both bleach tables and notes; testing after 7-10 days for total coliform and E. coli or fecal coliform, retest 2-4 weeks and 3-4 months, repeat if coliform found"
+      "used": "Contractor should do it; do not drink after extensive flooding; fuel or chemicals not made safe by boiling or disinfection; safety (electricity, hazards, do not enter the well pit, goggles, ventilation, warn users); unscented bleach 5-9%; steps for drilled or driven and bored or dug wells including no-pump bailing and bucket mixing, 3-5 gallons in a 5-gallon bucket, 5-10 minute rinse, at least 12 hours, draining, boil 1 minute until tested; both bleach tables and notes; testing after 7-10 days for total coliform and E. coli or fecal coliform, retest 2-4 weeks and 3-4 months, repeat if coliform found; goggles or face shield when working with chlorine solutions (applied to bailing)"
     },
     {
       "name": "CDC, Disinfecting of Drilled or Driven Wells After a Disaster (earlier version, copy hosted by New Mexico Department of Health)",
@@ -338,12 +339,12 @@
       "used": "Do not drink, cook, bathe or wash with flooded well water; electrician checks wiring; rubber boots and gloves not adequate protection; may not be safe for many months"
     },
     {
-      "name": "New York State Department of Health, Restoring and Testing Your Private Well After a Flood (6562, 2/17)",
+      "name": "New York State Department of Health, Restoring and Testing Your Private Well After a Flood (publication 6562, revised April 2018)",
       "used": "Never step in water around a well unless power is off; no splashless, scented or gel bleach; stand at least 8 hours, preferably 12 to 24; not into septic or sewer; fuel or chemicals: do not use, contact the health department; use other water until the health department says otherwise; NY State certified lab, sterile bottle"
     },
     {
       "name": "Private Well Class (RCAP and University of Illinois, EPA-funded), What do I do if there is a power outage and my well won't work? (2026)",
-      "used": "No pumping without power; turn off power to the pump so it does not restart, label the breaker; pressure tank faucet near the bottom"
+      "used": "No pumping without power; turn off power to the pump so it does not restart, label the breaker; pressure tank faucet near the bottom; make sure power is fully restored before starting the pump"
     },
     {
       "name": "Water Systems Council (wellcare), Homeowner Emergency Localized Plan (HELP)",
@@ -368,8 +369,11 @@
     {
       "name": "Penn State Extension, Spring Development and Protection (Water Facts #4)",
       "used": "Springs susceptible to contamination, most need continuous disinfection; fence livestock, redirect surface water, activities at least 100 feet from the spring box; fluctuating flow unreliable"
+    },
+    {
+      "name": "WHO (prepared by WEDC), Technical Notes on Drinking-Water, Sanitation and Hygiene in Emergencies, note 1, Cleaning and disinfecting wells (2011)",
+      "used": "Bleach gives off chlorine gas, a serious health hazard; if you must enter the well, full protective clothing and a breathing apparatus; clean the lining from outside with a long-handled brush"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

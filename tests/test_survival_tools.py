@@ -947,7 +947,7 @@ def test_wc_data_text_is_shown_as_text(page, app_url):
 
 
 def test_wc_links_appear_only_for_keys_that_resolve(page, app_url):
-    wc_boot(page, app_url)   # no surv-wind-chill topic: the hypothermia and frostbite protocols are shipped
+    wc_boot(page, app_url, topics=[])   # no surv-wind-chill topic (one ships from batch C): the hypothermia and frostbite protocols are shipped
     links = page.locator('#survPage .sv-link')
     assert links.evaluate_all('els => els.map(e => e.dataset.link)') == ['p:hypothermia', 'p:frostbite']
     assert page.locator('#survPage button[data-link="s:surv-wind-chill"]').count() == 0
@@ -961,6 +961,13 @@ def test_wc_links_include_the_topic_once_it_exists_and_open_it(page, app_url):
     links.first.click()
     wait_hash(page, '#/survival/surv-wind-chill')
     expect(page.locator('#survPage h2')).to_have_text('Wind chill and cold exposure')
+
+
+def test_wc_links_lead_with_the_shipped_wind_chill_topic(page, app_url):
+    wc_boot(page, app_url)   # shipped topics: batch C's surv-wind-chill resolves
+    links = page.locator('#survPage .sv-link')
+    assert links.evaluate_all('els => els.map(e => e.dataset.link)') == ['s:surv-wind-chill', 'p:hypothermia', 'p:frostbite']
+    assert 'Wind chill and cold danger' in links.first.inner_text()
 
 
 def test_wc_link_opens_the_emergency_protocol(page, app_url):

@@ -486,3 +486,34 @@ Source disagreements found while checking the Survival topics. Each says what th
    snowball) and "light through a wall means it's too thin" are added. The snow trench size (3 feet deep,
    shoulder-wide) is the US Antarctic Program's; no source gives its vent, so the app's existing vent-hole rule applies.
    Say if anyone in the group has trained on these and wants different figures (they would need a source).
+
+50. **How fast skin freezes at 0°F with a 15 mph wind (surv-wind-chill, wind chill tool) — Heat pack Task 6.** National
+   Weather Service, Understanding Wind Chill (weather.gov/safety/cold-wind-chill-chart): at 0°F and 15 mph the wind chill
+   is -19°F and "exposed skin can freeze in 30 minutes". NOAA JetStream, Wind Chill (noaa.gov/jetstream/synoptic/wind-chill),
+   same conditions: "exposed skin can freeze in just a few minutes." NWS Peachtree City prints "less than 30 minutes" and
+   the NWS Alaska legend "30 minutes or less" (wind chill record, Task 3). Today: the tool's title says "30 minutes or less ... and faster when colder
+   or windier" and does not quote JetStream; the Wind chill topic quotes both, NWS first, and says "Plan on the shorter
+   time." Say if the tool's title should also quote JetStream's "just a few minutes".
+51. **Candle in the car kit (vehicle-winter-kit, surv-winter-storms) — Heat pack Task 6.** National Weather Service
+   (Prepare! Don't Let a Winter Storm Take You by Surprise) lists "Candle and matches to provide light and in an emergency,
+   lifesaving heat" in its car kit, and NWS Twin Cities lists "candles/matches/metal cup to melt snow". The Red Cross
+   (February 21, 2023): "Use flashlights in the dark — not candles"; CPSC (as in Carbon monoxide): flashlights or
+   battery-operated candles instead of candles. Today: no candle in the checklist or the topic; flashlight with spare
+   batteries instead. The NWS and CDC "waterproof matches and a can to melt snow" item is kept, with no word on where to
+   light it. Say if the group wants a candle in the car kit, and whether the matches item should say "outside the car".
+52. **How long to run the engine when stranded (surv-winter-storms) — Heat pack Task 6.** NWS brochure (Winter Weather
+   Safety for You and Your Family), CDC (During & After a Winter Storm) and the Red Cross: about 10 minutes each hour, one
+   window slightly open, exhaust pipe clear. This matches the checked Carbon monoxide poisoning protocol (CDC). NWS Twin
+   Cities (Winter Hazard Awareness Week, November 7, 2023): "Run the engine a few minutes every hour, or every half hour in
+   extreme cold." Today: about 10 minutes each hour (three national sources and the protocol). Running more often in
+   extreme cold means more warmth but more exhaust; say if the group wants the Twin Cities line added.
+53. **Sleeping in a stranded car while the engine runs (surv-winter-storms, surv-sleep-warm) — Heat pack Task 6 fix
+   round.** The Red Cross (February 21, 2023): "If more than one person is in the vehicle, take turns sleeping." CDC: "Stay
+   awake." The checked Carbon monoxide poisoning protocol: "Do not run a stove, heater, lantern, generator or engine
+   inside a tent, snow shelter, camper or vehicle where people are sleeping." Read strictly, the protocol means no one may
+   be asleep while the engine runs, which the Red Cross does not say. Today: someone is always awake; anyone asleep is
+   woken before the engine is started for its 10 minutes and the engine is off before anyone goes back to sleep (the
+   strictest reading). Waking everyone hourly costs sleep on a long night; say if the group would rather allow sleepers
+   while one person stays awake and watches the clock. Fix round 2: the doFirst, summary and Sleep warm lines now
+   say the same (everyone awake while the engine runs; off before anyone sleeps); CDC's "stay awake" is kept as
+   "as much as you can", sleeping only in turns with the engine off.

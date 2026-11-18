@@ -1,0 +1,132 @@
+{
+  "id": "vehicle-winter-kit",
+  "title": "Vehicle winter kit",
+  "category": "heat",
+  "summary": "What to keep in each car or truck through the winter, from the National Weather Service, CDC and New York State lists. Keep the gas tank near full, too.",
+  "items": [
+    {
+      "id": "phone-charger",
+      "text": "Mobile phone, charger and spare batteries or a portable charger",
+      "note": "Keep it charged and with you, so you can tell rescuers where you are."
+    },
+    {
+      "id": "blankets",
+      "text": "Blankets or sleeping bags"
+    },
+    {
+      "id": "warm-clothing",
+      "text": "Extra warm, dry clothing: hats, coats, mittens"
+    },
+    {
+      "id": "flashlight",
+      "text": "Flashlight with extra batteries",
+      "note": "Use a flashlight in the dark, not candles (the app’s choice, D51)."
+    },
+    {
+      "id": "radio",
+      "text": "Battery-powered radio with extra batteries"
+    },
+    {
+      "id": "first-aid",
+      "text": "First aid kit, with any medicines you need"
+    },
+    {
+      "id": "knife",
+      "text": "Knife or pocket knife"
+    },
+    {
+      "id": "food",
+      "text": "High-calorie, non-perishable food or quick-energy snacks"
+    },
+    {
+      "id": "water",
+      "text": "Water, in a container"
+    },
+    {
+      "id": "melt-snow",
+      "text": "Waterproof matches and a small can to melt snow for drinking water",
+      "note": "Don’t eat snow: it lowers your body temperature. Never burn anything inside the car (D51; Carbon monoxide)."
+    },
+    {
+      "id": "toilet",
+      "text": "Large empty can to use as an emergency toilet, with tissues, toilet paper and paper towels"
+    },
+    {
+      "id": "traction",
+      "text": "Sack of sand or cat litter for traction, or road salt to melt ice"
+    },
+    {
+      "id": "shovel",
+      "text": "Shovel"
+    },
+    {
+      "id": "scraper",
+      "text": "Windshield scraper and brush"
+    },
+    {
+      "id": "tools",
+      "text": "Tool kit"
+    },
+    {
+      "id": "tow",
+      "text": "Tow rope or tow chains"
+    },
+    {
+      "id": "booster-cables",
+      "text": "Battery booster (jumper) cables"
+    },
+    {
+      "id": "tire-chains",
+      "text": "Tire chains"
+    },
+    {
+      "id": "tire-sealant",
+      "text": "Canned compressed air with sealant, for an emergency tire repair"
+    },
+    {
+      "id": "reflectors",
+      "text": "Hazard reflectors"
+    },
+    {
+      "id": "distress-flag",
+      "text": "Brightly colored cloth or distress flag, help signs, or emergency flares",
+      "note": "Tie the cloth to the antenna if you’re stranded."
+    },
+    {
+      "id": "maps",
+      "text": "Road maps and a compass",
+      "note": "Don’t depend on a phone with limited battery."
+    }
+  ],
+  "sources": [
+    {
+      "name": "National Weather Service, Prepare! Don’t Let a Winter Storm Take You by Surprise (weather.gov/safety/winter-before): Winter Storm Survival Kit",
+      "used": "Mobile phone, charger, batteries; blankets or sleeping bags; flashlight with extra batteries; first-aid kit; knife; high-calorie non-perishable food; extra clothing to keep dry; large empty can as emergency toilet, tissues, toilet paper, paper towels; small can and waterproof matches to melt snow; sack of sand or cat litter; shovel; windshield scraper and brush; tool kit; tow rope; battery booster cables; water container; compass and road maps, don’t depend on mobile devices; keep the gas tank near full. Its candle-and-matches item is left out (see the record and decisions)"
+    },
+    {
+      "name": "CDC, Preparing for a Winter Storm (reviewed December 2, 2025): emergency kit for the car",
+      "used": "Cell phone, portable charger, extra batteries; extra hats, coats, mittens and blankets; windshield scraper; shovel; battery-powered radio with extra batteries; flashlight with extra batteries; water and snack food; first aid kit with any necessary medications and a pocket knife; tow chains or rope; tire chains; canned compressed air with sealant; cat litter or sand, or road salt; booster or jumper cables; hazard or other reflectors; bright colored flag or help signs, emergency distress flag, emergency flares; road maps; waterproof matches and a can to melt snow"
+    },
+    {
+      "name": "New York State Governor’s Office, Governor Hochul Urges Caution Ahead of Ice and Lake Effect Snow Systems (December 28, 2025): Winter Driving Safety Tips",
+      "used": "Blankets, shovel, flashlight and extra batteries, extra warm clothing, tire chains, battery booster cables, quick energy foods, brightly colored cloth as a distress flag; keep a phone or two-way radio charged and with you to call for help and give your location"
+    },
+    {
+      "name": "CDC, Safety Guidelines: During & After a Winter Storm (reviewed August 25, 2026)",
+      "used": "Tie a brightly colored cloth to the antenna; don’t eat snow, it lowers body temperature"
+    },
+    {
+      "name": "American Red Cross, Giant Winter Storm Threatens Millions; Follow these Safety Steps (February 21, 2023)",
+      "used": "Use flashlights in the dark, not candles (under Power Outage Safety; applied to the car by the app, D51)"
+    },
+    {
+      "name": "FEMA, Ahead of Expected Nor’easter, FEMA Encourages Communities in the Storm’s Path to be #WinterReady (January 5, 2024)",
+      "used": "Food and water, a shovel, windshield scraper, blankets, tow chains, reflectors (confirms items above)"
+    },
+    {
+      "name": "Carbon monoxide and burning fuel indoors (surv-carbon-monoxide)",
+      "used": "Never burn charcoal inside a home, garage, vehicle or tent (CPSC)"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

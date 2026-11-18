@@ -1,0 +1,232 @@
+{
+  "id": "surv-stomach-illness-in-a-group",
+  "title": "Stomach illness in a group",
+  "category": "water",
+  "keywords": [
+    "stomach bug",
+    "norovirus",
+    "diarrhea",
+    "vomiting",
+    "outbreak",
+    "isolate",
+    "sick person",
+    "gastro",
+    "food handling",
+    "hygiene"
+  ],
+  "summary": "Treat the sick person with the Emergency protocols, and protect everyone else: keep them apart with one carer and their own toilet, keep them away from food and water, wash hands with soap, and check the water.",
+  "doFirst": [
+    "Care for the sick person with the Severe vomiting or diarrhea and Dehydration protocols.",
+    "Keep them apart from the others, with their own toilet or bucket and one carer.",
+    "They prepare no food and handle no water for others until 3 days after their symptoms stop.",
+    "Everyone washes hands with soap and water. Hand sanitizer does not work well against norovirus.",
+    "Check that every drop the group drinks is being treated."
+  ],
+  "sections": [
+    {
+      "h": "Treat the sick person",
+      "blocks": [
+        {
+          "p": "This topic is about protecting the rest of the group. For the sick person’s care, what to drink and the danger signs that mean they need medical help, use the protocols."
+        },
+        {
+          "link": "p:vomiting-diarrhea",
+          "label": "Severe vomiting or diarrhea"
+        },
+        {
+          "link": "p:dehydration",
+          "label": "Dehydration"
+        }
+      ]
+    },
+    {
+      "h": "How it spreads",
+      "blocks": [
+        {
+          "list": [
+            "Diarrhea spreads through contaminated food or drinking water, or from person to person through poor hygiene (WHO).",
+            "Water with human feces in it, from sewage, septic tanks and latrines, is a particular danger (WHO). Food is another major cause when it is prepared or stored in dirty conditions (WHO).",
+            "Norovirus, a common cause of vomiting and diarrhea, is in vomit and poop, can be there before symptoms start, and can stay in poop for 2 weeks or more after the person feels better (CDC).",
+            "It can stay on surfaces for up to two weeks (University of Minnesota Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Several people sick at once",
+      "blocks": [
+        {
+          "p": "When two or more people get the same illness from the same food or drink, CDC calls it a foodborne outbreak. Check the shared things first:"
+        },
+        {
+          "list": [
+            "Water: is every drop that people drink, cook with and brush teeth with being boiled or treated (CDC)? Recheck how it is done, the dose and the waiting time (Make water safe). Recheck the source too.",
+            "Food: what did everyone eat? Throw away food that might be contaminated: norovirus can be in food that looks, smells and tastes normal (CDC).",
+            "Who cooked: was anyone preparing food while ill, or just after? (Minnesota Department of Health investigators ask this.)"
+          ]
+        },
+        {
+          "p": "Several people ill at the same time can also mean a shared poison or fumes from a stove, heater or engine: the Severe vomiting or diarrhea protocol checks for these."
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        },
+        {
+          "link": "s:surv-find-water",
+          "label": "Find water outside"
+        }
+      ]
+    },
+    {
+      "h": "Keep the sick person apart",
+      "blocks": [
+        {
+          "list": [
+            "Put them in a separate room or part of the shelter or camp, away from people who are not sick (CDC, evacuation centers), as far as your space allows.",
+            "Several sick people can share one area, but keep beds or cots at least 3 feet (90 cm) apart (CDC, evacuation centers).",
+            "Give them their own toilet or bucket toilet that only sick people use (CDC, Minnesota Department of Health). See Toilets when the water is off.",
+            "Serve their food away from people who are not sick, if you can (CDC).",
+            "Keep them apart until 3 days (72 hours) after their vomiting and diarrhea stop (Minnesota Department of Health). CDC’s evacuation-center guidance says at least 24 hours; this app uses the longer time."
+          ]
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        }
+      ]
+    },
+    {
+      "h": "One carer",
+      "blocks": [
+        {
+          "list": [
+            "CDC asks that a sick child be looked after by only one adult, the same one until 24 hours after symptoms stop. Do the same for any sick person if you can, so fewer people are exposed.",
+            "The carer washes hands with soap and water before and after caring for the sick person (CDC), and wears gloves to clean up vomit or diarrhea and to handle soiled laundry (CDC).",
+            "Someone who is ill does not care for others (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Food and water",
+      "blocks": [
+        {
+          "warn": "Anyone who has had vomiting or diarrhea must not prepare or handle food, or handle the group’s water, until 3 days (72 hours) after their symptoms stop (Minnesota Department of Health; University of Minnesota Extension). CDC says: “Wait at least 2 days (48 hours) after symptoms stop.” This app uses the longer time."
+        },
+        {
+          "list": [
+            "Cooks wash with soap and water before they start; hand sanitizer does not replace it for them (CDC).",
+            "Don’t touch ready-to-eat food with bare hands; use utensils (University of Minnesota Extension).",
+            "Wash fruit and vegetables carefully before you prepare them (CDC).",
+            "Wash dishes and food surfaces, then sanitize them with bleach (see Clean and disinfect)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Hand washing",
+      "blocks": [
+        {
+          "list": [
+            "Everyone washes with soap and water for at least 20 seconds, especially after the toilet and before eating or handling food (CDC).",
+            "Use soap and water, not sanitizer: hand sanitizer does not work well against norovirus and is not a substitute for handwashing (CDC).",
+            "Put a hand-washing station by the sick person’s toilet and one where food is made (Oregon State University Extension)."
+          ]
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        }
+      ]
+    },
+    {
+      "h": "Clean up and laundry",
+      "blocks": [
+        {
+          "list": [
+            "Clean up vomit or diarrhea straight away (Minnesota Department of Health): gloves, soak it up, bag it, wash with soap and water, then disinfect with the strong bleach mix and leave it wet (CDC). The full steps and the mix are in Clean and disinfect.",
+            "Wash soiled clothes and bedding at once, with gloves, without shaking them (CDC).",
+            "Clean door handles and other things the sick person touches often, with the surface mix. Use the strong vomit and diarrhea mix on their toilet seat or bucket and on anything soiled with vomit or diarrhea (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        }
+      ]
+    },
+    {
+      "h": "How long to keep it up",
+      "blocks": [
+        {
+          "p": "Keep the separate toilet, the food rule and strict hand washing going until 3 days after the last person’s symptoms stop (Minnesota Department of Health). Norovirus can stay in poop for 2 weeks or more after someone feels better (CDC), so keep washing hands with soap after the toilet."
+        }
+      ]
+    },
+    {
+      "h": "When it is beyond the group",
+      "blocks": [
+        {
+          "p": "The protocols list the danger signs that mean someone needs medical help. Go through them for each sick person, and recheck them."
+        },
+        {
+          "link": "p:vomiting-diarrhea",
+          "label": "Severe vomiting or diarrhea"
+        },
+        {
+          "link": "p:dehydration",
+          "label": "Dehydration"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, How to Prevent Norovirus, reviewed January 13, 2025",
+      "used": "Do not prepare or handle food or care for others; wait at least 2 days (48 hours) after symptoms stop (quoted); hand washing 20 seconds; sanitizer does not work well against norovirus and is not a substitute; virus in vomit and poop before symptoms and in poop 2 weeks or more after; food that might be contaminated thrown away even if normal looking; wash fruit and vegetables; clean-up and laundry"
+    },
+    {
+      "name": "CDC, Infection Control Recommendations for Prevention of Transmission of Diarrheal Diseases in Evacuation Centers (archived; reviewed January 29, 2019)",
+      "used": "Separate sick persons in a separate section until 24 hours after symptoms stop; designated toilets for the sick; serve their food away from others; one responsible adult, the same one, for a sick child; ill workers not back until 24 hours after symptoms stop"
+    },
+    {
+      "name": "CDC, Infection Control Guidance for Community Evacuation Centers Following Disasters (archived; reviewed September 5, 2017)",
+      "used": "Separate area for ill residents; residents with similar symptoms may be housed together with cots at least 3 feet apart; food handlers wash with soap and water, no gel substitute"
+    },
+    {
+      "name": "CDC, Foodborne Disease Outbreak Surveillance System FAQ, September 6, 2024",
+      "used": "Outbreak definition: two or more people get the same illness from the same contaminated food or drink"
+    },
+    {
+      "name": "CDC, About Handwashing (Clean Hands), reviewed February 16, 2024",
+      "used": "Wash before and after caring for someone sick with vomiting or diarrhea"
+    },
+    {
+      "name": "Minnesota Department of Health, Norovirus Toolkit for shelters (date stamp 1/21/2025)",
+      "used": "Separate and cohort ill guests; designated bathrooms; isolate while ill and for 72 hours after symptoms stop; ill staff restricted from food handling and guest contact until 72 hours after; clean up incidents immediately; investigators ask whether food staff were ill and what food was served"
+    },
+    {
+      "name": "University of Minnesota Extension, Step-by-step guide to norovirus cleanup (reviewed 2025)",
+      "used": "Don't prepare or serve food until 72 hours after vomiting or diarrhea stops; no bare-hand contact with ready-to-eat food; norovirus on surfaces up to two weeks"
+    },
+    {
+      "name": "WHO, Diarrhoeal disease fact sheet, 7 March 2024",
+      "used": "Spread through contaminated food or drinking water or person to person through poor hygiene; water with human faeces from sewage, septic tanks and latrines; food prepared or stored in unhygienic conditions"
+    },
+    {
+      "name": "Oregon State University Extension, Survival Basics: Sanitation and Waste Management, EM 9334 (2021)",
+      "used": "Hand-washing stations next to the toilet and where food is prepared"
+    },
+    {
+      "name": "CDC, What You Can Do to Prevent Diarrheal Illness After a Disaster, reviewed July 22, 2024",
+      "used": "Safe water for drinking and other uses including brushing teeth; boil or disinfect if bottled water is not available"
+    },
+    {
+      "name": "CDC, Cleaning and Disinfecting with Bleach, reviewed April 24, 2024",
+      "used": "Surface mix used for things the sick person touches (via Clean and disinfect)"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

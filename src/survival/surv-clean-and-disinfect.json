@@ -1,0 +1,283 @@
+{
+  "id": "surv-clean-and-disinfect",
+  "title": "Clean and disinfect",
+  "category": "water",
+  "keywords": [
+    "disinfect",
+    "bleach",
+    "clean",
+    "sanitize",
+    "dishes",
+    "laundry",
+    "vomit",
+    "diarrhea",
+    "norovirus",
+    "surfaces"
+  ],
+  "summary": "Clean with soap and water first, then disinfect with the right bleach mix for the job; never mix bleach with other cleaners, and never drink a surface mix.",
+  "sections": [
+    {
+      "h": "Clean first, then disinfect",
+      "blocks": [
+        {
+          "list": [
+            "Cleaning removes most germs, dirt and impurities from surfaces. Disinfecting kills most germs on surfaces and objects (CDC).",
+            "Clean before you disinfect. Wash the surface with soap and water first (CDC). Vomit or stool must be cleaned up before disinfecting, or the disinfectant will not work (CDC).",
+            "Disinfect when someone is sick (CDC). Clean things everyone touches often, such as door handles, light switches and counters, regularly (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Bleach to use",
+      "blocks": [
+        {
+          "list": [
+            "Use regular, plain, unscented household bleach of 5% to 9% sodium hypochlorite. Check the label. Don’t use a bleach whose percentage is outside that range or not given (CDC).",
+            "Some laundry bleach and splashless bleach are not suitable for disinfecting (CDC). No scented bleach (CDC).",
+            "Mix with room-temperature water (CDC).",
+            "Mix a fresh batch every day. Diluted bleach is not as effective after 24 hours (CDC).",
+            "Mix it in a container you never use for food or drinking water, and label it."
+          ]
+        },
+        {
+          "warn": "These mixes are for surfaces, dishes and laundry. They are far too strong to drink. Never drink them and never use them to treat drinking water: for drinking water, use the drops in Make water safe."
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe (drinking water)"
+        }
+      ]
+    },
+    {
+      "h": "Safety when mixing",
+      "blocks": [
+        {
+          "warn": "Never mix bleach with ammonia or any other cleaner (CDC). Bleach with ammonia makes toxic chloramine gas; bleach with acids, such as vinegar, toilet bowl cleaners, rust removers and drain cleaners, gives off chlorine gas (Washington State Department of Health). Urine contains ammonia: never pour bleach into a bucket or bag with pee in it."
+        },
+        {
+          "list": [
+            "Wear gloves and eye protection, and rubber boots if the job is wet (CDC).",
+            "Open windows and doors when you use bleach indoors, and try not to breathe the fumes (CDC).",
+            "Read and follow the directions on the bleach label (CDC).",
+            "Coughing, shortness of breath, chest pain, wheezing, watery or sore eyes, throat or nose after mixing chemicals are signs of exposure (Washington State Department of Health). If someone has these, use the Poisoning protocol."
+          ]
+        },
+        {
+          "link": "p:poisoning",
+          "label": "Poisoning (swallowed, inhaled, skin or eye)"
+        }
+      ]
+    },
+    {
+      "h": "Which mix for which job",
+      "blocks": [
+        {
+          "p": "All for plain, unscented household bleach. The strength each source assumes is in the table. 1 gallon is 3.8 L; 1 tablespoon is 15 mL; 1 teaspoon is 5 mL."
+        },
+        {
+          "table": {
+            "head": [
+              "Job",
+              "Bleach",
+              "Water",
+              "Leave it",
+              "Source"
+            ],
+            "rows": [
+              [
+                "Surfaces when someone is sick: door handles, counters, toilet seats, taps",
+                "5 tablespoons (1/3 cup, 75 mL) of 5% to 9% bleach; or 4 teaspoons (20 mL)",
+                "1 gallon; or 1 quart (0.95 L)",
+                "Wet for at least 1 minute",
+                "CDC"
+              ],
+              [
+                "Vomit or diarrhea, after cleaning it up",
+                "5 to 25 tablespoons (75 to 375 mL) of 5% to 8% bleach (1,000 to 5,000 ppm)",
+                "1 gallon",
+                "Wet for 10 minutes if you can; never less than 5",
+                "CDC"
+              ],
+              [
+                "Dishes, cutlery, cups, and counters where food is made",
+                "1 tablespoon (15 mL) of 5% to 9% bleach",
+                "1 gallon",
+                "Dishes: rinse or soak 1 minute. Counters: wipe on and leave wet. Then air dry completely",
+                "CDC, New York State Department of Health"
+              ],
+              [
+                "Emptied buckets, floors, tools and other things that don’t touch food, after washing with soap and water",
+                "1 cup (240 mL) of 5% to 9% bleach",
+                "5 gallons (19 L)",
+                "Air dry",
+                "CDC"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Containers for drinking water have their own mix: see Store water at home."
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        },
+        {
+          "p": "If anyone in the group has vomiting or diarrhea, use the vomit or diarrhea mix for their toilet seat or bucket and anything they have soiled (CDC norovirus guidance: disinfect after someone vomits or has diarrhea)."
+        }
+      ]
+    },
+    {
+      "h": "Surfaces",
+      "blocks": [
+        {
+          "steps": [
+            "Wash the surface with soap and water to remove dirt (CDC).",
+            "Wipe or spray on the bleach mix for the job (table above).",
+            "Keep the surface visibly wet for the whole time in the table (CDC).",
+            "Let it air dry (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Dishes with little water",
+      "blocks": [
+        {
+          "p": "Use disposable plates, cups and cutlery if you have them (CDC). Otherwise:"
+        },
+        {
+          "steps": [
+            "Wash the dishes with dish soap or detergent and rinse them (CDC, New York State Department of Health). Use boiled (then cooled) or other safe water if you have it (New York State Department of Health).",
+            "In a separate basin, mix 1 tablespoon (15 mL) of plain, unscented 5% to 9% bleach in each gallon (3.8 L) of water (New York State Department of Health; CDC for the strength).",
+            "Rinse or soak the washed dishes in it for 1 minute (New York State Department of Health, CDC).",
+            "Let them air dry completely before you use them. Don’t dry them with a towel (CDC, New York State Department of Health)."
+          ]
+        },
+        {
+          "list": [
+            "Clean counters and boards where food is made the same way: wash, rinse, the same bleach mix, air dry (CDC).",
+            "“Green” or “environmentally friendly” dishwasher additives are weak disinfectants; don’t rely on them alone (New York State Department of Health).",
+            "Dump dishwater as dirty wash water (see Garbage and dirty water)."
+          ]
+        },
+        {
+          "link": "s:surv-garbage-and-greywater",
+          "label": "Garbage and dirty water"
+        }
+      ]
+    },
+    {
+      "h": "Vomit and diarrhea",
+      "blocks": [
+        {
+          "p": "Norovirus, a common cause of vomiting and diarrhea, can stay on surfaces for up to two weeks (University of Minnesota Extension). Clean up straight away (Minnesota Department of Health)."
+        },
+        {
+          "steps": [
+            "Keep other people and pets away. Put on rubber or disposable gloves (CDC); a disposable apron and a mask as well if you have them (University of Minnesota Extension). Open windows and doors (CDC).",
+            "Soak up the vomit or stool with paper towels (CDC), or cover it with kitty litter or baking soda and scrape it up with cardboard or paper plates (University of Minnesota Extension). Never vacuum it (Minnesota Department of Health).",
+            "Put everything in a plastic trash bag (CDC).",
+            "Wash the whole area with soap and water (University of Minnesota Extension). The mess must be gone before you disinfect, or the disinfectant will not work (CDC).",
+            "Wet the area with the vomit or diarrhea mix: 5 to 25 tablespoons of plain, unscented 5% to 8% bleach per gallon of water (CDC). Keep it wet for 10 minutes if you can (CDC, evacuation centers), and never less than 5 minutes (CDC).",
+            "Clean the whole area again with soap and hot water (CDC).",
+            "Bag the cloths, apron and mask. Take your gloves off into the bag, seal it, and put on new gloves to carry it to a lidded trash can (University of Minnesota Extension).",
+            "Wash the soiled laundry (below), and wash your hands with soap and water (CDC)."
+          ]
+        },
+        {
+          "list": [
+            "Throw away uncovered food near where someone vomited: University of Minnesota Extension says within 25 feet (7.6 m).",
+            "Keep people out of the room for 2 hours if you can; norovirus can stay in the air that long after someone vomits (University of Minnesota Extension).",
+            "Carpet or rugs: don’t vacuum first. Cover the spot with kitty litter or baking soda to soak it up (University of Minnesota Extension)."
+          ]
+        },
+        {
+          "link": "s:surv-stomach-illness-in-a-group",
+          "label": "Stomach illness in a group"
+        }
+      ]
+    },
+    {
+      "h": "Laundry of a sick person",
+      "blocks": [
+        {
+          "steps": [
+            "Take off clothes and bedding with vomit or poop on them straight away. Wear rubber or disposable gloves (CDC).",
+            "Handle them carefully. Don’t shake them (CDC).",
+            "Remove any vomit or stool first, and keep these things apart from other laundry (University of Minnesota Extension).",
+            "With a machine: wash with detergent and hot water on the longest cycle, then dry on the highest heat (CDC). Household bleach can go in the rinse water (CDC, evacuation centers); follow the bleach label (University of Minnesota Extension).",
+            "Without a machine: use the warmest water you can and dry everything completely (CDC). No source we opened gives a hand-washing method for soiled laundry, so keep your gloves on and wash where the water can’t reach food or drinking water.",
+            "Wash your hands with soap and water afterward (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        },
+        {
+          "link": "c:sanitation-kit",
+          "label": "Sanitation kit checklist"
+        },
+        {
+          "link": "p:vomiting-diarrhea",
+          "label": "Severe vomiting or diarrhea"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, When and How to Clean and Disinfect Your Home, reviewed January 31, 2025",
+      "used": "Cleaning removes, disinfecting kills (definitions); clean with soap and water before disinfecting; disinfect when someone is sick; clean high-touch surfaces regularly; protective equipment; ventilation; do not mix products; laundry with warmest appropriate water and dry completely"
+    },
+    {
+      "name": "CDC, Cleaning and Disinfecting with Bleach, reviewed April 24, 2024",
+      "used": "Regular unscented household bleach, 5% to 9% sodium hypochlorite, not if outside the range or not stated; some laundry bleach and splashless bleach not appropriate; 5 tablespoons (1/3 cup) per gallon or 4 teaspoons per quart of room-temperature water; at least 1 minute, visibly wet; new solution daily, less effective after 24 hours; never mix with other cleaners; ventilation; gloves or eye protection; clean dirty surfaces first; follow the label"
+    },
+    {
+      "name": "CDC, How to Safely Clean and Sanitize with Bleach, reviewed August 26, 2026",
+      "used": "Unscented 5% to 9% bleach; never mix bleach with ammonia or any other cleaner; boots, gloves, eye protection; open windows and doors, avoid fumes; food-contact surfaces: wash, rinse, 1 tablespoon per gallon, air dry; non-food surfaces and items: 1 cup per 5 gallons, air dry"
+    },
+    {
+      "name": "CDC, How to Prevent Norovirus, reviewed January 13, 2025",
+      "used": "Vomit and diarrhea clean-up steps in order: gloves, paper towels into a plastic bag, 1,000 to 5,000 ppm bleach (5 to 25 tablespoons of household bleach [5% to 8%] per gallon), at least 5 minutes, clean again with soap and hot water, laundry, trash, wash hands; laundry: remove at once, gloves, don't shake, detergent and hot water at the longest cycle, highest dryer heat, wash hands"
+    },
+    {
+      "name": "CDC, Infection Control Recommendations for Prevention of Transmission of Diarrheal Diseases in Evacuation Centers (archived; reviewed January 29, 2019)",
+      "used": "1,000 ppm (5 tablespoons of 6% bleach per gallon); keep wet 10 minutes if possible; vomit or stool must be cleaned up before disinfecting; solutions daily (weekly only in a lightproof bottle); eye protection when diluting; bleach in laundry rinse water"
+    },
+    {
+      "name": "CDC, Drinking Water Advisories: An Overview, reviewed March 4, 2024",
+      "used": "Disposable plates and utensils if possible; hand-washed dishes: wash and rinse, separate basin of bleach water, soak at least one minute, air dry completely"
+    },
+    {
+      "name": "New York State Department of Health, Boil Water Notices: FAQ for Residents and Homeowners (revised November 2018), question 17",
+      "used": "Hand-washed dishes: boiled (then cooled) or alternate water, or after detergent wash rinse a minute in 1 tablespoon of unscented bleach per gallon; air dry completely; green dishwasher additives are weaker disinfectants"
+    },
+    {
+      "name": "Washington State Department of Health, Dangers of Mixing Bleach with Cleaners",
+      "used": "Don't mix bleach with ammonia, acids or other cleaners; ammonia gives chloramines, acids (vinegar, toilet bowl cleaners, rust removers, drain cleaners) give chlorine gas; exposure symptoms"
+    },
+    {
+      "name": "University of Minnesota Extension, Step-by-step guide to norovirus cleanup (reviewed 2025)",
+      "used": "Norovirus on surfaces up to two weeks; keep people and pets away; gloves, apron, mask; kitty litter or baking soda, scrape with paper plates or cardboard; clean with soapy water; bag waste, new gloves to carry it; food within 25 feet thrown away; area isolated two hours (airborne particles); carpets: don't vacuum first; laundry: remove vomit and stool first, keep separate, bleach per label"
+    },
+    {
+      "name": "Minnesota Department of Health, Norovirus Toolkit for shelters (date stamp 1/21/2025)",
+      "used": "Clean up vomiting or diarrheal incidents immediately; never vacuum vomit"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

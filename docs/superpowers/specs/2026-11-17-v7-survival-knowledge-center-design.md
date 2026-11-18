@@ -10,7 +10,7 @@ Survival, this document wins.
 Survival today is 14 text topics written for a lost hiker anywhere in the world. Jordan wants it to become the
 group's **knowledge center for surviving a long grid-down, wartime or "apocalypse" period**, solo or as a group,
 in town and in the woods, written for **New York and the Northeast United States**. Everyone who will use it
-lives in or around Liverpool, NY, so Central New York is the home case, but the content must still be right
+lives in Central New York, so that is the home case, but the content must still be right
 however far the group travels: the Adirondacks, Catskills and New England mountains, the Great Lakes and
 Finger Lakes, the big cities, and the Atlantic coast. It must work whether the group stays home or has to move.
 

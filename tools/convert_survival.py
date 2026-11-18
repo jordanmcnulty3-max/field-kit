@@ -1,6 +1,10 @@
-"""One-off v6 to v7 conversion: reads tests/fixtures/survival-v6.html, writes src/survival/<id>.json.
+"""HISTORICAL ONE-OFF, kept for the record: the v6 to v7 conversion, already run (v7 Task 2). Do not run it again.
+The topics in src/survival/ have since been source-checked and rewritten; running this would overwrite them with the
+v6 draft text and placeholder sources. It refuses to write unless given --force.
 
-Run `python3 tools/convert_survival.py`. Text is carried word for word (entities decoded, inline tags dropped);
+One-off v6 to v7 conversion: reads tests/fixtures/survival-v6.html, writes src/survival/<id>.json.
+
+Run `python3 tools/convert_survival.py --force`. Text is carried word for word (entities decoded, inline tags dropped);
 the only deletions are the ones listed in docs/v7-migration.md and applied in DELETIONS below.
 """
 import html
@@ -267,6 +271,11 @@ def convert():
 
 
 def main():
+    if '--force' not in sys.argv[1:]:
+        print('convert_survival.py is a historical one-off: running it would overwrite the source-checked topics in '
+              'src/survival/ with v6 draft text. Nothing was written. Pass --force only to redo the original conversion.',
+              file=sys.stderr)
+        return 2
     os.makedirs(OUT, exist_ok=True)
     topics, added = convert()
     for t in topics:

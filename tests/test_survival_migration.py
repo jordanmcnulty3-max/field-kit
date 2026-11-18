@@ -1,12 +1,9 @@
 """Task 2 migration checks, narrowed in Task 13 to topics still in draft; plus the real-sources check. Plain pytest, no browser."""
 import glob
-import html
 import json
 import os
 import re
 import sys
-
-import pytest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
@@ -16,66 +13,15 @@ import figs  # noqa: E402
 from tools.validate import validate_topics  # noqa: E402
 
 FIXTURE = os.path.join(ROOT, 'tests', 'fixtures', 'survival-v6.html')
-MIGRATION = os.path.join(ROOT, 'docs', 'v7-migration.md')
 FIG_RE = re.compile(r'\{\{fig:([a-z0-9-]+)\|(.*?)\}\}', re.S)
-
-
-def norm(s):
-    return re.sub(r'\s+', ' ', s).strip()
 
 
 def v6():
     return open(FIXTURE, encoding='utf-8').read()
 
 
-def plain(fragment):
-    """Old HTML to text: figure markers become captions, tags become spaces, entities are decoded."""
-    fragment = FIG_RE.sub(lambda m: ' ' + m.group(2) + ' ', fragment)
-    return norm(html.unescape(re.sub(r'<[^>]+>', ' ', fragment)))
-
-
-def old_topics():
-    out = {}
-    for chunk in v6().split('</details>')[:-1]:
-        tid = re.search(r'<details class="ref" id="(surv-[^"]+)"', chunk).group(1)
-        out[tid] = plain(chunk[chunk.index('<details'):])
-    return out
-
-
-def migration_list(section):
-    """Entries under '## <section>' as lists of fields split on ' || ' (quoted text unquoted)."""
-    doc = open(MIGRATION, encoding='utf-8').read()
-    body = re.search(r'^## %s\n(.*?)(?=^## |\Z)' % re.escape(section), doc, re.S | re.M).group(1)
-    entries = []
-    for line in body.splitlines():
-        if line.startswith('- ') and ' || ' in line:
-            fields = [f.strip() for f in line[2:].split(' || ')]
-            entries.append([re.fullmatch(r'"(.*)"', f, re.S).group(1) if f.startswith('"') else f for f in fields])
-    return entries
-
-
 def new_topics():
     return {t['id']: t for t in (json.load(open(p, encoding='utf-8')) for p in sorted(glob.glob(os.path.join(ROOT, 'src', 'survival', '*.json'))))}
-
-
-def flatten(topic, skip_headings=()):
-    """Title, then headings, list items, paragraphs, cells and figure captions in order. Link blocks are ignored."""
-    parts = [topic['title']]
-    for sec in topic['sections']:
-        if sec['h'] not in skip_headings:
-            parts.append(sec['h'])
-        for b in sec['blocks']:
-            if 'p' in b or 'warn' in b:
-                parts.append(b.get('p') or b['warn'])
-            elif 'list' in b or 'steps' in b:
-                parts.extend(b.get('list') or b['steps'])
-            elif 'table' in b:
-                parts.extend(b['table']['head'])
-                for row in b['table']['rows']:
-                    parts.extend(row)
-            elif 'fig' in b:
-                parts.append(b['cap'])
-    return norm(' '.join(parts))
 
 
 def test_every_topic_has_real_sources():
@@ -90,31 +36,6 @@ def test_every_topic_has_real_sources():
         names = [s['name'] for s in t['sources']]
         assert not any('Not yet source-checked' in n for n in names), tid
         assert all(s['name'].strip() and s['used'].strip() for s in t['sources']), tid
-
-
-def test_priorities_has_old_priorities_and_picker_bullets_with_frostbite_replaced_by_link():
-    """Word-for-word check against the v6 fixture; applies only while surv-priorities is still a draft."""
-    if new_topics()['surv-priorities'].get('draft') is not True:
-        pytest.skip('surv-priorities has been source-checked (Task 13); its text no longer matches v6 word for word')
-    src = v6()
-    prio = plain(re.search(r'<h2>Priorities</h2>(.*?)</div>', src, re.S).group(1))
-    removed = [r for tid, r, _ in migration_list('Deletions') if tid == 'surv-priorities']
-    assert len(removed) == 1
-    parts = ['Priorities', prio]
-    for region, heading in (('temperate', 'Forest'), ('cold', 'Cold and snow'), ('coastal', 'Coast and sea')):
-        frag = re.search(r'<div class="region" data-region="%s"[^>]*>(.*?)</div>' % region, src, re.S).group(1)
-        parts.append(heading)
-        parts.extend(plain(li) for li in re.findall(r'<li>(.*?)</li>', frag, re.S))
-    expected = norm(' '.join(parts))
-    assert removed[0] in expected
-    expected = norm(expected.replace(' ' + removed[0], '', 1))
-    topic = new_topics()['surv-priorities']
-    assert flatten(topic) == norm('Priorities ' + expected)
-    links = [b for s in topic['sections'] for b in s['blocks'] if 'link' in b]
-    assert [b['link'] for b in links] == ['p:frostbite']
-    cold = [s for s in topic['sections'] if s['h'] == 'Cold and snow'][0]
-    assert cold['blocks'][-1]['link'] == 'p:frostbite'
-    assert 'frostbite' not in json.dumps(cold['blocks'][:-1]).lower()
 
 
 def test_figures_used_equal_old_set_minus_shelter_desert_and_nav_cross():
@@ -151,3 +72,17 @@ def test_draft_topics_keep_placeholder_source_and_all_topics_validate():
     keys |= {'u:daylight', 'u:sos'}   # survival tool keys, as build.py allows them
     errors, _warnings = validate_topics(topics, set(figs.F), keys)
     assert errors == []
+
+
+def test_converter_refuses_to_overwrite_topics_without_force(tmp_path):
+    """tools/convert_survival.py would replace the source-checked topics with v6 drafts: it must refuse unless --force is given."""
+    import shutil, subprocess
+    for rel in ('tools/convert_survival.py', 'tests/fixtures/survival-v6.html'):
+        os.makedirs(tmp_path / os.path.dirname(rel), exist_ok=True)
+        shutil.copy(os.path.join(ROOT, rel), tmp_path / rel)
+    shutil.copytree(os.path.join(ROOT, 'src', 'survival'), tmp_path / 'src' / 'survival')
+    before = {p.name: p.read_bytes() for p in (tmp_path / 'src' / 'survival').iterdir()}
+    r = subprocess.run([sys.executable, str(tmp_path / 'tools' / 'convert_survival.py')], capture_output=True, text=True)
+    assert r.returncode != 0
+    assert '--force' in r.stderr + r.stdout
+    assert {p.name: p.read_bytes() for p in (tmp_path / 'src' / 'survival').iterdir()} == before

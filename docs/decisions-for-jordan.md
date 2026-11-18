@@ -342,3 +342,7 @@ Source disagreements found while checking the Survival topics. Each says what th
    Diluted bleach is mixed fresh every day (CDC; the 2019 evacuation-center page allows a week in a lightproof bottle).
    Say whether the toilet topic's bucket mix should become the strong mix (one fewer mix, stronger), and whether it
    should add "if anyone has vomiting or diarrhea, use the strong mix after emptying, washing and rinsing".
+36. **Bleach mix for rodent droppings (surv-garbage-and-greywater) — Water pack final review.** CDC's rodent clean-up
+   page gives a bleach mix of 1 part bleach to 10 parts water (1 1/2 cups per gallon) but prints no bleach strength,
+   so it was left out. Today: the topic says to soak droppings with "a disinfectant" for 5 minutes, CDC's own word,
+   with no mix. Say whether to add CDC's 1:10 mix as printed, with a note that CDC gives no strength.

@@ -2454,18 +2454,18 @@ earlier this day (quotes above).
 
 ## Water pack Task 8: diagrams (2026-11-18)
 
-Every drawn word and number below comes from the topic named; no figure adds a fact. `handwash-station` is not drawn yet (its topic is still under review).
+Every drawn word and number below comes from the topic named; no figure adds a fact. `handwash-station` was added in fix round 1 once its topic was final.
 
 ### water-safe (surv-make-water-safe, "Make water safe", steps block)
 
 Relabelled: the old figure said 6,500 feet and 6 percent bleach; now matches the checked topic.
-- "1 minute rolling boil": step 2, "Bring it to a rolling boil for at least 1 minute."
+- "Rolling boil", "At least 1 minute": step 2, "Bring it to a rolling boil for at least 1 minute."
 - "3 min above 5,000 ft": step 2, "Above 5,000 ft, boil for 3 minutes."
 - "No fire? Bleach": step 3, "No fire? Use plain, unscented household chlorine bleach (5% to 9% ...)".
-- "8 drops of 5% to 9% bleach per gallon": step 3, "(5% to 9%, such as 6% or 8.25%) ... Add 8 drops per gallon".
+- "8 drops of 5% to 9% unscented bleach per gallon": step 3, "plain, unscented household chlorine bleach (5% to 9%, such as 6% or 8.25%) ... Add 8 drops per gallon".
 - "Stir, wait 30 minutes": step 3, "Stir and let it stand 30 minutes."
 - "1 gal": step 3, "per gallon". The bottle carries no strength label.
-- Alt text: same figures. Doubling for cloudy, coloured or very cold water is in the caption's step, not drawn.
+- Alt text: same figures. Doubling is not drawn; the caption carries it in the topic's words: "Double it if the water is cloudy, colored or very cold."
 
 ### water-heater-drain (surv-water-in-the-house, "Water heater", after the steps)
 
@@ -2495,3 +2495,9 @@ Cat hole only; the group latrine (3 ft deep, 100 ft, 5 ft above groundwater) doe
 - "6 to 8 inches (15 to 20 cm) deep" and "4 to 6 inches (10 to 15 cm) across": step 3.
 - "Soil you dug out": step 4, "fill the hole with the soil you dug out".
 - The New York rule of 150 feet is in the topic's next paragraph, not drawn.
+
+### handwash-station (surv-handwashing, "Hand-washing station", after the jug steps)
+
+- "Jug with an on/off spigot", "Catch bucket", "Towel": "All you need is a jug of clean drinking water with an on/off spigot, soap, towels, and a catch bucket for the used water."
+- "Soap in a sock": step 4, "put a bar of soap in the toe of a tube sock or nylon stocking and tie it to the jug's handle".
+- Not drawn: the soakaway pit (the topic's "Where the dirty water goes" section), the tippy tap, any numbers. The jug stands on a table with the bucket below, as in the outdoors step.

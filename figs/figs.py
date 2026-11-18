@@ -45,24 +45,26 @@ svg('water-bag', 190, 'Clear plastic bag tied over a leafy branch in sun, with w
 {lbl(40,152,'Leafy, non-poisonous','')}{lbl(40,166,'branch in full sun','')}
 {lbl(336,186,'Water collects in the low corner','tb','end')}''')
 
-svg('water-safe', 175, 'Boil water for 1 minute, or 3 minutes above 5,000 feet; or, with no fire, add 8 drops of 5% to 9% unscented bleach per gallon, stir and wait 30 minutes', f'''
-{lbl(80,22,'Boil','tb','middle')}
+svg('water-safe', 182, 'Rolling boil for at least 1 minute, or 3 minutes above 5,000 feet; or, with no fire, add 8 drops of 5% to 9% unscented bleach per gallon, stir and wait 30 minutes', f'''
+{lbl(80,20,'Rolling boil','tb','middle')}
 <path d="M30 80 H130 V140 Q130 150 120 150 H40 Q30 150 30 140 Z" class="k"/>
 <path d="M30 90 H18 M130 90 H142" class="k t3"/>
 <path d="M34 98 H126" class="a"/>
 <circle cx="55" cy="115" r="4" class="a t1"/><circle cx="80" cy="108" r="3" class="a t1"/><circle cx="102" cy="121" r="5" class="a t1"/><circle cx="68" cy="133" r="3" class="a t1"/><circle cx="112" cy="138" r="3" class="a t1"/>
 <path d="M60 76 q-5 -6 0 -11 M100 76 q-5 -6 0 -11" class="m t1"/>
 {flame(55,170,0.42)}{flame(80,170,0.5)}{flame(105,170,0.42)}
-{lbl(80,46,'1 minute rolling boil','','middle')}{lbl(80,62,'3 min above 5,000 ft','tm','middle')}
+{lbl(80,46,'At least 1 minute','','middle')}{lbl(80,62,'3 min above 5,000 ft','tm','middle')}
 <line x1="170" y1="20" x2="170" y2="160" class="m t1 d"/>
 {lbl(260,20,'No fire? Bleach','tb','middle')}
+<g transform="translate(0,8)">
 <rect x="196" y="76" width="40" height="66" rx="6" class="k"/><rect x="207" y="62" width="18" height="14" class="k"/><rect x="204" y="54" width="24" height="8" rx="2" class="k kf"/>
 <path d="M254 82 q6 9 0 14 q-6 -5 0 -14z M254 102 q6 9 0 14 q-6 -5 0 -14z M254 122 q6 9 0 14 q-6 -5 0 -14z" class="afs"/>
 <path d="M276 92 h44 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-44 a6 6 0 0 1 -6 -6 v-44 a6 6 0 0 1 6 -6z" class="k"/>
 <path d="M286 92 v-12 h20 v12" class="k"/><path d="M272 116 H324" class="a"/>
 {lbl(298,138,'1 gal','tm','middle')}
-{lbl(260,34,'8 drops of 5% to 9%','','middle')}{lbl(260,47,'bleach per gallon','','middle')}
-{lbl(260,168,'Stir, wait 30 minutes','tb','middle')}''')
+</g>
+{lbl(260,32,'8 drops of 5% to 9%','','middle')}{lbl(260,44,'unscented bleach','','middle')}{lbl(260,56,'per gallon','','middle')}
+{lbl(260,174,'Stir, wait 30 minutes','tb','middle')}''')
 
 
 def badge(cx, cy, n):
@@ -75,7 +77,7 @@ heater_rows = [(40, ['Power or gas OFF']), (82, ['Let it cool']), (124, ['Close 
                (172, ['Open a hot tap']), (214, ['Container here']), (256, ['Open the drain'])]
 heater_list = ''.join(badge(184, y - 4, i) + ''.join(lbl(200, y + 14 * j, t) for j, t in enumerate(rows))
                       for i, (y, rows) in enumerate(heater_rows, 1))
-svg('water-heater-drain', 318, 'Water heater tank drained in six steps: 1 Power or gas OFF; 2 Let it cool; 3 Close the water intake valve; 4 Open a hot tap; 5 Container here; 6 Open the drain. Refill the tank before turning power or gas back on.', f'''
+svg('water-heater-drain', 324, 'Water heater tank drained in six steps: 1 Power or gas OFF; 2 Let it cool; 3 Close the water intake valve; 4 Open a hot tap; 5 Container here; 6 Open the drain. Refill the tank before turning power or gas back on.', f'''
 <line x1="6" y1="268" x2="160" y2="268" class="m"/>
 <line x1="38" y1="216" x2="38" y2="232" class="k t3"/><line x1="86" y1="216" x2="86" y2="232" class="k t3"/>
 <rect x="28" y="66" width="68" height="150" rx="12" class="k t3"/>
@@ -107,7 +109,7 @@ svg('toilet-buckets', 186, 'Two-bucket toilet: a lidded pee bucket and a poo buc
 {lbl(170,64,'Seat','tb','middle')}{lead(170,68,170,81)}
 <path d="M258 172 Q292 112 326 172 Z" class="w wf"/>
 <path d="M300 150 L322 118" class="w t3"/><ellipse cx="298" cy="152" rx="9" ry="5" transform="rotate(-50 298 152)" class="w wf"/>
-{arrow(254,158,214,158)}
+{arrow(262,146,212,106)}
 {lbl(336,24,'Cover material','tb','end')}{lbl(336,38,'half a cup (120 mL)','','end')}{lbl(336,52,'after each poo','','end')}{lead(282,58,284,142)}''')
 
 svg('latrine', 200, 'Cat hole in side view: a hole 6 to 8 inches (15 to 20 cm) deep and 4 to 6 inches (10 to 15 cm) across, at least 200 feet (60 m) from water, with the soil you dug out beside it', f'''
@@ -123,6 +125,23 @@ svg('latrine', 200, 'Cat hole in side view: a hole 6 to 8 inches (15 to 20 cm) d
 {dim(262,150,288,150)}{lbl(275,168,'4 to 6 inches','','middle')}{lbl(275,182,'(10 to 15 cm) across','','middle')}
 {lbl(336,64,'Soil you','','end')}{lbl(336,76,'dug out','','end')}''')
 
+
+svg('handwash-station', 226, 'Hand-washing station: a jug of treated water with an on/off spigot on a table, a bar of soap in a sock tied to its handle, a towel, and a catch bucket on the ground under the spigot', f'''
+<line x1="6" y1="198" x2="176" y2="198" class="m"/>
+<line x1="14" y1="122" x2="14" y2="198" class="k t3"/><line x1="166" y1="122" x2="166" y2="198" class="k t3"/>
+<line x1="8" y1="122" x2="172" y2="122" class="k t5"/>
+<rect x="58" y="52" width="60" height="70" rx="8" class="k"/><rect x="61" y="76" width="54" height="43" rx="6" class="af"/>
+<rect x="78" y="42" width="20" height="10" rx="2" class="k kf"/>
+<path d="M58 108 H44 V116" class="k t3"/><path d="M36 102 H52" class="k t3"/>
+<line x1="44" y1="122" x2="44" y2="158" class="a t3 d"/>
+<path d="M118 62 H132 V88 H118" class="k t3"/>
+<path d="M132 88 V92" class="k t1"/><rect x="122" y="92" width="18" height="18" rx="7" class="k milk"/>
+<rect x="144" y="106" width="26" height="16" rx="2" class="k milk"/><path d="M150 106 V122 M156 106 V122" class="m t1"/>
+<path d="M22 160 L26 198 H70 L74 160 Z" class="k"/><path d="M24 178 H72" class="a"/>
+{lbl(186,40,'Jug with an on/off','')}{lbl(186,54,'spigot','')}{lead(184,46,119,60)}
+{lbl(186,104,'Soap in a sock','')}{lead(184,100,141,100)}
+{lbl(186,130,'Towel','')}{lead(184,126,171,118)}
+{lbl(48,216,'Catch bucket','','middle')}''')
 # ---------------- SHELTER ----------------
 svg('shelter-site', 200, 'Valley cross-section: wind on ridgetops, cold air and floods in the valley floor, a level bench as the best site', f'''
 <path d="M0 55 L45 28 L85 62 L125 112 L155 150 L190 154 L218 130 L236 112 L264 110 L282 84 L305 48 L340 58 L340 200 L0 200 Z" class="gr m"/>

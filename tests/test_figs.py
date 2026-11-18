@@ -97,8 +97,25 @@ def test_every_figure_a_topic_uses_exists():
 
 
 # ---- Water pack Task 8: diagrams carry only what their topic carries ----
+def drawn_of(name):
+    """Only the <text> content actually drawn on the figure (no alt label), lower-cased, apostrophes straightened."""
+    svg, _ = figs.F[name]
+    root = ET.fromstring(svg)
+    drawn = ' '.join(''.join(t.itertext()) for t in root.iter() if t.tag.split('}')[-1] == 'text')
+    return re.sub(r'\s+', ' ', drawn.replace('’', "'")).lower()
+
+
+def alt_of(name):
+    return re.sub(r'\s+', ' ', figs.F[name][1].replace('’', "'")).lower()
+
+
 def topic_json(tid):
     return open(os.path.join(ROOT, 'src', 'survival', f'{tid}.json'), encoding='utf-8').read().replace('’', "'")
+
+
+def topic_caption(tid, name):
+    t = json.load(open(os.path.join(ROOT, 'src', 'survival', f'{tid}.json'), encoding='utf-8'))
+    return [b['cap'] for s in t['sections'] for b in s['blocks'] if b.get('fig') == name][0].replace('’', "'").lower()
 
 
 WATER_FIGS = {
@@ -106,6 +123,7 @@ WATER_FIGS = {
     'water-heater-drain': 'surv-water-in-the-house',
     'toilet-buckets': 'surv-toilet-no-water',
     'latrine': 'surv-latrines',
+    'handwash-station': 'surv-handwashing',
 }
 
 
@@ -115,17 +133,31 @@ def test_water_figure_exists_and_sits_once_in_its_topic(name):
     assert topic_figs()[WATER_FIGS[name]].count(name) == 1
 
 
+def test_drawn_text_helper_excludes_the_alt_label():
+    assert 'water heater tank drained' in alt_of('water-heater-drain')
+    assert 'water heater tank drained' not in drawn_of('water-heater-drain')
+
+
 def test_water_safe_carries_the_checked_figures_only():
-    t = text_of('water-safe')
+    d = drawn_of('water-safe')
     topic = topic_json('surv-make-water-safe').lower()
-    for word in ('1 minute', '3 min', '5,000 ft', '8 drops', '5% to 9%', 'per gallon', '30 minutes'):
-        assert word in t, f'missing {word!r}: {t}'
-    for fact in ('1 minute', '5,000 ft', '8 drops per gallon', '5% to 9%', '30 minutes'):
+    for word in ('rolling boil', 'at least 1 minute', '3 min above 5,000 ft', '8 drops of 5% to 9%', 'unscented bleach',
+                 'per gallon', 'stir, wait 30 minutes'):
+        assert word in d, f'missing {word!r} in drawn text: {d}'
+    for fact in ('rolling boil for at least 1 minute', 'above 5,000 ft', '8 drops per gallon', '5% to 9%',
+                 'unscented', 'stir and let it stand 30 minutes'):
         assert fact in topic, fact
     for old in ('6,500', '6 percent', '6%'):
-        assert old not in t, f'still says {old!r}: {t}'
-    svg, label = figs.F['water-safe']
+        assert old not in d, f'still says {old!r}: {d}'
+    svg, _ = figs.F['water-safe']
+    alt = alt_of('water-safe')
     assert '6,500' not in svg and '6 percent' not in svg and '6%' not in svg
+    for word in ('at least 1 minute', '5,000 feet', '8 drops', '5% to 9%', 'unscented', 'per gallon', '30 minutes'):
+        assert word in alt, f'alt label missing {word!r}'
+    cap = topic_caption('surv-make-water-safe', 'water-safe')
+    for word in ('at least 1 minute', '5,000 ft', '8 drops per gallon', 'unscented 5% to 9%',
+                 'double it if the water is cloudy, colored or very cold', '30 minutes'):
+        assert word in cap, f'caption missing {word!r}'
 
 
 HEATER_LABELS = ['Power or gas OFF', 'Let it cool', 'Close the water intake valve', 'Open a hot tap',
@@ -134,32 +166,54 @@ HEATER_FOOTER = 'Refill the tank before turning power or gas back on'
 
 
 def test_water_heater_drain_labels_numbered_in_order():
-    t = text_of('water-heater-drain')
+    t = drawn_of('water-heater-drain')
     pos = -1
     for i, label in enumerate(HEATER_LABELS, 1):
         want = f'{i} {label}'.lower()
         at = t.find(want, pos + 1)
-        assert at > pos, f'{want!r} not found in order in: {t}'
+        assert at > pos, f'{want!r} not found in order in drawn text: {t}'
         pos = at
-    assert HEATER_FOOTER.lower() in t[pos:]
+    assert HEATER_FOOTER.lower() in t[pos:], t
+    alt = alt_of('water-heater-drain')
+    for i, label in enumerate(HEATER_LABELS, 1):
+        assert f'{i} {label}'.lower() in alt
+    assert HEATER_FOOTER.lower() in alt
 
 
 def test_toilet_buckets_uses_the_topics_words():
-    t = text_of('toilet-buckets')
+    d = drawn_of('toilet-buckets')
     topic = topic_json('surv-toilet-no-water').lower()
     for word in ('pee', 'poo', 'lid', 'seat', 'cover material', 'half a cup (120 ml)', 'after each poo'):
-        assert word in t, f'missing {word!r}: {t}'
-        assert word in topic or word == 'lid', word
-    assert 'bleach' not in t and 'sawdust' not in t
+        assert word in d, f'missing {word!r} in drawn text: {d}'
+        assert word in topic, word
+    assert 'bleach' not in d and 'sawdust' not in d
+    alt = alt_of('toilet-buckets')
+    for word in ('pee', 'poo', 'seat', 'cover material', 'half a cup (120 ml)', 'after each poo'):
+        assert word in alt
 
 
 def test_latrine_numbers_all_come_from_the_topic():
-    t = text_of('latrine')
+    d = drawn_of('latrine')
     topic = topic_json('surv-latrines').lower()
-    for phrase in ('6 to 8 inches (15 to 20 cm)', '200 feet (60 m)'):
-        assert phrase in t, f'missing {phrase!r}: {t}'
-        assert phrase in topic
+    for phrase in ('at least 200 feet (60 m) from water', 'about 70 steps', '6 to 8 inches (15 to 20 cm) deep',
+                   '4 to 6 inches (10 to 15 cm) across', 'soil you dug out'):
+        assert phrase in d, f'missing {phrase!r} in drawn text: {d}'
+    for phrase in ('200 feet (60 m)', 'about 70 steps', '6 to 8 inches (15 to 20 cm) deep',
+                   '4 to 6 inches (10 to 15 cm) across', 'soil you dug out'):
+        assert phrase in topic, phrase
     # every number-with-unit drawn must appear in the topic text exactly as drawn
-    for m in re.finditer(r'\d[\d,.]*(?: to \d[\d,.]*)? (?:inches|feet|ft|in|cm|m)\b(?: \([^)]*\))?', t):
+    for m in re.finditer(r'\d[\d,.]*(?: to \d[\d,.]*)? (?:inches|feet|ft|in|cm|m)\b(?: \([^)]*\))?', d):
         assert m.group(0) in topic, f'{m.group(0)!r} drawn but not in the topic'
-    assert '911' not in t
+    assert '911' not in d and '150' not in d
+
+
+def test_handwash_station_uses_the_topics_words():
+    d = drawn_of('handwash-station')
+    topic = topic_json('surv-handwashing').lower()
+    for phrase in ('jug with an on/off spigot', 'soap in a sock', 'towel', 'catch bucket'):
+        assert phrase in d, f'missing {phrase!r} in drawn text: {d}'
+    for word in ('on/off spigot', 'soap', 'towel', 'catch bucket', 'sock'):
+        assert word in d, f'missing {word!r} in drawn text: {d}'
+        assert word in topic, word
+    assert 'bleach' not in d and '911' not in d
+    assert not re.search(r'\d', d), f'no numbers expected: {d}'

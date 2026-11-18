@@ -135,6 +135,10 @@
           ]
         },
         {
+          "fig": "handwash-station",
+          "cap": "A jug of treated water with an on/off spigot, set on a table, with soap and towels within reach and a catch bucket below to catch the used water. A bar of soap in the toe of a sock can be tied to the jug’s handle."
+        },
+        {
           "link": "s:surv-water-store",
           "label": "Store water at home"
         },

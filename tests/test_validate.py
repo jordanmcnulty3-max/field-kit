@@ -611,12 +611,26 @@ def derrs(items):
     return validate_tooldata(items)[0]
 
 
+def gridded(**over):
+    """A small wind chill style tool with a valid chart grid; keyword args replace grid keys."""
+    g = {'temps': [10, 5, 0], 'winds': [5, 10, 15],
+         'chill': [[6, 0, -5], [3, -4, -10], [0, -7, -13]],
+         'bands': [[0, 0, 30], [0, 30, 30], [30, 30, 10]],
+         'bandMinutes': [10, 30]}
+    g.update(over)
+    return tooldata(id='windchill', title='Wind chill', grid=g)
+
+
+def gerrs(**over):
+    return derrs([gridded(**over)])
+
+
 class ToolDataValidation(unittest.TestCase):
     def has(self, errors, *parts):
         self.assertTrue(any(all(x in e for x in parts) for e in errors), (parts, errors))
 
     def test_tool_names(self):
-        self.assertEqual(TOOL_NAMES, ('daylight', 'sos', 'water'))
+        self.assertEqual(TOOL_NAMES, ('daylight', 'sos', 'water', 'windchill'))
 
     def test_valid_and_empty(self):
         self.assertEqual(validate_tooldata([tooldata()]), ([], []))
@@ -692,6 +706,67 @@ class ToolDataValidation(unittest.TestCase):
         self.assertIn('water', warnings[0])
         self.assertEqual(topic_draft_ids([tooldata(draft=True), tooldata(id='b')]), ['water'])
         self.has(derrs([tooldata(draft=1)]), 'draft')
+
+    def test_grid_valid_and_absent(self):
+        self.assertEqual(validate_tooldata([gridded()]), ([], []))
+        self.assertEqual(validate_tooldata([tooldata()]), ([], []))
+
+    def test_grid_must_be_an_object(self):
+        for bad in (None, [], 'x', 5):
+            self.has(derrs([tooldata(id='windchill', grid=bad)]), "'windchill'", 'grid', 'object')
+
+    def test_grid_keys_are_exact(self):
+        self.has(gerrs(extra=1), "'windchill'", 'grid', "unknown key 'extra'")
+        for k in ('temps', 'winds', 'chill', 'bands', 'bandMinutes'):
+            g = gridded()['grid']; del g[k]
+            self.has(derrs([tooldata(id='windchill', grid=g)]), "'windchill'", 'grid', k)
+
+    def test_grid_temps(self):
+        for bad in ([], 'x', None, [10, 'a', 0], [10, True, 0], [10, 10, 0], [0, 5, 10], [10, float('nan'), 0]):
+            self.has(gerrs(temps=bad), "'windchill'", 'temps')
+
+    def test_grid_winds(self):
+        for bad in ([], 'x', None, [0, 10, 15], [-5, 10, 15], [5, 5, 15], [15, 10, 5], [5, 'a', 15]):
+            self.has(gerrs(winds=bad), "'windchill'", 'winds')
+
+    def test_grid_band_minutes(self):
+        for bad in ([], 'x', None, [0, 30], [-10, 30], [30, 10], [10, 10], [10, 'a']):
+            self.has(gerrs(bandMinutes=bad), "'windchill'", 'bandMinutes')
+
+    def test_grid_row_counts_and_ragged_rows(self):
+        for k in ('chill', 'bands'):
+            g = gridded()['grid'][k]
+            self.has(gerrs(**{k: g[:2]}), "'windchill'", k, 'rows')
+            self.has(gerrs(**{k: g + [g[0]]}), "'windchill'", k, 'rows')
+            self.has(gerrs(**{k: 'x'}), "'windchill'", k)
+            self.has(gerrs(**{k: [g[0], g[1][:2], g[2]]}), "'windchill'", k, 'row', 'columns')
+            self.has(gerrs(**{k: [g[0], 'x', g[2]]}), "'windchill'", k, 'row')
+
+    def test_grid_chill_cells_are_finite_numbers(self):
+        for bad in (float('nan'), float('inf'), float('-inf'), 'x', None, True):
+            c = [list(r) for r in gridded()['grid']['chill']]; c[1][1] = bad
+            self.has(gerrs(chill=c), "'windchill'", 'chill')
+
+    def test_grid_band_cells_are_zero_or_a_legend_value(self):
+        for bad in (5, 20, -1, '30', None, 30.5):
+            b = [list(r) for r in gridded()['grid']['bands']]; b[0][0] = bad
+            self.has(gerrs(bands=b), "'windchill'", 'bands')
+
+    def test_grid_band_never_gets_less_severe(self):
+        # wind rises down a column: 30 then 0 is a slip
+        b = [[0, 0, 30], [0, 30, 30], [30, 30, 10]]
+        b[2][2] = 0
+        self.has(gerrs(bands=b), "'windchill'", 'bands', 'less severe')
+        # temperature falls along a row: 10 then 30 is a slip
+        b = [[0, 0, 30], [0, 30, 30], [30, 30, 10]]
+        b[2][0] = 10
+        self.has(gerrs(bands=b), "'windchill'", 'bands', 'less severe')
+        b = [[0, 0, 30], [0, 30, 30], [30, 30, 10]]
+        b[1][2] = 0
+        self.has(gerrs(bands=b), "'windchill'", 'bands', 'less severe')
+        # equal bands and 0 to a number are fine; a shorter time is more severe
+        ok = [[0, 0, 0], [0, 0, 30], [0, 30, 10]]
+        self.assertEqual(gerrs(bands=ok), [])
 
     def test_non_dict_inputs_do_not_raise(self):
         for bad in ('x', None, 5, {}, ['x'], [None], [5], [[]]):

@@ -223,8 +223,9 @@ ITEM_KEYS = {'id', 'text', 'note', 'qty'}
 QTY_KEYS = {'amount', 'unit', 'per'}
 QTY_PER = ('person', 'personDay')
 # Survival tools the app registers (src/survival-tools.js); each one is a link target u:<name>.
-TOOL_NAMES = ('daylight', 'sos', 'water')
-TOOLDATA_KEYS = {'id', 'title', 'values', 'sources', 'reviewed', 'draft'}
+TOOL_NAMES = ('daylight', 'sos', 'water', 'windchill')
+TOOLDATA_KEYS = {'id', 'title', 'values', 'grid', 'sources', 'reviewed', 'draft'}
+TOOLDATA_GRID_KEYS = {'temps', 'winds', 'chill', 'bands', 'bandMinutes'}
 TOOLDATA_VALUE_KEYS = {'value', 'unit', 'note'}
 TOOLDATA_ID_PATTERN = re.compile(r'[a-z][a-z0-9-]{0,39}')
 
@@ -464,6 +465,86 @@ def _finite_num(v):
     return isinstance(v, (int, float)) and not isinstance(v, bool) and v == v and v not in (float('inf'), float('-inf'))
 
 
+def _num_list(where, name, v, errors, order, positive=False):
+    """Check a non-empty list of finite numbers in strict order ('asc' or 'desc'), optionally all > 0. True when valid."""
+    if not isinstance(v, list) or not v:
+        errors.append(f'{where}: {name} must be a non-empty list of numbers')
+        return False
+    if not all(_finite_num(x) for x in v):
+        errors.append(f'{where}: {name} must hold only finite numbers')
+        return False
+    if positive and any(x <= 0 for x in v):
+        errors.append(f'{where}: {name} must all be greater than 0')
+        return False
+    pairs = list(zip(v, v[1:]))
+    if not all((a < b) if order == 'asc' else (a > b) for a, b in pairs):
+        errors.append(f'{where}: {name} must be strictly {"ascending" if order == "asc" else "descending"}')
+        return False
+    return True
+
+
+def _grid_rows(where, name, v, n_rows, n_cols, errors):
+    """Check a winds-by-temps matrix of n_rows lists of n_cols cells. True when the shape is right."""
+    if not isinstance(v, list) or len(v) != n_rows:
+        errors.append(f'{where}: {name} must have {n_rows} rows (one per wind)')
+        return False
+    ok = True
+    for r, row in enumerate(v):
+        if not isinstance(row, list) or len(row) != n_cols:
+            errors.append(f'{where}: {name} row {r} must be a list of {n_cols} columns (one per temperature)')
+            ok = False
+    return ok
+
+
+def _check_grid(where, grid, errors):
+    """The transcribed chart in tool data: temps (F, descending), winds (mph, ascending), chill[w][t], bands[w][t]."""
+    gw = f'{where} grid'
+    if not isinstance(grid, dict):
+        errors.append(f'{gw}: must be an object')
+        return
+    _unknown_keys(gw, grid, TOOLDATA_GRID_KEYS, errors)
+    for k in sorted(TOOLDATA_GRID_KEYS - set(grid)):
+        errors.append(f'{gw}: missing {k}')
+    temps = grid.get('temps')
+    winds = grid.get('winds')
+    minutes = grid.get('bandMinutes')
+    ok_t = 'temps' in grid and _num_list(gw, 'temps', temps, errors, 'desc')
+    ok_w = 'winds' in grid and _num_list(gw, 'winds', winds, errors, 'asc', positive=True)
+    ok_m = 'bandMinutes' in grid and _num_list(gw, 'bandMinutes', minutes, errors, 'asc', positive=True)
+    shape = {}
+    for name in ('chill', 'bands'):
+        if name in grid and ok_t and ok_w:
+            shape[name] = _grid_rows(gw, name, grid[name], len(winds), len(temps), errors)
+        else:
+            shape[name] = False
+    if shape['chill']:
+        for w, row in enumerate(grid['chill']):
+            for t, cell in enumerate(row):
+                if not _finite_num(cell):
+                    errors.append(f'{gw}: chill cell [{w}][{t}] must be a finite number')
+    if not shape['bands']:
+        return
+    cells_ok = True
+    for w, row in enumerate(grid['bands']):
+        for t, cell in enumerate(row):
+            if isinstance(cell, bool) or not isinstance(cell, (int, float)) or not (cell == 0 or (ok_m and cell in minutes)):
+                errors.append(f'{gw}: bands cell [{w}][{t}] must be 0 or one of bandMinutes')
+                cells_ok = False
+    if not cells_ok:
+        return
+
+    def severity(cell):    # 0 is least severe; fewer minutes is more severe
+        return 0 if cell == 0 else 1 / cell
+
+    bands = grid['bands']
+    for w, row in enumerate(bands):
+        for t, cell in enumerate(row):
+            if t and severity(cell) < severity(row[t - 1]):
+                errors.append(f'{gw}: bands cell [{w}][{t}] is less severe than the warmer cell beside it')
+            if w and severity(cell) < severity(bands[w - 1][t]):
+                errors.append(f'{gw}: bands cell [{w}][{t}] is less severe than the calmer cell above it')
+
+
 def validate_tooldata(items):
     """Return (errors, warnings) for src/tooldata/*.json: the numbers the Survival tools use. Never raises on JSON-decodable input."""
     errors, warnings = [], []
@@ -485,6 +566,8 @@ def validate_tooldata(items):
         _check_sources(where, t, errors)
         _check_reviewed(where, t, errors)
         _check_draft(where, t, tid, errors, warnings)
+        if 'grid' in t:
+            _check_grid(where, t['grid'], errors)
         values = t.get('values')
         if not isinstance(values, dict) or not values:
             errors.append(f'{where}: values must be a non-empty object')

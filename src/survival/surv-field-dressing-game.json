@@ -1,0 +1,74 @@
+{
+  "id": "surv-field-dressing-game",
+  "title": "Field dressing game",
+  "category": "basics",
+  "keywords": [
+    "field dressing",
+    "deer",
+    "game",
+    "rabbit",
+    "fish",
+    "tularemia",
+    "gutting"
+  ],
+  "summary": "Open the belly without puncturing the stomach or intestines, then cool the carcass fast.",
+  "where": [
+    "rural",
+    "woods"
+  ],
+  "sections": [
+    {
+      "h": "Deer-sized game",
+      "blocks": [
+        {
+          "steps": [
+            "Make sure it’s dead: approach from behind and touch the open eye with a stick. No blink, no movement.",
+            "Tag it if the law requires, and put on gloves.",
+            "Lay it on its back with the head slightly uphill.",
+            "Pinch up the belly skin and make a shallow cut. With two fingers inside guiding the blade edge-up, open the belly from the pelvis to the breastbone without puncturing the stomach or intestines.",
+            "Cut around the anus to free it, and tie it off to keep waste off the meat.",
+            "Cut the diaphragm away from the ribs, reach up into the chest, and cut the windpipe and gullet as far forward as you can.",
+            "Roll the animal onto its side and pull the organs out. Keep the heart and liver if they look healthy.",
+            "Drain the cavity and cool the carcass fast: prop it open, get it off the ground and into shade, and skin it in warm weather."
+          ]
+        },
+        {
+          "fig": "dress-deer",
+          "cap": "Seen from above with the animal on its back. The dashed line is the belly cut."
+        }
+      ]
+    },
+    {
+      "h": "Small game and fish",
+      "blocks": [
+        {
+          "list": [
+            "Rabbits and squirrels: pinch the back skin, cut a slit, and pull the hide apart toward the head and feet. Open the belly and remove the organs.",
+            "Wear gloves with rabbits. If the liver has white spots, throw the whole animal away (tularemia).",
+            "Fish: cut from the vent to the gills, pull out the guts, then scale or skin."
+          ]
+        },
+        {
+          "fig": "dress-fish",
+          "cap": "The vent is the small opening on the belly toward the tail."
+        },
+        {
+          "list": [
+            "Birds: pluck or skin, then open the body cavity and remove the organs."
+          ]
+        },
+        {
+          "p": "Cook all wild game thoroughly. Bear and wild pig must be cooked through to kill trichinella parasites."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

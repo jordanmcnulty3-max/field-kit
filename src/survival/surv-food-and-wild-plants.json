@@ -1,0 +1,83 @@
+{
+  "id": "surv-food-and-wild-plants",
+  "title": "Food and wild plants",
+  "category": "basics",
+  "keywords": [
+    "food",
+    "plants",
+    "edible",
+    "hemlock",
+    "poisonous",
+    "cattail",
+    "acorns",
+    "insects"
+  ],
+  "summary": "Food is the lowest priority, and you should only eat a plant you can identify with certainty.",
+  "where": [
+    "rural",
+    "woods"
+  ],
+  "sections": [
+    {
+      "h": "Food and wild plants",
+      "blocks": [
+        {
+          "p": "Food is the lowest priority, since you can last weeks without it. Don’t spend energy or risk poisoning chasing it early."
+        },
+        {
+          "p": "Only eat a plant you can identify with certainty. Water hemlock and poison hemlock, two of the deadliest plants in North America, look like wild carrot or parsley, and a small amount can kill."
+        }
+      ]
+    },
+    {
+      "h": "Warning signs in plants you don’t know",
+      "blocks": [
+        {
+          "list": [
+            "Milky or discoloured sap",
+            "Beans, bulbs or seeds inside pods",
+            "A bitter or soapy taste",
+            "Spines, fine hairs or thorns",
+            "Carrot-, parsley- or dill-like leaves",
+            "An almond smell in the leaves or wood",
+            "Grain heads with pink, purple or black spurs",
+            "Leaves in groups of three"
+          ]
+        },
+        {
+          "fig": "plant-warnings",
+          "cap": "Warning signs only. These drawings are not for identifying plants."
+        },
+        {
+          "p": "A few well-known edibles break these rules (blackberry canes have thorns), which is why positive identification matters more than any rule. Skip wild mushrooms entirely: almost no calories, and deadly lookalikes."
+        },
+        {
+          "p": "There are deliberately no drawings of edible plants here. Identify plants with a regional field guide that has real photographs, ideally after learning them from someone local."
+        }
+      ]
+    },
+    {
+      "h": "Widespread, easier options",
+      "blocks": [
+        {
+          "list": [
+            "Cattail: young shoots, starchy roots and pollen. Grows in wet ground across much of the world.",
+            "Dandelion: leaves, flowers and roots are all edible.",
+            "Acorns: shell and chop them, then soak or boil in several changes of water until they’re no longer bitter.",
+            "Blackberries and raspberries: clustered berries with few toxic lookalikes.",
+            "Insects: grasshoppers, crickets, grubs and ants. Remove legs and wings and cook them. Skip brightly coloured, hairy or smelly insects, caterpillars, and flies, ticks and mosquitoes.",
+            "Fish: all freshwater fish can be eaten if cooked thoroughly."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

@@ -1,0 +1,82 @@
+{
+  "id": "surv-priorities",
+  "title": "Priorities",
+  "category": "basics",
+  "keywords": [
+    "priorities",
+    "rule of threes",
+    "STOP",
+    "lost",
+    "hypothermia",
+    "frostbite",
+    "seawater"
+  ],
+  "summary": "Work the problem in order: air, shelter, water, food. If you’re lost, STOP: Stop, Think, Observe, Plan.",
+  "sections": [
+    {
+      "h": "Priorities",
+      "blocks": [
+        {
+          "p": "In harsh conditions a person can last roughly 3 minutes without air, 3 hours without shelter, 3 days without water and 3 weeks without food. Work the problem in that order."
+        },
+        {
+          "p": "If you’re lost, STOP: Stop, Think, Observe, Plan. If someone knows your route and when you’re due back, staying put usually gets you found faster than wandering."
+        }
+      ]
+    },
+    {
+      "h": "Forest",
+      "blocks": [
+        {
+          "list": [
+            "The biggest killer here is hypothermia in wet, windy weather between 30 and 50°F, not extreme cold. Get out of wind and rain early, before you’re soaked.",
+            "Water is usually plentiful. Treat all of it.",
+            "Dead and downed wood is everywhere, so fire is usually achievable. Look for standing dead wood when the ground is wet.",
+            "Check your skin for ticks every day."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Cold and snow",
+      "blocks": [
+        {
+          "list": [
+            "Remember COLD: keep clothing Clean, avoid Overheating (sweat soaks insulation), wear it Loose and in layers, and keep it Dry.",
+            "Cover head, hands and feet.",
+            "Eat and drink regularly. Your body needs fuel to make heat.",
+            "Melt snow before drinking it. Eating it lowers your core temperature.",
+            "Never run a stove or fire in a sealed tent or snow shelter. Carbon monoxide kills without warning.",
+            "Wear sunglasses, or cut thin slits in bark or cloth, to prevent snow blindness."
+          ]
+        },
+        {
+          "link": "p:frostbite",
+          "label": "Frostbite care"
+        }
+      ]
+    },
+    {
+      "h": "Coast and sea",
+      "blocks": [
+        {
+          "list": [
+            "Never drink seawater. It dehydrates you faster.",
+            "Collect rain and dew. On a beach, dig behind the first dune where plants grow; fresh water often collects there.",
+            "Only eat mussels and clams that were alive and closed before cooking, and skip them entirely during red tide warnings.",
+            "Know the tide times. Rising water can cut you off on points and tidal flats.",
+            "Cover up. Sun reflected off water and sand burns fast."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

@@ -1,0 +1,68 @@
+{
+  "id": "surv-dangerous-animals",
+  "title": "Dangerous animals",
+  "category": "basics",
+  "keywords": [
+    "bear",
+    "bear spray",
+    "snake",
+    "tick",
+    "bite",
+    "animals",
+    "wildlife"
+  ],
+  "summary": "Never run from a bear, check yourself daily for ticks, and get a snakebite to a hospital.",
+  "where": [
+    "rural",
+    "woods"
+  ],
+  "sections": [
+    {
+      "h": "Bears",
+      "blocks": [
+        {
+          "list": [
+            "In bear country, carry bear spray where you can reach it fast, and store food and scented items away from where you sleep.",
+            "Never run. Talk calmly, stand your ground, and back away slowly.",
+            "Black bear attack: don’t play dead. Get to safety if you can; if you can’t, fight back, aiming for the face.",
+            "Any bear that stalks you or attacks at night in your tent: fight back."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Snakes",
+      "blocks": [
+        {
+          "list": [
+            "Watch where you put your hands and feet. Step onto logs and rocks, not over them.",
+            "If bitten: stay calm and still, take off rings and watches before swelling starts, and get to a hospital. Don’t cut, suck, ice or put a tourniquet on the bite."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Ticks",
+      "blocks": [
+        {
+          "p": "Check your whole body daily, including scalp and skin folds."
+        },
+        {
+          "fig": "tick",
+          "cap": "Use fine-tipped tweezers. Afterward, clean the bite and your hands."
+        },
+        {
+          "p": "See a doctor if a rash or fever appears in the weeks after a bite."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

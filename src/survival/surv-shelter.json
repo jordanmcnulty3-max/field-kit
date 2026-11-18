@@ -1,0 +1,85 @@
+{
+  "id": "surv-shelter",
+  "title": "Shelter",
+  "category": "basics",
+  "keywords": [
+    "shelter",
+    "debris hut",
+    "lean-to",
+    "tarp",
+    "snow trench",
+    "insulation",
+    "bed"
+  ],
+  "summary": "Pick flat, dry ground, insulate from the ground first and keep the shelter small.",
+  "where": [
+    "rural",
+    "woods"
+  ],
+  "sections": [
+    {
+      "h": "Pick the spot",
+      "blocks": [
+        {
+          "list": [
+            "Flat, dry ground above flood level, with no dead trees or hanging branches overhead.",
+            "Avoid valley floors on cold nights (cold air pools there) and exposed ridgetops (wind).",
+            "Close to water and building material, but never in a dry wash."
+          ]
+        },
+        {
+          "fig": "shelter-site",
+          "cap": "A level spot partway up a slope beats both the valley floor and the ridgetop."
+        }
+      ]
+    },
+    {
+      "h": "Build",
+      "blocks": [
+        {
+          "steps": [
+            "Insulate from the ground first: a bed of dry leaves, grass or boughs at least a hand’s width thick once you lie on it. The ground pulls heat out of you faster than the air.",
+            "Keep it small, just big enough to lie in. Your body has to heat the space.",
+            "Debris hut: prop a long ridgepole on a stump or forked stick at about hip height. Lean sticks along both sides, then pile leaves and debris at least an arm’s length thick. Pull a pile of leaves into the entrance once you’re inside.",
+            "Lean-to: lash a pole between two trees, lean branches against it on the windward side, and cover with boughs or a tarp. Build a fire in front, with a wall of logs or rocks behind it to reflect heat in.",
+            "Tarp: tie a ridgeline between trees and drape the tarp over it as an A-frame, low end facing the wind."
+          ]
+        },
+        {
+          "fig": "shelter-debris",
+          "cap": "Debris hut. More debris means more warmth; it should be thick enough that you can’t see light through it."
+        },
+        {
+          "fig": "shelter-leanto",
+          "cap": "Lean-to. The log wall throws the fire’s heat back into the shelter."
+        },
+        {
+          "fig": "shelter-tarp",
+          "cap": "Tarp A-frame. Pitch the end facing the wind lower to keep rain and wind out."
+        }
+      ]
+    },
+    {
+      "h": "Snow",
+      "blocks": [
+        {
+          "list": [
+            "A snow trench or snow cave insulates well. Poke a ventilation hole, keep your digging tool inside with you, and never use a stove or fire in a sealed snow shelter."
+          ]
+        },
+        {
+          "fig": "shelter-snow",
+          "cap": "Snow trench. Sleeping above the floor keeps you out of the coldest air."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

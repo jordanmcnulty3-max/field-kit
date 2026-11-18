@@ -1,0 +1,42 @@
+{
+  "id": "surv-make-water-safe",
+  "title": "Make water safe",
+  "category": "basics",
+  "keywords": [
+    "boil",
+    "bleach",
+    "filter",
+    "purify",
+    "treat",
+    "drinking water",
+    "tablets"
+  ],
+  "summary": "Strain cloudy water, then boil it for 1 minute, or treat it with unscented bleach.",
+  "sections": [
+    {
+      "h": "Make water safe",
+      "blocks": [
+        {
+          "steps": [
+            "If the water is cloudy, let it settle, then strain it through a clean cloth.",
+            "Boil at a rolling boil for 1 minute. Above 6,500 ft, boil for 3 minutes.",
+            "No fire? Use unscented household bleach: 8 drops of 6% bleach (or 6 drops of 8.25%) per gallon. Double it for cloudy or very cold water. Stir and wait 30 minutes.",
+            "Tablets and filters: follow the maker’s directions. Most filters don’t stop viruses."
+          ]
+        },
+        {
+          "fig": "water-safe",
+          "cap": "Boiling is the most reliable method. Bleach must be plain, unscented and not expired."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

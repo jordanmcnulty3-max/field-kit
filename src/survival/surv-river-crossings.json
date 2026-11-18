@@ -1,0 +1,48 @@
+{
+  "id": "surv-river-crossings",
+  "title": "River crossings",
+  "category": "basics",
+  "keywords": [
+    "river",
+    "crossing",
+    "ford",
+    "current",
+    "strainer",
+    "pole",
+    "swept away"
+  ],
+  "summary": "Look for a wide, shallow, slow section, and if in doubt, don’t cross.",
+  "where": [
+    "rural",
+    "woods"
+  ],
+  "sections": [
+    {
+      "h": "River crossings",
+      "blocks": [
+        {
+          "list": [
+            "Look for a wide, shallow, slow section. Never cross just above rapids, falls or strainers (fallen trees and brush the current flows through).",
+            "Snowmelt rivers run lowest early in the morning.",
+            "Unbuckle your pack’s hip belt and chest strap so you can shed it if you fall.",
+            "Face upstream, plant a sturdy pole upstream as a third leg, and shuffle sideways, moving one point at a time and angling slightly downstream.",
+            "Fast water above the knee can knock you over. If in doubt, don’t cross; look elsewhere or wait.",
+            "If you’re swept away, float on your back with your feet downstream and up, and angle toward shore."
+          ]
+        },
+        {
+          "fig": "river",
+          "cap": "Seen from above. The current runs left to right."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

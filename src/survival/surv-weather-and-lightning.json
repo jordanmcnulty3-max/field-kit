@@ -1,0 +1,46 @@
+{
+  "id": "surv-weather-and-lightning",
+  "title": "Weather and lightning",
+  "category": "basics",
+  "keywords": [
+    "weather",
+    "lightning",
+    "thunder",
+    "storm",
+    "clouds",
+    "front"
+  ],
+  "summary": "If you can hear thunder, get inside a building or hard-topped vehicle.",
+  "sections": [
+    {
+      "h": "Weather and lightning",
+      "blocks": [
+        {
+          "list": [
+            "Tall, building clouds by early afternoon mean thunderstorms are likely. In summer mountains, be off peaks and ridges by early afternoon.",
+            "Clouds that lower and thicken through the day usually mean rain within hours. A sudden wind shift with a drop in temperature means a front is arriving."
+          ]
+        },
+        {
+          "fig": "lightning",
+          "cap": "Sound travels about a mile every 5 seconds; light arrives almost instantly."
+        },
+        {
+          "list": [
+            "If you can hear thunder, get inside a building or hard-topped vehicle. Tents and open shelters don’t protect you.",
+            "No place outside is safe. If you’re caught out, get off peaks and ridges and away from lone tall trees, water and metal. Don’t lie flat on the ground, and spread a group out.",
+            "Wait 30 minutes after the last thunder before going back out."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

@@ -1,0 +1,108 @@
+{
+  "id": "surv-navigation-without-a-compass",
+  "title": "Navigation without a compass",
+  "category": "basics",
+  "keywords": [
+    "navigation",
+    "compass",
+    "shadow stick",
+    "north star",
+    "watch",
+    "moon",
+    "pace count"
+  ],
+  "summary": "Find direction from a shadow stick, an analog watch or the night sky, and stay on course.",
+  "where": [
+    "rural",
+    "woods"
+  ],
+  "sections": [
+    {
+      "h": "Shadow stick (works in both hemispheres)",
+      "blocks": [
+        {
+          "steps": [
+            "Push a straight stick upright into level ground and mark the tip of its shadow.",
+            "Wait at least 15 minutes and mark the new shadow tip.",
+            "A line from the first mark to the second runs roughly west to east. Stand with the first mark on your left and the second on your right, and you’re facing north."
+          ]
+        },
+        {
+          "fig": "nav-shadow",
+          "cap": "The shadow tip moves east as the sun moves west. Most accurate around midday."
+        }
+      ]
+    },
+    {
+      "h": "Analog watch",
+      "blocks": [
+        {
+          "list": [
+            "Northern Hemisphere: point the hour hand at the sun. South is halfway between the hour hand and 12 o’clock. During daylight saving time, use 1 o’clock instead of 12."
+          ]
+        },
+        {
+          "fig": "nav-watch",
+          "cap": "A rough method; least reliable near midday and close to the equator."
+        }
+      ]
+    },
+    {
+      "h": "Night sky",
+      "blocks": [
+        {
+          "list": [
+            "North Star: follow the two stars at the end of the Big Dipper’s cup about five times the gap between them. Polaris is within about a degree of true north, and its height above the horizon roughly equals your latitude."
+          ]
+        },
+        {
+          "fig": "nav-polaris",
+          "cap": "The Big Dipper turns around Polaris through the night, but the pointers always point to it."
+        },
+        {
+          "fig": "nav-cross",
+          "cap": "The two bright Pointers beside the cross help confirm you have the real one, not the dimmer “false cross.”"
+        },
+        {
+          "list": [
+            "Moon: if it rises before the sun sets, its lit side faces west. If it rises after midnight, the lit side faces east."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Staying on course",
+      "blocks": [
+        {
+          "list": [
+            "Pace count: count each time your left foot lands. Most adults take 60 to 70 per 100 m on flat ground; measure yours on a known distance.",
+            "Pick a landmark on your bearing, walk to it, then pick the next.",
+            "Follow handrails like streams, ridges and roads, and pick a catching feature past your goal so you know when you’ve overshot.",
+            "Aim off: to hit a spot on a river, aim deliberately to one side so you know which way to turn when you reach it."
+          ]
+        },
+        {
+          "fig": "nav-aimoff",
+          "cap": "Aiming straight at a point usually misses it, and then you don’t know which way to turn."
+        },
+        {
+          "list": [
+            "Daylight left: hold your hand out at arm’s length. Each finger between the sun and the horizon is roughly 15 minutes."
+          ]
+        },
+        {
+          "fig": "nav-hand",
+          "cap": "Stop and make camp while you still have light to work with."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

@@ -1,0 +1,93 @@
+{
+  "id": "surv-traps-and-fishing",
+  "title": "Traps and fishing",
+  "category": "basics",
+  "keywords": [
+    "snare",
+    "trap",
+    "deadfall",
+    "fishing",
+    "gorge hook",
+    "fish trap",
+    "squirrel"
+  ],
+  "summary": "Set many traps on active game trails, and leave several baited lines out overnight.",
+  "where": [
+    "rural",
+    "woods"
+  ],
+  "sections": [
+    {
+      "h": "Traps and fishing",
+      "blocks": [
+        {
+          "p": "Outside a genuine emergency, trapping, snaring and set lines are regulated or illegal in most places. Check your state’s rules before practising."
+        },
+        {
+          "list": [
+            "Set traps on active game trails, at spots where the trail narrows, and near water, dens or feeding signs.",
+            "Set many. Most traps catch nothing, so a dozen beats one.",
+            "Handle them as little as possible and leave the trail undisturbed. Check them at least once a day."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Traps",
+      "blocks": [
+        {
+          "list": [
+            "Simple snare: a loop of wire or strong cord with a sliding noose, anchored firmly. For rabbits, make the loop about fist-sized with its bottom about 3 inches above the trail."
+          ]
+        },
+        {
+          "fig": "trap-snare",
+          "cap": "Simple snare across a trail. Disturb the trail as little as possible."
+        },
+        {
+          "list": [
+            "Squirrel pole: lean a long pole against a tree squirrels use and fix several small snares along it."
+          ]
+        },
+        {
+          "fig": "trap-squirrel",
+          "cap": "Squirrels take the easy route up a leaning pole."
+        },
+        {
+          "list": [
+            "Figure-4 deadfall: three notched sticks hold up a heavy rock or log, and bait on the trigger stick drops it. Keep your hands and body out from under the weight while setting it."
+          ]
+        },
+        {
+          "fig": "trap-fig4",
+          "cap": "Figure-4 deadfall. Disturbing the bait trips the trigger and drops the weight."
+        }
+      ]
+    },
+    {
+      "h": "Fishing",
+      "blocks": [
+        {
+          "list": [
+            "Gorge hook: a short sliver of bone or hardwood, sharpened at both ends and tied at the middle. Bait it; it lodges crosswise when swallowed.",
+            "Fish trap: a funnel of stakes in shallow water that fish swim into but struggle to find their way out of.",
+            "Several baited lines left out overnight catch more than one rod you have to watch.",
+            "Fish feed most around dawn and dusk."
+          ]
+        },
+        {
+          "fig": "fishing",
+          "cap": "Gorge hook and a stake fish trap, seen from above."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

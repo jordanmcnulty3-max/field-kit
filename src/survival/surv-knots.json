@@ -1,0 +1,81 @@
+{
+  "id": "surv-knots",
+  "title": "Knots",
+  "category": "basics",
+  "keywords": [
+    "knots",
+    "bowline",
+    "clove hitch",
+    "taut-line",
+    "trucker",
+    "square knot",
+    "sheet bend"
+  ],
+  "summary": "Bowline, clove hitch, taut-line hitch, trucker’s hitch, square knot and sheet bend.",
+  "sections": [
+    {
+      "h": "Bowline: a fixed loop that won’t slip or jam",
+      "blocks": [
+        {
+          "p": "Make a small loop in the standing part. Pass the end up through it, around behind the standing part, and back down through the small loop. “The rabbit comes out of the hole, around the tree, and back down the hole.”"
+        },
+        {
+          "fig": "knot-bowline",
+          "cap": "Leave a tail at least a hand’s width long, and pull all four strands tight to set it."
+        }
+      ]
+    },
+    {
+      "h": "Clove hitch: quick tie-off to a pole",
+      "blocks": [
+        {
+          "p": "Wrap around the pole, cross over your first wrap, wrap again, and tuck the end under that second wrap."
+        }
+      ]
+    },
+    {
+      "h": "Taut-line hitch: adjustable tent and tarp lines",
+      "blocks": [
+        {
+          "p": "Pass the end around the anchor. Make two turns around the standing line inside the loop, then one more turn outside the loop. Slide the knot to tighten."
+        }
+      ]
+    },
+    {
+      "h": "Trucker’s hitch: cinch a load or ridgeline tight",
+      "blocks": [
+        {
+          "p": "Tie a fixed loop partway along the line, pass the end around the anchor and back through the loop, pull tight, and lock it with two half hitches."
+        },
+        {
+          "fig": "knot-trucker",
+          "cap": "The loop works like a pulley, multiplying your pull."
+        }
+      ]
+    },
+    {
+      "h": "Square knot: join two ends of the same size",
+      "blocks": [
+        {
+          "p": "Right over left and under, then left over right and under. Not for critical loads."
+        }
+      ]
+    },
+    {
+      "h": "Sheet bend: join two ropes of different sizes",
+      "blocks": [
+        {
+          "p": "Fold a bight in the thicker rope. Pass the thinner rope up through it, around behind both legs, and tuck it under itself."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

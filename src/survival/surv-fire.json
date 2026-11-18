@@ -1,0 +1,88 @@
+{
+  "id": "surv-fire",
+  "title": "Fire",
+  "category": "basics",
+  "keywords": [
+    "fire",
+    "tinder",
+    "kindling",
+    "ferro rod",
+    "teepee",
+    "log cabin",
+    "wet weather"
+  ],
+  "summary": "Gather about twice what you think you need, then build and light the fire.",
+  "sections": [
+    {
+      "h": "Gather first, about twice what you think",
+      "blocks": [
+        {
+          "list": [
+            "Tinder: dry, fine and fluffy. Birch bark, dry grass, cattail fluff, resin-soaked pine (fatwood), dryer lint, cotton balls with petroleum jelly.",
+            "Kindling: dead twigs from pencil-lead to pencil thickness.",
+            "Fuel: dead wood wrist-thick and bigger. Dry wood snaps with a crack."
+          ]
+        },
+        {
+          "fig": "fire-sizes",
+          "cap": "Most failed fires run short on kindling. Gather far more than seems necessary."
+        }
+      ]
+    },
+    {
+      "h": "Build and light",
+      "blocks": [
+        {
+          "steps": [
+            "Clear a 10-foot circle down to bare soil, away from overhanging branches. On snow or wet ground, build on a platform of green sticks or flat rocks.",
+            "Put the tinder bundle in the centre and lean kindling around it like a teepee, with an opening facing the wind.",
+            "Light the tinder from the upwind side, then add fuel from small to large. Blow gently at the base.",
+            "Once it’s going, a log cabin of fuel stacked around the teepee burns longer and makes good coals for cooking."
+          ]
+        },
+        {
+          "fig": "fire-lays",
+          "cap": "Start with a teepee; build a log cabin around it once it catches."
+        }
+      ]
+    },
+    {
+      "h": "Ways to light it",
+      "blocks": [
+        {
+          "list": [
+            "Ferro rod: hold the striker still against the rod, right in the tinder, and pull the rod back. Pushing the striker scatters the tinder."
+          ]
+        },
+        {
+          "fig": "fire-ferro",
+          "cap": "Pulling the rod back keeps the sparks landing exactly where the striker sits."
+        },
+        {
+          "list": [
+            "9-volt battery and fine steel wool: touch both terminals to the wool and it ignites.",
+            "Bow drill: it works, but it takes practice. Learn it before you need it."
+          ]
+        },
+        {
+          "p": "In wet weather, use standing dead wood and the dead lower branches of conifers, and split wood to reach the dry core. Birch bark burns even when damp."
+        },
+        {
+          "fig": "fire-platform",
+          "cap": "A platform stops snowmelt or wet ground from drowning the fire from below."
+        },
+        {
+          "p": "Never leave a fire unattended. Before you leave, drown it, stir it, and feel that it’s cold."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

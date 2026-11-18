@@ -1,0 +1,47 @@
+{
+  "id": "surv-signal-for-rescue",
+  "title": "Signal for rescue",
+  "category": "basics",
+  "keywords": [
+    "signal",
+    "rescue",
+    "whistle",
+    "mirror",
+    "ground symbols",
+    "distress",
+    "aircraft"
+  ],
+  "summary": "Three of anything is a distress signal: three fires, three whistle blasts, three flashes.",
+  "sections": [
+    {
+      "h": "Signal for rescue",
+      "blocks": [
+        {
+          "p": "Three of anything is a distress signal: three fires in a triangle, three whistle blasts, three flashes. Repeat at intervals."
+        },
+        {
+          "p": "Ground-to-air symbols, as large as you can make them with high contrast: V means you need assistance, X means you need medical help."
+        },
+        {
+          "fig": "signal-ground",
+          "cap": "Use logs, rocks, clothing or trampled snow against a contrasting background, in an open area."
+        },
+        {
+          "p": "Use a mirror or your phone screen to flash sunlight at aircraft. Aim with two fingers in a V toward the target."
+        },
+        {
+          "fig": "signal-mirror",
+          "cap": "Tilt the mirror until the spot of light falls on your fingers, then it’s hitting the aircraft too."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

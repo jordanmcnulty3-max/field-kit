@@ -1,0 +1,58 @@
+{
+  "id": "surv-ten-essentials",
+  "title": "The ten essentials",
+  "category": "basics",
+  "keywords": [
+    "backcountry",
+    "essentials",
+    "pack",
+    "kit",
+    "headlamp",
+    "first aid",
+    "whistle"
+  ],
+  "summary": "Pack these on every trip into the backcountry, even a short one.",
+  "where": [
+    "rural",
+    "woods"
+  ],
+  "sections": [
+    {
+      "h": "The ten essentials",
+      "blocks": [
+        {
+          "p": "Pack these on every trip into the backcountry, even a short one."
+        },
+        {
+          "fig": "kit",
+          "cap": "Ten things that turn a bad night out into a survivable one."
+        },
+        {
+          "list": [
+            "Navigation: map, compass, and a charged phone or GPS.",
+            "Headlamp, with spare batteries.",
+            "Sun protection: sunglasses, sunscreen and a hat.",
+            "First aid kit, including a tourniquet.",
+            "Knife or multi-tool.",
+            "Fire: lighter, ferro rod or waterproof matches, plus tinder.",
+            "Emergency shelter: space blanket, bivy sack or tarp.",
+            "Extra food: a day’s worth beyond the plan.",
+            "Extra water and a way to treat more.",
+            "Extra layers: insulation and rain gear."
+          ]
+        },
+        {
+          "p": "Tell someone your route and when you’ll be back, and add a whistle: three blasts carries farther than shouting."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

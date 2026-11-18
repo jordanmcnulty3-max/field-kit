@@ -1,0 +1,56 @@
+{
+  "id": "surv-find-water",
+  "title": "Find water",
+  "category": "basics",
+  "keywords": [
+    "water",
+    "dew",
+    "rain",
+    "transpiration",
+    "stream",
+    "thirst"
+  ],
+  "summary": "Water runs downhill: check valley bottoms, the base of cliffs and dry stream beds.",
+  "sections": [
+    {
+      "h": "Find water",
+      "blocks": [
+        {
+          "list": [
+            "Water runs downhill. Check valley bottoms, the base of cliffs, and dry stream beds; dig on the outside of bends where water last flowed."
+          ]
+        },
+        {
+          "fig": "water-bend",
+          "cap": "Water lingers longest under the outside of a bend, where the current cut deepest."
+        },
+        {
+          "list": [
+            "Signs of water nearby: green vegetation, swarming insects, animal trails that join up, and birds flying low and straight at dawn and dusk.",
+            "Catch rain with a tarp, poncho or large leaves.",
+            "Before sunrise, tie absorbent cloth around your ankles, walk through tall grass, and wring out the dew.",
+            "Tie a clear plastic bag over a leafy branch of a non-poisonous plant in full sun. Water collects in the bag as the leaves breathe."
+          ]
+        },
+        {
+          "fig": "water-bag",
+          "cap": "A transpiration bag yields a little water over several hours. Move it to a fresh branch daily."
+        },
+        {
+          "list": [
+            "Never drink seawater or urine.",
+            "Treat all wild water before drinking (see Make water safe)."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Not yet source-checked",
+      "used": "Converted from v6 text; checked in Tasks 13 to 16"
+    }
+  ],
+  "reviewed": "2026-11-17",
+  "draft": true
+}

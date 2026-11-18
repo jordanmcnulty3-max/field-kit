@@ -1,0 +1,109 @@
+{
+  "id": "sanitation-kit",
+  "title": "Sanitation kit",
+  "category": "water",
+  "summary": "What a household or group needs for a two-bucket toilet, bagged waste, cat holes and clean hands when the water and sewer are off.",
+  "items": [
+    {
+      "id": "buckets",
+      "text": "Two 5-gallon (19 L) buckets with lids that close well, marked “pee” and “poo”",
+      "note": "One for pee, one for poo. Keep them apart."
+    },
+    {
+      "id": "seat",
+      "text": "A toilet seat that fits on the buckets"
+    },
+    {
+      "id": "bags",
+      "text": "Several boxes of heavy-duty 3 to 5 mil black garbage or contractor bags",
+      "note": "To line the poo bucket and to double-bag full ones, diapers and pads."
+    },
+    {
+      "id": "cover-material",
+      "text": "Cover material: sawdust, wood shavings, shredded paper, bark chips or peat moss",
+      "note": "About half a cup (120 mL) after each poo."
+    },
+    {
+      "id": "scoop",
+      "text": "A plastic scoop for the cover material"
+    },
+    {
+      "id": "waste-can",
+      "text": "A separate garbage can with a tight lid, for the bagged toilet waste"
+    },
+    {
+      "id": "toilet-paper",
+      "text": "Toilet paper or wipes"
+    },
+    {
+      "id": "zip-bags",
+      "text": "Zipper bags, for used toilet paper and wipes and for packing out waste"
+    },
+    {
+      "id": "gloves",
+      "text": "Disposable latex or nitrile gloves, for bagging waste"
+    },
+    {
+      "id": "soap",
+      "text": "Soap"
+    },
+    {
+      "id": "sanitizer",
+      "text": "Hand sanitizer with at least 60% alcohol",
+      "note": "For when there is no water. Soap and water clean better."
+    },
+    {
+      "id": "handwash-jug",
+      "text": "A water jug with an on/off spigot, towels and a catch bucket, for a hand-washing station"
+    },
+    {
+      "id": "bleach",
+      "text": "Plain, unscented household bleach (5% to 9%), for cleaning the buckets",
+      "note": "Never pour it into a bucket with pee in it. Never mix bleach with ammonia or any other cleaner."
+    },
+    {
+      "id": "trowel",
+      "text": "A small garden trowel for cat holes, and a shovel for a latrine"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Oregon State University Extension Service, Survival Basics: Sanitation and Waste Management (EM 9334, October 2021)",
+      "used": "Supply list: two 5-gallon buckets with lids labelled pee and poo; several boxes of 3 to 5 mil black garbage or contractor bags; water jug with on/off spigot; towels; soap; catch bucket; carbon material; toilet paper; closable bags for used toilet paper; latex or nitrile gloves; about half a cup of carbon material per use; sanitizer with at least 60% alcohol"
+    },
+    {
+      "name": "Jefferson County Department of Emergency Management with Clallam County Sheriff’s Emergency Management, Twin-Bucket Emergency Toilet (updated March 2015)",
+      "used": "Lid that closes well; seat moved between buckets; plastic scoop for carbon material"
+    },
+    {
+      "name": "City of Wilsonville, Oregon, The Two-Bucket Toilet Solution",
+      "used": "Toilet seat (optional, highly recommended); soap and water better than sanitizer"
+    },
+    {
+      "name": "Washington County, Oregon, Emergency Management (Take5), Disaster Sanitation",
+      "used": "Two 5-gallon buckets; heavy-duty garbage bags; toilet paper or wipes; disposable gloves; soap and water or sanitizer of 60% or more"
+    },
+    {
+      "name": "Municipality of Anchorage Office of Emergency Management, Sanitation and Hygiene in an Emergency",
+      "used": "Large garbage can with a heavy liner and tight-fitting lid"
+    },
+    {
+      "name": "National Park Service, Blue Ridge Parkway, Much Ado About Number Two; US Forest Service, Going in the Forest",
+      "used": "Zipper bags or sealed containers to pack out toilet paper and waste"
+    },
+    {
+      "name": "Leave No Trace Center for Outdoor Ethics, Principle 3: Dispose of Waste Properly; Public Health – Seattle & King County, How to create an emergency toilet",
+      "used": "Small garden trowel for cat holes; latrine hole at least 3 feet deep, soil thrown in after each use"
+    },
+    {
+      "name": "NY Division of Military and Naval Affairs, Field Sanitation Team course, Lesson 6: Waste Disposal in the Field (US Army field sanitation; second source only)",
+      "used": "A shovel kept at the latrine to cover waste after each use"
+    },
+    {
+      "name": "CDC, How to Safely Clean and Sanitize with Bleach (reviewed August 26, 2026); North Carolina Department of Health and Human Services, Toilet Use During an Emergency (October 2024); Washington State Department of Health, Dangers of Mixing Bleach with Cleaners",
+      "used": "Plain unscented bleach 5% to 9%; never mix with ammonia or any other cleaner; disinfect the bucket with bleach; urine contains ammonia"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

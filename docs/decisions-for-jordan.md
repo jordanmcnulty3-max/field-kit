@@ -226,3 +226,32 @@ Source disagreements found while checking the Survival topics. Each says what th
    Water Providers Consortium water heater hanger: turn the gas knob "to the pilot setting — do not turn it
    completely off". Today: "off" (FEMA), and relight by the heater's or gas company's instructions. Say if the group
    wants "pilot" instead, which avoids relighting but leaves a flame under a tank being drained.
+27. **Bleach in toilet buckets (surv-toilet-no-water) — Water pack Task 6.** FEMA (Are You Ready?): after each use
+   pour a small amount of household disinfectant such as chlorine bleach into the toilet container. Anchorage and
+   Wayne County (Michigan) emergency management: bleach diluted 1 to 10, with no bleach strength. The two-bucket
+   agencies (Oregon State Extension, Jefferson and Clallam counties, Washington County, Wilsonville) use only cover
+   material. Washington State Department of Health: urine contains ammonia, and bleach plus ammonia makes chloramine
+   gas. Today: no bleach in any waste bucket; bleach only to clean an emptied bucket (CDC's 1 cup in 5 gallons for
+   household items). Say if the group wants a disinfectant in the poo bucket.
+28. **Latrine distances (surv-latrines, surv-toilet-no-water) — Water pack Task 6.** From water: King County, Oregon
+   State Extension and the Army 100 ft; Sphere 30 m; NYS DEC (state land rule) 150 ft; Leave No Trace, US Forest
+   Service and NPS 200 ft for cat holes. Today: 200 ft for latrines and buried waste too. Pit bottom above
+   groundwater: King County 1 ft, Sphere 1.5 m; today 1.5 m. Close the pit: Army at 1 ft from the top, Sphere leaves
+   0.5 m; today 0.5 m. From the kitchen: King County 100 ft from homes and campsites; the Army 100 yards downwind of
+   its field kitchen (Army alone, so not used). Sphere also sets a maximum of 50 m from dwellings to a shared toilet,
+   so people can reach it at night; not stated. Say if the group wants the Army's 100 yards from the kitchen or
+   Sphere's 50 m maximum added.
+29. **Latrines and buried waste in town (surv-latrines, surv-toilet-no-water) — Water pack Task 6.** King County:
+   latrines are not appropriate in urban places, but bagged waste may be buried on your own property. Jefferson
+   County: do not dig a pit privy; germs spread to neighbours. Oregon State Extension: in more rural areas consider a
+   latrine. Today: surv-latrines is tagged rural, woods and coast (hidden under the town filter); in town, hold the
+   bagged waste and wait. Say if a backyard latrine in town should be allowed when the sewer will be dead for months.
+30. **Flushing after a disaster (surv-toilet-no-water) — Water pack Task 6.** Oregon State Extension: avoid toilets even
+   if your home sewer lines are not damaged; the street pipes may be broken. DC Water and NPS describe bucket
+   flushing during a water outage. Jefferson County: don't flush after a disaster until officials say it is OK.
+   Today: flush with a bucket only while the sewer works and nothing backs up; after an earthquake, flood or similar
+   damage, don't flush until officials say so. Say if the group wants "never flush in a long outage" instead.
+31. **Burying household garbage (surv-garbage-and-greywater) — Water pack Task 6.** FEMA (Are You Ready?): "Bury
+   garbage, if necessary", no depth or distance. The Army: a 4 x 4 x 4 ft pit at least 100 yards downstream of any
+   water in use (Army alone). Leave No Trace: buried garbage still draws animals. Today: no burying instructions;
+   bag, lid and store. Say if the group wants the Army's pit described.

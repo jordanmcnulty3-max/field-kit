@@ -1879,3 +1879,186 @@ New sources opened 2026-11-18 by web fetch (found by web search; title checked):
 - F9 (surv-water-store). Old: "Water from a public supply treated with chlorine: fill straight from the tap. You don't need to add anything" New: "...fill straight from the tap, unless there is a boil-water notice. You don't need to add anything" Consistent with the in-house topic's treat-it-or-not rule. Outcome: added.
 - N2 (surv-water-how-much list item and CDC source line). Old: "CDC: at least 3 days, and a 2-week supply if possible." New: "CDC: 3 days, and a 2-week supply if possible." CDC-EWS: "Store at least 1 gallon of water per person, per day for 3 days." "Try to store a 2-week supply if possible." Source "used" line reworded the same way. Outcome: corrected.
 - Draft removed from surv-water-how-much, surv-water-store, surv-water-in-the-house and home-water-store after this fix round, as instructed.
+
+## Water pack Task 6: toilets, latrines, garbage (2026-11-18)
+
+Files (all draft): src/survival/surv-toilet-no-water.json, surv-latrines.json, surv-garbage-and-greywater.json,
+src/checklists/sanitation-kit.json. Every source below was found by web search and opened by web fetch on 2026-11-18;
+the page title (and date where printed) was checked after each fetch. Fetches return excerpts capped at about 125
+characters per quote, so long sentences were read as consecutive pieces. No Firecrawl.
+
+Source keys:
+- OSU-SAN: Oregon State University Extension Service, Survival Basics: Sanitation and Waste Management, EM 9334, October 2021 (page modified September 24, 2025). https://extension.oregonstate.edu/catalog/pub/em-9334-survival-basics-sanitation-waste-management (opened three times for the toilet, hand-washing, storage and supply-list passages)
+- JEFF-TB: Jefferson County Dept of Emergency Management with Clallam County Sheriff's Emergency Management, Twin-Bucket Emergency Toilet (sanitary sewer version), updated March 2015. https://www.clallamcountywa.gov/DocumentCenter/View/3435/Emergency-Toilets-If-You-Are-On-Sanitary-Sewer-PDF
+- CLAL-SEP: Clallam County Environmental Health and Emergency Management, Twin-Bucket Emergency Toilet (septic version), updated March 2015. https://www.clallamcountywa.gov/DocumentCenter/View/3436/Emergency-Toilets-If-You-Are-On-Septic-System-PDF
+- WACO: Washington County, Oregon, Take5, Disaster Sanitation (no date). https://washingtoncountyor.gov/take5/disaster-sanitation
+- WILS: City of Wilsonville, Oregon, The Two-Bucket Toilet Solution (credits the Regional Disaster Preparedness Organization; no date). https://www.wilsonvilleoregon.gov/ready/page/two-bucket-toilet-solution
+- KC-ET: Public Health – Seattle & King County, How to create an emergency toilet (no date). https://cd.kingcounty.gov/en/dept/dph/health-safety/safety-injury-prevention/emergency-preparedness/personal-preparedness/emergency-toilets (opened twice)
+- NCDHHS: North Carolina DHHS, Toilet Use During an Emergency, October 2024. https://www.ncdhhs.gov/toilet-use-during-emergency/open
+- ANC: Municipality of Anchorage OEM, Sanitation and Hygiene in an Emergency (no publisher printed in the text; muni.org OEM page). https://www.muni.org/Departments/OEM/Prepared/Pages/EmergencySanitation.aspx
+- WAYNE: Wayne County, Michigan, Homeland Security & Emergency Management, Sanitation in an Emergency. https://www.waynecountymi.gov/Government/Departments/Homeland-Security-Emergency-Management/Homeland-Security/Sanitation-in-an-Emergency (read for comparison; not cited in topics)
+- FEMA-AYR: FEMA, Are You Ready?, Shelter chapter (copy hosted by CERT Los Angeles; no date). https://www.cert-la.com/downloads/education/english/FEMA-Shelter.pdf (read for comparison; not cited in topics)
+- NPS-BF: National Park Service, Grand Canyon, How to Flush a Toilet with a Bucket (Water Conservation Alert), October 13, 2026. https://www.nps.gov/grca/getinvolved/upload/Grand-Canyon-Community-At-Home-Conservation-Guide-Bucket-Flush.pdf
+- DCW: DC Water, What's on Tap, Preparedness Issue 2021. https://www.dcwater.com/preparedness21
+- NYSDOH-BW: New York State Department of Health, Boil Water Notices: FAQ for Residents and Homeowners, question 24. https://healthweb-back.health.ny.gov/environmental/water/drinking/boilwater/faq_residents_and_homeowners.htm (opened twice)
+- NYSDOH-TS: New York State Department of Health, Trash Disposal and Septic Systems after Weather Emergencies, revised October 2023. https://healthweb-back.health.ny.gov/environmental/emergency/flood/trash_septic_systems.htm
+- WADOH-MIX: Washington State Department of Health, Dangers of Mixing Bleach with Cleaners. https://www.doh.wa.gov/YouandYourFamily/HealthyHome/Contaminants/BleachMixingDangers
+- CDC-BL: CDC, How to Safely Clean and Sanitize with Bleach, reviewed August 26, 2026 (as in Task 4). https://www.cdc.gov/natural-disasters/safety/how-to-safely-clean-and-sanitize-with-bleach.html
+- SLCO: Cleaning Up Bodily Fluids and Human Waste (saltlakehealth.org, Salt Lake County Health Department address; no date). https://www.saltlakecounty.gov/globalassets/1-site-files/health/print-materials/illness-prevention/human_waste_brochure.pdf
+- TAMU: Texas A&M AgriLife Extension, Onsite Wastewater Treatment Systems: Responding to Electrical Power Outages and Floods, ER-001 (no date). https://texashelp.tamu.edu/wp-content/uploads/2016/02/waste-systems-blackouts-floods-1.pdf
+- EPA-SEP: US EPA, Septic Systems - What to Do after the Flood, updated August 24, 2026. https://www.epa.gov/ground-water-and-drinking-water/septic-systems-what-do-after-flood
+- FW: FEMA, Red Cross and USDA, Food and Water in an Emergency (as in Task 4; not re-opened: the main-valve sentence is the one checked there).
+- LNT-3: Leave No Trace, Principle 3: Dispose of Waste Properly. https://lnt.org/learn/principle-3
+- LNT-W: Leave No Trace, Winter Recreation. https://lnt.org/winter-recreation/
+- USFS-GF: US Forest Service, Going in the Forest (no date). https://fs.usda.gov/media/241716
+- NPS-BR: National Park Service, Blue Ridge Parkway, Much Ado About Number Two, updated May 22, 2020. https://www.nps.gov/blri/planyourvisit/number-2.htm
+- DEC-SL: NYS DEC, State Land Camping Rules. https://dec.ny.gov/things-to-do/camping/state-land-rules
+- ADK-W: Adirondack Mountain Club, Winter Leave No Trace Tips (Amy Harff, 2018). https://adk.org/winter-leave-no-trace-tips/
+- SPHERE: Sphere Handbook, WASH chapter (copy hosted by Universitas Sebelas Maret; edition year not printed in the part read; the excreta and solid-waste standard numbers match the 2018 edition's numbering). https://ksrpmi.uns.ac.id/wp-content/uploads/2019/09/Sphere-Handbook-2018-WATER-SUPPLY.pdf
+- CDC-SAN: CDC, Potential Sanitation Solutions During an Emergency Response, reviewed December 9, 2021 (archive.cdc.gov). https://archive.cdc.gov/www_cdc_gov/healthywater/global/sanitation/sanitation-emergency-response.html
+- ARMY-FS: NY Division of Military and Naval Affairs, Field Sanitation Team Certification Course, Lesson 6, Waste Disposal in the Field (MED153; no date; US Army field sanitation doctrine). https://dmna.ny.gov/foodservice/docs/Field_Sanitation_Team_Certification_Course/Student_Book/L006HO_Waste_Disposal.pdf. Second source only; marked below wherever a statement rests on it.
+- CDC-ANI: CDC, What to Do to Protect Yourself From Animals After a Disaster, August 26, 2026. https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-from-animals-after-a-disaster.html
+- DEC-BEAR: NYS DEC, DEC Issues Guidance to Reduce Conflicts with Bears, April 7, 2023. https://dec.ny.gov/news/press-releases/2023/4/dec-issues-guidance-to-reduce-conflicts-with-bears; NYS DEC, Be BearWise. https://dec.ny.gov/nature/animals-fish-plants/black-bear/management/bearwise
+- DEC-OB: NYS DEC, Open Burning. https://dec.ny.gov/environmental-protection/air-quality/open-burning
+- EPA-BB: US EPA (archived), Backyard Burning: Human Health. https://archive.epa.gov/epawaste/nonhaz/municipal/web/html/health.html
+- UMN-NORO: University of Minnesota Extension, Step-by-step guide to norovirus cleanup, reviewed 2025. https://extension.umn.edu/sanitation-and-preventing-illness/clean-vomit-and-diarrhea
+
+Conversions: 1 gal = 3.785 L (USGS, Task 4); 1 cup = 240 mL (CDC-BL prints it); half cup = 120 mL; 1 ft = 0.3048 m,
+1 in = 2.54 cm by definition. 200 ft = 61.0 m, written "60 m"; 150 ft = 45.7 m (not converted in text); 100 ft = 30.5 m,
+"30 m"; 3 ft = 0.91 m, "90 cm"; 1 ft = 30 cm; 6 to 8 in = 15 to 20 cm; 4 to 6 in = 10 to 15 cm; 1.5 m = 4.9 ft, "5 feet
+(1.5 m)"; 0.5 m = 19.7 in, "about 20 inches (0.5 m)"; 5 gal = 18.9 L, "19 L"; 13 gal = 49.2 L, "49 L"; 1 to 2 gal =
+3.8 to 7.6 L, "4 to 8 L"; 500°F = 260°C.
+
+### surv-toilet-no-water
+
+- Poop carries germs, pee usually does not — WILS ("Urine is (usually) sterile, while poop contains pathogens requiring special handling"); JEFF-TB ("Urine has almost no health risk"). Matches.
+- Flies, pests and rats carry germs from waste to food and water — OSU-SAN ("If human waste is not managed properly, flies, pests and rodents can spread germs or spores of feces" "to our food and the open water sources on which we may rely"). Matches. "That is how stomach illness spreads" — summary sentence; linked p:vomiting-diarrhea.
+- doFirst items — each restates a checked line below.
+- Bucket flush only for tank (gravity) toilets, not sealed pressure tanks — NPS-BF ("Standard gravity-fed toilets only. If the tank holds a sealed pressure vessel, ask your housing office"). Matches.
+- A gallon or two (4 to 8 L), varies by toilet — NPS-BF ("A gallon or two often works; the amount varies by toilet"); DCW ("It requires a gallon of water, poured directly into the toilet bowl"). Matches.
+- Pour slowly then fast; avoid splashing — DCW ("Start slowly at first, then quickly add the rest"); NPS-BF ("Pour steadily into the bowl, then faster to trigger a flush." "Avoid splashes."). Matches.
+- Stop if water rises without draining — NPS-BF verbatim meaning. Matches.
+- Restore the bowl level; don't also use the handle — NPS-BF ("Slowly add a little water if needed to restore the usual standing level. Do not use the handle as well."). Matches.
+- Water you would not drink is fine for flushing; quote — NYSDOH-BW Q24 ("There is no need to disinfect water used for flushing."). The question is about tap water under a boil-water notice; WACO ("Add non-drinking water" to the pee bucket) and CDC-FCW (Task 4: pool water for hygiene and cleaning) support using non-drinking water for sanitation. Outcome: matches, applied a little beyond its boil-notice context (reviewer, please judge).
+- No grease, food scraps, wipes or cleaning chemicals in flushing water — NPS-BF. Matches.
+- Several pee uses before flushing — DCW ("In most cases, several uses can be made of the toilet for liquid wastes before you need to flush"). Matches.
+- Don't flush after damage until officials say OK — JEFF-TB ("After a disaster, DO NOT flush a toilet until given the OK by a local official"); CLAL-SEP ("until told it is OK by county officials"). "After an earthquake, flood or similar damage" — JEFF-TB is written for earthquakes; ANC ("Do not flush the toilet if water lines are damaged"). Home pipes fine, street pipes broken — OSU-SAN ("Your home's pipes might be OK but pipes in the street may be broken"). Matches. OSU-SAN goes further ("Avoid using toilets even if your home sewer lines are not damaged"); the app allows bucket flushing only while the sewer works and nothing backs up (DCW, NPS-BF describe it for water outages). Disagreement logged (decisions D, Task 6).
+- Toilet doesn't drain normally, sewage comes back up: stop — NPS-BF ("Stop using a toilet that does not drain normally"); NYSDOH-TS (sewage backup as a sign of damage). Matches.
+- Septic flooded or soil around it flooded — NYSDOH-TS ("Do not use your septic system (toilets, washing machine, etc.) if the soil around the system is flooded"). Matches.
+- Shut the main valve if you hear of broken water or sewer lines — FW (checked in Task 4: "if you hear reports of broken water or sewage lines"). Matches surv-water-in-the-house.
+- Two-bucket: "Oregon and Washington emergency managers and Oregon State University Extension" — JEFF-TB, CLAL-SEP (Washington State counties), WACO, WILS (Oregon), OSU-SAN. Pee mixed with poo makes the smell — OSU-SAN ("the pee is the component that produces the strong smell in toilets that mix"). Matches.
+- Steps, order checked against OSU-SAN and JEFF-TB:
+  1. Two 5-gallon buckets marked pee and poo — OSU-SAN ("Get two 5-gallon buckets." "Mark the buckets "pee" and "poo""). Lids — JEFF-TB ("cover with a lid that closes well"), OSU-SAN supply list ("Two 5-gallon buckets with lids").
+  2. Poo bucket lined with a heavy-duty 13-gallon bag; pee bucket unlined — OSU-SAN verbatim meaning.
+  3. Private place, cover material and scoop nearby — JEFF-TB ("Put buckets in a private space with carbon covering material nearby, along with a plastic scoop"). Materials — OSU-SAN ("wood shavings, sawdust, shredded paper, bark chips or peat moss").
+  4. Seat moved between buckets, lid after use — CLAL-SEP ("The seat can be moved from one to the other."); JEFF-TB/CLAL-SEP ("After use, remove the seat from the bucket and cover with a lid that closes well").
+  5. Toilet paper in the poo bucket — WACO ("Place toilet paper in POO bucket"); JEFF-TB ("After using the pee bucket, you can put the toilet paper in the poo bucket"); WILS.
+  6. Try not to pee in the poo bucket; mistakes happen — OSU-SAN; JEFF-TB ("it's understandable that there will be mistakes").
+  7. About half a cup to cover completely — OSU-SAN ("sprinkle about a half cup of carbon material" "so that it completely covers the surface of the poo"). JEFF-TB says "1 to 2 scoops". OSU's measure used (it is a stated volume). Purpose: moisture, odor, flies — WILS ("to absorb moisture, reduce odor, and deter flies"). Matches.
+- No diapers, pads or pet waste in the buckets — JEFF-TB ("DO NOT place baby or adult diapers, sanitary pads, or bagged pet waste in pee or poo buckets"). Matches.
+- Pee bucket emptied at about a quarter full or before too heavy — OSU-SAN verbatim. Dilute with non-drinking water and pour on lawn or ground — WACO ("Add non-drinking water to contents if possible." "Pour on lawn, garden or ground."); OSU-SAN ("add some water to the contents if possible to dilute the urine and simply pour on the lawn or ground"). Change spot each time — OSU-SAN. "Keep it well away from any well, spring or stream" — group judgement, no distance given by any town source; cautious (LNT-3 asks 200 feet from water for urine in the backcountry). Logged here.
+- Poo bucket no more than half full — OSU-SAN ("Fill poo bucket no more than half-full of waste"); WACO; WILS ("When the bucket is half-full, double bag"). Gloves, double-bag, seal; reline — OSU-SAN verbatim meaning. "Take off gloves and wash your hands" — WACO ("Always clean your hands after toileting"); group judgement for the glove step.
+- Hold pee with a tight lid and wait if told to — JEFF-TB ("DO store pee and poo in the buckets and WAIT for disposal instructions from authorities"); CLAL-SEP ("you can store pee while waiting for disposal instructions"). Matches.
+- Bags in the bowl: shut off the toilet's water and get water out of the bowl — NCDHHS ("Turn off the water valve and flush out any water still in the bowl"). Two heavy-duty bags — KC-ET ("with two heavy-duty plastic garbage bags"); NCDHHS (a bag inside another kitchen bag). Cat litter, fireplace ashes or sawdust — KC-ET. Tie and remove daily to a garage, basement or outbuilding — KC-ET verbatim meaning. Matches.
+- No bleach in pee buckets: urine contains ammonia; bleach plus ammonia makes chloramines — WADOH-MIX ("ammonia can be found in ... urine (use caution when cleaning litter boxes, diaper pails, or toilet bowls)"; "When bleach is mixed with ammonia, toxic gases called chloramines are produced"). Never mix bleach with ammonia or any other cleaner — CDC-BL verbatim. Twin-bucket agencies use cover material, no chemicals — OSU-SAN, JEFF-TB, CLAL-SEP, WACO, WILS (none mentions bleach in the buckets; checked). Older guides add bleach — FEMA-AYR ("pour or sprinkle a small amount of regular household disinfectant, such as chlorine bleach, into the container"); ANC ("liquid bleach diluted 1 cup bleach to 10 cups of water", no strength); WAYNE ("one part liquid chlorine bleach to ten parts water", no strength); NCDHHS lists "bleach or disinfectant" as an absorbent, no dilution. None gives a bleach strength, so per the content contract no dilution is given. Outcome: more cautious path taken (no bleach in waste); decisions D, Task 6.
+- Clean the buckets: NCDHHS ("Disinfect the bucket with bleach or discard after use"). CDC mix — CDC-BL ("Sanitize using a mixture of 1 cup (240 mL) of bleach to 5 gallons of water" for non-food household surfaces and items that may have touched floodwater; "regular, unscented household bleach with a sodium hypochlorite concentration between 5% and 9%"; "Allow to air dry"; "open windows and doors"). A waste bucket is a non-food household item; CDC's context is floodwater. Outcome: used with its CDC label; reviewer, please judge. "Empty the bucket first" and gloves — group judgement following WADOH-MIX and OSU-SAN (gloves when handling waste).
+- Store waste: separate can, tight lid — OSU-SAN ("A dedicated and separate garbage can or roll cart"; "store separately from other garbage"); ANC ("large lined trash can with a tight fitting lid"). Far from food and water; children, pets, flies, rats — OSU-SAN; WACO ("away from food, kids and animals"; "Secure waste from pets, flies and rats"). Garage, basement or outbuilding — KC-ET. Not in normal garbage — OSU-SAN ("Do not put human waste into the normal garbage"); unless officials announce — KC-ET ("During a declared emergency, these bags may be included with the regular garbage if a public announcement has been made"). Matches.
+- Store until the sewer is fixed; listen for instructions — OSU-SAN ("You will likely have to store the waste until the public sanitary system is fixed"); WACO ("Listen for more information from your local waste disposal haulers"). Matches.
+- Disposal options: working sewer or septic, or bury on own property — KC-ET. Not within 100 feet of a water source or where it can leach downhill — OSU-SAN ("Do not bury waste within 100 feet of a water source or where the contaminants can leach downhill into a water source"). App uses 200 feet (LNT-3, USFS-GF, NPS-BR cat-hole distance) — more cautious; decisions D.
+- In town, don't dig pits — JEFF-TB ("DO NOT dig a pit privy." "disease organisms can easily contaminate neighboring properties"); KC-ET ("Latrines are not appropriate in urban locations"). KC-ET also allows burying bagged waste on one's own property; the app keeps burying to rural land (surv-latrines is tagged rural, woods, coast). Disagreement logged (decisions D).
+- Storm drain — SLCO ("it is against the law to wash waste into a storm drain"; Utah). "Or put it in a ditch or stream" — follows from the water-source distances above (OSU-SAN, KC-ET). No New York rule on disposing of bagged human waste was found; nothing stated as a New York rule.
+- Septic: gravity systems keep working — TAMU ("A gravity collection system that feeds into a septic tank and soil absorption area will continue to operate properly"). "You can flush it with a bucket" — inference from TAMU and OSU-SAN ("it may be safe to continue using as long as you do not see signs of leaking" or backing up). Pumps, aerobic units, sand filters need electricity; waste collects — TAMU. Short outage: water only for flushing and hand washing; extended: stop all water use — TAMU ("Limit water usage to essentials such as toilet flushing and hand washing"; "If you expect the power to be out for an extended time:" "Stop all water use."). Stop if plumbing drains slowly — TAMU. Don't use if soil flooded — NYSDOH-TS, EPA-SEP ("If possible, don't use the system if the soil is saturated and flooded"). Don't pump while flooded — EPA-SEP ("Do not pump the tank during flooded or saturated drainfield conditions"). Signs — NYSDOH-TS ("sluggish plumbing, sewage backup, and soil erosion around the drain field"); EPA-SEP ("settling or an inability to accept water"). After an earthquake don't assume it works — CLAL-SEP verbatim. No cover material if the poo bucket will go into a septic tank — CLAL-SEP ("DO NOT ADD CARBON MATERIAL of any kind to your poo bucket if you are going to dump it in your own septic tank"; JEFF-TB "Carbon can't be put in a septic system"). Matches.
+- Hand washing: soap and water after toileting and before eating — WACO. Sanitizer at least 60% alcohol when no water — OSU-SAN ("a hand sanitizer with at least 60% alcohol"); WACO ("60%+"). Soap and water clean better — WILS ("Hand sanitizer is fine in a pinch, but the most effective way to stay clean is using soap and water"). Matches. Full hand washing is for surv-handwashing (Task 7).
+- Links: p:vomiting-diarrhea, s:surv-water-in-the-house, s:surv-garbage-and-greywater, s:surv-latrines, p:poisoning (bleach fumes), c:sanitation-kit, s:surv-water-how-much.
+
+### surv-latrines
+
+- where: rural, woods, coast (not town) — KC-ET ("Latrines are not appropriate in urban locations"); JEFF-TB (no pit privy, neighboring properties); OSU-SAN ("If you live in a more rural area, consider digging a latrine"). Coast included: no source restricts cat holes or latrines on the coast. Logged in decisions D.
+- Cat holes on the move; latrines for young children or more than a few nights — LNT-3 ("there are times when latrines may be more applicable, such as when camping with young children or if staying in one camp for longer than a few nights"). Matches.
+- 200 feet from water, trails and camp; about 70 steps — USFS-GF ("Move at least 200 feet (about 70 steps) away from any water sources, trails, parking areas and campsites"); LNT-3 ("at least 200 feet (about 70 to 80 adult paces) from water, trails, and camp"); NPS-BR ("Two hundred feet away from water and trails (approximately 80 adult paces)"). Matches.
+- Inconspicuous site — LNT-3. Matches.
+- 6 to 8 inches deep, 4 to 6 inches across, small trowel — LNT-3 ("Dig a hole 6-8 inches deep and 4-6 inches in diameter with a small garden trowel"); USFS-GF; NPS-BR. Matches.
+- Fill with the original soil and disguise with leaves and debris — NPS-BR verbatim meaning; LNT-3. Matches.
+- Spread out; don't go to the same place twice — LNT-3; NPS-BR. Matches.
+- New York normal-times rule: 6 to 8 inches deep, at least 150 feet from water or campsites, cover with leaves and soil; pit privies where provided; LNT recommends 200 — DEC-SL verbatim meaning. Matches.
+- Toilet paper packed out in sealed bags — NPS-BR ("Always pack it out ... Don't put it in your cathole either"); USFS-GF ("Pack your toilet paper or wipes in a double ziploc bag"). LNT-3 allows burying it deep. Disagreement: pack out first (more cautious), LNT's option mentioned. Wipes always packed out; don't burn (wildfires); unscented — LNT-3 verbatim meaning. Matches.
+- Pee 200 feet from trails, campsites and water; rocks, pine needles, gravel; animals attracted to salts dig up plants and soil; diluting helps — LNT-3. LNT's "water sources with a water flow of less than 500 cubic feet per second" qualifier left out (the app asks 200 feet from all water; more cautious). Matches.
+- Packing out where required; ask land managers; sealed zipper bags or containers; commercial systems — LNT-3; NPS-BR. "in normal times" added (land managers will not be reachable in a long outage). Matches.
+- Latrine location matters, slow breakdown — LNT-3 ("Since this higher concentration of feces will decompose very slowly, location is especially important"). Matches.
+- From water: at least 200 feet — more cautious than KC-ET ("at least 100 feet away from surface water bodies such as lakes, rivers, streams, and at least 100 feet downhill or away from any drinking water source (well or spring)"), OSU-SAN (100 feet), SPHERE ("the distance between containment facilities and water sources should be at least 30 metres"), ARMY-FS ("100 feet away from any unit ground water source"), DEC-SL (150 feet, for human waste on state land). 200 feet is LNT-3, USFS-GF and NPS-BR's cat-hole figure. Outcome: more cautious used; decisions D.
+- From tents, homes and the kitchen: at least 100 feet — KC-ET ("100 feet downhill or away from any ... home, apartment, or campsite"); away from food preparation and eating areas — KC-ET ("Keep the toilet away from food preparation and eating areas"). ARMY-FS: "at least 100 yards downwind from the unit's field food service facility" and "30 yards from the edge of the unit area". The Army's 100 yards is more cautious for the kitchen but rests on the Army alone; not used; decisions D. SPHERE gives a maximum of 50 m from dwellings to a shared toilet (so people can reach it); not stated in the topic; decisions D.
+- Pit bottom at least 1.5 m above groundwater — SPHERE ("the bottom of pits should be at least 1.5 metres above the groundwater table"); KC-ET ("at least 1 foot above hard pan or the water table"). More cautious (Sphere) used, KC's figure shown.
+- Downhill from wells and springs — KC-ET ("100 feet downhill or away from any drinking water source"). Never uphill or upwind of camp — SPHERE ("Do not establish defaecation areas uphill or upwind of settlements"). Matches.
+- High water table unsuitable — CDC-SAN ("Unsuitable where water table is high"). Matches.
+- At least 3 feet deep — KC-ET ("The hole for a latrine must be at least 3 feet deep"). ARMY-FS deep pit: 1 foot per week of use plus 1 foot (not used; Army alone). Matches.
+- Soil, mulch or ash after each use — KC-ET ("throw dirt, lime, mulch, or ash in the latrine"); lime left out (WAYNE warns against quicklime; no source says which lime is safe). Handful of soil — LNT-3 ("toss in a handful of soil after each use"). Matches.
+- Cover between uses; keep covers and doors closed against insects and animals — KC-ET verbatim meaning. Matches.
+- Hand-washing next to it — KC-ET ("Provide a place next to the emergency toilet to wash hands that offers soap, running water, and paper towels"); SPHERE ("Ensure that the facility allows for handwashing, including water and soap (or an alternative such as ash)"); CDC-SAN ("Install handwashing stations at every sanitation facility"). Matches. Detail is for surv-handwashing (links to add later).
+- Supervise small children — KC-ET. Matches.
+- Close at about 20 inches (0.5 m) from the top — SPHERE ("Allow 0.5 metres at the top of the pit for backfill"); ARMY-FS ("When a latrine pit is filled to within one foot of the top"); CDC-SAN ("waste covered with soil when latrine is near-full"). More cautious (Sphere) used.
+- Fill to ground level packing the soil; mound on top against flies; mark the spot — ARMY-FS ("Fill the pit to ground level, packing the dirt after every three inches of dirt added." "Then mound the latrine with twelve inches of soil to prevent flies from entering or exiting the pit." sign with type and date). These rest on the Army alone (with CDC-SAN for covering with soil); no numbers from it are given in the text. Flagged for the reviewer.
+- Winter: frozen ground and snow make cat holes hard — ADK-W verbatim meaning. Pack out solid waste and toilet paper — ADK-W ("it is best to pack out all human solid waste and toilet paper"); LNT-W ("Pack out solid human waste."). Snow is not the place — LNT-W ("The snow may seem like an easy place to dispose of our trash and human waste" ... other options). Snow cat hole 200 feet from trails and water if unable to pack out — LNT-W verbatim meaning. Check your map for water — LNT-W ("Consult your map to make sure that you are camping 200 feet away from water"; said of camps, applied to the cat hole). Matches.
+- Hand washing or sanitizer afterward — LNT-3 ("Hand sanitizers that don't require rinsing allow you to wash your hands"). Matches.
+
+### surv-garbage-and-greywater
+
+- Garbage draws rats, mice, flies and black bears — CDC-ANI (rodents), OSU-SAN (flies), DEC-BEAR (bears and garbage). Rodents spread disease, bite — CDC-ANI ("They can spread diseases and can bite people or pets"). Flies carry germs to food and open water — OSU-SAN ("Flies can carry germs and spores of feces to human food and open water sources"). Matches.
+- Heavy-duty bags inside containers with tight lids; away from home and well — NYSDOH-TS ("storing garbage in heavy duty garbage bags inside containers with tight lids"; "Keep garbage in a convenient location, away from your drinking water well and home"). Matches. "Away from where people sleep" — agrees with surv-dangerous-animals (checked topic).
+- Bears: cans in a sturdy building; pet and livestock food indoors; clean grills — DEC-BEAR verbatim meaning. "such as a shed or garage" — example added. Matches.
+- Trash out as soon as you can; clean up debris — CDC-ANI ("Throw out trash as soon as you can." "Put trash in a covered trashcan or dumpster." "Clean up debris and trash as soon as possible outside your home."). Food and water in thick plastic, glass or metal with tight lids — CDC-ANI verbatim. Matches.
+- Bagged toilet waste in its own can — OSU-SAN. Matches.
+- In camp, garbage with food and scented items away from where you sleep — surv-dangerous-animals (DEC canister text, checked in v7). Matches.
+- Plan meals for little garbage; pack out leftover food, grease, scraps, orange peel — LNT-3 verbatim meaning. Matches. "At home, bag food scraps with the rest of the garbage in a lidded can" — follows NYSDOH-TS; no compost advice found in any opened source (DEC BearWise links out for it).
+- Rodents: close holes, dime — CDC-ANI ("Some rodents can squeeze through holes as small as a dime"); snap traps; dead rodent with gloves in two plastic bags; don't sweep or vacuum droppings not disinfected; don't eat or drink what rodents touched — CDC-ANI verbatim meaning. CDC-ANI's "1:10 chlorine solution" ("1½ cups of household bleach mixed with 1 gallon of water") is not given: the page prints no bleach strength (content contract). For surv-clean-and-disinfect (Task 7) to source. Matches otherwise.
+- Diapers and menstrual products in heavy-duty 3 to 5 mil black bags, disposed of with bagged poo — OSU-SAN verbatim meaning. Not in the toilet buckets — JEFF-TB. Matches. JEFF-TB says "Dispose of them in trash"; OSU keeps them with the bagged poo; OSU used (more cautious).
+- Vomit and diarrhea clean-up waste: gloves, plastic bag, sealed, new gloves to carry it to a secure container; wash hands — UMN-NORO verbatim meaning. Matches. Fuller cleaning is for surv-clean-and-disinfect and surv-stomach-illness-in-a-group (links to add later).
+- Sharps and medicines: no opened source covered household disposal in an emergency; left out.
+- Burning: quote "Burning trash is illegal statewide in all cases." — DEC-OB verbatim. Burn barrels included — DEC-OB ("This includes burning trash or other solid wastes in a burn barrel or similar device"). Wood stoves, fireplaces, outdoor wood boilers — DEC-OB ("Part 219 Incinerators prohibits burning trash in wood stoves, fireplaces, and outdoor wood boilers"). Stated as normal-times New York rule. Matches.
+- Burn barrels rarely hotter than 500°F; incomplete combustion; harmful smoke and soot — DEC-OB verbatim meaning. 500°F = 260°C. Matches.
+- Dioxins, particles, carbon monoxide; ash with mercury, lead, chromium, arsenic taken up by garden vegetables — EPA-BB verbatim meaning. Matches. No public agency instructions for burning trash in an emergency were found; none given. ARMY-FS gives burning at 50 yards downwind of camp but prefers burial; not used.
+- Half-burned or buried garbage still draws animals — LNT-3 verbatim meaning; "Burning trash is never recommended". Matches. Burying household garbage: FEMA-AYR says "Bury garbage, if necessary" with no depth or distance; ARMY-FS gives a 4 x 4 x 4 foot pit 100 yards downstream of water (Army alone). Not given in the topic; decisions D.
+- Greywater defined — plain description.
+- Sewer working: sink drain, not the toilet — NPS-BF ("Pour used dishwater down the sink drain, not into the toilet"). Matches.
+- With a bucket toilet, use it to dilute pee — OSU-SAN ("Water collected in the bucket or basin can be used to dilute urine before dumping outside"). Don't treat it for reuse — OSU-SAN verbatim. Matches.
+- Keep it out of a latrine — SPHERE (household water from cleaning, cooking, laundry or bathing should not "enter the containment facilities"). Matches.
+- Camp: carry water 200 feet from streams and lakes; never wash in them — LNT-3 verbatim meaning. Little soap; NY rule no soap within 150 feet of water — LNT-3; DEC-SL ("Do not use soap to wash yourself, clothing or dishes within 150 feet of water"). Strain with fine mesh; scatter broadly, well away from camp, especially with bears; pack out strainer contents — LNT-3 verbatim meaning. Order checked against LNT-3's dishwashing paragraph. Matches.
+- Dead animals per local animal control as soon as you can — CDC-ANI verbatim meaning. "Wear gloves" — CDC-ANI (gloves for dead rodents). "when you can reach them" added (phones may not work). Matches.
+
+### sanitation-kit (checklist)
+
+- buckets — OSU-SAN supply list ("Two 5-gallon buckets with lids; label buckets "Pee" and "Poo""); JEFF-TB (lid that closes well); WACO.
+- seat — WILS ("A toilet seat (optional, but highly recommended)"); JEFF-TB/CLAL-SEP.
+- bags — OSU-SAN ("Several boxes of 3–5 mil black plastic garbage/contractor bags"). Note: liner, double-bagging, diapers, pads — OSU-SAN. (WILS lists 13-gallon bags of 0.9 mil or thicker; OSU's heavier bag used.)
+- cover-material, note half a cup — OSU-SAN.
+- scoop — JEFF-TB ("along with a plastic scoop").
+- waste-can — OSU-SAN; ANC.
+- toilet-paper — OSU-SAN; WACO ("Toilet paper or wipes").
+- zip-bags — OSU-SAN ("Closable bags to hold used toilet paper"); NPS-BR; USFS-GF.
+- gloves — OSU-SAN ("Latex or nitrile gloves to wear when bagging poop"); WACO.
+- soap — OSU-SAN; WACO.
+- sanitizer, 60% — OSU-SAN; WACO. Note — WILS.
+- handwash-jug — OSU-SAN ("Full water jug with on/off spigot"; towels; "Catch bucket or basin").
+- bleach 5% to 9%, for cleaning the buckets; never into pee; never mix — CDC-BL; NCDHHS; WADOH-MIX.
+- trowel and shovel — LNT-3 (trowel); KC-ET (3-foot latrine); ARMY-FS (shovel at the latrine; second source, not a number).
+- 14 items. No qty: no opened source gives a per-person figure for any item (OSU-SAN's "multiply the number of humans and pets by 14" is gallons of water for two weeks, already covered by home-water-store).
+
+### Task 6 disagreements (summary; questions in decisions-for-jordan.md section D)
+
+- Bleach in toilet buckets: FEMA-AYR, ANC, WAYNE add it (no strength); twin-bucket agencies don't; WADOH-MIX warns urine contains ammonia. App: none.
+- Latrine and burial distance from water: 100 ft (KC-ET, OSU-SAN, ARMY-FS), 30 m (SPHERE), 150 ft (DEC-SL rule), 200 ft (LNT-3, USFS-GF, NPS-BR). App: 200 ft.
+- Pit bottom above groundwater: 1 ft (KC-ET) vs 1.5 m (SPHERE). App: 1.5 m.
+- Closing: 1 ft from top (ARMY-FS) vs 0.5 m (SPHERE). App: 0.5 m.
+- Kitchen: 100 ft (KC-ET) vs 100 yards (ARMY-FS, Army alone). App: 100 ft.
+- Burying in town: KC-ET allows on own property; JEFF-TB and KC-ET (latrines) say not in town. App: not in town.
+- Flushing after a disaster: OSU-SAN avoid toilets even if home lines are fine; NPS-BF and DCW describe bucket flushing in water outages. App: flush only while the sewer works and nothing backs up; don't flush after damage until officials say so.
+- Toilet paper: NPS-BR pack out always; LNT-3 bury deep or pack out. App: pack out, LNT option mentioned.
+- Diapers: JEFF-TB "in trash"; OSU-SAN with the bagged poo. App: OSU.
+
+### Task 6 pages that would not open or were not used
+
+- Seattle Public Utilities Emergency Sanitation trifold (seattle.gov PDF): site error.
+- UNT web archive copy of CDC healthywater/emergency/cleaning/sanitation.html (2012): wrapper only, no content.
+- PHLUSH, Twin Bucket Toilet FAQs (phlush.org, April 2025): opened; a non-profit, not an agency; nothing used (its "store urine 2 weeks" and "monitor bags for gas" are not from an agency).
+- Salt Lake County 9:1 bleach for body-fluid clean-up: no bleach strength; not used.
+- NYS DEC Be BearWise: only headings linking to bearwise.org; DEC press release used instead.
+- Ready.gov and Red Cross: no page found by search with a bleach dilution for toilet waste.

@@ -1,0 +1,202 @@
+{
+  "id": "surv-garbage-and-greywater",
+  "title": "Garbage and dirty water",
+  "category": "water",
+  "keywords": [
+    "garbage",
+    "trash",
+    "rats",
+    "bears",
+    "greywater",
+    "dishwater",
+    "diapers",
+    "burning trash",
+    "pests",
+    "waste"
+  ],
+  "summary": "With no garbage collection, keep trash in heavy bags inside lidded cans, away from the house, the well and where people sleep; don’t burn it; strain dishwater and scatter it well away from water.",
+  "sections": [
+    {
+      "h": "Why it matters",
+      "blocks": [
+        {
+          "p": "Garbage brings rats, mice, flies and, in much of the Northeast, black bears. Rodents spread disease and can bite people and pets (CDC). Flies carry germs from waste to food and to open water (Oregon State University Extension)."
+        }
+      ]
+    },
+    {
+      "h": "Store garbage",
+      "blocks": [
+        {
+          "list": [
+            "Put garbage in heavy-duty garbage bags inside containers with tight lids (New York State Department of Health).",
+            "Keep it away from your home and your drinking water well (New York State Department of Health), and away from where people sleep.",
+            "Where there are bears, keep the cans in a sturdy building such as a shed or garage (NYS DEC). Keep pet and livestock food indoors and clean grease and food off grills (NYS DEC).",
+            "Get trash out of the house as soon as you can, and clean up debris and trash around it (CDC).",
+            "Store food and water in thick plastic, glass or metal containers with tight lids, so pests can’t reach them (CDC).",
+            "Bagged toilet waste goes in its own can, apart from other garbage (Oregon State University Extension)."
+          ]
+        },
+        {
+          "p": "In camp, store garbage with the food and every scented item, away from where you sleep."
+        },
+        {
+          "link": "s:surv-dangerous-animals",
+          "label": "Dangerous animals (bears)"
+        }
+      ]
+    },
+    {
+      "h": "Food waste",
+      "blocks": [
+        {
+          "list": [
+            "Plan meals so you make as little messy, smelly garbage as possible (Leave No Trace).",
+            "In camp, pack out all leftover food, grease and food scraps. Pick up every bit, even orange peel (Leave No Trace).",
+            "At home, bag food scraps with the rest of the garbage in a lidded can."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Rats and mice",
+      "blocks": [
+        {
+          "list": [
+            "Close every hole in the walls. Some rodents get through holes the size of a dime (CDC).",
+            "Catch them with spring-loaded snap traps (CDC).",
+            "A dead rodent: wear rubber or plastic gloves, seal it in two plastic bags and throw it away (CDC).",
+            "Don’t sweep or vacuum droppings or urine. Spray them with disinfectant first (CDC).",
+            "Don’t eat or drink anything rodents may have touched (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Diapers and sick waste",
+      "blocks": [
+        {
+          "list": [
+            "Diapers (baby and adult), sanitary pads and other menstrual products: bag them in heavy-duty 3 to 5 mil black plastic bags (Oregon State University Extension). Never put them in the toilet buckets (Jefferson County). Keep them with the bagged toilet waste until it can be got rid of (Oregon State University Extension).",
+            "Cleaning up vomit or diarrhea: wear disposable gloves, put the soiled things and the gloves in a plastic trash bag, seal it, and put on new gloves to carry it to a lidded trash can (University of Minnesota Extension). Then wash your hands."
+          ]
+        },
+        {
+          "link": "p:vomiting-diarrhea",
+          "label": "Severe vomiting or diarrhea"
+        }
+      ]
+    },
+    {
+      "h": "Don’t burn it",
+      "blocks": [
+        {
+          "list": [
+            "In New York, in normal times: “Burning trash is illegal statewide in all cases.” That includes a burn barrel, a wood stove, a fireplace and an outdoor wood boiler (NYS DEC).",
+            "A burn barrel rarely gets hotter than 500°F (260°C). The trash doesn’t burn completely and makes harmful smoke and soot (NYS DEC).",
+            "Burning household trash gives off dioxins, fine particles and carbon monoxide. The ash can hold mercury, lead, chromium and arsenic, which garden vegetables take up (EPA).",
+            "Half-burned or buried garbage still draws animals (Leave No Trace)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Dishwater and wash water",
+      "blocks": [
+        {
+          "p": "Greywater is the dirty water from washing dishes, hands and people."
+        },
+        {
+          "list": [
+            "At home while the sewer still works, pour it down the sink drain, not into the toilet (National Park Service).",
+            "With a bucket toilet, use it to dilute the pee before you pour it out (Oregon State University Extension).",
+            "Don’t try to treat it to use again (Oregon State University Extension).",
+            "Keep it out of a latrine or pit toilet (Sphere handbook)."
+          ]
+        },
+        {
+          "steps": [
+            "In camp, carry water at least 200 feet (60 m) from streams and lakes to wash. Never wash in a lake or stream (Leave No Trace).",
+            "Use as little soap as you can. New York State land rule in normal times: no soap within 150 feet of water (NYS DEC).",
+            "Strain the dirty water through a fine mesh strainer (Leave No Trace).",
+            "Scatter it broadly, well away from camp, especially where there are bears (Leave No Trace).",
+            "Pack out what is in the strainer with the leftover food (Leave No Trace)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Dead animals",
+      "blocks": [
+        {
+          "p": "Get rid of dead animals as soon as you can, following your local animal control authority’s guidelines when you can reach them (CDC). Wear gloves."
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        },
+        {
+          "link": "s:surv-latrines",
+          "label": "Latrines and cat holes"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "New York State Department of Health, Trash Disposal and Septic Systems after Weather Emergencies (revised October 2023)",
+      "used": "Heavy-duty garbage bags inside containers with tight lids; away from your drinking water well and home"
+    },
+    {
+      "name": "CDC, What to Do to Protect Yourself From Animals After a Disaster (August 26, 2026)",
+      "used": "Rodents spread disease and bite; secure food; throw out trash as soon as you can, in a covered can; clean up debris; store food and water in thick plastic, glass or metal with tight lids; close holes, some rodents fit through a dime-sized hole; snap traps; dead rodent sealed in two plastic bags with gloves; don’t sweep or vacuum droppings that have not been disinfected; don’t eat or drink what rodents may have touched; dead animals per local animal control (its 1:10 bleach solution, which gives no bleach strength, is not used)"
+    },
+    {
+      "name": "NYS DEC, DEC Issues Guidance to Reduce Conflicts with Bears (April 7, 2023); NYS DEC, Be BearWise",
+      "used": "Secure garbage cans in a sturdy building; store pet and livestock food indoors; clean grease and food from grills; secure food, garbage and recycling"
+    },
+    {
+      "name": "Oregon State University Extension Service, Survival Basics: Sanitation and Waste Management (EM 9334, October 2021)",
+      "used": "Flies carry germs to food and open water; bagged toilet waste stored separately from other garbage; diapers and menstrual products in heavy-duty 3 to 5 mil black bags, disposed of with bagged poo; catch-basin water used to dilute urine, not treated for reuse"
+    },
+    {
+      "name": "Jefferson County Department of Emergency Management with Clallam County Sheriff’s Emergency Management, Twin-Bucket Emergency Toilet (updated March 2015)",
+      "used": "No diapers, sanitary pads or bagged pet waste in the pee or poo buckets"
+    },
+    {
+      "name": "University of Minnesota Extension, Step-by-step guide to norovirus cleanup (reviewed 2025)",
+      "used": "Disposable gloves; soiled items, waste and protective gear in a plastic trash bag, sealed; new gloves to carry the bag to a secure trash container; wash hands"
+    },
+    {
+      "name": "NYS DEC, Open Burning",
+      "used": "“Burning trash is illegal statewide in all cases”, including burn barrels; Part 219 prohibits burning trash in wood stoves, fireplaces and outdoor wood boilers; burn barrels rarely hotter than 500°F, incomplete combustion, harmful smoke and soot"
+    },
+    {
+      "name": "US EPA, Backyard Burning: Human Health (archived page)",
+      "used": "Backyard trash burning releases dioxins, particle pollution, carbon monoxide and other pollutants; ash can contain mercury, lead, chromium and arsenic, which garden vegetables absorb"
+    },
+    {
+      "name": "Leave No Trace Center for Outdoor Ethics, Principle 3: Dispose of Waste Properly",
+      "used": "Plan meals to avoid messy, smelly garbage; pack out all trash, leftover food, grease and micro-trash including orange peels; burning trash never recommended, half-burned or buried garbage still attracts animals; wash 200 feet from streams or lakes, not in them; small amounts of soap; strain with a fine mesh strainer, scatter broadly, well away from camp especially with bears; pack out strainer contents"
+    },
+    {
+      "name": "NYS DEC, State Land Camping Rules",
+      "used": "No soap to wash yourself, clothing or dishes within 150 feet of water; carry out what you carry in"
+    },
+    {
+      "name": "National Park Service, Grand Canyon, How to Flush a Toilet with a Bucket (October 13, 2026)",
+      "used": "Pour used dishwater down the sink drain, not into the toilet"
+    },
+    {
+      "name": "Sphere Handbook, Water Supply, Sanitation and Hygiene Promotion chapter (copy hosted by Universitas Sebelas Maret)",
+      "used": "Household wastewater should not enter excreta containment facilities"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

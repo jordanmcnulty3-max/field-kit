@@ -1,6 +1,126 @@
 {
-  "about": "Reference sun times and moon phases for tests/test_astro.py. Local clock times (24 h) in the row's time zone; null means the event does not happen that local day. Where each value came from, the date it was fetched, and which fetched values were left out and why (the March and June Syracuse rows, and all moonrise/moonset times) is in docs/content-review.md under 'Daylight and moon reference values'. USNO could not be fetched for this task; no value here is estimated, except the Utqiagvik 2026-12-21 row, which is a geometric fact (see its sunSource). Rows marked 'confidence' rest on one source that is not confirmed and are to be replaced by USNO.",
+  "about": "Reference sun and moon values for tests/test_astro.py, every row from the US Naval Observatory's 'Complete Sun and Moon Data for One Day' page, fetched by the controller on 2026-11-17 after the user approved the fetch. Local wall-clock times (24 h) as the page printed them, which are the times a phone in the row's time zone shows (on 2026-11-01 the page's times are EST after the 2 a.m. change; on 2026-03-08 EDT). null means USNO lists no such event that local day ('none listed', or the object stays above or below the horizon or twilight limit). Record: docs/content-review.md, 'Daylight and moon reference values'.",
   "rows": [
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-03-07",
+      "sun": {
+        "dawn": "06:02",
+        "rise": "06:30",
+        "set": "18:01",
+        "dusk": "18:30"
+      },
+      "moon": {
+        "rise": "22:54",
+        "set": "07:59"
+      },
+      "phase": {
+        "usno": "Waning Gibbous",
+        "illumPct": 82,
+        "closestPrimary": "Last Quarter",
+        "closestPrimaryDate": "2026-03-11"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-03-08",
+      "sun": {
+        "dawn": "07:00",
+        "rise": "07:29",
+        "set": "19:03",
+        "dusk": "19:31"
+      },
+      "moon": {
+        "rise": null,
+        "set": "09:24"
+      },
+      "phase": {
+        "usno": "Waning Gibbous",
+        "illumPct": 75,
+        "closestPrimary": "Last Quarter",
+        "closestPrimaryDate": "2026-03-11"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-03-09",
+      "sun": {
+        "dawn": "06:59",
+        "rise": "07:27",
+        "set": "19:04",
+        "dusk": "19:32"
+      },
+      "moon": {
+        "rise": "00:59",
+        "set": "09:54"
+      },
+      "phase": {
+        "usno": "Waning Gibbous",
+        "illumPct": 66,
+        "closestPrimary": "Last Quarter",
+        "closestPrimaryDate": "2026-03-11"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-03-20",
+      "sun": {
+        "dawn": "06:39",
+        "rise": "07:08",
+        "set": "19:17",
+        "dusk": "19:45"
+      },
+      "moon": {
+        "rise": "07:37",
+        "set": "21:38"
+      },
+      "phase": {
+        "usno": "Waxing Crescent",
+        "illumPct": 4,
+        "closestPrimary": "New Moon",
+        "closestPrimaryDate": "2026-03-18"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-06-21",
+      "sun": {
+        "dawn": "04:50",
+        "rise": "05:25",
+        "set": "20:48",
+        "dusk": "21:23"
+      },
+      "moon": {
+        "rise": "12:59",
+        "set": "00:39"
+      },
+      "phase": {
+        "usno": "Waxing Crescent",
+        "illumPct": 48,
+        "closestPrimary": "First Quarter",
+        "closestPrimaryDate": "2026-06-21"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
+    },
     {
       "place": "Syracuse, NY",
       "lat": 43.05,
@@ -8,13 +128,22 @@
       "tz": "America/New_York",
       "date": "2026-09-22",
       "sun": {
-        "dawn": "06:23",
-        "rise": "06:51",
-        "set": "19:01",
+        "dawn": "06:24",
+        "rise": "06:52",
+        "set": "19:02",
         "dusk": "19:30"
       },
-      "sunSource": "sunrisesunset.io",
-      "confidence": "single source; same page judged unreliable for other dates; to be replaced by USNO"
+      "moon": {
+        "rise": "17:17",
+        "set": "02:15"
+      },
+      "phase": {
+        "usno": "Waxing Gibbous",
+        "illumPct": 84,
+        "closestPrimary": "First Quarter",
+        "closestPrimaryDate": "2026-09-18"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
     },
     {
       "place": "Syracuse, NY",
@@ -23,13 +152,22 @@
       "tz": "America/New_York",
       "date": "2026-10-31",
       "sun": {
-        "dawn": "07:08",
+        "dawn": "07:09",
         "rise": "07:38",
-        "set": "17:57",
+        "set": "17:58",
         "dusk": "18:27"
       },
-      "sunSource": "sunrisesunset.io",
-      "confidence": "single source; same page judged unreliable for other dates; to be replaced by USNO"
+      "moon": {
+        "rise": "23:00",
+        "set": "13:47"
+      },
+      "phase": {
+        "usno": "Waning Gibbous",
+        "illumPct": 63,
+        "closestPrimary": "Last Quarter",
+        "closestPrimaryDate": "2026-11-01"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
     },
     {
       "place": "Syracuse, NY",
@@ -38,20 +176,22 @@
       "tz": "America/New_York",
       "date": "2026-11-01",
       "sun": {
-        "dawn": "06:09",
+        "dawn": "06:10",
         "rise": "06:39",
         "set": "16:56",
         "dusk": "17:26"
       },
-      "sunSource": "sunrisesunset.io; sunrise-sunset.org agrees (06:09:42, 06:39:16, 16:56:25, 17:25:58)",
-      "phase": {
-        "name": "Last quarter",
-        "illumSources": [
-          0.52,
-          0.46
-        ]
+      "moon": {
+        "rise": "23:17",
+        "set": "13:22"
       },
-      "phaseSource": "time-ok.com 'Third quarter' 52%; sunrise-sunset.org 46%, last quarter at 3:28 pm"
+      "phase": {
+        "usno": "Waning Gibbous",
+        "illumPct": 52,
+        "closestPrimary": "Last Quarter",
+        "closestPrimaryDate": "2026-11-01"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
     },
     {
       "place": "Syracuse, NY",
@@ -60,20 +200,94 @@
       "tz": "America/New_York",
       "date": "2026-11-02",
       "sun": {
-        "dawn": "06:10",
-        "rise": "06:40",
+        "dawn": "06:11",
+        "rise": "06:41",
         "set": "16:55",
-        "dusk": "17:24"
+        "dusk": "17:25"
       },
-      "sunSource": "sunrisesunset.io; sunrise-sunset.org agrees (06:10:54, 06:40:32, 16:55:07, 17:24:44)",
+      "moon": {
+        "rise": null,
+        "set": "13:50"
+      },
       "phase": {
-        "name": "Waning crescent",
-        "illumSources": [
-          0.41,
-          0.35
-        ]
+        "usno": "Waning Crescent",
+        "illumPct": 41,
+        "closestPrimary": "Last Quarter",
+        "closestPrimaryDate": "2026-11-01"
       },
-      "phaseSource": "time-ok.com 41%; sunrise-sunset.org 35%"
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-11-09",
+      "sun": {
+        "dawn": "06:19",
+        "rise": "06:50",
+        "set": "16:47",
+        "dusk": "17:17"
+      },
+      "moon": {
+        "rise": "07:24",
+        "set": "16:34"
+      },
+      "phase": {
+        "usno": "New Moon",
+        "illumPct": 0,
+        "closestPrimary": "New Moon",
+        "closestPrimaryDate": "2026-11-09"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-11-17",
+      "sun": {
+        "dawn": "06:29",
+        "rise": "07:00",
+        "set": "16:39",
+        "dusk": "17:10"
+      },
+      "moon": {
+        "rise": "13:04",
+        "set": null
+      },
+      "phase": {
+        "usno": "Waxing Gibbous",
+        "illumPct": 52,
+        "closestPrimary": "First Quarter",
+        "closestPrimaryDate": "2026-11-17"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
+    },
+    {
+      "place": "Syracuse, NY",
+      "lat": 43.05,
+      "lon": -76.15,
+      "tz": "America/New_York",
+      "date": "2026-11-24",
+      "sun": {
+        "dawn": "06:37",
+        "rise": "07:08",
+        "set": "16:34",
+        "dusk": "17:05"
+      },
+      "moon": {
+        "rise": "16:15",
+        "set": "07:24"
+      },
+      "phase": {
+        "usno": "Full Moon",
+        "illumPct": 100,
+        "closestPrimary": "Full Moon",
+        "closestPrimaryDate": "2026-11-24"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
     },
     {
       "place": "Syracuse, NY",
@@ -83,12 +297,21 @@
       "date": "2026-12-21",
       "sun": {
         "dawn": "07:00",
-        "rise": "07:32",
-        "set": "16:32",
+        "rise": "07:33",
+        "set": "16:33",
         "dusk": "17:05"
       },
-      "sunSource": "sunrisesunset.io",
-      "confidence": "single source; same page judged unreliable for other dates; to be replaced by USNO"
+      "moon": {
+        "rise": "14:00",
+        "set": "04:52"
+      },
+      "phase": {
+        "usno": "Waxing Gibbous",
+        "illumPct": 92,
+        "closestPrimary": "Full Moon",
+        "closestPrimaryDate": "2026-12-23"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
     },
     {
       "place": "Utqiagvik, AK",
@@ -97,10 +320,23 @@
       "tz": "America/Anchorage",
       "date": "2026-06-21",
       "sun": {
+        "dawn": null,
         "rise": null,
-        "set": null
+        "set": null,
+        "dusk": null
       },
-      "sunSource": "Washington Times, 11 May 2026: the sun will not set again until 2 August"
+      "sunNote": "Object continuously above the Horizon; continuously above the Twilight Limit",
+      "moon": {
+        "rise": "15:00",
+        "set": "02:09"
+      },
+      "phase": {
+        "usno": "First Quarter",
+        "illumPct": 50,
+        "closestPrimary": "First Quarter",
+        "closestPrimaryDate": "2026-06-21"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
     },
     {
       "place": "Utqiagvik, AK",
@@ -109,10 +345,24 @@
       "tz": "America/Anchorage",
       "date": "2026-12-21",
       "sun": {
+        "dawn": "11:56",
+        "rise": null,
+        "set": null,
+        "dusk": "14:55"
+      },
+      "sunNote": "Object continuously below the Horizon; civil twilight begins 11:56, ends 14:55",
+      "moon": {
         "rise": null,
         "set": null
       },
-      "sunSource": "geometric: at 71.29 N with solar declination about -23.44 degrees the sun's highest altitude is about -4.7 degrees, below the -0.833 degree rise threshold; consistent with sunrise-sunset.org (polar night from 19 Nov)"
+      "moonNote": "Object continuously above the Horizon",
+      "phase": {
+        "usno": "Waxing Gibbous",
+        "illumPct": 93,
+        "closestPrimary": "Full Moon",
+        "closestPrimaryDate": "2026-12-23"
+      },
+      "source": "USNO Astronomical Applications, Complete Sun and Moon Data for One Day (https://aa.usno.navy.mil/calculated/rstt/oneday?date=YYYY-MM-DD&lat=LAT&lon=LON&label=NAME&tz=H&tz_sign=-1&tz_label=false&dst=true|false&submit=Get+Data), fetched 2026-11-17"
     }
   ]
 }

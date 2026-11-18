@@ -1,4 +1,4 @@
-"""Task 10: FK_ASTRO sun and moon times against the reference values in tests/fixtures/almanac-syracuse.json.
+"""Task 10: FK_ASTRO sun and moon times against US Naval Observatory values in tests/fixtures/almanac-syracuse.json.
 
 The page runs in the row's own time zone (America/New_York for Syracuse, America/Anchorage for Utqiagvik), so
 local midnight and the fixture's local clock times are turned into epoch ms by the browser itself, which also
@@ -45,13 +45,27 @@ def ak_page(browser):
 
 COMPUTE = """([row]) => {
   const [y, m, d] = row.date.split('-').map(Number);
+  // new Date(y, m, d, h, min) reads a wall-clock time in the page's time zone, so 06:39 on 2026-11-01 is EST and
+  // 07:29 on 2026-03-08 is EDT, as a phone in America/New_York shows them.
   const local = hm => { if (hm === null) return null; const [h, mi] = hm.split(':').map(Number); return new Date(y, m - 1, d, h, mi).getTime(); };
   const start = new Date(y, m - 1, d).getTime();
   const want = { sun: {}, moon: {} };
   for (const k of Object.keys(row.sun)) want.sun[k] = local(row.sun[k]);
-  for (const k of Object.keys(row.moon || {})) want.moon[k] = local(row.moon[k]);
+  for (const k of Object.keys(row.moon)) want.moon[k] = local(row.moon[k]);
   return { want, sun: FK_ASTRO.sun(start, row.lat, row.lon), moon: FK_ASTRO.moon(start, row.lat, row.lon) };
 }"""
+
+PHASE_TOL_PCT = 3
+
+
+def phase_name_ok(row, got):
+    """USNO's daily phase text names a primary phase on some days it happens (New Moon 2026-11-09, Full Moon 11-24,
+    First Quarter at Utqiagvik 06-21) but not others (Waxing Gibbous 52% on 11-17, the First Quarter day; Waxing
+    Crescent 48% on 06-21 at Syracuse; Waning Gibbous 52% on 11-01, the Last Quarter day). FK_ASTRO names the primary
+    phase on the local day it happens. So the name must equal USNO's text, or, on the local date of USNO's closest
+    primary phase, equal that primary phase."""
+    usno, got = row['phase']['usno'].lower(), got.lower()
+    return got == usno or (row['phase']['closestPrimaryDate'] == row['date'] and got == row['phase']['closestPrimary'].lower())
 
 
 def check_row(pg, app_url, row):
@@ -62,14 +76,12 @@ def check_row(pg, app_url, row):
         for k, want in r['want'][part].items():
             got = r[part][k]
             if want is None:
-                assert got is None, f"{row['place']} {row['date']} {part}.{k}: expected none, got {got}"
+                assert got is None, f"{row['place']} {row['date']} {part}.{k}: USNO lists none, got {got}"
             else:
-                assert got is not None, f"{row['place']} {row['date']} {part}.{k}: expected {row[part][k]}, got none"
+                assert got is not None, f"{row['place']} {row['date']} {part}.{k}: USNO {row[part][k]}, got none"
                 assert abs(got - want) <= tol, f"{row['place']} {row['date']} {part}.{k}: off by {(got - want) / 60000:.1f} min"
-    if 'phase' in row:
-        lo, hi = min(row['phase']['illumSources']) - 0.03, max(row['phase']['illumSources']) + 0.03
-        assert r['moon']['name'] == row['phase']['name']
-        assert lo <= r['moon']['illum'] <= hi
+    assert phase_name_ok(row, r['moon']['name']), f"{row['date']}: {r['moon']['name']} vs USNO {row['phase']['usno']}"
+    assert abs(r['moon']['illum'] * 100 - row['phase']['illumPct']) <= PHASE_TOL_PCT
     return r
 
 
@@ -77,21 +89,24 @@ SYR = [r for r in ROWS if r['tz'] == 'America/New_York']
 UTQ = [r for r in ROWS if r['tz'] == 'America/Anchorage']
 
 
-def test_fixture_has_the_verified_rows():
-    """Planned: Syracuse 2026-03-07/08/09, 03-20, 06-21, 09-22, 10-31, 11-01, 11-02, 12-21 and Utqiagvik 06-21, 12-21, sun
-    and moon. The March and June Syracuse rows and all moonrise/moonset times are left out until a source that can be
-    trusted (USNO) is fetched: see docs/content-review.md, 'Daylight and moon reference values'."""
-    assert [r['date'] for r in SYR] == ['2026-09-22', '2026-10-31', '2026-11-01', '2026-11-02', '2026-12-21']
+def test_fixture_has_every_planned_row_from_usno():
+    assert [r['date'] for r in SYR] == ['2026-03-07', '2026-03-08', '2026-03-09', '2026-03-20', '2026-06-21', '2026-09-22',
+                                        '2026-10-31', '2026-11-01', '2026-11-02', '2026-11-09', '2026-11-17', '2026-11-24',
+                                        '2026-12-21']
     assert [r['date'] for r in UTQ] == ['2026-06-21', '2026-12-21']
+    for r in ROWS:
+        assert r['source'].startswith('USNO') and 'aa.usno.navy.mil/calculated/rstt/oneday' in r['source'] and '2026-11-17' in r['source']
+        assert set(r['sun']) == {'dawn', 'rise', 'set', 'dusk'} and set(r['moon']) == {'rise', 'set'}
+        assert 'confidence' not in r
 
 
 @pytest.mark.parametrize('row', SYR, ids=[r['date'] for r in SYR])
-def test_syracuse_matches_reference(ny_page, app_url, row):
+def test_syracuse_matches_usno(ny_page, app_url, row):
     check_row(ny_page, app_url, row)
 
 
 @pytest.mark.parametrize('row', UTQ, ids=[r['date'] for r in UTQ])
-def test_utqiagvik_matches_reference(ak_page, app_url, row):
+def test_utqiagvik_matches_usno(ak_page, app_url, row):
     check_row(ak_page, app_url, row)
 
 
@@ -108,18 +123,6 @@ def test_functions_are_pure_and_shaped(ny_page, app_url):
     assert 0 <= out['m']['phase'] < 1 and 0 <= out['m']['illum'] <= 1
     assert out['m']['name'] in ['New moon', 'Waxing crescent', 'First quarter', 'Waxing gibbous', 'Full moon',
                                 'Waning gibbous', 'Last quarter', 'Waning crescent']
-
-
-def test_phase_names_through_a_month(ny_page, app_url):
-    """Primary phases are named on the local day they happen (November 2026: new 9th, first quarter 17th, full 24th,
-    per time-ok.com's November table recorded in content-review); days between take the in-between names."""
-    ny_page.goto(app_url + '#/survival')
-    ny_page.wait_for_function('window.FK_ASTRO')
-    names = ny_page.evaluate("""() => { const out = {};
-      for (const d of [5, 9, 12, 17, 20, 24, 27]) out[d] = FK_ASTRO.moon(new Date(2026, 10, d).getTime(), 43.05, -76.15).name;
-      return out; }""")
-    assert names == {'5': 'Waning crescent', '9': 'New moon', '12': 'Waxing crescent', '17': 'First quarter',
-                     '20': 'Waxing gibbous', '24': 'Full moon', '27': 'Waning gibbous'}
 
 
 def test_astro_is_first_script_and_has_no_dom_or_fk():

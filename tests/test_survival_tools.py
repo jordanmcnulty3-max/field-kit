@@ -301,21 +301,14 @@ def test_daylight_with_last_fix_shows_position_age_and_seven_days(ny_page, app_u
 
 
 def test_daylight_clock_change_in_march_shows_local_times(ny_page, app_url):
-    """No trusted March reference yet (see content-review), so this checks the clock change itself: on Sunday 8 March
-    the clock jumps an hour, so every time shows about an hour later than on the 7th, and each card shows what
-    FK_ASTRO computes for that local day."""
     page = ny_page
     dl_boot(page, app_url, 'America/New_York', (2026, 3, 7, 10, 0), fix=SYR)
-    want = page.evaluate("""() => [7, 8, 9].map(d => { const s = FK_ASTRO.sun(new Date(2026, 2, d).getTime(), 43.05, -76.15), out = {};
-      for (const k of ['dawn', 'rise', 'set', 'dusk']) { const t = new Date(s[k]); out[k] = t.getHours() * 60 + t.getMinutes(); }
-      return out; })""")
-    for i in range(3):
-        for k in ('dawn', 'rise', 'set', 'dusk'):
-            assert minutes(cell(page, i, k)) == want[i][k], f'card {i} {k}'
-    for k in ('dawn', 'rise', 'set', 'dusk'):
+    for i, date in enumerate(['2026-03-07', '2026-03-08', '2026-03-09']):
+        assert_card_matches(page, i, fixture_row('Syracuse', date))
+    for k in ('dawn', 'rise', 'set', 'dusk'):   # on Sunday 8 March the clock jumps an hour
         jump = minutes(cell(page, 1, k)) - minutes(cell(page, 0, k))
         assert 56 <= jump <= 63, f'{k} moved {jump} min across the clock change'
-        assert abs(minutes(cell(page, 2, k)) - minutes(cell(page, 1, k))) <= 3
+    assert cell(page, 1, 'moonrise').startswith('—')   # USNO: no moonrise on 8 March
 
 
 def test_daylight_clock_change_in_november_shows_local_times(ny_page, app_url):
@@ -333,13 +326,19 @@ def test_daylight_utqiagvik_june_does_not_set(ak_page, app_url):
     dl_boot(page, app_url, 'America/Anchorage', (2026, 6, 21, 12, 0), fix=UTQ)
     assert cell(page, 0, 'set') == 'Does not set'
     assert cell(page, 0, 'len') == '24 h 0 min'
+    assert cell(page, 0, 'dawn') == cell(page, 0, 'dusk') == 'Light all night'   # USNO: continuously above the twilight limit
+    assert_card_matches(page, 0, {**fixture_row('Utqiagvik', '2026-06-21'), 'sun': {}})   # moonrise 15:00, moonset 02:09
 
 
-def test_daylight_utqiagvik_december_does_not_rise(ak_page, app_url):
+def test_daylight_utqiagvik_december_does_not_rise_but_has_first_and_last_light(ak_page, app_url):
+    """USNO 2026-12-21: sun continuously below the horizon, civil twilight 11:56 to 14:55, moon above the horizon all day."""
     page = ak_page
     dl_boot(page, app_url, 'America/Anchorage', (2026, 12, 21, 12, 0), fix=UTQ)
     assert cell(page, 0, 'rise') == 'Does not rise'
     assert cell(page, 0, 'len') == '0 h 0 min'
+    row = fixture_row('Utqiagvik', '2026-12-21')
+    assert_card_matches(page, 0, {**row, 'sun': {'dawn': row['sun']['dawn'], 'dusk': row['sun']['dusk']}})
+    assert cell(page, 0, 'moonrise').startswith('—') and cell(page, 0, 'moonset').startswith('—')
 
 
 def test_daylight_without_fix_asks_and_accepts_a_typed_position(ny_page, app_url):

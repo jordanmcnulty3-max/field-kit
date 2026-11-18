@@ -47,6 +47,10 @@
           ]
         },
         {
+          "fig": "shelter-debris",
+          "cap": "Debris hut. Ridgepole at about waist height, debris at least 3 feet thick."
+        },
+        {
           "fig": "shelter-leanto",
           "cap": "Lean-to. The log wall throws the fire’s heat back into the shelter."
         }

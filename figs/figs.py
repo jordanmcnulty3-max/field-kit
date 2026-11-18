@@ -77,7 +77,7 @@ svg('shelter-site', 200, 'Valley cross-section: wind on ridgetops, cold air and 
 {lbl(170,176,'Valley floor: cold air pools,','','middle')}{lbl(170,190,'floods run here','','middle')}''')
 
 ribs = ''.join(f'<line x1="{x}" y1="{88+(x-55)*77/255:.1f}" x2="{x-16}" y2="165" class="w t1"/>' for x in range(100, 300, 28))
-svg('shelter-debris', 195, 'Debris hut: ridgepole propped at hip height, ribs, debris an arm’s length thick, thick leaf bed inside', f'''
+svg('shelter-debris', 195, 'Debris hut: ridgepole propped at waist height, ribs, debris at least 3 feet (1 metre) thick, thick leaf bed inside', f'''
 <rect x="0" y="165" width="340" height="30" class="gr"/><line x1="0" y1="165" x2="340" y2="165" class="m"/>
 <path d="M78 165 L80 156 Q170 148 272 160 L280 165 Z" class="gf g t1"/>
 <line x1="70" y1="165" x2="70" y2="96" class="w t3"/><path d="M70 102 L60 86 M70 102 L80 86" class="w t3"/>
@@ -85,8 +85,8 @@ svg('shelter-debris', 195, 'Debris hut: ridgepole propped at hip height, ribs, d
 {ribs}
 <path d="M36 165 C28 104 50 60 92 62 C134 64 222 110 334 165" class="w wf t1"/>
 <path d="M44 165 A15 15 0 0 1 72 165" class="k"/>
-{lbl(150,36,'Ridgepole at hip height','tb')}{lead(170,40,148,112)}
-{lbl(214,82,'Debris an arm’s','')}{lbl(214,96,'length thick','')}{lead(212,94,190,104)}
+{lbl(150,36,'Ridgepole at waist height','tb')}{lead(170,40,148,112)}
+{lbl(214,82,'Debris at least','')}{lbl(214,96,'3 ft (1 m) thick','')}{lead(212,94,190,104)}
 {lbl(330,186,'Thick leaf bed','tb','end')}{lead(270,176,240,158)}
 {lbl(10,186,'Door: plug it from inside','')}''')
 
@@ -144,13 +144,13 @@ svg('shelter-desert', 190, 'Desert shade shelter: two layers with an air gap ove
 {lbl(170,176,'Dig in: deeper sand is cooler','','middle')}''')
 
 # ---------------- FIRE ----------------
-svg('fire-sizes', 130, 'Fire materials: tinder, kindling from pencil-lead to pencil thick, and wrist-thick fuel', f'''
+svg('fire-sizes', 142, 'Fire materials: dry, fine tinder; kindling from pencil lead to thumb thick; fuel forearm thick and up', f'''
 <path d="M30 58 c5 -22 34 -24 42 -6 c8 16 -12 30 -26 22 c-14 -8 -4 -26 12 -22 c12 4 10 16 0 18 M40 48 c8 -6 20 -4 22 6 M36 66 c10 8 26 6 30 -6" class="w t1"/>
-{lbl(55,100,'Tinder','tb','middle')}{lbl(55,116,'fine and dry','tm','middle')}
+{lbl(55,100,'Tinder','tb','middle')}{lbl(55,116,'dry, fine','tm','middle')}{lbl(55,130,'material','tm','middle')}
 <line x1="124" y1="40" x2="196" y2="46" class="w t1"/><line x1="126" y1="54" x2="198" y2="58" class="w"/><line x1="124" y1="70" x2="196" y2="72" class="w t3"/>
-{lbl(160,100,'Kindling','tb','middle')}{lbl(160,116,'up to pencil-thick','tm','middle')}
+{lbl(160,100,'Kindling','tb','middle')}{lbl(160,116,'pencil lead','tm','middle')}{lbl(160,130,'to thumb thick','tm','middle')}
 <line x1="244" y1="44" x2="316" y2="40" style="stroke-width:10" class="w"/><line x1="242" y1="68" x2="318" y2="70" style="stroke-width:15" class="w"/>
-{lbl(280,100,'Fuel','tb','middle')}{lbl(280,116,'wrist-thick and up','tm','middle')}''')
+{lbl(280,100,'Fuel','tb','middle')}{lbl(280,116,'forearm thick','tm','middle')}{lbl(280,130,'and up','tm','middle')}''')
 
 tp = ''.join(f'<line x1="{x}" y1="145" x2="{85+(x-85)*0.08:.1f}" y2="56" class="w"/>' for x in [50,74,96,110,122])
 lc_tp = ''.join(f'<line x1="{x}" y1="140" x2="255" y2="88" class="w t1"/>' for x in [240,250,262,272])
@@ -181,13 +181,13 @@ svg('fire-ferro', 160, 'Ferro rod technique: hold the striker still in the tinde
 {lbl(20,100,'Pull the rod back','tb')}
 {lbl(336,40,'Striker held still,','tb','end')}{lbl(336,54,'tip in the tinder','','end')}{lead(290,58,214,94)}''')
 
-svg('fire-platform', 150, 'A platform of green sticks keeps a fire off snow or wet ground', f'''
+svg('fire-platform', 150, 'A base of green logs in two crosswise layers keeps a fire off deep snow', f'''
 <rect x="0" y="112" width="340" height="38" class="snow"/>
-{lbl(12,140,'Snow or wet ground','tm')}
+{lbl(12,140,'Deep snow','tm')}
 {''.join(f'<circle cx="{x}" cy="106" r="6" class="w wfs"/>' for x in range(112, 236, 12))}
 <line x1="104" y1="94" x2="240" y2="94" style="stroke-width:7" class="w"/>
 {flame(170,90,1.0)}{flame(172,90,0.55,'h hf')}
-{lbl(252,72,'Green sticks','tb')}{lbl(252,86,'or flat rocks','')}{lead(250,88,238,100)}''')
+{lbl(336,44,'Green logs only,','tb','end')}{lbl(336,58,'two layers,','','end')}{lbl(336,72,'crosswise','','end')}{lead(296,78,240,100)}''')
 
 # ---------------- FOOD ----------------
 umbel = ''.join(f'<line x1="57" y1="168" x2="{x}" y2="{140+abs(x-57)*0.25:.1f}" class="g t1"/><circle cx="{x}" cy="{140+abs(x-57)*0.25:.1f}" r="3" class="kf"/>' for x in [31,40,49,57,65,74,83])
@@ -215,7 +215,7 @@ svg('plant-warnings', 255, 'Warning signs in unknown plants: milky sap, seeds in
 {lbl(283,234,'Dark spurs','tb','middle')}{lbl(283,248,'on grain','tb','middle')}''')
 
 # ---------------- TRAPS ----------------
-svg('trap-snare', 190, 'Simple snare hung over a game trail: fist-size loop about 3 inches above the trail, twigs funneling the animal in', f'''
+svg('trap-snare', 190, 'Simple snare hung over a game trail: a loop big enough to slip over the animal’s head, with twigs funneling the animal in', f'''
 <rect x="0" y="165" width="340" height="25" class="gr"/><line x1="0" y1="165" x2="340" y2="165" class="m"/>
 <line x1="90" y1="165" x2="90" y2="34" class="w t3"/><line x1="250" y1="165" x2="250" y2="34" class="w t3"/>
 <path d="M90 42 l-8 -10 M250 42 l8 -10" class="w t3"/>
@@ -224,11 +224,9 @@ svg('trap-snare', 190, 'Simple snare hung over a game trail: fist-size loop abou
 <line x1="208" y1="165" x2="202" y2="100" class="w"/><line x1="218" y1="165" x2="208" y2="112" class="w t1"/>
 <line x1="170" y1="40" x2="170" y2="97" class="k t1"/>
 <circle cx="170" cy="125" r="28" class="k"/>
-<path d="M228 153 h14 M228 165 h14" class="m t1"/><path d="M235 155 v8" class="m t1"/>
-{lbl(246,163,'≈ 3 in','tb')}
 {lbl(170,24,'Wire tied to a solid support','','middle')}
-{lbl(336,92,'Loop about','tb','end')}{lbl(336,106,'fist size','','end')}{lead(276,110,198,118)}
-{lbl(8,90,'Twigs funnel','')}{lbl(8,104,'it into the loop','')}{lead(60,108,128,130)}''')
+{lbl(336,70,'Loop big','tb','end')}{lbl(336,84,'enough to','','end')}{lbl(336,98,'slip over the','','end')}{lbl(336,112,'animal’s head','','end')}{lead(290,118,198,126)}
+{lbl(8,90,'Twigs funnel','')}{lbl(8,104,'it into','')}{lbl(8,118,'the loop','')}{lead(62,116,128,130)}''')
 
 svg('trap-fig4', 200, 'Figure-4 deadfall: upright, diagonal lock bar and baited trigger holding up a heavy rock', f'''
 <rect x="0" y="185" width="340" height="15" class="gr"/><line x1="0" y1="185" x2="340" y2="185" class="m"/>
@@ -353,17 +351,17 @@ svg('lightning', 150, 'Count from flash to thunder: every 5 seconds is about 1 m
 {lbl(160,118,'Wait 30 minutes after','tb')}{lbl(160,134,'the last thunder.')}''')
 
 
-svg('river', 200, 'River crossing: face upstream, pole planted upstream, shuffle across angling slightly downstream, away from strainers', f'''
+svg('river', 200, 'River crossing: face upstream, pole planted upstream, shuffle across at about 45 degrees downstream, away from strainers', f'''
 <rect x="0" y="40" width="340" height="128" class="af"/>
 <line x1="0" y1="40" x2="340" y2="40" class="m"/><line x1="0" y1="168" x2="340" y2="168" class="m"/>
 {arrow(14,70,54,70,'a','aA')}{arrow(14,140,54,140,'a','aA')}{lbl(14,62,'Current','tm')}
-<path d="M140 30 C150 80 168 120 196 178" class="k d" marker-end="url(#aK)"/>
-<circle cx="164" cy="104" r="8" class="kf"/>
-<line x1="156" y1="102" x2="128" y2="94" class="w t3"/>
+<path d="M44 36 L176 168" class="k d" marker-end="url(#aK)"/>
+<circle cx="110" cy="102" r="8" class="kf"/>
+<line x1="102" y1="100" x2="74" y2="92" class="w t3"/>
 <path d="M272 58 L330 122 M290 70 l-10 12 M306 88 l12 -8 M318 104 l-12 10" class="w t3"/>
-{lbl(120,124,'Face upstream,','tb','end')}{lbl(120,138,'pole upstream','','end')}
+{lbl(150,112,'Face upstream,','tb')}{lbl(150,126,'pole upstream','')}
 {lbl(330,148,'Strainers and rapids:','tb','end')}{lbl(330,162,'stay well upstream','','end')}
-{lbl(140,24,'Angle slightly downstream','')}''')
+{lbl(84,24,'About 45° downstream','tb')}''')
 
 icons = [
  ('Map, compass', '<circle cx="0" cy="0" r="16" class="k"/><path d="M0 -12 L5 0 L0 12 L-5 0 Z" class="k"/><path d="M0 -12 L5 0 L-5 0 Z" class="hf"/>'),
@@ -394,10 +392,9 @@ svg('dress-deer', 240, 'Field dressing from above, animal on its back: cut from 
 <circle cx="170" cy="203" r="5" class="h"/>
 <line x1="170" y1="36" x2="170" y2="46" class="h t3"/>
 </g>
-{arrow(16,130,16,70,'k','aK')}{lbl(10,150,'Head','tb')}{lbl(10,164,'uphill','tb')}
 {lbl(206,30,'Windpipe: cut','tb')}{lbl(206,44,'far forward')}{lead(204,38,118,40)}
 {lbl(206,90,'Diaphragm: free','tb')}{lbl(206,104,'it from the ribs')}{lead(204,98,156,98)}
-{lbl(206,140,'Shallow cut,','tb')}{lbl(206,154,'blade edge up,')}{lbl(206,168,'breastbone to pelvis')}{lead(204,146,116,140)}
+{lbl(206,140,'Shallow cut,','tb')}{lbl(206,154,'blade edge up,')}{lbl(206,168,'pelvis to breastbone')}{lead(204,146,116,140)}
 {lbl(206,200,'Cut around the','tb')}{lbl(206,214,'anus, tie it off')}{lead(204,206,118,203)}''')
 
 svg('nav-watch', 210, 'Watch method, Northern Hemisphere: point the hour hand at the sun; south is halfway to 12 o’clock', f'''

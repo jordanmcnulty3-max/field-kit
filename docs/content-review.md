@@ -1321,10 +1321,10 @@ Source keys (opened 2026-11-17 by web fetch from search results; title checked a
 ### Task 14 diagrams removed in this batch
 
 Figure files are unchanged in figs/; only the topic fig blocks were removed.
-- shelter-debris: label fixes (later small task). "Ridgepole at hip height" should say waist height; "Debris an arm's length thick" should say at least 3 ft.
-- fire-sizes: label fixes (later small task). Kindling is pencil-lead to thumb thick; fuel is forearm thick (not "wrist-thick and up").
-- fire-platform: label fixes (later small task). Drop "or flat rocks"; the base is for deep snow, not "snow or wet ground".
-- river: label and drawing fix (later small task). "Angle slightly downstream" and the drawn path (about 21 degrees) should show about 45 degrees downstream.
+- shelter-debris: label fixes (later small task). "Ridgepole at hip height" should say waist height; "Debris an arm's length thick" should say at least 3 ft. Done in Task 16b: relabelled "waist height" and "3 ft (1 m) thick"; figure restored to surv-shelter.
+- fire-sizes: label fixes (later small task). Kindling is pencil-lead to thumb thick; fuel is forearm thick (not "wrist-thick and up"). Done in Task 16b: kindling "pencil lead to thumb thick", fuel "forearm thick and up", tinder "dry, fine material"; figure restored to surv-fire.
+- fire-platform: label fixes (later small task). Drop "or flat rocks"; the base is for deep snow, not "snow or wet ground". Done in Task 16b: "Green logs only, two layers, crosswise" and "Deep snow"; figure restored to surv-fire after the build steps.
+- river: label and drawing fix (later small task). "Angle slightly downstream" and the drawn path (about 21 degrees) should show about 45 degrees downstream. Done in Task 16b: label "About 45 degrees downstream", path redrawn at 45 degrees; figure restored to surv-river-crossings.
 - shelter-tarp: needs a new drawing (waits for its pack). Drawn as an A-frame with the low end into the wind; the text is now a poncho lean-to with its back into the wind.
 - fire-ferro: needs a new drawing (waits for its pack). Drawn as the pull-back method; the text is now the Army method (striker driven down the rod).
 
@@ -1500,10 +1500,10 @@ Statements changed:
 - F8 surv-food-and-wild-plants, insects: "Remove wings and barbed legs" now "Remove legs, wings and heads" — ATP 4-136 ("remove their legs, wings, and heads before eating them"). FM p. 73 says wings and barbed legs; ATP (newer) used.
 - F11 docs/decisions-for-jordan.md D10: CDC MMWR now credited with wild game meat only; birds credited to NYS DOH and USDA FSIS; FSIS-OTHER figures added (venison roasts 160 °F, whole game birds 165 °F).
 
-Diagrams removed in this batch (record; figs/ not edited):
+Diagrams removed in this batch (record; the trap-snare and dress-deer fixes are done, Task 16b):
 - plant-warnings: standing rule (no plant drawings); stays out.
-- trap-snare: label-only fix possible. Delete the "≈ 3 in" dimension marker and label; relabel "Loop about fist size" as "Loop big enough to pass over its head"; fix the alt text to match. A later small task makes the change.
-- dress-deer: label-only fix possible. Remove the "Head uphill" arrow and label; "breastbone to pelvis" should read "pelvis to breastbone". A later small task makes the change.
+- trap-snare: label-only fix possible. Delete the "≈ 3 in" dimension marker and label; relabel "Loop about fist size" as "Loop big enough to pass over its head"; fix the alt text to match. A later small task makes the change. Done in Task 16b: "3 in" marker and label deleted, loop relabelled "big enough to slip over the animal's head" (the topic's own wording), alt text fixed; figure restored to surv-traps-and-fishing.
+- dress-deer: label-only fix possible. Remove the "Head uphill" arrow and label; "breastbone to pelvis" should read "pelvis to breastbone". A later small task makes the change. Done in Task 16b: "Head uphill" arrow and label removed, "pelvis to breastbone"; figure restored to surv-field-dressing-game.
 - fishing: the right half draws a stake funnel where the text now describes a lashed-stick basket trap; needs a new drawing, waits for the food pack.
 
 F7 (record): the trapping check intervals (Southern Zone 24 hours; Northern Zone 24 or 48 hours by WMU and trap) come from the 2023-2024 NYS DEC Hunting & Trapping Guide. Recheck against the current edition in the food pack.

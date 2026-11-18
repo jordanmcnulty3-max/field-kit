@@ -32,6 +32,10 @@
           ]
         },
         {
+          "fig": "river",
+          "cap": "Seen from above; the current runs left to right. Face upstream, pole on the upstream side, cross at about 45 degrees downstream."
+        },
+        {
           "link": "p:drowning",
           "label": "Drowning"
         },

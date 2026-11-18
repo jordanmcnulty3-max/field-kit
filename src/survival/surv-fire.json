@@ -25,6 +25,10 @@
         },
         {
           "p": "If you skip the tinder or kindling stage, the fire will likely fail."
+        },
+        {
+          "fig": "fire-sizes",
+          "cap": "Tinder, kindling and fuel. If you skip the tinder or kindling stage, the fire will likely fail."
         }
       ]
     },
@@ -38,6 +42,10 @@
             "Put the tinder in the centre and lean kindling around it like a teepee. Light it from the upwind side, then add kindling and fuel from small to large.",
             "Once it’s going, a log cabin of fuel stacked in crosswise layers around it quickly makes a large bed of coals for cooking."
           ]
+        },
+        {
+          "fig": "fire-platform",
+          "cap": "On deep snow, build on green logs in two crosswise layers. Never use wet, porous or riverbed rocks: they can explode when heated."
         },
         {
           "fig": "fire-lays",

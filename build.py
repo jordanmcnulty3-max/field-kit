@@ -18,7 +18,7 @@ os.chdir(ROOT)
 sys.path.insert(0, 'figs')
 sys.path.insert(0, ROOT)
 import figs
-from tools.validate import draft_ids, report_wording_is_draft, validate
+from tools.validate import draft_ids, report_wording_is_draft, topic_draft_ids, validate, validate_checklists, validate_topics
 
 
 def read(p):
@@ -55,28 +55,60 @@ shell = shell.replace('</style>', read('figs/figs.css') + '\n</style>', 1)
 shell = shell.replace('<body>\n', '<body>\n' + read('figs/markers.html'), 1)
 js = '\n'.join(read('src/' + f) for f in ['geo.js', 'ballistics.js', 'app.js', 'router.js', 'emergency.js', 'emergency-tools.js', 'patients.js', 'reports.js', 'protocol.js', 'search.js', 'map.js', 'survival.js'])
 
-# Protocols: validate every src/protocols/*.json, then inline as window.FK_DATA (sorted by id).
-protocols = []
-for path in sorted(glob.glob('src/protocols/*.json')):
-    try:
-        protocols.append(json.loads(read(path)))
-    except ValueError as e:
-        sys.exit(f'{path}: invalid JSON: {e}')
+# Protocols, topics and checklists: validate every JSON file, then inline as window.FK_DATA (sorted by id).
+def load_json_dir(pattern):
+    items = []
+    for path in sorted(glob.glob(pattern)):
+        try:
+            items.append(json.loads(read(path)))
+        except ValueError as e:
+            sys.exit(f'{path}: invalid JSON: {e}')
+    return items
+
+
+protocols = load_json_dir('src/protocols/*.json')
+topics = load_json_dir('src/survival/*.json')
+checklists = load_json_dir('src/checklists/*.json')
+
+
+def ids_of(items):
+    return [x['id'] for x in items if isinstance(x, dict) and isinstance(x.get('id'), str)]
+
+
+# Link keys a topic block may point at (spec section 5.3).
+link_keys = {f'p:{i}' for i in ids_of(protocols)} | {f's:{i}' for i in ids_of(topics)} | {f'c:{i}' for i in ids_of(checklists)}
+link_keys |= {'u:daylight', 'u:sos', 't:tq', 't:cpr', 't:rate', 't:burn', 'r:9line', 'r:mist'}
+link_keys |= {f'a:{n}' for n in ('map', 'position', 'ballistics', 'areas', 'waypoints', 'settings')}
+
 errors, warnings = validate(protocols, set(figs.F))
+for check in (validate_topics(topics, set(figs.F), link_keys), validate_checklists(checklists, link_keys)):
+    errors += check[0]
+    warnings += check[1]
+errors += [f'topic {i!r}: id equals a protocol id' for i in sorted(set(ids_of(topics)) & set(ids_of(protocols)))]
 for w in warnings:
     print('warning:', w)
 if RELEASE:
     errors += [f'{pid}: draft protocol not allowed in a --release build' for pid in draft_ids(protocols)]
+    errors += [f'{tid}: draft topic not allowed in a --release build' for tid in topic_draft_ids(topics)]
+    errors += [f'{cid}: draft checklist not allowed in a --release build' for cid in topic_draft_ids(checklists)]
 if RELEASE and report_wording_is_draft(read('src/reports.js')):
     errors.append('src/reports.js: report wording is still marked draft (REPORT_WORDING_DRAFT); check it against its source, then remove the marker line and set draft: false')
 if errors:
-    sys.exit('Protocol validation failed:\n  ' + '\n  '.join(errors))
+    sys.exit('Validation failed:\n  ' + '\n  '.join(errors))
 protocols.sort(key=lambda p: p['id'])
+topics.sort(key=lambda t: t['id'])
+checklists.sort(key=lambda c: c['id'])
 for p in protocols:
     for s in p['steps']:
         if 'fig' in s:
             s['figSvg'], _ = figs.F[s['fig']]
-fk_data = json.dumps({'protocols': protocols}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+for t in topics:
+    for sec in t['sections']:
+        for blk in sec['blocks']:
+            if 'fig' in blk:
+                blk['figSvg'], blk['figLabel'] = figs.F[blk['fig']]
+fk_data = json.dumps({'protocols': protocols, 'topics': topics, 'checklists': checklists},
+                     ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 
 # Every check runs before the output file is opened, so a failure cannot leave an empty index.html behind.
 marker = '<script>\n/*__SCRIPTS__*/'

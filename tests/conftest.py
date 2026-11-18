@@ -63,23 +63,32 @@ def page(browser):
     assert errors == [], 'browser errors:\n' + '\n'.join(errors)
 
 
-def inject_protocols(page, fixtures, only=False):
+def inject_data(page, protocols=None, topics=None, checklists=None, only=False):
     """FK_DATA is assigned by an inline script after init scripts run, so trap the assignment and
-    add the fixtures to its protocols. A fixture with the same id as a real protocol replaces it.
-    only=True drops every shipped protocol, so the page sees the fixtures alone (for tests whose
-    expectations depend on exactly which protocols exist)."""
+    add the fixtures to each kind passed (None leaves that kind untouched). A fixture with the same id
+    as a shipped item replaces it. only=True drops the shipped items of each kind passed, so the page
+    sees the fixtures alone (for tests whose expectations depend on exactly which items exist)."""
+    extra = {'protocols': protocols, 'topics': topics, 'checklists': checklists}
+    extra = {k: v for k, v in extra.items() if v is not None}
     page.add_init_script(f"""
       (() => {{
-        const extra = {json.dumps(fixtures)}, ONLY = {json.dumps(bool(only))};
+        const extra = {json.dumps(extra)}, ONLY = {json.dumps(bool(only))};
         let val;
         Object.defineProperty(window, 'FK_DATA', {{
           configurable: true,
           get() {{ return val; }},
           set(v) {{
-            const ids = new Set(extra.map(p => p && p.id));
-            v.protocols = (ONLY ? [] : v.protocols.filter(p => !ids.has(p.id))).concat(extra);
+            for (const kind of Object.keys(extra)) {{
+              const add = extra[kind], ids = new Set(add.map(x => x && x.id));
+              v[kind] = (ONLY ? [] : (v[kind] || []).filter(x => !ids.has(x.id))).concat(add);
+            }}
             val = v;
           }}
         }});
       }})();
     """)
+
+
+def inject_protocols(page, fixtures, only=False):
+    """Protocol-only shorthand for inject_data."""
+    inject_data(page, protocols=fixtures, only=only)

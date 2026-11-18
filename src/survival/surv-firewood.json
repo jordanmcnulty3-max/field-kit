@@ -1,0 +1,239 @@
+{
+  "id": "surv-firewood",
+  "title": "Firewood",
+  "category": "heat",
+  "keywords": [
+    "firewood",
+    "seasoned wood",
+    "green wood",
+    "dry wood",
+    "moisture meter",
+    "cord",
+    "face cord",
+    "split wood",
+    "splitting maul",
+    "stack wood",
+    "woodpile",
+    "hardwood",
+    "oak",
+    "maple",
+    "hickory",
+    "birch",
+    "ash",
+    "btu",
+    "firewood 50 miles",
+    "move firewood",
+    "certificate of origin"
+  ],
+  "summary": "Burn only split wood seasoned at least six months, to less than 20 percent moisture; oak can take two years. Stack it off the ground with only the top covered, away from the house. Hardwoods give the most heat. In normal times New York bans moving untreated firewood more than 50 miles from where it was cut.",
+  "sections": [
+    {
+      "h": "Seasoned and green",
+      "blocks": [
+        {
+          "list": [
+            "Burn only dry, split, well-seasoned wood. Don’t burn wet or green (unseasoned) wood (EPA).",
+            "Wood burns best at less than 20 percent moisture (EPA; US Department of Energy and Cornell Cooperative Extension: 20 percent or less). Wet wood gives less heat and more smoke and creosote, because the fire spends its energy boiling off water (Cornell Cooperative Extension of Warren County).",
+            "Freshly cut wood can hold 100 percent moisture or more, and most dealers sell it that way (Cornell Cooperative Extension of Warren County).",
+            "Test with a wood moisture meter before you burn (EPA). A meter reads only about 1/4 inch (6 mm) deep, so split a few pieces and test the inside (Cornell Cooperative Extension of Tompkins County).",
+            "Signs of seasoned wood: splits (checks) in the end grain (Cornell Cooperative Extension of Tompkins County, Penn State Extension), a sharper sound when two pieces are knocked together (Cornell Cooperative Extension of Tompkins County), and an even color with no green (US Department of Energy)."
+          ]
+        },
+        {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        }
+      ]
+    },
+    {
+      "h": "How long it takes to dry",
+      "blocks": [
+        {
+          "list": [
+            "At least six months (EPA, Cornell Cooperative Extension of Tompkins County). Penn State Extension: 6 to 12 months, and one full year or even two is better.",
+            "Many kinds of wood, stacked well where the air is fairly dry, drop below 20 percent moisture within a year. Oak can take two years or more (Cornell Cooperative Extension of Warren County).",
+            "In shade or near water it can take much longer than six months (Cornell Cooperative Extension of Tompkins County).",
+            "So cut or buy wood at least a whole season ahead (Cornell Cooperative Extension of Tompkins and Warren Counties). Penn State Extension’s schedule: cut by April, split it, stack it by May, and let it season at least six months.",
+            "Seasoned wood keeps for a few years. Burn the oldest first and keep each year’s wood separate (Penn State Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Splitting",
+      "blocks": [
+        {
+          "list": [
+            "Split wood soon after the tree is cut (Penn State Extension).",
+            "Split it 2 to 6 inches (5 to 15 cm) wide (Penn State Extension).",
+            "Splitting is easiest when the wood is frozen. Use wedges on knotty logs (Penn State Extension).",
+            "Penn State Extension suggests a splitting block 14 to 18 inches (36 to 46 cm) tall and a 4 to 8 lb (1.8 to 3.6 kg) maul rather than a heavier tool.",
+            "Always wear safety glasses, long pants and boots when splitting (Penn State Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Stacking and storing",
+      "blocks": [
+        {
+          "list": [
+            "Store wood outdoors, off the ground, on pallets or metal tubes (EPA, Cornell Cooperative Extension of Tompkins County, Penn State Extension).",
+            "Cover only the top and leave the sides open: covering the sides traps moisture (EPA). Never wrap a stack fully in a tarp, plastic or canvas (Penn State Extension).",
+            "Stack it loosely, no more than two layers deep (Cornell Cooperative Extension of Tompkins County), just loose enough not to fall over (Penn State Extension).",
+            "Dry it in a dry, sunny, windy spot, not against a building (Penn State Extension). Keep the pile away from the house: a woodpile against the house can let termites reach it (Iowa State University Extension).",
+            "Leave firewood outside until a day or two before you burn it (Iowa State University Extension).",
+            "Don’t spray firewood with insecticide: it does little good and can be dangerous (Iowa State University Extension).",
+            "Indoors, keep wood at least 3 feet (1 m) from the stove or fireplace (US Fire Administration: anything that can burn)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Which wood",
+      "blocks": [
+        {
+          "p": "Hardwoods such as oak, hickory and black locust give the most heat. Softwoods and light woods such as poplar, aspen and spruce light easily and burn fast: use them in mild spring and fall weather (Cornell Cooperative Extension of Tompkins County). Burn little pine, fir or spruce: their resin can coat the chimney with creosote (Penn State Extension)."
+        },
+        {
+          "table": {
+            "head": [
+              "Northeast hardwood",
+              "Heat per cord (million BTU)"
+            ],
+            "rows": [
+              [
+                "Hickory",
+                "28.0"
+              ],
+              [
+                "Black birch",
+                "26.8"
+              ],
+              [
+                "White oak group",
+                "25.7"
+              ],
+              [
+                "Sugar maple",
+                "24.0"
+              ],
+              [
+                "Red oak group",
+                "24.0"
+              ],
+              [
+                "White ash",
+                "23.6"
+              ],
+              [
+                "Yellow birch",
+                "23.6"
+              ],
+              [
+                "Paper and gray birch",
+                "20.3"
+              ],
+              [
+                "Black cherry",
+                "19.9"
+              ],
+              [
+                "Red and silver maple",
+                "18.7"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Air-dried wood at about 20 percent moisture (Penn State Extension, Table 1). Other reports give different values. 1 million BTU is about 1.06 gigajoules."
+        },
+        {
+          "warn": "Burning a lot of very high-heat wood such as Osage orange or ironwood (hop hornbeam) can burn through the bottom of some stoves (Penn State Extension)."
+        }
+      ]
+    },
+    {
+      "h": "Cords, and how much",
+      "blocks": [
+        {
+          "list": [
+            "A full cord is a stack 4 feet high, 4 feet deep and 8 feet long (1.2 × 1.2 × 2.4 m) (Cornell Cooperative Extension of Warren County, Penn State Extension): 128 cubic feet (3.6 cubic meters). To measure a pile, multiply its height, width and length in feet and divide by 128 (Penn State Extension).",
+            "A face cord is 4 feet by 8 feet by 16 or 18 inches (1.2 × 2.4 m × 41 to 46 cm) (Cornell Cooperative Extension of Warren County): about a quarter to a half of a full cord (Penn State Extension)."
+          ]
+        },
+        {
+          "p": "How much a winter takes: no source opened gives a figure. It depends on the stove or fireplace, the house and the weather."
+        }
+      ]
+    },
+    {
+      "h": "Moving firewood: New York’s rule",
+      "blocks": [
+        {
+          "p": "In normal times, New York State Department of Environmental Conservation rules apply to any wood meant for fuel:"
+        },
+        {
+          "list": [
+            "Untreated firewood may not be moved more than 50 miles (80 km), in a straight line, from where it was cut.",
+            "Firewood heat-treated to 160°F (71°C) for 75 minutes and labelled “New York Approved Heat-Treated Firewood/Pest Free” can be moved anywhere.",
+            "Wood you cut for your own use needs a Self-Issued Certificate of Origin (a form from DEC).",
+            "Bought untreated firewood needs a receipt or label that shows where it came from.",
+            "Untreated firewood may not be brought into New York from another state or country."
+          ]
+        },
+        {
+          "p": "Buy and burn wood cut near you: it slows the spread of tree pests (EPA). On New York state land, use only dead and down wood: see Fire."
+        },
+        {
+          "link": "s:surv-fire",
+          "label": "Fire"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "US EPA, Burn Wise, Best Wood-Burning Practices (last updated October 13, 2026)",
+      "used": "Burn only dry, split, well-seasoned wood; less than 20 percent moisture; test with a moisture meter; season at least six months; store outdoors, off the ground, only the top covered; do not burn wet or green wood; buy and burn local wood to slow invasive pests"
+    },
+    {
+      "name": "US Department of Energy, Energy Saver, Wood and Pellet Heating (undated)",
+      "used": "Moisture 20% or less by weight; seasoned wood is even in color without green"
+    },
+    {
+      "name": "Cornell Cooperative Extension of Warren County, Buying Firewood (June 3, 2014, updated January 28, 2025)",
+      "used": "Full cord 4 x 8 x 4 ft; face cord 4 ft x 8 ft x 16 or 18 in; green wood can be 100% moisture or more; most dealers sell green; many species below 20% within a year if properly stacked in low humidity; oak two years or more; wet wood gives more smoke and creosote and less heat; buy a season ahead; New York's 50-mile limit"
+    },
+    {
+      "name": "Cornell Cooperative Extension of Tompkins County, Your Guide to Heating with Wood (with NYSERDA, 2010)",
+      "used": "At least six months to about 20% or less; longer in shade or near water; buy a season ahead; end-grain splits and sharper sound; moisture meter reads about a quarter inch deep, split pieces to test; stack off the ground on pallets, loosely, no more than two layers deep, cover only the top; oak, hickory, black locust most heat; poplar, aspen, spruce for mild weather"
+    },
+    {
+      "name": "Penn State Extension, Heating with Wood: An Introduction (Calvin Norman, updated June 15, 2026)",
+      "used": "Table 1 heat per air-dried cord (about 20% moisture) of Northeastern hardwoods; values differ between reports; seasoning 6 to 12 months; cut by April, split, stack by May; checks at log ends; split 2 to 6 inches; easiest frozen; wedges; block 14 to 18 inches; 4 to 8 lb maul; safety glasses, pants and boots; dry, sunny, windy site, not against a building; off the ground on pallets or metal tubes; roofing on top, never fully covered; loose stacking; shelf life a few years, oldest first; limit pine, fir, spruce (resin); Osage orange and ironwood can burn through some stoves; cord 4 x 4 x 8 ft, divide by 128; face cord about a quarter to a half of a cord"
+    },
+    {
+      "name": "Penn State Extension, Using Your Wood Stove Efficiently and Effectively (Daniel Ciolkosz, updated July 8, 2024)",
+      "used": "Minimum six months of drying, one full year or even two is better"
+    },
+    {
+      "name": "Iowa State University Extension and Outreach, Firewood Insects (February 2020)",
+      "used": "Stack firewood off the ground and away from your home; a pile against the house can let termites reach it; leave firewood outside until a day or two before burning; do not use insecticides on firewood"
+    },
+    {
+      "name": "New York State Department of Environmental Conservation, Firewood and Invasive Pests (undated; regulation of 2009)",
+      "used": "Covers all wood destined for fuel; untreated firewood no more than 50 miles (linear) from its source; heat treatment 71°C (160°F) for 75 minutes; label wording; Self-Issued Certificate of Origin for personal use; receipt or label for purchased firewood; no untreated firewood imported into New York"
+    },
+    {
+      "name": "US Fire Administration, Fireplace and Wood Stove Safety (card, undated)",
+      "used": "Keep anything that can burn at least 3 feet from the fireplace or wood stove"
+    },
+    {
+      "name": "Fire (surv-fire, checked)",
+      "used": "On New York state land, only dead and down wood"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

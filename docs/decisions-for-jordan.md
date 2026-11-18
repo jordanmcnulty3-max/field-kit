@@ -393,3 +393,37 @@ Source disagreements found while checking the Survival topics. Each says what th
    30 days without a stabilizer (one made for ethanol gasoline). NYS DOH: don't burn last season's kerosene. Today: the
    topic says no New York limit was found and gives Maine's 30 days as the only figure. Say if someone in the group can
    ask the local fire marshal or code office for the limit, so it can be added from that source.
+43. **Babies in a cold house (surv-heat-out, home-heat-kit) — Heat pack Task 5.** CDC: infants under 1 year "should
+   never sleep in a cold room". University of Missouri Extension (GH5117): "Bed is the warmest place to be with other
+   family members and lots of covers." Safe to Sleep (NICHD): only a fitted sheet in the baby's sleep area, no
+   comforters, quilts, pillows or blankets; a wearable blanket or extra layer instead; too many layers overheat a baby
+   (higher SIDS risk); couches and armchairs never; room sharing near but not in your bed is safer than bed-sharing.
+   No source opened says how to keep a baby warm at night in a house with no heat. Today: the baby sleeps in the warm
+   room, in its own sleep space, in a wearable blanket or extra layer, never in an adult bed under the family's covers
+   (Missouri's line says "Not for babies"). Worth asking a medical professional what the group should do if the warm
+   room itself gets cold overnight.
+44. **Wood stove overnight (surv-wood-stoves-fireplaces) — Heat pack Task 5.** US Fire Administration (Fireplace and
+   Wood Stove Safety card): "Put the fire out before you go to sleep or leave your home." Indiana Department of Homeland
+   Security: extinguish fireplace fires before going to bed. CSIA: be sure the fire is fully extinguished before turning
+   in. Penn State Extension describes banking a wood stove overnight on a bed of coals with the damper partly closed, and
+   the US Department of Energy says oak, hickory and pine "will burn overnight". Today: put it out before sleep (USFA,
+   the most cautious), and the text names Penn State's banking as described but not followed. With a stove as the only
+   heat for weeks, this rule makes the nights cold. Say if the group wants a banked stove allowed overnight, and on what
+   conditions (CO and smoke alarms, someone awake, damper never fully closed).
+45. **When the house is too cold to stay (surv-heat-out) — Heat pack Task 5.** No source opened gives an indoor
+   temperature at which to leave. CDC: "If you're not able to keep your home warm, make temporary arrangements to stay
+   elsewhere"; infants under 1 never sleep in a cold room; over 65, check the temperature often. National Institute on
+   Aging (2009): homes at 60 to 65°F can trigger hypothermia in older people. NYS Department of Health: keep indoor
+   temperatures above 68°F for the very young, the elderly and people with health problems (and the heat no lower than
+   55°F for pipes). Today: the topic gives CDC's rule and quotes those figures, and says no source gives a leave-at
+   temperature. Say if the group wants its own line (for example, move babies and older people out when the warm room
+   cannot be kept above a set temperature).
+46. **Chimney fire: what to do (surv-wood-stoves-fireplaces) — Heat pack Task 5.** Crystal Lakes Fire Protection
+   District (Colorado): call 911, get everyone out including pets, close stove doors and intake vents if you can safely,
+   use a chimney-fire suppressant if you have one, have the fire department confirm it is out. University of Missouri
+   Extension (G1731): call the fire department, close all openings and draft controls, "squirt a multi-purpose dry
+   chemical extinguisher or throw baking soda onto the fire in the stove", never water into the chimney. No US Fire
+   Administration, NFPA or New York page on chimney fires was found. Today: get everyone out and call if you can; close
+   the doors and air intakes only if safe; never water into the chimney; have it checked; no reuse until inspected. The
+   extinguisher and baking soda step is left out, in line with Store fuel safely's extinguisher rule (only a small fire in
+   one object, with a clear way out). Say if the group wants Missouri's extinguisher step added.

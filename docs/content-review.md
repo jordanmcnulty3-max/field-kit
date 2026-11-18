@@ -1657,3 +1657,39 @@ Re-opened: NPS-10 (title "Ten Essentials (U.S. National Park Service)" confirmed
 - C2 decisions-for-jordan D11: now names both poisonous irises (yellow flag and native blue flag), matching the Task 15 fix.
 - C3 figs/figs.py `river`: second hazard line "stay well upstream" now "never cross just above them", the surv-river-crossings wording (FM ch 17). tests/test_figs.py: "stay well upstream" added to the river case's forbidden wording, "never cross just above them" to its required wording. Rendered at 360 px, day and night: the right-aligned line fits inside the river band, nothing clipped.
 - C4 surv-fire: `fire-sizes` caption "Tinder, kindling and fuel. If you skip the tinder or kindling stage, the fire will likely fail." now "Tinder, kindling and fuel." (the sentence is in the paragraph above).
+
+## Water pack Task 3: water planner numbers (2026-11-18)
+
+File: src/tooldata/water.json (draft). No topics in this task. Every source below was found by web search and
+opened by web fetch on 2026-11-18; the page title was checked after each fetch.
+
+Source keys:
+- RG-W: Ready.gov (FEMA), Water. https://ready.gov/water
+- RG-KIT: Ready.gov (FEMA), Emergency Supply List (page heading). https://www.ready.gov/kit
+- FW: FEMA in cooperation with the American Red Cross and USDA, Food and Water in an Emergency (no date printed; county-hosted copy of the FEMA booklet). https://henrycounty.in.gov/DocumentCenter/View/295/Food-and-Water-in-an-Emergency-PDF
+- CDC-EWS: CDC, How to Create an Emergency Water Supply, last reviewed June 27, 2025. https://cdc.gov/water-emergency/about/how-to-create-and-store-an-emergency-water-supply.html (the older cdc.gov/healthywater URL returned the same page, same date)
+- ARC-KIT: American Red Cross, Survival Kit Supplies ("What Do You Need In a Survival Kit"). https://redcross.org/get-help/how-to-prepare-for-emergencies/survival-kit-supplies.html
+- DHSES: NYS Division of Homeland Security and Emergency Services, Before an Emergency Happens. https://www.dhses.ny.gov/before-emergency
+- NYSDOH-7009: NYS Department of Health, family emergency preparedness leaflet, publication 7009, footer "11/14" (no title extracted). https://Health.NY.Gov/publications/7009.pdf
+- USGS-FW: USGS Water Science School, Facts About Water. https://www.usgs.gov/water-science-school/science/facts-about-water
+- NIST-811: NIST SP 811, Guide for the Use of the International System of Units (SI), 1995 edition, Appendix B.8. https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication811e1995.pdf (the PDF notes this edition was withdrawn in 2018 and superseded by the 2008 edition; the 2008 edition's B.8 web page needed an approval nobody gave, see below)
+
+### Values
+
+- `drinkPerPersonDay` = 1 gal. RG-W: "Store at least one gallon of water per person per day for several days, for drinking and sanitation." RG-KIT: "Water (one gallon per person per day for several days, for drinking and sanitation)". CDC-EWS: "Store at least 1 gallon of water per day for each person"; "You can use this water during an emergency for drinking, cooking, brushing teeth, and other uses." FW: "You will also need water for food preparation and hygiene. Store a total of at least one gallon per person, per day." ARC-KIT: "Water: one gallon per person, per day". DHSES: "one gallon per person per day". NYSDOH-7009: "at least one gallon per person per day ... for drinking and household use". All agree. Outcome: 1 gal.
+- `drinkPerPersonDay` note, what it covers: drinking, cooking, brushing teeth and other uses (CDC-EWS); drinking and sanitation (RG-W); drinking plus food preparation and hygiene (FW). Stated with each agency's wording. Outcome: matches.
+- `drinkPerPersonDay` note, who needs more (no figure in any source, so no extra value): children, nursing mothers, sick people (RG-W "may need more water"; FW "will need even more"); a medical emergency (RG-W "might require additional water"); warm climate (RG-W "If you live in a warm weather climate more water may be necessary"); pregnant women, people who are sick, pets, hot climate (CDC-EWS "Consider storing more water than this for ..."). Outcome: listed in the note, no number.
+- "3.8 L" in the note: 1 gal = 3.785412 L (NIST-811), rounded up. Outcome: arithmetic from NIST-811.
+- `planDays` = 14 days. CDC-EWS: "Store at least 1 gallon of water per person, per day for 3 days"; "Try to store a 2-week supply if possible." ARC-KIT: "3-day supply for evacuation, 2-week supply for home". FW: "You should store at least a two-week supply of water for each member of your family." DHSES: "enough food, water, medications, and other consumables to last up to 10 days." NYSDOH-7009: "for three days". RG-W and RG-KIT: "several days" (no number). Agencies differ; the longest target (2 weeks: CDC goal, Red Cross home, FEMA booklet) is used, as the dispatch requires. Decisions D15. Outcome: 14 days, all figures in the note except NYS DOH 2014 and Ready.gov "several days" (recorded here).
+- `extraHotWeatherPerPersonDay` = 1 gal, label "Very hot weather". RG-W: "A normally active person needs about three quarters of a gallon of fluid daily, from water and other beverages." ... "In very hot temperatures, water needs can double." FW: "A normally active person needs to drink at least two quarts of water each day. Hot environments can double that amount." The sources quantify the hot-weather extra as a doubling but differ on the base: FW doubles 2 quarts (extra 0.5 gal); RG-W's base is ambiguous (its fluid figure gives 0.75 gal; its stored gallon gives 1 gal). Used the most cautious reading, 1 gal. Decisions D16. Outcome: 1 gal, flagged.
+- No other extras: no source opened gives a figure for children, nursing, pregnancy, illness, medical emergency or pets (CDC-EWS confirmed: no figure for pets; ready.gov/pets would not open). Outcome: no extra values; described in the base note.
+- `lbPerGallon` = 8.33 lb. USGS-FW: "Weight: 8.33 pounds/gallon; 1 kilogram/liter". Cross-check: NIST-811 B.9 gives 1 lb/gal = 0.1198264 kg/L, so USGS's 1 kg/L is 8.345 lb/gal; the 0.2% difference is the temperature of the water and does not change a planner total in practice. Outcome: 8.33 (USGS figure as printed).
+- `litersPerGallon` = 3.785412 L. NIST-811 B.8: "gallon (U.S.) (gal) liter (L) 3.785 412 E + 00". USGS-FW: "1 gallon = 4 quarts = 8 pints = 128 fluid ounces = 3.7854 liters". Agree. Outcome: 3.785412.
+- `title`: "one gallon per person per day ... for drinking, cooking and basic hygiene" summarises CDC-EWS, RG-W and FW above. "no source opened says it covers flushing toilets, bathing or laundry": none of the eight pages opened mentions toilet flushing, bathing or laundry water. Outcome: stated only as an absence.
+
+### Pages that would not open or were not used
+
+- FEMA's own copy of Food and Water in an Emergency (https://www.fema.gov:443/pdf/library/f&web.pdf): site error. The county-hosted copy (FW) was used; it names FEMA, the Red Cross and USDA as authors.
+- Ready.gov Pets (https://ready.gov/pets): site error. No per-animal water figure found.
+- NIST SP 811 Appendix B.8 web page (2008 edition): the fetch needed an approval nobody answered, so it was not retried. NIST Handbook 44 appendices (nist.gov/document/... PDFs): site error. NIST SP 811 Appendix B intro page (nist.gov/node/777686) and footnotes page (nist.gov/node/777646) opened but hold no gallon row. The withdrawn 1995 edition was used; USGS-FW agrees with it to the four decimal places USGS prints. A reviewer may want to confirm the figure against the 2008 edition.
+- UNT web archive copies of NIST Weights and Measures appendices: only the archive wrapper loaded, no content.

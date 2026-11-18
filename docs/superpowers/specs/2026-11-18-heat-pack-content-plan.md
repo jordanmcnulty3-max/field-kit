@@ -20,7 +20,7 @@ heaters, and generators. So every one of those gets its own full treatment; none
 - Non-goals: summer heat without power (Town hazards pack); walking on lake ice and winter travel on foot
   (Moving pack); cooking without power beyond what a heat source implies (Food pack); long-term wood-lot
   management, chainsaw technique, building or installing a stove or chimney.
-- Anti-goals: any instruction that makes an unsafe improvisation sound acceptable (unvented burning indoors,
+- Anti-goals: any instruction that makes an unsafe improvisation sound acceptable (burning anything indoors that is not made and rated for indoor use,
   oven or grill as a heater, back-feeding a house from a generator, alcohol or candle "heaters" presented as
   safe); a number nobody sourced; treatment advice that competes with the Emergency protocols.
 
@@ -80,6 +80,9 @@ Service frostbite-time band out, plus a link to the topic and the two Emergency 
 - Frostbite bands come from a table transcribed from the NWS chart into `src/tooldata/windchill.json` (sourced,
   validated and release-gated like `water.json`), not from a fitted formula. Between chart cells the tool uses
   the colder temperature and the higher wind, so it never understates danger.
+- The tool accepts only what the NWS chart covers (its temperature and wind range, read from the chart when it
+  is opened). Outside that it says "Off the National Weather Service chart" and shows no figure and no band, so
+  an unsourced band can never appear. `validate_tooldata` is extended to accept the band table.
 - If the reviewer cannot confirm the band boundaries from the chart itself, the bands are dropped and the tool
   shows wind chill with NWS's written thresholds only.
 - No °C input and no fuel planner in this pack (section 9).
@@ -131,6 +134,17 @@ only; the Firecrawl connector is not used.
 8. No guided flow in this pack; urgent topics use the Do first box.
 9. Existing checked text in Fire, Shelter, Priorities and Water in winter is not reworded unless a source
    requires it; new topics must agree with it or log the conflict.
+
+10. **Kerosene and propane heaters get operating guidance, not a blanket "don't"** (pending Jordan, see below).
+    The group owns them. The topic states the strictest conditions any opened agency source sets (indoor-rated
+    only, fuel, ventilation, never asleep or unattended), names any agency that says not to use them indoors at
+    all and any New York restriction found, and never softens the existing Shelter line about heaters and sleep.
+11. Shelter stays an outdoor topic with its `where` tags. Sheltering in a building or a vehicle is written in
+    `surv-heat-out` and `surv-winter-storms`, which no filter hides.
+12. Heat sources Jordan did not name: a natural gas furnace is covered under "what a furnace needs" in
+    `surv-heat-out`; electric heaters on a generator get a short section in `surv-generators`; pellet stoves (need
+    power) and vent-free gas fireplaces get a short note in `surv-wood-stoves-fireplaces` and
+    `surv-carbon-monoxide`. Gas leaks and shutting off gas wait for the Town hazards pack.
 
 ## 10. Left to the builder
 

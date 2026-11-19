@@ -3946,8 +3946,13 @@ Conversions: none (no measured quantities in these three topics).
   "...before the emergency or with infant formula."; "If you do NOT have previously expressed breast milk or infant formula,
   continue breastfeeding."; "Hand express or pump your breast milk regularly and discard it to maintain your milk supply";
   "Breastfeeding can resume when advised by local health officials or after evacuation and self-decontamination."). CDC-INF's
-  Cronobacter line, pump-cleaning line and lactation-support line are left out (general infant-feeding care, not fallout). CDC-FAQ
-  agrees on breastfeeding. Medical-professional question: D94.
+  Cronobacter line, pump-cleaning line and lactation-support line are left out (general infant-feeding care, not fallout).
+  Correction (fix round): CDC-FAQ does not agree with CDC-INF. CDC-FAQ "What if I am nursing?": "If possible, nursing mothers who
+  were near the affected area should temporarily stop breastfeeding" / "and switch to breast milk (that was pumped and stored
+  before the exposure) or formula, until they can be seen by a doctor."; "If no other source of food is available for your
+  baby, continue to breastfeed." Stronger ("should" against "consider") and a wider trigger ("near the affected area" against
+  "outside in the affected area"). Both are now shown, each credited to its CDC page by name, without choosing (controller
+  ruling). Medical-professional question: D94.
 - Medicine and pet food: CDC-FWM ("Continue taking your medication."; "It is safe to consume medicine that was already inside or
   medicine in containers that were outside" / "but have been wiped off."; pet food sealed; wipe containers; "Wash or wipe off pet
   bowls, dishes, and mats"); CDC-PETS (same).
@@ -4038,3 +4043,35 @@ Conversions: none (no measured quantities in these three topics).
 - Emergency protocols linked, not restated: bleeding, wound-care, burns, shock. Burns' evacuate list is not edited (D96).
 - No radiation topic has a where or when tag. No dose, exposure limit or potassium iodide. "Safe" appears only inside the
   titles "Make water safe" (a link label and a source line) and CDC's page title "Food, Drinking Water, and Medicine Safety".
+
+### Batch B fix round (2026-11-18), from task-5-review.md
+
+Draft removed from all three topics after these fixes. Minor 9 (the two CO quotes) is carried to the whole-pack review.
+
+- I1 (breastfeeding): water-and-food "Babies" now shows CDC Infant Feeding's statement and CDC FAQ's statement as two bullets,
+  each credited by page name, without choosing. CDC-FAQ re-opened this round (wording above, in the corrected "Babies" entry).
+  The CDC FAQ source line names the breastfeeding answer. D94 rewritten.
+- I2: Leaving "Hurt or sick" bullet 3 is now "First aid is in Emergency." (the hub's wording); "inside first" removed.
+- I3: Leaving "On foot or by car" bullet 2 is now "If you must leave and have a car, fallout on the car is not a reason not to use
+  it (FEMA planning guidance)." FEMA-PG3 p. 212 ("Use of contaminated vehicles (personal or mass transit) for evacuation should
+  not be discouraged").
+- M1: Leaving Do first 2 now "if it doesn’t slow you down, wear a hat, gloves and an outer layer you can take off (this app’s own
+  caution; ...)".
+- M2: coming-inside "Clean clothes" caution now says just inside the outside door, not outside (more time in fallout) and not in
+  the shelter room, labelled "This app’s own caution". No current source decides the side of the door. ITE-1968 chapter 7,
+  re-opened this round: "If anyone has been outside and fallout particles have collected on his shoes or clothing," / "they
+  should be brushed off before he enters the shelter area again." Shown as dated support for "not in the shelter room"; it
+  doesn't decide inside or outside the house door either. ITE-1968 added to the topic's sources. D90 updated.
+- M3: Leaving "Which way to go" now "and at right angles to the fallout’s path if you know it (FEMA planning guidance). Officials
+  may know the path; you may not."
+- M4: water-and-food Do first 2 now "Drink bottled water and other sealed drinks first (CDC), then water you stored yourself (this
+  app’s reading)"; "Which water to drink first" paragraph now says the app's reading treats self-stored sealed water like bottled
+  water, ahead of the heater and toilet tank. D98.
+- M5: the 1968 milk line now carries its condition, from ITE-1968 re-opened this round: "Therefore, if possible, they should be
+  given canned or powdered milk for a few weeks" / "if authorities say the regular milk supply is contaminated by radioactive
+  elements." Source line updated.
+- M6: the 1968 covered-wells line now ends "this app does not rely on it to rank a well higher".
+- M7: formula with no bottled water and no officials logged with D94 (no text added).
+- M8: coming-inside link label "Wound cleaning and care" (the protocol's title).
+- Reviewer note on source lines: coming-inside's CDC Get Inside / Stay Inside line no longer lists gloves, dust mask and cut
+  covering; those are credited to the CDC pets page, where the reviewer confirmed them.

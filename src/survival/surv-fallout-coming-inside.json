@@ -111,7 +111,7 @@
           ]
         },
         {
-          "p": "This app’s caution, not a source’s: shake or brush clothes off at the door, not in the room where people are sheltering, and cover your mouth and nose while you do it."
+          "p": "This app’s own caution, not a source’s: shake or brush clothes off just inside the outside door, not outside (that is more time in fallout) and not in the room where people are sheltering. Cover your mouth and nose while you do it. The 1968 handbook In Time of Emergency (dated) also says fallout on shoes or clothing should be brushed off before going into the shelter area."
         }
       ]
     },
@@ -171,7 +171,7 @@
         },
         {
           "link": "p:wound-care",
-          "label": "Wound care"
+          "label": "Wound cleaning and care"
         },
         {
           "link": "p:burns",
@@ -191,11 +191,11 @@
     },
     {
       "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024) and What to Do: Stay Inside (last reviewed April 17, 2024)",
-      "used": "Remove outer layer before entering; radioactive material settles like dust or mud; put on clean clothing; pets inside, washed with shampoo or soap and rinsed; gloves and dust mask; cover cuts; wash hands and face after; wipe supplies brought in; officials will say if the home needs decontaminating"
+      "used": "Remove outer layer before entering; radioactive material settles like dust or mud; put on clean clothing; pets inside, washed with shampoo or soap and rinsed; wash hands and face after; wipe supplies brought in; officials will say if the home needs decontaminating"
     },
     {
       "name": "CDC, How to Decontaminate Pets After a Radiation Emergency (last reviewed April 15, 2024)",
-      "used": "Washing pets; mouth covering; cuts covered; newspapers or absorbent material indoors; don’t touch soiled material with bare hands; bag it away from people and pets"
+      "used": "Washing and rinsing pets; waterproof gloves and a dust mask or mouth covering; yours and your pet’s cuts covered; wash hands and face after; newspapers or absorbent material indoors; don’t touch soiled material with bare hands; bag it away from people and pets"
     },
     {
       "name": "CDC, Infant Feeding (radiation emergencies; last reviewed April 16, 2024)",
@@ -220,8 +220,11 @@
     {
       "name": "FEMA Office of Emerging Threats, Nuclear Detonation Response Guidance: Planning for the First 72 Hours (March 2023; updated June 12, 2023; copy hosted by HHS REMM)",
       "used": "Contaminated material catches in shirt collars and around the tops of shoes; decontaminate medical equipment such as wheelchairs and eyeglasses"
+    },
+    {
+      "name": "Office of Civil Defense, In Time of Emergency: A Citizen’s Handbook on Nuclear Attack and Natural Disasters (H-14, March 1968; dated civil defence publication)",
+      "used": "Fallout on shoes or clothing brushed off before entering the shelter area"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

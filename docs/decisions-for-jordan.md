@@ -620,8 +620,10 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
 90. **Shaking off clothes when there are no clean ones (surv-fallout-coming-inside).** CDC's decontamination infographic: with
    no clean clothes, take off the outer layer, shake or brush the clothes off, put them back on, and wash hands, face and skin
    again. CDC also says to take clothes off carefully so radioactive dust doesn't shake loose, and no source says where to do
-   the shaking. Today: CDC's step, plus a line labelled as the app's caution: shake or brush clothes off at the door, not in the
-   room where people are sheltering, and cover your mouth and nose. Say if the group wants a different place (for example just
+   the shaking. Today: CDC's step, plus a line labelled as the app's own caution: shake or brush clothes off just inside the outside
+   door, not outside (more time in fallout) and not in the room where people are sheltering, and cover your mouth and nose. The
+   1968 handbook (dated) says to brush fallout off shoes and clothing before going into the shelter area; it does not say which
+   side of the house door. Say if the group wants a different place (for example just
    outside the door, which means a moment more in fallout).
 91. **Milk from your own animals, wild game and fish after fallout (surv-fallout-water-and-food).** No current source opened says
    when these can be used. Ready.gov and CDC say not to eat garden food, or food or liquids that were outdoors uncovered, until
@@ -643,11 +645,18 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    water safe says water with radioactive material can't be fixed by boiling or disinfecting. Today: the topic names the old
    method and says the app doesn't follow it. No change expected; recorded because it is a source disagreement, and because a
    group with no stored water left would face it.
-94. **Breastfeeding after being outside in fallout (surv-fallout-water-and-food). Worth asking a medical professional.** CDC:
-   if you were outside where fallout came down, consider stopping breastfeeding for a while and feeding stored breast milk or
-   formula; with neither, keep breastfeeding; pump and discard to keep the supply; resume when health officials say or after
-   leaving the area and cleaning off. With no officials, "when health officials say" may never come. Today: CDC's wording as
-   written. Say if a medical professional would add anything for the no-officials case.
+94. **Breastfeeding after fallout, and formula with no bottled water (surv-fallout-water-and-food). Worth asking a medical
+   professional.** Two CDC pages disagree. CDC Infant Feeding (2024): if you were outside in the affected area, consider
+   stopping breastfeeding for a while and feed stored breast milk or formula; with neither, keep breastfeeding; pump and discard
+   to keep the supply; resume when health officials say or after leaving the area and cleaning off. CDC Frequently Asked
+   Questions (2022): if possible, nursing mothers who were near the affected area should temporarily stop breastfeeding and use
+   stored breast milk or formula until seen by a doctor; if no other food is available for the baby, keep breastfeeding. The FAQ
+   is stronger ("should", not "consider") and has a wider trigger ("near", not "outside in"). With no officials and no doctor,
+   neither end point may come. Today: both statements are shown, each credited to its page, and the app does not choose.
+   Also not covered: making powdered formula with no bottled water and no officials. CDC Infant Feeding says bottled water if
+   possible and tap water only if local officials say; it says nothing about stored, water heater or toilet tank water for
+   formula. Today: the topic is silent on that case. Say which CDC statement the group should follow, and what to use for
+   formula when bottled water runs out.
 95. **Taking a casualty out through fallout for care (surv-fallout-leaving). Worth asking a medical professional.** Ready.gov
    counts serious injury among the immediate dangers that can force you out, and FEMA names medical needs; Ready.gov also says
    to listen for where to get care. No source says what a household with no officials, and no way to know if a hospital is open,
@@ -666,3 +675,8 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    still says to go somewhere with heat if you can't keep the house warm. Today: no source opened weighs cold against fallout;
    the topic gives no cold trigger for leaving. Say if the group wants one (for example when nothing in the house can keep a
    baby or older person warm).
+98. **Water you stored yourself, in the drinking order (surv-fallout-water-and-food).** CDC's order after fallout: bottled water
+   and sealed drinks, then refrigerator drinks, then water in other containers in the house (water heater, toilet tank), then
+   tap water. CDC does not name water a household stored in its own sealed containers. Today: labelled as the app's reading,
+   such water is treated like bottled water and drunk first, ahead of the heater and toilet tank (it is sealed and was indoors,
+   as CDC says of sealed drinks). Say if the group wants it ranked with the heater and toilet tank instead.

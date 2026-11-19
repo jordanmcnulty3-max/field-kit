@@ -200,7 +200,6 @@ ol.steps li::marker{font-weight:700;color:var(--c)}
 .em-resume{width:100%;margin:0 0 16px;border:2px solid var(--ink);font-size:17px}
 .em-draft{font-size:12px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0}
 .em-life .em-draft{color:inherit}
-.em-h{margin:0 0 8px}
 .em-hrow{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .em-clear{min-height:44px;min-width:44px;margin:-10px 0 -2px;padding:0 10px;border:0;background:none;color:var(--muted);font:inherit;font-size:14px;text-decoration:underline}
 #survHome .em-clear{min-height:48px;min-width:48px}
@@ -388,6 +387,8 @@ body.mapmode #tacSeg{margin-bottom:12px}
 #mTrack[aria-pressed="true"]{background:var(--blaze);border-color:var(--blaze)}
 .maptag{position:absolute;left:68px;top:12px;z-index:1000;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .maptag span{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.mapnote{position:absolute;left:16px;right:76px;top:96px;z-index:1000;padding:12px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:15px;line-height:1.4}
+.mapnote p{margin:0 0 8px}
 .maptag .rec{background:var(--blaze);color:var(--on-accent);border-color:var(--blaze);font-weight:600}
 .mapbar{position:absolute;left:12px;right:12px;bottom:22px;z-index:1000;display:flex;align-items:center;gap:8px;
   background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 8px 8px 12px}
@@ -425,8 +426,12 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 /* Survival: home and pages (topic pages are drawn from FK_DATA.topics) */
 .body ul{margin:0 0 8px;padding-left:20px}
 .body ul li{margin-bottom:6px}
-.sv-cat{margin:16px 0 8px}
-.sv-cat:first-child{margin-top:0}
+/* Home section labels (Pinned, Recent, Topics, Tools, Checklists): small muted capitals, so they read as
+   dividers and not as one more row. The space above belongs to the section, not the heading: every heading
+   is the first child of its own section, so a :first-child rule on the heading removed the space everywhere. */
+.sv-cat,.em-h{margin:0 0 8px;font-size:14px;line-height:1.3;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#survPinned,#survRecent,#survTopics,#survTools,#survLists{margin-top:32px}
+#survHome>:first-child{margin-top:0}
 .sv-list{display:grid;grid-template-columns:1fr;gap:8px}
 .sv-filters{display:grid;gap:8px;margin:0 0 16px}
 .sv-frow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
@@ -572,6 +577,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <div id="map" aria-label="Map"></div>
       <div class="cross" aria-hidden="true"></div>
       <div class="maptag"><span id="mLayerName">USGS Topo</span><span class="rec" id="recChip" hidden>Recording</span></div>
+      <div class="mapnote" id="mapNote" role="status" hidden><p id="mapNoteText"></p><button type="button" class="btn small" id="mapNoteLayers">Choose another map</button></div>
       <div class="mapctl">
         <button id="mLayers" aria-label="Map layers" title="Map layers">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5z"/><path d="m2 13 10 5 10-5"/></svg>

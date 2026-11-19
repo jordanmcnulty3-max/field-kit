@@ -170,7 +170,7 @@ def test_home_items_sections_appear_with_badge_and_hide_when_empty(page, app_url
     page.evaluate(PROVIDERS)
     expect(page.locator('#survTools')).to_have_text('')   # nothing until a redraw is asked for
     page.evaluate('FK.survival.refreshHome()')
-    assert page.locator('#survTools h2').inner_text() == 'Tools'
+    assert page.locator('#survTools h2').text_content() == 'Tools'
     btns = page.locator('#survTools button')
     assert btns.count() == 1
     assert btns.first.get_attribute('data-key') == 'u:lamp'
@@ -178,7 +178,7 @@ def test_home_items_sections_appear_with_badge_and_hide_when_empty(page, app_url
     assert page.locator('#survLists').inner_text() == ''   # no items: no heading either
     page.evaluate("window.__lists = [{ key: 'c:ten', title: 'Ten essentials' }]; window.__tools = []; FK.survival.refreshHome()")
     assert page.locator('#survTools').inner_text() == ''
-    assert page.locator('#survLists h2').inner_text() == 'Checklists'
+    assert page.locator('#survLists h2').text_content() == 'Checklists'
     assert page.locator('#survLists button').inner_text() == 'Ten essentials'
 
 
@@ -261,7 +261,7 @@ def test_twelve_opens_store_twelve_and_each_home_shows_its_newest_five(page, app
     page.evaluate("FK.route.go('/survival')")
     wait_hash(page, '#/survival')
     assert shown(page, 'survRecent') == ['s:surv-t6', 's:surv-t5', 's:surv-t4', 's:surv-t3', 's:surv-t2']
-    assert page.locator('#survRecent h2').inner_text() == 'Recent'
+    assert page.locator('#survRecent h2').text_content() == 'Recent'
 
 
 def test_recent_keeps_at_most_twenty(page, app_url):
@@ -289,7 +289,7 @@ def test_clear_on_survival_home_empties_storage_and_both_homes_and_moves_focus(p
 def test_pinned_topic_on_both_homes_pinned_protocol_only_on_emergency(page, app_url):
     boot_both(page, app_url, storage={'pins': ['s:surv-t3', 'p:burns', 'p:shock']})
     assert shown(page, 'survPinned') == ['s:surv-t3']
-    assert page.locator('#survPinned h2').inner_text() == '★ Pinned'
+    assert page.locator('#survPinned h2').text_content() == '★ Pinned'
     assert page.evaluate("FK.pins.forSection('survival')") == ['s:surv-t3']
     page.evaluate("FK.route.go('/emergency')")
     wait_hash(page, '#/emergency')
@@ -825,3 +825,22 @@ def test_the_food_pack_does_not_link_field_dressing_game_until_v76():
     # Its label puts the food pages above Wound cleaning and care for "dressing" (docs/v7.5-rulings.md); the link returns with v7.6
     for tid in [k[2:] for k in FOOD]:
         assert 's:surv-field-dressing-game' not in _links(_shipped('survival')[tid]), tid
+
+
+def test_home_section_headings_have_space_above_and_read_as_labels(page, app_url):
+    """Every home heading is the first child of its own section, so the space above has to come from the
+    section: in v7.5 the headings sat flush against the card above them."""
+    page.goto(app_url + '#/survival')
+    page.wait_for_selector('#survLists h2')
+    gaps = page.evaluate("""() => ['survTopics', 'survTools', 'survLists'].map(id => {
+      const el = document.getElementById(id), h = el.querySelector('h2'), cs = getComputedStyle(h);
+      let prev = el.previousElementSibling;
+      while (prev && !prev.getBoundingClientRect().height) prev = prev.previousElementSibling;
+      return { id, gap: h.getBoundingClientRect().top - prev.getBoundingClientRect().bottom,
+               upper: cs.textTransform, size: parseFloat(cs.fontSize) };
+    })""")
+    for g in gaps:
+        assert g['gap'] >= 24, g
+        assert g['upper'] == 'uppercase' and g['size'] < 16, g
+    row = page.evaluate("parseFloat(getComputedStyle(document.querySelector('#survCats summary')).fontSize)")
+    assert row > gaps[0]['size']

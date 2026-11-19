@@ -3767,3 +3767,288 @@ Draft removed from all four topics after these fixes.
 - M9: correction to the record above: the p. 43 wording "middle of a large, dense building" was not found by the reviewer;
   the nearest are p. 46 "center of larger, dense buildings" and p. 65 "center of large, heavy buildings". Topic text is
   unaffected (row 2 also rests on READY, CDC-GI and FEMA-PG3 p. 54).
+
+## Radiation pack batch P: radiation decontamination and radiation sickness protocols (2026-11-18)
+
+Files (both draft): src/protocols/radiation-decontamination.json, src/protocols/radiation-sickness.json. Test added:
+tests/test_validate.py::test_radiation_protocols_keep_the_pack_rules (no "safe", no 911, no potassium iodide, no dose
+unit; both name the Survival topic that owns leaving shelter; evacuate lists open with the needs-not-instructions line).
+No test counts protocols by number; tests/test_validate.py::ShapeTests::test_shipped_protocols_pass_unchanged expects no
+warnings, so it fails while the two protocols are draft (as does the --release gate in tests/test_reports.py).
+
+Every source below was found by built-in web search and opened by web fetch on 2026-11-18; the title (and date where
+printed) was checked after each fetch. Fetches return quotes capped at about 125 characters, so long sentences were read
+as consecutive pieces; FEMA-COMM pages 13 to 16, 40, 46, 47, 51 and 95 to 97 were read line by line. No Firecrawl, no
+Bright Data.
+
+Source keys:
+- CDC-SD: CDC, How to Self-Decontaminate after a Radiation Emergency, last reviewed April 15, 2024. https://cdc.gov/radiation-emergencies/prevention/self-decontaminate.html
+- CDC-DYO: CDC, Decontamination for Yourself and Others (infographic text), last reviewed April 17, 2024. https://www.cdc.gov/radiation-emergencies/infographic/decontamination.html
+- CDC-PETS: CDC, How to Decontaminate Pets After a Radiation Emergency, last reviewed April 15, 2024. https://www.cdc.gov/radiation-emergencies/prevention/decontaminate-pets.html
+- CDC-CAUSES: CDC, What Causes Contamination versus Exposure, last reviewed April 10, 2024. https://cdc.gov/radiation-emergencies/causes
+- CDC-KIDS: CDC, Radiation Emergencies and Children (no date printed). https://www.cdc.gov/childrenindisasters/radiation-emergencies.html
+- CDC-FAQ: CDC, Frequently Asked Questions about Radiation Emergencies, last reviewed April 19, 2022, updated April 12, 2024. https://cdc.gov/radiation-emergencies/faq/index.html
+- CDC-HELP: CDC, Decontamination – Helping Others, last reviewed April 4, 2018 (old URL path; used only where FEMA-COMM says the same). https://www.cdc.gov/nceh/radiation/emergencies/selfdecon_helpothers.htm
+- CDC-GI: CDC, What to Do: Get Inside, last reviewed April 15, 2024 (re-opened for this batch). https://cdc.gov/radiation-emergencies/response/get-inside.html
+- CDC-ARS: CDC, Acute Radiation Syndrome (public), last reviewed April 10, 2024. https://www.cdc.gov/radiation-emergencies/signs-symptoms/acute-radiation-syndrome.html
+- CDC-ARS-HCP: CDC, Acute Radiation Syndrome: Information for Clinicians, last reviewed April 23, 2024. https://cdc.gov/radiation-emergencies/hcp/clinical-guidance/ars.html
+- CDC-JIT: CDC, Radiological Terrorism: Just-In-Time Training for Hospital Clinicians, transcript (no date printed). https://cdc.gov/nceh/radiation/emergencies/videos/jit/RadTerrorismJIT-Transcript-508.pdf
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024 (loaded; spec 10 call 13 not needed). https://ready.gov/radiation
+- RC: American Red Cross, Nuclear Explosion and Radiation Emergencies (no date; © 2026). https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/nuclear-explosion-radiation-emergencies.html (opened with the search result's "?cb=10029" suffix)
+- FEMA-COMM: FEMA Office of Emerging Threats, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath, second edition, April 2024. https://www.fema.gov/sites/default/files/documents/fema_oet_nuclear-detonation-preparedness-communicating-aftermath_052024.pdf (parts 0 to 300,000 characters read)
+- FEMA-PG3: FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (as batch A). https://www.fema.gov/sites/default/files/documents/fema_nuc-detonation-planning-guide.pdf (all five 100,000-character parts searched for this batch)
+- NYS-RRC: New York State Department of Health, Radiological Terrorism Rapid Response Card, prepared December 2002, revised December 2013 (written for responders and clinicians). https://healthweb-back.health.ny.gov/environmental/emergency/radiological_terrorism/radterr.htm
+
+Would not open or not used: the NYS-RRC PDF at health.ny.gov/environmental/emergency/radiological_terrorism/radterr.pdf
+(fetch refused: "failed ... (client_error)"; the HTML card on the department's healthweb-back host was used). HHS REMM
+pages (decontamination procedures, time to vomiting) were returned only as UNT web archive copies, so they were not used
+(the content plan accepts archive copies only for Ready.gov); the CDC and FEMA pages above cover the same points. No NYS
+Department of Health or DHSES public page on decontamination or radiation sickness was returned by search; New York is
+represented by NYS-RRC (a state document for responders) only.
+
+Numbers: "up to 90%" (CDC-DYO "Taking off your outer layer of clothing can remove up to 90% of radioactive material.";
+READY and FEMA-COMM p. 13 the same; CDC-FAQ "Even just removing your outer layer of clothing can remove up to 90%").
+"2 to 3 week" (NYS-RRC "especially following a 2-3 week period with nausea and vomiting"). "weeks 2 and 18" (FEMA-COMM
+p. 59 "roughly between weeks 2 and 18 of pregnancy"). "several weeks up to 2 years" (CDC-ARS; FEMA-COMM p. 51). "few hours
+up to several months" (FEMA-COMM p. 46; CDC-ARS). No other numbers. No dose, exposure limit or potassium iodide anywhere.
+FEMA-PG3's dose figures (for example GI-ARS "in excess of 6 Gy (600 rad)", p. 193) were read and not used.
+
+### radiation-decontamination
+
+Category environment (beside Carbon monoxide poisoning); not advanced: every step is a public instruction.
+Step order follows CDC-DYO's numbered order (1 outer clothing, 2 wash, 3 clean clothes, 4 help others and pets), with
+FEMA-COMM's order for the extras (yourself first, then others; belongings after self-decontamination, p. 15), and the
+life-threat question first (FEMA-PG3).
+
+- s1 / s20 (life threat first): FEMA-PG3 p. 99 "Regardless of location, management of serious injury takes precedence over
+  radiological decontamination."; p. 76 "however, any immediate lifesaving procedures should be performed before
+  decontamination."; p. 110 "In instances of life-threatening or serious injuries, medical care takes priority over
+  contamination screening and decontamination." NYS-RRC "Patient with life-threatening condition: treat, then
+  decontaminate."; "Emergency responders should not delay treatment of victims due to fear of becoming contaminated";
+  "Externally exposed patients do not become radioactive". s20 bleeding: FEMA-COMM p. 10 "If you're wounded, apply pressure
+  to stop any bleeding then decontaminate the area around the wound". Gloves and mask: FEMA-COMM p. 15. The protocols named
+  (Severe bleeding, CPR, Recovery position, Shock) are linked, not restated.
+- s2: CDC-DYO, READY, FEMA-COMM p. 13 (90%); CDC-SD "Be very careful in removing your clothing to prevent inhaling
+  radioactive dust released from shaking."; READY "Be very careful in removing your clothing to prevent radioactive dust
+  from shaking loose."; shoes: FEMA-PG3 p. 107 "Remove contaminated clothes and shoes and place them in a bag." and FEMA-COMM
+  Message B "remove shoes and outer clothing". Where: CDC-GI "Carefully remove your outer layer of clothing before entering
+  the building, if you can."; FEMA-COMM p. 40 "Remove the outer layer after you are safely inside." Conflict, both stated
+  (D86). CDC-CAUSES/CDC-KIDS "Try to avoid spreading contamination to parts of the body that may not be contaminated, such
+  as areas that were clothed."; READY "Avoid touching your eyes, nose, and mouth, if possible." Warn "Do not shake the
+  clothes out": from the CDC-SD and READY "shaking loose" sentences.
+- s3: CDC-SD "Put the clothing in a plastic bag or other sealable container and put the bag far away from other people and
+  pets."; CDC-KIDS "If possible, place the clothing in a plastic bag or leave it in an out-of-the-way area, such as the
+  corner of a room." / "Keep people away from it"; RC "place your contaminated clothing in a plastic bag and seal or tie the
+  bag"; CDC-KIDS "Keep cuts and abrasions covered when handling contaminated items".
+- s4 (wash): CDC-SD "Take a warm shower and gently wash yourself with lots of soap." / "Do not scald, scrub, or scratch your
+  skin." / "Wash your hair with shampoo or soap."; CDC-DYO "Do not use conditioner because it will cause radioactive
+  material to stick to your hair."; RC "Do not use conditioner in your hair because it will bind radioactive material to
+  your hair"; FEMA-PG3 p. 107 "If washing your hair, do not use conditioner." / "When showering, try to direct rinse water
+  away from face and body." / "Keep materials out of eyes, nose, mouth, and wounds."; FEMA-COMM p. 14 "Wash gently; do not
+  scald, scrub, or scratch your skin." No shower: CDC-SD "At a sink or faucet, wash your hands, face, and parts of your body
+  that were not covered." / "Use soap and plenty of water." / moist wipe, clean wet cloth, damp paper towel / "Pay special
+  attention to your hands and face."; READY "If you cannot wash, use a wipe or clean wet cloth to wipe any skin or hair that
+  was not covered." Cuts: CDC-SD "Keep cuts and abrasions covered when washing to stop radioactive material from getting in
+  open wounds." FEMA-COMM p. 14 "Although the best way to self-decontaminate is to shower and completely change your
+  clothes, you can still remove most of the radioactive material even without water or a change of clothes." CDC-SD "You can
+  still use tap water for decontamination."; FEMA-PG3 p. 100 "When water is scarce or needed to fight fires, wet wipes or dry
+  methods can be used for decontamination." READY "Do not use household cleaning wipes on your skin." / "Hand sanitizer
+  does not protect against radioactive material." Water temperature: CDC-SD "warm", CDC-KIDS "lukewarm", FEMA-PG3 "warm",
+  NYS-RRC "tepid"; written "warm (not hot)" with CDC's "do not scald".
+- s5: CDC-SD "Gently blow your nose and wipe your eyelids, eyelashes, and ears" with "a moist wipe, a clean wet cloth, or a
+  damp paper towel"; RC and FEMA-COMM p. 14 the same; bagging: CDC-SD "Put the used wipes, cloth, or towel in a plastic bag
+  or other sealable container." and READY "Seal these towels or cleaning cloths in a plastic bag and place them away from
+  people and pets."; FEMA-COMM p. 14. Eye: Eye injury protocol (checked) s10 "Grit, dust or an eyelash: do not rub. ...
+  rinse the eye with clean tap water or eyewash" (linked; NYS-RRC "For eyes, flush with plenty of water" agrees).
+- s6: CDC-DYO "Clothes stored in a closet or drawer away from radioactive material are safe to wear." (written "can be
+  worn"); FEMA-COMM p. 14 "Use clothing stored in a closet, drawer, or other covered area, if possible." / "It is much less
+  likely to have any radioactive materials on it." No clean clothes: CDC-DYO "Take off your outer layer of clothing, shake
+  or brush off your clothes, and put your clothes back on." / "Rewash your hands, face, and exposed skin at a sink or
+  faucet."; FEMA-COMM p. 14 "brush or wipe off your clothing as best as you can away from other people or pets." / "Cover
+  your nose and mouth with a cloth or mask if you can, so you don't swallow any hazardous particles you shake loose."
+- s7 (wounds, burns): FEMA-COMM p. 10 "If you're wounded, apply pressure to stop any bleeding then decontaminate the area
+  around the wound and wrap physical injuries or lightly wrap burn injuries." Clinician wording (not used as a lay step,
+  D82): CDC-JIT "Cleanse wounds first, then orifices, then intact skin." / "Use gentle, repeated irrigations to cleanse
+  wounds"; NYS-RRC "Priority efforts should be directed to decontamination of open wounds." Wound cleaning and care and
+  Burns are linked, not restated (D83 for burn cooling). Radiation burn pointer: FEMA-COMM p. 47.
+- s8 (help others): FEMA-COMM p. 15 "After decontaminating yourself, help others who might not be able to self-decontaminate
+  on their own, such as babies and children, people with disabilities, people with access or functional needs, older
+  adults, or pets."; CDC-HELP "If you have infants, small children, or others who may need help washing, wash yourself
+  first." Letting people in: FEMA-COMM Message B "Allowing others to come inside with you can save their lives." / "The
+  particles are dangerous, but the people themselves are not." / "If they can, they should remove shoes and outer clothing."
+  / "Have them shower, if possible, or wipe themselves off at a sink."; CDC-GI "Providing shelter to someone who was outside
+  during a radiation emergency can save their life without endangering your own." Children: CDC-FAQ "Children are more
+  likely to develop health effects from radiation exposure." Breastfeeding: CDC-KIDS "Pregnant women should take extra
+  precautions during a radiation emergency." / "They should consider not breastfeeding if other milk sources are available
+  until they can see their healthcare professional." (D85).
+- s9 (helper protection): FEMA-COMM p. 15 "If available, put on something to cover your clothing." / "Wear waterproof gloves
+  and a mask (or other material to cover your nose and mouth) if you can." / "Cover cuts and scrapes (yours and those of
+  anyone you are helping) when washing to keep radioactive material out of the wound."; CDC-DYO "Wear waterproof gloves and
+  a dust mask if you can." Not dangerous: NYS-RRC "Externally exposed patients do not become radioactive and therefore they
+  do not pose a risk to EMS or other first responders." / "It is important to understand that a person who has been exposed
+  to radiation is unlikely to pose a radiological health risk to any other person." Body fluids: CDC-CAUSES "Body fluids
+  (blood, sweat, urine) can contain radioactive materials if you are contaminated." / "Making sure that others do not come
+  in contact with dust or body fluids from a person with contamination will help prevent contamination of other people in
+  the home."
+- s10: FEMA-COMM p. 15 "After helping others, decontaminate yourself again to make sure no radioactive materials are on you
+  from the person or animals you helped."; CDC-DYO "Rewash your hands, face, and exposed skin at a sink or faucet."
+- s11 (pets): CDC-PETS "Wash your pet carefully with shampoo or soap and water and rinse completely." / "Wear waterproof
+  gloves and a dust mask (or other material to cover your mouth) if you can." / "Keep cuts and abrasions (both yours and
+  your pets) covered" / "Wash your hands and face after washing your pet."; FEMA-COMM p. 15 "Wash your pet thoroughly with
+  shampoo and water and rinse completely." / "If you cannot wash your pet, brush, or wipe off your pet with a wet cloth or a
+  paper towel." / "Some pets tend to shake themselves off, so be careful of contamination." / "Contaminated animals, if not
+  properly decontaminated, can contaminate people or objects."; READY "Gently brush your pet's coat to remove any radioactive
+  particles and wash your pet with soap and water, if available."; FEMA-PG3 p. 210 "Animals cross-contaminating owners,
+  especially children who pet them, present a health risk."; FEMA-COMM p. 95/97 "Keep pets indoors."
+- s12 (belongings): FEMA-COMM pp. 15 to 16 "After you are inside and have self-decontaminated, you can decontaminate other
+  essential belongings, such as wallets, jewelry, or assistive medical devices, such as wheelchairs, prosthetic limbs, or
+  hearing aids." / "Clean essential belongings and assistive medical devices the same way you would remove dirt or sand
+  from" / "Use a damp cloth or towel or wet wipe to wipe down surfaces and wear waterproof gloves" / "If an item cannot be
+  decontaminated and you don't immediately need it, put it in a bag" / "Wait for further instructions from officials." Home:
+  CDC Stay Inside (batch A record) via Living in a closed-up house.
+- s13: CDC-ARS (symptoms, minutes to days, come and go); FEMA-COMM p. 47 (beta burns hours to days); FEMA-COMM p. 46 stress
+  sentence. Pointer to How long to stay in and Leaving and moving after fallout; no rule of its own.
+- Do not list: each line carries its source above. Evacuate list: worded as needs (brief), opening with the pointer line;
+  "serious, life-threatening injury" FEMA-COMM p. 40; radiation sickness and burns FEMA-COMM pp. 46 to 47, CDC-FAQ; wounds and
+  burns by link to the checked protocols.
+- Looked for, not found: a public source on cleaning radioactive dust out of a wound (D82); on decontaminating a baby
+  specifically (only "wash yourself first" and FEMA's list); on contact lenses or glasses (not mentioned in any source
+  opened; glasses not named in s12); a current NYS public page.
+
+### radiation-sickness
+
+Category environment; not advanced. Danger-sign screen in the order of the checked Severe vomiting or diarrhea protocol
+(responsive and breathing, then alertness, then shock), then the radiation-specific steps.
+
+- s1, s20: wording and CPR pointer as in Severe vomiting or diarrhea (checked). "Do not delay CPR to clean them off":
+  FEMA-PG3 pp. 76, 99, 110; NYS-RRC.
+- s2, s21: FEMA-PG3 p. 194 "N-ARS is commonly lethal hours to days post-exposure." / "Symptoms include headache, nausea,
+  vomiting, confusion, altered mental status, fever, hypotension, seizures, and coma."; FEMA-COMM p. 40 "If you or anyone
+  you are sheltering with experiences the onset of severe symptoms, such as significant trouble breathing, or changes in
+  mental status, call 911." (911 not written; "needs urgent medical care" instead). Nothing by mouth, recovery position and
+  other causes: as in Severe vomiting or diarrhea s21 (checked).
+- s3, s22: FEMA-PG3 p. 193 "Initially, GI-ARS symptoms include nausea, vomiting, and diarrhea, potentially causing
+  dehydration"; shock care by link (Shock, checked).
+- s4: CDC-FAQ "It is important to get radioactive material off your body as soon as possible to lower your risk of harm.";
+  90% as above; helpers FEMA-COMM p. 15.
+- s5 (signs): CDC-ARS "Acute Radiation Syndrome (ARS), or radiation sickness, is a serious illness." / "It can happen when
+  you are exposed to very high levels of radiation, usually over a short period of time." / "These symptoms start within
+  minutes to days after the exposure." / "They can last for minutes up to several days and may come and go." / "After the
+  initial symptoms, you usually look and feel healthy for a period of time." / "This damage can start to show within a few
+  hours after exposure or it may be delayed for several days." / "temporary hair loss"; CDC-FAQ "Symptoms of Acute
+  Radiation Syndrome (ARS), or radiation sickness, may include nausea, vomiting, headache and diarrhea."; FEMA-COMM p. 46
+  "When a person becomes sick again, their symptoms could include loss of appetite, fatigue, fever, nausea, vomiting,
+  diarrhea, and possibly even seizures and coma." / "This seriously ill stage might last from a few hours up to several
+  months." / "White blood cells are needed for preventing and fighting infections." / "Most deaths that occur from acute
+  radiation syndrome are due to infections or internal bleeding." Early vomiting (spec 5: "only as a source states it"):
+  FEMA-PG3 p. 81 "Time to vomiting: vomiting onset time after exposure can indicate radiation dose received, with higher
+  doses causing earlier vomiting onset; however, many other factors besides radiation can induce vomiting." FEMA-COMM p. 46
+  "It is very common and understandable for people who have not been exposed to radiation to show similar symptoms due to
+  stress from the incident." / "If you experience these symptoms shortly after the incident and you were inside at the time,
+  it is most likely not caused by radiation exposure." FEMA-PG3 p. 76 "the symptoms of ARS are non-specific ... such as
+  nausea and vomiting, may occur without exposure." Not used: CDC-JIT "Serious systemic radiation injury, or acute radiation
+  syndrome, will always induce nausea and vomiting." (clinician teaching; would invite the reverse reading) and CDC-ARS-HCP
+  Table 1 onset windows by syndrome (clinician dose staging). D84.
+  Conflict: FEMA-COMM p. 46 says these symptoms "might appear within days to weeks after exposure" and also "minor symptoms
+  within a few hours"; CDC-ARS says "within minutes to days". The protocol uses CDC's wording (the earlier start, so nobody
+  waits); FEMA's "weeks" appears through the later-signs step.
+- s6: CDC-JIT "Duration of exposure, location, and time of onset of nausea and vomiting are major diagnostic factors.";
+  FEMA-PG3 p. 76 "The physical location and medical history of triaged populations should be recorded alongside contact
+  information in case follow-up is needed for medical care, biodosimetry, or epidemiological study."
+- s7: CDC-ARS and FEMA-COMM p. 51 "Treatments for acute radiation syndrome focus on reducing infections, maintaining
+  hydration, and treating major injuries and burns."; FEMA-PG3 p. 193 (dehydration). Fluids, warnings and hygiene by link
+  to Severe vomiting or diarrhea and Dehydration (checked; the warn line is theirs word for word). Body fluids: CDC-CAUSES.
+- s8: FEMA-COMM p. 46 (bone marrow, white blood cells, infection deaths); CDC-ARS "The cause of death in most cases is the
+  destruction of the person's bone marrow." / "This results in infections and internal bleeding."; CDC-ARS-HCP "Supportive
+  care in an environment that provides neutropenic precautions". The three home measures are this app's judgement, labelled
+  in the detail (D81). Infection signs by link to Wound cleaning and care (checked).
+- s9: FEMA-COMM p. 47 "Exposure to high doses of radiation can cause severe sunburn-like burns, which are sometimes referred
+  to as beta burns" / "Unlike thermal burn injuries that appear immediately, beta burns appear a few hours to several days
+  after exposure." / "Symptoms include itchiness, tingling, skin redness, and swelling caused by buildup of fluid." / "Seek
+  medical care immediately if you think you have a beta burn." / "The key treatments for beta burns are infection
+  prevention and pain management."; FEMA-PG3 p. 194 "there may be a much greater depth of injury for radiation burns than
+  thermal burns"; p. 193 "Later symptoms result in blisters, ulcers, itchiness, tingling, epilation (hair loss), erythema,
+  and edema". Burns (checked) evacuate list: "Get medical care: every electrical, lightning, chemical, radiation or
+  explosion burn, even a small one." — agrees.
+- s10: NYS-RRC "The acute radiation syndrome follows a predictable pattern that unfolds over several days or weeks" /
+  "Specific symptoms of concern, especially following a 2-3 week period with nausea and vomiting, are:" / "thermal
+  burn-like skin lesions without documented heat exposure;" / "a tendency to bleed (nosebleeds, gingival (gum) bleeding,
+  bruising);" / "hair loss." / "These symptoms may not appear immediately; it may take several days or weeks before
+  symptoms are observed."; FEMA-COMM p. 46 (loss of appetite, fatigue, fever).
+- s11: NYS-RRC (two sentences above); FEMA-COMM Message B; CDC-GI (without endangering your own); CDC-CAUSES (body fluids);
+  NYS-RRC "Ambulance personnel attending victims should wear gloves."
+- s12: CDC-FAQ "If you have symptoms of ARS (skin burns, nausea, or vomiting) seek medical attention as soon as it is safe
+  to leave your building or shelter." (written "once emergency officials say you can leave"; CDC-ARS "seek medical attention
+  after emergency officials say it is safe"); FEMA-COMM p. 46 "If you were near the incident and experience these symptoms,
+  seek medical assistance."; p. 47 beta burn; p. 40 "If applicable to the medical facility situation: Only those with
+  serious, life-threatening injuries should seek medical care, because medical facilities are overwhelmed." (D87);
+  FEMA-COMM p. 51 "Medical professionals will determine if medical treatments are appropriate, which treatment, who should
+  participate, and how much."; CDC-FAQ "Medical professionals will determine if treatments are needed."; FEMA-COMM p. 63
+  "Children are generally more likely to develop health effects from radiation exposure than adults." / "exposure to high
+  amounts of radiation can further damage your immune system" / "Medical treatments for radiation exposures might be less
+  effective in people who are immunocompromised."; p. 59 "After any radiation incident, it is highly unlikely that exposure
+  will cause damage to the fetus." / "Fetuses are at highest risk during their early development, roughly between weeks 2
+  and 18 of pregnancy."; p. 51 "The lower the radiation exposure, the more likely it is that the person will recover from
+  acute radiation syndrome, even without medical treatment." / "For survivors of acute radiation syndrome, the recovery
+  process might last from several weeks to up to 2 years." Recheck interval: group judgement, labelled.
+- Do not list and evacuate list: sources as above; evacuate entries are needs, opening with the pointer line.
+- Looked for, not found: any public source on caring for radiation sickness at home without a hospital beyond fluids and
+  "reducing infections" (D81); a current public statement that radiation sickness is "not contagious" in those words (the
+  protocol uses NYS-RRC's and FEMA's wording instead); how long after exposure symptoms stop being likely from radiation.
+
+### Batch P agreement with checked topics and protocols
+
+- Burns, Vomiting or diarrhoea, Wound cleaning and care, Dehydration, Shock, Eye injury, Seizure, Recovery position, CPR,
+  Severe bleeding: linked by title, never edited or reworded. The drinks warning in radiation-sickness s7 is the checked
+  protocols' line word for word. Burns' "every ... radiation ... burn ... needs medical care" agrees with FEMA-COMM p. 47.
+- Help wording: the standard line ("Call 911 if you have signal. If not, send someone for help and prepare to move the
+  casualty.") is not used in either protocol, because sending someone out is leaving shelter, which Leaving and moving after
+  fallout owns (spec 10 call 14). The protocols say what needs medical care and name that topic. The checked protocols they
+  link to still carry the line (D80).
+- Batch A topics: How long to stay in and Leaving and moving after fallout are named, not restated; coming-in rules agree
+  with the hub ("They take off their outer layer of clothes before they come in, if they can (CDC)") and Living in a
+  closed-up house ("Put them in a bag (Ready.gov)"). New finding for Living in a closed-up house (not edited): D88.
+- No "safe", no 911, no dose, no potassium iodide in either protocol (checked by the new test).
+
+### Batch P fix round (2026-11-18), from task-4-review.md
+
+Draft removed from both protocols after these fixes. FEMA-COMM and CDC-KIDS re-opened by web fetch for I1, I2 and M1.
+
+- I1 (breastfeeding): decontamination s8 detail now gives CDC-KIDS in order: "It is possible for nursing mothers to pass
+  radioactive materials to their babies through their breastmilk." / "They should consider not breastfeeding if other milk
+  sources are available until they can see their healthcare professional." and, separately, "Pregnant women should take
+  extra precautions during a radiation emergency." Correction to the s8 record above: "They" means nursing mothers. D85
+  rewritten.
+- I2 (wounds): FEMA-COMM p. 40 "If you are injured and need to self-decontaminate, clean around the wound," / "and then treat
+  your injury as you would an ordinary injury." / "Get a health care professional to decontaminate your wound once you have
+  access to one."; p. 41 "It is important to treat your physical injuries." / "Apply the appropriate treatments, even if there
+  is concern that it might result in some radiation contamination."; p. 10 Message 8 "Get a health care professional to
+  decontaminate the wound when you're able to see one." Added to decontamination s7 detail (all four) and s20 detail (p. 41).
+  The record's "Looked for, not found: a public source on cleaning radioactive dust out of a wound" is withdrawn: FEMA-COMM
+  answers it (a professional, when reachable). D82 and D83 rewritten around these sentences.
+- M1: decontamination s2 detail now cites FEMA-COMM p. 8 ("Those entering the location can easily self-decontaminate by
+  removing shoes and outer clothing and/or brushing or wiping off fallout particles immediately after they enter.") instead
+  of p. 40, whose "Remove the outer layer after you are safely inside." is about the extra layer worn to travel for care.
+  D86 cites p. 8 and Message B (p. 96).
+- M2: sickness s10 detail quotes NYS-RRC verbatim: "Specific symptoms of concern, especially following a 2-3 week period
+  with nausea and vomiting, are".
+- M3: sickness s11 text "Once they are cleaned off, they are unlikely to be a danger to you."; donts[5] "unlikely to pose a
+  risk to others"; decontamination s9 detail "unlikely to be a danger to you". CDC-CAUSES added beside the body-fluids
+  line in both: "you can expose people near you to radiation from the radioactive material inside your body".
+- M4: decontamination s11 text "Wear gloves and a mask if you can." (CDC-PETS, FEMA-COMM).
+- M5: decontamination s12 text and detail add "away from people and pets" (FEMA-COMM p. 16). s12 text shortened to stay
+  under 200 characters ("Wipe the things you need, such as wallets, jewellery, wheelchairs or hearing aids, as you
+  would wipe off dirt. ...").
+- M6: sickness s9 text "It needs medical care; see detail for what to do meanwhile." Detail points to the Burns protocol
+  only for covering (its step 8), pain (its step 9) and to Wound cleaning and care for infection signs, for FEMA-COMM p. 47's
+  "infection prevention and pain management"; cooling a burn that appears later is logged as D89 (medical professional).
+- M7: decontamination s20 and sickness s21, s22 details quote surv-fallout-warning.json Do first 3 word for word: "Leave only
+  if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you
+  to (Ready.gov)." and keep naming Leaving and moving after fallout (Survival) (title confirmed by the controller).
+- M8: the test is now RadiationProtocols.test_radiation_protocols_keep_the_pack_rules, a unittest method using self.assert*,
+  so both `python3 -m unittest tests.test_validate` and pytest collect it.
+- M9: corrections to the record above: FEMA-COMM treatment text ("Treatments for acute radiation syndrome focus on reducing
+  infections, maintaining hydration, and treating major injuries and burns.") is on p. 52, not p. 51; the "It is important to
+  treat your physical injuries" pair is on p. 41. The CDC-KIDS source line keeps "undated, read 2026-11-18".
+- D88 extended with the rest of FEMA-COMM section 3.3.5 (p. 16), as quoted by the reviewer and in the re-opened page. No
+  Survival topic edited.

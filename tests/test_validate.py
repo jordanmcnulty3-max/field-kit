@@ -776,3 +776,32 @@ class ToolDataValidation(unittest.TestCase):
         t = tooldata(draft=True); before = copy.deepcopy(t)
         validate_tooldata([t])
         self.assertEqual(t, before)
+
+
+def test_radiation_protocols_keep_the_pack_rules():
+    # Radiation pack (spec 2, 7, 10 calls 3 and 14): no "safe", no dial text, no dose or pill, and the rule for
+    # leaving shelter is owned by the Survival topic, which both protocols name instead of carrying their own.
+    import json, os, re
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    def strings(v):
+        if isinstance(v, str):
+            yield v
+        elif isinstance(v, dict):
+            for x in v.values():
+                yield from strings(x)
+        elif isinstance(v, list):
+            for x in v:
+                yield from strings(x)
+
+    leaving = os.path.join(root, 'src', 'survival', 'surv-fallout-leaving.json')
+    leaving_title = json.load(open(leaving, encoding='utf-8'))['title'] if os.path.exists(leaving) else 'Leaving and moving after fallout'
+    for pid in ('radiation-decontamination', 'radiation-sickness'):
+        p = json.load(open(os.path.join(root, 'src', 'protocols', pid + '.json'), encoding='utf-8'))
+        shown = [s for k, v in p.items() if k not in ('sources', 'id') for s in strings(v)]
+        text = '\n'.join(shown)
+        assert not re.search(r'\bsafe', text, re.I), pid
+        assert '911' not in text and 'potassium iodide' not in text.lower(), pid
+        assert not re.search(r'\d\s*(gy|rad|rem|sv|msv)\b', text, re.I), pid
+        assert leaving_title in text, (pid, leaving_title)
+        assert p['evacuate'][0].startswith('This list says what needs medical care.'), pid

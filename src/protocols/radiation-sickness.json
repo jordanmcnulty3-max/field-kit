@@ -1,0 +1,192 @@
+{
+  "id": "radiation-sickness",
+  "title": "Radiation sickness",
+  "category": "environment",
+  "draft": true,
+  "keywords": [
+    "radiation sickness",
+    "radiation poisoning",
+    "acute radiation syndrome",
+    "ars",
+    "radiation burn",
+    "beta burn",
+    "fallout sickness",
+    "nausea after fallout",
+    "vomiting after nuclear",
+    "sick after fallout",
+    "hair falling out",
+    "bleeding gums",
+    "radiation exposure",
+    "nuclear fallout",
+    "is it contagious",
+    "caring for radiation victim"
+  ],
+  "summary": "Nausea, vomiting, headache or diarrhoea after being out in fallout or near the explosion: check for danger signs, clean them off, keep up fluids, protect them from infection, watch the skin and for bleeding, and note when it started. They are not dangerous to care for.",
+  "steps": [
+    {
+      "id": "s1",
+      "text": "Check: do they respond? Are they breathing normally?",
+      "detail": "Gasping or occasional breaths are not normal breathing. If you are not sure, treat it as not breathing normally.",
+      "ask": {
+        "q": "Are they unresponsive and not breathing normally?",
+        "yes": "s20",
+        "no": "s2"
+      }
+    },
+    {
+      "id": "s2",
+      "text": "Are they confused, very drowsy or hard to wake, having a seizure, or having real trouble breathing?",
+      "detail": "FEMA lists confusion, altered mental status, seizures and coma among the signs of the most severe form of radiation sickness (FEMA planning guidance), and tells people to get help for severe symptoms such as significant trouble breathing or changes in mental status (FEMA, Communicating in the Immediate Aftermath).\n\nThese signs can have other causes with their own protocols: a head injury, fumes from a stove or heater (Carbon monoxide poisoning), low blood sugar, or severe dehydration.",
+      "ask": {
+        "q": "Confused, very drowsy, a seizure, or real trouble breathing?",
+        "yes": "s21",
+        "no": "s3"
+      }
+    },
+    {
+      "id": "s3",
+      "text": "Are there signs of shock: pale or grey, cool, clammy skin, a fast weak pulse, fast breathing?",
+      "detail": "Vomiting and diarrhoea from radiation sickness can cause dehydration (FEMA planning guidance), and injuries or burns from the explosion can cause shock. A person in shock gets nothing by mouth (Shock protocol).",
+      "ask": {
+        "q": "Are there signs of shock?",
+        "yes": "s22",
+        "no": "s4"
+      }
+    },
+    {
+      "id": "s4",
+      "text": "If they have not been cleaned off yet, do it now with the Radiation decontamination protocol. Wear gloves and cover your nose and mouth if you can.",
+      "detail": "Getting radioactive material off the body as soon as possible lowers the risk of harm (CDC). Taking off the outer layer of clothing can remove up to 90% of it (CDC, FEMA).\n\nHelpers: waterproof gloves and a mask or cloth over the nose and mouth if you can, cuts covered, and clean yourself again afterwards (FEMA, Communicating in the Immediate Aftermath)."
+    },
+    {
+      "id": "s5",
+      "text": "Know the signs: nausea, vomiting, headache and diarrhoea, starting minutes to days after exposure. They may come and go, and the person may seem well for a time before getting sick again.",
+      "detail": "Radiation sickness (acute radiation syndrome) is a serious illness that can follow exposure to very high levels of radiation, usually over a short time (CDC). Symptoms may include nausea, vomiting, headache and diarrhoea; they start within minutes to days after the exposure, can last for minutes up to several days, and may come and go (CDC). After the first symptoms the person usually looks and feels healthy for a while, then becomes sick again (CDC, FEMA).\n\nWhen they become sick again, symptoms could include loss of appetite, tiredness, fever, nausea, vomiting, diarrhoea, and possibly seizures and coma; this stage might last from a few hours up to several months (FEMA, Communicating in the Immediate Aftermath). Radiation damages the bone marrow, which makes the blood cells that fight infection; most deaths from radiation sickness are from infection or internal bleeding (FEMA, CDC). Skin damage can show within a few hours or be delayed for several days, and hair loss can follow (CDC).\n\nWhat early vomiting means: FEMA's guidance for planners says that the more radiation a person received, the sooner vomiting tends to start, but that many other things besides radiation can cause vomiting (FEMA planning guidance). FEMA's public guidance says it is very common for people who were not exposed to have the same symptoms from stress, and that symptoms shortly after the explosion in someone who was inside at the time are most likely not caused by radiation (FEMA, Communicating in the Immediate Aftermath). This app cannot tell from symptoms how much radiation someone received (see the open question).",
+      "log": "Radiation sickness: symptoms noted"
+    },
+    {
+      "id": "s6",
+      "text": "Note when the symptoms started, especially the first vomiting, and where they were and for how long. Keep it with them for whoever gives medical care.",
+      "detail": "Clinicians use the duration of exposure, where the person was, and the time the nausea and vomiting started as major clues (CDC clinician training). FEMA's planning guidance asks that where people were, and their medical history, be recorded in case follow-up care is needed. The Patient log in Tools keeps timed notes."
+    },
+    {
+      "id": "s7",
+      "text": "Vomiting or diarrhoea: if they are fully alert, give small, frequent sips. Use the Severe vomiting or diarrhea protocol, and the Dehydration protocol for what to give.",
+      "warn": "No drinks if they are drowsy, confused, in shock, or cannot swallow.",
+      "detail": "Treatment of radiation sickness focuses on reducing and treating infections, maintaining hydration, and treating injuries and burns (CDC, FEMA). Vomiting and diarrhoea from radiation sickness can cause dehydration (FEMA planning guidance).\n\nThe Severe vomiting or diarrhea protocol covers the warning signs, sips and hygiene; the Dehydration protocol covers oral rehydration solution and the home-made recipe. Which water and food can be used is in Water and food after fallout (Survival).\n\nVomit and diarrhoea from someone with radioactive material inside the body can carry it (CDC): clean it up with gloves, as the Severe vomiting or diarrhea protocol describes.",
+      "log": "Oral fluids started"
+    },
+    {
+      "id": "s8",
+      "text": "Protect them from infection: wash your hands before and after caring for them, keep their wounds and burns clean and covered, and keep anyone with a cough, cold or stomach bug away.",
+      "detail": "Most deaths from radiation sickness are due to infection or internal bleeding, because radiation damages the bone marrow that makes the white blood cells that fight infection (FEMA, Communicating in the Immediate Aftermath; CDC). Treatment focuses on reducing and treating infections (CDC, FEMA). In hospital, CDC's clinician guidance gives supportive care with precautions against infection (CDC clinician guidance).\n\nNo source opened says what a lay person should do about infection at home. Hand washing, clean covered wounds and keeping sick people away are this app's judgement, drawn from those facts (see the open question). For wounds use the Wound cleaning and care protocol; for hand washing with little water, see Washing hands with little water (Survival).\n\nFever (FEMA lists it among the later signs), or a wound that turns red, swollen, warm or smelly (Wound cleaning and care protocol), can mean infection: that needs medical care."
+    },
+    {
+      "id": "s9",
+      "text": "Watch the skin: itching, tingling, redness or swelling hours to days later, on skin that was not near heat, can be a radiation burn. Care for it with the Burns protocol.",
+      "detail": "FEMA: high levels of radiation can cause severe sunburn-like burns (beta burns). Unlike heat burns, which appear at once, they appear a few hours to several days after exposure. Symptoms include itchiness, tingling, skin redness and swelling. Seek medical care immediately if you think you have one. The key treatments are infection prevention and pain management (FEMA, Communicating in the Immediate Aftermath). FEMA's planning guidance adds that radiation burns may go much deeper than heat burns.\n\nLater signs include blisters, ulcers and hair loss (FEMA planning guidance). The Burns protocol says every radiation burn, even a small one, needs medical care."
+    },
+    {
+      "id": "s10",
+      "text": "Over the following weeks, watch for nosebleeds, bleeding gums, easy bruising, fever, hair loss and burn-like sores. Any of these needs medical care.",
+      "detail": "New York State Department of Health (card for responders and clinicians): radiation sickness follows a predictable pattern over several days or weeks; symptoms of concern, especially after a 2 to 3 week period following nausea and vomiting, are burn-like skin sores without heat exposure, a tendency to bleed (nosebleeds, gum bleeding, bruising), and hair loss. Symptoms may take several days or weeks to appear.\n\nFEMA: when a person becomes sick again, symptoms could include loss of appetite, tiredness and fever (FEMA, Communicating in the Immediate Aftermath).\n\nFor heavy bleeding, use the Severe bleeding protocol."
+    },
+    {
+      "id": "s11",
+      "text": "Caring for them is not dangerous once they are cleaned off. Wear gloves for vomit, diarrhoea, urine and blood, and wash your hands afterwards.",
+      "detail": "New York State Department of Health: externally exposed patients do not become radioactive, and a person who has been exposed to radiation is unlikely to pose a radiological health risk to any other person. FEMA: \"The particles are dangerous, but the people themselves are not.\" CDC: providing shelter to someone who was outside can save their life without endangering your own.\n\nIf radioactive material is inside someone's body, their body fluids (blood, sweat, urine) can contain it, and touching them can spread it; keep others from contact with dust or body fluids from them (CDC, What Causes Contamination versus Exposure). The New York State card tells responders to wear gloves.",
+      "log": "Radiation sickness: care given"
+    },
+    {
+      "id": "s12",
+      "text": "Radiation sickness needs medical care. Keep up drinks if they are alert, and keep them clean. Whether and when to leave shelter for care is in Leaving and moving after fallout (Survival).",
+      "detail": "CDC: if you have symptoms of radiation sickness (skin burns, nausea or vomiting), seek medical attention once emergency officials say you can leave. FEMA: if you were near the incident and have these symptoms, seek medical assistance; seek medical care immediately if you think you have a radiation burn (FEMA, Communicating in the Immediate Aftermath). Medical professionals decide which radiation medicines, if any, a person needs (FEMA, CDC).\n\nFEMA's public messages also say that when medical facilities are overwhelmed, only those with serious, life-threatening injuries should seek medical care (see the open question).\n\nMost at risk: children are more likely than adults to develop health effects from radiation (CDC, FEMA). People with weakened immune systems can be harmed more, and treatment may work less well for them (FEMA). In pregnancy, FEMA says it is highly unlikely that exposure after a radiation incident will harm the unborn baby, and that the risk is highest roughly between weeks 2 and 18 (FEMA, Communicating in the Immediate Aftermath).\n\nThe lower the radiation a person received, the more likely they are to recover, even without medical treatment; recovery can take from several weeks up to 2 years (FEMA, CDC).\n\nRecheck the danger signs (confusion, seizures, trouble breathing, signs of shock) every time you check on them; if one appears, go back to the start of this protocol (group judgement; no source gives an interval).",
+      "end": true
+    },
+    {
+      "id": "s20",
+      "text": "Start CPR now: use the CPR, adult protocol (or CPR, child or CPR, infant).",
+      "detail": "Do not delay CPR to clean them off: life-saving care comes first (FEMA, New York State Department of Health). If you can do it without delay, wear gloves, and take off their outer clothing later (Radiation decontamination protocol).",
+      "end": true
+    },
+    {
+      "id": "s21",
+      "text": "Give nothing by mouth. If they are breathing, lie them on their side (Recovery position protocol). For a seizure, use the Seizure protocol. This needs urgent medical care.",
+      "detail": "Confusion, seizures and coma can be signs of the most severe radiation sickness (FEMA planning guidance), and FEMA's public messages treat significant trouble breathing or changes in mental status as severe symptoms that need help at once (FEMA, Communicating in the Immediate Aftermath). Think of other causes and use their protocols too: a head injury (Head injury and concussion), fumes from a stove, heater or engine (Carbon monoxide poisoning), diabetes (Low blood sugar), or dehydration.\n\nWatch their breathing all the time. If they stop breathing normally, start CPR (CPR, adult protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter: see Leaving and moving after fallout (Survival).",
+      "end": true
+    },
+    {
+      "id": "s22",
+      "text": "Signs of shock: give nothing by mouth. Use the Shock protocol. This needs urgent medical care.",
+      "detail": "Treat the cause if you can: stop bleeding first (Severe bleeding protocol). Severe fluid loss from vomiting and diarrhoea can also cause shock (Severe vomiting or diarrhea protocol).\n\nIf they vomit, roll them onto their side (Recovery position protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter: see Leaving and moving after fallout (Survival).",
+      "end": true
+    }
+  ],
+  "donts": [
+    "Do not delay CPR or other life-saving care to clean someone off (FEMA, New York State Department of Health).",
+    "Do not give drinks to anyone who is confused, very drowsy, in shock, or unable to swallow.",
+    "Do not touch vomit, diarrhoea, urine or blood with bare hands (CDC).",
+    "Do not give any medicine for radiation unless a medical professional or official says to (FEMA, CDC).",
+    "Do not judge how much radiation someone received from when they started vomiting: stress and other illnesses cause the same signs (FEMA).",
+    "Do not treat a person who was exposed as dangerous to be near: once cleaned off, they are not (New York State Department of Health, FEMA)."
+  ],
+  "evacuate": [
+    "This list says what needs medical care. During a fallout warning, whether and when to leave shelter to reach it is covered in Leaving and moving after fallout (Survival).",
+    "Needs urgent medical care: unresponsive, confused or very drowsy, a seizure, significant trouble breathing, or signs of shock (FEMA; Shock protocol).",
+    "Needs medical care now: a possible radiation burn (itching, tingling, redness or swelling hours to days later on skin not near heat) (FEMA).",
+    "Needs medical care: nausea, vomiting, headache or diarrhoea after being near the explosion or out in fallout (FEMA, CDC), and the warning signs in the Severe vomiting or diarrhea and Dehydration protocols.",
+    "Needs medical care: nosebleeds, bleeding gums, easy bruising, hair loss or burn-like sores in the weeks after (New York State Department of Health), fever, or an infected wound."
+  ],
+  "sources": [
+    {
+      "name": "US CDC, Acute Radiation Syndrome (public page), last reviewed April 10, 2024",
+      "year": 2024,
+      "url": "https://www.cdc.gov/radiation-emergencies/signs-symptoms/acute-radiation-syndrome.html"
+    },
+    {
+      "name": "US CDC, Acute Radiation Syndrome: Information for Clinicians, last reviewed April 23, 2024",
+      "year": 2024,
+      "url": "https://cdc.gov/radiation-emergencies/hcp/clinical-guidance/ars.html"
+    },
+    {
+      "name": "US CDC, Frequently Asked Questions about Radiation Emergencies, updated April 12, 2024",
+      "year": 2024,
+      "url": "https://cdc.gov/radiation-emergencies/faq/index.html"
+    },
+    {
+      "name": "US CDC, What Causes Contamination versus Exposure, last reviewed April 10, 2024",
+      "year": 2024,
+      "url": "https://cdc.gov/radiation-emergencies/causes"
+    },
+    {
+      "name": "US CDC, What to Do: Get Inside, last reviewed April 15, 2024",
+      "year": 2024,
+      "url": "https://cdc.gov/radiation-emergencies/response/get-inside.html"
+    },
+    {
+      "name": "US CDC, Radiation Emergencies and Children (undated, read 2026-11-18)",
+      "year": 2026,
+      "url": "https://www.cdc.gov/childrenindisasters/radiation-emergencies.html"
+    },
+    {
+      "name": "FEMA, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath, second edition, April 2024",
+      "year": 2024,
+      "url": "https://www.fema.gov/sites/default/files/documents/fema_oet_nuclear-detonation-preparedness-communicating-aftermath_052024.pdf"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023)",
+      "year": 2023,
+      "url": "https://www.fema.gov/sites/default/files/documents/fema_nuc-detonation-planning-guide.pdf"
+    },
+    {
+      "name": "New York State Department of Health, Radiological Terrorism Rapid Response Card (for responders and clinicians), December 2002, revised December 2013",
+      "year": 2013,
+      "url": "https://healthweb-back.health.ny.gov/environmental/emergency/radiological_terrorism/radterr.htm"
+    },
+    {
+      "name": "US CDC, Radiological Terrorism: Just-In-Time Training for Hospital Clinicians (transcript, undated)",
+      "url": "https://cdc.gov/nceh/radiation/emergencies/videos/jit/RadTerrorismJIT-Transcript-508.pdf"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

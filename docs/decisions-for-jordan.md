@@ -617,3 +617,55 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    an emergency stove or heater, so it is not held back until the cold is a danger to life; CDC's rule to turn off
    forced-air heating that brings in outside air still applies, and its outside vents must be kept clear (which may mean a
    trip out in snow). Say if the group wants the furnace treated like a stove (off until the cold is a danger to life).
+80. **"Send someone for help" during fallout (radiation-decontamination, radiation-sickness, and the protocols they link).**
+   The standard help line in every checked protocol is "Call 911 if you have signal. If not, send someone for help and
+   prepare to move the casualty." During a fallout warning, sending someone means sending them outside. Today: the two new
+   protocols leave that line out, say what needs medical care, and name Leaving and moving after fallout (Survival) as the
+   place that decides whether and when to leave shelter. The checked protocols they send people to (Burns, Shock, Severe
+   bleeding, CPR, Eye injury and others) still carry the standard line and were not edited. Say if the group wants a
+   fallout note added to the standard line (a change to checked protocols, to be checked like any other).
+81. **Protecting someone with radiation sickness from infection at home (radiation-sickness). Medical professional.** Sources
+   say most deaths are from infection or internal bleeding, that treatment focuses on reducing infections, and that hospitals
+   use precautions against infection (CDC clinician guidance: "neutropenic precautions"). No source opened says what a lay
+   person should do. Today: the protocol suggests, as the app's labelled judgement, washing hands before and after care,
+   keeping wounds and burns clean and covered, and keeping anyone with a cough, cold or stomach bug away. Worth showing a
+   medic or nurse: what else (food, water, bedding, separation) is worth doing without a hospital.
+82. **Cleaning radioactive dust out of a wound (radiation-decontamination). Medical professional.** Public guidance (FEMA
+   2024, CDC): press on a bleeding wound, keep cuts covered while washing, clean the skin around the wound, then wrap it.
+   Clinician guidance (CDC hospital training; New York State Department of Health card): clean wounds first, with gentle,
+   repeated rinsing. Today: the public rule, then the Wound cleaning and care protocol (which rinses minor wounds with plenty
+   of clean water) once the skin around the wound is clean. Ask whether rinsing the wound itself should come first or not.
+83. **Cooling a burn on someone covered in fallout (radiation-decontamination). Medical professional.** The Burns protocol
+   (checked) cools a burn under cool running water for 5 to 20 minutes. FEMA's public message says to lightly wrap burn
+   injuries after decontaminating around them, and CDC says to keep cuts covered while washing so material does not get in.
+   No source opened covers cooling a burn while dust is still on the skin. Today: outer clothes off first, then the Burns
+   protocol as written. Ask whether cooling should wait until the skin around the burn is cleaned, or the reverse.
+84. **What early vomiting means (radiation-sickness). Medical professional.** FEMA's planning guidance: the earlier vomiting
+   starts after exposure, the higher the radiation received, but many other things cause vomiting. FEMA's public guidance:
+   people who were not exposed often get the same symptoms from stress, and symptoms soon after the explosion in someone who
+   was inside are most likely not from radiation. Clinician tables give onset times by severity (CDC). Today: the protocol
+   gives both FEMA statements, tells people to note when vomiting started, and gives no estimate of how much radiation
+   someone received. Say if the group wants the clinician timing shown (it is a triage tool for trained staff).
+85. **Breastfeeding after fallout (radiation-decontamination). Medical professional.** CDC: pregnant women should take
+   extra precautions, and should consider not breastfeeding if other milk sources are available until they can see their
+   healthcare professional. Off-grid there may be no other milk and no professional. Today: CDC's sentence is quoted in the
+   detail of the helping-others step with a note that this may not be possible. Ask what a mother should do when there is no
+   other milk.
+86. **Where to take off outer clothes (radiation-decontamination).** CDC: before entering the building, if you can. FEMA's
+   2024 public messages for someone coming back in: after you are inside. Today: "before coming in, or just inside the door,
+   away from others", with both sources in the detail. This also binds Coming in from outside (later topic).
+87. **Who should go for medical care (radiation-sickness).** FEMA's public messages give two rules: seek medical help if you
+   were near the incident and have symptoms, and, when medical facilities are overwhelmed, only those with serious,
+   life-threatening injuries should seek care. CDC: seek medical attention for radiation sickness symptoms once officials say
+   you can leave shelter. Today: the protocol lists what needs medical care (needs, not instructions) and points to Leaving
+   and moving after fallout for whether and when to go. Also a question for a medical professional: what a group can do for
+   radiation sickness if no medical care is ever reachable.
+88. **Closing up the house after the fallout has passed, and heat (surv-fallout-shelter-living, not edited).** Found while
+   reading FEMA's 2024 public messaging guide (Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath,
+   p. 16): "Closing off ventilation after the passage of the fallout cloud provides little to no health benefit." and
+   "Heating and cooling should take priority if there are extreme temperatures." Also "If you are in a sturdy building with
+   some broken windows, there is no need to relocate." Living in a closed-up house (checked in batch A) says to turn off
+   forced-air heating that brings in outside air (CDC) and puts no-flame warmth first for the whole sheltering period (your
+   winter rule). FEMA's line is about ventilation and heating, not about burning anything in a sealed room, and does not
+   change the carbon monoxide rules. Say if the group wants Living in a closed-up house to carry FEMA's line (a change to a
+   checked topic, to be checked like any other).

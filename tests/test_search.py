@@ -947,7 +947,7 @@ V75_ACCEPTED = {
     'food': ['s:surv-food-and-wild-plants', 's:surv-fallout-water-and-food', 's:surv-food-power-out'],
     'cook': ['s:surv-food-cooking-no-power', 's:surv-fire', 's:surv-field-dressing-game'],
     'power': ['s:surv-wells-without-power', 's:surv-food-power-out', 's:surv-food-cooking-no-power'],
-    'power out': ['s:surv-food-power-out', 's:surv-heat-out', 's:surv-food-cooking-no-power'],
+    'power out': ['s:surv-food-power-out', 's:surv-heat-out', 's:surv-wells-without-power'],
     'pantry': ['c:pantry', 's:surv-food-storage', 's:surv-fallout-water-and-food'],
     'storing': ['s:surv-food-storage', 's:surv-find-water', 's:surv-firewood'],
     'store': ['s:surv-store-fuel', 's:surv-water-store', 's:surv-food-how-much'],
@@ -979,7 +979,7 @@ V75_ACCEPTED_WEAK = {
     'flood': ['s:surv-wells-without-power', 's:surv-food-still-good', 's:surv-find-water'],
     'canned': ['s:surv-unheated-house', 's:surv-fallout-water-and-food', 's:surv-food-cooking-no-power'],
     'what to buy': ['s:surv-fallout-get-ready', 's:surv-food-how-much', 's:surv-portable-heaters'],
-    'throw out': ['s:surv-food-still-good', 's:surv-food-when-short', 's:surv-food-power-out'],
+    'throw out': ['s:surv-food-still-good', 's:surv-food-power-out', 's:surv-portable-heaters'],
     'storage': ['s:surv-store-fuel', 's:surv-water-store', 's:surv-food-storage'],
     'dishes': ['s:surv-clean-and-disinfect', 's:surv-food-clean-kitchen', 's:surv-find-water'],
     'thawed': ['s:surv-food-still-good', 's:surv-unheated-house', 's:surv-food-babies-children'],
@@ -1124,7 +1124,7 @@ def _packs():
     return packs
 
 
-def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category(page=None):
+def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
     root = os.path.join(os.path.dirname(__file__), '..', 'src')
     load = lambda d: {j['id']: j for j in (json.load(open(f, encoding='utf-8')) for f in glob.glob(os.path.join(root, d, '*.json')))}
     protocols, checklists, topics = load('protocols'), load('checklists'), load('survival')
@@ -1145,4 +1145,9 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category(page=None):
         if t.get('category') == 'food':
             assert tid.startswith('surv-food-')
     assert sum(1 for t in topics.values() if t.get('category') == 'food') == 10
-    assert all(c.get('category') == 'food' for i, c in checklists.items() if i == 'pantry')
+    assert 'pantry' in food['checklists'] and checklists['pantry'].get('category') == 'food'   # c:pantry is indexed in the food pack
+    # Pack membership is by category for checklists and topics: one whose category is a pack's category belongs to that pack, so a new
+    # one has to be listed. Protocols carry no pack field (the radiation protocols are in the injury categories), so their explicit lists
+    # are asserted above (the food pack has none).
+    for k in packs:
+        assert sorted(i for i, c in checklists.items() if c.get('category') == k['topic']) == sorted(k['checklists']), k['topic']

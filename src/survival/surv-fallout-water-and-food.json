@@ -21,7 +21,14 @@
     "baby formula",
     "breastfeeding",
     "pet food",
-    "medicine"
+    "medicine",
+    "bottled water",
+    "boil water",
+    "water heater",
+    "toilet tank",
+    "deer",
+    "hunting",
+    "fish"
   ],
   "summary": "Food and drinks that were indoors or sealed can be used; wipe the outside of anything that was outdoors before you open it. Drink bottled water and other sealed drinks first, then water you stored yourself. Boiling and bleach don’t take fallout out of water. Don’t eat or drink anything that was outdoors uncovered, including garden food and rainwater, until officials say you can.",
   "doFirst": [
@@ -72,7 +79,7 @@
           ]
         },
         {
-          "p": "Wipe off any water container that was outdoors before you open it (CDC). Water you stored yourself in sealed containers: this app’s reading is to treat it like bottled water, ahead of the water heater and toilet tank. See Store water at home."
+          "p": "Wipe off any water container that was outdoors before you open it (CDC). Water you stored yourself in sealed containers: this app’s reading is to drink it after bottled water and other sealed drinks, and ahead of the water heater and toilet tank. See Store water at home."
         },
         {
           "link": "s:surv-water-store",
@@ -143,8 +150,9 @@
             "Powdered formula: make it with bottled water if you can. Use tap water only if local officials say it is fine (CDC).",
             "Don’t leave the house or shelter to get formula. Staying inside and breastfeeding is better (CDC).",
             "Breastfeeding: if you were indoors with the doors and windows closed, keep breastfeeding (CDC).",
-            "If you were outside, two CDC pages say it differently. CDC’s Infant Feeding page: if you were outside in the affected area, consider stopping breastfeeding for a while and feed breast milk pumped and stored before the emergency, or formula; if you have neither, keep breastfeeding; to keep up your milk, express or pump regularly and throw that milk away; breastfeeding can start again when local health officials say, or after you leave the area and clean yourself off.",
-            "CDC’s Frequently Asked Questions page: if possible, nursing mothers who were near the affected area should stop breastfeeding for a while and switch to breast milk pumped and stored before the exposure, or formula, until they can be seen by a doctor; if no other food is available for the baby, keep breastfeeding."
+            "If you were outside, three CDC pages say it differently. CDC’s Infant Feeding page: if you were outside in the affected area, consider stopping breastfeeding for a while and feed breast milk pumped and stored before the emergency, or formula; if you have neither, keep breastfeeding; to keep up your milk, express or pump regularly and throw that milk away; breastfeeding can start again when local health officials say, or after you leave the area and clean yourself off.",
+            "CDC’s Frequently Asked Questions page: if possible, nursing mothers who were near the affected area should stop breastfeeding for a while and switch to breast milk pumped and stored before the exposure, or formula, until they can be seen by a doctor; if no other food is available for the baby, keep breastfeeding.",
+            "CDC’s Radiation Emergencies and Children page: nursing mothers can pass radioactive material to their babies through breastmilk, and should consider not breastfeeding if other milk sources are available until they can see their healthcare professional (Radiation decontamination)."
           ]
         }
       ]
@@ -171,12 +179,16 @@
       "used": "Sealed food and drinks and food already inside; boiling tap water will not remove radioactive materials; tap water still usable for washing and cleaning"
     },
     {
-      "name": "CDC, Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022)",
+      "name": "CDC, Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022; updated April 12, 2024)",
       "used": "Until test results are available, bottled water is the only water certain to be free of contamination; tap or well water can be used to clean yourself and your food; nursing mothers near the affected area should, if possible, temporarily stop breastfeeding and use stored breast milk or formula until seen by a doctor, and keep breastfeeding if no other food is available"
     },
     {
       "name": "CDC, Infant Feeding (radiation emergencies; last reviewed April 16, 2024)",
       "used": "Ready-to-feed formula; powdered formula with bottled water; tap water only if local officials say; do not leave shelter to get formula; breastfeeding indoors and after being outside; pumping and discarding; when breastfeeding can resume; you cannot boil or disinfect the radiation out of water"
+    },
+    {
+      "name": "CDC, Radiation Emergencies and Children (undated, read 2026-11-18)",
+      "used": "Nursing mothers can pass radioactive material through breastmilk; consider not breastfeeding if other milk sources are available until seen by a healthcare professional"
     },
     {
       "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",

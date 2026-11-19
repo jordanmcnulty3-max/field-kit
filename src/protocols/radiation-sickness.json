@@ -18,7 +18,9 @@
     "radiation exposure",
     "nuclear fallout",
     "is it contagious",
-    "caring for radiation victim"
+    "caring for radiation victim",
+    "nosebleed",
+    "bruising"
   ],
   "summary": "Nausea, vomiting, headache or diarrhoea after being out in fallout or near the explosion: check for danger signs, clean them off, keep up fluids, protect them from infection, watch the skin and for bleeding, and note when it started. They are not dangerous to care for.",
   "steps": [
@@ -83,7 +85,7 @@
     {
       "id": "s9",
       "text": "Watch the skin: itching, tingling, redness or swelling hours to days later, on skin that was not near heat, can be a radiation burn. It needs medical care; see detail for what to do meanwhile.",
-      "detail": "FEMA: high levels of radiation can cause severe sunburn-like burns (beta burns). Unlike heat burns, which appear at once, they appear a few hours to several days after exposure. Symptoms include itchiness, tingling, skin redness and swelling. Seek medical care immediately if you think you have one. The key treatments are infection prevention and pain management (FEMA, Communicating in the Immediate Aftermath). FEMA's planning guidance adds that radiation burns may go much deeper than heat burns.\n\nLater signs include blisters, ulcers and hair loss (FEMA planning guidance). The Burns protocol says every radiation burn, even a small one, needs medical care.\n\nMeanwhile, for the two things FEMA names: infection prevention, by covering the burn loosely with a clean, dry, non-stick dressing and checking it for infection (Burns protocol, covering step; Wound cleaning and care protocol, infection signs); pain, as the Burns protocol's pain step describes. No source opened says whether to cool a radiation burn that appears hours or days later, as the Burns protocol cools a fresh heat burn (see the open question)."
+      "detail": "FEMA: high levels of radiation can cause severe sunburn-like burns (beta burns). Unlike heat burns, which appear at once, they appear a few hours to several days after exposure. Symptoms include itchiness, tingling, skin redness and swelling. Seek medical care immediately if you think you have one. The key treatments are infection prevention and pain management (FEMA, Communicating in the Immediate Aftermath). FEMA's planning guidance adds that radiation burns may go much deeper than heat burns.\n\nLater signs include blisters, ulcers and hair loss (FEMA planning guidance). The Burns protocol says every radiation burn, even a small one, needs medical care.\n\nMeanwhile, for the two things FEMA names: infection prevention, by covering the burn loosely with a clean, dry, non-stick dressing and checking it for infection (Burns protocol, covering step; Wound cleaning and care protocol, infection signs); pain: the Burns protocol's pain step gives no pain medicine by mouth for a burn that needs medical care, and it counts every radiation burn as one; whether to give pain medicine when no medical care can be reached is an open question (see the open question). No source opened says whether to cool a radiation burn that appears hours or days later, as the Burns protocol cools a fresh heat burn (see the open question)."
     },
     {
       "id": "s10",
@@ -111,13 +113,13 @@
     {
       "id": "s21",
       "text": "Give nothing by mouth. If they are breathing, lie them on their side (Recovery position protocol). For a seizure, use the Seizure protocol. This needs urgent medical care.",
-      "detail": "Confusion, seizures and coma can be signs of the most severe radiation sickness (FEMA planning guidance), and FEMA's public messages treat significant trouble breathing or changes in mental status as severe symptoms that need help at once (FEMA, Communicating in the Immediate Aftermath). Think of other causes and use their protocols too: a head injury (Head injury and concussion), fumes from a stove, heater or engine (Carbon monoxide poisoning), diabetes (Low blood sugar), or dehydration.\n\nWatch their breathing all the time. If they stop breathing normally, start CPR (CPR, adult protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter. From Fallout warning (Survival): “Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).” Whether and how to go is in Leaving and moving after fallout (Survival).",
+      "detail": "Confusion, seizures and coma can be signs of the most severe radiation sickness (FEMA planning guidance), and FEMA's public messages treat significant trouble breathing or changes in mental status as severe symptoms that need help at once (FEMA, Communicating in the Immediate Aftermath). Think of other causes and use their protocols too: a head injury (Head injury and concussion), fumes from a stove, heater or engine (Carbon monoxide poisoning), diabetes (Low blood sugar), or dehydration.\n\nWatch their breathing all the time. If they stop breathing normally, start CPR (CPR, adult protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter. From Leaving and moving after fallout (Survival): “Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).” Whether and how to go is in Leaving and moving after fallout (Survival).",
       "end": true
     },
     {
       "id": "s22",
       "text": "Signs of shock: give nothing by mouth. Use the Shock protocol. This needs urgent medical care.",
-      "detail": "Treat the cause if you can: stop bleeding first (Severe bleeding protocol). Severe fluid loss from vomiting and diarrhoea can also cause shock (Severe vomiting or diarrhea protocol).\n\nIf they vomit, roll them onto their side (Recovery position protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter. From Fallout warning (Survival): “Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).” Whether and how to go is in Leaving and moving after fallout (Survival).",
+      "detail": "Treat the cause if you can: stop bleeding first (Severe bleeding protocol). Severe fluid loss from vomiting and diarrhoea can also cause shock (Severe vomiting or diarrhea protocol).\n\nIf they vomit, roll them onto their side (Recovery position protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter. From Leaving and moving after fallout (Survival): “Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).” Whether and how to go is in Leaving and moving after fallout (Survival).",
       "end": true
     }
   ],

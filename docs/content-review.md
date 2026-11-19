@@ -4773,3 +4773,87 @@ house and building basements are below ground and shaded more strongly than the 
 four sides and its centre is in the middle, clear of the walls; coming inside reads 1 to 6, each panel is its protocol step,
 s2 to s7 with none skipped, "Save a life first" above and "Then help others" below; the bag is drawn far from the person and
 pet. `tests/test_survival_migration.py` `PINNED_FIGS` carries the two topics.
+
+## Radiation pack whole-pack fixes (2026-11-18), from task-9-pack-review.md
+
+Every change below copies an owner page or a source already recorded in this file; no new source was opened for this wave
+except as the review records (FEMA 2024, re-opened by the pack reviewer). Quotes of owner pages were checked word for word
+against the owner files as they stand.
+
+- I1, p:radiation-decontamination s7 detail (text unchanged): wounds are rinsed and dressed as the Wound cleaning and care
+  protocol says, as for any wound; a health care professional should still decontaminate the wound once one can be reached
+  (FEMA, Communicating in the Immediate Aftermath, recorded above: "Get a health care professional to decontaminate your
+  wound once you have access to one"; "treat your injury as you would an ordinary injury"). Burns: the Burns protocol.
+- I2, breastfeeding: p:radiation-decontamination s8 now points to Water and food after fallout and gives CDC Infant Feeding's
+  "indoors with the doors and windows closed, keep breastfeeding"; source line added: CDC, Infant Feeding (radiation
+  emergencies), last reviewed April 16, 2024, https://www.cdc.gov/radiation-emergencies/caring/infant-feeding.html (recorded
+  for batch B). Water and food after fallout "Babies" gains CDC Radiation Emergencies and Children's line (as recorded for the
+  protocol: "It is possible for nursing mothers to pass radioactive materials to their babies through their breastmilk";
+  "They should consider not breastfeeding if other milk sources are available until they can see their healthcare
+  professional"), credited to Radiation decontamination, with a source entry; lead-in now "three CDC pages". The CDC FAQ is
+  credited "(last reviewed April 19, 2022; updated April 12, 2024)" in Water and food after fallout, Coming in from outside and
+  Leaving and moving after fallout, as in Get ready and the checklist.
+- I3, pets: "Bring pets inside with you, if you can" (CDC-GI, "Bring pets inside with you, if you can.") in Living in a
+  closed-up house and Coming in from outside.
+- I4, where to take clothes off: How long to stay in, Living in a closed-up house and Leaving and moving after fallout (Do
+  first 4 and "Arriving") now say what p:radiation-decontamination s2 says: outer layer of clothes and shoes, slowly and
+  carefully, before coming in or just inside the door, away from others; credited to Radiation decontamination.
+- I5, hub Do first 4: shoes added and "Every step is in Radiation decontamination." The dirty bomb page's two quotes of it
+  were updated word for word (without the pointer sentence). "Seal the bag" (CDC-DB, "seal it in a plastic bag") added to the
+  dirty bomb Do first and step 5.
+- I6, CO alarm: Living in a closed-up house's body now quotes Carbon monoxide's Do first ("CO alarm sounding? Don't look for
+  the cause. Get everyone outside into fresh air now", CPSC), the words Leaving quotes; its source line now says which line
+  comes from which topic. Do first 5 (Stay warm when the heat is out's line) is unchanged.
+- I7, dirty bomb Do first: new first item from the page's own words: CDC's "a dirty bomb cannot" make a mushroom cloud (the
+  page's "What it is" paragraph) and the page's labelled app caution ("treat it as a nuclear explosion"; D107).
+- I8, dirty bomb damper: quotes Wood stoves and fireplaces' Do first 2 word for word ("Open the damper before you light a fire,
+  and never close it until the fire is out and the embers are cold (Massachusetts Department of Fire Services).").
+- I9, Get ready summary: "Getting inside is always the best protection (CDC): no pill, mask or product takes its place."
+  (CDC KI page, recorded for batch C: get inside, stay inside, stay tuned is always the best protection.)
+- I10, Living in a closed-up house, "Heat in winter": new paragraph after the app's winter rule. Source: FEMA Office of
+  Emerging Threats, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath, second edition, April 2024,
+  section 3.3.5 "Immediate Actions to Reduce Contamination in Your Home", printed page 16,
+  https://www.fema.gov/sites/default/files/documents/fema_oet_nuclear-detonation-preparedness-communicating-aftermath_052024.pdf
+  (re-opened by the pack reviewer; wording as in D88). Sentences quoted: "Closing off ventilation after the passage of the
+  fallout cloud provides little to no health benefit." "Heating and cooling should take priority if there are extreme
+  temperatures." "Radioactive fallout particles might be raining down in your area." (bullet; quoted in lower case inside
+  the sentence) "Limit your exposure to radiation by closing windows and doors if you can" (paraphrased as "close windows and
+  doors"). "You should consider turning off anything that brings air in from the outside." "If you are experiencing extreme
+  temperatures or weather conditions, listen to emergency officials for guidance on heating and air conditioning." "The
+  health risk from turning off HVAC systems might be greater than the risk of radioactive contamination." The paragraph ends
+  with the app's rule restated in the page's own words (warmth without flame first; nothing ever burns in a sealed room).
+  Not used: the opening "extremely small" and "short period" sentences, the broken-windows bullet, the recirculate and HVAC
+  sub-bullets, and the closing bullet. The "Close it up" damper bullet now reads "Make sure fireplace dampers are closed (CDC,
+  Ready.gov, FEMA 2024)" (the section's sub-bullet "Make sure fireplace dampers are closed."), keeping the open-until-embers-
+  cold rule. Source entry added. Jordan's winter rule paragraph is not reworded.
+- I11, Potassium iodide "Risks": link to Leaving and moving after fallout added after Anaphylaxis.
+- Minor 1, hub: "drop it back" (grammar).
+- Minor 2, How long to stay in body: "for as long as 2 weeks ... (FEMA 1985, dated)", as its Do first 3 and summary.
+- Minor 3, How long to stay in Do first 1: the leaving sentence now ends "..., or officials tell you to (Ready.gov).", word for
+  word from Leaving's Do first 1.
+- Minor 4, hub Do first 5: first two sentences are Living in a closed-up house's Do first 1 word for word; the radio sentence
+  stays.
+- Minor 5, Coming in from outside: the warning is p:radiation-decontamination's donts word for word, without their source
+  parentheses.
+- Minor 6, Coming in from outside: "wallets, jewellery, wheelchairs or hearing aids" (protocol s12 text).
+- Minor 7, p:radiation-decontamination s11: CDC-PETS "Do not touch soiled material with your bare hands." and NYC-H "Do not
+  shave your pet's fur as an alternative to washing." / "Shaving will not get rid you of the radioactive fallout particles."
+  (recorded for batch B); NYC Health source entry added
+  (https://www.nyc.gov/site/doh/health/emergency-preparedness/emergencies-radiological-nuclear-incident.page). Coming in from
+  outside: "without touching it with bare hands (CDC)".
+- Minor 8, Water and food after fallout: stored water is drunk after bottled water and other sealed drinks, ahead of the water
+  heater and toilet tank (the app's reading, as its summary and Do first 2 say).
+- Minor 9, Get ready: link labels are the checklist titles.
+- Minor 10: Leaving and moving after fallout linked in "Hurt or sick" in the hub (after Shock) and Coming in from outside
+  (after Radiation sickness).
+- Minor 11, Living in a closed-up house: cold-driven leaving points to Leaving and moving after fallout.
+- Minor 12, Living in a closed-up house Do first 4: the page's own danger-to-life sentence appended.
+- Minor 13: "both dated" (How long to stay in) and "also dated" (Where to shelter from fallout) for the 1968 handbook.
+- Minor 14: protocol urgent steps (decontamination s20, sickness s21, s22) credit the leaving sentence to Leaving and moving
+  after fallout.
+- Minor 15, p:radiation-sickness s9: pain points to the Burns protocol's pain warning ("No pain medicine by mouth if ... the
+  burn needs evacuation") and evacuate line ("every ... radiation ... burn, even a small one"); the no-care case is an open
+  question (D89).
+- Minor 17, keywords: added as listed in the fix report; "bleach" (Water and food after fallout) and "co alarm" (Living in a
+  closed-up house) were dropped because they moved a v7.3 top-three search result.
+- Minor 18 and 19: v7.4 rulings and decisions records updated (no user-visible text).

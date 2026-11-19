@@ -23,14 +23,18 @@
     "wind direction",
     "evacuation route",
     "arriving at another house",
-    "moving to another shelter"
+    "moving to another shelter",
+    "escape",
+    "hospital",
+    "injured",
+    "doctor"
   ],
   "summary": "Stay in unless an immediate danger such as a fire, gas leak, collapse or serious injury forces you out, or officials tell you to leave. If you must go, cover your mouth, nose and skin, move away from the explosion and the heaviest fallout to the nearest good shelter, and take off your outer clothes and wash when you get there.",
   "doFirst": [
     "Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).",
     "Have to go? Cover your mouth and nose with a mask, cloth or towel (CDC), and if it doesn’t slow you down, wear a hat, gloves and an outer layer you can take off (this app’s own caution; fallout lands on clothing and bare skin, FEMA planning guidance).",
     "Go to the nearest building that gives good shelter, moving away from the explosion and from where the fallout is heaviest (CDC, FEMA planning guidance).",
-    "When you get there, take off your outer clothes and shoes before you go in, and wash (CDC, FEMA planning guidance). See Coming in from outside.",
+    "When you get there, take off your outer clothes and shoes before you go in or just inside the door, away from others, and wash (CDC, FEMA planning guidance; Radiation decontamination). See Coming in from outside.",
     "Told to evacuate? Listen for the routes, shelters and procedures officials give, and follow them (Ready.gov)."
   ],
   "sections": [
@@ -179,7 +183,7 @@
         {
           "list": [
             "Taking in someone who was outside can save their life without putting your own at risk (CDC).",
-            "Arriving: take off your outer layer of clothes before you go in. Once inside, wash the parts of your body that were uncovered, then put on clean clothes if you can (CDC).",
+            "Arriving: take off your outer layer of clothes and shoes before you go in, or just inside the door, away from others (CDC; Radiation decontamination). Once inside, wash the parts of your body that were uncovered, then put on clean clothes if you can (CDC).",
             "Letting someone in: ask them to do the same (CDC).",
             "Bring pets with you (NYC Health); the federal government advises against leaving them behind (FEMA planning guidance). Wash them when you arrive, as in Coming in from outside."
           ]
@@ -212,7 +216,7 @@
       "used": "Do not leave unless officials provide other instructions or the shelter is threatened by fire or collapse; rapid dry self-decontamination while evacuating (changing or shaking the outer layer); contamination catches in collars and shoe tops"
     },
     {
-      "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024) and Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022)",
+      "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024) and Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022; updated April 12, 2024)",
       "used": "Cover mouth and nose; get inside a building; sheltering someone who was outside can save their life without endangering your own; outer layer off before entering, wash, clean clothes; unless a life-threatening situation, don’t leave until officials say"
     },
     {

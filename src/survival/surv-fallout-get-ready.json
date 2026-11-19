@@ -18,9 +18,12 @@
     "hand crank radio",
     "noaa weather radio",
     "two week supply",
-    "stockpile"
+    "stockpile",
+    "prepare",
+    "what to buy",
+    "nuclear plan"
   ],
-  "summary": "Before anything happens: pick the shelter spot in each home now, keep water, sealed food and medicine for at least 2 weeks, keep a battery or hand-crank radio, and agree a family plan for being apart. No pill, mask or product protects you from fallout radiation the way getting inside does.",
+  "summary": "Before anything happens: pick the shelter spot in each home now, keep water, sealed food and medicine for at least 2 weeks, keep a battery or hand-crank radio, and agree a family plan for being apart. Getting inside is always the best protection (CDC): no pill, mask or product takes its place.",
   "sections": [
     {
       "h": "Pick your shelter spot now",
@@ -46,7 +49,7 @@
         },
         {
           "link": "c:fallout-shelter-kit",
-          "label": "Fallout shelter kit (checklist)"
+          "label": "Fallout shelter kit"
         },
         {
           "link": "s:surv-fallout-how-long",
@@ -78,7 +81,7 @@
         },
         {
           "link": "c:home-water-store",
-          "label": "Home water store (checklist)"
+          "label": "Home water store"
         },
         {
           "link": "s:surv-water-in-the-house",
@@ -98,7 +101,7 @@
         },
         {
           "link": "c:sanitation-kit",
-          "label": "Sanitation kit (checklist)"
+          "label": "Sanitation kit"
         }
       ]
     },
@@ -114,7 +117,7 @@
         },
         {
           "link": "c:home-heat-kit",
-          "label": "Home heat kit (checklist)"
+          "label": "Home heat kit"
         },
         {
           "link": "s:surv-heat-out",

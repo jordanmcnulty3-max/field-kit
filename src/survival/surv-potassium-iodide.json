@@ -16,7 +16,11 @@
     "radioactive iodine",
     "iodized salt",
     "iodine supplement",
-    "drink iodine"
+    "drink iodine",
+    "iosat",
+    "thyrosafe",
+    "thyroshield",
+    "radiation tablets"
   ],
   "summary": "Potassium iodide (KI) protects only the thyroid, and only from radioactive iodine. CDC says it will not help in a nuclear bomb emergency: fallout is the danger, and getting inside is the protection. Take it only if public health or emergency officials or a healthcare provider tell you to. This app gives no dose.",
   "doFirst": [
@@ -130,6 +134,10 @@
         {
           "link": "p:anaphylaxis",
           "label": "Anaphylaxis (severe allergic reaction)"
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
         }
       ]
     },

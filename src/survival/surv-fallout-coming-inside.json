@@ -23,7 +23,10 @@
     "pet fallout",
     "wash a child",
     "coming back inside",
-    "entering shelter"
+    "entering shelter",
+    "shoes",
+    "contaminated clothes",
+    "wash hair"
   ],
   "summary": "Save a life first. Then take off the outer layer of clothes and shoes, before you come in or just inside the door, away from others, and bag them. Wash gently with soap and water, or wipe off: no conditioner, no scrubbing. Put on clean clothes, then help others and pets. Every step is in Radiation decontamination.",
   "doFirst": [
@@ -61,7 +64,7 @@
           "label": "Radiation decontamination (cleaning off fallout)"
         },
         {
-          "warn": "From Radiation decontamination: Don’t delay life-saving care to clean someone off. Don’t shake out contaminated clothes or shoes near people or pets, or bring them into the living space unbagged. No hair conditioner: it makes radioactive material stick to the hair. Don’t scald, scrub or scratch the skin. No household cleaning wipes on skin, and don’t rely on hand sanitizer: it does not protect against radioactive material. Keep the dust out of cuts, eyes, nose and mouth: keep cuts covered while washing. Clean yourself again after helping someone else or a pet."
+          "warn": "From Radiation decontamination: Do not delay life-saving care to clean someone off. Do not shake out contaminated clothes or shoes near people or pets, or bring them into the living space unbagged. Do not use hair conditioner: it makes radioactive material stick to the hair. Do not scald, scrub or scratch the skin. Do not use household cleaning wipes on skin, and do not rely on hand sanitizer: it does not protect against radioactive material. Do not let the dust get into cuts, eyes, nose or mouth: keep cuts covered while washing. Do not forget to clean yourself again after helping someone else or a pet."
         }
       ]
     },
@@ -114,8 +117,8 @@
       "blocks": [
         {
           "list": [
-            "Bring pets inside (CDC). Wash a pet that was outside with shampoo or soap and water and rinse well, or brush or wipe it, wearing gloves and a mask if you can; then wash your hands and face (Radiation decontamination; CDC).",
-            "Keep pets indoors (NYC Health): animals can pick up fallout again and bring it inside (FEMA planning guidance). Put newspapers or other absorbent material down so a pet can relieve itself indoors, and bag soiled material away from people and pets (CDC)."
+            "Bring pets inside with you, if you can (CDC). Wash a pet that was outside with shampoo or soap and water and rinse well, or brush or wipe it, wearing gloves and a mask if you can; then wash your hands and face (Radiation decontamination; CDC).",
+            "Keep pets indoors (NYC Health): animals can pick up fallout again and bring it inside (FEMA planning guidance). Put newspapers or other absorbent material down so a pet can relieve itself indoors, and bag soiled material away from people and pets, without touching it with bare hands (CDC)."
           ]
         }
       ]
@@ -125,7 +128,7 @@
       "blocks": [
         {
           "list": [
-            "Wipe off anything brought in from outside (CDC), and the things you need, such as glasses, wallets and wheelchairs (Radiation decontamination).",
+            "Wipe off anything brought in from outside (CDC), and the things you need, such as wallets, jewellery, wheelchairs or hearing aids (Radiation decontamination).",
             "Keep every bag of clothes, wipes and soiled material together, far from people and pets (CDC).",
             "Officials will tell you if the house itself needs cleaning (CDC)."
           ]
@@ -145,6 +148,10 @@
         {
           "link": "p:radiation-sickness",
           "label": "Radiation sickness"
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
         },
         {
           "link": "p:bleeding",
@@ -183,7 +190,7 @@
       "used": "Store the bag far from people and pets until officials say how to dispose of it"
     },
     {
-      "name": "CDC, Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022)",
+      "name": "CDC, Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022; updated April 12, 2024)",
       "used": "Get radioactive material off as soon as possible; contamination spreads like tracked-in dust or mud"
     },
     {

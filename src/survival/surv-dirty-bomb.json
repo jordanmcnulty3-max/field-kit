@@ -16,13 +16,15 @@
     "terrorism",
     "explosion radiation",
     "contamination",
-    "radiation emergency"
+    "radiation emergency",
+    "radiological attack"
   ],
   "summary": "A dirty bomb is an ordinary explosion that scatters radioactive dust and smoke. It is not a nuclear explosion: the blast is the main danger, and its radioactive material could spread over a few blocks or miles, not a whole region. Cover your nose and mouth, get into an undamaged building, take off your outer clothes, wash, and stay in until officials say otherwise.",
   "doFirst": [
+    "Saw a mushroom cloud? A dirty bomb cannot make one (CDC): go to Fallout warning now. Not sure which it was? This app’s own caution, not a source’s: treat it as a nuclear explosion and follow Fallout warning and How long to stay in.",
     "Outside near it? Cover your nose and mouth with a cloth. Don’t touch anything thrown off by the explosion. Go quickly into a building whose walls and windows are not broken (CDC).",
     "Inside an undamaged building? Stay in. Shut windows and outside doors, and turn off fans, heating and air conditioning that bring in outside air (CDC).",
-    "Once inside, as Fallout warning says: “Carefully take off your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).” Put the cloth you covered your mouth with in the bag too (CDC).",
+    "Once inside, as Fallout warning says: “Carefully take off your outer layer of clothes and shoes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).” Put the cloth you covered your mouth with in the bag too (CDC). Seal the bag (CDC).",
     "Listen to local radio or TV, or official accounts, for instructions (CDC).",
     "Children at school stay there. Don’t go to the school until officials say it is all right to travel (CDC)."
   ],
@@ -68,8 +70,8 @@
             "Cover your nose and mouth with a cloth, so you breathe in less radioactive dust or smoke (CDC).",
             "Don’t touch objects thrown off by the explosion: they might be radioactive (CDC).",
             "Go quickly into a building whose walls and windows are not broken (CDC).",
-            "Once inside, clean off as Fallout warning says: “Carefully take off your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).”",
-            "Put the cloth you covered your mouth with in the bag too. Taking off outer clothes may get rid of up to 90% of the radioactive dust (CDC).",
+            "Once inside, clean off as Fallout warning says: “Carefully take off your outer layer of clothes and shoes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).”",
+            "Put the cloth you covered your mouth with in the bag too, and seal the bag. Taking off outer clothes may get rid of up to 90% of the radioactive dust (CDC).",
             "Put the bag where others won’t touch it, and keep it until officials say what to do with it (CDC).",
             "Listen to local radio or TV news, or official government social media accounts, for instructions (CDC)."
           ]
@@ -86,7 +88,7 @@
         {
           "steps": [
             "If the building’s walls and windows are not broken or damaged, stay in and don’t leave (CDC).",
-            "Shut all windows and outside doors. Turn off fans and heating and air-conditioning systems that bring in air from outside (CDC). Close fireplace dampers too (CDC), but only when no fire is burning: see Wood stoves and fireplaces.",
+            "Shut all windows and outside doors. Turn off fans and heating and air-conditioning systems that bring in air from outside (CDC). Close fireplace dampers too (CDC), but never while a fire is burning: “Open the damper before you light a fire, and never close it until the fire is out and the embers are cold (Massachusetts Department of Fire Services).” See Wood stoves and fireplaces.",
             "If the walls and windows are broken, go to an inside room and don’t leave. If the building is badly damaged, go quickly into a building whose walls and windows are not broken (CDC).",
             "If you must go outside, cover your nose and mouth with a cloth. Coming back in, clean off as in the steps above, and store the bag where others won’t touch it (CDC).",
             "Listen to local radio or TV news, or official government social media accounts, for instructions (CDC)."

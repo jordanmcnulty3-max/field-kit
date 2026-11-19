@@ -24,15 +24,19 @@
     "shelter in place",
     "missile alert",
     "attack warning",
-    "duck and cover"
+    "duck and cover",
+    "detonation",
+    "nuclear strike",
+    "siren",
+    "emergency alert"
   ],
   "summary": "Get inside the nearest building now and go to the basement or the middle of it, away from the walls and roof. Stay in for at least 24 hours unless an immediate danger such as a fire, gas leak, collapse or serious injury forces you out. Don’t drive or walk away through fallout, and don’t go out to get family.",
   "doFirst": [
     "Warning or flash? Get inside the nearest building now and move away from windows (Ready.gov). Caught outside when it goes off: lie face down to protect bare skin from the heat and flying debris, then get inside as soon as the shockwave has passed (Ready.gov).",
     "Go to the basement or the middle of the building, as far from the walls and roof as you can (CDC). Brick or concrete buildings and basements are best, but being inside any building is better than being outside (CDC).",
     "Stay inside for at least 24 hours (Ready.gov, CDC). Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov). Don’t go out to get family: stay where you are (CDC).",
-    "Came in from outside? Carefully take off your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).",
-    "Close windows and doors. Turn off fans, air conditioners and forced-air heating that bring in outside air (CDC). Listen to a battery or hand-crank radio (Ready.gov)."
+    "Came in from outside? Carefully take off your outer layer of clothes and shoes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC). Every step is in Radiation decontamination.",
+    "Close and lock windows and doors. Turn off fans, air conditioners and forced-air heating units that bring in air from outside (CDC). Listen to a battery or hand-crank radio (Ready.gov)."
   ],
   "sections": [
     {
@@ -63,7 +67,7 @@
       "h": "Before the fallout arrives",
       "blocks": [
         {
-          "p": "A nuclear explosion on the ground can suck material up into the air and drops it back as dangerous, sand-like radioactive particles called fallout (Ready.gov)."
+          "p": "A nuclear explosion on the ground can suck material up into the air and drop it back as dangerous, sand-like radioactive particles called fallout (Ready.gov)."
         },
         {
           "warn": "After a detonation you will have 10 minutes or more to find a good shelter before fallout arrives (Ready.gov, FEMA planning guidance). Use those minutes to get inside. Being out in fallout that is falling or has just fallen may be fatal (NYC Health)."
@@ -149,6 +153,10 @@
         {
           "link": "p:shock",
           "label": "Shock"
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
         },
         {
           "link": "p:radiation-sickness",

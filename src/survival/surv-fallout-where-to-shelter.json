@@ -21,7 +21,11 @@
     "cave",
     "trench",
     "nuclear shelter",
-    "radiation shelter"
+    "radiation shelter",
+    "bunker",
+    "interior room",
+    "storm cellar",
+    "safest room"
   ],
   "summary": "Put as much heavy material and distance as you can between you and the fallout outside and on the roof. Underground is best, then the middle of a large brick or concrete building. A small wood-frame house is poor above ground but far better than outside. A car is not a shelter.",
   "doFirst": [
@@ -95,7 +99,7 @@
       "blocks": [
         {
           "list": [
-            "Basement: go there first (CDC). The best corner is the one most below ground level (FEMA, Protection in the Nuclear Age, 1985, dated; the 1968 Office of Civil Defense handbook In Time of Emergency says the same).",
+            "Basement: go there first (CDC). The best corner is the one most below ground level (FEMA, Protection in the Nuclear Age, 1985, dated; the 1968 Office of Civil Defense handbook In Time of Emergency, also dated, says the same).",
             "No basement: the middle of the house, away from the walls and windows (NYC Health), and as far from the roof as you can (CDC).",
             "Stay away from the outside walls and the roof wherever you are in the house (CDC)."
           ]

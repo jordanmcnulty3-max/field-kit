@@ -5,6 +5,7 @@
   "keywords": [
     "fallout",
     "nuclear",
+    "nuke",
     "nuclear bomb",
     "nuclear attack",
     "nuclear explosion",
@@ -85,6 +86,14 @@
             "Don’t go out to get loved ones. Going outside to get them could expose you and them to dangerous levels of radiation (CDC). Don’t pick up children from school or daycare (NYC Health).",
             "Let people in. Giving shelter to someone who was outside can save their life (CDC). They take off their outer layer of clothes before they come in, if they can (CDC)."
           ]
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
         }
       ]
     },
@@ -140,6 +149,39 @@
         {
           "link": "p:shock",
           "label": "Shock"
+        },
+        {
+          "link": "p:radiation-sickness",
+          "label": "Radiation sickness"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
+        }
+      ]
+    },
+    {
+      "h": "Everything on fallout",
+      "blocks": [
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "link": "s:surv-dirty-bomb",
+          "label": "Dirty bomb"
+        },
+        {
+          "link": "s:surv-potassium-iodide",
+          "label": "Potassium iodide (KI): what it can and can’t do"
+        },
+        {
+          "link": "s:surv-fallout-get-ready",
+          "label": "Get ready for fallout"
+        },
+        {
+          "link": "c:fallout-shelter-kit",
+          "label": "Fallout shelter kit (checklist)"
         }
       ]
     },

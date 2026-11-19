@@ -77,6 +77,10 @@
         {
           "link": "s:surv-winter-storms",
           "label": "Winter storms"
+        },
+        {
+          "link": "s:surv-fallout-shelter-living",
+          "label": "Living in a closed-up house"
         }
       ]
     },

@@ -694,3 +694,50 @@ def test_little_words_in_a_search_get_no_short_keyword_bonus(page, app_url, text
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
     assert [r['key'] for r in q(page, text)][:len(first)] == first
+
+
+# ---------- Radiation pack (Task 8, Review Focus 5) ----------
+
+RADIATION_SEARCHES = ['fallout', 'nuke', 'nuclear', 'radiation', 'dirty bomb', 'KI', 'iodine', 'decon']
+RADIATION_KEYS = {'s:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
+                  's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
+                  's:surv-potassium-iodide', 's:surv-fallout-get-ready', 'p:radiation-decontamination', 'p:radiation-sickness'}
+
+
+@pytest.mark.parametrize('text', RADIATION_SEARCHES)
+def test_radiation_hurried_searches_find_a_radiation_page_in_the_first_three(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    ks = [r['key'] for r in q(page, text)]
+    assert RADIATION_KEYS & set(ks[:3]), f'{text!r} found no radiation topic or protocol in the first three: {ks[:5]}'
+
+
+# The full v7.3 result lists on main (built from main, in order). The radiation pages may join a list
+# but must not reorder or displace any v7.3 result, so the v7.3 keys in today's list keep their order.
+V73_RESULTS = {
+    'CO': ['p:carbon-monoxide', 's:surv-carbon-monoxide', 'p:head-injury', 'p:tourniquet-conversion', 't:cpr', 't:rate', 's:surv-dress-for-cold',
+           's:surv-navigation-without-a-compass', 's:surv-wind-chill', 'a:position', 'p:animal-bite', 'p:cpr-adult', 'p:cpr-child', 'p:cpr-infant',
+           'p:drowning', 'p:fainting', 'p:fracture', 'p:frostbite', 'p:heat-illness', 'p:hemostatic-packing', 'p:hypothermia',
+           'p:needle-decompression', 'p:pelvic-binder', 'p:poisoning', 'p:seizure', 'p:shock', 'p:snakebite', 'p:spine-injury',
+           'p:sprain-dislocation', 's:surv-fire'],
+    'bleach': ['p:poisoning', 's:surv-clean-and-disinfect', 's:surv-make-water-safe', 's:surv-water-store', 's:surv-toilet-no-water',
+               'p:poison-plants', 'p:vomiting-diarrhea', 's:surv-find-water', 's:surv-garbage-and-greywater', 's:surv-stomach-illness-in-a-group',
+               's:surv-water-winter', 's:surv-wells-without-power', 'c:home-water-store', 'c:sanitation-kit'],
+    'burn': ['t:burn', 'p:burns', 's:surv-carbon-monoxide', 'p:poison-plants', 's:surv-garbage-and-greywater', 's:surv-wood-stoves-fireplaces',
+             's:surv-firewood', 's:surv-portable-heaters', 's:surv-sleep-warm', 's:surv-store-fuel', 'p:blisters', 'p:carbon-monoxide',
+             'p:cricothyrotomy', 'p:hypothermia', 'p:lightning', 'p:march', 'p:poisoning', 'p:spider-scorpion', 'p:wound-care', 's:surv-fire',
+             's:surv-generators', 's:surv-heat-out', 's:surv-latrines', 's:surv-make-water-safe', 's:surv-priorities', 's:surv-shelter',
+             's:surv-unheated-house', 's:surv-water-in-the-house', 's:surv-water-winter', 's:surv-winter-storms'],
+}
+
+
+@pytest.mark.parametrize('text', sorted(V73_RESULTS))
+def test_v73_results_for_co_bleach_and_burn_keep_their_order_with_the_radiation_pages_added(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    ks = [r['key'] for r in q(page, text)]
+    old = V73_RESULTS[text]
+    kept = [k for k in ks if k in old]
+    assert kept == old[:len(kept)], f'{text!r}: v7.3 results reordered: {kept}'
+    assert ks[:2] == old[:2]   # the head of each list is exactly as in v7.3
+    assert [k for k in ks if k not in old and k not in RADIATION_KEYS] == []   # nothing but radiation pages joins the list (the 30-result cap may push a v7.3 tail result out)

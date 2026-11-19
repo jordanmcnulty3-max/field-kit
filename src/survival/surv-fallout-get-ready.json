@@ -65,6 +65,10 @@
           ]
         },
         {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
           "link": "s:surv-water-how-much",
           "label": "How much water you need"
         },
@@ -144,6 +148,10 @@
           ]
         },
         {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
+        },
+        {
           "link": "s:surv-fallout-warning",
           "label": "Fallout warning: what to do first"
         }
@@ -158,6 +166,14 @@
         {
           "link": "s:surv-fallout-warning",
           "label": "Fallout warning: what to do first"
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
         },
         {
           "link": "s:surv-dirty-bomb",

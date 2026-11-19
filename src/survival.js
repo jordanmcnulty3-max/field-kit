@@ -291,7 +291,7 @@
   const tagged = (t, dim, val) => val === 'any' || !Array.isArray(t[dim]) || !t[dim].length || t[dim].includes(val);
   const matches = (t, f) => tagged(t, 'where', f.where) && tagged(t, 'when', f.when);
   /* Each category's hub topic leads its list (Priorities in Basics, the heat hub in Heat); the rest go by title. */
-  const LEADS = ['surv-priorities', 'surv-heat-out'];
+  const LEADS = ['surv-priorities', 'surv-heat-out', 'surv-fallout-warning'];
   const lead = t => (LEADS.includes(t.id) ? 0 : 1);
   const byTitle = (a, b) => lead(a) - lead(b) || a.title.localeCompare(b.title);
 

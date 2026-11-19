@@ -73,6 +73,10 @@
             "Put the bag where others won’t touch it, and keep it until officials say what to do with it (CDC).",
             "Listen to local radio or TV news, or official government social media accounts, for instructions (CDC)."
           ]
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
         }
       ]
     },
@@ -87,6 +91,10 @@
             "If you must go outside, cover your nose and mouth with a cloth. Coming back in, clean off as in the steps above, and store the bag where others won’t touch it (CDC).",
             "Listen to local radio or TV news, or official government social media accounts, for instructions (CDC)."
           ]
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
         },
         {
           "p": "It is not necessary to put duct tape or plastic around doors or windows (CDC)."
@@ -191,6 +199,14 @@
             "People hurt by radioactive pieces, or covered in radioactive dust, will need medical care (CDC).",
             "The low radiation expected from a dirty bomb may cause no symptoms. Anyone who gets symptoms such as nausea, vomiting, diarrhea, or swelling and redness of the skin should get medical care from a doctor, hospital or the place officials name (CDC)."
           ]
+        },
+        {
+          "link": "p:radiation-sickness",
+          "label": "Radiation sickness"
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
         },
         {
           "link": "p:bleeding",

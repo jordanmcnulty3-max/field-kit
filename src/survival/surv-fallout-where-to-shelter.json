@@ -125,6 +125,10 @@
         {
           "link": "s:surv-fallout-how-long",
           "label": "How long to stay in"
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
         }
       ]
     },
@@ -138,6 +142,10 @@
             "If you must be outside and can’t get inside right away, cover your mouth and nose with a mask, cloth or towel (CDC).",
             "Before you go in, carefully take off your outer layer of clothes, if you can (CDC)."
           ]
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
         }
       ]
     },

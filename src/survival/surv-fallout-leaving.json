@@ -108,6 +108,14 @@
         {
           "link": "p:shock",
           "label": "Shock"
+        },
+        {
+          "link": "p:radiation-sickness",
+          "label": "Radiation sickness"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
         }
       ]
     },

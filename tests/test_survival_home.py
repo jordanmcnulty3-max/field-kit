@@ -1,5 +1,8 @@
 """Task 5: Survival home, category lists, filters and homeItems providers."""
+import glob
 import json
+import os
+import subprocess
 
 import pytest
 from playwright.sync_api import expect
@@ -353,7 +356,12 @@ ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-sa
           # heat pack (Task 10): the hub and every fuel-burning topic; winter storms (downed lines, stranded car) and
           # sleep warm (heater and engine sleep rules) by ruling of the Task 9 review (I4)
           's:surv-heat-out', 's:surv-carbon-monoxide', 's:surv-wood-stoves-fireplaces', 's:surv-portable-heaters',
-          's:surv-generators', 's:surv-store-fuel', 's:surv-winter-storms', 's:surv-sleep-warm']
+          's:surv-generators', 's:surv-store-fuel', 's:surv-winter-storms', 's:surv-sleep-warm',
+          # radiation pack (Task 8): all ten topics, so no Where or When filter can hide fallout guidance (spec 4)
+          's:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
+          's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
+          's:surv-potassium-iodide', 's:surv-fallout-get-ready']
+RADIATION = ALWAYS[-10:]
 # Topics tagged when: cold: listed under Any and Cold, hidden under Warm, for every Where value.
 WHEN_COLD = ['s:surv-unheated-house', 's:surv-dress-for-cold', 's:surv-wind-chill', 's:surv-water-winter']
 WHERES = ('any', 'town', 'rural', 'woods', 'coast')
@@ -495,3 +503,146 @@ def test_f14_not_found_message_is_cleared_when_the_home_is_next_shown(page, app_
     page.evaluate("FK.route.go('/survival')")
     wait_hash(page, '#/survival')
     expect(page.locator('#survLive')).to_have_text('')
+
+
+# ---------- Radiation pack (Task 8): category home, protected topics, links ----------
+
+RAD = 'Radiation and fallout'
+
+
+def _shipped(folder):
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return {os.path.basename(p)[:-5]: json.load(open(p, encoding='utf-8')) for p in glob.glob(os.path.join(root, 'src', folder, '*.json'))}
+
+
+def test_radiation_topics_carry_no_where_or_when_key_in_the_shipped_data():
+    rad = {i: t for i, t in _shipped('survival').items() if t.get('category') == 'radiation'}
+    assert sorted('s:' + i for i in rad) == sorted(RADIATION)
+    for i, t in rad.items():
+        assert 'where' not in t and 'when' not in t, i
+
+
+def test_radiation_hub_leads_the_category_and_all_ten_are_listed_under_every_filter(page, app_url):
+    shipped_home(page, app_url)
+    open_cat(page, RAD)
+    for where in WHERES:
+        for when in ('any', 'cold', 'warm'):
+            page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
+            rad = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"radiation\"] button[data-key]')].map(b => b.dataset.key)")
+            assert sorted(rad) == sorted(RADIATION), f'where={where} when={when}: {rad}'
+            assert rad[0] == 's:surv-fallout-warning', f'where={where} when={when}: {rad}'
+
+
+def test_radiation_category_header_and_its_ten_rows_fit_360px(page, app_url):
+    shipped_home(page, app_url)
+    open_cat(page, RAD)
+    for night in (False, True):
+        if night:
+            page.click('#nightBtn')
+            assert page.evaluate('document.documentElement.dataset.theme') == 'night'
+        d = page.locator('#survCats details[data-cat="radiation"]')
+        boxes = [d.locator('summary').bounding_box()] + [b.bounding_box() for b in d.locator('button[data-key]').all()]
+        assert len(boxes) == 11
+        for b in boxes:
+            assert b['x'] >= 0 and b['x'] + b['width'] <= 360, b
+        assert page.evaluate('document.documentElement.scrollWidth') <= 360
+        spill = page.evaluate("""[...document.querySelectorAll('#survCats details[data-cat="radiation"] button[data-key]')].filter(b => {
+            const r = b.getBoundingClientRect(), s = b.querySelector('span').getBoundingClientRect();
+            return s.left < r.left || s.right > r.right || b.scrollWidth > b.clientWidth + 1; }).map(b => b.textContent)""")
+        assert spill == []
+
+
+def _links(node):
+    """Every link key in a topic's section blocks."""
+    out = []
+    for sec in node.get('sections', []):
+        for b in sec.get('blocks', []):
+            if isinstance(b, dict) and 'link' in b:
+                out.append(b['link'])
+    return out
+
+
+RADIATION_PROTOCOLS = ['p:radiation-decontamination', 'p:radiation-sickness']
+
+
+def test_every_link_in_the_radiation_topics_and_the_six_protected_topics_resolves():
+    from tools.validate import TOOL_NAMES
+    topics, protocols, lists = _shipped('survival'), _shipped('protocols'), _shipped('checklists')
+    known = ({'p:' + i for i in protocols} | {'s:' + i for i in topics} | {'c:' + i for i in lists}
+             | {'u:' + n for n in TOOL_NAMES} | {'t:tq', 't:cpr', 't:rate', 't:burn', 'r:9line', 'r:mist'}
+             | {'a:' + n for n in ('map', 'position', 'ballistics', 'areas', 'waypoints', 'settings')})
+    assert 'u:fallout' not in known   # ruled out: no fallout tool
+    assert 'c:fallout-shelter-kit' in known
+    for tid in [k[2:] for k in RADIATION] + list(SIX):
+        for k in _links(topics[tid]):
+            assert k in known, f'{tid}: unknown link {k}'
+
+
+def test_the_hub_links_every_other_radiation_topic_and_both_protocols():
+    hub = _links(_shipped('survival')['surv-fallout-warning'])
+    for k in RADIATION[1:] + RADIATION_PROTOCOLS:
+        assert k in hub, k
+    assert 'c:fallout-shelter-kit' in hub
+
+
+# link blocks that earlier writers could not add because the targets did not exist (docs/v7.4-rulings.md, "Links later tasks must add")
+LATER_LINKS = {
+    'surv-fallout-warning': ['s:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
+                             's:surv-potassium-iodide', 's:surv-fallout-get-ready', 'p:radiation-decontamination', 'p:radiation-sickness'],
+    'surv-fallout-how-long': ['s:surv-fallout-leaving', 's:surv-fallout-coming-inside', 'p:radiation-decontamination'],
+    'surv-fallout-where-to-shelter': ['s:surv-fallout-leaving', 's:surv-fallout-coming-inside'],
+    'surv-fallout-shelter-living': ['s:surv-fallout-water-and-food', 's:surv-fallout-coming-inside', 'p:radiation-decontamination', 's:surv-fallout-leaving'],
+    'surv-dirty-bomb': ['p:radiation-decontamination', 'p:radiation-sickness', 's:surv-fallout-leaving'],
+    'surv-fallout-get-ready': ['s:surv-fallout-water-and-food', 's:surv-fallout-coming-inside', 'p:radiation-decontamination', 's:surv-fallout-leaving'],
+    'surv-fallout-leaving': ['p:radiation-sickness', 'p:radiation-decontamination'],
+    'surv-fallout-coming-inside': ['p:radiation-decontamination', 'p:radiation-sickness'],
+}
+
+
+@pytest.mark.parametrize('tid,wanted', sorted(LATER_LINKS.items()))
+def test_links_the_earlier_radiation_writers_could_not_add_are_there(tid, wanted):
+    have = _links(_shipped('survival')[tid])
+    for k in wanted:
+        assert k in have, f'{tid} lacks {k}'
+
+
+def test_get_ready_reaches_the_shelter_kit_checklist():
+    assert 'c:fallout-shelter-kit' in _links(_shipped('survival')['surv-fallout-get-ready'])
+
+
+# the six checked topics each gain exactly one link block to a radiation topic and nothing else
+SIX = {'surv-priorities': 's:surv-fallout-warning', 'surv-shelter': 's:surv-fallout-where-to-shelter',
+       'surv-heat-out': 's:surv-fallout-shelter-living', 'surv-carbon-monoxide': 's:surv-fallout-shelter-living',
+       'surv-water-store': 's:surv-fallout-water-and-food', 'surv-water-in-the-house': 's:surv-fallout-water-and-food'}
+
+
+def _main_text(name):
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    for ref in ('main', 'origin/main'):
+        r = subprocess.run(['git', 'show', f'{ref}:src/survival/{name}.json'], cwd=root, capture_output=True, text=True, encoding='utf-8')
+        if r.returncode == 0:
+            return json.loads(r.stdout)
+    pytest.skip('neither main nor origin/main is available')
+
+
+@pytest.mark.parametrize('tid,target', sorted(SIX.items()))
+def test_the_six_checked_topics_differ_from_main_by_one_added_link_block(tid, target):
+    now, was = _shipped('survival')[tid], _main_text(tid)
+    extra = []
+    now_sections = json.loads(json.dumps(now['sections']))
+    assert len(now_sections) == len(was['sections']), tid
+    for sn, sw in zip(now_sections, was['sections']):
+        assert sn['h'] == sw['h'], tid
+        bn, bw = sn['blocks'], sw['blocks']
+        if bn != bw:
+            # the new block is the only difference: removing it gives back main's blocks
+            added = [i for i in range(len(bn)) if bn[:i] + bn[i + 1:] == bw]
+            assert added, f'{tid}: section {sn["h"]!r} differs by more than one block'
+            extra.append(bn[added[0]])
+    assert len(extra) == 1, f'{tid}: expected one added block, found {extra}'
+    assert set(extra[0]) == {'link', 'label'} and extra[0]['link'] == target, extra[0]
+    assert all(isinstance(v, str) and v for v in extra[0].values())
+    for k in now:
+        if k != 'sections':
+            assert now[k] == was[k], f'{tid}: {k} changed'
+    assert set(now) == set(was)

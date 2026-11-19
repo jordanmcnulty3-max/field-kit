@@ -151,6 +151,10 @@
         {
           "link": "u:water",
           "label": "Water planner"
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
         }
       ]
     }

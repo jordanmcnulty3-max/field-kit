@@ -38,6 +38,10 @@
         {
           "fig": "shelter-site",
           "cap": "Low ground collects cold air at night and floods. Pick level ground above flood level, out of the wind."
+        },
+        {
+          "link": "s:surv-fallout-where-to-shelter",
+          "label": "Where to shelter from fallout"
         }
       ]
     },

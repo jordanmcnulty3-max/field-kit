@@ -39,6 +39,10 @@
             "NYC Health: expect to shelter indoors for at least 24 hours.",
             "FEMA’s planning guidance: get inside, stay inside, stay tuned for at least 12 to 24 hours, unless threatened by fire, building collapse, medical needs or another immediate threat. This app uses the longer figure: at least 24 hours."
           ]
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
         }
       ]
     },
@@ -136,6 +140,14 @@
         {
           "link": "s:surv-generators",
           "label": "Generators"
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
         }
       ]
     },

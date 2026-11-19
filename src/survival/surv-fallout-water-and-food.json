@@ -81,6 +81,10 @@
           "label": "Store water at home"
         },
         {
+          "link": "s:surv-fallout-get-ready",
+          "label": "Get ready for fallout"
+        },
+        {
           "link": "s:surv-water-in-the-house",
           "label": "Water already in your house"
         }

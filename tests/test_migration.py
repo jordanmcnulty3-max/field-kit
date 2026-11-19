@@ -454,3 +454,22 @@ def test_v72_backup_with_fire_and_shelter_keys_restores(page, app_url, tmp_path)
     page.wait_for_function("location.hash === '#/survival'")
     _open_from(page, '#survPinned', 's:surv-fire', 'Fire')
     _open_from(page, '#survRecent', 's:surv-shelter', 'Shelter')
+
+
+# ---------- Radiation pack (v7.4): a v7.3-shaped backup restores and its keys still open ----------
+
+def test_v73_backup_restores_on_v74_and_its_pins_recents_and_filter_open(page, app_url, tmp_path):
+    boot(page, app_url, hash_='#/survival')
+    v73 = backup_file({'fk.pins': json.dumps(['s:surv-heat-out', 's:surv-carbon-monoxide']),
+                       'fk.recent': json.dumps(['s:surv-priorities', 's:surv-heat-out']),
+                       'fk.survFilter': json.dumps({'where': 'rural', 'when': 'cold'}), 'fk.night': 'false'}, version='7.3')
+    pick(page, tmp_path, v73)
+    restore_now(page)
+    assert page.evaluate('FK.pins.all()') == ['s:surv-heat-out', 's:surv-carbon-monoxide']
+    page.wait_for_function("location.hash === '#/survival'")
+    _open_from(page, '#survPinned', 's:surv-heat-out', 'Stay warm when the heat is out')
+    _open_from(page, '#survRecent', 's:surv-priorities', 'Priorities')
+    # the restored Rural + Cold filter hides no radiation topic: all ten are listed
+    page.locator('#survCats summary', has_text='Radiation and fallout').click()
+    listed_keys = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"radiation\"] button[data-key]')].map(b => b.dataset.key)")
+    assert len(listed_keys) == 10 and listed_keys[0] == 's:surv-fallout-warning'

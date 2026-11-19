@@ -5271,3 +5271,65 @@ them); 1,000 feet = 300 m; 8 quarts = 7.6 L. Celsius in the temperature table is
 - Protocols: Severe vomiting or diarrhea, Dehydration, Carbon monoxide poisoning and the CPR protocols linked by exact title;
   none edited.
 - No `where` or `when` tag, no 911 or dial control, no home town, no question numbers or task words in user-visible text.
+
+### Food pack batch A fix round 1 (2026-11-19), from task-1-review.md
+
+Re-opened by the writer with built-in fetch on 2026-11-19 (titles checked): GE Appliances contentId=19226 and 17512, Whirlpool,
+KitchenAid, Sub-Zero/Wolf (URLs and verbatim quotes in docs/v7.5-rulings.md "Indoor cooking"); Ready.gov Power Outage Tips
+(https://ready.gov/tr/node/5151, English, undated); FSIS-EM (/es/node/3347) for the flood lines. NCHFP-SP's clean-up sentences
+are as recorded in the batch A record (first fetch), confirmed by the reviewer's re-open. Draft removed from all four topics.
+
+- Critical 1 (pull tops): FSIS-EM "Food containers that are not waterproof include those with screw-caps, snap lids, pull tops, and
+  crimped caps." and "Discard any food that is not in a waterproof container if there is any chance" / "that it has come into contact
+  with flood water." Is it still good? flood list item 6 now adds pull tops (CDC, USDA); the saving step says "all-metal cans without
+  pull tops" and "Pull-top cans are not waterproof: throw them out (USDA)."
+- Minor 3 (air-dry): FSIS-EM salvage steps in order: "Remove the labels, if they are the removable kind..."; "Thoroughly wash the
+  cans or retort pouches with soap and water, using hot water if it is available."; "Brush or wipe away any dirt or silt."; "Rinse
+  the cans or retort pouches with water that is safe for drinking, if available,"; boil 2 minutes or the 1-tablespoon solution 15
+  minutes; "Air-dry cans or retort pouches for a minimum of 1 hour before opening or storing."; re-label "including the expiration
+  date (if available), with a marker."; use as soon as possible. The topic merges CDC's and USDA's steps in that order (CDC brushes
+  before washing; USDA washes then brushes: the topic brushes first, then washes and rinses, which loses nothing), boiling only.
+- Important 7 (flooded dishes): FSIS-EM "Thoroughly wash metal pans, ceramic dishes, and utensils (including can openers)" / "with
+  soap and water, using hot water if available."; "Rinse and then sanitize them by boiling in clean water or immersing them for 15
+  minutes" / "in a solution of 1 tablespoon of unscented, liquid chlorine bleach per gallon of drinking water"; "Thoroughly wash
+  countertops with soap and water, using hot water if available."; "Rinse and then sanitize them by applying a solution of 1
+  tablespoon of unscented, liquid chlorine bleach" / "per gallon of drinking water"; "Allow to air-dry." The mix equals Clean and
+  disinfect's food mix and is named, not restated. CDC-KFS's 1 cup in 5 gallons is not given (D121).
+- Important 4 (refreezing): NYS-FF "Toss thawed foods if freezer is above 40 degrees F." (in the batch A first fetch, missing from
+  the record); CDC-PO "All perishable foods in your freezer if they have thawed."; FSG-CH thawed column refreezes hard cheeses,
+  fruit juices, fruit, breads, rolls, muffins and cakes without custard, pie crusts and dough, flour, cornmeal, nuts, waffles,
+  pancakes and bagels. Comparison: FSG-CH is the looser; NYS-FF and CDC-PO the more cautious. Controller ruling: the cautious reading.
+  Is it still good? Do first 3, "The time limits" 3, "Freezer food" list 2 and the chart lead-in state it; the chart keeps only its
+  ice-crystal column (every row's value in it unchanged). D128.
+- Important 1 (game): ground meats row "(not wild game)", ham row "(uncooked; not wild boar)", and "Wild game, ground or whole, is
+  always 165°F (73.9°C)." under the table (Field dressing game's rule).
+- Important 2 (gas range): new section text and Do first 4 from GE, Whirlpool, KitchenAid and Wolf (quotes in the rulings). Each
+  condition and its source: manual first, safety feature may prevent it (Whirlpool, KitchenAid); surface burners only, oven can't be
+  lit (GE, Whirlpool, KitchenAid); no griddles, grills, French tops, charbroilers (Wolf; Whirlpool: vent may not be working); match
+  first, then knob (GE, KitchenAid), ignitor at least 6 inches (Wolf; 15 cm the app's conversion); no automatic relight (Wolf); blown
+  out, gas still flows, turn to Off (GE); monitor closely (Wolf); never to heat the kitchen (Wolf). EPA-PO quoted for the agency side.
+  The EPA-CP source line was removed from the topic (no longer used there). D117.
+- Important 3 (distance): Ready.gov Power Outage Tips "Generators, camp stoves or charcoal grills should always be used outdoors and
+  at least 20 feet away from windows."; 20 feet = 6 m as the checked Generators topic writes it. Do first 5, the outdoor list and the
+  summary use it, with EPA's doors and air intakes and Massachusetts's 10 feet from any building. D119.
+- Important 5: Food poisoning Do first 4 now bags only a sealed container; leaking or open goes to the detox steps first (NCHFP order).
+- Important 6: Is it still good? Do first 4 (cans, jars, home-canned, CDC-HC) and 5 (flood water, CDC-KFS) added; Do first 1 merges
+  never-taste, the smell/color/texture rule (Minor 2: "a normal one proves nothing") and "When in doubt, throw it out".
+- Important 7 (spill) and Minor 1: NCHFP-SP's clean-up given in full, in its order ("A fresh solution of 1 part unscented liquid
+  household chlorine bleach (5 to 6% sodium hypochlorite) to 5 parts clean water" / "should be used to treat work surfaces,
+  equipment, or other items, including can openers and clothing," / "that may have come in contact with suspect foods or liquids.";
+  "Spray or wet contaminated surfaces with the bleach solution and let stand for 30 minutes."; "Wearing gloves, wipe up treated
+  spills with paper towels being careful to minimize the spread of contamination."; "Dispose of these paper towels by placing them
+  in a plastic bag before putting them in the trash."; "Next, apply the bleach solution to all surfaces and equipment again, and let
+  stand for 30 minutes and rinse."; "As a last step, thoroughly wash all detoxified counters, containers, equipment, clothing, etc.";
+  "Discard gloves when cleaning process is complete."; "(Note: Bleach is an irritant itself and should not be inhaled or allowed to
+  come in contact with the skin.)"), with a warn label and the never-mix line from Clean and disinfect (CDC). "This app does not give
+  it yet" removed. D123.
+- Important 8 (search): keywords removed and replaced; hub heading "Thermometers" renamed "Check the temperature"; remaining changes
+  on screen listed in docs/v7.5-rulings.md ruling 21.
+- Minor 4: baby Do first adds sluggish and "floppy" (NYS-BOT) and pupils slow to react to light (CDC-BOT).
+- Minor 5: the 1-hour limit above 90°F (32°C) is in Is it still good?'s summary.
+- Minor 6: fallout sentence now "cook only on what Living in a closed-up house allows".
+- Minor 7: "and bottles" added to the permeable packaging line (FSIS-EM; the end of the sentence as the fetch summarised it).
+- Tool gate final: No food planner (controller ruling). Botulism gate final: no protocol. Both recorded in docs/v7.5-rulings.md and
+  added to Deferred.

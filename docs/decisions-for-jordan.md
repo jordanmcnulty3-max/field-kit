@@ -866,45 +866,61 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
 Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in docs/v7.5-rulings.md.
 
 117. **Cooking indoors on a gas or propane range, or on a vented wood stove or fireplace (surv-food-cooking-no-power).** The
-   checked topics forbid heating the house with a gas oven or range and cooking on a stove or fireplace that isn't vented; they
-   didn't say whether cooking on a range lit by hand, or on a vented wood stove, is allowed. EPA (Power Outages and Indoor Air
-   Quality, 2026): "You can use a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up
-   for cooking", and vented appliances can be used to cook indoors in an outage "if the vent does not require power to operate".
-   No opened source (EPA, CDC, Ready.gov, New York State Public Service, NYC Emergency Management, Maine CDC) says in words that
-   you can cook on a gas or propane range in a power outage; they say only never to heat with one. Today: a vented fireplace or
-   wood stove set up for cooking is allowed under EPA's conditions and every rule in Wood stoves and fireplaces, with CO alarms;
-   a gas or propane range is not, labelled as this app's own caution (EPA's normal-times advice for ranges is an exhaust fan
-   vented outdoors, which needs power); otherwise cook outdoors or eat food cold. Cost: households without a wood stove or
-   fireplace cook outdoors in winter or eat cold food. Say if the group wants the range allowed, and under what conditions (for
-   example a window open, a CO alarm in the kitchen, short use only, never unattended, never for heat).
+   checked topics forbid heating the house with a gas oven or range, and cooking on a stove or fireplace that isn't vented. One
+   side: the range makers GE, Whirlpool, KitchenAid and Wolf say the surface burners can be lit with a match in a power outage on
+   models that allow it, with conditions: check the model's manual first (some models have a safety feature that prevents it);
+   surface burners only, never the oven (it can't be lit by hand), and never griddles, grills, French tops or charbroilers (Wolf;
+   Whirlpool: the vent may not be working); match first, then the knob; the burner is lit or off, with no automatic relight, and
+   gas keeps flowing if the flame blows out (GE, Wolf); monitor it closely; never use it to heat the kitchen (Wolf). The other side:
+   no government agency page opened (EPA, CDC, Ready.gov, NYS Public Service, NYS DHSES, NYC Health, NYC Emergency Management, Maine
+   CDC, CPSC) says anything about cooking on a range in an outage; all say never to heat with one. EPA's outage page allows indoor
+   cooking only on "a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking",
+   says vented appliances can be used "if the vent does not require power to operate", and says "Unvented combustion appliances
+   should not be used to cook indoors"; in normal times EPA advises an exhaust fan vented outdoors over gas ranges, which needs
+   power. CDC's checked line "Don't cook or burn anything on a stove or fireplace that isn't vented" could be read to cover a range.
+   No source says anything about the carbon monoxide risk of cooking on a range in an outage, a window open, or how long. Today
+   (controller ruling): the range is allowed as the makers allow it, with every condition above, only if the model's manual allows
+   hand lighting (otherwise no); "Never heat the house with a gas oven or range (CDC, CPSC)" sits beside it, with a link to Carbon
+   monoxide for alarms. A vented fireplace or wood stove set up for cooking is allowed under EPA's conditions and every rule in Wood
+   stoves and fireplaces. Say if the group wants the range ruled out in a power cut (the cautious reading of EPA and CDC), or more
+   conditions (for example a window open, or short use only).
 118. **Candle warmers, chafing dishes and fondue pots (surv-food-cooking-no-power).** Ready.gov lists them, with a fireplace,
    as alternative cooking sources in an emergency. They burn fuel in the room, and no opened source says how to use them indoors
    without carbon monoxide building up. Today: labelled app caution, don't use them while the power is out. Say if the group
    wants them allowed.
-119. **How far a grill stays from the house (surv-food-cooking-no-power).** Massachusetts Department of Fire Services: 10 feet from
-   the side of a building unless the maker's instructions say it can be closer. New York's Division of Consumer Protection: at
-   least 3 feet from siding, deck rails and eaves, and never next to your home. EPA: "a safe distance" from doors, windows and air
-   intakes. Today: 10 feet (the more cautious). Say if the group wants New York's figure.
+119. **How far a grill or camp stove stays from the house (surv-food-cooking-no-power).** Ready.gov (Power Outage Tips):
+   "Generators, camp stoves or charcoal grills should always be used outdoors and at least 20 feet away from windows."
+   Massachusetts Department of Fire Services: 10 feet from the side of a building unless the maker's instructions say it can be
+   closer. New York's Division of Consumer Protection: at least 3 feet from siding, deck rails and eaves, and never next to your
+   home. EPA: "a safe distance" from doors, windows and air intakes. Today: at least 20 feet from windows (Ready.gov, the federal
+   and most cautious figure), a safe distance from doors and air intakes (EPA), and at least 10 feet from the side of any building
+   (Massachusetts). Say if the group wants a different figure.
 120. **A cold house and the fridge's 4 hours (surv-food-still-good).** CDC: throw out perishable fridge food "after 4 hours without
    power or without a cold source like ice". In a Central New York winter the kitchen itself may be near 40°F, and a fridge
    thermometer may still read 40°F or below after 4 hours. No source says a cold room counts as a cold source; New York State
    Department of Health says never to put food outside, even in winter. Today: the 4-hour rule stands unless the food was kept
    with ice or another cold source and checked at 40°F or below. Say if the group wants a thermometer reading alone to be enough.
-121. **Food, cans and dishes after a flood (surv-food-still-good).** CDC cleans undamaged cans either by a bleach soak (1 cup of
-   bleach in 5 gallons of water, 15 minutes) or by boiling 2 minutes, and sanitizes flooded dishes and food surfaces with 1 cup
-   of bleach in 5 gallons. That mix is stronger than Clean and disinfect's food mix and is not one of the app's two mixes. Today:
-   the topic gives CDC's boiling method for cans only and gives no sanitizing step for flooded dishes. Say whether the group wants
-   CDC's flood mix added to Clean and disinfect (a change to a checked topic).
+121. **Food, cans and dishes after a flood (surv-food-still-good).** USDA FSIS: wash pans, dishes and utensils (can openers
+   included), rinse, then boil them in clean water or immerse them 15 minutes in 1 tablespoon of unscented bleach per gallon; the
+   same solution on washed countertops, then air-dry; cans: boil 2 minutes or the same solution 15 minutes, then air-dry at least 1
+   hour. USDA's solution is Clean and disinfect's food mix. CDC uses 1 cup of bleach in 5 gallons (about 3 tablespoons a gallon),
+   1 minute for dishes and 15 minutes for cans, which matches neither of the app's mixes. Today: USDA's steps, with the food mix
+   named (not restated) and USDA's 15 minutes, or boiling; cans by boiling 2 minutes and air-drying 1 hour; pull-top cans thrown
+   out (USDA). CDC's stronger mix is not given. Say if the group wants CDC's mix added to Clean and disinfect (a checked topic).
 122. **Botulism with no hospital (surv-food-poisoning). Medical professional.** CDC and New York State Department of Health say
    only to see a doctor or go to the emergency room immediately; botulism needs antitoxin and may need a breathing machine. No
    opened source gives anything a lay person can do without a hospital, so there is no botulism protocol. Today: the topic says so,
    and, labelled as this app's reading, says to keep trying to reach medical care and to use the CPR protocols if the person stops
    responding and is not breathing normally. Ask a medical professional what a group with no hospital should do (for example
    about rescue breathing for hours, swallowing, or giving food and drink).
-123. **Cleaning up a spill from a suspect can or jar (surv-food-poisoning).** The National Center for Home Food Preservation uses
-   1 part household bleach to 5 parts water, left 30 minutes, applied twice, for surfaces, can openers and clothing. That is
-   much stronger than either of the app's two mixes. Today: the topic gives gloves, keeping it off the skin and bagging paper
-   towels, and says the source's bleach clean-up is not in the app yet. Say if the group wants it added (it would be a third mix).
+123. **Cleaning up a spill from a suspect can or jar: a third bleach mix (surv-food-poisoning).** The standing decision is two
+   household bleach mixes only (Clean and disinfect's strong mix and food mix). The National Center for Home Food Preservation's
+   clean-up for botulism toxin uses a fresh 1 part unscented liquid household bleach (5 to 6%) to 5 parts clean water, on surfaces,
+   equipment, can openers and clothing, left 30 minutes, wiped up with gloves and paper towels that are bagged, applied again for
+   30 minutes, rinsed, then everything washed. That is far stronger than either mix. Today (controller ruling): NCHFP's clean-up is
+   given in full in Food poisoning and botulism only, named as NCHFP's, labelled for this clean-up only, never for drinking water,
+   never as an everyday sanitizer for dishes or food surfaces, never mixed with another cleaner. This is yours to keep or cut: keep
+   it (a toxin spill gets a real step) or cut it (back to two mixes, and a spill gets gloves and bagging only).
 124. **Other jars from the same batch (surv-food-poisoning).** No opened source says what to do with them. Today: labelled app
    caution: if one container from a batch shows any warning sign, or someone got sick after eating from it, treat the whole batch
    as suspect. Say if the group wants a different rule.
@@ -920,9 +936,13 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    USDA: 50 pounds holds an 18-cubic-foot full freezer for 2 days; Ready.gov: 25 pounds keeps a 10-cubic-foot freezer below
    freezing for 3 to 4 days. No handling source could be opened. Today: dry ice is not mentioned; block ice, homemade ice and
    coolers are. Say if the group wants it added once a handling source is opened.
-128. **"Unusual taste or smell" (surv-food-still-good).** New York State Department of Health's botulism page says you can lower the
-   risk by "not eating foods with an unusual taste or smell". CDC: never taste food to see if it is safe. Today: CDC's rule; a bad
-   smell or look is only ever a reason to throw food out. No choice needed.
+128. **Refreezing thawed freezer food (surv-food-still-good).** FoodSafety.gov's freezer chart lets hard cheese, bread and rolls,
+   flour, cornmeal, nuts, waffles, pancakes, bagels, pie crusts and dough, fruit and fruit juice be refrozen even after more than 2
+   hours above 40°F. New York State Department of Health: "Toss thawed foods if freezer is above 40 degrees F." CDC: throw out "All
+   perishable foods in your freezer if they have thawed." Today (controller ruling, the more cautious): refreeze or cook only what
+   still has ice crystals or is at 40°F or below; once the freezer is above 40°F, thawed food is thrown out, and the chart's thawed
+   column is not shown. (The earlier D128, New York's "unusual taste or smell" line against CDC's never taste, needed no choice and is
+   recorded in docs/v7.5-rulings.md ruling 16.) Say if the group wants the chart's thawed-but-keep foods back.
 129. **Home-canned food from someone else (surv-food-still-good).** CDC: don't eat home-canned food if you don't know whether safe
    canning guidelines were followed; if you do, boil home-canned tomatoes and low-acid food 10 minutes (plus 1 minute per 1,000
    feet) before eating. Today: both, in that order. Say if the group wants a stricter rule (for example, never eat home-canned

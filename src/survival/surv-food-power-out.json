@@ -3,9 +3,7 @@
   "title": "Food when the power goes out",
   "category": "food",
   "keywords": [
-    "power outage food",
     "power out food",
-    "food power outage",
     "fridge",
     "refrigerator",
     "freezer",
@@ -13,10 +11,11 @@
     "keep food cold",
     "how long does a freezer stay cold",
     "how long does the fridge stay cold",
-    "cooler",
-    "appliance thermometer",
     "food outside in winter",
-    "food in the snow"
+    "food in the snow",
+    "fridge without power",
+    "freezer without power",
+    "keep the freezer cold"
   ],
   "summary": "Keep the fridge and freezer doors shut. A fridge keeps food cold for about 4 hours; a full freezer about 48 hours, a half-full one about 24. Eat the most perishable food first, move fridge food into a cooler with ice after 4 hours, and never put food outside to keep it cold, even in winter. Check food in Is it still good? before you eat or refreeze it.",
   "doFirst": [
@@ -95,7 +94,7 @@
       ]
     },
     {
-      "h": "Thermometers",
+      "h": "Check the temperature",
       "blocks": [
         {
           "list": [
@@ -203,6 +202,5 @@
       "used": "Its first Do first line, quoted word for word"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

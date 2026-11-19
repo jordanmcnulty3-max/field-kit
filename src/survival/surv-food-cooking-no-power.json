@@ -5,22 +5,21 @@
   "keywords": [
     "cook without power",
     "cooking without power",
-    "cook without electricity",
     "cook outside",
-    "cooking on a grill",
-    "food thermometer",
-    "meat thermometer",
+    "light gas burner with a match",
+    "stove burner by hand",
     "cooking temperature",
     "internal temperature",
+    "safe minimum temperature",
     "eat food cold"
   ],
-  "summary": "Never cook with a grill, camp stove or charcoal indoors, and never heat the house with a gas oven or range. Indoors, cook only on a fireplace or wood stove vented to the outside and set up for cooking. This app says not to cook on a gas or propane range while the power is out. Otherwise cook outdoors, away from the house, or eat food cold. Cook meat, poultry, eggs and leftovers to the temperatures in the table, checked with a food thermometer.",
+  "summary": "Never cook with a grill, camp stove or charcoal indoors, and never heat the house with a gas oven or range. Indoors, cook on a fireplace or wood stove vented to the outside and set up for cooking, or on a gas range’s surface burners lit by match only if your model’s manual allows it, watched the whole time. Otherwise cook outdoors, at least 20 feet (6 m) from windows, or eat food cold. Cook meat, poultry, eggs and leftovers to the temperatures in the table, checked with a food thermometer.",
   "doFirst": [
     "Never burn charcoal, or use a grill, hibachi, fuel lantern or camp stove indoors, and never heat the house with a gas oven or range (CDC, CPSC).",
     "Never run a generator in the house, garage, basement, crawlspace, shed, porch or carport, even with doors and windows open (CDC, CPSC). See Generators.",
-    "Indoors, cook only on a fireplace or wood stove that is vented to the outside, set up for cooking, and has a vent that needs no power to work (EPA), under every rule in Wood stoves and fireplaces.",
-    "Gas or propane kitchen range: this app’s own caution is not to cook on it while the power is out. No source opened for this app says you can.",
-    "Otherwise cook outdoors, at least 10 feet (3 m) from the house (Massachusetts Department of Fire Services), or eat food cold. Store-bought canned food can be eaten from the can without warming (Ready.gov)."
+    "Indoors, cook on a fireplace or wood stove that is vented to the outside, set up for cooking, and has a vent that needs no power to work (EPA), under every rule in Wood stoves and fireplaces.",
+    "Gas or propane range: surface burners only, lit by match only if your model’s manual says it can be, watched the whole time, never to heat the room (GE, Whirlpool, KitchenAid, Wolf). No manual to hand, or it says no: don’t.",
+    "Otherwise cook outdoors, at least 20 feet (6 m) from windows (Ready.gov), or eat food cold. Store-bought canned food can be eaten from the can without warming (Ready.gov)."
   ],
   "sections": [
     {
@@ -71,10 +70,27 @@
       "h": "A gas or propane range",
       "blocks": [
         {
-          "p": "No source opened for this app says, in words, that you can cook on a gas or propane kitchen range during a power outage. EPA allows cooking indoors in an outage only on a vented appliance whose vent needs no power, and its advice for gas ranges in normal times is an exhaust fan vented to the outdoors (EPA). A fan needs power, so this app reads a range in a power cut as not meeting EPA’s condition."
+          "p": "The range makers GE, Whirlpool, KitchenAid and Wolf say the surface burners of a gas range can be lit by hand with a match in a power outage, on models that allow it. No government agency page opened for this app says anything about cooking on a range in an outage. EPA’s outage guidance names only “a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking”, and says “Unvented combustion appliances should not be used to cook indoors, or for any other indoor use.”"
         },
         {
-          "warn": "This app’s own caution: don’t cook on a gas or propane range while the power is out. Cook outdoors, or on a vented fireplace or wood stove as above, or eat food cold. And never heat the house with a gas oven or range (CDC, CPSC)."
+          "warn": "Never heat the house with a gas oven or range (CDC, CPSC)."
+        },
+        {
+          "list": [
+            "Check your model’s manual first. Light a burner by hand only if the manual says your model can be lit that way: some models have a safety feature that prevents it (Whirlpool, KitchenAid). No manual to hand, or it doesn’t allow it: the answer is no, and you cook outdoors or eat food cold.",
+            "Surface burners only. Never the oven: it can’t be lit by hand in an outage (GE, Whirlpool, KitchenAid). Never a griddle, grill, French top or charbroiler on the range (Wolf; Whirlpool: the vent may not be working).",
+            "Light it the way your manual says. The makers’ steps: hold a lit long match or lighter at the burner first, then turn the knob (GE, KitchenAid; Wolf: an ignitor at least 6 inches (15 cm) long).",
+            "A burner is either lit or off. With no power there is no automatic relight (Wolf). If the flame goes out, gas keeps flowing: turn the knob to Off (GE).",
+            "Watch the burner the whole time it is lit (Wolf: monitor the gas burner closely).",
+            "Never use it to heat the room (Wolf: do not use surface burners to heat the kitchen)."
+          ]
+        },
+        {
+          "p": "Carbon monoxide alarms, and what to do when one sounds, are in Carbon monoxide and burning fuel indoors."
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
         }
       ]
     },
@@ -90,7 +106,7 @@
       "h": "During a fallout warning",
       "blocks": [
         {
-          "p": "While you shelter from fallout, Living in a closed-up house governs instead: warmth without flame comes first, and going outdoors to cook is a trip outside."
+          "p": "While you shelter from fallout, cook only on what Living in a closed-up house allows: warmth without flame comes first there, and going outdoors to cook is a trip outside."
         },
         {
           "link": "s:surv-fallout-shelter-living",
@@ -104,7 +120,7 @@
         {
           "list": [
             "Use grills and camp stoves outside only, in a well-ventilated area (Ready.gov, New York State Division of Consumer Protection).",
-            "Keep a grill at least 10 feet (3 m) from the side of a building unless its maker’s instructions say it can be closer (Massachusetts Department of Fire Services). EPA: a safe distance from the house’s doors, windows and any air intakes for its heating or cooling system.",
+            "Keep grills and camp stoves at least 20 feet (6 m) from windows (Ready.gov), a safe distance from the house’s doors and any air intakes for its heating or cooling system (EPA), and at least 10 feet (3 m) from the side of any building unless the grill maker’s instructions say it can be closer (Massachusetts Department of Fire Services).",
             "Not under overhanging branches, and away from deck railings (Massachusetts Department of Fire Services).",
             "Never leave a burning grill unattended (Massachusetts Department of Fire Services).",
             "Keep children and pets 3 feet (1 m) away from grills (Massachusetts Department of Fire Services).",
@@ -152,11 +168,11 @@
                 "145°F (62.8°C), then rest at least 3 minutes"
               ],
               [
-                "Ham, fresh or smoked (uncooked)",
+                "Ham, fresh or smoked (uncooked; not wild boar)",
                 "145°F (62.8°C), then rest at least 3 minutes"
               ],
               [
-                "Ground meats",
+                "Ground meats (not wild game)",
                 "160°F (71.1°C)"
               ],
               [
@@ -187,7 +203,7 @@
           }
         },
         {
-          "p": "Table from USDA; CDC gives the same. The wild game row is Field dressing game’s rule: “Cook all wild game and birds to at least 165°F in the thickest part, and fish to 145°F.” And: “Bear and wild boar can carry trichinella worms. Cook them to 165°F.”"
+          "p": "Table from USDA; CDC gives the same. The wild game row is Field dressing game’s rule: “Cook all wild game and birds to at least 165°F in the thickest part, and fish to 145°F.” And: “Bear and wild boar can carry trichinella worms. Cook them to 165°F.” Wild game, ground or whole, is always 165°F (73.9°C)."
         },
         {
           "link": "s:surv-field-dressing-game",
@@ -248,8 +264,24 @@
       "used": "Unvented combustion appliances should not be used to cook indoors; vented appliances can be used to cook indoors during a power outage if the vent does not require power; you can use a vented fireplace or vented wood stove set up for cooking; outdoor cooking at a safe distance from doors, windows and air intakes; never charcoal in a fireplace; CO alarms; gas stoves and ovens make carbon monoxide"
     },
     {
-      "name": "EPA, Sources of Combustion Products (last updated November 10, 2026)",
-      "used": "Exhaust fans over gas cooking stoves and ranges; a stove hood with a fan vented to the outdoors; never use a gas stove to heat your home"
+      "name": "Ready.gov (FEMA), Power Outage Tips (undated web page)",
+      "used": "Generators, camp stoves or charcoal grills always outdoors and at least 20 feet away from windows; never use a gas stovetop or oven to heat your home"
+    },
+    {
+      "name": "GE Appliances, Gas Range & Cooktop: Lighting Electric Ignition Burners During a Power Failure, and Range, Cooktop & Wall Oven: Power Outage Tips and Operation (support pages)",
+      "used": "Surface burners can be lit with a match in a power outage; hold a lighted match to the burner, then turn the knob; the oven cannot be lit; a burner blown out still has gas flowing; make sure the burner stays lit or is turned to Off"
+    },
+    {
+      "name": "Whirlpool, Will a Gas Stove Work in a Power Outage? (undated web page)",
+      "used": "Some stovetops can be lit by hand; depends on make and model, which may have a safety feature that prevents it; check your model-specific manual first; avoid grills or griddles because the vent may not be working; a gas oven typically can't be lit by hand"
+    },
+    {
+      "name": "KitchenAid, Will a Gas Stove Work Without Electricity? (undated web page)",
+      "used": "If your model has a manual ignition feature you can light the burners with a match; long match or lighter; some models have safety features that prevent it; check your manual first; gas ovens won't work in an outage"
+    },
+    {
+      "name": "Sub-Zero/Wolf, Light Gas Burners Without Power (FAQ)",
+      "used": "Surface burners can be lit manually, natural gas or propane; minimum 6-inch ignitor; only surface burners, never ovens, griddles, French tops or charbroilers; do not use surface burners to heat the kitchen; monitor the gas burner closely; no automatic reignition"
     },
     {
       "name": "Ready.gov (FEMA), Food (Suggested Food Supplies; undated web page)",
@@ -281,13 +313,12 @@
     },
     {
       "name": "New York State Department of State, Division of Consumer Protection, Consumer Alert on gas and charcoal grills (May 14, 2024)",
-      "used": "Only outside in a well-ventilated area; never indoors, in a garage, breezeway, carport, porch, next to your home or under a surface that will burn; charcoal makes CO until completely extinguished, so don't store a grill indoors with freshly used coals; light charcoal in a chimney; at least 3 feet from siding, deck rails and eaves (the app uses the 10 feet above)"
+      "used": "Only outside in a well-ventilated area; never indoors, in a garage, breezeway, carport, porch, next to your home or under a surface that will burn; charcoal makes CO until completely extinguished, so don't store a grill indoors with freshly used coals; light charcoal in a chimney; at least 3 feet from siding, deck rails and eaves (the app uses Ready.gov’s 20 feet from windows)"
     },
     {
       "name": "Carbon monoxide and burning fuel indoors, Wood stoves and fireplaces, Generators and Field dressing game (other topics in this app)",
       "used": "Carbon monoxide’s Do first lines 3 and 4 and its CDC quotation on unvented stoves, word for word; the wood stove rules named, not reworded; Field dressing game’s 165°F rule for all wild game and its trichinella line"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

@@ -7,19 +7,19 @@
     "botulism symptoms",
     "infant botulism",
     "honey under 1",
-    "bad canned food",
-    "home canned",
     "bulging lid",
     "ate bad food",
     "ate spoiled food",
-    "honey for babies"
+    "honey for babies",
+    "botulism signs",
+    "suspect jar"
   ],
   "summary": "Diarrhea, stomach pain or cramps, nausea, vomiting and fever are the usual signs of food poisoning; care is in the Severe vomiting or diarrhea and Dehydration protocols. Double vision, blurred vision, drooping eyelids, slurred speech, trouble swallowing or breathing, or muscle weakness can be botulism, a medical emergency: see a doctor or go to an emergency room now. Never give honey to a baby under 1 year.",
   "doFirst": [
     "Vomiting or diarrhea after eating: use the Severe vomiting or diarrhea and Dehydration protocols.",
     "Double vision, blurred vision, drooping eyelids, slurred speech, trouble swallowing, trouble breathing, trouble moving the eyes or muscle weakness? It can be botulism. Botulism is a medical emergency: see a doctor or go to the emergency room now. Do not wait (CDC).",
-    "A baby who is constipated, feeds poorly, has drooping eyelids, a weak cry or less expression than usual can have botulism too (CDC). Get them to a doctor now.",
-    "Throw away food that might be contaminated, and never taste it (CDC). Bag a suspect can or jar without opening it (National Center for Home Food Preservation).",
+    "A baby who is sluggish and “floppy”, constipated, feeds poorly, has drooping eyelids, pupils slow to react to light, a weak cry or less expression than usual can have botulism too (CDC, New York State Department of Health). Get them to a doctor now.",
+    "Throw away food that might be contaminated, and never taste it (CDC). A suspect can or jar that is still sealed: bag it unopened. Leaking or open: make it harmless first, as in Getting rid of a suspect can or jar (National Center for Home Food Preservation).",
     "Never give honey to a baby under 1 year (New York State Department of Health)."
   ],
   "sections": [
@@ -157,7 +157,29 @@
           ]
         },
         {
-          "p": "A spill from a suspect can or jar: keep everyone away from it, keep it off your skin, wear rubber or heavy plastic gloves, and bag any paper towels before they go in the trash (National Center for Home Food Preservation). That source also gives a bleach clean-up for these spills that is stronger than either mix in Clean and disinfect; this app does not give it yet."
+          "p": "A spill from a suspect can or jar, and anything it touched (work surfaces, equipment, can openers, clothing): the National Center for Home Food Preservation’s clean-up, in its own words and order:"
+        },
+        {
+          "warn": "This bleach mix is for this clean-up only. Never use it for drinking water, and never as an everyday sanitizer for dishes or food surfaces: for those, use Clean and disinfect. Never mix bleach with ammonia or any other cleaner (CDC; Clean and disinfect)."
+        },
+        {
+          "steps": [
+            "Wear rubber or heavy plastic gloves (National Center for Home Food Preservation).",
+            "Make a fresh solution of 1 part unscented liquid household chlorine bleach (5 to 6% sodium hypochlorite) to 5 parts clean water (National Center for Home Food Preservation).",
+            "Spray or wet the contaminated surfaces with the bleach solution and let it stand for 30 minutes (National Center for Home Food Preservation).",
+            "Wearing gloves, wipe up the treated spill with paper towels, taking care not to spread the contamination (National Center for Home Food Preservation).",
+            "Put the paper towels in a plastic bag before they go in the trash (National Center for Home Food Preservation).",
+            "Put the bleach solution on all the surfaces and equipment again, let it stand for 30 minutes, and rinse (National Center for Home Food Preservation).",
+            "Last, wash everything you cleaned thoroughly: counters, containers, equipment, clothing (National Center for Home Food Preservation).",
+            "Throw away the gloves when the clean-up is done (National Center for Home Food Preservation)."
+          ]
+        },
+        {
+          "p": "Bleach is an irritant itself: don’t breathe it in or let it touch your skin (National Center for Home Food Preservation)."
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
         },
         {
           "p": "Other jars or cans from the same batch: no source opened for this app says what to do with them. This app’s own caution: if one container from a batch shows any sign in Is it still good?, or someone got sick after eating from it, treat the whole batch as suspect and get rid of it the same way."
@@ -208,13 +230,16 @@
     },
     {
       "name": "National Center for Home Food Preservation (University of Georgia), Identifying and Handling Spoiled Canned Food (adapted from USDA, revised 2015)",
-      "used": "Treat suspect low-acid containers, tomatoes included, as having botulinum toxin; sealed: heavy garbage bag in a regular trash container; unsealed, open or leaking: detoxify first; the detoxification steps (gloves, stockpot of 8 quarts or more, containers on their sides, wash gloved hands, cover by 1 inch, lid, boil 30 minutes, cool, discard, discard gloves); toxin can be fatal swallowed or through openings in the skin; gloves for suspect food and clean-up; bag paper towels"
+      "used": "Treat suspect low-acid containers, tomatoes included, as having botulinum toxin; sealed: heavy garbage bag in a regular trash container; unsealed, open or leaking: detoxify first; the detoxification steps (gloves, stockpot of 8 quarts or more, containers on their sides, wash gloved hands, cover by 1 inch, lid, boil 30 minutes, cool, discard, discard gloves); toxin can be fatal swallowed or through openings in the skin; gloves for suspect food and clean-up; the spill clean-up in its order: fresh 1 part unscented liquid household chlorine bleach (5 to 6% sodium hypochlorite) to 5 parts clean water for work surfaces, equipment, can openers and clothing; wet and stand 30 minutes; wipe up with gloves and paper towels; bag the towels; apply again, stand 30 minutes, rinse; wash everything; discard gloves; bleach is an irritant"
+    },
+    {
+      "name": "Clean and disinfect (another topic in this app)",
+      "used": "Never mix bleach with ammonia or any other cleaner (CDC); the everyday mixes, linked"
     },
     {
       "name": "Severe vomiting or diarrhea, Dehydration and the CPR protocols; Stomach illness in a group (other parts of this app)",
       "used": "Care, drinks and danger signs by link; carbon monoxide and shared poison checks; who stays away from food and water"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

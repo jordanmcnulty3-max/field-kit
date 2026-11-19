@@ -1,0 +1,237 @@
+{
+  "id": "surv-dirty-bomb",
+  "title": "Dirty bomb",
+  "category": "radiation",
+  "keywords": [
+    "dirty bomb",
+    "rdd",
+    "radiological dispersal device",
+    "radiological dispersion device",
+    "radiological bomb",
+    "radioactive bomb",
+    "radioactive dust",
+    "radioactive smoke",
+    "radiation release",
+    "terrorist attack",
+    "terrorism",
+    "explosion radiation",
+    "contamination",
+    "radiation emergency"
+  ],
+  "summary": "A dirty bomb is an ordinary explosion that scatters radioactive dust and smoke. It is not a nuclear explosion: the blast is the main danger, and its radioactive material could spread over a few blocks or miles, not a whole region. Cover your nose and mouth, get into an undamaged building, take off your outer clothes, wash, and stay in until officials say otherwise.",
+  "doFirst": [
+    "Outside near it? Cover your nose and mouth with a cloth. Don’t touch anything thrown off by the explosion. Go quickly into a building whose walls and windows are not broken (CDC).",
+    "Inside an undamaged building? Stay in. Shut windows and outside doors, and turn off fans, heating and air conditioning that bring in outside air (CDC).",
+    "Once inside, as Fallout warning says: “Carefully take off your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).” Put the cloth you covered your mouth with in the bag too (CDC).",
+    "Listen to local radio or TV, or official accounts, for instructions (CDC).",
+    "Children at school stay there. Don’t go to the school until officials say it is all right to travel (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "What it is",
+      "blocks": [
+        {
+          "list": [
+            "A dirty bomb uses an ordinary explosive to scatter radioactive dust, smoke or other material (CDC).",
+            "It cannot create an atomic blast (CDC). A nuclear bomb makes an explosion millions of times more powerful than a dirty bomb (NRC).",
+            "A dirty bomb’s radiation could be spread within a few blocks or miles of the explosion. The cloud from a nuclear bomb could spread over thousands of square miles (NRC).",
+            "As radioactive material spreads, it becomes less concentrated and less harmful (NRC)."
+          ]
+        },
+        {
+          "p": "An atomic bomb makes a mushroom cloud; a dirty bomb cannot (CDC). If you saw a mushroom cloud, go to Fallout warning now."
+        },
+        {
+          "link": "s:surv-fallout-warning",
+          "label": "Fallout warning: what to do first"
+        }
+      ]
+    },
+    {
+      "h": "The danger",
+      "blocks": [
+        {
+          "list": [
+            "The main danger is the explosion, which can cause serious injuries and damage for people close to it (CDC). Those closest are the most likely to be hurt by it (NRC).",
+            "The radioactive material would probably not cause immediate serious illness, except to people very close to the blast (CDC). Most dirty bombs would not release enough radiation to kill people or cause severe illness (NRC).",
+            "The radioactive dust and smoke that spread farther away could harm your health if you breathe them in (CDC).",
+            "You can’t see, smell, feel or taste radiation, so act at once to protect yourself and your family (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Outside and close to it",
+      "blocks": [
+        {
+          "steps": [
+            "Cover your nose and mouth with a cloth, so you breathe in less radioactive dust or smoke (CDC).",
+            "Don’t touch objects thrown off by the explosion: they might be radioactive (CDC).",
+            "Go quickly into a building whose walls and windows are not broken (CDC).",
+            "Once inside, clean off as Fallout warning says: “Carefully take off your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).”",
+            "Put the cloth you covered your mouth with in the bag too. Taking off outer clothes may get rid of up to 90% of the radioactive dust (CDC).",
+            "Put the bag where others won’t touch it, and keep it until officials say what to do with it (CDC).",
+            "Listen to local radio or TV news, or official government social media accounts, for instructions (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Inside and close to it",
+      "blocks": [
+        {
+          "steps": [
+            "If the building’s walls and windows are not broken or damaged, stay in and don’t leave (CDC).",
+            "Shut all windows and outside doors. Turn off fans and heating and air-conditioning systems that bring in air from outside (CDC). Close fireplace dampers too (CDC), but only when no fire is burning: see Wood stoves and fireplaces.",
+            "If the walls and windows are broken, go to an inside room and don’t leave. If the building is badly damaged, go quickly into a building whose walls and windows are not broken (CDC).",
+            "If you must go outside, cover your nose and mouth with a cloth. Coming back in, clean off as in the steps above, and store the bag where others won’t touch it (CDC).",
+            "Listen to local radio or TV news, or official government social media accounts, for instructions (CDC)."
+          ]
+        },
+        {
+          "p": "It is not necessary to put duct tape or plastic around doors or windows (CDC)."
+        },
+        {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        }
+      ]
+    },
+    {
+      "h": "In a car",
+      "blocks": [
+        {
+          "steps": [
+            "Close the windows and turn off the air conditioner, heater and vents (CDC).",
+            "Cover your nose and mouth with a cloth (CDC).",
+            "If your home, workplace or a public building is close, go there now and get inside quickly (CDC).",
+            "If you can’t get to a building, pull over and stop in the best place you can find. On a hot or sunny day, try to stop under a bridge or in shade (CDC).",
+            "Turn off the engine and listen to the radio for instructions. Stay in the car until you are told you can drive on (CDC)."
+          ]
+        },
+        {
+          "warn": "These car steps are CDC’s for a dirty bomb only. After a nuclear explosion a car is not a shelter: get out and into a building (Where to shelter from fallout)."
+        },
+        {
+          "link": "s:surv-fallout-where-to-shelter",
+          "label": "Where to shelter from fallout"
+        }
+      ]
+    },
+    {
+      "h": "Farther away",
+      "blocks": [
+        {
+          "list": [
+            "The first actions are very similar to those for a nuclear explosion: get inside, stay inside, stay tuned for more instructions (FEMA planning guidance, CDC).",
+            "Officials may tell people to stay where they are or to leave the immediate area quickly (NRC). Follow what they say.",
+            "Protection comes from less time near the radioactive material, more distance from it, and shielding from it, including from breathing it in (NRC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Staying in",
+      "blocks": [
+        {
+          "p": "No source opened for this app gives a length of time for a dirty bomb. CDC says to stay in the building, or the car, until officials tell you that you can travel."
+        },
+        {
+          "warn": "This app’s own caution, not a source’s: if you don’t know whether it was a dirty bomb or a nuclear explosion, treat it as a nuclear explosion and follow Fallout warning and How long to stay in."
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        }
+      ]
+    },
+    {
+      "h": "Family and pets",
+      "blocks": [
+        {
+          "list": [
+            "If your family is with you, stay together and take the same steps for everyone (CDC).",
+            "If they are in another home or building, they stay there until you are told it is all right to travel (CDC).",
+            "Schools have emergency plans and shelters. Children at school stay there (CDC).",
+            "Bring pets in from outside if you can do it without putting yourself at risk, and wash them with soap and water (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Food and water",
+      "blocks": [
+        {
+          "list": [
+            "Food and water supplies will most likely not be affected (CDC).",
+            "Unpackaged food or water that was out in the open close to the incident may have radioactive dust on it: don’t eat or drink it (CDC).",
+            "Food in cans and other sealed containers can be eaten. Wash the outside of the container before you open it (CDC).",
+            "Officials will check food and water and tell people when they can be used (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Potassium iodide",
+      "blocks": [
+        {
+          "p": "CDC: after a dirty bomb, taking potassium iodide (KI) would probably not help. KI does not protect against other radioactive materials or protect the rest of the body, and it can be dangerous to some people."
+        },
+        {
+          "link": "s:surv-potassium-iodide",
+          "label": "Potassium iodide (KI): what it can and can’t do"
+        }
+      ]
+    },
+    {
+      "h": "Hurt or sick",
+      "blocks": [
+        {
+          "list": [
+            "People hurt by radioactive pieces, or covered in radioactive dust, will need medical care (CDC).",
+            "The low radiation expected from a dirty bomb may cause no symptoms. Anyone who gets symptoms such as nausea, vomiting, diarrhea, or swelling and redness of the skin should get medical care from a doctor, hospital or the place officials name (CDC)."
+          ]
+        },
+        {
+          "link": "p:bleeding",
+          "label": "Severe bleeding"
+        },
+        {
+          "link": "p:burns",
+          "label": "Burns"
+        },
+        {
+          "link": "p:shock",
+          "label": "Shock"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Dirty Bombs: Frequently Asked Questions (last reviewed April 10, 2024)",
+      "used": "An atomic bomb produces the mushroom cloud; a dirty bomb uses explosives to scatter radioactive dust, smoke or other material and cannot create an atomic blast; main danger is the explosion; probably not enough radiation for immediate serious illness except very close to the blast; dust and smoke farther away harmful if inhaled; radiation can’t be seen, smelled, felt or tasted; the outside, inside and in-a-car steps in order; removing outer clothes may get rid of up to 90% of radioactive dust; duct tape or plastic around doors or windows not necessary; children and family; pets; KI would probably not be beneficial and can be dangerous to some people; food and water; low exposure may cause no symptoms; nausea, vomiting, diarrhea, skin swelling and redness; contact a doctor, hospital or site authorities recommend"
+    },
+    {
+      "name": "CDC, Radiological Dispersal Device (RDD) (last reviewed April 17, 2024)",
+      "used": "Cannot create an atomic blast; main danger is the explosion; people injured by radioactive pieces or contaminated with radioactive dust will need medical attention; get inside, stay inside, stay tuned"
+    },
+    {
+      "name": "CDC, What to Do for Different Types of Radiation Emergencies (last reviewed July 20, 2026)",
+      "used": "The best way to protect yourself if a dirty bomb explodes is to get inside, stay inside and stay tuned"
+    },
+    {
+      "name": "US Nuclear Regulatory Commission (NRC), Backgrounder on Dirty Bombs (February 2022)",
+      "used": "Not a nuclear bomb; a nuclear bomb’s explosion millions of times more powerful; spread within a few blocks or miles, against thousands of square miles for a nuclear bomb’s cloud; those closest most likely injured by the explosion; less concentrated and less harmful as it spreads; most would not release enough radiation to kill people or cause severe illness; sheltering in place or quickly leaving the immediate area; time, distance and shielding"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023)",
+      "used": "Initial protective actions for a nuclear detonation and a dirty bomb are very similar: get inside, stay inside, stay tuned"
+    },
+    {
+      "name": "Wood stoves and fireplaces, Where to shelter from fallout, Fallout warning and How long to stay in (other topics in this app)",
+      "used": "A damper stays open while a fire burns; a car is not a shelter after a nuclear explosion; the cleaning-off line quoted word for word from Fallout warning’s Do first (Ready.gov, CDC)"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

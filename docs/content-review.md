@@ -4359,3 +4359,313 @@ Draft removed from all three topics after these fixes. Minor 9 (the two CO quote
 - M8: coming-inside link label "Wound cleaning and care" (the protocol's title).
 - Reviewer note on source lines: coming-inside's CDC Get Inside / Stay Inside line no longer lists gloves, dust mask and cut
   covering; those are credited to the CDC pets page, where the reviewer confirmed them.
+## Radiation pack batch C: dirty bomb, potassium iodide, get ready, fallout shelter kit (2026-11-18)
+
+Files (all draft): src/survival/surv-dirty-bomb.json, surv-potassium-iodide.json, surv-fallout-get-ready.json,
+src/checklists/fallout-shelter-kit.json. tests/test_build.py topic count 42 to 45. Every source below was found by built-in
+web search and opened by web fetch on 2026-11-18; the title (and date where printed) was checked after each fetch. Fetches
+return quotes capped at about 125 characters, so long sentences were read as consecutive pieces. No Firecrawl, no Bright Data.
+Ready.gov's radiation page loaded; ready.gov/build-a-kit failed (client error) and ready.gov/kit loaded without a title or
+date in the fetch result, so spec 10 call 13 applied only to that page (its items are all also in a loaded Ready.gov or CDC
+page, or are plain kit items: flashlight, first aid kit, manual can opener, phone and charger, baby and pet supplies,
+children's activities).
+
+Potassium iodide gate (spec 10, calls 3 and 12): no opened CDC or FDA page tells the public to take KI after a nuclear
+detonation. CDC-KI has a section headed "KI will not help in a nuclear bomb emergency". FDA-KI says local officials "will
+tell the public if there is a need to take KI" and gives no detonation-specific advice. The topic was written; no dose
+table, no dose, no age bands with amounts. Neither page's dose table was copied into the record or the topic.
+
+Dirty bomb rule: nothing on construction, materials or where material is found. The topic's one-line definition
+("uses an ordinary explosive to scatter radioactive dust, smoke or other material") is CDC-DB's own definition sentence
+with "dynamite or other explosives" written "an ordinary explosive". Sentences on which radioactive materials could be used
+were not read into the record (fetch prompts asked for them to be skipped) and are not in the topic.
+
+Source keys:
+- CDC-KI: CDC, Potassium Iodide (KI), last reviewed April 16, 2024 (page also shows updated January 30, 2025). https://www.cdc.gov/radiation-emergencies/treatment/potassium-iodide.html (opened twice; second fetch for every section in order)
+- FDA-KI: FDA, Frequently Asked Questions on Potassium Iodide (KI), content current as of 03/24/2022. https://www.fda.gov/drugs/bioterrorism-and-drug-preparedness/frequently-asked-questions-potassium-iodide-ki
+- NYS-KI: New York State Department of Health, Potassium Iodide (KI) and Radiation Emergencies: Fact Sheet, revised April 2017. https://healthweb-back.health.ny.gov/environmental/radiological/potassium_iodide/fact_sheet.htm
+- CDC-DB: CDC, Dirty Bombs: Frequently Asked Questions, last reviewed April 10, 2024 (metadata updated December 20, 2023). https://cdc.gov/radiation-emergencies/about/dirty-bombs-faq.html (opened twice; second fetch for the step lists in order)
+- CDC-RDD: CDC, Radiological Dispersal Device (RDD) (infographic page), last reviewed April 17, 2024. https://www.cdc.gov/radiation-emergencies/infographic/radiological-dispersal-device.html
+- CDC-TYPES: CDC, What to Do for Different Types of Radiation Emergencies, last reviewed July 20, 2026. https://www.cdc.gov/radiation-emergencies/about/what-to-do.html
+- NRC-DB: US Nuclear Regulatory Commission, Backgrounder on Dirty Bombs, document dated February 2022 (page reviewed/updated September 15, 2026). https://www.nrc.gov/regulations-legislation/fact-sheets-brochures/backgrounder-on-dirty-bombs (opened twice)
+- CDC-FAQ: CDC, Frequently Asked Questions about Radiation Emergencies, last reviewed April 19, 2022 (updated April 12, 2024). https://cdc.gov/radiation-emergencies/faq/index.html (opened twice)
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024. https://ready.gov/radiation ("Prepare Now" and "Be Safe After" word for word)
+- READY-KIT: Ready.gov Build A Kit list. https://www.ready.gov/kit (no title or date in the fetch result; content is Ready.gov's "Basic Disaster Supplies Kit", "Additional Emergency Supplies" and "Maintaining Your Kit")
+- CDC-PREP: CDC, Preparing for a Radiation Emergency, last reviewed April 15, 2024 (updated January 31, 2025). https://cdc.gov/radiation-emergencies/safety/index.html (no kit or plan content; not cited)
+- CDC-BR: CDC, Be Ready for Radiation Emergencies, updated and reviewed August 31, 2026. https://cdc.gov/radiation-emergencies/features/be-ready.html (kit for yourself and for pets; radio; community, school, nursing home and employer plans; same as CDC-FAQ, which is cited)
+- FEMA-PG3: FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change 06/12/2023). https://www.fema.gov/sites/default/files/documents/fema_nuc-detonation-planning-guide.pdf (searched in four 100,000-character parts for KI, dirty bomb and public preparedness: offsets 0, 200,000, 300,000, 400,000; offset 100,000 was not re-read in this batch)
+- PNA-1985: FEMA, Protection in the Nuclear Age, June 1985 (dated), Waldo County copy. https://waldocountyme.gov/wp-content/uploads/2024/01/1985-FEMA_Protection_in_the_Nuclear_Age.pdf
+- NYS-KIT: New York State preparedness checklist for children, "Help Detective Emm find the missing supplies" (prepare.ny.gov; no agency or date printed), hosted at https://www.dhses.ny.gov/system/files/documents/2025/08/preparednesskitchecklist.pdf
+- NYC-RG: New York City, Response Guide: Radiological and Nuclear Emergencies (undated). https://www.nyc.gov/assets/doh/downloads/pdf/em/radiological-nuclear-response-guide.pdf (no preparation, dirty-bomb steps or KI content; not cited)
+
+Would not open or held nothing usable: ready.gov/build-a-kit (client error). Old CDC KI and dirty bomb URLs under
+/nceh/ and archive copies of the retired Ready.gov RDD page were returned by search but not opened (current CDC pages
+loaded). The FDA KI shelf-life page was not searched for (the topic says nothing about storage or expiry).
+
+Looked for and not found: a CDC, FDA or NYS statement that iodine sold for water treatment or wound care is or is not a
+substitute (only table salt, iodine foods and supplements are named, CDC-KI; and "drink iodine" as a rumor, FEMA-PG3 p.
+129); a length of time to stay in after a dirty bomb (CDC-DB says until told; NRC-DB and CDC-TYPES give none); a current
+source telling people to pick a home shelter spot in advance (Ready.gov and CDC name school, work, care-facility and
+community plans; PNA-1985, dated, says to give clear instructions on where the shelter is); a source listing plastic
+sheeting or tape for fallout (READY-KIT lists "Plastic sheeting, scissors and duct tape (to shelter in place)" for any
+emergency; CDC-DB says "It is not necessary to put duct tape or plastic around doors or windows"); a source listing KI for
+a nuclear detonation kit (none; CDC-KI says it will not help).
+
+Conversions: 1 gallon = 3.785 L, "3.8 L" (quoted from How much water you need).
+
+### surv-dirty-bomb
+
+- Tags: none. Links: s:surv-fallout-warning, s:surv-wood-stoves-fireplaces, s:surv-fallout-where-to-shelter,
+  s:surv-potassium-iodide, p:bleeding, p:burns, p:shock. Links left for later tasks: docs/v7.4-rulings.md.
+- Summary: CDC-DB, NRC-DB as below. "Stay in until officials say otherwise" is CDC-DB's "stay in the building and do not
+  leave" with "until you are told it is safe" written without "safe".
+- doFirst 1: CDC-DB outside steps 1 to 3 ("Cover your nose and mouth with a cloth to reduce the risk of breathing in
+  radioactive dust or smoke."; "Don't touch objects thrown off by an explosion—they might be radioactive."; "Quickly go into a
+  building where the walls and windows have not been broken.").
+- doFirst 2: CDC-DB inside steps 1 and 2 ("If the walls and windows of the building are not broken or damaged, stay in the
+  building and do not leave."; "shut all windows, outside doors, and fireplace dampers."; "Turn off fans and heating and
+  air-conditioning systems that bring in air from the outside."). Dampers are left out of the Do first and given in the
+  inside steps with the fire caveat (Wood stoves and fireplaces, checked: damper open while a fire burns), as batch A did.
+- doFirst 3: CDC-DB outside steps 4 and 6 ("take off your outer layer of clothing and seal it in a plastic bag if
+  available."; "Shower or wash with soap and water."; "Be sure to wash your hair."). A pointer: the cleaning-off steps
+  belong to p:radiation-decontamination (owner rule) and must be aligned when it exists.
+- doFirst 4: CDC-DB step 7 ("Tune to the local radio, television news, or official government agencies social media
+  accounts for more instructions.").
+- doFirst 5: CDC-DB children ("If your children are at school, they should stay there until it is safe to travel."; "Do not go
+  to the school until public officials say it is safe to travel."). "Safe" written "all right".
+- What it is: CDC-DB ("a dirty bomb uses dynamite or other explosives to scatter radioactive dust, smoke, or other
+  material"; "cannot create an atomic blast"; "An atomic bomb ... produces the atomic mushroom cloud"); NRC-DB ("A nuclear
+  bomb creates an explosion that is millions of times more powerful than a dirty bomb."; "a dirty bomb's radiation could be
+  dispersed within a few blocks or miles of the explosion."; "The cloud of radiation from a nuclear bomb could spread
+  thousands of square miles"; "As radioactive material spreads, it becomes less concentrated and less harmful."). The
+  mushroom-cloud pointer to Fallout warning is the app's routing, from CDC-DB's atomic-bomb sentence.
+- The danger: CDC-DB ("The main danger from a dirty bomb is from the explosion, which can cause serious injuries and property
+  damage for people close to the explosion."; "would probably not create enough radiation exposure to cause immediate serious
+  illness, except to people who are very close to the blast site."; "the radioactive dust and smoke spread farther away could
+  be dangerous to health if it is inhaled."; "Because people cannot see, smell, feel, or taste radiation, you should take
+  immediate steps to protect yourself and your loved ones."); NRC-DB ("Those closest to the RDD would be the most likely to
+  be injured by the explosion."; "Most RDDs would not release enough radiation to kill people or cause severe illness"; the
+  rest of NRC's sentence was not returned and is not used).
+- Outside and close to it: CDC-DB steps 1 to 7 in CDC's order, word for word as quoted in the doFirst lines plus "Put the
+  cloth you used to cover your mouth in the bag, too."; "Removing outer clothes may get rid of up to 90% of radioactive
+  dust."; "Put the plastic bag where others will not touch it."; "Keep it until authorities tell you what to do with it.";
+  "Washing will remove any remaining dust." (not used). Number: 90% (CDC-DB; READY says the same of clothing removal).
+  CDC-DB's "This area will shield you from radiation that might be outside" is not used.
+- Inside and close to it: CDC-DB steps 1 to 7 in order; steps 3 and 4 are joined in one step ("If the walls and windows of
+  the building are broken, go to an interior room and do not leave."; "If the building has been heavily damaged, quickly go
+  into a building where the walls and windows have not been broken."); "If you must go outside, be sure to cover your nose and
+  mouth with a cloth."; "Store the bag where others will not touch it."; "It is not necessary to put duct tape or plastic
+  around doors or windows." Damper caveat: Wood stoves and fireplaces (checked).
+- In a car: CDC-DB steps 1 to 6 in order; steps 5 and 6 are joined ("Close the windows and turn off the air conditioner,
+  heater, and vents."; "Cover your nose and mouth with a cloth to avoid breathing radioactive dust or smoke."; "If you are
+  close to your home, office, or a public building, go there immediately and go inside quickly."; "If you cannot get to your
+  home or another building safely, pull over to the side of the road and stop in the safest place possible."; "If it is a hot
+  or sunny day, try to stop under a bridge or in a shady spot."; "Turn off the engine and listen to the radio for
+  instructions."; "Stay in the car until you are told it is safe to get back on the road."). The warning that this is for a
+  dirty bomb only, and that after a nuclear explosion a car is not a shelter, is from Where to shelter from fallout (FEMA-PG3,
+  NYC Health, checked in batch A). D100.
+- Farther away: FEMA-PG3 p. 119 ("initial protective actions for a nuclear detonation and for a dirty bomb scenario are very
+  similar:" / "people must "Get Inside, Stay Inside, and Stay Tuned" for more instructions."); CDC-TYPES ("The best way to
+  protect yourself if an RDD explodes is to get inside, stay inside, and stay tuned."); NRC-DB ("protective measures, such as
+  sheltering in place or quickly leaving the immediate area"; "Minimizing the time exposed to radioactive materials;";
+  "Maximizing the distance from the source of radiation; and"; "Shielding from external exposure and inhaling radioactive
+  material."). CDC-DB has no separate far-away section.
+- Staying in: CDC-DB (stay in the building / car "until you are told it is safe"). No time found. D101.
+- Family and pets: CDC-DB ("If your children or family are with you, stay together."; "Take the same actions to protect your
+  whole family."; "they should stay there until you are told it is safe to travel."; "Schools have emergency plans and
+  shelters."; "If you have pets outside, bring them inside if it can be done safely."; "Wash your pets with soap and water to
+  remove any radioactive dust."). "If it can be done safely" written "if you can do it without putting yourself at risk".
+- Food and water: CDC-DB ("Food and water supplies most likely will remain safe." written "will most likely not be
+  affected"; "any unpackaged food or water that was exposed and close to the incident may have radioactive dust on it.";
+  "do not consume water or food that was out in the open."; "The food inside of cans and other sealed containers will be safe
+  to eat." written "can be eaten"; "Wash the outside of the container before opening it."; "Authorities will monitor food and
+  water quality for safety and keep the public informed when they are safe to consume.").
+- Potassium iodide: CDC-DB ("KI will not protect a person from other radioactive materials or protect other parts of the body
+  from exposure to radiation."; "taking KI would probably not be beneficial."; "Also, KI can be dangerous to some people.").
+  The sentence of CDC-DB that names a radioactive material is paraphrased away ("would probably not help").
+- Hurt or sick: CDC-RDD ("People injured by radioactive pieces or contaminated with radioactive dust will need medical
+  attention."); CDC-DB ("Low levels of radiation exposure (like those expected from a dirty bomb explosion) may not cause any
+  symptoms."; symptoms "such as" nausea, vomiting, diarrhea, and swelling and redness of the skin; "If you develop any of these
+  symptoms, you should contact your doctor, hospital, or other sites recommended by authorities."). Medical care is linked
+  (bleeding, burns, shock); p:radiation-sickness to be added (rulings).
+
+### surv-potassium-iodide
+
+- Tags: none. Links: s:surv-fallout-warning, s:surv-dirty-bomb, p:anaphylaxis. Title changed from the plan's "what it does
+  and does not do" to "Potassium iodide (KI): what it can and can't do" (search pins "no" to CPR; see rulings).
+- No dose, no dose table, no age bands with amounts, no tablet strengths. CDC-KI's 24-hours-before / 4-hours-after timing,
+  its "One dose of KI offers protection for 24 hours" and its breastfeeding advice are not used (D103, D102).
+- doFirst 1: CDC-KI ("The best protection in a radiation emergency is always to get inside, stay inside, and stay tuned").
+- doFirst 2: CDC-KI ("Leaving your shelter or home to seek KI could expose you to dangerous levels of radiation" / "and put you
+  and your loved ones at greater risk.").
+- doFirst 3: CDC-KI ("Do not take KI unless you are instructed by public health or emergency response officials or a
+  healthcare provider.").
+- doFirst 4: CDC-KI ("Do not use table salt or foods that contain iodine as a substitute for KI."; "They do not help prevent
+  internal contamination, and eating large amounts could be harmful."; "Dietary supplements that contain iodine may not work
+  to protect the thyroid and can hurt you.").
+- What it does: CDC-KI ("Potassium iodide (KI) is a type of iodine that is not radioactive."; "The thyroid is a gland in the
+  neck"; "there is no room to absorb the radioactive iodine."; "KI protects only the thyroid."; "KI does not protect other
+  parts of the body."; "KI protects only against radioactive iodine and does not protect against other types of radioactive
+  materials."; "KI is most effective if taken shortly before or right after internal contamination with radioactive
+  iodine."; "KI may not give a person 100% thyroid protection from radioactive iodine."; "KI is not a treatment and cannot
+  reverse damage already done to the thyroid."); FDA-KI ("It is not a general radioprotective agent.").
+- After a nuclear explosion: CDC-KI section "KI will not help in a nuclear bomb emergency", every sentence ("Radiation from
+  radioactive fallout is the biggest threat to your health after a nuclear detonation (explosion)."; "Fallout is made up of
+  hundreds of types of radioactive materials."; "There is a relatively small amount of radioactive iodine in fallout compared
+  to other types of radioactive materials" / "that can cause harm just by external exposure."; "KI would not protect you
+  against the harmful health effects of any radioactive materials other than radioactive iodine."; "If you were in a situation
+  to take in enough radioactive iodine for KI to be helpful, you would have been exposed to deadly levels of external
+  radiation from fallout."), and "Risks of focusing on KI" ("You may think you are protected against radiation exposure when
+  you are not.").
+- After a dirty bomb: CDC-DB as in surv-dirty-bomb.
+- When officials might call for it: CDC-KI ("Most radiation emergencies will involve other types of radioactive materials and
+  not radioactive iodine alone."; "Radioactive iodine is most common in nuclear power plant incidents."); NYS-KI ("If there is
+  an emergency, you will hear an announcement from your local or state health officials."; "Your local health department will
+  tell you when you should start taking KI and they will also tell you when you can stop taking it."); FDA-KI ("After a
+  radiological or nuclear event in the United States, local public health or emergency management officials" / "will tell
+  the public if there is a need to take KI or other protective actions."). NYS-KI's plant-distance figure and its once-a-day
+  instruction are not used (plant accidents deferred; D103). Scope line: spec 2 (no source needed).
+- Who it is meant for: CDC-KI ("KI is only recommended for people under 40 and women who are pregnant or breastfeeding.";
+  "This is because younger people's cells are still growing and increasing in number more quickly."; "This puts them at risk
+  for developing thyroid cancer after breathing in radioactive iodine."; "Infants (under 1 month) have the highest risk of
+  developing thyroid cancer from contamination with radioactive iodine."; "Adults over 40 years old have a much lower risk of
+  developing thyroid cancer."; "They are also more likely to have health conditions, like problems with their thyroids," /
+  "that increase the risk for harmful health effects from KI."; "Adults over 40 should only take KI when recommended by
+  officials"). Number: 40 years and 1 month (CDC-KI); these are who-for limits, not doses.
+- Who should not take it: CDC-KI ("People with certain medical conditions, including known iodine sensitivity, should not take
+  KI" / "or should talk to a healthcare provider about whether they can safely take KI."); FDA-KI ("Persons with known iodine
+  sensitivity should avoid KI, as should individuals with dermatitis herpetiformis" / "and hypocomplementemic vasculitis,
+  extremely rare conditions associated with an increased risk" / "of iodine hypersensitivity."; "People with nodular thyroid
+  with heart disease should not take KI."; "Individuals with multinodular goiter, Graves' disease, and autoimmune thyroiditis
+  should be treated with caution" (FDA's "-- especially if dosing extends beyond a few days" is not used); "A seafood or
+  shellfish allergy does not necessarily mean that you are allergic or hypersensitive to iodine."; "If you are not sure if you
+  should take KI, consult your health care professional.").
+- Risks: CDC-KI ("Gastro-intestinal (stomach) upset, rashes, and inflammation of the salivary glands."; "Allergic reaction.";
+  "Severe illness or death in people who take more KI than recommended."; "More than a single dose may lead to later problems
+  with normal development."; "The development of hypothyroidism in infants less than one month old who receive more than one
+  dose of KI."); FDA-KI ("Taking a higher dose of KI, or taking KI more often than recommended, does not offer more protection"
+  / "and can cause severe illness or death."; "Severe shortness of breath requires immediate medical attention."). Link
+  p:anaphylaxis for a severe allergic reaction (not restated).
+- What is not a substitute: CDC-KI (salt, iodine foods, supplements as in doFirst 4; "Only use KI products that have been
+  approved by the Food and Drug Administration (FDA)."); FEMA-PG3 p. 129 ("If social media posts encouraged people to drink
+  iodine to protect themselves from radiation, what would you do?"; "How would you confront this rumor?"). FDA-KI does not
+  address substitutes.
+- If you keep KI: FDA-KI ("KI is available without a prescription."); CDC-KI ("KI should be used only as directed."; FDA-approved
+  only). "Keeping KI is never a reason to go outside, delay getting inside, or leave shelter" rests on CDC-KI's risks of
+  focusing on KI (leaving shelter to seek KI) and its reminder; "delay getting inside" is the app's reading of the same.
+
+### surv-fallout-get-ready
+
+- Tags: none. No doFirst (not urgent). Links: s:surv-fallout-where-to-shelter, c:fallout-shelter-kit, s:surv-fallout-how-long,
+  s:surv-water-how-much, s:surv-water-store, c:home-water-store, s:surv-water-in-the-house, s:surv-toilet-no-water,
+  c:sanitation-kit, s:surv-fallout-shelter-living, c:home-heat-kit, s:surv-heat-out, s:surv-fallout-warning (twice),
+  s:surv-dirty-bomb, s:surv-potassium-iodide. Water and food links sit here (spec 10, call 15); there is no food-store
+  topic in the app, and s:surv-fallout-water-and-food does not exist yet (rulings).
+- Pick your shelter spot now: the rule is Where to shelter from fallout's (owner), summarised from its Do first (basement or
+  underground; else the middle of the building away from the walls, roof and windows). "Decide now" is the app's instruction;
+  PNA-1985 ("Go over instructions with your family so that you all understand what to do."; "Children and the disabled or
+  elderly especially should be given clear instructions on where to find a fallout shelter."); READY ("Familiarize yourself
+  with school, work and care-facility plans for staying inside/sheltering-in-place and evacuation."); CDC-FAQ ("Your community
+  should have a plan in place in case of a radiation emergency."; "Check with community leaders to learn more about the
+  plan.").
+- Supplies for up to 2 weeks: How long to stay in (owner: "plan to shelter for up to 2 weeks" with no official word);
+  PNA-1985 p. 10 ("Have ready at least a two-week stock of water, food, and supplies to bring to shelter."); READY ("Include a
+  spare change of clothes for each family member, a trash bag for contaminated clothing," / "and sealed food, water and
+  medicine.").
+- Water and food: How much water you need (checked; its summary "Store at least 1 gallon (3.8 L) per person per day for 2
+  weeks" quoted); "Store it where you will shelter, so nobody has to go out for it" follows Living in a closed-up house
+  ("so nobody has to go outside for them"). Food: READY-KIT ("Food (at least a several-day supply of non-perishable food)";
+  "Manual can opener (for food)"); NYS-KIT ("Food - at least enough for 7 days"); PNA-1985 two weeks; the longest used (D104).
+  CDC-SI via Living in a closed-up house ("Food and drinks that are sealed or were already inside can be used (CDC)").
+  PNA-1985's "at least one quart of water per day" is not used (current sources say 1 gallon; D104).
+- Toilets and washing: Living in a closed-up house ("so nobody has to go outside for them"); READY (soap and water; "a wipe or
+  clean wet cloth"; trash bag).
+- Winter: READY-KIT ("Sleeping bag or warm blanket for each person"); Living in a closed-up house (no-flame warmth first;
+  "Keep battery CO alarms near where people sleep (CDC, CPSC)"; "Never burn anything in a sealed room"). "Central New York
+  winter" is the spec's setting, no number.
+- Ways to hear news: READY ("Have a battery-powered or hand crank radio, which will continue to work" / "if other forms of
+  communication fail."; "Have several ways to receive emergency alerts."; FEMA App; community alerts); CDC-FAQ ("preferably a
+  National Oceanic and Atmospheric Administration (NOAA)" / "weather radio"; "If your emergency radio uses batteries, keep
+  extra batteries in your emergency preparedness kit."; "Try to use text messages (SMS) to communicate with others."; "Making
+  phone calls could be hard."). CDC-FAQ's electromagnetic pulse lines are not used (Comms pack, spec 2).
+- A plan for being apart: READY ("Make a Family Emergency Communications Plan."; "Decide where your family will meet if you
+  cannot meet at home."; "Identify an out-of-state contact who you can inform of your whereabouts and safety." written "where
+  they are and how they are"); Fallout warning doFirst 3 quoted word for word ("Don't go out to get family: stay where you are
+  (CDC)."); CDC-FAQ ("Children and adults in schools, daycares, hospitals, nursing homes, or other places will be instructed to
+  stay inside"; "Facilities have plans in place to keep everyone safe inside." written "plans to keep them inside").
+- Learn the steps now: FEMA-PG3 p. 207 ("Ideally, public education campaigns provide self-decontamination instructions to the
+  public prior to emergency incidents."). "The first actions must happen in minutes" rests on Fallout warning ("10 minutes or
+  more", READY, FEMA-PG3).
+- What not to count on: CDC-KI (thyroid only; will not help in a nuclear bomb emergency; salt, iodine foods and supplements);
+  READY ("Do not use household cleaning wipes on your skin."; "Hand sanitizer does not protect against radioactive material.");
+  CDC-FAQ ("covering your mouth and nose with a mask, cloth, or towel" / "can help reduce the amount of radioactive material you
+  breathe."); CDC-KI ("The best protection in a radiation emergency is always to get inside, stay inside, and stay tuned").
+  No opened source names other products as not worth buying; none are named.
+
+### fallout-shelter-kit (checklist)
+
+- Category radiation. No links in items (spec 10, call 15); other lists are named in plain text. No potassium iodide (no
+  source lists it for this event; D106). No plastic sheeting or tape (D105). Quantities scale only where a source gives a
+  per-person figure: spare change of clothes (READY "for each family member") and sleeping bag or warm blanket (READY-KIT
+  "for each person"); water's per-person figure is shown as text and its quantity stays on Home water store (one owner).
+- radio: READY, CDC-FAQ (NOAA preferred); note READY. radio-batteries: CDC-FAQ. flashlights: READY-KIT ("Flashlight", "Extra
+  batteries"), PNA-1985 ("a battery-powered radio and a flashlight or lantern, with spare batteries"); note from Living in a
+  closed-up house ("Use flashlights or battery lanterns, not candles or fuel lanterns (CDC, CPSC; Carbon monoxide)").
+- water: How much water you need (1 gallon (3.8 L) per person per day for 2 weeks); "Keep it where you will shelter" as in
+  the topic. food: READY ("sealed food"), READY-KIT ("non-perishable food"), CDC-FAQ ("non-perishable foods"), up to 2 weeks
+  (PNA-1985, How long to stay in; D104). can-opener: READY-KIT.
+- medicines: READY ("medicine"), READY-KIT ("Prescription medications."; "Non-prescription medications"), PNA-1985 p. 26
+  ("Include medicines taken regularly or likely to be needed by family members."); "for 2 weeks" from PNA-1985's two-week
+  stock of supplies. first-aid: READY-KIT. baby-supplies: READY-KIT ("Infant formula, bottles, diapers, wipes and diaper rash
+  cream"). pet-supplies: READY-KIT ("Pet food and extra water for your pet").
+- clothes: READY. trash-bags: READY ("a trash bag for contaminated clothing"); note CDC-DB ("seal it in a plastic bag";
+  "Put the plastic bag where others will not touch it."). soap: READY ("wash with soap and water"). wipes: READY ("use a wipe
+  or clean wet cloth to wipe any skin or hair that was not covered"; household cleaning wipes; hand sanitizer).
+- masks: READY-KIT ("Dust mask (to help filter contaminated air)"); note CDC-FAQ and CDC-KI as in the topic.
+- bedding: READY-KIT. co-alarms: Living in a closed-up house doFirst 5 and its sealed-room rule. sanitation: plain-text
+  pointer to the Sanitation kit list. phone: READY-KIT ("Cell phone with chargers and a backup battery"); note CDC-FAQ.
+  family-plan: READY. activities: READY-KIT ("Books, games, puzzles or other activities for children").
+- Left off: whistle, wrench, local maps, cash, documents, fire extinguisher, matches (READY-KIT items not specific to
+  staying inside; the Home heat kit covers the extinguisher).
+
+### Batch C agreement with checked topics and protocols
+
+- Dirty bomb car steps differ from the fallout rule (cars are not shelters); the topic says which applies (D100).
+- Damper: closing dampers (CDC-DB) is given only with Wood stoves and fireplaces' open-while-burning rule, as Living in a
+  closed-up house does.
+- "Duct tape or plastic ... not necessary" (CDC-DB) is CDC's "not necessary", not "don't": it does not clash with Stay warm
+  when the heat is out's plastic over windows for warmth.
+- Water: How much water you need, Store water at home and Water already in your house are linked, not restated; the one
+  quoted figure is word for word.
+- No sheltering period is restated: get-ready and the checklist point to How long to stay in's "up to 2 weeks".
+- No cleaning-off steps are owned here; the dirty bomb steps are CDC-DB's event steps and must be checked against
+  p:radiation-decontamination when it exists (rulings).
+
+### Batch C fix round (2026-11-18), from task-6-review.md
+
+Draft removed from all four items after these fixes. No new source was opened; every change uses the sources above or a
+checked topic's text word for word.
+- I1: amounts to keep now say "at least 2 weeks" (PNA-1985 p. 10 "at least a two-week stock"; How much water you need "at
+  least 1 gallon ... for 2 weeks"): get-ready summary, heading "Supplies for 2 weeks or more", its paragraph and food line;
+  checklist water, food and medicines items. Where the sheltering period itself is meant (get-ready paragraph, checklist
+  summary, both source lines) How long to stay in's Do first 3 is quoted word for word: "for as long as 2 weeks, and maybe
+  longer (civil defence handbooks, 1968 and 1985, dated)."
+- I2: surv-dirty-bomb doFirst 3 and outside step 4 now quote Fallout warning's Do first 4 word for word ("Carefully take off
+  your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov,
+  CDC)."). Only CDC-DB's extras stay: the mouth cloth goes in the bag; up to 90%; bag where others won't touch it, kept until
+  officials say. Inside step 4 says "clean off as in the steps above". CDC-DB's "Shower or wash with soap and water. Be sure
+  to wash your hair." is covered by the quoted "wash or wipe the skin and hair that were uncovered" and is no longer written
+  separately; CDC's order (bag stored before washing) becomes clothes, bag, wash (quote), then cloth and bag storage.
+  p:radiation-decontamination links placed in docs/v7.4-rulings.md.
+- M1: "very similar to those for a nuclear explosion" (FEMA-PG3 p. 119 "very similar").
+- M2: get-ready shelter line now only "decide now where you would shelter, by the rules in Where to shelter from fallout."
+- M3: qty unit "in all, one per person" for clothes and bedding ("For your group: 1 in all, one per person" / "4 in all, one per
+  person"). Days stepper noted in rulings C17.
+- M4: source name "Ready.gov (FEMA), Build A Kit (ready.gov/kit; undated)" in both files; the fetch detail stays here (READY-KIT).
+- M5: KI "Who it is meant for" opens "If officials call for KI, this is who CDC says it is meant for. It is never a reason to
+  take KI without being told to." (CDC-KI "Do not take KI unless you are instructed ...").
+- M6: NYS line now "after a nuclear power plant emergency" (NYS-KI covers plant emergencies only).
+- M7: s:surv-fallout-leaving added to the links later tasks must add, in dirty bomb "Hurt or sick".
+- M8: dirty bomb "Staying in" gains a labelled warn: "This app's own caution, not a source's: if you don't know whether it was
+  a dirty bomb or a nuclear explosion, treat it as a nuclear explosion and follow Fallout warning and How long to stay in."
+  plus a link to How long to stay in (D107).

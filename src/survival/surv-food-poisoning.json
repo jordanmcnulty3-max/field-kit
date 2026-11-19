@@ -4,15 +4,8 @@
   "category": "food",
   "keywords": [
     "botulism",
-    "botulism symptoms",
     "infant botulism",
-    "honey under 1",
-    "bulging lid",
-    "ate bad food",
-    "ate spoiled food",
-    "honey for babies",
-    "botulism signs",
-    "suspect jar"
+    "ate spoiled food"
   ],
   "summary": "Diarrhea, stomach pain or cramps, nausea, vomiting and fever are the usual signs of food poisoning; care is in the Severe vomiting or diarrhea and Dehydration protocols. Double vision, blurred vision, drooping eyelids, slurred speech, trouble swallowing or breathing, or muscle weakness can be botulism, a medical emergency: see a doctor or go to an emergency room now. Never give honey to a baby under 1 year.",
   "doFirst": [
@@ -57,6 +50,10 @@
         {
           "link": "s:surv-stomach-illness-in-a-group",
           "label": "Stomach illness in a group"
+        },
+        {
+          "link": "s:surv-food-clean-kitchen",
+          "label": "Keep food clean"
         },
         {
           "link": "p:carbon-monoxide",
@@ -123,6 +120,10 @@
       "blocks": [
         {
           "warn": "Honey is a known source of botulism in babies. Never feed honey to a baby under 1 year of age (New York State Department of Health)."
+        },
+        {
+          "link": "s:surv-food-babies-children",
+          "label": "Feeding babies and young children"
         }
       ]
     },
@@ -183,6 +184,10 @@
         },
         {
           "p": "Other jars or cans from the same batch: no source opened for this app says what to do with them. This app’s own caution: if one container from a batch shows any sign in Is it still good?, or someone got sick after eating from it, treat the whole batch as suspect and get rid of it the same way."
+        },
+        {
+          "link": "s:surv-food-preserving",
+          "label": "Preserving food"
         }
       ]
     },

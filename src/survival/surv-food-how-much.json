@@ -3,14 +3,7 @@
   "title": "How much food to store, and what",
   "category": "food",
   "keywords": [
-    "how much food",
-    "emergency food",
-    "stock up",
-    "nonperishable",
-    "non-perishable",
-    "food per person",
-    "calories",
-    "bulk staples"
+    "how much food"
   ],
   "summary": "Federal and New York State sources say to store from several days to 2 weeks of food; extension services go to 30 days, and one lists amounts for a year. This app plans for at least 2 weeks at home, the Red Cross figure, the same as for water. Build up from the food your household already eats: food that needs no refrigeration, little or no cooking and little or no water. Plan for babies, children, older people, special diets and pets. The per-person amounts some extension services print are for adults or ages 14 and up; none gives an amount for a child of a stated age.",
   "sections": [
@@ -143,6 +136,10 @@
         },
         {
           "p": "No source opened gives an amount of food for a child of a stated age, so this app gives none."
+        },
+        {
+          "link": "s:surv-food-babies-children",
+          "label": "Feeding babies and young children"
         }
       ]
     },

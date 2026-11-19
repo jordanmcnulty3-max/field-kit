@@ -3,11 +3,6 @@
   "title": "Rationing food",
   "category": "food",
   "keywords": [
-    "food is short",
-    "short of food",
-    "running out of food",
-    "not enough food",
-    "food shortage",
     "ration food",
     "rationing food",
     "rations"
@@ -88,6 +83,10 @@
         {
           "link": "p:low-blood-sugar",
           "label": "Low blood sugar"
+        },
+        {
+          "link": "s:surv-food-babies-children",
+          "label": "Feeding babies and young children"
         }
       ]
     },
@@ -107,6 +106,10 @@
         {
           "link": "s:surv-food-storage",
           "label": "Storing food"
+        },
+        {
+          "link": "s:surv-food-preserving",
+          "label": "Preserving food"
         }
       ]
     },

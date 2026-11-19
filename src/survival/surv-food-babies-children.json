@@ -2,14 +2,7 @@
   "id": "surv-food-babies-children",
   "title": "Feeding babies and young children",
   "category": "food",
-  "keywords": [
-    "ready-to-feed formula",
-    "powdered formula",
-    "infant formula",
-    "mixing formula",
-    "sterilizing",
-    "toddler food"
-  ],
+  "keywords": [],
   "summary": "Breastfeeding is the safest way to feed a baby in an emergency: keep going. Ready-to-feed formula is the safest formula. Powdered formula needs bottled, boiled or treated water and the exact amounts on the label; with no fridge, make it fresh for each feeding. Never water formula down or make your own. Do not give your child honey before 12 months (CDC); no cow’s milk or milk alternatives before 12 months either. Children under 4 choke easily: cut food small, sit them up and watch them eat.",
   "doFirst": [
     "Breastfeeding? Keep going. In an emergency it is the safest way to feed a baby, and you can keep breastfeeding even when you feel stressed (CDC).",
@@ -98,6 +91,10 @@
             "Don’t use formula after its “use by” date (FDA).",
             "Formula cans that were in unsafe water, or have dents, rust spots, puffy ends or a broken seal: throw them away (CDC)."
           ]
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Storing food"
         }
       ]
     },
@@ -231,6 +228,10 @@
       "blocks": [
         {
           "p": "No source opened for this app says what to feed a baby under 12 months when there is no formula and no one can breastfeed. What the sources do say: never water formula down or make your own, and no cow’s milk or milk alternatives before 12 months (CDC, FDA). Restarting breastfeeding needs time and regular help, and CDC says formula or donor milk must continue until the milk supply is enough (see Breastfeeding above): it is not a quick answer. Keep ready-to-feed formula in your supplies before anything happens (Ready.gov)."
+        },
+        {
+          "link": "c:pantry",
+          "label": "Pantry"
         }
       ]
     },
@@ -253,6 +254,10 @@
         {
           "link": "s:surv-water-how-much",
           "label": "How much water you need"
+        },
+        {
+          "link": "s:surv-food-when-short",
+          "label": "Rationing food"
         }
       ]
     },

@@ -4,18 +4,7 @@
   "category": "food",
   "keywords": [
     "power out food",
-    "fridge",
-    "refrigerator",
-    "freezer",
-    "chest freezer",
-    "keep food cold",
-    "how long does a freezer stay cold",
-    "how long does the fridge stay cold",
-    "food outside in winter",
-    "food in the snow",
-    "fridge without power",
-    "freezer without power",
-    "keep the freezer cold"
+    "fridge"
   ],
   "summary": "Keep the fridge and freezer doors shut. A fridge keeps food cold for about 4 hours; a full freezer about 48 hours, a half-full one about 24. Eat the most perishable food first, move fridge food into a cooler with ice after 4 hours, and never put food outside to keep it cold, even in winter. Check food in Is it still good? before you eat or refreeze it.",
   "doFirst": [
@@ -74,6 +63,10 @@
             "If the power has been out for 4 hours and you have a cooler and ice, put the fridge’s perishable food in the cooler. Add ice or a cold source like frozen gel packs to keep it at 40°F (4°C) or below (CDC).",
             "In freezing weather, make ice: fill buckets, empty milk cartons or cans with water and leave them outside to freeze. Then put the ice in your fridge, freezer or coolers (USDA)."
           ]
+        },
+        {
+          "link": "s:surv-food-preserving",
+          "label": "Preserving food"
         }
       ]
     },
@@ -139,12 +132,24 @@
             "Have a cooler and frozen gel packs ready in case you have to take food out of the fridge to keep it cold (CDC).",
             "Keep food on hand that needs no refrigeration and can be eaten cold or heated on an outdoor grill (USDA). Keep a hand-held can opener (USDA)."
           ]
+        },
+        {
+          "link": "s:surv-food-how-much",
+          "label": "How much food to store, and what"
+        },
+        {
+          "link": "c:pantry",
+          "label": "Pantry"
         }
       ]
     },
     {
       "h": "Everything on food",
       "blocks": [
+        {
+          "link": "s:surv-food-how-much",
+          "label": "How much food to store, and what"
+        },
         {
           "link": "s:surv-food-still-good",
           "label": "Is it still good?"
@@ -156,6 +161,26 @@
         {
           "link": "s:surv-food-poisoning",
           "label": "Food poisoning and botulism"
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Storing food"
+        },
+        {
+          "link": "s:surv-food-when-short",
+          "label": "Rationing food"
+        },
+        {
+          "link": "s:surv-food-clean-kitchen",
+          "label": "Keep food clean"
+        },
+        {
+          "link": "s:surv-food-babies-children",
+          "label": "Feeding babies and young children"
+        },
+        {
+          "link": "s:surv-food-preserving",
+          "label": "Preserving food"
         },
         {
           "link": "s:surv-fallout-water-and-food",

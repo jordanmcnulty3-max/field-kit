@@ -72,6 +72,10 @@
           "label": "Water and food after fallout"
         },
         {
+          "link": "s:surv-food-how-much",
+          "label": "How much food to store, and what"
+        },
+        {
           "link": "s:surv-water-how-much",
           "label": "How much water you need"
         },

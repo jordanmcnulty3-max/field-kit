@@ -739,8 +739,13 @@ V73_RESULTS = {
 }
 
 
+FOOD_KEYS = {'s:surv-food-power-out', 's:surv-food-still-good', 's:surv-food-cooking-no-power', 's:surv-food-poisoning', 's:surv-food-how-much',
+             's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children',
+             's:surv-food-preserving', 'c:pantry'}
+
+
 @pytest.mark.parametrize('text', sorted(V73_RESULTS))
-def test_v73_results_for_co_bleach_and_burn_keep_their_order_with_the_radiation_pages_added(page, app_url, text):
+def test_v73_results_for_co_bleach_and_burn_keep_their_order_with_the_radiation_and_food_pages_added(page, app_url, text):
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
     ks = [r['key'] for r in q(page, text)]
@@ -748,7 +753,7 @@ def test_v73_results_for_co_bleach_and_burn_keep_their_order_with_the_radiation_
     assert ks[:3] == old[:3], f'{text!r}: top three changed: {ks[:3]} (v7.3: {old[:3]})'   # radiation pages only below position 3
     kept = [k for k in ks if k in old]
     assert kept == old[:len(kept)], f'{text!r}: v7.3 results reordered: {kept}'
-    assert [k for k in ks if k not in old and k not in RADIATION_KEYS] == []   # nothing but radiation pages joins the list (the 30-result cap may push a v7.3 tail result out)
+    assert [k for k in ks if k not in old and k not in RADIATION_KEYS and k not in FOOD_KEYS] == []   # nothing but radiation and food pages joins the list (the 30-result cap may push a v7.3 tail result out)
 
 
 # ---------- Final review I1 and I2: tie order, measured on screen ----------
@@ -810,7 +815,9 @@ def test_v73_first_three_on_screen_are_unchanged(page, app_url, text):
     page.wait_for_function('window.FK && FK.search')
     open_search(page)
     now = on_screen(page, text)[:3]
-    if text in V73_ON_SCREEN_OUTSCORED:
+    if text in V75_ACCEPTED:   # changed again by the food pack: pinned in V75_ACCEPTED, below
+        assert now == V75_ACCEPTED[text], f'{text!r}: {now}'
+    elif text in V73_ON_SCREEN_OUTSCORED:
         assert now == V73_ON_SCREEN_OUTSCORED[text], f'{text!r}: {now}'
         assert now != V73_ON_SCREEN[text]   # if v7.3 comes back, move the query out of the outscored list
     else:
@@ -835,3 +842,181 @@ def test_fall_keeps_head_injury_in_the_first_three_on_screen(page, app_url):
     open_search(page)
     ks = on_screen(page, 'fall')
     assert ks[:3] == ['p:radiation-decontamination', 'p:head-injury', 'p:march'], ks[:5]
+
+
+# ---------- Food pack (v7.5 Task 8): the on-screen first three against the v7.4 release ----------
+# First three results as the overlay shows them (grouped by kind), recorded from a build of the v7.4 release (4375170) at 360x640 by
+# typing each query into the overlay on #/survival: the 29 queries pinned above, the words people type in a kitchen emergency, and the
+# words the batch reviewers named. The food pack must not change them, except the lists in the four dicts below (docs/v7.5-rulings.md,
+# "Search results that changed, accepted" and "Search results that changed, need a ruling"), each pinned as it now stands.
+V74_ON_SCREEN = {
+    'CO': ['p:carbon-monoxide', 'p:head-injury', 'p:animal-bite'],
+    'bleach': ['p:poisoning', 'p:poison-plants', 'p:vomiting-diarrhea'],
+    'burn': ['t:burn', 'p:burns', 'p:poison-plants'],
+    'bleeding': ['p:bleeding', 'p:abdominal-wound', 'p:amputation'],
+    'cpr': ['p:cpr-adult', 'p:cpr-child', 'p:cpr-infant'],
+    'choking': ['p:choking', 'p:choking-infant', 'p:anaphylaxis'],
+    'shock': ['p:shock', 'p:burns', 'p:abdominal-wound'],
+    'in shock': ['p:shock', 'p:abdominal-wound', 'p:amputation'],
+    'frostbite': ['p:frostbite', 'p:wound-care', 's:surv-priorities'],
+    'frost bite': ['s:surv-wind-chill', 's:surv-priorities', 'p:wound-care'],
+    'hypothermia': ['p:hypothermia', 'p:frostbite', 'p:march'],
+    'water': ['s:surv-find-water', 's:surv-garbage-and-greywater', 's:surv-handwashing'],
+    'generator': ['s:surv-generators', 's:surv-carbon-monoxide', 's:surv-wells-without-power'],
+    'tourniquet': ['p:tourniquet-conversion', 'p:junctional-bleeding', 'p:hemostatic-packing'],
+    'seizure': ['p:seizure', 'p:recovery-position', 'p:carbon-monoxide'],
+    'overdose': ['p:overdose', 'p:cpr-adult', 'p:poisoning'],
+    'poison': ['p:poison-plants', 'p:carbon-monoxide', 'p:poisoning'],
+    'snake': ['p:snakebite', 's:surv-dangerous-animals'],
+    'heat': ['p:heat-illness', 'p:carbon-monoxide', 'p:hypothermia'],
+    'no': ['p:cpr-adult', 'p:cpr-child', 'p:cpr-infant'],
+    'food': ['s:surv-food-and-wild-plants', 's:surv-fallout-water-and-food', 's:surv-stomach-illness-in-a-group'],
+    'shelter': ['s:surv-shelter', 's:surv-fallout-where-to-shelter', 's:surv-fallout-warning'],
+    'mushroom': ['p:poisoning', 'p:vomiting-diarrhea', 's:surv-food-and-wild-plants'],
+    'blast': ['p:amputation', 'p:march', 'p:eye-injury'],
+    'serious': ['p:shock', 'p:bleeding', 'p:burns'],
+    'lie': ['p:fainting', 'p:shock', 'p:altitude'],
+    'emergency': ['p:low-blood-sugar', 'p:seizure', 'p:abdominal-wound'],
+    'wall': ['p:chest-wound', 'p:march', 'p:wound-care'],
+    'now': ['p:animal-bite', 'p:head-injury', 'p:overdose'],
+    'cook': ['s:surv-fire', 's:surv-field-dressing-game', 's:surv-wells-without-power'],
+    'fire': ['p:stings', 'p:burns', 'p:poisoning'],
+    'stove': ['s:surv-wood-stoves-fireplaces', 's:surv-carbon-monoxide', 's:surv-fallout-shelter-living'],
+    'sick': ['p:altitude', 'p:radiation-sickness', 'p:vomiting-diarrhea'],
+    'vomiting': ['p:vomiting-diarrhea', 'p:dehydration', 'p:recovery-position'],
+    'baby': ['p:choking-infant', 'p:cpr-infant', 'p:burns'],
+    'milk': ['s:surv-fallout-water-and-food', 's:surv-fire', 's:surv-food-and-wild-plants'],
+    'can': ['s:surv-potassium-iodide', 's:surv-store-fuel', 's:surv-unheated-house'],
+    'salt': ['p:dehydration', 'p:heat-illness', 'p:vomiting-diarrhea'],
+    'ice': ['p:sprain-dislocation', 'p:snakebite', 'p:amputation'],
+    'freezer': ['s:surv-water-store', 's:surv-fallout-water-and-food'],
+    'power': ['s:surv-wells-without-power', 's:surv-generators', 's:surv-heat-out'],
+    'pantry': ['s:surv-fallout-water-and-food'],
+    'spoiled': [],
+    'botulism': [],
+    'formula': ['s:surv-fallout-water-and-food', 's:surv-wind-chill', 'c:fallout-shelter-kit'],
+    'canning': [],
+    'power out': ['s:surv-heat-out', 's:surv-wells-without-power', 's:surv-generators'],
+    'breastfeeding': ['s:surv-fallout-water-and-food', 's:surv-potassium-iodide', 'p:dehydration'],
+    'honey': ['p:burns', 'p:stings'],
+    'fever': ['p:tick', 'p:altitude', 'p:animal-bite'],
+    'dehydration': ['p:dehydration', 'p:vomiting-diarrhea', 'p:altitude'],
+    'meat': ['p:stings', 's:surv-field-dressing-game'],
+    'thermometer': ['p:frostbite', 'p:heat-illness', 's:surv-field-dressing-game'],
+    'power outage': ['s:surv-generators', 's:surv-heat-out', 's:surv-wells-without-power'],
+    'flood': ['s:surv-wells-without-power', 's:surv-find-water', 's:surv-latrines'],
+    'canned': ['s:surv-unheated-house', 's:surv-fallout-water-and-food', 's:surv-water-in-the-house'],
+    'oven': ['s:surv-carbon-monoxide', 's:surv-heat-out', 's:surv-fallout-shelter-living'],
+    'range': ['a:ballistics', 's:surv-carbon-monoxide', 's:surv-heat-out'],
+    'grill': ['s:surv-carbon-monoxide', 's:surv-heat-out', 's:surv-fallout-shelter-living'],
+    'store': ['s:surv-store-fuel', 's:surv-water-store', 's:surv-unheated-house'],
+    'storing': ['s:surv-find-water', 's:surv-firewood', 's:surv-handwashing'],
+    'storage': ['s:surv-store-fuel', 's:surv-water-store', 's:surv-fallout-where-to-shelter'],
+    'what to buy': ['s:surv-fallout-get-ready', 's:surv-portable-heaters', 's:surv-store-fuel'],
+    'date': ['p:tick', 'p:animal-bite', 's:surv-water-store'],
+    'insects': ['s:surv-food-and-wild-plants', 's:surv-find-water', 's:surv-latrines'],
+    'throw out': ['s:surv-portable-heaters', 's:surv-dirty-bomb', 's:surv-latrines'],
+    'bottles': ['s:surv-water-store', 's:surv-make-water-safe', 's:surv-fallout-water-and-food'],
+    'raw': [],
+    'feeding': ['s:surv-generators', 's:surv-handwashing', 's:surv-traps-and-fishing'],
+    'children': ['s:surv-dress-for-cold', 's:surv-water-how-much', 's:surv-dirty-bomb'],
+    'child': ['p:choking', 'p:cpr-child', 'p:animal-bite'],
+    'dishes': ['s:surv-clean-and-disinfect', 's:surv-find-water', 's:surv-garbage-and-greywater'],
+    'clean': ['s:surv-clean-and-disinfect', 's:surv-fallout-coming-inside', 's:surv-find-water'],
+    'keep': ['s:surv-heat-out', 's:surv-carbon-monoxide', 's:surv-find-water'],
+    'rationing': [],
+    'preserving': [],
+}
+
+# Rule (b): an older Survival page may leave the first three only for a food page with the query word in its title. ("freezer" is named
+# by the controller as an example; its match is the hub's summary and Do first, not its title.) No Emergency protocol leaves these lists.
+V75_ACCEPTED = {
+    'food': ['s:surv-food-and-wild-plants', 's:surv-fallout-water-and-food', 's:surv-food-power-out'],
+    'cook': ['s:surv-food-cooking-no-power', 's:surv-fire', 's:surv-field-dressing-game'],
+    'power': ['s:surv-wells-without-power', 's:surv-food-power-out', 's:surv-food-cooking-no-power'],
+    'power out': ['s:surv-food-power-out', 's:surv-heat-out', 's:surv-wells-without-power'],
+    'pantry': ['c:pantry', 's:surv-fallout-water-and-food', 's:surv-food-power-out'],
+    'storing': ['s:surv-food-storage', 's:surv-find-water', 's:surv-firewood'],
+    'store': ['s:surv-store-fuel', 's:surv-water-store', 's:surv-food-how-much'],
+    'feeding': ['s:surv-food-babies-children', 's:surv-generators', 's:surv-handwashing'],
+    'children': ['s:surv-food-babies-children', 's:surv-dress-for-cold', 's:surv-water-how-much'],
+    'clean': ['s:surv-clean-and-disinfect', 's:surv-food-clean-kitchen', 's:surv-fallout-coming-inside'],
+    'keep': ['s:surv-food-clean-kitchen', 's:surv-heat-out', 's:surv-carbon-monoxide'],
+    'freezer': ['s:surv-food-power-out', 's:surv-food-preserving', 's:surv-food-still-good'],
+}
+
+# Words v7.4 had no result for: a food page is now the answer and nothing is displaced.
+V75_NEW_RESULTS = {
+    'spoiled': ['s:surv-food-poisoning', 's:surv-food-still-good'],
+    'botulism': ['s:surv-food-poisoning', 's:surv-food-preserving', 's:surv-food-power-out'],
+    'canning': ['s:surv-food-preserving', 's:surv-food-still-good'],
+    'raw': ['s:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-how-much'],
+    'rationing': ['s:surv-food-when-short', 's:surv-food-power-out', 's:surv-food-babies-children'],
+    'preserving': ['s:surv-food-preserving', 's:surv-food-power-out', 's:surv-food-poisoning'],
+}
+
+# Summary, Do first or body text of a food page outscores an older page (no keyword is the cause). The text is not changed here: the lists
+# are pinned as they stand until the controller rules. An Emergency protocol leaves "meat" and "thermometer".
+V75_NEED_RULING = {
+    'milk': ['s:surv-fallout-water-and-food', 's:surv-food-power-out', 's:surv-food-babies-children'],
+    'formula': ['s:surv-fallout-water-and-food', 's:surv-food-babies-children', 's:surv-wind-chill'],
+    'meat': ['s:surv-food-power-out', 's:surv-food-clean-kitchen', 's:surv-food-cooking-no-power'],
+    'thermometer': ['s:surv-food-cooking-no-power', 's:surv-field-dressing-game', 's:surv-heat-out'],
+    'flood': ['s:surv-wells-without-power', 's:surv-food-still-good', 's:surv-find-water'],
+    'canned': ['s:surv-unheated-house', 's:surv-fallout-water-and-food', 's:surv-food-cooking-no-power'],
+    'what to buy': ['s:surv-fallout-get-ready', 's:surv-food-how-much', 's:surv-portable-heaters'],
+    'throw out': ['s:surv-food-power-out', 's:surv-portable-heaters', 's:surv-dirty-bomb'],
+    'dishes': ['s:surv-clean-and-disinfect', 's:surv-food-clean-kitchen', 's:surv-find-water'],
+}
+
+# Already ruled (docs/v7.5-rulings.md, batch C ruling 13): the babies page, and for "honey" also Food poisoning and botulism, lead;
+# Dehydration ("breastfeeding") and Stings ("honey") are no longer in the first three.
+V75_RULED = {
+    'breastfeeding': ['s:surv-fallout-water-and-food', 's:surv-food-babies-children', 's:surv-potassium-iodide'],
+    'honey': ['s:surv-food-babies-children', 's:surv-food-poisoning', 'p:burns'],
+}
+
+V75_CHANGED = {**V75_ACCEPTED, **V75_NEW_RESULTS, **V75_NEED_RULING, **V75_RULED}
+FOOD_FIRST = ['food', 'freezer', 'pantry', 'spoiled', 'botulism', 'formula', 'canning', 'power out']
+
+
+@pytest.mark.parametrize('text', sorted(V74_ON_SCREEN))
+def test_v74_first_three_on_screen_are_unchanged_by_the_food_pack(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    now = on_screen(page, text)[:3]
+    if text in V75_CHANGED:
+        assert now == V75_CHANGED[text], f'{text!r}: {now}'
+        assert now != V74_ON_SCREEN[text]   # if v7.4 comes back, take the query out of the changed lists
+        if text in V75_ACCEPTED:   # an Emergency protocol never leaves an accepted list
+            assert [k for k in V74_ON_SCREEN[text] if k.startswith('p:') and k not in now] == []
+    else:
+        assert now == V74_ON_SCREEN[text], f'{text!r}: first three on screen {now} (v7.4: {V74_ON_SCREEN[text]})'
+
+
+@pytest.mark.parametrize('text', FOOD_FIRST)
+def test_food_words_show_a_food_page_in_the_first_three_on_screen(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, text)[:3]
+    assert any(k.startswith('s:surv-food-') or k == 'c:pantry' for k in ks), f'{text!r}: {ks}'
+
+
+def test_the_two_ruled_exceptions_keep_their_protocols_just_below_the_first_three(page, app_url):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    assert 'p:dehydration' in on_screen(page, 'breastfeeding')[3:8]
+    assert 'p:stings' in on_screen(page, 'honey')[3:8]
+
+
+def test_food_pages_are_indexed_after_every_older_page_hub_first(page, app_url):
+    # "fishing" matches the Traps topic by title and an older protocol and three food pages by body text alone, all at the same score:
+    # at equal score the older page is listed first, then the food hub, then the other food pages
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    ks = [r['key'] for r in q(page, 'fishing')]
+    older, hub = ks.index('p:impaled-object'), ks.index('s:surv-food-power-out')
+    assert older < hub and all(hub < ks.index(k) for k in ks if k.startswith('s:surv-food-') and k != 's:surv-food-power-out'), ks

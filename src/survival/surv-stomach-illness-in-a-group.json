@@ -121,6 +121,10 @@
             "Wash fruit and vegetables carefully before you prepare them (CDC).",
             "Wash dishes and food surfaces, then sanitize them with bleach (see Clean and disinfect)."
           ]
+        },
+        {
+          "link": "s:surv-food-clean-kitchen",
+          "label": "Keep food clean"
         }
       ]
     },

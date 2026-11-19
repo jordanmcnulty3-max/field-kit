@@ -50,6 +50,10 @@
         },
         {
           "p": "Before you eat, wipe counters, plates, pots and utensils with a damp cloth or clean towel (CDC). Put the cloth in a plastic bag, put the bag away from people and pets, and wash your hands (CDC)."
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
         }
       ]
     },

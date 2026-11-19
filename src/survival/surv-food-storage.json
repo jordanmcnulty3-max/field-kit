@@ -3,18 +3,7 @@
   "title": "Storing food",
   "category": "food",
   "keywords": [
-    "food storage",
-    "store food",
-    "shelf life",
-    "expiration",
-    "best by",
-    "best if used by",
-    "use by",
-    "sell by",
-    "rotate food",
-    "pantry pests",
-    "weevils",
-    "food grade"
+    "weevils"
   ],
   "summary": "Store food so it keeps: somewhere cool, dry and dark. Below 85°F (29°C) is best, and never above or beside the stove, under the sink or in a damp garage or basement. Keep it covered, in tightly closed glass, metal or heavy food-grade plastic. Date everything, put new food behind old and use the oldest first. The date on most food is about quality, not safety. Throw away food that pests got into.",
   "sections": [
@@ -86,6 +75,10 @@
         {
           "link": "s:surv-clean-and-disinfect",
           "label": "Clean and disinfect"
+        },
+        {
+          "link": "s:surv-food-clean-kitchen",
+          "label": "Keep food clean"
         }
       ]
     },
@@ -187,6 +180,10 @@
           "warn": "Never buy or use infant formula after its Use-By date (USDA)."
         },
         {
+          "link": "s:surv-food-babies-children",
+          "label": "Feeding babies and young children"
+        },
+        {
           "p": "Dates are not an indicator of the food’s safety (USDA). From Is it still good?, word for word: “Throw out any food with an unusual smell, color or texture; a normal one proves nothing: food that looks and smells normal can still make you sick (CDC). When in doubt, throw it out (CDC).”"
         },
         {
@@ -234,6 +231,10 @@
         {
           "link": "s:surv-food-power-out",
           "label": "Food when the power goes out"
+        },
+        {
+          "link": "s:surv-food-preserving",
+          "label": "Preserving food"
         }
       ]
     },

@@ -55,16 +55,22 @@
   const withBody = (doc, parts) => { if (parts.length) doc.fields.push(bodyField(parts)); doc.parts = parts; return doc; };
 
   /* Tie order. At equal score the document indexed first wins, so the order of indexing decides ties (nothing else does). Every page
-     from before the radiation pack (v7.4) is indexed exactly as in v7.3; the pack's pages come after all of them: its two protocols,
-     then the fallout hub, then its other topics, then its checklist. So a tie between a pack page and an older page always goes to the
-     older page, as it did before the pack. */
-  const HUB = 's:surv-fallout-warning';
-  const PACK_PROTOCOLS = new Set(['radiation-decontamination', 'radiation-sickness']);
-  const PACK_CHECKLISTS = new Set(['fallout-shelter-kit']);
-  const packTopic = t => !!t && t.category === 'radiation';
+     from before the first pack (v7.3 and earlier) is indexed exactly as it was, in its old order. After them come the packs, one
+     after the other in the order they shipped; a pack's pages are its protocols, then its hub, then its other topics, then its
+     checklists, each in file order. So a tie between a pack page and an older page always goes to the older page, and between two
+     packs to the earlier pack. A new pack is one more entry at the end of PACKS:
+       topic      the category its topics carry (every topic of the pack, and only those, has this category)
+       hub        the key of the pack's hub topic, indexed first among its topics
+       protocols  ids of the pack's Emergency protocols (indexed before its hub)
+       checklists ids of the pack's checklists (indexed after its topics) */
+  const PACKS = [
+    { topic: 'radiation', hub: 's:surv-fallout-warning', protocols: ['radiation-decontamination', 'radiation-sickness'], checklists: ['fallout-shelter-kit'] },   // v7.4
+    { topic: 'food', hub: 's:surv-food-power-out', protocols: [], checklists: ['pantry'] },   // v7.5
+  ];
+  const packOf = (kind, v) => PACKS.findIndex(k => kind === 'topic' ? k.topic === v : k[kind === 'protocol' ? 'protocols' : 'checklists'].includes(v));
 
   function build() {
-    const out = [], packProtocols = [], packTopics = [], packChecklists = [];
+    const out = [], packed = PACKS.map(() => ({ protocols: [], topics: [], checklists: [] }));
     for (const p of FK.protocols()) {   // well-formed protocols only (app.js)
       const adv = p.tier === 'advanced' || p.category === 'advanced';
       const f = [field(W.title, p.title)];
@@ -76,20 +82,25 @@
         if (s && s.text) parts.push(s.text);
         if (s && s.detail) parts.push(Array.isArray(s.detail) ? s.detail.join(' ') : s.detail);
       }
-      (PACK_PROTOCOLS.has(p.id) ? packProtocols : out).push(withBody({ key: 'p:' + p.id, title: p.title, kind: adv ? 'Advanced' : 'Emergency', draft: p.draft === true, fields: f }, parts));
+      const k = packOf('protocol', p.id);
+      (k >= 0 ? packed[k].protocols : out).push(withBody({ key: 'p:' + p.id, title: p.title, kind: adv ? 'Advanced' : 'Emergency', draft: p.draft === true, fields: f }, parts));
     }
     for (const t of (FK.tools && FK.tools.list ? FK.tools.list() : [])) {
       const report = t.segment === 'report';
       out.push({ key: (report ? 'r:' : 't:') + t.name, title: t.label, kind: report ? 'Report' : 'Tool', draft: false,
         fields: [field(W.title, t.label), field(W.keywords, TOOL_WORDS[t.name] || '')] });
     }
-    for (const t of FK.survival ? FK.survival.topics() : []) (packTopic(t) ? packTopics : out).push(topicDoc(t));
+    for (const t of FK.survival ? FK.survival.topics() : []) {
+      const k = t ? packOf('topic', t.category) : -1;
+      (k >= 0 ? packed[k].topics : out).push(topicDoc(t));
+    }
     for (const c of survList('checklists')) {
       if (!str(c && c.id) || !str(c.title)) continue;
       const f = [field(W.title, c.title)];
       const parts = [];
       for (const it of Array.isArray(c.items) ? c.items : []) if (it && str(it.text)) parts.push(it.text);
-      (PACK_CHECKLISTS.has(c.id) ? packChecklists : out).push(withBody({ key: 'c:' + c.id, title: c.title, kind: 'Checklist', draft: c.draft === true, fields: f }, parts));
+      const k = packOf('checklist', c.id);
+      (k >= 0 ? packed[k].checklists : out).push(withBody({ key: 'c:' + c.id, title: c.title, kind: 'Checklist', draft: c.draft === true, fields: f }, parts));
     }
     for (const u of survList('tools')) {
       if (!str(u && u.name) || !str(u.label)) continue;
@@ -98,7 +109,7 @@
     for (const [id, s] of Object.entries(SCREENS)) {
       out.push({ key: 'a:' + id, title: s.title, kind: 'App', draft: false, fields: [field(W.title, s.title), field(W.keywords, s.keywords)] });
     }
-    out.push(...packProtocols, ...packTopics.filter(d => d.key === HUB), ...packTopics.filter(d => d.key !== HUB), ...packChecklists);
+    PACKS.forEach((k, i) => out.push(...packed[i].protocols, ...packed[i].topics.filter(d => d.key === k.hub), ...packed[i].topics.filter(d => d.key !== k.hub), ...packed[i].checklists));
     return out;
   }
   const str = v => typeof v === 'string' && v.trim() !== '';

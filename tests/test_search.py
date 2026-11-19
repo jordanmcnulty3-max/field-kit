@@ -853,6 +853,12 @@ def test_fall_keeps_head_injury_in_the_first_three_on_screen(page, app_url):
 # words the batch reviewers named. The food pack must not change them, except the lists in the four dicts below (docs/v7.5-rulings.md,
 # "Search results that changed, accepted" and its lists below it), each pinned as it now stands.
 V74_ON_SCREEN = {
+    'emergency food': ['p:low-blood-sugar', 'p:choking', 'p:vomiting-diarrhea'],
+    'short of food': ['p:asthma', 'p:radiation-sickness', 'p:seizure'],
+    'swollen can': ['s:surv-potassium-iodide', 's:surv-unheated-house', 'p:sprain-dislocation'],
+    'cross contamination': ['p:radiation-decontamination', 'p:fracture'],
+    'how long can food sit out': ['p:low-blood-sugar', 'p:hypothermia', 's:surv-fallout-leaving'],
+    'running out of food': ['s:surv-unheated-house', 's:surv-heat-out', 's:surv-fallout-shelter-living'],
     'CO': ['p:carbon-monoxide', 'p:head-injury', 'p:animal-bite'],
     'bleach': ['p:poisoning', 'p:poison-plants', 'p:vomiting-diarrhea'],
     'burn': ['t:burn', 'p:burns', 'p:poison-plants'],
@@ -979,7 +985,13 @@ V75_ACCEPTED_WEAK = {
     'flood': ['s:surv-wells-without-power', 's:surv-food-still-good', 's:surv-find-water'],
     'canned': ['s:surv-unheated-house', 's:surv-fallout-water-and-food', 's:surv-food-cooking-no-power'],
     'what to buy': ['s:surv-fallout-get-ready', 's:surv-food-how-much', 's:surv-portable-heaters'],
-    'throw out': ['s:surv-food-still-good', 's:surv-food-power-out', 's:surv-portable-heaters'],
+    'throw out': ['s:surv-food-still-good', 's:surv-food-when-short', 's:surv-food-power-out'],
+    'emergency food': ['s:surv-food-how-much', 's:surv-food-poisoning', 's:surv-stomach-illness-in-a-group'],
+    'short of food': ['s:surv-food-when-short', 's:surv-unheated-house', 's:surv-food-storage'],
+    'swollen can': ['s:surv-food-still-good', 's:surv-potassium-iodide', 's:surv-unheated-house'],
+    'cross contamination': ['s:surv-food-clean-kitchen', 'p:radiation-decontamination', 'p:fracture'],
+    'how long can food sit out': ['s:surv-food-still-good', 's:surv-food-babies-children', 's:surv-food-how-much'],
+    'running out of food': ['s:surv-food-when-short', 's:surv-food-power-out', 's:surv-unheated-house'],
     'storage': ['s:surv-store-fuel', 's:surv-water-store', 's:surv-food-storage'],
     'dishes': ['s:surv-clean-and-disinfect', 's:surv-food-clean-kitchen', 's:surv-find-water'],
     'thawed': ['s:surv-food-still-good', 's:surv-unheated-house', 's:surv-food-babies-children'],
@@ -1151,3 +1163,15 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
     # are asserted above (the food pack has none).
     for k in packs:
         assert sorted(i for i, c in checklists.items() if c.get('category') == k['topic']) == sorted(k['checklists']), k['topic']
+
+
+@pytest.mark.parametrize('text,page_key', [('cross contamination', 's:surv-food-clean-kitchen'), ('how long can food sit out', 's:surv-food-still-good'),
+                                           ('running out of food', 's:surv-food-when-short'), ('infant formula', 's:surv-food-babies-children')])
+def test_food_phrases_find_their_page(page, app_url, text, page_key):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, text)[:3]
+    assert page_key in ks, ks
+    if text != 'infant formula':   # "infant formula" finds the babies page second, after Water and food after fallout (as in v7.4)
+        assert ks[0] == page_key, ks

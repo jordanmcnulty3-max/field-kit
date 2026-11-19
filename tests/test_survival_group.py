@@ -570,3 +570,131 @@ def test_planner_on_the_shipped_water_data_gives_the_pack_figures(page, app_url)
     assert page.locator('#survPage [data-k="lb"]').inner_text() == '117 lb'
     assert 'This does not cover flushing toilets, bathing or laundry: plan that water separately.' in t
     no_overflow(page)
+
+
+# ---------- The Days field: only on a checklist with an item that is per person per day ----------
+
+FALLOUT_URL = '#/survival/list/fallout-shelter-kit'
+PERSON_CL = {'id': 'per-person', 'title': 'Per person only', 'category': 'basics', 'summary': 'One each.',
+             'items': [{'id': 'cups', 'text': 'Cups', 'qty': {'amount': 2, 'unit': 'cups', 'per': 'person'}},
+                       {'id': 'bags', 'text': 'Bags', 'qty': {'amount': 1, 'unit': 'bags', 'per': 'person'}},
+                       {'id': 'plain', 'text': 'Plain'}],
+             'sources': [{'name': 'Fixture source', 'used': 'everything'}], 'reviewed': '2026-11-18'}
+BAD_QTY_CL = {'id': 'bad-qty', 'title': 'Bad quantities', 'category': 'basics', 'summary': 'Broken data.',
+              'items': [{'id': 'cups', 'text': 'Cups', 'qty': {'amount': 2, 'unit': 'cups', 'per': 'person'}},
+                        {'id': 'n1', 'text': 'Null qty', 'qty': None},
+                        {'id': 'n2', 'text': 'String qty', 'qty': 'lots'},
+                        {'id': 'n3', 'text': 'Array qty', 'qty': [1, 2]},
+                        {'id': 'n4', 'text': 'Negative per day', 'qty': {'amount': -2, 'unit': 'gal', 'per': 'personDay'}},
+                        {'id': 'n5', 'text': 'No unit', 'qty': {'amount': 2, 'per': 'personDay'}},
+                        {'id': 'n6', 'text': 'Bad per', 'qty': {'amount': 2, 'unit': 'gal', 'per': 'week'}},
+                        {'id': 'n7', 'text': 'Missing per', 'qty': {'amount': 2, 'unit': 'gal'}}],
+              'sources': [{'name': 'Fixture source', 'used': 'everything'}], 'reviewed': '2026-11-18'}
+
+
+def boot_shipped(page, app_url, hash_=FALLOUT_URL, storage=None):
+    """The shipped checklists and data, with an optional saved group."""
+    page.set_default_timeout(4000)
+    seed = {'fk.advAck': 'true', **{'fk.' + k: json.dumps(v) for k, v in (storage or {}).items()}}
+    page.add_init_script("if (!sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1'); const d = %s;"
+                         " for (const k in d) localStorage.setItem(k, d[k]); }" % json.dumps(seed))
+    page.goto(app_url + hash_)
+    page.wait_for_function('window.FK && FK.survival && FK.survival.group')
+    page.wait_for_selector('#survPage .sv-page')
+
+
+def status(page):
+    return page.locator('#survPage .sv-gsum').inner_text()
+
+
+def day_field(page):
+    return page.locator('#survPage .sv-group').get_by_label('Days', exact=True)
+
+
+def test_shipped_fallout_kit_shows_people_only_and_no_days_wording(page, app_url):
+    boot_shipped(page, app_url, storage={'group': {'people': 4, 'days': 14}})
+    expect(page.locator('#survPage .sv-group')).to_have_count(1)
+    expect(day_field(page)).to_have_count(0)
+    expect(page.locator('#survPage .sv-group [data-gfield="days"]')).to_have_count(0)
+    assert status(page) == 'Quantities for 4 people'
+    assert 'day' not in status(page).lower()
+    assert 'Day' not in page.locator('#survPage .sv-group').inner_text()
+    clothes, sleeping = qty(page, 'clothes'), qty(page, 'bedding')
+    assert clothes and sleeping
+    set_field(page, 'People', 7)
+    assert status(page) == 'Quantities for 7 people'
+    assert qty(page, 'clothes') != clothes and qty(page, 'bedding') != sleeping
+    set_field(page, 'People', 1)
+    assert status(page) == 'Quantities for 1 person'
+    assert group(page)['days'] == 14   # untouched
+
+
+def test_shipped_checklist_with_a_per_day_item_still_shows_days(page, app_url):
+    boot_shipped(page, app_url, '#/survival/list/home-water-store', storage={'group': {'people': 4, 'days': 14}})
+    expect(day_field(page)).to_have_count(1)
+    assert status(page) == 'Quantities for 4 people for 14 days'
+    ids = page.evaluate("[...document.querySelectorAll('#survPage [data-qty]')].map(x => x.dataset.qty)")
+    assert ids
+    before = {i: qty(page, i) for i in ids}
+    set_field(page, 'Days', 3)
+    assert status(page) == 'Quantities for 4 people for 3 days'
+    assert {i: qty(page, i) for i in ids} != before
+
+
+def test_days_value_survives_a_visit_to_a_checklist_without_days(page, app_url):
+    boot(page, app_url, LIST_URL, checklists=(QCL, PERSON_CL))
+    set_field(page, 'Days', 30)
+    assert group(page)['days'] == 30
+    page.evaluate("FK.route.go('/survival/list/per-person')")
+    wait_hash(page, '#/survival/list/per-person')
+    expect(day_field(page)).to_have_count(0)
+    assert status(page) == 'Quantities for 1 person'
+    assert group(page)['days'] == 30 and stored_group(page) in (None, {'people': 1, 'days': 30})
+    set_field(page, 'People', 3)
+    assert stored_group(page) == {'people': 3, 'days': 30}   # days kept when people is saved
+    page.go_back()
+    wait_hash(page, LIST_URL)
+    assert day_field(page).input_value() == '30'
+    assert status(page) == 'Quantities for 3 people for 30 days'
+
+
+def test_fallout_kit_keyboard_order_and_48px_targets_are_unchanged_without_days(page, app_url):
+    boot_shipped(page, app_url)
+    ed = page.locator('#survPage .sv-group')
+    for name in ('One fewer person', 'One more person'):
+        b = ed.get_by_role('button', name=name, exact=True).bounding_box()
+        assert b['width'] >= 48 and b['height'] >= 48, name
+    assert editor_input(page, 'People').bounding_box()['height'] >= 48
+    assert ed.get_by_role('button').count() == 2
+    assert page.evaluate('document.activeElement.id') == 'svTitle'
+    order = []
+    for _ in range(4):
+        page.keyboard.press('Tab')
+        order.append(page.evaluate('document.activeElement.dataset.act || document.activeElement.getAttribute("aria-label") || document.activeElement.dataset.gfield'))
+    assert order == ['pin', 'One fewer person', 'people', 'One more person']
+    page.keyboard.press('Tab')   # past the group box, not into a Days control
+    assert page.evaluate("document.activeElement.dataset.act") == 'clear-ticks'
+
+
+@pytest.mark.parametrize('night', [False, True])
+def test_fallout_kit_people_only_box_fits_360px_in_day_and_night(page, app_url, night):
+    boot_shipped(page, app_url, storage={'group': {'people': 50, 'days': 365}, 'night': night})
+    assert (page.evaluate("document.documentElement.dataset.theme") == 'night') is night
+    assert status(page) == 'Quantities for 50 people'
+    no_overflow(page)
+
+
+def test_malformed_quantities_are_ignored_and_do_not_count_as_per_day(page, app_url):
+    boot(page, app_url, '#/survival/list/bad-qty', checklists=(BAD_QTY_CL,))
+    expect(day_field(page)).to_have_count(0)
+    assert status(page) == 'Quantities for 1 person'
+    assert page.locator('#survPage [data-qty]').count() == 1
+    set_field(page, 'People', 2)
+    assert qty(page, 'cups').replace('\xa0', ' ') == '4 cups'
+    no_bad_numbers(page)
+
+
+def test_a_checklist_with_no_scaled_items_still_has_no_group_box(page, app_url):
+    boot(page, app_url, '#/survival/list/plain')
+    expect(page.locator('#survPage .sv-page')).to_have_count(1)
+    expect(page.locator('#survPage .sv-group')).to_have_count(0)

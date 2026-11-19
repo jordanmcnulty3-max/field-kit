@@ -631,7 +631,7 @@ def _main_text(name):
 
 
 @pytest.mark.parametrize('tid,target', sorted(SIX.items()))
-def test_the_six_checked_topics_differ_from_main_by_one_added_link_block(tid, target):
+def test_the_six_checked_topics_differ_from_v73_release_by_one_added_link_block(tid, target):
     now, was = _shipped('survival')[tid], _main_text(tid)
     extra = []
     now_sections = json.loads(json.dumps(now['sections']))

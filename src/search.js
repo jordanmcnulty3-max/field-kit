@@ -51,6 +51,7 @@
     }
     return false;
   }
+  /* The body field is never the title or keyword field, which the keyword-bonus and title checks rely on. */
   const withBody = (doc, parts) => { if (parts.length) doc.fields.push(bodyField(parts)); doc.parts = parts; return doc; };
 
   function build() {

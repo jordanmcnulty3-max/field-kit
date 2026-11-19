@@ -96,7 +96,9 @@
      (leaving the field, Enter, a stepper, the arrow keys), never on each keystroke, so the status line speaks once per change.
      host is filled with the editor; summary(group) gives the status line's text; onChange(group) runs after every change of
      the group, from this editor or anywhere else, until stop() (call it when the page closes). refresh() redraws the status line. */
-  function mountGroup(host, summary, onChange) {
+  function mountGroup(host, summary, onChange, opts) {
+    const withDays = !(opts && opts.days === false);   // false: People only; the saved days are never touched
+    const keys = Object.keys(LIMITS).filter(k => k !== 'days' || withDays);
     const field = (k, label, fewer, more) => {
       const [lo, hi] = LIMITS[k];
       return '<div class="sv-gfield"><label for="svG-' + k + '">' + label + '</label><div class="sv-step">' +
@@ -105,12 +107,12 @@
         '<button type="button" data-gstep="' + k + '" data-d="1" aria-label="' + more + '">+</button></div></div>';
     };
     host.innerHTML = '<fieldset class="sv-group"><legend>Your group</legend>' + field('people', 'People', 'One fewer person', 'One more person') +
-      field('days', 'Days', 'One fewer day', 'One more day') + '<p class="sv-gsum" role="status"></p></fieldset>';
+      (withDays ? field('days', 'Days', 'One fewer day', 'One more day') : '') + '<p class="sv-gsum" role="status"></p></fieldset>';
     const fs = host.querySelector('.sv-group'), live = fs.querySelector('.sv-gsum');
     const refresh = () => { const t = summary(group()); if (live.textContent !== t) live.textContent = t; };
     function paint() {
       const g = group();
-      for (const k of Object.keys(LIMITS)) {
+      for (const k of keys) {
         const input = fs.querySelector('[data-gfield="' + k + '"]');
         if (input.value !== String(g[k])) input.value = g[k];
         for (const b of fs.querySelectorAll('[data-gstep="' + k + '"]')) b.setAttribute('aria-disabled', String(g[k] === LIMITS[k][b.dataset.d < 0 ? 0 : 1]));
@@ -210,6 +212,7 @@
   /* ---------- Checklist pages (#/survival/list/<id>): native checkboxes, a count, Clear ticks with an in-page second tap ---------- */
   const countOf = id => ticks(id).length + '/' + checklist(id).items.length;
   const scales = c => c.items.some(it => okQty(it.qty));
+  const scalesByDay = c => c.items.some(it => okQty(it.qty) && it.qty.per === 'personDay');   // only then do the days matter
   function checklistHTML(c) {
     const on = new Set(ticks(c.id)), g = group();
     const rows = c.items.map((it, i) => {
@@ -234,13 +237,14 @@
     FK.recent.add('c:' + id);
     const wrap = el.querySelector('.sv-gwrap');
     /* Only the quantities change with the group: the rows, their ticks and focus stay as they are. */
-    const ed = wrap && mountGroup(wrap, g => 'Quantities for ' + groupWords(g), g => {
+    const byDay = scalesByDay(c);
+    const ed = wrap && mountGroup(wrap, g => 'Quantities for ' + (byDay ? groupWords(g) : counted(g.people, 'person', 'people')), g => {
       const spans = new Map([...el.querySelectorAll('[data-qty]')].map(x => [x.dataset.qty, x]));
       for (const it of c.items) {
         const s = okQty(it.qty) && spans.get(it.id);
         if (s) { const t = qtyText(it.qty, g); s.textContent = t; s.parentElement.hidden = !t; }
       }
-    });
+    }, { days: byDay });
     return () => { clearTimeout(clearT); clearT = null; clearSure = false; if (ed) ed.stop(); };
   }
   let clearT = null, clearSure = false;

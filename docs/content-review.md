@@ -6165,3 +6165,27 @@ for the cans); every caption sentence is a topic sentence; fridge: each hold tim
 the closed door, each freezer lid sits on and spans its body, the full freezer's food fills at least 80% of its height and the
 half-full one's 35% to 55%; cans: the four signs in the list's order, title above, botulism lines below.
 `tests/test_survival_migration.py` `PINNED_FIGS` carries the two topics.
+
+### Food pack Task 7 fix round 1 (2026-11-19), from task-7-review.md
+
+- food-cans-to-discard, footer (review Important 1): the warn is now drawn in full, in its own words and order: "You cannot see,
+  smell or taste / the toxin that causes botulism, / and even a small taste of food that has it / can be deadly." and "It can
+  be in cans that look normal / and in food that smells and tastes normal." Source: the "Cans and jars" warn, "You cannot see,
+  smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly (CDC). It can be in
+  cans that look normal and in food that smells and tastes normal (New York State Department of Health)." Only the source
+  names are left out. The alt text says the same.
+- food-cans-to-discard, disposal pointer (review Important 2): below a dashed divider, "How to get rid of a suspect can or jar /
+  without touching what is inside: / Food poisoning and botulism" (the page name in large bold). Source: "How to get rid of a
+  suspect can or jar without touching what is inside, and the signs of botulism, are in Food poisoning and botulism."
+  Shortened only by dropping "and the signs of botulism, are in"; the colon stands where the words were dropped. That sentence
+  is appended word for word to the caption. The handling rules themselves (bag sealed, make leaking ones harmless, gloves)
+  belong to Food poisoning and botulism and are not drawn.
+- food-cans-to-discard, panel 2 (review Important 3): the crushed can is redrawn like the other cans (rim, band lines), its
+  sides pinched in with jagged crumples and short crumple creases at the waist; no X or bar.
+- food-fridge-freezer (review Minor 4): footer split into "Before you eat, cook or refreeze anything," / "check it in" / "Is
+  it still good?", with the page name on its own line in large bold, the same way the cans figure sets "Food poisoning and
+  botulism". Words unchanged. "door" beside the chest freezers is kept: the topic's only word for it is "door" (Minor 5).
+- Tests: each sign drawing sits centred over and just above its own label and clear of the other labels (swapped drawings
+  fail); every shape in the cans figure belongs to one of the four sign drawings apart from the dashed dividers (no can or jar
+  without a sign); the full botulism lines and the pointer are drawn, in order, below the panels, and are in the alt text;
+  the caption carries the pointer sentence; the fridge page name stands on its own bold line.

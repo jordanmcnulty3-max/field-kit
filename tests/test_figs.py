@@ -735,11 +735,16 @@ FOOD_FIGS = {
         'surv-food-still-good', 'Cans and jars',
         ['any of these signs', 'throw it out', 'leaking, bulging', 'or swollen', 'looks damaged', 'cracked or abnormal',
          'spurts liquid or foam', 'when opened', 'food is discolored', 'moldy or smells bad',
-         'you cannot see, smell or taste', 'the toxin that causes botulism', 'it can be in cans that look normal'],
+         'you cannot see, smell or taste', 'the toxin that causes botulism', 'and even a small taste of food that has it',
+         'can be deadly', 'it can be in cans that look normal', 'and in food that smells and tastes normal',
+         'how to get rid of a suspect can or jar', 'without touching what is inside', 'food poisoning and botulism'],
         [r'\bsafe', r'\bok\b', r'\bfine\b', r'\bgood\b', r'\bkeep\b', r'\bsave', r'\d', r'flood', r'pull', r'screw',
          r'rust', r'small dent', r'boil', r'sniff', r'taste it', r'\beat\b'],
         ['any of these signs means home-canned or store-bought food might be contaminated',
-         'you cannot see, smell or taste the toxin that causes botulism', 'it can be in cans that look normal']),
+         'you cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly',
+         'it can be in cans that look normal and in food that smells and tastes normal',
+         'how to get rid of a suspect can or jar without touching what is inside, and the signs of botulism, are in food '
+         'poisoning and botulism.']),
 }
 
 
@@ -817,7 +822,13 @@ def test_fridge_freezer_hold_times_carry_their_condition_and_appliance():
         assert hours in r and 'keeps food cold for' in r and 'with the door shut' in r, r
         assert [s for s in r if re.search(r'\d', s)] == [hours], r
     assert rows[0] == ['keep the fridge and freezer doors shut'], rows[0]
-    assert rows[-1] == ['before you eat, cook or refreeze anything,', 'check it in is it still good?'], rows[-1]
+    assert rows[-1] == ['before you eat, cook or refreeze anything,', 'check it in', 'is it still good?'], rows[-1]
+    title = [t for t in ET.fromstring(figs.F['food-fridge-freezer'][0]).iter() if t.tag.split('}')[-1] == 'text'
+             and ''.join(t.itertext()) == 'Is it still good?']
+    assert len(title) == 1 and {'tb', 'tl'} & set(title[0].get('class').split()), 'the page name stands on its own line, in bold'
+    plain = [t for t in ET.fromstring(figs.F['food-fridge-freezer'][0]).iter() if t.tag.split('}')[-1] == 'text'
+             and ''.join(t.itertext()) == 'check it in']
+    assert len(plain) == 1 and 'tb' not in (plain[0].get('class') or '').split()
     assert sorted(re.findall(r'\d+', alt_of('food-fridge-freezer'))) == ['24', '4', '48']
     for s in ('about 4 hours', 'about 48 hours', 'about 24 hours', 'with the door', 'doors shut', 'check it in is it still good?'):
         assert s in alt_of('food-fridge-freezer'), s
@@ -854,17 +865,105 @@ def test_fridge_freezer_doors_shut_and_full_versus_half_full():
     assert fx0 < hx0 and hx1 < fx1 and fy0 < hy0 and hy1 < fy1, 'the handle is on the closed door'
 
 
-def test_cans_signs_in_the_topics_order_with_the_warning_below():
+def test_cans_signs_in_the_topics_order_with_the_warning_and_pointer_below():
     """The four signs read left to right, top to bottom in the order of the topic's list; "Any of these signs" and "Throw it
-    out" are above them; the botulism lines are below them. No number and no can drawn without a sign."""
+    out" are above them; the whole botulism warning, then the disposal pointer, are below them."""
     texts = _texts('food-cans-to-discard')
     first = ['leaking, bulging', 'looks damaged,', 'spurts liquid or foam', 'food is discolored,']
     pos = [next((x, y) for x, y, s in texts if s == f) for f in first]
     assert pos[0][1] == pos[1][1] < pos[2][1] == pos[3][1] and pos[0][0] < pos[1][0] and pos[2][0] < pos[3][0], pos
     top = [y for x, y, s in texts if s in ('any of these signs:', 'throw it out')]
     assert len(top) == 2 and max(top) < min(y for _, y in pos) - 60
-    below = [y for x, y, s in texts if s in ('you cannot see, smell or taste', 'the toxin that causes botulism.',
-                                             'it can be in cans that look normal')]
-    assert len(below) == 3 and min(below) > max(y for _, y in pos) + 14
-    p = parts('food-cans-to-discard')
-    assert {'sign-1', 'sign-2', 'sign-3', 'sign-4'} <= set(p), set(p)
+    order = [s for _, y, s in sorted(texts, key=lambda t: t[1]) if y > max(y for _, y in pos)]
+    assert order[2:] == ['you cannot see, smell or taste', 'the toxin that causes botulism,',
+                         'and even a small taste of food that has it', 'can be deadly.', 'it can be in cans that look normal',
+                         'and in food that smells and tastes normal.', 'how to get rid of a suspect can or jar',
+                         'without touching what is inside:', 'food poisoning and botulism'], order
+    alt = alt_of('food-cans-to-discard')
+    for w in ('and even a small taste of food that has it can be deadly',
+              'it can be in cans that look normal and in food that smells and tastes normal',
+              'how to get rid of a suspect can or jar without touching what is inside', 'food poisoning and botulism'):
+        assert w in alt, w
+
+
+def _path_points(d):
+    """Every end and control point of a path (absolute and relative M L H V Q A Z), enough for a bounding box."""
+    pts, x, y, sx, sy = [], 0.0, 0.0, 0.0, 0.0
+    for cmd, args in re.findall(r'([MLHVQAZmlhvqaz])([^MLHVQAZmlhvqaz]*)', d):
+        n = [float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', args)]
+        rel = cmd.islower()
+        c = cmd.upper()
+        step = {'M': 2, 'L': 2, 'H': 1, 'V': 1, 'Q': 4, 'A': 7, 'Z': 0}[c]
+        if c == 'Z':
+            x, y = sx, sy
+            continue
+        for i in range(0, len(n), step):
+            a = n[i:i + step]
+            if c in 'ML':
+                x, y = (x + a[0], y + a[1]) if rel else (a[0], a[1])
+                if c == 'M' and i == 0:
+                    sx, sy = x, y
+            elif c == 'H':
+                x = x + a[0] if rel else a[0]
+            elif c == 'V':
+                y = y + a[0] if rel else a[0]
+            elif c == 'Q':
+                pts.append((x + a[0], y + a[1]) if rel else (a[0], a[1]))
+                x, y = (x + a[2], y + a[3]) if rel else (a[2], a[3])
+            elif c == 'A':
+                x, y = (x + a[5], y + a[6]) if rel else (a[5], a[6])
+            pts.append((x, y))
+    return pts
+
+
+def _shape_box(el):
+    xs, ys = [], []
+    for e in el.iter():
+        tag = e.tag.split('}')[-1]
+        if tag in ('circle', 'ellipse'):
+            cx, cy = float(e.get('cx')), float(e.get('cy'))
+            rx, ry = float(e.get('r') or e.get('rx')), float(e.get('r') or e.get('ry'))
+            if e.get('transform'):   # rotated: take the larger radius both ways
+                rx = ry = max(rx, ry)
+            xs += [cx - rx, cx + rx]; ys += [cy - ry, cy + ry]
+        elif tag in ('rect', 'line'):
+            b = bbox(e); xs += [b[0], b[2]]; ys += [b[1], b[3]]
+        elif tag == 'path':
+            for px, py in _path_points(e.get('d')):
+                xs.append(px); ys.append(py)
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+CAN_SIGNS = {'sign-1': 'leaking, bulging', 'sign-2': 'looks damaged,', 'sign-3': 'spurts liquid or foam',
+             'sign-4': 'food is discolored,'}
+
+
+@pytest.mark.parametrize('part', sorted(CAN_SIGNS))
+def test_cans_each_drawing_sits_over_its_own_label(part):
+    """Each sign's drawing is centred over the label naming it and just above it, inside the same panel, so swapping two
+    drawings fails."""
+    texts = _texts('food-cans-to-discard')
+    lx, ly = next((x, y) for x, y, s in texts if s == CAN_SIGNS[part])
+    x0, y0, x1, y1 = _shape_box(parts('food-cans-to-discard')[part])
+    assert abs((x0 + x1) / 2 - lx) <= 20, (part, (x0, x1), lx)
+    assert y1 < ly - 10 and ly - y1 <= 45, (part, y1, ly)
+    for other, label in CAN_SIGNS.items():
+        if other != part:
+            ox, oy = next((x, y) for x, y, s in texts if s == label)
+            assert not (x0 <= ox <= x1 and y0 <= oy <= y1), (part, 'overlaps the label of', other)
+
+
+def test_cans_no_can_or_jar_drawn_without_a_sign():
+    """Every shape in the figure belongs to one of the four sign drawings, apart from the dashed dividers: no can or jar is
+    drawn as if a can without these signs were fine."""
+    root = ET.fromstring(figs.F['food-cans-to-discard'][0])
+    assert set(CAN_SIGNS) <= set(parts('food-cans-to-discard'))
+    loose = []
+    for g in root:
+        tag = g.tag.split('}')[-1]
+        if tag == 'text' or g.get('data-part') in CAN_SIGNS:
+            continue
+        if tag == 'line' and set(g.get('class', '').split()) >= {'m', 'd'}:
+            continue
+        loose.append(ET.tostring(g, encoding='unicode'))
+    assert loose == [], loose

@@ -433,7 +433,7 @@ FULL = [(221, 235, [(25, 26), (51, 30), (81, 26)]), (206, 221, [(25, 34), (59, 2
         (191, 206, [(25, 22), (47, 32), (79, 28)])]
 HALF = [(321, 335, [(25, 30), (55, 24), (79, 28)]), (308, 321, [(25, 24), (49, 32), (81, 26)])]
 
-svg('food-fridge-freezer', 400, 'Keep the fridge and freezer doors shut. With the door shut, a fridge keeps food cold for about 4 hours, a full freezer about 48 hours and a half-full freezer about 24 hours. Before you eat, cook or refreeze anything, check it in Is it still good?', f'''
+svg('food-fridge-freezer', 418, 'Keep the fridge and freezer doors shut. With the door shut, a fridge keeps food cold for about 4 hours, a full freezer about 48 hours and a half-full freezer about 24 hours. Before you eat, cook or refreeze anything, check it in Is it still good?', f'''
 {lbl(170,20,'Keep the fridge and freezer doors shut','tl','middle')}
 <line x1="4" y1="32" x2="336" y2="32" class="m t1 d"/>
 <rect x="36" y="42" width="60" height="100" rx="5" class="k milk t3" data-part="fridge"/>
@@ -448,7 +448,8 @@ svg('food-fridge-freezer', 400, 'Keep the fridge and freezer doors shut. With th
 {chest(20, 282, 'half', HALF)}
 {hold(278, 'Half-full freezer', 'about 24 hours')}
 <line x1="4" y1="354" x2="336" y2="354" class="m t1 d"/>
-{lbl(170,374,'Before you eat, cook or refreeze anything,','tb','middle')}{lbl(170,390,'check it in Is it still good?','tb','middle')}''')
+{lbl(170,374,'Before you eat, cook or refreeze anything,','tb','middle')}{lbl(170,390,'check it in','','middle')}
+{lbl(170,408,'Is it still good?','tl','middle')}''')
 
 def can_body(cx, y, h, w=44, cls='k milk'):
     """Side view of a can: top rim ellipse at y, straight sides, rounded bottom at y + h."""
@@ -471,9 +472,10 @@ S1 = f'''<g data-part="sign-1">
 S2 = f'''<g data-part="sign-2">
 {jar(222, 72, 56)}<rect x="206" y="62" width="32" height="10" rx="2" class="k gr"/>
 <path d="M214 86 L224 96 L216 104 L228 116 L222 124" class="h t3"/>
-<path d="M276 72 V90 L288 100 L276 110 V124 A18 5 0 0 0 312 124 V110 L300 100 L312 90 V72 Z" class="k milk"/>
-<ellipse cx="294" cy="72" rx="18" ry="5" class="k milk"/>
-<path d="M276 90 L288 100 L276 110 M312 90 L300 100 L312 110 M288 100 H300" class="h t3"/></g>'''
+<path d="M272 72 V88 L280 94 L276 99 L283 104 L277 109 L272 114 V124 A22 6 0 0 0 316 124 V114 L310 108 L306 103 L312 98 L307 93 L316 88 V72 Z" class="k milk"/>
+<ellipse cx="294" cy="72" rx="22" ry="6" class="k milk"/>
+<path d="M272 84 A22 6 0 0 0 316 84 M272 117 A22 6 0 0 0 316 117" class="m t1"/>
+<path d="M285 96 l5 4 M296 94 l-3 6 M302 103 l-6 3 M288 106 l4 -2" class="h t3"/></g>'''
 S3 = f'''<g data-part="sign-3">
 {can_body(85, 240, 40)}
 <ellipse cx="85" cy="240" rx="22" ry="5" class="k"/>
@@ -489,7 +491,7 @@ S4 = f'''<g data-part="sign-4">
 <path d="M229 236 h0.1 M236 231 h0.1 M244 233 h0.1 M251 237 h0.1 M240 238 h0.1" class="g t5"/>
 <path d="M228 252 q6 -4 10 2 q4 6 -2 9 q-8 2 -8 -11 Z M244 262 q6 -2 8 4 q0 6 -6 5 q-5 -2 -2 -9 Z" class="g gf"/></g>'''
 
-svg('food-cans-to-discard', 400, 'Cans and jars: throw it out if the container is leaking, bulging or swollen; looks damaged, cracked or abnormal; spurts liquid or foam when opened; or the food is discolored, moldy or smells bad. You cannot see, smell or taste the toxin that causes botulism. It can be in cans that look normal.', f'''
+svg('food-cans-to-discard', 508, 'Cans and jars: throw it out if the container is leaking, bulging or swollen; looks damaged, cracked or abnormal; spurts liquid or foam when opened; or the food is discolored, moldy or smells bad. You cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly. It can be in cans that look normal and in food that smells and tastes normal. How to get rid of a suspect can or jar without touching what is inside: Food poisoning and botulism.', f'''
 {lbl(170,20,'Any of these signs:','tl','middle')}{lbl(170,40,'Throw it out','tl','middle')}
 <line x1="4" y1="50" x2="336" y2="50" class="m t1 d"/>
 <line x1="170" y1="54" x2="170" y2="330" class="m t1 d"/><line x1="4" y1="192" x2="336" y2="192" class="m t1 d"/>
@@ -498,8 +500,12 @@ svg('food-cans-to-discard', 400, 'Cans and jars: throw it out if the container i
 {S3}{lbl(85,304,'Spurts liquid or foam','tb','middle')}{lbl(85,318,'when opened','tb','middle')}
 {S4}{lbl(255,304,'Food is discolored,','tb','middle')}{lbl(255,318,'moldy or smells bad','tb','middle')}
 <line x1="4" y1="334" x2="336" y2="334" class="m t1 d"/>
-{lbl(170,354,'You cannot see, smell or taste','tb','middle')}{lbl(170,368,'the toxin that causes botulism.','tb','middle')}
-{lbl(170,390,'It can be in cans that look normal','tb','middle')}''')
+{lbl(170,354,'You cannot see, smell or taste','tb','middle')}{lbl(170,368,'the toxin that causes botulism,','tb','middle')}
+{lbl(170,382,'and even a small taste of food that has it','tb','middle')}{lbl(170,396,'can be deadly.','tb','middle')}
+{lbl(170,418,'It can be in cans that look normal','tb','middle')}{lbl(170,432,'and in food that smells and tastes normal.','tb','middle')}
+<line x1="4" y1="446" x2="336" y2="446" class="m t1 d"/>
+{lbl(170,466,'How to get rid of a suspect can or jar','','middle')}{lbl(170,480,'without touching what is inside:','','middle')}
+{lbl(170,500,'Food poisoning and botulism','tl','middle')}''')
 
 # ---------------- FIRE ----------------
 svg('fire-sizes', 142, 'Fire materials: dry, fine tinder; kindling from pencil lead to thumb thick; fuel forearm thick and up', f'''

@@ -1,0 +1,190 @@
+{
+  "id": "surv-food-when-short",
+  "title": "Rationing food",
+  "category": "food",
+  "keywords": [
+    "food is short",
+    "short of food",
+    "running out of food",
+    "not enough food",
+    "food shortage",
+    "ration food",
+    "rationing food",
+    "rations"
+  ],
+  "summary": "Never ration drinking water. Food may be rationed, but not for children or the others listed under Who must not go short (an older FEMA, Red Cross and USDA booklet, and this app’s own caution). Eat the most perishable food first, and save the non-perishable food for later. Eat at least one well-balanced meal a day, with enough calories for the work that must be done. If water is short, avoid foods that make you thirsty. Hunger is never a reason to eat food that is not safe.",
+  "doFirst": [
+    "Don’t ration drinking water. Ready.gov: “Never ration drinking water unless ordered to do so by authorities. Drink the amount you need today and try to find more for tomorrow.”",
+    "Don’t cut the food of children, or of anyone else listed under Who must not go short (FEMA, Red Cross and USDA booklet; this app’s own caution).",
+    "Eat the most perishable food first, and save the non-perishable food and staples for later (Food when the power goes out; FEMA, Red Cross and USDA booklet). Check each food in Is it still good? before you eat it.",
+    "Eat at least one well-balanced meal each day, and take in enough calories to do any necessary work (FEMA, Red Cross and USDA booklet).",
+    "Hunger is never a reason to eat food that is not safe. When in doubt, throw it out (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "Water comes first",
+      "blocks": [
+        {
+          "p": "Priorities, word for word: a person can survive “about 3 days without water and about 3 weeks without food.” Ready.gov: “Never ration drinking water unless ordered to do so by authorities. Drink the amount you need today and try to find more for tomorrow.”"
+        },
+        {
+          "list": [
+            "If your water is limited, try to avoid foods that are high in fat and protein, and salty foods, which make you thirsty. Try to eat salt-free crackers, whole grain cereals and canned foods with a lot of liquid (FEMA, Red Cross and USDA booklet).",
+            "Freeze-dried food needs more water to rehydrate it and to digest it (Oregon State University Extension)."
+          ]
+        },
+        {
+          "p": "Signs that someone is not drinking enough, and what to do, are in the Dehydration protocol."
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        },
+        {
+          "link": "p:dehydration",
+          "label": "Dehydration"
+        }
+      ]
+    },
+    {
+      "h": "Eating less",
+      "blocks": [
+        {
+          "p": "An older federal booklet says: “If activity is reduced, healthy people can survive on half their usual food intake for an extended period” and “Food, unlike water, may be rationed safely, except for children and pregnant women.” (FEMA, with the American Red Cross and USDA, Food and Water in an Emergency)"
+        },
+        {
+          "p": "No other source opened says how far food can safely be cut, or for how long. This app gives no amount."
+        },
+        {
+          "list": [
+            "Eat at least one well-balanced meal each day (FEMA, Red Cross and USDA booklet; University of Minnesota Extension).",
+            "Take in enough calories to enable you to do any necessary work (FEMA, Red Cross and USDA booklet). After a disaster, people may be far more active outdoors than usual (Oregon State University Extension).",
+            "Vitamin, mineral and protein supplements help assure adequate nutrition (FEMA, Red Cross and USDA booklet). University of Minnesota Extension recommends a multivitamin with its two-week emergency menu.",
+            "Keep regular mealtimes: they help everyone in stressful times, especially children. Under stress, some people eat several days of food or drink at once (Oregon State University Extension).",
+            "Familiar foods can lift morale and give a feeling of security in time of stress (FEMA, Red Cross and USDA booklet)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Who must not go short",
+      "blocks": [
+        {
+          "list": [
+            "Children (FEMA, Red Cross and USDA booklet).",
+            "Pregnant women (FEMA, Red Cross and USDA booklet).",
+            "Nursing mothers: breastfeeding mothers support their own health and their baby’s by eating nutritious meals and snacks (CDC). Keep breastfeeding even when food is short: mothers who are hungry or have little healthy food are still able to breastfeed (CDC)."
+          ]
+        },
+        {
+          "warn": "This app’s own caution: don’t cut the food of a nursing mother, an older person, anyone on a special diet or with allergies, or anyone who is sick or injured. No source opened says they can safely eat less."
+        },
+        {
+          "p": "Older people, and anyone with a special diet or allergies, need particular attention when you stock food (FEMA, Red Cross and USDA booklet). Canned dietetic foods, juices and soups may help people who are ill or older (FEMA, Red Cross and USDA booklet)."
+        },
+        {
+          "p": "Someone with diabetes: a missed or small meal is a common cause of low blood sugar (Red Cross, as quoted in the Low blood sugar protocol). Its signs and what to do are in that protocol."
+        },
+        {
+          "link": "p:low-blood-sugar",
+          "label": "Low blood sugar"
+        }
+      ]
+    },
+    {
+      "h": "Make what you have last",
+      "blocks": [
+        {
+          "p": "From Food when the power goes out, word for word: “Eat the most perishable food first: leftovers, meat, poultry, and foods with milk, cream, sour cream or soft cheese (New York State Department of Health).” Save the non-perishable food and staples for later (FEMA, Red Cross and USDA booklet)."
+        },
+        {
+          "p": "How long the fridge and freezer keep food cold is in Food when the power goes out. Which shelf food keeps longest is in Storing food."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Storing food"
+        }
+      ]
+    },
+    {
+      "h": "Don’t eat what should be thrown out",
+      "blocks": [
+        {
+          "warn": "From Is it still good?, word for word: “Never taste food to find out if it is safe (CDC). Throw out any food with an unusual smell, color or texture; a normal one proves nothing: food that looks and smells normal can still make you sick (CDC). When in doubt, throw it out (CDC).”"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "link": "s:surv-food-poisoning",
+          "label": "Food poisoning and botulism"
+        }
+      ]
+    },
+    {
+      "h": "Food from outside",
+      "blocks": [
+        {
+          "p": "From Food and wild plants, word for word: “Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early.” “Only eat a plant you can identify with certainty.” After fallout, food that was outdoors has its own rules: see Water and food after fallout."
+        },
+        {
+          "link": "s:surv-food-and-wild-plants",
+          "label": "Food and wild plants"
+        },
+        {
+          "link": "s:surv-traps-and-fishing",
+          "label": "Traps and fishing"
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-food-how-much",
+          "label": "How much food to store, and what"
+        },
+        {
+          "link": "s:surv-priorities",
+          "label": "Priorities"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency (older booklet; 1994 edition and later reprints)",
+      "used": "Half the usual food intake with reduced activity; food may be rationed safely except for children and pregnant women; water not; avoid high-fat, high-protein and salty foods when water is limited; salt-free crackers, whole grain cereals, canned foods with high liquid content; one well-balanced meal a day; enough calories for necessary work; vitamin, mineral and protein supplements; familiar foods; special diets, allergies and elderly people need particular attention when stocking; canned dietetic foods, juices and soups for ill or elderly people; non-perishable foods and staples used last"
+    },
+    {
+      "name": "CDC, Facts About Infant Feeding During Emergencies (October 4, 2024)",
+      "used": "Breastfeeding mothers support their health and their baby’s by eating nutritious meals and snacks; women who are hungry or have limited access to healthy foods are still able to breastfeed"
+    },
+    {
+      "name": "University of Minnesota Extension, Preparing a 2-week emergency food supply (reviewed 2026)",
+      "used": "At least one well-balanced meal each day; a multivitamin recommended with its menu"
+    },
+    {
+      "name": "Oregon State University Extension, Survival Basics: Food, EM 9331 (August 2021)",
+      "used": "More activity after a disaster; regular mealtimes, especially for children; stress eating; more water for freeze-dried food"
+    },
+    {
+      "name": "How much water you need, Priorities, Food and wild plants, Is it still good?, Food when the power goes out, Low blood sugar (other topics and a protocol in this app)",
+      "used": "Ready.gov’s never-ration line, the survival times, wild food, the throw-out rule, what to eat first and low blood sugar causes, quoted word for word"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

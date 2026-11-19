@@ -1,0 +1,157 @@
+{
+  "id": "pantry",
+  "title": "Pantry",
+  "category": "food",
+  "summary": "Food and gear for at least 2 weeks at home, the Red Cross figure for home. Food your household already eats, that needs no fridge and little or no cooking or water.",
+  "items": [
+    {
+      "id": "two-weeks",
+      "text": "Non-perishable food your household eats, for at least 2 weeks",
+      "note": "Choose food that needs no refrigeration, little or no cooking and little or no water. Keep some that is ready to eat, even if most of it needs cooking."
+    },
+    {
+      "id": "canned",
+      "text": "Ready-to-eat canned meats, fish, poultry, beans, fruits, vegetables, pasta and soup"
+    },
+    {
+      "id": "high-energy",
+      "text": "High-energy foods: peanut butter, nuts, jerky, trail mix, protein or fruit bars"
+    },
+    {
+      "id": "cereal",
+      "text": "Dry cereal or granola, and crackers"
+    },
+    {
+      "id": "fruit-juice",
+      "text": "Dried fruit and canned juices"
+    },
+    {
+      "id": "milk",
+      "text": "Milk that keeps on the shelf: powdered, canned or shelf-stable boxes"
+    },
+    {
+      "id": "staples",
+      "text": "Staples: sugar, salt, pepper, instant coffee, tea bags, cocoa"
+    },
+    {
+      "id": "comfort",
+      "text": "Comfort foods, such as hard candy and chocolate bars"
+    },
+    {
+      "id": "children-foods",
+      "text": "Foods your children already eat",
+      "note": "A disaster is not the time to surprise young children with new foods."
+    },
+    {
+      "id": "special-diets",
+      "text": "Food for anyone with a special diet, allergies or a medical need, and for older people"
+    },
+    {
+      "id": "supplements",
+      "text": "Vitamin and mineral supplements"
+    },
+    {
+      "id": "baby",
+      "text": "Baby supplies: formula, bottles and baby food, if you have a baby",
+      "note": "Never buy or use infant formula after its Use-By date."
+    },
+    {
+      "id": "pets",
+      "text": "Pet food, if you have pets"
+    },
+    {
+      "id": "can-opener",
+      "text": "Manual can opener"
+    },
+    {
+      "id": "tableware",
+      "text": "Paper plates, cups, plastic utensils and paper towels"
+    },
+    {
+      "id": "containers",
+      "text": "Food-grade containers that close tightly: glass jars with screw-top lids, heavy plastic or metal",
+      "note": "For opened packages and for keeping out insects and rodents."
+    },
+    {
+      "id": "bags",
+      "text": "Zipper-closure plastic food storage or freezer bags"
+    },
+    {
+      "id": "marker",
+      "text": "Marker, to date food when you buy it and when you open it"
+    },
+    {
+      "id": "directions",
+      "text": "Cooking directions or mix ratios written on cards, for staples not in their own package"
+    },
+    {
+      "id": "meal-list",
+      "text": "A written list of meals for each day for 14 days, with the water and gear each needs"
+    },
+    {
+      "id": "thermometers",
+      "text": "Appliance thermometers for the fridge and freezer, and a food thermometer"
+    },
+    {
+      "id": "cooler",
+      "text": "A cooler and frozen gel packs"
+    },
+    {
+      "id": "fuel",
+      "text": "Extra cooking fuel for 2 to 4 weeks",
+      "note": "Charcoal grills and camp stoves are for outdoor use only. Where and how to cook safely is in Cook without power; storing fuel is in Store fuel safely."
+    },
+    {
+      "id": "water",
+      "text": "Drinking water, as on the Home water store list",
+      "note": "Plan extra for food that needs water, such as dry milk, dried soups, instant rice and freeze-dried food."
+    }
+  ],
+  "sources": [
+    {
+      "name": "Ready.gov (FEMA), Food (last updated March 30, 2022)",
+      "used": "Choose foods your family will eat; ready-to-eat canned meats, fruits, vegetables and a can opener; protein or fruit bars; dry cereal or granola; peanut butter; dried fruit; canned juices; non-perishable pasteurized milk; high-energy foods; food for infants; comfort/stress foods; charcoal grills and camp stoves are for outdoor use only"
+    },
+    {
+      "name": "Ready.gov (FEMA), Build A Kit (undated)",
+      "used": "Manual can opener; mess kits, paper cups, plates, paper towels and plastic utensils; infant formula and bottles; pet food"
+    },
+    {
+      "name": "American Red Cross, Survival Kit Supplies (undated)",
+      "used": "Non-perishable, easy-to-prepare food, 2-week supply for home; manual can opener; baby supplies (bottles, formula, baby food)"
+    },
+    {
+      "name": "New York State Division of Homeland Security and Emergency Services, Before an Emergency Happens (undated)",
+      "used": "Ready-to-eat canned foods (vegetables, fruits, beans, meat, fish, poultry, pasta, soup, juice); milk, powdered, canned or shelf-stable; high-energy foods; staples; candy; specialty food for older adults or special diets; infant food and formula; pet food; manual can opener"
+    },
+    {
+      "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency (older booklet; 1994 edition and later reprints)",
+      "used": "Foods needing no refrigeration, preparation or cooking; vitamin, mineral and protein supplements; manual can opener and disposable utensils; special diets and allergies; screw-top jars or air-tight cans against pests; date food with ink or marker"
+    },
+    {
+      "name": "University of Georgia Extension, Preparing an Emergency Food Supply, Short Term Food Storage (reviewed March 2020)",
+      "used": "Little or no water; some ready-to-eat food if some needs cooking; zipper-closure food storage or freezer bags; airtight containers, glass jars with screw-top lids; preparation steps or mix ratios on cards; water and gear noted for each day’s meals; dried soups, dry milk and instant rice need water"
+    },
+    {
+      "name": "University of Minnesota Extension, Preparing a 2-week emergency food supply (reviewed 2026)",
+      "used": "A list of meals for each day for 14 days"
+    },
+    {
+      "name": "University of Illinois Extension, How To Build An Emergency Food Supply (undated)",
+      "used": "Special diets, allergies or medical needs; infant formula and baby food; manual can opener, disposable utensils, paper products, plastic containers; food for pets; date items with a marker"
+    },
+    {
+      "name": "Oregon State University Extension, Survival Basics: Food, EM 9331 (August 2021)",
+      "used": "Extra fuel for 2 to 4 weeks; food-grade containers; no new foods for young children; more water for freeze-dried food"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Food Product Dating (undated)",
+      "used": "Do not buy or use baby formula after its Use-By date"
+    },
+    {
+      "name": "Food when the power goes out, Cook without power, Store fuel safely, Home water store (other topics and a checklist in this app)",
+      "used": "Appliance thermometers, a food thermometer, a cooler and frozen gel packs (CDC, USDA, as given there); cooking and fuel by name; water by name"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

@@ -5347,3 +5347,360 @@ are as recorded in the batch A record (first fetch), confirmed by the reviewer's
   Jordan's decision.
 - Keywords "stove burner by hand" and "thawed meat" removed; "fever" and "dehydration" listed for Task 8 (rulings 21).
 - Spill-mix limits labelled "This app’s own caution"; "Thawed food in a freezer above 40°F (4°C) goes".
+## Food pack batch B: how much food to store, store food so it lasts, when food is short, Pantry checklist (2026-11-19)
+
+Files (all draft): src/survival/surv-food-how-much.json, surv-food-storage.json, surv-food-when-short.json,
+src/checklists/pantry.json. tests/test_build.py topic count 52 to 55. Rulings: docs/v7.5-rulings.md "Batch B"; questions D130 to
+D139. Every source below was found by built-in web search and opened by built-in web fetch on 2026-11-19; the title (and date where
+printed) was checked after each fetch. Fetches return quotes capped at about 125 characters, so long sentences were read as
+consecutive pieces (marked " / "). No Firecrawl, no Bright Data. No URL was constructed: each was returned by a search.
+
+Source keys:
+- READY-F: Ready.gov (FEMA), Food, "Suggested Emergency Food Supplies", Last Updated 03/30/2022. https://www.ready.gov/food (opened twice)
+- READY-KIT: Ready.gov (FEMA), Build A Kit, "Emergency Supply List" and "Maintaining Your Kit" (no date in the fetch result). https://www.ready.gov/kit
+- ARC-KIT: American Red Cross, "What Do You Need In a Survival Kit" (heading "Survival Kit Supplies"; no date, footer © 2026). https://redcross.org/get-help/how-to-prepare-for-emergencies/survival-kit-supplies.html
+- FW: FEMA in cooperation with the American Red Cross and USDA, Food and Water in an Emergency (no date or number printed; county-hosted copy). https://henrycounty.in.gov/DocumentCenter/View/295/Food-and-Water-in-an-Emergency-PDF (opened three times). The same lines were checked in FW-1994.
+- FW-1994: the same booklet as "FEMA Triangle: Food and Water in an Emergency", footer ARC 5055 / FEMA L-210, November 1994, "Reprinted by permission of the American Red Cross (1997)". https://qsl.net/n0njy/foodwtr.html (used to date the booklet: "two weeks", "rationed safely, except for children and pregnant women", "half their usual food intake", salty foods, storage tips and the shelf-life lists are in it). UGA-EFS cites the booklet as FEMA-477, August 2004.
+- DHSES: New York State Division of Homeland Security and Emergency Services, Before an Emergency Happens (no date). https://www.dhses.ny.gov/before-emergency
+- NYS-KIT: New York State preparedness checklist for children, "Help Detective Emm Find the Missing Supplies" (prepare.ny.gov; no agency or date printed). https://www.dhses.ny.gov/system/files/documents/2025/08/preparednesskitchecklist.pdf
+- ILL-EFS: University of Illinois Extension, How To Build An Emergency Food Supply (no date or author). https://extension.illinois.edu/sites/default/files/how_to_build_an_emergency_food_supply.pdf
+- UGA-ST: University of Georgia Extension (Elizabeth Andress, Ph.D., and Judy Harrison, Ph.D.), Preparing an Emergency Food Supply, Short Term Food Storage, reviewed March 2020. https://www.fcs.uga.edu/extension/preparing-an-emergency-food-supply-short-term-food-storage
+- UGA-EFS: University of Georgia Extension (Judy Harrison, Ph.D., and Elizabeth Andress, Ph.D.), Preparing an Emergency Food Supply, Long Term Food Storage, reviewed 2017. https://www.fcs.uga.edu/extension/preparing-an-emergency-food-supply-long-term-food-storage (re-opened twice for this batch)
+- UMN-2W: University of Minnesota Extension (Abby Gold, Nikki Johnson, Betsy Johnson, Kelly Kunkel, Mary Schroeder), Preparing a 2-week emergency food supply, reviewed in 2026. https://extension.umn.edu/preparing-a-2-week-emergency-food-supply
+- UMN-PP: University of Minnesota Extension, Pantry pests: Insects found in stored food, reviewed in 2024. https://extension.umn.edu/household-insects/pantry-pests-insects-found-stored-food
+- OSU-SB: Oregon State University Extension Service (Hyde, Marty-Jimenez, Black, Corcoran, Kraemer), Survival Basics: Food, EM 9331, August 2021. https://extension.oregonstate.edu/catalog/em-9331-survival-basics-food (opened twice)
+- FSIS-SS: USDA FSIS, Shelf-Stable Food Safety (English; no date). https://www.fsis.usda.gov/es/node/3296 (opened twice)
+- FSIS-DATE: USDA FSIS, Food Product Dating (English; no date). https://www.fsis.usda.gov/es/node/3294
+- FSIS-FRZ: USDA FSIS, Freezing and Food Safety (English; no date). https://www.fsis.usda.gov/es/node/3304
+- CDC-ROD: CDC, Rodent Control (Natural Disasters), last reviewed Aug. 26, 2026. https://cdc.gov/natural-disasters/psa-toolkit/rodent-control.html
+- CDC-IFE: CDC, Facts About Infant Feeding During Emergencies, Oct. 4, 2024. https://cdc.gov/infant-feeding-emergencies-toolkit/php/facts.html
+- Opened, nothing used: Cornell Cooperative Extension of Warren County, Food & Water in Emergencies (last updated January 28, 2025),
+  https://warren.cce.cornell.edu/food-nutrition/food-water-in-emergencies (links only: no amounts, days, storage or rationing);
+  FEMA, "Food Safety: A Recipe for National Preparedness" (no date, no publisher named), https://www.fema.gov/es/node/666564
+  (general storage lines, all covered by the sources above).
+
+Would not open: the 2004 fema.gov booklet at webharvest.gov (rate-limit page); Colorado State University Extension, "Three-day
+emergency supply of shelf-stable food for one person" (foodsmartcolorado.colostate.edu redirected to a general Colorado State page,
+not followed). Nothing from these is in a topic.
+
+Looked for and not found: a current federal, New York State or extension statement of food per person per day or per child for an
+emergency store (Ready.gov, Red Cross, DHSES, NYS-KIT, ILL-EFS, UGA-ST, UMN-2W, OSU-SB, Cornell Warren County: days only; UMN-2W's
+menu is "designed for two people" with recipes for "four to six adults", no per-person amount); signs that someone is not getting
+enough food, from any official lay source (one search; results were a children's health site, a church page, Mayo-network
+definitions and news, none used); how a group should share food; any source besides FW on rationing food; any source saying a
+nursing mother or a sick person may eat less.
+
+Conversions (app's own): 85°F = 29°C; 100°F = 38°C; 50°F and 70°F = 10°C and 21°C (as Protect an unheated house writes them);
+130°F = 54°C; 0°F = -18°C; 40°F = 4°C (as the checked topics write it). Pounds to kilograms at 0.4536 kg per lb, rounded: 240 lb =
+109 kg, 120 lb = 54 kg, 75 lb = 34 kg, 42 lb = 19 kg, 40 lb = 18 kg, 25 lb = 11.3 kg, 20 lb = 9.1 kg, 17 lb = 7.7 kg, 5 lb = 2.3 kg,
+4 lb = 1.8 kg, 1 lb = 0.45 kg, 1/2 lb = 0.23 kg; 1/2 gal = 1.9 L.
+
+### surv-food-how-much
+
+- Tags: none. Owner of: amounts to store (spec 7). Links: s:surv-water-how-much (twice), s:surv-food-storage (twice), c:pantry
+  (twice), s:surv-food-cooking-no-power, s:surv-store-fuel, s:surv-food-still-good, s:surv-water-store, s:surv-food-when-short,
+  s:surv-food-power-out, s:surv-fallout-get-ready. Every label equals its target's title. No doFirst (normal-times topic).
+- "How many days" list: READY-F "Store at least a several-day supply of non-perishable food."; NYS-KIT "Food - at least enough for 7
+  days"; DHSES "Be prepared to make it on your own for at least 10 days."; ARC-KIT "Food: non-perishable, easy-to-prepare items (3-day
+  supply for evacuation, 2-week supply for home)"; FW "Even though it is unlikely that an emergency would cut off your food supply for
+  two weeks, / you should prepare a supply that will last that long."; ILL-EFS "Make a plan to store enough food for each person in /
+  the household to last between 14-30 days."; OSU-SB "The minimum goal for the state is meals for two weeks, but many local emergency
+  managers recommend four weeks’ supply." App's line "at least 2 weeks ... the Red Cross figure" matches How much water you need
+  ("at least 2 weeks") and Get ready for fallout ("this app says at least 2 weeks"); 30 days is ILL-EFS's upper figure. D130.
+- "Build it up" steps: 1 UGA-ST "Make a list of all family members by name, indicating any special needs (diabetic, allergies,
+  etc.)"; UMN-2W "Make a list of all family members by name and include any special needs like diabetes and allergies." 2 UMN-2W "Make
+  a list of meals to be served for each day for 14 days."; UGA-ST "Add notes to each day's list that indicate how much water and what
+  equipment and utensils will be needed for preparation." 3 UGA-ST "Many people already have a two-week supply of most staples on hand
+  if they stop and think about it / and make a written plan." 4 FW "The easiest way to develop a two-week stockpile is to increase the
+  amount of basic foods / you normally keep on your shelves." 5 UGA-ST "If you eat out regularly, you will need to take that into
+  consideration and increase the amount of supplies / you normally eat in a two-week period of time."; ILL-EFS "you will need to factor
+  those meals into your food supply list". 6 by link. Paragraph: FW "You don't need to go out and buy unfamiliar foods to prepare an
+  emergency food supply."; "In fact, familiar foods are important."; "They can lift morale and give a feeling of security in time of
+  stress." Step order is the app's (list, plan, check, buy, adjust, store); no source orders them.
+- "What kinds of food": READY-F "Choose foods your family will eat."; FW "Foods that require no refrigeration, preparation or cooking
+  are best."; UGA-ST "select foods that require no refrigeration, / minimal or no preparation or cooking, and little or no water."
+  List: READY-F "Ready-to-eat canned meats, fruits, vegetables and a can opener"; DHSES "Ready-to-eat canned foods - vegetables,
+  fruits, beans, meat, fish, poultry, pasta, soup, juice."; READY-F "Protein or fruit bars", "Dry cereal or granola"; DHSES "High
+  energy foods - peanut butter, jelly, nuts, dried meat (for example, jerky), granola, trail mix, energy bars."; READY-F "Dried fruit",
+  "Canned juices"; DHSES "Milk - powdered, canned or shelf-stable brick pack."; DHSES "Staples - sugar, salt, pepper, instant coffee,
+  tea bags, cocoa."; READY-F "Comfort/stress foods", DHSES "Candy - chocolate bars, hard candy."; READY-F "Food for infants", DHSES
+  "Specialty food - for older adults or people on special diets."; READY-KIT "Pet food and extra water for your pet", ILL-EFS "Food
+  for pets." Second list: UGA-ST "If some foods in your kit will require cooking, be sure to also include some that are ready to eat.";
+  UGA-ST "Canned foods are also cooked and can be eaten right of the can"; FW "Canned food can be eaten right out of the can."; UGA-ST
+  "Do not buy large, or especially institutional size, containers of food to save money if you won't be able to store leftovers
+  properly."; READY-KIT "Manual can opener (for food)"; OSU-SB "Determine how much extra fuel (propane, butane, wood, charcoal
+  briquettes, etc.) you need" / "to prepare food for two to four weeks." The fuel types are not listed in the topic; it points to
+  Cook without power for where and how to cook (owner).
+- "Water to make the food": UGA-ST heading "Also Plan Water Supplies to Prepare:" (instant oatmeal, dry milk, powdered drink mixes,
+  instant pudding, dried soups, bouillon, instant rice and potatoes; pudding not listed in the topic); UGA-ST "Dehydrated or
+  freeze-dried foods are lightweight and take up little room, but you will need to plan extra water supplies for rehydrating them for
+  use."; OSU-SB "If you are using freeze-dried food, you will need more water to rehydrate and digest it."; FW "If your water supply is
+  limited, try to avoid foods that are high in fat and protein, / and don't stock salty foods, since they will make you thirsty." No
+  water amount (the water pack's).
+- "Babies, children and special needs": FW "Individuals with special diets and allergies will need particular attention, / as will
+  babies, toddlers and elderly people."; READY-KIT "Infant formula, bottles, diapers, wipes and diaper rash cream"; ARC-KIT "Baby
+  supplies (bottles, formula, baby food, diapers)"; FSIS-DATE "Do not buy or use baby formula after its "Use-By" date." (D138); OSU-SB
+  "This is not the time to surprise young children with new foods."; ILL-EFS "Foods that fit the special diets, allergies, or medical
+  needs of your family."; FW "Canned dietetic foods, juices and soups may be helpful for ill or elderly people." FW's "Nursing mothers
+  may need liquid formula, in case they are unable to nurse." is not given (infant feeding is batch C's). "No source opened gives an
+  amount of food for a child": see Looked for (D133).
+- "How much in a day": OSU-SB table caption "MyPlate Plan for 2,000-calorie portion sizes, ages 14+"; "Determine the number of
+  servings and portion sizes for you and your family." / "These factors vary with age and activity level." / "After a disaster,
+  survivors may have greatly increased outdoor activity levels." The table's daily amounts (2½ cups vegetables, 2 cups fruit, 5½
+  ounces protein, 6 ounces grains, 3 cups dairy) are not given (ruling 4).
+- "Storing for a year": UGA-EFS, re-opened twice on 2026-11-19. Heading "Bulk Staples"; "The following amounts are suggested per adult,
+  per year:"; Table 1 header "Amount*"; rows Wheat 240 pounds, Powdered Milk 75 pounds, Corn 240 pounds, Iodized Salt 5 pounds,
+  Soybeans 120 pounds, Fats and Oil 20 pounds**, Vitamin C*** 180 grams; "* Best to buy in nitrogen-packed cans", "** 1 gallon equals
+  7 pounds", "*** Rotate every two years". Heading "Other Foods to Supplement Your Bulk Staples"; "Consider stocking some of the items
+  listed as examples below. Amounts are suggested quantities for an adult for one year."; rows Flour, White Enriched 17 lbs; Corn Meal
+  42 lbs; Pasta (Spaghetti/Macaroni) 42 lbs; Beans (dry) 25 lbs; Beans, Lima (dry) 1 lb; Peas, Split (dry) 1 lb; Lentils (dry) 1 lb;
+  Dry Soup Mix 5 lbs; Peanut Butter 4 lbs; Dry Yeast 1/2 lb; Sugar, White Granulated 40 lbs; Soda 1 lb; Baking Powder 1 lb; Vinegar
+  1/2 gal. Every row is in the topic with its figure unchanged; names lightly reworded ("Lima beans (dry)", "Split peas (dry)",
+  "Baking soda (“Soda” on the page)"). Infant: "Amounts needed would vary, depending on the age of the infant." References:
+  "Federal Emergency Management Agency. Food and Water in an Emergency. (FEMA-477). FEMA, Washington, DC. August 2004." and "Church of
+  Jesus Christ of Latter-Day Saints. 1998. Emergency Preparedness Manual." The topic names the second "a church preparedness manual".
+  Not quoted: the page's "two quarts a day", its "365 multi-vitamin/mineral tablets per person", its shelf-life lists and its
+  "indefinitely" list (D137). D139.
+- Agreement: How much water you need (2 weeks; water amounts linked, not restated); Get ready for fallout (2 weeks; 7 days New
+  York); Cook without power (eat it cold; cooking by link); Is it still good? (opened food by link). No calorie, weight or child
+  amount derived by the app.
+
+### surv-food-storage
+
+- Tags: none. Owner of: storage and shelf life (spec 7). Links: s:surv-unheated-house, s:surv-garbage-and-greywater,
+  s:surv-clean-and-disinfect, s:surv-food-still-good (twice), s:surv-food-poisoning, s:surv-food-power-out, s:surv-food-how-much,
+  c:pantry, s:surv-food-when-short, s:surv-water-store. Labels equal titles. No doFirst.
+- "Where to keep it": FSIS-SS "Store canned foods and other shelf stable products in a cool, dry place."; FW "Keep food in a dry, cool
+  spot-a dark area if possible."; FSIS-SS "Temperatures below 85 degrees F are best." "High temperatures (over 100 degrees F) are
+  harmful to canned goods too." "The risk of spoilage jumps sharply as storage temperatures rise."; ILL-EFS "Canned foods should be
+  stored between 50 and 70 degrees."; FSIS-SS "Never put them above or beside the stove, under the sink, in a damp garage or basement,
+  / or any place exposed to high or low temperature extremes."; ILL-EFS "Store canned goods away from sunlight, damp areas or spots
+  where nearby vents," / "pipes or furnaces to avoid temperature fluctuations."; UGA-EFS "All dry ingredients or supplies should be
+  stored off the floor in clean, dry, dark places away from any source of moisture."; OSU-SB "In small homes, consider storing food in
+  bedroom or coat closets, under beds or behind furniture." Conflict: OSU-SB "Basements and root cellars can be excellent places for
+  long-term food storage." against FSIS-SS "damp ... basement": not used (D137). OSU-SB "Canned foods can become dangerous if stored in
+  temperatures above 95°F." is less cautious than FSIS-SS's 85°F best and is not used.
+- "Freezing weather": two sentences quoted word for word from Protect an unheated house (checked; its sources FSIS-SS "Frozen cans could
+  swell because the food inside expanded when frozen." "Also, discard frozen cans that are not swollen but have been allowed to thaw
+  at 40 degrees F or higher." "Cans that have thawed and refrozen are not safe.", confirmed in this fetch).
+- "Containers": FW "Keep food covered at all times."; CDC-ROD "Keep food sealed in containers with tight fitting lids."; READY-KIT
+  "Store boxed food in tightly closed plastic or metal containers."; OSU-SB "Use only food-grade containers designated for food
+  storage." "Harmful chemicals may leech into the food from containers not meant for food storage, / making it unsafe to eat." (topic
+  writes "leach"); UGA-ST "Store purchased packages of food staples for your emergency supply in airtight plastic food storage
+  containers, / glass jars with screw-top lids, or non-rusty metal cans."; OSU-SB "While glass can be an excellent food storage medium,
+  it is also fragile." "Protect canning jars in boxes with cardboard strips or crumpled newspaper between the jars."; FW "Open food
+  boxes or cans carefully so that you can close them tightly after each use."; ILL-EFS "When opening packages, do so carefully so
+  packaging can be resealed and tightly closed after use."; FW "Wrap cookies and crackers in plastic bags, and keep them in tight
+  containers." "Empty opened packages of sugar, dried fruits and nuts into screw-top jars or air-tight cans / to protect them from
+  pests."; ILL-EFS "Place open packages of sugar, flour, dried fruits and nuts in airtight containers."; UGA-ST "If staples such as
+  rice, instant cereals and potatoes and dry milk are not kept in packages with cooking directions, / be sure to write up preparation
+  steps or mix ratios on index cards".
+- "Insects and rodents": UMN-PP "Inspect packages or bulk products before buying." "Packages should be sealed and unbroken." "Look for
+  evidence of insects including holes in the packaging or wrapping."; "Store insect-free foods in tightly closed glass, metal or heavy
+  plastic containers." "You can also store foods in the refrigerator or freezer."; "Keep food storage areas clean." "Clean up crumbs or
+  spilled food immediately."; OSU-SB "Monitor food supplies for water, insect and rodent damage." "Inspect all stored food for pests
+  every six months."; UMN-PP "When you find food that is infested, throw it away." "When you know a stored product problem is present,
+  be sure to examine all susceptible food / as there could be more than one infested source."; UMN-PP "If you have older food products
+  and you are not sure if they are infested, / you can put them in the freezer at 0 degrees for at least four days / or in shallow
+  cookie sheets or pans in an oven at 130 degrees for at least 30 minutes." "These temperatures will kill any eggs or insects." (0
+  degrees read as °F: a US Extension page, beside 130 degrees oven); UMN-PP "Washing shelves with detergent, bleach, ammonia, or
+  disinfectants will not keep pantry pests from returning / and could be dangerous if the chemicals come in contact with food."
+  Rodents: CDC-ROD "Rats and mice can spread disease, contaminate food, and destroy property." "Keep food, water, and items rodents can
+  hide in away from them."; "Don’t eat or drink anything rodents may have touched (CDC)." quoted word for word from Garbage and dirty
+  water (checked), which owns holes, traps and droppings (ruling 6). UMN-PP's "Buy dried foods in quantities small enough to be used
+  up in a short period of time (two to four months)." is not given: it conflicts with stocking for weeks.
+- "Date it and use the oldest first": FW "Use foods before they go bad, and replace them with fresh supplies, dated with ink or
+  marker." "Place new items at the back of the storage area and older ones in front."; UGA-ST "If packages do not contain a use-by or
+  expiration date, date foods when purchased and when opened."; ILL-EFS "Date items with a marker to see easily which items should be
+  used first or discarded."; UGA-ST "Keep the supply fresh by rotating non-perishable staple items in general storage once or twice a
+  year."; FSIS-SS "Check your pantry every few weeks and use canned goods you have had on hand for awhile."; UGA-ST "If foods are not to
+  be used for regular needs, be sure to clearly label them as Emergency or Disaster Food and store in a special location." "Keep a list
+  of dates when food items need to be inspected and possibly rotated"; READY-KIT "Replace expired items as needed." "Re-think your
+  needs every year and update your kit as your family’s needs change."
+- "How long it keeps", USDA table: FSIS-SS chart "FOOD | STORAGE ON SHELF | STORAGE AFTER OPENING": Low-acid canned goods (examples
+  "canned meat and poultry, stews, soups (except tomato), spaghetti (noodle and pasta) products," / "potatoes, corn, carrots, spinach,
+  beans, beets, peas, and pumpkin.") 2 to 5 years | 3 to 4 days in the refrigerator; High-acid canned goods (examples "juices (tomato,
+  orange, lemon, lime, and grapefruit); tomatoes; grapefruit, pineapple," / "apples and apple products, mixed fruit, peaches, pears,
+  plums, all berries, pickles, sauerkraut," / "and foods treated with vinegar-based sauces or dressings like German potato salad and
+  sauerbraten.") 12 to 18 months | 5 to 7 days in the refrigerator; canned ham (shelf-stable) 2 to 5 years | 3 to 4 days; Rice and
+  dried pasta 2 years | After cooking, 3 to 4 days in the refrigerator; Jerky, commercially packaged 12 months | N/A (topic: "No time
+  given"); Tuna and other seafood in retort pouches 18 months | 3 to 4 days in the refrigerator; Hard/dry sausage "6 weeks in pantry" |
+  "3 weeks refrigerated". Examples lightly shortened (juice kinds and the two dish names dropped). Not shown: home canned foods (12
+  months, with "Before using, boil 10 minutes for high-acid foods; 20 minutes for low-acid foods.", which differs from CDC's rule in Is
+  it still good? and is a canning matter), jerky home-dried, USDA dried egg mix, dried egg whites, MREs, meat or poultry in retort
+  pouches ("Use manufacturer's recommendation"). Lead-in: FSIS-SS "Over several years, this can cause taste and texture changes, / and
+  eventually lower the nutritional value of the food." Then UGA-ST "For best quality, store canned foods in cool, dry locations and use
+  within one year."; FW lists "Use within six months:" Powdered milk (boxed); Dried fruit (in metal container); Dry, crisp crackers (in
+  metal container); Potatoes. "Use within one year:" Canned condensed meat and vegetable soups; Canned fruits, fruit juices and
+  vegetables; Ready-to-eat cereals and uncooked instant cereals (in metal containers); Peanut butter; Jelly; Hard candy and canned
+  nuts; Vitamin C. "May be stored indefinitely" list not used (D137). OSU-SB "Dried beans stored for more than three years may not
+  rehydrate."; "Freeze-dried foods may boast a 20- to 30-year storage life, but don’t ensure quality." "When opened, they will spoil
+  quickly if exposed to moisture and humidity."
+- "Dates on food": FSIS-DATE "Except for infant formula, dates are not an indicator of the product’s safety and are not required by
+  Federal law."; "the dates applied to food are for quality and not for safety."; "A "Best if Used By/Before" date indicates when a
+  product will be of best flavor or quality. / It is not a purchase or safety date."; "A "Sell-By" date tells the store how long to
+  display the product for sale for inventory management. / It is not a safety date."; "A "Use-By" date is the last date recommended for
+  the use of the product while at peak quality. / It is not a safety date except when used on infant formula as described below.";
+  warn: "Do not buy or use baby formula after its "Use-By" date." The never-taste line is quoted word for word from Is it still good?
+  (its Do first 1). Not used: FSIS-DATE "Foods not exhibiting signs of spoilage should be wholesome and may be ... consumed / beyond the
+  labeled "Best if Used By" date." and "Consumers must evaluate the quality of the product prior to its consumption" (look as a test,
+  ruling 7).
+- "Cans": FSIS-SS "Don't purchase bulging, rusted, leaking, or deeply dented cans."; UGA-ST "inspect your supply periodically / to make
+  sure there are no rusty, leaking, bulging or badly dented containers and no broken seals." "Dents that involve seams or can ends can
+  break seals." "Large or severe dents in the sides of a can may also break a seal around the can end or seam, / even though it might
+  not be obvious." "Replace items found in any of these conditions." Throw-out rules by link (Is it still good? owns them). Not used:
+  FSIS-SS small dent and surface rust lines (D131); UGA-ST's flood-can soak of "two tablespoons of chlorine bleach to each gallon of
+  water for 15 minutes" (differs from the water pack's mixes; Is it still good? owns flood cans).
+- "In the freezer": FSIS-FRZ "Store all foods at 0° F or lower to retain vitamin content, color, flavor and texture."; "Food stored
+  constantly at 0 °F will always be safe." "Only the quality suffers with lengthy freezer storage."; "Because freezing keeps food safe
+  almost indefinitely, recommended storage times are for quality only."; "Keep an appliance thermometer in your freezing compartment or
+  freezer to check the temperature."; "Proper packaging helps maintain quality and prevent freezer burn." "For prolonged storage,
+  overwrap these packages"; "Freezer burn does not make food unsafe, merely dry in spots." "Cut freezer-burned portions away either
+  before or after cooking the food."; "Some exceptions are canned food or eggs in shells." "Shell eggs should not be frozen." FSIS-FRZ's
+  "A freezer full of food will usually keep about 2 days" is not given (the hub owns hold times).
+
+### surv-food-when-short
+
+- Tags: none. Links: s:surv-water-how-much, p:dehydration, p:low-blood-sugar, s:surv-food-power-out, s:surv-food-storage,
+  s:surv-food-still-good, s:surv-food-poisoning, s:surv-food-and-wild-plants, s:surv-traps-and-fishing, s:surv-field-dressing-game,
+  s:surv-fallout-water-and-food, s:surv-food-how-much, s:surv-priorities. Labels equal titles.
+- doFirst 1 and "Water comes first": Ready.gov's line quoted word for word as it stands in How much water you need (checked); Priorities
+  quoted word for word ("about 3 days without water and about 3 weeks without food"). FW "If your water supply is limited, try to avoid
+  foods that are high in fat and protein, / and don't stock salty foods, since they will make you thirsty." "Try to eat salt-free
+  crackers, whole grain cereals and canned foods with high liquid content." (topic: "with a lot of liquid"); OSU-SB freeze-dried water
+  line; the Dehydration sentence is How much water you need's, word for word.
+- doFirst 2 and "Who must not go short": FW "Food, unlike water, may be rationed safely, except for children and pregnant women."; FW
+  "Take in enough calories to enable you to do any necessary work."; FW special diets, allergies, babies, toddlers, elderly; FW
+  "Canned dietetic foods, juices and soups may be helpful for ill or elderly people."; CDC-IFE "Breastfeeding mothers support their
+  health and their baby's health by eating nutritious meals and snacks"; "However, women who are hungry or have limited access to
+  healthy foods are still able to breastfeed." Labelled app's own caution: nursing mothers, sick or injured people (D132). Low blood
+  sugar: the protocol's "Common causes in someone with diabetes (Red Cross): a missed or small meal, more exercise than usual, vomiting,
+  or too much diabetes medicine." (protocol text, checked), cited as the protocol's.
+- doFirst 3 and "Make what you have last": FW "FIRST, use perishable food and foods from the refrigerator." "THEN, use the foods from the
+  freezer." "FINALLY, begin to use non-perishable foods and staples." Step order is FW's. FW's freezer line ("at least three days") is
+  not given (the hub owns hold times; the hub's 48 hours is shorter and stands).
+- doFirst 4 and "Eating less": FW "If activity is reduced, healthy people can survive on half their usual food intake for an extended
+  period / and without any food for many days." (quoted whole, with the booklet named; D135); FW "Eat at least one well-balanced meal
+  each day."; UMN-2W "Plan food supplies so you all can eat at least one well-balanced meal each day."; FW "Include vitamin, mineral and
+  protein supplements in your stockpile to assure adequate nutrition."; UMN-2W "Menu items meet basic nutrition needs, including
+  calories, protein, vitamin C and fiber" / "but a multi-vitamin is recommended to meet full nutritional needs."; OSU-SB "Regular
+  mealtimes during stressful times can benefit all family members but especially children."; "Some overly stressed people may react by
+  binge-eating several days of food or liquids before the first meal."; OSU-SB "After a disaster, survivors may have greatly increased
+  outdoor activity levels."; FW familiar foods lines. FW's "Drink enough liquid to enable your body to function properly (two quarts a
+  day)." is not given (water pack). No fasting or diet claim; no amount (D135).
+- doFirst 5 and "Don’t eat what should be thrown out": Is it still good?'s Do first 1, word for word; CDC's "When in doubt, throw it
+  out" as given there.
+- "Food from outside": Food and wild plants quoted word for word (checked). Fallout by link (owner).
+- Not given: signs of underfeeding (D134), sharing (D136), amounts for children (D133).
+- Agreement: How much water you need (never ration water; Ready.gov line identical); Stomach illness in a group (not touched); Food when
+  the power goes out (most perishable first; this topic's FW order agrees); Is it still good? (quoted); Low blood sugar (quoted, not
+  restated).
+
+### pantry (checklist)
+
+- Category food. No item has a qty (ruling 1), so no "Your group" box and no Days. Items carry no links; topics are named in notes only.
+- two-weeks: ARC-KIT 2-week supply for home; FW/UGA-ST no refrigeration, little or no cooking or water; UGA-ST some ready to eat.
+  canned: READY-F, DHSES. high-energy: DHSES, READY-F (protein or fruit bars). cereal: READY-F "Dry cereal or granola"; UGA-ST
+  "crackers". fruit-juice: READY-F. milk: DHSES. staples: DHSES. comfort: READY-F, DHSES. children-foods: OSU-SB. special-diets: ILL-EFS,
+  DHSES, FW. supplements: FW. baby: READY-KIT, ARC-KIT, DHSES; note FSIS-DATE. pets: READY-KIT, ILL-EFS. can-opener: READY-KIT, ARC-KIT,
+  DHSES, FW. tableware: READY-KIT "Mess kits, paper cups, plates, paper towels and plastic utensils"; FW "disposable utensils".
+  containers: UGA-ST, UMN-PP, OSU-SB (food-grade); note FW pests. bags: UGA-ST "Consider stocking zipper-closure plastic food storage or
+  food freezer bags in your emergency supplies." marker: FW, ILL-EFS, UGA-ST. directions: UGA-ST. meal-list: UMN-2W, UGA-ST.
+  thermometers and cooler: Food when the power goes out (CDC appliance thermometers, cooler and frozen gel packs; USDA food
+  thermometer), as given there. fuel: OSU-SB two to four weeks; note READY-F "Charcoal grills and camp stoves are for outdoor use
+  only." water: by name of the Home water store list; note UGA-ST, OSU-SB.
+
+### Batch B agreement with checked topics and protocols
+
+- Water pack: no water amount, boiling time or bleach mix restated; How much water you need and Store water at home linked; Ready.gov's
+  never-ration line identical to the checked text.
+- Flame indoors: no indoor cooking rule; the only fuel lines are "Charcoal grills and camp stoves are for outdoor use only" (Ready.gov,
+  as in Cook without power's sources) and "Where and how to cook safely is in Cook without power".
+- Is it still good? (throw-out owner), Food when the power goes out (hold times), Food poisoning and botulism (botulism) and Cook without
+  power (cooking): linked or quoted word for word only.
+- Protect an unheated house, Garbage and dirty water, Priorities, Food and wild plants, Low blood sugar: quoted word for word.
+- Get ready for fallout and Fallout shelter kit: 2 weeks agrees. Stomach illness in a group: not touched.
+
+### Food pack batch B fix round 1 (2026-11-19), from task-4-review.md
+
+Re-opened or newly opened by the writer on 2026-11-19 (built-in search, then fetch of a returned URL; title and date checked):
+- NYSDOH-SPF: New York State Department of Health, Storing and Preparing Food in Weather Emergencies, revised October 2023.
+  https://healthweb-back.health.ny.gov/environmental/emergency/flood/storing_preparing_food.htm : "Keep a food supply that will feed
+  your household for 3 to 7 days." "Stock up on enough food for 3-7 days." "Store food in a cool, dark area." "Keep canned foods in a
+  dry, dark area where the temperature is fairly cool." "Do not store your food in the basement if it is prone to flooding." Used in
+  how-much (days list, replacing NYS-KIT, which is dropped from the topic) and storage (where to keep it). Agrees with FSIS-SS.
+- OHIO-5582: Ohio State University Extension, Eating Nutritiously When the Power Is Out, HYG-5582 (Brinkman, Coplin, Medeiros),
+  02/11/2016. https://ohioline.osu.edu/factsheet/hyg-5582 : "Each day’s menu provides 1,800–2,000 calories and the day’s necessary
+  nutrients."; "Considering an individual’s daily needs can range from 1,200–3,200 calories,"; columns "Serving for 1"; three-day
+  menu, "If more days are needed, repeat the cycle."; no child amount ("Children are also better able to cope when they eat a healthy
+  diet." only).
+- USU-FSH: Utah State University Extension, Food Storage in the Home (Charlotte P. Brennand, Deloy G. Hendricks; no date).
+  https://extension.usu.edu/preserve-the-harvest/research/food-storage-in-home.php : "One pound of dry matter per person per day serves
+  as a basis for a food storage program." "One pound of dry matter provides about 1600 calories of energy." "Thus dried beans, flour,
+  wheat, rice, sugar, dried fruits or vegetables, pastas or dried skim milk…all provide about 1600 calories per pound." "While 1600
+  calories will not adequately meet the energy needs of a hard-working large man…it will quiet hunger pangs for individual members of
+  a family." No child amount. Its water line ("a tablespoon for each 15 calories of food") is not used (water pack). 1 lb = 0.45 kg.
+- OSU-SB re-opened: caption line "MyPlate Plan for 2,000-calorie portion sizes, ages 14+"; Vegetables "2½ cups", "1 cup counts as: 1
+  cup raw, frozen or cooked/canned vegetables; or 2 cups leafy salad greens;" / "or 1 cup 100% vegetable juice"; Fruits "2 cups", "1
+  cup counts as: 1 cup raw, frozen or cooked/canned fruit; or ½ cup dried fruit; or 1 cup 100% fruit juice"; Protein "5½ ounces", "1
+  ounce counts as: 1 ounce cooked or canned lean meats, poultry, or seafood; or 1 egg; or 1 tablespoon peanut butter;" / "or ¼ cup
+  cooked beans or peas; or ½ ounce nuts or seeds"; Grains "6 ounces", "1 ounce counts as: 1 slice bread; or 1 ounce ready-to-eat cereal;
+  or ½ cup cooked rice, pasta or cereal"; Dairy "3 cups", "1 cup counts as: 1 cup milk; or 1 cup yogurt; or 1 cup fortified soy
+  beverage;" / "or 1½ ounces natural cheese or 2 ounces processed cheese". "These suggested pantry items are organized by food group"; the
+  page does not say the list is built on MyPlate (the topic no longer says so). Every cell is in the topic; "cooked/canned" written
+  "cooked or canned", "meats" singular. 1 US cup = 240 mL (the US nutrition-labeling cup; app's conversion); no metric for MyPlate
+  ounces (ruling 12).
+- UAF-PP: University of Alaska Fairbanks Cooperative Extension Service, Pantry Pests, HGA-00062, reviewed June 2024.
+  https://uaf.edu/ces/publications/database/insects-pests/pantry-pests.php : "Another method is to freeze the infested food in plastic
+  bags at 0°F for three to four days to destroy insects and eggs." "at 140°F for 30 minutes" (oven, light infestation); "Heavily
+  infested food should be discarded." Used only for the °F unit (ruling 16).
+- CSU-3D: Colorado State University Extension, Three Day Emergency Supply of Shelf Stable Food for One Person, 4/19/1999. It loaded this
+  time at https://foodsmartcolorado.colostate.edu/food-safety/emergency-resources/three-day-emergency-supply-of-shelf-stable-food-for-one-person
+  (the earlier record of a redirect stands for the first attempt). Servings per three days by the Food Guide Pyramid; "The amount of
+  food you need depends on your age, gender, physical condition and activity level." Not used (ruling 12).
+- UGA-ST re-opened (M-10): both lines are on the page: "Pack all these items in plastic bags (zipper closures work well) to keep them
+  dry and as airtight as possible." (three-day kit) and "Consider stocking zipper-closure plastic food storage or food freezer bags in
+  your emergency supplies." (FAQ). Also "Make a list of meals to be served, labeled "Day 1" through "Day 14"." "Indicate where food can
+  be found for each day, if not stored all in one location." "This process will force you to think through what you will need to
+  purchase and store." Used in how-much "Build it up" steps 2 and 4. UGA-ST "Do not eat out of cans found in any of these conditions
+  during the emergency." used in storage "Cans" (M-7).
+
+Changes by finding (file and line in the fixed files):
+- I-1, I-2: surv-food-when-short.json "Who must not go short" (lines 70 to 95): list is children, pregnant women (FEMA), nursing mothers
+  (CDC, recast as keep breastfeeding); the app caution warn now names nursing mothers, older people, special diets or allergies, sick or
+  injured; FEMA's attention line kept as a stocking line.
+- I-3: surv-food-how-much.json summary (line 15) and "How much in a day" (from line 150): OSU table, Ohio State, Utah State, UGA, each
+  dated and marked not for children.
+- I-4: how-much "How many days" closing paragraph and summary.
+- I-5, M-9: how-much days list (NYSDOH-SPF replaces NYS-KIT); storage "Where to keep it" (NYSDOH-SPF basement and dark lines).
+- I-6: title "Rationing food" (ruling 17); link labels in how-much and storage updated.
+- M-1: storage "Freezing weather" now cites USDA. M-2: storage "Dates on food" sentence now USDA's. M-3: storage freezing line (UAF unit),
+  oven step cut. M-4: half-intake quote ends at "for an extended period". M-5: stress line merged into the mealtimes line. M-6: hub's
+  Do first 2 quoted; FEMA's three steps removed. M-7: "and don’t eat from it (University of Georgia Extension)". M-8: keyword
+  "rations". M-10: as above.
+- Added (controller): how-much "Build it up" step 4, counting the days held, labelled as this app's own suggestion (ruling 13).
+- Draft removed from the three topics and the Pantry checklist.
+
+### Food pack batch B: storage topic retitled (2026-11-19, controller)
+
+surv-food-storage's title changed from "Store food so it lasts" to "Storing food" (id unchanged) so the title has no word starting
+with "last". The summary now opens "Store food so it keeps" (no figure or rule changed). Link labels updated in surv-food-how-much
+(two links, and its step 6 and source line) and surv-food-when-short (one link and its "Make what you have last" paragraph). Also
+renamed in docs/v7.5-rulings.md and D131. On screen against a505f23: "last" Daylight and moon, Seizure, Animal or human bite (and
+rabies risk), unchanged; "lasts" Seizure, Fainting, Shock, unchanged; "keep" unchanged; "store", "storing" and "storage" each lose
+one older Survival page (listed for the search task in docs/v7.5-rulings.md); no Emergency protocol displaced. Earlier entries in this
+record that name "Store food so it lasts" refer to the same topic.
+
+### Food pack batch B re-review fixes (2026-11-19), from task-4-review.md "Re-review of fixes"
+
+- N-1: USU-FSH also has a servings table with a column headed "Children, teen girls, active women, most men" at "about 2,200" calories,
+  with no ages (reviewer's re-open). The Utah item in surv-food-how-much now reads: "Its older servings table puts “children” with teen
+  girls, active women and most men at about 2,200 calories, without saying what ages; this app does not use it for children." The
+  summary, the "Babies, children and special needs" line, the "How much in a day" opening and closing lines now say no source gives an
+  amount "for a child of a stated age" (was "aged 1 to 12"). D133 amended.
+- N-2: "That is no reason to cut her food." removed from Rationing food's nursing-mothers item; the labelled app caution below it
+  already says it.
+- N-3: Oregon table column header now "Portion size (MyPlate 2,000-calorie plan, ages 14+)", from the page's "Portion size" column
+  and its caption line. The note is shortened to "No metric figure is given for “ounces” because the page defines them by the “counts
+  as” column."
+- N-4: docs/v7.5-rulings.md ruling 16 corrected (both UAF methods are for infested food that is kept; UAF used for the unit only).

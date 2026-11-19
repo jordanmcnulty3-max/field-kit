@@ -950,3 +950,69 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    canning guidelines were followed; if you do, boil home-canned tomatoes and low-acid food 10 minutes (plus 1 minute per 1,000
    feet) before eating. Today: both, in that order. Say if the group wants a stricter rule (for example, never eat home-canned
    food you didn't see canned).
+
+Food at home pack (v7.5), batch B: numbers 130 to 139 (surv-food-how-much, surv-food-storage, surv-food-when-short, the Pantry
+checklist). Rulings are in docs/v7.5-rulings.md, "Batch B".
+
+130. **How many days of food the group aims for (surv-food-how-much, Pantry).** Sources differ: Ready.gov "at least a several-day
+   supply"; New York State's preparedness checklist 7 days; New York State DHSES "at least 10 days"; the Red Cross a 2-week supply
+   for home; the older FEMA, Red Cross and USDA booklet two weeks; University of Illinois Extension 14 to 30 days; Oregon State
+   University Extension says Oregon's minimum goal is 2 weeks and many local emergency managers there recommend 4 weeks. Today:
+   "This app plans for at least 2 weeks of food at home", the Red Cross figure, the same as water and Get ready for fallout, and it
+   names 30 days as the longest figure in any source opened. The group holds about a week now. Say if the group wants a longer
+   target (30 days, a season) written in as the group's own goal. (Fix round 1:) New York State Department of Health's "Keep a food supply that will feed your household for 3 to 7 days"
+   now replaces the children's checklist in the days list. The topic also adds, labelled as this app's own suggestion, counting the days
+   on the 14-day meal list that the shelves already cover (University of Georgia Extension's Day 1 to Day 14 list). Say if the group
+   wants that line cut.
+131. **Small dents and surface rust on cans (surv-food-storage).** USDA (Shelf-Stable Food Safety): "If a can containing food has a
+   small dent, but is otherwise in good shape, the food should be safe to eat." and "Surface rust that you can remove by rubbing
+   with your finger or a paper towel is not serious." Is it still good? throws out any container that "looks damaged, cracked or
+   abnormal" (CDC) and cans "deeply rusted" or dented so badly they won't stack or open (USDA). Today: neither USDA line is given;
+   Storing food says only not to buy bulging, rusted, leaking or deeply dented cans, to replace stored cans with rust,
+   leaks, bulges, bad dents or broken seals (University of Georgia Extension), and links Is it still good? for what to throw out.
+   Say if the group wants USDA's small-dent and surface-rust lines added (more cans kept in a long emergency).
+132. **Who must not go short, beyond children and pregnant women (surv-food-when-short). Medical professional.** The only source
+   that says food may be rationed (the older FEMA, Red Cross and USDA booklet) says "except for children and pregnant women". No
+   source opened says whether a nursing mother, a sick or injured person, an older person, or someone with diabetes can safely eat
+   less. Today, labelled as this app's own caution: don't cut the food of a nursing mother or of anyone sick or injured; older
+   people, the ill and special diets "need particular attention" (FEMA); someone with diabetes is pointed to the Low blood sugar
+   protocol. Ask a medical professional whom else the group should never put on less food, and what a person with diabetes should
+   do when food is short.
+133. **How much food a child needs (surv-food-how-much, surv-food-when-short). Medical professional.** No source opened gives an
+   amount of food for a child aged 1 to 12, for storing or for a shortage. The University of Georgia per-year table is for adults
+   and says infant amounts "would vary, depending on the age of the infant". Today: the app gives no amount for a child and says so.
+   Ask a medical professional or a dietitian for amounts the group can store for its children. (Fix round 1:) The topic now quotes, as printed, the per-person amounts state extension services
+   give: Oregon State (2021) a 2,000-calorie daily food-group table for ages 14 and up; Ohio State (2016) "Each day's menu provides
+   1,800–2,000 calories"; Utah State (undated) "One pound of dry matter per person per day"; University of Georgia (2017) per adult
+   per year. None gives an amount for a child of a stated age. Utah State's older servings table puts "children" with teen girls,
+   active women and most men at about 2,200 calories, without saying what ages; the app does not use it for children and says so.
+   The gap stands: ask a medical professional for amounts the group can store for its children aged 1 to 12.
+134. **Signs that someone is not getting enough food (surv-food-when-short). Medical professional.** No federal, state or extension
+   source opened gives signs of underfeeding for lay people, for adults or children. Today: no signs are given; the Dehydration
+   protocol is linked for signs of not drinking enough. Ask a medical professional what signs the group should watch for,
+   especially in young children, and when to stop cutting back.
+135. **How far and how long adults can eat less (surv-food-when-short). Medical professional.** The older FEMA booklet: "If activity
+   is reduced, healthy people can survive on half their usual food intake for an extended period and without any food for many
+   days." No current source opened says the same or gives a limit. Today: the booklet's two sentences are quoted with its name, and
+   the app says no other source opened says how far food can be cut or for how long, and gives no amount. Ask a medical
+   professional whether the group should use the half-ration line at all, and for how long.
+136. **Sharing food in the group (surv-food-when-short).** No source opened says how a group should share food (pooling between
+   households, who decides portions, how to keep a common store from being eaten early; Oregon State only notes that some stressed
+   people eat several days of food at once). Today: nothing on sharing. This is the group's own rule to make.
+137. **Shelf times that disagree (surv-food-storage).** USDA: low-acid canned food 2 to 5 years, high-acid 12 to 18 months, rice and
+   dried pasta 2 years. The older FEMA booklet: canned soups, fruits and vegetables "use within one year", and white rice, dry pasta,
+   wheat, dried corn, salt and others "may be stored indefinitely (in proper containers and conditions)". University of Georgia
+   Extension: canned food within one year for best quality. Today: USDA's table, then the one-year line and FEMA's six-month and
+   one-year lists as shorter quality times; FEMA's "indefinitely" list is left out because USDA gives rice and pasta 2 years.
+   Oregon State's "Basements and root cellars can be excellent places for long-term food storage" is left out because USDA says
+   never in a damp basement. Say if the group wants FEMA's long list back.
+138. **Infant formula past its date (surv-food-storage, surv-food-how-much, Pantry). Medical professional.** USDA (Food Product
+   Dating): "Do not buy or use baby formula after its "Use-By" date." Oregon State University Extension: "While it's still safe to
+   feed babies formula past its expiration date, the nutrients that fortify the formula will no longer be adequate." Today: USDA's
+   rule, as a warning; Oregon's line is not given. Ask a medical professional what to feed a baby if the only formula left is past
+   its date (the babies and children topic owns infant feeding).
+139. **The University of Georgia per-year list (surv-food-how-much).** It is the only per-person food list found: bulk staples and
+   other foods "per adult, per year", reviewed 2017, citing FEMA (2004) and a church preparedness manual (1998) without saying which
+   gave the figures, nothing for children. Today: both tables are quoted as printed (with metric added), named and dated, with "This
+   app does not turn these figures into amounts for fewer days, for a household or for a child." Say if the group would rather cut
+   the tables (they suit a household storing whole grains for a year, which nobody in the group does today).

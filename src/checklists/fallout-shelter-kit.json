@@ -53,7 +53,7 @@
       "text": "A spare change of clothes for each person",
       "qty": {
         "amount": 1,
-        "unit": "in all, one per person",
+        "unit": "in total",
         "per": "person"
       }
     },
@@ -81,7 +81,7 @@
       "text": "Sleeping bag or warm blanket for each person",
       "qty": {
         "amount": 1,
-        "unit": "in all, one per person",
+        "unit": "in total",
         "per": "person"
       }
     },

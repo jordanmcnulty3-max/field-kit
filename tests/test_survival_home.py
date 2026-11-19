@@ -361,7 +361,10 @@ ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-sa
           's:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
           's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
           's:surv-potassium-iodide', 's:surv-fallout-get-ready']
-RADIATION = ALWAYS[-10:]
+RADIATION = ['s:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
+             's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
+             's:surv-potassium-iodide', 's:surv-fallout-get-ready']   # named, so a later pack appending to ALWAYS cannot shift it
+assert set(RADIATION) <= set(ALWAYS)
 # Topics tagged when: cold: listed under Any and Cold, hidden under Warm, for every Where value.
 WHEN_COLD = ['s:surv-unheated-house', 's:surv-dress-for-cold', 's:surv-wind-chill', 's:surv-water-winter']
 WHERES = ('any', 'town', 'rural', 'woods', 'coast')

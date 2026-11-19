@@ -78,6 +78,10 @@
         {
           "link": "s:surv-fallout-where-to-shelter",
           "label": "Where to shelter from fallout"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
         }
       ]
     },

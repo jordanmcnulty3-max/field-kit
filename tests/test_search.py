@@ -790,7 +790,7 @@ def on_screen(page, text):
 # Three queries where a radiation page outscores a v7.3 result (a title or keyword match against a weaker match), so no tie order can
 # restore v7.3; left as they are for Jordan (final fix report). Today's first three on screen, so any further change is caught.
 V73_ON_SCREEN_OUTSCORED = {
-    'bleeding': ['p:bleeding', 'p:abdominal-wound', 'p:radiation-sickness'],   # keyword "bleeding" (4) over Amputation (3)
+    'bleeding': ['p:bleeding', 'p:abdominal-wound', 'p:radiation-sickness'],   # keyword "bleeding gums" (4) over Amputation's summary (3)
     'food': ['s:surv-food-and-wild-plants', 's:surv-fallout-water-and-food', 's:surv-stomach-illness-in-a-group'],   # title word (5.5) over keyword (4)
     'shelter': ['s:surv-shelter', 's:surv-fallout-where-to-shelter', 's:surv-fallout-warning'],   # title word (5.5) and keyword (4) over body (3)
 }

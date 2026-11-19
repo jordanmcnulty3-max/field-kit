@@ -55,7 +55,13 @@
           "p": "A CO alarm still means what Carbon monoxide says, even during a fallout warning: “CO alarm sounding? Don’t look for the cause. Get everyone outside into fresh air now” (CPSC)."
         },
         {
-          "p": "Cold is handled inside first, by the rules in Living in a closed-up house. A shelter that is poor can be swapped once for a much better one nearby, by the times in Where to shelter from fallout."
+          "p": "This app’s reading, not a source’s: once outside, go into the nearest other building rather than standing in the open, as Fallout warning says: “Get inside the nearest building now and move away from windows” (Ready.gov). For going back in, Carbon monoxide says: “If no responders can come, don’t go back in until the house has aired out and the cause is fixed”."
+        },
+        {
+          "p": "Cold is handled inside first, by the rules in Living in a closed-up house. This app’s own caution, not a source’s, because no source opened weighs cold against fallout as a reason to leave: if the cold itself becomes a danger to life and there is no way to make heat that follows the carbon monoxide rules in Living in a closed-up house, this app counts that as an immediate danger like those named above, and the steps for going are on this page."
+        },
+        {
+          "p": "A shelter that is poor can be swapped once for a much better one nearby, by the times in Where to shelter from fallout."
         },
         {
           "link": "s:surv-fallout-how-long",

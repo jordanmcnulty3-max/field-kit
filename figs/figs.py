@@ -314,7 +314,8 @@ svg('warm-room', 214, 'House plan: one small warm room on the sheltered side of 
 
 # ---------------- RADIATION ----------------
 # Drawn from surv-fallout-where-to-shelter ("Best spot in a house", "Apartments and large buildings") and
-# surv-fallout-coming-inside with p:radiation-decontamination. No numbers, no arrows, no "safe" (radiation pack Task 7).
+# surv-fallout-coming-inside with p:radiation-decontamination. No amounts, no "safe" (radiation pack Task 7); the only
+# numbers are the step badges, and the only arrow is the double arrow labelled "far" in panel 2 of fallout-coming-inside.
 def person(cx, top, s=1.0, cls='k'):
     """Stick figure standing on y = top + 56*s."""
     hy, neck, hip, foot = top + 7 * s, top + 14 * s, top + 36 * s, top + 56 * s

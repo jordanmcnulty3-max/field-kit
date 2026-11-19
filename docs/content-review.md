@@ -4857,3 +4857,37 @@ against the owner files as they stand.
 - Minor 17, keywords: added as listed in the fix report; "bleach" (Water and food after fallout) and "co alarm" (Living in a
   closed-up house) were dropped because they moved a v7.3 top-three search result.
 - Minor 18 and 19: v7.4 rulings and decisions records updated (no user-visible text).
+
+## Radiation pack final review fixes (2026-11-19), from final-review.md
+
+No source was opened in this wave. Every quoted line was checked word for word against its owner file as it stands, or
+against the record above.
+
+- I5, cold with no stove or heater: one sentence each in Living in a closed-up house ("Heat in winter", after the "go
+  somewhere with heat" sentence) and Leaving and moving after fallout ("When leaving beats staying", after "Cold is handled
+  inside first, ..."), labelled as this app's own caution, with "no source opened weighs cold against fallout as a reason to
+  leave" (as D97 records). D112.
+- I6, CO alarm during fallout: after the quoted Carbon monoxide Do first on both pages, one labelled app reading: go into the
+  nearest other building, quoting surv-fallout-warning Do first 1 ("Get inside the nearest building now and move away from
+  windows", Ready.gov), and, for going back in, surv-carbon-monoxide's own line ("If no responders can come, don’t go back in
+  until the house has aired out and the cause is fixed", credited there to the Carbon monoxide poisoning protocol, s6 "until
+  the space is aired out and the cause is fixed"). surv-carbon-monoxide not edited. D113.
+- I7, basement or stove room: labelled app reading after the one-small-room list, with a link to Where to shelter from
+  fallout; the winter rule's "if the cold itself becomes a danger to life" referred to, not reworded. D114.
+- I8a, formula: labelled app reading after CDC-INF's bottled/tap water line, referring to the page's own drinking order. D115;
+  D94 and D98 updated.
+- I8b, breastfeeding end point: checked against the record above. CDC-INF: "If you do NOT have previously expressed breast milk
+  or infant formula, continue breastfeeding." CDC-FAQ: "If no other source of food is available for your baby, continue to
+  breastfeed." CDC-KIDS: "They should consider not breastfeeding if other milk sources are available until they can see their
+  healthcare professional." CDC-KIDS does not say to continue when no other food is available, so no "all three agree" line
+  was added; D94 now says that with no officials or doctor none of the three end points arrives.
+- M1, hub: p:radiation-decontamination link block in "Before the fallout arrives", after Where to shelter from fallout.
+- M2, Living in a closed-up house: the FEMA 2024 paragraph is now a lead, a three-item list and the same closing two
+  sentences; every quoted fragment is unchanged (FEMA-COMM p. 16, recorded in the whole-pack fixes).
+- M3, furnace: CDC-GI ("Turn off fans, air conditioners, and forced-air heating units that bring in air from outside") and
+  Stay warm when the heat is out "What a furnace needs" ("A furnace or boiler that burns oil, gas or propane"; "Keep the
+  furnace’s outside vents clear of snow and ice. A blocked vent can let carbon monoxide build up", NYDCP-22 via
+  surv-carbon-monoxide) are now two list items; a third, labelled app reading covers a unit that is both. D116.
+- M4, Water and food after fallout "Babies": the stray "(Radiation decontamination)" after CDC-KIDS's line removed; the CDC
+  page is named in the bullet and has its own source entry.
+- M5, fallout-shelter-kit: per-person unit now "in total" ("1 in total", "4 in total").

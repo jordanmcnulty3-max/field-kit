@@ -72,6 +72,9 @@
           "p": "A CO alarm still means what Carbon monoxide says, even during a fallout warning: “CO alarm sounding? Don’t look for the cause. Get everyone outside into fresh air now” (CPSC). Going out means going into fallout, which is one more reason nothing burns in a closed-up house."
         },
         {
+          "p": "This app’s reading, not a source’s: once outside, go into the nearest other building rather than standing in the open, as Fallout warning says: “Get inside the nearest building now and move away from windows” (Ready.gov). For going back in, Carbon monoxide says: “If no responders can come, don’t go back in until the house has aired out and the cause is fixed”."
+        },
+        {
           "link": "s:surv-carbon-monoxide",
           "label": "Carbon monoxide and burning fuel indoors"
         },
@@ -88,10 +91,30 @@
           "p": "This app’s rule for a closed-up house in winter: warmth without flame comes first, for the whole sheltering period. If the cold itself becomes a danger to life, run the stove or heater under the carbon monoxide rules in full, accepting that outside air comes in. Nothing ever burns in a sealed room."
         },
         {
-          "p": "FEMA’s 2024 guidance for officials, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath, says: “Closing off ventilation after the passage of the fallout cloud provides little to no health benefit. Heating and cooling should take priority if there are extreme temperatures.” For while “radioactive fallout particles might be raining down in your area”, it says to close windows and doors, that “You should consider turning off anything that brings air in from the outside”, and: “If you are experiencing extreme temperatures or weather conditions, listen to emergency officials for guidance on heating and air conditioning. The health risk from turning off HVAC systems might be greater than the risk of radioactive contamination.” This app’s rule stays as above: warmth without flame comes first, for the whole sheltering period. Nothing ever burns in a sealed room."
+          "p": "FEMA’s 2024 guidance for officials, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath, says:"
         },
         {
-          "p": "A furnace or boiler vented to the outside that still has power to run is the house’s normal heat, not a stove or heater added for the emergency (this app’s reading). Turn off any forced-air heating that brings in air from outside (CDC), and keep its outside vents clear (What a furnace needs, in Stay warm when the heat is out; that is a trip outside: see How long to stay in). The rule above is for when it can’t run."
+          "list": [
+            "“Closing off ventilation after the passage of the fallout cloud provides little to no health benefit. Heating and cooling should take priority if there are extreme temperatures.”",
+            "While “radioactive fallout particles might be raining down in your area”: close windows and doors, and “You should consider turning off anything that brings air in from the outside”.",
+            "At that time too: “If you are experiencing extreme temperatures or weather conditions, listen to emergency officials for guidance on heating and air conditioning. The health risk from turning off HVAC systems might be greater than the risk of radioactive contamination.”"
+          ]
+        },
+        {
+          "p": "This app’s rule stays as above: warmth without flame comes first, for the whole sheltering period. Nothing ever burns in a sealed room."
+        },
+        {
+          "p": "A furnace or boiler vented to the outside that still has power to run is the house’s normal heat, not a stove or heater added for the emergency (this app’s reading)."
+        },
+        {
+          "list": [
+            "Forced-air heating units that bring in air from outside: turn them off (CDC).",
+            "A furnace or boiler that burns oil, gas or propane: “Keep the furnace’s outside vents clear of snow and ice. A blocked vent can let carbon monoxide build up” (What a furnace needs, in Stay warm when the heat is out). That is a trip outside: see How long to stay in.",
+            "A forced-air furnace that burns fuel and brings in air from outside: turn it off (this app’s reading: CDC’s rule comes first, and the vent rule is for a furnace that is running)."
+          ]
+        },
+        {
+          "p": "The rule above is for when it can’t run."
         },
         {
           "p": "Warmth without flame, as in Stay warm when the heat is out:"
@@ -102,6 +125,13 @@
             "Put on layers, a hat and socks, and use blankets and sleeping bags (FEMA, National Institute on Aging; Stay warm when the heat is out).",
             "Bed is the warmest place, with other family members and lots of covers (University of Missouri Extension; Stay warm when the heat is out). Babies sleep differently: see Stay warm when the heat is out."
           ]
+        },
+        {
+          "p": "This app’s reading of its own two rules: during the sheltering period, stay in the best-shielded place the house has (see Where to shelter from fallout) and keep warm there without flame; move to the room with the stove only if the cold itself becomes a danger to life, as this app’s rule at the top of this section says."
+        },
+        {
+          "link": "s:surv-fallout-where-to-shelter",
+          "label": "Where to shelter from fallout"
         },
         {
           "warn": "Babies under 1 year must never sleep in a cold room (CDC). Check older people often: they make less body heat (CDC). They are among those most at risk from the cold (Stay warm when the heat is out)."
@@ -121,6 +151,9 @@
         },
         {
           "p": "Stay warm when the heat is out says to go somewhere with heat if you can’t keep the house warm. During a fallout warning that means going outside: read Leaving and moving after fallout first."
+        },
+        {
+          "p": "This app’s own caution, not a source’s, because no source opened weighs cold against fallout as a reason to leave: if the cold itself becomes a danger to life and there is no way to make heat that follows the carbon monoxide rules, this app counts that as an immediate danger like those Leaving and moving after fallout names, and the steps for going are there."
         },
         {
           "link": "s:surv-fallout-leaving",

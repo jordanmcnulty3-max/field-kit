@@ -570,7 +570,7 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    day 3, short trips on days 7 and 8, 2 to 4 hours a day from day 9 to 12, normal from day 13); it is not used, because
    the content plan limits the Army manuals to the caught-outdoors case. Say if the group wants that timetable, or a
    different rule for trips.
-69. **A CO alarm during fallout sheltering (surv-fallout-shelter-living). Medical professional.** Carbon monoxide (checked, CPSC): if a CO alarm
+69. **A CO alarm during fallout sheltering (surv-fallout-shelter-living). Medical professional. (Where to wait once outside: see D113.)** Carbon monoxide (checked, CPSC): if a CO alarm
    sounds, get everyone outside now. Fallout guidance (Ready.gov): stay inside for the first 24 hours unless an immediate
    hazard such as fire, a gas leak, building collapse or serious injury forces you out; CO is not on its list. Both can
    kill. Today: the closed-up-house topic quotes the CO rule unchanged (Carbon monoxide's Do first, the same words Leaving quotes) and says going out means going into fallout, which is
@@ -584,7 +584,7 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    (checked) says: if you can't keep the house warm, go somewhere with heat. During a fallout warning that means travelling
    through fallout. Today: the closed-up-house topic points to Leaving and moving after fallout before anyone leaves for heat;
    Stay warm when the heat is out is not edited. Say if the heat topic should gain a line about fallout (one link block is allowed in the radiation pack).
-71. **When does the cold become "a danger to life" (surv-fallout-shelter-living). Medical professional.** Your rule: no-flame warmth first; burn
+71. **When does the cold become "a danger to life" (surv-fallout-shelter-living). Medical professional. (Cold with no heat: see D112; basement or stove room: see D114.)** Your rule: no-flame warmth first; burn
    only when the cold itself is a danger to life, then under the carbon monoxide rules in full. No opened source gives an
    indoor temperature for this (Stay warm when the heat is out lists the figures sources give: hypothermia in older people
    at 60 to 65°F, and so on). Today: no temperature; the topic says to watch babies and older people first and to use the
@@ -617,6 +617,7 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    an emergency stove or heater, so it is not held back until the cold is a danger to life; CDC's rule to turn off
    forced-air heating that brings in outside air still applies, and its outside vents must be kept clear (which may mean a
    trip out in snow). Say if the group wants the furnace treated like a stove (off until the cold is a danger to life).
+   (The two furnace rules are now shown as separate cases: see D116.)
 80. **"Send someone for help" during fallout (radiation-decontamination, radiation-sickness, and the protocols they link).
    Medical professional. (Going for medical care during fallout: see D87 and D95.)**
    The standard help line in every checked protocol is "Call 911 if you have signal. If not, send someone for help and
@@ -742,8 +743,15 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    fallout now also shows CDC's Radiation Emergencies and Children line (D85), so three CDC pages are shown.
    Also not covered: making powdered formula with no bottled water and no officials. CDC Infant Feeding says bottled water if
    possible and tap water only if local officials say; it says nothing about stored, water heater or toilet tank water for
-   formula. Today: the topic is silent on that case. Say which CDC statement the group should follow, and what to use for
-   formula when bottled water runs out.
+   formula. Today (final review fixes): a labelled app reading says water you stored yourself before the fallout comes next
+   after bottled water for formula, as it does for drinking (D98, D115); nothing is said about water heater, toilet tank or
+   tap water for formula without officials. End points: CDC Infant Feeding ends when local health officials say, or after
+   leaving the area and cleaning off; CDC FAQ ends when the mother can be seen by a doctor; CDC Radiation Emergencies and
+   Children ends when she can see her healthcare professional. With no officials and no doctor reachable, none of the three end
+   points arrives. Two of the three (Infant Feeding, FAQ) say to keep breastfeeding when there is no stored milk or formula; the
+   Children page, as recorded, says only to consider not breastfeeding if other milk is available, so the app does not state
+   that all three agree. Say which CDC statement the group should follow, what ends it when no one can be reached, and what
+   to use for formula when bottled and stored water run out.
 95. **Taking a casualty out through fallout for care (surv-fallout-leaving). Worth asking a medical professional. (Going for
    medical care during fallout: see D80 and D87.)** Ready.gov
    counts serious injury among the immediate dangers that can force you out, and FEMA names medical needs; Ready.gov also says
@@ -757,7 +765,7 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    the leaving rule allows it only for an immediate danger such as serious injury. Today: Burns is linked and not edited; the
    leaving topic does not list burns separately. Say if the group wants a note on this (an edit to Burns would be a checked
    protocol change).
-97. **Cold as a reason to leave shelter (surv-fallout-leaving; follows D70).** The leaving topic now owns the rule for leaving.
+97. **Cold as a reason to leave shelter (surv-fallout-leaving; follows D70; see D112).** The leaving topic now owns the rule for leaving.
    It sends cold to Living in a closed-up house first (no-flame warmth, then a stove or heater under the carbon monoxide rules
    when the cold is a danger to life) and does not list cold as a reason to leave on its own. Stay warm when the heat is out
    still says to go somewhere with heat if you can't keep the house warm. Today: no source opened weighs cold against fallout;
@@ -767,7 +775,8 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    and sealed drinks, then refrigerator drinks, then water in other containers in the house (water heater, toilet tank), then
    tap water. CDC does not name water a household stored in its own sealed containers. Today: labelled as the app's reading,
    such water is drunk after bottled water and other sealed drinks, and ahead of the water heater and toilet tank (it is sealed
-   and was indoors, as CDC says of sealed drinks). Say if the group wants it ranked with the heater and toilet tank instead.
+   and was indoors, as CDC says of sealed drinks). The same order now applies to powdered formula (Babies, labelled app
+   reading; D115). Say if the group wants it ranked with the heater and toilet tank instead.
 100. **In a car during a dirty bomb (surv-dirty-bomb).** CDC's dirty bomb steps: close the windows, turn off the air,
    heater and vents, cover nose and mouth; go into your home or a building if one is close; otherwise pull over, turn off the
    engine and stay in the car until told you can drive on. For a nuclear explosion, Where to shelter from fallout (FEMA, NYC
@@ -820,3 +829,36 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    nothing about the ground floor. Today: the diagram marks the building's basement only; its above-ground storeys carry no
    marking, and "the center of the building" is shown on a separate plan seen from above, with no floor named. Say if the
    group wants a floor named (that needs a source opened for it).
+112. **Cold with no stove or heater during fallout (surv-fallout-shelter-living, surv-fallout-leaving). (Follows D71 and D97.)**
+   Living in a closed-up house sent cold to Leaving and moving after fallout, and Leaving sent cold back to Living in a
+   closed-up house; a house with no stove or heater had no answer. No source opened weighs cold against fallout as a reason
+   to leave. Today: both pages carry one sentence, labelled as this app's own caution: if the cold itself becomes a danger to
+   life and there is no way to make heat that follows the carbon monoxide rules, the app counts that as an immediate danger
+   like those Leaving and moving after fallout names, and the steps for going are there. Neither page restates the leaving
+   rule or the sheltering period. Say if the group wants a different rule, or a trigger for "a danger to life" (D71).
+113. **Where to wait after a CO alarm during fallout (surv-fallout-shelter-living, surv-fallout-leaving). Medical
+   professional. (Follows D69.)** Carbon monoxide (checked, CPSC) says get everyone outside now, and don't go back in until
+   responders say you can; if no responders can come, don't go back in until the house has aired out and the cause is fixed
+   (Carbon monoxide poisoning protocol). During fallout, standing outside means standing in fallout. Today: both pages say,
+   labelled as this app's reading, to go into the nearest other building rather than stand in the open, quoting Fallout
+   warning's "Get inside the nearest building now and move away from windows" (Ready.gov), and quote Carbon monoxide's
+   no-responders line for going back in. No source says how long to wait in the other building during fallout, how to know
+   the house has aired out, or whether to clean off again on the way back in. Say if the group wants more.
+114. **Basement or the room with the stove (surv-fallout-shelter-living). (Follows D71; see D110.)** Fallout warning and Where
+   to shelter from fallout send people to the basement; Heat in winter says to keep everyone in one small room on the
+   sheltered side of the house, and the only permitted fire is a stove that is rarely in the basement. Today: a labelled app
+   reading of its own two rules: during the sheltering period stay in the best-shielded place the house has (Where to shelter
+   from fallout) and keep warm there without flame; move to the room with the stove only if the cold itself becomes a danger to
+   life (your winter rule, not reworded). Say if the group wants the warm room to win sooner (for example for a baby).
+115. **Stored water for powdered formula (surv-fallout-water-and-food). Worth asking a medical professional. (Part of D94;
+   follows D98.)** CDC Infant Feeding: bottled water if possible, tap water only if local officials say. CDC says nothing of
+   water a household stored itself. Today: a labelled app reading puts water you stored yourself before the fallout next after
+   bottled water for formula, as the page already ranks it for drinking. Say if the group wants it ranked otherwise for babies.
+116. **A forced-air furnace that burns fuel and draws outside air (surv-fallout-shelter-living). (Follows D76 and D88.)** The
+   page said "Turn off any forced-air heating that brings in air from outside (CDC), and keep its outside vents clear", which
+   read as both off and running. Today: two cases in the sources' words (CDC: forced-air heating units that bring in air from
+   outside, turn them off; Stay warm when the heat is out: a furnace or boiler that burns oil, gas or propane, keep its outside
+   vents clear of snow and ice, a blocked vent can let carbon monoxide build up), and, labelled as this app's reading, a unit
+   that is both is turned off, because CDC's rule comes first and the vent rule is for a furnace that is running. FEMA's 2024
+   line that the health risk from turning off HVAC systems might be greater than the contamination risk in extreme
+   temperatures is quoted on the same page (D88). Say if the group wants such a furnace kept running in extreme cold.

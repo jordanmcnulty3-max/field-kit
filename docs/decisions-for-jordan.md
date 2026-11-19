@@ -965,7 +965,7 @@ checklist). Rulings are in docs/v7.5-rulings.md, "Batch B".
    small dent, but is otherwise in good shape, the food should be safe to eat." and "Surface rust that you can remove by rubbing
    with your finger or a paper towel is not serious." Is it still good? throws out any container that "looks damaged, cracked or
    abnormal" (CDC) and cans "deeply rusted" or dented so badly they won't stack or open (USDA). Today: neither USDA line is given;
-   Store food so it lasts says only not to buy bulging, rusted, leaking or deeply dented cans, to replace stored cans with rust,
+   Storing food says only not to buy bulging, rusted, leaking or deeply dented cans, to replace stored cans with rust,
    leaks, bulges, bad dents or broken seals (University of Georgia Extension), and links Is it still good? for what to throw out.
    Say if the group wants USDA's small-dent and surface-rust lines added (more cans kept in a long emergency).
 132. **Who must not go short, beyond children and pregnant women (surv-food-when-short). Medical professional.** The only source

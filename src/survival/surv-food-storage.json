@@ -1,6 +1,6 @@
 {
   "id": "surv-food-storage",
-  "title": "Store food so it lasts",
+  "title": "Storing food",
   "category": "food",
   "keywords": [
     "food storage",
@@ -16,7 +16,7 @@
     "weevils",
     "food grade"
   ],
-  "summary": "Keep food somewhere cool, dry and dark: below 85°F (29°C) is best, and never above or beside the stove, under the sink or in a damp garage or basement. Keep it covered, in tightly closed glass, metal or heavy food-grade plastic. Date everything, put new food behind old and use the oldest first. The date on most food is about quality, not safety. Throw away food that pests got into.",
+  "summary": "Store food so it keeps: somewhere cool, dry and dark. Below 85°F (29°C) is best, and never above or beside the stove, under the sink or in a damp garage or basement. Keep it covered, in tightly closed glass, metal or heavy food-grade plastic. Date everything, put new food behind old and use the oldest first. The date on most food is about quality, not safety. Throw away food that pests got into.",
   "sections": [
     {
       "h": "Where to keep it",

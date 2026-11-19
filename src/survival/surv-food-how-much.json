@@ -50,7 +50,7 @@
             "Count the days on your list that the food on your shelves already covers: that is how many days you hold, and the other days are what you still need to buy (this app’s own suggestion; University of Georgia Extension says the list “will force you to think through what you will need to purchase and store”).",
             "Buy more of the basic foods you normally keep on your shelves. That is the easiest way to build a two-week supply (FEMA, Red Cross and USDA booklet).",
             "If you eat out regularly, add those meals to your list (University of Georgia Extension, University of Illinois Extension).",
-            "Date what you buy and keep it so it lasts, as in Store food so it lasts."
+            "Date what you buy and store it as in Storing food."
           ]
         },
         {
@@ -58,7 +58,7 @@
         },
         {
           "link": "s:surv-food-storage",
-          "label": "Store food so it lasts"
+          "label": "Storing food"
         },
         {
           "link": "c:pantry",
@@ -330,7 +330,7 @@
         },
         {
           "link": "s:surv-food-storage",
-          "label": "Store food so it lasts"
+          "label": "Storing food"
         },
         {
           "link": "s:surv-food-when-short",
@@ -405,7 +405,7 @@
       "used": "Do not buy or use baby formula after its Use-By date"
     },
     {
-      "name": "How much water you need, Store water at home, Store food so it lasts, Cook without power, Is it still good? (other topics in this app)",
+      "name": "How much water you need, Store water at home, Storing food, Cook without power, Is it still good? (other topics in this app)",
       "used": "Water amounts and storage, storage, cooking and throw-out rules, by link"
     }
   ],

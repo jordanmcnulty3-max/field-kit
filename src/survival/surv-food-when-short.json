@@ -98,7 +98,7 @@
           "p": "From Food when the power goes out, word for word: “Eat the most perishable food first: leftovers, meat, poultry, and foods with milk, cream, sour cream or soft cheese (New York State Department of Health).” Save the non-perishable food and staples for later (FEMA, Red Cross and USDA booklet)."
         },
         {
-          "p": "How long the fridge and freezer keep food cold is in Food when the power goes out. Which shelf food keeps longest is in Store food so it lasts."
+          "p": "How long the fridge and freezer keep food cold is in Food when the power goes out. Which shelf food keeps longest is in Storing food."
         },
         {
           "link": "s:surv-food-power-out",
@@ -106,7 +106,7 @@
         },
         {
           "link": "s:surv-food-storage",
-          "label": "Store food so it lasts"
+          "label": "Storing food"
         }
       ]
     },

@@ -5667,3 +5667,13 @@ Changes by finding (file and line in the fixed files):
   "rations". M-10: as above.
 - Added (controller): how-much "Build it up" step 4, counting the days held, labelled as this app's own suggestion (ruling 13).
 - Draft removed from the three topics and the Pantry checklist.
+
+### Food pack batch B: storage topic retitled (2026-11-19, controller)
+
+surv-food-storage's title changed from "Store food so it lasts" to "Storing food" (id unchanged) so the title has no word starting
+with "last". The summary now opens "Store food so it keeps" (no figure or rule changed). Link labels updated in surv-food-how-much
+(two links, and its step 6 and source line) and surv-food-when-short (one link and its "Make what you have last" paragraph). Also
+renamed in docs/v7.5-rulings.md and D131. On screen against a505f23: "last" Daylight and moon, Seizure, Animal or human bite (and
+rabies risk), unchanged; "lasts" Seizure, Fainting, Shock, unchanged; "keep" unchanged; "store", "storing" and "storage" each lose
+one older Survival page (listed for the search task in docs/v7.5-rulings.md); no Emergency protocol displaced. Earlier entries in this
+record that name "Store food so it lasts" refer to the same topic.

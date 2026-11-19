@@ -981,8 +981,9 @@ checklist). Rulings are in docs/v7.5-rulings.md, "Batch B".
    Ask a medical professional or a dietitian for amounts the group can store for its children. (Fix round 1:) The topic now quotes, as printed, the per-person amounts state extension services
    give: Oregon State (2021) a 2,000-calorie daily food-group table for ages 14 and up; Ohio State (2016) "Each day's menu provides
    1,800–2,000 calories"; Utah State (undated) "One pound of dry matter per person per day"; University of Georgia (2017) per adult
-   per year. Each is marked not for children; none gives an amount for a child aged 1 to 12. The gap stands: ask a medical
-   professional for amounts for the group's children.
+   per year. None gives an amount for a child of a stated age. Utah State's older servings table puts "children" with teen girls,
+   active women and most men at about 2,200 calories, without saying what ages; the app does not use it for children and says so.
+   The gap stands: ask a medical professional for amounts the group can store for its children aged 1 to 12.
 134. **Signs that someone is not getting enough food (surv-food-when-short). Medical professional.** No federal, state or extension
    source opened gives signs of underfeeding for lay people, for adults or children. Today: no signs are given; the Dehydration
    protocol is linked for signs of not drinking enough. Ask a medical professional what signs the group should watch for,

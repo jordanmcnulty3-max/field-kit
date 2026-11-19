@@ -5677,3 +5677,17 @@ renamed in docs/v7.5-rulings.md and D131. On screen against a505f23: "last" Dayl
 rabies risk), unchanged; "lasts" Seizure, Fainting, Shock, unchanged; "keep" unchanged; "store", "storing" and "storage" each lose
 one older Survival page (listed for the search task in docs/v7.5-rulings.md); no Emergency protocol displaced. Earlier entries in this
 record that name "Store food so it lasts" refer to the same topic.
+
+### Food pack batch B re-review fixes (2026-11-19), from task-4-review.md "Re-review of fixes"
+
+- N-1: USU-FSH also has a servings table with a column headed "Children, teen girls, active women, most men" at "about 2,200" calories,
+  with no ages (reviewer's re-open). The Utah item in surv-food-how-much now reads: "Its older servings table puts “children” with teen
+  girls, active women and most men at about 2,200 calories, without saying what ages; this app does not use it for children." The
+  summary, the "Babies, children and special needs" line, the "How much in a day" opening and closing lines now say no source gives an
+  amount "for a child of a stated age" (was "aged 1 to 12"). D133 amended.
+- N-2: "That is no reason to cut her food." removed from Rationing food's nursing-mothers item; the labelled app caution below it
+  already says it.
+- N-3: Oregon table column header now "Portion size (MyPlate 2,000-calorie plan, ages 14+)", from the page's "Portion size" column
+  and its caption line. The note is shortened to "No metric figure is given for “ounces” because the page defines them by the “counts
+  as” column."
+- N-4: docs/v7.5-rulings.md ruling 16 corrected (both UAF methods are for infested food that is kept; UAF used for the unit only).

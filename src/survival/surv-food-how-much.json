@@ -12,7 +12,7 @@
     "calories",
     "bulk staples"
   ],
-  "summary": "Federal and New York State sources say to store from several days to 2 weeks of food; extension services go to 30 days, and one lists amounts for a year. This app plans for at least 2 weeks at home, the Red Cross figure, the same as for water. Build up from the food your household already eats: food that needs no refrigeration, little or no cooking and little or no water. Plan for babies, children, older people, special diets and pets. The per-person amounts some extension services print are for adults or ages 14 and up; none gives an amount for a child aged 1 to 12.",
+  "summary": "Federal and New York State sources say to store from several days to 2 weeks of food; extension services go to 30 days, and one lists amounts for a year. This app plans for at least 2 weeks at home, the Red Cross figure, the same as for water. Build up from the food your household already eats: food that needs no refrigeration, little or no cooking and little or no water. Plan for babies, children, older people, special diets and pets. The per-person amounts some extension services print are for adults or ages 14 and up; none gives an amount for a child of a stated age.",
   "sections": [
     {
       "h": "How many days",
@@ -142,7 +142,7 @@
           ]
         },
         {
-          "p": "No source opened gives an amount of food for a child aged 1 to 12, so this app gives none."
+          "p": "No source opened gives an amount of food for a child of a stated age, so this app gives none."
         }
       ]
     },
@@ -150,7 +150,7 @@
       "h": "How much in a day",
       "blocks": [
         {
-          "p": "Federal and New York State sources give days, not amounts. Some state extension services print amounts per person. Each is given here as printed. None gives an amount for a child aged 1 to 12, so none of them is for children, and this app works out no amount of its own."
+          "p": "Federal and New York State sources give days, not amounts. Some state extension services print amounts per person. Each is given here as printed. None gives an amount for a child of a stated age; this app uses none of them for children and works out no amount of its own."
         },
         {
           "p": "Oregon State University Extension (2021) prints “MyPlate Plan for 2,000-calorie portion sizes, ages 14+”, and says to determine the number of servings and portion sizes for you and your family: “These factors vary with age and activity level.” Not for children."
@@ -159,7 +159,7 @@
           "table": {
             "head": [
               "Food group",
-              "A day, ages 14+ (2,000 calories)",
+              "Portion size (MyPlate 2,000-calorie plan, ages 14+)",
               "Counts as"
             ],
             "rows": [
@@ -192,17 +192,17 @@
           }
         },
         {
-          "p": "1 US cup is 240 mL. “Ounces” in the Protein and Grains rows are the measure the right-hand column defines, not a weight, so no metric figure is given for them."
+          "p": "1 US cup is 240 mL. No metric figure is given for “ounces” because the page defines them by the “counts as” column."
         },
         {
           "list": [
             "Ohio State University Extension (2016), a three-day menu for one person: “Each day’s menu provides 1,800–2,000 calories and the day’s necessary nutrients.” It notes that a person’s daily needs can range from 1,200 to 3,200 calories. Not for children: it gives no child amount.",
-            "Utah State University Extension (undated): “One pound of dry matter per person per day serves as a basis for a food storage program.” One pound (0.45 kg) of dry foods such as dried beans, flour, wheat, rice, sugar, pasta or dried skim milk provides about 1,600 calories, which it says will not meet the needs of a hard-working large man. Not for children: it gives no child amount.",
+            "Utah State University Extension (undated): “One pound of dry matter per person per day serves as a basis for a food storage program.” One pound (0.45 kg) of dry foods such as dried beans, flour, wheat, rice, sugar, pasta or dried skim milk provides about 1,600 calories, which it says will not meet the needs of a hard-working large man. Its older servings table puts “children” with teen girls, active women and most men at about 2,200 calories, without saying what ages; this app does not use it for children.",
             "University of Georgia Extension (reviewed 2017): amounts per adult, per year, in the next section."
           ]
         },
         {
-          "p": "After a disaster, people may be far more active outdoors than usual (Oregon State University Extension). How much food a child aged 1 to 12 needs is not in any source opened."
+          "p": "After a disaster, people may be far more active outdoors than usual (Oregon State University Extension). How much food a child of a given age needs is not in any source opened."
         }
       ]
     },
@@ -398,7 +398,7 @@
     },
     {
       "name": "Utah State University Extension, Food Storage in the Home (Brennand and Hendricks; undated)",
-      "used": "One pound of dry matter per person per day as a basis for a food storage program; about 1,600 calories per pound; not enough for a hard-working large man"
+      "used": "One pound of dry matter per person per day as a basis for a food storage program; about 1,600 calories per pound; not enough for a hard-working large man; its older servings table groups “children” with teen girls, active women and most men at about 2,200 calories, without ages (not used for children)"
     },
     {
       "name": "USDA Food Safety and Inspection Service, Food Product Dating (undated)",

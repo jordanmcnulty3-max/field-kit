@@ -4891,3 +4891,383 @@ against the record above.
 - M4, Water and food after fallout "Babies": the stray "(Radiation decontamination)" after CDC-KIDS's line removed; the CDC
   page is named in the bullet and has its own source entry.
 - M5, fallout-shelter-kit: per-person unit now "in total" ("1 in total", "4 in total").
+
+## Food pack batch A: food when the power goes out, is it still good, cook without power, food poisoning and botulism (2026-11-19)
+
+Files (all draft): src/survival/surv-food-power-out.json (hub), surv-food-still-good.json, surv-food-cooking-no-power.json,
+surv-food-poisoning.json. tests/test_build.py topic count 48 to 52. Gates and the indoor-cooking finding: docs/v7.5-rulings.md.
+Every source below was found by built-in web search and opened by built-in web fetch on 2026-11-19; the title (and date where
+printed) was checked after each fetch. Fetches return quotes capped at about 125 characters, so long sentences were read as
+consecutive pieces, and the FoodSafety.gov charts were read in two fetches (fridge, then freezer) as row-by-row lists. No
+Firecrawl, no Bright Data. No URL was constructed: each was returned by a search, or named in a page that was fetched
+(FoodSafety.gov's chart URL was named by the HHS syndication page).
+
+Source keys:
+- CDC-KFS: CDC, Keep Food Safe After a Disaster or Emergency, last reviewed and updated November 24, 2025. https://www.cdc.gov/food-safety/foods/keep-food-safe-after-emergency.html
+- CDC-PO: CDC, What to Do to Protect Yourself During a Power Outage, reviewed August 26, 2026. https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-during-a-power-outage.html
+- CDC-PREV: CDC, Preventing Food Poisoning, last reviewed and updated November 24, 2025. https://cdc.gov/food-safety/prevention
+- CDC-SYM: CDC, Food Poisoning Symptoms, dated November 24, 2025. https://www.cdc.gov/food-safety/signs-symptoms/index.html
+- CDC-BOT: CDC, Symptoms of Botulism, page dated April 1, 2024. https://cdc.gov/botulism/signs-symptoms
+- CDC-HC: CDC, Home-Canned Foods (botulism prevention), page dated April 25, 2024 (last published December 2, 2025). https://cdc.gov/botulism/prevention/home-canned-foods.html (opened twice)
+- FSG-3: FoodSafety.gov (HHS), Three Ways to Keep Food Safe When You Lose Power, published October 8, 2020, modified September 21, 2023. https://www.foodsafety.gov/blog/three-ways-keep-food-safe-when-you-lose-power
+- FSG-CH: FoodSafety.gov, Food Safety During Power Outage (the two charts), last reviewed August 8, 2024. https://www.foodsafety.gov/food-safety-charts/food-safety-during-power-outage (opened three times: summary, fridge chart, freezer chart)
+- FSG-4: FoodSafety.gov, 4 Steps to Food Safety, last reviewed September 18, 2023. https://www.foodsafety.gov/keep-food-safe/4-steps-to-food-safety
+- HHS-SYN: HHS Digital Media syndication page "Food Safety and Power Outages: When to Save and When to Throw Out". https://digitalmedia.hhs.gov/storefront/showContent/105 (held no chart; named FSG-CH's URL; not cited)
+- FSIS-EM: USDA FSIS, Keeping Food Safe During an Emergency (English page at the /es/ node address; no date printed). https://www.fsis.usda.gov/es/node/3347 (opened three times)
+- FSIS-TEMP: USDA FSIS, Safe Minimum Internal Temperature Chart, last updated April 14, 2025. https://www.fsis.usda.gov/es/node/3293
+- FSIS-MOLD: USDA FSIS, Molds on Food: Are They Dangerous? (English; no date printed). https://www.fsis.usda.gov/es/node/3303
+- NYS-FF: New York State Department of Health, The Fridge and Freezer: When the Power is Out, revised October 2023. https://healthweb-back.health.ny.gov/environmental/emergency/flood/fridge_freezer_no_power.htm (opened twice)
+- NYS-BOT: New York State Department of Health, Botulism Fact Sheet, revised December 2025. https://healthweb-back.health.ny.gov/diseases/communicable/botulism/fact_sheet.htm (opened twice)
+- NYC-EM: NYC Emergency Management, Plan for Hazards: Utility Disruptions (undated). https://www.nyc.gov/site/em/ready/utility-disruptions.page
+- NYS-DPS: New York State Department of Public Service, Electric and Natural Gas Safety Tips (05/22rv). https://dps.ny.gov/system/files/documents/2023/12/electric-and-natural-gas-safety-tips.pdf (indoor-cooking finding only; not cited in a topic)
+- READY-F: Ready.gov, Food / Suggested Food Supplies (no date in the fetch result). https://ready.gov/food (opened twice)
+- EPA-PO: EPA, Power Outages and Indoor Air Quality (IAQ), last updated February 18, 2026. https://epa.gov/emergencies-iaq/power-outages-and-indoor-air-quality-iaq and https://www.epa.gov/node/264249 (same page; both opened)
+- EPA-CP: EPA, Sources of Combustion Products, last updated November 10, 2026. https://www.epa.gov/indoor-air-quality-iaq/sources-combustion-products-introduction-indoor-air-quality
+- ME-CO: Maine CDC, Carbon Monoxide Safety in Power Outages (undated). https://www.maine.gov/mema/maine-prepares/home-preparedness/carbon-monoxide-safety (indoor-cooking finding only; not cited)
+- MA-GRILL: Massachusetts Department of Fire Services, Grilling Safety (no date printed). https://mass.gov/info-details/grilling-safety
+- NYDCP-GR: New York State Department of State, Division of Consumer Protection, Consumer Alert on gas and charcoal grills, May 14, 2024. https://dos.ny.gov/news/consumer-alert-ny-department-states-division-consumer-protection-provides-safety-tips-follow (opened twice)
+- NCHFP-SP: National Center for Home Food Preservation, Identifying and Handling Spoiled Canned Food (no date; adapted from a USDA bulletin revised 2015). https://nchfp.uga.edu/how/can/general-information/identifying-and-handling-spoiled-canned-food/
+- USU-PO: Utah State University Extension, Power Outage Preparedness: How to Safely Use Alternative Heating and Lighting Sources (undated). https://extension.usu.edu/preparedness/articles-and-research/alternatives-during-a-power-outage (nothing on cooking; its open-flame-indoors lines conflict with the checked CO topics; not used)
+- UGA-EFS: University of Georgia Extension, Preparing an Emergency Food Supply, Long Term Food Storage (reviewed 2017). https://www.fcs.uga.edu/extension/preparing-an-emergency-food-supply-long-term-food-storage (Tool gate only)
+- ILL-EFS: University of Illinois Extension, How To Build An Emergency Food Supply (undated). https://extension.illinois.edu/sites/default/files/how_to_build_an_emergency_food_supply.pdf (Tool gate only)
+
+Would not open: USDA FSIS's own English address for Keeping Food Safe During an Emergency
+(https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/emergencies/keep-your-food-safe-during-emergencies,
+client error; the same page loaded at the /es/node/3347 address) and FSIS Botulism
+(https://www.fsis.usda.gov/food-safety/foodborne-illness-and-disease/illnesses-and-pathogens/botulism, client error); FEMA,
+Food and Water in an Emergency (fema.gov PDF client error; carbon.utah.gov copy robots-blocked; UNT archive returned only its
+viewer); ready.gov/power-outages (client error); Purdue Extension dry ice note (.docx returned as binary data); MedlinePlus
+Botulism (nlm.nih.gov redirected to medlineplus.gov; the follow-up fetch was refused by the session's permission prompt).
+Nothing from these is in a topic.
+
+Conversions (app's own): 0°F = -18°C; 1 inch = 2.5 cm; 3 feet = 1 m and 10 feet = 3 m (as the checked heat topics write
+them); 1,000 feet = 300 m; 8 quarts = 7.6 L. Celsius in the temperature table is USDA's own (62.8, 71.1, 73.9); 40°F (4°C),
+50°F (10°C), 90°F (32°C) and 140°F (60°C) are FoodSafety.gov's own.
+
+### surv-food-power-out (hub; leads the Food category)
+
+- Tags: none. Links: s:surv-food-still-good (twice), s:surv-generators, s:surv-food-cooking-no-power, s:surv-food-poisoning,
+  s:surv-fallout-water-and-food, s:surv-field-dressing-game, s:surv-food-and-wild-plants, s:surv-traps-and-fishing. Every label
+  equals its target's title. Links left for later tasks: docs/v7.5-rulings.md. The hub-lead entry in src/survival.js is Task 8's.
+- Owner of: fridge and freezer hold times (spec 7).
+- doFirst 1 / table "How long it stays cold": CDC-KFS ("If the doors stay closed, food will stay safe up to: 4 hours in a
+  refrigerator, 48 hours in a full freezer," / "24 hours in a half-full freezer."); CDC-PO ("A full freezer will keep food safe
+  for 48 hours (24 hours if half-full) without power if you don't open the door."; "Your refrigerator will keep food safe for up
+  to 4 hours without power if you don't open the door."); FSG-3 ("A refrigerator will keep food cold for about 4 hours if the
+  door is kept closed."; "A full freezer will hold its temperature for about 48 hours, or 24 hours if it is half-full, if you
+  don't open the door."); FSIS-EM ("The refrigerator will keep food safely cold for about 4 hours if it is unopened."; "A full
+  freezer will hold the temperature for approximately 48 hours (24 hours if it is half full)" / "if the door remains closed.");
+  NYS-FF ("Food in the refrigerator will remain cold for about 4 hours if the door stays shut."; "A fully-filled freezer will
+  stay at freezing temperature for about two days if the door stays shut."; "A half-full freezer will stay cold for about one
+  day."). All agree. "About" is kept (FSG-3, FSIS-EM, NYS-FF).
+- doFirst 2: NYS-FF ("Eat the most perishable items first, such as leftovers, meat, poultry, and foods containing milk," /
+  "cream, sour cream, or soft cheese."). NYC-EM says "Use the perishable food in the refrigerator and freezer first." (not
+  cited). FEMA's fridge-then-freezer-then-pantry order could not be opened (FEMA-477 failed) and is not used.
+- doFirst 3 / "Keep it cold longer" 3: CDC-KFS ("If the power has been out for 4 hours, and a cooler and ice are available, put
+  refrigerated perishable foods in the cooler."; "To keep them at 40°F or below, add ice or a cold source like frozen gel
+  packs.").
+- doFirst 4 / "Not outside, even in winter": NYS-FF ("Do not put your food outside to keep it cold, even in the winter."; "This
+  is not a good idea because temperatures cold enough for refrigerated food are too warm for frozen food."; "And, even if it is
+  very cold outside, the sun could warm the food to a temperature that would allow bacteria to grow."; "Also, animals could get
+  into your food and contaminate it."); FSIS-EM ("No, frozen food can thaw if it is exposed to the sun's rays even when the
+  temperature is very cold."; "The outside temperature could vary hour by hour and the temperature outside will not protect
+  refrigerated and frozen food."; "Animals may harbor bacteria or disease; never consume food that has come in contact with an
+  animal."; "Rather than putting the food outside, consider taking advantage of the cold temperatures by making ice."). The
+  question FSIS-EM answers is not printed in the fetch; its answer is about putting food outside in cold weather.
+- doFirst 5: links Is it still good? (the throw-out owner); CDC-KFS ("Never taste food to know if it is safe to eat.").
+- "How long it stays cold" list: NYS-FF ("Don't open the doors any more than is needed to quickly check the temperature and
+  get your food."; "Group items so they form an “igloo” to protect each other."; "Keep meats together on one side of the
+  freezer or on a tray so that if they begin thawing," / "their juices won't get on other food."; "Foods with a high water
+  content, such as meat or fruit, will stay frozen longer than food with a low" / "water content, such as bread."); FSIS-EM
+  ("When your freezer is not full, keep items close together—this helps the food stay cold longer.").
+- "Keep it cold longer": NYS-FF ("Put ice or frozen water containers in fridge or freezer to keep your food cold,"; "If you
+  think power will be out for several days, purchase dry ice or block ice"); CDC-KFS ("Buy dry ice or block ice to keep food
+  cold in the refrigerator if you think the power could be out for a long time."); FSIS-EM ("Fill buckets, empty milk cartons or
+  cans with water and leave them outside to freeze."; "Then put the homemade ice in your refrigerator, freezer, or coolers.").
+  "In freezing weather" is the app's lead-in to FSIS's cold-temperature answer. Dry ice left out (rulings 5; D127).
+- "Thermometers": CDC-KFS ("Keep appliance thermometers in your refrigerator and freezer."; "The refrigerator should be at 40°F
+  or below."; "The freezer should be at 0°F or below."); NYS-FF ("use an appliance thermometer in fridge and freezer when the
+  power is out."); FSIS-EM ("If you're not sure a particular food is cold enough, take its temperature with a food
+  thermometer.").
+- "After 4 hours, or when the power comes back": FSG-3 ("After the power outage, check each food item separately."); CDC-KFS
+  ("When in doubt, throw it out.").
+- "A generator for the fridge or freezer": Generators' Do first 1, quoted word for word. No generator rule restated.
+- "Get ready before it happens": CDC-KFS ("Keep appliance thermometers..."; "Freeze containers of water and gel packs to help
+  keep food at 40°F or below."; "Have a cooler and frozen gel packs ready in case you have to remove food from the refrigerator
+  to keep it cold."); FSIS-EM ("by having items on hand that don't require refrigeration and can be eaten cold or heated on the
+  outdoor grill."; "Be sure to keep a hand-held can opener for an emergency.").
+- Looked for and not found: how long a chest freezer holds compared with an upright (no source distinguishes them; the
+  full/half-full times are used for both); any source allowing a cold room, porch, garage or snow as a fridge (NYS-FF and
+  FSIS-EM both say no).
+
+### surv-food-still-good
+
+- Tags: none. Links: s:surv-food-power-out, s:surv-food-poisoning, s:surv-clean-and-disinfect, s:surv-fallout-water-and-food,
+  s:surv-food-cooking-no-power, s:surv-stomach-illness-in-a-group.
+- Owner of: what to throw out (spec 7).
+- doFirst 1: CDC-KFS ("Never taste food to know if it is safe to eat."; "Unsafe food can make you sick even if it looks and
+  smells normal.").
+- doFirst 2 / "The time limits" 1: CDC-KFS ("Throw out perishable food in your refrigerator (meat, fish, cut fruits and
+  vegetables, eggs, milk, and leftovers)" / "after 4 hours without power or without a cold source like ice."; "If you have an
+  appliance thermometer in your refrigerator, check to see if it is still at 40 °F or below."; "Check temperatures of food kept
+  in coolers or your refrigerator with an added cold source."). CDC-PO lists "meat, chicken and other poultry, fish, eggs, and
+  leftovers" "when the power has been off for 4 hours or more"; FSG-3 "meat, poultry, fish, eggs, and milk"; CDC-KFS's list is
+  the longest and is used. D120 (cold kitchen).
+- doFirst 3 / "Freezer food" 2: CDC-KFS ("You can safely refreeze or cook thawed frozen food that still contains ice crystals
+  or is at 40 °F or below."); FSG-3 ("If food in your freezer is partially or completely thawed, it can be safely re-frozen" /
+  "if it still contains ice crystals or is 40°F (4°C) or below."); FSG-CH ("Food may be safely refrozen if it still contains ice
+  crystals or is at 40°F (4°C) or below, however, its quality may suffer."); FSIS-EM ("If the food still contains ice crystals or
+  is 40 °F or below, it is safe to refreeze."). CDC-PO's wording ("still contains ice crystals" / "and feels as cold as if
+  refrigerated") is the freezer chart's column.
+- doFirst 4: CDC-KFS ("Throw out any food with an unusual smell, color, or texture."). The second sentence is the app's framing
+  of CDC-KFS's "Unsafe food can make you sick even if it looks and smells normal."
+- doFirst 5: CDC-KFS ("When in doubt, throw it out.").
+- "The time limits" 2: CDC-PREV ("Never leave perishable food out for more than 2 hours (or 1 hour if exposed to temperatures
+  above 90°F)."); FSG-4 ("Bacteria that cause food poisoning multiply quickest between 40°F (4°C) and 140°F (60°C)."; "If the
+  food is exposed to temperatures above 90°F (32°C) ..., refrigerate it within 1 hour."). READY-F's "Throw away any food that has
+  been at room temperature for two hours or more." agrees.
+- "The time limits" 3: CDC-KFS ("Throw out food that has thawed or is above 40°."); the exception points to FSG-CH, which CDC-KFS
+  itself names ("Check this FoodSafety.gov chart for a list of what foods you should throw out and foods you can refreeze.").
+- "The time limits" 4: FSG-3 (check each item separately).
+- "Fridge food" table: FSG-CH refrigerated chart, column "Exposed to temperatures of 40°F (4°C) or above for more than 2 hours",
+  every row, in the page's order: Meat, poultry, seafood: raw or leftover cooked meat, poultry, fish, or seafood; soy meat
+  substitutes Discard; thawing meat or poultry Discard; salads (meat, tuna, shrimp, chicken, or egg salad) Discard; gravy,
+  stuffing, broth Discard; lunchmeats, hot dogs, bacon, sausage, dried beef Discard; pizza with any topping Discard; canned hams
+  labeled "Keep Refrigerated" Discard; canned meats and fish, opened Discard; casseroles, soups, stews Discard. Cheese: soft
+  cheeses (blue/bleu, Roquefort, Brie, Camembert, cottage, cream, Edam, Monterey Jack, ricotta, mozzarella, Muenster,
+  Neufchatel, queso blanco, queso fresco) Discard; hard cheeses (Cheddar, Colby, Swiss, Parmesan, provolone, Romano) Keep;
+  processed cheeses Keep; shredded cheeses Discard; low-fat cheeses Discard; grated Parmesan, Romano, or combination (in can or
+  jar) Keep. Dairy: milk, cream, sour cream, buttermilk, evaporated milk, yogurt, eggnog, soy milk Discard; butter, margarine
+  Keep; baby formula, opened Discard. Eggs: fresh shell eggs, eggs hard-cooked in shell, egg dishes, egg products Discard;
+  custards and puddings, quiche Discard. Fruits: fresh fruits, cut Discard; fresh fruits, uncut Keep; fruit juices, opened Keep;
+  canned fruits, opened Keep; dried fruits, raisins, candied fruits, dates Keep; sliced or shredded coconut Discard. Sauces,
+  spreads, jams: opened mayonnaise, tartar sauce, horseradish "Discard (if above 50°F (10°C) for more than 8 hrs)"; peanut
+  butter Keep; jelly, relish, taco sauce, mustard, catsup, olives, pickles Keep; Worcestershire, soy, barbecue, hoisin sauces
+  Keep; fish sauces, oyster sauce Discard; opened vinegar-based dressings Keep; opened creamy-based dressings Discard; spaghetti
+  sauce, opened Discard. Bread, cakes, cookies, pasta, grains: bread, rolls, cakes, muffins, quick breads, tortillas Keep;
+  refrigerator biscuits, rolls, cookie dough Discard; cooked pasta, rice, potatoes Discard; pasta salads with mayonnaise or
+  vinaigrette Discard; fresh pasta Discard; cheesecake Discard; breakfast foods (waffles, pancakes, bagels) Keep. Pies and pastry:
+  cream filled pastries Discard; pies with filling containing eggs or milk (custard, cheese-filled, chiffon), quiche Discard;
+  fruit pies Keep. Vegetables: fresh vegetables, cut Discard; fresh vegetables, uncut Keep; fresh mushrooms, herbs, spices Keep;
+  greens, pre-cut, pre-washed, packaged Discard; vegetables, cooked Discard; tofu, cooked Discard; vegetable juice, opened
+  Discard; baked potatoes Discard; commercial garlic in oil Discard; potato salad Discard; casseroles, soups, stews Discard
+  (listed twice by the page; given once in the topic). "Use this chart as a general guide." (FSG-CH, said of the freezer chart;
+  applied to both). The lead-in's last sentence is CDC-KFS's unusual smell, color or texture rule.
+- "Freezer food" list 1: FSIS-EM ("If an appliance thermometer was kept in the freezer, read the temperature when the power
+  comes back on."; "If the appliance thermometer stored in the freezer reads 40 °F or below, the food is safe and may be
+  refrozen."). List 2: FSIS-EM ("If a thermometer has not been kept in the freezer, check each package of food to determine the
+  safety."), plus the refreeze sources above; "or cooked" CDC-KFS. List 3: FSIS-EM ("Partial thawing and refreezing may reduce
+  the quality of some food, but the food will remain safe to eat."); FSG-CH ("its quality may suffer").
+- "Freezer food" table: FSG-CH frozen chart, columns "Contains ice crystals and feels cold as if refrigerated" and "Exposed to
+  temperatures of 40°F (4°C) or above for more than 2 hours", every row: meat, poultry, seafood (all types of cuts) Refreeze /
+  Discard; stews, soups Refreeze / Discard; milk "Refreeze (some loss of texture)" / Discard; eggs (out of shell) and egg
+  products Refreeze / Discard; ice cream, frozen yogurt Discard / Discard; cheese (soft and semi-soft) "Refreeze (some loss of
+  texture)" / Discard; hard cheeses Refreeze / Refreeze; shredded cheeses Refreeze / Discard; cheesecake Refreeze / Discard;
+  fruits: juices Refreeze / "Refreeze (discard if mold, yeasty smell, or sliminess develops)"; home or commercially packaged
+  "Refreeze (will change texture and flavor)" / "Refreeze (discard if mold, yeasty smell, or sliminess develops)"; vegetables:
+  juices Refreeze / "Discard after held above 40°F (4°C) for 6 hours"; home or commercially packaged or blanched "Refreeze (may
+  suffer texture and flavor loss)" / "Discard after held above 40°F (4°C) for 6 hours"; breads, rolls, muffins, cakes (without
+  custard fillings) Refreeze / Refreeze; cakes, pies, pastries with custard or cheese filling Refreeze / Discard; pie crusts,
+  commercial and homemade bread dough "Refreeze (some quality loss may occur)" / "Refreeze (quality loss is considerable)";
+  casseroles (pasta, rice-based) Refreeze / Discard; flour, cornmeal, nuts Refreeze / Refreeze; breakfast items (waffles,
+  pancakes, bagels) Refreeze / Refreeze; frozen meal, entree, specialty item (pizza, sausage and biscuit, meat pie, convenience
+  foods) Refreeze / Discard. The juice and fruit notes name mold, a yeasty smell or sliminess as reasons to throw out (never as a
+  test that food is fine).
+- "Mold": FSIS-MOLD ("Don't sniff the moldy item. This can cause respiratory trouble."; "If food is covered with mold, discard
+  it."); table, every row: luncheon meats, bacon, hot dogs Discard; hard salami and dry-cured country hams "Use. Scrub mold off
+  surface."; cooked leftover meat and poultry Discard; cooked casseroles Discard; cooked grain and pasta Discard; hard cheese (not
+  cheese where mold is part of processing) "Use. Cut off at least 1 inch around and below the mold spot" / "keep the knife out of
+  the mold itself so it will not cross-contaminate other parts of the cheese" / "After trimming off the mold, re-cover the cheese
+  in fresh wrap."; cheese made with mold: "Discard soft cheeses such as Brie and Camembert if they contain molds that are not a
+  part of the manufacturing process." / "If surface mold is on hard cheeses such as Gorgonzola and Stilton," / "cut off mold at
+  least 1 inch around and below the mold spot and handle like hard cheese (above)."; soft cheese (cottage, cream cheese,
+  Neufchatel, chevre, Bel Paese, etc.), crumbled, shredded, or sliced cheeses (all types) Discard; yogurt and sour cream Discard;
+  jams and jellies Discard; fruits and vegetables, FIRM (cabbage, bell peppers, carrots, etc.) "Use. Cut off at least 1 inch
+  around and below the mold spot" / keep the knife out of the mold; fruits and vegetables, SOFT (cucumbers, peaches, tomatoes,
+  etc.) Discard; bread and baked goods Discard; peanut butter, legumes and nuts Discard. "Bel Paese" shortened to "and others".
+- "Cans and jars": CDC-HC ("Any of the following signs indicate that home-canned and store-bought food might be" /
+  "contaminated with toxins or harmful germs."; "The container is leaking, bulging, or swollen"; "The container looks damaged,
+  cracked, or abnormal"; "The container spurts liquid or foam when opened"; "The food is discolored, moldy, or smells bad"; "If
+  the container or the food inside have any of these signs of contamination, throw it out!"); FSIS-EM ("Inspect canned foods and
+  discard any food in damaged cans."; "Can damage is shown by swelling, leakage, punctures, holes, fractures, extensive deep
+  rusting, or crushing/denting"; the rest of the sentence, as the fetch summarised it: dents or crushing severe enough to stop
+  normal stacking or opening with a hand-operated can opener). Warn: CDC-HC ("You cannot see, smell, or taste the toxin that
+  causes botulism."; "But taking even a small taste of food containing the toxin can be deadly."); NYS-BOT ("Botulism can be
+  present in cans that look normal and in foods that smell and taste normal; however,"; the rest of NYS-BOT's sentence is not
+  used, D128).
+- "Home-canned food": CDC-HC ("Do not eat food if you do not know whether safe canning guidelines were followed."; "High
+  temperatures can destroy the toxin that causes botulism."; "Boil the following foods in a saucepan before eating them."; list
+  "Home-canned tomatoes", "Foods containing home-canned tomatoes", "All low-acid home-canned foods"; "These foods include all
+  fresh vegetables, figs, meats, poultry, fish, seafood, and some tomatoes."; "At altitudes below 1,000 feet, boil foods for 10
+  minutes."; "Add 1 minute for each additional 1,000 feet of elevation."; "Refrigerate any canned or pickled foods after you open
+  them."). CDC-HC's fourth item, home-fermented Alaska Native foods, is left out (not relevant to Central New York). "Any of the
+  signs ... boiled or not" is the app's joining of CDC-HC's throw-out rule with its boiling rule. NYS-BOT ("should consider
+  boiling the food for 10 minutes") agrees on 10 minutes and is weaker; CDC is used. No canning procedure.
+- "Flood water": CDC-KFS throw-away list, every item, in order ("Perishable food that has not been refrigerated or frozen
+  properly due to power outages"; "Food that may have come in contact with floodwater or stormwater"; "Food with an unusual
+  smell, color, or texture"; "Food in packages that are not waterproof"; "Food in cardboard containers, including
+  juice/milk/baby formula boxes"; "Food containers with screw caps, snap lids, crimped caps, twist caps, flip tops, and snap
+  tops"; "Home-canned foods and canned foods or food containers that are bulging, open, or damaged"; "Throw out cans or food
+  containers that spurt liquid or foam when you open them or contain food that is discolored, moldy, or smells bad"); "Throw
+  out wooden cutting boards, baby bottle nipples, and pacifiers if they have come into contact with floodwaters."; "Sanitizing
+  methods are not effective for removing contaminates in floodwater from these items." FSIS-EM agrees ("Do not eat any food that
+  may have come into contact with flood water."; cardboard boxes and home canned foods). Saving cans, CDC-KFS steps in order:
+  "This includes food in cans, plastic, or metal pouches (like flexible, shelf stable juice packages)."; "Remove labels if
+  possible."; "Note the expiration date."; "Brush or wipe away dirt or silt."; "Wash cans and pouches with hot, soapy water.";
+  "Rinse cans and pouches with clean, safe water."; "OR put them in a pot of water, bring to a boil, and continue boiling for 2
+  minutes."; "Re-label cans or pouches with a marker."; "Include the expiration date."; "Use food in cans or pouches as soon as
+  possible."; FSIS-EM ("Undamaged, commercially prepared foods in all-metal cans and retort pouches can be saved if you do the
+  following:"; "Food in reconditioned cans or retort pouches should be used as soon as possible, thereafter."). CDC-KFS's bleach
+  alternative (1 cup in 5 gallons, 15 minutes) and its flood sanitizing mix for dishes and surfaces are not given (rulings 10;
+  D121). FSIS-EM's line on diluting concentrated formula from reconditioned cans with clean drinking water is left for the
+  babies topic.
+- "Fire and smoke": FSIS-EM ("Discard food that has been near a fire."; "Food exposed to fire can be damaged by the heat of the
+  fire, smoke fumes, and chemicals used to fight the fire."; "Food in cans or jars may appear to be okay, but the heat from a fire
+  can activate food spoilage bacteria."; "If the heat is extreme, the cans or jars themselves can split or rupture, rendering the
+  food unsafe."; "Discard any raw food or food in permeable packaging—cardboard, plastic wrap, screw-topped jars"; "Food stored in
+  refrigerators or freezers can also become contaminated by fumes."; "The refrigerator seal isn't airtight and fumes can get
+  inside."; "Food that is exposed to chemicals should be thrown away—the chemicals cannot be washed off the food."; "Cookware
+  exposed to fire-fighting chemicals can be decontaminated by washing in soap and hot water."; "Then submerge for 15 minutes in a
+  solution of 1 tablespoon unscented, liquid chlorine bleach per gallon of water."). The food mix in Clean and disinfect is
+  1 tablespoon (15 mL) of 5% to 9% bleach per gallon: the same strength, so it is named, not restated.
+- "More": fallout food is Water and food after fallout's (spec 7); linked.
+
+### surv-food-cooking-no-power
+
+- Tags: none. Links: s:surv-carbon-monoxide, s:surv-generators, s:surv-wood-stoves-fireplaces, s:surv-fallout-shelter-living,
+  s:surv-fire, s:surv-store-fuel, s:surv-portable-heaters, p:burns, s:surv-field-dressing-game, s:surv-food-still-good,
+  s:surv-make-water-safe, s:surv-food-power-out, p:carbon-monoxide.
+- Owner of: cooking temperatures and indoor cooking (spec 7). The indoor-cooking finding, verbatim, is in docs/v7.5-rulings.md
+  "Indoor cooking"; D117.
+- doFirst 1: Carbon monoxide's Do first 4, word for word ("Never burn charcoal, or use a grill, hibachi, fuel lantern or camp
+  stove indoors, and never heat the house with a gas oven or range (CDC, CPSC).").
+- doFirst 2: Carbon monoxide's Do first 3, word for word, "See Generators." included.
+- doFirst 3 / "A fireplace or wood stove": EPA-PO ("Vented appliances can be used to safely cook indoors during a power outage
+  if the vent does not require power to operate."; "You can use a vented fireplace or a vented wood stove or another vented fuel
+  burning stove, if it is set up for cooking."; "Never use charcoal in a fireplace because there is a risk of carbon monoxide
+  poisoning."; "Make sure that your home is equipped with CO alarm(s),"); READY-F ("...candle warmers, chafing dishes," / "fondue
+  pots or a fireplace."). "Another vented fuel burning stove" is not offered: no opened source says what it covers, and a gas
+  range is dealt with below. Wood stoves and fireplaces quoted word for word: Do first 2 first sentence, Do first 3, the "At
+  night" warn's first sentence, and "Before you light it" item 6. CDC's “Don’t cook or burn anything on a stove or fireplace that
+  isn’t vented.” as it stands in Carbon monoxide's warn block.
+- doFirst 4 / "A gas or propane range": no source (see rulings "Indoor cooking"); EPA-CP ("Install and use exhaust fans over
+  gas cooking stoves and ranges and keep the burners properly adjusted."; "Using a stove hood with a fan vented to the outdoors
+  greatly reduces exposure to pollutants during cooking."). "In normal times" and "A fan needs power" are the app's reading,
+  labelled. The warn is labelled as this app's own caution and quotes Carbon monoxide's "never heat the house with a gas oven or
+  range (CDC, CPSC)".
+- doFirst 5: MA-GRILL ("Grills must be 10 feet from the side of a building unless the manufacturer's instructions say it can be
+  closer."); READY-F ("Commercially canned food may be eaten out of the can without warming."). D119.
+- "Never indoors": the warn quotes the two checked prohibitions word for word (Carbon monoxide: "never heat the house with a gas
+  oven or range (CDC, CPSC)", capitalised as a sentence; CDC's unvented-stove line as in its warn block). List 1: Carbon monoxide
+  Do first 4's first half; READY-F ("Charcoal grills and camp stoves are for outdoor use only."). List 2: NYDCP-GR ("Never use a
+  grill indoors, in a garage, breezeway, carport, porch, next to your home or under a surface that will burn."). List 3: Carbon
+  monoxide Do first 3 without "See Generators." List 4: NYDCP-GR ("Since charcoal produces CO fumes until the charcoal is
+  completely extinguished," / "do not store a grill indoors with freshly used coals.").
+- "Burners that are not on the list": READY-F (candle warmers, chafing dishes, fondue pots); labelled app caution; D118.
+- "During a fallout warning": one sentence and the link, as spec 7 asks; "warmth without flame comes first" is Living in a
+  closed-up house's own words; "a trip outside" is How long to stay in's term as that topic uses it.
+- "Cooking outdoors": READY-F; NYDCP-GR ("Only use grills outside in a well-ventilated area."); MA-GRILL ("Always grill
+  outdoors."; 10 feet; "Make sure grills are not underneath overhanging branches."; "Place grills away from the house and deck
+  railings."; "Never leave a burning grill unattended."; "Keep children and pets three feet away from grills."; "Use only charcoal
+  starter fluid."; "Never add lighter fluid to burning briquettes or hot coals."; "For proper disposal of grill ashes, allow the
+  coals to burn out completely and then cool for 48 hours before disposal."; "If you must dispose of ashes before they are
+  completely cooled, thoroughly soak them in water before putting them in a metal container."; "If you smell gas while cooking,
+  turn off and get away from the grill."; "Do not use matches or lighters to check for leaks."); EPA-PO (outdoors "at a safe
+  distance away from your home's doors, windows and any air intakes for your home's HVAC system."); NYDCP-GR ("Light charcoal in a
+  charcoal chimney."; "doesn't involve the use of accelerants like lighter fluid"). NYDCP-GR's "at least 3 feet from siding, deck
+  rails, and eaves" is not used (D119).
+- "Cook it through": CDC-PREV ("The only way to tell if food is safely cooked is to use a food thermometer."; "You can't tell if
+  food is safely cooked by checking its color and texture (except for seafood)."); FSIS-TEMP ("Cook all food to these minimum
+  internal temperatures, as measured with a food thermometer", before removing food from the heat source). The "(except for
+  seafood)" exception and CDC's fish-with-fins alternative are not used (D126). Table, every FSIS-TEMP row used: "Beef, Pork, Veal
+  and Lamb Steaks, Chops and Roasts" 145°F (62.8°C), "allow to rest for at least 3 minutes"; "Ham, Fresh or Smoked (Uncooked)"
+  145°F (62.8°C), rest at least 3 minutes; "Ground Meats" 160°F (71.1°C); "All Poultry (Breasts, Whole Bird, Legs, Thighs, Wings,
+  Ground Poultry, Giblets and Stuffing)" 165°F (73.9°C); "Eggs" 160°F (71.1°C); "Fish & Shellfish" 145°F (62.8°C); "Leftovers"
+  165°F (73.9°C); "Casseroles" 165°F (73.9°C). Not used: "Ground Poultry" (covered by All Poultry) and "Fully Cooked Ham (to
+  Reheat)" 140°F / 165°F (left out to keep the table short; leftovers cover reheating). CDC-PREV's table agrees (145°F whole cuts
+  with 3 minutes, 160°F ground meats, 165°F poultry, 165°F leftovers and casseroles). Wild game row: Field dressing game, "Cook all
+  wild game and birds to at least 165°F in the thickest part, and fish to 145°F." and "Bear and wild boar can carry trichinella
+  worms. Cook them to 165°F.", quoted word for word; 73.9°C is FSIS's conversion of 165°F. FSIS-TEMP has no game row, so nothing
+  in the table contradicts 165°F for game; the 145°F meat row says "(not wild game)".
+- "Keep cooked food hot": FSG-4 ("Keep food hot (140°F (60°C) or above) after cooking:"). FSG-4 names a chafing dish as a heat
+  source for keeping food hot; not used (D118).
+- "Eat it cold": READY-F; FSIS-EM ("...items on hand that don't require refrigeration and can be eaten cold or heated on the
+  outdoor grill.").
+- "Water for cooking": CDC-PO ("Safe water for drinking, cooking, and personal hygiene includes bottled, boiled, or treated
+  water."). No boiling time or bleach dose restated; Make water safe linked.
+- Looked for and not found: any opened federal, New York or extension source saying in words that you can cook on a gas or
+  propane kitchen range during a power outage (EPA-PO, EPA-CP, CDC-PO, READY-F, NYS-DPS, NYC-EM, ME-CO, USU-PO; ready.gov/power-
+  outages and FEMA-477 failed); how to cook safely without a food thermometer (CDC-PREV: the thermometer is the only way); a
+  grill distance from a federal source (EPA-PO says only "a safe distance").
+
+### surv-food-poisoning
+
+- Tags: none. Links: p:vomiting-diarrhea, p:dehydration, s:surv-stomach-illness-in-a-group, p:carbon-monoxide, p:cpr-adult,
+  p:cpr-child, p:cpr-infant, s:surv-food-still-good, s:surv-food-cooking-no-power, s:surv-food-power-out.
+- Owner of: botulism signs (spec 7). Care is linked, not restated (danger signs are the protocols'; rulings 13).
+- Botulism protocol gate: FAIL (docs/v7.5-rulings.md). D122.
+- doFirst 1: the protocols by exact title.
+- doFirst 2 / "Botulism" list: CDC-BOT ("Difficulty swallowing", "Muscle weakness", "Double vision", "Drooping eyelids",
+  "Blurry vision", "Slurred speech", "Difficulty breathing", "Difficulty moving the eyes"; "Signs and symptoms in foodborne
+  botulism also might include:" "Vomiting," "Nausea," "Stomach pain," "Diarrhea."; "Botulism is a medical emergency."; "If you or
+  your child has signs and symptoms of botulism, immediately see your doctor or go to the emergency room."; "Do not wait.").
+  doFirst 2 writes "Blurry vision" as "blurred vision" (NYS-BOT's word).
+- doFirst 3 / infant paragraph: CDC-BOT ("Signs and symptoms in an infant might include:" "Constipation," "Poor feeding,"
+  "Drooping eyelids," "Pupils that are slow to react to light," "Face showing less expression than usual," "Weak cry that sounds
+  different than usual."); NYS-BOT ("Infants with botulism typically appear sluggish and "floppy" (have poor muscle tone), feed
+  poorly," / "become constipated (have difficulty passing stool or poop), and have a weak cry."). "Get them to a doctor now" is
+  CDC-BOT's "you or your child" line applied to a baby.
+- doFirst 4: Stomach illness in a group ("Throw away food that might be contaminated" (CDC)); CDC-HC ("Never taste food to see if
+  it's safe."); NCHFP-SP (sealed suspect containers into a heavy garbage bag).
+- doFirst 5 / "Honey and babies": NYS-BOT ("Known sources of infant botulism, such as honey, should not be fed to infants under 1
+  year of age.").
+- "Food poisoning": CDC-SYM ("Diarrhea", "Stomach pain or cramps", "Nausea", "Vomiting", "Fever"; "Some germs can make you sick
+  within a few hours after you swallow them."; "Others may take a few days to make you sick."; "If you have diarrhea or vomiting,
+  be sure to drink plenty of fluids to prevent dehydration"; "See your doctor if you are pregnant and have a fever and other
+  flu-like symptoms."). CDC-SYM's five severe symptoms are not restated (rulings 13).
+- "Several people sick": Stomach illness in a group's outbreak line (CDC) and its pointers; the Severe vomiting or diarrhea
+  protocol's step s4 (carbon monoxide, shared poison) named, not restated.
+- "Botulism" paragraphs: CDC-BOT ("Botulism is caused by a toxin that attacks the body's nerves and causes muscle weakness.";
+  "Botulism can weaken muscles used in breathing, which can lead to difficulty breathing and even death."; "People with botulism
+  might not have all of these signs and symptoms at the same time."); NYS-BOT ("dry mouth" in the classic symptoms; "For
+  foodborne botulism, neurological symptoms typically appear within 12-72 hours after eating or drinking" / "a contaminated food
+  or beverage but can range from 2 hours to 8 days."; "For infant botulism, the incubation period may span up to 30 days from
+  exposure."; "The symptoms of botulism make hospitalization necessary."; "If diagnosed early, botulism can be treated with a drug
+  called antitoxin," / "which stops the toxin from causing more harm to the body."; "If the disease is severe, a patient may
+  experience breathing problems and be placed on a breathing machine" / "called a ventilator."; "Botulism is not spread from
+  person to person."). CDC-SYM's table gives botulism "18 to 36 hours"; NYS-BOT's wider range is used (D125). The no-hospital
+  paragraph is labelled as this app's reading (D122).
+- "Getting rid of a suspect can or jar": NCHFP-SP ("all suspect containers of spoiled low-acid foods, including tomatoes," /
+  "should be treated as having produced botulinum toxin and handled carefully in one of two ways:"; "If the swollen metal cans or
+  suspect glass jars are still sealed, place them in a heavy garbage bag."; "Close and place the bag in a regular trash container
+  or dispose in a nearby landfill."; "If the suspect cans or glass jars are unsealed, open, or leaking, they should be detoxified
+  before disposal."; steps in order: "Wear disposable rubber or heavy plastic gloves."; "Carefully place the suspect containers and
+  lids on their sides in an 8-quart volume or larger stock pot," / "pan, or boiling-water canner."; "Wash your hands with gloves
+  thoroughly."; "Carefully add water to the pot and avoid splashing the water."; "The water should completely cover the containers
+  with a minimum of a 1-inch level above the containers."; "Place a lid on the pot and heat the water to boiling."; "Boil 30
+  minutes to ensure detoxifying the food and all container components."; "Cool and discard the containers, their lids, and food in
+  the trash or dispose in a nearby landfill."; "Discard gloves when cleaning process is complete."; "Contact with botulinum toxin
+  can be fatal whether it is ingested or enters through any openings in the skin."; "Take care to avoid contact with suspect foods
+  or liquids."; "Wear rubber or heavy plastic gloves when handling suspect foods or cleaning up contaminated work surfaces and
+  equipment."; "Dispose of these paper towels by placing them in a plastic bag before putting them in the trash."). "Boiling-water
+  canner" and "landfill" left out. NCHFP-SP's bleach solution (1 part bleach to 5 parts water, 30 minutes, twice) is not given
+  (rulings 9; D123). The same-batch paragraph is a labelled app caution: NCHFP-SP, CDC-HC and NYS-BOT say nothing about other
+  containers from the same batch (D124).
+- Looked for and not found: lay actions for botulism without a hospital (CDC-BOT, NYS-BOT; MedlinePlus failed); what to do with
+  the rest of a batch; whether to keep suspect food for testing (no opened page says).
+
+### Batch A agreement with checked topics and protocols
+
+- Flame indoors: the six checked topics are quoted, not reworded: Carbon monoxide Do first 3 and 4 and its CDC warn quotation;
+  Wood stoves and fireplaces' damper, 3-foot, put-it-out and alarm lines; Generators' Do first 1. No sentence permits a camp
+  stove, grill, charcoal or generator indoors; a gas range is not permitted (app caution). Living in a closed-up house governs
+  during fallout (linked).
+- Game temperature: the table's game row is Field dressing game's 165°F; the domestic 145°F row says "(not wild game)".
+- Water pack: no boiling time for water, bleach dose or water amount restated; Make water safe and Clean and disinfect are
+  linked or named. The 2-minute can boil and the 10-minute home-canned boil and 30-minute detox boil are food and container
+  steps from CDC and NCHFP, not water treatment.
+- Stomach illness in a group: owns who stays away from food (D32); linked from Food poisoning and botulism, not restated.
+- Fallout: Water and food after fallout owns food after fallout; linked from the hub and Is it still good?, not restated.
+- Protocols: Severe vomiting or diarrhea, Dehydration, Carbon monoxide poisoning and the CPR protocols linked by exact title;
+  none edited.
+- No `where` or `when` tag, no 911 or dial control, no home town, no question numbers or task words in user-visible text.

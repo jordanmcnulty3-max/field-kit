@@ -1,0 +1,293 @@
+{
+  "id": "surv-food-cooking-no-power",
+  "title": "Cook without power",
+  "category": "food",
+  "keywords": [
+    "cook without power",
+    "cooking without power",
+    "cook without electricity",
+    "cook outside",
+    "cooking on a grill",
+    "food thermometer",
+    "meat thermometer",
+    "cooking temperature",
+    "internal temperature",
+    "eat food cold"
+  ],
+  "summary": "Never cook with a grill, camp stove or charcoal indoors, and never heat the house with a gas oven or range. Indoors, cook only on a fireplace or wood stove vented to the outside and set up for cooking. This app says not to cook on a gas or propane range while the power is out. Otherwise cook outdoors, away from the house, or eat food cold. Cook meat, poultry, eggs and leftovers to the temperatures in the table, checked with a food thermometer.",
+  "doFirst": [
+    "Never burn charcoal, or use a grill, hibachi, fuel lantern or camp stove indoors, and never heat the house with a gas oven or range (CDC, CPSC).",
+    "Never run a generator in the house, garage, basement, crawlspace, shed, porch or carport, even with doors and windows open (CDC, CPSC). See Generators.",
+    "Indoors, cook only on a fireplace or wood stove that is vented to the outside, set up for cooking, and has a vent that needs no power to work (EPA), under every rule in Wood stoves and fireplaces.",
+    "Gas or propane kitchen range: this app’s own caution is not to cook on it while the power is out. No source opened for this app says you can.",
+    "Otherwise cook outdoors, at least 10 feet (3 m) from the house (Massachusetts Department of Fire Services), or eat food cold. Store-bought canned food can be eaten from the can without warming (Ready.gov)."
+  ],
+  "sections": [
+    {
+      "h": "Never indoors",
+      "blocks": [
+        {
+          "warn": "Never heat the house with a gas oven or range (CDC, CPSC). CDC: “Don’t cook or burn anything on a stove or fireplace that isn’t vented.”"
+        },
+        {
+          "list": [
+            "Never burn charcoal, or use a grill, hibachi, fuel lantern or camp stove indoors (CDC, CPSC). Charcoal grills and camp stoves are for outdoor use only (Ready.gov).",
+            "Never use a grill in a garage, breezeway, carport or porch, next to the house, or under anything that can burn (New York State Division of Consumer Protection).",
+            "Never run a generator in the house, garage, basement, crawlspace, shed, porch or carport, even with doors and windows open (CDC, CPSC).",
+            "Don’t bring a grill inside with coals that were just used: charcoal gives off carbon monoxide until it is completely out (New York State Division of Consumer Protection)."
+          ]
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "link": "s:surv-generators",
+          "label": "Generators"
+        }
+      ]
+    },
+    {
+      "h": "A fireplace or wood stove",
+      "blocks": [
+        {
+          "p": "EPA: during a power outage, you can cook indoors on a vented fireplace or a vented wood stove, if it is set up for cooking. A vented appliance can be used to cook indoors only if its vent does not need power to work (EPA). Ready.gov also lists a fireplace for cooking in an emergency."
+        },
+        {
+          "list": [
+            "Only a fireplace or wood stove vented to the outside (CDC, EPA). Every rule in Wood stoves and fireplaces applies, among them: “Open the damper before you light a fire, and never close it until the fire is out and the embers are cold (Massachusetts Department of Fire Services).” “Keep anything that can burn at least 3 feet (1 m) from the fireplace or stove (US Fire Administration).” “Put the fire out before you go to sleep or leave the house (US Fire Administration, FEMA).”",
+            "Never use charcoal in a fireplace: it can cause carbon monoxide poisoning (EPA).",
+            "Make sure the house has carbon monoxide alarms (EPA). Wood stoves and fireplaces: “Put a smoke alarm and a battery-operated carbon monoxide alarm near the area you heat, and test them every month (CDC).”",
+            "A vent-free gas fireplace or gas logs are not vented. Don’t cook on them (CDC: “Don’t cook or burn anything on a stove or fireplace that isn’t vented.”)."
+          ]
+        },
+        {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        }
+      ]
+    },
+    {
+      "h": "A gas or propane range",
+      "blocks": [
+        {
+          "p": "No source opened for this app says, in words, that you can cook on a gas or propane kitchen range during a power outage. EPA allows cooking indoors in an outage only on a vented appliance whose vent needs no power, and its advice for gas ranges in normal times is an exhaust fan vented to the outdoors (EPA). A fan needs power, so this app reads a range in a power cut as not meeting EPA’s condition."
+        },
+        {
+          "warn": "This app’s own caution: don’t cook on a gas or propane range while the power is out. Cook outdoors, or on a vented fireplace or wood stove as above, or eat food cold. And never heat the house with a gas oven or range (CDC, CPSC)."
+        }
+      ]
+    },
+    {
+      "h": "Burners that are not on the list",
+      "blocks": [
+        {
+          "p": "Ready.gov also lists candle warmers, chafing dishes and fondue pots for cooking in an emergency. They burn fuel in the room, and no source opened for this app says how to use them indoors without carbon monoxide building up. This app’s own caution: don’t use them while the power is out."
+        }
+      ]
+    },
+    {
+      "h": "During a fallout warning",
+      "blocks": [
+        {
+          "p": "While you shelter from fallout, Living in a closed-up house governs instead: warmth without flame comes first, and going outdoors to cook is a trip outside."
+        },
+        {
+          "link": "s:surv-fallout-shelter-living",
+          "label": "Living in a closed-up house"
+        }
+      ]
+    },
+    {
+      "h": "Cooking outdoors",
+      "blocks": [
+        {
+          "list": [
+            "Use grills and camp stoves outside only, in a well-ventilated area (Ready.gov, New York State Division of Consumer Protection).",
+            "Keep a grill at least 10 feet (3 m) from the side of a building unless its maker’s instructions say it can be closer (Massachusetts Department of Fire Services). EPA: a safe distance from the house’s doors, windows and any air intakes for its heating or cooling system.",
+            "Not under overhanging branches, and away from deck railings (Massachusetts Department of Fire Services).",
+            "Never leave a burning grill unattended (Massachusetts Department of Fire Services).",
+            "Keep children and pets 3 feet (1 m) away from grills (Massachusetts Department of Fire Services).",
+            "Charcoal: use only charcoal starter fluid, and never add lighter fluid to burning briquettes or hot coals (Massachusetts Department of Fire Services). New York’s Division of Consumer Protection suggests lighting charcoal in a charcoal chimney, with no lighter fluid at all.",
+            "Ashes: let the coals burn out completely, then cool for 48 hours before you get rid of them. If you must get rid of them sooner, soak them thoroughly in water and put them in a metal container (Massachusetts Department of Fire Services).",
+            "Propane grill: if you smell gas while cooking, turn the grill off and get away from it. Never use a match or lighter to look for a leak (Massachusetts Department of Fire Services)."
+          ]
+        },
+        {
+          "p": "Cooking over an open fire: build and put out the fire as in Fire. Fuel and propane cylinders: see Store fuel safely and Kerosene and propane heaters."
+        },
+        {
+          "link": "s:surv-fire",
+          "label": "Fire"
+        },
+        {
+          "link": "s:surv-store-fuel",
+          "label": "Store fuel safely"
+        },
+        {
+          "link": "s:surv-portable-heaters",
+          "label": "Kerosene and propane heaters"
+        },
+        {
+          "link": "p:burns",
+          "label": "Burns"
+        }
+      ]
+    },
+    {
+      "h": "Cook it through",
+      "blocks": [
+        {
+          "p": "The only way to tell if food is cooked enough to kill germs is a food thermometer. You can’t tell by its color and texture (CDC). Cook food to these temperatures before you take it off the heat, measured with a food thermometer (USDA)."
+        },
+        {
+          "table": {
+            "head": [
+              "Food",
+              "Cook to at least"
+            ],
+            "rows": [
+              [
+                "Beef, pork, veal and lamb steaks, chops and roasts (not wild game)",
+                "145°F (62.8°C), then rest at least 3 minutes"
+              ],
+              [
+                "Ham, fresh or smoked (uncooked)",
+                "145°F (62.8°C), then rest at least 3 minutes"
+              ],
+              [
+                "Ground meats",
+                "160°F (71.1°C)"
+              ],
+              [
+                "All poultry: breasts, whole bird, legs, thighs, wings, ground poultry, giblets and stuffing",
+                "165°F (73.9°C)"
+              ],
+              [
+                "Eggs",
+                "160°F (71.1°C)"
+              ],
+              [
+                "Fish and shellfish",
+                "145°F (62.8°C)"
+              ],
+              [
+                "Leftovers",
+                "165°F (73.9°C)"
+              ],
+              [
+                "Casseroles",
+                "165°F (73.9°C)"
+              ],
+              [
+                "All wild game and wild birds, in the thickest part",
+                "165°F (73.9°C): see Field dressing game"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Table from USDA; CDC gives the same. The wild game row is Field dressing game’s rule: “Cook all wild game and birds to at least 165°F in the thickest part, and fish to 145°F.” And: “Bear and wild boar can carry trichinella worms. Cook them to 165°F.”"
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "list": [
+            "Not eating it straight away? Keep cooked food hot, at 140°F (60°C) or above (FoodSafety.gov).",
+            "Leftovers and anything left out: how long they can wait is in Is it still good?"
+          ]
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        }
+      ]
+    },
+    {
+      "h": "Eat it cold",
+      "blocks": [
+        {
+          "list": [
+            "Store-bought canned food can be eaten from the can without warming (Ready.gov).",
+            "Keep food on hand that needs no refrigeration and can be eaten cold (USDA)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Water for cooking",
+      "blocks": [
+        {
+          "p": "Water for drinking, cooking and washing must be bottled, boiled or treated (CDC). How to boil or treat it is in Make water safe."
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "US Environmental Protection Agency (EPA), Power Outages and Indoor Air Quality (IAQ) (last updated February 18, 2026)",
+      "used": "Unvented combustion appliances should not be used to cook indoors; vented appliances can be used to cook indoors during a power outage if the vent does not require power; you can use a vented fireplace or vented wood stove set up for cooking; outdoor cooking at a safe distance from doors, windows and air intakes; never charcoal in a fireplace; CO alarms; gas stoves and ovens make carbon monoxide"
+    },
+    {
+      "name": "EPA, Sources of Combustion Products (last updated November 10, 2026)",
+      "used": "Exhaust fans over gas cooking stoves and ranges; a stove hood with a fan vented to the outdoors; never use a gas stove to heat your home"
+    },
+    {
+      "name": "Ready.gov (FEMA), Food (Suggested Food Supplies; undated web page)",
+      "used": "Charcoal grills and camp stoves are for outdoor use only; candle warmers, chafing dishes, fondue pots or a fireplace listed as alternative cooking sources (fireplace used, the others not); commercially canned food may be eaten out of the can without warming"
+    },
+    {
+      "name": "CDC, Preventing Food Poisoning (last reviewed November 24, 2025)",
+      "used": "A food thermometer is the only way to tell; color and texture don't tell you; its temperature table matches USDA's"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Safe Minimum Internal Temperature Chart (last updated April 14, 2025)",
+      "used": "Every row of the temperature table, with its Celsius figures and the 3-minute rest; measured with a food thermometer before taking food off the heat"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Keeping Food Safe During an Emergency (undated web page)",
+      "used": "Food that needs no refrigeration and can be eaten cold"
+    },
+    {
+      "name": "FoodSafety.gov, 4 Steps to Food Safety (last reviewed September 18, 2023)",
+      "used": "Keep food hot, 140°F or above, after cooking"
+    },
+    {
+      "name": "CDC, What to Do to Protect Yourself During a Power Outage (reviewed August 26, 2026)",
+      "used": "Safe water for drinking, cooking and personal hygiene is bottled, boiled or treated"
+    },
+    {
+      "name": "Massachusetts Department of Fire Services, Grilling Safety (undated web page)",
+      "used": "Always grill outdoors; 10 feet from the side of a building unless the manufacturer says closer; not under overhanging branches; away from deck railings; never unattended; children and pets three feet away; only charcoal starter fluid, never added to burning coals; ashes: burn out, cool 48 hours, or soak and put in a metal container; smell gas: turn off and get away; no matches or lighters to check for leaks"
+    },
+    {
+      "name": "New York State Department of State, Division of Consumer Protection, Consumer Alert on gas and charcoal grills (May 14, 2024)",
+      "used": "Only outside in a well-ventilated area; never indoors, in a garage, breezeway, carport, porch, next to your home or under a surface that will burn; charcoal makes CO until completely extinguished, so don't store a grill indoors with freshly used coals; light charcoal in a chimney; at least 3 feet from siding, deck rails and eaves (the app uses the 10 feet above)"
+    },
+    {
+      "name": "Carbon monoxide and burning fuel indoors, Wood stoves and fireplaces, Generators and Field dressing game (other topics in this app)",
+      "used": "Carbon monoxide’s Do first lines 3 and 4 and its CDC quotation on unvented stoves, word for word; the wood stove rules named, not reworded; Field dressing game’s 165°F rule for all wild game and its trichinella line"
+    }
+  ],
+  "reviewed": "2026-11-19",
+  "draft": true
+}

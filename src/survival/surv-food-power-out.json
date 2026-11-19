@@ -1,0 +1,208 @@
+{
+  "id": "surv-food-power-out",
+  "title": "Food when the power goes out",
+  "category": "food",
+  "keywords": [
+    "power outage food",
+    "power out food",
+    "food power outage",
+    "fridge",
+    "refrigerator",
+    "freezer",
+    "chest freezer",
+    "keep food cold",
+    "how long does a freezer stay cold",
+    "how long does the fridge stay cold",
+    "cooler",
+    "appliance thermometer",
+    "food outside in winter",
+    "food in the snow"
+  ],
+  "summary": "Keep the fridge and freezer doors shut. A fridge keeps food cold for about 4 hours; a full freezer about 48 hours, a half-full one about 24. Eat the most perishable food first, move fridge food into a cooler with ice after 4 hours, and never put food outside to keep it cold, even in winter. Check food in Is it still good? before you eat or refreeze it.",
+  "doFirst": [
+    "Keep the fridge and freezer doors shut. With the doors shut, a fridge keeps food cold for about 4 hours, a full freezer about 48 hours and a half-full freezer about 24 hours (CDC, FoodSafety.gov, USDA).",
+    "Eat the most perishable food first: leftovers, meat, poultry, and foods with milk, cream, sour cream or soft cheese (New York State Department of Health).",
+    "Power out for 4 hours and you have a cooler and ice? Put the fridge’s perishable food in the cooler, with ice or frozen gel packs, to keep it at 40°F (4°C) or below (CDC).",
+    "Don’t put food outside to keep it cold, even in winter (New York State Department of Health). Make ice outside instead (USDA).",
+    "Before you eat, cook or refreeze anything, check it in Is it still good? Never taste food to find out if it is safe (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "How long it stays cold",
+      "blocks": [
+        {
+          "table": {
+            "head": [
+              "With the door shut",
+              "Keeps food cold for"
+            ],
+            "rows": [
+              [
+                "Fridge",
+                "About 4 hours"
+              ],
+              [
+                "Full freezer",
+                "About 48 hours"
+              ],
+              [
+                "Half-full freezer",
+                "About 24 hours"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Times from CDC, FoodSafety.gov and USDA. New York State Department of Health gives the same: a fully filled freezer stays at freezing for about two days, a half-full one stays cold for about one day."
+        },
+        {
+          "list": [
+            "Open the doors only as much as you must to check the temperature quickly and get your food (New York State Department of Health).",
+            "In the freezer, group items together so they form an “igloo” and protect each other (New York State Department of Health). When the freezer is not full, keep items close together: it helps the food stay cold longer (USDA).",
+            "Keep meat together on one side of the freezer or on a tray, so that if it begins to thaw its juices don’t get on other food (New York State Department of Health).",
+            "Food with a lot of water in it, such as meat or fruit, stays frozen longer than food with little water, such as bread (New York State Department of Health)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Keep it cold longer",
+      "blocks": [
+        {
+          "list": [
+            "Put ice or frozen water containers in the fridge or freezer to keep the food cold (New York State Department of Health).",
+            "If you think the power will be out for a long time, get block ice for the fridge or freezer (CDC, New York State Department of Health).",
+            "If the power has been out for 4 hours and you have a cooler and ice, put the fridge’s perishable food in the cooler. Add ice or a cold source like frozen gel packs to keep it at 40°F (4°C) or below (CDC).",
+            "In freezing weather, make ice: fill buckets, empty milk cartons or cans with water and leave them outside to freeze. Then put the ice in your fridge, freezer or coolers (USDA)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Not outside, even in winter",
+      "blocks": [
+        {
+          "warn": "Don’t put your food outside to keep it cold, even in the winter (New York State Department of Health)."
+        },
+        {
+          "list": [
+            "Weather cold enough for fridge food is too warm for frozen food (New York State Department of Health).",
+            "Even when it is very cold outside, the sun can warm food enough for germs to grow, and frozen food can thaw in the sun (New York State Department of Health, USDA).",
+            "The temperature outside can change hour by hour; it will not protect fridge or freezer food (USDA).",
+            "Animals can get into food and contaminate it (New York State Department of Health). Never eat food that has come in contact with an animal (USDA)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Thermometers",
+      "blocks": [
+        {
+          "list": [
+            "Keep an appliance thermometer in the fridge and in the freezer (CDC, New York State Department of Health).",
+            "The fridge should be at 40°F (4°C) or below, and the freezer at 0°F (-18°C) or below (CDC).",
+            "Not sure a particular food is cold enough? Take its temperature with a food thermometer (USDA)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "After 4 hours, or when the power comes back",
+      "blocks": [
+        {
+          "p": "What to keep, what to refreeze and what to throw out, food by food, is in Is it still good? Check each food separately (FoodSafety.gov). When in doubt, throw it out (CDC)."
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        }
+      ]
+    },
+    {
+      "h": "A generator for the fridge or freezer",
+      "blocks": [
+        {
+          "p": "A generator can keep a fridge or freezer running. Read Generators before you use one. Its first rule: “Run it only outside, more than 20 feet (6 m) from windows, doors and vents, with the exhaust pointing away from the house (CDC, CPSC).”"
+        },
+        {
+          "link": "s:surv-generators",
+          "label": "Generators"
+        }
+      ]
+    },
+    {
+      "h": "Get ready before it happens",
+      "blocks": [
+        {
+          "list": [
+            "Keep appliance thermometers in the fridge and freezer (CDC).",
+            "Freeze containers of water and gel packs to help keep food at 40°F (4°C) or below (CDC).",
+            "Have a cooler and frozen gel packs ready in case you have to take food out of the fridge to keep it cold (CDC).",
+            "Keep food on hand that needs no refrigeration and can be eaten cold or heated on an outdoor grill (USDA). Keep a hand-held can opener (USDA)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Everything on food",
+      "blocks": [
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
+          "link": "s:surv-food-poisoning",
+          "label": "Food poisoning and botulism"
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-food-and-wild-plants",
+          "label": "Food and wild plants"
+        },
+        {
+          "link": "s:surv-traps-and-fishing",
+          "label": "Traps and fishing"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Keep Food Safe After a Disaster or Emergency (last reviewed November 24, 2025)",
+      "used": "Appliance thermometers; fridge 40°F or below, freezer 0°F or below; freeze containers of water and gel packs; cooler and frozen gel packs ready; dry or block ice if the power could be out a long time; doors closed; 4 hours in a fridge, 48 hours in a full freezer, 24 hours in a half-full freezer; after 4 hours, perishable food into a cooler with ice or a cold source to keep it at 40°F or below; never taste food; when in doubt, throw it out"
+    },
+    {
+      "name": "CDC, What to Do to Protect Yourself During a Power Outage (reviewed August 26, 2026)",
+      "used": "Keep fridge and freezer doors closed; full freezer 48 hours (24 if half full); fridge up to 4 hours"
+    },
+    {
+      "name": "FoodSafety.gov (US Department of Health and Human Services), Three Ways to Keep Food Safe When You Lose Power (modified September 21, 2023)",
+      "used": "Fridge about 4 hours with the door closed; full freezer about 48 hours, 24 if half full; check each food item separately"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Keeping Food Safe During an Emergency (undated web page)",
+      "used": "Fridge about 4 hours unopened; full freezer about 48 hours, 24 if half full; keep items close together in a freezer that is not full; frozen food can thaw in the sun even when it is very cold; outside temperature varies hour by hour and will not protect food; animals; never eat food an animal has touched; make ice outside in buckets, milk cartons or cans and put it in the fridge, freezer or coolers; take a food's temperature with a food thermometer; food that can be eaten cold or heated on the outdoor grill; hand-held can opener"
+    },
+    {
+      "name": "New York State Department of Health, The Fridge and Freezer: When the Power is Out (revised October 2023)",
+      "used": "Doors closed, opened only to check the temperature and get food; appliance thermometer; fridge about 4 hours; full freezer about two days, half-full about one day; ice or frozen water containers; dry or block ice for several days; eat the most perishable items first (leftovers, meat, poultry, foods with milk, cream, sour cream or soft cheese); high-water foods stay frozen longer than bread; group items into an igloo; meat on one side or a tray; never put food outside, even in winter: too warm for frozen food, sun, animals"
+    },
+    {
+      "name": "Generators (another topic in this app)",
+      "used": "Its first Do first line, quoted word for word"
+    }
+  ],
+  "reviewed": "2026-11-19",
+  "draft": true
+}

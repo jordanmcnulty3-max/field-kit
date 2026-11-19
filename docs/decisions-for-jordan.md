@@ -862,3 +862,68 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    that is both is turned off, because CDC's rule comes first and the vent rule is for a furnace that is running. FEMA's 2024
    line that the health risk from turning off HVAC systems might be greater than the contamination risk in extreme
    temperatures is quoted on the same page (D88). Say if the group wants such a furnace kept running in extreme cold.
+
+Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in docs/v7.5-rulings.md.
+
+117. **Cooking indoors on a gas or propane range, or on a vented wood stove or fireplace (surv-food-cooking-no-power).** The
+   checked topics forbid heating the house with a gas oven or range and cooking on a stove or fireplace that isn't vented; they
+   didn't say whether cooking on a range lit by hand, or on a vented wood stove, is allowed. EPA (Power Outages and Indoor Air
+   Quality, 2026): "You can use a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up
+   for cooking", and vented appliances can be used to cook indoors in an outage "if the vent does not require power to operate".
+   No opened source (EPA, CDC, Ready.gov, New York State Public Service, NYC Emergency Management, Maine CDC) says in words that
+   you can cook on a gas or propane range in a power outage; they say only never to heat with one. Today: a vented fireplace or
+   wood stove set up for cooking is allowed under EPA's conditions and every rule in Wood stoves and fireplaces, with CO alarms;
+   a gas or propane range is not, labelled as this app's own caution (EPA's normal-times advice for ranges is an exhaust fan
+   vented outdoors, which needs power); otherwise cook outdoors or eat food cold. Cost: households without a wood stove or
+   fireplace cook outdoors in winter or eat cold food. Say if the group wants the range allowed, and under what conditions (for
+   example a window open, a CO alarm in the kitchen, short use only, never unattended, never for heat).
+118. **Candle warmers, chafing dishes and fondue pots (surv-food-cooking-no-power).** Ready.gov lists them, with a fireplace,
+   as alternative cooking sources in an emergency. They burn fuel in the room, and no opened source says how to use them indoors
+   without carbon monoxide building up. Today: labelled app caution, don't use them while the power is out. Say if the group
+   wants them allowed.
+119. **How far a grill stays from the house (surv-food-cooking-no-power).** Massachusetts Department of Fire Services: 10 feet from
+   the side of a building unless the maker's instructions say it can be closer. New York's Division of Consumer Protection: at
+   least 3 feet from siding, deck rails and eaves, and never next to your home. EPA: "a safe distance" from doors, windows and air
+   intakes. Today: 10 feet (the more cautious). Say if the group wants New York's figure.
+120. **A cold house and the fridge's 4 hours (surv-food-still-good).** CDC: throw out perishable fridge food "after 4 hours without
+   power or without a cold source like ice". In a Central New York winter the kitchen itself may be near 40°F, and a fridge
+   thermometer may still read 40°F or below after 4 hours. No source says a cold room counts as a cold source; New York State
+   Department of Health says never to put food outside, even in winter. Today: the 4-hour rule stands unless the food was kept
+   with ice or another cold source and checked at 40°F or below. Say if the group wants a thermometer reading alone to be enough.
+121. **Food, cans and dishes after a flood (surv-food-still-good).** CDC cleans undamaged cans either by a bleach soak (1 cup of
+   bleach in 5 gallons of water, 15 minutes) or by boiling 2 minutes, and sanitizes flooded dishes and food surfaces with 1 cup
+   of bleach in 5 gallons. That mix is stronger than Clean and disinfect's food mix and is not one of the app's two mixes. Today:
+   the topic gives CDC's boiling method for cans only and gives no sanitizing step for flooded dishes. Say whether the group wants
+   CDC's flood mix added to Clean and disinfect (a change to a checked topic).
+122. **Botulism with no hospital (surv-food-poisoning). Medical professional.** CDC and New York State Department of Health say
+   only to see a doctor or go to the emergency room immediately; botulism needs antitoxin and may need a breathing machine. No
+   opened source gives anything a lay person can do without a hospital, so there is no botulism protocol. Today: the topic says so,
+   and, labelled as this app's reading, says to keep trying to reach medical care and to use the CPR protocols if the person stops
+   responding and is not breathing normally. Ask a medical professional what a group with no hospital should do (for example
+   about rescue breathing for hours, swallowing, or giving food and drink).
+123. **Cleaning up a spill from a suspect can or jar (surv-food-poisoning).** The National Center for Home Food Preservation uses
+   1 part household bleach to 5 parts water, left 30 minutes, applied twice, for surfaces, can openers and clothing. That is
+   much stronger than either of the app's two mixes. Today: the topic gives gloves, keeping it off the skin and bagging paper
+   towels, and says the source's bleach clean-up is not in the app yet. Say if the group wants it added (it would be a third mix).
+124. **Other jars from the same batch (surv-food-poisoning).** No opened source says what to do with them. Today: labelled app
+   caution: if one container from a batch shows any warning sign, or someone got sick after eating from it, treat the whole batch
+   as suspect. Say if the group wants a different rule.
+125. **When botulism starts (surv-food-poisoning).** CDC's food poisoning table: 18 to 36 hours. New York State Department of Health:
+   typically 12 to 72 hours, ranging from 2 hours to 8 days, and up to 30 days for babies. Today: New York's wider range. No
+   choice needed unless the group wants CDC's shorter one.
+126. **No food thermometer (surv-food-cooking-no-power). Medical professional.** CDC: a food thermometer is the only way to tell,
+   except for seafood; CDC accepts fish with fins cooked "until the flesh is opaque and separates easily with a fork". The pack
+   does not offer look as a test. Today: the table and a thermometer only; nothing for people without one. Say if the group wants
+   CDC's fish exception shown; ask a medical professional whether anything else is safe to say without a thermometer. (Keep a
+   food thermometer in the kit.)
+127. **Dry ice (surv-food-power-out).** CDC and New York State Department of Health suggest dry or block ice for a long outage.
+   USDA: 50 pounds holds an 18-cubic-foot full freezer for 2 days; Ready.gov: 25 pounds keeps a 10-cubic-foot freezer below
+   freezing for 3 to 4 days. No handling source could be opened. Today: dry ice is not mentioned; block ice, homemade ice and
+   coolers are. Say if the group wants it added once a handling source is opened.
+128. **"Unusual taste or smell" (surv-food-still-good).** New York State Department of Health's botulism page says you can lower the
+   risk by "not eating foods with an unusual taste or smell". CDC: never taste food to see if it is safe. Today: CDC's rule; a bad
+   smell or look is only ever a reason to throw food out. No choice needed.
+129. **Home-canned food from someone else (surv-food-still-good).** CDC: don't eat home-canned food if you don't know whether safe
+   canning guidelines were followed; if you do, boil home-canned tomatoes and low-acid food 10 minutes (plus 1 minute per 1,000
+   feet) before eating. Today: both, in that order. Say if the group wants a stricter rule (for example, never eat home-canned
+   food you didn't see canned).

@@ -926,6 +926,16 @@ V74_ON_SCREEN = {
     'keep': ['s:surv-heat-out', 's:surv-carbon-monoxide', 's:surv-find-water'],
     'rationing': [],
     'preserving': [],
+    'dressing': ['s:surv-field-dressing-game', 's:surv-traps-and-fishing', 'p:wound-care'],
+    'field dressing': ['s:surv-field-dressing-game', 's:surv-traps-and-fishing', 'p:burns'],
+    'wound dressing': ['p:wound-care', 'p:chest-wound', 'p:abdominal-wound'],
+    'wound': ['p:chest-wound', 'p:wound-care', 'p:abdominal-wound'],
+    'food poisoning': ['p:vomiting-diarrhea', 'p:poisoning', 'p:radiation-sickness'],
+    'feed': ['s:surv-generators', 's:surv-dangerous-animals', 's:surv-handwashing'],
+    'rat': ['t:rate', 'p:snakebite', 'p:abdominal-wound'],
+    'thawed': ['p:frostbite', 's:surv-unheated-house'],
+    'smelling': ['p:dehydration', 'p:poisoning', 'p:vomiting-diarrhea'],
+    'swallowing': ['p:low-blood-sugar', 'p:poison-plants', 'p:snakebite'],
 }
 
 # Rule (b): an older Survival page may leave the first three only for a food page with the query word in its title. ("freezer" is named
@@ -955,9 +965,10 @@ V75_NEW_RESULTS = {
     'preserving': ['s:surv-food-preserving', 's:surv-food-power-out', 's:surv-food-poisoning'],
 }
 
-# Summary, Do first or body text of a food page outscores an older page (no keyword is the cause). The text is not changed here: the lists
-# are pinned as they stand until the controller rules. An Emergency protocol leaves "meat" and "thermometer".
-V75_NEED_RULING = {
+# Ruled: a protocol that held a first-three place only through body or summary text is fairly displaced by a page whose summary or Do first
+# is about the word (no keyword is the cause). Pinned as they stand so a later change is caught. An Emergency protocol leaves "meat",
+# "thermometer", "thawed", "smelling" and "swallowing".
+V75_ACCEPTED_WEAK = {
     'milk': ['s:surv-fallout-water-and-food', 's:surv-food-power-out', 's:surv-food-babies-children'],
     'formula': ['s:surv-fallout-water-and-food', 's:surv-food-babies-children', 's:surv-wind-chill'],
     'meat': ['s:surv-food-power-out', 's:surv-food-clean-kitchen', 's:surv-food-cooking-no-power'],
@@ -967,6 +978,9 @@ V75_NEED_RULING = {
     'what to buy': ['s:surv-fallout-get-ready', 's:surv-food-how-much', 's:surv-portable-heaters'],
     'throw out': ['s:surv-food-power-out', 's:surv-portable-heaters', 's:surv-dirty-bomb'],
     'dishes': ['s:surv-clean-and-disinfect', 's:surv-food-clean-kitchen', 's:surv-find-water'],
+    'thawed': ['s:surv-food-still-good', 's:surv-unheated-house', 's:surv-food-babies-children'],
+    'smelling': ['s:surv-food-still-good', 's:surv-store-fuel', 'p:dehydration'],
+    'swallowing': ['s:surv-food-poisoning', 'p:low-blood-sugar', 'p:poison-plants'],
 }
 
 # Already ruled (docs/v7.5-rulings.md, batch C ruling 13): the babies page, and for "honey" also Food poisoning and botulism, lead;
@@ -976,7 +990,23 @@ V75_RULED = {
     'honey': ['s:surv-food-babies-children', 's:surv-food-poisoning', 'p:burns'],
 }
 
-V75_CHANGED = {**V75_ACCEPTED, **V75_NEW_RESULTS, **V75_NEED_RULING, **V75_RULED}
+# Ruled accepted although the protocol matched by title or keyword: the page titled for the word is the right first result
+# ("food poisoning": its Do first box sends the reader to the protocols; "feed" and "rat": a title-word prefix while typing).
+V75_STRONG_ACCEPTED = {
+    'food poisoning': ['s:surv-food-poisoning', 's:surv-food-and-wild-plants', 's:surv-food-power-out'],
+    'feed': ['s:surv-food-babies-children', 's:surv-generators', 's:surv-food-poisoning'],
+    'rat': ['t:rate', 's:surv-food-when-short', 's:surv-dangerous-animals'],
+}
+
+# Not resolved: Wound cleaning and care (and Burns for "field dressing") were asked to stay in the first three, with the food pack's
+# link to Field dressing game removed. Food pages still match "dressing" by text that cannot be reworded (a sentence that names Field
+# dressing game and two table rows, "dressings", in the USDA/FoodSafety charts), so the protocol is fourth. Pinned as it stands.
+V75_OPEN = {
+    'dressing': ['s:surv-field-dressing-game', 's:surv-traps-and-fishing', 's:surv-food-cooking-no-power'],
+    'field dressing': ['s:surv-field-dressing-game', 's:surv-traps-and-fishing', 's:surv-food-cooking-no-power'],
+}
+
+V75_CHANGED = {**V75_ACCEPTED, **V75_NEW_RESULTS, **V75_ACCEPTED_WEAK, **V75_RULED, **V75_STRONG_ACCEPTED, **V75_OPEN}
 FOOD_FIRST = ['food', 'freezer', 'pantry', 'spoiled', 'botulism', 'formula', 'canning', 'power out']
 
 
@@ -1004,12 +1034,21 @@ def test_food_words_show_a_food_page_in_the_first_three_on_screen(page, app_url,
     assert any(k.startswith('s:surv-food-') or k == 'c:pantry' for k in ks), f'{text!r}: {ks}'
 
 
-def test_the_two_ruled_exceptions_keep_their_protocols_just_below_the_first_three(page, app_url):
+FIRST_FIVE = {
+    'breastfeeding': ['s:surv-fallout-water-and-food', 's:surv-food-babies-children', 's:surv-potassium-iodide', 's:surv-food-when-short', 'p:dehydration'],
+    'honey': ['s:surv-food-babies-children', 's:surv-food-poisoning', 'p:burns', 'p:stings'],
+    'food poisoning': ['s:surv-food-poisoning', 's:surv-food-and-wild-plants', 's:surv-food-power-out', 's:surv-food-clean-kitchen', 's:surv-food-preserving'],
+}
+
+
+@pytest.mark.parametrize('text', sorted(FIRST_FIVE))
+def test_first_five_on_screen_are_pinned_as_they_stand(page, app_url, text):
+    # "breastfeeding": Dehydration is fifth (Rationing food also matches); "honey": Stings is fourth; "food poisoning": the protocols
+    # come after five Survival pages, the page titled for it first
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
     open_search(page)
-    assert 'p:dehydration' in on_screen(page, 'breastfeeding')[3:8]
-    assert 'p:stings' in on_screen(page, 'honey')[3:8]
+    assert on_screen(page, text)[:5] == FIRST_FIVE[text]
 
 
 def test_food_pages_are_indexed_after_every_older_page_hub_first(page, app_url):

@@ -721,7 +721,7 @@ def _title_of(key):
     return _shipped(folder)[i]['title']
 
 
-SEVEN = {'surv-priorities': 's:surv-food-power-out', 'surv-stomach-illness-in-a-group': 's:surv-food-clean-kitchen',
+SEVEN = {'surv-priorities': 's:surv-food-how-much', 'surv-stomach-illness-in-a-group': 's:surv-food-clean-kitchen',
          'surv-generators': 's:surv-food-power-out', 'surv-fallout-water-and-food': 's:surv-food-still-good',
          'surv-fallout-get-ready': 's:surv-food-how-much', 'surv-water-store': 's:surv-food-how-much',
          'surv-heat-out': 's:surv-food-power-out'}
@@ -819,3 +819,9 @@ def test_the_seven_checked_topics_differ_from_v74_release_by_one_added_link_bloc
         if k != 'sections':
             assert now[k] == was[k], f'{tid}: {k} changed'
     assert set(now) == set(was)
+
+
+def test_the_food_pack_does_not_link_field_dressing_game_until_v76():
+    # Its label puts the food pages above Wound cleaning and care for "dressing" (docs/v7.5-rulings.md); the link returns with v7.6
+    for tid in [k[2:] for k in FOOD]:
+        assert 's:surv-field-dressing-game' not in _links(_shipped('survival')[tid]), tid

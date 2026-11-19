@@ -639,12 +639,12 @@ def _main_text(name):
 
 
 @pytest.mark.parametrize('tid,target', sorted(SIX.items()))
-def test_the_six_checked_topics_differ_from_v73_release_by_one_added_link_block(tid, target):
+def test_the_six_checked_topics_differ_from_v73_release_by_one_added_link_block_apart_from_the_food_pack_link(tid, target):
     now, was = _shipped('survival')[tid], _main_text(tid)
     extra = []
     now_sections = json.loads(json.dumps(now['sections']))
     assert len(now_sections) == len(was['sections']), tid
-    if tid in SEVEN:   # the food pack (v7.5) adds its own one block to some of these topics: it is checked against v7.4, below
+    if tid in SEVEN:   # the food pack (v7.5) also adds one link block to three of the six: filtered out here, checked against v7.4 below
         for sn in now_sections:
             sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != SEVEN[tid]]
     for sn, sw in zip(now_sections, was['sections']):

@@ -2,7 +2,10 @@
   "id": "surv-food-clean-kitchen",
   "title": "Keep food clean",
   "category": "food",
-  "keywords": [],
+  "keywords": [
+    "cross contaminate",
+    "rinsing produce"
+  ],
   "summary": "Keeping food clean with little water: wash your hands with soap before you touch food. Keep raw meat, poultry, seafood and eggs apart from food that won’t be cooked. Wash dishes, counters and cutting boards, sanitize them with the food mix and let them air dry, by the steps in Clean and disinfect, using safe water. Anyone who has had vomiting or diarrhea prepares no food until at least 2 days after it stops.",
   "doFirst": [
     "Wash your hands with soap and the cleanest water you have before, during and after preparing food, and before eating (CDC, FoodSafety.gov). How, with little water: Washing hands with little water.",

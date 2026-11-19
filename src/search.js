@@ -67,7 +67,10 @@
     { topic: 'radiation', hub: 's:surv-fallout-warning', protocols: ['radiation-decontamination', 'radiation-sickness'], checklists: ['fallout-shelter-kit'] },   // v7.4
     { topic: 'food', hub: 's:surv-food-power-out', protocols: [], checklists: ['pantry'] },   // v7.5
   ];
-  const packOf = (kind, v) => PACKS.findIndex(k => kind === 'topic' ? k.topic === v : k[kind === 'protocol' ? 'protocols' : 'checklists'].includes(v));
+  // The index of the pack a document belongs to, or -1 for a document that is in none (those keep the old order, before every pack).
+  const packOfTopic = category => PACKS.findIndex(k => k.topic === category);
+  const packOfProtocol = id => PACKS.findIndex(k => k.protocols.includes(id));
+  const packOfChecklist = id => PACKS.findIndex(k => k.checklists.includes(id));
 
   function build() {
     const out = [], packed = PACKS.map(() => ({ protocols: [], topics: [], checklists: [] }));
@@ -82,7 +85,7 @@
         if (s && s.text) parts.push(s.text);
         if (s && s.detail) parts.push(Array.isArray(s.detail) ? s.detail.join(' ') : s.detail);
       }
-      const k = packOf('protocol', p.id);
+      const k = packOfProtocol(p.id);
       (k >= 0 ? packed[k].protocols : out).push(withBody({ key: 'p:' + p.id, title: p.title, kind: adv ? 'Advanced' : 'Emergency', draft: p.draft === true, fields: f }, parts));
     }
     for (const t of (FK.tools && FK.tools.list ? FK.tools.list() : [])) {
@@ -91,7 +94,7 @@
         fields: [field(W.title, t.label), field(W.keywords, TOOL_WORDS[t.name] || '')] });
     }
     for (const t of FK.survival ? FK.survival.topics() : []) {
-      const k = t ? packOf('topic', t.category) : -1;
+      const k = t ? packOfTopic(t.category) : -1;
       (k >= 0 ? packed[k].topics : out).push(topicDoc(t));
     }
     for (const c of survList('checklists')) {
@@ -99,7 +102,7 @@
       const f = [field(W.title, c.title)];
       const parts = [];
       for (const it of Array.isArray(c.items) ? c.items : []) if (it && str(it.text)) parts.push(it.text);
-      const k = packOf('checklist', c.id);
+      const k = packOfChecklist(c.id);
       (k >= 0 ? packed[k].checklists : out).push(withBody({ key: 'c:' + c.id, title: c.title, kind: 'Checklist', draft: c.draft === true, fields: f }, parts));
     }
     for (const u of survList('tools')) {

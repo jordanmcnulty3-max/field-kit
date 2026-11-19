@@ -511,6 +511,14 @@ def test_first_open_is_fast_with_sixty_protocols(page, app_url):
     assert ms < 10, ms
 
 
+def test_first_query_on_real_shipped_data_is_fast(page, app_url):
+    """Guards the index cost against content growth: every protocol, topic and checklist that ships is indexed by the first query."""
+    page.goto(app_url + '#/emergency')   # no fixtures: whatever ships
+    page.wait_for_function('window.FK && FK.search')
+    ms = page.evaluate("(() => { const t = performance.now(); FK.search.query('protocol'); return performance.now() - t; })()")
+    assert ms < 50, ms
+
+
 def test_real_shipped_data_found_by_title_and_first_keyword(page, app_url):
     page.goto(app_url + '#/emergency')   # no fixtures: whatever protocols ship
     page.wait_for_function('window.FK && FK.search')

@@ -40,7 +40,9 @@ PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-
                  'surv-generators': {'generator-placement'}, 'surv-wood-stoves-fireplaces': {'heater-clearance'},
                  'surv-heat-out': {'warm-room'},
                  # radiation pack Task 7: where to shelter and coming inside, drawn from their checked text
-                 'surv-fallout-where-to-shelter': {'fallout-shelter-spots'}, 'surv-fallout-coming-inside': {'fallout-coming-inside'}}
+                 'surv-fallout-where-to-shelter': {'fallout-shelter-spots'}, 'surv-fallout-coming-inside': {'fallout-coming-inside'},
+                 # food pack Task 7: power cut hold times and the signs of a bad can or jar, drawn from their checked text
+                 'surv-food-power-out': {'food-fridge-freezer'}, 'surv-food-still-good': {'food-cans-to-discard'}}
 
 
 def new_topics():

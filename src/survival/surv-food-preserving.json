@@ -1,0 +1,244 @@
+{
+  "id": "surv-food-preserving",
+  "title": "Preserving food",
+  "category": "food",
+  "keywords": [
+    "food preservation",
+    "herb bundles",
+    "dehydrator",
+    "curing",
+    "jerky"
+  ],
+  "summary": "This page gives no method for canning, curing or smoking food, or for drying meat, fruit or vegetables; herbs are the one food it teaches you to dry. Don’t try to dry meat to save it: this page gives no method, and bacteria that cause illness are likely to survive the dry heat of a warm oven or a food dehydrator (USDA). Thawing meat is cooked and eaten, or thrown out, by Is it still good? and Cook without power. Pressure canning by tested instructions is the only recommended way to can vegetables, meat, poultry or fish; canning done wrong can cause botulism, which you can’t see, smell or taste. A failing freezer: keep it shut and check its food in Is it still good?",
+  "doFirst": [
+    "Freezer failing? Keep the door shut and follow Food when the power goes out. Before you refreeze, cook or eat anything from it, check it in Is it still good?",
+    "This app’s caution: don’t try canning for the first time now. Pressure canning is the only recommended method for low-acid food such as vegetables, meat, poultry and fish, and a boiling water canner will not protect against botulism (CDC).",
+    "Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC). The warning signs are in Is it still good?",
+    "Don’t try to dry meat to save it: this page gives no method. Bacteria that cause illness are likely to survive the dry heat of a warm oven, and especially a food dehydrator, and sun drying is not recommended for meat jerky (USDA). Thawing meat: check it in Is it still good?, then cook and eat it by Cook without power, or throw it out."
+  ],
+  "sections": [
+    {
+      "h": "A freezer that is failing",
+      "blocks": [
+        {
+          "p": "How long a freezer keeps food frozen with the door shut, and how to keep it cold longer with ice and coolers, is in Food when the power goes out. Don’t put your food outside to keep it cold, even in the winter (New York State Department of Health)."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        },
+        {
+          "p": "What to refreeze, cook or throw out is in Is it still good? Its rule: “once the freezer is above 40°F (4°C), throw out thawed food (New York State Department of Health, CDC). Food that still has ice crystals or is at 40°F (4°C) or below can be refrozen or cooked (CDC, FoodSafety.gov).”"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "p": "Cooking it, and the temperatures to cook it to: Cook without power."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        }
+      ]
+    },
+    {
+      "h": "Canning: not something to learn now",
+      "blocks": [
+        {
+          "warn": "You cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly (CDC)."
+        },
+        {
+          "list": [
+            "Home-canned vegetables are the most common cause of botulism outbreaks in the United States (CDC).",
+            "Low-acid foods are all fresh vegetables, figs, meats, poultry, fish, seafood and some tomatoes (CDC).",
+            "Botulism bacteria grow in moist, low-acid food with less than 2 percent oxygen, between 40°F and 120°F (4°C and 49°C), and can make their deadly toxin within 3 to 4 days (National Center for Home Food Preservation, from the USDA guide).",
+            "Their spores are very hard to destroy at boiling-water temperatures. Low-acid food has to be heated to 240°F to 250°F (116°C to 121°C), which takes a pressure canner (National Center for Home Food Preservation, from the USDA guide).",
+            "Pressure canning is the only recommended method for low-acid foods. A boiling water canner will not protect against botulism. Don’t use an electric multi-cooker, even one with a “canning” button (CDC).",
+            "Safe canning means following tested instructions exactly: the USDA Complete Guide to Home Canning, or recipes that follow it (CDC)."
+          ]
+        },
+        {
+          "p": "This app gives no canning method. Learn it in normal times, from the USDA Complete Guide to Home Canning (CDC names it) and the National Center for Home Food Preservation. Land-grant colleges often teach preserving too (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "Home-canned food from someone else",
+      "blocks": [
+        {
+          "warn": "Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC)."
+        },
+        {
+          "p": "From the canning section above: “Safe canning means following tested instructions exactly: the USDA Complete Guide to Home Canning, or recipes that follow it (CDC).”"
+        },
+        {
+          "p": "The signs that a can or jar is unsafe, and what to do before eating home-canned food you know was canned by safe guidelines, are in Is it still good? Getting rid of a suspect can or jar safely, and the signs of botulism, are in Food poisoning and botulism."
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "link": "s:surv-food-poisoning",
+          "label": "Food poisoning and botulism"
+        }
+      ]
+    },
+    {
+      "h": "Drying meat",
+      "blocks": [
+        {
+          "warn": "USDA: “The U.S. Department of Agriculture (USDA) Meat and Poultry Hotline’s current recommendation for making jerky safely is to heat meat to 160°F and poultry to 165°F before the dehydrating process.” Most dehydrator instructions don’t include this step, and a dehydrator may not reach temperatures high enough to heat meat to 160°F (71.1°C) or 165°F (73.9°C) (USDA). Sun drying is not recommended for making meat jerky, because there is no steady heat source and animals, insects, dust and bacteria can contaminate it (USDA)."
+        },
+        {
+          "list": [
+            "Several outbreaks of E. coli O157:H7 have occurred in venison jerky (National Center for Home Food Preservation).",
+            "USDA’s jerky page says there are other special considerations for jerky from venison or other wild game: venison can be heavily contaminated with fecal bacteria, and deer carcasses are usually not chilled quickly the way beef is, so bacteria can multiply. It gives no heating figure of its own for game. This app’s reading: the USDA figures above are not for wild game. This page gives no temperature for drying game. Cook without power cooks all wild game and wild birds to at least 165°F (73.9°C) in the thickest part.",
+            "Bacteria that cause illness are likely to survive the dry heat of a warm oven, and especially the 130 to 140°F (54 to 60°C) of a food dehydrator (USDA).",
+            "Don’t try to dry meat to save it. This page gives no method for drying meat, including game. Thawing meat goes by Is it still good? and Cook without power."
+          ]
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        }
+      ]
+    },
+    {
+      "h": "Drying fruit and vegetables",
+      "blocks": [
+        {
+          "list": [
+            "Vegetables are not recommended for drying outdoors: they are low in sugar and acid, which increases the risk of spoilage (National Center for Home Food Preservation).",
+            "Fruit dried outdoors needs hot, dry, breezy days, a minimum temperature of 85°F (29°C), humidity below 60 percent, several days, screens safe for contact with food (not galvanized “hardware cloth”, copper or aluminum) and a cover against birds and insects (National Center for Home Food Preservation), and dried fruit then needs a heat or freezer treatment against insect eggs (Penn State Extension).",
+            "Penn State Extension: “While sun drying works in dry climates, the high humidity in Pennsylvania makes this method impractical here.”"
+          ]
+        },
+        {
+          "p": "This page gives no method for drying fruit or vegetables: the sources’ methods need an oven, a dehydrator or a freezer, or outdoor weather that Penn State calls impractical where humidity is high. Learn drying in normal times from the National Center for Home Food Preservation or Penn State Extension’s Let’s Preserve: Drying Fruits and Vegetables."
+        }
+      ]
+    },
+    {
+      "h": "Air-drying herbs",
+      "blocks": [
+        {
+          "p": "Herbs are the one food this page teaches you to dry without power, from the National Center for Home Food Preservation (NCHFP) and Penn State Extension. For air-drying to be successful, humidity must be low and good air circulation must be available (Penn State). Sun drying is not recommended: herbs lose flavor and color (NCHFP)."
+        },
+        {
+          "steps": [
+            "Pick herbs just before the flowers first open, in the morning after the dew has dried (NCHFP, Penn State). Don’t let them lie in the sun or unattended after picking (NCHFP).",
+            "Start with clean counters and utensils, and wash your hands with soap (Penn State). Throw away bruised, soiled or imperfect leaves and stems, and check the plants, especially seeds, for insects (NCHFP, Penn State).",
+            "Rinse them in cool water, gently shake off the water, and pat them dry with a paper towel. Remove as much moisture as possible (Penn State).",
+            "Sturdy herbs such as rosemary, sage, thyme, summer savory and parsley: tie them into small bundles and hang them to air dry, in a dry place with good air circulation (NCHFP, Penn State). A rubber band tightens as the stems dry, so they don’t fall out (Penn State).",
+            "Tender-leaf herbs such as basil, oregano, tarragon, lemon balm and the mints have a lot of moisture and will mold if not dried quickly (NCHFP, Penn State). Hang a small bunch inside a paper bag with holes torn or punched in its sides, close the top with a rubber band, and place it where air currents will circulate through the bag. Large amounts will mold (NCHFP).",
+            "Hang them away from the sink, stove or dishwasher, where there is a lot of moisture. Keep dust off with a paper bag punched with holes (Penn State).",
+            "They are dry when the leaves are crispy and crumble easily between the fingers. Make sure they are completely dry, to prevent mold in storage (Penn State, NCHFP).",
+            "Treat them against insects: Penn State says air-dried herbs and seeds need heating at 160°F (71°C) for 30 minutes, or freezing at 0°F (-17°C) or lower for at least 48 hours, to destroy insects and insect eggs. The heat method reduces flavor and is not suitable for seeds you want to plant (Penn State).",
+            "Store them in airtight containers in a cool, dry, dark place, such as a cupboard or drawer away from the stove and sink, not on a windowsill (Penn State, NCHFP). Most dried herbs keep well for up to a year (Penn State)."
+          ]
+        },
+        {
+          "p": "The insect step needs an oven or a freezer. NCHFP’s herb method does not include it; Penn State’s does, and this page follows Penn State. This app’s own caution for herbs that have not had the insect step: don’t put them into long storage; keep them apart from other stored food, look them over before each use, and throw them out if you see insects, webbing or mold."
+        }
+      ]
+    },
+    {
+      "h": "Salting and curing",
+      "blocks": [
+        {
+          "p": "No official source opened for this app teaches a beginner to salt or cure meat or fish. The National Center for Home Food Preservation’s guidance says to cure meat in a refrigerator below 40°F (4°C), and warns that using sodium nitrite in place of salt in a curing recipe can be a lethal dose. This app gives no method."
+        }
+      ]
+    },
+    {
+      "h": "Smoking",
+      "blocks": [
+        {
+          "p": "“Smoke itself, without proper cooking, is not an effective food preservative.” (National Center for Home Food Preservation.) It gives storage times for cured or smoked poultry and lightly cured fish only in a refrigerator or freezer, and says modern fish curing and smoking recipes make a highly perishable product that rarely keeps better than the raw fish (National Center for Home Food Preservation). This app gives no method. Cooking outdoors safely is in Cook without power."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        }
+      ]
+    },
+    {
+      "h": "Cold storage",
+      "blocks": [
+        {
+          "p": "Keeping food cold without a working fridge or freezer, with ice and coolers and never outdoors, is in Food when the power goes out. Root cellars and storing garden crops are not covered in this app."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Storing food"
+        }
+      ]
+    },
+    {
+      "h": "Learning in normal times",
+      "blocks": [
+        {
+          "p": "The National Center for Home Food Preservation has information for safely canning, preserving, pickling, fermenting, freezing, drying, curing and smoking, and storing food (CDC). Learn from it, the USDA Complete Guide to Home Canning and an extension service before you need it."
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Storing food"
+        },
+        {
+          "link": "s:surv-food-how-much",
+          "label": "How much food to store, and what"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Home-Canned Foods (botulism prevention; April 25, 2024)",
+      "used": "Low-acid foods most common source; home-canned vegetables most common cause of outbreaks; low-acid foods listed; pressure canning only recommended method; boiling water canner will not protect; no electric multi-cooker; follow the USDA Complete Guide to Home Canning; land-grant colleges; the National Center for Home Food Preservation for canning, preserving, pickling, fermenting, freezing, drying, curing, smoking and storing"
+    },
+    {
+      "name": "National Center for Home Food Preservation (University of Georgia), Ensuring Safe Canned Foods (adapted from USDA’s Complete Guide to Home Canning, Agriculture Information Bulletin No. 539, revised 2015)",
+      "used": "Toxin within 3 to 4 days in moist, low-acid food between 40° and 120°F with less than 2 percent oxygen; spores very hard to destroy at boiling-water temperatures; low-acid foods sterilized at 240° to 250°F, attainable with pressure canners"
+    },
+    {
+      "name": "National Center for Home Food Preservation, Sun Drying (from So Easy to Preserve, 6th ed., 2014, University of Georgia Cooperative Extension)",
+      "used": "Fruit safe to dry outdoors when conditions are favorable; screens safe for food, avoid hardware cloth, copper and aluminum; two screens or cheesecloth against birds and insects; vegetables and meats not recommended outdoors, and why; dry them in an oven or food dehydrator; hot, dry, breezy days; at least 85°F; humidity below 60 percent; several days; cover or bring in at night"
+    },
+    {
+      "name": "Penn State Extension, Let’s Preserve: Drying Fruits and Vegetables (Dehydration) (updated April 13, 2023)",
+      "used": "Sun drying impractical in Pennsylvania’s humidity; dried fruit treated against insect eggs by heat or freezing; named for learning in normal times"
+    },
+    {
+      "name": "USDA FSIS, Jerky and Food Safety (no date shown)",
+      "used": "Heat meat to 160°F and poultry to 165°F before the dehydrating process; most dehydrator instructions lack this step and a dehydrator may not reach those temperatures; sun drying not recommended for meat jerky, and why; other special considerations for jerky from venison or other wild game (fecal contamination; carcasses not rapidly chilled); bacteria likely to survive the dry heat of a warm oven and especially the 130 to 140°F of a dehydrator"
+    },
+    {
+      "name": "National Center for Home Food Preservation, Herbs (from So Easy to Preserve, 6th ed., 2014)",
+      "used": "Sun drying not recommended for herbs; harvest timing; not in the sun or unattended; rinse; discard imperfect leaves; sturdy herbs in bundles; tender-leaf herbs in paper bags with holes, small bunches, air currents; crispy and crumbling when dry; airtight containers, cool, dry, dark place"
+    },
+    {
+      "name": "Penn State Extension, Let’s Preserve: Drying Herbs (updated July 31, 2023)",
+      "used": "Low humidity and good air circulation; clean counters, hand washing; inspect for insects; rinse, shake, pat dry; tie and hang; rubber band; away from sink, stove, dishwasher; paper bag against dust; completely dry; heat at 160°F for 30 minutes or freeze at 0°F for 48 hours against insects; storage place; up to a year"
+    },
+    {
+      "name": "National Center for Home Food Preservation, Curing and Smoking Meats for Home Food Preservation: Literature Review and Critical Preservation Points (sections 5 and 6; no date shown)",
+      "used": "Several outbreaks of E. coli O157:H7 in venison jerky; cure, age or preserve meats in a refrigerator below 40°F; sodium nitrite in place of salt can be a lethal dose; smoke without proper cooking is not an effective preservative; cured and smoked products kept refrigerated or frozen"
+    },
+    {
+      "name": "Food when the power goes out, Is it still good?, Cook without power, Food poisoning and botulism (other topics in this app)",
+      "used": "Quoted word for word: food not outside even in winter (New York State Department of Health); the freezer rule (New York State Department of Health, CDC, FoodSafety.gov); home-canned food from someone else and the botulism toxin warning (CDC). Freezer times, warning signs, boiling home-canned food, disposal and cooking by link; thawing meat checked, then cooked and eaten or thrown out, by link; Cook without power’s wild game temperature (165°F)"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

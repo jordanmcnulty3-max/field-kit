@@ -1,0 +1,709 @@
+{
+  "id": "surv-food-still-good",
+  "title": "Is it still good?",
+  "category": "food",
+  "keywords": [
+    "eat",
+    "is it still good",
+    "spoiled",
+    "spoiled food",
+    "throw out food",
+    "refreeze",
+    "thawed",
+    "freezer thawed",
+    "left out overnight",
+    "moldy food",
+    "mold on food",
+    "dented can",
+    "bulging can",
+    "swollen can",
+    "refrozen",
+    "food sit",
+    "defrost",
+    "food gone bad"
+  ],
+  "summary": "Never taste food to test it, and when in doubt, throw it out. After 4 hours without power or a cold source like ice, throw out the fridge’s perishable food. Refreeze or cook only freezer food that still has ice crystals or is at 40°F (4°C) or below; once the freezer is above 40°F, throw out thawed food. Perishable food left out more than 2 hours (1 hour above 90°F (32°C)) goes. Throw out leaking, bulging or damaged cans and jars, home-canned food you can’t vouch for, and food that touched flood water. A bad smell, color or texture means throw it out; a normal one proves nothing.",
+  "doFirst": [
+    "Never taste food to find out if it is safe (CDC). Throw out any food with an unusual smell, color or texture; a normal one proves nothing: food that looks and smells normal can still make you sick (CDC). When in doubt, throw it out (CDC).",
+    "Fridge without power for more than 4 hours, and no cold source like ice? Throw out its perishable food: meat, fish, cut fruits and vegetables, eggs, milk and leftovers (CDC). The chart below goes food by food.",
+    "Freezer: refreeze or cook only food that still has ice crystals or is at 40°F (4°C) or below (CDC, FoodSafety.gov). Once the freezer is above 40°F (4°C), throw out thawed food (New York State Department of Health, CDC).",
+    "Cans and jars that leak, bulge, are swollen, damaged or cracked, spurt liquid or foam when opened, or hold discolored, moldy or bad-smelling food: throw them out. Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC).",
+    "Throw out food that may have touched flood water or storm water (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "The time limits",
+      "blocks": [
+        {
+          "list": [
+            "Fridge: throw out perishable food (meat, fish, cut fruits and vegetables, eggs, milk and leftovers) after 4 hours without power or without a cold source like ice (CDC). With an appliance thermometer, check that the fridge is still at 40°F (4°C) or below, and check the temperature of food kept in coolers or in a fridge with ice added (CDC).",
+            "Food left out: never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC). Germs multiply fastest between 40°F (4°C) and 140°F (60°C) (FoodSafety.gov).",
+            "Freezer: once the freezer is above 40°F (4°C), throw out thawed food (New York State Department of Health, CDC). Food that still has ice crystals or is at 40°F (4°C) or below can be refrozen or cooked (CDC, FoodSafety.gov).",
+            "Check each food separately (FoodSafety.gov). How long the fridge and freezer stay cold is in Food when the power goes out."
+          ]
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        }
+      ]
+    },
+    {
+      "h": "Fridge food",
+      "blocks": [
+        {
+          "p": "FoodSafety.gov’s chart for food in the fridge that was at 40°F (4°C) or above for more than 2 hours. Use it as a general guide (FoodSafety.gov). Anything with an unusual smell, color or texture goes, whatever the chart says (CDC)."
+        },
+        {
+          "table": {
+            "head": [
+              "Food in the fridge",
+              "At 40°F (4°C) or above for more than 2 hours"
+            ],
+            "rows": [
+              [
+                "Raw or leftover cooked meat, poultry, fish or seafood; soy meat substitutes",
+                "Throw out"
+              ],
+              [
+                "Thawing meat or poultry",
+                "Throw out"
+              ],
+              [
+                "Meat, tuna, shrimp, chicken or egg salad",
+                "Throw out"
+              ],
+              [
+                "Gravy, stuffing, broth",
+                "Throw out"
+              ],
+              [
+                "Lunchmeats, hot dogs, bacon, sausage, dried beef",
+                "Throw out"
+              ],
+              [
+                "Pizza with any topping",
+                "Throw out"
+              ],
+              [
+                "Canned hams labeled “Keep Refrigerated”",
+                "Throw out"
+              ],
+              [
+                "Canned meats and fish, opened",
+                "Throw out"
+              ],
+              [
+                "Casseroles, soups, stews",
+                "Throw out"
+              ],
+              [
+                "Soft cheeses: blue, Roquefort, Brie, Camembert, cottage, cream, Edam, Monterey Jack, ricotta, mozzarella, Muenster, Neufchatel, queso blanco, queso fresco",
+                "Throw out"
+              ],
+              [
+                "Hard cheeses: Cheddar, Colby, Swiss, Parmesan, provolone, Romano",
+                "Keep"
+              ],
+              [
+                "Processed cheeses",
+                "Keep"
+              ],
+              [
+                "Shredded cheeses",
+                "Throw out"
+              ],
+              [
+                "Low-fat cheeses",
+                "Throw out"
+              ],
+              [
+                "Grated Parmesan, Romano or a mix, in a can or jar",
+                "Keep"
+              ],
+              [
+                "Milk, cream, sour cream, buttermilk, evaporated milk, yogurt, eggnog, soy milk",
+                "Throw out"
+              ],
+              [
+                "Butter, margarine",
+                "Keep"
+              ],
+              [
+                "Baby formula, opened",
+                "Throw out"
+              ],
+              [
+                "Fresh shell eggs, eggs hard-cooked in shell, egg dishes, egg products",
+                "Throw out"
+              ],
+              [
+                "Custards and puddings, quiche",
+                "Throw out"
+              ],
+              [
+                "Fresh fruits, cut",
+                "Throw out"
+              ],
+              [
+                "Fresh fruits, uncut",
+                "Keep"
+              ],
+              [
+                "Fruit juices, opened",
+                "Keep"
+              ],
+              [
+                "Canned fruits, opened",
+                "Keep"
+              ],
+              [
+                "Dried fruits, raisins, candied fruits, dates",
+                "Keep"
+              ],
+              [
+                "Sliced or shredded coconut",
+                "Throw out"
+              ],
+              [
+                "Opened mayonnaise, tartar sauce, horseradish",
+                "Throw out if above 50°F (10°C) for more than 8 hours"
+              ],
+              [
+                "Peanut butter",
+                "Keep"
+              ],
+              [
+                "Jelly, relish, taco sauce, mustard, ketchup, olives, pickles",
+                "Keep"
+              ],
+              [
+                "Worcestershire, soy, barbecue, hoisin sauces",
+                "Keep"
+              ],
+              [
+                "Fish sauces, oyster sauce",
+                "Throw out"
+              ],
+              [
+                "Opened vinegar-based dressings",
+                "Keep"
+              ],
+              [
+                "Opened creamy dressings",
+                "Throw out"
+              ],
+              [
+                "Spaghetti sauce, opened",
+                "Throw out"
+              ],
+              [
+                "Bread, rolls, cakes, muffins, quick breads, tortillas",
+                "Keep"
+              ],
+              [
+                "Refrigerator biscuits, rolls, cookie dough",
+                "Throw out"
+              ],
+              [
+                "Cooked pasta, rice, potatoes",
+                "Throw out"
+              ],
+              [
+                "Pasta salads with mayonnaise or vinaigrette",
+                "Throw out"
+              ],
+              [
+                "Fresh pasta",
+                "Throw out"
+              ],
+              [
+                "Cheesecake",
+                "Throw out"
+              ],
+              [
+                "Waffles, pancakes, bagels",
+                "Keep"
+              ],
+              [
+                "Cream-filled pastries",
+                "Throw out"
+              ],
+              [
+                "Pies with a filling containing eggs or milk (custard, cheese-filled, chiffon); quiche",
+                "Throw out"
+              ],
+              [
+                "Fruit pies",
+                "Keep"
+              ],
+              [
+                "Fresh vegetables, cut",
+                "Throw out"
+              ],
+              [
+                "Fresh vegetables, uncut",
+                "Keep"
+              ],
+              [
+                "Fresh mushrooms, herbs, spices",
+                "Keep"
+              ],
+              [
+                "Greens, pre-cut, pre-washed, packaged",
+                "Throw out"
+              ],
+              [
+                "Vegetables, cooked",
+                "Throw out"
+              ],
+              [
+                "Tofu, cooked",
+                "Throw out"
+              ],
+              [
+                "Vegetable juice, opened",
+                "Throw out"
+              ],
+              [
+                "Baked potatoes",
+                "Throw out"
+              ],
+              [
+                "Commercial garlic in oil",
+                "Throw out"
+              ],
+              [
+                "Potato salad",
+                "Throw out"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "h": "Freezer food",
+      "blocks": [
+        {
+          "list": [
+            "If an appliance thermometer was kept in the freezer, read it when the power comes back on. At 40°F (4°C) or below, the food can be refrozen (USDA).",
+            "No thermometer in the freezer? Check each package. Only food that still has ice crystals or is at 40°F (4°C) or below can be refrozen (USDA, FoodSafety.gov) or cooked (CDC). Thawed food in a freezer above 40°F (4°C) goes (New York State Department of Health, CDC).",
+            "Refrozen food may lose some quality, but it can still be eaten (USDA, FoodSafety.gov)."
+          ]
+        },
+        {
+          "p": "Power still out? Keeping the freezer cold, with the door shut and with ice, is in Food when the power goes out. Cooking food that can still be cooked is in Cook without power."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
+          "p": "FoodSafety.gov’s freezer chart, for food that still has ice crystals and feels as cold as if it were in the fridge. Some of it still goes. Use it as a general guide (FoodSafety.gov). Thawed food is thrown out, as above, even where FoodSafety.gov’s chart would let you refreeze it: New York State Department of Health and CDC say to throw it out, and this app follows the more cautious rule."
+        },
+        {
+          "table": {
+            "head": [
+              "Food in the freezer",
+              "Still has ice crystals and feels as cold as if in the fridge"
+            ],
+            "rows": [
+              [
+                "Meat, poultry, seafood: all cuts",
+                "Refreeze"
+              ],
+              [
+                "Stews, soups",
+                "Refreeze"
+              ],
+              [
+                "Milk",
+                "Refreeze (some loss of texture)"
+              ],
+              [
+                "Eggs (out of shell) and egg products",
+                "Refreeze"
+              ],
+              [
+                "Ice cream, frozen yogurt",
+                "Throw out"
+              ],
+              [
+                "Soft and semi-soft cheese",
+                "Refreeze (some loss of texture)"
+              ],
+              [
+                "Hard cheeses",
+                "Refreeze"
+              ],
+              [
+                "Shredded cheeses",
+                "Refreeze"
+              ],
+              [
+                "Cheesecake",
+                "Refreeze"
+              ],
+              [
+                "Fruit juices",
+                "Refreeze"
+              ],
+              [
+                "Fruit, home or commercially packaged",
+                "Refreeze (texture and flavor will change)"
+              ],
+              [
+                "Vegetable juices",
+                "Refreeze"
+              ],
+              [
+                "Vegetables, home or commercially packaged or blanched",
+                "Refreeze (may lose texture and flavor)"
+              ],
+              [
+                "Breads, rolls, muffins, cakes without custard filling",
+                "Refreeze"
+              ],
+              [
+                "Cakes, pies, pastries with custard or cheese filling",
+                "Refreeze"
+              ],
+              [
+                "Pie crusts, bought or homemade bread dough",
+                "Refreeze (some quality loss)"
+              ],
+              [
+                "Casseroles: pasta or rice",
+                "Refreeze"
+              ],
+              [
+                "Flour, cornmeal, nuts",
+                "Refreeze"
+              ],
+              [
+                "Waffles, pancakes, bagels",
+                "Refreeze"
+              ],
+              [
+                "Frozen meals, entrees, pizza, sausage and biscuit, meat pie, convenience foods",
+                "Refreeze"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "h": "Mold",
+      "blocks": [
+        {
+          "warn": "Don’t sniff moldy food: it can cause breathing trouble. If food is covered with mold, throw it out (USDA)."
+        },
+        {
+          "p": "USDA’s guide for a spot of mold. USDA’s mold page says nothing about power cuts or flood water. This app’s reading: the table is only for food that has stayed cold, has not touched flood water and shows no other unusual smell, color or texture; anything else goes by the rest of this page."
+        },
+        {
+          "table": {
+            "head": [
+              "Food with mold on it",
+              "What to do"
+            ],
+            "rows": [
+              [
+                "Luncheon meats, bacon, hot dogs",
+                "Throw out"
+              ],
+              [
+                "Hard salami and dry-cured country hams",
+                "Use. Scrub the mold off the surface"
+              ],
+              [
+                "Cooked leftover meat and poultry",
+                "Throw out"
+              ],
+              [
+                "Cooked casseroles",
+                "Throw out"
+              ],
+              [
+                "Cooked grain and pasta",
+                "Throw out"
+              ],
+              [
+                "Hard cheese (not one where mold is part of how it is made)",
+                "Use. Cut off at least 1 inch (2.5 cm) around and below the mold spot, keeping the knife out of the mold. Re-cover the cheese in fresh wrap"
+              ],
+              [
+                "Soft cheeses made with mold, such as Brie and Camembert",
+                "Throw out if they have mold that is not part of how they are made"
+              ],
+              [
+                "Hard cheeses made with mold, such as Gorgonzola and Stilton, with mold on the surface",
+                "Cut off at least 1 inch (2.5 cm) around and below the mold spot and handle like hard cheese"
+              ],
+              [
+                "Soft cheese (cottage, cream cheese, Neufchatel, chevre and others); crumbled, shredded or sliced cheese of any kind",
+                "Throw out"
+              ],
+              [
+                "Yogurt and sour cream",
+                "Throw out"
+              ],
+              [
+                "Jams and jellies",
+                "Throw out"
+              ],
+              [
+                "Firm fruits and vegetables (cabbage, bell peppers, carrots and others)",
+                "Use. Cut off at least 1 inch (2.5 cm) around and below the mold spot, keeping the knife out of the mold"
+              ],
+              [
+                "Soft fruits and vegetables (cucumbers, peaches, tomatoes and others)",
+                "Throw out"
+              ],
+              [
+                "Bread and baked goods",
+                "Throw out"
+              ],
+              [
+                "Peanut butter, beans and other legumes, nuts",
+                "Throw out"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "h": "Cans and jars",
+      "blocks": [
+        {
+          "p": "Any of these signs means home-canned or store-bought food might be contaminated with toxins or harmful germs. Throw it out (CDC):"
+        },
+        {
+          "list": [
+            "The container is leaking, bulging or swollen.",
+            "The container looks damaged, cracked or abnormal.",
+            "The container spurts liquid or foam when opened.",
+            "The food is discolored, moldy or smells bad."
+          ]
+        },
+        {
+          "fig": "food-cans-to-discard",
+          "cap": "Any of these signs means home-canned or store-bought food might be contaminated with toxins or harmful germs. Throw it out (CDC). You cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly (CDC). It can be in cans that look normal and in food that smells and tastes normal (New York State Department of Health). How to get rid of a suspect can or jar without touching what is inside, and the signs of botulism, are in Food poisoning and botulism."
+        },
+        {
+          "p": "USDA counts a can as damaged if it is swollen, leaking, punctured, holed, fractured, deeply rusted, or crushed or dented badly enough that it won’t stack or won’t open with a hand-crank opener. Throw out food in damaged cans (USDA)."
+        },
+        {
+          "warn": "You cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly (CDC). It can be in cans that look normal and in food that smells and tastes normal (New York State Department of Health)."
+        },
+        {
+          "p": "How to get rid of a suspect can or jar without touching what is inside, and the signs of botulism, are in Food poisoning and botulism."
+        },
+        {
+          "link": "s:surv-food-poisoning",
+          "label": "Food poisoning and botulism"
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Storing food"
+        }
+      ]
+    },
+    {
+      "h": "Home-canned food",
+      "blocks": [
+        {
+          "warn": "Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC)."
+        },
+        {
+          "p": "Home-canned food you know was canned by safe guidelines: CDC says to boil these in a saucepan before eating them, because high temperatures can destroy the toxin that causes botulism:"
+        },
+        {
+          "list": [
+            "Home-canned tomatoes, and foods that contain them.",
+            "All low-acid home-canned foods: all fresh vegetables, figs, meats, poultry, fish, seafood and some tomatoes (CDC)."
+          ]
+        },
+        {
+          "p": "Below 1,000 feet (300 m), boil them for 10 minutes. Add 1 minute for each 1,000 feet (300 m) higher up (CDC). What you can heat the pot on with the power out is in Cook without power."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
+          "p": "Any of the signs under Cans and jars means throw it out, boiled or not (CDC). Refrigerate any canned or pickled food after you open it (CDC). This app’s reading: with no working fridge, an opened can or jar of a food that is on the Fridge food chart above goes by its row there, but no source opened says how long a “Keep” row holds with no fridge at all; any other opened can or jar is treated as perishable food left out: “never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).”"
+        },
+        {
+          "link": "s:surv-food-preserving",
+          "label": "Preserving food"
+        }
+      ]
+    },
+    {
+      "h": "Flood water",
+      "blocks": [
+        {
+          "p": "Throw away (CDC):"
+        },
+        {
+          "list": [
+            "Perishable food that was not kept cold enough because of a power outage.",
+            "Food that may have touched flood water or storm water.",
+            "Food with an unusual smell, color or texture.",
+            "Food in packages that are not waterproof.",
+            "Food in cardboard containers, including juice, milk and baby formula boxes.",
+            "Food containers with screw caps, snap lids, pull tops, crimped caps, twist caps, flip tops and snap tops (CDC, USDA).",
+            "Home-canned food, and cans or food containers that are bulging, open or damaged.",
+            "Cans or food containers that spurt liquid or foam when you open them, or hold food that is discolored, moldy or smells bad.",
+            "Wooden cutting boards, baby bottle nipples and pacifiers that touched flood water: they can’t be made clean (CDC)."
+          ]
+        },
+        {
+          "p": "Undamaged, store-bought food in all-metal cans without pull tops, or in retort pouches (flexible, shelf-stable pouches), can be saved (CDC, USDA). Pull-top cans are not waterproof: throw them out (USDA)."
+        },
+        {
+          "steps": [
+            "Take the labels off if you can, and note the expiration date (CDC, USDA).",
+            "Brush or wipe away dirt or silt (CDC, USDA).",
+            "Wash the cans and pouches in soapy water, hot if you have it, and rinse them in water that is safe to drink (CDC, USDA).",
+            "Put them in a pot of water, bring it to a boil, and keep it boiling for 2 minutes (CDC, USDA).",
+            "Let them air-dry for at least 1 hour before you open or store them (USDA).",
+            "Re-label each can or pouch with a marker, including the expiration date (CDC, USDA).",
+            "Use them as soon as you can (CDC, USDA)."
+          ]
+        },
+        {
+          "p": "What you can heat the pot on with the power out is in Cook without power."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
+          "p": "Pans, dishes, utensils and counters that flood water touched (USDA):"
+        },
+        {
+          "steps": [
+            "Wash metal pans, ceramic dishes and utensils, can openers included, with soap and water, hot if you have it (USDA).",
+            "Rinse them, then sanitize them: boil them in clean water, or soak them for 15 minutes in the food mix from Clean and disinfect, which is the strength USDA gives (USDA).",
+            "Countertops: wash them with soap and water, hot if you have it, rinse, put the food mix on them, and let them air-dry (USDA)."
+          ]
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        },
+        {
+          "link": "s:surv-food-clean-kitchen",
+          "label": "Keep food clean"
+        }
+      ]
+    },
+    {
+      "h": "Fire and smoke",
+      "blocks": [
+        {
+          "list": [
+            "Throw out food that has been near a fire. Heat, smoke fumes and the chemicals used to fight a fire can all damage it (USDA).",
+            "Cans and jars may look fine, but the heat of a fire can set off the germs that spoil food. Great heat can split or burst the can or jar (USDA).",
+            "Throw out raw food, and food in packaging that lets air through, such as cardboard, plastic wrap, screw-topped jars and bottles (USDA).",
+            "Fumes can get into the fridge and freezer too: their seals are not airtight (USDA).",
+            "Food that fire-fighting chemicals touched goes in the trash: the chemicals can’t be washed off food (USDA).",
+            "Pots and pans that fire-fighting chemicals touched: wash them in soap and hot water, then soak them for 15 minutes in the food mix from Clean and disinfect, which is the strength USDA gives (USDA)."
+          ]
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "p": "Food that was outdoors during fallout has its own rules: see Water and food after fallout."
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
+          "link": "s:surv-stomach-illness-in-a-group",
+          "label": "Stomach illness in a group"
+        },
+        {
+          "link": "s:surv-food-clean-kitchen",
+          "label": "Keep food clean"
+        },
+        {
+          "link": "s:surv-food-babies-children",
+          "label": "Feeding babies and young children"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Keep Food Safe After a Disaster or Emergency (last reviewed November 24, 2025)",
+      "used": "Never taste food; when in doubt, throw it out; perishable fridge food (meat, fish, cut fruits and vegetables, eggs, milk, leftovers) after 4 hours without power or a cold source; unusual smell, color or texture; check the fridge thermometer and the temperature of food in coolers; throw out food that has thawed or is above 40°F; refreeze or cook thawed frozen food with ice crystals or at 40°F or below; flood list; unsafe food can make you sick even if it looks and smells normal; wooden cutting boards, nipples and pacifiers; saving commercial cans and pouches (labels, dirt, wash, rinse, boil 2 minutes, re-label, use soon)"
+    },
+    {
+      "name": "CDC, What to Do to Protect Yourself During a Power Outage (reviewed August 26, 2026)",
+      "used": "Throw out all perishable foods in your freezer if they have thawed"
+    },
+    {
+      "name": "CDC, Preventing Food Poisoning (last reviewed November 24, 2025)",
+      "used": "Never leave perishable food out more than 2 hours, or 1 hour above 90°F"
+    },
+    {
+      "name": "CDC, Home-Canned Foods (botulism prevention; page dated April 25, 2024)",
+      "used": "Signs that home-canned or store-bought food might be contaminated; throw it out; you can't see, smell or taste the toxin; a small taste can be deadly; don't eat it if you don't know safe canning guidelines were followed; boil home-canned tomatoes and low-acid home-canned foods 10 minutes below 1,000 feet, plus 1 minute per 1,000 feet; low-acid foods listed; refrigerate canned or pickled food once opened"
+    },
+    {
+      "name": "FoodSafety.gov (US Department of Health and Human Services), Food Safety During Power Outage charts (last reviewed August 8, 2024)",
+      "used": "Refrigerated food chart, row by row; frozen food chart, the column for food that still has ice crystals; use as a general guide; refrozen food may lose quality"
+    },
+    {
+      "name": "FoodSafety.gov, Three Ways to Keep Food Safe When You Lose Power (modified September 21, 2023)",
+      "used": "Check each food item separately"
+    },
+    {
+      "name": "New York State Department of Health, The Fridge and Freezer: When the Power is Out (revised October 2023)",
+      "used": "Toss thawed foods if freezer is above 40 degrees F"
+    },
+    {
+      "name": "FoodSafety.gov, 4 Steps to Food Safety (last reviewed September 18, 2023)",
+      "used": "Germs multiply fastest between 40°F and 140°F"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Keeping Food Safe During an Emergency (undated web page)",
+      "used": "Freezer thermometer at 40°F or below when the power returns; check each package; ice crystals or 40°F or below can be refrozen; quality loss; damaged cans described; undamaged all-metal cans and retort pouches can be saved and used soon; fire: heat, smoke, chemicals, cans and jars, permeable packaging, fumes in the fridge, chemicals can't be washed off; cookware: soap and hot water, then 15 minutes in 1 tablespoon of unscented bleach per gallon; containers that are not waterproof include screw-caps, snap lids, pull tops and crimped caps; salvage steps including air-drying at least 1 hour; flooded pans, dishes, utensils and can openers: wash, rinse, boil in clean water or immerse 15 minutes in 1 tablespoon of unscented bleach per gallon; countertops: wash, rinse, apply the same solution, air-dry; raw food and permeable packaging including bottles"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Molds on Food: Are They Dangerous? (undated web page)",
+      "used": "Don't sniff moldy food; food covered with mold is discarded; the table for each food"
+    },
+    {
+      "name": "New York State Department of Health, Botulism Fact Sheet (revised December 2025)",
+      "used": "Botulism can be present in cans that look normal and in foods that smell and taste normal"
+    },
+    {
+      "name": "Clean and disinfect (another topic in this app)",
+      "used": "The food mix, named, not restated"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

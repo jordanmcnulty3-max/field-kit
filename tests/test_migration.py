@@ -473,3 +473,25 @@ def test_v73_backup_restores_on_v74_and_its_pins_recents_and_filter_open(page, a
     page.locator('#survCats summary', has_text='Radiation and fallout').click()
     listed_keys = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"radiation\"] button[data-key]')].map(b => b.dataset.key)")
     assert len(listed_keys) == 10 and listed_keys[0] == 's:surv-fallout-warning'
+
+
+# ---------- Food pack (v7.5): a v7.4-shaped backup restores and its keys still open ----------
+
+def test_v74_backup_restores_on_v75_and_its_pins_recents_and_filter_open(page, app_url, tmp_path):
+    boot(page, app_url, hash_='#/survival')
+    v74 = backup_file({'fk.pins': json.dumps(['s:surv-fallout-warning', 's:surv-heat-out']),
+                       'fk.recent': json.dumps(['s:surv-fallout-get-ready', 's:surv-priorities']),
+                       'fk.survFilter': json.dumps({'where': 'woods', 'when': 'warm'}), 'fk.night': 'false'}, version='7.4')
+    pick(page, tmp_path, v74)
+    restore_now(page)
+    assert page.evaluate('FK.pins.all()') == ['s:surv-fallout-warning', 's:surv-heat-out']
+    page.wait_for_function("location.hash === '#/survival'")
+    _open_from(page, '#survPinned', 's:surv-fallout-warning', 'Fallout warning: what to do first')
+    _open_from(page, '#survRecent', 's:surv-priorities', 'Priorities')
+    # the restored Woods + Warm filter hides no food topic: all ten are listed, the hub first
+    page.locator('#survCats summary', has_text='Food').first.click()
+    keys = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"food\"] button[data-key]')].map(b => b.dataset.key)")
+    assert len(keys) == 10 and keys[0] == 's:surv-food-power-out'
+    # a v7.4 file holds no food key; the new topics open from search and from the home
+    page.evaluate("FK.route.go('/survival/surv-food-power-out')")
+    page.wait_for_function("location.hash === '#/survival/surv-food-power-out'")

@@ -862,3 +862,278 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    that is both is turned off, because CDC's rule comes first and the vent rule is for a furnace that is running. FEMA's 2024
    line that the health risk from turning off HVAC systems might be greater than the contamination risk in extreme
    temperatures is quoted on the same page (D88). Say if the group wants such a furnace kept running in extreme cold.
+
+Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in docs/v7.5-rulings.md.
+
+117. **Cooking indoors on a gas or propane range, or on a vented wood stove or fireplace (surv-food-cooking-no-power). Decided
+   by Jordan on 2026-11-19: allowed on the makers' conditions.** The checked topics forbid heating the house with a gas oven or range, and quote CDC: "Don't cook or burn anything
+   on a stove or fireplace that isn't vented." EPA's outage page says "Unvented combustion appliances should not be used to cook
+   indoors, or for any other indoor use", allows vented appliances only "if the vent does not require power to operate", and names
+   only "a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking". A kitchen
+   range has no vent that works in a power cut, so EPA's sentence, read literally, covers it, and CDC's line can be read the same
+   way. No government agency page opened (EPA, CDC, Ready.gov, NYS Public Service, NYS DHSES, NYC Health, NYC Emergency
+   Management, Maine CDC, CPSC) says anything about cooking on a range in an outage; all say never to heat with one. On the other
+   side, four range makers allow the surface burners to be lit by hand in an outage on models that allow it: GE, Whirlpool,
+   KitchenAid and Wolf. Their conditions: check the model's manual first (some models have a safety feature that prevents it);
+   surface burners only, never the oven, and never griddles, grills, French tops or charbroilers (Wolf; Whirlpool: the vent may
+   not be working); GE and KitchenAid light it by holding the lit match or long lighter at the burner, then turning the knob to Lo
+   or LITE; Wolf turns the knob to HIGH, then lights it with an ignitor at least 6 inches long; the burner is lit or off, with no
+   automatic relight, and gas keeps flowing if the flame blows out (GE, Wolf); monitor it closely; never use it to heat the kitchen
+   (Wolf). The page (first by controller ruling, now by Jordan's decision below) allows the range as the makers allow it, with every condition above, only if the
+   model's manual allows lighting by hand. To allow it, the app's own labelled reading narrows a checked CDC line and an EPA line
+   by interpretation, on the strength of four manufacturers' manuals: it says the two lines do not name a kitchen range (CDC lists
+   "stoves" and "gas ranges" separately) and do not rule out a range's surface burners used only as the makers allow, and, in its
+   own words: "If you are unsure, don’t use it: cook outdoors or eat food cold." Decided by Jordan on 2026-11-19: cooking on a gas
+   or propane kitchen range during a power cut is allowed on the makers' conditions (surface burners only; only if the model's
+   manual allows lighting by hand; watched the whole time; never to heat the room), labelled in the topic as this app's own reading
+   of the CDC and EPA lines. The topic already said this; its range Do first line now carries the label too. A vented fireplace or
+   wood stove set up for cooking is allowed under EPA's conditions and every rule in Wood stoves and fireplaces.
+118. **Candle warmers, chafing dishes and fondue pots (surv-food-cooking-no-power).** Ready.gov lists them, with a fireplace,
+   as alternative cooking sources in an emergency. They burn fuel in the room, and no opened source says how to use them indoors
+   without carbon monoxide building up. Today: labelled app caution, don't use them while the power is out. Say if the group
+   wants them allowed.
+119. **How far a grill or camp stove stays from the house (surv-food-cooking-no-power).** Ready.gov (Power Outage Tips):
+   "Generators, camp stoves or charcoal grills should always be used outdoors and at least 20 feet away from windows."
+   Massachusetts Department of Fire Services: 10 feet from the side of a building unless the maker's instructions say it can be
+   closer. New York's Division of Consumer Protection: at least 3 feet from siding, deck rails and eaves, and never next to your
+   home. EPA: "a safe distance" from doors, windows and air intakes. Today (final review fix, 2026-11-19): one distance a reader can act
+   on. The page gives Ready.gov's "at least 20 feet away from windows" and EPA's safe distance from doors and air intakes, then, labelled
+   as this app's own caution, "keep them at least 20 feet (6 m) from every side of the house, not only from its windows". The
+   Massachusetts 10-foot line ("Grills must be 10 feet from the side of a building unless the manufacturer's instructions say it can be
+   closer", re-opened 2026-11-19) is no longer on the page, because beside 20 feet it read as an alternative; its other grill rules
+   stay. Cost if wrong: a household with little yard has to grill further out than Massachusetts requires. Say if the group wants a
+   different figure.
+120. **A cold house and the fridge's 4 hours (surv-food-still-good).** CDC: throw out perishable fridge food "after 4 hours without
+   power or without a cold source like ice". In a Central New York winter the kitchen itself may be near 40°F, and a fridge
+   thermometer may still read 40°F or below after 4 hours. No source says a cold room counts as a cold source; New York State
+   Department of Health says never to put food outside, even in winter. Today: the 4-hour rule stands unless the food was kept
+   with ice or another cold source and checked at 40°F or below. Say if the group wants a thermometer reading alone to be enough.
+121. **Food, cans and dishes after a flood (surv-food-still-good).** USDA FSIS: wash pans, dishes and utensils (can openers
+   included), rinse, then boil them in clean water or immerse them 15 minutes in 1 tablespoon of unscented bleach per gallon; the
+   same solution on washed countertops, then air-dry; cans: boil 2 minutes or the same solution 15 minutes, then air-dry at least 1
+   hour. USDA's solution is Clean and disinfect's food mix. CDC uses 1 cup of bleach in 5 gallons (about 3 tablespoons a gallon),
+   1 minute for dishes and 15 minutes for cans, which matches neither of the app's mixes. Today: USDA's steps, with the food mix
+   named (not restated) and USDA's 15 minutes, or boiling; cans by boiling 2 minutes and air-drying 1 hour; pull-top cans thrown
+   out (USDA). CDC's stronger mix is not given. Say if the group wants CDC's mix added to Clean and disinfect (a checked topic).
+122. **Botulism with no hospital (surv-food-poisoning). Medical professional.** CDC and New York State Department of Health say
+   only to see a doctor or go to the emergency room immediately; botulism needs antitoxin and may need a breathing machine. No
+   opened source gives anything a lay person can do without a hospital, so there is no botulism protocol. Today: the topic says so,
+   and, labelled as this app's reading, says to keep trying to reach medical care and to use the CPR protocols if the person stops
+   responding and is not breathing normally. Ask a medical professional what a group with no hospital should do (for example
+   about rescue breathing for hours, swallowing, or giving food and drink).
+123. **Cleaning up a spill from a suspect can or jar: a third bleach mix (surv-food-poisoning).** The standing decision is two
+   household bleach mixes only (Clean and disinfect's strong mix and food mix). The National Center for Home Food Preservation's
+   clean-up for botulism toxin uses a fresh 1 part unscented liquid household bleach (5 to 6%) to 5 parts clean water, on surfaces,
+   equipment, can openers and clothing, left 30 minutes, wiped up with gloves and paper towels that are bagged, applied again for
+   30 minutes, rinsed, then everything washed. That is far stronger than either mix. What the app does today (controller ruling, as
+   shipped in v7.5): NCHFP's clean-up is given in full in Food poisoning and botulism only, named as NCHFP's, labelled as this app's
+   caution for this clean-up only, never for drinking water, never as an everyday sanitizer for dishes or food surfaces, never mixed
+   with another cleaner. Your choice, if you want to change it: keep it as shipped (a toxin spill gets a real step), or cut it (back to
+   the two mixes; a spill then gets gloves and bagging only). If you say nothing, it stays as shipped.
+124. **Other jars from the same batch (surv-food-poisoning).** No opened source says what to do with them. Today: labelled app
+   caution: if one container from a batch shows any warning sign, or someone got sick after eating from it, treat the whole batch
+   as suspect. Say if the group wants a different rule.
+125. **When botulism starts (surv-food-poisoning).** CDC's food poisoning table: 18 to 36 hours. New York State Department of Health:
+   typically 12 to 72 hours, ranging from 2 hours to 8 days, and up to 30 days for babies. Today: New York's wider range. No
+   choice needed unless the group wants CDC's shorter one.
+126. **No food thermometer (surv-food-cooking-no-power). Medical professional.** CDC: a food thermometer is the only way to tell,
+   except for seafood; CDC accepts fish with fins cooked "until the flesh is opaque and separates easily with a fork". The pack
+   does not offer look as a test. Today: the table and a thermometer only; nothing for people without one. Say if the group wants
+   CDC's fish exception shown; ask a medical professional whether anything else is safe to say without a thermometer. (Keep a
+   food thermometer in the kit.)
+127. **Dry ice (surv-food-power-out).** CDC and New York State Department of Health suggest dry or block ice for a long outage.
+   USDA: 50 pounds holds an 18-cubic-foot full freezer for 2 days; Ready.gov: 25 pounds keeps a 10-cubic-foot freezer below
+   freezing for 3 to 4 days. No handling source could be opened. Today: dry ice is not mentioned; block ice, homemade ice and
+   coolers are. Say if the group wants it added once a handling source is opened.
+128. **Refreezing thawed freezer food (surv-food-still-good).** FoodSafety.gov's freezer chart lets hard cheese, bread and rolls,
+   flour, cornmeal, nuts, waffles, pancakes, bagels, pie crusts and dough, fruit and fruit juice be refrozen even after more than 2
+   hours above 40°F. New York State Department of Health: "Toss thawed foods if freezer is above 40 degrees F." CDC: throw out "All
+   perishable foods in your freezer if they have thawed." Today (controller ruling, the more cautious): refreeze or cook only what
+   still has ice crystals or is at 40°F or below; once the freezer is above 40°F, thawed food is thrown out, and the chart's thawed
+   column is not shown. (The earlier D128, New York's "unusual taste or smell" line against CDC's never taste, needed no choice and is
+   recorded in docs/v7.5-rulings.md ruling 16.) Say if the group wants the chart's thawed-but-keep foods back.
+129. **Home-canned food from someone else (surv-food-still-good).** CDC: don't eat home-canned food if you don't know whether safe
+   canning guidelines were followed; if you do, boil home-canned tomatoes and low-acid food 10 minutes (plus 1 minute per 1,000
+   feet) before eating. Today: both, in that order. Say if the group wants a stricter rule (for example, never eat home-canned
+   food you didn't see canned).
+
+Food at home pack (v7.5), batch B: numbers 130 to 139 (surv-food-how-much, surv-food-storage, surv-food-when-short, the Pantry
+checklist). Rulings are in docs/v7.5-rulings.md, "Batch B".
+
+130. **How many days of food the group aims for (surv-food-how-much, Pantry).** Sources differ: Ready.gov "at least a several-day
+   supply"; New York State's preparedness checklist 7 days; New York State DHSES "at least 10 days"; the Red Cross a 2-week supply
+   for home; the older FEMA, Red Cross and USDA booklet two weeks; University of Illinois Extension 14 to 30 days; Oregon State
+   University Extension says Oregon's minimum goal is 2 weeks and many local emergency managers there recommend 4 weeks. Today:
+   "This app plans for at least 2 weeks of food at home", the Red Cross figure, the same as water and Get ready for fallout, and it
+   names 30 days as the longest figure in any source opened. The group holds about a week now. Say if the group wants a longer
+   target (30 days, a season) written in as the group's own goal. (Fix round 1:) New York State Department of Health's "Keep a food supply that will feed your household for 3 to 7 days"
+   now replaces the children's checklist in the days list. The topic also adds, labelled as this app's own suggestion, counting the days
+   on the 14-day meal list that the shelves already cover (University of Georgia Extension's Day 1 to Day 14 list). Say if the group
+   wants that line cut.
+131. **Small dents and surface rust on cans (surv-food-storage).** USDA (Shelf-Stable Food Safety): "If a can containing food has a
+   small dent, but is otherwise in good shape, the food should be safe to eat." and "Surface rust that you can remove by rubbing
+   with your finger or a paper towel is not serious." Is it still good? throws out any container that "looks damaged, cracked or
+   abnormal" (CDC) and cans "deeply rusted" or dented so badly they won't stack or open (USDA). Today: neither USDA line is given;
+   Storing food says only not to buy bulging, rusted, leaking or deeply dented cans, to replace stored cans with rust,
+   leaks, bulges, bad dents or broken seals (University of Georgia Extension), and links Is it still good? for what to throw out.
+   Say if the group wants USDA's small-dent and surface-rust lines added (more cans kept in a long emergency).
+132. **Who must not go short, beyond children and pregnant women (surv-food-when-short). Medical professional.** The only source
+   that says food may be rationed (the older FEMA, Red Cross and USDA booklet) says "except for children and pregnant women". No
+   source opened says whether a nursing mother, a sick or injured person, an older person, or someone with diabetes can safely eat
+   less. Today, labelled as this app's own caution: don't cut the food of a nursing mother or of anyone sick or injured; older
+   people, the ill and special diets "need particular attention" (FEMA); someone with diabetes is pointed to the Low blood sugar
+   protocol. Ask a medical professional whom else the group should never put on less food, and what a person with diabetes should
+   do when food is short.
+133. **How much food a child needs (surv-food-how-much, surv-food-when-short). Medical professional.** No source opened gives an
+   amount of food for a child aged 1 to 12, for storing or for a shortage. The University of Georgia per-year table is for adults
+   and says infant amounts "would vary, depending on the age of the infant". Today: the app gives no amount for a child and says so.
+   Ask a medical professional or a dietitian for amounts the group can store for its children. (Fix round 1:) The topic now quotes, as printed, the per-person amounts state extension services
+   give: Oregon State (2021) a 2,000-calorie daily food-group table for ages 14 and up; Ohio State (2016) "Each day's menu provides
+   1,800–2,000 calories"; Utah State (undated) "One pound of dry matter per person per day"; University of Georgia (2017) per adult
+   per year. None gives an amount for a child of a stated age. Utah State's older servings table puts "children" with teen girls,
+   active women and most men at about 2,200 calories, without saying what ages; the app does not use it for children and says so.
+   The gap stands: ask a medical professional for amounts the group can store for its children aged 1 to 12.
+134. **Signs that someone is not getting enough food (surv-food-when-short). Medical professional.** No federal, state or extension
+   source opened gives signs of underfeeding for lay people, for adults or children. Today: no signs are given; the Dehydration
+   protocol is linked for signs of not drinking enough. Ask a medical professional what signs the group should watch for,
+   especially in young children, and when to stop cutting back.
+135. **How far and how long adults can eat less (surv-food-when-short). Medical professional.** The older FEMA booklet: "If activity
+   is reduced, healthy people can survive on half their usual food intake for an extended period and without any food for many
+   days." No current source opened says the same or gives a limit. Today: the booklet's two sentences are quoted with its name, and
+   the app says no other source opened says how far food can be cut or for how long, and gives no amount. Ask a medical
+   professional whether the group should use the half-ration line at all, and for how long.
+136. **Sharing food in the group (surv-food-when-short).** No source opened says how a group should share food (pooling between
+   households, who decides portions, how to keep a common store from being eaten early; Oregon State only notes that some stressed
+   people eat several days of food at once). Today: nothing on sharing. This is the group's own rule to make.
+137. **Shelf times that disagree (surv-food-storage).** USDA: low-acid canned food 2 to 5 years, high-acid 12 to 18 months, rice and
+   dried pasta 2 years. The older FEMA booklet: canned soups, fruits and vegetables "use within one year", and white rice, dry pasta,
+   wheat, dried corn, salt and others "may be stored indefinitely (in proper containers and conditions)". University of Georgia
+   Extension: canned food within one year for best quality. Today: USDA's table, then the one-year line and FEMA's six-month and
+   one-year lists as shorter quality times; FEMA's "indefinitely" list is left out because USDA gives rice and pasta 2 years.
+   Oregon State's "Basements and root cellars can be excellent places for long-term food storage" is left out because USDA says
+   never in a damp basement. Say if the group wants FEMA's long list back.
+138. **Infant formula past its date (surv-food-storage, surv-food-how-much, Pantry). Medical professional.** USDA (Food Product
+   Dating): "Do not buy or use baby formula after its "Use-By" date." Oregon State University Extension: "While it's still safe to
+   feed babies formula past its expiration date, the nutrients that fortify the formula will no longer be adequate." Today: USDA's
+   rule, as a warning; Oregon's line is not given. Ask a medical professional what to feed a baby if the only formula left is past
+   its date (the babies and children topic owns infant feeding).
+139. **The University of Georgia per-year list (surv-food-how-much).** It is the only per-person food list found: bulk staples and
+   other foods "per adult, per year", reviewed 2017, citing FEMA (2004) and a church preparedness manual (1998) without saying which
+   gave the figures, nothing for children. Today: both tables are quoted as printed (with metric added), named and dated, with "This
+   app does not turn these figures into amounts for fewer days, for a household or for a child." Say if the group would rather cut
+   the tables (they suit a household storing whole grains for a year, which nobody in the group does today).
+Food at home pack (v7.5), batch C: numbers 140 to 149. Rulings are in docs/v7.5-rulings.md ("Batch C").
+
+140. **Which water for powdered formula when there is no bottled water (surv-food-babies-children). Medical professional.** CDC
+   (Feeding Your Child Safely During a Disaster): bottled water; if none, boiled water, cooled; "Only use treated water to prepare
+   formula if bottled or boiled water is unavailable." Ready.gov: "use bottled water or boiled water as a last resort", and says
+   nothing about treated water. Today: CDC's order, treated water last, with Make water safe linked for how. Ask a medical
+   professional whether water treated with bleach or tablets is acceptable for formula when boiling is impossible (no fuel), and for
+   which ages. After fallout, Water and food after fallout governs (D115).
+141. **A bleach soak for baby bottles and feeding items (surv-food-babies-children). Medical professional.** CDC (How to Clean
+   Infant Feeding Items During Emergencies, January 8, 2025) gives two ways to sanitize washed items "If your baby is younger than 2
+   months or if your baby is sick", "at least once every day". Method 1: "Put items in a pot and fill with safe water." "Boil for 5
+   minutes." "Remove items carefully." "Air dry sanitized items." "Do NOT rinse sanitized items." Method 2, exactly as CDC states it:
+   "Put items in a wash basin and fill with safe water." "Add 1 teaspoon of bleach per 1/2 gallon or 8 cups of water." "Soak for 2
+   minutes." "Remove items carefully." "Air dry sanitized items." "Do NOT rinse sanitized items." and "Any bleach that remains on
+   feeding items after sanitizing will break down quickly as it dries and will not hurt your baby." (CDC gives no bleach type or
+   percentage.) It is neither of Clean and disinfect's mixes (food mix 1 tablespoon per gallon, strong mix 1/3 cup per gallon), so it
+   would be a third household mix. CDC (Questions About Infant Feeding In Emergencies): "A heat source may not be available to safely
+   sanitize the bottles, which can increase the possibility of your baby becoming sick." Who needs sanitizing: CDC says younger than 2
+   months or sick; FDA (Handling Infant Formula Safely) also lists babies born prematurely, with a weakened immune system, or ill or
+   receiving medical treatment, and says to sanitize before first use and once daily. Today: boiling only, for CDC's and FDA's
+   groups together and before first use (the more cautious list); the page says CDC has a bleach soak that is not on the page, quotes
+   CDC's heat-source sentence, points to disposable cups when boiling is impossible, and, as the app's own caution, says not to use
+   Clean and disinfect's mixes instead. To add the soak, approve "add CDC's soak" and it goes in as quoted above, scoped to baby
+   feeding items. Ask a medical professional whether the soak should be added, and for which babies.
+142. **A breastfeeding mother with diarrhea or vomiting (surv-food-babies-children). Medical professional.** CDC: "You can and should
+   continue breastfeeding while sick with certain illnesses such as the flu, COVID-19, or diarrhea" (and mastitis). CDC's page does not
+   mention vomiting. Stomach illness in a group: anyone who has had vomiting or diarrhea must not prepare food, handle the group's water
+   or care for others until 2 days (3 if possible) after it stops. Today: with diarrhea she keeps breastfeeding (CDC); the page says no
+   opened source covers vomiting; everything else follows Stomach illness in a group. Ask whether she keeps breastfeeding while
+   vomiting, whether she may prepare her baby's formula or care for her own baby otherwise, and what hand washing is enough when water
+   is short.
+143. **When formula runs out and no one can breastfeed (surv-food-babies-children). Medical professional.** CDC names donor milk as a
+   breast milk substitute: "Breast milk substitutes (formula and donor milk) should be continued as needed to make sure that infants
+   continue to receive enough nutrition if milk supply is not (yet) adequate." No opened source says how a household should get or
+   handle donor milk, or what to feed a baby under 12 months when there is no formula, no breast milk and no donor milk. The sources
+   forbid homemade or watered-down formula and cow's milk or milk alternatives before 12 months. CDC on relactation: "Relactation
+   depends on many different factors, and regular help by a lactation support provider is important."; the child "must be carefully
+   monitored"; CDC also says to learn cup feeding from a lactation support provider. Today: the page says no source covers it, repeats
+   what not to do, gives relactation with CDC's conditions and its formula-or-donor-milk sentence, says relactation is not a quick
+   answer, and says to keep ready-to-feed formula in supplies (Ready.gov). Ask a medical professional about donor milk from another
+   mother in the group (screening, handling), how to support relactation, and how to cup-feed safely. Group action: keep more formula
+   than you think you need.
+144. **Breast milk and opened ready-to-feed formula with no working fridge (surv-food-babies-children). Medical professional.** CDC:
+   completely thawed breast milk "put it in the refrigerator and use it within the next day, or throw it away"; breast milk can stay in
+   an insulated cooler with frozen ice packs up to 24 hours (CDC gives this for travel); opened ready-to-feed formula: follow the label
+   (FDA). Today: those statements as CDC and FDA give them, the cooler time labelled as CDC's travel figure, and "once it is at room
+   temperature or warmed, use it within 2 hours" (CDC). Ask how long thawed breast milk and opened ready-to-feed formula can be kept in a
+   cooler with ice when there is no fridge.
+145. **Which babies need ready-to-feed most (surv-food-babies-children). Medical professional.** CDC: less than 2 months old, born
+   early, or with a weakened immune system. FDA (Do's and Don'ts): younger than 3 months, and ask the baby's doctor about extra
+   precautions; FDA (Handling Infant Formula Safely): two months and younger at higher risk. Today: CDC's line, with FDA's 3 months
+   named beside it. Ask which age to use when there is no doctor to ask.
+146. **Sanitizing dishes: how long in the food mix (surv-food-clean-kitchen).** Clean and disinfect (checked; CDC and New York State
+   Department of Health) says rinse or soak dishes 1 minute in the food mix. University of Florida IFAS Extension, with the same
+   strength (1 tablespoon of bleach per gallon), says submerge them 5 to 10 minutes. Today: Clean and disinfect's steps by link; the
+   Florida time is not given. Say if the group wants the longer soak (Clean and disinfect would change).
+147. **No method for drying meat, fruit or vegetables, or for salting, curing or smoking (surv-food-preserving).** USDA FSIS (Jerky
+   and Food Safety): "heat meat to 160°F and poultry to 165°F before the dehydrating process"; "a dehydrator may not reach temperatures
+   high enough to heat meat to 160°F or 165°F"; "Sun drying is not recommended for making meat jerky". NCHFP: "Several outbreaks of E.
+   coli O157:H7 have occurred in venison jerky." Fruit and vegetable methods (NCHFP, Penn State) need an oven, a dehydrator or a freezer,
+   or, for fruit outdoors, at least 85°F, humidity below 60 percent, several days, food-safe screens and a heat or freezer step against
+   insect eggs; Penn State calls sun drying impractical in Pennsylvania's humidity. NCHFP's curing and smoking guidance cures meat in a
+   refrigerator and is not a beginner's method. Today: the page states these requirements in the sources' words and gives no method;
+   it teaches only air-drying herbs (D149). The page gives no temperature or method for drying game (see D149 for what it says about game). Cost: a household with a generator, or in
+   a dry spell, gets no drying method. Say if the group wants a dehydrator method (with USDA's heating step) added for households with
+   power.
+148. **A baby who is not feeding well, with no health care provider (surv-food-babies-children). Medical professional.** CDC: "If you
+   are worried that your baby is not breastfeeding well, talk to a health care provider right away." CDC's solid-food page sends
+   allergy questions (severe eczema, egg allergy, peanut) to the child's doctor or nurse. Today: the page gives CDC's sentence as it
+   stands and leaves allergen introduction out. Ask a medical professional what signs mean a baby is not getting enough and what the
+   group can do without a provider, and whether anything about first allergenic foods belongs in the app.
+149. **Air-dried herbs and the insect step (surv-food-preserving).** Penn State (Let's Preserve: Drying Herbs): air-dried herbs and
+   seeds "need to be treated to destroy any insects or insect eggs by heating the herbs or seeds at 160°F (71°C) for 30 minutes or
+   freezing at 0°F (-17°C) or lower at least 48 hours". NCHFP's herb page gives the same air-drying method without that step. Today:
+   the page follows Penn State (the more cautious), gives the step, and says that without an oven or freezer the herbs have not had
+   it, and adds, labelled as the app's own caution (fix round 2): herbs that have not had the insect step are not put into long
+   storage, are kept apart from other stored food, are looked over before each use, and are thrown out if insects, webbing or mold
+   show (neither source says anything on signs of insect damage in dried herbs; Penn State only says "Make sure herbs are completely
+   dry to prevent mold growth during storage"). Say if the group wants NCHFP's method without the step accepted for a long outage.
+   Also logged here (no number left in 140 to 149): **game jerky temperature (surv-food-preserving), a conflict with checked text.**
+   The National Center for Home Food Preservation's review, section 5.4.6 (Game): "USDA recommends attaining an internal temperature of
+   at least 170°F (CDC 1985)" for game (section 5.4.6, Game; the sentence is about game meat, not jerky alone). The checked Field dressing
+   game topic cooks all wild game to 165°F. Today (corrected in the whole-pack fixes): Preserving food's "Drying meat" warn carries
+   USDA's jerky figures, heat meat to 160°F and poultry to 165°F before dehydrating. The next line says what USDA's jerky page gives
+   for game: "there are other special considerations when making homemade jerky from venison or other wild game", namely that venison
+   can be heavily contaminated with fecal bacteria and that deer carcasses are usually not chilled quickly the way beef is, so bacteria
+   can multiply (USDA FSIS, Jerky and Food Safety, quoting Keene and co-authors); it gives no heating figure of its own for game. Then, labelled as this app's reading, that the USDA figures are not for
+   wild game; that the page gives no temperature for drying game; and that Cook without power cooks all wild game and wild birds to at
+   least 165°F (73.9°C) in the thickest part (its table row, which is Field dressing game's rule). The page gives no method for drying
+   meat, including game. Field dressing game is unchanged and is not linked from the food pages until v7.6 (docs/v7.5-rulings.md).
+   Say which figure the group wants if a game-drying method is ever added.
+
+Food at home pack (v7.5), whole-pack read fixes: numbers from 150.
+
+150. **Mold, freezer burn and CDC's "unusual smell, color or texture" line (surv-food-still-good, surv-food-storage).** CDC (Keep
+   Food Safe After a Disaster or Emergency): throw out food with an unusual smell, color or texture. USDA FSIS (Molds on Food: Are
+   They Dangerous?) lets some foods with a spot of mold be used after scrubbing or cutting (hard salami and dry-cured country hams,
+   hard cheese, firm fruits and vegetables); its page says nothing about power cuts or flood water, and its only general rule is "If
+   food is covered with mold, discard it." USDA FSIS (Freezing and Food Safety): "Freezer burn does not make food unsafe, merely dry
+   in spots"; "It appears as grayish-brown leathery spots"; "Cut freezer-burned portions away either before or after cooking the
+   food." No source opened says how the CDC line and these two USDA pages fit together. Today, labelled as this app's reading: the
+   mold table is only for food that has stayed cold, has not touched flood water and shows no other unusual smell, color or texture,
+   and anything else goes by the rest of Is it still good?; freezer burn as USDA describes it is for food kept frozen, and any other
+   unusual smell, color or texture, or food that thawed in a power cut, goes by Is it still good? Cost if wrong: food USDA would let
+   you keep is thrown out after an outage. Say if the group wants USDA's mold table and freezer-burn rule to apply after a power cut.
+151. **An opened can or jar with no working fridge (surv-food-still-good).** CDC: "Refrigerate any canned or pickled food after you
+   open it." No source opened says what to do when there is no working fridge. Today, labelled as this app's reading: an opened can or
+   jar of a food that is on FoodSafety.gov's fridge chart on the same page goes by its row there (the chart is the sourced owner for
+   those foods: for example opened canned meats and fish, opened spaghetti sauce and opened vegetable juice are thrown out; opened
+   canned fruit, fruit juice and pickles are kept); any other opened can or jar is treated as perishable food left out, under CDC's line
+   on the same page, "never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C)". The chart is for a
+   fridge that was at 40°F or above for more than 2 hours; no source says how long its "keep" rows hold at room temperature, and the
+   page now says so beside the reading ("but no source opened says how long a “Keep” row holds with no fridge at all"). Cost if
+   wrong: an opened can of an unlisted food that could have been kept is thrown out, or a listed one is kept longer than a source
+   would allow. Say if the group wants a time limit on the chart's "keep" rows with no fridge.

@@ -25,6 +25,10 @@
         {
           "link": "s:surv-fallout-warning",
           "label": "Fallout warning: what to do first"
+        },
+        {
+          "link": "s:surv-food-how-much",
+          "label": "How much food to store, and what"
         }
       ]
     },

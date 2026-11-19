@@ -360,11 +360,16 @@ ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-sa
           # radiation pack (Task 8): all ten topics, so no Where or When filter can hide fallout guidance (spec 4)
           's:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
           's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
-          's:surv-potassium-iodide', 's:surv-fallout-get-ready']
+          's:surv-potassium-iodide', 's:surv-fallout-get-ready',
+          # food pack (Task 8): all ten topics, so no Where or When filter can hide food safety (spec 4)
+          's:surv-food-power-out', 's:surv-food-still-good', 's:surv-food-cooking-no-power', 's:surv-food-poisoning', 's:surv-food-how-much',
+          's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-preserving']
 RADIATION = ['s:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
              's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
              's:surv-potassium-iodide', 's:surv-fallout-get-ready']   # named, so a later pack appending to ALWAYS cannot shift it
-assert set(RADIATION) <= set(ALWAYS)
+FOOD = ['s:surv-food-power-out', 's:surv-food-still-good', 's:surv-food-cooking-no-power', 's:surv-food-poisoning', 's:surv-food-how-much',
+        's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-preserving']
+assert set(RADIATION) <= set(ALWAYS) and set(FOOD) <= set(ALWAYS)
 # Topics tagged when: cold: listed under Any and Cold, hidden under Warm, for every Where value.
 WHEN_COLD = ['s:surv-unheated-house', 's:surv-dress-for-cold', 's:surv-wind-chill', 's:surv-water-winter']
 WHERES = ('any', 'town', 'rural', 'woods', 'coast')
@@ -634,11 +639,14 @@ def _main_text(name):
 
 
 @pytest.mark.parametrize('tid,target', sorted(SIX.items()))
-def test_the_six_checked_topics_differ_from_v73_release_by_one_added_link_block(tid, target):
+def test_the_six_checked_topics_differ_from_v73_release_by_one_added_link_block_apart_from_the_food_pack_link(tid, target):
     now, was = _shipped('survival')[tid], _main_text(tid)
     extra = []
     now_sections = json.loads(json.dumps(now['sections']))
     assert len(now_sections) == len(was['sections']), tid
+    if tid in CHECKED_FOOD_LINKS:   # the food pack (v7.5) also adds one link block to four of the six: filtered out here, checked against v7.4 below
+        for sn in now_sections:
+            sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != CHECKED_FOOD_LINKS[tid]]
     for sn, sw in zip(now_sections, was['sections']):
         assert sn['h'] == sw['h'], tid
         bn, bw = sn['blocks'], sw['blocks']
@@ -654,3 +662,166 @@ def test_the_six_checked_topics_differ_from_v73_release_by_one_added_link_block(
         if k != 'sections':
             assert now[k] == was[k], f'{tid}: {k} changed'
     assert set(now) == set(was)
+
+
+# ---------- Food pack (Task 8): category home, protected topics, links ----------
+
+FOOD_CAT = 'Food'
+
+
+def test_food_topics_carry_no_where_or_when_key_in_the_shipped_data():
+    food = {i: t for i, t in _shipped('survival').items() if t.get('category') == 'food'}
+    assert sorted('s:' + i for i in food) == sorted(FOOD)   # the three older food topics are under Basics, not here
+    for i, t in food.items():
+        assert 'where' not in t and 'when' not in t, i
+
+
+def test_food_hub_leads_the_category_and_all_ten_are_listed_under_all_fifteen_filters(page, app_url):
+    shipped_home(page, app_url)
+    open_cat(page, FOOD_CAT)
+    for where in WHERES:
+        for when in ('any', 'cold', 'warm'):
+            page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
+            food = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"food\"] button[data-key]')].map(b => b.dataset.key)")
+            assert sorted(food) == sorted(FOOD), f'where={where} when={when}: {food}'
+            assert food[0] == 's:surv-food-power-out', f'where={where} when={when}: {food}'
+
+
+def test_food_category_header_and_its_ten_rows_fit_360px(page, app_url):
+    shipped_home(page, app_url)
+    open_cat(page, FOOD_CAT)
+    for night in (False, True):
+        if night:
+            page.click('#nightBtn')
+            assert page.evaluate('document.documentElement.dataset.theme') == 'night'
+        d = page.locator('#survCats details[data-cat="food"]')
+        boxes = [d.locator('summary').bounding_box()] + [b.bounding_box() for b in d.locator('button[data-key]').all()]
+        assert len(boxes) == 11
+        for b in boxes:
+            assert b['x'] >= 0 and b['x'] + b['width'] <= 360, b
+        assert page.evaluate('document.documentElement.scrollWidth') <= 360
+        assert all(b['height'] >= 48 for b in boxes), [b['height'] for b in boxes]
+        spill = page.evaluate("""[...document.querySelectorAll('#survCats details[data-cat="food"] button[data-key]')].filter(b => {
+            const r = b.getBoundingClientRect(), s = b.querySelector('span').getBoundingClientRect();
+            return s.left < r.left || s.right > r.right || b.scrollWidth > b.clientWidth + 1; }).map(b => b.textContent)""")
+        assert spill == []
+
+
+def _known_keys():
+    from tools.validate import TOOL_NAMES
+    topics, protocols, lists = _shipped('survival'), _shipped('protocols'), _shipped('checklists')
+    return ({'p:' + i for i in protocols} | {'s:' + i for i in topics} | {'c:' + i for i in lists}
+            | {'u:' + n for n in TOOL_NAMES} | {'t:tq', 't:cpr', 't:rate', 't:burn', 'r:9line', 'r:mist'}
+            | {'a:' + n for n in ('map', 'position', 'ballistics', 'areas', 'waypoints', 'settings')})
+
+
+def _title_of(key):
+    kind, i = key.split(':', 1)
+    folder = {'p': 'protocols', 's': 'survival', 'c': 'checklists'}[kind]
+    return _shipped(folder)[i]['title']
+
+
+CHECKED_FOOD_LINKS = {'surv-priorities': 's:surv-food-how-much', 'surv-stomach-illness-in-a-group': 's:surv-food-clean-kitchen',
+         'surv-generators': 's:surv-food-power-out', 'surv-fallout-water-and-food': 's:surv-food-still-good',
+         'surv-fallout-get-ready': 's:surv-food-how-much', 'surv-water-store': 's:surv-food-how-much',
+         'surv-heat-out': 's:surv-food-power-out', 'surv-carbon-monoxide': 's:surv-food-cooking-no-power'}
+
+
+def test_every_link_in_the_food_pages_and_the_checked_topics_resolves_and_is_labelled_with_the_title():
+    topics = _shipped('survival')
+    known = _known_keys()
+    assert 'u:food' not in known and 'p:botulism' not in known   # ruled out in this release: no food planner, no botulism protocol
+    pantry = _shipped('checklists')['pantry']
+    assert pantry['title'] == 'Pantry'
+    for tid in [k[2:] for k in FOOD]:
+        for sec in topics[tid]['sections']:
+            for b in sec['blocks']:
+                if 'link' in b:
+                    assert b['link'] in known, f'{tid}: unknown link {b["link"]}'
+                    if b['link'][:2] in ('p:', 's:', 'u:', 'c:'):
+                        assert b['label'] == _title_of(b['link']), f'{tid}: label {b["label"]!r} for {b["link"]}'
+    for tid, target in CHECKED_FOOD_LINKS.items():
+        for k in _links(topics[tid]):
+            assert k in known, f'{tid}: unknown link {k}'
+        added = [b for sec in topics[tid]['sections'] for b in sec['blocks'] if b.get('link') == target]
+        assert added and all(b['label'] == _title_of(target) for b in added), tid
+
+
+def test_the_food_hub_links_every_other_food_topic_and_the_checklist():
+    hub = _shipped('survival')['surv-food-power-out']
+    keys = _links(hub)
+    for k in FOOD[1:] + ['c:pantry']:
+        assert k in keys, k
+    assert 's:surv-generators' in keys
+    everything = [b['link'] for sec in hub['sections'] if sec['h'] == 'Everything on food' for b in sec['blocks'] if 'link' in b]
+    assert everything[0] == 's:surv-food-how-much'   # how much to store is linked first (spec 10, call 7)
+    assert 'c:pantry' in [b['link'] for sec in hub['sections'] if sec['h'] == 'Get ready before it happens' for b in sec['blocks'] if 'link' in b]
+
+
+# link blocks that earlier writers could not add because their targets did not exist (docs/v7.5-rulings.md, "Links later tasks must add"):
+# topic -> {section: [keys]}; there is no u:food and no p:botulism in this release
+FOOD_LATER_LINKS = {
+    'surv-food-power-out': {'Everything on food': ['s:surv-food-how-much', 's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen',
+                                                   's:surv-food-babies-children', 's:surv-food-preserving'],
+                            'Get ready before it happens': ['s:surv-food-how-much', 'c:pantry']},
+    'surv-food-still-good': {'Cans and jars': ['s:surv-food-storage'], 'Home-canned food': ['s:surv-food-preserving'],
+                             'Flood water': ['s:surv-food-clean-kitchen'], 'More': ['s:surv-food-clean-kitchen', 's:surv-food-babies-children']},
+    'surv-food-cooking-no-power': {'Cook it through': ['s:surv-food-clean-kitchen'], 'Eat it cold': ['s:surv-food-how-much']},
+    'surv-food-poisoning': {'Honey and babies': ['s:surv-food-babies-children'], 'Several people sick': ['s:surv-food-clean-kitchen'],
+                            'Getting rid of a suspect can or jar': ['s:surv-food-preserving']},
+    'surv-food-how-much': {'Babies, children and special needs': ['s:surv-food-babies-children']},
+    'surv-food-storage': {'Dates on food': ['s:surv-food-babies-children'], 'In the freezer': ['s:surv-food-preserving'],
+                          'Insects and rodents': ['s:surv-food-clean-kitchen']},
+    'surv-food-when-short': {'Who must not go short': ['s:surv-food-babies-children'], 'Make what you have last': ['s:surv-food-preserving']},
+    'surv-food-babies-children': {'From 12 months': ['s:surv-food-when-short'], 'When formula runs out': ['c:pantry'],
+                                  'Formula: which kind': ['s:surv-food-storage']},
+    'surv-food-clean-kitchen': {'Raw and cooked apart': ['s:surv-food-storage']},
+    'surv-food-preserving': {'Cold storage': ['s:surv-food-storage'], 'Learning in normal times': ['s:surv-food-storage', 's:surv-food-how-much']},
+}
+
+
+@pytest.mark.parametrize('tid', sorted(FOOD_LATER_LINKS))
+def test_links_the_food_writers_could_not_add_are_in_their_sections(tid):
+    sections = {sec['h']: [b['link'] for b in sec['blocks'] if 'link' in b] for sec in _shipped('survival')[tid]['sections']}
+    for h, wanted in FOOD_LATER_LINKS[tid].items():
+        for k in wanted:
+            assert k in sections[h], f'{tid} / {h} lacks {k}'
+
+
+PACK_COMMIT = '4375170'   # the v7.4 release commit: a fixed base, so this test stays true after the food pack merges
+
+
+def _v74_text(name):
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    r = subprocess.run(['git', 'show', f'{PACK_COMMIT}:src/survival/{name}.json'], cwd=root, capture_output=True, text=True, encoding='utf-8')
+    if r.returncode != 0:
+        pytest.skip(f'v7.4 release commit {PACK_COMMIT} is not in this clone, so the checked topics cannot be compared with it')
+    return json.loads(r.stdout)
+
+
+@pytest.mark.parametrize('tid,target', sorted(CHECKED_FOOD_LINKS.items()))
+def test_the_checked_topics_differ_from_v74_release_by_one_added_link_block(tid, target):
+    now, was = _shipped('survival')[tid], _v74_text(tid)
+    extra = []
+    now_sections = json.loads(json.dumps(now['sections']))
+    assert len(now_sections) == len(was['sections']), tid
+    for sn, sw in zip(now_sections, was['sections']):
+        assert sn['h'] == sw['h'], tid
+        bn, bw = sn['blocks'], sw['blocks']
+        if bn != bw:
+            added = [i for i in range(len(bn)) if bn[:i] + bn[i + 1:] == bw]
+            assert added, f'{tid}: section {sn["h"]!r} differs by more than one block'
+            extra.append(bn[added[0]])
+    assert len(extra) == 1, f'{tid}: expected one added block, found {extra}'
+    assert set(extra[0]) == {'link', 'label'} and extra[0]['link'] == target, extra[0]
+    assert all(isinstance(v, str) and v for v in extra[0].values())
+    for k in now:
+        if k != 'sections':
+            assert now[k] == was[k], f'{tid}: {k} changed'
+    assert set(now) == set(was)
+
+
+def test_the_food_pack_does_not_link_field_dressing_game_until_v76():
+    # Its label puts the food pages above Wound cleaning and care for "dressing" (docs/v7.5-rulings.md); the link returns with v7.6
+    for tid in [k[2:] for k in FOOD]:
+        assert 's:surv-field-dressing-game' not in _links(_shipped('survival')[tid]), tid

@@ -1,0 +1,187 @@
+{
+  "id": "surv-food-clean-kitchen",
+  "title": "Keep food clean",
+  "category": "food",
+  "keywords": [
+    "rinsing produce",
+    "cross contamination"
+  ],
+  "summary": "Keeping food clean with little water: wash your hands with soap before you touch food. Keep raw meat, poultry, seafood and eggs apart from food that won’t be cooked. Wash dishes, counters and cutting boards, sanitize them with the food mix and let them air dry, by the steps in Clean and disinfect, using safe water. Anyone who has had vomiting or diarrhea prepares no food until at least 2 days after it stops.",
+  "doFirst": [
+    "Wash your hands with soap and the cleanest water you have before, during and after preparing food, and before eating (CDC, FoodSafety.gov). How, with little water: Washing hands with little water.",
+    "Anyone who has had vomiting or diarrhea must not prepare or handle food, handle the group’s water, or care for others. CDC: “Wait at least 2 days (48 hours) after symptoms stop.” Wait 3 days (72 hours) if the group can manage it (Minnesota Department of Health; University of Minnesota Extension).",
+    "Keep raw meat, poultry, seafood and eggs apart from food that won’t be cooked: separate cutting boards, plates and utensils (FoodSafety.gov).",
+    "Wash dishes, counters and cutting boards, sanitize them with the food mix and let them air dry, by the steps in Clean and disinfect.",
+    "Safe water for drinking, cooking and washing yourself is bottled, boiled or treated water (CDC). How to make it: Make water safe."
+  ],
+  "sections": [
+    {
+      "h": "Hands",
+      "blocks": [
+        {
+          "p": "Wash with soap and water (FoodSafety.gov, CDC):"
+        },
+        {
+          "list": [
+            "Before, during and after preparing food.",
+            "After handling raw meat, poultry, seafood or their juices, or uncooked eggs.",
+            "Before eating, and before feeding children.",
+            "After using the toilet, changing diapers or cleaning up a child who has used the toilet.",
+            "After touching garbage or an animal, and before and after caring for someone who is sick."
+          ]
+        },
+        {
+          "list": [
+            "Before preparing food, wash with boiled (then cooled) water, bottled water, or water from another acceptable source (New York State Department of Health).",
+            "Anyone preparing food must wash with soap and water; sanitizer does not replace it for them (CDC, evacuation centers).",
+            "Don’t touch ready-to-eat food with bare hands; use utensils (University of Minnesota Extension)."
+          ]
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        }
+      ]
+    },
+    {
+      "h": "Raw and cooked apart",
+      "blocks": [
+        {
+          "list": [
+            "Use one cutting board for fresh produce and other food that won’t be cooked before it is eaten, and another for raw meat, poultry or seafood. Replace boards when they are worn (FoodSafety.gov).",
+            "Use separate plates and utensils for cooked and raw food (FoodSafety.gov).",
+            "Keep raw meat, poultry and seafood in containers or sealed, leakproof plastic bags (FoodSafety.gov).",
+            "Wash plates, utensils and cutting boards that touched raw meat, poultry, seafood, eggs or flour (FoodSafety.gov), then sanitize them as in Clean and disinfect.",
+            "Don’t wash raw meat, poultry, eggs or seafood: it spreads germs around the kitchen (FoodSafety.gov).",
+            "Rinse fruit and vegetables under running water before you peel or cut them, without soap, bleach or produce washes, and scrub firm produce with a clean brush (FoodSafety.gov). Use safe water (CDC).",
+            "Keep food in covered containers. Keep cooking and eating utensils clean (Ready.gov)."
+          ]
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Storing food"
+        },
+        {
+          "p": "Cooking temperatures, and how long cooked food can wait, are in Cook without power and Is it still good?"
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        }
+      ]
+    },
+    {
+      "h": "Dishes and surfaces with little water",
+      "blocks": [
+        {
+          "list": [
+            "Use disposable plates, cups and cutlery if you have them (CDC).",
+            "Scrape leftover food off into the garbage before you wash (University of Florida IFAS Extension).",
+            "Wash, rinse, sanitize with the food mix, and air dry: the steps and the mix are in Clean and disinfect, under Dishes with little water and Surfaces.",
+            "No hot water? Cold water is fine, but the sanitizing step matters even more (University of Florida IFAS Extension).",
+            "When the wash or rinse water gets dirty, empty the basin, clean it and refill it (University of Florida IFAS Extension).",
+            "Wash dish cloths often (FoodSafety.gov)."
+          ]
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        },
+        {
+          "p": "Where to pour the dirty water: Garbage and dirty water. What to heat water on with the power out: Cook without power."
+        },
+        {
+          "link": "s:surv-garbage-and-greywater",
+          "label": "Garbage and dirty water"
+        },
+        {
+          "p": "Pans, dishes, utensils and counters that flood water touched, and pots and pans that fire-fighting chemicals touched, have their own steps in Is it still good?"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        }
+      ]
+    },
+    {
+      "h": "When someone is sick",
+      "blocks": [
+        {
+          "warn": "Anyone who has had vomiting or diarrhea must not prepare or handle food, handle the group’s water, or care for others. CDC: “Wait at least 2 days (48 hours) after symptoms stop.” Wait 3 days (72 hours) if the group can manage it (Minnesota Department of Health; University of Minnesota Extension)."
+        },
+        {
+          "list": [
+            "Wash dishes and food surfaces, then sanitize them with bleach (see Clean and disinfect).",
+            "Throw away food and food packaging within 25 feet (7.6 m) of the vomit or stool (University of Minnesota Extension)."
+          ]
+        },
+        {
+          "link": "s:surv-stomach-illness-in-a-group",
+          "label": "Stomach illness in a group"
+        },
+        {
+          "link": "s:surv-food-poisoning",
+          "label": "Food poisoning and botulism"
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "p": "Bottles and baby feeding items have their own cleaning steps."
+        },
+        {
+          "link": "s:surv-food-babies-children",
+          "label": "Feeding babies and young children"
+        },
+        {
+          "p": "Food that was outdoors during fallout, and wiping counters and plates after fallout: Water and food after fallout."
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "FoodSafety.gov (HHS), 4 Steps to Food Safety (last reviewed September 18, 2023)",
+      "used": "Key times to wash hands; separate cutting boards for produce and raw meat, poultry or seafood; replace worn boards; separate plates and utensils; containers or sealed leakproof bags; wash plates, utensils and boards that touched raw meat, poultry, seafood, eggs or flour; don’t wash meat, poultry, eggs or seafood; rinse produce under running water without soap, bleach or produce washes, before peeling or cutting; scrub firm produce; wash dish cloths often"
+    },
+    {
+      "name": "CDC, What to Do to Protect Yourself During a Power Outage (August 26, 2026)",
+      "used": "Safe water for drinking, cooking and personal hygiene is bottled, boiled or treated"
+    },
+    {
+      "name": "University of Florida IFAS Extension, Safe Dishwashing Without an Automatic Dishwasher (FCS80034, © 2024)",
+      "used": "Scrape off food first; cold water is fine but sanitizing matters more; empty, clean and refill basins when the water gets dirty"
+    },
+    {
+      "name": "Ready.gov, Food (last updated March 30, 2022)",
+      "used": "Keep food in covered containers; keep cooking and eating utensils clean"
+    },
+    {
+      "name": "Washing hands with little water, Stomach illness in a group, Clean and disinfect (other topics in this app)",
+      "used": "Quoted word for word: washing with safe water before preparing food (New York State Department of Health); cooks wash with soap, sanitizer does not replace it (CDC); no bare hands on ready-to-eat food (University of Minnesota Extension); who must not prepare food and for how long (CDC; Minnesota Department of Health; University of Minnesota Extension); sanitize dishes and food surfaces after illness; disposable plates (CDC); food within 25 feet of vomit (University of Minnesota Extension). The food mix and dish steps by link; before feeding children (CDC, as that topic gives it)"
+    },
+    {
+      "name": "Other topics in this app: Cook without power, Is it still good?, Garbage and dirty water, Make water safe, Feeding babies and young children, Water and food after fallout, Food poisoning and botulism, Food when the power goes out",
+      "used": "Cooking temperatures and heating water; time limits and flood or fire clean-up; dirty water; making water safe; baby feeding items; fallout; by link"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

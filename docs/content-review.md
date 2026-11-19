@@ -5607,3 +5607,63 @@ Conversions (app's own): 85°F = 29°C; 100°F = 38°C; 50°F and 70°F = 10°C 
   power (cooking): linked or quoted word for word only.
 - Protect an unheated house, Garbage and dirty water, Priorities, Food and wild plants, Low blood sugar: quoted word for word.
 - Get ready for fallout and Fallout shelter kit: 2 weeks agrees. Stomach illness in a group: not touched.
+
+### Food pack batch B fix round 1 (2026-11-19), from task-4-review.md
+
+Re-opened or newly opened by the writer on 2026-11-19 (built-in search, then fetch of a returned URL; title and date checked):
+- NYSDOH-SPF: New York State Department of Health, Storing and Preparing Food in Weather Emergencies, revised October 2023.
+  https://healthweb-back.health.ny.gov/environmental/emergency/flood/storing_preparing_food.htm : "Keep a food supply that will feed
+  your household for 3 to 7 days." "Stock up on enough food for 3-7 days." "Store food in a cool, dark area." "Keep canned foods in a
+  dry, dark area where the temperature is fairly cool." "Do not store your food in the basement if it is prone to flooding." Used in
+  how-much (days list, replacing NYS-KIT, which is dropped from the topic) and storage (where to keep it). Agrees with FSIS-SS.
+- OHIO-5582: Ohio State University Extension, Eating Nutritiously When the Power Is Out, HYG-5582 (Brinkman, Coplin, Medeiros),
+  02/11/2016. https://ohioline.osu.edu/factsheet/hyg-5582 : "Each day’s menu provides 1,800–2,000 calories and the day’s necessary
+  nutrients."; "Considering an individual’s daily needs can range from 1,200–3,200 calories,"; columns "Serving for 1"; three-day
+  menu, "If more days are needed, repeat the cycle."; no child amount ("Children are also better able to cope when they eat a healthy
+  diet." only).
+- USU-FSH: Utah State University Extension, Food Storage in the Home (Charlotte P. Brennand, Deloy G. Hendricks; no date).
+  https://extension.usu.edu/preserve-the-harvest/research/food-storage-in-home.php : "One pound of dry matter per person per day serves
+  as a basis for a food storage program." "One pound of dry matter provides about 1600 calories of energy." "Thus dried beans, flour,
+  wheat, rice, sugar, dried fruits or vegetables, pastas or dried skim milk…all provide about 1600 calories per pound." "While 1600
+  calories will not adequately meet the energy needs of a hard-working large man…it will quiet hunger pangs for individual members of
+  a family." No child amount. Its water line ("a tablespoon for each 15 calories of food") is not used (water pack). 1 lb = 0.45 kg.
+- OSU-SB re-opened: caption line "MyPlate Plan for 2,000-calorie portion sizes, ages 14+"; Vegetables "2½ cups", "1 cup counts as: 1
+  cup raw, frozen or cooked/canned vegetables; or 2 cups leafy salad greens;" / "or 1 cup 100% vegetable juice"; Fruits "2 cups", "1
+  cup counts as: 1 cup raw, frozen or cooked/canned fruit; or ½ cup dried fruit; or 1 cup 100% fruit juice"; Protein "5½ ounces", "1
+  ounce counts as: 1 ounce cooked or canned lean meats, poultry, or seafood; or 1 egg; or 1 tablespoon peanut butter;" / "or ¼ cup
+  cooked beans or peas; or ½ ounce nuts or seeds"; Grains "6 ounces", "1 ounce counts as: 1 slice bread; or 1 ounce ready-to-eat cereal;
+  or ½ cup cooked rice, pasta or cereal"; Dairy "3 cups", "1 cup counts as: 1 cup milk; or 1 cup yogurt; or 1 cup fortified soy
+  beverage;" / "or 1½ ounces natural cheese or 2 ounces processed cheese". "These suggested pantry items are organized by food group"; the
+  page does not say the list is built on MyPlate (the topic no longer says so). Every cell is in the topic; "cooked/canned" written
+  "cooked or canned", "meats" singular. 1 US cup = 240 mL (the US nutrition-labeling cup; app's conversion); no metric for MyPlate
+  ounces (ruling 12).
+- UAF-PP: University of Alaska Fairbanks Cooperative Extension Service, Pantry Pests, HGA-00062, reviewed June 2024.
+  https://uaf.edu/ces/publications/database/insects-pests/pantry-pests.php : "Another method is to freeze the infested food in plastic
+  bags at 0°F for three to four days to destroy insects and eggs." "at 140°F for 30 minutes" (oven, light infestation); "Heavily
+  infested food should be discarded." Used only for the °F unit (ruling 16).
+- CSU-3D: Colorado State University Extension, Three Day Emergency Supply of Shelf Stable Food for One Person, 4/19/1999. It loaded this
+  time at https://foodsmartcolorado.colostate.edu/food-safety/emergency-resources/three-day-emergency-supply-of-shelf-stable-food-for-one-person
+  (the earlier record of a redirect stands for the first attempt). Servings per three days by the Food Guide Pyramid; "The amount of
+  food you need depends on your age, gender, physical condition and activity level." Not used (ruling 12).
+- UGA-ST re-opened (M-10): both lines are on the page: "Pack all these items in plastic bags (zipper closures work well) to keep them
+  dry and as airtight as possible." (three-day kit) and "Consider stocking zipper-closure plastic food storage or food freezer bags in
+  your emergency supplies." (FAQ). Also "Make a list of meals to be served, labeled "Day 1" through "Day 14"." "Indicate where food can
+  be found for each day, if not stored all in one location." "This process will force you to think through what you will need to
+  purchase and store." Used in how-much "Build it up" steps 2 and 4. UGA-ST "Do not eat out of cans found in any of these conditions
+  during the emergency." used in storage "Cans" (M-7).
+
+Changes by finding (file and line in the fixed files):
+- I-1, I-2: surv-food-when-short.json "Who must not go short" (lines 70 to 95): list is children, pregnant women (FEMA), nursing mothers
+  (CDC, recast as keep breastfeeding); the app caution warn now names nursing mothers, older people, special diets or allergies, sick or
+  injured; FEMA's attention line kept as a stocking line.
+- I-3: surv-food-how-much.json summary (line 15) and "How much in a day" (from line 150): OSU table, Ohio State, Utah State, UGA, each
+  dated and marked not for children.
+- I-4: how-much "How many days" closing paragraph and summary.
+- I-5, M-9: how-much days list (NYSDOH-SPF replaces NYS-KIT); storage "Where to keep it" (NYSDOH-SPF basement and dark lines).
+- I-6: title "Rationing food" (ruling 17); link labels in how-much and storage updated.
+- M-1: storage "Freezing weather" now cites USDA. M-2: storage "Dates on food" sentence now USDA's. M-3: storage freezing line (UAF unit),
+  oven step cut. M-4: half-intake quote ends at "for an extended period". M-5: stress line merged into the mealtimes line. M-6: hub's
+  Do first 2 quoted; FEMA's three steps removed. M-7: "and don’t eat from it (University of Georgia Extension)". M-8: keyword
+  "rations". M-10: as above.
+- Added (controller): how-much "Build it up" step 4, counting the days held, labelled as this app's own suggestion (ruling 13).
+- Draft removed from the three topics and the Pantry checklist.

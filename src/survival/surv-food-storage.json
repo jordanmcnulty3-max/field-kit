@@ -23,9 +23,10 @@
       "blocks": [
         {
           "list": [
-            "Somewhere cool and dry (USDA), and dark if possible (FEMA, Red Cross and USDA booklet).",
+            "Somewhere cool and dry (USDA), and dark if possible (FEMA, Red Cross and USDA booklet; New York State Department of Health).",
             "Temperatures below 85°F (29°C) are best. Over 100°F (38°C) harms canned food, and the risk of spoilage jumps as the temperature rises (USDA). University of Illinois Extension says to keep canned food between 50°F and 70°F (10°C and 21°C).",
             "Never above or beside the stove, under the sink, in a damp garage or basement, or anywhere exposed to high or low temperature extremes (USDA).",
+            "Not in a basement that is prone to flooding (New York State Department of Health).",
             "Away from sunlight, damp spots, and vents, pipes or furnaces that make the temperature swing (University of Illinois Extension).",
             "Off the floor, in a clean, dry, dark place away from any source of moisture (University of Georgia Extension).",
             "In a small home: bedroom or coat closets, under beds or behind furniture (Oregon State University Extension)."
@@ -37,7 +38,7 @@
       "h": "Freezing weather",
       "blocks": [
         {
-          "p": "Keep canned food where it won’t freeze. From Protect an unheated house, word for word: “A can that froze may swell. Never use a swollen can: throw it out (USDA Food Safety and Inspection Service).” “Throw out frozen cans that thawed at 40°F (4°C) or warmer, even if they are not swollen. Cans that thawed and froze again are not safe (USDA Food Safety and Inspection Service).”"
+          "p": "Keep canned food where it won’t freeze: never store it anywhere exposed to high or low temperature extremes (USDA). From Protect an unheated house, word for word: “A can that froze may swell. Never use a swollen can: throw it out (USDA Food Safety and Inspection Service).” “Throw out frozen cans that thawed at 40°F (4°C) or warmer, even if they are not swollen. Cans that thawed and froze again are not safe (USDA Food Safety and Inspection Service).”"
         },
         {
           "link": "s:surv-unheated-house",
@@ -71,7 +72,7 @@
             "Keep storage areas clean, and clean up crumbs and spilled food right away (University of Minnesota Extension).",
             "Check stored food for insects, rodents and water damage every six months (Oregon State University Extension).",
             "Found food with insects in it? Throw it away. Then check all the other food they could get into: there may be more than one infested source (University of Minnesota Extension).",
-            "Older food you are not sure about: freezing it at 0°F (-18°C) for at least four days, or heating it in shallow pans in a 130°F (54°C) oven for at least 30 minutes, kills any eggs or insects (University of Minnesota Extension).",
+            "Older food you are not sure about: freezing it at 0°F (-18°C) for at least four days kills any eggs or insects (University of Minnesota Extension; University of Alaska Fairbanks Extension gives the temperature in °F).",
             "Washing shelves with bleach, ammonia or detergent will not keep pantry insects from coming back, and the chemicals could be dangerous if they touch food (University of Minnesota Extension)."
           ]
         },
@@ -186,7 +187,7 @@
           "warn": "Never buy or use infant formula after its Use-By date (USDA)."
         },
         {
-          "p": "A date never makes food safe. From Is it still good?, word for word: “Throw out any food with an unusual smell, color or texture; a normal one proves nothing: food that looks and smells normal can still make you sick (CDC). When in doubt, throw it out (CDC).”"
+          "p": "Dates are not an indicator of the food’s safety (USDA). From Is it still good?, word for word: “Throw out any food with an unusual smell, color or texture; a normal one proves nothing: food that looks and smells normal can still make you sick (CDC). When in doubt, throw it out (CDC).”"
         },
         {
           "link": "s:surv-food-still-good",
@@ -200,7 +201,7 @@
         {
           "list": [
             "Don’t buy bulging, rusted, leaking or deeply dented cans (USDA).",
-            "Check stored cans now and then for rust, leaks, bulges, bad dents and broken seals. A dent on a seam or on the end of the can can break the seal, and so can a large dent in the side, even if you can’t see it. Replace any can you find like this (University of Georgia Extension)."
+            "Check stored cans now and then for rust, leaks, bulges, bad dents and broken seals. A dent on a seam or on the end of the can can break the seal, and so can a large dent in the side, even if you can’t see it. Replace any can you find like this, and don’t eat from it (University of Georgia Extension)."
           ]
         },
         {
@@ -249,7 +250,7 @@
         },
         {
           "link": "s:surv-food-when-short",
-          "label": "When food is short"
+          "label": "Rationing food"
         },
         {
           "link": "s:surv-water-store",
@@ -259,6 +260,10 @@
     }
   ],
   "sources": [
+    {
+      "name": "New York State Department of Health, Storing and Preparing Food in Weather Emergencies (revised October 2023)",
+      "used": "Cool, dark area; not in a basement prone to flooding"
+    },
     {
       "name": "USDA Food Safety and Inspection Service, Shelf-Stable Food Safety (undated)",
       "used": "Cool, dry place; below 85°F best; over 100°F harmful; never above or beside the stove, under the sink, in a damp garage or basement or at temperature extremes; check your pantry every few weeks; shelf storage table (low-acid and high-acid canned goods with examples, canned ham, rice and dried pasta, jerky, seafood in retort pouches, hard or dry sausage); taste, texture and nutrition change over years; don’t buy bulging, rusted, leaking or deeply dented cans"
@@ -281,7 +286,7 @@
     },
     {
       "name": "University of Georgia Extension, Preparing an Emergency Food Supply, Short Term Food Storage (reviewed March 2020)",
-      "used": "Containers (airtight plastic, glass with screw-top lids, non-rusty metal cans); cooking directions on cards; date when bought and opened; rotate staples once or twice a year; label emergency food and keep a list of dates; canned food within one year for best quality; inspect cans for rust, leaks, bulges, bad dents and broken seals, dents on seams or ends, replace them"
+      "used": "Containers (airtight plastic, glass with screw-top lids, non-rusty metal cans); cooking directions on cards; date when bought and opened; rotate staples once or twice a year; label emergency food and keep a list of dates; canned food within one year for best quality; inspect cans for rust, leaks, bulges, bad dents and broken seals, dents on seams or ends, replace them; do not eat out of cans found in any of these conditions"
     },
     {
       "name": "University of Georgia Extension, Preparing an Emergency Food Supply, Long Term Food Storage (reviewed 2017)",
@@ -297,7 +302,11 @@
     },
     {
       "name": "University of Minnesota Extension, Pantry pests: Insects found in stored food (reviewed 2024)",
-      "used": "Check packages; tightly closed glass, metal or heavy plastic containers or fridge or freezer; clean storage areas; throw away infested food and check other food; freezer at 0 degrees for four days or oven at 130 degrees for 30 minutes; chemicals on shelves don’t prevent pests and could be dangerous"
+      "used": "Check packages; tightly closed glass, metal or heavy plastic containers or fridge or freezer; clean storage areas; throw away infested food and check other food; freezer for at least four days for food you are not sure about; chemicals on shelves don’t prevent pests and could be dangerous"
+    },
+    {
+      "name": "University of Alaska Fairbanks Cooperative Extension Service, Pantry Pests, HGA-00062 (reviewed June 2024)",
+      "used": "Freeze food at 0°F for three to four days to destroy insects and eggs (the unit for the freezing step)"
     },
     {
       "name": "CDC, Rodent Control (Natural Disasters; reviewed August 26, 2026)",
@@ -308,6 +317,5 @@
       "used": "Frozen cans, rodents and the throw-out rule, quoted word for word"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

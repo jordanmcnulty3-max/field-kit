@@ -957,7 +957,10 @@ checklist). Rulings are in docs/v7.5-rulings.md, "Batch B".
    University Extension says Oregon's minimum goal is 2 weeks and many local emergency managers there recommend 4 weeks. Today:
    "This app plans for at least 2 weeks of food at home", the Red Cross figure, the same as water and Get ready for fallout, and it
    names 30 days as the longest figure in any source opened. The group holds about a week now. Say if the group wants a longer
-   target (30 days, a season) written in as the group's own goal.
+   target (30 days, a season) written in as the group's own goal. (Fix round 1:) New York State Department of Health's "Keep a food supply that will feed your household for 3 to 7 days"
+   now replaces the children's checklist in the days list. The topic also adds, labelled as this app's own suggestion, counting the days
+   on the 14-day meal list that the shelves already cover (University of Georgia Extension's Day 1 to Day 14 list). Say if the group
+   wants that line cut.
 131. **Small dents and surface rust on cans (surv-food-storage).** USDA (Shelf-Stable Food Safety): "If a can containing food has a
    small dent, but is otherwise in good shape, the food should be safe to eat." and "Surface rust that you can remove by rubbing
    with your finger or a paper towel is not serious." Is it still good? throws out any container that "looks damaged, cracked or
@@ -975,7 +978,11 @@ checklist). Rulings are in docs/v7.5-rulings.md, "Batch B".
 133. **How much food a child needs (surv-food-how-much, surv-food-when-short). Medical professional.** No source opened gives an
    amount of food for a child aged 1 to 12, for storing or for a shortage. The University of Georgia per-year table is for adults
    and says infant amounts "would vary, depending on the age of the infant". Today: the app gives no amount for a child and says so.
-   Ask a medical professional or a dietitian for amounts the group can store for its children.
+   Ask a medical professional or a dietitian for amounts the group can store for its children. (Fix round 1:) The topic now quotes, as printed, the per-person amounts state extension services
+   give: Oregon State (2021) a 2,000-calorie daily food-group table for ages 14 and up; Ohio State (2016) "Each day's menu provides
+   1,800–2,000 calories"; Utah State (undated) "One pound of dry matter per person per day"; University of Georgia (2017) per adult
+   per year. Each is marked not for children; none gives an amount for a child aged 1 to 12. The gap stands: ask a medical
+   professional for amounts for the group's children.
 134. **Signs that someone is not getting enough food (surv-food-when-short). Medical professional.** No federal, state or extension
    source opened gives signs of underfeeding for lay people, for adults or children. Today: no signs are given; the Dehydration
    protocol is linked for signs of not drinking enough. Ask a medical professional what signs the group should watch for,

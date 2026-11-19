@@ -409,6 +409,104 @@ svg('fallout-coming-inside', 532, 'Save a life first. Then: 1 take off the outer
 {cell(172, 358, '6', C6, [('Care for wounds','tb'), ('once the skin around a',''), ('wound is clean','')])}
 {lbl(170,508,'Then help others and pets, and','tb','middle')}{lbl(170,522,'clean yourself again afterwards','','middle')}''')
 
+# ---------------- FOOD ----------------
+# Food pack Task 7, drawn from the checked text only. food-fridge-freezer: surv-food-power-out, "How long it stays cold" (the
+# table and Do first 1, 5); its only numbers are the three hold times, each beside "keeps food cold for" and "with the door
+# shut". food-cans-to-discard: surv-food-still-good, "Cans and jars" (CDC's four signs and the botulism warning); no number,
+# no can drawn without a sign, no flood rule. Neither says "safe". Defects are drawn in blaze, liquid in blue.
+def chest(x, y, k, rows):
+    """Chest freezer seen from the front with its front wall cut away: body x..x+92, y..y+56, lid shut on top. rows: list of
+    (top, bottom, [x widths]) blocks of food packed side by side."""
+    food = ''.join(f'<rect x="{bx}" y="{top}" width="{w}" height="{bot - top}" rx="2" class="k wf t1"/>'
+                   for top, bot, xs in rows for bx, w in xs)
+    return (f'<rect x="{x}" y="{y}" width="92" height="56" class="k milk t3" data-part="body-{k}"/>'
+            f'<g data-part="food-{k}">{food}</g>'
+            f'<rect x="{x-4}" y="{y-10}" width="100" height="10" rx="2" class="k milk t3" data-part="lid-{k}"/>'
+            f'<rect x="{x+38}" y="{y-6}" width="16" height="3" rx="1" class="kf"/>'
+            f'<path d="M{x+6} {y+56} v5 M{x+86} {y+56} v5" class="k t3"/>')
+
+def hold(y, who, hours):
+    return (f'{lbl(130, y, who, "tb")}{lbl(130, y + 18, "keeps food cold for")}{lbl(130, y + 38, hours, "tl")}'
+            f'{lbl(130, y + 56, "with the door shut")}')
+
+FULL = [(221, 235, [(25, 26), (51, 30), (81, 26)]), (206, 221, [(25, 34), (59, 22), (81, 26)]),
+        (191, 206, [(25, 22), (47, 32), (79, 28)])]
+HALF = [(321, 335, [(25, 30), (55, 24), (79, 28)]), (308, 321, [(25, 24), (49, 32), (81, 26)])]
+
+svg('food-fridge-freezer', 418, 'Keep the fridge and freezer doors shut. With the door shut, a fridge keeps food cold for about 4 hours, a full freezer about 48 hours and a half-full freezer about 24 hours. Before you eat, cook or refreeze anything, check it in Is it still good?', f'''
+{lbl(170,20,'Keep the fridge and freezer doors shut','tl','middle')}
+<line x1="4" y1="32" x2="336" y2="32" class="m t1 d"/>
+<rect x="36" y="42" width="60" height="100" rx="5" class="k milk t3" data-part="fridge"/>
+<rect x="40" y="46" width="52" height="92" rx="3" class="m t1"/>
+<rect x="82" y="58" width="5" height="34" rx="2" class="kf" data-part="fridge-handle"/>
+<path d="M42 142 v5 M90 142 v5" class="k t3"/>
+{hold(62, 'Fridge', 'about 4 hours')}
+<line x1="4" y1="154" x2="336" y2="154" class="m t1 d"/>
+{chest(20, 182, 'full', FULL)}
+{hold(178, 'Full freezer', 'about 48 hours')}
+<line x1="4" y1="254" x2="336" y2="254" class="m t1 d"/>
+{chest(20, 282, 'half', HALF)}
+{hold(278, 'Half-full freezer', 'about 24 hours')}
+<line x1="4" y1="354" x2="336" y2="354" class="m t1 d"/>
+{lbl(170,374,'Before you eat, cook or refreeze anything,','tb','middle')}{lbl(170,390,'check it in','','middle')}
+{lbl(170,408,'Is it still good?','tl','middle')}''')
+
+def can_body(cx, y, h, w=44, cls='k milk'):
+    """Side view of a can: top rim ellipse at y, straight sides, rounded bottom at y + h."""
+    r = w / 2
+    return (f'<path d="M{cx-r} {y} V{y+h} A{r} 6 0 0 0 {cx+r} {y+h} V{y} Z" class="{cls}"/>'
+            f'<path d="M{cx-r} {y+h*0.35:.0f} A{r} 6 0 0 0 {cx+r} {y+h*0.35:.0f} M{cx-r} {y+h*0.7:.0f} A{r} 6 0 0 0 {cx+r} {y+h*0.7:.0f}" class="m t1"/>')
+
+def jar(cx, y, h=50, w=40):
+    """Glass jar, mouth at y, body to y + h."""
+    r = w / 2
+    return (f'<path d="M{cx-r+6} {y} V{y+6} Q{cx-r} {y+8} {cx-r} {y+14} V{y+h-6} Q{cx-r} {y+h} {cx-r+6} {y+h} H{cx+r-6} '
+            f'Q{cx+r} {y+h} {cx+r} {y+h-6} V{y+14} Q{cx+r} {y+8} {cx+r-6} {y+6} V{y} Z" class="k milk"/>')
+
+S1 = f'''<g data-part="sign-1">
+{can_body(85, 76, 38)}
+<path d="M63 76 Q85 52 107 76 Q85 82 63 76 Z" class="h t3 hfl"/>
+<path d="M63 114 Q85 140 107 114" class="h t3"/>
+<path d="M107 104 q4 8 0 12 q-4 -4 0 -12 Z M112 118 q4 8 0 12 q-4 -4 0 -12 Z" class="afs"/>
+<ellipse cx="118" cy="136" rx="12" ry="3" class="afs"/></g>'''
+S2 = f'''<g data-part="sign-2">
+{jar(222, 72, 56)}<rect x="206" y="62" width="32" height="10" rx="2" class="k gr"/>
+<path d="M214 86 L224 96 L216 104 L228 116 L222 124" class="h t3"/>
+<path d="M272 72 V88 L280 94 L276 99 L283 104 L277 109 L272 114 V124 A22 6 0 0 0 316 124 V114 L310 108 L306 103 L312 98 L307 93 L316 88 V72 Z" class="k milk"/>
+<ellipse cx="294" cy="72" rx="22" ry="6" class="k milk"/>
+<path d="M272 84 A22 6 0 0 0 316 84 M272 117 A22 6 0 0 0 316 117" class="m t1"/>
+<path d="M285 96 l5 4 M296 94 l-3 6 M302 103 l-6 3 M288 106 l4 -2" class="h t3"/></g>'''
+S3 = f'''<g data-part="sign-3">
+{can_body(85, 240, 40)}
+<ellipse cx="85" cy="240" rx="22" ry="5" class="k"/>
+<ellipse cx="54" cy="226" rx="20" ry="5" transform="rotate(-35 54 226)" class="k milk"/>
+<path d="M78 236 L66 208 M86 234 L86 204 M94 236 L108 208" class="a t3"/>
+<circle cx="62" cy="202" r="4" class="a t1"/><circle cx="74" cy="198" r="3" class="a t1"/><circle cx="88" cy="196" r="5" class="a t1"/>
+<circle cx="102" cy="200" r="3.5" class="a t1"/><circle cx="114" cy="204" r="4" class="a t1"/>
+<path d="M118 216 q4 8 0 12 q-4 -4 0 -12 Z M56 214 q4 8 0 12 q-4 -4 0 -12 Z" class="afs"/></g>'''
+S4 = f'''<g data-part="sign-4">
+{jar(240, 226, 58)}
+<path d="M224 240 H256 V278 H224 Z" class="wf"/>
+<path d="M223 242 q-2 -8 5 -9 q1 -8 9 -6 q4 -7 11 -2 q8 -3 9 5 q6 2 3 12 Z" class="g gf t3"/>
+<path d="M229 236 h0.1 M236 231 h0.1 M244 233 h0.1 M251 237 h0.1 M240 238 h0.1" class="g t5"/>
+<path d="M228 252 q6 -4 10 2 q4 6 -2 9 q-8 2 -8 -11 Z M244 262 q6 -2 8 4 q0 6 -6 5 q-5 -2 -2 -9 Z" class="g gf"/></g>'''
+
+svg('food-cans-to-discard', 508, 'Cans and jars: throw it out if the container is leaking, bulging or swollen; looks damaged, cracked or abnormal; spurts liquid or foam when opened; or the food is discolored, moldy or smells bad. You cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly. It can be in cans that look normal and in food that smells and tastes normal. How to get rid of a suspect can or jar without touching what is inside: Food poisoning and botulism.', f'''
+{lbl(170,20,'Any of these signs:','tl','middle')}{lbl(170,40,'Throw it out','tl','middle')}
+<line x1="4" y1="50" x2="336" y2="50" class="m t1 d"/>
+<line x1="170" y1="54" x2="170" y2="330" class="m t1 d"/><line x1="4" y1="192" x2="336" y2="192" class="m t1 d"/>
+{S1}{lbl(85,158,'Leaking, bulging','tb','middle')}{lbl(85,172,'or swollen','tb','middle')}
+{S2}{lbl(255,158,'Looks damaged,','tb','middle')}{lbl(255,172,'cracked or abnormal','tb','middle')}
+{S3}{lbl(85,304,'Spurts liquid or foam','tb','middle')}{lbl(85,318,'when opened','tb','middle')}
+{S4}{lbl(255,304,'Food is discolored,','tb','middle')}{lbl(255,318,'moldy or smells bad','tb','middle')}
+<line x1="4" y1="334" x2="336" y2="334" class="m t1 d"/>
+{lbl(170,354,'You cannot see, smell or taste','tb','middle')}{lbl(170,368,'the toxin that causes botulism,','tb','middle')}
+{lbl(170,382,'and even a small taste of food that has it','tb','middle')}{lbl(170,396,'can be deadly.','tb','middle')}
+{lbl(170,418,'It can be in cans that look normal','tb','middle')}{lbl(170,432,'and in food that smells and tastes normal.','tb','middle')}
+<line x1="4" y1="446" x2="336" y2="446" class="m t1 d"/>
+{lbl(170,466,'How to get rid of a suspect can or jar','','middle')}{lbl(170,480,'without touching what is inside:','','middle')}
+{lbl(170,500,'Food poisoning and botulism','tl','middle')}''')
+
 # ---------------- FIRE ----------------
 svg('fire-sizes', 142, 'Fire materials: dry, fine tinder; kindling from pencil lead to thumb thick; fuel forearm thick and up', f'''
 <path d="M30 58 c5 -22 34 -24 42 -6 c8 16 -12 30 -26 22 c-14 -8 -4 -26 12 -22 c12 4 10 16 0 18 M40 48 c8 -6 20 -4 22 6 M36 66 c10 8 26 6 30 -6" class="w t1"/>

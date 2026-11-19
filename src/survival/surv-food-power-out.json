@@ -44,6 +44,10 @@
           "p": "Times from CDC, FoodSafety.gov and USDA. New York State Department of Health gives the same: a fully filled freezer stays at freezing for about two days, a half-full one stays cold for about one day."
         },
         {
+          "fig": "food-fridge-freezer",
+          "cap": "Keep the fridge and freezer doors shut. With the doors shut, a fridge keeps food cold for about 4 hours, a full freezer about 48 hours and a half-full freezer about 24 hours (CDC, FoodSafety.gov, USDA). Before you eat, cook or refreeze anything, check it in Is it still good?"
+        },
+        {
           "list": [
             "Open the doors only as much as you must to check the temperature quickly and get your food (New York State Department of Health).",
             "In the freezer, group items together so they form an “igloo” and protect each other (New York State Department of Health). When the freezer is not full, keep items close together: it helps the food stay cold longer (USDA).",

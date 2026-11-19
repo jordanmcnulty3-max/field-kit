@@ -715,3 +715,255 @@ def test_coming_inside_bag_is_drawn_far_from_the_person_and_pet():
         return min(b[0] for b in out), min(b[1] for b in out), max(b[2] for b in out), max(b[3] for b in out)
     bag, who = box(p['bag-shape']), box(p['people-pets'])
     assert who[0] - bag[2] >= 2 * (bag[2] - bag[0]), (bag, who)
+
+
+# ---- Food pack Task 7: diagrams carry only what their topic carries ----
+# figure -> (topic, section heading it sits in, phrases drawn on it (each also in the topic's own text), wording that must
+#            not be drawn or in the alt text, phrases the caption carries)
+FOOD_FIGS = {
+    'food-fridge-freezer': (
+        'surv-food-power-out', 'How long it stays cold',
+        ['keep the fridge and freezer doors shut', 'fridge', 'full freezer', 'half-full freezer', 'keeps food cold for',
+         'about 4 hours', 'about 48 hours', 'about 24 hours', 'with the door shut',
+         'before you eat, cook or refreeze anything', 'check it in is it still good?'],
+        [r'\bsafe', r'\bok\b', r'\bfine\b', r'\bfresh', r'°', r'\bdays?\b', r'\bminutes?\b', r'\bopen', r'outside',
+         r'\bice\b', r'cooler', r'generator', r'thermometer', r'throw', r'\b(?!4\b|48\b|24\b)\d+'],
+        ['keep the fridge and freezer doors shut.', 'a fridge keeps food cold for about 4 hours',
+         'a full freezer about 48 hours and a half-full freezer about 24 hours',
+         'before you eat, cook or refreeze anything, check it in is it still good?']),
+    'food-cans-to-discard': (
+        'surv-food-still-good', 'Cans and jars',
+        ['any of these signs', 'throw it out', 'leaking, bulging', 'or swollen', 'looks damaged', 'cracked or abnormal',
+         'spurts liquid or foam', 'when opened', 'food is discolored', 'moldy or smells bad',
+         'you cannot see, smell or taste', 'the toxin that causes botulism', 'and even a small taste of food that has it',
+         'can be deadly', 'it can be in cans that look normal', 'and in food that smells and tastes normal',
+         'how to get rid of a suspect can or jar', 'without touching what is inside', 'food poisoning and botulism'],
+        [r'\bsafe', r'\bok\b', r'\bfine\b', r'\bgood\b', r'\bkeep\b', r'\bsave', r'\d', r'flood', r'pull', r'screw',
+         r'rust', r'small dent', r'boil', r'sniff', r'taste it', r'\beat\b'],
+        ['any of these signs means home-canned or store-bought food might be contaminated',
+         'you cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly',
+         'it can be in cans that look normal and in food that smells and tastes normal',
+         'how to get rid of a suspect can or jar without touching what is inside, and the signs of botulism, are in food '
+         'poisoning and botulism.']),
+}
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_sits_once_in_its_section(name):
+    tid, section = FOOD_FIGS[name][:2]
+    assert name in figs.F, name
+    assert topic_figs()[tid].count(name) == 1, (tid, name)
+    assert fig_section(tid, name) == [section]
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_draws_its_topics_words(name):
+    tid, _, words, _, _ = FOOD_FIGS[name]
+    d, topic = drawn_of(name), topic_text(tid)
+    for w in words:
+        assert w in d, f'{name}: missing {w!r} in drawn text: {d}'
+        assert w in topic, f'{name}: {w!r} is not in {tid}'
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_every_drawn_line_is_in_the_text(name):
+    """Every text string drawn is word for word in the topic's own text (not its captions or sources); trailing punctuation
+    that only ends a line is ignored. No step badges: neither figure is a sequence."""
+    tid = FOOD_FIGS[name][0]
+    source = topic_text(tid)
+    for _, _, s in _texts(name):
+        line = s.strip().rstrip(':,.').strip()
+        assert line and line in source, f'{name}: drawn {s!r} is not in {tid}'
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_draws_no_unstated_wording(name):
+    banned = FOOD_FIGS[name][3]
+    for t in (drawn_of(name), alt_of(name)):
+        for pat in banned:
+            assert not re.search(pat, t), f'{name}: says {pat!r}: {t}'
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_alt_and_caption(name):
+    """The caption is the topic's own sentences, word for word, and carries what the picture shows."""
+    tid, _, _, _, cap_words = FOOD_FIGS[name]
+    alt = alt_of(name)
+    assert len(alt) > 40, alt
+    cap = topic_caption(tid, name)
+    for w in cap_words:
+        assert w in cap, f'{name}: caption missing {w!r}: {cap}'
+    assert not re.search(r'\bsafe|\bfine\b|\bok\b', cap)
+    for sentence in [x.strip() for x in re.split(r'(?<=[.?])\s', cap) if x.strip()]:
+        assert sentence.rstrip('.') in topic_text(tid), f'{name}: caption sentence not in the topic: {sentence!r}'
+
+
+def _rows(name):
+    """Drawn texts grouped into the horizontal bands between the figure's full-width dashed dividers."""
+    root = ET.fromstring(figs.F[name][0])
+    cuts = sorted(float(e.get('y1')) for e in root.iter() if e.tag.split('}')[-1] == 'line' and 'd' in e.get('class', '').split()
+                  and e.get('y1') == e.get('y2') and float(e.get('x2')) - float(e.get('x1')) > 250)
+    bands = [-1e9] + cuts + [1e9]
+    out = [[] for _ in range(len(bands) - 1)]
+    for x, y, s in _texts(name):
+        out[next(i for i in range(len(bands) - 1) if bands[i] < y < bands[i + 1])].append(s)
+    return out
+
+
+def test_fridge_freezer_hold_times_carry_their_condition_and_appliance():
+    """Each hold time is drawn in its own band with its appliance, "keeps food cold for" and "with the door shut" (never the
+    number alone), in the table's order: fridge, full freezer, half-full freezer. The only numbers are the three hold times."""
+    rows = _rows('food-fridge-freezer')
+    want = [('fridge', 'about 4 hours'), ('full freezer', 'about 48 hours'), ('half-full freezer', 'about 24 hours')]
+    held = [r for r in rows if any(re.search(r'\d', s) for s in r)]
+    assert len(held) == 3, rows
+    for r, (who, hours) in zip(held, want):
+        assert r[0] == who, (r, who)
+        assert hours in r and 'keeps food cold for' in r and 'with the door shut' in r, r
+        assert [s for s in r if re.search(r'\d', s)] == [hours], r
+    assert rows[0] == ['keep the fridge and freezer doors shut'], rows[0]
+    assert rows[-1] == ['before you eat, cook or refreeze anything,', 'check it in', 'is it still good?'], rows[-1]
+    title = [t for t in ET.fromstring(figs.F['food-fridge-freezer'][0]).iter() if t.tag.split('}')[-1] == 'text'
+             and ''.join(t.itertext()) == 'Is it still good?']
+    assert len(title) == 1 and {'tb', 'tl'} & set(title[0].get('class').split()), 'the page name stands on its own line, in bold'
+    plain = [t for t in ET.fromstring(figs.F['food-fridge-freezer'][0]).iter() if t.tag.split('}')[-1] == 'text'
+             and ''.join(t.itertext()) == 'check it in']
+    assert len(plain) == 1 and 'tb' not in (plain[0].get('class') or '').split()
+    assert sorted(re.findall(r'\d+', alt_of('food-fridge-freezer'))) == ['24', '4', '48']
+    for s in ('about 4 hours', 'about 48 hours', 'about 24 hours', 'with the door', 'doors shut', 'check it in is it still good?'):
+        assert s in alt_of('food-fridge-freezer'), s
+
+
+def _box(el):
+    out = []
+    for e in el.iter():
+        if e.tag.split('}')[-1] in ('rect', 'line', 'path'):
+            out.append(bbox(e))
+    return min(b[0] for b in out), min(b[1] for b in out), max(b[2] for b in out), max(b[3] for b in out)
+
+
+def test_fridge_freezer_doors_shut_and_full_versus_half_full():
+    """The fridge door and both freezer lids are drawn shut (the lid sits on the body and spans it); the full freezer's food
+    reaches most of the way up, the half-full one's no more than about half; the half-full freezer's food is kept close
+    together (one block, no gaps wider than the drawn line)."""
+    p = parts('food-fridge-freezer')
+    need = {'fridge', 'fridge-handle', 'lid-full', 'body-full', 'food-full', 'lid-half', 'body-half', 'food-half'}
+    assert need <= set(p), need - set(p)
+    for k in ('full', 'half'):
+        lx0, ly0, lx1, ly1 = bbox(p[f'lid-{k}'])
+        bx0, by0, bx1, by1 = bbox(p[f'body-{k}'])
+        assert lx0 <= bx0 and lx1 >= bx1 and ly1 == by0, (k, (lx0, ly0, lx1, ly1), (bx0, by0, bx1, by1))
+        fx0, fy0, fx1, fy1 = _box(p[f'food-{k}'])
+        assert bx0 < fx0 and fx1 < bx1 and by0 < fy0 and fy1 < by1, f'{k}: food inside the freezer'
+    bx0, by0, bx1, by1 = bbox(p['body-full'])
+    fill_full = (by1 - _box(p['food-full'])[1]) / (by1 - by0)
+    bx0, by0, bx1, by1 = bbox(p['body-half'])
+    fill_half = (by1 - _box(p['food-half'])[1]) / (by1 - by0)
+    assert fill_full >= 0.8 and 0.35 <= fill_half <= 0.55, (fill_full, fill_half)
+    hx0, hy0, hx1, hy1 = bbox(p['fridge-handle'])
+    fx0, fy0, fx1, fy1 = bbox(p['fridge'])
+    assert fx0 < hx0 and hx1 < fx1 and fy0 < hy0 and hy1 < fy1, 'the handle is on the closed door'
+
+
+def test_cans_signs_in_the_topics_order_with_the_warning_and_pointer_below():
+    """The four signs read left to right, top to bottom in the order of the topic's list; "Any of these signs" and "Throw it
+    out" are above them; the whole botulism warning, then the disposal pointer, are below them."""
+    texts = _texts('food-cans-to-discard')
+    first = ['leaking, bulging', 'looks damaged,', 'spurts liquid or foam', 'food is discolored,']
+    pos = [next((x, y) for x, y, s in texts if s == f) for f in first]
+    assert pos[0][1] == pos[1][1] < pos[2][1] == pos[3][1] and pos[0][0] < pos[1][0] and pos[2][0] < pos[3][0], pos
+    top = [y for x, y, s in texts if s in ('any of these signs:', 'throw it out')]
+    assert len(top) == 2 and max(top) < min(y for _, y in pos) - 60
+    order = [s for _, y, s in sorted(texts, key=lambda t: t[1]) if y > max(y for _, y in pos)]
+    assert order[2:] == ['you cannot see, smell or taste', 'the toxin that causes botulism,',
+                         'and even a small taste of food that has it', 'can be deadly.', 'it can be in cans that look normal',
+                         'and in food that smells and tastes normal.', 'how to get rid of a suspect can or jar',
+                         'without touching what is inside:', 'food poisoning and botulism'], order
+    alt = alt_of('food-cans-to-discard')
+    for w in ('and even a small taste of food that has it can be deadly',
+              'it can be in cans that look normal and in food that smells and tastes normal',
+              'how to get rid of a suspect can or jar without touching what is inside', 'food poisoning and botulism'):
+        assert w in alt, w
+
+
+def _path_points(d):
+    """Every end and control point of a path (absolute and relative M L H V Q A Z), enough for a bounding box."""
+    pts, x, y, sx, sy = [], 0.0, 0.0, 0.0, 0.0
+    for cmd, args in re.findall(r'([MLHVQAZmlhvqaz])([^MLHVQAZmlhvqaz]*)', d):
+        n = [float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', args)]
+        rel = cmd.islower()
+        c = cmd.upper()
+        step = {'M': 2, 'L': 2, 'H': 1, 'V': 1, 'Q': 4, 'A': 7, 'Z': 0}[c]
+        if c == 'Z':
+            x, y = sx, sy
+            continue
+        for i in range(0, len(n), step):
+            a = n[i:i + step]
+            if c in 'ML':
+                x, y = (x + a[0], y + a[1]) if rel else (a[0], a[1])
+                if c == 'M' and i == 0:
+                    sx, sy = x, y
+            elif c == 'H':
+                x = x + a[0] if rel else a[0]
+            elif c == 'V':
+                y = y + a[0] if rel else a[0]
+            elif c == 'Q':
+                pts.append((x + a[0], y + a[1]) if rel else (a[0], a[1]))
+                x, y = (x + a[2], y + a[3]) if rel else (a[2], a[3])
+            elif c == 'A':
+                x, y = (x + a[5], y + a[6]) if rel else (a[5], a[6])
+            pts.append((x, y))
+    return pts
+
+
+def _shape_box(el):
+    xs, ys = [], []
+    for e in el.iter():
+        tag = e.tag.split('}')[-1]
+        if tag in ('circle', 'ellipse'):
+            cx, cy = float(e.get('cx')), float(e.get('cy'))
+            rx, ry = float(e.get('r') or e.get('rx')), float(e.get('r') or e.get('ry'))
+            if e.get('transform'):   # rotated: take the larger radius both ways
+                rx = ry = max(rx, ry)
+            xs += [cx - rx, cx + rx]; ys += [cy - ry, cy + ry]
+        elif tag in ('rect', 'line'):
+            b = bbox(e); xs += [b[0], b[2]]; ys += [b[1], b[3]]
+        elif tag == 'path':
+            for px, py in _path_points(e.get('d')):
+                xs.append(px); ys.append(py)
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+CAN_SIGNS = {'sign-1': 'leaking, bulging', 'sign-2': 'looks damaged,', 'sign-3': 'spurts liquid or foam',
+             'sign-4': 'food is discolored,'}
+
+
+@pytest.mark.parametrize('part', sorted(CAN_SIGNS))
+def test_cans_each_drawing_sits_over_its_own_label(part):
+    """Each sign's drawing is centred over the label naming it and just above it, inside the same panel, so swapping two
+    drawings fails."""
+    texts = _texts('food-cans-to-discard')
+    lx, ly = next((x, y) for x, y, s in texts if s == CAN_SIGNS[part])
+    x0, y0, x1, y1 = _shape_box(parts('food-cans-to-discard')[part])
+    assert abs((x0 + x1) / 2 - lx) <= 20, (part, (x0, x1), lx)
+    assert y1 < ly - 10 and ly - y1 <= 45, (part, y1, ly)
+    for other, label in CAN_SIGNS.items():
+        if other != part:
+            ox, oy = next((x, y) for x, y, s in texts if s == label)
+            assert not (x0 <= ox <= x1 and y0 <= oy <= y1), (part, 'overlaps the label of', other)
+
+
+def test_cans_no_can_or_jar_drawn_without_a_sign():
+    """Every shape in the figure belongs to one of the four sign drawings, apart from the dashed dividers: no can or jar is
+    drawn as if a can without these signs were fine."""
+    root = ET.fromstring(figs.F['food-cans-to-discard'][0])
+    assert set(CAN_SIGNS) <= set(parts('food-cans-to-discard'))
+    loose = []
+    for g in root:
+        tag = g.tag.split('}')[-1]
+        if tag == 'text' or g.get('data-part') in CAN_SIGNS:
+            continue
+        if tag == 'line' and set(g.get('class', '').split()) >= {'m', 'd'}:
+            continue
+        loose.append(ET.tostring(g, encoding='unicode'))
+    assert loose == [], loose

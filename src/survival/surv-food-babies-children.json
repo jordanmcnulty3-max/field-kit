@@ -1,0 +1,446 @@
+{
+  "id": "surv-food-babies-children",
+  "title": "Feeding babies and young children",
+  "category": "food",
+  "keywords": [
+    "ready-to-feed formula",
+    "powdered formula",
+    "infant formula",
+    "mixing formula",
+    "sterilizing",
+    "toddler food"
+  ],
+  "summary": "Breastfeeding is the safest way to feed a baby in an emergency: keep going. Ready-to-feed formula is the safest formula. Powdered formula needs bottled, boiled or treated water and the exact amounts on the label; with no fridge, make it fresh for each feeding. Never water formula down or make your own. Do not give your child honey before 12 months (CDC); no cow’s milk or milk alternatives before 12 months either. Children under 4 choke easily: cut food small, sit them up and watch them eat.",
+  "doFirst": [
+    "Breastfeeding? Keep going. In an emergency it is the safest way to feed a baby, and you can keep breastfeeding even when you feel stressed (CDC).",
+    "Formula: use ready-to-feed if you have it; it needs no water (CDC). Powdered formula: mix it with bottled water; if you have none, boiled water, cooled; treated water only if you have neither (CDC). How to boil or treat water: Make water safe. After fallout, follow Water and food after fallout instead.",
+    "Use the exact amounts of water and powder on the label. Too much or too little formula can make a baby sick. Never make homemade formula (CDC).",
+    "No working fridge? Make fresh formula for every feeding, and throw out what is left after it (CDC).",
+    "Do not give your child honey before 12 months (CDC). Before 12 months, also no cow’s milk and no milk alternatives (CDC).",
+    "Under 4 years old: cut food into pieces no larger than ½ inch (1.3 cm), sit the child upright and watch them eat (USDA, AAP). If a child chokes, use the Emergency protocols linked below."
+  ],
+  "sections": [
+    {
+      "h": "Breastfeeding",
+      "blocks": [
+        {
+          "list": [
+            "In emergencies, breastfeeding is the safest way to feed your baby. It helps protect the baby from germs that cause diarrhea and vomiting, and keeps the baby hydrated (CDC).",
+            "A baby less than 6 months old does not need to drink water or any other liquids, even in hot weather (CDC).",
+            "You can keep breastfeeding and expressing breast milk even if you feel physical and emotional stress (CDC).",
+            "If you think you have less milk than normal, breastfeed more often (CDC). If you give both breast milk and formula, breastfeeding more often raises your supply and means less formula (CDC).",
+            "You can and should keep breastfeeding while sick with certain illnesses such as the flu, COVID-19 or diarrhea, or a breast infection such as mastitis (CDC). Wash your hands with soap and safe water, or use a hand sanitizer with at least 60% alcohol (CDC).",
+            "Learn to express breast milk by hand: in a power outage an electric breast pump may not work (CDC).",
+            "Stay with your child: staying together makes it much easier to keep breastfeeding (CDC)."
+          ]
+        },
+        {
+          "p": "Diarrhea: CDC says keep breastfeeding. No source opened for this app says whether to keep breastfeeding while vomiting. Everything else, preparing food, handling the group’s water and caring for others, follows Stomach illness in a group."
+        },
+        {
+          "link": "s:surv-stomach-illness-in-a-group",
+          "label": "Stomach illness in a group"
+        },
+        {
+          "p": "If you are worried that your baby is not breastfeeding well, CDC says to talk to a health care provider right away."
+        },
+        {
+          "p": "Restarting after stopping (relactation) is possible: you may be able to build your milk back up by pumping, hand expressing and nursing at the breast often. Relactation depends on many different factors, and regular help by a lactation support provider is important. The child must be carefully monitored to make sure they are getting enough to gain weight normally. Breast milk substitutes (formula and donor milk) should be continued as needed so the baby gets enough while the milk supply is not yet enough (CDC)."
+        },
+        {
+          "p": "Nursing mothers are among those who need more water than the minimum: see How much water you need."
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        },
+        {
+          "p": "After fallout, breastfeeding and formula have their own rules: follow Water and food after fallout."
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        }
+      ]
+    },
+    {
+      "h": "Stored breast milk",
+      "blocks": [
+        {
+          "list": [
+            "Freshly expressed milk keeps at room temperature (77°F (25°C) or colder) for up to 4 hours (CDC).",
+            "In an insulated cooler with frozen ice packs, up to 24 hours (CDC gives this for travel).",
+            "Frozen milk that has started to thaw but still has ice crystals can be refrozen (CDC).",
+            "Never refreeze breast milk after it has completely thawed (CDC). Completely thawed but still cold: CDC says put it in the fridge and use it within the next day, or throw it away.",
+            "Once it is at room temperature or warmed, use it within 2 hours (CDC).",
+            "If the baby did not finish it, use what is left within 2 hours, then throw it out (CDC).",
+            "It does not need to be warmed (CDC). Never warm or thaw it in a microwave or straight on the stove (CDC)."
+          ]
+        },
+        {
+          "p": "How long the fridge and freezer stay cold without power is in Food when the power goes out."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        }
+      ]
+    },
+    {
+      "h": "Formula: which kind",
+      "blocks": [
+        {
+          "list": [
+            "Ready-to-feed formula is the safest option in an emergency. It is sterile and needs no water (CDC).",
+            "Powdered formula is not sterile, and it needs safe water (CDC).",
+            "For a baby less than 2 months old, born early, or with a weakened immune system, ready-to-feed formula is especially important in any emergency (CDC). FDA sets the age at younger than 3 months and says to ask the baby’s doctor about extra precautions.",
+            "Never feed homemade infant formula: it can lead to serious health problems (CDC). FDA strongly advises against it too.",
+            "Don’t use formula after its “use by” date (FDA).",
+            "Formula cans that were in unsafe water, or have dents, rust spots, puffy ends or a broken seal: throw them away (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Mixing powdered formula",
+      "blocks": [
+        {
+          "steps": [
+            "Clean the surface where you will mix it. Wash your hands with soap and water; if you have no safe water for that, use hand sanitizer with at least 60% alcohol (CDC).",
+            "Use a clean bottle, or another food-grade container with a lid or cap. Never one that has ever held anything toxic (CDC).",
+            "Water: bottled water, until local authorities say the tap water is safe to drink. No bottled water: boiled water, cooled before mixing. Treated water only if you have no bottled or boiled water (CDC). How to boil or treat it: Make water safe. After fallout, boiling and bleach don’t remove fallout: follow Water and food after fallout.",
+            "Measure the water first, then add the exact number of scoops the label gives, with the scoop that came with it (CDC, FDA). No measuring cup: use a bottle or food-grade container marked with its volume (CDC).",
+            "Put the lid or cap on and shake to mix. Don’t stir (CDC). It does not need warming (CDC).",
+            "Feed it within 1 hour from the start of the feeding, and within 2 hours of making it (CDC).",
+            "After the feeding, throw out any formula that is left; don’t save it for later. Formula mixed with the baby’s saliva grows bacteria (CDC, FDA).",
+            "Clean the bottle and nipple with soap and safe water, or throw away the disposable cup (CDC)."
+          ]
+        },
+        {
+          "warn": "Use the exact amounts of water and formula on the label. Adding too much or too little formula can make your baby sick (CDC). Never water formula down to make it last: formula with too much water will not provide enough nutrition (FDA)."
+        },
+        {
+          "list": [
+            "No working fridge: make fresh formula for every feeding (CDC). With a working fridge, formula you won’t use within 2 hours goes straight in it and is used within 24 hours (CDC, FDA).",
+            "Make only as much as the baby will eat (CDC).",
+            "If you give both, breastfeed or give breast milk first, then the formula (CDC).",
+            "Don’t use a bottle to feed a baby anything except formula or breast milk (CDC).",
+            "Opened powdered formula: write the date on the lid, keep the lid tight and the can in a cool, dry place, not the fridge; it usually needs to be used within one month (FDA). Keep the scoop inside, and the lid and scoop clean and dry (CDC).",
+            "Don’t freeze formula (FDA).",
+            "Opened ready-to-feed formula: follow the label (FDA). After a power cut, opened formula from the fridge is on the chart in Is it still good?"
+          ]
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "p": "To warm it (not needed): stand the closed bottle in a bowl of warm water for a few minutes, keeping water out of the bottle and nipple. Test a few drops on your wrist: warm, not hot. Never in a microwave (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "Feeding from a cup",
+      "blocks": [
+        {
+          "list": [
+            "When safe water is not available, bottles and nipples are dangerous to use, because they are hard to clean (CDC).",
+            "Feed formula or expressed breast milk from a disposable cup, a new cup for each feeding, then throw the cup away (CDC). A baby can lap milk from a cup (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Cleaning bottles and feeding items",
+      "blocks": [
+        {
+          "p": "Clean bottles, nipples, sippy cups and all their parts, cups, bowls, spoons and anything used to make or store baby food, formula or breast milk after every use (CDC)."
+        },
+        {
+          "list": [
+            "Use safe water that has not been used for anything else. Bottled water is safest; otherwise water made safe by boiling, bleach or filtering (CDC; Make water safe).",
+            "Water with chemicals, toxins or radioactive material can’t be made safe by boiling or bleach (CDC).",
+            "No safe water and soap for cleaning? Use disposable cups and supplies (CDC).",
+            "Keep a wash basin and scrub brush only for feeding items (CDC). Never clean feeding items near where you change diapers (CDC).",
+            "Throw away bottle nipples, pacifiers and other hard-to-clean items that floodwater touched (CDC)."
+          ]
+        },
+        {
+          "steps": [
+            "Wash your hands with soap and water, or use hand sanitizer with at least 60% alcohol (CDC).",
+            "Pour out any leftover milk, formula or food (CDC).",
+            "Take everything apart and put it in your wash basin, never straight in the sink: germs in the sink can make a baby sick (CDC).",
+            "Fill the basin with safe water and dish soap and scrub every surface with the brush. Squeeze soapy water through nipples, straws, valves and spouts (CDC).",
+            "Rinse with safe water (CDC).",
+            "Air dry on an unused paper towel or a clean rack, upside down, or in a clean mesh bag; if you can’t air dry, use a clean paper towel. Never a dish towel (CDC).",
+            "Clean the basin, brush and rack with soap and safe water, rinse and air dry them (CDC).",
+            "Store the items, completely dry, in a clean place such as the basin with its lid (CDC)."
+          ]
+        },
+        {
+          "p": "Sanitize them as well, at least once a day, if the baby is younger than 2 months (CDC) or 2 months or younger (FDA), is sick (CDC, FDA), was born early, has a weakened immune system, or is having medical treatment (FDA). FDA also says to sanitize feeding items before their first use:"
+        },
+        {
+          "steps": [
+            "Put the washed items in a pot and cover them with safe water (CDC).",
+            "Boil for 5 minutes (CDC).",
+            "Take them out carefully and let them air dry. Don’t rinse them (CDC)."
+          ]
+        },
+        {
+          "p": "What you can heat the pot on with the power out is in Cook without power. CDC also has a bleach soak for these items; it is a different strength from both mixes in Clean and disinfect and is not on this page, so boiling is the only way to sanitize here. CDC: when there is no heat source to sanitize bottles, that “can increase the possibility of your baby becoming sick.” With no way to boil, feed from disposable cups (CDC). This app’s own caution: don’t use Clean and disinfect’s mixes on baby feeding items instead."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        }
+      ]
+    },
+    {
+      "h": "Before 12 months: never these",
+      "blocks": [
+        {
+          "warn": "Honey is a known source of botulism in babies. Never feed honey to a baby under 1 year of age (New York State Department of Health). Not in food, water or formula, and not on a pacifier (CDC)."
+        },
+        {
+          "list": [
+            "Cow’s milk: not before 12 months. It may cause bleeding in the gut, has too many proteins and minerals for a baby’s kidneys, and does not have the nutrients a baby needs (CDC).",
+            "Milk alternatives made from soy, oat, rice, coconut, cashew or almond: not before 12 months (CDC).",
+            "Fruit or vegetable juice: not before 12 months (CDC)."
+          ]
+        },
+        {
+          "p": "Signs of botulism in a baby are in Food poisoning and botulism."
+        },
+        {
+          "link": "s:surv-food-poisoning",
+          "label": "Food poisoning and botulism"
+        }
+      ]
+    },
+    {
+      "h": "When formula runs out",
+      "blocks": [
+        {
+          "p": "No source opened for this app says what to feed a baby under 12 months when there is no formula and no one can breastfeed. What the sources do say: never water formula down or make your own, and no cow’s milk or milk alternatives before 12 months (CDC, FDA). Restarting breastfeeding needs time and regular help, and CDC says formula or donor milk must continue until the milk supply is enough (see Breastfeeding above): it is not a quick answer. Keep ready-to-feed formula in your supplies before anything happens (Ready.gov)."
+        }
+      ]
+    },
+    {
+      "h": "From 12 months",
+      "blocks": [
+        {
+          "list": [
+            "Whole cow’s milk can start at 12 months, not before. Unflavored and unsweetened (CDC).",
+            "A milk alternative, from 12 months only: unflavored, unsweetened, and fortified with vitamin D and calcium. Check the label (CDC).",
+            "Never raw (unpasteurized) milk, juice, yogurt or cheese: it can make a child very sick (CDC).",
+            "No added sugars, sugary drinks or caffeinated drinks before 2 years (CDC). Juice after 12 months is unnecessary; for ages 1 through 3, AAP says no more than 4 ounces (about 120 mL) of 100% fruit juice a day (CDC).",
+            "Avoid foods high in salt; some snack foods and packaged foods for toddlers are high in it (CDC). Check the label.",
+            "No fish high in mercury: king mackerel, marlin, orange roughy, shark, swordfish, tilefish (from the Gulf of Mexico) and bigeye tuna (CDC). Before serving fish caught by family or friends, check the fish advisories (CDC)."
+          ]
+        },
+        {
+          "p": "Children are among those who need more water than the minimum: see How much water you need."
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        }
+      ]
+    },
+    {
+      "h": "Food for babies starting solids",
+      "blocks": [
+        {
+          "list": [
+            "Solid food can start at about 6 months; not before 4 months (CDC).",
+            "Cook food until it is soft enough to mash easily with a fork. Mash or puree it smooth at first (CDC).",
+            "Take all fat, skin and bones off poultry, meat and fish before cooking (CDC).",
+            "Feed small portions, let the baby eat slowly, and always watch them while they eat (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Choking: foods to change or avoid",
+      "blocks": [
+        {
+          "warn": "Children under the age of 4 are at a high risk of choking while eating (USDA). Keep high-risk foods from them until 4 years of age or older, depending on the child (AAP)."
+        },
+        {
+          "p": "Choking hazards (CDC, AAP, USDA). The list may not include every food that could cause choking (CDC)."
+        },
+        {
+          "list": [
+            "Hot dogs, sausages and meat sticks; tough or large chunks of meat; bones in meat or fish.",
+            "Whole grapes, cherries, berries and melon balls; uncut cherry or grape tomatoes; whole corn kernels; whole beans.",
+            "Hard raw vegetables and fruit, such as raw carrots and apple pieces; whole pieces of canned fruit.",
+            "Uncooked dried vegetables or fruit, such as raisins; other dried fruit.",
+            "Nuts and seeds, whole or chopped, and breads, crackers and cereals with seeds, nuts or whole grain kernels; whole kernels of cooked barley, wheat or other grains; plain wheat germ.",
+            "Chunks or spoonfuls of peanut butter or other nut butters.",
+            "Chunks or cubes of cheese, and string cheese.",
+            "Popcorn, chips, pretzels, cookies and granola bars.",
+            "Round, hard, sticky or gummy candy, caramels, jelly beans, cough drops, lollipops, marshmallows, chewing gum and chewy fruit snacks.",
+            "Ice cubes."
+          ]
+        },
+        {
+          "p": "Also avoid foods as wide around as a nickel, about the size of a young child’s throat (USDA)."
+        },
+        {
+          "p": "Make food safer (USDA, CDC, AAP):"
+        },
+        {
+          "list": [
+            "Cook or steam hard food, like carrots, until it is soft enough to pierce with a fork (USDA).",
+            "Remove seeds, pits and tough skins or peels from fruit and vegetables. Remove all bones from fish, chicken and meat (USDA).",
+            "Cut food into thin slices, strips or pieces no larger than ½ inch (1.3 cm), or grate, mash or puree it (USDA, AAP).",
+            "Grapes, cherries, cherry tomatoes and melon balls: slice them in half lengthwise, then into pieces no larger than ½ inch (1.3 cm) (USDA).",
+            "Hot dogs, string cheese and baby carrots: cut them into short strips, not round pieces (USDA, CDC).",
+            "Grind tough meat and poultry. Grate or thinly slice cheese (USDA). Spread nut butters thinly (AAP)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Choking: how children eat",
+      "blocks": [
+        {
+          "list": [
+            "Sit the child upright, at a table or in a high chair, to eat (CDC, USDA). Never let them run, walk, play or lie down with food in their mouth, or eat in a car or stroller (AAP, CDC).",
+            "Sit and eat with them, and watch them the whole time (CDC, USDA).",
+            "Small bites; swallow between bites, and before talking or laughing (USDA). Keep meals calm and unhurried (CDC). No games with food (USDA).",
+            "Never prop a bottle up for a baby to feed themselves (USDA).",
+            "Many choking incidents happen when older brothers or sisters give dangerous foods to a younger child (AAP)."
+          ]
+        },
+        {
+          "p": "If a child chokes: Choking, infant for a baby under 1 year; Choking, adult and child from about 1 year."
+        },
+        {
+          "link": "p:choking-infant",
+          "label": "Choking, infant"
+        },
+        {
+          "link": "p:choking",
+          "label": "Choking, adult and child"
+        }
+      ]
+    },
+    {
+      "h": "A sick baby or child",
+      "blocks": [
+        {
+          "p": "Vomiting or diarrhea: use the protocols. The Dehydration protocol says: “Babies: keep breastfeeding (WHO).”"
+        },
+        {
+          "link": "p:vomiting-diarrhea",
+          "label": "Severe vomiting or diarrhea"
+        },
+        {
+          "link": "p:dehydration",
+          "label": "Dehydration"
+        },
+        {
+          "p": "Keeping a baby warm and safe asleep in a cold house: Stay warm when the heat is out."
+        },
+        {
+          "link": "s:surv-heat-out",
+          "label": "Stay warm when the heat is out"
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-food-clean-kitchen",
+          "label": "Keep food clean"
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Breastfeeding During a Disaster and Other Emergencies (last updated August 10, 2026)",
+      "used": "Breastfeeding is the safest way in emergencies; protects against germs that cause diarrhea and vomiting; keeps the baby hydrated; under 6 months no water or other liquids even in hot weather; breastfeed more often if less milk; talk to a health care provider if worried"
+    },
+    {
+      "name": "CDC, Questions About Infant Feeding In Emergencies (August 12, 2026)",
+      "used": "Breastfeed and express through stress; keep breastfeeding with flu, COVID-19, diarrhea or mastitis; wash hands or 60% sanitizer; relactation: pumping, hand expressing and nursing often, depends on many factors, regular help by a lactation support provider, monitoring weight gain, formula and donor milk continued as needed; no heat source to sanitize bottles can increase the possibility of a baby becoming sick; ready-to-feed safest; partly thawed milk with ice crystals can be refrozen; completely thawed but cold: fridge, use within the next day or throw away"
+    },
+    {
+      "name": "CDC, Feeding Your Child Safely During a Disaster (February 20, 2025; updated November 24, 2025)",
+      "used": "Learn hand expression, electric pump in an outage; stay with your child; ready-to-use formula first; bottled water for powdered formula, then boiled and cooled, treated only if neither; mixed feeding: breastfeed more often; lap from a disposable cup"
+    },
+    {
+      "name": "CDC, Prepare and Store Powdered Infant Formula in an Emergency (August 10, 2026)",
+      "used": "Ready-to-feed sterile and safest; powdered not sterile; under 2 months, premature, weakened immune system; the five steps; use within 1 hour of starting and 2 hours of preparing; fridge within 24 hours; no fridge: fresh every feeding; throw out leftovers; saliva; breast milk first; bottle only for formula or breast milk; only the amount the baby will eat; cup feeding; exact amounts; too much or too little; no homemade formula; damaged cans; lids and scoops; warming"
+    },
+    {
+      "name": "CDC, How to Clean Infant Feeding Items During Emergencies (January 8, 2025)",
+      "used": "Items to clean after every use; safe water not used for anything else; bottled safest; boil, bleach or filter; chemicals, toxins, radioactive material; disposable supplies; floodwater items; kit used only for feeding items; the cleaning steps; no dish towel; not near diapering; sanitize under 2 months or sick, once a day, boil 5 minutes, don’t rinse (its bleach soak is not given)"
+    },
+    {
+      "name": "CDC, Breast Milk Storage and Preparation (last updated August 14, 2026)",
+      "used": "Room temperature 77°F or colder up to 4 hours; insulated cooler with frozen ice packs up to 24 hours when traveling; never refreeze thawed milk; use within 2 hours once at room temperature or warmed; leftovers within 2 hours; no warming needed; never microwave or heat on the stove"
+    },
+    {
+      "name": "FDA, Handling Infant Formula Safely: What You Need to Know (content current as of May 17, 2024)",
+      "used": "Measure water first, exact scoops; too much water will not provide enough nutrition; higher-risk babies for sanitizing (two months or younger, premature, weakened immune system, ill or receiving medical treatment); sanitize before first use and once daily; saliva in leftovers; fridge within 24 hours; opened powder within about one month, dated lid, cool dry place, not the fridge; freezing not recommended; use-by date; two months and younger at higher risk"
+    },
+    {
+      "name": "FDA, Infant Formula: Safety Do’s and Don’ts (content current as of May 31, 2023)",
+      "used": "Strongly advises against homemade formula; younger than 3 months, premature or weakened immune system: ask the pediatrician about extra precautions; scoop provided; use-by date"
+    },
+    {
+      "name": "Ready.gov, Food (last updated March 30, 2022)",
+      "used": "Food for infants among supplies; use ready-to-feed formula"
+    },
+    {
+      "name": "CDC, Foods and Drinks to Avoid or Limit (Infant and Toddler Nutrition; April 14, 2026)",
+      "used": "No honey before 12 months, not in food, water, formula or on a pacifier; no added sugars; salt; fish high in mercury and the seven named; fish advisories; unpasteurized foods; cow’s milk before 12 months; no juice before 12 months, unnecessary after, AAP’s 4 ounces for ages 1 through 3; caffeine before 2 years"
+    },
+    {
+      "name": "CDC, Cow’s Milk and Milk Alternatives (Infant and Toddler Nutrition; April 16, 2026)",
+      "used": "Whole cow’s milk at 12 months, not before, and why; unflavored and unsweetened; fortified alternatives from 12 months, unflavored, unsweetened, vitamin D and calcium; no raw milk"
+    },
+    {
+      "name": "CDC, When, What, and How to Introduce Solid Foods (April 14, 2026)",
+      "used": "Solids at about 6 months, not before 4 months; soft enough to mash with a fork; smooth at first; remove fat, skin and bones; small portions, eat slowly, always watch; cylindrical foods in strips"
+    },
+    {
+      "name": "CDC, Choking Hazards (Infant and Toddler Nutrition; March 11, 2026)",
+      "used": "The choking-hazard food list; the list may not be complete; sit up, high chair, not in a car or stroller, calm, watch at all times"
+    },
+    {
+      "name": "American Academy of Pediatrics (healthychildren.org), Choking Prevention for Babies & Children (last updated February 27, 2026)",
+      "used": "Foods to avoid or modify; keep high-risk foods until 4 years or older depending on development; pieces no larger than one-half inch; spread nut butters thinly; never run, walk, play or lie down with food; older siblings"
+    },
+    {
+      "name": "USDA Food and Nutrition Service, Reducing the Risk of Choking in Young Children at Mealtimes (FNS-877, September 2020)",
+      "used": "Children under 4 at high risk; its food list (dried fruit, pretzels, ice cubes, cough drops, lollipops added to CDC’s); preparation tips (cook soft, remove seeds, pits, skins and bones, ½ inch, halve round foods lengthwise, strips not rounds, grind meat, grate cheese); nickel width; mealtime tips; never prop a bottle"
+    },
+    {
+      "name": "Food poisoning and botulism, Stomach illness in a group, Make water safe, How much water you need, Water and food after fallout, Is it still good?, Food when the power goes out, Cook without power, Stay warm when the heat is out (other topics in this app); the Choking, Severe vomiting or diarrhea and Dehydration protocols",
+      "used": "The honey warning quoted word for word; who prepares food and cares for others when sick; boiling and treating water; nursing mothers and children need more water; fallout feeding rules; the opened-formula row; fridge and freezer times; what to heat water on; babies in a cold house; choking care; a breastfed baby keeps breastfeeding"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

@@ -5704,3 +5704,402 @@ record that name "Store food so it lasts" refer to the same topic.
   and its caption line. The note is shortened to "No metric figure is given for “ounces” because the page defines them by the “counts
   as” column."
 - N-4: docs/v7.5-rulings.md ruling 16 corrected (both UAF methods are for infested food that is kept; UAF used for the unit only).
+## Food pack batch C: keep food clean, feeding babies and young children, preserving food (2026-11-19)
+
+Files (all draft): src/survival/surv-food-clean-kitchen.json, surv-food-babies-children.json, surv-food-preserving.json.
+tests/test_build.py topic count 52 to 55. Rulings, search findings and links left for later: docs/v7.5-rulings.md ("Batch C").
+Questions: docs/decisions-for-jordan.md section D, 140 to 147. Every source below was found by built-in web search and opened by
+built-in web fetch on 2026-11-19; the title and date were checked after each fetch. Fetches return quotes capped at about 125
+characters, so long sentences were read as consecutive pieces (a second fetch asked for the ends of truncated sentences where
+needed). No Firecrawl, no Bright Data. No URL was constructed: each was returned by a search, named in a fetched page (CDC-PIF was
+the link target named in CDC-FYC), or given by the server as a redirect (USDA-CH, see below).
+
+Source keys:
+- CDC-BFE: CDC, Breastfeeding During a Disaster and Other Emergencies, last updated and reviewed August 10, 2026. https://Www.cdc.gov/nutrition/emergencies-infant-feeding/breastfeeding.html
+- CDC-IFQ: CDC, Questions About Infant Feeding In Emergencies, August 12, 2026. https://www.cdc.gov/infant-feeding-emergencies-toolkit/php/faqs.html (opened twice)
+- CDC-FYC: CDC, Feeding Your Child Safely During a Disaster, February 20, 2025 (metadata updated November 24, 2025). https://www.cdc.gov/breastfeeding/php/guidelines-recommendations/feeding-your-child-safely-during-a-disaster.html (opened twice)
+- CDC-PIF: CDC, Prepare and Store Powdered Infant Formula in an Emergency, August 10, 2026. https://www.cdc.gov/infant-feeding-emergencies-toolkit/php/powdered-infant-formula.html
+- CDC-CLN: CDC, How to Clean Infant Feeding Items During Emergencies, January 8, 2025. https://cdc.gov/infant-feeding-emergencies-toolkit/php/how-to-clean-infant-feeding-items-during-emergencies.html
+- CDC-BMS: CDC, Breast Milk Storage and Preparation, last updated August 14, 2026. https://www.cdc.gov/breastfeeding/breast-milk-preparation-and-storage/handling-breastmilk.html
+- FDA-HIF: FDA, Handling Infant Formula Safely: What You Need to Know, content current as of May 17, 2024. https://www.fda.gov/food/buy-store-serve-safe-food/handling-infant-formula-safely-what-you-need-know
+- FDA-DD: FDA, Infant Formula: Safety Do's and Don'ts, content current as of May 31, 2023. https://fda.gov/consumers/consumer-updates/infant-formula-safety-dos-and-donts
+- CDC-AVL: CDC, Foods and Drinks to Avoid or Limit (Infant and Toddler Nutrition), April 14, 2026. https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/foods-and-drinks-to-avoid-or-limit.html
+- CDC-MILK: CDC, Cow's Milk and Milk Alternatives, April 16, 2026. https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/cows-milk-and-milk-alternatives.html
+- CDC-SOL: CDC, When, What, and How to Introduce Solid Foods, April 14, 2026. https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/when-what-and-how-to-introduce-solid-foods.html
+- CDC-CH: CDC, Choking Hazards (Infant and Toddler Nutrition), March 11, 2026. https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/choking-hazards.html?
+- AAP-CH: American Academy of Pediatrics (healthychildren.org), Choking Prevention for Babies & Children: What Every Parent Needs to Know, Council on Injury, Violence & Poison Prevention, last updated 2/27/2026. https://www.healthychildren.org/English/health-issues/injuries-emergencies/Pages/Choking-Prevention.aspx
+- USDA-CH: USDA Food and Nutrition Service, Reducing the Risk of Choking in Young Children at Mealtimes (FNS-877, September 2020). Landing page https://www.fna.usda.gov/tn/reducing-risk-choking-young-children-mealtimes (returned by search; "Page updated: September 11, 2025"; the agency is now styled Food and Nutrition Administration). Its PDF link https://www.fna.usda.gov/sites/default/files/resource-files/ReducingRiskofChokinginYoungChildren.pdf redirected (302, USDA's server) to https://fna-bwbufwdzbabpezgc.z01.azurefd.us/sites/default/files/resource-files/ReducingRiskofChokinginYoungChildren.pdf, which was fetched twice (the second time for verbatim tips). The wicworks.fns.usda.gov pages returned by the first search redirected to wicworks.fna.usda.gov and were not followed.
+- READY-F: Ready.gov, Food, last updated 03/30/2022. https://ready.gov/food
+- FSG-4: FoodSafety.gov, 4 Steps to Food Safety, last reviewed September 18, 2023. https://www.foodsafety.gov/keep-food-safe/4-steps-to-food-safety
+- CDC-KFS: CDC, Keep Food Safe After a Disaster or Emergency, November 24, 2025. https://www.cdc.gov/food-safety/foods/keep-food-safe-after-emergency.html (re-opened; nothing new used)
+- CDC-PO: CDC, What to Do to Protect Yourself During a Power Outage, August 26, 2026. https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-during-a-power-outage.html (re-opened)
+- UF-DISH: University of Florida IFAS Extension, Safe Dishwashing Without an Automatic Dishwasher for Home, Community Events, and Outdoor Activities (FCS80034/FY1403; Denhard, Simonne, McWilliams; © 2024, no publication date). https://ask.ifas.ufl.edu/publication/FY1403
+- CDC-HC: CDC, Home-Canned Foods (botulism), April 25, 2024. https://cdc.gov/botulism/prevention/home-canned-foods.html
+- NCHFP-ESC: National Center for Home Food Preservation, Ensuring Safe Canned Foods (adapted from USDA Complete Guide to Home Canning, AIB 539, revised 2015). https://nchfp.uga.edu/how/can/general-information/ensuring-safe-canned-foods
+- NCHFP-SUN: National Center for Home Food Preservation, Sun Drying (from So Easy to Preserve, 6th ed. 2014, Bulletin 989, UGA Cooperative Extension; revised by Andress and Harrison). https://nchfp.uga.edu/how/dry/drying-general/sun-drying
+- PSU-DRY: Penn State Extension, Let's Preserve: Drying Fruits and Vegetables (Dehydration), Zepp, Hirneisen, LaBorde, updated April 13, 2023. https://extension.psu.edu/lets-preserve-drying-fruits-and-vegetables (opened twice)
+- NCHFP-CSS: National Center for Home Food Preservation, Curing and Smoking Meats for Home Food Preservation: Literature Review and Critical Preservation Points, section 5 "Cure Smoke Review Safety" (https://nchfp.uga.edu/publications/nchfp-publications/literature-reviews/cure-smoke-review-safety/) and section 6 "Cure Smoke Review Preservation" (https://nchfp.uga.edu/publications/nchfp-publications/literature-reviews/cure-smoke-review-preservation/); its table of contents (https://nchfp.uga.edu/publications/nchfp-publications/literature-reviews/curing-and-smoking-meats-for-home-food-preservation-literature-review-and-critical-preservation-points-table-of-contents/) showed headings only. No author or year shown on the pages fetched.
+
+Would not open or not used: wicworks.fns.usda.gov "reducing risk choking" and "infant nutrition and feeding guide" (cross-host redirects to
+wicworks.fna.usda.gov, not followed); the Preface of NCHFP-CSS (the table of contents page held headings only). Nothing from these is
+in a topic.
+
+Conversions (app's own): ½ inch = 1.3 cm; 77°F = 25°C; 85°F = 29°C; 120°F = 49°C; 240°F = 116°C; 250°F = 121°C; 4 ounces = about
+120 mL; 40°F (4°C) as FoodSafety.gov writes it; 25 feet (7.6 m) as Clean and disinfect writes it.
+
+### surv-food-babies-children
+
+- Tags: none. Links (labels equal titles): s:surv-stomach-illness-in-a-group, s:surv-water-how-much (twice), s:surv-fallout-water-and-food,
+  s:surv-food-power-out, s:surv-make-water-safe, s:surv-food-still-good, s:surv-food-cooking-no-power, s:surv-food-poisoning,
+  p:choking-infant ("Choking, infant"), p:choking ("Choking, adult and child"), p:vomiting-diarrhea, p:dehydration, s:surv-heat-out,
+  s:surv-food-clean-kitchen, s:surv-handwashing, s:surv-clean-and-disinfect.
+- Owner of: infant and child feeding (spec 7). The honey rule is quoted from Food poisoning and botulism (its owner), word for word,
+  with CDC-AVL's "not in food, water, formula or pacifier" added. Water treatment is linked, never restated (no boiling time; CDC-FYC's
+  "boil water for 1 minute" and FDA-HIF's "one minute (3 minutes at elevations above 6500 feet)" are not given; FDA's 6500 feet differs
+  from Make water safe's 5,000 feet, which stands).
+- Agreement with Water and food after fallout "Babies": that section governs after fallout and is linked ("After fallout, breastfeeding
+  and formula have their own rules"). Both say ready-to-feed first and bottled water for powdered formula (CDC). This topic's general
+  order (bottled, then boiled and cooled, then treated only if neither: CDC-FYC) does not apply after fallout, where boiling and
+  bleach do not remove fallout; the link sentence sends readers there. D115 (stored water for formula after fallout) is unchanged.
+- doFirst 1: CDC-BFE ("In emergencies, breastfeeding is the safest way to feed your baby."); CDC-IFQ ("You can continue to breastfeed
+  and express breast milk even if you are feeling physical and emotional stress.").
+- doFirst 2 / Mixing step 3: CDC-PIF ("ready-to-feed (RTF) infant formula is the safest option."; "RTF infant formula is a sterile,
+  liquid infant formula that is ready to feed without adding water."; "Use bottled water to prepare powdered formula until local
+  authorities say the tap water is safe to drink."; "If bottled water is not available, learn how to make water safe by boiling or
+  disinfecting."); CDC-FYC ("If bottled water is not available, boil water for 1 minute and let it cool before mixing with formula.";
+  "Only use treated water to prepare formula if bottled or boiled water is unavailable."). READY-F ("If you must mix infant formula use
+  bottled water or boiled water as a last resort.") does not mention treated water (D140).
+- doFirst 3 / warn: CDC-PIF ("Always use the exact amount of water and formula listed on the instructions of the infant formula
+  container."; "Adding too much or too little formula can make your baby sick."; "Do not make or feed your baby homemade infant
+  formula."; "Feeding homemade infant formula can lead to serious health problems."). "Never water formula down to make it last" is the
+  app's plain restatement of "too much or too little" (no separate source sentence; FDA-HIF was summarised as saying too much water
+  will "not provide enough nutrition", not quoted verbatim, and is not cited for it).
+- doFirst 4 / Mixing list 1: CDC-PIF ("During power outages, you may not have access to a working refrigerator."; "In this case,
+  prepare fresh formula for every feeding."; "Throw out any formula that's left over after feeding your baby."; "Do not refrigerate it
+  to save for later."; "If you are not going to use the prepared formula within 2 hours, immediately store it in the refrigerator" /
+  "and use within 24 hours."); FDA-HIF ("If it is not used immediately, store the bottle in the refrigerator and use it within 24
+  hours.").
+- doFirst 5 / "Before 12 months": CDC-AVL ("Do not give your child honey before 12 months."; "Do not add honey to your baby's food,
+  water, infant formula, or pacifier."; cow's milk "may put them at risk for intestinal bleeding", "too many proteins and minerals for
+  your baby's kidneys to handle easily", "does not have the right amount of nutrients your baby needs"; "Children younger than 12 months
+  should not drink any fruit or vegetable juice."); CDC-MILK ("You can introduce your child to whole cow's milk at 12 months old (but not
+  before)."; "Fortified dairy alternatives can include beverages made from plants, such as soy, oat, rice, coconut, cashew, and almond.";
+  "These milk alternatives should not be given before your child is 12 months old."). Honey warn: Food poisoning and botulism's warn,
+  word for word (New York State Department of Health).
+- doFirst 6 / choking sections: see below.
+- Breastfeeding list: CDC-BFE ("Helps protect your baby from germs that can cause colds, ear infections, diarrhea, and vomiting.";
+  "Keeps your baby hydrated."; "If your baby is less than 6 months old, they do not need to drink water or any other liquids, even in hot
+  weather."; "If you think you have less breast milk than normal, breastfeed more often to increase your breast milk supply."; "If you
+  are worried that your baby is not breastfeeding well, talk to a health care provider right away."); CDC-FYC ("during an emergency you
+  may wish to breastfeed more often to increase your breast milk supply and reduce reliance on formula."; "Learn how to express breast
+  milk by hand."; "If there is a power outage, you may not be able to use your electric breast pump."; "During and after a disaster,
+  stay with your child."; "Staying together makes it much easier to continue breastfeeding."); CDC-IFQ ("You can and should continue
+  breastfeeding while sick with certain illnesses such as the flu, COVID-19, or diarrhea" / "or if you have a breast infection such as
+  mastitis."; "Be sure to wash your hands with soap and safe water or use a hand sanitizer with at least 60% alcohol" / "to help prevent
+  spreading germs."; relactation: "Relactation is when you start breastfeeding again after having stopped for some time (weeks or
+  months)." and "must be carefully monitored to make sure the child is getting enough to have normal weight gain."). Diarrhea and
+  Stomach illness in a group: D142. Nursing mothers need more water: How much water you need ("Children, nursing mothers and sick people
+  (Ready.gov)"), linked, no amount.
+- Stored breast milk: CDC-BMS ("At room temperature (77°F or colder) for up to 4 hours."; "Breast milk can be stored in an insulated
+  cooler with frozen ice packs for up to 24 hours when traveling."; "Never refreeze breast milk after it has thawed."; "Once breast milk
+  is brought to room temperature or warmed, use it within 2 hours."; "If your baby did not finish the bottle, use the leftover milk
+  within 2 hours."; "After 2 hours, leftover breast milk should be discarded."; "Breast milk does not need to be warmed."; "Never thaw
+  or heat breast milk in a microwave."; "Do not heat breast milk directly on the stove or in the microwave."); CDC-IFQ ("Frozen breast
+  milk that has started to thaw but still contains ice crystals can be refrozen."; "If your breast milk has completely thawed but still
+  feels cold, put it in the refrigerator and use it within the next day" / "or throw it away."). The two CDC pages are reconciled as
+  "completely thawed" (never refreeze) and "still has ice crystals" (can be refrozen). The cooler time is labelled "CDC gives this for
+  travel". Fridge 4 days and freezer months are not given (no working fridge or freezer is assumed here; Food when the power goes out
+  links). Thawed milk with no fridge: D144.
+- Formula, which kind: CDC-PIF ("Powdered infant formula is not sterile."; "If your baby is less than 2 months old, was born
+  prematurely, or has a weakened immune system," / "it is especially important to use ready-to-feed infant formula in any emergency.";
+  damaged cans: "If formula cans were exposed to unsafe water, have dents, rust spots, puffy ends or a broken seal," / "throw them away
+  immediately."); FDA-DD ("If your baby is very young (younger than 3 months old), was born prematurely, or has a weakened immune
+  system," / "contact your infant's pediatrician to find out if you need to take extra precautions in preparing your infant's
+  formula."; "The FDA strongly advises parents and caregivers not to make and feed their infants homemade formulas."); FDA-HIF ("Don't
+  use a package or container of infant formula after this date."). FDA-HIF names "Two months and younger" as higher risk; FDA-DD says
+  younger than 3 months (D145).
+- Mixing steps: CDC-PIF step 1 ("Clean your preparation surface."; "Wash your hands with soap and water."; "If water is not available
+  or not safe for handwashing, use alcohol-based hand sanitizer with at least 60% alcohol."; "Use a clean bottle or other food-grade
+  safe container and a lid or cap to prepare the infant formula."; "Never use a container that has ever held any toxic substances or
+  chemicals."); step 3 ("Measure the water first and then add the infant formula powder with the scoop provided."; "If you do not have
+  a measuring cup, use a disposable water bottle or other food-grade safe container" / "that lists the total volume so you can
+  estimate."), FDA-HIF and FDA-DD the same ("Always measure the water first and then add the powder."; "Be sure to use the scoop
+  provided by the manufacturer."); step 4 ("With the lid or cap on, shake infant formula in the bottle or other food-grade safe
+  container to mix."; "Do not stir."; "You do not need to warm infant formula before feeding."); "Use prepared infant formula within 1
+  hour from start of feeding and within 2 hours of preparation."; saliva: CDC-PIF ("The combination of infant formula and your baby's
+  saliva can cause bacteria to grow."), FDA-HIF ("Throw away any leftover formula because it now contains the baby's saliva, which can
+  cause bacteria to grow."); step 5 ("After feeding, thoroughly clean the bottle and nipple with soap and safe water or discard
+  disposable cup."). "Make only the amount your baby will eat" ("When mixing infant formula, make only the amount your baby will eat in
+  the bottle."); breast milk first ("breastfeed or feed your baby breast milk first," / "then feed the formula."); "Do not use a bottle
+  to feed your baby anything besides infant formula or breast milk."; scoop and lids ("Keep powdered formula lids and scoops clean and
+  dry."; "Store the scoop inside the container."). FDA-HIF opened powder ("Once a container of powdered formula is opened, the formula
+  typically needs to be used within one month."; "Write the date that you opened the formula on the lid."; "With the lid tight, store in
+  a cool dry place, not in the refrigerator."); "Freezing is not recommended."; ready-to-feed and concentrate storage: "Follow the
+  manufacturer's directions on the label". Warming: CDC-PIF ("place the closed bottle into a bowl of warm water" / "for a few
+  minutes."; "Avoid getting water into the bottle or nipple."; "putting a few drops of formula on your wrist."; "It should feel warm,
+  not hot."; "Never warm formula in a microwave."). Opened formula after a power cut: Is it still good?'s chart row "Baby formula,
+  opened: Throw out", linked, not restated.
+- Feeding from a cup: CDC-PIF ("When safe water is not available, bottles and bottle nipples are dangerous to use" / "because they are
+  difficult to clean."; "If you are using disposable cups, use a new cup for each feeding."; "pour the formula into a disposable cup to
+  feed your baby."; "After feeding, throw away the cup."); CDC-IFQ ("Disposable cups are recommended for feeding expressed breast milk or
+  infant formula"); CDC-FYC ("If you cannot clean infant feeding supplies safely, children can lap up milk from a disposable cup, if
+  available."). CDC-IFQ's "Ask for help from a lactation support provider if you need to learn how to feed your baby with a cup." is
+  not given (no one to ask; D143).
+- Cleaning: CDC-CLN, all of it in its order ("Clean all items after every use"; the item list; "Use water that has not been used for
+  anything else."; "In most emergencies, bottled water is safest for cleaning."; "water contaminated with germs can be made safe by
+  boiling, adding bleach, or filtering."; "Do not use water contaminated with harmful chemicals, toxins, or radioactive material." / "It
+  cannot be made safe by boiling or adding bleach."; "When safe water and soap are not available for cleaning feeding items, use
+  disposable supplies"; "Throw away bottle nipples, pacifiers, and other items that are hard to clean if they have been touched by
+  floodwater."; "Don't use the wash basin or scrub brush to clean anything else."; steps 1 to 7 as quoted in the fetch, including
+  "NEVER put items directly in a sink." / "Germs in the sink can make your baby sick.", "Pour or squeeze soapy water through bottle
+  nipples, straws, valves, and sippy cup spouts.", "Do NOT dry with a dish towel.", "put all items upside down to drain out the water";
+  "Do not clean infant feeding items near diapering areas!"; sanitize: "If your baby is younger than 2 months or if your baby is sick";
+  "Sanitize all items at least once every day for extra protection."; Method 1 "Put items in a pot and fill with safe water." "Boil for
+  5 minutes." "Remove items carefully." "Air dry sanitized items." "Do NOT rinse sanitized items."). Method 2 ("Add 1 teaspoon of bleach
+  per 1/2 gallon or 8 cups of water." "Soak for 2 minutes." not rinsed) is not given (D141). FDA-HIF allows air drying "on a paper towel
+  or clean dish towel"; CDC-CLN (emergencies) says never a dish towel: CDC used (more cautious). Floodwater items agree with Is it still
+  good? ("Wooden cutting boards, baby bottle nipples and pacifiers that touched flood water").
+- From 12 months: CDC-MILK ("Children can drink unflavored, unsweetened whole cow's milk."; "Choose one that is unflavored and
+  unsweetened."; "Choose one fortified with vitamin D and calcium."; "Check labels because nutrient content can vary between brands.";
+  "Do not give your child raw or unpasteurized milk." and "These harmful bacteria and germs can make your child very sick and can be
+  life-threatening."); CDC-AVL (unpasteurized juice, milk, yogurt, cheeses; "Children younger than 24 months should not have added
+  sugars."; caffeinated drinks before 24 months; "Juice after 12 months is unnecessary."; "The American Academy of Pediatrics
+  recommends no more than 4 ounces of 100% fruit juice a day" / "for children ages 1 through 3 years."; "Avoid feeding foods high in
+  salt (sodium) to young children."; "Some snack foods and store-bought packaged foods for toddlers are high in sodium."; "Before
+  serving fish caught by family and friends, check for fish and shellfish advisories."). CDC-MILK's "about 2 servings of dairy daily"
+  for 12 through 23 months is a feeding amount and is not given (spec 10, call 9: the app adds no feeding amounts it does not need;
+  it is sourced, but no serving size was given in the fetch). Children need more water: How much water you need, linked.
+- Starting solids: CDC-SOL ("Your child can begin eating solid foods at about 6 months."; "Introducing foods before 4 months is not
+  recommended."; "Cook food until it is soft enough to easily mash with a fork."; "Mash or puree vegetables, fruits, and other foods
+  until smooth."; "Remove all fat, skin, and bones from poultry, meat, and fish before cooking."; "Feed small portions and encourage
+  your baby to eat slowly."; "Always watch your child while they are eating."). Allergen guidance (3 to 5 days between new foods; peanut
+  with eczema or egg allergy) is not given: it needs a doctor's input the group may not have and is normal-times guidance.
+- Choking: warn USDA-CH ("Children under the age of 4 are at a high risk of choking while eating."), AAP-CH ("Keep high-risk foods from
+  children until 4 years of age or older, depending on each child's development and maturity level."). Food list merged from CDC-CH
+  (every item kept: corn kernels, uncut cherry or grape tomatoes, hard raw vegetables or fruit, whole pieces of canned fruit, uncut
+  grapes, berries, cherries or melon balls, uncooked dried vegetables or fruit such as raisins, whole or chopped nuts and seeds, chunks
+  or spoonfuls of nut and seed butters, tough or large chunks of meat, hot dogs, meat sticks or sausages, large chunks of cheese
+  especially string cheese, bones in meat or fish, whole beans, cookies or granola bars, chips, pretzels, popcorn, crackers or breads
+  with seeds, nut pieces or whole grain kernels, whole grain kernels of cooked barley, wheat or other grains, plain wheat germ, round or
+  hard candy, jelly beans, caramels, gum drops, gummy candies, chewy fruit snacks, chewing gum, marshmallows; "may not include all
+  foods that could cause choking"), AAP-CH (hot dogs; hard, gooey or sticky candy; chewing gum; nuts and seeds; whole grapes; raw
+  carrot sticks; raw apple chunks; popcorn; thick chunks of nut butter, "be sure to spread thinly instead"; marshmallows; meat sticks
+  or sausages; chunks of meat; chunks of cheese or string cheese) and USDA-CH (adds dried fruit, hard pretzels and pretzel chips, ice
+  cubes, cough drops, lollipops; "avoid serving foods that are as wide around as a nickel," / "which is about the size of a young
+  child's throat."). "Gum drops" is under "gummy candy". Preparation: USDA-CH verbatim tips ("Cook or steam hard food, like carrots,
+  until it is soft enough to pierce with a fork."; "Remove seeds, pits, and tough skins/peels from fruits and vegetables."; "Finely chop
+  foods into thin slices, strips, or small pieces (no larger than ½ inch), or grate, mash, or puree foods."; "Remove all bones from
+  fish, chicken, and meat before cooking or serving."; "Grind up tough meats and poultry."; "Grate or thinly slice cheese before
+  serving."; "Slice these items in half lengthwise." then "slice into smaller pieces (no larger than ½ inch)"; "Cut tube-shaped foods,
+  such as baby carrots, string cheese, hot dogs, etc., into short strips rather than round pieces."); AAP-CH ("Cut food for infants and
+  young children into pieces no larger than one-half inch"); CDC-SOL ("Cut cylindrical foods like hot dogs, sausage, and string cheese
+  into short thin strips."). Eating: CDC-CH ("Have your child sit up while eating (no lying down, crawling, or walking)."; "Have your
+  child sit in a high chair or other safe place."; "Avoid letting your child eat in the car or stroller."; "Keep mealtimes calm.";
+  "Avoid distractions, disruptions, and rushing when eating."; "Watch your child at all times while they are eating."); AAP-CH ("Never
+  let them run, walk, play or lie down with food in their mouths."; "Many choking incidents happen when older brothers or sisters give
+  dangerous foods, toys or small objects to a younger child."); USDA-CH ("Sit and eat with children at meals and snacks."; "Remind
+  children to take small bites of food and swallow between bites."; "Reminding children to swallow their food before talking or
+  laughing."; "When serving infants, do not prop the bottle up on a pillow or other item for the baby to feed him or herself.";
+  "Making sure children are sitting upright while eating."; "All children should avoid playing games with food"). Choking care: the
+  two protocols by link; their age split (infant under about 1 year) is the protocols' own.
+- A sick baby or child: Dehydration protocol's "Babies: keep breastfeeding (WHO)." quoted in short form; Stay warm when the heat is out
+  linked for a baby in a cold house.
+- When formula runs out: no source opened says what to feed a baby under 12 months when there is no formula and no breast milk. D143.
+  READY-F: "Food for infants" and "Use ready-to-feed formula." for keeping it in supplies.
+- Looked for and not found: CDC or FDA guidance on what to feed an infant when formula runs out and nobody can breastfeed (CDC-IFQ and
+  CDC-FYC are silent; FDA-DD only forbids homemade formula); how long opened ready-to-feed formula keeps without a fridge (FDA-HIF: the
+  label); breastfeeding guidance for the mother's own food in a shortage (left to When food is short, a later page); any CDC, AAP or
+  USDA figure for how much a child should eat (none is given; spec 10 call 9).
+
+### surv-food-clean-kitchen
+
+- Title: "Keep food clean" (spec proposal "Keep food clean with little water"; "water" as a title word changed the v7.3 first
+  three for "water"; scope unchanged). Tags: none. Links: s:surv-handwashing, s:surv-food-cooking-no-power, s:surv-food-still-good, s:surv-clean-and-disinfect,
+  s:surv-garbage-and-greywater, s:surv-stomach-illness-in-a-group, s:surv-food-poisoning, s:surv-food-babies-children,
+  s:surv-fallout-water-and-food, s:surv-make-water-safe, s:surv-food-power-out.
+- Owner rules: who must not prepare food is Stomach illness in a group's warn, quoted word for word (doFirst 2 and the "When someone
+  is sick" warn); the food mix and the dish steps are Clean and disinfect's, linked and named, never restated (no amount or time).
+- Quoted word for word from checked topics: Washing hands with little water ("Before preparing food, wash with boiled (then cooled)
+  water, bottled water, or water from another acceptable source (New York State Department of Health)."; "Anyone preparing food must
+  wash with soap and water; sanitizer does not replace it for them (CDC, evacuation centers)."); Stomach illness in a group ("Don't
+  touch ready-to-eat food with bare hands; use utensils (University of Minnesota Extension)."; "Wash dishes and food surfaces, then
+  sanitize them with bleach (see Clean and disinfect)."); Clean and disinfect ("Use disposable plates, cups and cutlery if you have
+  them (CDC)."; "Throw away food and food packaging within 25 feet (7.6 m) of the vomit or stool (University of Minnesota Extension).").
+- doFirst 1 / Hands list: FSG-4 ("Before, during, and after preparing food"; "After handling raw meat, poultry, seafood, or their
+  juices, or uncooked eggs"; "Before eating"; "After using the toilet"; "After changing diapers or cleaning up a child who has used the
+  toilet"; "After touching an animal, animal feed, or animal waste"; "After touching garbage"; "Before and after caring for someone who
+  is sick"); "before feeding children" is CDC's as Washing hands with little water gives it; "the cleanest water you have" is that
+  topic's "Use the cleanest water available to you (CDC)".
+- doFirst 3 / Raw and cooked apart: FSG-4 ("Use one cutting board for fresh produce or other foods that won't be cooked before they're
+  eaten," / "and another for raw meat, poultry, or seafood."; "Replace them when they are worn."; "Use separate plates and utensils for
+  cooked and raw foods."; "At home, place raw meat, poultry, and seafood in containers or sealed, leakproof plastic bags."; "Use hot,
+  soapy water to thoroughly wash plates, utensils, and cutting boards that touched raw meat," / "poultry, seafood, eggs, or flour.";
+  "Don't wash meat, poultry, eggs, or seafood to avoid spreading harmful germs around your kitchen."; "Rinse fruits and vegetables
+  under running water without soap, bleach, or commercial produce washes."; "Rinse fruits and vegetables before peeling, removing
+  skin, or cutting away any damaged or bruised areas."; "Scrub firm produce like melons or cucumbers with a clean produce brush.";
+  "Wash dish cloths often in the hot cycle of your washing machine." (given as "Wash dish cloths often")). "Hot" is dropped from "hot,
+  soapy water" for the plates line: the hot-water point is UF-DISH's cold-water line. READY-F ("Keep food in covered containers.";
+  "Keep cooking and eating utensils clean.").
+- doFirst 5: CDC-PO ("Safe water for drinking, cooking, and personal hygiene includes bottled, boiled, or treated water.").
+- Dishes: UF-DISH ("Before you begin washing your dishes, scrape off any excess food from the surface and discard it"; "If a facility
+  does not have hot water, it is ok to use cold water; however, the sanitation step becomes even more important"; "If the water gets
+  cold or dirty, then empty, clean, and refill the bowls as needed."). UF-DISH's three-basin setup, 110°F wash water, 171°F hot-water
+  sanitizing and its 5 to 10 minute bleach soak are not given: the dish steps are Clean and disinfect's (D146).
+- Not given: CDC-KFS's 1 cup of bleach in 5 gallons (D121, unchanged).
+- Looked for and not found: an official source for washing dishes with a stated small amount of water (none found; Clean and disinfect's
+  steps stand).
+
+### surv-food-preserving
+
+- Title: "Preserving food" (spec proposal "Preserve food without a freezer"; changed because "freezer" as a title word put this page
+  above the hub for "freezer"; the scope is unchanged). Tags: none. Links: s:surv-food-power-out (twice), s:surv-food-still-good
+  (twice), s:surv-food-cooking-no-power (twice), s:surv-food-poisoning.
+- No canning procedure of any kind (spec 10, call 3): no processing time, pressure, jar, headspace or recipe. The 240 to 250°F figure
+  explains why a pressure canner is needed; NCHFP-ESC's "attainable with pressure canners operated at 10 to 15 PSIG" is cut at
+  "pressure canner" (no PSIG given).
+- Quoted word for word from checked topics: Is it still good? ("Don't eat home-canned food if you don't know whether safe canning
+  guidelines were followed (CDC)."; "You cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that
+  has it can be deadly (CDC)."; its freezer rule "once the freezer is above 40°F (4°C), throw out thawed food (New York State
+  Department of Health, CDC). Food that still has ice crystals or is at 40°F (4°C) or below can be refrozen or cooked (CDC,
+  FoodSafety.gov)."); Food when the power goes out ("Don't put your food outside to keep it cold, even in the winter (New York State
+  Department of Health)."). Boiling home-canned food and disposal are linked, not restated.
+- doFirst 2 / Canning list: CDC-HC ("Pressure canning is the only recommended method for canning low-acid foods."; "Do not use a
+  boiling water canner for low-acid foods because it will not protect against botulism."; "Do not use an electric, multi-cooker
+  appliance, even if it has a "canning" or "steam canning" button on the front panel."; "Home-canned vegetables, which are low-acid
+  foods, are the most common cause of botulism outbreaks in the United States."; "These foods include all fresh vegetables, figs,
+  meats, poultry, fish, seafood, and some tomatoes."; "These instructions are in the USDA Complete Guide to Home Canning."; "Use only
+  recipes and cookbooks that follow the steps in the USDA guide."; "Land-grant colleges often provide information on growing and
+  preserving food."; NCHFP "Get information for safely canning, preserving, pickling, fermenting, freezing, drying, curing and smoking,"
+  / "and storing food."). "Don't try canning for the first time now" is labelled as the app's caution (spec 10 call 3).
+- Canning list 3 and 4: NCHFP-ESC ("may produce a deadly toxin within 3 to 4 days of growth in an environment consisting of:" "a
+  moist, low-acid food," "a temperature between 40° and 120°F," and "less than 2 percent oxygen"; "Botulinum spores are very hard to
+  destroy at boiling-water temperatures;"; "Therefore, all low-acid foods should be sterilized at temperatures of 240° to 250°F," /
+  "attainable with pressure canners operated at 10 to 15 PSIG.").
+- doFirst 4 / Drying: NCHFP-SUN ("Vegetables (with the exception of vine dried beans) and meats are not recommended for out-of-doors
+  drying."; "Vegetables are low in sugar and acid."; "Meats are high in protein, making them ideal for microbial growth when heat and
+  humidity cannot be controlled."; "It is best to dry meats and vegetables indoors using controlled conditions of an oven or food
+  dehydrator."; "To dry fruits out-of-doors hot, dry, breezy days are best."; "A minimum temperature of 85ºF is needed with higher
+  temperatures being better."; "It takes several days to dry foods out-of-doors."; "A humidity below 60 percent is best."; "Fruits
+  dried out-of-doors must be covered or brought under shelter at night."). The vine-dried beans exception is not given (no method for
+  it was opened). PSU-DRY ("While sun drying works in dry climates, the high humidity in Pennsylvania makes this method impractical
+  here."; oven "140 (60°C) to 150°F (65°C)"; dehydrator "145°F (62°C)" then "135 (57°C) to 140°F (60°C)"; and, as the first fetch summarised
+  it (not quoted, not used), pasteurizing dried fruit in a freezer or an oven). None of these figures is in the topic. Why no drying method: v7.5-rulings.md Batch C ruling 2.
+- Salting and curing / Smoking: NCHFP-CSS section 6 ("store, age, cure, or otherwise preserve meats in a refrigerator below 40°F.";
+  "Curing should be carried out at a temperature between 35°F and 40°F."; "Mistakenly using sodium nitrite instead of NaCl in typical
+  curing recipes can lead to a lethal dose"; "Smoke itself, without proper cooking, is not an effective food preservative (Hilderbrand
+  1999)."; "Store Cured/Smoked Poultry up to two weeks in the refrigerator or up to one year in the freezer"; "Store lightly cured fish
+  10-14 days in the refrigerator or 2-3 months in the freezer (Luick 1998)."; "Modern fish curing/smoking recipes produce a highly
+  perishable product that rarely keeps better than the raw fish."). Section 5 (botulism thrives in moist foods low in salt; 65% of
+  botulism cases from inadequate home processing) read and not used. NCHFP-CSS also says properly prepared dry cured hams are safe at
+  room temperature; the page's "only in a refrigerator or freezer" is about its poultry and fish storage times, which is what it says.
+  Why no method: ruling 3.
+- Cold storage: links only; root cellars deferred (spec 10 call 5).
+- Looked for and not found: an official beginner method for salting, curing or smoking that works without refrigeration (NCHFP-CSS
+  cures in a refrigerator); an official drying method that works with no power and no freezer in Northeast weather.
+
+### Batch C agreement with checked topics and protocols
+
+- Clean and disinfect: the two mixes are named and linked, never restated; CDC-CLN's bleach soak for baby items is not given (D141);
+  a labelled app caution says not to use Clean and disinfect's mixes on baby feeding items in its place.
+- Stomach illness in a group: its warn is quoted word for word in two topics; a breastfeeding mother with diarrhea keeps breastfeeding
+  (CDC-IFQ) and otherwise follows that topic (D142).
+- Washing hands with little water, Make water safe, How much water you need, Garbage and dirty water: linked; quoted lines word for
+  word; no water amount, boiling time or dose restated.
+- Water and food after fallout, Babies: linked as governing after fallout; no conflict with it (both CDC).
+- Stay warm when the heat is out: linked for a baby in a cold house.
+- Food poisoning and botulism: honey warn quoted; signs of infant botulism linked; disposal linked.
+- Is it still good?, Food when the power goes out, Cook without power: quoted and linked as above; no hold time, discard rule or cooking
+  temperature restated. Heating water indoors is linked to Cook without power, not described.
+- Protocols: Choking, infant; Choking, adult and child; Severe vomiting or diarrhea; Dehydration: linked; labels equal their titles.
+
+### Food pack batch C fix round 1 (2026-11-19), from task-5-review.md
+
+Re-opened or newly opened by the writer with built-in search and fetch (titles checked): USDA FSIS, Jerky and Food Safety (no date
+shown), https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/meat-fish/jerky; NCHFP, Herbs (So Easy to Preserve,
+6th ed. 2014), https://nchfp.uga.edu/how/dry/recipes/herbs; Penn State Extension, Let's Preserve: Drying Herbs (Zepp, Hirneisen,
+LaBorde; updated July 31, 2023), https://extension.psu.edu/lets-preserve-drying-herbs; CDC-IFQ (relactation, heat source, cooler
+answer); FDA-HIF (water amounts, higher-risk babies, sanitizing); CDC-AVL (mercury); CDC-CH (fruit and vegetable and candy items).
+UConn Extension Cold Storage was found by search only (deferred). Draft removed from all three topics.
+
+- Critical 1 (meat drying): FSIS "The U.S. Department of Agriculture (USDA) Meat and Poultry Hotline's current recommendation for
+  making jerky safely is to" / "heat meat to 160°F and poultry to 165°F before the dehydrating process."; "But most dehydrator
+  instructions do not include this step, and a dehydrator may not reach temperatures high enough" / "to heat meat to 160°F or 165°F.";
+  "Sun drying is not recommended for making meat jerky due to a lack of a steady heat source and the potential for" / "contamination
+  from animals, insects, dust and bacteria." NCHFP-CSS s.5.4.6 (Game) "Several outbreaks of E. coli O157:H7 have occurred in venison jerky" (confirmed by
+  the writer's re-fetch). Celsius 71.1 and 73.9 as USDA's chart
+  in Cook without power. Wild game 165°F: Field dressing game, linked. NCHFP's meat line ("dry ... indoors using controlled conditions
+  of an oven or food dehydrator") removed. Summary and Do first 4 changed the same way.
+- Important 1 (outdoor fruit): requirements only, from NCHFP-SUN (85ºF minimum; humidity below 60 percent; several days; "Screens need
+  to be safe for contact with food."; "Avoid screens made from 'hardware cloth.'"; "Also avoid copper and aluminum screening."; "two
+  screens are best"; "Cheesecloth could also be used to cover the food.") and PSU-DRY (insect-egg treatment of dried fruit, as the
+  reviewer quoted: "Heat dried fruit in the oven at 160°F (71°C) for 30 minutes or chill in the freezer at 0°F or below for 48 hours";
+  the topic gives no figure for it). No step order is given; the section ends "This page gives no method for drying fruit or
+  vegetables". NCHFP's vegetable line given as "low in sugar and acid" / "This increases the risks for food spoilage."
+- Herbs (controller): NCHFP Herbs ("Sun drying is not recommended because the herbs can lose flavor and color."; "just before the
+  flowers first open"; "Gather the herbs in the early morning after the dew has evaporated"; "They should not lie in the sun or
+  unattended after harvesting."; "Rinse herbs in cool water and gently shake to remove excess moisture."; "Discard all bruised, soiled
+  or imperfect leaves and stems."; "The more sturdy herbs such as rosemary, sage, thyme, summer savory and parsley" / "are the easiest to
+  dry without a dehydrator."; "Tie them into small bundles and hang them to air dry."; "Basil, oregano, tarragon, lemon balm and the
+  mints have a high moisture content and will mold if not dried quickly."; "Try hanging the tender-leaf herbs or those with seeds inside
+  paper bags to dry."; "Tear or punch holes in the sides of the bag."; "Suspend a small bunch (large amounts will mold) of herbs in a bag
+  and close the top with a rubber band."; "Place where air currents will circulate through the bag."; "When the leaves are crispy dry
+  and crumple easily between the fingers"; "Place herbs in airtight containers and store in a cool, dry, dark area"); PSU Drying Herbs
+  ("For air-drying to be successful, humidity must be low and good air circulation must be available."; "Start with clean countertops
+  and utensils."; "Wash hands with soap and warm water."; "Inspect plants, especially seeds, for insects."; "Then gently pat dry with a
+  paper towel."; "Remove as much moisture as possible."; "hung in a dry area with good air circulation"; "If you use a rubber band to tie
+  them, it will tighten as the stems dry and stems will not fall out of the cluster."; "Hang herbs away from the sink, stove, or
+  dishwasher where there is a lot of moisture."; "Keep dust off herbs by covering them with a paper bag punched with holes."; "Make sure
+  herbs are completely dry to prevent mold growth during storage."; "Herbs that have been air-dried and seeds need to be treated to
+  destroy any insects or insect eggs by heating the herbs or seeds at 160°F (71°C) for 30 minutes" / "or freezing at 0°F (-17°C) or
+  lower at least 48 hours."; "(The heat method will reduce the flavor and is not suitable for seeds that you want for planting.)";
+  "Store in a cool, dry, dark place such as cupboards or drawers away from stoves and sinks."; "Don't set them near the stove top or on
+  a windowsill."; "Most dried herbs keep well for up to a year."). Conflict: NCHFP has no insect step; Penn State's is used (D149).
+  NCHFP's dehydrator, oven-light and microwave methods are not given (power).
+- Important 2: CDC-IFQ relactation lines quoted in the Breastfeeding paragraph ("You may be able to relactate or re-establish your milk
+  production by pumping, hand expressing, and/or" / "nursing directly at the breast often."; "Relactation depends on many different
+  factors, and regular help by a lactation support provider is important."; "must be carefully monitored"; "Breast milk substitutes
+  (formula and donor milk) should be continued as needed to make sure that infants continue" / "to receive enough nutrition if milk
+  supply is not (yet) adequate."). "When formula runs out" now says relactation is not a quick answer. D143 corrected.
+- Important 3: fallout pointer in Do first 2 and mixing step 3, and a link block after the mixing list (Water and food after fallout:
+  "Boiling tap water does not remove radioactive material (CDC)"; CDC-CLN "It cannot be made safe by boiling or adding bleach.").
+- Important 4: FDA-HIF higher-risk list (two months or younger, weakened immune system, premature, ill or receiving medical treatment;
+  summarised by the fetch, wording "having medical treatment" the app's) and "Sanitize the feeding items before first use and once daily
+  by:" (verbatim, first fetch). The more cautious union is used; recorded in D141.
+- Important 5: CDC-CH "Uncooked dried vegetables or fruit, such as raisins." and "Round or hard candy, jelly beans, caramels, gum drops,
+  or gummy candies." restored. The record's earlier "every item kept" was wrong for these two.
+- Important 6: CDC-IFQ names flu, COVID-19, diarrhea and mastitis; "vomiting" removed; the page says no opened source covers it (D142).
+- Important 7: search re-measured; ruling 13 rewritten.
+- Important 8: D141 rewritten (Medical professional; CDC's soak verbatim; CDC-IFQ "A heat source may not be available to safely sanitize
+  the bottles, which can increase the possibility of your baby" / "becoming sick."). Topic sentence quotes it and points to disposable
+  cups (CDC-PIF, CDC-FYC). "this app does not give it" removed.
+- Minor 1: FDA-HIF "Formula with too much water will not provide enough nutrition." cited (FDA).
+- Minor 2: CDC-IFQ's "completely thawed ... use it within the next day or throw it away" is in its answer "I brought a cooler. How can I
+  store my milk?" (milk on arrival); the topic attributes it to CDC as before; "completely" in the refreeze line reconciles CDC-BMS's
+  "Never refreeze breast milk after it has thawed." with CDC-IFQ's ice-crystals line (ruling 8).
+- Minor 3: CDC-AVL "Avoid feeding fish high in mercury to young children. These fish include:" "King mackerel." "Marlin." "Orange
+  roughy." "Shark." "Swordfish." "Tilefish (from the Gulf of Mexico)." "Tuna (bigeye)." added.
+- Minor 4: Dehydration protocol quoted as it stands: "Babies: keep breastfeeding (WHO)."
+- Minor 5: kitchen flood and fire line matches Is it still good? ("Pans, dishes, utensils and counters that flood water touched (USDA)";
+  "Pots and pans that fire-fighting chemicals touched") and links it.
+- Minor 6: "no method" sentences now name fruit and vegetables; herbs are taught.
+- Minor 7: ruling 16 cites spec 10 call 3 for the labelled canning caution.
+- Minor 8: kitchen summary "Keeping food clean with little water"; preserving summary names curing and smoking (salting is in its
+  section heading and text; kept out of the summary for "salt", ruling 13).
+- Minor 9: "jerky" now finds Preserving food (keyword); "baby" unchanged (no food page in the first eight; left for the search task).
+- Minor 10: not fixed; see ruling 13.
+
+### Food pack batch C fix round 2 (2026-11-19), from the re-review in task-5-review.md
+
+- N1: preserving Do first 4 and summary rewritten: no safe way to dry meat with no working oven or dehydrator, no method given; thawing
+  meat checked in Is it still good?, then cooked and eaten by Cook without power, or thrown out (links added to "Drying meat"). The FSIS
+  figures stay only in the body warn (quotes as in fix round 1).
+- N2: the 165°F wild-game clause removed from "Drying meat"; "including game" added. NCHFP-CSS 5.4.6 "USDA recommends attaining an
+  internal temperature of at least 170°F (CDC 1985)." re-fetched by the writer and logged against Field dressing game's 165°F (D149;
+  no free number in 140 to 149).
+- N3: labelled app caution for herbs without the insect step (long storage, keep apart, look before use, throw out on insects, webbing
+  or mold). Penn State Drying Herbs and NCHFP Herbs, as fetched in fix round 1, say nothing on signs of insect damage; Penn State's mold
+  line is "Make sure herbs are completely dry to prevent mold growth during storage." D149.
+- Honey restored to babies Do first 5 and the summary in CDC-AVL's exact words: "Do not give your child honey before 12 months."
+- M-a: sanitizing line "younger than 2 months (CDC) or 2 months or younger (FDA), is sick (CDC, FDA)".
+- M-b: tender-leaf herbs "will mold if not dried quickly (NCHFP, Penn State)".
+- Search: ruling 13 rewritten from on-screen measurements (three builds; lists there).

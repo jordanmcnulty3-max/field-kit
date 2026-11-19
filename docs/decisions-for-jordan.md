@@ -1016,3 +1016,87 @@ checklist). Rulings are in docs/v7.5-rulings.md, "Batch B".
    gave the figures, nothing for children. Today: both tables are quoted as printed (with metric added), named and dated, with "This
    app does not turn these figures into amounts for fewer days, for a household or for a child." Say if the group would rather cut
    the tables (they suit a household storing whole grains for a year, which nobody in the group does today).
+Food at home pack (v7.5), batch C: numbers 140 to 149. Rulings are in docs/v7.5-rulings.md ("Batch C").
+
+140. **Which water for powdered formula when there is no bottled water (surv-food-babies-children). Medical professional.** CDC
+   (Feeding Your Child Safely During a Disaster): bottled water; if none, boiled water, cooled; "Only use treated water to prepare
+   formula if bottled or boiled water is unavailable." Ready.gov: "use bottled water or boiled water as a last resort", and says
+   nothing about treated water. Today: CDC's order, treated water last, with Make water safe linked for how. Ask a medical
+   professional whether water treated with bleach or tablets is acceptable for formula when boiling is impossible (no fuel), and for
+   which ages. After fallout, Water and food after fallout governs (D115).
+141. **A bleach soak for baby bottles and feeding items (surv-food-babies-children). Medical professional.** CDC (How to Clean
+   Infant Feeding Items During Emergencies, January 8, 2025) gives two ways to sanitize washed items "If your baby is younger than 2
+   months or if your baby is sick", "at least once every day". Method 1: "Put items in a pot and fill with safe water." "Boil for 5
+   minutes." "Remove items carefully." "Air dry sanitized items." "Do NOT rinse sanitized items." Method 2, exactly as CDC states it:
+   "Put items in a wash basin and fill with safe water." "Add 1 teaspoon of bleach per 1/2 gallon or 8 cups of water." "Soak for 2
+   minutes." "Remove items carefully." "Air dry sanitized items." "Do NOT rinse sanitized items." and "Any bleach that remains on
+   feeding items after sanitizing will break down quickly as it dries and will not hurt your baby." (CDC gives no bleach type or
+   percentage.) It is neither of Clean and disinfect's mixes (food mix 1 tablespoon per gallon, strong mix 1/3 cup per gallon), so it
+   would be a third household mix. CDC (Questions About Infant Feeding In Emergencies): "A heat source may not be available to safely
+   sanitize the bottles, which can increase the possibility of your baby becoming sick." Who needs sanitizing: CDC says younger than 2
+   months or sick; FDA (Handling Infant Formula Safely) also lists babies born prematurely, with a weakened immune system, or ill or
+   receiving medical treatment, and says to sanitize before first use and once daily. Today: boiling only, for CDC's and FDA's
+   groups together and before first use (the more cautious list); the page says CDC has a bleach soak that is not on the page, quotes
+   CDC's heat-source sentence, points to disposable cups when boiling is impossible, and, as the app's own caution, says not to use
+   Clean and disinfect's mixes instead. To add the soak, approve "add CDC's soak" and it goes in as quoted above, scoped to baby
+   feeding items. Ask a medical professional whether the soak should be added, and for which babies.
+142. **A breastfeeding mother with diarrhea or vomiting (surv-food-babies-children). Medical professional.** CDC: "You can and should
+   continue breastfeeding while sick with certain illnesses such as the flu, COVID-19, or diarrhea" (and mastitis). CDC's page does not
+   mention vomiting. Stomach illness in a group: anyone who has had vomiting or diarrhea must not prepare food, handle the group's water
+   or care for others until 2 days (3 if possible) after it stops. Today: with diarrhea she keeps breastfeeding (CDC); the page says no
+   opened source covers vomiting; everything else follows Stomach illness in a group. Ask whether she keeps breastfeeding while
+   vomiting, whether she may prepare her baby's formula or care for her own baby otherwise, and what hand washing is enough when water
+   is short.
+143. **When formula runs out and no one can breastfeed (surv-food-babies-children). Medical professional.** CDC names donor milk as a
+   breast milk substitute: "Breast milk substitutes (formula and donor milk) should be continued as needed to make sure that infants
+   continue to receive enough nutrition if milk supply is not (yet) adequate." No opened source says how a household should get or
+   handle donor milk, or what to feed a baby under 12 months when there is no formula, no breast milk and no donor milk. The sources
+   forbid homemade or watered-down formula and cow's milk or milk alternatives before 12 months. CDC on relactation: "Relactation
+   depends on many different factors, and regular help by a lactation support provider is important."; the child "must be carefully
+   monitored"; CDC also says to learn cup feeding from a lactation support provider. Today: the page says no source covers it, repeats
+   what not to do, gives relactation with CDC's conditions and its formula-or-donor-milk sentence, says relactation is not a quick
+   answer, and says to keep ready-to-feed formula in supplies (Ready.gov). Ask a medical professional about donor milk from another
+   mother in the group (screening, handling), how to support relactation, and how to cup-feed safely. Group action: keep more formula
+   than you think you need.
+144. **Breast milk and opened ready-to-feed formula with no working fridge (surv-food-babies-children). Medical professional.** CDC:
+   completely thawed breast milk "put it in the refrigerator and use it within the next day, or throw it away"; breast milk can stay in
+   an insulated cooler with frozen ice packs up to 24 hours (CDC gives this for travel); opened ready-to-feed formula: follow the label
+   (FDA). Today: those statements as CDC and FDA give them, the cooler time labelled as CDC's travel figure, and "once it is at room
+   temperature or warmed, use it within 2 hours" (CDC). Ask how long thawed breast milk and opened ready-to-feed formula can be kept in a
+   cooler with ice when there is no fridge.
+145. **Which babies need ready-to-feed most (surv-food-babies-children). Medical professional.** CDC: less than 2 months old, born
+   early, or with a weakened immune system. FDA (Do's and Don'ts): younger than 3 months, and ask the baby's doctor about extra
+   precautions; FDA (Handling Infant Formula Safely): two months and younger at higher risk. Today: CDC's line, with FDA's 3 months
+   named beside it. Ask which age to use when there is no doctor to ask.
+146. **Sanitizing dishes: how long in the food mix (surv-food-clean-kitchen).** Clean and disinfect (checked; CDC and New York State
+   Department of Health) says rinse or soak dishes 1 minute in the food mix. University of Florida IFAS Extension, with the same
+   strength (1 tablespoon of bleach per gallon), says submerge them 5 to 10 minutes. Today: Clean and disinfect's steps by link; the
+   Florida time is not given. Say if the group wants the longer soak (Clean and disinfect would change).
+147. **No method for drying meat, fruit or vegetables, or for salting, curing or smoking (surv-food-preserving).** USDA FSIS (Jerky
+   and Food Safety): "heat meat to 160°F and poultry to 165°F before the dehydrating process"; "a dehydrator may not reach temperatures
+   high enough to heat meat to 160°F or 165°F"; "Sun drying is not recommended for making meat jerky". NCHFP: "Several outbreaks of E.
+   coli O157:H7 have occurred in venison jerky." Fruit and vegetable methods (NCHFP, Penn State) need an oven, a dehydrator or a freezer,
+   or, for fruit outdoors, at least 85°F, humidity below 60 percent, several days, food-safe screens and a heat or freezer step against
+   insect eggs; Penn State calls sun drying impractical in Pennsylvania's humidity. NCHFP's curing and smoking guidance cures meat in a
+   refrigerator and is not a beginner's method. Today: the page states these requirements in the sources' words and gives no method;
+   it teaches only air-drying herbs (D149). The page gives no temperature for drying game, because it gives no method (see D149 for the game-jerky conflict). Cost: a household with a generator, or in
+   a dry spell, gets no drying method. Say if the group wants a dehydrator method (with USDA's heating step) added for households with
+   power.
+148. **A baby who is not feeding well, with no health care provider (surv-food-babies-children). Medical professional.** CDC: "If you
+   are worried that your baby is not breastfeeding well, talk to a health care provider right away." CDC's solid-food page sends
+   allergy questions (severe eczema, egg allergy, peanut) to the child's doctor or nurse. Today: the page gives CDC's sentence as it
+   stands and leaves allergen introduction out. Ask a medical professional what signs mean a baby is not getting enough and what the
+   group can do without a provider, and whether anything about first allergenic foods belongs in the app.
+149. **Air-dried herbs and the insect step (surv-food-preserving).** Penn State (Let's Preserve: Drying Herbs): air-dried herbs and
+   seeds "need to be treated to destroy any insects or insect eggs by heating the herbs or seeds at 160°F (71°C) for 30 minutes or
+   freezing at 0°F (-17°C) or lower at least 48 hours". NCHFP's herb page gives the same air-drying method without that step. Today:
+   the page follows Penn State (the more cautious), gives the step, and says that without an oven or freezer the herbs have not had
+   it, and adds, labelled as the app's own caution (fix round 2): herbs that have not had the insect step are not put into long
+   storage, are kept apart from other stored food, are looked over before each use, and are thrown out if insects, webbing or mold
+   show (neither source says anything on signs of insect damage in dried herbs; Penn State only says "Make sure herbs are completely
+   dry to prevent mold growth during storage"). Say if the group wants NCHFP's method without the step accepted for a long outage.
+   Also logged here (no number left in 140 to 149): **game jerky temperature (surv-food-preserving), a conflict with checked text.**
+   The National Center for Home Food Preservation's review, section 5.4.6 (Game): "USDA recommends attaining an internal temperature of
+   at least 170°F (CDC 1985)" for game jerky. The checked Field dressing game topic cooks all wild game to 165°F. Today: Preserving food
+   gives no temperature for drying game (it gives no method for drying meat at all) and Field dressing game is unchanged. Say which
+   figure the group wants if a game-drying method is ever added.

@@ -799,3 +799,12 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    can't tell which it was, or how long to stay in after a dirty bomb when no one says (D101). Today: a labelled app caution
    says to treat it as a nuclear explosion and follow Fallout warning and How long to stay in (the longer stay and the
    stricter car rule). Say if the group wants a different default.
+110. **Basement corner or away from the walls (surv-fallout-where-to-shelter, fallout-shelter-spots).** "Best spot in a house"
+   says the best basement corner is the one most below ground level (FEMA 1985 and the 1968 handbook, both dated) and, in its
+   next line, to stay away from the outside walls and the roof wherever you are in the house (CDC). A corner sits against two
+   outside walls. Today: the topic carries both lines; the diagram shades the whole basement ("Basement: go there first") and
+   draws no corner. Say whether the corner line should stay, and the diagram can then show it.
+111. **Which floor of a large building (surv-fallout-where-to-shelter, fallout-shelter-spots).** The topic says: the center of
+   the building, as far from the roof and windows as you can, and away from areas near the roof. It names no floor and says
+   nothing about the ground floor. Today: the diagram shades the center of every floor but the top one, the same on each. Say
+   if the group wants a floor named (that needs a source opened for it).

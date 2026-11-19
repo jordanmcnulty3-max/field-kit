@@ -312,6 +312,95 @@ svg('warm-room', 214, 'House plan: one small warm room on the sheltered side of 
 <path d="M10 186 V190 H330 V186" class="m t1"/>
 {lbl(170,206,'Sheltered side of the house','tb','middle')}''')
 
+# ---------------- RADIATION ----------------
+# Drawn from surv-fallout-where-to-shelter ("Best spot in a house", "Apartments and large buildings") and
+# surv-fallout-coming-inside with p:radiation-decontamination. No numbers, no arrows, no "safe" (radiation pack Task 7).
+def person(cx, top, s=1.0, cls='k'):
+    """Stick figure standing on y = top + 56*s."""
+    hy, neck, hip, foot = top + 7 * s, top + 14 * s, top + 36 * s, top + 56 * s
+    return (f'<circle cx="{cx}" cy="{hy:.1f}" r="{7*s:.1f}" class="{cls}"/>'
+            f'<path d="M{cx} {neck:.1f} V{hip:.1f} M{cx-8*s:.1f} {foot:.1f} L{cx} {hip:.1f} L{cx+8*s:.1f} {foot:.1f}" class="{cls}"/>')
+
+svg('fallout-shelter-spots', 398, 'Best spot in a house: basement, go there first; no basement, the middle of the house, away from the walls and windows; stay away from the outside walls and the roof. Apartments and large buildings: the basement is best; otherwise the center of the building, as far from the roof and windows as you can; stay away from areas near the roof, fire escapes and balconies', f'''
+{lbl(170,18,'Best spot in a house','tl','middle')}
+{lbl(170,36,'Stay away from the outside walls and the roof','','middle')}{lead(82,40,82,50)}{lead(258,40,258,50)}
+<rect x="0" y="124" width="166" height="40" class="gr"/><rect x="174" y="124" width="166" height="8" class="gr"/>
+<line x1="0" y1="124" x2="166" y2="124" class="m" data-part="ground-a"/>
+<path d="M6 86 L82 52 L158 86" class="k t3"/>
+<rect x="14" y="86" width="136" height="38" class="k t3" data-part="house-a"/>
+{window(14, 96, 14, 112)}{window(150, 96, 150, 112)}
+<rect x="14" y="124" width="136" height="36" class="milk"/>
+<rect x="14" y="124" width="136" height="36" class="af" style="fill-opacity:.3" data-part="basement-a"/><path d="M14 124 V160 H150 V124" class="k t3"/>
+<path d="M120 124 h8 v7 h8 v7 h8 v7" class="k t1"/>
+{lbl(70,140,'Basement:','tb','middle')}{lbl(70,154,'go there first','tb','middle')}
+<line x1="174" y1="124" x2="340" y2="124" class="m" data-part="ground-b"/>
+<path d="M182 86 L258 52 L334 86" class="k t3"/>
+<rect x="240" y="100" width="36" height="24" class="af" style="fill-opacity:.3" data-part="spot-b"/><path d="M240 124 V100 H276 V124" class="a t1 d"/>
+<rect x="190" y="86" width="136" height="38" class="k t3" data-part="house-b"/>
+<path d="M234 86 V102 M234 116 V124 M282 86 V102 M282 116 V124" class="k t1"/>
+{window(190, 96, 190, 112)}{window(326, 96, 326, 112)}
+{lbl(258,148,'No basement: the middle','tb','middle')}{lbl(258,162,'of the house, away from','','middle')}{lbl(258,176,'the walls and windows','','middle')}{lead(258,137,258,116)}
+<line x1="10" y1="184" x2="330" y2="184" class="m t1 d"/>
+{lbl(170,206,'Apartments and large buildings','tl','middle')}
+{lbl(120,224,'Stay away from areas near the roof,','','middle')}{lbl(120,238,'fire escapes and balconies','','middle')}
+{lead(120,242,120,250)}{lead(66,242,58,262)}{lead(170,242,180,260)}
+<rect x="0" y="360" width="340" height="38" class="gr"/>
+<rect x="102" y="272" width="36" height="88" class="af" style="fill-opacity:.3" data-part="spot-c"/><path d="M102 360 V272 H138 V360" class="a t1 d"/>
+<rect x="70" y="252" width="100" height="108" class="k t3" data-part="bldg"/>
+<path d="M66 252 H174" class="k t3"/>
+<line x1="70" y1="272" x2="170" y2="272" class="k t1" data-part="top-floor"/>
+<path d="M70 294 H170 M70 316 H170 M70 338 H170" class="k t1"/>
+{''.join(window(70, y + 6, 70, y + 14) + window(170, y + 6, 170, y + 14) for y in (252, 272, 294, 316, 338))}
+<g data-part="fire-escape"><path d="M50 270 H70 M50 292 H70 M50 314 H70 M50 336 H70" class="k"/>
+<path d="M68 336 L52 314 M68 314 L52 292 M68 292 L52 270" class="k t1"/><path d="M50 262 V270 M50 284 V292 M50 306 V314 M50 328 V336" class="k t1"/></g>
+<g data-part="balconies"><path d="M170 270 H188 M170 292 H188 M170 314 H188 M170 336 H188" class="k t3"/>
+<path d="M188 262 V270 M188 284 V292 M188 306 V314 M188 328 V336 M176 262 H188 M176 284 H188 M176 306 H188 M176 328 H188" class="k t1"/></g>
+<line x1="0" y1="360" x2="340" y2="360" class="m" data-part="ground-c"/>
+<rect x="70" y="360" width="100" height="28" class="milk"/>
+<rect x="70" y="360" width="100" height="28" class="af" style="fill-opacity:.3" data-part="basement-c"/><path d="M70 360 V388 H170 V360" class="k t3"/>
+{lbl(198,292,'Otherwise: the center of','tb')}{lbl(198,306,'the building, as far from','')}{lbl(198,320,'the roof and windows','')}{lbl(198,334,'as you can','')}
+{lead(194,340,140,350)}
+{lbl(198,380,'Basement is best','tb')}{lead(194,376,160,376)}''')
+
+def shoe(x, y):
+    """Side view of a shoe, heel at x, sole on y."""
+    return f'<path d="M{x} {y} V{y-7} H{x+6} L{x+14} {y-3} Q{x+18} {y-2} {x+18} {y} Z" class="k t1"/>'
+
+svg('fallout-coming-inside', 384, 'Save a life first. Then: 1 take off the outer layer of clothes and shoes slowly, before you come in or just inside the door, away from others; 2 bag them and put the bag far from people and pets; 3 wash gently with soap and water, or wipe off, no conditioner, no scrubbing; 4 put on clean clothes from a closet, drawer or other covered place. Then help others and pets, and clean yourself again afterwards', f'''
+{lbl(170,18,'Save a life first. Then:','tl','middle')}
+<line x1="170" y1="30" x2="170" y2="340" class="m t1 d"/><line x1="4" y1="190" x2="336" y2="190" class="m t1 d"/><line x1="4" y1="344" x2="336" y2="344" class="m t1 d"/>
+{badge(12,42,'1')}
+<line x1="24" y1="104" x2="164" y2="104" class="m"/>
+<path d="M124 104 V38 H156 V104" class="k t3"/><path d="M124 40 L110 48 V110 L124 104" class="k milk"/>
+{person(76, 48)}
+<path d="M76 70 L55 76 M76 70 L86 88" class="k"/>
+<path d="M46 78 L42 80 L36 100 L41 101 L46 88 V104 H62 V88 L67 101 L72 100 L66 80 L62 78 Q54 83 46 78 Z" class="w wf"/>
+{shoe(88, 104)}{shoe(104, 104)}
+{lbl(12,122,'Outer layer of clothes','tb')}{lbl(12,136,'and shoes off, slowly','tb')}
+{lbl(12,152,'Before you come in or','')}{lbl(12,166,'just inside the door,','')}{lbl(12,180,'away from others','')}
+{badge(184,42,'2')}
+<line x1="196" y1="104" x2="336" y2="104" class="m"/>
+<path d="M200 104 Q188 84 204 72 L210 66 H222 L228 72 Q244 84 232 104 Z" class="k gr"/>
+<path d="M214 66 q-9 -10 -3 -13 q5 2 3 13 M218 66 q9 -10 3 -13 q-5 2 -3 13" class="k t1"/>
+{person(282, 48)}<path d="M282 70 L272 84 M282 70 L292 84" class="k"/>
+<ellipse cx="314" cy="90" rx="12" ry="6" class="k"/><circle cx="328" cy="82" r="5" class="k"/><path d="M330 79 l5 -2 M305 94 V104 M311 95 V104 M318 95 V104 M323 94 V104 M302 88 q-6 -3 -6 -10" class="k"/>
+{lbl(184,122,'Bag them','tb')}{lbl(184,138,'Put the bag far from','')}{lbl(184,152,'people and pets','')}
+{badge(12,208,'3')}
+<line x1="24" y1="270" x2="164" y2="270" class="m"/>
+<path d="M120 270 V200 H104 V206" class="k t3"/><path d="M94 206 H114 L110 212 H98 Z" class="k kf"/>
+<path d="M90 216 L84 240 M96 216 L93 230 M112 216 L115 230 M118 216 L124 240 M88 244 L84 260 M120 244 L124 260" class="a t1 d"/>
+{person(104, 214)}<path d="M104 236 L94 226 M104 236 L114 226" class="k"/>
+<rect x="34" y="258" width="22" height="12" rx="4" class="k milk"/>
+{lbl(12,288,'Wash gently with soap','tb')}{lbl(12,302,'and water, or wipe off','tb')}
+{lbl(12,318,'No conditioner,','')}{lbl(12,332,'no scrubbing','')}
+{badge(184,208,'4')}
+<line x1="196" y1="270" x2="336" y2="270" class="m"/>
+<rect x="202" y="226" width="52" height="44" class="k"/><path d="M202 240 H254 M202 254 H254" class="k t1"/>
+<circle cx="228" cy="233" r="2" class="kf"/><circle cx="228" cy="247" r="2" class="kf"/><circle cx="228" cy="261" r="2" class="kf"/>
+<path d="M286 218 L272 226 L278 238 L284 234 V264 H316 V234 L322 238 L328 226 L314 218 Q300 226 286 218 Z" class="k milk"/>
+{lbl(184,288,'Put on clean clothes','tb')}{lbl(184,302,'from a closet, drawer','')}{lbl(184,316,'or other covered place','')}
+{lbl(170,362,'Then help others and pets, and','tb','middle')}{lbl(170,376,'clean yourself again afterwards','','middle')}''')
+
 # ---------------- FIRE ----------------
 svg('fire-sizes', 142, 'Fire materials: dry, fine tinder; kindling from pencil lead to thumb thick; fuel forearm thick and up', f'''
 <path d="M30 58 c5 -22 34 -24 42 -6 c8 16 -12 30 -26 22 c-14 -8 -4 -26 12 -22 c12 4 10 16 0 18 M40 48 c8 -6 20 -4 22 6 M36 66 c10 8 26 6 30 -6" class="w t1"/>

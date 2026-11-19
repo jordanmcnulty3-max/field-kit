@@ -53,6 +53,10 @@
           "p": "The cleaning-off steps are in the Emergency protocol Radiation decontamination, one at a time. In order: save a life first; take off the outer clothes and shoes and bag them; wash or wipe off; blow the nose and wipe the eyes and ears; put on clean clothes; care for wounds; help others who can’t clean off on their own, protecting yourself while you do; clean yourself again; clean pets; wipe the things you need; then watch for radiation sickness."
         },
         {
+          "fig": "fallout-coming-inside",
+          "cap": "Save a life first. Then take off the outer layer of clothes and shoes, before you come in or just inside the door, away from others, and bag them. Wash gently with soap and water, or wipe off: no conditioner, no scrubbing. Put on clean clothes, then help others and pets. Every step is in Radiation decontamination."
+        },
+        {
           "link": "p:radiation-decontamination",
           "label": "Radiation decontamination (cleaning off fallout)"
         },

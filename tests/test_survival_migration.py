@@ -38,7 +38,9 @@ PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-
                  'surv-fire': {'fire-sizes', 'fire-platform', 'fire-lays', 'fire-ferro'},
                  'surv-shelter': {'shelter-site', 'shelter-debris', 'shelter-leanto', 'shelter-snow', 'shelter-tarp', 'quinzhee'},
                  'surv-generators': {'generator-placement'}, 'surv-wood-stoves-fireplaces': {'heater-clearance'},
-                 'surv-heat-out': {'warm-room'}}
+                 'surv-heat-out': {'warm-room'},
+                 # radiation pack Task 7: where to shelter and coming inside, drawn from their checked text
+                 'surv-fallout-where-to-shelter': {'fallout-shelter-spots'}, 'surv-fallout-coming-inside': {'fallout-coming-inside'}}
 
 
 def new_topics():

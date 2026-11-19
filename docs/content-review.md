@@ -4702,3 +4702,65 @@ which this writer did not open.
   and neither contradicts it.
 - Also: surv-fallout-water-and-food summary "Drink stored water first." now "Drink bottled water and other sealed drinks first,
   then water you stored yourself." to match its Do first 2 (CDC; the app's reading, D98).
+
+## Radiation pack Task 7: diagrams (2026-11-18)
+
+Two figures, drawn from the checked text only; no source opened. `fallout-decay` not drawn (no shelter-time tool; the tool gate
+did not pass). No number, distance, arrow or ranking beyond the topic's; neither figure says "safe". Shaded blue with a dashed
+edge = the place the label names. Rendered at 360 px in day, dark and night mode and viewed (`/tmp/figs-7/`, not tracked).
+
+### fallout-shelter-spots (surv-fallout-where-to-shelter, "Apartments and large buildings", after the list)
+
+Two house cross-sections and one large building cross-section. No arrows at all (nothing that could read as a direction the
+radiation comes from); no floor numbers.
+- Title "Best spot in a house": the section heading.
+- "Stay away from the outside walls and the roof" (leaders to both roofs): "Stay away from the outside walls and the roof
+  wherever you are in the house (CDC)."
+- House with a basement, whole basement shaded, stairs down, "Basement: go there first": "Basement: go there first (CDC)."
+  Agrees with the ranking table: "Underground: basement (a house basement counts) ... Best".
+- Not drawn: the best corner ("The best corner is the one most below ground level", FEMA 1985 and 1968, dated). It reads
+  against the next line's "stay away from the outside walls ... wherever you are in the house", so the drawing does not pick
+  one; D110. Test forbids "corner".
+- House with no basement (nothing below ground), the middle room shaded low, clear of both outside walls, "No basement: the
+  middle of the house, away from the walls and windows": "No basement: the middle of the house, away from the walls and
+  windows (NYC Health), and as far from the roof as you can (CDC)." Windows drawn in both outside walls.
+- Title "Apartments and large buildings": the section heading.
+- Building basement shaded, "Basement is best": "Going to the basement is best (New York City, Response Guide ...)."
+- Centre band shaded on every floor but the top one, clear of the outer walls and their windows, "Otherwise: the center of
+  the building, as far from the roof and windows as you can": "Otherwise go to the center of the building, as far from the
+  roof and windows as you can (New York City, Response Guide)." The band is the same on each floor it covers: the topic names
+  no floor (D111).
+- "Stay away from areas near the roof, fire escapes and balconies" (leaders to the roof, a fire escape on the left wall and a
+  balcony on the right): "Stay away from areas near the roof, fire escapes and balconies (NYC Health)." The top floor is left
+  unshaded for "near the roof".
+- Not drawn: the place-type ranking (masonry, wood frame, car, outside), the 15 and 30 minute move times, airtightness.
+- Caption: "Basement: go there first. No basement: the middle of the house, away from the walls and windows. In a large
+  building, otherwise go to the center of the building, as far from the roof and windows as you can." The topic's sentences;
+  "In a large building," names the panel.
+
+### fallout-coming-inside (surv-fallout-coming-inside, "The steps", after the paragraph)
+
+Four numbered panels in the order of the topic summary and of p:radiation-decontamination (s2, s3, s4, s6); the protocol's
+s5 (nose, eyes, ears), s7 (wounds) and s12 (belongings) are not drawn, as the summary leaves them out; the caption sends the
+reader to the protocol for every step.
+- "Save a life first. Then:" above the panels: summary, "Save a life first. Then take off ..."; protocol s1 and s20.
+- 1, a person at an open door holding a coat away, shoes on the floor, "Outer layer of clothes and shoes off, slowly",
+  "Before you come in or just inside the door, away from others": Do first 2, "Take off the outer layer of clothes and shoes
+  slowly, so the dust doesn't shake loose, before you come in or just inside the door, away from others"; protocol s2.
+- 2, a tied bag apart from a person and a dog, "Bag them", "Put the bag far from people and pets": Do first 2, "Bag them and
+  put the bag far from people and pets (CDC)"; protocol s3.
+- 3, a person under a shower, a bar of soap, "Wash gently with soap and water, or wipe off", "No conditioner, no scrubbing":
+  summary, "Wash gently with soap and water, or wipe off: no conditioner, no scrubbing."; protocol s4.
+- 4, a chest of drawers and a clean shirt, "Put on clean clothes from a closet, drawer or other covered place": Do first 4;
+  protocol s6.
+- "Then help others and pets, and clean yourself again afterwards" below the panels: Do first 5; protocol s8 to s11.
+- Not drawn: 90%, water temperature, the no-shower sink and wipe detail beyond "or wipe off", pets' washing, the never list.
+- Caption: the topic's summary, word for word.
+
+Tests (`tests/test_figs.py`, `RAD_FIGS`): each figure sits once in its section; every drawn phrase is drawn and is in the
+topic's own text; forbidden in drawn and alt text: "safe", any digit (shelter spots; coming inside allows only the badges 1
+to 4), radiation, fallout, worst, floor, airtight, corner, shield, protect (shelter spots), 90, hot, bleach, sanitizer, scrub
+other than "scrubbing", shake, vacuum, hose (coming inside); caption words; shelter spots has no arrow markers and its geometry
+(basement below ground, no-basement house has nothing below ground, spots centred and clear of the walls, the band out of the
+top floor); coming inside reads 1 to 4 in order, each step in its own panel, in the protocol's order, with "Save a life
+first" above and "Then help others" below. `tests/test_survival_migration.py` `PINNED_FIGS` gains the two topics.

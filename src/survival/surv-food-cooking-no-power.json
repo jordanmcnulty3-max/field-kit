@@ -127,7 +127,7 @@
         {
           "list": [
             "Use grills and camp stoves outside only, in a well-ventilated area (Ready.gov, New York State Division of Consumer Protection).",
-            "Keep grills and camp stoves at least 20 feet (6 m) from windows (Ready.gov), a safe distance from the house’s doors and any air intakes for its heating or cooling system (EPA), and at least 10 feet (3 m) from the side of any building unless the grill maker’s instructions say it can be closer (Massachusetts Department of Fire Services).",
+            "Keep grills and camp stoves at least 20 feet (6 m) from windows (Ready.gov) and a safe distance from the house’s doors and any air intakes for its heating or cooling system (EPA). This app’s caution: keep them at least 20 feet (6 m) from every side of the house, not only from its windows.",
             "Not under overhanging branches, and away from deck railings (Massachusetts Department of Fire Services).",
             "Never leave a burning grill unattended (Massachusetts Department of Fire Services).",
             "Keep children and pets 3 feet (1 m) away from grills (Massachusetts Department of Fire Services).",
@@ -320,7 +320,7 @@
     },
     {
       "name": "Massachusetts Department of Fire Services, Grilling Safety (undated web page)",
-      "used": "Always grill outdoors; 10 feet from the side of a building unless the manufacturer says closer; not under overhanging branches; away from deck railings; never unattended; children and pets three feet away; only charcoal starter fluid, never added to burning coals; ashes: burn out, cool 48 hours, or soak and put in a metal container; smell gas: turn off and get away; no matches or lighters to check for leaks"
+      "used": "Always grill outdoors; not under overhanging branches; away from deck railings; never unattended; children and pets three feet away; only charcoal starter fluid, never added to burning coals; ashes: burn out, cool 48 hours, or soak and put in a metal container; smell gas: turn off and get away; no matches or lighters to check for leaks"
     },
     {
       "name": "New York State Department of State, Division of Consumer Protection, Consumer Alert on gas and charcoal grills (May 14, 2024)",

@@ -6301,3 +6301,26 @@ temperatures," "potentially allowing bacteria multiplication." No heating figure
 - N3, surv-food-still-good "Home-canned food": the labelled reading now reads "with no working fridge, an opened can or jar of a food
   that is on the Fridge food chart above goes by its row there; any other opened can or jar is treated as perishable food left out: ..."
   (the chart, FoodSafety.gov, owns the foods it lists). D151 rewritten.
+
+### Food pack final review fixes (2026-11-19), from final-review.md
+
+Opened in this round (built-in search, then fetch of a returned URL; title checked):
+- Ready.gov, Power Outage Tips (no date shown), https://ready.gov/tr/node/5151 (English text): "Generators, camp stoves or charcoal grills
+  should always be used outdoors and at least 20 feet away from windows."
+- Massachusetts Department of Fire Services, Grilling Safety, https://mass.gov/info-details/grilling-safety: "Grills must be 10 feet from
+  the side of a building unless the manufacturer's instructions say it can be closer."; "Make sure grills are not underneath overhanging
+  branches."; "Place grills away from the house and deck railings."
+
+Changes:
+- I1, surv-food-power-out "How long it stays cold": "Times from CDC, FoodSafety.gov and USDA." -> "Times for a power outage, from CDC,
+  FoodSafety.gov and USDA." (the hub's sources are each power-outage pages: CDC power outage page, FoodSafety.gov's power outage charts,
+  USDA's emergency page).
+- M1, surv-food-still-good "Home-canned food": the reading now says "goes by its row there, but no source opened says how long a “Keep”
+  row holds with no fridge at all;". D151.
+- M2, surv-food-cooking-no-power "Cooking outdoors": "Keep grills and camp stoves at least 20 feet (6 m) from windows (Ready.gov) and a
+  safe distance from the house’s doors and any air intakes for its heating or cooling system (EPA). This app’s caution: keep them at least
+  20 feet (6 m) from every side of the house, not only from its windows." The Massachusetts 10-foot clause is removed from the page and
+  from its source line; its other rules stay. D119.
+- M3: hub "Keep it cold longer" link to Preserving food removed.
+- Keywords: "doubt throw" dropped; "defrost", "food gone bad" (Is it still good?) and "sterilize" (babies) added; "baby food" fails the
+  keyword rule and is not added (docs/v7.5-rulings.md, whole-pack fixes 8).

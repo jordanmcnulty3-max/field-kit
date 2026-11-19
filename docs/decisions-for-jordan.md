@@ -879,7 +879,7 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    not be working); GE and KitchenAid light it by holding the lit match or long lighter at the burner, then turning the knob to Lo
    or LITE; Wolf turns the knob to HIGH, then lights it with an ignitor at least 6 inches long; the burner is lit or off, with no
    automatic relight, and gas keeps flowing if the flame blows out (GE, Wolf); monitor it closely; never use it to heat the kitchen
-   (Wolf). Today (controller ruling): the range is allowed as the makers allow it, with every condition above, only if the
+   (Wolf). The page (first by controller ruling, now by Jordan's decision below) allows the range as the makers allow it, with every condition above, only if the
    model's manual allows lighting by hand. To allow it, the app's own labelled reading narrows a checked CDC line and an EPA line
    by interpretation, on the strength of four manufacturers' manuals: it says the two lines do not name a kitchen range (CDC lists
    "stoves" and "gas ranges" separately) and do not rule out a range's surface burners used only as the makers allow, and, in its
@@ -896,9 +896,13 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    "Generators, camp stoves or charcoal grills should always be used outdoors and at least 20 feet away from windows."
    Massachusetts Department of Fire Services: 10 feet from the side of a building unless the maker's instructions say it can be
    closer. New York's Division of Consumer Protection: at least 3 feet from siding, deck rails and eaves, and never next to your
-   home. EPA: "a safe distance" from doors, windows and air intakes. Today: at least 20 feet from windows (Ready.gov, the federal
-   and most cautious figure), a safe distance from doors and air intakes (EPA), and at least 10 feet from the side of any building
-   (Massachusetts). Say if the group wants a different figure.
+   home. EPA: "a safe distance" from doors, windows and air intakes. Today (final review fix, 2026-11-19): one distance a reader can act
+   on. The page gives Ready.gov's "at least 20 feet away from windows" and EPA's safe distance from doors and air intakes, then, labelled
+   as this app's own caution, "keep them at least 20 feet (6 m) from every side of the house, not only from its windows". The
+   Massachusetts 10-foot line ("Grills must be 10 feet from the side of a building unless the manufacturer's instructions say it can be
+   closer", re-opened 2026-11-19) is no longer on the page, because beside 20 feet it read as an alternative; its other grill rules
+   stay. Cost if wrong: a household with little yard has to grill further out than Massachusetts requires. Say if the group wants a
+   different figure.
 120. **A cold house and the fridge's 4 hours (surv-food-still-good).** CDC: throw out perishable fridge food "after 4 hours without
    power or without a cold source like ice". In a Central New York winter the kitchen itself may be near 40°F, and a fridge
    thermometer may still read 40°F or below after 4 hours. No source says a cold room counts as a cold source; New York State
@@ -921,10 +925,11 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    household bleach mixes only (Clean and disinfect's strong mix and food mix). The National Center for Home Food Preservation's
    clean-up for botulism toxin uses a fresh 1 part unscented liquid household bleach (5 to 6%) to 5 parts clean water, on surfaces,
    equipment, can openers and clothing, left 30 minutes, wiped up with gloves and paper towels that are bagged, applied again for
-   30 minutes, rinsed, then everything washed. That is far stronger than either mix. Today (controller ruling): NCHFP's clean-up is
-   given in full in Food poisoning and botulism only, named as NCHFP's, labelled for this clean-up only, never for drinking water,
-   never as an everyday sanitizer for dishes or food surfaces, never mixed with another cleaner. This is yours to keep or cut: keep
-   it (a toxin spill gets a real step) or cut it (back to two mixes, and a spill gets gloves and bagging only).
+   30 minutes, rinsed, then everything washed. That is far stronger than either mix. What the app does today (controller ruling, as
+   shipped in v7.5): NCHFP's clean-up is given in full in Food poisoning and botulism only, named as NCHFP's, labelled as this app's
+   caution for this clean-up only, never for drinking water, never as an everyday sanitizer for dishes or food surfaces, never mixed
+   with another cleaner. Your choice, if you want to change it: keep it as shipped (a toxin spill gets a real step), or cut it (back to
+   the two mixes; a spill then gets gloves and bagging only). If you say nothing, it stays as shipped.
 124. **Other jars from the same batch (surv-food-poisoning).** No opened source says what to do with them. Today: labelled app
    caution: if one container from a batch shows any warning sign, or someone got sick after eating from it, treat the whole batch
    as suspect. Say if the group wants a different rule.
@@ -1128,6 +1133,7 @@ Food at home pack (v7.5), whole-pack read fixes: numbers from 150.
    those foods: for example opened canned meats and fish, opened spaghetti sauce and opened vegetable juice are thrown out; opened
    canned fruit, fruit juice and pickles are kept); any other opened can or jar is treated as perishable food left out, under CDC's line
    on the same page, "never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C)". The chart is for a
-   fridge that was at 40°F or above for more than 2 hours; no source says how long its "keep" rows hold at room temperature. Cost if
+   fridge that was at 40°F or above for more than 2 hours; no source says how long its "keep" rows hold at room temperature, and the
+   page now says so beside the reading ("but no source opened says how long a “Keep” row holds with no fridge at all"). Cost if
    wrong: an opened can of an unlisted food that could have been kept is thrown out, or a listed one is kept longer than a source
    would allow. Say if the group wants a time limit on the chart's "keep" rows with no fridge.

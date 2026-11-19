@@ -945,6 +945,7 @@ V74_ON_SCREEN = {
     'thawed': ['p:frostbite', 's:surv-unheated-house'],
     'smelling': ['p:dehydration', 'p:poisoning', 'p:vomiting-diarrhea'],
     'swallowing': ['p:low-blood-sugar', 'p:poison-plants', 'p:snakebite'],
+    'doubt': ['p:chest-pain', 'p:bleeding', 'p:fracture'],   # back to v7.4 once the keyword "doubt throw" was dropped (final review M6)
 }
 
 # Rule (b): an older Survival page may leave the first three only for a food page with the query word in its title. ("freezer" is named
@@ -1170,7 +1171,10 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
 
 @pytest.mark.parametrize('text,page_key', [('cross contamination', 's:surv-food-clean-kitchen'), ('how long can food sit out', 's:surv-food-still-good'),
                                            ('running out of food', 's:surv-food-when-short'), ('infant formula', 's:surv-food-babies-children'),
-                                           ('gas range', 's:surv-food-cooking-no-power'), ('kitchen range', 's:surv-food-cooking-no-power')])
+                                           ('gas range', 's:surv-food-cooking-no-power'), ('kitchen range', 's:surv-food-cooking-no-power'),
+                                           ('power outage food', 's:surv-food-power-out'), ('power outage freezer', 's:surv-food-power-out'),
+                                           ('when in doubt throw it out', 's:surv-food-still-good'), ('defrost', 's:surv-food-still-good'),
+                                           ('food gone bad', 's:surv-food-still-good'), ('sterilize', 's:surv-food-babies-children')])
 def test_food_phrases_find_their_page(page, app_url, text, page_key):
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
@@ -1179,3 +1183,12 @@ def test_food_phrases_find_their_page(page, app_url, text, page_key):
     assert page_key in ks, ks
     if text != 'infant formula':   # "infant formula" finds the babies page second, after Water and food after fallout (as in v7.4)
         assert ks[0] == page_key, ks
+
+
+def test_power_outage_lists_the_food_hub_in_the_first_four_after_the_v74_results(page, app_url):
+    # final review I1: the hub's own text says "power outage"; v7.4's first three stay as they were
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, 'power outage')[:4]
+    assert ks == ['s:surv-generators', 's:surv-heat-out', 's:surv-wells-without-power', 's:surv-food-power-out'], ks

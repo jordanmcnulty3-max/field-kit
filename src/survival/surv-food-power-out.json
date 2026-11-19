@@ -52,7 +52,7 @@
           }
         },
         {
-          "p": "Times from CDC, FoodSafety.gov and USDA. New York State Department of Health gives the same: a fully filled freezer stays at freezing for about two days, a half-full one stays cold for about one day."
+          "p": "Times for a power outage, from CDC, FoodSafety.gov and USDA. New York State Department of Health gives the same: a fully filled freezer stays at freezing for about two days, a half-full one stays cold for about one day."
         },
         {
           "fig": "food-fridge-freezer",
@@ -78,10 +78,6 @@
             "If the power has been out for 4 hours and you have a cooler and ice, put the fridge’s perishable food in the cooler. Add ice or a cold source like frozen gel packs to keep it at 40°F (4°C) or below (CDC).",
             "In freezing weather, make ice: fill buckets, empty milk cartons or cans with water and leave them outside to freeze. Then put the ice in your fridge, freezer or coolers (USDA)."
           ]
-        },
-        {
-          "link": "s:surv-food-preserving",
-          "label": "Preserving food"
         }
       ]
     },

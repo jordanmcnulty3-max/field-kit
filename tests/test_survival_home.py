@@ -763,7 +763,7 @@ def test_the_food_hub_links_every_other_food_topic_and_the_checklist():
 FOOD_LATER_LINKS = {
     'surv-food-power-out': {'Everything on food': ['s:surv-food-how-much', 's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen',
                                                    's:surv-food-babies-children', 's:surv-food-preserving'],
-                            'Get ready before it happens': ['s:surv-food-how-much', 'c:pantry'], 'Keep it cold longer': ['s:surv-food-preserving']},
+                            'Get ready before it happens': ['s:surv-food-how-much', 'c:pantry']},
     'surv-food-still-good': {'Cans and jars': ['s:surv-food-storage'], 'Home-canned food': ['s:surv-food-preserving'],
                              'Flood water': ['s:surv-food-clean-kitchen'], 'More': ['s:surv-food-clean-kitchen', 's:surv-food-babies-children']},
     'surv-food-cooking-no-power': {'Cook it through': ['s:surv-food-clean-kitchen'], 'Eat it cold': ['s:surv-food-how-much']},

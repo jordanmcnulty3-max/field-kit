@@ -8,7 +8,6 @@
     "spoiled",
     "spoiled food",
     "throw out food",
-    "doubt throw",
     "refreeze",
     "thawed",
     "freezer thawed",
@@ -19,7 +18,9 @@
     "bulging can",
     "swollen can",
     "refrozen",
-    "food sit"
+    "food sit",
+    "defrost",
+    "food gone bad"
   ],
   "summary": "Never taste food to test it, and when in doubt, throw it out. After 4 hours without power or a cold source like ice, throw out the fridge’s perishable food. Refreeze or cook only freezer food that still has ice crystals or is at 40°F (4°C) or below; once the freezer is above 40°F, throw out thawed food. Perishable food left out more than 2 hours (1 hour above 90°F (32°C)) goes. Throw out leaking, bulging or damaged cans and jars, home-canned food you can’t vouch for, and food that touched flood water. A bad smell, color or texture means throw it out; a normal one proves nothing.",
   "doFirst": [
@@ -538,7 +539,7 @@
           "label": "Cook without power"
         },
         {
-          "p": "Any of the signs under Cans and jars means throw it out, boiled or not (CDC). Refrigerate any canned or pickled food after you open it (CDC). This app’s reading: with no working fridge, an opened can or jar of a food that is on the Fridge food chart above goes by its row there; any other opened can or jar is treated as perishable food left out: “never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).”"
+          "p": "Any of the signs under Cans and jars means throw it out, boiled or not (CDC). Refrigerate any canned or pickled food after you open it (CDC). This app’s reading: with no working fridge, an opened can or jar of a food that is on the Fridge food chart above goes by its row there, but no source opened says how long a “Keep” row holds with no fridge at all; any other opened can or jar is treated as perishable food left out: “never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).”"
         },
         {
           "link": "s:surv-food-preserving",

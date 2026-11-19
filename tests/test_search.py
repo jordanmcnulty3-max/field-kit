@@ -737,7 +737,7 @@ def test_v73_results_for_co_bleach_and_burn_keep_their_order_with_the_radiation_
     page.wait_for_function('window.FK && FK.search')
     ks = [r['key'] for r in q(page, text)]
     old = V73_RESULTS[text]
+    assert ks[:3] == old[:3], f'{text!r}: top three changed: {ks[:3]} (v7.3: {old[:3]})'   # radiation pages only below position 3
     kept = [k for k in ks if k in old]
     assert kept == old[:len(kept)], f'{text!r}: v7.3 results reordered: {kept}'
-    assert ks[:2] == old[:2]   # the head of each list is exactly as in v7.3
     assert [k for k in ks if k not in old and k not in RADIATION_KEYS] == []   # nothing but radiation pages joins the list (the 30-result cap may push a v7.3 tail result out)

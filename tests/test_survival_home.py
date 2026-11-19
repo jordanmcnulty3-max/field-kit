@@ -546,6 +546,7 @@ def test_radiation_category_header_and_its_ten_rows_fit_360px(page, app_url):
         for b in boxes:
             assert b['x'] >= 0 and b['x'] + b['width'] <= 360, b
         assert page.evaluate('document.documentElement.scrollWidth') <= 360
+        assert all(b['height'] >= 48 for b in boxes), [b['height'] for b in boxes]   # 48 px touch targets, header and rows
         spill = page.evaluate("""[...document.querySelectorAll('#survCats details[data-cat="radiation"] button[data-key]')].filter(b => {
             const r = b.getBoundingClientRect(), s = b.querySelector('span').getBoundingClientRect();
             return s.left < r.left || s.right > r.right || b.scrollWidth > b.clientWidth + 1; }).map(b => b.textContent)""")
@@ -583,6 +584,8 @@ def test_the_hub_links_every_other_radiation_topic_and_both_protocols():
     for k in RADIATION[1:] + RADIATION_PROTOCOLS:
         assert k in hub, k
     assert 'c:fallout-shelter-kit' in hub
+    labels = [b['label'] for sec in _shipped('survival')['surv-fallout-warning']['sections'] for b in sec['blocks'] if b.get('link') == 'c:fallout-shelter-kit']
+    assert labels == [_shipped('checklists')['fallout-shelter-kit']['title']]
 
 
 # link blocks that earlier writers could not add because the targets did not exist (docs/v7.4-rulings.md, "Links later tasks must add")
@@ -616,13 +619,15 @@ SIX = {'surv-priorities': 's:surv-fallout-warning', 'surv-shelter': 's:surv-fall
        'surv-water-store': 's:surv-fallout-water-and-food', 'surv-water-in-the-house': 's:surv-fallout-water-and-food'}
 
 
+V73_RELEASE = '1cded2e'   # the v7.3 release commit: a fixed base, so this test stays true after the radiation pack merges
+
+
 def _main_text(name):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    for ref in ('main', 'origin/main'):
-        r = subprocess.run(['git', 'show', f'{ref}:src/survival/{name}.json'], cwd=root, capture_output=True, text=True, encoding='utf-8')
-        if r.returncode == 0:
-            return json.loads(r.stdout)
-    pytest.skip('neither main nor origin/main is available')
+    r = subprocess.run(['git', 'show', f'{V73_RELEASE}:src/survival/{name}.json'], cwd=root, capture_output=True, text=True, encoding='utf-8')
+    if r.returncode != 0:
+        pytest.skip(f'v7.3 release commit {V73_RELEASE} is not in this clone, so the checked topics cannot be compared with it')
+    return json.loads(r.stdout)
 
 
 @pytest.mark.parametrize('tid,target', sorted(SIX.items()))

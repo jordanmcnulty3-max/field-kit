@@ -749,3 +749,72 @@ def test_v73_results_for_co_bleach_and_burn_keep_their_order_with_the_radiation_
     kept = [k for k in ks if k in old]
     assert kept == old[:len(kept)], f'{text!r}: v7.3 results reordered: {kept}'
     assert [k for k in ks if k not in old and k not in RADIATION_KEYS] == []   # nothing but radiation pages joins the list (the 30-result cap may push a v7.3 tail result out)
+
+
+# ---------- Final review I1 and I2: tie order, measured on screen ----------
+# The first three results as the search overlay shows them (grouped by kind, groups in order of their best result) in the
+# real v7.3 release (1cded2e), recorded from a v7.3 build at 360x640 by typing each query into the overlay on #/survival.
+# The radiation pack must not change them.
+V73_ON_SCREEN = {
+    'CO': ['p:carbon-monoxide', 'p:head-injury', 'p:animal-bite'],
+    'bleach': ['p:poisoning', 'p:poison-plants', 'p:vomiting-diarrhea'],
+    'burn': ['t:burn', 'p:burns', 'p:poison-plants'],
+    'bleeding': ['p:bleeding', 'p:abdominal-wound', 'p:amputation'],
+    'cpr': ['p:cpr-adult', 'p:cpr-child', 'p:cpr-infant'],
+    'choking': ['p:choking', 'p:choking-infant', 'p:anaphylaxis'],
+    'shock': ['p:shock', 'p:burns', 'p:abdominal-wound'],
+    'in shock': ['p:shock', 'p:abdominal-wound', 'p:amputation'],
+    'frostbite': ['p:frostbite', 'p:wound-care', 's:surv-priorities'],
+    'frost bite': ['s:surv-wind-chill', 's:surv-priorities', 'p:wound-care'],
+    'hypothermia': ['p:hypothermia', 'p:frostbite', 'p:march'],
+    'water': ['s:surv-find-water', 's:surv-garbage-and-greywater', 's:surv-handwashing'],
+    'generator': ['s:surv-generators', 's:surv-carbon-monoxide', 's:surv-wells-without-power'],
+    'tourniquet': ['p:tourniquet-conversion', 'p:junctional-bleeding', 'p:hemostatic-packing'],
+    'seizure': ['p:seizure', 'p:recovery-position', 'p:carbon-monoxide'],
+    'overdose': ['p:overdose', 'p:cpr-adult', 'p:poisoning'],
+    'poison': ['p:poison-plants', 'p:carbon-monoxide', 'p:poisoning'],
+    'snake': ['p:snakebite', 's:surv-dangerous-animals'],
+    'heat': ['p:heat-illness', 'p:carbon-monoxide', 'p:hypothermia'],
+    'no': ['p:cpr-adult', 'p:cpr-child', 'p:cpr-infant'],
+    'food': ['s:surv-food-and-wild-plants', 's:surv-stomach-illness-in-a-group', 's:surv-unheated-house'],
+    'shelter': ['s:surv-shelter', 's:surv-heat-out', 's:surv-priorities'],
+}
+
+
+def on_screen(page, text):
+    type_q(page, text)
+    page.wait_for_selector('#searchBody .sr-item')
+    return keys(page)
+
+
+# Three queries where a radiation page outscores a v7.3 result (a title or keyword match against a weaker match), so no tie order can
+# restore v7.3; left as they are for Jordan (final fix report). Today's first three on screen, so any further change is caught.
+V73_ON_SCREEN_OUTSCORED = {
+    'bleeding': ['p:bleeding', 'p:abdominal-wound', 'p:radiation-sickness'],   # keyword "bleeding" (4) over Amputation (3)
+    'food': ['s:surv-food-and-wild-plants', 's:surv-fallout-water-and-food', 's:surv-stomach-illness-in-a-group'],   # title word (5.5) over keyword (4)
+    'shelter': ['s:surv-shelter', 's:surv-fallout-where-to-shelter', 's:surv-fallout-warning'],   # title word (5.5) and keyword (4) over body (3)
+}
+
+
+@pytest.mark.parametrize('text', sorted(V73_ON_SCREEN))
+def test_v73_first_three_on_screen_are_unchanged(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    now = on_screen(page, text)[:3]
+    if text in V73_ON_SCREEN_OUTSCORED:
+        assert now == V73_ON_SCREEN_OUTSCORED[text], f'{text!r}: {now}'
+        assert now != V73_ON_SCREEN[text]   # if v7.3 comes back, move the query out of the outscored list
+    else:
+        assert now == V73_ON_SCREEN[text], f'{text!r}: first three on screen {now} (v7.3: {V73_ON_SCREEN[text]})'
+
+
+@pytest.mark.parametrize('text', ['fallout', 'nuclear'])
+def test_fallout_and_nuclear_show_the_fallout_warning_hub_first_on_screen(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, text)
+    assert ks[0] == 's:surv-fallout-warning', f'{text!r}: {ks[:5]}'
+    page.press('#searchInput', 'Enter')   # Enter opens the first result on screen
+    page.wait_for_function("location.hash.indexOf('surv-fallout-warning') >= 0")

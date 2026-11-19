@@ -544,6 +544,7 @@
     const cap = b.parentElement.querySelector('figcaption');
     $('#figCap').textContent = cap ? cap.textContent : '';
     dlg.showModal();
+    dlg.scrollTop = 0;   // focus goes to Close at the bottom; a tall figure must still open at its top
   });
   $('#figClose').addEventListener('click', () => dlg.close());
   dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });

@@ -54,8 +54,17 @@
   /* The body field is never the title or keyword field, which the keyword-bonus and title checks rely on. */
   const withBody = (doc, parts) => { if (parts.length) doc.fields.push(bodyField(parts)); doc.parts = parts; return doc; };
 
+  /* Tie order. At equal score the document indexed first wins, so the order of indexing decides ties (nothing else does). The fallout hub
+     is indexed first of all, so "fallout" and "nuclear" put it first; the rest of the radiation pack (v7.4) is indexed after the older
+     pages of its kind, so a tie with an everyday page ("water", "food", "shelter", "bleeding") still goes to the page that led before it. */
+  const HUB = 's:surv-fallout-warning';
+  const PACK_PROTOCOLS = new Set(['radiation-decontamination', 'radiation-sickness']);
+  const packTopic = t => !!t && t.category === 'radiation';
+
   function build() {
-    const out = [];
+    const out = [], packProtocols = [];
+    const hub = FK.survival ? FK.survival.topics().find(t => 's:' + t.id === HUB) : null;
+    if (hub) out.push(topicDoc(hub));
     for (const p of FK.protocols()) {   // well-formed protocols only (app.js)
       const adv = p.tier === 'advanced' || p.category === 'advanced';
       const f = [field(W.title, p.title)];
@@ -67,14 +76,17 @@
         if (s && s.text) parts.push(s.text);
         if (s && s.detail) parts.push(Array.isArray(s.detail) ? s.detail.join(' ') : s.detail);
       }
-      out.push(withBody({ key: 'p:' + p.id, title: p.title, kind: adv ? 'Advanced' : 'Emergency', draft: p.draft === true, fields: f }, parts));
+      (PACK_PROTOCOLS.has(p.id) ? packProtocols : out).push(withBody({ key: 'p:' + p.id, title: p.title, kind: adv ? 'Advanced' : 'Emergency', draft: p.draft === true, fields: f }, parts));
     }
+    out.push(...packProtocols);
     for (const t of (FK.tools && FK.tools.list ? FK.tools.list() : [])) {
       const report = t.segment === 'report';
       out.push({ key: (report ? 'r:' : 't:') + t.name, title: t.label, kind: report ? 'Report' : 'Tool', draft: false,
         fields: [field(W.title, t.label), field(W.keywords, TOOL_WORDS[t.name] || '')] });
     }
-    for (const t of FK.survival ? FK.survival.topics() : []) out.push(topicDoc(t));
+    const topics = FK.survival ? FK.survival.topics().filter(t => t !== hub) : [];
+    for (const t of topics) if (!packTopic(t)) out.push(topicDoc(t));
+    for (const t of topics) if (packTopic(t)) out.push(topicDoc(t));
     for (const c of survList('checklists')) {
       if (!str(c && c.id) || !str(c.title)) continue;
       const f = [field(W.title, c.title)];

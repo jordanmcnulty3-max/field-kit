@@ -1153,3 +1153,23 @@ def test_t11_timer_still_running_at_startup_is_restored_and_vibrates_when_it_end
     page.clock.run_for(21_000)
     assert page.evaluate('window.__vibes') == [[300, 150, 300]]
     assert page.evaluate('FK.protocol.timer()')['done'] is True
+
+
+def test_no_shipped_protocol_title_runs_under_the_pin_star_at_360(page, app_url):
+    # Final review I4: "Radiation decontamination (cleaning off fallout)" ran "decontamin|" under the pin star.
+    page.add_init_script("localStorage.setItem('fk.advAck', 'true')")
+    page.goto(app_url + '#/emergency')
+    page.wait_for_function('window.FK && FK.protocols')
+    ids = page.evaluate('FK.protocols().map(p => p.id)')
+    assert 'radiation-decontamination' in ids
+    bad = []
+    for pid in ids:
+        page.goto(app_url + '#/emergency/' + pid)
+        page.wait_for_selector('#ppTitle')
+        r = page.evaluate("""(() => { const t = document.getElementById('ppTitle'), star = t.parentElement.querySelector('[data-act="pin"]');
+            const range = document.createRange(); range.selectNodeContents(t);
+            const right = Math.max(...[...range.getClientRects()].map(x => x.right));
+            return [t.textContent, right, star.getBoundingClientRect().left, t.scrollWidth - t.clientWidth]; })()""")
+        if r[1] > r[2] or r[3] > 0:
+            bad.append(r)
+    assert bad == [], bad

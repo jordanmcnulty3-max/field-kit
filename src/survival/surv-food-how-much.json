@@ -1,0 +1,356 @@
+{
+  "id": "surv-food-how-much",
+  "title": "How much food to store, and what",
+  "category": "food",
+  "keywords": [
+    "how much food",
+    "emergency food",
+    "stock up",
+    "nonperishable",
+    "non-perishable",
+    "food per person",
+    "calories",
+    "bulk staples"
+  ],
+  "summary": "Agencies say to store from several days to 30 days of food; the Red Cross says 2 weeks at home, and this app plans for at least 2 weeks, the same as for water. Build up from the food your household already eats: food that needs no refrigeration, little or no cooking and little or no water. Plan for babies, children, older people, special diets and pets. No source opened gives an amount of food per person for an emergency, or any amount for a child.",
+  "sections": [
+    {
+      "h": "How many days",
+      "blocks": [
+        {
+          "p": "Agencies give different numbers of days:"
+        },
+        {
+          "list": [
+            "Ready.gov (FEMA): at least a several-day supply of non-perishable food.",
+            "New York State’s preparedness checklist: at least enough food for 7 days. New York State Division of Homeland Security and Emergency Services: be prepared to make it on your own for at least 10 days.",
+            "American Red Cross: a 2-week supply for home, and a 3-day supply to take with you if you leave.",
+            "FEMA, the Red Cross and USDA, in an older booklet: even though it is unlikely that an emergency would cut off your food supply for two weeks, prepare a supply that will last that long.",
+            "University of Illinois Extension: enough food for each person in the household for 14 to 30 days.",
+            "Oregon State University Extension: Oregon’s minimum goal is meals for 2 weeks, and many local emergency managers there recommend 4 weeks."
+          ]
+        },
+        {
+          "p": "This app plans for at least 2 weeks of food at home, the Red Cross figure, the same as How much water you need does for water. The longest figure in any source opened is 30 days (University of Illinois Extension)."
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        }
+      ]
+    },
+    {
+      "h": "Build it up from what you eat now",
+      "blocks": [
+        {
+          "steps": [
+            "List everyone in the household by name, with any special needs such as diabetes or allergies (University of Georgia Extension, University of Minnesota Extension).",
+            "Write down the meals for each day, for 14 days (University of Minnesota Extension). On each day’s list, note how much water and what equipment and utensils the meals need (University of Georgia Extension).",
+            "Check your cupboards. Many people already have a two-week supply of most staples once they make a written plan (University of Georgia Extension).",
+            "Buy more of the basic foods you normally keep on your shelves. That is the easiest way to build a two-week supply (FEMA, Red Cross and USDA booklet).",
+            "If you eat out regularly, add those meals to your list (University of Georgia Extension, University of Illinois Extension).",
+            "Date what you buy and keep it so it lasts, as in Store food so it lasts."
+          ]
+        },
+        {
+          "p": "You don’t need to buy unfamiliar foods. Familiar foods are important: they can lift morale and give a feeling of security in time of stress (FEMA, Red Cross and USDA booklet)."
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Store food so it lasts"
+        },
+        {
+          "link": "c:pantry",
+          "label": "Pantry"
+        }
+      ]
+    },
+    {
+      "h": "What kinds of food",
+      "blocks": [
+        {
+          "p": "Choose foods your family will eat (Ready.gov). Foods that need no refrigeration, preparation or cooking are best (FEMA, Red Cross and USDA booklet), and foods that need little or no water (University of Georgia Extension)."
+        },
+        {
+          "list": [
+            "Ready-to-eat canned meats, fish, poultry, beans, fruits, vegetables, pasta, soup and juice (Ready.gov, New York State Division of Homeland Security and Emergency Services).",
+            "Protein or fruit bars, dry cereal or granola (Ready.gov).",
+            "High-energy foods: peanut butter, jelly, nuts, dried meat such as jerky, granola, trail mix, energy bars (New York State Division of Homeland Security and Emergency Services).",
+            "Dried fruit and canned juices (Ready.gov).",
+            "Milk that keeps on the shelf: powdered, canned or shelf-stable brick pack (New York State Division of Homeland Security and Emergency Services).",
+            "Staples: sugar, salt, pepper, instant coffee, tea bags, cocoa (New York State Division of Homeland Security and Emergency Services).",
+            "Comfort foods, such as chocolate bars and hard candy (Ready.gov, New York State Division of Homeland Security and Emergency Services).",
+            "Food for babies, older people and anyone on a special diet (Ready.gov, New York State Division of Homeland Security and Emergency Services).",
+            "Food for pets (Ready.gov, University of Illinois Extension)."
+          ]
+        },
+        {
+          "list": [
+            "If some of your food needs cooking, keep some that is ready to eat too (University of Georgia Extension). Canned food is already cooked and can be eaten right out of the can (University of Georgia Extension; FEMA, Red Cross and USDA booklet).",
+            "Don’t buy large or institutional-size containers to save money if you won’t be able to store the leftovers properly (University of Georgia Extension). How long opened food may sit out is in Is it still good?",
+            "Keep a manual can opener (Ready.gov).",
+            "Work out how much extra fuel you need to cook for 2 to 4 weeks (Oregon State University Extension). Where and how to cook safely is in Cook without power."
+          ]
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
+          "link": "s:surv-store-fuel",
+          "label": "Store fuel safely"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        }
+      ]
+    },
+    {
+      "h": "Water to make the food",
+      "blocks": [
+        {
+          "list": [
+            "Plan water for food that needs it, such as instant oatmeal, dry milk, powdered drink mixes, dried soups, bouillon, and instant rice and potatoes (University of Georgia Extension).",
+            "Dehydrated and freeze-dried foods are light and take little room, but need extra water to make them ready to eat (University of Georgia Extension). You also need more water to digest freeze-dried food (Oregon State University Extension).",
+            "Don’t stock salty foods if your water may be limited: they make you thirsty (FEMA, Red Cross and USDA booklet)."
+          ]
+        },
+        {
+          "p": "How much water to store, and how to store it, is in the water topics."
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        }
+      ]
+    },
+    {
+      "h": "Babies, children and special needs",
+      "blocks": [
+        {
+          "list": [
+            "Babies, toddlers and older people, and anyone with a special diet or allergies, need particular attention (FEMA, Red Cross and USDA booklet).",
+            "If you have a baby, stock infant formula, bottles and baby food (Ready.gov Build A Kit, American Red Cross). Never buy or use formula after its Use-By date (USDA).",
+            "Stock foods your children already eat: a disaster is not the time to surprise young children with new foods (Oregon State University Extension).",
+            "Food for special diets, allergies or medical needs (University of Illinois Extension). Canned dietetic foods, juices and soups may help people who are ill or older (FEMA, Red Cross and USDA booklet)."
+          ]
+        },
+        {
+          "p": "No source opened gives an amount of food for a child, so this app gives none."
+        }
+      ]
+    },
+    {
+      "h": "How much in a day",
+      "blocks": [
+        {
+          "p": "No current federal, New York State or extension source opened gives an amount of food per person per day for an emergency store. Oregon State University Extension builds its emergency pantry list on MyPlate’s plan for 2,000 calories a day, for ages 14 and up, and says the number of servings and portion sizes vary with age and activity level. After a disaster, people may be far more active outdoors than usual (Oregon State University Extension)."
+        },
+        {
+          "p": "This app works out no calorie or weight figure of its own."
+        }
+      ]
+    },
+    {
+      "h": "Storing for a year: one extension list",
+      "blocks": [
+        {
+          "p": "University of Georgia Extension (page reviewed 2017) suggests these amounts “per adult, per year” of bulk staples, best bought in nitrogen-packed cans. The page names an older FEMA booklet (2004) and a church preparedness manual (1998) as its references without saying which gave the figures. It gives nothing for children, and for babies says “Amounts needed would vary, depending on the age of the infant.” This app does not turn these figures into amounts for fewer days, for a household or for a child."
+        },
+        {
+          "table": {
+            "head": [
+              "Bulk staple",
+              "Per adult, per year"
+            ],
+            "rows": [
+              [
+                "Wheat",
+                "240 lb (109 kg)"
+              ],
+              [
+                "Powdered milk",
+                "75 lb (34 kg)"
+              ],
+              [
+                "Corn",
+                "240 lb (109 kg)"
+              ],
+              [
+                "Iodized salt",
+                "5 lb (2.3 kg)"
+              ],
+              [
+                "Soybeans",
+                "120 lb (54 kg)"
+              ],
+              [
+                "Fats and oil (1 gallon is 7 lb)",
+                "20 lb (9.1 kg)"
+              ],
+              [
+                "Vitamin C (rotate every two years)",
+                "180 grams"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Other foods to supplement the bulk staples, “suggested quantities for an adult for one year” (University of Georgia Extension):"
+        },
+        {
+          "table": {
+            "head": [
+              "Food",
+              "Per adult, per year"
+            ],
+            "rows": [
+              [
+                "Flour, white enriched",
+                "17 lb (7.7 kg)"
+              ],
+              [
+                "Corn meal",
+                "42 lb (19 kg)"
+              ],
+              [
+                "Pasta (spaghetti, macaroni)",
+                "42 lb (19 kg)"
+              ],
+              [
+                "Beans (dry)",
+                "25 lb (11.3 kg)"
+              ],
+              [
+                "Lima beans (dry)",
+                "1 lb (0.45 kg)"
+              ],
+              [
+                "Split peas (dry)",
+                "1 lb (0.45 kg)"
+              ],
+              [
+                "Lentils (dry)",
+                "1 lb (0.45 kg)"
+              ],
+              [
+                "Dry soup mix",
+                "5 lb (2.3 kg)"
+              ],
+              [
+                "Peanut butter",
+                "4 lb (1.8 kg)"
+              ],
+              [
+                "Dry yeast",
+                "1/2 lb (0.23 kg)"
+              ],
+              [
+                "Sugar, white granulated",
+                "40 lb (18 kg)"
+              ],
+              [
+                "Baking soda (“Soda” on the page)",
+                "1 lb (0.45 kg)"
+              ],
+              [
+                "Baking powder",
+                "1 lb (0.45 kg)"
+              ],
+              [
+                "Vinegar",
+                "1/2 gal (1.9 L)"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "c:pantry",
+          "label": "Pantry"
+        },
+        {
+          "link": "s:surv-food-storage",
+          "label": "Store food so it lasts"
+        },
+        {
+          "link": "s:surv-food-when-short",
+          "label": "When food is short"
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        },
+        {
+          "link": "s:surv-fallout-get-ready",
+          "label": "Get ready for fallout"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Ready.gov (FEMA), Food (last updated March 30, 2022)",
+      "used": "At least a several-day supply of non-perishable food; choose foods your family will eat; special dietary needs; suggested items (ready-to-eat canned meats, fruits, vegetables and a can opener; protein or fruit bars; dry cereal or granola; peanut butter; dried fruit; canned juices; non-perishable pasteurized milk; high-energy foods; food for infants; comfort/stress foods)"
+    },
+    {
+      "name": "Ready.gov (FEMA), Build A Kit (undated)",
+      "used": "Manual can opener; infant formula, bottles; pet food"
+    },
+    {
+      "name": "American Red Cross, Survival Kit Supplies (undated)",
+      "used": "Food: non-perishable, easy-to-prepare items, 3-day supply for evacuation, 2-week supply for home; baby supplies (bottles, formula, baby food)"
+    },
+    {
+      "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency (older booklet; 1994 edition and later reprints)",
+      "used": "Prepare a two-week supply; increase the basic foods you normally keep; familiar foods lift morale; foods needing no refrigeration, preparation or cooking are best; don’t stock salty foods if water is limited; special diets, allergies, babies, toddlers, elderly; canned dietetic foods, juices and soups for ill or elderly people; canned food eaten out of the can"
+    },
+    {
+      "name": "New York State Division of Homeland Security and Emergency Services, Before an Emergency Happens (undated)",
+      "used": "Be prepared to make it on your own for at least 10 days; ready-to-eat canned foods; shelf-stable milk; high-energy foods; staples; candy; specialty food for older adults and special diets; baby food"
+    },
+    {
+      "name": "New York State, Help Detective Emm Find the Missing Supplies (preparedness checklist for children; undated)",
+      "used": "Food: at least enough for 7 days"
+    },
+    {
+      "name": "University of Illinois Extension, How To Build An Emergency Food Supply (undated)",
+      "used": "Food for each person for 14 to 30 days; meals eaten away from home; special diets, allergies or medical needs; food for pets"
+    },
+    {
+      "name": "University of Georgia Extension, Preparing an Emergency Food Supply, Short Term Food Storage (reviewed March 2020)",
+      "used": "List household members and special needs; note water, equipment and utensils for each day; many people already have two weeks of staples with a written plan; eating out; little or no water; ready-to-eat foods beside foods that need cooking; canned food eaten from the can; large containers and leftovers; foods that need water to prepare; dehydrated and freeze-dried foods need extra water"
+    },
+    {
+      "name": "University of Georgia Extension, Preparing an Emergency Food Supply, Long Term Food Storage (reviewed 2017)",
+      "used": "Bulk staples and supplemental foods per adult per year, quoted as printed; nitrogen-packed cans; nothing for children; infant amounts vary with age; its two references"
+    },
+    {
+      "name": "University of Minnesota Extension, Preparing a 2-week emergency food supply (reviewed 2026)",
+      "used": "A list of meals for each day for 14 days; family members and special needs"
+    },
+    {
+      "name": "Oregon State University Extension, Survival Basics: Food, EM 9331 (August 2021)",
+      "used": "Oregon’s minimum goal of 2 weeks; 4 weeks recommended by many local emergency managers; MyPlate 2,000-calorie plan for ages 14 and up; servings and portions vary with age and activity; more activity after a disaster; extra fuel for 2 to 4 weeks; more water for freeze-dried food; no new foods for young children"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Food Product Dating (undated)",
+      "used": "Do not buy or use baby formula after its Use-By date"
+    },
+    {
+      "name": "How much water you need, Store water at home, Store food so it lasts, Cook without power, Is it still good? (other topics in this app)",
+      "used": "Water amounts and storage, storage, cooking and throw-out rules, by link"
+    }
+  ],
+  "reviewed": "2026-11-19",
+  "draft": true
+}

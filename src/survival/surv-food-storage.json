@@ -1,0 +1,313 @@
+{
+  "id": "surv-food-storage",
+  "title": "Store food so it lasts",
+  "category": "food",
+  "keywords": [
+    "food storage",
+    "store food",
+    "shelf life",
+    "expiration",
+    "best by",
+    "best if used by",
+    "use by",
+    "sell by",
+    "rotate food",
+    "pantry pests",
+    "weevils",
+    "food grade"
+  ],
+  "summary": "Keep food somewhere cool, dry and dark: below 85°F (29°C) is best, and never above or beside the stove, under the sink or in a damp garage or basement. Keep it covered, in tightly closed glass, metal or heavy food-grade plastic. Date everything, put new food behind old and use the oldest first. The date on most food is about quality, not safety. Throw away food that pests got into.",
+  "sections": [
+    {
+      "h": "Where to keep it",
+      "blocks": [
+        {
+          "list": [
+            "Somewhere cool and dry (USDA), and dark if possible (FEMA, Red Cross and USDA booklet).",
+            "Temperatures below 85°F (29°C) are best. Over 100°F (38°C) harms canned food, and the risk of spoilage jumps as the temperature rises (USDA). University of Illinois Extension says to keep canned food between 50°F and 70°F (10°C and 21°C).",
+            "Never above or beside the stove, under the sink, in a damp garage or basement, or anywhere exposed to high or low temperature extremes (USDA).",
+            "Away from sunlight, damp spots, and vents, pipes or furnaces that make the temperature swing (University of Illinois Extension).",
+            "Off the floor, in a clean, dry, dark place away from any source of moisture (University of Georgia Extension).",
+            "In a small home: bedroom or coat closets, under beds or behind furniture (Oregon State University Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Freezing weather",
+      "blocks": [
+        {
+          "p": "Keep canned food where it won’t freeze. From Protect an unheated house, word for word: “A can that froze may swell. Never use a swollen can: throw it out (USDA Food Safety and Inspection Service).” “Throw out frozen cans that thawed at 40°F (4°C) or warmer, even if they are not swollen. Cans that thawed and froze again are not safe (USDA Food Safety and Inspection Service).”"
+        },
+        {
+          "link": "s:surv-unheated-house",
+          "label": "Protect an unheated house"
+        }
+      ]
+    },
+    {
+      "h": "Containers",
+      "blocks": [
+        {
+          "list": [
+            "Keep food covered at all times (FEMA, Red Cross and USDA booklet), sealed in containers with tight-fitting lids (CDC).",
+            "Store boxed food in tightly closed plastic or metal containers (Ready.gov).",
+            "Use only food-grade containers made for storing food: harmful chemicals can leach into food from containers not meant for it (Oregon State University Extension).",
+            "Good choices: airtight plastic food storage containers, glass jars with screw-top lids, or metal cans that are not rusty (University of Georgia Extension). Glass breaks: pack jars with cardboard strips or crumpled newspaper between them (Oregon State University Extension).",
+            "Open boxes and packages carefully, so you can close them tightly after each use (FEMA, Red Cross and USDA booklet; University of Illinois Extension).",
+            "Put opened sugar, flour, dried fruit and nuts into airtight jars or cans. Wrap cookies and crackers in plastic bags and keep them in tight containers (FEMA, Red Cross and USDA booklet; University of Illinois Extension).",
+            "Rice, instant cereal, potatoes or dry milk that is not in its own package with cooking directions: write the directions or mix ratios on a card and keep it with the food (University of Georgia Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Insects and rodents",
+      "blocks": [
+        {
+          "list": [
+            "Before you buy, check that packages are sealed and unbroken, with no holes (University of Minnesota Extension).",
+            "Store food in tightly closed glass, metal or heavy plastic containers, or in the fridge or freezer (University of Minnesota Extension).",
+            "Keep storage areas clean, and clean up crumbs and spilled food right away (University of Minnesota Extension).",
+            "Check stored food for insects, rodents and water damage every six months (Oregon State University Extension).",
+            "Found food with insects in it? Throw it away. Then check all the other food they could get into: there may be more than one infested source (University of Minnesota Extension).",
+            "Older food you are not sure about: freezing it at 0°F (-18°C) for at least four days, or heating it in shallow pans in a 130°F (54°C) oven for at least 30 minutes, kills any eggs or insects (University of Minnesota Extension).",
+            "Washing shelves with bleach, ammonia or detergent will not keep pantry insects from coming back, and the chemicals could be dangerous if they touch food (University of Minnesota Extension)."
+          ]
+        },
+        {
+          "p": "Rats and mice can spread disease and contaminate food (CDC). Keep food and water away from them (CDC). From Garbage and dirty water, word for word: “Don’t eat or drink anything rodents may have touched (CDC).” How to close holes, trap them and clean up droppings safely is in Garbage and dirty water; cleaning food surfaces afterwards is in Clean and disinfect."
+        },
+        {
+          "link": "s:surv-garbage-and-greywater",
+          "label": "Garbage and dirty water"
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        }
+      ]
+    },
+    {
+      "h": "Date it and use the oldest first",
+      "blocks": [
+        {
+          "list": [
+            "Date everything with a marker when you buy it and when you open it (FEMA, Red Cross and USDA booklet; University of Georgia Extension; University of Illinois Extension).",
+            "Put new food at the back and older food in front (FEMA, Red Cross and USDA booklet).",
+            "Use what you store and replace it: rotate staples once or twice a year (University of Georgia Extension). Check your pantry every few weeks and use the canned food you have had for a while (USDA).",
+            "Food kept only for emergencies: label it as emergency food, keep it in its own place, and keep a list of dates when it needs checking (University of Georgia Extension).",
+            "Replace expired items, and rethink what you need every year as your family changes (Ready.gov)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "How long it keeps",
+      "blocks": [
+        {
+          "p": "USDA’s times for food kept on the shelf. Over several years canned food changes in taste and texture, and its nutritional value eventually drops (USDA)."
+        },
+        {
+          "table": {
+            "head": [
+              "Food",
+              "On the shelf, unopened",
+              "After opening, in the fridge"
+            ],
+            "rows": [
+              [
+                "Low-acid canned food: meat and poultry, stews, soups (not tomato), pasta products, potatoes, corn, carrots, spinach, beans, beets, peas, pumpkin",
+                "2 to 5 years",
+                "3 to 4 days"
+              ],
+              [
+                "High-acid canned food: juices, tomatoes, grapefruit, pineapple, apples and apple products, mixed fruit, peaches, pears, plums, berries, pickles, sauerkraut, foods in vinegar-based sauces or dressings",
+                "12 to 18 months",
+                "5 to 7 days"
+              ],
+              [
+                "Shelf-stable canned ham",
+                "2 to 5 years",
+                "3 to 4 days"
+              ],
+              [
+                "Rice and dried pasta",
+                "2 years",
+                "Cooked: 3 to 4 days"
+              ],
+              [
+                "Jerky, store-bought",
+                "12 months",
+                "No time given"
+              ],
+              [
+                "Tuna and other seafood in pouches",
+                "18 months",
+                "3 to 4 days"
+              ],
+              [
+                "Hard or dry sausage",
+                "6 weeks",
+                "3 weeks"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "For best quality, use canned food within one year (University of Georgia Extension). An older federal booklet gives these shorter times (FEMA, Red Cross and USDA booklet):"
+        },
+        {
+          "list": [
+            "Use within 6 months: boxed powdered milk; dried fruit and dry, crisp crackers in a metal container; potatoes.",
+            "Use within 1 year: canned condensed meat and vegetable soups; canned fruits, fruit juices and vegetables; ready-to-eat cereals and uncooked instant cereals in metal containers; peanut butter; jelly; hard candy and canned nuts; vitamin C."
+          ]
+        },
+        {
+          "list": [
+            "Dried beans stored for more than three years may not rehydrate (Oregon State University Extension).",
+            "Freeze-dried foods may claim a 20- to 30-year storage life, but that does not ensure quality. Once opened, they spoil quickly in moist, humid air (Oregon State University Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Dates on food",
+      "blocks": [
+        {
+          "list": [
+            "Except for infant formula, the dates on food are for quality, not safety, and federal law does not require them (USDA).",
+            "“Best if Used By” or “Best if Used Before”: when the food will be at its best flavor or quality. Not a purchase or safety date (USDA).",
+            "“Sell-By”: how long the store displays the food for sale. Not a safety date (USDA).",
+            "“Use-By”: the last date for use at peak quality. Not a safety date, except on infant formula (USDA)."
+          ]
+        },
+        {
+          "warn": "Never buy or use infant formula after its Use-By date (USDA)."
+        },
+        {
+          "p": "A date never makes food safe. From Is it still good?, word for word: “Throw out any food with an unusual smell, color or texture; a normal one proves nothing: food that looks and smells normal can still make you sick (CDC). When in doubt, throw it out (CDC).”"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        }
+      ]
+    },
+    {
+      "h": "Cans",
+      "blocks": [
+        {
+          "list": [
+            "Don’t buy bulging, rusted, leaking or deeply dented cans (USDA).",
+            "Check stored cans now and then for rust, leaks, bulges, bad dents and broken seals. A dent on a seam or on the end of the can can break the seal, and so can a large dent in the side, even if you can’t see it. Replace any can you find like this (University of Georgia Extension)."
+          ]
+        },
+        {
+          "p": "Which cans and jars to throw out, and how to get rid of a suspect one, is in Is it still good? and Food poisoning and botulism."
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "link": "s:surv-food-poisoning",
+          "label": "Food poisoning and botulism"
+        }
+      ]
+    },
+    {
+      "h": "In the freezer",
+      "blocks": [
+        {
+          "list": [
+            "Keep all food at 0°F (-18°C) or lower. Food kept constantly at 0°F is always safe; only its quality suffers with long storage, so freezer storage times are for quality only (USDA).",
+            "Keep an appliance thermometer in the freezer to check the temperature (USDA).",
+            "Wrap food well, and overwrap packages for long storage, to prevent freezer burn. Freezer burn does not make food unsafe, only dry in spots: cut those parts away before or after cooking (USDA).",
+            "Don’t freeze canned food or eggs in their shells (USDA)."
+          ]
+        },
+        {
+          "p": "When the power goes out, how long the freezer stays cold is in Food when the power goes out."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-food-how-much",
+          "label": "How much food to store, and what"
+        },
+        {
+          "link": "c:pantry",
+          "label": "Pantry"
+        },
+        {
+          "link": "s:surv-food-when-short",
+          "label": "When food is short"
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "USDA Food Safety and Inspection Service, Shelf-Stable Food Safety (undated)",
+      "used": "Cool, dry place; below 85°F best; over 100°F harmful; never above or beside the stove, under the sink, in a damp garage or basement or at temperature extremes; check your pantry every few weeks; shelf storage table (low-acid and high-acid canned goods with examples, canned ham, rice and dried pasta, jerky, seafood in retort pouches, hard or dry sausage); taste, texture and nutrition change over years; don’t buy bulging, rusted, leaking or deeply dented cans"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Food Product Dating (undated)",
+      "used": "Dates are for quality, not safety, except infant formula; not required by federal law; Best if Used By/Before, Sell-By, Use-By; do not buy or use baby formula after its Use-By date"
+    },
+    {
+      "name": "USDA Food Safety and Inspection Service, Freezing and Food Safety (undated)",
+      "used": "Store food at 0°F or lower; food stored constantly at 0°F is always safe; storage times are for quality only; appliance thermometer; packaging and overwrapping; freezer burn; don’t freeze canned food or shell eggs"
+    },
+    {
+      "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency (older booklet; 1994 edition and later reprints)",
+      "used": "Dry, cool, dark spot; keep food covered; open boxes so they close tightly; wrap cookies and crackers; opened sugar, dried fruit and nuts in screw-top jars or air-tight cans against pests; date with ink or marker; new items behind, older in front; use within 6 months and within 1 year lists"
+    },
+    {
+      "name": "Ready.gov (FEMA), Build A Kit (undated)",
+      "used": "Store boxed food in tightly closed plastic or metal containers; replace expired items; rethink needs every year"
+    },
+    {
+      "name": "University of Georgia Extension, Preparing an Emergency Food Supply, Short Term Food Storage (reviewed March 2020)",
+      "used": "Containers (airtight plastic, glass with screw-top lids, non-rusty metal cans); cooking directions on cards; date when bought and opened; rotate staples once or twice a year; label emergency food and keep a list of dates; canned food within one year for best quality; inspect cans for rust, leaks, bulges, bad dents and broken seals, dents on seams or ends, replace them"
+    },
+    {
+      "name": "University of Georgia Extension, Preparing an Emergency Food Supply, Long Term Food Storage (reviewed 2017)",
+      "used": "Off the floor in clean, dry, dark places away from moisture"
+    },
+    {
+      "name": "University of Illinois Extension, How To Build An Emergency Food Supply (undated)",
+      "used": "Canned foods between 50 and 70 degrees; away from sunlight, damp areas, vents, pipes, furnaces; open packages carefully; opened sugar, flour, dried fruit and nuts in airtight containers; date items with a marker"
+    },
+    {
+      "name": "Oregon State University Extension, Survival Basics: Food, EM 9331 (August 2021)",
+      "used": "Food-grade containers only; protecting glass jars; storage in small homes; inspect for pests every six months; water, insect and rodent damage; dried beans over three years; freeze-dried food storage claims"
+    },
+    {
+      "name": "University of Minnesota Extension, Pantry pests: Insects found in stored food (reviewed 2024)",
+      "used": "Check packages; tightly closed glass, metal or heavy plastic containers or fridge or freezer; clean storage areas; throw away infested food and check other food; freezer at 0 degrees for four days or oven at 130 degrees for 30 minutes; chemicals on shelves don’t prevent pests and could be dangerous"
+    },
+    {
+      "name": "CDC, Rodent Control (Natural Disasters; reviewed August 26, 2026)",
+      "used": "Keep food sealed in containers with tight-fitting lids; keep food and water away from rodents; rats and mice spread disease and contaminate food"
+    },
+    {
+      "name": "Protect an unheated house, Garbage and dirty water, Is it still good? (other topics in this app)",
+      "used": "Frozen cans, rodents and the throw-out rule, quoted word for word"
+    }
+  ],
+  "reviewed": "2026-11-19",
+  "draft": true
+}

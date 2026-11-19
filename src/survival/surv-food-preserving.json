@@ -9,12 +9,12 @@
     "curing",
     "jerky"
   ],
-  "summary": "This page gives no method for canning, curing or smoking food, or for drying meat, fruit or vegetables; herbs are the one food it teaches you to dry. Thawing meat is cooked and eaten, or thrown out, by Is it still good? and Cook without power. Pressure canning by tested instructions is the only recommended way to can vegetables, meat, poultry or fish; canning done wrong can cause botulism, which you can’t see, smell or taste. A failing freezer: keep it shut and check its food in Is it still good?",
+  "summary": "This page gives no method for canning, curing or smoking food, or for drying meat, fruit or vegetables; herbs are the one food it teaches you to dry. Don’t try to dry meat to save it: this page gives no method, and bacteria that cause illness are likely to survive the dry heat of a warm oven or a food dehydrator (USDA). Thawing meat is cooked and eaten, or thrown out, by Is it still good? and Cook without power. Pressure canning by tested instructions is the only recommended way to can vegetables, meat, poultry or fish; canning done wrong can cause botulism, which you can’t see, smell or taste. A failing freezer: keep it shut and check its food in Is it still good?",
   "doFirst": [
     "Freezer failing? Keep the door shut and follow Food when the power goes out. Before you refreeze, cook or eat anything from it, check it in Is it still good?",
     "This app’s caution: don’t try canning for the first time now. Pressure canning is the only recommended method for low-acid food such as vegetables, meat, poultry and fish, and a boiling water canner will not protect against botulism (CDC).",
     "Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC). The warning signs are in Is it still good?",
-    "Don’t try to dry meat to save it: this page gives no method. A dehydrator may not get meat as hot as USDA advises, and sun drying is not recommended for meat jerky (USDA). Thawing meat: check it in Is it still good?, then cook and eat it by Cook without power, or throw it out."
+    "Don’t try to dry meat to save it: this page gives no method. Bacteria that cause illness are likely to survive the dry heat of a warm oven, and especially a food dehydrator, and sun drying is not recommended for meat jerky (USDA). Thawing meat: check it in Is it still good?, then cook and eat it by Cook without power, or throw it out."
   ],
   "sections": [
     {
@@ -95,8 +95,9 @@
         {
           "list": [
             "Several outbreaks of E. coli O157:H7 have occurred in venison jerky (National Center for Home Food Preservation).",
-            "USDA’s jerky page gives jerky from venison or other wild game an answer of its own. This app’s reading: the USDA figures above are not for wild game. This page gives no temperature for drying game. Cook without power cooks all wild game and wild birds to at least 165°F (73.9°C) in the thickest part.",
-            "This page gives no method for drying meat, including game. Thawing meat goes by Is it still good? and Cook without power."
+            "USDA’s jerky page says there are other special considerations for jerky from venison or other wild game: venison can be heavily contaminated with fecal bacteria, and deer carcasses are usually not chilled quickly the way beef is, so bacteria can multiply. It gives no heating figure of its own for game. This app’s reading: the USDA figures above are not for wild game. This page gives no temperature for drying game. Cook without power cooks all wild game and wild birds to at least 165°F (73.9°C) in the thickest part.",
+            "Bacteria that cause illness are likely to survive the dry heat of a warm oven, and especially the 130 to 140°F (54 to 60°C) of a food dehydrator (USDA).",
+            "Don’t try to dry meat to save it. This page gives no method for drying meat, including game. Thawing meat goes by Is it still good? and Cook without power."
           ]
         },
         {
@@ -220,7 +221,7 @@
     },
     {
       "name": "USDA FSIS, Jerky and Food Safety (no date shown)",
-      "used": "Heat meat to 160°F and poultry to 165°F before the dehydrating process; most dehydrator instructions lack this step and a dehydrator may not reach those temperatures; sun drying not recommended for meat jerky, and why; other special considerations for jerky from venison or other wild game"
+      "used": "Heat meat to 160°F and poultry to 165°F before the dehydrating process; most dehydrator instructions lack this step and a dehydrator may not reach those temperatures; sun drying not recommended for meat jerky, and why; other special considerations for jerky from venison or other wild game (fecal contamination; carcasses not rapidly chilled); bacteria likely to survive the dry heat of a warm oven and especially the 130 to 140°F of a dehydrator"
     },
     {
       "name": "National Center for Home Food Preservation, Herbs (from So Easy to Preserve, 6th ed., 2014)",

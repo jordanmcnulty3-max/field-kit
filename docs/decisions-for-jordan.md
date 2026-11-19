@@ -1100,9 +1100,10 @@ Food at home pack (v7.5), batch C: numbers 140 to 149. Rulings are in docs/v7.5-
    The National Center for Home Food Preservation's review, section 5.4.6 (Game): "USDA recommends attaining an internal temperature of
    at least 170°F (CDC 1985)" for game (section 5.4.6, Game; the sentence is about game meat, not jerky alone). The checked Field dressing
    game topic cooks all wild game to 165°F. Today (corrected in the whole-pack fixes): Preserving food's "Drying meat" warn carries
-   USDA's jerky figures, heat meat to 160°F and poultry to 165°F before dehydrating. The next line says USDA's jerky page gives jerky
-   from venison or other wild game an answer of its own (USDA FSIS, Jerky and Food Safety: "there are other special considerations when
-   making homemade jerky from venison or other wild game"), then, labelled as this app's reading, that the USDA figures are not for
+   USDA's jerky figures, heat meat to 160°F and poultry to 165°F before dehydrating. The next line says what USDA's jerky page gives
+   for game: "there are other special considerations when making homemade jerky from venison or other wild game", namely that venison
+   can be heavily contaminated with fecal bacteria and that deer carcasses are usually not chilled quickly the way beef is, so bacteria
+   can multiply (USDA FSIS, Jerky and Food Safety, quoting Keene and co-authors); it gives no heating figure of its own for game. Then, labelled as this app's reading, that the USDA figures are not for
    wild game; that the page gives no temperature for drying game; and that Cook without power cooks all wild game and wild birds to at
    least 165°F (73.9°C) in the thickest part (its table row, which is Field dressing game's rule). The page gives no method for drying
    meat, including game. Field dressing game is unchanged and is not linked from the food pages until v7.6 (docs/v7.5-rulings.md).
@@ -1122,8 +1123,11 @@ Food at home pack (v7.5), whole-pack read fixes: numbers from 150.
    unusual smell, color or texture, or food that thawed in a power cut, goes by Is it still good? Cost if wrong: food USDA would let
    you keep is thrown out after an outage. Say if the group wants USDA's mold table and freezer-burn rule to apply after a power cut.
 151. **An opened can or jar with no working fridge (surv-food-still-good).** CDC: "Refrigerate any canned or pickled food after you
-   open it." No source opened says what to do when there is no working fridge. Today, labelled as this app's reading: treat an
-   opened can or jar as perishable food left out, under CDC's line on the same page, "never leave perishable food out for more than
-   2 hours, or 1 hour if it is above 90°F (32°C)". FoodSafety.gov's fridge chart (on the same page) keeps opened canned fruit,
-   pickles and similar foods after more than 2 hours above 40°F, so this reading is more cautious than that chart for those foods.
-   Cost if wrong: opened food that could have been kept is thrown out. Say if the group wants the chart used instead.
+   open it." No source opened says what to do when there is no working fridge. Today, labelled as this app's reading: an opened can or
+   jar of a food that is on FoodSafety.gov's fridge chart on the same page goes by its row there (the chart is the sourced owner for
+   those foods: for example opened canned meats and fish, opened spaghetti sauce and opened vegetable juice are thrown out; opened
+   canned fruit, fruit juice and pickles are kept); any other opened can or jar is treated as perishable food left out, under CDC's line
+   on the same page, "never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C)". The chart is for a
+   fridge that was at 40°F or above for more than 2 hours; no source says how long its "keep" rows hold at room temperature. Cost if
+   wrong: an opened can of an unlisted food that could have been kept is thrown out, or a listed one is kept longer than a source
+   would allow. Say if the group wants a time limit on the chart's "keep" rows with no fridge.

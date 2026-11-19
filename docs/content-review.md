@@ -6277,3 +6277,27 @@ Changes, by finding (old sentence -> new; the full list with fields is in the fi
   warning" adds the page's own Ready.gov line. M12: Storing food "Older food with no insects seen, that you are not sure about". M13:
   Preserving "Home-canned food from someone else" quotes the canning section's CDC line. M14: babies "From 12 months" links How much
   food to store, and what.
+
+### Food pack whole-pack re-check fixes (2026-11-19), from task-9-wholepack-recheck.md
+
+Re-opened: USDA FSIS, Jerky and Food Safety, https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/meat-fish/jerky
+(built-in fetch; title checked). "When raw meat or poultry is dehydrated at home — either in a warm oven or a food dehydrator —" / "to make
+jerky which will be stored on the shelf, pathogenic bacteria are likely to survive the dry heat of a warm oven" / "and especially the 130
+to 140°F temperature of a food dehydrator." Game: "Yes, there are other special considerations when making homemade jerky from venison or
+other wild game." then Keene et al.: "Venison can be heavily contaminated with fecal bacteria — the degree varying with the hunter's
+skill," "wound location, and other factors." "While fresh beef is usually rapidly chilled, deer carcasses are typically held at ambient
+temperatures," "potentially allowing bacteria multiplication." No heating figure for game is given. Conversions (app's own): 130°F = 54°C,
+140°F = 60°C.
+
+- N1, surv-food-preserving: Do first 4 "Don’t try to dry meat to save it: this page gives no method. Bacteria that cause illness are
+  likely to survive the dry heat of a warm oven, and especially a food dehydrator, and sun drying is not recommended for meat jerky
+  (USDA). Thawing meat: ..."; summary adds "Don’t try to dry meat to save it: this page gives no method, and bacteria that cause illness
+  are likely to survive the dry heat of a warm oven or a food dehydrator (USDA)."; "Drying meat" list adds "Bacteria that cause illness
+  are likely to survive the dry heat of a warm oven, and especially the 130 to 140°F (54 to 60°C) of a food dehydrator (USDA)." and its
+  last item now opens "Don’t try to dry meat to save it."
+- N2, surv-food-preserving: "USDA’s jerky page says there are other special considerations for jerky from venison or other wild game:
+  venison can be heavily contaminated with fecal bacteria, and deer carcasses are usually not chilled quickly the way beef is, so bacteria
+  can multiply. It gives no heating figure of its own for game." (replaces "gives ... an answer of its own"). D149 matches.
+- N3, surv-food-still-good "Home-canned food": the labelled reading now reads "with no working fridge, an opened can or jar of a food
+  that is on the Fridge food chart above goes by its row there; any other opened can or jar is treated as perishable food left out: ..."
+  (the chart, FoodSafety.gov, owns the foods it lists). D151 rewritten.

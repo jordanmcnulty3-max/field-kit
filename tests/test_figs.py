@@ -715,3 +715,156 @@ def test_coming_inside_bag_is_drawn_far_from_the_person_and_pet():
         return min(b[0] for b in out), min(b[1] for b in out), max(b[2] for b in out), max(b[3] for b in out)
     bag, who = box(p['bag-shape']), box(p['people-pets'])
     assert who[0] - bag[2] >= 2 * (bag[2] - bag[0]), (bag, who)
+
+
+# ---- Food pack Task 7: diagrams carry only what their topic carries ----
+# figure -> (topic, section heading it sits in, phrases drawn on it (each also in the topic's own text), wording that must
+#            not be drawn or in the alt text, phrases the caption carries)
+FOOD_FIGS = {
+    'food-fridge-freezer': (
+        'surv-food-power-out', 'How long it stays cold',
+        ['keep the fridge and freezer doors shut', 'fridge', 'full freezer', 'half-full freezer', 'keeps food cold for',
+         'about 4 hours', 'about 48 hours', 'about 24 hours', 'with the door shut',
+         'before you eat, cook or refreeze anything', 'check it in is it still good?'],
+        [r'\bsafe', r'\bok\b', r'\bfine\b', r'\bfresh', r'°', r'\bdays?\b', r'\bminutes?\b', r'\bopen', r'outside',
+         r'\bice\b', r'cooler', r'generator', r'thermometer', r'throw', r'\b(?!4\b|48\b|24\b)\d+'],
+        ['keep the fridge and freezer doors shut.', 'a fridge keeps food cold for about 4 hours',
+         'a full freezer about 48 hours and a half-full freezer about 24 hours',
+         'before you eat, cook or refreeze anything, check it in is it still good?']),
+    'food-cans-to-discard': (
+        'surv-food-still-good', 'Cans and jars',
+        ['any of these signs', 'throw it out', 'leaking, bulging', 'or swollen', 'looks damaged', 'cracked or abnormal',
+         'spurts liquid or foam', 'when opened', 'food is discolored', 'moldy or smells bad',
+         'you cannot see, smell or taste', 'the toxin that causes botulism', 'it can be in cans that look normal'],
+        [r'\bsafe', r'\bok\b', r'\bfine\b', r'\bgood\b', r'\bkeep\b', r'\bsave', r'\d', r'flood', r'pull', r'screw',
+         r'rust', r'small dent', r'boil', r'sniff', r'taste it', r'\beat\b'],
+        ['any of these signs means home-canned or store-bought food might be contaminated',
+         'you cannot see, smell or taste the toxin that causes botulism', 'it can be in cans that look normal']),
+}
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_sits_once_in_its_section(name):
+    tid, section = FOOD_FIGS[name][:2]
+    assert name in figs.F, name
+    assert topic_figs()[tid].count(name) == 1, (tid, name)
+    assert fig_section(tid, name) == [section]
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_draws_its_topics_words(name):
+    tid, _, words, _, _ = FOOD_FIGS[name]
+    d, topic = drawn_of(name), topic_text(tid)
+    for w in words:
+        assert w in d, f'{name}: missing {w!r} in drawn text: {d}'
+        assert w in topic, f'{name}: {w!r} is not in {tid}'
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_every_drawn_line_is_in_the_text(name):
+    """Every text string drawn is word for word in the topic's own text (not its captions or sources); trailing punctuation
+    that only ends a line is ignored. No step badges: neither figure is a sequence."""
+    tid = FOOD_FIGS[name][0]
+    source = topic_text(tid)
+    for _, _, s in _texts(name):
+        line = s.strip().rstrip(':,.').strip()
+        assert line and line in source, f'{name}: drawn {s!r} is not in {tid}'
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_draws_no_unstated_wording(name):
+    banned = FOOD_FIGS[name][3]
+    for t in (drawn_of(name), alt_of(name)):
+        for pat in banned:
+            assert not re.search(pat, t), f'{name}: says {pat!r}: {t}'
+
+
+@pytest.mark.parametrize('name', sorted(FOOD_FIGS))
+def test_food_figure_alt_and_caption(name):
+    """The caption is the topic's own sentences, word for word, and carries what the picture shows."""
+    tid, _, _, _, cap_words = FOOD_FIGS[name]
+    alt = alt_of(name)
+    assert len(alt) > 40, alt
+    cap = topic_caption(tid, name)
+    for w in cap_words:
+        assert w in cap, f'{name}: caption missing {w!r}: {cap}'
+    assert not re.search(r'\bsafe|\bfine\b|\bok\b', cap)
+    for sentence in [x.strip() for x in re.split(r'(?<=[.?])\s', cap) if x.strip()]:
+        assert sentence.rstrip('.') in topic_text(tid), f'{name}: caption sentence not in the topic: {sentence!r}'
+
+
+def _rows(name):
+    """Drawn texts grouped into the horizontal bands between the figure's full-width dashed dividers."""
+    root = ET.fromstring(figs.F[name][0])
+    cuts = sorted(float(e.get('y1')) for e in root.iter() if e.tag.split('}')[-1] == 'line' and 'd' in e.get('class', '').split()
+                  and e.get('y1') == e.get('y2') and float(e.get('x2')) - float(e.get('x1')) > 250)
+    bands = [-1e9] + cuts + [1e9]
+    out = [[] for _ in range(len(bands) - 1)]
+    for x, y, s in _texts(name):
+        out[next(i for i in range(len(bands) - 1) if bands[i] < y < bands[i + 1])].append(s)
+    return out
+
+
+def test_fridge_freezer_hold_times_carry_their_condition_and_appliance():
+    """Each hold time is drawn in its own band with its appliance, "keeps food cold for" and "with the door shut" (never the
+    number alone), in the table's order: fridge, full freezer, half-full freezer. The only numbers are the three hold times."""
+    rows = _rows('food-fridge-freezer')
+    want = [('fridge', 'about 4 hours'), ('full freezer', 'about 48 hours'), ('half-full freezer', 'about 24 hours')]
+    held = [r for r in rows if any(re.search(r'\d', s) for s in r)]
+    assert len(held) == 3, rows
+    for r, (who, hours) in zip(held, want):
+        assert r[0] == who, (r, who)
+        assert hours in r and 'keeps food cold for' in r and 'with the door shut' in r, r
+        assert [s for s in r if re.search(r'\d', s)] == [hours], r
+    assert rows[0] == ['keep the fridge and freezer doors shut'], rows[0]
+    assert rows[-1] == ['before you eat, cook or refreeze anything,', 'check it in is it still good?'], rows[-1]
+    assert sorted(re.findall(r'\d+', alt_of('food-fridge-freezer'))) == ['24', '4', '48']
+    for s in ('about 4 hours', 'about 48 hours', 'about 24 hours', 'with the door', 'doors shut', 'check it in is it still good?'):
+        assert s in alt_of('food-fridge-freezer'), s
+
+
+def _box(el):
+    out = []
+    for e in el.iter():
+        if e.tag.split('}')[-1] in ('rect', 'line', 'path'):
+            out.append(bbox(e))
+    return min(b[0] for b in out), min(b[1] for b in out), max(b[2] for b in out), max(b[3] for b in out)
+
+
+def test_fridge_freezer_doors_shut_and_full_versus_half_full():
+    """The fridge door and both freezer lids are drawn shut (the lid sits on the body and spans it); the full freezer's food
+    reaches most of the way up, the half-full one's no more than about half; the half-full freezer's food is kept close
+    together (one block, no gaps wider than the drawn line)."""
+    p = parts('food-fridge-freezer')
+    need = {'fridge', 'fridge-handle', 'lid-full', 'body-full', 'food-full', 'lid-half', 'body-half', 'food-half'}
+    assert need <= set(p), need - set(p)
+    for k in ('full', 'half'):
+        lx0, ly0, lx1, ly1 = bbox(p[f'lid-{k}'])
+        bx0, by0, bx1, by1 = bbox(p[f'body-{k}'])
+        assert lx0 <= bx0 and lx1 >= bx1 and ly1 == by0, (k, (lx0, ly0, lx1, ly1), (bx0, by0, bx1, by1))
+        fx0, fy0, fx1, fy1 = _box(p[f'food-{k}'])
+        assert bx0 < fx0 and fx1 < bx1 and by0 < fy0 and fy1 < by1, f'{k}: food inside the freezer'
+    bx0, by0, bx1, by1 = bbox(p['body-full'])
+    fill_full = (by1 - _box(p['food-full'])[1]) / (by1 - by0)
+    bx0, by0, bx1, by1 = bbox(p['body-half'])
+    fill_half = (by1 - _box(p['food-half'])[1]) / (by1 - by0)
+    assert fill_full >= 0.8 and 0.35 <= fill_half <= 0.55, (fill_full, fill_half)
+    hx0, hy0, hx1, hy1 = bbox(p['fridge-handle'])
+    fx0, fy0, fx1, fy1 = bbox(p['fridge'])
+    assert fx0 < hx0 and hx1 < fx1 and fy0 < hy0 and hy1 < fy1, 'the handle is on the closed door'
+
+
+def test_cans_signs_in_the_topics_order_with_the_warning_below():
+    """The four signs read left to right, top to bottom in the order of the topic's list; "Any of these signs" and "Throw it
+    out" are above them; the botulism lines are below them. No number and no can drawn without a sign."""
+    texts = _texts('food-cans-to-discard')
+    first = ['leaking, bulging', 'looks damaged,', 'spurts liquid or foam', 'food is discolored,']
+    pos = [next((x, y) for x, y, s in texts if s == f) for f in first]
+    assert pos[0][1] == pos[1][1] < pos[2][1] == pos[3][1] and pos[0][0] < pos[1][0] and pos[2][0] < pos[3][0], pos
+    top = [y for x, y, s in texts if s in ('any of these signs:', 'throw it out')]
+    assert len(top) == 2 and max(top) < min(y for _, y in pos) - 60
+    below = [y for x, y, s in texts if s in ('you cannot see, smell or taste', 'the toxin that causes botulism.',
+                                             'it can be in cans that look normal')]
+    assert len(below) == 3 and min(below) > max(y for _, y in pos) + 14
+    p = parts('food-cans-to-discard')
+    assert {'sign-1', 'sign-2', 'sign-3', 'sign-4'} <= set(p), set(p)

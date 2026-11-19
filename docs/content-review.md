@@ -6103,3 +6103,65 @@ UConn Extension Cold Storage was found by search only (deferred). Draft removed 
 - M-a: sanitizing line "younger than 2 months (CDC) or 2 months or younger (FDA), is sick (CDC, FDA)".
 - M-b: tender-leaf herbs "will mold if not dried quickly (NCHFP, Penn State)".
 - Search: ruling 13 rewritten from on-screen measurements (three builds; lists there).
+
+## Food pack Task 7: diagrams (2026-11-19)
+
+Two figures, drawn from the checked text only; no source opened. `food-drying` not drawn (controller: the preserving topic
+teaches no drying method except air-drying herbs). No number, time, temperature or ranking beyond the text's; neither figure
+says "safe", "ok" or "fine"; no step badges (neither is a sequence). Every drawn text line is word for word in its topic's own
+text (not its captions). Blaze = the defect on a can or jar; blue = liquid; brown blocks = food. Rendered at 360 px, inline and
+enlarged, day and night, and viewed (`/tmp/figs-food/*.png`, not tracked).
+
+### food-fridge-freezer (surv-food-power-out, "How long it stays cold", after the table and its source paragraph)
+
+- Title "Keep the fridge and freezer doors shut": Do first 1, "Keep the fridge and freezer doors shut."
+- Three bands, in the table's order, split by dashed dividers. Each band: the appliance, "keeps food cold for", the hold time,
+  "with the door shut", so no number stands without its condition. From the table (head "With the door shut" / "Keeps food
+  cold for"; rows "Fridge | About 4 hours", "Full freezer | About 48 hours", "Half-full freezer | About 24 hours") and Do first
+  1, "With the doors shut, a fridge keeps food cold for about 4 hours, a full freezer about 48 hours and a half-full freezer
+  about 24 hours (CDC, FoodSafety.gov, USDA)."
+- Fridge: a closed fridge seen from the front, handle on the door (door shut).
+- Full freezer / Half-full freezer: a chest freezer seen from the front with its front wall cut away so the load shows; the
+  lid is drawn shut on the body. Full: packed nearly to the lid. Half-full: food to about half the height, packed side by side
+  ("When the freezer is not full, keep items close together", USDA, in the list below; no label drawn for it).
+- "Before you eat, cook or refreeze anything, check it in Is it still good?": Do first 5, first sentence. It keeps the hold
+  times from reading as a promise that food is fine.
+- Not drawn: the thermometer and 40°F/0°F ("Check the temperature" is another section; temperatures beside the hours would
+  give a tired reader two kinds of number to mix up), opening the doors to check, ice, coolers, not outside, generators,
+  NYSDOH's "about two days / about one day".
+- Caption: "Keep the fridge and freezer doors shut. With the doors shut, a fridge keeps food cold for about 4 hours, a full
+  freezer about 48 hours and a half-full freezer about 24 hours (CDC, FoodSafety.gov, USDA). Before you eat, cook or refreeze
+  anything, check it in Is it still good?" Do first 1 and the first sentence of Do first 5, word for word.
+
+### food-cans-to-discard (surv-food-still-good, "Cans and jars", after CDC's list of signs)
+
+- Title "Any of these signs:" / "Throw it out": "Any of these signs means home-canned or store-bought food might be contaminated
+  with toxins or harmful germs. Throw it out (CDC):"
+- Four panels in the list's order, left to right, top to bottom; each label is the list item's words without "The
+  container"/"The":
+  1. A can with both ends domed out and liquid dripping from its seam, "Leaking, bulging or swollen": "The container is
+     leaking, bulging or swollen."
+  2. A jar with a crack and a can crushed in at the middle, "Looks damaged, cracked or abnormal": "The container looks damaged,
+     cracked or abnormal." (USDA's paragraph below also counts a crushed can as damaged.)
+  3. A can with its lid lifted and liquid and foam spurting out, "Spurts liquid or foam when opened": "The container spurts
+     liquid or foam when opened."
+  4. An open jar with mold on top and dark patches in the food, "Food is discolored, moldy or smells bad": "The food is
+     discolored, moldy or smells bad." No smell lines are drawn (smell is not presented as a test).
+- Below: "You cannot see, smell or taste the toxin that causes botulism." / "It can be in cans that look normal": the warn,
+  "You cannot see, smell or taste the toxin that causes botulism ... It can be in cans that look normal ...". This line is why
+  no can without a sign is drawn: the topic never says such a can is fine.
+- Not drawn: the flood rule (pull tops, screw caps and so on; it cannot be shown without an all-metal can that reads as fine,
+  and it belongs to "Flood water"), USDA's punctured, holed or deeply rusted cans, home-canned food and boiling, fire.
+- Caption: "Any of these signs means home-canned or store-bought food might be contaminated with toxins or harmful germs. Throw
+  it out (CDC). You cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can
+  be deadly (CDC). It can be in cans that look normal and in food that smells and tastes normal (New York State Department of
+  Health)." Topic sentences word for word; the only change is the colon after "Throw it out (CDC)" ending in a full stop.
+
+Tests (`tests/test_figs.py`, `FOOD_FIGS`): each figure sits once in its section; listed phrases drawn and in the topic's text;
+every drawn line is in the topic's text; forbidden wording absent from drawn and alt text ("safe", "ok", "fine", any other
+number, degrees, days, open, ice, thermometer, throw for the fridge; any digit, "good", "keep", flood, pull, rust, boil, sniff
+for the cans); every caption sentence is a topic sentence; fridge: each hold time sits in its own band with its appliance,
+"keeps food cold for" and "with the door shut", in the table's order, and the only numbers are 4, 48, 24; the fridge handle is on
+the closed door, each freezer lid sits on and spans its body, the full freezer's food fills at least 80% of its height and the
+half-full one's 35% to 55%; cans: the four signs in the list's order, title above, botulism lines below.
+`tests/test_survival_migration.py` `PINNED_FIGS` carries the two topics.

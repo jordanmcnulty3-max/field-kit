@@ -1,0 +1,220 @@
+{
+  "id": "surv-fallout-leaving",
+  "title": "Leaving and moving after fallout",
+  "category": "radiation",
+  "keywords": [
+    "evacuate",
+    "evacuation",
+    "leave shelter",
+    "leaving shelter",
+    "when to leave",
+    "fire during fallout",
+    "house on fire",
+    "building collapse",
+    "gas leak",
+    "medical emergency fallout",
+    "get to hospital",
+    "self-evacuate",
+    "bug out",
+    "flee",
+    "drive out",
+    "walk out",
+    "which way to go",
+    "wind direction",
+    "evacuation route",
+    "arriving at another house",
+    "moving to another shelter"
+  ],
+  "summary": "Stay in unless an immediate danger such as a fire, gas leak, collapse or serious injury forces you out, or officials tell you to leave. If you must go, cover your mouth, nose and skin, move away from the explosion and the heaviest fallout to the nearest good shelter, and take off your outer clothes and wash when you get there.",
+  "doFirst": [
+    "Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).",
+    "Have to go? Cover your mouth and nose with a mask, cloth or towel (CDC), and if it doesn’t slow you down, wear a hat, gloves and an outer layer you can take off (this app’s own caution; fallout lands on clothing and bare skin, FEMA planning guidance).",
+    "Go to the nearest building that gives good shelter, moving away from the explosion and from where the fallout is heaviest (CDC, FEMA planning guidance).",
+    "When you get there, take off your outer clothes and shoes before you go in, and wash (CDC, FEMA planning guidance). See Coming in from outside.",
+    "Told to evacuate? Listen for the routes, shelters and procedures officials give, and follow them (Ready.gov)."
+  ],
+  "sections": [
+    {
+      "h": "When leaving beats staying",
+      "blocks": [
+        {
+          "p": "Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov). How long to stay in otherwise is in How long to stay in."
+        },
+        {
+          "list": [
+            "FEMA’s planning guidance: stay inside unless threatened by fire, building collapse, medical needs or another immediate threat. Fast-spreading fires may call for leaving at once.",
+            "FEMA’s 72-hour guidance: don’t leave unless officials give other instructions or your shelter is threatened by fire or collapse.",
+            "CDC: unless you have a life-threatening situation, don’t leave your building or shelter until emergency officials say you can."
+          ]
+        },
+        {
+          "p": "A CO alarm still means what Carbon monoxide says, even during a fallout warning: “CO alarm sounding? Don’t look for the cause. Get everyone outside into fresh air now” (CPSC)."
+        },
+        {
+          "p": "Cold is handled inside first, by the rules in Living in a closed-up house. A shelter that is poor can be swapped once for a much better one nearby, by the times in Where to shelter from fallout."
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "link": "s:surv-fallout-shelter-living",
+          "label": "Living in a closed-up house"
+        },
+        {
+          "link": "s:surv-fallout-where-to-shelter",
+          "label": "Where to shelter from fallout"
+        }
+      ]
+    },
+    {
+      "h": "Leaving on your own",
+      "blocks": [
+        {
+          "list": [
+            "FEMA strongly discourages people leaving on their own because of the risks (FEMA planning guidance).",
+            "Unless a fire or other immediate danger forces you, no evacuation should be tried until there is basic information about where the fallout fell (FEMA planning guidance).",
+            "FEMA plans to move first the people whose lives are in immediate danger. People who are not hurt and have adequate shelter and food and water are a low priority for early evacuation (FEMA planning guidance).",
+            "Outside you may meet fires, downed power lines and broken gas lines. Driving may be very dangerous or impossible because of crashed cars and rubble on the roads (NYC Health)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Hurt or sick",
+      "blocks": [
+        {
+          "list": [
+            "Ready.gov counts serious injury among the immediate dangers that can force you out, and FEMA’s planning guidance names medical needs and medical emergencies.",
+            "If you are sick or injured, listen for instructions on how and where to get medical care (Ready.gov).",
+            "First aid is in Emergency."
+          ]
+        },
+        {
+          "p": "This app’s caution, not a source’s: with no word from officials, nobody can tell you whether a hospital is open or can be reached. Before anyone carries a casualty out through fallout, be as sure as you can where you are going and that you can get there."
+        },
+        {
+          "link": "p:bleeding",
+          "label": "Severe bleeding"
+        },
+        {
+          "link": "p:burns",
+          "label": "Burns"
+        },
+        {
+          "link": "p:shock",
+          "label": "Shock"
+        }
+      ]
+    },
+    {
+      "h": "Which way to go",
+      "blocks": [
+        {
+          "list": [
+            "If officials give a route, use it (Ready.gov, NYC Health): routes are chosen to keep your radiation exposure as low as possible (NYC Health).",
+            "With no route given: move away from the explosion and from the areas with the most fallout (FEMA planning guidance), and at right angles to the fallout’s path if you know it (FEMA planning guidance). Officials may know the path; you may not.",
+            "Fallout can make radiation dangerous downwind of the explosion (FEMA planning guidance). But the wind high up can carry it in a different direction from the wind you feel, and in more than one direction (FEMA planning guidance).",
+            "Fallout is often visible as it falls, about the size of fine sand or table salt (FEMA planning guidance).",
+            "In a town, connections between buildings and tunnels can keep you under cover for part of the way (FEMA planning guidance)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "On foot or by car",
+      "blocks": [
+        {
+          "list": [
+            "A car is not a shelter (FEMA planning guidance). Don’t shelter in it (NYC Health): get into a building.",
+            "If you must leave and have a car, fallout on the car is not a reason not to use it (FEMA planning guidance).",
+            "Expect blocked roads: rubble and disabled vehicles can make driving difficult or impossible (FEMA planning guidance, NYC Health)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Cover up on the way",
+      "blocks": [
+        {
+          "list": [
+            "Cover your mouth and nose with a mask, cloth or towel (CDC). No mask? Use a handkerchief or clothing (NYC Health). Don’t wait for a mask: you don’t need one to evacuate (NYC Health).",
+            "Fallout lands on clothing and bare skin, such as the head and hands (FEMA planning guidance). It catches easily in shirt collars and around the tops of shoes (FEMA 72-hour guidance).",
+            "Try not to touch your eyes, nose and mouth (Ready.gov)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Clean off on the way and when you arrive",
+      "blocks": [
+        {
+          "list": [
+            "Leaving a fallout area or going into a shelter: brush off, take off or change your outer clothes and shoes, and wipe off bare skin (FEMA planning guidance).",
+            "On the move, FEMA’s 72-hour guidance is quick, dry cleaning, such as changing or shaking off the outer layer.",
+            "When you get in, wash as in Coming in from outside."
+          ]
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
+        }
+      ]
+    },
+    {
+      "h": "Arriving at another household",
+      "blocks": [
+        {
+          "list": [
+            "Taking in someone who was outside can save their life without putting your own at risk (CDC).",
+            "Arriving: take off your outer layer of clothes before you go in. Once inside, wash the parts of your body that were uncovered, then put on clean clothes if you can (CDC).",
+            "Letting someone in: ask them to do the same (CDC).",
+            "Bring pets with you (NYC Health); the federal government advises against leaving them behind (FEMA planning guidance). Wash them when you arrive, as in Coming in from outside."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Going back",
+      "blocks": [
+        {
+          "list": [
+            "If you have evacuated, don’t go back until local authorities tell you to (Ready.gov).",
+            "Whether and when you can go home depends on where it is, and is very hard to predict (NYC Health)."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",
+      "used": "Leave only if threatened by an immediate hazard (fire, gas leak, building collapse, serious injury) or told by authorities; if advised to evacuate, listen for routes, shelters and procedures; after evacuating, do not return until local authorities say; listen for instructions on medical care; avoid touching eyes, nose and mouth"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023)",
+      "used": "Stay inside unless threatened by fire, building collapse, medical needs or other immediate threats; evacuation may be warranted for fire, collapse or medical emergencies; rapidly evolving fires may warrant emergency evacuation; self-evacuation strongly discouraged; no evacuation until basic information on fallout distribution unless fire or other immediate threats to life; priority for immediately life-threatening situations, uninjured people with adequate shelter and food and water low priority; move away from the detonation and the highest fallout; right angles to the fallout path; fallout dangerous downwind; winds aloft differ and can deposit fallout in more than one direction; fallout visible, fine sand or table salt; protected escape routes; cars not adequate shelter; contaminated personal vehicles not discouraged; rubble and disabled vehicles; fallout lands on clothing and exposed body parts; brushing, removing or changing outer clothing and footwear and wiping skin when leaving fallout areas or entering shelter; pets not left behind"
+    },
+    {
+      "name": "FEMA Office of Emerging Threats, Nuclear Detonation Response Guidance: Planning for the First 72 Hours (March 2023; updated June 12, 2023; copy hosted by HHS REMM)",
+      "used": "Do not leave unless officials provide other instructions or the shelter is threatened by fire or collapse; rapid dry self-decontamination while evacuating (changing or shaking the outer layer); contamination catches in collars and shoe tops"
+    },
+    {
+      "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024) and Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022)",
+      "used": "Cover mouth and nose; get inside a building; sheltering someone who was outside can save their life without endangering your own; outer layer off before entering, wash, clean clothes; unless a life-threatening situation, don’t leave until officials say"
+    },
+    {
+      "name": "NYC Health (New York City Department of Health and Mental Hygiene), Emergencies: Nuclear Incident",
+      "used": "Hazards of self-evacuating (fires, downed power lines, ruptured gas lines; car travel very dangerous or impossible); follow official routes, designed to keep exposure low; mask or handkerchief, no mask needed to evacuate; bring pets; return home hard to predict"
+    },
+    {
+      "name": "Carbon monoxide and burning fuel indoors (another topic in this app)",
+      "used": "The CO alarm action quoted word for word from its Do first (CPSC)"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

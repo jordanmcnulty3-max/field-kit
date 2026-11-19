@@ -617,3 +617,41 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    an emergency stove or heater, so it is not held back until the cold is a danger to life; CDC's rule to turn off
    forced-air heating that brings in outside air still applies, and its outside vents must be kept clear (which may mean a
    trip out in snow). Say if the group wants the furnace treated like a stove (off until the cold is a danger to life).
+100. **In a car during a dirty bomb (surv-dirty-bomb).** CDC's dirty bomb steps: close the windows, turn off the air,
+   heater and vents, cover nose and mouth; go into your home or a building if one is close; otherwise pull over, turn off the
+   engine and stay in the car until told you can drive on. For a nuclear explosion, Where to shelter from fallout (FEMA, NYC
+   Health) says a car is not a shelter: get out and into a building. Today: the topic gives CDC's car steps with a warning
+   that they are for a dirty bomb only. Say if the group would rather the app always said "get into a building", even for a
+   dirty bomb.
+101. **How long to stay in after a dirty bomb when no one says (surv-dirty-bomb).** CDC says stay in the building (or the
+   car) until told it is all right to travel; NRC and CDC give no length of time, and nothing for when no word comes. How
+   long to stay in (its 24 hours and up to 2 weeks) is for fallout, which a dirty bomb does not produce over a region.
+   Today: the topic says no source gives a time and to stay in until officials say. Say if the group wants a rule for when no
+   word ever comes (it would be the app's own, labelled as such).
+102. **Breastfeeding and radioactive iodine (surv-potassium-iodide).** CDC's KI page says breastfeeding women should consider
+   stopping breastfeeding until evacuated from the affected area, if possible, and feed the baby another way, because
+   radioactive iodine can pass to infants through breast milk. That advice sits in CDC's guidance for an event with
+   radioactive iodine (most common at nuclear power plants) and assumes evacuation and other feeding are possible. Today: not
+   in the app. A question for a medical professional: whether, and how, the fallout topics should say anything about
+   breastfeeding when no formula or clean water may be available.
+103. **KI timing and repeat doses (surv-potassium-iodide).** CDC: take KI within 24 hours before or 4 hours after exposure;
+   one dose protects for 24 hours; officials will say if another is needed; more than one dose may cause later development
+   problems. FDA: KI should not be taken as a preventative before radiation exposure. New York State Department of Health
+   (2017, written for nuclear plant emergencies): keep taking it once a day until the health department says to stop or you
+   are out of the area. All three say to follow officials. Today: the topic says only that KI works best shortly before or
+   right after radioactive iodine gets into the body (CDC), that it is taken only if officials or a healthcare provider say
+   so, and that more than a single dose has risks; no hours, no number of doses, no dose. Say if the group wants CDC's hours
+   shown (they are not a dose, but invite taking KI early).
+104. **How much food to keep for fallout (surv-fallout-get-ready, fallout-shelter-kit).** Ready.gov: at least a several-day
+   supply. New York State's preparedness list: at least 7 days. FEMA's Protection in the Nuclear Age (1985, dated): at least
+   a two-week stock of water, food and supplies to bring to shelter. Today: up to 2 weeks, matching How long to stay in and
+   How much water you need. The 1985 handbook's "at least one quart of water per person per day" is not used (current
+   sources say 1 gallon). No source gives food by weight or calories per person, so the checklist does not scale food.
+105. **Plastic sheeting and duct tape (fallout-shelter-kit).** Ready.gov's general kit lists "Plastic sheeting, scissors and
+   duct tape (to shelter in place)". CDC's dirty bomb page says it is not necessary to put duct tape or plastic around doors or
+   windows, and FEMA's planning guidance says a building need not be airtight to protect against fallout and still needs
+   enough fresh air. Today: not on the fallout kit (Home heat kit still lists window plastic for warmth). Say if the group
+   wants it on the list.
+106. **Potassium iodide in the kit (fallout-shelter-kit).** No opened source lists KI for a nuclear detonation; CDC says it
+   will not help there. It matters most in a nuclear power plant accident, which this app does not cover yet. Today: not on
+   the list. Say if the group wants KI on a list for a plant accident when that pack is written (the package gives the dose).

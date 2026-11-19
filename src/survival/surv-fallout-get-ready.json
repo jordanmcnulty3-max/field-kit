@@ -1,0 +1,226 @@
+{
+  "id": "surv-fallout-get-ready",
+  "title": "Get ready for fallout",
+  "category": "radiation",
+  "keywords": [
+    "prepare for nuclear war",
+    "nuclear preparedness",
+    "fallout preparedness",
+    "prepping",
+    "fallout kit",
+    "fallout supplies",
+    "shelter supplies",
+    "emergency kit",
+    "supply kit",
+    "family plan",
+    "meeting place",
+    "out of state contact",
+    "hand crank radio",
+    "noaa weather radio",
+    "two week supply",
+    "stockpile"
+  ],
+  "summary": "Before anything happens: pick the shelter spot in each home now, keep water, sealed food and medicine for up to 2 weeks, keep a battery or hand-crank radio, and agree a family plan for being apart. No pill, mask or product protects you from fallout radiation the way getting inside does.",
+  "sections": [
+    {
+      "h": "Pick your shelter spot now",
+      "blocks": [
+        {
+          "list": [
+            "In each home your group uses, decide now where you would shelter, by the rules in Where to shelter from fallout: underground if there is a basement, otherwise the middle of the building, away from the walls and roof.",
+            "Go over the plan with everyone so you all know what to do, and give children, older people and anyone with a disability clear instructions on where the shelter spot is (FEMA, Protection in the Nuclear Age, 1985, dated).",
+            "Find out the sheltering and evacuation plans of schools, workplaces and care facilities your family uses (Ready.gov), and your community’s plan (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-fallout-where-to-shelter",
+          "label": "Where to shelter from fallout"
+        }
+      ]
+    },
+    {
+      "h": "Supplies for up to 2 weeks",
+      "blocks": [
+        {
+          "p": "With no official word, this app plans on sheltering for up to 2 weeks (How long to stay in). FEMA’s 1985 handbook (dated) says the same for supplies: have ready at least a two-week stock of water, food and supplies to bring to shelter. Ready.gov’s kit for radiation emergencies includes a spare change of clothes for each family member, a trash bag for contaminated clothing, and sealed food, water and medicine."
+        },
+        {
+          "link": "c:fallout-shelter-kit",
+          "label": "Fallout shelter kit (checklist)"
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        }
+      ]
+    },
+    {
+      "h": "Water and food",
+      "blocks": [
+        {
+          "list": [
+            "Water: How much water you need says to store at least 1 gallon (3.8 L) per person per day for 2 weeks. Store it where you will shelter, so nobody has to go out for it.",
+            "Food: sealed, non-perishable food, and a manual can opener (Ready.gov). Ready.gov says at least several days; New York State’s kit list says at least 7 days; this app plans on 2 weeks, as above.",
+            "Food and drinks that are sealed or were already inside can be used during sheltering (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-water-how-much",
+          "label": "How much water you need"
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        },
+        {
+          "link": "c:home-water-store",
+          "label": "Home water store (checklist)"
+        },
+        {
+          "link": "s:surv-water-in-the-house",
+          "label": "Water already in your house"
+        }
+      ]
+    },
+    {
+      "h": "Toilets and washing",
+      "blocks": [
+        {
+          "p": "Plan toilets that work with the water off, so nobody has to go outside for them (Living in a closed-up house). Keep soap, plastic bags and wipes or cloths for cleaning off after anyone comes in from outside (Ready.gov)."
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        },
+        {
+          "link": "c:sanitation-kit",
+          "label": "Sanitation kit (checklist)"
+        }
+      ]
+    },
+    {
+      "h": "Winter",
+      "blocks": [
+        {
+          "p": "A closed-up house in a Central New York winter gets cold. Keep a sleeping bag or warm blanket for each person (Ready.gov), warm clothes, and battery CO alarms near where people sleep (Living in a closed-up house). Living in a closed-up house says how to keep warm without flame first, and when anything may burn: never in a sealed room."
+        },
+        {
+          "link": "s:surv-fallout-shelter-living",
+          "label": "Living in a closed-up house"
+        },
+        {
+          "link": "c:home-heat-kit",
+          "label": "Home heat kit (checklist)"
+        },
+        {
+          "link": "s:surv-heat-out",
+          "label": "Stay warm when the heat is out"
+        }
+      ]
+    },
+    {
+      "h": "Ways to hear news",
+      "blocks": [
+        {
+          "list": [
+            "Keep a battery-powered or hand-crank radio. It keeps working when other ways of getting news fail (Ready.gov). CDC prefers a NOAA weather radio.",
+            "If the radio uses batteries, keep extra batteries with it (CDC).",
+            "Have several ways to get emergency alerts, including your area’s community alerts and the FEMA app (Ready.gov).",
+            "During an emergency, phone calls may be hard to make: try text messages (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "A plan for being apart",
+      "blocks": [
+        {
+          "list": [
+            "Make a family emergency communication plan (Ready.gov).",
+            "Decide where your family will meet if you can’t meet at home (Ready.gov).",
+            "Pick an out-of-state contact everyone can tell where they are and how they are (Ready.gov).",
+            "Agree now that whoever is where, stays there. Fallout warning says: “Don’t go out to get family: stay where you are (CDC).”",
+            "Children and adults in schools, daycares, hospitals and nursing homes will be told to stay inside, and those places have plans to keep them inside (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-fallout-warning",
+          "label": "Fallout warning: what to do first"
+        }
+      ]
+    },
+    {
+      "h": "Learn the steps now",
+      "blocks": [
+        {
+          "p": "The first actions must happen in minutes, so read them before you need them. FEMA’s planning guidance says people should ideally learn how to clean themselves off before an emergency."
+        },
+        {
+          "link": "s:surv-fallout-warning",
+          "label": "Fallout warning: what to do first"
+        },
+        {
+          "link": "s:surv-dirty-bomb",
+          "label": "Dirty bomb"
+        }
+      ]
+    },
+    {
+      "h": "What not to count on",
+      "blocks": [
+        {
+          "list": [
+            "Potassium iodide (KI): it protects only the thyroid and will not help in a nuclear bomb emergency (CDC). See Potassium iodide.",
+            "Table salt, foods with iodine and iodine supplements are not a substitute for KI (CDC).",
+            "Hand sanitizer does not protect against radioactive material, and household cleaning wipes should not be used on skin (Ready.gov).",
+            "A mask or cloth over your mouth and nose helps cut how much radioactive material you breathe if you must be outside (CDC), but getting inside is always the best protection (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-potassium-iodide",
+          "label": "Potassium iodide (KI): what it can and can’t do"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024), sections on preparing and on what to do after",
+      "used": "Several ways to receive alerts, community alerts and the FEMA App; battery-powered or hand-crank radio that keeps working when other communication fails; emergency kit with a spare change of clothes for each family member, a trash bag for contaminated clothing, and sealed food, water and medicine; family emergency communication plan, meeting place if you can’t meet at home, out-of-state contact; school, work and care-facility plans; soap and water or a wipe or clean wet cloth; no household cleaning wipes on skin; hand sanitizer does not protect against radioactive material"
+    },
+    {
+      "name": "Ready.gov (FEMA), Build A Kit page (ready.gov/kit; no title or date returned by the fetch)",
+      "used": "At least a several-day supply of non-perishable food; manual can opener; sleeping bag or warm blanket for each person"
+    },
+    {
+      "name": "CDC, Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022; updated April 12, 2024)",
+      "used": "Community, school, nursing home and employer plans; battery-powered or hand-crank radio, preferably a NOAA weather radio; extra batteries; text messages when calls are hard; loved ones in schools, daycares, hospitals and nursing homes will be told to stay inside and facilities have plans; covering mouth and nose reduces the radioactive material you breathe"
+    },
+    {
+      "name": "CDC, Potassium Iodide (KI) (last reviewed April 16, 2024; updated January 30, 2025)",
+      "used": "KI protects only the thyroid and will not help in a nuclear bomb emergency; table salt, iodine foods and supplements are not substitutes; get inside, stay inside, stay tuned is always the best protection"
+    },
+    {
+      "name": "CDC, What to Do: Stay Inside (last reviewed April 17, 2024)",
+      "used": "Foods and drinks that are sealed or were already inside (as used in Living in a closed-up house)"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023), page 207",
+      "used": "Ideally, self-decontamination instructions reach the public before an emergency"
+    },
+    {
+      "name": "FEMA, Protection in the Nuclear Age (June 1985; dated civil defence publication)",
+      "used": "Have ready at least a two-week stock of water, food and supplies to bring to shelter; go over instructions with your family; clear instructions for children, the disabled and the elderly on where to find the shelter"
+    },
+    {
+      "name": "New York State, preparedness kit checklist for children (prepare.ny.gov, hosted by NYS DHSES; undated)",
+      "used": "Food: at least enough for 7 days"
+    },
+    {
+      "name": "Where to shelter from fallout, How long to stay in, Living in a closed-up house, Fallout warning, How much water you need and Toilets when the water is off (other topics in this app)",
+      "used": "Shelter-spot rules; up to 2 weeks with no official word; no-flame warmth first and never burning in a sealed room; toilets and water so nobody has to go outside for them; battery CO alarms near where people sleep (CDC, CPSC); “Don’t go out to get family: stay where you are (CDC)” quoted word for word; 1 gallon (3.8 L) per person per day for 2 weeks"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

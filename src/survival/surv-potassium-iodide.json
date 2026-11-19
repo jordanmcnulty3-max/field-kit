@@ -1,0 +1,183 @@
+{
+  "id": "surv-potassium-iodide",
+  "title": "Potassium iodide (KI): what it can and can’t do",
+  "category": "radiation",
+  "keywords": [
+    "potassium iodide",
+    "ki",
+    "ki pills",
+    "ki tablets",
+    "iodine pills",
+    "iodine tablets",
+    "anti radiation pills",
+    "radiation pills",
+    "nuke pills",
+    "thyroid",
+    "radioactive iodine",
+    "iodized salt",
+    "iodine supplement",
+    "drink iodine"
+  ],
+  "summary": "Potassium iodide (KI) protects only the thyroid, and only from radioactive iodine. CDC says it will not help in a nuclear bomb emergency: fallout is the danger, and getting inside is the protection. Take it only if public health or emergency officials or a healthcare provider tell you to. This app gives no dose.",
+  "doFirst": [
+    "Get inside, stay inside, stay tuned: that is always the best protection in a radiation emergency (CDC).",
+    "Don’t leave your shelter to look for KI. Going out for it could expose you and your family to dangerous radiation (CDC).",
+    "Take KI only if public health or emergency officials or a healthcare provider tell you to (CDC).",
+    "Don’t use table salt or foods with iodine instead: they don’t help. Iodine supplements may not work and can hurt you (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "What it does",
+      "blocks": [
+        {
+          "list": [
+            "KI is a form of iodine that is not radioactive. Taken at the right time, it fills the thyroid, a gland in the neck, so there is no room left for radioactive iodine (CDC).",
+            "It protects only the thyroid, not any other part of the body (CDC).",
+            "It protects only against radioactive iodine, not against other radioactive materials (CDC). FDA: it is not a general protection against radiation.",
+            "It works best taken shortly before or right after radioactive iodine gets into the body (CDC).",
+            "It may not give the thyroid full protection, and it is not a treatment: it can’t undo damage already done (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "After a nuclear explosion",
+      "blocks": [
+        {
+          "warn": "CDC: KI will not help in a nuclear bomb emergency. Radiation from fallout is the biggest threat to your health after a nuclear explosion."
+        },
+        {
+          "list": [
+            "Fallout is made up of hundreds of kinds of radioactive material. There is relatively little radioactive iodine in it compared with the others, which can harm you from outside your body (CDC).",
+            "KI would not protect you from any of the radioactive materials in fallout except radioactive iodine (CDC).",
+            "If you were somewhere you could take in enough radioactive iodine for KI to help, you would already have been exposed to deadly levels of radiation from fallout outside your body (CDC).",
+            "Relying on KI can make you think you are protected when you are not (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-fallout-warning",
+          "label": "Fallout warning: what to do first"
+        }
+      ]
+    },
+    {
+      "h": "After a dirty bomb",
+      "blocks": [
+        {
+          "p": "CDC: taking KI after a dirty bomb would probably not help, and KI can be dangerous to some people."
+        },
+        {
+          "link": "s:surv-dirty-bomb",
+          "label": "Dirty bomb"
+        }
+      ]
+    },
+    {
+      "h": "When officials might call for it",
+      "blocks": [
+        {
+          "list": [
+            "Radioactive iodine is most common in nuclear power plant accidents. Most radiation emergencies involve other radioactive materials, not radioactive iodine alone (CDC).",
+            "In normal times in New York, local or state health officials announce when to start taking KI and when to stop (New York State Department of Health).",
+            "After a radiological or nuclear event in the United States, local public health or emergency officials will tell the public whether KI is needed (FDA)."
+          ]
+        },
+        {
+          "p": "Nuclear power plant accidents are not covered in this app yet."
+        }
+      ]
+    },
+    {
+      "h": "Who it is meant for",
+      "blocks": [
+        {
+          "list": [
+            "CDC recommends KI only for people under 40, and for women who are pregnant or breastfeeding. Younger people’s cells are growing faster, which puts them at risk of thyroid cancer after breathing in radioactive iodine (CDC).",
+            "Newborns under 1 month old have the highest risk of thyroid cancer from radioactive iodine (CDC).",
+            "Adults over 40 have a much lower risk of thyroid cancer and are more likely to have health problems that KI can make worse. They take KI only if officials recommend it (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Who should not take it",
+      "blocks": [
+        {
+          "list": [
+            "People with certain medical conditions, including known iodine sensitivity, should not take KI, or should ask a healthcare provider first (CDC).",
+            "FDA: people with known iodine sensitivity should avoid KI, and so should people with dermatitis herpetiformis or hypocomplementemic vasculitis, two very rare conditions.",
+            "FDA: people with nodular thyroid with heart disease should not take KI. People with multinodular goiter, Graves’ disease or autoimmune thyroiditis should be treated with caution.",
+            "A seafood or shellfish allergy does not necessarily mean you are allergic to iodine (FDA).",
+            "Not sure? Ask a healthcare provider (FDA)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Risks",
+      "blocks": [
+        {
+          "list": [
+            "KI can cause stomach upset, rashes, swollen salivary glands and allergic reactions (CDC).",
+            "Severe shortness of breath after taking it needs medical care at once (FDA).",
+            "Taking more than you are told to, or more often, gives no more protection and can cause severe illness or death (FDA, CDC).",
+            "More than a single dose may cause later problems with normal development, and newborns under 1 month old who get more than one dose can develop an underactive thyroid (CDC)."
+          ]
+        },
+        {
+          "link": "p:anaphylaxis",
+          "label": "Anaphylaxis (severe allergic reaction)"
+        }
+      ]
+    },
+    {
+      "h": "What is not a substitute",
+      "blocks": [
+        {
+          "list": [
+            "Table salt and foods that contain iodine: they don’t prevent radioactive material getting into the body, and eating large amounts could be harmful (CDC).",
+            "Dietary supplements that contain iodine: they may not protect the thyroid and can hurt you (CDC).",
+            "Drinking iodine: FEMA’s planning guidance treats posts urging people to drink iodine to protect themselves from radiation as a rumor for officials to confront.",
+            "Use only KI products approved by the FDA (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "If you keep KI",
+      "blocks": [
+        {
+          "list": [
+            "KI is sold without a prescription (FDA). Only products approved by the FDA should be used (CDC).",
+            "This app gives no dose. If officials or a healthcare provider tell you to take KI, use it only as directed (CDC).",
+            "Keeping KI is never a reason to go outside, delay getting inside, or leave shelter (CDC)."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Potassium Iodide (KI) (last reviewed April 16, 2024; updated January 30, 2025)",
+      "used": "KI is non-radioactive iodine that fills the thyroid; protects only the thyroid and only against radioactive iodine; most effective shortly before or right after internal contamination; may not give 100% protection; not a treatment; KI will not help in a nuclear bomb emergency: fallout is the biggest threat, hundreds of radioactive materials, relatively small amount of radioactive iodine, deadly external exposure first; risks of focusing on KI, including leaving shelter to seek it; get inside, stay inside, stay tuned; take KI only if instructed by officials or a healthcare provider; recommended only for people under 40 and women who are pregnant or breastfeeding, and why; infants under 1 month at highest risk; adults over 40 only when officials recommend; medical conditions and iodine sensitivity; harmful effects (stomach upset, rashes, salivary gland inflammation, allergic reaction, hypothyroidism in infants under 1 month given more than one dose, severe illness or death from more than recommended); more than a single dose and later development; table salt, iodine foods and dietary supplements are not substitutes; only FDA-approved products; use only as directed; most radiation emergencies involve other materials; radioactive iodine most common in nuclear power plant incidents. Its dose table is not used"
+    },
+    {
+      "name": "FDA, Frequently Asked Questions on Potassium Iodide (KI) (content current as of March 24, 2022)",
+      "used": "Not a general radioprotective agent; local officials will tell the public if KI is needed; higher or more frequent doses give no more protection and can cause severe illness or death; iodine sensitivity, dermatitis herpetiformis, hypocomplementemic vasculitis; nodular thyroid with heart disease; multinodular goiter, Graves’ disease, autoimmune thyroiditis; seafood or shellfish allergy; consult a health care professional; severe shortness of breath requires immediate medical attention; available without a prescription. Its dose table is not used"
+    },
+    {
+      "name": "CDC, Dirty Bombs: Frequently Asked Questions (last reviewed April 10, 2024)",
+      "used": "After a dirty bomb, KI would probably not be beneficial and can be dangerous to some people"
+    },
+    {
+      "name": "New York State Department of Health, Potassium Iodide (KI) and Radiation Emergencies: Fact Sheet (revised April 2017)",
+      "used": "Local or state health officials announce an emergency; the local health department says when to start and stop taking KI"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023), page 129",
+      "used": "Social media posts encouraging people to drink iodine to protect themselves from radiation, treated as a rumor to confront"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

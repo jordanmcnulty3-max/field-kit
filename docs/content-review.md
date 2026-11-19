@@ -4009,3 +4009,46 @@ Category environment; not advanced. Danger-sign screen in the order of the check
   with the hub ("They take off their outer layer of clothes before they come in, if they can (CDC)") and Living in a
   closed-up house ("Put them in a bag (Ready.gov)"). New finding for Living in a closed-up house (not edited): D88.
 - No "safe", no 911, no dose, no potassium iodide in either protocol (checked by the new test).
+
+### Batch P fix round (2026-11-18), from task-4-review.md
+
+Draft removed from both protocols after these fixes. FEMA-COMM and CDC-KIDS re-opened by web fetch for I1, I2 and M1.
+
+- I1 (breastfeeding): decontamination s8 detail now gives CDC-KIDS in order: "It is possible for nursing mothers to pass
+  radioactive materials to their babies through their breastmilk." / "They should consider not breastfeeding if other milk
+  sources are available until they can see their healthcare professional." and, separately, "Pregnant women should take
+  extra precautions during a radiation emergency." Correction to the s8 record above: "They" means nursing mothers. D85
+  rewritten.
+- I2 (wounds): FEMA-COMM p. 40 "If you are injured and need to self-decontaminate, clean around the wound," / "and then treat
+  your injury as you would an ordinary injury." / "Get a health care professional to decontaminate your wound once you have
+  access to one."; p. 41 "It is important to treat your physical injuries." / "Apply the appropriate treatments, even if there
+  is concern that it might result in some radiation contamination."; p. 10 Message 8 "Get a health care professional to
+  decontaminate the wound when you're able to see one." Added to decontamination s7 detail (all four) and s20 detail (p. 41).
+  The record's "Looked for, not found: a public source on cleaning radioactive dust out of a wound" is withdrawn: FEMA-COMM
+  answers it (a professional, when reachable). D82 and D83 rewritten around these sentences.
+- M1: decontamination s2 detail now cites FEMA-COMM p. 8 ("Those entering the location can easily self-decontaminate by
+  removing shoes and outer clothing and/or brushing or wiping off fallout particles immediately after they enter.") instead
+  of p. 40, whose "Remove the outer layer after you are safely inside." is about the extra layer worn to travel for care.
+  D86 cites p. 8 and Message B (p. 96).
+- M2: sickness s10 detail quotes NYS-RRC verbatim: "Specific symptoms of concern, especially following a 2-3 week period
+  with nausea and vomiting, are".
+- M3: sickness s11 text "Once they are cleaned off, they are unlikely to be a danger to you."; donts[5] "unlikely to pose a
+  risk to others"; decontamination s9 detail "unlikely to be a danger to you". CDC-CAUSES added beside the body-fluids
+  line in both: "you can expose people near you to radiation from the radioactive material inside your body".
+- M4: decontamination s11 text "Wear gloves and a mask if you can." (CDC-PETS, FEMA-COMM).
+- M5: decontamination s12 text and detail add "away from people and pets" (FEMA-COMM p. 16). s12 text shortened to stay
+  under 200 characters ("Wipe the things you need, such as wallets, jewellery, wheelchairs or hearing aids, as you
+  would wipe off dirt. ...").
+- M6: sickness s9 text "It needs medical care; see detail for what to do meanwhile." Detail points to the Burns protocol
+  only for covering (its step 8), pain (its step 9) and to Wound cleaning and care for infection signs, for FEMA-COMM p. 47's
+  "infection prevention and pain management"; cooling a burn that appears later is logged as D89 (medical professional).
+- M7: decontamination s20 and sickness s21, s22 details quote surv-fallout-warning.json Do first 3 word for word: "Leave only
+  if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you
+  to (Ready.gov)." and keep naming Leaving and moving after fallout (Survival) (title confirmed by the controller).
+- M8: the test is now RadiationProtocols.test_radiation_protocols_keep_the_pack_rules, a unittest method using self.assert*,
+  so both `python3 -m unittest tests.test_validate` and pytest collect it.
+- M9: corrections to the record above: FEMA-COMM treatment text ("Treatments for acute radiation syndrome focus on reducing
+  infections, maintaining hydration, and treating major injuries and burns.") is on p. 52, not p. 51; the "It is important to
+  treat your physical injuries" pair is on p. 41. The CDC-KIDS source line keeps "undated, read 2026-11-18".
+- D88 extended with the rest of FEMA-COMM section 3.3.5 (p. 16), as quoted by the reviewer and in the re-opened page. No
+  Survival topic edited.

@@ -2,7 +2,6 @@
   "id": "radiation-sickness",
   "title": "Radiation sickness",
   "category": "environment",
-  "draft": true,
   "keywords": [
     "radiation sickness",
     "radiation poisoning",
@@ -83,18 +82,18 @@
     },
     {
       "id": "s9",
-      "text": "Watch the skin: itching, tingling, redness or swelling hours to days later, on skin that was not near heat, can be a radiation burn. Care for it with the Burns protocol.",
-      "detail": "FEMA: high levels of radiation can cause severe sunburn-like burns (beta burns). Unlike heat burns, which appear at once, they appear a few hours to several days after exposure. Symptoms include itchiness, tingling, skin redness and swelling. Seek medical care immediately if you think you have one. The key treatments are infection prevention and pain management (FEMA, Communicating in the Immediate Aftermath). FEMA's planning guidance adds that radiation burns may go much deeper than heat burns.\n\nLater signs include blisters, ulcers and hair loss (FEMA planning guidance). The Burns protocol says every radiation burn, even a small one, needs medical care."
+      "text": "Watch the skin: itching, tingling, redness or swelling hours to days later, on skin that was not near heat, can be a radiation burn. It needs medical care; see detail for what to do meanwhile.",
+      "detail": "FEMA: high levels of radiation can cause severe sunburn-like burns (beta burns). Unlike heat burns, which appear at once, they appear a few hours to several days after exposure. Symptoms include itchiness, tingling, skin redness and swelling. Seek medical care immediately if you think you have one. The key treatments are infection prevention and pain management (FEMA, Communicating in the Immediate Aftermath). FEMA's planning guidance adds that radiation burns may go much deeper than heat burns.\n\nLater signs include blisters, ulcers and hair loss (FEMA planning guidance). The Burns protocol says every radiation burn, even a small one, needs medical care.\n\nMeanwhile, for the two things FEMA names: infection prevention, by covering the burn loosely with a clean, dry, non-stick dressing and checking it for infection (Burns protocol, covering step; Wound cleaning and care protocol, infection signs); pain, as the Burns protocol's pain step describes. No source opened says whether to cool a radiation burn that appears hours or days later, as the Burns protocol cools a fresh heat burn (see the open question)."
     },
     {
       "id": "s10",
       "text": "Over the following weeks, watch for nosebleeds, bleeding gums, easy bruising, fever, hair loss and burn-like sores. Any of these needs medical care.",
-      "detail": "New York State Department of Health (card for responders and clinicians): radiation sickness follows a predictable pattern over several days or weeks; symptoms of concern, especially after a 2 to 3 week period following nausea and vomiting, are burn-like skin sores without heat exposure, a tendency to bleed (nosebleeds, gum bleeding, bruising), and hair loss. Symptoms may take several days or weeks to appear.\n\nFEMA: when a person becomes sick again, symptoms could include loss of appetite, tiredness and fever (FEMA, Communicating in the Immediate Aftermath).\n\nFor heavy bleeding, use the Severe bleeding protocol."
+      "detail": "New York State Department of Health (card for responders and clinicians): radiation sickness follows a predictable pattern over several days or weeks; “Specific symptoms of concern, especially following a 2-3 week period with nausea and vomiting, are” burn-like skin sores without heat exposure, a tendency to bleed (nosebleeds, gum bleeding, bruising), and hair loss. Symptoms may take several days or weeks to appear.\n\nFEMA: when a person becomes sick again, symptoms could include loss of appetite, tiredness and fever (FEMA, Communicating in the Immediate Aftermath).\n\nFor heavy bleeding, use the Severe bleeding protocol."
     },
     {
       "id": "s11",
-      "text": "Caring for them is not dangerous once they are cleaned off. Wear gloves for vomit, diarrhoea, urine and blood, and wash your hands afterwards.",
-      "detail": "New York State Department of Health: externally exposed patients do not become radioactive, and a person who has been exposed to radiation is unlikely to pose a radiological health risk to any other person. FEMA: \"The particles are dangerous, but the people themselves are not.\" CDC: providing shelter to someone who was outside can save their life without endangering your own.\n\nIf radioactive material is inside someone's body, their body fluids (blood, sweat, urine) can contain it, and touching them can spread it; keep others from contact with dust or body fluids from them (CDC, What Causes Contamination versus Exposure). The New York State card tells responders to wear gloves.",
+      "text": "Once they are cleaned off, they are unlikely to be a danger to you. Wear gloves for vomit, diarrhoea, urine and blood, and wash your hands afterwards.",
+      "detail": "New York State Department of Health: externally exposed patients do not become radioactive, and a person who has been exposed to radiation is unlikely to pose a radiological health risk to any other person. FEMA: \"The particles are dangerous, but the people themselves are not.\" CDC: providing shelter to someone who was outside can save their life without endangering your own.\n\nCDC adds that if radioactive material is inside someone's body, they can expose people near them to radiation from it, and their body fluids (blood, sweat, urine) can contain it, and touching them can spread it; keep others from contact with dust or body fluids from them (CDC, What Causes Contamination versus Exposure). The New York State card tells responders to wear gloves.",
       "log": "Radiation sickness: care given"
     },
     {
@@ -112,13 +111,13 @@
     {
       "id": "s21",
       "text": "Give nothing by mouth. If they are breathing, lie them on their side (Recovery position protocol). For a seizure, use the Seizure protocol. This needs urgent medical care.",
-      "detail": "Confusion, seizures and coma can be signs of the most severe radiation sickness (FEMA planning guidance), and FEMA's public messages treat significant trouble breathing or changes in mental status as severe symptoms that need help at once (FEMA, Communicating in the Immediate Aftermath). Think of other causes and use their protocols too: a head injury (Head injury and concussion), fumes from a stove, heater or engine (Carbon monoxide poisoning), diabetes (Low blood sugar), or dehydration.\n\nWatch their breathing all the time. If they stop breathing normally, start CPR (CPR, adult protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter: see Leaving and moving after fallout (Survival).",
+      "detail": "Confusion, seizures and coma can be signs of the most severe radiation sickness (FEMA planning guidance), and FEMA's public messages treat significant trouble breathing or changes in mental status as severe symptoms that need help at once (FEMA, Communicating in the Immediate Aftermath). Think of other causes and use their protocols too: a head injury (Head injury and concussion), fumes from a stove, heater or engine (Carbon monoxide poisoning), diabetes (Low blood sugar), or dehydration.\n\nWatch their breathing all the time. If they stop breathing normally, start CPR (CPR, adult protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter. From Fallout warning (Survival): “Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).” Whether and how to go is in Leaving and moving after fallout (Survival).",
       "end": true
     },
     {
       "id": "s22",
       "text": "Signs of shock: give nothing by mouth. Use the Shock protocol. This needs urgent medical care.",
-      "detail": "Treat the cause if you can: stop bleeding first (Severe bleeding protocol). Severe fluid loss from vomiting and diarrhoea can also cause shock (Severe vomiting or diarrhea protocol).\n\nIf they vomit, roll them onto their side (Recovery position protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter: see Leaving and moving after fallout (Survival).",
+      "detail": "Treat the cause if you can: stop bleeding first (Severe bleeding protocol). Severe fluid loss from vomiting and diarrhoea can also cause shock (Severe vomiting or diarrhea protocol).\n\nIf they vomit, roll them onto their side (Recovery position protocol).\n\nDuring a fallout warning, getting medical care means leaving shelter. From Fallout warning (Survival): “Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).” Whether and how to go is in Leaving and moving after fallout (Survival).",
       "end": true
     }
   ],
@@ -128,7 +127,7 @@
     "Do not touch vomit, diarrhoea, urine or blood with bare hands (CDC).",
     "Do not give any medicine for radiation unless a medical professional or official says to (FEMA, CDC).",
     "Do not judge how much radiation someone received from when they started vomiting: stress and other illnesses cause the same signs (FEMA).",
-    "Do not treat a person who was exposed as dangerous to be near: once cleaned off, they are not (New York State Department of Health, FEMA)."
+    "Do not treat a person who was exposed as dangerous to be near: once cleaned off, they are unlikely to pose a risk to others (New York State Department of Health, FEMA)."
   ],
   "evacuate": [
     "This list says what needs medical care. During a fallout warning, whether and when to leave shelter to reach it is covered in Leaving and moving after fallout (Survival).",

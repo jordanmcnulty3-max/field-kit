@@ -630,30 +630,38 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    person should do. Today: the protocol suggests, as the app's labelled judgement, washing hands before and after care,
    keeping wounds and burns clean and covered, and keeping anyone with a cough, cold or stomach bug away. Worth showing a
    medic or nurse: what else (food, water, bedding, separation) is worth doing without a hospital.
-82. **Cleaning radioactive dust out of a wound (radiation-decontamination). Medical professional.** Public guidance (FEMA
-   2024, CDC): press on a bleeding wound, keep cuts covered while washing, clean the skin around the wound, then wrap it.
-   Clinician guidance (CDC hospital training; New York State Department of Health card): clean wounds first, with gentle,
-   repeated rinsing. Today: the public rule, then the Wound cleaning and care protocol (which rinses minor wounds with plenty
-   of clean water) once the skin around the wound is clean. Ask whether rinsing the wound itself should come first or not.
-83. **Cooling a burn on someone covered in fallout (radiation-decontamination). Medical professional.** The Burns protocol
-   (checked) cools a burn under cool running water for 5 to 20 minutes. FEMA's public message says to lightly wrap burn
-   injuries after decontaminating around them, and CDC says to keep cuts covered while washing so material does not get in.
-   No source opened covers cooling a burn while dust is still on the skin. Today: outer clothes off first, then the Burns
-   protocol as written. Ask whether cooling should wait until the skin around the burn is cleaned, or the reverse.
+82. **Radioactive dust in a wound when no professional can be reached (radiation-decontamination). Medical professional.**
+   FEMA's 2024 public guidance (Communicating in the Immediate Aftermath, pp. 10, 40 and 41): press on a bleeding wound,
+   clean around the wound, "and then treat your injury as you would an ordinary injury"; "Get a health care professional to
+   decontaminate your wound once you have access to one"; "Apply the appropriate treatments, even if there is concern that
+   it might result in some radiation contamination." Clinician guidance (CDC hospital training; New York State Department
+   of Health card) cleans wounds first, with gentle, repeated rinsing. Today: FEMA's public rule, then the Wound cleaning
+   and care protocol as for any wound, with the wound itself left for a professional. The open question is what to do when
+   no health care professional is ever reachable: whether the group should rinse the wound itself, and how.
+83. **Cooling a fresh burn on someone covered in fallout (radiation-decontamination). Medical professional.** The Burns
+   protocol (checked) cools a burn under cool running water for 5 to 20 minutes. FEMA's 2024 public guidance says to clean
+   around a wound and treat the injury as an ordinary injury, to "lightly wrap burn injuries", and to "Apply the appropriate
+   treatments, even if there is concern that it might result in some radiation contamination." Today: outer clothes off
+   first, then the Burns protocol as written, cooling included, without waiting. Worth confirming with a medic that cooling
+   with water that may carry dust onto the burn is the right trade.
 84. **What early vomiting means (radiation-sickness). Medical professional.** FEMA's planning guidance: the earlier vomiting
    starts after exposure, the higher the radiation received, but many other things cause vomiting. FEMA's public guidance:
    people who were not exposed often get the same symptoms from stress, and symptoms soon after the explosion in someone who
    was inside are most likely not from radiation. Clinician tables give onset times by severity (CDC). Today: the protocol
    gives both FEMA statements, tells people to note when vomiting started, and gives no estimate of how much radiation
    someone received. Say if the group wants the clinician timing shown (it is a triage tool for trained staff).
-85. **Breastfeeding after fallout (radiation-decontamination). Medical professional.** CDC: pregnant women should take
-   extra precautions, and should consider not breastfeeding if other milk sources are available until they can see their
-   healthcare professional. Off-grid there may be no other milk and no professional. Today: CDC's sentence is quoted in the
-   detail of the helping-others step with a note that this may not be possible. Ask what a mother should do when there is no
-   other milk.
-86. **Where to take off outer clothes (radiation-decontamination).** CDC: before entering the building, if you can. FEMA's
-   2024 public messages for someone coming back in: after you are inside. Today: "before coming in, or just inside the door,
-   away from others", with both sources in the detail. This also binds Coming in from outside (later topic).
+85. **Breastfeeding after fallout (radiation-decontamination). Medical professional.** CDC (Radiation Emergencies and
+   Children): "It is possible for nursing mothers to pass radioactive materials to their babies through their breastmilk."
+   "They should consider not breastfeeding if other milk sources are available until they can see their healthcare
+   professional." Separately: "Pregnant women should take extra precautions during a radiation emergency." Off-grid there may
+   be no other milk and no professional. Today: CDC's sentences are given in the detail of the helping-others step with a
+   note that this may not be possible. Ask what a mother should do when there is no other milk.
+86. **Where to take off outer clothes (radiation-decontamination).** CDC (What to Do: Get Inside): "Carefully remove your
+   outer layer of clothing before entering the building, if you can." FEMA's 2024 messaging guide (p. 8): those entering
+   "can easily self-decontaminate by removing shoes and outer clothing and/or brushing or wiping off fallout particles
+   immediately after they enter"; its EAS Message B (p. 96): "If they can, they should remove shoes and outer clothing."
+   Today: "before coming in, or just inside the door, away from others", with both sources in the detail. This also binds
+   Coming in from outside (later topic).
 87. **Who should go for medical care (radiation-sickness).** FEMA's public messages give two rules: seek medical help if you
    were near the incident and have symptoms, and, when medical facilities are overwhelmed, only those with serious,
    life-threatening injuries should seek care. CDC: seek medical attention for radiation sickness symptoms once officials say
@@ -669,3 +677,17 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    winter rule). FEMA's line is about ventilation and heating, not about burning anything in a sealed room, and does not
    change the carbon monoxide rules. Say if the group wants Living in a closed-up house to carry FEMA's line (a change to a
    checked topic, to be checked like any other).
+   The same section (3.3.5, "Immediate Actions to Reduce Contamination in Your Home") also says, for while fallout may be
+   coming down: "Limit your exposure to radiation by closing windows and doors if you can"; "You should consider turning off
+   anything that brings air in from the outside. If it's an option, turn off "ventilation mode" or "fresh air intake" and
+   switch air to recirculate if possible. If you aren't sure if your HVAC system has this option, then turn it off if safe to
+   do so."; "If you are experiencing extreme temperatures or weather conditions, listen to emergency officials for guidance
+   on heating and air conditioning. The health risk from turning off HVAC systems might be greater than the risk of
+   radioactive contamination."; "Make sure fireplace dampers are closed." The section's opening paragraph also says "The
+   likelihood of drawing in radioactive fallout into your home is extremely small after the passage of the fallout cloud."
+89. **A radiation burn that appears hours or days later (radiation-sickness). Medical professional.** FEMA's 2024 public
+   guidance: radiation (beta) burns appear a few hours to several days after exposure, need medical care immediately, and
+   "The key treatments for beta burns are infection prevention and pain management." The Burns protocol (checked) starts by
+   cooling a fresh heat burn under running water for 5 to 20 minutes; no source opened says whether to cool a burn that
+   appears later. Today: the protocol says it needs medical care and points to the Burns protocol only for covering it
+   loosely, checking for infection and pain, not for cooling. Ask what else to do for it without a hospital.

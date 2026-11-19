@@ -617,3 +617,52 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    an emergency stove or heater, so it is not held back until the cold is a danger to life; CDC's rule to turn off
    forced-air heating that brings in outside air still applies, and its outside vents must be kept clear (which may mean a
    trip out in snow). Say if the group wants the furnace treated like a stove (off until the cold is a danger to life).
+90. **Shaking off clothes when there are no clean ones (surv-fallout-coming-inside).** CDC's decontamination infographic: with
+   no clean clothes, take off the outer layer, shake or brush the clothes off, put them back on, and wash hands, face and skin
+   again. CDC also says to take clothes off carefully so radioactive dust doesn't shake loose, and no source says where to do
+   the shaking. Today: CDC's step, plus a line labelled as the app's caution: shake or brush clothes off at the door, not in the
+   room where people are sheltering, and cover your mouth and nose. Say if the group wants a different place (for example just
+   outside the door, which means a moment more in fallout).
+91. **Milk from your own animals, wild game and fish after fallout (surv-fallout-water-and-food).** No current source opened says
+   when these can be used. Ready.gov and CDC say not to eat garden food, or food or liquids that were outdoors uncovered, until
+   officials say. The 1968 handbook In Time of Emergency (dated) says milk from cows that grazed on pasture with fallout might
+   harm infants' and small children's thyroids, and they should have canned or powdered milk for a few weeks; it calls milk "not
+   expected to be a serious problem" otherwise. Today: an app caution to treat milk, game and fish like food that was outdoors
+   (don't use until officials say), with the 1968 line shown as dated. Say if the group keeps animals and wants more (it needs a
+   source; state agricultural guidance found so far is written for nuclear plant releases, which this pack does not cover).
+92. **Drinking well water after fallout (surv-fallout-water-and-food).** CDC: until tested, only bottled water is certain to be
+   free of contamination; tap or well water can be used for washing yourself and food; if there is no stored, heater or toilet
+   tank water, drink tap water to stay hydrated. No current source gives a drinking rule for a private well. The 1968 handbook
+   (dated) says water in covered wells would not be contaminated. Today: a well is treated like tap water in CDC's order (the
+   app's reading), with the 1968 line shown as dated. Say if the group wants well water ranked higher (for example ahead of the
+   toilet tank).
+93. **Straining fallout out of open water (surv-fallout-water-and-food).** The 1968 and 1985 handbooks (dated) say to strain
+   doubtful water (from a faucet, stream or pond) through a paper towel or cloth to remove fallout particles, let it settle 24
+   hours, then boil or treat it; the 1968 handbook adds that particles in reservoirs, lakes and streams settle to the bottom.
+   Ready.gov (current) says not to consume liquids that were outdoors and uncovered until authorities say, and the checked Make
+   water safe says water with radioactive material can't be fixed by boiling or disinfecting. Today: the topic names the old
+   method and says the app doesn't follow it. No change expected; recorded because it is a source disagreement, and because a
+   group with no stored water left would face it.
+94. **Breastfeeding after being outside in fallout (surv-fallout-water-and-food). Worth asking a medical professional.** CDC:
+   if you were outside where fallout came down, consider stopping breastfeeding for a while and feeding stored breast milk or
+   formula; with neither, keep breastfeeding; pump and discard to keep the supply; resume when health officials say or after
+   leaving the area and cleaning off. With no officials, "when health officials say" may never come. Today: CDC's wording as
+   written. Say if a medical professional would add anything for the no-officials case.
+95. **Taking a casualty out through fallout for care (surv-fallout-leaving). Worth asking a medical professional.** Ready.gov
+   counts serious injury among the immediate dangers that can force you out, and FEMA names medical needs; Ready.gov also says
+   to listen for where to get care. No source says what a household with no officials, and no way to know if a hospital is open,
+   should weigh before carrying someone out. Today: those sources, first aid by link, and a labelled app caution to be as sure as
+   you can where you are going and that you can get there. Say if the group or a medical professional wants a firmer rule (for
+   example which injuries justify the trip).
+96. **The Burns protocol's "get medical care" line during fallout sheltering (surv-fallout-leaving, burns). Worth asking a
+   medical professional.** Burns (checked) says to get medical care for every electrical, lightning, chemical, radiation or
+   explosion burn, even a small one. During fallout sheltering, leaving for a small burn would mean going out through fallout;
+   the leaving rule allows it only for an immediate danger such as serious injury. Today: Burns is linked and not edited; the
+   leaving topic does not list burns separately. Say if the group wants a note on this (an edit to Burns would be a checked
+   protocol change).
+97. **Cold as a reason to leave shelter (surv-fallout-leaving; follows D70).** The leaving topic now owns the rule for leaving.
+   It sends cold to Living in a closed-up house first (no-flame warmth, then a stove or heater under the carbon monoxide rules
+   when the cold is a danger to life) and does not list cold as a reason to leave on its own. Stay warm when the heat is out
+   still says to go somewhere with heat if you can't keep the house warm. Today: no source opened weighs cold against fallout;
+   the topic gives no cold trigger for leaving. Say if the group wants one (for example when nothing in the house can keep a
+   baby or older person warm).

@@ -1,0 +1,227 @@
+{
+  "id": "surv-fallout-coming-inside",
+  "title": "Coming in from outside",
+  "category": "radiation",
+  "keywords": [
+    "decontamination",
+    "decontaminate",
+    "decon",
+    "fallout on clothes",
+    "fallout on skin",
+    "radioactive dust",
+    "take off clothes",
+    "undress",
+    "bag clothes",
+    "shower",
+    "wash off fallout",
+    "conditioner",
+    "shampoo",
+    "wipes",
+    "no shower",
+    "clean clothes",
+    "wash pet",
+    "pet fallout",
+    "wash a child",
+    "coming back inside",
+    "entering shelter"
+  ],
+  "summary": "Take off your outer layer of clothes carefully, before you come in if you can, and seal them in a bag far from people and pets. Then shower, or wash or wipe the skin and hair that were uncovered. Never use conditioner, and don’t scrub or scratch your skin.",
+  "doFirst": [
+    "Take off your outer layer of clothes before you come in, if you can (CDC), and your shoes just inside the door (NYC Health). Go slowly so the dust doesn’t shake loose (CDC, Ready.gov). Taking off the outer layer can remove up to 90% of radioactive material (CDC).",
+    "Put the clothes in a plastic bag or other sealable container, and put the bag far away from people and pets (CDC).",
+    "Shower if you can: warm water, lots of soap, and shampoo or soap for your hair. No conditioner. Don’t scald, scrub or scratch your skin (CDC).",
+    "No shower? Wash your hands, face and the skin that was uncovered with soap and plenty of water at a sink, or wipe them with a moist wipe or clean wet cloth. Gently blow your nose and wipe your eyelids, eyelashes and ears (CDC).",
+    "Put on clean clothes that were stored indoors (CDC)."
+  ],
+  "sections": [
+    {
+      "h": "Why it matters",
+      "blocks": [
+        {
+          "list": [
+            "Radioactive material settles on your clothes and body like dust or mud (CDC), and can be tracked into the house or spread to another person or object the same way (CDC).",
+            "Fallout left on the skin can cause burns there if it is not brushed or washed off (FEMA planning guidance).",
+            "Get it off as soon as you can (CDC, FEMA planning guidance)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Where to undress and what to do with the clothes",
+      "blocks": [
+        {
+          "list": [
+            "Take off the outer layer before you come into the building, if you can (CDC). Take off your shoes just after you come in, so you don’t spread fallout through the house (NYC Health).",
+            "Fallout catches easily in shirt collars and around the tops of shoes (FEMA, Nuclear Detonation Response Guidance: Planning for the First 72 Hours).",
+            "Try not to touch your eyes, nose and mouth (Ready.gov).",
+            "Bag the clothes, and put the bag in an out-of-the-way place, away from people and pets (CDC), until officials say how to get rid of it (CDC).",
+            "Don’t put the bags with your dirty laundry (NYC Health)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Washing",
+      "blocks": [
+        {
+          "list": [
+            "With a shower: take a warm shower and wash gently with lots of soap. Wash your hair with shampoo or soap (CDC).",
+            "No shower: at a sink or faucet, wash your hands, face and the parts of your body that were uncovered, with soap and plenty of water (CDC).",
+            "No sink: wipe the parts that were uncovered with a moist wipe, clean wet cloth or damp paper towel, above all your hands and face (CDC). Baby wipes work, and so does water from a container (NYC Health).",
+            "Gently blow your nose, and wipe your eyelids, eyelashes and ears (CDC).",
+            "Keep cuts and scrapes covered while you wash, so radioactive material doesn’t get into them (CDC).",
+            "Put used wipes, cloths and towels in a plastic bag too, far from people and pets (CDC)."
+          ]
+        },
+        {
+          "warn": "Never use hair conditioner, including 2-in-1 shampoo and conditioner: it makes fallout stick to your hair (CDC, NYC Health). Don’t scald, scrub or scratch your skin (CDC). Don’t use household cleaning wipes on your skin, and don’t count on hand sanitizer: it does not protect against radioactive material (Ready.gov)."
+        },
+        {
+          "p": "Tap water can still be used for washing, even when it isn’t used for drinking (CDC). Whether to drink it is in Water and food after fallout."
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        }
+      ]
+    },
+    {
+      "h": "Little or no water",
+      "blocks": [
+        {
+          "list": [
+            "When water is short, change your outer clothes and shoes and use wet wipes or dry methods instead (FEMA planning guidance).",
+            "Fallout on your hair, skin or clothes: brush it off with gloves, rags or a broom (NYC Health).",
+            "Any washing, brushing or change of clothes helps (FEMA planning guidance)."
+          ]
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        }
+      ]
+    },
+    {
+      "h": "Clean clothes",
+      "blocks": [
+        {
+          "list": [
+            "Clothes that were in a closet or drawer away from the fallout can be worn (CDC).",
+            "No clean clothes: take off the outer layer, shake or brush the clothes off, and put them back on. Then wash your hands, face and the skin that was uncovered again (CDC)."
+          ]
+        },
+        {
+          "p": "This app’s caution, not a source’s: shake or brush clothes off at the door, not in the room where people are sheltering, and cover your mouth and nose while you do it."
+        }
+      ]
+    },
+    {
+      "h": "Children and anyone who needs help",
+      "blocks": [
+        {
+          "list": [
+            "Clean yourself first and put on clean clothes, then clean your child (CDC).",
+            "Gently wash your child’s hands and face, above all around the eyes, nose and mouth, with soap and water or a clean wet cloth or paper towel (CDC).",
+            "When you help someone, wear waterproof gloves and a dust mask if you can, and keep your own cuts and scrapes covered (CDC). Cover your mouth with a mask, cloth or towel (CDC).",
+            "Afterwards, wash your hands, face and skin that was uncovered again (CDC).",
+            "Clean the things people need too, such as glasses and wheelchairs (FEMA, Nuclear Detonation Response Guidance: Planning for the First 72 Hours)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Pets",
+      "blocks": [
+        {
+          "list": [
+            "Bring pets inside (CDC). Gently brush the coat, then wash your pet with shampoo or soap and water and rinse completely (Ready.gov, CDC).",
+            "Wear waterproof gloves and a dust mask, or cover your mouth, if you can. Keep your cuts and your pet’s covered while you wash it (CDC).",
+            "Don’t shave the fur instead of washing: it doesn’t get rid of the fallout (NYC Health).",
+            "Wash your hands and face afterwards (CDC).",
+            "Keep pets indoors (NYC Health): animals can pick up fallout again and bring it inside (FEMA planning guidance). Put newspapers or other absorbent material down so a pet can relieve itself indoors. Don’t touch soiled material with bare hands; bag it and put the bag away from people and pets (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Keeping the shelter clean",
+      "blocks": [
+        {
+          "list": [
+            "Wipe off anything brought in from outside (CDC).",
+            "Keep every bag of clothes, wipes and soiled material together, away from where people sleep and eat (CDC: far from people and pets).",
+            "Officials will tell you if the house itself needs cleaning (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-fallout-shelter-living",
+          "label": "Living in a closed-up house"
+        }
+      ]
+    },
+    {
+      "h": "Hurt",
+      "blocks": [
+        {
+          "p": "First aid is in Emergency. Keep wounds covered while washing (CDC)."
+        },
+        {
+          "link": "p:bleeding",
+          "label": "Severe bleeding"
+        },
+        {
+          "link": "p:wound-care",
+          "label": "Wound care"
+        },
+        {
+          "link": "p:burns",
+          "label": "Burns"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, How to Self-Decontaminate after a Radiation Emergency (last reviewed April 15, 2024)",
+      "used": "Outer layer off can remove up to 90% of radioactive material; remove carefully so dust is not breathed in; plastic bag or sealable container far from people and pets; warm shower, lots of soap; do not scald, scrub or scratch; shampoo or soap for hair; cuts covered; no shower: sink, soap and plenty of water; moist wipe, clean wet cloth or damp paper towel; blow nose, wipe eyelids, eyelashes and ears; bag used wipes; tap water can still be used for washing"
+    },
+    {
+      "name": "CDC, Decontamination for Yourself and Others (infographic, last reviewed April 17, 2024)",
+      "used": "Bag in an out-of-the-way place; no conditioner because it makes radioactive material stick to hair; clothes stored in a closet or drawer can be worn; no clean clothes: take off, shake or brush off, put back on, rewash; helpers wear waterproof gloves and a dust mask, keep cuts covered, rewash"
+    },
+    {
+      "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024) and What to Do: Stay Inside (last reviewed April 17, 2024)",
+      "used": "Remove outer layer before entering; radioactive material settles like dust or mud; put on clean clothing; pets inside, washed with shampoo or soap and rinsed; gloves and dust mask; cover cuts; wash hands and face after; wipe supplies brought in; officials will say if the home needs decontaminating"
+    },
+    {
+      "name": "CDC, How to Decontaminate Pets After a Radiation Emergency (last reviewed April 15, 2024)",
+      "used": "Washing pets; mouth covering; cuts covered; newspapers or absorbent material indoors; don’t touch soiled material with bare hands; bag it away from people and pets"
+    },
+    {
+      "name": "CDC, Infant Feeding (radiation emergencies; last reviewed April 16, 2024)",
+      "used": "Wash yourself and put on clean clothes, then wash your child’s hands and face, especially around the eyes, nose and mouth; store the bag far from people and pets until officials say how to dispose of it"
+    },
+    {
+      "name": "CDC, Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022)",
+      "used": "Get radioactive material off as soon as possible; contamination spreads like tracked-in dust or mud; cover your mouth with a mask, cloth or towel when decontaminating others"
+    },
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",
+      "used": "Careful removal so dust doesn’t shake loose; avoid touching eyes, nose and mouth; no household cleaning wipes on skin; hand sanitizer does not protect against radioactive material; brush and wash pets"
+    },
+    {
+      "name": "NYC Health (New York City Department of Health and Mental Hygiene), Emergencies: Nuclear Incident",
+      "used": "Shoes off just after entering; brush fallout off with gloves, rags or a broom; no conditioner including 2-in-1; wet wipes such as baby wipes or water from a container; bags not with dirty laundry; don’t shave a pet’s fur; keep pets indoors"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023)",
+      "used": "Particles left on the skin can cause localized burns; decontaminate as soon as possible; with scarce water, wet wipes or dry methods and a change of outer clothing and shoes; any action to reduce contamination helps; animals may re-contaminate themselves and bring contamination inside"
+    },
+    {
+      "name": "FEMA Office of Emerging Threats, Nuclear Detonation Response Guidance: Planning for the First 72 Hours (March 2023; updated June 12, 2023; copy hosted by HHS REMM)",
+      "used": "Contaminated material catches in shirt collars and around the tops of shoes; decontaminate medical equipment such as wheelchairs and eyeglasses"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

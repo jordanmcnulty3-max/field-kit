@@ -1,0 +1,201 @@
+{
+  "id": "surv-fallout-water-and-food",
+  "title": "Water and food after fallout",
+  "category": "radiation",
+  "keywords": [
+    "food after fallout",
+    "water after fallout",
+    "radioactive water",
+    "radioactive food",
+    "contaminated water",
+    "contaminated food",
+    "drinking water fallout",
+    "tap water radiation",
+    "boil water radiation",
+    "bleach radiation",
+    "well water fallout",
+    "rainwater fallout",
+    "pond water",
+    "garden vegetables",
+    "canned food",
+    "wipe cans",
+    "milk",
+    "baby formula",
+    "breastfeeding",
+    "pet food",
+    "medicine"
+  ],
+  "summary": "Food and drinks that were indoors or sealed can be used; wipe the outside of anything that was outdoors before you open it. Drink stored water first. Boiling and bleach don’t take fallout out of water. Don’t eat or drink anything that was outdoors uncovered, including garden food and rainwater, until officials say you can.",
+  "doFirst": [
+    "Eat and drink what was already indoors or is sealed (CDC). Wipe off any container that was outdoors with a damp cloth before you open it (Ready.gov, CDC).",
+    "Drink bottled and stored water first (CDC). Boiling does not take radioactive material out of water (CDC).",
+    "Don’t eat or drink anything that was outdoors and uncovered, or food from your garden, until officials tell you that you can (Ready.gov)."
+  ],
+  "sections": [
+    {
+      "h": "Food you can use",
+      "blocks": [
+        {
+          "list": [
+            "Food in sealed containers: cans, bottles, jars and boxes (CDC, NYC Health).",
+            "Unspoiled food in the refrigerator or freezer, and food in a pantry or drawer away from the fallout (CDC). Fallout does not get into food stored in your home (NYC Health).",
+            "Food in containers that were outdoors, once the container has been wiped off with a damp towel or cloth (Ready.gov, CDC).",
+            "Fruit you peel, such as bananas and oranges. Rinse fruit and vegetables you don’t peel before eating them (NYC Health)."
+          ]
+        },
+        {
+          "p": "Before you eat, wipe counters, plates, pots and utensils with a damp cloth or clean towel (CDC). Put the cloth in a plastic bag, put the bag away from people and pets, and wash your hands (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "Food to leave alone",
+      "blocks": [
+        {
+          "list": [
+            "Unsealed food that was outdoors may have fallout on it (Ready.gov). Fallout can settle anywhere that is open to the air (NYC Health).",
+            "Don’t pick or eat food from your garden until officials say you can (CDC, Ready.gov)."
+          ]
+        },
+        {
+          "p": "No current source opened says when milk from your own animals, or wild game and fish, can be used after fallout. This app’s caution: treat them like food that was outdoors, and don’t use them until officials say you can. The 1968 civil defence handbook In Time of Emergency (dated) says that milk from cows that grazed on pasture with fallout on it might harm the thyroid glands of infants and small children, and that they should have canned or powdered milk for a few weeks."
+        }
+      ]
+    },
+    {
+      "h": "Which water to drink first",
+      "blocks": [
+        {
+          "steps": [
+            "Bottled water, and drinks in cans, bottles, cartons and other sealed containers: the package keeps fallout out (CDC, NYC Health). Until officials say other water is fine to drink, bottled water is the only water certain to be free of contamination (CDC).",
+            "Drinks already in the refrigerator or freezer (CDC).",
+            "Water in other containers in the house, such as the water heater tank or the toilet tank (not the bowl): CDC says it is free of radioactive material. Take it out by the steps, and within the limits, in Water already in your house.",
+            "If none of those is available, CDC says to drink tap water to stay hydrated."
+          ]
+        },
+        {
+          "p": "Wipe off any water container that was outdoors before you open it (CDC). Water you stored yourself counts as stored water: see Store water at home."
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        },
+        {
+          "link": "s:surv-water-in-the-house",
+          "label": "Water already in your house"
+        }
+      ]
+    },
+    {
+      "h": "What boiling and bleach don’t do",
+      "blocks": [
+        {
+          "warn": "Boiling tap water does not remove radioactive material (CDC). You cannot boil or disinfect the radiation out of water (CDC). Make water safe says the same: boiling or disinfecting can’t fix water with radioactive material in it, so find another source."
+        },
+        {
+          "p": "Boiling and bleach still kill germs. If stored or tap water needs treating for germs, use Make water safe as usual, knowing it does nothing about fallout."
+        },
+        {
+          "link": "s:surv-make-water-safe",
+          "label": "Make water safe"
+        }
+      ]
+    },
+    {
+      "h": "Tap water and wells",
+      "blocks": [
+        {
+          "list": [
+            "Public health, environmental and emergency agencies test drinking water supplies after a radiation emergency (CDC). NYC Health: drink bottled water until public health authorities say the tap water is fine.",
+            "Tap water can still be used for washing and cleaning (CDC). CDC: you can use tap or well water to clean yourself and your food.",
+            "A well: no current source opened gives a separate rule for drinking well water after fallout. Treat it like tap water in the order above (this app’s reading). The 1968 handbook In Time of Emergency (dated) says water in covered wells would not be contaminated."
+          ]
+        },
+        {
+          "link": "s:surv-wells-without-power",
+          "label": "Wells without power"
+        }
+      ]
+    },
+    {
+      "h": "Rain, ponds and streams",
+      "blocks": [
+        {
+          "p": "Don’t drink water that was outdoors and uncovered, such as rain barrels, rainwater, ponds and streams, until officials tell you that you can (Ready.gov: food or liquids that were outdoors and uncovered)."
+        },
+        {
+          "p": "The 1968 and 1985 civil defence handbooks (dated) say to strain doubtful water through a paper towel or cloth to remove fallout particles, then boil or treat it. This app doesn’t: it follows Ready.gov and CDC above."
+        },
+        {
+          "link": "s:surv-find-water",
+          "label": "Find water outside"
+        }
+      ]
+    },
+    {
+      "h": "Babies",
+      "blocks": [
+        {
+          "list": [
+            "Use ready-to-feed infant formula if you have it; it needs no water (CDC).",
+            "Powdered formula: make it with bottled water if you can. Use tap water only if local officials say it is fine (CDC).",
+            "Don’t leave the house or shelter to get formula. Staying inside and breastfeeding is better (CDC).",
+            "Breastfeeding: if you were indoors with the doors and windows closed, keep breastfeeding (CDC).",
+            "If you were outside where the fallout came down, CDC says to consider stopping breastfeeding for a while and to feed breast milk pumped and stored before the emergency, or formula. If you have neither, keep breastfeeding (CDC). To keep up your milk, express or pump regularly and throw that milk away (CDC). Breastfeeding can start again when local health officials say, or after you leave the area and clean yourself off (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Medicine and pet food",
+      "blocks": [
+        {
+          "list": [
+            "Keep taking your medicine. Medicine that was indoors can be used; if the container was outdoors, wipe it off first (CDC).",
+            "Pet food in sealed containers can be used. Wipe the containers before opening them, and wash or wipe pet bowls, dishes and mats (CDC)."
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Food, Drinking Water, and Medicine Safety in a Radiation Emergency (last reviewed April 15, 2024)",
+      "used": "Sealed food and food already inside; refrigerator, freezer, pantry; wiped containers from outside; wipe counters, plates, pots and utensils, bag the cloth, wash hands; no garden food until officials say; boiling does not remove radioactive material; bottled water the only water free of contamination until officials say; sealed drinks and refrigerator drinks; toilet tank and water heater water free of radioactive material; otherwise tap water to stay hydrated; tap water for washing and cleaning; officials test drinking water; medicine and pet food"
+    },
+    {
+      "name": "CDC, What to Do: Stay Inside (last reviewed April 17, 2024)",
+      "used": "Sealed food and drinks and food already inside; boiling tap water will not remove radioactive materials; tap water still usable for washing and cleaning"
+    },
+    {
+      "name": "CDC, Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022)",
+      "used": "Until test results are available, bottled water is the only water certain to be free of contamination; tap or well water can be used to clean yourself and your food"
+    },
+    {
+      "name": "CDC, Infant Feeding (radiation emergencies; last reviewed April 16, 2024)",
+      "used": "Ready-to-feed formula; powdered formula with bottled water; tap water only if local officials say; do not leave shelter to get formula; breastfeeding indoors and after being outside; pumping and discarding; when breastfeeding can resume; you cannot boil or disinfect the radiation out of water"
+    },
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",
+      "used": "Food that was inside a building; sealed containers from outside wiped with a damp towel or cloth; unsealed food from outside may be contaminated; no garden food, and no food or liquids that were outdoors and uncovered, until authorities say"
+    },
+    {
+      "name": "NYC Health (New York City Department of Health and Mental Hygiene), Emergencies: Nuclear Incident",
+      "used": "Fallout does not contaminate food stored in the home; canned, refrigerated, frozen, boxed and bottled food; peeled fruit; rinse unpeeled fruit and vegetables; fallout settles anywhere open to the air; drink bottled water until authorities say tap water is fine; sealed drinks"
+    },
+    {
+      "name": "Office of Civil Defense, In Time of Emergency: A Citizen’s Handbook on Nuclear Attack and Natural Disasters (H-14, March 1968; dated civil defence publication)",
+      "used": "Water in covered wells would not be contaminated; milk from cows grazing contaminated pasture and infants and small children; straining water to remove fallout particles (named and not followed)"
+    },
+    {
+      "name": "FEMA, Protection in the Nuclear Age (June 1985; dated civil defence publication)",
+      "used": "Straining water to remove fallout particles (named and not followed)"
+    },
+    {
+      "name": "Store water at home, Water already in your house, Make water safe, Find water outside and Wells without power (other topics in this app)",
+      "used": "Stored water and the water heater and toilet tank steps by link; its warning that boiling or disinfecting cannot fix water with radioactive material, and to find another source"
+    }
+  ],
+  "reviewed": "2026-11-18",
+  "draft": true
+}

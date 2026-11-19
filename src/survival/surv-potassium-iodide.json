@@ -78,7 +78,7 @@
         {
           "list": [
             "Radioactive iodine is most common in nuclear power plant accidents. Most radiation emergencies involve other radioactive materials, not radioactive iodine alone (CDC).",
-            "In normal times in New York, local or state health officials announce when to start taking KI and when to stop (New York State Department of Health).",
+            "In normal times in New York, after a nuclear power plant emergency, local or state health officials announce when to start taking KI and when to stop (New York State Department of Health).",
             "After a radiological or nuclear event in the United States, local public health or emergency officials will tell the public whether KI is needed (FDA)."
           ]
         },
@@ -90,6 +90,9 @@
     {
       "h": "Who it is meant for",
       "blocks": [
+        {
+          "p": "If officials call for KI, this is who CDC says it is meant for. It is never a reason to take KI without being told to."
+        },
         {
           "list": [
             "CDC recommends KI only for people under 40, and for women who are pregnant or breastfeeding. Younger people’s cells are growing faster, which puts them at risk of thyroid cancer after breathing in radioactive iodine (CDC).",
@@ -178,6 +181,5 @@
       "used": "Social media posts encouraging people to drink iodine to protect themselves from radiation, treated as a rumor to confront"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

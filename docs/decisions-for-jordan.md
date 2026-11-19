@@ -655,3 +655,7 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
 106. **Potassium iodide in the kit (fallout-shelter-kit).** No opened source lists KI for a nuclear detonation; CDC says it
    will not help there. It matters most in a nuclear power plant accident, which this app does not cover yet. Today: not on
    the list. Say if the group wants KI on a list for a plant accident when that pack is written (the package gives the dose).
+107. **Not sure whether it was a dirty bomb or a nuclear explosion (surv-dirty-bomb).** No source says what to do when you
+   can't tell which it was, or how long to stay in after a dirty bomb when no one says (D101). Today: a labelled app caution
+   says to treat it as a nuclear explosion and follow Fallout warning and How long to stay in (the longer stay and the
+   stricter car rule). Say if the group wants a different default.

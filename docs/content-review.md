@@ -4049,3 +4049,32 @@ Conversions: 1 gallon = 3.785 L, "3.8 L" (quoted from How much water you need).
 - No sheltering period is restated: get-ready and the checklist point to How long to stay in's "up to 2 weeks".
 - No cleaning-off steps are owned here; the dirty bomb steps are CDC-DB's event steps and must be checked against
   p:radiation-decontamination when it exists (rulings).
+
+### Batch C fix round (2026-11-18), from task-6-review.md
+
+Draft removed from all four items after these fixes. No new source was opened; every change uses the sources above or a
+checked topic's text word for word.
+- I1: amounts to keep now say "at least 2 weeks" (PNA-1985 p. 10 "at least a two-week stock"; How much water you need "at
+  least 1 gallon ... for 2 weeks"): get-ready summary, heading "Supplies for 2 weeks or more", its paragraph and food line;
+  checklist water, food and medicines items. Where the sheltering period itself is meant (get-ready paragraph, checklist
+  summary, both source lines) How long to stay in's Do first 3 is quoted word for word: "for as long as 2 weeks, and maybe
+  longer (civil defence handbooks, 1968 and 1985, dated)."
+- I2: surv-dirty-bomb doFirst 3 and outside step 4 now quote Fallout warning's Do first 4 word for word ("Carefully take off
+  your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov,
+  CDC)."). Only CDC-DB's extras stay: the mouth cloth goes in the bag; up to 90%; bag where others won't touch it, kept until
+  officials say. Inside step 4 says "clean off as in the steps above". CDC-DB's "Shower or wash with soap and water. Be sure
+  to wash your hair." is covered by the quoted "wash or wipe the skin and hair that were uncovered" and is no longer written
+  separately; CDC's order (bag stored before washing) becomes clothes, bag, wash (quote), then cloth and bag storage.
+  p:radiation-decontamination links placed in docs/v7.4-rulings.md.
+- M1: "very similar to those for a nuclear explosion" (FEMA-PG3 p. 119 "very similar").
+- M2: get-ready shelter line now only "decide now where you would shelter, by the rules in Where to shelter from fallout."
+- M3: qty unit "in all, one per person" for clothes and bedding ("For your group: 1 in all, one per person" / "4 in all, one per
+  person"). Days stepper noted in rulings C17.
+- M4: source name "Ready.gov (FEMA), Build A Kit (ready.gov/kit; undated)" in both files; the fetch detail stays here (READY-KIT).
+- M5: KI "Who it is meant for" opens "If officials call for KI, this is who CDC says it is meant for. It is never a reason to
+  take KI without being told to." (CDC-KI "Do not take KI unless you are instructed ...").
+- M6: NYS line now "after a nuclear power plant emergency" (NYS-KI covers plant emergencies only).
+- M7: s:surv-fallout-leaving added to the links later tasks must add, in dirty bomb "Hurt or sick".
+- M8: dirty bomb "Staying in" gains a labelled warn: "This app's own caution, not a source's: if you don't know whether it was
+  a dirty bomb or a nuclear explosion, treat it as a nuclear explosion and follow Fallout warning and How long to stay in."
+  plus a link to How long to stay in (D107).

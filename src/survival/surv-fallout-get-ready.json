@@ -20,14 +20,14 @@
     "two week supply",
     "stockpile"
   ],
-  "summary": "Before anything happens: pick the shelter spot in each home now, keep water, sealed food and medicine for up to 2 weeks, keep a battery or hand-crank radio, and agree a family plan for being apart. No pill, mask or product protects you from fallout radiation the way getting inside does.",
+  "summary": "Before anything happens: pick the shelter spot in each home now, keep water, sealed food and medicine for at least 2 weeks, keep a battery or hand-crank radio, and agree a family plan for being apart. No pill, mask or product protects you from fallout radiation the way getting inside does.",
   "sections": [
     {
       "h": "Pick your shelter spot now",
       "blocks": [
         {
           "list": [
-            "In each home your group uses, decide now where you would shelter, by the rules in Where to shelter from fallout: underground if there is a basement, otherwise the middle of the building, away from the walls and roof.",
+            "In each home your group uses, decide now where you would shelter, by the rules in Where to shelter from fallout.",
             "Go over the plan with everyone so you all know what to do, and give children, older people and anyone with a disability clear instructions on where the shelter spot is (FEMA, Protection in the Nuclear Age, 1985, dated).",
             "Find out the sheltering and evacuation plans of schools, workplaces and care facilities your family uses (Ready.gov), and your community’s plan (CDC)."
           ]
@@ -39,10 +39,10 @@
       ]
     },
     {
-      "h": "Supplies for up to 2 weeks",
+      "h": "Supplies for 2 weeks or more",
       "blocks": [
         {
-          "p": "With no official word, this app plans on sheltering for up to 2 weeks (How long to stay in). FEMA’s 1985 handbook (dated) says the same for supplies: have ready at least a two-week stock of water, food and supplies to bring to shelter. Ready.gov’s kit for radiation emergencies includes a spare change of clothes for each family member, a trash bag for contaminated clothing, and sealed food, water and medicine."
+          "p": "How long to stay in says that with no word from anyone, plan to keep sheltering “for as long as 2 weeks, and maybe longer (civil defence handbooks, 1968 and 1985, dated).” So keep supplies for at least 2 weeks. FEMA’s 1985 handbook (dated) says the same: have ready at least a two-week stock of water, food and supplies to bring to shelter. Ready.gov’s kit for radiation emergencies includes a spare change of clothes for each family member, a trash bag for contaminated clothing, and sealed food, water and medicine."
         },
         {
           "link": "c:fallout-shelter-kit",
@@ -60,7 +60,7 @@
         {
           "list": [
             "Water: How much water you need says to store at least 1 gallon (3.8 L) per person per day for 2 weeks. Store it where you will shelter, so nobody has to go out for it.",
-            "Food: sealed, non-perishable food, and a manual can opener (Ready.gov). Ready.gov says at least several days; New York State’s kit list says at least 7 days; this app plans on 2 weeks, as above.",
+            "Food: sealed, non-perishable food, and a manual can opener (Ready.gov). Ready.gov says at least several days; New York State’s kit list says at least 7 days; this app says at least 2 weeks, as above.",
             "Food and drinks that are sealed or were already inside can be used during sheltering (CDC)."
           ]
         },
@@ -189,7 +189,7 @@
       "used": "Several ways to receive alerts, community alerts and the FEMA App; battery-powered or hand-crank radio that keeps working when other communication fails; emergency kit with a spare change of clothes for each family member, a trash bag for contaminated clothing, and sealed food, water and medicine; family emergency communication plan, meeting place if you can’t meet at home, out-of-state contact; school, work and care-facility plans; soap and water or a wipe or clean wet cloth; no household cleaning wipes on skin; hand sanitizer does not protect against radioactive material"
     },
     {
-      "name": "Ready.gov (FEMA), Build A Kit page (ready.gov/kit; no title or date returned by the fetch)",
+      "name": "Ready.gov (FEMA), Build A Kit (ready.gov/kit; undated)",
       "used": "At least a several-day supply of non-perishable food; manual can opener; sleeping bag or warm blanket for each person"
     },
     {
@@ -218,9 +218,8 @@
     },
     {
       "name": "Where to shelter from fallout, How long to stay in, Living in a closed-up house, Fallout warning, How much water you need and Toilets when the water is off (other topics in this app)",
-      "used": "Shelter-spot rules; up to 2 weeks with no official word; no-flame warmth first and never burning in a sealed room; toilets and water so nobody has to go outside for them; battery CO alarms near where people sleep (CDC, CPSC); “Don’t go out to get family: stay where you are (CDC)” quoted word for word; 1 gallon (3.8 L) per person per day for 2 weeks"
+      "used": "Shelter-spot rules; “for as long as 2 weeks, and maybe longer (civil defence handbooks, 1968 and 1985, dated)” with no word from anyone; no-flame warmth first and never burning in a sealed room; toilets and water so nobody has to go outside for them; battery CO alarms near where people sleep (CDC, CPSC); “Don’t go out to get family: stay where you are (CDC)” quoted word for word; 1 gallon (3.8 L) per person per day for 2 weeks"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

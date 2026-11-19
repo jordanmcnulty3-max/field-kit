@@ -22,7 +22,7 @@
   "doFirst": [
     "Outside near it? Cover your nose and mouth with a cloth. Don’t touch anything thrown off by the explosion. Go quickly into a building whose walls and windows are not broken (CDC).",
     "Inside an undamaged building? Stay in. Shut windows and outside doors, and turn off fans, heating and air conditioning that bring in outside air (CDC).",
-    "Once inside, take off your outer layer of clothes and seal it in a plastic bag. Shower or wash with soap and water, and wash your hair (CDC).",
+    "Once inside, as Fallout warning says: “Carefully take off your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).” Put the cloth you covered your mouth with in the bag too (CDC).",
     "Listen to local radio or TV, or official accounts, for instructions (CDC).",
     "Children at school stay there. Don’t go to the school until officials say it is all right to travel (CDC)."
   ],
@@ -68,9 +68,9 @@
             "Cover your nose and mouth with a cloth, so you breathe in less radioactive dust or smoke (CDC).",
             "Don’t touch objects thrown off by the explosion: they might be radioactive (CDC).",
             "Go quickly into a building whose walls and windows are not broken (CDC).",
-            "Once inside, take off your outer layer of clothes and seal it in a plastic bag if you have one. Put the cloth you covered your mouth with in the bag too. Taking off outer clothes may get rid of up to 90% of the radioactive dust (CDC).",
+            "Once inside, clean off as Fallout warning says: “Carefully take off your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC).”",
+            "Put the cloth you covered your mouth with in the bag too. Taking off outer clothes may get rid of up to 90% of the radioactive dust (CDC).",
             "Put the bag where others won’t touch it, and keep it until officials say what to do with it (CDC).",
-            "Shower or wash with soap and water, and wash your hair (CDC).",
             "Listen to local radio or TV news, or official government social media accounts, for instructions (CDC)."
           ]
         }
@@ -84,7 +84,7 @@
             "If the building’s walls and windows are not broken or damaged, stay in and don’t leave (CDC).",
             "Shut all windows and outside doors. Turn off fans and heating and air-conditioning systems that bring in air from outside (CDC). Close fireplace dampers too (CDC), but only when no fire is burning: see Wood stoves and fireplaces.",
             "If the walls and windows are broken, go to an inside room and don’t leave. If the building is badly damaged, go quickly into a building whose walls and windows are not broken (CDC).",
-            "If you must go outside, cover your nose and mouth with a cloth. Coming back in, take off your outer layer of clothes, seal it in a plastic bag and store it where others won’t touch it. Then shower or wash, including your hair (CDC).",
+            "If you must go outside, cover your nose and mouth with a cloth. Coming back in, clean off as in the steps above, and store the bag where others won’t touch it (CDC).",
             "Listen to local radio or TV news, or official government social media accounts, for instructions (CDC)."
           ]
         },
@@ -123,7 +123,7 @@
       "blocks": [
         {
           "list": [
-            "The first actions are the same as for a nuclear explosion: get inside, stay inside, stay tuned for more instructions (FEMA planning guidance, CDC).",
+            "The first actions are very similar to those for a nuclear explosion: get inside, stay inside, stay tuned for more instructions (FEMA planning guidance, CDC).",
             "Officials may tell people to stay where they are or to leave the immediate area quickly (NRC). Follow what they say.",
             "Protection comes from less time near the radioactive material, more distance from it, and shielding from it, including from breathing it in (NRC)."
           ]
@@ -135,6 +135,13 @@
       "blocks": [
         {
           "p": "No source opened for this app gives a length of time for a dirty bomb. CDC says to stay in the building, or the car, until officials tell you that you can travel."
+        },
+        {
+          "warn": "This app’s own caution, not a source’s: if you don’t know whether it was a dirty bomb or a nuclear explosion, treat it as a nuclear explosion and follow Fallout warning and How long to stay in."
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
         }
       ]
     },
@@ -222,10 +229,9 @@
       "used": "Initial protective actions for a nuclear detonation and a dirty bomb are very similar: get inside, stay inside, stay tuned"
     },
     {
-      "name": "Wood stoves and fireplaces; Where to shelter from fallout (other topics in this app)",
-      "used": "A damper stays open while a fire burns; a car is not a shelter after a nuclear explosion"
+      "name": "Wood stoves and fireplaces, Where to shelter from fallout, Fallout warning and How long to stay in (other topics in this app)",
+      "used": "A damper stays open while a fire burns; a car is not a shelter after a nuclear explosion; the cleaning-off line quoted word for word from Fallout warning’s Do first (Ready.gov, CDC)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

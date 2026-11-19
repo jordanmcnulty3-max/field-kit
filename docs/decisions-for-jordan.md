@@ -1011,7 +1011,7 @@ Food at home pack (v7.5), batch C: numbers 140 to 149. Rulings are in docs/v7.5-
    or, for fruit outdoors, at least 85°F, humidity below 60 percent, several days, food-safe screens and a heat or freezer step against
    insect eggs; Penn State calls sun drying impractical in Pennsylvania's humidity. NCHFP's curing and smoking guidance cures meat in a
    refrigerator and is not a beginner's method. Today: the page states these requirements in the sources' words and gives no method;
-   it teaches only air-drying herbs (D149). Wild game stays at 165°F (Field dressing game). Cost: a household with a generator, or in
+   it teaches only air-drying herbs (D149). The page gives no temperature for drying game, because it gives no method (see D149 for the game-jerky conflict). Cost: a household with a generator, or in
    a dry spell, gets no drying method. Say if the group wants a dehydrator method (with USDA's heating step) added for households with
    power.
 148. **A baby who is not feeding well, with no health care provider (surv-food-babies-children). Medical professional.** CDC: "If you
@@ -1023,4 +1023,12 @@ Food at home pack (v7.5), batch C: numbers 140 to 149. Rulings are in docs/v7.5-
    seeds "need to be treated to destroy any insects or insect eggs by heating the herbs or seeds at 160°F (71°C) for 30 minutes or
    freezing at 0°F (-17°C) or lower at least 48 hours". NCHFP's herb page gives the same air-drying method without that step. Today:
    the page follows Penn State (the more cautious), gives the step, and says that without an oven or freezer the herbs have not had
-   it. Say if the group wants NCHFP's method without the step accepted for a long outage.
+   it, and adds, labelled as the app's own caution (fix round 2): herbs that have not had the insect step are not put into long
+   storage, are kept apart from other stored food, are looked over before each use, and are thrown out if insects, webbing or mold
+   show (neither source says anything on signs of insect damage in dried herbs; Penn State only says "Make sure herbs are completely
+   dry to prevent mold growth during storage"). Say if the group wants NCHFP's method without the step accepted for a long outage.
+   Also logged here (no number left in 140 to 149): **game jerky temperature (surv-food-preserving), a conflict with checked text.**
+   The National Center for Home Food Preservation's review, section 5.4.6 (Game): "USDA recommends attaining an internal temperature of
+   at least 170°F (CDC 1985)" for game jerky. The checked Field dressing game topic cooks all wild game to 165°F. Today: Preserving food
+   gives no temperature for drying game (it gives no method for drying meat at all) and Field dressing game is unchanged. Say which
+   figure the group wants if a game-drying method is ever added.

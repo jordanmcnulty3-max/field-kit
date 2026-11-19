@@ -10,13 +10,13 @@
     "sterilizing",
     "toddler food"
   ],
-  "summary": "Breastfeeding is the safest way to feed a baby in an emergency: keep going. Ready-to-feed formula is the safest formula. Powdered formula needs bottled, boiled or treated water and the exact amounts on the label; with no fridge, make it fresh for each feeding. Never water formula down or make your own. No cow’s milk or milk alternatives before 12 months. Children under 4 choke easily: cut food small, sit them up and watch them eat.",
+  "summary": "Breastfeeding is the safest way to feed a baby in an emergency: keep going. Ready-to-feed formula is the safest formula. Powdered formula needs bottled, boiled or treated water and the exact amounts on the label; with no fridge, make it fresh for each feeding. Never water formula down or make your own. Do not give your child honey before 12 months (CDC); no cow’s milk or milk alternatives before 12 months either. Children under 4 choke easily: cut food small, sit them up and watch them eat.",
   "doFirst": [
     "Breastfeeding? Keep going. In an emergency it is the safest way to feed a baby, and you can keep breastfeeding even when you feel stressed (CDC).",
     "Formula: use ready-to-feed if you have it; it needs no water (CDC). Powdered formula: mix it with bottled water; if you have none, boiled water, cooled; treated water only if you have neither (CDC). How to boil or treat water: Make water safe. After fallout, follow Water and food after fallout instead.",
     "Use the exact amounts of water and powder on the label. Too much or too little formula can make a baby sick. Never make homemade formula (CDC).",
     "No working fridge? Make fresh formula for every feeding, and throw out what is left after it (CDC).",
-    "Before 12 months: no cow’s milk, no milk alternatives, and nothing from the list in Before 12 months: never these (CDC).",
+    "Do not give your child honey before 12 months (CDC). Before 12 months, also no cow’s milk and no milk alternatives (CDC).",
     "Under 4 years old: cut food into pieces no larger than ½ inch (1.3 cm), sit the child upright and watch them eat (USDA, AAP). If a child chokes, use the Emergency protocols linked below."
   ],
   "sections": [
@@ -186,7 +186,7 @@
           ]
         },
         {
-          "p": "Sanitize them as well, at least once a day, if the baby is 2 months old or younger or is sick (CDC, FDA), was born early, has a weakened immune system, or is having medical treatment (FDA). FDA also says to sanitize feeding items before their first use:"
+          "p": "Sanitize them as well, at least once a day, if the baby is younger than 2 months (CDC) or 2 months or younger (FDA), is sick (CDC, FDA), was born early, has a weakened immune system, or is having medical treatment (FDA). FDA also says to sanitize feeding items before their first use:"
         },
         {
           "steps": [

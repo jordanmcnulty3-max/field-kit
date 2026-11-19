@@ -5717,3 +5717,19 @@ UConn Extension Cold Storage was found by search only (deferred). Draft removed 
   section heading and text; kept out of the summary for "salt", ruling 13).
 - Minor 9: "jerky" now finds Preserving food (keyword); "baby" unchanged (no food page in the first eight; left for the search task).
 - Minor 10: not fixed; see ruling 13.
+
+### Food pack batch C fix round 2 (2026-11-19), from the re-review in task-5-review.md
+
+- N1: preserving Do first 4 and summary rewritten: no safe way to dry meat with no working oven or dehydrator, no method given; thawing
+  meat checked in Is it still good?, then cooked and eaten by Cook without power, or thrown out (links added to "Drying meat"). The FSIS
+  figures stay only in the body warn (quotes as in fix round 1).
+- N2: the 165°F wild-game clause removed from "Drying meat"; "including game" added. NCHFP-CSS 5.4.6 "USDA recommends attaining an
+  internal temperature of at least 170°F (CDC 1985)." re-fetched by the writer and logged against Field dressing game's 165°F (D149;
+  no free number in 140 to 149).
+- N3: labelled app caution for herbs without the insect step (long storage, keep apart, look before use, throw out on insects, webbing
+  or mold). Penn State Drying Herbs and NCHFP Herbs, as fetched in fix round 1, say nothing on signs of insect damage; Penn State's mold
+  line is "Make sure herbs are completely dry to prevent mold growth during storage." D149.
+- Honey restored to babies Do first 5 and the summary in CDC-AVL's exact words: "Do not give your child honey before 12 months."
+- M-a: sanitizing line "younger than 2 months (CDC) or 2 months or younger (FDA), is sick (CDC, FDA)".
+- M-b: tender-leaf herbs "will mold if not dried quickly (NCHFP, Penn State)".
+- Search: ruling 13 rewritten from on-screen measurements (three builds; lists there).

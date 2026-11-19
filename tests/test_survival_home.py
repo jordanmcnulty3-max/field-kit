@@ -644,9 +644,9 @@ def test_the_six_checked_topics_differ_from_v73_release_by_one_added_link_block_
     extra = []
     now_sections = json.loads(json.dumps(now['sections']))
     assert len(now_sections) == len(was['sections']), tid
-    if tid in SEVEN:   # the food pack (v7.5) also adds one link block to three of the six: filtered out here, checked against v7.4 below
+    if tid in CHECKED_FOOD_LINKS:   # the food pack (v7.5) also adds one link block to four of the six: filtered out here, checked against v7.4 below
         for sn in now_sections:
-            sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != SEVEN[tid]]
+            sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != CHECKED_FOOD_LINKS[tid]]
     for sn, sw in zip(now_sections, was['sections']):
         assert sn['h'] == sw['h'], tid
         bn, bw = sn['blocks'], sw['blocks']
@@ -721,13 +721,13 @@ def _title_of(key):
     return _shipped(folder)[i]['title']
 
 
-SEVEN = {'surv-priorities': 's:surv-food-how-much', 'surv-stomach-illness-in-a-group': 's:surv-food-clean-kitchen',
+CHECKED_FOOD_LINKS = {'surv-priorities': 's:surv-food-how-much', 'surv-stomach-illness-in-a-group': 's:surv-food-clean-kitchen',
          'surv-generators': 's:surv-food-power-out', 'surv-fallout-water-and-food': 's:surv-food-still-good',
          'surv-fallout-get-ready': 's:surv-food-how-much', 'surv-water-store': 's:surv-food-how-much',
-         'surv-heat-out': 's:surv-food-power-out'}
+         'surv-heat-out': 's:surv-food-power-out', 'surv-carbon-monoxide': 's:surv-food-cooking-no-power'}
 
 
-def test_every_link_in_the_food_pages_and_the_seven_checked_topics_resolves_and_is_labelled_with_the_title():
+def test_every_link_in_the_food_pages_and_the_checked_topics_resolves_and_is_labelled_with_the_title():
     topics = _shipped('survival')
     known = _known_keys()
     assert 'u:food' not in known and 'p:botulism' not in known   # ruled out in this release: no food planner, no botulism protocol
@@ -740,7 +740,7 @@ def test_every_link_in_the_food_pages_and_the_seven_checked_topics_resolves_and_
                     assert b['link'] in known, f'{tid}: unknown link {b["link"]}'
                     if b['link'][:2] in ('p:', 's:', 'u:', 'c:'):
                         assert b['label'] == _title_of(b['link']), f'{tid}: label {b["label"]!r} for {b["link"]}'
-    for tid, target in SEVEN.items():
+    for tid, target in CHECKED_FOOD_LINKS.items():
         for k in _links(topics[tid]):
             assert k in known, f'{tid}: unknown link {k}'
         added = [b for sec in topics[tid]['sections'] for b in sec['blocks'] if b.get('link') == target]
@@ -799,8 +799,8 @@ def _v74_text(name):
     return json.loads(r.stdout)
 
 
-@pytest.mark.parametrize('tid,target', sorted(SEVEN.items()))
-def test_the_seven_checked_topics_differ_from_v74_release_by_one_added_link_block(tid, target):
+@pytest.mark.parametrize('tid,target', sorted(CHECKED_FOOD_LINKS.items()))
+def test_the_checked_topics_differ_from_v74_release_by_one_added_link_block(tid, target):
     now, was = _shipped('survival')[tid], _v74_text(tid)
     extra = []
     now_sections = json.loads(json.dumps(now['sections']))

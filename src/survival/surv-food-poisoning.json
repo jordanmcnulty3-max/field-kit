@@ -20,7 +20,7 @@
     "Double vision, blurred vision, drooping eyelids, slurred speech, trouble swallowing, trouble breathing, trouble moving the eyes or muscle weakness? It can be botulism. Botulism is a medical emergency: see a doctor or go to the emergency room now. Do not wait (CDC).",
     "A baby who is sluggish and “floppy”, constipated, feeds poorly, has drooping eyelids, pupils slow to react to light, a weak cry or less expression than usual can have botulism too (CDC, New York State Department of Health). Get them to a doctor now.",
     "Throw away food that might be contaminated, and never taste it (CDC). A suspect can or jar that is still sealed: bag it unopened. Leaking or open: make it harmless first, as in Getting rid of a suspect can or jar (National Center for Home Food Preservation).",
-    "Never give honey to a baby under 1 year (New York State Department of Health)."
+    "Never feed honey to a baby under 1 year of age (New York State Department of Health)."
   ],
   "sections": [
     {
@@ -30,7 +30,7 @@
           "p": "The most common signs are diarrhea, stomach pain or cramps, nausea, vomiting and fever (CDC). Some germs make you sick within a few hours of eating; others take a few days (CDC)."
         },
         {
-          "p": "If you have diarrhea or vomiting, drink plenty of fluids so you don’t get dehydrated (CDC). How to care for someone, what to give them to drink, and the danger signs that mean they need medical help are in the protocols."
+          "p": "If you have diarrhea or vomiting, keep drinking so you don’t get dehydrated (CDC), in small, frequent sips (Dehydration protocol). How to care for someone, what to give them to drink, and the danger signs that mean they need medical help are in the protocols."
         },
         {
           "link": "p:vomiting-diarrhea",
@@ -163,6 +163,13 @@
             "Let it cool, then put the containers, lids and food in the trash (National Center for Home Food Preservation).",
             "Throw away the gloves when you are done (National Center for Home Food Preservation)."
           ]
+        },
+        {
+          "p": "What you can heat the pot on with the power out is in Cook without power."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
         },
         {
           "p": "A spill from a suspect can or jar, and anything it touched (work surfaces, equipment, can openers, clothing): the National Center for Home Food Preservation’s clean-up, in its own words and order:"

@@ -71,7 +71,7 @@
             "Keep storage areas clean, and clean up crumbs and spilled food right away (University of Minnesota Extension).",
             "Check stored food for insects, rodents and water damage every six months (Oregon State University Extension).",
             "Found food with insects in it? Throw it away. Then check all the other food they could get into: there may be more than one infested source (University of Minnesota Extension).",
-            "Older food you are not sure about: freezing it at 0°F (-18°C) for at least four days kills any eggs or insects (University of Minnesota Extension; University of Alaska Fairbanks Extension gives the temperature in °F).",
+            "Older food with no insects seen, that you are not sure about: freezing it at 0°F (-18°C) for at least four days kills any eggs or insects (University of Minnesota Extension; University of Alaska Fairbanks Extension gives the temperature in °F).",
             "Washing shelves with bleach, ammonia or detergent will not keep pantry insects from coming back, and the chemicals could be dangerous if they touch food (University of Minnesota Extension)."
           ]
         },
@@ -231,7 +231,7 @@
           "list": [
             "Keep all food at 0°F (-18°C) or lower. Food kept constantly at 0°F is always safe; only its quality suffers with long storage, so freezer storage times are for quality only (USDA).",
             "Keep an appliance thermometer in the freezer to check the temperature (USDA).",
-            "Wrap food well, and overwrap packages for long storage, to prevent freezer burn. Freezer burn does not make food unsafe, only dry in spots: cut those parts away before or after cooking (USDA).",
+            "Wrap food well, and overwrap packages for long storage, to prevent freezer burn. Freezer burn does not make food unsafe, only dry in spots: cut those parts away before or after cooking (USDA). It looks like grayish-brown, leathery spots where air touched the food (USDA). This app’s reading: that is for food kept frozen; any other unusual smell, color or texture, or food that thawed in a power cut, goes by Is it still good?",
             "Don’t freeze canned food or eggs in their shells (USDA)."
           ]
         },
@@ -245,6 +245,10 @@
         {
           "link": "s:surv-food-preserving",
           "label": "Preserving food"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
         }
       ]
     },
@@ -285,7 +289,7 @@
     },
     {
       "name": "USDA Food Safety and Inspection Service, Freezing and Food Safety (undated)",
-      "used": "Store food at 0°F or lower; food stored constantly at 0°F is always safe; storage times are for quality only; appliance thermometer; packaging and overwrapping; freezer burn; don’t freeze canned food or shell eggs"
+      "used": "Store food at 0°F or lower; food stored constantly at 0°F is always safe; storage times are for quality only; appliance thermometer; packaging and overwrapping; freezer burn (not unsafe, dry spots, cut away; grayish-brown leathery spots from air on the food); don’t freeze canned food or shell eggs"
     },
     {
       "name": "FEMA, American Red Cross and USDA, Food and Water in an Emergency (older booklet; 1994 edition and later reprints)",

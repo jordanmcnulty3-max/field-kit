@@ -87,7 +87,7 @@
         },
         {
           "list": [
-            "If some of your food needs cooking, keep some that is ready to eat too (University of Georgia Extension). Canned food is already cooked and can be eaten right out of the can (University of Georgia Extension; FEMA, Red Cross and USDA booklet).",
+            "If some of your food needs cooking, keep some that is ready to eat too (University of Georgia Extension). Store-bought canned food is already cooked and can be eaten right out of the can (University of Georgia Extension; FEMA, Red Cross and USDA booklet; Ready.gov).",
             "Don’t buy large or institutional-size containers to save money if you won’t be able to store the leftovers properly (University of Georgia Extension). How long opened food may sit out is in Is it still good?",
             "Keep a manual can opener (Ready.gov).",
             "Work out how much extra fuel you need to cook for 2 to 4 weeks (Oregon State University Extension). Where and how to cook safely is in Cook without power."
@@ -136,7 +136,7 @@
         {
           "list": [
             "Babies, toddlers and older people, and anyone with a special diet or allergies, need particular attention (FEMA, Red Cross and USDA booklet).",
-            "If you have a baby, stock infant formula, bottles and baby food (Ready.gov Build A Kit, American Red Cross). Never buy or use formula after its Use-By date (USDA).",
+            "If you have a baby, stock infant formula, bottles and baby food (Ready.gov Build A Kit, American Red Cross). Never buy or use infant formula after its Use-By date (USDA).",
             "Stock foods your children already eat: a disaster is not the time to surprise young children with new foods (Oregon State University Extension).",
             "Food for special diets, allergies or medical needs (University of Illinois Extension). Canned dietetic foods, juices and soups may help people who are ill or older (FEMA, Red Cross and USDA booklet)."
           ]
@@ -354,7 +354,7 @@
   "sources": [
     {
       "name": "Ready.gov (FEMA), Food (last updated March 30, 2022)",
-      "used": "At least a several-day supply of non-perishable food; choose foods your family will eat; special dietary needs; suggested items (ready-to-eat canned meats, fruits, vegetables and a can opener; protein or fruit bars; dry cereal or granola; peanut butter; dried fruit; canned juices; non-perishable pasteurized milk; high-energy foods; food for infants; comfort/stress foods)"
+      "used": "At least a several-day supply of non-perishable food; choose foods your family will eat; special dietary needs; suggested items (ready-to-eat canned meats, fruits, vegetables and a can opener; protein or fruit bars; dry cereal or granola; peanut butter; dried fruit; canned juices; non-perishable pasteurized milk; high-energy foods; food for infants; comfort/stress foods); commercially canned food may be eaten out of the can without warming"
     },
     {
       "name": "Ready.gov (FEMA), Build A Kit (undated)",

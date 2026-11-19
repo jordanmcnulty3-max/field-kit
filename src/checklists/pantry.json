@@ -52,7 +52,7 @@
     },
     {
       "id": "baby",
-      "text": "Baby supplies: formula, bottles and baby food, if you have a baby",
+      "text": "Baby supplies: ready-to-feed formula, bottles and baby food, if you have a baby",
       "note": "Never buy or use infant formula after its Use-By date."
     },
     {
@@ -110,7 +110,7 @@
   "sources": [
     {
       "name": "Ready.gov (FEMA), Food (last updated March 30, 2022)",
-      "used": "Choose foods your family will eat; ready-to-eat canned meats, fruits, vegetables and a can opener; protein or fruit bars; dry cereal or granola; peanut butter; dried fruit; canned juices; non-perishable pasteurized milk; high-energy foods; food for infants; comfort/stress foods; charcoal grills and camp stoves are for outdoor use only"
+      "used": "Choose foods your family will eat; ready-to-eat canned meats, fruits, vegetables and a can opener; protein or fruit bars; dry cereal or granola; peanut butter; dried fruit; canned juices; non-perishable pasteurized milk; high-energy foods; food for infants; use ready-to-feed formula; comfort/stress foods; charcoal grills and camp stoves are for outdoor use only"
     },
     {
       "name": "Ready.gov (FEMA), Build A Kit (undated)",

@@ -865,8 +865,8 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
 
 Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in docs/v7.5-rulings.md.
 
-117. **Cooking indoors on a gas or propane range, or on a vented wood stove or fireplace (surv-food-cooking-no-power). Your
-   decision.** The checked topics forbid heating the house with a gas oven or range, and quote CDC: "Don't cook or burn anything
+117. **Cooking indoors on a gas or propane range, or on a vented wood stove or fireplace (surv-food-cooking-no-power). Decided
+   by Jordan on 2026-11-19: allowed on the makers' conditions.** The checked topics forbid heating the house with a gas oven or range, and quote CDC: "Don't cook or burn anything
    on a stove or fireplace that isn't vented." EPA's outage page says "Unvented combustion appliances should not be used to cook
    indoors, or for any other indoor use", allows vented appliances only "if the vent does not require power to operate", and names
    only "a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking". A kitchen
@@ -883,10 +883,11 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    model's manual allows lighting by hand. To allow it, the app's own labelled reading narrows a checked CDC line and an EPA line
    by interpretation, on the strength of four manufacturers' manuals: it says the two lines do not name a kitchen range (CDC lists
    "stoves" and "gas ranges" separately) and do not rule out a range's surface burners used only as the makers allow, and, in its
-   own words: "If you are unsure, don’t use it: cook outdoors or eat food cold." This is your decision. If you say no, the range permission is
-   removed, and the topic says flame cooking is done outdoors or on a vented fireplace or wood stove set up for cooking, and food
-   is otherwise eaten cold. A vented fireplace or wood stove set up for cooking is allowed either way, under EPA's conditions and
-   every rule in Wood stoves and fireplaces. (The controller is asking you now; the text may change again.)
+   own words: "If you are unsure, don’t use it: cook outdoors or eat food cold." Decided by Jordan on 2026-11-19: cooking on a gas
+   or propane kitchen range during a power cut is allowed on the makers' conditions (surface burners only; only if the model's
+   manual allows lighting by hand; watched the whole time; never to heat the room), labelled in the topic as this app's own reading
+   of the CDC and EPA lines. The topic already said this; its range Do first line now carries the label too. A vented fireplace or
+   wood stove set up for cooking is allowed under EPA's conditions and every rule in Wood stoves and fireplaces.
 118. **Candle warmers, chafing dishes and fondue pots (surv-food-cooking-no-power).** Ready.gov lists them, with a fireplace,
    as alternative cooking sources in an emergency. They burn fuel in the room, and no opened source says how to use them indoors
    without carbon monoxide building up. Today: labelled app caution, don't use them while the power is out. Say if the group
@@ -1079,7 +1080,7 @@ Food at home pack (v7.5), batch C: numbers 140 to 149. Rulings are in docs/v7.5-
    or, for fruit outdoors, at least 85°F, humidity below 60 percent, several days, food-safe screens and a heat or freezer step against
    insect eggs; Penn State calls sun drying impractical in Pennsylvania's humidity. NCHFP's curing and smoking guidance cures meat in a
    refrigerator and is not a beginner's method. Today: the page states these requirements in the sources' words and gives no method;
-   it teaches only air-drying herbs (D149). The page gives no temperature for drying game, because it gives no method (see D149 for the game-jerky conflict). Cost: a household with a generator, or in
+   it teaches only air-drying herbs (D149). The page gives no temperature or method for drying game (see D149 for what it says about game). Cost: a household with a generator, or in
    a dry spell, gets no drying method. Say if the group wants a dehydrator method (with USDA's heating step) added for households with
    power.
 148. **A baby who is not feeding well, with no health care provider (surv-food-babies-children). Medical professional.** CDC: "If you
@@ -1097,6 +1098,32 @@ Food at home pack (v7.5), batch C: numbers 140 to 149. Rulings are in docs/v7.5-
    dry to prevent mold growth during storage"). Say if the group wants NCHFP's method without the step accepted for a long outage.
    Also logged here (no number left in 140 to 149): **game jerky temperature (surv-food-preserving), a conflict with checked text.**
    The National Center for Home Food Preservation's review, section 5.4.6 (Game): "USDA recommends attaining an internal temperature of
-   at least 170°F (CDC 1985)" for game jerky. The checked Field dressing game topic cooks all wild game to 165°F. Today: Preserving food
-   gives no temperature for drying game (it gives no method for drying meat at all) and Field dressing game is unchanged. Say which
-   figure the group wants if a game-drying method is ever added.
+   at least 170°F (CDC 1985)" for game (section 5.4.6, Game; the sentence is about game meat, not jerky alone). The checked Field dressing
+   game topic cooks all wild game to 165°F. Today (corrected in the whole-pack fixes): Preserving food's "Drying meat" warn carries
+   USDA's jerky figures, heat meat to 160°F and poultry to 165°F before dehydrating. The next line says USDA's jerky page gives jerky
+   from venison or other wild game an answer of its own (USDA FSIS, Jerky and Food Safety: "there are other special considerations when
+   making homemade jerky from venison or other wild game"), then, labelled as this app's reading, that the USDA figures are not for
+   wild game; that the page gives no temperature for drying game; and that Cook without power cooks all wild game and wild birds to at
+   least 165°F (73.9°C) in the thickest part (its table row, which is Field dressing game's rule). The page gives no method for drying
+   meat, including game. Field dressing game is unchanged and is not linked from the food pages until v7.6 (docs/v7.5-rulings.md).
+   Say which figure the group wants if a game-drying method is ever added.
+
+Food at home pack (v7.5), whole-pack read fixes: numbers from 150.
+
+150. **Mold, freezer burn and CDC's "unusual smell, color or texture" line (surv-food-still-good, surv-food-storage).** CDC (Keep
+   Food Safe After a Disaster or Emergency): throw out food with an unusual smell, color or texture. USDA FSIS (Molds on Food: Are
+   They Dangerous?) lets some foods with a spot of mold be used after scrubbing or cutting (hard salami and dry-cured country hams,
+   hard cheese, firm fruits and vegetables); its page says nothing about power cuts or flood water, and its only general rule is "If
+   food is covered with mold, discard it." USDA FSIS (Freezing and Food Safety): "Freezer burn does not make food unsafe, merely dry
+   in spots"; "It appears as grayish-brown leathery spots"; "Cut freezer-burned portions away either before or after cooking the
+   food." No source opened says how the CDC line and these two USDA pages fit together. Today, labelled as this app's reading: the
+   mold table is only for food that has stayed cold, has not touched flood water and shows no other unusual smell, color or texture,
+   and anything else goes by the rest of Is it still good?; freezer burn as USDA describes it is for food kept frozen, and any other
+   unusual smell, color or texture, or food that thawed in a power cut, goes by Is it still good? Cost if wrong: food USDA would let
+   you keep is thrown out after an outage. Say if the group wants USDA's mold table and freezer-burn rule to apply after a power cut.
+151. **An opened can or jar with no working fridge (surv-food-still-good).** CDC: "Refrigerate any canned or pickled food after you
+   open it." No source opened says what to do when there is no working fridge. Today, labelled as this app's reading: treat an
+   opened can or jar as perishable food left out, under CDC's line on the same page, "never leave perishable food out for more than
+   2 hours, or 1 hour if it is above 90°F (32°C)". FoodSafety.gov's fridge chart (on the same page) keeps opened canned fruit,
+   pickles and similar foods after more than 2 hours above 40°F, so this reading is more cautious than that chart for those foods.
+   Cost if wrong: opened food that could have been kept is thrown out. Say if the group wants the chart used instead.

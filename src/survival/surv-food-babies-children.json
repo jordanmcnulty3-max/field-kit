@@ -9,7 +9,7 @@
     "sterilizing",
     "toddler"
   ],
-  "summary": "Breastfeeding is the safest way to feed a baby in an emergency: keep going. Ready-to-feed formula is the safest formula. Powdered formula needs bottled, boiled or treated water and the exact amounts on the label; with no fridge, make it fresh for each feeding. Never water formula down or make your own. Do not give your child honey before 12 months (CDC); no cow’s milk or milk alternatives before 12 months either. Children under 4 choke easily: cut food small, sit them up and watch them eat.",
+  "summary": "Breastfeeding is the safest way to feed a baby in an emergency: keep going. Ready-to-feed formula is the safest formula. Powdered formula needs bottled water, or boiled water, and treated water only if you have neither. Use the exact amounts on the label; with no fridge, make it fresh for each feeding. Never water formula down or make your own. Do not give your child honey before 12 months (CDC); no cow’s milk or milk alternatives before 12 months either. Children under 4 choke easily: cut food small, sit them up and watch them eat.",
   "doFirst": [
     "Breastfeeding? Keep going. In an emergency it is the safest way to feed a baby, and you can keep breastfeeding even when you feel stressed (CDC).",
     "Formula: use ready-to-feed if you have it; it needs no water (CDC). Powdered formula: mix it with bottled water; if you have none, boiled water, cooled; treated water only if you have neither (CDC). How to boil or treat water: Make water safe. After fallout, follow Water and food after fallout instead.",
@@ -169,7 +169,7 @@
         },
         {
           "list": [
-            "Use safe water that has not been used for anything else. Bottled water is safest; otherwise water made safe by boiling, bleach or filtering (CDC; Make water safe).",
+            "Use safe water that has not been used for anything else. Bottled water is safest. Without it, CDC says water with germs in it can be made safe by boiling, adding bleach or filtering. How to do each is in Make water safe, which says: “Filters: portable filters do not remove viruses. After filtering, add a chemical disinfectant such as chlorine, iodine or chlorine dioxide.”",
             "Water with chemicals, toxins or radioactive material can’t be made safe by boiling or bleach (CDC).",
             "No safe water and soap for cleaning? Use disposable cups and supplies (CDC).",
             "Keep a wash basin and scrub brush only for feeding items (CDC). Never clean feeding items near where you change diapers (CDC).",
@@ -264,6 +264,10 @@
         {
           "link": "s:surv-food-when-short",
           "label": "Rationing food"
+        },
+        {
+          "link": "s:surv-food-how-much",
+          "label": "How much food to store, and what"
         }
       ]
     },
@@ -450,7 +454,7 @@
     },
     {
       "name": "Food poisoning and botulism, Stomach illness in a group, Make water safe, How much water you need, Water and food after fallout, Is it still good?, Food when the power goes out, Cook without power, Stay warm when the heat is out (other topics in this app); the Choking, Severe vomiting or diarrhea and Dehydration protocols",
-      "used": "The honey warning quoted word for word; who prepares food and cares for others when sick; boiling and treating water; nursing mothers and children need more water; fallout feeding rules; the opened-formula row; fridge and freezer times; what to heat water on; babies in a cold house; choking care; a breastfed baby keeps breastfeeding"
+      "used": "The honey warning quoted word for word; who prepares food and cares for others when sick; boiling and treating water, and Make water safe’s filter line quoted word for word; nursing mothers and children need more water; fallout feeding rules; the opened-formula row; fridge and freezer times; what to heat water on; babies in a cold house; choking care; a breastfed baby keeps breastfeeding"
     }
   ],
   "reviewed": "2026-11-19"

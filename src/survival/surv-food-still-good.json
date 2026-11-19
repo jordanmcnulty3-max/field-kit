@@ -292,6 +292,17 @@
           ]
         },
         {
+          "p": "Power still out? Keeping the freezer cold, with the door shut and with ice, is in Food when the power goes out. Cooking food that can still be cooked is in Cook without power."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
           "p": "FoodSafety.gov’s freezer chart, for food that still has ice crystals and feels as cold as if it were in the fridge. Some of it still goes. Use it as a general guide (FoodSafety.gov). Thawed food is thrown out, as above, even where FoodSafety.gov’s chart would let you refreeze it: New York State Department of Health and CDC say to throw it out, and this app follows the more cautious rule."
         },
         {
@@ -393,7 +404,7 @@
           "warn": "Don’t sniff moldy food: it can cause breathing trouble. If food is covered with mold, throw it out (USDA)."
         },
         {
-          "p": "USDA’s guide for a spot of mold."
+          "p": "USDA’s guide for a spot of mold. USDA’s mold page says nothing about power cuts or flood water. This app’s reading: the table is only for food that has stayed cold, has not touched flood water and shows no other unusual smell, color or texture; anything else goes by the rest of this page."
         },
         {
           "table": {
@@ -520,10 +531,14 @@
           ]
         },
         {
-          "p": "Below 1,000 feet (300 m), boil them for 10 minutes. Add 1 minute for each 1,000 feet (300 m) higher up (CDC)."
+          "p": "Below 1,000 feet (300 m), boil them for 10 minutes. Add 1 minute for each 1,000 feet (300 m) higher up (CDC). What you can heat the pot on with the power out is in Cook without power."
         },
         {
-          "p": "Any of the signs under Cans and jars means throw it out, boiled or not (CDC). Refrigerate any canned or pickled food after you open it (CDC)."
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
+          "p": "Any of the signs under Cans and jars means throw it out, boiled or not (CDC). Refrigerate any canned or pickled food after you open it (CDC). This app’s reading: with no working fridge, treat an opened can or jar as perishable food left out: “never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).”"
         },
         {
           "link": "s:surv-food-preserving",
@@ -563,6 +578,13 @@
             "Re-label each can or pouch with a marker, including the expiration date (CDC, USDA).",
             "Use them as soon as you can (CDC, USDA)."
           ]
+        },
+        {
+          "p": "What you can heat the pot on with the power out is in Cook without power."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
         },
         {
           "p": "Pans, dishes, utensils and counters that flood water touched (USDA):"

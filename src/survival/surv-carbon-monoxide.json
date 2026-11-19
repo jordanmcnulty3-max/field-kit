@@ -75,6 +75,10 @@
           "label": "Wood stoves and fireplaces"
         },
         {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        },
+        {
           "link": "s:surv-winter-storms",
           "label": "Winter storms"
         },

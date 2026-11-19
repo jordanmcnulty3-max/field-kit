@@ -6189,3 +6189,91 @@ half-full one's 35% to 55%; cans: the four signs in the list's order, title abov
   fail); every shape in the cans figure belongs to one of the four sign drawings apart from the dashed dividers (no can or jar
   without a sign); the full botulism lines and the pointer are drawn, in order, below the panels, and are in the alt text;
   the caption carries the pointer sentence; the fridge page name stands on its own bold line.
+
+## Food pack whole-pack read fixes (2026-11-19), from task-9-wholepack.md
+
+Decision recorded: Jordan decided on 2026-11-19 (D117) that cooking on a gas or propane kitchen range during a power cut is allowed on
+the makers' conditions (surface burners only, the model's manual allows hand lighting, watched, never for heat), labelled as this app's
+own reading of the CDC and EPA lines. surv-food-cooking-no-power already said this; its range Do first line now carries the label
+("this app’s reading of CDC and EPA, below"). docs/decisions-for-jordan.md D117 and docs/v7.5-rulings.md "Indoor cooking" updated.
+
+Opened in this round with built-in search and fetch (each URL returned by a search; title checked after each fetch). No Firecrawl, no
+Bright Data. Fetches return quotes capped at about 125 characters; long sentences were read as consecutive pieces.
+- READY-F: Ready.gov, Food, "Last Updated: 03/30/2022". https://www.ready.gov/food. "Commercially canned food may be eaten out of the
+  can without warming." "Use ready-to-feed formula." "If you must mix infant formula use bottled water or boiled water as a last resort."
+- FSIS-JERKY: USDA FSIS, Jerky and Food Safety (no date shown). https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/meat-fish/jerky
+  (opened twice). "The U.S. Department of Agriculture (USDA) Meat and Poultry Hotline's current recommendation for making jerky safely"
+  / "is to heat meat to 160°F and poultry to 165°F before the dehydrating process." "This step assures that any bacteria present will
+  be destroyed by wet heat." "But most dehydrator instructions do not include this step, and a dehydrator may not reach temperatures
+  high enough" / "to heat meat to 160°F or 165°F." "Sun drying is not recommended for making meat jerky due to a lack of a steady heat
+  source". "Yes, there are other special considerations when making homemade jerky from venison or other wild game." (then Keene et
+  al.: venison "can be heavily contaminated with fecal bacteria"; deer carcasses "typically held at ambient temperatures").
+- NCHFP-CSS: National Center for Home Food Preservation, Cure Smoke Review Safety, section 5.4.6 (Game).
+  https://nchfp.uga.edu/publications/nchfp-publications/literature-reviews/cure-smoke-review-safety/ "Several outbreaks of E. coli
+  O157:H7 have occurred in venison jerky (USDA FSIS 1998)." "USDA recommends attaining an internal temperature of at least 170°F (CDC
+  1985)." (about game meat; no heating or drying step for game jerky is given).
+- FSIS-MOLD: USDA FSIS, Molds on Food: Are They Dangerous? https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/molds-food-are-they-dangerous
+  "If food is covered with mold, discard it." "Don't sniff the moldy item." Table rows as in the topic (hard salami and dry-cured
+  country hams "Use. Scrub mold off surface."; hard cheese and firm fruits and vegetables "Use. Cut off at least 1 inch around and below
+  the mold spot"). The page has no line on power outages, floods or "if in doubt".
+- FSIS-FRZ: USDA FSIS, Freezing and Food Safety (English page at https://www.fsis.usda.gov/es/node/3304; the English address
+  https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/freezing-and-food-safety returned a client
+  error). "Freezer burn does not make food unsafe, merely dry in spots." "It appears as grayish-brown leathery spots and is caused by
+  air coming in contact with the surface of the food." "Cut freezer-burned portions away either before or after cooking the food."
+- CDC-CLN: CDC, How to Clean Infant Feeding Items During Emergencies, January 8, 2025.
+  https://cdc.gov/infant-feeding-emergencies-toolkit/php/how-to-clean-infant-feeding-items-during-emergencies.html "Use water that has
+  not been used for anything else." "In most emergencies, bottled water is safest for cleaning." "If bottled water is not available,
+  water contaminated with germs can be made safe by boiling, adding bleach, or filtering." "Do not use water contaminated with harmful
+  chemicals, toxins, or radioactive material." "It cannot be made safe by boiling or adding bleach."
+- WOLF: Sub-Zero/Wolf, "Light Gas Burners Without Power | FAQ". https://www.subzero-wolf.com/assistance/answers/light-gas-burners-without-power
+  "Do not attempt to manually light ovens, griddles, French tops, and charbroilers without power, as they are higher output."
+- KA: KitchenAid, Will a Gas Stove Work Without Electricity? https://www.kitchenaid.com/pinch-of-help/major-appliances/will-gas-stove-work-without-electricity.html
+  "Most gas ovens require electricity to ignite and operate, so they will not work during an outage."
+- WP: Whirlpool, Will a Gas Stove Work in a Power Outage? https://www.whirlpool.com/blog/kitchen/will-a-gas-stove-work-in-power-outage.html
+  "Unlike a gas stove top, it's typically not possible to manually light a gas oven."
+
+Changes, by finding (old sentence -> new; the full list with fields is in the fix report):
+- C1: surv-food-how-much "What kinds of food": "Store-bought canned food is already cooked and can be eaten right out of the can
+  (University of Georgia Extension; FEMA, Red Cross and USDA booklet; Ready.gov)." Qualifier from READY-F "Commercially canned food".
+  Ready.gov's source line adds the sentence. surv-food-when-short "Water comes first": "store-bought canned foods with a lot of liquid"
+  (the booklet's list is store stock; the qualifier narrows it). Every other "canned" line in the pack names store items ("ready-to-eat
+  canned", "canned dietetic foods", chart rows) or home-canned food with its boiling rule; none was changed.
+- I4: surv-food-preserving Do first 4: "Don’t try to dry meat to save it: this page gives no method. A dehydrator may not get meat as
+  hot as USDA advises, and sun drying is not recommended for meat jerky (USDA). Thawing meat: ..." (FSIS-JERKY: heat meat to 160°F
+  before dehydrating; a dehydrator may not reach temperatures high enough to heat meat to 160°F; sun drying not recommended). Summary:
+  the oven-or-dehydrator clause removed ("This page gives no method for ... drying meat" stays; "Thawing meat is cooked and eaten, or
+  thrown out, by Is it still good? and Cook without power."). "Drying meat": "Without a working oven or dehydrator there is no way here
+  to dry meat safely." removed. Two earlier wordings were dropped for search (docs/v7.5-rulings.md, whole-pack fixes 5).
+- I5: surv-food-preserving "Drying meat", after the venison line: "USDA’s jerky page gives jerky from venison or other wild game an
+  answer of its own. This app’s reading: the USDA figures above are not for wild game. This page gives no temperature for drying game.
+  Cook without power cooks all wild game and wild birds to at least 165°F (73.9°C) in the thickest part." (FSIS-JERKY "Yes, there are
+  other special considerations when making homemade jerky from venison or other wild game."; Cook without power's table row "All wild
+  game and wild birds, in the thickest part | 165°F (73.9°C)"). D149 corrected. NCHFP-CSS's 170°F stays logged, not used.
+- I6: surv-food-still-good "Mold": "USDA’s mold page says nothing about power cuts or flood water. This app’s reading: the table is
+  only for food that has stayed cold, has not touched flood water and shows no other unusual smell, color or texture; anything else goes
+  by the rest of this page." (FSIS-MOLD). surv-food-storage "In the freezer": "It looks like grayish-brown, leathery spots where air
+  touched the food (USDA). This app’s reading: that is for food kept frozen; any other unusual smell, color or texture, or food that
+  thawed in a power cut, goes by Is it still good?" (FSIS-FRZ), and a link to Is it still good? D150.
+- I7: surv-food-babies-children "Cleaning bottles and feeding items": "Bottled water is safest. Without it, CDC says water with germs
+  in it can be made safe by boiling, adding bleach or filtering. How to do each is in Make water safe, which says: “Filters: portable
+  filters do not remove viruses. After filtering, add a chemical disinfectant such as chlorine, iodine or chlorine dioxide.”" (CDC-CLN;
+  Make water safe quoted word for word, not reworded).
+- I8: Pantry "Baby supplies: ready-to-feed formula, bottles and baby food, if you have a baby" (READY-F "Use ready-to-feed formula.",
+  added to the Pantry's Ready.gov source line). No quantity.
+- I9, I10: link blocks to Cook without power after the home-canned boil, the flood-can boil (Is it still good?) and the suspect-jar
+  boil (Food poisoning and botulism), each after "What you can heat the pot on with the power out is in Cook without power." (the
+  babies page's pointer, word for word). Is it still good? "Freezer food": "Power still out? Keeping the freezer cold, with the door
+  shut and with ice, is in Food when the power goes out. Cooking food that can still be cooked is in Cook without power." with links to
+  both (pointers only; the hub already carries the ice lines).
+- I2: surv-carbon-monoxide gains its one link block, Cook without power, in "Never indoors". I3: keywords "gas range", "kitchen range"
+  (docs/v7.5-rulings.md, whole-pack fixes 1).
+- M1: Food poisoning Do first 5 quotes the babies warn: "Never feed honey to a baby under 1 year of age (New York State Department of
+  Health)." M2: How much food: "Never buy or use infant formula after its Use-By date (USDA)." (Storing food's warn, word for word).
+  M3: Food poisoning: "If you have diarrhea or vomiting, keep drinking so you don’t get dehydrated (CDC), in small, frequent sips
+  (Dehydration protocol)." (Dehydration step: "Give small, frequent sips"). M4: see the decision above. M5: "Never the oven: most can’t
+  be lit by hand in an outage (GE, Whirlpool, KitchenAid), and Wolf says not to try." (KA, WP, WOLF). M6: babies summary "Powdered
+  formula needs bottled water, or boiled water, and treated water only if you have neither." (its Do first 2). M7: Is it still good?
+  "Home-canned food", labelled app reading quoting the page's own CDC 2-hour line (D151). M11: Cook without power "During a fallout
+  warning" adds the page's own Ready.gov line. M12: Storing food "Older food with no insects seen, that you are not sure about". M13:
+  Preserving "Home-canned food from someone else" quotes the canning section's CDC line. M14: babies "From 12 months" links How much
+  food to store, and what.

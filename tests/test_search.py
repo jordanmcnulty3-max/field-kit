@@ -997,6 +997,9 @@ V75_ACCEPTED_WEAK = {
     'thawed': ['s:surv-food-still-good', 's:surv-unheated-house', 's:surv-food-babies-children'],
     'smelling': ['s:surv-food-still-good', 's:surv-store-fuel', 'p:dehydration'],
     'swallowing': ['s:surv-food-poisoning', 'p:low-blood-sugar', 'p:poison-plants'],
+    # whole-pack fixes (docs/v7.5-rulings.md): the keyword "gas range" on Cook without power takes Stay warm when the heat is out,
+    # matched here by body text only, out of the first three
+    'range': ['a:ballistics', 's:surv-food-cooking-no-power', 's:surv-carbon-monoxide'],
 }
 
 # Already ruled (docs/v7.5-rulings.md, batch C ruling 13): the babies page, and for "honey" also Food poisoning and botulism, lead;
@@ -1166,7 +1169,8 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
 
 
 @pytest.mark.parametrize('text,page_key', [('cross contamination', 's:surv-food-clean-kitchen'), ('how long can food sit out', 's:surv-food-still-good'),
-                                           ('running out of food', 's:surv-food-when-short'), ('infant formula', 's:surv-food-babies-children')])
+                                           ('running out of food', 's:surv-food-when-short'), ('infant formula', 's:surv-food-babies-children'),
+                                           ('gas range', 's:surv-food-cooking-no-power'), ('kitchen range', 's:surv-food-cooking-no-power')])
 def test_food_phrases_find_their_page(page, app_url, text, page_key):
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')

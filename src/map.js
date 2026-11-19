@@ -8,20 +8,31 @@
     topo: { name: 'USGS Topo', note: 'US and territories. Saves for offline.',
       url: USGS + 'USGSTopo/MapServer/tile/{z}/{y}/{x}', maxNative: 16, offline: true, kb: 20,
       attr: '<a href="https://www.usgs.gov/programs/national-geospatial-program/national-map">USGS The National Map</a>' },
-    imagery: { name: 'USGS Imagery + Topo', note: 'US satellite imagery with contours. Saves for offline.',
-      url: USGS + 'USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', maxNative: 16, offline: true, kb: 45,
+    sat: { name: 'USGS Imagery', note: 'US satellite photos, no contours or names. Saves for offline.',
+      url: USGS + 'USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', maxNative: 16, offline: true, kb: 45,
       attr: '<a href="https://www.usgs.gov/programs/national-geospatial-program/national-map">USGS The National Map</a>' },
     otm: { name: 'OpenTopoMap', note: 'Worldwide, online only. Its terms don’t allow bulk downloads.',
       url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', subdomains: 'abc', maxNative: 17, offline: false, kb: 30,
-      attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | © <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)' }
+      attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | © <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)' },
+    /* USGS retired this service on 2026-11-16. The entry stays so that areas saved before then keep their
+       tiles and their place in the list; it is offered only while such an area exists, and never for saving. */
+    imagery: { name: 'USGS Imagery + Topo (retired)', note: 'USGS switched this map off on November 16, 2026. Only areas you saved before then still show.',
+      url: USGS + 'USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', maxNative: 16, offline: false, retired: true, kb: 45,
+      attr: '<a href="https://www.usgs.gov/programs/national-geospatial-program/national-map">USGS The National Map</a>' }
   };
 
-  let map = null, base = null, layerId = LAYERS[store.get('mapLayer', 'topo')] ? store.get('mapLayer', 'topo') : 'topo';
+  let map = null, base = null, layerId = 'topo';
   let me = null, acc = null, tgtLine = null, trackLine = null;
   const wpGroup = () => map._fkWps, areaGroup = () => map._fkAreas;
   let follow = store.get('mapFollow', true), zoomedToFix = false;
   let areas = list('areas', a => okId(a.id) && LAYERS[a.layer] && ['s', 'w', 'n', 'e', 'zMin', 'zMax'].every(k => fin(a[k])))
     .map(a => ({ ...a, name: String(a.name ?? 'Area'), tiles: fin(a.tiles) ? a.tiles : 0, bytes: fin(a.bytes) ? a.bytes : 0 }));
+  const offered = id => !!LAYERS[id] && (!LAYERS[id].retired || areas.some(a => a.layer === id));
+  {
+    // A phone left on the retired satellite map with nothing saved from it moves to the satellite map that remains.
+    const want = store.get('mapLayer', 'topo');
+    layerId = offered(want) ? want : LAYERS[want] && LAYERS[want].retired ? 'sat' : 'topo';
+  }
   let track = store.get('track', []);
   track = Array.isArray(track) ? track.filter(p => Array.isArray(p) && okLatLon(p[0], p[1]) && fin(p[3])) : [];
   let recording = store.get('recording', false) === true;
@@ -116,9 +127,26 @@
     const L0 = LAYERS[layerId];
     if (base) map.removeLayer(base);
     base = new FallbackLayer(L0.url, { maxNativeZoom: L0.maxNative, maxZoom: 18, subdomains: L0.subdomains || 'abc',
-      attribution: L0.attr, keepBuffer: 3 }).addTo(map);
+      attribution: L0.attr, keepBuffer: 3 });
+    // Say so when a whole screen of tiles fails, instead of leaving a blank map. A tile that fell back to a
+    // saved lower zoom counts as loaded; tileerror fires only once every fallback has failed too.
+    let ok = 0, bad = 0;
+    note(null);
+    base.on('loading', () => { ok = bad = 0; });
+    base.on('tileload', () => { ok++; note(null); });
+    base.on('tileerror', () => { bad++; });
+    base.on('load', () => note(bad && !ok ? L0 : null));
+    base.addTo(map);
     $('#mLayerName').textContent = L0.name;
   }
+  function note(L0) {
+    $('#mapNote').hidden = !L0;
+    if (!L0) return;
+    $('#mapNoteText').textContent = L0.retired ? 'USGS switched this map off on November 16, 2026. It shows only inside areas you saved before then.'
+      : !navigator.onLine ? 'You’re offline and this spot is outside your saved areas.'
+      : 'This map isn’t loading. The map service may be down, or the connection is too weak.';
+  }
+  $('#mapNoteLayers').addEventListener('click', () => $('#mLayers').click());
 
   /* ---------- Position marker ---------- */
   const meIcon = () => L.divIcon({ className: 'me-icon', iconSize: [64, 64], iconAnchor: [32, 32],
@@ -256,7 +284,7 @@
 
   /* ---------- Layers ---------- */
   $('#mLayers').addEventListener('click', () => {
-    $('#layerList').innerHTML = Object.entries(LAYERS).map(([id, l]) => `<label class="opt">
+    $('#layerList').innerHTML = Object.entries(LAYERS).filter(([id]) => offered(id) || id === layerId).map(([id, l]) => `<label class="opt">
       <input type="radio" name="layer" value="${id}" ${id === layerId ? 'checked' : ''}>
       <span><b>${l.name}</b><br><span class="hint">${l.note}</span></span></label>`).join('');
     $('#dlgLayers').showModal();
@@ -300,6 +328,7 @@
   function estimate() {
     const L0 = LAYERS[layerId];
     const go = $('#saveGo');
+    if (L0.retired) { $('#saveEst').textContent = 'USGS switched this map off, so it can’t be saved. Switch to another USGS map in Layers.'; go.disabled = true; return; }
     if (!L0.offline) { $('#saveEst').textContent = `${L0.name} can’t be saved. Switch to a USGS map in Layers.`; go.disabled = true; return; }
     const a = currentArea(), n = countTiles(a);
     if (n > MAX_TILES) { $('#saveEst').textContent = `${n.toLocaleString()} tiles is too many. Zoom in on the map or pick less detail.`; go.disabled = true; return; }

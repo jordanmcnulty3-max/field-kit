@@ -60,7 +60,7 @@ def test_tick_two_saves_shows_count_and_survives_reload_on_page_and_home(page, a
     assert count(page) == '2/10'
     page.evaluate("FK.route.go('/survival')")
     wait_hash(page, '#/survival')
-    assert page.locator('#survLists h2').inner_text() == 'Checklists'
+    assert page.locator('#survLists h2').text_content() == 'Checklists'
     assert page.locator('#survLists button[data-key="c:ten-essentials"]').inner_text().replace('\n', ' ') == 'Ten essentials 2/10'
 
 

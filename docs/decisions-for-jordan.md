@@ -865,25 +865,28 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
 
 Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in docs/v7.5-rulings.md.
 
-117. **Cooking indoors on a gas or propane range, or on a vented wood stove or fireplace (surv-food-cooking-no-power).** The
-   checked topics forbid heating the house with a gas oven or range, and cooking on a stove or fireplace that isn't vented. One
-   side: the range makers GE, Whirlpool, KitchenAid and Wolf say the surface burners can be lit with a match in a power outage on
-   models that allow it, with conditions: check the model's manual first (some models have a safety feature that prevents it);
-   surface burners only, never the oven (it can't be lit by hand), and never griddles, grills, French tops or charbroilers (Wolf;
-   Whirlpool: the vent may not be working); match first, then the knob; the burner is lit or off, with no automatic relight, and
-   gas keeps flowing if the flame blows out (GE, Wolf); monitor it closely; never use it to heat the kitchen (Wolf). The other side:
-   no government agency page opened (EPA, CDC, Ready.gov, NYS Public Service, NYS DHSES, NYC Health, NYC Emergency Management, Maine
-   CDC, CPSC) says anything about cooking on a range in an outage; all say never to heat with one. EPA's outage page allows indoor
-   cooking only on "a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking",
-   says vented appliances can be used "if the vent does not require power to operate", and says "Unvented combustion appliances
-   should not be used to cook indoors"; in normal times EPA advises an exhaust fan vented outdoors over gas ranges, which needs
-   power. CDC's checked line "Don't cook or burn anything on a stove or fireplace that isn't vented" could be read to cover a range.
-   No source says anything about the carbon monoxide risk of cooking on a range in an outage, a window open, or how long. Today
-   (controller ruling): the range is allowed as the makers allow it, with every condition above, only if the model's manual allows
-   hand lighting (otherwise no); "Never heat the house with a gas oven or range (CDC, CPSC)" sits beside it, with a link to Carbon
-   monoxide for alarms. A vented fireplace or wood stove set up for cooking is allowed under EPA's conditions and every rule in Wood
-   stoves and fireplaces. Say if the group wants the range ruled out in a power cut (the cautious reading of EPA and CDC), or more
-   conditions (for example a window open, or short use only).
+117. **Cooking indoors on a gas or propane range, or on a vented wood stove or fireplace (surv-food-cooking-no-power). Your
+   decision.** The checked topics forbid heating the house with a gas oven or range, and quote CDC: "Don't cook or burn anything
+   on a stove or fireplace that isn't vented." EPA's outage page says "Unvented combustion appliances should not be used to cook
+   indoors, or for any other indoor use", allows vented appliances only "if the vent does not require power to operate", and names
+   only "a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking". A kitchen
+   range has no vent that works in a power cut, so EPA's sentence, read literally, covers it, and CDC's line can be read the same
+   way. No government agency page opened (EPA, CDC, Ready.gov, NYS Public Service, NYS DHSES, NYC Health, NYC Emergency
+   Management, Maine CDC, CPSC) says anything about cooking on a range in an outage; all say never to heat with one. On the other
+   side, four range makers allow the surface burners to be lit by hand in an outage on models that allow it: GE, Whirlpool,
+   KitchenAid and Wolf. Their conditions: check the model's manual first (some models have a safety feature that prevents it);
+   surface burners only, never the oven, and never griddles, grills, French tops or charbroilers (Wolf; Whirlpool: the vent may
+   not be working); GE and KitchenAid light it by holding the lit match or long lighter at the burner, then turning the knob to Lo
+   or LITE; Wolf turns the knob to HIGH, then lights it with an ignitor at least 6 inches long; the burner is lit or off, with no
+   automatic relight, and gas keeps flowing if the flame blows out (GE, Wolf); monitor it closely; never use it to heat the kitchen
+   (Wolf). Today (controller ruling): the range is allowed as the makers allow it, with every condition above, only if the
+   model's manual allows lighting by hand. To allow it, the app's own labelled reading narrows a checked CDC line and an EPA line
+   by interpretation, on the strength of four manufacturers' manuals: it says the two lines do not name a kitchen range (CDC lists
+   "stoves" and "gas ranges" separately) and do not rule out a range's surface burners used only as the makers allow, and that a
+   reader who takes them to cover their range should not use it. This is your decision. If you say no, the range permission is
+   removed, and the topic says flame cooking is done outdoors or on a vented fireplace or wood stove set up for cooking, and food
+   is otherwise eaten cold. A vented fireplace or wood stove set up for cooking is allowed either way, under EPA's conditions and
+   every rule in Wood stoves and fireplaces. (The controller is asking you now; the text may change again.)
 118. **Candle warmers, chafing dishes and fondue pots (surv-food-cooking-no-power).** Ready.gov lists them, with a fireplace,
    as alternative cooking sources in an emergency. They burn fuel in the room, and no opened source says how to use them indoors
    without carbon monoxide building up. Today: labelled app caution, don't use them while the power is out. Say if the group

@@ -19,8 +19,7 @@
     "bulging can",
     "swollen can",
     "refrozen",
-    "how long can food sit out",
-    "thawed meat"
+    "how long can food sit out"
   ],
   "summary": "Never taste food to test it, and when in doubt, throw it out. After 4 hours without power or a cold source like ice, throw out the fridge’s perishable food. Refreeze or cook only freezer food that still has ice crystals or is at 40°F (4°C) or below; once the freezer is above 40°F, throw out thawed food. Perishable food left out more than 2 hours (1 hour above 90°F (32°C)) goes. Throw out leaking, bulging or damaged cans and jars, home-canned food you can’t vouch for, and food that touched flood water. A bad smell, color or texture means throw it out; a normal one proves nothing.",
   "doFirst": [
@@ -288,7 +287,7 @@
         {
           "list": [
             "If an appliance thermometer was kept in the freezer, read it when the power comes back on. At 40°F (4°C) or below, the food can be refrozen (USDA).",
-            "No thermometer in the freezer? Check each package. Only food that still has ice crystals or is at 40°F (4°C) or below can be refrozen (USDA, FoodSafety.gov) or cooked (CDC). Thawed food goes (New York State Department of Health, CDC).",
+            "No thermometer in the freezer? Check each package. Only food that still has ice crystals or is at 40°F (4°C) or below can be refrozen (USDA, FoodSafety.gov) or cooked (CDC). Thawed food in a freezer above 40°F (4°C) goes (New York State Department of Health, CDC).",
             "Refrozen food may lose some quality, but it can still be eaten (USDA, FoodSafety.gov)."
           ]
         },

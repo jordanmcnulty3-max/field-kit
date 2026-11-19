@@ -5333,3 +5333,17 @@ are as recorded in the batch A record (first fetch), confirmed by the reviewer's
 - Minor 7: "and bottles" added to the permeable packaging line (FSIS-EM; the end of the sentence as the fetch summarised it).
 - Tool gate final: No food planner (controller ruling). Botulism gate final: no protocol. Both recorded in docs/v7.5-rulings.md and
   added to Deferred.
+
+### Food pack batch A fix round 2 (2026-11-19), from the re-review in task-1-review.md
+
+- Range lighting: each maker's order as it states it. GE ("Hold a lighted match next to the burner and then turn the knob to the
+  "Lo" position to light it.") and KitchenAid ("Light the match or lighter and hold it near the burner's flame ports."; "Turn the
+  desired stove burner knob counterclockwise to LITE."): flame first, then the knob. Wolf ("Turn the control knob to HIGH, then use a
+  minimum 6" ignitor to manually light the burner."): knob first. Summary and Do first 4 say "lit by hand". D117 corrected.
+- Range and the unvented-cooking lines: EPA's "Unvented combustion appliances should not be used to cook indoors, or for any other
+  indoor use." moved into the agencies paragraph; the reviewer's labelled reading added after it, word for word. CDC, Carbon Monoxide
+  Poisoning Basics (last reviewed October 26, 2026; re-opened by the reviewer) lists "stoves, lanterns, grills, fireplaces, gas
+  ranges, or furnaces". "Burners that are not on the list" now says its reason applies equally to a range. D117 rewritten as
+  Jordan's decision.
+- Keywords "stove burner by hand" and "thawed meat" removed; "fever" and "dehydration" listed for Task 8 (rulings 21).
+- Spill-mix limits labelled "This app’s own caution"; "Thawed food in a freezer above 40°F (4°C) goes".

@@ -7,18 +7,17 @@
     "cooking without power",
     "cook outside",
     "light gas burner with a match",
-    "stove burner by hand",
     "cooking temperature",
     "internal temperature",
     "safe minimum temperature",
     "eat food cold"
   ],
-  "summary": "Never cook with a grill, camp stove or charcoal indoors, and never heat the house with a gas oven or range. Indoors, cook on a fireplace or wood stove vented to the outside and set up for cooking, or on a gas range’s surface burners lit by match only if your model’s manual allows it, watched the whole time. Otherwise cook outdoors, at least 20 feet (6 m) from windows, or eat food cold. Cook meat, poultry, eggs and leftovers to the temperatures in the table, checked with a food thermometer.",
+  "summary": "Never cook with a grill, camp stove or charcoal indoors, and never heat the house with a gas oven or range. Indoors, cook on a fireplace or wood stove vented to the outside and set up for cooking, or on a gas range’s surface burners lit by hand only if your model’s manual allows it, watched the whole time. Otherwise cook outdoors, at least 20 feet (6 m) from windows, or eat food cold. Cook meat, poultry, eggs and leftovers to the temperatures in the table, checked with a food thermometer.",
   "doFirst": [
     "Never burn charcoal, or use a grill, hibachi, fuel lantern or camp stove indoors, and never heat the house with a gas oven or range (CDC, CPSC).",
     "Never run a generator in the house, garage, basement, crawlspace, shed, porch or carport, even with doors and windows open (CDC, CPSC). See Generators.",
     "Indoors, cook on a fireplace or wood stove that is vented to the outside, set up for cooking, and has a vent that needs no power to work (EPA), under every rule in Wood stoves and fireplaces.",
-    "Gas or propane range: surface burners only, lit by match only if your model’s manual says it can be, watched the whole time, never to heat the room (GE, Whirlpool, KitchenAid, Wolf). No manual to hand, or it says no: don’t.",
+    "Gas or propane range: surface burners only, lit by hand only if your model’s manual says it can be, watched the whole time, never to heat the room (GE, Whirlpool, KitchenAid, Wolf). No manual to hand, or it says no: don’t.",
     "Otherwise cook outdoors, at least 20 feet (6 m) from windows (Ready.gov), or eat food cold. Store-bought canned food can be eaten from the can without warming (Ready.gov)."
   ],
   "sections": [
@@ -70,7 +69,13 @@
       "h": "A gas or propane range",
       "blocks": [
         {
-          "p": "The range makers GE, Whirlpool, KitchenAid and Wolf say the surface burners of a gas range can be lit by hand with a match in a power outage, on models that allow it. No government agency page opened for this app says anything about cooking on a range in an outage. EPA’s outage guidance names only “a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking”, and says “Unvented combustion appliances should not be used to cook indoors, or for any other indoor use.”"
+          "p": "The range makers GE, Whirlpool, KitchenAid and Wolf say the surface burners of a gas range can be lit by hand in a power outage, on models that allow it."
+        },
+        {
+          "p": "No government agency page opened for this app says anything about cooking on a range in an outage. EPA’s outage guidance names only “a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking”, and says “Unvented combustion appliances should not be used to cook indoors, or for any other indoor use.”"
+        },
+        {
+          "p": "CDC’s line “Don’t cook or burn anything on a stove or fireplace that isn’t vented” and EPA’s line on unvented appliances do not name a kitchen range; CDC lists “stoves” and “gas ranges” separately as sources of carbon monoxide. This app’s reading: they do not rule out a range’s surface burners used only as the makers allow. If you read them as covering your range, don’t use it: cook outdoors or eat food cold."
         },
         {
           "warn": "Never heat the house with a gas oven or range (CDC, CPSC)."
@@ -79,7 +84,7 @@
           "list": [
             "Check your model’s manual first. Light a burner by hand only if the manual says your model can be lit that way: some models have a safety feature that prevents it (Whirlpool, KitchenAid). No manual to hand, or it doesn’t allow it: the answer is no, and you cook outdoors or eat food cold.",
             "Surface burners only. Never the oven: it can’t be lit by hand in an outage (GE, Whirlpool, KitchenAid). Never a griddle, grill, French top or charbroiler on the range (Wolf; Whirlpool: the vent may not be working).",
-            "Light it the way your manual says. The makers’ steps: hold a lit long match or lighter at the burner first, then turn the knob (GE, KitchenAid; Wolf: an ignitor at least 6 inches (15 cm) long).",
+            "Light it the way your manual says. GE and KitchenAid: hold the lit match (or long lighter) at the burner, then turn the knob to Lo or LITE. Wolf: turn the knob to HIGH, then light it with an ignitor at least 6 inches (15 cm) long.",
             "A burner is either lit or off. With no power there is no automatic relight (Wolf). If the flame goes out, gas keeps flowing: turn the knob to Off (GE).",
             "Watch the burner the whole time it is lit (Wolf: monitor the gas burner closely).",
             "Never use it to heat the room (Wolf: do not use surface burners to heat the kitchen)."
@@ -98,7 +103,7 @@
       "h": "Burners that are not on the list",
       "blocks": [
         {
-          "p": "Ready.gov also lists candle warmers, chafing dishes and fondue pots for cooking in an emergency. They burn fuel in the room, and no source opened for this app says how to use them indoors without carbon monoxide building up. This app’s own caution: don’t use them while the power is out."
+          "p": "Ready.gov also lists candle warmers, chafing dishes and fondue pots for cooking in an emergency. They burn fuel in the room, and no source opened for this app says how to use them indoors without carbon monoxide building up. That is just as true of a gas range; the difference is that the range makers give conditions for using its surface burners (above), and no maker’s or agency’s conditions were opened for these. This app’s own caution: don’t use them while the power is out."
         }
       ]
     },

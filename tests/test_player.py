@@ -1173,3 +1173,15 @@ def test_no_shipped_protocol_title_runs_under_the_pin_star_at_360(page, app_url)
         if r[1] > r[2] or r[3] > 0:
             bad.append(r)
     assert bad == [], bad
+
+
+def test_snakebite_title_stays_on_one_line_at_360(page, app_url):
+    # Re-review R2: with overflow-wrap:anywhere and an 8px header gap the 80px title column broke it as "Snakebit / e";
+    # v7.3 showed it on one line. The header gap is 7.5px, the smallest that keeps every v7.3 line break (final fix report).
+    page.goto(app_url + '#/emergency/snakebite')
+    page.wait_for_selector('#ppTitle')
+    r = page.evaluate("""(() => { const t = document.getElementById('ppTitle'), range = document.createRange(); range.selectNodeContents(t);
+        const tops = new Set([...range.getClientRects()].map(x => Math.round(x.top)));
+        const star = t.parentElement.querySelector('[data-act="pin"]').getBoundingClientRect().left;
+        return [t.textContent, tops.size, Math.max(...[...range.getClientRects()].map(x => x.right)) <= star]; })()""")
+    assert r == ['Snakebite', 1, True], r

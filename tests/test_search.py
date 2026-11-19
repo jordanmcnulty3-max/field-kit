@@ -778,6 +778,14 @@ V73_ON_SCREEN = {
     'no': ['p:cpr-adult', 'p:cpr-child', 'p:cpr-infant'],
     'food': ['s:surv-food-and-wild-plants', 's:surv-stomach-illness-in-a-group', 's:surv-unheated-house'],
     'shelter': ['s:surv-shelter', 's:surv-heat-out', 's:surv-priorities'],
+    # re-review R1: words from the hub's text whose v7.3 lists a hub indexed first of all had taken over
+    'mushroom': ['p:poisoning', 'p:vomiting-diarrhea', 's:surv-food-and-wild-plants'],
+    'blast': ['p:amputation', 'p:march', 'p:eye-injury'],
+    'serious': ['p:shock', 'p:bleeding', 'p:burns'],
+    'lie': ['p:fainting', 'p:shock', 'p:altitude'],
+    'emergency': ['p:low-blood-sugar', 'p:seizure', 'p:abdominal-wound'],
+    'wall': ['p:chest-wound', 'p:march', 'p:wound-care'],
+    'now': ['p:animal-bite', 'p:head-injury', 'p:overdose'],
 }
 
 
@@ -810,11 +818,20 @@ def test_v73_first_three_on_screen_are_unchanged(page, app_url, text):
 
 
 @pytest.mark.parametrize('text', ['fallout', 'nuclear'])
-def test_fallout_and_nuclear_show_the_fallout_warning_hub_first_on_screen(page, app_url, text):
+def test_fallout_and_nuclear_show_the_fallout_warning_hub_in_the_first_three_on_screen(page, app_url, text):
+    # The hub is indexed after every v7.3 page and after the two pack protocols (re-review R1), so it wins no tie with an older page.
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
     open_search(page)
     ks = on_screen(page, text)
-    assert ks[0] == 's:surv-fallout-warning', f'{text!r}: {ks[:5]}'
-    page.press('#searchInput', 'Enter')   # Enter opens the first result on screen
-    page.wait_for_function("location.hash.indexOf('surv-fallout-warning') >= 0")
+    assert 's:surv-fallout-warning' in ks[:3], f'{text!r}: {ks[:5]}'
+
+
+def test_fall_keeps_head_injury_in_the_first_three_on_screen(page, app_url):
+    # re-review R3: "fall" is a prefix of the title word "Fallout"; with the pack protocols indexed before the hub,
+    # Radiation decontamination takes first place and Head injury (v7.3's first) stays second.
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, 'fall')
+    assert ks[:3] == ['p:radiation-decontamination', 'p:head-injury', 'p:march'], ks[:5]

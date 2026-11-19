@@ -25,7 +25,7 @@
     "pet food",
     "medicine"
   ],
-  "summary": "Food and drinks that were indoors or sealed can be used; wipe the outside of anything that was outdoors before you open it. Drink stored water first. Boiling and bleach don’t take fallout out of water. Don’t eat or drink anything that was outdoors uncovered, including garden food and rainwater, until officials say you can.",
+  "summary": "Food and drinks that were indoors or sealed can be used; wipe the outside of anything that was outdoors before you open it. Drink bottled water and other sealed drinks first, then water you stored yourself. Boiling and bleach don’t take fallout out of water. Don’t eat or drink anything that was outdoors uncovered, including garden food and rainwater, until officials say you can.",
   "doFirst": [
     "Eat and drink what was already indoors or is sealed (CDC). Wipe off any container that was outdoors with a damp cloth before you open it (Ready.gov, CDC).",
     "Drink bottled water and other sealed drinks first (CDC), then water you stored yourself (this app’s reading). Boiling does not take radioactive material out of water (CDC).",

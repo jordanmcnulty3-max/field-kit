@@ -4669,3 +4669,36 @@ checked topic's text word for word.
 - M8: dirty bomb "Staying in" gains a labelled warn: "This app's own caution, not a source's: if you don't know whether it was
   a dirty bomb or a nuclear explosion, treat it as a nuclear explosion and follow Fallout warning and How long to stay in."
   plus a link to How long to stay in (D107).
+
+### Batch B alignment with the decontamination protocol (2026-11-18, after the protocols were merged)
+
+surv-fallout-coming-inside rewritten as a summary that points to p:radiation-decontamination (src/protocols/radiation-decontamination.json,
+read in full). No new web source was opened; text taken from the protocol is credited to it by name in the topic and its
+source line, because some of it rests on FEMA, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath (2024),
+which this writer did not open.
+
+- Order: Do first 1 to 5 follow protocol steps s1/s20 (injury first), s2-s3 (clothes and shoes off, bagged), s4 (wash or wipe),
+  s6 (clean clothes), s8-s11 (others, protect yourself, clean again, pets). "The steps" names all thirteen protocol actions in
+  the protocol's order and links it.
+- Never list: the warn in "The steps" is the protocol's seven don'ts, in order. No other "never" or "don't" remains in the topic.
+  Removed: NYC Health's "Do not place them with your dirty laundry" and "Do not shave your pet's fur" (not in the don'ts), the
+  dirty-laundry and shaving lines' source credits, and the app's caution on which side of the door to brush clothes.
+- Where to take off clothes: protocol s2 wording ("before coming in, or just inside the door, away from others"), credited to
+  the protocol and CDC (What to Do: Get Inside). NYC Health's "shoes just after entering" line is dropped (covered).
+- No clean clothes: protocol s6 wording; D90 and D86 cross-referenced as one question.
+- Little or no water: protocol s4 detail ("Showering and changing all your clothes is the best way, but you can still remove
+  most of the radioactive material without water or a change of clothes"; wet wipes or other methods when water is scarce,
+  FEMA planning guidance p. 100); CDC tap-water line kept. NYC Health's broom line dropped.
+- Children and helpers: protocol s8-s10 in summary (clean yourself first; gloves, mask, cuts covered; clean yourself again;
+  let people in, CDC What to Do: Get Inside). CDC Infant Feeding's child-washing detail dropped from the topic (the protocol
+  carries the steps); CDC Infant Feeding stays in the sources for "until officials say how to get rid of them".
+- Pets: protocol s11 in summary; CDC pets page; "keep pets indoors" (NYC Health; the protocol credits FEMA). Pet sanitation kept
+  as a positive instruction (CDC pets page), with "don't touch soiled material with bare hands" dropped (not in the don'ts).
+- Keeping the shelter clean: protocol s12 (wipe belongings) added; CDC lines kept.
+- Hurt or sick: injury first (protocol s1, s20); radiation sickness signs from protocol s13, with p:radiation-sickness linked.
+- 1968 handbook removed from the topic and its sources (ruling 22, 28).
+- Still different from the protocol, by design: the topic keeps "Why it matters" (CDC, FEMA planning guidance p. 39 beta burns)
+  and the collar and shoe-top line (FEMA 72-hour guidance), which the protocol does not carry; neither is a step or a "never",
+  and neither contradicts it.
+- Also: surv-fallout-water-and-food summary "Drink stored water first." now "Drink bottled water and other sealed drinks first,
+  then water you stored yourself." to match its Do first 2 (CDC; the app's reading, D98).

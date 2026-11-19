@@ -661,7 +661,8 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    "can easily self-decontaminate by removing shoes and outer clothing and/or brushing or wiping off fallout particles
    immediately after they enter"; its EAS Message B (p. 96): "If they can, they should remove shoes and outer clothing."
    Today: "before coming in, or just inside the door, away from others", with both sources in the detail. This also binds
-   Coming in from outside (later topic).
+   Coming in from outside (later topic). Coming in from outside now says the same; its question about brushing clothes off is
+   D90. Answer the two together.
 87. **Who should go for medical care (radiation-sickness).** FEMA's public messages give two rules: seek medical help if you
    were near the incident and have symptoms, and, when medical facilities are overwhelmed, only those with serious,
    life-threatening injuries should seek care. CDC: seek medical attention for radiation sickness symptoms once officials say
@@ -691,14 +692,16 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    cooling a fresh heat burn under running water for 5 to 20 minutes; no source opened says whether to cool a burn that
    appears later. Today: the protocol says it needs medical care and points to the Burns protocol only for covering it
    loosely, checking for infection and pain, not for cooling. Ask what else to do for it without a hospital.
-90. **Shaking off clothes when there are no clean ones (surv-fallout-coming-inside).** CDC's decontamination infographic: with
-   no clean clothes, take off the outer layer, shake or brush the clothes off, put them back on, and wash hands, face and skin
-   again. CDC also says to take clothes off carefully so radioactive dust doesn't shake loose, and no source says where to do
-   the shaking. Today: CDC's step, plus a line labelled as the app's own caution: shake or brush clothes off just inside the outside
-   door, not outside (more time in fallout) and not in the room where people are sheltering, and cover your mouth and nose. The
-   1968 handbook (dated) says to brush fallout off shoes and clothing before going into the shelter area; it does not say which
-   side of the house door. Say if the group wants a different place (for example just
-   outside the door, which means a moment more in fallout).
+90. **Brushing off clothes when there are no clean ones (surv-fallout-coming-inside; one question with D86).** CDC's
+   decontamination infographic: with no clean clothes, take off the outer layer, shake or brush the clothes off, put them back
+   on, and wash hands, face and skin again. CDC also says to take clothes off carefully so radioactive dust doesn't shake loose.
+   The Radiation decontamination protocol adds FEMA's 2024 messaging guide: brush or wipe off clothing away from other people or
+   pets, with nose and mouth covered. Today: Coming in from outside says what the protocol says ("take the outer layer off,
+   brush it off away from others with your nose and mouth covered, put it back on, and wash again"), and takes off clothes
+   "before you come in, or just inside the door, away from others" (D86). The earlier app caution ("just inside the outside
+   door, not outside") and the dated 1968 line were removed when the topic was aligned with the protocol. Say if the group wants
+   a fixed place for both (for example always just inside the door, which keeps people out of the fallout a moment longer but
+   brings some dust into the house).
 91. **Milk from your own animals, wild game and fish after fallout (surv-fallout-water-and-food).** No current source opened says
    when these can be used. Ready.gov and CDC say not to eat garden food, or food or liquids that were outdoors uncovered, until
    officials say. The 1968 handbook In Time of Emergency (dated) says milk from cows that grazed on pasture with fallout might

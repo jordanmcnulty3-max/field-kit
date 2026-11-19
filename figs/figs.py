@@ -338,6 +338,7 @@ svg('fallout-shelter-spots', 418, 'Best spot in a house: the basement, go there 
 {lbl(150,212,'Stay away from areas near the roof,','','middle')}{lbl(150,226,'fire escapes and balconies','','middle')}
 {lead(150,230,150,238)}{lead(98,230,94,250)}{lead(202,230,206,248)}
 <rect x="0" y="300" width="340" height="36" class="gr"/>
+<line x1="10" y1="343" x2="330" y2="343" class="m t1 d"/>
 <rect x="105" y="240" width="90" height="60" class="k t3" data-part="bldg"/>
 <path d="M101 240 H199" class="k t3"/><path d="M105 260 H195 M105 280 H195" class="k t1"/>
 {''.join(window(105, y + 5, 105, y + 13) + window(195, y + 5, 195, y + 13) for y in (240, 260, 280))}
@@ -384,7 +385,7 @@ C3 = f'''<line x1="24" y1="70" x2="164" y2="70" class="m"/>
 C4 = f'''<circle cx="64" cy="38" r="24" class="k milk"/>
 <path d="M40 32 q-8 0 -8 8 q0 8 8 8 M88 32 q8 0 8 8 q0 8 -8 8" class="k"/>
 <circle cx="56" cy="34" r="2" class="kf"/><circle cx="72" cy="34" r="2" class="kf"/><path d="M64 38 V46 H60 M58 54 H70" class="k t1"/>
-<path d="M26 72 L46 34" class="k t3"/><rect x="40" y="26" width="18" height="13" rx="2" transform="rotate(-12 49 32)" class="w wf"/>
+<path d="M8 72 Q14 58 30 56 L42 40" class="k t3"/><rect x="40" y="26" width="18" height="13" rx="2" transform="rotate(-12 49 32)" class="w wf"/>
 <path d="M124 70 Q116 58 126 50 L129 46 H137 L140 50 Q150 58 142 70 Z" class="k gr"/><path d="M131 46 q-5 -6 -2 -8 q3 1 2 8 M135 46 q5 -6 2 -8 q-3 1 -2 8" class="k t1"/>
 <line x1="108" y1="70" x2="164" y2="70" class="m"/>'''
 C5 = f'''<line x1="24" y1="70" x2="164" y2="70" class="m"/>

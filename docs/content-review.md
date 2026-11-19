@@ -4736,6 +4736,8 @@ No arrows; no floor is marked.
 - Not drawn: the place-type ranking beyond the two basements, the move times, airtightness.
 - Caption: "Basement: go there first. Apartments and large buildings: going to the basement is best. Otherwise go to the
   center of the building, as far from the roof and windows as you can." Topic sentences; the section heading names the panel.
+- A dashed divider, the same as the one between the house and the building, sits above the plan so it cannot read as a
+  level below the basement (re-review); no words added.
 
 ### fallout-coming-inside (surv-fallout-coming-inside, "The steps", after the paragraph)
 
@@ -4758,7 +4760,10 @@ paragraph above the figure (review I4 added s5 and s7).
   protocol s7, "Wounds: once the skin around a wound is clean, care for it with the Wound cleaning and care protocol."
 - "Then help others and pets, and clean yourself again afterwards" below: Do first 5; protocol s8 to s11.
 - Not drawn: s12 (belongings), s13 (watch for radiation sickness), 90%, water temperature, the never list.
-- Caption: the topic's summary, word for word (it names Radiation decontamination for every step).
+- Caption: "Save a life first. The cleaning-off steps are in the Emergency protocol Radiation decontamination, one at a
+  time." Summary's first sentence and the first sentence of "The steps", word for word (re-review: the summary left out s5
+  and s7, which the figure shows).
+- Panel 4's hand is drawn as an arm with an elbow (re-review, optional).
 
 Tests (`tests/test_figs.py`, `RAD_FIGS`): each figure sits once in its section; listed phrases drawn and in the topic's text;
 every drawn text line is in the topic's or protocol's text; forbidden wording in drawn and alt text ("safe", digits other

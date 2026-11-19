@@ -535,7 +535,7 @@ RAD_FIGS = {
          'blow the nose and wipe the eyes and ears', 'put on clean clothes from a closet, drawer or other covered place',
          'care for wounds', 'then help others and pets, and clean yourself again afterwards'],
         [r'\bsafe', r'90', r'\bhot\b', r'bleach', r'sanitizer', r'scrub(?!bing)', r'shake', r'vacuum', r'hose'],
-        ['save a life first', 'outer layer', 'bag', 'wash gently', 'clean clothes'],
+        ['save a life first. ', 'the cleaning-off steps are in the emergency protocol radiation decontamination, one at a time.'],
         'radiation-decontamination'),
 }
 

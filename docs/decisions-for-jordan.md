@@ -559,3 +559,58 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    overnight, and puts a wood stove out before sleep for fire reasons (D44). The app reads the protocol's words as meaning
    unvented or camp equipment; nobody is harmed (the literal reading is stricter). The protocol was not edited. Say if its
    wording should say "unvented" (a protocol change, to be checked like any other).
+68. **How long to stay in when no one ever says (surv-fallout-how-long).** Current federal and New York City guidance says
+   at least 24 hours and then wait for officials; none gives a period for when no word ever comes. The dated civil
+   defence handbooks fill the gap: In Time of Emergency (Office of Civil Defense, 1968): 2 or 3 days to as long as 2
+   weeks; Protection in the Nuclear Age (FEMA, 1985): a few days to as much as two weeks, somewhat longer in limited areas.
+   Both say people might leave for short periods before then, but leave it to officials or a meter to say when. Today: plan
+   on up to 2 weeks (could be longer in some places), plus a labelled app caution: no trips out in the first 24 hours
+   except for an immediate hazard, then only brief trips for what can't wait, above all in the first few days. The Army
+   survival manual (FM 3-05.70) has a soldier's timetable (complete isolation 4 to 6 days, one 30-minute trip for water on
+   day 3, short trips on days 7 and 8, 2 to 4 hours a day from day 9 to 12, normal from day 13); it is not used, because
+   the content plan limits the Army manuals to the caught-outdoors case. Say if the group wants that timetable, or a
+   different rule for trips.
+69. **A CO alarm during fallout sheltering (surv-fallout-shelter-living).** Carbon monoxide (checked, CPSC): if a CO alarm
+   sounds, get everyone outside now. Fallout guidance (Ready.gov): stay inside for the first 24 hours unless an immediate
+   hazard such as fire, a gas leak, building collapse or serious injury forces you out; CO is not on its list. Both can
+   kill. Today: the closed-up-house topic quotes the CO rule unchanged and says going out means going into fallout, which is
+   one more reason nothing burns in the house. No source opened says what to do instead (for example opening windows wide
+   and moving to another room). Say if the group wants a different rule (it would need a source, and is also a question for
+   a medical professional).
+70. **"Go somewhere with heat" during fallout (surv-heat-out, surv-fallout-shelter-living).** Stay warm when the heat is out
+   (checked) says: if you can't keep the house warm, go somewhere with heat. During a fallout warning that means travelling
+   through fallout. Today: the closed-up-house topic points to How long to stay in before anyone leaves for heat; Stay warm
+   when the heat is out is not edited. The rule for leaving shelter will be in Leaving and moving after fallout (later
+   batch). Say if the heat topic should gain a line about fallout (one link block is allowed in the radiation pack).
+71. **When does the cold become "a danger to life" (surv-fallout-shelter-living).** Your rule: no-flame warmth first; burn
+   only when the cold itself is a danger to life, then under the carbon monoxide rules in full. No opened source gives an
+   indoor temperature for this (Stay warm when the heat is out lists the figures sources give: hypothermia in older people
+   at 60 to 65°F, and so on). Today: no temperature; the topic says to watch babies and older people first and to use the
+   Hypothermia protocol for the signs. Say if the group wants a trigger (for example a room temperature or the first signs
+   of hypothermia in anyone). Also a question for a medical professional.
+72. **Moving from a poor shelter to a better one (surv-fallout-where-to-shelter).** FEMA's planning guidance (2022): when an
+   adequate shelter is within 15 minutes' travel, people in a poor shelter (its "protection factor 2") should stay no longer
+   than 30 minutes after the detonation, and in a better shelter ("protection factor 4") an hour or two, before moving.
+   FEMA does not say which buildings have those factors (its figure is an image that could not be read). Ready.gov says
+   only: if a multi-story building or basement can be reached within a few minutes, go there immediately. Today: both are
+   in the topic, FEMA's as "poor" and "somewhat better" with a note that FEMA does not name the buildings. Say if the group
+   would rather keep only Ready.gov's simpler rule.
+73. **Older handbooks allow a stove indoors (surv-fallout-shelter-living).** Protection in the Nuclear Age (FEMA, 1985)
+   suggests a camp stove for heat and cooking in the shelter with adequate ventilation (no charcoal); In Time of Emergency
+   (1968) says a stove indoors needs adequate ventilation. The checked Carbon monoxide topic (CDC, CPSC) says never run a
+   camp stove indoors. Today: the topic names the old advice and says the app follows CDC and CPSC. No change expected;
+   recorded because it is a source disagreement.
+74. **How soon fallout arrives (surv-fallout-warning).** Ready.gov and FEMA's planning guidance: 10 minutes or more after a
+   detonation. FEMA's planning guidance also says that in many areas fallout arrives an hour or more after, and its 72-hour
+   guidance says it may take several hours. The 1968 and 1985 handbooks say 15 to 30 minutes close to the explosion and 5
+   to 10 hours or more 100 to 200 miles away. Today: 10 minutes or more, the shortest, so nobody delays getting in; the
+   longer times are not shown. Say if the group wants the longer times shown as well.
+75. **What to do at the flash (surv-fallout-warning).** Ready.gov (current): outside, lie face down to protect exposed skin
+   from the heat and flying debris, then go inside after the shockwave passes. In Time of Emergency (1968): take cover
+   instantly; with no cover, lie down and curl up on your side and cover your head with your arms and hands. Today:
+   Ready.gov's face down. No change expected; recorded as a disagreement.
+76. **A working furnace during the sheltering period (surv-fallout-shelter-living).** Your winter rule speaks of "the stove or
+   heater". The topic reads a furnace or boiler vented to the outside that still has power as the house's normal heat, not
+   an emergency stove or heater, so it is not held back until the cold is a danger to life; CDC's rule to turn off
+   forced-air heating that brings in outside air still applies, and its outside vents must be kept clear (which may mean a
+   trip out in snow). Say if the group wants the furnace treated like a stove (off until the cold is a danger to life).

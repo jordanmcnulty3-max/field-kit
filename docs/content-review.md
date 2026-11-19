@@ -3445,3 +3445,273 @@ No new source was opened; no number or instruction changed.
   and not a common English word ranks higher ("CO"). Wind chill brochure used line: "the three times on the chart's legend".
 - Decisions: D39 points at docs/v7.3-rulings.md, not the build ledger, and ends with one question (room or house); D61
   ends with a question. docs/v7.3-rulings.md lists every ruling and a Deferred section.
+
+## Radiation pack batch A: fallout warning, where to shelter, how long to stay in, living in a closed-up house (2026-11-18)
+
+Files (all draft): src/survival/surv-fallout-warning.json, surv-fallout-where-to-shelter.json, surv-fallout-how-long.json,
+surv-fallout-shelter-living.json. tests/test_build.py topic count 38 to 42. Every source below was found by built-in web
+search and opened by web fetch on 2026-11-18; the title (and date where printed) was checked after each fetch. Fetches
+return quotes capped at about 125 characters, so long sentences were read as consecutive pieces. No Firecrawl, no Bright
+Data. Ready.gov loaded this time (it failed all through v7.3), so spec 10 call 13 was not needed.
+
+Source keys:
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024. https://ready.gov/radiation (opened twice; the second fetch for "Stay Safe During", "Prepare Now" and "Be Safe After" word for word)
+- CDC-GI: CDC, What to Do: Get Inside, last reviewed April 15, 2024. https://cdc.gov/radiation-emergencies/response/get-inside.html
+- CDC-SI: CDC, What to Do: Stay Inside, last reviewed April 17, 2024. https://www.cdc.gov/radiation-emergencies/response/stay-inside.html
+- CDC-WTD: CDC, What to Do in Radiation Emergencies, last reviewed April 15, 2024. https://cdc.gov/radiation-emergencies/response/index.html
+- CDC-WHERE: CDC, Where To Go In a Radiation Emergency (infographic text), last reviewed April 17, 2024. https://cdc.gov/radiation-emergencies/infographic/where-to-go.html
+- CDC-PREP: CDC, Preparing for a Radiation Emergency, last reviewed April 15, 2024 (updated January 31, 2025). https://cdc.gov/radiation-emergencies/safety/index.html (meter search only; not cited)
+- CDC-HCP1 and CDC-HCP2: CDC, Immediate Actions to Take When a Nuclear Detonation Occurs, and Preparing for Radiation Incidents, both last reviewed April 23, 2024. https://cdc.gov/radiation-emergencies/hcp/nuclear-detonations/immediate-actions.html and https://www.cdc.gov/radiation-emergencies/hcp/nuclear-detonations/preparing.html (decay-rule search only; neither has it; not cited)
+- FEMA-PG3: FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (Foreword 2022; record of change 06/12/2023, CBRN Office renamed Office of Emerging Threats, no other change). https://www.fema.gov/sites/default/files/documents/fema_nuc-detonation-planning-guide.pdf (all five 100,000-character parts read; pages 46 to 90 read three more times for exact wording)
+- FEMA-72: FEMA Office of Emerging Threats, Nuclear Detonation Response Guidance: Planning for the First 72 Hours, March 2023 (updated 06/12/2023), copy hosted by HHS REMM. https://remm.hhs.gov/fema_oet-72-hour-nuclear-detonation-response-guidance.pdf (both parts read; Figure 3 is an image, not readable)
+- CDP-710 and CDP-LIM: FEMA Center for Domestic Preparedness online course AWR-923-W (course folder dated 2021-05-12), pages "The 7:10 Rule of Thumb" and "Limitations of 7:10 Rule of Thumb". https://cdp.dhs.gov/shared/se/courses/default/AWR-923-W%2005122021%201.2-20210512144644/groups/394.html and .../groups/395.html
+- CDP-CAT: Center for Domestic Preparedness, Online Courses. https://cdp.dhs.gov/online_course (lists AWR-923-W "Radiological Emergency Management"; logo alt text "Department of Homeland Security Shield / FEMA Center for Domestic Preparedness")
+- NYC-H: NYC Health, Emergencies: Nuclear Incident. https://www.nyc.gov/site/doh/health/emergency-preparedness/emergencies-radiological-nuclear-incident.page
+- NYC-RG: New York City, Response Guide: Radiological and Nuclear Emergencies, Individuals & Families (undated; no single issuing agency named). https://www.nyc.gov/assets/doh/downloads/pdf/em/radiological-nuclear-response-guide.pdf
+- PNA-1985: FEMA, Protection in the Nuclear Age, June 1985 (GPO 1984 453-797 printed on p. 38; no H-number in the text), copy hosted by Waldo County, Maine. https://waldocountyme.gov/wp-content/uploads/2024/01/1985-FEMA_Protection_in_the_Nuclear_Age.pdf (OCR text)
+- ITE-1968: Department of Defense, Office of Civil Defense, In Time of Emergency: A Citizen's Handbook on Nuclear Attack and Natural Disasters, H-14, March 1968, Project Gutenberg. https://gutenberg.org/ebooks/15158.html.images (opened twice)
+- FM3-05.70: US Army FM 3-05.70, Survival, chapter 23 "Survival in Man-Made Hazards", section "Survival in the Nuclear Environment"; a printout (12/6/21) of a mongabay.com mirror, hosted by Waldo County, Maine; no manual date in the copy; lines cut at the right margin. https://waldocountyme.gov/wp-content/uploads/2024/01/Survival-In-the-Nuclear-Environment.pdf (opened twice)
+
+Would not open or held nothing usable: the CDC page in Gutenberg's "cache/epub" form (robots disallowed; the ebooks page
+was used instead); FM 3-05.70 at biotech.law.lsu.edu (error page: "no longer available"); FM 21-76 (2006 copy at
+sjsu.edu): the fetch stops at 500,000 characters, before chapter 23, so the Army text is FM 3-05.70 above. DHS S&T
+"Visualizing a Nuclear Detonation and Response" fact sheet (April 2023): no sheltering content. Searches returned no
+New York State Department of Health or DHSES page on a nuclear detonation; New York is represented by New York City's
+pages (city guidance, named as such). The archived Ready.gov "nuclear-explosion" page and archived REMM pages were not
+used (archive copies; Ready.gov's live page loaded).
+
+Conversions: 3 feet = 0.91 m, "1 m" (the Army text prints "1 meter (3 feet)"); 1 inch = 2.54 cm, "2.5 cm" (quoted from
+Kerosene and propane heaters). Fractions: 7 hours 1/10, 49 hours 1/100, about 2 weeks 1/1,000 (PNA-1985 prints all three;
+7 x 7 x 7 = 343 hours = 14.3 days, "about two weeks").
+
+### surv-fallout-warning
+
+- Tags: none. Links: s:surv-fallout-where-to-shelter, s:surv-fallout-how-long, s:surv-fallout-shelter-living,
+  s:surv-carbon-monoxide, p:bleeding, p:burns, p:shock. Links left for later tasks: see docs/v7.4-rulings.md.
+- doFirst 1: READY ("If warned of the possibility of a radiation hazard, immediately get inside the nearest building and
+  move away from windows."; "If you are outside, lie face down to protect exposed skin from the heat and flying debris.";
+  "After the shockwave passes, go inside the nearest building as quickly as possible.").
+- doFirst 2: CDC-GI ("Go to the basement or the middle of the building."; "Stay as far away from the walls and roof of the
+  building as you can."; "Brick or concrete multi-story building or basement are best, but being inside any building is
+  safer than being outside." The app writes "better than being outside").
+- doFirst 3: READY ("Remain in the most protective location ... for the first 24 hours" / "unless threatened by an immediate
+  hazard (e.g., fire, gas leak, building collapse, or serious injury)" / "or informed by authorities that it is safe to
+  leave."; "Sheltering usually lasts at least 24 hours."), CDC-GI ("Staying inside for at least 24 hours ..."; "Stay where
+  you are!"). "Officials tell you to" replaces "informed by authorities that it is safe to leave" so the topic never says
+  "safe".
+- doFirst 4: READY ("Remove your outer layer of contaminated clothing"; "Be very careful in removing your clothing";
+  "take a shower or wash with soap and water"; "If you cannot wash, use a wipe or clean wet cloth to wipe any skin or hair
+  that was not covered."; kit: "a trash bag for contaminated clothing"), CDC-GI ("Carefully remove your outer layer of
+  clothing before entering the building, if you can."; "Wash the parts of your body that were uncovered"). FEMA-PG3 p. 107
+  sample message: "Remove contaminated clothes and shoes and place them in a bag." This is a pointer; the cleaning-off
+  steps belong to the decontamination protocol (owner rule) and must be aligned when it exists.
+- doFirst 5: CDC-GI ("Close and lock all windows and doors."; "If possible, turn off fans, air conditioners, and
+  forced-air heating units that bring air in from the outside."), READY ("Have a battery-powered or hand crank radio, which
+  will continue to work if other forms of communication fail."). Fireplace dampers are left to Living in a closed-up house
+  because a damper must stay open while a fire burns (Wood stoves and fireplaces, checked).
+- If you have warning: READY (three sentences as quoted; "Put as many walls between you and the outside"; "take cover from
+  the blast behind anything that might offer protection").
+- At the flash and the blast: READY (face down; after the shockwave); CDC-GI ("If you must be outside and cannot get inside
+  immediately, cover your mouth and nose with a mask, cloth, or towel."). ITE-1968 says lie on your side curled up and
+  cover your head with your arms and hands; the topic follows READY (current). D75.
+- Before the fallout arrives: READY ("If it detonates on the ground, the explosion can suck material up into the air" /
+  "and create dangerous, sand-like, radioactive particles called fallout."; "After a detonation, you will have 10 minutes
+  or more to find an adequate shelter before fallout arrives."; "If a multi-story building or a basement can be safely
+  reached within a few minutes of the explosion," / "go there immediately."; "The safest buildings have brick or concrete
+  walls." (written "best"); "Underground parking garages and subways can also provide good shelter."). FEMA-PG3 p. 54
+  ("Fallout will likely take 10 minutes or more to arrive."). NYC-H ("Exposure to fallout that is falling or has just
+  fallen may be fatal."). Not used: FEMA-PG3 p. 47 "In many areas, fallout will arrive an hour or more after the
+  detonation" and FEMA-72 p. 87 "Fallout may take several hours to arrive" (they invite delay; the shortest time is used);
+  PNA-1985 and ITE-1968 "within 15-30 minutes" near an explosion (longer than READY's minimum). D74.
+- Don't run from it: FEMA-PG3 p. 67 ("Cars and other vehicles are not adequate shelters because they lack dense shielding
+  material."), p. 71 ("Self-evacuation is strongly discouraged due to the risks involved"; context: section 3.6
+  Self-Evacuation, "Many individuals may self-evacuate, based on either official guidance or uninformed, spontaneous
+  decisions."), p. 70 ("no evacuation should be attempted until basic information is available regarding fallout
+  distribution"); CDC-GI ("Going outside to get loved ones could expose you and them to dangerous levels of radiation.";
+  "Providing shelter to someone who was outside during a radiation emergency can save their life"; outer clothing off
+  before entering); NYC-H ("Do not pick up your children from school or daycare.").
+- Stay in and stay tuned: READY ("Follow instructions from emergency response officials."; radio); FEMA-PG3 p. 52 ("Tune in
+  to local radio to determine radiation hazard."), p. 63 ("In the absence of any information, sheltering provides
+  protection against initial and fallout radiation" / "blast, thermal, and dust/smoke hazards."). The 24-hour figure is
+  quoted from the owner, How long to stay in.
+- Closing up the house: pointer to the owner, Living in a closed-up house; "Never burn anything in a sealed room" is the
+  owner's sentence word for word.
+- Hurt or sick: READY ("If you are sick or injured, listen for instructions on how and where to get medical attention.").
+  READY's "call 9-1-1" line is not used (no dial control; standing rule).
+- What this covers: the app's scope statement (spec 2, plant accidents deferred). No source needed.
+
+### surv-fallout-where-to-shelter
+
+- Tags: none. Links: s:surv-fallout-how-long.
+- doFirst: READY and FEMA-PG3 p. 65 ("The best radiation protection is underground (e.g., basements, subway tunnels,
+  underground parking garages)"); CDC-GI and NYC-H ("If the basement is unavailable, seek shelter in the center of the
+  building away from walls and windows"); NYC-H ("Shelter in your car" listed under don'ts); FEMA-PG3 p. 67.
+- What makes a good shelter: CDC-WHERE ("Radioactive material settles on the outside of buildings;" / "so the best thing to
+  do is stay as far away from the walls and roof of the building as you can."); READY (walls); FEMA-PG3 p. 67 (vehicles
+  lack dense shielding); FEMA-PG3 p. 66 ("Adequate shelters reduce radiation doses by a factor of 10 or more"; Definitions
+  p. 228: "Shelters that reduce external radiation exposure by a factor of 10 or more are considered adequate." Written as
+  "a tenth or less", a ratio, no dose); p. 66 ("Structures do not need to be airtight to protect against fallout
+  radiation," / "so buildings with minor damage can be used as shelters if they are structurally sound."); p. 39 ("Even
+  buildings with broken windows can provide adequate protection from ground shine dose.").
+- Best to worst table, row by row:
+  1. Underground — FEMA-PG3 p. 65 (above); READY (underground parking garages and subways "good shelter"). "Best".
+  2. Middle of a large brick or concrete building — READY ("Remain in the most protective location (basement or center of
+     a large building)"; brick or concrete), CDC-GI (brick or concrete multi-story best), FEMA-PG3 p. 43 ("Get Inside a
+     basement or the middle of a large, dense building."), p. 54 ("center of larger concrete or reinforced brick
+     buildings"). "Best above ground" is the app's wording for ranking it after underground (FEMA-PG3 p. 65 puts
+     underground first).
+  3. Thick-walled masonry; house basement — FEMA-PG3 p. 65 ("Thicker-walled masonry buildings and residential basements
+     generally provide adequate protection.").
+  4. Small house above ground — FEMA-PG3 p. 65 ("Smaller single-family homes, particularly wood/steel frame houses, do not
+     usually provide adequate protection above ground," / "though is still far better than being outside.").
+  5. One-story wood frame, no basement — FEMA-PG3 p. 67 ("Vehicles and single-story wood frame houses without basements
+     provide limited shielding" / "and should not be considered adequate shelter.").
+  6. Car — FEMA-PG3 p. 65 ("Cars do not provide adequate shelter."), p. 67; NYC-H.
+  7. Outside — CDC-GI ("being inside any building is safer than being outside"; written "better"); FEMA-PG3 p. 43 ("Any
+     shelter is better than being outside for extended periods of time.").
+- Best spot in a house: CDC-GI (basement; walls and roof); PNA-1985 p. 17 ("The shelter should be located in the corner of
+  your basement that is most below ground level."); ITE-1968 ("A basement corner below ground level, or a storm cellar, is
+  the best place to improvise fallout protection."); NYC-H (center, away from walls and windows). The basement-corner
+  detail is from dated sources because current guidance says only "basement" (it fills a gap; does not override).
+- Apartments and large buildings: NYC-RG ("In the case of a nuclear explosion, go to the center of the building, as far from
+  the roof and windows as possible."; "Going to the basement is best."); NYC-H ("near the roof, fire escapes and
+  balconies"). Looked for, not found: any current source ranking middle floors of tall buildings (FEMA-PG3 speaks of
+  "centers of large, multi-story structures" only; FEMA-PG3 Figure 24 and FEMA-72 Figure 3, the building protection
+  factor figures, are images and could not be read). Nothing is said about floors beyond "away from the roof".
+- Moving to a better shelter: READY ("within a few minutes"); FEMA-PG3 p. 67 ("When adequate shelters are nearby (within 15
+  minutes travel time), people in poor-quality shelters" / "(protection factors = 2) should stay there no longer than 30
+  minutes from the detonation."; "For individuals in better shelters (protection factor = 4), people should stay for an
+  hour or two"; "The optimal time, from detonation, to stay in the first (poor quality) shelter will depend on the initial"
+  / "shelter protection factor and the travel time to the adequate shelter."). FEMA does not name which buildings have
+  protection factor 2 or 4 (the figure is an image), so the topic says "poor" and "somewhat better" and says FEMA does not
+  name them. Protection factor numbers are left out (planner terms). D72.
+- Caught outdoors or in a car: CDC-GI ("Get inside a building right away."; mask, cloth or towel; outer layer before
+  entering); READY (10 minutes); FEMA-PG3 p. 65 and 67 (cars). NYC-RG's car advice ("Pull to the side of the road, turn off
+  the engine, close the windows and vents...") is for radiological emergencies in general and is not used: for a nuclear
+  detonation FEMA-PG3 and NYC-H say a car is not a shelter.
+- In the woods with no building (spec 10 call 11): FM3-05.70 23-30 ("Five minutes to locate the shelter is a good guide.
+  Speed in finding shelter is absolutely essential."); 23-35 ("an underground shelter covered by 1 meter (3 feet) or more of
+  earth provides the best protection against fallout"; "Caves and tunnels covered by more than 1 meter (3 feet) of earth.";
+  "Storm or storage cellars." / "Culverts." / "Basements or cellars of abandoned buildings." / "Abandoned buildings made of
+  stone or mud."); 23-33 (ditches, ravines, rocky outcroppings, hills, riverbanks; "dig a fighting position or sli[t
+  trench]", cut off); 23-34 ("When digging a trench, work from inside the trench as soon as it is large enough to cover part
+  of your body"; "If you dig as quickly as possible, you will reduce the dosage you receive."); 23-38 (keep body covered
+  while building, to guard against beta burns — from the first, summarised fetch; not re-read word for word; "Where
+  possible, seek a crude, existing shelter that you can improve. If none is available, dig a trench."); 23-36 ("It is not
+  mandatory that you build a roof on your shelter."; roof only if materials are readily available without much outside
+  exposure). Step order: existing cover first, then natural cover, then dig, as 23-38 orders it. Left out: the Army's
+  half-value-layer figures, dose examples in cGy, poncho roof detail, and its post-attack exposure timetable (23-39) — the
+  last because call 11 limits the Army manuals to this one case (D68 tells Jordan it exists).
+
+### surv-fallout-how-long
+
+- Tags: none. Links: s:surv-generators.
+- Order (brief): current official period first (READY, CDC, NYC-H, FEMA-PG3), then dated periods with publication and year
+  in the sentence (ITE-1968, PNA-1985).
+- doFirst 1 and 2: READY, CDC-GI, NYC-H ("Expect to shelter indoors for at least 24 hours."); READY ("STAY INSIDE: Take
+  shelter unless told otherwise."; "do not return until you are told it is safe to do so by local authorities" is about
+  evacuees and is not used).
+- doFirst 3: the app's caution below.
+- What officials say: READY (as quoted); CDC-SI ("Staying inside for at least 24 hours can protect you and your family until
+  it is safe to leave the area." — the "until it is safe" clause is not used; "Always listen for additional instructions
+  from emergency officials and radiation experts."); NYC-H; FEMA-PG3 p. 47 ("“Get Inside, Stay Inside, Stay Tuned” for at
+  least 12‒24 hours unless threatened by fire," building collapse, medical needs or other immediate threats), p. 43 ("Stay
+  Inside for 12–24 hours, unless provided additional guidance."), p. 69 ("Where possible, individuals should stay in an
+  adequate shelter for the first 24 hours following detonation"). Conflict: FEMA-PG3 12 to 24 hours vs READY, CDC, NYC-H at
+  least 24 hours; the longer is used and the topic says so.
+- Why time matters: FEMA-PG3 p. 33 ("Fallout gives off over half of its energy in the first hour and then continues to decay
+  rapidly"); READY ("Radiation levels decrease rapidly, becoming significantly less dangerous, during the first 24 hours.");
+  FEMA-72 ("measurements may initially increase rapidly, then decrease over the first 48 hours."); FEMA-PG3 p. 178 (wind
+  "may resuspend fallout particles back into the air", boundaries can shift). Warn: CDP-LIM ("For accuracy and reliability,
+  nothing can replace a direct instrument reading."); the "never a time rule alone" sentence is spec 2's anti-goal.
+- The 7:10 rule: CDP-710 ("The 7:10 Rule of Thumb states that for every 7-fold increase in time after detonation," / "there
+  is a 10-fold decrease in the exposure rate."; example 400 R/hr at 2 hours, 40 R/hr at 14 hours — not printed, no dose
+  units in the app). Table rows: PNA-1985 p. 5 ("for every sevenfold increase in time after detonation, there is a tenfold
+  decrease in the radiation rate."; 1,000 R/hr at one hour, about 100 R/hr at seven hours; "After the next sevenfold passage
+  time (49 hours or approximately two days)" about 10 R/hr; after about two weeks "the level of radiation would be at
+  one-thousandth of the level at one hour after detonation"). The rows are written as fractions of the 1-hour level, with
+  "About" because CDP-LIM says "only approximations". Limits list: CDP-LIM ("Like any rule of thumb, the answers obtained
+  are only approximations."; assumes detonation time known and fallout from only one detonation; instrument reading).
+  CDP-LIM also says the rule may be needed to predict when short trips outside a shelter are possible; the topic does not
+  say this, because the app has no meter guidance and never treats a time rule alone as a reason to go out (spec 2).
+- When no one tells you: FEMA-PG3 p. 63 (absence of information); ITE-1968 chapter 4 ("people in affected areas would have
+  to stay in fallout shelters for 2 or 3 days to as long as 2 weeks."), chapter 3 ("In most places, it is unlikely that
+  full-time shelter occupancy would be required for more than a week or two."; "people soon might be able to leave shelter
+  for a few minutes or a few hours at a time"), chapter 4 ("Unless you have these instruments, you will have to depend on
+  your local government to tell you when to leave shelter."); PNA-1985 p. 6 ("In areas receiving fallout, shelter stay
+  times could range from a few days to as much as two weeks", "somewhat longer in limited areas"; "the first few days after
+  an attack would be the most dangerous time."), p. 23 ("from a few days to as much as a week or two."), p. 29 ("the
+  radiation level will decline to a point where you can leave the shelter for short periods of time to perform emergency
+  functions."; "you probably will have to depend on your local government to tell you when to leave shelter."). The two
+  agree on up to 2 weeks; PNA-1985 adds "somewhat longer in limited areas", so the longer stay (spec 1, 9) is "up to 2
+  weeks, and it could be longer in some places".
+- App's own caution (labelled in the text): no trips in the first 24 hours except for an immediate hazard (READY's rule
+  carried into the no-word case), then only necessary, brief trips to the end of 2 weeks, above all in the first few days
+  (PNA-1985 "first few days ... most dangerous"). No source gives a day for brief trips without a meter or officials. D68.
+- Trips outside: CDC-GI (mask, cloth or towel; outer layer off before entering); READY ("Be very careful in removing your
+  clothing to prevent radioactive dust from shaking loose."; wash or wipe uncovered skin and hair); Generators (checked:
+  "Run it only outside").
+- If you have a meter: see "Meter" in docs/v7.4-rulings.md. CDP-LIM quoted. Looked for, not found: public-actionable meter
+  readings in READY, CDC-GI, CDC-SI, CDC-WTD, CDC-PREP (no mention of detectors), FEMA-PG3 (responder detectors and planner
+  zone thresholds only: dangerous radiation zone over 10 R/h, mass care shelters below 0.1 mR/hr), FEMA-72 (responder
+  thresholds only: "Only emergency workers with radiation detection equipment should operate outdoors"), CDP pages.
+
+### surv-fallout-shelter-living
+
+- Tags: none. Links: s:surv-carbon-monoxide, p:carbon-monoxide, s:surv-heat-out, s:surv-wood-stoves-fireplaces,
+  s:surv-portable-heaters, p:hypothermia, s:surv-fallout-how-long (twice), s:surv-sleep-warm, s:surv-water-in-the-house,
+  s:surv-water-store, s:surv-toilet-no-water, s:surv-handwashing.
+- Owner of the closed-house air rule (spec 7). The winter heat default is written in the words of Global Constraints and
+  labelled as the app's rule.
+- doFirst 1: CDC-GI. doFirst 2: the owner sentence, FEMA-PG3 p. 66 (airtight). doFirst 3 and 5: Stay warm when the heat is
+  out's Do first, word for word (CDC; CDC, CPSC). doFirst 4: Jordan's no-flame-first rule, wording from Stay warm when the
+  heat is out.
+- Close it up: CDC-GI and READY (windows, doors, fans, air conditioners, forced-air heating, "Close fireplace dampers.",
+  pets); NYC-RG ("In houses or apartments, turn off window fans, air conditioners and heating/cooling systems that bring air
+  from outside."); damper sentence word for word from Wood stoves and fireplaces' Do first (Massachusetts Department of
+  Fire Services); CDC-GI ("Bring indoors and wipe any supplies from outside that your pets might need for at least 24
+  hours.").
+- Air, and anything that burns: FEMA-PG3 p. 66 (airtight), p. 65 ("Make sure to maintain enough ventilation to ensure
+  adequate indoor air quality."; "Close windows and doors to minimize the amount of outdoor air being drawn into the
+  building."). "Don't tape or cover ... to make the house airtight" is labelled as the app's reading of FEMA; no opened
+  source says "don't tape" in words. Never list word for word from Stay warm when the heat is out (CDC). Trapped-CO sentence
+  from Carbon monoxide ("Even with doors and windows open, a closed or partly closed space can trap it and let it build to
+  deadly levels quickly (CPSC)."; "it" written as "carbon monoxide"). Old handbooks: PNA-1985 p. 26 (camp stove; "If a
+  stove is used indoors, however, adequate ventilation is essential."; "(Do not use charcoal for heating or cooking.)");
+  ITE-1968 ("If a stove is used indoors, adequate ventilation is needed."). Conflict with checked CDC/CPSC text; the app
+  follows CDC and CPSC, in the same form Shelter uses for the Army snow-cave stoves. D73. CO alarm sentence quoted from Stay
+  warm when the heat is out's Do first; the conflict with sheltering is D69.
+- Heat in winter: the rule (Global Constraints, spec 1 and 7). No-flame list from Stay warm when the heat is out (Do first
+  and "Keep your body warm"; "heat only that" written "live in that" because no heat source is assumed). Babies and older
+  people sentence word for word from its Do first; "among those most at risk" from its "Who is most at risk" (CDC). No
+  indoor temperature: Stay warm when the heat is out ("No source opened gives an indoor temperature at which to leave");
+  D71. Burn options each point to their checked owners: Wood stoves and fireplaces (vented only, CDC; damper; put out before
+  sleep), Kerosene and propane heaters ("Run the heater in a room with the door open to the rest of the house (CPSC)."; "Open
+  an outside window about 1 inch (2.5 cm) (CPSC)."; "This app says do both"), Carbon monoxide (alarms). Furnace paragraph:
+  the app's reading that a working vented furnace is the house's normal heat and not "the stove or heater" of the rule;
+  CDC-GI (turn off forced-air heating that brings in outside air); Stay warm when the heat is out "What a furnace needs"
+  (vents). D76. Go-somewhere-warm conflict: Stay warm when the heat is out's Do first ("Can’t keep the house warm? Go
+  somewhere with heat") vs sheltering; D70.
+- Light: Carbon monoxide ("For light, use flashlights or battery lanterns"; fuel lanterns never indoors, CDC; candles,
+  CPSC).
+- Sleeping: heater sleep rule word for word from Kerosene and propane heaters (owner rule, v7.3 ruling 14); put-out rule
+  word for word from Wood stoves and fireplaces' "At night" warn.
+- Water, food and toilets: CDC-SI ("Foods and drinks that are sealed or that were already inside are safe."; written "can be
+  used"). Everything else by link; what fallout means for tap water, wells and outside food is for Water and food after
+  fallout (later batch). CDC-SI's "Boiling tap water will not remove radioactive materials." is left to that topic.
+- When someone has to go out: CDC-GI, READY (as above; "Seal these towels or cleaning cloths in a plastic bag" and the kit's
+  trash bag for clothing — written "Put them in a bag"); CDC-SI ("Emergency responders or local officials will let you know
+  if you need to decontaminate your home."). Pointer only; steps belong to the decontamination protocol.
+- Looked for, not found: an official fallout-specific rule for toilets, sleeping or keeping warm (none in READY, CDC, FEMA-PG3,
+  NYC); PNA-1985's toilet disinfectant and burial lines were not used (Toilets when the water is off is the checked owner).
+
+### Batch A agreement with checked topics and protocols
+
+- Carbon monoxide, Stay warm when the heat is out, Kerosene and propane heaters, Wood stoves and fireplaces, Generators,
+  Sleep warm: quoted word for word where marked; no checked text edited. Fireplace dampers: CDC and READY say close them;
+  Wood stoves and fireplaces says never close until the fire is out and embers cold; both are stated together. Shelter
+  (checked) is not contradicted: its snow and woods shelters are for cold, this topic's woods section is for fallout.
+- Priorities: "about 3 hours at a dangerous temperature" is not touched; the winter rule sends people to the heat topic.
+- Emergency protocols linked, not restated: bleeding, burns, shock, carbon-monoxide, hypothermia.
+- No radiation topic has a where or when tag. No dose, exposure limit or potassium iodide anywhere. The word "safe" does
+  not appear in any of the four topics.

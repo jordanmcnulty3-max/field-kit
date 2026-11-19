@@ -3445,3 +3445,1449 @@ No new source was opened; no number or instruction changed.
   and not a common English word ranks higher ("CO"). Wind chill brochure used line: "the three times on the chart's legend".
 - Decisions: D39 points at docs/v7.3-rulings.md, not the build ledger, and ends with one question (room or house); D61
   ends with a question. docs/v7.3-rulings.md lists every ruling and a Deferred section.
+
+## Radiation pack batch A: fallout warning, where to shelter, how long to stay in, living in a closed-up house (2026-11-18)
+
+Files (all draft): src/survival/surv-fallout-warning.json, surv-fallout-where-to-shelter.json, surv-fallout-how-long.json,
+surv-fallout-shelter-living.json. tests/test_build.py topic count 38 to 42. Every source below was found by built-in web
+search and opened by web fetch on 2026-11-18; the title (and date where printed) was checked after each fetch. Fetches
+return quotes capped at about 125 characters, so long sentences were read as consecutive pieces. No Firecrawl, no Bright
+Data. Ready.gov loaded this time (it failed all through v7.3), so spec 10 call 13 was not needed.
+
+Source keys:
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024. https://ready.gov/radiation (opened twice; the second fetch for "Stay Safe During", "Prepare Now" and "Be Safe After" word for word)
+- CDC-GI: CDC, What to Do: Get Inside, last reviewed April 15, 2024. https://cdc.gov/radiation-emergencies/response/get-inside.html
+- CDC-SI: CDC, What to Do: Stay Inside, last reviewed April 17, 2024. https://www.cdc.gov/radiation-emergencies/response/stay-inside.html
+- CDC-WTD: CDC, What to Do in Radiation Emergencies, last reviewed April 15, 2024. https://cdc.gov/radiation-emergencies/response/index.html
+- CDC-WHERE: CDC, Where To Go In a Radiation Emergency (infographic text), last reviewed April 17, 2024. https://cdc.gov/radiation-emergencies/infographic/where-to-go.html
+- CDC-PREP: CDC, Preparing for a Radiation Emergency, last reviewed April 15, 2024 (updated January 31, 2025). https://cdc.gov/radiation-emergencies/safety/index.html (meter search only; not cited)
+- CDC-HCP1 and CDC-HCP2: CDC, Immediate Actions to Take When a Nuclear Detonation Occurs, and Preparing for Radiation Incidents, both last reviewed April 23, 2024. https://cdc.gov/radiation-emergencies/hcp/nuclear-detonations/immediate-actions.html and https://www.cdc.gov/radiation-emergencies/hcp/nuclear-detonations/preparing.html (decay-rule search only; neither has it; not cited)
+- FEMA-PG3: FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (Foreword 2022; record of change 06/12/2023, CBRN Office renamed Office of Emerging Threats, no other change). https://www.fema.gov/sites/default/files/documents/fema_nuc-detonation-planning-guide.pdf (all five 100,000-character parts read; pages 46 to 90 read three more times for exact wording)
+- FEMA-72: FEMA Office of Emerging Threats, Nuclear Detonation Response Guidance: Planning for the First 72 Hours, March 2023 (updated 06/12/2023), copy hosted by HHS REMM. https://remm.hhs.gov/fema_oet-72-hour-nuclear-detonation-response-guidance.pdf (both parts read; Figure 3 is an image, not readable)
+- CDP-710 and CDP-LIM: FEMA Center for Domestic Preparedness online course AWR-923-W (course folder dated 2021-05-12), pages "The 7:10 Rule of Thumb" and "Limitations of 7:10 Rule of Thumb". https://cdp.dhs.gov/shared/se/courses/default/AWR-923-W%2005122021%201.2-20210512144644/groups/394.html and .../groups/395.html
+- CDP-CAT: Center for Domestic Preparedness, Online Courses. https://cdp.dhs.gov/online_course (lists AWR-923-W "Radiological Emergency Management"; logo alt text "Department of Homeland Security Shield / FEMA Center for Domestic Preparedness")
+- NYC-H: NYC Health, Emergencies: Nuclear Incident. https://www.nyc.gov/site/doh/health/emergency-preparedness/emergencies-radiological-nuclear-incident.page
+- NYC-RG: New York City, Response Guide: Radiological and Nuclear Emergencies, Individuals & Families (undated; no single issuing agency named). https://www.nyc.gov/assets/doh/downloads/pdf/em/radiological-nuclear-response-guide.pdf
+- PNA-1985: FEMA, Protection in the Nuclear Age, June 1985 (GPO 1984 453-797 printed on p. 38; no H-number in the text), copy hosted by Waldo County, Maine. https://waldocountyme.gov/wp-content/uploads/2024/01/1985-FEMA_Protection_in_the_Nuclear_Age.pdf (OCR text)
+- ITE-1968: Department of Defense, Office of Civil Defense, In Time of Emergency: A Citizen's Handbook on Nuclear Attack and Natural Disasters, H-14, March 1968, Project Gutenberg. https://gutenberg.org/ebooks/15158.html.images (opened twice)
+- FM3-05.70: US Army FM 3-05.70, Survival, chapter 23 "Survival in Man-Made Hazards", section "Survival in the Nuclear Environment"; a printout (12/6/21) of a mongabay.com mirror, hosted by Waldo County, Maine; no manual date in the copy; lines cut at the right margin. https://waldocountyme.gov/wp-content/uploads/2024/01/Survival-In-the-Nuclear-Environment.pdf (opened twice)
+
+Would not open or held nothing usable: the CDC page in Gutenberg's "cache/epub" form (robots disallowed; the ebooks page
+was used instead); FM 3-05.70 at biotech.law.lsu.edu (error page: "no longer available"); FM 21-76 (2006 copy at
+sjsu.edu): the fetch stops at 500,000 characters, before chapter 23, so the Army text is FM 3-05.70 above. DHS S&T
+"Visualizing a Nuclear Detonation and Response" fact sheet (April 2023): no sheltering content. Searches returned no
+New York State Department of Health or DHSES page on a nuclear detonation; New York is represented by New York City's
+pages (city guidance, named as such). The archived Ready.gov "nuclear-explosion" page and archived REMM pages were not
+used (archive copies; Ready.gov's live page loaded).
+
+Conversions: 3 feet = 0.91 m, "1 m" (the Army text prints "1 meter (3 feet)"); 1 inch = 2.54 cm, "2.5 cm" (quoted from
+Kerosene and propane heaters). Fractions: 7 hours 1/10, 49 hours 1/100, about 2 weeks 1/1,000 (PNA-1985 prints all three;
+7 x 7 x 7 = 343 hours = 14.3 days, "about two weeks").
+
+### surv-fallout-warning
+
+- Tags: none. Links: s:surv-fallout-where-to-shelter, s:surv-fallout-how-long, s:surv-fallout-shelter-living,
+  s:surv-carbon-monoxide, p:bleeding, p:burns, p:shock. Links left for later tasks: see docs/v7.4-rulings.md.
+- doFirst 1: READY ("If warned of the possibility of a radiation hazard, immediately get inside the nearest building and
+  move away from windows."; "If you are outside, lie face down to protect exposed skin from the heat and flying debris.";
+  "After the shockwave passes, go inside the nearest building as quickly as possible.").
+- doFirst 2: CDC-GI ("Go to the basement or the middle of the building."; "Stay as far away from the walls and roof of the
+  building as you can."; "Brick or concrete multi-story building or basement are best, but being inside any building is
+  safer than being outside." The app writes "better than being outside").
+- doFirst 3: READY ("Remain in the most protective location ... for the first 24 hours" / "unless threatened by an immediate
+  hazard (e.g., fire, gas leak, building collapse, or serious injury)" / "or informed by authorities that it is safe to
+  leave."; "Sheltering usually lasts at least 24 hours."), CDC-GI ("Staying inside for at least 24 hours ..."; "Stay where
+  you are!"). "Officials tell you to" replaces "informed by authorities that it is safe to leave" so the topic never says
+  "safe".
+- doFirst 4: READY ("Remove your outer layer of contaminated clothing"; "Be very careful in removing your clothing";
+  "take a shower or wash with soap and water"; "If you cannot wash, use a wipe or clean wet cloth to wipe any skin or hair
+  that was not covered."; kit: "a trash bag for contaminated clothing"), CDC-GI ("Carefully remove your outer layer of
+  clothing before entering the building, if you can."; "Wash the parts of your body that were uncovered"). FEMA-PG3 p. 107
+  sample message: "Remove contaminated clothes and shoes and place them in a bag." This is a pointer; the cleaning-off
+  steps belong to the decontamination protocol (owner rule) and must be aligned when it exists.
+- doFirst 5: CDC-GI ("Close and lock all windows and doors."; "If possible, turn off fans, air conditioners, and
+  forced-air heating units that bring air in from the outside."), READY ("Have a battery-powered or hand crank radio, which
+  will continue to work if other forms of communication fail."). Fireplace dampers are left to Living in a closed-up house
+  because a damper must stay open while a fire burns (Wood stoves and fireplaces, checked).
+- If you have warning: READY (three sentences as quoted; "Put as many walls between you and the outside"; "take cover from
+  the blast behind anything that might offer protection").
+- At the flash and the blast: READY (face down; after the shockwave); CDC-GI ("If you must be outside and cannot get inside
+  immediately, cover your mouth and nose with a mask, cloth, or towel."). ITE-1968 says lie on your side curled up and
+  cover your head with your arms and hands; the topic follows READY (current). D75.
+- Before the fallout arrives: READY ("If it detonates on the ground, the explosion can suck material up into the air" /
+  "and create dangerous, sand-like, radioactive particles called fallout."; "After a detonation, you will have 10 minutes
+  or more to find an adequate shelter before fallout arrives."; "If a multi-story building or a basement can be safely
+  reached within a few minutes of the explosion," / "go there immediately."; "The safest buildings have brick or concrete
+  walls." (written "best"); "Underground parking garages and subways can also provide good shelter."). FEMA-PG3 p. 54
+  ("Fallout will likely take 10 minutes or more to arrive."). NYC-H ("Exposure to fallout that is falling or has just
+  fallen may be fatal."). Not used: FEMA-PG3 p. 47 "In many areas, fallout will arrive an hour or more after the
+  detonation" and FEMA-72 p. 87 "Fallout may take several hours to arrive" (they invite delay; the shortest time is used);
+  PNA-1985 and ITE-1968 "within 15-30 minutes" near an explosion (longer than READY's minimum). D74.
+- Don't run from it: FEMA-PG3 p. 67 ("Cars and other vehicles are not adequate shelters because they lack dense shielding
+  material."), p. 71 ("Self-evacuation is strongly discouraged due to the risks involved"; context: section 3.6
+  Self-Evacuation, "Many individuals may self-evacuate, based on either official guidance or uninformed, spontaneous
+  decisions."), p. 70 ("no evacuation should be attempted until basic information is available regarding fallout
+  distribution"); CDC-GI ("Going outside to get loved ones could expose you and them to dangerous levels of radiation.";
+  "Providing shelter to someone who was outside during a radiation emergency can save their life"; outer clothing off
+  before entering); NYC-H ("Do not pick up your children from school or daycare.").
+- Stay in and stay tuned: READY ("Follow instructions from emergency response officials."; radio); FEMA-PG3 p. 52 ("Tune in
+  to local radio to determine radiation hazard."), p. 63 ("In the absence of any information, sheltering provides
+  protection against initial and fallout radiation" / "blast, thermal, and dust/smoke hazards."). The 24-hour figure is
+  quoted from the owner, How long to stay in.
+- Closing up the house: pointer to the owner, Living in a closed-up house; "Never burn anything in a sealed room" is the
+  owner's sentence word for word.
+- Hurt or sick: READY ("If you are sick or injured, listen for instructions on how and where to get medical attention.").
+  READY's "call 9-1-1" line is not used (no dial control; standing rule).
+- What this covers: the app's scope statement (spec 2, plant accidents deferred). No source needed.
+
+### surv-fallout-where-to-shelter
+
+- Tags: none. Links: s:surv-fallout-how-long.
+- doFirst: READY and FEMA-PG3 p. 65 ("The best radiation protection is underground (e.g., basements, subway tunnels,
+  underground parking garages)"); CDC-GI and NYC-H ("If the basement is unavailable, seek shelter in the center of the
+  building away from walls and windows"); NYC-H ("Shelter in your car" listed under don'ts); FEMA-PG3 p. 67.
+- What makes a good shelter: CDC-WHERE ("Radioactive material settles on the outside of buildings;" / "so the best thing to
+  do is stay as far away from the walls and roof of the building as you can."); READY (walls); FEMA-PG3 p. 67 (vehicles
+  lack dense shielding); FEMA-PG3 p. 66 ("Adequate shelters reduce radiation doses by a factor of 10 or more"; Definitions
+  p. 228: "Shelters that reduce external radiation exposure by a factor of 10 or more are considered adequate." Written as
+  "a tenth or less", a ratio, no dose); p. 66 ("Structures do not need to be airtight to protect against fallout
+  radiation," / "so buildings with minor damage can be used as shelters if they are structurally sound."); p. 39 ("Even
+  buildings with broken windows can provide adequate protection from ground shine dose.").
+- Best to worst table, row by row:
+  1. Underground — FEMA-PG3 p. 65 (above); READY (underground parking garages and subways "good shelter"). "Best".
+  2. Middle of a large brick or concrete building — READY ("Remain in the most protective location (basement or center of
+     a large building)"; brick or concrete), CDC-GI (brick or concrete multi-story best), FEMA-PG3 p. 43 ("Get Inside a
+     basement or the middle of a large, dense building."), p. 54 ("center of larger concrete or reinforced brick
+     buildings"). "Best above ground" is the app's wording for ranking it after underground (FEMA-PG3 p. 65 puts
+     underground first).
+  3. Thick-walled masonry; house basement — FEMA-PG3 p. 65 ("Thicker-walled masonry buildings and residential basements
+     generally provide adequate protection.").
+  4. Small house above ground — FEMA-PG3 p. 65 ("Smaller single-family homes, particularly wood/steel frame houses, do not
+     usually provide adequate protection above ground," / "though is still far better than being outside.").
+  5. One-story wood frame, no basement — FEMA-PG3 p. 67 ("Vehicles and single-story wood frame houses without basements
+     provide limited shielding" / "and should not be considered adequate shelter.").
+  6. Car — FEMA-PG3 p. 65 ("Cars do not provide adequate shelter."), p. 67; NYC-H.
+  7. Outside — CDC-GI ("being inside any building is safer than being outside"; written "better"); FEMA-PG3 p. 43 ("Any
+     shelter is better than being outside for extended periods of time.").
+- Best spot in a house: CDC-GI (basement; walls and roof); PNA-1985 p. 17 ("The shelter should be located in the corner of
+  your basement that is most below ground level."); ITE-1968 ("A basement corner below ground level, or a storm cellar, is
+  the best place to improvise fallout protection."); NYC-H (center, away from walls and windows). The basement-corner
+  detail is from dated sources because current guidance says only "basement" (it fills a gap; does not override).
+- Apartments and large buildings: NYC-RG ("In the case of a nuclear explosion, go to the center of the building, as far from
+  the roof and windows as possible."; "Going to the basement is best."); NYC-H ("near the roof, fire escapes and
+  balconies"). Looked for, not found: any current source ranking middle floors of tall buildings (FEMA-PG3 speaks of
+  "centers of large, multi-story structures" only; FEMA-PG3 Figure 24 and FEMA-72 Figure 3, the building protection
+  factor figures, are images and could not be read). Nothing is said about floors beyond "away from the roof".
+- Moving to a better shelter: READY ("within a few minutes"); FEMA-PG3 p. 67 ("When adequate shelters are nearby (within 15
+  minutes travel time), people in poor-quality shelters" / "(protection factors = 2) should stay there no longer than 30
+  minutes from the detonation."; "For individuals in better shelters (protection factor = 4), people should stay for an
+  hour or two"; "The optimal time, from detonation, to stay in the first (poor quality) shelter will depend on the initial"
+  / "shelter protection factor and the travel time to the adequate shelter."). FEMA does not name which buildings have
+  protection factor 2 or 4 (the figure is an image), so the topic says "poor" and "somewhat better" and says FEMA does not
+  name them. Protection factor numbers are left out (planner terms). D72.
+- Caught outdoors or in a car: CDC-GI ("Get inside a building right away."; mask, cloth or towel; outer layer before
+  entering); READY (10 minutes); FEMA-PG3 p. 65 and 67 (cars). NYC-RG's car advice ("Pull to the side of the road, turn off
+  the engine, close the windows and vents...") is for radiological emergencies in general and is not used: for a nuclear
+  detonation FEMA-PG3 and NYC-H say a car is not a shelter.
+- In the woods with no building (spec 10 call 11): FM3-05.70 23-30 ("Five minutes to locate the shelter is a good guide.
+  Speed in finding shelter is absolutely essential."); 23-35 ("an underground shelter covered by 1 meter (3 feet) or more of
+  earth provides the best protection against fallout"; "Caves and tunnels covered by more than 1 meter (3 feet) of earth.";
+  "Storm or storage cellars." / "Culverts." / "Basements or cellars of abandoned buildings." / "Abandoned buildings made of
+  stone or mud."); 23-33 (ditches, ravines, rocky outcroppings, hills, riverbanks; "dig a fighting position or sli[t
+  trench]", cut off); 23-34 ("When digging a trench, work from inside the trench as soon as it is large enough to cover part
+  of your body"; "If you dig as quickly as possible, you will reduce the dosage you receive."); 23-38 (keep body covered
+  while building, to guard against beta burns — from the first, summarised fetch; not re-read word for word; "Where
+  possible, seek a crude, existing shelter that you can improve. If none is available, dig a trench."); 23-36 ("It is not
+  mandatory that you build a roof on your shelter."; roof only if materials are readily available without much outside
+  exposure). Step order: existing cover first, then natural cover, then dig, as 23-38 orders it. Left out: the Army's
+  half-value-layer figures, dose examples in cGy, poncho roof detail, and its post-attack exposure timetable (23-39) — the
+  last because call 11 limits the Army manuals to this one case (D68 tells Jordan it exists).
+
+### surv-fallout-how-long
+
+- Tags: none. Links: s:surv-generators.
+- Order (brief): current official period first (READY, CDC, NYC-H, FEMA-PG3), then dated periods with publication and year
+  in the sentence (ITE-1968, PNA-1985).
+- doFirst 1 and 2: READY, CDC-GI, NYC-H ("Expect to shelter indoors for at least 24 hours."); READY ("STAY INSIDE: Take
+  shelter unless told otherwise."; "do not return until you are told it is safe to do so by local authorities" is about
+  evacuees and is not used).
+- doFirst 3: the app's caution below.
+- What officials say: READY (as quoted); CDC-SI ("Staying inside for at least 24 hours can protect you and your family until
+  it is safe to leave the area." — the "until it is safe" clause is not used; "Always listen for additional instructions
+  from emergency officials and radiation experts."); NYC-H; FEMA-PG3 p. 47 ("“Get Inside, Stay Inside, Stay Tuned” for at
+  least 12‒24 hours unless threatened by fire," building collapse, medical needs or other immediate threats), p. 43 ("Stay
+  Inside for 12–24 hours, unless provided additional guidance."), p. 69 ("Where possible, individuals should stay in an
+  adequate shelter for the first 24 hours following detonation"). Conflict: FEMA-PG3 12 to 24 hours vs READY, CDC, NYC-H at
+  least 24 hours; the longer is used and the topic says so.
+- Why time matters: FEMA-PG3 p. 33 ("Fallout gives off over half of its energy in the first hour and then continues to decay
+  rapidly"); READY ("Radiation levels decrease rapidly, becoming significantly less dangerous, during the first 24 hours.");
+  FEMA-72 ("measurements may initially increase rapidly, then decrease over the first 48 hours."); FEMA-PG3 p. 178 (wind
+  "may resuspend fallout particles back into the air", boundaries can shift). Warn: CDP-LIM ("For accuracy and reliability,
+  nothing can replace a direct instrument reading."); the "never a time rule alone" sentence is spec 2's anti-goal.
+- The 7:10 rule: CDP-710 ("The 7:10 Rule of Thumb states that for every 7-fold increase in time after detonation," / "there
+  is a 10-fold decrease in the exposure rate."; example 400 R/hr at 2 hours, 40 R/hr at 14 hours — not printed, no dose
+  units in the app). Table rows: PNA-1985 p. 5 ("for every sevenfold increase in time after detonation, there is a tenfold
+  decrease in the radiation rate."; 1,000 R/hr at one hour, about 100 R/hr at seven hours; "After the next sevenfold passage
+  time (49 hours or approximately two days)" about 10 R/hr; after about two weeks "the level of radiation would be at
+  one-thousandth of the level at one hour after detonation"). The rows are written as fractions of the 1-hour level, with
+  "About" because CDP-LIM says "only approximations". Limits list: CDP-LIM ("Like any rule of thumb, the answers obtained
+  are only approximations."; assumes detonation time known and fallout from only one detonation; instrument reading).
+  CDP-LIM also says the rule may be needed to predict when short trips outside a shelter are possible; the topic does not
+  say this, because the app has no meter guidance and never treats a time rule alone as a reason to go out (spec 2).
+- When no one tells you: FEMA-PG3 p. 63 (absence of information); ITE-1968 chapter 4 ("people in affected areas would have
+  to stay in fallout shelters for 2 or 3 days to as long as 2 weeks."), chapter 3 ("In most places, it is unlikely that
+  full-time shelter occupancy would be required for more than a week or two."; "people soon might be able to leave shelter
+  for a few minutes or a few hours at a time"), chapter 4 ("Unless you have these instruments, you will have to depend on
+  your local government to tell you when to leave shelter."); PNA-1985 p. 6 ("In areas receiving fallout, shelter stay
+  times could range from a few days to as much as two weeks", "somewhat longer in limited areas"; "the first few days after
+  an attack would be the most dangerous time."), p. 23 ("from a few days to as much as a week or two."), p. 29 ("the
+  radiation level will decline to a point where you can leave the shelter for short periods of time to perform emergency
+  functions."; "you probably will have to depend on your local government to tell you when to leave shelter."). The two
+  agree on up to 2 weeks; PNA-1985 adds "somewhat longer in limited areas", so the longer stay (spec 1, 9) is "up to 2
+  weeks, and it could be longer in some places".
+- App's own caution (labelled in the text): no trips in the first 24 hours except for an immediate hazard (READY's rule
+  carried into the no-word case), then only necessary, brief trips to the end of 2 weeks, above all in the first few days
+  (PNA-1985 "first few days ... most dangerous"). No source gives a day for brief trips without a meter or officials. D68.
+- Trips outside: CDC-GI (mask, cloth or towel; outer layer off before entering); READY ("Be very careful in removing your
+  clothing to prevent radioactive dust from shaking loose."; wash or wipe uncovered skin and hair); Generators (checked:
+  "Run it only outside").
+- If you have a meter: see "Meter" in docs/v7.4-rulings.md. CDP-LIM quoted. Looked for, not found: public-actionable meter
+  readings in READY, CDC-GI, CDC-SI, CDC-WTD, CDC-PREP (no mention of detectors), FEMA-PG3 (responder detectors and planner
+  zone thresholds only: dangerous radiation zone over 10 R/h, mass care shelters below 0.1 mR/hr), FEMA-72 (responder
+  thresholds only: "Only emergency workers with radiation detection equipment should operate outdoors"), CDP pages.
+
+### surv-fallout-shelter-living
+
+- Tags: none. Links: s:surv-carbon-monoxide, p:carbon-monoxide, s:surv-heat-out, s:surv-wood-stoves-fireplaces,
+  s:surv-portable-heaters, p:hypothermia, s:surv-fallout-how-long (twice), s:surv-sleep-warm, s:surv-water-in-the-house,
+  s:surv-water-store, s:surv-toilet-no-water, s:surv-handwashing.
+- Owner of the closed-house air rule (spec 7). The winter heat default is written in the words of Global Constraints and
+  labelled as the app's rule.
+- doFirst 1: CDC-GI. doFirst 2: the owner sentence, FEMA-PG3 p. 66 (airtight). doFirst 3 and 5: Stay warm when the heat is
+  out's Do first, word for word (CDC; CDC, CPSC). doFirst 4: Jordan's no-flame-first rule, wording from Stay warm when the
+  heat is out.
+- Close it up: CDC-GI and READY (windows, doors, fans, air conditioners, forced-air heating, "Close fireplace dampers.",
+  pets); NYC-RG ("In houses or apartments, turn off window fans, air conditioners and heating/cooling systems that bring air
+  from outside."); damper sentence word for word from Wood stoves and fireplaces' Do first (Massachusetts Department of
+  Fire Services); CDC-GI ("Bring indoors and wipe any supplies from outside that your pets might need for at least 24
+  hours.").
+- Air, and anything that burns: FEMA-PG3 p. 66 (airtight), p. 65 ("Make sure to maintain enough ventilation to ensure
+  adequate indoor air quality."; "Close windows and doors to minimize the amount of outdoor air being drawn into the
+  building."). "Don't tape or cover ... to make the house airtight" is labelled as the app's reading of FEMA; no opened
+  source says "don't tape" in words. Never list word for word from Stay warm when the heat is out (CDC). Trapped-CO sentence
+  from Carbon monoxide ("Even with doors and windows open, a closed or partly closed space can trap it and let it build to
+  deadly levels quickly (CPSC)."; "it" written as "carbon monoxide"). Old handbooks: PNA-1985 p. 26 (camp stove; "If a
+  stove is used indoors, however, adequate ventilation is essential."; "(Do not use charcoal for heating or cooking.)");
+  ITE-1968 ("If a stove is used indoors, adequate ventilation is needed."). Conflict with checked CDC/CPSC text; the app
+  follows CDC and CPSC, in the same form Shelter uses for the Army snow-cave stoves. D73. CO alarm sentence quoted from Stay
+  warm when the heat is out's Do first; the conflict with sheltering is D69.
+- Heat in winter: the rule (Global Constraints, spec 1 and 7). No-flame list from Stay warm when the heat is out (Do first
+  and "Keep your body warm"; "heat only that" written "live in that" because no heat source is assumed). Babies and older
+  people sentence word for word from its Do first; "among those most at risk" from its "Who is most at risk" (CDC). No
+  indoor temperature: Stay warm when the heat is out ("No source opened gives an indoor temperature at which to leave");
+  D71. Burn options each point to their checked owners: Wood stoves and fireplaces (vented only, CDC; damper; put out before
+  sleep), Kerosene and propane heaters ("Run the heater in a room with the door open to the rest of the house (CPSC)."; "Open
+  an outside window about 1 inch (2.5 cm) (CPSC)."; "This app says do both"), Carbon monoxide (alarms). Furnace paragraph:
+  the app's reading that a working vented furnace is the house's normal heat and not "the stove or heater" of the rule;
+  CDC-GI (turn off forced-air heating that brings in outside air); Stay warm when the heat is out "What a furnace needs"
+  (vents). D76. Go-somewhere-warm conflict: Stay warm when the heat is out's Do first ("Can’t keep the house warm? Go
+  somewhere with heat") vs sheltering; D70.
+- Light: Carbon monoxide ("For light, use flashlights or battery lanterns"; fuel lanterns never indoors, CDC; candles,
+  CPSC).
+- Sleeping: heater sleep rule word for word from Kerosene and propane heaters (owner rule, v7.3 ruling 14); put-out rule
+  word for word from Wood stoves and fireplaces' "At night" warn.
+- Water, food and toilets: CDC-SI ("Foods and drinks that are sealed or that were already inside are safe."; written "can be
+  used"). Everything else by link; what fallout means for tap water, wells and outside food is for Water and food after
+  fallout (later batch). CDC-SI's "Boiling tap water will not remove radioactive materials." is left to that topic.
+- When someone has to go out: CDC-GI, READY (as above; "Seal these towels or cleaning cloths in a plastic bag" and the kit's
+  trash bag for clothing — written "Put them in a bag"); CDC-SI ("Emergency responders or local officials will let you know
+  if you need to decontaminate your home."). Pointer only; steps belong to the decontamination protocol.
+- Looked for, not found: an official fallout-specific rule for toilets, sleeping or keeping warm (none in READY, CDC, FEMA-PG3,
+  NYC); PNA-1985's toilet disinfectant and burial lines were not used (Toilets when the water is off is the checked owner).
+
+### Batch A agreement with checked topics and protocols
+
+- Carbon monoxide, Stay warm when the heat is out, Kerosene and propane heaters, Wood stoves and fireplaces, Generators,
+  Sleep warm: quoted word for word where marked; no checked text edited. Fireplace dampers: CDC and READY say close them;
+  Wood stoves and fireplaces says never close until the fire is out and embers cold; both are stated together. Shelter
+  (checked) is not contradicted: its snow and woods shelters are for cold, this topic's woods section is for fallout.
+- Priorities: "about 3 hours at a dangerous temperature" is not touched; the winter rule sends people to the heat topic.
+- Emergency protocols linked, not restated: bleeding, burns, shock, carbon-monoxide, hypothermia.
+- No radiation topic has a where or when tag. No dose, exposure limit or potassium iodide anywhere. The word "safe" does
+  not appear in any of the four topics.
+
+### Batch A fix round (2026-11-18), from task-1-review.md
+
+Draft removed from all four topics after these fixes.
+
+- I1 (closed list): "Leave only if a fire, gas leak, building collapse or serious injury forces you out" becomes "Leave
+  only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out" in the hub's
+  summary and Do first 3, and in How long to stay in's summary and Do first 1. READY: "unless threatened by an immediate
+  hazard (e.g., fire, gas leak, building collapse, or serious injury)"; FEMA-PG3 p. 47 adds "medical needs, or other
+  immediate threats". No longer excludes the CO alarm rule (D69 updated).
+- I2 (2 weeks): How long to stay in's Do first 3 is now "Plan to keep sheltering for as long as 2 weeks, and maybe longer
+  (civil defence handbooks, 1968 and 1985, dated)"; its summary names "the dated civil defence handbooks of 1968 and 1985"
+  and "as long as 2 weeks, and longer in some places" (ITE-1968 "to as long as 2 weeks"; PNA-1985 "as much as two weeks",
+  "somewhat longer in limited areas").
+- I3 (poor shelter): FEMA-PG3 p. 67, same paragraph: "Emergency response officials may issue supplemental orders, such as
+  early evacuation, to people in structures with poor shielding (e.g., wood frame residential structures)"; "transitioning
+  to adequate shelters in the nearby area, ideally moving away from ground zero" (quoted from the reviewer's re-opening).
+  Where to shelter now says FEMA gives wood-frame houses as the example of poor shielding and that the move should
+  ideally be away from the explosion. Ruling 10 and D72 corrected.
+- I4 (basement): table row 1 now "Underground: basement (a house basement counts), subway tunnel, underground parking
+  garage"; row 3 is "Thick-walled masonry building" only. FEMA-PG3 p. 65 puts basements with the best; CDC-GI basement first.
+- I5 (tape): "Don't tape or cover ..." removed. Do first 2, the summary and "Air, and anything that burns" now use FEMA's
+  words (structures need not be airtight; keep enough ventilation, written "enough fresh air") with "Never burn anything in
+  a sealed room." No conflict with Stay warm when the heat is out remains. Ruling 8 rewritten.
+- I6 (gate): docs/v7.4-rulings.md Tool gate set to "No tool (controller ruling)" with the reviewer's confirmed facts;
+  Deferred gains "No shelter-time tool"; u:fallout removed from the links later tasks must add. The 7:10 text in How long
+  to stay in is unchanged.
+- M1: woods step 1 now "Best: an underground shelter under 3 feet (1 m) or more of earth. Next best, in this order: ..."
+  (FM 21-76: "the following unoccupied structures (in order listed) offer the next best protection").
+- M2: "Keep everyone in one small room on the sheltered side of the house, with few windows, and close off the rest (as in
+  Stay warm when the heat is out)" — no longer carries the sources' names on a changed sentence.
+- M3: furnace vents line adds "that is a trip outside: see How long to stay in".
+- M4: hub adds FEMA-PG3 p. 70's exception: "unless a fire or other immediate danger forces you".
+- M5: hub "can suck material up" (READY's "can").
+- M6: shelter-living old handbooks "(...; both dated)".
+- M7: CDP source line "course pages dated May 12, 2021".
+- M8: the woods steps and their source line now cite US Army FM 21-76, Survival (June 1992), chapter 23 "The Nuclear
+  Environment", the source verified in full. The writer re-opened it in the fix round:
+  https://public.3.basecamp.com/p/inZg8e16NHVuznoxmCMQvZG2/attachments/2623d47a-200b-11ef-9bd5-aaa4f1cd8999/download/usarmy_survivalfieldmanual.pdf
+  (title "US Army Survival Field Manual, No 21-76, June 1992"; read at offset 400,000): "Five minutes to locate the shelter is
+  a good guide."; "Good examples are ditches, ravines, rocky outcropping, hills, and river banks."; "When digging a trench,
+  work from inside the trench as soon as it is large enough to cover part of your body"; "While an underground shelter
+  covered by 1 meter or more of earth provides the best protection against fallout radiation"; "the following unoccupied
+  structures (in order listed) offer the next best protection."; "It is not mandatory that you build a roof on your
+  shelter."; "Build one only if the materials are readily available with only a brief exposure to outside contamination.";
+  "Where possible, seek a crude, existing shelter that you can improve."; "While building your shelter, keep all parts of
+  your body covered with clothing to protect it against beta burns." The FM 3-05.70 mirror (FM3-05.70 above) holds the same
+  text but is clipped; the source line says the text is also in FM 3-05.70. FM 21-76 (1992) is an Army manual used under
+  spec 10 call 11, not a civil defence publication.
+- M9: correction to the record above: the p. 43 wording "middle of a large, dense building" was not found by the reviewer;
+  the nearest are p. 46 "center of larger, dense buildings" and p. 65 "center of large, heavy buildings". Topic text is
+  unaffected (row 2 also rests on READY, CDC-GI and FEMA-PG3 p. 54).
+
+## Radiation pack batch P: radiation decontamination and radiation sickness protocols (2026-11-18)
+
+Files (both draft): src/protocols/radiation-decontamination.json, src/protocols/radiation-sickness.json. Test added:
+tests/test_validate.py::test_radiation_protocols_keep_the_pack_rules (no "safe", no 911, no potassium iodide, no dose
+unit; both name the Survival topic that owns leaving shelter; evacuate lists open with the needs-not-instructions line).
+No test counts protocols by number; tests/test_validate.py::ShapeTests::test_shipped_protocols_pass_unchanged expects no
+warnings, so it fails while the two protocols are draft (as does the --release gate in tests/test_reports.py).
+
+Every source below was found by built-in web search and opened by web fetch on 2026-11-18; the title (and date where
+printed) was checked after each fetch. Fetches return quotes capped at about 125 characters, so long sentences were read
+as consecutive pieces; FEMA-COMM pages 13 to 16, 40, 46, 47, 51 and 95 to 97 were read line by line. No Firecrawl, no
+Bright Data.
+
+Source keys:
+- CDC-SD: CDC, How to Self-Decontaminate after a Radiation Emergency, last reviewed April 15, 2024. https://cdc.gov/radiation-emergencies/prevention/self-decontaminate.html
+- CDC-DYO: CDC, Decontamination for Yourself and Others (infographic text), last reviewed April 17, 2024. https://www.cdc.gov/radiation-emergencies/infographic/decontamination.html
+- CDC-PETS: CDC, How to Decontaminate Pets After a Radiation Emergency, last reviewed April 15, 2024. https://www.cdc.gov/radiation-emergencies/prevention/decontaminate-pets.html
+- CDC-CAUSES: CDC, What Causes Contamination versus Exposure, last reviewed April 10, 2024. https://cdc.gov/radiation-emergencies/causes
+- CDC-KIDS: CDC, Radiation Emergencies and Children (no date printed). https://www.cdc.gov/childrenindisasters/radiation-emergencies.html
+- CDC-FAQ: CDC, Frequently Asked Questions about Radiation Emergencies, last reviewed April 19, 2022, updated April 12, 2024. https://cdc.gov/radiation-emergencies/faq/index.html
+- CDC-HELP: CDC, Decontamination – Helping Others, last reviewed April 4, 2018 (old URL path; used only where FEMA-COMM says the same). https://www.cdc.gov/nceh/radiation/emergencies/selfdecon_helpothers.htm
+- CDC-GI: CDC, What to Do: Get Inside, last reviewed April 15, 2024 (re-opened for this batch). https://cdc.gov/radiation-emergencies/response/get-inside.html
+- CDC-ARS: CDC, Acute Radiation Syndrome (public), last reviewed April 10, 2024. https://www.cdc.gov/radiation-emergencies/signs-symptoms/acute-radiation-syndrome.html
+- CDC-ARS-HCP: CDC, Acute Radiation Syndrome: Information for Clinicians, last reviewed April 23, 2024. https://cdc.gov/radiation-emergencies/hcp/clinical-guidance/ars.html
+- CDC-JIT: CDC, Radiological Terrorism: Just-In-Time Training for Hospital Clinicians, transcript (no date printed). https://cdc.gov/nceh/radiation/emergencies/videos/jit/RadTerrorismJIT-Transcript-508.pdf
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024 (loaded; spec 10 call 13 not needed). https://ready.gov/radiation
+- RC: American Red Cross, Nuclear Explosion and Radiation Emergencies (no date; © 2026). https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/nuclear-explosion-radiation-emergencies.html (opened with the search result's "?cb=10029" suffix)
+- FEMA-COMM: FEMA Office of Emerging Threats, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath, second edition, April 2024. https://www.fema.gov/sites/default/files/documents/fema_oet_nuclear-detonation-preparedness-communicating-aftermath_052024.pdf (parts 0 to 300,000 characters read)
+- FEMA-PG3: FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (as batch A). https://www.fema.gov/sites/default/files/documents/fema_nuc-detonation-planning-guide.pdf (all five 100,000-character parts searched for this batch)
+- NYS-RRC: New York State Department of Health, Radiological Terrorism Rapid Response Card, prepared December 2002, revised December 2013 (written for responders and clinicians). https://healthweb-back.health.ny.gov/environmental/emergency/radiological_terrorism/radterr.htm
+
+Would not open or not used: the NYS-RRC PDF at health.ny.gov/environmental/emergency/radiological_terrorism/radterr.pdf
+(fetch refused: "failed ... (client_error)"; the HTML card on the department's healthweb-back host was used). HHS REMM
+pages (decontamination procedures, time to vomiting) were returned only as UNT web archive copies, so they were not used
+(the content plan accepts archive copies only for Ready.gov); the CDC and FEMA pages above cover the same points. No NYS
+Department of Health or DHSES public page on decontamination or radiation sickness was returned by search; New York is
+represented by NYS-RRC (a state document for responders) only.
+
+Numbers: "up to 90%" (CDC-DYO "Taking off your outer layer of clothing can remove up to 90% of radioactive material.";
+READY and FEMA-COMM p. 13 the same; CDC-FAQ "Even just removing your outer layer of clothing can remove up to 90%").
+"2 to 3 week" (NYS-RRC "especially following a 2-3 week period with nausea and vomiting"). "weeks 2 and 18" (FEMA-COMM
+p. 59 "roughly between weeks 2 and 18 of pregnancy"). "several weeks up to 2 years" (CDC-ARS; FEMA-COMM p. 51). "few hours
+up to several months" (FEMA-COMM p. 46; CDC-ARS). No other numbers. No dose, exposure limit or potassium iodide anywhere.
+FEMA-PG3's dose figures (for example GI-ARS "in excess of 6 Gy (600 rad)", p. 193) were read and not used.
+
+### radiation-decontamination
+
+Category environment (beside Carbon monoxide poisoning); not advanced: every step is a public instruction.
+Step order follows CDC-DYO's numbered order (1 outer clothing, 2 wash, 3 clean clothes, 4 help others and pets), with
+FEMA-COMM's order for the extras (yourself first, then others; belongings after self-decontamination, p. 15), and the
+life-threat question first (FEMA-PG3).
+
+- s1 / s20 (life threat first): FEMA-PG3 p. 99 "Regardless of location, management of serious injury takes precedence over
+  radiological decontamination."; p. 76 "however, any immediate lifesaving procedures should be performed before
+  decontamination."; p. 110 "In instances of life-threatening or serious injuries, medical care takes priority over
+  contamination screening and decontamination." NYS-RRC "Patient with life-threatening condition: treat, then
+  decontaminate."; "Emergency responders should not delay treatment of victims due to fear of becoming contaminated";
+  "Externally exposed patients do not become radioactive". s20 bleeding: FEMA-COMM p. 10 "If you're wounded, apply pressure
+  to stop any bleeding then decontaminate the area around the wound". Gloves and mask: FEMA-COMM p. 15. The protocols named
+  (Severe bleeding, CPR, Recovery position, Shock) are linked, not restated.
+- s2: CDC-DYO, READY, FEMA-COMM p. 13 (90%); CDC-SD "Be very careful in removing your clothing to prevent inhaling
+  radioactive dust released from shaking."; READY "Be very careful in removing your clothing to prevent radioactive dust
+  from shaking loose."; shoes: FEMA-PG3 p. 107 "Remove contaminated clothes and shoes and place them in a bag." and FEMA-COMM
+  Message B "remove shoes and outer clothing". Where: CDC-GI "Carefully remove your outer layer of clothing before entering
+  the building, if you can."; FEMA-COMM p. 40 "Remove the outer layer after you are safely inside." Conflict, both stated
+  (D86). CDC-CAUSES/CDC-KIDS "Try to avoid spreading contamination to parts of the body that may not be contaminated, such
+  as areas that were clothed."; READY "Avoid touching your eyes, nose, and mouth, if possible." Warn "Do not shake the
+  clothes out": from the CDC-SD and READY "shaking loose" sentences.
+- s3: CDC-SD "Put the clothing in a plastic bag or other sealable container and put the bag far away from other people and
+  pets."; CDC-KIDS "If possible, place the clothing in a plastic bag or leave it in an out-of-the-way area, such as the
+  corner of a room." / "Keep people away from it"; RC "place your contaminated clothing in a plastic bag and seal or tie the
+  bag"; CDC-KIDS "Keep cuts and abrasions covered when handling contaminated items".
+- s4 (wash): CDC-SD "Take a warm shower and gently wash yourself with lots of soap." / "Do not scald, scrub, or scratch your
+  skin." / "Wash your hair with shampoo or soap."; CDC-DYO "Do not use conditioner because it will cause radioactive
+  material to stick to your hair."; RC "Do not use conditioner in your hair because it will bind radioactive material to
+  your hair"; FEMA-PG3 p. 107 "If washing your hair, do not use conditioner." / "When showering, try to direct rinse water
+  away from face and body." / "Keep materials out of eyes, nose, mouth, and wounds."; FEMA-COMM p. 14 "Wash gently; do not
+  scald, scrub, or scratch your skin." No shower: CDC-SD "At a sink or faucet, wash your hands, face, and parts of your body
+  that were not covered." / "Use soap and plenty of water." / moist wipe, clean wet cloth, damp paper towel / "Pay special
+  attention to your hands and face."; READY "If you cannot wash, use a wipe or clean wet cloth to wipe any skin or hair that
+  was not covered." Cuts: CDC-SD "Keep cuts and abrasions covered when washing to stop radioactive material from getting in
+  open wounds." FEMA-COMM p. 14 "Although the best way to self-decontaminate is to shower and completely change your
+  clothes, you can still remove most of the radioactive material even without water or a change of clothes." CDC-SD "You can
+  still use tap water for decontamination."; FEMA-PG3 p. 100 "When water is scarce or needed to fight fires, wet wipes or dry
+  methods can be used for decontamination." READY "Do not use household cleaning wipes on your skin." / "Hand sanitizer
+  does not protect against radioactive material." Water temperature: CDC-SD "warm", CDC-KIDS "lukewarm", FEMA-PG3 "warm",
+  NYS-RRC "tepid"; written "warm (not hot)" with CDC's "do not scald".
+- s5: CDC-SD "Gently blow your nose and wipe your eyelids, eyelashes, and ears" with "a moist wipe, a clean wet cloth, or a
+  damp paper towel"; RC and FEMA-COMM p. 14 the same; bagging: CDC-SD "Put the used wipes, cloth, or towel in a plastic bag
+  or other sealable container." and READY "Seal these towels or cleaning cloths in a plastic bag and place them away from
+  people and pets."; FEMA-COMM p. 14. Eye: Eye injury protocol (checked) s10 "Grit, dust or an eyelash: do not rub. ...
+  rinse the eye with clean tap water or eyewash" (linked; NYS-RRC "For eyes, flush with plenty of water" agrees).
+- s6: CDC-DYO "Clothes stored in a closet or drawer away from radioactive material are safe to wear." (written "can be
+  worn"); FEMA-COMM p. 14 "Use clothing stored in a closet, drawer, or other covered area, if possible." / "It is much less
+  likely to have any radioactive materials on it." No clean clothes: CDC-DYO "Take off your outer layer of clothing, shake
+  or brush off your clothes, and put your clothes back on." / "Rewash your hands, face, and exposed skin at a sink or
+  faucet."; FEMA-COMM p. 14 "brush or wipe off your clothing as best as you can away from other people or pets." / "Cover
+  your nose and mouth with a cloth or mask if you can, so you don't swallow any hazardous particles you shake loose."
+- s7 (wounds, burns): FEMA-COMM p. 10 "If you're wounded, apply pressure to stop any bleeding then decontaminate the area
+  around the wound and wrap physical injuries or lightly wrap burn injuries." Clinician wording (not used as a lay step,
+  D82): CDC-JIT "Cleanse wounds first, then orifices, then intact skin." / "Use gentle, repeated irrigations to cleanse
+  wounds"; NYS-RRC "Priority efforts should be directed to decontamination of open wounds." Wound cleaning and care and
+  Burns are linked, not restated (D83 for burn cooling). Radiation burn pointer: FEMA-COMM p. 47.
+- s8 (help others): FEMA-COMM p. 15 "After decontaminating yourself, help others who might not be able to self-decontaminate
+  on their own, such as babies and children, people with disabilities, people with access or functional needs, older
+  adults, or pets."; CDC-HELP "If you have infants, small children, or others who may need help washing, wash yourself
+  first." Letting people in: FEMA-COMM Message B "Allowing others to come inside with you can save their lives." / "The
+  particles are dangerous, but the people themselves are not." / "If they can, they should remove shoes and outer clothing."
+  / "Have them shower, if possible, or wipe themselves off at a sink."; CDC-GI "Providing shelter to someone who was outside
+  during a radiation emergency can save their life without endangering your own." Children: CDC-FAQ "Children are more
+  likely to develop health effects from radiation exposure." Breastfeeding: CDC-KIDS "Pregnant women should take extra
+  precautions during a radiation emergency." / "They should consider not breastfeeding if other milk sources are available
+  until they can see their healthcare professional." (D85).
+- s9 (helper protection): FEMA-COMM p. 15 "If available, put on something to cover your clothing." / "Wear waterproof gloves
+  and a mask (or other material to cover your nose and mouth) if you can." / "Cover cuts and scrapes (yours and those of
+  anyone you are helping) when washing to keep radioactive material out of the wound."; CDC-DYO "Wear waterproof gloves and
+  a dust mask if you can." Not dangerous: NYS-RRC "Externally exposed patients do not become radioactive and therefore they
+  do not pose a risk to EMS or other first responders." / "It is important to understand that a person who has been exposed
+  to radiation is unlikely to pose a radiological health risk to any other person." Body fluids: CDC-CAUSES "Body fluids
+  (blood, sweat, urine) can contain radioactive materials if you are contaminated." / "Making sure that others do not come
+  in contact with dust or body fluids from a person with contamination will help prevent contamination of other people in
+  the home."
+- s10: FEMA-COMM p. 15 "After helping others, decontaminate yourself again to make sure no radioactive materials are on you
+  from the person or animals you helped."; CDC-DYO "Rewash your hands, face, and exposed skin at a sink or faucet."
+- s11 (pets): CDC-PETS "Wash your pet carefully with shampoo or soap and water and rinse completely." / "Wear waterproof
+  gloves and a dust mask (or other material to cover your mouth) if you can." / "Keep cuts and abrasions (both yours and
+  your pets) covered" / "Wash your hands and face after washing your pet."; FEMA-COMM p. 15 "Wash your pet thoroughly with
+  shampoo and water and rinse completely." / "If you cannot wash your pet, brush, or wipe off your pet with a wet cloth or a
+  paper towel." / "Some pets tend to shake themselves off, so be careful of contamination." / "Contaminated animals, if not
+  properly decontaminated, can contaminate people or objects."; READY "Gently brush your pet's coat to remove any radioactive
+  particles and wash your pet with soap and water, if available."; FEMA-PG3 p. 210 "Animals cross-contaminating owners,
+  especially children who pet them, present a health risk."; FEMA-COMM p. 95/97 "Keep pets indoors."
+- s12 (belongings): FEMA-COMM pp. 15 to 16 "After you are inside and have self-decontaminated, you can decontaminate other
+  essential belongings, such as wallets, jewelry, or assistive medical devices, such as wheelchairs, prosthetic limbs, or
+  hearing aids." / "Clean essential belongings and assistive medical devices the same way you would remove dirt or sand
+  from" / "Use a damp cloth or towel or wet wipe to wipe down surfaces and wear waterproof gloves" / "If an item cannot be
+  decontaminated and you don't immediately need it, put it in a bag" / "Wait for further instructions from officials." Home:
+  CDC Stay Inside (batch A record) via Living in a closed-up house.
+- s13: CDC-ARS (symptoms, minutes to days, come and go); FEMA-COMM p. 47 (beta burns hours to days); FEMA-COMM p. 46 stress
+  sentence. Pointer to How long to stay in and Leaving and moving after fallout; no rule of its own.
+- Do not list: each line carries its source above. Evacuate list: worded as needs (brief), opening with the pointer line;
+  "serious, life-threatening injury" FEMA-COMM p. 40; radiation sickness and burns FEMA-COMM pp. 46 to 47, CDC-FAQ; wounds and
+  burns by link to the checked protocols.
+- Looked for, not found: a public source on cleaning radioactive dust out of a wound (D82); on decontaminating a baby
+  specifically (only "wash yourself first" and FEMA's list); on contact lenses or glasses (not mentioned in any source
+  opened; glasses not named in s12); a current NYS public page.
+
+### radiation-sickness
+
+Category environment; not advanced. Danger-sign screen in the order of the checked Severe vomiting or diarrhea protocol
+(responsive and breathing, then alertness, then shock), then the radiation-specific steps.
+
+- s1, s20: wording and CPR pointer as in Severe vomiting or diarrhea (checked). "Do not delay CPR to clean them off":
+  FEMA-PG3 pp. 76, 99, 110; NYS-RRC.
+- s2, s21: FEMA-PG3 p. 194 "N-ARS is commonly lethal hours to days post-exposure." / "Symptoms include headache, nausea,
+  vomiting, confusion, altered mental status, fever, hypotension, seizures, and coma."; FEMA-COMM p. 40 "If you or anyone
+  you are sheltering with experiences the onset of severe symptoms, such as significant trouble breathing, or changes in
+  mental status, call 911." (911 not written; "needs urgent medical care" instead). Nothing by mouth, recovery position and
+  other causes: as in Severe vomiting or diarrhea s21 (checked).
+- s3, s22: FEMA-PG3 p. 193 "Initially, GI-ARS symptoms include nausea, vomiting, and diarrhea, potentially causing
+  dehydration"; shock care by link (Shock, checked).
+- s4: CDC-FAQ "It is important to get radioactive material off your body as soon as possible to lower your risk of harm.";
+  90% as above; helpers FEMA-COMM p. 15.
+- s5 (signs): CDC-ARS "Acute Radiation Syndrome (ARS), or radiation sickness, is a serious illness." / "It can happen when
+  you are exposed to very high levels of radiation, usually over a short period of time." / "These symptoms start within
+  minutes to days after the exposure." / "They can last for minutes up to several days and may come and go." / "After the
+  initial symptoms, you usually look and feel healthy for a period of time." / "This damage can start to show within a few
+  hours after exposure or it may be delayed for several days." / "temporary hair loss"; CDC-FAQ "Symptoms of Acute
+  Radiation Syndrome (ARS), or radiation sickness, may include nausea, vomiting, headache and diarrhea."; FEMA-COMM p. 46
+  "When a person becomes sick again, their symptoms could include loss of appetite, fatigue, fever, nausea, vomiting,
+  diarrhea, and possibly even seizures and coma." / "This seriously ill stage might last from a few hours up to several
+  months." / "White blood cells are needed for preventing and fighting infections." / "Most deaths that occur from acute
+  radiation syndrome are due to infections or internal bleeding." Early vomiting (spec 5: "only as a source states it"):
+  FEMA-PG3 p. 81 "Time to vomiting: vomiting onset time after exposure can indicate radiation dose received, with higher
+  doses causing earlier vomiting onset; however, many other factors besides radiation can induce vomiting." FEMA-COMM p. 46
+  "It is very common and understandable for people who have not been exposed to radiation to show similar symptoms due to
+  stress from the incident." / "If you experience these symptoms shortly after the incident and you were inside at the time,
+  it is most likely not caused by radiation exposure." FEMA-PG3 p. 76 "the symptoms of ARS are non-specific ... such as
+  nausea and vomiting, may occur without exposure." Not used: CDC-JIT "Serious systemic radiation injury, or acute radiation
+  syndrome, will always induce nausea and vomiting." (clinician teaching; would invite the reverse reading) and CDC-ARS-HCP
+  Table 1 onset windows by syndrome (clinician dose staging). D84.
+  Conflict: FEMA-COMM p. 46 says these symptoms "might appear within days to weeks after exposure" and also "minor symptoms
+  within a few hours"; CDC-ARS says "within minutes to days". The protocol uses CDC's wording (the earlier start, so nobody
+  waits); FEMA's "weeks" appears through the later-signs step.
+- s6: CDC-JIT "Duration of exposure, location, and time of onset of nausea and vomiting are major diagnostic factors.";
+  FEMA-PG3 p. 76 "The physical location and medical history of triaged populations should be recorded alongside contact
+  information in case follow-up is needed for medical care, biodosimetry, or epidemiological study."
+- s7: CDC-ARS and FEMA-COMM p. 51 "Treatments for acute radiation syndrome focus on reducing infections, maintaining
+  hydration, and treating major injuries and burns."; FEMA-PG3 p. 193 (dehydration). Fluids, warnings and hygiene by link
+  to Severe vomiting or diarrhea and Dehydration (checked; the warn line is theirs word for word). Body fluids: CDC-CAUSES.
+- s8: FEMA-COMM p. 46 (bone marrow, white blood cells, infection deaths); CDC-ARS "The cause of death in most cases is the
+  destruction of the person's bone marrow." / "This results in infections and internal bleeding."; CDC-ARS-HCP "Supportive
+  care in an environment that provides neutropenic precautions". The three home measures are this app's judgement, labelled
+  in the detail (D81). Infection signs by link to Wound cleaning and care (checked).
+- s9: FEMA-COMM p. 47 "Exposure to high doses of radiation can cause severe sunburn-like burns, which are sometimes referred
+  to as beta burns" / "Unlike thermal burn injuries that appear immediately, beta burns appear a few hours to several days
+  after exposure." / "Symptoms include itchiness, tingling, skin redness, and swelling caused by buildup of fluid." / "Seek
+  medical care immediately if you think you have a beta burn." / "The key treatments for beta burns are infection
+  prevention and pain management."; FEMA-PG3 p. 194 "there may be a much greater depth of injury for radiation burns than
+  thermal burns"; p. 193 "Later symptoms result in blisters, ulcers, itchiness, tingling, epilation (hair loss), erythema,
+  and edema". Burns (checked) evacuate list: "Get medical care: every electrical, lightning, chemical, radiation or
+  explosion burn, even a small one." — agrees.
+- s10: NYS-RRC "The acute radiation syndrome follows a predictable pattern that unfolds over several days or weeks" /
+  "Specific symptoms of concern, especially following a 2-3 week period with nausea and vomiting, are:" / "thermal
+  burn-like skin lesions without documented heat exposure;" / "a tendency to bleed (nosebleeds, gingival (gum) bleeding,
+  bruising);" / "hair loss." / "These symptoms may not appear immediately; it may take several days or weeks before
+  symptoms are observed."; FEMA-COMM p. 46 (loss of appetite, fatigue, fever).
+- s11: NYS-RRC (two sentences above); FEMA-COMM Message B; CDC-GI (without endangering your own); CDC-CAUSES (body fluids);
+  NYS-RRC "Ambulance personnel attending victims should wear gloves."
+- s12: CDC-FAQ "If you have symptoms of ARS (skin burns, nausea, or vomiting) seek medical attention as soon as it is safe
+  to leave your building or shelter." (written "once emergency officials say you can leave"; CDC-ARS "seek medical attention
+  after emergency officials say it is safe"); FEMA-COMM p. 46 "If you were near the incident and experience these symptoms,
+  seek medical assistance."; p. 47 beta burn; p. 40 "If applicable to the medical facility situation: Only those with
+  serious, life-threatening injuries should seek medical care, because medical facilities are overwhelmed." (D87);
+  FEMA-COMM p. 51 "Medical professionals will determine if medical treatments are appropriate, which treatment, who should
+  participate, and how much."; CDC-FAQ "Medical professionals will determine if treatments are needed."; FEMA-COMM p. 63
+  "Children are generally more likely to develop health effects from radiation exposure than adults." / "exposure to high
+  amounts of radiation can further damage your immune system" / "Medical treatments for radiation exposures might be less
+  effective in people who are immunocompromised."; p. 59 "After any radiation incident, it is highly unlikely that exposure
+  will cause damage to the fetus." / "Fetuses are at highest risk during their early development, roughly between weeks 2
+  and 18 of pregnancy."; p. 51 "The lower the radiation exposure, the more likely it is that the person will recover from
+  acute radiation syndrome, even without medical treatment." / "For survivors of acute radiation syndrome, the recovery
+  process might last from several weeks to up to 2 years." Recheck interval: group judgement, labelled.
+- Do not list and evacuate list: sources as above; evacuate entries are needs, opening with the pointer line.
+- Looked for, not found: any public source on caring for radiation sickness at home without a hospital beyond fluids and
+  "reducing infections" (D81); a current public statement that radiation sickness is "not contagious" in those words (the
+  protocol uses NYS-RRC's and FEMA's wording instead); how long after exposure symptoms stop being likely from radiation.
+
+### Batch P agreement with checked topics and protocols
+
+- Burns, Vomiting or diarrhoea, Wound cleaning and care, Dehydration, Shock, Eye injury, Seizure, Recovery position, CPR,
+  Severe bleeding: linked by title, never edited or reworded. The drinks warning in radiation-sickness s7 is the checked
+  protocols' line word for word. Burns' "every ... radiation ... burn ... needs medical care" agrees with FEMA-COMM p. 47.
+- Help wording: the standard line ("Call 911 if you have signal. If not, send someone for help and prepare to move the
+  casualty.") is not used in either protocol, because sending someone out is leaving shelter, which Leaving and moving after
+  fallout owns (spec 10 call 14). The protocols say what needs medical care and name that topic. The checked protocols they
+  link to still carry the line (D80).
+- Batch A topics: How long to stay in and Leaving and moving after fallout are named, not restated; coming-in rules agree
+  with the hub ("They take off their outer layer of clothes before they come in, if they can (CDC)") and Living in a
+  closed-up house ("Put them in a bag (Ready.gov)"). New finding for Living in a closed-up house (not edited): D88.
+- No "safe", no 911, no dose, no potassium iodide in either protocol (checked by the new test).
+
+### Batch P fix round (2026-11-18), from task-4-review.md
+
+Draft removed from both protocols after these fixes. FEMA-COMM and CDC-KIDS re-opened by web fetch for I1, I2 and M1.
+
+- I1 (breastfeeding): decontamination s8 detail now gives CDC-KIDS in order: "It is possible for nursing mothers to pass
+  radioactive materials to their babies through their breastmilk." / "They should consider not breastfeeding if other milk
+  sources are available until they can see their healthcare professional." and, separately, "Pregnant women should take
+  extra precautions during a radiation emergency." Correction to the s8 record above: "They" means nursing mothers. D85
+  rewritten.
+- I2 (wounds): FEMA-COMM p. 40 "If you are injured and need to self-decontaminate, clean around the wound," / "and then treat
+  your injury as you would an ordinary injury." / "Get a health care professional to decontaminate your wound once you have
+  access to one."; p. 41 "It is important to treat your physical injuries." / "Apply the appropriate treatments, even if there
+  is concern that it might result in some radiation contamination."; p. 10 Message 8 "Get a health care professional to
+  decontaminate the wound when you're able to see one." Added to decontamination s7 detail (all four) and s20 detail (p. 41).
+  The record's "Looked for, not found: a public source on cleaning radioactive dust out of a wound" is withdrawn: FEMA-COMM
+  answers it (a professional, when reachable). D82 and D83 rewritten around these sentences.
+- M1: decontamination s2 detail now cites FEMA-COMM p. 8 ("Those entering the location can easily self-decontaminate by
+  removing shoes and outer clothing and/or brushing or wiping off fallout particles immediately after they enter.") instead
+  of p. 40, whose "Remove the outer layer after you are safely inside." is about the extra layer worn to travel for care.
+  D86 cites p. 8 and Message B (p. 96).
+- M2: sickness s10 detail quotes NYS-RRC verbatim: "Specific symptoms of concern, especially following a 2-3 week period
+  with nausea and vomiting, are".
+- M3: sickness s11 text "Once they are cleaned off, they are unlikely to be a danger to you."; donts[5] "unlikely to pose a
+  risk to others"; decontamination s9 detail "unlikely to be a danger to you". CDC-CAUSES added beside the body-fluids
+  line in both: "you can expose people near you to radiation from the radioactive material inside your body".
+- M4: decontamination s11 text "Wear gloves and a mask if you can." (CDC-PETS, FEMA-COMM).
+- M5: decontamination s12 text and detail add "away from people and pets" (FEMA-COMM p. 16). s12 text shortened to stay
+  under 200 characters ("Wipe the things you need, such as wallets, jewellery, wheelchairs or hearing aids, as you
+  would wipe off dirt. ...").
+- M6: sickness s9 text "It needs medical care; see detail for what to do meanwhile." Detail points to the Burns protocol
+  only for covering (its step 8), pain (its step 9) and to Wound cleaning and care for infection signs, for FEMA-COMM p. 47's
+  "infection prevention and pain management"; cooling a burn that appears later is logged as D89 (medical professional).
+- M7: decontamination s20 and sickness s21, s22 details quote surv-fallout-warning.json Do first 3 word for word: "Leave only
+  if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you
+  to (Ready.gov)." and keep naming Leaving and moving after fallout (Survival) (title confirmed by the controller).
+- M8: the test is now RadiationProtocols.test_radiation_protocols_keep_the_pack_rules, a unittest method using self.assert*,
+  so both `python3 -m unittest tests.test_validate` and pytest collect it.
+- M9: corrections to the record above: FEMA-COMM treatment text ("Treatments for acute radiation syndrome focus on reducing
+  infections, maintaining hydration, and treating major injuries and burns.") is on p. 52, not p. 51; the "It is important to
+  treat your physical injuries" pair is on p. 41. The CDC-KIDS source line keeps "undated, read 2026-11-18".
+- D88 extended with the rest of FEMA-COMM section 3.3.5 (p. 16), as quoted by the reviewer and in the re-opened page. No
+  Survival topic edited.
+## Radiation pack batch B: coming in from outside, water and food after fallout, leaving and moving after fallout (2026-11-18)
+
+Files (all draft): src/survival/surv-fallout-coming-inside.json, surv-fallout-water-and-food.json, surv-fallout-leaving.json.
+tests/test_build.py topic count 42 to 45. Every source below was found by built-in web search and opened by web fetch on
+2026-11-18; the title (and date where printed) was checked after each fetch. Fetches return quotes capped at about 125
+characters, so long sentences were read as consecutive pieces. No Firecrawl, no Bright Data. Ready.gov loaded, so spec 10
+call 13 was not needed. surv-fallout-coming-inside is written from the sources as a summary of the federal steps; it is to
+be aligned with p:radiation-decontamination once that protocol exists (task brief step 2, not yet done).
+
+Source keys (batch A keys reused where the same page was re-opened):
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024. https://ready.gov/radiation
+- CDC-SD: CDC, How to Self-Decontaminate after a Radiation Emergency, last reviewed April 15, 2024. https://cdc.gov/radiation-emergencies/prevention/self-decontaminate.html (opened twice, the second time for exact sentences)
+- CDC-DYO: CDC, Decontamination for Yourself and Others (infographic text), last reviewed April 17, 2024. https://www.cdc.gov/radiation-emergencies/infographic/decontamination.html
+- CDC-GI: CDC, What to Do: Get Inside, last reviewed April 15, 2024. https://cdc.gov/radiation-emergencies/response/get-inside.html
+- CDC-SI: CDC, What to Do: Stay Inside, last reviewed April 17, 2024. https://www.cdc.gov/radiation-emergencies/response/stay-inside.html
+- CDC-PETS: CDC, How to Decontaminate Pets After a Radiation Emergency, last reviewed April 15, 2024. https://www.cdc.gov/radiation-emergencies/prevention/decontaminate-pets.html
+- CDC-FWM: CDC, Food, Drinking Water, and Medicine Safety in a Radiation Emergency, last reviewed April 15, 2024. https://www.cdc.gov/radiation-emergencies/safety/food-drinking-water-medicine-safety.html
+- CDC-INF: CDC, Infant Feeding (radiation emergencies), last reviewed April 16, 2024. https://www.cdc.gov/radiation-emergencies/caring/infant-feeding.html
+- CDC-FAQ: CDC, Frequently Asked Questions about Radiation Emergencies, last reviewed April 19, 2022. https://cdc.gov/radiation-emergencies/faq/index.html
+- NYC-H: NYC Health, Emergencies: Nuclear Incident. https://www.nyc.gov/site/doh/health/emergency-preparedness/emergencies-radiological-nuclear-incident.page (opened twice, the second time for complete sentences; section headings "Protect Yourself and Others", "Radiation and Pregnancy")
+- FEMA-PG3: FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change 06/12/2023). https://www.fema.gov/sites/default/files/documents/fema_nuc-detonation-planning-guide.pdf (all five 100,000-character parts read; part one read twice)
+- FEMA-72: FEMA Office of Emerging Threats, Nuclear Detonation Response Guidance: Planning for the First 72 Hours, March 2023 (updated 06/12/2023), copy hosted by HHS REMM. https://remm.hhs.gov/fema_oet-72-hour-nuclear-detonation-response-guidance.pdf (both parts read)
+- PNA-1985: FEMA, Protection in the Nuclear Age, June 1985 (dated), copy hosted by Waldo County, Maine. https://waldocountyme.gov/wp-content/uploads/2024/01/1985-FEMA_Protection_in_the_Nuclear_Age.pdf
+- ITE-1968: Office of Civil Defense, In Time of Emergency, H-14, March 1968 (dated), Project Gutenberg. https://gutenberg.org/ebooks/15158.html.images (first 100,000 of 118,998 characters read; the rest was not needed for these topics)
+
+Would not open or held nothing usable: New York State Department of Health "Radiological Terrorism: Rapid Response Card for
+EMS Personnel" (https://Health.ny.gov/environmental/emergency/radiological_terrorism/radterr.pdf failed with a client error;
+the copy at https://healthweb-back.health.ny.gov/environmental/emergency/radiological_terrorism/radterr.pdf opened: an EMS
+card from about December 2002, dirty bombs only, nothing for the public on fallout, not cited). EPA search returned only
+drinking-water regulation and protective action guide pages (dose-based; not opened). Searches for current guidance on
+milk, livestock and garden produce after fallout returned only nuclear power plant agricultural brochures (state and county
+emergency management); not opened, because plant accidents are out of scope (spec 2) and their advice is written for a
+plant release. Not used: the US Army survival manuals (spec 10 call 11 limits them to the caught-outdoors case, so their
+water and food lines were not opened for these topics).
+
+Conversions: none (no measured quantities in these three topics).
+
+### surv-fallout-coming-inside
+
+- Tags: none. Links: s:surv-fallout-water-and-food, s:surv-handwashing, s:surv-fallout-shelter-living, p:bleeding,
+  p:wound-care, p:burns. Links left for later: p:radiation-decontamination (see docs/v7.4-rulings.md).
+- Step order follows CDC-DYO's numbered steps (1 outer clothing off and bagged, 2 wash, 3 clean clothes, 4 help others and
+  pets) and CDC-SD's order (clothing, then shower or no shower).
+- doFirst 1: CDC-GI ("Carefully remove your outer layer of clothing before entering the building, if you can."); NYC-H ("If you
+  were outside when fallout was falling or had just fallen, take off your shoes" / "just after entering the building to avoid
+  spreading contamination."); CDC-DYO and READY ("Be very careful in removing your clothing to prevent radioactive dust from
+  shaking loose."); CDC-SD, CDC-DYO, READY ("Taking off your outer layer of clothing can remove up to 90% of radioactive
+  material."). 90% is a share of the material, not a dose.
+- doFirst 2: CDC-SD ("Put the clothing in a plastic bag or other sealable container and put the bag far away from other people
+  and pets.").
+- doFirst 3: CDC-SD ("Take a warm shower and gently wash yourself with lots of soap."; "Do not scald, scrub, or scratch your
+  skin."; "Wash your hair with shampoo or soap."); CDC-DYO ("Do not use conditioner because it will cause radioactive material
+  to stick to your hair.").
+- doFirst 4: CDC-SD ("At a sink or faucet, wash your hands, face, and parts of your body that were not covered."; "Use soap and
+  plenty of water."; moist wipe, clean wet cloth or damp paper towel; "Gently blow your nose and wipe your eyelids, eyelashes,
+  and ears").
+- doFirst 5: CDC-DYO ("Clothes stored in a closet or drawer away from radioactive material are safe to wear." written "can be
+  worn"); CDC-GI ("Then put on clean clothing, if you can.").
+- Why it matters: CDC-GI ("Radioactive material can settle on your clothing and your body, like dust or mud."); CDC-FAQ
+  ("Radioactive contamination can spread in the same way that dust or mud can be tracked into the home" / "or spread to
+  another person or object."; "It is important to get radioactive material off your body as soon as possible"); FEMA-PG3 p. 39
+  ("If contamination is not brushed or washed off, particles in contact with the skin can cause localized beta burns."), p. 100
+  ("If potentially contaminated with fallout, decontamination should be performed as soon as possible.").
+- Where to undress: CDC-GI, NYC-H (as above); FEMA-72 Tactic 9 ("Contaminated material can easily be caught in the collar of
+  shirts, top of shoes around the ankles, or similar locations."); READY ("Avoid touching your eyes, nose, and mouth, if
+  possible."); CDC-DYO ("Put the bag in an out-of-the-way place, away from other people and pets."); CDC-INF ("Store the bag as
+  far away from other people and pets as possible" / "until local health officials tell you how to dispose of it safely." —
+  CDC-INF's examples "closet, attic, basement" are left out because the basement is often the shelter room); NYC-H ("Do not
+  place them with your dirty laundry.").
+- Washing: CDC-SD (shower, hair, sink, wipes, nose, eyelids, ears, cuts: "Keep cuts and abrasions covered when washing to stop
+  radioactive material from getting in open wounds."; "Put the used wipes, cloth, or towel in a plastic bag or other sealable
+  container."); CDC-DYO ("Pay special attention to your hands and face."); NYC-H ("If it is not possible to shower, you can use
+  wet wipes (such as baby wipes) or water from a container" / "to clean your hands, face, and especially the areas around your
+  mouth, nose and eyes.").
+- Never list (warn): conditioner — CDC-DYO (above), NYC-H ("Wash your hair well, but do not use hair conditioner, including
+  2-in-1 hair shampoo and conditioner."; "Conditioner can make fallout particles difficult to remove."), FEMA-PG3 p. 107 ("If
+  washing your hair, do not use conditioner."), FEMA-72 (same); scald, scrub, scratch — CDC-SD; FEMA-PG3 p. 107 ("Avoid
+  scratching, burning, or causing breaks in the skin."); cleaning wipes and sanitizer — READY ("Do not use household cleaning
+  wipes on your skin."; "Hand sanitizer does not protect against radioactive material.").
+- Tap water for washing: CDC-SD ("You can still use tap water for decontamination."); CDC-SI, CDC-FWM.
+- Little or no water: FEMA-PG3 p. 100 ("When water is scarce or needed to fight fires, wet wipes or dry methods"), p. 103 ("If
+  water resources are scarce or not available, changing outer clothing and shoes"), p. 105 ("any action to reduce the external
+  contamination should be encouraged.", written "Any washing, brushing or change of clothes helps"); NYC-H ("If you know or
+  think you have fallout on your hair, skin, or clothes:" / "Brush it off with gloves, rags or a broom."). FEMA-PG3 p. 103's
+  cold-weather sentence was cut off at the fetch limit and is not used.
+- Clean clothes: CDC-DYO ("If you do not have clean clothes:" / "Take off your outer layer of clothing, shake or brush off your
+  clothes, and put your clothes back on." / "Rewash your hands, face, and exposed skin at a sink or faucet."). No source says
+  where to shake them; CDC also says to take clothes off carefully so dust doesn't shake loose. The "at the door, not in the
+  room where people are sheltering, and cover your mouth and nose" line is labelled as the app's caution (D90).
+- Children and anyone who needs help: CDC-INF ("Wash yourself off (self-decontaminate)."; "Put on clean clothes."; "Then,
+  decontaminate your baby or child."; "Make sure to gently wash your child's hands and face (especially around eyes, nose, and
+  mouth) with soap and water" / "or with a clean wet cloth or paper towel."); CDC-DYO step 4 ("Wear waterproof gloves and a dust
+  mask if you can."; "Keep cuts and scrapes covered"; "Rewash your hands, face, and exposed skin"); CDC-FAQ ("cover your mouth
+  with a mask, cloth, or towel when you are decontaminating other people"); FEMA-72 ("Decontaminate medical equipment (e.g.,
+  wheelchairs, eyeglasses), service animals, pets, vehicles, and other important items").
+- Pets: CDC-GI ("Bring pets inside with you, if you can."); READY ("Gently brush your pet’s coat to remove any radioactive
+  particles and wash your pet with soap and water, if available."); CDC-PETS ("Wash your pet carefully with shampoo or soap and
+  water and rinse completely."; "Wear waterproof gloves and a dust mask (or other material to cover your mouth) if you can.";
+  "Keep cuts and abrasions (both yours and your pets) covered"; "Wash your hands and face after washing your pet."; newspapers
+  or absorbent material; "Do not touch soiled material with your bare hands."; bag it away from people and pets); NYC-H ("Do not
+  shave your pet's fur as an alternative to washing."; "Shaving will not get rid you of the radioactive fallout particles.";
+  "Keep them indoors."); FEMA-PG3 p. 210 ("Animals may re-contaminate themselves and bring contamination inside homes or
+  shelters.").
+- Keeping the shelter clean: CDC-GI ("Bring indoors and wipe any supplies"); CDC-SD, CDC-DYO (bags far from people and pets;
+  "away from where people sleep and eat" is the app's wording for that); CDC-SI ("Emergency responders or local officials will
+  let you know if you need to decontaminate your home.", the same sentence Living in a closed-up house uses).
+- Hurt: CDC-SD (cuts covered). Care by link only. Looked for, not found in the pages opened: a public-facing statement that
+  life-saving first aid comes before cleaning off (FEMA-PG3 p. 207 says only that evacuating critical patients must not be
+  hindered by decontamination policy, a planner rule). Left to the decontamination protocol.
+- Looked for, not found: anything on eyes beyond wiping eyelids and eyelashes (no eye-flushing step for the public in these
+  pages); hearing aids, contact lenses.
+
+### surv-fallout-water-and-food
+
+- Tags: none. Links: s:surv-water-store, s:surv-water-in-the-house, s:surv-make-water-safe, s:surv-wells-without-power,
+  s:surv-find-water. No water pack number is restated (no gallons, drops, minutes or temperatures).
+- doFirst 1: CDC-FWM and CDC-SI ("Foods and drinks that are sealed or that were already inside are safe."); READY ("It is safe
+  to eat food in sealed containers that were outside" / "as long as you wipe off the container with a damp towel or cloth before
+  using."); CDC-FWM ("Food in containers from the outside that have been wiped off is safe to eat."). "Safe" written "can be
+  used" throughout.
+- doFirst 2: CDC-FWM ("Keep bottled water as an emergency supply."; "Bottled water is the only water that is free of
+  contamination until emergency officials say" / "that other water sources are safe."; "Boiling tap water will not get rid of
+  radioactive material."). "Bottled and stored": water the household stored itself is sealed in its containers (Store water at
+  home); the app treats it as CDC treats sealed drinks ("The package protects the liquid inside from radioactive material.").
+- doFirst 3: READY ("Do not consume food from your garden, or food or liquids that were outdoors and uncovered," / "until
+  authorities tell you it is safe.").
+- Food you can use: CDC-FWM ("Eat food in sealed containers (cans, bottles, boxes, etc.)."; "Unspoiled food in your
+  refrigerator or freezer is also safe to eat."; "Food in a pantry or drawer away from radioactive material is safe to eat.";
+  wiped containers); NYC-H ("Fallout will not contaminate food stored in your home."; "You can eat food such as canned goods,
+  food stored in the refrigerator or freezer, boxed foods and food in bottles or jars."; "It is safe to eat peeled fruits such
+  bananas and oranges."; "You should rinse fruits and vegetables that are not peeled before eating."); READY (damp towel or
+  cloth). Kitchen paragraph: CDC-FWM ("Wipe off counters, plates, pots, and utensils with a damp cloth or clean towel before
+  using them."; bag the cloth; "Place the bag away from other people and pets."; "Wash your hands after cleaning.").
+- Food to leave alone: READY ("Unsealed foods from outside may be contaminated with radioactive material."); NYC-H ("Avoid food
+  located outdoors because fallout can settle anywhere that is open to the air."); CDC-FWM ("Do not pick or eat food from your
+  garden until emergency officials determine it is safe to do so."). Milk, game, fish: looked for and not found in READY, CDC-FWM,
+  CDC-FAQ (milk only as breastfeeding), CDC-INF (no cow's milk), NYC-H, FEMA-PG3 (none of the five parts has public food
+  guidance), FEMA-72, PNA-1985 (milk only as a household drink). ITE-1968 chapter 2 ("Milk contamination from fallout is not
+  expected to be a serious problem after an attack."; "If cows graze on contaminated pasture and swallow fallout particles" /
+  "their milk might be harmful to the thyroid glands of infants and small children."; "they should be given canned or powdered
+  milk for a few weeks"). The "treat them like food that was outdoors" line is labelled as the app's caution (D91). ITE-1968's
+  "not expected to be a serious problem" for adults is not shown (it would loosen the app's caution).
+- Which water to drink first (step order is CDC-FWM's order): 1 CDC-FWM ("You can drink water, juices, or other drinks in
+  sealed containers."; "The package protects the liquid inside from radioactive material."; bottled water the only water free
+  of contamination until officials say; CDC-FAQ: "Until those results are available, bottled water is the only water source that
+  is certain to be free of contamination."); NYC-H ("Drinks in cans, bottles, juice boxes, cartons or other sealed containers
+  will be safe to drink."). 2 CDC-FWM ("Drinks in your refrigerator or freezer are also safe to drink."). 3 CDC-FWM ("Water in
+  other containers in your home, such as a toilet tank (not bowl) or hot water heater" / "will also be free of radioactive
+  material."); the steps and limits stay with Water already in your house (checked: toilet tank only if clear with no cleaner,
+  treat it; heater power off and cool first). 4 CDC-FWM ("If those water sources are not available, then tap water should be
+  used to stay hydrated."). Wipe containers: CDC-FWM ("use a damp cloth or clean towel to wipe off containers or packages before
+  opening them.").
+- What boiling and bleach don't do: CDC-SI and CDC-FWM (boiling); CDC-INF ("You cannot boil or disinfect the radiation out of
+  water."); Make water safe (checked: "Water with fuel, toxic chemicals or radioactive material cannot be made safe by boiling
+  or disinfecting; find another source." — restated in other words with the topic named, so the word "safe" does not appear
+  outside a title). The germs paragraph points to Make water safe unchanged. Filters: no opened source says whether a filter
+  removes fallout from water, so the topic says nothing about filters (an earlier draft line was removed).
+- Tap water and wells: CDC-SI and CDC-FWM ("Public health, environmental protection or emergency management agencies will test
+  drinking water supplies."; tap water for washing and cleaning); CDC-FAQ ("You can use tap or well water for cleaning yourself
+  and your food."); NYC-H ("Drink bottled water until public health authorities say that tap water is safe." written "is
+  fine"). Wells: no current source gives a drinking rule. "Treat it like tap water in the order above" is labelled as the app's
+  reading. ITE-1968 chapter 2 ("Water stored in covered containers and water in covered wells would not be contaminated after an
+  attack"), dated, shown as dated and below the current order (D92).
+- Rain, ponds and streams: READY (food or liquids outdoors and uncovered; "rain barrels, rainwater, ponds and streams" are the
+  app's examples of that phrase). Not followed: PNA-1985 p. 28 and ITE-1968 chapter 7 ("Strain the water through a paper towel
+  or several thicknesses of clean cloth, to remove dirt and fallout particles"; settle 24 hours; boil 3 to 5 minutes or treat);
+  ITE-1968 chapter 2 (particles in open reservoirs, lakes and streams settle to the bottom; dissolved material of concern for a
+  few weeks at most). They conflict with READY's rule and with Make water safe; the current sources win (spec 1 and 9).
+  D93.
+- Babies: CDC-INF ("Use ready-to-feed infant formula, if available"; "A sterile liquid formula that does not need to be mixed
+  with water"; "Prepare powdered infant formula with bottled water if possible."; "Tap water may be used if local officials say
+  it is safe."; "Do NOT leave your house or other indoor sheltering location to go get infant formula."; "It is safer to stay
+  inside and continue breastfeeding."; "If you are in the affected area and were indoors with the doors and windows closed, it
+  is safe to continue breastfeeding."; "If you were outside in the affected area during the incident, you may be internally
+  contaminated."; "Consider temporarily stopping breastfeeding and feed your baby with breast milk that was pumped and stored" /
+  "...before the emergency or with infant formula."; "If you do NOT have previously expressed breast milk or infant formula,
+  continue breastfeeding."; "Hand express or pump your breast milk regularly and discard it to maintain your milk supply";
+  "Breastfeeding can resume when advised by local health officials or after evacuation and self-decontamination."). CDC-INF's
+  Cronobacter line, pump-cleaning line and lactation-support line are left out (general infant-feeding care, not fallout).
+  Correction (fix round): CDC-FAQ does not agree with CDC-INF. CDC-FAQ "What if I am nursing?": "If possible, nursing mothers who
+  were near the affected area should temporarily stop breastfeeding" / "and switch to breast milk (that was pumped and stored
+  before the exposure) or formula, until they can be seen by a doctor."; "If no other source of food is available for your
+  baby, continue to breastfeed." Stronger ("should" against "consider") and a wider trigger ("near the affected area" against
+  "outside in the affected area"). Both are now shown, each credited to its CDC page by name, without choosing (controller
+  ruling). Medical-professional question: D94.
+- Medicine and pet food: CDC-FWM ("Continue taking your medication."; "It is safe to consume medicine that was already inside or
+  medicine in containers that were outside" / "but have been wiped off."; pet food sealed; wipe containers; "Wash or wipe off pet
+  bowls, dishes, and mats"); CDC-PETS (same).
+
+### surv-fallout-leaving
+
+- Tags: none. Links: s:surv-fallout-how-long, s:surv-carbon-monoxide, s:surv-fallout-shelter-living,
+  s:surv-fallout-where-to-shelter, p:bleeding, p:burns, p:shock, s:surv-fallout-coming-inside. Links left for later:
+  p:radiation-sickness (see docs/v7.4-rulings.md).
+- Owner of the rule for leaving shelter (spec 7; spec 10 call 14). The rule sentence is word for word the hub's Do first 3
+  ("Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials
+  tell you to (Ready.gov).") and agrees with How long to stay in's Do first 1. The sheltering period is not restated: How long to
+  stay in is linked, and an earlier draft's Ready.gov "first 24 hours" line was removed for that reason.
+- doFirst 1: READY ("unless threatened by an immediate hazard (e.g., fire, gas leak, building collapse, or serious injury)" / "or
+  informed by authorities that it is safe to leave.").
+- doFirst 2: CDC-GI (mask, cloth or towel); hat, gloves and a removable outer layer are labelled as the app's advice, resting on
+  FEMA-PG3 p. 71 ("Contamination occurs when fallout lands on clothing and exposed parts of the body (head, hands, etc.).").
+- doFirst 3: CDC-GI and CDC-FAQ ("Get inside a building right away."); FEMA-PG3 p. 46 ("When evacuating, people should move away
+  from the detonation location and areas with the highest fallout concentration.").
+- doFirst 4: CDC-GI (outer layer off before entering; wash); FEMA-PG3 p. 71 ("People may need rudimentary decontamination when
+  they leave fallout areas or enter a shelter."; "brushing, removing, or changing the outer layer of clothing (including footwear)
+  and wiping off exposed skin").
+- doFirst 5: READY ("If advised to evacuate, listen for information about routes, shelters, and procedures.").
+- When leaving beats staying: FEMA-PG3 p. 45/47 ("unless threatened by fire, building collapse, medical needs, or other immediate
+  threats"), p. 43 ("evacuation may be warranted in the event of fire, building collapse, or medical emergencies."), p. 69
+  ("rapidly evolving fires may warrant emergency evacuation of potentially impacted areas"); FEMA-72 p. 16 ("Do not leave unless
+  officials provide other instructions or your shelter is threatened by fire or collapse."); CDC-FAQ ("Unless you have a
+  life-threatening situation, you should not leave your building or place of shelter" / "until emergency officials say it is
+  safe to do so." written "say you can"). CO alarm: Carbon monoxide's Do first word for word ("CO alarm sounding? Don’t look for
+  the cause. Get everyone outside into fresh air now"; its "then call 911" clause is not quoted, no dial control). Agrees with
+  Living in a closed-up house and D69. Cold and poor shelter: pointers to their owners only (cold: D97).
+- Leaving on your own: FEMA-PG3 p. 71 ("Self-evacuation is strongly discouraged due to the risks involved"), p. 70 ("Unless
+  threatened by fire or other immediate life-safety concerns, no evacuation should be attempted until basic information is
+  available regarding fallout distribution"; "Planners should especially prioritize individuals who face immediately
+  life-threating situations."; "Uninjured individuals with adequate shelter and access to safe food and water are a low priority
+  for early evacuation."); NYC-H ("You may also face many hazards trying to self-evacuate."; "Car travel will either be very
+  dangerous or impossible, due to vehicle collisions and rubble blocking roadways."; "You may also encounter fires, downed power
+  lines and ruptured gas lines outdoors."). The hub's "Don’t run from it" uses the same FEMA sentences.
+- Hurt or sick: READY (serious injury in the hazard list; "If you are sick or injured, listen for instructions on how and where
+  to get medical attention."; its "call 9-1-1" line not used); FEMA-PG3 (medical needs, medical emergencies). The "be as sure as
+  you can where you are going" paragraph is labelled as the app's caution; no source says what a household with no officials
+  should do with a casualty who needs a hospital (D95, medical professional). Burns' evacuate line ("Get medical care: every ...
+  radiation ... burn, even a small one") versus staying in: D96.
+- Which way to go: READY and NYC-H ("Authorities will determine and instruct the public about the safest evacuation route.";
+  "Follow evacuation instructions because they are designed to keep your exposure to radiation as low as possible"); FEMA-PG3 p.
+  46 (above), p. 70 ("travel is at right angles to the fallout path (to the extent possible) and away from the plume
+  centerline."), p. 16 ("Fallout can create dangerous radiation levels downwind of the detonation."), p. 29 ("the nuclear cloud
+  and descending fallout material may go in different directions than ground-level wind observations"), p. 33 ("Wind direction
+  and speed change with altitude, which can cause the fallout to be deposited in more than one direction."), p. 28 ("are clearly
+  visible as they fall, often being the size of fine sand or table salt"), p. 50 ("use protected escape routes (e.g.,
+  connections between buildings, tunnels, core areas within buildings"). p. 70's right-angles rule and p. 50's escape routes are
+  written for officials directing an evacuation; the topic gives them as FEMA's planning guidance, after "If officials give a
+  route, use it". FEMA-PG3 p. 8's fire sentence is in a fictional scenario and is not used.
+- On foot or by car: FEMA-PG3 p. 65 ("Cars do not provide adequate shelter."); NYC-H ("Do not shelter in your car."); FEMA-PG3
+  p. 212 ("Use of contaminated vehicles (personal or mass transit) for evacuation should not be discouraged"), p. 208 ("The public
+  may self-evacuate using contaminated personal vehicles."); p. 51 ("Substantial rubble and disabled vehicles are expected in the
+  streets" / "making evacuation and vehicle passage difficult or impossible without street clearing"). Looked for, not found:
+  any source comparing walking with driving through fallout.
+- Cover up on the way: CDC-GI (mask, cloth, towel); NYC-H ("Wear a mask if you have one, but you don't need a mask to evacuate.";
+  "If you don't have a mask, use handkerchiefs or other articles of clothing to cover your nose and mouth."); FEMA-PG3 p. 71
+  (clothing and exposed body parts; "Crude respiratory protection, such as a cloth mask can further mitigate any concern.");
+  FEMA-72 (collars, shoe tops); READY (eyes, nose, mouth).
+- Clean off: FEMA-PG3 p. 71 (above); FEMA-72 Tactic 9 ("Promote and support rapid, dry self-decontamination methods, such as
+  changing or shaking outer layer of clothes"), Tactic 7 ("Instruct the public to conduct rapid, dry self-decontamination while
+  they evacuate"). Steps by link to Coming in from outside.
+- Arriving at another household: CDC-GI ("Providing shelter to someone who was outside during a radiation emergency can save their
+  life without endangering your own."; "Ask them to remove their outer layer of clothing before entering the building or
+  shelter."; "Once inside, ask them to wash the parts of their body that were uncovered when they were outside."; "Then ask them
+  to put on clean clothing, if they can."); NYC-H ("If you have pets, you can bring them with you when you evacuate."); FEMA-PG3
+  p. 210 ("the federal government advises pet owners against leaving pets behind if they ever have to evacuate their homes").
+- Going back: READY ("If you have evacuated, do not return until you are told it is safe to do so by local authorities." written
+  "tell you to"); NYC-H ("Whether you can return home will depend on its location."; "It will be very difficult to predict if or
+  when you will be able to return home.").
+- Not used: PNA-1985 and ITE-1968 boat shelter (200 feet offshore; Central New York lakes; not asked for and not current);
+  PNA-1985 p. 22 fire check; FEMA-72 "Prepare to evacuate once radiation levels are less than 10 R/h" (a responder meter
+  threshold; no dose units in the app).
+
+### Batch B agreement with checked topics and protocols
+
+- Water pack: no stored-water, heater, bleach or boiling number restated. Water already in your house (checked) lists the heater
+  tank and toilet tank; CDC-FWM says both are free of radioactive material; the topic sends readers to its steps and limits.
+  Make water safe (checked) says radioactive water cannot be fixed by boiling or disinfecting; the topic agrees and names it.
+  Store water at home is not contradicted (stored water is first in the order).
+- Carbon monoxide: Do first quoted word for word. Living in a closed-up house's CO paragraph quotes Stay warm when the heat is
+  out's Do first sentence but names Carbon monoxide (finding for batch A's owner; its file was not edited here).
+- Batch A: the leaving rule is word for word the hub's; Where to shelter keeps the move-to-better-shelter timing; How long to
+  stay in keeps the period. Living in a closed-up house keeps the closed-house air rule; nothing here permits burning anything.
+- Emergency protocols linked, not restated: bleeding, wound-care, burns, shock. Burns' evacuate list is not edited (D96).
+- No radiation topic has a where or when tag. No dose, exposure limit or potassium iodide. "Safe" appears only inside the
+  titles "Make water safe" (a link label and a source line) and CDC's page title "Food, Drinking Water, and Medicine Safety".
+
+### Batch B fix round (2026-11-18), from task-5-review.md
+
+Draft removed from all three topics after these fixes. Minor 9 (the two CO quotes) is carried to the whole-pack review.
+
+- I1 (breastfeeding): water-and-food "Babies" now shows CDC Infant Feeding's statement and CDC FAQ's statement as two bullets,
+  each credited by page name, without choosing. CDC-FAQ re-opened this round (wording above, in the corrected "Babies" entry).
+  The CDC FAQ source line names the breastfeeding answer. D94 rewritten.
+- I2: Leaving "Hurt or sick" bullet 3 is now "First aid is in Emergency." (the hub's wording); "inside first" removed.
+- I3: Leaving "On foot or by car" bullet 2 is now "If you must leave and have a car, fallout on the car is not a reason not to use
+  it (FEMA planning guidance)." FEMA-PG3 p. 212 ("Use of contaminated vehicles (personal or mass transit) for evacuation should
+  not be discouraged").
+- M1: Leaving Do first 2 now "if it doesn’t slow you down, wear a hat, gloves and an outer layer you can take off (this app’s own
+  caution; ...)".
+- M2: coming-inside "Clean clothes" caution now says just inside the outside door, not outside (more time in fallout) and not in
+  the shelter room, labelled "This app’s own caution". No current source decides the side of the door. ITE-1968 chapter 7,
+  re-opened this round: "If anyone has been outside and fallout particles have collected on his shoes or clothing," / "they
+  should be brushed off before he enters the shelter area again." Shown as dated support for "not in the shelter room"; it
+  doesn't decide inside or outside the house door either. ITE-1968 added to the topic's sources. D90 updated.
+- M3: Leaving "Which way to go" now "and at right angles to the fallout’s path if you know it (FEMA planning guidance). Officials
+  may know the path; you may not."
+- M4: water-and-food Do first 2 now "Drink bottled water and other sealed drinks first (CDC), then water you stored yourself (this
+  app’s reading)"; "Which water to drink first" paragraph now says the app's reading treats self-stored sealed water like bottled
+  water, ahead of the heater and toilet tank. D98.
+- M5: the 1968 milk line now carries its condition, from ITE-1968 re-opened this round: "Therefore, if possible, they should be
+  given canned or powdered milk for a few weeks" / "if authorities say the regular milk supply is contaminated by radioactive
+  elements." Source line updated.
+- M6: the 1968 covered-wells line now ends "this app does not rely on it to rank a well higher".
+- M7: formula with no bottled water and no officials logged with D94 (no text added).
+- M8: coming-inside link label "Wound cleaning and care" (the protocol's title).
+- Reviewer note on source lines: coming-inside's CDC Get Inside / Stay Inside line no longer lists gloves, dust mask and cut
+  covering; those are credited to the CDC pets page, where the reviewer confirmed them.
+## Radiation pack batch C: dirty bomb, potassium iodide, get ready, fallout shelter kit (2026-11-18)
+
+Files (all draft): src/survival/surv-dirty-bomb.json, surv-potassium-iodide.json, surv-fallout-get-ready.json,
+src/checklists/fallout-shelter-kit.json. tests/test_build.py topic count 42 to 45. Every source below was found by built-in
+web search and opened by web fetch on 2026-11-18; the title (and date where printed) was checked after each fetch. Fetches
+return quotes capped at about 125 characters, so long sentences were read as consecutive pieces. No Firecrawl, no Bright Data.
+Ready.gov's radiation page loaded; ready.gov/build-a-kit failed (client error) and ready.gov/kit loaded without a title or
+date in the fetch result, so spec 10 call 13 applied only to that page (its items are all also in a loaded Ready.gov or CDC
+page, or are plain kit items: flashlight, first aid kit, manual can opener, phone and charger, baby and pet supplies,
+children's activities).
+
+Potassium iodide gate (spec 10, calls 3 and 12): no opened CDC or FDA page tells the public to take KI after a nuclear
+detonation. CDC-KI has a section headed "KI will not help in a nuclear bomb emergency". FDA-KI says local officials "will
+tell the public if there is a need to take KI" and gives no detonation-specific advice. The topic was written; no dose
+table, no dose, no age bands with amounts. Neither page's dose table was copied into the record or the topic.
+
+Dirty bomb rule: nothing on construction, materials or where material is found. The topic's one-line definition
+("uses an ordinary explosive to scatter radioactive dust, smoke or other material") is CDC-DB's own definition sentence
+with "dynamite or other explosives" written "an ordinary explosive". Sentences on which radioactive materials could be used
+were not read into the record (fetch prompts asked for them to be skipped) and are not in the topic.
+
+Source keys:
+- CDC-KI: CDC, Potassium Iodide (KI), last reviewed April 16, 2024 (page also shows updated January 30, 2025). https://www.cdc.gov/radiation-emergencies/treatment/potassium-iodide.html (opened twice; second fetch for every section in order)
+- FDA-KI: FDA, Frequently Asked Questions on Potassium Iodide (KI), content current as of 03/24/2022. https://www.fda.gov/drugs/bioterrorism-and-drug-preparedness/frequently-asked-questions-potassium-iodide-ki
+- NYS-KI: New York State Department of Health, Potassium Iodide (KI) and Radiation Emergencies: Fact Sheet, revised April 2017. https://healthweb-back.health.ny.gov/environmental/radiological/potassium_iodide/fact_sheet.htm
+- CDC-DB: CDC, Dirty Bombs: Frequently Asked Questions, last reviewed April 10, 2024 (metadata updated December 20, 2023). https://cdc.gov/radiation-emergencies/about/dirty-bombs-faq.html (opened twice; second fetch for the step lists in order)
+- CDC-RDD: CDC, Radiological Dispersal Device (RDD) (infographic page), last reviewed April 17, 2024. https://www.cdc.gov/radiation-emergencies/infographic/radiological-dispersal-device.html
+- CDC-TYPES: CDC, What to Do for Different Types of Radiation Emergencies, last reviewed July 20, 2026. https://www.cdc.gov/radiation-emergencies/about/what-to-do.html
+- NRC-DB: US Nuclear Regulatory Commission, Backgrounder on Dirty Bombs, document dated February 2022 (page reviewed/updated September 15, 2026). https://www.nrc.gov/regulations-legislation/fact-sheets-brochures/backgrounder-on-dirty-bombs (opened twice)
+- CDC-FAQ: CDC, Frequently Asked Questions about Radiation Emergencies, last reviewed April 19, 2022 (updated April 12, 2024). https://cdc.gov/radiation-emergencies/faq/index.html (opened twice)
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024. https://ready.gov/radiation ("Prepare Now" and "Be Safe After" word for word)
+- READY-KIT: Ready.gov Build A Kit list. https://www.ready.gov/kit (no title or date in the fetch result; content is Ready.gov's "Basic Disaster Supplies Kit", "Additional Emergency Supplies" and "Maintaining Your Kit")
+- CDC-PREP: CDC, Preparing for a Radiation Emergency, last reviewed April 15, 2024 (updated January 31, 2025). https://cdc.gov/radiation-emergencies/safety/index.html (no kit or plan content; not cited)
+- CDC-BR: CDC, Be Ready for Radiation Emergencies, updated and reviewed August 31, 2026. https://cdc.gov/radiation-emergencies/features/be-ready.html (kit for yourself and for pets; radio; community, school, nursing home and employer plans; same as CDC-FAQ, which is cited)
+- FEMA-PG3: FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change 06/12/2023). https://www.fema.gov/sites/default/files/documents/fema_nuc-detonation-planning-guide.pdf (searched in four 100,000-character parts for KI, dirty bomb and public preparedness: offsets 0, 200,000, 300,000, 400,000; offset 100,000 was not re-read in this batch)
+- PNA-1985: FEMA, Protection in the Nuclear Age, June 1985 (dated), Waldo County copy. https://waldocountyme.gov/wp-content/uploads/2024/01/1985-FEMA_Protection_in_the_Nuclear_Age.pdf
+- NYS-KIT: New York State preparedness checklist for children, "Help Detective Emm find the missing supplies" (prepare.ny.gov; no agency or date printed), hosted at https://www.dhses.ny.gov/system/files/documents/2025/08/preparednesskitchecklist.pdf
+- NYC-RG: New York City, Response Guide: Radiological and Nuclear Emergencies (undated). https://www.nyc.gov/assets/doh/downloads/pdf/em/radiological-nuclear-response-guide.pdf (no preparation, dirty-bomb steps or KI content; not cited)
+
+Would not open or held nothing usable: ready.gov/build-a-kit (client error). Old CDC KI and dirty bomb URLs under
+/nceh/ and archive copies of the retired Ready.gov RDD page were returned by search but not opened (current CDC pages
+loaded). The FDA KI shelf-life page was not searched for (the topic says nothing about storage or expiry).
+
+Looked for and not found: a CDC, FDA or NYS statement that iodine sold for water treatment or wound care is or is not a
+substitute (only table salt, iodine foods and supplements are named, CDC-KI; and "drink iodine" as a rumor, FEMA-PG3 p.
+129); a length of time to stay in after a dirty bomb (CDC-DB says until told; NRC-DB and CDC-TYPES give none); a current
+source telling people to pick a home shelter spot in advance (Ready.gov and CDC name school, work, care-facility and
+community plans; PNA-1985, dated, says to give clear instructions on where the shelter is); a source listing plastic
+sheeting or tape for fallout (READY-KIT lists "Plastic sheeting, scissors and duct tape (to shelter in place)" for any
+emergency; CDC-DB says "It is not necessary to put duct tape or plastic around doors or windows"); a source listing KI for
+a nuclear detonation kit (none; CDC-KI says it will not help).
+
+Conversions: 1 gallon = 3.785 L, "3.8 L" (quoted from How much water you need).
+
+### surv-dirty-bomb
+
+- Tags: none. Links: s:surv-fallout-warning, s:surv-wood-stoves-fireplaces, s:surv-fallout-where-to-shelter,
+  s:surv-potassium-iodide, p:bleeding, p:burns, p:shock. Links left for later tasks: docs/v7.4-rulings.md.
+- Summary: CDC-DB, NRC-DB as below. "Stay in until officials say otherwise" is CDC-DB's "stay in the building and do not
+  leave" with "until you are told it is safe" written without "safe".
+- doFirst 1: CDC-DB outside steps 1 to 3 ("Cover your nose and mouth with a cloth to reduce the risk of breathing in
+  radioactive dust or smoke."; "Don't touch objects thrown off by an explosion—they might be radioactive."; "Quickly go into a
+  building where the walls and windows have not been broken.").
+- doFirst 2: CDC-DB inside steps 1 and 2 ("If the walls and windows of the building are not broken or damaged, stay in the
+  building and do not leave."; "shut all windows, outside doors, and fireplace dampers."; "Turn off fans and heating and
+  air-conditioning systems that bring in air from the outside."). Dampers are left out of the Do first and given in the
+  inside steps with the fire caveat (Wood stoves and fireplaces, checked: damper open while a fire burns), as batch A did.
+- doFirst 3: CDC-DB outside steps 4 and 6 ("take off your outer layer of clothing and seal it in a plastic bag if
+  available."; "Shower or wash with soap and water."; "Be sure to wash your hair."). A pointer: the cleaning-off steps
+  belong to p:radiation-decontamination (owner rule) and must be aligned when it exists.
+- doFirst 4: CDC-DB step 7 ("Tune to the local radio, television news, or official government agencies social media
+  accounts for more instructions.").
+- doFirst 5: CDC-DB children ("If your children are at school, they should stay there until it is safe to travel."; "Do not go
+  to the school until public officials say it is safe to travel."). "Safe" written "all right".
+- What it is: CDC-DB ("a dirty bomb uses dynamite or other explosives to scatter radioactive dust, smoke, or other
+  material"; "cannot create an atomic blast"; "An atomic bomb ... produces the atomic mushroom cloud"); NRC-DB ("A nuclear
+  bomb creates an explosion that is millions of times more powerful than a dirty bomb."; "a dirty bomb's radiation could be
+  dispersed within a few blocks or miles of the explosion."; "The cloud of radiation from a nuclear bomb could spread
+  thousands of square miles"; "As radioactive material spreads, it becomes less concentrated and less harmful."). The
+  mushroom-cloud pointer to Fallout warning is the app's routing, from CDC-DB's atomic-bomb sentence.
+- The danger: CDC-DB ("The main danger from a dirty bomb is from the explosion, which can cause serious injuries and property
+  damage for people close to the explosion."; "would probably not create enough radiation exposure to cause immediate serious
+  illness, except to people who are very close to the blast site."; "the radioactive dust and smoke spread farther away could
+  be dangerous to health if it is inhaled."; "Because people cannot see, smell, feel, or taste radiation, you should take
+  immediate steps to protect yourself and your loved ones."); NRC-DB ("Those closest to the RDD would be the most likely to
+  be injured by the explosion."; "Most RDDs would not release enough radiation to kill people or cause severe illness"; the
+  rest of NRC's sentence was not returned and is not used).
+- Outside and close to it: CDC-DB steps 1 to 7 in CDC's order, word for word as quoted in the doFirst lines plus "Put the
+  cloth you used to cover your mouth in the bag, too."; "Removing outer clothes may get rid of up to 90% of radioactive
+  dust."; "Put the plastic bag where others will not touch it."; "Keep it until authorities tell you what to do with it.";
+  "Washing will remove any remaining dust." (not used). Number: 90% (CDC-DB; READY says the same of clothing removal).
+  CDC-DB's "This area will shield you from radiation that might be outside" is not used.
+- Inside and close to it: CDC-DB steps 1 to 7 in order; steps 3 and 4 are joined in one step ("If the walls and windows of
+  the building are broken, go to an interior room and do not leave."; "If the building has been heavily damaged, quickly go
+  into a building where the walls and windows have not been broken."); "If you must go outside, be sure to cover your nose and
+  mouth with a cloth."; "Store the bag where others will not touch it."; "It is not necessary to put duct tape or plastic
+  around doors or windows." Damper caveat: Wood stoves and fireplaces (checked).
+- In a car: CDC-DB steps 1 to 6 in order; steps 5 and 6 are joined ("Close the windows and turn off the air conditioner,
+  heater, and vents."; "Cover your nose and mouth with a cloth to avoid breathing radioactive dust or smoke."; "If you are
+  close to your home, office, or a public building, go there immediately and go inside quickly."; "If you cannot get to your
+  home or another building safely, pull over to the side of the road and stop in the safest place possible."; "If it is a hot
+  or sunny day, try to stop under a bridge or in a shady spot."; "Turn off the engine and listen to the radio for
+  instructions."; "Stay in the car until you are told it is safe to get back on the road."). The warning that this is for a
+  dirty bomb only, and that after a nuclear explosion a car is not a shelter, is from Where to shelter from fallout (FEMA-PG3,
+  NYC Health, checked in batch A). D100.
+- Farther away: FEMA-PG3 p. 119 ("initial protective actions for a nuclear detonation and for a dirty bomb scenario are very
+  similar:" / "people must "Get Inside, Stay Inside, and Stay Tuned" for more instructions."); CDC-TYPES ("The best way to
+  protect yourself if an RDD explodes is to get inside, stay inside, and stay tuned."); NRC-DB ("protective measures, such as
+  sheltering in place or quickly leaving the immediate area"; "Minimizing the time exposed to radioactive materials;";
+  "Maximizing the distance from the source of radiation; and"; "Shielding from external exposure and inhaling radioactive
+  material."). CDC-DB has no separate far-away section.
+- Staying in: CDC-DB (stay in the building / car "until you are told it is safe"). No time found. D101.
+- Family and pets: CDC-DB ("If your children or family are with you, stay together."; "Take the same actions to protect your
+  whole family."; "they should stay there until you are told it is safe to travel."; "Schools have emergency plans and
+  shelters."; "If you have pets outside, bring them inside if it can be done safely."; "Wash your pets with soap and water to
+  remove any radioactive dust."). "If it can be done safely" written "if you can do it without putting yourself at risk".
+- Food and water: CDC-DB ("Food and water supplies most likely will remain safe." written "will most likely not be
+  affected"; "any unpackaged food or water that was exposed and close to the incident may have radioactive dust on it.";
+  "do not consume water or food that was out in the open."; "The food inside of cans and other sealed containers will be safe
+  to eat." written "can be eaten"; "Wash the outside of the container before opening it."; "Authorities will monitor food and
+  water quality for safety and keep the public informed when they are safe to consume.").
+- Potassium iodide: CDC-DB ("KI will not protect a person from other radioactive materials or protect other parts of the body
+  from exposure to radiation."; "taking KI would probably not be beneficial."; "Also, KI can be dangerous to some people.").
+  The sentence of CDC-DB that names a radioactive material is paraphrased away ("would probably not help").
+- Hurt or sick: CDC-RDD ("People injured by radioactive pieces or contaminated with radioactive dust will need medical
+  attention."); CDC-DB ("Low levels of radiation exposure (like those expected from a dirty bomb explosion) may not cause any
+  symptoms."; symptoms "such as" nausea, vomiting, diarrhea, and swelling and redness of the skin; "If you develop any of these
+  symptoms, you should contact your doctor, hospital, or other sites recommended by authorities."). Medical care is linked
+  (bleeding, burns, shock); p:radiation-sickness to be added (rulings).
+
+### surv-potassium-iodide
+
+- Tags: none. Links: s:surv-fallout-warning, s:surv-dirty-bomb, p:anaphylaxis. Title changed from the plan's "what it does
+  and does not do" to "Potassium iodide (KI): what it can and can't do" (search pins "no" to CPR; see rulings).
+- No dose, no dose table, no age bands with amounts, no tablet strengths. CDC-KI's 24-hours-before / 4-hours-after timing,
+  its "One dose of KI offers protection for 24 hours" and its breastfeeding advice are not used (D103, D102).
+- doFirst 1: CDC-KI ("The best protection in a radiation emergency is always to get inside, stay inside, and stay tuned").
+- doFirst 2: CDC-KI ("Leaving your shelter or home to seek KI could expose you to dangerous levels of radiation" / "and put you
+  and your loved ones at greater risk.").
+- doFirst 3: CDC-KI ("Do not take KI unless you are instructed by public health or emergency response officials or a
+  healthcare provider.").
+- doFirst 4: CDC-KI ("Do not use table salt or foods that contain iodine as a substitute for KI."; "They do not help prevent
+  internal contamination, and eating large amounts could be harmful."; "Dietary supplements that contain iodine may not work
+  to protect the thyroid and can hurt you.").
+- What it does: CDC-KI ("Potassium iodide (KI) is a type of iodine that is not radioactive."; "The thyroid is a gland in the
+  neck"; "there is no room to absorb the radioactive iodine."; "KI protects only the thyroid."; "KI does not protect other
+  parts of the body."; "KI protects only against radioactive iodine and does not protect against other types of radioactive
+  materials."; "KI is most effective if taken shortly before or right after internal contamination with radioactive
+  iodine."; "KI may not give a person 100% thyroid protection from radioactive iodine."; "KI is not a treatment and cannot
+  reverse damage already done to the thyroid."); FDA-KI ("It is not a general radioprotective agent.").
+- After a nuclear explosion: CDC-KI section "KI will not help in a nuclear bomb emergency", every sentence ("Radiation from
+  radioactive fallout is the biggest threat to your health after a nuclear detonation (explosion)."; "Fallout is made up of
+  hundreds of types of radioactive materials."; "There is a relatively small amount of radioactive iodine in fallout compared
+  to other types of radioactive materials" / "that can cause harm just by external exposure."; "KI would not protect you
+  against the harmful health effects of any radioactive materials other than radioactive iodine."; "If you were in a situation
+  to take in enough radioactive iodine for KI to be helpful, you would have been exposed to deadly levels of external
+  radiation from fallout."), and "Risks of focusing on KI" ("You may think you are protected against radiation exposure when
+  you are not.").
+- After a dirty bomb: CDC-DB as in surv-dirty-bomb.
+- When officials might call for it: CDC-KI ("Most radiation emergencies will involve other types of radioactive materials and
+  not radioactive iodine alone."; "Radioactive iodine is most common in nuclear power plant incidents."); NYS-KI ("If there is
+  an emergency, you will hear an announcement from your local or state health officials."; "Your local health department will
+  tell you when you should start taking KI and they will also tell you when you can stop taking it."); FDA-KI ("After a
+  radiological or nuclear event in the United States, local public health or emergency management officials" / "will tell
+  the public if there is a need to take KI or other protective actions."). NYS-KI's plant-distance figure and its once-a-day
+  instruction are not used (plant accidents deferred; D103). Scope line: spec 2 (no source needed).
+- Who it is meant for: CDC-KI ("KI is only recommended for people under 40 and women who are pregnant or breastfeeding.";
+  "This is because younger people's cells are still growing and increasing in number more quickly."; "This puts them at risk
+  for developing thyroid cancer after breathing in radioactive iodine."; "Infants (under 1 month) have the highest risk of
+  developing thyroid cancer from contamination with radioactive iodine."; "Adults over 40 years old have a much lower risk of
+  developing thyroid cancer."; "They are also more likely to have health conditions, like problems with their thyroids," /
+  "that increase the risk for harmful health effects from KI."; "Adults over 40 should only take KI when recommended by
+  officials"). Number: 40 years and 1 month (CDC-KI); these are who-for limits, not doses.
+- Who should not take it: CDC-KI ("People with certain medical conditions, including known iodine sensitivity, should not take
+  KI" / "or should talk to a healthcare provider about whether they can safely take KI."); FDA-KI ("Persons with known iodine
+  sensitivity should avoid KI, as should individuals with dermatitis herpetiformis" / "and hypocomplementemic vasculitis,
+  extremely rare conditions associated with an increased risk" / "of iodine hypersensitivity."; "People with nodular thyroid
+  with heart disease should not take KI."; "Individuals with multinodular goiter, Graves' disease, and autoimmune thyroiditis
+  should be treated with caution" (FDA's "-- especially if dosing extends beyond a few days" is not used); "A seafood or
+  shellfish allergy does not necessarily mean that you are allergic or hypersensitive to iodine."; "If you are not sure if you
+  should take KI, consult your health care professional.").
+- Risks: CDC-KI ("Gastro-intestinal (stomach) upset, rashes, and inflammation of the salivary glands."; "Allergic reaction.";
+  "Severe illness or death in people who take more KI than recommended."; "More than a single dose may lead to later problems
+  with normal development."; "The development of hypothyroidism in infants less than one month old who receive more than one
+  dose of KI."); FDA-KI ("Taking a higher dose of KI, or taking KI more often than recommended, does not offer more protection"
+  / "and can cause severe illness or death."; "Severe shortness of breath requires immediate medical attention."). Link
+  p:anaphylaxis for a severe allergic reaction (not restated).
+- What is not a substitute: CDC-KI (salt, iodine foods, supplements as in doFirst 4; "Only use KI products that have been
+  approved by the Food and Drug Administration (FDA)."); FEMA-PG3 p. 129 ("If social media posts encouraged people to drink
+  iodine to protect themselves from radiation, what would you do?"; "How would you confront this rumor?"). FDA-KI does not
+  address substitutes.
+- If you keep KI: FDA-KI ("KI is available without a prescription."); CDC-KI ("KI should be used only as directed."; FDA-approved
+  only). "Keeping KI is never a reason to go outside, delay getting inside, or leave shelter" rests on CDC-KI's risks of
+  focusing on KI (leaving shelter to seek KI) and its reminder; "delay getting inside" is the app's reading of the same.
+
+### surv-fallout-get-ready
+
+- Tags: none. No doFirst (not urgent). Links: s:surv-fallout-where-to-shelter, c:fallout-shelter-kit, s:surv-fallout-how-long,
+  s:surv-water-how-much, s:surv-water-store, c:home-water-store, s:surv-water-in-the-house, s:surv-toilet-no-water,
+  c:sanitation-kit, s:surv-fallout-shelter-living, c:home-heat-kit, s:surv-heat-out, s:surv-fallout-warning (twice),
+  s:surv-dirty-bomb, s:surv-potassium-iodide. Water and food links sit here (spec 10, call 15); there is no food-store
+  topic in the app, and s:surv-fallout-water-and-food does not exist yet (rulings).
+- Pick your shelter spot now: the rule is Where to shelter from fallout's (owner), summarised from its Do first (basement or
+  underground; else the middle of the building away from the walls, roof and windows). "Decide now" is the app's instruction;
+  PNA-1985 ("Go over instructions with your family so that you all understand what to do."; "Children and the disabled or
+  elderly especially should be given clear instructions on where to find a fallout shelter."); READY ("Familiarize yourself
+  with school, work and care-facility plans for staying inside/sheltering-in-place and evacuation."); CDC-FAQ ("Your community
+  should have a plan in place in case of a radiation emergency."; "Check with community leaders to learn more about the
+  plan.").
+- Supplies for up to 2 weeks: How long to stay in (owner: "plan to shelter for up to 2 weeks" with no official word);
+  PNA-1985 p. 10 ("Have ready at least a two-week stock of water, food, and supplies to bring to shelter."); READY ("Include a
+  spare change of clothes for each family member, a trash bag for contaminated clothing," / "and sealed food, water and
+  medicine.").
+- Water and food: How much water you need (checked; its summary "Store at least 1 gallon (3.8 L) per person per day for 2
+  weeks" quoted); "Store it where you will shelter, so nobody has to go out for it" follows Living in a closed-up house
+  ("so nobody has to go outside for them"). Food: READY-KIT ("Food (at least a several-day supply of non-perishable food)";
+  "Manual can opener (for food)"); NYS-KIT ("Food - at least enough for 7 days"); PNA-1985 two weeks; the longest used (D104).
+  CDC-SI via Living in a closed-up house ("Food and drinks that are sealed or were already inside can be used (CDC)").
+  PNA-1985's "at least one quart of water per day" is not used (current sources say 1 gallon; D104).
+- Toilets and washing: Living in a closed-up house ("so nobody has to go outside for them"); READY (soap and water; "a wipe or
+  clean wet cloth"; trash bag).
+- Winter: READY-KIT ("Sleeping bag or warm blanket for each person"); Living in a closed-up house (no-flame warmth first;
+  "Keep battery CO alarms near where people sleep (CDC, CPSC)"; "Never burn anything in a sealed room"). "Central New York
+  winter" is the spec's setting, no number.
+- Ways to hear news: READY ("Have a battery-powered or hand crank radio, which will continue to work" / "if other forms of
+  communication fail."; "Have several ways to receive emergency alerts."; FEMA App; community alerts); CDC-FAQ ("preferably a
+  National Oceanic and Atmospheric Administration (NOAA)" / "weather radio"; "If your emergency radio uses batteries, keep
+  extra batteries in your emergency preparedness kit."; "Try to use text messages (SMS) to communicate with others."; "Making
+  phone calls could be hard."). CDC-FAQ's electromagnetic pulse lines are not used (Comms pack, spec 2).
+- A plan for being apart: READY ("Make a Family Emergency Communications Plan."; "Decide where your family will meet if you
+  cannot meet at home."; "Identify an out-of-state contact who you can inform of your whereabouts and safety." written "where
+  they are and how they are"); Fallout warning doFirst 3 quoted word for word ("Don't go out to get family: stay where you are
+  (CDC)."); CDC-FAQ ("Children and adults in schools, daycares, hospitals, nursing homes, or other places will be instructed to
+  stay inside"; "Facilities have plans in place to keep everyone safe inside." written "plans to keep them inside").
+- Learn the steps now: FEMA-PG3 p. 207 ("Ideally, public education campaigns provide self-decontamination instructions to the
+  public prior to emergency incidents."). "The first actions must happen in minutes" rests on Fallout warning ("10 minutes or
+  more", READY, FEMA-PG3).
+- What not to count on: CDC-KI (thyroid only; will not help in a nuclear bomb emergency; salt, iodine foods and supplements);
+  READY ("Do not use household cleaning wipes on your skin."; "Hand sanitizer does not protect against radioactive material.");
+  CDC-FAQ ("covering your mouth and nose with a mask, cloth, or towel" / "can help reduce the amount of radioactive material you
+  breathe."); CDC-KI ("The best protection in a radiation emergency is always to get inside, stay inside, and stay tuned").
+  No opened source names other products as not worth buying; none are named.
+
+### fallout-shelter-kit (checklist)
+
+- Category radiation. No links in items (spec 10, call 15); other lists are named in plain text. No potassium iodide (no
+  source lists it for this event; D106). No plastic sheeting or tape (D105). Quantities scale only where a source gives a
+  per-person figure: spare change of clothes (READY "for each family member") and sleeping bag or warm blanket (READY-KIT
+  "for each person"); water's per-person figure is shown as text and its quantity stays on Home water store (one owner).
+- radio: READY, CDC-FAQ (NOAA preferred); note READY. radio-batteries: CDC-FAQ. flashlights: READY-KIT ("Flashlight", "Extra
+  batteries"), PNA-1985 ("a battery-powered radio and a flashlight or lantern, with spare batteries"); note from Living in a
+  closed-up house ("Use flashlights or battery lanterns, not candles or fuel lanterns (CDC, CPSC; Carbon monoxide)").
+- water: How much water you need (1 gallon (3.8 L) per person per day for 2 weeks); "Keep it where you will shelter" as in
+  the topic. food: READY ("sealed food"), READY-KIT ("non-perishable food"), CDC-FAQ ("non-perishable foods"), up to 2 weeks
+  (PNA-1985, How long to stay in; D104). can-opener: READY-KIT.
+- medicines: READY ("medicine"), READY-KIT ("Prescription medications."; "Non-prescription medications"), PNA-1985 p. 26
+  ("Include medicines taken regularly or likely to be needed by family members."); "for 2 weeks" from PNA-1985's two-week
+  stock of supplies. first-aid: READY-KIT. baby-supplies: READY-KIT ("Infant formula, bottles, diapers, wipes and diaper rash
+  cream"). pet-supplies: READY-KIT ("Pet food and extra water for your pet").
+- clothes: READY. trash-bags: READY ("a trash bag for contaminated clothing"); note CDC-DB ("seal it in a plastic bag";
+  "Put the plastic bag where others will not touch it."). soap: READY ("wash with soap and water"). wipes: READY ("use a wipe
+  or clean wet cloth to wipe any skin or hair that was not covered"; household cleaning wipes; hand sanitizer).
+- masks: READY-KIT ("Dust mask (to help filter contaminated air)"); note CDC-FAQ and CDC-KI as in the topic.
+- bedding: READY-KIT. co-alarms: Living in a closed-up house doFirst 5 and its sealed-room rule. sanitation: plain-text
+  pointer to the Sanitation kit list. phone: READY-KIT ("Cell phone with chargers and a backup battery"); note CDC-FAQ.
+  family-plan: READY. activities: READY-KIT ("Books, games, puzzles or other activities for children").
+- Left off: whistle, wrench, local maps, cash, documents, fire extinguisher, matches (READY-KIT items not specific to
+  staying inside; the Home heat kit covers the extinguisher).
+
+### Batch C agreement with checked topics and protocols
+
+- Dirty bomb car steps differ from the fallout rule (cars are not shelters); the topic says which applies (D100).
+- Damper: closing dampers (CDC-DB) is given only with Wood stoves and fireplaces' open-while-burning rule, as Living in a
+  closed-up house does.
+- "Duct tape or plastic ... not necessary" (CDC-DB) is CDC's "not necessary", not "don't": it does not clash with Stay warm
+  when the heat is out's plastic over windows for warmth.
+- Water: How much water you need, Store water at home and Water already in your house are linked, not restated; the one
+  quoted figure is word for word.
+- No sheltering period is restated: get-ready and the checklist point to How long to stay in's "up to 2 weeks".
+- No cleaning-off steps are owned here; the dirty bomb steps are CDC-DB's event steps and must be checked against
+  p:radiation-decontamination when it exists (rulings).
+
+### Batch C fix round (2026-11-18), from task-6-review.md
+
+Draft removed from all four items after these fixes. No new source was opened; every change uses the sources above or a
+checked topic's text word for word.
+- I1: amounts to keep now say "at least 2 weeks" (PNA-1985 p. 10 "at least a two-week stock"; How much water you need "at
+  least 1 gallon ... for 2 weeks"): get-ready summary, heading "Supplies for 2 weeks or more", its paragraph and food line;
+  checklist water, food and medicines items. Where the sheltering period itself is meant (get-ready paragraph, checklist
+  summary, both source lines) How long to stay in's Do first 3 is quoted word for word: "for as long as 2 weeks, and maybe
+  longer (civil defence handbooks, 1968 and 1985, dated)."
+- I2: surv-dirty-bomb doFirst 3 and outside step 4 now quote Fallout warning's Do first 4 word for word ("Carefully take off
+  your outer layer of clothes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov,
+  CDC)."). Only CDC-DB's extras stay: the mouth cloth goes in the bag; up to 90%; bag where others won't touch it, kept until
+  officials say. Inside step 4 says "clean off as in the steps above". CDC-DB's "Shower or wash with soap and water. Be sure
+  to wash your hair." is covered by the quoted "wash or wipe the skin and hair that were uncovered" and is no longer written
+  separately; CDC's order (bag stored before washing) becomes clothes, bag, wash (quote), then cloth and bag storage.
+  p:radiation-decontamination links placed in docs/v7.4-rulings.md.
+- M1: "very similar to those for a nuclear explosion" (FEMA-PG3 p. 119 "very similar").
+- M2: get-ready shelter line now only "decide now where you would shelter, by the rules in Where to shelter from fallout."
+- M3: qty unit "in all, one per person" for clothes and bedding ("For your group: 1 in all, one per person" / "4 in all, one per
+  person"). Days stepper noted in rulings C17.
+- M4: source name "Ready.gov (FEMA), Build A Kit (ready.gov/kit; undated)" in both files; the fetch detail stays here (READY-KIT).
+- M5: KI "Who it is meant for" opens "If officials call for KI, this is who CDC says it is meant for. It is never a reason to
+  take KI without being told to." (CDC-KI "Do not take KI unless you are instructed ...").
+- M6: NYS line now "after a nuclear power plant emergency" (NYS-KI covers plant emergencies only).
+- M7: s:surv-fallout-leaving added to the links later tasks must add, in dirty bomb "Hurt or sick".
+- M8: dirty bomb "Staying in" gains a labelled warn: "This app's own caution, not a source's: if you don't know whether it was
+  a dirty bomb or a nuclear explosion, treat it as a nuclear explosion and follow Fallout warning and How long to stay in."
+  plus a link to How long to stay in (D107).
+
+### Batch B alignment with the decontamination protocol (2026-11-18, after the protocols were merged)
+
+surv-fallout-coming-inside rewritten as a summary that points to p:radiation-decontamination (src/protocols/radiation-decontamination.json,
+read in full). No new web source was opened; text taken from the protocol is credited to it by name in the topic and its
+source line, because some of it rests on FEMA, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath (2024),
+which this writer did not open.
+
+- Order: Do first 1 to 5 follow protocol steps s1/s20 (injury first), s2-s3 (clothes and shoes off, bagged), s4 (wash or wipe),
+  s6 (clean clothes), s8-s11 (others, protect yourself, clean again, pets). "The steps" names all thirteen protocol actions in
+  the protocol's order and links it.
+- Never list: the warn in "The steps" is the protocol's seven don'ts, in order. No other "never" or "don't" remains in the topic.
+  Removed: NYC Health's "Do not place them with your dirty laundry" and "Do not shave your pet's fur" (not in the don'ts), the
+  dirty-laundry and shaving lines' source credits, and the app's caution on which side of the door to brush clothes.
+- Where to take off clothes: protocol s2 wording ("before coming in, or just inside the door, away from others"), credited to
+  the protocol and CDC (What to Do: Get Inside). NYC Health's "shoes just after entering" line is dropped (covered).
+- No clean clothes: protocol s6 wording; D90 and D86 cross-referenced as one question.
+- Little or no water: protocol s4 detail ("Showering and changing all your clothes is the best way, but you can still remove
+  most of the radioactive material without water or a change of clothes"; wet wipes or other methods when water is scarce,
+  FEMA planning guidance p. 100); CDC tap-water line kept. NYC Health's broom line dropped.
+- Children and helpers: protocol s8-s10 in summary (clean yourself first; gloves, mask, cuts covered; clean yourself again;
+  let people in, CDC What to Do: Get Inside). CDC Infant Feeding's child-washing detail dropped from the topic (the protocol
+  carries the steps); CDC Infant Feeding stays in the sources for "until officials say how to get rid of them".
+- Pets: protocol s11 in summary; CDC pets page; "keep pets indoors" (NYC Health; the protocol credits FEMA). Pet sanitation kept
+  as a positive instruction (CDC pets page), with "don't touch soiled material with bare hands" dropped (not in the don'ts).
+- Keeping the shelter clean: protocol s12 (wipe belongings) added; CDC lines kept.
+- Hurt or sick: injury first (protocol s1, s20); radiation sickness signs from protocol s13, with p:radiation-sickness linked.
+- 1968 handbook removed from the topic and its sources (ruling 22, 28).
+- Still different from the protocol, by design: the topic keeps "Why it matters" (CDC, FEMA planning guidance p. 39 beta burns)
+  and the collar and shoe-top line (FEMA 72-hour guidance), which the protocol does not carry; neither is a step or a "never",
+  and neither contradicts it.
+- Also: surv-fallout-water-and-food summary "Drink stored water first." now "Drink bottled water and other sealed drinks first,
+  then water you stored yourself." to match its Do first 2 (CDC; the app's reading, D98).
+
+## Radiation pack Task 7: diagrams (2026-11-18, revised after review)
+
+Two figures, drawn from the checked text only; no source opened. `fallout-decay` not drawn (no shelter-time tool; the tool gate
+did not pass). No number, distance, arrow or ranking beyond the text's; neither figure says "safe". Every drawn text line is
+word for word in the topic's own text (or, for coming inside, the protocol's). Shaded blue = the place the label names; the
+basements are shaded most strongly. Rendered at 360 px in day, dark and night mode and viewed (`/tmp/figs-7/*-v3.png`, not
+tracked).
+
+### fallout-shelter-spots (surv-fallout-where-to-shelter, "Best to worst", after the table)
+
+Placed after the table because it is where the topic first gives both a house basement ("a house basement counts") and the
+middle of a large building, the two things the figure now shows; the house and building sections follow directly.
+No arrows; no floor is marked.
+- Title "Best spot in a house": the section heading.
+- House with a basement, whole basement shaded, stairs down, "Basement: go there first": "Basement: go there first (CDC)."
+  Agrees with the table: "Underground: basement (a house basement counts) ... Best".
+- Not drawn: the best corner (D110), and the house with no basement (review I3: the same table calls a one-story wood-frame
+  house with no basement "Limited; not an adequate shelter", so a marked spot there read as equal to a basement). "Stay away
+  from the outside walls and the roof" is no longer drawn: with only the basement house left it sat over a basement shaded to
+  its walls (D110), and the house section's text carries it.
+- Title "Apartments and large buildings": the section heading.
+- Building section, basement shaded, "Basement is best" first in the SVG text and highest of the panel's labels, leader down
+  to the basement: "Going to the basement is best (New York City, Response Guide ...)." The above-ground storeys carry no
+  shading and no label (review I1, I2; D111).
+- "Stay away from areas near the roof, fire escapes and balconies" (leaders to the roof, a fire escape on the left wall and a
+  balcony on the right): "Stay away from areas near the roof, fire escapes and balconies (NYC Health)."
+- Separate plan of the building seen from above (no floor named, no stack of floors): windows on all four outside walls, the
+  centre marked lightly, clear of the walls, "Otherwise go to the center of the building, as far from the roof and windows as
+  you can": "Otherwise go to the center of the building, as far from the roof and windows as you can (New York City, Response
+  Guide)." "As far from the roof" is in the label only; the plan shows only the windows part.
+- Not drawn: the place-type ranking beyond the two basements, the move times, airtightness.
+- Caption: "Basement: go there first. Apartments and large buildings: going to the basement is best. Otherwise go to the
+  center of the building, as far from the roof and windows as you can." Topic sentences; the section heading names the panel.
+- A dashed divider, the same as the one between the house and the building, sits above the plan so it cannot read as a
+  level below the basement (re-review); no words added.
+
+### fallout-coming-inside (surv-fallout-coming-inside, "The steps", after the paragraph)
+
+Six numbered panels: protocol steps s2 to s7 in the protocol's order with none skipped, matching the order in "The steps"
+paragraph above the figure (review I4 added s5 and s7).
+- "Save a life first. Then:" above the panels: summary, "Save a life first. Then take off ..."; protocol s1 and s20.
+- 1, a person at an open door with a coat held low and still, shoes on the floor (review: the arm no longer holds the coat
+  out at arm's length), "Take off the outer layer of clothes and shoes slowly and carefully", "Do it before coming in, or just
+  inside the door, away from others": protocol s2, word for word; Do first 2.
+- 2, a tied bag, a two-headed line marked "far", then a person and a dog (the gap is more than twice the bag's width), "Bag
+  them", "Put the bag far from people and pets": Do first 2; protocol s3.
+- 3, a person under a shower, a bar of soap, "Wash gently with soap and water, or wipe off", "No conditioner, no scrubbing":
+  summary; protocol s4. Wiping is in the label only (no picture of it reads clearly at this size).
+- 4, a face with a cloth at one eye, a small tied bag, "Blow the nose and wipe the eyes and ears", "Bag every wipe, cloth and
+  towel you used": "The steps" paragraph, "blow the nose and wipe the eyes and ears"; protocol s5, "Bag every wipe, cloth and
+  towel you used."
+- 5, a chest of drawers and a clean shirt, "Put on clean clothes from a closet, drawer or other covered place": Do first 4;
+  protocol s6.
+- 6, a bandaged arm, "Care for wounds", "once the skin around a wound is clean": "The steps" paragraph, "care for wounds";
+  protocol s7, "Wounds: once the skin around a wound is clean, care for it with the Wound cleaning and care protocol."
+- "Then help others and pets, and clean yourself again afterwards" below: Do first 5; protocol s8 to s11.
+- Not drawn: s12 (belongings), s13 (watch for radiation sickness), 90%, water temperature, the never list.
+- Caption: "Save a life first. The cleaning-off steps are in the Emergency protocol Radiation decontamination, one at a
+  time." Summary's first sentence and the first sentence of "The steps", word for word (re-review: the summary left out s5
+  and s7, which the figure shows).
+- Panel 4's hand is drawn as an arm with an elbow (re-review, optional).
+
+Tests (`tests/test_figs.py`, `RAD_FIGS`): each figure sits once in its section; listed phrases drawn and in the topic's text;
+every drawn text line is in the topic's or protocol's text; forbidden wording in drawn and alt text ("safe", digits other
+than the badges, floor, corner, no basement, middle of the house, and others); every caption sentence is a topic sentence;
+shelter spots has no arrow markers, its basement label comes first, and nothing (shading or text) marks an above-ground storey;
+house and building basements are below ground and shaded more strongly than the plan's centre; the plan has windows on all
+four sides and its centre is in the middle, clear of the walls; coming inside reads 1 to 6, each panel is its protocol step,
+s2 to s7 with none skipped, "Save a life first" above and "Then help others" below; the bag is drawn far from the person and
+pet. `tests/test_survival_migration.py` `PINNED_FIGS` carries the two topics.
+
+## Radiation pack whole-pack fixes (2026-11-18), from task-9-pack-review.md
+
+Every change below copies an owner page or a source already recorded in this file; no new source was opened for this wave
+except as the review records (FEMA 2024, re-opened by the pack reviewer). Quotes of owner pages were checked word for word
+against the owner files as they stand.
+
+- I1, p:radiation-decontamination s7 detail (text unchanged): wounds are rinsed and dressed as the Wound cleaning and care
+  protocol says, as for any wound; a health care professional should still decontaminate the wound once one can be reached
+  (FEMA, Communicating in the Immediate Aftermath, recorded above: "Get a health care professional to decontaminate your
+  wound once you have access to one"; "treat your injury as you would an ordinary injury"). Burns: the Burns protocol.
+- I2, breastfeeding: p:radiation-decontamination s8 now points to Water and food after fallout and gives CDC Infant Feeding's
+  "indoors with the doors and windows closed, keep breastfeeding"; source line added: CDC, Infant Feeding (radiation
+  emergencies), last reviewed April 16, 2024, https://www.cdc.gov/radiation-emergencies/caring/infant-feeding.html (recorded
+  for batch B). Water and food after fallout "Babies" gains CDC Radiation Emergencies and Children's line (as recorded for the
+  protocol: "It is possible for nursing mothers to pass radioactive materials to their babies through their breastmilk";
+  "They should consider not breastfeeding if other milk sources are available until they can see their healthcare
+  professional"), credited to Radiation decontamination, with a source entry; lead-in now "three CDC pages". The CDC FAQ is
+  credited "(last reviewed April 19, 2022; updated April 12, 2024)" in Water and food after fallout, Coming in from outside and
+  Leaving and moving after fallout, as in Get ready and the checklist.
+- I3, pets: "Bring pets inside with you, if you can" (CDC-GI, "Bring pets inside with you, if you can.") in Living in a
+  closed-up house and Coming in from outside.
+- I4, where to take clothes off: How long to stay in, Living in a closed-up house and Leaving and moving after fallout (Do
+  first 4 and "Arriving") now say what p:radiation-decontamination s2 says: outer layer of clothes and shoes, slowly and
+  carefully, before coming in or just inside the door, away from others; credited to Radiation decontamination.
+- I5, hub Do first 4: shoes added and "Every step is in Radiation decontamination." The dirty bomb page's two quotes of it
+  were updated word for word (without the pointer sentence). "Seal the bag" (CDC-DB, "seal it in a plastic bag") added to the
+  dirty bomb Do first and step 5.
+- I6, CO alarm: Living in a closed-up house's body now quotes Carbon monoxide's Do first ("CO alarm sounding? Don't look for
+  the cause. Get everyone outside into fresh air now", CPSC), the words Leaving quotes; its source line now says which line
+  comes from which topic. Do first 5 (Stay warm when the heat is out's line) is unchanged.
+- I7, dirty bomb Do first: new first item from the page's own words: CDC's "a dirty bomb cannot" make a mushroom cloud (the
+  page's "What it is" paragraph) and the page's labelled app caution ("treat it as a nuclear explosion"; D107).
+- I8, dirty bomb damper: quotes Wood stoves and fireplaces' Do first 2 word for word ("Open the damper before you light a fire,
+  and never close it until the fire is out and the embers are cold (Massachusetts Department of Fire Services).").
+- I9, Get ready summary: "Getting inside is always the best protection (CDC): no pill, mask or product takes its place."
+  (CDC KI page, recorded for batch C: get inside, stay inside, stay tuned is always the best protection.)
+- I10, Living in a closed-up house, "Heat in winter": new paragraph after the app's winter rule. Source: FEMA Office of
+  Emerging Threats, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath, second edition, April 2024,
+  section 3.3.5 "Immediate Actions to Reduce Contamination in Your Home", printed page 16,
+  https://www.fema.gov/sites/default/files/documents/fema_oet_nuclear-detonation-preparedness-communicating-aftermath_052024.pdf
+  (re-opened by the pack reviewer; wording as in D88). Sentences quoted: "Closing off ventilation after the passage of the
+  fallout cloud provides little to no health benefit." "Heating and cooling should take priority if there are extreme
+  temperatures." "Radioactive fallout particles might be raining down in your area." (bullet; quoted in lower case inside
+  the sentence) "Limit your exposure to radiation by closing windows and doors if you can" (paraphrased as "close windows and
+  doors"). "You should consider turning off anything that brings air in from the outside." "If you are experiencing extreme
+  temperatures or weather conditions, listen to emergency officials for guidance on heating and air conditioning." "The
+  health risk from turning off HVAC systems might be greater than the risk of radioactive contamination." The paragraph ends
+  with the app's rule restated in the page's own words (warmth without flame first; nothing ever burns in a sealed room).
+  Not used: the opening "extremely small" and "short period" sentences, the broken-windows bullet, the recirculate and HVAC
+  sub-bullets, and the closing bullet. The "Close it up" damper bullet now reads "Make sure fireplace dampers are closed (CDC,
+  Ready.gov, FEMA 2024)" (the section's sub-bullet "Make sure fireplace dampers are closed."), keeping the open-until-embers-
+  cold rule. Source entry added. Jordan's winter rule paragraph is not reworded.
+- I11, Potassium iodide "Risks": link to Leaving and moving after fallout added after Anaphylaxis.
+- Minor 1, hub: "drop it back" (grammar).
+- Minor 2, How long to stay in body: "for as long as 2 weeks ... (FEMA 1985, dated)", as its Do first 3 and summary.
+- Minor 3, How long to stay in Do first 1: the leaving sentence now ends "..., or officials tell you to (Ready.gov).", word for
+  word from Leaving's Do first 1.
+- Minor 4, hub Do first 5: first two sentences are Living in a closed-up house's Do first 1 word for word; the radio sentence
+  stays.
+- Minor 5, Coming in from outside: the warning is p:radiation-decontamination's donts word for word, without their source
+  parentheses.
+- Minor 6, Coming in from outside: "wallets, jewellery, wheelchairs or hearing aids" (protocol s12 text).
+- Minor 7, p:radiation-decontamination s11: CDC-PETS "Do not touch soiled material with your bare hands." and NYC-H "Do not
+  shave your pet's fur as an alternative to washing." / "Shaving will not get rid you of the radioactive fallout particles."
+  (recorded for batch B); NYC Health source entry added
+  (https://www.nyc.gov/site/doh/health/emergency-preparedness/emergencies-radiological-nuclear-incident.page). Coming in from
+  outside: "without touching it with bare hands (CDC)".
+- Minor 8, Water and food after fallout: stored water is drunk after bottled water and other sealed drinks, ahead of the water
+  heater and toilet tank (the app's reading, as its summary and Do first 2 say).
+- Minor 9, Get ready: link labels are the checklist titles.
+- Minor 10: Leaving and moving after fallout linked in "Hurt or sick" in the hub (after Shock) and Coming in from outside
+  (after Radiation sickness).
+- Minor 11, Living in a closed-up house: cold-driven leaving points to Leaving and moving after fallout.
+- Minor 12, Living in a closed-up house Do first 4: the page's own danger-to-life sentence appended.
+- Minor 13: "both dated" (How long to stay in) and "also dated" (Where to shelter from fallout) for the 1968 handbook.
+- Minor 14: protocol urgent steps (decontamination s20, sickness s21, s22) credit the leaving sentence to Leaving and moving
+  after fallout.
+- Minor 15, p:radiation-sickness s9: pain points to the Burns protocol's pain warning ("No pain medicine by mouth if ... the
+  burn needs evacuation") and evacuate line ("every ... radiation ... burn, even a small one"); the no-care case is an open
+  question (D89).
+- Minor 17, keywords: added as listed in the fix report; "bleach" (Water and food after fallout) and "co alarm" (Living in a
+  closed-up house) were dropped because they moved a v7.3 top-three search result.
+- Minor 18 and 19: v7.4 rulings and decisions records updated (no user-visible text).
+
+## Radiation pack final review fixes (2026-11-19), from final-review.md
+
+No source was opened in this wave. Every quoted line was checked word for word against its owner file as it stands, or
+against the record above.
+
+- I5, cold with no stove or heater: one sentence each in Living in a closed-up house ("Heat in winter", after the "go
+  somewhere with heat" sentence) and Leaving and moving after fallout ("When leaving beats staying", after "Cold is handled
+  inside first, ..."), labelled as this app's own caution, with "no source opened weighs cold against fallout as a reason to
+  leave" (as D97 records). D112.
+- I6, CO alarm during fallout: after the quoted Carbon monoxide Do first on both pages, one labelled app reading: go into the
+  nearest other building, quoting surv-fallout-warning Do first 1 ("Get inside the nearest building now and move away from
+  windows", Ready.gov), and, for going back in, surv-carbon-monoxide's own line ("If no responders can come, don’t go back in
+  until the house has aired out and the cause is fixed", credited there to the Carbon monoxide poisoning protocol, s6 "until
+  the space is aired out and the cause is fixed"). surv-carbon-monoxide not edited. D113.
+- I7, basement or stove room: labelled app reading after the one-small-room list, with a link to Where to shelter from
+  fallout; the winter rule's "if the cold itself becomes a danger to life" referred to, not reworded. D114.
+- I8a, formula: labelled app reading after CDC-INF's bottled/tap water line, referring to the page's own drinking order. D115;
+  D94 and D98 updated.
+- I8b, breastfeeding end point: checked against the record above. CDC-INF: "If you do NOT have previously expressed breast milk
+  or infant formula, continue breastfeeding." CDC-FAQ: "If no other source of food is available for your baby, continue to
+  breastfeed." CDC-KIDS: "They should consider not breastfeeding if other milk sources are available until they can see their
+  healthcare professional." CDC-KIDS does not say to continue when no other food is available, so no "all three agree" line
+  was added; D94 now says that with no officials or doctor none of the three end points arrives.
+- M1, hub: p:radiation-decontamination link block in "Before the fallout arrives", after Where to shelter from fallout.
+- M2, Living in a closed-up house: the FEMA 2024 paragraph is now a lead, a three-item list and the same closing two
+  sentences; every quoted fragment is unchanged (FEMA-COMM p. 16, recorded in the whole-pack fixes).
+- M3, furnace: CDC-GI ("Turn off fans, air conditioners, and forced-air heating units that bring in air from outside") and
+  Stay warm when the heat is out "What a furnace needs" ("A furnace or boiler that burns oil, gas or propane"; "Keep the
+  furnace’s outside vents clear of snow and ice. A blocked vent can let carbon monoxide build up", NYDCP-22 via
+  surv-carbon-monoxide) are now two list items; a third, labelled app reading covers a unit that is both. D116.
+- M4, Water and food after fallout "Babies": the stray "(Radiation decontamination)" after CDC-KIDS's line removed; the CDC
+  page is named in the bullet and has its own source entry.
+- M5, fallout-shelter-kit: per-person unit now "in total" ("1 in total", "4 in total").

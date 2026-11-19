@@ -110,6 +110,10 @@
         {
           "link": "s:surv-make-water-safe",
           "label": "Make water safe"
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
         }
       ]
     },

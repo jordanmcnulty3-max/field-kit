@@ -21,6 +21,10 @@
         },
         {
           "p": "If you’re lost, STOP: Sit down and stay calm, Think, Observe, Plan. Then stay put: moving makes it harder for searchers to find you. Move only if your life is under immediate threat. Before any trip, leave word with someone about where you’re going and when you’ll be back, so a search starts in the right place."
+        },
+        {
+          "link": "s:surv-fallout-warning",
+          "label": "Fallout warning: what to do first"
         }
       ]
     },

@@ -24,39 +24,72 @@
 
   /* ---------- Text handling: lowercase, no diacritics, no punctuation, apostrophes dropped ---------- */
   const norm = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/['’]/g, '');
-  const tokens = s => norm(s).match(/[\p{L}\p{N}]+/gu) || [];
+  /* Plain ASCII (most of the text) tokenises the same way without the Unicode work: nothing to decompose, and \p{L}\p{N} is just [A-Za-z0-9] there. */
+  const ASCII = /^[\x00-\x7f]*$/;
+  const tokens = s => {
+    s = String(s);
+    return (ASCII.test(s) ? s.toLowerCase().replace(/'/g, '').match(/[a-z0-9]+/g) : norm(s).match(/[\p{L}\p{N}]+/gu)) || [];
+  };
   const WORD = /[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu;   // words of the original text, with their positions
   const flat = s => String(s == null ? '' : s).replace(/\s+/g, ' ').trim();
 
   /* ---------- Index: built once, on first use ---------- */
   let docs = null;
-  const field = (w, text, body) => ({ w, toks: [...new Set(tokens(text))], text: body ? flat(text) : '' });
+  const field = (w, text) => ({ w, toks: [...new Set(tokens(text))] });
+  /* Body text (steps, details, paragraphs, items) all weighs the same, so for ranking it is one field: the text itself, normalised the
+     same way as the words are (norm), pieces joined by a space. A body word starting with w is an occurrence of w in it that follows
+     something that is not a letter or digit. The pieces stay as written, in order, in doc.parts; one is tokenised and flattened only if a snippet needs it. */
+  const bodyField = parts => ({ w: W.body, hay: norm(parts.join(' ')) });
+  const ALNUM = /^[\p{L}\p{N}]$/u;
+  function startsWord(hay, w) {
+    for (let i = hay.indexOf(w); i >= 0; i = hay.indexOf(w, i + 1)) {
+      if (i === 0) return true;
+      let j = i - 1, c = hay.charCodeAt(j);
+      if (c < 128) { if (!((c >= 97 && c <= 122) || (c >= 48 && c <= 57))) return true; continue; }
+      if (c >= 0xDC00 && c <= 0xDFFF && j > 0) { const h = hay.charCodeAt(j - 1); if (h >= 0xD800 && h <= 0xDBFF) j--; }   // the letter before is an astral character
+      if (!ALNUM.test(String.fromCodePoint(hay.codePointAt(j)))) return true;
+    }
+    return false;
+  }
+  /* The body field is never the title or keyword field, which the keyword-bonus and title checks rely on. */
+  const withBody = (doc, parts) => { if (parts.length) doc.fields.push(bodyField(parts)); doc.parts = parts; return doc; };
+
+  /* Tie order. At equal score the document indexed first wins, so the order of indexing decides ties (nothing else does). Every page
+     from before the radiation pack (v7.4) is indexed exactly as in v7.3; the pack's pages come after all of them: its two protocols,
+     then the fallout hub, then its other topics, then its checklist. So a tie between a pack page and an older page always goes to the
+     older page, as it did before the pack. */
+  const HUB = 's:surv-fallout-warning';
+  const PACK_PROTOCOLS = new Set(['radiation-decontamination', 'radiation-sickness']);
+  const PACK_CHECKLISTS = new Set(['fallout-shelter-kit']);
+  const packTopic = t => !!t && t.category === 'radiation';
 
   function build() {
-    const out = [];
+    const out = [], packProtocols = [], packTopics = [], packChecklists = [];
     for (const p of FK.protocols()) {   // well-formed protocols only (app.js)
       const adv = p.tier === 'advanced' || p.category === 'advanced';
       const f = [field(W.title, p.title)];
       if (Array.isArray(p.keywords)) f.push(field(W.keywords, p.keywords.join(' ')));
       if (typeof p.summary === 'string' && p.summary) f.push(field(W.summary, p.summary));
       if (Array.isArray(p.notes)) f.push(field(W.summary, p.notes.filter(n => typeof n === 'string').join(' ')));   // notes count as much as the summary
+      const parts = [];
       for (const s of Array.isArray(p.steps) ? p.steps : []) {
-        if (s && s.text) f.push(field(W.body, s.text, true));
-        if (s && s.detail) f.push(field(W.body, Array.isArray(s.detail) ? s.detail.join(' ') : s.detail, true));
+        if (s && s.text) parts.push(s.text);
+        if (s && s.detail) parts.push(Array.isArray(s.detail) ? s.detail.join(' ') : s.detail);
       }
-      out.push({ key: 'p:' + p.id, title: p.title, kind: adv ? 'Advanced' : 'Emergency', draft: p.draft === true, fields: f });
+      (PACK_PROTOCOLS.has(p.id) ? packProtocols : out).push(withBody({ key: 'p:' + p.id, title: p.title, kind: adv ? 'Advanced' : 'Emergency', draft: p.draft === true, fields: f }, parts));
     }
     for (const t of (FK.tools && FK.tools.list ? FK.tools.list() : [])) {
       const report = t.segment === 'report';
       out.push({ key: (report ? 'r:' : 't:') + t.name, title: t.label, kind: report ? 'Report' : 'Tool', draft: false,
         fields: [field(W.title, t.label), field(W.keywords, TOOL_WORDS[t.name] || '')] });
     }
-    for (const t of FK.survival ? FK.survival.topics() : []) out.push(topicDoc(t));
+    for (const t of FK.survival ? FK.survival.topics() : []) (packTopic(t) ? packTopics : out).push(topicDoc(t));
     for (const c of survList('checklists')) {
       if (!str(c && c.id) || !str(c.title)) continue;
       const f = [field(W.title, c.title)];
-      for (const it of Array.isArray(c.items) ? c.items : []) if (it && str(it.text)) f.push(field(W.body, it.text, true));
-      out.push({ key: 'c:' + c.id, title: c.title, kind: 'Checklist', draft: c.draft === true, fields: f });
+      const parts = [];
+      for (const it of Array.isArray(c.items) ? c.items : []) if (it && str(it.text)) parts.push(it.text);
+      (PACK_CHECKLISTS.has(c.id) ? packChecklists : out).push(withBody({ key: 'c:' + c.id, title: c.title, kind: 'Checklist', draft: c.draft === true, fields: f }, parts));
     }
     for (const u of survList('tools')) {
       if (!str(u && u.name) || !str(u.label)) continue;
@@ -65,6 +98,7 @@
     for (const [id, s] of Object.entries(SCREENS)) {
       out.push({ key: 'a:' + id, title: s.title, kind: 'App', draft: false, fields: [field(W.title, s.title), field(W.keywords, s.keywords)] });
     }
+    out.push(...packProtocols, ...packTopics.filter(d => d.key === HUB), ...packTopics.filter(d => d.key !== HUB), ...packChecklists);
     return out;
   }
   const str = v => typeof v === 'string' && v.trim() !== '';
@@ -92,17 +126,18 @@
     if (strs(t.keywords).length) f.push(field(W.keywords, strs(t.keywords).join(' ')));
     if (typeof t.summary === 'string' && t.summary) f.push(field(W.summary, t.summary));
     if (strs(t.doFirst).length) f.push(field(W.summary, strs(t.doFirst).join(' ')));
+    const parts = [];
     for (const s of t.sections) {
       if (!s || typeof s !== 'object') continue;
-      if (typeof s.h === 'string' && s.h) f.push(field(W.body, s.h, true));
-      for (const b of Array.isArray(s.blocks) ? s.blocks : []) for (const x of blockTexts(b)) if (x) f.push(field(W.body, x, true));
+      if (typeof s.h === 'string' && s.h) parts.push(s.h);
+      for (const b of Array.isArray(s.blocks) ? s.blocks : []) for (const x of blockTexts(b)) if (x) parts.push(x);
     }
-    return { key: 's:' + t.id, title: t.title, kind: 'Survival', draft: t.draft === true, fields: f };
+    return withBody({ key: 's:' + t.id, title: t.title, kind: 'Survival', draft: t.draft === true, fields: f }, parts);
   }
   const index = () => docs || (docs = build());
 
   /* ---------- Matching and ranking ---------- */
-  const hits = (f, w) => f.toks.some(t => t.startsWith(w));
+  const hits = (f, w) => f.hay !== undefined ? startsWord(f.hay, w) : f.toks.some(t => t.startsWith(w));
   const COMMON = new Set('am an as at be by do go he if in is it me my no of on or so to up us we'.split(' '));   // little words that sit inside many keyword phrases
   function score(doc, words) {
     let total = 0;
@@ -125,9 +160,10 @@
   function snippetFor(doc, words) {
     if (words.every(w => hits(doc.fields[0], w))) return '';   // the title already shows why it matched
     const isMatch = tok => { const n = norm(tok); return words.some(w => n.startsWith(w)); };
-    for (const f of doc.fields) {
-      if (f.w !== W.body || !f.toks.some(t => words.some(w => t.startsWith(w)))) continue;
-      const text = f.text;
+    const parts = doc.parts || [];
+    for (let i = 0; i < parts.length; i++) {
+      if (!tokens(parts[i]).some(t => words.some(w => t.startsWith(w)))) continue;
+      const text = flat(parts[i]);
       let first = -1;
       for (const m of text.matchAll(WORD)) if (isMatch(m[0])) { first = m.index; break; }
       if (first < 0) continue;

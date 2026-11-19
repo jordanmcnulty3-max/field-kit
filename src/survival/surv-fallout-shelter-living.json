@@ -1,0 +1,296 @@
+{
+  "id": "surv-fallout-shelter-living",
+  "title": "Living in a closed-up house",
+  "category": "radiation",
+  "keywords": [
+    "closed up house",
+    "sealed room",
+    "seal the house",
+    "tape windows",
+    "plastic sheeting",
+    "duct tape",
+    "ventilation",
+    "fresh air",
+    "fallout heat",
+    "heat in winter",
+    "cold shelter",
+    "wood stove fallout",
+    "kerosene heater fallout",
+    "candles",
+    "light",
+    "pets",
+    "toilet",
+    "damper",
+    "fans",
+    "furnace",
+    "air conditioner",
+    "fireplace",
+    "generator",
+    "space heater",
+    "carbon monoxide",
+    "chimney"
+  ],
+  "summary": "Close windows, doors and anything that pulls in outside air. The house doesn’t need to be airtight to protect against fallout, and it still needs enough fresh air. Never burn anything in a sealed room. Keep warm without flame first; burn only if the cold itself becomes a danger to life, and then under every carbon monoxide rule.",
+  "doFirst": [
+    "Close and lock windows and doors. Turn off fans, air conditioners and forced-air heating units that bring in air from outside (CDC).",
+    "Never burn anything in a sealed room. You don’t need to make the house airtight to protect against fallout, and it still needs enough fresh air (FEMA planning guidance).",
+    "Never heat the house with an oven or gas range, and never run a generator, grill, camp stove, charcoal or a fuel lantern indoors (CDC). See Carbon monoxide.",
+    "Cold? Warm people without flame first: one small room, layers, blankets, sleeping bags and each other. See Stay warm when the heat is out. If the cold itself becomes a danger to life, run the stove or heater under the carbon monoxide rules in full, accepting that outside air comes in.",
+    "Keep battery CO alarms near where people sleep (CDC, CPSC). If one sounds, get everyone outside now (CPSC). See Carbon monoxide."
+  ],
+  "sections": [
+    {
+      "h": "Close it up",
+      "blocks": [
+        {
+          "list": [
+            "Close and lock all windows and doors (CDC).",
+            "Turn off fans, air conditioners and forced-air heating units that bring in air from outside, if you can (CDC, Ready.gov). In houses and apartments, that includes window fans and any heating or cooling system that brings in outside air (New York City, Response Guide: Radiological and Nuclear Emergencies).",
+            "Make sure fireplace dampers are closed (CDC, Ready.gov, FEMA 2024), but only when no fire is burning. Open the damper before you light a fire, and never close it until the fire is out and the embers are cold (Massachusetts Department of Fire Services). See Wood stoves and fireplaces.",
+            "Bring pets inside with you, if you can (CDC, Ready.gov). Bring in and wipe off any supplies from outside that your pets will need for at least 24 hours (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Air, and anything that burns",
+      "blocks": [
+        {
+          "warn": "Never burn anything in a sealed room. A closed-up house still needs air, and anything that burns fuel makes carbon monoxide."
+        },
+        {
+          "p": "Closing up the house means shutting out the outside air that fans and open windows pull in. You don’t need to make the house airtight: structures do not need to be airtight to protect against fallout radiation, and the house still needs enough fresh air to keep the air indoors fit to breathe (FEMA planning guidance). Never burn anything in a sealed room."
+        },
+        {
+          "list": [
+            "Never heat the house with an oven or gas range, and never run a generator, grill, camp stove, charcoal or a fuel lantern indoors (CDC). See Carbon monoxide.",
+            "Even with doors and windows open, a closed or partly closed space can trap carbon monoxide and let it build to deadly levels quickly (CPSC; Carbon monoxide).",
+            "Older civil defence handbooks (Office of Civil Defense, 1968; FEMA, 1985; both dated) allow a stove indoors with ventilation, and the 1985 handbook names a camp stove. This app doesn’t: it follows CDC and CPSC."
+          ]
+        },
+        {
+          "p": "A CO alarm still means what Carbon monoxide says, even during a fallout warning: “CO alarm sounding? Don’t look for the cause. Get everyone outside into fresh air now” (CPSC). Going out means going into fallout, which is one more reason nothing burns in a closed-up house."
+        },
+        {
+          "p": "This app’s reading, not a source’s: once outside, go into the nearest other building rather than standing in the open, as Fallout warning says: “Get inside the nearest building now and move away from windows” (Ready.gov). For going back in, Carbon monoxide says: “If no responders can come, don’t go back in until the house has aired out and the cause is fixed”."
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "link": "p:carbon-monoxide",
+          "label": "Carbon monoxide poisoning"
+        }
+      ]
+    },
+    {
+      "h": "Heat in winter",
+      "blocks": [
+        {
+          "p": "This app’s rule for a closed-up house in winter: warmth without flame comes first, for the whole sheltering period. If the cold itself becomes a danger to life, run the stove or heater under the carbon monoxide rules in full, accepting that outside air comes in. Nothing ever burns in a sealed room."
+        },
+        {
+          "p": "FEMA’s 2024 guidance for officials, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath, says:"
+        },
+        {
+          "list": [
+            "“Closing off ventilation after the passage of the fallout cloud provides little to no health benefit. Heating and cooling should take priority if there are extreme temperatures.”",
+            "While “radioactive fallout particles might be raining down in your area”: close windows and doors, and “You should consider turning off anything that brings air in from the outside”.",
+            "At that time too: “If you are experiencing extreme temperatures or weather conditions, listen to emergency officials for guidance on heating and air conditioning. The health risk from turning off HVAC systems might be greater than the risk of radioactive contamination.”"
+          ]
+        },
+        {
+          "p": "This app’s rule stays as above: warmth without flame comes first, for the whole sheltering period. Nothing ever burns in a sealed room."
+        },
+        {
+          "p": "A furnace or boiler vented to the outside that still has power to run is the house’s normal heat, not a stove or heater added for the emergency (this app’s reading)."
+        },
+        {
+          "list": [
+            "Forced-air heating units that bring in air from outside: turn them off (CDC).",
+            "A furnace or boiler that burns oil, gas or propane: “Keep the furnace’s outside vents clear of snow and ice. A blocked vent can let carbon monoxide build up” (What a furnace needs, in Stay warm when the heat is out). That is a trip outside: see How long to stay in.",
+            "A forced-air furnace that burns fuel and brings in air from outside: turn it off (this app’s reading: CDC’s rule comes first, and the vent rule is for a furnace that is running)."
+          ]
+        },
+        {
+          "p": "The rule above is for when it can’t run."
+        },
+        {
+          "p": "Warmth without flame, as in Stay warm when the heat is out:"
+        },
+        {
+          "list": [
+            "Keep everyone in one small room on the sheltered side of the house, with few windows, and close off the rest (as in Stay warm when the heat is out).",
+            "Put on layers, a hat and socks, and use blankets and sleeping bags (FEMA, National Institute on Aging; Stay warm when the heat is out).",
+            "Bed is the warmest place, with other family members and lots of covers (University of Missouri Extension; Stay warm when the heat is out). Babies sleep differently: see Stay warm when the heat is out."
+          ]
+        },
+        {
+          "p": "This app’s reading of its own two rules: during the sheltering period, stay in the best-shielded place the house has (see Where to shelter from fallout) and keep warm there without flame; move to the room with the stove only if the cold itself becomes a danger to life, as this app’s rule at the top of this section says."
+        },
+        {
+          "link": "s:surv-fallout-where-to-shelter",
+          "label": "Where to shelter from fallout"
+        },
+        {
+          "warn": "Babies under 1 year must never sleep in a cold room (CDC). Check older people often: they make less body heat (CDC). They are among those most at risk from the cold (Stay warm when the heat is out)."
+        },
+        {
+          "p": "No source opened gives an indoor temperature at which the cold becomes a danger to life (Stay warm when the heat is out lists the figures sources do give). Watch babies and older people first, and use the Hypothermia protocol for the signs."
+        },
+        {
+          "p": "If the cold becomes a danger to life, these are the only ways to burn anything, each under every rule in its own topic:"
+        },
+        {
+          "list": [
+            "A wood stove or fireplace vented to the outside, with the damper open, by every rule in Wood stoves and fireplaces, including putting the fire out before anyone sleeps.",
+            "A kerosene or propane heater made for indoor use, only under every condition in Kerosene and propane heaters. Those conditions include a door open to the rest of the house and an outside window open about 1 inch (2.5 cm): that is the outside air this rule accepts.",
+            "Working CO alarms in the house, whatever you burn (Carbon monoxide)."
+          ]
+        },
+        {
+          "p": "Stay warm when the heat is out says to go somewhere with heat if you can’t keep the house warm. During a fallout warning that means going outside: read Leaving and moving after fallout first."
+        },
+        {
+          "p": "This app’s own caution, not a source’s, because no source opened weighs cold against fallout as a reason to leave: if the cold itself becomes a danger to life and there is no way to make heat that follows the carbon monoxide rules, this app counts that as an immediate danger like those Leaving and moving after fallout names, and the steps for going are there."
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
+        },
+        {
+          "link": "s:surv-heat-out",
+          "label": "Stay warm when the heat is out"
+        },
+        {
+          "link": "s:surv-wood-stoves-fireplaces",
+          "label": "Wood stoves and fireplaces"
+        },
+        {
+          "link": "s:surv-portable-heaters",
+          "label": "Kerosene and propane heaters"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        }
+      ]
+    },
+    {
+      "h": "Light",
+      "blocks": [
+        {
+          "p": "Use flashlights or battery lanterns, not candles or fuel lanterns (CDC, CPSC; Carbon monoxide)."
+        }
+      ]
+    },
+    {
+      "h": "Sleeping",
+      "blocks": [
+        {
+          "list": [
+            "An unvented fuel-burning heater: “Turn it off when you go to sleep or leave the room, and never run it where anyone is sleeping (CPSC, US Fire Administration; Carbon monoxide protocol).”",
+            "A wood stove or fireplace: “Put the fire out before you go to sleep or leave the house (US Fire Administration, FEMA).”",
+            "For keeping warm at night without a flame, see Sleep warm."
+          ]
+        },
+        {
+          "link": "s:surv-sleep-warm",
+          "label": "Sleep warm"
+        }
+      ]
+    },
+    {
+      "h": "Water, food and toilets",
+      "blocks": [
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "p": "Food and drinks that are sealed or were already inside can be used (CDC). Use the water stored in the house and the toilet arrangements in these topics, so nobody has to go outside for them."
+        },
+        {
+          "link": "s:surv-water-in-the-house",
+          "label": "Water already in your house"
+        },
+        {
+          "link": "s:surv-water-store",
+          "label": "Store water at home"
+        },
+        {
+          "link": "s:surv-toilet-no-water",
+          "label": "Toilets when the water is off"
+        },
+        {
+          "link": "s:surv-handwashing",
+          "label": "Washing hands with little water"
+        }
+      ]
+    },
+    {
+      "h": "When someone has to go out",
+      "blocks": [
+        {
+          "list": [
+            "Keep it short: see How long to stay in.",
+            "Coming back, take off the outer layer of clothes and shoes slowly and carefully, so the dust does not shake loose, before coming in or just inside the door, away from others (Radiation decontamination). Put them in a bag (Ready.gov).",
+            "Wash or wipe the skin and hair that were uncovered (Ready.gov).",
+            "Wipe off anything brought in from outside, such as pet supplies (CDC)."
+          ]
+        },
+        {
+          "p": "Officials will tell you if the house itself needs cleaning (CDC)."
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024) and What to Do: Stay Inside (last reviewed April 17, 2024)",
+      "used": "Close and lock windows and doors; turn off fans, air conditioners and forced-air heating units that bring in outside air; close fireplace dampers; bring pets inside and wipe supplies they need for at least 24 hours; remove outer clothing before entering; foods and drinks sealed or already inside; officials will say if the home needs decontaminating"
+    },
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",
+      "used": "Turn off fans, air conditioners and forced-air heating; close fireplace dampers; pets inside; remove outer clothing carefully so dust doesn’t shake loose; bag for contaminated clothing; wash or wipe uncovered skin and hair"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023)",
+      "used": "Structures do not need to be airtight to protect against fallout radiation; maintain enough ventilation to ensure adequate indoor air quality"
+    },
+    {
+      "name": "New York City, Response Guide: Radiological and Nuclear Emergencies, Individuals and Families (undated)",
+      "used": "Turn off window fans, air conditioners and heating or cooling systems that bring air from outside"
+    },
+    {
+      "name": "FEMA Office of Emerging Threats, Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath (second edition, April 2024), page 16, section 3.3.5",
+      "used": "Closing off ventilation after the fallout cloud passes gives little to no health benefit; heating and cooling take priority in extreme temperatures; while fallout may be coming down, close windows and doors, consider turning off anything that brings in outside air, listen to officials on heating and air conditioning in extreme temperatures, the health risk from turning off HVAC might be greater than the contamination risk; make sure fireplace dampers are closed"
+    },
+    {
+      "name": "FEMA, Protection in the Nuclear Age (June 1985) and Office of Civil Defense, In Time of Emergency (H-14, March 1968); dated civil defence publications",
+      "used": "Both allow a stove indoors with adequate ventilation (1985 names a camp stove); recorded as a conflict and not followed"
+    },
+    {
+      "name": "Carbon monoxide and burning fuel indoors, Stay warm when the heat is out, Wood stoves and fireplaces, Kerosene and propane heaters and Sleep warm (other topics in this app)",
+      "used": "Never-indoors line, Do first CO alarm line and baby and older-people line quoted word for word from Stay warm when the heat is out’s Do first (CDC, CPSC); the body’s CO alarm action quoted word for word from Carbon monoxide’s Do first (CPSC); one warm room, layers and bed from Stay warm when the heat is out; trapped carbon monoxide (CPSC) and light (CPSC) from Carbon monoxide; damper rule and put-out-before-sleep rule quoted word for word from Wood stoves and fireplaces (Massachusetts Department of Fire Services; US Fire Administration, FEMA); heater sleep rule quoted word for word and door-and-window condition from Kerosene and propane heaters (CPSC, US Fire Administration)"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

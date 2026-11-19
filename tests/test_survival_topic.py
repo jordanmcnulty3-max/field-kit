@@ -346,3 +346,28 @@ def test_shipped_topic_tables_fit_or_scroll_with_cue_and_sticky_first_column_at_
         page.locator('#survPage .tablewrap').nth(i).scroll_into_view_if_needed()
         for c in page.evaluate(FIRST_COLUMN_AFTER_SCROLL, i):
             assert c['inView'] and c['opaque'] and c['onTop'], (tid, i, 'first column must stay readable when scrolled', c)
+
+
+def test_every_shipped_diagram_opens_enlarged_with_its_top_on_screen(page, app_url):
+    # Final review I3: a figure taller than the dialog opened scrolled down (focus goes to Close), cutting off its top.
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.survival')
+    ids = page.evaluate("FK.survival.topics().filter(t => t.sections.some(s => (s.blocks || []).some(b => b && b.fig))).map(t => t.id)")
+    assert 'surv-fallout-coming-inside' in ids
+    bad, seen = [], 0
+    for tid in ids:
+        page.goto(app_url + '#/survival/' + tid)
+        page.wait_for_selector('#survPage figure.fig button')
+        figs = page.locator('#survPage figure.fig button')
+        for i in range(figs.count()):
+            figs.nth(i).click()
+            expect(page.locator('#dlgFig')).to_be_visible()
+            r = page.evaluate("""(() => { const d = document.getElementById('dlgFig').getBoundingClientRect(),
+                s = document.querySelector('#figBody svg').getBoundingClientRect(); return [d.top, d.bottom, s.top]; })()""")
+            if not (r[0] <= r[2] < r[1]):
+                bad.append((tid, i, r))
+            seen += 1
+            page.click('#figClose')
+            expect(page.locator('#dlgFig')).to_be_hidden()
+    assert seen >= 39, seen
+    assert bad == [], bad

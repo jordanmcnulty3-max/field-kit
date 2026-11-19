@@ -312,6 +312,103 @@ svg('warm-room', 214, 'House plan: one small warm room on the sheltered side of 
 <path d="M10 186 V190 H330 V186" class="m t1"/>
 {lbl(170,206,'Sheltered side of the house','tb','middle')}''')
 
+# ---------------- RADIATION ----------------
+# Drawn from surv-fallout-where-to-shelter ("Best spot in a house", "Apartments and large buildings") and
+# surv-fallout-coming-inside with p:radiation-decontamination. No amounts, no "safe" (radiation pack Task 7); the only
+# numbers are the step badges, and the only arrow is the double arrow labelled "far" in panel 2 of fallout-coming-inside.
+def person(cx, top, s=1.0, cls='k'):
+    """Stick figure standing on y = top + 56*s."""
+    hy, neck, hip, foot = top + 7 * s, top + 14 * s, top + 36 * s, top + 56 * s
+    return (f'<circle cx="{cx}" cy="{hy:.1f}" r="{7*s:.1f}" class="{cls}"/>'
+            f'<path d="M{cx} {neck:.1f} V{hip:.1f} M{cx-8*s:.1f} {foot:.1f} L{cx} {hip:.1f} L{cx+8*s:.1f} {foot:.1f}" class="{cls}"/>')
+
+svg('fallout-shelter-spots', 418, 'Best spot in a house: the basement, go there first. Apartments and large buildings: the basement is best; otherwise go to the center of the building, as far from the roof and windows as you can, shown on a plan seen from above; stay away from areas near the roof, fire escapes and balconies', f'''
+{lbl(170,18,'Best spot in a house','tl','middle')}
+<rect x="60" y="94" width="220" height="44" class="gr"/>
+<line x1="60" y1="94" x2="280" y2="94" class="m" data-part="ground-a"/>
+<path d="M94 62 L170 30 L246 62" class="k t3"/>
+<rect x="102" y="62" width="136" height="32" class="k t3" data-part="house-a"/>
+{window(102, 70, 102, 86)}{window(238, 70, 238, 86)}
+<rect x="102" y="94" width="136" height="38" class="milk"/>
+<rect x="102" y="94" width="136" height="38" class="af" style="fill-opacity:.45" data-part="basement-a"/><path d="M102 94 V132 H238 V94" class="k t3"/>
+<path d="M208 94 h8 v7 h8 v7 h8 v7" class="k t1"/>
+{lbl(160,111,'Basement:','tb','middle')}{lbl(160,125,'go there first','tb','middle')}
+<line x1="10" y1="152" x2="330" y2="152" class="m t1 d"/>
+{lbl(170,174,'Apartments and large buildings','tl','middle')}
+{lbl(236,194,'Basement is best','tb')}<path d="M300 199 V314 H186" class="m t1"/>
+{lbl(150,212,'Stay away from areas near the roof,','','middle')}{lbl(150,226,'fire escapes and balconies','','middle')}
+{lead(150,230,150,238)}{lead(98,230,94,250)}{lead(202,230,206,248)}
+<rect x="0" y="300" width="340" height="36" class="gr"/>
+<line x1="10" y1="343" x2="330" y2="343" class="m t1 d"/>
+<rect x="105" y="240" width="90" height="60" class="k t3" data-part="bldg"/>
+<path d="M101 240 H199" class="k t3"/><path d="M105 260 H195 M105 280 H195" class="k t1"/>
+{''.join(window(105, y + 5, 105, y + 13) + window(195, y + 5, 195, y + 13) for y in (240, 260, 280))}
+<g data-part="fire-escape"><path d="M87 258 H105 M87 278 H105" class="k"/><path d="M103 278 L89 258" class="k t1"/>
+<path d="M87 250 V258 M87 270 V278" class="k t1"/></g>
+<g data-part="balconies"><path d="M195 258 H213 M195 278 H213" class="k t3"/>
+<path d="M213 250 V258 M213 270 V278 M201 250 H213 M201 270 H213" class="k t1"/></g>
+<line x1="0" y1="300" x2="340" y2="300" class="m" data-part="ground-c"/>
+<rect x="105" y="300" width="90" height="28" class="milk"/>
+<rect x="105" y="300" width="90" height="28" class="af" style="fill-opacity:.45" data-part="basement-c"/><path d="M105 300 V328 H195 V300" class="k t3"/>
+<rect x="20" y="350" width="100" height="60" class="milk"/>
+<rect x="50" y="366" width="40" height="28" class="af" style="fill-opacity:.2" data-part="plan-center"/><path d="M50 366 H90 V394 H50 Z" class="a t1 d"/>
+<rect x="20" y="350" width="100" height="60" class="k t3" data-part="plan"/>
+<path d="M20 370 H38 M102 370 H120 M20 390 H38 M102 390 H120 M44 350 V360 M96 350 V360 M44 410 V400 M96 410 V400" class="k t1"/>
+<g data-part="plan-windows">{window(26, 350, 38, 350)}{window(64, 350, 76, 350)}{window(102, 350, 114, 350)}{window(26, 410, 38, 410)}{window(64, 410, 76, 410)}{window(102, 410, 114, 410)}{window(20, 376, 20, 384)}{window(120, 376, 120, 384)}</g>
+{lbl(136,366,'Otherwise go to the','tb')}{lbl(136,380,'center of the building,','')}{lbl(136,394,'as far from the roof and','')}{lbl(136,408,'windows as you can','')}
+{lead(132,376,92,380)}''')
+
+def shoe(x, y):
+    """Side view of a shoe, heel at x, sole on y."""
+    return f'<path d="M{x} {y} V{y-7} H{x+6} L{x+14} {y-3} Q{x+18} {y-2} {x+18} {y} Z" class="k t1"/>'
+
+def cell(x0, y0, n, body, lines):
+    """One numbered panel: badge, drawing in local coordinates (floor at y = 70), then label lines (text, class)."""
+    labels = ''.join(lbl(x0 + 12, y0 + 92 + 14 * i, t, c) for i, (t, c) in enumerate(lines))
+    return f'{badge(x0 + 12, y0 + 12, n)}<g transform="translate({x0} {y0 + 4})">{body}</g>{labels}'
+
+C1 = f'''<line x1="24" y1="70" x2="164" y2="70" class="m"/>
+<path d="M124 70 V6 H156 V70" class="k t3"/><path d="M124 8 L110 16 V76 L124 70" class="k milk"/>
+{person(76, 14)}<path d="M76 34 L54 48 M76 34 L84 50" class="k"/>
+<path d="M48 48 L45 50 L41 63 L45 64 L48 56 V68 H60 V56 L63 64 L67 63 L63 50 L60 48 Q54 51 48 48 Z" class="w wf"/>
+{shoe(90, 70)}{shoe(106, 70)}'''
+C2 = f'''<line x1="12" y1="70" x2="164" y2="70" class="m"/>
+<g data-part="bag"><path d="M14 70 Q4 52 18 42 L23 37 H33 L38 42 Q52 52 42 70 Z" class="k gr" data-part="bag-shape"/>
+<path d="M26 37 q-8 -9 -3 -12 q4 2 3 12 M30 37 q8 -9 3 -12 q-4 2 -3 12" class="k t1"/></g>
+<g data-part="people-pets">{person(130, 14)}<path d="M130 34 L122 48 M130 34 L138 48" class="k"/>
+<ellipse cx="152" cy="58" rx="9" ry="5" class="k"/><circle cx="163" cy="51" r="4" class="k"/><path d="M146 62 V70 M150 63 V70 M155 63 V70 M159 62 V70 M143 56 q-5 -3 -5 -9" class="k"/></g>
+<line x1="58" y1="44" x2="114" y2="44" class="m" marker-start="url(#aM)" marker-end="url(#aM)"/>'''
+C3 = f'''<line x1="24" y1="70" x2="164" y2="70" class="m"/>
+<path d="M124 70 V0 H108 V4" class="k t3"/><path d="M98 4 H118 L114 10 H102 Z" class="k kf"/>
+<path d="M94 14 L88 38 M100 14 L97 28 M116 14 L119 28 M122 14 L128 38 M92 42 L88 58 M124 42 L128 58" class="a t1 d"/>
+{person(108, 14)}<path d="M108 34 L98 24 M108 34 L118 24" class="k"/>
+<rect x="34" y="58" width="22" height="12" rx="4" class="k milk"/>'''
+C4 = f'''<circle cx="64" cy="38" r="24" class="k milk"/>
+<path d="M40 32 q-8 0 -8 8 q0 8 8 8 M88 32 q8 0 8 8 q0 8 -8 8" class="k"/>
+<circle cx="56" cy="34" r="2" class="kf"/><circle cx="72" cy="34" r="2" class="kf"/><path d="M64 38 V46 H60 M58 54 H70" class="k t1"/>
+<path d="M8 72 Q14 58 30 56 L42 40" class="k t3"/><rect x="40" y="26" width="18" height="13" rx="2" transform="rotate(-12 49 32)" class="w wf"/>
+<path d="M124 70 Q116 58 126 50 L129 46 H137 L140 50 Q150 58 142 70 Z" class="k gr"/><path d="M131 46 q-5 -6 -2 -8 q3 1 2 8 M135 46 q5 -6 2 -8 q-3 1 -2 8" class="k t1"/>
+<line x1="108" y1="70" x2="164" y2="70" class="m"/>'''
+C5 = f'''<line x1="24" y1="70" x2="164" y2="70" class="m"/>
+<rect x="30" y="26" width="52" height="44" class="k"/><path d="M30 40 H82 M30 54 H82" class="k t1"/>
+<circle cx="56" cy="33" r="2" class="kf"/><circle cx="56" cy="47" r="2" class="kf"/><circle cx="56" cy="61" r="2" class="kf"/>
+<path d="M114 18 L100 26 L106 38 L112 34 V64 H144 V34 L150 38 L156 26 L142 18 Q128 26 114 18 Z" class="k milk"/>'''
+C6 = f'''<path d="M10 30 H130 Q150 28 158 36 Q162 44 152 52 Q140 58 130 56 H10" class="skin"/>
+<rect x="58" y="24" width="40" height="38" rx="4" class="k milk"/><path d="M58 34 L98 30 M58 44 L98 40 M58 54 L98 50" class="k t1"/>'''
+
+svg('fallout-coming-inside', 532, 'Save a life first. Then: 1 take off the outer layer of clothes and shoes slowly and carefully, before coming in or just inside the door, away from others; 2 bag them and put the bag far from people and pets; 3 wash gently with soap and water, or wipe off, no conditioner, no scrubbing; 4 blow the nose and wipe the eyes and ears, and bag every wipe, cloth and towel you used; 5 put on clean clothes from a closet, drawer or other covered place; 6 care for wounds once the skin around a wound is clean. Then help others and pets, and clean yourself again afterwards', f'''
+{lbl(170,18,'Save a life first. Then:','tl','middle')}
+<line x1="170" y1="30" x2="170" y2="486" class="m t1 d"/><line x1="4" y1="204" x2="336" y2="204" class="m t1 d"/>
+<line x1="4" y1="354" x2="336" y2="354" class="m t1 d"/><line x1="4" y1="490" x2="336" y2="490" class="m t1 d"/>
+{cell(0, 30, '1', C1, [('Take off the outer layer','tb'), ('of clothes and shoes','tb'), ('slowly and carefully','tb'), ('Do it before coming in,',''), ('or just inside the door,',''), ('away from others','')])}
+{cell(172, 30, '2', C2, [('Bag them','tb'), ('Put the bag far from',''), ('people and pets','')])}
+{lbl(258,66,'far','','middle')}
+{cell(0, 208, '3', C3, [('Wash gently with soap','tb'), ('and water, or wipe off','tb'), ('No conditioner,',''), ('no scrubbing','')])}
+{cell(172, 208, '4', C4, [('Blow the nose and wipe','tb'), ('the eyes and ears','tb'), ('Bag every wipe, cloth',''), ('and towel you used','')])}
+{cell(0, 358, '5', C5, [('Put on clean clothes','tb'), ('from a closet, drawer',''), ('or other covered place','')])}
+{cell(172, 358, '6', C6, [('Care for wounds','tb'), ('once the skin around a',''), ('wound is clean','')])}
+{lbl(170,508,'Then help others and pets, and','tb','middle')}{lbl(170,522,'clean yourself again afterwards','','middle')}''')
+
 # ---------------- FIRE ----------------
 svg('fire-sizes', 142, 'Fire materials: dry, fine tinder; kindling from pencil lead to thumb thick; fuel forearm thick and up', f'''
 <path d="M30 58 c5 -22 34 -24 42 -6 c8 16 -12 30 -26 22 c-14 -8 -4 -26 12 -22 c12 4 10 16 0 18 M40 48 c8 -6 20 -4 22 6 M36 66 c10 8 26 6 30 -6" class="w t1"/>

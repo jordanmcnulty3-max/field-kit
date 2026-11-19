@@ -1,0 +1,142 @@
+{
+  "id": "fallout-shelter-kit",
+  "title": "Fallout shelter kit",
+  "category": "radiation",
+  "summary": "What to keep at your shelter spot so the group can shelter without going out “for as long as 2 weeks, and maybe longer (civil defence handbooks, 1968 and 1985, dated).”",
+  "items": [
+    {
+      "id": "radio",
+      "text": "Battery-powered or hand-crank radio, preferably a NOAA weather radio",
+      "note": "Keeps working when other ways of getting news fail."
+    },
+    {
+      "id": "radio-batteries",
+      "text": "Extra batteries for the radio"
+    },
+    {
+      "id": "flashlights",
+      "text": "Flashlights or battery lanterns, with extra batteries",
+      "note": "Not candles or fuel lanterns."
+    },
+    {
+      "id": "water",
+      "text": "Drinking water for at least 2 weeks, as on the Home water store list",
+      "note": "At least 1 gallon (3.8 L) per person per day. Keep it where you will shelter."
+    },
+    {
+      "id": "food",
+      "text": "Sealed, non-perishable food for at least 2 weeks"
+    },
+    {
+      "id": "can-opener",
+      "text": "Manual can opener"
+    },
+    {
+      "id": "medicines",
+      "text": "Medicines: prescription and non-prescription, for at least 2 weeks",
+      "note": "Include medicines taken regularly or likely to be needed."
+    },
+    {
+      "id": "first-aid",
+      "text": "First aid kit"
+    },
+    {
+      "id": "baby-supplies",
+      "text": "Baby supplies: formula, bottles, diapers and wipes, if you have a baby"
+    },
+    {
+      "id": "pet-supplies",
+      "text": "Pet food and extra water, if you have pets"
+    },
+    {
+      "id": "clothes",
+      "text": "A spare change of clothes for each person",
+      "qty": {
+        "amount": 1,
+        "unit": "in total",
+        "per": "person"
+      }
+    },
+    {
+      "id": "trash-bags",
+      "text": "Trash bags or plastic bags for clothes taken off after being outside",
+      "note": "Seal the clothes in, and keep the bag where no one will touch it."
+    },
+    {
+      "id": "soap",
+      "text": "Soap, for washing skin and hair after being outside"
+    },
+    {
+      "id": "wipes",
+      "text": "Wipes or clean cloths, for wiping skin and hair if you can’t wash",
+      "note": "Not household cleaning wipes. Hand sanitizer does not protect against radioactive material."
+    },
+    {
+      "id": "masks",
+      "text": "Dust masks or cloths to cover your mouth and nose if you must go outside",
+      "note": "They help cut how much radioactive material you breathe. Getting inside is still the best protection."
+    },
+    {
+      "id": "bedding",
+      "text": "Sleeping bag or warm blanket for each person",
+      "qty": {
+        "amount": 1,
+        "unit": "in total",
+        "per": "person"
+      }
+    },
+    {
+      "id": "co-alarms",
+      "text": "Battery carbon monoxide alarms near where people sleep",
+      "note": "Never burn anything in a sealed room. Winter heat supplies are on the Home heat kit list."
+    },
+    {
+      "id": "sanitation",
+      "text": "Toilet and sanitation supplies, as on the Sanitation kit list"
+    },
+    {
+      "id": "phone",
+      "text": "Cell phone with chargers and a backup battery",
+      "note": "Text messages may get through when calls don’t."
+    },
+    {
+      "id": "family-plan",
+      "text": "Family emergency plan written down: meeting place if you can’t meet at home, and an out-of-state contact"
+    },
+    {
+      "id": "activities",
+      "text": "Books, games or other activities for children"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",
+      "used": "Battery-powered or hand-crank radio that keeps working when other communication fails; spare change of clothes for each family member; trash bag for contaminated clothing; sealed food, water and medicine; family emergency communication plan, meeting place, out-of-state contact; soap and water, or a wipe or clean wet cloth; no household cleaning wipes on skin; hand sanitizer does not protect against radioactive material"
+    },
+    {
+      "name": "Ready.gov (FEMA), Build A Kit (ready.gov/kit; undated)",
+      "used": "Flashlight; extra batteries; first aid kit; dust mask to help filter contaminated air; manual can opener; cell phone with chargers and a backup battery; prescription and non-prescription medications; infant formula, bottles, diapers and wipes; pet food and extra water for your pet; sleeping bag or warm blanket for each person; books, games or activities for children; non-perishable food"
+    },
+    {
+      "name": "CDC, Frequently Asked Questions about Radiation Emergencies (last reviewed April 19, 2022; updated April 12, 2024)",
+      "used": "Radio, preferably a NOAA weather radio; extra batteries; bottled water and non-perishable foods; text messages when calls are hard; covering mouth and nose reduces the radioactive material you breathe"
+    },
+    {
+      "name": "CDC, Dirty Bombs: Frequently Asked Questions (last reviewed April 10, 2024)",
+      "used": "Seal removed clothing in a plastic bag and put it where others will not touch it"
+    },
+    {
+      "name": "CDC, Potassium Iodide (KI) (last reviewed April 16, 2024; updated January 30, 2025)",
+      "used": "Get inside, stay inside, stay tuned is always the best protection"
+    },
+    {
+      "name": "FEMA, Protection in the Nuclear Age (June 1985; dated civil defence publication)",
+      "used": "Two-week stock of water, food and supplies to bring to shelter; medicines taken regularly or likely to be needed; battery-powered radio and flashlight or lantern with spare batteries"
+    },
+    {
+      "name": "Living in a closed-up house, How much water you need and How long to stay in (other topics in this app)",
+      "used": "Flashlights or battery lanterns, not candles or fuel lanterns (CDC, CPSC); battery CO alarms near where people sleep (CDC, CPSC); never burn anything in a sealed room; 1 gallon (3.8 L) per person per day for 2 weeks; “for as long as 2 weeks, and maybe longer (civil defence handbooks, 1968 and 1985, dated)” with no word from anyone (How long to stay in)"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

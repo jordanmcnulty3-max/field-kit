@@ -1,0 +1,205 @@
+{
+  "id": "surv-fallout-how-long",
+  "title": "How long to stay in",
+  "category": "radiation",
+  "keywords": [
+    "how long to shelter",
+    "how long to stay inside",
+    "when can i go outside",
+    "when to leave shelter",
+    "24 hours",
+    "two weeks",
+    "fallout decay",
+    "7-10 rule",
+    "7:10 rule",
+    "rule of seven",
+    "radiation decay",
+    "going outside",
+    "trip outside",
+    "no instructions",
+    "no radio",
+    "geiger counter",
+    "radiation meter",
+    "dosimeter",
+    "how many days",
+    "come out",
+    "leave the basement"
+  ],
+  "summary": "Officials say to stay inside for at least 24 hours unless an immediate danger such as a fire, gas leak, collapse or serious injury forces you out, and then until they say to leave. If no word ever comes, the dated civil defence handbooks of 1968 and 1985 say shelter could last as long as 2 weeks, and longer in some places. Fallout weakens fast, but only a meter or an official can tell you how strong it still is.",
+  "doFirst": [
+    "Stay in for at least the first 24 hours (Ready.gov, CDC, NYC Health). Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov).",
+    "After that, keep sheltering until officials tell you to leave (Ready.gov).",
+    "No word from anyone? Plan to keep sheltering for as long as 2 weeks, and maybe longer (civil defence handbooks, 1968 and 1985, dated). Go out only for what can’t wait, as briefly as you can (see When no one tells you)."
+  ],
+  "sections": [
+    {
+      "h": "What officials say",
+      "blocks": [
+        {
+          "list": [
+            "Ready.gov: stay in the most protective place (a basement or the center of a large building) for the first 24 hours, unless threatened by an immediate hazard such as fire, a gas leak, building collapse or serious injury, or until authorities say you may leave. Sheltering usually lasts at least 24 hours.",
+            "CDC: staying inside for at least 24 hours can protect you and your family. Always listen for more instructions from emergency officials and radiation experts.",
+            "NYC Health: expect to shelter indoors for at least 24 hours.",
+            "FEMA’s planning guidance: get inside, stay inside, stay tuned for at least 12 to 24 hours, unless threatened by fire, building collapse, medical needs or another immediate threat. This app uses the longer figure: at least 24 hours."
+          ]
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
+        }
+      ]
+    },
+    {
+      "h": "Why time matters",
+      "blocks": [
+        {
+          "list": [
+            "Fallout gives off over half of its energy in the first hour and keeps decaying fast (FEMA planning guidance).",
+            "Radiation levels drop fast and become much less dangerous during the first 24 hours (Ready.gov).",
+            "Where fallout is still coming down, levels can rise quickly at first and then fall over the first 48 hours (FEMA, Nuclear Detonation Response Guidance: Planning for the First 72 Hours).",
+            "Wind can stir fallout back up into the air and shift where it lies (FEMA planning guidance)."
+          ]
+        },
+        {
+          "warn": "Weaker is not the same as harmless. Never treat a time rule on its own as a reason to go out. Only a meter reading or officials can say how strong the radiation outside still is: for accuracy and reliability, nothing can replace a direct instrument reading (FEMA Center for Domestic Preparedness)."
+        }
+      ]
+    },
+    {
+      "h": "The 7:10 rule",
+      "blocks": [
+        {
+          "p": "FEMA’s Center for Domestic Preparedness teaches the 7:10 rule of thumb: for every 7-fold increase in time after the detonation, there is a 10-fold decrease in the exposure rate. FEMA’s 1985 handbook Protection in the Nuclear Age (dated) gives the same rule with these steps:"
+        },
+        {
+          "table": {
+            "head": [
+              "Time since the explosion",
+              "Fallout radiation, compared with 1 hour after"
+            ],
+            "rows": [
+              [
+                "1 hour",
+                "The starting level"
+              ],
+              [
+                "7 hours",
+                "About 1/10"
+              ],
+              [
+                "49 hours (about 2 days)",
+                "About 1/100"
+              ],
+              [
+                "About 2 weeks",
+                "About 1/1,000"
+              ]
+            ]
+          }
+        },
+        {
+          "list": [
+            "The answers are only approximations (FEMA Center for Domestic Preparedness).",
+            "The rule assumes you know when the explosion happened, and that the fallout came from only one explosion (FEMA Center for Domestic Preparedness).",
+            "It tells you how much the radiation has dropped, not how strong it is. Only an instrument reading can say what the level is (FEMA Center for Domestic Preparedness)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "When no one tells you",
+      "blocks": [
+        {
+          "p": "Current federal guidance assumes officials will say when to come out, and gives no period for when no word ever comes. FEMA’s planning guidance says that with no information at all, sheltering still protects against fallout radiation."
+        },
+        {
+          "p": "Older civil defence handbooks fill the gap. They are dated, and they never override the current guidance above:"
+        },
+        {
+          "list": [
+            "Office of Civil Defense, In Time of Emergency (1968, dated): people in areas with fallout would have to stay in shelter for 2 or 3 days to as long as 2 weeks. In most places, full-time shelter would probably not be needed for more than a week or two.",
+            "FEMA, Protection in the Nuclear Age (1985, dated): shelter stays could range from a few days to as much as two weeks, and somewhat longer in limited areas. The first few days would be the most dangerous time."
+          ]
+        },
+        {
+          "p": "This app uses the longer stay: with no official word, plan to shelter for as long as 2 weeks, and know it could be longer in some places (FEMA 1985, dated). Both handbooks say people might be able to leave for short periods before then, and both leave it to officials or a meter to say when. Neither gives a day for it without them."
+        },
+        {
+          "warn": "This app’s own caution, not a source’s: with no meter and no official word, stay in all the time for at least the first 24 hours unless an immediate hazard forces you out. For the rest of the 2 weeks, and above all in the first few days, go out only for what can’t wait, and as briefly as you can."
+        }
+      ]
+    },
+    {
+      "h": "Trips outside you can’t avoid",
+      "blocks": [
+        {
+          "list": [
+            "Keep each trip as short as you can, and go only for what can’t wait (this app’s caution; the 1968 and 1985 handbooks, both dated, speak only of short periods outside).",
+            "If you must be outside, cover your mouth and nose with a mask, cloth or towel (CDC).",
+            "Coming back in: take off the outer layer of clothes and shoes slowly and carefully, so the dust does not shake loose, before coming in or just inside the door, away from others (Radiation decontamination). Then wash or wipe the skin and hair that were uncovered (Ready.gov).",
+            "A generator runs only outside, so every start and every refill is a trip out. See Generators."
+          ]
+        },
+        {
+          "link": "s:surv-generators",
+          "label": "Generators"
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
+        }
+      ]
+    },
+    {
+      "h": "If you have a meter",
+      "blocks": [
+        {
+          "p": "A radiation meter is the only way to know how strong the radiation actually is: for accuracy and reliability, nothing can replace a direct instrument reading (FEMA Center for Domestic Preparedness). No official source opened for this app gives meter readings that a member of the public can act on, so this app does not yet explain how to read one or what a reading means."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",
+      "used": "Most protective location for the first 24 hours unless threatened by an immediate hazard (fire, gas leak, building collapse, serious injury) or told by authorities; sheltering usually lasts at least 24 hours; radiation levels decrease rapidly and become significantly less dangerous during the first 24 hours; removing outer clothing carefully so dust doesn’t shake loose; washing or wiping uncovered skin and hair"
+    },
+    {
+      "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024) and What to Do: Stay Inside (last reviewed April 17, 2024)",
+      "used": "At least 24 hours; listen for more instructions from officials and radiation experts; cover mouth and nose outside; remove outer clothing before entering"
+    },
+    {
+      "name": "NYC Health (New York City Department of Health and Mental Hygiene), Emergencies: Nuclear Incident",
+      "used": "Expect to shelter indoors for at least 24 hours"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023)",
+      "used": "Get Inside, Stay Inside, Stay Tuned for at least 12 to 24 hours unless threatened by fire, building collapse, medical needs or other immediate threats; fallout gives off over half its energy in the first hour and decays rapidly; wind may resuspend fallout; in the absence of any information, sheltering protects against fallout radiation"
+    },
+    {
+      "name": "FEMA Office of Emerging Threats, Nuclear Detonation Response Guidance: Planning for the First 72 Hours (March 2023; updated June 12, 2023; copy hosted by HHS REMM)",
+      "used": "Measurements may increase rapidly at first, then decrease over the first 48 hours"
+    },
+    {
+      "name": "FEMA Center for Domestic Preparedness, online course AWR-923-W, Radiological Emergency Management (course pages dated May 12, 2021), pages “The 7:10 Rule of Thumb” and “Limitations of 7:10 Rule of Thumb”",
+      "used": "For every 7-fold increase in time after detonation, a 10-fold decrease in the exposure rate; answers are only approximations; assumes the detonation time is known and fallout from one detonation; nothing can replace a direct instrument reading"
+    },
+    {
+      "name": "FEMA, Protection in the Nuclear Age (June 1985; dated civil defence publication)",
+      "used": "Sevenfold time, tenfold decrease: 7 hours, 49 hours (about two days), and about two weeks at one-thousandth of the one-hour level; shelter stays from a few days to as much as two weeks, somewhat longer in limited areas; first few days most dangerous; leaving for short periods once the level declines, with local government saying when"
+    },
+    {
+      "name": "Office of Civil Defense, In Time of Emergency: A Citizen’s Handbook on Nuclear Attack and Natural Disasters (H-14, March 1968; dated civil defence publication)",
+      "used": "Shelter for 2 or 3 days to as long as 2 weeks; full-time shelter unlikely to be needed for more than a week or two; leaving for a few minutes or hours at a time; without instruments, depend on local government to say when to leave"
+    },
+    {
+      "name": "Generators (another topic in this app)",
+      "used": "A generator runs only outside"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

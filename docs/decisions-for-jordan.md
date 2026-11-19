@@ -559,3 +559,306 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    overnight, and puts a wood stove out before sleep for fire reasons (D44). The app reads the protocol's words as meaning
    unvented or camp equipment; nobody is harmed (the literal reading is stricter). The protocol was not edited. Say if its
    wording should say "unvented" (a protocol change, to be checked like any other).
+68. **How long to stay in when no one ever says (surv-fallout-how-long).** Current federal and New York City guidance says
+   at least 24 hours and then wait for officials; none gives a period for when no word ever comes. The dated civil
+   defence handbooks fill the gap: In Time of Emergency (Office of Civil Defense, 1968): 2 or 3 days to as long as 2
+   weeks; Protection in the Nuclear Age (FEMA, 1985): a few days to as much as two weeks, somewhat longer in limited areas.
+   Both say people might leave for short periods before then, but leave it to officials or a meter to say when. Today: plan
+   on as long as 2 weeks, and maybe longer (the Do first and summary name the 1968 and 1985 handbooks), plus a labelled app caution: no trips out in the first 24 hours
+   except for an immediate hazard, then only brief trips for what can't wait, above all in the first few days. The Army
+   survival manual (FM 3-05.70) has a soldier's timetable (complete isolation 4 to 6 days, one 30-minute trip for water on
+   day 3, short trips on days 7 and 8, 2 to 4 hours a day from day 9 to 12, normal from day 13); it is not used, because
+   the content plan limits the Army manuals to the caught-outdoors case. Say if the group wants that timetable, or a
+   different rule for trips.
+69. **A CO alarm during fallout sheltering (surv-fallout-shelter-living). Medical professional. (Where to wait once outside: see D113.)** Carbon monoxide (checked, CPSC): if a CO alarm
+   sounds, get everyone outside now. Fallout guidance (Ready.gov): stay inside for the first 24 hours unless an immediate
+   hazard such as fire, a gas leak, building collapse or serious injury forces you out; CO is not on its list. Both can
+   kill. Today: the closed-up-house topic quotes the CO rule unchanged (Carbon monoxide's Do first, the same words Leaving quotes) and says going out means going into fallout, which is
+   one more reason nothing burns in the house. Fix round: the "leave only if" lines in the fallout topics now say "an
+   immediate danger such as a fire, gas leak, building collapse or serious injury" (Ready.gov's examples, not a closed
+   list), so they no longer exclude a CO alarm. No source opened says what to do instead (for example opening windows wide
+   and moving to another room). Say if the group wants a different rule (it would need a source, and is also a question for
+   a medical professional).
+70. **"Go somewhere with heat" during fallout (surv-heat-out, surv-fallout-shelter-living) (answered by D97: Leaving and
+   moving after fallout now exists and owns leaving).** Stay warm when the heat is out
+   (checked) says: if you can't keep the house warm, go somewhere with heat. During a fallout warning that means travelling
+   through fallout. Today: the closed-up-house topic points to Leaving and moving after fallout before anyone leaves for heat;
+   Stay warm when the heat is out is not edited. Say if the heat topic should gain a line about fallout (one link block is allowed in the radiation pack).
+71. **When does the cold become "a danger to life" (surv-fallout-shelter-living). Medical professional. (Cold with no heat: see D112; basement or stove room: see D114.)** Your rule: no-flame warmth first; burn
+   only when the cold itself is a danger to life, then under the carbon monoxide rules in full. No opened source gives an
+   indoor temperature for this (Stay warm when the heat is out lists the figures sources give: hypothermia in older people
+   at 60 to 65°F, and so on). Today: no temperature; the topic says to watch babies and older people first and to use the
+   Hypothermia protocol for the signs. Say if the group wants a trigger (for example a room temperature or the first signs
+   of hypothermia in anyone). Also a question for a medical professional.
+72. **Moving from a poor shelter to a better one (surv-fallout-where-to-shelter).** FEMA's planning guidance (2022): when an
+   adequate shelter is within 15 minutes' travel, people in a poor shelter (its "protection factor 2") should stay no longer
+   than 30 minutes after the detonation, and in a better shelter ("protection factor 4") an hour or two, before moving.
+   The same paragraph gives wood-frame residential structures as an example of poor shielding, and says the move should
+   ideally be away from ground zero; it names no buildings for "protection factor 4" (its figure is an image that could
+   not be read). Ready.gov says only: if a multi-story building or basement can be reached within a few minutes, go there
+   immediately. Today: both are in the topic, FEMA's as "poor" and "somewhat better", with FEMA's wood-frame example and
+   "ideally away from the explosion". Say if the group would rather keep only Ready.gov's simpler rule.
+73. **Older handbooks allow a stove indoors (surv-fallout-shelter-living).** Protection in the Nuclear Age (FEMA, 1985)
+   suggests a camp stove for heat and cooking in the shelter with adequate ventilation (no charcoal); In Time of Emergency
+   (1968) says a stove indoors needs adequate ventilation. The checked Carbon monoxide topic (CDC, CPSC) says never run a
+   camp stove indoors. Today: the topic names the old advice and says the app follows CDC and CPSC. No change expected;
+   recorded because it is a source disagreement.
+74. **How soon fallout arrives (surv-fallout-warning).** Ready.gov and FEMA's planning guidance: 10 minutes or more after a
+   detonation. FEMA's planning guidance also says that in many areas fallout arrives an hour or more after, and its 72-hour
+   guidance says it may take several hours. The 1968 and 1985 handbooks say 15 to 30 minutes close to the explosion and 5
+   to 10 hours or more 100 to 200 miles away. Today: 10 minutes or more, the shortest, so nobody delays getting in; the
+   longer times are not shown. Say if the group wants the longer times shown as well.
+75. **What to do at the flash (surv-fallout-warning).** Ready.gov (current): outside, lie face down to protect exposed skin
+   from the heat and flying debris, then go inside after the shockwave passes. In Time of Emergency (1968): take cover
+   instantly; with no cover, lie down and curl up on your side and cover your head with your arms and hands. Today:
+   Ready.gov's face down. No change expected; recorded as a disagreement.
+76. **A working furnace during the sheltering period (surv-fallout-shelter-living).** Your winter rule speaks of "the stove or
+   heater". The topic reads a furnace or boiler vented to the outside that still has power as the house's normal heat, not
+   an emergency stove or heater, so it is not held back until the cold is a danger to life; CDC's rule to turn off
+   forced-air heating that brings in outside air still applies, and its outside vents must be kept clear (which may mean a
+   trip out in snow). Say if the group wants the furnace treated like a stove (off until the cold is a danger to life).
+   (The two furnace rules are now shown as separate cases: see D116.)
+80. **"Send someone for help" during fallout (radiation-decontamination, radiation-sickness, and the protocols they link).
+   Medical professional. (Going for medical care during fallout: see D87 and D95.)**
+   The standard help line in every checked protocol is "Call 911 if you have signal. If not, send someone for help and
+   prepare to move the casualty." During a fallout warning, sending someone means sending them outside. Today: the two new
+   protocols leave that line out, say what needs medical care, and name Leaving and moving after fallout (Survival) as the
+   place that decides whether and when to leave shelter. The checked protocols they send people to (Burns, Shock, Severe
+   bleeding, CPR, Eye injury and others) still carry the standard line and were not edited. Say if the group wants a
+   fallout note added to the standard line (a change to checked protocols, to be checked like any other).
+81. **Protecting someone with radiation sickness from infection at home (radiation-sickness). Medical professional.** Sources
+   say most deaths are from infection or internal bleeding, that treatment focuses on reducing infections, and that hospitals
+   use precautions against infection (CDC clinician guidance: "neutropenic precautions"). No source opened says what a lay
+   person should do. Today: the protocol suggests, as the app's labelled judgement, washing hands before and after care,
+   keeping wounds and burns clean and covered, and keeping anyone with a cough, cold or stomach bug away. Worth showing a
+   medic or nurse: what else (food, water, bedding, separation) is worth doing without a hospital.
+82. **Radioactive dust in a wound when no professional can be reached (radiation-decontamination). Medical professional.**
+   FEMA's 2024 public guidance (Communicating in the Immediate Aftermath, pp. 10, 40 and 41): press on a bleeding wound,
+   clean around the wound, "and then treat your injury as you would an ordinary injury"; "Get a health care professional to
+   decontaminate your wound once you have access to one"; "Apply the appropriate treatments, even if there is concern that
+   it might result in some radiation contamination." Clinician guidance (CDC hospital training; New York State Department
+   of Health card) cleans wounds first, with gentle, repeated rinsing. Today: FEMA's public rule: clean around the wound, then rinse and dress it as the Wound cleaning and care protocol says, as
+   for any wound; a professional should still decontaminate the wound once reachable. The open question is whether that is
+   enough when no professional is ever reachable.
+83. **Cooling a fresh burn on someone covered in fallout (radiation-decontamination). Medical professional. (Burns
+   protocol during fallout: see D89 and D96.)** The Burns
+   protocol (checked) cools a burn under cool running water for 5 to 20 minutes. FEMA's 2024 public guidance says to clean
+   around a wound and treat the injury as an ordinary injury, to "lightly wrap burn injuries", and to "Apply the appropriate
+   treatments, even if there is concern that it might result in some radiation contamination." Today: outer clothes off
+   first, then the Burns protocol as written, cooling included, without waiting. Worth confirming with a medic that cooling
+   with water that may carry dust onto the burn is the right trade.
+84. **What early vomiting means (radiation-sickness). Medical professional.** FEMA's planning guidance: the earlier vomiting
+   starts after exposure, the higher the radiation received, but many other things cause vomiting. FEMA's public guidance:
+   people who were not exposed often get the same symptoms from stress, and symptoms soon after the explosion in someone who
+   was inside are most likely not from radiation. Clinician tables give onset times by severity (CDC). Today: the protocol
+   gives both FEMA statements, tells people to note when vomiting started, and gives no estimate of how much radiation
+   someone received. Say if the group wants the clinician timing shown (it is a triage tool for trained staff).
+85. **Breastfeeding after fallout (radiation-decontamination). Medical professional. (One question with D94 and D102.)** CDC (Radiation Emergencies and
+   Children): "It is possible for nursing mothers to pass radioactive materials to their babies through their breastmilk."
+   "They should consider not breastfeeding if other milk sources are available until they can see their healthcare
+   professional." Separately: "Pregnant women should take extra precautions during a radiation emergency." Off-grid there may
+   be no other milk and no professional. Today: CDC's sentences are given in the detail of the helping-others step with a
+   note that this may not be possible, and a pointer to Water and food after fallout, which shows all three CDC pages,
+   including: if you were indoors with the doors and windows closed, keep breastfeeding. Ask what a mother should do when there is no other milk.
+86. **Where to take off outer clothes (radiation-decontamination).** CDC (What to Do: Get Inside): "Carefully remove your
+   outer layer of clothing before entering the building, if you can." FEMA's 2024 messaging guide (p. 8): those entering
+   "can easily self-decontaminate by removing shoes and outer clothing and/or brushing or wiping off fallout particles
+   immediately after they enter"; its EAS Message B (p. 96): "If they can, they should remove shoes and outer clothing."
+   Today: "before coming in, or just inside the door, away from others", with both sources in the detail. This also binds
+   Coming in from outside (later topic). Coming in from outside now says the same; its question about brushing clothes off is
+   D90. Answer the two together.
+87. **Who should go for medical care (radiation-sickness). Medical professional. (Going for medical care during fallout:
+   see D80 and D95.)** FEMA's public messages give two rules: seek medical help if you
+   were near the incident and have symptoms, and, when medical facilities are overwhelmed, only those with serious,
+   life-threatening injuries should seek care. CDC: seek medical attention for radiation sickness symptoms once officials say
+   you can leave shelter. Today: the protocol lists what needs medical care (needs, not instructions) and points to Leaving
+   and moving after fallout for whether and when to go. Also a question for a medical professional: what a group can do for
+   radiation sickness if no medical care is ever reachable.
+88. **Closing up the house after the fallout has passed, and heat (surv-fallout-shelter-living).** Found while
+   reading FEMA's 2024 public messaging guide (Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath,
+   p. 16): "Closing off ventilation after the passage of the fallout cloud provides little to no health benefit." and
+   "Heating and cooling should take priority if there are extreme temperatures." Also "If you are in a sturdy building with
+   some broken windows, there is no need to relocate." Living in a closed-up house (checked in batch A) says to turn off
+   forced-air heating that brings in outside air (CDC) and puts no-flame warmth first for the whole sheltering period (your
+   winter rule). FEMA's line is about ventilation and heating, not about burning anything in a sealed room, and does not
+   change the carbon monoxide rules. Say if the group wants Living in a closed-up house to carry FEMA's line (a change to a
+   checked topic, to be checked like any other).
+   The same section (3.3.5, "Immediate Actions to Reduce Contamination in Your Home") also says, for while fallout may be
+   coming down: "Limit your exposure to radiation by closing windows and doors if you can"; "You should consider turning off
+   anything that brings air in from the outside. If it's an option, turn off "ventilation mode" or "fresh air intake" and
+   switch air to recirculate if possible. If you aren't sure if your HVAC system has this option, then turn it off if safe to
+   do so."; "If you are experiencing extreme temperatures or weather conditions, listen to emergency officials for guidance
+   on heating and air conditioning. The health risk from turning off HVAC systems might be greater than the risk of
+   radioactive contamination."; "Make sure fireplace dampers are closed." The section's opening paragraph also says "The
+   likelihood of drawing in radioactive fallout into your home is extremely small after the passage of the fallout cloud."
+   Today: Living in a closed-up house now shows FEMA's p. 16 sentences beside the app's rule; the app's rule stays as written,
+   and nothing burns in a sealed room.
+89. **A radiation burn that appears hours or days later (radiation-sickness). Medical professional. (Burns protocol during
+   fallout: see D83 and D96.)** FEMA's 2024 public
+   guidance: radiation (beta) burns appear a few hours to several days after exposure, need medical care immediately, and
+   "The key treatments for beta burns are infection prevention and pain management." The Burns protocol (checked) starts by
+   cooling a fresh heat burn under running water for 5 to 20 minutes; no source opened says whether to cool a burn that
+   appears later. Today: the protocol says it needs medical care and points to the Burns protocol only for covering it
+   loosely, checking for infection and pain, not for cooling. On pain, it now says: the Burns protocol's pain step gives no
+   pain medicine by mouth for a burn that needs medical care, and it counts every radiation burn as one; whether to give pain
+   medicine when no medical care can be reached is an open question. Ask what else to do for it without a hospital.
+90. **Brushing off clothes when there are no clean ones (surv-fallout-coming-inside; one question with D86).** CDC's
+   decontamination infographic: with no clean clothes, take off the outer layer, shake or brush the clothes off, put them back
+   on, and wash hands, face and skin again. CDC also says to take clothes off carefully so radioactive dust doesn't shake loose.
+   The Radiation decontamination protocol adds FEMA's 2024 messaging guide: brush or wipe off clothing away from other people or
+   pets, with nose and mouth covered. Today: Coming in from outside says what the protocol says ("take the outer layer off,
+   brush it off away from others with your nose and mouth covered, put it back on, and wash again"), and takes off clothes
+   "before you come in, or just inside the door, away from others" (D86). The earlier app caution ("just inside the outside
+   door, not outside") and the dated 1968 line were removed when the topic was aligned with the protocol. Say if the group wants
+   a fixed place for both (for example always just inside the door, which keeps people out of the fallout a moment longer but
+   brings some dust into the house).
+91. **Milk from your own animals, wild game and fish after fallout (surv-fallout-water-and-food).** No current source opened says
+   when these can be used. Ready.gov and CDC say not to eat garden food, or food or liquids that were outdoors uncovered, until
+   officials say. The 1968 handbook In Time of Emergency (dated) says milk from cows that grazed on pasture with fallout might
+   harm infants' and small children's thyroids, and they should have canned or powdered milk for a few weeks; it calls milk "not
+   expected to be a serious problem" otherwise. Today: an app caution to treat milk, game and fish like food that was outdoors
+   (don't use until officials say), with the 1968 line shown as dated. Say if the group keeps animals and wants more (it needs a
+   source; state agricultural guidance found so far is written for nuclear plant releases, which this pack does not cover).
+92. **Drinking well water after fallout (surv-fallout-water-and-food).** CDC: until tested, only bottled water is certain to be
+   free of contamination; tap or well water can be used for washing yourself and food; if there is no stored, heater or toilet
+   tank water, drink tap water to stay hydrated. No current source gives a drinking rule for a private well. The 1968 handbook
+   (dated) says water in covered wells would not be contaminated. Today: a well is treated like tap water in CDC's order (the
+   app's reading), with the 1968 line shown as dated. Say if the group wants well water ranked higher (for example ahead of the
+   toilet tank).
+93. **Straining fallout out of open water (surv-fallout-water-and-food).** The 1968 and 1985 handbooks (dated) say to strain
+   doubtful water (from a faucet, stream or pond) through a paper towel or cloth to remove fallout particles, let it settle 24
+   hours, then boil or treat it; the 1968 handbook adds that particles in reservoirs, lakes and streams settle to the bottom.
+   Ready.gov (current) says not to consume liquids that were outdoors and uncovered until authorities say, and the checked Make
+   water safe says water with radioactive material can't be fixed by boiling or disinfecting. Today: the topic names the old
+   method and says the app doesn't follow it. No change expected; recorded because it is a source disagreement, and because a
+   group with no stored water left would face it.
+94. **Breastfeeding after fallout, and formula with no bottled water (surv-fallout-water-and-food). Worth asking a medical
+   professional. (One question with D85 and D102.)** Two CDC pages disagree. CDC Infant Feeding (2024): if you were outside in the affected area, consider
+   stopping breastfeeding for a while and feed stored breast milk or formula; with neither, keep breastfeeding; pump and discard
+   to keep the supply; resume when health officials say or after leaving the area and cleaning off. CDC Frequently Asked
+   Questions (2022; updated April 12, 2024): if possible, nursing mothers who were near the affected area should temporarily stop breastfeeding and use
+   stored breast milk or formula until seen by a doctor; if no other food is available for the baby, keep breastfeeding. The FAQ
+   is stronger ("should", not "consider") and has a wider trigger ("near", not "outside in"). With no officials and no doctor,
+   neither end point may come. Today: both statements are shown, each credited to its page, and the app does not choose. Water and food after
+   fallout now also shows CDC's Radiation Emergencies and Children line (D85), so three CDC pages are shown.
+   Also not covered: making powdered formula with no bottled water and no officials. CDC Infant Feeding says bottled water if
+   possible and tap water only if local officials say; it says nothing about stored, water heater or toilet tank water for
+   formula. Today (final review fixes): a labelled app reading says water you stored yourself before the fallout comes next
+   after bottled water for formula, as it does for drinking (D98, D115); nothing is said about water heater, toilet tank or
+   tap water for formula without officials. End points: CDC Infant Feeding ends when local health officials say, or after
+   leaving the area and cleaning off; CDC FAQ ends when the mother can be seen by a doctor; CDC Radiation Emergencies and
+   Children ends when she can see her healthcare professional. With no officials and no doctor reachable, none of the three end
+   points arrives. Two of the three (Infant Feeding, FAQ) say to keep breastfeeding when there is no stored milk or formula; the
+   Children page, as recorded, says only to consider not breastfeeding if other milk is available, so the app does not state
+   that all three agree. Say which CDC statement the group should follow, what ends it when no one can be reached, and what
+   to use for formula when bottled and stored water run out.
+95. **Taking a casualty out through fallout for care (surv-fallout-leaving). Worth asking a medical professional. (Going for
+   medical care during fallout: see D80 and D87.)** Ready.gov
+   counts serious injury among the immediate dangers that can force you out, and FEMA names medical needs; Ready.gov also says
+   to listen for where to get care. No source says what a household with no officials, and no way to know if a hospital is open,
+   should weigh before carrying someone out. Today: those sources, first aid by link, and a labelled app caution to be as sure as
+   you can where you are going and that you can get there. Say if the group or a medical professional wants a firmer rule (for
+   example which injuries justify the trip).
+96. **The Burns protocol's "get medical care" line during fallout sheltering (surv-fallout-leaving, burns). Worth asking a
+   medical professional. (Burns protocol during fallout: see D83 and D89.)** Burns (checked) says to get medical care for every electrical, lightning, chemical, radiation or
+   explosion burn, even a small one. During fallout sheltering, leaving for a small burn would mean going out through fallout;
+   the leaving rule allows it only for an immediate danger such as serious injury. Today: Burns is linked and not edited; the
+   leaving topic does not list burns separately. Say if the group wants a note on this (an edit to Burns would be a checked
+   protocol change).
+97. **Cold as a reason to leave shelter (surv-fallout-leaving; follows D70; see D112).** The leaving topic now owns the rule for leaving.
+   It sends cold to Living in a closed-up house first (no-flame warmth, then a stove or heater under the carbon monoxide rules
+   when the cold is a danger to life) and does not list cold as a reason to leave on its own. Stay warm when the heat is out
+   still says to go somewhere with heat if you can't keep the house warm. Today: no source opened weighs cold against fallout;
+   the topic gives no cold trigger for leaving. Say if the group wants one (for example when nothing in the house can keep a
+   baby or older person warm).
+98. **Water you stored yourself, in the drinking order (surv-fallout-water-and-food).** CDC's order after fallout: bottled water
+   and sealed drinks, then refrigerator drinks, then water in other containers in the house (water heater, toilet tank), then
+   tap water. CDC does not name water a household stored in its own sealed containers. Today: labelled as the app's reading,
+   such water is drunk after bottled water and other sealed drinks, and ahead of the water heater and toilet tank (it is sealed
+   and was indoors, as CDC says of sealed drinks). The same order now applies to powdered formula (Babies, labelled app
+   reading; D115). Say if the group wants it ranked with the heater and toilet tank instead.
+100. **In a car during a dirty bomb (surv-dirty-bomb).** CDC's dirty bomb steps: close the windows, turn off the air,
+   heater and vents, cover nose and mouth; go into your home or a building if one is close; otherwise pull over, turn off the
+   engine and stay in the car until told you can drive on. For a nuclear explosion, Where to shelter from fallout (FEMA, NYC
+   Health) says a car is not a shelter: get out and into a building. Today: the topic gives CDC's car steps with a warning
+   that they are for a dirty bomb only. Say if the group would rather the app always said "get into a building", even for a
+   dirty bomb.
+101. **How long to stay in after a dirty bomb when no one says (surv-dirty-bomb). (See D107.)** CDC says stay in the building (or the
+   car) until told it is all right to travel; NRC and CDC give no length of time, and nothing for when no word comes. How
+   long to stay in (at least the first 24 hours, and with no word from anyone, as long as 2 weeks, and maybe longer) is for fallout, which a dirty bomb does not produce over a region.
+   Today: the topic says no source gives a time and to stay in until officials say. Say if the group wants a rule for when no
+   word ever comes (it would be the app's own, labelled as such).
+102. **Breastfeeding and radioactive iodine (surv-potassium-iodide). Medical professional. (One question with D85 and D94.)** CDC's KI page says breastfeeding women should consider
+   stopping breastfeeding until evacuated from the affected area, if possible, and feed the baby another way, because
+   radioactive iodine can pass to infants through breast milk. That advice sits in CDC's guidance for an event with
+   radioactive iodine (most common at nuclear power plants) and assumes evacuation and other feeding are possible. Today: not
+   in the app. A question for a medical professional: whether, and how, the fallout topics should say anything about
+   breastfeeding when no formula or clean water may be available.
+103. **KI timing and repeat doses (surv-potassium-iodide).** CDC: take KI within 24 hours before or 4 hours after exposure;
+   one dose protects for 24 hours; officials will say if another is needed; more than one dose may cause later development
+   problems. FDA: KI should not be taken as a preventative before radiation exposure. New York State Department of Health
+   (2017, written for nuclear plant emergencies): keep taking it once a day until the health department says to stop or you
+   are out of the area. All three say to follow officials. Today: the topic says only that KI works best shortly before or
+   right after radioactive iodine gets into the body (CDC), that it is taken only if officials or a healthcare provider say
+   so, and that more than a single dose has risks; no hours, no number of doses, no dose. Say if the group wants CDC's hours
+   shown (they are not a dose, but invite taking KI early).
+104. **How much food to keep for fallout (surv-fallout-get-ready, fallout-shelter-kit).** Ready.gov: at least a several-day
+   supply. New York State's preparedness list: at least 7 days. FEMA's Protection in the Nuclear Age (1985, dated): at least
+   a two-week stock of water, food and supplies to bring to shelter. Today: at least 2 weeks, matching How long to stay in and
+   How much water you need. The 1985 handbook's "at least one quart of water per person per day" is not used (current
+   sources say 1 gallon). No source gives food by weight or calories per person, so the checklist does not scale food.
+105. **Plastic sheeting and duct tape (fallout-shelter-kit).** Ready.gov's general kit lists "Plastic sheeting, scissors and
+   duct tape (to shelter in place)". CDC's dirty bomb page says it is not necessary to put duct tape or plastic around doors or
+   windows, and FEMA's planning guidance says a building need not be airtight to protect against fallout and still needs
+   enough fresh air. Today: not on the fallout kit (Home heat kit still lists window plastic for warmth). Say if the group
+   wants it on the list.
+106. **Potassium iodide in the kit (fallout-shelter-kit).** No opened source lists KI for a nuclear detonation; CDC says it
+   will not help there. It matters most in a nuclear power plant accident, which this app does not cover yet. Today: not on
+   the list. Say if the group wants KI on a list for a plant accident when that pack is written (the package gives the dose).
+107. **Not sure whether it was a dirty bomb or a nuclear explosion (surv-dirty-bomb). (See D101.)** No source says what to do when you
+   can't tell which it was, or how long to stay in after a dirty bomb when no one says (D101). Today: a labelled app caution
+   says to treat it as a nuclear explosion and follow Fallout warning and How long to stay in (the longer stay and the
+   stricter car rule). Say if the group wants a different default.
+110. **Basement corner or away from the walls (surv-fallout-where-to-shelter, fallout-shelter-spots).** "Best spot in a house"
+   says the best basement corner is the one most below ground level (FEMA 1985 and the 1968 handbook, both dated) and, in its
+   next line, to stay away from the outside walls and the roof wherever you are in the house (CDC). A corner sits against two
+   outside walls. Today: the topic carries both lines; the diagram shades the whole basement ("Basement: go there first") and
+   draws no corner. Say whether the corner line should stay, and the diagram can then show it.
+111. **Which floor of a large building (surv-fallout-where-to-shelter, fallout-shelter-spots).** The topic says: the center of
+   the building, as far from the roof and windows as you can, and away from areas near the roof. It names no floor and says
+   nothing about the ground floor. Today: the diagram marks the building's basement only; its above-ground storeys carry no
+   marking, and "the center of the building" is shown on a separate plan seen from above, with no floor named. Say if the
+   group wants a floor named (that needs a source opened for it).
+112. **Cold with no stove or heater during fallout (surv-fallout-shelter-living, surv-fallout-leaving). (Follows D71 and D97.)**
+   Living in a closed-up house sent cold to Leaving and moving after fallout, and Leaving sent cold back to Living in a
+   closed-up house; a house with no stove or heater had no answer. No source opened weighs cold against fallout as a reason
+   to leave. Today: both pages carry one sentence, labelled as this app's own caution: if the cold itself becomes a danger to
+   life and there is no way to make heat that follows the carbon monoxide rules, the app counts that as an immediate danger
+   like those Leaving and moving after fallout names, and the steps for going are there. Neither page restates the leaving
+   rule or the sheltering period. Say if the group wants a different rule, or a trigger for "a danger to life" (D71).
+113. **Where to wait after a CO alarm during fallout (surv-fallout-shelter-living, surv-fallout-leaving). Medical
+   professional. (Follows D69.)** Carbon monoxide (checked, CPSC) says get everyone outside now, and don't go back in until
+   responders say you can; if no responders can come, don't go back in until the house has aired out and the cause is fixed
+   (Carbon monoxide poisoning protocol). During fallout, standing outside means standing in fallout. Today: both pages say,
+   labelled as this app's reading, to go into the nearest other building rather than stand in the open, quoting Fallout
+   warning's "Get inside the nearest building now and move away from windows" (Ready.gov), and quote Carbon monoxide's
+   no-responders line for going back in. No source says how long to wait in the other building during fallout, how to know
+   the house has aired out, or whether to clean off again on the way back in. Say if the group wants more.
+114. **Basement or the room with the stove (surv-fallout-shelter-living). (Follows D71; see D110.)** Fallout warning and Where
+   to shelter from fallout send people to the basement; Heat in winter says to keep everyone in one small room on the
+   sheltered side of the house, and the only permitted fire is a stove that is rarely in the basement. Today: a labelled app
+   reading of its own two rules: during the sheltering period stay in the best-shielded place the house has (Where to shelter
+   from fallout) and keep warm there without flame; move to the room with the stove only if the cold itself becomes a danger to
+   life (your winter rule, not reworded). Say if the group wants the warm room to win sooner (for example for a baby).
+115. **Stored water for powdered formula (surv-fallout-water-and-food). Worth asking a medical professional. (Part of D94;
+   follows D98.)** CDC Infant Feeding: bottled water if possible, tap water only if local officials say. CDC says nothing of
+   water a household stored itself. Today: a labelled app reading puts water you stored yourself before the fallout next after
+   bottled water for formula, as the page already ranks it for drinking. Say if the group wants it ranked otherwise for babies.
+116. **A forced-air furnace that burns fuel and draws outside air (surv-fallout-shelter-living). (Follows D76 and D88.)** The
+   page said "Turn off any forced-air heating that brings in air from outside (CDC), and keep its outside vents clear", which
+   read as both off and running. Today: two cases in the sources' words (CDC: forced-air heating units that bring in air from
+   outside, turn them off; Stay warm when the heat is out: a furnace or boiler that burns oil, gas or propane, keep its outside
+   vents clear of snow and ice, a blocked vent can let carbon monoxide build up), and, labelled as this app's reading, a unit
+   that is both is turned off, because CDC's rule comes first and the vent rule is for a furnace that is running. FEMA's 2024
+   line that the health risk from turning off HVAC systems might be greater than the contamination risk in extreme
+   temperatures is quoted on the same page (D88). Say if the group wants such a furnace kept running in extreme cold.

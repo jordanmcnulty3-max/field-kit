@@ -1,0 +1,232 @@
+{
+  "id": "surv-fallout-warning",
+  "title": "Fallout warning: what to do first",
+  "category": "radiation",
+  "keywords": [
+    "fallout",
+    "nuclear",
+    "nuke",
+    "nuclear bomb",
+    "nuclear attack",
+    "nuclear explosion",
+    "nuclear blast",
+    "nuclear war",
+    "atomic bomb",
+    "a-bomb",
+    "radiation",
+    "radioactive",
+    "mushroom cloud",
+    "flash",
+    "shockwave",
+    "get inside",
+    "stay inside",
+    "stay tuned",
+    "shelter in place",
+    "missile alert",
+    "attack warning",
+    "duck and cover",
+    "detonation",
+    "nuclear strike",
+    "siren",
+    "emergency alert"
+  ],
+  "summary": "Get inside the nearest building now and go to the basement or the middle of it, away from the walls and roof. Stay in for at least 24 hours unless an immediate danger such as a fire, gas leak, collapse or serious injury forces you out. Don’t drive or walk away through fallout, and don’t go out to get family.",
+  "doFirst": [
+    "Warning or flash? Get inside the nearest building now and move away from windows (Ready.gov). Caught outside when it goes off: lie face down to protect bare skin from the heat and flying debris, then get inside as soon as the shockwave has passed (Ready.gov).",
+    "Go to the basement or the middle of the building, as far from the walls and roof as you can (CDC). Brick or concrete buildings and basements are best, but being inside any building is better than being outside (CDC).",
+    "Stay inside for at least 24 hours (Ready.gov, CDC). Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out, or officials tell you to (Ready.gov). Don’t go out to get family: stay where you are (CDC).",
+    "Came in from outside? Carefully take off your outer layer of clothes and shoes and put them in a bag, then wash or wipe the skin and hair that were uncovered (Ready.gov, CDC). Every step is in Radiation decontamination.",
+    "Close and lock windows and doors. Turn off fans, air conditioners and forced-air heating units that bring in air from outside (CDC). Listen to a battery or hand-crank radio (Ready.gov)."
+  ],
+  "sections": [
+    {
+      "h": "If you have warning",
+      "blocks": [
+        {
+          "list": [
+            "If you are warned that a radiation hazard is possible, get inside the nearest building at once and move away from windows (Ready.gov).",
+            "Put as many walls as you can between you and the outside (Ready.gov).",
+            "For a nuclear explosion, if you have warning, take cover from the blast behind anything that might give protection (Ready.gov)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "At the flash and the blast",
+      "blocks": [
+        {
+          "list": [
+            "Outside: lie face down to protect bare skin from the heat and flying debris (Ready.gov).",
+            "After the shockwave passes, go inside the nearest building as quickly as you can (Ready.gov).",
+            "If you must be outside and can’t get inside right away, cover your mouth and nose with a mask, cloth or towel (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Before the fallout arrives",
+      "blocks": [
+        {
+          "p": "A nuclear explosion on the ground can suck material up into the air and drop it back as dangerous, sand-like radioactive particles called fallout (Ready.gov)."
+        },
+        {
+          "warn": "After a detonation you will have 10 minutes or more to find a good shelter before fallout arrives (Ready.gov, FEMA planning guidance). Use those minutes to get inside. Being out in fallout that is falling or has just fallen may be fatal (NYC Health)."
+        },
+        {
+          "p": "If a multi-story building or a basement can be reached within a few minutes of the explosion, go there at once (Ready.gov). Brick or concrete buildings are best, and underground parking garages and subways can also give good shelter (Ready.gov)."
+        },
+        {
+          "link": "s:surv-fallout-where-to-shelter",
+          "label": "Where to shelter from fallout"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
+        }
+      ]
+    },
+    {
+      "h": "Don’t run from it",
+      "blocks": [
+        {
+          "list": [
+            "Don’t try to drive or walk out of the area. Cars and other vehicles are not adequate shelters (FEMA planning guidance). FEMA strongly discourages people leaving on their own, and says that, unless a fire or other immediate danger forces you, no evacuation should be tried until there is basic information about where the fallout fell (FEMA planning guidance).",
+            "Don’t go out to get loved ones. Going outside to get them could expose you and them to dangerous levels of radiation (CDC). Don’t pick up children from school or daycare (NYC Health).",
+            "Let people in. Giving shelter to someone who was outside can save their life (CDC). They take off their outer layer of clothes before they come in, if they can (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
+        }
+      ]
+    },
+    {
+      "h": "Stay in and stay tuned",
+      "blocks": [
+        {
+          "p": "Stay inside for at least 24 hours, and then until officials tell you to leave. How long, what changes it, and what to do if no one ever says, are in How long to stay in."
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        },
+        {
+          "list": [
+            "Follow instructions from emergency officials (Ready.gov). Listen to local radio for the radiation hazard where you are (FEMA planning guidance).",
+            "A battery-powered or hand-crank radio keeps working when other ways of getting news fail (Ready.gov).",
+            "No one broadcasting? Keep sheltering. FEMA’s planning guidance: with no information at all, sheltering still protects against fallout radiation."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Closing up the house",
+      "blocks": [
+        {
+          "p": "Close windows and doors, and turn off fans and heating that pull in outside air. Never burn anything in a sealed room. How to keep a closed-up house liveable, including heat in winter, is in Living in a closed-up house."
+        },
+        {
+          "link": "s:surv-fallout-shelter-living",
+          "label": "Living in a closed-up house"
+        },
+        {
+          "link": "s:surv-carbon-monoxide",
+          "label": "Carbon monoxide and burning fuel indoors"
+        }
+      ]
+    },
+    {
+      "h": "Hurt or sick",
+      "blocks": [
+        {
+          "p": "If you are sick or injured, listen for instructions on how and where to get medical care (Ready.gov). First aid is in Emergency."
+        },
+        {
+          "link": "p:bleeding",
+          "label": "Severe bleeding"
+        },
+        {
+          "link": "p:burns",
+          "label": "Burns"
+        },
+        {
+          "link": "p:shock",
+          "label": "Shock"
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
+        },
+        {
+          "link": "p:radiation-sickness",
+          "label": "Radiation sickness"
+        },
+        {
+          "link": "p:radiation-decontamination",
+          "label": "Radiation decontamination (cleaning off fallout)"
+        }
+      ]
+    },
+    {
+      "h": "Everything on fallout",
+      "blocks": [
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "link": "s:surv-dirty-bomb",
+          "label": "Dirty bomb"
+        },
+        {
+          "link": "s:surv-potassium-iodide",
+          "label": "Potassium iodide (KI): what it can and can’t do"
+        },
+        {
+          "link": "s:surv-fallout-get-ready",
+          "label": "Get ready for fallout"
+        },
+        {
+          "link": "c:fallout-shelter-kit",
+          "label": "Fallout shelter kit"
+        }
+      ]
+    },
+    {
+      "h": "What this covers",
+      "blocks": [
+        {
+          "p": "These topics cover fallout from a nuclear explosion. A nuclear power plant accident has its own official plans and is not covered in this app yet."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",
+      "used": "Get inside the nearest building and move away from windows when warned; as many walls as possible between you and the outside; take cover behind anything that might offer protection; outside, lie face down to protect exposed skin from heat and flying debris; after the shockwave go inside the nearest building; fallout as sand-like radioactive particles; 10 minutes or more to find shelter before fallout arrives; multi-story building or basement within a few minutes; brick or concrete; underground parking garages and subways; first 24 hours unless threatened by fire, gas leak, building collapse or serious injury, or told by authorities; sheltering usually lasts at least 24 hours; turn off fans, air conditioners and forced-air heating that bring in outside air; follow instructions from officials; battery or hand-crank radio; remove outer clothing and wash or wipe uncovered skin and hair; trash bag for contaminated clothing; listen for instructions on medical care"
+    },
+    {
+      "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024)",
+      "used": "Basement or middle of the building, away from walls and roof; brick or concrete multi-story building or basement best, any building better than outside; at least 24 hours; close and lock windows and doors; turn off fans, air conditioners and forced-air heating that bring in outside air; cover mouth and nose if you can’t get inside; remove outer clothing before entering and wash uncovered skin; stay where you are rather than going out to get loved ones; sheltering someone who was outside can save their life"
+    },
+    {
+      "name": "CDC, What to Do in Radiation Emergencies (last reviewed April 15, 2024)",
+      "used": "Get inside, stay inside, stay tuned"
+    },
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023)",
+      "used": "Fallout will likely take 10 minutes or more to arrive; cars and other vehicles are not adequate shelters; self-evacuation strongly discouraged; no evacuation until basic information on fallout distribution is available; tune in to local radio; in the absence of any information, sheltering protects against fallout radiation"
+    },
+    {
+      "name": "NYC Health (New York City Department of Health and Mental Hygiene), Emergencies: Nuclear Incident",
+      "used": "Exposure to fallout that is falling or has just fallen may be fatal; do not pick up children from school or daycare"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

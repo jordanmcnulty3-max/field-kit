@@ -511,6 +511,14 @@ def test_first_open_is_fast_with_sixty_protocols(page, app_url):
     assert ms < 10, ms
 
 
+def test_first_query_on_real_shipped_data_is_fast(page, app_url):
+    """Guards the index cost against content growth: every protocol, topic and checklist that ships is indexed by the first query."""
+    page.goto(app_url + '#/emergency')   # no fixtures: whatever ships
+    page.wait_for_function('window.FK && FK.search')
+    ms = page.evaluate("(() => { const t = performance.now(); FK.search.query('protocol'); return performance.now() - t; })()")
+    assert ms < 50, ms
+
+
 def test_real_shipped_data_found_by_title_and_first_keyword(page, app_url):
     page.goto(app_url + '#/emergency')   # no fixtures: whatever protocols ship
     page.wait_for_function('window.FK && FK.search')
@@ -694,3 +702,136 @@ def test_little_words_in_a_search_get_no_short_keyword_bonus(page, app_url, text
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
     assert [r['key'] for r in q(page, text)][:len(first)] == first
+
+
+# ---------- Radiation pack (Task 8, Review Focus 5) ----------
+
+RADIATION_SEARCHES = ['fallout', 'nuke', 'nuclear', 'radiation', 'dirty bomb', 'KI', 'iodine', 'decon']
+RADIATION_KEYS = {'s:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
+                  's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
+                  's:surv-potassium-iodide', 's:surv-fallout-get-ready', 'p:radiation-decontamination', 'p:radiation-sickness'}
+
+
+@pytest.mark.parametrize('text', RADIATION_SEARCHES)
+def test_radiation_hurried_searches_find_a_radiation_page_in_the_first_three(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    ks = [r['key'] for r in q(page, text)]
+    assert RADIATION_KEYS & set(ks[:3]), f'{text!r} found no radiation topic or protocol in the first three: {ks[:5]}'
+
+
+# The full v7.3 result lists on main (built from main, in order). The radiation pages may join a list
+# but must not reorder or displace any v7.3 result, so the v7.3 keys in today's list keep their order.
+V73_RESULTS = {
+    'CO': ['p:carbon-monoxide', 's:surv-carbon-monoxide', 'p:head-injury', 'p:tourniquet-conversion', 't:cpr', 't:rate', 's:surv-dress-for-cold',
+           's:surv-navigation-without-a-compass', 's:surv-wind-chill', 'a:position', 'p:animal-bite', 'p:cpr-adult', 'p:cpr-child', 'p:cpr-infant',
+           'p:drowning', 'p:fainting', 'p:fracture', 'p:frostbite', 'p:heat-illness', 'p:hemostatic-packing', 'p:hypothermia',
+           'p:needle-decompression', 'p:pelvic-binder', 'p:poisoning', 'p:seizure', 'p:shock', 'p:snakebite', 'p:spine-injury',
+           'p:sprain-dislocation', 's:surv-fire'],
+    'bleach': ['p:poisoning', 's:surv-clean-and-disinfect', 's:surv-make-water-safe', 's:surv-water-store', 's:surv-toilet-no-water',
+               'p:poison-plants', 'p:vomiting-diarrhea', 's:surv-find-water', 's:surv-garbage-and-greywater', 's:surv-stomach-illness-in-a-group',
+               's:surv-water-winter', 's:surv-wells-without-power', 'c:home-water-store', 'c:sanitation-kit'],
+    'burn': ['t:burn', 'p:burns', 's:surv-carbon-monoxide', 'p:poison-plants', 's:surv-garbage-and-greywater', 's:surv-wood-stoves-fireplaces',
+             's:surv-firewood', 's:surv-portable-heaters', 's:surv-sleep-warm', 's:surv-store-fuel', 'p:blisters', 'p:carbon-monoxide',
+             'p:cricothyrotomy', 'p:hypothermia', 'p:lightning', 'p:march', 'p:poisoning', 'p:spider-scorpion', 'p:wound-care', 's:surv-fire',
+             's:surv-generators', 's:surv-heat-out', 's:surv-latrines', 's:surv-make-water-safe', 's:surv-priorities', 's:surv-shelter',
+             's:surv-unheated-house', 's:surv-water-in-the-house', 's:surv-water-winter', 's:surv-winter-storms'],
+}
+
+
+@pytest.mark.parametrize('text', sorted(V73_RESULTS))
+def test_v73_results_for_co_bleach_and_burn_keep_their_order_with_the_radiation_pages_added(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    ks = [r['key'] for r in q(page, text)]
+    old = V73_RESULTS[text]
+    assert ks[:3] == old[:3], f'{text!r}: top three changed: {ks[:3]} (v7.3: {old[:3]})'   # radiation pages only below position 3
+    kept = [k for k in ks if k in old]
+    assert kept == old[:len(kept)], f'{text!r}: v7.3 results reordered: {kept}'
+    assert [k for k in ks if k not in old and k not in RADIATION_KEYS] == []   # nothing but radiation pages joins the list (the 30-result cap may push a v7.3 tail result out)
+
+
+# ---------- Final review I1 and I2: tie order, measured on screen ----------
+# The first three results as the search overlay shows them (grouped by kind, groups in order of their best result) in the
+# real v7.3 release (1cded2e), recorded from a v7.3 build at 360x640 by typing each query into the overlay on #/survival.
+# The radiation pack must not change them.
+V73_ON_SCREEN = {
+    'CO': ['p:carbon-monoxide', 'p:head-injury', 'p:animal-bite'],
+    'bleach': ['p:poisoning', 'p:poison-plants', 'p:vomiting-diarrhea'],
+    'burn': ['t:burn', 'p:burns', 'p:poison-plants'],
+    'bleeding': ['p:bleeding', 'p:abdominal-wound', 'p:amputation'],
+    'cpr': ['p:cpr-adult', 'p:cpr-child', 'p:cpr-infant'],
+    'choking': ['p:choking', 'p:choking-infant', 'p:anaphylaxis'],
+    'shock': ['p:shock', 'p:burns', 'p:abdominal-wound'],
+    'in shock': ['p:shock', 'p:abdominal-wound', 'p:amputation'],
+    'frostbite': ['p:frostbite', 'p:wound-care', 's:surv-priorities'],
+    'frost bite': ['s:surv-wind-chill', 's:surv-priorities', 'p:wound-care'],
+    'hypothermia': ['p:hypothermia', 'p:frostbite', 'p:march'],
+    'water': ['s:surv-find-water', 's:surv-garbage-and-greywater', 's:surv-handwashing'],
+    'generator': ['s:surv-generators', 's:surv-carbon-monoxide', 's:surv-wells-without-power'],
+    'tourniquet': ['p:tourniquet-conversion', 'p:junctional-bleeding', 'p:hemostatic-packing'],
+    'seizure': ['p:seizure', 'p:recovery-position', 'p:carbon-monoxide'],
+    'overdose': ['p:overdose', 'p:cpr-adult', 'p:poisoning'],
+    'poison': ['p:poison-plants', 'p:carbon-monoxide', 'p:poisoning'],
+    'snake': ['p:snakebite', 's:surv-dangerous-animals'],
+    'heat': ['p:heat-illness', 'p:carbon-monoxide', 'p:hypothermia'],
+    'no': ['p:cpr-adult', 'p:cpr-child', 'p:cpr-infant'],
+    'food': ['s:surv-food-and-wild-plants', 's:surv-stomach-illness-in-a-group', 's:surv-unheated-house'],
+    'shelter': ['s:surv-shelter', 's:surv-heat-out', 's:surv-priorities'],
+    # re-review R1: words from the hub's text whose v7.3 lists a hub indexed first of all had taken over
+    'mushroom': ['p:poisoning', 'p:vomiting-diarrhea', 's:surv-food-and-wild-plants'],
+    'blast': ['p:amputation', 'p:march', 'p:eye-injury'],
+    'serious': ['p:shock', 'p:bleeding', 'p:burns'],
+    'lie': ['p:fainting', 'p:shock', 'p:altitude'],
+    'emergency': ['p:low-blood-sugar', 'p:seizure', 'p:abdominal-wound'],
+    'wall': ['p:chest-wound', 'p:march', 'p:wound-care'],
+    'now': ['p:animal-bite', 'p:head-injury', 'p:overdose'],
+}
+
+
+def on_screen(page, text):
+    type_q(page, text)
+    page.wait_for_selector('#searchBody .sr-item')
+    return keys(page)
+
+
+# Two queries where a radiation page outscores a v7.3 result (a title or keyword match against a weaker match), so no tie order can
+# restore v7.3. Accepted by controller ruling (v7.4 rulings F2): a page titled for fallout is a fair result for these words, and the
+# general topic stays first. Today's first three on screen, so any further change is caught.
+V73_ON_SCREEN_OUTSCORED = {
+    'food': ['s:surv-food-and-wild-plants', 's:surv-fallout-water-and-food', 's:surv-stomach-illness-in-a-group'],   # title word (5.5) over keyword (4)
+    'shelter': ['s:surv-shelter', 's:surv-fallout-where-to-shelter', 's:surv-fallout-warning'],   # title word (5.5) and keyword (4) over body (3)
+}
+
+
+@pytest.mark.parametrize('text', sorted(V73_ON_SCREEN))
+def test_v73_first_three_on_screen_are_unchanged(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    now = on_screen(page, text)[:3]
+    if text in V73_ON_SCREEN_OUTSCORED:
+        assert now == V73_ON_SCREEN_OUTSCORED[text], f'{text!r}: {now}'
+        assert now != V73_ON_SCREEN[text]   # if v7.3 comes back, move the query out of the outscored list
+    else:
+        assert now == V73_ON_SCREEN[text], f'{text!r}: first three on screen {now} (v7.3: {V73_ON_SCREEN[text]})'
+
+
+@pytest.mark.parametrize('text', ['fallout', 'nuclear'])
+def test_fallout_and_nuclear_show_the_fallout_warning_hub_in_the_first_three_on_screen(page, app_url, text):
+    # The hub is indexed after every v7.3 page and after the two pack protocols (re-review R1), so it wins no tie with an older page.
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, text)
+    assert 's:surv-fallout-warning' in ks[:3], f'{text!r}: {ks[:5]}'
+
+
+def test_fall_keeps_head_injury_in_the_first_three_on_screen(page, app_url):
+    # re-review R3: "fall" is a prefix of the title word "Fallout"; with the pack protocols indexed before the hub,
+    # Radiation decontamination takes first place and Head injury (v7.3's first) stays second.
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, 'fall')
+    assert ks[:3] == ['p:radiation-decontamination', 'p:head-injury', 'p:march'], ks[:5]

@@ -1,0 +1,216 @@
+{
+  "id": "surv-fallout-where-to-shelter",
+  "title": "Where to shelter from fallout",
+  "category": "radiation",
+  "keywords": [
+    "fallout shelter",
+    "best place to shelter",
+    "where to hide",
+    "basement",
+    "no basement",
+    "apartment",
+    "brick building",
+    "concrete building",
+    "wood frame house",
+    "car",
+    "subway",
+    "parking garage",
+    "caught outside",
+    "in the woods",
+    "culvert",
+    "cave",
+    "trench",
+    "nuclear shelter",
+    "radiation shelter",
+    "bunker",
+    "interior room",
+    "storm cellar",
+    "safest room"
+  ],
+  "summary": "Put as much heavy material and distance as you can between you and the fallout outside and on the roof. Underground is best, then the middle of a large brick or concrete building. A small wood-frame house is poor above ground but far better than outside. A car is not a shelter.",
+  "doFirst": [
+    "Basement or underground (subway, underground parking garage) if you can reach one within a few minutes (Ready.gov, FEMA planning guidance).",
+    "No basement? Go to the middle of the building, away from the walls, roof and windows (CDC, NYC Health).",
+    "Never shelter in a car (NYC Health). Cars are not adequate shelters (FEMA planning guidance)."
+  ],
+  "sections": [
+    {
+      "h": "What makes a good shelter",
+      "blocks": [
+        {
+          "list": [
+            "Distance from the fallout. Radioactive material settles on the outside of buildings, so stay as far from the walls and roof as you can (CDC).",
+            "Mass between you and it. Put as many walls as you can between you and the outside (Ready.gov). Cars and other vehicles are not adequate shelters because they lack dense shielding material (FEMA planning guidance).",
+            "An adequate shelter cuts the radiation reaching you to a tenth or less of what it would be outside (FEMA planning guidance).",
+            "It does not need to be airtight. Structures do not need to be airtight to protect against fallout radiation, so a building with minor damage can be used if it is structurally sound (FEMA planning guidance). Even buildings with broken windows can give adequate protection (FEMA planning guidance)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Best to worst",
+      "blocks": [
+        {
+          "table": {
+            "head": [
+              "Place",
+              "How it ranks"
+            ],
+            "rows": [
+              [
+                "Underground: basement (a house basement counts), subway tunnel, underground parking garage",
+                "Best (FEMA planning guidance, Ready.gov)"
+              ],
+              [
+                "Middle of a large brick or concrete building",
+                "Best above ground (Ready.gov, CDC, FEMA planning guidance)"
+              ],
+              [
+                "Thick-walled masonry building",
+                "Generally adequate (FEMA planning guidance)"
+              ],
+              [
+                "Small house above ground, especially wood frame",
+                "Not usually adequate, but far better than outside (FEMA planning guidance)"
+              ],
+              [
+                "One-story wood-frame house with no basement",
+                "Limited; not an adequate shelter (FEMA planning guidance)"
+              ],
+              [
+                "Car or other vehicle",
+                "Not a shelter (FEMA planning guidance, NYC Health)"
+              ],
+              [
+                "Outside",
+                "Worst: any building is better (CDC)"
+              ]
+            ]
+          }
+        },
+        {
+          "fig": "fallout-shelter-spots",
+          "cap": "Basement: go there first. Apartments and large buildings: going to the basement is best. Otherwise go to the center of the building, as far from the roof and windows as you can."
+        }
+      ]
+    },
+    {
+      "h": "Best spot in a house",
+      "blocks": [
+        {
+          "list": [
+            "Basement: go there first (CDC). The best corner is the one most below ground level (FEMA, Protection in the Nuclear Age, 1985, dated; the 1968 Office of Civil Defense handbook In Time of Emergency, also dated, says the same).",
+            "No basement: the middle of the house, away from the walls and windows (NYC Health), and as far from the roof as you can (CDC).",
+            "Stay away from the outside walls and the roof wherever you are in the house (CDC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Apartments and large buildings",
+      "blocks": [
+        {
+          "list": [
+            "Going to the basement is best (New York City, Response Guide: Radiological and Nuclear Emergencies).",
+            "Otherwise go to the center of the building, as far from the roof and windows as you can (New York City, Response Guide).",
+            "Stay away from areas near the roof, fire escapes and balconies (NYC Health)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Moving to a better shelter",
+      "blocks": [
+        {
+          "p": "If a multi-story building or a basement can be reached within a few minutes of the explosion, go there at once (Ready.gov)."
+        },
+        {
+          "p": "FEMA’s planning guidance gives times for moving later: when an adequate shelter is within about 15 minutes’ travel, people in a poor shelter should stay there no longer than 30 minutes after the explosion, and people in a somewhat better shelter an hour or two, before moving to it. FEMA gives wood-frame houses as an example of poor shielding, and says the move should ideally take you away from the explosion. These times are for one short move to a much better shelter nearby."
+        },
+        {
+          "p": "Otherwise, stay where you are. Once you are in, the rules for staying in are in How long to stay in."
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        },
+        {
+          "link": "s:surv-fallout-leaving",
+          "label": "Leaving and moving after fallout"
+        }
+      ]
+    },
+    {
+      "h": "Caught outdoors or in a car",
+      "blocks": [
+        {
+          "list": [
+            "Get inside a building right away (CDC). After a detonation you will have 10 minutes or more before fallout arrives (Ready.gov).",
+            "In a car: get out and into a building. Cars are not adequate shelters (FEMA planning guidance).",
+            "If you must be outside and can’t get inside right away, cover your mouth and nose with a mask, cloth or towel (CDC).",
+            "Before you go in, carefully take off your outer layer of clothes, if you can (CDC)."
+          ]
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
+        }
+      ]
+    },
+    {
+      "h": "In the woods with no building",
+      "blocks": [
+        {
+          "p": "If you can reach any building in the time you have, go there. If there is none, these steps are from the Army’s survival manual (FM 21-76, 1992). Speed matters most: the Army gives five minutes to find shelter as a good guide."
+        },
+        {
+          "steps": [
+            "Best: an underground shelter under 3 feet (1 m) or more of earth. Next best, in this order: a cave or tunnel under more than 3 feet of earth, a storm or storage cellar, a culvert, the basement or cellar of an abandoned building, an abandoned stone or mud building (Army FM 21-76).",
+            "None? Use ground that shields you: a ditch, ravine, rocky outcrop, hill or riverbank (Army FM 21-76).",
+            "On open, level ground, dig a trench. Work from inside it as soon as it covers part of your body, and dig as fast as you can (Army FM 21-76).",
+            "Keep your body covered while you work (Army FM 21-76).",
+            "A roof is not needed. Build one only if the material is right at hand and you don’t have to spend long outside to get it (Army FM 21-76)."
+          ]
+        },
+        {
+          "p": "Then stay in it: see How long to stay in."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "FEMA, Planning Guidance for Response to a Nuclear Detonation, third edition (2022; record of change June 12, 2023)",
+      "used": "Adequate shelters reduce radiation exposure by a factor of 10 or more; best protection underground (basements, subway tunnels, underground parking garages); centers of large buildings; thicker-walled masonry buildings and residential basements generally adequate; smaller single-family homes, particularly wood frame, not usually adequate above ground but far better than outside; vehicles and single-story wood-frame houses without basements limited, not adequate; cars lack dense shielding; structures need not be airtight, buildings with minor damage usable if structurally sound; broken windows can still give adequate protection; shelter-move timing (adequate shelter within 15 minutes: poor shelter no longer than 30 minutes, better shelter an hour or two)"
+    },
+    {
+      "name": "Ready.gov (FEMA), Radiation Emergencies (last updated June 14, 2024)",
+      "used": "As many walls as possible between you and the outside; multi-story building or basement within a few minutes; brick or concrete; underground parking garages and subways; 10 minutes or more before fallout arrives"
+    },
+    {
+      "name": "CDC, What to Do: Get Inside (last reviewed April 15, 2024) and Where To Go In a Radiation Emergency (last reviewed April 17, 2024)",
+      "used": "Basement or middle of the building; radioactive material settles on the outside of buildings, so stay away from walls and roof; brick or concrete multi-story building or basement best, any building better than outside; get inside right away; cover mouth and nose; remove outer clothing before entering"
+    },
+    {
+      "name": "NYC Health (New York City Department of Health and Mental Hygiene), Emergencies: Nuclear Incident",
+      "used": "Basement; if none, center of the building away from walls and windows; avoid areas near the roof, fire escapes and balconies; do not shelter in your car"
+    },
+    {
+      "name": "New York City, Response Guide: Radiological and Nuclear Emergencies, Individuals and Families (undated)",
+      "used": "Basement is best; center of the building, as far from the roof and windows as possible"
+    },
+    {
+      "name": "FEMA, Protection in the Nuclear Age (June 1985; dated civil defence publication)",
+      "used": "Shelter in the basement corner that is most below ground level"
+    },
+    {
+      "name": "Office of Civil Defense, In Time of Emergency: A Citizen’s Handbook on Nuclear Attack and Natural Disasters (H-14, March 1968; dated civil defence publication)",
+      "used": "A basement corner below ground level is the best place for fallout protection"
+    },
+    {
+      "name": "US Army FM 21-76, Survival (June 1992), chapter 23, The Nuclear Environment; the same text is in its successor FM 3-05.70",
+      "used": "No building: five minutes to locate shelter as a guide; caves and tunnels under more than 1 meter of earth, storm or storage cellars, culverts, basements or cellars of abandoned buildings, abandoned stone or mud buildings; ditches, ravines, rocky outcrops, hills, riverbanks; dig a trench, work from inside it, dig fast; keep the body covered; a roof is not mandatory"
+    }
+  ],
+  "reviewed": "2026-11-18"
+}

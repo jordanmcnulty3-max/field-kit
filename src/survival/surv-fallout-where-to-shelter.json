@@ -83,6 +83,10 @@
               ]
             ]
           }
+        },
+        {
+          "fig": "fallout-shelter-spots",
+          "cap": "Basement: go there first. Apartments and large buildings: going to the basement is best. Otherwise go to the center of the building, as far from the roof and windows as you can."
         }
       ]
     },
@@ -107,10 +111,6 @@
             "Otherwise go to the center of the building, as far from the roof and windows as you can (New York City, Response Guide).",
             "Stay away from areas near the roof, fire escapes and balconies (NYC Health)."
           ]
-        },
-        {
-          "fig": "fallout-shelter-spots",
-          "cap": "Basement: go there first. No basement: the middle of the house, away from the walls and windows. In a large building, otherwise go to the center of the building, as far from the roof and windows as you can."
         }
       ]
     },

@@ -510,25 +510,33 @@ def protocol_json(pid):
     return json.load(open(os.path.join(ROOT, 'src', 'protocols', f'{pid}.json'), encoding='utf-8'))
 
 
+def protocol_text(pid):
+    p = protocol_json(pid)
+    parts = [p['summary']] + [s[k] for s in p['steps'] for k in ('text', 'detail', 'warn') if k in s] + p['donts']
+    return re.sub(r'\s+', ' ', ' '.join(parts).replace('’', "'")).lower()
+
+
 # figure -> (topic, section heading it sits in, phrases drawn on it (each also in the topic's own text), wording that must
-#            not be drawn or in the alt text, phrases the caption carries)
+#            not be drawn or in the alt text, phrases the caption carries, protocol whose text drawn lines may also come from)
 RAD_FIGS = {
     'fallout-shelter-spots': (
-        'surv-fallout-where-to-shelter', 'Apartments and large buildings',
-        ['best spot in a house', 'stay away from the outside walls and the roof', 'basement: go there first',
-         'no basement: the middle of the house, away from the walls and windows',
-         'apartments and large buildings', 'basement is best', 'center of the building',
-         'as far from the roof and windows as you can', 'stay away from areas near the roof, fire escapes and balconies'],
-        [r'\bsafe', r'\d', r'radiation', r'fallout', r'worst', r'floor', r'airtight', r'corner', r'shield', r'protect'],
-        ['basement', 'middle of the house', 'center of the building']),
+        'surv-fallout-where-to-shelter', 'Best to worst',
+        ['best spot in a house', 'basement: go there first', 'apartments and large buildings', 'basement is best',
+         'otherwise go to the center of the building, as far from the roof and windows as you can',
+         'stay away from areas near the roof, fire escapes and balconies'],
+        [r'\bsafe', r'\d', r'radiation', r'fallout', r'worst', r'floor', r'airtight', r'corner', r'shield', r'protect',
+         r'no basement', r'middle of the house'],
+        ['basement: go there first', 'going to the basement is best', 'otherwise go to the center of the building'],
+        None),
     'fallout-coming-inside': (
         'surv-fallout-coming-inside', 'The steps',
-        ['save a life first', 'outer layer of clothes and shoes', 'slowly', 'before you come in or just inside the door',
-         'away from others', 'bag them', 'far from people and pets', 'wash gently with soap and water', 'or wipe off',
-         'no conditioner, no scrubbing', 'put on clean clothes from a closet, drawer or other covered place',
-         'then help others and pets', 'clean yourself again'],
-        [r'\bsafe', r'90', r'hot', r'bleach', r'sanitizer', r'scrub(?!bing)', r'shake', r'vacuum', r'hose'],
-        ['save a life first', 'outer layer', 'bag', 'wash gently', 'clean clothes']),
+        ['save a life first', 'take off the outer layer of clothes and shoes', 'away from others', 'bag them',
+         'far from people and pets', 'wash gently with soap and water, or wipe off', 'no conditioner, no scrubbing',
+         'blow the nose and wipe the eyes and ears', 'put on clean clothes from a closet, drawer or other covered place',
+         'care for wounds', 'then help others and pets, and clean yourself again afterwards'],
+        [r'\bsafe', r'90', r'\bhot\b', r'bleach', r'sanitizer', r'scrub(?!bing)', r'shake', r'vacuum', r'hose'],
+        ['save a life first', 'outer layer', 'bag', 'wash gently', 'clean clothes'],
+        'radiation-decontamination'),
 }
 
 
@@ -542,11 +550,30 @@ def test_radiation_figure_sits_once_in_its_section(name):
 
 @pytest.mark.parametrize('name', sorted(RAD_FIGS))
 def test_radiation_figure_draws_its_topics_words(name):
-    tid, _, words, _, _ = RAD_FIGS[name]
+    tid, _, words, _, _, _ = RAD_FIGS[name]
     d, topic = drawn_of(name), topic_text(tid)
     for w in words:
         assert w in d, f'{name}: missing {w!r} in drawn text: {d}'
         assert w in topic, f'{name}: {w!r} is not in {tid}'
+
+
+def _texts(name):
+    root = ET.fromstring(figs.F[name][0])
+    return [(float(t.get('x')), float(t.get('y')), re.sub(r'\s+', ' ', ''.join(t.itertext()).replace('’', "'")).lower())
+            for t in root.iter() if t.tag.split('}')[-1] == 'text']
+
+
+@pytest.mark.parametrize('name', sorted(RAD_FIGS))
+def test_radiation_figure_every_drawn_line_is_in_the_text(name):
+    """Every text string drawn (not only chosen phrases) is word for word in the topic's own text or its protocol's,
+    apart from step badges; trailing punctuation that only ends a line is ignored."""
+    tid, protocol = RAD_FIGS[name][0], RAD_FIGS[name][5]
+    source = topic_text(tid) + ' | ' + (protocol_text(protocol) if protocol else '')
+    for _, _, s in _texts(name):
+        if re.fullmatch(r'\d', s):
+            continue
+        line = s.strip().rstrip(':,.').strip()
+        assert line and line in source, f'{name}: drawn {s!r} is not in {tid}' + (f' or {protocol}' if protocol else '')
 
 
 @pytest.mark.parametrize('name', sorted(RAD_FIGS))
@@ -559,13 +586,16 @@ def test_radiation_figure_draws_no_unstated_wording(name):
 
 @pytest.mark.parametrize('name', sorted(RAD_FIGS))
 def test_radiation_figure_alt_and_caption(name):
-    tid, _, _, _, cap_words = RAD_FIGS[name]
+    tid, _, _, _, cap_words, _ = RAD_FIGS[name]
     alt = alt_of(name)
     assert len(alt) > 40, alt
     cap = topic_caption(tid, name)
     for w in cap_words:
         assert w in cap, f'{name}: caption missing {w!r}: {cap}'
     assert not re.search(r'\bsafe', cap)
+    for sentence in [x.strip() for x in re.split(r'(?<=\.)\s', cap) if x.strip()]:
+        body = re.sub(r'^apartments and large buildings: ', '', sentence).rstrip('.')
+        assert body in topic_text(tid), f'{name}: caption sentence not in the topic: {sentence!r}'
 
 
 def test_shelter_spots_has_no_arrows_and_no_numbers():
@@ -575,68 +605,113 @@ def test_shelter_spots_has_no_arrows_and_no_numbers():
     assert not re.search(r'\d', drawn_of('fallout-shelter-spots'))
 
 
-def test_shelter_spots_geometry():
-    """House with a basement: the whole basement is marked and lies below the ground. House with no basement: nothing
-    below the ground, and the marked spot is in the middle, clear of the walls. Large building: the basement is marked
-    below the ground; the centre band is in the middle, clear of the outer walls, and stays out of the top floor."""
-    p = parts('fallout-shelter-spots')
-    need = {'house-a', 'ground-a', 'basement-a', 'house-b', 'ground-b', 'spot-b', 'bldg', 'ground-c', 'top-floor',
-            'basement-c', 'spot-c'}
-    assert need <= set(p), need - set(p)
-    ga, gb, gc = (bbox(p[k])[1] for k in ('ground-a', 'ground-b', 'ground-c'))
-    ha, ba = bbox(p['house-a']), bbox(p['basement-a'])
-    assert ba[1] >= ga and ba[0] >= ha[0] - 1 and ba[2] <= ha[2] + 1, 'house basement under the house, below ground'
-    hb, sb = bbox(p['house-b']), bbox(p['spot-b'])
-    assert hb[3] <= gb, 'the no-basement house has nothing below ground'
-    assert abs((sb[0] + sb[2]) / 2 - (hb[0] + hb[2]) / 2) <= 2, 'spot in the middle of the house'
-    assert sb[0] - hb[0] >= 15 and hb[2] - sb[2] >= 15, 'spot clear of the outside walls'
-    assert sb[3] <= gb
-    bd, bc, sc, top = bbox(p['bldg']), bbox(p['basement-c']), bbox(p['spot-c']), bbox(p['top-floor'])
-    assert bc[1] >= gc, 'building basement below ground'
-    assert abs((sc[0] + sc[2]) / 2 - (bd[0] + bd[2]) / 2) <= 2, 'band in the centre of the building'
-    assert sc[0] - bd[0] >= 15 and bd[2] - sc[2] >= 15, 'band clear of the outer walls and windows'
-    assert sc[1] >= top[3], 'band stays out of the top floor, near the roof'
-    assert sc[3] <= gc
-
-
-def _texts(name):
+def _shaded(name):
     root = ET.fromstring(figs.F[name][0])
-    return [(float(t.get('x')), float(t.get('y')), ''.join(t.itertext()).replace('’', "'").lower())
-            for t in root.iter() if t.tag.split('}')[-1] == 'text']
+    return [e for e in root.iter() if set((e.get('class') or '').split()) & {'af', 'hfl', 'gf', 'wf'}]
 
 
-def test_coming_inside_numbers_are_the_four_badges_only():
+def test_shelter_spots_basement_label_first_and_no_floor_marked():
+    """Review: the basement label is read first (first place label in the SVG and highest in its panel), and nothing marks
+    an above-ground floor of the stacked building: no shading and no text inside it."""
+    texts = _texts('fallout-shelter-spots')
+    order = [s for _, _, s in texts]
+    i = next(k for k, s in enumerate(order) if 'basement is best' in s)
+    for later in ('otherwise', 'stay away from areas'):
+        j = next(k for k, s in enumerate(order) if later in s)
+        assert i < j, (later, order)
+    by = {s: y for _, y, s in texts}
+    assert by['basement is best'] < min(y for s, y in by.items() if 'otherwise' in s or 'stay away from areas' in s)
+    p = parts('fallout-shelter-spots')
+    bx0, by0, bx1, by1 = bbox(p['bldg'])
+    for e in _shaded('fallout-shelter-spots'):
+        x0, y0, x1, y1 = bbox(e)
+        assert x1 <= bx0 or x0 >= bx1 or y1 <= by0 or y0 >= by1, f'shading inside the building above ground: {e.attrib}'
+    for x, y, s in texts:
+        assert not (bx0 < x < bx1 and by0 < y < by1), f'text inside the building above ground: {s!r}'
+
+
+def test_shelter_spots_geometry():
+    """House: the whole basement is marked, under the house, below the ground. Building: the basement is marked below the
+    ground, more strongly than the centre of the floor plan. Floor plan: one floor, windows on every side, the centre
+    marked in the middle and clear of the outside walls."""
+    p = parts('fallout-shelter-spots')
+    need = {'house-a', 'ground-a', 'basement-a', 'bldg', 'ground-c', 'basement-c', 'plan', 'plan-center'}
+    assert need <= set(p), need - set(p)
+    ga, gc = bbox(p['ground-a'])[1], bbox(p['ground-c'])[1]
+    ha, ba = bbox(p['house-a']), bbox(p['basement-a'])
+    assert ba[1] >= ga and abs(ba[0] - ha[0]) <= 1 and abs(ba[2] - ha[2]) <= 1, 'whole house basement, below ground'
+    bc = bbox(p['basement-c'])
+    assert bc[1] >= gc, 'building basement below ground'
+    op = lambda e: float(re.search(r'fill-opacity:([\d.]+)', e.get('style')).group(1))
+    assert op(p['basement-c']) > op(p['plan-center']) and op(p['basement-a']) > op(p['plan-center'])
+    pl, pc = bbox(p['plan']), bbox(p['plan-center'])
+    assert pl[1] > bbox(p['basement-c'])[3], 'the plan is drawn apart from the building section'
+    assert abs((pc[0] + pc[2]) / 2 - (pl[0] + pl[2]) / 2) <= 1 and abs((pc[1] + pc[3]) / 2 - (pl[1] + pl[3]) / 2) <= 1
+    assert min(pc[0] - pl[0], pl[2] - pc[2], pc[1] - pl[1], pl[3] - pc[3]) >= 12, 'centre clear of the outside walls'
+    wins = [e for e in p['plan-windows'].iter() if e.tag.split('}')[-1] == 'rect']
+    sides = set()
+    for w in wins:
+        x, y = float(w.get('x')), float(w.get('y'))
+        sides.add('t' if abs(y + 3 - pl[1]) < 1 else 'b' if abs(y + 3 - pl[3]) < 1 else 'l' if abs(x + 3 - pl[0]) < 1 else
+                  'r' if abs(x + 3 - pl[2]) < 1 else '?')
+    assert sides == {'t', 'b', 'l', 'r'}, sides
+
+
+def test_coming_inside_numbers_are_the_badges_only():
     nums = [s for _, _, s in _texts('fallout-coming-inside') if re.search(r'\d', s)]
-    assert sorted(nums) == ['1', '2', '3', '4'], nums
+    assert sorted(nums) == ['1', '2', '3', '4', '5', '6'], nums
 
 
-def test_coming_inside_steps_follow_the_protocol_order():
-    """Badges 1 to 4 read left to right, top to bottom; each badge's cell carries its step; the order is the order of the
-    Radiation decontamination protocol's steps; "Save a life first" is above them and "Then help others" below."""
+# panel's first label -> protocol step it draws, and a phrase of that step's text
+COMING_STEPS = [('take off the outer layer', 's2', 'Take off the outer layer'), ('bag them', 's3', 'plastic bag'),
+                ('wash gently', 's4', 'Wash gently'), ('blow the nose', 's5', 'blow the nose'),
+                ('put on clean clothes', 's6', 'Put on clean clothes'), ('care for wounds', 's7', 'Wounds:')]
+
+
+def test_coming_inside_panels_follow_the_protocol_with_none_skipped():
+    """Badges read left to right, top to bottom; each badge's panel carries its step; the panels are the protocol's steps
+    s2 to s7 in the protocol's order with none skipped (the nose, eyes and ears step included); "Save a life first" is
+    above them and "Then help others ... clean yourself again" below."""
     texts = _texts('fallout-coming-inside')
-    badges = {s: (x, y) for x, y, s in texts if s in ('1', '2', '3', '4')}
-    order = sorted(badges, key=lambda s: (round(badges[s][1] / 40), badges[s][0]))
-    assert order == ['1', '2', '3', '4'], badges
+    badges = {s: (x, y) for x, y, s in texts if re.fullmatch(r'\d', s)}
+    order = sorted(badges, key=lambda s: (badges[s][1], badges[s][0]))
+    assert order == ['1', '2', '3', '4', '5', '6'], badges
+    rows = sorted({y for _, y in badges.values()})
 
-    def where(phrase):
-        hits = [(x, y) for x, y, s in texts if phrase in s]
+    def cell(x, y):
+        row = max((r for r in rows if r - 10 <= y), default=None)
+        if row is None:
+            return None
+        cands = [b for b, (bx, by) in badges.items() if by == row and bx - 15 <= x]
+        return max(cands, key=lambda b: badges[b][0]) if cands else None
+    steps = protocol_json('radiation-decontamination')['steps']
+    ids = [s['id'] for s in steps]
+    for n, (phrase, sid, key) in enumerate(COMING_STEPS, 1):
+        hits = [(x, y) for x, y, s in texts if s.startswith(phrase)]
         assert hits, phrase
-        return hits[0]
+        assert cell(*hits[0]) == str(n), (phrase, cell(*hits[0]))
+        assert key in next(s['text'] for s in steps if s['id'] == sid), (sid, key)
+    drawn = [sid for _, sid, _ in COMING_STEPS]
+    assert ids[ids.index(drawn[0]):ids.index(drawn[-1]) + 1] == drawn, 'a protocol step between the first and last is skipped'
+    top, bottom = min(rows), max(rows)
+    assert next(y for _, y, s in texts if 'save a life first' in s) < top
+    assert next(y for _, y, s in texts if s.startswith('then help others')) > bottom + 60
+    assert ids.index('s8') == ids.index('s7') + 1, 'helping others comes straight after wounds'
 
-    def cell(xy):
-        x, y = xy
-        return min(badges, key=lambda b: (0 if (x >= badges[b][0] - 15 and y >= badges[b][1] - 10) else 1,
-                                          abs(y - badges[b][1]) + abs(x - badges[b][0]) / 4))
-    assert cell(where('outer layer')) == '1'
-    assert cell(where('bag them')) == '2'
-    assert cell(where('wash gently')) == '3'
-    assert cell(where('clean clothes')) == '4'
-    top = min(y for _, y in badges.values())
-    bottom = max(y for _, y in badges.values())
-    assert where('save a life first')[1] < top
-    assert where('then help others')[1] > bottom + 40
 
-    steps = [s['text'] for s in protocol_json('radiation-decontamination')['steps']]
-    idx = [next(i for i, t in enumerate(steps) if k in t) for k in
-           ('Take off the outer layer', 'plastic bag', 'Wash gently', 'Put on clean clothes', 'Help others')]
-    assert idx == sorted(idx), idx
+def test_coming_inside_bag_is_drawn_far_from_the_person_and_pet():
+    """Review: "far" is visible, not only labelled: the gap between the bag and the person is at least twice the bag's width."""
+    p = parts('fallout-coming-inside')
+    def box(el):
+        out = []
+        for e in el.iter():
+            tag = e.tag.split('}')[-1]
+            if tag in ('circle', 'ellipse'):
+                cx, cy = float(e.get('cx')), float(e.get('cy'))
+                rx, ry = float(e.get('r') or e.get('rx')), float(e.get('r') or e.get('ry'))
+                out.append((cx - rx, cy - ry, cx + rx, cy + ry))
+            elif tag in ('line', 'rect') or (tag == 'path' and re.match(r'M', e.get('d', ''))):
+                out.append(bbox(e))
+        return min(b[0] for b in out), min(b[1] for b in out), max(b[2] for b in out), max(b[3] for b in out)
+    bag, who = box(p['bag-shape']), box(p['people-pets'])
+    assert who[0] - bag[2] >= 2 * (bag[2] - bag[0]), (bag, who)

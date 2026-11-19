@@ -806,5 +806,6 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    draws no corner. Say whether the corner line should stay, and the diagram can then show it.
 111. **Which floor of a large building (surv-fallout-where-to-shelter, fallout-shelter-spots).** The topic says: the center of
    the building, as far from the roof and windows as you can, and away from areas near the roof. It names no floor and says
-   nothing about the ground floor. Today: the diagram shades the center of every floor but the top one, the same on each. Say
-   if the group wants a floor named (that needs a source opened for it).
+   nothing about the ground floor. Today: the diagram marks the building's basement only; its above-ground storeys carry no
+   marking, and "the center of the building" is shown on a separate plan seen from above, with no floor named. Say if the
+   group wants a floor named (that needs a source opened for it).

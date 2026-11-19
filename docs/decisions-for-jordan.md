@@ -882,8 +882,8 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    (Wolf). Today (controller ruling): the range is allowed as the makers allow it, with every condition above, only if the
    model's manual allows lighting by hand. To allow it, the app's own labelled reading narrows a checked CDC line and an EPA line
    by interpretation, on the strength of four manufacturers' manuals: it says the two lines do not name a kitchen range (CDC lists
-   "stoves" and "gas ranges" separately) and do not rule out a range's surface burners used only as the makers allow, and that a
-   reader who takes them to cover their range should not use it. This is your decision. If you say no, the range permission is
+   "stoves" and "gas ranges" separately) and do not rule out a range's surface burners used only as the makers allow, and, in its
+   own words: "If you are unsure, don’t use it: cook outdoors or eat food cold." This is your decision. If you say no, the range permission is
    removed, and the topic says flame cooking is done outdoors or on a vented fireplace or wood stove set up for cooking, and food
    is otherwise eaten cold. A vented fireplace or wood stove set up for cooking is allowed either way, under EPA's conditions and
    every rule in Wood stoves and fireplaces. (The controller is asking you now; the text may change again.)

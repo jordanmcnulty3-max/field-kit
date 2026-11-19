@@ -6,7 +6,7 @@
     "cook without power",
     "cooking without power",
     "cook outside",
-    "light gas burner with a match",
+    "light gas burner by hand",
     "cooking temperature",
     "internal temperature",
     "safe minimum temperature",
@@ -25,7 +25,7 @@
       "h": "Never indoors",
       "blocks": [
         {
-          "warn": "Never heat the house with a gas oven or range (CDC, CPSC). CDC: “Don’t cook or burn anything on a stove or fireplace that isn’t vented.”"
+          "warn": "Never heat the house with a gas oven or range (CDC, CPSC). CDC: “Don’t cook or burn anything on a stove or fireplace that isn’t vented.” For a gas range, see A gas or propane range below."
         },
         {
           "list": [
@@ -75,7 +75,7 @@
           "p": "No government agency page opened for this app says anything about cooking on a range in an outage. EPA’s outage guidance names only “a vented fireplace or a vented wood stove or another vented fuel burning stove, if it is set up for cooking”, and says “Unvented combustion appliances should not be used to cook indoors, or for any other indoor use.”"
         },
         {
-          "p": "CDC’s line “Don’t cook or burn anything on a stove or fireplace that isn’t vented” and EPA’s line on unvented appliances do not name a kitchen range; CDC lists “stoves” and “gas ranges” separately as sources of carbon monoxide. This app’s reading: they do not rule out a range’s surface burners used only as the makers allow. If you read them as covering your range, don’t use it: cook outdoors or eat food cold."
+          "p": "CDC’s line “Don’t cook or burn anything on a stove or fireplace that isn’t vented” and EPA’s line on unvented appliances do not name a kitchen range; CDC lists “stoves” and “gas ranges” separately as sources of carbon monoxide. This app’s reading: they do not rule out a range’s surface burners used only as the makers allow. If you are unsure, don’t use it: cook outdoors or eat food cold."
         },
         {
           "warn": "Never heat the house with a gas oven or range (CDC, CPSC)."

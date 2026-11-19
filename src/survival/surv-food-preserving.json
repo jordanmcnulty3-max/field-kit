@@ -1,0 +1,170 @@
+{
+  "id": "surv-food-preserving",
+  "title": "Preserving food",
+  "category": "food",
+  "keywords": [
+    "food preservation",
+    "drying food",
+    "dehydrating",
+    "dehydrator",
+    "curing"
+  ],
+  "summary": "This app gives no method for canning, drying or curing food. Pressure canning by tested instructions is the only recommended way to can vegetables, meat, poultry or fish; canning done wrong can cause botulism, which you can’t see, smell or taste. Drying needs an oven or dehydrator held at a set temperature, or, for fruit only, several hot, dry days. A failing freezer: keep it shut and check its food in Is it still good?",
+  "doFirst": [
+    "Freezer failing? Keep the door shut and follow Food when the power goes out. Before you refreeze, cook or eat anything from it, check it in Is it still good?",
+    "This app’s caution: don’t try canning for the first time now. Pressure canning is the only recommended method for low-acid food such as vegetables, meat, poultry and fish, and a boiling water canner will not protect against botulism (CDC).",
+    "Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC). The warning signs are in Is it still good?",
+    "Don’t dry meat or vegetables outdoors: the National Center for Home Food Preservation does not recommend it."
+  ],
+  "sections": [
+    {
+      "h": "A freezer that is failing",
+      "blocks": [
+        {
+          "p": "How long a freezer keeps food frozen with the door shut, and how to keep it cold longer with ice and coolers, is in Food when the power goes out. Don’t put your food outside to keep it cold, even in the winter (New York State Department of Health)."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        },
+        {
+          "p": "What to refreeze, cook or throw out is in Is it still good? Its rule: “once the freezer is above 40°F (4°C), throw out thawed food (New York State Department of Health, CDC). Food that still has ice crystals or is at 40°F (4°C) or below can be refrozen or cooked (CDC, FoodSafety.gov).”"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "p": "Cooking it, and the temperatures to cook it to: Cook without power."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        }
+      ]
+    },
+    {
+      "h": "Canning: not something to learn now",
+      "blocks": [
+        {
+          "warn": "You cannot see, smell or taste the toxin that causes botulism, and even a small taste of food that has it can be deadly (CDC)."
+        },
+        {
+          "list": [
+            "Home-canned vegetables are the most common cause of botulism outbreaks in the United States (CDC).",
+            "Low-acid foods are all fresh vegetables, figs, meats, poultry, fish, seafood and some tomatoes (CDC).",
+            "Botulism bacteria grow in moist, low-acid food with less than 2 percent oxygen, between 40°F and 120°F (4°C and 49°C), and can make their deadly toxin within 3 to 4 days (National Center for Home Food Preservation, from the USDA guide).",
+            "Their spores are very hard to destroy at boiling-water temperatures. Low-acid food has to be heated to 240°F to 250°F (116°C to 121°C), which takes a pressure canner (National Center for Home Food Preservation, from the USDA guide).",
+            "Pressure canning is the only recommended method for low-acid foods. A boiling water canner will not protect against botulism. Don’t use an electric multi-cooker, even one with a “canning” button (CDC).",
+            "Safe canning means following tested instructions exactly: the USDA Complete Guide to Home Canning, or recipes that follow it (CDC)."
+          ]
+        },
+        {
+          "p": "This app gives no canning method. Learn it in normal times, from the USDA Complete Guide to Home Canning (CDC names it) and the National Center for Home Food Preservation. Land-grant colleges often teach preserving too (CDC)."
+        }
+      ]
+    },
+    {
+      "h": "Home-canned food from someone else",
+      "blocks": [
+        {
+          "warn": "Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC)."
+        },
+        {
+          "p": "The signs that a can or jar is unsafe, and what to do before eating home-canned food you know was canned by safe guidelines, are in Is it still good? Getting rid of a suspect can or jar safely, and the signs of botulism, are in Food poisoning and botulism."
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "link": "s:surv-food-poisoning",
+          "label": "Food poisoning and botulism"
+        }
+      ]
+    },
+    {
+      "h": "Drying",
+      "blocks": [
+        {
+          "list": [
+            "Meat and vegetables: the National Center for Home Food Preservation says to dry them indoors, under the controlled conditions of an oven or food dehydrator. They are not recommended for drying outdoors: vegetables are low in sugar and acid, and meat is high in protein, so germs can grow when heat and humidity can’t be controlled (National Center for Home Food Preservation).",
+            "Fruit can be dried outdoors on hot, dry, breezy days: at least 85°F (29°C) is needed, humidity below 60 percent is best, and it takes several days. Cover the fruit or bring it under shelter at night (National Center for Home Food Preservation).",
+            "Penn State Extension: “While sun drying works in dry climates, the high humidity in Pennsylvania makes this method impractical here.”"
+          ]
+        },
+        {
+          "p": "This app gives no drying method: the methods in the sources need an oven or dehydrator held at a set temperature, or, for fruit, the outdoor weather above. Learn drying in normal times from the National Center for Home Food Preservation or Penn State Extension’s Let’s Preserve: Drying Fruits and Vegetables."
+        }
+      ]
+    },
+    {
+      "h": "Salting and curing",
+      "blocks": [
+        {
+          "p": "No official source opened for this app teaches a beginner to salt or cure meat or fish. The National Center for Home Food Preservation’s guidance says to cure meat in a refrigerator below 40°F (4°C), and warns that using sodium nitrite in place of salt in a curing recipe can be a lethal dose. This app gives no method."
+        }
+      ]
+    },
+    {
+      "h": "Smoking",
+      "blocks": [
+        {
+          "p": "“Smoke itself, without proper cooking, is not an effective food preservative.” (National Center for Home Food Preservation.) It gives storage times for cured or smoked poultry and lightly cured fish only in a refrigerator or freezer, and says modern fish curing and smoking recipes make a highly perishable product that rarely keeps better than the raw fish (National Center for Home Food Preservation). This app gives no method. Cooking outdoors safely is in Cook without power."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        }
+      ]
+    },
+    {
+      "h": "Cold storage",
+      "blocks": [
+        {
+          "p": "Keeping food cold without a working fridge or freezer, with ice and coolers and never outdoors, is in Food when the power goes out. Root cellars and storing garden crops are not covered in this app."
+        },
+        {
+          "link": "s:surv-food-power-out",
+          "label": "Food when the power goes out"
+        }
+      ]
+    },
+    {
+      "h": "Learning in normal times",
+      "blocks": [
+        {
+          "p": "The National Center for Home Food Preservation has information for safely canning, preserving, pickling, fermenting, freezing, drying, curing and smoking, and storing food (CDC). Learn from it, the USDA Complete Guide to Home Canning and an extension service before you need it."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "CDC, Home-Canned Foods (botulism prevention; April 25, 2024)",
+      "used": "Low-acid foods most common source; home-canned vegetables most common cause of outbreaks; low-acid foods listed; pressure canning only recommended method; boiling water canner will not protect; no electric multi-cooker; follow the USDA Complete Guide to Home Canning; land-grant colleges; the National Center for Home Food Preservation for canning, preserving, pickling, fermenting, freezing, drying, curing, smoking and storing"
+    },
+    {
+      "name": "National Center for Home Food Preservation (University of Georgia), Ensuring Safe Canned Foods (adapted from USDA’s Complete Guide to Home Canning, Agriculture Information Bulletin No. 539, revised 2015)",
+      "used": "Toxin within 3 to 4 days in moist, low-acid food between 40° and 120°F with less than 2 percent oxygen; spores very hard to destroy at boiling-water temperatures; low-acid foods sterilized at 240° to 250°F, attainable with pressure canners"
+    },
+    {
+      "name": "National Center for Home Food Preservation, Sun Drying (from So Easy to Preserve, 6th ed., 2014, University of Georgia Cooperative Extension)",
+      "used": "Fruit safe to dry outdoors when conditions are favorable; vegetables and meats not recommended outdoors, and why; dry them in an oven or food dehydrator; hot, dry, breezy days; at least 85°F; humidity below 60 percent; several days; cover or bring in at night"
+    },
+    {
+      "name": "Penn State Extension, Let’s Preserve: Drying Fruits and Vegetables (Dehydration) (updated April 13, 2023)",
+      "used": "Sun drying impractical in Pennsylvania’s humidity; named for learning in normal times"
+    },
+    {
+      "name": "National Center for Home Food Preservation, Curing and Smoking Meats for Home Food Preservation: Literature Review and Critical Preservation Points (sections 5 and 6; no date shown)",
+      "used": "Cure, age or preserve meats in a refrigerator below 40°F; sodium nitrite in place of salt can be a lethal dose; smoke without proper cooking is not an effective preservative; cured and smoked products kept refrigerated or frozen"
+    },
+    {
+      "name": "Food when the power goes out, Is it still good?, Cook without power, Food poisoning and botulism (other topics in this app)",
+      "used": "Quoted word for word: food not outside even in winter (New York State Department of Health); the freezer rule (New York State Department of Health, CDC, FoodSafety.gov); home-canned food from someone else and the botulism toxin warning (CDC). Freezer times, warning signs, boiling home-canned food, disposal and cooking by link"
+    }
+  ],
+  "reviewed": "2026-11-19",
+  "draft": true
+}

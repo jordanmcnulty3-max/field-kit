@@ -947,3 +947,56 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    canning guidelines were followed; if you do, boil home-canned tomatoes and low-acid food 10 minutes (plus 1 minute per 1,000
    feet) before eating. Today: both, in that order. Say if the group wants a stricter rule (for example, never eat home-canned
    food you didn't see canned).
+
+Food at home pack (v7.5), batch C: numbers 140 to 148 (149 unused). Rulings are in docs/v7.5-rulings.md ("Batch C").
+
+140. **Which water for powdered formula when there is no bottled water (surv-food-babies-children). Medical professional.** CDC
+   (Feeding Your Child Safely During a Disaster): bottled water; if none, boiled water, cooled; "Only use treated water to prepare
+   formula if bottled or boiled water is unavailable." Ready.gov: "use bottled water or boiled water as a last resort", and says
+   nothing about treated water. Today: CDC's order, treated water last, with Make water safe linked for how. Ask a medical
+   professional whether water treated with bleach or tablets is acceptable for formula when boiling is impossible (no fuel), and for
+   which ages. After fallout, Water and food after fallout governs (D115).
+141. **A bleach soak for baby bottles and feeding items (surv-food-babies-children).** CDC (How to Clean Infant Feeding Items During
+   Emergencies) gives two ways to sanitize washed items for a baby under 2 months or a sick baby, at least once a day: boil 5 minutes,
+   or soak 2 minutes in 1 teaspoon of bleach per 1/2 gallon (8 cups) of water, then air dry without rinsing. The bleach soak would be a
+   third household bleach mix (the standing decision is two, Clean and disinfect's; D123 already added NCHFP's spill mix). Today: only
+   boiling is given; the page says CDC also has a bleach soak that the app does not give, and, as the app's own caution, not to use
+   Clean and disinfect's mixes on feeding items in its place. Cost: a household with no fuel to boil cannot sanitize a newborn's
+   bottles from the app. Yours: add CDC's soak (named, scoped to baby feeding items) or keep boiling only.
+142. **A breastfeeding mother with diarrhea or vomiting (surv-food-babies-children). Medical professional.** CDC: "You can and should
+   continue breastfeeding while sick with certain illnesses such as the flu, COVID-19, or diarrhea". Stomach illness in a group: anyone
+   who has had vomiting or diarrhea must not prepare food, handle the group's water or care for others until 2 days (3 if possible)
+   after it stops. Today: she keeps breastfeeding (CDC), and in everything else follows Stomach illness in a group. Ask whether she
+   may also prepare her baby's formula or care for her own baby otherwise, and what hand washing is enough when water is short.
+143. **When formula runs out and no one can breastfeed (surv-food-babies-children). Medical professional.** No opened source says what
+   to feed a baby under 12 months then. The sources forbid homemade or watered-down formula and cow's milk or milk alternatives before
+   12 months. CDC describes relactation (restarting breastfeeding after weeks or months) and says the child must be carefully monitored
+   for normal weight gain; CDC also says to learn cup feeding from a lactation support provider. Today: the page says no source covers
+   it, repeats what not to do, mentions relactation in CDC's words, and says to keep ready-to-feed formula in supplies (Ready.gov).
+   Ask a medical professional what a group with no store and no doctor should do, how to support relactation, and how to cup-feed a
+   baby safely. Group action: keep more formula than you think you need.
+144. **Breast milk and opened ready-to-feed formula with no working fridge (surv-food-babies-children). Medical professional.** CDC:
+   completely thawed breast milk "put it in the refrigerator and use it within the next day, or throw it away"; breast milk can stay in
+   an insulated cooler with frozen ice packs up to 24 hours (CDC gives this for travel); opened ready-to-feed formula: follow the label
+   (FDA). Today: those statements as CDC and FDA give them, the cooler time labelled as CDC's travel figure, and "once it is at room
+   temperature or warmed, use it within 2 hours" (CDC). Ask how long thawed breast milk and opened ready-to-feed formula can be kept in a
+   cooler with ice when there is no fridge.
+145. **Which babies need ready-to-feed most (surv-food-babies-children). Medical professional.** CDC: less than 2 months old, born
+   early, or with a weakened immune system. FDA (Do's and Don'ts): younger than 3 months, and ask the baby's doctor about extra
+   precautions; FDA (Handling Infant Formula Safely): two months and younger at higher risk. Today: CDC's line, with FDA's 3 months
+   named beside it. Ask which age to use when there is no doctor to ask.
+146. **Sanitizing dishes: how long in the food mix (surv-food-clean-kitchen).** Clean and disinfect (checked; CDC and New York State
+   Department of Health) says rinse or soak dishes 1 minute in the food mix. University of Florida IFAS Extension, with the same
+   strength (1 tablespoon of bleach per gallon), says submerge them 5 to 10 minutes. Today: Clean and disinfect's steps by link; the
+   Florida time is not given. Say if the group wants the longer soak (Clean and disinfect would change).
+147. **No drying, salting, curing or smoking method (surv-food-preserving).** Drying methods from the National Center for Home Food
+   Preservation and Penn State Extension need an oven or dehydrator held at 135 to 150°F, or, for fruit only, outdoor weather of at
+   least 85°F and below 60 percent humidity for several days (which Penn State calls impractical in Pennsylvania); the National Center's
+   curing and smoking guidance cures meat in a refrigerator and is not a beginner's method. Today: the page explains this and gives no
+   method (spec call 4). Cost: a household with a generator, or in a dry summer, gets no drying method. Say if the group wants a
+   dehydrator method added for households with power (Penn State's Let's Preserve is complete).
+148. **A baby who is not feeding well, with no health care provider (surv-food-babies-children). Medical professional.** CDC: "If you
+   are worried that your baby is not breastfeeding well, talk to a health care provider right away." CDC's solid-food page sends
+   allergy questions (severe eczema, egg allergy, peanut) to the child's doctor or nurse. Today: the page gives CDC's sentence as it
+   stands and leaves allergen introduction out. Ask a medical professional what signs mean a baby is not getting enough and what the
+   group can do without a provider, and whether anything about first allergenic foods belongs in the app.

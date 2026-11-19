@@ -3715,3 +3715,55 @@ Kerosene and propane heaters). Fractions: 7 hours 1/10, 49 hours 1/100, about 2 
 - Emergency protocols linked, not restated: bleeding, burns, shock, carbon-monoxide, hypothermia.
 - No radiation topic has a where or when tag. No dose, exposure limit or potassium iodide anywhere. The word "safe" does
   not appear in any of the four topics.
+
+### Batch A fix round (2026-11-18), from task-1-review.md
+
+Draft removed from all four topics after these fixes.
+
+- I1 (closed list): "Leave only if a fire, gas leak, building collapse or serious injury forces you out" becomes "Leave
+  only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out" in the hub's
+  summary and Do first 3, and in How long to stay in's summary and Do first 1. READY: "unless threatened by an immediate
+  hazard (e.g., fire, gas leak, building collapse, or serious injury)"; FEMA-PG3 p. 47 adds "medical needs, or other
+  immediate threats". No longer excludes the CO alarm rule (D69 updated).
+- I2 (2 weeks): How long to stay in's Do first 3 is now "Plan to keep sheltering for as long as 2 weeks, and maybe longer
+  (civil defence handbooks, 1968 and 1985, dated)"; its summary names "the dated civil defence handbooks of 1968 and 1985"
+  and "as long as 2 weeks, and longer in some places" (ITE-1968 "to as long as 2 weeks"; PNA-1985 "as much as two weeks",
+  "somewhat longer in limited areas").
+- I3 (poor shelter): FEMA-PG3 p. 67, same paragraph: "Emergency response officials may issue supplemental orders, such as
+  early evacuation, to people in structures with poor shielding (e.g., wood frame residential structures)"; "transitioning
+  to adequate shelters in the nearby area, ideally moving away from ground zero" (quoted from the reviewer's re-opening).
+  Where to shelter now says FEMA gives wood-frame houses as the example of poor shielding and that the move should
+  ideally be away from the explosion. Ruling 10 and D72 corrected.
+- I4 (basement): table row 1 now "Underground: basement (a house basement counts), subway tunnel, underground parking
+  garage"; row 3 is "Thick-walled masonry building" only. FEMA-PG3 p. 65 puts basements with the best; CDC-GI basement first.
+- I5 (tape): "Don't tape or cover ..." removed. Do first 2, the summary and "Air, and anything that burns" now use FEMA's
+  words (structures need not be airtight; keep enough ventilation, written "enough fresh air") with "Never burn anything in
+  a sealed room." No conflict with Stay warm when the heat is out remains. Ruling 8 rewritten.
+- I6 (gate): docs/v7.4-rulings.md Tool gate set to "No tool (controller ruling)" with the reviewer's confirmed facts;
+  Deferred gains "No shelter-time tool"; u:fallout removed from the links later tasks must add. The 7:10 text in How long
+  to stay in is unchanged.
+- M1: woods step 1 now "Best: an underground shelter under 3 feet (1 m) or more of earth. Next best, in this order: ..."
+  (FM 21-76: "the following unoccupied structures (in order listed) offer the next best protection").
+- M2: "Keep everyone in one small room on the sheltered side of the house, with few windows, and close off the rest (as in
+  Stay warm when the heat is out)" — no longer carries the sources' names on a changed sentence.
+- M3: furnace vents line adds "that is a trip outside: see How long to stay in".
+- M4: hub adds FEMA-PG3 p. 70's exception: "unless a fire or other immediate danger forces you".
+- M5: hub "can suck material up" (READY's "can").
+- M6: shelter-living old handbooks "(...; both dated)".
+- M7: CDP source line "course pages dated May 12, 2021".
+- M8: the woods steps and their source line now cite US Army FM 21-76, Survival (June 1992), chapter 23 "The Nuclear
+  Environment", the source verified in full. The writer re-opened it in the fix round:
+  https://public.3.basecamp.com/p/inZg8e16NHVuznoxmCMQvZG2/attachments/2623d47a-200b-11ef-9bd5-aaa4f1cd8999/download/usarmy_survivalfieldmanual.pdf
+  (title "US Army Survival Field Manual, No 21-76, June 1992"; read at offset 400,000): "Five minutes to locate the shelter is
+  a good guide."; "Good examples are ditches, ravines, rocky outcropping, hills, and river banks."; "When digging a trench,
+  work from inside the trench as soon as it is large enough to cover part of your body"; "While an underground shelter
+  covered by 1 meter or more of earth provides the best protection against fallout radiation"; "the following unoccupied
+  structures (in order listed) offer the next best protection."; "It is not mandatory that you build a roof on your
+  shelter."; "Build one only if the materials are readily available with only a brief exposure to outside contamination.";
+  "Where possible, seek a crude, existing shelter that you can improve."; "While building your shelter, keep all parts of
+  your body covered with clothing to protect it against beta burns." The FM 3-05.70 mirror (FM3-05.70 above) holds the same
+  text but is clipped; the source line says the text is also in FM 3-05.70. FM 21-76 (1992) is an Army manual used under
+  spec 10 call 11, not a civil defence publication.
+- M9: correction to the record above: the p. 43 wording "middle of a large, dense building" was not found by the reviewer;
+  the nearest are p. 46 "center of larger, dense buildings" and p. 65 "center of large, heavy buildings". Topic text is
+  unaffected (row 2 also rests on READY, CDC-GI and FEMA-PG3 p. 54).

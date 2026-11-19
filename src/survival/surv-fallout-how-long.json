@@ -22,11 +22,11 @@
     "radiation meter",
     "dosimeter"
   ],
-  "summary": "Officials say to stay inside for at least 24 hours unless a fire, gas leak, collapse or serious injury forces you out, and then until they say to leave. If no word ever comes, older civil defence handbooks say shelter could last up to 2 weeks. Fallout weakens fast, but only a meter or an official can tell you how strong it still is.",
+  "summary": "Officials say to stay inside for at least 24 hours unless an immediate danger such as a fire, gas leak, collapse or serious injury forces you out, and then until they say to leave. If no word ever comes, the dated civil defence handbooks of 1968 and 1985 say shelter could last as long as 2 weeks, and longer in some places. Fallout weakens fast, but only a meter or an official can tell you how strong it still is.",
   "doFirst": [
-    "Stay in for at least the first 24 hours (Ready.gov, CDC, NYC Health). Leave only if a fire, gas leak, building collapse or serious injury forces you out (Ready.gov).",
+    "Stay in for at least the first 24 hours (Ready.gov, CDC, NYC Health). Leave only if an immediate danger such as a fire, gas leak, building collapse or serious injury forces you out (Ready.gov).",
     "After that, keep sheltering until officials tell you to leave (Ready.gov).",
-    "No word from anyone? Keep sheltering for up to 2 weeks, and go out only for what can’t wait, as briefly as you can (see When no one tells you)."
+    "No word from anyone? Plan to keep sheltering for as long as 2 weeks, and maybe longer (civil defence handbooks, 1968 and 1985, dated). Go out only for what can’t wait, as briefly as you can (see When no one tells you)."
   ],
   "sections": [
     {
@@ -170,7 +170,7 @@
       "used": "Measurements may increase rapidly at first, then decrease over the first 48 hours"
     },
     {
-      "name": "FEMA Center for Domestic Preparedness, online course AWR-923-W, Radiological Emergency Management (course version May 12, 2021), pages “The 7:10 Rule of Thumb” and “Limitations of 7:10 Rule of Thumb”",
+      "name": "FEMA Center for Domestic Preparedness, online course AWR-923-W, Radiological Emergency Management (course pages dated May 12, 2021), pages “The 7:10 Rule of Thumb” and “Limitations of 7:10 Rule of Thumb”",
       "used": "For every 7-fold increase in time after detonation, a 10-fold decrease in the exposure rate; answers are only approximations; assumes the detonation time is known and fallout from one detonation; nothing can replace a direct instrument reading"
     },
     {
@@ -186,6 +186,5 @@
       "used": "A generator runs only outside"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

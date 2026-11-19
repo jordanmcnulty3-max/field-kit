@@ -54,7 +54,7 @@
             ],
             "rows": [
               [
-                "Underground: basement, subway tunnel, underground parking garage",
+                "Underground: basement (a house basement counts), subway tunnel, underground parking garage",
                 "Best (FEMA planning guidance, Ready.gov)"
               ],
               [
@@ -62,7 +62,7 @@
                 "Best above ground (Ready.gov, CDC, FEMA planning guidance)"
               ],
               [
-                "Thick-walled masonry building; house basement",
+                "Thick-walled masonry building",
                 "Generally adequate (FEMA planning guidance)"
               ],
               [
@@ -117,7 +117,7 @@
           "p": "If a multi-story building or a basement can be reached within a few minutes of the explosion, go there at once (Ready.gov)."
         },
         {
-          "p": "FEMA’s planning guidance gives times for moving later: when an adequate shelter is within about 15 minutes’ travel, people in a poor shelter should stay there no longer than 30 minutes after the explosion, and people in a somewhat better shelter an hour or two, before moving to it. It does not say which buildings count as poor, and these times are for one short move to a much better shelter nearby."
+          "p": "FEMA’s planning guidance gives times for moving later: when an adequate shelter is within about 15 minutes’ travel, people in a poor shelter should stay there no longer than 30 minutes after the explosion, and people in a somewhat better shelter an hour or two, before moving to it. FEMA gives wood-frame houses as an example of poor shielding, and says the move should ideally take you away from the explosion. These times are for one short move to a much better shelter nearby."
         },
         {
           "p": "Otherwise, stay where you are. Once you are in, the rules for staying in are in How long to stay in."
@@ -145,15 +145,15 @@
       "h": "In the woods with no building",
       "blocks": [
         {
-          "p": "If you can reach any building in the time you have, go there. If there is none, these steps are from the Army’s survival manual (FM 3-05.70, Survival). Speed matters most: the Army gives five minutes to find shelter as a good guide."
+          "p": "If you can reach any building in the time you have, go there. If there is none, these steps are from the Army’s survival manual (FM 21-76, 1992). Speed matters most: the Army gives five minutes to find shelter as a good guide."
         },
         {
           "steps": [
-            "Look for cover under 3 feet (1 m) or more of earth: a cave or tunnel, a storm or storage cellar, a culvert, the basement or cellar of an abandoned building, or an abandoned stone building (Army FM 3-05.70).",
-            "None? Use ground that shields you: a ditch, ravine, rocky outcrop, hill or riverbank (Army FM 3-05.70).",
-            "On open, level ground, dig a trench. Work from inside it as soon as it covers part of your body, and dig as fast as you can (Army FM 3-05.70).",
-            "Keep your body covered while you work (Army FM 3-05.70).",
-            "A roof is not needed. Build one only if the material is right at hand and you don’t have to spend long outside to get it (Army FM 3-05.70)."
+            "Best: an underground shelter under 3 feet (1 m) or more of earth. Next best, in this order: a cave or tunnel under more than 3 feet of earth, a storm or storage cellar, a culvert, the basement or cellar of an abandoned building, an abandoned stone or mud building (Army FM 21-76).",
+            "None? Use ground that shields you: a ditch, ravine, rocky outcrop, hill or riverbank (Army FM 21-76).",
+            "On open, level ground, dig a trench. Work from inside it as soon as it covers part of your body, and dig as fast as you can (Army FM 21-76).",
+            "Keep your body covered while you work (Army FM 21-76).",
+            "A roof is not needed. Build one only if the material is right at hand and you don’t have to spend long outside to get it (Army FM 21-76)."
           ]
         },
         {
@@ -192,10 +192,9 @@
       "used": "A basement corner below ground level is the best place for fallout protection"
     },
     {
-      "name": "US Army FM 3-05.70, Survival, chapter 23, Survival in the Nuclear Environment (copy hosted by Waldo County, Maine)",
+      "name": "US Army FM 21-76, Survival (June 1992), chapter 23, The Nuclear Environment; the same text is in its successor FM 3-05.70",
       "used": "No building: five minutes to locate shelter as a guide; caves and tunnels under more than 1 meter of earth, storm or storage cellars, culverts, basements or cellars of abandoned buildings, abandoned stone or mud buildings; ditches, ravines, rocky outcrops, hills, riverbanks; dig a trench, work from inside it, dig fast; keep the body covered; a roof is not mandatory"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

@@ -564,7 +564,7 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    defence handbooks fill the gap: In Time of Emergency (Office of Civil Defense, 1968): 2 or 3 days to as long as 2
    weeks; Protection in the Nuclear Age (FEMA, 1985): a few days to as much as two weeks, somewhat longer in limited areas.
    Both say people might leave for short periods before then, but leave it to officials or a meter to say when. Today: plan
-   on up to 2 weeks (could be longer in some places), plus a labelled app caution: no trips out in the first 24 hours
+   on as long as 2 weeks, and maybe longer (the Do first and summary name the 1968 and 1985 handbooks), plus a labelled app caution: no trips out in the first 24 hours
    except for an immediate hazard, then only brief trips for what can't wait, above all in the first few days. The Army
    survival manual (FM 3-05.70) has a soldier's timetable (complete isolation 4 to 6 days, one 30-minute trip for water on
    day 3, short trips on days 7 and 8, 2 to 4 hours a day from day 9 to 12, normal from day 13); it is not used, because
@@ -574,7 +574,9 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    sounds, get everyone outside now. Fallout guidance (Ready.gov): stay inside for the first 24 hours unless an immediate
    hazard such as fire, a gas leak, building collapse or serious injury forces you out; CO is not on its list. Both can
    kill. Today: the closed-up-house topic quotes the CO rule unchanged and says going out means going into fallout, which is
-   one more reason nothing burns in the house. No source opened says what to do instead (for example opening windows wide
+   one more reason nothing burns in the house. Fix round: the "leave only if" lines in the fallout topics now say "an
+   immediate danger such as a fire, gas leak, building collapse or serious injury" (Ready.gov's examples, not a closed
+   list), so they no longer exclude a CO alarm. No source opened says what to do instead (for example opening windows wide
    and moving to another room). Say if the group wants a different rule (it would need a source, and is also a question for
    a medical professional).
 70. **"Go somewhere with heat" during fallout (surv-heat-out, surv-fallout-shelter-living).** Stay warm when the heat is out
@@ -591,10 +593,11 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
 72. **Moving from a poor shelter to a better one (surv-fallout-where-to-shelter).** FEMA's planning guidance (2022): when an
    adequate shelter is within 15 minutes' travel, people in a poor shelter (its "protection factor 2") should stay no longer
    than 30 minutes after the detonation, and in a better shelter ("protection factor 4") an hour or two, before moving.
-   FEMA does not say which buildings have those factors (its figure is an image that could not be read). Ready.gov says
-   only: if a multi-story building or basement can be reached within a few minutes, go there immediately. Today: both are
-   in the topic, FEMA's as "poor" and "somewhat better" with a note that FEMA does not name the buildings. Say if the group
-   would rather keep only Ready.gov's simpler rule.
+   The same paragraph gives wood-frame residential structures as an example of poor shielding, and says the move should
+   ideally be away from ground zero; it names no buildings for "protection factor 4" (its figure is an image that could
+   not be read). Ready.gov says only: if a multi-story building or basement can be reached within a few minutes, go there
+   immediately. Today: both are in the topic, FEMA's as "poor" and "somewhat better", with FEMA's wood-frame example and
+   "ideally away from the explosion". Say if the group would rather keep only Ready.gov's simpler rule.
 73. **Older handbooks allow a stove indoors (surv-fallout-shelter-living).** Protection in the Nuclear Age (FEMA, 1985)
    suggests a camp stove for heat and cooking in the shelter with adequate ventilation (no charcoal); In Time of Emergency
    (1968) says a stove indoors needs adequate ventilation. The checked Carbon monoxide topic (CDC, CPSC) says never run a

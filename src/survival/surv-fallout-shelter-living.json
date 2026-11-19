@@ -25,10 +25,10 @@
     "furnace",
     "air conditioner"
   ],
-  "summary": "Close windows, doors and anything that pulls in outside air, but don’t seal the house airtight: fallout shelter doesn’t need it, and people need air. Never burn anything in a sealed room. Keep warm without flame first; burn only if the cold itself becomes a danger to life, and then under every carbon monoxide rule.",
+  "summary": "Close windows, doors and anything that pulls in outside air. The house doesn’t need to be airtight to protect against fallout, and it still needs enough fresh air. Never burn anything in a sealed room. Keep warm without flame first; burn only if the cold itself becomes a danger to life, and then under every carbon monoxide rule.",
   "doFirst": [
     "Close and lock windows and doors. Turn off fans, air conditioners and forced-air heating units that bring in air from outside (CDC).",
-    "Never burn anything in a sealed room. Closing up the house is not sealing it airtight: structures do not need to be airtight to protect against fallout radiation (FEMA planning guidance).",
+    "Never burn anything in a sealed room. You don’t need to make the house airtight to protect against fallout, and it still needs enough fresh air (FEMA planning guidance).",
     "Never heat the house with an oven or gas range, and never run a generator, grill, camp stove, charcoal or a fuel lantern indoors (CDC). See Carbon monoxide.",
     "Cold? Warm people without flame first: one small room, layers, blankets, sleeping bags and each other. See Stay warm when the heat is out.",
     "Keep battery CO alarms near where people sleep (CDC, CPSC). If one sounds, get everyone outside now (CPSC). See Carbon monoxide."
@@ -54,13 +54,13 @@
           "warn": "Never burn anything in a sealed room. A closed-up house still needs air, and anything that burns fuel makes carbon monoxide."
         },
         {
-          "p": "Closing up the house means shutting out the outside air that fans and open windows pull in. It does not mean sealing the house: structures do not need to be airtight to protect against fallout radiation, and FEMA’s planning guidance says to keep enough ventilation for the air indoors to stay fit to breathe. Don’t tape or cover doors, windows or vents to make the house airtight (this app’s reading of FEMA)."
+          "p": "Closing up the house means shutting out the outside air that fans and open windows pull in. You don’t need to make the house airtight: structures do not need to be airtight to protect against fallout radiation, and the house still needs enough fresh air to keep the air indoors fit to breathe (FEMA planning guidance). Never burn anything in a sealed room."
         },
         {
           "list": [
             "Never heat the house with an oven or gas range, and never run a generator, grill, camp stove, charcoal or a fuel lantern indoors (CDC). See Carbon monoxide.",
             "Even with doors and windows open, a closed or partly closed space can trap carbon monoxide and let it build to deadly levels quickly (CPSC; Carbon monoxide).",
-            "Older civil defence handbooks (Office of Civil Defense, 1968; FEMA, 1985) allow a stove indoors with ventilation, and the 1985 handbook names a camp stove. This app doesn’t: it follows CDC and CPSC."
+            "Older civil defence handbooks (Office of Civil Defense, 1968; FEMA, 1985; both dated) allow a stove indoors with ventilation, and the 1985 handbook names a camp stove. This app doesn’t: it follows CDC and CPSC."
           ]
         },
         {
@@ -83,14 +83,14 @@
           "p": "This app’s rule for a closed-up house in winter: warmth without flame comes first, for the whole sheltering period. If the cold itself becomes a danger to life, run the stove or heater under the carbon monoxide rules in full, accepting that outside air comes in. Nothing ever burns in a sealed room."
         },
         {
-          "p": "A furnace or boiler vented to the outside that still has power to run is the house’s normal heat, not a stove or heater added for the emergency (this app’s reading). Turn off any forced-air heating that brings in air from outside (CDC), and keep its outside vents clear (What a furnace needs, in Stay warm when the heat is out). The rule above is for when it can’t run."
+          "p": "A furnace or boiler vented to the outside that still has power to run is the house’s normal heat, not a stove or heater added for the emergency (this app’s reading). Turn off any forced-air heating that brings in air from outside (CDC), and keep its outside vents clear (What a furnace needs, in Stay warm when the heat is out; that is a trip outside: see How long to stay in). The rule above is for when it can’t run."
         },
         {
           "p": "Warmth without flame, as in Stay warm when the heat is out:"
         },
         {
           "list": [
-            "Pick one small room on the sheltered side of the house, with few windows, and live in that. Close off the rest (University of Missouri Extension, CDC; Stay warm when the heat is out).",
+            "Keep everyone in one small room on the sheltered side of the house, with few windows, and close off the rest (as in Stay warm when the heat is out).",
             "Put on layers, a hat and socks, and use blankets and sleeping bags (FEMA, National Institute on Aging; Stay warm when the heat is out).",
             "Bed is the warmest place, with other family members and lots of covers (University of Missouri Extension; Stay warm when the heat is out). Babies sleep differently: see Stay warm when the heat is out."
           ]
@@ -231,6 +231,5 @@
       "used": "Never-indoors line, CO alarm line and baby and older-people line quoted word for word from Stay warm when the heat is out’s Do first (CDC, CPSC); one warm room, layers and bed from Stay warm when the heat is out; trapped carbon monoxide (CPSC) and light (CPSC) from Carbon monoxide; damper rule and put-out-before-sleep rule quoted word for word from Wood stoves and fireplaces (Massachusetts Department of Fire Services; US Fire Administration, FEMA); heater sleep rule quoted word for word and door-and-window condition from Kerosene and propane heaters (CPSC, US Fire Administration)"
     }
   ],
-  "reviewed": "2026-11-18",
-  "draft": true
+  "reviewed": "2026-11-18"
 }

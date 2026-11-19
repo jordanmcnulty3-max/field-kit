@@ -20,6 +20,13 @@ Jordan (2026-11-18), in the brainstorm:
 - **Approach A** (section 3): urgent actions sit in a topic's Do first box; exposure care is added to Emergency
   as protocols.
 - The topic list in section 4 "looks good for now".
+- **When no official instruction comes** (after the builder check): older federal civil defence publications
+  fill the gap. Each is named with its year, marked as dated, and used only where current guidance is silent.
+  The app still never says "safe".
+- **Winter heat in a closed-up house** (after the builder check): **no-flame warmth first** for the sheltering
+  period (one room, bedding, layers, body heat, as the heat pack describes). If the cold itself becomes a danger
+  to life, the stove or heater is run under the existing carbon monoxide rules in full, accepting that outside
+  air comes in. Nothing is ever burned in a sealed room.
 
 Fallout kills people who are outside or poorly sheltered in the first hours, and the protective actions are few
 and simple. The pack's job is to make those few actions findable in seconds and to stop the dangerous mistakes:
@@ -125,8 +132,10 @@ only way to know the level and that the app does not yet cover reading one, and 
   `surv-wood-stoves-fireplaces`, `surv-generators` and `surv-heat-out` are checked and are not softened or
   reworded. `surv-fallout-shelter-living` owns the rule for a closed-up house and must be written so that no
   reading of it permits burning anything in a sealed room. Where a radiation source and a combustion source
-  cannot both be followed (for example, heating a closed-up house in winter with a kerosene heater), the topic
-  states both, takes the reading that cannot kill by carbon monoxide, and the question is logged for Jordan.
+  cannot both be followed (heating a closed-up house in winter), the default is Jordan's decision in section 1:
+  no-flame warmth first; burn only when the cold itself is a danger to life, and then under the checked carbon
+  monoxide rules in full. The topic states both rules and who is most at risk from the cold (infants, older
+  people) by link to `surv-heat-out`; what the sources add is logged for Jordan.
   It is written and reviewed in the first batch because every later topic leans on it.
 - **Water pack.** Stored water, the water heater tank, bleach doses and boiling times stay exactly as checked.
   The radiation topics add only what sources say about fallout and water.
@@ -172,8 +181,10 @@ its nuclear detonation safety flyers; FEMA *Planning Guidance for Response to a 
 edition; CDC radiation emergencies (sheltering, self-decontamination, potassium iodide, acute radiation
 syndrome, dirty bomb FAQs); HHS REMM; FDA (potassium iodide); EPA (protective action guides, radiation
 basics); NRC (dirty bomb fact sheet); NYS Department of Health and NYS DHSES; Red Cross. Older civil defence
-publications (for example FEMA's 1985 *Protection in the Nuclear Age*) may be used only for points current
-guidance does not cover, are named with their year in the source line, and never override a current source.
+publications (for example FEMA's 1985 *Protection in the Nuclear Age*) are used for points current guidance
+does not cover, above all how long to stay in when no instruction comes (Jordan's decision, section 1). They are
+named with their year in the topic text and the source line, marked as dated, never override a current source,
+and where two of them disagree the longer stay is used.
 
 Every rule in v7 design section 6 applies. Where sources disagree, the more cautious one is used and the
 question is logged in `docs/decisions-for-jordan.md` section D from **number 68**. Web research uses built-in

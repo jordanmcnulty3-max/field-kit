@@ -673,7 +673,7 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    you can leave shelter. Today: the protocol lists what needs medical care (needs, not instructions) and points to Leaving
    and moving after fallout for whether and when to go. Also a question for a medical professional: what a group can do for
    radiation sickness if no medical care is ever reachable.
-88. **Closing up the house after the fallout has passed, and heat (surv-fallout-shelter-living, not edited).** Found while
+88. **Closing up the house after the fallout has passed, and heat (surv-fallout-shelter-living).** Found while
    reading FEMA's 2024 public messaging guide (Nuclear Detonation Preparedness: Communicating in the Immediate Aftermath,
    p. 16): "Closing off ventilation after the passage of the fallout cloud provides little to no health benefit." and
    "Heating and cooling should take priority if there are extreme temperatures." Also "If you are in a sturdy building with
@@ -776,7 +776,7 @@ Numbers 49 and 54 to 59 are not used: they were reserved for parallel batches. N
    dirty bomb.
 101. **How long to stay in after a dirty bomb when no one says (surv-dirty-bomb). (See D107.)** CDC says stay in the building (or the
    car) until told it is all right to travel; NRC and CDC give no length of time, and nothing for when no word comes. How
-   long to stay in (its 24 hours and up to 2 weeks) is for fallout, which a dirty bomb does not produce over a region.
+   long to stay in (at least the first 24 hours, and with no word from anyone, as long as 2 weeks, and maybe longer) is for fallout, which a dirty bomb does not produce over a region.
    Today: the topic says no source gives a time and to stay in until officials say. Say if the group wants a rule for when no
    word ever comes (it would be the app's own, labelled as such).
 102. **Breastfeeding and radioactive iodine (surv-potassium-iodide). Medical professional. (One question with D85 and D94.)** CDC's KI page says breastfeeding women should consider

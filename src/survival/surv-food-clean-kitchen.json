@@ -4,10 +4,9 @@
   "category": "food",
   "keywords": [
     "cross contaminate",
-    "raw meat and poultry",
     "rinsing produce"
   ],
-  "summary": "Wash your hands with soap before you touch food. Keep raw meat, poultry, seafood and eggs apart from food that won’t be cooked. Wash dishes, counters and cutting boards, sanitize them with the food mix and let them air dry, by the steps in Clean and disinfect, using safe water. Anyone who has had vomiting or diarrhea prepares no food until at least 2 days after it stops.",
+  "summary": "Keeping food clean with little water: wash your hands with soap before you touch food. Keep raw meat, poultry, seafood and eggs apart from food that won’t be cooked. Wash dishes, counters and cutting boards, sanitize them with the food mix and let them air dry, by the steps in Clean and disinfect, using safe water. Anyone who has had vomiting or diarrhea prepares no food until at least 2 days after it stops.",
   "doFirst": [
     "Wash your hands with soap and the cleanest water you have before, during and after preparing food, and before eating (CDC, FoodSafety.gov). How, with little water: Washing hands with little water.",
     "Anyone who has had vomiting or diarrhea must not prepare or handle food, handle the group’s water, or care for others. CDC: “Wait at least 2 days (48 hours) after symptoms stop.” Wait 3 days (72 hours) if the group can manage it (Minnesota Department of Health; University of Minnesota Extension).",
@@ -96,7 +95,11 @@
           "label": "Garbage and dirty water"
         },
         {
-          "p": "Pans, dishes and counters that flood water touched, and pots near a fire, have their own steps in Is it still good?"
+          "p": "Pans, dishes, utensils and counters that flood water touched, and pots and pans that fire-fighting chemicals touched, have their own steps in Is it still good?"
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
         }
       ]
     },
@@ -176,6 +179,5 @@
       "used": "Cooking temperatures and heating water; time limits and flood or fire clean-up; dirty water; making water safe; baby feeding items; fallout; by link"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

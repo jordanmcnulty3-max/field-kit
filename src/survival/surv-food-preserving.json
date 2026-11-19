@@ -4,17 +4,17 @@
   "category": "food",
   "keywords": [
     "food preservation",
-    "drying food",
-    "dehydrating",
+    "herb bundles",
     "dehydrator",
-    "curing"
+    "curing",
+    "jerky"
   ],
-  "summary": "This app gives no method for canning, drying or curing food. Pressure canning by tested instructions is the only recommended way to can vegetables, meat, poultry or fish; canning done wrong can cause botulism, which you can’t see, smell or taste. Drying needs an oven or dehydrator held at a set temperature, or, for fruit only, several hot, dry days. A failing freezer: keep it shut and check its food in Is it still good?",
+  "summary": "This page gives no method for canning, curing or smoking food, or for drying meat, fruit or vegetables; herbs are the one food it teaches you to dry. Pressure canning by tested instructions is the only recommended way to can vegetables, meat, poultry or fish; canning done wrong can cause botulism, which you can’t see, smell or taste. USDA says meat must be heated to 160°F and poultry to 165°F before drying, and sun drying is not recommended for meat. A failing freezer: keep it shut and check its food in Is it still good?",
   "doFirst": [
     "Freezer failing? Keep the door shut and follow Food when the power goes out. Before you refreeze, cook or eat anything from it, check it in Is it still good?",
     "This app’s caution: don’t try canning for the first time now. Pressure canning is the only recommended method for low-acid food such as vegetables, meat, poultry and fish, and a boiling water canner will not protect against botulism (CDC).",
     "Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC). The warning signs are in Is it still good?",
-    "Don’t dry meat or vegetables outdoors: the National Center for Home Food Preservation does not recommend it."
+    "Don’t dry meat without heating it first: USDA says heat meat to 160°F (71.1°C) and poultry to 165°F (73.9°C) before drying, and sun drying is not recommended for meat. This page gives no method for drying meat."
   ],
   "sections": [
     {
@@ -84,17 +84,59 @@
       ]
     },
     {
-      "h": "Drying",
+      "h": "Drying meat",
+      "blocks": [
+        {
+          "warn": "USDA: “The U.S. Department of Agriculture (USDA) Meat and Poultry Hotline’s current recommendation for making jerky safely is to heat meat to 160°F and poultry to 165°F before the dehydrating process.” Most dehydrator instructions don’t include this step, and a dehydrator may not reach temperatures high enough to heat meat to 160°F (71.1°C) or 165°F (73.9°C) (USDA). Sun drying is not recommended for making meat jerky, because there is no steady heat source and animals, insects, dust and bacteria can contaminate it (USDA)."
+        },
+        {
+          "list": [
+            "Wild game: in this app all wild game is cooked to 165°F (73.9°C), not 160°F, as Field dressing game says. Several outbreaks of E. coli O157:H7 have occurred in venison jerky (National Center for Home Food Preservation).",
+            "This page gives no method for drying meat. Without a working oven or dehydrator there is no way here to dry meat safely."
+          ]
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        }
+      ]
+    },
+    {
+      "h": "Drying fruit and vegetables",
       "blocks": [
         {
           "list": [
-            "Meat and vegetables: the National Center for Home Food Preservation says to dry them indoors, under the controlled conditions of an oven or food dehydrator. They are not recommended for drying outdoors: vegetables are low in sugar and acid, and meat is high in protein, so germs can grow when heat and humidity can’t be controlled (National Center for Home Food Preservation).",
-            "Fruit can be dried outdoors on hot, dry, breezy days: at least 85°F (29°C) is needed, humidity below 60 percent is best, and it takes several days. Cover the fruit or bring it under shelter at night (National Center for Home Food Preservation).",
+            "Vegetables are not recommended for drying outdoors: they are low in sugar and acid, which increases the risk of spoilage (National Center for Home Food Preservation).",
+            "Fruit dried outdoors needs hot, dry, breezy days, a minimum temperature of 85°F (29°C), humidity below 60 percent, several days, screens safe for contact with food (not galvanized “hardware cloth”, copper or aluminum) and a cover against birds and insects (National Center for Home Food Preservation), and dried fruit then needs a heat or freezer treatment against insect eggs (Penn State Extension).",
             "Penn State Extension: “While sun drying works in dry climates, the high humidity in Pennsylvania makes this method impractical here.”"
           ]
         },
         {
-          "p": "This app gives no drying method: the methods in the sources need an oven or dehydrator held at a set temperature, or, for fruit, the outdoor weather above. Learn drying in normal times from the National Center for Home Food Preservation or Penn State Extension’s Let’s Preserve: Drying Fruits and Vegetables."
+          "p": "This page gives no method for drying fruit or vegetables: the sources’ methods need an oven, a dehydrator or a freezer, or outdoor weather that Penn State calls impractical where humidity is high. Learn drying in normal times from the National Center for Home Food Preservation or Penn State Extension’s Let’s Preserve: Drying Fruits and Vegetables."
+        }
+      ]
+    },
+    {
+      "h": "Air-drying herbs",
+      "blocks": [
+        {
+          "p": "Herbs are the one food this page teaches you to dry without power, from the National Center for Home Food Preservation (NCHFP) and Penn State Extension. For air-drying to be successful, humidity must be low and good air circulation must be available (Penn State). Sun drying is not recommended: herbs lose flavor and color (NCHFP)."
+        },
+        {
+          "steps": [
+            "Pick herbs just before the flowers first open, in the morning after the dew has dried (NCHFP, Penn State). Don’t let them lie in the sun or unattended after picking (NCHFP).",
+            "Start with clean counters and utensils, and wash your hands with soap (Penn State). Throw away bruised, soiled or imperfect leaves and stems, and check the plants, especially seeds, for insects (NCHFP, Penn State).",
+            "Rinse them in cool water, gently shake off the water, and pat them dry with a paper towel. Remove as much moisture as possible (Penn State).",
+            "Sturdy herbs such as rosemary, sage, thyme, summer savory and parsley: tie them into small bundles and hang them to air dry, in a dry place with good air circulation (NCHFP, Penn State). A rubber band tightens as the stems dry, so they don’t fall out (Penn State).",
+            "Tender-leaf herbs such as basil, oregano, tarragon, lemon balm and the mints have a lot of moisture and will mold if not dried quickly. Hang a small bunch inside a paper bag with holes torn or punched in its sides, close the top with a rubber band, and place it where air currents will circulate through the bag. Large amounts will mold (NCHFP).",
+            "Hang them away from the sink, stove or dishwasher, where there is a lot of moisture. Keep dust off with a paper bag punched with holes (Penn State).",
+            "They are dry when the leaves are crispy and crumble easily between the fingers. Make sure they are completely dry, to prevent mold in storage (Penn State, NCHFP).",
+            "Treat them against insects: Penn State says air-dried herbs and seeds need heating at 160°F (71°C) for 30 minutes, or freezing at 0°F (-17°C) or lower for at least 48 hours, to destroy insects and insect eggs. The heat method reduces flavor and is not suitable for seeds you want to plant (Penn State).",
+            "Store them in airtight containers in a cool, dry, dark place, such as a cupboard or drawer away from the stove and sink, not on a windowsill (Penn State, NCHFP). Most dried herbs keep well for up to a year (Penn State)."
+          ]
+        },
+        {
+          "p": "The insect step needs an oven or a freezer. NCHFP’s herb method does not include it; Penn State’s does, and this page follows Penn State. Without an oven or freezer, the herbs have not had that step."
         }
       ]
     },
@@ -150,21 +192,32 @@
     },
     {
       "name": "National Center for Home Food Preservation, Sun Drying (from So Easy to Preserve, 6th ed., 2014, University of Georgia Cooperative Extension)",
-      "used": "Fruit safe to dry outdoors when conditions are favorable; vegetables and meats not recommended outdoors, and why; dry them in an oven or food dehydrator; hot, dry, breezy days; at least 85°F; humidity below 60 percent; several days; cover or bring in at night"
+      "used": "Fruit safe to dry outdoors when conditions are favorable; screens safe for food, avoid hardware cloth, copper and aluminum; two screens or cheesecloth against birds and insects; vegetables and meats not recommended outdoors, and why; dry them in an oven or food dehydrator; hot, dry, breezy days; at least 85°F; humidity below 60 percent; several days; cover or bring in at night"
     },
     {
       "name": "Penn State Extension, Let’s Preserve: Drying Fruits and Vegetables (Dehydration) (updated April 13, 2023)",
-      "used": "Sun drying impractical in Pennsylvania’s humidity; named for learning in normal times"
+      "used": "Sun drying impractical in Pennsylvania’s humidity; dried fruit treated against insect eggs by heat or freezing; named for learning in normal times"
+    },
+    {
+      "name": "USDA FSIS, Jerky and Food Safety (no date shown)",
+      "used": "Heat meat to 160°F and poultry to 165°F before the dehydrating process; most dehydrator instructions lack this step and a dehydrator may not reach those temperatures; sun drying not recommended for meat jerky, and why"
+    },
+    {
+      "name": "National Center for Home Food Preservation, Herbs (from So Easy to Preserve, 6th ed., 2014)",
+      "used": "Sun drying not recommended for herbs; harvest timing; not in the sun or unattended; rinse; discard imperfect leaves; sturdy herbs in bundles; tender-leaf herbs in paper bags with holes, small bunches, air currents; crispy and crumbling when dry; airtight containers, cool, dry, dark place"
+    },
+    {
+      "name": "Penn State Extension, Let’s Preserve: Drying Herbs (updated July 31, 2023)",
+      "used": "Low humidity and good air circulation; clean counters, hand washing; inspect for insects; rinse, shake, pat dry; tie and hang; rubber band; away from sink, stove, dishwasher; paper bag against dust; completely dry; heat at 160°F for 30 minutes or freeze at 0°F for 48 hours against insects; storage place; up to a year"
     },
     {
       "name": "National Center for Home Food Preservation, Curing and Smoking Meats for Home Food Preservation: Literature Review and Critical Preservation Points (sections 5 and 6; no date shown)",
-      "used": "Cure, age or preserve meats in a refrigerator below 40°F; sodium nitrite in place of salt can be a lethal dose; smoke without proper cooking is not an effective preservative; cured and smoked products kept refrigerated or frozen"
+      "used": "Several outbreaks of E. coli O157:H7 in venison jerky; cure, age or preserve meats in a refrigerator below 40°F; sodium nitrite in place of salt can be a lethal dose; smoke without proper cooking is not an effective preservative; cured and smoked products kept refrigerated or frozen"
     },
     {
-      "name": "Food when the power goes out, Is it still good?, Cook without power, Food poisoning and botulism (other topics in this app)",
-      "used": "Quoted word for word: food not outside even in winter (New York State Department of Health); the freezer rule (New York State Department of Health, CDC, FoodSafety.gov); home-canned food from someone else and the botulism toxin warning (CDC). Freezer times, warning signs, boiling home-canned food, disposal and cooking by link"
+      "name": "Food when the power goes out, Is it still good?, Cook without power, Food poisoning and botulism, Field dressing game (other topics in this app)",
+      "used": "Quoted word for word: food not outside even in winter (New York State Department of Health); the freezer rule (New York State Department of Health, CDC, FoodSafety.gov); home-canned food from someone else and the botulism toxin warning (CDC). Freezer times, warning signs, boiling home-canned food, disposal and cooking by link; wild game always 165°F (Field dressing game)"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

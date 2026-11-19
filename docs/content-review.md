@@ -5641,3 +5641,79 @@ Conversions (app's own): ½ inch = 1.3 cm; 77°F = 25°C; 85°F = 29°C; 120°F 
 - Is it still good?, Food when the power goes out, Cook without power: quoted and linked as above; no hold time, discard rule or cooking
   temperature restated. Heating water indoors is linked to Cook without power, not described.
 - Protocols: Choking, infant; Choking, adult and child; Severe vomiting or diarrhea; Dehydration: linked; labels equal their titles.
+
+### Food pack batch C fix round 1 (2026-11-19), from task-5-review.md
+
+Re-opened or newly opened by the writer with built-in search and fetch (titles checked): USDA FSIS, Jerky and Food Safety (no date
+shown), https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/meat-fish/jerky; NCHFP, Herbs (So Easy to Preserve,
+6th ed. 2014), https://nchfp.uga.edu/how/dry/recipes/herbs; Penn State Extension, Let's Preserve: Drying Herbs (Zepp, Hirneisen,
+LaBorde; updated July 31, 2023), https://extension.psu.edu/lets-preserve-drying-herbs; CDC-IFQ (relactation, heat source, cooler
+answer); FDA-HIF (water amounts, higher-risk babies, sanitizing); CDC-AVL (mercury); CDC-CH (fruit and vegetable and candy items).
+UConn Extension Cold Storage was found by search only (deferred). Draft removed from all three topics.
+
+- Critical 1 (meat drying): FSIS "The U.S. Department of Agriculture (USDA) Meat and Poultry Hotline's current recommendation for
+  making jerky safely is to" / "heat meat to 160°F and poultry to 165°F before the dehydrating process."; "But most dehydrator
+  instructions do not include this step, and a dehydrator may not reach temperatures high enough" / "to heat meat to 160°F or 165°F.";
+  "Sun drying is not recommended for making meat jerky due to a lack of a steady heat source and the potential for" / "contamination
+  from animals, insects, dust and bacteria." NCHFP-CSS s.5.4.6 (Game) "Several outbreaks of E. coli O157:H7 have occurred in venison jerky" (confirmed by
+  the writer's re-fetch). Celsius 71.1 and 73.9 as USDA's chart
+  in Cook without power. Wild game 165°F: Field dressing game, linked. NCHFP's meat line ("dry ... indoors using controlled conditions
+  of an oven or food dehydrator") removed. Summary and Do first 4 changed the same way.
+- Important 1 (outdoor fruit): requirements only, from NCHFP-SUN (85ºF minimum; humidity below 60 percent; several days; "Screens need
+  to be safe for contact with food."; "Avoid screens made from 'hardware cloth.'"; "Also avoid copper and aluminum screening."; "two
+  screens are best"; "Cheesecloth could also be used to cover the food.") and PSU-DRY (insect-egg treatment of dried fruit, as the
+  reviewer quoted: "Heat dried fruit in the oven at 160°F (71°C) for 30 minutes or chill in the freezer at 0°F or below for 48 hours";
+  the topic gives no figure for it). No step order is given; the section ends "This page gives no method for drying fruit or
+  vegetables". NCHFP's vegetable line given as "low in sugar and acid" / "This increases the risks for food spoilage."
+- Herbs (controller): NCHFP Herbs ("Sun drying is not recommended because the herbs can lose flavor and color."; "just before the
+  flowers first open"; "Gather the herbs in the early morning after the dew has evaporated"; "They should not lie in the sun or
+  unattended after harvesting."; "Rinse herbs in cool water and gently shake to remove excess moisture."; "Discard all bruised, soiled
+  or imperfect leaves and stems."; "The more sturdy herbs such as rosemary, sage, thyme, summer savory and parsley" / "are the easiest to
+  dry without a dehydrator."; "Tie them into small bundles and hang them to air dry."; "Basil, oregano, tarragon, lemon balm and the
+  mints have a high moisture content and will mold if not dried quickly."; "Try hanging the tender-leaf herbs or those with seeds inside
+  paper bags to dry."; "Tear or punch holes in the sides of the bag."; "Suspend a small bunch (large amounts will mold) of herbs in a bag
+  and close the top with a rubber band."; "Place where air currents will circulate through the bag."; "When the leaves are crispy dry
+  and crumple easily between the fingers"; "Place herbs in airtight containers and store in a cool, dry, dark area"); PSU Drying Herbs
+  ("For air-drying to be successful, humidity must be low and good air circulation must be available."; "Start with clean countertops
+  and utensils."; "Wash hands with soap and warm water."; "Inspect plants, especially seeds, for insects."; "Then gently pat dry with a
+  paper towel."; "Remove as much moisture as possible."; "hung in a dry area with good air circulation"; "If you use a rubber band to tie
+  them, it will tighten as the stems dry and stems will not fall out of the cluster."; "Hang herbs away from the sink, stove, or
+  dishwasher where there is a lot of moisture."; "Keep dust off herbs by covering them with a paper bag punched with holes."; "Make sure
+  herbs are completely dry to prevent mold growth during storage."; "Herbs that have been air-dried and seeds need to be treated to
+  destroy any insects or insect eggs by heating the herbs or seeds at 160°F (71°C) for 30 minutes" / "or freezing at 0°F (-17°C) or
+  lower at least 48 hours."; "(The heat method will reduce the flavor and is not suitable for seeds that you want for planting.)";
+  "Store in a cool, dry, dark place such as cupboards or drawers away from stoves and sinks."; "Don't set them near the stove top or on
+  a windowsill."; "Most dried herbs keep well for up to a year."). Conflict: NCHFP has no insect step; Penn State's is used (D149).
+  NCHFP's dehydrator, oven-light and microwave methods are not given (power).
+- Important 2: CDC-IFQ relactation lines quoted in the Breastfeeding paragraph ("You may be able to relactate or re-establish your milk
+  production by pumping, hand expressing, and/or" / "nursing directly at the breast often."; "Relactation depends on many different
+  factors, and regular help by a lactation support provider is important."; "must be carefully monitored"; "Breast milk substitutes
+  (formula and donor milk) should be continued as needed to make sure that infants continue" / "to receive enough nutrition if milk
+  supply is not (yet) adequate."). "When formula runs out" now says relactation is not a quick answer. D143 corrected.
+- Important 3: fallout pointer in Do first 2 and mixing step 3, and a link block after the mixing list (Water and food after fallout:
+  "Boiling tap water does not remove radioactive material (CDC)"; CDC-CLN "It cannot be made safe by boiling or adding bleach.").
+- Important 4: FDA-HIF higher-risk list (two months or younger, weakened immune system, premature, ill or receiving medical treatment;
+  summarised by the fetch, wording "having medical treatment" the app's) and "Sanitize the feeding items before first use and once daily
+  by:" (verbatim, first fetch). The more cautious union is used; recorded in D141.
+- Important 5: CDC-CH "Uncooked dried vegetables or fruit, such as raisins." and "Round or hard candy, jelly beans, caramels, gum drops,
+  or gummy candies." restored. The record's earlier "every item kept" was wrong for these two.
+- Important 6: CDC-IFQ names flu, COVID-19, diarrhea and mastitis; "vomiting" removed; the page says no opened source covers it (D142).
+- Important 7: search re-measured; ruling 13 rewritten.
+- Important 8: D141 rewritten (Medical professional; CDC's soak verbatim; CDC-IFQ "A heat source may not be available to safely sanitize
+  the bottles, which can increase the possibility of your baby" / "becoming sick."). Topic sentence quotes it and points to disposable
+  cups (CDC-PIF, CDC-FYC). "this app does not give it" removed.
+- Minor 1: FDA-HIF "Formula with too much water will not provide enough nutrition." cited (FDA).
+- Minor 2: CDC-IFQ's "completely thawed ... use it within the next day or throw it away" is in its answer "I brought a cooler. How can I
+  store my milk?" (milk on arrival); the topic attributes it to CDC as before; "completely" in the refreeze line reconciles CDC-BMS's
+  "Never refreeze breast milk after it has thawed." with CDC-IFQ's ice-crystals line (ruling 8).
+- Minor 3: CDC-AVL "Avoid feeding fish high in mercury to young children. These fish include:" "King mackerel." "Marlin." "Orange
+  roughy." "Shark." "Swordfish." "Tilefish (from the Gulf of Mexico)." "Tuna (bigeye)." added.
+- Minor 4: Dehydration protocol quoted as it stands: "Babies: keep breastfeeding (WHO)."
+- Minor 5: kitchen flood and fire line matches Is it still good? ("Pans, dishes, utensils and counters that flood water touched (USDA)";
+  "Pots and pans that fire-fighting chemicals touched") and links it.
+- Minor 6: "no method" sentences now name fruit and vegetables; herbs are taught.
+- Minor 7: ruling 16 cites spec 10 call 3 for the labelled canning caution.
+- Minor 8: kitchen summary "Keeping food clean with little water"; preserving summary names curing and smoking (salting is in its
+  section heading and text; kept out of the summary for "salt", ruling 13).
+- Minor 9: "jerky" now finds Preserving food (keyword); "baby" unchanged (no food page in the first eight; left for the search task).
+- Minor 10: not fixed; see ruling 13.

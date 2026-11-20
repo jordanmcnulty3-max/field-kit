@@ -941,6 +941,12 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    does not offer look as a test. Today: the table and a thermometer only; nothing for people without one. Say if the group wants
    CDC's fish exception shown; ask a medical professional whether anything else is safe to say without a thermometer. (Keep a
    food thermometer in the kit.)
+   **Whole-pack read (land pack, v7.7), game and fish.** Cook without power is not reworded. For game, Field dressing game now says no
+   source opened gives a sign to go by: Missouri Department of Conservation ("color is not a good indicator of doneness") and South
+   Dakota State University Extension (juices running clear are not reliable; a thermometer is "the only reliable way"). It adds, labelled
+   as this app's caution: "with no thermometer, cut game into small pieces and boil it, or boil it in a stew, until every piece is cooked
+   through; never eat game rare." NYS DOH's wild game page gives only the 165°F figure. Ask a medical professional whether that caution is
+   right, or whether the page should say nothing beyond "keep a thermometer". Fish: see 211.
 127. **Dry ice (surv-food-power-out).** CDC and New York State Department of Health suggest dry or block ice for a long outage.
    USDA: 50 pounds holds an 18-cubic-foot full freezer for 2 days; Ready.gov: 25 pounds keeps a 10-cubic-foot freezer below
    freezing for 3 to 4 days. No handling source could be opened. Today: dry ice is not mentioned; block ice, homemade ice and
@@ -1227,6 +1233,8 @@ docs/v7.7-rulings.md ("Batch A1").
    disinfects knives, skinning boards and equipment "with a bleach solution of 1 part bleach in 9 parts water". Under the pack's bleach
    rule a special-purpose mix must be named in Clean and disinfect; this one is not, so the page links Clean and disinfect instead.
    Say if it should be added as a named special-purpose mix.
+   **Whole-pack read:** Clean and disinfect had nothing on knives, so Trapping's line now says to wash knives and tools with soap and
+   water and sanitize them as in Butchering deer and small game, "Knives and keeping the work clean", and links that page.
 188. **Furbearer meat: 165°F, not "until the juices run clear" (surv-land-trapping).** The NYS DEC trapper manual (p. 21): "Cook
    furbearer meat thoroughly until the juices run clear." The page uses Field dressing game's 165°F rule for all wild game instead and
    does not give the juices test. Nothing to decide unless you want the manual's words shown too.
@@ -1317,6 +1325,12 @@ Food from the land pack (v7.7), batch A2 (field dressing, butchering, keeping ga
    "don't take the tongue from a deer"; heart and liver are given with their preparation, the NYS DOH risk sentence beside them, and
    165°F. Cost if wrong: food thrown away (tongue), or organ meat eaten with a risk NYS DOH names. Medical professional / Jordan: say if
    heart and liver should also be left in New York deer.
+   **Changed in the whole-pack read.** The page said NYS DOH's risk sentence ("cooking does not remove it") and then "cook heart and liver
+   to 165°F", which read as a contradiction. Butchering (the owner of organs) now decides, by the cautious option: "This app's caution, as
+   for the tongue: in normal times, eat a deer's heart and liver only if the deer has tested negative for chronic wasting disease; with no
+   test, leave them." Field dressing game's step and the kit's bag note now point there instead of saying "keep". NYS DOH's page (revised
+   November 2025) also says "there is currently no evidence that CWD in animals is linked to disease in people"; that line is not on the
+   app's pages. Cost if wrong: a deer's heart and liver are left in a long emergency. Say if you want them kept.
 165. **Stock from bones and rendering fat (surv-land-butchering).** New Mexico State University (1994) saws the backbone into stock;
    NYS DOH says avoid cutting through the spinal cord and Cornell Wildlife Health Lab says avoid sawing into bone. No source opened says
    how to make stock from other deer bones or render deer fat. Today: no backbone stock; other stock and fat rendering left out, said on
@@ -1392,6 +1406,9 @@ Food from the land pack (v7.7), batch B (hub, hunting deer and big game, small g
    the general rule, 4 inches for activities on foot, stay off at 2 inches or less. DEC's trapper manual: three inches suggested minimum
    for one person, four better. Today: the hub gives DEC's page and says the app goes by 4 inches on foot. The fishing topic (another
    writer) may give the same rule; the two must agree. Cost if wrong: safe ice passed up between 3 and 4 inches.
+   **Whole-pack read:** the hub no longer gives its own figures; it quotes Fishing for food's ice warning word for word (4 inches clear,
+   8 inches white, stay off at 2 inches or less, 6 inches for several people) and links it. Nothing to decide unless you want the hub's
+   own wording back.
 176. **Shotgun range for birds (surv-land-small-game).** New Jersey Fish and Wildlife: most shotguns are not effective past 40 yards.
    Missouri Department of Conservation: all shots under 45 yards. Today: about 40 yards, Missouri's figure named. Cost if wrong: a few
    longer shots passed up.
@@ -1423,9 +1440,52 @@ Food from the land pack (v7.7), home, links and search after the content: number
    (naming CDC's bottle soak and the clean-up mix for a suspect can or jar). Naming NYS DOH's 1:1 knife and tool soak there would be a
    second edit, so the soak is named only where it is used: Butchering deer and small game, labelled for that one use and "never for
    drinking water", with a link to Clean and disinfect. Say if the sentence in Clean and disinfect should be extended to name it.
+   **Settled in the whole-pack read:** the sentence in Clean and disinfect now names it as a third special-purpose mix, "NYS Department of
+   Health's soak for knives and tools after butchering a deer, in Butchering deer and small game", still one sentence. See also 209.
 208. **Some medical searches show a land page above a protocol that matched only in its text.** For example "foot" (Trapping third;
    Frostbite drops to sixth), "broken arm" (Field dressing game and the land hub second and third), "allergic reaction" (the hub third,
    for its insect allergy line), "white skin" (Field dressing game fifth). In each the first result is unchanged and the protocol
    that drops matched the word only in its text, not by its title or a keyword; the pages match through their summaries, first steps or
    headings, which were not reworded for a search position. Every case driven by a new keyword was fixed by removing it (the list is in
    docs/v7.7-rulings.md). Say if any of these should be fixed by rewording the land pages' summaries.
+
+Food from the land pack (v7.7), whole-pack read fixes: numbers 209 to 214.
+
+209. **The 1:1 bleach mix on counters after butchering (surv-land-butchering, surv-clean-and-disinfect).** NYS Department of Health
+   (Harvesting, Preparing, and Eating Wild Game, revised November 2025), under Chronic Wasting Disease: soak cleaned knives and tools for
+   one hour in bleach "mixed with an equal amount of water", air dry, rinse, and "Wipe down cleaned counters and other surfaces with the
+   bleach solution and allow them to air dry"; its skull-cap line also cleans "work surfaces with bleach 1:1 solution". Clean and
+   disinfect (the owner of household mixes; CDC and NYS DOH's boil-water FAQ) gives counters where food is made the food mix, 1
+   tablespoon per gallon. Today: the 1:1 soak is for knives and tools only and the page says "never put it on counters (they get the food
+   mix in Clean and disinfect)". Cost if wrong: counters after a deer get a weaker mix than NYS DOH gives for the chronic wasting disease
+   prion; a 1:1 mix left to dry on a counter where food is then made is the risk the other way. Say if you want NYS DOH's counter step
+   back, and how food is made on that counter afterwards.
+210. **A deer that could not be chilled in time (surv-field-dressing-game, surv-land-big-game).** Ohio State University Extension: "During
+   warm hunting seasons (over 40 F), meat will need to be chilled within three to four hours of the kill." Utah State University
+   Extension: refrigerate the skinned carcass "usually within 3 to 4 hours if the air temperature is above 45oF". Montana State University
+   Extension: meat at 40°F or below "within 24 hours", and to a cooler the day of the kill in warm weather. North Carolina Wildlife
+   Resources Commission: above 40°F, once skinned, butcher at once or cut into sections in a cooler or refrigerator. No source opened says
+   how long meat stays safe with no cold, or whether a deer found the next day is food. Today, labelled as this app's cautions: "meat you
+   can't chill within 3 to 4 hours of the kill, cook within that time or don't eat it", and a deer that lay more than 3 to 4 hours in air
+   above 40°F before it was chilled (found the next morning after a mild night, or after the long wait for a gut shot) is not eaten. Cost
+   if wrong: in warm weather a whole deer may be thrown away that could have been eaten. Say if the group wants a different line, for
+   example going by smell and the organ signs.
+211. **Fish with no thermometer, against Cook without power (surv-land-fish-cleaning, surv-food-cooking-no-power).** Cook without power
+   (checked) says "The only way to tell if food is cooked enough to kill germs is a food thermometer" (CDC). FDA (Selecting and Serving
+   Fresh and Frozen Seafood Safely): "If you don't have a food thermometer, there are other ways to determine whether seafood is done";
+   fish: the flesh "separates easily with a fork". Today: the fish page gives FDA's words, attributed; Cook without power is not reworded.
+   Say whether Cook without power should name FDA's fish sign as the one exception (that would be a change to a checked page).
+212. **The jerky method is a blend of two NCHFP documents (surv-land-keeping-meat).** The "Backed by a food-safety agency" jerky method
+   follows NCHFP's jerky page (So Easy to Preserve) for its steps, but heats wild game to 170°F from NCHFP's curing and smoking literature
+   review (section 6.4) instead of the jerky page's 160°F, and makes the jerky page's 30-day freezing of game optional ("do it, but don't
+   count on it"). No single agency page gives this exact method, and the page's "eaten as it is" end step rests on that blend. Today: shown
+   as it is, with the blend explained in step 5. Say if you accept it; if not, either the end step becomes "cook to 165°F" like every other
+   method, or the method follows NCHFP's jerky page exactly, including the freezing.
+213. **No page gives the signs of the illnesses game can carry (gap).** The pack names trichinellosis, tularemia and toxoplasmosis (Field
+   dressing game, Trapping) but no page says what they look like or what to do when someone falls ill after eating game; Food poisoning
+   and botulism covers food poisoning and botulism only. Not researched in this release. Say if you want it researched for a later one
+   (it would touch an Emergency protocol or a medical topic: medical professional).
+214. **The second-search speed test sits at the edge of its 10 ms limit (tests/test_search.py).** `test_first_open_is_fast_with_sixty_protocols`
+   checks that a second search over sixty fixture protocols takes under 10 ms. Run alone 30 times on this branch: see docs/v7.7-rulings.md,
+   "Whole-pack read: fixes", for the count and times. The limit was not changed. Say whether a failure of this test alone should block a
+   release, or whether the limit should be measured on the phone instead.

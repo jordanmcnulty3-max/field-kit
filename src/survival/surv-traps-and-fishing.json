@@ -44,6 +44,9 @@
           ]
         },
         {
+          "warn": "Low-head dams: a low wall built across the whole width of a river or stream (National Weather Service). The churning water below one can pull a person under and hold them there, and it is dangerous for swimming, boating and fishing: keep out of it (Indiana Department of Homeland Security). Someone caught in it: don’t go in after them; throw a rope, a ring buoy or a jug on a rope from the bank. More than a quarter of the people who die at these dams are the rescuers (Indiana Department of Homeland Security)."
+        },
+        {
           "fig": "land-fishing",
           "cap": "Four of the places in rivers and streams: the hole below a dam or waterfall, the outside of a bend where the fast water carries food, the quiet pocket behind a rock, and the seam where two currents meet (NYS DEC). Undercut banks, eddies and drop-offs are not drawn."
         },
@@ -243,6 +246,14 @@
     {
       "name": "New York Sea Grant (Ken Gall), Handling Your Catch (undated)",
       "used": "Get the fish on ice as soon as it is caught"
+    },
+    {
+      "name": "Indiana Department of Homeland Security, Get Prepared: Low-Head Dams (web page)",
+      "used": "Recirculating forces below a low-head dam pull and trap people underwater; the churning action is dangerous for swimming, boating and fishing; rescue from shore with a ring buoy, cushion or jug on a rope, never by going in; more than 25 percent of dam-related deaths are rescuers"
+    },
+    {
+      "name": "National Weather Service (Indianapolis office), Avoid the Drowning Machine: Low Head Dam Awareness Month, quoting the American Society of Civil Engineers",
+      "used": "A low-head dam is a manufactured structure built in a river or stream channel, extending fully across the banks"
     }
   ],
   "reviewed": "2026-11-19"

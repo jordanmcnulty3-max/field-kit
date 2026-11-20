@@ -16,12 +16,12 @@
     {
       "id": "hatchet-saw",
       "text": "A small hatchet or saw",
-      "note": "For splitting the pelvis or breastbone of a large animal."
+      "note": "Cut joints with a knife where you can, and avoid sawing into bone: see Butchering deer and small game. Never cut meat with a blade you used on bone."
     },
     {
       "id": "gloves",
       "text": "Disposable rubber, nitrile or latex gloves",
-      "note": "Always with rabbits, hares and rodents, and if your hands have cuts or sores."
+      "note": "Always; above all with rabbits, hares and rodents, and if your hands have cuts or sores."
     },
     {
       "id": "cloths",
@@ -39,7 +39,7 @@
     {
       "id": "bags",
       "text": "Sealable plastic bags",
-      "note": "For the heart and liver, and for the guts to go in the trash."
+      "note": "For the guts to go in the trash, and for the heart and liver when Butchering deer and small game says to keep them."
     },
     {
       "id": "game-bags",
@@ -127,7 +127,7 @@
     },
     {
       "id": "ruler",
-      "text": "A ruler, to check fish against the legal size"
+      "text": "A ruler, to check fish against the legal size in normal times"
     },
     {
       "id": "ice-picks",
@@ -153,6 +153,11 @@
     {
       "id": "trap-gloves",
       "text": "Gloves for setting traps, long rubber gloves for water sets, and a heavy pair for handling animals"
+    },
+    {
+      "id": "trap-safety",
+      "text": "Setting tongs, a safety gripper and a rope with a loop in one end, whenever you use large body-gripping traps",
+      "note": "How to use the rope to free yourself is in Trapping."
     },
     {
       "id": "stakes-wire",
@@ -184,6 +189,11 @@
       "text": "Airtight bags or wrap, and a marker to label and date meat"
     },
     {
+      "id": "bleach",
+      "text": "Plain, unscented household bleach",
+      "note": "For the knife and tool soak in Butchering deer and small game, and the mixes in Clean and disinfect."
+    },
+    {
       "id": "thermometer",
       "text": "A food thermometer, and a thermometer for the cooler or the place meat hangs",
       "note": "Wild game is cooked to 165°F (74°C)."
@@ -201,7 +211,7 @@
     },
     {
       "name": "Cornell Cooperative Extension, NYS 4-H Shooting Sports and Cornell University Department of Natural Resources, Wild Harvest Table Guides to Deer Hunting and Preparation and to Hunting Fowl and Other Small Game (November 2015)",
-      "used": "A sharp knife, plastic gloves, sanitizing wipes, rope, rubber bands or string, a saw for the pelvis or breastbone of large animals; clean cloths or paper towels, a cooler of ice; ice packs, milk jugs of ice or bags of snow in the cavity; gloves with rabbits"
+      "used": "A sharp knife, plastic gloves, sanitizing wipes, rope, rubber bands or string, a saw (its pelvis and breastbone use not given: Butchering deer and small game avoids sawing into bone); clean cloths or paper towels, a cooler of ice; ice packs, milk jugs of ice or bags of snow in the cavity; gloves with rabbits"
     },
     {
       "name": "Indiana DNR, Deer Hunting Check List",
@@ -229,7 +239,7 @@
     },
     {
       "name": "NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping (student manual, 4th edition, 2016), chapters 5 and 6",
-      "used": "Pack basket, buckets; traps; gloves, long rubber gloves, a heavy pair for handling animals; stakes; wire or cable; pliers and cable cutters; digging tool or trowel; dirt sifter; kneeling pad; extra trap tags; catchpole; hip boots or waders; inflatable PFD; ice safety picks; waterproof matches and fire starters"
+      "used": "Pack basket, buckets; traps; gloves, long rubber gloves, a heavy pair for handling animals; stakes; wire or cable; pliers and cable cutters; digging tool or trowel; dirt sifter; kneeling pad; extra trap tags; catchpole; hip boots or waders; inflatable PFD; ice safety picks; waterproof matches and fire starters; setting tongs, a rope with a loop in the end and a safety gripper with large body-gripping traps"
     },
     {
       "name": "New York Trapper course (hunter-ed.com), Equipment for Water Trapping",
@@ -240,8 +250,8 @@
       "used": "A life jacket for each person on board, worn"
     },
     {
-      "name": "Field dressing game, Butchering deer and small game, Preserving game meat, New York rules for hunting, fishing and trapping (other topics in this app)",
-      "used": "Game only, not kitchen knives; gloves with rabbits and rodents and with cuts or sores; game bags, cheesecloth, cotton bags or pillow cases (North Dakota State University Extension, Kentucky Afield, as given there); boning knife, meat saw, gambrel or stick, table, airtight bags or wrap, labels (as given there); food thermometer and a thermometer on the ice (as given there); food-grade salt without additives (National Center for Home Food Preservation, as given there); 165°F for wild game; legal traps, orange and trap marking by name"
+      "name": "Field dressing game, Butchering deer and small game, Preserving game meat, Trapping, Clean and disinfect, New York rules for hunting, fishing and trapping (other topics in this app)",
+      "used": "Game only, not kitchen knives; gloves always, above all with rabbits and rodents and with cuts or sores; joints cut with a knife, no sawing into bone where you can, never the bone blade on meat (Cornell Wildlife Health Lab, as given there); heart and liver kept only as Butchering says; bleach for the knife and tool soak and the household mixes; game bags, cheesecloth, cotton bags or pillow cases (North Dakota State University Extension, Kentucky Afield, as given there); boning knife, meat saw, gambrel or stick, table, airtight bags or wrap, labels (as given there); food thermometer and a thermometer on the ice (as given there); food-grade salt without additives (National Center for Home Food Preservation, as given there); 165°F for wild game; legal traps, orange and trap marking by name"
     }
   ],
   "reviewed": "2026-11-19"

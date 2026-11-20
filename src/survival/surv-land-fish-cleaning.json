@@ -129,7 +129,7 @@
         },
         {
           "list": [
-            "Most seafood should reach 145°F (63°C) inside (FDA). No thermometer: FDA’s sign for fish is flesh that separates easily with a fork.",
+            "Most seafood should reach 145°F (63°C) inside (FDA). No thermometer: FDA says, “If you don’t have a food thermometer, there are other ways to determine whether seafood is done.” For fish, its sign is flesh that “separates easily with a fork” (FDA).",
             "Cook all freshwater fish, to kill parasites (US Army).",
             "New York Sea Grant gives 140°F (60°C) for one minute; this app goes by FDA’s higher 145°F (63°C).",
             "Wash your hands for at least 20 seconds after handling raw fish, and clean cutting boards and knives before they touch cooked or ready-to-eat food (FDA)."
@@ -226,7 +226,7 @@
               [
                 "Oswego River, Varick Dam to the upper dam (Lock 2)",
                 "Every other fish",
-                "As the first table (state health advice). This app’s caution: don’t eat",
+                "State advice: statewide table. This app’s caution: don’t eat",
                 "Don’t eat"
               ],
               [
@@ -418,7 +418,7 @@
               [
                 "Mud Creek (to Sauquoit Creek); Sauquoit Creek, Old Silk Mill Dam to the Mohawk River",
                 "Every other fish",
-                "As the first table (state health advice). This app’s caution: don’t eat",
+                "State advice: statewide table. This app’s caution: don’t eat",
                 "Don’t eat"
               ]
             ]
@@ -461,7 +461,7 @@
     },
     {
       "name": "US FDA, Selecting and Serving Fresh and Frozen Seafood Safely (content current as of March 5, 2024)",
-      "used": "40°F or below and use within 2 days, otherwise wrap and freeze; thaw in the fridge; 145°F; flesh separates easily with a fork; smells of seafood gone bad; hand washing and boards"
+      "used": "40°F or below and use within 2 days, otherwise wrap and freeze; thaw in the fridge; 145°F; with no food thermometer, other ways to tell; fish flesh separates easily with a fork; smells of seafood gone bad; hand washing and boards"
     },
     {
       "name": "US Army ATP 3-50.21, Survival (September 2018), chapter 4",

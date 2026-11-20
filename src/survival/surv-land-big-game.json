@@ -213,8 +213,13 @@
         {
           "list": [
             "Massachusetts hunter education waits 30 minutes after a firearm shot and 1 hour after an arrow, and longer if you are unsure of the shot; Maine hunter education says half an hour to an hour. New Jersey Fish and Wildlife waits 1 hour before following any ordinary hit. This app goes by at least 1 hour.",
-            "A gut-shot deer may go into a swamp, creek or pond to cool down: check the water nearby (New Jersey Fish and Wildlife)."
+            "A gut-shot deer may go into a swamp, creek or pond to cool down: check the water nearby (New Jersey Fish and Wildlife).",
+            "In air above 40°F (4°C), a long wait can take you past the time a deer’s meat has to be chilled: a gut-shot deer left overnight in mild air is not eaten, by this app’s caution in Field dressing game, “Cooling the carcass”."
           ]
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
         }
       ]
     },
@@ -230,8 +235,12 @@
             "Wounded deer often take the easiest way, downhill and toward water (Massachusetts hunter education, Maine hunter education).",
             "If you lose the trail, go back to the last sign and search outward in widening circles (Massachusetts hunter education, New Jersey Fish and Wildlife). Be ready for a follow-up shot (North Carolina Wildlife Resources Commission).",
             "If you jump the deer from its bed, leave quietly so you don’t push it further (Massachusetts hunter education).",
-            "Stop hunting and search for any animal you wounded (Maine hunter education). Darkness or weather can stop you: the flagging lets you pick the trail up again the next day (Maine hunter education)."
+            "Stop hunting and search for any animal you wounded (Maine hunter education). Darkness or weather can stop you: the flagging lets you pick the trail up again the next day (Maine hunter education). Whether a deer you find the next day is still food is in Field dressing game, “Cooling the carcass”."
           ]
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
         }
       ]
     },
@@ -243,9 +252,9 @@
             "Watch it from a distance for breathing (New Jersey Fish and Wildlife).",
             "Approach from behind its head and stay away from its feet and antlers (Missouri Department of Conservation, Massachusetts hunter education).",
             "The eyes of a dead deer are normally open (Massachusetts hunter education). Touch the corner of the eye with a long stick: if it blinks, it is still alive (New Jersey Fish and Wildlife, Missouri Department of Conservation).",
-            "Still alive: finish it with a shot into the heart and lungs, only if that shot is legal (New York rules) and safe (New Jersey Fish and Wildlife, Massachusetts hunter education).",
+            "Still alive: finish it with a shot into the heart and lungs, only if that shot is safe and, in normal times, legal (New York rules) (New Jersey Fish and Wildlife, Massachusetts hunter education).",
             "Put your firearm or bow down only when you are certain the deer is dead (Missouri Department of Conservation).",
-            "Tag it if the law requires (New York rules), then field dress it as soon as you can (Massachusetts hunter education)."
+            "In normal times, tag it if the law requires (New York rules). Then field dress it as soon as you can (Massachusetts hunter education)."
           ]
         },
         {
@@ -355,7 +364,7 @@
           ]
         },
         {
-          "warn": "Bear meat can carry trichinella worms. How to cook it, and why bear is never made into jerky, are in Field dressing game and Preserving game meat."
+          "warn": "Bear meat can carry trichinella worms. How to cook it is in Field dressing game; why bear is never made into jerky is in Preserving game meat."
         },
         {
           "link": "s:surv-field-dressing-game",

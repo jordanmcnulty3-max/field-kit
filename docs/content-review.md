@@ -7787,3 +7787,99 @@ only: "Reach up into the chest and cut the windpipe" (bold) / "and gullet as far
 ribs." (step 6, word for word). The drawn elements listed above for "Panel 6 (second)" (the hand and arm, the knife there, and the
 windpipe and gullet) are no longer drawn. Nothing is drawn on the neck in any panel. The step-6 opening now starts at panel 4's
 breastbone point (x 164, against the cut's end at x 170). The figure is 1000 units tall, down from 1190.
+
+## Food from the land (v7.7): whole-pack read fixes (2026-11-20)
+
+Every changed fact below was re-opened in this round (built-in search, then a fetch of a URL the search returned).
+
+- **Bleach: knife and tool soak and counters (surv-land-butchering, surv-clean-and-disinfect, surv-land-trapping).** Re-opened: NYS
+  Department of Health, Harvesting, Preparing, and Eating Wild Game (revised November 2025),
+  https://healthweb-back.health.ny.gov/environmental/outdoors/venison_game/advice_on_eating_game.htm. Under "Chronic Wasting Disease":
+  "Soak cleaned knives and tools for one hour in a fresh solution of household chlorine bleach (unscented)" "mixed with an equal amount
+  of water (for example, 1-quart bleach with 1-quart water)," "air dry, then rinse with clean water." and "Wipe down cleaned counters and
+  other surfaces with the bleach solution and allow them to air dry." Under "Hand and Tool Hygiene": "Rinse tools and work surfaces with
+  either boiling water (212°F) or sanitize with a bleach solution or chemical sanitizer." Grinding: clean and disinfect all equipment
+  afterward. Changed: the soak is now labelled "for knives and tools only" and its counter step is not given ("never put it on counters
+  (they get the food mix in Clean and disinfect)"), by the controller's ruling that Clean and disinfect owns household mixes (conflict
+  logged, D209). "Sanitize" now says which: counters, surfaces and tools from any animal but a deer get the food mix in Clean and
+  disinfect; knives and tools used on a deer also get the soak. Grinder: "sanitize it as under “Knives and keeping the work clean”".
+  Clean and disinfect's one sentence names the soak as a third special-purpose mix. Trapping's knife line sends the reader to Butchering.
+- **Carcass cooling and time limits (surv-field-dressing-game owner; surv-land-keeping-meat, surv-land-big-game link).** Re-opened:
+  Ohio State University Extension, Care and Handling of Venison (HYG-5367), https://ohioline.osu.edu/factsheet/hyg-5367: "During warm
+  hunting seasons (over 40 F), meat will need to be chilled within three to four hours of the kill." Utah State University Extension,
+  How to Preserve Venison, https://extension.usu.edu/preserve-the-harvest/research/venison: "Refrigerate the skinned carcass as soon as
+  possible for best quality" "(usually within 3 to 4 hours if the air temperature is above 45oF)." Montana State University Extension,
+  Field Care of Harvested Big Game, https://animalrangeextension.montana.edu/wildlife/hunting/field-care-of-big-game.html: "Make sure the
+  internal temperature of the meat is cooled to 40 degrees F or below within 24 hours." and "The carcass should be taken to a cooler the
+  day of the kill if the weather is warm." North Carolina Wildlife Resources Commission, After the Hunt,
+  https://ncwildlife.gov/hunting/after-hunt: "Once the skin is removed, and the temperature above 40 degrees Fahrenheit, the deer should be
+  butchered immediately" "or cut into sections and placed in a cooler or large refrigerator overnight to prevent spoilage." NYS DOH (as
+  above): keep game cold until butchered, with ice or below 45°F, including while large game hangs for several days. Also opened, not
+  used (no time limit or no-ice answer): Wisconsin DATCP, Caring for Venison in Warm Weather (DFS-MB-023, 2013),
+  https://datcp.wi.gov/Documents/VenisonWarmWeather.pdf (carcass surface to 40°F within 24 hours, over 40°F consider ice: agrees);
+  Mississippi State Department of Health, Hunters: Safe Handling for Venison, https://msdh.ms.gov/Page/43,1454,377.html (over 41°F,
+  consider ice; no hours); Ask Extension #160950 (Michigan, 2013), https://ask2.extension.org/kb/faq.php?id=160950 (no time limit).
+  Conflict: Ohio State's 40°F against Utah State's 45°F for the 3 to 4 hours; Ohio State (more cautious) is the instruction, Utah named
+  beside it. Montana's 24 hours is given for colder air only. Looked for and not found: how long meat stays safe with no cold, and whether
+  a deer found the next day is food. Both labelled as this app's cautions (D210). NMSU's "watch it closely above 45°F" removed from both
+  pages (superseded by the stricter line; it read against "below 45°F"). The 2-hour and 1-hour rule is quoted word for word from Is it
+  still good? ("never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).").
+- **Jerky needs a working oven or dehydrator; drying outdoors (surv-land-keeping-meat).** Re-opened: National Center for Home Food
+  Preservation, Sun Drying (So Easy to Preserve, 6th ed., 2014), https://nchfp.uga.edu/how/dry/drying-general/sun-drying: "Vegetables
+  (with the exception of vine dried beans) and meats are not recommended for out-of-doors drying." and "It is best to dry meats and
+  vegetables indoors using controlled conditions of an oven or food dehydrator." Cook without power's sentence "Never the oven: most can’t
+  be lit by hand in an outage (GE, Whirlpool, KitchenAid), and Wolf says not to try." is quoted word for word (grep: present in
+  surv-food-cooking-no-power, "A gas or propane range", step 2). The summary and Do first now say the agency jerky method needs a working
+  dehydrator or an oven that holds 140°F (60°C), none without power, smoke outdoors only, and the agencies advise against drying meat in
+  the sun or open air. Smoking now links Cook without power, "Cooking outdoors", for where to put a fire.
+- **No thermometer (surv-field-dressing-game, surv-land-fish-cleaning).** Re-opened: US FDA, Selecting and Serving Fresh and Frozen
+  Seafood Safely (content current as of 03/05/2024), https://www.fda.gov/food/resourcesforyou/consumers/ucm077331.htm: "If you don't have
+  a food thermometer, there are other ways to determine whether seafood is done." Fish: "The flesh is clear and separates easily with a
+  fork" (the page carries "separates easily with a fork"; "clear" left out, as before, since CDC's wording is "opaque"). Missouri
+  Department of Conservation, Bear: Properly Cook All Game, https://mdc.mo.gov/hunting-trapping/species/bear/bear-properly-cook-all-game:
+  "A meat thermometer should be used because color is not a good indicator of doneness." South Dakota State University Extension, Is it
+  Done Yet? (updated October 31, 2023), https://extension.sdstate.edu/it-done-yet-how-determine-meat-cooked-properly: colour change and
+  juices running clear are not reliable; "A properly calibrated meat thermometer is the only reliable way". NYS DOH's page gives only
+  165°F and mentions no thermometer. Looked for and not found: any agency or extension sign for game with no thermometer. The boil-it-small
+  line is this app's caution (D126 addition). The fish/thermometer conflict with Cook without power is logged (D211).
+- **Heart and liver (surv-land-butchering).** NYS DOH (as above): "Other organs (liver, kidney, heart and salivary glands) may also pose a
+  risk of infection." and cooking does not remove CWD risk; also "However, there is currently no evidence that CWD in animals is linked to
+  disease in people." (not added to the page). Changed: the cautious option is labelled as this app's caution (D164).
+- **An animal already caught or shot that looks sick (surv-field-dressing-game, new section).** Opened: Westchester County Department of
+  Health (New York), Disposing of a dead animal, https://health.westchestercountyny.gov/rabies/disposing-of-a-dead-animal: "Line a garbage
+  can with two heavy duty trash bags. Wearing gloves and using a shovel, place the carcass in the bags." "Tie off each bag"; "It must be
+  buried three feet deep and 250 feet from a water source such as a lake, stream or well." CDC, Safety Guidelines: Disposing of Dead
+  Animals After a Disaster (last reviewed August 26, 2026),
+  https://www.cdc.gov/natural-disasters/safety/safety-guidelines-disposing-dead-animals-after-a-disaster.html: gloves, protective
+  eyewear, cover open wounds; a shovel into a plastic bag; wash your hands. NYS DOH (as above): don't handle or eat game that appears sick.
+  The trapper manual's rabies sentence and NYS Wildlife Health Program's "don't feed carcass parts to pets or leave them for scavengers"
+  are as recorded for those pages. 3 feet = 0.9 m; 250 feet = 76 m. Not found: burning a carcass (not given).
+- **Spring cattail on the hub (surv-land-start).** Quotes Wild plants word for word: "Yellow iris can be confused with cattail, especially
+  when it is not in bloom: their leaves are very similar (Government of Alberta)." No new fact.
+- **Raspberries and blackberries (surv-food-and-wild-plants).** Re-opened: Illinois Extension, Brambles: Pesky Garden Weed or Delicious
+  Summer Treat (Nick Frillman, July 2, 2021),
+  https://extension.illinois.edu/blogs/flowers-fruits-and-frass/2021-07-02-brambles-pesky-garden-weed-or-delicious-summer-treat: "There
+  are no poisonous look-alikes to worry about." Removed: "A wild berry that looks like a store-bought raspberry or blackberry is safe to
+  eat" (the source's "if you see anything in the woods that looks like store-bought raspberry or blackberry, it's safe to eat!"), since it
+  lets looks stand in for identification. Added: "Learn them in person all the same, like every plant on this page."
+- **No gambrel? on ice (surv-land-butchering).** Re-opened: Kentucky Afield, Cleaning your harvest without gutting it (Fall 2016),
+  https://fw.ky.gov/deerfieldquartering/Documents/FieldQuarteringYourDeer.pdf: "If you're aging the meat in a cooler, place a thermometer
+  atop the ice to ensure it stays below 40 degrees." Changed "keep the ice below 40°F" to "get the meat on ice in a cooler, with a
+  thermometer on top of the ice to check the cooler stays below 40°F (4°C)".
+- **Low-head dams (surv-traps-and-fishing, "Where the fish are").** Opened: Indiana Department of Homeland Security, Get Prepared:
+  Low-Head Dams, https://secure.in.gov/dhs/get-prepared/general-safety/low-head-dam-safety: low-head dams "create strong turbulent and
+  recirculating forces that can pull and trap individuals underwater"; "The churning action below low-head dams is dangerous for swimming,
+  boating, fishing and other water recreational activities."; do not jump in, shore-assisted rescue, a ring buoy, boat cushion or milk jug
+  on a rope; "more than 25 percent of dam-related deaths are the rescuers themselves." National Weather Service (Indianapolis), Avoid the
+  Drowning Machine: Low Head Dam Awareness Month, https://www.weather.gov/ind/LowHeadDamAwarenessMonth, quoting ASCE: "A low head dam is a
+  manufactured structure, built in a river or stream channel, extending fully across the banks." No NYS DEC or Canal Corporation page on
+  low-head dams came up in the search (a DEC dam safety page did, on dam owners' duties; not used). Indiana DHS's 911 line and its "tuck
+  your chin" self-rescue steps are not carried (no dial; the warning keeps people out of the water). The figure caption is unchanged; the
+  warning sits directly above the figure.
+- **Text-only changes with no new fact:** the kit (saw note follows Butchering; gloves always; the bag note; "in normal times" on the
+  ruler; setting tongs, safety gripper and looped rope from the trapper manual as Trapping gives them; plain unscented bleach for the
+  soak and the household mixes); Butchering's summary adds pancreas (as its never-eat box and NYS DOH give it); the hub quotes Fishing for
+  food's ice warning word for word; the hub's insect line drops the isopod aside; "in normal times" on tagging and legal-shot lines; Big
+  game's bear line points jerky to Preserving game meat; Field dressing's birds link New York rules; the babies page gains one link block
+  to Gutting, filleting and eating fish; Trapping's lead-in moved above the steps; the two Central New York fish cells now read "State
+  advice: statewide table. This app’s caution: don’t eat".

@@ -2,6 +2,7 @@
 import glob
 import json
 import os
+import re
 import subprocess
 
 import pytest
@@ -962,11 +963,158 @@ def test_the_cdc_bottle_soak_is_on_the_babies_page_for_that_use_only_and_clean_a
     assert 'Soak for 2 minutes (CDC).' in texts
     assert 'CDC’s bleach soak is for baby bottles and feeding items only. Never use it for drinking water.' in texts
     assert not any('is not on this page' in x for x in texts)
-    special = [x for x in _texts(topics['surv-clean-and-disinfect']) if 'two more special-purpose bleach mixes' in x]
+    special = [x for x in _texts(topics['surv-clean-and-disinfect']) if 'three more special-purpose bleach mixes' in x]
     assert len(special) == 1 and 'Feeding babies and young children' in special[0] and 'Food poisoning and botulism' in special[0]
+    assert 'Butchering deer and small game' in special[0]   # the knife and tool soak (whole-pack read, C1)
     assert 'never for drinking water' in special[0]
     assert '5 parts clean water' in ' '.join(_texts(topics['surv-food-poisoning']))   # the clean-up mix is where the sentence says
 
+
+def test_the_one_to_one_knife_soak_is_for_knives_and_tools_only_and_trapping_sends_knives_to_it():
+    # whole-pack read C1: Clean and disinfect owns the household mixes, so counters get its food mix; NYS DOH's 1:1 soak stays on
+    # Butchering for knives and tools only, and Trapping's "clean and disinfect knives and tools" opens the page that has it
+    topics = _shipped('survival')
+    land = [x for tid, t in topics.items() if t.get('category') == 'land' for x in _texts(t)]
+    soak = [x for x in land if 'equal amount of water' in x]
+    assert len(soak) == 1, soak
+    assert 'for knives and tools only' in soak[0] and 'never put it on counters' in soak[0], soak[0]
+    assert 'never use it for drinking water' in soak[0]
+    for x in land:
+        low = x.lower()
+        assert not ('counter' in low and ('same mix' in low or 'equal amount' in low) and 'never put it on counters' not in low), x
+    butcher = ' '.join(_texts(topics['surv-land-butchering']))
+    assert 'To sanitize counters and other surfaces, and the tools you used on any animal other than a deer, use the food mix in Clean and disinfect.' in butcher
+    assert 's:surv-clean-and-disinfect' in _links(topics['surv-land-butchering'])
+    trap = topics['surv-land-trapping']
+    sec = next(s for s in trap['sections'] if s['h'] == 'Rabies, disease and handling')
+    item = next(x for b in sec['blocks'] for x in b.get('list', []) if x.startswith('Clean and disinfect knives and tools'))
+    assert 'Butchering deer and small game' in item, item
+    assert 's:surv-land-butchering' in [b['link'] for b in sec['blocks'] if 'link' in b]
+
+def _all_texts(t):
+    # every user-visible string of a topic: the summary, Do first, blocks and table cells
+    out = [t.get('summary', '')] + list(t.get('doFirst', []))
+    for sec in t['sections']:
+        out.append(sec['h'])
+        for b in sec['blocks']:
+            for k in ('p', 'warn', 'cap'):
+                if k in b:
+                    out.append(b[k])
+            for k in ('list', 'steps'):
+                out.extend(b.get(k, []))
+            if 'table' in b:
+                out.extend(b['table']['head'])
+                out.extend(c for row in b['table']['rows'] for c in row)
+    return out
+
+
+def test_warm_meat_time_limits_each_have_one_owner():
+    # whole-pack read C2: Is it still good? owns the 2-hour and 1-hour rule for perishable food (quoted, never restated); Field dressing
+    # game owns how fast a carcass is chilled (3 to 4 hours in air above 40°F, 24 hours otherwise) and NYS DOH's 45°F sentence; Preserving
+    # game meat quotes or links it
+    topics = _shipped('survival')
+    still = 'never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).'
+    assert still in ' '.join(_all_texts(topics['surv-food-still-good']))
+    land = {tid: t for tid, t in topics.items() if t.get('category') == 'land'}
+    for tid, t in land.items():
+        for x in _all_texts(t):
+            rest = x.replace(still, '')
+            if 'perishable' in rest.lower():   # a perishable-food time limit only inside the quoted rule
+                assert not re.search(r'\bhours?\b', rest), (tid, x)
+            if '3 to 4 hours' in x or 'three to four hours' in x:
+                assert tid == 'surv-field-dressing-game', (tid, x)
+            n45 = len(re.findall(r'(?<!\d)45°F', x))   # not 145°F
+            if n45 and tid != 'surv-field-dressing-game':
+                assert n45 == x.count('“Keep game cool, with ice or below 45°F (7°C) (the meat), until it is butchered'), (tid, x)
+    fd = _all_texts(land['surv-field-dressing-game'])
+    assert any(still in x for x in fd)
+    cooling = next(s for s in land['surv-field-dressing-game']['sections'] if s['h'] == 'Cooling the carcass')
+    text = ' '.join(_all_texts({'sections': [cooling]}))
+    for must in ('within 3 to 4 hours of the kill (Ohio State University Extension)', 'No ice, snow or fridge, and the air above 40°F',
+                 'Found later.', 'This app’s caution: don’t eat it.'):
+        assert must in text, must
+    assert 's:surv-food-still-good' in _links({'sections': [cooling]})
+    keep = land['surv-land-keeping-meat']
+    assert 'Hanging a carcass below' in keep['doFirst'][0] and '45°F' not in keep['doFirst'][0]
+    hanging = next(s for s in keep['sections'] if s['h'] == 'Hanging a carcass')
+    assert 's:surv-field-dressing-game' in _links({'sections': [hanging]})
+    for tid in ('surv-land-big-game', 'surv-land-keeping-meat'):
+        assert 's:surv-field-dressing-game' in _links(land[tid]), tid
+
+def test_preserving_game_meat_says_the_agency_jerky_needs_a_working_oven_or_dehydrator_and_never_sends_drying_outdoors():
+    # whole-pack read C3 and C4: the summary and Do first name the dehydrator or oven and the power outage; "outdoors only" is for smoke
+    # and fire, never for drying; the jerky method quotes Cook without power on the gas oven, word for word, and links it
+    topics = _shipped('survival')
+    keep = topics['surv-land-keeping-meat']
+    box = ' '.join(keep['doFirst'])
+    for where in (keep['summary'], box):
+        assert 'dehydrator' in where and 'oven that holds 140°F (60°C)' in where and 'without power' in where or 'no power' in where, where
+        assert 'the agencies advise against drying meat in the sun or open air' in where.lower(), where
+    for x in _all_texts(keep):
+        low = x.lower()
+        assert 'dry meat outdoors' not in low and 'smoke and dry meat' not in low and 'dry meat only outdoors' not in low, x
+    oven = 'Never the oven: most can’t be lit by hand in an outage (GE, Whirlpool, KitchenAid), and Wolf says not to try.'
+    assert oven in ' '.join(_texts(topics['surv-food-cooking-no-power']))
+    jerky = next(sec for sec in keep['sections'] if sec['h'] == 'Jerky')
+    jtext = ' '.join(_all_texts({'sections': [jerky]}))
+    assert oven in jtext and 'this method can’t be done' in jtext
+    assert 's:surv-food-cooking-no-power' in _links({'sections': [jerky]})
+
+def test_whole_pack_read_fixes_keep_one_answer_per_question():
+    # whole-pack read, Important and Minor findings and carried items: each page that used to contradict another now links or quotes it
+    topics = _shipped('survival')
+    t = lambda tid: ' '.join(_all_texts(topics[tid]))
+    fd, butcher, hub = t('surv-field-dressing-game'), t('surv-land-butchering'), t('surv-land-start')
+    # I1: game with no thermometer gets a plain answer; the fish page gives FDA's own words for fish
+    assert 'No thermometer: no source opened gives a sign you can go by for game.' in fd
+    assert 'well past the point they look done; never eat game rare.' in fd   # re-check R3
+    assert 'Cooling the carcass, and what to do with no ice, snow or fridge or with a deer found later' in t('surv-land-keeping-meat')   # R1
+    assert 'a gut-shot deer left overnight in mild air is not eaten' in t('surv-land-big-game')   # R5
+    assert '“If you don’t have a food thermometer, there are other ways to determine whether seafood is done.”' in t('surv-land-fish-cleaning')
+    # I2: one decision on a deer's heart and liver, on Butchering; Field dressing and the kit point to it
+    assert ('eat a deer’s heart and liver only if the deer has tested negative for chronic wasting disease (testing is possible only in '
+            'normal times); with no test, leave them.') in butcher and 'in normal times, eat a deer' not in butcher
+    assert 'Keep the heart and liver in a clean bag if they look healthy' not in fd and 'Heart, liver and tongue' in fd
+    kit = {i['id']: i for i in _shipped('checklists')['land-kit']['items']}
+    assert 'when Butchering deer and small game says to keep them' in kit['bags']['note']
+    # I3: an animal already caught or shot that looks sick has steps on the owner page, and Trapping and Small game link to them
+    assert any(sec['h'] == 'Already caught or shot, and it looks sick' for sec in topics['surv-field-dressing-game']['sections'])
+    for tid in ('surv-land-trapping', 'surv-land-small-game'):
+        assert '“Already caught or shot, and it looks sick”' in t(tid), tid
+    assert 'In normal times, report sick rabbits' in t('surv-land-small-game')
+    # I4: the hub's spring cattail line carries the iris warning from Wild plants, word for word
+    iris = 'Yellow iris can be confused with cattail, especially when it is not in bloom: their leaves are very similar (Government of Alberta).'
+    assert iris in t('surv-food-and-wild-plants') and '“' + iris + '”' in hub
+    # I5: no plant is eaten on looks alone
+    assert 'looks like a store-bought' not in t('surv-food-and-wild-plants')
+    # I6: the kit's saw note follows Butchering, not the pelvis and breastbone
+    assert 'pelvis' not in kit['hatchet-saw']['note'] and 'Butchering deer and small game' in kit['hatchet-saw']['note']
+    # I7: Field dressing's birds link the migratory bird rule
+    birds = next(sec for sec in topics['surv-field-dressing-game']['sections'] if sec['h'] == 'Birds')
+    assert 's:surv-land-ny-rules' in _links({'sections': [birds]})
+    # I8: the babies page links the fish advice
+    assert 's:surv-land-fish-cleaning' in _links(topics['surv-food-babies-children'])
+    # I10: bear jerky is sent to the page that has it
+    assert 'why bear is never made into jerky is in Preserving game meat' in t('surv-land-big-game')
+    assert 'bear' in t('surv-land-keeping-meat').lower() and 'jerky' not in fd.lower()
+    # M1: Butchering's summary names every part its never-eat box names
+    assert 'spleen, pancreas, tonsils' in topics['surv-land-butchering']['summary']
+    # M2: the hub quotes Fishing for food's ice warning word for word
+    ice = next(b['warn'] for sec in topics['surv-traps-and-fishing']['sections'] if sec['h'] == 'Ice fishing' for b in sec['blocks'] if 'warn' in b)
+    quoted = ice.split(' Slush ice')[0]
+    assert '“' + quoted + '”' in hub and '3 to 4 inches' not in hub
+    # M3: gloves always, above all with rabbits, hares and rodents
+    assert kit['gloves']['note'].startswith('Always;')
+    # carried 1: the low-head dam warning sits with the line that sends people below a dam
+    where = next(sec for sec in topics['surv-traps-and-fishing']['sections'] if sec['h'] == 'Where the fish are')
+    assert any('Low-head dams' in b.get('warn', '') for b in where['blocks'])
+    # carried 4: Trapping's lead-in sits directly above the manual's steps
+    kill = next(sec for sec in topics['surv-land-trapping']['sections'] if sec['h'] == 'Killing a trapped animal')
+    i = next(n for n, b in enumerate(kill['blocks']) if 'steps' in b)
+    assert kill['blocks'][i - 1] == {'p': 'The steps, from the NYS DEC trapper manual, in its order:'}
+    assert 'From the NYS DEC trapper manual, in its order.' not in t('surv-land-trapping')
+    # carried 5: no cell says both "eat by the statewide table" and "don't eat" in the old words
+    assert 'As the first table' not in t('surv-land-fish-cleaning')
 
 def test_fishing_fish_cleaning_and_trapping_split_the_old_traps_topic():
     # land pack batch C (spec 4 rows 2, 5, 7; spec 10 calls 4, 7, 9): Fishing for food keeps the id and is fishing only; the fish
@@ -1056,8 +1204,9 @@ LAND_BASE = '0244043'   # the search changes, before any land content: what the 
 def _base_topic(name):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     r = subprocess.run(['git', 'show', f'{LAND_BASE}:src/survival/{name}.json'], cwd=root, capture_output=True, text=True, encoding='utf-8')
-    if r.returncode != 0:
-        pytest.skip(f'commit {LAND_BASE} is not in this clone, so the older pages cannot be compared with it')
+    if r.returncode != 0:   # a clone without the base commit must not pass these checks by skipping them
+        pytest.fail(f'commit {LAND_BASE} is not in this clone, so the older pages cannot be compared with it: '
+                    f'fetch the full history (git fetch --unshallow) and run again. git said: {r.stderr.strip()}')
     return json.loads(r.stdout)
 
 

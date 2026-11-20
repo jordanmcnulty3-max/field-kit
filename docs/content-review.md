@@ -6324,3 +6324,285 @@ Changes:
 - M3: hub "Keep it cold longer" link to Preserving food removed.
 - Keywords: "doubt throw" dropped; "defrost", "food gone bad" (Is it still good?) and "sterilize" (babies) added; "baby food" fails the
   keyword rule and is not added (docs/v7.5-rulings.md, whole-pack fixes 8).
+
+## v7.7 Food from the land, batch A2: Field dressing game (rewrite), Butchering deer and small game, Keeping game meat, Preserving food pointers (2026-11-19)
+
+Writer A2. Every page below was found with the built-in search and opened with the built-in fetch in this session; the title and
+publisher were checked on each. Quotes are short (the fetch tool returns quotes of 125 characters or fewer).
+
+### Sources opened (name, URL)
+
+- NYS DOH, Harvesting, Preparing, and Eating Wild Game: https://healthweb-back.health.ny.gov/environmental/outdoors/venison_game/advice_on_eating_game.htm
+- NYS DOH, Tularemia (fact sheet): https://healthweb-back.health.ny.gov/diseases/communicable/tularemia/fact_sheet.htm
+- NYS Wildlife Health Program, Tularemia fact sheet (Apr 2021): https://cwhl.vet.cornell.edu/system/files/public/cwhl-fact-sheetstularemia.pdf
+- NYS Wildlife Health Program, Highly Pathogenic Avian Influenza: What Hunters Need to Know (Sep 2022): https://extapps.dec.ny.gov/docs/wildlife_pdf/hpaihunters.pdf
+- Cornell Wildlife Health Lab, Tips for Safe Handling and Processing Venison (19 Nov 2018): https://cwhl.vet.cornell.edu/article/tips-safe-handling-and-processing-venison
+- Cornell Cooperative Extension / NYS 4-H Shooting Sports, Wild Harvest Table Guide to Deer Hunting and Preparation (11/2015): https://blogs.cornell.edu/wildharvestdev2/files//2016/09/Rifle_Venison_4HSS_WHT-13cyq46.pdf
+- Cornell Cooperative Extension / NYS 4-H, Wild Harvest Table Guide to Preserving Meat (11/2015): https://blogs.cornell.edu/wildharvestdev2/files//2016/09/Muzzleloader_Living-History_4HSS_WHT-27rc14j.pdf (opened, not used: see conflicts)
+- NYS DEC press release, 6 Nov 2026, CWD found in Livingston County wild deer: https://dec.ny.gov/news/press-releases/2026/11/dec-announces-chronic-wasting-disease-found-in-livingston-county-wild-deer
+- CDC, About Chronic Wasting Disease: https://www.cdc.gov/chronic-wasting/about
+- CDC, How to Prevent Trichinellosis: https://www.cdc.gov/trichinellosis/prevention/index.html
+- CDC, Preventing Tularemia: https://www.cdc.gov/tularemia/prevention
+- FoodSafety.gov, Cook to a Safe Minimum Internal Temperature (print page): https://www.foodsafety.gov/print/pdf/node/10
+- FoodSafety.gov, Cold Food Storage Chart: https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts
+- Minnesota Department of Health, Refrigerator and Freezer Storage Chart: https://www.health.mn.gov/people/foodsafety/store/cold.html
+- Michigan DNR, Common Deer Afflictions: https://michigan.gov/dnr/managing-resources/wildlife/wildlife-disease/diseases-by-species/common-deer-afflictions
+- Penn State Extension, Proper Care and Handling of Venison from Field to Table (updated 18 Nov 2020): https://extension.psu.edu/proper-care-and-handling-of-venison-from-field-to-table
+- Penn State Extension, Proper Care and Handling of Game Birds from Field to Table (updated 19 Nov 2020): https://extension.psu.edu/proper-care-and-handling-of-game-birds-from-field-to-table
+- Penn State Extension, How Do You Break Down Your Venison Carcass? (video page, no date): https://extension.psu.edu/how-do-you-break-down-your-venison-carcass
+- New Mexico State University, Processing Your Deer at Home (Circular 508, Jan 1994): https://pubs.nmsu.edu/_circulars/CR508/
+- New Mexico State University, Field Care of Harvested Big Game (CR 507, rev. Sep 2012): https://pubs.nmsu.edu/_circulars/CR507/
+- Montana State University Extension, Field Care of Harvested Big Game: https://animalrangeextension.montana.edu/wildlife/hunting/field-care-of-big-game.html
+- North Dakota State University Extension, FN536 pocket guide, deer and elk (reviewed Apr 2024): https://www.ndsu.edu/agriculture/sites/default/files/2024-04/fn536.pdf
+- North Dakota State University Extension, FN155 Wild Side of the Menu No. 3, Preservation of Game Meats and Fish (reviewed Aug 2022): https://www.ag.ndsu.edu:8000/agriculture/sites/default/files/2022-10/fn155.pdf
+- Kentucky Afield (Fall 2016), Cleaning your harvest without gutting it (fw.ky.gov; the text does not name the agency): https://fw.ky.gov/deerfieldquartering/Documents/FieldQuarteringYourDeer.pdf
+- Indiana DNR Fish and Wildlife, Deer Processing (no date): https://in.gov/dnr/fish-and-wildlife/files/fw-deer-processing.pdf
+- Indiana State Board of Animal Health, Deer Processing (MC-1/9.03): https://www.in.gov/dnr/fish-and-wildlife/files/dressing.pdf
+- Massachusetts, Deer Processing Workshop instructor notes (mass.gov; no agency or date shown): https://www.mass.gov/doc/deer-processing-workshop/download
+- New Mexico Department of Game and Fish magazine, Don't overlook those organ meats (John Martsh; no date): https://magazine.wildlife.state.nm.us/?p=4253
+- Ohio DNR, Field Dressing Your Deer (Pub. 111, Sep06): https://dam.assets.ohio.gov/image/upload/ohiodnr.gov/documents/wildlife/hunting-trapping/field%20dressing%20deer%20pub111.pdf
+- Clemson Cooperative Extension, Safe Handling of Wild Game Birds (HGIC 3515, rev. 10 Jan 2024): https://hgic.clemson.edu/factsheet/safe-handling-of-wild-game-birds/
+- Missouri Department of Conservation, Rabbit: Safety and Health: https://mdc.mo.gov/hunting-trapping/species/rabbit/rabbit-safety-health ; How to Clean a Rabbit: https://mdc.mo.gov/hunting-trapping/species/rabbit/how-clean-rabbit ; How to Clean a Squirrel: https://mdc.mo.gov/hunting-trapping/species/squirrel/how-clean-squirrel
+- Oregon Department of Fish and Wildlife, How to hunt rabbit: https://myodfw.com/articles/how-hunt-rabbit
+- Utah State University Extension, How to Preserve Venison (no date): https://extension.usu.edu/preserve-the-harvest/research/venison.php
+- National Center for Home Food Preservation, Jerky (So Easy to Preserve, 6th ed., 2014): https://nchfp.uga.edu/how/dry/recipes/jerky
+- National Center for Home Food Preservation, Sun Drying: https://nchfp.uga.edu/how/dry/drying-general/sun-drying
+- National Center for Home Food Preservation, Cure Smoke Review, section 6 (Critical Preservation Points): https://nchfp.uga.edu/publications/nchfp-publications/literature-reviews/cure-smoke-review-preservation/
+- National Center for Home Food Preservation, Cure Smoke Review, section 5 (Safety): https://nchfp.uga.edu/publications/nchfp-publications/literature-reviews/cure-smoke-review-safety/
+- University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed Oct 2021): https://www.uaf.edu/ces/publications/database/food/jerky.php
+- US Army FM 21-76, Survival Manual (SJSU-hosted copy; the file name says 2006; no date in the text read): https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf (pages 97 to 99)
+
+Failed or empty: NDSU FN155 landing page (https://www.ag.ndsu.edu/publications/food-nutrition/wild-side-of-the-menu-no-3-preservation-of-game-meats-and-fish/
+redirected; the redirect target was refused by the permission system; the PDF above was used instead). USDA FSIS Game from Farm to Table
+and Freezing and Food Safety (UNT web archive copies returned only the viewer wrapper, no text; nothing used). Michigan State University
+Extension E657 venison bulletin (bot protection; nothing used). No current FSIS wild game page was found by search.
+
+Not re-opened in this session (checked v7 text kept word for word, sources as listed on the page): CDC MMWR 2024;73(40) and Missouri
+Department of Conservation "Bear: Properly Cook All Game" (the trichinella warn, frozen), NYS DEC "Care of Your Catch" (the fish item, kept
+until the fish cleaning topic takes it), Oregon/Missouri rabbit and squirrel items (re-opened; unchanged).
+
+### Field dressing game (rewrite; id and title kept)
+
+Kept word for word (checked v7 text): the "Before you start" warn, CWD and rabies paragraphs; the eight deer steps except that four steps were
+inserted before the last; the rabbit, squirrel, tularemia and fish items and both figures with their captions; "Cook it through" p, warn and
+lead p. Re-checked against the re-opened sources: CDC CWD ("Do not shoot, handle or eat animals that look sick or act strangely"; "Do not
+touch or eat meat from animals found dead"; "latex or rubber gloves"; "knives or other tools you use in your kitchen"; "Strongly consider
+having the deer or elk tested"); DEC release (Town of Sparta, Livingston County; "first occurrence of CWD in a wild deer in New York State
+since 2005"; 2005 Oneida County; high-risk parts brain, spinal cord, spleen, eyes); Ohio DNR steps 1 to 12; Indiana BOAH ("Be sure it is
+dead before you get within range of its feet or antlers"; slight slope; two fingers, edge outward; trim ingesta/feces; 40°F or less);
+Montana ("cooled to 40 degrees F or below within 24 hours"; skin "if the temperature is expected to stay above freezing the first night").
+FM 21-76 p. 97: "The liver's surface should be smooth and wet and its color deep red or purple."
+
+New text, each with its source sentence:
+- Do first 1 to 5: Ohio DNR (eye touch), Indiana BOAH (feet and antlers; "as soon as possible"), NYS DOH ("Wear nitrile, rubber or latex
+  gloves"), Penn State venison (paunch and intestines carry foodborne-illness bacteria), Montana (40°F within 24 hours, prop, shade), NYS
+  DOH and CDC (sick, strange, found dead).
+- Summary: the same rules; "inside" for internal meat temperature (Montana: "internal temperature of the meat").
+- Before you start list: NYS DOH "especially important to wear gloves when your hands have cuts or open sores"; "Do not eat, drink or
+  smoke while cleaning harvested game" (also HPAI sheet). Penn State venison tool list: "sharp knife, small hatchet, whetstone or steel,
+  rope or cord, six-inch rubber bands, clean cloths or paper towels, sealable bags, a cooler with ice or snow, disposable gloves, and
+  clean drinking water" (hatchet and rubber bands not carried). Knife cleaned "with clean water, premoistened wipes, or alcohol swabs".
+- Inserted step 8: Penn State venison "If the organs smell offensive or exhibit greenish discharge, black blood ... do not consume meat
+  from this carcass". Step 9: Montana "Wipe out all blood or other loose material inside the body cavity"; NDSU FN536 "Use little water",
+  "Do not use grass or snow to wipe out the carcass". Step 10: CWHL "Put internal organs in a bag for trash disposal"; HPAI sheet "Do
+  not feed carcass parts to pets or leave behind for other wild animals to scavenge".
+- Cooling the carcass: Penn State "quickly cool the carcass to 35-40°F (3–4°C)" (the page shows 3 to 4°C; the app gives 2 to 4°C, the
+  conversion of 35 to 40°F); NYS DOH "Game should be kept cool (with ice or refrigerated below 45℉ or 7℃) until butchered (including big
+  game hanging for several days)"; Penn State shade and air, ice or snow in sealed plastic bags; Ohio DNR bags of ice; NMSU CR507 warm
+  weather "elevate the animal above the ground", hang head down, prop open; quarter and ice; "Watch the carcass carefully if temperatures
+  increase above 45 °F during the day or if the carcass does not remain shaded at all times"; NDSU FN536 warm-weather skinning with
+  cheesecloth, "In cool weather (28 to 35 F), wrap the carcass or quarters in a sheet and hang in a ventilated shed", don't let it freeze,
+  "Freezing may toughen the meat"; Montana cheesecloth or light cotton bags; USU "usually within 3 to 4 hours if the air temperature is
+  above 45oF"; Penn State and NDSU, not on the hood, not in the trunk while warm. Conversions (app's own): 28°F = -2°C, 35°F = 2°C,
+  45°F = 7°C.
+- Small game: ODFW "Put your rabbit in a cooler or a game meat bag to keep it cool until you get home and refrigerate or freeze it."
+- Birds: HPAI sheet ("Field dress game outdoors or in a well-ventilated area"; masks, gloves, eye protection; seal unwanted organs in
+  plastic bags; wash hands); Clemson ("Remove the entrails and crop as soon as possible, because the grain in the crop may ferment"; clean
+  cloth, "Do not use grass or snow"; "plucked or skinned in the field"; birds individually in plastic bags on ice in hot weather; "Do not
+  pile warm birds"; not in the trunk); Penn State birds (don't cut crop, gizzard, intestines; 35 to 40°F).
+- Signs an animal is not safe to eat: NYS DOH "Only harvest animals that look and act healthy; animals that are dead or not behaving
+  normally may carry dangerous diseases"; HPAI "many birds may show no symptoms before death". CWD signs: NYS DOH "poor body condition",
+  "abnormal behavior such as staggering or very poor posture"; NDSU FN536 "weight loss, tremors, drooling, and abnormal head posture".
+  Rabies: NYS DOH species list, "only found occasionally in New York State deer", "seem to lose their normal fear of humans; salivate
+  excessively; appear to have injured hind legs; or be found lying on the ground struggling". HPAI signs: "diarrhea, discharge from the
+  nose, coughing and sneezing, and incoordination". Organs: Penn State venison (above); Cornell 4-H guide "Do not eat the meat if the
+  organs smell bad", clots or discoloration. Rabbit liver: MDC "numerous white lesions about the size of a pin head", "the rabbit should
+  be discarded and not eaten"; ODFW "Do not eat the meat". Michigan DNR: liver flukes, black lines, dark brown fluid, "render it
+  inedible"; cysticercosis, "the remainder of the liver is edible"; fibromas "gray, white, or black wart-like growths", edible; abscesses
+  "contain green paste-like material", can be removed.
+- Diseases you can't see: CDC trichinellosis ("bear, wild boar, wildcat, fox, wolf, seal, or walrus"; "Curing (salting), drying,
+  smoking, or microwaving meat alone does not consistently kill the worms"); NYS DOH tularemia ("rabbits, hares, and rodents"; skin
+  contact; "handling or eating insufficiently cooked rabbit meat"; gloves "especially rabbits, muskrats"; cook thoroughly); CWHL
+  tularemia (cottontails, snowshoe hares, beavers, muskrats); CDC tularemia (gloves "especially rabbits, muskrats, prairie dogs, and other
+  rodents"; "Cook game meat thoroughly"); NYS DOH toxoplasmosis ("undercooked, contaminated meat such as venison"), E. coli
+  (intestinal contents; cooking), CWD ("Cooking does not remove the risk of CWD").
+- Links: Keeping game meat and Butchering deer and small game (new, this batch); Cook without power. The Food poisoning and botulism
+  link was tried and taken out (it moved "botulism" search results).
+
+Conflicts:
+- Cooking temperature: FoodSafety.gov chart gives "Rabbit and venison Wild or farm-raised 160°F (71°C)"; Penn State venison 145°F for
+  whole cuts and 160°F for ground; NDSU FN536 "at least 160 F"; New Mexico Game and Fish heart to "medium". The app's checked rule is
+  165°F for all wild game (NYS DOH "Cook all game and birds to at least 165℉ (74℃)"; HPAI sheet 165°F; MDC rabbit 165°F; D10). 165°F
+  used everywhere.
+- CWD history: NYS DOH's wild game page still says "No cases of CWD have been detected in New York State since 2005"; the DEC release of
+  6 November 2026 supersedes it. The checked sentence (DEC, 2026) kept.
+- Cooling figures: Penn State 35 to 40°F; Montana 40°F within 24 hours; NYS DOH below 45°F. All shown; none contradicts the others.
+
+### Butchering deer and small game (new)
+
+- Before you start: Indiana DNR tools ("A sharp, short knife", "A sharp fillet or boning knife", bone saw, gambrel, "A cool workspace");
+  NMSU CR508 ("a meat saw or fine-toothed carpenter's saw, a sharp narrow-bladed knife"); NYS DOH gloves, no eating/drinking/smoking,
+  "Butchering tools should never be used for any other purpose", "Keep butchering tools separate from utensils regularly used in the
+  kitchen", "Avoid handling or cutting through the skull or spinal cord"; CWHL "Take your time, do one animal at a time!", "Store each
+  deer's meat in its own labeled container", "Debone that deer! Keep contact with the brain, spinal cord, lymph nodes, and spleen to a
+  minimum", "Avoid sawing into bone where possible", trim generously near shattered bone, spine, skull; NDSU FN536 "Bone out carcasses".
+- Hanging and skinning, step order: (1) Mass notes "hanging on a gambrel by its hind legs with the head facing the ground"; NMSU CR507
+  "Hang the carcass from the hind legs for skinning"; Indiana DNR at least 8 feet off the ground (8 ft = 2.4 m). (2) NMSU CR507 cut
+  around hock and knee, down the inside of each leg. (3) Indiana DNR "Remove the front legs at the joint. Take your knife and cut a circle
+  down to the bone around the joint."; Mass split front-leg skin on the hair seam. (4) NMSU CR507 pull with both hands, cut flesh back,
+  abdomen last. (5) Mass: work down the neck; "At the base of the head, cut through the top of the spinal column with a knife or bone
+  saw" (paraphrased); NYS DOH wash if brain/spinal tissue handled. (6) Indiana DNR "Wash any hair off the meat with cold water." Gutless
+  alternative: Kentucky Afield steps 1 to 31 (on its side, hide along the spine, shoulder, hindquarter, tenderloin, backstrap, neck,
+  flip; game bags or pillow cases in the shade; thermometer on the ice "below 40 degrees").
+- Quartering order: Penn State video (shoulders, backstraps, tenderloins, hind legs) and Mass notes (shoulders "there is no joint or bone
+  structure to break through", neck, tenderloins, backstraps, hind quarters); Kentucky backstrap ½-inch cut, cross cut, tease off;
+  tenderloin "Grab the tubular muscle running along the inside of the spine"; NMSU tenderloin "near the pelvic area"; flank and rib meat
+  (Kentucky, Penn State video); Mass rib meat "If in good condition with no gut material"; hind leg: Penn State video ball joint "Stay
+  tight to the hipbones", Kentucky "sever the joint by cutting directly into it", NMSU "cut through it with a knife rather than a saw to
+  avoid bone dust and marrow"; Indiana DNR second person. Disposal: Mass "Bones, sinew, and hide: Bag for disposal"; HPAI sheet (pets).
+- Boning out the hind leg: Indiana DNR knee joint leaves the shank; femur out; "the sirloin, which is round and hugs the front of the
+  femur", top round, bottom round, eye of round; Mass "Sirloin tip (round tip, 'football roast')", waxy gland "Do not grind it"; NMSU
+  meat near the long tendon "too tough for steak"; Penn State video and NMSU natural seams, each muscle in its own connective tissue.
+- Cuts table (every cell): backstrap steaks "usually 3/4 inch thick" (NMSU), roasts and ends for stew (Penn State video); tenderloin
+  thick or thin, butterflied (NMSU); sirloin tip roast or thin steak 1/4 to 3/8 inch (NMSU), large braised roast (Mass); rounds thin
+  steaks cut just before frying or roasts (NMSU), jerky, braising (Mass; Mass also lists corning, not carried: see Keeping game meat);
+  shoulder arm roast, small thin steaks (NMSU), braised blade roast or ground (Mass), stew, grind, sausage (Penn State video; "sausage"
+  not carried, see the sausage warn); neck mincemeat, stew, grind or roast whole (NMSU), roasts (Kentucky); ribs plates for barbecue or
+  stew (NMSU), grilling or grinding (Kentucky), rib meat to the grind (Mass); brisket barbeque (Kentucky); shank trimmed for grinding
+  (NMSU); flank jerky, plate steaks, grinding (Kentucky); trimmings grind, stew, jerky (NMSU), grind (Indiana). Conversions (app's own):
+  3/4 in = 2 cm, 1/4 to 3/8 in = 6 to 10 mm. "Where it comes from" cells: Kentucky (backstrap, tenderloin, brisket, flank), Indiana
+  (sirloin, shank), NMSU and Mass (rounds, shoulder, neck, ribs); "Mincemeat" not carried.
+- Trimming: NCHFP jerky "Trim and discard all fat from meat because it becomes rancid quickly"; Indiana DNR fat "has a bitter taste";
+  NDSU FN536 "The distinctive flavor of game meats is mainly due to the fat they contain"; Indiana silver skin; Mass silver skin and
+  tendons; NYS DOH "Lymph nodes can be eliminated by boning out the meat and carefully trimming the fat and connective tissue"; CWHL lymph
+  nodes between muscles; Penn State "Remove all visible dirt, feces, hair, and bloodshot areas"; NYS DOH bruised or discolored meat, all
+  bullets and fragments, generous distance from the wound channel, "Discard meat with excessive bullet damage"; lead warn from NYS DOH
+  ("too small to detect by sight, feel, or even when eating"; "Ground meat from lead-shot game tends to contain more lead fragments than
+  whole muscle cuts"; children and people who can get pregnant). Not carried: NMSU's soak of bloodshot meat in salt water (NYS DOH says
+  discard bruised meat; the more cautious used).
+- Heart, liver, tongue: NM Game and Fish heart ("best eaten fresh. You can refrigerate it for up to a couple of days"; cold water while
+  pumping; "cut away and discard all fat, arteries, veins and blood vessels"; "Discard any parts of the heart damaged by the bullet or
+  broadhead"); liver "off colored, with cysts, or in otherwise poor condition" discard; soak 24 hours, water changed every eight hours;
+  slices ½ inch (13 mm). Michigan DNR flukes. FM 21-76 p. 98 "Cut the tongue out, skin it, boil it until tender, and eat it." NYS DOH
+  "Avoid handling the brain and spinal tissues or fluids, saliva and mouth parts", tonsils among the parts that "may have abnormal
+  infectious proteins called CWD prions", "Other organs (liver, kidney, heart and salivary glands) may also pose a risk". Tongue: app's
+  caution (D164).
+- Never eat: NYS DOH prion list (brain, spinal cord and other nervous tissue, spleen, pancreas, eyes, tonsils, lymph nodes), "Discard
+  intestines"; DEC high-risk parts; FM 21-76 p. 98 "You can also cook and eat the brain" (reported, not followed); Penn State venison
+  organs; MDC rabbit.
+- Bones and fat: NMSU CR508 backbone "sections for soup stock"; NYS DOH and CWHL as above. Looked for and not found: a source for stock
+  from other deer bones, and for rendering deer fat (D165).
+- Grinding: NMSU and Indiana (trimmings, shank, neck, flank); CWHL "remove fat and other tissues before grinding meat"; NYS DOH "If you
+  prepare your own ground meat, thoroughly clean and disinfect all equipment after use"; Penn State "Thoroughly clean and sanitize all
+  equipment, including the tabletop meat grinder"; Mass "Never put your hand near or in the grinder's throat". Looked for and not found:
+  grinding without power (Mass says only that electric grinders reduce work compared with hand grinders; no method).
+- Sausage warn: NCHFP section 5.1.1 nitrates/nitrites "inhibit Clostridium botulinum"; 6.2.3 "Mistakenly using sodium nitrite instead of
+  NaCl in typical curing recipes can lead to a lethal dose"; 5.2.4 E. coli O157:H7 "can survive the typical dry fermentation processing
+  conditions"; 6.7 "We do not recommend preparing homemade, non-fermented sausages that are not fully cooked"; CDC trichinellosis curing.
+- Small game and birds: MDC rabbit "Separate the front and hind quarters from the carcass at the 'shoulder' and 'hip' joints"; MDC
+  squirrel "Make sure the carcass is free of hair", "wash the body cavity"; Penn State birds "Separate the carcass by pulling the breast
+  apart from the neck, back, and legs", bloodshot areas, 165°F; Clemson ducks wings at the joints, head, pinfeathers, "scalding the birds
+  in hot water (145 °F)" (63°C, app's conversion), upland birds soaked "in cold water for one to two hours"; NYS DOH shot and feathers.
+- Knives and clean work: Penn State and NDSU whetstone or steel; Mass dull blade "over exertion which could lead to a potential injury",
+  wash and sharpen afterwards; NDSU and Penn State warm soapy water; CWHL "Wash knives and tools with soap and hot water between
+  animals"; NYS DOH wash, then "Rinse tools and work surfaces with either boiling water (212°F) or sanitize with a bleach solution or
+  chemical sanitizer"; NYS DOH CWD soak: "Soak cleaned knives and tools for one hour in a fresh solution of household chlorine bleach
+  (unscented) mixed with an equal amount of water (for example, 1-quart bleach with 1-quart water), air dry, then rinse with clean water";
+  "Wipe down cleaned counters and other surfaces with the bleach solution and allow them to air dry" (CWHL gives the same 50% mix). 1 quart
+  = 0.95 L (app's conversion). The never-drink and never-mix lines follow the bleach rule of the land spec (section 7) and Clean and
+  disinfect's checked warns.
+- Wrapping: Penn State meal-size portions "about one pound", wrap tightly, remove air, label and date; NMSU keep chunks whole, cut steaks
+  just before cooking. 1 lb = 0.45 kg.
+
+Conflicts: Mass removes the head through the spinal column, NYS DOH says avoid cutting through the spinal cord: both shown, NYS DOH's
+precautions added (D169). NMSU backbone stock against NYS DOH and CWHL (D165). FM 21-76 eats brain and tongue against NYS DOH (D164).
+
+### Keeping game meat (new)
+
+- Cold and time table: Minnesota DOH "deer 3 to 5 6 to 12", "rabbit 1 to 2 12", "duck, goose 1 to 2 6" (days at 40°F, months at 0°F);
+  USU "Fresh cuts: Refrigerate for 1 to 2 days" (used, shorter); FoodSafety.gov ground meats "1 to 2 days" and "3 to 4 months", soups and
+  stews with meat "3 to 4 days" and "2 to 3 months", "The guidelines for freezer storage are for quality only", "frozen foods stored
+  continuously at 0°F (-18°C) or below can be kept indefinitely"; Clemson birds "used within three days", frozen "within six months".
+  Also seen and not used in the table: Penn State 2 to 3 days fridge and 9 to 12 months frozen; NDSU FN536 2 to 3 days and "three to four
+  months in the freezer"; USU roasts frozen 1 year, ground 6 to 9 months; NDSU FN155 most wild game up to one year frozen. NDSU FN536 "Freeze
+  only the amount that will become solidly frozen within 24 hours"; Penn State "do not refreeze thawed products".
+- Hanging: NYS DOH 45°F (above); Penn State "hold the carcass at 40°F(4°C) or below for two to three days, at most"; Cornell 4-H guide
+  "Keep the deer below 40°F during aging", "hung by its hind feet with the skin on", "it is not necessary to age the meat to achieve
+  tender results"; NDSU FN536 "34 to 37 F for 10 to 14 days", "Aging is not recommended for carcasses with little or no fat covering",
+  "Two to three days is sufficient", not needed for sausage meat; NMSU CR507 "If temperatures stay at or around 32 °F, then venison can be
+  aged for as long as 10 to 12 days"; USU 34 to 36°F (not carried); Kentucky thermometer on the ice; NMSU quarter and ice.
+- Winter cold as the freezer: FM 21-76 p. 99 "In cold climates, you can freeze and keep meat indefinitely." "Freezing is not a means of
+  preparing meat." "You must still cook it before eating."; FoodSafety.gov continuously at 0°F; Preserving food's NYS DOH sentence, quoted
+  word for word; Penn State refreeze; NDSU FN536 carcass freezing toughens. Risk sentence labelled as the app's caution (D163).
+- Jerky (NCHFP jerky page): "If pork or wild game is used to make jerky, the meat should be treated to kill the trichinella parasite";
+  "freeze a portion that is 6 inches or less thick at 0ºF or below for at least 30 days"; gut contents: "It is best to avoid making jerky
+  from this meat and use it only in ways that it will be thoroughly cooked"; "Partially freeze meat to make slicing easier"; "Slice meat
+  no thicker than ¼ inch"; "Trim and discard all fat"; "Cover and refrigerate 1-2 hours or overnight"; "bring strips and marinade to a
+  boil and boil for 5 minutes before draining and drying"; "If strips are more than ¼ inch thick, the length of time may need to be
+  increased"; "check the temperature of several strips with a metal stem-type thermometer"; "dehydrator or oven preheated to 140ºF";
+  "Begin checking samples after 3 hours"; "cracks but does not break when it is bent"; "Properly dried jerky will keep at room temperature
+  two weeks in a sealed container"; "refrigerate or freeze jerky"; "glass jars or heavy plastic food storage bags"; "Raw poultry is
+  generally not recommended for use in making jerky". NCHFP review 6.4 "Wild game (bear, elk, etc.) must be treated to destroy
+  Trichinella by heating to 170°F, since some strains of Trichinella are freeze resistant (CDC 1985)"; 5.4.6 "USDA recommends attaining an
+  internal temperature of at least 170°F"; 5.4.6 "Several outbreaks of E. coli O157:H7 have occurred in venison jerky". UAF "Heat meat in
+  marinade to 160°F. Heat to boiling (212°F) for game meat."; "To be safe, do not use bear meat for jerky." Penn State jerky "one to two
+  months under refrigeration (< 40°F [4°C])". USDA dehydrator sentence quoted from Preserving food. CDC "Freezing wild game meats may not
+  effectively kill all worms". Conversions (app's own): 170°F = 77°C (76.7), 212°F = 100°C, 140°F = 60°C, 6 in = 15 cm, 1/4 in = 6 mm.
+- Smoking: NDSU FN155 smoked deer jerky ("Pump with brine (two pounds commercial saltcure mixture per gallon of water)"; crock or
+  USDA-approved plastic, "Do not use plastic containers such as garbage cans, plastic bags or supermarket ice cream buckets"; submerged;
+  "Store in cooler (38 F) for 10 days"; "Every two days, change the position of the meat"; "smoke five hours at 150 F"; "Hang to dry at
+  room temperature (about two weeks)"); NDSU hardwoods, "Never use a soft wood such as pine". FM 21-76 p. 98 ("The intent is to produce
+  smoke, not heat"; "Do not use resinous wood"; "no more than 6 centimeters thick"; "Meat smoked overnight in this manner will last about
+  1 week"; "Two days of continuous smoking will preserve the meat for 2 to 4 weeks"; "dark, curled, brittle stick and you can eat it
+  without further cooking"). NCHFP 6.3 "Smoke itself, without proper cooking, is not an effective food preservative", "Caution should be
+  used when smoking meats at temperatures in the danger zone 40-140°F for prolonged periods of time", "meats must have been salted or cured
+  first"; 6.1.3 "The danger zone for microbial growth is 40-140°F"; 6.8 storage refrigerated or frozen. CO: Carbon monoxide's summary
+  quoted word for word. Conversions: 38°F = 3°C, 150°F = 66°C, 2 lb = 0.9 kg, 1 gal = 3.8 L.
+- Sun and air drying: FM 21-76 p. 99 (strips about 6 mm, with the grain; "sunny location with good air flow"; "out of the reach of
+  animals and cover them to keep blowflies off"; "Allow the meat to dry thoroughly before eating"; "dry, crisp texture and will not feel
+  cool to the touch"). USDA sun-drying sentence quoted from Preserving food. NCHFP Sun Drying "Vegetables (with the exception of vine dried
+  beans) and meats are not recommended for out-of-doors drying."
+- Salting and brining: FM 21-76 p. 99 ("soaking it thoroughly in a saltwater solution"; "The solution must cover the meat"; "Wash off the
+  salt before cooking"; no strength or time given). NDSU FN155 corning: "3 lb salt", "10 oz sugar", "2 ounces sodium nitrate", "½ ounce
+  sodium nitrite" (amounts not carried, D166), spices, six gallons; "The ideal temperature for corning meat is about 38 F"; one third more
+  salt per 15 F above 38 F, "At 83 F" six pounds total; 15 days, stir and rotate on days 5 and 10; boil, skim, simmer "for about five hours
+  or until tender"; "cooked and consumed within one week or frozen for up to one month"; its sweet pickle cure "Add commercial cure to
+  pickle solution according to package directions" and "If temperature becomes warm and brine becomes ropy, remove meat". NCHFP 6.2.2
+  "Only food grade salt without additives, e.g., iodine"; 6.2.3 commercial mixes, lethal dose; 6.2.4 "Curing should be carried out at a
+  temperature between 35°F and 40°F", "the upper temperature is set to limit microbial growth"; 5.2.1 "C. botulinum thrives in moist foods
+  that are low in salt (less than 10%)". Conversions: 6 gal = 23 L, 3 lb = 1.4 kg, 10 oz = 280 g, 15°F difference = 8°C, 83°F = 28°C,
+  6 lb = 2.7 kg.
+- Left out: NDSU FN155 dry cure ("6 pounds salt", "3 pounds sugar", nitrate or nitrite, "at 38 F for two days per pound of leg, or
+  approximately four to six weeks") and sweet pickle cure (three days per pound at 38°F); pemmican (no source opened).
+
+Conflicts:
+- Jerky trichinella step: NCHFP's jerky page freezes wild game 30 days; Cornell 4-H preserving guide freezes game at 5°F for 20 days; UAF
+  freezes 1 to 2 months; CDC and NCHFP's own review say some strains are freeze resistant. The heat step (170°F) is the one the page
+  relies on (D162). Cornell 4-H preserving guide's 160°F after boiling not used for game (below 165°F).
+- Jerky game temperature: NCHFP review 170°F; UAF boiling (212°F); USDA 160°F (meat). The page gives the NCHFP figure as the minimum and
+  names UAF's boiling (closes D149 as logged in D162).
+- Fridge time for deer cuts: USU 1 to 2 days; Penn State and NDSU 2 to 3; Minnesota DOH 3 to 5. Shortest used (D161).
+- Hanging: NYS DOH below 45°F for several days; Penn State 40°F, 2 to 3 days at most; NDSU 10 to 14 days at 34 to 37°F; NMSU 10 to 12
+  days near 32°F. Penn State used (D160).
+
+### Preserving food (v7.5, edited)
+
+Changed only where it said the app or page gives no method for meat: summary (first two sentences), Do first 4 (first sentence), Drying
+meat list items 2 (one sentence) and 4, Salting and curing p, Smoking p; one link block "Keeping game meat" added in each of Drying meat,
+Salting and curing and Smoking; source line for other topics extended. Every agency warning kept word for word: USDA dry-heat sentence
+(summary and Do first), the USDA jerky warn, the USDA game sentence, the USDA dehydrator line, NCHFP E. coli line, NCHFP cure-below-40°F
+and nitrite sentences, NCHFP smoke sentence and storage sentence. Canning text untouched.
+
+### Cook without power (v7.5)
+
+One link block added in "Cook it through" after the quoted wild game rule: Field dressing game. No text changed.

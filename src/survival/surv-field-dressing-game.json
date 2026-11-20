@@ -7,13 +7,27 @@
     "deer",
     "game",
     "rabbit",
+    "squirrel",
+    "duck",
     "fish",
     "tularemia",
     "gutting",
+    "gut a deer",
+    "cool a deer",
     "chronic wasting disease",
-    "trichinella"
+    "cwd",
+    "rabies",
+    "trichinella",
+    "bird flu"
   ],
-  "summary": "Open the belly without cutting the stomach or intestines, cool the carcass fast, and cook all game to 165°F.",
+  "summary": "Don’t take, handle or eat an animal that looks sick, acts strangely or is found dead. Wear gloves, open the belly without cutting the stomach or intestines, and cool it to 40°F (4°C) or colder inside within 24 hours. Organs that smell bad, show greenish discharge or black blood mean you don’t eat that animal. Cook all game and birds to 165°F (74°C). Skinning and cutting up the cooled carcass are in Butchering deer and small game.",
+  "doFirst": [
+    "Make sure it is dead: from behind, at arm’s length, touch the corner of its eye with a stick. If it blinks, it is alive. Stay clear of its feet and antlers (Ohio DNR, Indiana State Board of Animal Health).",
+    "Put on rubber, nitrile or latex gloves, and field dress it as soon as possible (NYS Department of Health, Indiana State Board of Animal Health).",
+    "Don’t cut the stomach or intestines: they carry germs that cause food poisoning (Penn State Extension).",
+    "Cool it fast: prop the body open, keep it in the shade, and get it to 40°F (4°C) or colder inside within 24 hours (Montana State University Extension).",
+    "An animal that looked sick or acted strangely, or that you found dead: don’t handle it and don’t eat it (NYS Department of Health, CDC)."
+  ],
   "sections": [
     {
       "h": "Before you start",
@@ -28,13 +42,21 @@
           "p": "Rabies is occasionally found in New York deer. It spreads through nervous tissue and saliva: avoid handling an animal that may be rabid, and never eat its meat."
         },
         {
+          "list": [
+            "Wear gloves especially if your hands have cuts or open sores (NYS Department of Health).",
+            "Don’t eat, drink or smoke while you clean game (NYS Department of Health, NYS Wildlife Health Program).",
+            "Bring a sharp knife, a whetstone or steel, rope or cord, clean cloths or paper towels, sealable bags, disposable gloves, clean drinking water and a cooler with ice or snow (Penn State Extension).",
+            "Clean the knife often as you work, with clean water, wipes or alcohol swabs (Penn State Extension)."
+          ]
+        },
+        {
           "link": "p:animal-bite",
-          "label": "Bitten or scratched by an animal (rabies)"
+          "label": "Animal or human bite (and rabies risk)"
         }
       ]
     },
     {
-      "h": "Deer-sized game",
+      "h": "Deer step by step",
       "blocks": [
         {
           "steps": [
@@ -45,12 +67,45 @@
             "Cut around the anus, pull it out a few inches, and tie it off with string, with the bladder, so droppings and urine stay off the meat.",
             "Cut the diaphragm away from the ribs all the way round, taking care not to puncture the stomach. Reach up into the chest and cut the windpipe and gullet as far forward as you can. Watch for sharp broken ribs.",
             "Roll the animal onto its side and pull the organs out. Trim away and throw out any meat soiled by gut contents, droppings or urine. Keep the heart and liver in a clean bag if they look healthy: a healthy liver is smooth, wet and deep red or purple.",
+            "Smell and look at the organs as they come out. If they smell bad, or show a greenish discharge or black blood, don’t eat any meat from this animal (Penn State Extension). The other signs are under “Signs an animal is not safe to eat” below.",
+            "Wipe out blood and loose material inside the body with a clean cloth (Montana State University Extension). Use little water, and don’t wipe it out with grass or snow (North Dakota State University Extension).",
+            "Put the guts in a bag for the trash (Cornell Wildlife Health Lab), and don’t feed them to pets or leave them for other animals (NYS Wildlife Health Program).",
             "Cool the carcass fast: prop the cavity open with clean sticks and hang it in the shade. Get the meat down to 40°F or colder within 24 hours. Skin it if nights will stay above freezing."
           ]
         },
         {
           "fig": "dress-deer",
           "cap": "Seen from above with the animal on its back. The dashed line is the belly cut, from pelvis to breastbone."
+        }
+      ]
+    },
+    {
+      "h": "Cooling the carcass",
+      "blocks": [
+        {
+          "p": "Heat ruins meat. Cool the carcass quickly to 35 to 40°F (2 to 4°C) to stop germs growing (Penn State Extension), and keep game below 45°F (7°C) until it is butchered, even while a big animal hangs for several days (NYS Department of Health)."
+        },
+        {
+          "list": [
+            "Prop the body open, and keep the carcass in the shade with air moving around it (Penn State Extension, Montana State University Extension). In warm weather, get it off the ground so air reaches all of it, and hang it head down (New Mexico State University Extension).",
+            "Bags of ice, or snow sealed in plastic bags, in the body cavity help cool it (Penn State Extension, Ohio DNR).",
+            "Skin it if the temperature will stay above freezing the first night (Montana State University Extension). In warm weather, skinning speeds cooling; protect the meat from flies with cheesecloth or light cotton bags (North Dakota State University Extension, Montana State University Extension).",
+            "Another way in warm weather: cut the carcass into quarters and put them on ice (New Mexico State University Extension). Above 45°F (7°C) air temperature, Utah State University Extension says to get the carcass into a refrigerator, usually within 3 to 4 hours.",
+            "Watch the carcass closely if the day gets above 45°F (7°C) or it is ever out of the shade (New Mexico State University Extension).",
+            "In cool weather, 28 to 35°F (-2 to 2°C), wrap the carcass or quarters in a sheet and hang them in a shed with air moving through it. Don’t let the carcass freeze: freezing may toughen the meat (North Dakota State University Extension).",
+            "Don’t tie a deer across the hood or roof of a vehicle, and don’t put it in a trunk while it is still warm (Penn State Extension, North Dakota State University Extension)."
+          ]
+        },
+        {
+          "p": "How long a carcass can hang, and at what temperature, is in Keeping game meat. Skinning, quartering and cutting it up are in Butchering deer and small game."
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Keeping game meat"
+        },
+        {
+          "link": "s:surv-land-butchering",
+          "label": "Butchering deer and small game"
         }
       ]
     },
@@ -62,16 +117,60 @@
             "Rabbits: hold the back skin, cut through the skin across the back (not into the meat), and peel the hide off in both directions. Open the belly from the breastbone to the tail without cutting the organs, and pull them out.",
             "Squirrels: cut through the tailbone without cutting the hide over the rump, cut in front of each hind leg, then peel the hide toward the head and down to the back feet. Open the belly from between the hind legs to the neck and remove the organs without cutting them.",
             "Tularemia: wear gloves with rabbits and rodents. Check a rabbit’s liver: if it has many white spots the size of a pinhead, throw the whole rabbit away.",
+            "Keep small game cool in a cooler or a game bag until you get home, then refrigerate or freeze it (Oregon Department of Fish and Wildlife).",
             "Fish: make a shallow cut from the vent to the gills without cutting the guts, remove the gills and guts, and scrape out the dark red kidney along the backbone. Then scale or skin it."
           ]
         },
         {
           "fig": "dress-fish",
           "cap": "The vent is the small opening on the belly toward the tail."
+        }
+      ]
+    },
+    {
+      "h": "Birds",
+      "blocks": [
+        {
+          "steps": [
+            "Field dress birds outdoors or where air moves freely. Wear gloves, and a mask and eye protection if you have them (NYS Wildlife Health Program).",
+            "Remove the crop and guts as soon as possible: grain in the crop can ferment (Clemson Cooperative Extension). Don’t cut into the crop, gizzard or intestines (Penn State Extension).",
+            "Wipe the cavity with a clean cloth or paper towel, not grass or snow (Clemson Cooperative Extension).",
+            "Pluck or skin the bird (Clemson Cooperative Extension).",
+            "Cool it quickly to 35 to 40°F (2 to 4°C) (Penn State Extension). In hot weather, put each bird in its own plastic bag on ice; don’t pile warm birds together or carry them in a trunk (Clemson Cooperative Extension).",
+            "Seal the guts and unwanted parts in plastic bags for the trash, and wash your hands well afterwards (NYS Wildlife Health Program)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Signs an animal is not safe to eat",
+      "blocks": [
+        {
+          "p": "Take only animals that look and act healthy: animals that are dead or not behaving normally may carry dangerous diseases (NYS Department of Health). Some diseases show no sign: many birds with bird flu show none before they die (NYS Wildlife Health Program). The cooking rule below applies to every animal."
         },
         {
           "list": [
-            "Birds: remove the guts and crop soon, and pluck or skin the bird. Cool it quickly."
+            "Chronic wasting disease (deer): poor body condition or thinness, staggering or very poor posture, drooling, tremors, an odd way of holding the head (NYS Department of Health, North Dakota State University Extension). Don’t take or eat the animal.",
+            "Rabies (any mammal, especially raccoons, bats, skunks and foxes, occasionally deer): an animal that seems to have lost its fear of people, drools a lot, seems to have hurt hind legs, or lies on the ground struggling (NYS Department of Health). Don’t handle it and never eat it.",
+            "Bird flu (ducks, geese and other birds): diarrhea, discharge from the nose, coughing and sneezing, or poor coordination; many birds show no sign before they die (NYS Wildlife Health Program). Don’t handle sick birds.",
+            "Organs that smell bad, or show a greenish discharge or black blood: don’t eat any meat from that animal (Penn State Extension). Cornell Cooperative Extension adds clots or discoloration in the heart or liver.",
+            "A rabbit liver with many white spots the size of a pinhead (tularemia): throw the whole rabbit away and don’t eat it (Missouri Department of Conservation, Oregon Department of Fish and Wildlife).",
+            "A deer liver with black lines through it, sometimes with pockets of dark brown fluid (liver flukes): throw the liver away (Michigan DNR).",
+            "A deer liver with clear or bloody cysts, each with a white dot: trim off those parts; the rest of the liver is edible (Michigan DNR).",
+            "Gray, white or black wart-like growths on the skin (fibromas) stay in the skin: the meat is edible (Michigan DNR).",
+            "Small walled-off pockets of green paste in the meat (abscesses) can be cut out (Michigan DNR)."
+          ]
+        },
+        {
+          "p": "Diseases you can’t see, and what stops them:"
+        },
+        {
+          "list": [
+            "Trichinella worms: bear, wild boar, wildcat, fox, wolf, seal and walrus are the wild game most at risk (CDC). Cooking kills them; curing, drying, smoking or microwaving alone does not consistently kill them (CDC).",
+            "Tularemia: rabbits, hares and rodents, and muskrats and beavers (NYS Department of Health, NYS Wildlife Health Program). It spreads through skin contact and through rabbit meat that is not cooked enough. Wear gloves and cook game meat thoroughly (NYS Department of Health).",
+            "Toxoplasmosis: can spread through undercooked meat such as venison (NYS Department of Health).",
+            "E. coli: comes from gut contents. Keep them off the meat and cook it through (NYS Department of Health).",
+            "Chronic wasting disease: cooking does not remove the risk (NYS Department of Health)."
           ]
         }
       ]
@@ -87,6 +186,26 @@
         },
         {
           "p": "Lead bullets break into fragments. Trim well away from the wound channel and throw out bruised or discoloured meat. Children and anyone who could become pregnant should not eat game shot with lead."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        }
+      ]
+    },
+    {
+      "h": "Next: butchering and keeping the meat",
+      "blocks": [
+        {
+          "p": "This page stops at the cooled carcass. Skinning, quartering, the cuts, the organs and grinding are in Butchering deer and small game. How long meat keeps, and every way to keep it, each with its label and its risks, are in Keeping game meat."
+        },
+        {
+          "link": "s:surv-land-butchering",
+          "label": "Butchering deer and small game"
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Keeping game meat"
         }
       ]
     }
@@ -102,11 +221,31 @@
     },
     {
       "name": "NYS Department of Health, Harvesting, Preparing, and Eating Wild Game",
-      "used": "Gloves; remove intestines soon; cook all game and birds to 165°F in the thickest part; don't eat sick, strange-acting or found-dead game; rabies occasionally in NY deer, spread by nervous tissue and saliva, never eat infected game; CWD parts include brain, spinal cord, lymph nodes; cooking does not remove CWD risk; lead: trim away from wound channels, discard bruised meat, children and people who can get pregnant avoid lead-shot game"
+      "used": "Gloves, especially with cuts or open sores; no eating, drinking or smoking while cleaning game; remove intestines soon; keep game below 45°F until butchered, including big game hanging for several days; only healthy-looking animals; cook all game and birds to 165°F in the thickest part; don't eat sick, strange-acting or found-dead game; rabies (species, occasionally in NY deer, signs, nervous tissue and saliva, never eat infected game); CWD signs and parts; cooking does not remove CWD risk; E. coli; toxoplasmosis in undercooked venison; lead: trim away from wound channels, discard bruised meat, children and people who can get pregnant avoid lead-shot game"
+    },
+    {
+      "name": "NYS Department of Health, Tularemia (fact sheet)",
+      "used": "Rabbits, hares and rodents; skin contact and undercooked rabbit meat; gloves with rabbits, muskrats and other rodents; cook game meat thoroughly"
+    },
+    {
+      "name": "NYS Wildlife Health Program (NYS DEC and Cornell Wildlife Health Lab), Tularemia fact sheet (April 2021)",
+      "used": "Cottontails, hares, beavers and muskrats among the species affected; gloves and thorough cooking"
+    },
+    {
+      "name": "NYS Wildlife Health Program, Highly Pathogenic Avian Influenza: What Hunters Need to Know (September 2022)",
+      "used": "Signs of sick birds; don't handle sick game; masks, gloves and eye protection; field dress outdoors or in a well-ventilated area; no eating, drinking or smoking; seal carcass and unwanted organs in plastic bags for the trash; don't feed carcass parts to pets or leave them for scavengers; wash hands"
+    },
+    {
+      "name": "Cornell Wildlife Health Lab, Tips for Safe Handling and Processing Venison (November 2018)",
+      "used": "Put internal organs in a bag for trash disposal"
+    },
+    {
+      "name": "Cornell Cooperative Extension and NYS 4-H Shooting Sports, Wild Harvest Table Guide to Deer Hunting and Preparation (November 2015)",
+      "used": "Don't eat the meat if the organs smell bad, or show clots or discoloration"
     },
     {
       "name": "Ohio DNR Division of Wildlife, Field Dressing Your Deer (Pub. 111)",
-      "used": "Confirm dead by touching the eye from behind at arm's length; tagging; gloves; tie off bladder and large intestine; diaphragm; windpipe and gullet as far forward as possible; sharp objects; heart and liver; prop open and hang in shade"
+      "used": "Confirm dead by touching the eye from behind at arm's length; tagging; gloves; tie off bladder and large intestine; diaphragm; windpipe and gullet as far forward as possible; sharp objects; heart and liver; prop open and hang in shade; bags of ice in the body cavity"
     },
     {
       "name": "Indiana State Board of Animal Health, Deer Processing (MC-1/9.03)",
@@ -114,23 +253,39 @@
     },
     {
       "name": "Montana State University Extension, Field Care of Harvested Big Game",
-      "used": "Blade up, pelvis toward breastbone, two fingers keep entrails from the point; tie off the vent; don't puncture the stomach at the diaphragm; prop open; shade; skin if above freezing the first night; meat to 40°F within 24 hours"
+      "used": "Blade up, pelvis toward breastbone, two fingers keep entrails from the point; tie off the vent; don't puncture the stomach at the diaphragm; wipe out blood and loose material; prop open; shade; skin if above freezing the first night; meat to 40°F within 24 hours; cheesecloth or light cotton bags against insects"
     },
     {
-      "name": "Penn State Extension, Proper Care and Handling of Venison from Field to Table",
-      "used": "Avoid cutting the paunch and intestines (foodborne bacteria); dress as soon as possible; prop the cavity open"
+      "name": "New Mexico State University Extension, Field Care of Harvested Big Game (CR 507, revised 2012)",
+      "used": "In warm weather elevate the carcass and hang it head down; quarter it and put it on ice; watch it above 45°F or out of the shade"
+    },
+    {
+      "name": "North Dakota State University Extension, From Field to Table: A Pocket Guide for the Care and Handling of Deer and Elk (FN536, reviewed April 2024)",
+      "used": "Little water, not grass or snow, to wipe the carcass; warm weather skinning and cheesecloth; 28 to 35°F wrap in a sheet and hang in a ventilated shed; don't let the carcass freeze; not across the hood or in the trunk while warm; CWD signs"
+    },
+    {
+      "name": "Penn State Extension, Proper Care and Handling of Venison from Field to Table (updated November 2020)",
+      "used": "Avoid cutting the paunch and intestines (foodborne bacteria); dress as soon as possible; gloves; clean the knife often; prop open; shade and air; organs that smell offensive or show greenish discharge or black blood, don't eat the meat; cool to 35 to 40°F; ice or snow sealed in plastic bags in the cavity; not in the trunk while warm; field kit list"
+    },
+    {
+      "name": "Penn State Extension, Proper Care and Handling of Game Birds from Field to Table (updated November 2020)",
+      "used": "Don't cut the crop, gizzard or intestines; cool birds to 35 to 40°F"
     },
     {
       "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8",
-      "used": "Healthy liver smooth, wet, deep red or purple (p. 96)"
+      "used": "Healthy liver smooth, wet, deep red or purple"
     },
     {
-      "name": "Oregon Department of Fish and Wildlife, How to Rabbit Hunt",
-      "used": "Rabbit skinning and gutting; gloves; liver spots mean do not eat"
+      "name": "Oregon Department of Fish and Wildlife, How to Hunt Rabbit",
+      "used": "Rabbit skinning and gutting; gloves; liver spots mean do not eat; keep the rabbit cool in a cooler or game bag, then refrigerate or freeze"
     },
     {
       "name": "Missouri Department of Conservation, How to Clean a Squirrel; Rabbit: Safety and Health",
       "used": "Squirrel skinning and gutting; numerous pinhead-size white liver lesions, throw the rabbit out; gloves; 165°F"
+    },
+    {
+      "name": "Michigan DNR, Common Deer Afflictions",
+      "used": "Liver flukes make the liver inedible; liver cysts with a white dot trimmed, rest edible; fibromas, meat edible; small abscesses removed"
     },
     {
       "name": "CDC, Preventing Tularemia",
@@ -141,8 +296,8 @@
       "used": "Cut from vent to gill arches, shallow; remove gills and organs; scrape out the kidney; scale or fillet"
     },
     {
-      "name": "Clemson Cooperative Extension, Safe Handling of Wild Game Birds (HGIC 3515)",
-      "used": "Remove entrails and crop quickly; pluck or skin in the field; cool quickly; poultry 165°F"
+      "name": "Clemson Cooperative Extension, Safe Handling of Wild Game Birds (HGIC 3515, revised January 2024)",
+      "used": "Remove entrails and crop quickly, grain may ferment; wipe with a clean cloth, not grass or snow; pluck or skin in the field; cool quickly; birds bagged individually on ice in hot weather; don't pile warm birds or carry them in a trunk; poultry 165°F"
     },
     {
       "name": "CDC MMWR 2024;73(40), Suspected Outbreak of Trichinellosis Associated with Undercooked Bear Meat",
@@ -150,7 +305,7 @@
     },
     {
       "name": "CDC, How to Prevent Trichinellosis",
-      "used": "Bear and wild boar at risk; freezing may not kill freeze-resistant worms in wild game; use a food thermometer"
+      "used": "Bear, wild boar, wildcat, fox, wolf, seal and walrus; freezing may not kill freeze-resistant worms in wild game; curing (salting), drying, smoking or microwaving alone does not consistently kill the worms; use a food thermometer"
     },
     {
       "name": "Missouri Department of Conservation, Bear: Properly Cook All Game",
@@ -159,7 +314,12 @@
     {
       "name": "USDA FSIS, Safe Minimum Internal Temperature Chart",
       "used": "Fish 145°F"
+    },
+    {
+      "name": "Utah State University Extension, How to Preserve Venison",
+      "used": "Refrigerate the carcass, usually within 3 to 4 hours, if the air is above 45°F"
     }
   ],
-  "reviewed": "2026-11-17"
+  "reviewed": "2026-11-19",
+  "draft": true
 }

@@ -1137,3 +1137,63 @@ Food at home pack (v7.5), whole-pack read fixes: numbers from 150.
    page now says so beside the reading ("but no source opened says how long a “Keep” row holds with no fridge at all"). Cost if
    wrong: an opened can of an unlisted food that could have been kept is thrown out, or a listed one is kept longer than a source
    would allow. Say if the group wants a time limit on the chart's "keep" rows with no fridge.
+
+Food from the land pack (v7.7), batch A2 (field dressing, butchering, keeping game meat): numbers 160 to 169.
+
+160. **How long a deer can hang, and how cold (surv-land-keeping-meat).** NYS Department of Health: keep game below 45°F (7°C) until
+   butchered, "including big game hanging for several days". Penn State Extension: "hold the carcass at 40°F (4°C) or below for two to
+   three days, at most". North Dakota State University Extension: aging at 34 to 37°F for 10 to 14 days, two to three days enough. New
+   Mexico State University: at or around 32°F, 10 to 12 days. Today: all four are shown, and the page and its Do first go by Penn
+   State (40°F or below, 2 to 3 days at most; never above 45°F). Cost if wrong: meat cut up and used sooner than it had to be. Say if
+   the group wants longer aging in steady cold.
+161. **How long cut venison keeps in a fridge (surv-land-keeping-meat).** Utah State University Extension: 1 to 2 days. Penn State and
+   NDSU: 2 to 3 days. Minnesota Department of Health: 3 to 5 days. Today: 1 to 2 days, with Minnesota's figure shown beside it. Cost if
+   wrong: meat eaten or frozen sooner than needed.
+162. **Game jerky temperature (closes the unnumbered "game jerky temperature" entry above, D149's question).** The National Center for
+   Home Food Preservation: "Wild game (bear, elk, etc.) must be treated to destroy Trichinella by heating to 170°F" (review, 6.4) and
+   "USDA recommends attaining an internal temperature of at least 170°F" for game (5.4.6). University of Alaska Fairbanks Extension:
+   heat game meat in its marinade to boiling (212°F). USDA's jerky page: 160°F for meat, no figure for game. Today: Keeping game meat's
+   jerky method boils the strips in marinade for 5 minutes (NCHFP's method) and checks several strips at 170°F or more, says in the same
+   step that both figures are above the 165°F cooking rule and that 160°F is not enough for game; NCHFP's 30-day freezing step is
+   given as "do it, but don't count on it" (CDC: freezing may not kill the worms in wild game). Deer jerky made that way is eaten as it
+   is within two weeks at room temperature, as NCHFP gives it; every other jerky is cooked to 165°F first; no bear jerky (UAF). Preserving
+   food now points to that step. Cost if wrong: if the group wants UAF's boiling figure as the target, the check is stricter; if NCHFP's
+   freezing were trusted, the heat step would be extra work. Say which figure the group wants.
+163. **Winter cold as the freezer (surv-land-keeping-meat), against a checked line.** The US Army survival manual (FM 21-76, 2006
+   copy): "In cold climates, you can freeze and keep meat indefinitely", but cook it before eating. Preserving food (checked) quotes NYS
+   Department of Health: "Don’t put your food outside to keep it cold, even in the winter." FoodSafety.gov's freezer times assume food
+   kept continuously at 0°F. Today: the method is shown under the "Traditional" label with the NYS DOH line quoted beside it, and its
+   risk is labelled as the app's caution (thaw and refreeze in sun or a warm spell, animals); no opened source states that risk in those
+   words. End step: cook to 165°F. Cost if wrong: either a cold-weather way to keep meat is discouraged, or a household trusts outdoor cold
+   that thaws without anyone noticing. Say if the group wants this method kept.
+164. **Deer tongue, heart and liver now that chronic wasting disease is in New York (surv-land-butchering).** FM 21-76 eats the tongue
+   (and the brain); NYS DOH says avoid saliva and mouth parts and lists tonsils among the parts that may carry CWD prions, and says the
+   liver, kidney, heart and salivary glands "may also pose a risk". Today: the brain is never eaten; the tongue carries the app's caution
+   "don't take the tongue from a deer"; heart and liver are given with their preparation, the NYS DOH risk sentence beside them, and
+   165°F. Cost if wrong: food thrown away (tongue), or organ meat eaten with a risk NYS DOH names. Medical professional / Jordan: say if
+   heart and liver should also be left in New York deer.
+165. **Stock from bones and rendering fat (surv-land-butchering).** New Mexico State University (1994) saws the backbone into stock;
+   NYS DOH says avoid cutting through the spinal cord and Cornell Wildlife Health Lab says avoid sawing into bone. No source opened says
+   how to make stock from other deer bones or render deer fat. Today: no backbone stock; other stock and fat rendering left out, said on
+   the page. Cost if wrong: food (fat and bone) wasted in a shortage. Say if the group wants these researched for a later release.
+166. **Curing salts in corned venison (surv-land-keeping-meat).** NDSU's corning recipe uses 2 ounces of sodium nitrate and ½ ounce of
+   sodium nitrite in 6 gallons; NCHFP warns that a nitrite mistake can be a lethal dose and says commercial cure mixes are safer than pure
+   nitrite. Today: the page gives no nitrate or nitrite amounts and says to use only a commercial cure mix by its package directions, and,
+   as the app's caution, not to corn meat without one. Cost if wrong: a household with pure curing salts and a scale cannot follow NDSU's
+   recipe from the app.
+167. **Smoked and dried meat the manual says is ready to eat (surv-land-keeping-meat).** FM 21-76: properly smoked meat "you can eat ...
+   without further cooking". The land spec's rule: cook to 165°F unless an agency source says the product is safe as it is for that
+   animal; no agency source opened says so for smoked, air-dried or salted game (NCHFP: smoke without proper cooking is not a
+   preservative; CDC: curing, drying or smoking does not consistently kill trichinella). Today: every traditional method ends with
+   cooking to 165°F, and the page says it does not follow the manual. Cost if wrong: dried meat has to be cooked before it can be eaten on
+   the move.
+168. **State health departments count as food-safety agencies for the labels (surv-land-keeping-meat).** The spec names USDA, FDA, CDC
+   and NCHFP. Today: the "Backed by a food-safety agency" label also covers FoodSafety.gov (HHS), the Minnesota Department of Health
+   (storage chart) and the NYS Department of Health (the 45°F hanging limit), and the label text on the page says "or a state health
+   department". Cost if wrong: two blocks carry the agency label on a state health department's word. Say if only federal agencies and
+   NCHFP should count.
+169. **Taking a deer's head off through the spine (surv-land-butchering).** The Massachusetts processing notes cut "through the top of
+   the spinal column" at the base of the head; NYS DOH says avoid cutting through the skull or spinal cord. No opened source gives a way
+   to remove the head without cutting the spine. Today: the step is given, with a knife or saw kept for this job, the brain and spinal
+   cord kept off the meat and hands washed if touched (NYS DOH). Cost if wrong: some contact with spinal tissue that a source advises
+   against. Say if the group would rather leave the head on and bone the meat off the hanging carcass.

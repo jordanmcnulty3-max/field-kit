@@ -99,7 +99,8 @@
  ],
  "canning": [
   "s:surv-food-preserving",
-  "s:surv-food-still-good"
+  "s:surv-food-still-good",
+  "s:surv-land-keeping-meat"
  ],
  "child": [
   "p:choking",
@@ -448,10 +449,10 @@
  ],
  "keep": [
   "s:surv-food-clean-kitchen",
+  "s:surv-land-keeping-meat",
   "s:surv-heat-out",
   "s:surv-food-power-out",
-  "p:blisters",
-  "p:fracture"
+  "p:blisters"
  ],
  "lie": [
   "p:fainting",
@@ -474,11 +475,11 @@
   "p:march"
  ],
  "meat": [
+  "s:surv-land-keeping-meat",
   "s:surv-food-power-out",
   "s:surv-food-clean-kitchen",
   "s:surv-food-cooking-no-power",
-  "s:surv-food-preserving",
-  "s:surv-food-still-good"
+  "s:surv-food-preserving"
  ],
  "milk": [
   "s:surv-fallout-water-and-food",

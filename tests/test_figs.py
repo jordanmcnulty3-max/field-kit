@@ -1097,8 +1097,7 @@ def test_land_figures_draw_no_plant_and_no_person():
     for name in LAND_FIGS:
         svg, label = figs.F[name]
         t = (svg + label).lower()
-        # land-field-dressing draws the topic's own "your other hand" and "belly skin", and the worker's gloved hand
-        # reaching into the opened deer (test_field_dressing_hand_is_drawn_only_inside_the_deer)
+        # land-field-dressing draws the topic's own words "your other hand" and "belly skin"; it draws no hand
         words = ('leaf', 'leaves', 'plant', 'person') if name == 'land-field-dressing' else (
             'leaf', 'leaves', 'plant', 'person', 'hand', 'skin')
         for word in words:
@@ -1185,7 +1184,7 @@ def test_field_dressing_inside_cuts_are_drawn_only_in_the_opened_body():
     exist only in panels marked as the opened body, each of which draws the opening; the outside cuts (the belly, around
     the anus) are drawn only in panels that show the outside."""
     panels = _fd_panels()
-    inside = {'diaphragm-cut', 'diaphragm', 'windpipe', 'gullet', 'windpipe-cut', 'hand', 'chest-open', 'knife'}
+    inside = {'diaphragm-cut', 'diaphragm', 'knife'}
     outside = {'belly-cut', 'anus-cut'}
     for n, view, parts, _ in panels:
         assert view in ('inside', 'outside'), (n, view)
@@ -1195,7 +1194,7 @@ def test_field_dressing_inside_cuts_are_drawn_only_in_the_opened_body():
         else:
             assert not parts & inside, (n, parts & inside)
     by = {(n, frozenset(p)) for n, _, p, _ in panels}
-    assert any({'diaphragm-cut', 'windpipe', 'windpipe-cut', 'hand', 'knife'} <= p for _, p in by)
+    assert any({'diaphragm-cut', 'diaphragm', 'knife'} <= p for _, p in by)
     assert [n for n, _, p, _ in panels if 'belly-cut' in p] == ['4']
     assert [n for n, _, p, _ in panels if 'anus-cut' in p] == ['5']
     # the inside-cut words sit only in the inside panels
@@ -1205,14 +1204,7 @@ def test_field_dressing_inside_cuts_are_drawn_only_in_the_opened_body():
             assert 'diaphragm' not in joined and 'windpipe' not in joined, n
 
 
-def test_field_dressing_hand_is_drawn_only_inside_the_deer():
-    """The only hand drawn is the worker's, reaching into the opened body in step 6; nothing else is a person."""
-    for n, view, parts, _ in _fd_panels():
-        if 'hand' in parts:
-            assert view == 'inside' and n == '6', n
-
-
-CUT_PARTS = {'belly-cut', 'anus-cut', 'diaphragm-cut', 'windpipe-cut'}
+CUT_PARTS = {'belly-cut', 'anus-cut', 'diaphragm-cut'}
 
 
 def test_field_dressing_dashes_mean_cut_here_only():
@@ -1237,31 +1229,50 @@ def _xs(e):
     return nums[0::2]
 
 
-def test_field_dressing_windpipe_is_cut_inside_the_chest_and_nothing_is_drawn_on_the_neck():
-    """Step 6 says "Reach up into the chest": the windpipe and gullet, their cut mark, the hand and the knife lie inside the
-    opened body (forward edge of the opening at x 156), so nothing of them is drawn over the neck (which ends at x 120)."""
+def test_field_dressing_step_six_is_one_step_with_two_actions():
+    """One badge 6; the diaphragm drawing under its words; then the windpipe action in words only, below the drawing, at the
+    same indent, with no rule between."""
     root = ET.fromstring(figs.F['land-field-dressing'][0])
     six = next(g for g in root.iter() if g.get('data-step') == '6')
+    acts = [g for g in six if g.get('data-part', '').endswith('-action')]
+    assert [g.get('data-part') for g in acts] == ['diaphragm-action', 'windpipe-action']
+    bold = [''.join(t.itertext()) for t in six.iter() if t.tag.split('}')[-1] == 'text' and t.get('class') == 'tb']
+    assert bold == ['6', 'Cut the diaphragm away from the ribs', 'Reach up into the chest and cut the windpipe']
+    words = [(float(t.get('x')), float(t.get('y')), ''.join(t.itertext())) for t in acts[1].iter() if t.tag.split('}')[-1] == 'text']
+    assert [w for _, _, w in words] == ['Reach up into the chest and cut the windpipe', 'and gullet as far forward as you can.',
+                                         'Watch for sharp broken ribs.']
+    assert not [e for e in acts[1].iter() if e.tag.split('}')[-1] not in ('g', 'text')], 'the windpipe action is words only'
+    first = [(float(t.get('x')), float(t.get('y'))) for t in acts[0] if t.tag.split('}')[-1] == 'text']
+    assert {w[0] for w in words} == {x for x, _ in first} == {28.0}
+    drawing = next(g for g in acts[0] if g.tag.split('}')[-1] == 'g')
+    dy = float(re.findall(r'-?\d+(?:\.\d+)?', drawing.get('transform'))[1])
+    lowest = max(float(t.get('y')) for t in drawing.iter() if t.tag.split('}')[-1] == 'text') + dy
+    assert min(y for _, y, _ in words) > lowest + 10, 'the words sit below the diaphragm drawing'
+    assert not [e for e in six.iter() if e.tag.split('}')[-1] == 'line' and 'd' in (e.get('class') or '').split()]
+    assert max(y for _, y, _ in words) <= float(root.get('viewBox').split()[3]) - 8
+
+
+def test_field_dressing_draws_no_windpipe_and_nothing_on_the_neck():
+    """The windpipe drawing was left out (docs/v7.7-rulings.md, Diagrams): no windpipe, gullet, hand or windpipe cut is
+    drawn anywhere; what step 6 draws inside the body lies within the opening (its front at x 164; the neck ends at x 120)."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    parts = {e.get('data-part') for e in root.iter() if e.get('data-part')}
+    assert not parts & {'windpipe', 'gullet', 'windpipe-cut', 'hand', 'hand-inside', 'arm', 'chest-open'}, parts
+    six = next(g for g in root.iter() if g.get('data-step') == '6')
     assert six.get('data-view') == 'inside'
-    for part in ('windpipe', 'gullet', 'windpipe-cut', 'hand', 'knife', 'chest-open', 'diaphragm-cut'):
+    for part in ('diaphragm', 'diaphragm-cut', 'knife', 'opening', 'ribs', 'stomach'):
         els = [e for e in six.iter() if e.get('data-part') == part]
         assert els, part
         for e in els:
-            assert min(_xs(e)) >= 156, (part, _xs(e))
-    for e in root.iter():
-        if e.get('data-part') in ('windpipe', 'gullet', 'windpipe-cut'):
-            assert e in list(six.iter())
+            assert min(_xs(e)) >= 160, (part, _xs(e))
 
 
-def test_field_dressing_step_six_is_one_step_with_two_actions():
-    """One badge 6, then the diaphragm and the windpipe drawings, each under its own bold line, with no rule between them."""
+def test_field_dressing_step_six_opening_starts_at_panel_fours_breastbone():
+    """The opened belly in step 6 reaches no further forward than where panel 4's cut stops at the breastbone."""
     root = ET.fromstring(figs.F['land-field-dressing'][0])
-    six = next(g for g in root.iter() if g.get('data-step') == '6')
-    acts = [g.get('data-part') for g in six if g.get('data-part', '').endswith('-action')]
-    assert acts == ['diaphragm-action', 'windpipe-action']
-    bold = [''.join(t.itertext()) for t in six.iter() if t.tag.split('}')[-1] == 'text' and t.get('class') == 'tb']
-    assert bold == ['6', 'Cut the diaphragm away from the ribs', 'Reach up into the chest and cut the windpipe']
-    assert not [e for e in six.iter() if e.tag.split('}')[-1] == 'line' and 'd' in (e.get('class') or '').split()]
+    end = min(_xs(next(e for e in root.iter() if e.get('data-part') == 'belly-cut')))
+    rim = min(_xs(next(e for e in root.iter() if e.get('data-part') == 'opening')))
+    assert rim >= end - 6, (rim, end)
 
 
 def test_field_dressing_shows_the_deer_on_its_back_on_a_slope_with_a_brace():

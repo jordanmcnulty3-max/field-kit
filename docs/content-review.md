@@ -7701,3 +7701,11 @@ All drawings are original; no source drawing was copied.
   so it does not end there.
 - No belly-up cue was added to the top view: every cue tried would need a new word or a new feature (teats, navel) that the topic
   does not name.
+
+#### land-field-dressing final round (2026-11-20), from the re-check in task-6c-review.md
+The figure ships with four drawings: steps 3, 4 and 5, and the diaphragm drawing for step 6. The windpipe drawing is removed. Step 6
+keeps its one badge. Under the diaphragm drawing, at the same indent and with no rule before it, the second action is given as words
+only: "Reach up into the chest and cut the windpipe" (bold) / "and gullet as far forward as you can." / "Watch for sharp broken
+ribs." (step 6, word for word). The drawn elements listed above for "Panel 6 (second)" (the hand and arm, the knife there, and the
+windpipe and gullet) are no longer drawn. Nothing is drawn on the neck in any panel. The step-6 opening now starts at panel 4's
+breastbone point (x 164, against the cut's end at x 170). The figure is 1000 units tall, down from 1190.

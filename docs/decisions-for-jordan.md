@@ -1137,3 +1137,56 @@ Food at home pack (v7.5), whole-pack read fixes: numbers from 150.
    page now says so beside the reading ("but no source opened says how long a “Keep” row holds with no fridge at all"). Cost if
    wrong: an opened can of an unlisted food that could have been kept is thrown out, or a listed one is kept longer than a source
    would allow. Say if the group wants a time limit on the chart's "keep" rows with no fridge.
+
+Food from the land pack (v7.7), batch A1 (Wild plants, plant poisoning gate, bottle soak): numbers 152 to 158. Rulings are in
+docs/v7.7-rulings.md ("Batch A1").
+
+152. **"Words cannot teach identification" (surv-food-and-wild-plants).** No source opened says it. The nearest: University of Vermont
+   Extension, "be certain you've positively identified the plant"; Vermont Department of Health, "be certain you know how to identify
+   ramps". Today, labelled "This app’s own caution": words on a screen cannot teach you to identify a plant, there are no drawings, and
+   each plant on the page is to be learned in person from someone who knows it before anyone relies on it. Say if the group wants it
+   worded differently (the photo guide you plan would change it).
+153. **Stinging nettle is not on the safe list (surv-food-and-wild-plants).** For it: NYS DEC, "Nettles occur in all parts of New York";
+   "Since cooking deactivates the stings, young nettle leaves make highly nutritious cooked greens." Oregon State University Extension
+   (EM 9373, 2022): gather in early spring before the plant flowers; long sleeves, long pants, long rubber gloves; "Dry or blanch
+   nettles before use to make them safe to eat" (boil 1½ to 2 minutes). Against: the Upstate New York Poison Center's list of poisonous
+   plants includes "Nettle (Stinging)" (its table does not show which part or why); Vermont Department of Health names Canadian
+   clearweed and false nettle as look-alikes and no source opened says whether they are safe to eat or how to tell them apart in words.
+   Today: left off (the more cautious reading). Say if the group wants nettle added with the DEC and Oregon State text.
+154. **Ramps are not on the safe list (surv-food-and-wild-plants).** Penn State Extension: lily-of-the-valley and false hellebore "may be
+   confused with ramps", "are deadly poisonous and can be found in the same habitat", and "ramps should always produce a notable onion
+   and garlic smell when crushed or bruised"; Vermont Department of Health gives the same smell difference for false hellebore. Under the
+   plan's rule a plant whose look-alike can kill is left off, whatever test a source gives. Today: ramps are named on the never-eat side
+   with their look-alikes. Say if the group wants ramps taught with the smell test (not recommended by this app).
+155. **Other plants left off for want of a source (surv-food-and-wild-plants).** Wild grapes (moonseed, Virginia creeper and pokeweed look
+   like them and can kill or seriously harm; NC State Extension, Penn State Extension, Poison Control). Elderberry (Penn State: all parts
+   poisonous, ripe berries edible when cooked; Missouri Department of Conservation lists it among plants water hemlock is taken for).
+   Staghorn sumac (Missouri Department of Conservation gives the fruit as a lemony tea and poison sumac's white drooping berries, but no
+   opened source gives a picking season, and Missouri warns that people very sensitive to poison ivy may react to sumac tea). Garlic
+   mustard (UConn Extension: "edible for humans"; no opened source gives parts, season or preparation). Today: none is on the page; wild
+   grapes and elderberry are named on the never-eat side. The safe list holds four plants (the plan allows fewer than six if sources
+   support fewer). Say which, if any, the group wants researched further.
+156. **Plant poisoning: what the poison centers say that the Poisoning protocol does not (Poisoning protocol). Medical professional.**
+   Upstate New York Poison Center (Poisonous Plants, 2024): "Remove any portion left in the mouth." then call the poison center.
+   Poison Control (Pokeberries: A grape look-alike): "Rinse the mouth and give water or milk to drink", then call. The protocol (checked,
+   unchanged) says "Give nothing to eat or drink unless Poison Control tells you to" (Red Cross) and allows water or milk only for a
+   burning, irritating or caustic product (poison.org); it does not say to remove plant left in the mouth or to rinse the mouth. Poison
+   Control (Can poison hemlock be deadly?): act immediately, go to an emergency department, do not treat symptoms at home; the protocol's
+   evacuation list already sends anyone who swallowed a wild plant or mushroom out when there is no signal. No source opened (Poison
+   Control, CDC, NYS Department of Health, HRSA, Upstate New York Poison Center, Northern New England Poison Center) gives steps for a
+   household with no Poison Control line and no hospital. Today: Wild plants links the protocol and says, from the poison centers, not
+   to wait for symptoms; nothing else. Ask a medical professional whether the protocol should add removing plant from the mouth and
+   rinsing it, whether to give water or milk after a plant, and what a household with no line and no hospital should do.
+157. **The plant warning-signs list is gone (surv-food-and-wild-plants).** The old page listed eight warning signs in unknown plants
+   (milky sap, seeds in pods, bitter or soapy taste, spines or hairs, carrot-like leaves, almond smell, spurred grain heads, leaves in
+   threes) from US Army ATP 3-50.21 and FM 21-76, with the warning that a plant showing none is not safe. The rewrite is the plan's short
+   safe list, never-eat list and mushroom rule; the Army list was not re-opened and is not carried (dandelion, on the safe list, has
+   milky sap; blackberries have thorns). Today: not on the page. Say if the group wants it back.
+158. **Which bleach for CDC's bottle soak (surv-food-babies-children). Medical professional.** CDC's page (How to Clean Infant Feeding
+   Items During Emergencies, January 8, 2025) gives "1 teaspoon of bleach per 1/2 gallon or 8 cups of water" and no bleach type or
+   strength. CDC's everyday page (How to Clean, Sanitize, and Store Infant Feeding Items, March 19, 2025) gives the same amount, "2
+   teaspoons of unscented bleach per gallon (16 cups) of water", and no percentage. Clean and disinfect's household mixes use plain,
+   unscented 5% to 9% bleach (CDC). Today (fix round): the soak is the emergency page's steps with "unscented bleach" from the everyday
+   page, labelled for baby feeding items only and never for drinking water, and the page says the emergency page gives no type or
+   strength while the everyday page gives the same amount and says unscented. Your decision on D141 (add the soak) is carried out. Ask
+   a medical professional whether to say 5% to 9% for the soak, as for the other mixes (no CDC infant-feeding page gives a strength).

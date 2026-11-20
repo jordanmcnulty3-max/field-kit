@@ -58,9 +58,9 @@
  "botulism": [
   "s:surv-food-poisoning",
   "s:surv-food-preserving",
+  "s:surv-clean-and-disinfect",
   "s:surv-food-power-out",
-  "s:surv-food-babies-children",
-  "s:surv-food-clean-kitchen"
+  "s:surv-food-babies-children"
  ],
  "breastfeeding": [
   "s:surv-fallout-water-and-food",
@@ -293,7 +293,7 @@
   "s:surv-generators",
   "p:bleeding",
   "p:tick",
-  "s:surv-handwashing"
+  "s:surv-clean-and-disinfect"
  ],
  "fever": [
   "p:tick",
@@ -324,18 +324,18 @@
   "s:surv-make-water-safe"
  ],
  "food": [
-  "s:surv-food-and-wild-plants",
   "s:surv-fallout-water-and-food",
   "s:surv-food-power-out",
   "s:surv-food-clean-kitchen",
-  "s:surv-food-how-much"
+  "s:surv-food-how-much",
+  "s:surv-food-poisoning"
  ],
  "food poisoning": [
   "s:surv-food-poisoning",
   "p:vomiting-diarrhea",
   "p:poisoning",
-  "s:surv-food-and-wild-plants",
-  "s:surv-food-power-out"
+  "s:surv-food-power-out",
+  "s:surv-food-clean-kitchen"
  ],
  "formula": [
   "s:surv-fallout-water-and-food",
@@ -440,11 +440,11 @@
   "s:surv-fallout-warning"
  ],
  "insects": [
-  "s:surv-food-and-wild-plants",
   "p:stings",
   "s:surv-find-water",
   "s:surv-latrines",
-  "s:surv-food-preserving"
+  "s:surv-food-preserving",
+  "s:surv-food-storage"
  ],
  "keep": [
   "s:surv-food-clean-kitchen",

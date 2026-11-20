@@ -33,6 +33,8 @@ REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water', 'surv-f
 # and restored with the 5,000 ft / 5% to 9% wording in the water pack's Task 8, which also adds the water-heater,
 # bucket-toilet, cat-hole and hand-washing-station figures to the new water topics.
 PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-safe': {'water-safe'},
+                 # land pack (v7.7): Wild plants is rewritten with no drawing of any plant (v7 design 6.5; land plan, Global Constraints)
+                 'surv-food-and-wild-plants': set(),
                  'surv-water-in-the-house': {'water-heater-drain'}, 'surv-toilet-no-water': {'toilet-buckets'},
                  'surv-latrines': {'latrine'}, 'surv-handwashing': {'handwash-station'},
                  # heat pack Task 7 deepened fire and shelter; heat pack Task 8 restores fire-ferro (push the striker down) and

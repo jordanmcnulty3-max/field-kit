@@ -54,9 +54,9 @@ PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-
                  'surv-fallout-where-to-shelter': {'fallout-shelter-spots'}, 'surv-fallout-coming-inside': {'fallout-coming-inside'},
                  # food pack Task 7: power cut hold times and the signs of a bad can or jar, drawn from their checked text
                  'surv-food-power-out': {'food-fridge-freezer'}, 'surv-food-still-good': {'food-cans-to-discard'},
-                 # land pack (v7.7) Task 6: the deer figures, drawn from their checked text; the deer field-dressing steps ship
-                 # text-only (dress-deer removed; the redraw failed review; docs/v7.7-rulings.md, Diagrams)
-                 'surv-land-big-game': {'land-deer-vitals'}, 'surv-field-dressing-game': {'dress-fish'},
+                 # land pack (v7.7) Task 6: the deer figures, drawn from their checked text; the deer field-dressing steps carry
+                 # the step-by-step land-field-dressing (dress-deer removed; docs/v7.7-rulings.md, Diagrams)
+                 'surv-land-big-game': {'land-deer-vitals'}, 'surv-field-dressing-game': {'land-field-dressing'},
                  'surv-land-butchering': {'land-deer-cuts'}}
 
 

@@ -185,7 +185,7 @@
           "warn": "Bear and wild boar can carry trichinella worms. Cook them to 165°F. Freezing, smoking or curing does not reliably kill the worms in wild game."
         },
         {
-          "p": "For bear, University of Alaska Fairbanks Extension says to cook the meat until it is well done, to an internal temperature of 185°F (85°C): freezing and heating may not be enough to kill parasites in bear meat."
+          "p": "For bear, University of Alaska Fairbanks Extension says to cook the meat until it is well done: freezing and heating may not be enough to kill parasites in bear meat."
         },
         {
           "p": "Lead bullets break into fragments. Trim well away from the wound channel and throw out bruised or discoloured meat. Children and anyone who could become pregnant should not eat game shot with lead."
@@ -332,7 +332,7 @@
     },
     {
       "name": "University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed October 2021)",
-      "used": "Cook bear meat until well done, internal temperature 185°F; freezing and heating may not kill parasites in bear meat"
+      "used": "Cook bear meat until well done; freezing and heating may not kill parasites in bear meat"
     }
   ],
   "reviewed": "2026-11-19"

@@ -1310,6 +1310,7 @@ Food from the land pack (v7.7), batch A2 (field dressing, butchering, keeping ga
    risk is labelled as the app's caution (thaw and refreeze in sun or a warm spell, animals); no opened source states that risk in those
    words. End step: cook to 165°F. Cost if wrong: either a cold-weather way to keep meat is discouraged, or a household trusts outdoor cold
    that thaws without anyone noticing. Say if the group wants this method kept.
+   **Decided.** Jordan, 2026-11-20: accepted as the Keeping game meat page gives it (the page is now titled Preserving game meat).
 164. **Deer tongue, heart and liver now that chronic wasting disease is in New York (surv-land-butchering).** FM 21-76 eats the tongue
    (and the brain); NYS DOH says avoid saliva and mouth parts and lists tonsils among the parts that may carry CWD prions, and says the
    liver, kidney, heart and salivary glands "may also pose a risk". Today: the brain is never eaten; the tongue carries the app's caution
@@ -1354,6 +1355,7 @@ Batch A2 fix round (numbers 200 to 203; 160 to 169 were used up).
    "may not be sufficient to kill parasites in bear meat". The checked rule (CDC MMWR 2024, NYS DOH) is 165°F for all wild game,
    bear included. Today: the 165°F sentences are word for word; a separate sentence beside them gives UAF's 185°F for bear, sourced.
    Medical professional / Jordan: say which figure the app should give for bear.
+   **Decided.** Jordan, 2026-11-20: bear at 165°F; the 185°F figure (University of Alaska Fairbanks extension) is not shown.
 202. **Corning temperature (surv-land-keeping-meat).** NDSU FN155: "Higher temperatures need not affect the end result of the corning
    process at all, if, for every 15 F of temperature above 38 F, you add one-third more salt." NCHFP review 6.2.4: "Curing should be
    carried out at a temperature between 35°F and 40°F", the upper limit "to limit microbial growth". Today: cure only at 35 to 40°F;

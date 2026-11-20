@@ -7628,3 +7628,15 @@ Other changes in this round that touch text a reader sees: the page titled "Keep
 docs/v7.7-rulings.md), and every label and every in-text mention of it follows the new title (Preserving food, the hub, Field dressing
 game, Butchering deer and small game, Hunting deer and big game, Small game and birds, Trapping, the kit checklist). The records above
 keep the old name where they describe earlier rounds. Link blocks were added (list in docs/v7.7-rulings.md); no other wording changed.
+
+Owner's decisions applied in the same round (Jordan, 2026-11-20):
+
+- **Bear at 165°F.** University of Alaska Fairbanks Extension (Making Jerky, FNH-00262, opened in batch A2) says to cook bear meat well
+  done, to an internal temperature of 185°F. By the owner's decision the app does not show that figure: the sentence in Field dressing
+  game ("Cook it through") and the clause in Preserving game meat ("Jerky") now keep UAF's "cook bear meat until well done" (and, in Field
+  dressing game, "freezing and heating may not be enough to kill parasites in bear meat") without the 185°F (85°C) figure; their source
+  lines drop it too. The 165°F rule, the trichinella warnings and "don’t use bear meat for jerky" are unchanged.
+- **Winter cold as a freezer accepted.** Preserving food's "Cold storage" pointer ("with ice and coolers and never outdoors") read
+  against Preserving game meat's traditional method; one sentence was added to it: "For game meat, winter cold as the freezer is given as
+  a traditional method, not agency-verified, with its risks, in Preserving game meat." The NYS DOH quote ("Don’t put your food outside
+  to keep it cold, even in the winter") stays word for word in Preserving food and is quoted first in the game page's section.

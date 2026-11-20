@@ -200,7 +200,7 @@
           ]
         },
         {
-          "p": "Dressing rabbits, squirrels and birds, and the signs that an animal is not safe to eat, are in Field dressing game; cutting them up is in Butchering deer and small game; how long they keep is in Keeping game meat."
+          "p": "Dressing rabbits, squirrels and birds, and the signs that an animal is not safe to eat, are in Field dressing game; cutting them up is in Butchering deer and small game; how long they keep is in Preserving game meat."
         },
         {
           "link": "s:surv-field-dressing-game",
@@ -212,7 +212,7 @@
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
         },
         {
           "link": "c:land-kit",
@@ -271,7 +271,7 @@
       "used": "Wear a life jacket, carrying doesn’t count; capacity plate; dress for the water temperature; cold water deadly on sunny days; weather, storms, rough and open water; companion and float plan; sudden moves; stay with the boat, most still float; don’t swim without a life jacket; clothes and waders float; 1-10-1 in its own words; heat escape position"
     },
     {
-      "name": "Field dressing game, Butchering deer and small game, Keeping game meat, Game, fish, milk and gardens after fallout, New York rules for hunting, fishing and trapping (other topics in this app)",
+      "name": "Field dressing game, Butchering deer and small game, Preserving game meat, Game, fish, milk and gardens after fallout, New York rules for hunting, fishing and trapping (other topics in this app)",
       "used": "Gloves with rabbits and rodents, tularemia and bird flu signs, lead; cutting up; keeping; wild game after fallout; every New York rule, all by link"
     }
   ],

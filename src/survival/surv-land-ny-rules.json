@@ -15,18 +15,15 @@
     "dec rules",
     "hunting hours",
     "shooting hours",
-    "trap check",
-    "check traps",
-    "legal traps",
     "snares illegal",
     "tagging deer",
     "report harvest",
     "baiting",
     "ice fishing rules",
     "tip-ups",
-    "number of lines",
     "set lines",
-    "minnow trap"
+    "minnow trap",
+    "how many lines"
   ],
   "summary": "New York’s rules as they stand in normal times, from the NYS DEC 2026–27 Hunting and Trapping Regulations Guide and the 2026 Freshwater Fishing Regulations Guide: which licence and course each activity needs, the kinds of season, hunting hours, the methods that are always illegal, distances, tagging and reporting, legal and illegal traps, how often traps must be checked, and legal fishing methods. No seasons or bag limits: they change every year, so check the current guide.",
   "sections": [
@@ -38,6 +35,10 @@
         },
         {
           "p": "This page gives no season dates or bag limits, because a table here would go out of date. It gives the structure and the standing rules. Seasons and limits differ by species, by zone (Northern and Southern) and by Wildlife Management Unit (WMU, an area on the guide’s map)."
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     },
@@ -159,6 +160,14 @@
             "Selling deer or bear meat.",
             "Taking any native snake, lizard or salamander, any turtle other than the snapping turtle, or a spruce grouse."
           ]
+        },
+        {
+          "link": "s:surv-land-big-game",
+          "label": "Hunting deer and big game"
+        },
+        {
+          "link": "s:surv-land-small-game",
+          "label": "Small game and birds"
         }
       ]
     },
@@ -233,6 +242,10 @@
         },
         {
           "p": "The guide defines a restraining trap as a device used to capture and restrain a mammal. Find your zone and WMU on the guide’s map."
+        },
+        {
+          "link": "s:surv-land-trapping",
+          "label": "Trapping"
         }
       ]
     },
@@ -252,6 +265,10 @@
             "No smoke, chemicals, gas or poison on or near a trap set for furbearers (state law).",
             "Put your name and address, or your DEC customer ID number, on every trap."
           ]
+        },
+        {
+          "link": "s:surv-land-trapping",
+          "label": "Trapping"
         }
       ]
     },
@@ -310,6 +327,14 @@
         },
         {
           "p": "Frogs, in their season, may be taken by spear, club, hook or hand with a hunting or fishing licence; with a gun or bow, a hunting licence is needed (2026 fishing guide, 2026–27 hunting guide)."
+        },
+        {
+          "link": "s:surv-traps-and-fishing",
+          "label": "Fishing for food"
+        },
+        {
+          "link": "s:surv-land-fish-cleaning",
+          "label": "Gutting, filleting and eating fish"
         }
       ]
     }

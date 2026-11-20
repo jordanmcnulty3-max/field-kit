@@ -25,6 +25,10 @@
         {
           "link": "s:surv-land-ny-rules",
           "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     },
@@ -33,7 +37,7 @@
       "blocks": [
         {
           "list": [
-            "Lakes and ponds: the edges of weed beds, where fish cruise (cast into the edges and openings to avoid tangles); points that slope gradually into deeper water (fish the tip and the corners); docks, where fish shelter from the sun at almost any time of day; downed trees and other sunken objects; trees and bushes hanging over the water, best where the water under them is deep; and lily pads (NYS DEC).",
+            "Lakes and ponds: the edges of weed beds, where fish cruise (cast into the edges and openings to avoid tangles); points, pieces of land that extend out from the shoreline and slope into deeper water: gradually sloping points are good places to fish (fish the tip and the corners); docks, where fish shelter from the sun at almost any time of day; downed trees and other sunken objects; trees and bushes hanging over the water, best where the water under them is deep; and lily pads (NYS DEC).",
             "Inlets, where streams enter a lake, can be excellent, especially in spring or fall, when spawning fish gather there (NYS DEC).",
             "Rivers and streams: undercut banks, the quiet pocket behind a rock, eddies, the seam where two currents meet, drop-offs, the outside of a bend where the fast water carries food, and the hole below a dam or waterfall (NYS DEC). In heavy current fish rest in eddies, and gather in deep pools, under overhanging brush and around sunken logs (US Army).",
             "Fish are not always near the bottom or the surface: change the depth of your bait until you find them. Cold water slows fish down, so move a lure slowly when the water is cold (NYS DEC)."
@@ -44,7 +48,7 @@
         },
         {
           "list": [
-            "Spring: yellow perch spawn in shallow water near plants in April and May; crappie gather in shallow water to spawn; brown bullheads spawn in shallow water near logs or rocks in May and June.",
+            "Spring: yellow perch spawn in shallow water near plants in April and May; crappie are most commonly caught when they congregate in shallow water to spawn, in May and June; brown bullheads spawn in shallow water near logs or rocks in May and June.",
             "Summer: sunfish (pumpkinseed, bluegill) spawn in shallow water from June to August and live around weeds, docks and other cover; crappie move to deeper, cooler water.",
             "Year round: yellow perch live in shallow, weedy, sheltered places; bullheads in still water with a mud bottom; walleye in the deep parts of large lakes, streams and rivers, and they hunt at night.",
             "Winter: under the ice; see Ice fishing below.",
@@ -61,6 +65,10 @@
             "For beginners: a spin-casting rod and reel, monofilament line (4 to 8 lb test for bluegill and yellow perch; 8 lb for most fishing), size 6 to 8 hooks for panfish, the smallest bobber that still holds your bait up, and the smallest sinker that keeps bait on the bottom. A bobber and bait is the best rig for beginners (NYS DEC).",
             "Bait: worms catch almost anything; minnows hooked through the back, tail or lip so they swim naturally; crickets for panfish; waxworms for trout, perch, crappie and sunfish; crayfish for bass (NYS DEC)."
           ]
+        },
+        {
+          "link": "c:land-kit",
+          "label": "Hunting, fishing and trapping kit"
         }
       ]
     },

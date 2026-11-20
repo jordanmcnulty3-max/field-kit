@@ -5,16 +5,10 @@
   "keywords": [
     "butcher",
     "butchering",
-    "skinning",
-    "skin a deer",
     "quartering",
     "boning out",
-    "backstrap",
     "tenderloin",
-    "venison cuts",
-    "deer heart",
     "deer liver",
-    "silver skin",
     "ground venison",
     "gambrel"
   ],
@@ -24,7 +18,7 @@
       "h": "Before you start",
       "blocks": [
         {
-          "p": "Start with a carcass that was field dressed and cooled as in Field dressing game. How long it can hang first is in Keeping game meat."
+          "p": "Start with a carcass that was field dressed and cooled as in Field dressing game. How long it can hang first is in Preserving game meat."
         },
         {
           "link": "s:surv-field-dressing-game",
@@ -167,7 +161,7 @@
           }
         },
         {
-          "p": "Whatever the cut, cook it to 165°F (74°C) in the thickest part: Field dressing game’s rule for all wild game. Jerky has its own heat step, in Keeping game meat."
+          "p": "Whatever the cut, cook it to 165°F (74°C) in the thickest part: Field dressing game’s rule for all wild game. Jerky has its own heat step, in Preserving game meat."
         }
       ]
     },
@@ -234,7 +228,7 @@
             "Grind trimmings, shank, neck and flank meat (New Mexico State University Extension, Indiana DNR). Take off the fat and other tissue first, so no lymph nodes go in (Cornell Wildlife Health Lab).",
             "Clean and disinfect the grinder and everything you used, before and after (NYS Department of Health, Penn State Extension).",
             "Never put your hand near or into the throat of a grinder (Massachusetts notes).",
-            "Keep ground meat cold and use it quickly: how long it keeps is in Keeping game meat. Cook it to 165°F (74°C)."
+            "Keep ground meat cold and use it quickly: how long it keeps is in Preserving game meat. Cook it to 165°F (74°C)."
           ]
         },
         {
@@ -296,11 +290,15 @@
           ]
         },
         {
-          "p": "How long it keeps cold or frozen, and the ways to keep it without a freezer, are in Keeping game meat."
+          "p": "How long it keeps cold or frozen, and the ways to keep it without a freezer, are in Preserving game meat."
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     }
@@ -387,7 +385,7 @@
       "used": "Duck wings at the joints, head, pin feathers; scalding at 145°F; soak upland birds in cold water 1 to 2 hours"
     },
     {
-      "name": "Field dressing game, Keeping game meat, Clean and disinfect (other topics in this app)",
+      "name": "Field dressing game, Preserving game meat, Clean and disinfect (other topics in this app)",
       "used": "The cooled carcass, the signs an animal is not safe to eat, and the 165°F rule for all wild game; hanging times, storage times and keeping methods by link; household bleach mixes by link"
     }
   ],

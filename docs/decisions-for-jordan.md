@@ -1207,9 +1207,11 @@ docs/v7.7-rulings.md ("Batch A1").
    table (issued 2024, page revised March 2025) and names the waters given stricter advice in April 2026, and says to check your water in
    normal times. The Department's regional brochures (Finger Lakes, Leatherstocking and others) list waters with their own advice; they
    were not opened. Fix round: the page now carries a second table of the Central New York waters with their own advice (Cayuga,
-   Cortland, Madison, Oneida, Onondaga and Oswego counties) from the Department's Advisory Listings by County. Two listings whose
-   columns were unclear ("every other fish" in the Mud Creek and Sauquoit Creek entry and in the Oswego River between Varick Dam
-   and the upper dam) are shown as "Don't eat" for both groups, the cautious reading. Say if other counties should be added.
+   Cortland, Madison, Oneida, Onondaga and Oswego counties) from the Department's Advisory Listings by County. For "all other fish"
+   in the Mud Creek and Sauquoit Creek entry and in the Oswego River between Varick Dam and the upper dam, the Department lists
+   "[See Statewide Advice] (Only for General Population) DON'T EAT": most people follow the statewide advice, and the sensitive group
+   should not eat these fish (re-opened 2026-11-20). The page shows that, and keeps "Don't eat" for both groups, labelled as this app's
+   caution. Say if most people should be given the statewide advice instead, and if other counties should be added.
 184. **Fish: 2 days cold and 145°F, not New York Sea Grant's figures (surv-land-fish-cleaning).** New York Sea Grant (Handling Your
    Catch) says freeze fish you can't cook within two or three days, and cook to 140°F for one minute. NYS DEC (2 days in a fridge) and
    FDA (within 2 days at 40°F or below; 145°F) are more cautious. Today: 2 days and 145°F, with Sea Grant's figures named as set aside.
@@ -1219,7 +1221,7 @@ docs/v7.7-rulings.md ("Batch A1").
    clear ice or 8 inches of white ice; the NYS DEC trapper manual says six inches or more for several people. Today: 4 and 8 inches,
    2 inches or less "stay off", and 6 inches for several people.
 186. **No way to keep fish without cold (surv-land-fish-cleaning).** No source was opened for smoking, salting or drying fish, so the page
-   gives none: fish keeps 2 days cold, or freezes, and otherwise follows the 2-hour rule. Keeping game meat covers game, not fish. Say if
+   gives none: fish keeps 2 days cold, or freezes, and otherwise follows the 2-hour rule. Preserving game meat covers game, not fish. Say if
    fish preserving should be researched.
 187. **The trapper manual's 1 to 9 bleach mix is not on the page (surv-land-trapping).** The NYS DEC trapper manual (2016, p. 17)
    disinfects knives, skinning boards and equipment "with a bleach solution of 1 part bleach in 9 parts water". Under the pack's bleach
@@ -1294,7 +1296,7 @@ Food from the land pack (v7.7), batch A2 (field dressing, butchering, keeping ga
 162. **Game jerky temperature (closes the unnumbered "game jerky temperature" entry above, D149's question).** The National Center for
    Home Food Preservation: "Wild game (bear, elk, etc.) must be treated to destroy Trichinella by heating to 170°F" (review, 6.4) and
    "USDA recommends attaining an internal temperature of at least 170°F" for game (5.4.6). University of Alaska Fairbanks Extension:
-   heat game meat in its marinade to boiling (212°F). USDA's jerky page: 160°F for meat, no figure for game. Today: Keeping game meat's
+   heat game meat in its marinade to boiling (212°F). USDA's jerky page: 160°F for meat, no figure for game. Today: Preserving game meat's
    jerky method boils the strips in marinade for 5 minutes (NCHFP's method) and checks several strips at 170°F or more, says in the same
    step that both figures are above the 165°F cooking rule and that 160°F is not enough for game; NCHFP's 30-day freezing step is
    given as "do it, but don't count on it" (CDC: freezing may not kill the worms in wild game). Deer jerky made that way is eaten as it
@@ -1399,3 +1401,29 @@ Food from the land pack (v7.7), batch B (hub, hunting deer and big game, small g
    bear. New Jersey Fish and Wildlife says the head of a deer is a low-percentage shot that should never be attempted, and gives the bear
    shot just behind the front shoulder. Today: no head shot on any big game; the bear section gives New Jersey's shot. Cost if wrong: none
    that the sources show.
+
+Food from the land pack (v7.7), home, links and search after the content: numbers 204 to 208.
+
+204. **"Keeping game meat" is now "Preserving game meat" (surv-land-keeping-meat).** With "Keeping" in the title the page came second for
+   the search "keep" and pushed the Broken bone (fracture) protocol out of the first five. "Preserving game meat" puts Fracture back
+   (the first five for "keep" are again exactly what they were before the pack). Its cost: for "preserving" the page comes second and
+   Field dressing game third (Field dressing links to the page by its title), so "Is it still good?" and "Storing food" drop to sixth
+   and seventh; no protocol was in that list. "Game meat: keeping it from spoiling" left "keep" unchanged (Fracture still out);
+   "Storing and preserving game meat" also moved "storing". Say if you prefer another title.
+205. **"milk" no longer shows Anaphylaxis in the first five.** "Game, fish, milk and gardens after fallout" has the word in its title and
+   comes first, and the land hub (which names milk in its text) is sixth; Anaphylaxis drops from fifth to seventh. Keywords cannot fix it (the title word outranks every keyword), and the title was
+   not changed. "milk allergy" still shows Anaphylaxis first. Say if the fallout page should get a title without "milk".
+206. **"ice" does not find the ice safety section of Fishing for food.** Every keyword with the word "ice" ("ice fishing", "ice
+   thickness", "thin ice") puts the page second for "ice" and pushes Winter storms out of the first five; "thin ice" also put the page
+   ahead of the Sprain protocol. No such keyword was added. "ice fishing" finds the page second (after New York rules), "ice thickness"
+   second (after Burns); "thin ice" and "safe ice" do not show it. Say if the fishing page should outrank Winter storms for "ice".
+207. **Clean and disinfect does not name the deer knife soak.** The checked page already gained its one allowed sentence in this pack
+   (naming CDC's bottle soak and the clean-up mix for a suspect can or jar). Naming NYS DOH's 1:1 knife and tool soak there would be a
+   second edit, so the soak is named only where it is used: Butchering deer and small game, labelled for that one use and "never for
+   drinking water", with a link to Clean and disinfect. Say if the sentence in Clean and disinfect should be extended to name it.
+208. **Some medical searches show a land page above a protocol that matched only in its text.** For example "foot" (Trapping third;
+   Frostbite drops to sixth), "broken arm" (Field dressing game and the land hub second and third), "allergic reaction" (the hub third,
+   for its insect allergy line), "white skin" (Field dressing game fifth). In each the first result is unchanged and the protocol
+   that drops matched the word only in its text, not by its title or a keyword; the pages match through their summaries, first steps or
+   headings, which were not reworded for a search position. Every case driven by a new keyword was fixed by removing it (the list is in
+   docs/v7.7-rulings.md). Say if any of these should be fixed by rewording the land pages' summaries.

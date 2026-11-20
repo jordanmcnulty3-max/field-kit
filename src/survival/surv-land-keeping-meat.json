@@ -1,6 +1,6 @@
 {
   "id": "surv-land-keeping-meat",
-  "title": "Keeping game meat",
+  "title": "Preserving game meat",
   "category": "land",
   "keywords": [
     "jerky",
@@ -273,6 +273,10 @@
         {
           "link": "s:surv-field-dressing-game",
           "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     }

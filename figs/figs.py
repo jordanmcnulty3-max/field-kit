@@ -1139,11 +1139,11 @@ FD_GUTS = ('<path d="M218 64 C238 58 252 70 252 86 C252 102 238 114 218 108 C206
 FD_DIAPHRAGM = ('<path d="M168 86 L198 64 C208 70 214 78 214 86 C214 94 208 102 198 108 Z" class="milk" data-part="diaphragm"/>'
                 '<path d="M198 64 C208 70 214 78 214 86 C214 94 208 102 198 108" class="k t1"/>'
                 '<path d="M188 78 L204 80 M184 86 L208 86 M188 94 L204 92" class="m t1"/>')
-FD_DCUT = '<path d="M168 86 L198 64 M168 86 L198 108" class="h t3 d" data-part="diaphragm-cut"/>'
+FD_DCUT = '<path d="M174 86 L198 69 M174 86 L198 103" class="h t3 d" data-part="diaphragm-cut"/>'
 FD_CHEST = '<path d="M160 86 L198 60 L198 112 Z" class="k kf" style="fill-opacity:.55" data-part="chest-open"/>'
-FD_ARM = ('<path d="M206 172 C204 150 200 128 196 112 C190 104 180 96 170 90 C164 86 164 80 170 80 C180 80 192 84 202 90 '
-          'L204 84 C206 78 212 78 214 84 L216 100 C220 120 224 146 226 172 Z" class="k milk" data-part="arm"/>'
-          '<path d="M201 140 L223 138 M178 86 L194 92" class="k t1"/>')
+FD_ARM = ('<path d="M206 172 C204 150 202 128 198 112 C192 106 184 100 174 96 C166 94 162 90 164 85 C166 80 172 79 180 80 '
+          'C186 81 192 82 196 84 C198 80 204 78 208 82 C212 88 214 96 216 104 C220 124 224 148 226 172 Z" class="k milk" data-part="arm"/>'
+          '<path d="M201 142 L223 140 M168 86 L184 88 M168 91 L184 92" class="k t1"/>')
 FD_WINDPIPE = ('<path d="M74 82 H150 M74 90 H150" class="k t1 d" data-part="windpipe"/>'
                '<path d="M166 80 C150 76 136 76 122 78 C112 80 112 94 122 94 C136 96 150 96 166 92" class="k t1 d" data-part="hand-inside"/>')
 FD_ANUS = ('<circle cx="302" cy="86" r="9" class="h t3 d" data-part="anus-cut"/><circle cx="302" cy="86" r="2.2" class="kf"/>')

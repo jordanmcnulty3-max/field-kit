@@ -7641,3 +7641,46 @@ and enlarged, day and night, and viewed (/home/claude/sdd/figs/, not tracked). T
 - land-deer-vitals (review Minor 2): the unlabelled two-thirds tick removed; the line keeps the bottom, one-third and top ticks.
 - land-deer-cuts: the shaded shank block removed. The text says where the shank starts ("Find the knee joint and cut through it: the
   lower part is the shank") but not where it ends, so "Shank" is now a label with a leader to the hind leg below its knee.
+
+### land-field-dressing (surv-field-dressing-game, "Deer step by step", after the steps) — Task 6c (2026-11-20)
+
+A step-by-step figure in five numbered panels, badged with the topic's own step numbers (3, 4, 5, 6, 6), top to bottom in the
+steps' order, like fallout-coming-inside. Panel 3 shows the deer on its back from the side and a little above; panels 4 to 6 show it
+from above, belly up, head lying on its side to the left. Outside cuts are drawn on the hide only in panels 4 and 5; the inside
+cuts are drawn only in the two step-6 panels, which show the belly opened (`data-view="inside"`, pinned by tests). Caption: "Don’t
+cut the stomach or intestines: they carry germs that cause food poisoning." (step 4 and Do first 3, word for word).
+
+Drawn elements and the sentence each rests on (all in step 3, 4, 5 or 6 of "Deer step by step"):
+- Panel 3, deer on its back on a sloping ground line, a rock against it; "Lay it on its back on a slight slope" / "and brace it with
+  a rock or log" / "rock or log": step 3. Antlers on the head: Do first 1 and step 1, "Stay clear of its feet and antlers".
+- Panel 4, dashed cut along the belly midline from between the hind legs to behind the front legs, arrow toward the chest;
+  "Pinch up the belly skin and make a shallow cut." / "With the blade edge up and two fingers" / "of your other hand keeping the guts"
+  / "away from the point, open the belly" / "from the pelvis to the breastbone." / "Don’t cut the stomach or intestines" /
+  "pelvis" / "breastbone": step 4 (the arrow's direction is the text's "from the pelvis to the breastbone").
+- Panel 5, the belly shown opened, dashed ring round the anus under the tail; "Cut around the anus, pull it out a few inches," /
+  "and tie it off with string, with the bladder," / "so droppings and urine stay off the meat." / "anus": step 5.
+- Panel 6 (first), opened belly with the rib arch at its front, the diaphragm as a sheet just behind the ribs, the stomach and
+  intestines as plain shapes behind it, a dashed cut along the diaphragm's edge at the ribs, a knife inside the opening;
+  "Cut the diaphragm away from the ribs" / "all the way round, taking care not to" / "puncture the stomach." / "ribs" / "diaphragm"
+  / "stomach": step 6.
+- Panel 6 (second), a gloved hand and arm going into the opening and forward under the ribs, its hidden part dashed, the windpipe
+  and gullet dashed (hidden) from the chest up the neck; "Reach up into the chest and cut the windpipe" / "and gullet as far
+  forward as you can." / "Watch for sharp broken ribs." / "windpipe and gullet": step 6; gloves: step 2.
+No other words or numbers are drawn; the badges are the steps' numbers.
+
+Anatomical positions taken from guides, not from the topic's words:
+- On its back with the head uphill, propped with rocks or logs: hunter-ed.com (Kalkomey) Washington study guide, "Field Dressing a
+  Deer, Detailed Instructions" ("on its back—head uphill, if possible"); Indiana DNR "dressing.pdf" ("Prop it on its back and brace
+  the animal with a rock or log").
+- Belly cut along the midline between the pelvis (between the hind legs) and the breastbone: Montana State University Extension,
+  Field Care of Harvested Big Game ("make a cut from the pelvis up to the breastbone"); Ohio DNR Pub. 111 (cut "along the deer's
+  midline"); Indiana DNR ("along the center line of the belly").
+- Anus at the rear, under the tail, cut round: Montana State, Ohio DNR Pub. 111, Indiana DNR.
+- Diaphragm: the thin sheet of muscle that separates the heart and lungs from the stomach, attached to the inside of the rib cage
+  all round, cut from inside the cavity, with the stomach right behind it: Montana State ("the thin layer of muscle (diaphragm)
+  separating the heart and lungs from the stomach away from the rib cage"; "be careful not to puncture the stomach"); Ohio DNR Pub.
+  111 ("Cut through the diaphragm, completely encircling the inside of the chest cavity"); Penn State Extension, Field dressing
+  deer pocket guide ("Reach into the cavity and cut the diaphragm free from the rib cage").
+- Windpipe and gullet cut from inside the chest, reaching forward toward the neck: Ohio DNR Pub. 111 ("Reach into the chest ... Cut
+  through the windpipe and esophagus, or as far forward as you can reach"); Montana State ("Reach as far forward as possible").
+All drawings are original; no source drawing was copied.

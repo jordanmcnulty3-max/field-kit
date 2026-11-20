@@ -77,7 +77,7 @@ RESTORED = {
     'surv-shelter': ['shelter-debris'],
     'surv-fire': ['fire-sizes', 'fire-platform'],
     'surv-river-crossings': ['river'],
-    # land pack (v7.7) Task 6: surv-field-dressing-game ships with no deer field-dressing figure (dress-deer was not
+    # land pack (v7.7) Task 6: surv-field-dressing-game's deer steps carry land-field-dressing (LAND_FIGS below); dress-deer was not
     # recognisable and the redraw failed the image-first review; docs/v7.7-rulings.md, Diagrams)
 }
 
@@ -1017,6 +1017,21 @@ LAND_FIGS = {
         ['the quiet pocket behind a rock', 'the seam where two currents meet',
          'the outside of a bend where the fast water carries food', 'the hole below a dam or waterfall',
          'undercut banks, eddies and drop-offs are not drawn']),
+    'land-field-dressing': (
+        'surv-field-dressing-game', 'Deer step by step',
+        ['lay it on its back on a slight slope', 'and brace it with a rock or log', 'rock or log',
+         'pinch up the belly skin and make a shallow cut.', 'with the blade edge up and two fingers',
+         'of your other hand keeping the guts', 'away from the point, open the belly', 'from the pelvis to the breastbone.',
+         "don't cut the stomach or intestines", 'pelvis', 'breastbone',
+         'cut around the anus, pull it out a few inches,', 'and tie it off with string, with the bladder,',
+         'so droppings and urine stay off the meat.', 'anus',
+         'cut the diaphragm away from the ribs', 'all the way round, taking care not to', 'puncture the stomach.',
+         'ribs', 'diaphragm', 'stomach',
+         'reach up into the chest and cut the windpipe', 'and gullet as far forward as you can.',
+         'watch for sharp broken ribs.', 'windpipe and gullet'],
+        [r'\d\d', r'°', r'lungs?', r'\bheart', r'liver', r'throat', r'\bneck', r'\bjaw', r'brisket', r'\bsaw', r'split',
+         r'\bsafe', r'esophagus', r'trachea', r'navel', r'genital', r'head uphill'],
+        ["don't cut the stomach or intestines", 'food poisoning']),
     'land-deer-cuts': (
         'surv-land-butchering', 'The cuts and what each is good for',
         ['backstrap (loin)', 'tenderloin', 'inside, along the underside', 'of the spine, near the pelvis', 'neck', 'shoulder',
@@ -1126,7 +1141,10 @@ def test_land_figures_draw_no_plant_and_no_person():
     for name in LAND_FIGS:
         svg, label = figs.F[name]
         t = (svg + label).lower()
-        for word in ('leaf', 'leaves', 'plant', 'person', 'hand', 'skin'):
+        # land-field-dressing draws the topic's own words "your other hand" and "belly skin"; it draws no hand
+        words = ('leaf', 'leaves', 'plant', 'person') if name == 'land-field-dressing' else (
+            'leaf', 'leaves', 'plant', 'person', 'hand', 'skin')
+        for word in words:
             assert word not in t, (name, word)
 
 
@@ -1159,11 +1177,161 @@ def test_deer_cuts_tenderloin_is_drawn_dashed_as_inside():
     assert len(t) == 1 and 'd' in t[0].get('class').split()
 
 
-def test_field_dressing_deer_steps_carry_no_figure():
-    """Controller ruling (docs/v7.7-rulings.md, Diagrams): the deer steps ship text-only; neither the failed redraw nor the
-    old top view is drawn or kept."""
-    assert topic_figs()['surv-field-dressing-game'] == []   # the fish figure moved to the fish page with its text
+def _fd_panels():
+    """land-field-dressing's panels in drawing order: (step badge, view, set of data-part names, its first drawn line)."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    out = []
+    for g in root.iter():
+        if g.get('data-step'):
+            parts = {e.get('data-part') for e in g.iter() if e.get('data-part')}
+            texts = [re.sub(r'\s+', ' ', ''.join(t.itertext()).replace('’', "'")).lower()
+                     for t in g.iter() if t.tag.split('}')[-1] == 'text']
+            out.append((g.get('data-step'), g.get('data-view'), parts, texts))
+    return out
+
+
+def _deer_steps():
+    t = json.load(open(os.path.join(ROOT, 'src', 'survival', 'surv-field-dressing-game.json'), encoding='utf-8'))
+    blk = next(b for sec in t['sections'] if sec['h'] == 'Deer step by step' for b in sec['blocks'] if 'steps' in b)
+    return [x.replace('’', "'").lower() for x in blk['steps']]
+
+
+def test_field_dressing_deer_steps_carry_the_step_by_step_figure():
+    """The deer steps carry land-field-dressing after the steps; the failed drawings stay gone."""
+    assert topic_figs()['surv-field-dressing-game'] == ['land-field-dressing']
     assert 'dress-deer' not in figs.F and 'land-field-dressing-cuts' not in figs.F
+    t = json.load(open(os.path.join(ROOT, 'src', 'survival', 'surv-field-dressing-game.json'), encoding='utf-8'))
+    blocks = next(sec['blocks'] for sec in t['sections'] if sec['h'] == 'Deer step by step')
+    assert 'steps' in blocks[0] and blocks[1].get('fig') == 'land-field-dressing'
+
+
+def test_field_dressing_panels_follow_the_topics_steps_in_order():
+    """One panel per step, badged with the topic's own step number, top to bottom in the steps' order (3, 4, 5, then the
+    two halves of 6); each panel's drawn words are word for word in that step, and its badge is the only number drawn."""
+    panels = _fd_panels()
+    assert [p[0] for p in panels] == ['3', '4', '5', '6'], 'one panel and one badge per step; step 6 holds both its actions'
+    steps = _deer_steps()
+    for n, _, _, texts in panels:
+        step = steps[int(n) - 1]
+        assert texts[0] == n, texts
+        for line in texts[1:]:
+            assert line.rstrip(':,.') in step, f'panel {n}: {line!r} is not in step {n}: {step}'
+    nums = [s for _, _, s in _texts('land-field-dressing') if re.search(r'\d', s)]
+    assert nums == ['3', '4', '5', '6'], nums
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    ys = [float(next(c for c in g if c.tag.split('}')[-1] == 'circle').get('cy')) for g in root.iter() if g.get('data-step')]
+    assert ys == sorted(ys), 'panels run top to bottom'
+
+
+def test_field_dressing_inside_cuts_are_drawn_only_in_the_opened_body():
+    """The diaphragm and the windpipe and gullet are cut from inside (step 6: "Reach up into the chest"), so their marks
+    exist only in panels marked as the opened body, each of which draws the opening; the outside cuts (the belly, around
+    the anus) are drawn only in panels that show the outside."""
+    panels = _fd_panels()
+    inside = {'diaphragm-cut', 'diaphragm', 'knife'}
+    outside = {'belly-cut', 'anus-cut'}
+    for n, view, parts, _ in panels:
+        assert view in ('inside', 'outside'), (n, view)
+        if view == 'inside':
+            assert n == '6' and 'opening' in parts, (n, parts)
+            assert not parts & outside, (n, parts & outside)
+        else:
+            assert not parts & inside, (n, parts & inside)
+    by = {(n, frozenset(p)) for n, _, p, _ in panels}
+    assert any({'diaphragm-cut', 'diaphragm', 'knife'} <= p for _, p in by)
+    assert [n for n, _, p, _ in panels if 'belly-cut' in p] == ['4']
+    assert [n for n, _, p, _ in panels if 'anus-cut' in p] == ['5']
+    # the inside-cut words sit only in the inside panels
+    for n, view, _, texts in panels:
+        joined = ' '.join(texts)
+        if view != 'inside':
+            assert 'diaphragm' not in joined and 'windpipe' not in joined, n
+
+
+CUT_PARTS = {'belly-cut', 'anus-cut', 'diaphragm-cut'}
+
+
+def test_field_dressing_dashes_mean_cut_here_only():
+    """Inside the panels a dashed line means "cut here": no dashed element that is not a marked cut (night mode turns every
+    line the same red, so a dashed see-through line would read as a cut). Only the rules between panels are dashed outside."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    for g in root.iter():
+        if g.get('data-step'):
+            for e in g.iter():
+                if 'd' in (e.get('class') or '').split():
+                    assert e.get('data-part') in CUT_PARTS, (g.get('data-step'), e.get('data-part'), e.attrib)
+    cuts = [e.get('data-part') for e in root.iter() if e.get('data-part') in CUT_PARTS]
+    assert sorted(cuts) == sorted(CUT_PARTS), cuts
+
+
+def _xs(e):
+    if e.tag.split('}')[-1] == 'rect':
+        return [float(e.get('x')), float(e.get('x')) + float(e.get('width'))]
+    if e.get('transform', '').startswith('translate('):
+        return [float(re.findall(r'-?\d+(?:\.\d+)?', e.get('transform'))[0])]
+    nums = [float(n) for n in re.findall(r'-?\d+(?:\.\d+)?', e.get('d'))]
+    return nums[0::2]
+
+
+def test_field_dressing_step_six_is_one_step_with_two_actions():
+    """One badge 6; the diaphragm drawing under its words; then the windpipe action in words only, below the drawing, at the
+    same indent, with no rule between."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    six = next(g for g in root.iter() if g.get('data-step') == '6')
+    acts = [g for g in six if g.get('data-part', '').endswith('-action')]
+    assert [g.get('data-part') for g in acts] == ['diaphragm-action', 'windpipe-action']
+    bold = [''.join(t.itertext()) for t in six.iter() if t.tag.split('}')[-1] == 'text' and t.get('class') == 'tb']
+    assert bold == ['6', 'Cut the diaphragm away from the ribs', 'Reach up into the chest and cut the windpipe']
+    words = [(float(t.get('x')), float(t.get('y')), ''.join(t.itertext())) for t in acts[1].iter() if t.tag.split('}')[-1] == 'text']
+    assert [w for _, _, w in words] == ['Reach up into the chest and cut the windpipe', 'and gullet as far forward as you can.',
+                                         'Watch for sharp broken ribs.']
+    assert not [e for e in acts[1].iter() if e.tag.split('}')[-1] not in ('g', 'text')], 'the windpipe action is words only'
+    first = [(float(t.get('x')), float(t.get('y'))) for t in acts[0] if t.tag.split('}')[-1] == 'text']
+    assert {w[0] for w in words} == {x for x, _ in first} == {28.0}
+    drawing = next(g for g in acts[0] if g.tag.split('}')[-1] == 'g')
+    dy = float(re.findall(r'-?\d+(?:\.\d+)?', drawing.get('transform'))[1])
+    lowest = max(float(t.get('y')) for t in drawing.iter() if t.tag.split('}')[-1] == 'text') + dy
+    assert min(y for _, y, _ in words) > lowest + 10, 'the words sit below the diaphragm drawing'
+    assert not [e for e in six.iter() if e.tag.split('}')[-1] == 'line' and 'd' in (e.get('class') or '').split()]
+    assert max(y for _, y, _ in words) <= float(root.get('viewBox').split()[3]) - 8
+
+
+def test_field_dressing_draws_no_windpipe_and_nothing_on_the_neck():
+    """The windpipe drawing was left out (docs/v7.7-rulings.md, Diagrams): no windpipe, gullet, hand or windpipe cut is
+    drawn anywhere; what step 6 draws inside the body lies within the opening (its front at x 164; the neck ends at x 120)."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    parts = {e.get('data-part') for e in root.iter() if e.get('data-part')}
+    assert not parts & {'windpipe', 'gullet', 'windpipe-cut', 'hand', 'hand-inside', 'arm', 'chest-open'}, parts
+    six = next(g for g in root.iter() if g.get('data-step') == '6')
+    assert six.get('data-view') == 'inside'
+    for part in ('diaphragm', 'diaphragm-cut', 'knife', 'opening', 'ribs', 'stomach'):
+        els = [e for e in six.iter() if e.get('data-part') == part]
+        assert els, part
+        for e in els:
+            assert min(_xs(e)) >= 160, (part, _xs(e))
+
+
+def test_field_dressing_step_six_opening_starts_at_panel_fours_breastbone():
+    """The opened belly in step 6 reaches no further forward than where panel 4's cut stops at the breastbone."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    end = min(_xs(next(e for e in root.iter() if e.get('data-part') == 'belly-cut')))
+    rim = min(_xs(next(e for e in root.iter() if e.get('data-part') == 'opening')))
+    assert rim >= end - 6, (rim, end)
+
+
+def test_field_dressing_shows_the_deer_on_its_back_on_a_slope_with_a_brace():
+    """Step 3: the deer on its back on a slight slope, braced; legs (with hooves) up, antlers on the head."""
+    p3 = _fd_panels()[0]
+    assert p3[0] == '3' and {'deer', 'slope', 'brace', 'head'} <= p3[2]
+    svg = figs.F['land-field-dressing'][0]
+    assert re.search(r'rotate\((\d+(?:\.\d+)?) ', svg) and 0 < float(re.search(r'rotate\((\d+(?:\.\d+)?) ', svg).group(1)) <= 8
+
+
+def test_field_dressing_figure_is_tall_and_scrolls_when_enlarged():
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    assert root.get('class').split() == ['dg', 'tall']
+    css = open(os.path.join(ROOT, 'figs', 'figs.css'), encoding='utf-8').read()
+    assert '#dlgFig .dg.tall{max-height:none}' in css
 
 
 def test_deer_cuts_shank_is_a_label_only():

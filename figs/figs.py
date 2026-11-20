@@ -1,10 +1,10 @@
 from rope import rope_svg
 import math
 F = {}
-def svg(name, h, label, body, w=340):
+def svg(name, h, label, body, w=340, cls='dg'):
     if name in F:
         raise ValueError(f'duplicate figure id: {name}')
-    F[name] = (f'<svg class="dg" viewBox="0 0 {w} {h}" role="img" aria-label="{label}">\n{body}\n</svg>', label)
+    F[name] = (f'<svg class="{cls}" viewBox="0 0 {w} {h}" role="img" aria-label="{label}">\n{body}\n</svg>', label)
 
 def sun(cx, cy, r=11):
     rays = ''.join(f'<line x1="{cx+(r+4)*math.cos(a):.1f}" y1="{cy+(r+4)*math.sin(a):.1f}" x2="{cx+(r+10)*math.cos(a):.1f}" y2="{cy+(r+10)*math.sin(a):.1f}" class="h"/>' for a in [i*math.pi/4 for i in range(8)])
@@ -1051,3 +1051,167 @@ svg('land-fishing', 340, 'River seen from above, flowing down the page, with fis
 {lbl(336,118,'The outside of a bend','','end')}{lbl(336,132,'where the fast water','','end')}{lbl(336,146,'carries food','','end')}{lead(300,152,242,166)}
 {lbl(84,218,'The quiet pocket','')}{lbl(84,232,'behind a rock','')}{lead(170,236,229,270)}
 {lbl(40,320,'The seam where','')}{lbl(40,334,'two currents meet','')}{lead(146,326,214,316)}''')
+# ---------------- LAND (v7.7): field dressing a deer, step by step ----------------
+# surv-field-dressing-game, "Deer step by step", steps 3 to 6, one panel per step (two for step 6), badged with the step's own
+# number. Panel 3 shows the deer on its back from the side and a little above; panels 4 to 6 show it from above, head to the
+# left, belly up. The cuts made from outside (the belly, around the anus) are drawn on the hide; the cuts made from inside (the
+# diaphragm, the windpipe and gullet) are drawn only in panels that show the body opened (data-view="inside").
+def _cr(pts):
+    """Catmull-Rom curve through pts, as cubic path commands (after an initial M)."""
+    out = []
+    for i in range(len(pts) - 1):
+        p0 = pts[i - 1] if i > 0 else pts[i]
+        p1, p2 = pts[i], pts[i + 1]
+        p3 = pts[i + 2] if i + 2 < len(pts) else pts[i + 1]
+        c1 = (p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6)
+        c2 = (p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6)
+        out.append(f'C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}')
+    return ' '.join(out)
+
+
+def limb(pts, ws, cls='k', hcls='k kf'):
+    """A leg through its joints pts, widths ws: filled, sides stroked, top left open so it grows out of the body; a cloven
+    hoof continues the last segment."""
+    L, R = [], []
+    for i, (x, y) in enumerate(pts):
+        a, b = pts[max(i - 1, 0)], pts[min(i + 1, len(pts) - 1)]
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        d = math.hypot(dx, dy) or 1
+        nx, ny, w = -dy / d, dx / d, ws[i] / 2
+        L.append((x + nx * w, y + ny * w))
+        R.append((x - nx * w, y - ny * w))
+    Rr = R[::-1]
+    fill = f'M{L[0][0]:.1f} {L[0][1]:.1f} {_cr(L)} L{Rr[0][0]:.1f} {Rr[0][1]:.1f} {_cr(Rr)} Z'
+    sides = f'M{L[0][0]:.1f} {L[0][1]:.1f} {_cr(L)} M{R[0][0]:.1f} {R[0][1]:.1f} {_cr(R)}'
+    (ax, ay), (bx, by) = pts[-2], pts[-1]
+    ang, h, l = math.degrees(math.atan2(by - ay, bx - ax)), ws[-1] * 0.62, ws[-1] * 1.5
+    hoof = (f'<path transform="translate({bx:.1f} {by:.1f}) rotate({ang:.1f})" d="M-1 {-h:.1f} L{l*.7:.1f} {-h*.9:.1f} '
+            f'Q{l:.1f} {-h*.5:.1f} {l*.8:.1f} -0.6 L{l*.45:.1f} 0 L{l*.8:.1f} 0.6 Q{l:.1f} {h*.5:.1f} {l*.7:.1f} {h*.9:.1f} '
+            f'L-1 {h:.1f} Z" class="{hcls}"/>')
+    return f'<path d="{fill}" class="milk"/><path d="{sides}" class="{cls}"/>{hoof}'
+
+
+# The head lying on its side, seen in profile, muzzle to the left; crown at (0, 0). Antlers, because the topic's first step
+# names them ("Stay clear of its feet and antlers") and they say "deer" at a glance.
+FD_HEAD = ('M0 0 C-8 0 -16 2 -24 6 C-34 10 -46 14 -52 16 C-59 18 -59 27 -52 28 C-44 29 -34 29 -22 31 C-12 32 0 29 6 21 '
+           'C9 13 7 4 0 0 Z')
+FD_EAR = 'M0 6 C6 -6 18 -14 32 -14 C26 -2 14 8 3 12 Z'
+FD_ANTLER = ('M-5 2 C-1 -10 6 -22 2 -34 C-2 -42 -16 -46 -32 -42 M-2 -8 C-8 -12 -12 -18 -12 -26 M3 -24 C8 -30 10 -40 8 -50 '
+             'M-10 -41 C-12 -48 -12 -54 -10 -60 M-22 -44 C-26 -50 -27 -56 -25 -62')
+
+
+def fd_head(x, y, r=0):
+    return (f'<g transform="translate({x} {y}) rotate({r})" data-part="head"><path d="{FD_ANTLER}" class="k t3"/>'
+            f'<path d="{FD_EAR}" class="k t1 milk"/><path d="{FD_HEAD}" class="k milk"/>'
+            f'<circle cx="-22" cy="12" r="2.4" class="kf"/><circle cx="-55" cy="21" r="3.2" class="kf"/></g>')
+
+
+# Panel 3 view: on its back, from the side and a little above, head to the left. Near legs bold, far legs muted.
+FD_SIDE_BODY = ('M100 110 C98 94 110 82 128 78 C146 74 164 74 180 78 C196 82 208 80 222 74 C240 68 260 72 270 86 '
+                'C278 98 278 114 268 124 C258 134 236 138 206 138 C176 140 150 142 128 140 C110 138 102 126 100 110 Z')
+FD_SIDE_NECK = 'M118 90 C100 88 84 94 70 104 L64 142 C82 146 100 144 120 136 Z'
+
+
+def fd_side():
+    return ('<g data-part="deer">'
+            + limb([(134, 84), (138, 64), (140, 48), (134, 32)], [11, 9, 6, 5], 'm t1', 'm kf')
+            + limb([(232, 80), (240, 60), (250, 46), (254, 28)], [13, 8, 6, 5], 'm t1', 'm kf')
+            + f'<path d="{FD_SIDE_NECK}" class="k milk"/><path d="{FD_SIDE_BODY}" class="k milk"/>'
+            '<path d="M272 104 C282 104 290 110 288 120 C280 118 274 114 270 110" class="k t1 milk"/>'
+            + limb([(234, 122), (244, 92), (256, 68), (270, 54), (268, 32)], [30, 22, 9, 6, 5.5])
+            + limb([(116, 126), (120, 100), (124, 72), (112, 54), (100, 44)], [18, 13, 8, 6, 5.5])
+            + fd_head(76, 116, 6) + '</g>')
+
+
+# Panels 4 to 6 view: from above, belly up, head lying on its side to the left. Midline y 86; the breastbone ends at x 166
+# (behind the front legs), the pelvis is at x 272 (between the hind legs), the anus at x 302 under the tail.
+FD_TOP_BODY = ('M108 72 C118 58 136 50 156 50 C176 50 196 56 220 56 C244 56 262 50 280 54 C300 58 312 72 312 86 '
+               'C312 100 300 114 280 118 C262 122 244 116 220 116 C196 116 176 122 156 122 C136 122 118 114 108 100 Z')
+FD_TOP_NECK = 'M120 70 C104 68 88 70 70 74 L66 102 C84 104 102 104 120 102 Z'
+FD_TOP_LEGS = [([(132, 56), (122, 36), (112, 20), (98, 10)], [16, 11, 7, 5.5]),
+               ([(132, 116), (122, 136), (112, 152), (98, 162)], [16, 11, 7, 5.5]),
+               ([(272, 58), (288, 36), (300, 26), (318, 10)], [26, 14, 7, 5.5]),
+               ([(272, 114), (288, 136), (300, 146), (318, 162)], [26, 14, 7, 5.5])]
+
+
+def fd_top(inner='', over=''):
+    """inner: drawn on the belly, under the head; over: drawn last."""
+    return ('<g data-part="deer">' + ''.join(limb(p, w) for p, w in FD_TOP_LEGS)
+            + f'<path d="{FD_TOP_BODY}" class="k milk"/><path d="{FD_TOP_NECK}" class="milk"/>'
+            '<path d="M120 70 C104 68 88 70 70 74 M66 102 C84 104 102 104 120 102" class="k"/>'
+            '<path d="M311 80 C322 78 332 82 334 86 C332 90 322 94 311 92" class="k t1 milk"/>'
+            + inner + fd_head(70, 74, 0) + over + '</g>')
+
+
+def fd_knife(x, y, ang):
+    """Knife with its point at (x, y), handle trailing at angle ang."""
+    return (f'<g transform="translate({x} {y}) rotate({ang})" data-part="knife">'
+            f'<path d="M0 0 C8 -2 20 -5 34 -5 L34 3 C20 3 8 2 0 0 Z" class="k milk"/>'
+            f'<path d="M34 -7 V5" class="k t3"/><rect x="35" y="-5" width="26" height="9" rx="4" class="k kf"/></g>')
+
+
+def fd_panel(y0, n, lines, body, dy, view='outside'):
+    """One step: badge with the step's number, its words (text, class), then the drawing moved down by dy."""
+    words = ''.join(lbl(28, y0 + 16 + 15 * i, t, c) for i, (t, c) in enumerate(lines))
+    return (f'<g data-step="{n}" data-view="{view}">{badge(12, y0 + 12, str(n))}{words}'
+            f'<g transform="translate(0 {y0 + dy})">{body}</g></g>')
+
+FD_CUT = '<path d="M272 86 L170 86" class="h t3 d" marker-end="url(#aH)" data-part="belly-cut"/>'
+FD_SLIT = '<path d="M166 86 C200 80 240 80 272 86 C240 92 200 92 166 86 Z" class="k gr" data-part="belly-open"/>'
+_lens = 'M160 86 C182 50 252 46 284 86 C252 126 182 122 160 86 Z'
+FD_OPEN = f'<path d="{_lens}" class="gr"/>'
+FD_RIM = f'<path d="{_lens}" class="k t3" data-part="opening"/>'
+# Step 6 view of the opened belly: a D-shaped opening, rounded at the front where the ribs are; its front is at the breastbone
+# point of panel 4 (x 164 to 170).
+_dopen = 'M164 86 C164 60 190 50 220 50 C252 50 276 66 288 86 C276 106 252 122 220 122 C190 122 164 112 164 86 Z'
+FD_DOPEN = f'<path d="{_dopen}" class="gr"/>'
+FD_DRIM = f'<path d="{_dopen}" class="k t3" data-part="opening"/>'
+# ribs: short rib ends along the rounded front of the opening, between its edge and the diaphragm's edge
+FD_RIBS = ('<path d="M175 62 L181 68 M168 72 L176 76 M166 86 L173 86 M168 100 L176 96 M175 110 L181 104 '
+           'M187 56 L190 63 M187 116 L190 109" class="k t1" data-part="ribs"/>')
+# the diaphragm: a sheet across the front of the cavity; its edge against the ribs is the cut, all the way round
+_dedge = 'M214 60 C192 60 176 70 176 86 C176 102 192 112 214 112'
+FD_DIAPHRAGM = (f'<path d="{_dedge} C206 102 204 94 204 86 C204 78 206 70 214 60 Z" class="milk" data-part="diaphragm"/>'
+                '<path d="M214 60 C206 70 204 78 204 86 C204 94 206 102 214 112" class="k t1"/>'
+                '<path d="M186 76 L202 80 M184 86 L202 86 M186 96 L202 92" class="m t1"/>')
+FD_DCUT = f'<path d="{_dedge}" class="h t3 d" data-part="diaphragm-cut"/>'
+FD_GUTS = ('<path d="M226 62 C246 56 258 70 258 86 C258 102 246 116 226 110 C214 104 212 68 226 62 Z" class="k milk" data-part="stomach"/>'
+           '<path d="M264 72 C275 70 283 80 281 86 C279 94 269 100 262 98 C256 96 258 90 264 88 C270 86 272 82 266 80" class="k t1"/>')
+FD_ANUS = ('<circle cx="302" cy="86" r="9" class="h t3 d" data-part="anus-cut"/><circle cx="302" cy="86" r="2.2" class="kf"/>')
+FD_ROCK = '<path d="M176 150 C170 132 178 116 196 113 C214 112 224 128 220 150 Z" class="k rock" data-part="brace"/>'
+
+_fd3 = (f'<g transform="rotate(4 170 120)"><line x1="-10" y1="150" x2="350" y2="150" class="m" data-part="slope"/>'
+        f'{fd_side()}{FD_ROCK}</g>')
+_fd4 = (fd_top(FD_CUT) + lbl(250, 34, 'pelvis', '', 'middle') + lead(256, 38, 268, 82)
+        + lbl(188, 148, 'breastbone', '', 'middle') + lead(186, 136, 178, 96))
+_fd5 = fd_top(FD_SLIT + FD_ANUS) + lbl(330, 128, 'anus', '', 'end') + lead(318, 120, 306, 94)
+_fd6a = (fd_top(FD_DOPEN + FD_DIAPHRAGM + FD_RIBS + FD_GUTS + FD_DCUT + FD_DRIM, fd_knife(185, 68, -40))
+         + lbl(150, 18, 'ribs', '', 'middle') + lead(152, 22, 171, 68)
+         + lbl(176, 156, 'diaphragm', '', 'middle') + lead(182, 144, 194, 98)
+         + lbl(252, 156, 'stomach', '', 'middle') + lead(248, 144, 244, 108))
+
+
+def fd_step6(y0):
+    """Step 6 is one step with two actions: one badge, the diaphragm drawing under its words, then the windpipe action in
+    words only, at the same indent and with no rule before it. (A windpipe drawing was tried twice and left out: it could not
+    be made legible at phone size in night mode; docs/v7.7-rulings.md, Diagrams.)"""
+    head1 = ''.join(lbl(28, y0 + 16 + 15 * i, t, c) for i, (t, c) in enumerate(
+        [('Cut the diaphragm away from the ribs', 'tb'), ('all the way round, taking care not to', ''), ('puncture the stomach.', '')]))
+    y1 = y0 + 50 + 178
+    head2 = ''.join(lbl(28, y1 + 15 * i, t, c) for i, (t, c) in enumerate(
+        [('Reach up into the chest and cut the windpipe', 'tb'), ('and gullet as far forward as you can.', ''),
+         ('Watch for sharp broken ribs.', '')]))
+    return (f'<g data-step="6" data-view="inside">{badge(12, y0 + 12, "6")}'
+            f'<g data-part="diaphragm-action">{head1}<g transform="translate(0 {y0 + 50})">{_fd6a}</g></g>'
+            f'<g data-part="windpipe-action">{head2}</g></g>')
+
+
+svg('land-field-dressing', 1000, 'Field dressing a deer, steps 3 to 6. 3: lay it on its back on a slight slope and brace it with a rock or log. 4: pinch up the belly skin and make a shallow cut; with the blade edge up and two fingers of your other hand keeping the guts away from the point, open the belly from the pelvis to the breastbone; don’t cut the stomach or intestines. 5: cut around the anus, pull it out a few inches, and tie it off with string, with the bladder. 6, inside the opened body: cut the diaphragm away from the ribs all the way round, taking care not to puncture the stomach; reach up into the chest and cut the windpipe and gullet as far forward as you can; watch for sharp broken ribs.', f'''
+{fd_panel(0, 3, [('Lay it on its back on a slight slope', 'tb'), ('and brace it with a rock or log', '')], _fd3, 22)}
+{lbl(250, 206, 'rock or log', '')}{lead(238, 196, 214, 168)}
+<line x1="4" y1="214" x2="336" y2="214" class="m t1 d"/>
+{fd_panel(220, 4, [('Pinch up the belly skin and make a shallow cut.', 'tb'), ('With the blade edge up and two fingers', ''), ('of your other hand keeping the guts', ''), ('away from the point, open the belly', ''), ('from the pelvis to the breastbone.', ''), ('Don’t cut the stomach or intestines', 'tb')], _fd4, 314 - 220)}
+<line x1="4" y1="486" x2="336" y2="486" class="m t1 d"/>
+{fd_panel(492, 5, [('Cut around the anus, pull it out a few inches,', 'tb'), ('and tie it off with string, with the bladder,', ''), ('so droppings and urine stay off the meat.', '')], _fd5, 50)}
+<line x1="4" y1="720" x2="336" y2="720" class="m t1 d"/>
+{fd_step6(726)}''', cls='dg tall')

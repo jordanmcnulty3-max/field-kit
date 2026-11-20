@@ -908,11 +908,11 @@ def test_the_cdc_bottle_soak_is_on_the_babies_page_for_that_use_only_and_clean_a
     # spec 7 "Bleach" and spec 12: the soak is added as CDC gives it; Clean and disinfect gains one sentence naming the special mixes
     topics = _shipped('survival')
     texts = _texts(topics['surv-food-babies-children'])
-    assert 'Add 1 teaspoon (5 mL) of bleach per 1/2 gallon (1.9 L) or 8 cups of water (CDC).' in texts
+    assert 'For each 1/2 gallon (1.9 L) or 8 cups of water, add 1 teaspoon (5 mL) of unscented bleach (CDC).' in texts
     assert 'Soak for 2 minutes (CDC).' in texts
     assert 'CDC’s bleach soak is for baby bottles and feeding items only. Never use it for drinking water.' in texts
     assert not any('is not on this page' in x for x in texts)
-    special = [x for x in _texts(topics['surv-clean-and-disinfect']) if x.startswith('Two other bleach mixes')]
+    special = [x for x in _texts(topics['surv-clean-and-disinfect']) if 'two more special-purpose bleach mixes' in x]
     assert len(special) == 1 and 'Feeding babies and young children' in special[0] and 'Food poisoning and botulism' in special[0]
     assert 'never for drinking water' in special[0]
     assert '5 parts clean water' in ' '.join(_texts(topics['surv-food-poisoning']))   # the clean-up mix is where the sentence says

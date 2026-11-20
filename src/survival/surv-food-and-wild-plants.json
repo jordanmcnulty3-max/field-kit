@@ -18,7 +18,7 @@
     "blackberries",
     "mushrooms"
   ],
-  "summary": "Only eat a plant you can identify with certainty, and learn each one in person before you rely on it: words cannot teach identification. Four plants the sources support, each with its look-alikes: blackberries and raspberries, wild strawberries, dandelion and cattail. Never eat any wild plant of the carrot family (water hemlock and poison hemlock kill), anything that looks like ramps or wild grapes, or a wild mushroom unless an expert has identified it. Someone ate a plant that might be poisonous: use the Poisoning protocol now.",
+  "summary": "Only eat a plant you can identify with certainty, and learn each one in person before you rely on it (this app’s caution: words cannot teach identification). Four plants the sources support, each with its look-alikes: blackberries and raspberries, wild strawberries, dandelion and cattail. Never eat any wild plant of the carrot family (water hemlock and poison hemlock kill), anything that looks like ramps or wild grapes, or a wild mushroom unless an expert has identified it. Someone ate a plant that might be poisonous: use the Poisoning protocol now.",
   "doFirst": [
     "Someone ate a wild plant or mushroom that might be poisonous? Don’t wait for symptoms (Northern New England Poison Center): use the Poisoning protocol, linked below, now.",
     "Only eat a plant you can identify with certainty.",
@@ -40,7 +40,7 @@
           "p": "Only eat a plant you can identify with certainty."
         },
         {
-          "warn": "This app’s own caution: words on a screen cannot teach you to identify a plant, and there are deliberately no drawings of plants here. Learn each plant on this page in person, from someone who knows it, before you rely on it."
+          "warn": "This app’s own caution: words on a screen cannot teach you to identify a plant, and there are deliberately no drawings of plants here. Learn each plant on this page in person, from someone who knows it, before you rely on it. Vermont’s health department suggests taking a foraging class from a trusted organization."
         },
         {
           "list": [
@@ -60,7 +60,7 @@
             "What: thorny, bush-like plants with arching canes (Illinois Extension). They grow wild on disturbed ground: logged woods, clearings, old fields and fencerows (Penn State Extension).",
             "Season: red and black raspberries usually ripen in July; blackberries a little later, and the seasons overlap (Penn State Extension).",
             "Part eaten: the berries.",
-            "Preparation: none. A wild berry that looks like a store-bought raspberry or blackberry is safe to eat (Illinois Extension).",
+            "Preparation: wash them; nothing else. A wild berry that looks like a store-bought raspberry or blackberry is safe to eat (Illinois Extension).",
             "Look-alikes: none that are poisonous (Illinois Extension). Black raspberries and blackberries are easily confused, and both are eaten: a raspberry comes off hollow in the middle; a blackberry keeps a white, spongy core (Penn State Extension).",
             "Wear gloves for any work among the canes except picking (Illinois Extension)."
           ]
@@ -86,7 +86,7 @@
       "blocks": [
         {
           "list": [
-            "What: leaves 3 to 10 inches (8 to 25 cm) long with widely spaced teeth that point back toward the base; a hollow flower stem; every part gives a white, milky juice when cut (Cornell Cooperative Extension). One flower on each stem, which does not fork; leaves jagged, hairless and light green (Penn State Extension).",
+            "What: leaves 3 to 10 inches (8 to 25 cm) long with widely spaced teeth that point back toward the base; a hollow flower stem; the leaves, root and flower stem give a white, milky juice when cut (Cornell Cooperative Extension). One flower on each stem, which does not fork; leaves jagged, hairless and light green (Penn State Extension).",
             "Season: it grows from March to November (Michigan State University Extension). Pick young, tender leaves before the plant flowers (Michigan State University Extension). The yellow flowers come in May and June, sometimes again in autumn (Cornell Cooperative Extension).",
             "Parts eaten: leaves, flowers and roots. Not the flower stem: its milky sap is bitter (Michigan State University Extension).",
             "Leaves: young ones in salads (University of Vermont Extension, Michigan State University Extension). Older leaves are bitter (Michigan State University Extension); boil or steam them like spinach (University of Vermont Extension).",
@@ -112,13 +112,13 @@
           ]
         },
         {
-          "warn": "Two poisonous irises grow in the same wet ground. Yellow flag iris: all parts are toxic and eating it upsets the stomach; it is a prohibited invasive plant in New York, in dense colonies on the shores of ponds, lakes and streams and in marshes (Cornell Cooperative Extension). Blue flag iris: native from Nova Scotia south into the northeastern US, at pond margins, in wet meadows and marshes; its roots are poisonous (NC State Extension, Cornell Botanic Gardens). Yellow iris can be confused with cattail: their leaves are very similar (Government of Alberta)."
+          "warn": "Two poisonous irises grow in the same wet ground. Yellow flag iris: all parts are toxic and eating it upsets the stomach; resin from its roots and leaves can irritate and blister the skin, so wear gloves to handle it; it grows in dense colonies on the shores of ponds, lakes and streams and in marshes (Cornell Cooperative Extension). Blue flag iris: native from Nova Scotia south into the northeastern US, at pond margins, in wet meadows and marshes; its roots are poisonous (NC State Extension, Cornell Botanic Gardens). Yellow iris can be confused with cattail, especially when it is not in bloom: their leaves are very similar (Government of Alberta)."
         },
         {
           "list": [
-            "Leaf base: round on cattail, flat on iris (Montana Department of Agriculture).",
+            "The main test, in any season: the leaf base is round on cattail and flat on iris (Montana Department of Agriculture).",
             "Leaves: iris leaves are sword-shaped and flattened, with a raised rib down the middle, and rise from the ground in a fan (Government of Alberta, Montana Department of Agriculture).",
-            "Flowers: iris has showy yellow or blue flowers (Government of Alberta, Cornell Botanic Gardens); cattail has only the brown spike (Mississippi State University Extension).",
+            "Flowers: iris has showy yellow or blue flowers (Government of Alberta, Cornell Botanic Gardens); cattail has only the brown spike (Mississippi State University Extension). This only helps when the iris is in bloom; in spring, when shoots are picked, go by the leaf base.",
             "Root: yellow flag iris rootstocks have black sap (Montana Department of Agriculture)."
           ]
         }
@@ -206,7 +206,7 @@
     },
     {
       "name": "Cornell Cooperative Extension Allegany County, Master Gardener Volunteer Weed Series: Dandelion (June 3, 2024)",
-      "used": "Dandelion leaves 3 to 10 inches with teeth pointing to the base; hollow flower stem; milky juice; flowers May to June and sometimes autumn"
+      "used": "Dandelion leaves 3 to 10 inches with teeth pointing to the base; hollow flower stem; leaves, taproot and flower stem give a milky juice; flowers May to June and sometimes autumn"
     },
     {
       "name": "Penn State Extension, Noxious Weed: Catsear (updated August 14, 2026)",
@@ -222,7 +222,7 @@
     },
     {
       "name": "Cornell Cooperative Extension (Erie County), Invasives: Yellow Flag Iris (2016)",
-      "used": "All parts of yellow iris toxic, stomach upset if eaten; prohibited invasive in New York; colonies on shores of ponds, lakes and streams, and in marshes"
+      "used": "All parts of yellow iris toxic, stomach upset if eaten; root and leaf resin irritates and blisters skin, wear gloves; colonies on shores of ponds, lakes and streams, and in marshes"
     },
     {
       "name": "NC State Extension Plant Toolbox, Iris versicolor; Cornell Botanic Gardens, Wild Iris (Iris versicolor)",
@@ -230,7 +230,7 @@
     },
     {
       "name": "Government of Alberta (open data), Pale Yellow Iris weed sheet; Montana Department of Agriculture, Yellowflag Iris",
-      "used": "Yellow iris confused with cattail, leaves very similar; leaves sword-like, flattened, in a fan, raised midrib; showy yellow flowers; cattail leaf bases round, iris flat; black sap in iris rootstocks"
+      "used": "Yellow iris, especially when not in bloom, confused with cattail, leaves very similar; leaves sword-like, flattened, in a fan, raised midrib; showy yellow flowers; cattail leaf bases round, iris flat; black sap in iris rootstocks"
     },
     {
       "name": "Missouri Department of Conservation, Field Guide: Common Water Hemlock",
@@ -258,7 +258,7 @@
     },
     {
       "name": "Vermont Department of Health, Poisonous Plants in Vermont (last updated May 18, 2026)",
-      "used": "Virginia creeper berries look like small grapes; don’t wait for symptoms after eating false hellebore"
+      "used": "Virginia creeper berries look like small grapes; don’t wait for symptoms after eating false hellebore; consider a foraging class from a trusted organization"
     },
     {
       "name": "NC State Extension Plant Toolbox, Menispermum canadense (common moonseed)",
@@ -273,6 +273,5 @@
       "used": "No field test for whether an unknown mushroom is edible"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

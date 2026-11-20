@@ -6444,9 +6444,10 @@ Conversions (app's own): ½ inch = 1.3 cm; 3 to 10 inches = 8 to 25 cm; 4 to 16 
   rhizomes"; low severity. CBG-IV "Iris rhizomes and rootstocks contain a purgative irritant"; showy blue flowers. AB-YI "might be
   confused with" common cattail, leaves "very similar"; iris leaves sword-like, flattened, in a fan, raised midrib; showy yellow flowers;
   "POISONOUS", severe gastric disturbances. MT-YI "cattail, which has round leaf bases, instead of the flat leaf bases yellowflag iris
-  has"; "Rhizomes contain black sap". The old page's "Yellow flag iris is easily mistaken for cattail when it is not in flower" is replaced by
-  "Yellow iris can be confused with cattail: their leaves are very similar (Government of Alberta)": the sheet as opened says "might be
-  confused with" and "Leaves are very similar, but lacks the showy yellow flowers", not "when not in flower". The sheet names no
+  has"; "Rhizomes contain black sap". (Corrected in the fix round.) The sheet's raw text, re-opened: "Iris pseudacorus especially when not in bloom might be
+  confused with:" then "Common Cattail (Typha latifolia) - Leaves are very similar, but lacks the showy yellow flowers." The page now
+  says "Yellow iris can be confused with cattail, especially when it is not in bloom: their leaves are very similar (Government of
+  Alberta)." The first record here, that the sheet did not say "when not in flower", was wrong. The sheet names no
   publisher; it is credited to the Government of Alberta, whose open data site holds it.
 - Never eat: MDC-WH "the most toxic plant in North America. All parts are deadly"; flowers "look a lot like those of Queen Anne’s lace";
   similar species listed (the page names Queen Anne’s lace, hedge parsley, meadow parsnip, sweet cicely, anise root, golden Alexanders,
@@ -6499,3 +6500,32 @@ Conversions (app's own): ½ inch = 1.3 cm; 3 to 10 inches = 8 to 25 cm; 4 to 16 
   and wild plants, word for word:" lead-in follow the new title; Food when the power goes out's link label too.
 - Cook without power and Field dressing game keep "fish to 145°F"; this page no longer states it.
 - No drawing of any plant; the v6 plant-warnings figure stays out (PINNED_FIGS set to the empty set).
+
+### Land pack batch A1 fix round (2026-11-19), from task-2-a1-review.md
+
+Re-opened (built-in search or the URL already in this record; title checked): AB-YI (raw text "Iris pseudacorus especially when not in
+bloom might be confused with:"); CCE-YFI ("All parts of yellow iris are toxic." / "Resin from its roots and leaves can cause skin
+irritation and blistering." / "If eaten, it will cause gastric distress in both humans and animals." / "Always wear gloves when handling
+the plants because of their toxicity."); CCE-DAN ("The leaves, taproot, and flower stem which is hollow, all exclude [exude] a white milky
+juice when cut."); VDH-PP ("Consider taking a foraging class from a trusted organization."); new source CDC-CSS: CDC, How to Clean,
+Sanitize, and Store Infant Feeding Items (Mar. 19, 2025), https://www.cdc.gov/hygiene/about/clean-sanitize-store-infant-feeding-items.html
+(found by search): "2 teaspoons of unscented bleach per gallon (16 cups) of water in a clean wash basin"; "Soak items in solution for at
+least 2 minutes."; do not rinse; air-dry; no strength given.
+
+- I1, Wild plants "Cattail": warn now "... especially when it is not in bloom: their leaves are very similar (Government of Alberta)."
+  (AB-YI); the leaf-base line leads: "The main test, in any season: the leaf base is round on cattail and flat on iris (Montana
+  Department of Agriculture)."; the Flowers line adds "This only helps when the iris is in bloom; in spring, when shoots are picked, go by
+  the leaf base." (app's reading of AB-YI's qualifier and USDA's spring shoots).
+- I2, Feeding babies: step 2 now "For each 1/2 gallon (1.9 L) or 8 cups of water, add 1 teaspoon (5 mL) of unscented bleach (CDC)."
+  (CDC-CLN amount, CDC-CSS "unscented"; the two ratios are equal: 2 teaspoons per gallon = 1 per 1/2 gallon); last line now "CDC’s
+  emergency page gives no bleach type or strength; CDC’s everyday page on the same job gives the same amount (2 teaspoons per gallon) and
+  says unscented bleach." CDC-CSS added to the sources. The step leads with the water volume (M2). D158 updated.
+- I3: "it is a prohibited invasive plant in New York" removed from the page and from the CCE Erie source line.
+- M1, Clean and disinfect: "Besides the container and bucket mixes below, two more special-purpose bleach mixes are each for one job
+  only, and never for drinking water: ..." (still one sentence; rest unchanged).
+- M3, summary: "(this app’s caution: words cannot teach identification)"; body caution adds "Vermont’s health department suggests taking
+  a foraging class from a trusted organization." (VDH-PP).
+- M4, dandelion: "the leaves, root and flower stem give a white, milky juice when cut" (CCE-DAN).
+- M5, brambles: "Preparation: wash them; nothing else." (the page's own wash line, MSU-DAN, UVM-DAN).
+- M6, iris warn: "resin from its roots and leaves can irritate and blister the skin, so wear gloves to handle it" (CCE-YFI).
+- M7, M9: no change (docs/v7.7-rulings.md, Batch A1 fix round). M8: rulings completed.

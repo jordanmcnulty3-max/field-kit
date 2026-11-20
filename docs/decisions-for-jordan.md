@@ -1184,7 +1184,9 @@ docs/v7.7-rulings.md ("Batch A1").
    milky sap; blackberries have thorns). Today: not on the page. Say if the group wants it back.
 158. **Which bleach for CDC's bottle soak (surv-food-babies-children). Medical professional.** CDC's page (How to Clean Infant Feeding
    Items During Emergencies, January 8, 2025) gives "1 teaspoon of bleach per 1/2 gallon or 8 cups of water" and no bleach type or
-   strength. Clean and disinfect's household mixes use plain, unscented 5% to 9% bleach (CDC). Today: the soak is given exactly as CDC
-   gives it, labelled for baby feeding items only and never for drinking water, with "CDC’s page gives no bleach type or strength."
-   Your decision on D141 (add the soak) is carried out. Ask a medical professional whether to say plain, unscented 5% to 9% bleach for
-   the soak, as for the other mixes.
+   strength. CDC's everyday page (How to Clean, Sanitize, and Store Infant Feeding Items, March 19, 2025) gives the same amount, "2
+   teaspoons of unscented bleach per gallon (16 cups) of water", and no percentage. Clean and disinfect's household mixes use plain,
+   unscented 5% to 9% bleach (CDC). Today (fix round): the soak is the emergency page's steps with "unscented bleach" from the everyday
+   page, labelled for baby feeding items only and never for drinking water, and the page says the emergency page gives no type or
+   strength while the everyday page gives the same amount and says unscented. Your decision on D141 (add the soak) is carried out. Ask
+   a medical professional whether to say 5% to 9% for the soak, as for the other mixes (no CDC infant-feeding page gives a strength).

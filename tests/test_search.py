@@ -963,6 +963,12 @@ def test_moved_topics_keep_their_index_position(page, app_url, text):
         if text == 'trap':   # only "trap" matched the renamed label's word
             changed |= {'s:surv-food-power-out', 's:surv-food-when-short'}
         older, want = [k for k in older if k not in changed], [k for k in want if k not in changed]
+    if text in ('fishing', 'trap'):
+        # whole-pack read (I3, I7): Field dressing game gained a section on an animal already in a trap, linked to Trapping, and a link
+        # to "New York rules for hunting, fishing and trapping" for migratory birds, so it now matches these two words by its text; its
+        # index position is unchanged and every other older page keeps its order
+        older = [k for k in older if k != 's:surv-field-dressing-game']
+        want = [k for k in want if k != 's:surv-field-dressing-game']
     if len(got) == 30:   # the list is capped at 30, so new pages can push older ones off its end
         want = want[:len(older)]
     assert older == want

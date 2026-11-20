@@ -1041,6 +1041,25 @@ def test_warm_meat_time_limits_each_have_one_owner():
     for tid in ('surv-land-big-game', 'surv-land-keeping-meat'):
         assert 's:surv-field-dressing-game' in _links(land[tid]), tid
 
+def test_preserving_game_meat_says_the_agency_jerky_needs_a_working_oven_or_dehydrator_and_never_sends_drying_outdoors():
+    # whole-pack read C3 and C4: the summary and Do first name the dehydrator or oven and the power outage; "outdoors only" is for smoke
+    # and fire, never for drying; the jerky method quotes Cook without power on the gas oven, word for word, and links it
+    topics = _shipped('survival')
+    keep = topics['surv-land-keeping-meat']
+    box = ' '.join(keep['doFirst'])
+    for where in (keep['summary'], box):
+        assert 'dehydrator' in where and 'oven that holds 140°F (60°C)' in where and 'without power' in where or 'no power' in where, where
+        assert 'the agencies advise against drying meat in the sun or open air' in where.lower(), where
+    for x in _all_texts(keep):
+        low = x.lower()
+        assert 'dry meat outdoors' not in low and 'smoke and dry meat' not in low and 'dry meat only outdoors' not in low, x
+    oven = 'Never the oven: most can’t be lit by hand in an outage (GE, Whirlpool, KitchenAid), and Wolf says not to try.'
+    assert oven in ' '.join(_texts(topics['surv-food-cooking-no-power']))
+    jerky = next(sec for sec in keep['sections'] if sec['h'] == 'Jerky')
+    jtext = ' '.join(_all_texts({'sections': [jerky]}))
+    assert oven in jtext and 'this method can’t be done' in jtext
+    assert 's:surv-food-cooking-no-power' in _links({'sections': [jerky]})
+
 def test_fishing_fish_cleaning_and_trapping_split_the_old_traps_topic():
     # land pack batch C (spec 4 rows 2, 5, 7; spec 10 calls 4, 7, 9): Fishing for food keeps the id and is fishing only; the fish
     # cooking sentence Cook without power quotes word for word from Field dressing game is carried identically by the new owner of

@@ -13,11 +13,11 @@
     "hang a deer",
     "aging venison"
   ],
-  "summary": "Keep game cold: below 40°F (4°C), and a hanging carcass no more than 2 to 3 days at that. Storage times are in the table. Every other way to keep meat here carries one of two labels: backed by a food-safety agency, or traditional and not agency-verified. None of them makes game ready to eat: cook it to 165°F (74°C) before eating, except deer jerky made exactly by the agency method. Smoke and dry meat only outdoors.",
+  "summary": "Keep game cold: below 40°F (4°C), and a hanging carcass no more than 2 to 3 days at that. Storage times are in the table. Every other way to keep meat here carries one of two labels: backed by a food-safety agency, or traditional and not agency-verified. None of them makes game ready to eat: cook it to 165°F (74°C) before eating, except deer jerky made exactly by the agency method, which needs a working dehydrator or an oven that holds 140°F (60°C), so none without power. Smoke meat only outdoors; the agencies advise against drying meat in the sun or open air.",
   "doFirst": [
-    "Keep the meat cold: a hanging deer at 40°F (4°C) or below for 2 to 3 days at most (Penn State Extension). How fast to cool the carcass first, and what to do with no ice or fridge: see Hanging a carcass below. Cut meat in a fridge at 40°F (4°C) or below: use it within 1 to 2 days (Utah State University Extension).",
+    "Keep the meat cold: a hanging deer at 40°F (4°C) or below for 2 to 3 days at most (Penn State Extension). Cooling the carcass first, and what to do with no ice or fridge: see Hanging a carcass below. Cut meat in a fridge at 40°F (4°C) or below: use it within 1 to 2 days (Utah State University Extension).",
     "Every method on this page keeps meat; none makes it ready to eat. Freezing may not kill trichinella worms in game meat, and curing, drying or smoking alone does not consistently kill them (CDC). Cook it to 165°F (74°C) in the thickest part before eating. The one exception is deer jerky made exactly as in “Jerky” below.",
-    "Smoke and dry meat outdoors only. Fires and fuel indoors: see Carbon monoxide and burning fuel indoors.",
+    "Smoke meat outdoors only; fires and fuel indoors: see Carbon monoxide and burning fuel indoors. The agency jerky method dries meat indoors, in a working dehydrator or an oven that holds 140°F (60°C); with no power to run one, there is no jerky. The agencies advise against drying meat in the sun or open air (National Center for Home Food Preservation, USDA).",
     "Don’t make jerky from meat that touched gut contents: cook that meat thoroughly instead (National Center for Home Food Preservation)."
   ],
   "sections": [
@@ -154,7 +154,11 @@
       "h": "Jerky",
       "blocks": [
         {
-          "p": "Backed by a food-safety agency (National Center for Home Food Preservation). This method needs a dehydrator or an oven that holds 140°F (60°C), and a food thermometer. It is for deer: don’t use bear meat for jerky (University of Alaska Fairbanks Extension), which also says to cook bear meat until well done. Jerky from wild boar or any other game is cooked to 165°F (74°C) before eating, as in the end step below. Raw poultry is generally not recommended for jerky (National Center for Home Food Preservation)."
+          "p": "Backed by a food-safety agency (National Center for Home Food Preservation). This method needs a working dehydrator or an oven that holds 140°F (60°C), a food thermometer, and a fridge for the marinating step. In a power outage, without a working dehydrator or oven, this method can’t be done. Never try to light a gas oven by hand in an outage: from Cook without power, “Never the oven: most can’t be lit by hand in an outage (GE, Whirlpool, KitchenAid), and Wolf says not to try.” It is for deer: don’t use bear meat for jerky (University of Alaska Fairbanks Extension), which also says to cook bear meat until well done. Jerky from wild boar or any other game is cooked to 165°F (74°C) before eating, as in the end step below. Raw poultry is generally not recommended for jerky (National Center for Home Food Preservation)."
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
         },
         {
           "steps": [
@@ -184,11 +188,15 @@
       "h": "Smoking and smoke-drying",
       "blocks": [
         {
-          "warn": "Smoke meat outdoors only. From Carbon monoxide and burning fuel indoors: “Carbon monoxide comes from anything that burns fuel. You cannot see or smell it.”"
+          "warn": "Smoke meat outdoors only. From Carbon monoxide and burning fuel indoors: “Carbon monoxide comes from anything that burns fuel. You cannot see or smell it.” Where to set up a fire outdoors, away from the house, is under “Cooking outdoors” in Cook without power."
         },
         {
           "link": "s:surv-carbon-monoxide",
           "label": "Carbon monoxide and burning fuel indoors"
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
         },
         {
           "p": "Traditional: from an extension source, not agency-verified. North Dakota State University Extension, smoked deer jerky:"
@@ -340,7 +348,7 @@
     },
     {
       "name": "National Center for Home Food Preservation, Sun Drying (from So Easy to Preserve, 6th ed., 2014)",
-      "used": "Meats not recommended for drying outdoors"
+      "used": "Meats are not recommended for out-of-doors drying; dry meats indoors in the controlled conditions of an oven or food dehydrator"
     },
     {
       "name": "University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed October 2021)",
@@ -356,7 +364,7 @@
     },
     {
       "name": "Field dressing game, Preserving food, Cook without power, Is it still good?, Carbon monoxide and burning fuel indoors, Butchering deer and small game (other topics in this app)",
-      "used": "The trichinella sentence, the 165°F rule for all wild game and NYS Department of Health’s 45°F sentence, quoted word for word, and carcass cooling by link (Field dressing game); USDA's dehydrator and sun-drying sentences and New York State Department of Health's winter sentence, quoted word for word from Preserving food; canning by link; cooking, thawed meat and carbon monoxide by link; sausage reasons by link"
+      "used": "The trichinella sentence, the 165°F rule for all wild game and NYS Department of Health’s 45°F sentence, quoted word for word, and carcass cooling by link (Field dressing game); USDA's dehydrator and sun-drying sentences and New York State Department of Health's winter sentence, quoted word for word from Preserving food; canning by link; cooking by link, and Cook without power’s gas-oven sentence quoted word for word with where to set up a fire outdoors by link; thawed meat and carbon monoxide by link; sausage reasons by link"
     }
   ],
   "reviewed": "2026-11-19"

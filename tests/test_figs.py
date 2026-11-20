@@ -78,7 +78,6 @@ RESTORED = {
     'surv-shelter': ['shelter-debris'],
     'surv-fire': ['fire-sizes', 'fire-platform'],
     'surv-river-crossings': ['river'],
-    'surv-traps-and-fishing': ['trap-snare'],
     'surv-field-dressing-game': ['dress-deer'],
 }
 
@@ -967,3 +966,30 @@ def test_cans_no_can_or_jar_drawn_without_a_sign():
             continue
         loose.append(ET.tostring(g, encoding='unicode'))
     assert loose == [], loose
+
+
+# ---- Land pack (v7.7) batch C: the trap figures move with their text to Trapping only if every drawn string is in its text ----
+def test_squirrel_pole_moved_to_trapping_and_draws_only_the_topics_words():
+    """Fishing for food is fishing only, so it carries no trap figure. trap-squirrel sits once in Trapping and its drawn line is
+    in that topic's own text. trap-snare ("twigs funnel it into the loop", "wire tied to a solid support") and trap-fig4
+    ("heavy rock or log", "trigger, bait on the end") draw words no opened source gives, so they are on no topic."""
+    used = topic_figs()
+    assert used['surv-traps-and-fishing'] == []
+    assert used['surv-land-trapping'] == ['trap-squirrel']
+    assert all(n not in names for names in used.values() for n in ('trap-snare', 'trap-fig4', 'fishing'))
+    topic = topic_text('surv-land-trapping')
+    for _, _, s in _texts('trap-squirrel'):
+        assert s.strip() in topic, f'trap-squirrel: drawn {s!r} is not in surv-land-trapping'
+    assert fig_section('surv-land-trapping', 'trap-squirrel') == ['Snares and deadfalls (survival manuals)']
+
+
+def test_dress_fish_moved_with_the_fish_text_to_the_fish_page():
+    """Batch C fix round (spec 7, one rule one owner): the fish gutting figure sits once on the fish page, in its gutting section,
+    and its drawn line is in that page's text; Field dressing game no longer carries it."""
+    used = topic_figs()
+    assert used['surv-land-fish-cleaning'] == ['dress-fish']
+    assert 'dress-fish' not in used['surv-field-dressing-game']
+    topic = topic_text('surv-land-fish-cleaning')
+    for _, _, s in _texts('dress-fish'):
+        assert s.strip().rstrip('.') in topic, f'dress-fish: drawn {s!r} is not in surv-land-fish-cleaning'
+    assert fig_section('surv-land-fish-cleaning', 'dress-fish') == ['Gut it']

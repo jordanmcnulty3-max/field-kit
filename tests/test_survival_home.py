@@ -957,3 +957,33 @@ def test_the_cdc_bottle_soak_is_on_the_babies_page_for_that_use_only_and_clean_a
     assert len(special) == 1 and 'Feeding babies and young children' in special[0] and 'Food poisoning and botulism' in special[0]
     assert 'never for drinking water' in special[0]
     assert '5 parts clean water' in ' '.join(_texts(topics['surv-food-poisoning']))   # the clean-up mix is where the sentence says
+
+
+def test_fishing_fish_cleaning_and_trapping_split_the_old_traps_topic():
+    # land pack batch C (spec 4 rows 2, 5, 7; spec 10 calls 4, 7, 9): Fishing for food keeps the id and is fishing only; the fish
+    # cooking sentence Cook without power quotes word for word from Field dressing game is carried identically by the new owner of
+    # fish at 145°F; Trapping states New York's position on snares and deadfalls on the same page; no land topic has a Where or When tag
+    topics = _shipped('survival')
+    fishing, clean, trap = topics['surv-traps-and-fishing'], topics['surv-land-fish-cleaning'], topics['surv-land-trapping']
+    assert fishing['title'] == 'Fishing for food'
+    for t in (fishing, clean, trap):
+        assert t['category'] == 'land' and 'where' not in t and 'when' not in t
+    quoted = 'Cook all wild game and birds to at least 165°F in the thickest part, and fish to 145°F.'
+    assert quoted in ' '.join(_texts(clean))
+    assert quoted in ' '.join(_texts(topics['surv-food-cooking-no-power']))
+    fish_text = ' '.join(_texts(fishing)).lower()
+    for word in ('snare', 'deadfall', 'body-gripping', 'foothold'):
+        assert word not in fish_text, word
+    trap_text = ' '.join(_texts(trap))
+    assert 'New York law forbids setting a snare or any noose that can take an animal' in trap_text
+    assert 'New York law counts a deadfall as a trapping device' in trap_text
+    assert 'This app’s caution: don’t set one without asking DEC.' in trap_text and 'Illegal in normal times' not in trap_text
+    assert 'touch the eye or mouth with the striking tool, never your hand' in trap_text
+    assert 's:surv-land-ny-rules' in _links(trap) and 's:surv-land-ny-rules' in _links(fishing)
+    assert {'s:surv-land-butchering', 's:surv-land-keeping-meat', 's:surv-field-dressing-game'} <= set(_links(trap))
+    fd = topics['surv-field-dressing-game']
+    assert 's:surv-land-fish-cleaning' in _links(fd) and quoted in ' '.join(_texts(fd))
+    for t in ('surv-food-when-short', 'surv-food-power-out'):
+        labels = [b['label'] for s in topics[t]['sections'] for b in s['blocks'] if b.get('link') == 's:surv-traps-and-fishing']
+        assert labels == ['Fishing for food'], (t, labels)
+    assert 's:surv-land-fish-cleaning' in _links(fishing) and 's:surv-traps-and-fishing' in _links(clean)

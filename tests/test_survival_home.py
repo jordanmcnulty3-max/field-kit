@@ -802,12 +802,21 @@ def _v74_text(name):
     return json.loads(r.stdout)
 
 
+# the land pack (v7.7) adds a second link block to one of them (spec 7, Fallout): filtered out here after checking it is there exactly once
+CHECKED_LAND_LINKS = {'surv-fallout-water-and-food': 's:surv-land-after-fallout'}
+
+
 @pytest.mark.parametrize('tid,target', sorted(CHECKED_FOOD_LINKS.items()))
 def test_the_checked_topics_differ_from_v74_release_by_one_added_link_block(tid, target):
     now, was = _shipped('survival')[tid], _v74_text(tid)
     extra = []
     now_sections = json.loads(json.dumps(now['sections']))
     assert len(now_sections) == len(was['sections']), tid
+    if tid in CHECKED_LAND_LINKS:
+        land = [b for sn in now_sections for b in sn['blocks'] if b.get('link') == CHECKED_LAND_LINKS[tid]]
+        assert land == [{'link': CHECKED_LAND_LINKS[tid], 'label': _title_of(CHECKED_LAND_LINKS[tid])}], land
+        for sn in now_sections:
+            sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != CHECKED_LAND_LINKS[tid]]
     for sn, sw in zip(now_sections, was['sections']):
         assert sn['h'] == sw['h'], tid
         bn, bw = sn['blocks'], sw['blocks']
@@ -824,10 +833,16 @@ def test_the_checked_topics_differ_from_v74_release_by_one_added_link_block(tid,
     assert set(now) == set(was)
 
 
-def test_the_food_pack_does_not_link_field_dressing_game_until_v76():
-    # Its label puts the food pages above Wound cleaning and care for "dressing" (docs/v7.5-rulings.md); the link returns with v7.6
-    for tid in [k[2:] for k in FOOD]:
-        assert 's:surv-field-dressing-game' not in _links(_shipped('survival')[tid]), tid
+def test_cooking_or_the_power_out_hub_links_field_dressing_game_by_its_title():
+    # v7.5 kept this link out for the "dressing" search (docs/v7.5-rulings.md); v7.7 lifts the ban (land spec 12) and requires the link
+    # from one of the two food pages that send people to the game rule. Preserving food points to Keeping game meat instead.
+    topics = _shipped('survival')
+    blocks = [b for tid in ('surv-food-cooking-no-power', 'surv-food-power-out') for sec in topics[tid]['sections']
+              for b in sec['blocks'] if b.get('link') == 's:surv-field-dressing-game']
+    assert blocks, 'neither Cook without power nor Food when the power goes out links Field dressing game'
+    assert all(b['label'] == topics['surv-field-dressing-game']['title'] == 'Field dressing game' for b in blocks), blocks
+    assert 's:surv-field-dressing-game' not in _links(topics['surv-food-preserving'])
+    assert 's:surv-land-keeping-meat' in _links(topics['surv-food-preserving'])
 
 
 def test_home_section_headings_have_space_above_and_read_as_labels(page, app_url):

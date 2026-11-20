@@ -1229,3 +1229,131 @@ docs/v7.7-rulings.md ("Batch A1").
    in Small game and birds); steps to free a dog from a foothold trap (the sources give only general release: catchpole, cover, press the
    springs, a partner); the AFWA species Best Management Practices sheets (the raccoon sheet could not be opened); the IAFWA manual's
    cable-device (snare) chapter (legal elsewhere, not in New York; read only in summary, not used). Today: none on the page. Say which you want researched.
+
+
+Food from the land pack (v7.7), batch D (New York rules; food sources after fallout): numbers 190 to 199.
+
+190. **Deadfalls under New York law (surv-land-ny-rules).** The 2026–27 Hunting and Trapping Guide and DEC's Trapping Regulations page
+   name snares as not allowed ("Snares may not be used for trapping") and say nothing about deadfalls either way; DEC's definition of
+   trapping includes "traps, deadfalls and other devices", and the law (ECL § 11-1101) speaks of "any trap or deadfall". Today, labelled
+   as this app's caution: "don’t set one in normal times without asking DEC." The trapping page (another writer) must not call deadfalls
+   legal. Cost if wrong: a legal method is discouraged. Say if you want DEC asked, or the caution dropped.
+191. **Carp by crossbow (surv-land-ny-rules).** DEC's General Freshwater Fishing Regulations: carp "may be taken by a longbow (recurve
+   or compound) or crossbow" in a set season. The 2026–27 Hunting and Trapping Guide (p. 16): "Crossbows may not be used to take carp or
+   any other fish." Today: both shown, and the app's caution says to use a longbow, not a crossbow. Cost if wrong: a legal crossbow use
+   is discouraged.
+192. **FDA's 1998 agency guidance on the fallout page (surv-land-after-fallout).** The only federal document opened that names steps for
+   garden produce (brushing, washing, peeling, holding for decay) and for farm animals (shelter, corral, protected or stored feed,
+   uncontaminated water, off contaminated pasture) is FDA's Accidental Radioactive Contamination of Human Food and Animal Feeds (1998),
+   written for state and local agencies after accidents such as at a nuclear power plant, not for a nuclear explosion. Today: shown, with
+   that limit stated each time, never as making food fine to eat, and never as a reason to go out while sheltering. Cost if wrong: readers
+   may give an accident document more weight than it has for fallout. Say if you want it removed (the page would then give nothing for
+   farm animals).
+193. **Eggs from your own hens after fallout (surv-land-after-fallout).** No source opened (CDC, Ready.gov, EPA 2017, FDA 1998, the 1968
+   and 1985 handbooks) says anything. Today, labelled as this app's caution: treat them like milk from your own animals, and don't use them
+   until officials say you can. Cost if wrong: eggs are not eaten that could have been.
+194. **Old and agency lines left off the fallout page because they would loosen the checked caution (surv-land-after-fallout).** The 1968
+   handbook (dated): "Milk contamination from fallout is not expected to be a serious problem after an attack"; "Most of the Nation's
+   remaining food supplies would be usable after an attack"; reaping, threshing, canning and processing would keep dangerous amounts of
+   fallout out of processed foods. EPA (2017): stored grain products and canned milk and vegetables "will not present a risk from
+   radioiodine". FDA (1998): fresh milk diverted to cheese or milk powder (an agency-scale action). Today: none of those shown; the page keeps
+   "don't use them until officials say you can". Say if the group wants any of them shown, dated.
+   Shown since the fix round (controller ruling under your v7.4 decision for when no official word comes): the 1968 handbook, chapter 2,
+   last sentence of its food, water and milk summary, word for word: "People suffering from extreme hunger or thirst should not be denied
+   these necessities after an attack, even if the only available supplies might contain fallout particles or other radioactive substances."
+   (the sentence before it: "In summary, the danger of people receiving harmful doses of fallout radiation through food, water or milk is
+   very small.", not shown). Today the page, in "Read this first", after the checked "don't use them until officials say you can" line and
+   the CDC and Ready.gov advice, says: "For people who have nothing else, the 1968 civil defence handbook In Time of Emergency (dated) says:
+   [the sentence]. That is not a statement that the food or water is free of fallout, or fine: the same sentence says it might contain
+   fallout particles. It does not replace the rule above while officials can still be heard." Say if you want it removed or reworded.
+195. **USDA advice for rural families on crops and livestock (surv-land-after-fallout).** The 1968 handbook says it "is available from the
+   U.S. Department of Agriculture". It was not looked up (it is not among the sources the fallout pages use). Today: the page says the app
+   does not have it. Say if you want a later task to find and check it (it would be a dated federal civil defence publication).
+196. **Going out to tend animals during a fallout shelter (surv-land-after-fallout).** No source opened says anything about tending farm
+   animals while sheltering (Ready.gov: pets and service animals inside when told to stay inside; FDA 1998: shelter, corral, protected
+   feed and water, for agencies). Today, labelled as this app's caution: each trip out to animals is a trip out like any other, under How
+   long to stay in's own caution, quoted word for word: "with no meter and no official word, stay in all the time for at least the first
+   24 hours unless an immediate hazard forces you out. For the rest of the 2 weeks, and above all in the first few days, go out only for
+   what can’t wait, and as briefly as you can." Whether a thirsty animal "can't wait" is left to the reader. Cost if wrong: animals suffer
+   in the first 24 hours, or people take trips they could have avoided. Say if the group wants a firmer line for livestock.
+
+Food from the land pack (v7.7), batch A2 (field dressing, butchering, keeping game meat): numbers 160 to 169.
+
+160. **How long a deer can hang, and how cold (surv-land-keeping-meat).** NYS Department of Health: keep game below 45°F (7°C) until
+   butchered, "including big game hanging for several days". Penn State Extension: "hold the carcass at 40°F (4°C) or below for two to
+   three days, at most". North Dakota State University Extension: aging at 34 to 37°F for 10 to 14 days, two to three days enough. New
+   Mexico State University: at or around 32°F, 10 to 12 days. Today: all four are shown, and the page and its Do first go by Penn
+   State (40°F or below, 2 to 3 days at most; never above 45°F). Cost if wrong: meat cut up and used sooner than it had to be. Say if
+   the group wants longer aging in steady cold.
+161. **How long cut venison keeps in a fridge (surv-land-keeping-meat).** Utah State University Extension: 1 to 2 days. Penn State and
+   NDSU: 2 to 3 days. Minnesota Department of Health: 3 to 5 days. Today: 1 to 2 days, with Minnesota's figure shown beside it. Cost if
+   wrong: meat eaten or frozen sooner than needed.
+162. **Game jerky temperature (closes the unnumbered "game jerky temperature" entry above, D149's question).** The National Center for
+   Home Food Preservation: "Wild game (bear, elk, etc.) must be treated to destroy Trichinella by heating to 170°F" (review, 6.4) and
+   "USDA recommends attaining an internal temperature of at least 170°F" for game (5.4.6). University of Alaska Fairbanks Extension:
+   heat game meat in its marinade to boiling (212°F). USDA's jerky page: 160°F for meat, no figure for game. Today: Keeping game meat's
+   jerky method boils the strips in marinade for 5 minutes (NCHFP's method) and checks several strips at 170°F or more, says in the same
+   step that both figures are above the 165°F cooking rule and that 160°F is not enough for game; NCHFP's 30-day freezing step is
+   given as "do it, but don't count on it" (CDC: freezing may not kill the worms in wild game). Deer jerky made that way is eaten as it
+   is within two weeks at room temperature, as NCHFP gives it; every other jerky is cooked to 165°F first; no bear jerky (UAF). Preserving
+   food now points to that step. Cost if wrong: if the group wants UAF's boiling figure as the target, the check is stricter; if NCHFP's
+   freezing were trusted, the heat step would be extra work. Say which figure the group wants.
+163. **Winter cold as the freezer (surv-land-keeping-meat), against a checked line.** The US Army survival manual (FM 21-76, 2006
+   copy): "In cold climates, you can freeze and keep meat indefinitely", but cook it before eating. Preserving food (checked) quotes NYS
+   Department of Health: "Don’t put your food outside to keep it cold, even in the winter." FoodSafety.gov's freezer times assume food
+   kept continuously at 0°F. Today: the method is shown under the "Traditional" label with the NYS DOH line quoted beside it, and its
+   risk is labelled as the app's caution (thaw and refreeze in sun or a warm spell, animals); no opened source states that risk in those
+   words. End step: cook to 165°F. Cost if wrong: either a cold-weather way to keep meat is discouraged, or a household trusts outdoor cold
+   that thaws without anyone noticing. Say if the group wants this method kept.
+164. **Deer tongue, heart and liver now that chronic wasting disease is in New York (surv-land-butchering).** FM 21-76 eats the tongue
+   (and the brain); NYS DOH says avoid saliva and mouth parts and lists tonsils among the parts that may carry CWD prions, and says the
+   liver, kidney, heart and salivary glands "may also pose a risk". Today: the brain is never eaten; the tongue carries the app's caution
+   "don't take the tongue from a deer"; heart and liver are given with their preparation, the NYS DOH risk sentence beside them, and
+   165°F. Cost if wrong: food thrown away (tongue), or organ meat eaten with a risk NYS DOH names. Medical professional / Jordan: say if
+   heart and liver should also be left in New York deer.
+165. **Stock from bones and rendering fat (surv-land-butchering).** New Mexico State University (1994) saws the backbone into stock;
+   NYS DOH says avoid cutting through the spinal cord and Cornell Wildlife Health Lab says avoid sawing into bone. No source opened says
+   how to make stock from other deer bones or render deer fat. Today: no backbone stock; other stock and fat rendering left out, said on
+   the page. Cost if wrong: food (fat and bone) wasted in a shortage. Say if the group wants these researched for a later release.
+166. **Curing salts in corned venison (surv-land-keeping-meat).** NDSU's corning recipe uses 2 ounces of sodium nitrate and ½ ounce of
+   sodium nitrite in 6 gallons; NCHFP warns that a nitrite mistake can be a lethal dose and says commercial cure mixes are safer than pure
+   nitrite. Today: the page gives no nitrate or nitrite amounts and says to use only a commercial cure mix by its package directions, and,
+   as the app's caution, not to corn meat without one. Cost if wrong: a household with pure curing salts and a scale cannot follow NDSU's
+   recipe from the app.
+167. **Smoked and dried meat the manual says is ready to eat (surv-land-keeping-meat).** FM 21-76: properly smoked meat "you can eat ...
+   without further cooking". The land spec's rule: cook to 165°F unless an agency source says the product is safe as it is for that
+   animal; no agency source opened says so for smoked, air-dried or salted game (NCHFP: smoke without proper cooking is not a
+   preservative; CDC: curing, drying or smoking does not consistently kill trichinella). Today: every traditional method ends with
+   cooking to 165°F, and the page says it does not follow the manual. Cost if wrong: dried meat has to be cooked before it can be eaten on
+   the move.
+168. **State health departments count as food-safety agencies for the labels (surv-land-keeping-meat).** The spec names USDA, FDA, CDC
+   and NCHFP. Today: the "Backed by a food-safety agency" label also covers FoodSafety.gov (HHS), the Minnesota Department of Health
+   (storage chart) and the NYS Department of Health (the 45°F hanging limit), and the label text on the page says "or a state health
+   department". Cost if wrong: two blocks carry the agency label on a state health department's word. Say if only federal agencies and
+   NCHFP should count.
+169. **Taking a deer's head off through the spine (surv-land-butchering).** The Massachusetts processing notes cut "through the top of
+   the spinal column" at the base of the head; NYS DOH says avoid cutting through the skull or spinal cord. No opened source gives a way
+   to remove the head without cutting the spine. Today: the step is given, with a knife or saw kept for this job, the brain and spinal
+   cord kept off the meat and hands washed if touched (NYS DOH). Cost if wrong: some contact with spinal tissue that a source advises
+   against. Say if the group would rather leave the head on and bone the meat off the hanging carcass.
+
+Batch A2 fix round (numbers 200 to 203; 160 to 169 were used up).
+
+200. **A deer liver with cysts (surv-field-dressing-game, surv-land-butchering).** New Mexico Department of Game and Fish: a heart or
+   liver "off colored, with cysts, or in otherwise poor condition" goes out with the gut pile. Michigan DNR: tapeworm cysts ("clear to
+   hemorrhagic fluid and a large white dot") "can be trimmed and the remainder of the liver is edible". Today: Field dressing game (the
+   owner of disease signs) throws the liver away and names Michigan's reading; Butchering links to it. Cost if wrong: an edible liver
+   thrown away.
+201. **Bear: 185°F against the 165°F rule (surv-field-dressing-game, surv-land-keeping-meat).** University of Alaska Fairbanks Extension
+   (Making Jerky, FNH-00262): "Cook bear meat until it is well done. The internal temperature should be 185°F", and freezing and heating
+   "may not be sufficient to kill parasites in bear meat". The checked rule (CDC MMWR 2024, NYS DOH) is 165°F for all wild game,
+   bear included. Today: the 165°F sentences are word for word; a separate sentence beside them gives UAF's 185°F for bear, sourced.
+   Medical professional / Jordan: say which figure the app should give for bear.
+202. **Corning temperature (surv-land-keeping-meat).** NDSU FN155: "Higher temperatures need not affect the end result of the corning
+   process at all, if, for every 15 F of temperature above 38 F, you add one-third more salt." NCHFP review 6.2.4: "Curing should be
+   carried out at a temperature between 35°F and 40°F", the upper limit "to limit microbial growth". Today: cure only at 35 to 40°F;
+   NDSU's warm-weather salt is named and not given; corned meat is kept refrigerated at 38°F (NDSU) and the page says no source gives a
+   keeping time without that cold. Cost if wrong: corning is not possible in warm weather.
+203. **Fridge time for game birds (surv-land-keeping-meat).** Clemson Cooperative Extension: game birds used within three days.
+   FoodSafety.gov: raw chicken or turkey 1 to 2 days (Minnesota DOH: duck, goose 1 to 2 days). Today: 1 to 2 days, Clemson's 3 named.
+   Cost if wrong: birds used a day sooner than needed.

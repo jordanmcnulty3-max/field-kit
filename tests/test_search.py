@@ -773,6 +773,15 @@ def test_v77_first_five_on_screen_are_unchanged(page, app_url, text):
     assert now == V77_ON_SCREEN[text], f'{text!r}: first five on screen {now} (v7.7: {V77_ON_SCREEN[text]})'
 
 
+def test_milk_allergy_still_shows_anaphylaxis_first(page, app_url):
+    # "milk" now lists Game, fish, milk and gardens after fallout first and Anaphylaxis leaves its first five (docs/v7.7-rulings.md,
+    # batch D ruling 12); a search for the allergy must still put the protocol first
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    assert on_screen(page, 'milk allergy')[0] == 'p:anaphylaxis'
+
+
 @pytest.mark.parametrize('text', ['bleeding', 'cold', 'food poisoning', 'dressing', 'water', 'CO', 'fall', 'shelter in place'])
 def test_the_screen_shows_results_in_rank_order_with_no_group_headings(page, app_url, text):
     page.goto(app_url + '#/survival')
@@ -935,6 +944,8 @@ LAND_OLDER_ORDER = json.load(open(os.path.join(os.path.dirname(__file__), 'fixtu
 def test_moved_topics_keep_their_index_position(page, app_url, text):
     # the three older topics moved to category land but stay indexed where a topic in no pack is: FK.search.query() lists the same
     # keys in the same order as the v7.6 build did (recorded in tests/fixtures/search_land_older_order.json before the move)
+    # Pages that are new in the land pack (v7.7) did not exist when the fixture was recorded; they index after every older page and
+    # are left out of the comparison, so what is checked is that every page that existed in v7.6 keeps its place.
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
     # the pack's new pages (ids surv-land-*, checklist land-kit) are not in the v7.6 build; leaving them out, every other key keeps its v7.6 order

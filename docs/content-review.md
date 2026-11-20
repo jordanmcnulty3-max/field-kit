@@ -6758,3 +6758,539 @@ Source keys and URLs:
 - RULES: no rule stated beyond the rules page's own reading; snares prohibited; deadfalls not called legal or illegal; no trap-check
   interval given.
 - Link labels: "Traps and fishing" became "Fishing for food" on surv-food-when-short and surv-food-power-out (no other text changed).
+
+## Food from the land pack batch D: New York rules, food sources after fallout (2026-11-19)
+
+Files (all draft): src/survival/surv-land-ny-rules.json, src/survival/surv-land-after-fallout.json; one link block added to
+src/survival/surv-fallout-water-and-food.json. Every source below was found by built-in web search and opened by built-in web
+fetch on 2026-11-19; the title (and year where printed) was checked after each fetch. Fetches return summaries with quotes
+capped at about 125 characters, so long sentences were read as consecutive pieces and a few sections were fetched twice for
+exact words. No Firecrawl, no Bright Data, no other connector. Metric conversions are the app's own (feet x 0.3048, inches x
+2.54, rounded; 250 in² = 1,613 cm², shown as 1,600; 35 lb = 15.9 kg, shown as 16).
+
+Source keys:
+- HTG-GEN: NYS DEC, 2026–2027 New York Hunting & Trapping Guide, General Information section (cover: "2026–2027 Official Guide to
+  Laws & Regulations, Volume 20, Issue No. 1"; "Most regulations are in effect September 1, 2026 through August 31, 2027"; footers
+  "2026–2027 New York Hunting & Trapping Guide"). https://dec.ny.gov/sites/default/files/2024-07/htggeneralinfo.pdf (opened three times)
+- HTG-BIG: same guide, Big Game section, pp. 20–38. https://dec.ny.gov/sites/default/files/2024-07/htgbiggame.pdf (opened twice)
+- HTG-SMALL: same guide, Small Game Hunting, pp. 46–49. https://dec.ny.gov/sites/default/files/2024-07/htgsmallgamehunting.pdf
+- HTG-TURKEY: same guide, Turkey Hunting, pp. 50–52. https://dec.ny.gov/sites/default/files/2024-07/htgturkey.pdf
+- HTG-MIG: same guide, Migratory Game Birds, pp. 53–55. https://dec.ny.gov/sites/default/files/2024-07/htgonlinemigratorygamebirds.pdf
+- HTG-FUR: same guide, Furbearer section, pp. 59–66. https://dec.ny.gov/sites/default/files/2024-07/htgfurbearer.pdf (opened twice)
+- HTG-PULL: NYS DEC, 2026–2027 Hunting & Trapping Seasons Pull-out Summary. https://dec.ny.gov/media/39356 (furbearer possession tag and pelt seal only)
+- DEC-HTGPAGE: NYS DEC, Hunting and Trapping Regulations Guide page (lists the 2026–27 guide's sections). https://www.dec.ny.gov/outdoor/37136.html
+- DEC-TRAPREG: NYS DEC, Trapping Regulations (web page, undated). https://dec.ny.gov/things-to-do/trapping/regulations
+- DEC-TRAP: NYS DEC, Trapping (web page, undated). https://www.dec.ny.gov/things-to-do/trapping
+- ECL: NY Environmental Conservation Law § 11-1101, Prohibitions, NY Senate Open Legislation ("most recent revision (from
+  2014-09-22)"). https://www.nysenate.gov/legislation/laws/ENV/11-1101
+- FISHGUIDE: NYS DEC, 2026 New York State Freshwater Fishing Regulations Guide (cover "Regulations in effect April 1, 2026"; footers
+  "2026 New York State Freshwater Fishing Regulations Guide"). https://dec.ny.gov/sites/default/files/2024-03/fishguide.pdf (both
+  parts read, 0–100,000 and 100,000–198,374 characters)
+- DEC-FISHREG: NYS DEC, 2026 Freshwater Fishing Regulations page. https://www.dec.ny.gov/things-to-do/freshwater-fishing/regulations
+- DEC-FISHGEN: NYS DEC, General Freshwater Fishing Regulations (web page, undated). https://dec.ny.gov/things-to-do/freshwater-fishing/regulations/general (opened twice)
+- CDC-FWM: CDC, Food, Drinking Water, and Medicine Safety in a Radiation Emergency, last reviewed April 15, 2024. https://www.cdc.gov/radiation-emergencies/safety/food-drinking-water-medicine-safety.html
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024. https://ready.gov/radiation
+- EPA-PAG: US EPA, PAG Manual: Protective Action Guides and Planning Guidance for Radiological Incidents, EPA-400/R-17/001, January
+  2017. https://www.epa.gov/system/files/documents/2025-04/epa_pag_manual_final_revisions_01-11-2017_cover_508-d.pdf (characters
+  0–300,000 of 365,721 read: chapters 1 to 5; the rest, references and appendices, not read)
+- FDA-1998: US FDA, Accidental Radioactive Contamination of Human Food and Animal Feeds: Recommendations for State and Local
+  Agencies, August 13, 1998 (final; guidance page https://www.fda.gov/regulatory-information/search-fda-guidance-documents/accidental-radioactive-contamination-human-food-and-animal-feeds).
+  PDF https://fda.gov/media/74043/download (characters 0–100,000 of 103,191 read)
+- ITE-1968: Office of Civil Defense, In Time of Emergency, H-14, March 1968 (dated). Project Gutenberg HTML
+  https://gutenberg.org/files/15158/15158-h/15158-h.htm (cover "H-14 March 1968" confirmed) and plain text
+  https://m.gutenberg.org/files/15158/15158.txt (both parts read: 0–100,000 and 100,000–139,151 characters)
+- PNA-1985: FEMA, Protection in the Nuclear Age, June 1985 (dated), Waldo County copy.
+  https://waldocountyme.gov/wp-content/uploads/2024/01/1985-FEMA_Protection_in_the_Nuclear_Age.pdf
+
+Would not open: the eRegulations PDF of the whole hunting guide (https://www.eregulations.com/assets/docs/resources/NY/26NYHD_LR.pdf,
+client error); the DEC section PDFs carry the same 2026–27 text. The eRegulations page "Furbearer Traps"
+(https://www.eregulations.com/newyork/hunting/furbearer-traps, 2026 digest, updated August 25, 2026) opened and agrees with HTG-FUR on
+body-gripping bait limits and the trail setback; not cited. DEC "Hunting and Trapping Seasons" (https://www.dec.ny.gov/things-to-do/trapping/seasons)
+opened: dates only, no rules; not cited. Opened and not used: USDA Radiological Monitoring Handbook, Agriculture Handbook No. 246 (July
+1963), https://www.govinfo.gov/content/pkg/GOVPUB-A-PURL-gpo21788/pdf/GOVPUB-A-PURL-gpo21788.pdf (written for USDA monitors, not
+households; outside the source list for this pack).
+
+### surv-land-ny-rules
+
+- Guide years: HTG-GEN cover and footers (2026–2027; Sept. 1, 2026 to Aug. 31, 2027); FISHGUIDE cover ("Regulations in effect April 1,
+  2026"). HuntFishNY app: HTG-PULL and DEC-FISHREG name it. No season dates or bag limits are given (spec 10 call 6); the frog and carp
+  seasons and every species' dates are left to the guide.
+- Licences table: Hunting: HTG-GEN pp. 10–11 (Hunter Education Certificate or previous hunting licence; "Minors under the age of 12
+  may not obtain a hunting license or hunt wildlife"; "You must be at least 11 years of age to take this class"). Bowhunting privilege:
+  HTG-GEN pp. 10–11 (hunting licence plus Bowhunter Education Certificate, NYS bowhunting stamp issued 1980 or later, or NYS junior
+  bowhunting licence issued 1980 or later); HTG-BIG p. 23 (privilege required for bowhunting seasons). Muzzleloading privilege: HTG-GEN
+  (current hunting licence); HTG-BIG p. 23. Turkey permit: HTG-GEN (required for all turkey hunters); HTG-TURKEY p. 50 ("You must carry
+  your hunting license and turkey permit while you hunt."). Migratory birds: HTG-MIG pp. 53–54 (hunting licence; "must register
+  annually with New York State's Harvest Information Program", proof carried; federal duck stamp "If you are 16 years or older and you
+  hunt waterfowl", signed and carried). DMP: HTG-BIG p. 30 (one antlerless deer per permit, only in the WMU issued for). Trapping:
+  HTG-GEN p. 11 ("Trapper Education Certificate or previous trapping license from any state or country"); marten permit HTG-FUR p. 61
+  ("A free special permit is still required to trap marten in New York State."). Fishing: FISHGUIDE p. 89 (licence "while fishing or
+  helping someone to fish", exceptions including "Persons under 16 years of age"); p. 90 free fishing days.
+- Private land: HTG-GEN p. 12 ("does not give the holder any right to go on private property without permission of the landowner").
+  Licence not transferable: HTG-FUR p. 62. Mandatory trapper education course: DEC-TRAP ("Trappers must complete a mandatory trapper
+  education course").
+- Kinds of season: HTG-BIG pp. 23, 27, 30, 37 (Early Antlerless, Early Bowhunting, Regular, Late Bowhunting, Muzzleloading, Youth
+  Firearms; privileges per season); bear seasons HTG-BIG p. 38; turkey spring and fall HTG-TURKEY p. 51; small game by species HTG-SMALL
+  pp. 46–49; permanent water only in mink, muskrat, otter or beaver season HTG-FUR p. 61; closed season for fish FISHGUIDE p. 69 ("A
+  person may not fish for a species (including catch and release) during the closed season"; released immediately) and p. 4 ("not even
+  catch and release"). Unprotected species: HTG-GEN pp. 16–17 (porcupine, red squirrel, woodchuck, chipmunk, English sparrow, starling,
+  rock pigeon, monk parakeet; licence and legal implement still required).
+- Hours: HTG-BIG p. 20 ("Big game hunting hours are 1/2-hour before sunrise to 1/2-hour after sunset (see page 80)."); HTG-SMALL pp.
+  48–49 (cottontail, hare, squirrel, pheasant, bobwhite, ruffed grouse sunrise to sunset); HTG-TURKEY p. 51 (spring "1/2 hour before
+  sunrise to noon"; the fall hours were garbled in the extracted text and are not given); HTG-MIG p. 54 ("All other migratory game birds
+  may be taken from one-half hour before sunrise until sunset."; woodcock "from sunrise to sunset"). Sunday: HTG-BIG p. 20 ("Sunday
+  hunting is allowed in all areas of New York State.").
+- Always illegal: HTG-GEN pp. 16–17 (motor vehicle, vehicle lights, public road; unloaded long guns and crossbows in vehicles;
+  automatic; silencer; semiautomatic over 6 rounds with exceptions; spear except frogs; explosive arrow; drug delivery device; "It is
+  illegal to hunt with the aid of bait or over any baited area" for big game, upland game birds, turkey, waterfowl). HTG-BIG p. 20
+  ("Intentional feeding or baiting of deer or bear is prohibited at all times of year."; "Take big game while the deer or bear is in
+  water."; rimfire, under 20 gauge, multi-projectile, bows under 35 lb, barbed broadheads), p. 21 (dogs except leashed tracking dog
+  licence; "Hunting bear with the aid of bait or dogs is prohibited."), p. 22 ("It is unlawful to sell deer or bear meat."). HTG-TURKEY
+  p. 50 (no rifle or air gun; no bait; no electronic calling device during the open season; no dog in spring; no live decoys). HTG-MIG
+  p. 55 (baiting, live decoys, recorded calls with exceptions, motorboat or sailboat unless motor off or sail furled and stopped, rifles;
+  "No person shall kill or cripple any migratory game bird without making a reasonable effort" to retrieve it) and p. 54 ("Non-toxic shot
+  is required for hunting any migratory game bird, except woodcock, everywhere in New York State."). HTG-SMALL p. 46 (native snakes,
+  lizards, salamanders; turtles other than snapping turtles; spruce grouse).
+- Distances: HTG-GEN p. 17 (500 ft firearm, 250 ft crossbow, 150 ft bow from school, playground, occupied factory or church; crossbow 500
+  ft in Suffolk and Westchester; same from dwelling, farm building or occupied structure unless owner, lessee, immediate family,
+  employee or consent; not over any part of a public highway). Blaze orange or pink: HTG-BIG p. 20 ("Any person hunting deer or bear
+  with a firearm or a person who is accompanying someone hunting…"; 250 sq. in. solid visible from all directions, or 250 sq. in.
+  patterned at least 50%, above the waist; or a hat at least 50% orange or pink).
+- Tagging: HTG-BIG p. 22 ("Immediately fill in all information and sign the carcass tag"; "Report your harvest online, by phone, or
+  HuntFishNY mobile app within 48 hours as required by law."), p. 21 (carcass tag once the animal leaves your possession; e-tag
+  immediately); HTG-TURKEY p. 50 ("Users of paper tags must report within 48 hours of the harvest."); HTG-GEN p. 15 (reporting reduced
+  "to 48 hours (no longer 7 days)"). Migratory birds: HTG-MIG p. 55 ("No person shall completely field dress any migratory game bird"
+  before transport; head or one fully feathered wing attached). Pelt seal: HTG-FUR p. 62 (bobcat, fisher, otter, marten; seal before sale
+  or transfer, mounting or tanning, leaving the state; "within 10 days after the close of the season in the WMU"; "Seals for these species
+  cannot be sent through the mail."); HTG-PULL (possession tag and seal).
+- Trap-check intervals (carried-in item): HTG-FUR p. 61, word for word: "In the Southern Zone: You must check traps once in each
+  24-hour period."; "WMU 5C, 5F, 5G, 5H, 5J, 6F, 6J, and 6N: Visit once in each 48-hour period"; "WMU 5A, 6A, 6C, 6G, 6H, and 6K:" then
+  "Traps set in water during the open season for beaver, otter, mink and muskrat: Visit once in each 48-hour period", "Body-gripping
+  traps set on land: Visit once in each 48-hour period", "Restraining traps: Visit once in each 24-hour period". DEC-TRAPREG gives the
+  same intervals ("Visited once in each 48-hour period", "Visited once in each 24-hour period"; Southern Zone wording identical). The two
+  WMU lists together are the Northern Zone WMUs the guide lists for trap checking; no other Northern Zone WMU is named. "Restraining
+  trap" definition: HTG-FUR p. 61 ("A device used to capture and restrain a mammal."). Neither source defines "visit" or "check".
+  ECL § 11-1101 sets no interval. Year recorded: 2026–27 guide.
+- Legal and illegal traps: HTG-FUR p. 61 ("Snares may not be used for trapping."; "Box or cage traps are legal for all species."; no
+  cage trap designed to take more than one muskrat; "On land, foothold traps must be 5¾ inches or smaller (inside jaw spread)."; "Teeth
+  are not allowed on foothold traps."; "Foothold traps larger than 4 inches set on land must have a pan tension device and be covered when
+  set."; "During beaver or otter season, foothold traps up to 7¼ inches are allowed if set under water."; "A foothold trap larger than
+  7¼ inches is never legal to use."; "Body-gripping traps more than 7½ inches may never be used on land."; Adirondack WMU bait or lure
+  rule; name and address or DEC customer ID on all traps), p. 62 (closed beaver or otter season: water foothold no larger than 5¾ in.),
+  p. 63 (Southern Zone beaver trigger rules over 8½ in.), p. 64 ("A body-gripping trap measuring less than 5½ inches may be set in any
+  manner with or without the use of bait."; 5½ to 7½ in. limits on bait and set). DEC-TRAPREG agrees. ECL § 11-1101(5)(c) ("use, locate
+  or set a snare or a device consisting of a noose of any material whereby an animal may be taken"), (7)(c) ("smoke, chemicals, gas or
+  poison shall not be used on or near any trap" for listed furbearers), (4) ("any trap or deadfall").
+- Deadfalls: looked for in HTG-FUR, DEC-TRAPREG, DEC-TRAP and ECL. None allows or forbids them by name; DEC-TRAPREG's definition of
+  trapping includes "traps, deadfalls and other devices commonly used to take wildlife"; ECL (4) names "any trap or deadfall". The page
+  says so and adds a labelled app caution (D190).
+- Trap placement: HTG-FUR p. 62 ("within 100 feet of a house, school, playground, or church"; ECL (12): without "the written consent"
+  of the owner or lessee; "You may not set a trap on a public road."; culvert or ditch unless posted or landowner forbids; 15 ft beaver
+  dam, den or house with exceptions; "You may not set or stake a trap prior to 7:00 AM on opening day."; "No one may disturb a trap
+  lawfully set by another person."; "No one may remove a lawfully trapped animal from another person's trap."; "You must attempt to
+  release any animals that are accidentally captured when the season is closed"; "If the animal is injured to the extent you believe it
+  will not survive, humanely dispatch it."; no legal provision to keep it without DEC permission; firearm on a trapped animal without a
+  hunting licence from 16; junior trappers 12–15 need a hunting licence and an accompanying adult), p. 61 (5 ft muskrat house; no full
+  suspension; carcass bait on foothold sets "shall be completely covered at the time the trap is set or visited", hidden from directly
+  above), p. 64 (land body-gripping traps 100 ft from a public trail except on WMAs).
+- Fishing: DEC-FISHGEN and FISHGUIDE pp. 68–72 (angling "taking fish by hook and line"; "no more than 3 lines with or without a rod";
+  5 lures or baits, 15 hook points; "Anglers must be in immediate attendance when their lines are in the water."; "The use of set lines
+  where the angler is not in immediate attendance is prohibited."; "No more than 7 ice-fishing lines in any combination of devices may be
+  used, unless otherwise noted in Special Regulations."; ice-fishing line defined to include "hand line, tip-up, tip down"; 5 lures or
+  baits, 15 hook points, immediate attendance; hand lines only May 1 to November 14; ice fishing permitted on most waters except where
+  special regulations say and for waters in the nine named counties; shanties name and address in letters at least 3 inches, removed by
+  March 15; nets: landing net, baitfish nets, one dip net for smelt, suckers, alewives, blueback herring; "No other use of nets to collect
+  fish is permitted."; gaffs only ice fishing or bowfishing; frogs by spear, club, hook or hand with a hunting or fishing licence, gun or
+  longbow needs a small game hunting licence; native salamanders and snakes not as bait). FISHGUIDE p. 79 (minnow trap "maximum entrance
+  diameter 1"", maximum length 20"; seine or scap net up to 36 sq. ft), p. 78 (personally caught baitfish only in the same water; no
+  overland transport by motor vehicle except in a designated corridor), p. 71 ("The taking of fish by spear or spear guns is prohibited at
+  all times"; no spears in the Adirondack Park, on Lake George or within 200 ft of their high-water mark; "The taking of fish by snatching
+  or blind snatching (page 69) is prohibited at all times"), p. 69 (snatching defined; snagging a type of snatching; daily limit and size).
+  HTG-SMALL p. 46 ("A hunting license is required to take frogs with a gun, bow, or crossbow").
+- Carp by bow, conflict: DEC-FISHGEN ("Carp may be taken by a longbow (recurve or compound) or crossbow in any number or size from May
+  15-September 30"; "No other fish may be taken with a bow."). HTG-GEN p. 16 ("Crossbows may not be used to take carp or any other
+  fish."). The more cautious is used: the page shows both and says, as the app's caution, to use a longbow (D191). Dates left out.
+- Left out: the fall turkey hours (garbled), species seasons and bag limits, frog and snapping turtle seasons, the Northern Zone
+  dog-and-rifle rule, firearm possession rules in deer season, DEC law enforcement phone line (no dial control), the smelt and sucker
+  net waters and sizes beyond "as the guide gives", the "frightening fish out of concealment" rule (FISHGUIDE p. 59, a special
+  regulation, not statewide).
+- Looked for and not found: a trapper education age or course length (HTG-FUR, HTG-GEN give none beyond the certificate); a fishing-guide
+  definition of "tip-up" (only inside "ice-fishing line"); explosives, poison or electricity for fish (not in DEC-FISHGEN or the parts of
+  FISHGUIDE read); a statewide personal baitfish possession limit.
+
+### surv-land-after-fallout
+
+- Do first 1: surv-fallout-water-and-food "Food to leave alone", word for word: "No current source opened says when milk from your own
+  animals, or wild game and fish, can be used after fallout. This app’s caution: treat them like food that was outdoors, and don’t use
+  them until officials say you can." (copied from the file, curly apostrophes kept). Do first 2: the same section's list item, word for
+  word: "Don’t pick or eat food from your garden until officials say you can (CDC, Ready.gov)." Do first 3 and 4: the app's own
+  direction, resting on Do first 1 and 2 and on How long to stay in (when you may go out); no new rule.
+- Read this first: CDC-FWM ("Do not pick or eat food from your garden until emergency officials determine it is safe to do so."; no
+  milk, eggs, livestock, feed, game or fish); READY ("Do not consume food from your garden, or food or liquids that were outdoors and
+  uncovered," / "until authorities tell you it is safe."; no milk, eggs, livestock, feed, game or fish). Jordan's v7.4 decision (radiation
+  pack spec section 1): older federal civil defence publications fill the gap, named with year, dated, never "safe".
+- Garden food: EPA-PAG section 4.6.1 p. 55 ("Protective actions might include restrictions on consumption of garden produce or locally
+  produced foods."); section 4.6 p. 54 (food and feed guidance is FDA's). FDA-1998 p. 3 (scope: "accidents at nuclear power plants and
+  many other types of accidents"; written for state and local agencies; no nuclear detonation), p. 16 (surface removal by "brushing,
+  washing, or peeling"; "holding to allow for radioactive decay"; no home gardens or households mentioned). ITE-1968 chapter 2 ("Since
+  radiation passing through food does not contaminate it, the only danger would be the actual swallowing of fallout particles" / "that
+  happened to be on the food itself" / "(or on the can or package containing the food), and these could be wiped or washed off.").
+  No source gives a wait time for garden food.
+- Milk: surv-fallout-water-and-food's 1968 sentence quoted word for word (ITE-1968 chapter 2: "If cows graze on contaminated pasture and
+  swallow fallout particles that contain some radioactive elements," / "their milk might be harmful to the thyroid glands of infants and
+  small children."; "canned or powdered milk for a few weeks" if authorities say the supply is contaminated). FDA-1998 p. 17 ("removal of
+  lactating dairy animals and meat animals from contaminated feeds and pasture"; "substitution of uncontaminated water for contaminated
+  water"), p. 5 ("placing dairy cows on stored feed"). EPA-PAG footnote 41 p. 55 ("Liquid beverages as well as milk are covered under the
+  FDA food PAG (FDA 1998)."). No goat-milk rule anywhere. Not shown: ITE-1968 "Milk contamination from fallout is not expected to be a
+  serious problem after an attack." (it would loosen the checked caution; as v7.4 decided); FDA-1998 p. 5 "diversion of fresh milk to
+  cheese or milk powder" (an agency-scale example; no household method) (D194).
+- Animals: FDA-1998 p. 15 ("moving animals to shelter, corralling livestock"; "providing protected feed and water"), p. 17 (removal from
+  contaminated feed and pasture; uncontaminated water). READY ("If you are instructed to stay inside during a radiation emergency, pets
+  and service animals should be inside too." quoted). ITE-1968 Introduction ("Special advice for rural families on emergency actions
+  related to crops and livestock" / "is available from the U.S. Department of Agriculture."); that advice was not looked up (D195).
+  PNA-1985: no farm animals, feed, dairy animals, eggs, game, fish or garden produce (milk only as a household drink, pp. 25–27).
+- Eggs: not in CDC-FWM, READY, EPA-PAG (parts read), FDA-1998 (protective actions; poultry only in import tables), ITE-1968, PNA-1985.
+  App caution labelled (D193).
+- Wild game, fish: not in CDC-FWM, READY, EPA-PAG (parts read), FDA-1998, ITE-1968 (fish only as canned shelf life), PNA-1985. The page
+  says so plainly and repeats the checked rule.
+- Not shown (would loosen the checked caution): ITE-1968 "Most of the Nation's remaining food supplies would be usable after an attack."
+  and "Reaping, threshing, canning and other processing would prevent any dangerous quantities of fallout particles" / "from getting into
+  processed foods." (about the national food supply); EPA-PAG p. 22 (grain products and canned milk and vegetables stored for weeks to
+  months "will not present a risk from radioiodine": an official-planning statement about stored commercial food, which belongs to
+  surv-fallout-water-and-food) (D194).
+- "Safe" appears only in CDC-FWM's page title in the source line (v7.4 ruling 24).
+
+### surv-fallout-water-and-food (one link block)
+
+- "Food to leave alone": one block {"link": "s:surv-land-after-fallout", "label": "Game, fish, milk and gardens after fallout"} after the
+  milk, game and fish paragraph. Nothing else changed. tests/test_survival_home.py allows exactly this second block against the v7.4
+  release (CHECKED_LAND_LINKS).
+
+### Batch D fix round (2026-11-19), from task-5-review.md
+
+Re-opened with built-in fetch (title checked): ITE-1968 HTML (chapter 2, "Understand the Hazards of Nuclear Attack": "People suffering
+from extreme hunger or thirst should not be denied these necessities after an attack," / "even if the only available supplies might contain
+fallout particles or other radioactive substances."; it ends the chapter's food, water and milk summary); HTG-BIG p. 23 ("Hunters must
+possess a current bowhunting or junior bowhunting privilege to participate during the bowhunting seasons."; "The bowhunting privilege is not
+required to hunt with a bow or crossbow during regular seasons."; "possess proof of eligibility (either a valid bowhunter education
+certificate or prior bowhunting license)"), p. 22 ("Attach the tag to the carcass upon arrival at your camp, home, or vehicle."), p. 20
+(salt licks or other attractants containing salt, "block, liquid, or powder", on lands inhabited by deer or bear; feeding ban includes
+mineral blocks or powders); HTG-FUR pp. 62–63 ("If you are not sure, contact a DEC Regional Wildlife Office or ECO for assistance"; "you may
+remove it and lay it in the vicinity of the trap"; "There are no legal provisions for you to keep it"; "you may not possess it even to take it
+back to your vehicle without permission from DEC"); HTG-TURKEY p. 51 (fall hours not readable: "Hunting Hours: Sunrise to sunset" sits beside
+the youth season heading; the page now says "Fall turkey hours: see the guide"); HTG-SMALL p. 46 ("You may not use a rifle or handgun to hunt
+pheasant or migratory game birds."; "Air guns may not be used to hunt waterfowl, pheasant, wild turkey, or big game."); FISHGUIDE p. 71 (in
+the nine counties "ice fishing is prohibited in waters inhabited by trout, unless specifically permitted"), p. 79 ("Minnow trap: maximum
+length 20", maximum entrance diameter 1", must be marked with owner's name and address."; seines or scap nets 36 sq ft, sunrise to sunset
+in all non-trout waters; seines at any time in Lakes Erie and Ontario, the Niagara River and the Hudson below Troy Dam), p. 89 (licence
+sentence); FDA-1998 Table D-2 p. 36 (food classes "Egg" and "Fish" in the intervention-level table; no protective step or advice for either;
+the pages now say "no source opened gives any step or advice for" eggs, game and fish). How long to stay in (this app, checked) quoted word for
+word in Do first 4 and the Animals warn.
+
+## v7.7 Food from the land, batch A2: Field dressing game (rewrite), Butchering deer and small game, Keeping game meat, Preserving food pointers (2026-11-19)
+
+Writer A2. Every page below was found with the built-in search and opened with the built-in fetch in this session; the title and
+publisher were checked on each. Quotes are short (the fetch tool returns quotes of 125 characters or fewer).
+
+### Sources opened (name, URL)
+
+- NYS DOH, Harvesting, Preparing, and Eating Wild Game: https://healthweb-back.health.ny.gov/environmental/outdoors/venison_game/advice_on_eating_game.htm
+- NYS DOH, Tularemia (fact sheet): https://healthweb-back.health.ny.gov/diseases/communicable/tularemia/fact_sheet.htm
+- NYS Wildlife Health Program, Tularemia fact sheet (Apr 2021): https://cwhl.vet.cornell.edu/system/files/public/cwhl-fact-sheetstularemia.pdf
+- NYS Wildlife Health Program, Highly Pathogenic Avian Influenza: What Hunters Need to Know (Sep 2022): https://extapps.dec.ny.gov/docs/wildlife_pdf/hpaihunters.pdf
+- Cornell Wildlife Health Lab, Tips for Safe Handling and Processing Venison (19 Nov 2018): https://cwhl.vet.cornell.edu/article/tips-safe-handling-and-processing-venison
+- Cornell Cooperative Extension / NYS 4-H Shooting Sports, Wild Harvest Table Guide to Deer Hunting and Preparation (11/2015): https://blogs.cornell.edu/wildharvestdev2/files//2016/09/Rifle_Venison_4HSS_WHT-13cyq46.pdf
+- Cornell Cooperative Extension / NYS 4-H, Wild Harvest Table Guide to Preserving Meat (11/2015): https://blogs.cornell.edu/wildharvestdev2/files//2016/09/Muzzleloader_Living-History_4HSS_WHT-27rc14j.pdf (opened, not used: see conflicts)
+- NYS DEC press release, 6 Nov 2026, CWD found in Livingston County wild deer: https://dec.ny.gov/news/press-releases/2026/11/dec-announces-chronic-wasting-disease-found-in-livingston-county-wild-deer
+- CDC, About Chronic Wasting Disease: https://www.cdc.gov/chronic-wasting/about
+- CDC, How to Prevent Trichinellosis: https://www.cdc.gov/trichinellosis/prevention/index.html
+- CDC, Preventing Tularemia: https://www.cdc.gov/tularemia/prevention
+- FoodSafety.gov, Cook to a Safe Minimum Internal Temperature (print page): https://www.foodsafety.gov/print/pdf/node/10
+- FoodSafety.gov, Cold Food Storage Chart: https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts
+- Minnesota Department of Health, Refrigerator and Freezer Storage Chart: https://www.health.mn.gov/people/foodsafety/store/cold.html
+- Michigan DNR, Common Deer Afflictions: https://michigan.gov/dnr/managing-resources/wildlife/wildlife-disease/diseases-by-species/common-deer-afflictions
+- Penn State Extension, Proper Care and Handling of Venison from Field to Table (updated 18 Nov 2020): https://extension.psu.edu/proper-care-and-handling-of-venison-from-field-to-table
+- Penn State Extension, Proper Care and Handling of Game Birds from Field to Table (updated 19 Nov 2020): https://extension.psu.edu/proper-care-and-handling-of-game-birds-from-field-to-table
+- Penn State Extension, How Do You Break Down Your Venison Carcass? (video page, no date): https://extension.psu.edu/how-do-you-break-down-your-venison-carcass
+- New Mexico State University, Processing Your Deer at Home (Circular 508, Jan 1994): https://pubs.nmsu.edu/_circulars/CR508/
+- New Mexico State University, Field Care of Harvested Big Game (CR 507, rev. Sep 2012): https://pubs.nmsu.edu/_circulars/CR507/
+- Montana State University Extension, Field Care of Harvested Big Game: https://animalrangeextension.montana.edu/wildlife/hunting/field-care-of-big-game.html
+- North Dakota State University Extension, FN536 pocket guide, deer and elk (reviewed Apr 2024): https://www.ndsu.edu/agriculture/sites/default/files/2024-04/fn536.pdf
+- North Dakota State University Extension, FN155 Wild Side of the Menu No. 3, Preservation of Game Meats and Fish (reviewed Aug 2022): https://www.ag.ndsu.edu:8000/agriculture/sites/default/files/2022-10/fn155.pdf
+- Kentucky Afield (Fall 2016), Cleaning your harvest without gutting it (fw.ky.gov; the text does not name the agency): https://fw.ky.gov/deerfieldquartering/Documents/FieldQuarteringYourDeer.pdf
+- Indiana DNR Fish and Wildlife, Deer Processing (no date): https://in.gov/dnr/fish-and-wildlife/files/fw-deer-processing.pdf
+- Indiana State Board of Animal Health, Deer Processing (MC-1/9.03): https://www.in.gov/dnr/fish-and-wildlife/files/dressing.pdf
+- Massachusetts, Deer Processing Workshop instructor notes (mass.gov; no agency or date shown): https://www.mass.gov/doc/deer-processing-workshop/download
+- New Mexico Department of Game and Fish magazine, Don't overlook those organ meats (John Martsh; no date): https://magazine.wildlife.state.nm.us/?p=4253
+- Ohio DNR, Field Dressing Your Deer (Pub. 111, Sep06): https://dam.assets.ohio.gov/image/upload/ohiodnr.gov/documents/wildlife/hunting-trapping/field%20dressing%20deer%20pub111.pdf
+- Clemson Cooperative Extension, Safe Handling of Wild Game Birds (HGIC 3515, rev. 10 Jan 2024): https://hgic.clemson.edu/factsheet/safe-handling-of-wild-game-birds/
+- Missouri Department of Conservation, Rabbit: Safety and Health: https://mdc.mo.gov/hunting-trapping/species/rabbit/rabbit-safety-health ; How to Clean a Rabbit: https://mdc.mo.gov/hunting-trapping/species/rabbit/how-clean-rabbit ; How to Clean a Squirrel: https://mdc.mo.gov/hunting-trapping/species/squirrel/how-clean-squirrel
+- Oregon Department of Fish and Wildlife, How to hunt rabbit: https://myodfw.com/articles/how-hunt-rabbit
+- Utah State University Extension, How to Preserve Venison (no date): https://extension.usu.edu/preserve-the-harvest/research/venison.php
+- National Center for Home Food Preservation, Jerky (So Easy to Preserve, 6th ed., 2014): https://nchfp.uga.edu/how/dry/recipes/jerky
+- National Center for Home Food Preservation, Sun Drying: https://nchfp.uga.edu/how/dry/drying-general/sun-drying
+- National Center for Home Food Preservation, Cure Smoke Review, section 6 (Critical Preservation Points): https://nchfp.uga.edu/publications/nchfp-publications/literature-reviews/cure-smoke-review-preservation/
+- National Center for Home Food Preservation, Cure Smoke Review, section 5 (Safety): https://nchfp.uga.edu/publications/nchfp-publications/literature-reviews/cure-smoke-review-safety/
+- University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed Oct 2021): https://www.uaf.edu/ces/publications/database/food/jerky.php
+- US Army FM 21-76, Survival Manual (SJSU-hosted copy; the file name says 2006; no date in the text read): https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf (pages 97 to 99)
+
+Failed or empty: NDSU FN155 landing page (https://www.ag.ndsu.edu/publications/food-nutrition/wild-side-of-the-menu-no-3-preservation-of-game-meats-and-fish/
+redirected; the redirect target was refused by the permission system; the PDF above was used instead). USDA FSIS Game from Farm to Table
+and Freezing and Food Safety (UNT web archive copies returned only the viewer wrapper, no text; nothing used). Michigan State University
+Extension E657 venison bulletin (bot protection; nothing used). No current FSIS wild game page was found by search.
+
+Not re-opened in this session (checked v7 text kept word for word, sources as listed on the page): CDC MMWR 2024;73(40) and Missouri
+Department of Conservation "Bear: Properly Cook All Game" (the trichinella warn, frozen), NYS DEC "Care of Your Catch" (the fish item, kept
+until the fish cleaning topic takes it), Oregon/Missouri rabbit and squirrel items (re-opened; unchanged).
+
+### Field dressing game (rewrite; id and title kept)
+
+Kept word for word (checked v7 text): the "Before you start" warn, CWD and rabies paragraphs; the eight deer steps except that four steps were
+inserted before the last; the rabbit, squirrel, tularemia and fish items and both figures with their captions; "Cook it through" p, warn and
+lead p. Re-checked against the re-opened sources: CDC CWD ("Do not shoot, handle or eat animals that look sick or act strangely"; "Do not
+touch or eat meat from animals found dead"; "latex or rubber gloves"; "knives or other tools you use in your kitchen"; "Strongly consider
+having the deer or elk tested"); DEC release (Town of Sparta, Livingston County; "first occurrence of CWD in a wild deer in New York State
+since 2005"; 2005 Oneida County; high-risk parts brain, spinal cord, spleen, eyes); Ohio DNR steps 1 to 12; Indiana BOAH ("Be sure it is
+dead before you get within range of its feet or antlers"; slight slope; two fingers, edge outward; trim ingesta/feces; 40°F or less);
+Montana ("cooled to 40 degrees F or below within 24 hours"; skin "if the temperature is expected to stay above freezing the first night").
+FM 21-76 p. 97: "The liver's surface should be smooth and wet and its color deep red or purple."
+
+New text, each with its source sentence:
+- Do first 1 to 5: Ohio DNR (eye touch), Indiana BOAH (feet and antlers; "as soon as possible"), NYS DOH ("Wear nitrile, rubber or latex
+  gloves"), Penn State venison (paunch and intestines carry foodborne-illness bacteria), Montana (40°F within 24 hours, prop, shade), NYS
+  DOH and CDC (sick, strange, found dead).
+- Summary: the same rules; "inside" for internal meat temperature (Montana: "internal temperature of the meat").
+- Before you start list: NYS DOH "especially important to wear gloves when your hands have cuts or open sores"; "Do not eat, drink or
+  smoke while cleaning harvested game" (also HPAI sheet). Penn State venison tool list: "sharp knife, small hatchet, whetstone or steel,
+  rope or cord, six-inch rubber bands, clean cloths or paper towels, sealable bags, a cooler with ice or snow, disposable gloves, and
+  clean drinking water" (hatchet and rubber bands not carried). Knife cleaned "with clean water, premoistened wipes, or alcohol swabs".
+- Inserted step 8: Penn State venison "If the organs smell offensive or exhibit greenish discharge, black blood ... do not consume meat
+  from this carcass". Step 9: Montana "Wipe out all blood or other loose material inside the body cavity"; NDSU FN536 "Use little water",
+  "Do not use grass or snow to wipe out the carcass". Step 10: CWHL "Put internal organs in a bag for trash disposal"; HPAI sheet "Do
+  not feed carcass parts to pets or leave behind for other wild animals to scavenge".
+- Cooling the carcass: Penn State "quickly cool the carcass to 35-40°F (3–4°C)" (the page shows 3 to 4°C; the app gives 2 to 4°C, the
+  conversion of 35 to 40°F); NYS DOH "Game should be kept cool (with ice or refrigerated below 45℉ or 7℃) until butchered (including big
+  game hanging for several days)"; Penn State shade and air, ice or snow in sealed plastic bags; Ohio DNR bags of ice; NMSU CR507 warm
+  weather "elevate the animal above the ground", hang head down, prop open; quarter and ice; "Watch the carcass carefully if temperatures
+  increase above 45 °F during the day or if the carcass does not remain shaded at all times"; NDSU FN536 warm-weather skinning with
+  cheesecloth, "In cool weather (28 to 35 F), wrap the carcass or quarters in a sheet and hang in a ventilated shed", don't let it freeze,
+  "Freezing may toughen the meat"; Montana cheesecloth or light cotton bags; USU "usually within 3 to 4 hours if the air temperature is
+  above 45oF"; Penn State and NDSU, not on the hood, not in the trunk while warm. Conversions (app's own): 28°F = -2°C, 35°F = 2°C,
+  45°F = 7°C.
+- Small game: ODFW "Put your rabbit in a cooler or a game meat bag to keep it cool until you get home and refrigerate or freeze it."
+- Birds: HPAI sheet ("Field dress game outdoors or in a well-ventilated area"; masks, gloves, eye protection; seal unwanted organs in
+  plastic bags; wash hands); Clemson ("Remove the entrails and crop as soon as possible, because the grain in the crop may ferment"; clean
+  cloth, "Do not use grass or snow"; "plucked or skinned in the field"; birds individually in plastic bags on ice in hot weather; "Do not
+  pile warm birds"; not in the trunk); Penn State birds (don't cut crop, gizzard, intestines; 35 to 40°F).
+- Signs an animal is not safe to eat: NYS DOH "Only harvest animals that look and act healthy; animals that are dead or not behaving
+  normally may carry dangerous diseases"; HPAI "many birds may show no symptoms before death". CWD signs: NYS DOH "poor body condition",
+  "abnormal behavior such as staggering or very poor posture"; NDSU FN536 "weight loss, tremors, drooling, and abnormal head posture".
+  Rabies: NYS DOH species list, "only found occasionally in New York State deer", "seem to lose their normal fear of humans; salivate
+  excessively; appear to have injured hind legs; or be found lying on the ground struggling". HPAI signs: "diarrhea, discharge from the
+  nose, coughing and sneezing, and incoordination". Organs: Penn State venison (above); Cornell 4-H guide "Do not eat the meat if the
+  organs smell bad", clots or discoloration. Rabbit liver: MDC "numerous white lesions about the size of a pin head", "the rabbit should
+  be discarded and not eaten"; ODFW "Do not eat the meat". Michigan DNR: liver flukes, black lines, dark brown fluid, "render it
+  inedible"; cysticercosis, "the remainder of the liver is edible"; fibromas "gray, white, or black wart-like growths", edible; abscesses
+  "contain green paste-like material", can be removed.
+- Diseases you can't see: CDC trichinellosis ("bear, wild boar, wildcat, fox, wolf, seal, or walrus"; "Curing (salting), drying,
+  smoking, or microwaving meat alone does not consistently kill the worms"); NYS DOH tularemia ("rabbits, hares, and rodents"; skin
+  contact; "handling or eating insufficiently cooked rabbit meat"; gloves "especially rabbits, muskrats"; cook thoroughly); CWHL
+  tularemia (cottontails, snowshoe hares, beavers, muskrats); CDC tularemia (gloves "especially rabbits, muskrats, prairie dogs, and other
+  rodents"; "Cook game meat thoroughly"); NYS DOH toxoplasmosis ("undercooked, contaminated meat such as venison"), E. coli
+  (intestinal contents; cooking), CWD ("Cooking does not remove the risk of CWD").
+- Links: Keeping game meat and Butchering deer and small game (new, this batch); Cook without power. The Food poisoning and botulism
+  link was tried and taken out (it moved "botulism" search results).
+
+Conflicts:
+- Cooking temperature: FoodSafety.gov chart gives "Rabbit and venison Wild or farm-raised 160°F (71°C)"; Penn State venison 145°F for
+  whole cuts and 160°F for ground; NDSU FN536 "at least 160 F"; New Mexico Game and Fish heart to "medium". The app's checked rule is
+  165°F for all wild game (NYS DOH "Cook all game and birds to at least 165℉ (74℃)"; HPAI sheet 165°F; MDC rabbit 165°F; D10). 165°F
+  used everywhere.
+- CWD history: NYS DOH's wild game page still says "No cases of CWD have been detected in New York State since 2005"; the DEC release of
+  6 November 2026 supersedes it. The checked sentence (DEC, 2026) kept.
+- Cooling figures: Penn State 35 to 40°F; Montana 40°F within 24 hours; NYS DOH below 45°F. All shown; none contradicts the others.
+
+### Butchering deer and small game (new)
+
+- Before you start: Indiana DNR tools ("A sharp, short knife", "A sharp fillet or boning knife", bone saw, gambrel, "A cool workspace");
+  NMSU CR508 ("a meat saw or fine-toothed carpenter's saw, a sharp narrow-bladed knife"); NYS DOH gloves, no eating/drinking/smoking,
+  "Butchering tools should never be used for any other purpose", "Keep butchering tools separate from utensils regularly used in the
+  kitchen", "Avoid handling or cutting through the skull or spinal cord"; CWHL "Take your time, do one animal at a time!", "Store each
+  deer's meat in its own labeled container", "Debone that deer! Keep contact with the brain, spinal cord, lymph nodes, and spleen to a
+  minimum", "Avoid sawing into bone where possible", trim generously near shattered bone, spine, skull; NDSU FN536 "Bone out carcasses".
+- Hanging and skinning, step order: (1) Mass notes "hanging on a gambrel by its hind legs with the head facing the ground"; NMSU CR507
+  "Hang the carcass from the hind legs for skinning"; Indiana DNR at least 8 feet off the ground (8 ft = 2.4 m). (2) NMSU CR507 cut
+  around hock and knee, down the inside of each leg. (3) Indiana DNR "Remove the front legs at the joint. Take your knife and cut a circle
+  down to the bone around the joint."; Mass split front-leg skin on the hair seam. (4) NMSU CR507 pull with both hands, cut flesh back,
+  abdomen last. (5) Mass: work down the neck; "At the base of the head, cut through the top of the spinal column with a knife or bone
+  saw" (paraphrased); NYS DOH wash if brain/spinal tissue handled. (6) Indiana DNR "Wash any hair off the meat with cold water." Gutless
+  alternative: Kentucky Afield steps 1 to 31 (on its side, hide along the spine, shoulder, hindquarter, tenderloin, backstrap, neck,
+  flip; game bags or pillow cases in the shade; thermometer on the ice "below 40 degrees").
+- Quartering order: Penn State video (shoulders, backstraps, tenderloins, hind legs) and Mass notes (shoulders "there is no joint or bone
+  structure to break through", neck, tenderloins, backstraps, hind quarters); Kentucky backstrap ½-inch cut, cross cut, tease off;
+  tenderloin "Grab the tubular muscle running along the inside of the spine"; NMSU tenderloin "near the pelvic area"; flank and rib meat
+  (Kentucky, Penn State video); Mass rib meat "If in good condition with no gut material"; hind leg: Penn State video ball joint "Stay
+  tight to the hipbones", Kentucky "sever the joint by cutting directly into it", NMSU "cut through it with a knife rather than a saw to
+  avoid bone dust and marrow"; Indiana DNR second person. Disposal: Mass "Bones, sinew, and hide: Bag for disposal"; HPAI sheet (pets).
+- Boning out the hind leg: Indiana DNR knee joint leaves the shank; femur out; "the sirloin, which is round and hugs the front of the
+  femur", top round, bottom round, eye of round; Mass "Sirloin tip (round tip, 'football roast')", waxy gland "Do not grind it"; NMSU
+  meat near the long tendon "too tough for steak"; Penn State video and NMSU natural seams, each muscle in its own connective tissue.
+- Cuts table (every cell): backstrap steaks "usually 3/4 inch thick" (NMSU), roasts and ends for stew (Penn State video); tenderloin
+  thick or thin, butterflied (NMSU); sirloin tip roast or thin steak 1/4 to 3/8 inch (NMSU), large braised roast (Mass); rounds thin
+  steaks cut just before frying or roasts (NMSU), jerky, braising (Mass; Mass also lists corning, not carried: see Keeping game meat);
+  shoulder arm roast, small thin steaks (NMSU), braised blade roast or ground (Mass), stew, grind, sausage (Penn State video; "sausage"
+  not carried, see the sausage warn); neck mincemeat, stew, grind or roast whole (NMSU), roasts (Kentucky); ribs plates for barbecue or
+  stew (NMSU), grilling or grinding (Kentucky), rib meat to the grind (Mass); brisket barbeque (Kentucky); shank trimmed for grinding
+  (NMSU); flank jerky, plate steaks, grinding (Kentucky); trimmings grind, stew, jerky (NMSU), grind (Indiana). Conversions (app's own):
+  3/4 in = 2 cm, 1/4 to 3/8 in = 6 to 10 mm. "Where it comes from" cells: Kentucky (backstrap, tenderloin, brisket, flank), Indiana
+  (sirloin, shank), NMSU and Mass (rounds, shoulder, neck, ribs); "Mincemeat" not carried.
+- Trimming: NCHFP jerky "Trim and discard all fat from meat because it becomes rancid quickly"; Indiana DNR fat "has a bitter taste";
+  NDSU FN536 "The distinctive flavor of game meats is mainly due to the fat they contain"; Indiana silver skin; Mass silver skin and
+  tendons; NYS DOH "Lymph nodes can be eliminated by boning out the meat and carefully trimming the fat and connective tissue"; CWHL lymph
+  nodes between muscles; Penn State "Remove all visible dirt, feces, hair, and bloodshot areas"; NYS DOH bruised or discolored meat, all
+  bullets and fragments, generous distance from the wound channel, "Discard meat with excessive bullet damage"; lead warn from NYS DOH
+  ("too small to detect by sight, feel, or even when eating"; "Ground meat from lead-shot game tends to contain more lead fragments than
+  whole muscle cuts"; children and people who can get pregnant). Not carried: NMSU's soak of bloodshot meat in salt water (NYS DOH says
+  discard bruised meat; the more cautious used).
+- Heart, liver, tongue: NM Game and Fish heart ("best eaten fresh. You can refrigerate it for up to a couple of days"; cold water while
+  pumping; "cut away and discard all fat, arteries, veins and blood vessels"; "Discard any parts of the heart damaged by the bullet or
+  broadhead"); liver "off colored, with cysts, or in otherwise poor condition" discard; soak 24 hours, water changed every eight hours;
+  slices ½ inch (13 mm). Michigan DNR flukes. FM 21-76 p. 98 "Cut the tongue out, skin it, boil it until tender, and eat it." NYS DOH
+  "Avoid handling the brain and spinal tissues or fluids, saliva and mouth parts", tonsils among the parts that "may have abnormal
+  infectious proteins called CWD prions", "Other organs (liver, kidney, heart and salivary glands) may also pose a risk". Tongue: app's
+  caution (D164).
+- Never eat: NYS DOH prion list (brain, spinal cord and other nervous tissue, spleen, pancreas, eyes, tonsils, lymph nodes), "Discard
+  intestines"; DEC high-risk parts; FM 21-76 p. 98 "You can also cook and eat the brain" (reported, not followed); Penn State venison
+  organs; MDC rabbit.
+- Bones and fat: NMSU CR508 backbone "sections for soup stock"; NYS DOH and CWHL as above. Looked for and not found: a source for stock
+  from other deer bones, and for rendering deer fat (D165).
+- Grinding: NMSU and Indiana (trimmings, shank, neck, flank); CWHL "remove fat and other tissues before grinding meat"; NYS DOH "If you
+  prepare your own ground meat, thoroughly clean and disinfect all equipment after use"; Penn State "Thoroughly clean and sanitize all
+  equipment, including the tabletop meat grinder"; Mass "Never put your hand near or in the grinder's throat". Looked for and not found:
+  grinding without power (Mass says only that electric grinders reduce work compared with hand grinders; no method).
+- Sausage warn: NCHFP section 5.1.1 nitrates/nitrites "inhibit Clostridium botulinum"; 6.2.3 "Mistakenly using sodium nitrite instead of
+  NaCl in typical curing recipes can lead to a lethal dose"; 5.2.4 E. coli O157:H7 "can survive the typical dry fermentation processing
+  conditions"; 6.7 "We do not recommend preparing homemade, non-fermented sausages that are not fully cooked"; CDC trichinellosis curing.
+- Small game and birds: MDC rabbit "Separate the front and hind quarters from the carcass at the 'shoulder' and 'hip' joints"; MDC
+  squirrel "Make sure the carcass is free of hair", "wash the body cavity"; Penn State birds "Separate the carcass by pulling the breast
+  apart from the neck, back, and legs", bloodshot areas, 165°F; Clemson ducks wings at the joints, head, pinfeathers, "scalding the birds
+  in hot water (145 °F)" (63°C, app's conversion), upland birds soaked "in cold water for one to two hours"; NYS DOH shot and feathers.
+- Knives and clean work: Penn State and NDSU whetstone or steel; Mass dull blade "over exertion which could lead to a potential injury",
+  wash and sharpen afterwards; NDSU and Penn State warm soapy water; CWHL "Wash knives and tools with soap and hot water between
+  animals"; NYS DOH wash, then "Rinse tools and work surfaces with either boiling water (212°F) or sanitize with a bleach solution or
+  chemical sanitizer"; NYS DOH CWD soak: "Soak cleaned knives and tools for one hour in a fresh solution of household chlorine bleach
+  (unscented) mixed with an equal amount of water (for example, 1-quart bleach with 1-quart water), air dry, then rinse with clean water";
+  "Wipe down cleaned counters and other surfaces with the bleach solution and allow them to air dry" (CWHL gives the same 50% mix). 1 quart
+  = 0.95 L (app's conversion). The never-drink and never-mix lines follow the bleach rule of the land spec (section 7) and Clean and
+  disinfect's checked warns.
+- Wrapping: Penn State meal-size portions "about one pound", wrap tightly, remove air, label and date; NMSU keep chunks whole, cut steaks
+  just before cooking. 1 lb = 0.45 kg.
+
+Conflicts: Mass removes the head through the spinal column, NYS DOH says avoid cutting through the spinal cord: both shown, NYS DOH's
+precautions added (D169). NMSU backbone stock against NYS DOH and CWHL (D165). FM 21-76 eats brain and tongue against NYS DOH (D164).
+
+### Keeping game meat (new)
+
+- Cold and time table: Minnesota DOH "deer 3 to 5 6 to 12", "rabbit 1 to 2 12", "duck, goose 1 to 2 6" (days at 40°F, months at 0°F);
+  USU "Fresh cuts: Refrigerate for 1 to 2 days" (used, shorter); FoodSafety.gov ground meats "1 to 2 days" and "3 to 4 months", soups and
+  stews with meat "3 to 4 days" and "2 to 3 months", "The guidelines for freezer storage are for quality only", "frozen foods stored
+  continuously at 0°F (-18°C) or below can be kept indefinitely"; Clemson birds "used within three days", frozen "within six months".
+  Also seen and not used in the table: Penn State 2 to 3 days fridge and 9 to 12 months frozen; NDSU FN536 2 to 3 days and "three to four
+  months in the freezer"; USU roasts frozen 1 year, ground 6 to 9 months; NDSU FN155 most wild game up to one year frozen. NDSU FN536 "Freeze
+  only the amount that will become solidly frozen within 24 hours"; Penn State "do not refreeze thawed products".
+- Hanging: NYS DOH 45°F (above); Penn State "hold the carcass at 40°F(4°C) or below for two to three days, at most"; Cornell 4-H guide
+  "Keep the deer below 40°F during aging", "hung by its hind feet with the skin on", "it is not necessary to age the meat to achieve
+  tender results"; NDSU FN536 "34 to 37 F for 10 to 14 days", "Aging is not recommended for carcasses with little or no fat covering",
+  "Two to three days is sufficient", not needed for sausage meat; NMSU CR507 "If temperatures stay at or around 32 °F, then venison can be
+  aged for as long as 10 to 12 days"; USU 34 to 36°F (not carried); Kentucky thermometer on the ice; NMSU quarter and ice.
+- Winter cold as the freezer: FM 21-76 p. 99 "In cold climates, you can freeze and keep meat indefinitely." "Freezing is not a means of
+  preparing meat." "You must still cook it before eating."; FoodSafety.gov continuously at 0°F; Preserving food's NYS DOH sentence, quoted
+  word for word; Penn State refreeze; NDSU FN536 carcass freezing toughens. Risk sentence labelled as the app's caution (D163).
+- Jerky (NCHFP jerky page): "If pork or wild game is used to make jerky, the meat should be treated to kill the trichinella parasite";
+  "freeze a portion that is 6 inches or less thick at 0ºF or below for at least 30 days"; gut contents: "It is best to avoid making jerky
+  from this meat and use it only in ways that it will be thoroughly cooked"; "Partially freeze meat to make slicing easier"; "Slice meat
+  no thicker than ¼ inch"; "Trim and discard all fat"; "Cover and refrigerate 1-2 hours or overnight"; "bring strips and marinade to a
+  boil and boil for 5 minutes before draining and drying"; "If strips are more than ¼ inch thick, the length of time may need to be
+  increased"; "check the temperature of several strips with a metal stem-type thermometer"; "dehydrator or oven preheated to 140ºF";
+  "Begin checking samples after 3 hours"; "cracks but does not break when it is bent"; "Properly dried jerky will keep at room temperature
+  two weeks in a sealed container"; "refrigerate or freeze jerky"; "glass jars or heavy plastic food storage bags"; "Raw poultry is
+  generally not recommended for use in making jerky". NCHFP review 6.4 "Wild game (bear, elk, etc.) must be treated to destroy
+  Trichinella by heating to 170°F, since some strains of Trichinella are freeze resistant (CDC 1985)"; 5.4.6 "USDA recommends attaining an
+  internal temperature of at least 170°F"; 5.4.6 "Several outbreaks of E. coli O157:H7 have occurred in venison jerky". UAF "Heat meat in
+  marinade to 160°F. Heat to boiling (212°F) for game meat."; "To be safe, do not use bear meat for jerky." Penn State jerky "one to two
+  months under refrigeration (< 40°F [4°C])". USDA dehydrator sentence quoted from Preserving food. CDC "Freezing wild game meats may not
+  effectively kill all worms". Conversions (app's own): 170°F = 77°C (76.7), 212°F = 100°C, 140°F = 60°C, 6 in = 15 cm, 1/4 in = 6 mm.
+- Smoking: NDSU FN155 smoked deer jerky ("Pump with brine (two pounds commercial saltcure mixture per gallon of water)"; crock or
+  USDA-approved plastic, "Do not use plastic containers such as garbage cans, plastic bags or supermarket ice cream buckets"; submerged;
+  "Store in cooler (38 F) for 10 days"; "Every two days, change the position of the meat"; "smoke five hours at 150 F"; "Hang to dry at
+  room temperature (about two weeks)"); NDSU hardwoods, "Never use a soft wood such as pine". FM 21-76 p. 98 ("The intent is to produce
+  smoke, not heat"; "Do not use resinous wood"; "no more than 6 centimeters thick"; "Meat smoked overnight in this manner will last about
+  1 week"; "Two days of continuous smoking will preserve the meat for 2 to 4 weeks"; "dark, curled, brittle stick and you can eat it
+  without further cooking"). NCHFP 6.3 "Smoke itself, without proper cooking, is not an effective food preservative", "Caution should be
+  used when smoking meats at temperatures in the danger zone 40-140°F for prolonged periods of time", "meats must have been salted or cured
+  first"; 6.1.3 "The danger zone for microbial growth is 40-140°F"; 6.8 storage refrigerated or frozen. CO: Carbon monoxide's summary
+  quoted word for word. Conversions: 38°F = 3°C, 150°F = 66°C, 2 lb = 0.9 kg, 1 gal = 3.8 L.
+- Sun and air drying: FM 21-76 p. 99 (strips about 6 mm, with the grain; "sunny location with good air flow"; "out of the reach of
+  animals and cover them to keep blowflies off"; "Allow the meat to dry thoroughly before eating"; "dry, crisp texture and will not feel
+  cool to the touch"). USDA sun-drying sentence quoted from Preserving food. NCHFP Sun Drying "Vegetables (with the exception of vine dried
+  beans) and meats are not recommended for out-of-doors drying."
+- Salting and brining: FM 21-76 p. 99 ("soaking it thoroughly in a saltwater solution"; "The solution must cover the meat"; "Wash off the
+  salt before cooking"; no strength or time given). NDSU FN155 corning: "3 lb salt", "10 oz sugar", "2 ounces sodium nitrate", "½ ounce
+  sodium nitrite" (amounts not carried, D166), spices, six gallons; "The ideal temperature for corning meat is about 38 F"; one third more
+  salt per 15 F above 38 F, "At 83 F" six pounds total; 15 days, stir and rotate on days 5 and 10; boil, skim, simmer "for about five hours
+  or until tender"; "cooked and consumed within one week or frozen for up to one month"; its sweet pickle cure "Add commercial cure to
+  pickle solution according to package directions" and "If temperature becomes warm and brine becomes ropy, remove meat". NCHFP 6.2.2
+  "Only food grade salt without additives, e.g., iodine"; 6.2.3 commercial mixes, lethal dose; 6.2.4 "Curing should be carried out at a
+  temperature between 35°F and 40°F", "the upper temperature is set to limit microbial growth"; 5.2.1 "C. botulinum thrives in moist foods
+  that are low in salt (less than 10%)". Conversions: 6 gal = 23 L, 3 lb = 1.4 kg, 10 oz = 280 g, 15°F difference = 8°C, 83°F = 28°C,
+  6 lb = 2.7 kg.
+- Left out: NDSU FN155 dry cure ("6 pounds salt", "3 pounds sugar", nitrate or nitrite, "at 38 F for two days per pound of leg, or
+  approximately four to six weeks") and sweet pickle cure (three days per pound at 38°F); pemmican (no source opened).
+
+Conflicts:
+- Jerky trichinella step: NCHFP's jerky page freezes wild game 30 days; Cornell 4-H preserving guide freezes game at 5°F for 20 days; UAF
+  freezes 1 to 2 months; CDC and NCHFP's own review say some strains are freeze resistant. The heat step (170°F) is the one the page
+  relies on (D162). Cornell 4-H preserving guide's 160°F after boiling not used for game (below 165°F).
+- Jerky game temperature: NCHFP review 170°F; UAF boiling (212°F); USDA 160°F (meat). The page gives the NCHFP figure as the minimum and
+  names UAF's boiling (closes D149 as logged in D162).
+- Fridge time for deer cuts: USU 1 to 2 days; Penn State and NDSU 2 to 3; Minnesota DOH 3 to 5. Shortest used (D161).
+- Hanging: NYS DOH below 45°F for several days; Penn State 40°F, 2 to 3 days at most; NDSU 10 to 14 days at 34 to 37°F; NMSU 10 to 12
+  days near 32°F. Penn State used (D160).
+
+### Preserving food (v7.5, edited)
+
+Changed only where it said the app or page gives no method for meat: summary (first two sentences), Do first 4 (first sentence), Drying
+meat list items 2 (one sentence) and 4, Salting and curing p, Smoking p; one link block "Keeping game meat" added in each of Drying meat,
+Salting and curing and Smoking; source line for other topics extended. Every agency warning kept word for word: USDA dry-heat sentence
+(summary and Do first), the USDA jerky warn, the USDA game sentence, the USDA dehydrator line, NCHFP E. coli line, NCHFP cure-below-40°F
+and nitrite sentences, NCHFP smoke sentence and storage sentence. Canning text untouched.
+
+### Cook without power (v7.5)
+
+One link block added in "Cook it through" after the quoted wild game rule: Field dressing game. No text changed.
+
+### Batch A2 fix round (2026-11-19), from task-2-a2-review.md
+
+Re-opened in this round (built-in fetch, title checked):
+- NDSU FN155 PDF (https://www.ag.ndsu.edu:8000/agriculture/sites/default/files/2022-10/fn155.pdf): smoked deer jerky steps in order,
+  "Debone hind leg, splitting into individual muscles; top, bottom and tip." "Pump with brine* (two pounds commercial saltcure mixture
+  per gallon of water)." "Place in crock or USDA-approved plastic container." ... "Store in cooler (38 F) for 10 days."; injector note
+  "* Can use ordinary syringe. Inject into several areas."; corning "store the balance in a cool place refrigerated at 38 degrees",
+  "cooked and consumed within one week or frozen for up to one month"; "for every 15 F of temperature above 38 F, you add one-third
+  more salt" (not given).
+- NCHFP cure-smoke review (preservation): 6.2.4 "Curing should be carried out at a temperature between 35°F and 40°F."; "the upper
+  temperature is set to limit microbial growth"; 6.7 "We do not recommend preparing homemade, non-fermented sausages that are not fully
+  cooked." (now used word for word in Butchering).
+- UAF Making Jerky: "CAUTION: Freezing and heating treatment may not be sufficient to kill parasites in bear meat."; "Cook bear meat until
+  it is well done."; "The internal temperature should be 185°F." (185°F = 85°C, app's conversion; D201).
+- FoodSafety.gov Cold Food Storage Chart: "Chicken or turkey, whole" 1 to 2 days, 1 year; "pieces" 1 to 2 days, 9 months; no game bird
+  row (D203).
+- Michigan DNR afflictions: cysticercosis "filled with a clear to hemorrhagic fluid and a large white dot", "can be trimmed and the
+  remainder of the liver is edible". NMDGF organ meats: "if the heart or liver appear to be off colored, with cysts, or in otherwise poor
+  condition", thrown out with the gut pile (D200).
+- Cornell Wildlife Health Lab tips: "If you remove the head or antlers, be sure to use a disinfected or disposable saw blade." "Do not
+  cut into meat with the same blade you used to cut bone!"
+- Penn State venison: "If the organs smell offensive or exhibit greenish discharge, black blood, or blood clots in the muscle," "do not
+  consume meat from this carcass."
+
+Changes: listed per finding in /home/claude/sdd/task-2-a2-report.md, "Fix round". Conversions (app's own): 6 cm = about 2 1/2 in.

@@ -1,0 +1,344 @@
+{
+  "id": "surv-land-ny-rules",
+  "title": "New York rules for hunting, fishing and trapping",
+  "category": "land",
+  "keywords": [
+    "license",
+    "licence",
+    "hunting license",
+    "fishing license",
+    "trapping license",
+    "hunter education",
+    "trapper education",
+    "regulations",
+    "game laws",
+    "dec rules",
+    "hunting hours",
+    "shooting hours",
+    "trap check",
+    "check traps",
+    "legal traps",
+    "snares illegal",
+    "tagging deer",
+    "report harvest",
+    "baiting",
+    "ice fishing rules",
+    "tip-ups",
+    "number of lines",
+    "set lines",
+    "minnow trap"
+  ],
+  "summary": "New York’s rules as they stand in normal times, from the NYS DEC 2026–27 Hunting and Trapping Regulations Guide and the 2026 Freshwater Fishing Regulations Guide: which licence and course each activity needs, the kinds of season, hunting hours, the methods that are always illegal, distances, tagging and reporting, legal and illegal traps, how often traps must be checked, and legal fishing methods. No seasons or bag limits: they change every year, so check the current guide.",
+  "sections": [
+    {
+      "h": "Read this first",
+      "blocks": [
+        {
+          "p": "Everything on this page is New York law as it applies in normal times. It comes from two NYS DEC guides: the 2026–2027 New York Hunting and Trapping Guide (most rules in effect September 1, 2026 to August 31, 2027) and the 2026 New York State Freshwater Fishing Regulations Guide (in effect April 1, 2026). The rules change: before you go, check the current guide on the DEC website or in the HuntFishNY app."
+        },
+        {
+          "p": "This page gives no season dates or bag limits, because a table here would go out of date. It gives the structure and the standing rules. Seasons and limits differ by species, by zone (Northern and Southern) and by Wildlife Management Unit (WMU, an area on the guide’s map)."
+        }
+      ]
+    },
+    {
+      "h": "Licences and courses",
+      "blocks": [
+        {
+          "p": "In normal times, under the 2026–27 hunting and trapping guide and the 2026 fishing guide:"
+        },
+        {
+          "table": {
+            "head": [
+              "To do this",
+              "You need"
+            ],
+            "rows": [
+              [
+                "Hunt",
+                "A hunting licence. To get one: a Hunter Education Certificate, or a hunting licence held before. Under 12 may not get a hunting licence or hunt. The course can be taken from age 11"
+              ],
+              [
+                "Hunt deer or bear with a bow or crossbow in a bowhunting season",
+                "A hunting licence and the Bowhunting privilege. To get it: a Bowhunter Education Certificate, or a New York bowhunting stamp or junior bowhunting licence issued in 1980 or later"
+              ],
+              [
+                "Hunt deer or bear with a bow or crossbow in the regular season",
+                "A hunting licence; the Bowhunting privilege is not needed, but carry proof of eligibility: a bowhunter education certificate or a bowhunting licence held before"
+              ],
+              [
+                "Hunt in a muzzleloading season",
+                "A hunting licence and the Muzzleloading privilege"
+              ],
+              [
+                "Hunt turkey",
+                "A hunting licence and a turkey permit, carried while you hunt. Required for every turkey hunter"
+              ],
+              [
+                "Hunt ducks, geese and other migratory birds",
+                "A hunting licence; Harvest Information Program registration every year, with proof carried; from age 16, a signed federal duck stamp for waterfowl"
+              ],
+              [
+                "Take an antlerless deer on a Deer Management Permit",
+                "The permit, for the one WMU it was issued for"
+              ],
+              [
+                "Trap",
+                "A trapping licence. To get one: a Trapper Education Certificate, or a trapping licence held before in any state or country. Marten also need a free special permit"
+              ],
+              [
+                "Fish, or help someone fish",
+                "A fishing licence, unless you are under 16 or another exception in the guide applies. On the free fishing days the guide names, no licence is needed"
+              ]
+            ]
+          }
+        },
+        {
+          "list": [
+            "A licence does not give you any right to go on private land without the landowner’s permission (hunting and trapping guide).",
+            "A trapping licence can be used only by the person it was issued to (hunting and trapping guide).",
+            "DEC: trappers must complete a mandatory trapper education course to get a trapping licence (the guide also accepts a trapping licence held before in any state or country)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Kinds of season",
+      "blocks": [
+        {
+          "p": "In normal times, each species has its own open season, and the dates differ by zone and WMU (2026–27 guide, 2026 fishing guide):"
+        },
+        {
+          "list": [
+            "Deer: early bowhunting, regular, late bowhunting and muzzleloading seasons, a youth firearms season and an early antlerless season. The Bowhunting privilege is needed in the bowhunting seasons and the Muzzleloading privilege in the muzzleloading seasons.",
+            "Bear has its own seasons. Turkey has a spring season and a fall season. Small game, waterfowl and furbearers each have seasons by species.",
+            "Trapping seasons are set by species and zone. You may set a trap in a permanent body of water only when the mink, muskrat, otter or beaver season is open.",
+            "Fishing: a person may not fish for a species, not even catch and release, outside its open season on that water. A fish caught in its closed season must be released at once.",
+            "Unprotected species may be taken at any time without limit, but a hunting licence and a legal implement are still needed: porcupine, red squirrel, woodchuck, chipmunk, English sparrow, starling, rock pigeon and monk parakeet."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Hunting hours and Sundays",
+      "blocks": [
+        {
+          "p": "In normal times, under the 2026–27 guide (the guide has a sunrise and sunset table):"
+        },
+        {
+          "list": [
+            "Deer and bear: from half an hour before sunrise to half an hour after sunset.",
+            "Most small game, including rabbits, hares, squirrels, pheasant and ruffed grouse: sunrise to sunset.",
+            "Turkey in the spring season: from half an hour before sunrise to noon. Fall turkey hours: see the guide.",
+            "Ducks, geese and most other migratory birds: from half an hour before sunrise until sunset. Woodcock: sunrise to sunset.",
+            "Sunday hunting is allowed in all areas of New York State."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Always illegal when hunting",
+      "blocks": [
+        {
+          "p": "In normal times, the 2026–27 guide makes these illegal:"
+        },
+        {
+          "list": [
+            "Hunting while in or on a motor vehicle (except with a special permit), with the aid of a vehicle’s lights, or on or from a public road.",
+            "Carrying a shotgun, rifle or crossbow in or on a motor vehicle unless it is unloaded.",
+            "An automatic firearm; a firearm with a silencer; a semiautomatic that holds more than 6 rounds, with the exceptions the guide lists.",
+            "A spear (frogs excepted), an arrow with an explosive head, or any device made to deliver drugs to an animal.",
+            "Hunting with the aid of bait, or over a baited area, for big game, upland game birds, turkey and waterfowl.",
+            "Feeding or baiting deer or bear on purpose, at any time of year, mineral blocks and powders included; making, setting or using salt licks or other attractants with any salt in them on land where deer or bear live.",
+            "Taking a deer or bear while it is in water.",
+            "Hunting big game with dogs, except with a leashed tracking dog licence. Hunting bear with bait or dogs.",
+            "For deer and bear: rimfire ammunition; a shotgun smaller than 20 gauge, or loads with more than one projectile; a bow under 35 lb (16 kg) draw weight; barbed broadheads.",
+            "A rifle or handgun for pheasant or migratory game birds. An air gun for waterfowl, pheasant, wild turkey or big game.",
+            "Taking a turkey with a rifle or air gun; using bait, an electronic call or a live decoy for turkey; hunting turkey with a dog in the spring season.",
+            "For migratory birds: rifles, bait, live decoys, recorded calls (with the exceptions the guide lists), shooting from a motorboat or sailboat unless the motor is off or the sail furled and the boat has stopped, and shot that is not non-toxic (woodcock excepted). Killing or crippling a migratory bird without a reasonable effort to retrieve it.",
+            "Selling deer or bear meat.",
+            "Taking any native snake, lizard or salamander, any turtle other than the snapping turtle, or a spruce grouse."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Distances and blaze orange",
+      "blocks": [
+        {
+          "p": "In normal times, under the 2026–27 guide:"
+        },
+        {
+          "list": [
+            "Don’t shoot a firearm within 500 feet (150 m), a crossbow within 250 feet (75 m) or a bow within 150 feet (45 m) of a school, playground, or occupied factory or church. In Suffolk and Westchester the crossbow distance is 500 feet (150 m).",
+            "The same distances apply to a dwelling, farm building or occupied structure, unless you own or lease it, are immediate family or an employee, or have the owner’s consent.",
+            "Don’t shoot so that the load, arrow or bolt passes over any part of a public highway.",
+            "Anyone hunting deer or bear with a firearm, and anyone with them, must wear solid or patterned orange or pink above the waist (at least 250 square inches (1,600 cm²), visible from all sides; patterned at least half orange or pink) or a hat at least half orange or pink."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Tagging and reporting",
+      "blocks": [
+        {
+          "p": "In normal times, under the 2026–27 guide:"
+        },
+        {
+          "list": [
+            "Deer, bear and turkey on a paper tag: fill in the tag right away when you take the animal, attach it to the carcass when you reach your camp, home or vehicle, and report the harvest within 48 hours (online, by phone or in the HuntFishNY app).",
+            "On an e-tag: fill it in right away in the HuntFishNY app.",
+            "A deer or bear needs its carcass tag once it leaves your possession.",
+            "Migratory birds: don’t completely field dress one before carrying it home; the head or one fully feathered wing must stay on.",
+            "Bobcat, otter, fisher and marten: fill in a furbearer possession tag and have the pelt or unskinned animal sealed. Seal it before selling, giving away, mounting, tanning or taking it out of the state, and within 10 days after the season closes in that WMU. Seals can’t be sent through the mail."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Trapping: how often to check traps",
+      "blocks": [
+        {
+          "p": "In normal times, the interval depends on zone, WMU and kind of trap. The guide’s words (2026–27 guide, furbearer section; the same on DEC’s Trapping Regulations page):"
+        },
+        {
+          "table": {
+            "head": [
+              "Where and which traps",
+              "Interval, in the guide’s words"
+            ],
+            "rows": [
+              [
+                "Southern Zone",
+                "“You must check traps once in each 24-hour period.”"
+              ],
+              [
+                "Northern Zone, WMUs 5C, 5F, 5G, 5H, 5J, 6F, 6J and 6N",
+                "“Visit once in each 48-hour period”"
+              ],
+              [
+                "Northern Zone, WMUs 5A, 6A, 6C, 6G, 6H and 6K: traps set in water during the open season for beaver, otter, mink and muskrat",
+                "“Visit once in each 48-hour period”"
+              ],
+              [
+                "The same WMUs: body-gripping traps set on land",
+                "“Visit once in each 48-hour period”"
+              ],
+              [
+                "The same WMUs: restraining traps",
+                "“Visit once in each 24-hour period”"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "The guide defines a restraining trap as a device used to capture and restrain a mammal. Find your zone and WMU on the guide’s map."
+        }
+      ]
+    },
+    {
+      "h": "Trapping: legal and illegal traps",
+      "blocks": [
+        {
+          "p": "In normal times, under the 2026–27 guide and DEC’s Trapping Regulations page:"
+        },
+        {
+          "list": [
+            "Snares may not be used for trapping. State law forbids setting a snare or any noose that can take an animal.",
+            "Box or cage traps are legal for all species, but not a cage trap made to take more than one muskrat at a setting.",
+            "Foothold traps: no teeth. On land, 5¾ inches (14.6 cm) or smaller, measured inside the jaws; one larger than 4 inches (10 cm) set on land must have a pan tension device and be covered when set. Under water during beaver or otter season, up to 7¼ inches (18.4 cm); in water when those seasons are closed, no larger than 5¾ inches (14.6 cm). Larger than 7¼ inches (18.4 cm) is never legal.",
+            "Body-gripping traps: more than 7½ inches (19 cm) may never be used on land; larger ones only in water during an open beaver or otter season. On land, one smaller than 5½ inches (14 cm) may be set any way, with or without bait; from 5½ to 7½ inches (14 to 19 cm) the guide sets limits on bait and on how and where the trap is set. In Adirondack WMUs, body-gripping traps on land may not be set with bait or lure when the fisher and marten season is closed. Southern Zone beaver traps larger than 8½ inches (21.6 cm) have their own trigger rules in the guide.",
+            "Deadfalls: the guide neither allows nor forbids them by name; New York law counts a deadfall as a trapping device. This app’s caution: don’t set one in normal times without asking DEC.",
+            "No smoke, chemicals, gas or poison on or near a trap set for furbearers (state law).",
+            "Put your name and address, or your DEC customer ID number, on every trap."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Trapping: where and how",
+      "blocks": [
+        {
+          "p": "In normal times, under the 2026–27 guide:"
+        },
+        {
+          "list": [
+            "Not within 100 feet (30 m) of a house, school, playground or church without the owner’s written consent (state law).",
+            "Not on a public road. A culvert or ditch is allowed unless the property is posted or the landowner does not allow trapping.",
+            "Body-gripping traps on land: not within 100 feet (30 m) of a public trail, except on Wildlife Management Areas.",
+            "Not on or within 15 feet (4.5 m) of a beaver dam, den or house (with the exceptions the guide lists), or on or within 5 feet (1.5 m) of a muskrat house.",
+            "Don’t set or stake a trap before 7:00 AM on opening day.",
+            "Don’t set a trap so a caught animal hangs fully in the air.",
+            "A foothold trap baited with a carcass: the carcass must be completely covered, so it can’t be seen from directly above, when the trap is set or visited.",
+            "Don’t disturb a trap someone else set lawfully, or take an animal from it.",
+            "An animal caught when its season is closed: try to release it. If it is injured so badly you believe it won’t survive, kill it humanely; if you are not sure, contact a DEC Regional Wildlife Office or an Environmental Conservation Officer. A dead animal may be laid near the trap. There is no legal way to keep it: you may not have it even to carry it back to your vehicle without DEC’s permission.",
+            "From age 16 you don’t need a hunting licence to use a firearm on a legally trapped animal. Junior trappers aged 12 to 15 need a hunting licence and must be with a parent, guardian or adult with written permission."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Fishing: legal methods",
+      "blocks": [
+        {
+          "p": "In normal times, under the 2026 fishing guide and DEC’s General Freshwater Fishing Regulations page:"
+        },
+        {
+          "list": [
+            "Angling means taking fish by hook and line. You may fish no more than 3 lines, with or without a rod, each with no more than 5 lures or baits and no more than 15 hook points.",
+            "You must be in immediate attendance when your lines are in the water. Set lines left without the angler in immediate attendance are prohibited.",
+            "Ice fishing: no more than 7 ice-fishing lines in any combination of devices (hand lines, tip-ups, tip-downs and the like), unless the special regulations for that water say otherwise; no more than 5 lures or baits and 15 hook points on each line; you must be in immediate attendance. From May 1 to November 14 only hand lines, rod and reel included, may be used through the ice.",
+            "Ice fishing is allowed on most waters, but not where special regulations forbid it. In Essex, Franklin, Fulton, Hamilton, Herkimer, Lewis, St. Lawrence, Warren and Washington counties, ice fishing is prohibited in waters inhabited by trout unless specifically permitted: check the guide for the water.",
+            "Ice shanties: the owner’s name and address on the outside in letters at least 3 inches (7.5 cm) high; off all waters by March 15.",
+            "Nets: a landing net to finish a catch; nets for baitfish under the baitfish rules; and one dip net for smelt, suckers, alewives or blueback herring, on the waters and in the sizes the guide gives. No other use of nets to collect fish is allowed.",
+            "Minnow traps only for baitfish: entrance no wider than 1 inch (2.5 cm), length no more than 20 inches (51 cm), marked with the owner’s name and address. A seine or scap net for baitfish: no more than 36 square feet (3.3 m²), from sunrise to sunset, in waters without trout (the guide lists a few big waters where seines may be used at any time).",
+            "Baitfish you catch yourself may be used only in the water they came from, and may not be carried overland in a motor vehicle except where the guide allows.",
+            "Carp only, by bow, in the set season and on waters where a bow may be shot, with a fishing or hunting licence. The fishing guide names a longbow or crossbow; the 2026–27 hunting guide says crossbows may not be used to take carp or any other fish. This app’s caution: use a longbow, not a crossbow. No other fish may be taken with a bow.",
+            "Gaffs only when ice fishing or bowfishing."
+          ]
+        },
+        {
+          "p": "In normal times these are never allowed (2026 fishing guide):"
+        },
+        {
+          "list": [
+            "Taking fish by spear or spear gun, at any time. No spear may be carried in the Adirondack Park, on Lake George, or within 200 feet (60 m) of their high-water mark.",
+            "Snatching or snagging fish (hooking fish not drawn to bait or lure).",
+            "Keeping fish over the daily limit, or outside the legal sizes.",
+            "Native salamanders and snakes as bait."
+          ]
+        },
+        {
+          "p": "Frogs, in their season, may be taken by spear, club, hook or hand with a hunting or fishing licence; with a gun or bow, a hunting licence is needed (2026 fishing guide, 2026–27 hunting guide)."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "NYS DEC, 2026–2027 New York Hunting & Trapping Guide (Official Guide to Laws & Regulations; most rules in effect September 1, 2026 to August 31, 2027): General Information, Big Game, Small Game, Turkey, Migratory Game Birds and Furbearer sections",
+      "used": "Licences, courses and ages; season kinds; hunting hours; Sunday hunting; illegal methods and devices; baiting and feeding; unprotected species; discharge distances; blaze orange or pink; tagging and 48-hour reporting; pelt sealing; trap-check intervals in the guide’s words; legal and illegal traps and sizes; trap placement; trap identification; accidental captures; firearms for trappers; crossbows and fish"
+    },
+    {
+      "name": "NYS DEC, 2026 New York State Freshwater Fishing Regulations Guide (in effect April 1, 2026)",
+      "used": "Who needs a fishing licence; free fishing days; closed seasons; angling; lines, lures and hook points; attendance and set lines; ice-fishing lines; spearing; snatching; nets; minnow trap and seine sizes; baitfish use and transport"
+    },
+    {
+      "name": "NYS DEC, Trapping Regulations (web page, undated)",
+      "used": "Trap-check intervals (the same as the guide); snares; cage, foothold and body-gripping limits; trap identification; setbacks"
+    },
+    {
+      "name": "NYS DEC, General Freshwater Fishing Regulations (web page, undated)",
+      "used": "Carp by bow; set lines; ice-fishing lines and counties; shanties; dip nets; gaffs; frogs; snakes and salamanders as bait"
+    },
+    {
+      "name": "NYS DEC, Trapping (web page, undated)",
+      "used": "Mandatory trapper education course for a trapping licence"
+    },
+    {
+      "name": "New York Environmental Conservation Law, section 11-1101 (NY Senate Open Legislation, revision of September 22, 2014)",
+      "used": "No snare or noose; deadfalls named as trapping devices; no smoke, chemicals, gas or poison near traps"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

@@ -6531,3 +6531,24 @@ households; outside the source list for this pack).
 - "Food to leave alone": one block {"link": "s:surv-land-after-fallout", "label": "Game, fish, milk and gardens after fallout"} after the
   milk, game and fish paragraph. Nothing else changed. tests/test_survival_home.py allows exactly this second block against the v7.4
   release (CHECKED_LAND_LINKS).
+
+### Batch D fix round (2026-11-19), from task-5-review.md
+
+Re-opened with built-in fetch (title checked): ITE-1968 HTML (chapter 2, "Understand the Hazards of Nuclear Attack": "People suffering
+from extreme hunger or thirst should not be denied these necessities after an attack," / "even if the only available supplies might contain
+fallout particles or other radioactive substances."; it ends the chapter's food, water and milk summary); HTG-BIG p. 23 ("Hunters must
+possess a current bowhunting or junior bowhunting privilege to participate during the bowhunting seasons."; "The bowhunting privilege is not
+required to hunt with a bow or crossbow during regular seasons."; "possess proof of eligibility (either a valid bowhunter education
+certificate or prior bowhunting license)"), p. 22 ("Attach the tag to the carcass upon arrival at your camp, home, or vehicle."), p. 20
+(salt licks or other attractants containing salt, "block, liquid, or powder", on lands inhabited by deer or bear; feeding ban includes
+mineral blocks or powders); HTG-FUR pp. 62–63 ("If you are not sure, contact a DEC Regional Wildlife Office or ECO for assistance"; "you may
+remove it and lay it in the vicinity of the trap"; "There are no legal provisions for you to keep it"; "you may not possess it even to take it
+back to your vehicle without permission from DEC"); HTG-TURKEY p. 51 (fall hours not readable: "Hunting Hours: Sunrise to sunset" sits beside
+the youth season heading; the page now says "Fall turkey hours: see the guide"); HTG-SMALL p. 46 ("You may not use a rifle or handgun to hunt
+pheasant or migratory game birds."; "Air guns may not be used to hunt waterfowl, pheasant, wild turkey, or big game."); FISHGUIDE p. 71 (in
+the nine counties "ice fishing is prohibited in waters inhabited by trout, unless specifically permitted"), p. 79 ("Minnow trap: maximum
+length 20", maximum entrance diameter 1", must be marked with owner's name and address."; seines or scap nets 36 sq ft, sunrise to sunset
+in all non-trout waters; seines at any time in Lakes Erie and Ontario, the Niagara River and the Hudson below Troy Dam), p. 89 (licence
+sentence); FDA-1998 Table D-2 p. 36 (food classes "Egg" and "Fish" in the intervention-level table; no protective step or advice for either;
+the pages now say "no source opened gives any step or advice for" eggs, game and fish). How long to stay in (this app, checked) quoted word for
+word in Do first 4 and the Animals warn.

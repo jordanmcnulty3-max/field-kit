@@ -59,8 +59,12 @@
                 "A hunting licence. To get one: a Hunter Education Certificate, or a hunting licence held before. Under 12 may not get a hunting licence or hunt. The course can be taken from age 11"
               ],
               [
-                "Hunt deer or bear with a bow or crossbow",
+                "Hunt deer or bear with a bow or crossbow in a bowhunting season",
                 "A hunting licence and the Bowhunting privilege. To get it: a Bowhunter Education Certificate, or a New York bowhunting stamp or junior bowhunting licence issued in 1980 or later"
+              ],
+              [
+                "Hunt deer or bear with a bow or crossbow in the regular season",
+                "A hunting licence; the Bowhunting privilege is not needed, but carry proof of eligibility: a bowhunter education certificate or a bowhunting licence held before"
               ],
               [
                 "Hunt in a muzzleloading season",
@@ -93,7 +97,7 @@
           "list": [
             "A licence does not give you any right to go on private land without the landowner’s permission (hunting and trapping guide).",
             "A trapping licence can be used only by the person it was issued to (hunting and trapping guide).",
-            "DEC: trappers must complete a mandatory trapper education course to get a trapping licence."
+            "DEC: trappers must complete a mandatory trapper education course to get a trapping licence (the guide also accepts a trapping licence held before in any state or country)."
           ]
         }
       ]
@@ -125,7 +129,7 @@
           "list": [
             "Deer and bear: from half an hour before sunrise to half an hour after sunset.",
             "Most small game, including rabbits, hares, squirrels, pheasant and ruffed grouse: sunrise to sunset.",
-            "Turkey in the spring season: from half an hour before sunrise to noon.",
+            "Turkey in the spring season: from half an hour before sunrise to noon. Fall turkey hours: see the guide.",
             "Ducks, geese and most other migratory birds: from half an hour before sunrise until sunset. Woodcock: sunrise to sunset.",
             "Sunday hunting is allowed in all areas of New York State."
           ]
@@ -145,10 +149,11 @@
             "An automatic firearm; a firearm with a silencer; a semiautomatic that holds more than 6 rounds, with the exceptions the guide lists.",
             "A spear (frogs excepted), an arrow with an explosive head, or any device made to deliver drugs to an animal.",
             "Hunting with the aid of bait, or over a baited area, for big game, upland game birds, turkey and waterfowl.",
-            "Feeding or baiting deer or bear on purpose, at any time of year.",
+            "Feeding or baiting deer or bear on purpose, at any time of year, mineral blocks and powders included; making, setting or using salt licks or other attractants with any salt in them on land where deer or bear live.",
             "Taking a deer or bear while it is in water.",
             "Hunting big game with dogs, except with a leashed tracking dog licence. Hunting bear with bait or dogs.",
             "For deer and bear: rimfire ammunition; a shotgun smaller than 20 gauge, or loads with more than one projectile; a bow under 35 lb (16 kg) draw weight; barbed broadheads.",
+            "A rifle or handgun for pheasant or migratory game birds. An air gun for waterfowl, pheasant, wild turkey or big game.",
             "Taking a turkey with a rifle or air gun; using bait, an electronic call or a live decoy for turkey; hunting turkey with a dog in the spring season.",
             "For migratory birds: rifles, bait, live decoys, recorded calls (with the exceptions the guide lists), shooting from a motorboat or sailboat unless the motor is off or the sail furled and the boat has stopped, and shot that is not non-toxic (woodcock excepted). Killing or crippling a migratory bird without a reasonable effort to retrieve it.",
             "Selling deer or bear meat.",
@@ -181,7 +186,7 @@
         },
         {
           "list": [
-            "Deer, bear and turkey on a paper tag: fill in the tag right away when you take the animal, and report the harvest within 48 hours (online, by phone or in the HuntFishNY app).",
+            "Deer, bear and turkey on a paper tag: fill in the tag right away when you take the animal, attach it to the carcass when you reach your camp, home or vehicle, and report the harvest within 48 hours (online, by phone or in the HuntFishNY app).",
             "On an e-tag: fill it in right away in the HuntFishNY app.",
             "A deer or bear needs its carcass tag once it leaves your possession.",
             "Migratory birds: don’t completely field dress one before carrying it home; the head or one fully feathered wing must stay on.",
@@ -266,7 +271,7 @@
             "Don’t set a trap so a caught animal hangs fully in the air.",
             "A foothold trap baited with a carcass: the carcass must be completely covered, so it can’t be seen from directly above, when the trap is set or visited.",
             "Don’t disturb a trap someone else set lawfully, or take an animal from it.",
-            "An animal caught when its season is closed: try to release it. If it is injured so badly you believe it won’t survive, kill it humanely. You may not keep it without DEC’s permission.",
+            "An animal caught when its season is closed: try to release it. If it is injured so badly you believe it won’t survive, kill it humanely; if you are not sure, contact a DEC Regional Wildlife Office or an Environmental Conservation Officer. A dead animal may be laid near the trap. There is no legal way to keep it: you may not have it even to carry it back to your vehicle without DEC’s permission.",
             "From age 16 you don’t need a hunting licence to use a firearm on a legally trapped animal. Junior trappers aged 12 to 15 need a hunting licence and must be with a parent, guardian or adult with written permission."
           ]
         }
@@ -283,10 +288,10 @@
             "Angling means taking fish by hook and line. You may fish no more than 3 lines, with or without a rod, each with no more than 5 lures or baits and no more than 15 hook points.",
             "You must be in immediate attendance when your lines are in the water. Set lines left without the angler in immediate attendance are prohibited.",
             "Ice fishing: no more than 7 ice-fishing lines in any combination of devices (hand lines, tip-ups, tip-downs and the like), unless the special regulations for that water say otherwise; no more than 5 lures or baits and 15 hook points on each line; you must be in immediate attendance. From May 1 to November 14 only hand lines, rod and reel included, may be used through the ice.",
-            "Ice fishing is allowed on most waters, but not where special regulations forbid it, and waters in Essex, Franklin, Fulton, Hamilton, Herkimer, Lewis, St. Lawrence, Warren and Washington counties have their own rules: check the guide for the water.",
+            "Ice fishing is allowed on most waters, but not where special regulations forbid it. In Essex, Franklin, Fulton, Hamilton, Herkimer, Lewis, St. Lawrence, Warren and Washington counties, ice fishing is prohibited in waters inhabited by trout unless specifically permitted: check the guide for the water.",
             "Ice shanties: the owner’s name and address on the outside in letters at least 3 inches (7.5 cm) high; off all waters by March 15.",
             "Nets: a landing net to finish a catch; nets for baitfish under the baitfish rules; and one dip net for smelt, suckers, alewives or blueback herring, on the waters and in the sizes the guide gives. No other use of nets to collect fish is allowed.",
-            "Minnow traps only for baitfish: entrance no wider than 1 inch (2.5 cm), length no more than 20 inches (51 cm). A seine or scap net for baitfish: no more than 36 square feet (3.3 m²).",
+            "Minnow traps only for baitfish: entrance no wider than 1 inch (2.5 cm), length no more than 20 inches (51 cm), marked with the owner’s name and address. A seine or scap net for baitfish: no more than 36 square feet (3.3 m²), from sunrise to sunset, in waters without trout (the guide lists a few big waters where seines may be used at any time).",
             "Baitfish you catch yourself may be used only in the water they came from, and may not be carried overland in a motor vehicle except where the guide allows.",
             "Carp only, by bow, in the set season and on waters where a bow may be shot, with a fishing or hunting licence. The fishing guide names a longbow or crossbow; the 2026–27 hunting guide says crossbows may not be used to take carp or any other fish. This app’s caution: use a longbow, not a crossbow. No other fish may be taken with a bow.",
             "Gaffs only when ice fishing or bowfishing."
@@ -335,6 +340,5 @@
       "used": "No snare or noose; deadfalls named as trapping devices; no smoke, chemicals, gas or poison near traps"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

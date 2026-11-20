@@ -1163,8 +1163,23 @@ Food from the land pack (v7.7), batch D (New York rules; food sources after fall
    handbook (dated): "Milk contamination from fallout is not expected to be a serious problem after an attack"; "Most of the Nation's
    remaining food supplies would be usable after an attack"; reaping, threshing, canning and processing would keep dangerous amounts of
    fallout out of processed foods. EPA (2017): stored grain products and canned milk and vegetables "will not present a risk from
-   radioiodine". FDA (1998): fresh milk diverted to cheese or milk powder (an agency-scale action). Today: none shown; the page keeps
+   radioiodine". FDA (1998): fresh milk diverted to cheese or milk powder (an agency-scale action). Today: none of those shown; the page keeps
    "don't use them until officials say you can". Say if the group wants any of them shown, dated.
+   Shown since the fix round (controller ruling under your v7.4 decision for when no official word comes): the 1968 handbook, chapter 2,
+   last sentence of its food, water and milk summary, word for word: "People suffering from extreme hunger or thirst should not be denied
+   these necessities after an attack, even if the only available supplies might contain fallout particles or other radioactive substances."
+   (the sentence before it: "In summary, the danger of people receiving harmful doses of fallout radiation through food, water or milk is
+   very small.", not shown). Today the page, in "Read this first", after the checked "don't use them until officials say you can" line and
+   the CDC and Ready.gov advice, says: "For people who have nothing else, the 1968 civil defence handbook In Time of Emergency (dated) says:
+   [the sentence]. That is not a statement that the food or water is free of fallout, or fine: the same sentence says it might contain
+   fallout particles. It does not replace the rule above while officials can still be heard." Say if you want it removed or reworded.
 195. **USDA advice for rural families on crops and livestock (surv-land-after-fallout).** The 1968 handbook says it "is available from the
    U.S. Department of Agriculture". It was not looked up (it is not among the sources the fallout pages use). Today: the page says the app
    does not have it. Say if you want a later task to find and check it (it would be a dated federal civil defence publication).
+196. **Going out to tend animals during a fallout shelter (surv-land-after-fallout).** No source opened says anything about tending farm
+   animals while sheltering (Ready.gov: pets and service animals inside when told to stay inside; FDA 1998: shelter, corral, protected
+   feed and water, for agencies). Today, labelled as this app's caution: each trip out to animals is a trip out like any other, under How
+   long to stay in's own caution, quoted word for word: "with no meter and no official word, stay in all the time for at least the first
+   24 hours unless an immediate hazard forces you out. For the rest of the 2 weeks, and above all in the first few days, go out only for
+   what can’t wait, and as briefly as you can." Whether a thirsty animal "can't wait" is left to the reader. Cost if wrong: animals suffer
+   in the first 24 hours, or people take trips they could have avoided. Say if the group wants a firmer line for livestock.

@@ -17,12 +17,12 @@
     "hunting after fallout",
     "fishing after fallout"
   ],
-  "summary": "Don’t use milk from your own animals, or wild game and fish, until officials say you can, and don’t pick or eat garden food until they say so (Water and food after fallout). No source opened says when they can be used, and nothing on this page says they are fine. If no official word ever comes, this page gives what older federal civil defence handbooks and federal guidance for agencies say, each named, with its year. For wild game, fish and eggs no source says anything.",
+  "summary": "Don’t use milk from your own animals, or wild game and fish, until officials say you can, and don’t pick or eat garden food until they say so (Water and food after fallout). No source opened says when they can be used, and nothing on this page says they are fine. If no official word ever comes, this page gives what older federal civil defence handbooks and federal guidance for agencies say, each named, with its year. For wild game, fish and eggs no source gives any step or advice.",
   "doFirst": [
     "From Water and food after fallout: “No current source opened says when milk from your own animals, or wild game and fish, can be used after fallout. This app’s caution: treat them like food that was outdoors, and don’t use them until officials say you can.”",
     "From Water and food after fallout: “Don’t pick or eat food from your garden until officials say you can (CDC, Ready.gov).”",
     "When officials do say what can be eaten, do what they say. Nothing on this page overrides them.",
-    "Don’t go outside to tend animals or the garden while you are sheltering. When you may go out is in How long to stay in."
+    "Animals to tend: this app’s caution is that each trip out to them is a trip out like any other, under the rule in How long to stay in: “with no meter and no official word, stay in all the time for at least the first 24 hours unless an immediate hazard forces you out. For the rest of the 2 weeks, and above all in the first few days, go out only for what can’t wait, and as briefly as you can.” The steps FDA lists for farm animals (shelter, and protected food and water) are under Animals you keep, below."
   ],
   "sections": [
     {
@@ -36,7 +36,10 @@
           "label": "Water and food after fallout"
         },
         {
-          "p": "Current federal advice (CDC, Ready.gov) says not to eat garden food, or food or liquids that were outdoors and uncovered, until officials say you can. It says nothing about milk, eggs, game or fish. If officials never speak, this page shows what older federal civil defence handbooks say, each named with its year and marked dated, and what federal guidance written for agencies says. None of them tells you a food is fine to eat, and this page never does."
+          "p": "Current federal advice says not to eat garden food until officials say you can (CDC, Ready.gov), and not to eat or drink food or liquids that were outdoors and uncovered until they say so (Ready.gov). It says nothing about milk, eggs, game or fish. If officials never speak, this page shows what older federal civil defence handbooks say, each named with its year and marked dated, and what federal guidance written for agencies says. None of them says when any of these foods is fine to eat, and this page never does."
+        },
+        {
+          "p": "For people who have nothing else, the 1968 civil defence handbook In Time of Emergency (dated) says: “People suffering from extreme hunger or thirst should not be denied these necessities after an attack, even if the only available supplies might contain fallout particles or other radioactive substances.” That is not a statement that the food or water is free of fallout, or fine: the same sentence says it might contain fallout particles. It does not replace the rule above while officials can still be heard."
         }
       ]
     },
@@ -90,7 +93,7 @@
           "label": "Coming in from outside"
         },
         {
-          "warn": "None of this is a reason to go outside while you are sheltering. How long to stay in owns when you may go out."
+          "warn": "This app’s caution: tending animals does not change when you may go out. Each trip to water or feed them goes by How long to stay in: “with no meter and no official word, stay in all the time for at least the first 24 hours unless an immediate hazard forces you out. For the rest of the 2 weeks, and above all in the first few days, go out only for what can’t wait, and as briefly as you can.”"
         },
         {
           "link": "s:surv-fallout-how-long",
@@ -105,7 +108,7 @@
       "h": "Eggs",
       "blocks": [
         {
-          "p": "No source opened says anything about eggs from your own hens after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. This app’s caution: treat them like milk from your own animals, and don’t use them until officials say you can."
+          "p": "No source opened gives any step or advice for eggs from your own hens after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. This app’s caution: treat them like milk from your own animals, and don’t use them until officials say you can."
         }
       ]
     },
@@ -113,7 +116,7 @@
       "h": "Wild game",
       "blocks": [
         {
-          "p": "No source opened says anything about wild game after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. The rule at the top of this page is the only one: don’t use it until officials say you can."
+          "p": "No source opened gives any step or advice for wild game after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. The rule at the top of this page is the only one: don’t use it until officials say you can."
         }
       ]
     },
@@ -121,7 +124,7 @@
       "h": "Fish",
       "blocks": [
         {
-          "p": "No source opened says anything about eating fish you catch after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. The rule at the top of this page is the only one: don’t use it until officials say you can."
+          "p": "No source opened gives any step or advice for eating fish you catch after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. The rule at the top of this page is the only one: don’t use it until officials say you can."
         }
       ]
     },
@@ -173,6 +176,5 @@
       "used": "When you may go out, washing a pet, and what to do first, by link"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

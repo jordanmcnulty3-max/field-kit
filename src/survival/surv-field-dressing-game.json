@@ -79,7 +79,7 @@
       "h": "Cooling the carcass",
       "blocks": [
         {
-          "p": "Heat ruins meat. Cool the carcass quickly to 35 to 40°F (2 to 4°C) to stop germs growing (Penn State Extension). Keep game cool, with ice or below 45°F (7°C), until it is butchered, even while a big animal hangs for several days (NYS Department of Health)."
+          "p": "Heat ruins meat. Cool the carcass quickly to 35 to 40°F (2 to 4°C) to stop germs growing (Penn State Extension). Keep game cool, with ice or below 45°F (7°C) (the meat), until it is butchered, even while a big animal hangs for several days (NYS Department of Health)."
         },
         {
           "warn": "How long you have. When the air is above 40°F (4°C), the meat must be chilled within 3 to 4 hours of the kill (Ohio State University Extension). Utah State University Extension gives the same 3 to 4 hours when the air is above 45°F (7°C); this app goes by Ohio State’s 40°F. In colder air, get the meat to 40°F (4°C) or colder inside within 24 hours (Montana State University Extension)."
@@ -226,7 +226,7 @@
           "p": "Cook all wild game and birds to at least 165°F in the thickest part, and fish to 145°F. Use a food thermometer if you have one."
         },
         {
-          "p": "No thermometer: no source opened gives a sign you can go by for game. Color is not a good indicator of doneness (Missouri Department of Conservation), and juices running clear are not a reliable sign (South Dakota State University Extension). This app’s caution: with no thermometer, cut game into small pieces and boil it, or boil it in a stew, until every piece is cooked through; never eat game rare."
+          "p": "No thermometer: no source opened gives a sign you can go by for game. Color is not a good indicator of doneness (Missouri Department of Conservation), and juices running clear are not a reliable sign (South Dakota State University Extension). This app’s caution: with no thermometer, cut game into small pieces and boil them, or boil them in a stew, well past the point they look done; never eat game rare."
         },
         {
           "warn": "Bear and wild boar can carry trichinella worms. Cook them to 165°F. Freezing, smoking or curing does not reliably kill the worms in wild game."

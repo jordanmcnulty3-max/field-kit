@@ -1025,7 +1025,7 @@ def test_warm_meat_time_limits_each_have_one_owner():
                 assert tid == 'surv-field-dressing-game', (tid, x)
             n45 = len(re.findall(r'(?<!\d)45°F', x))   # not 145°F
             if n45 and tid != 'surv-field-dressing-game':
-                assert n45 == x.count('“Keep game cool, with ice or below 45°F (7°C), until it is butchered'), (tid, x)
+                assert n45 == x.count('“Keep game cool, with ice or below 45°F (7°C) (the meat), until it is butchered'), (tid, x)
     fd = _all_texts(land['surv-field-dressing-game'])
     assert any(still in x for x in fd)
     cooling = next(s for s in land['surv-field-dressing-game']['sections'] if s['h'] == 'Cooling the carcass')
@@ -1067,9 +1067,13 @@ def test_whole_pack_read_fixes_keep_one_answer_per_question():
     fd, butcher, hub = t('surv-field-dressing-game'), t('surv-land-butchering'), t('surv-land-start')
     # I1: game with no thermometer gets a plain answer; the fish page gives FDA's own words for fish
     assert 'No thermometer: no source opened gives a sign you can go by for game.' in fd
+    assert 'well past the point they look done; never eat game rare.' in fd   # re-check R3
+    assert 'Cooling the carcass, and what to do with no ice, snow or fridge or with a deer found later' in t('surv-land-keeping-meat')   # R1
+    assert 'a gut-shot deer left overnight in mild air is not eaten' in t('surv-land-big-game')   # R5
     assert '“If you don’t have a food thermometer, there are other ways to determine whether seafood is done.”' in t('surv-land-fish-cleaning')
     # I2: one decision on a deer's heart and liver, on Butchering; Field dressing and the kit point to it
-    assert 'eat a deer’s heart and liver only if the deer has tested negative for chronic wasting disease; with no test, leave them.' in butcher
+    assert ('eat a deer’s heart and liver only if the deer has tested negative for chronic wasting disease (testing is possible only in '
+            'normal times); with no test, leave them.') in butcher and 'in normal times, eat a deer' not in butcher
     assert 'Keep the heart and liver in a clean bag if they look healthy' not in fd and 'Heart, liver and tongue' in fd
     kit = {i['id']: i for i in _shipped('checklists')['land-kit']['items']}
     assert 'when Butchering deer and small game says to keep them' in kit['bags']['note']

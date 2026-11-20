@@ -106,7 +106,10 @@
       "h": "Hanging a carcass",
       "blocks": [
         {
-          "p": "Backed by a food-safety agency, from Field dressing game: “Keep game cool, with ice or below 45°F (7°C), until it is butchered, even while a big animal hangs for several days (NYS Department of Health).”"
+          "p": "Backed by a food-safety agency, from Field dressing game: “Keep game cool, with ice or below 45°F (7°C) (the meat), until it is butchered, even while a big animal hangs for several days (NYS Department of Health).”"
+        },
+        {
+          "p": "Cooling the carcass, and what to do with no ice, snow or fridge or with a deer found later, are in Field dressing game, “Cooling the carcass”."
         },
         {
           "link": "s:surv-field-dressing-game",

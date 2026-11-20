@@ -944,8 +944,8 @@ Food at home pack (v7.5), batch A: numbers 117 to 129. Gates and rulings are in 
    **Whole-pack read (land pack, v7.7), game and fish.** Cook without power is not reworded. For game, Field dressing game now says no
    source opened gives a sign to go by: Missouri Department of Conservation ("color is not a good indicator of doneness") and South
    Dakota State University Extension (juices running clear are not reliable; a thermometer is "the only reliable way"). It adds, labelled
-   as this app's caution: "with no thermometer, cut game into small pieces and boil it, or boil it in a stew, until every piece is cooked
-   through; never eat game rare." NYS DOH's wild game page gives only the 165°F figure. Ask a medical professional whether that caution is
+   as this app's caution: "with no thermometer, cut game into small pieces and boil them, or boil them in a stew, well past the point they
+   look done; never eat game rare." NYS DOH's wild game page gives only the 165°F figure. Ask a medical professional whether that caution is
    right, or whether the page should say nothing beyond "keep a thermometer". Fish: see 211.
 127. **Dry ice (surv-food-power-out).** CDC and New York State Department of Health suggest dry or block ice for a long outage.
    USDA: 50 pounds holds an 18-cubic-foot full freezer for 2 days; Ready.gov: 25 pounds keeps a 10-cubic-foot freezer below
@@ -1327,8 +1327,8 @@ Food from the land pack (v7.7), batch A2 (field dressing, butchering, keeping ga
    heart and liver should also be left in New York deer.
    **Changed in the whole-pack read.** The page said NYS DOH's risk sentence ("cooking does not remove it") and then "cook heart and liver
    to 165°F", which read as a contradiction. Butchering (the owner of organs) now decides, by the cautious option: "This app's caution, as
-   for the tongue: in normal times, eat a deer's heart and liver only if the deer has tested negative for chronic wasting disease; with no
-   test, leave them." Field dressing game's step and the kit's bag note now point there instead of saying "keep". NYS DOH's page (revised
+   for the tongue: eat a deer's heart and liver only if the deer has tested negative for chronic wasting disease (testing is possible
+   only in normal times); with no test, leave them." Field dressing game's step and the kit's bag note now point there instead of saying "keep". NYS DOH's page (revised
    November 2025) also says "there is currently no evidence that CWD in animals is linked to disease in people"; that line is not on the
    app's pages. Cost if wrong: a deer's heart and liver are left in a long emergency. Say if you want them kept.
 165. **Stock from bones and rendering fat (surv-land-butchering).** New Mexico State University (1994) saws the backbone into stock;

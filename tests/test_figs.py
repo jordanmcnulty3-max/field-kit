@@ -970,11 +970,12 @@ def test_cans_no_can_or_jar_drawn_without_a_sign():
 
 # ---- Land pack (v7.7) batch C: the trap figures move with their text to Trapping only if every drawn string is in its text ----
 def test_squirrel_pole_moved_to_trapping_and_draws_only_the_topics_words():
-    """Fishing for food is fishing only, so it carries no trap figure. trap-squirrel sits once in Trapping and its drawn line is
+    """Fishing for food is fishing only, so it carries no trap figure (its one figure is land-fishing, where fish gather in a
+    river; land pack Task 6). trap-squirrel sits once in Trapping and its drawn line is
     in that topic's own text. trap-snare ("twigs funnel it into the loop", "wire tied to a solid support") and trap-fig4
     ("heavy rock or log", "trigger, bait on the end") draw words no opened source gives, so they are on no topic."""
     used = topic_figs()
-    assert used['surv-traps-and-fishing'] == []
+    assert used['surv-traps-and-fishing'] == ['land-fishing']
     assert used['surv-land-trapping'] == ['trap-squirrel']
     assert all(n not in names for names in used.values() for n in ('trap-snare', 'trap-fig4', 'fishing'))
     topic = topic_text('surv-land-trapping')
@@ -1007,6 +1008,15 @@ LAND_FIGS = {
         [r'\d', r'\bhead\b', r'\bneck\b', r'quartering', r'facing you', r'liver', r'gut', r'spine', r'backbone', r'brain',
          r'shoulder blade', r'diaphragm', r'\bsafe', r'yards?'],
         ['aim just behind the shoulder', 'one third of the way up from the bottom of the chest', 'smaller than a pie plate']),
+    'land-fishing': (
+        'surv-traps-and-fishing', 'Where the fish are',
+        ['rivers and streams', 'the hole below a dam', 'or waterfall', 'the outside of a bend', 'where the fast water',
+         'carries food', 'the quiet pocket', 'behind a rock', 'the seam where', 'two currents meet'],
+        [r'\d', r'trap', r'\bnet', r'set line', r'trotline', r'stakeout', r'\bhook', r'undercut', r'edd', r'drop-off',
+         r'weed', r'lily', r'\btree', r'bush', r'\bsafe', r'ice'],
+        ['the quiet pocket behind a rock', 'the seam where two currents meet',
+         'the outside of a bend where the fast water carries food', 'the hole below a dam or waterfall',
+         'undercut banks, eddies and drop-offs are not drawn']),
     'land-deer-cuts': (
         'surv-land-butchering', 'The cuts and what each is good for',
         ['backstrap (loin)', 'tenderloin', 'inside, along the underside', 'of the spine, near the pelvis', 'neck', 'shoulder',
@@ -1073,8 +1083,42 @@ def test_land_figure_alt_and_caption(name):
     cap = topic_caption(tid, name)
     for w in cap_words:
         assert w in cap, f'{name}: caption missing {w!r}: {cap}'
+    if name in CAPTION_NOTES:
+        return  # captions with the figure's own note are checked in their own test
     for sentence in [x.strip() for x in re.split(r'(?<=[.?])\s', cap) if x.strip()]:
         assert sentence.rstrip('.') in topic_text(tid), f'{name}: caption sentence not in the topic: {sentence!r}'
+
+
+# Figures whose caption adds the figure's own note on what is not drawn (review 6b): the note, word for word.
+CAPTION_NOTES = {'land-fishing': 'Undercut banks, eddies and drop-offs are not drawn.'}
+
+
+def test_land_fishing_caption_names_what_is_drawn_and_what_is_not():
+    """The caption names the four drawn places in the topic's own words, from the rivers-and-streams line, and the three
+    places that line names but the figure does not draw are named as not drawn, in the figure's own note."""
+    cap = topic_caption('surv-traps-and-fishing', 'land-fishing')
+    note = CAPTION_NOTES['land-fishing'].lower()
+    assert cap.endswith(note), cap
+    first = cap[:-len(note)].strip()
+    assert first.startswith('four of the places in rivers and streams: ') and first.endswith(' (nys dec).'), first
+    places = first[len('four of the places in rivers and streams: '):-len(' (nys dec).')]
+    names = [p.strip() for p in re.split(r',\s*(?:and\s+)?', places)]
+    assert names == ['the hole below a dam or waterfall', 'the outside of a bend where the fast water carries food',
+                     'the quiet pocket behind a rock', 'the seam where two currents meet'], names
+    topic = topic_text('surv-traps-and-fishing')
+    line = next(x for x in topic.split('rivers and streams: ')[1:] if 'undercut banks' in x)
+    for n in names:
+        assert n in line, n
+    for missing in ('undercut banks', 'eddies', 'drop-offs'):
+        assert missing in line and missing in note
+        assert missing not in drawn_of('land-fishing')
+
+
+def test_land_fishing_every_fish_faces_upstream_and_clears_the_pocket_flow_lines():
+    root = ET.fromstring(figs.F['land-fishing'][0])
+    rots = [float(re.search(r'rotate\((-?[\d.]+)\)', f.get('transform')).group(1))
+            for f in root.iter() if f.get('data-part') == 'fish']
+    assert len(rots) == 4 and all(-90 < r <= 0 for r in rots), rots  # head up the page or up-left: into the current
 
 
 def test_land_figures_draw_no_plant_and_no_person():
@@ -1128,3 +1172,23 @@ def test_deer_cuts_shank_is_a_label_only():
     assert not [e for e in root.iter() if e.get('data-part') == 'shank']
     assert not [e for e in root.iter() if 'wf' in (e.get('class') or '').split()]
     assert 'shank' in drawn_of('land-deer-cuts')
+
+
+def test_land_fishing_draws_a_fish_at_each_named_place_and_no_trap():
+    """Four fish, one for each labelled place; the river flows down the page (the current arrows point down or downstream),
+    so "behind a rock" and "the hole below a dam" read the right way round; no trap, net, line or hook is drawn."""
+    root = ET.fromstring(figs.F['land-fishing'][0])
+    fish = [e for e in root.iter() if e.get('data-part') == 'fish']
+    assert len(fish) == 4
+    pos = [tuple(float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', f.get('transform'))[:2]) for f in fish]
+    part = {e.get('data-part'): e for e in root.iter() if e.get('data-part') in ('dam', 'hole', 'rock', 'seam')}
+    dam_y = float(part['dam'].get('y1'))
+    hole = part['hole']
+    assert float(hole.get('cy')) > dam_y, 'the hole is below (downstream of) the dam'
+    hx, hy, hrx, hry = (float(hole.get(k)) for k in ('cx', 'cy', 'rx', 'ry'))
+    assert any(((x - hx) / hrx) ** 2 + ((y - hy) / hry) ** 2 < 1 for x, y in pos), 'a fish in the hole below the dam'
+    rx, ry = float(part['rock'].get('cx')), float(part['rock'].get('cy'))
+    assert any(abs(x - rx) < 6 and 0 < y - ry < 30 for x, y in pos), 'a fish just downstream of the rock'
+    for line in root.iter():
+        if line.tag.split('}')[-1] == 'line' and line.get('marker-end') and 'a' in line.get('class', '').split():
+            assert float(line.get('y2')) >= float(line.get('y1')) or float(line.get('x2')) > float(line.get('x1'))

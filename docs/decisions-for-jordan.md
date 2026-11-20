@@ -1317,3 +1317,41 @@ Batch A2 fix round (numbers 200 to 203; 160 to 169 were used up).
 203. **Fridge time for game birds (surv-land-keeping-meat).** Clemson Cooperative Extension: game birds used within three days.
    FoodSafety.gov: raw chicken or turkey 1 to 2 days (Minnesota DOH: duck, goose 1 to 2 days). Today: 1 to 2 days, Clemson's 3 named.
    Cost if wrong: birds used a day sooner than needed.
+
+Food from the land pack (v7.7), batch B (hub, hunting deer and big game, small game and birds, kit checklist): numbers 170 to 179.
+
+170. **"Start with fishing" (surv-land-start).** No source says which food a particular group should go after first. The hub says, labelled
+   "This app’s suggestion", to start with fishing because it is what your group knows best, and adds what ATP 3-50.21 says (fish usually
+   more plentiful than mammals, caught mostly silently). Today: in the Do first box and the first steps. Cost if wrong: effort goes to
+   fishing when the group would rather hunt. Say if you want a different first step, or none.
+171. **How long to wait before following a shot deer (surv-land-big-game).** New Jersey Fish and Wildlife: one hour before trailing a
+   standard hit, at least six to eight hours after a gut shot. Massachusetts hunter education: 30 minutes after a firearm shot, 1 hour
+   after an arrow. Maine: half an hour to an hour. North Carolina: 15 to 30 minutes, an hour or more for a poor hit. Today: at least
+   1 hour for any ordinary hit, 6 to 8 hours after a gut shot, all four named. Cost if wrong: a firearm-shot deer cools half an hour later
+   than it needs to.
+172. **Quartering-toward and head-on shots with a firearm (surv-land-big-game).** Alaska Department of Fish and Game accepts both with a
+   bullet that can break the bones in the way. Texas Parks and Wildlife says quartering toward is more likely to hit shoulder bone and
+   head-on can ruin meat and go through the stomach (and both never with a bow). Today: "Pass it up" for both, ADF&G's view named. Cost if
+   wrong: some killing shots are passed up.
+173. **Insects raw or cooked (surv-land-start).** FM 21-76: "You can eat most insects raw." Michigan State University Extension and Ohio
+   State University Extension (quoting FDA on allergy): cook every wild insect completely, never raw. Today: cook every one; the manual's
+   line is named and not followed. Cost if wrong: fuel used to cook insects.
+174. **Heart trouble and dragging a deer (surv-land-start). Medical professional.** The American Heart Association says dragging can bring
+   on a heart attack or stroke even in a fit hunter, and to get a check-up before the season. No source opened says who should not drag.
+   Today, labelled as this app’s caution: "anyone with heart trouble, or who gets chest pain with effort, does not do the dragging." Ask a
+   medical professional whether that is the right line, and whether anything else (age, diabetes, cold) belongs in it.
+175. **Ice thickness for going on foot (surv-land-start).** NYS DEC's ice fishing page: a minimum of three to four inches of solid ice is
+   the general rule, 4 inches for activities on foot, stay off at 2 inches or less. DEC's trapper manual: three inches suggested minimum
+   for one person, four better. Today: the hub gives DEC's page and says the app goes by 4 inches on foot. The fishing topic (another
+   writer) may give the same rule; the two must agree. Cost if wrong: safe ice passed up between 3 and 4 inches.
+176. **Shotgun range for birds (surv-land-small-game).** New Jersey Fish and Wildlife: most shotguns are not effective past 40 yards.
+   Missouri Department of Conservation: all shots under 45 yards. Today: about 40 yards, Missouri's figure named. Cost if wrong: a few
+   longer shots passed up.
+177. **Firearm and shot sizes for squirrels and rabbits (surv-land-small-game).** Call 5 says no firearm choice. The brief asked what is
+   worth the cartridge. Today: one line gives what Missouri Department of Conservation uses (.22 rifle or a .410 or 20-gauge shotgun,
+   number 6 shot for squirrels, 20 gauge with number 6 or 7½ for rabbits), as Missouri's practice, not a recommendation. Cost if wrong:
+   the page edges into ammunition choice. Say if you want the line removed.
+178. **Head shots on bear (surv-land-big-game).** Connecticut's hunter safety manual says to aim for the head or the heart-lung region of a
+   bear. New Jersey Fish and Wildlife says the head of a deer is a low-percentage shot that should never be attempted, and gives the bear
+   shot just behind the front shoulder. Today: no head shot on any big game; the bear section gives New Jersey's shot. Cost if wrong: none
+   that the sources show.

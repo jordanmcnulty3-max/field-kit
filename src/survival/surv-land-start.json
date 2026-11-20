@@ -1,0 +1,335 @@
+{
+  "id": "surv-land-start",
+  "title": "Food from the land: where to start",
+  "category": "land",
+  "keywords": [
+    "food from the land",
+    "hunting",
+    "hunting and fishing",
+    "living off the land",
+    "where to start",
+    "what to hunt",
+    "edible insects",
+    "eating insects",
+    "eat bugs"
+  ],
+  "summary": "Food is the lowest priority, so spend effort where it pays. Fish are usually more plentiful than game and are caught quietly; small animals are more plentiful than deer; deer are harder to get, and tree stand falls and dragging are their dangers. Never go alone, tell someone where you are going, and have a way to keep meat cool before you take an animal. Wild plants only from the safe list. Insects only cooked, and not by anyone allergic to shellfish. Every page in this category is linked at the end.",
+  "doFirst": [
+    "Spend effort where it pays: the table below shows what each kind of food gives and what it costs.",
+    "Never go out alone if you can help it, and tell someone where you are going and when you will be back (American Heart Association, NYS DEC).",
+    "This app’s suggestion: start with what your group knows best, fishing. Fish are usually more plentiful than mammals, and catching them is mostly silent (US Army ATP 3-50.21).",
+    "Before you take any animal, have a way to keep the meat cool (New Jersey Fish and Wildlife), and know how to dress and cool it (linked below).",
+    "After fallout, from Water and food after fallout: wild game and fish are not used until officials say you can. See Game, fish, milk and gardens after fallout."
+  ],
+  "sections": [
+    {
+      "h": "Read this first",
+      "blocks": [
+        {
+          "p": "This category is written for a group with some fishing and hunting experience and little or no trapping. Its first job is to show where effort pays in each season and what can hurt you; its second is to make sure an animal, once taken, becomes safe food and is not wasted."
+        },
+        {
+          "p": "From Wild plants: “Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early.”"
+        },
+        {
+          "p": "In normal times New York requires licences and sets seasons and legal methods for hunting, fishing and trapping. They are all in one place, New York rules."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "link": "s:surv-land-after-fallout",
+          "label": "Game, fish, milk and gardens after fallout"
+        }
+      ]
+    },
+    {
+      "h": "What each kind of food gives, and what it costs",
+      "blocks": [
+        {
+          "p": "What the sources say. No source opened gives calories or amounts of meat to compare, so this app gives none. Swipe sideways to see the whole table."
+        },
+        {
+          "table": {
+            "head": [
+              "Food",
+              "What it gives",
+              "Effort and risk"
+            ],
+            "rows": [
+              [
+                "Fish",
+                "A good source of protein and fat; usually more plentiful than mammals (US Army ATP 3-50.21)",
+                "Catching them is mostly silent (ATP 3-50.21). Cold water and thin ice are the dangers (NYS DEC)"
+              ],
+              [
+                "Small game and birds",
+                "Concentrate on smaller animals unless you get the chance at large game: there are more of them (US Army FM 21-76)",
+                "Zone-of-fire safety in a group (Maine hunter education); gloves with rabbits and hares (Field dressing game)"
+              ],
+              [
+                "Deer",
+                "Mammals are excellent sources of protein (ATP 3-50.21)",
+                "Large game roams vast areas and is harder to get (FM 21-76). Falls from tree stands (NYS DEC); dragging can bring on a heart attack (American Heart Association); the bigger the animal, the more it can hurt you (FM 21-76)"
+              ],
+              [
+                "Trapping",
+                "Traps work 24 hours a day with no one there (ATP 3-50.21); several well-placed traps can catch much more than one hunter with a rifle (FM 21-76)",
+                "Your group has little trapping experience. In normal times New York limits which traps are legal (New York rules)"
+              ],
+              [
+                "Wild plants",
+                "Widely available and easily gathered (ATP 3-50.21)",
+                "Deadly look-alikes: eat only what Wild plants lists as safe"
+              ],
+              [
+                "Insects",
+                "Many are 65 to 80 percent protein, against about 20 percent for beef (ATP 3-50.21, FM 21-76)",
+                "You need a great many to equal the protein of one rabbit (ATP 3-50.21). Allergy risk (below)"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "h": "By season in Central New York",
+      "blocks": [
+        {
+          "p": "What the sources say about when each food is there. Where a source is from outside New York, it is named. Hunting, fishing and trapping seasons in normal times are in New York rules."
+        },
+        {
+          "list": [
+            "Spring: young dandelion leaves, before the plant flowers, and young cattail shoots (Wild plants). Fish gather at inlets before they spawn, usually in spring or fall; crappie move into shallow water to spawn, and walleye spawn in April in fast-flowing streams (NYS DEC).",
+            "Summer: wild raspberries usually ripen in July, blackberries a little later (Wild plants). Small ponds full of sunfish are the best place to get a bite; in summer crappie go to deeper, cooler water (NYS DEC). Squirrels move much less at midday on hot, humid days (Missouri Department of Conservation). Heat spoils meat fast: don’t hunt on a hot day without a way to keep the meat cool (New Jersey Fish and Wildlife).",
+            "Fall: fish gather at inlets again (NYS DEC). In Missouri, rabbit numbers are often higher in October (Missouri Department of Conservation).",
+            "Winter: ice fishing for yellow perch, sunfish, chain pickerel and northern pike in ponds and lakes, and walleye and lake trout in deep lakes (NYS DEC); the ice rules are under Safety below. Rabbits may move at midday on a sunny day after a cold snap (Missouri Department of Conservation). Cold helps keep meat, but read what the agencies say in Keeping game meat first."
+          ]
+        },
+        {
+          "link": "s:surv-food-and-wild-plants",
+          "label": "Wild plants"
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Keeping game meat"
+        }
+      ]
+    },
+    {
+      "h": "What to do first",
+      "blocks": [
+        {
+          "steps": [
+            "Take stock of what the group owns and knows. The kit list below is a start.",
+            "Fish first: it is what your group knows best (this app’s suggestion), and fish are usually more plentiful than game and caught quietly (US Army ATP 3-50.21).",
+            "Before anyone hunts, set up a way to keep meat cool (New Jersey Fish and Wildlife) and read Field dressing game, including the signs that an animal is not safe to eat.",
+            "Hunt the smaller animals unless you have the chance at a deer (US Army FM 21-76): Small game and birds.",
+            "Learn the plants on the safe list in person before you rely on them (Wild plants)."
+          ]
+        },
+        {
+          "link": "c:land-kit",
+          "label": "Hunting, fishing and trapping kit"
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        }
+      ]
+    },
+    {
+      "h": "Who should not go out",
+      "blocks": [
+        {
+          "list": [
+            "Nobody alone. Never hunt alone if you can help it (American Heart Association); use the buddy system on the ice (NYS DEC); on the water, hunt with a companion within sight or call (Minnesota DNR).",
+            "Heavy work: dragging a deer can leave even a fit hunter breathless and could bring on a heart attack or stroke (American Heart Association). This app’s caution: anyone with heart trouble, or who gets chest pain with effort, does not do the dragging.",
+            "In normal times every hunter must take a hunter education course before getting a licence (NYS DEC). The hunting pages here assume that training.",
+            "During a fallout shelter period, going out at all is ruled by How long to stay in, and wild game and fish are not used until officials say you can (Game, fish, milk and gardens after fallout).",
+            "Who should not eat it, from Field dressing game: “Children and anyone who could become pregnant should not eat game shot with lead.”"
+          ]
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        }
+      ]
+    },
+    {
+      "h": "Safety",
+      "blocks": [
+        {
+          "list": [
+            "Be sure of your target and what lies beyond it (NYS DEC). The rest is in Hunting deer and big game and Small game and birds.",
+            "Tree stands: a full-body harness, connected before your feet leave the ground and until you are back down (NYS DEC).",
+            "Ice: NYS DEC’s general rule is a minimum of 3 to 4 inches (8 to 10 cm) of solid ice; 4 inches (10 cm) to go out on foot; stay off ice 2 inches (5 cm) or thinner. Slush ice is about half as strong; double the thickness for white ice. Check the ice as you go, and carry ice picks (NYS DEC). This app goes by 4 inches on foot.",
+            "Boats: wear a life jacket, and dress for the water temperature, not the air (Minnesota DNR)."
+          ]
+        },
+        {
+          "link": "p:bleeding",
+          "label": "Severe bleeding"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        },
+        {
+          "link": "p:drowning",
+          "label": "Drowning"
+        },
+        {
+          "link": "p:chest-pain",
+          "label": "Chest pain or heart attack"
+        },
+        {
+          "link": "p:animal-bite",
+          "label": "Animal or human bite (and rabies risk)"
+        },
+        {
+          "link": "p:tick",
+          "label": "Tick bite"
+        },
+        {
+          "link": "p:poisoning",
+          "label": "Poisoning (swallowed, inhaled, skin or eye)"
+        },
+        {
+          "link": "s:surv-dangerous-animals",
+          "label": "Dangerous animals"
+        }
+      ]
+    },
+    {
+      "h": "Insects",
+      "blocks": [
+        {
+          "p": "Many insects are 65 to 80 percent protein, against about 20 percent for beef, but you have to gather a great many to get as much protein as one rabbit gives (US Army ATP 3-50.21, 2018)."
+        },
+        {
+          "list": [
+            "Stick to grasshoppers and crickets, and only to bugs you can easily identify (Michigan State University Extension, which also names sowbugs and pillbugs).",
+            "Never eat adult insects that bite or sting, hairy or brightly coloured insects, hairy caterpillars, insects with a strong smell, spiders, or ticks, flies and mosquitoes (ATP 3-50.21).",
+            "Collect only where no pesticides have been used (Michigan State University Extension).",
+            "Take off stingers, legs, wings and heads (ATP 3-50.21).",
+            "Cook every one completely, to kill germs and parasites (Michigan State University Extension). Cook any insect collected in the wild; never eat one raw (Ohio State University Extension). The US Army manual FM 21-76 says most insects can be eaten raw; this app goes by the extension services."
+          ]
+        },
+        {
+          "warn": "Anyone allergic to shrimp, lobster or other shellfish should not eat insects (Michigan State University Extension; FDA, quoted by Ohio State University Extension), nor anyone allergic to mushrooms (Michigan State University Extension)."
+        },
+        {
+          "link": "p:anaphylaxis",
+          "label": "Anaphylaxis (severe allergic reaction)"
+        }
+      ]
+    },
+    {
+      "h": "Everything in Food from the land",
+      "blocks": [
+        {
+          "link": "s:surv-traps-and-fishing",
+          "label": "Fishing for food"
+        },
+        {
+          "link": "s:surv-land-small-game",
+          "label": "Small game and birds"
+        },
+        {
+          "link": "s:surv-land-big-game",
+          "label": "Hunting deer and big game"
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-land-butchering",
+          "label": "Butchering deer and small game"
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Keeping game meat"
+        },
+        {
+          "link": "s:surv-food-and-wild-plants",
+          "label": "Wild plants"
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "link": "s:surv-land-after-fallout",
+          "label": "Game, fish, milk and gardens after fallout"
+        },
+        {
+          "link": "c:land-kit",
+          "label": "Hunting, fishing and trapping kit"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "US Army ATP 3-50.21, Survival (September 2018), chapter 4, paragraphs 4-45, 4-79, 4-87, 4-132 to 4-136 and 4-146",
+      "used": "Plants widely available and easily procured; mammals excellent sources of protein; traps and snares work 24 hours a day without anyone present; insects 65 to 80 percent protein against 20 percent for beef, gathered in large numbers to equal a rabbit; insects to avoid; remove stingers, legs, wings and heads; fish a good source of protein and fat, more abundant than mammals, methods mostly silent"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8, pages 73, 74 and 79",
+      "used": "Concentrate on the smaller animals due to their abundance; large game roams vast areas and is harder to trap; insects 65 to 80 percent protein; most insects can be eaten raw (shown, not followed); injury in proportion to size; several well-placed traps can catch more than a man with a rifle"
+    },
+    {
+      "name": "Michigan State University Extension (4-H Entomology), Eating bugs: Part 3 – Catch and eat them yourself (April 21, 2022)",
+      "used": "Grasshoppers, crickets and isopods; only bugs you can easily identify; pesticide-free collecting; cook completely to destroy pathogens and parasites; no bugs for people allergic to shellfish or to mushrooms"
+    },
+    {
+      "name": "Ohio State University Extension (CFAES), Chow Line: Cicadas can be a tasty treat, but they can be hazardous to those allergic to seafood, FDA warns (undated)",
+      "used": "FDA: don’t eat cicadas if allergic to seafood; cook any insect collected in the wild and avoid eating it raw"
+    },
+    {
+      "name": "NYS DEC, Beginners’ Guide to Freshwater Fishing (undated)",
+      "used": "Inlets in spring or fall before spawning; crappie shallow in spring, deeper and cooler in summer; walleye spawn in April in swift tributaries; small ponds of sunfish the best place to get a bite"
+    },
+    {
+      "name": "NYS DEC, Learn How To Ice Fish (web page, undated)",
+      "used": "Winter ice fishing; species by water; minimum of three to four inches of solid ice as the general rule; 2 inches or less stay off, 4 inches on foot; slush ice about 50 percent weaker; double for white ice; check periodically; ice picks; buddy system"
+    },
+    {
+      "name": "NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping (student manual, 4th edition, 2016), chapter 5",
+      "used": "Ice: three inches suggested minimum for one person, four better (the more cautious DEC figure used)"
+    },
+    {
+      "name": "NYS DEC press release, DEC Releases Hunting Safety Statistics for 2024 (February 14, 2025); NYS DEC bulletins, DEC Reminds New York State Hunters: Be Safe During Hunting Seasons (2019, 2020); NYS DEC Hunter Education, Tree Stand “Best Practices”",
+      "used": "Identify target and what lies beyond; tree stand harness connected before feet leave the ground; tell someone where you will be and when you will return; every hunter takes a Hunter Education Course before a licence"
+    },
+    {
+      "name": "American Heart Association, Hunting safety should include heart attack and stroke awareness (October 27, 2022)",
+      "used": "Never hunt alone if possible; dragging leaves even the fittest hunter breathless and could bring on a heart attack or stroke"
+    },
+    {
+      "name": "Minnesota Department of Natural Resources, Water Safety for Duck Hunters (2017)",
+      "used": "Hunt with a companion within sight or voice; wear a life jacket; dress for the water temperature"
+    },
+    {
+      "name": "New Jersey Division of Fish and Wildlife, hunter education workbook, Chapter 4: Game Care, Before and After the Shot",
+      "used": "Avoid hunting on hot days without a way to keep game cool"
+    },
+    {
+      "name": "Missouri Department of Conservation: Getting Started Squirrel Hunting; Getting Started Rabbit Hunting; Small Game Hunting (Xplor, November 2015)",
+      "used": "Squirrels less active at midday on hot, humid days; rabbits midday on sunny days after a cold snap; rabbit numbers often higher in October (Missouri)"
+    },
+    {
+      "name": "Maine Hunter Safety Course (hunter-ed.com, with the Maine Department of Inland Fisheries and Wildlife), Maintaining Your Safe Zone-of-Fire",
+      "used": "Zone-of-fire safety when hunting in a group"
+    },
+    {
+      "name": "Wild plants, Field dressing game, Keeping game meat, Water and food after fallout, Game, fish, milk and gardens after fallout, How long to stay in, New York rules for hunting, fishing and trapping, and the other topics linked here (in this app)",
+      "used": "The food-priority sentence and the lead sentence, quoted word for word; the plant seasons (dandelion, cattail, raspberries and blackberries) and safe list; gloves with rabbits and hares; keeping meat in winter; wild game and fish after fallout; going out during a fallout shelter period; every New York rule, all by link"
+    }
+  ],
+  "reviewed": "2026-11-19",
+  "draft": true
+}

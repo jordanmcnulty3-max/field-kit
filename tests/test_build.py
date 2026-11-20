@@ -40,7 +40,7 @@ def test_normal_build_inlines_all_topics(tree):
     text = index.read_text(encoding='utf-8')
     assert '"topics":[' in text and '"checklists":[{' in text and '"id":"ten-essentials"' in text
     ids = topic_ids()
-    assert len(ids) == 62   # the 15 migrated topics, the water pack's 11, heat pack batches A, B and C (4 each), radiation batches A (4), B (3) and C (3), food batches A (4), B (3) and C (3), land batches A (2) and D (2)
+    assert len(ids) == 65   # the 15 migrated topics, the water pack's 11, heat pack batches A, B and C (4 each), radiation batches A (4), B (3) and C (3), food batches A (4), B (3) and C (3), land batches A (2), D (2) and B (3)
     for tid in ids:
         assert f'"id":"{tid}"' in text
     assert re.search(r'"figSvg":"<svg', text) and '"figLabel":"' in text

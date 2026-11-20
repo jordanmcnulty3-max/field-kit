@@ -1,0 +1,478 @@
+{
+  "id": "surv-land-big-game",
+  "title": "Hunting deer and big game",
+  "category": "land",
+  "keywords": [
+    "deer hunting",
+    "hunting deer",
+    "big game",
+    "shot placement",
+    "vital area",
+    "where to shoot a deer",
+    "blood trail",
+    "tracking a deer",
+    "tree stand",
+    "treestand",
+    "safety harness",
+    "drag a deer",
+    "bear hunting"
+  ],
+  "summary": "For a hunter who already owns a legal firearm or bow and has had basic training. Be sure of your target and what is beyond it. Take only a standing animal, broadside or quartering away, and aim just behind the front shoulder at the heart and lungs. After the shot, mark the spot and wait at least an hour before following, longer after a gut shot. In a tree stand, wear a full-body harness and stay connected the whole time. Drag the deer out, never carry it on your shoulders, and get help if it is too heavy.",
+  "doFirst": [
+    "Be sure of your target and what is beyond it. If you can’t see what is beyond the target, don’t take the shot (NYS DEC, Maine hunter education).",
+    "In a tree stand: wear a full-body harness and stay connected from the time you leave the ground until you are back down (NYS DEC).",
+    "Shoot only a standing animal that is broadside or quartering away, within your range, and aim at the heart and lungs just behind the front shoulder (Texas Parks and Wildlife, New Jersey Fish and Wildlife). If the angle is wrong, wait or pass.",
+    "After the shot: watch where it goes, mark the last spot you saw it, and wait at least 1 hour before you follow it; after a gut shot, at least 6 to 8 hours (New Jersey Fish and Wildlife).",
+    "Drag or cart the deer out, never on your shoulders (Missouri Department of Conservation). If it is too heavy for you, go and get help (New Jersey Fish and Wildlife)."
+  ],
+  "sections": [
+    {
+      "h": "Read this first",
+      "blocks": [
+        {
+          "p": "This page assumes you already own a legal firearm or bow and have had basic training with it. It does not teach choosing a firearm or shooting. It covers what changes when the deer is food: making a clean kill, finding the animal, staying safe, and getting it out. Field dressing, butchering and keeping the meat have their own pages, linked at the end."
+        },
+        {
+          "p": "In normal times New York requires a hunting licence and sets seasons, hours, legal methods, orange clothing and tagging. They are all in New York rules."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "list": [
+            "Tell someone where you will be hunting and when you will be back. A map showing your stand helps others find you if you are late (NYS DEC).",
+            "Never hunt alone if you can help it (American Heart Association).",
+            "Prepare for winter weather, and carry emergency supplies such as a flashlight, water and high-energy food (NYS DEC).",
+            "Don’t hunt on hot days unless you have a way to keep the meat cool (New Jersey Fish and Wildlife). Cooling a deer is in Field dressing game."
+          ]
+        },
+        {
+          "p": "After fallout, the rule for wild game is in Game, fish, milk and gardens after fallout: don’t use it until officials say you can."
+        },
+        {
+          "link": "s:surv-land-after-fallout",
+          "label": "Game, fish, milk and gardens after fallout"
+        }
+      ]
+    },
+    {
+      "h": "What changes when it is for food",
+      "blocks": [
+        {
+          "list": [
+            "A well-placed shot puts the animal down almost at once, damages little meat and makes field dressing easier (Connecticut hunter safety manual).",
+            "A gut shot does not kill quickly: the animal can escape and suffer, and the gut contents can spoil the meat (Connecticut hunter safety manual). A misplaced shot can mean a long, suffering animal and a deer you never find (Texas Parks and Wildlife).",
+            "A shot from the front can damage a lot of meat and pass through the stomach into a hind leg (Texas Parks and Wildlife).",
+            "Heat spoils meat: field dress the animal as soon as you can (Massachusetts hunter education).",
+            "Lead bullets leave small lead fragments in the meat that you cannot detect. Cornell Cooperative Extension suggests non-lead bullets or slugs; with lead, throw out the meat around the wound channel. Who should not eat game shot with lead is in Field dressing game."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Your target and what is beyond it",
+      "blocks": [
+        {
+          "p": "NYS DEC’s four rules: treat every firearm as if it is loaded; keep the muzzle pointed in a safe direction; keep your finger off the trigger until you are ready to fire; identify your target and what lies beyond it."
+        },
+        {
+          "list": [
+            "Never fire at a sound or at movement. Use binoculars to identify your target and what is behind it; never use your rifle scope as binoculars (Washington hunter education).",
+            "If you cannot see what lies beyond the target, don’t take the shot. Check for a safe backstop: something solid enough to stop the bullet that will not make it ricochet (Maine hunter education).",
+            "Bullets go a long way: a .22 bullet can travel over 1½ miles (2.4 km), a centerfire bullet several miles, and a slug over 800 yards (730 m) (Maine hunter education).",
+            "A small branch can deflect an arrow or a bullet (New Jersey Fish and Wildlife).",
+            "Never wear the colour of any game animal in the area, and wear hunter orange so others know you are a hunter (Washington hunter education)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Shot placement",
+      "blocks": [
+        {
+          "p": "The vital area is the heart and lungs in the chest; the liver and the big blood vessels are vital too (Texas Parks and Wildlife, Massachusetts bowhunter education). The best shot passes through both lungs (New Jersey Fish and Wildlife)."
+        },
+        {
+          "steps": [
+            "Wait for the animal to stand still. Shoot only an animal that is standing still and unaware of you, within your effective range (New Jersey Fish and Wildlife), and don’t shoot at a moving deer (Connecticut hunter safety manual).",
+            "Wait for it to turn broadside: side-on, it shows the biggest target for the heart and lungs, and it is the best shot for anyone new (Texas Parks and Wildlife).",
+            "Aim just behind the shoulder. Follow the back edge of the front leg nearest you up into the body, and aim about one third of the way up from the bottom of the chest (Texas Parks and Wildlife, Alaska Department of Fish and Game).",
+            "Pick one small spot there, smaller than a pie plate. Don’t aim at the whole animal (New Jersey Fish and Wildlife).",
+            "Quartering away (rear end angled away from you): aim at the front shoulder on the far side, so the shot goes through both lungs (New Jersey Fish and Wildlife). Texas Parks and Wildlife says take it with a firearm only if you are sure of your aim: a miss to the rear is a gut shot."
+          ]
+        },
+        {
+          "p": "Swipe sideways to see the whole table."
+        },
+        {
+          "table": {
+            "head": [
+              "Animal facing",
+              "Take it?"
+            ],
+            "rows": [
+              [
+                "Broadside (side-on)",
+                "Yes: the best shot, firearm or bow (Texas Parks and Wildlife)"
+              ],
+              [
+                "Quartering away",
+                "Yes, aiming at the far shoulder (New Jersey Fish and Wildlife); with a firearm only if you are sure of your aim (Texas Parks and Wildlife)"
+              ],
+              [
+                "Quartering toward you",
+                "Pass it up. More likely to hit the shoulder bone, and the deer can see you move; never with a bow (Texas Parks and Wildlife, Massachusetts bowhunter education)"
+              ],
+              [
+                "Facing you head-on",
+                "Pass it up. It can ruin a lot of meat and go through the stomach; never with a bow (Texas Parks and Wildlife)"
+              ],
+              [
+                "Facing away, rear end toward you",
+                "Never: no large vital area shows (Texas Parks and Wildlife, Alaska Department of Fish and Game)"
+              ],
+              [
+                "Head",
+                "Never: a low-percentage shot (New Jersey Fish and Wildlife)"
+              ],
+              [
+                "Straight down from a tree stand",
+                "Never. Wait until the deer is at least 10 yards (9 m) out and broadside or quartering away (New Jersey Fish and Wildlife)"
+              ]
+            ]
+          }
+        },
+        {
+          "list": [
+            "From a tree stand, a steep shot may go through only one lung, and the animal can go a long way before it dies (Massachusetts bowhunter education). A deer can live with one lung, and the backbone blocks much of the vital area from above (New Jersey Fish and Wildlife).",
+            "Most missed or wounded game comes from bad decisions: rushing, shooting too far, or shooting at a bad angle. Pass on a difficult shot (New Jersey Fish and Wildlife)."
+          ]
+        },
+        {
+          "p": "Alaska Department of Fish and Game also accepts quartering-toward and head-on shots with a firearm whose bullet can break the bones in the way. This app goes by the more cautious sources: pass them up."
+        }
+      ]
+    },
+    {
+      "h": "Right after the shot",
+      "blocks": [
+        {
+          "steps": [
+            "Reload, and keep watching the deer: a wounded deer can hurt you (Missouri Department of Conservation).",
+            "Watch where it runs and listen for it to fall. Crashing sounds usually mean a fatal hit and a short trail (New Jersey Fish and Wildlife, North Carolina Wildlife Resources Commission).",
+            "Mark in your mind where it stood when you shot and the last place you saw it. Take a compass bearing to that spot and estimate the distance (Massachusetts hunter education).",
+            "Note the time, and stay where you are (New Jersey Fish and Wildlife).",
+            "When the wait is over, go to where the deer stood and look for blood, hair, scuffed ground, broken twigs and your arrow (New Jersey Fish and Wildlife). Check the ground and the trail before you decide you missed (Maine hunter education)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "How long to wait before you follow",
+      "blocks": [
+        {
+          "p": "A deer that is pushed while it is still alive often runs off and is never found (Massachusetts hunter education). Unless you can see the deer down, wait before you follow it."
+        },
+        {
+          "p": "Swipe sideways to see the whole table."
+        },
+        {
+          "table": {
+            "head": [
+              "Blood and sign",
+              "Usually means",
+              "Wait"
+            ],
+            "rows": [
+              [
+                "Pink or bright red and frothy",
+                "Lung hit (New Jersey Fish and Wildlife, North Carolina Wildlife Resources Commission)",
+                "At least 1 hour (New Jersey Fish and Wildlife)"
+              ],
+              [
+                "Bright red, not frothy",
+                "Heart or a cut artery (New Jersey Fish and Wildlife, North Carolina Wildlife Resources Commission)",
+                "At least 1 hour (New Jersey Fish and Wildlife)"
+              ],
+              [
+                "Dark red",
+                "Muscle or liver hit. A liver-hit deer may live longer (New Jersey Fish and Wildlife)",
+                "1 hour or more (North Carolina Wildlife Resources Commission); no source opened gives a firmer figure"
+              ],
+              [
+                "Dark, with brown or green plant matter",
+                "Gut shot (New Jersey Fish and Wildlife, North Carolina Wildlife Resources Commission)",
+                "At least 6 to 8 hours (New Jersey Fish and Wildlife)"
+              ]
+            ]
+          }
+        },
+        {
+          "list": [
+            "Massachusetts hunter education waits 30 minutes after a firearm shot and 1 hour after an arrow, and longer if you are unsure of the shot; Maine hunter education says half an hour to an hour. New Jersey Fish and Wildlife waits 1 hour before following any ordinary hit. This app goes by at least 1 hour.",
+            "A gut-shot deer may go into a swamp, creek or pond to cool down: check the water nearby (New Jersey Fish and Wildlife)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Following the blood trail",
+      "blocks": [
+        {
+          "steps": [
+            "Walk beside the trail, not on it, so you don’t wipe out the sign (North Carolina Wildlife Resources Commission, New Jersey Fish and Wildlife).",
+            "Look for blood on the ground and on leaves and brush above the ground, and for hair, bone, tracks, broken twigs and scattered leaves (New Jersey Fish and Wildlife, Maine hunter education).",
+            "Mark the trail as you go with bright orange flagging, so you can find your way back to the last sign. Take the flagging down afterwards (Maine hunter education, Massachusetts hunter education).",
+            "Keep the group small: three people at most (New Jersey Fish and Wildlife). More eyes help in poor light or bad weather (North Carolina Wildlife Resources Commission).",
+            "Wounded deer often take the easiest way, downhill and toward water (Massachusetts hunter education, Maine hunter education).",
+            "If you lose the trail, go back to the last sign and search outward in widening circles (Massachusetts hunter education, New Jersey Fish and Wildlife). Be ready for a follow-up shot (North Carolina Wildlife Resources Commission).",
+            "If you jump the deer from its bed, leave quietly so you don’t push it further (Massachusetts hunter education).",
+            "Stop hunting and search for any animal you wounded (Maine hunter education). Darkness or weather can stop you: the flagging lets you pick the trail up again the next day (Maine hunter education)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Walking up to the deer",
+      "blocks": [
+        {
+          "steps": [
+            "Watch it from a distance for breathing (New Jersey Fish and Wildlife).",
+            "Approach from behind its head and stay away from its feet and antlers (Missouri Department of Conservation, Massachusetts hunter education).",
+            "The eyes of a dead deer are normally open (Massachusetts hunter education). Touch the corner of the eye with a long stick: if it blinks, it is still alive (New Jersey Fish and Wildlife, Missouri Department of Conservation).",
+            "Still alive: finish it with a shot into the heart and lungs, only if that is safe (New Jersey Fish and Wildlife, Massachusetts hunter education).",
+            "Put your firearm or bow down only when you are certain the deer is dead (Missouri Department of Conservation).",
+            "Tag it if the law requires (New York rules), then field dress it as soon as you can (Massachusetts hunter education)."
+          ]
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        }
+      ]
+    },
+    {
+      "h": "Tree stands",
+      "blocks": [
+        {
+          "warn": "NYS DEC counted 11 falls from tree stands in New York in 2024, two of them fatal; in nine the hunter wore no safety harness or had not connected it to the tree. DEC says a fall-arrest harness kept connected to the tree could have prevented all of them."
+        },
+        {
+          "steps": [
+            "Read the stand maker’s instructions and warnings. Check the stand, straps and chains every season, replace worn or missing parts, and don’t leave a stand up all year (NYS DEC).",
+            "Wear a full-body harness with a lifeline, fixed at the base of the tree and to the tree just above your head when you sit. Connect your harness to the lifeline with a carabiner and a prusik knot, which slides along it (NYS DEC).",
+            "Connect to the tree before your feet leave the ground and stay connected until you are back down (NYS DEC).",
+            "The harness needs a foot strap: hanging in a harness cuts off blood in your legs (suspension trauma), and the strap takes the pressure off (NYS DEC).",
+            "Never climb in or out of a stand with a loaded firearm (NYS DEC). Once you are safely in the stand, raise your gear on a haul line: the firearm unloaded and muzzle down, the haul line never tied to the trigger or trigger guard; a bow or crossbow with its quiver (NYS DEC).",
+            "Keep a knife, phone, flashlight and whistle in your pockets, not in a pack hanging in the tree (NYS DEC)."
+          ]
+        },
+        {
+          "p": "Someone fell? Use the protocols."
+        },
+        {
+          "link": "p:spine-injury",
+          "label": "Neck or back (spine) injury"
+        },
+        {
+          "link": "p:fracture",
+          "label": "Broken bone (fracture)"
+        },
+        {
+          "link": "p:head-injury",
+          "label": "Head injury and concussion"
+        }
+      ]
+    },
+    {
+      "h": "Hunting in the cold",
+      "blocks": [
+        {
+          "list": [
+            "Hypothermia happens when your body loses heat faster than it makes it. Cold, wet conditions bring it on, and it can happen at up to about 50°F (10°C) (Maine hunter education).",
+            "Sweat, rain and dew on brush slowly soak your clothes; wind takes heat away as it dries you; resting against a cold surface pulls heat out of you (Maine hunter education).",
+            "Dress properly, stay out of dangerous weather, and dry off quickly when you get wet (Maine hunter education). Layers that wick sweat, no cotton, and a wind- and water-resistant outer layer (NYS DEC, ice fishing).",
+            "High-calorie food such as chocolate, peanuts or raisins gives quick energy that helps your body make heat (Maine hunter education).",
+            "Cold weather narrows blood vessels and adds to the strain on the heart (American Heart Association)."
+          ]
+        },
+        {
+          "link": "s:surv-dress-for-cold",
+          "label": "Dress for the cold"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        },
+        {
+          "link": "p:frostbite",
+          "label": "Frostbite"
+        }
+      ]
+    },
+    {
+      "h": "Getting the deer out",
+      "blocks": [
+        {
+          "warn": "Dragging an animal through the woods can leave even a fit hunter breathless and could bring on a heart attack or stroke (American Heart Association). Take breaks. Don’t hurt yourself dragging something too heavy for you: go and get help (New Jersey Fish and Wildlife)."
+        },
+        {
+          "list": [
+            "Drag or cart the deer out; don’t carry it on your shoulders, where another hunter could take it for a live deer (Missouri Department of Conservation). Put hunter orange on it (New Jersey Fish and Wildlife).",
+            "Drag a buck by its antlers. For a doe or a fawn, make a handle with a strong stick between the hind legs at the hocks. A deer cart saves your back (Missouri Department of Conservation).",
+            "A smaller field-dressing cut keeps dirt out while you drag (Cornell Cooperative Extension). Avoid dragging through water or dirt (New Jersey Fish and Wildlife). Wrap the carcass in a cloth to keep dirt and flies off (Missouri Department of Conservation).",
+            "Keep it as clean and cool as you can on the way home (Missouri Department of Conservation). Cooling is in Field dressing game."
+          ]
+        },
+        {
+          "p": "Chest pain or other signs of a heart attack while dragging? Stop and use the protocol."
+        },
+        {
+          "link": "p:chest-pain",
+          "label": "Chest pain or heart attack"
+        }
+      ]
+    },
+    {
+      "h": "Black bear",
+      "blocks": [
+        {
+          "list": [
+            "Shot placement matters even more: the best shot is just behind the front shoulder, with the bear angled slightly away from broadside. Take extra time, calm down and slow your breathing before you shoot (New Jersey Fish and Wildlife).",
+            "A bear’s long, thick fur hides its shape: find the heart and lungs precisely, so you don’t shoot only into hair or wound it. A wounded bear can be dangerous (Connecticut hunter safety manual).",
+            "The waiting, trailing and approach above are the general hunter education steps; no source opened gives separate ones for bear."
+          ]
+        },
+        {
+          "warn": "Bear meat can carry trichinella worms. How to cook it, and why bear is never made into jerky, are in Field dressing game and Keeping game meat."
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Keeping game meat"
+        },
+        {
+          "link": "s:surv-dangerous-animals",
+          "label": "Dangerous animals"
+        }
+      ]
+    },
+    {
+      "h": "Injuries",
+      "blocks": [
+        {
+          "link": "p:bleeding",
+          "label": "Severe bleeding"
+        },
+        {
+          "link": "p:impaled-object",
+          "label": "Impaled object"
+        }
+      ]
+    },
+    {
+      "h": "Next: field dressing, butchering, keeping",
+      "blocks": [
+        {
+          "p": "Making sure the deer is dead, gutting it, cooling it and the signs that an animal is not safe to eat are in Field dressing game. Cutting it up is in Butchering deer and small game; how long it keeps, and how to keep it, in Keeping game meat."
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-land-butchering",
+          "label": "Butchering deer and small game"
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Keeping game meat"
+        },
+        {
+          "link": "c:land-kit",
+          "label": "Hunting, fishing and trapping kit"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "NYS DEC Hunter Education, Tree Stand “Best Practices” (undated)",
+      "used": "Read the instructions and warnings; inspect the stand, straps and chains every season, replace worn or missing parts; don’t leave the stand up all year; full-body harness with lifeline, connected from leaving the ground until back down; foot strap against suspension trauma; lifeline at the base and just above the head; carabiner and prusik knot; haul line, unloaded firearm muzzle down, never tied to the trigger or trigger guard, bow or crossbow with quiver; tell someone, map of the stand; knife, phone, flashlight and whistle in pockets"
+    },
+    {
+      "name": "NYS DEC press release, DEC Releases Hunting Safety Statistics for 2024 (February 14, 2025)",
+      "used": "The four primary firearm rules including identify target and what lies beyond; connect to the tree before feet leave the ground; 11 elevated hunting incidents in 2024, two fatal, nine without a harness or not connected; all preventable with a connected fall-arrest harness"
+    },
+    {
+      "name": "NYS DEC bulletins, DEC Reminds New York State Hunters: Be Safe During Hunting Seasons (November 8, 2019 and October 15, 2020)",
+      "used": "Never climb in or out of a tree stand with a loaded firearm; tell friends or relatives where you will hunt and when you will return; prepare for winter conditions; emergency supplies such as flashlights, water and high-energy food"
+    },
+    {
+      "name": "NYS DEC, Learn How To Ice Fish (web page, undated)",
+      "used": "Layered clothing that wicks moisture, no cotton, wind- and water-resistant outer layers"
+    },
+    {
+      "name": "Texas Parks and Wildlife Department, Hunter Education online course, Shots to the Vital Areas",
+      "used": "Heart and lungs; broadside the largest target and best for novices; aim just behind the shoulder, back side of the near front leg, one third up; quartering toward more likely to hit shoulder bone, avoid with a bow; quartering away only with confidence, a miss is a gut shot and likely loss; head-on damages meat and may pass through the stomach, not with a bow; never from the rear; wait for a better angle"
+    },
+    {
+      "name": "New Jersey Division of Fish and Wildlife, hunter education workbook, Chapter 4: Game Care, Before and After the Shot",
+      "used": "Heart, lungs and liver, best a double lung; head never; a spot smaller than a pie plate; broadside and quartering-away aim; standing, unaware and within range; branches deflect; never straight down from a stand, wait until 10 yards out; one lung; pass on difficult shots; listen, mark, note the time, wait 20 minutes before leaving the stand; blood colours; wait one hour for a standard hit, six to eight hours for a gut shot, check water; walk beside the trail, blood on vegetation, flag, widening circles, three trackers at most; watch for breathing, approach behind the head, touch the eye, follow-up shot; flag big game with hunter orange; don’t drag something too heavy, get help; avoid dragging through water or dirt; avoid hot days without a way to keep game cool"
+    },
+    {
+      "name": "New Jersey Division of Fish and Wildlife, Black Bear Hunting Tips (web page)",
+      "used": "Shot placement is critical; ideal shot just behind the front shoulder with the bear angling slightly away from broadside; calm down and slow your breathing"
+    },
+    {
+      "name": "Massachusetts Basic Hunter Education, instructor guide, Lesson 17: Big Game Recovery (mass.gov, version 2/2017)",
+      "used": "Watch the animal, mark the last spot, compass bearing and distance; wait 30 minutes with a firearm, 1 hour with archery, longer if unsure; bumping a wounded animal often means it is not recovered; sign to look for; bright flagging; return to last sign and search in arcs or circles; downhill and toward water; leave a bumped bedded deer quietly; approach from behind, away from the feet; eyes of a dead animal normally open; follow-up shot only if legal, safe and ethical; field dress as soon as possible, heat speeds spoilage"
+    },
+    {
+      "name": "Massachusetts Bowhunter Education, instructor guide, Lesson 7: Judgment and Shot Placement (mass.gov, 2017 standards)",
+      "used": "Vital area includes heart, lungs, liver and major blood vessels; angles to take and avoid; a steep shot from a stand passes through one lung and gives a long trail"
+    },
+    {
+      "name": "North Carolina Wildlife Resources Commission, Tips for Recovering Game Animals (ncwildlife.gov)",
+      "used": "Blood colours and what they mean; poorly hit game 1 hour or more; crashing sounds; walk beside the trail; companions; widening circles, ready for a follow-up shot"
+    },
+    {
+      "name": "Maine Hunter Safety Course (hunter-ed.com, with the Maine Department of Inland Fisheries and Wildlife): Trailing Wounded Game; Importance of Safe Backstops; Hypothermia",
+      "used": "Stop the hunt and search for a wounded animal; wait half an hour to an hour; check before deciding you missed; sign at the shot site; orange flagging, removed afterwards, to resume next day; downhill toward water; if you can’t see beyond the target, don’t shoot; safe backstop; .22 over 1½ miles, centerfire several miles, slugs over 800 yards; hypothermia definition, up to about 50°F, sweat, dew, wind, cold surfaces; dress properly, avoid bad weather, dry off; high-calorie food"
+    },
+    {
+      "name": "Washington Hunter Safety Course (hunter-ed.com), Victim Mistaken for Game",
+      "used": "Never fire at a sound or movement; binoculars to identify target and backstop; never a rifle scope as binoculars; never wear the colour of a game animal; wear hunter orange"
+    },
+    {
+      "name": "Connecticut DEEP hunter safety manual, Chapter 12: Making a Quick, Clean Kill (Outdoor Roadmap course material on the Connecticut site)",
+      "used": "A well-placed shot drops the animal almost immediately, less meat damage, easier field dressing; no shots at moving big game; gut shot not quick, the animal escapes and suffers, intestinal juices spoil meat; bear fur long and thick, locate the vitals precisely, a wounded bear can be dangerous"
+    },
+    {
+      "name": "Alaska Department of Fish and Game, Big Game Shot Placement (web page)",
+      "used": "Heart-lung vital zone; broadside aim one third up from the bottom of the chest, behind the near front shoulder; rear shots not advisable; quartering forward and forward-facing accepted with a bullet that breaks bone (shown, not followed)"
+    },
+    {
+      "name": "Missouri Department of Conservation, Field Dressing Your Deer (web page)",
+      "used": "Reload and watch, a wounded deer can hurt you; approach from behind the head; set the firearm or bow aside only when certain; eye touched with a stick; drag or cart, not on shoulders, another hunter could shoot; antlers, stick between the hocks, deer cart; cloth wrap; clean and cool in transport"
+    },
+    {
+      "name": "Cornell Cooperative Extension, NYS 4-H Shooting Sports and Cornell University Department of Natural Resources, Wild Harvest Table Guide to Deer Hunting and Preparation (Rifle; November 2015)",
+      "used": "Undetectable lead fragments; consider non-lead bullets or slugs; discard meat around the wound channel; a smaller incision against contamination when dragging"
+    },
+    {
+      "name": "American Heart Association, Hunting safety should include heart attack and stroke awareness (October 27, 2022); A-hunting we will go – just be mindful of heart health risks (November 25, 2024)",
+      "used": "Dragging leaves even the fittest hunter breathless and could bring on a heart attack or stroke; cold constricts blood vessels; never hunt alone if possible; take breaks"
+    },
+    {
+      "name": "Field dressing game, Keeping game meat, Butchering deer and small game, Game, fish, milk and gardens after fallout, New York rules for hunting, fishing and trapping, Dangerous animals, Dress for the cold (other topics in this app)",
+      "used": "Field dressing, cooling, disease signs, lead and the cooking rule for bear; keeping meat and bear jerky; cutting up; wild game after fallout; every New York rule; bears; cold-weather clothing, all by link"
+    }
+  ],
+  "reviewed": "2026-11-19",
+  "draft": true
+}

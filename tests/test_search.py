@@ -901,6 +901,11 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
     land = packs[2]
     assert land['older'] == ['s:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants'], land
     assert land['hub'] == 's:surv-land-start' and land['checklists'] == ['land-kit'] and land['protocols'] == []
+    # the land pack's content has landed: its hub and checklist ship and nothing about the pack is skipped any more
+    assert 'surv-land-start' in topics and topics['surv-land-start']['category'] == 'land'
+    assert 'land-kit' in checklists and checklists['land-kit']['category'] == 'land'
+    assert sum(1 for t in topics.values() if t.get('category') == 'land') == 12
+    assert not [i for i, t in topics.items() if t.get('category') == 'land' and t.get('draft')]
     for k in packs[:2]:
         assert k['older'] == [], k
     for tid, t in topics.items():
@@ -961,3 +966,111 @@ def test_moved_topics_keep_their_index_position(page, app_url, text):
     if len(got) == 30:   # the list is capped at 30, so new pages can push older ones off its end
         want = want[:len(older)]
     assert older == want
+
+
+# ---------- Food from the land (v7.7): search after the content ----------
+# Measured on screen against the build of commit 0244043 (the search changes, before any land content); docs/v7.7-rulings.md,
+# "Home, links and search (after the content)".
+
+LAND_WORDS = ['deer', 'fish', 'fishing', 'trap', 'snare', 'plants', 'berries', 'jerky', 'smoke meat', 'butcher', 'hunting', 'license']
+
+
+def _land_keys():
+    root = os.path.join(os.path.dirname(__file__), '..', 'src')
+    keys = {'s:' + t['id'] for t in (json.load(open(f, encoding='utf-8')) for f in glob.glob(os.path.join(root, 'survival', '*.json')))
+            if t.get('category') == 'land'}
+    return keys | {'c:land-kit'}
+
+
+@pytest.mark.parametrize('text', LAND_WORDS)
+def test_land_words_show_a_land_page_in_the_first_three_on_screen(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, text)[:3]
+    assert set(ks) & _land_keys(), f'{text!r}: {ks}'
+
+
+# What the pre-content build (0244043) showed on screen for these six; the land pack must not change any of them.
+PRE_CONTENT_MEDICAL = {
+    'bleeding': ['p:bleeding', 'p:junctional-bleeding', 'p:abdominal-wound', 't:tq', 'p:amputation'],
+    'choking': ['p:choking', 'p:choking-infant', 'p:anaphylaxis', 'p:asthma', 'p:cpr-adult'],
+    'cut': ['p:amputation', 'p:bleeding', 'p:cricothyrotomy', 'p:eye-injury', 'p:wound-care'],
+    'bite': ['p:animal-bite', 'p:spider-scorpion', 'p:tick', 'p:snakebite', 'p:wound-care'],
+    'poison': ['p:carbon-monoxide', 'p:poison-plants', 'p:poisoning', 's:surv-food-poisoning', 'p:vomiting-diarrhea'],
+    'fall': ['p:head-injury', 'p:march', 'p:spine-injury', 'p:radiation-sickness', 'p:radiation-decontamination'],
+}
+
+
+@pytest.mark.parametrize('text', sorted(PRE_CONTENT_MEDICAL))
+def test_medical_words_show_what_the_pre_content_build_showed(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    assert on_screen(page, text)[:5] == PRE_CONTENT_MEDICAL[text]
+
+
+# Searches the land pack's new keywords used to move, fixed by narrowing those keywords (rule 13); each still lists what the
+# pre-content build listed in its first five, in the same order.
+NARROWED = {
+    'cut off': ['p:amputation', 's:surv-toilet-no-water', 'p:radiation-decontamination', 'p:bleeding', 'p:eye-injury'],
+    'cuts': ['p:sprain-dislocation', 'p:wound-care'],
+    'heart': ['p:chest-pain', 'p:cpr-adult', 't:rate', 's:surv-winter-storms', 'p:fainting'],
+    'blood': ['p:low-blood-sugar', 'p:bleeding', 'p:shock', 'p:vomiting-diarrhea', 'p:stroke'],
+    'check': ['p:march', 'p:altitude', 'p:fracture', 'p:heat-illness', 'p:hypothermia'],
+    'leg': ['p:fracture', 'p:spine-injury', 'p:bleeding', 'p:burns', 'p:fainting'],
+    'numb': ['p:frostbite', 'p:spine-injury', 'p:stroke', 's:surv-wind-chill', 'p:asthma'],
+    'body': ['p:amputation', 't:burn', 'p:burns', 'p:impaled-object', 'p:spider-scorpion'],
+    'neck or back (spine) injury': ['p:spine-injury', 'p:abdominal-wound', 'p:junctional-bleeding', 'p:cricothyrotomy', 'p:dislocation-reduction'],
+}
+
+
+@pytest.mark.parametrize('text', sorted(NARROWED))
+def test_searches_fixed_by_narrowing_land_keywords_keep_their_pre_content_first_results(page, app_url, text):
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    ks = on_screen(page, text)
+    assert ks[:len(NARROWED[text])] == NARROWED[text], f'{text!r}: {ks[:5]}'
+
+
+# The guard list as it stood before the land content: a later change may remove pairs from GUARD_V77 (a protocol back in its first
+# three) but never add one.
+GUARD_V77_BEFORE_LAND = {
+    ('bleeding', 'wound'), ('hypothermia', 'cold'), ('hypothermia', 'cold water'), ('march', 'shot'),
+    ('radiation-sickness', 'nuclear fallout'), ('recovery-position', 'breathing'), ('recovery-position', 'unresponsive'),
+    ('shock', 'collapse'), ('wound-care', 'bite'), ('wound-care', 'cut'),
+}
+
+
+def test_the_protocol_guard_list_may_shrink_but_not_grow():
+    assert GUARD_V77 <= GUARD_V77_BEFORE_LAND, sorted(GUARD_V77 - GUARD_V77_BEFORE_LAND)
+
+
+def test_keep_shows_the_fracture_protocol_and_preserving_game_meat_is_found(page, app_url):
+    # "Keeping game meat" put the page second for "keep" and pushed Broken bone (fracture) out of the first five; the page is titled
+    # "Preserving game meat" so that "keep" shows what it showed before the land content
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    assert 'p:fracture' in on_screen(page, 'keep')[:5]
+    for text in ('preserving game meat', 'jerky', 'preserve', 'game meat'):
+        assert 's:surv-land-keeping-meat' in on_screen(page, text)[:3], text
+
+
+LAND_TOPIC_ORDER = [
+    stopic('surv-land-zz-new', 'Newer land page', category='land', sections=[{'h': 'T', 'blocks': [{'p': 'quuxberry'}]}]),
+    stopic('surv-land-start', 'Land hub', category='land', sections=[{'h': 'T', 'blocks': [{'p': 'quuxberry'}]}]),
+    stopic('surv-food-zz', 'Food pack page', category='food', sections=[{'h': 'T', 'blocks': [{'p': 'quuxberry'}]}]),
+    stopic('surv-zz-older', 'Older page', sections=[{'h': 'T', 'blocks': [{'p': 'quuxberry'}]}]),
+    stopic('surv-traps-and-fishing', 'Older land page', category='land', sections=[{'h': 'T', 'blocks': [{'p': 'quuxberry'}]}]),
+]
+
+
+def test_newer_land_topics_index_after_every_older_page_hub_first(page, app_url):
+    # five pages match the word only in body text, all at the same score: the older pages (one of them an older land topic that
+    # keeps its place) come first, then the food pack's page, then the land hub, then the other new land page
+    sboot(page, app_url, topics=LAND_TOPIC_ORDER, only=False)
+    page.wait_for_function('window.FK && FK.search')
+    assert [r['key'] for r in q(page, 'quuxberry')] == [
+        's:surv-zz-older', 's:surv-traps-and-fishing', 's:surv-food-zz', 's:surv-land-start', 's:surv-land-zz-new']

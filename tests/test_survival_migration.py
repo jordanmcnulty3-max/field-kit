@@ -26,7 +26,8 @@ MIGRATED = {'surv-dangerous-animals', 'surv-field-dressing-game', 'surv-find-wat
             'surv-river-crossings', 'surv-shelter', 'surv-signal-for-rescue', 'surv-ten-essentials',
             'surv-traps-and-fishing', 'surv-weather-and-lightning'}
 # Migrated topics a content pack moved to another category (water pack, Task 5; heat pack, Task 7; drafts while it was written, released in the pack;
-# land pack, v7.7: the three food-from-the-land topics, rewritten by that pack's later tasks).
+# land pack, v7.7: the three food-from-the-land topics, rewritten and out of draft). The map gives each one's category; it also exempts a
+# draft from the placeholder check, which none of them needs any more (see the test below).
 REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water', 'surv-fire': 'heat', 'surv-shelter': 'heat',
             'surv-traps-and-fishing': 'land', 'surv-field-dressing-game': 'land', 'surv-food-and-wild-plants': 'land'}
 # Exact figure sets are pinned for these topics: find-water keeps both v6 figures; make-water-safe's water-safe was removed in v7 (Task 13)
@@ -106,6 +107,8 @@ def test_draft_topics_keep_placeholder_source_and_all_topics_validate():
         if t.get('draft') is True and t['id'] not in REOPENED:
             assert t['reviewed'] == '2026-11-17'
             assert t['sources'] == [{'name': 'Not yet source-checked', 'used': 'Converted from v6 text; checked in Tasks 13 to 16'}]
+    for tid in ('surv-traps-and-fishing', 'surv-field-dressing-game', 'surv-food-and-wild-plants'):   # rewritten in v7.7 and out of draft
+        assert not [t for t in topics if t['id'] == tid and t.get('draft')], tid
     keys = {'p:' + os.path.splitext(os.path.basename(p))[0] for p in glob.glob(os.path.join(ROOT, 'src', 'protocols', '*.json'))}
     keys |= {'c:' + os.path.splitext(os.path.basename(p))[0] for p in glob.glob(os.path.join(ROOT, 'src', 'checklists', '*.json'))}
     keys |= {'u:' + n for n in TOOL_NAMES}   # survival tool keys, as build.py allows them

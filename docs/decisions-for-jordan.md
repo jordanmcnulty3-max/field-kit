@@ -1436,6 +1436,14 @@ Food from the land pack (v7.7), home, links and search after the content: number
    thickness", "thin ice") puts the page second for "ice" and pushes Winter storms out of the first five; "thin ice" also put the page
    ahead of the Sprain protocol. No such keyword was added. "ice fishing" finds the page second (after New York rules), "ice thickness"
    second (after Burns); "thin ice" and "safe ice" do not show it. Say if the fishing page should outrank Winter storms for "ice".
+   **Settled in the whole-branch review (2026-11-20), unless you overrule it:** falling through ice is a life-safety matter, so Fishing
+   for food now has a Do first box carrying its own ice warning word for word ("Ice: walk only on at least 4 inches (10 cm) of solid,
+   clear ice, or 8 inches (20 cm) of white or snow ice. Stay off ice 2 inches (5 cm) thick or less (NYS DEC).", with a pointer to "Ice
+   fishing"), and the keywords "ice fishing", "ice thickness" and "thin ice". On screen now: "ice" shows Sprain first and Fishing for food
+   second, and Winter storms drops to sixth; "thin ice", "ice thickness", "ice fishing" and "fall through ice" show Fishing for food
+   first; "safe ice" second. No Emergency protocol left the "ice" first five. Still not reached: "is the ice safe" (Fishing for food
+   tenth). One cost outside the pinned list: for "no ice", Sprain drops from fifth to sixth. The lists are in docs/v7.7-rulings.md,
+   "Whole-branch review: fixes".
 207. **Clean and disinfect does not name the deer knife soak.** The checked page already gained its one allowed sentence in this pack
    (naming CDC's bottle soak and the clean-up mix for a suspect can or jar). Naming NYS DOH's 1:1 knife and tool soak there would be a
    second edit, so the soak is named only where it is used: Butchering deer and small game, labelled for that one use and "never for
@@ -1470,6 +1478,14 @@ Food from the land pack (v7.7), whole-pack read fixes: numbers 209 to 214.
    above 40°F before it was chilled (found the next morning after a mild night, or after the long wait for a gut shot) is not eaten. Cost
    if wrong: in warm weather a whole deer may be thrown away that could have been eaten. Say if the group wants a different line, for
    example going by smell and the organ signs.
+   **Added in the whole-branch review (2026-11-20), the controller's ruling for you to confirm:** the cooling limit comes first and
+   belongs to Field dressing game; no keeping method extends it. Field dressing game's "No ice, snow or fridge" warning now adds, as this
+   app's caution: "no way of keeping meat in Preserving game meat makes that time longer. Start one only on meat still inside the 3 to 4
+   hours, and cook the meat to 165°F (74°C) before eating, as each method there says. The traditional ways there, such as smoke-drying
+   and sun and air drying, are not agency-verified, for warm weather or any other." Preserving game meat ("The two labels") quotes Field
+   dressing game's caution word for word and says the same, labelled as the app's caution, with a link. So the July family with no ice
+   reads one answer on both pages: chill within 3 to 4 hours, or cook within that time, or don't eat it; smoke-drying or sun drying is
+   not a way round that. Cost if wrong: as above, a deer that a traditional method could have kept is thrown away or cooked at once.
 211. **Fish with no thermometer, against Cook without power (surv-land-fish-cleaning, surv-food-cooking-no-power).** Cook without power
    (checked) says "The only way to tell if food is cooked enough to kill germs is a food thermometer" (CDC). FDA (Selecting and Serving
    Fresh and Frozen Seafood Safely): "If you don't have a food thermometer, there are other ways to determine whether seafood is done";
@@ -1489,3 +1505,16 @@ Food from the land pack (v7.7), whole-pack read fixes: numbers 209 to 214.
    checks that a second search over sixty fixture protocols takes under 10 ms. Run alone 30 times on this branch: see docs/v7.7-rulings.md,
    "Whole-pack read: fixes", for the count and times. The limit was not changed. Say whether a failure of this test alone should block a
    release, or whether the limit should be measured on the phone instead.
+
+Food from the land pack (v7.7), whole-branch review fixes: number 215.
+
+215. **Setting a trap: what the page teaches and what it leaves to a person (surv-land-trapping).** Trapping now says how to tell a
+   foothold, a body-gripping (Conibear) and a cage or box trap apart (NYS DEC trapper manual, IAFWA trapper education manual, North
+   Dakota Game and Fish), that you should have someone who has set one show you how to set and release it and practise with them first
+   (IAFWA), the IAFWA manual's five steps for setting a coil-spring foothold trap, and its notes for body-gripping traps (small ones by
+   hand with safety hooks; size 220 and larger with setting tongs and a safety gripper; extreme care under water). No source opened
+   gives every step of setting a body-gripping trap, or any step for a cage trap, so the page says, as this app's caution: "this page
+   does not teach every step of setting a body-gripping trap, or how to set a cage trap. Never set a body-gripping trap until someone who
+   has set one has shown you how. Have a cage trap's owner show you how it sets." Cost if wrong: someone with no one to show them cannot
+   use a body-gripping or cage trap from this page alone. Say if you want the body-gripping steps researched further (for example a
+   manufacturer's instructions) for a later release.

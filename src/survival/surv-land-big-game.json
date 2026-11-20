@@ -213,8 +213,13 @@
         {
           "list": [
             "Massachusetts hunter education waits 30 minutes after a firearm shot and 1 hour after an arrow, and longer if you are unsure of the shot; Maine hunter education says half an hour to an hour. New Jersey Fish and Wildlife waits 1 hour before following any ordinary hit. This app goes by at least 1 hour.",
-            "A gut-shot deer may go into a swamp, creek or pond to cool down: check the water nearby (New Jersey Fish and Wildlife)."
+            "A gut-shot deer may go into a swamp, creek or pond to cool down: check the water nearby (New Jersey Fish and Wildlife).",
+            "In air above 40°F (4°C), a long wait can take you past the time a deer’s meat has to be chilled: see Field dressing game, “Cooling the carcass”."
           ]
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
         }
       ]
     },
@@ -230,8 +235,12 @@
             "Wounded deer often take the easiest way, downhill and toward water (Massachusetts hunter education, Maine hunter education).",
             "If you lose the trail, go back to the last sign and search outward in widening circles (Massachusetts hunter education, New Jersey Fish and Wildlife). Be ready for a follow-up shot (North Carolina Wildlife Resources Commission).",
             "If you jump the deer from its bed, leave quietly so you don’t push it further (Massachusetts hunter education).",
-            "Stop hunting and search for any animal you wounded (Maine hunter education). Darkness or weather can stop you: the flagging lets you pick the trail up again the next day (Maine hunter education)."
+            "Stop hunting and search for any animal you wounded (Maine hunter education). Darkness or weather can stop you: the flagging lets you pick the trail up again the next day (Maine hunter education). Whether a deer you find the next day is still food is in Field dressing game, “Cooling the carcass”."
           ]
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
         }
       ]
     },

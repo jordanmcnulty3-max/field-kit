@@ -20,12 +20,12 @@
     "trichinella",
     "bird flu"
   ],
-  "summary": "Don’t take, handle or eat an animal that looks sick, acts strangely or is found dead. Wear gloves, open the belly without cutting the stomach or intestines, and cool it to 40°F (4°C) or colder inside within 24 hours. Organs that smell bad, show greenish discharge or black blood mean you don’t eat that animal. Cook all game and birds to 165°F (74°C). Skinning and cutting up the cooled carcass are in Butchering deer and small game.",
+  "summary": "Don’t take, handle or eat an animal that looks sick, acts strangely or is found dead. Wear gloves, open the belly without cutting the stomach or intestines, and cool it fast: chilled within 3 to 4 hours of the kill when the air is above 40°F (4°C), otherwise to 40°F (4°C) or colder inside within 24 hours. Organs that smell bad, show greenish discharge or black blood mean you don’t eat that animal. Cook all game and birds to 165°F (74°C). Skinning and cutting up the cooled carcass are in Butchering deer and small game.",
   "doFirst": [
     "Make sure it is dead: from behind, at arm’s length, touch the corner of its eye with a stick. If it blinks, it is alive. Stay clear of its feet and antlers (Ohio DNR, Indiana State Board of Animal Health).",
     "Put on rubber, nitrile or latex gloves, and field dress it as soon as possible (NYS Department of Health, Indiana State Board of Animal Health).",
     "Don’t cut the stomach or intestines: they carry germs that cause food poisoning (Penn State Extension).",
-    "Cool it fast: prop the body open, keep it in the shade, and get it to 40°F (4°C) or colder inside within 24 hours (Montana State University Extension).",
+    "Cool it fast: prop the body open and keep it in the shade. Air above 40°F (4°C): chill it within 3 to 4 hours of the kill (Ohio State University Extension). Colder air: get it to 40°F (4°C) or colder inside within 24 hours (Montana State University Extension). No ice or fridge, or found the next day: see Cooling the carcass.",
     "An animal that looked sick or acted strangely, or that you found dead: don’t handle it and don’t eat it (NYS Department of Health, CDC)."
   ],
   "sections": [
@@ -70,7 +70,7 @@
             "Smell and look at the organs as they come out. If they smell bad, or show a greenish discharge, black blood or blood clots in the muscle, don’t eat any meat from this animal (Penn State Extension). The other signs are under “Signs an animal is not safe to eat” below.",
             "Wipe out blood and loose material inside the body with a clean cloth (Montana State University Extension). Use little water, and don’t wipe it out with grass or snow (North Dakota State University Extension).",
             "Put the guts in a bag for the trash (Cornell Wildlife Health Lab), and don’t feed them to pets or leave them for other animals (NYS Wildlife Health Program).",
-            "Cool the carcass fast: prop the cavity open with clean sticks and hang it in the shade. Get the meat down to 40°F or colder within 24 hours. Skin it if nights will stay above freezing."
+            "Cool the carcass fast: prop the cavity open with clean sticks and hang it in the shade. Get it chilled in the time given under “Cooling the carcass” below. Skin it if nights will stay above freezing."
           ]
         }
       ]
@@ -79,18 +79,30 @@
       "h": "Cooling the carcass",
       "blocks": [
         {
-          "p": "Heat ruins meat. Cool the carcass quickly to 35 to 40°F (2 to 4°C) to stop germs growing (Penn State Extension), and keep game below 45°F (7°C) until it is butchered, even while a big animal hangs for several days (NYS Department of Health)."
+          "p": "Heat ruins meat. Cool the carcass quickly to 35 to 40°F (2 to 4°C) to stop germs growing (Penn State Extension). Keep game cool, with ice or below 45°F (7°C), until it is butchered, even while a big animal hangs for several days (NYS Department of Health)."
+        },
+        {
+          "warn": "How long you have. When the air is above 40°F (4°C), the meat must be chilled within 3 to 4 hours of the kill (Ohio State University Extension). Utah State University Extension gives the same 3 to 4 hours when the air is above 45°F (7°C); this app goes by Ohio State’s 40°F. In colder air, get the meat to 40°F (4°C) or colder inside within 24 hours (Montana State University Extension)."
         },
         {
           "list": [
             "Prop the body open, and keep the carcass in the shade with air moving around it (Penn State Extension, Montana State University Extension). In warm weather, get it off the ground so air reaches all of it, and hang it head down (New Mexico State University Extension).",
             "Bags of ice, or snow sealed in plastic bags, in the body cavity help cool it (Penn State Extension, Ohio DNR).",
             "Skin it if the temperature will stay above freezing the first night (Montana State University Extension). In warm weather, skinning speeds cooling; protect the meat from flies with cheesecloth or light cotton bags (North Dakota State University Extension, Montana State University Extension).",
-            "Another way in warm weather: cut the carcass into quarters and put them on ice (New Mexico State University Extension). Above 45°F (7°C) air temperature, Utah State University Extension says to get the carcass into a refrigerator, usually within 3 to 4 hours.",
-            "Watch the carcass closely if the day gets above 45°F (7°C) or it is ever out of the shade (New Mexico State University Extension).",
+            "Another way in warm weather: cut the carcass into quarters and put them on ice (New Mexico State University Extension). If the weather is warm, Montana State University Extension takes the carcass to a cooler the day of the kill.",
             "In cool weather, 28 to 35°F (-2 to 2°C), wrap the carcass or quarters in a sheet and hang them in a shed with air moving through it. Don’t let the carcass freeze: freezing may toughen the meat (North Dakota State University Extension).",
             "Don’t tie a deer across the hood or roof of a vehicle, and don’t put it in a trunk while it is still warm (Penn State Extension, North Dakota State University Extension)."
           ]
+        },
+        {
+          "warn": "No ice, snow or fridge, and the air above 40°F (4°C): field dress it at once, skin it, and cut it into quarters in the shade with air around them. North Carolina Wildlife Resources Commission: once the skin is off and the air is above 40°F, butcher the deer at once, or cut it into sections and put them in a cooler or refrigerator. No source opened says how long meat stays safe with no cold at all. This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it. Cooked meat then goes by Is it still good?: “never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).”"
+        },
+        {
+          "p": "Found later. A deer that lay more than 3 to 4 hours in air above 40°F (4°C) before it was chilled, such as one found the next morning after a mild night or after the long wait for a gut shot: no source opened says whether its meat is still safe. This app’s caution: don’t eat it. After a colder night, field dress it at once and go by every sign under “Signs an animal is not safe to eat” below."
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
         },
         {
           "p": "How long a carcass can hang, and at what temperature, is in Preserving game meat. Skinning, quartering and cutting it up are in Butchering deer and small game."
@@ -224,7 +236,7 @@
     },
     {
       "name": "NYS Department of Health, Harvesting, Preparing, and Eating Wild Game",
-      "used": "Gloves, especially with cuts or open sores; no eating, drinking or smoking while cleaning game; remove intestines soon; keep game below 45°F until butchered, including big game hanging for several days; only healthy-looking animals; cook all game and birds to 165°F in the thickest part; don't eat sick, strange-acting or found-dead game; rabies (species, occasionally in NY deer, signs, nervous tissue and saliva, never eat infected game); CWD signs and parts; cooking does not remove CWD risk; E. coli; toxoplasmosis in undercooked venison; lead: trim away from wound channels, discard bruised meat, children and people who can get pregnant avoid lead-shot game"
+      "used": "Gloves, especially with cuts or open sores; no eating, drinking or smoking while cleaning game; remove intestines soon; keep game cool, with ice or below 45°F, until butchered, including big game hanging for several days; only healthy-looking animals; cook all game and birds to 165°F in the thickest part; don't eat sick, strange-acting or found-dead game; rabies (species, occasionally in NY deer, signs, nervous tissue and saliva, never eat infected game); CWD signs and parts; cooking does not remove CWD risk; E. coli; toxoplasmosis in undercooked venison; lead: trim away from wound channels, discard bruised meat, children and people who can get pregnant avoid lead-shot game"
     },
     {
       "name": "NYS Department of Health, Tularemia (fact sheet)",
@@ -256,11 +268,11 @@
     },
     {
       "name": "Montana State University Extension, Field Care of Harvested Big Game",
-      "used": "Blade up, pelvis toward breastbone, two fingers keep entrails from the point; tie off the vent; don't puncture the stomach at the diaphragm; wipe out blood and loose material; prop open; shade; skin if above freezing the first night; meat to 40°F within 24 hours; cheesecloth or light cotton bags against insects"
+      "used": "Blade up, pelvis toward breastbone, two fingers keep entrails from the point; tie off the vent; don't puncture the stomach at the diaphragm; wipe out blood and loose material; prop open; shade; skin if above freezing the first night; meat to 40°F within 24 hours; to a cooler the day of the kill if the weather is warm; cheesecloth or light cotton bags against insects"
     },
     {
       "name": "New Mexico State University Extension, Field Care of Harvested Big Game (CR 507, revised 2012)",
-      "used": "In warm weather elevate the carcass and hang it head down; quarter it and put it on ice; watch it above 45°F or out of the shade"
+      "used": "In warm weather elevate the carcass and hang it head down; quarter it and put it on ice"
     },
     {
       "name": "North Dakota State University Extension, From Field to Table: A Pocket Guide for the Care and Handling of Deer and Elk (FN536, reviewed April 2024)",
@@ -320,7 +332,15 @@
     },
     {
       "name": "Utah State University Extension, How to Preserve Venison",
-      "used": "Refrigerate the carcass, usually within 3 to 4 hours, if the air is above 45°F"
+      "used": "Refrigerate the skinned carcass, usually within 3 to 4 hours, if the air is above 45°F (shown beside Ohio State’s more cautious 40°F)"
+    },
+    {
+      "name": "Ohio State University Extension, Care and Handling of Venison (HYG-5367; no date shown)",
+      "used": "During warm hunting seasons (over 40°F), meat must be chilled within three to four hours of the kill"
+    },
+    {
+      "name": "North Carolina Wildlife Resources Commission, After the Hunt (web page)",
+      "used": "Once the skin is off and the temperature is above 40°F, butcher the deer immediately or cut it into sections in a cooler or refrigerator"
     },
     {
       "name": "New Mexico Department of Game and Fish, Don't Overlook Those Organ Meats (John Martsh; no date shown)",
@@ -329,6 +349,10 @@
     {
       "name": "University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed October 2021)",
       "used": "Cook bear meat until well done; freezing and heating may not kill parasites in bear meat"
+    },
+    {
+      "name": "Is it still good? (another topic in this app)",
+      "used": "The 2-hour and 1-hour rule for perishable food, quoted word for word"
     }
   ],
   "reviewed": "2026-11-19"

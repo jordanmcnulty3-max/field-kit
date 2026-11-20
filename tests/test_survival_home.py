@@ -2,6 +2,7 @@
 import glob
 import json
 import os
+import re
 import subprocess
 
 import pytest
@@ -989,6 +990,56 @@ def test_the_one_to_one_knife_soak_is_for_knives_and_tools_only_and_trapping_sen
     item = next(x for b in sec['blocks'] for x in b.get('list', []) if x.startswith('Clean and disinfect knives and tools'))
     assert 'Butchering deer and small game' in item, item
     assert 's:surv-land-butchering' in [b['link'] for b in sec['blocks'] if 'link' in b]
+
+def _all_texts(t):
+    # every user-visible string of a topic: the summary, Do first, blocks and table cells
+    out = [t.get('summary', '')] + list(t.get('doFirst', []))
+    for sec in t['sections']:
+        out.append(sec['h'])
+        for b in sec['blocks']:
+            for k in ('p', 'warn', 'cap'):
+                if k in b:
+                    out.append(b[k])
+            for k in ('list', 'steps'):
+                out.extend(b.get(k, []))
+            if 'table' in b:
+                out.extend(b['table']['head'])
+                out.extend(c for row in b['table']['rows'] for c in row)
+    return out
+
+
+def test_warm_meat_time_limits_each_have_one_owner():
+    # whole-pack read C2: Is it still good? owns the 2-hour and 1-hour rule for perishable food (quoted, never restated); Field dressing
+    # game owns how fast a carcass is chilled (3 to 4 hours in air above 40°F, 24 hours otherwise) and NYS DOH's 45°F sentence; Preserving
+    # game meat quotes or links it
+    topics = _shipped('survival')
+    still = 'never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).'
+    assert still in ' '.join(_all_texts(topics['surv-food-still-good']))
+    land = {tid: t for tid, t in topics.items() if t.get('category') == 'land'}
+    for tid, t in land.items():
+        for x in _all_texts(t):
+            rest = x.replace(still, '')
+            if 'perishable' in rest.lower():   # a perishable-food time limit only inside the quoted rule
+                assert not re.search(r'\bhours?\b', rest), (tid, x)
+            if '3 to 4 hours' in x or 'three to four hours' in x:
+                assert tid == 'surv-field-dressing-game', (tid, x)
+            n45 = len(re.findall(r'(?<!\d)45°F', x))   # not 145°F
+            if n45 and tid != 'surv-field-dressing-game':
+                assert n45 == x.count('“Keep game cool, with ice or below 45°F (7°C), until it is butchered'), (tid, x)
+    fd = _all_texts(land['surv-field-dressing-game'])
+    assert any(still in x for x in fd)
+    cooling = next(s for s in land['surv-field-dressing-game']['sections'] if s['h'] == 'Cooling the carcass')
+    text = ' '.join(_all_texts({'sections': [cooling]}))
+    for must in ('within 3 to 4 hours of the kill (Ohio State University Extension)', 'No ice, snow or fridge, and the air above 40°F',
+                 'Found later.', 'This app’s caution: don’t eat it.'):
+        assert must in text, must
+    assert 's:surv-food-still-good' in _links({'sections': [cooling]})
+    keep = land['surv-land-keeping-meat']
+    assert 'Hanging a carcass below' in keep['doFirst'][0] and '45°F' not in keep['doFirst'][0]
+    hanging = next(s for s in keep['sections'] if s['h'] == 'Hanging a carcass')
+    assert 's:surv-field-dressing-game' in _links({'sections': [hanging]})
+    for tid in ('surv-land-big-game', 'surv-land-keeping-meat'):
+        assert 's:surv-field-dressing-game' in _links(land[tid]), tid
 
 def test_fishing_fish_cleaning_and_trapping_split_the_old_traps_topic():
     # land pack batch C (spec 4 rows 2, 5, 7; spec 10 calls 4, 7, 9): Fishing for food keeps the id and is fishing only; the fish

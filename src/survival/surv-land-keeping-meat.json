@@ -15,7 +15,7 @@
   ],
   "summary": "Keep game cold: below 40°F (4°C), and a hanging carcass no more than 2 to 3 days at that. Storage times are in the table. Every other way to keep meat here carries one of two labels: backed by a food-safety agency, or traditional and not agency-verified. None of them makes game ready to eat: cook it to 165°F (74°C) before eating, except deer jerky made exactly by the agency method. Smoke and dry meat only outdoors.",
   "doFirst": [
-    "Keep the meat cold: a hanging deer at 40°F (4°C) or below for 2 to 3 days at most (Penn State Extension), and never above 45°F (7°C) (NYS Department of Health). Cut meat in a fridge at 40°F (4°C) or below: use it within 1 to 2 days (Utah State University Extension).",
+    "Keep the meat cold: a hanging deer at 40°F (4°C) or below for 2 to 3 days at most (Penn State Extension). How fast to cool the carcass first, and what to do with no ice or fridge: see Hanging a carcass below. Cut meat in a fridge at 40°F (4°C) or below: use it within 1 to 2 days (Utah State University Extension).",
     "Every method on this page keeps meat; none makes it ready to eat. Freezing may not kill trichinella worms in game meat, and curing, drying or smoking alone does not consistently kill them (CDC). Cook it to 165°F (74°C) in the thickest part before eating. The one exception is deer jerky made exactly as in “Jerky” below.",
     "Smoke and dry meat outdoors only. Fires and fuel indoors: see Carbon monoxide and burning fuel indoors.",
     "Don’t make jerky from meat that touched gut contents: cook that meat thoroughly instead (National Center for Home Food Preservation)."
@@ -106,7 +106,11 @@
       "h": "Hanging a carcass",
       "blocks": [
         {
-          "p": "Backed by a food-safety agency: keep game cool, with ice or below 45°F (7°C), until it is butchered, including a big game carcass hanging for several days (NYS Department of Health)."
+          "p": "Backed by a food-safety agency, from Field dressing game: “Keep game cool, with ice or below 45°F (7°C), until it is butchered, even while a big animal hangs for several days (NYS Department of Health).”"
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
         },
         {
           "p": "How long, from the extension services, most cautious first:"
@@ -116,7 +120,7 @@
             "Penn State Extension: hold the carcass at 40°F (4°C) or below for two to three days, at most. This app goes by this figure.",
             "Cornell Cooperative Extension: keep the deer below 40°F (4°C) while it ages, hung by its hind feet with the skin on. Aging is not needed for tender meat.",
             "North Dakota State University Extension: aging at 34 to 37°F (1 to 3°C) for 10 to 14 days tenderizes meat, but two to three days is enough, and aging is not recommended for a carcass with little or no fat on it, or for meat that will be ground.",
-            "New Mexico State University Extension: if the temperature stays at or around 32°F (0°C), venison can age for as long as 10 to 12 days; watch it closely if the day goes above 45°F (7°C)."
+            "New Mexico State University Extension: if the temperature stays at or around 32°F (0°C), venison can age for as long as 10 to 12 days."
           ]
         },
         {
@@ -316,7 +320,7 @@
     },
     {
       "name": "New Mexico State University Extension, Field Care of Harvested Big Game (CR 507, revised 2012)",
-      "used": "At or around 32°F venison can age 10 to 12 days; watch above 45°F; in warm weather quarter the carcass and put it on ice"
+      "used": "At or around 32°F venison can age 10 to 12 days; in warm weather quarter the carcass and put it on ice"
     },
     {
       "name": "Kentucky Afield (Kentucky Department of Fish and Wildlife Resources), Cleaning Your Harvest Without Gutting It (Fall 2016)",
@@ -352,7 +356,7 @@
     },
     {
       "name": "Field dressing game, Preserving food, Cook without power, Is it still good?, Carbon monoxide and burning fuel indoors, Butchering deer and small game (other topics in this app)",
-      "used": "The trichinella sentence and the 165°F rule for all wild game (Field dressing game); USDA's dehydrator and sun-drying sentences and New York State Department of Health's winter sentence, quoted word for word from Preserving food; canning by link; cooking, thawed meat and carbon monoxide by link; sausage reasons by link"
+      "used": "The trichinella sentence, the 165°F rule for all wild game and NYS Department of Health’s 45°F sentence, quoted word for word, and carcass cooling by link (Field dressing game); USDA's dehydrator and sun-drying sentences and New York State Department of Health's winter sentence, quoted word for word from Preserving food; canning by link; cooking, thawed meat and carbon monoxide by link; sausage reasons by link"
     }
   ],
   "reviewed": "2026-11-19"

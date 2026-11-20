@@ -9,11 +9,9 @@
     "shot placement",
     "vital area",
     "where to shoot a deer",
-    "blood trail",
     "tracking a deer",
     "tree stand",
     "treestand",
-    "safety harness",
     "drag a deer",
     "bear hunting"
   ],
@@ -357,7 +355,7 @@
           ]
         },
         {
-          "warn": "Bear meat can carry trichinella worms. How to cook it, and why bear is never made into jerky, are in Field dressing game and Keeping game meat."
+          "warn": "Bear meat can carry trichinella worms. How to cook it, and why bear is never made into jerky, are in Field dressing game and Preserving game meat."
         },
         {
           "link": "s:surv-field-dressing-game",
@@ -365,7 +363,7 @@
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
         },
         {
           "link": "s:surv-dangerous-animals",
@@ -405,7 +403,7 @@
       "h": "Next: field dressing, butchering, keeping",
       "blocks": [
         {
-          "p": "Making sure the deer is dead, gutting it, cooling it and the signs that an animal is not safe to eat are in Field dressing game. Cutting it up is in Butchering deer and small game; how long it keeps, and how to keep it, in Keeping game meat."
+          "p": "Making sure the deer is dead, gutting it, cooling it and the signs that an animal is not safe to eat are in Field dressing game. Cutting it up is in Butchering deer and small game; how long it keeps, and how to keep it, in Preserving game meat."
         },
         {
           "link": "s:surv-field-dressing-game",
@@ -417,7 +415,7 @@
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
         },
         {
           "link": "c:land-kit",
@@ -496,7 +494,7 @@
       "used": "Dragging leaves even the fittest hunter breathless and could bring on a heart attack or stroke; cold constricts blood vessels; never hunt alone if possible; take breaks"
     },
     {
-      "name": "Field dressing game, Keeping game meat, Butchering deer and small game, Game, fish, milk and gardens after fallout, New York rules for hunting, fishing and trapping, Dangerous animals, Dress for the cold (other topics in this app)",
+      "name": "Field dressing game, Preserving game meat, Butchering deer and small game, Game, fish, milk and gardens after fallout, New York rules for hunting, fishing and trapping, Dangerous animals, Dress for the cold (other topics in this app)",
       "used": "Field dressing, cooling, disease signs, lead and the cooking rule for bear; keeping meat and bear jerky; cutting up; wild game after fallout; every New York rule; bears; cold-weather clothing, all by link"
     }
   ],

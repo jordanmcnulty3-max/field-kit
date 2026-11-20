@@ -104,7 +104,7 @@
             "Spring: young dandelion leaves, before the plant flowers, and young cattail shoots (Wild plants). Fish gather at inlets before they spawn, usually in spring or fall; crappie move into shallow water to spawn, and walleye spawn in April in fast-flowing streams (NYS DEC).",
             "Summer: wild raspberries usually ripen in July, blackberries a little later (Wild plants). Small ponds full of sunfish are the best place to get a bite; in summer crappie go to deeper, cooler water (NYS DEC). Squirrels move much less at midday on hot, humid days (Missouri Department of Conservation). Heat spoils meat fast: don’t hunt on a hot day without a way to keep the meat cool (New Jersey Fish and Wildlife).",
             "Fall: fish gather at inlets again (NYS DEC). In Missouri, rabbit numbers are often higher in October (Missouri Department of Conservation).",
-            "Winter: ice fishing for yellow perch, sunfish, chain pickerel and northern pike in ponds and lakes, and walleye and lake trout in deep lakes (NYS DEC); the ice rules are under Safety below. Rabbits may move at midday on a sunny day after a cold snap (Missouri Department of Conservation). Cold helps keep meat, but read what the agencies say in Keeping game meat first."
+            "Winter: ice fishing for yellow perch, sunfish, chain pickerel and northern pike in ponds and lakes, and walleye and lake trout in deep lakes (NYS DEC); the ice rules are under Safety below. Rabbits may move at midday on a sunny day after a cold snap (Missouri Department of Conservation). Cold helps keep meat, but read what the agencies say in Preserving game meat first."
           ]
         },
         {
@@ -113,7 +113,7 @@
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
         }
       ]
     },
@@ -150,6 +150,10 @@
             "During a fallout shelter period, going out at all is ruled by How long to stay in. This app’s caution, from Water and food after fallout: don’t use wild game and fish until officials say you can.",
             "Who should not eat it, from Field dressing game: “Children and anyone who could become pregnant should not eat game shot with lead.”"
           ]
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
         },
         {
           "link": "s:surv-fallout-how-long",
@@ -269,6 +273,14 @@
           "label": "Fishing for food"
         },
         {
+          "link": "s:surv-land-fish-cleaning",
+          "label": "Gutting, filleting and eating fish"
+        },
+        {
+          "link": "s:surv-land-trapping",
+          "label": "Trapping"
+        },
+        {
           "link": "s:surv-land-small-game",
           "label": "Small game and birds"
         },
@@ -286,7 +298,7 @@
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
         },
         {
           "link": "s:surv-food-and-wild-plants",
@@ -361,7 +373,7 @@
       "used": "Zone-of-fire safety when hunting in a group"
     },
     {
-      "name": "Wild plants, Field dressing game, Keeping game meat, Water and food after fallout, Game, fish, milk and gardens after fallout, How long to stay in, New York rules for hunting, fishing and trapping, and the other topics linked here (in this app)",
+      "name": "Wild plants, Field dressing game, Preserving game meat, Water and food after fallout, Game, fish, milk and gardens after fallout, How long to stay in, New York rules for hunting, fishing and trapping, and the other topics linked here (in this app)",
       "used": "The food-priority sentence and the lead sentence, quoted word for word; the plant seasons (dandelion, cattail, raspberries and blackberries) and safe list; gloves with rabbits and hares; keeping meat in winter; wild game and fish after fallout; going out during a fallout shelter period; every New York rule, all by link"
     }
   ],

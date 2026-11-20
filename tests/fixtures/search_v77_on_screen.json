@@ -449,10 +449,10 @@
  ],
  "keep": [
   "s:surv-food-clean-kitchen",
-  "s:surv-land-keeping-meat",
   "s:surv-heat-out",
   "s:surv-food-power-out",
-  "p:blisters"
+  "p:blisters",
+  "p:fracture"
  ],
  "lie": [
   "p:fainting",
@@ -580,10 +580,10 @@
  ],
  "preserving": [
   "s:surv-food-preserving",
+  "s:surv-land-keeping-meat",
+  "s:surv-field-dressing-game",
   "s:surv-food-power-out",
-  "s:surv-food-poisoning",
-  "s:surv-food-still-good",
-  "s:surv-food-storage"
+  "s:surv-food-poisoning"
  ],
  "range": [
   "a:ballistics",

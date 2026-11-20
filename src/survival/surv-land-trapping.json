@@ -7,8 +7,6 @@
     "trapping",
     "snare",
     "deadfall",
-    "foothold trap",
-    "body-gripping trap",
     "box trap",
     "trapline"
   ],
@@ -37,6 +35,10 @@
         {
           "link": "s:surv-land-ny-rules",
           "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     },
@@ -106,6 +108,10 @@
             "Water sets that drown the animal: stake the trap in water 12 to 18 inches (30 to 45 cm) deep, or use a sliding wire or cable that lets the animal reach deep water (NYS DEC trapper manual).",
             "What to carry, from the manual’s pack basket: traps, gloves, pan covers, a dirt sifter, stakes, a bait jar, a digging tool (most trappers use a long, sturdy trowel), lure, a hatchet with its edge covered, a kneeling pad, wire, pliers, swivels and spare trap tags."
           ]
+        },
+        {
+          "link": "c:land-kit",
+          "label": "Hunting, fishing and trapping kit"
         }
       ]
     },
@@ -146,15 +152,18 @@
           "p": "Without a firearm:"
         },
         {
+          "warn": "Larger animals such as raccoons may be too large for some beginners to kill safely this way: get help (NYS DEC trapper manual)."
+        },
+        {
           "steps": [
             "Strike sharply at the base of the skull with a heavy wooden or metal tool.",
             "Strike a second time: the first blow makes the animal unconscious, the second kills it or leaves it in a coma.",
-            "To make sure it dies, pin the head with one foot and stand on the chest, near the heart, with the other foot for several minutes. Never stand on an animal that is conscious.",
+            "To make sure it dies, pin the head with one foot and stand on the chest, near the heart, with the other foot for several minutes. Never stand on an animal that is conscious. Don’t step off an unconscious animal until it is dead.",
             "Check: touch the eye or mouth with the striking tool, never your hand, and watch for any reaction. No reaction, no breathing and no heartbeat: you can take it as dead. Opossums are hard to check."
           ]
         },
         {
-          "warn": "Larger animals such as raccoons may be too large for some beginners to kill safely this way: get help (NYS DEC trapper manual). If killing an animal, or releasing one you don’t want, seems too hard, the manual says not to set traps on land: trap water animals with body-gripping traps and drowning sets until you can."
+          "warn": "If killing an animal, or releasing one you don’t want, seems too hard, the manual says not to set traps on land: trap water animals with body-gripping traps and drowning sets until you can."
         }
       ]
     },
@@ -228,7 +237,7 @@
       "h": "After the catch",
       "blocks": [
         {
-          "p": "How to field dress small game, and the signs that an animal is not safe to eat, are in Field dressing game. Cutting up small game is in Butchering deer and small game. How long the meat keeps, and the ways to keep it, are in Keeping game meat. Cook all of it to 165°F (74°C)."
+          "p": "How to field dress small game, and the signs that an animal is not safe to eat, are in Field dressing game. Cutting up small game is in Butchering deer and small game. How long the meat keeps, and the ways to keep it, are in Preserving game meat. Cook all of it to 165°F (74°C)."
         },
         {
           "link": "s:surv-field-dressing-game",
@@ -240,7 +249,7 @@
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
         }
       ]
     },

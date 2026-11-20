@@ -204,6 +204,10 @@
         {
           "link": "s:surv-traps-and-fishing",
           "label": "Fishing for food"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     }

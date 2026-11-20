@@ -1,6 +1,6 @@
 {
   "id": "surv-land-keeping-meat",
-  "title": "Keeping game meat",
+  "title": "Preserving game meat",
   "category": "land",
   "keywords": [
     "jerky",
@@ -150,7 +150,7 @@
       "h": "Jerky",
       "blocks": [
         {
-          "p": "Backed by a food-safety agency (National Center for Home Food Preservation). This method needs a dehydrator or an oven that holds 140°F (60°C), and a food thermometer. It is for deer: don’t use bear meat for jerky (University of Alaska Fairbanks Extension), which also says to cook bear meat until well done, to 185°F (85°C). Jerky from wild boar or any other game is cooked to 165°F (74°C) before eating, as in the end step below. Raw poultry is generally not recommended for jerky (National Center for Home Food Preservation)."
+          "p": "Backed by a food-safety agency (National Center for Home Food Preservation). This method needs a dehydrator or an oven that holds 140°F (60°C), and a food thermometer. It is for deer: don’t use bear meat for jerky (University of Alaska Fairbanks Extension), which also says to cook bear meat until well done. Jerky from wild boar or any other game is cooked to 165°F (74°C) before eating, as in the end step below. Raw poultry is generally not recommended for jerky (National Center for Home Food Preservation)."
         },
         {
           "steps": [
@@ -273,6 +273,10 @@
         {
           "link": "s:surv-field-dressing-game",
           "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     }
@@ -336,7 +340,7 @@
     },
     {
       "name": "University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed October 2021)",
-      "used": "Heat game meat in marinade to boiling (212°F); don't use bear meat for jerky; cook bear meat well done, to 185°F"
+      "used": "Heat game meat in marinade to boiling (212°F); don't use bear meat for jerky; cook bear meat well done"
     },
     {
       "name": "North Dakota State University Extension, Wild Side of the Menu No. 3: Preservation of Game Meats and Fish (FN155, reviewed August 2022)",

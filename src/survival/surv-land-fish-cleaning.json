@@ -29,6 +29,10 @@
         {
           "link": "s:surv-traps-and-fishing",
           "label": "Fishing for food"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     },
@@ -222,7 +226,7 @@
               [
                 "Oswego River, Varick Dam to the upper dam (Lock 2)",
                 "Every other fish",
-                "Don’t eat (this app’s reading of an unclear listing)",
+                "As the first table (state health advice). This app’s caution: don’t eat",
                 "Don’t eat"
               ],
               [
@@ -364,19 +368,19 @@
                 "Over 20 in (51 cm): don’t eat; under 20 in: up to 1 a month"
               ],
               [
-                "Mohawk River and Erie Canal, Feeder Dam 1 to Lock E20",
+                "Mohawk River and Erie Canal, Feeder Dam 1 (and Lock E21) to Lock E20",
                 "Walleye, rock bass, carp, bluegill",
                 "Don’t eat",
                 "Don’t eat"
               ],
               [
-                "Mohawk River and Erie Canal, Feeder Dam 1 to Lock E20",
+                "Mohawk River and Erie Canal, Feeder Dam 1 (and Lock E21) to Lock E20",
                 "Yellow perch, smallmouth bass",
                 "Up to 1 a month",
                 "Don’t eat"
               ],
               [
-                "Mohawk River and Erie Canal, Feeder Dam 1 to Lock E20",
+                "Mohawk River and Erie Canal, Feeder Dam 1 (and Lock E21) to Lock E20",
                 "White sucker, pumpkinseed and other sunfish",
                 "Up to 1 a month",
                 "Up to 1 a month"
@@ -414,7 +418,7 @@
               [
                 "Mud Creek (to Sauquoit Creek); Sauquoit Creek, Old Silk Mill Dam to the Mohawk River",
                 "Every other fish",
-                "Don’t eat (this app’s reading of an unclear listing)",
+                "As the first table (state health advice). This app’s caution: don’t eat",
                 "Don’t eat"
               ]
             ]
@@ -430,6 +434,14 @@
             "Broil, grill or bake the trimmed, skinned fish on a rack so the fat drips away, and don’t use the drippings for sauce or gravy. Cooking or soaking fish cannot get rid of the chemicals.",
             "Spread your meals out: if the advice is up to 4 meals a month, don’t eat them all in one week. This matters most for women and young children."
           ]
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "link": "s:surv-land-after-fallout",
+          "label": "Game, fish, milk and gardens after fallout"
         }
       ]
     }

@@ -7666,3 +7666,56 @@ and enlarged, day and night, and viewed (/home/claude/sdd/figs/, not tracked). T
   20 px to the inch. The text does not place the stake, the chain's length or the feed pile (bank or floating), so the layout would be
   invented. The raccoon box needs a body-gripping trap whose springs, trigger and safety the text does not describe; such a trap can
   catch the trapper, and New York limits them on land. Recorded in docs/v7.7-rulings.md, Diagrams. trap-squirrel is unchanged.
+
+## Land pack: home, links and search after the content (2026-11-20)
+
+Four small content fixes the batch reviewers left. Each source was found with the built-in search and fetched at the URL the search
+returned; the page title and agency were checked on each fetch.
+
+- **Trapping, "Killing a trapped animal" (surv-land-trapping).** Re-opened: NYS DEC, Trapping Furbearers: An Introduction to Responsible
+  Trapping, student manual, 4th ed. 2016, https://extapps.dec.ny.gov/docs/wildlife_pdf/trapedman.pdf ("Killing Trapped Animals", second
+  half of the file). The manual, in its order: strike at the base of the skull; strike twice; "To ensure death, pin the head with one foot
+  and stand on the chest (area near the heart)" for several minutes; "The trapper should never attempt to stand on a conscious animal and
+  should not step off of an unconscious animal until it is dead"; touch the eye or mouth with the striking tool; no reaction, breathing or
+  heartbeat; opossum hard to check; "The larger furbearers such as raccoon, coyote, and bobcat may be too large for some beginners to
+  safely kill using this method"; "seek assistance". Changed: step 3 now ends "Don’t step off an unconscious animal until it is dead."
+  The warning that raccoons may be too large for some beginners (wording unchanged) moved above the steps, as the reviewer asked; the
+  closing advice about trapping water animals until you can stays after them.
+- **Gutting, filleting and eating fish, Central New York table (surv-land-fish-cleaning).** Re-opened: NYS DOH, Advisory Listings by
+  County, https://healthweb-back.health.ny.gov/environmental/outdoors/fish/health_advisories/by_county.htm (columns "General
+  Population", "Sensitive Population"). Oswego River, Varick Dam at Oswego (Lock #8) to Upper Dam at Fulton (Lock #2), and Mud Creek and
+  Sauquoit Creek (Old Silk Mill Dam to the Mohawk River): "All other fish [See Statewide Advice] (Only for General Population) DON'T EAT".
+  The two cells that said "Don’t eat (this app’s reading of an unclear listing)" now say "As the first table (state health advice). This
+  app’s caution: don’t eat" (the first table is the Department's statewide advice; a longer wording made the table too wide for the
+  phone); the sensitive column stays "Don’t eat" (the Department's own). The Mohawk segment reads "from Feeder Dam 1
+  on Mohawk River and Lock E21 at New London to Lock E20 at Whitesboro", so its rows now say "Feeder Dam 1 (and Lock E21) to Lock E20".
+  Question D183 reworded to match.
+- **Fishing for food, "Where the fish are" (surv-traps-and-fishing).** Re-opened: NYS DEC, Beginners' Guide to Freshwater Fishing,
+  https://extapps.dec.ny.gov/docs/fish_marine_pdf/gsfishing.pdf. p. 24: "Points are pieces of land that extend out from the shoreline
+  and slope into deeper water. Gradually sloping points are good places to fish." and "Fish the tip of the point and the corners of the
+  point". p. 9 (black crappie): "most commonly caught when they congregate in shallow water to spawn in the spring"; spawning
+  "May-June". Changed: "points that slope gradually into deeper water" became "points, pieces of land that extend out from the shoreline
+  and slope into deeper water: gradually sloping points are good places to fish"; "crappie gather in shallow water to spawn" became
+  "crappie are most commonly caught when they congregate in shallow water to spawn, in May and June".
+- **Wild plants, Cattail (surv-food-and-wild-plants).** Re-opened: Montana Department of Agriculture, Yellowflag Iris,
+  https://agr.mt.gov/Topics/N-P/Noxious-Weeds-Pages/Education/Current-Weeds/Yellowflag-Iris. Its one comparison: "cattail, which has
+  round leaf bases, instead of the flat leaf bases yellowflag iris has." It says nothing about which difference is the main test or
+  about seasons. "The main test, in any season: the leaf base is round on cattail and flat on iris" became "Leaf base: cattail has round
+  leaf bases; yellow flag iris has flat ones (Montana Department of Agriculture)."
+
+Other changes in this round that touch text a reader sees: the page titled "Keeping game meat" is now "Preserving game meat" (search;
+docs/v7.7-rulings.md), and every label and every in-text mention of it follows the new title (Preserving food, the hub, Field dressing
+game, Butchering deer and small game, Hunting deer and big game, Small game and birds, Trapping, the kit checklist). The records above
+keep the old name where they describe earlier rounds. Link blocks were added (list in docs/v7.7-rulings.md); no other wording changed.
+
+Owner's decisions applied in the same round (Jordan, 2026-11-20):
+
+- **Bear at 165°F.** University of Alaska Fairbanks Extension (Making Jerky, FNH-00262, opened in batch A2) says to cook bear meat well
+  done, to an internal temperature of 185°F. By the owner's decision the app does not show that figure: the sentence in Field dressing
+  game ("Cook it through") and the clause in Preserving game meat ("Jerky") now keep UAF's "cook bear meat until well done" (and, in Field
+  dressing game, "freezing and heating may not be enough to kill parasites in bear meat") without the 185°F (85°C) figure; their source
+  lines drop it too. The 165°F rule, the trichinella warnings and "don’t use bear meat for jerky" are unchanged.
+- **Winter cold as a freezer accepted.** Preserving food's "Cold storage" pointer ("with ice and coolers and never outdoors") read
+  against Preserving game meat's traditional method; one sentence was added to it: "For game meat, winter cold as the freezer is given as
+  a traditional method, not agency-verified, with its risks, in Preserving game meat." The NYS DOH quote ("Don’t put your food outside
+  to keep it cold, even in the winter") stays word for word in Preserving food and is quoted first in the game page's section.

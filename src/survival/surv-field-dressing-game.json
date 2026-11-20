@@ -93,11 +93,11 @@
           ]
         },
         {
-          "p": "How long a carcass can hang, and at what temperature, is in Keeping game meat. Skinning, quartering and cutting it up are in Butchering deer and small game."
+          "p": "How long a carcass can hang, and at what temperature, is in Preserving game meat. Skinning, quartering and cutting it up are in Butchering deer and small game."
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
         },
         {
           "link": "s:surv-land-butchering",
@@ -181,7 +181,7 @@
           "warn": "Bear and wild boar can carry trichinella worms. Cook them to 165°F. Freezing, smoking or curing does not reliably kill the worms in wild game."
         },
         {
-          "p": "For bear, University of Alaska Fairbanks Extension says to cook the meat until it is well done, to an internal temperature of 185°F (85°C): freezing and heating may not be enough to kill parasites in bear meat."
+          "p": "For bear, University of Alaska Fairbanks Extension says to cook the meat until it is well done: freezing and heating may not be enough to kill parasites in bear meat."
         },
         {
           "p": "Lead bullets break into fragments. Trim well away from the wound channel and throw out bruised or discoloured meat. Children and anyone who could become pregnant should not eat game shot with lead."
@@ -196,7 +196,7 @@
       "h": "Next: butchering and keeping the meat",
       "blocks": [
         {
-          "p": "This page stops at the cooled carcass. Skinning, quartering, the cuts, the organs and grinding are in Butchering deer and small game. How long meat keeps, and every way to keep it, each with its label and its risks, are in Keeping game meat."
+          "p": "This page stops at the cooled carcass. Skinning, quartering, the cuts, the organs and grinding are in Butchering deer and small game. How long meat keeps, and every way to keep it, each with its label and its risks, are in Preserving game meat."
         },
         {
           "link": "s:surv-land-butchering",
@@ -204,7 +204,11 @@
         },
         {
           "link": "s:surv-land-keeping-meat",
-          "label": "Keeping game meat"
+          "label": "Preserving game meat"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     }
@@ -324,7 +328,7 @@
     },
     {
       "name": "University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed October 2021)",
-      "used": "Cook bear meat until well done, internal temperature 185°F; freezing and heating may not kill parasites in bear meat"
+      "used": "Cook bear meat until well done; freezing and heating may not kill parasites in bear meat"
     }
   ],
   "reviewed": "2026-11-19"

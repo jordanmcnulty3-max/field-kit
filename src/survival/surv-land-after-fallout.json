@@ -9,7 +9,6 @@
     "fish after fallout",
     "eggs after fallout",
     "livestock fallout",
-    "farm animals fallout",
     "cow milk fallout",
     "goat milk fallout",
     "chickens fallout",
@@ -117,6 +116,14 @@
       "blocks": [
         {
           "p": "No source opened gives any step or advice for wild game after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. The rule at the top of this page is the only one: don’t use it until officials say you can."
+        },
+        {
+          "link": "s:surv-land-big-game",
+          "label": "Hunting deer and big game"
+        },
+        {
+          "link": "s:surv-land-small-game",
+          "label": "Small game and birds"
         }
       ]
     },
@@ -125,6 +132,10 @@
       "blocks": [
         {
           "p": "No source opened gives any step or advice for eating fish you catch after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. The rule at the top of this page is the only one: don’t use it until officials say you can."
+        },
+        {
+          "link": "s:surv-land-fish-cleaning",
+          "label": "Gutting, filleting and eating fish"
         }
       ]
     },
@@ -138,6 +149,10 @@
         {
           "link": "s:surv-fallout-warning",
           "label": "Fallout warning: what to do first"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     }

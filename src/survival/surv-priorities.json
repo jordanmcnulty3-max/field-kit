@@ -29,6 +29,10 @@
         {
           "link": "s:surv-food-how-much",
           "label": "How much food to store, and what"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     },

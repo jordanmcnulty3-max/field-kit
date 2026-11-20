@@ -2,6 +2,7 @@
 import glob
 import json
 import os
+import re
 import subprocess
 
 import pytest
@@ -35,7 +36,7 @@ def cats(page):
 
 
 def open_cat(page, label):
-    page.locator('#survCats summary', has_text=label).click()
+    page.locator('#survCats summary', has_text=label).first.click()   # first: 'Food' comes before 'Food from the land'
 
 
 def titles(page, label):
@@ -363,13 +364,21 @@ ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-sa
           's:surv-potassium-iodide', 's:surv-fallout-get-ready',
           # food pack (Task 8): all ten topics, so no Where or When filter can hide food safety (spec 4)
           's:surv-food-power-out', 's:surv-food-still-good', 's:surv-food-cooking-no-power', 's:surv-food-poisoning', 's:surv-food-how-much',
-          's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-preserving']
+          's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-preserving',
+          # land pack (v7.7): every topic of Food from the land carries no tag (the three older ones lost theirs), so no filter can hide them
+          's:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants',
+          's:surv-land-start', 's:surv-land-big-game', 's:surv-land-small-game', 's:surv-land-trapping', 's:surv-land-butchering',
+          's:surv-land-fish-cleaning', 's:surv-land-keeping-meat', 's:surv-land-ny-rules', 's:surv-land-after-fallout']
 RADIATION = ['s:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
              's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
              's:surv-potassium-iodide', 's:surv-fallout-get-ready']   # named, so a later pack appending to ALWAYS cannot shift it
 FOOD = ['s:surv-food-power-out', 's:surv-food-still-good', 's:surv-food-cooking-no-power', 's:surv-food-poisoning', 's:surv-food-how-much',
         's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-preserving']
-assert set(RADIATION) <= set(ALWAYS) and set(FOOD) <= set(ALWAYS)
+MOVED = ['s:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants']
+LAND = ['s:surv-land-start', 's:surv-traps-and-fishing', 's:surv-land-fish-cleaning', 's:surv-land-trapping', 's:surv-land-big-game',
+        's:surv-land-small-game', 's:surv-field-dressing-game', 's:surv-land-butchering', 's:surv-land-keeping-meat',
+        's:surv-food-and-wild-plants', 's:surv-land-ny-rules', 's:surv-land-after-fallout']   # the hub first, then as the hub lists them
+assert set(RADIATION) <= set(ALWAYS) and set(FOOD) <= set(ALWAYS) and set(MOVED) <= set(LAND) <= set(ALWAYS)
 # Topics tagged when: cold: listed under Any and Cold, hidden under Warm, for every Where value.
 WHEN_COLD = ['s:surv-unheated-house', 's:surv-dress-for-cold', 's:surv-wind-chill', 's:surv-water-winter']
 WHERES = ('any', 'town', 'rural', 'woods', 'coast')
@@ -412,7 +421,7 @@ def test_fire_and_shelter_are_listed_under_heat_with_the_hub_first(page, app_url
     basics = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"basics\"] button[data-key]')].map(b => b.dataset.key)")
     assert 's:surv-fire' in heat and 's:surv-shelter' in heat
     assert 's:surv-fire' not in basics and 's:surv-shelter' not in basics
-    assert basics[0] == 's:surv-priorities' and len(basics) >= 10   # Basics keeps its remaining topics
+    assert basics[0] == 's:surv-priorities' and len(basics) == 8   # Basics keeps its eight remaining topics (the three land topics moved out of it in v7.7)
     assert len(heat) == 14
     assert heat[0] == 's:surv-heat-out'   # the hub leads its category, as Priorities leads Basics
     page.click('#survCats [data-key="s:surv-fire"]')
@@ -647,6 +656,9 @@ def test_the_six_checked_topics_differ_from_v73_release_by_one_added_link_block_
     if tid in CHECKED_FOOD_LINKS:   # the food pack (v7.5) also adds one link block to four of the six: filtered out here, checked against v7.4 below
         for sn in now_sections:
             sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != CHECKED_FOOD_LINKS[tid]]
+    if tid in CHECKED_LAND_LINKS:   # and the land pack (v7.7) one to Priorities: filtered out here, checked against v7.4 below
+        for sn in now_sections:
+            sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != CHECKED_LAND_LINKS[tid]]
     for sn, sw in zip(now_sections, was['sections']):
         assert sn['h'] == sw['h'], tid
         bn, bw = sn['blocks'], sw['blocks']
@@ -799,12 +811,22 @@ def _v74_text(name):
     return json.loads(r.stdout)
 
 
+# the land pack (v7.7) adds a second link block to one of them (spec 7, Fallout): filtered out here after checking it is there exactly once
+CHECKED_LAND_LINKS = {'surv-fallout-water-and-food': 's:surv-land-after-fallout',
+                      'surv-priorities': 's:surv-land-start'}   # and Priorities one block to the land hub (land plan, Task 7)
+
+
 @pytest.mark.parametrize('tid,target', sorted(CHECKED_FOOD_LINKS.items()))
 def test_the_checked_topics_differ_from_v74_release_by_one_added_link_block(tid, target):
     now, was = _shipped('survival')[tid], _v74_text(tid)
     extra = []
     now_sections = json.loads(json.dumps(now['sections']))
     assert len(now_sections) == len(was['sections']), tid
+    if tid in CHECKED_LAND_LINKS:
+        land = [b for sn in now_sections for b in sn['blocks'] if b.get('link') == CHECKED_LAND_LINKS[tid]]
+        assert land == [{'link': CHECKED_LAND_LINKS[tid], 'label': _title_of(CHECKED_LAND_LINKS[tid])}], land
+        for sn in now_sections:
+            sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != CHECKED_LAND_LINKS[tid]]
     for sn, sw in zip(now_sections, was['sections']):
         assert sn['h'] == sw['h'], tid
         bn, bw = sn['blocks'], sw['blocks']
@@ -821,10 +843,16 @@ def test_the_checked_topics_differ_from_v74_release_by_one_added_link_block(tid,
     assert set(now) == set(was)
 
 
-def test_the_food_pack_does_not_link_field_dressing_game_until_v76():
-    # Its label puts the food pages above Wound cleaning and care for "dressing" (docs/v7.5-rulings.md); the link returns with v7.6
-    for tid in [k[2:] for k in FOOD]:
-        assert 's:surv-field-dressing-game' not in _links(_shipped('survival')[tid]), tid
+def test_cooking_or_the_power_out_hub_links_field_dressing_game_by_its_title():
+    # v7.5 kept this link out for the "dressing" search (docs/v7.5-rulings.md); v7.7 lifts the ban (land spec 12) and requires the link
+    # from one of the two food pages that send people to the game rule. Preserving food points to Preserving game meat instead.
+    topics = _shipped('survival')
+    blocks = [b for tid in ('surv-food-cooking-no-power', 'surv-food-power-out') for sec in topics[tid]['sections']
+              for b in sec['blocks'] if b.get('link') == 's:surv-field-dressing-game']
+    assert blocks, 'neither Cook without power nor Food when the power goes out links Field dressing game'
+    assert all(b['label'] == topics['surv-field-dressing-game']['title'] == 'Field dressing game' for b in blocks), blocks
+    assert 's:surv-field-dressing-game' not in _links(topics['surv-food-preserving'])
+    assert 's:surv-land-keeping-meat' in _links(topics['surv-food-preserving'])
 
 
 def test_home_section_headings_have_space_above_and_read_as_labels(page, app_url):
@@ -844,3 +872,513 @@ def test_home_section_headings_have_space_above_and_read_as_labels(page, app_url
         assert g['upper'] == 'uppercase' and g['size'] < 16, g
     row = page.evaluate("parseFloat(getComputedStyle(document.querySelector('#survCats summary')).fontSize)")
     assert row > gaps[0]['size']
+
+
+# ---------- Food from the land (v7.7): the land category ----------
+
+def test_the_three_moved_topics_are_category_land_and_carry_no_where_or_when_key_in_the_shipped_data():
+    land = {i: t for i, t in _shipped('survival').items() if t.get('category') == 'land'}
+    assert sorted('s:' + i for i in land if not i.startswith('surv-land-')) == sorted(MOVED)   # the rest of the pack arrives with its content
+    for i, t in land.items():
+        assert 'where' not in t and 'when' not in t, i
+
+
+def test_land_category_sits_after_food_and_holds_the_three_moved_topics(page, app_url):
+    shipped_home(page, app_url)
+    heads = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat] > summary')].map(s => s.textContent.trim())")   # CSS capitals are not in textContent
+    assert 'Food from the land' in heads and heads.index('Food from the land') == heads.index('Food') + 1, heads
+    cat = lambda c: page.evaluate(f"[...document.querySelectorAll('#survCats details[data-cat=\"{c}\"] button[data-key]')].map(b => b.dataset.key)")
+    assert set(MOVED) <= set(cat('land'))
+    assert not set(MOVED) & set(cat('basics'))
+
+
+def test_moved_topics_are_listed_under_all_fifteen_filters(page, app_url):
+    shipped_home(page, app_url)
+    for where in WHERES:
+        for when in ('any', 'cold', 'warm'):
+            page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
+            land = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
+            assert set(MOVED) <= set(land), f'where={where} when={when}: {land}'
+
+
+def test_land_hub_leads_the_category_and_every_land_topic_is_listed_under_all_fifteen_filters(page, app_url):
+    shipped_home(page, app_url)
+    every = sorted('s:' + i for i, t in _shipped('survival').items() if t.get('category') == 'land')
+    assert 's:surv-land-start' in every
+    open_cat(page, 'Food from the land')
+    for where in WHERES:
+        for when in ('any', 'cold', 'warm'):
+            page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
+            land = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
+            assert sorted(land) == every, f'where={where} when={when}: {land}'
+            assert land[0] == 's:surv-land-start', f'where={where} when={when}: {land}'
+
+
+def test_the_land_hub_links_every_other_land_topic_and_the_checklist():
+    topics = _shipped('survival')
+    hub = topics['surv-land-start']
+    keys = _links(hub)
+    for tid, t in topics.items():
+        if t.get('category') == 'land' and tid != 'surv-land-start':
+            assert 's:' + tid in keys, tid
+    assert 'c:land-kit' in keys and _shipped('checklists')['land-kit']['category'] == 'land'
+    known = _known_keys()
+    for k in keys:
+        assert k in known, k
+
+
+def _texts(t):
+    out = list(t.get('doFirst', []))
+    for sec in t['sections']:
+        for b in sec['blocks']:
+            for k in ('p', 'warn'):
+                if k in b:
+                    out.append(b[k])
+            for k in ('list', 'steps'):
+                out.extend(b.get(k, []))
+    return out
+
+
+def test_wild_plants_keeps_the_quoted_sentences_the_mushroom_rule_and_the_poisoning_link_and_draws_no_plant():
+    # spec 10 calls 2, 3 and 9: the sentences Rationing food quotes word for word are frozen; the mushroom warning stays word for word
+    topics = _shipped('survival')
+    t = topics['surv-food-and-wild-plants']
+    assert t['title'] == 'Wild plants' and t['category'] == 'land'
+    texts = _texts(t)
+    for quoted in ('Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early.',
+                   'Only eat a plant you can identify with certainty.'):
+        assert quoted in texts, quoted
+        assert quoted in ' '.join(_texts(topics['surv-food-when-short'])), quoted
+    assert ('Never eat a wild mushroom unless an expert has identified it. Poisonous mushrooms can look like edible ones, there is no field '
+            'test that shows a mushroom is safe, and cooking does not destroy the poisons.') in texts
+    assert 'p:poisoning' in _links(t)
+    assert not any('fig' in b for sec in t['sections'] for b in sec['blocks'])
+
+
+def test_the_cdc_bottle_soak_is_on_the_babies_page_for_that_use_only_and_clean_and_disinfect_names_the_special_mixes():
+    # spec 7 "Bleach" and spec 12: the soak is added as CDC gives it; Clean and disinfect gains one sentence naming the special mixes
+    topics = _shipped('survival')
+    texts = _texts(topics['surv-food-babies-children'])
+    assert 'For each 1/2 gallon (1.9 L) or 8 cups of water, add 1 teaspoon (5 mL) of unscented bleach (CDC).' in texts
+    assert 'Soak for 2 minutes (CDC).' in texts
+    assert 'CDC’s bleach soak is for baby bottles and feeding items only. Never use it for drinking water.' in texts
+    assert not any('is not on this page' in x for x in texts)
+    special = [x for x in _texts(topics['surv-clean-and-disinfect']) if 'three more special-purpose bleach mixes' in x]
+    assert len(special) == 1 and 'Feeding babies and young children' in special[0] and 'Food poisoning and botulism' in special[0]
+    assert 'Butchering deer and small game' in special[0]   # the knife and tool soak (whole-pack read, C1)
+    assert 'never for drinking water' in special[0]
+    assert '5 parts clean water' in ' '.join(_texts(topics['surv-food-poisoning']))   # the clean-up mix is where the sentence says
+
+
+def test_the_one_to_one_knife_soak_is_for_knives_and_tools_only_and_trapping_sends_knives_to_it():
+    # whole-pack read C1: Clean and disinfect owns the household mixes, so counters get its food mix; NYS DOH's 1:1 soak stays on
+    # Butchering for knives and tools only, and Trapping's "clean and disinfect knives and tools" opens the page that has it
+    topics = _shipped('survival')
+    land = [x for tid, t in topics.items() if t.get('category') == 'land' for x in _texts(t)]
+    soak = [x for x in land if 'equal amount of water' in x]
+    assert len(soak) == 1, soak
+    assert 'for knives and tools only' in soak[0] and 'never put it on counters' in soak[0], soak[0]
+    assert 'never use it for drinking water' in soak[0]
+    for x in land:
+        low = x.lower()
+        assert not ('counter' in low and ('same mix' in low or 'equal amount' in low) and 'never put it on counters' not in low), x
+    butcher = ' '.join(_texts(topics['surv-land-butchering']))
+    assert 'To sanitize counters and other surfaces, and the tools you used on any animal other than a deer, use the food mix in Clean and disinfect.' in butcher
+    assert 's:surv-clean-and-disinfect' in _links(topics['surv-land-butchering'])
+    trap = topics['surv-land-trapping']
+    sec = next(s for s in trap['sections'] if s['h'] == 'Rabies, disease and handling')
+    item = next(x for b in sec['blocks'] for x in b.get('list', []) if x.startswith('Clean and disinfect knives and tools'))
+    assert 'Butchering deer and small game' in item, item
+    assert 's:surv-land-butchering' in [b['link'] for b in sec['blocks'] if 'link' in b]
+
+def _all_texts(t):
+    # every user-visible string of a topic: the summary, Do first, blocks and table cells
+    out = [t.get('summary', '')] + list(t.get('doFirst', []))
+    for sec in t['sections']:
+        out.append(sec['h'])
+        for b in sec['blocks']:
+            for k in ('p', 'warn', 'cap'):
+                if k in b:
+                    out.append(b[k])
+            for k in ('list', 'steps'):
+                out.extend(b.get(k, []))
+            if 'table' in b:
+                out.extend(b['table']['head'])
+                out.extend(c for row in b['table']['rows'] for c in row)
+    return out
+
+
+def test_warm_meat_time_limits_each_have_one_owner():
+    # whole-pack read C2: Is it still good? owns the 2-hour and 1-hour rule for perishable food (quoted, never restated); Field dressing
+    # game owns how fast a carcass is chilled (3 to 4 hours in air above 40°F, 24 hours otherwise) and NYS DOH's 45°F sentence; Preserving
+    # game meat quotes or links it
+    topics = _shipped('survival')
+    still = 'never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).'
+    assert still in ' '.join(_all_texts(topics['surv-food-still-good']))
+    land = {tid: t for tid, t in topics.items() if t.get('category') == 'land'}
+    for tid, t in land.items():
+        for x in _all_texts(t):
+            rest = x.replace(still, '')
+            if 'perishable' in rest.lower():   # a perishable-food time limit only inside the quoted rule
+                assert not re.search(r'\bhours?\b', rest), (tid, x)
+            # whole-branch review I3: Preserving game meat quotes the owner's caution word for word; the hours appear nowhere else
+            owner = '“This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it.”'
+            if tid == 'surv-land-keeping-meat':
+                x = x.replace(owner, '')
+            if '3 to 4 hours' in x or 'three to four hours' in x:
+                assert tid == 'surv-field-dressing-game', (tid, x)
+            n45 = len(re.findall(r'(?<!\d)45°F', x))   # not 145°F
+            if n45 and tid != 'surv-field-dressing-game':
+                assert n45 == x.count('“Keep game cool, with ice or below 45°F (7°C) (the meat), until it is butchered'), (tid, x)
+    fd = _all_texts(land['surv-field-dressing-game'])
+    assert any(still in x for x in fd)
+    cooling = next(s for s in land['surv-field-dressing-game']['sections'] if s['h'] == 'Cooling the carcass')
+    text = ' '.join(_all_texts({'sections': [cooling]}))
+    for must in ('within 3 to 4 hours of the kill (Ohio State University Extension)', 'No ice, snow or fridge, and the air above 40°F',
+                 'Found later.', 'This app’s caution: don’t eat it.'):
+        assert must in text, must
+    assert 's:surv-food-still-good' in _links({'sections': [cooling]})
+    keep = land['surv-land-keeping-meat']
+    assert 'Hanging a carcass below' in keep['doFirst'][0] and '45°F' not in keep['doFirst'][0]
+    hanging = next(s for s in keep['sections'] if s['h'] == 'Hanging a carcass')
+    assert 's:surv-field-dressing-game' in _links({'sections': [hanging]})
+    for tid in ('surv-land-big-game', 'surv-land-keeping-meat'):
+        assert 's:surv-field-dressing-game' in _links(land[tid]), tid
+
+def test_preserving_game_meat_says_the_agency_jerky_needs_a_working_oven_or_dehydrator_and_never_sends_drying_outdoors():
+    # whole-pack read C3 and C4: the summary and Do first name the dehydrator or oven and the power outage; "outdoors only" is for smoke
+    # and fire, never for drying; the jerky method quotes Cook without power on the gas oven, word for word, and links it
+    topics = _shipped('survival')
+    keep = topics['surv-land-keeping-meat']
+    box = ' '.join(keep['doFirst'])
+    for where in (keep['summary'], box):
+        assert 'dehydrator' in where and 'oven that holds 140°F (60°C)' in where and 'without power' in where or 'no power' in where, where
+        assert 'the agencies advise against drying meat in the sun or open air' in where.lower(), where
+    for x in _all_texts(keep):
+        low = x.lower()
+        assert 'dry meat outdoors' not in low and 'smoke and dry meat' not in low and 'dry meat only outdoors' not in low, x
+    oven = 'Never the oven: most can’t be lit by hand in an outage (GE, Whirlpool, KitchenAid), and Wolf says not to try.'
+    assert oven in ' '.join(_texts(topics['surv-food-cooking-no-power']))
+    jerky = next(sec for sec in keep['sections'] if sec['h'] == 'Jerky')
+    jtext = ' '.join(_all_texts({'sections': [jerky]}))
+    assert oven in jtext and 'this method can’t be done' in jtext
+    assert 's:surv-food-cooking-no-power' in _links({'sections': [jerky]})
+
+def test_whole_pack_read_fixes_keep_one_answer_per_question():
+    # whole-pack read, Important and Minor findings and carried items: each page that used to contradict another now links or quotes it
+    topics = _shipped('survival')
+    t = lambda tid: ' '.join(_all_texts(topics[tid]))
+    fd, butcher, hub = t('surv-field-dressing-game'), t('surv-land-butchering'), t('surv-land-start')
+    # I1: game with no thermometer gets a plain answer; the fish page gives FDA's own words for fish
+    assert 'No thermometer: no source opened gives a sign you can go by for game.' in fd
+    assert 'well past the point they look done; never eat game rare.' in fd   # re-check R3
+    assert 'Cooling the carcass, and what to do with no ice, snow or fridge or with a deer found later' in t('surv-land-keeping-meat')   # R1
+    assert 'a gut-shot deer left overnight in mild air is not eaten' in t('surv-land-big-game')   # R5
+    assert '“If you don’t have a food thermometer, there are other ways to determine whether seafood is done.”' in t('surv-land-fish-cleaning')
+    # I2: one decision on a deer's heart and liver, on Butchering; Field dressing and the kit point to it
+    assert ('eat a deer’s heart and liver only if the deer has tested negative for chronic wasting disease (testing is possible only in '
+            'normal times); with no test, leave them.') in butcher and 'in normal times, eat a deer' not in butcher
+    assert 'Keep the heart and liver in a clean bag if they look healthy' not in fd and 'Heart, liver and tongue' in fd
+    kit = {i['id']: i for i in _shipped('checklists')['land-kit']['items']}
+    assert 'when Butchering deer and small game says to keep them' in kit['bags']['note']
+    # I3: an animal already caught or shot that looks sick has steps on the owner page, and Trapping and Small game link to them
+    assert any(sec['h'] == 'Already caught or shot, and it looks sick' for sec in topics['surv-field-dressing-game']['sections'])
+    for tid in ('surv-land-trapping', 'surv-land-small-game'):
+        assert '“Already caught or shot, and it looks sick”' in t(tid), tid
+    assert 'In normal times, report sick rabbits' in t('surv-land-small-game')
+    # I4: the hub's spring cattail line carries the iris warning from Wild plants, word for word
+    iris = 'Yellow iris can be confused with cattail, especially when it is not in bloom: their leaves are very similar (Government of Alberta).'
+    assert iris in t('surv-food-and-wild-plants') and '“' + iris + '”' in hub
+    # I5: no plant is eaten on looks alone
+    assert 'looks like a store-bought' not in t('surv-food-and-wild-plants')
+    # I6: the kit's saw note follows Butchering, not the pelvis and breastbone
+    assert 'pelvis' not in kit['hatchet-saw']['note'] and 'Butchering deer and small game' in kit['hatchet-saw']['note']
+    # I7: Field dressing's birds link the migratory bird rule
+    birds = next(sec for sec in topics['surv-field-dressing-game']['sections'] if sec['h'] == 'Birds')
+    assert 's:surv-land-ny-rules' in _links({'sections': [birds]})
+    # I8: the babies page links the fish advice
+    assert 's:surv-land-fish-cleaning' in _links(topics['surv-food-babies-children'])
+    # I10: bear jerky is sent to the page that has it
+    assert 'why bear is never made into jerky is in Preserving game meat' in t('surv-land-big-game')
+    assert 'bear' in t('surv-land-keeping-meat').lower() and 'jerky' not in fd.lower()
+    # M1: Butchering's summary names every part its never-eat box names
+    assert 'spleen, pancreas, tonsils' in topics['surv-land-butchering']['summary']
+    # M2: the hub quotes Fishing for food's ice warning word for word
+    ice = next(b['warn'] for sec in topics['surv-traps-and-fishing']['sections'] if sec['h'] == 'Ice fishing' for b in sec['blocks'] if 'warn' in b)
+    quoted = ice.split(' Slush ice')[0]
+    assert '“' + quoted + '”' in hub and '3 to 4 inches' not in hub
+    # M3: gloves always, above all with rabbits, hares and rodents
+    assert kit['gloves']['note'].startswith('Always;')
+    # carried 1: the low-head dam warning sits with the line that sends people below a dam
+    where = next(sec for sec in topics['surv-traps-and-fishing']['sections'] if sec['h'] == 'Where the fish are')
+    assert any('Low-head dams' in b.get('warn', '') for b in where['blocks'])
+    # carried 4: Trapping's lead-in sits directly above the manual's steps
+    kill = next(sec for sec in topics['surv-land-trapping']['sections'] if sec['h'] == 'Killing a trapped animal')
+    i = next(n for n, b in enumerate(kill['blocks']) if 'steps' in b)
+    assert kill['blocks'][i - 1] == {'p': 'The steps, from the NYS DEC trapper manual, in its order:'}
+    assert 'From the NYS DEC trapper manual, in its order.' not in t('surv-land-trapping')
+    # carried 5: no cell says both "eat by the statewide table" and "don't eat" in the old words
+    assert 'As the first table' not in t('surv-land-fish-cleaning')
+
+def test_fishing_fish_cleaning_and_trapping_split_the_old_traps_topic():
+    # land pack batch C (spec 4 rows 2, 5, 7; spec 10 calls 4, 7, 9): Fishing for food keeps the id and is fishing only; the fish
+    # cooking sentence Cook without power quotes word for word from Field dressing game is carried identically by the new owner of
+    # fish at 145°F; Trapping states New York's position on snares and deadfalls on the same page; no land topic has a Where or When tag
+    topics = _shipped('survival')
+    fishing, clean, trap = topics['surv-traps-and-fishing'], topics['surv-land-fish-cleaning'], topics['surv-land-trapping']
+    assert fishing['title'] == 'Fishing for food'
+    for t in (fishing, clean, trap):
+        assert t['category'] == 'land' and 'where' not in t and 'when' not in t
+    quoted = 'Cook all wild game and birds to at least 165°F in the thickest part, and fish to 145°F.'
+    assert quoted in ' '.join(_texts(clean))
+    assert quoted in ' '.join(_texts(topics['surv-food-cooking-no-power']))
+    fish_text = ' '.join(_texts(fishing)).lower()
+    for word in ('snare', 'deadfall', 'body-gripping', 'foothold'):
+        assert word not in fish_text, word
+    trap_text = ' '.join(_texts(trap))
+    assert 'New York law forbids setting a snare or any noose that can take an animal' in trap_text
+    assert 'New York law counts a deadfall as a trapping device' in trap_text
+    assert 'This app’s caution: don’t set one without asking DEC.' in trap_text and 'Illegal in normal times' not in trap_text
+    assert 'touch the eye or mouth with the striking tool, never your hand' in trap_text
+    assert 's:surv-land-ny-rules' in _links(trap) and 's:surv-land-ny-rules' in _links(fishing)
+    assert {'s:surv-land-butchering', 's:surv-land-keeping-meat', 's:surv-field-dressing-game'} <= set(_links(trap))
+    fd = topics['surv-field-dressing-game']
+    assert 's:surv-land-fish-cleaning' in _links(fd) and quoted in ' '.join(_texts(fd))
+    for t in ('surv-food-when-short', 'surv-food-power-out'):
+        labels = [b['label'] for s in topics[t]['sections'] for b in s['blocks'] if b.get('link') == 's:surv-traps-and-fishing']
+        assert labels == ['Fishing for food'], (t, labels)
+    assert 's:surv-land-fish-cleaning' in _links(fishing) and 's:surv-traps-and-fishing' in _links(clean)
+
+
+# ---------- Food from the land (v7.7): home, links and labels after the content ----------
+
+LAND_CAT = 'Food from the land'
+
+
+def test_land_category_holds_exactly_the_twelve_land_topics_and_basics_none_of_the_moved_ones(page, app_url):
+    assert sorted('s:' + i for i, t in _shipped('survival').items() if t.get('category') == 'land') == sorted(LAND)
+    shipped_home(page, app_url)
+    open_cat(page, LAND_CAT)
+    land = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
+    basics = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"basics\"] button[data-key]')].map(b => b.dataset.key)")
+    assert land[0] == 's:surv-land-start' and sorted(land) == sorted(LAND), land
+    assert len(basics) == 8 and not set(LAND) & set(basics), basics
+
+
+def test_land_category_header_and_its_twelve_rows_fit_360px(page, app_url):
+    shipped_home(page, app_url)
+    open_cat(page, LAND_CAT)
+    for night in (False, True):
+        if night:
+            page.click('#nightBtn')
+            assert page.evaluate('document.documentElement.dataset.theme') == 'night'
+        d = page.locator('#survCats details[data-cat="land"]')
+        boxes = [d.locator('summary').bounding_box()] + [b.bounding_box() for b in d.locator('button[data-key]').all()]
+        assert len(boxes) == 13
+        for b in boxes:
+            assert b['x'] >= 0 and b['x'] + b['width'] <= 360, b
+        assert page.evaluate('document.documentElement.scrollWidth') <= 360
+        assert all(b['height'] >= 48 for b in boxes), [b['height'] for b in boxes]
+        spill = page.evaluate("""[...document.querySelectorAll('#survCats details[data-cat="land"] button[data-key]')].filter(b => {
+            const r = b.getBoundingClientRect(), s = b.querySelector('span').getBoundingClientRect();
+            return s.left < r.left || s.right > r.right || b.scrollWidth > b.clientWidth + 1; }).map(b => b.textContent)""")
+        assert spill == []
+
+
+def test_every_link_in_every_land_topic_resolves_and_is_labelled_with_the_title():
+    topics = _shipped('survival')
+    known = _known_keys()
+    seen = 0
+    for tid in [k[2:] for k in LAND]:
+        for sec in topics[tid]['sections']:
+            for b in sec['blocks']:
+                if 'link' in b:
+                    seen += 1
+                    assert b['link'] in known, f'{tid} / {sec["h"]}: unknown link {b["link"]}'
+                    if b['link'][:2] in ('p:', 's:', 'c:'):
+                        assert b['label'] == _title_of(b['link']), f'{tid} / {sec["h"]}: label {b["label"]!r} for {b["link"]}'
+                    elif b['link'].startswith('u:'):
+                        assert b['label'].strip(), f'{tid}: empty label for {b["link"]}'
+    assert seen > 100   # a handful would mean the walk found nothing
+
+
+LAND_BASE = '0244043'   # the search changes, before any land content: what the older pages looked like before this pack
+
+
+def _base_topic(name):
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    r = subprocess.run(['git', 'show', f'{LAND_BASE}:src/survival/{name}.json'], cwd=root, capture_output=True, text=True, encoding='utf-8')
+    if r.returncode != 0:   # a clone without the base commit must not pass these checks by skipping them
+        pytest.fail(f'commit {LAND_BASE} is not in this clone, so the older pages cannot be compared with it: '
+                    f'fetch the full history (git fetch --unshallow) and run again. git said: {r.stderr.strip()}')
+    return json.loads(r.stdout)
+
+
+def _link_blocks(t):
+    return [b for sec in t['sections'] for b in sec['blocks'] if 'link' in b]
+
+
+def test_every_link_the_land_pack_added_or_relabelled_on_older_pages_resolves_and_is_labelled_with_the_title():
+    # older pages keep labels they always had (some are not their target's title, e.g. "Hypothermia care"); every link block this pack
+    # added or relabelled carries the target's title, and every link on an edited older page still resolves
+    topics, known = _shipped('survival'), _known_keys()
+    edited = []
+    for tid, t in sorted(topics.items()):
+        if t.get('category') == 'land':
+            continue
+        was = _base_topic(tid)
+        if was == t:
+            continue
+        edited.append(tid)
+        old = _link_blocks(was)
+        for b in _link_blocks(t):
+            assert b['link'] in known, f'{tid}: unknown link {b["link"]}'
+            if b not in old and b['link'][:2] in ('p:', 's:', 'c:'):
+                assert b['label'] == _title_of(b['link']), f'{tid}: label {b["label"]!r} for {b["link"]}'
+    assert {'surv-priorities', 'surv-dangerous-animals', 'surv-food-when-short', 'surv-food-power-out', 'surv-food-cooking-no-power',
+            'surv-food-preserving', 'surv-clean-and-disinfect', 'surv-fallout-water-and-food'} <= set(edited), edited
+
+
+# The plan's list (land plan, Task 7): one link block each from the older page into the pack, and no second
+LAND_POINTERS = {'surv-priorities': 's:surv-land-start', 'surv-dangerous-animals': 's:surv-land-big-game',
+                 'surv-food-when-short': 's:surv-land-start', 'surv-food-power-out': 's:surv-land-start',
+                 'surv-food-cooking-no-power': 's:surv-field-dressing-game'}
+
+
+@pytest.mark.parametrize('tid,target', sorted(LAND_POINTERS.items()))
+def test_the_older_pages_on_the_plan_list_gain_exactly_one_link_block_into_the_pack(tid, target):
+    topics = _shipped('survival')
+    now, was = topics[tid], _base_topic(tid)
+    land = {'s:' + i for i, t in topics.items() if t.get('category') == 'land'} | {'c:land-kit'}
+    old_links = [b['link'] for b in _link_blocks(was)]
+    added = [b for b in _link_blocks(now) if b['link'] not in old_links]
+    assert added == [{'link': target, 'label': _title_of(target)}], added
+    assert target in land
+    # nothing else was reworded: with the added block left out, every block is as it was, apart from labels and names that now follow
+    # a renamed title (spec 10 call 9)
+    renamed = lambda x: json.loads(json.dumps(x).replace('Food and wild plants', 'Wild plants').replace('Traps and fishing', 'Fishing for food'))
+    for sn, sw in zip(now['sections'], was['sections']):
+        assert sn['h'] == sw['h']
+        bn = [b for b in sn['blocks'] if b not in added]
+        assert len(bn) == len(sw['blocks']), (tid, sn['h'])
+        for a, b in zip(bn, sw['blocks']):
+            if a != b:
+                assert a == renamed(b), (tid, a, b)
+                if 'link' in a:
+                    assert a['label'] == _title_of(a['link']), (tid, a)
+    assert len(now['sections']) == len(was['sections'])
+
+
+def test_the_land_hub_links_trapping_fish_cleaning_and_new_york_rules_where_its_text_names_them():
+    hub = _shipped('survival')['surv-land-start']
+    sections = {sec['h']: [b['link'] for b in sec['blocks'] if 'link' in b] for sec in hub['sections']}
+    everything = sections['Everything in Food from the land']
+    assert everything[:3] == ['s:surv-traps-and-fishing', 's:surv-land-fish-cleaning', 's:surv-land-trapping'], everything
+    assert 's:surv-land-ny-rules' in sections['Who should not go out']   # its text says "see New York rules"
+
+
+def test_fishing_fish_cleaning_and_trapping_link_the_hub_and_preserving_food_points_to_preserving_game_meat():
+    topics = _shipped('survival')
+    for tid in ('surv-traps-and-fishing', 'surv-land-fish-cleaning', 'surv-land-trapping', 'surv-food-and-wild-plants',
+                'surv-field-dressing-game', 'surv-land-butchering', 'surv-land-keeping-meat', 'surv-land-ny-rules', 'surv-land-after-fallout'):
+        assert 's:surv-land-start' in _links(topics[tid]), tid
+    assert topics['surv-land-keeping-meat']['title'] == 'Preserving game meat'
+    pointers = [b for b in _link_blocks(topics['surv-food-preserving']) if b['link'] == 's:surv-land-keeping-meat']
+    assert pointers and all(b['label'] == 'Preserving game meat' for b in pointers)
+    rules = _links(topics['surv-land-ny-rules'])
+    for k in ('s:surv-land-trapping', 's:surv-traps-and-fishing', 's:surv-land-fish-cleaning', 's:surv-land-big-game', 's:surv-land-small-game'):
+        assert k in rules, k
+
+
+# ---------- Food from the land (v7.7): whole-branch review fixes ----------
+
+FISH_SENSITIVE = 'People who may become pregnant (under age 50) and children under 15'   # NYS DOH's own definition, re-opened
+
+
+def test_every_fish_advice_table_names_both_groups_in_its_head_and_each_water_has_its_own_table():
+    # whole-branch review I1: a 39-row table left the two advice columns unlabelled after a screen; now every advice table is one water
+    # (or the statewide advice) and carries both groups in its head; the advice in the rows is unchanged
+    t = _shipped('survival')['surv-land-fish-cleaning']
+    sec = next(s for s in t['sections'] if s['h'] == 'New York’s advice on eating fish you catch')
+    blocks = sec['blocks']
+    tables = [(n, b['table']) for n, b in enumerate(blocks) if 'table' in b]
+    assert len(tables) >= 20, len(tables)
+    assert tables[0][1]['head'] == ['Fish (statewide advice)', 'Most people', FISH_SENSITIVE]
+    rows = []
+    for n, tb in tables[1:]:
+        assert tb['head'] == ['Fish', 'Most people', FISH_SENSITIVE], tb['head']
+        assert 'p' in blocks[n - 1], 'each water is named in the line above its table'
+        rows += tb['rows']
+    assert len(rows) == 38 and all(len(r) == 3 for r in rows)
+    caution = ['Every other fish', 'State advice: statewide table. This app’s caution: don’t eat', 'Don’t eat']
+    assert rows.count(caution) == 2   # the app's more cautious cells stay as approved
+    for x in _all_texts(t):
+        assert 'Sensitive' not in x, x
+    assert 'one-half pound (227 g)' in ' '.join(_texts(t))
+
+
+def test_no_topic_carries_a_hard_coded_swipe_sentence():
+    # whole-branch review I6: the app shows its own cue above a table that scrolls; a sentence in the content showed above tables that fit
+    for tid, t in _shipped('survival').items():
+        for x in _all_texts(t):
+            assert 'swipe' not in x.lower(), (tid, x)
+
+
+def test_warm_weather_meat_gets_one_answer_on_field_dressing_and_preserving_game_meat():
+    # whole-branch review I3: the cooling limit comes first and belongs to Field dressing game; no keeping method extends it. Both pages
+    # say so in the same words, labelled as the app's caution, and Preserving game meat quotes the owner's line and links it
+    topics = _shipped('survival')
+    fd, keep = topics['surv-field-dressing-game'], topics['surv-land-keeping-meat']
+    cooling = next(s for s in fd['sections'] if s['h'] == 'Cooling the carcass')
+    kinds = [next(iter(b)) for b in cooling['blocks']]
+    noice = cooling['blocks'][2]['warn']
+    assert cooling['blocks'][1]['warn'].startswith('How long you have.') and noice.startswith('No ice, snow or fridge')   # minor M3
+    assert cooling['blocks'][3]['p'].startswith('Found later.') and kinds[4] == 'link'
+    owner = 'This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it.'
+    assert owner in noice
+    shared = ('and cook the meat to 165°F (74°C) before eating, as each method', 'such as smoke-drying and sun and air drying, are not '
+              'agency-verified, for warm weather or any other.')
+    assert 'This app’s caution: no way of keeping meat in Preserving game meat makes that time longer.' in noice
+    labels = next(s for s in keep['sections'] if s['h'] == 'The two labels')
+    joined = [b['p'] for b in labels['blocks'] if 'p' in b and 'makes that time longer' in b['p']]
+    assert len(joined) == 1 and '“' + owner + '”' in joined[0]
+    assert 'This app’s caution, the same as Field dressing game’s: no method on this page makes that time longer.' in joined[0]
+    for part in shared:
+        assert part in noice and part in joined[0], part
+    assert 's:surv-field-dressing-game' in _links({'sections': [labels]})
+
+
+def test_trapping_says_how_to_tell_the_traps_apart_and_how_to_set_them_before_where_to_set_them():
+    # whole-branch review I2: a first-time trapper holding a borrowed trap is told which kind it is and how it is set, from the trapper
+    # manuals; what no source opened gives (every body-gripping step, setting a cage trap) is the app's caution, never written from memory
+    trap = _shipped('survival')['surv-land-trapping']
+    heads = [s['h'] for s in trap['sections']]
+    i = heads.index('Which trap you have, and setting it')
+    assert heads[i - 1] == 'The kinds of trap' and heads[i + 1].startswith('Muskrat, beaver and raccoon')
+    sec = trap['sections'][i]
+    text = ' '.join(_texts({'sections': [sec]}))
+    for kind in ('Foothold trap:', 'Body-gripping trap, also called a Conibear trap:', 'Cage or box trap:'):
+        assert kind in text, kind
+    steps = next(b['steps'] for b in sec['blocks'] if 'steps' in b)
+    assert len(steps) == 5 and steps[0].startswith('Put the palm of each hand on one of the springs')
+    assert 'Setting a coil-spring foothold trap, from the IAFWA trapper education manual, in its order.' in text
+    for must in ('setting tongs', 'safety gripper', 'have someone who has set one show you how to set it and how to release it safely',
+                 'This app’s caution: this page does not teach every step of setting a body-gripping trap, or how to set a cage trap.',
+                 'Never set a body-gripping trap until someone who has set one has shown you how.'):
+        assert must in text, must
+    assert 's:surv-land-ny-rules' in _links({'sections': [sec]})
+    assert any(s['name'].startswith('International Association of Fish and Wildlife Agencies, Trapper Education Manual') for s in trap['sources'])
+
+
+def test_whole_branch_review_minor_fixes():
+    topics = _shipped('survival')
+    # M2: Wild plants' Do first says where the Poisoning link is, and it is there
+    plants = topics['surv-food-and-wild-plants']
+    assert 'It is the first link under “Before you eat any wild plant”, below.' in plants['doFirst'][0]
+    before = next(s for s in plants['sections'] if s['h'] == 'Before you eat any wild plant')
+    assert _links({'sections': [before]})[0] == 'p:poisoning'
+    # M5: a v7.6 pin on "Traps and fishing" opens Fishing for food, whose first link block reaches Trapping
+    first = topics['surv-traps-and-fishing']['sections'][0]
+    assert {'link': 's:surv-land-trapping', 'label': 'Trapping'} in first['blocks']
+    # M10: Butchering names its Massachusetts source in full once, as the source list does
+    assert 'Massachusetts deer processing workshop, instructor notes, called “Massachusetts notes” below' in ' '.join(_texts(topics['surv-land-butchering']))

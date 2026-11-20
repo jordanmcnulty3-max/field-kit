@@ -1,0 +1,394 @@
+{
+  "id": "surv-land-butchering",
+  "title": "Butchering deer and small game",
+  "category": "land",
+  "keywords": [
+    "butcher",
+    "butchering",
+    "quartering",
+    "boning out",
+    "tenderloin",
+    "deer liver",
+    "ground venison",
+    "gambrel"
+  ],
+  "summary": "Hang the cooled deer by its hind legs, skin it, take off the shoulders, backstraps, tenderloins, neck and hind legs, and bone the meat out. Trim off the fat, silver skin and bloodshot meat. Never eat the brain, spinal cord, eyes, spleen, pancreas, tonsils or lymph nodes, and avoid sawing through bone or the spinal cord: chronic wasting disease is in New York deer. Grind only fresh meat and keep it cold; this app gives no cured or fermented sausage. Keep tools for this job only and clean them well. Cook all game to 165°F (74°C).",
+  "sections": [
+    {
+      "h": "Before you start",
+      "blocks": [
+        {
+          "p": "Start with a carcass that was field dressed and cooled as in Field dressing game. How long it can hang first is in Preserving game meat."
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "list": [
+            "Tools: a sharp short knife, a sharp boning or fillet knife, a meat saw or fine-toothed saw, a gambrel or a stick through the hind legs, rope, a table or counter, airtight bags or wrap, and a cool place to work (Indiana DNR, New Mexico State University Extension).",
+            "Wear nitrile, rubber or latex gloves, especially if your hands have cuts or sores. Don’t eat, drink or smoke while you work (NYS Department of Health).",
+            "Use your butchering tools for nothing else, and keep them apart from your kitchen utensils (NYS Department of Health).",
+            "Do one animal at a time, and keep each deer’s meat in its own labelled container (Cornell Wildlife Health Lab).",
+            "Bone the meat out, and keep contact with the brain, spinal cord, lymph nodes and spleen to a minimum (Cornell Wildlife Health Lab, North Dakota State University Extension). Avoid handling or cutting through the skull or spinal cord (NYS Department of Health), and avoid sawing into bone where you can; trim generously near shattered bone, the spine and the skull (Cornell Wildlife Health Lab)."
+          ]
+        },
+        {
+          "warn": "Chronic wasting disease is in New York deer, and cooking does not remove its risk (Field dressing game). The parts never to eat are listed below."
+        }
+      ]
+    },
+    {
+      "h": "Hanging and skinning",
+      "blocks": [
+        {
+          "steps": [
+            "Hang the deer by its hind legs from a gambrel, head down (Massachusetts deer processing workshop, instructor notes, called “Massachusetts notes” below; New Mexico State University Extension). Hang it high enough to work under: Indiana DNR says at least 8 feet (2.4 m) off the ground.",
+            "Cut the hide all the way round each hind leg at the hock, then down the inside of each leg (New Mexico State University Extension).",
+            "Take off the front legs at the joint: cut a circle down to the bone around it (Indiana DNR). Split the skin of each front leg along the hair seam (Massachusetts notes).",
+            "Pull the hide down with both hands, freeing it with the knife where it sticks. If muscle starts to come away with the hide, cut it back onto the carcass. Do the belly last: its thin muscles tend to come off with the hide (New Mexico State University Extension).",
+            "Work the hide down the neck to the head (Massachusetts notes). Taking the head off means cutting through the spine at the base of the skull (Massachusetts notes). Use a disinfected or disposable saw blade, and never cut meat with the blade you used on bone (Cornell Wildlife Health Lab). Keep the brain and spinal cord off the meat, and wash your hands with soap and water if you touch them (NYS Department of Health).",
+            "Wash any hair off the meat with cold water (Indiana DNR)."
+          ]
+        },
+        {
+          "p": "No gambrel? A deer lying on its side can be skinned and quartered one side at a time without gutting it: cut the hide along the spine, peel it down, take off the shoulder and the hindquarter, then the backstrap and the neck meat, pull the skin back up to keep dirt off, and turn it over (Kentucky Department of Fish and Wildlife Resources, Kentucky Afield). Put each quarter in a game bag or a clean pillow case in the shade, and get the meat on ice in a cooler, with a thermometer on top of the ice to check the cooler stays below 40°F (4°C) (Kentucky Afield)."
+        }
+      ]
+    },
+    {
+      "h": "Quartering",
+      "blocks": [
+        {
+          "steps": [
+            "Front shoulders: pull the leg away from the ribs and cut along the natural seam, following the shoulder blade. Keep the knife in the connective tissue rather than in the muscle (Penn State Extension). There is no joint to cut through (Massachusetts notes). Do both sides.",
+            "Backstraps: make a long cut down each side of the spine, then a short cross cut at each end. Keep the knife tight to the backbone so the meat stays on the backstrap, and lift each one off the ribs (Penn State Extension, Kentucky Afield).",
+            "Tenderloins: the two small tube-shaped muscles inside, along the underside of the spine, near the pelvis. Keep the blade against the bone and tease each one free (Penn State Extension, Kentucky Afield, New Mexico State University Extension).",
+            "Neck: take off the neck meat and trim it (Kentucky Afield, Indiana DNR).",
+            "Flank and rib meat: cut the thin flank meat from the sides and belly, and the meat from between and over the ribs (Kentucky Afield, Penn State Extension). Use rib meat only if it is in good condition with no gut material on it (Massachusetts notes).",
+            "Hind legs: follow the hipbone to the ball joint and cut into the joint with the knife, staying tight to the bone (Penn State Extension, Kentucky Afield). New Mexico State University Extension cuts this joint with a knife, not a saw, to keep bone dust and marrow off the meat. Get a second person to help hold a heavy leg (Indiana DNR)."
+          ]
+        },
+        {
+          "p": "What is left is bone and the spine. Bag the bones, sinew and hide for disposal (Massachusetts notes), and don’t feed carcass parts to pets or leave them for other animals (NYS Wildlife Health Program)."
+        }
+      ]
+    },
+    {
+      "h": "Boning out the hind leg",
+      "blocks": [
+        {
+          "steps": [
+            "Find the knee joint and cut through it: the lower part is the shank (Indiana DNR).",
+            "Cut the meat away from the thigh bone (femur), letting the bone guide your knife (Indiana DNR, New Mexico State University Extension).",
+            "Separate the muscles along their natural seams; each sits in its own sheet of connective tissue (Penn State Extension, New Mexico State University Extension). They are the sirloin, which is round and hugs the front of the thigh bone (Indiana DNR), also called the sirloin tip, round tip or “football roast” (Massachusetts notes); the top round; the bottom round; and the eye of round (Indiana DNR, Massachusetts notes).",
+            "Find the waxy gland in the fat between the top, bottom and eye of round. Cut it out and throw it away; never grind it (Massachusetts notes).",
+            "Trim the meat near the long tendon for grinding: it is too tough for steak (New Mexico State University Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "The cuts and what each is good for",
+      "blocks": [
+        {
+          "fig": "land-deer-cuts",
+          "cap": "Tenderloins: the two small tube-shaped muscles inside, along the underside of the spine, near the pelvis."
+        },
+        {
+          "table": {
+            "head": [
+              "Cut",
+              "Where it comes from",
+              "Good for"
+            ],
+            "rows": [
+              [
+                "Backstrap (loin)",
+                "The long strip along each side of the spine, over the ribs",
+                "Steaks, usually 3/4 inch (2 cm) thick, or small roasts; the ends for stew (New Mexico State University Extension, Penn State Extension)"
+              ],
+              [
+                "Tenderloin",
+                "Inside, along the underside of the spine, near the pelvis",
+                "Steaks, thick or thin, or butterflied for a bigger steak (New Mexico State University Extension)"
+              ],
+              [
+                "Sirloin (sirloin tip, round tip)",
+                "Hind leg: round, hugging the front of the thigh bone",
+                "Roast, a large braised roast, or thin steaks 1/4 to 3/8 inch (6 to 10 mm) for frying (New Mexico State University Extension, Massachusetts notes)"
+              ],
+              [
+                "Top round, bottom round, eye of round",
+                "Hind leg: the big muscles around the thigh bone",
+                "Roasts, or thin steaks cut just before frying; jerky; braising (New Mexico State University Extension, Massachusetts notes)"
+              ],
+              [
+                "Shoulder",
+                "Front leg and shoulder blade",
+                "Arm roast; small thin steaks; braised for shredded meat; stew; grind (New Mexico State University Extension, Massachusetts notes, Penn State Extension)"
+              ],
+              [
+                "Neck",
+                "Between the shoulders and the head",
+                "Roast it whole or tied as roasts; stew; grind (New Mexico State University Extension, Kentucky Afield)"
+              ],
+              [
+                "Ribs and rib meat",
+                "The sides of the chest",
+                "Barbecue, grilling or stew; or the meat cut off for grinding (New Mexico State University Extension, Kentucky Afield, Massachusetts notes)"
+              ],
+              [
+                "Brisket",
+                "The front and sides of the chest",
+                "Barbecue (Kentucky Afield)"
+              ],
+              [
+                "Shank",
+                "The lower leg, below the knee",
+                "Meat trimmed off the heavy tendons for grinding (New Mexico State University Extension)"
+              ],
+              [
+                "Flank",
+                "The thin meat on the sides and belly",
+                "Jerky, plate steaks or grinding (Kentucky Afield)"
+              ],
+              [
+                "Trimmings",
+                "Everything left from the cuts above",
+                "Grinding, stew or jerky (New Mexico State University Extension, Indiana DNR)"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Whatever the cut, cook it to 165°F (74°C) in the thickest part: Field dressing game’s rule for all wild game. Jerky has its own heat step, in Preserving game meat."
+        }
+      ]
+    },
+    {
+      "h": "Trimming",
+      "blocks": [
+        {
+          "list": [
+            "Fat: trim all of it off. It turns rancid quickly (National Center for Home Food Preservation), it tastes bitter (Indiana DNR), and it carries most of the gamey taste (North Dakota State University Extension).",
+            "Silver skin, tendons and heavy connective tissue: trim them off the backstraps, tenderloins, neck and hind leg muscles (Indiana DNR, Massachusetts notes, Penn State Extension).",
+            "Lymph nodes sit between muscles in the connective tissue: boning out and carefully trimming the fat and connective tissue removes them (NYS Department of Health, Cornell Wildlife Health Lab).",
+            "Bloodshot and bruised meat: cut it out, with any dirt, droppings, hair and feathers (Penn State Extension). Throw out bruised or discoloured meat (NYS Department of Health).",
+            "Bullet damage: remove every bullet, slug, shot and fragment, and meat with fur, dirt, bone chips or plant material in it. Trim a generous distance from the wound channel, and throw out meat with heavy bullet damage (NYS Department of Health)."
+          ]
+        },
+        {
+          "warn": "Lead bullets shatter into pieces too small to see, feel or notice when eating. Ground meat from lead-shot game tends to hold more fragments than whole cuts. Children and people who can get pregnant should not eat game shot with lead (NYS Department of Health)."
+        }
+      ]
+    },
+    {
+      "h": "Heart, liver and tongue",
+      "blocks": [
+        {
+          "list": [
+            "Heart: run cold water through it while you squeeze it, to clear the blood from its chambers. Cut away all fat, arteries, veins and blood vessels, and any part damaged by the bullet or arrow. It is best eaten fresh, within a couple of days in a fridge (New Mexico Department of Game and Fish).",
+            "Liver: the signs that mean a liver is thrown away (off colour, cysts, poor condition, black fluke lines) are in Field dressing game. New Mexico Department of Game and Fish soaks a liver in cold water in a fridge for 24 hours, changing the water every 8 hours, to draw out blood, then slices it 1/2 inch (13 mm) thick.",
+            "Tongue: the US Army survival manual (FM 21-76, 2006 copy) says to cut it out, skin it and boil it until tender. NYS Department of Health says to avoid handling the saliva and mouth parts of game, and lists the tonsils among the parts that may carry chronic wasting disease. This app’s caution, now that the disease is in New York deer: don’t take the tongue from a deer."
+          ]
+        },
+        {
+          "p": "NYS Department of Health says the liver, kidney, heart and salivary glands may also carry a risk of chronic wasting disease, and that cooking does not remove it. This app’s caution, as for the tongue: eat a deer’s heart and liver only if the deer has tested negative for chronic wasting disease (testing is possible only in normal times); with no test, leave them. The heart and liver of other game, and of a deer that tested negative, are cooked to 165°F (74°C), like all game."
+        }
+      ]
+    },
+    {
+      "h": "Never eat",
+      "blocks": [
+        {
+          "warn": "Never eat the brain, spinal cord, eyes, spleen, pancreas, tonsils or lymph nodes of a deer: they may carry the prions of chronic wasting disease (NYS Department of Health). DEC treats the brain, spinal cord, spleen and eyes as high-risk parts. The US Army survival manual says the brain can be cooked and eaten; this app says never, for deer."
+        },
+        {
+          "list": [
+            "Throw away the intestines (NYS Department of Health).",
+            "Any animal whose organs smelled bad or showed greenish discharge or black blood: none of its meat (Penn State Extension). The other signs are in Field dressing game.",
+            "A rabbit liver with many white pinhead spots: the whole rabbit goes (Missouri Department of Conservation)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Bones and fat",
+      "blocks": [
+        {
+          "p": "New Mexico State University Extension (1994) saws the backbone into sections for soup stock. Since then NYS Department of Health has said to avoid cutting through the spinal cord, Cornell Wildlife Health Lab to avoid sawing into bone, and chronic wasting disease has been found in New York deer. This app gives no stock from deer backbone. No source opened for this app says how to make stock safely from other deer bones, or how to render deer fat, so neither is given here."
+        }
+      ]
+    },
+    {
+      "h": "Grinding",
+      "blocks": [
+        {
+          "list": [
+            "Grind trimmings, shank, neck and flank meat (New Mexico State University Extension, Indiana DNR). Take off the fat and other tissue first, so no lymph nodes go in (Cornell Wildlife Health Lab).",
+            "Clean and disinfect the grinder and everything you used, before and after (NYS Department of Health, Penn State Extension): wash it, then sanitize it as under “Knives and keeping the work clean” below.",
+            "Never put your hand near or into the throat of a grinder (Massachusetts notes).",
+            "Keep ground meat cold and use it quickly: how long it keeps is in Preserving game meat. Cook it to 165°F (74°C)."
+          ]
+        },
+        {
+          "p": "This app gives no way to grind meat without power: no source opened for it describes one."
+        },
+        {
+          "warn": "Fresh ground meat only: this app gives no cured, dried or fermented sausage. Cured meats rely on nitrite to hold back the germ that causes botulism (National Center for Home Food Preservation), and a mistake with sodium nitrite in a curing recipe can be a lethal dose (National Center for Home Food Preservation). E. coli O157:H7 can survive the drying and fermenting of sausage (National Center for Home Food Preservation). Curing (salting), drying or smoking alone does not consistently kill trichinella worms (CDC). The National Center for Home Food Preservation does not recommend preparing homemade, non-fermented sausages that are not fully cooked."
+        }
+      ]
+    },
+    {
+      "h": "Small game and birds",
+      "blocks": [
+        {
+          "list": [
+            "Rabbit: after skinning and gutting (Field dressing game), cut off the front and hind quarters at the shoulder and hip joints (Missouri Department of Conservation).",
+            "Squirrel: skin and gut it as in Field dressing game, make sure no hair is left on it, and wash the body cavity (Missouri Department of Conservation).",
+            "Birds: separate the breast from the neck, back and legs by pulling them apart (Penn State Extension). On ducks, cut off the wings at the joints and the head, and pluck the pin feathers. Scalding in hot water, 145°F (63°C), loosens feathers (Clemson Cooperative Extension).",
+            "Soak upland birds in cold water for 1 to 2 hours to remove excess blood (Clemson Cooperative Extension).",
+            "Remove all shot, fragments and feathers, and cut out bloodshot meat (NYS Department of Health, Penn State Extension).",
+            "Cook all game birds and small game to 165°F (74°C) (Penn State Extension, Missouri Department of Conservation)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Knives and keeping the work clean",
+      "blocks": [
+        {
+          "list": [
+            "Keep your knives sharp, with a whetstone or a steel (Penn State Extension, North Dakota State University Extension). A dull blade makes you push harder, and that can lead to injury (Massachusetts notes).",
+            "Wash your knife, hands and cutting board often with warm, soapy water (North Dakota State University Extension, Penn State Extension), and wash knives and tools with soap and hot water between animals (Cornell Wildlife Health Lab).",
+            "After butchering, wash tools, work surfaces and your hands and arms well with soap and water, then rinse tools and surfaces with boiling water (212°F, 100°C) or sanitize them (NYS Department of Health). To sanitize counters and other surfaces, and the tools you used on any animal other than a deer, use the food mix in Clean and disinfect. Knives and tools used on a deer also get the soak below.",
+            "Keep raw meat away from cooked and ready-to-eat food (North Dakota State University Extension, Penn State Extension).",
+            "Wash and sharpen your knives when you finish (Massachusetts notes)."
+          ]
+        },
+        {
+          "warn": "Knife and tool soak after a deer, for knives and tools only: NYS Department of Health says to soak cleaned knives and tools for one hour in fresh, unscented household bleach mixed with an equal amount of water (for example 1 quart (0.95 L) of bleach and 1 quart of water), let them air dry, then rinse them with clean water. This mix is far too strong for anything else: never put it on counters (they get the food mix in Clean and disinfect), never drink it, never use it for drinking water, and never mix bleach with any other cleaner."
+        },
+        {
+          "link": "s:surv-clean-and-disinfect",
+          "label": "Clean and disinfect"
+        },
+        {
+          "link": "p:bleeding",
+          "label": "Severe bleeding"
+        }
+      ]
+    },
+    {
+      "h": "Wrapping",
+      "blocks": [
+        {
+          "list": [
+            "Cut and pack the meat in meal-size portions, about 1 pound (0.45 kg) (Penn State Extension).",
+            "Wrap it tightly and press out all the air, then label it with what it is and the date (Penn State Extension).",
+            "Keep whole pieces whole and cut steaks just before cooking: it keeps the meat moist (New Mexico State University Extension)."
+          ]
+        },
+        {
+          "p": "How long it keeps cold or frozen, and the ways to keep it without a freezer, are in Preserving game meat."
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Preserving game meat"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "New Mexico State University Extension, Processing Your Deer at Home (Circular 508, January 1994)",
+      "used": "Tools; hanging from a gambrel; front shoulder; backstrap; flank; neck; ribs; tenderloin; backbone sawn for soup stock (reported, not followed); hind leg into sirloin, sirloin tip, round and shank; ball-and-socket joint cut with a knife to avoid bone dust and marrow; round separated into its muscles; meat near the long tendon for grinding; uses of each cut; loin steaks 3/4 inch; thin steaks 1/4 to 3/8 inch; keep chunks whole and cut steaks just before cooking"
+    },
+    {
+      "name": "New Mexico State University Extension, Field Care of Harvested Big Game (CR 507, revised 2012)",
+      "used": "Hang from the hind legs for skinning; cut around hock and knee and down the inside of each leg; pull the hide, cut back muscle that comes away; abdomen last"
+    },
+    {
+      "name": "Indiana DNR Division of Fish and Wildlife, Deer Processing (no date shown)",
+      "used": "Tools; hang at least 8 feet up with a gambrel or stick; front legs off at the joint; remove head and neck; rinse hair off with cold water; quartering order; second person for the legs; shank at the knee; femur out; sirloin (round, hugging the front of the femur), top round, bottom round, eye of round; trim fat (bitter) and silver skin; trimmings for grind; airtight bags"
+    },
+    {
+      "name": "Massachusetts deer processing workshop, instructor notes (mass.gov; no agency or date shown)",
+      "used": "Hang head down on a gambrel; front leg skin split on the hair seam; cutting through the spine at the base of the head; shoulders have no joint; rib meat only without gut material; sirloin tip (round tip, football roast); top, bottom and eye of round for jerky, braising; shoulder braised or ground; waxy gland between the rounds discarded, never ground; never a hand near the grinder throat; dull knives lead to injury; wash and sharpen knives afterwards; bones, sinew and hide bagged"
+    },
+    {
+      "name": "Penn State Extension, How Do You Break Down Your Venison Carcass? (video, Gary Abdullah; no date shown)",
+      "used": "Shoulder along the natural seam, knife in the connective tissue; backstrap cuts tight to the vertebrae; tenderloin with the blade against bone; hind leg at the hip ball joint; separate muscles along seams; trim connective tissue, fat, bruised or bloodshot tissue; shoulder for stew, grind; backstrap ends for small roasts or stew"
+    },
+    {
+      "name": "Penn State Extension, Proper Care and Handling of Venison from Field to Table (updated November 2020)",
+      "used": "Remove dirt, feces, hair and bloodshot areas; clean and sanitize the grinder; whetstone or steel; wash hands, knife and boards with warm soapy water; keep raw meat separate; meal-size portions about one pound; wrap tightly, remove air, label and date"
+    },
+    {
+      "name": "Penn State Extension, Proper Care and Handling of Game Birds from Field to Table (updated November 2020)",
+      "used": "Separate the breast from the neck, back and legs; remove feathers and bloodshot areas; game birds to 165°F"
+    },
+    {
+      "name": "Kentucky Department of Fish and Wildlife Resources, Kentucky Afield (Fall 2016), Cleaning Your Harvest Without Gutting It",
+      "used": "Skinning and quartering a deer on its side without gutting; game bags or pillow cases; tenderloin teased off by hand; backstrap cut along the spine and cross cut; neck meat for roasts; brisket for barbecue; flank for jerky, plate steaks or grinding; rib meat for grilling or grinding; a thermometer on top of the ice to keep the cooler below 40°F"
+    },
+    {
+      "name": "NYS Department of Health, Harvesting, Preparing, and Eating Wild Game",
+      "used": "Gloves; no eating, drinking or smoking; tools for no other purpose, apart from kitchen utensils; avoid cutting through the skull or spinal cord; avoid brain, spinal tissue, saliva and mouth parts, wash hands if handled; discard intestines; CWD parts (brain, spinal cord, nervous tissue, spleen, pancreas, eyes, tonsils, lymph nodes) and other organs (liver, kidney, heart, salivary glands); lymph nodes removed by boning out and trimming; one-hour 1:1 bleach soak for knives and tools, air dry, rinse (its counter step with the same mix is not given: counters get Clean and disinfect’s food mix); wash and rinse with boiling water (212°F) or sanitize; clean and disinfect equipment after grinding; remove bullets, shot, fragments and contaminated meat; lead fragments, generous trim, ground meat holds more lead; children and people who can get pregnant avoid lead-shot game; bruised or discolored meat discarded"
+    },
+    {
+      "name": "NYS DEC press release, 6 November 2026, Chronic Wasting Disease Found in Livingston County Wild Deer",
+      "used": "Brain, spinal cord, spleen and eyes as high-risk parts"
+    },
+    {
+      "name": "Cornell Wildlife Health Lab, Tips for Safe Handling and Processing Venison (November 2018)",
+      "used": "One animal at a time; debone, keep contact with brain, spinal cord, lymph nodes and spleen to a minimum; avoid sawing into bone, trim generously near shattered bone, spine and skull; lymph nodes between muscles, remove fat and tissue before grinding; soap and hot water between animals; each deer's meat in its own labeled container; disinfected or disposable saw blade to remove the head, never the same blade on meat"
+    },
+    {
+      "name": "NYS Wildlife Health Program, Highly Pathogenic Avian Influenza: What Hunters Need to Know (September 2022)",
+      "used": "Don't feed carcass parts to pets or leave them for scavengers"
+    },
+    {
+      "name": "North Dakota State University Extension, From Field to Table: A Pocket Guide for the Care and Handling of Deer and Elk (FN536, reviewed April 2024)",
+      "used": "Bone out, or avoid eating brain, spinal cord, eyes, spleen and lymph nodes; fat carries the game flavor; wash knife, hands and board with warm soapy water; whetstone or steel; keep raw and cooked apart"
+    },
+    {
+      "name": "National Center for Home Food Preservation, Jerky (from So Easy to Preserve, 6th ed., 2014)",
+      "used": "Trim and discard all fat because it becomes rancid quickly"
+    },
+    {
+      "name": "National Center for Home Food Preservation, Curing and Smoking Meats for Home Food Preservation: Literature Review (sections 5 and 6)",
+      "used": "Nitrite inhibits Clostridium botulinum in cured meats; sodium nitrite in place of salt can be a lethal dose; E. coli O157:H7 survives dry fermentation; homemade non-fermented sausage that is not fully cooked not recommended"
+    },
+    {
+      "name": "CDC, How to Prevent Trichinellosis",
+      "used": "Curing (salting), drying, smoking or microwaving alone does not consistently kill the worms"
+    },
+    {
+      "name": "New Mexico Department of Game and Fish, Don't Overlook Those Organ Meats (John Martsh; no date shown)",
+      "used": "Heart: fresh, refrigerate a couple of days, pump out blood with cold water, trim fat and vessels, discard bullet or broadhead damage; liver soaked 24 hours in cold water in the fridge, changing it every 8 hours; slice 1/2 inch"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8",
+      "used": "Tongue cut out, skinned and boiled; brain can be cooked and eaten (reported, not followed)"
+    },
+    {
+      "name": "Missouri Department of Conservation, How to Clean a Rabbit; How to Clean a Squirrel; Rabbit: Safety and Health",
+      "used": "Rabbit quarters at the shoulder and hip joints; squirrel free of hair, cavity washed; white pinhead liver spots, discard the rabbit; rabbit to 165°F"
+    },
+    {
+      "name": "Clemson Cooperative Extension, Safe Handling of Wild Game Birds (HGIC 3515, revised January 2024)",
+      "used": "Duck wings at the joints, head, pin feathers; scalding at 145°F; soak upland birds in cold water 1 to 2 hours"
+    },
+    {
+      "name": "Field dressing game, Preserving game meat, Clean and disinfect (other topics in this app)",
+      "used": "The cooled carcass, the signs an animal is not safe to eat, and the 165°F rule for all wild game; hanging times, storage times and keeping methods by link; household bleach mixes by link"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

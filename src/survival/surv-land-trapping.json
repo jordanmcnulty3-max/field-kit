@@ -1,0 +1,362 @@
+{
+  "id": "surv-land-trapping",
+  "title": "Trapping",
+  "category": "land",
+  "keywords": [
+    "trap",
+    "trapping",
+    "snare",
+    "deadfall",
+    "box trap",
+    "trapline"
+  ],
+  "summary": "Trapping from zero, as New York’s trapper education teaches it: the kinds of trap, where to set them for muskrat, beaver and raccoon, checking them every day as early as you can, killing a trapped animal quickly, releasing a pet or an animal you don’t want, and staying safe around body-gripping traps and sick animals. Snares are illegal in New York in normal times.",
+  "doFirst": [
+    "You are caught in a large body-gripping trap: thread a rope through the ends of the springs, put your foot in the loop and pull the loose end with your free arm. This takes the pressure off the springs so you can free yourself (NYS DEC trapper manual).",
+    "A dog is caught in a body-gripping trap: act at once. Squeeze both springs and turn the trap so the jaws are not pressing on its windpipe. Press one spring closed with both hands and fasten its safety lock, do the same with the other spring, then slide the dog’s head out of the jaws (North Dakota Game and Fish).",
+    "Springs too stiff to squeeze: thread a 4-foot (1.2 m) rope, belt or leash through the large rings of one spring, bring it around and back through the first ring as a handle, put your foot on one end and pull the free end until you can latch the safety lock. Do the same with the other spring (North Dakota Game and Fish).",
+    "A dog is caught by the foot in a foothold trap: act at once. Find the trap’s spring or springs (one long spring, two long springs, or coil springs), press them all down at the same time to open the jaws, using your feet if you need to, and slide the open trap off the dog’s foot. Pulling the trap’s stake or chain loose does not free the foot (North Dakota Game and Fish).",
+    "Bitten by a trapped or wild animal: wash the bite with soap and water, then get medical help (NYS DEC trapper manual), and open Animal or human bite (and rabies risk)."
+  ],
+  "sections": [
+    {
+      "h": "What trapping gives you",
+      "blocks": [
+        {
+          "list": [
+            "Several well-placed traps can catch much more game than one person hunting with a rifle (US Army).",
+            "Meat: New York’s trapper manual says some carcasses can be used for food, and suggests “broiled marsh rabbit” (really muskrat) or beaver stew.",
+            "What it asks of you: the right trap and set for one kind of animal, and a visit to every trap every day, as early as you can (NYS DEC trapper manual)."
+          ]
+        },
+        {
+          "warn": "In normal times New York requires a trapping licence and sets the seasons, the traps and sizes allowed, where traps may go, and how often they must be checked (2026–27 hunting and trapping guide). Those rules are in New York rules for hunting, fishing and trapping. This page teaches the methods; the rules page says what is legal."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
+        }
+      ]
+    },
+    {
+      "h": "The kinds of trap",
+      "blocks": [
+        {
+          "list": [
+            "Foothold (steel) traps are the main kind used. Set properly, and of the right size, they mostly hold the animal by the foot, so an animal you don’t want can usually be released. Most land animals trapped in New York can be taken with traps no larger than a #1½ coilspring. Set the pan so it takes 1 to 2 pounds (0.5 to 0.9 kg) of force to press down, and check that the pan sits level (NYS DEC trapper manual).",
+            "Body-gripping traps are made to kill quickly, but don’t always. Don’t use them where or in a way that could catch an animal you don’t want (NYS DEC trapper manual). Large ones can catch the trapper: see Staying safe below.",
+            "Cage or box traps seldom harm what they catch and make it easy to let an animal go. They are bulky and cost more, and foxes and coyotes avoid them (NYS DEC trapper manual).",
+            "Snares (also called cable restraints): in normal times New York law forbids them (2026–27 hunting and trapping guide); the trapper manual notes they may still be on sale. The survival-manual snares and deadfalls are at the end of this page, with New York’s position."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Which trap you have, and setting it",
+      "blocks": [
+        {
+          "p": "Before you set any trap, have someone who has set one show you how to set it and how to release it safely, and practise with them until you can do it correctly (IAFWA trapper education manual)."
+        },
+        {
+          "p": "Telling them apart:"
+        },
+        {
+          "list": [
+            "Foothold trap: jaws that hold the animal by the foot, a pan that the animal presses down, and one long spring, two long springs, or coil springs (NYS DEC trapper manual; North Dakota Game and Fish).",
+            "Body-gripping trap, also called a Conibear trap: made to kill, with two jaws that rotate shut on the animal’s neck or chest (IAFWA trapper education manual). Openings range from 5 to 12 inches (13 to 30 cm) (North Dakota Game and Fish).",
+            "Cage or box trap: a box, or a cage of wire, that catches one animal at a time and seldom harms it (NYS DEC trapper manual)."
+          ]
+        },
+        {
+          "p": "Setting a coil-spring foothold trap, from the IAFWA trapper education manual, in its order. A single long-spring trap is easier to set than a coil-spring. Wear the gloves you will trap in, and practise in them."
+        },
+        {
+          "steps": [
+            "Put the palm of each hand on one of the springs, and press both levers down evenly at the same time until the jaws open.",
+            "Hold the jaws open with the palm and thumb of one hand.",
+            "With the thumb of your free hand, set the dog in the notch of the pan. Ease a little pressure off the jaws to make sure it holds.",
+            "Hold the dog down with one thumb, raise the free jaw, and put your fingers below the jaw and the pan, holding the trap by its base plate.",
+            "Holding the pan up, with the fingers of both hands under the jaws and the pan, set the trap in place."
+          ]
+        },
+        {
+          "p": "Body-gripping traps (IAFWA trapper education manual):"
+        },
+        {
+          "list": [
+            "Small ones have springs you can squeeze shut by hand. On a trap with two springs, a safety hook holds each spring squeezed; release the hooks only once the trap is in place.",
+            "Size 220 and larger: set them with setting tongs, a tool that uses leverage to squeeze the springs and fasten the safety hook, and keep the tongs within reach. Use a safety gripper so the trap can’t fire shut while you finish the set. Carry the rope with a loop: how to use it is in the box at the top of this page.",
+            "Take extreme care setting one under water."
+          ]
+        },
+        {
+          "warn": "This app’s caution: this page does not teach every step of setting a body-gripping trap, or how to set a cage trap. Never set a body-gripping trap until someone who has set one has shown you how. Have a cage trap’s owner show you how it sets."
+        },
+        {
+          "p": "Which traps, and what sizes, are legal where, in normal times, is in New York rules for hunting, fishing and trapping."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        }
+      ]
+    },
+    {
+      "h": "Muskrat, beaver and raccoon: where and how to set",
+      "blocks": [
+        {
+          "p": "From the NYS DEC trapper manual. In normal times, check New York rules for hunting, fishing and trapping for which traps and sizes are legal for each set."
+        },
+        {
+          "p": "Muskrat: lives mostly in water, in marshes, swamps, streams, lakes and ponds, and is most active at night, dawn and dusk. Signs: trails, channels, cut plants, tracks along banks, droppings, bank burrows 4 to 8 inches (10 to 20 cm) across, feed beds of cut grasses or cattails, and small dome-shaped huts."
+        },
+        {
+          "list": [
+            "Trail set: hide a foothold trap underwater where you can see their trails.",
+            "Feed bed set: a foothold trap in 1 to 2 inches (2.5 to 5 cm) of water in front of the feed pile; in water over a foot (30 cm) deep, use a submersion wire.",
+            "Channel set: a body-gripping trap of the right size in a channel they swim through.",
+            "For muskrat, mink and raccoon, 1 to 2 inches (2.5 to 5 cm) of water over the trap is usually enough."
+          ]
+        },
+        {
+          "p": "Beaver: lives near water, mostly at night and at dawn and dusk, and can weigh more than 60 pounds (27 kg). Signs: dams, channels, lodges of sticks and mud or large bank burrows, freshly cut trees, tracks, and mounds of mud with scent on them along the banks. Beavers use the same runways again and again."
+        },
+        {
+          "list": [
+            "For a foothold trap on beaver the manual says to use a submersion wire or cable with a one-way sliding lock, so the beaver goes into deep water, unless the trap is anchored so it can’t reach the surface. You need at least 3 feet (90 cm) of water.",
+            "Scent mound set: a well-hidden trap in 3 to 4 inches (7.5 to 10 cm) of water, with a sliding-lock submersion wire.",
+            "Body-gripping traps of the right size are ideal in the channels beavers use."
+          ]
+        },
+        {
+          "p": "Raccoon: den trees show smoothed bark, scratches, hair and droppings. Sets the manual lists for raccoon: pocket, cubby, spring run, cage and dirt hole."
+        },
+        {
+          "list": [
+            "Pocket set (also takes mink and muskrat): dig a hole upward into the bank, with its back end above the waterline; for mink and muskrat about 6 inches (15 cm) across and 12 inches (30 cm) deep. Bait it with fish, and add a lure.",
+            "Raccoon box: a box about 9 by 9 inches (23 by 23 cm), its opening guarded by a medium body-gripping trap at least 4 inches (10 cm) inside the box. A cubby like this keeps most dogs from setting off the trap.",
+            "Cage trap: see The kinds of trap.",
+            "Most raccoons in New York, especially young ones, carry raccoon roundworm. Its eggs, in their droppings, can survive for years. Wear gloves and wash well (see Rabies, disease and handling)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Making a set: the basics",
+      "blocks": [
+        {
+          "list": [
+            "Aim each set at one kind of animal, or a small group of kinds (NYS DEC trapper manual).",
+            "Don’t set near trails used a lot by people and pets, or where hunters run dogs. Never use pet food as bait, and near homes with pets avoid baits that draw dogs and cats, such as fish. Cover any bait so it can’t be seen from above, to protect birds of prey (NYS DEC trapper manual).",
+            "Anchor: the stake must hold the largest animal the trap may catch; 12 to 18 inches (30 to 45 cm) long suits most ground. In loose soil drive two stakes crossed in an X. Use at least three swivels on the chain: at the trap, at the stake and in the middle. Lengthen a chain with more chain or cable, never with wire (NYS DEC trapper manual).",
+            "After driving the stake, pull hard on the chain. If the stake moves, the trap is not anchored well enough (NYS DEC trapper manual).",
+            "Check chains, stakes and drags for weak spots before you treat (dye or wax) your traps and after each catch (NYS DEC trapper manual).",
+            "Water sets that drown the animal: stake the trap in water 12 to 18 inches (30 to 45 cm) deep, or use a sliding wire or cable that lets the animal reach deep water (NYS DEC trapper manual).",
+            "What to carry, from the manual’s pack basket: traps, gloves, pan covers, a dirt sifter, stakes, a bait jar, a digging tool (most trappers use a long, sturdy trowel), lure, a hatchet with its edge covered, a kneeling pad, wire, pliers, swivels and spare trap tags."
+          ]
+        },
+        {
+          "link": "c:land-kit",
+          "label": "Hunting, fishing and trapping kit"
+        }
+      ]
+    },
+    {
+      "h": "Checking traps",
+      "blocks": [
+        {
+          "p": "In normal times, check every trap at least as often as New York law requires (2026–27 hunting and trapping guide): see New York rules for hunting, fishing and trapping."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "list": [
+            "As practice, trapper education teaches: check traps every day, as early in the day as you can, so the animal spends as little time in the trap as possible; the manual’s trapper checks traps early each morning (NYS DEC trapper manual).",
+            "Always go close enough to see the trap (NYS DEC trapper manual).",
+            "If a dog, a cat or a person has been at the set, move the trap somewhere else (NYS DEC trapper manual)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Killing a trapped animal",
+      "blocks": [
+        {
+          "list": [
+            "Kill an animal you will keep as quickly and humanely as you can. New or young trappers should go after only animals they can kill easily and safely, and get help with any animal they can’t handle safely.",
+            "Firearm: a well-placed shot with a .22 rimfire cartridge, aimed to pass through the front of the brain. Opossums: at the base of the ear or down the middle of the skull. Animals in foothold and cage traps can be shot safely.",
+            "Keep the firearm unloaded until you need it, watch for ricochets off the ground, rocks or the trap, and have everyone with you stand behind the shooter.",
+            "If the animal may have rabies, or has bitten someone, kill it without damaging the head, so that in normal times health authorities can test it. What to do with it then is in Field dressing game, “Already caught or shot, and it looks sick”."
+          ]
+        },
+        {
+          "p": "Without a firearm:"
+        },
+        {
+          "warn": "Larger animals such as raccoons may be too large for some beginners to kill safely this way: get help (NYS DEC trapper manual)."
+        },
+        {
+          "p": "The steps, from the NYS DEC trapper manual, in its order:"
+        },
+        {
+          "steps": [
+            "Strike sharply at the base of the skull with a heavy wooden or metal tool.",
+            "Strike a second time: the first blow makes the animal unconscious, the second kills it or leaves it in a coma.",
+            "To make sure it dies, pin the head with one foot and stand on the chest, near the heart, with the other foot for several minutes. Never stand on an animal that is conscious. Don’t step off an unconscious animal until it is dead.",
+            "Check: touch the eye or mouth with the striking tool, never your hand, and watch for any reaction. No reaction, no breathing and no heartbeat: you can take it as dead. Opossums are hard to check."
+          ]
+        },
+        {
+          "warn": "If killing an animal, or releasing one you don’t want, seems too hard, the manual says not to set traps on land: trap water animals with body-gripping traps and drowning sets until you can."
+        }
+      ]
+    },
+    {
+      "h": "Releasing a pet or an animal you don’t want",
+      "blocks": [
+        {
+          "list": [
+            "A catchpole (a pole with a noose) holds the animal while you take off the trap: put the loop around its neck and make it snug, but don’t choke it. Fabric held down over the animal along the caught leg also helps. Releasing is always easier with a partner (NYS DEC trapper manual).",
+            "Release a caught dog or cat at once and, if you can, tell its owner (NYS DEC trapper manual).",
+            "A dog in a foothold or body-gripping trap: the steps are in the box at the top of this page.",
+            "In normal times New York has its own rule for an animal caught out of season: see New York rules for hunting, fishing and trapping."
+          ]
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        }
+      ]
+    },
+    {
+      "h": "Staying safe",
+      "blocks": [
+        {
+          "list": [
+            "Whenever you use large body-gripping traps, carry setting tongs and a rope with a loop in the end (NYS DEC trapper manual). How to use the rope to free yourself is in the box at the top of this page.",
+            "Use a safety gripper when you set a large body-gripping trap: it keeps the jaws from closing fully if the trap fires while you set it (NYS DEC trapper manual).",
+            "Don’t wax body-gripping traps: waxed traps can go off unexpectedly (NYS DEC trapper manual).",
+            "Near water, wear a life jacket (the manual suggests an inflatable one). On ice, six inches (15 cm) or more of strong ice is needed for several people; if you go through, face the way you came (NYS DEC trapper manual). The full ice rules are in Fishing for food.",
+            "Shivering is one of the first signs of hypothermia. Wool keeps you warm even when wet (NYS DEC trapper manual)."
+          ]
+        },
+        {
+          "link": "s:surv-traps-and-fishing",
+          "label": "Fishing for food"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        }
+      ]
+    },
+    {
+      "h": "Rabies, disease and handling",
+      "blocks": [
+        {
+          "list": [
+            "Avoid sick animals, and ones that don’t act normally (NYS DEC trapper manual). The signs of disease, and which animals are not safe to eat, are in Field dressing game, with what to do with one already in your trap.",
+            "Rabies can be carried by any warm-blooded mammal and, left untreated, is always fatal. It spreads through a bite or scratch, or through a cut while skinning an infected animal (NYS DEC trapper manual).",
+            "Wear latex or other protective gloves, eye protection and coveralls when you handle carcasses or droppings, and wash your hands and arms well with soap and water afterwards (NYS DEC trapper manual).",
+            "Muskrats and beavers can carry tularemia: wear rubber or plastic gloves to skin them, and stay away from a muskrat found dead or dying for no clear reason (NYS DEC trapper manual).",
+            "Freezing game meat, even for a long time, may not kill all worms (NYS DEC trapper manual). Cook all of it to 165°F (74°C), Field dressing game’s rule for all wild game.",
+            "Clean and disinfect knives and tools: wash them with soap and water, then sanitize them as in Butchering deer and small game, “Knives and keeping the work clean”."
+          ]
+        },
+        {
+          "link": "p:animal-bite",
+          "label": "Animal or human bite (and rabies risk)"
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-land-butchering",
+          "label": "Butchering deer and small game"
+        }
+      ]
+    },
+    {
+      "h": "After the catch",
+      "blocks": [
+        {
+          "p": "How to field dress small game, and the signs that an animal is not safe to eat, are in Field dressing game. Cutting up small game is in Butchering deer and small game. How long the meat keeps, and the ways to keep it, are in Preserving game meat. Cook all of it to 165°F (74°C)."
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-land-butchering",
+          "label": "Butchering deer and small game"
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Preserving game meat"
+        }
+      ]
+    },
+    {
+      "h": "Snares and deadfalls (survival manuals)",
+      "blocks": [
+        {
+          "warn": "Snares, in normal times: New York law forbids setting a snare or any noose that can take an animal (2026–27 hunting and trapping guide). Deadfalls, in normal times: the guide neither allows nor forbids them by name, and New York law counts a deadfall as a trapping device. This app’s caution: don’t set one without asking DEC."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "p": "Trapper education does not teach snares or deadfalls; what follows is from the US Army survival manuals."
+        },
+        {
+          "list": [
+            "Where: put snares and traps where animals clearly pass, on runs and trails; near bedding, watering and feeding places they work best. Build a funnel-shaped barrier from the sides of the trail toward the trap, narrowest at the trap, to guide the animal in, and keep it inconspicuous (US Army).",
+            "Scent: hide your scent with mud from a place with rotting plants, or with fluids from earlier kills. Never use human urine (US Army).",
+            "Simple snare: a noose of wire over a trail or den hole, attached to a firmly planted stake. Make the noose big enough to pass over the animal’s head. It tightens as the animal struggles. Wire is best: cord can loosen and slip off. Small twigs or blades of grass can hold the noose up (US Army).",
+            "Squirrel pole: small snares along a pole leaned on a tree squirrels use. Make the wire nooses 2 to 2 1/4 inches (5 to 6 cm) across, about 1 inch (2.5 cm) off the pole, the top and bottom ones 18 inches (45 cm) from the ends. Set more than one pole to catch more (US Army).",
+            "Figure-4 deadfall: three notched sticks lock together to hold up a weight that drops onto the animal; the weight must be heavy enough to kill or disable it at once. The trigger needs close fits and exact angles: practise making it before you need it (US Army). This app’s caution: keep your hands and body out from under the weight while you set it."
+          ]
+        },
+        {
+          "fig": "trap-squirrel",
+          "cap": "Squirrel pole: small snares along a pole leaned on a tree squirrels use. Illegal in New York in normal times."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping, student manual, 4th edition (2016)",
+      "used": "Muskrat as marsh rabbit, beaver stew, some carcasses used for food; trap types, sizes, pan tension and level pans; body-gripping cautions; cage traps; box traps and cage-like wire traps catch one animal at a time; snares on sale; selective trapping and baits; muskrat, beaver and raccoon sign; trail, feed bed, channel, scent mound, pocket and raccoon box sets; water depths; submersion wires; anchoring, stakes, swivels, chain; pack basket; check daily and early; approach; move a visited set; killing (pp. 83-84): beginners, .22 shot, opossum, foothold and cage traps, firearm safety, head kept for rabies testing, two blows, pinning, checking with the tool, larger animals too large for beginners, water sets instead; catchpole, fabric, partner; release pets and tell the owner; tongs, rope, safety gripper, no wax; life jacket, six inches of ice, face the way you came; hypothermia and wool; rabies, gloves, washing, tularemia, raccoon roundworm; freezing may not kill worms; wash a bite, get help; self-release with a rope"
+    },
+    {
+      "name": "North Dakota Game and Fish Department, Body-Grip Traps and Foothold Traps: Identification, Use and Removing a Dog (two web pages, undated)",
+      "used": "Steps to free a dog from a body-gripping trap; rope, belt or leash method; steps to free a dog from a foothold trap; pulling the stake does not free the foot; body-grip openings of 5 to 12 inches; foothold traps with one long spring, two long springs or coil springs"
+    },
+    {
+      "name": "International Association of Fish and Wildlife Agencies, Trapper Education Manual (2005)",
+      "used": "Practise setting and releasing with an instructor or experienced trapper; body-gripping traps also known as Conibear traps, two jaws rotating shut on the neck or chest; long-spring easier to set than coil-spring; coil-spring setting steps (pp. 45-46); gloves; small body-gripping traps set by hand, safety hooks; setting tongs for size 220 and larger, safety gripper, tongs within reach; extreme caution under water"
+    },
+    {
+      "name": "New York rules for hunting, fishing and trapping (this app), from the NYS DEC 2026–2027 Hunting and Trapping Guide and New York Environmental Conservation Law 11-1101",
+      "used": "In normal times: snares and nooses forbidden; the guide does not address deadfalls"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (September 2018), chapter 4",
+      "used": "Several traps beat one hunter (4-86); placement on runs and trails (4-89); scent (4-91); channelization (4-93); simple loop snare and squirrel pole noose sizes and spacing (4-102); deadfall (4-103)"
+    },
+    {
+      "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8",
+      "used": "Second source for placement around bedding, water and feeding areas, inconspicuous channel, mud and no human urine (p. 79); simple snare (p. 81); squirrel pole and 45 cm (p. 82); figure-4 deadfall (p. 85)"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

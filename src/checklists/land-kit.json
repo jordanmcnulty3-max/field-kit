@@ -1,0 +1,258 @@
+{
+  "id": "land-kit",
+  "title": "Hunting, fishing and trapping kit",
+  "category": "land",
+  "summary": "Gear for taking food from the land and turning it into safe meat: what to carry when you hunt, fish, trap and dress game, and what to have at home to cut up and keep it. From NYS DEC hunter, trapper and fishing education material and extension game-care guides.",
+  "items": [
+    {
+      "id": "knife",
+      "text": "A sharp knife for field dressing",
+      "note": "Use it for game only, not your kitchen knives. Clean it often as you work."
+    },
+    {
+      "id": "sharpener",
+      "text": "A whetstone or steel for sharpening"
+    },
+    {
+      "id": "hatchet-saw",
+      "text": "A small hatchet or saw",
+      "note": "Cut joints with a knife where you can, and avoid sawing into bone: see Butchering deer and small game. Never cut meat with a blade you used on bone."
+    },
+    {
+      "id": "gloves",
+      "text": "Disposable rubber, nitrile or latex gloves",
+      "note": "Always; above all with rabbits, hares and rodents, and if your hands have cuts or sores."
+    },
+    {
+      "id": "cloths",
+      "text": "Clean cloths or paper towels, and sanitizing wipes"
+    },
+    {
+      "id": "cord",
+      "text": "Several feet of rope or nylon cord, and a drag rope"
+    },
+    {
+      "id": "ties",
+      "text": "Rubber bands, string or twist ties",
+      "note": "For tying off the vent and bladder."
+    },
+    {
+      "id": "bags",
+      "text": "Sealable plastic bags",
+      "note": "For the guts to go in the trash, and for the heart and liver when Butchering deer and small game says to keep them."
+    },
+    {
+      "id": "game-bags",
+      "text": "Game bags, cheesecloth or clean cotton bags (a clean pillow case will do)",
+      "note": "To keep flies and dirt off meat while it cools."
+    },
+    {
+      "id": "cooler",
+      "text": "A large cooler with ice or snow",
+      "note": "Bags of ice or snow, or jugs of ice, also go inside a deer to cool it."
+    },
+    {
+      "id": "water",
+      "text": "Clean drinking water"
+    },
+    {
+      "id": "harness",
+      "text": "A full-body safety harness with a lifeline and foot strap, and a haul line, if you hunt from a tree stand"
+    },
+    {
+      "id": "orange",
+      "text": "Hunter orange clothing",
+      "note": "New York’s rule for deer and bear is in New York rules for hunting, fishing and trapping."
+    },
+    {
+      "id": "pockets",
+      "text": "Knife, phone, flashlight and whistle carried in your pockets"
+    },
+    {
+      "id": "light",
+      "text": "Headlamp or flashlight, with spare batteries"
+    },
+    {
+      "id": "navigation",
+      "text": "Map, compass or GPS"
+    },
+    {
+      "id": "binoculars",
+      "text": "Binoculars",
+      "note": "To identify your target and what is behind it. Never use a rifle scope as binoculars."
+    },
+    {
+      "id": "flagging",
+      "text": "Fluorescent orange flagging tape",
+      "note": "To mark a blood trail."
+    },
+    {
+      "id": "food-water-out",
+      "text": "Water and high-energy food for the day"
+    },
+    {
+      "id": "first-aid",
+      "text": "First aid kit"
+    },
+    {
+      "id": "layers",
+      "text": "Warm layers that wick sweat (no cotton), a wind- and water-resistant outer layer, and extra gloves"
+    },
+    {
+      "id": "deer-cart",
+      "text": "A deer cart, if you have one",
+      "note": "Saves your back on the drag."
+    },
+    {
+      "id": "rod-reel",
+      "text": "Rod and reel: a spin-casting outfit for beginners"
+    },
+    {
+      "id": "line",
+      "text": "Monofilament fishing line",
+      "note": "Eight-pound test is a good all-round weight."
+    },
+    {
+      "id": "tackle",
+      "text": "Hooks, sinkers, bobbers, swivels and snap-swivels",
+      "note": "Size 6 to 8 Aberdeen hooks for panfish."
+    },
+    {
+      "id": "bait",
+      "text": "Bait or lures"
+    },
+    {
+      "id": "fishing-tools",
+      "text": "Needle-nose pliers for hooks, line clippers, a net, a bucket and a towel"
+    },
+    {
+      "id": "ruler",
+      "text": "A ruler, to check fish against the legal size in normal times"
+    },
+    {
+      "id": "ice-picks",
+      "text": "Ice safety picks, for ice fishing or trapping on ice"
+    },
+    {
+      "id": "ice-gear",
+      "text": "Ice gear: a spud bar or hand auger, a jigging rod or hand line, tip-ups, boots with cleats, and a sled for hauling"
+    },
+    {
+      "id": "life-jacket",
+      "text": "A life jacket for each person in a boat, and an inflatable one for trapping in water"
+    },
+    {
+      "id": "pack-basket",
+      "text": "A pack basket, bucket or sack to carry trapping gear"
+    },
+    {
+      "id": "traps",
+      "text": "Traps that are legal in normal times, and extra trap tags",
+      "note": "Which traps are legal, and how each must be marked, are in New York rules for hunting, fishing and trapping."
+    },
+    {
+      "id": "trap-gloves",
+      "text": "Gloves for setting traps, long rubber gloves for water sets, and a heavy pair for handling animals"
+    },
+    {
+      "id": "trap-safety",
+      "text": "Setting tongs, a safety gripper and a rope with a loop in one end, whenever you use large body-gripping traps",
+      "note": "How to use the rope to free yourself is in Trapping."
+    },
+    {
+      "id": "stakes-wire",
+      "text": "Trap stakes, wire or cable, pliers and cable cutters"
+    },
+    {
+      "id": "digging",
+      "text": "A trowel or other digging tool, a dirt sifter and a kneeling pad"
+    },
+    {
+      "id": "boots",
+      "text": "Hip boots or chest waders, for water sets"
+    },
+    {
+      "id": "catchpole",
+      "text": "A catchpole",
+      "note": "To control a trapped animal so it can be released or dispatched more safely."
+    },
+    {
+      "id": "fire",
+      "text": "Waterproof matches and fire starters"
+    },
+    {
+      "id": "butchering-tools",
+      "text": "At home: a boning or fillet knife, a meat saw, a gambrel or stout stick, and a table to work on"
+    },
+    {
+      "id": "wrap",
+      "text": "Airtight bags or wrap, and a marker to label and date meat"
+    },
+    {
+      "id": "bleach",
+      "text": "Plain, unscented household bleach",
+      "note": "For the knife and tool soak in Butchering deer and small game, and the mixes in Clean and disinfect."
+    },
+    {
+      "id": "thermometer",
+      "text": "A food thermometer, and a thermometer for the cooler or the place meat hangs",
+      "note": "Wild game is cooked to 165°F (74°C)."
+    },
+    {
+      "id": "salt",
+      "text": "Food-grade salt with no additives such as iodine",
+      "note": "For brining. Ways to keep meat, and their risks, are in Preserving game meat."
+    }
+  ],
+  "sources": [
+    {
+      "name": "Penn State Extension, Proper Care and Handling of Venison from Field to Table (updated November 18, 2020)",
+      "used": "Bring these items when you hunt: a sharp knife; a small hatchet; a whetstone or steel; several feet of rope or nylon cord; rubber bands; clean cloths or paper towels; sealable storage bags; a large cooler full of ice or snow; disposable gloves; clean drinking water"
+    },
+    {
+      "name": "Cornell Cooperative Extension, NYS 4-H Shooting Sports and Cornell University Department of Natural Resources, Wild Harvest Table Guides to Deer Hunting and Preparation and to Hunting Fowl and Other Small Game (November 2015)",
+      "used": "A sharp knife, plastic gloves, sanitizing wipes, rope, rubber bands or string, a saw (its pelvis and breastbone use not given: Butchering deer and small game avoids sawing into bone); clean cloths or paper towels, a cooler of ice; ice packs, milk jugs of ice or bags of snow in the cavity; gloves with rabbits"
+    },
+    {
+      "name": "Indiana DNR, Deer Hunting Check List",
+      "used": "Sharpen and pack a knife; headlamp or flashlight with spare batteries; drag rope; GPS, map, compass; water and snacks; small saw or pruners; cell phone; paper towels, gloves, twist ties or rubber bands; tree stand with full body harness; hunter orange; first aid kit; binoculars; layered clothing"
+    },
+    {
+      "name": "NYS DEC Hunter Education, Tree Stand “Best Practices”; NYS DEC bulletin, DEC Reminds New York State Hunters: Be Safe During Hunting Seasons (October 15, 2020)",
+      "used": "Full-body harness with lifeline and foot strap; haul line; knife, phone, flashlight and whistle in pockets; flashlights, water and high-energy food"
+    },
+    {
+      "name": "Washington Hunter Safety Course (hunter-ed.com), Victim Mistaken for Game; Maine Hunter Safety Course (hunter-ed.com), Trailing Wounded Game",
+      "used": "Binoculars to identify target and backstop, never a rifle scope; fluorescent orange flagging for a blood trail"
+    },
+    {
+      "name": "Missouri Department of Conservation, Field Dressing Your Deer",
+      "used": "A deer cart saves your back"
+    },
+    {
+      "name": "NYS DEC, Beginners’ Guide to Freshwater Fishing (undated)",
+      "used": "Spin-casting rod and reel for beginners; monofilament, eight-pound test all-round; size 6 to 8 Aberdeen hooks for panfish; sinkers, bobbers, swivels, snap-swivels; bait or lures; needle-nose pliers, net, bucket, towel, line clippers; ruler to check legal size"
+    },
+    {
+      "name": "NYS DEC, Learn How To Ice Fish (web page, undated)",
+      "used": "Layered clothing that wicks moisture, no cotton, wind- and water-resistant outer layers; extra gloves; boots with cleats; ice safety picks; spud bar or hand auger; jigging rod or hand line; tip-ups; sled"
+    },
+    {
+      "name": "NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping (student manual, 4th edition, 2016), chapters 5 and 6",
+      "used": "Pack basket, buckets; traps; gloves, long rubber gloves, a heavy pair for handling animals; stakes; wire or cable; pliers and cable cutters; digging tool or trowel; dirt sifter; kneeling pad; extra trap tags; catchpole; hip boots or waders; inflatable PFD; ice safety picks; waterproof matches and fire starters; setting tongs, a rope with a loop in the end and a safety gripper with large body-gripping traps"
+    },
+    {
+      "name": "New York Trapper course (hunter-ed.com), Equipment for Water Trapping",
+      "used": "Hip boots or chest waders; packbasket or burlap sack; trap tags; trowel; stakes; wire or cable; pliers and cable cutters; long rubber gloves; float coat or inflatable life jacket; ice picks; waterproof matches, fire starters"
+    },
+    {
+      "name": "Minnesota Department of Natural Resources, Water Safety for Duck Hunters (2017)",
+      "used": "A life jacket for each person on board, worn"
+    },
+    {
+      "name": "Field dressing game, Butchering deer and small game, Preserving game meat, Trapping, Clean and disinfect, New York rules for hunting, fishing and trapping (other topics in this app)",
+      "used": "Game only, not kitchen knives; gloves always, above all with rabbits and rodents and with cuts or sores; joints cut with a knife, no sawing into bone where you can, never the bone blade on meat (Cornell Wildlife Health Lab, as given there); heart and liver kept only as Butchering says; bleach for the knife and tool soak and the household mixes; game bags, cheesecloth, cotton bags or pillow cases (North Dakota State University Extension, Kentucky Afield, as given there); boning knife, meat saw, gambrel or stick, table, airtight bags or wrap, labels (as given there); food thermometer and a thermometer on the ice (as given there); food-grade salt without additives (National Center for Home Food Preservation, as given there); 165°F for wild game; legal traps, orange and trap marking by name"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

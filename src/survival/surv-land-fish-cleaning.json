@@ -1,0 +1,748 @@
+{
+  "id": "surv-land-fish-cleaning",
+  "title": "Gutting, filleting and eating fish",
+  "category": "land",
+  "keywords": [
+    "clean fish",
+    "cleaning fish",
+    "fillet",
+    "gut fish",
+    "fish advisory",
+    "eating fish",
+    "fish fillet",
+    "scale fish",
+    "store fish"
+  ],
+  "summary": "Kill the fish quickly and get it cold. Gut it soon, then fillet it or cook it whole. Keep cleaned fish at 40°F (4°C) or below and cook it within 2 days, or freeze it. Throw out fish that smells sour, rancid or of ammonia. Cook fish to 145°F (63°C). New York’s Department of Health advises how many fish meals a month from which fish; people who could become pregnant (under 50) and children under 15 should eat less of some fish and none of others.",
+  "sections": [
+    {
+      "h": "Kill it and get it cold",
+      "blocks": [
+        {
+          "list": [
+            "Kill the fish quickly (New York Sea Grant), with a blow to the head (Maine Department of Inland Fisheries and Wildlife). A long, stressful death softens the flesh (Maine Department of Inland Fisheries and Wildlife).",
+            "Bleeding improves the meat of some fish: cut the gill arches with a knife or scissors (Maine Department of Inland Fisheries and Wildlife, New York Sea Grant).",
+            "Get it on ice as soon as it is caught (New York Sea Grant, NYS DEC). An ice slurry cools fish faster: 8 parts ice to 1 part water in a cooler, with ice made from drinking water, topped up with more ice as it melts (New York Sea Grant).",
+            "Keeping fish alive until you clean them is in Fishing for food."
+          ]
+        },
+        {
+          "link": "s:surv-traps-and-fishing",
+          "label": "Fishing for food"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
+        }
+      ]
+    },
+    {
+      "h": "Gut it",
+      "blocks": [
+        {
+          "p": "In short: cut from the vent to the gills, pull the guts out. NYS DEC’s field dressing steps:"
+        },
+        {
+          "steps": [
+            "Make a shallow cut from the vent (the small opening on the belly toward the tail) to the gills. Keep the blade shallow so you don’t cut the stomach or intestines.",
+            "Cut the bridge that attaches the gills, and pull out the gills and the guts.",
+            "Scrape out the long red kidney along the backbone, with the knife blade or your thumbnail.",
+            "Rinse the belly and pack the fish in a cooler with ice."
+          ]
+        },
+        {
+          "fig": "dress-fish",
+          "cap": "The vent is the small opening on the belly toward the tail."
+        },
+        {
+          "list": [
+            "Gut a large fish as soon as you catch it and pack the belly with ice. A small fish you will fillet the same day need not be gutted (New York Sea Grant).",
+            "If gut contents spill, rinse the belly at once (Maine Department of Inland Fisheries and Wildlife).",
+            "Then scale or skin it (US Army). Always cut away from yourself (NYS DEC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Fillet it",
+      "blocks": [
+        {
+          "p": "NYS DEC’s steps:"
+        },
+        {
+          "steps": [
+            "Lay the fish flat on its side. Cut behind the pectoral fin (the side fin behind the gills) down to the backbone, but not through it.",
+            "Without taking the knife out, turn the blade and cut toward the tail, through the rib cage, with the blade flat along the backbone (not through it).",
+            "Stop just before the fillet comes off. Flip it over, skin side down, still attached.",
+            "Slide the knife between the meat and the skin and, holding it almost flat, work it back and forth to take the fillet off the skin.",
+            "Carefully cut out the rib cage from the fillet.",
+            "Turn the fish over and do the same on the other side. Rinse the fillets in cold, clean water."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Or cook it whole",
+      "blocks": [
+        {
+          "p": "Pan dressing, NYS DEC’s steps:"
+        },
+        {
+          "steps": [
+            "Scrape off the scales on both sides, from the tail toward the head, with a scale scraper or the back of a knife.",
+            "Cut 1/4 to 1/2 inch (6 to 12 mm) deep along each side of the back fin and the fin under the belly, so they can come out later.",
+            "Hold the fish on its back and cut just behind the vent; slide the knife forward just under the skin to the pectoral fin.",
+            "Lay it flat and cut deep on both sides behind the pectoral fin, without cutting the backbone.",
+            "Pull the head upward to break the backbone: the head tears loose and the guts and the side and belly fins come with it.",
+            "Pull the back and belly fins away and forward (pliers help), cut off the tail, and rinse in cold, clean water."
+          ]
+        },
+        {
+          "p": "Boiling fish with the skin on keeps its fat and juices, and the water makes a broth. Fish can also be roasted on a stick, baked or fried (US Army)."
+        }
+      ]
+    },
+    {
+      "h": "How long it keeps",
+      "blocks": [
+        {
+          "list": [
+            "Cleaned fish keeps up to 2 days in a fridge (NYS DEC). FDA: keep fish you will use within 2 days at 40°F (4°C) or below; otherwise wrap it tightly in plastic, foil or moisture-proof paper and freeze it. Thaw it in the fridge overnight (FDA).",
+            "New York Sea Grant says to freeze it if you can’t cook it within two or three days; this app goes by the shorter time, 2 days.",
+            "No ice and no cold: fish is perishable food. From Is it still good?, word for word: “never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).”"
+          ]
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
+          "warn": "Don’t eat fish that seems to have gone bad: cooking does not make it safe (US Army). If raw or cooked fish smells sour, rancid or fishy, don’t eat it; seafood gone bad can also smell of ammonia (FDA). Other signs: sunken eyes, faded scales, gills that are not red to pink, flesh that keeps the dent of your thumb, a slimy body, or a sharp or peppery taste (US Army)."
+        }
+      ]
+    },
+    {
+      "h": "Cook it to 145°F",
+      "blocks": [
+        {
+          "p": "From Field dressing game, word for word: “Cook all wild game and birds to at least 165°F in the thickest part, and fish to 145°F.”"
+        },
+        {
+          "list": [
+            "Most seafood should reach 145°F (63°C) inside (FDA). No thermometer: FDA says, “If you don’t have a food thermometer, there are other ways to determine whether seafood is done.” For fish, its sign is flesh that “separates easily with a fork” (FDA).",
+            "Cook all freshwater fish, to kill parasites (US Army).",
+            "New York Sea Grant gives 140°F (60°C) for one minute; this app goes by FDA’s higher 145°F (63°C).",
+            "Wash your hands for at least 20 seconds after handling raw fish, and clean cutting boards and knives before they touch cooked or ready-to-eat food (FDA)."
+          ]
+        },
+        {
+          "link": "s:surv-food-cooking-no-power",
+          "label": "Cook without power"
+        }
+      ]
+    },
+    {
+      "h": "New York’s advice on eating fish you catch",
+      "blocks": [
+        {
+          "p": "From the NYS Department of Health: its statewide advice was issued in 2024 (page revised March 2025), and its waterbody advice was last updated in April 2026. It applies to waters with no advice of their own, outside the Adirondack and Catskill regions, which have their own regional advice. Some waters have advice of their own (the Central New York ones are in the tables below, one for each water): in April 2026 it was made stricter for Lake Ontario, Lake Erie, the upper Niagara River, part of the Mohawk River, Cumberland Bay of Lake Champlain, Lake George, Seneca Lake and Catharine Creek. In normal times, check the Department’s list for your water before you eat what you catch."
+        },
+        {
+          "p": "Who: the Department gives one advice for people who may become pregnant (under age 50) and children under 15, and another for everyone else, called “most people” here (NYS Department of Health). A meal in this advice is one-half pound (227 g) of fish; you could eat two quarter-pound meals in place of one (NYS Department of Health). Chemicals in fish can affect unborn babies and children’s development, can stay in the body for decades, and can pass to a baby through breastfeeding (NYS Department of Health)."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish (statewide advice)",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Brook trout, rainbow trout, brown trout under 20 inches (51 cm), bluegill, pumpkinseed and other sunfish, white sucker, yellow perch under 10 inches (25 cm)",
+                "Up to 4 meals a month",
+                "Up to 4 meals a month"
+              ],
+              [
+                "Black crappie, brown trout over 20 inches (51 cm), bullhead, chain pickerel under 20 inches (51 cm), carp, lake trout, largemouth bass under 15 inches (38 cm), northern pike under 26 inches (66 cm), rock bass, walleye under 19 inches (48 cm), yellow perch over 10 inches (25 cm), and any fish not listed",
+                "Up to 4 meals a month",
+                "Up to 1 meal a month"
+              ],
+              [
+                "Chain pickerel over 20 inches (51 cm), channel catfish, freshwater drum, largemouth bass over 15 inches (38 cm), smallmouth bass under 15 inches (38 cm), white perch",
+                "Up to 1 meal a month",
+                "Up to 1 meal a month"
+              ],
+              [
+                "Northern pike over 26 inches (66 cm), smallmouth bass over 15 inches (38 cm), walleye over 19 inches (48 cm)",
+                "Up to 1 meal a month",
+                "Don’t eat"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Central New York waters with their own advice. The statewide table above does not apply to the fish named for these waters: use these tables instead, one for each water. In them, “up to 1 a month” means up to 1 meal a month. For a fish not named for its water, use the statewide table. From NYS Department of Health’s advisory listings by county (Cayuga, Cortland, Madison, Oneida, Onondaga and Oswego counties), as listed in November 2026; Cortland County has no water with advice of its own. In normal times, check the Department’s list: advice changes."
+        },
+        {
+          "p": "Onondaga Lake; the Seneca River below Lock 24."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "White perch, walleye, largemouth bass, channel catfish, carp",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Smallmouth bass",
+                "Over 15 in (38 cm): don’t eat; under 15 in: up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Yellow perch; every fish not named here",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Pumpkinseed and other sunfish, brown bullhead",
+                "Up to 4 a month",
+                "Don’t eat"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Oswego River, Varick Dam to the upper dam (Lock 2)."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Channel catfish",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Every other fish",
+                "State advice: statewide table. This app’s caution: don’t eat",
+                "Don’t eat"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Oswego River, mouth to Varick Dam (Lock 8). Its advice is Lake Ontario’s, in the next table."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Every fish",
+                "As Lake Ontario",
+                "As Lake Ontario"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Lake Ontario."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Carp",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Walleye, lake trout, brown trout over 20 in (51 cm)",
+                "Up to 1 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Smallmouth bass, rainbow trout and steelhead, brown trout under 20 in, coho, chinook and Atlantic salmon, bluegill, pumpkinseed and other sunfish",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Salmon River, mouth to the Salmon River Reservoir. Lake Ontario’s table is above."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Smallmouth bass",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Every other fish",
+                "As Lake Ontario",
+                "As Lake Ontario"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Salmon River Reservoir."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Smallmouth bass",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Largemouth bass",
+                "Over 15 in (38 cm): don’t eat; under 15 in: up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Yellow perch",
+                "Over 10 in (25 cm): up to 1 a month; under 10 in: up to 4 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Oneida Lake."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Walleye, smallmouth bass",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Skaneateles Creek, lake dam to the Seneca River."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Rainbow trout, brown trout",
+                "Up to 1 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Owasco Lake."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Walleye",
+                "Up to 1 a month",
+                "Over 19 in (48 cm): don’t eat; under 19 in: up to 1 a month"
+              ],
+              [
+                "Rainbow trout, brown trout",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Cayuga Lake."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Rainbow trout",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Jamesville Reservoir; the Erie Canal, Lockport to Lock 21."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Yellow perch",
+                "Over 10 in (25 cm): up to 1 a month; under 10 in: up to 4 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Glacier Lake (Clark Reservation State Park)."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Pumpkinseed and other sunfish",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Eaton Brook Reservoir."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Walleye",
+                "Up to 1 a month",
+                "Don’t eat"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Chenango River."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Walleye",
+                "Up to 1 a month",
+                "Over 19 in (48 cm): don’t eat; under 19 in: up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Unadilla River, below Mill Pond Dam."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Walleye",
+                "Up to 1 a month",
+                "Don’t eat"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Delta Lake."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Northern pike",
+                "Over 26 in (66 cm): don’t eat; under 26 in: up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Largemouth bass",
+                "Up to 1 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Kayuta Lake."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Yellow perch",
+                "Over 10 in (25 cm): up to 1 a month; under 10 in: up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Chain pickerel",
+                "Up to 1 a month",
+                "Over 20 in (51 cm): don’t eat; under 20 in: up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Mohawk River and Erie Canal, Feeder Dam 1 (and Lock E21) to Lock E20."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Walleye, rock bass, carp, bluegill",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Yellow perch, smallmouth bass",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "White sucker, pumpkinseed and other sunfish",
+                "Up to 1 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Mohawk River and Erie Canal, Lock E20 to Lock E18."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "White sucker, tiger muskellunge, smallmouth bass, largemouth bass, carp",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Walleye",
+                "Up to 1 a month",
+                "Over 19 in (48 cm): don’t eat; under 19 in: up to 1 a month"
+              ],
+              [
+                "Yellow perch, pumpkinseed and other sunfish, bluegill",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Sixmile Creek (Gulf Road to the Mohawk River); Threemile Creek."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "Every fish",
+                "Don’t eat",
+                "Don’t eat"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "Mud Creek (to Sauquoit Creek); Sauquoit Creek, Old Silk Mill Dam to the Mohawk River."
+        },
+        {
+          "table": {
+            "head": [
+              "Fish",
+              "Most people",
+              "People who may become pregnant (under age 50) and children under 15"
+            ],
+            "rows": [
+              [
+                "White sucker, brown trout",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Every other fish",
+                "State advice: statewide table. This app’s caution: don’t eat",
+                "Don’t eat"
+              ]
+            ]
+          }
+        },
+        {
+          "p": "To lower the chemicals in a meal (NYS Department of Health):"
+        },
+        {
+          "list": [
+            "Choose smaller fish of a kind: they may carry less.",
+            "Remove the skin and trim all the fat from the belly flap, the line along the sides, the back and under the skin. This lowers the chemicals that collect in fat, but not mercury, which is in the meat itself.",
+            "Broil, grill or bake the trimmed, skinned fish on a rack so the fat drips away, and don’t use the drippings for sauce or gravy. Cooking or soaking fish cannot get rid of the chemicals.",
+            "Spread your meals out: if the advice is up to 4 meals a month, don’t eat them all in one week. This matters most for women and young children."
+          ]
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "link": "s:surv-land-after-fallout",
+          "label": "Game, fish, milk and gardens after fallout"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "NYS DEC, Beginners’ Guide to Freshwater Fishing (I FISH NY, with Take Me Fishing/RBFF), chapter 3, Care of Your Catch",
+      "used": "Ice as soon as possible; field dressing, filleting and pan dressing steps; cut away from yourself; cleaned fish up to two days in a fridge"
+    },
+    {
+      "name": "Maine Department of Inland Fisheries and Wildlife, How to Bring Home a Quality Catch (Maine Fishing Guide, web page, undated)",
+      "used": "Blow to the head; stressful death softens flesh; bleeding by cutting the gill arches; rinse spilled gut contents"
+    },
+    {
+      "name": "New York Sea Grant (Ken Gall), Handling Your Catch (undated)",
+      "used": "Kill quickly; bleed; ice at once; ice slurry 8 to 1, ice from drinking water; gut large fish early; small fish filleted the same day; two or three days and 140°F for one minute (both set aside for the more cautious figures)"
+    },
+    {
+      "name": "US FDA, Selecting and Serving Fresh and Frozen Seafood Safely (content current as of March 5, 2024)",
+      "used": "40°F or below and use within 2 days, otherwise wrap and freeze; thaw in the fridge; 145°F; with no food thermometer, other ways to tell; fish flesh separates easily with a fork; smells of seafood gone bad; hand washing and boards"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (September 2018), chapter 4",
+      "used": "Signs of fish gone bad, cooking does not make it safe (4-164); scale or skin (4-166); boiling, roasting, baking, frying (4-167); cook freshwater fish for parasites (4-148)"
+    },
+    {
+      "name": "CDC, quoted from Is it still good?",
+      "used": "Perishable food left out 2 hours, 1 hour above 90°F"
+    },
+    {
+      "name": "Field dressing game (this app), quoted",
+      "used": "The game and fish cooking sentence, word for word"
+    },
+    {
+      "name": "NYS Department of Health, Statewide Fish Advice (issued 2024; page revised March 2025)",
+      "used": "The table, the sensitive and general populations (the head of every advice table uses its definition), waters it applies to"
+    },
+    {
+      "name": "NYS Department of Health, New York State Health Advice on Eating Fish You Catch (page revised March 2026)",
+      "used": "Adirondack and Catskill regional advice; check your water; why the sensitive group eats less"
+    },
+    {
+      "name": "NYS Department of Health, Updates Waterbody-Specific Advice for Eating Fish You Catch (press release, April 1, 2026)",
+      "used": "Waters given stricter advice in 2026"
+    },
+    {
+      "name": "NYS Department of Health, Tips for Healthier Eating (revised January 2023)",
+      "used": "Smaller fish; skin and trim fat; mercury in the meat; rack cooking, no drippings; cooking or soaking does not remove chemicals; spacing meals"
+    },
+    {
+      "name": "NYS Department of Health, Advisory Listings by County (web page, read November 2026; no date on the page)",
+      "used": "Advice for named waters in Cayuga, Cortland, Madison, Oneida, Onondaga and Oswego counties"
+    },
+    {
+      "name": "NYS Department of Health, Background Information (Health Advice on Eating Fish You Catch, page revised May 2025)",
+      "used": "The advice assumes a meal of one-half pound; two quarter-pound meals in place of one"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

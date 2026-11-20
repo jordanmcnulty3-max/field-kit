@@ -364,7 +364,7 @@ class TopicValidation(unittest.TestCase):
         self.assertEqual(RESERVED_TOPIC_IDS, {'tool', 'list'})
         self.assertEqual(WHERE, {'town', 'rural', 'woods', 'coast'})
         self.assertEqual(WHEN, {'cold', 'warm'})
-        self.assertEqual(TOPIC_CATEGORIES, {'basics', 'water', 'heat', 'radiation', 'food', 'comms', 'staying', 'moving', 'town'})
+        self.assertEqual(TOPIC_CATEGORIES, {'basics', 'water', 'heat', 'radiation', 'food', 'land', 'comms', 'staying', 'moving', 'town'})
 
     def test_valid_topic_has_no_errors(self):
         self.assertEqual(validate_topics([topic()], {'f1'}, {'s:surv-other'}), ([], []))

@@ -199,6 +199,9 @@ def test_six_column_table_does_not_scroll_page_sideways_at_360(page, app_url):
     expect(page.locator('#survPage table')).to_be_visible()
     assert page.evaluate('document.documentElement.scrollWidth') <= 360
     assert page.eval_on_selector('#survPage .tablewrap', 'e => e.scrollWidth > e.clientWidth')   # it scrolls inside its own box
+    # whole-branch review I6: with no swipe sentence in the content, the app's own cue is what tells the reader the table scrolls
+    expect(page.locator('#survPage .sv-swipe')).to_be_visible()
+    assert page.inner_text('#survPage .sv-swipe').strip() == SWIPE_CUE
 
 
 def test_pin_star_toggles_pin(page, app_url):

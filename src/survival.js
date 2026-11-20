@@ -4,7 +4,7 @@
   const esc = FK.esc;
   const $ = id => document.getElementById(id);
   const CATS = [['basics', 'Basics'], ['water', 'Water and sanitation'], ['heat', 'Heat, shelter and winter'], ['radiation', 'Radiation and fallout'],
-    ['food', 'Food'], ['comms', 'Comms'], ['staying', 'Staying put'], ['moving', 'Moving'], ['town', 'Town hazards and health']];
+    ['food', 'Food'], ['land', 'Food from the land'], ['comms', 'Comms'], ['staying', 'Staying put'], ['moving', 'Moving'], ['town', 'Town hazards and health']];
   /* A key's kind letter and id, or null; which keys are valid is decided once, by FK.keyPattern (emergency.js). */
   const parseKey = k => (typeof k === 'string' && FK.keyPattern.test(k) ? { kind: k[0], id: k.slice(2) } : null);
   const JUMP_MIN = 4;   // a topic with this many sections gets a jump list
@@ -294,8 +294,8 @@
   }
   const tagged = (t, dim, val) => val === 'any' || !Array.isArray(t[dim]) || !t[dim].length || t[dim].includes(val);
   const matches = (t, f) => tagged(t, 'where', f.where) && tagged(t, 'when', f.when);
-  /* Each category's hub topic leads its list (Priorities in Basics, the heat hub in Heat, the food hub in Food); the rest go by title. */
-  const LEADS = ['surv-priorities', 'surv-heat-out', 'surv-fallout-warning', 'surv-food-power-out'];
+  /* Each category's hub topic leads its list (Priorities in Basics, the heat hub in Heat, the food hub in Food, the land hub in Food from the land); the rest go by title. */
+  const LEADS = ['surv-priorities', 'surv-heat-out', 'surv-fallout-warning', 'surv-food-power-out', 'surv-land-start'];
   const lead = t => (LEADS.includes(t.id) ? 0 : 1);
   const byTitle = (a, b) => lead(a) - lead(b) || a.title.localeCompare(b.title);
 

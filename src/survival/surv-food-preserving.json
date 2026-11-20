@@ -9,12 +9,12 @@
     "curing",
     "jerky"
   ],
-  "summary": "This page gives no method for canning, curing or smoking food, or for drying meat, fruit or vegetables; herbs are the one food it teaches you to dry. Don’t try to dry meat to save it: this page gives no method, and bacteria that cause illness are likely to survive the dry heat of a warm oven or a food dehydrator (USDA). Thawing meat is cooked and eaten, or thrown out, by Is it still good? and Cook without power. Pressure canning by tested instructions is the only recommended way to can vegetables, meat, poultry or fish; canning done wrong can cause botulism, which you can’t see, smell or taste. A failing freezer: keep it shut and check its food in Is it still good?",
+  "summary": "This page gives no method for canning food, for drying, curing or smoking meat other than game, for curing or smoking fish, or for drying fruit or vegetables; herbs are the one food it teaches you to dry. Ways to keep game meat without a freezer are in Preserving game meat, each with its label and its risks; bacteria that cause illness are likely to survive the dry heat of a warm oven or a food dehydrator (USDA). Thawing meat is cooked and eaten, or thrown out, by Is it still good? and Cook without power. Pressure canning by tested instructions is the only recommended way to can vegetables, meat, poultry or fish; canning done wrong can cause botulism, which you can’t see, smell or taste. A failing freezer: keep it shut and check its food in Is it still good?",
   "doFirst": [
     "Freezer failing? Keep the door shut and follow Food when the power goes out. Before you refreeze, cook or eat anything from it, check it in Is it still good?",
     "This app’s caution: don’t try canning for the first time now. Pressure canning is the only recommended method for low-acid food such as vegetables, meat, poultry and fish, and a boiling water canner will not protect against botulism (CDC).",
     "Don’t eat home-canned food if you don’t know whether safe canning guidelines were followed (CDC). The warning signs are in Is it still good?",
-    "Don’t try to dry meat to save it: this page gives no method. Bacteria that cause illness are likely to survive the dry heat of a warm oven, and especially a food dehydrator, and sun drying is not recommended for meat jerky (USDA). Thawing meat: check it in Is it still good?, then cook and eat it by Cook without power, or throw it out."
+    "Drying meat to save it: see Preserving game meat, which gives each method with its label and its risks. Bacteria that cause illness are likely to survive the dry heat of a warm oven, and especially a food dehydrator, and sun drying is not recommended for meat jerky (USDA). Thawing meat: check it in Is it still good?, then cook and eat it by Cook without power, or throw it out."
   ],
   "sections": [
     {
@@ -95,10 +95,14 @@
         {
           "list": [
             "Several outbreaks of E. coli O157:H7 have occurred in venison jerky (National Center for Home Food Preservation).",
-            "USDA’s jerky page says there are other special considerations for jerky from venison or other wild game: venison can be heavily contaminated with fecal bacteria, and deer carcasses are usually not chilled quickly the way beef is, so bacteria can multiply. It gives no heating figure of its own for game. This app’s reading: the USDA figures above are not for wild game. This page gives no temperature for drying game. Cook without power cooks all wild game and wild birds to at least 165°F (73.9°C) in the thickest part.",
+            "USDA’s jerky page says there are other special considerations for jerky from venison or other wild game: venison can be heavily contaminated with fecal bacteria, and deer carcasses are usually not chilled quickly the way beef is, so bacteria can multiply. It gives no heating figure of its own for game. This app’s reading: the USDA figures above are not for wild game. The heating figure for game jerky, and why it is above the 165°F cooking rule, is in Preserving game meat. Cook without power cooks all wild game and wild birds to at least 165°F (73.9°C) in the thickest part.",
             "Bacteria that cause illness are likely to survive the dry heat of a warm oven, and especially the 130 to 140°F (54 to 60°C) of a food dehydrator (USDA).",
-            "Don’t try to dry meat to save it. This page gives no method for drying meat, including game. Thawing meat goes by Is it still good? and Cook without power."
+            "Methods for drying meat, including game jerky, are in Preserving game meat. Thawing meat goes by Is it still good? and Cook without power."
           ]
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Preserving game meat"
         },
         {
           "link": "s:surv-food-still-good",
@@ -153,7 +157,11 @@
       "h": "Salting and curing",
       "blocks": [
         {
-          "p": "No official source opened for this app teaches a beginner to salt or cure meat or fish. The National Center for Home Food Preservation’s guidance says to cure meat in a refrigerator below 40°F (4°C), and warns that using sodium nitrite in place of salt in a curing recipe can be a lethal dose. This app gives no method."
+          "p": "No food-safety agency source opened for this app teaches a beginner to salt or cure meat or fish. Salting, brining and corning game meat, as traditional methods with their labels and risks, are in Preserving game meat. The National Center for Home Food Preservation’s guidance says to cure meat in a refrigerator below 40°F (4°C), and warns that using sodium nitrite in place of salt in a curing recipe can be a lethal dose. This page gives no method for salting or curing fish."
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Preserving game meat"
         }
       ]
     },
@@ -161,7 +169,11 @@
       "h": "Smoking",
       "blocks": [
         {
-          "p": "“Smoke itself, without proper cooking, is not an effective food preservative.” (National Center for Home Food Preservation.) It gives storage times for cured or smoked poultry and lightly cured fish only in a refrigerator or freezer, and says modern fish curing and smoking recipes make a highly perishable product that rarely keeps better than the raw fish (National Center for Home Food Preservation). This app gives no method. Cooking outdoors safely is in Cook without power."
+          "p": "“Smoke itself, without proper cooking, is not an effective food preservative.” (National Center for Home Food Preservation.) It gives storage times for cured or smoked poultry and lightly cured fish only in a refrigerator or freezer, and says modern fish curing and smoking recipes make a highly perishable product that rarely keeps better than the raw fish (National Center for Home Food Preservation). Smoking game meat, outdoors only, with its label and its risks, is in Preserving game meat. This page gives no method for smoking fish. Cooking outdoors safely is in Cook without power."
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Preserving game meat"
         },
         {
           "link": "s:surv-food-cooking-no-power",
@@ -173,7 +185,7 @@
       "h": "Cold storage",
       "blocks": [
         {
-          "p": "Keeping food cold without a working fridge or freezer, with ice and coolers and never outdoors, is in Food when the power goes out. Root cellars and storing garden crops are not covered in this app."
+          "p": "Keeping food cold without a working fridge or freezer, with ice and coolers and never outdoors, is in Food when the power goes out. For game meat, winter cold as the freezer is given as a traditional method, not agency-verified, with its risks, in Preserving game meat. Root cellars and storing garden crops are not covered in this app."
         },
         {
           "link": "s:surv-food-power-out",
@@ -236,8 +248,8 @@
       "used": "Several outbreaks of E. coli O157:H7 in venison jerky; cure, age or preserve meats in a refrigerator below 40°F; sodium nitrite in place of salt can be a lethal dose; smoke without proper cooking is not an effective preservative; cured and smoked products kept refrigerated or frozen"
     },
     {
-      "name": "Food when the power goes out, Is it still good?, Cook without power, Food poisoning and botulism (other topics in this app)",
-      "used": "Quoted word for word: food not outside even in winter (New York State Department of Health); the freezer rule (New York State Department of Health, CDC, FoodSafety.gov); home-canned food from someone else and the botulism toxin warning (CDC). Freezer times, warning signs, boiling home-canned food, disposal and cooking by link; thawing meat checked, then cooked and eaten or thrown out, by link; Cook without power’s wild game temperature (165°F)"
+      "name": "Food when the power goes out, Is it still good?, Cook without power, Food poisoning and botulism, Preserving game meat (other topics in this app)",
+      "used": "Quoted word for word: food not outside even in winter (New York State Department of Health); the freezer rule (New York State Department of Health, CDC, FoodSafety.gov); home-canned food from someone else and the botulism toxin warning (CDC). Freezer times, warning signs, boiling home-canned food, disposal and cooking by link; thawing meat checked, then cooked and eaten or thrown out, by link; Cook without power’s wild game temperature (165°F); drying, smoking, salting and curing game meat, and the game jerky heating figure, by link to Preserving game meat"
     }
   ],
   "reviewed": "2026-11-19"

@@ -1,0 +1,279 @@
+{
+  "id": "surv-land-small-game",
+  "title": "Small game and birds",
+  "category": "land",
+  "keywords": [
+    "small game",
+    "squirrel hunting",
+    "rabbit hunting",
+    "hare",
+    "snowshoe hare",
+    "turkey hunting",
+    "grouse",
+    "pheasant",
+    "duck hunting",
+    "waterfowl",
+    "goose hunting",
+    "zone of fire",
+    "snapping turtle"
+  ],
+  "summary": "Smaller animals are worth the effort because there are more of them. Squirrels: aim for the head when that is all that shows; rabbits: shoot in the open. Turkey with a shotgun: the head and neck only. Birds on the wing: within about 40 yards. Shoot only inside your own zone of fire, never at a sound, and never at a bird against the sky. Wear gloves with rabbits and hares. On the water, wear a life jacket and dress for the water, not the air.",
+  "doFirst": [
+    "Shoot only game in front of you, inside your own zone of fire. If a bird turns back across the line of hunters, don’t swing on it and don’t fire (Maine hunter education).",
+    "Never fire at a sound or movement (Washington hunter education). Never shoot at a bird or animal against the sky (Maine hunter education).",
+    "Turkey with a shotgun: the head and neck only, never the body (New Jersey Fish and Wildlife). Don’t stalk turkey calls: it could be another hunter (MassWildlife).",
+    "Wear gloves with rabbits, hares and rodents, and check the animal for signs of disease before you eat it (linked below).",
+    "In a boat: wear a life jacket, don’t overload the boat, and if it tips over, stay with it (Minnesota DNR)."
+  ],
+  "sections": [
+    {
+      "h": "Read this first",
+      "blocks": [
+        {
+          "p": "This page assumes you already own a legal firearm and have had basic training with it. It covers what is worth a shot, where to aim, and how to shoot safely when it is for food. In normal times New York sets seasons, hours, legal firearms and shot, and which animals may be taken: see New York rules."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "p": "After fallout, the caution for wild game is in Game, fish, milk and gardens after fallout: don’t use it until officials say you can."
+        },
+        {
+          "link": "s:surv-land-after-fallout",
+          "label": "Game, fish, milk and gardens after fallout"
+        }
+      ]
+    },
+    {
+      "h": "Worth the effort",
+      "blocks": [
+        {
+          "list": [
+            "Unless you have the chance at large game, concentrate on the smaller animals: there are more of them (US Army survival manual, FM 21-76).",
+            "Squirrels: Missouri Department of Conservation says they taste better than nearly any other game animal.",
+            "Rabbits: in Missouri, rabbit numbers are often higher in October (Missouri Department of Conservation). No New York figure was found.",
+            "Missouri Department of Conservation hunts squirrels with a .22 rifle or a shotgun, preferably .410 or 20 gauge, with number 6 shot, and rabbits with a 20 gauge and number 6 or 7½ shot.",
+            "Pass up a shot you can’t recover: a squirrel peeking out of a tree hole is unlikely to be recovered (Missouri Department of Conservation), and don’t shoot at birds at the edge of range: shooting too far is one of the bad decisions behind most missed or wounded game (New Jersey Fish and Wildlife)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Safe shooting",
+      "blocks": [
+        {
+          "p": "NYS DEC’s firearm rules: treat every firearm as if it is loaded; keep the muzzle pointed in a safe direction; keep your finger off the trigger until you are ready to fire; identify your target and what lies beyond it."
+        },
+        {
+          "list": [
+            "Your zone of fire is the area where you can shoot safely. It changes with every step. Never swing or shoot outside it (Maine hunter education).",
+            "Hunt in groups of three at most, two while you are new to it, and agree on each person’s zone of fire before you set off (Maine hunter education).",
+            "Walking three abreast: the middle hunter takes birds flushing straight ahead; each end hunter takes birds flying toward their end of the line. A bird that turns back across the line: everyone holds their swing and doesn’t fire (Maine hunter education).",
+            "Only one hunter aims at any one target. Never let your muzzle cross a person while you swing on game: better to pass up the shot (Maine hunter education).",
+            "Shoot only with a safe backstop, never at an animal or bird against the sky (Maine hunter education). Shot travels far: small shot 200 to 350 yards (180 to 320 m), larger shot over 600 yards (550 m), and a .22 bullet over 1½ miles (2.4 km) (Maine hunter education).",
+            "Everyone wears fluorescent orange when hunting in a group (Maine hunter education). Watch for dogs in tall brush: a beagle can be taken for a rabbit (Missouri Department of Conservation).",
+            "Wear safety glasses and ear protection (Missouri Department of Conservation)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Squirrels",
+      "blocks": [
+        {
+          "list": [
+            "Gray squirrels live mostly in large woods and bottomlands and are active from dawn; fox squirrels are found more at the edges of woods and are more active later in the morning and at midday. On hot, humid summer days they move much less at midday (Missouri Department of Conservation).",
+            "Approach at an angle until you get a good shot (Missouri Department of Conservation).",
+            "When only the head shows behind a branch, aim for the head: head shots put fewer pellets in the meat (Missouri Department of Conservation).",
+            "Don’t shoot into leaf nests, or at a squirrel peeking out of a tree hole (Missouri Department of Conservation).",
+            "A .22 bullet fired at a squirrel can travel over 1½ miles (2.4 km) (Maine hunter education): only shoot when there is a safe backstop behind it, never at a squirrel against the sky."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Rabbits and hares",
+      "blocks": [
+        {
+          "list": [
+            "Look in brushy cover near feeding areas: hayfields, pastures, woodland edges and fields (Missouri Department of Conservation).",
+            "They move most in early morning and late afternoon. On a sunny day after a cold snap they may move at midday: try south- and southwest-facing slopes (Missouri Department of Conservation).",
+            "Wait until the rabbit reaches an open spot with no brush before you shoot (Missouri Department of Conservation).",
+            "New York’s small game includes cottontail rabbits and varying (snowshoe) hares (NYS DEC hunting guide). No source opened gives hare hunting advice of its own.",
+            "Wear disposable gloves when you handle a rabbit or hare carcass, and keep dogs away from carcasses: rabbit hemorrhagic disease kills rabbits and hares and lasts for months on surfaces (NYS DEC). In normal times, report sick rabbits, or rabbits dying in unusual ways, to DEC’s Wildlife Health Program (NYS DEC). One that looks sick and is already shot: see Field dressing game, “Already caught or shot, and it looks sick”.",
+            "Rabbits and hares can carry tularemia. Wear gloves, and check the liver before you eat one: how, and when to throw the rabbit away, is in Field dressing game."
+          ]
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        }
+      ]
+    },
+    {
+      "h": "Turkey",
+      "blocks": [
+        {
+          "warn": "Most turkey hunting accidents happen when a hunter sneaks up on another hunter who is calling (MassWildlife). Never stalk a turkey call: sit and call the birds to you."
+        },
+        {
+          "list": [
+            "Shotgun: aim only at the head and neck. A body shot will not kill the bird (New Jersey Fish and Wildlife): its wings can stop pellets and leave it wounded (Connecticut hunter safety manual).",
+            "Don’t shoot a gobbler in full strut: wait until its head and neck are stretched out. Make sure there are no other birds behind it (New Jersey Fish and Wildlife).",
+            "Bow: the broadside shot is best (Texas Parks and Wildlife).",
+            "Pattern your shotgun before you hunt, know your effective range, and pick out objects at known distances when you set up so you don’t shoot beyond it (MassWildlife).",
+            "Don’t wear red, white, blue or black: those colours go with male turkeys (MassWildlife).",
+            "Sit against a large tree or rock, where your view isn’t blocked. Don’t set decoys close to where you sit (MassWildlife).",
+            "Carry decoys, a tail fan and any turkey you take inside a bag or vest, never in the open, and consider wearing orange walking in and out (MassWildlife).",
+            "If another hunter comes toward you, stay still and call out in a loud voice. Don’t wave, and don’t use a turkey call to get their attention (MassWildlife)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Grouse, pheasant and other upland birds",
+      "blocks": [
+        {
+          "list": [
+            "Aim for the head and lead the bird (New Jersey Fish and Wildlife).",
+            "Most shotguns are not effective past 40 yards (37 m). Don’t shoot at birds at the edge of range (New Jersey Fish and Wildlife). Missouri Department of Conservation keeps every shot under 45 yards; this app goes by 40.",
+            "Ruffed grouse have a black band on the tail; the endangered spruce grouse, in Adirondack evergreen forests, has an orangish-brown band. Learn the difference before you hunt there (NYS DEC hunting guide). Whether spruce grouse may be taken in normal times is in New York rules.",
+            "NYS DEC releases about 50,000 pheasants a year on public and private land (NYS DEC hunting guide).",
+            "Field dress birds right away and keep the meat cool and clean. On warm days hang birds rather than piling them: a pile traps heat (Cornell Cooperative Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Ducks and geese",
+      "blocks": [
+        {
+          "list": [
+            "The shot rules for waterfowl in normal times are in New York rules. Steel shot is lighter than lead, so you may need a larger shot size (New Jersey Fish and Wildlife).",
+            "The same range limit as other birds: within about 40 yards (37 m) (New Jersey Fish and Wildlife).",
+            "Ducks, geese and other birds can carry bird flu, often with no sign. Don’t handle sick birds; the signs, and how to dress birds safely, are in Field dressing game."
+          ]
+        },
+        {
+          "warn": "Cold water can kill even on a sunny day. Dress for the water temperature, not the air (Minnesota DNR)."
+        },
+        {
+          "steps": [
+            "Wear a life jacket: carrying one doesn’t count (Minnesota DNR).",
+            "Don’t overload the boat; stay within its capacity plate (Minnesota DNR).",
+            "Check the weather. Never set out in a storm, don’t hunt in rough water, and avoid crossing big open water (Minnesota DNR).",
+            "Hunt with a companion, within sight or call. Tell someone where you will hunt and when you will be back (Minnesota DNR).",
+            "Sudden moves, like standing up quickly, can throw someone out or tip the boat (Minnesota DNR).",
+            "If you fall in or the boat tips over, stay with the boat and try to get back in: most swamped boats still float. Don’t try to swim unless you are wearing a life jacket. Keep your boots and clothes on: most clothing, waders included, floats for a long time (Minnesota DNR).",
+            "In the water: 1 minute to stay calm and get your breathing under control; 10 minutes of useful movement to make a plan, get yourself out if you can, and signal for help; then 1 hour or more of useful consciousness: focus on slowing heat loss. In a life jacket, cross your ankles, cross your arms over your chest, draw your knees to your chest and lean back (Minnesota DNR)."
+          ]
+        },
+        {
+          "link": "p:drowning",
+          "label": "Drowning"
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        }
+      ]
+    },
+    {
+      "h": "Other animals",
+      "blocks": [
+        {
+          "list": [
+            "Snapping turtles: if you eat one, trim off all the fat and throw away the fat, liver and eggs before cooking, to cut down the pollutants you take in (NYS DEC hunting guide).",
+            "Frogs, woodchucks and some other animals have their own rules in normal times, and some have no closed season: see New York rules."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Handling and next steps",
+      "blocks": [
+        {
+          "list": [
+            "Field dress right away and keep the meat cool and clean (Cornell Cooperative Extension). Bring a sharp knife, clean cloths or paper towels, plastic gloves and, if you can, a cooler of ice (Cornell Cooperative Extension).",
+            "Shot can stay in the meat even after it passes through: chew carefully (Cornell Cooperative Extension). Lead harms children and unborn babies most (Cornell Cooperative Extension); who should not eat game shot with lead is in Field dressing game."
+          ]
+        },
+        {
+          "p": "Dressing rabbits, squirrels and birds, and the signs that an animal is not safe to eat, are in Field dressing game; cutting them up is in Butchering deer and small game; how long they keep is in Preserving game meat."
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
+          "link": "s:surv-land-butchering",
+          "label": "Butchering deer and small game"
+        },
+        {
+          "link": "s:surv-land-keeping-meat",
+          "label": "Preserving game meat"
+        },
+        {
+          "link": "c:land-kit",
+          "label": "Hunting, fishing and trapping kit"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8, page 73",
+      "used": "Unless you have the chance to take large game, concentrate on the smaller animals, due to their abundance"
+    },
+    {
+      "name": "Missouri Department of Conservation: Getting Started Squirrel Hunting; Getting Started Rabbit Hunting; Small Game Hunting (Xplor, November 2015); Nontoxic Shot and Shot Size",
+      "used": "Squirrels taste better than nearly any other game; rabbit numbers higher in October (Missouri); .22 or shotgun, .410 or 20 gauge, number 6 shot for squirrels; 20 gauge, number 6 or 7½ for rabbits; approach at an angle; head shots limit pellets; no shots into leaf nests or at squirrels in cavities; gray and fox squirrel habitat and times; rabbit cover, times, sunny days after a cold snap, south-facing slopes; shoot rabbits in the open; beagles in brush; safety glasses and ear protection; all shots under 45 yards (shown, 40 used)"
+    },
+    {
+      "name": "New Jersey Division of Fish and Wildlife, hunter education workbook, Chapter 4: Game Care, Before and After the Shot",
+      "used": "Small game and birds: aim for the head and lead the bird; most shotguns not effective past 40 yards, no skyblasting; steel lighter than lead, larger shot may be needed; turkey head and neck only, a body shot will not kill; not in full strut; no other birds behind"
+    },
+    {
+      "name": "Maine Hunter Safety Course (hunter-ed.com, with the Maine Department of Inland Fisheries and Wildlife): What Is a Zone-of-Fire?; Maintaining Your Safe Zone-of-Fire; Importance of Safe Backstops",
+      "used": "Zone of fire, changes with every step; groups of three at most, two for new hunters, agree zones first; three abreast; hold swings when game turns back; one shooter per target; never point at a person; backstop, no skylined animal; fluorescent orange; small shot 200 to 350 yards, larger shot over 600 yards, .22 over 1½ miles"
+    },
+    {
+      "name": "Washington Hunter Safety Course (hunter-ed.com), Victim Mistaken for Game",
+      "used": "Never fire at a sound or movement"
+    },
+    {
+      "name": "NYS DEC bulletin, DEC Reminds New York State Hunters: Be Safe During Hunting Seasons (October 15, 2020)",
+      "used": "The four firearm rules: treat every firearm as loaded, muzzle in a safe direction, finger off the trigger, sure of the target and what is beyond"
+    },
+    {
+      "name": "MassWildlife (Massachusetts Division of Fisheries and Wildlife), Turkey hunting safety (web page)",
+      "used": "Most accidents from stalking hunters who are calling; don’t stalk hen calls, sit and call; no red, white, blue or black; protect your back against a large tree or rock with a clear view; decoys not too close; decoys, fans and birds concealed; consider orange in and out; call out loudly, don’t wave or call; pattern the shotgun, know your range, range objects"
+    },
+    {
+      "name": "Texas Parks and Wildlife Department, Hunter Education online course, Shots to the Vital Areas",
+      "used": "Turkey: broadside best for bowhunters"
+    },
+    {
+      "name": "Connecticut DEEP, Connecticut Hunter Safety Manual, Chapter 12: Making a Quick, Clean Kill (Outdoor Roadmap course material)",
+      "used": "Turkey wings thick enough to deflect pellets and leave the bird wounded"
+    },
+    {
+      "name": "NYS DEC, 2026–2027 New York Hunting and Trapping Guide, Small Game Hunting section",
+      "used": "Cottontails and varying hares as small game; spruce grouse and ruffed grouse tail bands, Adirondack evergreen forests; about 50,000 pheasants released a year; RHDV2 lethal to rabbits and hares, lasts months on surfaces, disposable gloves, keep dogs off carcasses, report sick rabbits; snapping turtles: trim fat, discard fat, liver and eggs"
+    },
+    {
+      "name": "Cornell Cooperative Extension, NYS 4-H Shooting Sports and Cornell University Department of Natural Resources, Wild Harvest Table Guide to Hunting Fowl and Other Small Game (November 2015)",
+      "used": "Field dress right away, keep meat cool and clean; hang birds on warm days, piling traps heat; knife, cloths or paper towels, plastic gloves, cooler of ice; shot can remain in meat, chew carefully; lead harmful to children and fetuses"
+    },
+    {
+      "name": "Minnesota Department of Natural Resources, Water Safety for Duck Hunters (2017)",
+      "used": "Wear a life jacket, carrying doesn’t count; capacity plate; dress for the water temperature; cold water deadly on sunny days; weather, storms, rough and open water; companion and float plan; sudden moves; stay with the boat, most still float; don’t swim without a life jacket; clothes and waders float; 1-10-1 in its own words; heat escape position"
+    },
+    {
+      "name": "Field dressing game, Butchering deer and small game, Preserving game meat, Game, fish, milk and gardens after fallout, New York rules for hunting, fishing and trapping (other topics in this app)",
+      "used": "Gloves with rabbits and rodents, tularemia and bird flu signs, lead; cutting up; keeping; wild game after fallout; every New York rule, all by link"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

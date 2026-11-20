@@ -138,15 +138,19 @@
       "h": "Food from outside",
       "blocks": [
         {
-          "p": "From Food and wild plants, word for word: “Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early.” “Only eat a plant you can identify with certainty.” After fallout, food that was outdoors has its own rules: see Water and food after fallout."
+          "p": "From Wild plants, word for word: “Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early.” “Only eat a plant you can identify with certainty.” After fallout, food that was outdoors has its own rules: see Water and food after fallout."
         },
         {
           "link": "s:surv-food-and-wild-plants",
-          "label": "Food and wild plants"
+          "label": "Wild plants"
         },
         {
           "link": "s:surv-traps-and-fishing",
-          "label": "Traps and fishing"
+          "label": "Fishing for food"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         },
         {
           "link": "s:surv-fallout-water-and-food",
@@ -186,7 +190,7 @@
       "used": "More activity after a disaster; regular mealtimes, especially for children; stress eating; more water for freeze-dried food"
     },
     {
-      "name": "How much water you need, Priorities, Food and wild plants, Is it still good?, Food when the power goes out, Low blood sugar (other topics and a protocol in this app)",
+      "name": "How much water you need, Priorities, Wild plants, Is it still good?, Food when the power goes out, Low blood sugar (other topics and a protocol in this app)",
       "used": "Ready.gov’s never-ration line, the survival times, wild food, the throw-out rule, what to eat first and low blood sugar causes, quoted word for word"
     }
   ],

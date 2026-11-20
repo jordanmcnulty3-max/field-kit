@@ -1,106 +1,269 @@
 {
   "id": "surv-traps-and-fishing",
-  "title": "Traps and fishing",
-  "category": "basics",
+  "title": "Fishing for food",
+  "category": "land",
   "keywords": [
-    "snare",
-    "trap",
-    "deadfall",
     "fishing",
+    "fish",
+    "tip-up",
+    "set line",
+    "trotline",
     "gorge hook",
-    "fish trap",
-    "squirrel"
+    "ice fishing",
+    "ice thickness",
+    "thin ice"
   ],
-  "summary": "Set several traps where animals clearly travel, and leave as little sign of yourself as you can.",
-  "where": [
-    "rural",
-    "woods"
+  "summary": "Fish are often more plentiful than game and can be caught quietly. Fish where they gather in each season, use set lines, traps and ice fishing as the sources teach them (set lines, fish traps and most nets are illegal in New York in normal times), and keep the catch alive or cold until you clean it. On ice, walk only on at least 4 inches (10 cm) of solid clear ice, or 8 inches (20 cm) of white ice.",
+  "doFirst": [
+    "Ice: walk only on at least 4 inches (10 cm) of solid, clear ice, or 8 inches (20 cm) of white or snow ice. Stay off ice 2 inches (5 cm) thick or less (NYS DEC). How to test the ice as you go, and what to do if you go through it, are under “Ice fishing” below."
   ],
   "sections": [
     {
-      "h": "Traps and fishing",
+      "h": "When it is for food",
       "blocks": [
         {
-          "warn": "In normal times New York requires a trapping licence, sets trapping seasons, bans snares for trapping, limits trap types, and requires traps to be checked at least once every 24 hours in the Southern Zone (every 24 or 48 hours in the Northern Zone, depending on area and trap). Fishing needs a licence from age 16, lines must not be left unattended, and fish traps may only be used for baitfish. Other states have their own rules."
+          "p": "This page assumes you have fished with a rod and reel before. Fish are a good source of protein and fat, are often more plentiful than game, and can be caught quietly (US Army). Sunfish are usually the first fish children catch (NYS DEC)."
+        },
+        {
+          "warn": "In normal times New York law sets who needs a licence, when each fish may be taken, how many lines you may use and which methods are allowed (2026 fishing guide). Three methods on this page go beyond what the rules allow in normal times: set lines, fish traps for anything but baitfish, and nets other than the few the rules allow. They are on this page because the sources teach them."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
+        },
+        {
+          "link": "s:surv-land-trapping",
+          "label": "Trapping"
+        }
+      ]
+    },
+    {
+      "h": "Where the fish are",
+      "blocks": [
+        {
+          "list": [
+            "Lakes and ponds: the edges of weed beds, where fish cruise (cast into the edges and openings to avoid tangles); points, pieces of land that extend out from the shoreline and slope into deeper water: gradually sloping points are good places to fish (fish the tip and the corners); docks, where fish shelter from the sun at almost any time of day; downed trees and other sunken objects; trees and bushes hanging over the water, best where the water under them is deep; and lily pads (NYS DEC).",
+            "Inlets, where streams enter a lake, can be excellent, especially in spring or fall, when spawning fish gather there (NYS DEC).",
+            "Rivers and streams: undercut banks, the quiet pocket behind a rock, eddies, the seam where two currents meet, drop-offs, the outside of a bend where the fast water carries food, and the hole below a dam or waterfall (NYS DEC). In heavy current fish rest in eddies, and gather in deep pools, under overhanging brush and around sunken logs (US Army).",
+            "Fish are not always near the bottom or the surface: change the depth of your bait until you find them. Cold water slows fish down, so move a lure slowly when the water is cold (NYS DEC)."
+          ]
+        },
+        {
+          "warn": "Low-head dams: a low wall built across the whole width of a river or stream (National Weather Service). The churning water below one can pull a person under and hold them there, and it is dangerous for swimming, boating and fishing: keep out of it (Indiana Department of Homeland Security). Someone caught in it: don’t go in after them; throw a rope, a ring buoy or a jug on a rope from the bank. More than a quarter of the people who die at these dams are the rescuers (Indiana Department of Homeland Security)."
+        },
+        {
+          "fig": "land-fishing",
+          "cap": "Four of the places in rivers and streams: the hole below a dam or waterfall, the outside of a bend where the fast water carries food, the quiet pocket behind a rock, and the seam where two currents meet (NYS DEC). Undercut banks, eddies and drop-offs are not drawn."
+        },
+        {
+          "p": "By season (NYS DEC):"
         },
         {
           "list": [
-            "Set traps where you can see animals pass: runs, trails, droppings, burrow openings, and feeding or watering spots. Set them where the trail narrows, or narrow it yourself with a funnel of sticks.",
-            "Set several. A few well-placed traps can catch more than one person hunting.",
-            "Leave as little sign of yourself as you can: clear away fresh dirt, don’t cut live plants nearby, and handle traps as little as possible. Human scent alarms animals; mud masks it. Don’t use urine."
+            "Spring: yellow perch spawn in shallow water near plants in April and May; crappie are most commonly caught when they congregate in shallow water to spawn, in May and June; brown bullheads spawn in shallow water near logs or rocks in May and June.",
+            "Summer: sunfish (pumpkinseed, bluegill) spawn in shallow water from June to August and live around weeds, docks and other cover; crappie move to deeper, cooler water.",
+            "Year round: yellow perch live in shallow, weedy, sheltered places; bullheads in still water with a mud bottom; walleye in the deep parts of large lakes, streams and rivers, and they hunt at night.",
+            "Winter: under the ice; see Ice fishing below.",
+            "Weather: fish eat heavily before a storm and seldom just after one, while the water is muddy. A light often draws fish at night (US Army)."
           ]
         }
       ]
     },
     {
-      "h": "Traps",
+      "h": "Rod and reel, briefly",
       "blocks": [
         {
           "list": [
-            "Simple snare: a noose of wire anchored firmly, big enough to slip over the animal’s head but never low enough for it to step a foot into. Wire works better than cord, which can loosen and slip off."
+            "For beginners: a spin-casting rod and reel, monofilament line (4 to 8 lb test for bluegill and yellow perch; 8 lb for most fishing), size 6 to 8 hooks for panfish, the smallest bobber that still holds your bait up, and the smallest sinker that keeps bait on the bottom. A bobber and bait is the best rig for beginners (NYS DEC).",
+            "Bait: worms catch almost anything; minnows hooked through the back, tail or lip so they swim naturally; crickets for panfish; waxworms for trout, perch, crappie and sunfish; crayfish for bass (NYS DEC)."
           ]
         },
         {
-          "fig": "trap-snare",
-          "cap": "Simple snare: a noose of wire anchored firmly, big enough to slip over the animal’s head. Twigs funnel the animal in."
-        },
-        {
-          "list": [
-            "Squirrel pole: lean a long pole against a tree squirrels use and fix several small wire nooses along it."
-          ]
-        },
-        {
-          "fig": "trap-squirrel",
-          "cap": "Squirrels take the easy route up a leaning pole."
-        },
-        {
-          "list": [
-            "Figure-4 deadfall: three notched sticks hold up a rock or log heavy enough to kill the animal at once, and bait on the trigger stick drops it. Practise setting the trigger first. Keep your hands and body out from under the weight while setting it."
-          ]
-        },
-        {
-          "fig": "trap-fig4",
-          "cap": "Figure-4 deadfall. Disturbing the bait trips the trigger and drops the weight."
+          "link": "c:land-kit",
+          "label": "Hunting, fishing and trapping kit"
         }
       ]
     },
     {
-      "h": "Fishing",
+      "h": "Set lines",
       "blocks": [
         {
+          "warn": "In normal times a set line is illegal in New York beyond what the 2026 fishing guide allows: the guide limits how many lines you may fish and the baits and hook points on each, and you must stay with your lines. So a trotline or stakeout with many hooks is illegal even when you stand beside it. The methods below are taught by the US Army survival manual and, where they are legal, by the Missouri Department of Conservation."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        },
+        {
           "list": [
-            "Gorge hook: a short sliver of bone or hardwood, sharpened at both ends and tied at the middle. Bait it lengthwise. Let the fish swallow it deep before you pull, so it sets itself in the throat; don’t jerk the line.",
-            "Fish trap: a funnel-shaped basket of lashed sticks that fish swim into but struggle to find their way out of.",
-            "Fish often feed heavily before a storm and seldom just after one, while the water is muddy. Light often draws them at night."
+            "Stakeout: drive two supple saplings into the bottom so their tops are just below the surface. Tie a cord between them just under the water, and tie short baited lines with hooks or gorges to it. The short lines must not be able to wrap around the poles or each other, or slide along the main line (US Army).",
+            "Trotline: tie a main line between two trees, or tie one end to a tree or big rock on the bank and weight the far end in the water. Braided nylon line works best. Hang short dropper lines from it on heavy barrel swivels; Missouri requires them at least 2 feet (60 cm) apart. Tie a float such as a 2-liter bottle to the main line to mark it (Missouri Department of Conservation).",
+            "Bank or limb lines: tie a line to a tree hanging over the water, to a brush pile sticking out of the water, or to a pole pushed into the mud and angled over the water. A piece of bungee cord or heavy inner tube in the line keeps a big catfish from breaking it (Missouri Department of Conservation).",
+            "Hooks and bait for catfish: circle hooks, 6/0 to 10/0, that a big fish can’t straighten; live bait such as sunfish, bullheads or crayfish, fresh cut fish, or on small waters worms or chicken livers (Missouri Department of Conservation).",
+            "Checking: Missouri, where these lines are legal, requires them to be attended at least once every 24 hours (Missouri Department of Conservation)."
           ]
         },
         {
-          "p": "Cleaning and cooking fish and game is in Field dressing game."
+          "p": "Gorge: a short shaft of wood or bone, sharp at both ends and notched in the middle for the line. Bait it lengthwise. Don’t jerk the line as you would with a hook: let the fish swallow the bait, so the gorge lodges as far down its throat as possible (US Army)."
+        },
+        {
+          "p": "Catfish fin spines and the feelers around the mouth can cause puncture wounds that become infected (US Army). Handle catfish with care."
+        }
+      ]
+    },
+    {
+      "h": "Fish traps and nets",
+      "blocks": [
+        {
+          "warn": "In normal times New York allows fish traps only for baitfish (minnow traps, with size limits), and no nets except a landing net, nets for baitfish and one dip net for a few kinds of fish (2026 fishing guide; see New York rules for hunting, fishing and trapping)."
+        },
+        {
+          "list": [
+            "Basket trap: lash sticks together with vines into a funnel shape, and close the top except for a hole big enough for fish to swim in (US Army).",
+            "Gill net: the US Army survival manual makes one from parachute cord, with a mesh of about 1 inch (2.5 cm), angles it in the stream so less debris builds up, and checks it often. This app does not give the net-making steps; they rely on the manual’s drawings.",
+            "Minnows caught in a legal minnow trap are bait for bigger fish, for example on a tip-up (NYS DEC)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Ice fishing",
+      "blocks": [
+        {
+          "warn": "Ice: walk only on at least 4 inches (10 cm) of solid, clear ice, or 8 inches (20 cm) of white or snow ice. Stay off ice 2 inches (5 cm) thick or less (NYS DEC). Several people together need 6 inches (15 cm) or more of strong ice (NYS DEC trapper education manual). Slush ice is about 50 percent weaker, and clear ice over running water about 20 percent weaker (NYS DEC)."
+        },
+        {
+          "list": [
+            "Check the thickness before you leave shore, and drill test holes as you go, at least every 150 feet (45 m), with a spud bar or an auger. Thickness varies even on one lake (NYS DEC).",
+            "Be most careful near shore, near moving water, where streams enter and leave lakes and ponds, and around docks, where bubblers keep ice thin some distance away (NYS DEC).",
+            "Carry ice safety picks (two handles with spike points). Fish with someone else, and tell someone where you will be and when you will be back (NYS DEC)."
+          ]
+        },
+        {
+          "p": "If you go through the ice (Minnesota Department of Natural Resources):"
+        },
+        {
+          "steps": [
+            "Don’t take off your winter clothing.",
+            "Turn toward the direction you came from.",
+            "Put your hands and arms on the unbroken ice.",
+            "Kick your feet and dig in your ice picks to work your way back onto the solid ice.",
+            "Once you are out, lie flat on the ice and roll away from the hole.",
+            "Get to a warm, dry, sheltered place and rewarm yourself at once."
+          ]
+        },
+        {
+          "link": "p:hypothermia",
+          "label": "Hypothermia"
+        },
+        {
+          "link": "p:drowning",
+          "label": "Drowning"
+        },
+        {
+          "p": "Gear and method (NYS DEC):"
+        },
+        {
+          "list": [
+            "Cut the hole with a spud bar (fine for ice up to about a foot (30 cm) thick; tie a lanyard to it so you don’t lose it through the ice) or an auger. Clear slush and ice chunks out of the hole with a skimmer.",
+            "Tip-up: a spool on a stick that holds a baited line through the hole; a bite releases a signal, usually a red flag. Most anglers set several (in normal times New York limits the lines you may fish through the ice: see the rules page). Hook a minnow through the lips or under the back fin.",
+            "Jigging: a jigging rod or hand line with a small spoon or lure, usually tipped with bait (minnows or fly larvae sold as spikes or mousies). Raise the rod tip a few inches and pause: fish usually take the bait during the pause."
+          ]
+        },
+        {
+          "p": "Where fish are under the ice (NYS DEC):"
+        },
+        {
+          "list": [
+            "Bluegills: over or along the edges of weed beds, in 15 feet (4.5 m) of water or less.",
+            "Yellow perch: from shallow weed beds under 10 feet (3 m) deep to flats in 40 feet (12 m) of water.",
+            "Crappie: along weed edges, or hanging in open water.",
+            "Northern pike and chain pickerel: shallow water, 5 to 15 feet (1.5 to 4.5 m), around or over weed beds.",
+            "Trout: anywhere from just a few feet under the ice to just off the bottom.",
+            "Walleye: around points, flats and shoals, within a foot (30 cm) of the bottom.",
+            "Large, shallower ponds and lakes suit chain pickerel, northern pike, yellow perch and sunfish; deep lakes must be fished selectively for pike, walleye or lake trout."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Keeping the catch until you clean it",
+      "blocks": [
+        {
+          "list": [
+            "Alive: on a stringer through the lower jaw, not the gills, or for small fish such as sunfish and perch in a mesh basket in cool water (NYS DEC). A stringer of dead fish keeps only when the water is about 40°F (4°C) or colder; water can feel cold and still not be cold enough (Maine Department of Inland Fisheries and Wildlife).",
+            "Or kill it quickly with a blow to the head (Maine Department of Inland Fisheries and Wildlife) and get it on ice as soon as it is caught (NYS DEC, New York Sea Grant).",
+            "Cleaning, how long fish keeps, New York’s advice on how much fish to eat, and cooking are in Gutting, filleting and eating fish."
+          ]
+        },
+        {
+          "link": "s:surv-land-fish-cleaning",
+          "label": "Gutting, filleting and eating fish"
         }
       ]
     }
   ],
   "sources": [
     {
-      "name": "NYS DEC, 2023-2024 New York Hunting & Trapping Guide (furbearers section)",
-      "used": "Trapping licence; Southern Zone 24-hour trap checks, Northern Zone 24 or 48 hours by WMU and trap; snares may not be used for trapping; body-gripping trap limits; season rules"
+      "name": "NYS DEC, Where To Fish: Rivers And Streams (web page, undated)",
+      "used": "Where fish hold in rivers and streams"
     },
     {
-      "name": "NYS DEC, General Freshwater Fishing Regulations",
-      "used": "Anglers must be in immediate attendance of lines; fish (minnow) traps only for baitfish"
+      "name": "NYS DEC, Beginners’ Guide to Freshwater Fishing (I FISH NY, with Take Me Fishing/RBFF), chapters 1 to 3 and 9",
+      "used": "Lakes and ponds: weed edges, points, docks, downed trees, overhanging trees, lily pads; inlets in spring or fall; depth of bait; slow lures in cold water; species habitat and spawning seasons (sunfish, yellow perch, crappie, brown bullhead, walleye); beginners' tackle and bait; stringer through the lower jaw; mesh basket; ice as soon as possible; ice thickness 4 inches clear or 8 inches white; test holes every 150 feet; carry ice picks; tell someone; spud lanyard; skimmer; tip-ups; jigging and the pause; where fish are under the ice"
     },
     {
-      "name": "NYS DEC, Freshwater Fishing Basics for Beginners",
-      "used": "Freshwater fishing licence from age 16"
+      "name": "NYS DEC, Learn How To Ice Fish (web page, undated)",
+      "used": "Stay off 2 inches or less; slush about 50 percent weaker; clear ice over running water about 20 percent weaker; double for white ice; danger areas and bubblers; ice picks; buddy system; spud bar up to about a foot; tip-up and jigging; minnow hooking; lake types and species"
+    },
+    {
+      "name": "NYS DEC, DEC Encourages Anglers to Safely Enjoy Ice Fishing this Season (press release, December 18, 2024)",
+      "used": "Check thickness before leaving shore, at various spots with an auger or spud bar; thickness varies within one waterbody; moving water and bubblers"
+    },
+    {
+      "name": "NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping, student manual, 4th edition (2016)",
+      "used": "Six inches or more of strong ice for several people"
+    },
+    {
+      "name": "New York rules for hunting, fishing and trapping (this app), from the NYS DEC 2026 Freshwater Fishing Regulations Guide",
+      "used": "In normal times: set lines must be attended; fish traps for baitfish only; the nets allowed"
+    },
+    {
+      "name": "Minnesota Department of Natural Resources, Ice safety: What if you fall in? (web page, undated)",
+      "used": "The six self-rescue steps"
+    },
+    {
+      "name": "Missouri Department of Conservation, Catfishing Without Pole and Line (web page, undated)",
+      "used": "Trotlines, bank and limb lines, droppers 2 feet apart in Missouri, swivels, floats, shock absorber, circle hooks and bait, 24-hour checks in Missouri"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (September 2018), chapter 4",
+      "used": "Fish as food, quiet to catch (4-146); feeding before storms, light at night (4-146); eddies, pools, cover (4-147); catfish spines and barbels (4-147); gorge (4-153); stakeout (4-154); gill net (4-155 to 4-157); basket trap (4-158)"
     },
     {
       "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8",
-      "used": "Trap placement, channelization, sign and scent (pp. 78-79); simple snare noose size and height, wire (p. 80); squirrel pole (p. 82); figure-4 deadfall (pp. 84-85); gorge (p. 89); fish traps (pp. 91-92); fish feeding (p. 75)"
+      "used": "Second source for feeding before storms, light at night, eddies and pools (p. 75), gorge and stakeout (p. 90), gill net (p. 91) and basket traps (p. 92)"
     },
     {
-      "name": "US Army ATP 3-50.21, Survival (2018), chapter 4",
-      "used": "Several traps beat one hunter (4-86); traps at burrow openings (4-15); scent, mud, no urine (4-91); snare and squirrel pole (4-102); figure-4 weight (4-103); gorge set by swallowing, don't jerk (4-153); funnel basket trap (4-158); feeding before storms (4-146)"
+      "name": "Maine Department of Inland Fisheries and Wildlife, How to Bring Home a Quality Catch (Maine Fishing Guide, web page, undated)",
+      "used": "Kill quickly with a blow to the head; stringer only in water about 40°F or less"
+    },
+    {
+      "name": "New York Sea Grant (Ken Gall), Handling Your Catch (undated)",
+      "used": "Get the fish on ice as soon as it is caught"
+    },
+    {
+      "name": "Indiana Department of Homeland Security, Get Prepared: Low-Head Dams (web page)",
+      "used": "Recirculating forces below a low-head dam pull and trap people underwater; the churning action is dangerous for swimming, boating and fishing; rescue from shore with a ring buoy, cushion or jug on a rope, never by going in; more than 25 percent of dam-related deaths are rescuers"
+    },
+    {
+      "name": "National Weather Service (Indianapolis office), Avoid the Drowning Machine: Low Head Dam Awareness Month, quoting the American Society of Civil Engineers",
+      "used": "A low-head dam is a manufactured structure built in a river or stream channel, extending fully across the banks"
     }
   ],
-  "reviewed": "2026-11-17"
+  "reviewed": "2026-11-19"
 }

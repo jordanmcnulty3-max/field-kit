@@ -199,11 +199,15 @@
         },
         {
           "link": "s:surv-food-and-wild-plants",
-          "label": "Food and wild plants"
+          "label": "Wild plants"
         },
         {
           "link": "s:surv-traps-and-fishing",
-          "label": "Traps and fishing"
+          "label": "Fishing for food"
+        },
+        {
+          "link": "s:surv-land-start",
+          "label": "Food from the land: where to start"
         }
       ]
     }

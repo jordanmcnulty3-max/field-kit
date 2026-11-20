@@ -62,13 +62,17 @@
        topic      the category its topics carry (every topic of the pack, and only those, has this category)
        hub        the key of the pack's hub topic, indexed first among its topics
        protocols  ids of the pack's Emergency protocols (indexed before its hub)
-       checklists ids of the pack's checklists (indexed after its topics) */
+       checklists ids of the pack's checklists (indexed after its topics)
+       older      optional: keys ("s:" and the id, as for hub) of topics that carry the pack's category but were indexed before the pack
+                  existed. They are indexed as a topic in no pack is, in their old place, so no search result moves when a topic changes
+                  category; every other topic of the category is a pack page, after all older pages. */
   const PACKS = [
     { topic: 'radiation', hub: 's:surv-fallout-warning', protocols: ['radiation-decontamination', 'radiation-sickness'], checklists: ['fallout-shelter-kit'] },   // v7.4
     { topic: 'food', hub: 's:surv-food-power-out', protocols: [], checklists: ['pantry'] },   // v7.5
+    { topic: 'land', hub: 's:surv-land-start', protocols: [], checklists: ['land-kit'], older: ['s:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants'] },   // v7.7
   ];
   // The index of the pack a document belongs to, or -1 for a document that is in none (those keep the old order, before every pack).
-  const packOfTopic = category => PACKS.findIndex(k => k.topic === category);
+  const packOfTopic = (category, id) => PACKS.findIndex(k => k.topic === category && !(k.older || []).includes('s:' + id));
   const packOfProtocol = id => PACKS.findIndex(k => k.protocols.includes(id));
   const packOfChecklist = id => PACKS.findIndex(k => k.checklists.includes(id));
 
@@ -94,7 +98,7 @@
         fields: [field(W.title, t.label), field(W.keywords, TOOL_WORDS[t.name] || '')] });
     }
     for (const t of FK.survival ? FK.survival.topics() : []) {
-      const k = t ? packOfTopic(t.category) : -1;
+      const k = t ? packOfTopic(t.category, t.id) : -1;
       (k >= 0 ? packed[k].topics : out).push(topicDoc(t));
     }
     for (const c of survList('checklists')) {
@@ -153,6 +157,12 @@
   /* ---------- Matching and ranking ---------- */
   const hits = (f, w) => f.hay !== undefined ? startsWord(f.hay, w) : f.toks.some(t => t.startsWith(w));
   const COMMON = new Set('am an as at be by do go he if in is it me my no of on or so to up us we'.split(' '));   // little words that sit inside many keyword phrases
+  /* A page's word t is the searched word w, allowing for an ending on the page's side: searching "collapse" finds
+     "collapsed", "vomit" finds "vomiting", "burn" finds "burns". Without it a page with the exact word as a keyword
+     outranked the protocol whose keyword is the longer form. Only this way round: "breathing" is not "breath". */
+  const ENDINGS = new Set(['s', 'es', 'd', 'ed', 'ing']);
+  const sameWord = (t, w) => t === w || (w.length > 2 && t.startsWith(w) && ENDINGS.has(t.slice(w.length)));
+  const WHOLE_KEYWORD = W.title + 0.25;   // between a title prefix (5) and a whole title word (5.5)
   function score(doc, words) {
     let total = 0;
     for (const w of words) {
@@ -163,9 +173,10 @@
       }
       if (!best) return 0;   // every word must match something
       total += best;
-      if (doc.fields[0].toks.includes(w)) total += 0.5;   // a whole title word beats a mere prefix
-      // A one-word search of one or two letters ("CO") that is a whole keyword, and not a common English word, beats titles that merely start with it.
-      else if (words.length === 1 && w.length < 3 && !COMMON.has(w) && doc.fields.some(f => f.w === W.keywords && f.toks.includes(w))) total += 1.25;
+      if (doc.fields[0].toks.some(t => sameWord(t, w))) total += 0.5;   // a whole title word beats a mere prefix
+      // A word that is a whole keyword, and not a common English word, beats a title that merely starts with it:
+      // "fall" is Head injury's keyword and only the start of "fallout". It still ranks under a whole title word.
+      else if (!COMMON.has(w) && best < WHOLE_KEYWORD && doc.fields.some(f => f.w === W.keywords && f.toks.some(t => sameWord(t, w)))) total += WHOLE_KEYWORD - best;
     }
     return total;
   }
@@ -275,12 +286,9 @@
   const item = r => '<button type="button" class="sr-item" data-key="' + esc(r.key) + '"><span>' + esc(r.title) +
     (r.draft ? ' <span class="sr-tag muted">Draft</span>' : '') + '</span><small>' + esc(r.where) + (r.snippet ? ' · ' + r.snippet : '') + '</small></button>';
 
-  /* Results are ranked; the list shows them in groups by kind, groups ordered by their best result. */
-  function grouped(results) {
-    const order = [];
-    results.forEach(r => { if (!order.includes(r.where)) order.push(r.where); });
-    return order.map(w => '<h3 class="sr-h">' + esc(w) + '</h3>' + results.filter(r => r.where === w).map(item).join('')).join('');
-  }
+  /* Results are shown in rank order, one list. Until v7.7 they were regrouped by kind with the leading kind's
+     whole group first, which put a protocol ranked second as low as nineteenth on screen. Each row names its kind. */
+  const ranked = results => results.map(item).join('');
   const CLEAR_RECENT = '<button type="button" class="em-clear" data-act="clear-recent" aria-label="Clear recent list">Clear</button>';
   function render() {
     const q = input.value;
@@ -297,7 +305,7 @@
       return;
     }
     const rs = query(q);
-    bodyEl.innerHTML = rs.length ? grouped(rs) : '<p class="sr-empty">No matches for “' + esc(q.trim()) + '”.</p>';
+    bodyEl.innerHTML = rs.length ? ranked(rs) : '<p class="sr-empty">No matches for “' + esc(q.trim()) + '”.</p>';
     live.textContent = rs.length ? rs.length + (rs.length === 1 ? ' result' : ' results') : 'No matches';
   }
 

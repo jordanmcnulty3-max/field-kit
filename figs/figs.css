@@ -25,3 +25,4 @@
 .dg .d{stroke-dasharray:5 5} .dg .t1{stroke-width:1.25} .dg .t3{stroke-width:3} .dg .t5{stroke-width:5}
 #dlgFig{width:calc(100vw - 16px);max-width:900px;padding:12px}
 #dlgFig .dg{max-height:calc(100dvh - 140px)}
+#dlgFig .dg.tall{max-height:none}   /* a step-by-step figure taller than the screen scrolls in the dialog, opening at its top */

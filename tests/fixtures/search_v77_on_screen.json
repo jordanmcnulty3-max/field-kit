@@ -1,0 +1,847 @@
+{
+ "CO": [
+  "p:carbon-monoxide",
+  "s:surv-carbon-monoxide",
+  "p:head-injury",
+  "p:tourniquet-conversion",
+  "t:cpr"
+ ],
+ "baby": [
+  "p:choking-infant",
+  "p:cpr-infant",
+  "s:surv-heat-out",
+  "s:surv-fallout-water-and-food",
+  "p:burns"
+ ],
+ "baby food": [
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-poisoning",
+  "s:surv-food-clean-kitchen",
+  "s:surv-food-how-much",
+  "s:surv-food-when-short"
+ ],
+ "bite": [
+  "p:animal-bite",
+  "p:spider-scorpion",
+  "p:tick",
+  "p:snakebite",
+  "p:wound-care"
+ ],
+ "blast": [
+  "p:amputation",
+  "p:march",
+  "s:surv-fallout-warning",
+  "s:surv-signal-for-rescue",
+  "s:surv-dirty-bomb"
+ ],
+ "bleach": [
+  "p:poisoning",
+  "s:surv-clean-and-disinfect",
+  "s:surv-make-water-safe",
+  "s:surv-water-store",
+  "s:surv-toilet-no-water"
+ ],
+ "bleeding": [
+  "p:bleeding",
+  "p:junctional-bleeding",
+  "p:abdominal-wound",
+  "t:tq",
+  "p:amputation"
+ ],
+ "bottles": [
+  "s:surv-water-store",
+  "p:hypothermia",
+  "p:overdose",
+  "s:surv-make-water-safe",
+  "c:home-water-store"
+ ],
+ "botulism": [
+  "s:surv-food-poisoning",
+  "s:surv-food-preserving",
+  "s:surv-food-power-out",
+  "s:surv-food-babies-children",
+  "s:surv-food-clean-kitchen"
+ ],
+ "breastfeeding": [
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-babies-children",
+  "p:dehydration",
+  "p:radiation-decontamination",
+  "s:surv-potassium-iodide"
+ ],
+ "breathing": [
+  "p:cpr-adult",
+  "p:cpr-child",
+  "p:cpr-infant",
+  "p:overdose",
+  "p:recovery-position"
+ ],
+ "burn": [
+  "p:burns",
+  "t:burn",
+  "s:surv-carbon-monoxide",
+  "p:poison-plants",
+  "s:surv-garbage-and-greywater"
+ ],
+ "can": [
+  "s:surv-potassium-iodide",
+  "s:surv-store-fuel",
+  "s:surv-fallout-how-long",
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-still-good"
+ ],
+ "canned": [
+  "s:surv-unheated-house",
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-cooking-no-power",
+  "s:surv-food-preserving",
+  "s:surv-food-still-good"
+ ],
+ "canning": [
+  "s:surv-food-preserving",
+  "s:surv-food-still-good"
+ ],
+ "child": [
+  "p:choking",
+  "p:cpr-child",
+  "s:surv-fallout-coming-inside",
+  "s:surv-food-babies-children",
+  "s:surv-dress-for-cold"
+ ],
+ "children": [
+  "s:surv-food-babies-children",
+  "s:surv-dress-for-cold",
+  "p:spider-scorpion",
+  "s:surv-water-how-much",
+  "s:surv-dirty-bomb"
+ ],
+ "choking": [
+  "p:choking",
+  "p:choking-infant",
+  "p:anaphylaxis",
+  "p:asthma",
+  "p:cpr-adult"
+ ],
+ "clean": [
+  "p:wound-care",
+  "s:surv-clean-and-disinfect",
+  "p:radiation-decontamination",
+  "s:surv-food-clean-kitchen",
+  "s:surv-fallout-coming-inside"
+ ],
+ "cold": [
+  "s:surv-dress-for-cold",
+  "s:surv-wind-chill",
+  "p:drowning",
+  "p:frostbite",
+  "p:heat-illness"
+ ],
+ "cold feet": [
+  "p:frostbite",
+  "s:surv-dress-for-cold",
+  "s:surv-wind-chill",
+  "s:surv-food-cooking-no-power",
+  "p:heat-illness"
+ ],
+ "cold hands": [
+  "p:frostbite",
+  "s:surv-dress-for-cold",
+  "s:surv-wind-chill",
+  "s:surv-handwashing",
+  "p:hypothermia"
+ ],
+ "cold sweat": [
+  "s:surv-dress-for-cold",
+  "p:shock",
+  "s:surv-wind-chill",
+  "p:heat-illness",
+  "s:surv-sleep-warm"
+ ],
+ "cold water": [
+  "s:surv-water-winter",
+  "p:drowning",
+  "p:heat-illness",
+  "p:hypothermia",
+  "s:surv-sleep-warm"
+ ],
+ "collapse": [
+  "p:cpr-adult",
+  "p:cpr-child",
+  "p:fainting",
+  "p:heat-illness",
+  "p:needle-decompression"
+ ],
+ "collapsed": [
+  "p:cpr-adult",
+  "p:cpr-child",
+  "p:fainting",
+  "p:heat-illness",
+  "p:needle-decompression"
+ ],
+ "cook": [
+  "s:surv-food-cooking-no-power",
+  "s:surv-fire",
+  "s:surv-field-dressing-game",
+  "s:surv-wells-without-power",
+  "s:surv-food-power-out"
+ ],
+ "cpr": [
+  "p:cpr-adult",
+  "p:cpr-child",
+  "p:cpr-infant",
+  "t:cpr",
+  "p:carbon-monoxide"
+ ],
+ "cross contaminate": [
+  "p:radiation-decontamination",
+  "p:vomiting-diarrhea",
+  "p:burns",
+  "p:poisoning",
+  "p:wound-care"
+ ],
+ "cross contamination": [
+  "s:surv-food-clean-kitchen",
+  "p:radiation-decontamination",
+  "p:fracture"
+ ],
+ "cut": [
+  "p:amputation",
+  "p:bleeding",
+  "p:cricothyrotomy",
+  "p:eye-injury",
+  "p:wound-care"
+ ],
+ "date": [
+  "p:tick",
+  "s:surv-water-store",
+  "s:surv-fallout-how-long",
+  "s:surv-food-storage",
+  "p:animal-bite"
+ ],
+ "dehydration": [
+  "p:dehydration",
+  "p:vomiting-diarrhea",
+  "s:surv-stomach-illness-in-a-group",
+  "s:surv-food-poisoning",
+  "p:altitude"
+ ],
+ "dirty bomb": [
+  "s:surv-dirty-bomb",
+  "p:radiation-decontamination",
+  "s:surv-fallout-warning",
+  "s:surv-potassium-iodide",
+  "s:surv-fallout-get-ready"
+ ],
+ "dishes": [
+  "s:surv-clean-and-disinfect",
+  "s:surv-food-clean-kitchen",
+  "s:surv-find-water",
+  "s:surv-garbage-and-greywater",
+  "s:surv-stomach-illness-in-a-group"
+ ],
+ "doubt": [
+  "p:chest-pain",
+  "s:surv-river-crossings",
+  "s:surv-food-still-good",
+  "s:surv-food-when-short",
+  "p:bleeding"
+ ],
+ "dressing": [
+  "s:surv-field-dressing-game",
+  "p:wound-care",
+  "p:abdominal-wound",
+  "p:amputation",
+  "p:animal-bite"
+ ],
+ "emergency": [
+  "p:low-blood-sugar",
+  "u:water",
+  "s:surv-fallout-warning",
+  "s:surv-dirty-bomb",
+  "s:surv-fallout-get-ready"
+ ],
+ "emergency food": [
+  "s:surv-food-how-much",
+  "s:surv-food-poisoning",
+  "p:low-blood-sugar",
+  "s:surv-stomach-illness-in-a-group",
+  "s:surv-fallout-get-ready"
+ ],
+ "fall": [
+  "p:head-injury",
+  "p:march",
+  "p:spine-injury",
+  "p:radiation-sickness",
+  "p:radiation-decontamination"
+ ],
+ "fallout": [
+  "p:radiation-decontamination",
+  "s:surv-fallout-warning",
+  "s:surv-fallout-get-ready",
+  "s:surv-fallout-leaving",
+  "s:surv-fallout-water-and-food"
+ ],
+ "feed": [
+  "s:surv-food-babies-children",
+  "s:surv-generators",
+  "s:surv-food-poisoning",
+  "p:bleeding",
+  "p:carbon-monoxide"
+ ],
+ "feeding": [
+  "s:surv-food-babies-children",
+  "s:surv-generators",
+  "p:bleeding",
+  "p:tick",
+  "s:surv-handwashing"
+ ],
+ "fever": [
+  "p:tick",
+  "s:surv-food-poisoning",
+  "p:altitude",
+  "p:animal-bite",
+  "p:burns"
+ ],
+ "field dressing": [
+  "s:surv-field-dressing-game",
+  "p:burns",
+  "p:wound-closure",
+  "p:frostbite",
+  "p:hemostatic-packing"
+ ],
+ "fire": [
+  "p:stings",
+  "s:surv-fire",
+  "p:burns",
+  "s:surv-store-fuel",
+  "s:surv-wood-stoves-fireplaces"
+ ],
+ "flood": [
+  "s:surv-wells-without-power",
+  "s:surv-food-still-good",
+  "s:surv-find-water",
+  "s:surv-latrines",
+  "s:surv-make-water-safe"
+ ],
+ "food": [
+  "s:surv-food-and-wild-plants",
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-power-out",
+  "s:surv-food-clean-kitchen",
+  "s:surv-food-how-much"
+ ],
+ "food poisoning": [
+  "s:surv-food-poisoning",
+  "p:vomiting-diarrhea",
+  "p:poisoning",
+  "s:surv-food-and-wild-plants",
+  "s:surv-food-power-out"
+ ],
+ "formula": [
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-babies-children",
+  "s:surv-wind-chill",
+  "c:fallout-shelter-kit",
+  "s:surv-food-how-much"
+ ],
+ "freezer": [
+  "s:surv-food-power-out",
+  "s:surv-food-still-good",
+  "s:surv-food-preserving",
+  "s:surv-water-store",
+  "s:surv-fallout-water-and-food"
+ ],
+ "frost bite": [
+  "s:surv-wind-chill",
+  "p:wound-care",
+  "s:surv-priorities"
+ ],
+ "frostbite": [
+  "p:frostbite",
+  "s:surv-priorities",
+  "s:surv-wind-chill",
+  "u:windchill",
+  "s:surv-dress-for-cold"
+ ],
+ "fuel": [
+  "s:surv-carbon-monoxide",
+  "s:surv-store-fuel",
+  "p:poisoning",
+  "s:surv-fire",
+  "s:surv-heat-out"
+ ],
+ "gas stove": [
+  "p:carbon-monoxide",
+  "s:surv-carbon-monoxide",
+  "s:surv-wood-stoves-fireplaces",
+  "s:surv-fallout-shelter-living",
+  "s:surv-food-cooking-no-power"
+ ],
+ "generator": [
+  "s:surv-generators",
+  "p:carbon-monoxide",
+  "s:surv-carbon-monoxide",
+  "s:surv-wells-without-power",
+  "s:surv-fallout-shelter-living"
+ ],
+ "grill": [
+  "s:surv-carbon-monoxide",
+  "s:surv-heat-out",
+  "s:surv-fallout-shelter-living",
+  "s:surv-food-cooking-no-power",
+  "p:carbon-monoxide"
+ ],
+ "heat": [
+  "p:heat-illness",
+  "s:surv-heat-out",
+  "c:home-heat-kit",
+  "p:hypothermia",
+  "s:surv-carbon-monoxide"
+ ],
+ "honey": [
+  "s:surv-food-poisoning",
+  "s:surv-food-babies-children",
+  "p:burns",
+  "p:stings"
+ ],
+ "hot water": [
+  "s:surv-water-in-the-house",
+  "p:burns",
+  "p:heat-illness",
+  "s:surv-sleep-warm",
+  "s:surv-garbage-and-greywater"
+ ],
+ "how long can food sit out": [
+  "s:surv-food-still-good",
+  "s:surv-food-babies-children",
+  "s:surv-food-how-much",
+  "s:surv-fallout-leaving",
+  "p:low-blood-sugar"
+ ],
+ "hypothermia": [
+  "p:hypothermia",
+  "s:surv-priorities",
+  "p:frostbite",
+  "p:march",
+  "s:surv-wind-chill"
+ ],
+ "ice": [
+  "p:sprain-dislocation",
+  "s:surv-unheated-house",
+  "s:surv-water-in-the-house",
+  "s:surv-water-winter",
+  "s:surv-winter-storms"
+ ],
+ "in shock": [
+  "p:shock",
+  "s:surv-fallout-coming-inside",
+  "s:surv-wells-without-power",
+  "p:abdominal-wound",
+  "s:surv-fallout-warning"
+ ],
+ "insects": [
+  "s:surv-food-and-wild-plants",
+  "p:stings",
+  "s:surv-find-water",
+  "s:surv-latrines",
+  "s:surv-food-preserving"
+ ],
+ "keep": [
+  "s:surv-food-clean-kitchen",
+  "s:surv-heat-out",
+  "s:surv-food-power-out",
+  "p:blisters",
+  "p:fracture"
+ ],
+ "lie": [
+  "p:fainting",
+  "p:shock",
+  "s:surv-fallout-warning",
+  "p:altitude",
+  "p:anaphylaxis"
+ ],
+ "light": [
+  "u:sos",
+  "p:fainting",
+  "u:daylight",
+  "a:settings",
+  "s:surv-fallout-shelter-living"
+ ],
+ "lightning": [
+  "p:lightning",
+  "s:surv-weather-and-lightning",
+  "p:burns",
+  "p:march"
+ ],
+ "meat": [
+  "s:surv-food-power-out",
+  "s:surv-food-clean-kitchen",
+  "s:surv-food-cooking-no-power",
+  "s:surv-food-preserving",
+  "s:surv-food-still-good"
+ ],
+ "milk": [
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-power-out",
+  "s:surv-food-babies-children",
+  "s:surv-food-still-good",
+  "p:anaphylaxis"
+ ],
+ "mushroom": [
+  "p:poisoning",
+  "s:surv-food-and-wild-plants",
+  "s:surv-fallout-warning",
+  "s:surv-dirty-bomb",
+  "p:vomiting-diarrhea"
+ ],
+ "no": [
+  "p:cpr-adult",
+  "p:cpr-child",
+  "p:cpr-infant",
+  "p:dehydration",
+  "p:npa"
+ ],
+ "not breathing": [
+  "p:cpr-adult",
+  "p:cpr-child",
+  "p:cpr-infant",
+  "p:overdose",
+  "p:recovery-position"
+ ],
+ "now": [
+  "p:animal-bite",
+  "p:head-injury",
+  "p:overdose",
+  "p:stroke",
+  "s:surv-carbon-monoxide"
+ ],
+ "nuclear": [
+  "p:radiation-decontamination",
+  "p:radiation-sickness",
+  "s:surv-fallout-warning",
+  "s:surv-fallout-get-ready",
+  "s:surv-fallout-where-to-shelter"
+ ],
+ "nuclear fallout": [
+  "p:radiation-decontamination",
+  "s:surv-fallout-warning",
+  "s:surv-fallout-get-ready",
+  "s:surv-fallout-where-to-shelter",
+  "p:radiation-sickness"
+ ],
+ "oven": [
+  "s:surv-carbon-monoxide",
+  "s:surv-heat-out",
+  "s:surv-fallout-shelter-living",
+  "s:surv-food-cooking-no-power",
+  "s:surv-food-preserving"
+ ],
+ "overdose": [
+  "p:overdose",
+  "p:cpr-adult",
+  "p:poisoning",
+  "p:seizure"
+ ],
+ "pantry": [
+  "c:pantry",
+  "s:surv-food-storage",
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-power-out",
+  "s:surv-food-babies-children"
+ ],
+ "poison": [
+  "p:carbon-monoxide",
+  "p:poison-plants",
+  "p:poisoning",
+  "s:surv-food-poisoning",
+  "p:vomiting-diarrhea"
+ ],
+ "power": [
+  "s:surv-wells-without-power",
+  "s:surv-food-power-out",
+  "s:surv-food-cooking-no-power",
+  "s:surv-generators",
+  "s:surv-heat-out"
+ ],
+ "power out": [
+  "s:surv-food-power-out",
+  "s:surv-heat-out",
+  "s:surv-generators",
+  "s:surv-wells-without-power",
+  "s:surv-food-cooking-no-power"
+ ],
+ "power outage": [
+  "s:surv-generators",
+  "s:surv-heat-out",
+  "s:surv-wells-without-power",
+  "s:surv-food-power-out",
+  "s:surv-food-cooking-no-power"
+ ],
+ "preserving": [
+  "s:surv-food-preserving",
+  "s:surv-food-power-out",
+  "s:surv-food-poisoning",
+  "s:surv-food-still-good",
+  "s:surv-food-storage"
+ ],
+ "range": [
+  "a:ballistics",
+  "s:surv-food-cooking-no-power",
+  "s:surv-carbon-monoxide",
+  "s:surv-heat-out",
+  "s:surv-fallout-shelter-living"
+ ],
+ "rat": [
+  "s:surv-garbage-and-greywater",
+  "t:rate",
+  "s:surv-food-when-short",
+  "p:snakebite",
+  "s:surv-dangerous-animals"
+ ],
+ "rationing": [
+  "s:surv-food-when-short",
+  "s:surv-food-power-out",
+  "s:surv-food-babies-children",
+  "s:surv-food-how-much",
+  "s:surv-food-storage"
+ ],
+ "raw": [
+  "s:surv-food-clean-kitchen",
+  "s:surv-food-babies-children",
+  "s:surv-food-how-much",
+  "s:surv-food-preserving",
+  "s:surv-food-still-good"
+ ],
+ "river": [
+  "s:surv-river-crossings",
+  "p:drowning",
+  "s:surv-find-water",
+  "s:surv-fire",
+  "s:surv-navigation-without-a-compass"
+ ],
+ "running out of food": [
+  "s:surv-food-when-short",
+  "s:surv-food-power-out",
+  "s:surv-unheated-house",
+  "s:surv-heat-out",
+  "s:surv-food-clean-kitchen"
+ ],
+ "salt": [
+  "p:dehydration",
+  "s:surv-potassium-iodide",
+  "p:heat-illness",
+  "p:vomiting-diarrhea",
+  "s:surv-find-water"
+ ],
+ "seizure": [
+  "p:seizure",
+  "p:recovery-position",
+  "p:carbon-monoxide",
+  "p:dehydration",
+  "p:head-injury"
+ ],
+ "serious": [
+  "p:shock",
+  "s:surv-fallout-warning",
+  "s:surv-fallout-how-long",
+  "s:surv-fallout-leaving",
+  "p:bleeding"
+ ],
+ "shelter": [
+  "s:surv-shelter",
+  "s:surv-fallout-where-to-shelter",
+  "c:fallout-shelter-kit",
+  "s:surv-fallout-warning",
+  "s:surv-fallout-coming-inside"
+ ],
+ "shock": [
+  "p:shock",
+  "p:burns",
+  "s:surv-wells-without-power",
+  "s:surv-fallout-warning",
+  "p:abdominal-wound"
+ ],
+ "short of food": [
+  "s:surv-food-when-short",
+  "p:asthma",
+  "s:surv-unheated-house",
+  "s:surv-food-storage",
+  "s:surv-toilet-no-water"
+ ],
+ "shot": [
+  "p:abdominal-wound",
+  "p:animal-bite",
+  "p:chest-wound",
+  "p:march",
+  "a:ballistics"
+ ],
+ "sick": [
+  "p:vomiting-diarrhea",
+  "s:surv-stomach-illness-in-a-group",
+  "p:radiation-sickness",
+  "p:altitude",
+  "s:surv-carbon-monoxide"
+ ],
+ "smelling": [
+  "s:surv-food-still-good",
+  "p:dehydration",
+  "p:poisoning",
+  "p:vomiting-diarrhea",
+  "p:wound-care"
+ ],
+ "snake": [
+  "p:snakebite",
+  "s:surv-dangerous-animals"
+ ],
+ "spoiled": [
+  "s:surv-food-poisoning",
+  "s:surv-food-still-good"
+ ],
+ "storage": [
+  "s:surv-store-fuel",
+  "s:surv-water-store",
+  "u:water",
+  "a:areas",
+  "a:settings"
+ ],
+ "store": [
+  "s:surv-store-fuel",
+  "s:surv-water-store",
+  "c:home-water-store",
+  "s:surv-food-how-much",
+  "s:surv-unheated-house"
+ ],
+ "store food": [
+  "s:surv-food-how-much",
+  "s:surv-unheated-house",
+  "s:surv-water-store",
+  "s:surv-fallout-water-and-food",
+  "s:surv-food-storage"
+ ],
+ "storing": [
+  "s:surv-food-storage",
+  "s:surv-find-water",
+  "s:surv-firewood",
+  "s:surv-handwashing",
+  "s:surv-store-fuel"
+ ],
+ "storm": [
+  "s:surv-winter-storms",
+  "p:lightning",
+  "s:surv-weather-and-lightning",
+  "s:surv-fallout-where-to-shelter",
+  "s:surv-food-still-good"
+ ],
+ "stove": [
+  "s:surv-wood-stoves-fireplaces",
+  "p:burns",
+  "p:carbon-monoxide",
+  "s:surv-carbon-monoxide",
+  "s:surv-fallout-shelter-living"
+ ],
+ "swallowing": [
+  "s:surv-food-poisoning",
+  "p:low-blood-sugar",
+  "p:poison-plants",
+  "p:snakebite",
+  "p:spider-scorpion"
+ ],
+ "swollen can": [
+  "s:surv-food-still-good",
+  "s:surv-potassium-iodide",
+  "p:sprain-dislocation",
+  "s:surv-unheated-house",
+  "p:abdominal-wound"
+ ],
+ "thawed": [
+  "s:surv-food-still-good",
+  "p:frostbite",
+  "s:surv-unheated-house",
+  "s:surv-food-babies-children",
+  "s:surv-food-preserving"
+ ],
+ "thermometer": [
+  "s:surv-food-cooking-no-power",
+  "p:frostbite",
+  "p:heat-illness",
+  "s:surv-field-dressing-game",
+  "s:surv-heat-out"
+ ],
+ "throw out": [
+  "s:surv-food-still-good",
+  "s:surv-food-when-short",
+  "s:surv-food-power-out",
+  "p:vomiting-diarrhea",
+  "s:surv-latrines"
+ ],
+ "tourniquet": [
+  "p:tourniquet-conversion",
+  "t:tq",
+  "p:bleeding",
+  "p:junctional-bleeding",
+  "p:snakebite"
+ ],
+ "unresponsive": [
+  "p:cpr-adult",
+  "p:cpr-child",
+  "p:cpr-infant",
+  "p:recovery-position",
+  "p:poisoning"
+ ],
+ "vomit": [
+  "p:vomiting-diarrhea",
+  "p:dehydration",
+  "p:recovery-position",
+  "s:surv-clean-and-disinfect",
+  "s:surv-stomach-illness-in-a-group"
+ ],
+ "vomiting": [
+  "p:vomiting-diarrhea",
+  "p:dehydration",
+  "p:recovery-position",
+  "s:surv-stomach-illness-in-a-group",
+  "p:radiation-sickness"
+ ],
+ "wall": [
+  "p:chest-wound",
+  "s:surv-generators",
+  "s:surv-fallout-warning",
+  "s:surv-dirty-bomb",
+  "s:surv-fallout-where-to-shelter"
+ ],
+ "water": [
+  "s:surv-find-water",
+  "s:surv-garbage-and-greywater",
+  "s:surv-handwashing",
+  "s:surv-make-water-safe",
+  "s:surv-toilet-no-water"
+ ],
+ "what to buy": [
+  "s:surv-fallout-get-ready",
+  "s:surv-food-how-much",
+  "s:surv-portable-heaters",
+  "s:surv-store-fuel",
+  "s:surv-carbon-monoxide"
+ ],
+ "wound": [
+  "p:chest-wound",
+  "p:hemostatic-packing",
+  "p:wound-care",
+  "p:wound-closure",
+  "p:abdominal-wound"
+ ],
+ "wound dressing": [
+  "p:wound-care",
+  "p:chest-wound",
+  "p:hemostatic-packing",
+  "p:wound-closure",
+  "s:surv-field-dressing-game"
+ ],
+ "wound packing": [
+  "p:hemostatic-packing",
+  "p:bleeding",
+  "p:wound-care",
+  "p:wound-closure",
+  "p:abdominal-wound"
+ ]
+}

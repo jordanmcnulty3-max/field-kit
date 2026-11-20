@@ -891,6 +891,32 @@ def test_moved_topics_are_listed_under_all_fifteen_filters(page, app_url):
             assert set(MOVED) <= set(land), f'where={where} when={when}: {land}'
 
 
+def test_land_hub_leads_the_category_and_every_land_topic_is_listed_under_all_fifteen_filters(page, app_url):
+    shipped_home(page, app_url)
+    every = sorted('s:' + i for i, t in _shipped('survival').items() if t.get('category') == 'land')
+    assert 's:surv-land-start' in every
+    open_cat(page, 'Food from the land')
+    for where in WHERES:
+        for when in ('any', 'cold', 'warm'):
+            page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
+            land = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
+            assert sorted(land) == every, f'where={where} when={when}: {land}'
+            assert land[0] == 's:surv-land-start', f'where={where} when={when}: {land}'
+
+
+def test_the_land_hub_links_every_other_land_topic_and_the_checklist():
+    topics = _shipped('survival')
+    hub = topics['surv-land-start']
+    keys = _links(hub)
+    for tid, t in topics.items():
+        if t.get('category') == 'land' and tid != 'surv-land-start':
+            assert 's:' + tid in keys, tid
+    assert 'c:land-kit' in keys and _shipped('checklists')['land-kit']['category'] == 'land'
+    known = _known_keys()
+    for k in keys:
+        assert k in known, k
+
+
 def _texts(t):
     out = list(t.get('doFirst', []))
     for sec in t['sections']:

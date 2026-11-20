@@ -877,13 +877,11 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
     seen = []
     for k in packs:
         assert k['hub'].startswith('s:'), k['hub']
-        if k['topic'] != 'land':   # the land hub ships with the pack's content (a later task); until then it is only a name
-            assert k['hub'][2:] in topics, k['hub']
-            assert topics[k['hub'][2:]]['category'] == k['topic'], k['hub']   # the hub is a topic of its own pack
+        assert k['hub'][2:] in topics, k['hub']
+        assert topics[k['hub'][2:]]['category'] == k['topic'], k['hub']   # the hub is a topic of its own pack
         assert [i for i in k['protocols'] if i not in protocols] == [], k   # every listed protocol and checklist ships
-        if k['topic'] != 'land':
-            assert [i for i in k['checklists'] if i not in checklists] == [], k
-            assert [i for i in k['checklists'] if checklists[i].get('category') != k['topic']] == [], k   # and belongs to this pack's category
+        assert [i for i in k['checklists'] if i not in checklists] == [], k
+        assert [i for i in k['checklists'] if checklists[i].get('category') != k['topic']] == [], k   # and belongs to this pack's category
         seen += [('p', i) for i in k['protocols']] + [('c', i) for i in k['checklists']]
     assert len(seen) == len(set(seen))   # in no two packs
     food = packs[1]
@@ -897,8 +895,7 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
     # one has to be listed. Protocols carry no pack field (the radiation protocols are in the injury categories), so their explicit lists
     # are asserted above (the food pack has none).
     for k in packs:
-        if k['topic'] != 'land':   # land-kit ships with the pack's content (a later task)
-            assert sorted(i for i, c in checklists.items() if c.get('category') == k['topic']) == sorted(k['checklists']), k['topic']
+        assert sorted(i for i, c in checklists.items() if c.get('category') == k['topic']) == sorted(k['checklists']), k['topic']
     # "older" lists topics of the pack's category that were indexed before the pack existed: they keep that place, so each must be
     # a shipped topic of the category; every other topic of the category is newer than v7.6 (its id starts surv-land-)
     land = packs[2]

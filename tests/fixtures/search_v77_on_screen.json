@@ -441,11 +441,11 @@
   "s:surv-fallout-warning"
  ],
  "insects": [
+  "s:surv-land-start",
   "p:stings",
   "s:surv-find-water",
   "s:surv-latrines",
-  "s:surv-food-preserving",
-  "s:surv-food-storage"
+  "s:surv-food-preserving"
  ],
  "keep": [
   "s:surv-food-clean-kitchen",

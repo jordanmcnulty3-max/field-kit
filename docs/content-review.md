@@ -7065,3 +7065,248 @@ Re-opened in this round (built-in fetch, title checked):
   consume meat from this carcass."
 
 Changes: listed per finding in /home/claude/sdd/task-2-a2-report.md, "Fix round". Conversions (app's own): 6 cm = about 2 1/2 in.
+
+## v7.7 Food from the land, batch B: Food from the land: where to start (hub), Hunting deer and big game, Small game and birds, checklist Hunting, fishing and trapping kit (2026-11-19)
+
+Writer's record. All pages opened with the built-in search, then fetch of a URL the search returned; title and publisher checked on each.
+All four items are drafts until review. Nothing below was written from memory.
+
+### Sources opened (name, URL)
+
+- NYS DEC Hunter Education, Tree Stand "Best Practices": https://extapps.dec.ny.gov/docs/wildlife_pdf/treestandsafety.pdf
+- NYS DEC press release, DEC Releases Hunting Safety Statistics for 2024 (Feb 14, 2025):
+  https://dec.ny.gov/news/press-releases/2025/2/dec-releases-hunting-safety-statistics-for-2024
+- NYS DEC bulletins, DEC Reminds New York State Hunters: Be Safe During Hunting Seasons: Oct 15, 2020
+  https://content.govdelivery.com/accounts/NYSDEC/bulletins/2a61338 ; Nov 8, 2019 https://content.govdelivery.com/accounts/NYSDEC/bulletins/26b01c6
+- NYS DEC, Learn How To Ice Fish: https://www.dec.ny.gov/things-to-do/freshwater-fishing/learn-to-fish/tips-skills/how-to-ice-fish
+- NYS DEC, Beginners' Guide to Freshwater Fishing (with RBFF): https://extapps.dec.ny.gov/docs/fish_marine_pdf/gsfishing.pdf
+- NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping, student manual, 4th ed. 2016:
+  https://extapps.dec.ny.gov/docs/wildlife_pdf/trapedman.pdf
+- NYS DEC, 2026–2027 New York Hunting & Trapping Guide, Small Game Hunting section (pp. 46–49):
+  https://dec.ny.gov/sites/default/files/2024-07/htgsmallgamehunting.pdf
+- Texas Parks and Wildlife, Hunter Education online course, Shots to the Vital Areas:
+  https://tpwd.texas.gov/education/hunter-education/online-course/hunting-skills-1/vital-areas
+- New Jersey Division of Fish and Wildlife, hunter education workbook, Chapter 4, Game Care: Before and After the Shot (pp. 16–19):
+  https://nj.gov/dep/fgw/pdf/hunted/chapter_4.pdf
+- New Jersey Division of Fish and Wildlife, Black Bear Hunting Tips: https://nj.gov/dep/fgw/qr/beartips.htm
+- Massachusetts Basic Hunter Education instructor guide, Lesson 17: Big Game Recovery (V. 2/2017; hosted on mass.gov, the document
+  itself names no agency): https://www.mass.gov/doc/lesson-17-big-game-recovery/download
+- Massachusetts Bowhunter Education 2017 Standards, Section 6, Lesson 7: Judgment and Shot Placement (mass.gov; no agency named in the
+  document): https://www.mass.gov/doc/bowlesson7/download
+- MassWildlife, Turkey hunting safety: https://www.mass.gov/info-details/turkey-hunting-safety
+- North Carolina Wildlife Resources Commission, Tips for Recovering Game Animals (hosted on ncwildlife.gov; the text names no agency):
+  https://ncwildlife.gov/tips-recovering-game-animals/open
+- Connecticut hunter safety manual, Chapter 12, Making a Quick, Clean Kill (Outdoor Roadmap material hosted on a ct.gov DEEP path):
+  https://test-cd.ct.gov/-/media/deep/hunting_trapping/pdf_files/hunter_safety_manual/chapter12.pdf
+- Alaska Department of Fish and Game, Big Game Shot Placement: https://adfg.alaska.gov/index.cfm?adfg=hunting.shot
+- Maine Hunter Safety Course (hunter-ed.com, Kalkomey, state-authorized with Maine IF&W): Hypothermia
+  https://www.hunter-ed.com/maine/studyGuide/Hypothermia/201022_65737/ ; Importance of Safe Backstops
+  https://www.hunter-ed.com/maine/studyGuide/Importance-of-Safe-Backstops/201022_65863/ ; Trailing Wounded Game
+  https://www.hunter-ed.com/maine/studyGuide/Trailing-Wounded-Game/201022_65570/ ; What Is a Zone-of-Fire?
+  https://www.hunter-ed.com/maine/studyGuide/What-Is-a-Zone-of-Fire/201022_65652/ ; Maintaining Your Safe Zone-of-Fire
+  https://www.hunter-ed.com/maine/studyGuide/Maintaining-Your-Safe-Zone-of-Fire/201022_65654/
+- Washington Hunter Safety Course (hunter-ed.com), Victim Mistaken for Game: https://hunter-ed.com/washington/studyGuide/Victim-Mistaken-for-Game/20105002_90176
+- New York Trapper course (hunter-ed.com), Equipment for Water Trapping (DEC not named on the page):
+  https://www.hunter-ed.com/newyorktrapper/studyGuide/Equipment-for-Water-Trapping/221035_151474/
+- Missouri Department of Conservation: Field Dressing Your Deer https://mdc.mo.gov/node/241023 ; Getting Started Squirrel Hunting
+  https://mdc.mo.gov/hunting-trapping/species/squirrel/getting-started-squirrel-hunting ; Getting Started Rabbit Hunting
+  https://mdc.mo.gov/hunting-trapping/species/rabbit/getting-started-rabbit-hunting ; Small Game Hunting (Xplor, Nov 2015)
+  https://mdc.mo.gov/magazines/xplor/2015-11/small-game-hunting ; Nontoxic Shot and Shot Size https://mdc.mo.gov/nontoxic-shot-shot-size
+- Minnesota DNR, Water Safety for Duck Hunters (2017): https://files.dnr.state.mn.us/education_safety/safety/boatwater/duck-hunter-water-safety.pdf
+- Indiana DNR, Deer Hunting Check List: https://secure.in.gov/dnr/fishwild/files/fw-deer_hunting_checklist.pdf
+- Penn State Extension, Proper Care and Handling of Venison from Field to Table (updated Nov 18, 2020):
+  https://extension.psu.edu/proper-care-and-handling-of-venison-from-field-to-table
+- Cornell Cooperative Extension (Seneca County), NYS 4-H Shooting Sports, Cornell DNR, Wild Harvest Table guides (11/2015, v.1): Fowl &
+  Other Small Game https://blogs.cornell.edu/wildharvesttest/files/2016/09/Shotgun_Fowl-and-Small-Game_4HSS_WHT-1ea7eoc.pdf ; Deer
+  (Rifle) https://blogs.cornell.edu/wildharvestdev2/files//2016/09/Rifle_Venison_4HSS_WHT-13cyq46.pdf
+- American Heart Association newsroom: Hunting safety should include heart attack and stroke awareness (Oct 27, 2022)
+  https://newsroom.heart.org/news/hunting-safety-should-include-heart-attack-and-stroke-awareness ; A-hunting we will go (Nov 25, 2024)
+  https://newsroom.heart.org/news/a-hunting-we-will-go-just-be-mindful-of-heart-health-risks
+- US Army ATP 3-50.21, Survival (Sept 2018), chapter 4 (read at offset 200000): https://irp.fas.org/doddir/army/atp3-50-21.pdf
+- US Army FM 21-76 (2006 copy), chapter 8 (read at offset 100000): https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- Michigan State University Extension, Eating bugs: Part 3 (Apr 21, 2022): https://www.canr.msu.edu/news/eating-bugs-part-3-catch-and-eat-them-yourself
+- Ohio State University CFAES, Chow Line: Cicadas ... FDA warns (undated):
+  https://cfaes.osu.edu/news/articles/chow-line-cicadas-can-be-tasty-treat-they-can-be-hazardous-those-allergic-seafood-fda
+
+Failed or empty: DEC huntguidefeatures.pdf (client error); Vermont F&W IBEP bear shot placement PDF (client error); Kalkomey "Today's
+Hunter in New York" manual PDF (client error); hunter-ed.com/newyork/manual (navigation page only, no content); MSU "Eating insects —
+safely" (bot wall); NJ hunter education home-study workbook (questions only, no answers; nothing used). Nothing from these is on a page.
+
+### Hunting deer and big game (surv-land-big-game, new)
+
+- Four firearm rules: DEC 2024 statistics release, "Primary Hunter Safety Rules" list, word for word in order (loaded; muzzle; identify
+  target and what lies beyond; finger off trigger), page gives them in DEC 2019/2020 bulletin order (loaded, muzzle, finger, target).
+- "If you cannot see what lies beyond the target, do not take the shot"; backstop "solid enough to capture fired bullets", "will not let
+  the projectile ricochet"; ".22-caliber bullet can travel over 1½ miles"; "centerfire ... several miles"; "Slugs can travel over 800
+  yards" (Maine, Importance of Safe Backstops). Conversions (app's): 1.5 mi = 2.4 km; 800 yd = 730 m.
+- "Never fire at a sound or movement"; binoculars; "Never use your rifle scope as binoculars"; never wear game colours; hunter orange
+  (Washington, Victim Mistaken for Game). "A small branch can deflect an arrow or bullet" (NJ ch. 4).
+- Vital area: TPWD (heart and lungs; broadside "presents the largest target area"; "best, especially for novice hunters"; front leg,
+  back side, "one-third of the way up into the body"); Mass bow lesson 7 (vital area includes liver and major blood vessels); NJ ch. 4
+  (heart, lungs, liver, "the best shot being a double lung"; pie plate; broadside "several inches behind the shoulder, on the lower half";
+  quartering away "aim at the opposite front shoulder"; standing still and unaware within effective range; head "should never be
+  attempted"; never straight down from a stand, wait until "at least 10 yards"; backbone blocks vital area; a deer can live with one lung;
+  most missed or wounded game from rushing, too far, bad angle). ADF&G ("about 1/3 of the distance from the bottom of the chest to the top
+  of the back", "directly behind the near side front shoulder"; rear "not advisable"; quartering forward and forward-facing acceptable
+  with a bullet able to break bones: shown, not followed, D172). CT ch. 12 ("You should not take shots at moving big game animals").
+  Conversion: 10 yd = 9 m.
+- Angle table cells: broadside yes (TPWD); quartering away firearm only with confidence (TPWD) and far-shoulder aim (NJ); quartering toward
+  avoid with bow, more likely shoulder bone, animal sees movement (TPWD), on Mass bow "avoid" list; head-on not with bow, meat damage,
+  through stomach to rear leg (TPWD); rear never (TPWD "Never take", ADF&G); head never (NJ); straight down never (NJ). "Pass it up" for
+  quartering-toward and head-on with a firearm is the app's cautious reading of TPWD against ADF&G (D172). Steep stand shot one lung, long
+  trail (Mass bow lesson 7).
+- What changes for food: CT ch. 12 (well-placed shot down almost immediately, little meat damage, easier field dressing; gut shot escapes,
+  suffers, intestinal juices spoil meat); TPWD (misplaced quartering-away shot, "prolonged suffering and a likely loss"; head-on meat
+  damage); Mass Lesson 17 (field dress as soon as possible, heat speeds spoilage); Cornell WHT rifle ("small, undetectable lead fragments";
+  "Consider using non-lead bullets or slugs"; "discard the meat around the wound channel").
+- Right after the shot, step order: reload and watch (MDC "A wounded deer can hurt you, so reload and watch"); watch, listen (NJ; "Crashing
+  sounds usually indicate a well-placed shot, fatal wound, and short tracking distance", NC); mark, compass bearing, distance (Mass L17);
+  note time, wait 20 minutes before leaving the stand (NJ; page says "stay where you are"); shot site sign (NJ); check before deciding you
+  missed (Maine).
+- Wait table: blood colours NJ ("Pink frothy ... lung", "Bright red ... heart", "Dark slimy ... liver hit. The animal may live longer",
+  "Slimy brown and green digested plant matter ... gut shot") and NC ("Bright and frothy (lung shot)", "Bright non-frothy (severed
+  artery)", "Dark (muscle or liver hit)", "Dark with vegetative material (gut shot)"). Waits: NJ "Wait one hour before trailing a standard
+  hit", "A gut shot deer shouldn't be trailed for at least six to eight hours", check swamps, creeks, ponds; NC "Poorly-hit game animals
+  require longer waiting periods (1 hour or more)"; Mass L17 "30 minutes (is using a firearm), 1 hour (if using archery), or longer if
+  unsure"; Maine "at least a half-hour to an hour". Conflict: the page uses NJ's 1 hour for every ordinary hit (D171). No source gives a
+  separate liver-hit wait; the page says so. Mass L17 "Bumping a wounded animal often means it won't be recovered."
+- Blood trail step order is the app's grouping of: walk beside the trail (NC, NJ); blood on vegetation, hair, bone, tracks (NJ, Maine);
+  orange flagging, remove afterwards, resume next day (Maine; Mass "bright or reflective flagging"); max three trackers (NJ), companions
+  help (NC); downhill toward water (Mass, Maine); last sign then widening circles (Mass, NJ), ready for follow-up (NC); bumped bedded deer,
+  leave quietly (Mass); ethical duty to search (Maine).
+- Approach, step order: breathing from a distance (NJ); from behind the head, away from feet (MDC, Mass); "The eyes of a dead animal are
+  normally open" (Mass); touch the eye with a stick, blink = alive (NJ, MDC); follow-up shot into the vitals (NJ), only if legal, safe and
+  ethical (Mass; page says "only if that is safe"; legality via New York rules link); set firearm aside only when certain (MDC); tag, field
+  dress (Mass).
+- Tree stands: DEC Best Practices list items in its order; "Connect to tree before feet leave the ground" (DEC 2024); "Never climb in or
+  out of a tree stand with a loaded firearm" (DEC 2019/2020). Warn figures: 11 elevated incidents in 2024, two fatal, nine without a
+  harness or not connected, all preventable (DEC 2024 release).
+- Cold: Maine Hypothermia (definition; "up to about 50°F" — page converts 10°C; sweat, dew, wind, cold surfaces; dress properly, avoid
+  weather, dry off; "chocolate, peanuts, or raisins"); DEC ice fishing page (layers that wick, no cotton, wind- and water-resistant outer
+  layer); AHA (cold constricts blood vessels).
+- Getting it out: MDC (drag or cart, not on shoulders, another hunter could shoot; antlers; stick between the hind hocks; deer cart; cloth
+  wrap; clean and cool); NJ (flag big game with hunter orange; "Don't injure yourself by trying to drag something that is too heavy for
+  you. Go get help."; avoid dragging through water or dirt); Cornell rifle (smaller incision when dragging); AHA (dragging "can leave even
+  the most fit hunter breathless", "could bring on a heart attack or stroke"; take breaks).
+- Black bear: NJ bear tips ("The ideal shot is just behind the front shoulder with the bear angling slightly away from broadside"; calm,
+  slow breathing); CT ch. 12 (long thick fur, locate vitals precisely, wounding a bear can be dangerous; CT also says aim for the head or
+  heart-lung region: the head is not given, D178). No bear-specific recovery steps found; the page says so. Bear cooking and jerky by link
+  only.
+- Before you go: DEC 2019/2020 (tell someone, map; prepare for winter; flashlights, water, high-energy food); AHA ("Never hunt alone if
+  possible"); NJ ("avoid hunting on hot days without a way to keep game cool").
+
+### Small game and birds (surv-land-small-game, new)
+
+- Worth it: FM 21-76 p. 73 ("Unless you have the chance to take large game, concentrate your efforts on the smaller animals, due to their
+  abundance"); MDC Xplor ("bushytails taste better than nearly any other game animal"; rabbits "October when rabbit numbers are often
+  higher" — Missouri; squirrel "number 6s", rabbit "number 6 shot"); MDC squirrel (".22 caliber rifle or shotgun (preferably 410 or 20
+  gauge)"; no leaf-nest shots; cavity squirrels "unlikely to be recovered"); MDC rabbit ("20-gauge shotgun loaded with #6 or #7½ shot").
+  Gauge and shot named as Missouri's practice, D177.
+- Safe shooting: Maine zone-of-fire pages (definition; "changes with every step"; never swing or shoot outside; groups no more than three,
+  two for new hunters; agree beforehand; three abreast; hold swings when game turns back; one shooter per target; never point at a person,
+  "Better to pass up a shot"; backstop; no "skylined" animal; fluorescent orange); Maine backstops ("Small shot can travel 200–350 yards",
+  "Larger shot can travel over 600 yards", .22 over 1½ miles; conversions 180–320 m, 550 m, 2.4 km); MDC Xplor (beagles; safety glasses and
+  ear protection); Washington (never at sound or movement).
+- Squirrels: MDC squirrel (gray: large forest tracts and bottomlands, active at dawn; fox: edges, later morning and midday; hot humid
+  midday; approach at an angle); MDC Xplor (head shot "limit the number of pellets in the meat").
+- Rabbits and hares: MDC rabbit (brushy cover near feeding areas; hayfields, pastures, woodlands, fields; early morning, late afternoon;
+  sunny days after a cold snap, south- and southwest-facing slopes); MDC Xplor (wait until open area with no brush); DEC guide (cottontails
+  and varying hares; RHDV2 "highly lethal", "can persist on surfaces for months", disposable gloves, minimise dog contact, report sick or
+  unusually dying rabbits). The guide's 10% bleach gear soak after out-of-state travel is not given (bleach mixes are fixed by the spec;
+  not needed for a household staying put). Tularemia: by link only.
+- Turkey: NJ ch. 4 ("Only the head and neck are acceptable targets. A body shot will not kill the bird"; not in full strut; head and neck
+  fully extended; no other birds behind); CT ch. 12 (wings deflect pellets); TPWD (broadside best for bowhunters); MassWildlife list (most
+  accidents from stalking hunters who are calling; don't stalk hen calls, sit and call; no red, white, blue or black; protect your back
+  against a large tree or rock, view not obstructed; decoys not too close; conceal decoys, fans and birds; orange in and out; call out
+  loudly, don't wave or use a call; pattern, know range, range objects). NJ's "at least 13 pellets" pattern figure not carried (gear).
+- Upland birds: NJ ch. 4 (aim for the head and lead the bird; "Most shotguns are not effective past 40 yards"; no skyblasting); MDC
+  nontoxic ("all shots should be limited to less than 45 yards"; conflict, 40 used, D176); DEC guide (spruce grouse orangish-brown tail band,
+  ruffed grouse black; Adirondack evergreen forests; roughly 50,000 pheasants a year); Cornell WHT fowl (field dress right away; "Piling
+  birds can also trap the heat"). Conversion: 40 yd = 37 m.
+- Waterfowl: NJ ch. 4 (non-toxic shot required — the rule itself by link; steel lighter, larger shot); MN DNR (life jacket worn; capacity
+  plate; dress for water temperature; "Even on sunny days, cold water can be deadly"; storms, rough water, open water; companion, float
+  plan; sudden weight shifts; stay with the boat, "Most capsized watercraft can still float", don't swim without a life jacket, clothes and
+  waders float; 1-10-1; heat escape position). The HELP position is summarised (knees to chest, arms crossed); MN's note to try it in a
+  pool first is not carried. Bird flu by link only.
+- Others: DEC guide (snapping turtles: trim all fat, discard fat, liver and eggs before cooking). Frogs, woodchucks, unprotected species by
+  link to New York rules.
+- Handling: Cornell WHT fowl (field dress right away, keep meat cool and clean; knife, cloths or paper towels, plastic gloves, cooler of ice;
+  shot can remain in meat, chew carefully; lead especially harmful to children and fetuses).
+- Looked for and not found: hare-specific hunting advice; grouse and woodcock shooting advice beyond NJ's general bird lines; a New York
+  figure for when rabbit numbers peak.
+- Not split in two: the sources for each species are thin (one or two pages each), so one topic.
+
+### Food from the land: where to start (surv-land-start, new hub)
+
+- Effort table: ATP 3-50.21 (4-45 "Plants are valuable sources of food because they are widely available, easily procured"; 4-79
+  "Mammals are excellent sources of protein"; 4-87 "Traps and snares work 24 hours a day without anyone needing to be present"; 4-132
+  "65 to 80 percent protein compared to only 20 percent for beef", "gathered in large numbers to get the same amount of protein as you
+  would from a rabbit"; 4-146 "Fish represent a good source of protein and fat", "usually more abundant than mammal wildlife, and the
+  methods to procure them are mostly silent"); FM 21-76 (p. 73 smaller animals due to abundance, larger animals "roam vast areas and are
+  somewhat more difficult to trap", "65 to 80 percent protein compared to 20 percent for beef"; p. 79 "The amount of injury an animal can
+  inflict is in direct proportion to its size", "Several well-placed traps have the potential to catch much more game than a man with a
+  rifle is likely to shoot"). No calorie or yield figure was found or derived; the page says so.
+- Seasons: DEC Beginners' Guide (inlets "usually spring or fall"; crappie shallow to spawn in spring, "seek deeper, cooler water during the
+  summer"; walleye spawn in April in tributaries with swift flow; "Small ponds loaded with sunfish are the best places to get a bite"); DEC
+  ice fishing (winter; chain pickerel, northern pike, yellow perch, sunfish in ponds and lakes; northern pike, walleye, lake trout in deep
+  lakes); MDC (squirrels at midday in hot weather; rabbits after a cold snap; October rabbits, Missouri); NJ (hot days). Plant seasons
+  come from Wild plants (MSU dandelion; USDA cattail; Penn State raspberries July, blackberries later) by name.
+- Ice line: DEC ice page ("A minimum of three to four inches of solid ice is the general rule for safety"; table "2 inches or less: stay
+  off", "4 inches: ice fishing or other activities on foot"; slush ice "about 50 percent weaker"; double for white ice; check periodically;
+  ice picks; buddy system). DEC trapper manual ch. 5: three inches suggested minimum for one person, four better. The page uses 4 inches on
+  foot (D175). Conversions: 3–4 in = 8–10 cm, 4 in = 10 cm, 2 in = 5 cm.
+- Who should not go: AHA (never hunt alone if possible; dragging, heart attack or stroke); DEC ice (buddy system); MN DNR (companion within
+  sight or voice); DEC bulletins ("DEC requires every hunter to take a Hunter Education Course ... before receiving a license"). Heart
+  trouble caution is the app's own (D174). Lead sentence quoted word for word from Field dressing game; How long to stay in by link.
+- Insects (spec 12: kept as a short section; supported by civilian sources): MSU Extension ("Grasshoppers, crickets and isopods (also called
+  sowbugs, pillbugs ...)"; "limit the number of bugs you are eating to those you can easily identify"; "free from pesticide use"; "cook them
+  completely to destroy any pathogens or parasites"; shellfish and mushroom allergy); OSU CFAES quoting FDA ("Don't eat #cicadas if you're
+  allergic to seafood"; "cook any insect collected in the wild and avoid eating it raw"); ATP 4-133 (avoid adults that bite or sting, hairy
+  or brightly coloured, hairy caterpillars, pungent insects, spiders, ticks, flies, mosquitoes), 4-136 (remove stingers, legs, wings,
+  heads; hard shells may carry parasites, cook fully). Conflict: FM 21-76 p. 74 "You can eat most insects raw" — not followed (D173). ATP
+  4-135's earthworms eaten raw after purging: not carried (worms not covered; ATP 4-137 itself says cook them). The old Wild plants line
+  "skip ... flies, ticks and mosquitoes" is matched by ATP 4-133; "grubs and ants" from the old line are not carried (MSU names neither;
+  ATP lists ants and grubs but the page keeps to the civilian list).
+- "Start with fishing" is the app's suggestion (the group's own skills per the plan), labelled on the page (D170).
+- Quoted word for word: Wild plants' food-priority sentence (body only); Field dressing game's lead sentence.
+
+### Hunting, fishing and trapping kit (land-kit, new checklist)
+
+Items and their sources: knife, whetstone or steel, hatchet, rope or nylon cord, rubber bands, cloths or paper towels, sealable bags,
+cooler of ice or snow, disposable gloves, clean drinking water (Penn State "Bring These Items When You Hunt"); knife, plastic gloves,
+sanitizing wipes, rope, rubber bands or string, saw for pelvis or breastbone, cooler, ice packs, jugs of ice, bags of snow (Cornell WHT
+rifle and fowl); drag rope, headlamp or flashlight with spare batteries, GPS/map/compass, water and snacks, small saw, twist ties,
+harness, hunter orange, first aid kit, binoculars, layered clothing (Indiana DNR); harness with lifeline and foot strap, haul line,
+pocket items (DEC tree stand); binoculars not scope (Washington); orange flagging (Maine); deer cart (MDC); spin-casting rod and reel,
+monofilament 8-pound test, size 6–8 Aberdeen hooks for panfish, sinkers, bobbers, swivels, snap-swivels, bait or lures, needle-nose pliers,
+net, bucket, towel, line clippers, ruler (DEC Beginners' Guide); layers no cotton, extra gloves, cleated boots, ice picks, spud bar or hand
+auger, jigging rod or hand line, tip-ups, sled (DEC ice page); pack basket or bucket or sack, traps, extra trap tags, setting gloves, long
+rubber gloves, heavy gloves for handling animals, stakes, wire or cable, pliers and cable cutters, trowel or digging tool, dirt sifter,
+kneeling pad, catchpole, hip boots or waders, inflatable PFD, waterproof matches and fire starters (DEC trapper manual ch. 5 and 6; NY
+trapper course page); life jacket worn (MN DNR); game bags or cheesecloth, butchering tools, wrap and labels, thermometers, food-grade salt
+(other topics in this app, which name their sources). No quantity is given; the only sizes are DEC's (8-pound test, size 6–8 hooks). The
+DEC trapper manual's wire gauges, stake lengths and drag sizes, its urine and lure, trap dyes and waxes, and its bleach solution are not
+carried (setting traps belongs to the trapping topic; bleach mixes are fixed by the spec).
+
+### Batch B fix round (2026-11-19), from task-3-review.md
+
+Re-opened in this round (built-in fetch of URLs a search returned, title checked):
+- NJ ch. 4: "An animal shot in the liver may live longer." (confirms the liver cell).
+- MDC Xplor: squirrel "Use shells loaded with number 6s."; rabbit "number 6 shot".
+- DEC Beginners' Guide: "monofilament line (mono) is the best choice for beginning anglers"; "Eight-pound test is a good all-around line
+  weight."
+- MN DNR duck hunter: "Wear it – don't just bring it."; 1-10-1 in its words (1 minute "Remain Calm. Get breathing under control."; 10
+  minutes of meaningful movement "Assess the situation and make a plan", "Self-rescue if possible", "Deploy emergency communications and
+  signaling"; 1 hour or more of useful consciousness "Focus on slowing heat loss"); H.E.L.P. (cross ankles, arms over chest, knees to chest,
+  lean back).
+- ADF&G Big Game Shot Placement: "Whether quartering forward (A) quartering away (B) or forward facing (C) it is always important to consider
+  the angle of the animal, and how that affects the vital organ location"; rear "not advisable"; caliber and bullet able to break bones.
+- MSU Eating bugs part 3: "Stir the bugs in the pan for about 10 minutes on medium heat."; "It is difficult to get an accurate internal
+  temperature thermometer reading on an insect"; "you should be extra sure they are thoroughly cooked."
+- AHA (Nov 25, 2024): "getting a good health check-up prior to hunting season would be ideal."
+- Connecticut DEEP, Connecticut Hunter Safety Manual page, which lists "Chapter 12 - Making a Quick, Clean Kill" linking chapter12.pdf:
+  https://portal.ct.gov/deep/hunting/cefs/hunter-safety-manual (official address for the CT source; the chapter text itself names Outdoor
+  Roadmap).
+- DEC trapper manual: a catchpole "can be used to control a trapped animal so it can be released or dispatched more safely and easily."
+- DEC 2020 bulletin (four firearm rules, as on the pages); DEC 2024 release lists five primary rules, the fifth "Wear hunter orange or pink".
+Changes are listed per finding in /home/claude/sdd/task-3-report.md, "Fix round".

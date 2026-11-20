@@ -7587,3 +7587,57 @@ DEC-PR; DOH-TIPS; NYS DOH Advisory Listings by County, https://healthweb-back.he
   streams; fire after icy water); the DEC Lakes and Ponds, Panfish and Walleye pages (walleye in spring, summer and fall; crappie before
   spawning; times of day for sunfish, crappie, walleye and bullheads; panfish tackle and bait lines), replaced from DEC-BG where it
   gives the same subject (lakes and ponds structure, species seasons, beginner tackle and bait).
+
+## Land pack Task 6, part 1: deer diagrams (2026-11-20)
+
+Three figures, drawn from the checked text only; no source opened. One deer outline (a doe seen from the side, facing left;
+far legs and far ear in the muted line) serves all three. Every drawn text line is word for word in its topic's own text
+(not its captions); no number is drawn except the field-dressing step badges. No plant, no person. Rendered at 360 px, inline
+and enlarged, day and night, and viewed (/home/claude/sdd/figs/, not tracked). The fishing and trap-set figures come later.
+
+### land-deer-vitals (surv-land-big-game, "Shot placement", after the steps)
+
+- Draws: "Broadside (side-on)" (table row 1); the heart and lungs shaded in the chest ("The vital area is the heart and lungs in
+  the chest"); a dashed line up the back edge of the near front leg into the body, the chest from its bottom to the top of the back
+  marked in thirds, and the aim mark one third of the way up, inside the shaded area (step 3: "Aim just behind the shoulder. Follow
+  the back edge of the front leg nearest you up into the body, and aim about one third of the way up from the bottom of the chest");
+  "Pick one small spot there, smaller than a pie plate" (step 4).
+- Not drawn: the liver and big blood vessels (vital too, but the text does not place them), a diaphragm, a gut area, a shoulder
+  blade, the quartering-away line, any head, neck or rear shot.
+- Caption: steps 3 and 4, word for word.
+
+### land-field-dressing-cuts (surv-field-dressing-game, "Deer step by step", in place of dress-deer)
+
+- Draws the cuts numbered in the steps' order: 1 belly cut, dashed, from the pelvis (at the hind legs) to the breastbone (at the
+  chest) (step 4: "open the belly from the pelvis to the breastbone"); 2 a ring at the anus (step 5: "Cut around the anus, ... and
+  tie it off"); 3 the diaphragm, dashed (inside), at the back of the chest (step 6: "Cut the diaphragm away from the ribs all the way
+  round"); 4 a short bar inside the front of the chest (step 6: "Reach up into the chest and cut the windpipe and gullet as far
+  forward as you can").
+- The deer is drawn standing so it reads as a deer; the steps lay it on its back (not drawn: the slope, the brace, the hands).
+- dress-deer (a body seen from above, not recognisable as a deer) leaves the topic; it stays in figs/.
+- Caption: "Open the belly from the pelvis to the breastbone. Don’t cut the stomach or intestines: they carry germs that cause food
+  poisoning." Step 4's words.
+
+### land-deer-cuts (surv-land-butchering, "The cuts and what each is good for", before the table)
+
+- Draws where each cut comes from, in the table's "Where it comes from" words: neck ("Between the shoulders and the head"),
+  shoulder ("Front leg and shoulder blade"), backstrap (loin) as a band along the spine over the ribs ("The long strip along each
+  side of the spine, over the ribs"), ribs ("The sides of the chest"), flank ("The thin meat on the sides and belly"), tenderloin
+  dashed, as inside ("Inside, along the underside of the spine, near the pelvis"), hind leg with sirloin, top round, bottom round,
+  eye of round ("Hind leg: ..."), shank shaded on the hind leg below its knee ("The lower leg, below the knee"; "Find the knee joint
+  and cut through it: the lower part is the shank").
+- Not drawn: brisket (the table puts it on "the front and sides of the chest", the same place as ribs; one region cannot carry
+  both honestly), trimmings, a front shank (the text names no front knee), the separate hind-leg muscles (the text places only the
+  sirloin, "hugging the front of the thigh bone", and no thigh bone is drawn).
+- Caption: Quartering step 3, "Tenderloins: the two small tube-shaped muscles inside, along the underside of the spine, near the
+  pelvis." It explains the dashed shape.
+
+### Land pack Task 6, part 1 fix round (2026-11-20), from task-6a-review.md
+
+- land-field-dressing-cuts dropped (review DROP; controller ruling, docs/v7.7-rulings.md, Diagrams): the diaphragm and windpipe cuts,
+  made from inside, read as outside cuts, and the standing deer contradicts step 3 (on its back). dress-deer is not restored (not
+  recognisable as a deer; same inside/outside fault). Both definitions removed from figs/. Field dressing game keeps dress-fish only;
+  its text was not changed and nowhere refers to a deer diagram.
+- land-deer-vitals (review Minor 2): the unlabelled two-thirds tick removed; the line keeps the bottom, one-third and top ticks.
+- land-deer-cuts: the shaded shank block removed. The text says where the shank starts ("Find the knee joint and cut through it: the
+  lower part is the shank") but not where it ends, so "Shank" is now a label with a leader to the hind leg below its knee.

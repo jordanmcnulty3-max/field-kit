@@ -25,7 +25,6 @@ CASES = {
     'fire-platform': ([r'flat rocks', r'wet ground', r'sticks'], ['green logs', 'deep snow']),
     'river': ([r'slightly downstream', r'stay well upstream'], ['45', 'downstream', 'never cross just above them']),
     'trap-snare': ([r'(?<!\d)3 in\b', r'fist'], ['head']),
-    'dress-deer': ([r'head uphill', r'uphill', r'breastbone to pelvis'], ['pelvis to breastbone']),
 }
 
 
@@ -78,7 +77,8 @@ RESTORED = {
     'surv-shelter': ['shelter-debris'],
     'surv-fire': ['fire-sizes', 'fire-platform'],
     'surv-river-crossings': ['river'],
-    'surv-field-dressing-game': ['dress-deer'],
+    # land pack (v7.7) Task 6: surv-field-dressing-game ships with no deer field-dressing figure (dress-deer was not
+    # recognisable and the redraw failed the image-first review; docs/v7.7-rulings.md, Diagrams)
 }
 
 
@@ -993,3 +993,138 @@ def test_dress_fish_moved_with_the_fish_text_to_the_fish_page():
     for _, _, s in _texts('dress-fish'):
         assert s.strip().rstrip('.') in topic, f'dress-fish: drawn {s!r} is not in surv-land-fish-cleaning'
     assert fig_section('surv-land-fish-cleaning', 'dress-fish') == ['Gut it']
+
+
+# ---- Land pack (v7.7) Task 6: the deer diagrams carry only what their topic carries ----
+# figure -> (topic, section heading it sits in, phrases drawn on it (each also in the topic's own text), wording that must
+#            not be drawn or in the alt text, phrases the caption carries)
+LAND_FIGS = {
+    'land-deer-vitals': (
+        'surv-land-big-game', 'Shot placement',
+        ['broadside (side-on)', 'aim just behind the shoulder', 'pick one small spot there,', 'smaller than a pie plate',
+         'heart and lungs', 'about one third', 'of the way up from', 'the bottom of the chest', 'follow the back edge',
+         'of the front leg nearest you'],
+        [r'\d', r'\bhead\b', r'\bneck\b', r'quartering', r'facing you', r'liver', r'gut', r'spine', r'backbone', r'brain',
+         r'shoulder blade', r'diaphragm', r'\bsafe', r'yards?'],
+        ['aim just behind the shoulder', 'one third of the way up from the bottom of the chest', 'smaller than a pie plate']),
+    'land-deer-cuts': (
+        'surv-land-butchering', 'The cuts and what each is good for',
+        ['backstrap (loin)', 'tenderloin', 'inside, along the underside', 'of the spine, near the pelvis', 'neck', 'shoulder',
+         'ribs', 'flank', 'hind leg', 'sirloin', 'top round, bottom round,', 'eye of round', 'shank'],
+        [r'\d', r'brain', r'spinal cord', r'lymph', r'spleen', r'\bsaw', r'brisket', r'tongue', r'liver', r'heart',
+         r'steak', r'roast', r'\bsafe'],
+        ['tenderloins', 'inside, along the underside of the spine, near the pelvis']),
+}
+
+
+def _drawn_lines(name):
+    """Every drawn text string."""
+    return [s for _, _, s in _texts(name)]
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_sits_once_in_its_section(name):
+    tid, section = LAND_FIGS[name][:2]
+    assert name in figs.F, name
+    assert topic_figs()[tid].count(name) == 1, (tid, name)
+    assert fig_section(tid, name) == [section]
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_svg_parses(name):
+    root = ET.fromstring(figs.F[name][0])
+    assert root.get('viewBox').startswith('0 0 340 '), root.get('viewBox')
+    assert root.get('role') == 'img' and root.get('aria-label') == figs.F[name][1]
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_draws_its_topics_words(name):
+    tid, _, words, _, _ = LAND_FIGS[name]
+    d, topic = drawn_of(name), topic_text(tid)
+    for w in words:
+        assert w in d, f'{name}: missing {w!r} in drawn text: {d}'
+        assert w.rstrip(',') in topic, f'{name}: {w!r} is not in {tid}'
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_every_drawn_line_is_in_the_text(name):
+    """Every text string drawn is word for word in the topic's own text (not its captions or sources); trailing punctuation
+    that only ends a line is ignored."""
+    tid = LAND_FIGS[name][0]
+    source = topic_text(tid)
+    for s in _drawn_lines(name):
+        line = s.strip().rstrip(':,.').strip()
+        assert line and line in source, f'{name}: drawn {s!r} is not in {tid}'
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_draws_no_unstated_wording(name):
+    banned = LAND_FIGS[name][3]
+    for t in (' '.join(_drawn_lines(name)), alt_of(name)):
+        for pat in banned:
+            assert not re.search(pat, t), f'{name}: says {pat!r}: {t}'
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_alt_and_caption(name):
+    """The caption is the topic's own sentences, word for word."""
+    tid, _, _, _, cap_words = LAND_FIGS[name]
+    assert len(alt_of(name)) > 40
+    cap = topic_caption(tid, name)
+    for w in cap_words:
+        assert w in cap, f'{name}: caption missing {w!r}: {cap}'
+    for sentence in [x.strip() for x in re.split(r'(?<=[.?])\s', cap) if x.strip()]:
+        assert sentence.rstrip('.') in topic_text(tid), f'{name}: caption sentence not in the topic: {sentence!r}'
+
+
+def test_land_figures_draw_no_plant_and_no_person():
+    """Land pack constraint: no drawing of any plant; nothing showing use on a person."""
+    for name in LAND_FIGS:
+        svg, label = figs.F[name]
+        t = (svg + label).lower()
+        for word in ('leaf', 'leaves', 'plant', 'person', 'hand', 'skin'):
+            assert word not in t, (name, word)
+
+
+def test_deer_vitals_aim_is_on_the_leg_line_a_third_of_the_way_up():
+    """The aim mark sits on the line up the back edge of the near front leg, one third of the way from the bottom of the
+    chest to the top of the back, inside the shaded heart and lungs."""
+    root = ET.fromstring(figs.F['land-deer-vitals'][0])
+    els = {}
+    for e in root.iter():
+        if e.get('data-part'):
+            els.setdefault(e.get('data-part'), []).append(e)
+    dx, dy = (float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', els['deer'][0].get('transform')))
+    leg = els['leg-line'][0]
+    thirds = sorted(float(e.get('y1')) for e in els['third'])
+    assert len(thirds) == 3, 'bottom, one third and top only: a two-thirds tick reads as a second aim mark'
+    top, bot = thirds[0], thirds[-1]
+    assert abs(thirds[1] - (bot - (bot - top) / 3)) < 0.2
+    aim = els['aim'][0]
+    ax, ay = float(aim.get('cx')) - dx, float(aim.get('cy')) - dy
+    assert ax == float(leg.get('x1')) == float(leg.get('x2'))
+    assert abs(ay - (bot - (bot - top) / 3)) < 0.2, (ay, top, bot)
+    v = els['vital'][0]
+    cx, cy, rx, ry = (float(v.get(k)) for k in ('cx', 'cy', 'rx', 'ry'))
+    assert ((ax - cx) / rx) ** 2 + ((ay - cy) / ry) ** 2 < 1, 'the aim spot is inside the heart and lungs'
+
+
+def test_deer_cuts_tenderloin_is_drawn_dashed_as_inside():
+    root = ET.fromstring(figs.F['land-deer-cuts'][0])
+    t = [e for e in root.iter() if e.get('data-part') == 'tenderloin']
+    assert len(t) == 1 and 'd' in t[0].get('class').split()
+
+
+def test_field_dressing_deer_steps_carry_no_figure():
+    """Controller ruling (docs/v7.7-rulings.md, Diagrams): the deer steps ship text-only; neither the failed redraw nor the
+    old top view is drawn or kept."""
+    assert topic_figs()['surv-field-dressing-game'] == []   # the fish figure moved to the fish page with its text
+    assert 'dress-deer' not in figs.F and 'land-field-dressing-cuts' not in figs.F
+
+
+def test_deer_cuts_shank_is_a_label_only():
+    """The text names where the shank starts (the knee joint) but not where it ends, so no shank boundary or shading is drawn."""
+    root = ET.fromstring(figs.F['land-deer-cuts'][0])
+    assert not [e for e in root.iter() if e.get('data-part') == 'shank']
+    assert not [e for e in root.iter() if 'wf' in (e.get('class') or '').split()]
+    assert 'shank' in drawn_of('land-deer-cuts')

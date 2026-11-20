@@ -1346,3 +1346,25 @@ def test_warm_weather_meat_gets_one_answer_on_field_dressing_and_preserving_game
     for part in shared:
         assert part in noice and part in joined[0], part
     assert 's:surv-field-dressing-game' in _links({'sections': [labels]})
+
+
+def test_trapping_says_how_to_tell_the_traps_apart_and_how_to_set_them_before_where_to_set_them():
+    # whole-branch review I2: a first-time trapper holding a borrowed trap is told which kind it is and how it is set, from the trapper
+    # manuals; what no source opened gives (every body-gripping step, setting a cage trap) is the app's caution, never written from memory
+    trap = _shipped('survival')['surv-land-trapping']
+    heads = [s['h'] for s in trap['sections']]
+    i = heads.index('Which trap you have, and setting it')
+    assert heads[i - 1] == 'The kinds of trap' and heads[i + 1].startswith('Muskrat, beaver and raccoon')
+    sec = trap['sections'][i]
+    text = ' '.join(_texts({'sections': [sec]}))
+    for kind in ('Foothold trap:', 'Body-gripping trap, also called a Conibear trap:', 'Cage or box trap:'):
+        assert kind in text, kind
+    steps = next(b['steps'] for b in sec['blocks'] if 'steps' in b)
+    assert len(steps) == 5 and steps[0].startswith('Put the palm of each hand on one of the springs')
+    assert 'Setting a coil-spring foothold trap, from the IAFWA trapper education manual, in its order.' in text
+    for must in ('setting tongs', 'safety gripper', 'have someone who has set one show you how to set it and how to release it safely',
+                 'This app’s caution: this page does not teach every step of setting a body-gripping trap, or how to set a cage trap.',
+                 'Never set a body-gripping trap until someone who has set one has shown you how.'):
+        assert must in text, must
+    assert 's:surv-land-ny-rules' in _links({'sections': [sec]})
+    assert any(s['name'].startswith('International Association of Fish and Wildlife Agencies, Trapper Education Manual') for s in trap['sources'])

@@ -56,6 +56,56 @@
       ]
     },
     {
+      "h": "Which trap you have, and setting it",
+      "blocks": [
+        {
+          "p": "Before you set any trap, have someone who has set one show you how to set it and how to release it safely, and practise with them until you can do it correctly (IAFWA trapper education manual)."
+        },
+        {
+          "p": "Telling them apart:"
+        },
+        {
+          "list": [
+            "Foothold trap: jaws that hold the animal by the foot, a pan that the animal presses down, and one long spring, two long springs, or coil springs (NYS DEC trapper manual; North Dakota Game and Fish).",
+            "Body-gripping trap, also called a Conibear trap: made to kill, with two jaws that rotate shut on the animal’s neck or chest (IAFWA trapper education manual). Openings range from 5 to 12 inches (13 to 30 cm) (North Dakota Game and Fish).",
+            "Cage or box trap: a box, or a cage of wire, that catches one animal at a time and seldom harms it (NYS DEC trapper manual)."
+          ]
+        },
+        {
+          "p": "Setting a coil-spring foothold trap, from the IAFWA trapper education manual, in its order. A single long-spring trap is easier to set than a coil-spring. Wear the gloves you will trap in, and practise in them."
+        },
+        {
+          "steps": [
+            "Put the palm of each hand on one of the springs, and press both levers down evenly at the same time until the jaws open.",
+            "Hold the jaws open with the palm and thumb of one hand.",
+            "With the thumb of your free hand, set the dog in the notch of the pan. Ease a little pressure off the jaws to make sure it holds.",
+            "Hold the dog down with one thumb, raise the free jaw, and put your fingers below the jaw and the pan, holding the trap by its base plate.",
+            "Holding the pan up, with the fingers of both hands under the jaws and the pan, set the trap in place."
+          ]
+        },
+        {
+          "p": "Body-gripping traps (IAFWA trapper education manual):"
+        },
+        {
+          "list": [
+            "Small ones have springs you can squeeze shut by hand. On a trap with two springs, a safety hook holds each spring squeezed; release the hooks only once the trap is in place.",
+            "Size 220 and larger: set them with setting tongs, a tool that uses leverage to squeeze the springs and fasten the safety hook, and keep the tongs within reach. Use a safety gripper so the trap can’t fire shut while you finish the set. Carry the rope with a loop: how to use it is in the box at the top of this page.",
+            "Take extreme care setting one under water."
+          ]
+        },
+        {
+          "warn": "This app’s caution: this page does not teach every step of setting a body-gripping trap, or how to set a cage trap. Never set a body-gripping trap until someone who has set one has shown you how. Have a cage trap’s owner show you how it sets."
+        },
+        {
+          "p": "Which traps, and what sizes, are legal where, in normal times, is in New York rules for hunting, fishing and trapping."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
+        }
+      ]
+    },
+    {
       "h": "Muskrat, beaver and raccoon: where and how to set",
       "blocks": [
         {
@@ -285,11 +335,15 @@
   "sources": [
     {
       "name": "NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping, student manual, 4th edition (2016)",
-      "used": "Muskrat as marsh rabbit, beaver stew, some carcasses used for food; trap types, sizes, pan tension and level pans; body-gripping cautions; cage traps; snares on sale; selective trapping and baits; muskrat, beaver and raccoon sign; trail, feed bed, channel, scent mound, pocket and raccoon box sets; water depths; submersion wires; anchoring, stakes, swivels, chain; pack basket; check daily and early; approach; move a visited set; killing (pp. 83-84): beginners, .22 shot, opossum, foothold and cage traps, firearm safety, head kept for rabies testing, two blows, pinning, checking with the tool, larger animals too large for beginners, water sets instead; catchpole, fabric, partner; release pets and tell the owner; tongs, rope, safety gripper, no wax; life jacket, six inches of ice, face the way you came; hypothermia and wool; rabies, gloves, washing, tularemia, raccoon roundworm; freezing may not kill worms; wash a bite, get help; self-release with a rope"
+      "used": "Muskrat as marsh rabbit, beaver stew, some carcasses used for food; trap types, sizes, pan tension and level pans; body-gripping cautions; cage traps; box traps and cage-like wire traps catch one animal at a time; snares on sale; selective trapping and baits; muskrat, beaver and raccoon sign; trail, feed bed, channel, scent mound, pocket and raccoon box sets; water depths; submersion wires; anchoring, stakes, swivels, chain; pack basket; check daily and early; approach; move a visited set; killing (pp. 83-84): beginners, .22 shot, opossum, foothold and cage traps, firearm safety, head kept for rabies testing, two blows, pinning, checking with the tool, larger animals too large for beginners, water sets instead; catchpole, fabric, partner; release pets and tell the owner; tongs, rope, safety gripper, no wax; life jacket, six inches of ice, face the way you came; hypothermia and wool; rabies, gloves, washing, tularemia, raccoon roundworm; freezing may not kill worms; wash a bite, get help; self-release with a rope"
     },
     {
       "name": "North Dakota Game and Fish Department, Body-Grip Traps and Foothold Traps: Identification, Use and Removing a Dog (two web pages, undated)",
-      "used": "Steps to free a dog from a body-gripping trap; rope, belt or leash method; steps to free a dog from a foothold trap; pulling the stake does not free the foot"
+      "used": "Steps to free a dog from a body-gripping trap; rope, belt or leash method; steps to free a dog from a foothold trap; pulling the stake does not free the foot; body-grip openings of 5 to 12 inches; foothold traps with one long spring, two long springs or coil springs"
+    },
+    {
+      "name": "International Association of Fish and Wildlife Agencies, Trapper Education Manual (2005)",
+      "used": "Practise setting and releasing with an instructor or experienced trapper; body-gripping traps also known as Conibear traps, two jaws rotating shut on the neck or chest; long-spring easier to set than coil-spring; coil-spring setting steps (pp. 45-46); gloves; small body-gripping traps set by hand, safety hooks; setting tongs for size 220 and larger, safety gripper, tongs within reach; extreme caution under water"
     },
     {
       "name": "New York rules for hunting, fishing and trapping (this app), from the NYS DEC 2026–2027 Hunting and Trapping Guide and New York Environmental Conservation Law 11-1101",

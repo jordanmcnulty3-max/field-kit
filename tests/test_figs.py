@@ -25,7 +25,6 @@ CASES = {
     'fire-platform': ([r'flat rocks', r'wet ground', r'sticks'], ['green logs', 'deep snow']),
     'river': ([r'slightly downstream', r'stay well upstream'], ['45', 'downstream', 'never cross just above them']),
     'trap-snare': ([r'(?<!\d)3 in\b', r'fist'], ['head']),
-    'dress-deer': ([r'head uphill', r'uphill', r'breastbone to pelvis'], ['pelvis to breastbone']),
 }
 
 
@@ -79,8 +78,8 @@ RESTORED = {
     'surv-fire': ['fire-sizes', 'fire-platform'],
     'surv-river-crossings': ['river'],
     'surv-traps-and-fishing': ['trap-snare'],
-    # land pack (v7.7) Task 6: dress-deer (a body seen from above) gave way to land-field-dressing-cuts, a side view of the
-    # deer with the cuts numbered in the steps' order; dress-deer stays in figs/ and its CASES check still holds
+    # land pack (v7.7) Task 6: surv-field-dressing-game ships with no deer field-dressing figure (dress-deer was not
+    # recognisable and the redraw failed the image-first review; docs/v7.7-rulings.md, Diagrams)
 }
 
 
@@ -983,12 +982,6 @@ LAND_FIGS = {
         [r'\d', r'\bhead\b', r'\bneck\b', r'quartering', r'facing you', r'liver', r'gut', r'spine', r'backbone', r'brain',
          r'shoulder blade', r'diaphragm', r'\bsafe', r'yards?'],
         ['aim just behind the shoulder', 'one third of the way up from the bottom of the chest', 'smaller than a pie plate']),
-    'land-field-dressing-cuts': (
-        'surv-field-dressing-game', 'Deer step by step',
-        ['open the belly from the pelvis', 'to the breastbone', 'cut around the anus,', 'and tie it off',
-         'cut the diaphragm away', 'from the ribs', 'cut the windpipe', 'and gullet as far', 'forward as you can'],
-        [r'uphill', r'breastbone to pelvis', r'\bsaw', r'\bsafe', r'(?<![\d])\d{2,}', r'°', r'inch'],
-        ['open the belly from the pelvis to the breastbone', 'don\'t cut the stomach or intestines']),
     'land-deer-cuts': (
         'surv-land-butchering', 'The cuts and what each is good for',
         ['backstrap (loin)', 'tenderloin', 'inside, along the underside', 'of the spine, near the pelvis', 'neck', 'shoulder',
@@ -1000,8 +993,8 @@ LAND_FIGS = {
 
 
 def _drawn_lines(name):
-    """Every drawn text string, except the step badges (a single digit)."""
-    return [s for _, _, s in _texts(name) if not re.fullmatch(r'\d', s)]
+    """Every drawn text string."""
+    return [s for _, _, s in _texts(name)]
 
 
 @pytest.mark.parametrize('name', sorted(LAND_FIGS))
@@ -1030,8 +1023,8 @@ def test_land_figure_draws_its_topics_words(name):
 
 @pytest.mark.parametrize('name', sorted(LAND_FIGS))
 def test_land_figure_every_drawn_line_is_in_the_text(name):
-    """Every text string drawn is word for word in the topic's own text (not its captions or sources), apart from the step
-    badges; trailing punctuation that only ends a line is ignored."""
+    """Every text string drawn is word for word in the topic's own text (not its captions or sources); trailing punctuation
+    that only ends a line is ignored."""
     tid = LAND_FIGS[name][0]
     source = topic_text(tid)
     for s in _drawn_lines(name):
@@ -1068,25 +1061,6 @@ def test_land_figures_draw_no_plant_and_no_person():
             assert word not in t, (name, word)
 
 
-def test_field_dressing_badges_follow_the_steps_order():
-    """Badge n labels the n-th cut in the order the topic's steps give them: belly, anus, diaphragm, windpipe."""
-    texts = _texts('land-field-dressing-cuts')
-    badges = sorted((s, x, y) for x, y, s in texts if re.fullmatch(r'\d', s))
-    assert [b[0] for b in badges] == ['1', '2', '3', '4']
-    want = ['open the belly from the pelvis', 'cut around the anus,', 'cut the diaphragm away', 'cut the windpipe']
-    for (n, bx, by), first in zip(badges, want):
-        x, y = next((x, y) for x, y, s in texts if s == first)
-        assert abs(y - by) < 1 and 0 < abs(x - bx) < 30, (n, first, (bx, by), (x, y))
-    steps = next(b['steps'] for s in json.load(open(os.path.join(ROOT, 'src', 'survival', 'surv-field-dressing-game.json'),
-                                                       encoding='utf-8'))['sections'] if s['h'] == 'Deer step by step'
-                 for b in s['blocks'] if 'steps' in b)
-    steps = [st.lower() for st in steps]
-    at = [next(i for i, st in enumerate(steps) if w.rstrip(',') in st) for w in want]
-    assert at == sorted(at), at
-    for n in '1234':
-        assert f'{n} ' + want[int(n) - 1].rstrip(',') in alt_of('land-field-dressing-cuts')
-
-
 def test_deer_vitals_aim_is_on_the_leg_line_a_third_of_the_way_up():
     """The aim mark sits on the line up the back edge of the near front leg, one third of the way from the bottom of the
     chest to the top of the back, inside the shaded heart and lungs."""
@@ -1098,8 +1072,9 @@ def test_deer_vitals_aim_is_on_the_leg_line_a_third_of_the_way_up():
     dx, dy = (float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', els['deer'][0].get('transform')))
     leg = els['leg-line'][0]
     thirds = sorted(float(e.get('y1')) for e in els['third'])
-    assert len(thirds) == 4
+    assert len(thirds) == 3, 'bottom, one third and top only: a two-thirds tick reads as a second aim mark'
     top, bot = thirds[0], thirds[-1]
+    assert abs(thirds[1] - (bot - (bot - top) / 3)) < 0.2
     aim = els['aim'][0]
     ax, ay = float(aim.get('cx')) - dx, float(aim.get('cy')) - dy
     assert ax == float(leg.get('x1')) == float(leg.get('x2'))
@@ -1113,3 +1088,19 @@ def test_deer_cuts_tenderloin_is_drawn_dashed_as_inside():
     root = ET.fromstring(figs.F['land-deer-cuts'][0])
     t = [e for e in root.iter() if e.get('data-part') == 'tenderloin']
     assert len(t) == 1 and 'd' in t[0].get('class').split()
+
+
+def test_field_dressing_deer_steps_carry_no_figure():
+    """Controller ruling (docs/v7.7-rulings.md, Diagrams): the deer steps ship text-only; neither the failed redraw nor the
+    old top view is drawn or kept."""
+    assert topic_figs()['surv-field-dressing-game'] == ['dress-fish']
+    assert fig_section('surv-field-dressing-game', 'dress-fish') == ['Small game and fish']
+    assert 'dress-deer' not in figs.F and 'land-field-dressing-cuts' not in figs.F
+
+
+def test_deer_cuts_shank_is_a_label_only():
+    """The text names where the shank starts (the knee joint) but not where it ends, so no shank boundary or shading is drawn."""
+    root = ET.fromstring(figs.F['land-deer-cuts'][0])
+    assert not [e for e in root.iter() if e.get('data-part') == 'shank']
+    assert not [e for e in root.iter() if 'wf' in (e.get('class') or '').split()]
+    assert 'shank' in drawn_of('land-deer-cuts')

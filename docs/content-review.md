@@ -7354,3 +7354,13 @@ and enlarged, day and night, and viewed (/home/claude/sdd/figs/, not tracked). T
   sirloin, "hugging the front of the thigh bone", and no thigh bone is drawn).
 - Caption: Quartering step 3, "Tenderloins: the two small tube-shaped muscles inside, along the underside of the spine, near the
   pelvis." It explains the dashed shape.
+
+### Land pack Task 6, part 1 fix round (2026-11-20), from task-6a-review.md
+
+- land-field-dressing-cuts dropped (review DROP; controller ruling, docs/v7.7-rulings.md, Diagrams): the diaphragm and windpipe cuts,
+  made from inside, read as outside cuts, and the standing deer contradicts step 3 (on its back). dress-deer is not restored (not
+  recognisable as a deer; same inside/outside fault). Both definitions removed from figs/. Field dressing game keeps dress-fish only;
+  its text was not changed and nowhere refers to a deer diagram.
+- land-deer-vitals (review Minor 2): the unlabelled two-thirds tick removed; the line keeps the bottom, one-third and top ticks.
+- land-deer-cuts: the shaded shank block removed. The text says where the shank starts ("Find the knee joint and cut through it: the
+  lower part is the shank") but not where it ends, so "Shank" is now a label with a leader to the hind leg below its knee.

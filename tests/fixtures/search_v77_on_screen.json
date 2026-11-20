@@ -428,10 +428,10 @@
  ],
  "ice": [
   "p:sprain-dislocation",
+  "s:surv-traps-and-fishing",
   "s:surv-unheated-house",
   "s:surv-water-in-the-house",
-  "s:surv-water-winter",
-  "s:surv-winter-storms"
+  "s:surv-water-winter"
  ],
  "in shock": [
   "p:shock",

@@ -1,0 +1,180 @@
+{
+  "id": "surv-land-after-fallout",
+  "title": "Game, fish, milk and gardens after fallout",
+  "category": "land",
+  "keywords": [
+    "milk after fallout",
+    "garden after fallout",
+    "game after fallout",
+    "fish after fallout",
+    "eggs after fallout",
+    "livestock fallout",
+    "farm animals fallout",
+    "cow milk fallout",
+    "goat milk fallout",
+    "chickens fallout",
+    "vegetables after fallout",
+    "hunting after fallout",
+    "fishing after fallout"
+  ],
+  "summary": "Don’t use milk from your own animals, or wild game and fish, until officials say you can, and don’t pick or eat garden food until they say so (Water and food after fallout). No source opened says when they can be used, and nothing on this page says they are fine. If no official word ever comes, this page gives what older federal civil defence handbooks and federal guidance for agencies say, each named, with its year. For wild game, fish and eggs no source gives any step or advice.",
+  "doFirst": [
+    "From Water and food after fallout: “No current source opened says when milk from your own animals, or wild game and fish, can be used after fallout. This app’s caution: treat them like food that was outdoors, and don’t use them until officials say you can.”",
+    "From Water and food after fallout: “Don’t pick or eat food from your garden until officials say you can (CDC, Ready.gov).”",
+    "When officials do say what can be eaten, do what they say. Nothing on this page overrides them.",
+    "Animals to tend: this app’s caution is that each trip out to them is a trip out like any other, under the rule in How long to stay in: “with no meter and no official word, stay in all the time for at least the first 24 hours unless an immediate hazard forces you out. For the rest of the 2 weeks, and above all in the first few days, go out only for what can’t wait, and as briefly as you can.” The steps FDA lists for farm animals (shelter, and protected food and water) are under Animals you keep, below."
+  ],
+  "sections": [
+    {
+      "h": "Read this first",
+      "blocks": [
+        {
+          "p": "Stored food and drinks, water, babies, medicine and pet food after fallout are in Water and food after fallout. This page is only for food that grows, grazes, swims or lays: the garden, milk from your own animals, eggs, wild game and fish, and feed for animals you keep."
+        },
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "p": "Current federal advice says not to eat garden food until officials say you can (CDC, Ready.gov), and not to eat or drink food or liquids that were outdoors and uncovered until they say so (Ready.gov). It says nothing about milk, eggs, game or fish. If officials never speak, this page shows what older federal civil defence handbooks say, each named with its year and marked dated, and what federal guidance written for agencies says. None of them says when any of these foods is fine to eat, and this page never does."
+        },
+        {
+          "p": "For people who have nothing else, the 1968 civil defence handbook In Time of Emergency (dated) says: “People suffering from extreme hunger or thirst should not be denied these necessities after an attack, even if the only available supplies might contain fallout particles or other radioactive substances.” That is not a statement that the food or water is free of fallout, or fine: the same sentence says it might contain fallout particles. It does not replace the rule above while officials can still be heard."
+        }
+      ]
+    },
+    {
+      "h": "Garden food",
+      "blocks": [
+        {
+          "warn": "Don’t pick or eat food from your garden until officials say you can (CDC, Ready.gov)."
+        },
+        {
+          "list": [
+            "EPA’s planning manual for officials (2017) says the steps after a radiation incident might include limits on eating garden produce or other locally grown food. It gives no rule for a household.",
+            "FDA’s recommendations for state and local agencies (1998) name two ways to lower contamination on fresh produce: removing it from the surface by brushing, washing or peeling, and holding the food so its radioactivity can decay. They are written for agencies after a radiation accident, such as at a nuclear power plant, not for fallout from a nuclear explosion, and they give no times or amounts for a household.",
+            "The 1968 civil defence handbook In Time of Emergency (dated) says radiation passing through food does not contaminate it; the danger is swallowing fallout particles that are on the food, and those could be wiped or washed off. It does not say when garden food can be eaten."
+          ]
+        },
+        {
+          "p": "If no official word ever comes: brushing, washing and peeling are the only steps any source opened names for fresh produce, and no source opened says they make it fine to eat. No source opened says how long to wait before eating from the garden."
+        }
+      ]
+    },
+    {
+      "h": "Milk from your own animals",
+      "blocks": [
+        {
+          "p": "No current source opened says when milk from your own cows or goats can be drunk after fallout. Water and food after fallout says: “The 1968 civil defence handbook In Time of Emergency (dated) says that milk from cows that grazed on pasture with fallout on it might harm the thyroid glands of infants and small children, and that, if authorities say the regular milk supply is contaminated, they should have canned or powdered milk for a few weeks.”"
+        },
+        {
+          "list": [
+            "FDA’s recommendations for agencies (1998) list, as steps to protect milk: taking milking animals off contaminated pasture and feed, putting dairy cows on stored feed, and giving them uncontaminated water in place of contaminated water. These are written for agencies after a radiation accident, not for fallout from a nuclear explosion.",
+            "EPA’s planning manual for officials (2017) leaves milk to FDA’s guidance and gives no advice for a household.",
+            "No source opened gives a goat-milk rule of its own, and none says how long to wait before drinking milk from your own animals."
+          ]
+        },
+        {
+          "p": "Feeding babies and young children after fallout, including formula, is in Water and food after fallout."
+        }
+      ]
+    },
+    {
+      "h": "Animals you keep: shelter, feed and water",
+      "blocks": [
+        {
+          "p": "FDA’s recommendations for agencies (1998) list these early steps for farm animals after a radiation accident: moving animals to shelter, corralling livestock, and giving them protected feed and water. They also list taking milking and meat animals off contaminated feed and pasture, and giving them uncontaminated water. FDA wrote them for agencies, not for a household, and not for fallout from a nuclear explosion; no current source opened gives farm-animal steps for fallout."
+        },
+        {
+          "p": "Ready.gov: “If you are instructed to stay inside during a radiation emergency, pets and service animals should be inside too.” Washing a pet that was outside is in Coming in from outside."
+        },
+        {
+          "link": "s:surv-fallout-coming-inside",
+          "label": "Coming in from outside"
+        },
+        {
+          "warn": "This app’s caution: tending animals does not change when you may go out. Each trip to water or feed them goes by How long to stay in: “with no meter and no official word, stay in all the time for at least the first 24 hours unless an immediate hazard forces you out. For the rest of the 2 weeks, and above all in the first few days, go out only for what can’t wait, and as briefly as you can.”"
+        },
+        {
+          "link": "s:surv-fallout-how-long",
+          "label": "How long to stay in"
+        },
+        {
+          "p": "The 1968 handbook says special advice for rural families on crops and livestock was available from the US Department of Agriculture. This app does not have that advice."
+        }
+      ]
+    },
+    {
+      "h": "Eggs",
+      "blocks": [
+        {
+          "p": "No source opened gives any step or advice for eggs from your own hens after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. This app’s caution: treat them like milk from your own animals, and don’t use them until officials say you can."
+        }
+      ]
+    },
+    {
+      "h": "Wild game",
+      "blocks": [
+        {
+          "p": "No source opened gives any step or advice for wild game after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. The rule at the top of this page is the only one: don’t use it until officials say you can."
+        }
+      ]
+    },
+    {
+      "h": "Fish",
+      "blocks": [
+        {
+          "p": "No source opened gives any step or advice for eating fish you catch after fallout: not CDC, Ready.gov, EPA (2017), FDA (1998), or the 1968 and 1985 civil defence handbooks. The rule at the top of this page is the only one: don’t use it until officials say you can."
+        }
+      ]
+    },
+    {
+      "h": "More",
+      "blocks": [
+        {
+          "link": "s:surv-fallout-water-and-food",
+          "label": "Water and food after fallout"
+        },
+        {
+          "link": "s:surv-fallout-warning",
+          "label": "Fallout warning: what to do first"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Water and food after fallout (another topic in this app)",
+      "used": "Its milk, game and fish caution and its garden line, quoted word for word; its line on the 1968 handbook and milk, quoted word for word; stored food, water, babies, medicine and pet food by link"
+    },
+    {
+      "name": "CDC, Food, Drinking Water, and Medicine Safety in a Radiation Emergency (last reviewed April 15, 2024)",
+      "used": "Don’t pick or eat food from your garden until officials say; no mention of milk, eggs, farm animals, animal feed, game or fish"
+    },
+    {
+      "name": "Ready.gov, Radiation Emergencies (last updated June 14, 2024)",
+      "used": "Don’t eat garden food, or food or liquids that were outdoors and uncovered, until authorities say; pets and service animals inside when told to stay inside; no mention of milk, eggs, farm animals, animal feed, game or fish"
+    },
+    {
+      "name": "US Environmental Protection Agency, PAG Manual: Protective Action Guides and Planning Guidance for Radiological Incidents (EPA-400/R-17/001, January 2017)",
+      "used": "Steps might include limits on eating garden produce or locally produced foods; milk and food left to FDA’s 1998 guidance; no advice for households on milk, eggs, farm animals, game or fish"
+    },
+    {
+      "name": "US Food and Drug Administration, Accidental Radioactive Contamination of Human Food and Animal Feeds: Recommendations for State and Local Agencies (August 1998)",
+      "used": "Written for agencies, for accidents, not nuclear explosions; brushing, washing or peeling produce and holding food for decay; dairy cows on stored feed; milking and meat animals off contaminated feed and pasture; uncontaminated water; moving animals to shelter, corralling livestock, protected feed and water; no mention of game, fish or home gardens"
+    },
+    {
+      "name": "Office of Civil Defense, In Time of Emergency: A Citizen’s Handbook on Nuclear Attack and Natural Disasters (H-14, March 1968; dated civil defence publication)",
+      "used": "Radiation passing through food does not contaminate it; fallout particles on food could be wiped or washed off; USDA advice for rural families on crops and livestock; nothing on eggs, game, fish or animal feed"
+    },
+    {
+      "name": "FEMA, Protection in the Nuclear Age (June 1985; dated civil defence publication)",
+      "used": "Looked in: nothing on garden produce, milk from animals, eggs, farm animals, animal feed, game or fish"
+    },
+    {
+      "name": "How long to stay in, Coming in from outside, Fallout warning: what to do first (other topics in this app)",
+      "used": "When you may go out, washing a pet, and what to do first, by link"
+    }
+  ],
+  "reviewed": "2026-11-19"
+}

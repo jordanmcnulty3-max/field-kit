@@ -802,12 +802,21 @@ def _v74_text(name):
     return json.loads(r.stdout)
 
 
+# the land pack (v7.7) adds a second link block to one of them (spec 7, Fallout): filtered out here after checking it is there exactly once
+CHECKED_LAND_LINKS = {'surv-fallout-water-and-food': 's:surv-land-after-fallout'}
+
+
 @pytest.mark.parametrize('tid,target', sorted(CHECKED_FOOD_LINKS.items()))
 def test_the_checked_topics_differ_from_v74_release_by_one_added_link_block(tid, target):
     now, was = _shipped('survival')[tid], _v74_text(tid)
     extra = []
     now_sections = json.loads(json.dumps(now['sections']))
     assert len(now_sections) == len(was['sections']), tid
+    if tid in CHECKED_LAND_LINKS:
+        land = [b for sn in now_sections for b in sn['blocks'] if b.get('link') == CHECKED_LAND_LINKS[tid]]
+        assert land == [{'link': CHECKED_LAND_LINKS[tid], 'label': _title_of(CHECKED_LAND_LINKS[tid])}], land
+        for sn in now_sections:
+            sn['blocks'] = [b for b in sn['blocks'] if b.get('link') != CHECKED_LAND_LINKS[tid]]
     for sn, sw in zip(now_sections, was['sections']):
         assert sn['h'] == sw['h'], tid
         bn, bw = sn['blocks'], sw['blocks']

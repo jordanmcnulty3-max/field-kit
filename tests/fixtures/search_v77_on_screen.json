@@ -481,11 +481,11 @@
   "s:surv-food-still-good"
  ],
  "milk": [
+  "s:surv-land-after-fallout",
   "s:surv-fallout-water-and-food",
   "s:surv-food-power-out",
   "s:surv-food-babies-children",
-  "s:surv-food-still-good",
-  "p:anaphylaxis"
+  "s:surv-food-still-good"
  ],
  "mushroom": [
   "p:poisoning",
@@ -691,7 +691,8 @@
  ],
  "snake": [
   "p:snakebite",
-  "s:surv-dangerous-animals"
+  "s:surv-dangerous-animals",
+  "s:surv-land-ny-rules"
  ],
  "spoiled": [
   "s:surv-food-poisoning",

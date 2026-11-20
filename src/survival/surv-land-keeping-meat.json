@@ -37,6 +37,13 @@
           "warn": "Whatever the label, cook wild game to 165°F (74°C) in the thickest part before you eat it, unless the method says otherwise. Use a food thermometer if you have one."
         },
         {
+          "p": "From Field dressing game, “Cooling the carcass”: “This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it.” This app’s caution, the same as Field dressing game’s: no method on this page makes that time longer. Start one only on meat still inside that time, and cook the meat to 165°F (74°C) before eating, as each method says. The traditional ways, such as smoke-drying and sun and air drying, are not agency-verified, for warm weather or any other."
+        },
+        {
+          "link": "s:surv-field-dressing-game",
+          "label": "Field dressing game"
+        },
+        {
           "link": "s:surv-food-cooking-no-power",
           "label": "Cook without power"
         }

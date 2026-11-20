@@ -1021,6 +1021,10 @@ def test_warm_meat_time_limits_each_have_one_owner():
             rest = x.replace(still, '')
             if 'perishable' in rest.lower():   # a perishable-food time limit only inside the quoted rule
                 assert not re.search(r'\bhours?\b', rest), (tid, x)
+            # whole-branch review I3: Preserving game meat quotes the owner's caution word for word; the hours appear nowhere else
+            owner = '“This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it.”'
+            if tid == 'surv-land-keeping-meat':
+                x = x.replace(owner, '')
             if '3 to 4 hours' in x or 'three to four hours' in x:
                 assert tid == 'surv-field-dressing-game', (tid, x)
             n45 = len(re.findall(r'(?<!\d)45°F', x))   # not 145°F
@@ -1318,3 +1322,27 @@ def test_no_topic_carries_a_hard_coded_swipe_sentence():
     for tid, t in _shipped('survival').items():
         for x in _all_texts(t):
             assert 'swipe' not in x.lower(), (tid, x)
+
+
+def test_warm_weather_meat_gets_one_answer_on_field_dressing_and_preserving_game_meat():
+    # whole-branch review I3: the cooling limit comes first and belongs to Field dressing game; no keeping method extends it. Both pages
+    # say so in the same words, labelled as the app's caution, and Preserving game meat quotes the owner's line and links it
+    topics = _shipped('survival')
+    fd, keep = topics['surv-field-dressing-game'], topics['surv-land-keeping-meat']
+    cooling = next(s for s in fd['sections'] if s['h'] == 'Cooling the carcass')
+    kinds = [next(iter(b)) for b in cooling['blocks']]
+    noice = cooling['blocks'][2]['warn']
+    assert cooling['blocks'][1]['warn'].startswith('How long you have.') and noice.startswith('No ice, snow or fridge')   # minor M3
+    assert cooling['blocks'][3]['p'].startswith('Found later.') and kinds[4] == 'link'
+    owner = 'This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it.'
+    assert owner in noice
+    shared = ('and cook the meat to 165°F (74°C) before eating, as each method', 'such as smoke-drying and sun and air drying, are not '
+              'agency-verified, for warm weather or any other.')
+    assert 'This app’s caution: no way of keeping meat in Preserving game meat makes that time longer.' in noice
+    labels = next(s for s in keep['sections'] if s['h'] == 'The two labels')
+    joined = [b['p'] for b in labels['blocks'] if 'p' in b and 'makes that time longer' in b['p']]
+    assert len(joined) == 1 and '“' + owner + '”' in joined[0]
+    assert 'This app’s caution, the same as Field dressing game’s: no method on this page makes that time longer.' in joined[0]
+    for part in shared:
+        assert part in noice and part in joined[0], part
+    assert 's:surv-field-dressing-game' in _links({'sections': [labels]})

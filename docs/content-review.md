@@ -7883,3 +7883,69 @@ Every changed fact below was re-opened in this round (built-in search, then a fe
   game's bear line points jerky to Preserving game meat; Field dressing's birds link New York rules; the babies page gains one link block
   to Gutting, filleting and eating fish; Trapping's lead-in moved above the steps; the two Central New York fish cells now read "State
   advice: statewide table. This app’s caution: don’t eat".
+
+## Food from the land (v7.7): whole-branch review fixes (2026-11-20)
+
+All pages fetched 2026-11-20 with the built-in fetch after a built-in search returned them; title and agency checked on each. Rulings are
+in docs/v7.7-rulings.md, "Whole-branch review: fixes".
+
+- **Fish advice tables (surv-land-fish-cleaning), I1 and M4.** Re-opened: NYS DOH, Statewide Fish Advice (Revised: March 2025),
+  https://healthweb-back.health.ny.gov/environmental/outdoors/fish/health_advisories/regional/statewide.htm: "The Sensitive Population
+  refers to people who may become pregnant (under age 50) and children under 15."; "The General Population refers to everyone else.";
+  columns "General Population Advice", "Sensitive Population Advice"; no meal size on the page. NYS DOH, Advisory Listings by County,
+  https://healthweb-back.health.ny.gov/environmental/outdoors/fish/health_advisories/by_county.htm (no date on the page): the same two
+  definitions ("The sensitive population refers to people who may become pregnant (under age 50) and children under 15."); columns
+  "County", "Waterbody", "Fish", "General Population", "Sensitive Population", "Chemicals of Concern"; one row per county, water and
+  fish. Checked against the app for Onondaga and Oswego counties: every row agrees (Onondaga Lake, the Seneca River below Lock 24 "See
+  Onondaga Lake advice", the two Oswego River reaches, Salmon River Reservoir, Salmon River); "Oswego River, mouth to Varick Dam at
+  Oswego (Lock #8), All fish: See Lake Ontario advice". The head cell of every advice table is the Department's own definition, "People
+  who may become pregnant (under age 50) and children under 15" (it adds "under age 50" to the wording first proposed); "Most people" is
+  kept for the general population, as the page already explained it. No cell of advice changed (38 water rows, the two "State advice:
+  statewide table. This app’s caution: don’t eat" cells included); each water now has its own table under a line naming it. Opened: NYS
+  DOH, Background Information (Revised May 2025),
+  https://healthweb-back.health.ny.gov/environmental/outdoors/fish/health_advisories/background.htm, "How We Set Advisories": "the
+  Department uses three basic meal categories (4 meals/month, 1 meal/month, and DON’T EAT); and a meal size of one-half pound." and
+  "Stating the assumed meal size gives people the option to adjust their fish consumption accordingly (e.g., they could eat 2 one-quarter
+  pound meals instead of 1 one-half pound meal when following an advisory)." Added: "A meal in this advice is one-half pound (227 g) of
+  fish; you could eat two quarter-pound meals in place of one (NYS Department of Health)." (1/2 lb = 226.8 g.) Not said: whether the half
+  pound is raw or cooked, or for a child (the page does not say). The two "As Lake Ontario" waters gain a line pointing to Lake Ontario's
+  table (the Department's "See Lake Ontario advice"); the cells are unchanged.
+- **Trapping, "Which trap you have, and setting it" (surv-land-trapping), I2 and M11.** Re-opened: NYS DEC, Trapping Furbearers: An
+  Introduction to Responsible Trapping, student manual, 4th ed. (printed 2016), https://extapps.dec.ny.gov/docs/wildlife_pdf/trapedman.pdf
+  (read whole, in two halves). It gives no step-by-step setting for any kind of trap; it identifies traps by name and use: body-gripping
+  traps "are designed to catch an animal around the neck or chest or both" (p. 26); "Box traps, including cage-like wire traps which catch
+  only one animal at a time" and they "seldom harm their catch" (p. 8); pans "1 and 2 pounds of force are required to depress the pan"
+  (p. 12) and should "sit level when set" (p. 31); "Whenever setting large body-gripping traps, the trapper should use a safety gripper
+  tool" (p. 29); it does not use the word "Conibear". Opened: International Association of Fish and Wildlife Agencies, Trapper Education
+  Manual (copyright 2005), https://www.ncwildlife.gov/media/1932/download (the search returned https://ncwildlife.org/media/1932/download,
+  which redirects there), pp. 45-46, in order: "Working with an instructor, or an experienced trapper, select at least one type of
+  foothold trap and practice setting it." "Have your instructor or mentor show you how to release the trap safely." "Practice with your
+  instructor's help until you can do it correctly." "Single long-spring traps are easier to set than coil-spring traps." "To set a
+  coilspring, place the palm of each hand on one of the springs." "Press down evenly on both levers at the same time until the jaws open."
+  "Once the jaws are open you can hold them in place with the palm and thumb of one hand." "Using the thumb on your free hand, set the dog
+  in the notch of the pan and release a little pressure on the jaws to make certain it is firmly in place." "Hold the dog down with one
+  thumb, then raise the free jaw and put your fingers below the jaw and the pan, holding the trap by the base plate." "Holding the pan up,
+  put the fingers of both hands under the jaws and the pan, and set the trap in place." "It is a good idea to practice while wearing the
+  same type of gloves you will use when making sets." "Smaller body-gripping traps have springs that can be compressed by hand." "On
+  double-spring models you can keep the springs compressed with safety hooks that can be released once you have your trap in place." "Use
+  setting tongs to set size 220 and larger body-gripping traps." "This tool uses leverage to compress the springs and fasten the safety
+  hook." "You should use a Conibear™ safety gripper to keep larger traps from firing shut while you are finishing your set." "Setting tongs
+  should always be within reach when using large body-gripping traps." "Use extreme caution when setting body-gripping traps under water."
+  p. 39: "The most common kill-type devices are body-gripping traps, also known as Conibear™ traps."; "When an animal triggers a
+  body-gripping trap, two rotating jaws close on the animal's neck or chest." No setting steps for cage traps (p. 40 says only that they
+  "may be difficult to use because of their size"). Opened: North Dakota Game and Fish Department, Body-Grip Traps - Identification, Use
+  and Removing a Dog, https://gf.nd.gov/hunting/trapping-and-dogs/body-grip: "Body-grip traps come in a variety of sizes with openings
+  ranging from 5 to 12 inches." (5 in = 12.7 cm, 12 in = 30.5 cm: "13 to 30 cm"); Foothold Traps - Identification, Use and Removing a
+  Dog, https://gf.nd.gov/hunting/trapping-and-dogs/foothold: "There are three main types of foot-hold traps" ("Single Long Spring", "Double
+  Long Spring", "Coil Spring"). Not found in any source opened: the full steps for setting a body-gripping trap by hand or with tongs, and
+  any steps for setting a cage or box trap; those are this app's caution (D215). The page's text now names "Conibear", so the search finds
+  it; no keyword was added.
+- **Warm weather, no ice (surv-field-dressing-game, surv-land-keeping-meat), I3.** No new fact: one joining sentence on each page,
+  labelled as this app's caution (the controller's ruling, D210), built from the owner's own caution and the existing labels (165°F, "not
+  agency-verified"). Preserving game meat quotes Field dressing game's caution word for word. Field dressing game's "No ice, snow or
+  fridge" warning and "Found later" moved directly under "How long you have" (M3), wording otherwise unchanged.
+- **Fishing for food, Do first (surv-traps-and-fishing), I5.** No new fact: the first two sentences of its own "Ice fishing" warning, word
+  for word, and a pointer to that section.
+- **Text-only changes with no new fact:** the six "Swipe sideways to see the whole table." sentences removed (I6); Wild plants' Do first
+  says where the Poisoning link is (M2); Fishing for food's first link block reaches Trapping (M5); Butchering names "Massachusetts deer
+  processing workshop, instructor notes" in full at its first mention (M10).

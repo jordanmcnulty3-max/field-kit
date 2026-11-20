@@ -8,10 +8,15 @@
     "tip-up",
     "set line",
     "trotline",
-    "fish trap",
-    "gorge hook"
+    "gorge hook",
+    "ice fishing",
+    "ice thickness",
+    "thin ice"
   ],
   "summary": "Fish are often more plentiful than game and can be caught quietly. Fish where they gather in each season, use set lines, traps and ice fishing as the sources teach them (set lines, fish traps and most nets are illegal in New York in normal times), and keep the catch alive or cold until you clean it. On ice, walk only on at least 4 inches (10 cm) of solid clear ice, or 8 inches (20 cm) of white ice.",
+  "doFirst": [
+    "Ice: walk only on at least 4 inches (10 cm) of solid, clear ice, or 8 inches (20 cm) of white or snow ice. Stay off ice 2 inches (5 cm) thick or less (NYS DEC). How to test the ice as you go, and what to do if you go through it, are under “Ice fishing” below."
+  ],
   "sections": [
     {
       "h": "When it is for food",
@@ -29,6 +34,10 @@
         {
           "link": "s:surv-land-start",
           "label": "Food from the land: where to start"
+        },
+        {
+          "link": "s:surv-land-trapping",
+          "label": "Trapping"
         }
       ]
     },

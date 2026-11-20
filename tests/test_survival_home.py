@@ -1021,6 +1021,10 @@ def test_warm_meat_time_limits_each_have_one_owner():
             rest = x.replace(still, '')
             if 'perishable' in rest.lower():   # a perishable-food time limit only inside the quoted rule
                 assert not re.search(r'\bhours?\b', rest), (tid, x)
+            # whole-branch review I3: Preserving game meat quotes the owner's caution word for word; the hours appear nowhere else
+            owner = '“This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it.”'
+            if tid == 'surv-land-keeping-meat':
+                x = x.replace(owner, '')
             if '3 to 4 hours' in x or 'three to four hours' in x:
                 assert tid == 'surv-field-dressing-game', (tid, x)
             n45 = len(re.findall(r'(?<!\d)45°F', x))   # not 145°F
@@ -1284,3 +1288,97 @@ def test_fishing_fish_cleaning_and_trapping_link_the_hub_and_preserving_food_poi
     rules = _links(topics['surv-land-ny-rules'])
     for k in ('s:surv-land-trapping', 's:surv-traps-and-fishing', 's:surv-land-fish-cleaning', 's:surv-land-big-game', 's:surv-land-small-game'):
         assert k in rules, k
+
+
+# ---------- Food from the land (v7.7): whole-branch review fixes ----------
+
+FISH_SENSITIVE = 'People who may become pregnant (under age 50) and children under 15'   # NYS DOH's own definition, re-opened
+
+
+def test_every_fish_advice_table_names_both_groups_in_its_head_and_each_water_has_its_own_table():
+    # whole-branch review I1: a 39-row table left the two advice columns unlabelled after a screen; now every advice table is one water
+    # (or the statewide advice) and carries both groups in its head; the advice in the rows is unchanged
+    t = _shipped('survival')['surv-land-fish-cleaning']
+    sec = next(s for s in t['sections'] if s['h'] == 'New York’s advice on eating fish you catch')
+    blocks = sec['blocks']
+    tables = [(n, b['table']) for n, b in enumerate(blocks) if 'table' in b]
+    assert len(tables) >= 20, len(tables)
+    assert tables[0][1]['head'] == ['Fish (statewide advice)', 'Most people', FISH_SENSITIVE]
+    rows = []
+    for n, tb in tables[1:]:
+        assert tb['head'] == ['Fish', 'Most people', FISH_SENSITIVE], tb['head']
+        assert 'p' in blocks[n - 1], 'each water is named in the line above its table'
+        rows += tb['rows']
+    assert len(rows) == 38 and all(len(r) == 3 for r in rows)
+    caution = ['Every other fish', 'State advice: statewide table. This app’s caution: don’t eat', 'Don’t eat']
+    assert rows.count(caution) == 2   # the app's more cautious cells stay as approved
+    for x in _all_texts(t):
+        assert 'Sensitive' not in x, x
+    assert 'one-half pound (227 g)' in ' '.join(_texts(t))
+
+
+def test_no_topic_carries_a_hard_coded_swipe_sentence():
+    # whole-branch review I6: the app shows its own cue above a table that scrolls; a sentence in the content showed above tables that fit
+    for tid, t in _shipped('survival').items():
+        for x in _all_texts(t):
+            assert 'swipe' not in x.lower(), (tid, x)
+
+
+def test_warm_weather_meat_gets_one_answer_on_field_dressing_and_preserving_game_meat():
+    # whole-branch review I3: the cooling limit comes first and belongs to Field dressing game; no keeping method extends it. Both pages
+    # say so in the same words, labelled as the app's caution, and Preserving game meat quotes the owner's line and links it
+    topics = _shipped('survival')
+    fd, keep = topics['surv-field-dressing-game'], topics['surv-land-keeping-meat']
+    cooling = next(s for s in fd['sections'] if s['h'] == 'Cooling the carcass')
+    kinds = [next(iter(b)) for b in cooling['blocks']]
+    noice = cooling['blocks'][2]['warn']
+    assert cooling['blocks'][1]['warn'].startswith('How long you have.') and noice.startswith('No ice, snow or fridge')   # minor M3
+    assert cooling['blocks'][3]['p'].startswith('Found later.') and kinds[4] == 'link'
+    owner = 'This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it.'
+    assert owner in noice
+    shared = ('and cook the meat to 165°F (74°C) before eating, as each method', 'such as smoke-drying and sun and air drying, are not '
+              'agency-verified, for warm weather or any other.')
+    assert 'This app’s caution: no way of keeping meat in Preserving game meat makes that time longer.' in noice
+    labels = next(s for s in keep['sections'] if s['h'] == 'The two labels')
+    joined = [b['p'] for b in labels['blocks'] if 'p' in b and 'makes that time longer' in b['p']]
+    assert len(joined) == 1 and '“' + owner + '”' in joined[0]
+    assert 'This app’s caution, the same as Field dressing game’s: no method on this page makes that time longer.' in joined[0]
+    for part in shared:
+        assert part in noice and part in joined[0], part
+    assert 's:surv-field-dressing-game' in _links({'sections': [labels]})
+
+
+def test_trapping_says_how_to_tell_the_traps_apart_and_how_to_set_them_before_where_to_set_them():
+    # whole-branch review I2: a first-time trapper holding a borrowed trap is told which kind it is and how it is set, from the trapper
+    # manuals; what no source opened gives (every body-gripping step, setting a cage trap) is the app's caution, never written from memory
+    trap = _shipped('survival')['surv-land-trapping']
+    heads = [s['h'] for s in trap['sections']]
+    i = heads.index('Which trap you have, and setting it')
+    assert heads[i - 1] == 'The kinds of trap' and heads[i + 1].startswith('Muskrat, beaver and raccoon')
+    sec = trap['sections'][i]
+    text = ' '.join(_texts({'sections': [sec]}))
+    for kind in ('Foothold trap:', 'Body-gripping trap, also called a Conibear trap:', 'Cage or box trap:'):
+        assert kind in text, kind
+    steps = next(b['steps'] for b in sec['blocks'] if 'steps' in b)
+    assert len(steps) == 5 and steps[0].startswith('Put the palm of each hand on one of the springs')
+    assert 'Setting a coil-spring foothold trap, from the IAFWA trapper education manual, in its order.' in text
+    for must in ('setting tongs', 'safety gripper', 'have someone who has set one show you how to set it and how to release it safely',
+                 'This app’s caution: this page does not teach every step of setting a body-gripping trap, or how to set a cage trap.',
+                 'Never set a body-gripping trap until someone who has set one has shown you how.'):
+        assert must in text, must
+    assert 's:surv-land-ny-rules' in _links({'sections': [sec]})
+    assert any(s['name'].startswith('International Association of Fish and Wildlife Agencies, Trapper Education Manual') for s in trap['sources'])
+
+
+def test_whole_branch_review_minor_fixes():
+    topics = _shipped('survival')
+    # M2: Wild plants' Do first says where the Poisoning link is, and it is there
+    plants = topics['surv-food-and-wild-plants']
+    assert 'It is the first link under “Before you eat any wild plant”, below.' in plants['doFirst'][0]
+    before = next(s for s in plants['sections'] if s['h'] == 'Before you eat any wild plant')
+    assert _links({'sections': [before]})[0] == 'p:poisoning'
+    # M5: a v7.6 pin on "Traps and fishing" opens Fishing for food, whose first link block reaches Trapping
+    first = topics['surv-traps-and-fishing']['sections'][0]
+    assert {'link': 's:surv-land-trapping', 'label': 'Trapping'} in first['blocks']
+    # M10: Butchering names its Massachusetts source in full once, as the source list does
+    assert 'Massachusetts deer processing workshop, instructor notes, called “Massachusetts notes” below' in ' '.join(_texts(topics['surv-land-butchering']))

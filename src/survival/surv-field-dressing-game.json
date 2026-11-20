@@ -72,7 +72,7 @@
             "Put the guts in a bag for the trash (Cornell Wildlife Health Lab), and don’t feed them to pets or leave them for other animals (NYS Wildlife Health Program).",
             "Cool the carcass fast: prop the cavity open with clean sticks and hang it in the shade. Get it chilled in the time given under “Cooling the carcass” below. Skin it if nights will stay above freezing."
           ]
-       },
+        },
         {
           "fig": "land-field-dressing",
           "cap": "Don’t cut the stomach or intestines: they carry germs that cause food poisoning."
@@ -89,6 +89,16 @@
           "warn": "How long you have. When the air is above 40°F (4°C), the meat must be chilled within 3 to 4 hours of the kill (Ohio State University Extension). Utah State University Extension gives the same 3 to 4 hours when the air is above 45°F (7°C); this app goes by Ohio State’s 40°F. In colder air, get the meat to 40°F (4°C) or colder inside within 24 hours (Montana State University Extension)."
         },
         {
+          "warn": "No ice, snow or fridge, and the air above 40°F (4°C): field dress it at once, skin it, and cut it into quarters in the shade with air around them. North Carolina Wildlife Resources Commission: once the skin is off and the air is above 40°F, butcher the deer at once, or cut it into sections and put them in a cooler or refrigerator. No source opened says how long meat stays safe with no cold at all. This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it. This app’s caution: no way of keeping meat in Preserving game meat makes that time longer. Start one only on meat still inside the 3 to 4 hours, and cook the meat to 165°F (74°C) before eating, as each method there says. The traditional ways there, such as smoke-drying and sun and air drying, are not agency-verified, for warm weather or any other. Cooked meat then goes by Is it still good?: “never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).”"
+        },
+        {
+          "p": "Found later. A deer that lay more than 3 to 4 hours in air above 40°F (4°C) before it was chilled, such as one found the next morning after a mild night or after the long wait for a gut shot: no source opened says whether its meat is still safe. This app’s caution: don’t eat it. After a colder night, field dress it at once and go by every sign under “Signs an animal is not safe to eat” below."
+        },
+        {
+          "link": "s:surv-food-still-good",
+          "label": "Is it still good?"
+        },
+        {
           "list": [
             "Prop the body open, and keep the carcass in the shade with air moving around it (Penn State Extension, Montana State University Extension). In warm weather, get it off the ground so air reaches all of it, and hang it head down (New Mexico State University Extension).",
             "Bags of ice, or snow sealed in plastic bags, in the body cavity help cool it (Penn State Extension, Ohio DNR).",
@@ -97,16 +107,6 @@
             "In cool weather, 28 to 35°F (-2 to 2°C), wrap the carcass or quarters in a sheet and hang them in a shed with air moving through it. Don’t let the carcass freeze: freezing may toughen the meat (North Dakota State University Extension).",
             "Don’t tie a deer across the hood or roof of a vehicle, and don’t put it in a trunk while it is still warm (Penn State Extension, North Dakota State University Extension)."
           ]
-        },
-        {
-          "warn": "No ice, snow or fridge, and the air above 40°F (4°C): field dress it at once, skin it, and cut it into quarters in the shade with air around them. North Carolina Wildlife Resources Commission: once the skin is off and the air is above 40°F, butcher the deer at once, or cut it into sections and put them in a cooler or refrigerator. No source opened says how long meat stays safe with no cold at all. This app’s caution: meat you can’t chill within 3 to 4 hours of the kill, cook within that time or don’t eat it. Cooked meat then goes by Is it still good?: “never leave perishable food out for more than 2 hours, or 1 hour if it is above 90°F (32°C) (CDC).”"
-        },
-        {
-          "p": "Found later. A deer that lay more than 3 to 4 hours in air above 40°F (4°C) before it was chilled, such as one found the next morning after a mild night or after the long wait for a gut shot: no source opened says whether its meat is still safe. This app’s caution: don’t eat it. After a colder night, field dress it at once and go by every sign under “Signs an animal is not safe to eat” below."
-        },
-        {
-          "link": "s:surv-food-still-good",
-          "label": "Is it still good?"
         },
         {
           "p": "How long a carcass can hang, and at what temperature, is in Preserving game meat. Skinning, quartering and cutting it up are in Butchering deer and small game."

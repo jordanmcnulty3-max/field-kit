@@ -1080,3 +1080,37 @@ def test_newer_land_topics_index_after_every_older_page_hub_first(page, app_url)
     page.wait_for_function('window.FK && FK.search')
     assert [r['key'] for r in q(page, 'quuxberry')] == [
         's:surv-zz-older', 's:surv-traps-and-fishing', 's:surv-food-zz', 's:surv-land-start', 's:surv-land-zz-new']
+
+
+# ---------- Food from the land (v7.7): whole-branch review fixes ----------
+
+def test_trap_shows_trapping_in_the_first_three_on_screen(page, app_url):
+    # whole-branch review I4: "fish trap" (Fishing for food) and "minnow trap" (New York rules) were whole keywords for "trap" and put
+    # both pages above Trapping; both phrases still find their pages by their text
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    assert 's:surv-land-trapping' in on_screen(page, 'trap')[:3]
+    assert 's:surv-traps-and-fishing' in on_screen(page, 'fish trap')[:3]
+    assert {'s:surv-land-ny-rules', 's:surv-traps-and-fishing'} <= set(on_screen(page, 'minnow trap')[:3])
+
+
+# What "ice" showed on screen before Fishing for food gained its ice keywords (the pinned five before the whole-branch review).
+ICE_BEFORE = ['p:sprain-dislocation', 's:surv-unheated-house', 's:surv-water-in-the-house', 's:surv-water-winter', 's:surv-winter-storms']
+
+
+def test_the_ice_rule_has_a_do_first_and_is_found_by_the_ice_words_without_moving_a_protocol(page, app_url):
+    # whole-branch review I5: the ice warning is the page's Do first, word for word from its ice section, and the ice words reach it;
+    # no Emergency protocol left the pinned "ice" five (Winter storms, an older Survival page, is sixth now: ruled)
+    t = json.load(open(os.path.join(os.path.dirname(__file__), '..', 'src', 'survival', 'surv-traps-and-fishing.json'), encoding='utf-8'))
+    warn = next(b['warn'] for s in t['sections'] if s['h'] == 'Ice fishing' for b in s['blocks'] if 'warn' in b)
+    assert t['doFirst'][0].startswith(warn.split(' Several people')[0]) and t['doFirst'][0].startswith('Ice: ')
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    open_search(page)
+    for text in ('ice thickness', 'ice fishing', 'thin ice'):
+        assert 's:surv-traps-and-fishing' in on_screen(page, text)[:3], text
+    ice = on_screen(page, 'ice')[:5]
+    assert ice == V77_ON_SCREEN['ice'] and 's:surv-traps-and-fishing' in ice
+    assert [k for k in ICE_BEFORE if k.startswith('p:') and k not in ice] == []
+    assert ice[0] == 'p:sprain-dislocation'

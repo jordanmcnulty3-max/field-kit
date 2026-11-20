@@ -48,7 +48,7 @@
       "h": "What each kind of food gives, and what it costs",
       "blocks": [
         {
-          "p": "What the sources say. No source opened gives calories or amounts of meat to compare, so this app gives none. Swipe sideways to see the whole table."
+          "p": "What the sources say. No source opened gives calories or amounts of meat to compare, so this app gives none."
         },
         {
           "table": {

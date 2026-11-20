@@ -1166,7 +1166,7 @@ def test_field_dressing_panels_follow_the_topics_steps_in_order():
     """One panel per step, badged with the topic's own step number, top to bottom in the steps' order (3, 4, 5, then the
     two halves of 6); each panel's drawn words are word for word in that step, and its badge is the only number drawn."""
     panels = _fd_panels()
-    assert [p[0] for p in panels] == ['3', '4', '5', '6', '6']
+    assert [p[0] for p in panels] == ['3', '4', '5', '6'], 'one panel and one badge per step; step 6 holds both its actions'
     steps = _deer_steps()
     for n, _, _, texts in panels:
         step = steps[int(n) - 1]
@@ -1174,7 +1174,7 @@ def test_field_dressing_panels_follow_the_topics_steps_in_order():
         for line in texts[1:]:
             assert line.rstrip(':,.') in step, f'panel {n}: {line!r} is not in step {n}: {step}'
     nums = [s for _, _, s in _texts('land-field-dressing') if re.search(r'\d', s)]
-    assert nums == ['3', '4', '5', '6', '6'], nums
+    assert nums == ['3', '4', '5', '6'], nums
     root = ET.fromstring(figs.F['land-field-dressing'][0])
     ys = [float(next(c for c in g if c.tag.split('}')[-1] == 'circle').get('cy')) for g in root.iter() if g.get('data-step')]
     assert ys == sorted(ys), 'panels run top to bottom'
@@ -1185,7 +1185,7 @@ def test_field_dressing_inside_cuts_are_drawn_only_in_the_opened_body():
     exist only in panels marked as the opened body, each of which draws the opening; the outside cuts (the belly, around
     the anus) are drawn only in panels that show the outside."""
     panels = _fd_panels()
-    inside = {'diaphragm-cut', 'diaphragm', 'windpipe', 'hand-inside', 'arm', 'chest-open', 'knife'}
+    inside = {'diaphragm-cut', 'diaphragm', 'windpipe', 'gullet', 'windpipe-cut', 'hand', 'chest-open', 'knife'}
     outside = {'belly-cut', 'anus-cut'}
     for n, view, parts, _ in panels:
         assert view in ('inside', 'outside'), (n, view)
@@ -1195,7 +1195,7 @@ def test_field_dressing_inside_cuts_are_drawn_only_in_the_opened_body():
         else:
             assert not parts & inside, (n, parts & inside)
     by = {(n, frozenset(p)) for n, _, p, _ in panels}
-    assert any('diaphragm-cut' in p for _, p in by) and any('windpipe' in p and 'hand-inside' in p for _, p in by)
+    assert any({'diaphragm-cut', 'windpipe', 'windpipe-cut', 'hand', 'knife'} <= p for _, p in by)
     assert [n for n, _, p, _ in panels if 'belly-cut' in p] == ['4']
     assert [n for n, _, p, _ in panels if 'anus-cut' in p] == ['5']
     # the inside-cut words sit only in the inside panels
@@ -1208,8 +1208,60 @@ def test_field_dressing_inside_cuts_are_drawn_only_in_the_opened_body():
 def test_field_dressing_hand_is_drawn_only_inside_the_deer():
     """The only hand drawn is the worker's, reaching into the opened body in step 6; nothing else is a person."""
     for n, view, parts, _ in _fd_panels():
-        if {'arm', 'hand-inside'} & parts:
+        if 'hand' in parts:
             assert view == 'inside' and n == '6', n
+
+
+CUT_PARTS = {'belly-cut', 'anus-cut', 'diaphragm-cut', 'windpipe-cut'}
+
+
+def test_field_dressing_dashes_mean_cut_here_only():
+    """Inside the panels a dashed line means "cut here": no dashed element that is not a marked cut (night mode turns every
+    line the same red, so a dashed see-through line would read as a cut). Only the rules between panels are dashed outside."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    for g in root.iter():
+        if g.get('data-step'):
+            for e in g.iter():
+                if 'd' in (e.get('class') or '').split():
+                    assert e.get('data-part') in CUT_PARTS, (g.get('data-step'), e.get('data-part'), e.attrib)
+    cuts = [e.get('data-part') for e in root.iter() if e.get('data-part') in CUT_PARTS]
+    assert sorted(cuts) == sorted(CUT_PARTS), cuts
+
+
+def _xs(e):
+    if e.tag.split('}')[-1] == 'rect':
+        return [float(e.get('x')), float(e.get('x')) + float(e.get('width'))]
+    if e.get('transform', '').startswith('translate('):
+        return [float(re.findall(r'-?\d+(?:\.\d+)?', e.get('transform'))[0])]
+    nums = [float(n) for n in re.findall(r'-?\d+(?:\.\d+)?', e.get('d'))]
+    return nums[0::2]
+
+
+def test_field_dressing_windpipe_is_cut_inside_the_chest_and_nothing_is_drawn_on_the_neck():
+    """Step 6 says "Reach up into the chest": the windpipe and gullet, their cut mark, the hand and the knife lie inside the
+    opened body (forward edge of the opening at x 156), so nothing of them is drawn over the neck (which ends at x 120)."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    six = next(g for g in root.iter() if g.get('data-step') == '6')
+    assert six.get('data-view') == 'inside'
+    for part in ('windpipe', 'gullet', 'windpipe-cut', 'hand', 'knife', 'chest-open', 'diaphragm-cut'):
+        els = [e for e in six.iter() if e.get('data-part') == part]
+        assert els, part
+        for e in els:
+            assert min(_xs(e)) >= 156, (part, _xs(e))
+    for e in root.iter():
+        if e.get('data-part') in ('windpipe', 'gullet', 'windpipe-cut'):
+            assert e in list(six.iter())
+
+
+def test_field_dressing_step_six_is_one_step_with_two_actions():
+    """One badge 6, then the diaphragm and the windpipe drawings, each under its own bold line, with no rule between them."""
+    root = ET.fromstring(figs.F['land-field-dressing'][0])
+    six = next(g for g in root.iter() if g.get('data-step') == '6')
+    acts = [g.get('data-part') for g in six if g.get('data-part', '').endswith('-action')]
+    assert acts == ['diaphragm-action', 'windpipe-action']
+    bold = [''.join(t.itertext()) for t in six.iter() if t.tag.split('}')[-1] == 'text' and t.get('class') == 'tb']
+    assert bold == ['6', 'Cut the diaphragm away from the ribs', 'Reach up into the chest and cut the windpipe']
+    assert not [e for e in six.iter() if e.tag.split('}')[-1] == 'line' and 'd' in (e.get('class') or '').split()]
 
 
 def test_field_dressing_shows_the_deer_on_its_back_on_a_slope_with_a_brace():

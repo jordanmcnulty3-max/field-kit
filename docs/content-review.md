@@ -7684,3 +7684,20 @@ Anatomical positions taken from guides, not from the topic's words:
 - Windpipe and gullet cut from inside the chest, reaching forward toward the neck: Ohio DNR Pub. 111 ("Reach into the chest ... Cut
   through the windpipe and esophagus, or as far forward as you can reach"); Montana State ("Reach as far forward as possible").
 All drawings are original; no source drawing was copied.
+
+#### land-field-dressing fix round (2026-11-20), from task-6c-review.md
+- Step 6 is now one panel group with one badge 6. It holds two drawings, each under its own bold line ("Cut the diaphragm away from
+  the ribs"; "Reach up into the chest and cut the windpipe"), with no rule between them.
+- Diaphragm drawing: the opening is now rounded at its front, where the ribs are, with short rib ends along it. The diaphragm is a
+  sheet across the front of the cavity, with the stomach right behind it. The cut is a dashed curve along the sheet's edge against
+  the ribs, round the whole front of the opening from one side to the other (step 6, "all the way round"). The knife is inside.
+- Windpipe drawing: nothing is drawn on the neck. With the diaphragm cut, the chest beyond it is shown darker. The windpipe (ringed)
+  and the gullet are drawn solid, running forward inside it and out of sight under the front of the opening. A solid gloved hand
+  reaches in from the deer's side, holding a knife whose point is at the tubes. The one cut mark crosses them at the front ("as far
+  forward as you can"). The see-through dashed hand and windpipe are gone. Inside the panels, dashes now mean only "cut here"
+  (tested).
+- Panel 3: the rock stands against the deer's side, as a chock, not under its back.
+- Panel 4's bold line keeps no full stop. The topic's sentence goes on, "Don’t cut the stomach or intestines: they carry germs ...",
+  so it does not end there.
+- No belly-up cue was added to the top view: every cue tried would need a new word or a new feature (teats, navel) that the topic
+  does not name.

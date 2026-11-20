@@ -1132,43 +1132,66 @@ FD_SLIT = '<path d="M166 86 C200 80 240 80 272 86 C240 92 200 92 166 86 Z" class
 _lens = 'M160 86 C182 50 252 46 284 86 C252 126 182 122 160 86 Z'
 FD_OPEN = f'<path d="{_lens}" class="gr"/>'
 FD_RIM = f'<path d="{_lens}" class="k t3" data-part="opening"/>'
-FD_RIBS = ('<path d="M160 86 L198 60 M160 86 L198 112" class="k t3" data-part="ribs"/>'
-           '<path d="M172 86 C180 76 190 68 200 66 M172 86 C180 96 190 104 200 106" class="k t1"/>')
-FD_GUTS = ('<path d="M218 64 C238 58 252 70 252 86 C252 102 238 114 218 108 C206 102 206 70 218 64 Z" class="k milk" data-part="stomach"/>'
-           '<path d="M258 72 C270 70 278 80 276 86 C274 94 264 100 256 98 C250 96 252 90 258 88 C264 86 266 82 260 80" class="k t1"/>')
-FD_DIAPHRAGM = ('<path d="M168 86 L198 64 C208 70 214 78 214 86 C214 94 208 102 198 108 Z" class="milk" data-part="diaphragm"/>'
-                '<path d="M198 64 C208 70 214 78 214 86 C214 94 208 102 198 108" class="k t1"/>'
-                '<path d="M188 78 L204 80 M184 86 L208 86 M188 94 L204 92" class="m t1"/>')
-FD_DCUT = '<path d="M174 86 L198 69 M174 86 L198 103" class="h t3 d" data-part="diaphragm-cut"/>'
-FD_CHEST = '<path d="M160 86 L198 60 L198 112 Z" class="k kf" style="fill-opacity:.55" data-part="chest-open"/>'
-FD_ARM = ('<path d="M206 172 C204 150 202 128 198 112 C192 106 184 100 174 96 C166 94 162 90 164 85 C166 80 172 79 180 80 '
-          'C186 81 192 82 196 84 C198 80 204 78 208 82 C212 88 214 96 216 104 C220 124 224 148 226 172 Z" class="k milk" data-part="arm"/>'
-          '<path d="M201 142 L223 140 M168 86 L184 88 M168 91 L184 92" class="k t1"/>')
-FD_WINDPIPE = ('<path d="M74 82 H150 M74 90 H150" class="k t1 d" data-part="windpipe"/>'
-               '<path d="M166 80 C150 76 136 76 122 78 C112 80 112 94 122 94 C136 96 150 96 166 92" class="k t1 d" data-part="hand-inside"/>')
+# Step 6 view of the opened belly: a D-shaped opening, rounded at the front where the ribs are.
+_dopen = 'M156 86 C156 60 184 50 218 50 C252 50 276 66 288 86 C276 106 252 122 218 122 C184 122 156 112 156 86 Z'
+FD_DOPEN = f'<path d="{_dopen}" class="gr"/>'
+FD_DRIM = f'<path d="{_dopen}" class="k t3" data-part="opening"/>'
+# ribs: short rib ends along the rounded front of the opening, between its edge and the diaphragm's edge
+FD_RIBS = ('<path d="M168 62 L174 68 M161 72 L169 76 M158 86 L166 86 M161 100 L169 96 M168 110 L174 104 '
+           'M180 56 L183 63 M180 116 L183 109" class="k t1" data-part="ribs"/>')
+# the diaphragm: a sheet across the front of the cavity; its edge against the ribs is the cut, all the way round
+_dedge = 'M210 60 C186 60 168 70 168 86 C168 102 186 112 210 112'
+FD_DIAPHRAGM = (f'<path d="{_dedge} C202 102 198 94 198 86 C198 78 202 70 210 60 Z" class="milk" data-part="diaphragm"/>'
+                '<path d="M210 60 C202 70 198 78 198 86 C198 94 202 102 210 112" class="k t1"/>'
+                '<path d="M178 76 L196 80 M176 86 L196 86 M178 96 L196 92" class="m t1"/>')
+FD_DCUT = f'<path d="{_dedge}" class="h t3 d" data-part="diaphragm-cut"/>'
+FD_GUTS = ('<path d="M222 62 C242 56 256 70 256 86 C256 102 242 116 222 110 C210 104 208 68 222 62 Z" class="k milk" data-part="stomach"/>'
+           '<path d="M262 72 C274 70 282 80 280 86 C278 94 268 100 260 98 C254 96 256 90 262 88 C268 86 270 82 264 80" class="k t1"/>')
+# after the diaphragm is cut: the chest beyond it, darker; the windpipe (ringed) and gullet run forward and out of sight under
+# the front of the opening; the gloved hand holds them with the knife, and the one cut mark is across them at the front
+FD_CHEST = f'<path d="{_dedge} C202 102 198 94 198 86 C198 78 202 70 210 60 Z" class="k kf" style="fill-opacity:.45" data-part="chest-open"/>'
+FD_PIPES = ('<rect x="158" y="77" width="48" height="8" class="k milk" data-part="windpipe"/>'
+            '<path d="M170 77 V85 M180 77 V85 M190 77 V85 M200 77 V85" class="k t1"/>'
+            '<rect x="158" y="88" width="48" height="6" rx="3" class="k milk" data-part="gullet"/>')
+FD_HAND = ('<path d="M240 172 C240 152 240 136 238 126 C236 116 232 112 224 110 L222 92 C238 94 250 104 256 118 C260 134 262 152 262 172 Z" class="k milk" data-part="hand"/>'
+           '<path d="M226 110 C212 112 202 106 202 100 C202 92 212 88 222 90 C230 92 232 106 226 110 Z" class="k milk"/>'
+           '<path d="M208 94 C212 96 212 104 208 106 M240 152 L261 150" class="k t1"/>')
+FD_WCUT = '<path d="M168 70 L168 102" class="h t3 d" data-part="windpipe-cut"/>'
 FD_ANUS = ('<circle cx="302" cy="86" r="9" class="h t3 d" data-part="anus-cut"/><circle cx="302" cy="86" r="2.2" class="kf"/>')
-FD_ROCK = '<path d="M150 150 C150 138 160 132 172 134 C184 134 192 142 190 152 Z" class="k rock" data-part="brace"/>'
+FD_ROCK = '<path d="M176 150 C170 132 178 116 196 113 C214 112 224 128 220 150 Z" class="k rock" data-part="brace"/>'
 
 _fd3 = (f'<g transform="rotate(4 170 120)"><line x1="-10" y1="150" x2="350" y2="150" class="m" data-part="slope"/>'
         f'{fd_side()}{FD_ROCK}</g>')
 _fd4 = (fd_top(FD_CUT) + lbl(250, 34, 'pelvis', '', 'middle') + lead(256, 38, 268, 82)
         + lbl(188, 148, 'breastbone', '', 'middle') + lead(186, 136, 178, 96))
 _fd5 = fd_top(FD_SLIT + FD_ANUS) + lbl(330, 128, 'anus', '', 'end') + lead(318, 120, 306, 94)
-_fd6a = (fd_top(FD_OPEN + FD_RIBS + FD_DIAPHRAGM + FD_GUTS + FD_DCUT + FD_RIM, fd_knife(182, 74, -36))
-         + lbl(160, 18, 'ribs', '', 'middle') + lead(162, 22, 176, 74)
-         + lbl(176, 156, 'diaphragm', '', 'middle') + lead(184, 144, 200, 98)
-         + lbl(252, 156, 'stomach', '', 'middle') + lead(248, 144, 236, 106))
-_fd6b = (fd_top(FD_OPEN + FD_CHEST + FD_RIBS + FD_GUTS + FD_RIM, FD_WINDPIPE + FD_ARM)
-         + lbl(200, 30, 'windpipe and gullet', '', 'middle') + lead(180, 36, 146, 80))
+_fd6a = (fd_top(FD_DOPEN + FD_DIAPHRAGM + FD_RIBS + FD_GUTS + FD_DCUT + FD_DRIM, fd_knife(176, 70, -40))
+         + lbl(150, 18, 'ribs', '', 'middle') + lead(152, 22, 164, 68)
+         + lbl(176, 156, 'diaphragm', '', 'middle') + lead(182, 144, 192, 98)
+         + lbl(252, 156, 'stomach', '', 'middle') + lead(248, 144, 240, 108))
+_fd6b = (fd_top(FD_DOPEN + FD_CHEST + FD_RIBS + FD_GUTS + FD_PIPES + FD_DRIM, fd_knife(170, 83, 20) + FD_HAND + FD_WCUT)
+         + lbl(196, 22, 'windpipe and gullet', '', 'middle') + lead(196, 28, 192, 78))
+
+
+def fd_step6(y0):
+    """Step 6 is one step with two actions: one badge, the two drawings one under the other with no rule between them."""
+    head1 = ''.join(lbl(28, y0 + 16 + 15 * i, t, c) for i, (t, c) in enumerate(
+        [('Cut the diaphragm away from the ribs', 'tb'), ('all the way round, taking care not to', ''), ('puncture the stomach.', '')]))
+    y1 = y0 + 230
+    head2 = ''.join(lbl(28, y1 + 16 + 15 * i, t, c) for i, (t, c) in enumerate(
+        [('Reach up into the chest and cut the windpipe', 'tb'), ('and gullet as far forward as you can.', ''),
+         ('Watch for sharp broken ribs.', '')]))
+    return (f'<g data-step="6" data-view="inside">{badge(12, y0 + 12, "6")}'
+            f'<g data-part="diaphragm-action">{head1}<g transform="translate(0 {y0 + 50})">{_fd6a}</g></g>'
+            f'<g data-part="windpipe-action">{head2}<g transform="translate(0 {y1 + 50})">{_fd6b}</g></g></g>')
+
 
 svg('land-field-dressing', 1190, 'Field dressing a deer, steps 3 to 6. 3: lay it on its back on a slight slope and brace it with a rock or log. 4: pinch up the belly skin and make a shallow cut; with the blade edge up and two fingers of your other hand keeping the guts away from the point, open the belly from the pelvis to the breastbone; don’t cut the stomach or intestines. 5: cut around the anus, pull it out a few inches, and tie it off with string, with the bladder. 6, inside the opened body: cut the diaphragm away from the ribs all the way round, taking care not to puncture the stomach; reach up into the chest and cut the windpipe and gullet as far forward as you can; watch for sharp broken ribs.', f'''
 {fd_panel(0, 3, [('Lay it on its back on a slight slope', 'tb'), ('and brace it with a rock or log', '')], _fd3, 22)}
-{lbl(250, 206, 'rock or log', '')}{lead(236, 196, 186, 172)}
+{lbl(250, 206, 'rock or log', '')}{lead(238, 196, 214, 168)}
 <line x1="4" y1="214" x2="336" y2="214" class="m t1 d"/>
 {fd_panel(220, 4, [('Pinch up the belly skin and make a shallow cut.', 'tb'), ('With the blade edge up and two fingers', ''), ('of your other hand keeping the guts', ''), ('away from the point, open the belly', ''), ('from the pelvis to the breastbone.', ''), ('Don’t cut the stomach or intestines', 'tb')], _fd4, 314 - 220)}
 <line x1="4" y1="486" x2="336" y2="486" class="m t1 d"/>
 {fd_panel(492, 5, [('Cut around the anus, pull it out a few inches,', 'tb'), ('and tie it off with string, with the bladder,', ''), ('so droppings and urine stay off the meat.', '')], _fd5, 50)}
 <line x1="4" y1="720" x2="336" y2="720" class="m t1 d"/>
-{fd_panel(726, 6, [('Cut the diaphragm away from the ribs', 'tb'), ('all the way round, taking care not to', ''), ('puncture the stomach.', '')], _fd6a, 50, 'inside')}
-<line x1="4" y1="954" x2="336" y2="954" class="m t1 d"/>
-{fd_panel(960, 6, [('Reach up into the chest and cut the windpipe', 'tb'), ('and gullet as far forward as you can.', ''), ('Watch for sharp broken ribs.', '')], _fd6b, 50, 'inside')}''', cls='dg tall')
+{fd_step6(726)}''', cls='dg tall')

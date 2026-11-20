@@ -983,3 +983,67 @@ svg('pressure-dressing', 236, 'Pressure dressing: keep pressing hard with both h
 {lbl(14,156,'Then wrap a firm bandage','tb')}{lbl(14,170,'over the dressing','tb')}
 <path d="M14 188 H326 V220 H14 Z" class="skin"/>
 <path d="M118 184 L152 184 L140 224 L106 224 Z M146 184 L180 184 L168 224 L134 224 Z M174 184 L208 184 L196 224 L162 224 Z M202 184 L236 184 L224 224 L190 224 Z" class="k wf"/>''')
+
+# ---------------- LAND (v7.7): deer, side view, facing left ----------------
+# One outline for the three deer figures, drawn only from each topic's checked text. Coordinates are the deer's own; each
+# figure places it with a translate. The far legs and far ear are drawn first, in the muted line, so the near ones read in front.
+DEER_BODY = ('M24 52 C26 46 36 38 46 32 L52 28 C56 18 62 12 72 8 C72 16 68 26 62 34 '
+             'C70 46 84 66 102 78 C140 72 200 72 236 76 C254 80 262 92 260 108 '
+             'C258 128 252 146 250 160 L256 178 L250 218 L240 220 L244 182 '
+             'C240 166 236 150 226 138 C220 132 212 128 204 128 C176 132 140 138 116 138 '
+             'L116 178 L116 218 L106 220 L106 180 C104 160 100 146 92 136 '
+             'C84 128 80 116 80 106 C78 92 68 78 56 68 C46 62 32 60 24 52 Z')
+DEER_EAR2 = 'M50 30 C50 20 52 12 58 4 C62 12 60 22 56 32'
+DEER_FAR = ('M142 136 L138 178 L142 218 L134 220 L130 180 L132 136 Z '
+            'M208 130 C220 142 228 160 232 182 L228 218 L236 220 L242 180 C240 166 236 150 230 138 Z')
+DEER_TAIL = 'M259 92 C268 94 272 104 268 116 C263 112 260 106 259 100'
+def deer(dx, dy, extra=''):
+    return (f'<g transform="translate({dx} {dy})" data-part="deer"><path d="{DEER_FAR}" class="m t1 milk"/>'
+            f'<path d="{DEER_EAR2}" class="k t1 milk"/><path d="{DEER_BODY}" class="k milk"/>'
+            f'<path d="{DEER_TAIL}" class="k t1 milk"/><circle cx="40" cy="42" r="2.2" class="kf"/>{extra}</g>')
+
+# Shot placement (surv-land-big-game): broadside; the near front leg's back edge (x 116) followed up into the body; the chest
+# from its bottom (y 138) to the top of the back (y 76) marked in thirds; the aim spot one third of the way up, in the heart and lungs.
+_vx, _vb, _vt = 116, 138, 76
+_vl = [_vb - (_vb - _vt) * i / 3 for i in range(4)]
+_ax, _ay = _vx + 36, round(_vl[1] + 60, 1)
+svg('land-deer-vitals', 330, 'Deer seen broadside (side-on), facing left, with the heart and lungs shaded in the chest. Aim just behind the shoulder: follow the back edge of the front leg nearest you up into the body, and aim about one third of the way up from the bottom of the chest. Pick one small spot there, smaller than a pie plate.', f'''
+{deer(36, 60, '<ellipse cx="128" cy="113" rx="25" ry="20" class="h hfl" data-part="vital"/>'
+      f'<line x1="{_vx}" y1="{_vt}" x2="{_vx}" y2="{_vb + 80}" class="k t1 d" data-part="leg-line"/>'
+      + ''.join(f'<line x1="{_vx - 12}" y1="{y:.1f}" x2="{_vx + 12}" y2="{y:.1f}" class="k" data-part="third"/>' for y in _vl))}
+<circle cx="{_ax}" cy="{_ay}" r="7" class="k t3" data-part="aim"/><circle cx="{_ax}" cy="{_ay}" r="2" class="kf"/>
+{lbl(6,18,'Broadside (side-on)','tb')}
+{lbl(334,18,'Aim just behind the shoulder','tb','end')}{lbl(334,32,'Pick one small spot there,','','end')}{lbl(334,46,'smaller than a pie plate','','end')}
+{lead(_ax + 20, 52, _ax + 4, _ay - 6)}
+{lbl(200,168,'Heart and lungs','tb')}{lead(198,164,189,164)}
+{lbl(6,236,'About one third','')}{lbl(6,250,'of the way up from','')}{lbl(6,264,'the bottom of the chest','')}{lead(110,240,_ax - 6,_ay + 12)}
+{lbl(170,308,'Follow the back edge','')}{lbl(170,322,'of the front leg nearest you','')}{lead(168,304,_vx + 38,230)}''')
+
+# Field dressing (surv-field-dressing-game, "Deer step by step"): the cuts numbered in the order of the steps.
+svg('land-field-dressing-cuts', 312, 'Deer seen from the side, facing left, with the cuts numbered in the order of the steps: 1 open the belly from the pelvis to the breastbone; 2 cut around the anus, and tie it off; 3 cut the diaphragm away from the ribs; 4 cut the windpipe and gullet as far forward as you can', f'''
+{deer(36, 40, '<path d="M210 123 C180 127 144 133 104 133" class="h t3 d" data-part="belly"/>'
+      '<circle cx="261" cy="104" r="5" class="h t3" data-part="anus"/>'
+      '<path d="M162 76 C146 96 146 118 162 134" class="a t3 d" data-part="diaphragm"/>'
+      '<line x1="90" y1="106" x2="101" y2="98" class="h t5" data-part="windpipe"/>')}
+{badge(14,286,1)}{lbl(28,290,'Open the belly from the pelvis','tb')}{lbl(28,304,'to the breastbone','')}{lead(196,282,226,173)}
+{badge(326,14,2)}{lbl(312,18,'Cut around the anus,','tb','end')}{lbl(336,32,'and tie it off','','end')}{lead(316,36,300,138)}
+{badge(150,56,3)}{lbl(164,60,'Cut the diaphragm away','tb')}{lbl(164,74,'from the ribs','')}{lead(190,80,188,128)}
+{badge(14,182,4)}{lbl(28,186,'Cut the windpipe','tb')}{lbl(28,200,'and gullet as far','')}{lbl(28,214,'forward as you can','')}{lead(110,180,127,144)}''')
+
+# Butchering (surv-land-butchering, "The cuts and what each is good for"): where each cut comes from, in the table's words.
+# Seams in the coyote line; the tenderloin is inside, so it is dashed; the shank (below the hind leg's knee) is shaded.
+svg('land-deer-cuts', 340, 'Deer seen from the side, facing left, showing where each cut comes from: neck, between the shoulders and the head; shoulder; backstrap (loin), along the spine over the ribs; ribs; flank; tenderloin, inside, along the underside of the spine, near the pelvis; hind leg: sirloin, top round, bottom round, eye of round; shank, below the knee', f'''
+{deer(36, 60, '<path d="M234 147 L253 153 L251 160 L256 178 L244 181 C242 170 239 160 234 147 Z" class="w wf" data-part="shank"/>'
+      '<path d="M100 77 C94 90 88 102 82 116" class="w" data-part="seam-neck"/>'
+      '<path d="M122 74 C128 96 126 120 117 138" class="w" data-part="seam-shoulder"/>'
+      '<path d="M122 90 C160 86 190 86 211 88" class="w" data-part="seam-backstrap"/>'
+      '<path d="M164 87 C168 104 168 120 164 134" class="w" data-part="seam-ribs"/>'
+      '<path d="M212 74 C208 96 204 114 206 130" class="w" data-part="seam-hind-leg"/>'
+      '<path d="M172 96 C182 92 200 92 210 96 C200 100 182 100 172 96 Z" class="k d" data-part="tenderloin"/>')}
+{lbl(179,178,'Ribs','','middle')}{lbl(203,184,'Flank','')}
+{lbl(336,16,'Hind leg','tb','end')}{lbl(336,30,'Sirloin','','end')}{lbl(336,44,'Top round, bottom round,','','end')}{lbl(336,58,'eye of round','','end')}{lead(316,64,268,164)}
+{lbl(150,104,'Backstrap (loin)','tb')}{lead(196,108,202,142)}
+{lbl(6,150,'Neck','tb')}{lead(40,146,120,148)}
+{lbl(6,196,'Shoulder','tb')}{lead(62,192,144,178)}
+{lbl(336,224,'Shank','tb','end')}{lead(298,220,286,224)}
+{lbl(140,302,'Tenderloin','tb')}{lbl(140,316,'inside, along the underside','')}{lbl(140,330,'of the spine, near the pelvis','')}{lead(234,292,240,160)}''')

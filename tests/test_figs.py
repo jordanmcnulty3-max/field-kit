@@ -79,7 +79,8 @@ RESTORED = {
     'surv-fire': ['fire-sizes', 'fire-platform'],
     'surv-river-crossings': ['river'],
     'surv-traps-and-fishing': ['trap-snare'],
-    'surv-field-dressing-game': ['dress-deer'],
+    # land pack (v7.7) Task 6: dress-deer (a body seen from above) gave way to land-field-dressing-cuts, a side view of the
+    # deer with the cuts numbered in the steps' order; dress-deer stays in figs/ and its CASES check still holds
 }
 
 
@@ -967,3 +968,148 @@ def test_cans_no_can_or_jar_drawn_without_a_sign():
             continue
         loose.append(ET.tostring(g, encoding='unicode'))
     assert loose == [], loose
+
+
+
+# ---- Land pack (v7.7) Task 6: the deer diagrams carry only what their topic carries ----
+# figure -> (topic, section heading it sits in, phrases drawn on it (each also in the topic's own text), wording that must
+#            not be drawn or in the alt text, phrases the caption carries)
+LAND_FIGS = {
+    'land-deer-vitals': (
+        'surv-land-big-game', 'Shot placement',
+        ['broadside (side-on)', 'aim just behind the shoulder', 'pick one small spot there,', 'smaller than a pie plate',
+         'heart and lungs', 'about one third', 'of the way up from', 'the bottom of the chest', 'follow the back edge',
+         'of the front leg nearest you'],
+        [r'\d', r'\bhead\b', r'\bneck\b', r'quartering', r'facing you', r'liver', r'gut', r'spine', r'backbone', r'brain',
+         r'shoulder blade', r'diaphragm', r'\bsafe', r'yards?'],
+        ['aim just behind the shoulder', 'one third of the way up from the bottom of the chest', 'smaller than a pie plate']),
+    'land-field-dressing-cuts': (
+        'surv-field-dressing-game', 'Deer step by step',
+        ['open the belly from the pelvis', 'to the breastbone', 'cut around the anus,', 'and tie it off',
+         'cut the diaphragm away', 'from the ribs', 'cut the windpipe', 'and gullet as far', 'forward as you can'],
+        [r'uphill', r'breastbone to pelvis', r'\bsaw', r'\bsafe', r'(?<![\d])\d{2,}', r'°', r'inch'],
+        ['open the belly from the pelvis to the breastbone', 'don\'t cut the stomach or intestines']),
+    'land-deer-cuts': (
+        'surv-land-butchering', 'The cuts and what each is good for',
+        ['backstrap (loin)', 'tenderloin', 'inside, along the underside', 'of the spine, near the pelvis', 'neck', 'shoulder',
+         'ribs', 'flank', 'hind leg', 'sirloin', 'top round, bottom round,', 'eye of round', 'shank'],
+        [r'\d', r'brain', r'spinal cord', r'lymph', r'spleen', r'\bsaw', r'brisket', r'tongue', r'liver', r'heart',
+         r'steak', r'roast', r'\bsafe'],
+        ['tenderloins', 'inside, along the underside of the spine, near the pelvis']),
+}
+
+
+def _drawn_lines(name):
+    """Every drawn text string, except the step badges (a single digit)."""
+    return [s for _, _, s in _texts(name) if not re.fullmatch(r'\d', s)]
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_sits_once_in_its_section(name):
+    tid, section = LAND_FIGS[name][:2]
+    assert name in figs.F, name
+    assert topic_figs()[tid].count(name) == 1, (tid, name)
+    assert fig_section(tid, name) == [section]
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_svg_parses(name):
+    root = ET.fromstring(figs.F[name][0])
+    assert root.get('viewBox').startswith('0 0 340 '), root.get('viewBox')
+    assert root.get('role') == 'img' and root.get('aria-label') == figs.F[name][1]
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_draws_its_topics_words(name):
+    tid, _, words, _, _ = LAND_FIGS[name]
+    d, topic = drawn_of(name), topic_text(tid)
+    for w in words:
+        assert w in d, f'{name}: missing {w!r} in drawn text: {d}'
+        assert w.rstrip(',') in topic, f'{name}: {w!r} is not in {tid}'
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_every_drawn_line_is_in_the_text(name):
+    """Every text string drawn is word for word in the topic's own text (not its captions or sources), apart from the step
+    badges; trailing punctuation that only ends a line is ignored."""
+    tid = LAND_FIGS[name][0]
+    source = topic_text(tid)
+    for s in _drawn_lines(name):
+        line = s.strip().rstrip(':,.').strip()
+        assert line and line in source, f'{name}: drawn {s!r} is not in {tid}'
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_draws_no_unstated_wording(name):
+    banned = LAND_FIGS[name][3]
+    for t in (' '.join(_drawn_lines(name)), alt_of(name)):
+        for pat in banned:
+            assert not re.search(pat, t), f'{name}: says {pat!r}: {t}'
+
+
+@pytest.mark.parametrize('name', sorted(LAND_FIGS))
+def test_land_figure_alt_and_caption(name):
+    """The caption is the topic's own sentences, word for word."""
+    tid, _, _, _, cap_words = LAND_FIGS[name]
+    assert len(alt_of(name)) > 40
+    cap = topic_caption(tid, name)
+    for w in cap_words:
+        assert w in cap, f'{name}: caption missing {w!r}: {cap}'
+    for sentence in [x.strip() for x in re.split(r'(?<=[.?])\s', cap) if x.strip()]:
+        assert sentence.rstrip('.') in topic_text(tid), f'{name}: caption sentence not in the topic: {sentence!r}'
+
+
+def test_land_figures_draw_no_plant_and_no_person():
+    """Land pack constraint: no drawing of any plant; nothing showing use on a person."""
+    for name in LAND_FIGS:
+        svg, label = figs.F[name]
+        t = (svg + label).lower()
+        for word in ('leaf', 'leaves', 'plant', 'person', 'hand', 'skin'):
+            assert word not in t, (name, word)
+
+
+def test_field_dressing_badges_follow_the_steps_order():
+    """Badge n labels the n-th cut in the order the topic's steps give them: belly, anus, diaphragm, windpipe."""
+    texts = _texts('land-field-dressing-cuts')
+    badges = sorted((s, x, y) for x, y, s in texts if re.fullmatch(r'\d', s))
+    assert [b[0] for b in badges] == ['1', '2', '3', '4']
+    want = ['open the belly from the pelvis', 'cut around the anus,', 'cut the diaphragm away', 'cut the windpipe']
+    for (n, bx, by), first in zip(badges, want):
+        x, y = next((x, y) for x, y, s in texts if s == first)
+        assert abs(y - by) < 1 and 0 < abs(x - bx) < 30, (n, first, (bx, by), (x, y))
+    steps = next(b['steps'] for s in json.load(open(os.path.join(ROOT, 'src', 'survival', 'surv-field-dressing-game.json'),
+                                                       encoding='utf-8'))['sections'] if s['h'] == 'Deer step by step'
+                 for b in s['blocks'] if 'steps' in b)
+    steps = [st.lower() for st in steps]
+    at = [next(i for i, st in enumerate(steps) if w.rstrip(',') in st) for w in want]
+    assert at == sorted(at), at
+    for n in '1234':
+        assert f'{n} ' + want[int(n) - 1].rstrip(',') in alt_of('land-field-dressing-cuts')
+
+
+def test_deer_vitals_aim_is_on_the_leg_line_a_third_of_the_way_up():
+    """The aim mark sits on the line up the back edge of the near front leg, one third of the way from the bottom of the
+    chest to the top of the back, inside the shaded heart and lungs."""
+    root = ET.fromstring(figs.F['land-deer-vitals'][0])
+    els = {}
+    for e in root.iter():
+        if e.get('data-part'):
+            els.setdefault(e.get('data-part'), []).append(e)
+    dx, dy = (float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', els['deer'][0].get('transform')))
+    leg = els['leg-line'][0]
+    thirds = sorted(float(e.get('y1')) for e in els['third'])
+    assert len(thirds) == 4
+    top, bot = thirds[0], thirds[-1]
+    aim = els['aim'][0]
+    ax, ay = float(aim.get('cx')) - dx, float(aim.get('cy')) - dy
+    assert ax == float(leg.get('x1')) == float(leg.get('x2'))
+    assert abs(ay - (bot - (bot - top) / 3)) < 0.2, (ay, top, bot)
+    v = els['vital'][0]
+    cx, cy, rx, ry = (float(v.get(k)) for k in ('cx', 'cy', 'rx', 'ry'))
+    assert ((ax - cx) / rx) ** 2 + ((ay - cy) / ry) ** 2 < 1, 'the aim spot is inside the heart and lungs'
+
+
+def test_deer_cuts_tenderloin_is_drawn_dashed_as_inside():
+    root = ET.fromstring(figs.F['land-deer-cuts'][0])
+    t = [e for e in root.iter() if e.get('data-part') == 'tenderloin']
+    assert len(t) == 1 and 'd' in t[0].get('class').split()

@@ -66,7 +66,7 @@
               [
                 "Small game and birds",
                 "Concentrate on smaller animals unless you get the chance at large game: there are more of them (US Army FM 21-76)",
-                "Zone-of-fire safety in a group (Maine hunter education); gloves with rabbits, hares and rodents (Field dressing game)"
+                "Zone-of-fire safety in a group (Maine hunter education); gloves always, above all with rabbits, hares and rodents (Field dressing game)"
               ],
               [
                 "Deer",
@@ -101,7 +101,7 @@
         },
         {
           "list": [
-            "Spring: young dandelion leaves, before the plant flowers, and young cattail shoots (Wild plants). Fish gather at inlets before they spawn, usually in spring or fall; crappie move into shallow water to spawn, and walleye spawn in April in fast-flowing streams (NYS DEC).",
+            "Spring: young dandelion leaves, before the plant flowers, and young cattail shoots, only after you have learned them in person (Wild plants). From Wild plants: “Yellow iris can be confused with cattail, especially when it is not in bloom: their leaves are very similar (Government of Alberta).” Fish gather at inlets before they spawn, usually in spring or fall; crappie move into shallow water to spawn, and walleye spawn in April in fast-flowing streams (NYS DEC).",
             "Summer: wild raspberries usually ripen in July, blackberries a little later (Wild plants). Small ponds full of sunfish are the best place to get a bite; in summer crappie go to deeper, cooler water (NYS DEC). Squirrels move much less at midday on hot, humid days (Missouri Department of Conservation). Heat spoils meat fast: don’t hunt on a hot day without a way to keep the meat cool (New Jersey Fish and Wildlife).",
             "Fall: fish gather at inlets again (NYS DEC). In Missouri, rabbit numbers are often higher in October (Missouri Department of Conservation).",
             "Winter: ice fishing for yellow perch, sunfish, chain pickerel and northern pike in ponds and lakes, and walleye and lake trout in deep lakes (NYS DEC); the ice rules are under Safety below. Rabbits may move at midday on a sunny day after a cold snap (Missouri Department of Conservation). Cold helps keep meat, but read what the agencies say in Preserving game meat first."
@@ -176,9 +176,13 @@
           "list": [
             "Be sure of your target and what lies beyond it (NYS DEC). The rest is in Hunting deer and big game and Small game and birds.",
             "Tree stands: a full-body harness, connected before your feet leave the ground and until you are back down (NYS DEC).",
-            "Ice: NYS DEC’s general rule is a minimum of 3 to 4 inches (8 to 10 cm) of solid ice; 4 inches (10 cm) to go out on foot; stay off ice 2 inches (5 cm) or thinner. Slush ice is about half as strong; double the thickness for white ice. Check the ice as you go, and carry ice picks (NYS DEC). This app goes by 4 inches on foot.",
+            "From Fishing for food: “Ice: walk only on at least 4 inches (10 cm) of solid, clear ice, or 8 inches (20 cm) of white or snow ice. Stay off ice 2 inches (5 cm) thick or less (NYS DEC). Several people together need 6 inches (15 cm) or more of strong ice (NYS DEC trapper education manual).” Check the ice as you go, and carry ice picks (NYS DEC).",
             "Boats: wear a life jacket, and dress for the water temperature, not the air (Minnesota DNR)."
           ]
+        },
+        {
+          "link": "s:surv-traps-and-fishing",
+          "label": "Fishing for food"
         },
         {
           "p": "Someone hurt? A gunshot, a fall from a tree stand, cold water: use the protocols."
@@ -249,7 +253,7 @@
         },
         {
           "list": [
-            "Stick to grasshoppers and crickets, and only to bugs you can easily identify (Michigan State University Extension, which also names sowbugs and pillbugs).",
+            "Stick to grasshoppers and crickets, and only to bugs you can easily identify (Michigan State University Extension).",
             "Never eat adult insects that bite or sting, hairy or brightly coloured insects, hairy caterpillars, insects with a strong smell, spiders, or ticks, flies and mosquitoes (ATP 3-50.21).",
             "Collect only where no pesticides have been used (Michigan State University Extension).",
             "Take off stingers, legs, wings and heads (ATP 3-50.21).",
@@ -330,7 +334,7 @@
     },
     {
       "name": "Michigan State University Extension (4-H Entomology), Eating bugs: Part 3 – Catch and eat them yourself (April 21, 2022)",
-      "used": "Grasshoppers, crickets and isopods; only bugs you can easily identify; pesticide-free collecting; cook completely to destroy pathogens and parasites; a thermometer reading is hard on an insect, stir about 10 minutes on medium heat, be extra sure; no bugs for people allergic to shellfish or to mushrooms"
+      "used": "Grasshoppers and crickets; only bugs you can easily identify; pesticide-free collecting; cook completely to destroy pathogens and parasites; a thermometer reading is hard on an insect, stir about 10 minutes on medium heat, be extra sure; no bugs for people allergic to shellfish or to mushrooms"
     },
     {
       "name": "Ohio State University Extension (CFAES), Chow Line: Cicadas can be a tasty treat, but they can be hazardous to those allergic to seafood, FDA warns (undated)",
@@ -342,11 +346,11 @@
     },
     {
       "name": "NYS DEC, Learn How To Ice Fish (web page, undated)",
-      "used": "Winter ice fishing; species by water; minimum of three to four inches of solid ice as the general rule; 2 inches or less stay off, 4 inches on foot; slush ice about 50 percent weaker; double for white ice; check periodically; ice picks; buddy system"
+      "used": "Winter ice fishing; species by water; check the ice periodically; ice picks; buddy system"
     },
     {
       "name": "NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping (student manual, 4th edition, 2016), chapter 5",
-      "used": "Ice: three inches suggested minimum for one person, four better (the more cautious DEC figure used)"
+      "used": "Ice: the trapper manual’s figures are given on Fishing for food and quoted from there"
     },
     {
       "name": "NYS DEC press release, DEC Releases Hunting Safety Statistics for 2024 (February 14, 2025); NYS DEC bulletins, DEC Reminds New York State Hunters: Be Safe During Hunting Seasons (2019, 2020); NYS DEC Hunter Education, Tree Stand “Best Practices”",
@@ -373,8 +377,8 @@
       "used": "Zone-of-fire safety when hunting in a group"
     },
     {
-      "name": "Wild plants, Field dressing game, Preserving game meat, Water and food after fallout, Game, fish, milk and gardens after fallout, How long to stay in, New York rules for hunting, fishing and trapping, and the other topics linked here (in this app)",
-      "used": "The food-priority sentence and the lead sentence, quoted word for word; the plant seasons (dandelion, cattail, raspberries and blackberries) and safe list; gloves with rabbits and hares; keeping meat in winter; wild game and fish after fallout; going out during a fallout shelter period; every New York rule, all by link"
+      "name": "Wild plants, Fishing for food, Field dressing game, Preserving game meat, Water and food after fallout, Game, fish, milk and gardens after fallout, How long to stay in, New York rules for hunting, fishing and trapping, and the other topics linked here (in this app)",
+      "used": "The food-priority sentence and the lead sentence, quoted word for word; the plant seasons (dandelion, cattail, raspberries and blackberries) and safe list; gloves always, above all with rabbits, hares and rodents; the iris sentence quoted word for word (Wild plants); the ice warning quoted word for word (Fishing for food); keeping meat in winter; wild game and fish after fallout; going out during a fallout shelter period; every New York rule, all by link"
     }
   ],
   "reviewed": "2026-11-19"

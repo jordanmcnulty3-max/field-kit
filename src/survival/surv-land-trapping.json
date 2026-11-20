@@ -138,14 +138,11 @@
       "h": "Killing a trapped animal",
       "blocks": [
         {
-          "p": "From the NYS DEC trapper manual, in its order."
-        },
-        {
           "list": [
             "Kill an animal you will keep as quickly and humanely as you can. New or young trappers should go after only animals they can kill easily and safely, and get help with any animal they can’t handle safely.",
             "Firearm: a well-placed shot with a .22 rimfire cartridge, aimed to pass through the front of the brain. Opossums: at the base of the ear or down the middle of the skull. Animals in foothold and cage traps can be shot safely.",
             "Keep the firearm unloaded until you need it, watch for ricochets off the ground, rocks or the trap, and have everyone with you stand behind the shooter.",
-            "If the animal may have rabies, or has bitten someone, kill it without damaging the head, so health authorities can test it."
+            "If the animal may have rabies, or has bitten someone, kill it without damaging the head, so that in normal times health authorities can test it. What to do with it then is in Field dressing game, “Already caught or shot, and it looks sick”."
           ]
         },
         {
@@ -153,6 +150,9 @@
         },
         {
           "warn": "Larger animals such as raccoons may be too large for some beginners to kill safely this way: get help (NYS DEC trapper manual)."
+        },
+        {
+          "p": "The steps, from the NYS DEC trapper manual, in its order:"
         },
         {
           "steps": [
@@ -211,7 +211,7 @@
       "blocks": [
         {
           "list": [
-            "Avoid sick animals, and ones that don’t act normally (NYS DEC trapper manual). The signs of disease, and which animals are not safe to eat, are in Field dressing game.",
+            "Avoid sick animals, and ones that don’t act normally (NYS DEC trapper manual). The signs of disease, and which animals are not safe to eat, are in Field dressing game, with what to do with one already in your trap.",
             "Rabies can be carried by any warm-blooded mammal and, left untreated, is always fatal. It spreads through a bite or scratch, or through a cut while skinning an infected animal (NYS DEC trapper manual).",
             "Wear latex or other protective gloves, eye protection and coveralls when you handle carcasses or droppings, and wash your hands and arms well with soap and water afterwards (NYS DEC trapper manual).",
             "Muskrats and beavers can carry tularemia: wear rubber or plastic gloves to skin them, and stay away from a muskrat found dead or dying for no clear reason (NYS DEC trapper manual).",

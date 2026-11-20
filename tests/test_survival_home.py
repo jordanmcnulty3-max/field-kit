@@ -1060,6 +1060,58 @@ def test_preserving_game_meat_says_the_agency_jerky_needs_a_working_oven_or_dehy
     assert oven in jtext and 'this method can’t be done' in jtext
     assert 's:surv-food-cooking-no-power' in _links({'sections': [jerky]})
 
+def test_whole_pack_read_fixes_keep_one_answer_per_question():
+    # whole-pack read, Important and Minor findings and carried items: each page that used to contradict another now links or quotes it
+    topics = _shipped('survival')
+    t = lambda tid: ' '.join(_all_texts(topics[tid]))
+    fd, butcher, hub = t('surv-field-dressing-game'), t('surv-land-butchering'), t('surv-land-start')
+    # I1: game with no thermometer gets a plain answer; the fish page gives FDA's own words for fish
+    assert 'No thermometer: no source opened gives a sign you can go by for game.' in fd
+    assert '“If you don’t have a food thermometer, there are other ways to determine whether seafood is done.”' in t('surv-land-fish-cleaning')
+    # I2: one decision on a deer's heart and liver, on Butchering; Field dressing and the kit point to it
+    assert 'eat a deer’s heart and liver only if the deer has tested negative for chronic wasting disease; with no test, leave them.' in butcher
+    assert 'Keep the heart and liver in a clean bag if they look healthy' not in fd and 'Heart, liver and tongue' in fd
+    kit = {i['id']: i for i in _shipped('checklists')['land-kit']['items']}
+    assert 'when Butchering deer and small game says to keep them' in kit['bags']['note']
+    # I3: an animal already caught or shot that looks sick has steps on the owner page, and Trapping and Small game link to them
+    assert any(sec['h'] == 'Already caught or shot, and it looks sick' for sec in topics['surv-field-dressing-game']['sections'])
+    for tid in ('surv-land-trapping', 'surv-land-small-game'):
+        assert '“Already caught or shot, and it looks sick”' in t(tid), tid
+    assert 'In normal times, report sick rabbits' in t('surv-land-small-game')
+    # I4: the hub's spring cattail line carries the iris warning from Wild plants, word for word
+    iris = 'Yellow iris can be confused with cattail, especially when it is not in bloom: their leaves are very similar (Government of Alberta).'
+    assert iris in t('surv-food-and-wild-plants') and '“' + iris + '”' in hub
+    # I5: no plant is eaten on looks alone
+    assert 'looks like a store-bought' not in t('surv-food-and-wild-plants')
+    # I6: the kit's saw note follows Butchering, not the pelvis and breastbone
+    assert 'pelvis' not in kit['hatchet-saw']['note'] and 'Butchering deer and small game' in kit['hatchet-saw']['note']
+    # I7: Field dressing's birds link the migratory bird rule
+    birds = next(sec for sec in topics['surv-field-dressing-game']['sections'] if sec['h'] == 'Birds')
+    assert 's:surv-land-ny-rules' in _links({'sections': [birds]})
+    # I8: the babies page links the fish advice
+    assert 's:surv-land-fish-cleaning' in _links(topics['surv-food-babies-children'])
+    # I10: bear jerky is sent to the page that has it
+    assert 'why bear is never made into jerky is in Preserving game meat' in t('surv-land-big-game')
+    assert 'bear' in t('surv-land-keeping-meat').lower() and 'jerky' not in fd.lower()
+    # M1: Butchering's summary names every part its never-eat box names
+    assert 'spleen, pancreas, tonsils' in topics['surv-land-butchering']['summary']
+    # M2: the hub quotes Fishing for food's ice warning word for word
+    ice = next(b['warn'] for sec in topics['surv-traps-and-fishing']['sections'] if sec['h'] == 'Ice fishing' for b in sec['blocks'] if 'warn' in b)
+    quoted = ice.split(' Slush ice')[0]
+    assert '“' + quoted + '”' in hub and '3 to 4 inches' not in hub
+    # M3: gloves always, above all with rabbits, hares and rodents
+    assert kit['gloves']['note'].startswith('Always;')
+    # carried 1: the low-head dam warning sits with the line that sends people below a dam
+    where = next(sec for sec in topics['surv-traps-and-fishing']['sections'] if sec['h'] == 'Where the fish are')
+    assert any('Low-head dams' in b.get('warn', '') for b in where['blocks'])
+    # carried 4: Trapping's lead-in sits directly above the manual's steps
+    kill = next(sec for sec in topics['surv-land-trapping']['sections'] if sec['h'] == 'Killing a trapped animal')
+    i = next(n for n, b in enumerate(kill['blocks']) if 'steps' in b)
+    assert kill['blocks'][i - 1] == {'p': 'The steps, from the NYS DEC trapper manual, in its order:'}
+    assert 'From the NYS DEC trapper manual, in its order.' not in t('surv-land-trapping')
+    # carried 5: no cell says both "eat by the statewide table" and "don't eat" in the old words
+    assert 'As the first table' not in t('surv-land-fish-cleaning')
+
 def test_fishing_fish_cleaning_and_trapping_split_the_old_traps_topic():
     # land pack batch C (spec 4 rows 2, 5, 7; spec 10 calls 4, 7, 9): Fishing for food keeps the id and is fishing only; the fish
     # cooking sentence Cook without power quotes word for word from Field dressing game is carried identically by the new owner of
@@ -1148,8 +1200,9 @@ LAND_BASE = '0244043'   # the search changes, before any land content: what the 
 def _base_topic(name):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     r = subprocess.run(['git', 'show', f'{LAND_BASE}:src/survival/{name}.json'], cwd=root, capture_output=True, text=True, encoding='utf-8')
-    if r.returncode != 0:
-        pytest.skip(f'commit {LAND_BASE} is not in this clone, so the older pages cannot be compared with it')
+    if r.returncode != 0:   # a clone without the base commit must not pass these checks by skipping them
+        pytest.fail(f'commit {LAND_BASE} is not in this clone, so the older pages cannot be compared with it: '
+                    f'fetch the full history (git fetch --unshallow) and run again. git said: {r.stderr.strip()}')
     return json.loads(r.stdout)
 
 

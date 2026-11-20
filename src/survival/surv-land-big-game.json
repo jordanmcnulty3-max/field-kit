@@ -252,9 +252,9 @@
             "Watch it from a distance for breathing (New Jersey Fish and Wildlife).",
             "Approach from behind its head and stay away from its feet and antlers (Missouri Department of Conservation, Massachusetts hunter education).",
             "The eyes of a dead deer are normally open (Massachusetts hunter education). Touch the corner of the eye with a long stick: if it blinks, it is still alive (New Jersey Fish and Wildlife, Missouri Department of Conservation).",
-            "Still alive: finish it with a shot into the heart and lungs, only if that shot is legal (New York rules) and safe (New Jersey Fish and Wildlife, Massachusetts hunter education).",
+            "Still alive: finish it with a shot into the heart and lungs, only if that shot is safe and, in normal times, legal (New York rules) (New Jersey Fish and Wildlife, Massachusetts hunter education).",
             "Put your firearm or bow down only when you are certain the deer is dead (Missouri Department of Conservation).",
-            "Tag it if the law requires (New York rules), then field dress it as soon as you can (Massachusetts hunter education)."
+            "In normal times, tag it if the law requires (New York rules). Then field dress it as soon as you can (Massachusetts hunter education)."
           ]
         },
         {
@@ -364,7 +364,7 @@
           ]
         },
         {
-          "warn": "Bear meat can carry trichinella worms. How to cook it, and why bear is never made into jerky, are in Field dressing game and Preserving game meat."
+          "warn": "Bear meat can carry trichinella worms. How to cook it is in Field dressing game; why bear is never made into jerky is in Preserving game meat."
         },
         {
           "link": "s:surv-field-dressing-game",

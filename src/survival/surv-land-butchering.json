@@ -12,7 +12,7 @@
     "ground venison",
     "gambrel"
   ],
-  "summary": "Hang the cooled deer by its hind legs, skin it, take off the shoulders, backstraps, tenderloins, neck and hind legs, and bone the meat out. Trim off the fat, silver skin and bloodshot meat. Never eat the brain, spinal cord, eyes, spleen, tonsils or lymph nodes, and avoid sawing through bone or the spinal cord: chronic wasting disease is in New York deer. Grind only fresh meat and keep it cold; this app gives no cured or fermented sausage. Keep tools for this job only and clean them well. Cook all game to 165°F (74°C).",
+  "summary": "Hang the cooled deer by its hind legs, skin it, take off the shoulders, backstraps, tenderloins, neck and hind legs, and bone the meat out. Trim off the fat, silver skin and bloodshot meat. Never eat the brain, spinal cord, eyes, spleen, pancreas, tonsils or lymph nodes, and avoid sawing through bone or the spinal cord: chronic wasting disease is in New York deer. Grind only fresh meat and keep it cold; this app gives no cured or fermented sausage. Keep tools for this job only and clean them well. Cook all game to 165°F (74°C).",
   "sections": [
     {
       "h": "Before you start",
@@ -52,7 +52,7 @@
           ]
         },
         {
-          "p": "No gambrel? A deer lying on its side can be skinned and quartered one side at a time without gutting it: cut the hide along the spine, peel it down, take off the shoulder and the hindquarter, then the backstrap and the neck meat, pull the skin back up to keep dirt off, and turn it over (Kentucky Department of Fish and Wildlife Resources, Kentucky Afield). Put each quarter in a game bag or a clean pillow case in the shade, and get the meat on ice: keep the ice below 40°F (4°C) (Kentucky Afield)."
+          "p": "No gambrel? A deer lying on its side can be skinned and quartered one side at a time without gutting it: cut the hide along the spine, peel it down, take off the shoulder and the hindquarter, then the backstrap and the neck meat, pull the skin back up to keep dirt off, and turn it over (Kentucky Department of Fish and Wildlife Resources, Kentucky Afield). Put each quarter in a game bag or a clean pillow case in the shade, and get the meat on ice in a cooler, with a thermometer on top of the ice to check the cooler stays below 40°F (4°C) (Kentucky Afield)."
         }
       ]
     },
@@ -197,7 +197,7 @@
           ]
         },
         {
-          "p": "NYS Department of Health says the liver, kidney, heart and salivary glands may also carry a risk of chronic wasting disease, and that cooking does not remove it. Cook heart and liver to 165°F (74°C), like all game."
+          "p": "NYS Department of Health says the liver, kidney, heart and salivary glands may also carry a risk of chronic wasting disease, and that cooking does not remove it. This app’s caution, as for the tongue: in normal times, eat a deer’s heart and liver only if the deer has tested negative for chronic wasting disease; with no test, leave them. The heart and liver of other game, and of a deer that tested negative, are cooked to 165°F (74°C), like all game."
         }
       ]
     },
@@ -338,7 +338,7 @@
     },
     {
       "name": "Kentucky Department of Fish and Wildlife Resources, Kentucky Afield (Fall 2016), Cleaning Your Harvest Without Gutting It",
-      "used": "Skinning and quartering a deer on its side without gutting; game bags or pillow cases; tenderloin teased off by hand; backstrap cut along the spine and cross cut; neck meat for roasts; brisket for barbecue; flank for jerky, plate steaks or grinding; rib meat for grilling or grinding; ice kept below 40°F"
+      "used": "Skinning and quartering a deer on its side without gutting; game bags or pillow cases; tenderloin teased off by hand; backstrap cut along the spine and cross cut; neck meat for roasts; brisket for barbecue; flank for jerky, plate steaks or grinding; rib meat for grilling or grinding; a thermometer on top of the ice to keep the cooler below 40°F"
     },
     {
       "name": "NYS Department of Health, Harvesting, Preparing, and Eating Wild Game",

@@ -3,8 +3,6 @@
   "title": "Keeping game meat",
   "category": "land",
   "keywords": [
-    "keep meat",
-    "keeping meat",
     "jerky",
     "smoke meat",
     "smoking meat",
@@ -48,7 +46,7 @@
       "h": "Cold and time",
       "blocks": [
         {
-          "p": "Backed by a food-safety agency (Minnesota Department of Health, FoodSafety.gov). Where sources give different times, use the shorter one. Swipe sideways to see the whole table."
+          "p": "Backed by a food-safety agency (Minnesota Department of Health, FoodSafety.gov). Where an extension service gives a shorter time, the table uses it and names it: those cells are an extension figure, not an agency one. Where sources give different times, use the shorter one. Swipe sideways to see the whole table."
         },
         {
           "table": {
@@ -80,8 +78,8 @@
               ],
               [
                 "Other game birds",
-                "3 days (Clemson Cooperative Extension)",
-                "6 months (Clemson Cooperative Extension)"
+                "1 to 2 days (FoodSafety.gov, raw chicken or turkey; Clemson Cooperative Extension gives 3)",
+                "6 months (Clemson Cooperative Extension; FoodSafety.gov gives 9 months to 1 year for chicken or turkey)"
               ],
               [
                 "Soups and stews with meat",
@@ -134,12 +132,14 @@
       "h": "Winter cold as the freezer",
       "blocks": [
         {
+          "p": "What the agencies say first. Preserving food quotes New York’s health department: “Don’t put your food outside to keep it cold, even in the winter (New York State Department of Health).” Freezer times assume food kept continuously at 0°F (-18°C) or below (FoodSafety.gov), and Penn State Extension says not to refreeze thawed meat."
+        },
+        {
           "p": "Traditional: from a historical source, not agency-verified. The US Army survival manual (FM 21-76, 2006 copy): “In cold climates, you can freeze and keep meat indefinitely.” It goes on: freezing is not a way of preparing meat, and you must still cook it before eating."
         },
         {
           "list": [
             "Its risk, as this app’s caution: outdoor cold is not steady. A sunny day or a warm spell can thaw meat and let it freeze again without your knowing, and animals can get at meat left outside.",
-            "What the agencies say: freezer times assume food kept continuously at 0°F (-18°C) or below (FoodSafety.gov). Preserving food quotes New York’s health department: “Don’t put your food outside to keep it cold, even in the winter (New York State Department of Health).” Penn State Extension says not to refreeze thawed meat.",
             "North Dakota State University Extension says not to let a whole carcass freeze before it is cut up: freezing may toughen the meat.",
             "End step: cook it to 165°F (74°C) before eating. Freezing does not reliably kill trichinella worms in wild game (CDC)."
           ]
@@ -150,7 +150,7 @@
       "h": "Jerky",
       "blocks": [
         {
-          "p": "Backed by a food-safety agency (National Center for Home Food Preservation, with USDA). This method needs a dehydrator or an oven that holds 140°F (60°C), and a food thermometer. It is for deer: don’t use bear meat for jerky (University of Alaska Fairbanks Extension), and raw poultry is generally not recommended for jerky (National Center for Home Food Preservation)."
+          "p": "Backed by a food-safety agency (National Center for Home Food Preservation). This method needs a dehydrator or an oven that holds 140°F (60°C), and a food thermometer. It is for deer: don’t use bear meat for jerky (University of Alaska Fairbanks Extension), which also says to cook bear meat until well done, to 185°F (85°C). Jerky from wild boar or any other game is cooked to 165°F (74°C) before eating, as in the end step below. Raw poultry is generally not recommended for jerky (National Center for Home Food Preservation)."
         },
         {
           "steps": [
@@ -158,7 +158,7 @@
             "Partly freeze the meat to make slicing easier. Slice it no thicker than 1/4 inch (6 mm). Trim off and throw away all fat: it turns rancid quickly (National Center for Home Food Preservation).",
             "Marinate it covered in the fridge for 1 to 2 hours or overnight (National Center for Home Food Preservation).",
             "Heat it before drying: bring the strips and marinade to a boil and boil for 5 minutes. Strips thicker than 1/4 inch may need longer (National Center for Home Food Preservation).",
-            "Check several strips with a metal stem thermometer (National Center for Home Food Preservation). For wild game, get them to at least 170°F (77°C): the National Center for Home Food Preservation says wild game must be heated to 170°F to destroy trichinella, and University of Alaska Fairbanks Extension heats game meat in its marinade to boiling, 212°F (100°C). Both are above the 165°F (74°C) cooking rule for wild game, and USDA’s 160°F (71°C) for meat jerky is not enough for game.",
+            "Check several strips with a metal stem thermometer (National Center for Home Food Preservation). For wild game, get them to at least 170°F (77°C). This follows the National Center for Home Food Preservation’s literature review (section 6.4: wild game must be heated to 170°F to destroy trichinella) in place of its jerky page, which heats to 160°F and freezes game first. University of Alaska Fairbanks Extension heats game meat in its marinade to boiling, 212°F (100°C). Both are above the 165°F (74°C) cooking rule for wild game, and USDA’s 160°F (71°C) for meat jerky is not enough for game.",
             "Drain the strips and lay them on racks in a dehydrator or oven preheated to 140°F (60°C) (National Center for Home Food Preservation).",
             "Start checking after 3 hours. It is done when a test piece cracks but does not break when you bend it (National Center for Home Food Preservation).",
             "Store it in a sealed container, glass jars or heavy plastic food bags. Properly dried jerky keeps two weeks at room temperature; refrigerate or freeze it to keep it longer (National Center for Home Food Preservation). Penn State Extension gives one to two months in a fridge below 40°F (4°C)."
@@ -191,15 +191,16 @@
         },
         {
           "steps": [
-            "Bone out a hind leg and split it into its separate muscles (North Dakota State University Extension).",
-            "Cover the meat completely with a brine of 2 pounds (0.9 kg) of commercial salt-cure mix per gallon (3.8 L) of water, and weight it down so it stays under. Use a crock or a food-grade container, never a garbage can, plastic bag or ice cream bucket (North Dakota State University Extension).",
+            "Bone out a hind leg and split it into its separate muscles: top, bottom and tip (North Dakota State University Extension).",
+            "Make a brine of 2 pounds (0.9 kg) of commercial salt-cure mix per gallon (3.8 L) of water, and pump it into the meat: an ordinary syringe will do, injecting into several places in each muscle (North Dakota State University Extension).",
+            "Put the meat in a crock or a food-grade container, never a garbage can, plastic bag or ice cream bucket. Cover it completely with the brine and weight it down so it stays under (North Dakota State University Extension).",
             "Keep it in a cooler at 38°F (3°C) for 10 days, turning the meat and weighting it down again every two days (North Dakota State University Extension).",
             "Take it out of the brine and smoke it for five hours at 150°F (66°C), with hardwood such as hickory, maple, chokecherry, oak or apple; never a soft wood such as pine (North Dakota State University Extension).",
             "Hang it to dry at room temperature, about two weeks (North Dakota State University Extension)."
           ]
         },
         {
-          "p": "Traditional: from a historical source, not agency-verified. The US Army survival manual (FM 21-76, 2006 copy) smokes meat over a small fire meant to make smoke, not heat, with hardwood and never resinous wood, the meat cut in slices no more than 6 centimeters thick, as printed. It says meat smoked overnight lasts about a week, two days of steady smoking preserve it 2 to 4 weeks, and properly smoked meat looks like a dark, curled, brittle stick."
+          "p": "Traditional: from a historical source, not agency-verified. The US Army survival manual (FM 21-76, 2006 copy) smokes meat over a small fire meant to make smoke, not heat, with hardwood and never resinous wood, the meat cut in slices no more than about 2 1/2 inches (6 centimeters, as printed) thick. It says meat smoked overnight lasts about a week, two days of steady smoking preserve it 2 to 4 weeks, and properly smoked meat looks like a dark, curled, brittle stick."
         },
         {
           "list": [
@@ -240,9 +241,9 @@
             "For 6 gallons (23 L) of corning liquid: 3 pounds (1.4 kg) of salt, 10 ounces (280 g) of sugar, spices (pepper, ground cloves, bay leaves, pickling spice) and curing salts, made up to 6 gallons with water (North Dakota State University Extension). Use food-grade salt with no additives such as iodine (National Center for Home Food Preservation).",
             "Curing salts: this app gives no amounts of sodium nitrate or nitrite. A mistake with them can be a lethal dose (National Center for Home Food Preservation). Use only a commercial cure mix, by its package directions (National Center for Home Food Preservation; North Dakota State University Extension does the same for its brine cure). Without one, this app’s caution: don’t corn meat.",
             "Put the meat in the liquid, weighted down if needed so it stays under, for 15 days. Stir the liquid and turn the meat on days 5 and 10 (North Dakota State University Extension). Use a crock or food-grade container (North Dakota State University Extension).",
-            "The best temperature is about 38°F (3°C). Above that, add one third more salt for every 15°F (8°C) above 38°F; at 83°F (28°C), that makes 6 pounds (2.7 kg) of salt in all (North Dakota State University Extension).",
+            "Cure only at 35 to 40°F (2 to 4°C): the National Center for Home Food Preservation sets that range, the upper limit to limit the growth of germs. North Dakota State University Extension calls about 38°F (3°C) ideal, and also gives extra salt for curing warmer; this app does not give that, because it would mean curing above the National Center for Home Food Preservation’s 40°F (4°C).",
             "If the brine turns ropy, take the meat out (North Dakota State University Extension, for its brine cure).",
-            "To cook it: cover with cold water, bring it to a boil, skim off the scum, and simmer about five hours or until tender. Cook and eat it within one week of taking it out of the liquid, or freeze it for up to one month (North Dakota State University Extension)."
+            "To cook it: cover with cold water, bring it to a boil, skim off the scum, and simmer about five hours or until tender. Keep what you don’t use straight away in a cool place, refrigerated at 38°F (3°C), and cook and eat it within one week of taking it out of the liquid, or freeze it for up to one month (North Dakota State University Extension). Without that cold, no source opened for this app gives any keeping time."
           ]
         },
         {
@@ -287,7 +288,7 @@
     },
     {
       "name": "FoodSafety.gov (US Department of Health and Human Services), Cold Food Storage Chart",
-      "used": "Ground meats 1 to 2 days, 3 to 4 months; soups and stews with meat 3 to 4 days, 2 to 3 months; fridge 40°F, freezer 0°F; freezer times for quality only, food kept continuously at 0°F can be kept indefinitely"
+      "used": "Ground meats 1 to 2 days, 3 to 4 months; soups and stews with meat 3 to 4 days, 2 to 3 months; fridge 40°F, freezer 0°F; freezer times for quality only, food kept continuously at 0°F can be kept indefinitely; raw chicken or turkey 1 to 2 days, 9 months to 1 year frozen"
     },
     {
       "name": "Utah State University Extension, How to Preserve Venison",
@@ -335,11 +336,11 @@
     },
     {
       "name": "University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed October 2021)",
-      "used": "Heat game meat in marinade to boiling (212°F); don't use bear meat for jerky"
+      "used": "Heat game meat in marinade to boiling (212°F); don't use bear meat for jerky; cook bear meat well done, to 185°F"
     },
     {
       "name": "North Dakota State University Extension, Wild Side of the Menu No. 3: Preservation of Game Meats and Fish (FN155, reviewed August 2022)",
-      "used": "Smoked deer jerky (muscles of the hind leg, 2 lb commercial salt-cure mix per gallon, crock or approved container, submerged, 38°F for 10 days turning every two days, smoke five hours at 150°F, dry about two weeks at room temperature); hardwoods, never pine; corning game (3 lb salt, 10 oz sugar, spices, curing salts, 6 gallons; about 38°F; one third more salt per 15°F above 38°F, 6 lb at 83°F; 15 days, stir on days 5 and 10; boil, skim, simmer about five hours; eat within one week or freeze up to a month); commercial cure by package directions and ropy brine (its brine cure); dry and brine cures of a whole leg, 4 to 6 weeks at 38°F"
+      "used": "Smoked deer jerky (hind leg into top, bottom and tip, pumped with 2 lb commercial salt-cure mix per gallon brine, ordinary syringe in several areas, crock or approved container, submerged, 38°F for 10 days turning every two days, smoke five hours at 150°F, dry about two weeks at room temperature); hardwoods, never pine; corning game (3 lb salt, 10 oz sugar, spices, curing salts, 6 gallons; about 38°F ideal; its extra salt above 38°F reported, not given; 15 days, stir on days 5 and 10; boil, skim, simmer about five hours; balance refrigerated at 38°F, cooked and eaten within one week or frozen up to a month); commercial cure by package directions and ropy brine (its brine cure); dry and brine cures of a whole leg, 4 to 6 weeks at 38°F"
     },
     {
       "name": "CDC, How to Prevent Trichinellosis",
@@ -350,6 +351,5 @@
       "used": "The trichinella sentence and the 165°F rule for all wild game (Field dressing game); USDA's dehydrator and sun-drying sentences and New York State Department of Health's winter sentence, quoted word for word from Preserving food; canning by link; cooking, thawed meat and carbon monoxide by link; sausage reasons by link"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

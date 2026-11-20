@@ -53,7 +53,7 @@
             "Cut the hide all the way round each hind leg at the hock, then down the inside of each leg (New Mexico State University Extension).",
             "Take off the front legs at the joint: cut a circle down to the bone around it (Indiana DNR). Split the skin of each front leg along the hair seam (Massachusetts notes).",
             "Pull the hide down with both hands, freeing it with the knife where it sticks. If muscle starts to come away with the hide, cut it back onto the carcass. Do the belly last: its thin muscles tend to come off with the hide (New Mexico State University Extension).",
-            "Work the hide down the neck to the head (Massachusetts notes). Taking the head off means cutting through the spine at the base of the skull (Massachusetts notes). Use a knife or saw kept for this job, keep the brain and spinal cord off the meat, and wash your hands with soap and water if you touch them (NYS Department of Health).",
+            "Work the hide down the neck to the head (Massachusetts notes). Taking the head off means cutting through the spine at the base of the skull (Massachusetts notes). Use a disinfected or disposable saw blade, and never cut meat with the blade you used on bone (Cornell Wildlife Health Lab). Keep the brain and spinal cord off the meat, and wash your hands with soap and water if you touch them (NYS Department of Health).",
             "Wash any hair off the meat with cold water (Indiana DNR)."
           ]
         },
@@ -194,7 +194,7 @@
         {
           "list": [
             "Heart: run cold water through it while you squeeze it, to clear the blood from its chambers. Cut away all fat, arteries, veins and blood vessels, and any part damaged by the bullet or arrow. It is best eaten fresh, within a couple of days in a fridge (New Mexico Department of Game and Fish).",
-            "Liver: throw it away if it is off-coloured, has cysts or is in poor condition (New Mexico Department of Game and Fish), or has black fluke lines through it (Michigan DNR). New Mexico Department of Game and Fish soaks a liver in cold water in a fridge for 24 hours, changing the water every 8 hours, to draw out blood, then slices it 1/2 inch (13 mm) thick.",
+            "Liver: the signs that mean a liver is thrown away (off colour, cysts, poor condition, black fluke lines) are in Field dressing game. New Mexico Department of Game and Fish soaks a liver in cold water in a fridge for 24 hours, changing the water every 8 hours, to draw out blood, then slices it 1/2 inch (13 mm) thick.",
             "Tongue: the US Army survival manual (FM 21-76, 2006 copy) says to cut it out, skin it and boil it until tender. NYS Department of Health says to avoid handling the saliva and mouth parts of game, and lists the tonsils among the parts that may carry chronic wasting disease. This app’s caution, now that the disease is in New York deer: don’t take the tongue from a deer."
           ]
         },
@@ -241,7 +241,7 @@
           "p": "This app gives no way to grind meat without power: no source opened for it describes one."
         },
         {
-          "warn": "Fresh ground meat only: this app gives no cured, dried or fermented sausage. Cured meats rely on nitrite to hold back the germ that causes botulism (National Center for Home Food Preservation), and a mistake with sodium nitrite in a curing recipe can be a lethal dose (National Center for Home Food Preservation). E. coli O157:H7 can survive the drying and fermenting of sausage (National Center for Home Food Preservation). Curing (salting), drying or smoking alone does not consistently kill trichinella worms (CDC). The National Center for Home Food Preservation does not recommend homemade sausage that is not fully cooked."
+          "warn": "Fresh ground meat only: this app gives no cured, dried or fermented sausage. Cured meats rely on nitrite to hold back the germ that causes botulism (National Center for Home Food Preservation), and a mistake with sodium nitrite in a curing recipe can be a lethal dose (National Center for Home Food Preservation). E. coli O157:H7 can survive the drying and fermenting of sausage (National Center for Home Food Preservation). Curing (salting), drying or smoking alone does not consistently kill trichinella worms (CDC). The National Center for Home Food Preservation does not recommend preparing homemade, non-fermented sausages that are not fully cooked."
         }
       ]
     },
@@ -348,7 +348,7 @@
     },
     {
       "name": "Cornell Wildlife Health Lab, Tips for Safe Handling and Processing Venison (November 2018)",
-      "used": "One animal at a time; debone, keep contact with brain, spinal cord, lymph nodes and spleen to a minimum; avoid sawing into bone, trim generously near shattered bone, spine and skull; lymph nodes between muscles, remove fat and tissue before grinding; soap and hot water between animals; each deer's meat in its own labeled container"
+      "used": "One animal at a time; debone, keep contact with brain, spinal cord, lymph nodes and spleen to a minimum; avoid sawing into bone, trim generously near shattered bone, spine and skull; lymph nodes between muscles, remove fat and tissue before grinding; soap and hot water between animals; each deer's meat in its own labeled container; disinfected or disposable saw blade to remove the head, never the same blade on meat"
     },
     {
       "name": "NYS Wildlife Health Program, Highly Pathogenic Avian Influenza: What Hunters Need to Know (September 2022)",
@@ -372,11 +372,7 @@
     },
     {
       "name": "New Mexico Department of Game and Fish, Don't Overlook Those Organ Meats (John Martsh; no date shown)",
-      "used": "Heart: fresh, refrigerate a couple of days, pump out blood with cold water, trim fat and vessels, discard bullet or broadhead damage; liver: discard if off-colored, with cysts or in poor condition; soak 24 hours in cold water in the fridge, changing it every 8 hours; slice 1/2 inch"
-    },
-    {
-      "name": "Michigan DNR, Common Deer Afflictions",
-      "used": "Liver flukes make the liver inedible"
+      "used": "Heart: fresh, refrigerate a couple of days, pump out blood with cold water, trim fat and vessels, discard bullet or broadhead damage; liver soaked 24 hours in cold water in the fridge, changing it every 8 hours; slice 1/2 inch"
     },
     {
       "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8",
@@ -395,6 +391,5 @@
       "used": "The cooled carcass, the signs an animal is not safe to eat, and the 165°F rule for all wild game; hanging times, storage times and keeping methods by link; household bleach mixes by link"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

@@ -6606,3 +6606,29 @@ and nitrite sentences, NCHFP smoke sentence and storage sentence. Canning text u
 ### Cook without power (v7.5)
 
 One link block added in "Cook it through" after the quoted wild game rule: Field dressing game. No text changed.
+
+### Batch A2 fix round (2026-11-19), from task-2-a2-review.md
+
+Re-opened in this round (built-in fetch, title checked):
+- NDSU FN155 PDF (https://www.ag.ndsu.edu:8000/agriculture/sites/default/files/2022-10/fn155.pdf): smoked deer jerky steps in order,
+  "Debone hind leg, splitting into individual muscles; top, bottom and tip." "Pump with brine* (two pounds commercial saltcure mixture
+  per gallon of water)." "Place in crock or USDA-approved plastic container." ... "Store in cooler (38 F) for 10 days."; injector note
+  "* Can use ordinary syringe. Inject into several areas."; corning "store the balance in a cool place refrigerated at 38 degrees",
+  "cooked and consumed within one week or frozen for up to one month"; "for every 15 F of temperature above 38 F, you add one-third
+  more salt" (not given).
+- NCHFP cure-smoke review (preservation): 6.2.4 "Curing should be carried out at a temperature between 35°F and 40°F."; "the upper
+  temperature is set to limit microbial growth"; 6.7 "We do not recommend preparing homemade, non-fermented sausages that are not fully
+  cooked." (now used word for word in Butchering).
+- UAF Making Jerky: "CAUTION: Freezing and heating treatment may not be sufficient to kill parasites in bear meat."; "Cook bear meat until
+  it is well done."; "The internal temperature should be 185°F." (185°F = 85°C, app's conversion; D201).
+- FoodSafety.gov Cold Food Storage Chart: "Chicken or turkey, whole" 1 to 2 days, 1 year; "pieces" 1 to 2 days, 9 months; no game bird
+  row (D203).
+- Michigan DNR afflictions: cysticercosis "filled with a clear to hemorrhagic fluid and a large white dot", "can be trimmed and the
+  remainder of the liver is edible". NMDGF organ meats: "if the heart or liver appear to be off colored, with cysts, or in otherwise poor
+  condition", thrown out with the gut pile (D200).
+- Cornell Wildlife Health Lab tips: "If you remove the head or antlers, be sure to use a disinfected or disposable saw blade." "Do not
+  cut into meat with the same blade you used to cut bone!"
+- Penn State venison: "If the organs smell offensive or exhibit greenish discharge, black blood, or blood clots in the muscle," "do not
+  consume meat from this carcass."
+
+Changes: listed per finding in /home/claude/sdd/task-2-a2-report.md, "Fix round". Conversions (app's own): 6 cm = about 2 1/2 in.

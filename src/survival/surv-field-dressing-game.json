@@ -67,7 +67,7 @@
             "Cut around the anus, pull it out a few inches, and tie it off with string, with the bladder, so droppings and urine stay off the meat.",
             "Cut the diaphragm away from the ribs all the way round, taking care not to puncture the stomach. Reach up into the chest and cut the windpipe and gullet as far forward as you can. Watch for sharp broken ribs.",
             "Roll the animal onto its side and pull the organs out. Trim away and throw out any meat soiled by gut contents, droppings or urine. Keep the heart and liver in a clean bag if they look healthy: a healthy liver is smooth, wet and deep red or purple.",
-            "Smell and look at the organs as they come out. If they smell bad, or show a greenish discharge or black blood, don’t eat any meat from this animal (Penn State Extension). The other signs are under “Signs an animal is not safe to eat” below.",
+            "Smell and look at the organs as they come out. If they smell bad, or show a greenish discharge, black blood or blood clots in the muscle, don’t eat any meat from this animal (Penn State Extension). The other signs are under “Signs an animal is not safe to eat” below.",
             "Wipe out blood and loose material inside the body with a clean cloth (Montana State University Extension). Use little water, and don’t wipe it out with grass or snow (North Dakota State University Extension).",
             "Put the guts in a bag for the trash (Cornell Wildlife Health Lab), and don’t feed them to pets or leave them for other animals (NYS Wildlife Health Program).",
             "Cool the carcass fast: prop the cavity open with clean sticks and hang it in the shade. Get the meat down to 40°F or colder within 24 hours. Skin it if nights will stay above freezing."
@@ -153,10 +153,10 @@
             "Chronic wasting disease (deer): poor body condition or thinness, staggering or very poor posture, drooling, tremors, an odd way of holding the head (NYS Department of Health, North Dakota State University Extension). Don’t take or eat the animal.",
             "Rabies (any mammal, especially raccoons, bats, skunks and foxes, occasionally deer): an animal that seems to have lost its fear of people, drools a lot, seems to have hurt hind legs, or lies on the ground struggling (NYS Department of Health). Don’t handle it and never eat it.",
             "Bird flu (ducks, geese and other birds): diarrhea, discharge from the nose, coughing and sneezing, or poor coordination; many birds show no sign before they die (NYS Wildlife Health Program). Don’t handle sick birds.",
-            "Organs that smell bad, or show a greenish discharge or black blood: don’t eat any meat from that animal (Penn State Extension). Cornell Cooperative Extension adds clots or discoloration in the heart or liver.",
+            "Organs that smell bad, or show a greenish discharge, black blood or blood clots in the muscle: don’t eat any meat from that animal (Penn State Extension). Cornell Cooperative Extension adds clots or discoloration in the heart or liver.",
             "A rabbit liver with many white spots the size of a pinhead (tularemia): throw the whole rabbit away and don’t eat it (Missouri Department of Conservation, Oregon Department of Fish and Wildlife).",
             "A deer liver with black lines through it, sometimes with pockets of dark brown fluid (liver flukes): throw the liver away (Michigan DNR).",
-            "A deer liver with clear or bloody cysts, each with a white dot: trim off those parts; the rest of the liver is edible (Michigan DNR).",
+            "A heart or liver that is off-coloured, has cysts or is in poor condition: throw it away (New Mexico Department of Game and Fish). Michigan DNR says a deer liver with tapeworm cysts (clear or bloody fluid with a white dot) can be trimmed and the rest eaten; this app goes by the more cautious rule and throws the liver away.",
             "Gray, white or black wart-like growths on the skin (fibromas) stay in the skin: the meat is edible (Michigan DNR).",
             "Small walled-off pockets of green paste in the meat (abscesses) can be cut out (Michigan DNR)."
           ]
@@ -183,6 +183,9 @@
         },
         {
           "warn": "Bear and wild boar can carry trichinella worms. Cook them to 165°F. Freezing, smoking or curing does not reliably kill the worms in wild game."
+        },
+        {
+          "p": "For bear, University of Alaska Fairbanks Extension says to cook the meat until it is well done, to an internal temperature of 185°F (85°C): freezing and heating may not be enough to kill parasites in bear meat."
         },
         {
           "p": "Lead bullets break into fragments. Trim well away from the wound channel and throw out bruised or discoloured meat. Children and anyone who could become pregnant should not eat game shot with lead."
@@ -265,7 +268,7 @@
     },
     {
       "name": "Penn State Extension, Proper Care and Handling of Venison from Field to Table (updated November 2020)",
-      "used": "Avoid cutting the paunch and intestines (foodborne bacteria); dress as soon as possible; gloves; clean the knife often; prop open; shade and air; organs that smell offensive or show greenish discharge or black blood, don't eat the meat; cool to 35 to 40°F; ice or snow sealed in plastic bags in the cavity; not in the trunk while warm; field kit list"
+      "used": "Avoid cutting the paunch and intestines (foodborne bacteria); dress as soon as possible; gloves; clean the knife often; prop open; shade and air; organs that smell offensive or show greenish discharge, black blood or blood clots in the muscle, don't eat the meat; cool to 35 to 40°F; ice or snow sealed in plastic bags in the cavity; not in the trunk while warm; field kit list"
     },
     {
       "name": "Penn State Extension, Proper Care and Handling of Game Birds from Field to Table (updated November 2020)",
@@ -285,7 +288,7 @@
     },
     {
       "name": "Michigan DNR, Common Deer Afflictions",
-      "used": "Liver flukes make the liver inedible; liver cysts with a white dot trimmed, rest edible; fibromas, meat edible; small abscesses removed"
+      "used": "Liver flukes make the liver inedible; liver tapeworm cysts trimmed, rest edible (shown, the more cautious rule used); fibromas, meat edible; small abscesses removed"
     },
     {
       "name": "CDC, Preventing Tularemia",
@@ -318,8 +321,15 @@
     {
       "name": "Utah State University Extension, How to Preserve Venison",
       "used": "Refrigerate the carcass, usually within 3 to 4 hours, if the air is above 45°F"
+    },
+    {
+      "name": "New Mexico Department of Game and Fish, Don't Overlook Those Organ Meats (John Martsh; no date shown)",
+      "used": "Throw out a heart or liver that is off colored, with cysts, or in otherwise poor condition"
+    },
+    {
+      "name": "University of Alaska Fairbanks Cooperative Extension Service, Making Jerky (FNH-00262, reviewed October 2021)",
+      "used": "Cook bear meat until well done, internal temperature 185°F; freezing and heating may not kill parasites in bear meat"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

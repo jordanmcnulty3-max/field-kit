@@ -1197,3 +1197,24 @@ Food from the land pack (v7.7), batch A2 (field dressing, butchering, keeping ga
    to remove the head without cutting the spine. Today: the step is given, with a knife or saw kept for this job, the brain and spinal
    cord kept off the meat and hands washed if touched (NYS DOH). Cost if wrong: some contact with spinal tissue that a source advises
    against. Say if the group would rather leave the head on and bone the meat off the hanging carcass.
+
+Batch A2 fix round (numbers 200 to 203; 160 to 169 were used up).
+
+200. **A deer liver with cysts (surv-field-dressing-game, surv-land-butchering).** New Mexico Department of Game and Fish: a heart or
+   liver "off colored, with cysts, or in otherwise poor condition" goes out with the gut pile. Michigan DNR: tapeworm cysts ("clear to
+   hemorrhagic fluid and a large white dot") "can be trimmed and the remainder of the liver is edible". Today: Field dressing game (the
+   owner of disease signs) throws the liver away and names Michigan's reading; Butchering links to it. Cost if wrong: an edible liver
+   thrown away.
+201. **Bear: 185°F against the 165°F rule (surv-field-dressing-game, surv-land-keeping-meat).** University of Alaska Fairbanks Extension
+   (Making Jerky, FNH-00262): "Cook bear meat until it is well done. The internal temperature should be 185°F", and freezing and heating
+   "may not be sufficient to kill parasites in bear meat". The checked rule (CDC MMWR 2024, NYS DOH) is 165°F for all wild game,
+   bear included. Today: the 165°F sentences are word for word; a separate sentence beside them gives UAF's 185°F for bear, sourced.
+   Medical professional / Jordan: say which figure the app should give for bear.
+202. **Corning temperature (surv-land-keeping-meat).** NDSU FN155: "Higher temperatures need not affect the end result of the corning
+   process at all, if, for every 15 F of temperature above 38 F, you add one-third more salt." NCHFP review 6.2.4: "Curing should be
+   carried out at a temperature between 35°F and 40°F", the upper limit "to limit microbial growth". Today: cure only at 35 to 40°F;
+   NDSU's warm-weather salt is named and not given; corned meat is kept refrigerated at 38°F (NDSU) and the page says no source gives a
+   keeping time without that cold. Cost if wrong: corning is not possible in warm weather.
+203. **Fridge time for game birds (surv-land-keeping-meat).** Clemson Cooperative Extension: game birds used within three days.
+   FoodSafety.gov: raw chicken or turkey 1 to 2 days (Minnesota DOH: duck, goose 1 to 2 days). Today: 1 to 2 days, Clemson's 3 named.
+   Cost if wrong: birds used a day sooner than needed.

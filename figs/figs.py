@@ -1031,24 +1031,23 @@ _SIDE = 'M-10 262 C60 262 140 272 214 296'
 def _wide(d, cls, w, st=''):
     return f'<path d="{d}" class="{cls}" style="stroke-width:{w}{st}"/>'
 def _fish(x, y, r=0):
-    return (f'<g transform="translate({x} {y}) rotate({r})" data-part="fish">'
+    return (f'<g transform="translate({x} {y}) rotate({r}) scale(1.3)" data-part="fish">'
             '<path d="M0 -8 C-4 -4 -4 4 0 7 C4 4 4 -4 0 -8 Z M0 7 L-4 13 L4 13 Z" class="k kf"/></g>')
 svg('land-fishing', 340, 'River seen from above, flowing down the page, with fish where they gather: the hole below a dam or waterfall; the outside of a bend where the fast water carries food; the quiet pocket behind a rock; the seam where two currents meet, where a stream joins the river', f'''
-<rect x="0" y="0" width="340" height="340" class="gr"/>
 {_wide(_RIVER,'k',66)}{_wide(_SIDE,'k',26)}
 {_wide(_RIVER,'k',60,';stroke:var(--surface)')}{_wide(_SIDE,'k',20,';stroke:var(--surface)')}
-<g style="opacity:.16">{_wide(_RIVER,'a',60)}{_wide(_SIDE,'a',20)}</g>
-<ellipse cx="118" cy="62" rx="24" ry="13" class="af" data-part="hole"/>
+<g style="opacity:.22">{_wide(_RIVER,'a',60)}{_wide(_SIDE,'a',20)}</g>
+<ellipse cx="118" cy="64" rx="22" ry="17" class="af a t1 d" data-part="hole"/>
 <line x1="82" y1="30" x2="154" y2="30" class="k t5" data-part="dam"/>
 <path d="M96 35 v7 M108 35 v7 M120 35 v7 M132 35 v7 M144 35 v7" class="a t1"/>
-{arrow(118,86,118,112,'a','aA')}{arrow(40,267,74,268,'a','aA')}
-<path d="M170 150 C206 160 232 178 240 202" class="a" marker-end="url(#aA)"/>
+{arrow(118,92,118,116,'a','aA')}{arrow(40,267,74,268,'a','aA')}
+<path d="M164 152 C196 162 220 178 228 202" class="a" marker-end="url(#aA)"/>
 <circle cx="236" cy="240" r="8" class="k rock" data-part="rock"/>
 <path d="M224 222 C222 236 222 250 226 262 M248 222 C250 236 250 250 246 262" class="a t1"/>
 <path d="M204 296 C212 310 218 326 222 346" class="k t1 d" data-part="seam"/>
-{_fish(118,62,90)}{_fish(244,176,-30)}{_fish(236,262,0)}{_fish(226,322,0)}
+{_fish(118,60,0)}{_fish(233,171,-43)}{_fish(236,266,0)}{_fish(228,312,0)}
 {lbl(336,18,'Rivers and streams','tb','end')}
-{lbl(170,56,'The hole below a dam','')}{lbl(170,70,'or waterfall','')}{lead(168,60,134,62)}
-{lbl(336,118,'The outside of a bend','','end')}{lbl(336,132,'where the fast water','','end')}{lbl(336,146,'carries food','','end')}{lead(300,152,252,172)}
-{lbl(60,206,'The quiet pocket','')}{lbl(60,220,'behind a rock','')}{lead(150,214,228,262)}
-{lbl(40,320,'The seam where','')}{lbl(40,334,'two currents meet','')}{lead(146,326,214,322)}''')
+{lbl(170,56,'The hole below a dam','')}{lbl(170,70,'or waterfall','')}{lead(168,60,142,62)}
+{lbl(336,118,'The outside of a bend','','end')}{lbl(336,132,'where the fast water','','end')}{lbl(336,146,'carries food','','end')}{lead(300,152,242,166)}
+{lbl(84,218,'The quiet pocket','')}{lbl(84,232,'behind a rock','')}{lead(170,236,229,270)}
+{lbl(40,320,'The seam where','')}{lbl(40,334,'two currents meet','')}{lead(146,326,214,316)}''')

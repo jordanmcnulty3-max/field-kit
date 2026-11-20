@@ -937,4 +937,16 @@ def test_moved_topics_keep_their_index_position(page, app_url, text):
     # keys in the same order as the v7.6 build did (recorded in tests/fixtures/search_land_older_order.json before the move)
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
-    assert [r['key'] for r in q(page, text)] == LAND_OLDER_ORDER[text]
+    # the pack's new pages (ids surv-land-*, checklist land-kit) are not in the v7.6 build; leaving them out, every other key keeps its v7.6 order
+    new = lambda k: k.startswith('s:surv-land-') or k == 'c:land-kit'
+    got = [r['key'] for r in q(page, text)]
+    older, want = [k for k in got if not new(k)], LAND_OLDER_ORDER[text]
+    if text != 'fishing':
+        # batch C rewrote Fishing for food (no trap, dressing or plant text left) and renamed the "Traps and fishing" link label on
+        # these two food pages, so whether they match these words changed with their text; every other older page keeps its order.
+        # "fishing" still matches all three and is compared whole.
+        changed = {'s:surv-traps-and-fishing', 's:surv-food-power-out', 's:surv-food-when-short'}
+        older, want = [k for k in older if k not in changed], [k for k in want if k not in changed]
+    if len(got) == 30:   # the list is capped at 30, so new pages can push older ones off its end
+        want = want[:len(older)]
+    assert older == want

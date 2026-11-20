@@ -6529,3 +6529,232 @@ least 2 minutes."; do not rinse; air-dry; no strength given.
 - M5, brambles: "Preparation: wash them; nothing else." (the page's own wash line, MSU-DAN, UVM-DAN).
 - M6, iris warn: "resin from its roots and leaves can irritate and blister the skin, so wear gloves to handle it" (CCE-YFI).
 - M7, M9: no change (docs/v7.7-rulings.md, Batch A1 fix round). M8: rulings completed.
+
+## Land pack batch C (2026-11-19): Fishing for food, Gutting, filleting and eating fish, Trapping
+
+Writer: batch C. All pages fetched 2026-11-19 with the built-in fetch after a built-in search returned them; title and agency checked on
+each. The fetch tool returns a model's reading of the page, with short quotes; the reviewer should re-open each page.
+
+Source keys and URLs:
+- DEC-TM: NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping, student manual, 4th ed. (printed 2016),
+  https://extapps.dec.ny.gov/docs/wildlife_pdf/trapedman.pdf (read in two halves).
+- IAFWA: International Association of Fish and Wildlife Agencies, Trapper Education Manual (2005), https://www.ncwildlife.gov/media/1932/download
+  (search returned ncwildlife.org/media/1932/download, which redirects there).
+- NDGF: North Dakota Game and Fish Department, Body-Grip Traps: Identification, Use and Removing a Dog, https://gf.nd.gov/hunting/trapping-and-dogs/body-grip
+- ATP: US Army ATP 3-50.21, Survival (September 2018), https://irp.fas.org/doddir/army/atp3-50-21.pdf (chapter 4 at characters 200,000 to 300,000).
+- FM: US Army FM 21-76, Survival Manual (2006 copy), https://www.sjsu.edu/people/michelle.hager/docs/fm_21-76_us_army_survival_manual_2006.pdf
+- DEC-BG: NYS DEC, Beginners' Guide to Freshwater Fishing (I FISH NY; Take Me Fishing/RBFF credit), https://extapps.dec.ny.gov/docs/fish_marine_pdf/gsfishing.pdf
+- DEC-ICE: NYS DEC, Learn How To Ice Fish, https://www.dec.ny.gov/things-to-do/freshwater-fishing/learn-to-fish/tips-skills/how-to-ice-fish
+- DEC-PR: NYS DEC press release, December 18, 2024, https://dec.ny.gov/news/press-releases/2024/12/dec-encourages-anglers-to-safely-enjoy-ice-fishing-this-season
+- DEC-LP / DEC-RS / DEC-PAN / DEC-WAL: NYS DEC Where To Fish: Lakes And Ponds; Where To Fish: Rivers And Streams; Fishing For Panfish;
+  Fishing For Walleye: https://dec.ny.gov/things-to-do/freshwater-fishing/learn-to-fish/tips-skills/where-to-fish-lakes-ponds ,
+  .../where-to-fish-rivers-streams , .../panfish , .../fishing-for-walleye (found from .../tips-skills, also opened).
+- MDC: Missouri Department of Conservation, Catfishing Without Pole and Line, https://mdc.mo.gov/fishing/species/catfish/catfishing-without-pole-line
+- MN-DNR: Minnesota DNR, What if you fall in?, https://dnr.state.mn.us/safety/ice/survival.html
+- MAINE: Maine Department of Inland Fisheries and Wildlife (maine.gov/ifw; the page does not name the agency in its text), How to Bring
+  Home a Quality Catch, https://www.maine.gov/ifw/fishing-boating/fishing/maine-fishing-guide/quality-catch.html
+- NYSG: New York Sea Grant (Ken Gall), Handling Your Catch, https://seagrant.sunysb.edu/nysportfishing/HandlingYourCatch.pdf (undated)
+- FDA: Selecting and Serving Fresh and Frozen Seafood Safely (content current as of 03/05/2024), https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-fresh-and-frozen-seafood-safely
+- DOH-SW: NYS DOH Statewide Fish Advice (Revised: March 2025; issued 2024), https://healthweb-back.health.ny.gov/environmental/outdoors/fish/health_advisories/regional/statewide.htm
+- DOH-IDX: NYS DOH Health Advice on Eating Fish You Catch (Revised: March 2026), https://healthweb-back.health.ny.gov/environmental/outdoors/fish/health_advisories/index.htm
+- DOH-PR: NYS DOH press release April 1, 2026, https://healthweb-back.health.ny.gov/press/releases/2026/2026-04-01_advice_for_eating_fish.htm
+- DOH-TIPS: NYS DOH Tips for Healthier Eating (Revised: January 2023), https://healthweb-back.health.ny.gov/environmental/outdoors/fish/health_advisories/tips.htm
+- RULES: the batch D draft of New York rules for hunting, fishing and trapping (/home/claude/wt-d, read-only) and task-5-report.md; not
+  re-opened at DEC by this batch.
+- Opened, not cited: DEC Fishing Tips And Skills index; DEC Best Management Practices For Trapping
+  (https://dec.ny.gov/things-to-do/trapping/best-management-practices: no species detail on the page); sspaeth.gitlab.io Survival
+  Manual (FM 3-05.70 web edition; the trapping chapter was not in it).
+- Failed: DEC raccoon BMP sheet https://extapps.dec.ny.gov/docs/wildlife_pdf/trapbmpsraccoon.pdf ("permission request ... not answered
+  in time"); nothing from it is used.
+
+### Fishing for food (surv-traps-and-fishing, rewritten, id kept)
+
+- "a good source of protein and fat, are often more plentiful than game, and can be caught quietly": ATP 4-146 ("more abundant than game
+  animals"). "Panfish ... excellent to eat": DEC-PAN ("Panfish can be caught easily by beginners and are excellent to eat").
+- Warn, three methods illegal in normal times: RULES ("Set lines left without the angler in immediate attendance are prohibited";
+  "Minnow traps only for baitfish"; "No other use of nets to collect fish is allowed"). Wording does not go beyond RULES.
+- Lakes and ponds list: DEC-LP ("Look for weed beds that lead to deeper water"; fish "cruise along the edge looking for food"; "a point
+  with a quick drop-off ... isn't a good fishing place"; structure lily pads, weed edges, downed trees, docks, overhanging trees;
+  "Structure provides shelter, shade, and cover"). Inlets: DEC-LP ("they carry food into the lake"; "gather together near inlets before
+  moving upstream to spawn"); "usually spring or fall": DEC-BG ch. 2 p. 25.
+- Rivers: DEC-RS (undercut banks, "The largest fish in a river often live in undercut banks!"; quiet "pocket" behind rocks; eddies;
+  seam; drop-off; outside of bends; hole below dams and falls). ATP 4-147 (eddies near rocks, deep pools, overhanging brush, submerged
+  logs); FM p. 76 the same.
+- Depth: DEC-BG ch. 2 p. 21 ("Fish are not always near the bottom or the surface"); cold water, slow retrieve: DEC-BG ch. 1 p. 3.
+- Seasons (DEC-PAN, DEC-WAL, DEC-BG): crappie "provided you do it in the spring before crappies spawn" (page reads "fish for crappie
+  before they spawn"); walleye "early part of walleye season ... searching around spawning areas" (the season's opening date is a rule,
+  left to RULES); bullheads "Spring and summer are prime seasons"; crappie "During the heat of summer ... suspend over deeper water";
+  black crappie "seek deeper, cooler water during the summer" (DEC-BG ch. 1 p. 10); walleye "During the heat of summer ... deep area";
+  fall "Schools of gizzard shad come close to shore from late-September through November, and walleye follow them in", walleye moving
+  back toward shore as water cools. Time of day: sunfish "bite better in the morning and evening"; crappie "at dawn, dusk, or even during
+  the night"; walleye "under low light periods, such as just before and after sunset"; bullheads "evening or at night".
+- Weather: ATP 4-146 and FM p. 76 (feed heavily before a storm, not after when water is muddy and swollen; light attracts fish at night).
+  Page words "eat heavily" and "muddy and high" (search rewording; same meaning).
+- Rod and reel: DEC-PAN (rods ultra-light to medium/light; spinning or spin casting reels; hooks 6 to 10; 6-8 lb test; smallest bobber;
+  split shot; sunfish baits crickets, grasshoppers, earthworms, grubs, waxworms; perch "small minnows and worms fished on a #6 hook",
+  near the bottom, deeper if only small ones; bullheads "doughballs, nightcrawlers or chicken livers on a #4 or #6 hook fished on the
+  bottom"; crappie "in 3' - 6' of water" with small jigs or minnows under a small bobber). Metric added: 3 to 6 ft = 0.9 to 1.8 m, shown
+  "1 to 2 m".
+- Set lines: warn from RULES. Stakeout: ATP 4-154 (two supple saplings, tops just below the surface, cord just under the water, short
+  baited lines, must not wrap round poles or each other or slide), FM p. 90. Trotline, bank and limb lines, hooks, bait, 24 hours: MDC
+  ("They can be tied between two trees"; tree or large rock with the far end weighted; "Braided nylon line works best"; "Dropper lines
+  are required to be spaced no less than two feet apart"; heavy barrel swivel; 2-liter bottle float; bank lines to overhanging trees,
+  brush piles, poles in the mud; bungee cords or inner tube; circle hooks "6/O up to 10/O"; live bait sunfish, bullheads, crayfish;
+  cut bait; worms or chicken livers on small waters; "gear must be attended at least once every 24 hours"). MDC's main-line and dropper
+  test strengths, jug lines and channel advice for blue catfish not carried.
+- Gorge: ATP 4-153 (short shaft, sharp at both ends, notched in the middle, baited lengthwise, do not jerk, let the fish swallow so it
+  lodges far down the throat), wood or bone from ATP 4-151; FM p. 90.
+- Catfish spines and barbels: ATP 4-147.
+- Fish traps and nets warn: RULES. Basket trap: ATP 4-158, FM p. 92. Gill net: ATP 4-155 to 4-157 (parachute suspension line, mesh
+  about 1 inch square, angling reduces debris, check frequently); steps not given. Minnows on tip-ups: DEC-ICE (minnows used with tip-ups).
+- Ice warn: DEC-BG ch. 9 p. 80 ("A minimum of 4 inches of solid (clear) ice or 8 inches of white or 'snow ice'"); DEC-ICE table ("2
+  inches or less: Stay Off"; "Slush ice is about 50 percent weaker"; "Clear ice over running water is about 20 percent weaker"; "Double
+  the recommendations for white ice"); DEC-TM p. 16 ("Six inches or more of strong ice is required for multiple people or snowmobiles";
+  IAFWA pp. 87-88 the same). Conflict: DEC-ICE "three to four inches" and IAFWA "three inches ... but four inches is better"; the more
+  cautious 4 inches used (D185). DEC-ICE's "Many ice anglers do not like to fish on less than five inches of ice" not carried.
+- Check before shore, test holes every 150 feet: DEC-PR ("Before leaving shore ... check the thickness"; auger or spud bar "at various
+  spots"; thickness varies within one waterbody), DEC-BG p. 80 ("drill regular test holes as you go, at least every 150 feet"). Danger
+  areas: DEC-ICE ("near shore, over moving bodies of water, and where streams enter and exit lakes and ponds"; bubblers thin ice some
+  distance away), DEC-PR (moving water, docks with bubblers), DEC-BG ("Avoid ice near moving/open water or around docks"); IAFWA
+  ("Avoid traveling on ice-covered streams and rivers"). Picks, buddy, tell someone: DEC-ICE, DEC-BG p. 80.
+- Self-rescue steps, in MN-DNR's order (six steps, quoted list); fire: IAFWA ("build a fire immediately unless you are close to shelter
+  or a vehicle"). Links: p:hypothermia, p:drowning (treatment not restated).
+- Gear: DEC-ICE (spud bars up to about a foot; tip-up "a spool on a stick", red flag; jigging rod or hand line, small spoon; minnows
+  through the lips or under the dorsal fin; spikes, mousies); DEC-BG pp. 76-77 (lanyard on the spud; skimmer; most anglers set several
+  tip-ups; "raising the rod tip up and down a few inches"; "Fish usually take the bait during the pause").
+- Under the ice: DEC-BG pp. 78-79 (bluegills 15 feet or less; perch under 10 feet to 40 feet; crappie weed edges or suspended; pike and
+  pickerel 5-15 feet; trout just under the ice to just off the bottom; walleye points, flats, shoals, within a foot of bottom); DEC-ICE
+  (large shallower ponds and lakes; deepwater lakes fished selectively).
+- Keeping: DEC-BG ch. 3 p. 32 (stringer "through the lower jaw not the gills"; mesh basket for sunfish and perch in cool water; ice as
+  soon as possible); MAINE (stringer when water is "about 40°F or less"; "be sure your catch is not still alive"; water may feel cold but
+  not be cold enough; "dispatched quickly with a blow to the head"); NYSG ("Get the fish on ice as soon as it is caught").
+- Removed from the old page: every trap and snare line and its three figures (to Trapping, or removed: see rulings); the old New York
+  warn (rules now owned by the rules page; only the three prohibitions are stated); "Cleaning and cooking fish and game is in Field
+  dressing game" (fish cleaning now has its own page). The old ATP and FM figures re-checked here; the 2023-2024 guide source dropped.
+- Looked for, not found: where fish are in winter other than under the ice; any Central New York-specific water by name (none named, by
+  design); set-line or trap guidance from a New York source (New York prohibits them).
+
+### Gutting, filleting and eating fish (surv-land-fish-cleaning, new)
+
+- Kill quickly: NYSG ("Kill the fish quickly to prevent it from being bruised"); blow to the head and soft flesh after a stressful death:
+  MAINE. Bleeding: MAINE ("bleeding can improve the taste of some species"; cut the gill arches with a knife or scissors), NYSG ("Bleed
+  the fish to improve the quality of the meat"). Ice at once: NYSG, DEC-BG p. 32. Slurry: NYSG ("8 parts ice to one part sea or fresh
+  water"; potable water for the ice; add ice as it melts).
+- Field dressing steps 1 to 4, in DEC-BG ch. 3's order (its five steps; "Keep the knife blade shallow to avoid cutting the stomach or
+  intestines"; "cut the bridge that attaches the gills"; kidney "by scraping it with the knife blade or your thumbnail"; "pack the fish
+  in a cooler with ice"); steps 2 and 3 of the guide joined. Large fish early, small fish same day: NYSG. Spilled gut contents: MAINE.
+  Scale or skin: ATP 4-166. Cut away from yourself: DEC-BG p. 32.
+- Fillet steps 1 to 6: DEC-BG ch. 3 (seven steps; the page joins steps 6 and 7). Pan dressing steps 1 to 6: DEC-BG ch. 3 (eight steps;
+  "1/4- to 1/2-inch-deep" shown 6 to 12 mm; the page joins 6 and 7 and leaves out "Ready for cooking!").
+- Boil, roast, bake, fry: ATP 4-167.
+- Keeping: DEC-BG p. 34 ("Cleaned fish can be kept in the refrigerator for up to two days"); FDA ("If seafood will be used within 2
+  days after purchase, store it in a clean refrigerator at a temperature of 40°F or below." / "Otherwise, wrap it tightly in plastic,
+  foil, or moisture-proof paper and store it in the freezer."; thaw in the refrigerator overnight). Conflict: NYSG "within two or three
+  days"; shorter time used (D184). NYSG's "7 to 14 days" at 32°F is a spoilage time, not a holding time; not carried.
+- No cold: quoted word for word from surv-food-still-good ("never leave perishable food out for more than 2 hours, or 1 hour if it is
+  above 90°F (32°C) (CDC).").
+- Gone-bad warn: ATP 4-164 (do not eat spoiled fish, cooking does not make it safe; sunken eyes, peculiar odor, faded scales, gills not
+  red to pink, flesh keeps a thumb dent, slimy body, sharp or peppery taste); FDA ("If you smell sour, rancid, or fishy odors in raw or
+  cooked seafood, do not eat it"; ammonia). ATP 4-165 "induce vomiting" not carried (contradicts the Poisoning protocol). ATP's
+  "peculiar odor" not listed separately (FDA's smells cover it).
+- 145°F: quoted word for word from Field dressing game (grep: the same sentence in surv-food-cooking-no-power and
+  surv-field-dressing-game, unchanged). FDA ("Most seafood should be cooked to an internal temperature of 145°F"; no thermometer: the
+  fetched text reads "The flesh is clear and separates easily with a fork"; the page carries only "separates easily with a fork").
+  145°F = 62.8°C, shown 63°C. Freshwater fish cooked for parasites: ATP 4-148. Conflict: NYSG "140°F for one minute"; FDA used (D184).
+  Hands 20 seconds, boards: FDA.
+- Advice: DOH-SW (table: Best Choice, Good Choice, Eat less, Avoid; the four rows' fish and sizes; General "Up to 4/month" for the first
+  two rows, "Up to 1/month" for the last two; Sensitive "Up to 4/month", "Up to 1/month", "Up to 1/month", "DON'T EAT"; Sensitive =
+  "people who may become pregnant (under age 50) and children under 15"; applies outside the Adirondack and Catskill regions to waters
+  without specific advice; "issued in 2024"; "Revised: March 2025"). Inches to cm added (20 in 51 cm, 10 in 25 cm, 15 in 38 cm, 26 in
+  66 cm, 19 in 48 cm). The column heads "Most people" and "Sensitive" are the page's words for General and Sensitive Population.
+  DOH-IDX (Adirondack and Catskill regional advice; check your water; chemicals affect childhood development and unborn babies; stay in
+  the body for decades; breastfeeding). DOH-PR (the eight waters with new, more restrictive PFOS advice). DOH-TIPS (smaller fish; "Remove
+  the skin and trim all the fat from the belly flap, the line along the sides"; mercury in the muscle; rack, no drippings; "Cooking or
+  soaking fish cannot eliminate the contaminants"; four meals not in one week; spacing matters most for women and young children).
+- Looked for, not found: a meal size for the statewide advice (DOH-PR gives "one 8-ounce meal" only for Lower Hudson striped bass; not
+  carried); waters with their own advice in Central New York (brochures not opened, D183); any source for keeping fish without cold (D186).
+
+### Trapping (surv-land-trapping, new)
+
+- Do first 1 (self-release): DEC-TM p. 22 ("thread the rope through the ends of the springs"; "Put your foot in the loop and use your
+  free arm to pull the loose end"), IAFWA p. 94 (same words; "This releases the pressure on the springs so you can free yourself").
+- Do first 2 and 3 (dog): NDGF, in its order: "Immediately squeeze both springs" and turn the trap so the jaws are not on the windpipe;
+  "Compress one of the springs using both hands until you're able to fasten the safety lock"; "Secure the safety lock"; the other spring;
+  "Slide the dog's head from between the jaws". Rope: "a 4-foot piece of nylon rope, belt or possibly a leash"; "Thread the rope through
+  the large rings of one spring"; "Bring the rope around and thread it back through the initial ring far enough to provide a good
+  'handle'"; "Put your foot on one end and pull on the free end."; "Do the same to the other spring." "brief amount of time".
+- Do first 4: DEC-TM p. 18 ("If you are bitten by a wild animal wash the bite with soap and water, then seek medical attention"); link
+  p:animal-bite.
+- What trapping gives: ATP 4-86 ("Several well-placed traps have the potential to catch much more game" than a man with a rifle);
+  IAFWA p. 104 ("Many people enjoy eating meat from healthy beaver, muskrats, raccoons, nutria, opossums, and bobcats": nutria and bobcat
+  left out as not food animals worth trapping here); DEC-TM p. 14 ("broiled marsh rabbit" (really muskrat) or beaver stew); check daily,
+  early: DEC-TM. Warn: RULES (licence, seasons, traps and sizes, places, check interval), no figure stated.
+- Kinds of trap: DEC-TM p. 8 (foothold "the primary type"; restricting movement; release; body-gripping "do not always do so"; "SHOULD
+  NOT BE USED IN PLACES OR IN WAYS THAT MAY TAKE UNINTENDED ANIMALS"; box traps "seldom harm their catch"; not effective for fox or
+  coyote), pp. 11-12 ("no larger than a #1 ½ coilspring"), p. 12 (pan "between 1 and 2 pounds"), p. 31 (pans level), p. 25 (cost and
+  size); IAFWA (cage traps near buildings or areas used by pets); DEC-TM ch. 1 ("Cable restraints or traps (also referred to as snares)
+  are illegal to use in New York, even though they may be available for sale").
+- Muskrat: DEC-TM pp. 42-43 (largely aquatic; marshes, swamps, streams, lakes, ponds; night, dawn, dusk; signs incl. burrows "about 4 to
+  8 inches in diameter", feed beds of cut grasses or cattails, huts); sets p. 70 (trail), p. 68 (feed bed: "1 to 2 inches of water in
+  front of the pile", submersion wire over a foot deep), p. 69 (channel, body-gripping), p. 68 (one to two inches over the trap).
+- Beaver: DEC-TM pp. 46-47 (semi-aquatic; nocturnal or crepuscular; "more than 60 pounds"; dens; dams, channels, lodges, cut trees,
+  tracks, mud scent mounds; habitual runways); p. 47 (submersion wires with one-way sliding locks for foothold traps, unless anchored;
+  "At least three feet of water"); p. 72 (scent mound: "3 to 4 inches of water, with a sliding lock submersion wire"); p. 69 (channels).
+- Raccoon: DEC-TM p. 55 (den trees), appendix 1 (pocket, cubby, spring run, cage, dirt-hole), p. 71 (pocket set; "about 6 inches in
+  diameter and 12 inches deep" for mink and muskrat; bait "fish or a honey-based bait and an appropriate lure": the page says fish and a
+  lure, search rewording), p. 77 (box "about 9 x 9 inches", medium body-gripping trap, "at least 4 inches up inside the box"), p. 38
+  (cubby keeps most dogs out), p. 21 ("Most raccoons in New York, especially young of the year, have raccoon roundworm infections"),
+  p. 20 ("The eggs can survive for years").
+- Basics: DEC-TM p. 37 (one furbearer or small group; trails used by people and pets; hunters' dogs), p. 38 ("Never use pet food for
+  bait"; fish near homes with pets; cover bait from above), p. 29 (stake must hold the largest animal; "12 to 18 inches"; cross-staking
+  X), p. 27 (three swivels; chain or cable, not wire), p. 79 (pull the chain; if the stake moves), p. 31 (weak spots "before treating
+  and after each catch"), p. 68 (submersion: "Stake the trap in deep water (12 to 18 inches) or use a sliding wire"), p. 23 (pack basket
+  list; urine and bait jar contents not detailed), p. 24 (trowel), p. 28 (hatchet edge covered).
+- Checking: RULES for law, no interval stated. Practice: DEC-TM ch. 5 ("Check traps daily and as early in the day as possible to
+  minimize the time an animal spends in the trap"), p. 82 (approach close enough to see the trap), p. 83 (move a set a dog, cat or
+  human visited); IAFWA p. 97 (live-restraining traps "at first light each morning").
+- Killing: DEC-TM ch. 4 ("killed by the trapper as quickly and humanely as possible"), p. 84 (".22 rim‐fire cartridge aimed to pass
+  through the front of the brain"; opossum "at the base of the ear"; "struck two times"; touch the "eye or mouth"), pp. 22-23
+  (unloaded until needed, ricochets, everyone behind the shooter), p. 22 (kill without damaging the head for rabies testing); IAFWA p. 98
+  ("shoot it in the head with a .22 rifle"; "Aim between the eyes and up a little"; heart shot if a bite or rabies; "Strike smaller
+  furbearers such as raccoon, opossum, and fox hard at the base of the skull with a heavy wooden or metal tool").
+- Releasing: IAFWA p. 99 (personal safety top priority; pets may bite; blanket or coat over a bird of prey while depressing the
+  springs; release a dog or cat and notify the owner); DEC-TM p. 83 (catchpole snug, "be careful not to choke the animal"; fabric held
+  down along the trapped limb; easier with a partner), ch. 5 (domestic animals "immediately release it and if at all possible inform its
+  owner"). Closed-season catches: RULES only.
+- Staying safe: DEC-TM p. 22 and IAFWA p. 94 (tongs and rope; IAFWA "where one hand can reach"), DEC-TM p. 29 (safety gripper), p. 32
+  (do not wax body-gripping traps), p. 16 (inflatable personal flotation device; six inches; face the direction you came from), IAFWA
+  pp. 87-88 (picks; fire), DEC-TM p. 15 (shivering; wool).
+- Disease: DEC-TM ch. 5 ("Avoid sick animals or ones that do not act normal"), p. 18 (rabies in all warm-blooded mammals; "Left
+  untreated, rabies is always fatal"; bite or scratch; cut while skinning), p. 17 (gloves, eye protection, coveralls; wash hands and
+  arms), p. 44 and p. 48 (tularemia; rubber or plastic gloves; muskrats found dead or dying; beaver same precautions), p. 21 ("Freezing
+  game meat, even for long periods, may not kill all worms"). 165°F: Field dressing game (linked); the manual's "until the juices run
+  clear" not carried (D188). The manual's 1 to 9 bleach mix not carried (D187); link to Clean and disinfect. Disease signs are left to
+  Field dressing game (owner), not restated.
+- Snares and deadfalls warn: RULES ("State law forbids setting a snare or any noose that can take an animal"; deadfalls: "the guide
+  neither allows nor forbids them by name"; this page says the current guide "does not address deadfalls" and to ask DEC, in normal
+  times). Trapper manuals do not teach them (DEC-TM mentions deadfalls only as history; IAFWA ch. 1 says deadfalls are prohibited, in a
+  general sense, and ch. 2 as history).
+- Placement and scent: ATP 4-89, 4-91, 4-93; FM p. 80 ("funnel-shaped barrier extending from the sides of the trail toward the trap",
+  "inconspicuous"; snares near bedding, water and feeding areas; mud from rotting vegetation; gall and urine bladder fluids of earlier
+  kills; not human urine). Simple snare: ATP 4-102, FM p. 81 (over a trail or den hole, "attached to a firmly planted stake", large
+  enough to pass over the head, tightens as the animal struggles, wire best because cordage loosens, "use small twigs or blades of grass
+  to hold it up"). Squirrel pole: FM p. 83 (long pole against a tree where squirrels are active, several wire nooses, more poles), ATP
+  4-102 ("nooses (2 to 2 1/4 inches in diameter) about 1 inch off the pole"; top and bottom "18 inches from the top and bottom"; FM 45 cm).
+  Deadfall: ATP 4-103, FM p. 85 ("drop a weight onto a prey and crush it"; "heavy enough to kill or incapacitate the prey immediately";
+  "three notched sticks"; "close tolerances and precise angles"; practise beforehand). The hands caution is the app's own (D180).
+- Figure: trap-squirrel's drawn text "Small snares along a pole leaned on a tree squirrels use" is word for word in the squirrel pole
+  line. trap-snare and trap-fig4 removed (rulings, batch C call 11).
+- Looked for, not found: a New York or AFWA page on freeing a dog (North Dakota used); dog release from foothold traps; raccoon natural
+  history size and activity (the manual's raccoon chapter was not in either half read); rabbit trapping.
+
+### Agreement with checked content (batch C)
+
+- Field dressing game's sentence "Cook all wild game and birds to at least 165°F in the thickest part, and fish to 145°F." is carried
+  word for word; Cook without power still quotes it; Field dressing game was not edited (batch A2 is rewriting it; its fish item and the
+  dress-fish figure should move out at merge, see the batch C report).
+- Is it still good?: quoted word for word, not restated. Poisoning protocol: no "induce vomiting". Hypothermia, Drowning and Animal bite
+  protocols: linked, not restated.
+- RULES: no rule stated beyond the rules page's own reading; snares prohibited; deadfalls not called legal or illegal; no trap-check
+  interval given.
+- Link labels: "Traps and fishing" became "Fishing for food" on surv-food-when-short and surv-food-power-out (no other text changed).

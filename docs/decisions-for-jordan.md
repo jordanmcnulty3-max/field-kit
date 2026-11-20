@@ -1190,3 +1190,42 @@ docs/v7.7-rulings.md ("Batch A1").
    page, labelled for baby feeding items only and never for drinking water, and the page says the emergency page gives no type or
    strength while the everyday page gives the same amount and says unscented. Your decision on D141 (add the soak) is carried out. Ask
    a medical professional whether to say 5% to 9% for the soak, as for the other mixes (no CDC infant-feeding page gives a strength).
+180. **The figure-4 deadfall caution is the app's own (surv-land-trapping).** "This app's caution: keep your hands and body out from
+   under the weight while you set it." Neither US Army manual opened (ATP 3-50.21, 2018, para 4-103; FM 21-76, 2006 copy, p. 85) gives a
+   safety warning with the deadfall; the old Traps and fishing page carried the sentence. Today: on the page, labelled as the app's own.
+   Say if you want it dropped.
+181. **The fish page's title is "Gutting, filleting and eating fish", not "Cleaning and keeping fish" (surv-land-fish-cleaning).** The
+   plan's title put the page second for the search "keep" (the word "keeping") and pushed the Broken bone (fracture) protocol out of the
+   first five; a pinned search may not lose an Emergency protocol. The word "Cleaning" also put it in the first five for "clean". Today:
+   the new title; id unchanged. Say if you prefer another title (any title with "keep" or "keeping" has the same effect on "keep").
+182. **"food", "running out of food" and "short of food" now list Fishing for food.** The plan's title "Fishing for food" gives the page
+   the whole title word "food". It now leads "food" (before: Water and food after fallout first) and is fifth for "running out of food"
+   (Keep food clean drops out) and third for "short of food" (Toilets without water drops out). No protocol left any list. Today: the
+   three lists were re-recorded (docs/v7.7-rulings.md, batch C). Say if "food" should not lead with a fishing page; the fix would be a
+   title without the word "food".
+183. **Water-by-water fish advice is not in the app (surv-land-fish-cleaning).** The page carries the NYS Department of Health statewide
+   table (issued 2024, page revised March 2025) and names the waters given stricter advice in April 2026, and says to check your water in
+   normal times. The Department's regional brochures (Finger Lakes, Leatherstocking and others) list waters with their own advice; they
+   were not opened, so none is on the page. Offline, a person can't look them up. Say if the waters the group fishes should be added.
+184. **Fish: 2 days cold and 145°F, not New York Sea Grant's figures (surv-land-fish-cleaning).** New York Sea Grant (Handling Your
+   Catch) says freeze fish you can't cook within two or three days, and cook to 140°F for one minute. NYS DEC (2 days in a fridge) and
+   FDA (within 2 days at 40°F or below; 145°F) are more cautious. Today: 2 days and 145°F, with Sea Grant's figures named as set aside.
+185. **Ice thickness: 4 inches of clear ice, 8 of white ice (surv-traps-and-fishing).** DEC's web page says "A minimum of three to four
+   inches of solid ice is the general rule" and its table gives 4 inches for activities on foot; the IAFWA trapper manual says some
+   trappers take three inches as the minimum for one person, "but four inches is better"; DEC's Beginners' Guide says 4 inches of solid
+   clear ice or 8 inches of white ice; the NYS DEC trapper manual says six inches or more for several people. Today: 4 and 8 inches,
+   2 inches or less "stay off", and 6 inches for several people.
+186. **No way to keep fish without cold (surv-land-fish-cleaning).** No source was opened for smoking, salting or drying fish, so the page
+   gives none: fish keeps 2 days cold, or freezes, and otherwise follows the 2-hour rule. Keeping game meat covers game, not fish. Say if
+   fish preserving should be researched.
+187. **The trapper manual's 1 to 9 bleach mix is not on the page (surv-land-trapping).** The NYS DEC trapper manual (2016, p. 17)
+   disinfects knives, skinning boards and equipment "with a bleach solution of 1 part bleach in 9 parts water". Under the pack's bleach
+   rule a special-purpose mix must be named in Clean and disinfect; this one is not, so the page links Clean and disinfect instead.
+   Say if it should be added as a named special-purpose mix.
+188. **Furbearer meat: 165°F, not "until the juices run clear" (surv-land-trapping).** The NYS DEC trapper manual (p. 21): "Cook
+   furbearer meat thoroughly until the juices run clear." The page uses Field dressing game's 165°F rule for all wild game instead and
+   does not give the juices test. Nothing to decide unless you want the manual's words shown too.
+189. **Left out of Trapping for want of a source.** Trapping rabbits or hares (no trapper education source opened covers it; hunting is
+   in Small game and birds); steps to free a dog from a foothold trap (the sources give only general release: catchpole, cover, press the
+   springs, a partner); the AFWA species Best Management Practices sheets (the raccoon sheet could not be opened); the IAFWA manual's
+   cable-device (snare) chapter (legal elsewhere, not in New York; read only in summary, not used). Today: none on the page. Say which you want researched.

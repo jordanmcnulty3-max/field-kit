@@ -35,6 +35,11 @@ REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water', 'surv-f
 PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-safe': {'water-safe'},
                  # land pack (v7.7): Wild plants is rewritten with no drawing of any plant (v7 design 6.5; land plan, Global Constraints)
                  'surv-food-and-wild-plants': set(),
+                 # land pack batch C: Fishing for food is fishing only and carries no figure; trap-snare, trap-fig4 and fishing no longer match
+                 # any text and are on no topic (Task 6 may redraw a fishing figure from the text)
+                 'surv-traps-and-fishing': set(),
+                 # land pack batch C: the squirrel pole moved with its text to Trapping (the only trap figure whose drawn words the text carries)
+                 'surv-land-trapping': {'trap-squirrel'},
                  'surv-water-in-the-house': {'water-heater-drain'}, 'surv-toilet-no-water': {'toilet-buckets'},
                  'surv-latrines': {'latrine'}, 'surv-handwashing': {'handwash-station'},
                  # heat pack Task 7 deepened fire and shelter; heat pack Task 8 restores fire-ferro (push the striker down) and

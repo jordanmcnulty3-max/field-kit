@@ -324,11 +324,11 @@
   "s:surv-make-water-safe"
  ],
  "food": [
+  "s:surv-traps-and-fishing",
   "s:surv-fallout-water-and-food",
   "s:surv-food-power-out",
   "s:surv-food-clean-kitchen",
-  "s:surv-food-how-much",
-  "s:surv-food-poisoning"
+  "s:surv-food-how-much"
  ],
  "food poisoning": [
   "s:surv-food-poisoning",
@@ -624,7 +624,7 @@
   "s:surv-food-power-out",
   "s:surv-unheated-house",
   "s:surv-heat-out",
-  "s:surv-food-clean-kitchen"
+  "s:surv-traps-and-fishing"
  ],
  "salt": [
   "p:dehydration",
@@ -664,9 +664,9 @@
  "short of food": [
   "s:surv-food-when-short",
   "p:asthma",
+  "s:surv-traps-and-fishing",
   "s:surv-unheated-house",
-  "s:surv-food-storage",
-  "s:surv-toilet-no-water"
+  "s:surv-food-storage"
  ],
  "shot": [
   "p:abdominal-wound",

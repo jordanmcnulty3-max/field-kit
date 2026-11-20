@@ -200,11 +200,25 @@
           ]
         },
         {
-          "p": "What you can heat the pot on with the power out is in Cook without power. CDC also has a bleach soak for these items; it is a different strength from both mixes in Clean and disinfect and is not on this page, so boiling is the only way to sanitize here. CDC: when there is no heat source to sanitize bottles, that “can increase the possibility of your baby becoming sick.” With no way to boil, feed from disposable cups (CDC). This app’s own caution: don’t use Clean and disinfect’s mixes on baby feeding items instead."
+          "p": "What you can heat the pot on with the power out is in Cook without power. No way to boil? Use CDC’s bleach soak below, or feed from disposable cups (CDC). The soak is a different strength from both mixes in Clean and disinfect. CDC: when there is no heat source to sanitize bottles, that “can increase the possibility of your baby becoming sick.” This app’s own caution: don’t use Clean and disinfect’s mixes on baby feeding items instead."
         },
         {
           "link": "s:surv-food-cooking-no-power",
           "label": "Cook without power"
+        },
+        {
+          "warn": "CDC’s bleach soak is for baby bottles and feeding items only. Never use it for drinking water."
+        },
+        {
+          "steps": [
+            "Put the washed items in a wash basin and fill it with safe water (CDC).",
+            "Add 1 teaspoon (5 mL) of bleach per 1/2 gallon (1.9 L) or 8 cups of water (CDC).",
+            "Soak for 2 minutes (CDC).",
+            "Take the items out carefully and let them air dry. Don’t rinse them (CDC)."
+          ]
+        },
+        {
+          "p": "Any bleach that remains on feeding items after sanitizing will break down quickly as it dries and will not hurt your baby (CDC). CDC’s page gives no bleach type or strength."
         }
       ]
     },
@@ -411,7 +425,7 @@
     },
     {
       "name": "CDC, How to Clean Infant Feeding Items During Emergencies (January 8, 2025)",
-      "used": "Items to clean after every use; safe water not used for anything else; bottled safest; boil, bleach or filter; chemicals, toxins, radioactive material; disposable supplies; floodwater items; kit used only for feeding items; the cleaning steps; no dish towel; not near diapering; sanitize under 2 months or sick, once a day, boil 5 minutes, don’t rinse (its bleach soak is not given)"
+      "used": "Items to clean after every use; safe water not used for anything else; bottled safest; boil, bleach or filter; chemicals, toxins, radioactive material; disposable supplies; floodwater items; kit used only for feeding items; the cleaning steps; no dish towel; not near diapering; sanitize under 2 months or sick, once a day, boil 5 minutes, don’t rinse; the bleach soak: wash basin of safe water, 1 teaspoon of bleach per 1/2 gallon or 8 cups, soak 2 minutes, don’t rinse, air dry, leftover bleach breaks down as it dries (no bleach type or strength given)"
     },
     {
       "name": "CDC, Breast Milk Storage and Preparation (last updated August 14, 2026)",

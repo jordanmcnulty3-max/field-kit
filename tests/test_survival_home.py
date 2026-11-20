@@ -874,3 +874,45 @@ def test_moved_topics_are_listed_under_all_fifteen_filters(page, app_url):
             page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
             land = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
             assert set(MOVED) <= set(land), f'where={where} when={when}: {land}'
+
+
+def _texts(t):
+    out = list(t.get('doFirst', []))
+    for sec in t['sections']:
+        for b in sec['blocks']:
+            for k in ('p', 'warn'):
+                if k in b:
+                    out.append(b[k])
+            for k in ('list', 'steps'):
+                out.extend(b.get(k, []))
+    return out
+
+
+def test_wild_plants_keeps_the_quoted_sentences_the_mushroom_rule_and_the_poisoning_link_and_draws_no_plant():
+    # spec 10 calls 2, 3 and 9: the sentences Rationing food quotes word for word are frozen; the mushroom warning stays word for word
+    topics = _shipped('survival')
+    t = topics['surv-food-and-wild-plants']
+    assert t['title'] == 'Wild plants' and t['category'] == 'land'
+    texts = _texts(t)
+    for quoted in ('Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early.',
+                   'Only eat a plant you can identify with certainty.'):
+        assert quoted in texts, quoted
+        assert quoted in ' '.join(_texts(topics['surv-food-when-short'])), quoted
+    assert ('Never eat a wild mushroom unless an expert has identified it. Poisonous mushrooms can look like edible ones, there is no field '
+            'test that shows a mushroom is safe, and cooking does not destroy the poisons.') in texts
+    assert 'p:poisoning' in _links(t)
+    assert not any('fig' in b for sec in t['sections'] for b in sec['blocks'])
+
+
+def test_the_cdc_bottle_soak_is_on_the_babies_page_for_that_use_only_and_clean_and_disinfect_names_the_special_mixes():
+    # spec 7 "Bleach" and spec 12: the soak is added as CDC gives it; Clean and disinfect gains one sentence naming the special mixes
+    topics = _shipped('survival')
+    texts = _texts(topics['surv-food-babies-children'])
+    assert 'Add 1 teaspoon (5 mL) of bleach per 1/2 gallon (1.9 L) or 8 cups of water (CDC).' in texts
+    assert 'Soak for 2 minutes (CDC).' in texts
+    assert 'CDC’s bleach soak is for baby bottles and feeding items only. Never use it for drinking water.' in texts
+    assert not any('is not on this page' in x for x in texts)
+    special = [x for x in _texts(topics['surv-clean-and-disinfect']) if x.startswith('Two other bleach mixes')]
+    assert len(special) == 1 and 'Feeding babies and young children' in special[0] and 'Food poisoning and botulism' in special[0]
+    assert 'never for drinking water' in special[0]
+    assert '5 parts clean water' in ' '.join(_texts(topics['surv-food-poisoning']))   # the clean-up mix is where the sentence says

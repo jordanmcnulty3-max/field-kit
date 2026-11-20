@@ -1,84 +1,168 @@
 {
   "id": "surv-food-and-wild-plants",
-  "title": "Food and wild plants",
+  "title": "Wild plants",
   "category": "land",
   "keywords": [
-    "food",
+    "wild plants",
     "plants",
     "edible",
+    "edible plants",
+    "foraging",
     "hemlock",
+    "water hemlock",
     "poisonous",
     "cattail",
-    "mushrooms",
-    "insects"
+    "dandelion",
+    "wild strawberries",
+    "raspberries",
+    "blackberries",
+    "mushrooms"
   ],
-  "summary": "Food is the lowest priority, and you should only eat a plant you can identify with certainty.",
+  "summary": "Only eat a plant you can identify with certainty, and learn each one in person before you rely on it: words cannot teach identification. Four plants the sources support, each with its look-alikes: blackberries and raspberries, wild strawberries, dandelion and cattail. Never eat any wild plant of the carrot family (water hemlock and poison hemlock kill), anything that looks like ramps or wild grapes, or a wild mushroom unless an expert has identified it. Someone ate a plant that might be poisonous: use the Poisoning protocol now.",
+  "doFirst": [
+    "Someone ate a wild plant or mushroom that might be poisonous? Don’t wait for symptoms (Northern New England Poison Center): use the Poisoning protocol, linked below, now.",
+    "Only eat a plant you can identify with certainty.",
+    "Never eat any wild plant of the carrot family, such as Queen Anne’s lace (wild carrot) or wild parsnip: water hemlock and poison hemlock look like them and can kill (Missouri Department of Conservation, Cornell University, Poison Control).",
+    "Never eat a wild mushroom unless an expert has identified it."
+  ],
   "sections": [
     {
-      "h": "Food and wild plants",
+      "h": "Before you eat any wild plant",
       "blocks": [
+        {
+          "link": "p:poisoning",
+          "label": "Poisoning (swallowed, inhaled, skin or eye)"
+        },
         {
           "p": "Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early."
         },
         {
-          "p": "Only eat a plant you can identify with certainty. Water hemlock and poison hemlock are among the most poisonous plants in North America. Both can look like wild carrot (Queen Anne’s lace) or wild parsnip, people have died after eating poison hemlock roots as wild carrots or parsnips, and a small amount of water hemlock can kill."
+          "p": "Only eat a plant you can identify with certainty."
         },
         {
-          "link": "p:poisoning",
-          "label": "Ate a plant or mushroom that might be poisonous"
+          "warn": "This app’s own caution: words on a screen cannot teach you to identify a plant, and there are deliberately no drawings of plants here. Learn each plant on this page in person, from someone who knows it, before you rely on it."
+        },
+        {
+          "list": [
+            "Cooking does not destroy the poisons in a plant (Upstate New York Poison Center).",
+            "Don’t assume a plant is safe because a bird or other animal is eating it (Upstate New York Poison Center).",
+            "Pick only where no chemicals, fertilizers or weed killers have been used, and away from paths, roadsides, animal areas and busy places (Michigan State University Extension), road salt and lawn treatments (University of Vermont Extension).",
+            "Wash everything you pick well before you prepare it (Michigan State University Extension, University of Vermont Extension)."
+          ]
         }
       ]
     },
     {
-      "h": "Warning signs in plants you don’t know",
+      "h": "Blackberries and raspberries",
       "blocks": [
         {
           "list": [
-            "Milky or discoloured sap",
-            "Beans, bulbs or seeds inside pods",
-            "A bitter or soapy taste",
-            "Spines, fine hairs or thorns",
-            "Carrot-, parsnip-, parsley- or dill-like leaves",
-            "An almond smell in the leaves or wood",
-            "Grain heads with pink, purple or black spurs",
-            "Leaves in groups of three"
+            "What: thorny, bush-like plants with arching canes (Illinois Extension). They grow wild on disturbed ground: logged woods, clearings, old fields and fencerows (Penn State Extension).",
+            "Season: red and black raspberries usually ripen in July; blackberries a little later, and the seasons overlap (Penn State Extension).",
+            "Part eaten: the berries.",
+            "Preparation: none. A wild berry that looks like a store-bought raspberry or blackberry is safe to eat (Illinois Extension).",
+            "Look-alikes: none that are poisonous (Illinois Extension). Black raspberries and blackberries are easily confused, and both are eaten: a raspberry comes off hollow in the middle; a blackberry keeps a white, spongy core (Penn State Extension).",
+            "Wear gloves for any work among the canes except picking (Illinois Extension)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Wild strawberries",
+      "blocks": [
+        {
+          "list": [
+            "What: leaves of 3 toothed leaflets on hairy stems; flowers with 5 white petals; a red berry about ½ inch (1.3 cm) across with its seeds on the outside (Missouri Department of Conservation).",
+            "Season: flowers from April to June in the northeastern US (Gleason and Cronquist, Manual of Vascular Plants of Northeastern United States, 1991). Missouri gives the fruit as June to July there (Missouri Department of Conservation); no New York date was found.",
+            "Part eaten: the berries.",
+            "Preparation: eaten fresh (Missouri Department of Conservation).",
+            "Look-alike: Indian or mock strawberry. It has yellow flowers, not white, and the teeth on its leaf edges are rounded, not sharp-pointed; its fruit is tasteless (NC State Extension). No source opened says whether it is safe to eat."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Dandelion",
+      "blocks": [
+        {
+          "list": [
+            "What: leaves 3 to 10 inches (8 to 25 cm) long with widely spaced teeth that point back toward the base; a hollow flower stem; every part gives a white, milky juice when cut (Cornell Cooperative Extension). One flower on each stem, which does not fork; leaves jagged, hairless and light green (Penn State Extension).",
+            "Season: it grows from March to November (Michigan State University Extension). Pick young, tender leaves before the plant flowers (Michigan State University Extension). The yellow flowers come in May and June, sometimes again in autumn (Cornell Cooperative Extension).",
+            "Parts eaten: leaves, flowers and roots. Not the flower stem: its milky sap is bitter (Michigan State University Extension).",
+            "Leaves: young ones in salads (University of Vermont Extension, Michigan State University Extension). Older leaves are bitter (Michigan State University Extension); boil or steam them like spinach (University of Vermont Extension).",
+            "Flowers: pick plump, fully open heads and remove the green base, which is bitter (Michigan State University Extension).",
+            "Roots: wash, chop, dry and roast them as a coffee substitute, or simmer them in water to make a drink (Michigan State University Extension).",
+            "Look-alike: catsear. Its flower stems fork, are solid and carry several flowers; its leaves are dark green, lobed and hairy; it is more common in early summer, dandelion in early spring (Penn State Extension). No source opened says whether catsear is safe for people to eat; Penn State says large amounts may harm horses."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Cattail",
+      "blocks": [
+        {
+          "list": [
+            "What: a plant of marshes (USDA Natural Resources Conservation Service) and pond shores (Mississippi State University Extension) with stout stems, long, broad leaf blades and a dense brown flower spike like a cigar (Mississippi State University Extension).",
+            "Season: young shoots in spring, cut from the rootstock when they are 4 to 16 inches (10 to 40 cm) long (USDA Natural Resources Conservation Service). The sources give no season for the other parts.",
+            "Young shoots: uncooked, they taste like cucumber; steamed, like cabbage (USDA Natural Resources Conservation Service). They can be eaten like asparagus (Mississippi State University Extension).",
+            "Stem base, where the stem meets the rootstock: boil or roast it like potatoes (USDA Natural Resources Conservation Service).",
+            "Young flower spikes, taken out of their sheaths: boil or steam them like corn (USDA Natural Resources Conservation Service, Mississippi State University Extension).",
+            "Pollen: use it as flour (USDA Natural Resources Conservation Service, Mississippi State University Extension).",
+            "Rootstock: uncooked, baked, roasted or broiled; the core can be ground into flour (USDA Natural Resources Conservation Service)."
           ]
         },
         {
-          "warn": "These signs help you avoid many poisonous plants, not all of them. A plant that shows none of them is not safe to eat. Eat only a plant you have positively identified."
+          "warn": "Two poisonous irises grow in the same wet ground. Yellow flag iris: all parts are toxic and eating it upsets the stomach; it is a prohibited invasive plant in New York, in dense colonies on the shores of ponds, lakes and streams and in marshes (Cornell Cooperative Extension). Blue flag iris: native from Nova Scotia south into the northeastern US, at pond margins, in wet meadows and marshes; its roots are poisonous (NC State Extension, Cornell Botanic Gardens). Yellow iris can be confused with cattail: their leaves are very similar (Government of Alberta)."
         },
         {
-          "p": "Some well-known edibles break these rules (blackberry canes have thorns), which is another reason positive identification matters more than any rule."
+          "list": [
+            "Leaf base: round on cattail, flat on iris (Montana Department of Agriculture).",
+            "Leaves: iris leaves are sword-shaped and flattened, with a raised rib down the middle, and rise from the ground in a fan (Government of Alberta, Montana Department of Agriculture).",
+            "Flowers: iris has showy yellow or blue flowers (Government of Alberta, Cornell Botanic Gardens); cattail has only the brown spike (Mississippi State University Extension).",
+            "Root: yellow flag iris rootstocks have black sap (Montana Department of Agriculture)."
+          ]
+        }
+      ]
+    },
+    {
+      "h": "Never eat these",
+      "blocks": [
+        {
+          "warn": "Water hemlock is the most toxic plant in North America, and all of it is deadly (Missouri Department of Conservation); even a small piece of the root can kill (Penn State Extension). Poison hemlock is deadly too (Poison Control): people have died after digging and eating its roots as wild carrots or parsnips (Cornell University)."
         },
+        {
+          "list": [
+            "Water hemlock and poison hemlock (carrot family): water hemlock’s flowers look a lot like Queen Anne’s lace (wild carrot); plants it can be taken for include Queen Anne’s lace, hedge parsley, meadow parsnip, sweet cicely, anise root, golden Alexanders, yarrow and elderberry (Missouri Department of Conservation). Poison hemlock is taken for wild carrot, Queen Anne’s lace, wild parsnip, cow parsnip, angelica, wild chervil and wild celery (Poison Control, Cornell University). The Missouri Department of Conservation’s advice to anyone without experience: treat every wild member of the carrot family as possibly deadly. This page lists none of them as food.",
+            "Ramps (wild leeks): lily-of-the-valley and false hellebore can be taken for ramps, grow in the same places and are deadly poisonous (Penn State Extension). False hellebore makes people ill 30 minutes to 4 hours after eating it, often starting with severe nausea and vomiting (Northern New England Poison Center). This page does not list ramps as food.",
+            "Wild grapes: moonseed has grape-like clusters of bluish-black fruit and can kill (NC State Extension). Virginia creeper berries look like small grapes (Vermont Department of Health) and may be fatal if eaten (Penn State Extension). To a child, pokeberries look like grapes; the whole pokeweed plant is poisonous, and its roots have made adults seriously ill, once eaten in mistake for ginseng (Poison Control). This page does not list wild grapes as food.",
+            "Elderberry: every part is poisonous (Penn State Extension). It is also on the list of plants water hemlock can be taken for (Missouri Department of Conservation). This page does not list it as food."
+          ]
+        },
+        {
+          "p": "These are not the only poisonous plants. The Upstate New York Poison Center’s list of poisonous plants is long and, it says, only partial: don’t assume any plant is non-poisonous."
+        }
+      ]
+    },
+    {
+      "h": "Mushrooms",
+      "blocks": [
         {
           "warn": "Never eat a wild mushroom unless an expert has identified it. Poisonous mushrooms can look like edible ones, there is no field test that shows a mushroom is safe, and cooking does not destroy the poisons."
         },
         {
-          "p": "There are deliberately no drawings of plants here. Identify plants with a regional field guide that has real photographs, ideally after learning them from someone local."
-        },
-        {
-          "link": "p:poison-plants",
-          "label": "Poison ivy, oak or sumac on the skin"
+          "p": "No mushroom is taught in this app."
         }
       ]
     },
     {
-      "h": "Easier options",
+      "h": "If someone eats a plant that might be poisonous",
       "blocks": [
         {
-          "list": [
-            "Cattail: in wet ground. Young shoots can be eaten like asparagus, and the starchy roots and the pollen can be made into flour. Look-alikes: two poisonous irises grow in the same wet ground: yellow flag iris (invasive, on pond, lake and stream shores in New York) and the native blue flag iris (pond margins, wet meadows and marshes in the Northeast). Yellow flag iris is easily mistaken for cattail when it is not in flower. Cattail leaf bases are round; iris leaf bases are flat.",
-            "Wild blackberries and raspberries: if it looks like a store-bought blackberry or raspberry, it is one. They have no poisonous look-alikes.",
-            "Insects: grasshoppers, crickets, grubs and ants. Remove legs, wings and heads, and cook them fully. Skip insects that bite or sting, hairy or brightly coloured insects, caterpillars, smelly insects, spiders, and flies, ticks and mosquitoes.",
-            "Freshwater fish: cook them thoroughly, to 145°F inside, to kill parasites."
-          ]
+          "p": "Don’t wait for symptoms to appear (Northern New England Poison Center, Vermont Department of Health). Use the Poisoning protocol now."
         },
         {
-          "p": "Pick plants well away from roads and from ground treated with pesticides or road salt, and wash them well."
-        },
-        {
-          "link": "p:vomiting-diarrhea",
-          "label": "Vomiting or diarrhea"
+          "link": "p:poisoning",
+          "label": "Poisoning (swallowed, inhaled, skin or eye)"
         }
       ]
     }
@@ -89,61 +173,106 @@
       "used": "About three weeks without food"
     },
     {
-      "name": "Missouri Department of Conservation, Common Water Hemlock",
-      "used": "Water hemlock among the most toxic plants in North America; a small amount kills; looks like Queen Anne's lace; poison hemlock a deadly look-alike"
+      "name": "Upstate New York Poison Center, Poisonous Plants (brochure, revised January 2024)",
+      "used": "Cooking does not destroy plant poisons; don’t assume a plant is non-toxic because wildlife eats it; the list is partial, don’t assume any plant is non-poisonous"
     },
     {
-      "name": "USDA NRCS Illinois, Water Hemlock fact sheet (2006)",
-      "used": "Water hemlock range from Quebec south through the eastern US (covers New York)"
+      "name": "Michigan State University Extension, Is a dandelion food or a weed? (June 5, 2025)",
+      "used": "Where not to pick; wash everything; dandelion grows March to November; young leaves before flowering; older leaves bitter; parts eaten, not the flower stem; flowers: plump open heads, remove the green base; roots roasted or simmered"
     },
     {
-      "name": "Cornell University Department of Animal Science, Plants Poisonous to Livestock: Poison Hemlock",
-      "used": "Human deaths from eating poison hemlock roots as wild carrots or parsnips; confused with wild carrot"
+      "name": "University of Vermont Extension, Dandelions: Foe or Friend? (May 8, 2024)",
+      "used": "Pick away from road salts, pesticides and lawn treatments; rinse well; young leaves in salads; older leaves boiled or steamed like spinach"
     },
     {
-      "name": "University of Arkansas Cooperative Extension, FSA2203 Poison Hemlock Identification and Control",
-      "used": "Poison hemlock and water hemlock the most acutely toxic of the parsley family; hard to tell from wild carrot"
+      "name": "Illinois Extension, Brambles: Pesky Garden Weed or Delicious Summer Treat (July 2, 2021)",
+      "used": "Thorny bush-like plants with arching canes; a wild berry that looks like a store-bought raspberry or blackberry is safe to eat; no poisonous look-alikes; gloves except when picking"
     },
     {
-      "name": "US Army ATP 3-50.21, Survival (2018), chapter 4",
-      "used": "Plant warning signs (4-61) and that they only often help (4-57, 4-62); no field test for mushrooms; insects to avoid, remove legs, wings and heads, cook (4-133, 4-136, 4-23); cook freshwater fish to kill parasites (4-148)"
+      "name": "Penn State Extension (Tioga County Master Gardeners), What is the Difference Between a Raspberry and a Blackberry? (June 6, 2022)",
+      "used": "Where wild brambles grow; raspberries ripen in July, blackberries somewhat later, overlapping; black raspberries confused with blackberries; hollow centre against white spongy core"
     },
     {
-      "name": "US Army FM 21-76, Survival Manual (2006 copy), chapters 8 and 9",
-      "used": "Same plant warning list (pp. 103-104); do not eat mushrooms; insects: remove wings and barbed legs, cook (pp. 72-73)"
+      "name": "Missouri Department of Conservation, Field Guide: Wild Strawberry",
+      "used": "Leaves, flowers, fruit and seeds on the outside; fruit June to July in Missouri; eaten fresh; Indian strawberry has yellow petals and less flavorful fruit"
     },
     {
-      "name": "CDC MMWR 2021;70(10), Accidental Poisonous Mushroom Ingestions, United States 2016-2018",
-      "used": "Never eat wild mushrooms unless identified by an expert; poisonous resemble nonpoisonous; cooking does not remove toxins"
+      "name": "Gleason and Cronquist, Manual of Vascular Plants of Northeastern United States and Adjacent Canada (1991), Fragaria virginiana, via the New York Botanical Garden",
+      "used": "Wild strawberry flowers April to June; throughout much of the US and southern Canada"
     },
     {
-      "name": "Mississippi State University Extension, Cattail (Typha spp.), P3735-21",
-      "used": "Cattail edible parts: young shoots like asparagus, starchy rhizome ground into meal, pollen as flour"
+      "name": "NC State Extension, Indian Mock Strawberry (TurfFiles, November 27, 2017)",
+      "used": "Yellow flowers instead of white; rounded leaf teeth instead of sharp-pointed; fruit tasteless"
+    },
+    {
+      "name": "Cornell Cooperative Extension Allegany County, Master Gardener Volunteer Weed Series: Dandelion (June 3, 2024)",
+      "used": "Dandelion leaves 3 to 10 inches with teeth pointing to the base; hollow flower stem; milky juice; flowers May to June and sometimes autumn"
+    },
+    {
+      "name": "Penn State Extension, Noxious Weed: Catsear (updated August 14, 2026)",
+      "used": "Catsear mistaken for dandelion; forked solid stems with several flowers against unforked hollow stems with one; dark green hairy lobed leaves against jagged hairless lighter leaves; early summer against early spring; may harm horses in large amounts"
+    },
+    {
+      "name": "USDA Natural Resources Conservation Service, Plant Guide: Broad-Leaved Cattail (2000)",
+      "used": "Common throughout the US, in marshes; young shoots in spring, 4 to 16 inches, uncooked or steamed; stem base boiled or roasted; young flower stalks boiled or steamed like corn; pollen as flour; rootstock uncooked, baked, roasted or broiled, core ground into flour; other parts gathered at the appropriate stage, no season given"
+    },
+    {
+      "name": "Mississippi State University Extension, Cattail (Typha spp.), P3735-21 (2023)",
+      "used": "Stout stems, broad linear leaf blades, cigar-like brown spike; stands along pond shorelines; young shoots like asparagus; immature flower spikes boiled like corn; pollen as flour"
     },
     {
       "name": "Cornell Cooperative Extension (Erie County), Invasives: Yellow Flag Iris (2016)",
-      "used": "All parts of yellow iris toxic; prohibited invasive in New York; colonies on shores of ponds, lakes and streams"
+      "used": "All parts of yellow iris toxic, stomach upset if eaten; prohibited invasive in New York; colonies on shores of ponds, lakes and streams, and in marshes"
     },
     {
-      "name": "Alberta Agriculture, Pale Yellow Iris weed sheet; Montana Department of Agriculture, Yellowflag Iris",
-      "used": "Yellow iris confused with cattail when not in bloom; cattail leaf bases round, iris flat"
+      "name": "NC State Extension Plant Toolbox, Iris versicolor; Cornell Botanic Gardens, Wild Iris (Iris versicolor)",
+      "used": "Blue flag iris native from Nova Scotia into the northeastern US; pond margins, wet meadows, marshes; poisonous roots (highest in the rhizomes); showy blue flowers"
     },
     {
-      "name": "Cornell Botanic Gardens, Wild Iris (Iris versicolor); NC State Extension Plant Toolbox, Iris versicolor",
-      "used": "Blue flag iris poisonous (roots, sap, seeds); native to the northeastern US; pond margins, wet meadows, marshes"
+      "name": "Government of Alberta (open data), Pale Yellow Iris weed sheet; Montana Department of Agriculture, Yellowflag Iris",
+      "used": "Yellow iris confused with cattail, leaves very similar; leaves sword-like, flattened, in a fan, raised midrib; showy yellow flowers; cattail leaf bases round, iris flat; black sap in iris rootstocks"
     },
     {
-      "name": "University of Illinois Extension, Brambles: Pesky Garden Weed or Delicious Summer Treat (2021)",
-      "used": "Wild blackberries and raspberries safe to eat; no poisonous look-alikes"
+      "name": "Missouri Department of Conservation, Field Guide: Common Water Hemlock",
+      "used": "Most toxic plant in North America, all parts deadly; flowers like Queen Anne’s lace; the similar species listed; treat all wild members of the carrot family as potentially fatally toxic if inexperienced"
     },
     {
-      "name": "USDA FSIS, Safe Minimum Internal Temperature Chart",
-      "used": "Fish 145°F"
+      "name": "Penn State Extension, Not-so-Nice Native Plants (updated September 22, 2024)",
+      "used": "A small portion of water hemlock root can be fatal; Virginia creeper may be fatal if the fruit is eaten; elderberry: all parts poisonous"
     },
     {
-      "name": "University of Vermont Extension, Dandelions: Foe or Friend? (2024); University of Maine Extension, Bulletin 4060",
-      "used": "Pick away from roads and treated areas (road salt, pesticides); wash greens"
+      "name": "Cornell University Department of Animal Science, Plants Poisonous to Livestock: Poison Hemlock",
+      "used": "Human deaths from harvesting and eating the roots as wild carrots or parsnips; confused with wild carrot and cow parsnip"
+    },
+    {
+      "name": "Poison Control (National Capital Poison Center), Can poison hemlock be deadly?; Pokeberries: A grape look-alike",
+      "used": "Poison hemlock is deadly and is taken for wild carrot, Queen Anne’s lace, wild parsnip, cow parsnip, angelica, wild chervil and wild celery; the whole pokeweed plant is poisonous, berries look like grapes to a child, roots made adults seriously ill, once mistaken for ginseng"
+    },
+    {
+      "name": "Penn State Extension, Ramps (Allium tricoccum) (updated January 5, 2026)",
+      "used": "Lily-of-the-valley and false hellebore may be confused with ramps, are deadly poisonous and grow in the same habitat"
+    },
+    {
+      "name": "Northern New England Poison Center, False Hellebore",
+      "used": "Mistaken for ramps; symptoms 30 minutes to 4 hours after eating, starting with severe nausea and vomiting; don’t wait for symptoms"
+    },
+    {
+      "name": "Vermont Department of Health, Poisonous Plants in Vermont (last updated May 18, 2026)",
+      "used": "Virginia creeper berries look like small grapes; don’t wait for symptoms after eating false hellebore"
+    },
+    {
+      "name": "NC State Extension Plant Toolbox, Menispermum canadense (common moonseed)",
+      "used": "Grape-like fruit clusters confused with wild grapes; highly toxic, can be fatal"
+    },
+    {
+      "name": "CDC MMWR 2021;70(10), Health Care Utilization and Outcomes Associated with Accidental Poisonous Mushroom Ingestions, United States 2016-2018",
+      "used": "Never eat wild mushrooms unless identified by an expert; poisonous resemble nonpoisonous; cooking does not remove toxins"
+    },
+    {
+      "name": "US Army ATP 3-50.21, Survival (2018), chapter 4, warning after paragraph 4-48",
+      "used": "No field test for whether an unknown mushroom is edible"
     }
   ],
-  "reviewed": "2026-11-17"
+  "reviewed": "2026-11-19",
+  "draft": true
 }

@@ -6324,3 +6324,178 @@ Changes:
 - M3: hub "Keep it cold longer" link to Preserving food removed.
 - Keywords: "doubt throw" dropped; "defrost", "food gone bad" (Is it still good?) and "sterilize" (babies) added; "baby food" fails the
   keyword rule and is not added (docs/v7.5-rulings.md, whole-pack fixes 8).
+
+## Land pack batch A1: Wild plants, the plant poisoning gate, the CDC bottle soak (2026-11-19)
+
+Files: src/survival/surv-food-and-wild-plants.json (rewritten, id kept, title "Wild plants", category land, draft), the CDC soak in
+surv-food-babies-children.json, one sentence in surv-clean-and-disinfect.json, the renamed link label (and the source-topic name in a
+quoting sentence) in surv-food-when-short.json and surv-food-power-out.json. Questions: docs/decisions-for-jordan.md section D, 152 to
+158. Rulings, the plant poisoning gate and quoted sentences: docs/v7.7-rulings.md ("Batch A1"). Every source below was found by
+built-in web search and opened by built-in web fetch on 2026-11-19, and its title and publisher were checked after the fetch. No
+Firecrawl, no Bright Data. No URL was constructed: each was returned by a search, or was a link named in a fetched page (the three
+Cornell Warren County PDFs), or a redirect given by the same agency's server (USDA PLANTS, below).
+
+Source keys:
+- TOOELE: Tooele County Health Department (Utah), Rule of Three: Simple rule of priorities when planning for an emergency (undated;
+  2026 footer). https://tooelehealth.org/rule-of-three-simple-rule-of-priorities-when-planning-for-an-emergency/ "You can survive about
+  three weeks without food." (re-opened for the frozen sentence)
+- UNYPC: Upstate New York Poison Center, Poisonous Plants (brochure, Form F88325, Rev. 1/2024). https://www.upstate.edu/poison/pdf/poisonous-plants-brochure.pdf
+- MSU-DAN: Michigan State University Extension, Is a dandelion food or a weed? (Christine Venema, June 5, 2025). https://www.canr.msu.edu/news/dandelions_for_food
+- UVM-DAN: University of Vermont Extension, Dandelions: Foe or Friend? (Deborah J. Benoit, May 8, 2024). https://www.uvm.edu/extension/news/dandelions-foe-or-friend
+- CCE-DAN: Cornell Cooperative Extension Allegany County, Master Gardener Volunteer Weed Series: Dandelion (Carol Sitarski, June 3, 2024). https://allegany.cce.cornell.edu/gardening/master-gardener-blog/master-gardener-volunteer-weed-series-dandelion-taraxacum-officinale
+- PSU-CAT: Penn State Extension, Noxious Weed - Catsear (Brittani Kirkland, updated August 14, 2026). https://extension.psu.edu/noxious-weed-catsear
+- ILL-BR: Illinois Extension, Brambles: Pesky Garden Weed or Delicious Summer Treat (Nick Frillman, July 2, 2021). https://extension.illinois.edu/blogs/flowers-fruits-and-frass/2021-07-02-brambles-pesky-garden-weed-or-delicious-summer-treat
+- PSU-RB: Penn State Extension, Tioga County Master Gardeners, What is the Difference Between a Raspberry and a Blackberry? (June 6, 2022). https://extension.psu.edu/programs/master-gardener/counties/tioga/news/what-is-the-difference-between-a-raspberry-and-a-blackberry
+- MDC-STR: Missouri Department of Conservation, Field Guide: Wild Strawberry (undated). https://mdc.mo.gov/discover-nature/field-guide/wild-strawberry
+- GC-STR: Gleason and Cronquist, Manual of Vascular Plants of Northeastern United States and Adjacent Canada (1991), Fragaria virginiana, on the New York Botanical Garden site. https://sweetgum.nybg.org/science/vh/monographs-details/?irn=6838
+- NCSU-MOCK: NC State Extension, Indian Mock Strawberry (TurfFiles; Fred Yelverton, November 27, 2017). https://content.ces.ncsu.edu/indian-mock-strawberry
+- USDA-CAT: USDA NRCS, Plant Guide: Broad-Leaved Cattail, Typha latifolia (Stevens, Hoag, Anderson; edited December 4, 2000). Search returned https://plants.usda.gov/DocumentLibrary/plantguide/pdf/pg_tyla.pdf, which USDA's server redirected (302) to https://plants.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/pg_tyla.pdf (fetched).
+- MSU-CAT: Mississippi State University Extension, Cattail (Typha spp.), P3735-21 (Neal, Riecke, Turnage; copyright 2023). https://extension.msstate.edu/sites/default/files/publications/P3735-21_cattail.pdf
+- CCE-YFI: Cornell Cooperative Extension (Erie County), Invasives: Yellow Flag Iris (Larraine Van Slooten, March 2016). https://erie.cce.cornell.edu/resources/article-1-invasive-yellow-flag-iris
+- NCSU-IV: NC State Extension Plant Toolbox, Iris versicolor. https://plants.ces.ncsu.edu/plants/iris-versicolor
+- CBG-IV: Cornell Botanic Gardens, Wild Iris (Iris versicolor) (no date shown). https://cornellbotanicgardens.org/plant/wild-iris
+- AB-YI: Pale Yellow Iris (Iris pseudacorus) weed sheet, Alberta government open data site (no publisher or date printed on the sheet). https://open.alberta.ca/dataset/a4bf2d0a-6433-417f-a62e-64ec5304f4d2/resource/77ba17e0-ba72-4b3f-b499-38fedd9a572f/download/ard-weeds-pale-yellow-iris.pdf
+- MT-YI: Montana Department of Agriculture, Yellowflag Iris (no date). https://agr.mt.gov/Topics/N-P/Noxious-Weeds-Pages/Education/Current-Weeds/Yellowflag-Iris
+- MDC-WH: Missouri Department of Conservation, Field Guide: Common Water Hemlock. https://mdc.mo.gov/discover-nature/field-guide/common-water-hemlock
+- PSU-NN: Penn State Extension, Not-so-Nice Native Plants (Denise D'Aurora, updated September 22, 2024). https://extension.psu.edu/not-so-nice-native-plants
+- CU-PH: Cornell University Department of Animal Science, Plants Poisonous to Livestock: Poison Hemlock. https://poisonousplants.ansci.cornell.edu/conium.html
+- PC-PH: Poison Control (National Capital Poison Center), Can poison hemlock be deadly? (Troutman, Soto; references accessed July 2026). https://www.poison.org/articles/can-poison-hemlock-be-deadly-184
+- PC-POKE: Poison Control (National Capital Poison Center), Pokeberries: A grape look-alike (Soloway; references accessed August 17, 2024). https://www.poison.org/articles/pokeberries-and-grapes-look-alike
+- PSU-RAMP: Penn State Extension, Ramps (Allium tricoccum) (Pugh, Norman, Burkhart, Houston; updated January 5, 2026). https://extension.psu.edu/ramps-allium-tricoccum
+- NNEPC-FH: Northern New England Poison Center, False Hellebore: Poisons A to Z (last updated April 19, 2018). https://www.nnepc.org/poisons/f/false-hellebore
+- VDH-PP: Vermont Department of Health, Poisonous Plants in Vermont (last updated May 18, 2026). https://healthvermont.gov/environment/chemicals/poisonous-plants-vermont
+- NCSU-MOON: NC State Extension Plant Toolbox, Menispermum canadense. https://plants.ces.ncsu.edu/plants/menispermum-canadense/
+- MMWR-MUSH: CDC, MMWR 70(10):337-341, Health Care Utilization and Outcomes Associated with Accidental Poisonous Mushroom Ingestions, United States, 2016-2018 (March 12, 2021). https://www.cdc.gov/mmwr/volumes/70/wr/mm7010a1.htm
+- ATP: US Army ATP 3-50.21, Survival (September 2018). https://irp.fas.org/doddir/army/atp3-50-21.pdf (read from character 200,000: chapter 4, the warning after paragraph 4-48)
+- NYSDEC-SN: NYS DEC, Stinging Nettle (no date). https://dec.ny.gov/nature/animals-fish-plants/stinging-nettle (used only for D153; nettle is not on the page)
+- OSU-SN: Oregon State University Extension, Wild Edibles: Stinging Nettle, EM 9373 (Macy, Hyde, Brixey, Davis; November 2022). https://extension.oregonstate.edu/catalog/em-9373-wild-edibles-stinging-nettle (D153 only)
+- MDC-SUM: Missouri Department of Conservation, Field Guide: Sumacs. https://mdc.mo.gov/discover-nature/field-guide/sumacs (D155 only)
+- PSU-GM: Penn State Extension, Garlic Mustard (Jackson, Gover, Wurzbacher, Templeton; updated December 4, 2025). https://extension.psu.edu/garlic-mustard (D155 only)
+- UCONN-GM: UConn Extension IPM, Invasive Plant Factsheet: Garlic mustard (updated April 2021). https://ipm.cahnr.uconn.edu/invasive_plants_garlic_mustard (D155 only)
+- Plant poisoning gate only: HRSA, Plants | Poison Help (March 18, 2019; modified April 15, 2025) https://poisonhelp.hrsa.gov/faq/plants ;
+  NYS DOH, Poison Proof Your Home (revised December 2025) https://healthweb-back.health.ny.gov/prevention/injury_prevention/poison_proof_your_home.htm ;
+  CDC NIOSH, Poisonous Plants and Work (October 1, 2026) https://www.cdc.gov/niosh/outdoor-workers/about/poisonous-plants.html
+- Bottle soak: CDC-CLN, CDC, How to Clean Infant Feeding Items During Emergencies (January 8, 2025), opened twice at
+  https://cdc.gov/infant-feeding-emergencies-toolkit/php/how-to-clean-infant-feeding-items-during-emergencies.html and
+  https://www.cdc.gov/nutrition/emergencies-infant-feeding/cleaning-feeding-items.html (same title, date and text).
+
+Would not open: Cornell Cooperative Extension Warren County, Wild Edibles (https://warren.cce.cornell.edu/food-nutrition/wild-edibles,
+July 2020, updated January 28, 2025) opened but holds no plant text; its webinar PDF "Wild Edibles: Safety, Conservation, and
+Consumables" (s3.amazonaws.com/assets.cce.cornell.edu/attachments/45964/...) was refused by the fetch tool's permission prompt (not
+answered in time); the other two PDFs were not tried. Pennsylvania Game Commission "How to forage for wild plants in Pennsylvania" and
+PA DCNR Good Natured post 238 both redirected (302) to agency home pages; not followed. University of Minnesota Extension stinging
+nettle page redirected to a general page; not followed. Nothing from these is in a topic.
+
+Conversions (app's own): ½ inch = 1.3 cm; 3 to 10 inches = 8 to 25 cm; 4 to 16 inches = 10 to 40 cm; 1 teaspoon = 5 mL; 1/2 gallon = 1.9 L.
+
+### surv-food-and-wild-plants (Wild plants)
+
+- Tags: none (category land, no where or when). Links: p:poisoning, twice (label "Poisoning (swallowed, inhaled, skin or eye)", the
+  protocol's title; the old label "Ate a plant or mushroom that might be poisonous" did not equal the title), first block of the first
+  section and last block of the page ("If someone eats a plant that might be poisonous"). p:poison-plants, p:vomiting-diarrhea and the
+  fish line's link are gone with their text.
+- Do first 1: "Don’t wait for symptoms" NNEPC-FH ("Do not wait for symptoms to appear"; VDH-PP "do not wait for symptoms to appear").
+  Do first 2 and section 1: "Only eat a plant you can identify with certainty." frozen (quoted by Rationing food). Do first 3: MDC-WH
+  ("consider all wild members of the carrot family as potentially fatally toxic"; "look a lot like those of Queen Anne’s lace"), CU-PH
+  (deaths, roots eaten as wild carrots or parsnips), PC-PH ("a deadly plant"; wild parsnip in its list). Do first 4: the mushroom
+  sentence, word for word.
+- "Food is the lowest priority: you can survive about three weeks without it. Don’t spend energy or risk poisoning chasing it early."
+  frozen; TOOELE re-opened: "You can survive about three weeks without food." ("lowest priority" is the app's reading of the rule's
+  order, as before.)
+- Identification caution: labelled "This app’s own caution", D152. No source opened says text cannot teach identification; UVM-DAN
+  "be certain you've positively identified the plant" and VDH-PP "be certain you know how to identify ramps" are the nearest.
+- "Cooking does not destroy the poisons in a plant" and "Don’t assume ... bird or other wildlife" UNYPC (safety tips list).
+- Where to pick: MSU-DAN "only harvest from areas you know have not been treated with chemicals, fertilizers or herbicides" and avoid
+  pathways, roadsides, animal or pet areas and high-traffic areas; UVM-DAN "free of contaminants, such as road salts, pesticides or lawn
+  treatments". Wash: MSU-DAN "Wash all leaves, flowers, and roots"; UVM-DAN "rinse them well". (Both are said of dandelion; the page
+  applies them to everything picked; the old page did the same with UVM and UMaine.)
+- Blackberries and raspberries: ILL-BR "bush-like, thorny plants with arching canes"; "if you see anything in the woods that looks like
+  store-bought raspberry or blackberry, it's safe to eat!"; "There are no poisonous look-alikes to worry about."; "Wear gloves when doing
+  anything with brambles except harvesting." PSU-RB: wild in disturbed areas (roadsides, logged woods, clearings, abandoned fields,
+  fencerows; roadsides left out of the page because MSU says not to pick there); red and black raspberries typically ripen in July,
+  blackberries somewhat later, overlapping; "The best way to tell them apart is to look for the receptacle": raspberry hollow, blackberry
+  white spongy centre; black raspberries easily confused with blackberries. Looked for and not found: a month for wild blackberries.
+- Wild strawberries: MDC-STR leaves "compound, with 3 egg-shaped leaflets with toothed lobes, on hairy stems"; flowers "5 white petals";
+  red berry about ½ inch with seeds on the outside; fruit June–July (Missouri); "prized native wild edibles", eaten fresh; Indian
+  strawberry yellow petals, fruit less juicy and less flavorful. GC-STR flowering "Apr.–June"; "Throughout much of the U.S. and s. Can."
+  NCSU-MOCK "has yellow flowers instead of white"; leaf teeth "rounded rather than sharp-pointed"; fruit "smaller and tasteless". Looked
+  for and not found: a New York fruiting date; whether mock strawberry is poisonous (page says so).
+- Dandelion: CCE-DAN leaves "3-10 inches long", "widely spaced teeth that point toward the leaf base", "flower stem which is hollow",
+  white milky juice, flowers "from May to June and sometimes in Autumn". PSU-CAT dandelion stems unforked and hollow with one flower;
+  leaves jagged, hairless, lighter green; catsear "forked and solid with multiple flowers per plant", leaves "dark green, lobe-shaped and
+  hairy", early summer against early spring; catsear in horses "not harmful unless consumed in large quantities" (stringhalt). MSU-DAN
+  "from March to November"; "young and tender ones before the plant begins to flower"; "The entire plant is edible except for the flower
+  stem, which is inedible because the milky sap is bitter"; "The older leaves are bitter"; flowers "plump large heads, that are fully
+  open", remove the green base (bitter); roots "washed, chopped, dried, and roasted" as a coffee alternative or simmered. UVM-DAN young
+  leaves in salads; "More mature leaves can be eaten like spinach, boiled or steamed." Looked for and not found: whether catsear is safe
+  for people (page says so).
+- Cattail: USDA-CAT common throughout the US, "coastal and valley marshes"; young shoots cut from the rhizomes in spring, "about 4 to 16
+  inches long", raw "taste like cucumber", steamed like cabbage; stem base "boiled or roasted like potatoes"; young flower stalks removed
+  from their sheaths "boiled or steamed just like corn"; pollen "a fine substitute for flours"; rhizomes and lower stems "eaten raw,
+  baked, roasted, or broiled", core ground into flour; other parts "at the appropriate stage of growth" (no season). The page says
+  "uncooked" for USDA's "raw" (a search word: "raw" put this page second, ahead of food-safety pages; same meaning). MSU-CAT stout stems,
+  "broad linear leaf blades", dense brown cigar-like spike; stands reduce shoreline access in ponds; "Young shoots can be eaten like
+  asparagus"; "immature flower spikes can be boiled and eaten like corn on the cob"; pollen as flour substitute. Looked for and not found:
+  any source on cattail from polluted water; seasons for parts other than shoots.
+- Irises: CCE-YFI "All parts of yellow iris are toxic"; eating causes stomach upset; "In New York it is listed as a prohibitive invasive
+  plant"; dense colonies along shores of ponds, lakes and streams, floodplains, fresh or brackish marshes (floodplains left out of the
+  page: the word put this page in the first five for "flood"). NCSU-IV native "spanning south from Nova Scotia" into the middle and
+  northeastern US; "wet areas of pond margins, wet meadows, and marshy areas"; poison parts roots, sap, seeds, "Highest concentration in
+  rhizomes"; low severity. CBG-IV "Iris rhizomes and rootstocks contain a purgative irritant"; showy blue flowers. AB-YI "might be
+  confused with" common cattail, leaves "very similar"; iris leaves sword-like, flattened, in a fan, raised midrib; showy yellow flowers;
+  "POISONOUS", severe gastric disturbances. MT-YI "cattail, which has round leaf bases, instead of the flat leaf bases yellowflag iris
+  has"; "Rhizomes contain black sap". The old page's "Yellow flag iris is easily mistaken for cattail when it is not in flower" is replaced by
+  "Yellow iris can be confused with cattail: their leaves are very similar (Government of Alberta)": the sheet as opened says "might be
+  confused with" and "Leaves are very similar, but lacks the showy yellow flowers", not "when not in flower". The sheet names no
+  publisher; it is credited to the Government of Alberta, whose open data site holds it.
+- Never eat: MDC-WH "the most toxic plant in North America. All parts are deadly"; flowers "look a lot like those of Queen Anne’s lace";
+  similar species listed (the page names Queen Anne’s lace, hedge parsley, meadow parsnip, sweet cicely, anise root, golden Alexanders,
+  yarrow, elderberry of MDC's list; prairie parsley, white snakeroot and Indian hemp left out for length); the carrot-family advice.
+  PSU-NN water hemlock "Ingesting even a small portion of the roots can be fatal"; Virginia creeper "may be fatal if the fruit is
+  eaten"; elderberry "All parts of the plant are poisonous" (its "Ripe berries are edible when cooked" is deliberately not given). CU-PH
+  "Human deaths have occurred from harvesting and consuming the roots as wild carrots or parsnips"; confused with wild carrot, cow
+  parsnip. PC-PH "Poison hemlock is a deadly plant that looks dangerously similar to several edible plants"; list: angelica, cow parsnip,
+  wild parsnip, wild chervil, wild celery, wild carrot, Queen Anne's lace. PSU-RAMP lily-of-the-valley and false hellebore "may be
+  confused with ramps"; "These plants are deadly poisonous and can be found in the same habitat." NNEPC-FH mistaken for ramps; effects
+  "between 30 minutes and 4 hours after eating the plant", often starting with "severe nausea and vomiting". NCSU-MOON "Causes
+  convulsions and can be fatal"; "The fruit clusters can be confused with wild grapes"; bluish-black drupes in grape-like clusters (its
+  single crescent seed against round grape seeds is not given: a seed test would teach eating grapes, which the page does not list).
+  VDH-PP Virginia creeper berries "look like small grapes"; "Do not eat the berries of Virginia creeper." PC-POKE "The entire pokeweed
+  plant is poisonous"; "To a child, pokeberries look like grapes"; roots: serious problems in adults; root eaten as ginseng. UNYPC "Do
+  not assume any plant is non-poisonous" and the list is partial.
+- Mushrooms: the warn is unchanged, word for word. MMWR-MUSH re-opened: "wild mushrooms should never be consumed unless they are
+  identified by an expert"; "poisonous mushrooms might resemble nonpoisonous mushrooms"; "cooking mushrooms does not remove or inactivate
+  toxins". ATP re-opened: "There is no field test for determining if an unknown mushroom or fungi is edible except by eating them."
+  (warning after 4-48; the old source line gave 4-133/4-136/4-23 for insects and 4-61 for the warning signs, which are not used now).
+  "No mushroom is taught in this app." is the page's own statement of fact.
+- Removed from the page (not carried): the warning-signs list and its two notes (ATP 4-61, FM 21-76; not re-opened, D157); the insects
+  item; the freshwater fish 145°F item (its owner becomes surv-land-fish-cleaning; it stays quoted in Cook without power and Field
+  dressing game); the vomiting and diarrhea link; the poison ivy link. Sources dropped with them: Missouri water hemlock (replaced by the
+  field guide entry), USDA NRCS Illinois water hemlock sheet, Arkansas FSA2203, FM 21-76, USDA FSIS temperature chart, University of
+  Maine Bulletin 4060.
+
+### The CDC bottle soak (surv-food-babies-children) and the special mixes sentence (surv-clean-and-disinfect)
+
+- CDC-CLN, both URLs, "Method 2": "Put items in a wash basin and fill with safe water." / "Add 1 teaspoon of bleach per 1/2 gallon or 8
+  cups of water." / "Soak for 2 minutes." / "Remove items carefully." / "Air dry sanitized items." / "Do NOT rinse sanitized items." and
+  "Any bleach that remains on feeding items after sanitizing will break down quickly as it dries and will not hurt your baby." No bleach
+  type or percentage on the page (the page says so). Who and how often: "If your baby is younger than 2 months or if your baby is sick" /
+  "Sanitize all items at least once every day" (unchanged on the page). The steps follow the existing boil steps' form (CDC's last three
+  steps in one line). The label warn ("for baby bottles and feeding items only. Never use it for drinking water.") is spec 7's rule.
+- The reworded sentence: "No way to boil? Use CDC’s bleach soak below, or feed from disposable cups (CDC). The soak is a different
+  strength from both mixes in Clean and disinfect." replaces "CDC also has a bleach soak ... is not on this page, so boiling is the only
+  way to sanitize here." and "With no way to boil, feed from disposable cups (CDC)." The CDC heat-source quote and the app's caution
+  against Clean and disinfect's mixes stay word for word.
+- Clean and disinfect: one sentence after "Two mixes do every job in this topic.": the two special mixes and where they are. The botulism
+  clean-up mix (1 part bleach to 5 parts water, 30 minutes) is in surv-food-poisoning, section "Getting rid of a suspect can or jar"
+  (checked by grep: its steps and its own one-use warn). Store water at home's container mix and Toilets' bucket mix are already pointed
+  to in the next paragraph of Clean and disinfect, unchanged.
+
+### Batch A1 agreement with checked topics and protocols
+
+- Poisoning protocol: linked, not restated. The page's "don't wait for symptoms" matches the protocol's don'ts ("Do not wait for
+  symptoms if you suspect poisoning (MedlinePlus)"). Gap logged, D156.
+- Rationing food quotes two sentences from this topic word for word: both kept identical (test added). Its link label and its "From Food
+  and wild plants, word for word:" lead-in follow the new title; Food when the power goes out's link label too.
+- Cook without power and Field dressing game keep "fish to 145°F"; this page no longer states it.
+- No drawing of any plant; the v6 plant-warnings figure stays out (PINNED_FIGS set to the empty set).

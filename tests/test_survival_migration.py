@@ -37,7 +37,7 @@ PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-
                  'surv-food-and-wild-plants': set(),
                  # land pack batch C: Fishing for food is fishing only and carries no figure; trap-snare, trap-fig4 and fishing no longer match
                  # any text and are on no topic (Task 6 may redraw a fishing figure from the text)
-                 'surv-traps-and-fishing': set(),
+                 'surv-traps-and-fishing': {'land-fishing'},
                  # land pack batch C: the squirrel pole moved with its text to Trapping (the only trap figure whose drawn words the text carries)
                  'surv-land-trapping': {'trap-squirrel'},
                  # batch C fix round: the fish gutting figure moved with the fish text from Field dressing game to the fish page
@@ -56,7 +56,7 @@ PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-
                  'surv-food-power-out': {'food-fridge-freezer'}, 'surv-food-still-good': {'food-cans-to-discard'},
                  # land pack (v7.7) Task 6: the deer figures, drawn from their checked text; the deer field-dressing steps ship
                  # text-only (dress-deer removed; the redraw failed review; docs/v7.7-rulings.md, Diagrams)
-                 'surv-land-big-game': {'land-deer-vitals'}, 'surv-field-dressing-game': {'dress-fish'},
+                 'surv-land-big-game': {'land-deer-vitals'}, 'surv-field-dressing-game': set(),
                  'surv-land-butchering': {'land-deer-cuts'}}
 
 

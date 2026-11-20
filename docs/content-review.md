@@ -7641,3 +7641,28 @@ and enlarged, day and night, and viewed (/home/claude/sdd/figs/, not tracked). T
 - land-deer-vitals (review Minor 2): the unlabelled two-thirds tick removed; the line keeps the bottom, one-third and top ticks.
 - land-deer-cuts: the shaded shank block removed. The text says where the shank starts ("Find the knee joint and cut through it: the
   lower part is the shank") but not where it ends, so "Shank" is now a label with a leader to the hind leg below its knee.
+
+### Land pack Task 6, part 2: fishing and trap set (2026-11-20)
+
+#### land-fishing (surv-traps-and-fishing, "Where the fish are", after the first list)
+
+- Draws a river seen from above, flowing down the page (current arrows), with a fish at four places from the list's rivers-and-streams
+  line: "Rivers and streams: undercut banks, the quiet pocket behind a rock, eddies, the seam where two currents meet, drop-offs, the
+  outside of a bend where the fast water carries food, and the hole below a dam or waterfall (NYS DEC)." Drawn: "Rivers and streams"
+  (title), "The hole below a dam" / "or waterfall" (a dam across the river, a deeper patch just below it), "The outside of a bend" /
+  "where the fast water" / "carries food" (the current arrow swinging to the outer bank), "The quiet pocket" / "behind a rock" (a rock
+  in the current, the fish just downstream of it), "The seam where" / "two currents meet" (a stream joining from the side, a dashed
+  line where the two flows meet).
+- Not drawn: undercut banks, eddies and drop-offs (seen from above they cannot be placed without inventing), anything for lakes
+  (weed beds, lily pads, overhanging trees and bushes are plants), set lines, traps and nets (illegal in New York in normal times);
+  the subject is legal rod-and-reel water reading.
+- Caption: the rivers-and-streams line above, word for word.
+
+#### land-trap-set (surv-land-trapping): not drawn
+
+- Tried the muskrat feed bed set ("a foothold trap in 1 to 2 inches (2.5 to 5 cm) of water in front of the feed pile") with the
+  anchor rules ("12 to 18 inches (30 to 45 cm) long", "at least three swivels on the chain: at the trap, at the stake and in the
+  middle"). At honest proportions the trap under 1 to 2 inches of water is a flat disc, not recognisable as a trap, even drawn at
+  20 px to the inch. The text does not place the stake, the chain's length or the feed pile (bank or floating), so the layout would be
+  invented. The raccoon box needs a body-gripping trap whose springs, trigger and safety the text does not describe; such a trap can
+  catch the trapper, and New York limits them on land. Recorded in docs/v7.7-rulings.md, Diagrams. trap-squirrel is unchanged.

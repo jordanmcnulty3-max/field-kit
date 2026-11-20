@@ -970,11 +970,12 @@ def test_cans_no_can_or_jar_drawn_without_a_sign():
 
 # ---- Land pack (v7.7) batch C: the trap figures move with their text to Trapping only if every drawn string is in its text ----
 def test_squirrel_pole_moved_to_trapping_and_draws_only_the_topics_words():
-    """Fishing for food is fishing only, so it carries no trap figure. trap-squirrel sits once in Trapping and its drawn line is
+    """Fishing for food is fishing only, so it carries no trap figure (its one figure is land-fishing, where fish gather in a
+    river; land pack Task 6). trap-squirrel sits once in Trapping and its drawn line is
     in that topic's own text. trap-snare ("twigs funnel it into the loop", "wire tied to a solid support") and trap-fig4
     ("heavy rock or log", "trigger, bait on the end") draw words no opened source gives, so they are on no topic."""
     used = topic_figs()
-    assert used['surv-traps-and-fishing'] == []
+    assert used['surv-traps-and-fishing'] == ['land-fishing']
     assert used['surv-land-trapping'] == ['trap-squirrel']
     assert all(n not in names for names in used.values() for n in ('trap-snare', 'trap-fig4', 'fishing'))
     topic = topic_text('surv-land-trapping')
@@ -1007,6 +1008,14 @@ LAND_FIGS = {
         [r'\d', r'\bhead\b', r'\bneck\b', r'quartering', r'facing you', r'liver', r'gut', r'spine', r'backbone', r'brain',
          r'shoulder blade', r'diaphragm', r'\bsafe', r'yards?'],
         ['aim just behind the shoulder', 'one third of the way up from the bottom of the chest', 'smaller than a pie plate']),
+    'land-fishing': (
+        'surv-traps-and-fishing', 'Where the fish are',
+        ['rivers and streams', 'the hole below a dam', 'or waterfall', 'the outside of a bend', 'where the fast water',
+         'carries food', 'the quiet pocket', 'behind a rock', 'the seam where', 'two currents meet'],
+        [r'\d', r'trap', r'\bnet', r'set line', r'trotline', r'stakeout', r'\bhook', r'undercut', r'edd', r'drop-off',
+         r'weed', r'lily', r'\btree', r'bush', r'\bsafe', r'ice'],
+        ['the quiet pocket behind a rock', 'the seam where two currents meet',
+         'the outside of a bend where the fast water carries food', 'the hole below a dam or waterfall']),
     'land-deer-cuts': (
         'surv-land-butchering', 'The cuts and what each is good for',
         ['backstrap (loin)', 'tenderloin', 'inside, along the underside', 'of the spine, near the pelvis', 'neck', 'shoulder',
@@ -1128,3 +1137,22 @@ def test_deer_cuts_shank_is_a_label_only():
     assert not [e for e in root.iter() if e.get('data-part') == 'shank']
     assert not [e for e in root.iter() if 'wf' in (e.get('class') or '').split()]
     assert 'shank' in drawn_of('land-deer-cuts')
+
+
+def test_land_fishing_draws_a_fish_at_each_named_place_and_no_trap():
+    """Four fish, one for each labelled place; the river flows down the page (the current arrows point down or downstream),
+    so "behind a rock" and "the hole below a dam" read the right way round; no trap, net, line or hook is drawn."""
+    root = ET.fromstring(figs.F['land-fishing'][0])
+    fish = [e for e in root.iter() if e.get('data-part') == 'fish']
+    assert len(fish) == 4
+    pos = [tuple(float(v) for v in re.findall(r'-?\d+(?:\.\d+)?', f.get('transform'))[:2]) for f in fish]
+    part = {e.get('data-part'): e for e in root.iter() if e.get('data-part') in ('dam', 'hole', 'rock', 'seam')}
+    dam_y = float(part['dam'].get('y1'))
+    hole = part['hole']
+    assert float(hole.get('cy')) > dam_y, 'the hole is below (downstream of) the dam'
+    assert (float(hole.get('cx')), float(hole.get('cy'))) in pos
+    rx, ry = float(part['rock'].get('cx')), float(part['rock'].get('cy'))
+    assert any(abs(x - rx) < 6 and 0 < y - ry < 30 for x, y in pos), 'a fish just downstream of the rock'
+    for line in root.iter():
+        if line.tag.split('}')[-1] == 'line' and line.get('marker-end') and 'a' in line.get('class', '').split():
+            assert float(line.get('y2')) >= float(line.get('y1')) or float(line.get('x2')) > float(line.get('x1'))

@@ -950,7 +950,13 @@ def test_fishing_fish_cleaning_and_trapping_split_the_old_traps_topic():
         assert word not in fish_text, word
     trap_text = ' '.join(_texts(trap))
     assert 'New York law forbids setting a snare or any noose that can take an animal' in trap_text
-    assert 'does not address deadfalls' in trap_text and 'ask DEC' in trap_text
+    assert 'New York law counts a deadfall as a trapping device' in trap_text
+    assert 'This app’s caution: don’t set one without asking DEC.' in trap_text and 'Illegal in normal times' not in trap_text
+    assert 'touch the eye or mouth with the striking tool, never your hand' in trap_text
+    assert 's:surv-land-ny-rules' in _links(trap) and 's:surv-land-ny-rules' in _links(fishing)
+    assert {'s:surv-land-butchering', 's:surv-land-keeping-meat', 's:surv-field-dressing-game'} <= set(_links(trap))
+    fd = topics['surv-field-dressing-game']
+    assert 's:surv-land-fish-cleaning' in _links(fd) and quoted in ' '.join(_texts(fd))
     for t in ('surv-food-when-short', 'surv-food-power-out'):
         labels = [b['label'] for s in topics[t]['sections'] for b in s['blocks'] if b.get('link') == 's:surv-traps-and-fishing']
         assert labels == ['Fishing for food'], (t, labels)

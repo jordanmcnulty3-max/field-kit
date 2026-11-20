@@ -40,6 +40,8 @@ PINNED_FIGS = {'surv-find-water': {'water-bend', 'water-bag'}, 'surv-make-water-
                  'surv-traps-and-fishing': set(),
                  # land pack batch C: the squirrel pole moved with its text to Trapping (the only trap figure whose drawn words the text carries)
                  'surv-land-trapping': {'trap-squirrel'},
+                 # batch C fix round: the fish gutting figure moved with the fish text from Field dressing game to the fish page
+                 'surv-land-fish-cleaning': {'dress-fish'},
                  'surv-water-in-the-house': {'water-heater-drain'}, 'surv-toilet-no-water': {'toilet-buckets'},
                  'surv-latrines': {'latrine'}, 'surv-handwashing': {'handwash-station'},
                  # heat pack Task 7 deepened fire and shelter; heat pack Task 8 restores fire-ferro (push the striker down) and

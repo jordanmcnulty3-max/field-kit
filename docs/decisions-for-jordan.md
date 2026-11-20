@@ -1206,7 +1206,10 @@ docs/v7.7-rulings.md ("Batch A1").
 183. **Water-by-water fish advice is not in the app (surv-land-fish-cleaning).** The page carries the NYS Department of Health statewide
    table (issued 2024, page revised March 2025) and names the waters given stricter advice in April 2026, and says to check your water in
    normal times. The Department's regional brochures (Finger Lakes, Leatherstocking and others) list waters with their own advice; they
-   were not opened, so none is on the page. Offline, a person can't look them up. Say if the waters the group fishes should be added.
+   were not opened. Fix round: the page now carries a second table of the Central New York waters with their own advice (Cayuga,
+   Cortland, Madison, Oneida, Onondaga and Oswego counties) from the Department's Advisory Listings by County. Two listings whose
+   columns were unclear ("every other fish" in the Mud Creek and Sauquoit Creek entry and in the Oswego River between Varick Dam
+   and the upper dam) are shown as "Don't eat" for both groups, the cautious reading. Say if other counties should be added.
 184. **Fish: 2 days cold and 145°F, not New York Sea Grant's figures (surv-land-fish-cleaning).** New York Sea Grant (Handling Your
    Catch) says freeze fish you can't cook within two or three days, and cook to 140°F for one minute. NYS DEC (2 days in a fridge) and
    FDA (within 2 days at 40°F or below; 145°F) are more cautious. Today: 2 days and 145°F, with Sea Grant's figures named as set aside.
@@ -1226,9 +1229,9 @@ docs/v7.7-rulings.md ("Batch A1").
    furbearer meat thoroughly until the juices run clear." The page uses Field dressing game's 165°F rule for all wild game instead and
    does not give the juices test. Nothing to decide unless you want the manual's words shown too.
 189. **Left out of Trapping for want of a source.** Trapping rabbits or hares (no trapper education source opened covers it; hunting is
-   in Small game and birds); steps to free a dog from a foothold trap (the sources give only general release: catchpole, cover, press the
-   springs, a partner); the AFWA species Best Management Practices sheets (the raccoon sheet could not be opened); the IAFWA manual's
-   cable-device (snare) chapter (legal elsewhere, not in New York; read only in summary, not used). Today: none on the page. Say which you want researched.
+   in Small game and birds); the AFWA species Best Management Practices sheets (the raccoon sheet could not be opened); the IAFWA manual's
+   cable-device (snare) chapter (legal elsewhere, not in New York; read only in summary, not used). Today: none on the page. (Fix round: North Dakota Game and Fish's foothold steps for a dog are now on Trapping; the IAFWA
+   manual is no longer cited, see docs/v7.7-rulings.md.) Say which you want researched.
 
 
 Food from the land pack (v7.7), batch D (New York rules; food sources after fallout): numbers 190 to 199.

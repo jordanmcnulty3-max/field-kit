@@ -981,3 +981,15 @@ def test_squirrel_pole_moved_to_trapping_and_draws_only_the_topics_words():
     for _, _, s in _texts('trap-squirrel'):
         assert s.strip() in topic, f'trap-squirrel: drawn {s!r} is not in surv-land-trapping'
     assert fig_section('surv-land-trapping', 'trap-squirrel') == ['Snares and deadfalls (survival manuals)']
+
+
+def test_dress_fish_moved_with_the_fish_text_to_the_fish_page():
+    """Batch C fix round (spec 7, one rule one owner): the fish gutting figure sits once on the fish page, in its gutting section,
+    and its drawn line is in that page's text; Field dressing game no longer carries it."""
+    used = topic_figs()
+    assert used['surv-land-fish-cleaning'] == ['dress-fish']
+    assert 'dress-fish' not in used['surv-field-dressing-game']
+    topic = topic_text('surv-land-fish-cleaning')
+    for _, _, s in _texts('dress-fish'):
+        assert s.strip().rstrip('.') in topic, f'dress-fish: drawn {s!r} is not in surv-land-fish-cleaning'
+    assert fig_section('surv-land-fish-cleaning', 'dress-fish') == ['Gut it']

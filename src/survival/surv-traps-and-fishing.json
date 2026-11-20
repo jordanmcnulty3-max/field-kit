@@ -11,16 +11,20 @@
     "fish trap",
     "gorge hook"
   ],
-  "summary": "Fish are often more plentiful than game and can be caught quietly. Fish where they gather in each season, use set lines, traps and ice fishing as the sources teach them, and keep the catch alive or cold until you clean it. On ice, walk only on at least 4 inches (10 cm) of solid clear ice, or 8 inches (20 cm) of white ice.",
+  "summary": "Fish are often more plentiful than game and can be caught quietly. Fish where they gather in each season, use set lines, traps and ice fishing as the sources teach them (set lines, fish traps and most nets are illegal in New York in normal times), and keep the catch alive or cold until you clean it. On ice, walk only on at least 4 inches (10 cm) of solid clear ice, or 8 inches (20 cm) of white ice.",
   "sections": [
     {
       "h": "When it is for food",
       "blocks": [
         {
-          "p": "This page assumes you have fished with a rod and reel before. Fish are a good source of protein and fat, are often more plentiful than game, and can be caught quietly (US Army). Panfish are easy for beginners to catch and excellent to eat (NYS DEC)."
+          "p": "This page assumes you have fished with a rod and reel before. Fish are a good source of protein and fat, are often more plentiful than game, and can be caught quietly (US Army). Sunfish are usually the first fish children catch (NYS DEC)."
         },
         {
-          "warn": "In normal times New York law sets who needs a licence, when each fish may be taken, how many lines you may use, and which methods are allowed. Three methods on this page are illegal in New York in normal times: set lines left without the angler in immediate attendance, fish traps for anything but baitfish, and nets other than the few the rules allow (NYS DEC). They are on this page because the sources teach them. The rules are in New York rules for hunting, fishing and trapping."
+          "warn": "In normal times New York law sets who needs a licence, when each fish may be taken, how many lines you may use and which methods are allowed (2026 fishing guide). Three methods on this page go beyond what the rules allow in normal times: set lines, fish traps for anything but baitfish, and nets other than the few the rules allow. They are on this page because the sources teach them."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
         }
       ]
     },
@@ -29,23 +33,22 @@
       "blocks": [
         {
           "list": [
-            "Lakes and ponds: weed beds, especially beds that lead to deeper water, and their edges, where fish cruise looking for food. Points that slope gradually into deeper water (not ones that drop off quickly). Docks, downed trees, overhanging trees and lily pads, which give shade and cover (NYS DEC).",
-            "Inlets carry food into a lake, and fish gather near them before moving upstream to spawn, usually in spring or fall (NYS DEC).",
-            "Rivers and streams: undercut banks (the largest fish in a river often live there), the quiet pocket behind a rock, eddies, the seam where two currents meet, drop-offs, the outside of a bend where the fast water carries food, and the hole below a dam or waterfall (NYS DEC). In heavy current fish rest in eddies, and gather in deep pools, under overhanging brush and around sunken logs (US Army).",
-            "Fish are not always near the bottom or the surface: change the depth of your bait until you find them (NYS DEC). Cold water slows fish down, so move a lure slowly when the water is cold (NYS DEC)."
+            "Lakes and ponds: the edges of weed beds, where fish cruise (cast into the edges and openings to avoid tangles); points that slope gradually into deeper water (fish the tip and the corners); docks, where fish shelter from the sun at almost any time of day; downed trees and other sunken objects; trees and bushes hanging over the water, best where the water under them is deep; and lily pads (NYS DEC).",
+            "Inlets, where streams enter a lake, can be excellent, especially in spring or fall, when spawning fish gather there (NYS DEC).",
+            "Rivers and streams: undercut banks, the quiet pocket behind a rock, eddies, the seam where two currents meet, drop-offs, the outside of a bend where the fast water carries food, and the hole below a dam or waterfall (NYS DEC). In heavy current fish rest in eddies, and gather in deep pools, under overhanging brush and around sunken logs (US Army).",
+            "Fish are not always near the bottom or the surface: change the depth of your bait until you find them. Cold water slows fish down, so move a lure slowly when the water is cold (NYS DEC)."
           ]
         },
         {
-          "p": "By season and time of day (NYS DEC, unless another source is named):"
+          "p": "By season (NYS DEC):"
         },
         {
           "list": [
-            "Spring: fish for crappie before they spawn. Walleye early in their season are around their spawning areas. Bullheads bite best in spring and summer.",
-            "Summer: in the heat, crappie hang over deeper water, black crappie look for deeper, cooler water, and walleye are mostly in the deep part of the lake.",
-            "Fall: walleye move back toward shore as the water cools, following schools of gizzard shad that come close to shore from late September through November.",
+            "Spring: yellow perch spawn in shallow water near plants in April and May; crappie gather in shallow water to spawn; brown bullheads spawn in shallow water near logs or rocks in May and June.",
+            "Summer: sunfish (pumpkinseed, bluegill) spawn in shallow water from June to August and live around weeds, docks and other cover; crappie move to deeper, cooler water.",
+            "Year round: yellow perch live in shallow, weedy, sheltered places; bullheads in still water with a mud bottom; walleye in the deep parts of large lakes, streams and rivers, and they hunt at night.",
             "Winter: under the ice; see Ice fishing below.",
-            "Time of day: sunfish bite best in the morning and evening; crappie may bite at dawn, at dusk or at night; walleye are most active just before and after sunset; bullheads bite best in the evening or at night.",
-            "Weather: fish eat heavily before a storm and seldom just after one, while the water is muddy and high. A light often draws fish at night (US Army)."
+            "Weather: fish eat heavily before a storm and seldom just after one, while the water is muddy. A light often draws fish at night (US Army)."
           ]
         }
       ]
@@ -55,8 +58,8 @@
       "blocks": [
         {
           "list": [
-            "For panfish: an ultra-light to medium-light rod, a spinning or spin-casting reel, hooks size 6 to 10, 6 to 8 lb test line, the smallest bobber you can use, and small split shot (NYS DEC).",
-            "Sunfish: crickets, grasshoppers, earthworms, grubs or waxworms. Yellow perch: small minnows or worms on a #6 hook, near the bottom; if you catch only small perch, try deeper water. Bullheads: doughballs, nightcrawlers or chicken livers on a #4 or #6 hook, on the bottom. Crappie: small jigs or minnows under a small bobber in 3 to 6 feet (1 to 2 m) of water (NYS DEC)."
+            "For beginners: a spin-casting rod and reel, monofilament line (4 to 8 lb test for bluegill and yellow perch; 8 lb for most fishing), size 6 to 8 hooks for panfish, the smallest bobber that still holds your bait up, and the smallest sinker that keeps bait on the bottom. A bobber and bait is the best rig for beginners (NYS DEC).",
+            "Bait: worms catch almost anything; minnows hooked through the back, tail or lip so they swim naturally; crickets for panfish; waxworms for trout, perch, crappie and sunfish; crayfish for bass (NYS DEC)."
           ]
         }
       ]
@@ -65,7 +68,11 @@
       "h": "Set lines",
       "blocks": [
         {
-          "warn": "In normal times New York prohibits set lines left without the angler in immediate attendance (NYS DEC). The methods below are taught by the US Army survival manual and, where they are legal, by the Missouri Department of Conservation."
+          "warn": "In normal times a set line is illegal in New York beyond what the 2026 fishing guide allows: the guide limits how many lines you may fish and the baits and hook points on each, and you must stay with your lines. So a trotline or stakeout with many hooks is illegal even when you stand beside it. The methods below are taught by the US Army survival manual and, where they are legal, by the Missouri Department of Conservation."
+        },
+        {
+          "link": "s:surv-land-ny-rules",
+          "label": "New York rules for hunting, fishing and trapping"
         },
         {
           "list": [
@@ -88,7 +95,7 @@
       "h": "Fish traps and nets",
       "blocks": [
         {
-          "warn": "In normal times New York allows fish traps only for baitfish (minnow traps, with size limits), and no nets except a landing net, nets for baitfish and one dip net for a few kinds of fish (NYS DEC)."
+          "warn": "In normal times New York allows fish traps only for baitfish (minnow traps, with size limits), and no nets except a landing net, nets for baitfish and one dip net for a few kinds of fish (2026 fishing guide; see New York rules for hunting, fishing and trapping)."
         },
         {
           "list": [
@@ -108,7 +115,7 @@
         {
           "list": [
             "Check the thickness before you leave shore, and drill test holes as you go, at least every 150 feet (45 m), with a spud bar or an auger. Thickness varies even on one lake (NYS DEC).",
-            "Be most careful near shore, near moving water, where streams enter and leave lakes and ponds, and around docks, where bubblers keep ice thin some distance away (NYS DEC). Avoid ice-covered streams and rivers: the current weakens the ice (trapper education manual).",
+            "Be most careful near shore, near moving water, where streams enter and leave lakes and ponds, and around docks, where bubblers keep ice thin some distance away (NYS DEC).",
             "Carry ice safety picks (two handles with spike points). Fish with someone else, and tell someone where you will be and when you will be back (NYS DEC)."
           ]
         },
@@ -122,7 +129,7 @@
             "Put your hands and arms on the unbroken ice.",
             "Kick your feet and dig in your ice picks to work your way back onto the solid ice.",
             "Once you are out, lie flat on the ice and roll away from the hole.",
-            "Get to a warm, dry, sheltered place and rewarm yourself at once. With no shelter or vehicle near, build a fire right away (trapper education manual)."
+            "Get to a warm, dry, sheltered place and rewarm yourself at once."
           ]
         },
         {
@@ -139,7 +146,7 @@
         {
           "list": [
             "Cut the hole with a spud bar (fine for ice up to about a foot (30 cm) thick; tie a lanyard to it so you don’t lose it through the ice) or an auger. Clear slush and ice chunks out of the hole with a skimmer.",
-            "Tip-up: a spool on a stick that holds a baited line through the hole; a bite releases a signal, usually a red flag. Most anglers set several. Hook a minnow through the lips or under the back fin.",
+            "Tip-up: a spool on a stick that holds a baited line through the hole; a bite releases a signal, usually a red flag. Most anglers set several (in normal times New York limits the lines you may fish through the ice: see the rules page). Hook a minnow through the lips or under the back fin.",
             "Jigging: a jigging rod or hand line with a small spoon or lure, usually tipped with bait (minnows or fly larvae sold as spikes or mousies). Raise the rod tip a few inches and pause: fish usually take the bait during the pause."
           ]
         },
@@ -152,7 +159,7 @@
             "Yellow perch: from shallow weed beds under 10 feet (3 m) deep to flats in 40 feet (12 m) of water.",
             "Crappie: along weed edges, or hanging in open water.",
             "Northern pike and chain pickerel: shallow water, 5 to 15 feet (1.5 to 4.5 m), around or over weed beds.",
-            "Trout: anywhere from just under the ice to just off the bottom.",
+            "Trout: anywhere from just a few feet under the ice to just off the bottom.",
             "Walleye: around points, flats and shoals, within a foot (30 cm) of the bottom.",
             "Large, shallower ponds and lakes suit chain pickerel, northern pike, yellow perch and sunfish; deep lakes must be fished selectively for pike, walleye or lake trout."
           ]
@@ -178,12 +185,12 @@
   ],
   "sources": [
     {
-      "name": "NYS DEC, Where To Fish: Lakes And Ponds; Where To Fish: Rivers And Streams; Fishing For Panfish; Fishing For Walleye (web pages, undated)",
-      "used": "Where fish hold in lakes, ponds, rivers and streams; inlets in spring or fall; seasons and times of day for crappie, bullheads, sunfish, perch and walleye; panfish tackle and bait; panfish excellent to eat"
+      "name": "NYS DEC, Where To Fish: Rivers And Streams (web page, undated)",
+      "used": "Where fish hold in rivers and streams"
     },
     {
       "name": "NYS DEC, Beginners’ Guide to Freshwater Fishing (I FISH NY, with Take Me Fishing/RBFF), chapters 1 to 3 and 9",
-      "used": "Depth of bait; slow lures in cold water; black crappie in summer; stringer through the lower jaw; mesh basket; ice as soon as possible; ice thickness 4 inches clear or 8 inches white; test holes every 150 feet; carry ice picks; tell someone; spud lanyard; skimmer; tip-ups; jigging and the pause; where fish are under the ice"
+      "used": "Lakes and ponds: weed edges, points, docks, downed trees, overhanging trees, lily pads; inlets in spring or fall; depth of bait; slow lures in cold water; species habitat and spawning seasons (sunfish, yellow perch, crappie, brown bullhead, walleye); beginners' tackle and bait; stringer through the lower jaw; mesh basket; ice as soon as possible; ice thickness 4 inches clear or 8 inches white; test holes every 150 feet; carry ice picks; tell someone; spud lanyard; skimmer; tip-ups; jigging and the pause; where fish are under the ice"
     },
     {
       "name": "NYS DEC, Learn How To Ice Fish (web page, undated)",
@@ -196,10 +203,6 @@
     {
       "name": "NYS DEC, Trapping Furbearers: An Introduction to Responsible Trapping, student manual, 4th edition (2016)",
       "used": "Six inches or more of strong ice for several people"
-    },
-    {
-      "name": "International Association of Fish and Wildlife Agencies, Trapper Education Manual (2005)",
-      "used": "Avoid ice-covered streams and rivers; build a fire at once after escaping icy water unless shelter or a vehicle is near"
     },
     {
       "name": "New York rules for hunting, fishing and trapping (this app), from the NYS DEC 2026 Freshwater Fishing Regulations Guide",
@@ -219,7 +222,7 @@
     },
     {
       "name": "US Army FM 21-76, Survival Manual (2006 copy), chapter 8",
-      "used": "Second source for feeding before storms, light at night, eddies and pools (p. 76), gorge and stakeout (p. 90), gill net (p. 91) and basket traps (p. 92)"
+      "used": "Second source for feeding before storms, light at night, eddies and pools (p. 75), gorge and stakeout (p. 90), gill net (p. 91) and basket traps (p. 92)"
     },
     {
       "name": "Maine Department of Inland Fisheries and Wildlife, How to Bring Home a Quality Catch (Maine Fishing Guide, web page, undated)",
@@ -230,6 +233,5 @@
       "used": "Get the fish on ice as soon as it is caught"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

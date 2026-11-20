@@ -7294,3 +7294,51 @@ Re-opened in this round (built-in fetch, title checked):
   consume meat from this carcass."
 
 Changes: listed per finding in /home/claude/sdd/task-2-a2-report.md, "Fix round". Conversions (app's own): 6 cm = about 2 1/2 in.
+
+### Batch C fix round (2026-11-20), from task-4-review.md
+
+Re-opened 2026-11-20 (title checked): DEC-TM pp. 82-84 (dispatch); NDGF foothold page https://gf.nd.gov/hunting/trapping-and-dogs/foothold
+(found by search: "Foothold Traps - Identification, Use and Removing a Dog", North Dakota Game and Fish Department); DEC-BG chapters 1
+and 2; DEC Where To Fish: Rivers And Streams at the search-returned URL https://www.dec.ny.gov/outdoor/81401.html; FM pp. 75, 79, 82;
+DEC-PR; DOH-TIPS; NYS DOH Advisory Listings by County, https://healthweb-back.health.ny.gov/environmental/outdoors/fish/health_advisories/by_county.htm
+(no date on the page). Rules page (now in the worktree, approved) read for snares, deadfalls, lines, baits and hook points.
+
+- C1, Trapping "Killing a trapped animal", from DEC-TM pp. 83-84 in its order: beginners only animals they can kill easily and safely
+  ("New or young trappers should only pursue animals which they can easily and safely kill"); .22 rimfire through the front of the
+  brain; opossum at the base of the ear or down the midline of the skull; foothold and cage-trapped animals can be shot safely;
+  ricochet off ground, rocks or trap; everyone behind the shooter. Without a firearm: strike sharply at the base of the skull with a
+  heavy wooden or metal tool; strike twice (first unconscious, second dead or comatose); "To ensure death, pin the head with one foot
+  and stand on the chest (area near the heart) of the animal" for several minutes; "The trapper should never attempt to stand on a
+  conscious animal"; "touch the eye or mouth of the animal with the striking tool and watch for any reaction"; no reaction, breathing
+  or heartbeat; opossum hard to check. Warn: "The larger furbearers such as raccoon, coyote, and bobcat may be too large for some
+  beginners to safely kill" (get help); closing advice (p. 84): if releasing or killing seems hard, don't trap on land, use body-grip
+  and submersion sets for water furbearers. The IAFWA lines (.22 between the eyes, heart shot, base-of-skull strike) were removed; the
+  rabies sentence now rests on DEC-TM p. 22 ("kill it without damaging the head so that health authorities can test it for rabies").
+- I1: Do first 4 from the NDGF foothold page (single long spring "compress the spring to open the trap", "Use your foot if necessary";
+  double long spring and coil spring "compress both springs at the same time"; "Use your feet if necessary"; "Slide the open trap off
+  the dog's foot"; removing the trap from its anchor does not release the foot; act immediately). The page says nothing about bites.
+- I2: Set lines warn: in normal times illegal beyond what the 2026 fishing guide allows (lines, baits and hook points per line,
+  attendance), so a many-hooked trotline or stakeout is illegal even attended; link to the rules page; no numbers restated. Tip-ups:
+  "in normal times New York limits the lines you may fish through the ice: see the rules page".
+- I3: deadfall warn now the rules page's own words, shorter: "the guide neither allows nor forbids them by name, and New York law
+  counts a deadfall as a trapping device. This app's caution: don't set one without asking DEC." No "Illegal" label; link added.
+- I4: every New York sentence on Fishing for food and Trapping now says "in normal times" and names the 2026 fishing guide or the
+  2026–27 hunting and trapping guide; snares rest on the guide (the 2016 manual kept only for "may still be on sale"); links to the
+  rules page in the fishing warn, set lines, trapping warn, Checking traps, Releasing and the snares and deadfalls warn.
+- I5: second table on the fish page, from the by-county listings for Cayuga, Cortland (none), Madison, Oneida, Onondaga and Oswego.
+  Rows grouped by water where the advice is the same; species, sizes and meals as listed; inches converted. Where the page's columns
+  were run together, the split was read from the pattern of other rows (Owasco, Chenango, Kayuta pickerel, Mohawk E20 to E18 walleye,
+  Delta pike, Onondaga smallmouth, Salmon River Reservoir largemouth). Mud Creek and Sauquoit Creek "all other fish" and Oswego River
+  (Varick to upper dam) "all other fish" read two ways in two fetches; shown "Don't eat" for both groups as the app's reading (D183).
+  The statewide table is said not to apply to the fish named for these waters. Water names include place names that DOH uses; none is
+  the group's home.
+- I6: links added (rules page; Field dressing game, Butchering deer and small game, Keeping game meat in a new "After the catch"
+  section). Field dressing game: the fish item replaced by a pointer plus a link block; the `dress-fish` figure moved to the fish page
+  "Gut it" section, whose text now says "cut from the vent to the gills, pull the guts out" (the figure's drawn line; DEC-BG field
+  dressing steps). The 145°F sentence is unchanged in Field dressing game, the fish page and Cook without power.
+- Minor fixes: see docs/v7.7-rulings.md, "Batch C fix round".
+- Removed for want of a search-returned, re-opened source: the IAFWA manual (meat of raccoons and opossums; cage traps near buildings
+  and pets; first light; between the eyes; heart shot; pets may bite; blanket over a bird of prey; rope within reach; avoid ice-covered
+  streams; fire after icy water); the DEC Lakes and Ponds, Panfish and Walleye pages (walleye in spring, summer and fall; crappie before
+  spawning; times of day for sunfish, crappie, walleye and bullheads; panfish tackle and bait lines), replaced from DEC-BG where it
+  gives the same subject (lakes and ponds structure, species seasons, beginner tackle and bait).

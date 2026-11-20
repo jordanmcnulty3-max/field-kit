@@ -10,7 +10,8 @@
     "fish advisory",
     "eating fish",
     "fish fillet",
-    "scale fish"
+    "scale fish",
+    "store fish"
   ],
   "summary": "Kill the fish quickly and get it cold. Gut it soon, then fillet it or cook it whole. Keep cleaned fish at 40°F (4°C) or below and cook it within 2 days, or freeze it. Throw out fish that smells sour, rancid or of ammonia. Cook fish to 145°F (63°C). New York’s Department of Health advises how many fish meals a month from which fish; people who could become pregnant (under 50) and children under 15 should eat less of some fish and none of others.",
   "sections": [
@@ -35,7 +36,7 @@
       "h": "Gut it",
       "blocks": [
         {
-          "p": "Field dressing, NYS DEC’s steps:"
+          "p": "In short: cut from the vent to the gills, pull the guts out. NYS DEC’s field dressing steps:"
         },
         {
           "steps": [
@@ -44,6 +45,10 @@
             "Scrape out the long red kidney along the backbone, with the knife blade or your thumbnail.",
             "Rinse the belly and pack the fish in a cooler with ice."
           ]
+        },
+        {
+          "fig": "dress-fish",
+          "cap": "The vent is the small opening on the belly toward the tail."
         },
         {
           "list": [
@@ -136,10 +141,10 @@
       "h": "New York’s advice on eating fish you catch",
       "blocks": [
         {
-          "p": "From the NYS Department of Health: its statewide advice was issued in 2024 (page revised March 2025), and its waterbody advice was last updated in April 2026. It applies to waters with no advice of their own, outside the Adirondack and Catskill regions, which have their own regional advice. Some waters have stricter advice of their own: in April 2026 it was made stricter for Lake Ontario, Lake Erie, the upper Niagara River, part of the Mohawk River, Cumberland Bay of Lake Champlain, Lake George, Seneca Lake and Catharine Creek. In normal times, check the Department’s list for your water before you eat what you catch."
+          "p": "From the NYS Department of Health: its statewide advice was issued in 2024 (page revised March 2025), and its waterbody advice was last updated in April 2026. It applies to waters with no advice of their own, outside the Adirondack and Catskill regions, which have their own regional advice. Some waters have advice of their own (the Central New York ones are in the second table): in April 2026 it was made stricter for Lake Ontario, Lake Erie, the upper Niagara River, part of the Mohawk River, Cumberland Bay of Lake Champlain, Lake George, Seneca Lake and Catharine Creek. In normal times, check the Department’s list for your water before you eat what you catch."
         },
         {
-          "p": "Who: “sensitive” means people who may become pregnant (under age 50) and children under 15; “most people” is everyone else (NYS Department of Health). Chemicals in fish can affect unborn babies and children’s development, can stay in the body for decades, and can pass to a baby through breastfeeding (NYS Department of Health). Swipe sideways to see the whole table."
+          "p": "Who: “sensitive” means people who may become pregnant (under age 50) and children under 15; “most people” is everyone else (NYS Department of Health). Chemicals in fish can affect unborn babies and children’s development, can stay in the body for decades, and can pass to a baby through breastfeeding (NYS Department of Health)."
         },
         {
           "table": {
@@ -173,12 +178,255 @@
           }
         },
         {
+          "p": "Central New York waters with their own advice. The statewide table above does not apply to the fish named for these waters: use this table instead. For a fish not named for its water, use the statewide table. From NYS Department of Health’s advisory listings by county (Cayuga, Cortland, Madison, Oneida, Onondaga and Oswego counties), as listed in November 2026; Cortland County has no water with advice of its own. In normal times, check the Department’s list: advice changes. Swipe sideways to see the whole table."
+        },
+        {
+          "table": {
+            "head": [
+              "Water",
+              "Fish",
+              "Most people (meals)",
+              "Sensitive (meals)"
+            ],
+            "rows": [
+              [
+                "Onondaga Lake; the Seneca River below Lock 24",
+                "White perch, walleye, largemouth bass, channel catfish, carp",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Onondaga Lake; the Seneca River below Lock 24",
+                "Smallmouth bass",
+                "Over 15 in (38 cm): don’t eat; under 15 in: up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Onondaga Lake; the Seneca River below Lock 24",
+                "Yellow perch; every fish not named here",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Onondaga Lake; the Seneca River below Lock 24",
+                "Pumpkinseed and other sunfish, brown bullhead",
+                "Up to 4 a month",
+                "Don’t eat"
+              ],
+              [
+                "Oswego River, Varick Dam to the upper dam (Lock 2)",
+                "Channel catfish",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Oswego River, Varick Dam to the upper dam (Lock 2)",
+                "Every other fish",
+                "Don’t eat (this app’s reading of an unclear listing)",
+                "Don’t eat"
+              ],
+              [
+                "Oswego River, mouth to Varick Dam (Lock 8)",
+                "Every fish",
+                "As Lake Ontario",
+                "As Lake Ontario"
+              ],
+              [
+                "Lake Ontario",
+                "Carp",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Lake Ontario",
+                "Walleye, lake trout, brown trout over 20 in (51 cm)",
+                "Up to 1 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Lake Ontario",
+                "Smallmouth bass, rainbow trout and steelhead, brown trout under 20 in, coho, chinook and Atlantic salmon, bluegill, pumpkinseed and other sunfish",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Salmon River, mouth to the Salmon River Reservoir",
+                "Smallmouth bass",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Salmon River, mouth to the Salmon River Reservoir",
+                "Every other fish",
+                "As Lake Ontario",
+                "As Lake Ontario"
+              ],
+              [
+                "Salmon River Reservoir",
+                "Smallmouth bass",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Salmon River Reservoir",
+                "Largemouth bass",
+                "Over 15 in (38 cm): don’t eat; under 15 in: up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Salmon River Reservoir",
+                "Yellow perch",
+                "Over 10 in (25 cm): up to 1 a month; under 10 in: up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Oneida Lake",
+                "Walleye, smallmouth bass",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Skaneateles Creek, lake dam to the Seneca River",
+                "Rainbow trout, brown trout",
+                "Up to 1 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Owasco Lake",
+                "Walleye",
+                "Up to 1 a month",
+                "Over 19 in (48 cm): don’t eat; under 19 in: up to 1 a month"
+              ],
+              [
+                "Owasco Lake",
+                "Rainbow trout, brown trout",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Cayuga Lake",
+                "Rainbow trout",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Jamesville Reservoir; the Erie Canal, Lockport to Lock 21",
+                "Yellow perch",
+                "Over 10 in (25 cm): up to 1 a month; under 10 in: up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Glacier Lake (Clark Reservation State Park)",
+                "Pumpkinseed and other sunfish",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Eaton Brook Reservoir",
+                "Walleye",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Chenango River",
+                "Walleye",
+                "Up to 1 a month",
+                "Over 19 in (48 cm): don’t eat; under 19 in: up to 1 a month"
+              ],
+              [
+                "Unadilla River, below Mill Pond Dam",
+                "Walleye",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Delta Lake",
+                "Northern pike",
+                "Over 26 in (66 cm): don’t eat; under 26 in: up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Delta Lake",
+                "Largemouth bass",
+                "Up to 1 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Kayuta Lake",
+                "Yellow perch",
+                "Over 10 in (25 cm): up to 1 a month; under 10 in: up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Kayuta Lake",
+                "Chain pickerel",
+                "Up to 1 a month",
+                "Over 20 in (51 cm): don’t eat; under 20 in: up to 1 a month"
+              ],
+              [
+                "Mohawk River and Erie Canal, Feeder Dam 1 to Lock E20",
+                "Walleye, rock bass, carp, bluegill",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Mohawk River and Erie Canal, Feeder Dam 1 to Lock E20",
+                "Yellow perch, smallmouth bass",
+                "Up to 1 a month",
+                "Don’t eat"
+              ],
+              [
+                "Mohawk River and Erie Canal, Feeder Dam 1 to Lock E20",
+                "White sucker, pumpkinseed and other sunfish",
+                "Up to 1 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Mohawk River and Erie Canal, Lock E20 to Lock E18",
+                "White sucker, tiger muskellunge, smallmouth bass, largemouth bass, carp",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Mohawk River and Erie Canal, Lock E20 to Lock E18",
+                "Walleye",
+                "Up to 1 a month",
+                "Over 19 in (48 cm): don’t eat; under 19 in: up to 1 a month"
+              ],
+              [
+                "Mohawk River and Erie Canal, Lock E20 to Lock E18",
+                "Yellow perch, pumpkinseed and other sunfish, bluegill",
+                "Up to 4 a month",
+                "Up to 1 a month"
+              ],
+              [
+                "Sixmile Creek (Gulf Road to the Mohawk River); Threemile Creek",
+                "Every fish",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Mud Creek (to Sauquoit Creek); Sauquoit Creek, Old Silk Mill Dam to the Mohawk River",
+                "White sucker, brown trout",
+                "Don’t eat",
+                "Don’t eat"
+              ],
+              [
+                "Mud Creek (to Sauquoit Creek); Sauquoit Creek, Old Silk Mill Dam to the Mohawk River",
+                "Every other fish",
+                "Don’t eat (this app’s reading of an unclear listing)",
+                "Don’t eat"
+              ]
+            ]
+          }
+        },
+        {
           "p": "To lower the chemicals in a meal (NYS Department of Health):"
         },
         {
           "list": [
             "Choose smaller fish of a kind: they may carry less.",
-            "Remove the skin and trim all the fat from the belly flap and along the sides. This lowers the chemicals that collect in fat, but not mercury, which is in the meat itself.",
+            "Remove the skin and trim all the fat from the belly flap, the line along the sides, the back and under the skin. This lowers the chemicals that collect in fat, but not mercury, which is in the meat itself.",
             "Broil, grill or bake the trimmed, skinned fish on a rack so the fat drips away, and don’t use the drippings for sauce or gravy. Cooking or soaking fish cannot get rid of the chemicals.",
             "Spread your meals out: if the advice is up to 4 meals a month, don’t eat them all in one week. This matters most for women and young children."
           ]
@@ -230,8 +478,11 @@
     {
       "name": "NYS Department of Health, Tips for Healthier Eating (revised January 2023)",
       "used": "Smaller fish; skin and trim fat; mercury in the meat; rack cooking, no drippings; cooking or soaking does not remove chemicals; spacing meals"
+    },
+    {
+      "name": "NYS Department of Health, Advisory Listings by County (web page, read November 2026; no date on the page)",
+      "used": "Advice for named waters in Cayuga, Cortland, Madison, Oneida, Onondaga and Oswego counties"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

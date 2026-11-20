@@ -962,11 +962,33 @@ def test_the_cdc_bottle_soak_is_on_the_babies_page_for_that_use_only_and_clean_a
     assert 'Soak for 2 minutes (CDC).' in texts
     assert 'CDC’s bleach soak is for baby bottles and feeding items only. Never use it for drinking water.' in texts
     assert not any('is not on this page' in x for x in texts)
-    special = [x for x in _texts(topics['surv-clean-and-disinfect']) if 'two more special-purpose bleach mixes' in x]
+    special = [x for x in _texts(topics['surv-clean-and-disinfect']) if 'three more special-purpose bleach mixes' in x]
     assert len(special) == 1 and 'Feeding babies and young children' in special[0] and 'Food poisoning and botulism' in special[0]
+    assert 'Butchering deer and small game' in special[0]   # the knife and tool soak (whole-pack read, C1)
     assert 'never for drinking water' in special[0]
     assert '5 parts clean water' in ' '.join(_texts(topics['surv-food-poisoning']))   # the clean-up mix is where the sentence says
 
+
+def test_the_one_to_one_knife_soak_is_for_knives_and_tools_only_and_trapping_sends_knives_to_it():
+    # whole-pack read C1: Clean and disinfect owns the household mixes, so counters get its food mix; NYS DOH's 1:1 soak stays on
+    # Butchering for knives and tools only, and Trapping's "clean and disinfect knives and tools" opens the page that has it
+    topics = _shipped('survival')
+    land = [x for tid, t in topics.items() if t.get('category') == 'land' for x in _texts(t)]
+    soak = [x for x in land if 'equal amount of water' in x]
+    assert len(soak) == 1, soak
+    assert 'for knives and tools only' in soak[0] and 'never put it on counters' in soak[0], soak[0]
+    assert 'never use it for drinking water' in soak[0]
+    for x in land:
+        low = x.lower()
+        assert not ('counter' in low and ('same mix' in low or 'equal amount' in low) and 'never put it on counters' not in low), x
+    butcher = ' '.join(_texts(topics['surv-land-butchering']))
+    assert 'To sanitize counters and other surfaces, and the tools you used on any animal other than a deer, use the food mix in Clean and disinfect.' in butcher
+    assert 's:surv-clean-and-disinfect' in _links(topics['surv-land-butchering'])
+    trap = topics['surv-land-trapping']
+    sec = next(s for s in trap['sections'] if s['h'] == 'Rabies, disease and handling')
+    item = next(x for b in sec['blocks'] for x in b.get('list', []) if x.startswith('Clean and disinfect knives and tools'))
+    assert 'Butchering deer and small game' in item, item
+    assert 's:surv-land-butchering' in [b['link'] for b in sec['blocks'] if 'link' in b]
 
 def test_fishing_fish_cleaning_and_trapping_split_the_old_traps_topic():
     # land pack batch C (spec 4 rows 2, 5, 7; spec 10 calls 4, 7, 9): Fishing for food keeps the id and is fishing only; the fish

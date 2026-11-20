@@ -216,7 +216,7 @@
             "Wear latex or other protective gloves, eye protection and coveralls when you handle carcasses or droppings, and wash your hands and arms well with soap and water afterwards (NYS DEC trapper manual).",
             "Muskrats and beavers can carry tularemia: wear rubber or plastic gloves to skin them, and stay away from a muskrat found dead or dying for no clear reason (NYS DEC trapper manual).",
             "Freezing game meat, even for a long time, may not kill all worms (NYS DEC trapper manual). Cook all of it to 165°F (74°C), Field dressing game’s rule for all wild game.",
-            "Clean and disinfect knives and tools: Clean and disinfect."
+            "Clean and disinfect knives and tools: wash them with soap and water, then sanitize them as in Butchering deer and small game, “Knives and keeping the work clean”."
           ]
         },
         {
@@ -228,8 +228,8 @@
           "label": "Field dressing game"
         },
         {
-          "link": "s:surv-clean-and-disinfect",
-          "label": "Clean and disinfect"
+          "link": "s:surv-land-butchering",
+          "label": "Butchering deer and small game"
         }
       ]
     },

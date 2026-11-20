@@ -230,7 +230,7 @@
         {
           "list": [
             "Grind trimmings, shank, neck and flank meat (New Mexico State University Extension, Indiana DNR). Take off the fat and other tissue first, so no lymph nodes go in (Cornell Wildlife Health Lab).",
-            "Clean and disinfect the grinder and everything you used, before and after (NYS Department of Health, Penn State Extension).",
+            "Clean and disinfect the grinder and everything you used, before and after (NYS Department of Health, Penn State Extension): wash it, then sanitize it as under “Knives and keeping the work clean” below.",
             "Never put your hand near or into the throat of a grinder (Massachusetts notes).",
             "Keep ground meat cold and use it quickly: how long it keeps is in Preserving game meat. Cook it to 165°F (74°C)."
           ]
@@ -265,13 +265,13 @@
           "list": [
             "Keep your knives sharp, with a whetstone or a steel (Penn State Extension, North Dakota State University Extension). A dull blade makes you push harder, and that can lead to injury (Massachusetts notes).",
             "Wash your knife, hands and cutting board often with warm, soapy water (North Dakota State University Extension, Penn State Extension), and wash knives and tools with soap and hot water between animals (Cornell Wildlife Health Lab).",
-            "After butchering, wash tools, work surfaces and your hands and arms well with soap and water, then rinse tools and surfaces with boiling water (212°F, 100°C) or sanitize them (NYS Department of Health).",
+            "After butchering, wash tools, work surfaces and your hands and arms well with soap and water, then rinse tools and surfaces with boiling water (212°F, 100°C) or sanitize them (NYS Department of Health). To sanitize counters and other surfaces, and the tools you used on any animal other than a deer, use the food mix in Clean and disinfect. Knives and tools used on a deer also get the soak below.",
             "Keep raw meat away from cooked and ready-to-eat food (North Dakota State University Extension, Penn State Extension).",
             "Wash and sharpen your knives when you finish (Massachusetts notes)."
           ]
         },
         {
-          "warn": "Knife and tool soak after a deer, one use only: NYS Department of Health says to soak cleaned knives and tools for one hour in fresh, unscented household bleach mixed with an equal amount of water (for example 1 quart (0.95 L) of bleach and 1 quart of water), let them air dry, then rinse them with clean water, and to wipe cleaned counters with the same mix and let them air dry. This mix is far too strong for anything else. Never drink it, never use it for drinking water, and never mix bleach with any other cleaner."
+          "warn": "Knife and tool soak after a deer, for knives and tools only: NYS Department of Health says to soak cleaned knives and tools for one hour in fresh, unscented household bleach mixed with an equal amount of water (for example 1 quart (0.95 L) of bleach and 1 quart of water), let them air dry, then rinse them with clean water. This mix is far too strong for anything else: never put it on counters (they get the food mix in Clean and disinfect), never drink it, never use it for drinking water, and never mix bleach with any other cleaner."
         },
         {
           "link": "s:surv-clean-and-disinfect",
@@ -342,7 +342,7 @@
     },
     {
       "name": "NYS Department of Health, Harvesting, Preparing, and Eating Wild Game",
-      "used": "Gloves; no eating, drinking or smoking; tools for no other purpose, apart from kitchen utensils; avoid cutting through the skull or spinal cord; avoid brain, spinal tissue, saliva and mouth parts, wash hands if handled; discard intestines; CWD parts (brain, spinal cord, nervous tissue, spleen, pancreas, eyes, tonsils, lymph nodes) and other organs (liver, kidney, heart, salivary glands); lymph nodes removed by boning out and trimming; one-hour 1:1 bleach soak for knives and tools, air dry, rinse, and the same mix on counters; wash and rinse with boiling water (212°F) or sanitize; clean and disinfect equipment after grinding; remove bullets, shot, fragments and contaminated meat; lead fragments, generous trim, ground meat holds more lead; children and people who can get pregnant avoid lead-shot game; bruised or discolored meat discarded"
+      "used": "Gloves; no eating, drinking or smoking; tools for no other purpose, apart from kitchen utensils; avoid cutting through the skull or spinal cord; avoid brain, spinal tissue, saliva and mouth parts, wash hands if handled; discard intestines; CWD parts (brain, spinal cord, nervous tissue, spleen, pancreas, eyes, tonsils, lymph nodes) and other organs (liver, kidney, heart, salivary glands); lymph nodes removed by boning out and trimming; one-hour 1:1 bleach soak for knives and tools, air dry, rinse (its counter step with the same mix is not given: counters get Clean and disinfect’s food mix); wash and rinse with boiling water (212°F) or sanitize; clean and disinfect equipment after grinding; remove bullets, shot, fragments and contaminated meat; lead fragments, generous trim, ground meat holds more lead; children and people who can get pregnant avoid lead-shot game; bruised or discolored meat discarded"
     },
     {
       "name": "NYS DEC press release, 6 November 2026, Chronic Wasting Disease Found in Livingston County Wild Deer",

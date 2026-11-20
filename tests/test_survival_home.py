@@ -1284,3 +1284,37 @@ def test_fishing_fish_cleaning_and_trapping_link_the_hub_and_preserving_food_poi
     rules = _links(topics['surv-land-ny-rules'])
     for k in ('s:surv-land-trapping', 's:surv-traps-and-fishing', 's:surv-land-fish-cleaning', 's:surv-land-big-game', 's:surv-land-small-game'):
         assert k in rules, k
+
+
+# ---------- Food from the land (v7.7): whole-branch review fixes ----------
+
+FISH_SENSITIVE = 'People who may become pregnant (under age 50) and children under 15'   # NYS DOH's own definition, re-opened
+
+
+def test_every_fish_advice_table_names_both_groups_in_its_head_and_each_water_has_its_own_table():
+    # whole-branch review I1: a 39-row table left the two advice columns unlabelled after a screen; now every advice table is one water
+    # (or the statewide advice) and carries both groups in its head; the advice in the rows is unchanged
+    t = _shipped('survival')['surv-land-fish-cleaning']
+    sec = next(s for s in t['sections'] if s['h'] == 'New York’s advice on eating fish you catch')
+    blocks = sec['blocks']
+    tables = [(n, b['table']) for n, b in enumerate(blocks) if 'table' in b]
+    assert len(tables) >= 20, len(tables)
+    assert tables[0][1]['head'] == ['Fish (statewide advice)', 'Most people', FISH_SENSITIVE]
+    rows = []
+    for n, tb in tables[1:]:
+        assert tb['head'] == ['Fish', 'Most people', FISH_SENSITIVE], tb['head']
+        assert 'p' in blocks[n - 1], 'each water is named in the line above its table'
+        rows += tb['rows']
+    assert len(rows) == 38 and all(len(r) == 3 for r in rows)
+    caution = ['Every other fish', 'State advice: statewide table. This app’s caution: don’t eat', 'Don’t eat']
+    assert rows.count(caution) == 2   # the app's more cautious cells stay as approved
+    for x in _all_texts(t):
+        assert 'Sensitive' not in x, x
+    assert 'one-half pound (227 g)' in ' '.join(_texts(t))
+
+
+def test_no_topic_carries_a_hard_coded_swipe_sentence():
+    # whole-branch review I6: the app shows its own cue above a table that scrolls; a sentence in the content showed above tables that fit
+    for tid, t in _shipped('survival').items():
+        for x in _all_texts(t):
+            assert 'swipe' not in x.lower(), (tid, x)

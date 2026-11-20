@@ -14,7 +14,7 @@ The second of Jordan's two food releases. v7.5 got a household from one week of 
 edible. This pack is for when the pantry is running down: getting food from the land around Central New York
 without wasting effort, poisoning anyone or losing the meat.
 
-Jordan (2026-11-19), in the brainstorm:
+Jordan (2026-11-19), in the brainstorm (he approved this plan the same evening, with the butchering change in call 8):
 
 - **Who knows what.** In the group there is "a mix of fishing knowledge, some hunting, but probably little to no
   trapping". So fishing and hunting topics build on experience and go to what changes when it is for food;
@@ -81,6 +81,7 @@ their ids (stored pins and recents point at them).
 | 4 | `surv-land-small-game` | Small game and birds | Squirrel, rabbit, turkey, waterfowl, grouse as sources cover them; what is worth a cartridge. |
 | 5 | `surv-land-trapping` | Trapping | From zero: trap types, sets, where, checking, dispatch, safety. New York's legal and illegal devices stated. |
 | 6 | `surv-field-dressing-game` (existing) | Field dressing game | Deepened: deer step by step, small game, birds, cooling, signs of disease (CWD, rabies, tularemia, trichinella as sourced), 165°F (D10 stays). |
+| 6a | `surv-land-butchering` | Butchering deer and small game | Call 8: from the hanging carcass to named cuts, organs, bones and fat. `surv-field-dressing-game` stops at the cooled carcass and links here. |
 | 7 | `surv-land-fish-cleaning` | Cleaning and keeping fish | Kill, gut, fillet or cook whole; keeping on ice or cold; New York fish consumption advisories. |
 | 8 | `surv-land-keeping-meat` | Keeping game meat | **Owner of meat preserving.** Cold and time; winter as the freezer; jerky per USDA and NCHFP (D149); traditional methods, labelled. |
 | 9 | `surv-food-and-wild-plants` (existing) | Wild plants | Short safe list, never-eat list, no mushrooms, text only. |
@@ -150,7 +151,7 @@ in an offline app is worse than none. The rules topic gives dates as of the guid
 - **Diagrams**, drawn after the text is checked and from it, each reviewed by someone who looks at the image
   first; one not recognisable without its caption is not shipped. Candidates, each only if the text supports
   it: `fishing` redrawn to match the text (the old one drew a stake funnel against a basket-trap text); deer
-  vital area for shot placement; field dressing cut lines; one basic trap set. **No diagram of any plant.**
+  vital area for shot placement; field dressing cut lines; the cuts of a deer (where each comes from); one basic trap set. **No diagram of any plant.**
 
 ## 9. Batches and sources
 
@@ -158,7 +159,7 @@ in an offline app is worse than none. The rules topic gives dates as of the guid
 read, final drive of the built app at 360x640 as a person in a situation):
 
 - **A, safety core, first and alone:** `surv-food-and-wild-plants`, `surv-field-dressing-game`,
-  `surv-land-keeping-meat`, and the two v7.5 edits (`surv-food-preserving`, the CDC bottle soak with the
+  `surv-land-butchering`, `surv-land-keeping-meat`, and the two v7.5 edits (`surv-food-preserving`, the CDC bottle soak with the
   `surv-clean-and-disinfect` sentence). Its report also records the **plant poisoning gate**.
 - Then in parallel in separate git worktrees, each with a reserved range of question numbers:
   - **B:** `surv-land-start`, `surv-land-big-game`, `surv-land-small-game`, checklist `land-kit`.
@@ -197,7 +198,7 @@ category and text; searches pinned to them are re-recorded only with a ruling.
 
 ## 10. Calls made (Jordan can overrule)
 
-1. Ships as **v7.7**. Eight new topics, three rewritten, one checklist, up to four diagrams.
+1. Ships as **v7.7**. Nine new topics, three rewritten, one checklist, up to five diagrams.
 2. **No mushroom is taught.** The checked sentence stays as it is: never eat a wild mushroom unless an expert
    has identified it. Text cannot teach the difference and the deadly ones kill days later.
 3. **The safe plant list** is about six to ten plants, each with season, part, preparation and its look-alikes
@@ -213,7 +214,16 @@ category and text; searches pinned to them are re-recorded only with a ruling.
    structure (which licence, which season type, what is always illegal) and the figures a source gives as
    standing rules, and says to check the current guide.
 7. **Trapping instructions come from trapper education material**, not survival manuals, wherever both exist.
-8. **Butchering goes as far as quarters and boning out**; no sausage, no grinding.
+8. **Butchering is its own topic and goes past quarters and boning out** (Jordan, 2026-11-19, on approving this
+   plan: "add a bit more detail to the butchering section. Don't stop just at quarters and boning out").
+   `surv-land-butchering` covers, as the sources give them: skinning and hanging; quartering; boning out; the
+   cuts of a deer by name and where each comes from (backstrap, tenderloin, the muscles of the hind leg,
+   shoulder, neck, ribs, shank, flank); what each cut is good for (roast, steak, stew, grind, jerky strips);
+   trimming fat, silver skin and bloodshot meat; heart, liver and tongue, and the organs never to eat; bones for
+   stock and rendering fat; grinding without power if a source describes it; the same for small game and birds
+   in brief; knife care and keeping the work clean. Fresh ground meat only: no cured or fermented sausage (the
+   botulism and trichinella risks are the reason, stated on the page). Cost: a long topic; it may split in two
+   (deer; small game and birds) if the sources are rich.
 9. Existing checked topics outside this pack gain at most one link block each and are not reworded, except:
    the edits named in section 7; link labels that must follow a renamed title; and a sentence a v7.5 page quotes
    word for word from one of the three rewritten topics, which is kept identical in both places (the quoted
@@ -235,11 +245,11 @@ rich; which Where and When filter tags each topic carries (the v7 design's rules
   the always-listed set in the tests.
 - **Search index:** the three rewritten topics keep the place in the index they have today, so tie order for the
   pinned searches does not move because of a category change. The `PACKS` mechanism gains a way to name older
-  topics that belong to a pack's category; only the eight new topics and the checklist index after older pages.
+  topics that belong to a pack's category; only the nine new topics and the checklist index after older pages.
 - **Insects** (now in the plants topic): a short section in the hub, as sourced, or dropped if the sources do
   not support it.
 - **Existing figures** `trap-snare`, `trap-squirrel` and `trap-fig4` move with their text to `surv-land-trapping`
-  and do not count toward the four candidates; their test follows them. Each is re-checked against the rewritten
+  and do not count toward the five candidates; their test follows them. Each is re-checked against the rewritten
   text and removed if it no longer matches.
 - **Tests that pin the old state** are updated with the change they guard: the v7.6 ban on linking Field
   dressing game from food pages is lifted (links are added, a carried-in item); `surv-food-babies-children` is

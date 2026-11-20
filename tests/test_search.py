@@ -944,6 +944,8 @@ LAND_OLDER_ORDER = json.load(open(os.path.join(os.path.dirname(__file__), 'fixtu
 def test_moved_topics_keep_their_index_position(page, app_url, text):
     # the three older topics moved to category land but stay indexed where a topic in no pack is: FK.search.query() lists the same
     # keys in the same order as the v7.6 build did (recorded in tests/fixtures/search_land_older_order.json before the move)
+    # Pages that are new in the land pack (v7.7) did not exist when the fixture was recorded; they index after every older page and
+    # are left out of the comparison, so what is checked is that every page that existed in v7.6 keeps its place.
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
     # the pack's new pages (ids surv-land-*, checklist land-kit) are not in the v7.6 build; leaving them out, every other key keeps its v7.6 order

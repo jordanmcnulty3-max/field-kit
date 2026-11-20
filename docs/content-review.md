@@ -6324,3 +6324,210 @@ Changes:
 - M3: hub "Keep it cold longer" link to Preserving food removed.
 - Keywords: "doubt throw" dropped; "defrost", "food gone bad" (Is it still good?) and "sterilize" (babies) added; "baby food" fails the
   keyword rule and is not added (docs/v7.5-rulings.md, whole-pack fixes 8).
+
+## Food from the land pack batch D: New York rules, food sources after fallout (2026-11-19)
+
+Files (all draft): src/survival/surv-land-ny-rules.json, src/survival/surv-land-after-fallout.json; one link block added to
+src/survival/surv-fallout-water-and-food.json. Every source below was found by built-in web search and opened by built-in web
+fetch on 2026-11-19; the title (and year where printed) was checked after each fetch. Fetches return summaries with quotes
+capped at about 125 characters, so long sentences were read as consecutive pieces and a few sections were fetched twice for
+exact words. No Firecrawl, no Bright Data, no other connector. Metric conversions are the app's own (feet x 0.3048, inches x
+2.54, rounded; 250 in² = 1,613 cm², shown as 1,600; 35 lb = 15.9 kg, shown as 16).
+
+Source keys:
+- HTG-GEN: NYS DEC, 2026–2027 New York Hunting & Trapping Guide, General Information section (cover: "2026–2027 Official Guide to
+  Laws & Regulations, Volume 20, Issue No. 1"; "Most regulations are in effect September 1, 2026 through August 31, 2027"; footers
+  "2026–2027 New York Hunting & Trapping Guide"). https://dec.ny.gov/sites/default/files/2024-07/htggeneralinfo.pdf (opened three times)
+- HTG-BIG: same guide, Big Game section, pp. 20–38. https://dec.ny.gov/sites/default/files/2024-07/htgbiggame.pdf (opened twice)
+- HTG-SMALL: same guide, Small Game Hunting, pp. 46–49. https://dec.ny.gov/sites/default/files/2024-07/htgsmallgamehunting.pdf
+- HTG-TURKEY: same guide, Turkey Hunting, pp. 50–52. https://dec.ny.gov/sites/default/files/2024-07/htgturkey.pdf
+- HTG-MIG: same guide, Migratory Game Birds, pp. 53–55. https://dec.ny.gov/sites/default/files/2024-07/htgonlinemigratorygamebirds.pdf
+- HTG-FUR: same guide, Furbearer section, pp. 59–66. https://dec.ny.gov/sites/default/files/2024-07/htgfurbearer.pdf (opened twice)
+- HTG-PULL: NYS DEC, 2026–2027 Hunting & Trapping Seasons Pull-out Summary. https://dec.ny.gov/media/39356 (furbearer possession tag and pelt seal only)
+- DEC-HTGPAGE: NYS DEC, Hunting and Trapping Regulations Guide page (lists the 2026–27 guide's sections). https://www.dec.ny.gov/outdoor/37136.html
+- DEC-TRAPREG: NYS DEC, Trapping Regulations (web page, undated). https://dec.ny.gov/things-to-do/trapping/regulations
+- DEC-TRAP: NYS DEC, Trapping (web page, undated). https://www.dec.ny.gov/things-to-do/trapping
+- ECL: NY Environmental Conservation Law § 11-1101, Prohibitions, NY Senate Open Legislation ("most recent revision (from
+  2014-09-22)"). https://www.nysenate.gov/legislation/laws/ENV/11-1101
+- FISHGUIDE: NYS DEC, 2026 New York State Freshwater Fishing Regulations Guide (cover "Regulations in effect April 1, 2026"; footers
+  "2026 New York State Freshwater Fishing Regulations Guide"). https://dec.ny.gov/sites/default/files/2024-03/fishguide.pdf (both
+  parts read, 0–100,000 and 100,000–198,374 characters)
+- DEC-FISHREG: NYS DEC, 2026 Freshwater Fishing Regulations page. https://www.dec.ny.gov/things-to-do/freshwater-fishing/regulations
+- DEC-FISHGEN: NYS DEC, General Freshwater Fishing Regulations (web page, undated). https://dec.ny.gov/things-to-do/freshwater-fishing/regulations/general (opened twice)
+- CDC-FWM: CDC, Food, Drinking Water, and Medicine Safety in a Radiation Emergency, last reviewed April 15, 2024. https://www.cdc.gov/radiation-emergencies/safety/food-drinking-water-medicine-safety.html
+- READY: Ready.gov, Radiation Emergencies, last updated 06/14/2024. https://ready.gov/radiation
+- EPA-PAG: US EPA, PAG Manual: Protective Action Guides and Planning Guidance for Radiological Incidents, EPA-400/R-17/001, January
+  2017. https://www.epa.gov/system/files/documents/2025-04/epa_pag_manual_final_revisions_01-11-2017_cover_508-d.pdf (characters
+  0–300,000 of 365,721 read: chapters 1 to 5; the rest, references and appendices, not read)
+- FDA-1998: US FDA, Accidental Radioactive Contamination of Human Food and Animal Feeds: Recommendations for State and Local
+  Agencies, August 13, 1998 (final; guidance page https://www.fda.gov/regulatory-information/search-fda-guidance-documents/accidental-radioactive-contamination-human-food-and-animal-feeds).
+  PDF https://fda.gov/media/74043/download (characters 0–100,000 of 103,191 read)
+- ITE-1968: Office of Civil Defense, In Time of Emergency, H-14, March 1968 (dated). Project Gutenberg HTML
+  https://gutenberg.org/files/15158/15158-h/15158-h.htm (cover "H-14 March 1968" confirmed) and plain text
+  https://m.gutenberg.org/files/15158/15158.txt (both parts read: 0–100,000 and 100,000–139,151 characters)
+- PNA-1985: FEMA, Protection in the Nuclear Age, June 1985 (dated), Waldo County copy.
+  https://waldocountyme.gov/wp-content/uploads/2024/01/1985-FEMA_Protection_in_the_Nuclear_Age.pdf
+
+Would not open: the eRegulations PDF of the whole hunting guide (https://www.eregulations.com/assets/docs/resources/NY/26NYHD_LR.pdf,
+client error); the DEC section PDFs carry the same 2026–27 text. The eRegulations page "Furbearer Traps"
+(https://www.eregulations.com/newyork/hunting/furbearer-traps, 2026 digest, updated August 25, 2026) opened and agrees with HTG-FUR on
+body-gripping bait limits and the trail setback; not cited. DEC "Hunting and Trapping Seasons" (https://www.dec.ny.gov/things-to-do/trapping/seasons)
+opened: dates only, no rules; not cited. Opened and not used: USDA Radiological Monitoring Handbook, Agriculture Handbook No. 246 (July
+1963), https://www.govinfo.gov/content/pkg/GOVPUB-A-PURL-gpo21788/pdf/GOVPUB-A-PURL-gpo21788.pdf (written for USDA monitors, not
+households; outside the source list for this pack).
+
+### surv-land-ny-rules
+
+- Guide years: HTG-GEN cover and footers (2026–2027; Sept. 1, 2026 to Aug. 31, 2027); FISHGUIDE cover ("Regulations in effect April 1,
+  2026"). HuntFishNY app: HTG-PULL and DEC-FISHREG name it. No season dates or bag limits are given (spec 10 call 6); the frog and carp
+  seasons and every species' dates are left to the guide.
+- Licences table: Hunting: HTG-GEN pp. 10–11 (Hunter Education Certificate or previous hunting licence; "Minors under the age of 12
+  may not obtain a hunting license or hunt wildlife"; "You must be at least 11 years of age to take this class"). Bowhunting privilege:
+  HTG-GEN pp. 10–11 (hunting licence plus Bowhunter Education Certificate, NYS bowhunting stamp issued 1980 or later, or NYS junior
+  bowhunting licence issued 1980 or later); HTG-BIG p. 23 (privilege required for bowhunting seasons). Muzzleloading privilege: HTG-GEN
+  (current hunting licence); HTG-BIG p. 23. Turkey permit: HTG-GEN (required for all turkey hunters); HTG-TURKEY p. 50 ("You must carry
+  your hunting license and turkey permit while you hunt."). Migratory birds: HTG-MIG pp. 53–54 (hunting licence; "must register
+  annually with New York State's Harvest Information Program", proof carried; federal duck stamp "If you are 16 years or older and you
+  hunt waterfowl", signed and carried). DMP: HTG-BIG p. 30 (one antlerless deer per permit, only in the WMU issued for). Trapping:
+  HTG-GEN p. 11 ("Trapper Education Certificate or previous trapping license from any state or country"); marten permit HTG-FUR p. 61
+  ("A free special permit is still required to trap marten in New York State."). Fishing: FISHGUIDE p. 89 (licence "while fishing or
+  helping someone to fish", exceptions including "Persons under 16 years of age"); p. 90 free fishing days.
+- Private land: HTG-GEN p. 12 ("does not give the holder any right to go on private property without permission of the landowner").
+  Licence not transferable: HTG-FUR p. 62. Mandatory trapper education course: DEC-TRAP ("Trappers must complete a mandatory trapper
+  education course").
+- Kinds of season: HTG-BIG pp. 23, 27, 30, 37 (Early Antlerless, Early Bowhunting, Regular, Late Bowhunting, Muzzleloading, Youth
+  Firearms; privileges per season); bear seasons HTG-BIG p. 38; turkey spring and fall HTG-TURKEY p. 51; small game by species HTG-SMALL
+  pp. 46–49; permanent water only in mink, muskrat, otter or beaver season HTG-FUR p. 61; closed season for fish FISHGUIDE p. 69 ("A
+  person may not fish for a species (including catch and release) during the closed season"; released immediately) and p. 4 ("not even
+  catch and release"). Unprotected species: HTG-GEN pp. 16–17 (porcupine, red squirrel, woodchuck, chipmunk, English sparrow, starling,
+  rock pigeon, monk parakeet; licence and legal implement still required).
+- Hours: HTG-BIG p. 20 ("Big game hunting hours are 1/2-hour before sunrise to 1/2-hour after sunset (see page 80)."); HTG-SMALL pp.
+  48–49 (cottontail, hare, squirrel, pheasant, bobwhite, ruffed grouse sunrise to sunset); HTG-TURKEY p. 51 (spring "1/2 hour before
+  sunrise to noon"; the fall hours were garbled in the extracted text and are not given); HTG-MIG p. 54 ("All other migratory game birds
+  may be taken from one-half hour before sunrise until sunset."; woodcock "from sunrise to sunset"). Sunday: HTG-BIG p. 20 ("Sunday
+  hunting is allowed in all areas of New York State.").
+- Always illegal: HTG-GEN pp. 16–17 (motor vehicle, vehicle lights, public road; unloaded long guns and crossbows in vehicles;
+  automatic; silencer; semiautomatic over 6 rounds with exceptions; spear except frogs; explosive arrow; drug delivery device; "It is
+  illegal to hunt with the aid of bait or over any baited area" for big game, upland game birds, turkey, waterfowl). HTG-BIG p. 20
+  ("Intentional feeding or baiting of deer or bear is prohibited at all times of year."; "Take big game while the deer or bear is in
+  water."; rimfire, under 20 gauge, multi-projectile, bows under 35 lb, barbed broadheads), p. 21 (dogs except leashed tracking dog
+  licence; "Hunting bear with the aid of bait or dogs is prohibited."), p. 22 ("It is unlawful to sell deer or bear meat."). HTG-TURKEY
+  p. 50 (no rifle or air gun; no bait; no electronic calling device during the open season; no dog in spring; no live decoys). HTG-MIG
+  p. 55 (baiting, live decoys, recorded calls with exceptions, motorboat or sailboat unless motor off or sail furled and stopped, rifles;
+  "No person shall kill or cripple any migratory game bird without making a reasonable effort" to retrieve it) and p. 54 ("Non-toxic shot
+  is required for hunting any migratory game bird, except woodcock, everywhere in New York State."). HTG-SMALL p. 46 (native snakes,
+  lizards, salamanders; turtles other than snapping turtles; spruce grouse).
+- Distances: HTG-GEN p. 17 (500 ft firearm, 250 ft crossbow, 150 ft bow from school, playground, occupied factory or church; crossbow 500
+  ft in Suffolk and Westchester; same from dwelling, farm building or occupied structure unless owner, lessee, immediate family,
+  employee or consent; not over any part of a public highway). Blaze orange or pink: HTG-BIG p. 20 ("Any person hunting deer or bear
+  with a firearm or a person who is accompanying someone hunting…"; 250 sq. in. solid visible from all directions, or 250 sq. in.
+  patterned at least 50%, above the waist; or a hat at least 50% orange or pink).
+- Tagging: HTG-BIG p. 22 ("Immediately fill in all information and sign the carcass tag"; "Report your harvest online, by phone, or
+  HuntFishNY mobile app within 48 hours as required by law."), p. 21 (carcass tag once the animal leaves your possession; e-tag
+  immediately); HTG-TURKEY p. 50 ("Users of paper tags must report within 48 hours of the harvest."); HTG-GEN p. 15 (reporting reduced
+  "to 48 hours (no longer 7 days)"). Migratory birds: HTG-MIG p. 55 ("No person shall completely field dress any migratory game bird"
+  before transport; head or one fully feathered wing attached). Pelt seal: HTG-FUR p. 62 (bobcat, fisher, otter, marten; seal before sale
+  or transfer, mounting or tanning, leaving the state; "within 10 days after the close of the season in the WMU"; "Seals for these species
+  cannot be sent through the mail."); HTG-PULL (possession tag and seal).
+- Trap-check intervals (carried-in item): HTG-FUR p. 61, word for word: "In the Southern Zone: You must check traps once in each
+  24-hour period."; "WMU 5C, 5F, 5G, 5H, 5J, 6F, 6J, and 6N: Visit once in each 48-hour period"; "WMU 5A, 6A, 6C, 6G, 6H, and 6K:" then
+  "Traps set in water during the open season for beaver, otter, mink and muskrat: Visit once in each 48-hour period", "Body-gripping
+  traps set on land: Visit once in each 48-hour period", "Restraining traps: Visit once in each 24-hour period". DEC-TRAPREG gives the
+  same intervals ("Visited once in each 48-hour period", "Visited once in each 24-hour period"; Southern Zone wording identical). The two
+  WMU lists together are the Northern Zone WMUs the guide lists for trap checking; no other Northern Zone WMU is named. "Restraining
+  trap" definition: HTG-FUR p. 61 ("A device used to capture and restrain a mammal."). Neither source defines "visit" or "check".
+  ECL § 11-1101 sets no interval. Year recorded: 2026–27 guide.
+- Legal and illegal traps: HTG-FUR p. 61 ("Snares may not be used for trapping."; "Box or cage traps are legal for all species."; no
+  cage trap designed to take more than one muskrat; "On land, foothold traps must be 5¾ inches or smaller (inside jaw spread)."; "Teeth
+  are not allowed on foothold traps."; "Foothold traps larger than 4 inches set on land must have a pan tension device and be covered when
+  set."; "During beaver or otter season, foothold traps up to 7¼ inches are allowed if set under water."; "A foothold trap larger than
+  7¼ inches is never legal to use."; "Body-gripping traps more than 7½ inches may never be used on land."; Adirondack WMU bait or lure
+  rule; name and address or DEC customer ID on all traps), p. 62 (closed beaver or otter season: water foothold no larger than 5¾ in.),
+  p. 63 (Southern Zone beaver trigger rules over 8½ in.), p. 64 ("A body-gripping trap measuring less than 5½ inches may be set in any
+  manner with or without the use of bait."; 5½ to 7½ in. limits on bait and set). DEC-TRAPREG agrees. ECL § 11-1101(5)(c) ("use, locate
+  or set a snare or a device consisting of a noose of any material whereby an animal may be taken"), (7)(c) ("smoke, chemicals, gas or
+  poison shall not be used on or near any trap" for listed furbearers), (4) ("any trap or deadfall").
+- Deadfalls: looked for in HTG-FUR, DEC-TRAPREG, DEC-TRAP and ECL. None allows or forbids them by name; DEC-TRAPREG's definition of
+  trapping includes "traps, deadfalls and other devices commonly used to take wildlife"; ECL (4) names "any trap or deadfall". The page
+  says so and adds a labelled app caution (D190).
+- Trap placement: HTG-FUR p. 62 ("within 100 feet of a house, school, playground, or church"; ECL (12): without "the written consent"
+  of the owner or lessee; "You may not set a trap on a public road."; culvert or ditch unless posted or landowner forbids; 15 ft beaver
+  dam, den or house with exceptions; "You may not set or stake a trap prior to 7:00 AM on opening day."; "No one may disturb a trap
+  lawfully set by another person."; "No one may remove a lawfully trapped animal from another person's trap."; "You must attempt to
+  release any animals that are accidentally captured when the season is closed"; "If the animal is injured to the extent you believe it
+  will not survive, humanely dispatch it."; no legal provision to keep it without DEC permission; firearm on a trapped animal without a
+  hunting licence from 16; junior trappers 12–15 need a hunting licence and an accompanying adult), p. 61 (5 ft muskrat house; no full
+  suspension; carcass bait on foothold sets "shall be completely covered at the time the trap is set or visited", hidden from directly
+  above), p. 64 (land body-gripping traps 100 ft from a public trail except on WMAs).
+- Fishing: DEC-FISHGEN and FISHGUIDE pp. 68–72 (angling "taking fish by hook and line"; "no more than 3 lines with or without a rod";
+  5 lures or baits, 15 hook points; "Anglers must be in immediate attendance when their lines are in the water."; "The use of set lines
+  where the angler is not in immediate attendance is prohibited."; "No more than 7 ice-fishing lines in any combination of devices may be
+  used, unless otherwise noted in Special Regulations."; ice-fishing line defined to include "hand line, tip-up, tip down"; 5 lures or
+  baits, 15 hook points, immediate attendance; hand lines only May 1 to November 14; ice fishing permitted on most waters except where
+  special regulations say and for waters in the nine named counties; shanties name and address in letters at least 3 inches, removed by
+  March 15; nets: landing net, baitfish nets, one dip net for smelt, suckers, alewives, blueback herring; "No other use of nets to collect
+  fish is permitted."; gaffs only ice fishing or bowfishing; frogs by spear, club, hook or hand with a hunting or fishing licence, gun or
+  longbow needs a small game hunting licence; native salamanders and snakes not as bait). FISHGUIDE p. 79 (minnow trap "maximum entrance
+  diameter 1"", maximum length 20"; seine or scap net up to 36 sq. ft), p. 78 (personally caught baitfish only in the same water; no
+  overland transport by motor vehicle except in a designated corridor), p. 71 ("The taking of fish by spear or spear guns is prohibited at
+  all times"; no spears in the Adirondack Park, on Lake George or within 200 ft of their high-water mark; "The taking of fish by snatching
+  or blind snatching (page 69) is prohibited at all times"), p. 69 (snatching defined; snagging a type of snatching; daily limit and size).
+  HTG-SMALL p. 46 ("A hunting license is required to take frogs with a gun, bow, or crossbow").
+- Carp by bow, conflict: DEC-FISHGEN ("Carp may be taken by a longbow (recurve or compound) or crossbow in any number or size from May
+  15-September 30"; "No other fish may be taken with a bow."). HTG-GEN p. 16 ("Crossbows may not be used to take carp or any other
+  fish."). The more cautious is used: the page shows both and says, as the app's caution, to use a longbow (D191). Dates left out.
+- Left out: the fall turkey hours (garbled), species seasons and bag limits, frog and snapping turtle seasons, the Northern Zone
+  dog-and-rifle rule, firearm possession rules in deer season, DEC law enforcement phone line (no dial control), the smelt and sucker
+  net waters and sizes beyond "as the guide gives", the "frightening fish out of concealment" rule (FISHGUIDE p. 59, a special
+  regulation, not statewide).
+- Looked for and not found: a trapper education age or course length (HTG-FUR, HTG-GEN give none beyond the certificate); a fishing-guide
+  definition of "tip-up" (only inside "ice-fishing line"); explosives, poison or electricity for fish (not in DEC-FISHGEN or the parts of
+  FISHGUIDE read); a statewide personal baitfish possession limit.
+
+### surv-land-after-fallout
+
+- Do first 1: surv-fallout-water-and-food "Food to leave alone", word for word: "No current source opened says when milk from your own
+  animals, or wild game and fish, can be used after fallout. This app’s caution: treat them like food that was outdoors, and don’t use
+  them until officials say you can." (copied from the file, curly apostrophes kept). Do first 2: the same section's list item, word for
+  word: "Don’t pick or eat food from your garden until officials say you can (CDC, Ready.gov)." Do first 3 and 4: the app's own
+  direction, resting on Do first 1 and 2 and on How long to stay in (when you may go out); no new rule.
+- Read this first: CDC-FWM ("Do not pick or eat food from your garden until emergency officials determine it is safe to do so."; no
+  milk, eggs, livestock, feed, game or fish); READY ("Do not consume food from your garden, or food or liquids that were outdoors and
+  uncovered," / "until authorities tell you it is safe."; no milk, eggs, livestock, feed, game or fish). Jordan's v7.4 decision (radiation
+  pack spec section 1): older federal civil defence publications fill the gap, named with year, dated, never "safe".
+- Garden food: EPA-PAG section 4.6.1 p. 55 ("Protective actions might include restrictions on consumption of garden produce or locally
+  produced foods."); section 4.6 p. 54 (food and feed guidance is FDA's). FDA-1998 p. 3 (scope: "accidents at nuclear power plants and
+  many other types of accidents"; written for state and local agencies; no nuclear detonation), p. 16 (surface removal by "brushing,
+  washing, or peeling"; "holding to allow for radioactive decay"; no home gardens or households mentioned). ITE-1968 chapter 2 ("Since
+  radiation passing through food does not contaminate it, the only danger would be the actual swallowing of fallout particles" / "that
+  happened to be on the food itself" / "(or on the can or package containing the food), and these could be wiped or washed off.").
+  No source gives a wait time for garden food.
+- Milk: surv-fallout-water-and-food's 1968 sentence quoted word for word (ITE-1968 chapter 2: "If cows graze on contaminated pasture and
+  swallow fallout particles that contain some radioactive elements," / "their milk might be harmful to the thyroid glands of infants and
+  small children."; "canned or powdered milk for a few weeks" if authorities say the supply is contaminated). FDA-1998 p. 17 ("removal of
+  lactating dairy animals and meat animals from contaminated feeds and pasture"; "substitution of uncontaminated water for contaminated
+  water"), p. 5 ("placing dairy cows on stored feed"). EPA-PAG footnote 41 p. 55 ("Liquid beverages as well as milk are covered under the
+  FDA food PAG (FDA 1998)."). No goat-milk rule anywhere. Not shown: ITE-1968 "Milk contamination from fallout is not expected to be a
+  serious problem after an attack." (it would loosen the checked caution; as v7.4 decided); FDA-1998 p. 5 "diversion of fresh milk to
+  cheese or milk powder" (an agency-scale example; no household method) (D194).
+- Animals: FDA-1998 p. 15 ("moving animals to shelter, corralling livestock"; "providing protected feed and water"), p. 17 (removal from
+  contaminated feed and pasture; uncontaminated water). READY ("If you are instructed to stay inside during a radiation emergency, pets
+  and service animals should be inside too." quoted). ITE-1968 Introduction ("Special advice for rural families on emergency actions
+  related to crops and livestock" / "is available from the U.S. Department of Agriculture."); that advice was not looked up (D195).
+  PNA-1985: no farm animals, feed, dairy animals, eggs, game, fish or garden produce (milk only as a household drink, pp. 25–27).
+- Eggs: not in CDC-FWM, READY, EPA-PAG (parts read), FDA-1998 (protective actions; poultry only in import tables), ITE-1968, PNA-1985.
+  App caution labelled (D193).
+- Wild game, fish: not in CDC-FWM, READY, EPA-PAG (parts read), FDA-1998, ITE-1968 (fish only as canned shelf life), PNA-1985. The page
+  says so plainly and repeats the checked rule.
+- Not shown (would loosen the checked caution): ITE-1968 "Most of the Nation's remaining food supplies would be usable after an attack."
+  and "Reaping, threshing, canning and other processing would prevent any dangerous quantities of fallout particles" / "from getting into
+  processed foods." (about the national food supply); EPA-PAG p. 22 (grain products and canned milk and vegetables stored for weeks to
+  months "will not present a risk from radioiodine": an official-planning statement about stored commercial food, which belongs to
+  surv-fallout-water-and-food) (D194).
+- "Safe" appears only in CDC-FWM's page title in the source line (v7.4 ruling 24).
+
+### surv-fallout-water-and-food (one link block)
+
+- "Food to leave alone": one block {"link": "s:surv-land-after-fallout", "label": "Game, fish, milk and gardens after fallout"} after the
+  milk, game and fish paragraph. Nothing else changed. tests/test_survival_home.py allows exactly this second block against the v7.4
+  release (CHECKED_LAND_LINKS).

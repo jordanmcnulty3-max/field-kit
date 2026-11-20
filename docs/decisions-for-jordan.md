@@ -1137,3 +1137,34 @@ Food at home pack (v7.5), whole-pack read fixes: numbers from 150.
    page now says so beside the reading ("but no source opened says how long a “Keep” row holds with no fridge at all"). Cost if
    wrong: an opened can of an unlisted food that could have been kept is thrown out, or a listed one is kept longer than a source
    would allow. Say if the group wants a time limit on the chart's "keep" rows with no fridge.
+
+Food from the land pack (v7.7), batch D (New York rules; food sources after fallout): numbers 190 to 199.
+
+190. **Deadfalls under New York law (surv-land-ny-rules).** The 2026–27 Hunting and Trapping Guide and DEC's Trapping Regulations page
+   name snares as not allowed ("Snares may not be used for trapping") and say nothing about deadfalls either way; DEC's definition of
+   trapping includes "traps, deadfalls and other devices", and the law (ECL § 11-1101) speaks of "any trap or deadfall". Today, labelled
+   as this app's caution: "don’t set one in normal times without asking DEC." The trapping page (another writer) must not call deadfalls
+   legal. Cost if wrong: a legal method is discouraged. Say if you want DEC asked, or the caution dropped.
+191. **Carp by crossbow (surv-land-ny-rules).** DEC's General Freshwater Fishing Regulations: carp "may be taken by a longbow (recurve
+   or compound) or crossbow" in a set season. The 2026–27 Hunting and Trapping Guide (p. 16): "Crossbows may not be used to take carp or
+   any other fish." Today: both shown, and the app's caution says to use a longbow, not a crossbow. Cost if wrong: a legal crossbow use
+   is discouraged.
+192. **FDA's 1998 agency guidance on the fallout page (surv-land-after-fallout).** The only federal document opened that names steps for
+   garden produce (brushing, washing, peeling, holding for decay) and for farm animals (shelter, corral, protected or stored feed,
+   uncontaminated water, off contaminated pasture) is FDA's Accidental Radioactive Contamination of Human Food and Animal Feeds (1998),
+   written for state and local agencies after accidents such as at a nuclear power plant, not for a nuclear explosion. Today: shown, with
+   that limit stated each time, never as making food fine to eat, and never as a reason to go out while sheltering. Cost if wrong: readers
+   may give an accident document more weight than it has for fallout. Say if you want it removed (the page would then give nothing for
+   farm animals).
+193. **Eggs from your own hens after fallout (surv-land-after-fallout).** No source opened (CDC, Ready.gov, EPA 2017, FDA 1998, the 1968
+   and 1985 handbooks) says anything. Today, labelled as this app's caution: treat them like milk from your own animals, and don't use them
+   until officials say you can. Cost if wrong: eggs are not eaten that could have been.
+194. **Old and agency lines left off the fallout page because they would loosen the checked caution (surv-land-after-fallout).** The 1968
+   handbook (dated): "Milk contamination from fallout is not expected to be a serious problem after an attack"; "Most of the Nation's
+   remaining food supplies would be usable after an attack"; reaping, threshing, canning and processing would keep dangerous amounts of
+   fallout out of processed foods. EPA (2017): stored grain products and canned milk and vegetables "will not present a risk from
+   radioiodine". FDA (1998): fresh milk diverted to cheese or milk powder (an agency-scale action). Today: none shown; the page keeps
+   "don't use them until officials say you can". Say if the group wants any of them shown, dated.
+195. **USDA advice for rural families on crops and livestock (surv-land-after-fallout).** The 1968 handbook says it "is available from the
+   U.S. Department of Agriculture". It was not looked up (it is not among the sources the fallout pages use). Today: the page says the app
+   does not have it. Say if you want a later task to find and check it (it would be a dated federal civil defence publication).

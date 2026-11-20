@@ -937,4 +937,6 @@ def test_moved_topics_keep_their_index_position(page, app_url, text):
     # keys in the same order as the v7.6 build did (recorded in tests/fixtures/search_land_older_order.json before the move)
     page.goto(app_url + '#/survival')
     page.wait_for_function('window.FK && FK.search')
-    assert [r['key'] for r in q(page, text)] == LAND_OLDER_ORDER[text]
+    # the pack's new pages (ids surv-land-*, checklist land-kit) are not in the v7.6 build; leaving them out, every other key keeps its v7.6 order
+    new = lambda k: k.startswith('s:surv-land-') or k == 'c:land-kit'
+    assert [r['key'] for r in q(page, text) if not new(r['key'])] == LAND_OLDER_ORDER[text]

@@ -34,6 +34,10 @@
         {
           "link": "s:surv-land-start",
           "label": "Food from the land: where to start"
+        },
+        {
+          "link": "s:surv-land-trapping",
+          "label": "Trapping"
         }
       ]
     },

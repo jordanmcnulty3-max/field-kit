@@ -1368,3 +1368,17 @@ def test_trapping_says_how_to_tell_the_traps_apart_and_how_to_set_them_before_wh
         assert must in text, must
     assert 's:surv-land-ny-rules' in _links({'sections': [sec]})
     assert any(s['name'].startswith('International Association of Fish and Wildlife Agencies, Trapper Education Manual') for s in trap['sources'])
+
+
+def test_whole_branch_review_minor_fixes():
+    topics = _shipped('survival')
+    # M2: Wild plants' Do first says where the Poisoning link is, and it is there
+    plants = topics['surv-food-and-wild-plants']
+    assert 'It is the first link under “Before you eat any wild plant”, below.' in plants['doFirst'][0]
+    before = next(s for s in plants['sections'] if s['h'] == 'Before you eat any wild plant')
+    assert _links({'sections': [before]})[0] == 'p:poisoning'
+    # M5: a v7.6 pin on "Traps and fishing" opens Fishing for food, whose first link block reaches Trapping
+    first = topics['surv-traps-and-fishing']['sections'][0]
+    assert {'link': 's:surv-land-trapping', 'label': 'Trapping'} in first['blocks']
+    # M10: Butchering names its Massachusetts source in full once, as the source list does
+    assert 'Massachusetts deer processing workshop, instructor notes, called “Massachusetts notes” below' in ' '.join(_texts(topics['surv-land-butchering']))

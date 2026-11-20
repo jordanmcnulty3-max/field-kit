@@ -7287,3 +7287,26 @@ trapper course page); life jacket worn (MN DNR); game bags or cheesecloth, butch
 (other topics in this app, which name their sources). No quantity is given; the only sizes are DEC's (8-pound test, size 6–8 hooks). The
 DEC trapper manual's wire gauges, stake lengths and drag sizes, its urine and lure, trap dyes and waxes, and its bleach solution are not
 carried (setting traps belongs to the trapping topic; bleach mixes are fixed by the spec).
+
+### Batch B fix round (2026-11-19), from task-3-review.md
+
+Re-opened in this round (built-in fetch of URLs a search returned, title checked):
+- NJ ch. 4: "An animal shot in the liver may live longer." (confirms the liver cell).
+- MDC Xplor: squirrel "Use shells loaded with number 6s."; rabbit "number 6 shot".
+- DEC Beginners' Guide: "monofilament line (mono) is the best choice for beginning anglers"; "Eight-pound test is a good all-around line
+  weight."
+- MN DNR duck hunter: "Wear it – don't just bring it."; 1-10-1 in its words (1 minute "Remain Calm. Get breathing under control."; 10
+  minutes of meaningful movement "Assess the situation and make a plan", "Self-rescue if possible", "Deploy emergency communications and
+  signaling"; 1 hour or more of useful consciousness "Focus on slowing heat loss"); H.E.L.P. (cross ankles, arms over chest, knees to chest,
+  lean back).
+- ADF&G Big Game Shot Placement: "Whether quartering forward (A) quartering away (B) or forward facing (C) it is always important to consider
+  the angle of the animal, and how that affects the vital organ location"; rear "not advisable"; caliber and bullet able to break bones.
+- MSU Eating bugs part 3: "Stir the bugs in the pan for about 10 minutes on medium heat."; "It is difficult to get an accurate internal
+  temperature thermometer reading on an insect"; "you should be extra sure they are thoroughly cooked."
+- AHA (Nov 25, 2024): "getting a good health check-up prior to hunting season would be ideal."
+- Connecticut DEEP, Connecticut Hunter Safety Manual page, which lists "Chapter 12 - Making a Quick, Clean Kill" linking chapter12.pdf:
+  https://portal.ct.gov/deep/hunting/cefs/hunter-safety-manual (official address for the CT source; the chapter text itself names Outdoor
+  Roadmap).
+- DEC trapper manual: a catchpole "can be used to control a trapped animal so it can be released or dispatched more safely and easily."
+- DEC 2020 bulletin (four firearm rules, as on the pages); DEC 2024 release lists five primary rules, the fifth "Wear hunter orange or pink".
+Changes are listed per finding in /home/claude/sdd/task-3-report.md, "Fix round".

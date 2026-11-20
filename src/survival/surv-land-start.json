@@ -19,7 +19,7 @@
     "Never go out alone if you can help it, and tell someone where you are going and when you will be back (American Heart Association, NYS DEC).",
     "This app’s suggestion: start with what your group knows best, fishing. Fish are usually more plentiful than mammals, and catching them is mostly silent (US Army ATP 3-50.21).",
     "Before you take any animal, have a way to keep the meat cool (New Jersey Fish and Wildlife), and know how to dress and cool it (linked below).",
-    "After fallout, from Water and food after fallout: wild game and fish are not used until officials say you can. See Game, fish, milk and gardens after fallout."
+    "After fallout, see Game, fish, milk and gardens after fallout before you use any wild game or fish."
   ],
   "sections": [
     {
@@ -66,7 +66,7 @@
               [
                 "Small game and birds",
                 "Concentrate on smaller animals unless you get the chance at large game: there are more of them (US Army FM 21-76)",
-                "Zone-of-fire safety in a group (Maine hunter education); gloves with rabbits and hares (Field dressing game)"
+                "Zone-of-fire safety in a group (Maine hunter education); gloves with rabbits, hares and rodents (Field dressing game)"
               ],
               [
                 "Deer",
@@ -145,15 +145,23 @@
         {
           "list": [
             "Nobody alone. Never hunt alone if you can help it (American Heart Association); use the buddy system on the ice (NYS DEC); on the water, hunt with a companion within sight or call (Minnesota DNR).",
-            "Heavy work: dragging a deer can leave even a fit hunter breathless and could bring on a heart attack or stroke (American Heart Association). This app’s caution: anyone with heart trouble, or who gets chest pain with effort, does not do the dragging.",
-            "In normal times every hunter must take a hunter education course before getting a licence (NYS DEC). The hunting pages here assume that training.",
-            "During a fallout shelter period, going out at all is ruled by How long to stay in, and wild game and fish are not used until officials say you can (Game, fish, milk and gardens after fallout).",
+            "Heavy work: dragging a deer can leave even a fit hunter breathless and could bring on a heart attack or stroke (American Heart Association). The American Heart Association says a good health check-up before the hunting season would be ideal. This app’s caution: anyone with heart trouble, or who gets chest pain with effort, does not do the dragging.",
+            "In normal times New York requires hunter education for a hunting licence: see New York rules. The hunting pages here assume that training.",
+            "During a fallout shelter period, going out at all is ruled by How long to stay in. This app’s caution, from Water and food after fallout: don’t use wild game and fish until officials say you can.",
             "Who should not eat it, from Field dressing game: “Children and anyone who could become pregnant should not eat game shot with lead.”"
           ]
         },
         {
           "link": "s:surv-fallout-how-long",
           "label": "How long to stay in"
+        },
+        {
+          "link": "p:chest-pain",
+          "label": "Chest pain or heart attack"
+        },
+        {
+          "link": "p:stroke",
+          "label": "Stroke"
         }
       ]
     },
@@ -169,8 +177,35 @@
           ]
         },
         {
+          "p": "Someone hurt? A gunshot, a fall from a tree stand, cold water: use the protocols."
+        },
+        {
+          "link": "p:march",
+          "label": "Trauma check (MARCH)"
+        },
+        {
           "link": "p:bleeding",
           "label": "Severe bleeding"
+        },
+        {
+          "link": "p:chest-wound",
+          "label": "Open chest wound"
+        },
+        {
+          "link": "p:abdominal-wound",
+          "label": "Belly (abdominal) injury"
+        },
+        {
+          "link": "p:spine-injury",
+          "label": "Neck or back (spine) injury"
+        },
+        {
+          "link": "p:head-injury",
+          "label": "Head injury and concussion"
+        },
+        {
+          "link": "p:fracture",
+          "label": "Broken bone (fracture)"
         },
         {
           "link": "p:hypothermia",
@@ -214,7 +249,7 @@
             "Never eat adult insects that bite or sting, hairy or brightly coloured insects, hairy caterpillars, insects with a strong smell, spiders, or ticks, flies and mosquitoes (ATP 3-50.21).",
             "Collect only where no pesticides have been used (Michigan State University Extension).",
             "Take off stingers, legs, wings and heads (ATP 3-50.21).",
-            "Cook every one completely, to kill germs and parasites (Michigan State University Extension). Cook any insect collected in the wild; never eat one raw (Ohio State University Extension). The US Army manual FM 21-76 says most insects can be eaten raw; this app goes by the extension services."
+            "Cook every one completely, to kill germs and parasites. A thermometer is hard to use on something so small: stir them in the pan for about 10 minutes on medium heat, and be extra sure they are thoroughly cooked (Michigan State University Extension). Cook any insect collected in the wild; never eat one raw (Ohio State University Extension). The US Army manual FM 21-76 says most insects can be eaten raw; this app goes by the extension services."
           ]
         },
         {
@@ -283,7 +318,7 @@
     },
     {
       "name": "Michigan State University Extension (4-H Entomology), Eating bugs: Part 3 – Catch and eat them yourself (April 21, 2022)",
-      "used": "Grasshoppers, crickets and isopods; only bugs you can easily identify; pesticide-free collecting; cook completely to destroy pathogens and parasites; no bugs for people allergic to shellfish or to mushrooms"
+      "used": "Grasshoppers, crickets and isopods; only bugs you can easily identify; pesticide-free collecting; cook completely to destroy pathogens and parasites; a thermometer reading is hard on an insect, stir about 10 minutes on medium heat, be extra sure; no bugs for people allergic to shellfish or to mushrooms"
     },
     {
       "name": "Ohio State University Extension (CFAES), Chow Line: Cicadas can be a tasty treat, but they can be hazardous to those allergic to seafood, FDA warns (undated)",
@@ -303,11 +338,11 @@
     },
     {
       "name": "NYS DEC press release, DEC Releases Hunting Safety Statistics for 2024 (February 14, 2025); NYS DEC bulletins, DEC Reminds New York State Hunters: Be Safe During Hunting Seasons (2019, 2020); NYS DEC Hunter Education, Tree Stand “Best Practices”",
-      "used": "Identify target and what lies beyond; tree stand harness connected before feet leave the ground; tell someone where you will be and when you will return; every hunter takes a Hunter Education Course before a licence"
+      "used": "Identify target and what lies beyond; tree stand harness connected before feet leave the ground; tell someone where you will be and when you will return; DEC requires a Hunter Education Course before a licence (the rule itself by link to New York rules)"
     },
     {
       "name": "American Heart Association, Hunting safety should include heart attack and stroke awareness (October 27, 2022)",
-      "used": "Never hunt alone if possible; dragging leaves even the fittest hunter breathless and could bring on a heart attack or stroke"
+      "used": "Never hunt alone if possible; dragging leaves even the fittest hunter breathless and could bring on a heart attack or stroke; a good health check-up before the season (also in A-hunting we will go, November 25, 2024)"
     },
     {
       "name": "Minnesota Department of Natural Resources, Water Safety for Duck Hunters (2017)",
@@ -330,6 +365,5 @@
       "used": "The food-priority sentence and the lead sentence, quoted word for word; the plant seasons (dandelion, cattail, raspberries and blackberries) and safe list; gloves with rabbits and hares; keeping meat in winter; wild game and fish after fallout; going out during a fallout shelter period; every New York rule, all by link"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

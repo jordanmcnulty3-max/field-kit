@@ -21,7 +21,7 @@
     {
       "id": "gloves",
       "text": "Disposable rubber, nitrile or latex gloves",
-      "note": "Always with rabbits, hares and other rodents, and if your hands have cuts or sores."
+      "note": "Always with rabbits, hares and rodents, and if your hands have cuts or sores."
     },
     {
       "id": "cloths",
@@ -168,7 +168,8 @@
     },
     {
       "id": "catchpole",
-      "text": "A catchpole, for releasing an animal you did not mean to catch"
+      "text": "A catchpole",
+      "note": "To control a trapped animal so it can be released or dispatched more safely."
     },
     {
       "id": "fire",
@@ -243,6 +244,5 @@
       "used": "Game only, not kitchen knives; gloves with rabbits and rodents and with cuts or sores; game bags, cheesecloth, cotton bags or pillow cases (North Dakota State University Extension, Kentucky Afield, as given there); boning knife, meat saw, gambrel or stick, table, airtight bags or wrap, labels (as given there); food thermometer and a thermometer on the ice (as given there); food-grade salt without additives (National Center for Home Food Preservation, as given there); 165°F for wild game; legal traps, orange and trap marking by name"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

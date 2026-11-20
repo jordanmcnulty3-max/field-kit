@@ -1329,8 +1329,9 @@ Food from the land pack (v7.7), batch B (hub, hunting deer and big game, small g
    after an arrow. Maine: half an hour to an hour. North Carolina: 15 to 30 minutes, an hour or more for a poor hit. Today: at least
    1 hour for any ordinary hit, 6 to 8 hours after a gut shot, all four named. Cost if wrong: a firearm-shot deer cools half an hour later
    than it needs to.
-172. **Quartering-toward and head-on shots with a firearm (surv-land-big-game).** Alaska Department of Fish and Game accepts both with a
-   bullet that can break the bones in the way. Texas Parks and Wildlife says quartering toward is more likely to hit shoulder bone and
+172. **Quartering-toward and head-on shots with a firearm (surv-land-big-game).** Alaska Department of Fish and Game shows quartering
+   forward and forward-facing shots, says to consider how the angle changes where the vital organs are, and to be sure the caliber and
+   bullet can break any bones in the way; it does not say to pass them up. Texas Parks and Wildlife says quartering toward is more likely to hit shoulder bone and
    head-on can ruin meat and go through the stomach (and both never with a bow). Today: "Pass it up" for both, ADF&G's view named. Cost if
    wrong: some killing shots are passed up.
 173. **Insects raw or cooked (surv-land-start).** FM 21-76: "You can eat most insects raw." Michigan State University Extension and Ohio

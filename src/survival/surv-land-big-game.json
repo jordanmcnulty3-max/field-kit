@@ -48,7 +48,7 @@
           ]
         },
         {
-          "p": "After fallout, the rule for wild game is in Game, fish, milk and gardens after fallout: don’t use it until officials say you can."
+          "p": "After fallout, the caution for wild game is in Game, fish, milk and gardens after fallout: don’t use it until officials say you can."
         },
         {
           "link": "s:surv-land-after-fallout",
@@ -74,7 +74,7 @@
       "h": "Your target and what is beyond it",
       "blocks": [
         {
-          "p": "NYS DEC’s four rules: treat every firearm as if it is loaded; keep the muzzle pointed in a safe direction; keep your finger off the trigger until you are ready to fire; identify your target and what lies beyond it."
+          "p": "NYS DEC’s firearm rules: treat every firearm as if it is loaded; keep the muzzle pointed in a safe direction; keep your finger off the trigger until you are ready to fire; identify your target and what lies beyond it."
         },
         {
           "list": [
@@ -150,7 +150,7 @@
           ]
         },
         {
-          "p": "Alaska Department of Fish and Game also accepts quartering-toward and head-on shots with a firearm whose bullet can break the bones in the way. This app goes by the more cautious sources: pass them up."
+          "p": "Alaska Department of Fish and Game shows quartering-toward and head-on shots, says to consider how the angle moves the vital organs, and to be sure your bullet can break any bones in the way. This app goes by the more cautious sources: pass up quartering-toward and head-on shots."
         }
       ]
     },
@@ -241,7 +241,7 @@
             "Watch it from a distance for breathing (New Jersey Fish and Wildlife).",
             "Approach from behind its head and stay away from its feet and antlers (Missouri Department of Conservation, Massachusetts hunter education).",
             "The eyes of a dead deer are normally open (Massachusetts hunter education). Touch the corner of the eye with a long stick: if it blinks, it is still alive (New Jersey Fish and Wildlife, Missouri Department of Conservation).",
-            "Still alive: finish it with a shot into the heart and lungs, only if that is safe (New Jersey Fish and Wildlife, Massachusetts hunter education).",
+            "Still alive: finish it with a shot into the heart and lungs, only if that shot is legal (New York rules) and safe (New Jersey Fish and Wildlife, Massachusetts hunter education).",
             "Put your firearm or bow down only when you are certain the deer is dead (Missouri Department of Conservation).",
             "Tag it if the law requires (New York rules), then field dress it as soon as you can (Massachusetts hunter education)."
           ]
@@ -269,19 +269,23 @@
           ]
         },
         {
-          "p": "Someone fell? Use the protocols."
+          "p": "Someone fell? Check them in order with the trauma check, and use the protocols for what you find."
+        },
+        {
+          "link": "p:march",
+          "label": "Trauma check (MARCH)"
         },
         {
           "link": "p:spine-injury",
           "label": "Neck or back (spine) injury"
         },
         {
-          "link": "p:fracture",
-          "label": "Broken bone (fracture)"
-        },
-        {
           "link": "p:head-injury",
           "label": "Head injury and concussion"
+        },
+        {
+          "link": "p:fracture",
+          "label": "Broken bone (fracture)"
         }
       ]
     },
@@ -326,11 +330,15 @@
           ]
         },
         {
-          "p": "Chest pain or other signs of a heart attack while dragging? Stop and use the protocol."
+          "p": "Chest pain, or a drooping face, a weak arm or slurred speech while dragging? Stop and use the protocol."
         },
         {
           "link": "p:chest-pain",
           "label": "Chest pain or heart attack"
+        },
+        {
+          "link": "p:stroke",
+          "label": "Stroke"
         }
       ]
     },
@@ -340,7 +348,7 @@
         {
           "list": [
             "Shot placement matters even more: the best shot is just behind the front shoulder, with the bear angled slightly away from broadside. Take extra time, calm down and slow your breathing before you shoot (New Jersey Fish and Wildlife).",
-            "A bear’s long, thick fur hides its shape: find the heart and lungs precisely, so you don’t shoot only into hair or wound it. A wounded bear can be dangerous (Connecticut hunter safety manual).",
+            "A bear’s fur is long and thick: take that into account and find the heart and lungs precisely. A wounded bear can be dangerous (Connecticut hunter safety manual).",
             "The waiting, trailing and approach above are the general hunter education steps; no source opened gives separate ones for bear."
           ]
         },
@@ -365,8 +373,23 @@
       "h": "Injuries",
       "blocks": [
         {
+          "p": "Someone shot, or cut while dressing game? Use the protocols."
+        },
+        {
+          "link": "p:march",
+          "label": "Trauma check (MARCH)"
+        },
+        {
           "link": "p:bleeding",
           "label": "Severe bleeding"
+        },
+        {
+          "link": "p:chest-wound",
+          "label": "Open chest wound"
+        },
+        {
+          "link": "p:abdominal-wound",
+          "label": "Belly (abdominal) injury"
         },
         {
           "link": "p:impaled-object",
@@ -406,11 +429,11 @@
     },
     {
       "name": "NYS DEC press release, DEC Releases Hunting Safety Statistics for 2024 (February 14, 2025)",
-      "used": "The four primary firearm rules including identify target and what lies beyond; connect to the tree before feet leave the ground; 11 elevated hunting incidents in 2024, two fatal, nine without a harness or not connected; all preventable with a connected fall-arrest harness"
+      "used": "Primary hunter safety rules (five, the fifth hunter orange or pink); connect to the tree before feet leave the ground; 11 elevated hunting incidents in 2024, two fatal, nine without a harness or not connected; all preventable with a connected fall-arrest harness"
     },
     {
       "name": "NYS DEC bulletins, DEC Reminds New York State Hunters: Be Safe During Hunting Seasons (November 8, 2019 and October 15, 2020)",
-      "used": "Never climb in or out of a tree stand with a loaded firearm; tell friends or relatives where you will hunt and when you will return; prepare for winter conditions; emergency supplies such as flashlights, water and high-energy food"
+      "used": "The four firearm rules (treat every firearm as loaded, muzzle in a safe direction, finger off the trigger, sure of the target and what is beyond); never climb in or out of a tree stand with a loaded firearm; tell friends or relatives where you will hunt and when you will return; prepare for winter conditions; emergency supplies such as flashlights, water and high-energy food"
     },
     {
       "name": "NYS DEC, Learn How To Ice Fish (web page, undated)",
@@ -422,7 +445,7 @@
     },
     {
       "name": "New Jersey Division of Fish and Wildlife, hunter education workbook, Chapter 4: Game Care, Before and After the Shot",
-      "used": "Heart, lungs and liver, best a double lung; head never; a spot smaller than a pie plate; broadside and quartering-away aim; standing, unaware and within range; branches deflect; never straight down from a stand, wait until 10 yards out; one lung; pass on difficult shots; listen, mark, note the time, wait 20 minutes before leaving the stand; blood colours; wait one hour for a standard hit, six to eight hours for a gut shot, check water; walk beside the trail, blood on vegetation, flag, widening circles, three trackers at most; watch for breathing, approach behind the head, touch the eye, follow-up shot; flag big game with hunter orange; don’t drag something too heavy, get help; avoid dragging through water or dirt; avoid hot days without a way to keep game cool"
+      "used": "Heart, lungs and liver, best a double lung; a liver-shot animal may live longer; head never; a spot smaller than a pie plate; broadside and quartering-away aim; standing, unaware and within range; branches deflect; never straight down from a stand, wait until 10 yards out; one lung; pass on difficult shots; listen, mark, note the time, wait 20 minutes before leaving the stand; blood colours; wait one hour for a standard hit, six to eight hours for a gut shot, check water; walk beside the trail, blood on vegetation, flag, widening circles, three trackers at most; watch for breathing, approach behind the head, touch the eye, follow-up shot; flag big game with hunter orange; don’t drag something too heavy, get help; avoid dragging through water or dirt; avoid hot days without a way to keep game cool"
     },
     {
       "name": "New Jersey Division of Fish and Wildlife, Black Bear Hunting Tips (web page)",
@@ -449,12 +472,12 @@
       "used": "Never fire at a sound or movement; binoculars to identify target and backstop; never a rifle scope as binoculars; never wear the colour of a game animal; wear hunter orange"
     },
     {
-      "name": "Connecticut DEEP hunter safety manual, Chapter 12: Making a Quick, Clean Kill (Outdoor Roadmap course material on the Connecticut site)",
-      "used": "A well-placed shot drops the animal almost immediately, less meat damage, easier field dressing; no shots at moving big game; gut shot not quick, the animal escapes and suffers, intestinal juices spoil meat; bear fur long and thick, locate the vitals precisely, a wounded bear can be dangerous"
+      "name": "Connecticut DEEP, Connecticut Hunter Safety Manual, Chapter 12: Making a Quick, Clean Kill (Outdoor Roadmap course material)",
+      "used": "A well-placed shot drops the animal almost immediately, less meat damage, easier field dressing; no shots at moving big game; gut shot not quick, the animal escapes and suffers, intestinal juices spoil meat; bear fur long and thick, take it into account, locate the vitals precisely, a wounded bear can be dangerous"
     },
     {
       "name": "Alaska Department of Fish and Game, Big Game Shot Placement (web page)",
-      "used": "Heart-lung vital zone; broadside aim one third up from the bottom of the chest, behind the near front shoulder; rear shots not advisable; quartering forward and forward-facing accepted with a bullet that breaks bone (shown, not followed)"
+      "used": "Heart-lung vital zone; broadside aim one third up from the bottom of the chest, behind the near front shoulder; rear shots not advisable; quartering forward and forward-facing shown, consider how the angle moves the vital organs, a caliber and bullet that break any bones in the way (pass-up used instead)"
     },
     {
       "name": "Missouri Department of Conservation, Field Dressing Your Deer (web page)",
@@ -473,6 +496,5 @@
       "used": "Field dressing, cooling, disease signs, lead and the cooking rule for bear; keeping meat and bear jerky; cutting up; wild game after fallout; every New York rule; bears; cold-weather clothing, all by link"
     }
   ],
-  "reviewed": "2026-11-19",
-  "draft": true
+  "reviewed": "2026-11-19"
 }

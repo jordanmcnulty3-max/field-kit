@@ -205,7 +205,7 @@ def validate(protocols, fig_names):
     return errors, warnings
 
 
-TOPIC_CATEGORIES = {'basics', 'water', 'heat', 'radiation', 'food', 'comms', 'staying', 'moving', 'town'}
+TOPIC_CATEGORIES = {'basics', 'water', 'heat', 'radiation', 'food', 'land', 'comms', 'staying', 'moving', 'town'}
 WHERE = {'town', 'rural', 'woods', 'coast'}
 WHEN = {'cold', 'warm'}
 RESERVED_TOPIC_IDS = {'tool', 'list'}

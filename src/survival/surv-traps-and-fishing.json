@@ -1,7 +1,7 @@
 {
   "id": "surv-traps-and-fishing",
   "title": "Traps and fishing",
-  "category": "basics",
+  "category": "land",
   "keywords": [
     "snare",
     "trap",
@@ -12,10 +12,6 @@
     "squirrel"
   ],
   "summary": "Set several traps where animals clearly travel, and leave as little sign of yourself as you can.",
-  "where": [
-    "rural",
-    "woods"
-  ],
   "sections": [
     {
       "h": "Traps and fishing",

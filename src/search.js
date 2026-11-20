@@ -62,13 +62,17 @@
        topic      the category its topics carry (every topic of the pack, and only those, has this category)
        hub        the key of the pack's hub topic, indexed first among its topics
        protocols  ids of the pack's Emergency protocols (indexed before its hub)
-       checklists ids of the pack's checklists (indexed after its topics) */
+       checklists ids of the pack's checklists (indexed after its topics)
+       older      optional: keys ("s:" and the id, as for hub) of topics that carry the pack's category but were indexed before the pack
+                  existed. They are indexed as a topic in no pack is, in their old place, so no search result moves when a topic changes
+                  category; every other topic of the category is a pack page, after all older pages. */
   const PACKS = [
     { topic: 'radiation', hub: 's:surv-fallout-warning', protocols: ['radiation-decontamination', 'radiation-sickness'], checklists: ['fallout-shelter-kit'] },   // v7.4
     { topic: 'food', hub: 's:surv-food-power-out', protocols: [], checklists: ['pantry'] },   // v7.5
+    { topic: 'land', hub: 's:surv-land-start', protocols: [], checklists: ['land-kit'], older: ['s:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants'] },   // v7.7
   ];
   // The index of the pack a document belongs to, or -1 for a document that is in none (those keep the old order, before every pack).
-  const packOfTopic = category => PACKS.findIndex(k => k.topic === category);
+  const packOfTopic = (category, id) => PACKS.findIndex(k => k.topic === category && !(k.older || []).includes('s:' + id));
   const packOfProtocol = id => PACKS.findIndex(k => k.protocols.includes(id));
   const packOfChecklist = id => PACKS.findIndex(k => k.checklists.includes(id));
 
@@ -94,7 +98,7 @@
         fields: [field(W.title, t.label), field(W.keywords, TOOL_WORDS[t.name] || '')] });
     }
     for (const t of FK.survival ? FK.survival.topics() : []) {
-      const k = t ? packOfTopic(t.category) : -1;
+      const k = t ? packOfTopic(t.category, t.id) : -1;
       (k >= 0 ? packed[k].topics : out).push(topicDoc(t));
     }
     for (const c of survList('checklists')) {

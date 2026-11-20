@@ -495,3 +495,23 @@ def test_v74_backup_restores_on_v75_and_its_pins_recents_and_filter_open(page, a
     # a v7.4 file holds no food key; the new topics open from search and from the home
     page.evaluate("FK.route.go('/survival/surv-food-power-out')")
     page.wait_for_function("location.hash === '#/survival/surv-food-power-out'")
+
+
+# ---------- Food from the land (v7.7): a v7.6-shaped backup restores and its keys still open ----------
+
+def test_v76_backup_with_the_three_moved_topics_restores_and_they_still_open_from_pins_and_recents(page, app_url, tmp_path):
+    boot(page, app_url, hash_='#/survival')
+    moved = ['s:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants']
+    v76 = backup_file({'fk.pins': json.dumps(moved[:2]), 'fk.recent': json.dumps([moved[2], 's:surv-priorities']),
+                       'fk.survFilter': json.dumps({'where': 'coast', 'when': 'cold'}), 'fk.night': 'false'}, version='7.6')
+    pick(page, tmp_path, v76)
+    restore_now(page)
+    assert page.evaluate('FK.pins.all()') == moved[:2]
+    page.wait_for_function("location.hash === '#/survival'")
+    for sel, key in (('#survPinned', moved[0]), ('#survPinned', moved[1]), ('#survRecent', moved[2])):
+        title = page.evaluate('k => FK.search.describe(k).title', key)
+        _open_from(page, sel, key, title)
+    # the restored Coast + Cold filter hides none of them: they are listed under Food from the land
+    page.locator('#survCats summary', has_text='Food from the land').click()
+    keys = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
+    assert set(moved) <= set(keys)

@@ -35,7 +35,7 @@ def cats(page):
 
 
 def open_cat(page, label):
-    page.locator('#survCats summary', has_text=label).click()
+    page.locator('#survCats summary', has_text=label).first.click()   # first: 'Food' comes before 'Food from the land'
 
 
 def titles(page, label):
@@ -363,13 +363,16 @@ ALWAYS = ['s:surv-dangerous-animals', 's:surv-priorities', 's:surv-make-water-sa
           's:surv-potassium-iodide', 's:surv-fallout-get-ready',
           # food pack (Task 8): all ten topics, so no Where or When filter can hide food safety (spec 4)
           's:surv-food-power-out', 's:surv-food-still-good', 's:surv-food-cooking-no-power', 's:surv-food-poisoning', 's:surv-food-how-much',
-          's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-preserving']
+          's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-preserving',
+          # land pack (v7.7): the three older topics that moved to Food from the land lose their tags, so no filter can hide them
+          's:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants']
 RADIATION = ['s:surv-fallout-warning', 's:surv-fallout-where-to-shelter', 's:surv-fallout-how-long', 's:surv-fallout-shelter-living',
              's:surv-fallout-coming-inside', 's:surv-fallout-water-and-food', 's:surv-fallout-leaving', 's:surv-dirty-bomb',
              's:surv-potassium-iodide', 's:surv-fallout-get-ready']   # named, so a later pack appending to ALWAYS cannot shift it
 FOOD = ['s:surv-food-power-out', 's:surv-food-still-good', 's:surv-food-cooking-no-power', 's:surv-food-poisoning', 's:surv-food-how-much',
         's:surv-food-storage', 's:surv-food-when-short', 's:surv-food-clean-kitchen', 's:surv-food-babies-children', 's:surv-food-preserving']
-assert set(RADIATION) <= set(ALWAYS) and set(FOOD) <= set(ALWAYS)
+MOVED = ['s:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants']
+assert set(RADIATION) <= set(ALWAYS) and set(FOOD) <= set(ALWAYS) and set(MOVED) <= set(ALWAYS)
 # Topics tagged when: cold: listed under Any and Cold, hidden under Warm, for every Where value.
 WHEN_COLD = ['s:surv-unheated-house', 's:surv-dress-for-cold', 's:surv-wind-chill', 's:surv-water-winter']
 WHERES = ('any', 'town', 'rural', 'woods', 'coast')
@@ -412,7 +415,7 @@ def test_fire_and_shelter_are_listed_under_heat_with_the_hub_first(page, app_url
     basics = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"basics\"] button[data-key]')].map(b => b.dataset.key)")
     assert 's:surv-fire' in heat and 's:surv-shelter' in heat
     assert 's:surv-fire' not in basics and 's:surv-shelter' not in basics
-    assert basics[0] == 's:surv-priorities' and len(basics) >= 10   # Basics keeps its remaining topics
+    assert basics[0] == 's:surv-priorities' and len(basics) >= 8   # Basics keeps its remaining topics (the three land topics moved out of it in v7.7)
     assert len(heat) == 14
     assert heat[0] == 's:surv-heat-out'   # the hub leads its category, as Priorities leads Basics
     page.click('#survCats [data-key="s:surv-fire"]')
@@ -844,3 +847,30 @@ def test_home_section_headings_have_space_above_and_read_as_labels(page, app_url
         assert g['upper'] == 'uppercase' and g['size'] < 16, g
     row = page.evaluate("parseFloat(getComputedStyle(document.querySelector('#survCats summary')).fontSize)")
     assert row > gaps[0]['size']
+
+
+# ---------- Food from the land (v7.7): the land category ----------
+
+def test_the_three_moved_topics_are_category_land_and_carry_no_where_or_when_key_in_the_shipped_data():
+    land = {i: t for i, t in _shipped('survival').items() if t.get('category') == 'land'}
+    assert sorted('s:' + i for i in land if not i.startswith('surv-land-')) == sorted(MOVED)   # the rest of the pack arrives with its content
+    for i, t in land.items():
+        assert 'where' not in t and 'when' not in t, i
+
+
+def test_land_category_sits_after_food_and_holds_the_three_moved_topics(page, app_url):
+    shipped_home(page, app_url)
+    heads = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat] > summary')].map(s => s.textContent.trim())")   # CSS capitals are not in textContent
+    assert 'Food from the land' in heads and heads.index('Food from the land') == heads.index('Food') + 1, heads
+    cat = lambda c: page.evaluate(f"[...document.querySelectorAll('#survCats details[data-cat=\"{c}\"] button[data-key]')].map(b => b.dataset.key)")
+    assert set(MOVED) <= set(cat('land'))
+    assert not set(MOVED) & set(cat('basics'))
+
+
+def test_moved_topics_are_listed_under_all_fifteen_filters(page, app_url):
+    shipped_home(page, app_url)
+    for where in WHERES:
+        for when in ('any', 'cold', 'warm'):
+            page.evaluate(f"FK.store.set('survFilter', {{ where: '{where}', when: '{when}' }}); FK.survival.refreshHome()")
+            land = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
+            assert set(MOVED) <= set(land), f'where={where} when={when}: {land}'

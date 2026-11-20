@@ -25,8 +25,10 @@ MIGRATED = {'surv-dangerous-animals', 'surv-field-dressing-game', 'surv-find-wat
             'surv-knots', 'surv-make-water-safe', 'surv-navigation-without-a-compass', 'surv-priorities',
             'surv-river-crossings', 'surv-shelter', 'surv-signal-for-rescue', 'surv-ten-essentials',
             'surv-traps-and-fishing', 'surv-weather-and-lightning'}
-# Migrated topics a content pack moved to another category (water pack, Task 5; heat pack, Task 7; drafts while it was written, released in the pack).
-REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water', 'surv-fire': 'heat', 'surv-shelter': 'heat'}
+# Migrated topics a content pack moved to another category (water pack, Task 5; heat pack, Task 7; drafts while it was written, released in the pack;
+# land pack, v7.7: the three food-from-the-land topics, rewritten by that pack's later tasks).
+REOPENED = {'surv-find-water': 'water', 'surv-make-water-safe': 'water', 'surv-fire': 'heat', 'surv-shelter': 'heat',
+            'surv-traps-and-fishing': 'land', 'surv-field-dressing-game': 'land', 'surv-food-and-wild-plants': 'land'}
 # Exact figure sets are pinned for these topics: find-water keeps both v6 figures; make-water-safe's water-safe was removed in v7 (Task 13)
 # and restored with the 5,000 ft / 5% to 9% wording in the water pack's Task 8, which also adds the water-heater,
 # bucket-toilet, cat-hole and hand-washing-station figures to the new water topics.

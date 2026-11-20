@@ -1,7 +1,7 @@
 {
   "id": "surv-field-dressing-game",
   "title": "Field dressing game",
-  "category": "basics",
+  "category": "land",
   "keywords": [
     "field dressing",
     "deer",
@@ -14,10 +14,6 @@
     "trichinella"
   ],
   "summary": "Open the belly without cutting the stomach or intestines, cool the carcass fast, and cook all game to 165°F.",
-  "where": [
-    "rural",
-    "woods"
-  ],
   "sections": [
     {
       "h": "Before you start",

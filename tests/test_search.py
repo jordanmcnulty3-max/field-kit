@@ -853,9 +853,9 @@ def _packs():
     src = open(os.path.join(os.path.dirname(__file__), '..', 'src', 'search.js'), encoding='utf-8').read()
     body = re.search(r'const PACKS = \[(.*?)\n  \];', src, re.S).group(1)
     packs = []
-    for m in re.finditer(r"\{ topic: '([^']+)', hub: '([^']+)', protocols: \[([^\]]*)\], checklists: \[([^\]]*)\] \}", body):
-        ids = lambda g: re.findall(r"'([^']+)'", g)
-        packs.append({'topic': m.group(1), 'hub': m.group(2), 'protocols': ids(m.group(3)), 'checklists': ids(m.group(4))})
+    for m in re.finditer(r"\{ topic: '([^']+)', hub: '([^']+)', protocols: \[([^\]]*)\], checklists: \[([^\]]*)\](?:, older: \[([^\]]*)\])? \}", body):
+        ids = lambda g: re.findall(r"'([^']+)'", g or '')
+        packs.append({'topic': m.group(1), 'hub': m.group(2), 'protocols': ids(m.group(3)), 'checklists': ids(m.group(4)), 'older': ids(m.group(5))})
     return packs
 
 
@@ -864,14 +864,17 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
     load = lambda d: {j['id']: j for j in (json.load(open(f, encoding='utf-8')) for f in glob.glob(os.path.join(root, d, '*.json')))}
     protocols, checklists, topics = load('protocols'), load('checklists'), load('survival')
     packs = _packs()
-    assert [k['topic'] for k in packs] == ['radiation', 'food'], packs   # the order is the index order: oldest pack first
+    assert [k['topic'] for k in packs] == ['radiation', 'food', 'land'], packs   # the order is the index order: oldest pack first
     seen = []
     for k in packs:
-        assert k['hub'].startswith('s:') and k['hub'][2:] in topics, k['hub']
-        assert topics[k['hub'][2:]]['category'] == k['topic'], k['hub']   # the hub is a topic of its own pack
+        assert k['hub'].startswith('s:'), k['hub']
+        if k['topic'] != 'land':   # the land hub ships with the pack's content (a later task); until then it is only a name
+            assert k['hub'][2:] in topics, k['hub']
+            assert topics[k['hub'][2:]]['category'] == k['topic'], k['hub']   # the hub is a topic of its own pack
         assert [i for i in k['protocols'] if i not in protocols] == [], k   # every listed protocol and checklist ships
-        assert [i for i in k['checklists'] if i not in checklists] == [], k
-        assert [i for i in k['checklists'] if checklists[i].get('category') != k['topic']] == [], k   # and belongs to this pack's category
+        if k['topic'] != 'land':
+            assert [i for i in k['checklists'] if i not in checklists] == [], k
+            assert [i for i in k['checklists'] if checklists[i].get('category') != k['topic']] == [], k   # and belongs to this pack's category
         seen += [('p', i) for i in k['protocols']] + [('c', i) for i in k['checklists']]
     assert len(seen) == len(set(seen))   # in no two packs
     food = packs[1]
@@ -885,7 +888,19 @@ def test_every_id_in_PACKS_exists_and_each_pack_holds_its_category():
     # one has to be listed. Protocols carry no pack field (the radiation protocols are in the injury categories), so their explicit lists
     # are asserted above (the food pack has none).
     for k in packs:
-        assert sorted(i for i, c in checklists.items() if c.get('category') == k['topic']) == sorted(k['checklists']), k['topic']
+        if k['topic'] != 'land':   # land-kit ships with the pack's content (a later task)
+            assert sorted(i for i, c in checklists.items() if c.get('category') == k['topic']) == sorted(k['checklists']), k['topic']
+    # "older" lists topics of the pack's category that were indexed before the pack existed: they keep that place, so each must be
+    # a shipped topic of the category; every other topic of the category is newer than v7.6 (its id starts surv-land-)
+    land = packs[2]
+    assert land['older'] == ['s:surv-traps-and-fishing', 's:surv-field-dressing-game', 's:surv-food-and-wild-plants'], land
+    assert land['hub'] == 's:surv-land-start' and land['checklists'] == ['land-kit'] and land['protocols'] == []
+    for k in packs[:2]:
+        assert k['older'] == [], k
+    for tid, t in topics.items():
+        if t.get('category') == 'land':
+            assert 's:' + tid in land['older'] or tid.startswith('surv-land-'), tid
+    assert [i for i in land['older'] if i[2:] not in topics or topics[i[2:]]['category'] != 'land'] == []
 
 
 @pytest.mark.parametrize('text,page_key', [('cross contamination', 's:surv-food-clean-kitchen'), ('how long can food sit out', 's:surv-food-still-good'),
@@ -911,3 +926,15 @@ def test_power_outage_lists_the_food_hub_in_the_first_four_after_the_v74_results
     open_search(page)
     ks = on_screen(page, 'power outage')[:4]
     assert ks == V77_ON_SCREEN['power outage'][:4] and 's:surv-food-power-out' in ks, ks
+
+
+LAND_OLDER_ORDER = json.load(open(os.path.join(os.path.dirname(__file__), 'fixtures', 'search_land_older_order.json'), encoding='utf-8'))
+
+
+@pytest.mark.parametrize('text', sorted(LAND_OLDER_ORDER))
+def test_moved_topics_keep_their_index_position(page, app_url, text):
+    # the three older topics moved to category land but stay indexed where a topic in no pack is: FK.search.query() lists the same
+    # keys in the same order as the v7.6 build did (recorded in tests/fixtures/search_land_older_order.json before the move)
+    page.goto(app_url + '#/survival')
+    page.wait_for_function('window.FK && FK.search')
+    assert [r['key'] for r in q(page, text)] == LAND_OLDER_ORDER[text]

@@ -1,7 +1,7 @@
 {
   "id": "surv-food-and-wild-plants",
   "title": "Food and wild plants",
-  "category": "basics",
+  "category": "land",
   "keywords": [
     "food",
     "plants",
@@ -13,10 +13,6 @@
     "insects"
   ],
   "summary": "Food is the lowest priority, and you should only eat a plant you can identify with certainty.",
-  "where": [
-    "rural",
-    "woods"
-  ],
   "sections": [
     {
       "h": "Food and wild plants",

@@ -8034,3 +8034,94 @@ Code: `src/wmm.js`; tests: `tests/test_wmm.py`. Both pages below were opened on 
 Other pages opened in the search and not used for numbers: NCEI's WMMHR2025 product page (https://www.ncei.noaa.gov/node/7156),
 the "WMM Update" notice (https://ncei.noaa.gov/node/6716) and the release news item (https://www.ncei.noaa.gov/node/7266); none
 holds the coefficient table.
+
+## Ballistics
+
+### Reference trajectories for the solver check (2026-11-21)
+
+`BAL.solve` (`src/ballistics.js`) is checked against published trajectories computed with a single stated G1 or G7 coefficient.
+Every page below was opened on 2026-11-21 with the figures taken as printed. The rows are in
+`tests/fixtures/ballistics_reference.json`, the test is `tests/test_ballistics_math.py`, and the results and decisions are in
+`docs/ballistics-rulings.md`. Drop is compared as an angle, atan(inches / (yards x 36)); only rows where the bullet is above
+Mach 1.2 are judged.
+
+Judged sources (four independent publishers; three G1, one G7):
+
+- **Hornady, "External Ballistics"** (text of the Hornady Handbook),
+  https://www.hornady.com/team-hornady/ballistic-information/ballistic-resources/external-ballistics. States that Hornady
+  coefficients are referred to the G1 model and that all coefficients and tables are adjusted to standard conditions: sea level,
+  59 F, 29.53 inHg, 78 % humidity (Army Standard Metro). Sight height is not printed as a number; each muzzle row reads -1.5 in.
+  Rows taken: the two 30 cal 180 gr example tables (Spire Point BC .425, Round Nose BC .241, both 3000 fps, 100 yd zero), every
+  row from 50 to 500 yd, drop and velocity; "Test #1: Standard Conditions" (BC .338, 2900 fps, 100 yd zero), every row from 100
+  to 500 yd. Tests #2 to #4 (other air, recalculated coefficient) not used.
+- **pyballistic QuickStart** (LGPL ballistic library), https://dbookstaber.github.io/pyballistic/latest. Range card example:
+  G7 0.22, 2600 fps, sight height 2, 100 yd zero, wind 5 mph from 3 o'clock. Rows taken: 100 to 500 yd, height, windage,
+  velocity, time. The example sets no atmosphere; `Shot` then uses `Atmo.icao()`
+  (https://dbookstaber.github.io/pyballistic/latest/api/conditions/shot), which is sea level at ICAO standard temperature and
+  pressure (https://dbookstaber.github.io/pyballistic/latest/api/conditions/atmo); that page names the default humidity constant
+  without its value, entered as 0 %. Also opened, no values used: https://dbookstaber.github.io/pyballistic/latest/concepts/conditions/atmo
+  and https://dbookstaber.github.io/pyballistic/latest/api/drag_tables (lists the tables' types, not their values).
+- **Steiner 3TR Ballistics**, https://www.eurooptic.com/content/pdf/Steiner/Steiner 3TR Ballistics.pdf. 5.56mm SS109/M855 62 gr
+  FMJ, BC 0.304 (model not named; taken as G1, see the rulings), 3100 fps, sight 1.5 in, 200 yd zero, 0 ft, 59 F, 29.92 inHg,
+  0 %, wind 10 mph at 90 degrees (3 o'clock). Rows taken: every 50 yd row from 200 to 1,000 yd (elevation in, wind drift in,
+  velocity, flight time). The table continues to 2,200 yd; rows past 1,000 yd not used.
+- **Sniper's Hide forum, "Range Report .308 Sierra MatchKing 175gr ballistic data/card"**,
+  https://www.snipershide.com/shooting/threads/308-sierra-matchking-175gr-ballistic-data-card.198129. Output of Zdziarski's
+  ballistic program: G1 0.496 (single), 2600 fps in the header and 2606 fps in the 0 yd row, sight 3.0 in, 100 yd zero (zero air
+  0 ft, 29.92 inHg, 59 F, 0 %), firing air 794 ft, 30.13 inHg, 20.8 F, 54 %, no wind. Rows taken: every row from 50 to 1,000 yd,
+  drop, velocity and time; the 214 yd row (peak) and the wind column (spin drift) not used.
+
+Recorded, not judged:
+
+- **Federal Premium, Gold Medal Sierra MatchKing 308 Win 175 gr (GM308M2)**,
+  https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M2.html. BC .505 (not labelled G1; G7 0.25
+  given separately), 2600 fps, sight 1.5 in, 100 yd zero, 10 mph crosswind. No atmosphere stated, so `"judged": false`. Rows
+  taken: velocity and wind drift 100 to 500 yd; drop at 50, 200 and 300 yd ("Average Range"). A Federal compare page with the
+  same figures also opened: https://308ar.com/wp-content/uploads/2016/03/Federal-Gold-Medal-Match-308-Winchester-Match-Ammunition.pdf
+
+### Standard atmospheres and drag tables (2026-11-21)
+
+- ICAO sea-level density 1.225 kg/m3 (0.076474 lb/ft3), speed of sound 340.29 m/s at 15 C and 1013.25 hPa, Army Standard Metro
+  density 0.075126 lb/ft3, the ICAO retardation constant 2.08551e-4 and the Metro constant 0.000683 x 0.30: ballistics-engine
+  `src/constants.rs`, https://docs.rs/crate/ballistics-engine/0.30.1/source/src/constants.rs. Used in the density test (1.225)
+  and the rulings.
+- Army Standard Metro density 0.0751265 lb/ft3 at 29.5275 inHg; Metro to ICAO coefficient factor 1.018: Dexadine Ballistic
+  Explorer help, https://dexadine.com/bexhelp/bexhelp140.htm. Used in the density test (0.0751265 lb/ft3 = 1.2034 kg/m3).
+- Standard ballistics atmosphere sea level, 59 F, 29.53 inHg, 78 %: Dexadine, https://dexadine.com/bexhelp/bexhelp42.htm.
+- Which makers use which standard (Metro: Barnes, Hornady, Sierra; ICAO: Berger, Nosler, Lapua), factors 1.018 and 0.982:
+  Long Range Hunting, "Using The Right BC in Your Ballistic Application", https://www.longrangehunting.com/goto/post?id=764918.
+- G1 drag coefficient 0.2629, 0.2558, 0.2487 at Mach 0, 0.05, 0.10 (the data-format example of the G1/G7 files) and their origin
+  (BRL, E.D. Lowry, Winchester-Western, 1965; McCoy): ballistics-engine data README,
+  https://docs.rs/crate/ballistics-engine/0.32.0/source/data/README.md.
+- At Mach 3 the G1 projectile's drag coefficient is 0.51 and the G7's 0.24: Applied Ballistics, "ABDOC130 Custom Drag Models",
+  https://appliedballisticsllc.com/wp-content/uploads/2019/11/ABDOC130_CDM.pdf (also holds plots of both curves, no table).
+
+No page that opened prints every pair of the G1 and G7 tables; see the rulings for how the rest of each curve is checked.
+
+### Pages that would not open or held no usable figures (2026-11-21)
+
+Would not open: Sierra Bullets "308 WINCHESTER ~ 175 GRAIN MATCHKING ~ Trajectory Chart" (https://sierrabullets.com/?p=30542);
+Wikipedia "External ballistics" (https://www.wikipedia.org/wiki/Bullet_drop).
+
+Opened but held no table text: Sierra 168 gr chart (https://www.sierrabullets.com/?p=30540), Sierra "5.0 Trajectory Tables"
+(https://www.sierrabullets.com/?p=17331) and "5.1 Effects of Altitude" (https://www.sierrabullets.com/?p=17378) returned only site
+navigation; the JBM example table in "long range shooting ballistic table how to read it"
+(https://thearmsguide.com/6977/long-range-shooting-ballistic-table-how-to-read-it-post-16) is an image; ammo.com 5.56 ballistics
+(https://ammo.com/ballistics/5.56-ballistics) charts are images; ballistics-engine `src/drag.rs`
+(https://docs.rs/crate/ballistics-engine/0.18.3/source/src/drag.rs) holds only a 21-point fallback that the source calls coarse.
+
+Opened, not used: Sig Sauer "Ballistics Data 2024" (https://www.sigsauer.com/media/sigsauer/resources/Ballistics_Data_2024.pdf;
+G1 tables with no zero, sight height or atmosphere stated); Chuck Hawks rifle trajectory table
+(https://chuckhawks.com/rifle_trajectory_table.htm; mixed sources, model not stated); Applied Ballistics "Practical Ballistics"
+(https://appliedballisticsllc.com/wp-content/uploads/2021/06/ABDOC118_PracticalBallistics-2021-Copyright.pdf; G1 and G7 drop for a
+175 gr bullet with no sight height or zero stated, and marked proprietary); the py-ballisticcalc PyPI pages
+(https://pypi.org/project/py-ballisticcalc, https://pypi.org/project/py-ballisticcalc/1.0.0/) and ballistics-engine CLI pages
+(https://docs.rs/crate/ballistics-engine/0.17.0/source/CLI_USAGE.md, https://docs.rs/crate/ballistics-engine/0.33.0), which print
+no trajectory output.
+Also opened with nothing to take: shooterscalculator.com chart (https://shooterscalculator.com/ballistic-trajectory-chart.php?t=13a2d644;
+empty form), Load Out Room JBM article (https://loadoutroom.com/thearmsguide/long-range-shooting-with-jbm-ballistics-table; no
+values), Garmin Applied Ballistics glossary
+(https://www8.garmin.com/manuals/webhelp/GUID-9258AC82-CE63-4DE9-84B7-473FEB0EA745/EN-US/GUID-BA44283F-CC42-45FF-94E8-D09DD5D138F3.html),
+Dexadine "Drag Table Information" (https://dexadine.com/bexhelp/bexhelp117.htm; tables as an image), DTIC ADA554683
+(https://apps.dtic.mil/sti/tr/pdf/ADA554683.pdf; bullet coefficients, no drag tables) and the Sniper's Hide "G1 & G7 Tables?"
+thread (https://www.snipershide.com/shooting/goto/post?id=9268996; no tables).

@@ -44,7 +44,7 @@ const BAL = (() => {
     let st = [0, -s.h, 0, s.v0 * Math.cos(alpha), s.v0 * Math.sin(alpha), 0, 0];
     const out = [];
     let i = 0;
-    const dt = 0.001;
+    const dt = s.dt;
     while (i < xs.length && st[6] < 15) {
       const [x, y, z, vx, vy, vz, tm] = st;
       const a1 = acc(vx, vy, vz);
@@ -69,12 +69,12 @@ const BAL = (() => {
 
   /* p: { bc, model, w (gr), mv (fps), sight (in), zero (yd), temp (°F), alt (ft),
           press (inHg, 0 = from altitude), rh (%), wind (mph), clock (1–12), angle (°),
-          ranges: [yd,...] } */
+          ranges: [yd,...], dt (s, integration step, default 0.001) } */
   function solve(p) {
     if (!(p.bc > 0) || !(p.mv > 0) || !(p.zero > 0)) return { error: 'Enter a BC, muzzle velocity and zero range.' };
     const atm = atmosphere(p.temp, p.alt || 0, p.press, p.rh || 0);
     const s = { model: p.model === 'G7' ? 'G7' : 'G1', K: (Math.PI / 8) / (p.bc * LBIN2),
-      rho: atm.rho, c: atm.c, v0: p.mv * FPS, h: (p.sight || 0) * IN };
+      rho: atm.rho, c: atm.c, v0: p.mv * FPS, h: (p.sight || 0) * IN, dt: p.dt > 0 ? p.dt : 0.001 };
 
     // Zero under current conditions, level, no wind.
     const zx = p.zero * YD;
@@ -104,5 +104,5 @@ const BAL = (() => {
     return { rows, atm, cross: W / MPH * Math.sin(ang), head: W / MPH * Math.cos(ang) };
   }
 
-  return { solve, atmosphere };
+  return { solve, atmosphere, tables: TABLES };
 })();

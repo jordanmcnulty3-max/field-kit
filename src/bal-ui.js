@@ -1,4 +1,5 @@
-/* ---------- Ballistics screen: the inputs, the profiles and the answer card and table. The solver is BAL (ballistics.js). ---------- */
+/* ---------- Ballistics screen: the profile, the shot, the answer card and the dope card. The solver is BAL (ballistics.js);
+   the words for each sight are BALS (bal-sight.js). The load lives in the profile and is edited in the profile editor only. ---------- */
 (() => {
   const FK = window.FK;
   const { $, $$, store, toast, esc, okId } = FK;
@@ -13,9 +14,9 @@
     { id: 'p308', name: 'Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel', bc: 0.25, model: 'G7', w: 175, mv: 2600, sight: 1.5, zero: 100 }
   ];
   const F = id => $('#' + id);
-  const LOAD_FIELDS = { bc: 'bBC', model: 'bModel', w: 'bW', mv: 'bMV', sight: 'bSH', zero: 'bZero' };
-  const ALL_FIELDS = ['bRange', 'bAngle', 'bWind', 'bClock', 'bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep'];
-  let unit = store.get('unit', 'mil') === 'moa' ? 'moa' : 'mil';
+  const SHOT_FIELDS = ['bRange', 'bAngle', 'bWind', 'bClock', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep'];   // what the screen stores besides the profile id
+  let showAll = false;                           // "Show all units": off whenever the screen opens or the profile changes; never stored
+  let frozen = false;                            // a backup is being restored: nothing is written over it
 
   /* ---------- Profiles ----------
      A profile: { id, name, bc, model, w, mv, sight (height, in), zero, optic?, zeroAtm?, mv0? }. The built-in loads (PRESETS) are
@@ -87,30 +88,15 @@
       (profiles.length ? `<optgroup label="My profiles">${profiles.map(opt).join('')}</optgroup>` : '') +
       `<optgroup label="Starting points">${PRESETS.map(opt).join('')}</optgroup>`;
     F('bProfile').value = cur;
-    F('bDel').hidden = !ownProfile(cur);
-  }
-  /* Put a profile's load numbers on the screen. A field the profile has no number for keeps what it shows. */
-  function loadFields(p) {
-    for (const [k, fid] of Object.entries(LOAD_FIELDS)) if (p[k] !== undefined) F(fid).value = p[k];
-  }
-  /* The six load values on the screen. A field that does not hold a number yet (being retyped) keeps the profile's value. */
-  function readLoad(base) {
-    const out = {};
-    for (const [k, fid] of Object.entries(LOAD_FIELDS)) {
-      if (k === 'model') out[k] = F(fid).value;
-      else { const v = parseFloat(F(fid).value); out[k] = Number.isFinite(v) ? v : base && base[k]; }
-    }
-    return out;
   }
   function choose(id) {
     cur = id;
+    showAll = false;
     fillProfiles();
     saveInputs();
   }
   function select(id) {
-    const p = anyProfile(id);
-    if (!p) return;
-    loadFields(p);                               // before choose(): the stored screen state pairs the id with its own numbers
+    if (!anyProfile(id)) return;
     choose(id);
     calc();
   }
@@ -122,7 +108,7 @@
     profiles = at < 0 ? profiles.concat([q]) : profiles.map(x => x.id === p.id ? q : x);
     if (!persist()) { profiles = before; toast(FK.FULL_MSG); return null; }
     fillProfiles();
-    if (cur === p.id) { loadFields(q); saveInputs(); calc(); }
+    if (cur === p.id) { saveInputs(); calc(); }
     return copy(q);
   }
   function remove(id) {
@@ -130,19 +116,8 @@
     const before = profiles;
     profiles = profiles.filter(x => x.id !== id);
     if (!persist()) { profiles = before; toast(FK.FULL_MSG); return; }
-    if (cur === id) { cur = firstBuiltIn().id; loadFields(anyProfile(cur)); saveInputs(); calc(); }
+    if (cur === id) { choose(firstBuiltIn().id); calc(); }
     fillProfiles();
-  }
-  /* Typing in a load field: an own profile takes the numbers; a built-in load becomes the profile "Custom" (made or overwritten). */
-  function writeLoad() {
-    const mine = ownProfile(cur);
-    const p = { ...(mine || { id: 'ucustom', name: 'Custom' }), ...readLoad(mine || anyProfile(cur)) };
-    const c = clean(p);
-    if (!c) return;
-    const q = ordered(c);
-    profiles = ownProfile(q.id) ? profiles.map(x => x.id === q.id ? q : x) : profiles.concat([q]);
-    persist();                                   // a full phone shows its own message through store.set
-    if (cur !== q.id) choose(q.id); else fillProfiles();
   }
   const newId = () => {
     let id;
@@ -151,38 +126,30 @@
   };
 
   F('bProfile').addEventListener('change', e => select(e.target.value));
-  F('bSave').addEventListener('click', async () => {
-    const name = await FK.sheet.ask({ title: 'Name this profile', label: 'Name, e.g. Tikka .308 – 175 SMK' });
-    if (!name) return;
-    const base = copy(anyProfile(cur) || {});
-    const p = save({ ...base, ...readLoad(base), id: newId(), name });
-    if (!p) return;
-    select(p.id);
-    toast(`Saved ${p.name}`);
-  });
-  F('bDel').addEventListener('click', async () => {
-    const id = F('bProfile').value, p = ownProfile(id);
-    if (!p || !await FK.sheet.confirm({ title: 'Delete the profile?', text: `Delete the ${p.name} profile? This can’t be undone.`, ok: 'Delete profile', danger: true })) return;
-    remove(id);
-  });
-
   function saveInputs() {
+    if (frozen) return;
     const s = { profile: cur };
-    ALL_FIELDS.forEach(id => { s[id] = F(id).value; });
+    SHOT_FIELDS.forEach(id => { s[id] = F(id).value; });
     store.set('bal', s);
   }
-  /* The stored selection decides what is selected. A built-in or own profile shows its own numbers; every other input is restored
-     as stored. A stored "custom" (v7.8's unsaved entry) or a retired built-in becomes the profile "Custom" when a BC and a velocity
-     were stored, otherwise the default built-in load is selected. */
+  /* The load a stored copy from before v7.9 carried in its own keys (bBC, bModel, ...); only the migration to "Custom" reads it. */
+  function storedLoad(s) {
+    const n = k => { const v = parseFloat(s[k]); return Number.isFinite(v) ? v : undefined; };
+    return { bc: n('bBC'), model: s.bModel, w: n('bW'), mv: n('bMV'), sight: n('bSH'), zero: n('bZero') };
+  }
+  /* The stored selection decides what is selected, and the profile always shows its own numbers. The shot, conditions and
+     card fields are restored as stored; older copies carry extra keys, which are ignored. A stored "custom" (v7.8's unsaved
+     entry) or a retired built-in becomes the profile "Custom" when a BC and a velocity were stored, otherwise the default
+     built-in load is selected. */
   function restoreInputs() {
     const s = store.get('bal', null);
-    if (!isObj(s)) { cur = firstBuiltIn().id; loadFields(anyProfile(cur)); fillProfiles(); return; }
-    ALL_FIELDS.forEach(id => { if (s[id] !== undefined) F(id).value = s[id]; });
+    if (!isObj(s)) { cur = firstBuiltIn().id; fillProfiles(); return; }
+    SHOT_FIELDS.forEach(id => { if (typeof s[id] === 'string' || typeof s[id] === 'number') F(id).value = s[id]; });
     let keepStored = false;                      // a failed profile write leaves the stored selection as it was, so the next open retries
     if (anyProfile(s.profile)) cur = s.profile;
     else if (s.profile === 'custom' || RETIRED.includes(s.profile)) {
-      const bc = parseFloat(s.bBC), mv = parseFloat(s.bMV);
-      const c = Number.isFinite(bc) && bc > 0 && Number.isFinite(mv) && mv > 0 ? clean({ id: 'ucustom', name: 'Custom', ...readLoad(null) }) : null;
+      const old = storedLoad(s);
+      const c = old.bc > 0 && old.mv > 0 ? clean({ id: 'ucustom', name: 'Custom', ...old }) : null;
       if (c) {
         const q = ordered(c);
         profiles = ownProfile('ucustom') ? profiles.map(x => x.id === 'ucustom' ? q : x) : profiles.concat([q]);
@@ -190,66 +157,145 @@
         cur = 'ucustom';
       } else cur = firstBuiltIn().id;
     } else cur = firstBuiltIn().id;
-    loadFields(anyProfile(cur));
     fillProfiles();
-    if (!keepStored) saveInputs();               // the stored copy now holds the selected profile's own numbers
+    if (!keepStored) saveInputs();               // the stored copy now holds the selected profile and the shot only
   }
 
-  const fmtAng = v => Math.abs(v).toFixed(1);
+  /* ---------- The answer ---------- */
+  const MSG = {
+    range: 'Enter a range from 1 to 3,000 yd.',
+    profile: 'This profile needs a ballistic coefficient, a velocity and a zero range. Tap Edit.',
+    reach: "Bullet doesn't reach that range with these inputs.",
+    cond: 'Check the conditions: temperature, altitude, pressure or humidity is out of range.',
+    wind: 'Enter a wind speed from 0 to 100 mph.',
+    angle: 'Enter an incline from -60 to 60 degrees.'
+  };
+  const given = id => F(id).value.trim() !== '';
+  const inside = (v, lo, hi) => v >= lo && v <= hi;
+  const label = yd => String(Number(yd.toFixed(1)));          // 500 -> "500", 36.5 -> "36.5"
+  const fx = (v, d) => { const t = v.toFixed(d); return /^-0(\.0+)?$/.test(t) ? t.slice(1) : t; };   // never "-0.0"
+
+  /* A column of the answer card: label, then the lines. */
+  function paint(el, name, lines) {
+    el.textContent = '';
+    const add = (cls, text) => { const d = document.createElement('div'); d.className = cls; d.textContent = text; el.appendChild(d); };
+    add('k', name);
+    lines.forEach((t, i) => { if (t) add(i === 0 ? 'v' : lines.length === 3 ? 'v2' : 's', t); });
+  }
+  function nothing(text) {
+    paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
+    F('solSub').textContent = text;
+    $('#dope').innerHTML = '';
+    fitDope();
+  }
+  /* The air the zero was made in, with the fields the solver wants all present (no pressure = from altitude). */
+  const zeroAir = z => z && { temp: z.temp, alt: z.alt === undefined ? 0 : z.alt, press: z.press === undefined ? 0 : z.press, rh: z.rh };
+  /* The profile row's sight and zero lines and the Show all units button. Returns whether the profile has a sight. */
+  function head(p) {
+    F('bSight').textContent = BALS.describe(p && p.optic);
+    const z = BALS.zeroLine(p && p.zeroAtm);
+    F('bZeroLine').textContent = z; F('bZeroLine').hidden = !z;
+    const sighted = !!(p && p.optic);
+    F('bAll').hidden = !sighted;
+    F('bAll').setAttribute('aria-pressed', String(sighted && showAll));
+    return sighted;
+  }
+  function condLine() {
+    const t = given('bTemp') ? num(F('bTemp')) : 59, press = num(F('bPress')), alt = num(F('bAlt'));
+    F('bCond').textContent = `${label(t)}°F · ${given('bPress') && press > 0 ? press.toFixed(2) + ' inHg' : label(alt) + ' ft'} · ${label(num(F('bRH')))}%`;
+  }
+
   function calc() {
+    const p = anyProfile(cur);
+    const sighted = head(p);
+    condLine();
+    const optic = sighted && !showAll ? p.optic : null;          // null: every unit
+    const target = given('bRange') ? parseFloat(F('bRange').value) : NaN;
+    if (!(inside(target, 1, 3000))) return nothing(MSG.range);
+    if (!p || !(p.bc > 0) || !(p.mv > 0) || !(p.zero > 0)) return nothing(MSG.profile);
+    const temp = given('bTemp') ? num(F('bTemp')) : 59, alt = num(F('bAlt')), press = num(F('bPress')), rh = num(F('bRH'));
+    if (!inside(temp, -60, 140) || !inside(alt, -2000, 30000) || (given('bPress') && !(press > 0)) || !inside(rh, 0, 100)) return nothing(MSG.cond);
+    const wind = num(F('bWind'));
+    if (!inside(wind, 0, 100)) return nothing(MSG.wind);
+    const angle = num(F('bAngle'));
+    if (!inside(angle, -60, 60)) return nothing(MSG.angle);
+
     const max = Math.min(3000, Math.max(50, num(F('bMax')) || 1000));
     const step = +F('bStep').value || 50;
-    const target = num(F('bRange'));
-    const ranges = [];
-    for (let r = step; r <= max; r += step) ranges.push(r);
-    const zero = num(F('bZero'));
-    if (zero && !ranges.includes(zero)) ranges.push(zero);
-    if (target > 0) ranges.push(target);
-
+    const table = [];                                            // the yardages shown on the dope card
+    for (let r = step; r <= max; r += step) table.push(r);
+    const at = table.filter(r => Math.round(r) !== Math.round(p.zero) || r === p.zero);   // the zero's own row, once
+    if (!at.includes(p.zero)) at.push(p.zero);
+    at.sort((a, b) => a - b);
+    const ranges = at.concat([target]);
     const res = BAL.solve({
-      bc: num(F('bBC')), model: F('bModel').value, w: num(F('bW')), mv: num(F('bMV')),
-      sight: num(F('bSH')), zero, temp: F('bTemp').value === '' ? 59 : num(F('bTemp')), alt: num(F('bAlt')),
-      press: num(F('bPress')), rh: num(F('bRH')), wind: num(F('bWind')), clock: +F('bClock').value,
-      angle: num(F('bAngle')), ranges
+      bc: p.bc, model: p.model || 'G7', w: p.w || 0, mv: p.mv, sight: p.sight || 0, zero: p.zero, zeroAtm: zeroAir(p.zeroAtm),
+      temp, alt, press, rh, wind, clock: +F('bClock').value, angle, ranges
     });
-    const U = unit === 'mil' ? 'mil' : 'MOA';
-    const ev = r => unit === 'mil' ? r.elevMil : r.elevMoa;
-    const wv = r => unit === 'mil' ? r.windMil : r.windMoa;
-    const dirE = v => Math.abs(v) < 0.05 ? '' : v > 0 ? 'U ' : 'D ';
-    const dirW = v => Math.abs(v) < 0.05 ? '' : v > 0 ? 'R ' : 'L ';
+    if (res.error) return nothing(res.error);
 
-    if (res.error) {
-      $('#solElev').textContent = '—'; $('#solWind').textContent = '—';
-      $('#solSub').textContent = res.error; $('#dope').innerHTML = ''; return;
-    }
-    const t = res.rows.find(r => r.yd === Math.round(target));
+    const xs = [...new Set(ranges.filter(r => r > 0))].sort((a, b) => a - b);   // the solver's own order: row i belongs to xs[i]
+    const rowFor = x => { const i = xs.indexOf(x); return i >= 0 && res.rows[i] ? { ...res.rows[i], yd: x } : null; };
+    const t = rowFor(target);
     if (t) {
-      $('#solElev').innerHTML = `${dirE(ev(t))}${fmtAng(ev(t))} <small>${U}</small>`;
-      $('#solWind').innerHTML = `${dirW(wv(t))}${fmtAng(wv(t))} <small>${U}</small>`;
-      $('#solSub').textContent = `At ${t.yd} yd: drop ${Math.abs(t.dropIn).toFixed(1)} in, drift ${Math.abs(t.windIn).toFixed(1)} in, `
+      const a = BALS.answer(t, optic), lines = side => optic ? [a[side].main, a[side].sub] : BALS.all(t)[side === 'elev' ? 'elev' : 'wind'];
+      paint(F('solElev'), 'ELEVATION', lines('elev')); paint(F('solWind'), 'WINDAGE', lines('wind'));
+      F('solSub').textContent = `At ${label(target)} yd: drop ${Math.abs(t.dropIn).toFixed(1)} in, drift ${Math.abs(t.windIn).toFixed(1)} in, `
         + `${Math.round(t.fps)} fps, ${Math.round(t.ftlb)} ft-lb, ${t.tof.toFixed(2)} s flight`
         + (t.mach < 1 ? '. Subsonic: expect larger errors.' : '.');
     } else {
-      $('#solElev').textContent = '—'; $('#solWind').textContent = '—';
-      $('#solSub').textContent = target > 0 ? 'Bullet doesn’t reach that range with these inputs.' : 'Enter a target range.';
+      paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
+      F('solSub').textContent = MSG.reach;
     }
-    const rows = res.rows.filter(r => r.yd % step === 0 || r.yd === zero);
-    $('#dope').innerHTML = `<thead><tr><th>Yd</th><th>Elev ${U}</th><th>Wind ${U}</th><th>Drop in</th><th>Drift in</th><th>fps</th><th>ft-lb</th><th>Time s</th></tr></thead><tbody>` +
-      rows.map(r => `<tr class="${r.yd === zero ? 'zero' : ''} ${r.mach < 1.2 ? 'trans' : ''}"><td>${r.yd}</td>` +
-        `<td>${dirE(ev(r))}${fmtAng(ev(r))}</td><td>${dirW(wv(r))}${fmtAng(wv(r))}</td>` +
-        `<td>${r.dropIn.toFixed(1)}</td><td>${Math.abs(r.windIn).toFixed(1)}</td><td>${Math.round(r.fps)}</td>` +
-        `<td>${Math.round(r.ftlb)}</td><td>${r.tof.toFixed(2)}</td></tr>`).join('') + '</tbody>';
+    const c = BALS.cols(optic), generic = !!optic && optic.type === 'reticle';   // a reticle's wind columns already carry the drift
+    const heads = ['Yd', ...c.elev, ...c.wind, 'Drop in', ...(generic ? [] : ['Drift in']), 'fps', 'ft-lb', 'Time s'];
+    const rows = at.map(rowFor).filter(Boolean).map(r => {
+      const x = BALS.cells(r, optic);
+      return `<tr class="${r.yd === p.zero ? 'zero' : ''} ${r.mach < 1.2 ? 'trans' : ''}"><td>${label(r.yd)}</td>` +
+        [...x.elev, ...x.wind, fx(r.dropIn, 1), ...(generic ? [] : [fx(Math.abs(r.windIn), 1)]), Math.round(r.fps), Math.round(r.ftlb), r.tof.toFixed(2)]
+          .map(v => `<td>${esc(String(v))}</td>`).join('') + '</tr>';
+    });
+    $('#dope').innerHTML = `<thead><tr>${heads.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody>`;
+    fitDope();
+  }
+  /* Only a table wider than its box shows the swipe cue and a sticky first column (the Survival tables' pattern). Measured when the
+     screen is visible: after each calculation, when the screen is shown and when the phone turns. */
+  function fitDope() {
+    const w = $('#dope').closest('.tablewrap');
+    w.classList.remove('wide');
+    const wide = w.scrollWidth > w.clientWidth + 1;
+    w.classList.toggle('wide', wide);
+    F('dopeCue').hidden = !wide;
   }
   let calcT;
-  ALL_FIELDS.forEach(id => F(id).addEventListener('input', e => {
-    if (Object.values(LOAD_FIELDS).includes(id)) writeLoad();
-    clearTimeout(calcT); calcT = setTimeout(() => { saveInputs(); calc(); }, 150);
-  }));
-  $$('#unitSeg button').forEach(b => b.addEventListener('click', () => {
-    unit = b.dataset.unit; store.set('unit', unit);
-    $$('#unitSeg button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
-    calc();
-  }));
+  const later = () => { clearTimeout(calcT); calcT = setTimeout(() => { saveInputs(); calc(); }, 150); };
+  SHOT_FIELDS.forEach(id => F(id).addEventListener('input', later));
+  F('bAll').addEventListener('click', () => { showAll = !showAll; calc(); });
+  F('bCondBtn').addEventListener('click', () => {
+    const open = F('bCondFields').hidden;
+    F('bCondFields').hidden = !open;
+    F('bCondBtn').setAttribute('aria-expanded', String(open));
+  });
+  /* A backup is being restored: drop the pending save so it cannot land on top of it. */
+  FK.on('restoring', () => { frozen = true; clearTimeout(calcT); });
+  FK.on('restoreFailed', () => { frozen = false; later(); });
+  /* On a short screen (keyboard up) the answer card is pinned under the header; the header's height sets where. */
+  $('#view-ballistics').addEventListener('focusin', () => {
+    const top = $('.top');
+    document.documentElement.style.setProperty('--balTop', (top ? top.getBoundingClientRect().bottom : 73) + 'px');
+  });
+  /* The screen opens with every unit hidden again and the conditions folded away. */
+  let was = false;
+  FK.on('shown', s => {
+    const now = s.tab === 'tactical' && s.view === 'ballistics';
+    if (now && !was) {
+      showAll = false;
+      F('bCondFields').hidden = true; F('bCondBtn').setAttribute('aria-expanded', 'false');
+      calc();
+    }
+    was = now;
+  });
+  addEventListener('resize', () => { if (!$('#view-ballistics').hidden) fitDope(); });
 
   /* ---------- Profile editor: load, the sight on it, and the conditions it was zeroed in ----------
      One sheet (#dlgRifle). An own profile can be saved in place, saved as a new profile or deleted; a built-in load only
@@ -389,7 +435,6 @@
 
   /* The surface other screens and tests use. */
   function init() {
-    $$('#unitSeg button').forEach(x => x.setAttribute('aria-selected', String(x.dataset.unit === unit)));
     restoreInputs();
     calc();
   }
@@ -399,5 +444,6 @@
     selected: () => copy(anyProfile(cur))
   };
   FK._test.presets = () => PRESETS.map(p => ({ ...p }));
+  FK._test.balState = () => ({ profile: cur, showAll });
   init();
 })();

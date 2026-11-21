@@ -221,7 +221,7 @@ velocity moves. The figures below are the default .308 (G7 0.243, 175 gr, 2600 f
   600 yd gives 2567 fps, and the card is then 0.03 mil off at 400 yd, 0.08 mil off at 800 yd and 0.29 mil off at 1,000 yd.
   Nothing on screen says the fit belongs to one distance beyond the line under the heading.
 - **Refused under 300 yd.** Near the muzzle a small misreading becomes a large velocity error: a 0.1 mil misreading at 300 yd
-  moves the answer by 74 fps (2.6 %), and at 200 yd it would be larger still, past what a person could judge. Cost if wrong:
+  moves the answer by 68 fps (2.6 %), and at 200 yd it would be larger still, past what a person could judge. Cost if wrong:
   a person with a real, careful 250 yd shot is turned away and must shoot farther; a limit set lower would let wild velocities
   through as results.
 - **Refused where the bullet is below Mach 1.2 at that distance with the profile's own velocity.** Through the transonic zone

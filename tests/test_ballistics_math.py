@@ -211,3 +211,24 @@ def test_a_removed_load_is_not_offered_and_its_id_is_not_reused(ready):
     ids = [p['id'] for p in ready.evaluate('FK._test.presets()')]
     assert not set(REMOVED_IDS) & set(ids)
     assert len(ids) == len(set(ids))
+
+
+# ---------- Zero conditions: the zero angle is found in the air the rifle was zeroed in ----------
+
+def test_zero_conditions_same_as_today_change_nothing(ready):
+    same = dict(temp=59, alt=0, press=0, rh=50)
+    assert solve(ready, **DEFAULT_308, ranges=[600], zeroAtm=same)['rows'] == solve(ready, **DEFAULT_308, ranges=[600])['rows']
+
+
+def test_zeroed_warm_shot_cold_needs_more_elevation(ready):
+    cold = {**DEFAULT_308, 'temp': 10}
+    warm_zero = solve(ready, **cold, ranges=[100, 600], zeroAtm=dict(temp=90, alt=0, press=0, rh=50))['rows']
+    same_air = solve(ready, **cold, ranges=[100, 600])['rows']
+    assert warm_zero[1]['elevMil'] > same_air[1]['elevMil']
+    assert abs(same_air[0]['elevMil']) < 0.005 and abs(warm_zero[0]['elevMil']) < 0.1
+
+
+def test_zero_conditions_absent_or_incomplete_mean_today(ready):
+    base = solve(ready, **DEFAULT_308, ranges=[600])['rows']
+    for za in [None, dict(temp=None, alt=0, press=0, rh=50), dict(temp=90, alt=0, press=0)]:
+        assert solve(ready, **DEFAULT_308, ranges=[600], zeroAtm=za)['rows'] == base

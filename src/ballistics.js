@@ -69,18 +69,23 @@ const BAL = (() => {
 
   /* p: { bc, model, w (gr), mv (fps), sight (in), zero (yd), temp (°F), alt (ft),
           press (inHg, 0 = from altitude), rh (%), wind (mph), clock (1–12), angle (°),
-          ranges: [yd,...], dt (s, integration step, default 0.001) } */
+          ranges: [yd,...], dt (s, integration step, default 0.001),
+          zeroAtm: { temp, alt, press, rh } the air the zero was made in (same units; absent, null or any
+          non-finite field = today's air) } */
   function solve(p) {
     if (!(p.bc > 0) || !(p.mv > 0) || !(p.zero > 0)) return { error: 'Enter a BC, muzzle velocity and zero range.' };
     const atm = atmosphere(p.temp, p.alt || 0, p.press, p.rh || 0);
     const s = { model: p.model === 'G7' ? 'G7' : 'G1', K: (Math.PI / 8) / (p.bc * LBIN2),
       rho: atm.rho, c: atm.c, v0: p.mv * FPS, h: (p.sight || 0) * IN, dt: p.dt > 0 ? p.dt : 0.001 };
 
-    // Zero under current conditions, level, no wind.
+    // Zero level, no wind, in the air the rifle was zeroed in (today's air when zeroAtm is absent or incomplete).
+    const za = p.zeroAtm, zeroAir = za && [za.temp, za.alt, za.press, za.rh].every(Number.isFinite)
+      ? atmosphere(za.temp, za.alt || 0, za.press, za.rh) : atm;
+    const sz = Object.assign({}, s, { rho: zeroAir.rho, c: zeroAir.c });
     const zx = p.zero * YD;
     let alpha = Math.atan(s.h / zx);
     for (let n = 0; n < 25; n++) {
-      const r = fly(s, alpha, 0, 0, 0, [zx])[0];
+      const r = fly(sz, alpha, 0, 0, 0, [zx])[0];
       if (!r) return { error: 'Bullet never reaches the zero range with these inputs.' };
       if (Math.abs(r.y) < 1e-6) break;
       alpha -= r.y / zx;

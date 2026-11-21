@@ -1,0 +1,208 @@
+"""BALS (src/bal-sight.js): one solved row plus a sight in, the words for the screen out. The sight never changes
+the trajectory; these tests pin the wording, the rounding and the unit conversions."""
+import math
+
+import pytest
+
+ROW = {'yd': 500, 'dropIn': -64.3, 'windIn': -21.9}
+MIL_FORM = {'elev': {'main': 'U 3.6 mil', 'sub': ''}, 'wind': {'main': 'R 1.2 mil', 'sub': ''}}
+BANNED = ('-0', 'NaN', 'Infinity', 'undefined', 'null')
+
+
+@pytest.fixture
+def ready(page, app_url):
+    page.goto(app_url)
+    page.wait_for_function('typeof BALS !== "undefined"')
+    return page
+
+
+def answer(page, row, sight):
+    return page.evaluate('([r, s]) => BALS.answer(r, s)', [row, sight])
+
+
+def cols(page, sight):
+    return page.evaluate('s => BALS.cols(s)', sight)
+
+
+def cells(page, row, sight):
+    return page.evaluate('([r, s]) => BALS.cells(r, s)', [row, sight])
+
+
+def clean(x):
+    s = str(x)
+    return not any(b in s for b in BANNED)
+
+
+def test_turret_mil(ready):
+    assert answer(ready, ROW, {'type': 'turret', 'unit': 'mil', 'click': 0.1}) == {
+        'elev': {'main': 'U 3.6 mil', 'sub': '36 clicks'}, 'wind': {'main': 'R 1.2 mil', 'sub': '12 clicks'}}
+
+
+def test_turret_true_moa_and_inches_per_100(ready):
+    assert answer(ready, ROW, {'type': 'turret', 'unit': 'moa', 'click': 0.25})['elev'] == {'main': 'U 12.3 MOA', 'sub': '49 clicks'}
+    assert answer(ready, ROW, {'type': 'turret', 'unit': 'iphy', 'click': 0.25})['elev'] == {'main': 'U 12.9 in/100 yd', 'sub': '51 clicks'}
+
+
+def test_turret_one_click_is_singular(ready):
+    r = {'yd': 100, 'dropIn': -0.36, 'windIn': 0}
+    assert answer(ready, r, {'type': 'turret', 'unit': 'mil', 'click': 0.1})['elev']['sub'] == '1 click'
+
+
+def test_reticle_nearest_mark_and_hold(ready):
+    s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0, 4.6, 6.3]}
+    assert answer(ready, ROW, s)['elev'] == {'main': 'Mark 2', 'sub': 'hold 10 in high'}
+    assert answer(ready, ROW, s)['wind'] == {'main': 'R 1.2 mil', 'sub': '22 in'}
+
+
+def test_reticle_before_first_mark_and_past_last(ready):
+    s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0, 4.6, 6.3]}
+    assert answer(ready, {'yd': 200, 'dropIn': -4.2, 'windIn': 0}, s)['elev'] == {'main': 'Centre', 'sub': 'hold 4.2 in high'}
+    assert answer(ready, {'yd': 800, 'dropIn': -227.9, 'windIn': 0}, s)['elev'] == {'main': 'Past last mark', 'sub': 'U 7.9 mil'}
+
+
+def test_reticle_target_inside_the_zero(ready):   # bullet above the line of sight
+    s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0]}
+    assert answer(ready, {'yd': 100, 'dropIn': 1.7, 'windIn': 0}, s)['elev'] == {'main': 'Centre', 'sub': 'hold 1.7 in low'}
+
+
+def test_reticle_hold_under_half_inch_is_left_out(ready):
+    s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0]}
+    # need 3.0 mil exactly at 100 yd = 10.8 in of drop: sits on mark 2
+    assert answer(ready, {'yd': 100, 'dropIn': -10.8, 'windIn': 0}, s)['elev'] == {'main': 'Mark 2', 'sub': ''}
+
+
+def test_reticle_one_mark_past_is_beyond_one_and_a_half_times(ready):
+    s = {'type': 'reticle', 'unit': 'mil', 'marks': [2.0]}
+    # 3.0 mil at 100 yd = 10.8 in: exactly 1.5 x the mark, still on the mark; 3.2 mil is past
+    assert answer(ready, {'yd': 100, 'dropIn': -10.8, 'windIn': 0}, s)['elev']['main'] == 'Mark 1'
+    assert answer(ready, {'yd': 100, 'dropIn': -11.6, 'windIn': 0}, s)['elev']['main'] == 'Past last mark'
+
+
+def test_reticle_in_moa(ready):
+    s = {'type': 'reticle', 'unit': 'moa', 'marks': [4.0, 8.0, 12.0]}
+    a = answer(ready, ROW, s)
+    assert a['elev']['main'] == 'Mark 3'            # 12.28 MOA against 12.0
+    assert a['wind']['main'] == 'R 4.2 MOA'
+
+
+def test_dot(ready):
+    assert answer(ready, ROW, {'type': 'dot'}) == {
+        'elev': {'main': 'Hold 64 in high', 'sub': ''}, 'wind': {'main': 'Hold 22 in right', 'sub': ''}}
+    assert answer(ready, {'yd': 7, 'dropIn': -2.3, 'windIn': 0}, {'type': 'dot'})['elev']['main'] == 'Hold 2.3 in high'
+    assert answer(ready, {'yd': 100, 'dropIn': -0.02, 'windIn': 0.01}, {'type': 'dot'}) == {
+        'elev': {'main': 'Hold on', 'sub': ''}, 'wind': {'main': 'No hold', 'sub': ''}}
+
+
+def test_dot_low_and_left(ready):
+    a = answer(ready, {'yd': 100, 'dropIn': 3.4, 'windIn': 12.6}, {'type': 'dot'})
+    assert a == {'elev': {'main': 'Hold 3.4 in low', 'sub': ''}, 'wind': {'main': 'Hold 13 in left', 'sub': ''}}
+
+
+def test_all_units(ready):
+    assert ready.evaluate('r => BALS.all(r)', ROW) == {
+        'elev': ['U 3.6 mil', 'U 12.3 MOA', 'Hold 64 in high'], 'wind': ['R 1.2 mil', 'R 4.2 MOA', 'Hold 22 in right']}
+
+
+def test_rounding_edges(ready):
+    t = {'type': 'turret', 'unit': 'mil', 'click': 0.1}
+    assert answer(ready, {'yd': 100, 'dropIn': -0.14, 'windIn': 0}, t)['elev'] == {'main': '0.0 mil', 'sub': '0 clicks'}   # 0.04 mil
+    assert answer(ready, {'yd': 100, 'dropIn': -0.56, 'windIn': 0}, t)['elev'] == {'main': 'U 0.2 mil', 'sub': '2 clicks'}   # 0.156 mil: past half a click rounds up
+
+
+def test_inches_switch_from_one_decimal_to_whole_at_ten(ready):
+    d = {'type': 'dot'}
+    assert answer(ready, {'yd': 100, 'dropIn': -9.94, 'windIn': 0}, d)['elev']['main'] == 'Hold 9.9 in high'
+    assert answer(ready, {'yd': 100, 'dropIn': -9.96, 'windIn': 0}, d)['elev']['main'] == 'Hold 10 in high'
+    assert answer(ready, {'yd': 100, 'dropIn': -10.4, 'windIn': 0}, d)['elev']['main'] == 'Hold 10 in high'
+
+
+def test_bad_input_gives_dashes(ready):
+    for row in [{'yd': 0, 'dropIn': -1, 'windIn': 0}, {'yd': 500, 'dropIn': None, 'windIn': 0}]:
+        a = answer(ready, row, {'type': 'turret', 'unit': 'mil', 'click': 0.1})
+        assert a['elev']['main'] == '—' and 'NaN' not in str(a)
+
+
+def test_bad_rows_are_dashes_everywhere(ready):
+    for row in [{'yd': 0, 'dropIn': -1, 'windIn': 0}, {'yd': 500, 'dropIn': None, 'windIn': 0},
+                {'yd': 500, 'dropIn': -1}, {'yd': 500, 'dropIn': -1, 'windIn': float('inf')}, None]:
+        for s in [None, {'type': 'dot'}, {'type': 'turret', 'unit': 'moa', 'click': 0.25},
+                  {'type': 'reticle', 'unit': 'mil', 'marks': [1, 2]}]:
+            a = answer(ready, row, s)
+            assert a['elev']['main'] == '—' and a['wind']['main'] == '—' and clean(a), (row, s, a)
+            c = cells(ready, row, s)
+            assert all(x == '—' for x in c['elev'] + c['wind']), (row, s, c)
+            assert [len(c['elev']), len(c['wind'])] == [len(cols(ready, s)['elev']), len(cols(ready, s)['wind'])]
+        assert all(x == '—' for x in ready.evaluate('r => BALS.all(r)', row)['elev'])
+
+
+@pytest.mark.parametrize('sight', [
+    {'type': 'scope'}, {'type': 'turret', 'unit': 'furlong', 'click': 0.1}, {'type': 'turret', 'unit': 'mil'},
+    {'type': 'turret', 'unit': 'mil', 'click': 0}, {'type': 'turret', 'unit': 'mil', 'click': -0.1},
+    {'type': 'reticle', 'unit': 'mil', 'marks': []}, {'type': 'reticle', 'unit': 'mil'},
+    {'type': 'reticle', 'unit': 'bogus', 'marks': [1]}, {}, 'turret', 5,
+])
+def test_malformed_sight_is_no_sight(ready, sight):
+    assert answer(ready, ROW, sight) == MIL_FORM
+    assert cells(ready, ROW, sight) == cells(ready, ROW, None)
+    assert cols(ready, sight) == cols(ready, None)
+
+
+def test_never_minus_zero_or_nan(ready):
+    sights = [None, {'type': 'dot'}, {'type': 'turret', 'unit': 'mil', 'click': 0.1},
+              {'type': 'reticle', 'unit': 'moa', 'marks': [2, 4]}]
+    for yd, d, w in [(100, 0.001, -0.001), (100, -0.001, 0.001), (100, 0, 0), (300, 0.04, -0.04), (1, -1e-9, 1e-9)]:
+        row = {'yd': yd, 'dropIn': d, 'windIn': w}
+        for s in sights:
+            assert clean(answer(ready, row, s)) and clean(cells(ready, row, s))
+        assert clean(ready.evaluate('r => BALS.all(r)', row))
+
+
+def test_no_sight_is_the_mil_form_with_a_moa_cell(ready):
+    assert answer(ready, ROW, None) == MIL_FORM
+
+
+# ---------- dope-card columns and cells ----------
+
+def test_cols_and_cells_turret(ready):
+    t = {'type': 'turret', 'unit': 'mil', 'click': 0.1}
+    assert cols(ready, t) == {'elev': ['Elev mil', 'Clicks'], 'wind': ['Wind mil', 'Clicks']}
+    assert cells(ready, ROW, t) == {'elev': ['U 3.6', '36'], 'wind': ['R 1.2', '12']}
+    assert cols(ready, {**t, 'unit': 'moa'})['elev'] == ['Elev MOA', 'Clicks']
+    assert cols(ready, {**t, 'unit': 'iphy'})['wind'] == ['Wind in/100 yd', 'Clicks']
+
+
+def test_cols_and_cells_reticle(ready):
+    s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0, 4.6, 6.3]}
+    assert cols(ready, s) == {'elev': ['Mark', 'Hold in'], 'wind': ['Wind mil', 'Drift in']}
+    assert cells(ready, ROW, s) == {'elev': ['2', '10 high'], 'wind': ['R 1.2', '22']}
+    assert cells(ready, {'yd': 200, 'dropIn': -4.2, 'windIn': 0}, s)['elev'] == ['C', '4.2 high']
+    assert cells(ready, {'yd': 100, 'dropIn': 1.7, 'windIn': 0}, s)['elev'] == ['C', '1.7 low']
+    assert cells(ready, {'yd': 800, 'dropIn': -227.9, 'windIn': 0}, s)['elev'] == ['Past', 'U 7.9 mil']
+    assert cells(ready, {'yd': 100, 'dropIn': -10.8, 'windIn': 0}, s)['elev'] == ['2', '']
+
+
+def test_cols_and_cells_dot(ready):
+    assert cols(ready, {'type': 'dot'}) == {'elev': ['Hold in'], 'wind': ['Hold in']}
+    assert cells(ready, ROW, {'type': 'dot'}) == {'elev': ['64 high'], 'wind': ['22 right']}
+    assert cells(ready, {'yd': 100, 'dropIn': -0.02, 'windIn': 0.01}, {'type': 'dot'}) == {'elev': ['0'], 'wind': ['0']}
+
+
+def test_cols_and_cells_no_sight(ready):
+    assert cols(ready, None) == {'elev': ['Elev mil', 'Elev MOA'], 'wind': ['Wind mil', 'Wind MOA']}
+    assert cells(ready, ROW, None) == {'elev': ['U 3.6', 'U 12.3'], 'wind': ['R 1.2', 'R 4.2']}
+
+
+# ---------- typed elevation to radians ----------
+
+def test_to_angle_every_unit_gives_the_same_angle(ready):
+    want = math.atan(64.3 / 18000)
+    for v, u in [(3.572, 'mil'), (12.28, 'moa'), (12.86, 'iphy'), (64.3, 'in')]:
+        got = ready.evaluate('([v, u]) => BALS.toAngle(v, u, 500)', [v, u])
+        assert abs(got - want) < 1e-5, (v, u, got, want)
+
+
+def test_to_angle_bad_input_is_nan(ready):
+    for args in [[None, 'mil', 500], ['', 'mil', 500], ['x', 'mil', 500], [float('inf'), 'mil', 500],
+                 [1, 'furlong', 500], [1, 'in', 0], [1, 'in', None], [1, None, 500]]:
+        assert ready.evaluate('a => Number.isNaN(BALS.toAngle(a[0], a[1], a[2]))', args), args
+    assert ready.evaluate('Number.isNaN(BALS.toAngle(undefined, "mil", 500))')

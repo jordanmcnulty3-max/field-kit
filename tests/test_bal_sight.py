@@ -215,3 +215,41 @@ def test_reticle_wind_drift_under_a_twentieth_inch_matches_the_cell(ready):
     r = {'yd': 100, 'dropIn': -4.2, 'windIn': -0.03}
     assert answer(ready, r, s)['wind']['sub'] == '0 in'
     assert cells(ready, r, s)['wind'][1] == '0'
+
+
+# ---------- The lines under the profile picker ----------
+
+def describe(page, sight):
+    return page.evaluate('s => BALS.describe(s)', sight)
+
+
+def test_describe_turrets_and_their_clicks(ready):
+    got = {(u, c): describe(ready, {'type': 'turret', 'unit': u, 'click': c})
+           for u, c in [('mil', 0.1), ('mil', 0.05), ('moa', 0.25), ('moa', 0.125), ('moa', 0.5), ('moa', 1), ('iphy', 0.25), ('iphy', 0.125), ('iphy', 0.5), ('iphy', 1)]}
+    assert got[('mil', 0.1)] == 'Mil turrets, 0.1 mil clicks'
+    assert got[('mil', 0.05)] == 'Mil turrets, 0.05 mil clicks'
+    assert got[('moa', 0.25)] == 'MOA turrets, 1/4 MOA clicks'
+    assert got[('moa', 0.125)] == 'MOA turrets, 1/8 MOA clicks'
+    assert got[('moa', 0.5)] == 'MOA turrets, 1/2 MOA clicks'
+    assert got[('moa', 1)] == 'MOA turrets, 1 MOA clicks'
+    assert got[('iphy', 0.25)] == 'Turrets in inches per 100 yd, 1/4 in clicks'
+    assert got[('iphy', 1)] == 'Turrets in inches per 100 yd, 1 in clicks'
+    assert describe(ready, {'type': 'turret', 'unit': 'mil', 'click': 0.25}) == 'Mil turrets, 0.25 mil clicks'
+
+
+def test_describe_reticles_dots_and_no_sight(ready):
+    assert describe(ready, {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3, 4.6, 6.3]}) == 'Drop reticle, 4 marks in mil'
+    assert describe(ready, {'type': 'reticle', 'unit': 'moa', 'marks': [2, 4]}) == 'Drop reticle, 2 marks in MOA'
+    assert describe(ready, {'type': 'reticle', 'unit': 'iphy', 'marks': [5]}) == 'Drop reticle, 1 mark in inches per 100 yd'
+    assert describe(ready, {'type': 'dot'}) == 'Red dot or iron sights'
+    for none in (None, {}, 'x', {'type': 'turret', 'unit': 'mil'}, {'type': 'reticle', 'unit': 'mil', 'marks': []}):
+        assert describe(ready, none) == 'No sight set: showing every unit'
+
+
+def test_zero_line(ready):
+    line = lambda a: ready.evaluate('a => BALS.zeroLine(a)', a)
+    assert line({'temp': 90, 'alt': 400, 'rh': 50}) == 'Zeroed at 90°F, 400 ft'
+    assert line({'temp': 90, 'alt': 400, 'press': 29.5, 'rh': 50}) == 'Zeroed at 90°F, 29.50 inHg'
+    assert line({'temp': 41.5, 'alt': -50}) == 'Zeroed at 41.5°F, -50 ft'
+    for bad in (None, {}, {'temp': 90}, {'alt': 3}, 'x'):
+        assert line(bad) == ''

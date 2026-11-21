@@ -122,5 +122,28 @@ const BALS = (() => {
     return known(unit) ? toRad(value, unit) : NaN;
   }
 
-  return { answer, all, cols, cells, toAngle };
+  /* ---- the lines under the profile picker ---- */
+  const FRACTION = { 0.25: '1/4', 0.125: '1/8', 0.5: '1/2', 1: '1' };
+  const clickWord = (click, unit) => (Object.prototype.hasOwnProperty.call(FRACTION, click) && unit !== 'mil' ? FRACTION[click] : String(click))
+    + ' ' + (unit === 'mil' ? 'mil' : unit === 'moa' ? 'MOA' : 'in');
+  const unitWords = { mil: 'mil', moa: 'MOA', iphy: 'inches per 100 yd' };
+
+  /* What the profile's sight is, in one line. */
+  function describe(sight) {
+    const s = sightOf(sight);
+    if (!s) return 'No sight set: showing every unit';
+    if (s.type === 'dot') return 'Red dot or iron sights';
+    if (s.type === 'turret') return (s.unit === 'mil' ? 'Mil turrets' : s.unit === 'moa' ? 'MOA turrets' : 'Turrets in inches per 100 yd') + ', ' + clickWord(s.click, s.unit) + ' clicks';
+    const n = s.marks.length;
+    return 'Drop reticle, ' + n + (n === 1 ? ' mark' : ' marks') + ' in ' + unitWords[s.unit];
+  }
+  /* The air the rifle was zeroed in: temperature, then the pressure when it was given, otherwise the altitude. '' when unusable. */
+  function zeroLine(atm) {
+    if (!atm || typeof atm !== 'object' || !fin(atm.temp)) return '';
+    const t = String(Number(atm.temp.toFixed(1))) + '°F';
+    if (fin(atm.press) && atm.press > 0) return 'Zeroed at ' + t + ', ' + atm.press.toFixed(2) + ' inHg';
+    return fin(atm.alt) ? 'Zeroed at ' + t + ', ' + Math.round(atm.alt) + ' ft' : '';
+  }
+
+  return { answer, all, cols, cells, toAngle, describe, zeroLine };
 })();

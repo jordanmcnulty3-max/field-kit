@@ -324,7 +324,8 @@
     profiles: () => profiles.map(copy),
     selected: () => copy(anyProfile(cur))
   };
-  /* What only the editor (bal-edit.js) needs. find gives a copy of a profile, own or built in, with whether it is the person's own. */
+  /* For src/bal-edit.js only: its read-only seam to the screen's profiles. FK.bal stays the public surface; nothing else may depend on this.
+     find gives a copy of a profile, own or built in, with whether it is the person's own. */
   FK.balHost = {
     newId, ZT, ZA,
     find: id => { const p = anyProfile(id); return p ? { profile: copy(p), own: !!ownProfile(id) } : null; }

@@ -301,3 +301,84 @@ def test_layout_at_360_with_large_text(page, app_url, night):
     assert too_small(page, DLG) == []
     assert clipped_buttons(page, DLG) == []
     assert overflow(page, DLG) == []
+
+
+def test_a_result_or_refusal_does_not_survive_closing(page, app_url):
+    open_editor(page, app_url)
+    work(page, 600, round(typed(page, shot(page, 2550, 600), 600, 'mil'), 4), 'mil')
+    assert out(page).startswith('Velocity')
+    page.click('#rfCancel')
+    reopen(page)
+    assert out(page) == ''
+    expect(page.locator('#rfTrueSave')).to_be_hidden()
+    work(page, 250, 1)
+    assert out(page) == NEAR
+    page.click('#rfCancel')
+    reopen(page)
+    assert out(page) == ''
+    work(page, 600, round(typed(page, shot(page, 2550, 600), 600, 'mil'), 4), 'mil')
+    page.go_back()                                   # Back, nothing in the profile changed
+    expect(page.locator(DLG)).to_be_hidden()
+    reopen(page)
+    assert out(page) == ''
+    expect(page.locator('#rfTrueSave')).to_be_hidden()
+
+
+def leave_and_reopen(page):
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    reopen(page)
+
+
+def test_mv0_after_put_back_and_corrections(page, app_url):
+    keep = {**LOAD, 'mv0': 2900}
+    # put back, then save as new: no mv0 on the copy (the velocity is the original, 2900, not the opened 2600)
+    open_editor(page, app_url, profiles=(keep,))
+    correct(page, 2500)
+    page.click('#rfTrueUndo')
+    assert page.input_value('#rfMV') == '2900'
+    page.fill('#rfName', 'Back copy')
+    page.click('#rfSaveNew')
+    expect(page.locator(DLG)).to_be_hidden()
+    copy = [p for p in profiles(page) if p['name'] == 'Back copy'][0]
+    assert copy['mv'] == 2900 and 'mv0' not in copy
+    # put back, correct again, save: the profile's own mv0 stays
+    page.wait_for_timeout(450)
+    page.evaluate('p => { FK.bal.save(p); FK.bal.select(p.id); }', keep)
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    page.wait_for_timeout(250)
+    correct(page, 2500)
+    page.click('#rfTrueUndo')
+    correct(page, 2800)
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    got = [p for p in profiles(page) if p['id'] == 'u1'][0]
+    assert got['mv0'] == 2900 and abs(got['mv'] - 2800) <= 2
+    # a profile with no mv0: correct, hand-edit the velocity back to the opened value, save: none is made
+    fresh_load(page)
+    correct(page, 2550)
+    page.fill('#rfMV', '2600')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    got = profiles(page)[0]
+    assert got['mv'] == 2600 and 'mv0' not in got
+    # the same, saved as a new profile
+    reopen(page)
+    correct(page, 2550)
+    page.fill('#rfMV', '2600')
+    page.fill('#rfName', 'Same velocity')
+    page.click('#rfSaveNew')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert 'mv0' not in [p for p in profiles(page) if p['name'] == 'Same velocity'][0]
+    # put back leaves nothing pending for a profile that had mv0, even when the velocity field is edited after
+    page.wait_for_timeout(450)
+    page.evaluate('p => { FK.bal.save(p); FK.bal.select(p.id); }', keep)
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    page.wait_for_timeout(250)
+    page.click('#rfTrueUndo')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    got = [p for p in profiles(page) if p['id'] == 'u1'][0]
+    assert got['mv'] == 2900 and 'mv0' not in got

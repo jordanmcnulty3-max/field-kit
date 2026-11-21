@@ -292,3 +292,29 @@ def test_true_uses_the_zero_conditions(ready):
     assert abs(got['mv'] - 2600) <= 1
     other = true_mv(ready, {**p, 'zeroAtm': None}, 700, angle)     # the same shot read without the zero air gives another velocity
     assert abs(other['mv'] - 2600) > 3
+
+
+def test_true_fifteen_percent_boundary(ready):
+    for real, fine in [(2213, True), (2207, False), (2987, True), (2993, False)]:   # -14.9 %, -15.1 %, +14.9 %, +15.1 % of 2600
+        got = true_mv(ready, DEFAULT_308, 600, need_angle(ready, 600, mv=real))
+        if fine:
+            assert got.get('warn') is True and abs(got['mv'] - real) <= 2, (real, got)
+        else:
+            assert got == {'error': 'far'}, (real, got)
+
+
+def test_need_falls_as_velocity_rises_for_every_built_in_load(ready):
+    """Bisection in trueMv needs the angle to fall strictly as velocity rises, wherever it can be asked."""
+    bad = ready.evaluate("""() => {
+      const bad = [], seen = [];
+      for (const l of FK._test.presets()) for (const yd of [300, 500, 800]) {
+        const base = { bc: l.bc, model: l.model, w: l.w, sight: l.sight, zero: l.zero, temp: 59, alt: 0, press: 0, rh: 50, wind: 0, clock: 12, ranges: [yd] };
+        const at = k => { const r = BAL.solve({ ...base, mv: l.mv * k }).rows[0]; return { need: Math.atan(-r.dropIn / (yd * 36)), mach: r.mach }; };
+        if (at(1).mach < 1.2) continue;
+        const ks = [0.85, 0.925, 1, 1.075, 1.15].map(k => at(k).need);
+        seen.push(l.id + yd);
+        if (!ks.every((v, i) => i === 0 || v < ks[i - 1])) bad.push([l.id, yd, ks]);
+      }
+      return { bad, n: seen.length }; }""")
+    assert ready.evaluate('FK._test.presets().length') == 6
+    assert bad['n'] >= 6 and bad['bad'] == []

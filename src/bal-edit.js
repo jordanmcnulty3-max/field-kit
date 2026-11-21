@@ -21,8 +21,8 @@
   let opened = null;         // what the sheet showed when it opened
   let deleting = false;      // Delete has been confirmed: nothing else in the sheet may act
   /* The shot correction. The part's own fields (rfTrueYd, rfTrueVal, rfTrueUnit) are not the profile and never make the sheet dirty.
-     editing.openMv: the velocity the sheet opened with. editing.mv0: the original velocity the profile will carry once saved
-     (the stored mv0 until a correction or Put back changes it). editing.used: a correction was applied in this sheet. */
+     editing.openMv: the velocity the sheet opened with. editing.applied: a correction has been applied since the last Put back.
+     editing.undone: Put back was pressed (and no correction since). What the profile carries as mv0 comes from these at Save. */
   let result = null;         // { mv } while a worked-out velocity is waiting for "Use"
   let unitTouched = false;   // the person chose the unit in rfTrueUnit; otherwise it follows the Sight and Unit fields
 
@@ -45,7 +45,7 @@
 
   function openEditor(p, own) {
     const o = p.optic, z = p.zeroAtm;
-    editing = { base: p, own, openMv: p.mv, mv0: p.mv0, used: false }; deleting = false;
+    editing = { base: p, own, openMv: p.mv, applied: false, undone: false }; deleting = false;
     result = null; unitTouched = false;
     F('rfTitle').textContent = own ? 'Edit profile' : 'Built-in load';
     F('rfBuiltIn').hidden = own;
@@ -59,13 +59,13 @@
     set('rfMarks', o && o.type === 'reticle' ? o.marks.join(', ') : '');
     set('rfZTemp', z && z.temp); set('rfZAlt', z && z.alt); set('rfZPress', z && z.press);
     F('rfTrueYd').value = F('rfTrueVal').value = '';
-    say(''); showSight(); showZHint(); fillTrueUnits(); showTrue();
+    say(''); showSight(); showZHint(); fillTrueUnits(); clearResult();
     dlg.querySelector('.mk-body').scrollTop = 0;
     opened = null;
     FK.sheet.open(dlg, {
       onClose: () => { editing = null; deleting = false; dlg.inert = false; opened = null; result = null; },
       onOpen: () => { F('rfTitle').focus(); opened = typed(); },    // no keyboard popping up on a phone
-      guard: { dirty: () => !!editing && opened !== null && !deleting && (typed() !== opened || editing.mv0 !== editing.base.mv0), title: 'Discard changes to this profile?', text: 'What you typed is not kept.' }
+      guard: { dirty: () => !!editing && opened !== null && !deleting && (typed() !== opened || nextMv0(false) !== editing.base.mv0), title: 'Discard changes to this profile?', text: 'What you typed is not kept.' }
     });
   }
   function edit(id) {
@@ -117,6 +117,15 @@
     }
     return out;
   }
+  /* The mv0 a Save would write (undefined: none). mv: the velocity being saved (the field's, when not given).
+     In place: the profile's own mv0 is kept, unless Put back was pressed; a profile without one gets the velocity the sheet
+     opened with, but only when a correction was applied and the velocity actually differs from it. A copy never inherits one. */
+  function nextMv0(asNew, mv) {
+    const now = mv === undefined ? numOf('rfMV') : mv, ed = editing, moved = ed.applied && now !== null && now !== ed.openMv;
+    if (asNew) return moved ? ed.openMv : undefined;
+    if (ed.applied) return ed.base.mv0 !== undefined ? ed.base.mv0 : moved ? ed.openMv : undefined;
+    return ed.undone ? undefined : ed.base.mv0;
+  }
   /* Save what the sheet shows, in place or as a new profile. Stays open (with the reason in #rfMsg) if it cannot. */
   function commitEditor(asNew) {
     if (!editing || deleting || (!asNew && !editing.own)) return;
@@ -126,7 +135,7 @@
     const p = { ...editing.base, ...v, id: asNew ? FK.balHost.newId() : editing.base.id };
     ['optic', 'zeroAtm'].forEach(k => { if (!p[k]) delete p[k]; });
     /* The original velocity: kept through every correction, gone once put back. A copy carries one only when a correction was applied here. */
-    const mv0 = asNew ? (editing.used ? editing.openMv : undefined) : editing.mv0;
+    const mv0 = nextMv0(asNew, v.mv);
     if (mv0 === undefined) delete p.mv0; else p.mv0 = mv0;
     const saved = FK.bal.save(p);
     if (!saved) { say('Could not save the profile.'); return; }     // the storage-full message has been shown
@@ -160,7 +169,7 @@
     const s = F('rfTrueSave');
     s.hidden = !result;
     if (result) s.textContent = `Use ${fmt(result.mv)} fps`;
-    const u = F('rfTrueUndo'), has = !!editing && editing.mv0 !== undefined && editing.base.mv0 !== undefined;
+    const u = F('rfTrueUndo'), has = !!editing && !editing.undone && editing.base.mv0 !== undefined;
     u.hidden = !has;
     if (has) u.textContent = `Put back ${fmt(editing.base.mv0)} fps`;
   }
@@ -198,13 +207,12 @@
   F('rfTrueSave').addEventListener('click', () => {
     if (!result || !editing) return;
     const mv = result.mv;
-    if (editing.mv0 === undefined) editing.mv0 = editing.base.mv0 !== undefined ? editing.base.mv0 : editing.openMv;
-    editing.used = true;
+    editing.applied = true; editing.undone = false;
     setVelocity(mv, `Velocity set to ${fmt(mv)} fps. Press Save to keep it.`);
   });
   F('rfTrueUndo').addEventListener('click', () => {
     if (!editing || editing.base.mv0 === undefined) return;
-    editing.mv0 = undefined;
+    editing.undone = true; editing.applied = false;
     setVelocity(editing.base.mv0, `Velocity put back to ${fmt(editing.base.mv0)} fps. Press Save to keep it.`);
   });
   F('rfTrueUnit').addEventListener('change', () => { unitTouched = true; });

@@ -245,3 +245,12 @@ velocity moves. The figures below are the default .308 (G7 0.243, 175 gr, 2600 f
   velocity by hand never creates or removes it. Cost if wrong: a person who corrects, then hand-edits, then corrects again
   can only put back the first velocity, not an in-between one; and a profile that has been corrected keeps a second number in
   storage (and in a backup) that older copies of the app drop on their next save.
+- **The editor reaches the screen through two objects (fix round 1).** `FK.bal` is the public surface (its keys are pinned by tests);
+  `FK.balHost` (`find`, `newId`, `ZT`, `ZA`) is a read-only seam for `src/bal-edit.js` only, so the editor could leave
+  `bal-ui.js` without widening `FK.bal`. Cost if wrong: two objects to know about, and a change to the screen's profile
+  handling must keep both in step; nothing outside `bal-edit.js` may use `FK.balHost`.
+- **`mv0` is written only when it means something (fix round 1).** At Save, a profile without `mv0` gets the velocity the sheet
+  opened with only if a correction was applied since the last Put back and the velocity being saved differs from it; a profile
+  that already has `mv0` keeps it through put back and correct again; Put back then Save removes it; a copy made after Put back
+  has none. Cost if wrong: a person who corrects and then types the old velocity back gets no `mv0`, so no "Put back" later
+  (nothing is lost: the velocity is the same).

@@ -233,9 +233,9 @@ def test_v5_localstorage_boots_with_no_console_errors(page, app_url):
     # Rifle profile is selectable and fills the load fields
     assert page.input_value('#bProfile') == 'u1k2j3x'
     page.select_option('#bProfile', 'p308')
-    assert page.input_value('#bMV') == '2600'
+    assert page.evaluate('FK.bal.selected().mv') == 2600
     page.select_option('#bProfile', 'u1k2j3x')
-    assert page.input_value('#bMV') == '2850' and page.input_value('#bW') == '105'
+    assert page.evaluate('[FK.bal.selected().mv, FK.bal.selected().w]') == [2850, 105]
     assert page.input_value('#bRange') == '650'
     # Waypoints load as markers and the target is still the target
     page.click('#tacSeg [data-view=position]')
@@ -536,10 +536,10 @@ def test_a_phone_whose_stored_load_was_removed_opens_without_error(page, app_url
     page.wait_for_selector('#dope tr')
     assert page.input_value('#bProfile') == 'ucustom'
     expect(page.locator('#bProfile option:checked')).to_have_text('Custom')
-    assert page.input_value('#bBC') == bc and page.input_value('#bMV') == mv
+    assert page.evaluate('[FK.bal.selected().bc, FK.bal.selected().mv]') == [float(bc), float(mv)]
     assert page.locator('#bProfile option[value="%s"]' % gone).count() == 0
     page.select_option('#bProfile', 'p308')       # and the built-in loads still load
-    assert page.input_value('#bMV') == '2600'
+    assert page.evaluate('FK.bal.selected().mv') == 2600
 
 
 # ---------- A stored built-in selection shows that load's current numbers ----------
@@ -555,7 +555,7 @@ def stored_bal(profile, bc, model, w, mv, sh, zero, **rest):
 
 def open_ballistics(page, app_url, stored, extra=None):
     boot(page, app_url, {'fk.bal': json.dumps(stored), **(extra or {})}, hash_='#/tactical/ballistics')
-    page.wait_for_selector('#dope tr')
+    page.wait_for_function("document.querySelector('#solElev').textContent.length > 3")
     page.wait_for_timeout(450)    # the screen recalculates on a 150 ms timer
 
 
@@ -565,13 +565,14 @@ def card(page):
 
 
 def load_fields(page):
-    return [page.input_value('#' + i) for i in ('bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero')]
+    """The selected profile's load, as numbers: bc, model, weight, velocity, sight height, zero."""
+    return page.evaluate("(p => [p.bc, p.model, p.w, p.mv, p.sight, p.zero])(FK.bal.selected())")
 
 
 def test_stored_p308_shows_the_current_load_and_keeps_the_other_inputs(page, app_url):
     open_ballistics(page, app_url, stored_bal('p308', '0.243', 'G7', '175', '2600', '1.5', '100'))
     assert page.input_value('#bProfile') == 'p308'
-    assert load_fields(page) == ['0.25', 'G7', '175', '2600', '1.5', '100']
+    assert load_fields(page) == [0.25, 'G7', 175, 2600, 1.5, 100]
     assert page.input_value('#bRange') == '600' and page.input_value('#bWind') == '5'
     stored_card = card(page)
     page.select_option('#bProfile', 'p223')       # leave and come back: a fresh pick of p308
@@ -584,14 +585,14 @@ def test_stored_p308_shows_the_current_load_and_keeps_the_other_inputs(page, app
 def test_stored_p223_shows_the_current_load(page, app_url):
     open_ballistics(page, app_url, stored_bal('p223', '0.372', 'G1', '77', '2750', '2.6', '100'))
     assert page.input_value('#bProfile') == 'p223'
-    assert load_fields(page) == ['0.188', 'G7', '77', '2720', '2.6', '100']
+    assert load_fields(page) == [0.188, 'G7', 77, 2720, 2.6, 100]
     assert page.input_value('#bRange') == '600'
 
 
 def test_stored_custom_selection_keeps_its_typed_numbers(page, app_url):
     open_ballistics(page, app_url, stored_bal('custom', '0.31', 'G1', '150', '2900', '1.8', '200'))
     assert page.input_value('#bProfile') == 'ucustom'
-    assert load_fields(page) == ['0.31', 'G1', '150', '2900', '1.8', '200']
+    assert load_fields(page) == [0.31, 'G1', 150, 2900, 1.8, 200]
 
 
 def test_stored_own_profile_selection_is_unchanged(page, app_url):
@@ -599,4 +600,4 @@ def test_stored_own_profile_selection_is_unchanged(page, app_url):
     open_ballistics(page, app_url, stored_bal('umine', '0.4', 'G1', '168', '2700', '1.7', '100'),
                     extra={'fk.profiles': json.dumps([own])})
     assert page.input_value('#bProfile') == 'umine'
-    assert load_fields(page) == ['0.4', 'G1', '168', '2700', '1.7', '100']
+    assert load_fields(page) == [0.4, 'G1', 168, 2700, 1.7, 100]

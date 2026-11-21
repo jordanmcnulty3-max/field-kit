@@ -32,7 +32,9 @@ def test_v78_profile_loads_and_shows_every_unit(page, app_url):
     assert got == V78 and 'optic' not in got
     assert page.evaluate('FK.bal.profiles()') == [V78]
     assert ls(page, 'profiles') == raw                       # nothing is rewritten in storage
-    assert page.input_value('#bProfile') == 'u1k2j3x' and page.input_value('#bMV') == '2850'
+    assert page.input_value('#bProfile') == 'u1k2j3x'
+    expect(page.locator('#bSight')).to_have_text('No sight set: showing every unit')
+    assert len(page.inner_text('#solElev').split('\n')) == 4      # the label and the three lines: every unit
 
 
 def test_custom_inputs_become_a_profile_named_custom(page, app_url):
@@ -48,19 +50,19 @@ def test_custom_inputs_become_a_profile_named_custom(page, app_url):
 
 def test_custom_profile_is_made_once_and_keeps_later_edits(page, app_url):
     open_ballistics(page, app_url, stored_bal('custom', '0.4', 'G1', '150', '2800', '1.8', '200'))
-    page.fill('#bMV', '2900')
+    page.evaluate('FK.bal.save({ ...FK.bal.selected(), mv: 2900 })')
     screen(page)
     page.reload()
     page.wait_for_selector('#dope tr')
     assert page.evaluate('FK.bal.profiles().filter(p => p.id === "ucustom").map(p => p.mv)') == [2900]
-    assert page.input_value('#bMV') == '2900'
+    assert page.evaluate('FK.bal.selected().mv') == 2900
 
 
 def test_custom_with_no_load_typed_selects_a_built_in(page, app_url):
     open_ballistics(page, app_url, stored_bal('custom', '', 'G7', '', '', '', ''))
     assert page.evaluate('FK.bal.profiles()') == []
     assert page.evaluate('FK.bal.selected().id') == 'p308' and page.input_value('#bProfile') == 'p308'
-    assert page.input_value('#bMV') == '2600'
+    assert page.evaluate('FK.bal.selected().mv') == 2600
     assert page.input_value('#bRange') == '600'                # the other inputs are restored
 
 
@@ -161,48 +163,34 @@ def test_picker_lists_my_profiles_then_starting_points_and_no_unsaved_entry(page
     assert page.locator('#bProfile > option').count() == 0
 
 
-# ---------- Typing, saving, deleting ----------
+# ---------- Saving, deleting ----------
 
-def test_typing_in_a_built_in_load_makes_custom_and_selects_it(page, app_url):
-    open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'))
-    page.fill('#bMV', '2650')
-    assert page.input_value('#bProfile') == 'ucustom'
-    screen(page)
-    assert page.evaluate('FK.bal.profiles()') == [{'id': 'ucustom', 'name': 'Custom', 'bc': 0.25, 'model': 'G7', 'w': 175, 'mv': 2650, 'sight': 1.5, 'zero': 100}]
-    assert page.evaluate('FK.bal.selected().id') == 'ucustom'
-    expect(page.locator('#bDel')).to_be_visible()
-    page.select_option('#bProfile', 'p223')
-    page.fill('#bBC', '0.2')                                 # a second time overwrites it
-    screen(page)
-    got = page.evaluate('FK.bal.profiles()')
-    assert len(got) == 1 and got[0]['bc'] == 0.2 and got[0]['mv'] == 2720 and got[0]['w'] == 77
-
-
-def test_typing_in_an_own_load_writes_that_profile(page, app_url):
+def test_typing_on_the_main_screen_never_touches_the_profiles(page, app_url):
     open_ballistics(page, app_url, stored_bal('u1k2j3x', '0.31', 'G7', '105', '2850', '1.9', '100'), extra={'fk.profiles': json.dumps([V78])})
-    page.fill('#bMV', '2900')
-    assert page.input_value('#bProfile') == 'u1k2j3x'
+    raw = ls(page, 'profiles')
+    page.fill('#bRange', '420')
+    page.fill('#bWind', '3')
     screen(page)
-    assert own(page) == [{**V78, 'mv': 2900}]
-    page.fill('#bW', '')                                     # a cleared field does not store zero
-    screen(page)
-    assert own(page)[0]['w'] == 105
+    assert ls(page, 'profiles') == raw and page.evaluate('FK.bal.selected()') == V78
+    assert json.loads(ls(page, 'bal'))['bRange'] == '420'
 
 
 def test_save_as_new_profile_and_delete_land_on_the_right_profile(page, app_url):
     open_ballistics(page, app_url, stored_bal('p223', '0.188', 'G7', '77', '2720', '2.6', '100'))
-    page.click('#bSave')
-    page.fill('#askInput', 'Range rifle')
-    page.click('#askOk')
+    page.click('#bEdit')
+    page.fill('#rfName', 'Range rifle')
+    page.click('#rfSaveNew')
+    expect(page.locator('#dlgRifle')).to_be_hidden()
     expect(page.locator('#bProfile option:checked')).to_have_text('Range rifle')
     got = page.evaluate('FK.bal.selected()')
     assert got['name'] == 'Range rifle' and got['mv'] == 2720 and got['id'] != 'p223'
-    page.click('#bDel')
+    page.click('#bEdit')
+    page.click('#rfDelete')
     page.click('#cfOk')
+    expect(page.locator('#dlgRifle')).to_be_hidden()
     expect(page.locator('#dlgConfirm')).to_be_hidden()
     assert page.evaluate('FK.bal.profiles()') == []
-    assert page.input_value('#bProfile') == 'p308' and page.input_value('#bMV') == '2600'
-    expect(page.locator('#bDel')).to_be_hidden()
+    assert page.input_value('#bProfile') == 'p308' and page.evaluate('FK.bal.selected().mv') == 2600
 
 
 def test_surface_save_select_remove(page, app_url):
@@ -214,11 +202,11 @@ def test_surface_save_select_remove(page, app_url):
     assert own(page) == [saved]
     assert page.locator('#bProfile option[value="u9"]').inner_text() == 'Nine'
     page.evaluate('FK.bal.select("u9")')
-    assert page.input_value('#bProfile') == 'u9' and page.input_value('#bMV') == '2500'
+    assert page.input_value('#bProfile') == 'u9' and page.evaluate('FK.bal.selected().mv') == 2500
     assert json.loads(ls(page, 'bal'))['profile'] == 'u9'
     page.evaluate('FK.bal.save({ id: "u9", name: "Nine again", mv: 2400 })')      # replace by id, in place
     assert [p['name'] for p in page.evaluate('FK.bal.profiles()')] == ['Nine again']
-    assert page.input_value('#bMV') == '2400'                # the selected profile's fields follow it
+    assert page.evaluate('FK.bal.selected().mv') == 2400     # the selected profile follows the save
     copy_ = page.evaluate('FK.bal.selected()')
     copy_['name'] = 'mutated'
     assert page.evaluate('FK.bal.selected().name') == 'Nine again'
@@ -242,43 +230,46 @@ def test_a_failed_profile_save_says_so_and_changes_nothing(page, app_url):
     assert [p['id'] for p in page.evaluate('FK.bal.profiles()')] == ['u1k2j3x']
 
 
-# ---------- The stored screen state always pairs the selected profile with its own load numbers ----------
+# ---------- The stored screen state holds the selected profile's id and the shot, never the load ----------
 
 LOAD_KEYS = ['bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero']
 
 
-def stored_load(page):
+def stored_state(page):
     s = json.loads(ls(page, 'bal'))
-    return s['profile'], [s[k] for k in LOAD_KEYS]
+    assert not [k for k in LOAD_KEYS if k in s], s       # the load lives in the profile only
+    return s['profile']
 
 
 def test_stored_screen_state_follows_a_picker_change_to_a_built_in(page, app_url):
     open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'))
     page.select_option('#bProfile', 'p223')
-    assert stored_load(page) == ('p223', ['0.188', 'G7', '77', '2720', '2.6', '100'])
+    assert stored_state(page) == 'p223'
 
 
 def test_stored_screen_state_follows_select_of_an_own_profile_and_remove(page, app_url):
     open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'), extra={'fk.profiles': json.dumps([V78])})
     page.evaluate('FK.bal.select("u1k2j3x")')
-    assert stored_load(page) == ('u1k2j3x', ['0.31', 'G7', '105', '2850', '1.9', '100'])
+    assert stored_state(page) == 'u1k2j3x'
     page.evaluate('FK.bal.remove("u1k2j3x")')
-    assert stored_load(page) == ('p308', ['0.25', 'G7', '175', '2600', '1.5', '100'])
+    assert stored_state(page) == 'p308'
 
 
 def test_stored_screen_state_after_save_as_new(page, app_url):
     open_ballistics(page, app_url, stored_bal('p223', '0.188', 'G7', '77', '2720', '2.6', '100'))
-    page.click('#bSave')
-    page.fill('#askInput', 'Mine')
-    page.click('#askOk')
+    page.click('#bEdit')
+    page.fill('#rfName', 'Mine')
+    page.click('#rfSaveNew')
     expect(page.locator('#bProfile option:checked')).to_have_text('Mine')
-    prof, load = stored_load(page)
-    assert prof == page.evaluate('FK.bal.selected().id') and load == ['0.188', 'G7', '77', '2720', '2.6', '100']
+    assert stored_state(page) == page.evaluate('FK.bal.selected().id') != 'p223'
+    assert page.evaluate('FK.bal.selected().mv') == 2720
 
 
-def test_opening_with_a_stale_built_in_brings_the_stored_copy_up_to_date(page, app_url):
+def test_opening_with_a_stale_built_in_shows_the_current_numbers_and_drops_the_old_load_keys(page, app_url):
     open_ballistics(page, app_url, stored_bal('p308', '0.243', 'G7', '175', '2500', '1.5', '100'))
-    assert stored_load(page) == ('p308', ['0.25', 'G7', '175', '2600', '1.5', '100'])
+    assert stored_state(page) == 'p308'
+    assert page.evaluate('FK.bal.selected()') == page.evaluate('FK._test.presets().find(p => p.id === "p308")')
+    assert page.evaluate('FK.bal.selected().mv') == 2600
 
 
 def test_a_failed_profile_write_leaves_custom_stored_so_the_migration_is_retried(page, app_url):
@@ -286,10 +277,11 @@ def test_a_failed_profile_write_leaves_custom_stored_so_the_migration_is_retried
       Storage.prototype.setItem = function (k, v) { if (k === 'fk.profiles' && sessionStorage.getItem('failProfiles')) throw new DOMException('full', 'QuotaExceededError'); return o.call(this, k, v); }; })()""")
     page.add_init_script("if (!sessionStorage.getItem('seeded')) sessionStorage.setItem('failProfiles', '1')")
     open_ballistics(page, app_url, stored_bal('custom', '0.4', 'G1', '150', '2800', '1.8', '200'))
-    assert stored_load(page) == ('custom', ['0.4', 'G1', '150', '2800', '1.8', '200'])
+    s = json.loads(ls(page, 'bal'))
+    assert s['profile'] == 'custom' and [s[k] for k in LOAD_KEYS] == ['0.4', 'G1', '150', '2800', '1.8', '200']     # left as it was
     assert ls(page, 'profiles') is None
     page.evaluate("sessionStorage.removeItem('failProfiles')")
     page.reload()
     page.wait_for_selector('#dope tr')
     assert page.evaluate('FK.bal.profiles()') == [{'id': 'ucustom', 'name': 'Custom', 'bc': 0.4, 'model': 'G1', 'w': 150, 'mv': 2800, 'sight': 1.8, 'zero': 200}]
-    assert stored_load(page) == ('ucustom', ['0.4', 'G1', '150', '2800', '1.8', '200'])
+    assert stored_state(page) == 'ucustom'

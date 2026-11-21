@@ -173,28 +173,36 @@ def test_delete_saved_map(page, app_url):
     page.wait_for_function("JSON.parse(localStorage.getItem('fk.areas')).length === 0")
 
 
+def open_editor(page, profile_id):
+    page.evaluate('id => FK.bal.select(id)', profile_id)
+    page.click('#bEdit')
+    expect(page.locator('#dlgRifle')).to_be_visible()
+
+
 def test_save_profile_name(page, app_url):
+    """New profiles are made in the profile editor (Save as new profile) and named there; there is no separate name sheet."""
     boot(page, app_url, '#/tactical/ballistics')
-    page.click('#bSave')
-    expect(page.locator('#dlgAsk h2')).to_have_text('Name this profile')
-    expect(page.locator('#dlgAsk input')).to_have_value('')
-    page.click('#dlgAsk [data-act="cancel"]')
+    open_editor(page, 'p308')
+    expect(page.locator('#rfName')).to_have_value('Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel')
+    page.click('#rfCancel')
+    expect(page.locator('#dlgRifle')).to_be_hidden()
     assert len(page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))")) == 1
-    page.click('#bSave')
-    page.fill('#dlgAsk input', 'Second')
-    page.keyboard.press('Enter')
+    page.click('#bEdit')
+    page.fill('#rfName', 'Second')
+    page.click('#rfSaveNew')
     page.wait_for_function("JSON.parse(localStorage.getItem('fk.profiles')).length === 2")
     assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))[1].name") == 'Second'
 
 
 def test_delete_profile(page, app_url):
     boot(page, app_url, '#/tactical/ballistics')
-    page.select_option('#bProfile', 'u1')
-    page.click('#bDel')
+    open_editor(page, 'u1')
+    page.click('#rfDelete')
     expect(page.locator('#dlgConfirm [data-act="ok"]')).to_have_text('Delete profile')
     page.click('#dlgConfirm [data-act="cancel"]')
     assert len(page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))")) == 1
-    page.click('#bDel')
+    expect(page.locator('#dlgRifle')).to_be_visible()      # still on the editor underneath
+    page.click('#rfDelete')
     page.click('#dlgConfirm [data-act="ok"]')
     page.wait_for_function("JSON.parse(localStorage.getItem('fk.profiles')).length === 0")
 

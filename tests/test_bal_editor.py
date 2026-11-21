@@ -35,10 +35,10 @@ def refuse(page, text, focus):
     assert page.evaluate('document.activeElement.id') == focus
 
 
-def test_edit_button_sits_with_the_profile_buttons(page, app_url):
+def test_edit_button_sits_in_the_profile_row(page, app_url):
     ballistics(page, app_url, profiles=[OWN])
-    assert page.evaluate("document.querySelector('#bEdit').closest('.row') === document.querySelector('#bSave').closest('.row')")
-    expect(page.locator('#bEdit')).to_have_text('Edit profile')
+    assert page.evaluate("document.querySelector('#bEdit').parentElement === document.querySelector('#bProfile').parentElement")
+    expect(page.locator('#bEdit')).to_have_text('Edit')
     assert page.evaluate('Object.keys(FK.bal).includes("edit")')
 
 
@@ -72,7 +72,7 @@ def test_edit_own_profile_saves_in_place(page, app_url):
     got = profiles(page)
     assert [p['id'] for p in got] == ['u1'] and got[0]['bc'] == 0.35 and got[0]['name'] == 'Mine'
     assert page.evaluate('FK.bal.selected().id') == 'u1'
-    assert page.input_value('#bBC') == '0.35'        # the main screen shows the saved numbers
+    assert page.evaluate('FK.bal.selected().bc') == 0.35        # the main screen's profile holds the saved numbers
 
 
 def test_save_as_new_makes_a_new_profile_and_selects_it(page, app_url):
@@ -85,7 +85,7 @@ def test_save_as_new_makes_a_new_profile_and_selects_it(page, app_url):
     assert len(got) == 2 and got[0] == OWN
     assert got[1]['name'] == 'Mine, hot load' and got[1]['mv'] == 2900 and got[1]['id'] != 'u1'
     assert page.evaluate('FK.bal.selected().id') == got[1]['id']
-    assert page.input_value('#bMV') == '2900'
+    assert page.evaluate('FK.bal.selected().mv') == 2900
 
 
 def test_built_in_load_offers_save_as_new_only(page, app_url):

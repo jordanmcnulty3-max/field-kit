@@ -14,7 +14,9 @@ from .test_tactical_existing import go
 # What Ballistics shows for the two pinned starting points, read from #solElev, #solWind, #solSub and the text of the dope card
 # table. default_*: the starting profile (.308 Win 175 gr SMK, 24" barrel) with the default inputs (500 yd, 10 mph from
 # 3 o'clock). p223_*: the .223 Rem 77 gr MatchKing starting point at 300 yd with a 10 mph wind from 9 o'clock. mil / moa: the
-# unit switch. Nothing here was worked out by hand. (The table shows -0.0 in the Drop column at 100 yd; that is how it is read.)
+# unit switch. Nothing here was worked out by hand. Since the screen was rebuilt around the sight, the readers are: the mil and
+# MOA lines of the show-all view (a profile with no sight), and the Drop, Drift, fps, ft-lb and Time columns of the dope card;
+# the unit switch is gone. The one edit to the pinned data: the Drop cell at the zero (100 yd) reads 0.0 where it read -0.0.
 # RE-PINNED for the "Built-in loads sourced" ruling in docs/ballistics-rulings.md: the default .308 load changed from G7 0.243
 # to the maker's G7 0.25, and the 5.56 NATO 62 gr load these figures were first captured for (id p556) was removed, so the
 # second set now pins p223. Before the restyle and before this ruling the same screen was captured from commit a190ff5 and
@@ -24,7 +26,7 @@ BEFORE = {'default_mil': {'e': 'U 3.5 mil',
                  's': 'At 500 yd: drop 63.6 in, drift 21.2 in, 1782 fps, 1234 ft-lb, 0.70 s flight.',
                  't': 'Yd\tElev mil\tWind mil\tDrop in\tDrift in\tfps\tft-lb\tTime s\n'
                       '50\t0.0\tR 0.1\t-0.1\t0.2\t2510\t2449\t0.06\n'
-                      '100\t0.0\tR 0.2\t-0.0\t0.7\t2422\t2281\t0.12\n'
+                      '100\t0.0\tR 0.2\t0.0\t0.7\t2422\t2281\t0.12\n'
                       '150\tU 0.3\tR 0.3\t-1.4\t1.7\t2336\t2121\t0.18\n'
                       '200\tU 0.6\tR 0.4\t-4.4\t3.0\t2252\t1971\t0.25\n'
                       '250\tU 1.0\tR 0.5\t-9.2\t4.8\t2169\t1829\t0.32\n'
@@ -48,7 +50,7 @@ BEFORE = {'default_mil': {'e': 'U 3.5 mil',
                  's': 'At 500 yd: drop 63.6 in, drift 21.2 in, 1782 fps, 1234 ft-lb, 0.70 s flight.',
                  't': 'Yd\tElev MOA\tWind MOA\tDrop in\tDrift in\tfps\tft-lb\tTime s\n'
                       '50\tU 0.1\tR 0.3\t-0.1\t0.2\t2510\t2449\t0.06\n'
-                      '100\t0.0\tR 0.7\t-0.0\t0.7\t2422\t2281\t0.12\n'
+                      '100\t0.0\tR 0.7\t0.0\t0.7\t2422\t2281\t0.12\n'
                       '150\tU 0.9\tR 1.1\t-1.4\t1.7\t2336\t2121\t0.18\n'
                       '200\tU 2.1\tR 1.4\t-4.4\t3.0\t2252\t1971\t0.25\n'
                       '250\tU 3.5\tR 1.8\t-9.2\t4.8\t2169\t1829\t0.32\n'
@@ -72,7 +74,7 @@ BEFORE = {'default_mil': {'e': 'U 3.5 mil',
               's': 'At 300 yd: drop 13.0 in, drift 9.1 in, 2036 fps, 709 ft-lb, 0.38 s flight.',
               't': 'Yd\tElev mil\tWind mil\tDrop in\tDrift in\tfps\tft-lb\tTime s\n'
                    '50\tU 0.4\tL 0.1\t-0.7\t0.2\t2598\t1154\t0.06\n'
-                   '100\t0.0\tL 0.3\t-0.0\t0.9\t2479\t1051\t0.12\n'
+                   '100\t0.0\tL 0.3\t0.0\t0.9\t2479\t1051\t0.12\n'
                    '150\tU 0.1\tL 0.4\t-0.8\t2.1\t2364\t955\t0.18\n'
                    '200\tU 0.4\tL 0.5\t-3.1\t3.9\t2251\t867\t0.24\n'
                    '250\tU 0.8\tL 0.7\t-7.1\t6.2\t2142\t785\t0.31\n'
@@ -96,7 +98,7 @@ BEFORE = {'default_mil': {'e': 'U 3.5 mil',
               's': 'At 300 yd: drop 13.0 in, drift 9.1 in, 2036 fps, 709 ft-lb, 0.38 s flight.',
               't': 'Yd\tElev MOA\tWind MOA\tDrop in\tDrift in\tfps\tft-lb\tTime s\n'
                    '50\tU 1.3\tL 0.4\t-0.7\t0.2\t2598\t1154\t0.06\n'
-                   '100\t0.0\tL 0.9\t-0.0\t0.9\t2479\t1051\t0.12\n'
+                   '100\t0.0\tL 0.9\t0.0\t0.9\t2479\t1051\t0.12\n'
                    '150\tU 0.5\tL 1.3\t-0.8\t2.1\t2364\t955\t0.18\n'
                    '200\tU 1.5\tL 1.8\t-3.1\t3.9\t2251\t867\t0.24\n'
                    '250\tU 2.7\tL 2.4\t-7.1\t6.2\t2142\t785\t0.31\n'
@@ -129,18 +131,21 @@ def ballistics(page, app_url, night=False, **kv):
     page.wait_for_selector('#dope tr')
 
 
-def readout(page):
-    return page.evaluate("""() => ({ e: document.querySelector('#solElev').textContent, w: document.querySelector('#solWind').textContent,
-      s: document.querySelector('#solSub').textContent, t: document.querySelector('#dope').innerText })""")
+def readout(page, unit='mil'):
+    """The pinned figures as the screen shows them for a profile with no sight (every unit): the mil or MOA line of the answer,
+    the sentence under it, and the dope card's Yd, Elev, Wind, Drop in, Drift in, fps, ft-lb and Time s columns for that unit."""
+    return page.evaluate("""unit => {
+      const line = id => document.querySelector('#' + id).innerText.split('\\n').filter(x => x.trim())[unit === 'mil' ? 1 : 2];
+      const heads = [...document.querySelectorAll('#dope th')].map(h => h.textContent.trim());
+      const U = unit === 'mil' ? 'mil' : 'MOA';
+      const want = ['Yd', 'Elev ' + U, 'Wind ' + U, 'Drop in', 'Drift in', 'fps', 'ft-lb', 'Time s'];
+      const at = want.map(w => heads.indexOf(w));
+      const rows = [...document.querySelectorAll('#dope tbody tr')].map(r => at.map(i => r.children[i].textContent).join('\\t'));
+      return { e: line('solElev'), w: line('solWind'), s: document.querySelector('#solSub').textContent, t: want.join('\\t') + '\\n' + rows.join('\\n') }; }""", unit)
 
 
 def settle(page):
     page.wait_for_timeout(450)   # the 150 ms recalculation timer plus a margin
-
-
-def set_unit(page, unit):
-    page.click(f'#unitSeg [data-unit="{unit}"]')
-    settle(page)
 
 
 def style_of(page, sel):
@@ -246,8 +251,7 @@ def enlarge_text(page):
 def test_default_profile_output_is_what_it_was_before_the_restyle(page, app_url):
     ballistics(page, app_url)
     assert readout(page) == BEFORE['default_mil']
-    set_unit(page, 'moa')
-    assert readout(page) == BEFORE['default_moa']
+    assert readout(page, 'moa') == BEFORE['default_moa']
 
 
 def test_second_profile_output_is_what_it_was_pinned_at(page, app_url):
@@ -258,15 +262,14 @@ def test_second_profile_output_is_what_it_was_pinned_at(page, app_url):
     page.select_option('#bClock', '9')
     settle(page)
     assert readout(page) == BEFORE['p223_mil']
-    set_unit(page, 'moa')
-    assert readout(page) == BEFORE['p223_moa']
+    assert readout(page, 'moa') == BEFORE['p223_moa']
 
 
 def test_the_dope_card_is_a_real_table_with_all_columns(page, app_url):
     """Guards the capture above against being an empty string on both sides."""
     ballistics(page, app_url)
     assert page.locator('#dope tbody tr').count() >= 20
-    assert page.locator('#dope th').count() == 8
+    assert page.locator('#dope th').count() == 10        # no sight: Yd, Elev mil, Elev MOA, Wind mil, Wind MOA, Drop, Drift, fps, ft-lb, Time
 
 
 # ---------- Headings and spacing: the home standard ----------
@@ -280,7 +283,7 @@ def test_tactical_headings_match_the_survival_home_heading(page, app_url, night)
     go(page, '/tactical/ballistics')
     page.wait_for_function('FK.view() === "ballistics"')
     heads = page.locator('#view-ballistics h2')
-    expect(heads).to_have_text(['Shot', 'Rifle and load', 'Conditions', 'Dope card'])
+    expect(heads).to_have_text(['Conditions', 'Dope card'])
     for i in range(heads.count()):
         h = heads.nth(i)
         h.evaluate('(e, i) => e.setAttribute("data-t12", i)', i)
@@ -299,7 +302,7 @@ def test_tactical_headings_match_the_survival_home_heading(page, app_url, night)
     go(page, '/tactical/ballistics')
     page.wait_for_function('FK.view() === "ballistics"')
     tops = page.evaluate("""() => [...document.querySelectorAll('#view-ballistics h2')].map(h => getComputedStyle(h.parentElement).marginTop)""")
-    assert tops == [gap] * 4
+    assert tops == [gap] * 2
 
 
 def test_ballistics_sections_have_clear_space_above_like_the_home(page, app_url):
@@ -308,75 +311,68 @@ def test_ballistics_sections_have_clear_space_above_like_the_home(page, app_url)
       let prev = h.parentElement.previousElementSibling;
       while (prev && !prev.getBoundingClientRect().height) prev = prev.previousElementSibling;
       return h.getBoundingClientRect().top - prev.getBoundingClientRect().bottom; })""")
-    assert len(gaps) == 4 and all(g >= 24 for g in gaps), gaps
+    assert len(gaps) == 2 and all(g >= 24 for g in gaps), gaps
 
 
-def test_ballistics_fields_did_not_move(page, app_url):
-    """Same fields, same order, same ids, in the same sections."""
+def test_ballistics_fields_and_their_order(page, app_url):
+    """The screen's controls, in order: the profile row, the shot, the conditions (folded) and the dope card. The load fields,
+    Save, Delete and the unit switch are gone from this screen (the profile editor holds the load)."""
     ballistics(page, app_url)
     got = page.evaluate("""() => [...document.querySelectorAll('#view-ballistics h2')].map(h => [h.textContent,
       [...h.parentElement.querySelectorAll('input, select, button')].map(e => e.id)])""")
     assert got == [
-        ['Shot', ['bRange', 'bAngle', 'bWind', 'bClock']],
-        ['Rifle and load', ['bProfile', 'bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero', 'bSave', 'bDel', 'bEdit']],
-        ['Conditions', ['bTemp', 'bAlt', 'bPress', 'bRH']],
+        ['Conditions', ['bCondBtn', 'bTemp', 'bAlt', 'bPress', 'bRH']],
         ['Dope card', ['bMax', 'bStep']],
     ]
     ids = page.evaluate("[...document.querySelectorAll('#view-ballistics [id]')].map(e => e.id)")
-    assert ids == ['solution', 'solElev', 'solWind', 'solSub', 'unitSeg', 'bRange', 'bAngle', 'bWind', 'bClock', 'bProfile', 'bBC', 'bModel',
-                   'bW', 'bMV', 'bSH', 'bZero', 'bSave', 'bDel', 'bEdit', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dope']
+    assert ids == ['bProfile', 'bEdit', 'bSight', 'bZeroLine', 'solution', 'solElev', 'solWind', 'solSub', 'bAll', 'bRange', 'bAngle', 'bWind',
+                   'bClock', 'bCond', 'bCondBtn', 'bCondFields', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dopeCue', 'dope']
 
 
 # ---------- Ballistics behaviour ----------
 
 def test_profile_save_load_and_delete(page, app_url):
+    """Made, switched to and deleted through the profile editor (the main screen has no Save or Delete)."""
     ballistics(page, app_url)
-    page.fill('#bBC', '0.4')
-    page.fill('#bMV', '2900')
-    settle(page)
-    page.click('#bSave')
-    expect(page.locator('#dlgAsk')).to_be_visible()
-    expect(page.locator('#askTitle')).to_have_text('Name this profile')
-    page.fill('#askInput', 'Range rifle')
-    page.click('#askOk')
-    expect(page.locator('#dlgAsk')).to_be_hidden()
-    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).map(p => [p.name, p.bc, p.mv])") == [['Custom', 0.4, 2900], ['Range rifle', 0.4, 2900]]   # typing made Custom; Save as new profile adds the named one
+    page.click('#bEdit')
+    expect(page.locator('#rfTitle')).to_have_text('Built-in load')
+    page.fill('#rfName', 'Range rifle')
+    page.fill('#rfBC', '0.4')
+    page.fill('#rfMV', '2900')
+    page.click('#rfSaveNew')
+    expect(page.locator('#dlgRifle')).to_be_hidden()
+    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).map(p => [p.name, p.bc, p.mv])") == [['Range rifle', 0.4, 2900]]
     expect(page.locator('#bProfile option:checked')).to_have_text('Range rifle')
-    expect(page.locator('#bDel')).to_be_visible()
     # load another profile, then come back to the saved one
     page.select_option('#bProfile', 'p223')
     settle(page)
-    assert page.input_value('#bBC') == '0.188' and page.input_value('#bMV') == '2720'
-    expect(page.locator('#bDel')).to_be_hidden()
-    mine = page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))[1].id")
+    assert page.evaluate('[FK.bal.selected().bc, FK.bal.selected().mv]') == [0.188, 2720]
+    mine = page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))[0].id")
     page.select_option('#bProfile', mine)
     settle(page)
-    assert page.input_value('#bBC') == '0.4' and page.input_value('#bMV') == '2900'
-    # delete goes through the confirm sheet; Cancel keeps it, Delete removes it
-    page.click('#bDel')
+    assert page.evaluate('[FK.bal.selected().bc, FK.bal.selected().mv]') == [0.4, 2900]
+    # delete goes through the confirm sheet from the editor; Cancel keeps it, Delete removes it
+    page.click('#bEdit')
+    page.click('#rfDelete')
     expect(page.locator('#dlgConfirm')).to_be_visible()
     expect(page.locator('#cfTitle')).to_have_text('Delete the profile?')
     page.click('#cfCancel')
     expect(page.locator('#dlgConfirm')).to_be_hidden()
-    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).length") == 2
-    page.click('#bDel')
+    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).length") == 1
+    page.click('#rfDelete')
     page.click('#cfOk')
     expect(page.locator('#dlgConfirm')).to_be_hidden()
-    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).map(p => p.name)") == ['Custom']
+    expect(page.locator('#dlgRifle')).to_be_hidden()
+    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).length") == 0
     expect(page.locator('#bProfile option:checked')).to_have_text('Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel')   # deleting lands on a built-in load
-    expect(page.locator('#bDel')).to_be_hidden()
 
 
-def test_switching_mil_and_moa_changes_the_units_and_back(page, app_url):
-    ballistics(page, app_url)
-    expect(page.locator('#solElev small')).to_have_text('mil')
-    set_unit(page, 'moa')
-    expect(page.locator('#solElev small')).to_have_text('MOA')
-    assert 'Elev MOA' in page.locator('#dope th').nth(1).inner_text()
-    expect(page.locator('#unitSeg [data-unit="moa"]')).to_have_attribute('aria-selected', 'true')
-    set_unit(page, 'mil')
-    expect(page.locator('#solElev small')).to_have_text('mil')
-    assert readout(page) == BEFORE['default_mil']
+def test_the_unit_switch_is_gone_and_the_answer_names_its_units(page, app_url):
+    """The old MIL / MOA switch is replaced by the profile's sight (and Show all units); the stored 'unit' is not read."""
+    ballistics(page, app_url, unit='moa')
+    assert page.locator('#unitSeg').count() == 0
+    assert 'U 3.5 mil' in page.inner_text('#solElev') and 'U 12.2 MOA' in page.inner_text('#solElev')
+    assert readout(page) == BEFORE['default_mil'] and readout(page, 'moa') == BEFORE['default_moa']
 
 
 # ---------- Night: everything on the Ballistics screen can be read ----------
@@ -396,7 +392,7 @@ def test_ballistics_text_is_readable(page, app_url, night):
     assert weak == []
     page.evaluate("document.querySelector('#bProfile').scrollIntoView()")
     heads = [r for r in rows if r['el'].startswith('H2')]
-    assert len(heads) == 4
+    assert len(heads) == 2
     if night:
         assert page.evaluate("document.documentElement.dataset.theme") == 'night'
 
@@ -557,7 +553,7 @@ def sheet_share(page):
 def sheet_ask(page):
     go(page, '/tactical/ballistics')
     page.wait_for_function('FK.view() === "ballistics"')
-    page.click('#bSave')
+    page.evaluate("() => { FK.sheet.ask({ title: 'Name this route', label: 'Name, e.g. Ridge loop' }); }")      # not awaited: it resolves when the sheet closes
     return '#dlgAsk'
 
 
@@ -565,7 +561,8 @@ def sheet_confirm(page):
     go(page, '/tactical/ballistics')
     page.wait_for_function('FK.view() === "ballistics"')
     page.select_option('#bProfile', 'u1')
-    page.click('#bDel')
+    page.click('#bEdit')
+    page.click('#rfDelete')
     return '#dlgConfirm'
 
 
@@ -614,8 +611,8 @@ def test_the_text_enlarging_stand_in_really_enlarges(page, app_url):
     """Guards the checks above against passing because nothing grew."""
     ballistics(page, app_url)
     size = lambda sel: page.evaluate("s => parseFloat(getComputedStyle(document.querySelector(s)).fontSize)", sel)
-    before = (size('#bSave'), size('#view-ballistics h2'), size('#solElev'))
+    before = (size('#bEdit'), size('#view-ballistics h2'), size('#solElev .v'))
     enlarge_text(page)
     enlarge_text(page)   # twice changes nothing more
-    after = (size('#bSave'), size('#view-ballistics h2'), size('#solElev'))
+    after = (size('#bEdit'), size('#view-ballistics h2'), size('#solElev .v'))
     assert [round(a / b, 2) for a, b in zip(after, before)] == [1.38] * 3

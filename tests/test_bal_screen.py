@@ -98,7 +98,7 @@ def test_load_fields_and_old_buttons_are_gone_from_the_main_screen(page, app_url
     for i in ['bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero', 'bSave', 'bDel', 'unitSeg']:
         assert page.locator('#' + i).count() == 0, i
     assert 'writeLoad' not in page.evaluate('Object.keys(FK.bal).join()')
-    assert page.evaluate('Object.keys(FK.bal).sort()') == ['calc', 'clean', 'edit', 'init', 'profiles', 'remove', 'save', 'select', 'selected']
+    assert page.evaluate('Object.keys(FK.bal).sort()') == ['calc', 'clean', 'edit', 'init', 'profiles', 'remove', 'save', 'select', 'selected', 'shotAir']
     expect(page.locator('#bEdit')).to_have_text('Edit')
     assert page.evaluate("document.querySelector('#bEdit').parentElement === document.querySelector('#bProfile').parentElement")
     order = page.evaluate("""() => ['#bProfile', '#bSight', '#solution', '#bRange', '#bCond', '#bMax', '#dope'].map(s => document.querySelector(s).getBoundingClientRect().top)""")

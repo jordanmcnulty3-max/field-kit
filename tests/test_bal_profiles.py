@@ -240,3 +240,56 @@ def test_a_failed_profile_save_says_so_and_changes_nothing(page, app_url):
     assert [p['id'] for p in page.evaluate('FK.bal.profiles()')] == ['u1k2j3x']
     page.evaluate('FK.bal.remove("u1k2j3x")')
     assert [p['id'] for p in page.evaluate('FK.bal.profiles()')] == ['u1k2j3x']
+
+
+# ---------- The stored screen state always pairs the selected profile with its own load numbers ----------
+
+LOAD_KEYS = ['bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero']
+
+
+def stored_load(page):
+    s = json.loads(ls(page, 'bal'))
+    return s['profile'], [s[k] for k in LOAD_KEYS]
+
+
+def test_stored_screen_state_follows_a_picker_change_to_a_built_in(page, app_url):
+    open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'))
+    page.select_option('#bProfile', 'p223')
+    assert stored_load(page) == ('p223', ['0.188', 'G7', '77', '2720', '2.6', '100'])
+
+
+def test_stored_screen_state_follows_select_of_an_own_profile_and_remove(page, app_url):
+    open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'), extra={'fk.profiles': json.dumps([V78])})
+    page.evaluate('FK.bal.select("u1k2j3x")')
+    assert stored_load(page) == ('u1k2j3x', ['0.31', 'G7', '105', '2850', '1.9', '100'])
+    page.evaluate('FK.bal.remove("u1k2j3x")')
+    assert stored_load(page) == ('p308', ['0.25', 'G7', '175', '2600', '1.5', '100'])
+
+
+def test_stored_screen_state_after_save_as_new(page, app_url):
+    open_ballistics(page, app_url, stored_bal('p223', '0.188', 'G7', '77', '2720', '2.6', '100'))
+    page.click('#bSave')
+    page.fill('#askInput', 'Mine')
+    page.click('#askOk')
+    expect(page.locator('#bProfile option:checked')).to_have_text('Mine')
+    prof, load = stored_load(page)
+    assert prof == page.evaluate('FK.bal.selected().id') and load == ['0.188', 'G7', '77', '2720', '2.6', '100']
+
+
+def test_opening_with_a_stale_built_in_brings_the_stored_copy_up_to_date(page, app_url):
+    open_ballistics(page, app_url, stored_bal('p308', '0.243', 'G7', '175', '2500', '1.5', '100'))
+    assert stored_load(page) == ('p308', ['0.25', 'G7', '175', '2600', '1.5', '100'])
+
+
+def test_a_failed_profile_write_leaves_custom_stored_so_the_migration_is_retried(page, app_url):
+    page.add_init_script("""(() => { const o = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { if (k === 'fk.profiles' && sessionStorage.getItem('failProfiles')) throw new DOMException('full', 'QuotaExceededError'); return o.call(this, k, v); }; })()""")
+    page.add_init_script("if (!sessionStorage.getItem('seeded')) sessionStorage.setItem('failProfiles', '1')")
+    open_ballistics(page, app_url, stored_bal('custom', '0.4', 'G1', '150', '2800', '1.8', '200'))
+    assert stored_load(page) == ('custom', ['0.4', 'G1', '150', '2800', '1.8', '200'])
+    assert ls(page, 'profiles') is None
+    page.evaluate("sessionStorage.removeItem('failProfiles')")
+    page.reload()
+    page.wait_for_selector('#dope tr')
+    assert page.evaluate('FK.bal.profiles()') == [{'id': 'ucustom', 'name': 'Custom', 'bc': 0.4, 'model': 'G1', 'w': 150, 'mv': 2800, 'sight': 1.8, 'zero': 200}]
+    assert stored_load(page) == ('ucustom', ['0.4', 'G1', '150', '2800', '1.8', '200'])

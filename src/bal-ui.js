@@ -107,8 +107,8 @@
   function select(id) {
     const p = anyProfile(id);
     if (!p) return;
+    loadFields(p);                               // before choose(): the stored screen state pairs the id with its own numbers
     choose(id);
-    loadFields(p);
     calc();
   }
   /* Add or replace by id. Nothing changes if the phone's storage refuses the write. Returns the cleaned profile, or null. */
@@ -175,7 +175,7 @@
     const s = store.get('bal', null);
     if (!isObj(s)) { cur = firstBuiltIn().id; loadFields(anyProfile(cur)); fillProfiles(); return; }
     ALL_FIELDS.forEach(id => { if (s[id] !== undefined) F(id).value = s[id]; });
-    let migrated = false;
+    let keepStored = false;                      // a failed profile write leaves the stored selection as it was, so the next open retries
     if (anyProfile(s.profile)) cur = s.profile;
     else if (s.profile === 'custom' || RETIRED.includes(s.profile)) {
       const bc = parseFloat(s.bBC), mv = parseFloat(s.bMV);
@@ -183,14 +183,13 @@
       if (c) {
         const q = ordered(c);
         profiles = ownProfile('ucustom') ? profiles.map(x => x.id === 'ucustom' ? q : x) : profiles.concat([q]);
-        persist();
+        if (!persist()) keepStored = true;
         cur = 'ucustom';
       } else cur = firstBuiltIn().id;
-      migrated = true;
-    } else { cur = firstBuiltIn().id; migrated = true; }
+    } else cur = firstBuiltIn().id;
     loadFields(anyProfile(cur));
     fillProfiles();
-    if (migrated) saveInputs();
+    if (!keepStored) saveInputs();               // the stored copy now holds the selected profile's own numbers
   }
 
   const fmtAng = v => Math.abs(v).toFixed(1);

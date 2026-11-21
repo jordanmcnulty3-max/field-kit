@@ -340,7 +340,7 @@ def test_profile_save_load_and_delete(page, app_url):
     page.fill('#askInput', 'Range rifle')
     page.click('#askOk')
     expect(page.locator('#dlgAsk')).to_be_hidden()
-    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).map(p => [p.name, p.bc, p.mv])") == [['Range rifle', 0.4, 2900]]
+    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).map(p => [p.name, p.bc, p.mv])") == [['Custom', 0.4, 2900], ['Range rifle', 0.4, 2900]]   # typing made Custom; Save as new profile adds the named one
     expect(page.locator('#bProfile option:checked')).to_have_text('Range rifle')
     expect(page.locator('#bDel')).to_be_visible()
     # load another profile, then come back to the saved one
@@ -348,7 +348,7 @@ def test_profile_save_load_and_delete(page, app_url):
     settle(page)
     assert page.input_value('#bBC') == '0.188' and page.input_value('#bMV') == '2720'
     expect(page.locator('#bDel')).to_be_hidden()
-    mine = page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))[0].id")
+    mine = page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))[1].id")
     page.select_option('#bProfile', mine)
     settle(page)
     assert page.input_value('#bBC') == '0.4' and page.input_value('#bMV') == '2900'
@@ -358,12 +358,12 @@ def test_profile_save_load_and_delete(page, app_url):
     expect(page.locator('#cfTitle')).to_have_text('Delete the profile?')
     page.click('#cfCancel')
     expect(page.locator('#dlgConfirm')).to_be_hidden()
-    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).length") == 1
+    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).length") == 2
     page.click('#bDel')
     page.click('#cfOk')
     expect(page.locator('#dlgConfirm')).to_be_hidden()
-    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).length") == 0
-    expect(page.locator('#bProfile option:checked')).to_have_text('Custom (unsaved)')
+    assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles')).map(p => p.name)") == ['Custom']
+    expect(page.locator('#bProfile option:checked')).to_have_text('Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel')   # deleting lands on a built-in load
     expect(page.locator('#bDel')).to_be_hidden()
 
 

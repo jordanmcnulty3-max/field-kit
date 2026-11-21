@@ -248,6 +248,139 @@
     calc();
   }));
 
+  /* ---------- Profile editor: load, the sight on it, and the conditions it was zeroed in ----------
+     One sheet (#dlgRifle). An own profile can be saved in place, saved as a new profile or deleted; a built-in load only
+     saved as a new profile. The sight and the zero conditions are stored on the profile and never reach BAL.solve. */
+  const dlg = F('dlgRifle');
+  const CLICK_CHOICES = {
+    mil: [[0.1, '0.1 mil'], [0.05, '0.05 mil']],
+    moa: [[0.25, '1/4 MOA'], [0.125, '1/8 MOA'], [0.5, '1/2 MOA'], [1, '1 MOA']],
+    iphy: [[0.25, '1/4 in'], [0.125, '1/8 in'], [0.5, '1/2 in'], [1, '1 in']]
+  };
+  const E = ['rfName', 'rfBC', 'rfModel', 'rfW', 'rfMV', 'rfSH', 'rfZero', 'rfOptic', 'rfUnit', 'rfClick', 'rfMarks', 'rfZTemp', 'rfZAlt', 'rfZPress'];
+  let editing = null;        // { base: profile, own: bool } while the sheet is open
+  let opened = null;         // what the sheet showed when it opened
+  let deleting = false;      // Delete has been confirmed: nothing else in the sheet may act
+
+  function fillClicks(unitKey, want) {
+    const list = CLICK_CHOICES[unitKey].slice();
+    if (want !== undefined && !list.some(c => c[0] === want)) list.push([want, String(want)]);
+    F('rfClick').innerHTML = list.map(c => `<option value="${c[0]}">${c[1]}</option>`).join('');
+    F('rfClick').value = String(want !== undefined ? want : list[0][0]);
+  }
+  function showSight() {
+    const t = F('rfOptic').value;
+    F('rfUnitRow').hidden = F('rfUnitHint').hidden = !(t === 'turret' || t === 'reticle');
+    F('rfClickRow').hidden = t !== 'turret';
+    F('rfMarksRow').hidden = F('rfMarksHint').hidden = t !== 'reticle';
+  }
+  const showZHint = () => { F('rfZHint').hidden = ['rfZTemp', 'rfZAlt', 'rfZPress'].some(i => F(i).value.trim() !== ''); };
+  const typed = () => E.map(i => F(i).value).join('\u0001');
+  const say = text => { F('rfMsg').textContent = text; };
+
+  function openEditor(p, own) {
+    const o = p.optic, z = p.zeroAtm;
+    editing = { base: p, own }; deleting = false;
+    F('rfTitle').textContent = own ? 'Edit profile' : 'Built-in load';
+    F('rfBuiltIn').hidden = own;
+    F('rfSave').hidden = F('rfDelete').hidden = !own;
+    const set = (id, v) => { F(id).value = v === undefined || v === null ? '' : v; };
+    set('rfName', p.name); set('rfBC', p.bc); set('rfModel', p.model || 'G7'); set('rfW', p.w); set('rfMV', p.mv); set('rfSH', p.sight); set('rfZero', p.zero);
+    set('rfOptic', o && o.type !== 'dot' ? o.type : o ? 'dot' : 'none');
+    const u = o && o.unit ? o.unit : 'mil';
+    set('rfUnit', u);
+    fillClicks(u, o && o.type === 'turret' ? o.click : undefined);
+    set('rfMarks', o && o.type === 'reticle' ? o.marks.join(', ') : '');
+    set('rfZTemp', z && z.temp); set('rfZAlt', z && z.alt); set('rfZPress', z && z.press);
+    say(''); showSight(); showZHint();
+    dlg.querySelector('.mk-body').scrollTop = 0;
+    opened = null;
+    FK.sheet.open(dlg, {
+      onClose: () => { editing = null; deleting = false; dlg.inert = false; opened = null; },
+      onOpen: () => { F('rfTitle').focus(); opened = typed(); },    // no keyboard popping up on a phone
+      guard: { dirty: () => !!editing && opened !== null && !deleting && typed() !== opened, title: 'Discard changes to this profile?', text: 'What you typed is not kept.' }
+    });
+  }
+  function edit(id) {
+    const p = anyProfile(id === undefined ? cur : id);
+    if (p) openEditor(copy(p), !!ownProfile(p.id));
+  }
+
+  /* The marks box: pieces split on commas and spaces, each a number above 0, at most 10, each larger than the one before. */
+  function parseMarks(text) {
+    const parts = text.split(/[\s,]+/).filter(Boolean);
+    if (!parts.length) return { error: 'A reticle needs at least one mark.' };
+    if (!parts.every(x => /^(\d+\.?\d*|\.\d+)$/.test(x) && parseFloat(x) > 0)) return { error: 'Marks must be numbers, like 1.5, 3, 4.6.' };
+    if (parts.length > 10) return { error: 'Up to 10 marks.' };
+    const marks = parts.map(parseFloat);
+    if (!marks.every((m, i) => i === 0 || m > marks[i - 1])) return { error: 'Marks must get larger down the list.' };
+    return { marks };
+  }
+  const numOf = id => { const t = F(id).value.trim(); const v = parseFloat(t); return t !== '' && Number.isFinite(v) ? v : null; };
+  /* What the sheet holds as a profile (without an id), or { error, focus } for the first thing at fault. */
+  function readEditor() {
+    const bad = (error, focus) => ({ error, focus });
+    const name = F('rfName').value.trim();
+    if (!name) return bad('Give the profile a name.', 'rfName');
+    const bc = numOf('rfBC'), mv = numOf('rfMV'), zero = numOf('rfZero'), sh = numOf('rfSH'), w = numOf('rfW');
+    if (!(bc > 0)) return bad('Ballistic coefficient must be more than 0.', 'rfBC');
+    if (!(mv > 0)) return bad('Muzzle velocity must be more than 0.', 'rfMV');
+    if (!(zero > 0)) return bad('Zero range must be more than 0.', 'rfZero');
+    if (w !== null && w < 0) return bad('Bullet weight can’t be below 0.', 'rfW');
+    if (sh !== null && sh < 0) return bad('Sight height can’t be below 0.', 'rfSH');
+    const out = { name, bc, model: F('rfModel').value, w: w || 0, mv, sight: sh || 0, zero, optic: null, zeroAtm: null };
+    const t = F('rfOptic').value, unit = F('rfUnit').value;
+    if (t === 'turret') out.optic = { type: 'turret', unit, click: parseFloat(F('rfClick').value) };
+    else if (t === 'dot') out.optic = { type: 'dot' };
+    else if (t === 'reticle') {
+      const m = parseMarks(F('rfMarks').value);
+      if (m.error) return bad(m.error, 'rfMarks');
+      out.optic = { type: 'reticle', unit, marks: m.marks };
+    }
+    const temp = numOf('rfZTemp'), alt = numOf('rfZAlt'), press = numOf('rfZPress');
+    if (temp !== null || alt !== null || press !== null) {
+      if (temp === null || (alt === null && press === null)) return bad('Zero conditions need a temperature and an altitude or a pressure.', temp === null ? 'rfZTemp' : 'rfZAlt');
+      const base = editing.base.zeroAtm;
+      out.zeroAtm = { temp, rh: base && fin(base.rh) ? base.rh : 50 };
+      if (alt !== null) out.zeroAtm.alt = alt;
+      if (press !== null) out.zeroAtm.press = press;
+    }
+    return out;
+  }
+  /* Save what the sheet shows, in place or as a new profile. Stays open (with the reason in #rfMsg) if it cannot. */
+  function commitEditor(asNew) {
+    if (!editing || deleting || (!asNew && !editing.own)) return;
+    const v = readEditor();
+    if (v.error) { say(v.error); F(v.focus).focus(); return; }
+    say('');
+    const p = { ...editing.base, ...v, id: asNew ? newId() : editing.base.id };
+    ['optic', 'zeroAtm'].forEach(k => { if (!p[k]) delete p[k]; });
+    const saved = save(p);
+    if (!saved) { say('Could not save the profile.'); return; }     // the storage-full message has been shown
+    select(saved.id);
+    FK.sheet.close(dlg);
+    toast(`Saved ${saved.name}`);
+  }
+  F('rfForm').addEventListener('submit', e => { e.preventDefault(); commitEditor(false); });
+  F('rfSaveNew').addEventListener('click', () => commitEditor(true));
+  F('rfCancel').addEventListener('click', () => FK.sheet.close(dlg));
+  F('rfOptic').addEventListener('change', showSight);
+  F('rfUnit').addEventListener('change', () => fillClicks(F('rfUnit').value));
+  ['rfZTemp', 'rfZAlt', 'rfZPress'].forEach(i => F(i).addEventListener('input', showZHint));
+  F('rfDelete').addEventListener('click', async () => {
+    if (!editing || !editing.own || deleting) return;
+    const id = editing.base.id, p = ownProfile(id);
+    if (!p) return;
+    deleting = true;
+    const yes = await FK.sheet.confirm({ title: 'Delete the profile?', text: `Delete the ${p.name} profile? This can’t be undone.`, ok: 'Delete profile', danger: true });
+    if (!yes || !editing || editing.base.id !== id) { deleting = false; return; }
+    remove(id);
+    if (ownProfile(id)) { deleting = false; return; }                // storage refused: the profile is still there
+    dlg.inert = true;
+    FK.sheet.afterStep(() => FK.sheet.close(dlg));                   // the confirm's own step back is still on its way
+  });
+  F('bEdit').addEventListener('click', () => edit());
+
   /* The surface other screens and tests use. */
   function init() {
     $$('#unitSeg button').forEach(x => x.setAttribute('aria-selected', String(x.dataset.unit === unit)));
@@ -255,7 +388,7 @@
     calc();
   }
   FK.bal = {
-    init, calc, clean, save, remove, select,
+    init, calc, clean, save, remove, select, edit,
     profiles: () => profiles.map(copy),
     selected: () => copy(anyProfile(cur))
   };

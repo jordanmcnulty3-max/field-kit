@@ -463,6 +463,12 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .mk-act .btn{min-height:48px;white-space:normal;padding-inline:8px}
 .mk-act .btn[hidden]{display:none}
 .mk-act:has(#mkDel[hidden]){grid-template-columns:repeat(3,minmax(0,1fr))}
+#rfForm{display:flex;flex-direction:column;min-height:0;flex:1}
+.rf-h{margin:20px 0 0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#rfForm label.f{margin-top:12px}
+#rfForm .hint{margin:6px 0 0}
+.rf-msg{margin:0;padding:8px 0 0;font-size:15px;font-weight:600;color:var(--blaze);overflow-wrap:anywhere}
+.rf-msg:empty{display:none}
 #dlgList .mk-act{grid-template-columns:1fr}
 .mk-kinds{margin:12px 0;padding:0;border:0;min-width:0}
 .mk-kinds legend{padding:0;margin:0 0 6px;font-size:14px;color:var(--muted)}
@@ -1003,7 +1009,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
         <label class="f">Zero range (yd)<input id="bZero" type="number" inputmode="decimal"></label>
       </div>
       <p class="hint" style="margin-top:8px">Built-in profiles are starting points. Your barrel and ammo lot change velocity, so chronograph your load and confirm at distance. AR-15 scopes usually sit 2.5–2.7 in above the bore.</p>
-      <div class="row"><button class="btn ghost" id="bSave">Save as new profile</button><button class="btn ghost" id="bDel" hidden>Delete profile</button></div>
+      <div class="row"><button class="btn ghost" id="bSave">Save as new profile</button><button class="btn ghost" id="bDel" hidden>Delete profile</button><button class="btn ghost" id="bEdit">Edit profile</button></div>
     </div>
 
     <div class="block">
@@ -1106,6 +1112,53 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <button type="button" class="btn ghost" id="mkMove">Move</button>
       <button type="button" class="btn ghost" id="mkDel">Delete</button>
       <button type="button" class="btn ghost" id="mkCancel">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgRifle" class="sheet mk-sheet" aria-labelledby="rfTitle">
+  <form id="rfForm" autocomplete="off" novalidate>
+    <div class="mk-body">
+      <h2 id="rfTitle" tabindex="-1">Edit profile</h2>
+      <p class="hint" id="rfBuiltIn" hidden>Built-in loads can't be changed. Save as a new profile to edit one.</p>
+      <h3 class="rf-h">Rifle and load</h3>
+      <label class="f">Name<input id="rfName" type="text" maxlength="60" enterkeyhint="done"></label>
+      <label class="f">Ballistic coefficient<input id="rfBC" type="number" inputmode="decimal" step="0.001"></label>
+      <label class="f">Drag model<select id="rfModel"><option>G1</option><option>G7</option></select></label>
+      <label class="f">Bullet weight (gr)<input id="rfW" type="number" inputmode="decimal"></label>
+      <label class="f">Muzzle velocity (fps)<input id="rfMV" type="number" inputmode="decimal"></label>
+      <p class="hint">Measure velocity near the temperature you'll shoot in.</p>
+      <label class="f">Sight height (in)<input id="rfSH" type="number" inputmode="decimal" step="0.1"></label>
+      <label class="f">Zero range (yd)<input id="rfZero" type="number" inputmode="decimal"></label>
+      <h3 class="rf-h">Sight</h3>
+      <label class="f">Sight
+        <select id="rfOptic">
+          <option value="none">Not set</option><option value="turret">Scope with turrets</option>
+          <option value="reticle">Drop reticle (low-power scope)</option><option value="dot">Red dot or iron sights</option>
+        </select>
+      </label>
+      <label class="f" id="rfUnitRow">Unit
+        <select id="rfUnit"><option value="mil">Mil</option><option value="moa">MOA (1.047 in at 100 yd)</option><option value="iphy">Inches per 100 yd</option></select>
+      </label>
+      <p class="hint" id="rfUnitHint">Some scopes sold as MOA move 1 inch per 100 yd. Check the manual.</p>
+      <label class="f" id="rfClickRow">Click size<select id="rfClick"></select></label>
+      <label class="f" id="rfMarksRow">Marks<input id="rfMarks" type="text" inputmode="decimal" enterkeyhint="done"></label>
+      <div id="rfMarksHint">
+        <p class="hint">Type each mark's distance below the centre, from your scope's manual. If the manual gives only yardages, this isn't supported yet.</p>
+        <p class="hint">If the reticle doesn't grow with magnification, the marks are true at one magnification only. The manual says which.</p>
+      </div>
+      <h3 class="rf-h">Zero conditions</h3>
+      <label class="f">Temperature (°F)<input id="rfZTemp" type="number" inputmode="decimal"></label>
+      <label class="f">Altitude (ft)<input id="rfZAlt" type="number" inputmode="decimal"></label>
+      <label class="f">Station pressure (inHg)<input id="rfZPress" type="number" inputmode="decimal" step="0.01"></label>
+      <p class="hint" id="rfZHint">Zero conditions not set: assumed the same as today.</p>
+    </div>
+    <p class="rf-msg" id="rfMsg" aria-live="polite"></p>
+    <div class="mk-act">
+      <button type="submit" class="btn" id="rfSave">Save</button>
+      <button type="button" class="btn ghost" id="rfSaveNew">Save as new profile</button>
+      <button type="button" class="btn ghost" id="rfDelete">Delete profile</button>
+      <button type="button" class="btn ghost" id="rfCancel">Cancel</button>
     </div>
   </form>
 </dialog>

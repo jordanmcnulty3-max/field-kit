@@ -232,3 +232,63 @@ def test_zero_conditions_absent_or_incomplete_mean_today(ready):
     base = solve(ready, **DEFAULT_308, ranges=[600])['rows']
     for za in [None, dict(temp=None, alt=0, press=0, rh=50), dict(temp=90, alt=0, press=0)]:
         assert solve(ready, **DEFAULT_308, ranges=[600], zeroAtm=za)['rows'] == base
+
+
+# ---------- Correcting the velocity from one real shot (BAL.trueMv) ----------
+
+def true_mv(page, p, yd, angle):
+    return page.evaluate('([p, yd, a]) => BAL.trueMv(p, yd, a)', [p, yd, angle])
+
+
+def need_angle(page, yd, **kw):
+    seen = solve(page, **{**DEFAULT_308, **kw}, ranges=[yd])['rows'][0]
+    return math.atan(-seen['dropIn'] / (yd * 36))
+
+
+def test_true_recovers_a_known_velocity(ready):
+    for real in (2550, 2600, 2680):
+        got = true_mv(ready, DEFAULT_308, 600, need_angle(ready, 600, mv=real))
+        assert 'error' not in got, got
+        assert abs(got['mv'] - real) <= 2
+        assert got['mv'] == int(got['mv'])
+        assert got['change'] == pytest.approx((got['mv'] - 2600) / 2600)
+
+
+def test_true_ignores_the_wind_and_incline_p_carries(ready):
+    flat = true_mv(ready, DEFAULT_308, 600, need_angle(ready, 600, mv=2560, wind=0))
+    windy = true_mv(ready, {**DEFAULT_308, 'wind': 25, 'clock': 9, 'angle': 30}, 600, need_angle(ready, 600, mv=2560, wind=0))
+    assert flat['mv'] == windy['mv'] and abs(flat['mv'] - 2560) <= 2
+
+
+def test_true_refusals(ready):
+    assert true_mv(ready, DEFAULT_308, 250, 0.001) == {'error': 'near'}
+    assert true_mv(ready, DEFAULT_308, 299.9, 0.001) == {'error': 'near'}
+    assert true_mv(ready, DEFAULT_308, 1100, need_angle(ready, 1100)) == {'error': 'slow'}
+    assert true_mv(ready, DEFAULT_308, 600, 2 * need_angle(ready, 600)) == {'error': 'far'}
+    # more than 15% off is refused even where some velocity in the search range comes close
+    assert true_mv(ready, DEFAULT_308, 600, need_angle(ready, 600, mv=2150)) == {'error': 'far'}
+
+
+def test_true_warns_past_five_percent(ready):
+    got = true_mv(ready, DEFAULT_308, 600, need_angle(ready, 600, mv=2450))
+    assert got['warn'] is True and abs(got['mv'] - 2450) <= 2 and got['change'] < -0.05
+    quiet = true_mv(ready, DEFAULT_308, 600, need_angle(ready, 600, mv=2550))
+    assert 'warn' not in quiet or quiet['warn'] is False
+
+
+def test_true_bad_input(ready):
+    bad = {'error': 'bad'}
+    for yd, ang in [(None, 0.01), (0, 0.01), (-600, 0.01), (600, None), (600, 0), (600, -0.01), ('x', 0.01)]:
+        assert true_mv(ready, DEFAULT_308, yd, ang) == bad, (yd, ang)
+    assert true_mv(ready, {**DEFAULT_308, 'mv': 0}, 600, 0.01) == bad
+    assert true_mv(ready, {**DEFAULT_308, 'mv': None}, 600, 0.01) == bad
+
+
+def test_true_uses_the_zero_conditions(ready):
+    cold = {'temp': -20, 'alt': 9000, 'press': 0, 'rh': 50}
+    p = {**DEFAULT_308, 'zero': 500, 'zeroAtm': cold}
+    angle = math.atan(-solve(ready, **p, ranges=[700])['rows'][0]['dropIn'] / (700 * 36))
+    got = true_mv(ready, p, 700, angle)
+    assert abs(got['mv'] - 2600) <= 1
+    other = true_mv(ready, {**p, 'zeroAtm': None}, 700, angle)     # the same shot read without the zero air gives another velocity
+    assert abs(other['mv'] - 2600) > 3

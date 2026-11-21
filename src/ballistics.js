@@ -109,5 +109,36 @@ const BAL = (() => {
     return { rows, atm, cross: W / MPH * Math.sin(ang), head: W / MPH * Math.cos(ang) };
   }
 
-  return { solve, atmosphere, tables: TABLES };
+  /* The muzzle velocity that reproduces one real shot. p: a full solve() input (the load, the zero, zeroAtm and the day's air);
+     yd: the distance of the shot; angleRad: the angle up from the line of sight the rifle really needed there. The shot is read
+     level and with no wind whatever p carries. Looks between 0.85 and 1.15 times p.mv, to within 0.5 fps.
+     Returns { mv (whole fps), change (fraction, signed), warn? (change over 5%) } or { error }:
+     'bad' (a number missing or not above 0), 'near' (under 300 yd), 'slow' (below Mach 1.2 there at p.mv), 'far' (more than
+     15% off, or nothing in range reproduces it). */
+  function trueMv(p, yd, angleRad) {
+    const ok = v => typeof v === 'number' && Number.isFinite(v) && v > 0;
+    if (!p || !ok(yd) || !ok(angleRad) || !ok(p.mv)) return { error: 'bad' };
+    if (yd < 300) return { error: 'near' };
+    const need = mv => {
+      const r = solve({ ...p, mv, wind: 0, clock: 12, angle: 0, ranges: [yd] });
+      const row = !r.error && r.rows.length === 1 ? r.rows[0] : null;
+      return row && { rad: Math.atan(-row.dropIn / (yd * 36)), mach: row.mach };
+    };
+    const now = need(p.mv);
+    if (!now) return { error: 'slow' };         // never gets there at this velocity
+    if (now.mach < 1.2) return { error: 'slow' };
+    let lo = p.mv * 0.85, hi = p.mv * 1.15;     // a faster bullet needs less angle
+    const a = need(lo), b = need(hi);
+    if (!a || !b || a.rad < angleRad || b.rad > angleRad) return { error: 'far' };
+    while (hi - lo > 0.5) {
+      const mid = (lo + hi) / 2, m = need(mid);
+      if (!m) return { error: 'far' };
+      if (m.rad > angleRad) lo = mid; else hi = mid;
+    }
+    const mv = Math.round((lo + hi) / 2), change = (mv - p.mv) / p.mv;
+    if (Math.abs(change) > 0.15) return { error: 'far' };
+    return Math.abs(change) > 0.05 ? { mv, change, warn: true } : { mv, change };
+  }
+
+  return { solve, trueMv, atmosphere, tables: TABLES };
 })();

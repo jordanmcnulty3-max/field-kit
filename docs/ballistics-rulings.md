@@ -145,8 +145,8 @@ Decisions made without Jordan:
 - **p308 moved from 0.243 to 0.25.** The 0.243 came from the earlier build with no recorded source. Cost if wrong: if 0.243 was
   right, shots to 1,000 yd land about 0.3 mil (11 in) low.
 - **p223 changed from G1 to G7 and from "OTM" to Federal's Sierra MatchKing load.** No opened page says .372 is a G1 value;
-  Federal labels only its G7 (.188). Cost if wrong: at 1,000 yd the elevation differs by 0.7 mil from the old figure. A phone that
-  already holds p223 keeps its stored numbers until the profile is selected again, then shows the new ones.
+  Federal labels only its G7 (.188). Cost if wrong: at 1,000 yd the elevation differs by 0.7 mil from the old figure. p223 keeps its
+  id because it is the same slot (a .223 Rem 77 gr match load) now with sourced figures.
 - **p65cm kept at G7 0.326, Hornady's Mach 2.25 value, although Hornady says the Mach 1.75 values (G7 0.310) are the ones to use
   beyond 600 yd.** 0.326 is the one Hornady says to use when comparing with other published coefficients, and it is what the load
   already held. Cost if wrong: beyond 600 yd the drop is understated; at 1,000 yd with 0.310 the elevation is U 9.11 mil against
@@ -167,9 +167,15 @@ Decisions made without Jordan:
   100 m and 400 m, 0.155 at 200 m, 0.153 at 300 m, 0.144 at 500 m, and 0.158 to 0.094 beyond 600 m (where the bullet is near
   Mach 1.2 and below). 0.151 is the value that holds from 25 m to 400 m, where the bullet is still above Mach 1.5. Cost if wrong:
   past 500 yd the drop is understated; with 0.144 the 500 yd elevation is U 2.96 mil against U 2.86 mil (0.10 mil, 5 in) and
-  1585 against 1642 fps; the table's own value changes again beyond 600 m, which a single coefficient cannot follow. The velocity
-  is RWS's 925 m/s at v10 (10 m from the muzzle), treated as the muzzle velocity; its second line, 914 m/s "assault rifle", was not
-  used. Cost if wrong: a muzzle velocity a few metres per second too low (not measured).
+  1585 against 1642 fps; the table's own value changes again beyond 600 m, which a single coefficient cannot follow. **The velocity 3035
+  fps (925 m/s) is a reading 10 m from the muzzle (v10), not a muzzle velocity**: the RWS page prints it under its technical
+  delivery terms with that measuring point and shows 898 m/s at 25 m and 818 m/s at 100 m, a loss of about 1.1 m/s per metre. The
+  figure was kept because it is what the maker printed (its second line, 914 m/s "assault rifle", was not used). Implied muzzle
+  velocity from the page's own decay: 925 + 10 x (925 - 898) / 25 = about 936 m/s, 3071 fps. Measured cost, G7 0.151, 62 gr, sight
+  2.6 in, 100 yd zero, standard air: at 3035 fps the elevation is U 0.945 mil at 300 yd and U 2.858 mil at 500 yd (drop 51.4 in);
+  at 3071 fps it is U 0.909 and U 2.767 mil (49.8 in). So the load as shipped overstates the drop by 0.04 mil at 300 yd and 0.09 mil
+  (1.6 in) at 500 yd. Sellier & Bellot's SS109 62 gr line (945 m/s) was looked at as a replacement but its page gives no test barrel
+  length and no coefficient, so it could not replace this one.
 - **p76239sb is 124 gr, not 123 gr, and G1 0.286.** Sellier & Bellot's only 7.62x39 FMJ row is 124 gr; Hornady's 123 gr SST page
   prints no coefficient, and no maker page with a labelled coefficient for a 123 gr FMJ was found. G1 was chosen for this
   flat-base bullet (S&B also prints G7 0.143); with G7 0.143 the 500 yd elevation is U 5.54 mil against U 5.45 mil (0.09 mil) and
@@ -190,3 +196,13 @@ Decisions made without Jordan:
   "Custom (unsaved)" until the user picks a load; those numbers are the unsourced ones.
 - **Sight height and zero left as they were** (sight height 2.6 in for the AR loads and p223, 2.0 in for p76239sb, 1.5 in for p65cm
   and p308, all zeroed at 100 yd); they are the app's own starting values, not sourced.
+- **A stored selection of a built-in load shows that load's current numbers (fix round 1).** On restore, when the stored
+  `profile` is the id of a load in `PRESETS`, the six load fields (coefficient, drag model, weight, velocity, sight height, zero)
+  are loaded from `PRESETS`; every other stored input (range, wind, conditions, card settings) is restored as stored. Reason:
+  typing in a load field already flips the selection to Custom, so a stored built-in id means the person picked the built-in and
+  never typed those numbers; without this a phone on the default .308 would show the new Federal name over the old 0.243. A stored
+  Custom selection and a stored selection of the user's own saved profile are unchanged (tests cover both, and the retired ids).
+  Cost: on update, a phone sitting on the default .308 sees its card move without anyone editing it (500 yd, default inputs, from
+  U 3.6 to U 3.5 mil; the figures are in the table above), and a phone on p223 sees G7 0.188 and 2720 fps in place of G1 0.372 and
+  2750 fps. If a person had hand-set a load field and still showed a built-in id, that cannot happen through the screen (typing
+  flips to Custom); a hand-edited backup could, and its numbers would be replaced.

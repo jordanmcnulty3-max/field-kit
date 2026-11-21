@@ -549,6 +549,10 @@
     if (!s) { fillProfiles('p308'); loadProfile('p308'); return; }
     fillProfiles(s.profile);
     ALL_FIELDS.forEach(id => { if (s[id] !== undefined) F(id).value = s[id]; });
+    /* A stored built-in selection shows that load's current numbers: typing in a load field flips the selection to Custom, so
+       the stored numbers are an older copy of the load, not the person's own. Every other input is restored as stored. */
+    const built = PRESETS.find(x => x.id === s.profile);
+    if (built) loadProfile(built.id);
   }
 
   const fmtAng = v => Math.abs(v).toFixed(1);

@@ -8212,7 +8212,7 @@ Pages taken from:
 - **RWS, "5.56x45 NATO BALL (SS109)" 4.0 g / 62 gr dual core**,
   https://www.rws-technology.com/en/armed-forces-law-enforcement/product/556x45-nato-ball-ss109-62gr-2422469. Taken: V0 925 m/s
   (3,035 fps) with a 508 mm (20 in) test barrel (the page's velocity row is measured at v10, 10 m from the muzzle, tolerance plus
-  or minus 15 m/s; a second "assault rifle" line gives 914 m/s), and the table "Ballistic coefficient G1 / G7" by distance:
+  or minus 15 m/s; a second "assault rifle" line gives 914 m/s). Caveat: 3,035 fps is a reading 10 m from the muzzle, not a muzzle velocity; the page's decay (898 m/s at 25 m) implies about 3,071 fps at the muzzle (cost in `docs/ballistics-rulings.md`), and the table "Ballistic coefficient G1 / G7" by distance:
   25 m 0.292 / 0.151; 100 m 0.281 / 0.151; 200 m 0.284 / 0.155; 300 m 0.281 / 0.153; 400 m 0.273 / 0.151; 500 m 0.242 / 0.144;
   600 m 0.238 / 0.158; 700 m 0.237 / 0.123; 800 m 0.236 / 0.094; 900 m 0.229 / 0.106; 1000 m 0.234 / 0.123 (speed at those
   distances 898, 818, 719, 626, 538, 451, 379, 329, 298, 275, 257 m/s). No atmosphere is stated on that page.

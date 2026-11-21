@@ -175,3 +175,33 @@ def test_every_case_records_where_it_came_from():
         assert c['url'].startswith('https://') and c['opened'] == '2026-11-21' and c['source'], c['id']
         assert c['model'] in ('G1', 'G7') and isinstance(c['judged'], bool), c['id']
         assert all(set(r) <= {'yd', 'dropIn', 'windIn', 'fps', 'tof'} for r in c['rows']), c['id']
+
+
+# ---------- The built-in loads: each number comes from a page that was opened ----------
+
+# Copied from docs/content-review.md ("Built-in loads"). Coefficient and drag model from the page named there, velocity and
+# barrel length from the ammunition maker's page; sight height and zero are the app's own starting values, not sourced.
+SOURCED = [
+    {'id': 'p223', 'name': '.223 Rem 77 gr MatchKing, 24″ barrel', 'bc': 0.188, 'model': 'G7', 'w': 77, 'mv': 2720,
+     'sight': 2.6, 'zero': 100},
+    {'id': 'p65cm', 'name': '6.5 Creedmoor 140 gr ELD-M, 24″ barrel', 'bc': 0.326, 'model': 'G7', 'w': 140, 'mv': 2710,
+     'sight': 1.5, 'zero': 100},
+    {'id': 'p308', 'name': '.308 Win 175 gr SMK, 24″ barrel', 'bc': 0.25, 'model': 'G7', 'w': 175, 'mv': 2600,
+     'sight': 1.5, 'zero': 100},
+]
+REMOVED_IDS = ['p556', 'p76239']   # no source with the drag model and the barrel length: see docs/ballistics-rulings.md
+
+
+def test_built_in_loads_are_the_sourced_values(ready):
+    assert ready.evaluate('FK._test.presets()') == SOURCED
+
+
+def test_every_built_in_load_names_its_barrel_length(ready):
+    for p in ready.evaluate('FK._test.presets()'):
+        assert '″ barrel' in p['name'], p['name']
+
+
+def test_a_removed_load_is_not_offered_and_its_id_is_not_reused(ready):
+    ids = [p['id'] for p in ready.evaluate('FK._test.presets()')]
+    assert not set(REMOVED_IDS) & set(ids)
+    assert len(ids) == len(set(ids))

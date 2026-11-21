@@ -94,3 +94,71 @@ ballistics-engine gives 0.075126 / 0.076474 = 0.98237. Measured on the default p
 
 Report only; the solver is not changed for it. Cost if a user enters a Metro-referred coefficient as ICAO (or the reverse):
 about 0.2 mil of elevation at 1,000 yd and about 0.03 mil at 500 yd.
+
+## Built-in loads sourced (2026-11-21)
+
+The five built-in loads had no recorded source. Each was checked against pages opened on 2026-11-21 (list in
+`docs/content-review.md`, "Built-in loads"). The rule used: a load stays only if its coefficient, with the drag model the page
+states, and its velocity, with the barrel length the page states, both come from an opened maker page. A retailer page or a
+forum post counted for nothing. **Result: two loads changed, one kept as it was, two removed.** Nothing was added.
+
+| Id | Before | After | Why |
+|---|---|---|---|
+| p65cm | G7 0.326, 2710 fps | same values, name now says 24″ barrel | Hornady's coefficient page gives G7 0.326 and Hornady's cartridge page gives 2710 fps from a 24 in test barrel |
+| p308 | G7 0.243, 2600 fps | G7 0.25, 2600 fps, 24″ barrel | Federal prints G7 0.25 and 2600 fps from 24 in |
+| p223 | G1 0.372, 2750 fps, "77 gr OTM" | G7 0.188, 2720 fps, ".223 Rem 77 gr MatchKing, 24″ barrel" | Federal prints G7 .188 and 2720 fps from 24 in; the bullet it describes is a Sierra MatchKing, not an OTM |
+| p556 | G1 0.304, 3020 fps, 20 in | removed | no opened page gives a coefficient with its model for M855, and no page gives 3020 fps with a barrel length (the Winchester catalog measures 78 ft from the muzzle) |
+| p76239 | G1 0.29, 2350 fps | removed | the only maker page opened is for a 124 gr Federal load with an unlabelled .298; the one page with a labelled G1 is a retailer's |
+
+On the screen, default inputs (59 F, sea level, 50 %, 10 mph from 3 o'clock), before and after:
+
+| Load | Range | Before | After |
+|---|---|---|---|
+| p308 | 500 yd | U 3.57 mil, R 1.22 mil, 1761 fps | U 3.54 mil, R 1.18 mil, 1782 fps |
+| p308 | 1,000 yd | U 11.97 mil, R 3.10 mil, 1091 fps | U 11.68 mil, R 2.97 mil, 1119 fps |
+| p223 | 500 yd | U 3.26 mil, R 1.54 mil, 1661 fps | U 3.34 mil, R 1.56 mil, 1638 fps |
+| p223 | 1,000 yd | U 12.80 mil, R 3.90 mil, 1030 fps | U 13.53 mil, R 4.17 mil, 983 fps |
+
+**BEFORE changed.** The test `BEFORE` in `tests/test_tactical_layout.py` pins what the screen shows for `p308` (the default) and
+for `p556`. `p308`'s numbers changed, so the default pins were captured again from the screen, read the same way the test reads
+it (`#solElev`, `#solWind`, `#solSub` and the dope card text, mil and MOA). `p556` no longer exists, so the second set now
+pins `p223` (300 yd, 10 mph from 9 o'clock), captured the same way; the keys were renamed `p223_mil` and `p223_moa`. A comment
+beside `BEFORE` names this ruling. The two tests that used `p556` (the second-profile readout and the save and delete test)
+now use `p223`.
+
+Decisions made without Jordan:
+
+- **Federal's own pages accepted as the source of the coefficient for p308 and p223, although Federal is not the bullet maker
+  (Sierra is).** Federal builds the cartridge and prints the model ("Ballistic Coefficient G7") on its own product page; the
+  Sierra pages that opened either printed no coefficient (175 gr: the ballistics tab never loaded) or printed .372 with no model
+  (77 gr). Federal's .505 and .372 carry no model label, so only the labelled G7 values were used. Cost if wrong: two default
+  coefficients rest on a source one step weaker than the bullet maker. If Sierra's own G7 for either bullet differs, the
+  .308 elevation at 1,000 yd moves by about 0.3 mil per 0.007 of coefficient (the 0.243 to 0.25 change above) and the .223
+  by more, since its coefficient is smaller. Fix: open Sierra's ballistics data for both and replace.
+- **p308 moved from 0.243 to 0.25.** The 0.243 came from the earlier build, with no recorded source. Cost if wrong: the default
+  profile's drop is 0.03 mil lower at 500 yd and 0.29 mil lower at 1,000 yd than the old figure; if 0.243 was right, shots to
+  1,000 yd land about 0.3 mil (11 in) low.
+- **p223 changed from G1 to G7 and from "OTM" to "MatchKing".** The old G1 0.372 happened to equal Federal's unlabelled .372, but
+  no opened page says .372 is a G1 value, and Federal's labelled G7 is .188. The old name said OTM; the loads opened are Sierra
+  MatchKing. Cost if wrong: at 1,000 yd the elevation differs by 0.7 mil from the old figure. A phone that already holds p223
+  keeps its stored numbers until the profile is selected again, then shows the new ones.
+- **p65cm kept at G7 0.326, Hornady's Mach 2.25 value, although Hornady says the Mach 1.75 values (G7 0.310) are the ones to use
+  beyond 600 yd.** 0.326 is the one Hornady says to use when comparing with other published coefficients, and it is what the
+  load already held. Cost if wrong: beyond 600 yd the drop is understated; at 1,000 yd with 0.310 the elevation is U 9.11 mil
+  against U 8.86 mil (0.25 mil, about 9 in), and 500 yd differs by 0.04 mil. Hornady also refers its coefficients to Army
+  Standard Metro air; the solver reads every coefficient as ICAO (see "Standard atmosphere of the coefficient"), a further
+  1.8 % on the coefficient (up to about 0.2 mil at 1,000 yd).
+- **p556 and p76239 removed rather than kept on weaker sources.** Both could have been kept on a retailer page or an
+  unlabelled coefficient; the rule says no. Cost if wrong: two common loads lose their one-tap starting point; a user can still
+  type the load into the fields and save it as a profile. If a maker page with the model and barrel length is found later, add
+  it under a new id.
+- **No 55 gr 5.56 load and no 16 in barrel velocity added.** The only opened pages for 55 and 62 gr 5.56 (Federal American Eagle)
+  state 24 in and no drag model, and no opened page gave a 16 in velocity. Cost if wrong: none to existing screens; the AR loads
+  stay missing.
+- **A phone whose stored selection names a removed load shows "Custom (unsaved)" and keeps the numbers it had.** The existing
+  code already does this (an id that is not in the list falls to Custom, and the stored field values are restored); a test now
+  covers both removed ids and checks that no console error is raised. The alternative, loading another built-in load, would swap
+  the user's coefficient and velocity without warning. Cost if wrong: such a phone keeps showing the old p556 or p76239 numbers
+  under "Custom (unsaved)" until the user picks a load; those numbers are the unsourced ones.
+- **Sight height and zero left as they were** (sight height 2.6 in for p223 and 1.5 in for p65cm and p308, all zeroed at 100 yd); they are the
+  app's own starting values, not sourced.

@@ -11,107 +11,110 @@ from .test_position import NO_SHARE, CLIP_STUB
 from .test_tac_io import import_sheet, counts_kml
 from .test_tactical_existing import go
 
-# What Ballistics showed before the restyle: captured from commit a190ff5 (the build before any v7.8 task-12 change) by reading
-# #solElev, #solWind, #solSub and the text of the dope card table. default_*: the starting profile (.308 Win 175 gr SMK) with
-# the default inputs (500 yd, 10 mph from 3 o'clock). p556_*: the 5.56 NATO 62 gr starting point at 300 yd with a 10 mph wind
-# from 9 o'clock. mil / moa: the unit switch. Nothing here was worked out by hand. (The table shows -0.0 in the Drop column at
-# 100 yd; that is how it was, and it is kept as captured.)
-BEFORE = {'default_mil': {'e': 'U 3.6 mil',
+# What Ballistics shows for the two pinned starting points, read from #solElev, #solWind, #solSub and the text of the dope card
+# table. default_*: the starting profile (.308 Win 175 gr SMK, 24" barrel) with the default inputs (500 yd, 10 mph from
+# 3 o'clock). p223_*: the .223 Rem 77 gr MatchKing starting point at 300 yd with a 10 mph wind from 9 o'clock. mil / moa: the
+# unit switch. Nothing here was worked out by hand. (The table shows -0.0 in the Drop column at 100 yd; that is how it is read.)
+# RE-PINNED for the "Built-in loads sourced" ruling in docs/ballistics-rulings.md: the default .308 load changed from G7 0.243
+# to the maker's G7 0.25, and the 5.56 NATO 62 gr load these figures were first captured for (id p556) was removed, so the
+# second set now pins p223. Before the restyle and before this ruling the same screen was captured from commit a190ff5 and
+# was unchanged through the solver check (docs/ballistics-rulings.md, "Solver check").
+BEFORE = {'default_mil': {'e': 'U 3.5 mil',
                  'w': 'R 1.2 mil',
-                 's': 'At 500 yd: drop 64.3 in, drift 21.9 in, 1761 fps, 1205 ft-lb, 0.70 s flight.',
+                 's': 'At 500 yd: drop 63.6 in, drift 21.2 in, 1782 fps, 1234 ft-lb, 0.70 s flight.',
                  't': 'Yd\tElev mil\tWind mil\tDrop in\tDrift in\tfps\tft-lb\tTime s\n'
-                      '50\t0.0\tR 0.1\t-0.1\t0.2\t2508\t2444\t0.06\n'
-                      '100\t0.0\tR 0.2\t-0.0\t0.8\t2417\t2271\t0.12\n'
-                      '150\tU 0.3\tR 0.3\t-1.4\t1.7\t2329\t2108\t0.18\n'
-                      '200\tU 0.6\tR 0.4\t-4.5\t3.1\t2242\t1954\t0.25\n'
-                      '250\tU 1.0\tR 0.6\t-9.2\t5.0\t2158\t1810\t0.32\n'
-                      '300\tU 1.5\tR 0.7\t-15.8\t7.3\t2075\t1674\t0.39\n'
-                      '350\tU 1.9\tR 0.8\t-24.5\t10.1\t1994\t1546\t0.46\n'
-                      '400\tU 2.5\tR 0.9\t-35.3\t13.5\t1915\t1425\t0.54\n'
-                      '450\tU 3.0\tR 1.1\t-48.5\t17.4\t1837\t1312\t0.62\n'
-                      '500\tU 3.6\tR 1.2\t-64.3\t21.9\t1761\t1205\t0.70\n'
-                      '550\tU 4.2\tR 1.4\t-82.9\t27.1\t1686\t1105\t0.79\n'
-                      '600\tU 4.8\tR 1.5\t-104.5\t32.9\t1613\t1011\t0.88\n'
-                      '650\tU 5.5\tR 1.7\t-129.5\t39.5\t1541\t923\t0.97\n'
-                      '700\tU 6.3\tR 1.9\t-158.2\t46.9\t1470\t840\t1.07\n'
-                      '750\tU 7.1\tR 2.0\t-190.8\t55.2\t1401\t763\t1.18\n'
-                      '800\tU 7.9\tR 2.2\t-227.9\t64.3\t1333\t691\t1.29\n'
-                      '850\tU 8.8\tR 2.4\t-269.9\t74.5\t1268\t625\t1.40\n'
-                      '900\tU 9.8\tR 2.6\t-317.4\t85.7\t1204\t564\t1.53\n'
-                      '950\tU 10.8\tR 2.9\t-370.8\t98.1\t1144\t509\t1.65\n'
-                      '1000\tU 12.0\tR 3.1\t-430.8\t111.6\t1091\t463\t1.79'},
- 'default_moa': {'e': 'U 12.3 MOA',
-                 'w': 'R 4.2 MOA',
-                 's': 'At 500 yd: drop 64.3 in, drift 21.9 in, 1761 fps, 1205 ft-lb, 0.70 s flight.',
+                      '50\t0.0\tR 0.1\t-0.1\t0.2\t2510\t2449\t0.06\n'
+                      '100\t0.0\tR 0.2\t-0.0\t0.7\t2422\t2281\t0.12\n'
+                      '150\tU 0.3\tR 0.3\t-1.4\t1.7\t2336\t2121\t0.18\n'
+                      '200\tU 0.6\tR 0.4\t-4.4\t3.0\t2252\t1971\t0.25\n'
+                      '250\tU 1.0\tR 0.5\t-9.2\t4.8\t2169\t1829\t0.32\n'
+                      '300\tU 1.5\tR 0.7\t-15.7\t7.1\t2089\t1696\t0.39\n'
+                      '350\tU 1.9\tR 0.8\t-24.3\t9.8\t2010\t1570\t0.46\n'
+                      '400\tU 2.4\tR 0.9\t-35.0\t13.0\t1932\t1451\t0.54\n'
+                      '450\tU 3.0\tR 1.0\t-48.1\t16.8\t1857\t1340\t0.61\n'
+                      '500\tU 3.5\tR 1.2\t-63.6\t21.2\t1782\t1234\t0.70\n'
+                      '550\tU 4.1\tR 1.3\t-81.9\t26.2\t1709\t1135\t0.78\n'
+                      '600\tU 4.8\tR 1.5\t-103.2\t31.8\t1637\t1042\t0.87\n'
+                      '650\tU 5.5\tR 1.6\t-127.7\t38.1\t1567\t954\t0.97\n'
+                      '700\tU 6.2\tR 1.8\t-155.8\t45.2\t1498\t872\t1.06\n'
+                      '750\tU 7.0\tR 2.0\t-187.8\t53.1\t1430\t795\t1.17\n'
+                      '800\tU 7.8\tR 2.1\t-224.0\t61.9\t1363\t723\t1.27\n'
+                      '850\tU 8.7\tR 2.3\t-264.9\t71.5\t1299\t656\t1.39\n'
+                      '900\tU 9.6\tR 2.5\t-310.9\t82.2\t1236\t594\t1.51\n'
+                      '950\tU 10.6\tR 2.7\t-362.6\t94.0\t1176\t537\t1.63\n'
+                      '1000\tU 11.7\tR 3.0\t-420.7\t106.9\t1119\t487\t1.76'},
+ 'default_moa': {'e': 'U 12.2 MOA',
+                 'w': 'R 4.0 MOA',
+                 's': 'At 500 yd: drop 63.6 in, drift 21.2 in, 1782 fps, 1234 ft-lb, 0.70 s flight.',
                  't': 'Yd\tElev MOA\tWind MOA\tDrop in\tDrift in\tfps\tft-lb\tTime s\n'
-                      '50\tU 0.1\tR 0.4\t-0.1\t0.2\t2508\t2444\t0.06\n'
-                      '100\t0.0\tR 0.7\t-0.0\t0.8\t2417\t2271\t0.12\n'
-                      '150\tU 0.9\tR 1.1\t-1.4\t1.7\t2329\t2108\t0.18\n'
-                      '200\tU 2.1\tR 1.5\t-4.5\t3.1\t2242\t1954\t0.25\n'
-                      '250\tU 3.5\tR 1.9\t-9.2\t5.0\t2158\t1810\t0.32\n'
-                      '300\tU 5.0\tR 2.3\t-15.8\t7.3\t2075\t1674\t0.39\n'
-                      '350\tU 6.7\tR 2.8\t-24.5\t10.1\t1994\t1546\t0.46\n'
-                      '400\tU 8.4\tR 3.2\t-35.3\t13.5\t1915\t1425\t0.54\n'
-                      '450\tU 10.3\tR 3.7\t-48.5\t17.4\t1837\t1312\t0.62\n'
-                      '500\tU 12.3\tR 4.2\t-64.3\t21.9\t1761\t1205\t0.70\n'
-                      '550\tU 14.4\tR 4.7\t-82.9\t27.1\t1686\t1105\t0.79\n'
-                      '600\tU 16.6\tR 5.2\t-104.5\t32.9\t1613\t1011\t0.88\n'
-                      '650\tU 19.0\tR 5.8\t-129.5\t39.5\t1541\t923\t0.97\n'
-                      '700\tU 21.6\tR 6.4\t-158.2\t46.9\t1470\t840\t1.07\n'
-                      '750\tU 24.3\tR 7.0\t-190.8\t55.2\t1401\t763\t1.18\n'
-                      '800\tU 27.2\tR 7.7\t-227.9\t64.3\t1333\t691\t1.29\n'
-                      '850\tU 30.3\tR 8.4\t-269.9\t74.5\t1268\t625\t1.40\n'
-                      '900\tU 33.7\tR 9.1\t-317.4\t85.7\t1204\t564\t1.53\n'
-                      '950\tU 37.3\tR 9.9\t-370.8\t98.1\t1144\t509\t1.65\n'
-                      '1000\tU 41.1\tR 10.7\t-430.8\t111.6\t1091\t463\t1.79'},
- 'p556_mil': {'e': 'U 1.0 mil',
-              'w': 'L 0.9 mil',
-              's': 'At 300 yd: drop 10.3 in, drift 9.9 in, 2138 fps, 630 ft-lb, 0.35 s flight.',
+                      '50\tU 0.1\tR 0.3\t-0.1\t0.2\t2510\t2449\t0.06\n'
+                      '100\t0.0\tR 0.7\t-0.0\t0.7\t2422\t2281\t0.12\n'
+                      '150\tU 0.9\tR 1.1\t-1.4\t1.7\t2336\t2121\t0.18\n'
+                      '200\tU 2.1\tR 1.4\t-4.4\t3.0\t2252\t1971\t0.25\n'
+                      '250\tU 3.5\tR 1.8\t-9.2\t4.8\t2169\t1829\t0.32\n'
+                      '300\tU 5.0\tR 2.3\t-15.7\t7.1\t2089\t1696\t0.39\n'
+                      '350\tU 6.6\tR 2.7\t-24.3\t9.8\t2010\t1570\t0.46\n'
+                      '400\tU 8.4\tR 3.1\t-35.0\t13.0\t1932\t1451\t0.54\n'
+                      '450\tU 10.2\tR 3.6\t-48.1\t16.8\t1857\t1340\t0.61\n'
+                      '500\tU 12.2\tR 4.0\t-63.6\t21.2\t1782\t1234\t0.70\n'
+                      '550\tU 14.2\tR 4.5\t-81.9\t26.2\t1709\t1135\t0.78\n'
+                      '600\tU 16.4\tR 5.1\t-103.2\t31.8\t1637\t1042\t0.87\n'
+                      '650\tU 18.8\tR 5.6\t-127.7\t38.1\t1567\t954\t0.97\n'
+                      '700\tU 21.3\tR 6.2\t-155.8\t45.2\t1498\t872\t1.06\n'
+                      '750\tU 23.9\tR 6.8\t-187.8\t53.1\t1430\t795\t1.17\n'
+                      '800\tU 26.7\tR 7.4\t-224.0\t61.9\t1363\t723\t1.27\n'
+                      '850\tU 29.8\tR 8.0\t-264.9\t71.5\t1299\t656\t1.39\n'
+                      '900\tU 33.0\tR 8.7\t-310.9\t82.2\t1236\t594\t1.51\n'
+                      '950\tU 36.4\tR 9.4\t-362.6\t94.0\t1176\t537\t1.63\n'
+                      '1000\tU 40.2\tR 10.2\t-420.7\t106.9\t1119\t487\t1.76'},
+ 'p223_mil': {'e': 'U 1.2 mil',
+              'w': 'L 0.8 mil',
+              's': 'At 300 yd: drop 13.0 in, drift 9.1 in, 2036 fps, 709 ft-lb, 0.38 s flight.',
               't': 'Yd\tElev mil\tWind mil\tDrop in\tDrift in\tfps\tft-lb\tTime s\n'
-                   '50\tU 0.4\tL 0.1\t-0.8\t0.2\t2860\t1126\t0.05\n'
-                   '100\t0.0\tL 0.3\t-0.0\t1.0\t2706\t1008\t0.10\n'
-                   '150\tU 0.1\tL 0.4\t-0.4\t2.3\t2557\t900\t0.16\n'
-                   '200\tU 0.3\tL 0.6\t-2.2\t4.2\t2413\t802\t0.22\n'
-                   '250\tU 0.6\tL 0.7\t-5.4\t6.7\t2273\t712\t0.29\n'
-                   '300\tU 1.0\tL 0.9\t-10.3\t9.9\t2138\t630\t0.35\n'
-                   '350\tU 1.4\tL 1.1\t-17.2\t13.9\t2008\t555\t0.43\n'
-                   '400\tU 1.8\tL 1.3\t-26.2\t18.8\t1882\t488\t0.50\n'
-                   '450\tU 2.3\tL 1.5\t-37.6\t24.5\t1762\t428\t0.59\n'
-                   '500\tU 2.9\tL 1.7\t-51.9\t31.3\t1648\t374\t0.67\n'
-                   '550\tU 3.5\tL 2.0\t-69.3\t39.1\t1540\t326\t0.77\n'
-                   '600\tU 4.2\tL 2.2\t-90.4\t48.1\t1439\t285\t0.87\n'
-                   '650\tU 4.9\tL 2.5\t-115.8\t58.4\t1346\t250\t0.98\n'
-                   '700\tU 5.8\tL 2.8\t-145.9\t69.9\t1262\t219\t1.09\n'
-                   '750\tU 6.7\tL 3.1\t-181.5\t82.7\t1189\t195\t1.21\n'
-                   '800\tU 7.8\tL 3.4\t-223.2\t96.8\t1127\t175\t1.34\n'
-                   '850\tU 8.9\tL 3.7\t-271.8\t112.1\t1075\t159\t1.48\n'
-                   '900\tU 10.1\tL 4.0\t-327.9\t128.4\t1032\t147\t1.62\n'
-                   '950\tU 11.5\tL 4.3\t-392.1\t145.8\t996\t136\t1.77\n'
-                   '1000\tU 12.9\tL 4.6\t-465.2\t164.0\t964\t128\t1.93'},
- 'p556_moa': {'e': 'U 3.3 MOA',
-              'w': 'L 3.2 MOA',
-              's': 'At 300 yd: drop 10.3 in, drift 9.9 in, 2138 fps, 630 ft-lb, 0.35 s flight.',
+                   '50\tU 0.4\tL 0.1\t-0.7\t0.2\t2598\t1154\t0.06\n'
+                   '100\t0.0\tL 0.3\t-0.0\t0.9\t2479\t1051\t0.12\n'
+                   '150\tU 0.1\tL 0.4\t-0.8\t2.1\t2364\t955\t0.18\n'
+                   '200\tU 0.4\tL 0.5\t-3.1\t3.9\t2251\t867\t0.24\n'
+                   '250\tU 0.8\tL 0.7\t-7.1\t6.2\t2142\t785\t0.31\n'
+                   '300\tU 1.2\tL 0.8\t-13.0\t9.1\t2036\t709\t0.38\n'
+                   '350\tU 1.7\tL 1.0\t-21.1\t12.7\t1933\t639\t0.46\n'
+                   '400\tU 2.2\tL 1.2\t-31.4\t17.0\t1832\t574\t0.54\n'
+                   '450\tU 2.7\tL 1.4\t-44.4\t22.2\t1734\t514\t0.62\n'
+                   '500\tU 3.3\tL 1.6\t-60.2\t28.1\t1638\t459\t0.71\n'
+                   '550\tU 4.0\tL 1.8\t-79.3\t35.0\t1544\t408\t0.81\n'
+                   '600\tU 4.7\tL 2.0\t-102.0\t42.9\t1453\t361\t0.91\n'
+                   '650\tU 5.5\tL 2.2\t-128.9\t52.0\t1365\t319\t1.01\n'
+                   '700\tU 6.4\tL 2.5\t-160.4\t62.2\t1279\t280\t1.13\n'
+                   '750\tU 7.3\tL 2.7\t-197.2\t73.9\t1197\t245\t1.25\n'
+                   '800\tU 8.3\tL 3.0\t-240.1\t87.0\t1120\t215\t1.38\n'
+                   '850\tU 9.5\tL 3.3\t-290.0\t101.5\t1066\t194\t1.51\n'
+                   '900\tU 10.7\tL 3.6\t-347.4\t117.0\t1033\t183\t1.66\n'
+                   '950\tU 12.1\tL 3.9\t-413.0\t133.2\t1007\t173\t1.80\n'
+                   '1000\tU 13.5\tL 4.2\t-487.2\t150.0\t983\t165\t1.96'},
+ 'p223_moa': {'e': 'U 4.1 MOA',
+              'w': 'L 2.9 MOA',
+              's': 'At 300 yd: drop 13.0 in, drift 9.1 in, 2036 fps, 709 ft-lb, 0.38 s flight.',
               't': 'Yd\tElev MOA\tWind MOA\tDrop in\tDrift in\tfps\tft-lb\tTime s\n'
-                   '50\tU 1.5\tL 0.5\t-0.8\t0.2\t2860\t1126\t0.05\n'
-                   '100\t0.0\tL 0.9\t-0.0\t1.0\t2706\t1008\t0.10\n'
-                   '150\tU 0.3\tL 1.5\t-0.4\t2.3\t2557\t900\t0.16\n'
-                   '200\tU 1.0\tL 2.0\t-2.2\t4.2\t2413\t802\t0.22\n'
-                   '250\tU 2.1\tL 2.6\t-5.4\t6.7\t2273\t712\t0.29\n'
-                   '300\tU 3.3\tL 3.2\t-10.3\t9.9\t2138\t630\t0.35\n'
-                   '350\tU 4.7\tL 3.8\t-17.2\t13.9\t2008\t555\t0.43\n'
-                   '400\tU 6.2\tL 4.5\t-26.2\t18.8\t1882\t488\t0.50\n'
-                   '450\tU 8.0\tL 5.2\t-37.6\t24.5\t1762\t428\t0.59\n'
-                   '500\tU 9.9\tL 6.0\t-51.9\t31.3\t1648\t374\t0.67\n'
-                   '550\tU 12.0\tL 6.8\t-69.3\t39.1\t1540\t326\t0.77\n'
-                   '600\tU 14.4\tL 7.7\t-90.4\t48.1\t1439\t285\t0.87\n'
-                   '650\tU 17.0\tL 8.6\t-115.8\t58.4\t1346\t250\t0.98\n'
-                   '700\tU 19.9\tL 9.5\t-145.9\t69.9\t1262\t219\t1.09\n'
-                   '750\tU 23.1\tL 10.5\t-181.5\t82.7\t1189\t195\t1.21\n'
-                   '800\tU 26.6\tL 11.6\t-223.2\t96.8\t1127\t175\t1.34\n'
-                   '850\tU 30.5\tL 12.6\t-271.8\t112.1\t1075\t159\t1.48\n'
-                   '900\tU 34.8\tL 13.6\t-327.9\t128.4\t1032\t147\t1.62\n'
-                   '950\tU 39.4\tL 14.7\t-392.1\t145.8\t996\t136\t1.77\n'
-                   '1000\tU 44.4\tL 15.7\t-465.2\t164.0\t964\t128\t1.93'}}
+                   '50\tU 1.3\tL 0.4\t-0.7\t0.2\t2598\t1154\t0.06\n'
+                   '100\t0.0\tL 0.9\t-0.0\t0.9\t2479\t1051\t0.12\n'
+                   '150\tU 0.5\tL 1.3\t-0.8\t2.1\t2364\t955\t0.18\n'
+                   '200\tU 1.5\tL 1.8\t-3.1\t3.9\t2251\t867\t0.24\n'
+                   '250\tU 2.7\tL 2.4\t-7.1\t6.2\t2142\t785\t0.31\n'
+                   '300\tU 4.1\tL 2.9\t-13.0\t9.1\t2036\t709\t0.38\n'
+                   '350\tU 5.7\tL 3.5\t-21.1\t12.7\t1933\t639\t0.46\n'
+                   '400\tU 7.5\tL 4.1\t-31.4\t17.0\t1832\t574\t0.54\n'
+                   '450\tU 9.4\tL 4.7\t-44.4\t22.2\t1734\t514\t0.62\n'
+                   '500\tU 11.5\tL 5.4\t-60.2\t28.1\t1638\t459\t0.71\n'
+                   '550\tU 13.8\tL 6.1\t-79.3\t35.0\t1544\t408\t0.81\n'
+                   '600\tU 16.2\tL 6.8\t-102.0\t42.9\t1453\t361\t0.91\n'
+                   '650\tU 18.9\tL 7.6\t-128.9\t52.0\t1365\t319\t1.01\n'
+                   '700\tU 21.9\tL 8.5\t-160.4\t62.2\t1279\t280\t1.13\n'
+                   '750\tU 25.1\tL 9.4\t-197.2\t73.9\t1197\t245\t1.25\n'
+                   '800\tU 28.7\tL 10.4\t-240.1\t87.0\t1120\t215\t1.38\n'
+                   '850\tU 32.6\tL 11.4\t-290.0\t101.5\t1066\t194\t1.51\n'
+                   '900\tU 36.9\tL 12.4\t-347.4\t117.0\t1033\t183\t1.66\n'
+                   '950\tU 41.5\tL 13.4\t-413.0\t133.2\t1007\t173\t1.80\n'
+                   '1000\tU 46.5\tL 14.3\t-487.2\t150.0\t983\t165\t1.96'}}
 
 
 # ---------- helpers ----------
@@ -247,16 +250,16 @@ def test_default_profile_output_is_what_it_was_before_the_restyle(page, app_url)
     assert readout(page) == BEFORE['default_moa']
 
 
-def test_second_profile_output_is_what_it_was_before_the_restyle(page, app_url):
+def test_second_profile_output_is_what_it_was_pinned_at(page, app_url):
     ballistics(page, app_url)
-    page.select_option('#bProfile', 'p556')
+    page.select_option('#bProfile', 'p223')
     page.fill('#bRange', '300')
     page.fill('#bWind', '10')
     page.select_option('#bClock', '9')
     settle(page)
-    assert readout(page) == BEFORE['p556_mil']
+    assert readout(page) == BEFORE['p223_mil']
     set_unit(page, 'moa')
-    assert readout(page) == BEFORE['p556_moa']
+    assert readout(page) == BEFORE['p223_moa']
 
 
 def test_the_dope_card_is_a_real_table_with_all_columns(page, app_url):
@@ -341,9 +344,9 @@ def test_profile_save_load_and_delete(page, app_url):
     expect(page.locator('#bProfile option:checked')).to_have_text('Range rifle')
     expect(page.locator('#bDel')).to_be_visible()
     # load another profile, then come back to the saved one
-    page.select_option('#bProfile', 'p556')
+    page.select_option('#bProfile', 'p223')
     settle(page)
-    assert page.input_value('#bBC') == '0.304' and page.input_value('#bMV') == '3020'
+    assert page.input_value('#bBC') == '0.188' and page.input_value('#bMV') == '2720'
     expect(page.locator('#bDel')).to_be_hidden()
     mine = page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))[0].id")
     page.select_option('#bProfile', mine)

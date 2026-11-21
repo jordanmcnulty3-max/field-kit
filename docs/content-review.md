@@ -8151,3 +8151,77 @@ values), Garmin Applied Ballistics glossary
 Dexadine "Drag Table Information" (https://dexadine.com/bexhelp/bexhelp117.htm; tables as an image), DTIC ADA554683
 (https://apps.dtic.mil/sti/tr/pdf/ADA554683.pdf; bullet coefficients, no drag tables) and the Sniper's Hide "G1 & G7 Tables?"
 thread (https://www.snipershide.com/shooting/goto/post?id=9268996; no tables).
+
+### Built-in loads (2026-11-21)
+
+Each built-in load (`PRESETS` in `src/app.js`) was checked against pages opened on 2026-11-21. A load stays only if both its
+coefficient (with the drag model the page states) and its velocity (with the barrel length the page states) came from an opened
+maker page. The test is `test_built_in_loads_are_the_sourced_values` in `tests/test_ballistics_math.py`; the decisions and what
+each costs if wrong are in `docs/ballistics-rulings.md`. Sight height and zero range in each load are the app's own starting
+values, not sourced numbers.
+
+Loads as they are now (the values copied into the test as `SOURCED`):
+
+| Id | Name | Coefficient | Drag model | Weight | Velocity | Kept / changed |
+|---|---|---|---|---|---|---|
+| p223 | .223 Rem 77 gr MatchKing, 24″ barrel | 0.188 | G7 | 77 gr | 2720 fps | changed (was G1 0.372, 2750 fps, named "OTM") |
+| p65cm | 6.5 Creedmoor 140 gr ELD-M, 24″ barrel | 0.326 | G7 | 140 gr | 2710 fps | kept, values unchanged, name gains the barrel length |
+| p308 | .308 Win 175 gr SMK, 24″ barrel | 0.25 | G7 | 175 gr | 2600 fps | changed (was G7 0.243) |
+
+Removed (ids never to be reused): p556 (5.56 NATO 62 gr M855, 20″ barrel, G1 0.304, 3020 fps) and p76239 (7.62x39 123 gr FMJ,
+G1 0.29, 2350 fps). No 55 gr 5.56 load or 16 in barrel velocity was added: no opened page gave a coefficient with its model for
+one.
+
+Pages taken from:
+
+- **Hornady, "6.5 Creedmoor 140 gr ELD Match"** (the loaded cartridge),
+  https://www.hornady.com/ammunition/rifle/6-5-creedmoor-140-gr-eld-match. Taken: 140 gr, muzzle velocity 2710 fps in the table
+  headed "Test Barrel (24")". The page prints no coefficient.
+- **Hornady, "Ballistic Coefficient"**, https://www.hornady.com/bc. Taken: for the 6.5mm 140 gr ELD Match, G1 and G7 by speed:
+  Mach 2.25 (2512 fps) 0.646 / 0.326; Mach 2.0 (2232 fps) 0.637 / 0.320; Mach 1.75 (1953 fps) 0.616 / 0.310. The page says the
+  Mach 2.25 values are the ones for comparing with other published coefficients and the Mach 1.75 values are for trajectories
+  beyond 600 yd. The first request for this page was refused by the fetch tool's permission check and the second opened. Also
+  opened, no coefficient printed (it links to the page above): https://www.hornady.com/bullets/rifle/6.5mm-.264-140-gr-eld-match-500
+- **Federal, "Gold Medal Sierra MatchKing 308 Win. 175 gr (GM308M2)"**,
+  https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M2.html. Taken: 175 gr, 2600 fps,
+  ballistic coefficient .505 (not labelled with a model) and "Ballistic Coefficient G7" 0.25. No barrel length on this page.
+- **Federal, "Gold Medal 308 Win." product page**, https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=151.
+  Taken: 175 gr, 2600 fps, test barrel length 24 in, ballistic coefficient 0.505 (no model label).
+- **Federal, "Gold Medal Sierra MatchKing 223 Rem. 77 gr (GM223M3)"**,
+  https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM223M3.html. Taken: Sierra MatchKing BTHP,
+  77 gr, 2720 fps, ballistic coefficient .372 (no model label) and "Ballistic Coefficient G7" .188. No barrel length on this page.
+- **Federal, "Gold Medal 223 Rem. (5.56x45mm)" product page**,
+  https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=147. Taken: Sierra MatchKing BTHP, 77 gr, 2720 fps, test
+  barrel length 24 in, ballistic coefficient 0.372 (no model label).
+
+Opened, nothing usable for these three loads:
+
+- Sierra, ".22 Cal / 5.56mm 77 Gr. HPBT MatchKing", https://sierrabullets.com/product/22-caliber-77-gr-hpbt-matchking. Prints
+  .372 at 3000 fps and above, .362 from 2500 to 1700 fps, .343 below 1700 fps, and does not say which drag model. Weight 77 gr.
+- Sierra 175 gr MatchKing pages, https://www.sierrabullets.com/?p=15298, https://sierrabullets.com/30-cal-175-gr-hpbt-matchking-smk/
+  and https://sierrabullets.com/product/30-cal-7-62mm-175-gr-hpbt-matchking: the weight and caliber only; their Ballistics and Specs
+  tabs showed only a loading icon, so no coefficient was read. https://www.sierrabullets.com/?p=15292 (22 cal list) prints none.
+  Sierra "4.1 Basic Definitions", https://www.sierrabullets.com/?p=17353, does not name a drag model.
+- Federal American Eagle 223 Rem. (5.56x45mm) pages, https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=71
+  (62 gr FMJ boat-tail, 3020 fps, 24 in, coefficient 0.307 with no model label) and
+  https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=69 (55 gr FMJ boat-tail, 3240 fps, 24 in, 0.269, no model
+  label). Not M855 and no model, so neither could source p556 or a 55 gr load.
+- Federal American Eagle 7.62x39 page, https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=66 (124 gr FMJ,
+  2350 fps, 20 in, coefficient 0.298 with no model label). A different weight and no model, so it could not source p76239.
+- M855: 2022 Winchester military small-caliber catalog, https://online.flippingbook.com/view/895403448 (62 gr, 3,020 ft/s plus or
+  minus 40 measured 78 ft from the muzzle; no barrel length, no coefficient); the 62 gr FMJ product data sheet on
+  https://cdn.shopify.com/s/files/1/0286/2592/8227/files/Product_Data_Sheet_5.56x45mm_62gr_FMJ.pdf (3100 ft/s plus or minus 30 at
+  0 m; no barrel length, no coefficient; the maker is not named, only a web address); Army Research Laboratory report ADA530895,
+  https://ntrl.ntis.gov/NTRL/dashboard/searchResults/titleDetail/ADA530895.xhtml (record only; no numbers on the page); DTIC
+  ADA300525, https://apps.dtic.mil/sti/pdfs/ADA300525.pdf (the M856 tracer only).
+
+Opened and not used as sources (a retailer page and forum posts): a retailer's page for Hornady Frontier 7.62x39 123 gr FMJ
+(https://www.luckygunner.com/7-62x39-123-grain-fmj-hornady-frontier-50-rounds; 2340 fps from a 24 in barrel, 0.266 G1); a Sniper's
+Hide post (https://www.snipershide.com/shooting/posts/10401844; calls 0.326 the advertised G7 of the 140 gr ELD Match).
+
+Would not open: Hornady bullet page https://www.hornady.com/bullets/rifle/6-5mm-264-140-gr-eld-match (returned "You are being
+redirected" twice); https://www.federalpremium.com/products/details/rifle.aspx?id=151 and
+https://www.hornady.com/ammunition/rifle/6-5-creedmoor-140-gr-eld-match?age=confirmed (refused by the fetch tool's permission
+check, not retried); Sniper's Hide thread https://www.snipershide.com/shooting/threads/g7-bc-for-308-175-smk.7775/page-2 (the
+fetch failed). Not opened for lack of a search result giving the address: any Sierra page that prints a G1 or G7 for the 175 gr
+MatchKing.

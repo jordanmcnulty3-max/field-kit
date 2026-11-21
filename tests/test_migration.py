@@ -1,6 +1,8 @@
 """Backup, restore and v5 -> current migration."""
 import json, os, re
 
+import pytest
+
 from playwright.sync_api import expect
 
 from .test_tools import T0
@@ -521,3 +523,19 @@ def test_v76_backup_with_the_three_moved_topics_restores_and_they_still_open_fro
     page.locator('#survCats summary', has_text='Food from the land').click()
     keys = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
     assert set(moved) <= set(keys)
+
+
+@pytest.mark.parametrize('gone,bc,mv', [('p556', '0.304', '3020'), ('p76239', '0.29', '2350')])
+def test_a_phone_whose_stored_load_was_removed_opens_without_error(page, app_url, gone, bc, mv):
+    """p556 and p76239 are no longer built in. A phone that had one selected keeps the numbers it was using and shows
+    Custom (unsaved); nothing throws (the harness fails the test on any console error)."""
+    stored = {'profile': gone, 'bBC': bc, 'bModel': 'G1', 'bW': '62', 'bMV': mv, 'bSH': '2.6', 'bZero': '100',
+              'bRange': '300', 'bWind': '0', 'bClock': '3', 'bTemp': '59', 'bAlt': '0', 'bPress': '', 'bRH': '50',
+              'bMax': '1000', 'bStep': '50'}
+    boot(page, app_url, {'fk.bal': json.dumps(stored)}, hash_='#/tactical/ballistics')
+    page.wait_for_selector('#dope tr')
+    assert page.input_value('#bProfile') == 'custom'
+    assert page.input_value('#bBC') == bc and page.input_value('#bMV') == mv
+    assert page.locator('#bProfile option[value="%s"]' % gone).count() == 0
+    page.select_option('#bProfile', 'p308')       # and the built-in loads still load
+    assert page.input_value('#bMV') == '2600'

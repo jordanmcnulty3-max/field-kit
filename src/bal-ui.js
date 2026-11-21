@@ -39,11 +39,14 @@
     }
     return null;
   }
+  const ZT = [-60, 140], ZA = [-2000, 30000];     // zero conditions a person could really have: temperature °F, altitude ft
   function cleanAtm(z) {
-    if (!isObj(z) || !fin(z.temp) || !(fin(z.alt) || fin(z.press))) return null;
+    if (!isObj(z) || !fin(z.temp) || z.temp < ZT[0] || z.temp > ZT[1]) return null;
+    const alt = fin(z.alt) && z.alt >= ZA[0] && z.alt <= ZA[1], press = fin(z.press) && z.press > 0;
+    if (!alt && !press) return null;
     const out = { temp: z.temp };
-    if (fin(z.alt)) out.alt = z.alt;
-    if (fin(z.press)) out.press = z.press;
+    if (alt) out.alt = z.alt;
+    if (press) out.press = z.press;
     out.rh = fin(z.rh) ? z.rh : 50;
     return out;
   }
@@ -339,6 +342,9 @@
     }
     const temp = numOf('rfZTemp'), alt = numOf('rfZAlt'), press = numOf('rfZPress');
     if (temp !== null || alt !== null || press !== null) {
+      if (temp !== null && (temp < ZT[0] || temp > ZT[1])) return bad('Temperature must be between -60 and 140 \u00b0F.', 'rfZTemp');
+      if (alt !== null && (alt < ZA[0] || alt > ZA[1])) return bad('Altitude must be between -2,000 and 30,000 ft.', 'rfZAlt');
+      if (press !== null && !(press > 0)) return bad('Station pressure must be more than 0.', 'rfZPress');
       if (temp === null || (alt === null && press === null)) return bad('Zero conditions need a temperature and an altitude or a pressure.', temp === null ? 'rfZTemp' : 'rfZAlt');
       const base = editing.base.zeroAtm;
       out.zeroAtm = { temp, rh: base && fin(base.rh) ? base.rh : 50 };

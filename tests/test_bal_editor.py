@@ -342,3 +342,195 @@ def test_built_in_editor_fits_with_large_text(page, app_url):
     enlarge_text(page)
     page.wait_for_timeout(100)
     assert [x for x in overflow(page, DLG) if 'page scrolls' not in x] == [] and clipped_buttons(page, DLG) == []
+
+
+# ---------- Fix round 1 ----------
+
+def test_station_pressure_must_be_above_zero(page, app_url):
+    open_editor(page, app_url)
+    page.fill('#rfZTemp', '40')
+    page.fill('#rfZPress', '0')
+    refuse(page, 'Station pressure must be more than 0.', 'rfZPress')
+    page.fill('#rfZPress', '-3')
+    refuse(page, 'Station pressure must be more than 0.', 'rfZPress')
+    page.fill('#rfZAlt', '800')
+    refuse(page, 'Station pressure must be more than 0.', 'rfZPress')
+    assert 'zeroAtm' not in profiles(page)[0]
+
+
+def test_zero_condition_ranges_are_refused(page, app_url):
+    open_editor(page, app_url)
+    page.fill('#rfZAlt', '800')
+    for t in ('-61', '141'):
+        page.fill('#rfZTemp', t)
+        refuse(page, 'Temperature must be between -60 and 140 °F.', 'rfZTemp')
+    page.fill('#rfZTemp', '40')
+    for a in ('-2001', '30001'):
+        page.fill('#rfZAlt', a)
+        refuse(page, 'Altitude must be between -2,000 and 30,000 ft.', 'rfZAlt')
+    page.fill('#rfZTemp', '-60')
+    page.fill('#rfZAlt', '-2000')
+    page.click('#rfSave')
+    assert profiles(page)[0]['zeroAtm'] == {'temp': -60, 'alt': -2000, 'rh': 50}
+    page.click('#bEdit')
+    page.fill('#rfZTemp', '140')
+    page.fill('#rfZAlt', '30000')
+    page.click('#rfSave')
+    assert profiles(page)[0]['zeroAtm']['alt'] == 30000
+
+
+@pytest.mark.parametrize('raw,want', [
+    ({'temp': 40, 'alt': 800, 'press': 0}, {'temp': 40, 'alt': 800, 'rh': 50}),
+    ({'temp': 40, 'alt': 800, 'press': -5}, {'temp': 40, 'alt': 800, 'rh': 50}),
+    ({'temp': 40, 'press': 0}, None),
+    ({'temp': 40, 'press': 29.1, 'alt': 50000}, {'temp': 40, 'press': 29.1, 'rh': 50}),
+    ({'temp': 40, 'alt': -2001}, None),
+    ({'temp': 40, 'alt': 30001}, None),
+    ({'temp': -61, 'alt': 100}, None),
+    ({'temp': 141, 'alt': 100}, None),
+    ({'temp': 140, 'alt': 30000}, {'temp': 140, 'alt': 30000, 'rh': 50}),
+    ({'temp': -60, 'alt': -2000}, {'temp': -60, 'alt': -2000, 'rh': 50}),
+])
+def test_clean_drops_impossible_zero_conditions(page, app_url, raw, want):
+    ballistics(page, app_url)
+    got = page.evaluate('p => FK.bal.clean(p)', {**OWN, 'zeroAtm': raw})
+    assert got.get('zeroAtm') == want
+
+
+def test_marks_box_is_a_plain_text_field_and_comma_or_space_both_separate(page, app_url):
+    open_editor(page, app_url)
+    page.select_option('#rfOptic', 'reticle')
+    el = page.locator('#rfMarks')
+    assert el.get_attribute('type') == 'text' and el.get_attribute('inputmode') is None
+    assert [el.get_attribute(a) for a in ('autocapitalize', 'autocomplete', 'autocorrect', 'spellcheck')] == ['off', 'off', 'off', 'false']
+    assert 'Separate marks with spaces or commas, like 1.5 3 4.6.' in page.text_content(DLG)
+    hints = page.locator('#rfMarksHint p').all_text_contents()
+    assert hints[0] == 'Separate marks with spaces or commas, like 1.5 3 4.6.' and len(hints) == 3
+    for text in ('1.5 3 4.6', '1.5, 3, 4.6', '1.5,3,4.6'):
+        page.click('#bEdit') if not page.locator(DLG).is_visible() else None
+        page.fill('#rfMarks', text)
+        page.click('#rfSave')
+        assert profiles(page)[0]['optic']['marks'] == [1.5, 3, 4.6], text
+        page.wait_for_timeout(400)
+
+
+def test_equal_neighbouring_marks_are_refused(page, app_url):
+    open_editor(page, app_url)
+    reticle(page, '3, 3')
+    refuse(page, 'Marks must get larger down the list.', 'rfMarks')
+    page.fill('#rfMarks', '1 2 2 3')
+    refuse(page, 'Marks must get larger down the list.', 'rfMarks')
+
+
+def test_escape_with_unsaved_typing_asks(page, app_url):
+    open_editor(page, app_url)
+    page.keyboard.press('Escape')                       # nothing typed: closes
+    expect(page.locator(DLG)).to_be_hidden()
+    page.wait_for_timeout(400)
+    page.click('#bEdit')
+    page.fill('#rfName', 'Changed')
+    page.keyboard.press('Escape')
+    expect(page.locator('#cfTitle')).to_have_text('Discard changes to this profile?')
+    page.click('#cfCancel')
+    expect(page.locator(DLG)).to_be_visible()
+    assert page.input_value('#rfName') == 'Changed'
+    page.keyboard.press('Escape')
+    page.click('#cfOk')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page) == [OWN]
+
+
+def test_backdrop_tap_with_unsaved_typing_asks(page, app_url):
+    open_editor(page, app_url)
+    page.fill('#rfName', 'Changed')
+    page.mouse.click(180, 10)
+    expect(page.locator('#cfTitle')).to_have_text('Discard changes to this profile?')
+    page.click('#cfCancel')
+    expect(page.locator(DLG)).to_be_visible()
+    page.mouse.click(180, 10)
+    page.click('#cfOk')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page) == [OWN]
+    page.wait_for_timeout(400)
+    page.click('#bEdit')
+    page.mouse.click(180, 10)                           # nothing typed: closes at once
+    expect(page.locator(DLG)).to_be_hidden()
+
+
+def test_changing_only_the_sight_type_is_a_change(page, app_url):
+    open_editor(page, app_url)
+    page.select_option('#rfOptic', 'dot')
+    page.go_back()
+    expect(page.locator('#cfTitle')).to_have_text('Discard changes to this profile?')
+    page.click('#cfCancel')
+    page.select_option('#rfOptic', 'none')              # back to what it opened with
+    page.go_back()
+    expect(page.locator(DLG)).to_be_hidden()
+
+
+def test_state_resets_between_openings(page, app_url):
+    open_editor(page, app_url, select='p308')
+    expect(page.locator('#rfSave')).to_be_hidden()
+    page.click('#rfCancel')
+    expect(page.locator(DLG)).to_be_hidden()
+    page.wait_for_timeout(400)
+    page.evaluate("FK.bal.select('u1')")
+    page.click('#bEdit')
+    expect(page.locator('#rfSave')).to_be_visible()
+    expect(page.locator('#rfDelete')).to_be_visible()
+    expect(page.locator('#rfBuiltIn')).to_be_hidden()
+    expect(page.locator('#rfTitle')).to_have_text('Edit profile')
+    page.fill('#rfBC', '')
+    refuse(page, 'Ballistic coefficient must be more than 0.', 'rfBC')
+    page.click('#rfCancel')
+    expect(page.locator(DLG)).to_be_hidden()
+    page.wait_for_timeout(400)
+    page.click('#bEdit')
+    assert msg(page) == '' and page.input_value('#rfBC') == '0.3'
+
+
+def test_save_as_new_keeps_the_sight(page, app_url):
+    open_editor(page, app_url)
+    page.select_option('#rfOptic', 'turret')
+    page.select_option('#rfUnit', 'iphy')
+    page.select_option('#rfClick', '0.125')
+    page.click('#rfSaveNew')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0] == OWN
+    assert profiles(page)[1]['optic'] == {'type': 'turret', 'unit': 'iphy', 'click': 0.125}
+    page.wait_for_timeout(400)
+    page.click('#bEdit')
+    reticle(page, '1 2.5 4')
+    page.click('#rfSaveNew')
+    assert profiles(page)[2]['optic'] == {'type': 'reticle', 'unit': 'mil', 'marks': [1, 2.5, 4]}
+    assert profiles(page)[1]['optic']['type'] == 'turret'
+
+
+def test_negative_weight_and_sight_height_are_refused(page, app_url):
+    open_editor(page, app_url)
+    page.fill('#rfW', '-1')
+    refuse(page, 'Bullet weight can\u2019t be below 0.', 'rfW')
+    page.fill('#rfW', '150')
+    page.fill('#rfSH', '-0.5')
+    refuse(page, 'Sight height can\u2019t be below 0.', 'rfSH')
+    assert profiles(page) == [OWN]
+
+
+@pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
+def test_a_refusal_at_enlarged_text_stays_inside_the_screen(page, app_url, night):
+    ballistics(page, app_url, night=night, profiles=[OWN])
+    page.evaluate("FK.bal.select('u1')")
+    page.click('#bEdit')
+    page.select_option('#rfOptic', 'reticle')
+    page.fill('#rfMarks', '3 1.5')
+    enlarge_text(page)
+    page.click('#rfSave')
+    expect(page.locator('#rfMsg')).to_have_text('Marks must get larger down the list.')
+    page.wait_for_timeout(150)
+    boxes = page.evaluate("""() => [...document.querySelectorAll('#dlgRifle .mk-act .btn, #rfMsg')]
+      .filter(e => e.getBoundingClientRect().width).map(e => { const r = e.getBoundingClientRect(); return [e.id, r.left, r.right, r.top, r.bottom, e.scrollWidth, e.clientWidth, e.scrollHeight, e.clientHeight]; })""")
+    assert len(boxes) == 5
+    for id_, l, r, t, b, sw, cw, sh, ch in boxes:
+        assert l >= -1 and r <= 361 and t >= 0 and b <= 641, (id_, l, r, t, b)
+        assert sw <= cw + 1 and sh <= ch + 1, (id_, 'clipped')
+    assert page.evaluate("document.querySelector('#dlgRifle').scrollWidth <= document.querySelector('#dlgRifle').clientWidth + 1")

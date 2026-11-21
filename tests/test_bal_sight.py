@@ -140,6 +140,8 @@ def test_bad_rows_are_dashes_everywhere(ready):
     {'type': 'turret', 'unit': 'mil', 'click': 0}, {'type': 'turret', 'unit': 'mil', 'click': -0.1},
     {'type': 'reticle', 'unit': 'mil', 'marks': []}, {'type': 'reticle', 'unit': 'mil'},
     {'type': 'reticle', 'unit': 'bogus', 'marks': [1]}, {}, 'turret', 5,
+    {'type': 'turret', 'unit': 'constructor', 'click': 0.1}, {'type': 'turret', 'unit': 'toString', 'click': 0.1},
+    {'type': 'reticle', 'unit': 'valueOf', 'marks': [1]}, {'type': 'turret', 'unit': '__proto__', 'click': 0.1},
 ])
 def test_malformed_sight_is_no_sight(ready, sight):
     assert answer(ready, ROW, sight) == MIL_FORM
@@ -203,6 +205,13 @@ def test_to_angle_every_unit_gives_the_same_angle(ready):
 
 def test_to_angle_bad_input_is_nan(ready):
     for args in [[None, 'mil', 500], ['', 'mil', 500], ['x', 'mil', 500], [float('inf'), 'mil', 500],
-                 [1, 'furlong', 500], [1, 'in', 0], [1, 'in', None], [1, None, 500]]:
+                 [1, 'furlong', 500], [1, 'constructor', 500], [1, 'toString', 500], [1, 'valueOf', 500], [1, 'in', 0], [1, 'in', None], [1, None, 500]]:
         assert ready.evaluate('a => Number.isNaN(BALS.toAngle(a[0], a[1], a[2]))', args), args
     assert ready.evaluate('Number.isNaN(BALS.toAngle(undefined, "mil", 500))')
+
+
+def test_reticle_wind_drift_under_a_twentieth_inch_matches_the_cell(ready):
+    s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0]}
+    r = {'yd': 100, 'dropIn': -4.2, 'windIn': -0.03}
+    assert answer(ready, r, s)['wind']['sub'] == '0 in'
+    assert cells(ready, r, s)['wind'][1] == '0'

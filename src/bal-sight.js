@@ -5,6 +5,7 @@
 const BALS = (() => {
   const DASH = '—', HOLD_MIN = 0.5;
   const LABEL = { mil: 'mil', moa: 'MOA', iphy: 'in/100 yd' };
+  const known = u => typeof u === 'string' && Object.prototype.hasOwnProperty.call(LABEL, u);
 
   /* ---- the one place for conversions and rounding ---- */
   const fin = Number.isFinite;
@@ -23,7 +24,7 @@ const BALS = (() => {
 
   /* Normalise a sight: null means no sight (mil form). */
   function sightOf(s) {
-    if (!s || typeof s !== 'object' || !LABEL[s.unit] && s.type !== 'dot') return null;
+    if (!s || typeof s !== 'object' || !known(s.unit) && s.type !== 'dot') return null;
     if (s.type === 'dot') return { type: 'dot' };
     if (s.type === 'turret' && fin(s.click) && s.click > 0) return { type: 'turret', unit: s.unit, click: s.click };
     if (s.type === 'reticle' && Array.isArray(s.marks)) {
@@ -65,7 +66,7 @@ const BALS = (() => {
     if (!sight) return { main: angle, sub: '' };
     if (sight.type === 'turret') return { main: angle, sub: clicksText(clicks(fromRad(a.rad, unit), sight.click)) };
     if (sight.type === 'dot') return { main: dotText(a, ax), sub: '' };
-    if (ax === 'wind') return { main: angle, sub: inch(a.hold) + ' in' };
+    if (ax === 'wind') return { main: angle, sub: (inchZero(a.hold) ? '0' : inch(a.hold)) + ' in' };
     const m = reticleMark(a, row, sight);
     if (m.at === sight.marks.length) return { main: 'Past last mark', sub: angle };
     const h = holdWords(m.hold, 'high', 'low');
@@ -118,7 +119,7 @@ const BALS = (() => {
   function toAngle(value, unit, yd) {
     if (!fin(value)) return NaN;
     if (unit === 'in') return fin(yd) && yd > 0 ? needRad(value, yd) : NaN;
-    return LABEL[unit] ? toRad(value, unit) : NaN;
+    return known(unit) ? toRad(value, unit) : NaN;
   }
 
   return { answer, all, cols, cells, toAngle };

@@ -169,7 +169,7 @@ def test_all_units(ready):
 def test_rounding_edges(ready):
     t = {'type': 'turret', 'unit': 'mil', 'click': 0.1}
     assert answer(ready, {'yd': 100, 'dropIn': -0.14, 'windIn': 0}, t)['elev'] == {'main': '0.0 mil', 'sub': '0 clicks'}   # 0.04 mil
-    assert answer(ready, {'yd': 100, 'dropIn': -0.54, 'windIn': 0}, t)['elev'] == {'main': 'U 0.2 mil', 'sub': '2 clicks'}   # 0.15 mil: half a click rounds up
+    assert answer(ready, {'yd': 100, 'dropIn': -0.56, 'windIn': 0}, t)['elev'] == {'main': 'U 0.2 mil', 'sub': '2 clicks'}   # 0.156 mil: past half a click rounds up
 
 def test_bad_input_gives_dashes(ready):
     for row in [{'yd': 0, 'dropIn': -1, 'windIn': 0}, {'yd': 500, 'dropIn': None, 'windIn': 0}]:

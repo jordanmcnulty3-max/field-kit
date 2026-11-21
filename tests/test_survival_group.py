@@ -11,7 +11,7 @@ from playwright.sync_api import expect
 from .conftest import inject_data
 from .test_survival_topic import XSS, settle, wait_hash
 
-FULL = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.'
+FULL = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or saved maps.'
 WATER_URL = '#/survival/tool/water'
 LIST_URL = '#/survival/list/store-water'
 NOT_AVAILABLE = 'The water planner’s numbers are not available yet'

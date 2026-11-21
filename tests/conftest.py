@@ -47,6 +47,9 @@ def page(browser):
     ctx = browser.new_context(viewport={'width': 360, 'height': 640}, service_workers='block')
     ctx.route('**/*', lambda route: route.continue_() if _is_local(route.request.url) else route.abort())
     pg = ctx.new_page()
+    # The test browser's own geolocation is blocked; a phone whose GPS is allowed but has no fix yet is the usual case, so
+    # stand in for that. A test that needs the blocked case replaces watchPosition again (a later init script wins).
+    pg.add_init_script('navigator.geolocation.watchPosition = () => 7; navigator.geolocation.clearWatch = () => {};')
     errors = []
     pg.on('pageerror', lambda e: errors.append(f'pageerror: {e}'))
 

@@ -124,7 +124,25 @@ p{margin:0 0 8px}
 @media (prefers-reduced-motion:reduce){#rose{transition:none}}
 .hdg b{font-size:44px;line-height:1;font-weight:650;display:block}
 .hdg .ref{font-size:14px;color:var(--muted)}
-.hdg .tgt{margin-top:12px;font-size:15px}
+/* v7.8 position */
+.hdg{min-width:0}
+.hdg b{font-size:60px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hdg .ref{font-size:16px;margin-top:6px}
+#view-position .pos-sec{margin-top:32px}
+#view-position #posSecPos{margin-top:0}
+#view-position #navPanel:not([hidden])~#posSecPos{margin-top:24px}
+#view-position .pos-sec .block,#view-position .block.pos-sec{border-top:0;padding:0}
+#view-position .pos-sec .readout{padding-bottom:0}
+#shareBtn{margin-top:16px}
+.wake-row{margin-top:12px}
+.decl-box{display:grid;gap:8px;margin-top:16px}
+#declSeg button[aria-pressed="true"]{background:var(--c);color:var(--on-accent);font-weight:600}
+#declSeg button{min-height:44px}
+.decl-line{margin:0;font-size:15px;white-space:pre-line}
+.decl-line[hidden]{display:none}
+.ps-text{margin:0 0 12px;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+  font-family:inherit;font-size:16px;line-height:1.5;font-weight:600;font-variant-numeric:tabular-nums;white-space:pre-wrap;overflow-wrap:anywhere;user-select:text;-webkit-user-select:text}
+/* /v7.8 position */
 
 /* Forms */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
@@ -142,12 +160,6 @@ input::placeholder{color:var(--muted);opacity:.8}
 .btn.full{width:100%}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 
-/* Waypoints */
-.wps{list-style:none;margin:12px 0 0;padding:0}
-.wps li{padding:12px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:4px 8px;align-items:center}
-.wps li.target .wname::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:8px}
-.wname{font-weight:600}
-.wmeta{font-size:14px;color:var(--muted);grid-column:1}
 .wact{grid-column:2;grid-row:1/3;display:flex;gap:6px}
 
 /* Ballistics output */
@@ -249,7 +261,9 @@ body.playing,body.tooling{overflow:hidden}
 .pp-list .pp-listbtn{margin:8px 0 0}
 .pp-fig{margin:0 0 16px}
 .pp-fig svg{display:block;max-width:100%;height:auto;margin:0 auto}
-.pp-q{font-size:18px;font-weight:600;margin:0 0 12px}
+.pp-askbar{flex:none;padding:10px 16px 2px;border-top:1px solid var(--line);background:var(--paper)}
+.pp-askbar+.pp-foot{border-top:0}
+.pp-q{font-size:18px;line-height:1.3;font-weight:700;margin:0;color:var(--ink);overflow-wrap:anywhere;max-width:640px;margin-inline:auto}
 .pp-wide{display:flex;width:100%;align-items:center;justify-content:center;min-height:56px;margin:0 0 12px;font-size:18px}
 .pp-timerbar{display:flex;align-items:center;gap:12px;padding:8px 16px;border-top:1px solid var(--line);background:var(--surface);font-size:18px}
 .pp-timerbar b{font-size:24px;font-variant-numeric:tabular-nums}
@@ -363,8 +377,11 @@ body.searching{overflow:hidden}
 /* Map */
 body.mapmode{overflow:hidden}
 body.mapmode main{padding-bottom:0}
+body.maptool.mapmode main{padding-top:0}   /* the Map / Position switch is hidden in a tool mode: no empty strip above the map */
+.save-fields{display:grid;grid-template-columns:1fr;gap:12px}   /* one field a row: the name hint and the detail choice are never cut off at 360 px */
 body.mapmode #tacSeg{margin-bottom:12px}
-.mapwrap{position:relative;margin:0 -16px;height:60vh;overflow:hidden;border-top:1px solid var(--line)}
+/* isolation: Leaflet's panes and controls (z-index 200 to 1000) stack inside the map, so toasts and the update bar stay above it. */
+.mapwrap{position:relative;isolation:isolate;margin:0 -16px;height:60vh;overflow:hidden;border-top:1px solid var(--line)}
 #map{position:absolute;inset:0;background:var(--surface)}
 .leaflet-container{font:inherit;font-size:14px}
 :root[data-theme="night"] .leaflet-tile-pane{filter:grayscale(1) invert(1) brightness(.7) sepia(1) saturate(9) hue-rotate(-38deg)}
@@ -373,9 +390,6 @@ body.mapmode #tacSeg{margin-bottom:12px}
 .leaflet-bar{border:1px solid var(--line) !important;box-shadow:none !important;border-radius:8px}
 .leaflet-control-attribution{background:color-mix(in srgb,var(--surface) 80%,transparent) !important;color:var(--muted);font-size:10px}
 .leaflet-control-attribution a{color:var(--muted)}
-.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--surface);color:var(--ink);border-radius:8px}
-.leaflet-popup-content{margin:12px 14px;font-size:15px;line-height:1.4}
-.pop-act{margin-top:8px}
 .cross{position:absolute;left:50%;top:50%;width:32px;height:32px;margin:-16px 0 0 -16px;pointer-events:none;z-index:600}
 .cross::before,.cross::after{content:"";position:absolute;background:var(--ink);box-shadow:0 0 0 1px var(--surface)}
 .cross::before{left:15px;top:0;width:2px;height:32px}
@@ -384,32 +398,223 @@ body.mapmode #tacSeg{margin-bottom:12px}
 .mapctl button{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
 .mapctl button svg{width:24px;height:24px}
 .mapctl button[aria-pressed="true"]{background:var(--c);color:var(--on-accent);border-color:var(--c)}
-#mTrack[aria-pressed="true"]{background:var(--blaze);border-color:var(--blaze)}
 .maptag{position:absolute;left:68px;top:12px;z-index:1000;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .maptag span{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
-.mapnote{position:absolute;left:16px;right:76px;top:96px;z-index:1000;padding:12px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:15px;line-height:1.4}
-.mapnote p{margin:0 0 8px}
+/* In the bottom stack, above the grid bar: never over the crosshair or the top chips. */
+.mapnote{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 12px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:14px;line-height:1.35}
+.mapnote[hidden]{display:none}
+.mapnote,.mapgps{margin-right:60px}   /* clear of the map's button column when the stack grows tall */
+.mapnote p{margin:0;flex:1;min-width:0}
+.mapnote .btn{flex:none;min-height:44px;max-width:40%;white-space:normal}
 .maptag .rec{background:var(--blaze);color:var(--on-accent);border-color:var(--blaze);font-weight:600}
-.mapbar{position:absolute;left:12px;right:12px;bottom:22px;z-index:1000;display:flex;align-items:center;gap:8px;
+.mapbar{display:flex;align-items:center;gap:8px;
   background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 8px 8px 12px}
 .mapbar .c{flex:1;min-width:0}
+.mapbar #mMark{min-height:44px;min-width:44px}
 .mapbar button.grid{display:block;border:0;background:none;padding:0;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left;white-space:nowrap}
 .mapbar .rel{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.wp-icon,.me-icon{background:none;border:0}
-.wp-pin{position:relative;width:18px;height:18px}
-.wp-pin i{display:block;width:18px;height:18px;border-radius:50%;background:var(--od);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--ink)}
-.wp-pin.tgt i{background:var(--blaze)}
-.wp-pin b{position:absolute;left:22px;top:-1px;white-space:nowrap;font-size:13px;font-weight:700;color:var(--ink);
-  text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface)}
+/* v7.8 units */
+#mapScale{align-self:flex-start;pointer-events:none;display:flex;flex-direction:column;gap:2px;
+  padding:3px 8px 5px;border-radius:6px;background:color-mix(in srgb,var(--surface) 88%,transparent);border:1px solid var(--line);color:var(--ink)}
+#mapScale[hidden]{display:none}
+.mapgps{margin:0 60px 0 0;padding:10px 12px;border-radius:8px;background:var(--surface);border:1px solid var(--blaze);color:var(--ink);font-size:14px;line-height:1.35}
+.mapgps[hidden]{display:none}
+#mapScale .lab{font-size:12px;font-weight:600;line-height:1.2}
+#mapScale .line{display:block;box-sizing:border-box;height:6px;border:2px solid var(--ink);border-top:0}
+/* /v7.8 units */
+.me-icon{background:none;border:0}
 .me{position:relative;width:64px;height:64px}
 .me .cone{position:absolute;inset:0;width:64px;height:64px;transform-origin:50% 50%}
 .me .cone path{fill:var(--me);opacity:.28}
+:root[data-theme="night"] .me .cone path{opacity:.55;stroke:#000;stroke-width:1.5}
 .me .dot{position:absolute;left:23px;top:23px;width:18px;height:18px;border-radius:50%;background:var(--me);border:3px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
 :root[data-theme="night"] .me .dot{border-color:#000}
 path.acc{fill:var(--me);fill-opacity:.1;stroke:var(--me);stroke-opacity:.4;stroke-width:1}
-path.trk{stroke:var(--me);stroke-width:4;stroke-opacity:.85;fill:none;stroke-linecap:round;stroke-linejoin:round}
-path.tgt-line{stroke:var(--blaze);stroke-width:3;stroke-dasharray:8 8;fill:none}
+/* Lines are told apart by pattern as well as colour (in the red night theme the colour is the same): a route is solid, the
+   track dotted, the navigate line long dashes and thicker, a ring thin, an area filled. */
+path.trk{stroke:var(--me);stroke-width:5;stroke-opacity:.9;stroke-dasharray:0 9;fill:none;stroke-linecap:round;stroke-linejoin:round}
+path.tgt-line{stroke:var(--blaze);stroke-width:5;stroke-dasharray:16 9;fill:none}
 path.area-rect{stroke:var(--od);stroke-width:2;stroke-dasharray:4 6;fill:var(--od);fill-opacity:.05}
+
+/* v7.8 markers */
+.mk-icon{background:none;border:0}
+.mk-pin{position:relative;width:30px;height:30px}
+.mk-pin i{display:grid;place-items:center;width:30px;height:30px;color:var(--ink)}
+.mk-pin i svg{width:26px;height:26px;overflow:visible}
+.mk-pin:not([data-kind="friend"]):not([data-kind="hostile"]):not([data-kind="neutral"]):not([data-kind="unknown"]) i{
+  border-radius:50%;background:var(--surface);border:1.5px solid var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.mk-pin:not([data-kind="friend"]):not([data-kind="hostile"]):not([data-kind="neutral"]):not([data-kind="unknown"]) i svg{width:20px;height:20px}
+.mk-pin.tgt i{outline:3px solid var(--blaze);outline-offset:2px;border-radius:50%}
+.mk-pin b{position:absolute;left:31px;top:4px;max-width:112px;padding:0 3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:700;color:var(--ink);
+  text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface)}
+.mk-pin.stale b{font-weight:600;color:var(--muted)}
+/* Red-light night theme: blue, green and yellow light would spoil night vision, so the frames turn red too and the
+   shape alone tells them apart. */
+/* A stale sighting (over 24 h) differs by shape in every theme: its outline is dashed and it has no fill; a fresh one is a
+   solid outline, filled. At night the fresh fill is bright red under a black outline, well lighter than the dimmed map. */
+.af.stale{stroke-dasharray:3.2 2.4}
+:root[data-theme="night"] .af{stroke:var(--ink)}
+:root[data-theme="night"] .af:not(.stale){fill:color-mix(in srgb,var(--ink) 85%,#fff);stroke:#000}
+:root[data-theme="night"] .afh{stroke:#000}
+dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding-bottom:0}
+#mkForm{display:flex;flex-direction:column;min-height:0;flex:1}
+.mk-body{overflow-y:auto;overflow-x:hidden;min-height:0;flex:1;overscroll-behavior:contain}
+.mk-act{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px 0 calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--paper)}
+.mk-act .btn{min-height:48px;white-space:normal;padding-inline:8px}
+.mk-act .btn[hidden]{display:none}
+.mk-act:has(#mkDel[hidden]){grid-template-columns:repeat(3,minmax(0,1fr))}
+#dlgList .mk-act{grid-template-columns:1fr}
+.mk-kinds{margin:12px 0;padding:0;border:0;min-width:0}
+.mk-kinds legend{padding:0;margin:0 0 6px;font-size:14px;color:var(--muted)}
+.mk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.mk-sub{margin:10px 0 6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mk-kind{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;min-height:60px;min-width:44px;padding:6px 2px;
+  border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:12px;line-height:1.15;text-align:center;cursor:pointer}
+.mk-kind svg{width:24px;height:24px;flex:none}
+.mk-kind span{overflow-wrap:break-word;hyphens:auto;max-width:100%}
+.mk-kind[aria-pressed="true"]{border:2px solid var(--c);background:color-mix(in srgb,var(--c) 16%,var(--surface));font-weight:700}
+.mk-gridline{display:block;border:0;background:none;padding:8px 0 0;min-height:44px;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left}
+.mk-rel{margin:0;font-size:14px;color:var(--muted)}
+.mk-count{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
+.mk-sheet h2:focus{outline:none}
+.mk-chips{display:flex;gap:6px;margin:0 -16px 8px;padding:0 16px 4px;overflow-x:auto;scrollbar-width:none}
+.mk-chips::-webkit-scrollbar{display:none}
+.mk-chips button{flex:none;white-space:nowrap;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:14px;cursor:pointer}
+.mk-chips button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on-accent);font-weight:600}
+.mk-list{list-style:none;margin:0;padding:0}
+.mk-list li{border-top:1px solid var(--line)}
+.mk-list li button{display:flex;gap:12px;align-items:flex-start;width:100%;min-height:56px;padding:10px 0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer}
+.mk-list .mk-ic{flex:none;display:grid;place-items:center;width:28px;height:28px;margin-top:2px}
+.mk-list .mk-ic svg{width:26px;height:26px}
+.mk-list .mk-name{font-weight:600;overflow-wrap:anywhere}
+.mk-list li.tgt .mk-name::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--blaze);margin-right:6px}
+.mk-tag{font-size:13px;color:var(--blaze);font-weight:600}
+.mk-list .mk-empty{padding:16px 0;color:var(--muted)}
+/* /v7.8 markers */
+/* v7.8 tools */
+body.maptool #tacSeg{display:none}
+.mapbottom{position:absolute;left:12px;right:12px;bottom:22px;z-index:1000;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.mapbottom>*{pointer-events:auto}
+.mapbottom>#mapScale{pointer-events:none}
+.maptag button.rec{min-height:44px;padding:0 14px;border-radius:999px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+  background:var(--blaze);color:var(--on-accent);border:1px solid var(--blaze)}
+.maptag button.rec[hidden]{display:none}
+#toolBar{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px}
+#toolBar[hidden]{display:none}
+#tbRead{margin:0 4px 6px;font-size:14px;font-weight:600;line-height:1.3;color:var(--ink);font-variant-numeric:tabular-nums}
+.tb-btns{display:flex;gap:6px}
+.tb-btns .btn{flex:1 1 0;min-width:44px;min-height:48px;padding:4px 6px;font-size:15px;line-height:1.15;white-space:normal;overflow-wrap:anywhere}
+.tb-btns .btn[hidden]{display:none}
+.tb-btns #tbAdd,.tb-btns #tbPlace{flex:1.7 1 0;font-weight:700}
+.tl-list{list-style:none;margin:0;padding:0}
+.tl-list li{border-top:1px solid var(--line)}
+.tl-list button{display:flex;gap:12px;align-items:center;width:100%;min-height:56px;padding:8px 0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;font-size:17px;font-weight:600}
+.tl-list button svg{flex:none;width:24px;height:24px}
+.tl-list .hint{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:2px}
+#dlgMarker .mk-act{grid-template-columns:repeat(3,minmax(0,1fr))}
+#dlgShape .mk-act .btn[hidden]{display:none}
+#shType{margin-top:-6px}
+#shName{overflow-wrap:anywhere}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+#shInfo{margin:8px 0;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+.sh-legs{list-style:none;margin:0;padding:0;font-variant-numeric:tabular-nums}
+.sh-legs li{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.sh-legs:empty{display:none}
+.rg-radii{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.rg-radii .f label{display:block}
+.rg-msg{margin:8px 0 0;min-height:1.3em;color:var(--blaze);font-weight:600}
+.rg-msg:empty{min-height:0}
+#rgCentre{width:100%;min-height:48px}
+/* Drawn shapes and the tool's draft. Lines carry a wider invisible twin (.shp-hit) so a fingertip finds them. */
+path.shp-route,path.tool-done{stroke:var(--od);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+path.shp-route.tgt{stroke:var(--blaze);stroke-width:5}
+path.shp-area{stroke:var(--od);stroke-width:3;stroke-linejoin:round;fill:var(--od);fill-opacity:.12}
+path.shp-ring{stroke:var(--od);stroke-width:2.5;fill:none}
+path.shp-ring.outer{fill:var(--od);fill-opacity:.04}
+path.shp-hit{stroke:#000;stroke-opacity:0;stroke-width:28;fill:none;stroke-linecap:round;stroke-linejoin:round}
+path.shp-start{stroke:var(--surface);stroke-width:2;fill:var(--od);fill-opacity:1}
+path.tool-band,path.tool-close{stroke:var(--blaze);stroke-width:3;stroke-dasharray:8 7;fill:none}
+path.tool-dot{stroke:var(--surface);stroke-width:2;fill:var(--blaze);fill-opacity:1}
+path.tool-done{stroke:var(--blaze)}
+path.tool-move{stroke:var(--blaze);stroke-width:2;stroke-dasharray:4 5;fill:none}
+.shp-lab-icon{background:none;border:0}
+.shp-lab,.shp-rlab{position:absolute;left:0;top:0;transform:translate(-50%,-50%);white-space:nowrap;font-size:13px;font-weight:700;color:var(--ink);
+  text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface);pointer-events:none}
+/* The name label is a tap target: 44 px tall, the text centred in it. */
+.shp-lab{display:block;max-width:120px;min-width:44px;line-height:44px;padding:0 4px;text-align:center;overflow:hidden;text-overflow:ellipsis;pointer-events:auto;cursor:pointer}
+path.shp-area,path.shp-ring{pointer-events:none}
+.shp-lab:not(.shp-text){color:transparent;text-shadow:none}
+.shp-text{pointer-events:none !important}
+.shp-rlab{font-size:12px;font-weight:600;transform:translate(-50%,-100%)}
+.mk-list .sh-ic{color:var(--od)}
+/* /v7.8 tools */
+/* v7.8 io */
+.io-seg{margin-bottom:8px}
+.io-seg button[aria-pressed="true"]{background:var(--c);color:var(--on-accent);font-weight:600}
+.io-fmt{margin:0 0 8px}
+.io-parts{border:0;margin:0 0 8px;padding:0}
+.io-parts .opt{align-items:center;min-height:48px;padding:6px 0;font-size:17px}
+.io-parts .opt input{margin-top:0}
+.io-parts .opt:has(input:disabled){color:var(--muted);cursor:default}
+.io-file{margin:-4px 0 8px;color:var(--muted);font-size:14px;overflow-wrap:anywhere}
+.io-found{margin:0 0 8px;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+.io-notes{list-style:none;margin:0 0 8px;padding:0}
+.io-notes li{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.io-notes:empty{display:none}
+/* /v7.8 io */
+/* v7.8 nav */
+#navPanel{padding:4px 0 16px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+#navPanel[hidden],#navPanel [hidden],#navStrip[hidden],#navStrip [hidden],.nv-back[hidden],#trkBackRow[hidden]{display:none}
+.nv-name{margin:0 0 8px;font-size:26px;line-height:1.2;font-weight:700;overflow-wrap:anywhere}
+.nv-step{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;margin-bottom:8px}
+.nv-step span{text-align:center;font-size:18px;font-weight:600}
+.nv-step .btn{min-width:48px}
+.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.nv-wait{margin:8px 0;font-size:20px;color:var(--muted)}
+.nv-main{display:flex;align-items:center;gap:16px}
+#nvArrow{flex:none;width:112px;height:112px;display:block}
+#nvArrowG{transform-origin:50px 50px;transition:transform .2s ease-out}
+@media (prefers-reduced-motion:reduce){#nvArrowG{transition:none}}
+.nv-read{min-width:0;flex:1}
+.nv-dist{font-size:48px;line-height:1.05;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em;white-space:nowrap}
+.nv-brg{font-size:20px;font-weight:600;margin-top:2px}
+.nv-arr{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:999px;background:var(--c);color:var(--on-accent);font-size:18px;font-weight:700}
+.nv-age{margin-top:4px;font-size:15px;font-weight:600;color:var(--blaze)}
+.nv-turn{margin:12px 0 0;font-size:24px;font-weight:700}
+.nv-line{margin:6px 0 0;font-size:17px}
+#nvNoCompass{color:var(--muted)}
+.nv-act{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.nv-back{margin:0 0 12px}
+.maptag{left:62px;right:66px;pointer-events:none}
+.maptag>*{pointer-events:auto}
+#navStrip{align-self:stretch;display:flex;flex-wrap:wrap;align-items:center;column-gap:8px;max-width:100%;min-height:44px;padding:4px 10px;border-radius:8px;
+  background:var(--surface);border:2px solid var(--blaze);color:var(--ink);font:inherit;font-size:15px;cursor:pointer;text-align:left}
+#navStrip span{padding:0;border:0;border-radius:0;background:none;font-size:inherit;color:inherit}
+#nsStep{flex:none;font-weight:700}
+#nsName{min-width:min(3em,100%);flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+#nsRest{flex:none;display:flex;gap:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+#navStrip #nsWait,#navStrip #nsRest.old span{color:var(--muted)}
+#navStrip #nsRest.old{font-weight:400}
+body.maptool #navStrip,body.maptool #nsAway{display:none}
+#nsAway[hidden],#nsAway [hidden],#nvAway[hidden]{display:none}
+.ns-away{align-self:stretch;padding:8px 10px;border-radius:8px;background:var(--surface);border:2px solid var(--blaze);color:var(--ink)}
+.ns-away p{margin:0 0 6px;font-size:14px;font-weight:700}
+.ns-away-btns{display:flex;gap:6px}
+.ns-away-btns .btn{flex:1;min-height:44px}
+.nv-away{font-size:17px;font-weight:700;color:var(--blaze)}
+/* /v7.8 nav */
+/* v7.8 iphone */
+.compass-ask{margin-top:12px}
+.compass-ask .btn{min-height:48px}
+.compass-blocked{margin:8px 0 0;font-size:16px;line-height:1.4;color:var(--ink)}
+/* /v7.8 iphone */
+/* v7.8 restyle */
+/* Ballistics sections look like the Survival home and the Position screen: the headings reuse .sv-cat (small muted capitals),
+   and each section carries the 32 px above it, with the card borders and padding gone, as Position did. Nothing moves. */
+#view-ballistics .block{margin-top:32px;padding:0;border-top:0}
+/* At a larger text size the grid under the crosshair wraps at its spaces instead of running out of its box. */
+.mapbar button.grid{white-space:normal}
+/* /v7.8 restyle */
 
 /* Dialogs */
 dialog{border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);padding:20px 16px;
@@ -417,6 +622,11 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--paper);c
 dialog::backdrop{background:rgba(0,0,0,.55)}
 dialog h2{margin-bottom:12px}
 dialog .row{flex-wrap:wrap}
+/* Bottom sheets: a dialog pinned to the bottom edge, sized for a thumb */
+dialog.sheet{margin:auto auto 0;width:min(560px,100vw);max-width:100vw;border-radius:16px 16px 0 0;border-bottom:0;
+  padding:20px 16px calc(16px + env(safe-area-inset-bottom))}
+dialog.sheet .row .btn{flex:1 1 140px}
+.btn.danger{background:var(--blaze);border-color:var(--blaze);color:var(--on-accent)}
 .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
 .opt input{width:22px;min-height:22px;height:22px;margin-top:2px;accent-color:var(--c)}
 progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
@@ -576,8 +786,12 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <div class="mapwrap" id="mapWrap">
       <div id="map" aria-label="Map"></div>
       <div class="cross" aria-hidden="true"></div>
-      <div class="maptag"><span id="mLayerName">USGS Topo</span><span class="rec" id="recChip" hidden>Recording</span></div>
-      <div class="mapnote" id="mapNote" role="status" hidden><p id="mapNoteText"></p><button type="button" class="btn small" id="mapNoteLayers">Choose another map</button></div>
+      <div class="maptag"><span id="mLayerName">USGS Topo</span><button type="button" class="rec" id="recChip" hidden aria-label="Recording. Open Track recording.">Recording</button>
+        <!-- v7.8 nav -->
+        <button type="button" id="navStrip" hidden><span id="nsStep" hidden></span><span id="nsName"></span><span id="nsRest"><span id="nsWait" hidden>waiting for a position</span><span id="nsBrg"></span><span id="nsDist"></span></span></button>
+        <div id="nsAway" class="ns-away" role="status" hidden><p id="nsAwayText"></p><div class="ns-away-btns"><button type="button" class="btn small" id="nsNext">Next point</button><button type="button" class="btn small ghost" id="nsStop">Stop</button></div></div>
+        <!-- /v7.8 nav -->
+      </div>
       <div class="mapctl">
         <button id="mLayers" aria-label="Map layers" title="Map layers">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5z"/><path d="m2 13 10 5 10-5"/></svg>
@@ -585,25 +799,92 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
         <button id="mLocate" aria-label="Follow my position" aria-pressed="false" title="Follow my position">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
         </button>
-        <button id="mTrack" aria-label="Track recording" aria-pressed="false" title="Track recording">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19c3 0 3-6 7-6s3 4 6 4"/><circle cx="19" cy="6" r="3"/><circle cx="4" cy="19" r="1.5" fill="currentColor"/></svg>
+        <!-- v7.8 tools -->
+        <button id="mTools" aria-label="Tools" title="Tools">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21 21 3"/><path d="M6 18l2 2M9 15l2 2M12 12l2 2M15 9l2 2M18 6l2 2"/></svg>
         </button>
-        <button id="mSave" aria-label="Save map for offline" title="Save map for offline">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 20h16"/></svg>
+        <!-- /v7.8 tools -->
+        <!-- v7.8 markers -->
+        <button id="mList" aria-label="Markers and shapes" title="Markers and shapes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h12M9 12h12M9 18h12"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg>
         </button>
+        <!-- /v7.8 markers -->
       </div>
-      <div class="mapbar">
-        <div class="c">
-          <button class="grid" id="mCenter" translate="no" aria-label="Grid at crosshair. Tap to copy.">—</button>
-          <span class="rel" id="mCenterRel">Grid at the crosshair</span>
+      <div class="mapbottom">
+        <!-- v7.8 units -->
+        <div id="mapScale" aria-hidden="true"><span class="lab"></span><span class="line"></span></div>
+        <div class="mapnote" id="mapNote" role="status" hidden><p id="mapNoteText"></p><button type="button" class="btn small" id="mapNoteLayers">Other map</button></div>
+        <p id="mapGps" class="mapgps" role="status" hidden></p>
+        <!-- /v7.8 units -->
+        <!-- v7.8 tools -->
+        <div id="toolBar" hidden>
+          <p id="tbRead" aria-hidden="true"></p><p id="tbLive" class="vh" aria-live="polite"></p>
+          <div class="tb-btns">
+            <button type="button" class="btn" id="tbAdd">Add point</button>
+            <button type="button" class="btn" id="tbPlace">Place</button>
+            <button type="button" class="btn ghost" id="tbUndo">Undo</button>
+            <button type="button" class="btn ghost" id="tbClear">Clear</button>
+            <button type="button" class="btn ghost" id="tbSaveRoute">Save as route</button>
+            <button type="button" class="btn ghost" id="tbDone">Done</button>
+            <button type="button" class="btn ghost" id="tbCancel">Cancel</button>
+          </div>
         </div>
-        <button class="btn small" id="mMark">Mark</button>
+        <!-- /v7.8 tools -->
+        <div class="mapbar">
+          <div class="c">
+            <button class="grid" id="mCenter" translate="no" aria-label="Grid at crosshair. Tap to copy.">—</button>
+            <span class="rel" id="mCenterRel">Grid at the crosshair</span>
+          </div>
+          <button class="btn small" id="mMark">Mark</button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Position -->
   <div id="view-position" hidden>
+    <!-- v7.8 nav -->
+    <section id="navPanel" aria-label="Navigation" hidden>
+      <h2 class="nv-name" id="nvName"></h2>
+      <div class="nv-step" id="nvStep" hidden>
+        <button type="button" class="btn ghost" id="nvPrev">Previous</button>
+        <span id="nvStepText"></span>
+        <button type="button" class="btn ghost" id="nvNext">Next</button>
+      </div>
+      <p class="nv-wait" id="nvWait" hidden>Waiting for a position</p>
+      <div class="nv-main">
+        <svg id="nvArrow" viewBox="0 0 100 100" aria-hidden="true" hidden>
+          <circle cx="50" cy="50" r="47" fill="none" stroke="var(--line)" stroke-width="3"/>
+          <path d="M50 0 L50 9" stroke="var(--muted)" stroke-width="4"/>
+          <g id="nvArrowG"><path d="M50 6 L74 42 L58 50 L58 84 L42 84 L42 50 L26 42 Z" fill="var(--ink)" stroke="var(--paper)" stroke-width="2.5" stroke-linejoin="round"/></g>
+        </svg>
+        <div class="nv-read">
+          <div class="nv-dist" id="nvDist" aria-hidden="true" hidden></div>
+          <div class="nv-brg" id="nvBrg" aria-hidden="true" hidden></div>
+          <div class="nv-arr" id="nvArrived" hidden>Arrived</div>
+          <div class="nv-away" id="nvAway" hidden></div>
+          <div class="nv-age" id="nvAge" hidden></div>
+        </div>
+      </div>
+      <p class="nv-turn" id="nvTurn" aria-hidden="true" hidden></p>
+      <p class="nv-line" id="nvNoCompass" hidden>No compass: bearing shown as a number</p>
+      <!-- v7.8 iphone -->
+      <div class="compass-ask" id="nvAskWrap" hidden>
+        <button type="button" class="btn ghost full compass-ask-btn" id="nvCompassAsk">Turn on compass</button>
+        <p class="compass-blocked" id="nvCompassBlocked" hidden>The compass is blocked. Allow motion and orientation access for this site in your browser or phone settings, then reload.</p>
+      </div>
+      <!-- /v7.8 iphone -->
+      <p class="nv-line" id="nvTime" hidden></p>
+      <p class="nv-line" id="nvEnd" hidden></p>
+      <p class="vh" id="nvLive" aria-live="polite"></p>
+      <div class="nv-act" id="nvAct"><button type="button" class="btn ghost" id="nvStop">Stop</button></div>
+    </section>
+    <div class="nv-back" id="nvBackWrap" hidden><button type="button" class="btn ghost full" id="nvBack">Back to start</button></div>
+    <!-- /v7.8 nav -->
+    <!-- v7.8 position -->
+    <section class="pos-sec" id="posSecPos" aria-labelledby="posHPos">
+    <h2 class="sv-cat" id="posHPos">Position</h2>
+    <!-- /v7.8 position -->
     <div class="readout">
       <div class="status" id="gpsStatus">Starting GPS…</div>
       <button class="mgrs empty" id="mgrs" translate="no" aria-label="MGRS coordinate. Tap to copy.">No fix yet</button>
@@ -613,8 +894,15 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
         <div class="stat"><b id="sAcc">—</b><span>Accuracy</span></div>
         <div class="stat"><b id="sSpd">—</b><span>Speed</span></div>
       </div>
+      <!-- v7.8 position -->
+      <button type="button" class="btn ghost full" id="shareBtn">Share position</button>
+      <!-- /v7.8 position -->
     </div>
-
+    <!-- v7.8 position -->
+    </section>
+    <section class="pos-sec" aria-labelledby="posHCompass">
+    <h2 class="sv-cat" id="posHCompass">Compass</h2>
+    <!-- /v7.8 position -->
     <div class="block">
       <div class="compass-wrap">
         <div class="compass">
@@ -629,28 +917,45 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
         <div class="hdg">
           <b id="hdg">—</b>
           <div class="ref" id="hdgRef">Hold the phone flat</div>
-          <div class="tgt" id="tgtInfo" hidden></div>
         </div>
       </div>
-      <div class="grid2" style="margin-top:12px">
-        <label class="f">Declination (°, east +)
+      <!-- v7.8 iphone -->
+      <div class="compass-ask" id="compassAskWrap" hidden>
+        <button type="button" class="btn full compass-ask-btn" id="compassAsk">Turn on compass</button>
+        <p class="compass-blocked" id="compassBlocked" hidden>The compass is blocked. Allow motion and orientation access for this site in your browser or phone settings, then reload.</p>
+      </div>
+      <!-- /v7.8 iphone -->
+      <!-- v7.8 position -->
+      <div class="decl-box">
+        <div class="seg small" id="declSeg" role="group" aria-label="Declination">
+          <button type="button" data-decl="auto" aria-pressed="true">Auto</button>
+          <button type="button" data-decl="manual" aria-pressed="false">By hand</button>
+        </div>
+        <p class="decl-line" id="declLine" aria-live="polite"></p>
+        <label class="f" id="declField" hidden>Declination (°, east +)
           <input id="decl" type="number" inputmode="decimal" step="0.1" placeholder="0">
         </label>
-        <label class="f">Screen
-          <button class="btn ghost" id="wakeBtn" aria-pressed="false">Keep screen on</button>
-        </label>
       </div>
-      <p class="hint" style="margin-top:8px">The compass reads magnetic north. Enter your local declination to get true bearings that line up with waypoints. Calibrate by moving the phone in a figure-8.</p>
+      <div class="wake-row"><button class="btn ghost full" id="wakeBtn" aria-pressed="false">Keep screen on</button></div>
+      <p class="hint" style="margin-top:8px">The compass reads magnetic north. Auto adds the declination for your position and By hand adds the number you type, so headings are true and line up with markers. Calibrate by moving the phone in a figure-8.</p>
+      <!-- /v7.8 position -->
     </div>
+    <!-- v7.8 position -->
+    </section>
+    <!-- /v7.8 position -->
 
-    <div class="block" id="blkWaypoints">
-      <h2>Waypoints</h2>
-      <div class="row"><input id="wpName" placeholder="Name (optional)…" aria-label="Waypoint name" autocomplete="off"><button class="btn" id="wpMark">Mark here</button></div>
+    <!-- v7.8 markers -->
+    <div class="block pos-sec" id="blkWaypoints">
+      <h2 class="sv-cat">Markers</h2>
+      <div class="row"><input id="wpName" placeholder="Name (optional)…" aria-label="Marker name" autocomplete="off"><button class="btn" id="wpMark">Mark here</button></div>
       <div class="row"><input id="wpCoord" placeholder="Grid or lat/long to add…" aria-label="Grid or coordinates to add" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="btn ghost" id="wpAdd">Add</button></div>
       <p class="hint" id="wpMsg" style="margin-top:8px"></p>
-      <ul class="wps" id="wpList"></ul>
-      <button class="btn ghost full" id="wpExport" style="margin-top:12px">Export KML for ATAK</button>
+      <div class="mk-count"><span id="wpCount">No markers yet</span><button class="btn ghost" id="wpOpenList">Open the list</button></div>
+      <!-- v7.8 io -->
+      <button class="btn ghost full" id="posExport" style="margin-top:12px">Export…</button>
+      <!-- /v7.8 io -->
     </div>
+    <!-- /v7.8 markers -->
   </div>
 
   <!-- Ballistics -->
@@ -666,7 +971,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     </div>
 
     <div class="block">
-      <h2>Shot</h2>
+      <h2 class="sv-cat">Shot</h2>
       <div class="grid2">
         <label class="f">Target range (yd)<input id="bRange" type="number" inputmode="decimal" value="500"></label>
         <label class="f">Incline (°)<input id="bAngle" type="number" inputmode="decimal" value="0" placeholder="+ up, − down"></label>
@@ -683,7 +988,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     </div>
 
     <div class="block">
-      <h2>Rifle and load</h2>
+      <h2 class="sv-cat">Rifle and load</h2>
       <label class="f wide">Profile
         <select id="bProfile"></select>
       </label>
@@ -702,7 +1007,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     </div>
 
     <div class="block">
-      <h2>Conditions</h2>
+      <h2 class="sv-cat">Conditions</h2>
       <div class="grid2">
         <label class="f">Temperature (°F)<input id="bTemp" type="number" inputmode="decimal" value="59"></label>
         <label class="f">Altitude (ft)<input id="bAlt" type="number" inputmode="decimal" value="0"></label>
@@ -713,7 +1018,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     </div>
 
     <div class="block">
-      <h2>Dope card</h2>
+      <h2 class="sv-cat">Dope card</h2>
       <div class="grid2">
         <label class="f">Out to (yd)<input id="bMax" type="number" inputmode="decimal" value="1000"></label>
         <label class="f">Every (yd)
@@ -755,6 +1060,150 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   </button>
 </nav>
 
+<dialog id="dlgAsk" class="sheet" aria-labelledby="askTitle">
+  <form id="askForm" autocomplete="off">
+    <h2 id="askTitle"></h2>
+    <label class="f"><span id="askLabel"></span><input id="askInput" type="text" enterkeyhint="done"></label>
+    <div class="row"><button type="button" class="btn ghost" id="askCancel" data-act="cancel">Cancel</button><button type="submit" class="btn" id="askOk" data-act="ok">Save</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlgTrkOld" class="sheet" aria-labelledby="toTitle">
+  <h2 id="toTitle">Continue the old track?</h2>
+  <p id="toText"></p>
+  <div class="row"><button type="button" class="btn full" id="toContinue">Continue the old track</button></div>
+  <div class="row"><button type="button" class="btn ghost full" id="toNew">Start a new track (the old one is cleared)</button></div>
+  <div class="row"><button type="button" class="btn ghost full" id="toCancel" autofocus>Cancel</button></div>
+</dialog>
+
+<dialog id="dlgConfirm" class="sheet" aria-labelledby="cfTitle">
+  <h2 id="cfTitle"></h2>
+  <p id="cfText" hidden></p>
+  <div class="row"><button type="button" class="btn ghost" id="cfCancel" data-act="cancel" autofocus>Cancel</button><button type="button" class="btn" id="cfOk" data-act="ok"></button></div>
+</dialog>
+
+<!-- v7.8 markers -->
+<dialog id="dlgMarker" class="sheet mk-sheet" aria-labelledby="mkTitle">
+  <form id="mkForm" autocomplete="off">
+    <div class="mk-body">
+      <h2 id="mkTitle" tabindex="-1">Marker</h2>
+      <label class="f">Name<input id="mkName" type="text" maxlength="60" enterkeyhint="done"></label>
+      <fieldset class="mk-kinds">
+        <legend>Kind</legend>
+        <div class="mk-grid" id="mkPlaces"></div>
+        <p class="mk-sub">Affiliation</p>
+        <div class="mk-grid" id="mkAffil"></div>
+      </fieldset>
+      <label class="f">Note<textarea id="mkNote" maxlength="500" rows="2"></textarea></label>
+      <p class="hint" id="mkLeft" hidden></p>
+      <button type="button" class="mk-gridline" id="mkGrid" translate="no" aria-describedby="mkGridHint"></button><span class="vh" id="mkGridHint">Tap to copy the grid.</span>
+      <p class="mk-rel" id="mkRel" hidden></p>
+      <p class="mk-rel" id="mkAge" hidden></p>
+    </div>
+    <div class="mk-act">
+      <button type="submit" class="btn" id="mkSave">Save</button>
+      <button type="button" class="btn ghost" id="mkGo">Go to</button>
+      <button type="button" class="btn ghost" id="mkMove">Move</button>
+      <button type="button" class="btn ghost" id="mkDel">Delete</button>
+      <button type="button" class="btn ghost" id="mkCancel">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgList" class="sheet mk-sheet" aria-labelledby="lsTitle">
+  <div class="mk-body">
+    <h2 id="lsTitle" tabindex="-1">Markers and shapes</h2>
+    <div class="mk-chips" id="lsChips" role="group" aria-label="Show kind"></div>
+    <ul class="mk-list" id="lsList"></ul>
+  </div>
+  <div class="mk-act"><button type="button" class="btn ghost" id="lsClose">Close</button></div>
+</dialog>
+<!-- /v7.8 markers -->
+
+<!-- v7.8 tools -->
+<dialog id="dlgTools" class="sheet mk-sheet" aria-labelledby="tlTitle">
+  <div class="mk-body">
+    <h2 id="tlTitle" tabindex="-1">Tools</h2>
+    <ul class="tl-list" id="tlList"></ul>
+  </div>
+  <div class="mk-act"><button type="button" class="btn ghost" id="tlClose">Close</button></div>
+</dialog>
+
+<dialog id="dlgShape" class="sheet mk-sheet" aria-labelledby="shName">
+  <div class="mk-body">
+    <h2 id="shName" tabindex="-1"></h2>
+    <p class="mk-rel" id="shType"></p>
+    <p id="shInfo"></p>
+    <ul class="sh-legs" id="shLegs" aria-label="Legs"></ul>
+  </div>
+  <div class="mk-act">
+    <button type="button" class="btn" id="shWalk">Walk this route</button>
+    <button type="button" class="btn ghost" id="shRename">Rename</button>
+    <button type="button" class="btn ghost" id="shDelete">Delete</button>
+    <button type="button" class="btn ghost" id="shClose">Close</button>
+  </div>
+</dialog>
+
+<dialog id="dlgRing" class="sheet" aria-labelledby="rgTitle">
+  <form id="rgForm" autocomplete="off" novalidate>
+    <h2 id="rgTitle" tabindex="-1">Range ring</h2>
+    <label class="f">Centre<select id="rgCentre"></select></label>
+    <div class="rg-radii">
+      <div class="f"><label for="rgR1">Radius 1 (<span class="rg-u">m</span>)</label><input id="rgR1" type="number" inputmode="decimal" min="0" step="any"></div>
+      <div class="f"><label for="rgR2">Radius 2 (<span class="rg-u">m</span>)</label><input id="rgR2" type="number" inputmode="decimal" min="0" step="any"></div>
+      <div class="f"><label for="rgR3">Radius 3 (<span class="rg-u">m</span>)</label><input id="rgR3" type="number" inputmode="decimal" min="0" step="any"></div>
+    </div>
+    <p class="hint" id="rgHint">Up to three rings around one centre. Leave a field empty to skip it.</p>
+    <p class="rg-msg" id="rgMsg" role="alert"></p>
+    <div class="row"><button type="button" class="btn ghost" id="rgCancel">Cancel</button><button type="submit" class="btn" id="rgSave">Save</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlgGoto" class="sheet" aria-labelledby="gtTitle">
+  <form id="gtForm" autocomplete="off" novalidate>
+    <h2 id="gtTitle" tabindex="-1">Go to grid</h2>
+    <label class="f">Grid or coordinates<input id="gtInput" type="text" enterkeyhint="go" autocapitalize="characters" spellcheck="false" placeholder="18T VN 12345 67890"></label>
+    <p class="rg-msg" id="gtMsg" role="alert"></p>
+    <div class="row"><button type="button" class="btn ghost" id="gtCancel">Cancel</button><button type="submit" class="btn" id="gtGo">Go</button></div>
+  </form>
+</dialog>
+<!-- /v7.8 tools -->
+
+<!-- v7.8 io -->
+<dialog id="dlgExport" class="sheet" aria-labelledby="exTitle">
+  <h2 id="exTitle" tabindex="-1">Export</h2>
+  <div class="seg io-seg" id="exFormat" role="group" aria-label="File format">
+    <button type="button" data-fmt="gpx" aria-pressed="true">GPX</button>
+    <button type="button" data-fmt="kml" aria-pressed="false">KML</button>
+  </div>
+  <p class="hint io-fmt" id="exFmtHint"></p>
+  <fieldset class="io-parts">
+    <legend class="vh">Include</legend>
+    <label class="opt"><input type="checkbox" id="exMarkers"><span id="exMarkersL">Markers</span></label>
+    <label class="opt"><input type="checkbox" id="exShapes"><span id="exShapesL">Routes, areas and rings</span></label>
+    <label class="opt"><input type="checkbox" id="exTrack"><span id="exTrackL">Recorded track</span></label>
+  </fieldset>
+  <div class="row"><button type="button" class="btn ghost" id="exCancel">Cancel</button><button type="button" class="btn" id="exSave">Save file</button></div>
+</dialog>
+
+<dialog id="dlgImport" class="sheet" aria-labelledby="imTitle">
+  <h2 id="imTitle" tabindex="-1">Import</h2>
+  <p class="io-file" id="imFile"></p>
+  <p class="io-found" id="imFound"></p>
+  <ul class="io-notes" id="imNotes"></ul>
+  <div class="row"><button type="button" class="btn ghost" id="imCancel">Cancel</button><button type="button" class="btn" id="imAdd">Add to map</button></div>
+</dialog>
+<!-- /v7.8 io -->
+
+<!-- v7.8 position -->
+<dialog id="dlgShare" class="sheet" aria-labelledby="psTitle">
+  <h2 id="psTitle" tabindex="-1">Position as text</h2>
+  <pre class="ps-text" id="psText"></pre>
+  <p class="hint" id="psMsg" role="status"></p>
+  <div class="row"><button type="button" class="btn ghost" id="psClose">Close</button><button type="button" class="btn" id="psCopy">Copy</button></div>
+</dialog>
+<!-- /v7.8 position -->
+
 <dialog id="dlgLayers">
   <h2>Map layers</h2>
   <div id="layerList"></div>
@@ -763,8 +1212,8 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 
 <dialog id="dlgSave">
   <h2>Save map for offline</h2>
-  <p class="hint">Downloads the area on screen for the current map layer. Zoom the map to frame it first.</p>
-  <div class="grid2">
+  <p class="hint">Downloads what the screen shows, for the current map layer. Zoom the map to frame it first.</p>
+  <div class="save-fields">
     <label class="f">Name<input id="saveName" placeholder="e.g. Hunting unit 4…" autocomplete="off"></label>
     <label class="f">Most detail
       <select id="saveZ">
@@ -777,7 +1226,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <progress id="saveProg" hidden></progress>
   <p class="hint" id="saveStatus" aria-live="polite"></p>
   <div class="row"><button class="btn" id="saveGo">Download</button><button class="btn ghost" id="saveClose">Close</button></div>
-  <h3 style="margin-top:20px">Saved areas</h3>
+  <h3 style="margin-top:20px">Saved maps</h3>
   <ul class="arealist" id="areaList"></ul>
   <p class="hint" id="storeUse"></p>
 </dialog>
@@ -786,8 +1235,19 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <h2>Track</h2>
   <p id="trkInfo"></p>
   <div class="row"><button class="btn full" id="trkToggle">Start recording</button></div>
-  <div class="row"><button class="btn ghost" id="trkExport">Export GPX</button><button class="btn ghost" id="trkClear">Clear track</button></div>
-  <p class="hint" style="margin-top:12px">Records only while Field Kit is open, so the screen stays on while recording. The GPX file includes your waypoints and opens in ATAK, Gaia and most mapping apps.</p>
+  <p id="trkMsg" class="rg-msg" role="status"></p>
+  <!-- v7.8 io -->
+  <div class="row"><button class="btn ghost" id="trkExportOpen">Export…</button><button class="btn ghost" id="trkClear">Clear track</button></div>
+  <!-- /v7.8 io -->
+  <!-- v7.8 tools -->
+  <div class="row"><button class="btn ghost full" id="trkRoute">Save as route</button></div>
+  <!-- /v7.8 tools -->
+  <!-- v7.8 nav -->
+  <div class="row" id="trkBackRow" hidden><button class="btn ghost full" id="trkBack">Back to start</button></div>
+  <!-- /v7.8 nav -->
+  <!-- v7.8 io -->
+  <p class="hint" style="margin-top:12px">Records only while Field Kit is open, so the screen stays on while recording.</p>
+  <!-- /v7.8 io -->
   <div class="row"><button class="btn ghost full" id="trkClose">Close</button></div>
 </dialog>
 
@@ -800,10 +1260,18 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 
 <dialog id="dlgMenu">
   <h2>Settings and backup</h2>
-  <p class="hint">Waypoints, tracks, rifle profiles, patient logs and timers live only on this phone. Back them up now and then, and before clearing Chrome’s data.</p>
+  <p class="hint">Markers, tracks, rifle profiles, patient logs and timers live only on this phone. Back them up now and then, and before clearing Chrome’s data.</p>
   <div class="row"><button class="btn" id="bkSave">Back up data</button><label class="btn ghost" for="bkFile" style="display:inline-flex;align-items:center">Restore backup</label></div>
   <input type="file" id="bkFile" accept="application/json,.json" hidden>
   <p class="hint" id="bkMsg" aria-live="polite"></p>
+  <!-- v7.8 units -->
+  <h3 id="unitDistH">Distances</h3>
+  <div class="seg" role="tablist" id="unitDist" aria-labelledby="unitDistH">
+    <button type="button" role="tab" data-unit="metric" aria-selected="true">Metric (m, km)</button>
+    <button type="button" role="tab" data-unit="us" aria-selected="false">US (yd, mi)</button>
+  </div>
+  <p class="hint">Applies to the map, markers and the Position screen. Altitude stays in feet and speed in mph.</p>
+  <!-- /v7.8 units -->
   <div id="bkConfirm" hidden>
     <p id="bkAsk" role="alert"></p>
     <div class="row"><button class="btn ghost" id="bkGo">Restore</button><button class="btn ghost" id="bkNo">Cancel</button></div>

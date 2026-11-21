@@ -14,7 +14,7 @@ IDS = [f'item{i}' for i in range(1, 11)]
 CL = {'id': 'ten-essentials', 'title': 'Ten essentials', 'category': 'basics', 'summary': 'Pack these.',
       'items': [{'id': i, 'text': f'Thing {n}', **({'note': f'Note {n}'} if n % 2 else {})} for n, i in enumerate(IDS, 1)],
       'sources': [{'name': 'Fixture source', 'used': 'everything'}], 'reviewed': '2026-11-10', 'draft': True}
-FULL = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.'
+FULL = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or saved maps.'
 
 
 def boot(page, app_url, hash_=LIST, storage=None, checklists=(CL,)):

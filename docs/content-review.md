@@ -7949,3 +7949,88 @@ in docs/v7.7-rulings.md, "Whole-branch review: fixes".
 - **Text-only changes with no new fact:** the six "Swipe sideways to see the whole table." sentences removed (I6); Wild plants' Do first
   says where the Poisoning link is (M2); Fishing for food's first link block reaches Trapping (M5); Butchering names "Massachusetts deer
   processing workshop, instructor notes" in full at its first mention (M10).
+
+## v7.8 Tactical
+
+### Geodesic reference pairs for the distance and bearing checks (2026-11-20)
+
+`GEO.distance` and `GEO.bearing` (and the new `TGEOM.dest`) treat the Earth as a sphere of radius 6,371,008.8 m. They are checked
+against published ellipsoid answers, so the allowed gap is 0.5% on distance and 0.5° on bearing. No NGS page with worked examples
+opened (the one search turned up pages that hold only code or descriptions), so these are two sources that did open. Both give the
+Vincenty inverse solution, so they are not independent formulas; the fallback in the plan asked for two independent published
+sets, and this is the closest that could be opened in the time allowed.
+
+- Pair 1, a named pair with a worked example. Source: "56.06: Vincenty's Formula, Inverse Problem", LibreTexts Physics, Prince
+  George's Community College, https://phys.libretexts.org/Courses/Prince_Georges_Community_College/General_Physics_I%3A_Classical_Mechanics/56%3A_Geodesy/56.06%3A_Vincentys_Formul-_Inverse_Problem
+  Point 1 (a sounding rocket in Chesapeake Hall) 38.888019, -76.823094; point 2 (apex of the Great Pyramid of Giza) 29.979175,
+  31.134358. Published: distance 9,351,378.858 m, azimuth 55.910048°. This app (sphere): 9,332,054 m (0.21% short), 55.96°.
+- Pairs 2 and 3, numbered test cases (points are not named; the page gives the second longitude only as a difference from the
+  first, so the first is taken as 0). Source: "Geodesics on the Ellipsoid", GeographicLib, https://geographiclib.sourceforge.io/2009-03/geodesic.html
+  (International ellipsoid, a = 6378388 m, f = 1/297).
+  - Case 00: from latitude 37°19'54.95367", to latitude 26°07'42.83946", longitude difference 41°28'35.50729". Published:
+    4,085,966.7026 m, azimuth 95°27'59.63" (95.4666°). This app: 4,079,297 m (0.16% short), 95.55°.
+  - Case 01: from latitude 35°16'11.24862", to latitude 67°22'14.77638", longitude difference 137°47'28.31435". Published:
+    8,084,823.8383 m, azimuth 15°44'23.75" (15.7399°). This app: 8,064,421 m (0.25% short), 15.72°.
+
+The sphere reads 0.16% to 0.25% short on these long lines, inside the 0.5% allowance; on the lines a phone user measures (under
+about 20 km) the gap is smaller. Used in `tests/test_tac_geom.py`.
+
+The 50 km ring check (`test_fifty_km_ring_is_round_to_one_percent`): the ring is drawn on the same sphere as `GEO.distance`, whose
+agreement with the ellipsoid is the 0.5% shown by the reference pairs above, so the 1% bound on a 50 km ring follows from that check.
+
+### Affiliation frames for markers (2026-11-20)
+
+The four affiliation marker kinds use the standard frame shapes and colours. Two pages opened and agree with the design document:
+
+- "NATO Joint Military Symbology", Wikipedia, https://en.wikipedia.org/wiki/NATO_Joint_Military_Symbology. For the land domain:
+  "a blue rectangle frame to denote friendly affiliation", "a red diamond frame to denote hostile affiliation", "a green square
+  frame to denote neutral affiliation", "a yellow quatrefoil frame is used to denote unknown affiliation"; "the same color scheme is
+  used" in the other domains. The fill colour is optional and "provides an enhanced (redundant) presentation of information about
+  the affiliation"; shape and colour are redundant, "allowing the symbology to be used under less-than-ideal conditions such as a
+  monochrome red display to preserve the operator's night vision". It gives no RGB or hex values.
+- "Military Symbology", Astute Systems LDM documentation, https://astute-systems.github.io/ldm/bms/military-symbology. Friend
+  "Blue/Cyan", "Rectangle (land), Oval (air), Semi-circle (sea)"; hostile "Red", "Diamond"; neutral "Green", "Square"; unknown
+  "Yellow", "Quatrefoil (cloverleaf)". Named colours only, no values.
+
+Drawn as: friend #80E0FF rectangle, hostile #FF8080 diamond, neutral #AAFFAA square, unknown #FFFF80 quatrefoil, each outlined in
+#1A1A1A over a white halo so it reads on the light topo map and on dark imagery. The hex values are the builder's choice of the light
+tints MIL-STD-2525 uses for filled frames; neither opened page states values, so they are not confirmed from a source. Shapes are
+confirmed. In the red night theme the frames are drawn in the theme's red (dim red fill, red outline): blue, green and yellow
+light would defeat a theme whose purpose is keeping night vision, and the first source names exactly this case as why shape carries
+the meaning too. An affiliation marker older than 24 hours is drawn as an outline with no fill, in both themes.
+
+### Magnetic declination: World Magnetic Model (2026-11-20)
+
+The Position screen works out magnetic declination from the position with the World Magnetic Model, model **WMM2025**, epoch
+**2025.0**, valid **2025.0 to 2030.0** ("for use from January 1, 2025 to December 31, 2029", as the technical report states it).
+Code: `src/wmm.js`; tests: `tests/test_wmm.py`. Both pages below were opened on 2026-11-20.
+
+- Coefficients (degree and order 12; n, m, g, h, g-dot, h-dot; 90 rows): Table 2 of "The US/UK World Magnetic Model for
+  2025-2030: Technical Report" (NOAA NCEI and British Geological Survey, 2025),
+  https://s3.us-east-1.amazonaws.com/library.oarcloud.noaa.gov/noaa_documents.lib/NESDIS/NCEI/WWM_Report_2025.pdf
+  The report's coefficient table was read in full (all 90 rows). The plain-text WMM.COF file itself was not opened: NCEI's
+  pages that a search returned link to it only inside zip downloads. The test values below are what prove the table right.
+- Test values: "Test Values for WMM2025" (NOAA NCEI),
+  https://www.ncei.noaa.gov/sites/default/files/2025-02/WMM2025testvalues.pdf
+  All 12 rows of the main table are used. Declination D as NOAA prints it (two decimals) and as this app computes it:
+
+  | Date | Height km | Lat | Lon | NOAA D | This app |
+  |---|---|---|---|---|---|
+  | 2025.0 | 0 | 80 | 0 | 1.28 | 1.2815 |
+  | 2025.0 | 0 | 0 | 120 | -0.16 | -0.1583 |
+  | 2025.0 | 0 | -80 | 240 | 68.78 | 68.7754 |
+  | 2025.0 | 100 | 80 | 0 | 0.85 | 0.8520 |
+  | 2025.0 | 100 | 0 | 120 | -0.15 | -0.1463 |
+  | 2025.0 | 100 | -80 | 240 | 68.21 | 68.2137 |
+  | 2027.5 | 0 | 80 | 0 | 2.59 | 2.5941 |
+  | 2027.5 | 0 | 0 | 120 | -0.24 | -0.2415 |
+  | 2027.5 | 0 | -80 | 240 | 68.49 | 68.4861 |
+  | 2027.5 | 100 | 80 | 0 | 2.16 | 2.1605 |
+  | 2027.5 | 100 | 0 | 120 | -0.23 | -0.2259 |
+  | 2027.5 | 100 | -80 | 240 | 67.93 | 67.9316 |
+
+  Every row rounds to NOAA's printed value (largest gap 0.0046°). The tests allow 0.01°.
+
+Other pages opened in the search and not used for numbers: NCEI's WMMHR2025 product page (https://www.ncei.noaa.gov/node/7156),
+the "WMM Update" notice (https://ncei.noaa.gov/node/6716) and the release news item (https://www.ncei.noaa.gov/node/7266); none
+holds the coefficient table.

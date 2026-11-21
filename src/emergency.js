@@ -10,7 +10,7 @@
   const SECTION_KINDS = { emergency: 'ptsracu', survival: 'scu' };   // which key kinds each home lists
   const forSection = (list, section) => Object.hasOwn(SECTION_KINDS, section) ? list.filter(k => SECTION_KINDS[section].includes(k[0])) : [];
   FK.keyPattern = KEY;
-  const PIN_FULL = 'Couldn’t change the pin: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.';
+  const PIN_FULL = 'Couldn’t change the pin: phone storage for Field Kit is full. Back up, then delete old tracks or saved maps.';
   const LIFE = [['bleeding', 'Bleeding'], ['choking', 'Choking']];
   const CHOOSER = [['cpr-adult', 'Adult'], ['cpr-child', 'Child'], ['cpr-infant', 'Infant']];
   const CATS = [['life', 'More life threats'], ['injury', 'Injuries'], ['environment', 'Heat, cold, environment'],

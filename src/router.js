@@ -45,7 +45,11 @@
   const stateIndex = () => (history.state && Number.isInteger(history.state[IDX])) ? history.state[IDX] : null;
   const withIndex = (st, i) => ({ ...(st && typeof st === 'object' ? st : {}), [IDX]: i });
   const push = hash => { index += 1; history.pushState(withIndex(null, index), '', hash); };
-  const replace = hash => history.replaceState(withIndex(history.state, index), '', hash);
+  /* A replace is a screen change on this entry: a sheet's or a tool mode's marker on it no longer holds, so it is not copied. */
+  const replace = hash => {
+    const { fkSheet, fkLayer, ...rest } = history.state && typeof history.state === 'object' ? history.state : {};
+    history.replaceState(withIndex(rest, index), '', hash);
+  };
   /* Back/Forward land on an entry with its number; an edited address or a script-pushed entry has none and
      was added after the entry the app was on. */
   function readIndex() {

@@ -1,9 +1,20 @@
 /* Field Kit offline cache. Bump VERSION whenever you upload changed files. */
-const VERSION = 'fieldkit-v7.7';
+const VERSION = 'fieldkit-v7.8';
 const TILES = 'fk-tiles';
 const TILE_HOSTS = ['basemap.nationalmap.gov'];
 const ASSETS = ['./', './index.html', './manifest.json', './leaflet.js', './leaflet.css',
   './icon-192.png', './icon-512.png', './icon-maskable-512.png'];
+
+/* A signal that aborts after ms. AbortSignal.timeout is missing on older Safari for iPhone, where calling it would throw and
+   the page would always come from the cache; there an AbortController and a timer stand in. With no AbortController either,
+   undefined: the fetch then has no time limit. */
+function timeoutSignal(ms) {
+  if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') return AbortSignal.timeout(ms);
+  if (typeof AbortController !== 'function') return undefined;
+  const c = new AbortController();
+  setTimeout(() => c.abort(), ms);
+  return c.signal;
+}
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
@@ -35,7 +46,7 @@ self.addEventListener('fetch', e => {
   if (req.mode === 'navigate') {
     e.respondWith(caches.open(VERSION).then(async cache => {
       try {
-        const res = await fetch(req, { signal: AbortSignal.timeout(3000) });
+        const res = await fetch(req, { signal: timeoutSignal(3000) });
         if (res.ok) { cache.put('./index.html', res.clone()); return res; }
         // GitHub Pages hiccup (404/5xx): keep the working app rather than showing an error page.
         return (await cache.match('./index.html')) || res;

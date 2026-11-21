@@ -1,4 +1,4 @@
-/* ---------- Map: offline topo, waypoints, tracks ---------- */
+/* ---------- Map: offline topo, tracks, saved maps (markers are drawn by tac-markers.js) ---------- */
 (() => {
   const FK = window.FK;
   const { $, store, toast, esc, fin, okId, list, okLatLon } = FK;
@@ -16,17 +16,17 @@
       attr: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | © <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)' },
     /* USGS retired this service on 2026-11-16. The entry stays so that areas saved before then keep their
        tiles and their place in the list; it is offered only while such an area exists, and never for saving. */
-    imagery: { name: 'USGS Imagery + Topo (retired)', note: 'USGS switched this map off on November 16, 2026. Only areas you saved before then still show.',
+    imagery: { name: 'USGS Imagery + Topo (retired)', note: 'USGS switched this map off on November 16, 2026. Only maps you saved before then still show.',
       url: USGS + 'USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', maxNative: 16, offline: false, retired: true, kb: 45,
       attr: '<a href="https://www.usgs.gov/programs/national-geospatial-program/national-map">USGS The National Map</a>' }
   };
 
   let map = null, base = null, layerId = 'topo';
   let me = null, acc = null, tgtLine = null, trackLine = null;
-  const wpGroup = () => map._fkWps, areaGroup = () => map._fkAreas;
+  const areaGroup = () => map._fkAreas;
   let follow = store.get('mapFollow', true), zoomedToFix = false;
   let areas = list('areas', a => okId(a.id) && LAYERS[a.layer] && ['s', 'w', 'n', 'e', 'zMin', 'zMax'].every(k => fin(a[k])))
-    .map(a => ({ ...a, name: String(a.name ?? 'Area'), tiles: fin(a.tiles) ? a.tiles : 0, bytes: fin(a.bytes) ? a.bytes : 0 }));
+    .map(a => ({ ...a, name: String(a.name ?? 'Saved map'), tiles: fin(a.tiles) ? a.tiles : 0, bytes: fin(a.bytes) ? a.bytes : 0 }));
   const offered = id => !!LAYERS[id] && (!LAYERS[id].retired || areas.some(a => a.layer === id));
   {
     // A phone left on the retired satellite map with nothing saved from it moves to the satellite map that remains.
@@ -55,14 +55,15 @@
   const savedView = () => { const v = store.get('mapView', null); return v && okLatLon(v.lat, v.lon) && fin(v.z) ? v : null; };
   function init() {
     if (map) {
-      // Re-show: resize without letting Leaflet shift the centre, then restore the last view.
+      // Re-show: read the last view first (the resize below reports a move, and its moveend would store the shifted centre
+      // over it: each Map -> Position -> Map moved the map), resize, then restore the view exactly.
+      const v = savedView(), f = FK.getFix();
       const wrap = $('#mapWrap'), top = wrap.getBoundingClientRect().top;
       wrap.style.height = Math.max(260, window.innerHeight - top - $('.tabbar').offsetHeight) + 'px';
       map.invalidateSize({ pan: false });
-      const v = savedView(), f = FK.getFix();
       if (follow && f) map.setView([f.lat, f.lon], map.getZoom(), { animate: false });
-      else if (v) map.setView([v.lat, v.lon], v.z, { animate: false });
-      renderWps(); renderMe(); renderCenter();
+      else if (v) map.setView([v.lat, v.lon], v.z, { animate: false, reset: true });   // reset: a pan would round to whole pixels
+      FK.markers.render(); renderTarget(); renderMe(); renderCenter();
       return;
     }
     if (!window.L) { $('#mapWrap').innerHTML = '<p class="hint" style="padding:16px">The map library didn’t load. Reload the app while online.</p>'; return; }
@@ -86,15 +87,12 @@
       renderCenter();
     });
     map.on('dragstart', () => setFollow(false));
-    map.on('contextmenu', e => addWpAt(e.latlng.wrap()));
-    map.getContainer().addEventListener('click', e => {
-      const b = e.target.closest('[data-pop]');
-      if (!b) return;
-      if (b.dataset.pop === 'nav') FK.toggleTarget(b.dataset.id);
-      map.closePopup();
+    map.on('contextmenu', e => {   // press and hold; does nothing while a tool mode is on
+      if (FK.mapTools && FK.mapTools.mode()) return;
+      const ll = e.latlng.wrap(); FK.markers.create(ll.lat, ll.lng);
     });
 
-    renderAreas(); renderWps(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
+    renderAreas(); FK.markers.render(); renderTarget(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
   }
 
   /* Tile layer that, when a tile is missing (e.g. offline past the saved zoom), scales up the
@@ -142,9 +140,9 @@
   function note(L0) {
     $('#mapNote').hidden = !L0;
     if (!L0) return;
-    $('#mapNoteText').textContent = L0.retired ? 'USGS switched this map off on November 16, 2026. It shows only inside areas you saved before then.'
-      : !navigator.onLine ? 'You’re offline and this spot is outside your saved areas.'
-      : 'This map isn’t loading. The map service may be down, or the connection is too weak.';
+    $('#mapNoteText').textContent = L0.retired ? 'USGS switched this map off on November 16, 2026. It shows only inside maps you saved before then.'
+      : !navigator.onLine ? 'You’re offline and this spot is outside your saved maps.'
+      : 'This map isn’t loading (service down or weak signal). Maps saved for offline still show.';
   }
   $('#mapNoteLayers').addEventListener('click', () => $('#mLayers').click());
 
@@ -171,115 +169,138 @@
     cone.removeAttribute('hidden');
     cone.style.transform = `rotate(${h}deg)`;
   }
+  /* Pressed only while it can follow something: with no position yet it does not look switched on. */
+  const paintLocate = () => $('#mLocate').setAttribute('aria-pressed', String(follow && !!FK.getFix()));
   function setFollow(on) {
     follow = on; store.set('mapFollow', on);
-    $('#mLocate').setAttribute('aria-pressed', String(on));
+    paintLocate();
   }
   $('#mLocate').addEventListener('click', () => {
     const f = FK.getFix();
-    if (!f) { toast('Waiting for a GPS fix. Open sky helps.'); return; }
+    if (!f) { toast(FK.gpsBlocked() ? FK.BLOCKED_MSG : 'No position yet, so the map can’t follow you. Waiting for a GPS fix: open sky helps.'); return; }
     setFollow(true);
     map.setView([f.lat, f.lon], Math.max(map.getZoom(), 15));
   });
 
   /* ---------- Center readout ---------- */
-  const fmtDist = m => m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(m < 10000 ? 2 : 1)} km`;
+  const fmtDist = m => TGEOM.fmtDist(m, FK.tac.unit());
   function renderCenter() {
     if (!visible()) return;
     const c = map.getCenter().wrap(), g = GEO.toMGRS(c.lat, c.lng);
     $('#mCenter').textContent = g ? g.text : `${c.lat.toFixed(5)}, ${c.lng.toFixed(5)}`;
-    const f = FK.getFix();
-    if (f) {
-      const d = GEO.distance(f.lat, f.lon, c.lat, c.lng), b = GEO.bearing(f.lat, f.lon, c.lat, c.lng);
-      $('#mCenterRel').textContent = d < 3 ? 'Your position' : `${fmtDist(d)} at ${Math.round(b)}° true from you`;
-    } else $('#mCenterRel').textContent = 'Grid at the crosshair';
+    $('#mCenterRel').textContent = FK.relText(c.lat, c.lng, fmtDist) || 'Grid at the crosshair';
   }
   $('#mCenter').addEventListener('click', async () => {
     const t = $('#mCenter').textContent;
     try { await navigator.clipboard.writeText(t); toast('Copied ' + t); } catch { toast(t); }
   });
-  $('#mMark').addEventListener('click', () => map && addWpAt(map.getCenter().wrap()));
+  $('#mMark').addEventListener('click', () => { if (map) { const c = map.getCenter().wrap(); FK.markers.create(c.lat, c.lng); } });
+  /* Centre the map on a point and stop following the GPS (the list does this before opening a marker). */
+  FK.mapShow = (lat, lon) => { if (!map) return; setFollow(false); map.setView([lat, lon], Math.max(map.getZoom(), 15), { animate: false }); };
 
-  function addWpAt(ll) {
-    const n = FK.getWps().length + 1;
-    const name = prompt('Name this waypoint', `WP ${n}`);
-    if (name === null) return;
-    const saved = FK.addWp(ll.lat, ll.lng, name);
-    if (saved) toast(`Added ${saved}`);
-  }
-
-  /* ---------- Waypoints and target ---------- */
-  function renderWps() {
-    if (!map) return;
-    const g = wpGroup(); g.clearLayers();
-    const tid = FK.getTarget(), f = FK.getFix();
-    FK.getWps().forEach(w => {
-      const isT = w.id === tid;
-      const icon = L.divIcon({ className: 'wp-icon', iconSize: [18, 18], iconAnchor: [9, 9],
-        html: `<div class="wp-pin${isT ? ' tgt' : ''}"><i></i><b>${esc(w.name)}</b></div>` });
-      const m = GEO.toMGRS(w.lat, w.lon);
-      let rel = '';
-      if (f) {
-        const d = GEO.distance(f.lat, f.lon, w.lat, w.lon);
-        rel = `<br>${fmtDist(d)} at ${Math.round(GEO.bearing(f.lat, f.lon, w.lat, w.lon))}° true`;
-      }
-      L.marker([w.lat, w.lon], { icon, title: w.name }).addTo(g)
-        .bindPopup(`<b>${esc(w.name)}</b><br>${m ? m.text : ''}${rel}<div class="pop-act">
-          <button class="btn small" data-pop="nav" data-id="${w.id}">${isT ? 'Stop navigating' : 'Go to'}</button></div>`);
-    });
-    renderTarget();
-  }
+  /* ---------- Navigation target line ---------- */
   function renderTarget() {
     if (!map) return;
-    const w = FK.getWps().find(x => x.id === FK.getTarget()), f = FK.getFix();
+    const w = FK.tac.targetPoint(), f = FK.getFix();
     tgtLine.setLatLngs(w && f ? [[f.lat, f.lon], [w.lat, w.lon]] : []);
   }
 
   /* ---------- Track recording ---------- */
-  const trackDist = () => track.reduce((s, p, i) => i ? s + GEO.distance(track[i - 1][0], track[i - 1][1], p[0], p[1]) : 0, 0);
+  const MS_TO_MPH = 2.23694;   // metres a second to mph, as the speed readout in app.js
+  const trackDist = () => TGEOM.pathLength(track);
+  const fmtSpan = ms => { const m = Math.round(ms / 60000); return `${m >= 60 ? Math.floor(m / 60) + ' h ' : ''}${m % 60} min`; };
+  /* The Track dialog's summary: distance and time, then average speed while moving. */
+  function trackText() {
+    const st = TGEOM.trackStats(track), n = track.length;
+    const moving = st.elapsedMs - st.movingMs > 60000 ? ` (${st.movingMs < 60000 ? 'under 1 min' : fmtSpan(st.movingMs)} moving)` : '';
+    let t = `${TGEOM.fmtDist(st.dist, FK.tac.unit())} over ${fmtSpan(st.elapsedMs)}${moving}, ${n} ${n === 1 ? 'point' : 'points'}.`;
+    if (st.movingMs >= 10000 && st.movingDist >= 10) t += ` Moving average ${(st.movingDist / (st.movingMs / 1000) * MS_TO_MPH).toFixed(1)} mph.`;
+    return t;
+  }
   function renderTrack() {
     if (map) trackLine.setLatLngs(track.map(p => [p[0], p[1]]));
     const d = trackDist();
     $('#recChip').hidden = !recording;
-    $('#recChip').textContent = `Recording, ${fmtDist(d)}`;
-    $('#mTrack').setAttribute('aria-pressed', String(recording));
+    const blocked = recording && FK.gpsBlocked();   // it can record nothing: say why instead of a distance that never grows
+    $('#recChip').textContent = blocked ? FK.BLOCKED_MSG : `Recording, ${fmtDist(d)}`;
+    $('#recChip').setAttribute('aria-label', `Recording, ${blocked ? FK.BLOCKED_MSG : fmtDist(d) + '.'} Open Track recording.`);
     if (track.length) {
-      const mins = Math.round((track[track.length - 1][3] - track[0][3]) / 60000);
-      $('#trkInfo').textContent = `${fmtDist(d)} over ${mins >= 60 ? Math.floor(mins / 60) + ' h ' : ''}${mins % 60} min, ${track.length} points.`;
+      $('#trkInfo').textContent = trackText();
     } else $('#trkInfo').textContent = 'No track recorded yet.';
     $('#trkToggle').textContent = recording ? 'Stop recording' : 'Start recording';
-    $('#trkExport').disabled = !track.length && !FK.getWps().length;
     $('#trkClear').disabled = !track.length || recording;
+    $('#trkRoute').disabled = track.length < 2;
+    FK.emit('track');   // tac-nav.js shows Back to start from this
   }
+  /* A point is recorded only when it is further from the last recorded point than the two fixes' errors could explain:
+     at least 5 m and twice the larger accuracy of the two. Accuracy is the 95% radius (the Geolocation spec's meaning), so
+     GPS scatter while standing still adds no points, no distance and no moving time; a walk is recorded every 2 x accuracy.
+     (Once is not enough: 30 min of correlated scatter at 1 x read as 30 min moving.) The last point's accuracy is kept for
+     this session only; after a reload the new fix's own stands in for it. */
+  let lastAcc = null;
   function onFixTrack(f) {
     if (!recording || f.acc == null || f.acc > 50) return;
     const last = track[track.length - 1];
-    if (last && GEO.distance(last[0], last[1], f.lat, f.lon) < 5) return;
+    if (last && GEO.distance(last[0], last[1], f.lat, f.lon) < Math.max(5, 2 * f.acc, 2 * (lastAcc ?? f.acc))) return;
+    lastAcc = f.acc;
     track.push([+f.lat.toFixed(6), +f.lon.toFixed(6), f.alt == null ? null : Math.round(f.alt * 10) / 10, f.t || Date.now()]);
     store.set('track', track);
     renderTrack();
   }
-  $('#mTrack').addEventListener('click', () => { renderTrack(); $('#dlgTrack').showModal(); });
+  function openTrack() { $('#trkMsg').textContent = ''; renderTrack(); FK.sheet.open($('#dlgTrack')); }
+  $('#recChip').addEventListener('click', openTrack);
+  /* A recorded track as a route: thinned to the most points a route holds, first and last kept, evenly sampled between. */
+  $('#trkRoute').addEventListener('click', () => {
+    if (track.length < 2) return;
+    const n = Math.min(FK.tac.MAX_PTS, track.length);
+    const pts = Array.from({ length: n }, (_, i) => track[Math.round(i * (track.length - 1) / (n - 1))]).map(p => [p[0], p[1]]);
+    const name = 'Track ' + new Date(track[0][3]).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const s = FK.tac.addShape({ type: 'route', name, pts });
+    if (s === 'limit') { toast(FK.mapTools.LIMIT_MSG); return; }
+    const kept = s || FK.tac.shapes().find(x => x.name === name && x.pts.length === n);   // not saved, but on screen this session
+    FK.sheet.close($('#dlgTrack'));
+    if (s) toast(`Saved as route ${s.name}`);
+    if (kept && map) map.fitBounds(pts, { padding: [40, 40], maxZoom: 16 });
+  });
+  /* Starting again after a break of over 30 min: the old track is kept only if the person says so (never cleared without it). */
+  const OLD_MS = 30 * 60000;
+  const odlg = $('#dlgTrkOld');
+  let oldChoice = null;
+  function askOld() {
+    const last = track[track.length - 1], ago = Date.now() - last[3];
+    const d = new Date(last[3]), today = d.toDateString() === new Date().toDateString();
+    $('#toText').textContent = `The track you have (${fmtDist(trackDist())}) ended ${today ? 'at ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, ${fmtSpan(ago)} ago. Recording on would join it to where you are now with a straight line.`;
+    oldChoice = null;
+    FK.sheet.open(odlg, { onClose: () => { const c = oldChoice; oldChoice = null; if (c) FK.sheet.afterStep(() => startRec(c === 'new')); }, onOpen: () => $('#toCancel').focus() });
+  }
+  $('#toContinue').addEventListener('click', () => { oldChoice = 'continue'; FK.sheet.close(odlg); });
+  $('#toNew').addEventListener('click', () => { oldChoice = 'new'; FK.sheet.close(odlg); });
+  $('#toCancel').addEventListener('click', () => FK.sheet.close(odlg));
+  function startRec(fresh) {
+    if (recording) return;
+    if (fresh) { track = []; lastAcc = null; store.set('track', track); }
+    recording = true; store.set('recording', true);
+    FK.setWake(true); toast('Recording. The screen stays on so GPS keeps running.');
+    FK.sensors(); renderTrack();
+  }
   $('#trkToggle').addEventListener('click', () => {
+    if (!recording && FK.gpsBlocked()) { $('#trkMsg').textContent = FK.BLOCKED_MSG; return; }   // it could never record a point
+    $('#trkMsg').textContent = '';
+    const last = track[track.length - 1];
+    if (!recording && last && fin(last[3]) && Date.now() - last[3] > OLD_MS) { askOld(); return; }
+    if (!recording) { startRec(false); return; }
     recording = !recording; store.set('recording', recording);
     if (recording) { FK.setWake(true); toast('Recording. The screen stays on so GPS keeps running.'); }
     else FK.setWake(false);
     FK.sensors(); renderTrack();
   });
-  $('#trkClear').addEventListener('click', () => {
-    if (!confirm(`Clear the recorded track (${fmtDist(trackDist())}, ${track.length} points)? Export it first to keep a copy. This can’t be undone.`)) return;
+  $('#trkClear').addEventListener('click', async () => {
+    if (!await FK.sheet.confirm({ title: 'Clear the track?', text: `Clear the recorded track (${fmtDist(trackDist())}, ${track.length} points)? Export it first to keep a copy. This can’t be undone.`, ok: 'Clear track', danger: true })) return;
     track = []; store.set('track', track); renderTrack();
   });
-  $('#trkExport').addEventListener('click', () => {
-    const x = s => esc(s);
-    const wpts = FK.getWps().map(w => `<wpt lat="${w.lat}" lon="${w.lon}">${w.alt != null ? `<ele>${w.alt}</ele>` : ''}<name>${x(w.name)}</name></wpt>`).join('\n');
-    const pts = track.map(p => `<trkpt lat="${p[0]}" lon="${p[1]}">${p[2] != null ? `<ele>${p[2]}</ele>` : ''}<time>${new Date(p[3]).toISOString()}</time></trkpt>`).join('\n');
-    const day = new Date().toISOString().slice(0, 10);
-    const gpx = `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Field Kit" xmlns="http://www.topografix.com/GPX/1/1">\n${wpts}\n` +
-      (track.length ? `<trk><name>Field Kit track ${day}</name><trkseg>\n${pts}\n</trkseg></trk>\n` : '') + '</gpx>\n';
-    FK.download(`fieldkit-${day}.gpx`, gpx, 'application/gpx+xml');
-    toast('Saved to Downloads. ATAK imports GPX from Import → Local SD.');
-  });
+  /* Export (GPX or KML) is one sheet in tac-io.js; the Track dialog hands over to it. */
+  $('#trkExportOpen').addEventListener('click', () => { FK.sheet.close($('#dlgTrack')); FK.sheet.afterStep(() => FK.io.openExport()); });
   $('#trkClose').addEventListener('click', () => $('#dlgTrack').close());
 
   /* ---------- Layers ---------- */
@@ -287,7 +308,7 @@
     $('#layerList').innerHTML = Object.entries(LAYERS).filter(([id]) => offered(id) || id === layerId).map(([id, l]) => `<label class="opt">
       <input type="radio" name="layer" value="${id}" ${id === layerId ? 'checked' : ''}>
       <span><b>${l.name}</b><br><span class="hint">${l.note}</span></span></label>`).join('');
-    $('#dlgLayers').showModal();
+    FK.sheet.open($('#dlgLayers'));
   });
   $('#layerList').addEventListener('change', e => { setBase(e.target.value); $('#dlgLayers').close(); });
   $('#layersClose').addEventListener('click', () => $('#dlgLayers').close());
@@ -339,7 +360,7 @@
     $('#areaList').innerHTML = areas.length ? areas.map(a => `<li data-id="${a.id}">
       <span><b>${esc(a.name)}</b><br><span class="hint">${LAYERS[a.layer] ? LAYERS[a.layer].name : a.layer}, zoom ${a.zMax}, ${a.tiles.toLocaleString()} tiles, ${fmtMB(a.bytes)}${a.partial ? ', incomplete' : ''}</span></span>
       <span class="wact"><button class="btn small ghost" data-area="show">Show</button><button class="btn small ghost" data-area="del">Delete</button></span></li>`).join('')
-      : '<li><span class="hint">Nothing saved yet. Frame an area on the map, then download it here.</span></li>';
+      : '<li><span class="hint">No saved maps yet. Frame the map on what you need, then download it here.</span></li>';
     if (navigator.storage && navigator.storage.estimate) {
       const e = await navigator.storage.estimate();
       $('#storeUse').textContent = `Field Kit is using ${fmtMB(e.usage || 0)} of storage on this phone.`;
@@ -352,17 +373,28 @@
   }
 
   let busy = false, cancel = false;
-  $('#mSave').addEventListener('click', () => {
+  function openSave() {
+    if (!map) return;
     if (!busy) { $('#saveName').value = ''; $('#saveProg').hidden = true; $('#saveStatus').textContent = ''; }
-    estimate(); renderAreaList(); $('#dlgSave').showModal();
-  });
+    estimate(); renderAreaList(); FK.sheet.open($('#dlgSave'));
+  }
   $('#saveZ').addEventListener('change', estimate);
   $('#saveClose').addEventListener('click', () => $('#dlgSave').close());
 
+  /* A signal that aborts after ms. AbortSignal.timeout is missing on older Safari for iPhone, so build one from an
+     AbortController and a timer there; with no AbortController either, undefined (the fetch then has no time limit). The timer
+     is left to fire even when the request has finished: aborting a finished request does nothing. */
+  function timeoutSignal(ms) {
+    if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') return AbortSignal.timeout(ms);
+    if (typeof AbortController !== 'function') return undefined;
+    const c = new AbortController();
+    setTimeout(() => c.abort(), ms);
+    return c.signal;
+  }
   async function probe(layer) {
     const u = tileUrl(layer, 0, 0, 0);
-    try { const r = await fetch(u, { mode: 'cors', cache: 'no-store', signal: AbortSignal.timeout(10000) }); if (r.ok) return 'cors'; } catch { /* try opaque */ }
-    try { await fetch(u, { mode: 'no-cors', cache: 'no-store', signal: AbortSignal.timeout(10000) }); return 'no-cors'; } catch { return null; }
+    try { const r = await fetch(u, { mode: 'cors', cache: 'no-store', signal: timeoutSignal(10000) }); if (r.ok) return 'cors'; } catch { /* try opaque */ }
+    try { await fetch(u, { mode: 'no-cors', cache: 'no-store', signal: timeoutSignal(10000) }); return 'no-cors'; } catch { return null; }
   }
 
   $('#saveGo').addEventListener('click', async () => {
@@ -376,7 +408,7 @@
     const mode = await probe(a.layer);
     if (!mode) { done('Couldn’t reach the map server. Check your connection and try again.'); return; }
     // Without CORS, Chrome counts each stored tile as much larger than it is, so keep areas small.
-    if (mode === 'no-cors' && total > 3000) { done('This map server only allows small offline areas. Zoom in or pick less detail (under 3,000 tiles).'); return; }
+    if (mode === 'no-cors' && total > 3000) { done('This map server only allows small saved maps. Zoom in or pick less detail (under 3,000 tiles).'); return; }
     if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
     let lock = null;
     if ('wakeLock' in navigator) { try { lock = await navigator.wakeLock.request('screen'); } catch { /* ignore */ } }
@@ -392,7 +424,7 @@
       for (let t = 0; t < 3; t++) {
         try {
           // A stalled request would otherwise hang this download worker forever.
-          const res = await fetch(url, { mode, signal: AbortSignal.timeout(15000) });
+          const res = await fetch(url, { mode, signal: timeoutSignal(15000) });
           if (res.type === 'opaque' || res.ok) {
             bytes += res.type === 'opaque' ? L0.kb * 1024 : (await res.clone().blob()).size;
             try { await cache.put(url, res); }
@@ -415,13 +447,13 @@
     update();
     if (lock) lock.release().catch(() => {});
 
-    const name = $('#saveName').value.trim() || `Area ${areas.length + 1}`;
+    const name = $('#saveName').value.trim() || `Saved map ${areas.length + 1}`;
     if (finished > 0) {
       areas.push({ id: Date.now().toString(36), name, layer: a.layer, s: a.s, w: a.w, n: a.n, e: a.e, zMin: a.zMin, zMax: a.zMax,
         tiles: total, bytes, partial: cancel || failed > 0, date: Date.now() });
       store.set('areas', areas); renderAreas();
     }
-    done(full ? `Phone storage is full, so the download stopped. ${name} is incomplete. Delete an area you don’t need or free space on the phone, then download again to finish.`
+    done(full ? `Phone storage is full, so the download stopped. ${name} is incomplete. Delete a saved map you don’t need or free space on the phone, then download again to finish.`
       : cancel ? `Stopped. Kept the ${finished.toLocaleString()} tiles already saved.`
       : failed ? `Saved ${name}, but ${failed} tiles failed. Download it again to fill the gaps.`
       : `Saved ${name}. It works offline now.`);
@@ -437,7 +469,7 @@
     const b = e.target.closest('[data-area]'); if (!b) return;
     const id = b.closest('li').dataset.id, a = areas.find(x => x.id === id); if (!a) return;
     if (b.dataset.area === 'show') { $('#dlgSave').close(); map.fitBounds([[a.s, a.w], [a.n, a.e]]); setFollow(false); return; }
-    if (!confirm(`Delete the saved map ${a.name}? You’ll need internet to download it again.`)) return;
+    if (!await FK.sheet.confirm({ title: 'Delete the saved map?', text: `Delete the saved map ${a.name}? You’ll need internet to download it again.`, ok: 'Delete saved map', danger: true })) return;
     b.disabled = true;
     const others = areas.filter(x => x.id !== id && x.layer === a.layer);
     const cache = await caches.open(TILE_CACHE);
@@ -450,9 +482,36 @@
 
   /* ---------- Wiring ---------- */
   FK.on('shown', s => { if (s.tab === 'tactical' && s.view === 'map') requestAnimationFrame(init); });
-  FK.on('fix', f => { onFixTrack(f); renderMe(); });
+  FK.on('fix', f => { onFixTrack(f); renderMe(); paintLocate(); });
   FK.on('heading', renderHeading);
-  FK.on('wps', () => { renderWps(); renderTrack(); });
+  /* Location blocked: the map says what Position says, instead of showing nothing. */
+  const renderGps = () => { const b = FK.gpsBlocked(); $('#mapGps').hidden = !b; $('#mapGps').textContent = b ? FK.BLOCKED_MSG : ''; };
+  FK.on('gpsBlocked', () => { renderGps(); renderTrack(); });
+  FK.on('wps', () => { renderTarget(); renderTrack(); });
+  FK.on('target', renderTarget);
+  /* Navigation starting (a new target, not the next point of the same route) turns follow on, so the map moves with the walker. */
+  const targetKey = () => { const t = FK.tac.target(); return t ? `${t.type}:${t.id || t.lat + ',' + t.lon}` : null; };
+  let lastTarget = targetKey();
+  FK.on('target', () => {
+    const k = targetKey(), was = lastTarget;
+    lastTarget = k;
+    if (!k || k === was || !map) return;
+    setFollow(true);
+    const f = FK.getFix();
+    if (f && visible()) map.panTo([f.lat, f.lon], { animate: false });
+  });
+  FK.on('shapes', renderTarget);   // a route target's point can move when the route is edited
+  FK.on('unit', () => { renderCenter(); renderTrack(); });
+  FK.on('fixlive', renderCenter);   // a fix just went stale (or live): "from you" becomes "from last position"
+  /* Track recording and Save map for offline open from the Tools sheet (tac-tools.js), search and the recording chip. */
+  /* Show these [lat, lon] points (follow off), as after an import. */
+  function fit(pts) {
+    if (!map || !pts || !pts.length) return;
+    setFollow(false);
+    map.fitBounds(pts, { padding: [40, 40], maxZoom: 16, animate: false });
+  }
+  FK.map = { openTrack, openSave, resize: sizeMap, fit, timeoutSignal, track: () => track.map(p => p.slice()),
+    trackStart: () => track.length ? { lat: track[0][0], lon: track[0][1] } : null };
   renderTrack();
   if (recording) { FK.sensors(); if (!FK.wakeOn()) FK.setWake(true); }
   if (FK.tab() === 'tactical' && FK.view() === 'map') requestAnimationFrame(init);

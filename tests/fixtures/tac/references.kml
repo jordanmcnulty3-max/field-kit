@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://fk-test-schema.invalid/kml/2.2.0/ogckml22.xsd">
+<Document>
+  <name>References</name>
+  <Style id="pin"><IconStyle><Icon><href>http://fk-test-icon.invalid/pin.png</href></Icon></IconStyle></Style>
+  <NetworkLink>
+    <name>Live feed</name>
+    <Link><href>http://fk-test-feed.invalid/feed.kml</href><refreshMode>onInterval</refreshMode></Link>
+  </NetworkLink>
+  <ScreenOverlay>
+    <name>Logo</name>
+    <Icon><href>http://fk-test-logo.invalid/logo.png</href></Icon>
+  </ScreenOverlay>
+  <Placemark>
+    <name>Pin</name>
+    <description><![CDATA[<img src="http://fk-test-img.invalid/photo.jpg"><a href="http://fk-test-link.invalid/">More</a><link rel="stylesheet" href="http://fk-test-css.invalid/a.css">]]></description>
+    <styleUrl>http://fk-test-style.invalid/styles.kml#pin</styleUrl>
+    <Point><coordinates>-76.0,43.0,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

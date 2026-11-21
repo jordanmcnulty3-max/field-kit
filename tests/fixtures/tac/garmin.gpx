@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:wptx1="http://www.garmin.com/xmlschemas/WaypointExtension/v1" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" creator="eTrex 30" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://fk-test-schema.invalid/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://fk-test-schema.invalid/xmlschemas/GpxExtensionsv3.xsd">
+  <metadata>
+    <link href="http://fk-test-link.invalid">
+      <text>Garmin International</text>
+    </link>
+    <time>2026-10-03T13:55:12Z</time>
+  </metadata>
+  <wpt lat="43.000000" lon="-76.000000">
+    <ele>120.37</ele>
+    <time>2026-10-03T13:58:40Z</time>
+    <name>001</name>
+    <cmt>Parking</cmt>
+    <desc>Parking</desc>
+    <sym>Flag, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+    </extensions>
+  </wpt>
+  <wpt lat="43.010000" lon="-76.010000">
+    <ele>131.0</ele>
+    <name>SPRING</name>
+    <cmt>Flows in spring only</cmt>
+    <sym>water</sym>
+  </wpt>
+  <wpt lat="43.020000" lon="-76.020000">
+    <name>Bad point</name>
+    <sym>Campground</sym>
+  </wpt>
+  <wpt lat="95.0" lon="-76.0">
+    <name>Off the globe</name>
+  </wpt>
+  <rte>
+    <name>To the lake</name>
+    <extensions>
+      <gpxx:RouteExtension>
+        <gpxx:IsAutoNamed>false</gpxx:IsAutoNamed>
+        <gpxx:DisplayColor>Magenta</gpxx:DisplayColor>
+      </gpxx:RouteExtension>
+    </extensions>
+    <rtept lat="43.000000" lon="-76.000000">
+      <name>001</name>
+      <extensions>
+        <gpxx:RoutePointExtension>
+          <gpxx:rpt lat="43.005" lon="-76.005"/>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="43.010000" lon="-76.010000">
+      <name>SPRING</name>
+    </rtept>
+    <rtept lat="43.030000" lon="-76.000000">
+      <name>LAKE</name>
+    </rtept>
+  </rte>
+  <trk>
+    <name>ACTIVE LOG 03 OCT 2026</name>
+    <extensions>
+      <gpxx:TrackExtension>
+        <gpxx:DisplayColor>Cyan</gpxx:DisplayColor>
+      </gpxx:TrackExtension>
+    </extensions>
+    <trkseg>
+      <trkpt lat="43.000000" lon="-76.000000">
+        <ele>120.4</ele>
+        <time>2026-10-03T14:00:00Z</time>
+        <extensions>
+          <gpxtpx:TrackPointExtension>
+            <gpxtpx:hr>101</gpxtpx:hr>
+          </gpxtpx:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="43.001000" lon="-76.000000">
+        <ele>121.0</ele>
+        <time>2026-10-03T14:00:30Z</time>
+      </trkpt>
+    </trkseg>
+    <trkseg>
+      <trkpt lat="43.002000" lon="-76.000000">
+        <time>2026-10-03T14:10:00Z</time>
+      </trkpt>
+      <trkpt lat="43.003000" lon="-76.001000">
+        <time>2026-10-03T14:10:30Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>
+    <trkseg>
+      <trkpt lat="43.004000" lon="-76.002000"></trkpt>
+      <trkpt lat="43.005000" lon="-76.003000"></trkpt>
+    </trkseg>
+  </trk>
+</gpx>

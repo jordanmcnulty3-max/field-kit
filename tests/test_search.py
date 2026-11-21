@@ -266,9 +266,8 @@ def test_saved_areas_settings_and_waypoints_screens(page, app_url):
     open_search(page)
     type_q(page, 'waypoints')
     page.click('#searchBody .sr-item[data-key="a:waypoints"]')
-    assert page.locator('#view-position').is_visible()
-    top = page.eval_on_selector('#blkWaypoints', 'e => e.getBoundingClientRect().top')
-    assert 0 <= top < 600   # in view (the page may be too short to scroll it to the very top)
+    page.wait_for_selector('#dlgList[open]')   # the marker list is a sheet on the map
+    assert page.locator('#view-map').is_visible()
 
 
 def test_tool_and_report_results(page, app_url):

@@ -229,7 +229,7 @@ def test_search_finds_the_tool_and_opens_it(page, app_url):
 
 # ---------- Daylight and moon ----------
 DAYLIGHT = '#/survival/tool/daylight'
-SYR = (43.05, -76.15)
+SYR = (43.0, -76.0)
 UTQ = (71.29, -156.79)
 NO_POS = 'No position yet. Get a fix on the Position screen, or type one here.'
 GEO_SPY = """
@@ -290,7 +290,7 @@ def test_daylight_with_last_fix_shows_position_age_and_seven_days(ny_page, app_u
     page = ny_page
     dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0), fix=SYR, fix_age_min=12)
     pos = page.locator('#survPage .dl-pos').inner_text()
-    assert 'Last GPS fix' in pos and '12 min ago' in pos and '43.05' in pos and '76.15' in pos
+    assert 'Last GPS fix' in pos and '12 min ago' in pos and '43.0' in pos and '76.0' in pos
     expect(page.locator('#survPage .dl-day')).to_have_count(7)
     assert card(page, 0).locator('h3').inner_text().startswith('Today')
     assert 'Wed' in card(page, 1).locator('h3').inner_text() and 'Nov 18' in card(page, 1).locator('h3').inner_text()
@@ -354,14 +354,14 @@ def test_daylight_without_fix_asks_and_accepts_a_typed_position(ny_page, app_url
     expect(page.locator('#survPage .dl-day')).to_have_count(0)
     lat, lon = page.get_by_label('Latitude', exact=True), page.get_by_label('Longitude', exact=True)
     assert lat.bounding_box()['height'] >= 48 and lon.bounding_box()['height'] >= 48
-    lat.fill('43.05')
-    lon.fill('76.15')   # W is the default: no minus key needed
+    lat.fill('43.0')
+    lon.fill('76.0')   # W is the default: no minus key needed
     use = page.get_by_role('button', name='Use this position')
     assert use.bounding_box()['height'] >= 48
     use.click()
     expect(page.locator('#survPage .dl-day')).to_have_count(7)
     assert 'Typed position' in page.locator('#survPage .dl-pos').inner_text()
-    assert json.loads(page.evaluate("localStorage.getItem('fk.daylightPos')")) == {'lat': 43.05, 'lon': -76.15, 'on': True}
+    assert json.loads(page.evaluate("localStorage.getItem('fk.daylightPos')")) == {'lat': 43.0, 'lon': -76.0, 'on': True}
     page.reload()
     expect(page.locator('#survPage .dl-day')).to_have_count(7)   # remembered
 
@@ -370,7 +370,7 @@ def test_daylight_refuses_latitude_91_with_an_announced_message(ny_page, app_url
     page = ny_page
     dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0))
     page.get_by_label('Latitude', exact=True).fill('91')
-    page.get_by_label('Longitude', exact=True).fill('76.15')
+    page.get_by_label('Longitude', exact=True).fill('76.0')
     page.get_by_role('button', name='Use this position').click()
     alert = page.locator('#survPage [role="alert"]')
     expect(alert).to_have_text('Latitude must be a number from 0 to 90.')
@@ -508,12 +508,12 @@ def test_f7_typed_position_is_used_even_when_storage_is_full(ny_page, app_url):
     page = ny_page
     dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0))
     page.evaluate(FULL_POS)
-    page.get_by_label('Latitude', exact=True).fill('43.05')
-    page.get_by_label('Longitude', exact=True).fill('76.15')
+    page.get_by_label('Latitude', exact=True).fill('43.0')
+    page.get_by_label('Longitude', exact=True).fill('76.0')
     page.get_by_role('button', name='Use this position').click()
     expect(page.locator('#survPage .dl-day')).to_have_count(7)
     assert 'Typed position' in page.locator('#survPage .dl-pos').inner_text()
-    assert page.inner_text('#toast') == "Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or map areas."
+    assert page.inner_text('#toast') == "Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or saved maps."
     assert page.evaluate("localStorage.getItem('fk.daylightPos')") is None
 
 
@@ -546,16 +546,16 @@ def test_f8_position_is_typed_without_a_sign_and_chosen_with_n_s_and_w_e(ny_page
 
 def test_f8_a_stored_signed_position_loads_with_the_right_directions(ny_page, app_url):
     page = ny_page
-    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0), storage={'daylightPos': {'lat': 43.05, 'lon': -76.15, 'on': True}})
+    dl_boot(page, app_url, 'America/New_York', (2026, 11, 17, 10, 0), storage={'daylightPos': {'lat': 43.0, 'lon': -76.0, 'on': True}})
     expect(page.locator('#survPage .dl-day')).to_have_count(7)
-    assert '43.0500° N, 76.1500° W' in page.locator('#survPage .dl-pos').inner_text()
+    assert '43.0000° N, 76.0000° W' in page.locator('#survPage .dl-pos').inner_text()
     page.get_by_role('button', name='Change position').click()
-    expect(page.get_by_label('Latitude', exact=True)).to_have_value('43.05')
-    expect(page.get_by_label('Longitude', exact=True)).to_have_value('76.15')
+    expect(page.get_by_label('Latitude', exact=True)).to_have_value('43')
+    expect(page.get_by_label('Longitude', exact=True)).to_have_value('76')
     expect(hem(page, 'North')).to_be_checked()
     expect(hem(page, 'West')).to_be_checked()
     page.get_by_role('button', name='Use this position').click()
-    assert json.loads(page.evaluate("localStorage.getItem('fk.daylightPos')")) == {'lat': 43.05, 'lon': -76.15, 'on': True}
+    assert json.loads(page.evaluate("localStorage.getItem('fk.daylightPos')")) == {'lat': 43.0, 'lon': -76.0, 'on': True}
 
 
 def test_f14_position_screen_is_a_button_that_opens_it(ny_page, app_url):

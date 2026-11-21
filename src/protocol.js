@@ -206,9 +206,11 @@
       (s.detail ? '<div class="pp-detail">' + paras(s.detail) + '</div>' : '') +
       (tools ? '<button class="btn pp-wide" data-act="tool">' + esc(toolLabel || 'Open tool') + '</button>' : '') +
       (s.timer && Number.isFinite(s.timer.seconds) && s.timer.seconds > 0
-        ? '<button class="btn ghost pp-wide" data-act="timer">Start timer: ' + esc(s.timer.label || 'Timer') + ' (' + mmss(s.timer.seconds * 1000) + ')</button>' : '') +
-      (isAsk(s) && s.ask.q && s.ask.q !== s.text ? '<p class="pp-q">' + esc(s.ask.q) + '</p>' : '');
+        ? '<button class="btn ghost pp-wide" data-act="timer">Start timer: ' + esc(s.timer.label || 'Timer') + ' (' + mmss(s.timer.seconds * 1000) + ')</button>' : '');
   }
+  /* A question step's question sits in the fixed bar directly above Yes and No (never at the end of a long body), so the
+     buttons always answer the words next to them. Layout only: the text is the step's own ask.q (or its text). */
+  const askBar = s => isAsk(s) ? '<div class="pp-askbar"><p class="pp-q" id="ppQ">' + esc(s.ask.q || s.text) + '</p></div>' : '';
 
   /* Do not / Evacuate when: one tap from every step. The buttons sit in the step body after the figure; an open list shows directly below them. */
   const marker = open => open ? '▴' : '▾';
@@ -243,7 +245,7 @@
   function stepFoot(p, i) {
     const s = p.steps[i];
     const back = '<button class="btn ghost back" data-act="back">Back</button>';
-    if (isAsk(s)) return back + '<button class="btn" data-act="yes">Yes</button><button class="btn" data-act="no">No</button>';
+    if (isAsk(s)) return back + '<button class="btn" data-act="yes" aria-describedby="ppQ">Yes</button><button class="btn" data-act="no" aria-describedby="ppQ">No</button>';
     return back + (successors(p, i).length ? '<button class="btn" data-act="next">NEXT</button>' : '<button class="btn" data-act="done">Done</button>');
   }
 
@@ -267,7 +269,7 @@
 
   function render() {
     const { p, mode, i } = cur;
-    let body, foot = '', prog = '';
+    let body, foot = '', prog = '', bar = '';
     if (mode === 'ack') {
       body = '<p class="pp-action" id="ppAction" tabindex="-1">' + esc(ACK_TEXT) + '</p>';
       foot = '<button class="btn" data-act="ack">I understand, show procedures</button>';
@@ -280,10 +282,11 @@
       prog = progress(p, i);
       body = stepBody(p, i);
       foot = stepFoot(p, i);
+      bar = askBar(p.steps[i]);
     }
     root.innerHTML = head(p) + prog + '<div class="pp-body" id="ppBody">' + body + '</div>' +
       '<div class="pp-timerbar" id="ppTimerBar" tabindex="-1" hidden><span class="grow pp-timerlabel"></span><b class="pp-timerval"></b></div>' +
-      (foot ? '<div class="pp-foot">' + foot + '</div>' : '') +
+      bar + (foot ? '<div class="pp-foot">' + foot + '</div>' : '') +
       '<div class="sr-live" id="ppLive" role="status" aria-live="polite"></div>';
     paintTimer();
     const body_ = root.querySelector('#ppBody');

@@ -3,8 +3,11 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
-  const APP_VERSION = '7.7';
-  const FULL_MSG = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or map areas.';
+  const APP_VERSION = '7.8';
+  /* What a grid that GEO.parseAny cannot read gets: the Position Add row and the map's Go to grid both show it. */
+  const GRID_HELP = 'Couldn’t read that location. Try a grid like 18T VN 12345 67890, or 43.0000, -76.0000, or 43°00′00″N 76°00′00″W.';
+  const BLOCKED_MSG = 'Location is blocked. Allow location for this site in Chrome’s site settings, then reload.';
+  const FULL_MSG = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or saved maps.';
   let warnedAt = 0;
   const store = {
     get(k, d) { try { const v = localStorage.getItem('fk.' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
@@ -89,16 +92,67 @@
   let watchId = null, fix = store.get('lastFix', null), llFormat = store.get('llFormat', 'dec') === 'dms' ? 'dms' : 'dec';
   if (!fix || !okLatLon(fix.lat, fix.lon)) fix = null;
   const navVisible = () => root.dataset.tab === 'tactical' && (view === 'position' || view === 'map') && !document.hidden;
-  const gpsWanted = () => !document.hidden && (navVisible() || !!(window.FK && FK.isRecording && FK.isRecording()));
+  /* GPS also runs in every tab while a track records or a navigation target is set (tac-nav.js shows the target). */
+  const gpsWanted = () => !document.hidden && (navVisible() || !!(window.FK && FK.isRecording && FK.isRecording()) || !!(window.FK && FK.tac && FK.tac.target()));
 
-  function setStatus(msg, warn) { const s = $('#gpsStatus'); s.textContent = msg; s.classList.toggle('warn', !!warn); }
+  function setStatus(msg, warn) { const s = $('#gpsStatus'); if (s.textContent !== msg) s.textContent = msg; s.classList.toggle('warn', !!warn); }
+
+  /* ---------- How fresh the stored fix is: ONE rule for every figure measured from it ----------
+     A fix up to 30 s old is live: "Your position", "from you", its speed. An older one (a stored fix from an earlier visit,
+     or the GPS has gone quiet) is the last position: "Last position, 3 days ago", "from last position", no speed. */
+  const LIVE_FIX_MS = 30000;
+  const fixLive = (f = fix) => !!f && fin(f.t) && Date.now() - f.t <= LIVE_FIX_MS;
+  const MON3 = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function fixAgeWords(ms) {
+    const s = Math.max(0, Math.round(ms / 1000));
+    if (s < 90) return `${s} s`;
+    if (s < 5400) return `${Math.round(s / 60)} min`;
+    if (s < 129600) return `${Math.round(s / 3600)} h`;
+    const d = Math.round(s / 86400);
+    return `${d} ${d === 1 ? 'day' : 'days'}`;
+  }
+  /* "Last position, 5 min ago", with the date when the fix is not from today. */
+  function lastPosText(f = fix) {
+    if (!f) return '';
+    if (!fin(f.t)) return 'Last position, time unknown';
+    const d = new Date(f.t), today = d.toDateString() === new Date().toDateString();
+    return `Last position, ${fixAgeWords(Date.now() - f.t)} ago${today ? '' : `, ${MON3[d.getMonth()]} ${d.getDate()}`}`;
+  }
+  const fromWords = () => fixLive() ? 'from you' : 'from last position';
+  /* The line under the grid at a spot (the map's crosshair, a marker): '' with no fix. */
+  function relText(lat, lon, fmtDist) {
+    if (!fix) return '';
+    const d = GEO.distance(fix.lat, fix.lon, lat, lon);
+    if (d < 3) return fixLive() ? 'Your position' : lastPosText();
+    return `${fmtDist(d)} at ${Math.round(GEO.bearing(fix.lat, fix.lon, lat, lon))}° true ${fromWords()}`;
+  }
+  let gpsErr = null, gpsBlocked = false;   // the standing GPS message (blocked, no signal...) until a fix arrives
+  function renderStatus() {
+    if (gpsErr) { setStatus(fix && !fixLive() ? `${lastPosText()}. ${gpsErr}` : gpsErr, true); return; }
+    if (fixLive()) setStatus('Live fix, ' + new Date(fix.t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+    else if (fix) setStatus(lastPosText() + (watchId !== null ? '. Updating…' : ''));
+    else if (watchId !== null) setStatus('Getting a GPS fix. Open sky helps.');
+  }
+  /* The live/last switch happens with time alone: check every 2 s, redraw what depends on it when it flips, and keep the
+     Position line's age current. */
+  let wasLive = fixLive();
+  setInterval(() => {
+    if (document.hidden) return;
+    const now = fixLive();
+    if (now !== wasLive) { wasLive = now; renderFix(); emit('fixlive', now); }
+    if (root.dataset.tab === 'tactical' && view === 'position') renderStatus();
+  }, 2000);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) return;
+    wasLive = fixLive(); renderFix(); renderStatus(); emit('fixlive', wasLive);
+  });
 
   function startGps() {
     if (watchId !== null) return;
-    if (!('geolocation' in navigator)) { setStatus('This browser has no location support.', true); return; }
-    if (!window.isSecureContext) { setStatus('Location needs HTTPS. Open the app from its GitHub Pages address.', true); return; }
-    setStatus(fix ? 'Updating position…' : 'Getting a GPS fix. Open sky helps.');
+    if (!('geolocation' in navigator)) { gpsErr = 'This browser has no location support.'; renderStatus(); return; }
+    if (!window.isSecureContext) { gpsErr = 'Location needs HTTPS. Open the app from its GitHub Pages address.'; renderStatus(); return; }
     watchId = navigator.geolocation.watchPosition(onFix, onGpsErr, { enableHighAccuracy: true, maximumAge: 2000, timeout: 30000 });
+    renderStatus();
   }
   function stopGps() { if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; } }
 
@@ -106,17 +160,23 @@
     const c = p.coords;
     fix = { lat: c.latitude, lon: c.longitude, alt: c.altitude, acc: c.accuracy, spd: c.speed, t: p.timestamp };
     store.set('lastFix', fix);
-    setStatus('Live fix, ' + new Date(p.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-    renderFix(); renderWps(); renderTarget();
+    liveFix = true;
+    gpsErr = null; wasLive = fixLive();
+    if (gpsBlocked) { gpsBlocked = false; emit('gpsBlocked', false); }
+    renderStatus();
+    renderFix(); renderWps();
+    declFromFix();   // before 'fix' goes out, so the navigate arrow uses the new declination
     emit('fix', fix);
   }
   function onGpsErr(e) {
     const msgs = {
-      1: 'Location is blocked. Allow location for this site in Chrome’s site settings, then reload.',
+      1: BLOCKED_MSG,
       2: 'No GPS signal. Move to open sky.',
       3: 'Still searching for satellites. Move to open sky.'
     };
-    setStatus(msgs[e.code] || 'Location error: ' + e.message, true);
+    gpsErr = msgs[e.code] || 'Location error: ' + e.message;
+    renderStatus();
+    if ((e.code === 1) !== gpsBlocked) { gpsBlocked = e.code === 1; emit('gpsBlocked', gpsBlocked); }
     emit('gpsError', msgs[e.code] || e.message);
   }
 
@@ -131,7 +191,7 @@
       : `${fix.lat.toFixed(6)}, ${fix.lon.toFixed(6)}`;
     $('#sAlt').textContent = fix.alt == null ? '—' : `${Math.round(fix.alt * 3.28084).toLocaleString()} ft`;
     $('#sAcc').textContent = fix.acc == null ? '—' : `±${Math.round(fix.acc)} m`;
-    $('#sSpd').textContent = fix.spd == null || Number.isNaN(fix.spd) ? '—' : `${(fix.spd * 2.23694).toFixed(1)} mph`;
+    $('#sSpd').textContent = fix.spd == null || Number.isNaN(fix.spd) || !fixLive() ? '—' : `${(fix.spd * 2.23694).toFixed(1)} mph`;
   }
 
   $('#mgrs').addEventListener('click', () => {
@@ -148,10 +208,78 @@
 
   /* ---------- Compass ---------- */
   let heading = null, compassOn = false, gotOri = false, oriTimer = null;
+  /* Declination: 'auto' works it out from the position with the World Magnetic Model (wmm.js); 'manual' uses the number
+     typed in #decl (east positive), stored as 'decl'. The worked-out value is never written to 'decl'. A phone that has a
+     typed non-zero value from before v7.8 and no mode stays on the typed value. */
   let decl = store.get('decl', 0);
   if (!fin(decl)) decl = 0;
+  let declMode = store.get('declMode', null);
+  if (declMode !== 'auto' && declMode !== 'manual') { declMode = decl ? 'manual' : 'auto'; store.set('declMode', declMode); }
+  let liveFix = false;   // has a GPS fix arrived in this session (else the position is the stored last one)
+  let auto = null;   // { lat, lon, day, value }: the last worked-out declination and where and when it was worked out
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const decimalYear = ms => {
+    const y = new Date(ms).getUTCFullYear(), a = Date.UTC(y, 0, 1), b = Date.UTC(y + 1, 0, 1);
+    return y + (ms - a) / (b - a);
+  };
+  /* The model's last day, from its decimal valid-until year (2030.0 is the start of 2030, so the last month is December 2029). */
+  const validUntilText = () => {
+    const y = Math.floor(WMM.validUntil), a = Date.UTC(y, 0, 1), b = Date.UTC(y + 1, 0, 1);
+    const d = new Date(a + (WMM.validUntil - y) * (b - a) - 1);
+    return `${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  };
+  /* Work the declination out again only when the position has moved more than 10 km or the date has changed. */
+  function autoDecl() {
+    if (!fix || typeof WMM === 'undefined') return null;
+    const day = new Date().toDateString();
+    if (auto && auto.day === day && GEO.distance(auto.lat, auto.lon, fix.lat, fix.lon) <= 10000) return auto.value;
+    const altKm = fin(fix.alt) ? fix.alt / 1000 : 0;
+    // A clock outside the model's years (a phone set to 1970 or 2099) uses the model at its nearest valid date: straight-line
+    // extrapolation drifts by degrees. The line still says the model is out of date (renderDecl reads the real clock).
+    const y = Math.min(WMM.validUntil, Math.max(WMM.epoch, decimalYear(Date.now())));
+    const v = WMM.declination(fix.lat, fix.lon, altKm, y);
+    auto = { lat: fix.lat, lon: fix.lon, day, value: fin(v) ? v : null };
+    return auto.value;
+  }
+  /* The declination applied to the compass, or null for none (the heading is then magnetic). */
+  const appliedDecl = () => declMode === 'manual' ? (decl ? decl : null) : autoDecl();
+  const declText = v => {
+    const r = Math.round(v * 10) / 10;
+    return r === 0 ? '0.0°' : `${Math.abs(r).toFixed(1)}° ${r < 0 ? 'W' : 'E'}`;
+  };
+  let lastApplied;
+  function renderDecl() {
+    $$('#declSeg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.decl === declMode)));
+    $('#declField').hidden = declMode === 'auto';
+    const line = $('#declLine');
+    line.hidden = declMode !== 'auto';
+    if (declMode === 'auto') {
+      const v = autoDecl();
+      if (v == null) line.textContent = fix ? 'Declination: not available at this position' : 'Declination: waiting for a position';
+      else {
+        const y = decimalYear(Date.now()), old = y >= WMM.validUntil || y < WMM.epoch;
+        line.textContent = `Declination ${declText(v)} (worked out from your ${liveFix ? '' : 'last known '}position, model valid to ${validUntilText()})` +
+          (old ? '\nThe magnetic model is out of date. Check a current map.' : '');
+      }
+    }
+  }
+  /* After anything that may change the applied declination: redraw what depends on it, and tell the navigate panel. */
+  function declChanged() {
+    renderDecl();
+    const a = appliedDecl();
+    if (a === lastApplied) return;
+    lastApplied = a;
+    renderCompass(); renderWps();
+    if (heading != null) emit('heading', trueHeading());
+    emit('decl', a);
+  }
+  function declFromFix() { if (declMode === 'auto') declChanged(); }
   $('#decl').value = decl || '';
-  $('#decl').addEventListener('input', e => { decl = num(e.target); store.set('decl', decl); renderCompass(); renderWps(); renderTarget(); });
+  $('#decl').addEventListener('input', e => { decl = num(e.target); store.set('decl', decl); declChanged(); });
+  $$('#declSeg button').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.decl === declMode) return;
+    declMode = b.dataset.decl; store.set('declMode', declMode); declChanged();
+  }));
 
   // Build rose: ticks every 10°, cardinal letters
   (function buildRose() {
@@ -168,42 +296,146 @@
     g.innerHTML = s;
   })();
 
+  /* Motion permission. Safari on iPhone sends no readings until the page has called DeviceOrientationEvent.requestPermission()
+     from inside a tap, so where that function exists the compass shows Turn on compass (#compassAsk, and #nvCompassAsk in the
+     navigate panel), from 800 ms after the compass starts with no reading, until permission is given or a reading arrives. Chrome 152 and later also has the function but sends
+     readings without it, so the listener is added anyway and the first reading hides the buttons. The 4-second "no sensor"
+     message waits for the permission. Nothing is stored: iPhone may forget the permission on reload, so it is asked again. */
+  const askable = () => typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function';
+  let calib = false;   // the last reading had a negative webkitCompassAccuracy
+  let oriAllowed = false, asking = false, oriBlocked = false, askDue = false, askTimer = null;
+  /* Permission is the way forward: the function exists, it has not been granted and no reading has come. */
+  const pending = () => askable() && !oriAllowed && !gotOri;
+  /* The button shows only after 800 ms with no reading, so on Android Chrome (whose first reading comes sooner) it never
+     appears. Once shown it stays until granted or a reading comes. */
+  const needAsk = () => pending() && askDue;
+  function renderAsk() {
+    const ask = needAsk();
+    $('#compassAskWrap').hidden = !ask;
+    $$('.compass-blocked').forEach(p => { p.hidden = !(ask && oriBlocked); });
+    emit('compassAsk', ask);
+  }
+  function armAsk() {
+    clearTimeout(askTimer); askTimer = null;
+    if (!pending() || askDue) return;
+    askTimer = setTimeout(() => { askTimer = null; if (pending()) { askDue = true; renderAsk(); } }, 800);
+  }
+  function askCompass() {
+    if (asking || !needAsk()) return;
+    asking = true;
+    // A question that never answers must not leave the button dead: after 10 s a tap asks again.
+    const freed = setTimeout(() => { asking = false; }, 10000);
+    let p;
+    // Called straight from the tap: no await or timer before it, or Safari refuses.
+    try { p = DeviceOrientationEvent.requestPermission(); } catch (e) { p = Promise.reject(e); }
+    // Only "denied" or a failure is a refusal; any other answer (Chrome can say "prompt") leaves the button as it was.
+    Promise.resolve(p).then(r => r, () => 'denied').then(r => {
+      clearTimeout(freed);
+      asking = false;
+      if (r === 'granted') {
+        oriAllowed = true; oriBlocked = false;
+        if (compassOn) { removeOri(); addOri(); armNoSensor(); }
+      } else oriBlocked = r === 'denied';
+      renderAsk();
+    });
+  }
+  $$('.compass-ask-btn').forEach(b => b.addEventListener('click', askCompass));
+  renderAsk();
+
   function onOri(e) {
+    // iPhone's webkitCompassAccuracy below 0 is taken to mean the compass may need calibrating. That meaning is not checked
+    // (no source opened says it), so the reading is still used; only a hint is added under it, until a reading without one.
     let h = null;
     if (typeof e.webkitCompassHeading === 'number') h = e.webkitCompassHeading;
     else if (e.alpha != null && (e.absolute || e.type === 'deviceorientationabsolute')) h = 360 - e.alpha;
     if (h == null) return;
+    calib = typeof e.webkitCompassAccuracy === 'number' && e.webkitCompassAccuracy < 0;
     const scr = (screen.orientation && screen.orientation.angle) || 0;
     h = (h + scr + 360) % 360;
-    gotOri = true;
+    if (!gotOri) { gotOri = true; clearTimeout(askTimer); if (askable()) renderAsk(); }
     if (heading == null) heading = h;
     else { const d = ((h - heading + 540) % 360) - 180; heading = (heading + d * 0.25 + 360) % 360; }
-    renderCompass(); renderTarget();
+    renderCompass();
     emit('heading', trueHeading());
+  }
+  function addOri() {
+    if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', onOri);
+    else window.addEventListener('deviceorientation', onOri);
+  }
+  function removeOri() {
+    window.removeEventListener('deviceorientationabsolute', onOri);
+    window.removeEventListener('deviceorientation', onOri);
+  }
+  function armNoSensor() {
+    clearTimeout(oriTimer);
+    oriTimer = setTimeout(() => { if (!gotOri) $('#hdgRef').textContent = 'No compass sensor found. Distances and bearings to markers still work.'; }, 4000);
   }
   function startCompass() {
     if (compassOn) return;
     compassOn = true;
-    if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', onOri);
-    else window.addEventListener('deviceorientation', onOri);
+    addOri();
     clearTimeout(oriTimer);
-    oriTimer = setTimeout(() => { if (!gotOri) $('#hdgRef').textContent = 'No compass sensor found. Distances and bearings to waypoints still work.'; }, 4000);
+    if (pending()) armAsk(); else armNoSensor();
   }
   function stopCompass() {
     if (!compassOn) return;
     compassOn = false;
-    window.removeEventListener('deviceorientationabsolute', onOri);
-    window.removeEventListener('deviceorientation', onOri);
+    clearTimeout(askTimer); askTimer = null;
+    removeOri();
   }
-  const trueHeading = () => heading == null ? null : (heading + decl + 360) % 360;
+  const trueHeading = () => heading == null ? null : (heading + (appliedDecl() ?? 0) + 360) % 360;
   function renderCompass() {
     const th = trueHeading();
     if (th == null) return;
     $('#rose').style.transform = `rotate(${-th}deg)`;
     $('#hdg').textContent = Math.round(th) % 360 + '°';
     const mils = Math.round(th * 6400 / 360) % 6400;
-    $('#hdgRef').textContent = `${GEO.cardinal(th)}, ${mils} mils, ${decl ? 'true' : 'magnetic'}`;
+    $('#hdgRef').textContent = `${GEO.cardinal(th)}, ${mils} mils, ${appliedDecl() == null ? 'magnetic' : 'true'}` +
+      (calib ? '. Compass may need calibrating: move the phone in a figure-8.' : '');
   }
+
+  /* ---------- Position as text ---------- */
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const p2 = n => String(n).padStart(2, '0');
+  /* The block to read aloud or paste: grid, lat/long, altitude, accuracy, the fix's time (local and Zulu), and its age when
+     older than a minute. A line whose value is unknown is left out. */
+  function positionText(f, now) {
+    const c5 = v => { const t = v.toFixed(5); return t === '-0.00000' ? '0.00000' : t; };
+    const g = GEO.toMGRS(f.lat, f.lon), ll = `${c5(f.lat)}, ${c5(f.lon)}`;
+    const lines = g ? [`Position ${g.text}`, ll] : [`Position ${ll}`];
+    if (fin(f.alt)) lines.push(`Altitude ${Math.round(f.alt * 3.28084)} ft`);
+    if (fin(f.acc)) lines.push(`Accuracy ±${Math.round(f.acc)} m`);
+    if (fin(f.t)) {
+      const d = new Date(f.t);
+      lines.push(`Time ${p2(d.getHours())}:${p2(d.getMinutes())} local, ${p2(d.getUTCHours())}:${p2(d.getUTCMinutes())}Z ${p2(d.getUTCDate())} ${MON[d.getUTCMonth()]} ${d.getUTCFullYear()}`);
+      const age = now - f.t, s = Math.round(age / 1000);
+      if (age > 60000) {
+        lines.push(`Position is ${s < 90 ? s + ' s' : s < 5400 ? Math.round(s / 60) + ' min' : s < 129600 ? Math.round(s / 3600) + ' h' : Math.round(s / 86400) + ' days'} old`);
+      }
+    }
+    return lines.join('\n');
+  }
+  async function copyShare(text) {
+    try { await navigator.clipboard.writeText(text); $('#psMsg').textContent = 'Copied.'; }
+    catch { $('#psMsg').textContent = 'Not copied. Press and hold the text to select it.'; }
+  }
+  function showShare(text) {
+    $('#psText').textContent = text;
+    $('#psMsg').textContent = '';
+    FK.sheet.open($('#dlgShare'), { onOpen: () => $('#psTitle').focus() });
+    copyShare(text);
+  }
+  $('#shareBtn').addEventListener('click', async () => {
+    if (!fix) { toast(gpsBlocked ? BLOCKED_MSG : 'No position yet. Wait for a GPS fix.'); return; }
+    const text = positionText(fix, Date.now());
+    if (typeof navigator.share === 'function') {
+      try { await navigator.share({ text }); return; }
+      catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    showShare(text);
+  });
+  $('#psCopy').addEventListener('click', () => copyShare($('#psText').textContent));
+  $('#psClose').addEventListener('click', () => FK.sheet.close($('#dlgShare')));
 
   /* ---------- Screen wake lock ---------- */
   let wakeWanted = false, wakeLock = null;
@@ -223,91 +455,34 @@
   }
   $('#wakeBtn').addEventListener('click', () => setWake(!wakeWanted));
 
-  /* ---------- Waypoints ---------- */
-  let wps = list('wps', w => okId(w.id) && okLatLon(w.lat, w.lon)).map(w => ({ ...w, name: String(w.name ?? 'Waypoint'), alt: fin(w.alt) ? w.alt : null }));
-  let targetId = store.get('target', null);
-  if (!wps.some(w => w.id === targetId)) targetId = null;
-  const saveWps = () => { const ok = store.set('wps', wps) && store.set('target', targetId); emit('wps'); return ok; };
-  const fmtDist = m => m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(m < 10000 ? 2 : 1)} km`;
-  const fmtMi = m => `${(m / 1609.344).toFixed(m < 16093 ? 2 : 1)} mi`;
-
-  /* Returns the waypoint's name, or null if it couldn't be saved (it stays on screen until the app closes). */
-  let wpSeq = 0;
-  function addWp(lat, lon, name, alt) {
-    const n = String(name || '').trim() || `WP ${wps.length + 1}`;
-    wps.push({ id: Date.now().toString(36) + (wpSeq++ % 36).toString(36), name: n, lat, lon, alt: fin(alt) ? alt : null, t: Date.now() });
-    const ok = saveWps(); renderWps();
-    if (!ok) toast(FULL_MSG);
-    return ok ? n : null;
-  }
+  /* ---------- Markers on Position ----------
+     The data lives in tac-data.js (FK.tac), which loads after this file and redraws the list through the 'wps' event. */
   $('#wpMark').addEventListener('click', () => {
     if (!fix) { $('#wpMsg').textContent = 'No GPS fix yet. Wait for a position, then mark.'; return; }
-    const n = addWp(fix.lat, fix.lon, $('#wpName').value, fix.alt);
-    $('#wpName').value = ''; $('#wpMsg').textContent = n ? `Marked ${n}.` : FULL_MSG;
+    const m = FK.tac.addMarker({ lat: fix.lat, lon: fix.lon, name: $('#wpName').value, alt: fix.alt });
+    $('#wpName').value = ''; $('#wpMsg').textContent = m ? `Marked ${m.name}.` : FULL_MSG;
   });
   $('#wpAdd').addEventListener('click', () => {
     const p = GEO.parseAny($('#wpCoord').value);
-    if (!p) { $('#wpMsg').textContent = 'Couldn’t read that location. Try a grid like 18S UJ 23394 07395, or 38.8977, -77.0365, or 38°53′52″N 77°02′11″W.'; return; }
-    const n = addWp(p.lat, p.lon, $('#wpName').value);
-    $('#wpCoord').value = ''; $('#wpName').value = ''; $('#wpMsg').textContent = n ? `Added ${n}.` : FULL_MSG;
+    if (!p) { $('#wpMsg').textContent = GRID_HELP; return; }
+    const m = FK.tac.addMarker({ lat: p.lat, lon: p.lon, name: $('#wpName').value });
+    $('#wpCoord').value = ''; $('#wpName').value = ''; $('#wpMsg').textContent = m ? `Added ${m.name}.` : FULL_MSG;
   });
 
+  /* The list itself is a sheet on the map (tac-markers.js); this block shows how many there are and opens it. */
   function renderWps() {
-    const ul = $('#wpList');
-    if (!wps.length) { ul.innerHTML = '<li><span class="wmeta">No waypoints yet. Mark your position or add a grid.</span></li>'; $('#wpExport').disabled = true; return; }
-    $('#wpExport').disabled = false;
-    ul.innerHTML = wps.map(w => {
-      const g = GEO.toMGRS(w.lat, w.lon);
-      let rel = '';
-      if (fix) {
-        const d = GEO.distance(fix.lat, fix.lon, w.lat, w.lon);
-        const b = GEO.bearing(fix.lat, fix.lon, w.lat, w.lon);
-        rel = d < 3 ? '<br>You are here' : `<br>${fmtDist(d)} (${fmtMi(d)}) at ${Math.round(b)}° true`;
-      }
-      const isT = w.id === targetId;
-      return `<li class="${isT ? 'target' : ''}" data-id="${w.id}">
-        <span class="wname">${esc(w.name)}</span>
-        <span class="wmeta">${g ? g.text : w.lat.toFixed(5) + ', ' + w.lon.toFixed(5)}${rel}</span>
-        <span class="wact">
-          <button class="btn small ${isT ? '' : 'ghost'}" data-act="nav">${isT ? 'Stop' : 'Go to'}</button>
-          <button class="btn small ghost" data-act="del" aria-label="Delete ${esc(w.name)}">Delete</button>
-        </span></li>`;
-    }).join('');
+    if (!FK.tac) return;   // before tac-data.js has loaded
+    const n = FK.tac.markers().length;
+    $('#wpCount').textContent = n ? `${n} ${n === 1 ? 'marker' : 'markers'}` : 'No markers yet';
+    $('#wpOpenList').disabled = !n;
   }
-  $('#wpList').addEventListener('click', e => {
-    const btn = e.target.closest('button'); if (!btn) return;
-    const id = btn.closest('li').dataset.id, w = wps.find(x => x.id === id); if (!w) return;
-    if (btn.dataset.act === 'nav') { targetId = targetId === id ? null : id; }
-    if (btn.dataset.act === 'del') {
-      if (!confirm(`Delete waypoint ${w.name}? This can’t be undone.`)) return;
-      wps = wps.filter(x => x.id !== id); if (targetId === id) targetId = null;
-    }
-    saveWps(); renderWps(); renderTarget();
-  });
+  $('#wpOpenList').addEventListener('click', () => { FK.route.go('/tactical/map'); FK.markers.openList(); });
+  on('wps', renderWps);
+  /* The navigation target and its display live in tac-nav.js; here only the GPS follows it. */
+  on('target', () => sensors());
 
-  function renderTarget() {
-    const w = wps.find(x => x.id === targetId), info = $('#tgtInfo'), mark = $('#tgtMark');
-    if (!w || !fix) { info.hidden = true; mark.setAttribute('hidden', ''); return; }
-    const d = GEO.distance(fix.lat, fix.lon, w.lat, w.lon);
-    const b = GEO.bearing(fix.lat, fix.lon, w.lat, w.lon);
-    mark.removeAttribute('hidden');
-    mark.setAttribute('transform', `rotate(${b} 100 100)`);
-    let turn = '';
-    const th = trueHeading();
-    if (th != null) {
-      const off = ((b - th + 540) % 360) - 180;
-      turn = Math.abs(off) < 5 ? 'Straight ahead' : `Turn ${Math.round(Math.abs(off))}° ${off > 0 ? 'right' : 'left'}`;
-    }
-    info.hidden = false;
-    info.innerHTML = `<b style="font-size:20px">${esc(w.name)}</b><br>${fmtDist(d)} at ${Math.round(b)}° true${turn ? '<br>' + turn : ''}`;
-  }
-
-  $('#wpExport').addEventListener('click', () => {
-    const pm = wps.map(w => `  <Placemark><name>${esc(w.name)}</name><Point><coordinates>${w.lon},${w.lat},${w.alt ?? 0}</coordinates></Point></Placemark>`).join('\n');
-    const kml = `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2">\n<Document><name>Field Kit waypoints</name>\n${pm}\n</Document>\n</kml>\n`;
-    download(`waypoints-${new Date().toISOString().slice(0, 10)}.kml`, kml, 'application/vnd.google-earth.kml+xml');
-    toast('Saved to Downloads. In ATAK: Import → Local SD.');
-  });
+  /* Export (GPX or KML) is one sheet in tac-io.js. */
+  $('#posExport').addEventListener('click', () => FK.io.openExport());
 
   /* ---------- Sensors on/off with visibility (saves battery) ---------- */
   function sensors() {
@@ -350,16 +525,16 @@
     F('bDel').hidden = !profiles.some(x => x.id === id);
   }
   F('bProfile').addEventListener('change', e => { loadProfile(e.target.value); saveInputs(); calc(); });
-  F('bSave').addEventListener('click', () => {
-    const name = (prompt('Name this profile, e.g. "Tikka .308 – 175 SMK"') || '').trim();
+  F('bSave').addEventListener('click', async () => {
+    const name = await FK.sheet.ask({ title: 'Name this profile', label: 'Name, e.g. Tikka .308 – 175 SMK' });
     if (!name) return;
     const p = { id: 'u' + Date.now().toString(36), name };
     for (const [k, fid] of Object.entries(LOAD_FIELDS)) p[k] = k === 'model' ? F(fid).value : num(F(fid));
     profiles.push(p); store.set('profiles', profiles); fillProfiles(p.id); saveInputs(); toast(`Saved ${name}`);
   });
-  F('bDel').addEventListener('click', () => {
+  F('bDel').addEventListener('click', async () => {
     const id = F('bProfile').value, p = profiles.find(x => x.id === id);
-    if (!p || !confirm(`Delete the ${p.name} profile? This can’t be undone.`)) return;
+    if (!p || !await FK.sheet.confirm({ title: 'Delete the profile?', text: `Delete the ${p.name} profile? This can’t be undone.`, ok: 'Delete profile', danger: true })) return;
     profiles = profiles.filter(x => x.id !== id); store.set('profiles', profiles); fillProfiles('custom'); saveInputs();
   });
 
@@ -483,11 +658,19 @@
   /* ---------- Shared API for the map module ---------- */
   window.FK = {
     protocols, opener, refocus, updateAvailable,
-    $, $$, store, toast, esc, on, emit, download, sensors, fin, okId, list, okLatLon, FULL_MSG,
-    getFix: () => fix, getWps: () => wps, getTarget: () => targetId,
-    toggleTarget(id) { targetId = targetId === id ? null : id; saveWps(); renderWps(); renderTarget(); },
-    addWp, trueHeading, setWake, wakeOn: () => wakeWanted,
-    tab: () => root.dataset.tab, view: () => view, showTab, showView
+    $, $$, store, toast, esc, on, emit, download, sensors, fin, okId, list, okLatLon, FULL_MSG, GRID_HELP,
+    getFix: () => fix,
+    gpsBlocked: () => gpsBlocked, BLOCKED_MSG,
+    fixLive: () => fixLive(), lastPosText: () => lastPosText(), fromWords, relText,
+    trueHeading, compassAsk: needAsk, setWake, wakeOn: () => wakeWanted,
+    tab: () => root.dataset.tab, view: () => view, showTab, showView,
+    /* Test hooks: the same code paths as a real GPS fix and a real compass reading (the reading is taken as-is, not smoothed
+       against the previous one). They change no stored data on their own. */
+    _test: {
+      fix: f => onFix({ coords: { latitude: f.lat, longitude: f.lon, accuracy: f.acc ?? 5, altitude: f.alt ?? null, speed: f.spd ?? null }, timestamp: f.t ?? Date.now() }),
+      heading: deg => { heading = null; onOri({ webkitCompassHeading: deg }); },
+      positionText
+    }
   };
 
   /* ---------- Segmented controls: arrow keys move between options ---------- */
@@ -520,7 +703,9 @@
     bits.push(navigator.serviceWorker && navigator.serviceWorker.controller ? 'works offline' : 'offline mode not active yet');
     $('#diag').textContent = bits.join(' · ');
   }
-  $('#menuBtn').addEventListener('click', () => { $('#bkMsg').textContent = ''; diag(); $('#dlgMenu').showModal(); });
+  const syncUnitSeg = () => $$('#unitDist button').forEach(x => x.setAttribute('aria-selected', String(FK.tac.unit() === x.dataset.unit)));
+  $$('#unitDist button').forEach(b => b.addEventListener('click', () => { FK.tac.setUnit(b.dataset.unit); syncUnitSeg(); }));
+  $('#menuBtn').addEventListener('click', () => { $('#bkMsg').textContent = ''; diag(); syncUnitSeg(); $('#dlgMenu').showModal(); });
   $('#menuClose').addEventListener('click', () => $('#dlgMenu').close());
   /* Keys that stay on this phone: never written to a backup and never touched by a restore. A half-finished
      protocol must not reappear on another phone, a stale position must not pass as current, and a backup handed
@@ -534,7 +719,7 @@
     phoneKeys().forEach(k => { data[k] = localStorage.getItem(k); });
     const day = new Date().toISOString().slice(0, 10);
     download(`fieldkit-backup-${day}.json`, JSON.stringify({ app: 'Field Kit', version: APP_VERSION, saved: new Date().toISOString(), data }, null, 1), 'application/json');
-    $('#bkMsg').textContent = `Saved ${Object.keys(data).length} items to Downloads. Saved map tiles aren’t included; re-download those areas on a new phone.` +
+    $('#bkMsg').textContent = `Saved ${Object.keys(data).length} items to Downloads. Saved map tiles aren’t included; download those saved maps again on a new phone.` +
       (hasPatients(data) ? ' This file includes patient logs. Keep it private.' : '');
   });
 
@@ -596,7 +781,7 @@
     const when = new Date(b.saved);
     pendingRestore = file;
     msg.textContent = '';
-    $('#bkAsk').textContent = `Restore the backup${isNaN(when) ? '' : ' from ' + when.toLocaleString()}? It replaces the waypoints, tracks, profiles, patient logs and settings on this phone. Running tourniquet timers on this phone are kept.`;
+    $('#bkAsk').textContent = `Restore the backup${isNaN(when) ? '' : ' from ' + when.toLocaleString()}? It replaces the markers, routes and areas, tracks, profiles, patient logs and settings on this phone. Running tourniquet timers on this phone are kept.`;
     paintRestore();
   });
   $('#bkGo').addEventListener('click', () => {
@@ -661,7 +846,8 @@
   $$('#unitSeg button').forEach(x => x.setAttribute('aria-selected', String(x.dataset.unit === unit)));
   restoreInputs();
   calc();
-  renderFix(); renderWps();
+  renderFix(); renderStatus();
+  renderDecl(); lastApplied = appliedDecl();
   showView(view);
   showTab(store.get('tab', 'tactical'));
 })();

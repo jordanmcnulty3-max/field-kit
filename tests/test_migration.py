@@ -1,6 +1,8 @@
 """Backup, restore and v5 -> current migration."""
 import json, os, re
 
+from playwright.sync_api import expect
+
 from .test_tools import T0
 
 FIX = os.path.join(os.path.dirname(__file__), 'fixtures')
@@ -233,11 +235,15 @@ def test_v5_localstorage_boots_with_no_console_errors(page, app_url):
     page.select_option('#bProfile', 'u1k2j3x')
     assert page.input_value('#bMV') == '2850' and page.input_value('#bW') == '105'
     assert page.input_value('#bRange') == '650'
-    # Waypoints are listed and the target is still the target
+    # Waypoints load as markers and the target is still the target
     page.click('#tacSeg [data-view=position]')
-    names = page.locator('#wpList li .wname').all_inner_texts()
-    assert names == ['Truck', 'Water cache']
-    assert page.locator('#wpList li.target .wname').all_inner_texts() == ['Water cache']
+    expect(page.locator('#wpCount')).to_have_text('2 markers')
+    page.click('#wpOpenList')
+    page.wait_for_selector('#dlgList[open]')
+    names = page.locator('#lsList li .mk-name').all_inner_texts()
+    assert sorted(names) == ['Truck', 'Water cache']
+    assert page.locator('#lsList li.tgt .mk-name').all_inner_texts() == ['Water cache']
+    page.click('#lsClose')
     # Tourniquet timer: running, 14:32 elapsed at the fixed clock, listed on the Emergency home
     page.goto(page.url.split('#')[0] + '#/emergency')
     page.wait_for_selector('#emActive .em-active')

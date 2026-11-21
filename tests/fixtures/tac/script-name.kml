@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Markup test</name>
+  <Placemark>
+    <name>&lt;script&gt;window.pwned=1&lt;/script&gt;Rally</name>
+    <description><![CDATA[<script>window.pwned=2</script><img src="http://fk-test-img.invalid/x.png" onerror="window.pwned=3">Meet <b>here</b>]]></description>
+    <Point><coordinates>-76.0,43.0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name><![CDATA[<img src=x onerror="window.pwned=4">Creek]]></name>
+    <LineString><coordinates>-76.0,43.0 -76.01,43.01</coordinates></LineString>
+  </Placemark>
+</Document>
+</kml>

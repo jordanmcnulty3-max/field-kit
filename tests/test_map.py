@@ -1,19 +1,15 @@
 """Map layers: the retired USGS Imagery + Topo service, its replacement, and the notice shown when a map
 does not load. The harness aborts every off-host request, so by default every tile fails."""
-import base64, json
+import base64
 
 from playwright.sync_api import expect
+
+from .tac import store, open_save
 
 PNG = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==')
 AREA = {'id': 'a1', 'name': 'Home', 'layer': 'imagery', 's': 43.0, 'w': -76.3, 'n': 43.2, 'e': -76.0,
         'zMin': 5, 'zMax': 14, 'tiles': 10, 'bytes': 1000}
 MAP = '#/tactical/map'
-
-
-def store(page, **kv):
-    page.add_init_script('(() => {' + ''.join(
-        f'if (localStorage.getItem({json.dumps("fk." + k)}) === null) localStorage.setItem({json.dumps("fk." + k)}, {json.dumps(json.dumps(v))});'
-        for k, v in kv.items()) + '})()')
 
 
 def tiles_ok(page):
@@ -49,7 +45,7 @@ def test_retired_layer_stays_while_it_has_saved_areas(page, app_url):
     expect(page.locator('#mLayerName')).to_have_text('USGS Imagery + Topo (retired)')
     assert layer_names(page) == ['USGS Topo', 'USGS Imagery', 'OpenTopoMap', 'USGS Imagery + Topo (retired)']
     page.click('#layersClose')
-    page.click('#mSave')
+    open_save(page)
     expect(page.locator('#areaList li')).to_have_count(1)        # the saved area is still listed
     expect(page.locator('#areaList')).to_contain_text('Home')
     expect(page.locator('#saveGo')).to_be_disabled()

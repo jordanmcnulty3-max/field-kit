@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Weekend plan.kml</name>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://fk-test-icon.invalid/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://fk-test-icon.invalid/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Folder>
+		<name>Weekend plan</name>
+		<open>1</open>
+		<Placemark>
+			<name>Trailhead</name>
+			<description><![CDATA[<div><b>Park</b> here &amp; walk north.<br>Gate shuts at 9.</div>]]></description>
+			<LookAt>
+				<longitude>-76.0</longitude>
+				<latitude>43.0</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<range>1000</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-76.0,43.0,0</coordinates>
+			</Point>
+		</Placemark>
+		<Folder>
+			<name>Day 1</name>
+			<Placemark>
+				<name>Ridge walk</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<LineString>
+					<tessellate>1</tessellate>
+					<coordinates>
+						-76.0,43.0,0 -76.01,43.01,0 -76.02,43.015,0 -76.03,43.02,0 
+					</coordinates>
+				</LineString>
+			</Placemark>
+			<Folder>
+				<name>Camp</name>
+				<Placemark>
+					<name>Camp field</name>
+					<styleUrl>#m_ylw-pushpin</styleUrl>
+					<Polygon>
+						<tessellate>1</tessellate>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									-76.04,43.02,0 -76.03,43.02,0 -76.03,43.03,0 -76.04,43.03,0 -76.04,43.02,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+						<innerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									-76.036,43.024,0 -76.034,43.024,0 -76.034,43.026,0 -76.036,43.024,0 
+								</coordinates>
+							</LinearRing>
+						</innerBoundaryIs>
+					</Polygon>
+				</Placemark>
+			</Folder>
+		</Folder>
+		<Placemark>
+			<name>Lookouts</name>
+			<MultiGeometry>
+				<Point>
+					<coordinates>-76.05,43.04,0</coordinates>
+				</Point>
+				<Point>
+					<coordinates>-76.06,43.04,0</coordinates>
+				</Point>
+				<LineString>
+					<coordinates>-76.05,43.04,0 -76.06,43.04,0</coordinates>
+				</LineString>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>Drive in</name>
+			<gx:Track>
+				<when>2026-10-03T14:00:00Z</when>
+				<when>2026-10-03T14:01:00Z</when>
+				<gx:coord>-76.1 43.0 0</gx:coord>
+				<gx:coord>-76.09 43.0 0</gx:coord>
+			</gx:Track>
+		</Placemark>
+		<Placemark>
+			<name>Tower model</name>
+			<Model>
+				<Location>
+					<longitude>-76.0</longitude>
+					<latitude>43.0</latitude>
+					<altitude>0</altitude>
+				</Location>
+				<Link>
+					<href>http://fk-test-model.invalid/tower.dae</href>
+				</Link>
+			</Model>
+		</Placemark>
+		<GroundOverlay>
+			<name>Old map</name>
+			<Icon>
+				<href>http://fk-test-overlay.invalid/old-map.jpg</href>
+			</Icon>
+			<LatLonBox>
+				<north>43.05</north>
+				<south>43.0</south>
+				<east>-76.0</east>
+				<west>-76.05</west>
+			</LatLonBox>
+		</GroundOverlay>
+	</Folder>
+</Document>
+</kml>

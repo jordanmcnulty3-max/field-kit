@@ -13,8 +13,8 @@
     map: { title: 'Map', keywords: 'offline topo layers satellite imagery crosshair mark track recording gpx' },
     position: { title: 'Position and compass', keywords: 'gps mgrs grid coordinates latitude longitude lat lon heading bearing declination north' },
     ballistics: { title: 'Ballistics', keywords: 'dope card rifle bullet wind elevation windage mil moa range shot drop' },
-    areas: { title: 'Saved areas', keywords: 'offline map download tiles saved region storage' },
-    waypoints: { title: 'Waypoints', keywords: 'mark waypoint target kml atak coordinates' },
+    areas: { title: 'Saved maps', keywords: 'offline map download tiles saved areas region storage' },
+    waypoints: { title: 'Markers', keywords: 'mark waypoint waypoints target kml atak coordinates' },
     settings: { title: 'Settings and backup', keywords: 'backup restore export import data night red light update version storage' }
   };
   const TOOL_WORDS = {
@@ -255,7 +255,7 @@
   function whenMap(fn, tries = 30) {
     if (FK.leafletMap && FK.leafletMap()) fn();
     else if (tries > 0) requestAnimationFrame(() => whenMap(fn, tries - 1));
-    else FK.toast('Open the map to see saved areas');
+    else FK.toast('Open the map to see saved maps');
   }
   function go(key) {
     const d = describe(key);
@@ -270,8 +270,8 @@
       case 's': case 'c': case 'u': return FK.survival.open(key, { replace });   // survival.js draws the page and adds it to Recent; false if it cannot open it
       case 'a':
         if (id === 'settings') { const open = () => $('menuBtn').click(); if (replace) FK.route.closeSearch(open); else open(); }
-        else if (id === 'areas') { nav('/tactical/map'); whenMap(() => $('mSave').click()); }   // the Saved areas list is in the Save map dialog
-        else if (id === 'waypoints') { nav('/tactical/position'); $('blkWaypoints').scrollIntoView({ block: 'start' }); }
+        else if (id === 'areas') { nav('/tactical/map'); whenMap(() => FK.map.openSave()); }   // the Saved maps list is in the Save map dialog
+        else if (id === 'waypoints') { nav('/tactical/map'); FK.markers.openList(); }   // the marker list is a sheet on the map
         else nav('/tactical/' + id);
         break;
     }

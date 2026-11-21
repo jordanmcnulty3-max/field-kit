@@ -494,6 +494,9 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 #rfForm .hint{margin:6px 0 0}
 .rf-msg{margin:0;padding:8px 0 0;font-size:15px;font-weight:600;color:var(--blaze);overflow-wrap:anywhere}
 .rf-msg:empty{display:none}
+.rf-true-btn{display:block;width:100%;margin-top:12px;min-height:48px;white-space:normal;padding:8px 16px}
+#rfForm .rf-true-out{margin-top:12px;font-size:16px;font-weight:600;color:var(--ink);overflow-wrap:anywhere}
+.rf-true-out:empty{display:none}
 #dlgList .mk-act{grid-template-columns:1fr}
 .mk-kinds{margin:12px 0;padding:0;border:0;min-width:0}
 .mk-kinds legend{padding:0;margin:0 0 6px;font-size:14px;color:var(--muted)}
@@ -1171,6 +1174,17 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <label class="f">Altitude (ft)<input id="rfZAlt" type="number" inputmode="decimal"></label>
       <label class="f">Station pressure (inHg)<input id="rfZPress" type="number" inputmode="decimal" step="0.01"></label>
       <p class="hint" id="rfZHint">Zero conditions not set: assumed the same as today.</p>
+      <div id="rfTruePart" hidden>
+        <h3 class="rf-h">Correct from a real shot</h3>
+        <p class="hint">Enter a distance and the elevation the rifle really needed there. Uses today's conditions from the Ballistics screen, a level shot and no wind.</p>
+        <label class="f">Distance (yd)<input id="rfTrueYd" type="number" inputmode="decimal"></label>
+        <label class="f">Elevation needed<input id="rfTrueVal" type="number" inputmode="decimal"></label>
+        <label class="f">In<select id="rfTrueUnit"></select></label>
+        <button type="button" class="btn ghost rf-true-btn" id="rfTrueGo">Work it out</button>
+        <p class="hint rf-true-out" id="rfTrueOut" aria-live="polite"></p>
+        <button type="button" class="btn rf-true-btn" id="rfTrueSave" hidden></button>
+        <button type="button" class="btn ghost rf-true-btn" id="rfTrueUndo" hidden></button>
+      </div>
     </div>
     <p class="rf-msg" id="rfMsg" aria-live="polite"></p>
     <div class="mk-act">

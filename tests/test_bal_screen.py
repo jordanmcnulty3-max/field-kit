@@ -476,3 +476,83 @@ def test_ballistics_fits_360_day_night_large_text(page, app_url, night, profile)
     if page.locator('#bAll').is_visible():
         page.click('#bAll')
     assert overflow(page, '#view-ballistics') == []
+
+
+# ---------- Fix round 1: the short-screen card, blank humidity, Show all units across a save ----------
+
+def visible_in_view(page, sel, height):
+    r = page.locator(sel).bounding_box()
+    return r is not None and r['width'] > 0 and r['y'] >= 0 and r['y'] + r['height'] <= height
+
+
+def test_message_is_visible_with_the_keyboard_up(page, app_url):
+    open_screen(page, app_url, profile='ut', profiles=MINE, view=(360, 340))
+    page.focus('#bRange')
+    page.fill('#bRange', '0')
+    settle(page)
+    expect(page.locator('#solSub')).to_be_visible()
+    expect(page.locator('#solSub')).to_have_text('Enter a range from 1 to 3,000 yd.')
+    assert visible_in_view(page, '#solution', 340)
+
+
+def test_answer_visible_with_the_keyboard_up_for_every_sight(page, app_url):
+    for pid in ['ut', 'ud', 'ur', 'un']:
+        open_screen(page, app_url, profile=pid, profiles=MINE, view=(360, 340))
+        page.focus('#bRange')
+        settle(page)
+        expect(page.locator('#solElev .v')).to_be_visible()
+        expect(page.locator('#solWind .v')).to_be_visible()
+        assert visible_in_view(page, '#solution', 340), pid
+
+
+def test_landscape_without_focus_shows_the_sentence_and_show_all_units(page, app_url):
+    open_screen(page, app_url, profile='ut', profiles=MINE, view=(640, 360))
+    expect(page.locator('#solSub')).to_be_visible()
+    expect(page.locator('#bAll')).to_be_visible()
+    bare = {'id': 'ubare', 'name': 'Bare', 'bc': 0.3, 'zero': 100}
+    open_screen(page, app_url, profile='ubare', profiles=[bare], view=(640, 360))
+    expect(page.locator('#solSub')).to_be_visible()
+    expect(page.locator('#solSub')).to_have_text('This profile needs a ballistic coefficient, a velocity and a zero range. Tap Edit.')
+
+
+def test_card_is_full_again_when_focus_leaves(page, app_url):
+    open_screen(page, app_url, profile='ut', profiles=MINE, view=(360, 340))
+    page.focus('#bRange')
+    expect(page.locator('#bAll')).to_be_hidden()
+    page.evaluate('document.activeElement.blur()')
+    expect(page.locator('#bAll')).to_be_visible()
+    expect(page.locator('#solSub')).to_be_visible()
+
+
+def test_a_focused_condition_field_is_not_under_the_pinned_card(page, app_url):
+    open_screen(page, app_url, profile='ut', profiles=MINE, view=(360, 340))
+    page.click('#bCondBtn')
+    for sel in ['#bTemp', '#bRH', '#bRange']:
+        page.focus(sel)
+        page.wait_for_timeout(200)
+        card = page.locator('#solution').bounding_box()
+        field = page.locator(sel).bounding_box()
+        assert field['y'] >= card['y'] + card['height'], (sel, field, card)
+
+
+def test_blank_humidity_means_50_percent(page, app_url):
+    open_screen(page, app_url, profile='un', profiles=MINE, shot={'bRH': '50', 'bRange': '800'})
+    page.click('#bCondBtn')
+    with50 = (card(page), page.inner_text('#bCond'))
+    shot(page, bRH='')
+    assert page.inner_text('#bCond') == '59°F · 0 ft · 50%' and card(page) == with50[0]
+    shot(page, bRH='0')
+    assert page.inner_text('#bCond').endswith('· 0%')
+
+
+def test_saving_the_same_profile_keeps_show_all_units(page, app_url):
+    open_screen(page, app_url, profile='ut', profiles=MINE)
+    page.click('#bAll')
+    page.click('#bEdit')
+    expect(page.locator('#dlgRifle')).to_be_visible()
+    page.wait_for_timeout(250)
+    page.click('#rfSave')
+    expect(page.locator('#dlgRifle')).to_be_hidden()
+    expect(page.locator('#bAll')).to_have_attribute('aria-pressed', 'true')
+    page.select_option('#bProfile', 'ud')
+    expect(page.locator('#bAll')).to_have_attribute('aria-pressed', 'false')

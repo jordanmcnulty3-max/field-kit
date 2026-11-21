@@ -184,10 +184,14 @@ input::placeholder{color:var(--muted);opacity:.8}
 .bal-cond p{flex:1;margin:0;min-width:0;font-size:16px}
 .bal-cond .btn{flex:none}
 #bCondFields{margin-top:12px}
+/* A short screen with a field focused (keyboard up): the answer card is pinned under the header and compact. A message always stays;
+   the transonic sentence and Show all units wait until focus leaves. Focused fields keep clear of the card. */
 @media (max-height:480px){
-  .solution{position:sticky;top:var(--balTop,73px);z-index:2;background:var(--paper);padding:8px 12px;gap:4px 12px}
-  .solution .v{font-size:22px}
-  .solution .sol-foot{display:none}      /* the sentence and the button wait until the keyboard is down: the answer itself stays */
+  .solution.compact{position:sticky;top:var(--balTop,73px);z-index:2;background:var(--paper);padding:8px 12px;gap:4px 12px}
+  .solution.compact .v{font-size:22px}
+  .solution.compact .sol-all{display:none}
+  .solution.compact:not(.msg) .sol-foot{display:none}
+  .bal-shot input,.bal-shot select,#bCondFields input{scroll-margin-top:170px}
 }
 .tablewrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:8px}
 table{border-collapse:collapse;width:100%;font-size:15px}

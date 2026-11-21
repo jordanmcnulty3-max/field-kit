@@ -90,8 +90,8 @@
     F('bProfile').value = cur;
   }
   function choose(id) {
+    if (id !== cur) showAll = false;               // a save of the same profile keeps it
     cur = id;
-    showAll = false;
     fillProfiles();
     saveInputs();
   }
@@ -185,6 +185,7 @@
   function nothing(text) {
     paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
     F('solSub').textContent = text;
+    F('solution').classList.add('msg');
     $('#dope').innerHTML = '';
     fitDope();
   }
@@ -202,18 +203,19 @@
   }
   function condLine() {
     const t = given('bTemp') ? num(F('bTemp')) : 59, press = num(F('bPress')), alt = num(F('bAlt'));
-    F('bCond').textContent = `${label(t)}°F · ${given('bPress') && press > 0 ? press.toFixed(2) + ' inHg' : label(alt) + ' ft'} · ${label(num(F('bRH')))}%`;
+    F('bCond').textContent = `${label(t)}°F · ${given('bPress') && press > 0 ? press.toFixed(2) + ' inHg' : label(alt) + ' ft'} · ${label(given('bRH') ? num(F('bRH')) : 50)}%`;
   }
 
   function calc() {
     const p = anyProfile(cur);
     const sighted = head(p);
     condLine();
+    F('solution').classList.remove('msg');
     const optic = sighted && !showAll ? p.optic : null;          // null: every unit
     const target = given('bRange') ? parseFloat(F('bRange').value) : NaN;
     if (!(inside(target, 1, 3000))) return nothing(MSG.range);
     if (!p || !(p.bc > 0) || !(p.mv > 0) || !(p.zero > 0)) return nothing(MSG.profile);
-    const temp = given('bTemp') ? num(F('bTemp')) : 59, alt = num(F('bAlt')), press = num(F('bPress')), rh = num(F('bRH'));
+    const temp = given('bTemp') ? num(F('bTemp')) : 59, alt = num(F('bAlt')), press = num(F('bPress')), rh = given('bRH') ? num(F('bRH')) : 50;
     if (!inside(temp, -60, 140) || !inside(alt, -2000, 30000) || (given('bPress') && !(press > 0)) || !inside(rh, 0, 100)) return nothing(MSG.cond);
     const wind = num(F('bWind'));
     if (!inside(wind, 0, 100)) return nothing(MSG.wind);
@@ -246,6 +248,7 @@
     } else {
       paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
       F('solSub').textContent = MSG.reach;
+      F('solution').classList.add('msg');
     }
     const c = BALS.cols(optic), generic = !!optic && optic.type === 'reticle';   // a reticle's wind columns already carry the drift
     const heads = ['Yd', ...c.elev, ...c.wind, 'Drop in', ...(generic ? [] : ['Drift in']), 'fps', 'ft-lb', 'Time s'];
@@ -280,9 +283,14 @@
   FK.on('restoring', () => { frozen = true; clearTimeout(calcT); });
   FK.on('restoreFailed', () => { frozen = false; later(); });
   /* On a short screen (keyboard up) the answer card is pinned under the header; the header's height sets where. */
-  $('#view-ballistics').addEventListener('focusin', () => {
+  const view = $('#view-ballistics'), card = F('solution');
+  view.addEventListener('focusin', e => {
     const top = $('.top');
     document.documentElement.style.setProperty('--balTop', (top ? top.getBoundingClientRect().bottom : 73) + 'px');
+    if (e.target.matches('input, select') && !e.target.closest('.bal-profile')) card.classList.add('compact');
+  });
+  view.addEventListener('focusout', e => {
+    if (!e.relatedTarget || !view.contains(e.relatedTarget) || !e.relatedTarget.matches('input, select')) card.classList.remove('compact');
   });
   /* The screen opens with every unit hidden again and the conditions folded away. */
   let was = false;
@@ -295,7 +303,7 @@
     }
     was = now;
   });
-  addEventListener('resize', () => { if (!$('#view-ballistics').hidden) fitDope(); });
+  addEventListener('resize', () => { if (!view.hidden) fitDope(); });
 
   /* ---------- Profile editor: load, the sight on it, and the conditions it was zeroed in ----------
      One sheet (#dlgRifle). An own profile can be saved in place, saved as a new profile or deleted; a built-in load only

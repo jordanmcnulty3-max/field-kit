@@ -98,19 +98,23 @@ about 0.2 mil of elevation at 1,000 yd and about 0.03 mil at 500 yd.
 ## Built-in loads sourced (2026-11-21)
 
 The five built-in loads had no recorded source. Each was checked against pages opened on 2026-11-21 (list in
-`docs/content-review.md`, "Built-in loads"). The rule used: a load stays only if its coefficient, with the drag model the page
-states, and its velocity, with the barrel length the page states, both come from an opened maker page. A retailer page or a
-forum post counted for nothing. **Result: two loads changed, one kept as it was, two removed.** Nothing was added.
+`docs/content-review.md`, "Built-in loads"). The rule used: a load stays or is added only if a maker's page for the cartridge
+the load is named after gives a coefficient with its drag model stated (G1 or G7) and a velocity with its test barrel length. A
+coefficient printed with no model is not used; a retailer page or a forum post counts for nothing. **Result: six loads. One is
+kept as it was (p65cm), two changed (p308, p223), three are new (p556m193, p556ss109, p76239sb), and the two ids p556 and
+p76239 are retired.** Names now give the maker and cartridge, so the coefficient and the velocity describe one real product.
 
 | Id | Before | After | Why |
 |---|---|---|---|
-| p65cm | G7 0.326, 2710 fps | same values, name now says 24″ barrel | Hornady's coefficient page gives G7 0.326 and Hornady's cartridge page gives 2710 fps from a 24 in test barrel |
-| p308 | G7 0.243, 2600 fps | G7 0.25, 2600 fps, 24″ barrel | Federal prints G7 0.25 and 2600 fps from 24 in |
-| p223 | G1 0.372, 2750 fps, "77 gr OTM" | G7 0.188, 2720 fps, ".223 Rem 77 gr MatchKing, 24″ barrel" | Federal prints G7 .188 and 2720 fps from 24 in; the bullet it describes is a Sierra MatchKing, not an OTM |
-| p556 | G1 0.304, 3020 fps, 20 in | removed | no opened page gives a coefficient with its model for M855, and no page gives 3020 fps with a barrel length (the Winchester catalog measures 78 ft from the muzzle) |
-| p76239 | G1 0.29, 2350 fps | removed | the only maker page opened is for a 124 gr Federal load with an unlabelled .298; the one page with a labelled G1 is a retailer's |
+| p65cm | G7 0.326, 2710 fps | same values; named "Hornady 6.5 Creedmoor 140 gr ELD-M, 24″ barrel" | Hornady's coefficient page gives G7 0.326 and Hornady's cartridge page gives 2710 fps from a 24 in test barrel |
+| p308 | G7 0.243, 2600 fps | G7 0.25, 2600 fps; "Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel" | Federal prints G7 0.25 and 2600 fps from 24 in |
+| p223 | G1 0.372, 2750 fps, "77 gr OTM" | G7 0.188, 2720 fps; "Federal Gold Medal .223 Rem 77 gr SMK, 24″ barrel" | Federal prints G7 .188 and 2720 fps from 24 in; the cartridge is a Sierra MatchKing load, not an OTM |
+| p556m193 | (none; p556 held G1 0.304, 3020 fps) | G7 0.127, 3301 fps, 55 gr; "Sellier & Bellot 5.56×45 M193 55 gr FMJ, 23.5″ barrel" | Sellier & Bellot's page prints 3,301 fps at 23½ in with G1 0.259 and G7 0.127 |
+| p556ss109 | (none) | G7 0.151, 3035 fps, 62 gr; "RWS 5.56x45 NATO Ball SS109 62 gr, 20″ barrel" | RWS prints 925 m/s from a 508 mm barrel and G1 / G7 coefficients by distance |
+| p76239sb | (none; p76239 held G1 0.29, 2350 fps, 123 gr) | G1 0.286, 2421 fps, 124 gr; "Sellier & Bellot 7.62×39 124 gr FMJ, 20.5″ barrel" | Sellier & Bellot prints 738 m/s from 520 mm with G1 0.286 and G7 0.143 |
+| p556, p76239 | as above | retired, never reused | their numbers had no source; a stored selection falls to Custom (below) |
 
-On the screen, default inputs (59 F, sea level, 50 %, 10 mph from 3 o'clock), before and after:
+On the screen, default inputs (59 F, sea level, 50 %, 10 mph from 3 o'clock), before and after, for the two that changed:
 
 | Load | Range | Before | After |
 |---|---|---|---|
@@ -119,46 +123,70 @@ On the screen, default inputs (59 F, sea level, 50 %, 10 mph from 3 o'clock), be
 | p223 | 500 yd | U 3.26 mil, R 1.54 mil, 1661 fps | U 3.34 mil, R 1.56 mil, 1638 fps |
 | p223 | 1,000 yd | U 12.80 mil, R 3.90 mil, 1030 fps | U 13.53 mil, R 4.17 mil, 983 fps |
 
-**BEFORE changed.** The test `BEFORE` in `tests/test_tactical_layout.py` pins what the screen shows for `p308` (the default) and
-for `p556`. `p308`'s numbers changed, so the default pins were captured again from the screen, read the same way the test reads
-it (`#solElev`, `#solWind`, `#solSub` and the dope card text, mil and MOA). `p556` no longer exists, so the second set now
-pins `p223` (300 yd, 10 mph from 9 o'clock), captured the same way; the keys were renamed `p223_mil` and `p223_moa`. A comment
-beside `BEFORE` names this ruling. The two tests that used `p556` (the second-profile readout and the save and delete test)
-now use `p223`.
+**BEFORE changed, once.** The test `BEFORE` in `tests/test_tactical_layout.py` pins what the screen shows for `p308` (the default)
+and for the second starting point it used, `p556`. `p308`'s numbers changed, so the default pins were captured again from the
+screen, read the same way the test reads it (`#solElev`, `#solWind`, `#solSub` and the dope card text, mil and MOA). `p556` is
+retired, so the second set pins `p223` (300 yd, 10 mph from 9 o'clock), captured the same way; the keys are `p223_mil` and
+`p223_moa`. A comment beside `BEFORE` names this ruling. Renaming the loads afterwards (Ruling A) changed no figure and the pinned
+text holds no load name, so `BEFORE` was not touched again; the two tests that used `p556` use `p223`.
 
 Decisions made without Jordan:
 
-- **Federal's own pages accepted as the source of the coefficient for p308 and p223, although Federal is not the bullet maker
-  (Sierra is).** Federal builds the cartridge and prints the model ("Ballistic Coefficient G7") on its own product page; the
-  Sierra pages that opened either printed no coefficient (175 gr: the ballistics tab never loaded) or printed .372 with no model
-  (77 gr). Federal's .505 and .372 carry no model label, so only the labelled G7 values were used. Cost if wrong: two default
-  coefficients rest on a source one step weaker than the bullet maker. If Sierra's own G7 for either bullet differs, the
-  .308 elevation at 1,000 yd moves by about 0.3 mil per 0.007 of coefficient (the 0.243 to 0.25 change above) and the .223
-  by more, since its coefficient is smaller. Fix: open Sierra's ballistics data for both and replace.
-- **p308 moved from 0.243 to 0.25.** The 0.243 came from the earlier build, with no recorded source. Cost if wrong: the default
-  profile's drop is 0.03 mil lower at 500 yd and 0.29 mil lower at 1,000 yd than the old figure; if 0.243 was right, shots to
-  1,000 yd land about 0.3 mil (11 in) low.
-- **p223 changed from G1 to G7 and from "OTM" to "MatchKing".** The old G1 0.372 happened to equal Federal's unlabelled .372, but
-  no opened page says .372 is a G1 value, and Federal's labelled G7 is .188. The old name said OTM; the loads opened are Sierra
-  MatchKing. Cost if wrong: at 1,000 yd the elevation differs by 0.7 mil from the old figure. A phone that already holds p223
-  keeps its stored numbers until the profile is selected again, then shows the new ones.
+- **Ruling A (controller): a coefficient published by the ammunition maker for its own loaded cartridge is an acceptable source,
+  provided the load's name names that maker's cartridge, so the two figures describe one real product.** Applied to p308 and
+  p223, whose names now begin "Federal Gold Medal", and to p65cm ("Hornady ...", coefficient and velocity both Hornady's own).
+  The Sierra pages that opened either printed no coefficient (175 gr: the ballistics tab never loaded) or printed .372 with no
+  model (77 gr), so Federal's labelled "Ballistic Coefficient G7" values (0.25 and .188) were used, and Federal's unlabelled .505
+  and .372 were not. Cost if wrong: the two coefficients rest on the loaded-cartridge maker rather than the bullet maker; if
+  Sierra's own G7 for either bullet differs, the .308 elevation at 1,000 yd moves by about 0.3 mil per 0.007 of coefficient (the
+  0.243 to 0.25 change measured below), the .223 by more since its coefficient is smaller. For the default load the 0.243 to 0.25
+  change is 0.29 mil of elevation at 1,000 yd (11.97 against 11.68 mil, about 11 in) and 0.03 mil at 500 yd. Fix: open Sierra's
+  data for both bullets and compare.
+- **p308 moved from 0.243 to 0.25.** The 0.243 came from the earlier build with no recorded source. Cost if wrong: if 0.243 was
+  right, shots to 1,000 yd land about 0.3 mil (11 in) low.
+- **p223 changed from G1 to G7 and from "OTM" to Federal's Sierra MatchKing load.** No opened page says .372 is a G1 value;
+  Federal labels only its G7 (.188). Cost if wrong: at 1,000 yd the elevation differs by 0.7 mil from the old figure. A phone that
+  already holds p223 keeps its stored numbers until the profile is selected again, then shows the new ones.
 - **p65cm kept at G7 0.326, Hornady's Mach 2.25 value, although Hornady says the Mach 1.75 values (G7 0.310) are the ones to use
-  beyond 600 yd.** 0.326 is the one Hornady says to use when comparing with other published coefficients, and it is what the
-  load already held. Cost if wrong: beyond 600 yd the drop is understated; at 1,000 yd with 0.310 the elevation is U 9.11 mil
-  against U 8.86 mil (0.25 mil, about 9 in), and 500 yd differs by 0.04 mil. Hornady also refers its coefficients to Army
-  Standard Metro air; the solver reads every coefficient as ICAO (see "Standard atmosphere of the coefficient"), a further
-  1.8 % on the coefficient (up to about 0.2 mil at 1,000 yd).
-- **p556 and p76239 removed rather than kept on weaker sources.** Both could have been kept on a retailer page or an
-  unlabelled coefficient; the rule says no. Cost if wrong: two common loads lose their one-tap starting point; a user can still
-  type the load into the fields and save it as a profile. If a maker page with the model and barrel length is found later, add
-  it under a new id.
-- **No 55 gr 5.56 load and no 16 in barrel velocity added.** The only opened pages for 55 and 62 gr 5.56 (Federal American Eagle)
-  state 24 in and no drag model, and no opened page gave a 16 in velocity. Cost if wrong: none to existing screens; the AR loads
-  stay missing.
-- **A phone whose stored selection names a removed load shows "Custom (unsaved)" and keeps the numbers it had.** The existing
-  code already does this (an id that is not in the list falls to Custom, and the stored field values are restored); a test now
-  covers both removed ids and checks that no console error is raised. The alternative, loading another built-in load, would swap
-  the user's coefficient and velocity without warning. Cost if wrong: such a phone keeps showing the old p556 or p76239 numbers
-  under "Custom (unsaved)" until the user picks a load; those numbers are the unsourced ones.
-- **Sight height and zero left as they were** (sight height 2.6 in for p223 and 1.5 in for p65cm and p308, all zeroed at 100 yd); they are the
-  app's own starting values, not sourced.
+  beyond 600 yd.** 0.326 is the one Hornady says to use when comparing with other published coefficients, and it is what the load
+  already held. Cost if wrong: beyond 600 yd the drop is understated; at 1,000 yd with 0.310 the elevation is U 9.11 mil against
+  U 8.86 mil (0.25 mil, about 9 in), and 500 yd differs by 0.04 mil. Hornady also refers its coefficients to Army Standard Metro
+  air; the solver reads every coefficient as ICAO (see "Standard atmosphere of the coefficient"), a further 1.8 % on the
+  coefficient (up to about 0.2 mil at 1,000 yd).
+- **Ruling B (controller): look again for 5.56 and 7.62x39 loads, since the release is for AR rifles as much as long range.**
+  Loads were accepted from a maker that prints both a labelled coefficient and a velocity with its test barrel length for its own
+  cartridge. Hornady (Frontier 55 gr M193, 62 gr FMJ, BLACK 62 gr FMJ and 123 gr SST), Federal American Eagle, PMC, Winchester,
+  Nosler, Black Hills, Fiocchi, Remington, Barnes and Norma were opened; their pages give velocities with barrels but no
+  coefficient, or a coefficient with no model (list in `docs/content-review.md`). Sellier & Bellot (55 gr M193 and 124 gr 7.62x39)
+  and RWS (62 gr SS109) print both. The Sellier & Bellot page says its coefficients are converted to standard ICAO air, the
+  standard this solver uses.
+- **p556m193: the G7 value used, not the G1.** Sellier & Bellot prints both (G1 0.259, G7 0.127). The G7 table suits a boat-tail
+  bullet; the two models give nearly the same drop at 300 and 500 yd (U 0.78 and 2.58 mil with G7, 0.78 and 2.55 mil with G1;
+  1610 against 1640 fps at 500 yd). Cost if wrong: about 0.03 mil at 500 yd.
+- **p556ss109: one G7 value, 0.151, taken from RWS's table, which gives a different value at every distance.** G7 is 0.151 at 25 m,
+  100 m and 400 m, 0.155 at 200 m, 0.153 at 300 m, 0.144 at 500 m, and 0.158 to 0.094 beyond 600 m (where the bullet is near
+  Mach 1.2 and below). 0.151 is the value that holds from 25 m to 400 m, where the bullet is still above Mach 1.5. Cost if wrong:
+  past 500 yd the drop is understated; with 0.144 the 500 yd elevation is U 2.96 mil against U 2.86 mil (0.10 mil, 5 in) and
+  1585 against 1642 fps; the table's own value changes again beyond 600 m, which a single coefficient cannot follow. The velocity
+  is RWS's 925 m/s at v10 (10 m from the muzzle), treated as the muzzle velocity; its second line, 914 m/s "assault rifle", was not
+  used. Cost if wrong: a muzzle velocity a few metres per second too low (not measured).
+- **p76239sb is 124 gr, not 123 gr, and G1 0.286.** Sellier & Bellot's only 7.62x39 FMJ row is 124 gr; Hornady's 123 gr SST page
+  prints no coefficient, and no maker page with a labelled coefficient for a 123 gr FMJ was found. G1 was chosen for this
+  flat-base bullet (S&B also prints G7 0.143); with G7 0.143 the 500 yd elevation is U 5.54 mil against U 5.45 mil (0.09 mil) and
+  the velocity 1146 against 1219 fps. Cost if wrong: about 0.1 mil at 500 yd. The velocity 2421 fps is S&B's 738 m/s, the barrel
+  20.5 in is 520 mm. A phone selecting the old 123 gr p76239 now meets the Custom fallback below, not a 124 gr load.
+- **No 16 in barrel velocity was added.** The only 16 in figures found are PMC's (55 gr 3120 fps, 62 gr LAP 2920 fps, its
+  catalogue states "Barrel Length: 16 inches"), and PMC prints its coefficients (0.243, 0.304) with no drag model anywhere; Federal's
+  Fusion MSR 62 gr is 2750 fps at 16 in with no coefficient. Under the rule a coefficient with no model is unusable, so no load
+  was built on them. Cost if wrong: the AR loads are all 20 to 24 in velocities; a 16 in carbine is slower, and the user must enter
+  its velocity by hand.
+- **No M855 or Hornady 62 gr load.** RWS's SS109 is the NATO 62 gr round with a labelled coefficient; the U.S. M855 pages
+  (Winchester catalogue, Federal, an unnamed maker's data sheet) gave no model or no barrel length. Cost if wrong: none to
+  existing screens.
+- **A phone whose stored selection names a retired load shows "Custom (unsaved)" and keeps the numbers it had.** The existing
+  code already does this (an id that is not in the list falls to Custom, and the stored field values are restored); a test covers
+  both retired ids and checks that no console error is raised. The alternative, loading another built-in load, would swap the
+  user's coefficient and velocity without warning. Cost if wrong: such a phone keeps showing the old p556 or p76239 numbers under
+  "Custom (unsaved)" until the user picks a load; those numbers are the unsourced ones.
+- **Sight height and zero left as they were** (sight height 2.6 in for the AR loads and p223, 2.0 in for p76239sb, 1.5 in for p65cm
+  and p308, all zeroed at 100 yd); they are the app's own starting values, not sourced.

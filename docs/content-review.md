@@ -8154,23 +8154,26 @@ thread (https://www.snipershide.com/shooting/goto/post?id=9268996; no tables).
 
 ### Built-in loads (2026-11-21)
 
-Each built-in load (`PRESETS` in `src/app.js`) was checked against pages opened on 2026-11-21. A load stays only if both its
-coefficient (with the drag model the page states) and its velocity (with the barrel length the page states) came from an opened
-maker page. The test is `test_built_in_loads_are_the_sourced_values` in `tests/test_ballistics_math.py`; the decisions and what
-each costs if wrong are in `docs/ballistics-rulings.md`. Sight height and zero range in each load are the app's own starting
-values, not sourced numbers.
+Each built-in load (`PRESETS` in `src/app.js`) was checked against pages opened on 2026-11-21. A load stays only if one maker
+page (or two pages of the same maker) gives both a coefficient with the drag model stated (G1 or G7) and a velocity with its test
+barrel length, for the cartridge the load is named after. A coefficient printed without a model is not used. A retailer page or a
+forum post is not a source. The test is `test_built_in_loads_are_the_sourced_values` in `tests/test_ballistics_math.py`; the
+decisions and what each costs if wrong are in `docs/ballistics-rulings.md`. Sight height and zero range in each load are the
+app's own starting values, not sourced numbers.
 
 Loads as they are now (the values copied into the test as `SOURCED`):
 
-| Id | Name | Coefficient | Drag model | Weight | Velocity | Kept / changed |
-|---|---|---|---|---|---|---|
-| p223 | .223 Rem 77 gr MatchKing, 24″ barrel | 0.188 | G7 | 77 gr | 2720 fps | changed (was G1 0.372, 2750 fps, named "OTM") |
-| p65cm | 6.5 Creedmoor 140 gr ELD-M, 24″ barrel | 0.326 | G7 | 140 gr | 2710 fps | kept, values unchanged, name gains the barrel length |
-| p308 | .308 Win 175 gr SMK, 24″ barrel | 0.25 | G7 | 175 gr | 2600 fps | changed (was G7 0.243) |
+| Id | Name | Coefficient | Weight | Velocity | Outcome |
+|---|---|---|---|---|---|
+| p556m193 | Sellier & Bellot 5.56×45 M193 55 gr FMJ, 23.5″ barrel | G7 0.127 | 55 gr | 3301 fps | new |
+| p556ss109 | RWS 5.56x45 NATO Ball SS109 62 gr, 20″ barrel | G7 0.151 | 62 gr | 3035 fps | new |
+| p223 | Federal Gold Medal .223 Rem 77 gr SMK, 24″ barrel | G7 0.188 | 77 gr | 2720 fps | changed (was G1 0.372, 2750 fps) |
+| p76239sb | Sellier & Bellot 7.62×39 124 gr FMJ, 20.5″ barrel | G1 0.286 | 124 gr | 2421 fps | new |
+| p65cm | Hornady 6.5 Creedmoor 140 gr ELD-M, 24″ barrel | G7 0.326 | 140 gr | 2710 fps | kept, values unchanged |
+| p308 | Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel | G7 0.25 | 175 gr | 2600 fps | changed (was G7 0.243) |
 
-Removed (ids never to be reused): p556 (5.56 NATO 62 gr M855, 20″ barrel, G1 0.304, 3020 fps) and p76239 (7.62x39 123 gr FMJ,
-G1 0.29, 2350 fps). No 55 gr 5.56 load or 16 in barrel velocity was added: no opened page gave a coefficient with its model for
-one.
+Retired, ids never to be reused: p556 (5.56 NATO 62 gr M855, 20″ barrel, G1 0.304, 3020 fps) and p76239 (7.62x39 123 gr FMJ, G1
+0.29, 2350 fps): neither had a source for its numbers. No 16 in barrel velocity could be paired with a labelled coefficient.
 
 Pages taken from:
 
@@ -8192,9 +8195,29 @@ Pages taken from:
   77 gr, 2720 fps, ballistic coefficient .372 (no model label) and "Ballistic Coefficient G7" .188. No barrel length on this page.
 - **Federal, "Gold Medal 223 Rem. (5.56x45mm)" product page**,
   https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=147. Taken: Sierra MatchKing BTHP, 77 gr, 2720 fps, test
-  barrel length 24 in, ballistic coefficient 0.372 (no model label).
+  barrel length 24 in, ballistic coefficient 0.372 (no model label). The Federal data sheet for the same cartridge,
+  https://defence.nioa.com.au/uploads/documents/Federal/Rifle/223_556/GM223M3.pdf, gives 2730 fps plus or minus 25 from the
+  "SAAMI standard test barrel" of 24.0 in and no coefficient; not used for the value (the product pages above give 2720).
+- **Sellier & Bellot, "5,56 × 45" M193 55 GRS SB556A**,
+  https://www.sellier-bellot.cz/en-us/products/rifle-ammunition/rifle-ammunition-fmj/detail/745/. Taken: 55 gr, velocity at the
+  muzzle 3,301 fps (2,912 fps at 100), test barrel length 23½ in, G1 0.259 and G7 0.127. The same figures (1,006 m/s, 600 mm,
+  0.259 / 0.127) are in the row for the .223 Rem. 55 grs FMJ (V341862) on
+  https://sellier-bellot.cz/en/products/rifle-ammunition/rifle-ammunition-fmj and (V341872) on
+  https://www.sellier-bellot.cz/en/products/rifle-ammunition/rifle-ammunition-training-fmj/.
+- **Sellier & Bellot, "7,62 × 39" FMJ 124 GRS (V340832 / V340842)**, the same two list pages. Taken: 124 gr (8.00 g), V0 738 m/s
+  (2,421 fps), V100 640 m/s, test barrel length 520 mm (20.5 in), G1 0.286 and G7 0.143. The table header gives millimetres for
+  the barrel; neither list has a 123 gr row. The page https://www.sellier-bellot.cz/en/products/ballistic-coefficient-calculation/
+  says the coefficients are calculated from measured velocities and "converted to standard ICAO air conditions" (15 C, 0 %
+  humidity, 1013.25 hPa), the standard this solver uses.
+- **RWS, "5.56x45 NATO BALL (SS109)" 4.0 g / 62 gr dual core**,
+  https://www.rws-technology.com/en/armed-forces-law-enforcement/product/556x45-nato-ball-ss109-62gr-2422469. Taken: V0 925 m/s
+  (3,035 fps) with a 508 mm (20 in) test barrel (the page's velocity row is measured at v10, 10 m from the muzzle, tolerance plus
+  or minus 15 m/s; a second "assault rifle" line gives 914 m/s), and the table "Ballistic coefficient G1 / G7" by distance:
+  25 m 0.292 / 0.151; 100 m 0.281 / 0.151; 200 m 0.284 / 0.155; 300 m 0.281 / 0.153; 400 m 0.273 / 0.151; 500 m 0.242 / 0.144;
+  600 m 0.238 / 0.158; 700 m 0.237 / 0.123; 800 m 0.236 / 0.094; 900 m 0.229 / 0.106; 1000 m 0.234 / 0.123 (speed at those
+  distances 898, 818, 719, 626, 538, 451, 379, 329, 298, 275, 257 m/s). No atmosphere is stated on that page.
 
-Opened, nothing usable for these three loads:
+Opened, nothing usable for these loads:
 
 - Sierra, ".22 Cal / 5.56mm 77 Gr. HPBT MatchKing", https://sierrabullets.com/product/22-caliber-77-gr-hpbt-matchking. Prints
   .372 at 3000 fps and above, .362 from 2500 to 1700 fps, .343 below 1700 fps, and does not say which drag model. Weight 77 gr.
@@ -8202,12 +8225,44 @@ Opened, nothing usable for these three loads:
   and https://sierrabullets.com/product/30-cal-7-62mm-175-gr-hpbt-matchking: the weight and caliber only; their Ballistics and Specs
   tabs showed only a loading icon, so no coefficient was read. https://www.sierrabullets.com/?p=15292 (22 cal list) prints none.
   Sierra "4.1 Basic Definitions", https://www.sierrabullets.com/?p=17353, does not name a drag model.
-- Federal American Eagle 223 Rem. (5.56x45mm) pages, https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=71
-  (62 gr FMJ boat-tail, 3020 fps, 24 in, coefficient 0.307 with no model label) and
-  https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=69 (55 gr FMJ boat-tail, 3240 fps, 24 in, 0.269, no model
-  label). Not M855 and no model, so neither could source p556 or a 55 gr load.
-- Federal American Eagle 7.62x39 page, https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=66 (124 gr FMJ,
-  2350 fps, 20 in, coefficient 0.298 with no model label). A different weight and no model, so it could not source p76239.
+- Hornady cartridge pages print velocity with a test barrel and no coefficient, so none could source a 5.56 or 7.62x39 load:
+  https://www.hornady.com/ammunition/rifle/5.56-nato-55-gr-fmj-bt-frontier (55 gr M193 Frontier, 3240 fps, 20 in),
+  https://www.hornady.com/ammunition/rifle/5.56-nato-55-gr-fmj-(m193)-frontier-50bx (same), https://www.hornady.com/ammunition/rifle/223-rem-55-gr-fmj-bt-frontier#!/
+  (3240 fps, 24 in), https://www.hornady.com/ammunition/rifle/5.56-nato-62-gr-fmj-frontier?age=confirmed (62 gr FMJ, 3060 fps,
+  20 in), https://www.hornady.com/ammunition/rifle/223-remington-62-gr-fmj-black (62 gr FMJ BLACK, 3100 fps, 24 in) and
+  https://www.hornady.com/ammunition/rifle/7.62x39-123-gr-sst-black?age=confirmed (123 gr SST BLACK, 2350 fps, 20 in; the first
+  request was refused by the fetch tool's permission check and the second opened). Hornady bullet pages
+  https://www.hornady.com/bullets/rifle/22-cal-224-55-gr-fmj-bt-with-cannelure, https://www.hornady.com/bullets/rifle/22-cal-.224-62-gr-fmj
+  and https://www.hornady.com/bullets/rifle/7-62-cal-310-123-gr-sst print no coefficient either (their Specifications section is a
+  link that returned no values).
+- Federal American Eagle pages: https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=71 (62 gr FMJ boat-tail,
+  3020 fps, 24 in, 0.307), https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=69 (55 gr, 3240 fps, 24 in, 0.269),
+  https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=66 (7.62x39 124 gr FMJ, 2350 fps, 20 in, 0.298),
+  https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE193.html (5.56x45 55 gr, 3165 fps, no barrel
+  length, .246) and https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE223N.html (223 Rem 62 gr, 3020 fps,
+  no barrel length, .307); no coefficient carries a model label. Federal's 2019 ballistics catalogue
+  (https://www.federalpremium.com/on/demandware.static/-/Library-Sites-VistaFederalSharedLibrary/default/ve1ee04a44271d744373155c0b4d7e4c993afc242/contentDocuments/catalog/2019/Federal2019-Ballistics.pdf)
+  has G1 and G7 columns but they are blank for every 223 Rem 55, 62 and 64 gr entry (and it has no coefficient for the
+  American Eagle table), so it cannot supply a model either.
+- PMC, https://pmcammo.com/product/x-tac-5-56x/ (5.56mm NATO 55 gr FMJ-BT, 3120 fps, coefficient 0.243) and
+  https://pmcammo.com/product/x-tac-5-56k/ (62 gr LAP, 2920 fps, 0.304), with the catalogue
+  https://pmcammo.com/wp-content/uploads/PMC-Catalog-2024-web.pdf stating "Barrel Length: 16 inches" for both: the only 16 in
+  velocities found, but neither the pages nor the catalogue say G1 or G7 for the coefficient, so not usable.
+- Norma, https://www.norma-ammunition.com/governmental/products/fmj/223-rem-full-metal-jacket-55gr---91012003: 223 Rem FMJ
+  3.6 g / 55 gr, V0 3232 fps, 24 in barrel, 0.232 G1 (a complete source, not used because Sellier & Bellot's page also gives a G7
+  and an imperial table). Norma's FMJ list https://www.norma-ammunition.com/governmental/products/fmj prints no values.
+- Other makers opened with no coefficient or no model: Winchester https://winchester.com/Products/Ammunition/Rifle/USA/W223K and
+  https://winchester.com/Products/Ammunition/Rifle/USA/USA223R1 ("no ballistics data available"); Nosler
+  https://www.nosler.com/223-remington-55gr-ballistic-tip-varmint-ammunition.html (3100 fps, 24 in) and
+  https://www.nosler.com/223-rem-62gr-fbhp-varmageddon-ammunition.html (2950 fps, 24 in), no coefficient; Barnes
+  https://barnesbullets.com/vor-tx-rifle-tsx-5-56-x-45mm/ (Specs and Ballistics tabs did not load); Black Hills
+  https://www.black-hills.com/shop/new-rifle-ammo/5-56mm/ (20 in, no coefficient); Fiocchi
+  https://www.fiocchiusa.com/centerfire-rifle/range-dynamics-rifle/33-556M193L.html (5.56 NATO 55 gr FMJ-BT, 3240 fps, no barrel
+  length, .243 unlabelled); Remington https://www.remington.com/rifle/umc-rifle/29-23711.html (223 Rem 55 gr, 3240 fps, no barrel
+  length, .202 unlabelled); Sellier & Bellot law-enforcement list
+  https://www.sellier-bellot.cz/en/products/law-enforcement-products/5-56x45/list/ (SS109 62 gr 945 m/s, no barrel length or
+  coefficient) and catalogue https://www.sellier-bellot.cz/repository/file/SB-le-catalogue-2024-en.pdf (no barrel lengths or
+  coefficients); Sellier & Bellot 123 gr: no row (the 7.62x39 row is 124 gr).
 - M855: 2022 Winchester military small-caliber catalog, https://online.flippingbook.com/view/895403448 (62 gr, 3,020 ft/s plus or
   minus 40 measured 78 ft from the muzzle; no barrel length, no coefficient); the 62 gr FMJ product data sheet on
   https://cdn.shopify.com/s/files/1/0286/2592/8227/files/Product_Data_Sheet_5.56x45mm_62gr_FMJ.pdf (3100 ft/s plus or minus 30 at
@@ -8222,6 +8277,12 @@ Hide post (https://www.snipershide.com/shooting/posts/10401844; calls 0.326 the 
 Would not open: Hornady bullet page https://www.hornady.com/bullets/rifle/6-5mm-264-140-gr-eld-match (returned "You are being
 redirected" twice); https://www.federalpremium.com/products/details/rifle.aspx?id=151 and
 https://www.hornady.com/ammunition/rifle/6-5-creedmoor-140-gr-eld-match?age=confirmed (refused by the fetch tool's permission
-check, not retried); Sniper's Hide thread https://www.snipershide.com/shooting/threads/g7-bc-for-308-175-smk.7775/page-2 (the
-fetch failed). Not opened for lack of a search result giving the address: any Sierra page that prints a G1 or G7 for the 175 gr
-MatchKing.
+check, not retried); https://www.sellierbellot.us/products/rifle-ammunition/rifle-ammunition-target-match/detail/792/ (refused by
+the permission check, not retried); Sellier & Bellot https://www.sellier-bellot.cz/produkty/naboje-pro-ozbrojene-slozky/5-56x45/detail/798/
+(opened, navigation menus only, no figures); Norma SS109 page
+https://www.norma-ammunition.com/en-gb/products/governmental/centerfire-rifle/steel-core/556x45-nato-steel-core-ss109-62gr---91012014
+(failed at its site, a second request was also refused), Norma TSX copper 62 gr page
+https://www.norma-ammunition.com/governmental/products/tsx-copper-solid/223-rem-tsx-copper-solid-62gr---91012001 (failed),
+Fiocchi https://fiocchi.com/en/705556.html (failed); Sniper's Hide thread
+https://www.snipershide.com/shooting/threads/g7-bc-for-308-175-smk.7775/page-2 (the fetch failed). Not opened for lack of a
+search result giving the address: any Sierra page that prints a G1 or G7 for the 175 gr MatchKing.

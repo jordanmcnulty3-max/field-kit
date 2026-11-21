@@ -179,17 +179,23 @@ def test_every_case_records_where_it_came_from():
 
 # ---------- The built-in loads: each number comes from a page that was opened ----------
 
-# Copied from docs/content-review.md ("Built-in loads"). Coefficient and drag model from the page named there, velocity and
-# barrel length from the ammunition maker's page; sight height and zero are the app's own starting values, not sourced.
+# Copied from docs/content-review.md ("Built-in loads"). Coefficient and drag model, and velocity with its barrel length, from
+# the maker's page for the cartridge the name gives; sight height and zero are the app's own starting values, not sourced.
 SOURCED = [
-    {'id': 'p223', 'name': '.223 Rem 77 gr MatchKing, 24″ barrel', 'bc': 0.188, 'model': 'G7', 'w': 77, 'mv': 2720,
+    {'id': 'p556m193', 'name': 'Sellier & Bellot 5.56×45 M193 55 gr FMJ, 23.5″ barrel', 'bc': 0.127, 'model': 'G7', 'w': 55,
+     'mv': 3301, 'sight': 2.6, 'zero': 100},
+    {'id': 'p556ss109', 'name': 'RWS 5.56x45 NATO Ball SS109 62 gr, 20″ barrel', 'bc': 0.151, 'model': 'G7', 'w': 62,
+     'mv': 3035, 'sight': 2.6, 'zero': 100},
+    {'id': 'p223', 'name': 'Federal Gold Medal .223 Rem 77 gr SMK, 24″ barrel', 'bc': 0.188, 'model': 'G7', 'w': 77, 'mv': 2720,
      'sight': 2.6, 'zero': 100},
-    {'id': 'p65cm', 'name': '6.5 Creedmoor 140 gr ELD-M, 24″ barrel', 'bc': 0.326, 'model': 'G7', 'w': 140, 'mv': 2710,
+    {'id': 'p76239sb', 'name': 'Sellier & Bellot 7.62×39 124 gr FMJ, 20.5″ barrel', 'bc': 0.286, 'model': 'G1', 'w': 124,
+     'mv': 2421, 'sight': 2.0, 'zero': 100},
+    {'id': 'p65cm', 'name': 'Hornady 6.5 Creedmoor 140 gr ELD-M, 24″ barrel', 'bc': 0.326, 'model': 'G7', 'w': 140, 'mv': 2710,
      'sight': 1.5, 'zero': 100},
-    {'id': 'p308', 'name': '.308 Win 175 gr SMK, 24″ barrel', 'bc': 0.25, 'model': 'G7', 'w': 175, 'mv': 2600,
+    {'id': 'p308', 'name': 'Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel', 'bc': 0.25, 'model': 'G7', 'w': 175, 'mv': 2600,
      'sight': 1.5, 'zero': 100},
 ]
-REMOVED_IDS = ['p556', 'p76239']   # no source with the drag model and the barrel length: see docs/ballistics-rulings.md
+REMOVED_IDS = ['p556', 'p76239']   # ids retired, never reused (their numbers had no source): see docs/ballistics-rulings.md
 
 
 def test_built_in_loads_are_the_sourced_values(ready):

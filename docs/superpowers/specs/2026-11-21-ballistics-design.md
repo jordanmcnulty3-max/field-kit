@@ -123,6 +123,12 @@ The check:
 - **Pass mark (call):** while the bullet is above Mach 1.2, elevation within 0.1 mil and wind
   within 0.1 mil out to 600 yd, and within 0.2 mil out to 1,000 yd; velocity within 1 percent.
   Below Mach 1.2 the difference is recorded, not judged.
+- **What counts as a reference (call):** a trajectory computed with one stated G1 or G7
+  coefficient, so it is the same kind of model as this solver. Two separate published solvers of
+  that kind count as independent. A maker's table or firing table built from radar data, a custom
+  drag curve or stepped coefficients is recorded beside the app's figures but **not judged**
+  against the pass mark, and the solver is **not** extended to match it (no stepped coefficients,
+  no custom drag curves in these releases).
 - **Checks that need no outside source:** with drag switched off the path is the textbook
   parabola; halving the time step moves no answer by more than 0.01 mil; air density matches the
   standard atmosphere table at sea level and at altitude; the two drag tables match their
@@ -149,9 +155,14 @@ profile, every stored input and every v7.8 backup loads unchanged and behaves as
 | Sight | Extra detail | Answer for elevation | Answer for wind |
 |---|---|---|---|
 | Not set | none | mil, MOA and inches together | mil, MOA and inches |
-| Scope with turrets | unit: mil or MOA; click size: 0.1 or 0.05 mil, 1/4, 1/8, 1/2 or 1 MOA | the angle in the turret's unit, and clicks | the angle in that unit, and clicks |
+| Scope with turrets | unit: mil, MOA, or inches per 100 yd; click size: 0.1 or 0.05 mil, or 1/4, 1/8, 1/2 or 1 in the other two | the angle in the turret's unit, and clicks | the angle in that unit, and clicks |
 | Drop reticle (low-power scope) | unit of the marks; each mark's distance below the centre, as the scope's manual gives it (up to 10 marks) | the nearest mark, then how far to hold high or low of it in inches | the angle in the reticle's unit, and inches |
 | Red dot or iron sights | none | hold high or low, in inches | hold left or right, in inches |
+
+**MOA means true MOA (1.047 in at 100 yd).** Some scopes sold as "MOA" really move 1 in per
+100 yd; the two differ by 4.7 percent, which is five or six quarter-clicks on a long shot. So
+turrets and reticle marks offer a third unit, "Inches per 100 yd", and the editor says to check
+the manual for which one the scope is. With no sight set, the answer shows true MOA. **(call)**
 
 Rules for the drop reticle:
 - The owner types the marks from their own manual. The app ships none.
@@ -160,6 +171,11 @@ Rules for the drop reticle:
 - The editor carries one line: on a scope whose reticle does not grow with magnification, the
   marks are true at one magnification only (the manual says which).
 - Marks must increase down the list; a list that does not is refused with the reason.
+- **Marks are entered as angles only (call).** Many low-power scope manuals label the marks by
+  yardage for one stated load and also print a table of their angles; the angles are what is
+  typed. A manual that gives yardages and nothing else is not supported in release 1, and the
+  editor says so. Entering marks by yardage, with the app working out what distance each mark is
+  really true at for the owner's load, is a candidate for release 2 if the group's manuals need it.
 
 **Zero conditions** (optional): temperature and either altitude or station pressure at the time
 the rifle was zeroed. When given, the zero is solved in that air and the shot in today's air. When
@@ -201,8 +217,8 @@ inputs:
 [ Tikka .308  ·  mil turrets            Edit ]
 
   ELEVATION            WINDAGE
-  U 3.5 mil            R 1.2 mil
-  35 clicks            12 clicks
+  U 3.6 mil            R 1.2 mil
+  36 clicks            12 clicks
   At 500 yd: drop 64.3 in, drift 21.9 in,
   1761 fps, 1205 ft-lb, 0.70 s flight.
                          [ Show all units ]
@@ -260,6 +276,7 @@ presenting it.
 - How the tests reach the solver (it is a top-level `BAL` object in `src/ballistics.js`).
 - Which reference sources are used, within the rule that they were opened and are recorded.
 - Table column widths and the swipe cue; the chart in section 6.
+- Whether "Show all units" is remembered per profile; the humidity assumed for zero conditions.
 - The order of tasks. Section 1 comes first: nothing is built on maths that has not been checked.
 
 ## What cannot be tested in a build session

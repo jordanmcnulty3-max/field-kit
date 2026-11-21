@@ -206,3 +206,42 @@ Decisions made without Jordan:
   U 3.6 to U 3.5 mil; the figures are in the table above), and a phone on p223 sees G7 0.188 and 2720 fps in place of G1 0.372 and
   2750 fps. If a person had hand-set a load field and still showed a built-in id, that cannot happen through the screen (typing
   flips to Custom); a hand-edited backup could, and its numbers would be replaced.
+
+## Correcting a profile from a real shot (2026-11-21)
+
+A person types the distance and the elevation their rifle really needed there, and the editor finds the muzzle velocity that
+reproduces it (`BAL.trueMv`, a bisection on velocity between 0.85 and 1.15 times the profile's, to within 0.5 fps). Only the
+velocity moves. The figures below are the default .308 (G7 0.243, 175 gr, 2600 fps, 1.5 in sight, 100 yd zero, 59 F, sea level,
+50 %) measured with the solver on 2026-11-21.
+
+- **Only the velocity is corrected, never the coefficient.** One shot gives one number, and a velocity and a coefficient cannot
+  both be found from it. Velocity is the figure a person is least sure of (chronograph, barrel, temperature) and the one a
+  single shot at distance is most sensitive to. Cost if wrong: the velocity absorbs any error that is really in the
+  coefficient, and it is right only near the distance of the shot. With a coefficient 7 % too high (0.26 for 0.243) a shot at
+  600 yd gives 2567 fps, and the card is then 0.03 mil off at 400 yd, 0.08 mil off at 800 yd and 0.29 mil off at 1,000 yd.
+  Nothing on screen says the fit belongs to one distance beyond the line under the heading.
+- **Refused under 300 yd.** Near the muzzle a small misreading becomes a large velocity error: a 0.1 mil misreading at 300 yd
+  moves the answer by 74 fps (2.6 %), and at 200 yd it would be larger still, past what a person could judge. Cost if wrong:
+  a person with a real, careful 250 yd shot is turned away and must shoot farther; a limit set lower would let wild velocities
+  through as results.
+- **Refused where the bullet is below Mach 1.2 at that distance with the profile's own velocity.** Through the transonic zone
+  the drag table changes fast, so the same angle comes from very different velocities, and the error is in the coefficient
+  curve, not the velocity. The default .308 is Mach 1.08 at 900 yd and 0.98 at 1,000 yd. Cost if wrong: a person shooting a
+  slow load far out cannot use this at all; a limit nearer Mach 1.0 would give them a velocity that is mostly the drag table's
+  error.
+- **A change over 5 % warns; a change over 15 % is refused.** 5 % of 2600 fps is 130 fps, which is 0.62 mil at 600 yd; 15 % is
+  390 fps, 2.2 mil. A real chronograph difference between a box and a rifle is usually a few percent; more than that points at
+  the distance, the zero or the sight height. The numbers are judgement, not measured. Cost if wrong: a rifle that really is
+  more than 15 % off its stated velocity (a much shorter barrel than the load was tested in) is refused and the person must
+  edit the velocity by hand; a limit too wide would let a typing slip through as a result.
+- **The shot is read level, with no wind, in today's conditions from the Ballistics screen.** The part's line says so. The
+  profile's zero conditions are used as the zero air. Cost if wrong: whatever the shot had in it is folded into the velocity.
+  At 600 yd on the default .308: a 20 degree incline gives 2681 fps (+3.1 %) for a rifle that is really at 2600; air at 20 F
+  when the screen says 59 F gives 2567 fps (-1.3 %); a 10 mph wind along the line of fire gives 2594 fps (-0.2 %), because it
+  barely moves the drop. A crosswind does not affect elevation here.
+- **The original velocity is kept and can be put back.** The first correction stores the velocity the sheet opened with as
+  `mv0` on the profile; later corrections leave it alone; "Put back" writes it into the velocity field and the sheet's Save
+  removes it. A copy made with "Save as new profile" carries `mv0` only when a correction was applied in that sheet. Editing the
+  velocity by hand never creates or removes it. Cost if wrong: a person who corrects, then hand-edits, then corrects again
+  can only put back the first velocity, not an in-between one; and a profile that has been corrected keeps a second number in
+  storage (and in a backup) that older copies of the app drop on their next save.

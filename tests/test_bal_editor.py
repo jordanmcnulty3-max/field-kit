@@ -323,6 +323,7 @@ def test_editor_fits_360_day_and_night_with_large_text(page, app_url, sight, nig
     assert box['x'] >= -1 and box['x'] + box['width'] <= 361, box
     assert [x for x in overflow(page, DLG) if 'page scrolls' not in x] == []
     assert page.evaluate("d => { const e = document.querySelector(d); return e.scrollWidth <= e.clientWidth + 1; }", DLG)
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
     assert too_small(page, DLG) == []
     assert clipped_buttons(page, DLG) == []
     enlarge_text(page)

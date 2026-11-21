@@ -318,13 +318,13 @@ def test_ballistics_fields_did_not_move(page, app_url):
       [...h.parentElement.querySelectorAll('input, select, button')].map(e => e.id)])""")
     assert got == [
         ['Shot', ['bRange', 'bAngle', 'bWind', 'bClock']],
-        ['Rifle and load', ['bProfile', 'bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero', 'bSave', 'bDel']],
+        ['Rifle and load', ['bProfile', 'bBC', 'bModel', 'bW', 'bMV', 'bSH', 'bZero', 'bSave', 'bDel', 'bEdit']],
         ['Conditions', ['bTemp', 'bAlt', 'bPress', 'bRH']],
         ['Dope card', ['bMax', 'bStep']],
     ]
     ids = page.evaluate("[...document.querySelectorAll('#view-ballistics [id]')].map(e => e.id)")
     assert ids == ['solution', 'solElev', 'solWind', 'solSub', 'unitSeg', 'bRange', 'bAngle', 'bWind', 'bClock', 'bProfile', 'bBC', 'bModel',
-                   'bW', 'bMV', 'bSH', 'bZero', 'bSave', 'bDel', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dope']
+                   'bW', 'bMV', 'bSH', 'bZero', 'bSave', 'bDel', 'bEdit', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dope']
 
 
 # ---------- Ballistics behaviour ----------

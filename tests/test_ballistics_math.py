@@ -11,6 +11,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(HERE, 'fixtures', 'ballistics_reference.json')) as f:
     CASES = json.load(f)
 JUDGED_CASES = [c for c in CASES if c['judged']]
+with open(os.path.join(HERE, 'fixtures', 'ballistics_drag_tables.json')) as f:
+    DRAG = json.load(f)
 
 G = 9.80665
 FPS = 0.3048
@@ -67,38 +69,53 @@ def test_halving_the_time_step_moves_nothing(ready):
 
 # ---------- Standard atmospheres ----------
 
+# U.S. Standard Atmosphere (same as ICAO below 11 km), English units: Anderson, Introduction to Flight, Appendix E.
+# (geometric altitude ft, temperature R, pressure lb/ft2, density slug/ft3)
+STD_ATM = [(0, 518.69, 2116.2, 2.3769e-3), (5000, 500.86, 1760.9, 2.0482e-3), (10000, 483.04, 1455.6, 1.7556e-3)]
+SLUG_FT3 = 515.3788   # kg/m3 per slug/ft3
+PSF_PER_INHG = 70.7262
+
+
 def test_air_density_matches_the_standard_atmosphere(ready):
     atm = lambda *a: ready.evaluate('a => BAL.atmosphere(...a)', list(a))
     # ICAO sea level, 59 F, 29.92 inHg, dry: 1.225 kg/m3, speed of sound 340.29 m/s (ballistics-engine constants.rs)
     icao = atm(59, 0, 29.92, 0)
     assert icao['rho'] == pytest.approx(1.225, rel=1e-3)
     assert icao['c'] == pytest.approx(340.29, abs=0.05)
-    # the same air reached from altitude 0 with pressure left blank (0 = from altitude)
-    assert atm(59, 0, 0, 0)['rho'] == pytest.approx(1.225, rel=1e-3)
     # Army Standard Metro, 59 F, 29.53 inHg, 78 %: 0.0751265 lb/ft3 (Dexadine Ballistic Explorer help)
     metro = atm(59, 0, 29.53, 78)
     assert metro['rho'] == pytest.approx(0.0751265 * 16.018463, rel=1e-3)
 
 
+@pytest.mark.parametrize('row', STD_ATM, ids=[f'{r[0]}ft' for r in STD_ATM])
+def test_air_density_at_altitude_matches_the_standard_atmosphere(ready, row):
+    """Pressure left blank (0) is worked out from altitude; at the table's temperature, dry air, the density is the table's."""
+    alt, t_rankine, p_psf, rho_slug = row
+    a = ready.evaluate('a => BAL.atmosphere(...a)', [t_rankine - 459.67, alt, 0, 0])
+    assert a['pIn'] == pytest.approx(p_psf / PSF_PER_INHG, rel=1e-3)
+    assert a['rho'] == pytest.approx(rho_slug * SLUG_FT3, rel=1e-3)
+
+
 # ---------- Drag tables ----------
 
 def test_drag_tables_match_their_published_values(ready):
+    """Every [Mach, Cd] pair of BAL.tables against the G1 and G7 tables printed by ballistics-engine (data/g1.csv,
+    data/g7.csv; origin BRL / Lowry 1965 / McCoy, as its data README states)."""
     tables = ready.evaluate('BAL.tables')
     assert set(tables) == {'G1', 'G7'}
-    for name, t in tables.items():
-        machs = [m for m, _ in t]
-        assert machs == sorted(machs) and len(set(machs)) == len(machs), name
-        assert machs[0] == 0 and machs[-1] == 5, name
-        assert all(0.1 < cd < 0.7 for _, cd in t), name
-    g1 = dict(map(tuple, tables['G1']))
-    g7 = dict(map(tuple, tables['G7']))
-    # The G1 rows printed in ballistics-engine's data README (data format example of its G1/G7 CSV files).
-    assert (g1[0], g1[0.05], g1[0.1]) == (0.2629, 0.2558, 0.2487)
-    # Applied Ballistics, ABDOC130 Custom Drag Models: at Mach 3 the G1 projectile has a drag coefficient of 0.51,
-    # the G7 projectile only 0.24 (printed to two decimals).
-    assert round(g1[3], 2) == 0.51 and round(g7[3], 2) == 0.24
-    # No source that opened prints every pair; the full curves are checked through the trajectories below
-    # (G1 through the sound barrier in the Steiner table, G7 in the pyballistic table).
+    for name in ('G1', 'G7'):
+        ours = {m: cd for m, cd in tables[name]}
+        published = {m: cd for m, cd in DRAG[name]}
+        assert len(ours) == len(tables[name]), name          # no Mach number twice
+        not_covered = sorted(set(ours) - set(published))     # pairs in BAL.tables that the source does not print
+        missing = sorted(set(published) - set(ours))         # pairs the source prints that BAL.tables lacks
+        assert not_covered == [] and missing == [], (name, not_covered, missing)
+        wrong = [(m, ours[m], published[m]) for m in published if ours[m] != published[m]]
+        assert wrong == [], (name, wrong)
+        assert [m for m, _ in tables[name]] == sorted(ours), name
+    # Applied Ballistics, ABDOC130 Custom Drag Models, a second source for one point each: at Mach 3 the G1 projectile has
+    # a drag coefficient of 0.51, the G7 projectile only 0.24 (printed to two decimals).
+    assert round(dict(map(tuple, tables['G1']))[3], 2) == 0.51 and round(dict(map(tuple, tables['G7']))[3], 2) == 0.24
     # The exported tables are the ones the solver flies: changing one changes the answer.
     before = solve(ready, ranges=[500], **DEFAULT_308)['rows'][0]['fps']
     ready.evaluate('BAL.tables.G7.forEach(r => { r[1] *= 2; })')

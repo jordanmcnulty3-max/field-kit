@@ -8096,7 +8096,33 @@ Recorded, not judged:
 - At Mach 3 the G1 projectile's drag coefficient is 0.51 and the G7's 0.24: Applied Ballistics, "ABDOC130 Custom Drag Models",
   https://appliedballisticsllc.com/wp-content/uploads/2019/11/ABDOC130_CDM.pdf (also holds plots of both curves, no table).
 
-No page that opened prints every pair of the G1 and G7 tables; see the rulings for how the rest of each curve is checked.
+- Full G1 and G7 tables, every [Mach, Cd] pair (G1 79 pairs, G7 84 pairs), added in fix round 1: ballistics-engine 0.17.0
+  `data/g1.csv`, https://docs.rs/crate/ballistics-engine/0.17.0/source/data/g1.csv, and `data/g7.csv`,
+  https://docs.rs/crate/ballistics-engine/0.17.0/source/data/g7.csv (both returned by a search; origin as stated in the data
+  README above). Copied into `tests/fixtures/ballistics_drag_tables.json`; every pair of `BAL.tables` matches exactly.
+- U.S. Standard Atmosphere in English units, rows for 0, 5,000 and 10,000 ft (temperature 518.69, 500.86, 483.04 R; pressure
+  2116.2, 1760.9, 1455.6 lb/ft2; density 2.3769, 2.0482, 1.7556 x 10^-3 slug/ft3), added in fix round 1: Anderson,
+  "Appendix E: Standard Atmosphere, English Engineering Units" (McGraw-Hill),
+  https://highered.mheducation.com/sites/dl/free/0072950463/281732/and50463_appE.pdf. Used in the altitude density test.
+
+Fix round 1, searched for a G7 (or stated-atmosphere G1 .308) trajectory to 1,000 yd; opened and not usable:
+- Exbal card, .308 168 gr SMK, https://rifleshooter.com/wp-content/uploads/2012/08/1682561.pdf: stepped coefficients (four
+  BCs by velocity band), so not judged and not entered.
+- RUAG Swiss P Target 175 gr, https://defence.nioa.com.au/uploads/documents/RUAG/7.62x51/5061_308_Win._SWISS_P_Target_11.3_g_-_175_gr_EN.pdf:
+  stepped G1 and G7 coefficients, sight height not stated; not entered.
+- Sniper Central 175 gr ballistic card listing, https://snipercentral.com/?p=29912: table only as an image, no BC stated.
+- py-ballisticcalc GitHub README, https://github.com/o-murphy/py-ballisticcalc: links example notebooks but prints no output;
+  the notebooks' own URLs were not returned by any search, so they were not opened.
+- Would not open (refused by the fetch tool): ballistics-engine validation README,
+  https://docs.rs/crate/ballistics-engine/0.32.0/source/data/validation/README.md, and its reference generator,
+  https://docs.rs/crate/ballistics-engine/0.30.1/source/data/validation/generators/gen_pybc_refs.py.
+- Also opened while looking for the drag tables, none prints them: https://bfxyz.nl/docs/bfxaboutdragfunctions.shtml and
+  https://snipercountry.com/?p=67.
+
+URL record (fix round 1): every URL in this Ballistics section is written exactly as a search returned it. Two look odd and
+are still as returned: the Steiner PDF URL contains raw spaces (the search result gave it that way, and it opened that way),
+and Wikipedia "External ballistics" was returned by the search as https://www.wikipedia.org/wiki/Bullet_drop (a redirect
+name); it was not built by hand. No URL in this section was constructed.
 
 ### Pages that would not open or held no usable figures (2026-11-21)
 

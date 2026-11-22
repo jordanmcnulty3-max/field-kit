@@ -61,6 +61,8 @@ const BALS = (() => {
     return { at: best, v, hold: (Math.tan(a.rad) - Math.tan(toRad(marks[best], sight.unit))) * row.yd * 36 };
   }
   const holdWords = (h, up, down) => Math.abs(h) < HOLD_MIN ? '' : inch(h) + ' ' + (h > 0 ? up : down);
+  /* Past a reticle's last mark the whole elevation is a hold: in the reticle's unit, then inches. */
+  const pastHold = (a, unit) => 'hold ' + ang(fromRad(a.rad, unit)) + ' ' + LABEL[unit] + ' (' + inch(a.up) + ' in) ' + (a.up > 0 ? a.holdPos : a.holdNeg);
 
   const dotText = (a, ax) => Math.abs(a.up) < HOLD_MIN ? (ax === 'elev' ? 'Hold on' : 'No hold')
     : 'Hold ' + inch(a.up) + ' in ' + (a.up > 0 ? a.holdPos : a.holdNeg);
@@ -76,9 +78,9 @@ const BALS = (() => {
       return { main: dialled(v, sight.click, a.pos, a.neg) + ' ' + LABEL[unit], sub: clicksText(clicks(v, sight.click)) };
     }
     if (sight.type === 'dot') return { main: dotText(a, ax), sub: '' };
-    if (ax === 'wind') return { main: angle, sub: (inchZero(a.hold) ? '0' : inch(a.hold)) + ' in' };
+    if (ax === 'wind') return { main: angle, sub: inchZero(a.up) ? 'No hold' : 'hold ' + inch(a.up) + ' in ' + (a.up > 0 ? a.holdPos : a.holdNeg) };
     const m = reticleMark(a, row, sight);
-    if (m.at === sight.marks.length) return { main: 'Past last mark', sub: angle };
+    if (m.at === sight.marks.length) return { main: 'Past last mark', sub: pastHold(a, sight.unit) };
     const h = holdWords(m.hold, 'high', 'low');
     return { main: m.at < 0 ? 'Centre' : 'Mark ' + (m.at + 1), sub: h && 'hold ' + h.replace(' ', ' in ') };
   }
@@ -99,9 +101,9 @@ const BALS = (() => {
 
   function cols(sight) {
     const s = sightOf(sight);
-    if (s && s.type === 'dot') return { elev: ['Hold in'], wind: ['Hold in'] };
-    if (s && s.type === 'reticle') return { elev: ['Mark', 'Hold in'], wind: ['Wind ' + LABEL[s.unit], 'Drift in'] };
-    if (s) return { elev: ['Elev ' + LABEL[s.unit], 'Clicks'], wind: ['Wind ' + LABEL[s.unit], 'Clicks'] };
+    if (s && s.type === 'dot') return { elev: ['Elev hold in'], wind: ['Wind hold in'] };
+    if (s && s.type === 'reticle') return { elev: ['Mark', 'Elev hold in'], wind: ['Wind ' + LABEL[s.unit], 'Wind hold in'] };
+    if (s) return { elev: ['Elev ' + LABEL[s.unit], 'Elev clicks'], wind: ['Wind ' + LABEL[s.unit], 'Wind clicks'] };
     return { elev: ['Elev mil', 'Elev MOA'], wind: ['Wind mil', 'Wind MOA'] };
   }
 
@@ -111,19 +113,17 @@ const BALS = (() => {
     const e = axis(row, 'elev'), w = axis(row, 'wind');
     const dir1 = (a, unit) => withDir(fromRad(a.rad, unit), a.pos, a.neg);
     if (!s) return { elev: [dir1(e, 'mil'), dir1(e, 'moa')], wind: [dir1(w, 'mil'), dir1(w, 'moa')] };
-    if (s.type === 'dot') {
-      const d = a => Math.abs(a.up) < HOLD_MIN ? '0' : inch(a.up) + ' ' + (a.up > 0 ? a.holdPos : a.holdNeg);
-      return { elev: [d(e)], wind: [d(w)] };
-    }
+    const hold = (a, min) => Math.abs(a.up) < min || inchZero(a.up) ? '0' : inch(a.up) + ' ' + (a.up > 0 ? a.holdPos : a.holdNeg);
+    if (s.type === 'dot') return { elev: [hold(e, HOLD_MIN)], wind: [hold(w, HOLD_MIN)] };
     if (s.type === 'turret') {
-      const c = a => String(clicks(fromRad(a.rad, s.unit), s.click));
+      const c = a => { const v = fromRad(a.rad, s.unit), n = clicks(v, s.click); return n > 0 ? (v > 0 ? a.pos : a.neg) + ' ' + n : '0'; };
       const d = a => dialled(fromRad(a.rad, s.unit), s.click, a.pos, a.neg);
       return { elev: [d(e), c(e)], wind: [d(w), c(w)] };
     }
     const m = reticleMark(e, row, s);
-    const elev = m.at === s.marks.length ? ['Past', dir1(e, s.unit) + ' ' + LABEL[s.unit]]
+    const elev = m.at === s.marks.length ? ['Past', inch(e.up) + ' ' + (e.up > 0 ? 'high' : 'low')]
       : [m.at < 0 ? 'C' : String(m.at + 1), holdWords(m.hold, 'high', 'low')];
-    return { elev, wind: [dir1(w, s.unit), inchZero(w.hold) ? '0' : inch(w.hold)] };
+    return { elev, wind: [dir1(w, s.unit), hold(w, 0)] };
   }
 
   /* A typed elevation to radians. unit: 'mil' | 'moa' | 'iphy' | 'in' (inches of drop at yd). NaN if unusable. */
@@ -156,5 +156,25 @@ const BALS = (() => {
     return fin(atm.alt) ? 'Zeroed at ' + t + ', ' + Math.round(atm.alt) + ' ft' : '';
   }
 
-  return { answer, all, cols, cells, toAngle, describe, zeroLine };
+  /* Where the bullet is at the target, for the sentence under the card: "63.6 in low, drift 21.2 in left". Path is measured from the
+     line of sight (positive up), drift from it (positive right); one decimal. '' for a bad row. */
+  function path(row) {
+    if (!rows(row)) return '';
+    const p = Math.abs(row.dropIn).toFixed(1), d = Math.abs(row.windIn).toFixed(1);
+    return (Number(p) === 0 ? 'on the line of sight' : p + ' in ' + (row.dropIn > 0 ? 'high' : 'low'))
+      + ', drift ' + d + ' in' + (Number(d) === 0 ? '' : row.windIn > 0 ? ' right' : ' left');
+  }
+  /* The load, in one line: "175 gr · G7 0.25 · 2,600 fps · zero 100 yd" (the weight left out when 0 or missing). '' when unusable. */
+  function loadLine(p) {
+    if (!p || typeof p !== 'object') return '';
+    const n = v => fin(v) ? Number(v.toFixed(3)) : null;
+    const parts = [];
+    if (n(p.w) > 0) parts.push(n(p.w) + ' gr');
+    if (n(p.bc) !== null) parts.push((p.model === 'G1' ? 'G1' : 'G7') + ' ' + n(p.bc));
+    if (n(p.mv) !== null) parts.push(Math.round(p.mv).toLocaleString('en-US') + ' fps');
+    if (n(p.zero) !== null) parts.push('zero ' + n(p.zero) + ' yd');
+    return parts.join(' \u00b7 ');
+  }
+
+  return { answer, all, cols, cells, toAngle, describe, zeroLine, path, loadLine };
 })();

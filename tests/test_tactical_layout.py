@@ -1,6 +1,8 @@
 """Tactical layout (v7.8, design section 9): Position and Ballistics headings and spacing match the v7.6 home standard,
 Ballistics gives the same numbers as before the restyle, and all three Tactical views and every v7.8 sheet fit a 360 px
 phone in day and night, with every control at least 44 px and nothing cut off when text is enlarged."""
+import re
+
 import pytest
 from playwright.sync_api import expect
 
@@ -131,17 +133,36 @@ def ballistics(page, app_url, night=False, **kv):
     page.wait_for_selector('#dope tr')
 
 
+SENTENCE = re.compile(r'^At (\S+) yd: ([\d.]+) in (low|high), drift ([\d.]+) in(?: (left|right))?, (.*)$')
+
+
 def readout(page, unit='mil'):
     """The pinned figures as the screen shows them for a profile with no sight (every unit): the mil or MOA line of the answer,
-    the sentence under it, and the dope card's Yd, Elev, Wind, Drop in, Drift in, fps, ft-lb and Time s columns for that unit."""
-    return page.evaluate("""unit => {
+    the sentence under it, and the dope card's Yd, Elev, Wind, Drop in, Drift in, fps, ft-lb and Time s columns for that unit.
+    The reader changed with the final drive, the figures did not: the dope column "Drop in" is now headed "Path in" (same signed
+    figures), a transonic row's yardage carries " †" (stripped here), and the sentence says "63.6 in low, drift 21.2 in left"
+    where it said "drop 63.6 in, drift 21.2 in" (read back into the pinned form; a bullet above the line of sight would read
+    "drop -N" and fail). The drift's direction is checked by the tests that call this."""
+    got = page.evaluate("""unit => {
       const line = id => document.querySelector('#' + id).innerText.split('\\n').filter(x => x.trim())[unit === 'mil' ? 1 : 2];
       const heads = [...document.querySelectorAll('#dope th')].map(h => h.textContent.trim());
       const U = unit === 'mil' ? 'mil' : 'MOA';
       const want = ['Yd', 'Elev ' + U, 'Wind ' + U, 'Drop in', 'Drift in', 'fps', 'ft-lb', 'Time s'];
-      const at = want.map(w => heads.indexOf(w));
-      const rows = [...document.querySelectorAll('#dope tbody tr')].map(r => at.map(i => r.children[i].textContent).join('\\t'));
+      const at = want.map(w => heads.indexOf(w === 'Drop in' ? 'Path in' : w));
+      const rows = [...document.querySelectorAll('#dope tbody tr')].map(r => at.map((i, k) => k === 0 ? r.children[i].textContent.replace(/ †$/, '') : r.children[i].textContent).join('\\t'));
       return { e: line('solElev'), w: line('solWind'), s: document.querySelector('#solSub').textContent, t: want.join('\\t') + '\\n' + rows.join('\\n') }; }""", unit)
+    m = SENTENCE.match(got['s'])
+    assert m, got['s']
+    got['s'] = f"At {m[1]} yd: drop {'' if m[3] == 'low' else '-'}{m[2]} in, drift {m[4]} in, {m[6]}"
+    got['drift'] = m[5]
+    return got
+
+
+def pinned(page, key, unit):
+    got = readout(page, unit)
+    drift = got.pop('drift')
+    assert got == BEFORE[key]
+    return drift
 
 
 def settle(page):
@@ -250,8 +271,8 @@ def enlarge_text(page):
 
 def test_default_profile_output_is_what_it_was_before_the_restyle(page, app_url):
     ballistics(page, app_url)
-    assert readout(page) == BEFORE['default_mil']
-    assert readout(page, 'moa') == BEFORE['default_moa']
+    assert pinned(page, 'default_mil', 'mil') == 'left'          # a wind from 3 o'clock carries the bullet left
+    assert pinned(page, 'default_moa', 'moa') == 'left'
 
 
 def test_second_profile_output_is_what_it_was_pinned_at(page, app_url):
@@ -261,8 +282,8 @@ def test_second_profile_output_is_what_it_was_pinned_at(page, app_url):
     page.fill('#bWind', '10')
     page.select_option('#bClock', '9')
     settle(page)
-    assert readout(page) == BEFORE['p223_mil']
-    assert readout(page, 'moa') == BEFORE['p223_moa']
+    assert pinned(page, 'p223_mil', 'mil') == 'right'            # from 9 o'clock: carried right
+    assert pinned(page, 'p223_moa', 'moa') == 'right'
 
 
 def test_the_dope_card_is_a_real_table_with_all_columns(page, app_url):
@@ -325,8 +346,9 @@ def test_ballistics_fields_and_their_order(page, app_url):
         ['Dope card', ['bMax', 'bStep']],
     ]
     ids = page.evaluate("[...document.querySelectorAll('#view-ballistics [id]')].map(e => e.id)")
-    assert ids == ['bProfile', 'bEdit', 'bSight', 'bZeroLine', 'solution', 'solElev', 'solWind', 'solSub', 'bAll', 'bRange', 'bAngle', 'bWind',
-                   'bClock', 'bCond', 'bCondBtn', 'bCondFields', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dopeCue', 'dope']
+    # the final drive added the load line (bLoad), the built-in line (bStart) and the dope card's key and transonic note
+    assert ids == ['bProfile', 'bEdit', 'bLoad', 'bSight', 'bStart', 'bZeroLine', 'solution', 'solElev', 'solWind', 'solSub', 'bAll', 'bRange', 'bAngle', 'bWind',
+                   'bClock', 'bCond', 'bCondBtn', 'bCondFields', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dopeCue', 'dope', 'dopeKey', 'dopeTrans']
 
 
 # ---------- Ballistics behaviour ----------
@@ -372,7 +394,7 @@ def test_the_unit_switch_is_gone_and_the_answer_names_its_units(page, app_url):
     ballistics(page, app_url, unit='moa')
     assert page.locator('#unitSeg').count() == 0
     assert 'U 3.5 mil' in page.inner_text('#solElev') and 'U 12.2 MOA' in page.inner_text('#solElev')
-    assert readout(page) == BEFORE['default_mil'] and readout(page, 'moa') == BEFORE['default_moa']
+    assert pinned(page, 'default_mil', 'mil') == 'left' and pinned(page, 'default_moa', 'moa') == 'left'
 
 
 # ---------- Night: everything on the Ballistics screen can be read ----------

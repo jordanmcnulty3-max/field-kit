@@ -117,8 +117,8 @@ def test_answer_follows_the_sight(page, app_url):
     page.evaluate('FK.bal.select("ur")'); settle(page)
     c = card(page)
     assert c['elev'][:2] == ['ELEVATION', 'Mark 2'] and c['elev'][2].startswith('hold ') and c['elev'][2].endswith(' in high'), c
-    assert c['wind'][:2] == ['WINDAGE', 'R 1.2 mil'] and c['wind'][2] == '21 in'
-    assert 'At 500 yd: drop 63.6 in, drift 21.2 in, 1782 fps, 1234 ft-lb, 0.70 s flight.' == c['sub']
+    assert c['wind'][:2] == ['WINDAGE', 'R 1.2 mil'] and c['wind'][2] == 'hold 21 in right'
+    assert 'At 500 yd: 63.6 in low, drift 21.2 in left, 1782 fps, 1234 ft-lb, 0.70 s flight.' == c['sub']     # it read 'drop 63.6 in, drift 21.2 in'
 
 
 def test_the_sight_never_changes_the_trajectory(page, app_url):
@@ -127,7 +127,7 @@ def test_the_sight_never_changes_the_trajectory(page, app_url):
     for pid in ['ut', 'ud', 'ur', 'un']:
         open_screen(page, app_url, profile=pid, profiles=MINE)
         subs.append(card(page)['sub'])
-        i = head(page).index('Drop in')
+        i = head(page).index('Path in')
         bodies.append([[r[0], r[i]] + r[-3:] for r in body(page)])      # yards, drop, fps, ft-lb, time
     assert len(set(subs)) == 1 and all(b == bodies[0] for b in bodies)
 
@@ -157,7 +157,7 @@ def test_no_sight_shows_every_unit(page, app_url):
     assert c['elev'] == ['ELEVATION', 'U 3.5 mil', 'U 12.2 MOA', 'Hold 64 in high'], c
     assert c['wind'] == ['WINDAGE', 'R 1.2 mil', 'R 4.0 MOA', 'Hold 21 in right'], c
     expect(page.locator('#bAll')).to_be_hidden()
-    assert head(page) == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Drop in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    assert head(page) == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
 
 
 def test_show_all_units_is_temporary(page, app_url):
@@ -168,14 +168,19 @@ def test_show_all_units_is_temporary(page, app_url):
     assert page.evaluate('FK._test.balState()') == {'profile': 'ut', 'showAll': False}
     b.click()
     expect(b).to_have_attribute('aria-pressed', 'true')
+    expect(b).to_have_text('Hide other units')
     c = card(page)
-    assert c['elev'] == ['ELEVATION', 'U 3.5 mil', 'U 12.2 MOA', 'Hold 64 in high'], c
+    # the sight's own lines stay and the other units are added beneath (a line the same as the sight's own is left out)
+    assert c['elev'] == ['ELEVATION', 'U 3.5 mil', '35 clicks', 'U 12.2 MOA', 'Hold 64 in high'], c
+    assert c['wind'] == ['WINDAGE', 'R 1.2 mil', '12 clicks', 'R 4.0 MOA', 'Hold 21 in right'], c
     assert head(page)[:3] == ['Yd', 'Elev mil', 'Elev MOA']
     assert page.evaluate('FK._test.balState()') == {'profile': 'ut', 'showAll': True}
     page.select_option('#bProfile', 'ud')                         # a profile change turns it off
     expect(b).to_have_attribute('aria-pressed', 'false')
+    expect(b).to_have_text('Show all units')
     assert card(page)['elev'] == ['ELEVATION', 'Hold 64 in high']
     b.click()
+    assert card(page)['elev'] == ['ELEVATION', 'Hold 64 in high', 'U 3.5 mil', 'U 12.2 MOA']
     assert page.evaluate('FK._test.balState().showAll') is True
     stored = json.loads(page.evaluate("localStorage.getItem('fk.bal')"))
     assert 'showAll' not in stored and 'bAll' not in stored          # never stored
@@ -199,13 +204,14 @@ def test_show_all_units_turns_off_when_the_screen_is_left_and_opened_again(page,
 
 def test_dope_columns_follow_the_sight(page, app_url):
     open_screen(page, app_url, profile='ut', profiles=MINE)
-    assert head(page) == ['Yd', 'Elev mil', 'Clicks', 'Wind mil', 'Clicks', 'Drop in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    assert head(page) == ['Yd', 'Elev mil', 'Elev clicks', 'Wind mil', 'Wind clicks', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    assert body(page)[9][:5] == ['500', 'U 3.5', 'U 35', 'R 1.2', 'R 12']
     page.evaluate('FK.bal.select("ur")'); settle(page)
-    assert head(page) == ['Yd', 'Mark', 'Hold in', 'Wind mil', 'Drift in', 'Drop in', 'fps', 'ft-lb', 'Time s']      # no second Drift in
+    assert head(page) == ['Yd', 'Mark', 'Elev hold in', 'Wind mil', 'Wind hold in', 'Path in', 'fps', 'ft-lb', 'Time s']      # no Drift in
     page.evaluate('FK.bal.select("ud")'); settle(page)
-    assert head(page) == ['Yd', 'Hold in', 'Hold in', 'Drop in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    assert head(page) == ['Yd', 'Elev hold in', 'Wind hold in', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
     page.click('#bAll')
-    assert head(page) == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Drop in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    assert head(page) == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
     rows = body(page)
     assert all(len(r) == 10 for r in rows) and rows[0][0] == '50'
 
@@ -228,13 +234,17 @@ def test_dope_table_scrolls_with_the_cue_when_wide(page, app_url):
     assert page.evaluate("(w => w.scrollWidth > w.clientWidth)(document.querySelector('#dope').closest('.tablewrap'))")
     pos = page.evaluate("getComputedStyle(document.querySelector('#dope td')).position")
     assert pos == 'sticky'
-    assert page.evaluate("document.querySelector('#dope').closest('.tablewrap').getAttribute('aria-label')") == 'Dope card table, scrolls sideways'
+    assert page.evaluate("document.querySelector('#dope').closest('.tablewrap').getAttribute('aria-label')") == 'Dope card table, scrolls both ways'
     wrap.evaluate('w => { w.scrollLeft = 300; }')
     first = page.evaluate("document.querySelector('#dope td').getBoundingClientRect().left - document.querySelector('#dope').closest('.tablewrap').getBoundingClientRect().left")
     assert -1 <= first <= 2        # the yard column stays at the left edge while the rest scrolls
-    page.set_viewport_size({'width': 900, 'height': 700})
+    # nothing to scroll: no cue. The turret's headings now name elevation or wind ("Elev clicks"), so its table no longer fits even
+    # at the widest the screen gets (640 px); the red dot's eight columns do. Tall enough that the box (it scrolls up and down too)
+    # needs no scroll bar.
+    page.evaluate('FK.bal.select("ud")')
+    page.set_viewport_size({'width': 900, 'height': 1400})
     page.wait_for_timeout(200)
-    expect(cue).to_be_hidden()    # nothing to scroll: no cue
+    expect(cue).to_be_hidden()
 
 
 def test_no_minus_zero_anywhere(page, app_url):
@@ -642,3 +652,102 @@ def test_the_typographic_minus_counts_on_the_screen(page, app_url):
     shot(page, bTemp='59', bAngle='steep')
     says(page, 'Enter an incline from -60 to 60 degrees.')
     whole_page_is_clean(page)
+
+
+
+# ---------- The card's words, the dope card's box, the lines under the picker ----------
+
+def test_the_sentence_says_high_or_low_and_the_way_the_wind_carries(page, app_url):
+    p = {**DOT, 'sight': 2.6, 'zero': 50}
+    open_screen(page, app_url, profile='ud', profiles=[p], shot={'bRange': '100'})
+    sub = card(page)['sub']
+    assert re.match(r'At 100 yd: \d+\.\d in high, drift \d+\.\d in left, ', sub), sub
+    assert card(page)['elev'][1].endswith(' in low')               # the hold is the other way from where the bullet is
+    shot(page, bClock=9)
+    assert ' in right, ' in card(page)['sub']
+    key = page.inner_text('#dopeKey')
+    assert key == 'Path: inches above the line of sight; a minus means below. Drift: inches the wind moves the bullet, shown without a sign.'
+    open_screen(page, app_url, profile='ur', profiles=MINE)
+    assert page.inner_text('#dopeKey') == 'Path: inches above the line of sight; a minus means below.'     # no Drift column
+
+
+def test_transonic_rows_carry_a_dagger_day_and_night(page, app_url):
+    for night in (False, True):
+        open_screen(page, app_url, profile='ut', profiles=MINE, night=night)
+        rows = page.evaluate("[...document.querySelectorAll('#dope tbody tr')].map(r => [r.children[0].textContent, r.classList.contains('trans')])")
+        assert rows[0] == ['50', False]
+        assert all(y.endswith(' †') == t for y, t in rows) and any(t for _, t in rows), rows
+        note = page.inner_text('#dopeTrans')
+        assert note == '† Below Mach 1.2 (transonic): less certain. Confirm these with real shots.'
+        assert 'orange' not in page.inner_text('#view-ballistics')
+    open_screen(page, app_url, profile='ut', profiles=MINE)
+    assert page.evaluate("getComputedStyle(document.querySelector('#dope tr.trans td')).color") != page.evaluate("getComputedStyle(document.querySelector('#dope tr:not(.trans):not(.zero) td')).color")
+
+
+@pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
+def test_dope_card_scrolls_in_its_own_box_with_sticky_headings(page, app_url, night):
+    open_screen(page, app_url, profile='ut', profiles=MINE, night=night, shot={'bStep': '25'})
+    wrap = page.locator('#dope').locator('xpath=..')
+    h = page.evaluate("document.querySelector('#dope').closest('.tablewrap').getBoundingClientRect().height")
+    assert 240 <= h <= 0.7 * 640 + 1, h
+    assert page.evaluate("(w => w.scrollHeight > w.clientHeight + 10)(document.querySelector('#dope').closest('.tablewrap'))")
+    wrap.evaluate('w => { w.scrollTop = 400; w.scrollLeft = 300; }')
+    page.wait_for_timeout(50)
+    got = page.evaluate("""() => { const w = document.querySelector('#dope').closest('.tablewrap').getBoundingClientRect();
+      const th = document.querySelectorAll('#dope th')[3].getBoundingClientRect(), td = document.querySelectorAll('#dope tbody tr')[20].children[0].getBoundingClientRect();
+      return { thTop: th.top - w.top, tdLeft: td.left - w.left }; }""")
+    assert -1 <= got['thTop'] <= 2 and -1 <= got['tdLeft'] <= 2, got
+    page.set_viewport_size({'width': 360, 'height': 900})
+    page.wait_for_timeout(200)
+    h = page.evaluate("document.querySelector('#dope').closest('.tablewrap').getBoundingClientRect().height")
+    assert h <= 0.7 * 900 + 1 and h > 0.7 * 640, h
+
+
+def test_lines_under_the_picker_name_the_load_and_ask_for_a_chronograph_on_a_built_in(page, app_url):
+    open_screen(page, app_url, profile='p308', profiles=MINE)
+    expect(page.locator('#bLoad')).to_have_text('175 gr · G7 0.25 · 2,600 fps · zero 100 yd')
+    expect(page.locator('#bStart')).to_have_text('Built-in figures are a starting point. Chronograph your rifle and save your own profile.')
+    order = page.evaluate("['#bProfile', '#bLoad', '#bSight', '#bStart', '#solution'].map(s => document.querySelector(s).getBoundingClientRect().top)")
+    assert order == sorted(order)
+    page.evaluate('FK.bal.select("ut")'); settle(page)
+    expect(page.locator('#bStart')).to_be_hidden()
+    expect(page.locator('#bLoad')).to_have_text('175 gr · G7 0.25 · 2,600 fps · zero 100 yd')
+    page.evaluate('FK.bal.save({ ...FK.bal.selected(), w: 0 })'); settle(page)
+    expect(page.locator('#bLoad')).to_have_text('G7 0.25 · 2,600 fps · zero 100 yd')
+
+
+def test_pressure_help_says_when_to_leave_it_blank(page, app_url):
+    open_screen(page, app_url)
+    page.click('#bCondBtn')
+    text = 'Leave blank unless you have a true station reading. Weather reports and phones give pressure corrected to sea level.'
+    assert text in page.inner_text('#bCondFields')
+    page.click('#bEdit')
+    expect(page.locator('#dlgRifle')).to_be_visible()
+    assert text in page.inner_text('#dlgRifle')
+    below = page.evaluate("[document.querySelector('#rfZPress').getBoundingClientRect().bottom, [...document.querySelectorAll('#dlgRifle .hint')].find(e => e.textContent.startsWith('Leave blank')).getBoundingClientRect().top]")
+    assert below[1] >= below[0]
+
+
+@pytest.mark.parametrize('profile', ['p308', 'ut', 'ud', 'ur'])
+def test_the_sentence_takes_the_full_width_and_the_button_sits_beneath(page, app_url, profile):
+    for big in (False, True):
+        open_screen(page, app_url, profile=profile, profiles=MINE)
+        if big:
+            enlarge_text(page)
+            page.wait_for_timeout(100)
+        sub, cardbox = page.locator('#solSub').bounding_box(), page.locator('#solution').bounding_box()
+        assert sub['width'] >= cardbox['width'] - 40, (sub, cardbox)
+        if page.locator('#bAll').is_visible():
+            b = page.locator('#bAll').bounding_box()
+            assert b['y'] >= sub['y'] + sub['height'] - 1 and b['height'] >= 44, (b, sub)
+
+
+def test_first_screen_fits_with_the_load_line_and_the_zero_line(page, app_url):
+    z = {**TURRET, 'id': 'uz', 'name': 'Zeroed turret', 'zeroAtm': {'temp': 90, 'alt': 400, 'rh': 50}}
+    open_screen(page, app_url, profile='uz', profiles=[z])
+    nav_top = page.evaluate("document.querySelector('.tabbar').getBoundingClientRect().top")
+    expect(page.locator('#bZeroLine')).to_be_visible()
+    expect(page.locator('#bAll')).to_be_visible()
+    for sel in ['#bProfile', '#bLoad', '#solution', '#bRange', '#bAngle', '#bWind', '#bClock']:
+        r = page.locator(sel).bounding_box()
+        assert r['y'] >= 0 and r['y'] + r['height'] <= nav_top, (sel, r, nav_top)

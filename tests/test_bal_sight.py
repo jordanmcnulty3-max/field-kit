@@ -73,13 +73,17 @@ def test_turret_one_click_is_singular(ready):
 def test_reticle_nearest_mark_and_hold(ready):
     s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0, 4.6, 6.3]}
     assert answer(ready, ROW, s)['elev'] == {'main': 'Mark 2', 'sub': 'hold 10 in high'}
-    assert answer(ready, ROW, s)['wind'] == {'main': 'R 1.2 mil', 'sub': '22 in'}
+    assert answer(ready, ROW, s)['wind'] == {'main': 'R 1.2 mil', 'sub': 'hold 22 in right'}     # a reticle's windage is a hold (it read '22 in')
 
 
 def test_reticle_before_first_mark_and_past_last(ready):
     s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0, 4.6, 6.3]}
     assert answer(ready, {'yd': 200, 'dropIn': -4.2, 'windIn': 0}, s)['elev'] == {'main': 'Centre', 'sub': 'hold 4.2 in high'}
-    assert answer(ready, {'yd': 800, 'dropIn': -227.9, 'windIn': 0}, s)['elev'] == {'main': 'Past last mark', 'sub': 'U 7.9 mil'}
+    # past the last mark: a hold in the reticle's unit and in inches, never a dial reading (it read 'U 7.9 mil')
+    assert answer(ready, {'yd': 800, 'dropIn': -227.9, 'windIn': 0}, s)['elev'] == {'main': 'Past last mark', 'sub': 'hold 7.9 mil (228 in) high'}
+    moa = {'type': 'reticle', 'unit': 'moa', 'marks': [2, 4, 6]}
+    assert answer(ready, {'yd': 800, 'dropIn': -226.4, 'windIn': 0}, moa)['elev'] == {'main': 'Past last mark', 'sub': 'hold 27.0 MOA (226 in) high'}
+    assert answer(ready, {'yd': 400, 'dropIn': -20.5, 'windIn': -20.4}, moa)['wind'] == {'main': 'R 4.9 MOA', 'sub': 'hold 20 in right'}
 
 
 def test_reticle_target_inside_the_zero(ready):   # bullet above the line of sight
@@ -189,24 +193,27 @@ def test_no_sight_is_the_mil_form_with_a_moa_cell(ready):
 
 def test_cols_and_cells_turret(ready):
     t = {'type': 'turret', 'unit': 'mil', 'click': 0.1}
-    assert cols(ready, t) == {'elev': ['Elev mil', 'Clicks'], 'wind': ['Wind mil', 'Clicks']}
-    assert cells(ready, ROW, t) == {'elev': ['U 3.6', '36'], 'wind': ['R 1.2', '12']}
-    assert cols(ready, {**t, 'unit': 'moa'})['elev'] == ['Elev MOA', 'Clicks']
-    assert cols(ready, {**t, 'unit': 'iphy'})['wind'] == ['Wind in/100 yd', 'Clicks']
+    # headings say elevation or wind, and click cells carry the direction (they read 'Clicks' and '36')
+    assert cols(ready, t) == {'elev': ['Elev mil', 'Elev clicks'], 'wind': ['Wind mil', 'Wind clicks']}
+    assert cells(ready, ROW, t) == {'elev': ['U 3.6', 'U 36'], 'wind': ['R 1.2', 'R 12']}
+    assert cells(ready, {'yd': 100, 'dropIn': 0.1, 'windIn': -0.1}, t) == {'elev': ['0.0', '0'], 'wind': ['0.0', '0']}
+    assert cells(ready, {'yd': 300, 'dropIn': 2, 'windIn': 2}, t) == {'elev': ['D 0.2', 'D 2'], 'wind': ['L 0.2', 'L 2']}
+    assert cols(ready, {**t, 'unit': 'moa'})['elev'] == ['Elev MOA', 'Elev clicks']
+    assert cols(ready, {**t, 'unit': 'iphy'})['wind'] == ['Wind in/100 yd', 'Wind clicks']
 
 
 def test_cols_and_cells_reticle(ready):
     s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0, 4.6, 6.3]}
-    assert cols(ready, s) == {'elev': ['Mark', 'Hold in'], 'wind': ['Wind mil', 'Drift in']}
-    assert cells(ready, ROW, s) == {'elev': ['2', '10 high'], 'wind': ['R 1.2', '22']}
+    assert cols(ready, s) == {'elev': ['Mark', 'Elev hold in'], 'wind': ['Wind mil', 'Wind hold in']}
+    assert cells(ready, ROW, s) == {'elev': ['2', '10 high'], 'wind': ['R 1.2', '22 right']}
     assert cells(ready, {'yd': 200, 'dropIn': -4.2, 'windIn': 0}, s)['elev'] == ['C', '4.2 high']
     assert cells(ready, {'yd': 100, 'dropIn': 1.7, 'windIn': 0}, s)['elev'] == ['C', '1.7 low']
-    assert cells(ready, {'yd': 800, 'dropIn': -227.9, 'windIn': 0}, s)['elev'] == ['Past', 'U 7.9 mil']
+    assert cells(ready, {'yd': 800, 'dropIn': -227.9, 'windIn': 0}, s)['elev'] == ['Past', '228 high']     # inches, as its heading says
     assert cells(ready, {'yd': 100, 'dropIn': -10.8, 'windIn': 0}, s)['elev'] == ['2', '']
 
 
 def test_cols_and_cells_dot(ready):
-    assert cols(ready, {'type': 'dot'}) == {'elev': ['Hold in'], 'wind': ['Hold in']}
+    assert cols(ready, {'type': 'dot'}) == {'elev': ['Elev hold in'], 'wind': ['Wind hold in']}
     assert cells(ready, ROW, {'type': 'dot'}) == {'elev': ['64 high'], 'wind': ['22 right']}
     assert cells(ready, {'yd': 100, 'dropIn': -0.02, 'windIn': 0.01}, {'type': 'dot'}) == {'elev': ['0'], 'wind': ['0']}
 
@@ -235,7 +242,7 @@ def test_to_angle_bad_input_is_nan(ready):
 def test_reticle_wind_drift_under_a_twentieth_inch_matches_the_cell(ready):
     s = {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3.0]}
     r = {'yd': 100, 'dropIn': -4.2, 'windIn': -0.03}
-    assert answer(ready, r, s)['wind']['sub'] == '0 in'
+    assert answer(ready, r, s)['wind']['sub'] == 'No hold'
     assert cells(ready, r, s)['wind'][1] == '0'
 
 
@@ -275,3 +282,21 @@ def test_zero_line(ready):
     assert line({'temp': 41.5, 'alt': -50}) == 'Zeroed at 41.5°F, -50 ft'
     for bad in (None, {}, {'temp': 90}, {'alt': 3}, 'x'):
         assert line(bad) == ''
+
+
+# ---------- The sentence under the card and the load line ----------
+
+def test_path_says_high_or_low_and_drift_says_which_way(ready):
+    path = lambda row: ready.evaluate('r => BALS.path(r)', row)
+    assert path({'yd': 500, 'dropIn': -63.62, 'windIn': -21.2}) == '63.6 in low, drift 21.2 in left'
+    assert path({'yd': 100, 'dropIn': 1.7, 'windIn': 0.66}) == '1.7 in high, drift 0.7 in right'
+    assert path({'yd': 100, 'dropIn': -0.02, 'windIn': 0.04}) == 'on the line of sight, drift 0.0 in'
+    assert path({'yd': 100, 'dropIn': None, 'windIn': 0}) == ''
+
+
+def test_load_line(ready):
+    line = lambda p: ready.evaluate('p => BALS.loadLine(p)', p)
+    assert line({'bc': 0.25, 'model': 'G7', 'w': 175, 'mv': 2600, 'zero': 100}) == '175 gr · G7 0.25 · 2,600 fps · zero 100 yd'
+    assert line({'bc': 0.3, 'model': 'G1', 'w': 0, 'mv': 950, 'zero': 36.5}) == 'G1 0.3 · 950 fps · zero 36.5 yd'
+    assert line({'bc': 0.3, 'mv': 2800}) == 'G7 0.3 · 2,800 fps'
+    assert line(None) == '' and clean(line({'bc': float('nan'), 'mv': 'x', 'zero': None}))

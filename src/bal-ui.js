@@ -23,6 +23,8 @@
     { id: 'p308', name: 'Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel', bc: 0.25, model: 'G7', w: 175, mv: 2600, sight: 1.5, zero: 100 }
   ];
   const F = id => $('#' + id);
+  /* What can be seen: the visual viewport where there is one (a phone keyboard shrinks only that), else the window. */
+  const seen = () => { const v = window.visualViewport; return v && Number.isFinite(v.height) ? { top: v.offsetTop || 0, height: v.height } : { top: 0, height: innerHeight }; };
   const SHOT_FIELDS = ['bRange', 'bAngle', 'bWind', 'bClock', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep'];   // what the screen stores besides the profile id
   let showAll = false;                           // "Show all units": off whenever the screen opens or the profile changes; never stored
   let frozen = false;                            // a backup is being restored: nothing is written over it
@@ -31,7 +33,8 @@
      A profile: { id, name, bc, model, w, mv, sight (height, in), zero, optic?, zeroAtm?, mv0? }. The built-in loads (PRESETS) are
      read-only; the person's own profiles are stored under 'profiles'. Whatever comes out of storage or a backup goes through
      clean() first, so a hand-edited or damaged entry cannot break the screen or inject markup. */
-  const RETIRED = ['p556', 'p76239'];                    // ids that were once built in; a stored selection naming one is treated as Custom
+  /* Ids that were once built in. A stored selection naming one becomes an own profile named for what it was. */
+  const RETIRED = { p556: '5.56 NATO 62 gr (old built-in)', p76239: '7.62\u00d739 123 gr (old built-in)' };
   const UNITS = ['mil', 'moa', 'iphy'], CLICKS = [0.1, 0.05, 0.25, 0.125, 0.5, 1];
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const isObj = v => !!v && typeof v === 'object' && !Array.isArray(v);
@@ -173,9 +176,9 @@
     });
     let keepStored = false;                      // a failed profile write leaves the stored selection as it was, so the next open retries
     if (anyProfile(s.profile)) cur = s.profile;
-    else if (s.profile === 'custom' || RETIRED.includes(s.profile)) {
-      const old = storedLoad(s);
-      const c = old.bc > 0 && old.mv > 0 ? clean({ id: 'ucustom', name: 'Custom', ...old }) : null;
+    else if (s.profile === 'custom' || (typeof s.profile === 'string' && has(RETIRED, s.profile))) {
+      const old = storedLoad(s), name = s.profile === 'custom' ? 'Custom' : RETIRED[s.profile];
+      const c = old.bc > 0 && old.mv > 0 ? clean({ id: 'ucustom', name, ...old }) : null;
       if (c) {
         const q = ordered(c);
         profiles = ownProfile('ucustom') ? profiles.map(x => x.id === 'ucustom' ? q : x) : profiles.concat([q]);
@@ -200,30 +203,37 @@
   const label = yd => String(Number(yd.toFixed(1)));          // 500 -> "500", 36.5 -> "36.5"
   const fx = (v, d) => { const t = v.toFixed(d); return /^-0(\.0+)?$/.test(t) ? t.slice(1) : t; };   // never "-0.0"
 
-  /* A column of the answer card: label, then the lines. */
-  function paint(el, name, lines) {
+  /* A column of the answer card: label, then the lines. lines: [main, sub] for a sight, or the three every-unit lines; more: the
+     other units added beneath a sight's own lines (Show all units). */
+  function paint(el, name, lines, more) {
     el.textContent = '';
     const add = (cls, text) => { const d = document.createElement('div'); d.className = cls; d.textContent = text; el.appendChild(d); };
     add('k', name);
     lines.forEach((t, i) => { if (t) add(i === 0 ? 'v' : lines.length === 3 ? 'v2' : 's', t); });
+    (more || []).forEach(t => add('v2 more', t));
   }
   function nothing(text) {
     paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
     F('solSub').textContent = text;
     F('solution').classList.add('msg');
     $('#dope').innerHTML = '';
+    F('dopeKey').textContent = '';
     fitDope();
   }
   /* The air the zero was made in, with the fields the solver wants all present (no pressure = from altitude). */
   const zeroAir = z => z && { temp: z.temp, alt: z.alt === undefined ? 0 : z.alt, press: z.press === undefined ? 0 : z.press, rh: z.rh };
   /* The profile row's sight and zero lines and the Show all units button. Returns whether the profile has a sight. */
   function head(p) {
+    const load = BALS.loadLine(p);
+    F('bLoad').textContent = load; F('bLoad').hidden = !load;
+    F('bStart').hidden = !(p && PRESETS.some(x => x.id === p.id));      // a built-in load: urge a chronograph reading
     F('bSight').textContent = BALS.describe(p && p.optic);
     const z = BALS.zeroLine(p && p.zeroAtm);
     F('bZeroLine').textContent = z; F('bZeroLine').hidden = !z;
     const sighted = !!(p && p.optic);
     F('bAll').hidden = !sighted;
     F('bAll').setAttribute('aria-pressed', String(sighted && showAll));
+    F('bAll').textContent = sighted && showAll ? 'Hide other units' : 'Show all units';
     return sighted;
   }
   function condLine() {
@@ -245,7 +255,8 @@
     const sighted = head(p);
     condLine();
     F('solution').classList.remove('msg');
-    const optic = sighted && !showAll ? p.optic : null;          // null: every unit
+    const optic = sighted ? p.optic : null;                      // null: every unit
+    const cardSight = showAll ? null : optic;                    // the dope card shows every unit while Show all units is on
     const target = read('bRange') === null ? NaN : read('bRange');
     if (!(inside(target, 1, 3000))) return nothing(MSG.range);
     if (!loadOk(p)) return nothing(MSG.profile);
@@ -275,9 +286,11 @@
     const rowFor = x => { const i = xs.indexOf(x); return i >= 0 && res.rows[i] ? { ...res.rows[i], yd: x } : null; };
     const t = rowFor(target);
     if (t) {
-      const a = BALS.answer(t, optic), lines = side => optic ? [a[side].main, a[side].sub] : BALS.all(t)[side === 'elev' ? 'elev' : 'wind'];
-      paint(F('solElev'), 'ELEVATION', lines('elev')); paint(F('solWind'), 'WINDAGE', lines('wind'));
-      F('solSub').textContent = `At ${label(target)} yd: drop ${Math.abs(t.dropIn).toFixed(1)} in, drift ${Math.abs(t.windIn).toFixed(1)} in, `
+      const a = BALS.answer(t, optic), every = BALS.all(t);
+      const lines = side => optic ? [a[side].main, a[side].sub] : every[side];
+      const more = side => optic && showAll ? every[side].filter(x => x !== a[side].main) : [];     // the sight's own lines stay
+      paint(F('solElev'), 'ELEVATION', lines('elev'), more('elev')); paint(F('solWind'), 'WINDAGE', lines('wind'), more('wind'));
+      F('solSub').textContent = `At ${label(target)} yd: ${BALS.path(t)}, `
         + `${Math.round(t.fps)} fps, ${Math.round(t.ftlb)} ft-lb, ${t.tof.toFixed(2)} s flight`
         + (t.mach < 1 ? '. Subsonic: expect larger errors.' : '.');
     } else {
@@ -285,21 +298,24 @@
       F('solSub').textContent = MSG.reach;
       F('solution').classList.add('msg');
     }
-    const c = BALS.cols(optic), generic = !!optic && optic.type === 'reticle';   // a reticle's wind columns already carry the drift
-    const heads = ['Yd', ...c.elev, ...c.wind, 'Drop in', ...(generic ? [] : ['Drift in']), 'fps', 'ft-lb', 'Time s'];
+    const c = BALS.cols(cardSight), generic = !!cardSight && cardSight.type === 'reticle';   // a reticle's wind columns already carry the drift
+    const heads = ['Yd', ...c.elev, ...c.wind, 'Path in', ...(generic ? [] : ['Drift in']), 'fps', 'ft-lb', 'Time s'];
     const rows = at.map(rowFor).filter(Boolean).map(r => {
-      const x = BALS.cells(r, optic);
-      return `<tr class="${r.yd === p.zero ? 'zero' : ''} ${r.mach < 1.2 ? 'trans' : ''}"><td>${label(r.yd)}</td>` +
+      const x = BALS.cells(r, cardSight), trans = r.mach < 1.2;
+      return `<tr class="${r.yd === p.zero ? 'zero' : ''} ${trans ? 'trans' : ''}"><td>${label(r.yd)}${trans ? ' \u2020' : ''}</td>` +
         [...x.elev, ...x.wind, fx(r.dropIn, 1), ...(generic ? [] : [fx(Math.abs(r.windIn), 1)]), Math.round(r.fps), Math.round(r.ftlb), r.tof.toFixed(2)]
           .map(v => `<td>${esc(String(v))}</td>`).join('') + '</tr>';
     });
     $('#dope').innerHTML = `<thead><tr>${heads.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody>`;
+    F('dopeKey').textContent = 'Path: inches above the line of sight; a minus means below.'
+      + (generic ? '' : ' Drift: inches the wind moves the bullet, shown without a sign.');
     fitDope();
   }
   /* Only a table wider than its box shows the swipe cue and a sticky first column (the Survival tables' pattern). Measured when the
      screen is visible: after each calculation, when the screen is shown and when the phone turns. */
   function fitDope() {
     const w = $('#dope').closest('.tablewrap');
+    w.style.maxHeight = Math.round(Math.max(240, 0.7 * seen().height)) + 'px';     // scrolls in its own box: at most 70 % of what can be seen
     w.classList.remove('wide');
     const wide = w.scrollWidth > w.clientWidth + 1;
     w.classList.toggle('wide', wide);
@@ -323,7 +339,6 @@
      shrinks only the visual viewport, so the height comes from window.visualViewport where there is one, else innerHeight. */
   const view = $('#view-ballistics'), card = F('solution'), SHORT = 480, GAP = 4;
   const balShort = h => typeof h === 'number' && Number.isFinite(h) && h <= SHORT;
-  const seen = () => { const v = window.visualViewport; return v && Number.isFinite(v.height) ? { top: v.offsetTop || 0, height: v.height } : { top: 0, height: innerHeight }; };
   const typing = el => !!el && !view.hidden && view.contains(el) && el.matches('input, select') && !el.closest('.bal-profile');
   function pin() {
     const el = document.activeElement, vis = seen(), on = typing(el) && balShort(vis.height);
@@ -348,7 +363,10 @@
   view.addEventListener('focusin', pinSoon);
   view.addEventListener('focusout', () => setTimeout(pin, 0));
   addEventListener('resize', () => { if (!view.hidden) pin(); });
-  if (window.visualViewport) { visualViewport.addEventListener('resize', pin); visualViewport.addEventListener('scroll', pin); }
+  if (window.visualViewport) {
+    visualViewport.addEventListener('resize', () => { pin(); if (!view.hidden) fitDope(); });
+    visualViewport.addEventListener('scroll', pin);
+  }
   /* The screen opens with every unit hidden again and the conditions folded away. */
   let was = false;
   FK.on('shown', s => {

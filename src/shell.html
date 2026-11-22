@@ -164,22 +164,25 @@ input::placeholder{color:var(--muted);opacity:.8}
 .wact{grid-column:2;grid-row:1/3;display:flex;gap:6px}
 
 /* Ballistics output */
-.solution{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;padding:10px 16px;border:2px solid var(--c);border-radius:8px;margin-bottom:8px}
-.solution .k{font-size:14px;line-height:1.3;color:var(--muted);letter-spacing:.04em}
-.solution .v{font-size:28px;line-height:1.1;font-weight:700;overflow-wrap:anywhere}
+.solution{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;padding:6px 14px;border:2px solid var(--c);border-radius:8px;margin-bottom:6px}
+.solution .k{font-size:13px;line-height:1.2;color:var(--muted);letter-spacing:.04em}
+.solution .v{font-size:28px;line-height:1.05;font-weight:700;overflow-wrap:anywhere}
 .solution .v2{font-size:17px;line-height:1.3;font-weight:600;overflow-wrap:anywhere}
-.solution .s{font-size:16px;line-height:1.3;color:var(--muted);overflow-wrap:anywhere}
-.solution .sol-foot{grid-column:1/-1;display:flex;align-items:center;gap:12px}
-.solution .sub{flex:1;min-width:0;margin:0;font-size:14px;color:var(--muted)}
+.solution .s{font-size:16px;line-height:1.2;color:var(--muted);overflow-wrap:anywhere}
+/* The sentence takes the card's full width and Show all units sits beneath it, at every text size. */
+.solution .sol-foot{grid-column:1/-1;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.solution .sub{align-self:stretch;min-width:0;margin:0;font-size:14px;line-height:1.25;color:var(--muted)}
 .solution .sol-all{flex:none;min-height:44px;padding:0 12px}
-.bal-profile{margin-bottom:12px}
+.solution .sol-all[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.bal-profile{margin-bottom:8px}
 .bal-pick{display:flex;gap:8px}
 .bal-pick select{flex:1;min-width:0;min-height:44px;font:inherit}
 .bal-pick .btn{min-height:44px}
 .bal-shot input,.bal-shot select{min-height:44px}
 .bal-pick .btn{flex:none;min-width:64px}
-.bal-sight{margin:4px 0 0;font-size:14px;line-height:1.3;color:var(--muted)}
-.bal-shot .grid2{gap:8px 12px}
+.bal-sight{margin:2px 0 0;font-size:14px;line-height:1.25;color:var(--muted)}
+.bal-shot .grid2{gap:6px 12px}
+.bal-shot label.f{gap:2px}
 .bal-cond{display:flex;align-items:center;gap:12px}
 .bal-cond p{flex:1;margin:0;min-width:0;font-size:16px}
 .bal-cond .btn{flex:none}
@@ -189,7 +192,7 @@ input::placeholder{color:var(--muted);opacity:.8}
    until focus leaves. */
 .solution.compact{position:sticky;top:var(--balTop,73px);z-index:2;background:var(--paper);padding:8px 12px;gap:4px 12px}
 .solution.compact .v{font-size:22px}
-.solution.compact .sol-all{display:none}
+.solution.compact .sol-all,.solution.compact .more{display:none}
 .solution.compact:not(.msg) .sol-foot{display:none}
 .tablewrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:8px}
 table{border-collapse:collapse;width:100%;font-size:15px}
@@ -198,6 +201,13 @@ th{font-weight:600;font-size:13px;color:var(--muted);border-bottom:1px solid var
 td:first-child,th:first-child{text-align:left;font-weight:600}
 tr.zero td{color:var(--muted)}
 tr.trans td{color:var(--blaze)}
+#dopeKey:empty{display:none}
+/* The dope card scrolls inside its own box both ways (its height is set from the visible height); the heading row and the yard column stay put. */
+#view-ballistics .tablewrap{overflow:auto;max-height:70vh;overscroll-behavior:contain}
+#view-ballistics .tablewrap th{position:sticky;top:0;z-index:1}
+#view-ballistics .tablewrap th:first-child,#view-ballistics .tablewrap td:first-child{position:sticky;left:0;background:var(--paper);box-shadow:inset -1px 0 0 var(--line)}
+#view-ballistics .tablewrap td:first-child{z-index:1}
+#view-ballistics .tablewrap th:first-child{z-index:3;background:var(--surface)}
 tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 60%,transparent)}
 details.more{margin-top:12px}
 details.more summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600;color:var(--c)}
@@ -1000,7 +1010,9 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
         <select id="bProfile"></select>
         <button type="button" class="btn ghost" id="bEdit">Edit</button>
       </div>
+      <p class="bal-sight" id="bLoad"></p>
       <p class="bal-sight" id="bSight"></p>
+      <p class="bal-sight" id="bStart" hidden>Built-in figures are a starting point. Chronograph your rifle and save your own profile.</p>
       <p class="bal-sight" id="bZeroLine" hidden></p>
     </div>
     <div class="solution" id="solution" aria-live="polite">
@@ -1038,7 +1050,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
           <label class="f">Station pressure (inHg)<input id="bPress" type="number" inputmode="decimal" step="0.01" placeholder="From altitude"></label>
           <label class="f">Humidity (%)<input id="bRH" type="number" inputmode="decimal" value="50"></label>
         </div>
-        <p class="hint" style="margin-top:8px">Leave pressure blank to estimate it from altitude. A Kestrel or phone barometer reading is more accurate.</p>
+        <p class="hint" style="margin-top:8px">Leave blank unless you have a true station reading. Weather reports and phones give pressure corrected to sea level.</p>
       </div>
     </div>
 
@@ -1051,8 +1063,10 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
         </label>
       </div>
       <p class="sv-swipe" id="dopeCue" hidden>Swipe sideways to see more columns</p>
-      <div class="tablewrap" tabindex="0" role="region" aria-label="Dope card table, scrolls sideways"><table id="dope"></table></div>
-      <p class="hint" style="margin-top:8px">Rows in orange are transonic (below Mach 1.2), where accuracy falls off and predictions get less reliable. Spin drift and Coriolis are not included yet.</p>
+      <div class="tablewrap" tabindex="0" role="region" aria-label="Dope card table, scrolls both ways"><table id="dope"></table></div>
+      <p class="hint" id="dopeKey" style="margin-top:8px"></p>
+      <p class="hint" id="dopeTrans" style="margin-top:8px">† Below Mach 1.2 (transonic): less certain. Confirm these with real shots.</p>
+      <p class="hint" style="margin-top:8px">Spin drift and Coriolis are not included yet.</p>
     </div>
   </div>
 </section>
@@ -1172,6 +1186,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <label class="f">Temperature (°F)<input id="rfZTemp" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></label>
       <label class="f">Altitude (ft)<input id="rfZAlt" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></label>
       <label class="f">Station pressure (inHg)<input id="rfZPress" type="number" inputmode="decimal" step="0.01"></label>
+      <p class="hint">Leave blank unless you have a true station reading. Weather reports and phones give pressure corrected to sea level.</p>
       <p class="hint" id="rfZHint">Zero conditions not set: assumed the same as today.</p>
       <div id="rfTruePart" hidden>
         <h3 class="rf-h">Correct from a real shot</h3>

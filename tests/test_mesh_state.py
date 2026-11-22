@@ -289,6 +289,7 @@ def test_teammates_survive_reload_and_are_not_in_a_backup(page, app_url, tmp_pat
 
 def test_team_is_capped_and_drops_the_longest_silent(page, app_url):
     boot(page, app_url)
+    chan(page, psk=PRIV)
     page.evaluate("""() => { for (let i = 1; i <= 100; i++) FK._test.mesh.feed({ type: 'nodeInfo', num: 5000 + i, longName: 'N' + i,
       shortName: '', position: null, lastHeard: 1000 + i, channel: 0 }); }""")
     assert page.evaluate('() => FK.mesh.teammates().length') == 100
@@ -349,3 +350,72 @@ def test_foreground_does_nothing_when_switch_is_off(page, app_url):
     page.evaluate("() => document.dispatchEvent(new Event('visibilitychange'))")
     page.wait_for_timeout(200)
     assert page.evaluate('() => [FakeRadio.connects, FK.mesh.status().state]') == [1, 'off']
+
+
+WPB = meshref.waypoint_bytes(id=5, lat=43.0, lon=-76.0, name='Rally')
+
+
+def early(page):
+    """Two nodes, a position, and a waypoint, all before any channel message."""
+    feed(page, node(BRAVO, long='Bravo', pos=dict(lat=43.01, lon=-76.01, alt=0, time=1766000100), heard=1766000100))
+    feed(page, node(CHARLIE, long='Charlie', heard=1766000200))
+    feed_packet(page, CHARLIE, meshref.PORT['POSITION'], meshref.position_bytes(43.0, -76.0, 0, 1766000300))
+    feed_packet(page, BRAVO, meshref.PORT['WAYPOINT'], WPB)
+
+
+def test_messages_before_the_channel_wait_for_a_private_verdict(page, app_url):
+    boot(page, app_url)
+    watch(page)
+    early(page)
+    assert page.evaluate('() => FK.mesh.teammates()') == [] and events(page, 'team') == [] and events(page, 'meshWaypoint') == []
+    chan(page, psk=PRIV, precision=32)
+    t = page.evaluate('() => FK.mesh.teammates()')
+    assert [x['num'] for x in t] == [BRAVO, CHARLIE]
+    assert team(page)[CHARLIE]['lat'] == 43.0 and team(page)[BRAVO]['name'] == 'Bravo'   # the position came after the node entry
+    ev = events(page, 'meshWaypoint')
+    assert len(ev) == 1 and ev[0]['from'] == BRAVO and ev[0]['name'] == 'Bravo'
+    chan(page, psk=PRIV, precision=32)   # a repeat applies nothing twice
+    assert len(events(page, 'meshWaypoint')) == 1
+
+
+def test_messages_before_the_channel_are_dropped_on_a_public_verdict(page, app_url):
+    boot(page, app_url)
+    watch(page)
+    early(page)
+    chan(page, psk=b'')
+    assert team(page) == {} and events(page, 'team') == [] and events(page, 'meshWaypoint') == []
+    chan(page, psk=PRIV)   # nothing is left to apply later either
+    assert team(page) == {} and events(page, 'meshWaypoint') == []
+
+
+def test_download_ending_without_a_channel_applies_nothing(page, app_url):
+    script = [R(my_node_num=ME),
+              R(node=dict(num=BRAVO, long='Bravo', short='BRV', pos=(43.01, -76.01, 0, 1766000100), last_heard=1766000100))]
+    boot(page, app_url, script=script)
+    watch(page)
+    assert page.evaluate('() => FK.mesh.connect()') is True
+    assert page.evaluate('() => [FK.mesh.status().state, FK.mesh.channel()]') == ['on', 'unknown']
+    assert team(page) == {} and events(page, 'team') == []
+    chan(page, psk=PRIV)   # a verdict long after the download does not resurrect it
+    assert team(page) == {} and page.evaluate('() => FK.mesh.canShare()') is True
+
+
+def test_new_download_empties_what_is_waiting_but_keeps_the_stored_list(page, app_url):
+    connected(page, app_url)
+    kept = team(page)
+    page.evaluate('() => FK._test.mesh.link("syncing", "")')
+    assert team(page) == kept   # still on screen while the new download runs
+    feed(page, node(DELTA, long='Delta', heard=5))
+    page.evaluate('() => FK._test.mesh.link("syncing", "")')   # a second download starts
+    chan(page, psk=PRIV)
+    assert DELTA not in team(page) and team(page) == kept
+
+
+def test_waiting_messages_are_capped_and_the_oldest_dropped(page, app_url):
+    boot(page, app_url)
+    watch(page)
+    page.evaluate("""wp => { for (let i = 1; i <= 205; i++) FK._test.mesh.feed({ type: 'packet', from: 7000 + i, to: 0xFFFFFFFF, channel: 0, id: i,
+      rxTime: 0, portnum: 8, payload: Uint8Array.from(wp) }); }""", list(WPB))
+    chan(page, psk=PRIV)
+    froms = [e['from'] for e in events(page, 'meshWaypoint')]
+    assert len(froms) == 200 and froms[0] == 7006 and froms[-1] == 7205   # the newest 200, in order

@@ -67,31 +67,48 @@
   }
 
   /* ---- messages and link state from the radio ---- */
+  /* The start-up messages may come in any order, so until the primary channel's verdict is known, nothing from the mesh is shown
+     or emitted: teammate updates and waypoint packets wait here (200 at most, oldest dropped). A private verdict applies them in
+     order; a public verdict, the end of the download with no verdict, or a new download discards them. */
+  const MAX_HELD = 200;
+  let held = [];
+  const isMesh = m => (m.type === 'nodeInfo' && !(m.num && m.num === myNum)) ||
+    (m.type === 'packet' && m.channel === 0 && (m.portnum === MPB.PORT.POSITION || m.portnum === MPB.PORT.NODEINFO || m.portnum === MPB.PORT.WAYPOINT));
+
+  function apply(m, now) {
+    if (m.type === 'nodeInfo') {
+      if (m.channel === 0) touch(m.num, { long: m.longName, short: m.shortName, pos: m.position, heard: m.lastHeard * 1000 });
+    } else if (m.portnum === MPB.PORT.POSITION && m.payload) touch(m.from, { pos: MPB.dec.position(m.payload), heard: now });
+    else if (m.portnum === MPB.PORT.NODEINFO && m.payload) {
+      const u = MPB.dec.user(m.payload);
+      if (u) touch(m.from, { long: u.longName, short: u.shortName, heard: now });
+    } else if (m.portnum === MPB.PORT.WAYPOINT && m.payload) {
+      const wp = MPB.dec.waypoint(m.payload);
+      if (wp) emit('meshWaypoint', { wp, from: m.from, name: nameOf(m.from) });
+    }
+  }
   function onMessage(m) {
     if (!enabled || !m) return;
     if (m.type === 'myInfo') {
       myNum = m.myNodeNum || null;
       store.set('meshMe', myNum);
       if (myNum && team.some(x => x.num === myNum)) { team = team.filter(x => x.num !== myNum); saveTeam(); }
-    } else if (m.type === 'channel') verdict(m);
-    else if (m.type === 'nodeInfo') {
-      if (m.num && m.num === myNum) { if (m.longName || m.shortName) myName = cleanName(m.longName) || cleanName(m.shortName); return; }
-      if (channel !== 'public' && m.channel === 0) touch(m.num, { long: m.longName, short: m.shortName, pos: m.position, heard: m.lastHeard * 1000 });
-    } else if (m.type === 'packet' && m.channel === 0 && channel !== 'public') {
-      if (m.portnum === MPB.PORT.POSITION && m.payload) touch(m.from, { pos: MPB.dec.position(m.payload), heard: Date.now() });
-      else if (m.portnum === MPB.PORT.NODEINFO && m.payload) {
-        const u = MPB.dec.user(m.payload);
-        if (u) touch(m.from, { long: u.longName, short: u.shortName, heard: Date.now() });
-      } else if (m.portnum === MPB.PORT.WAYPOINT && m.payload && channel === 'private') {
-        const wp = MPB.dec.waypoint(m.payload);
-        if (wp) emit('meshWaypoint', { wp, from: m.from, name: nameOf(m.from) });
-      }
+    } else if (m.type === 'channel') {
+      verdict(m);
+      if (channel === 'private') { const h = held; held = []; h.forEach(x => apply(x.m, x.at)); }
+      else if (channel === 'public') held = [];
+    } else if (m.type === 'nodeInfo' && m.num && m.num === myNum) {
+      if (m.longName || m.shortName) myName = cleanName(m.longName) || cleanName(m.shortName);
+    } else if (isMesh(m)) {
+      if (channel === 'private') apply(m, Date.now());
+      else if (channel === 'unknown') { held.push({ m, at: Date.now() }); if (held.length > MAX_HELD) held.shift(); }
     }
   }
   function onState(s) {
     if (!enabled) return;
     st = { state: s.state, name: s.name || '', reason: s.reason };
-    if (s.state === 'syncing') { channel = 'unknown'; positions = 'unknown'; }   // every start-up download decides afresh
+    if (s.state === 'syncing') { channel = 'unknown'; positions = 'unknown'; held = []; }   // every start-up download decides afresh
+    else if (s.state === 'on' && channel === 'unknown') held = [];                          // the download ended with no verdict
     emit('mesh');
   }
 
@@ -104,7 +121,7 @@
     if (!v) {
       if (link) link.disconnect();                   // its 'off' report is ignored now: enabled is false
       st = { state: 'off', name: '', reason: 'user' };
-      channel = 'unknown'; positions = 'unknown';
+      channel = 'unknown'; positions = 'unknown'; held = [];
     }
     emit('mesh');
   }

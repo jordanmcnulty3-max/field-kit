@@ -300,3 +300,29 @@ def test_the_night_theme_keeps_the_ring_round_and_the_friend_a_rectangle(page, a
     r = ev(page, """() => { const t = document.querySelector('#map .tm-pin i'), f = document.querySelector('#map .mk-pin[data-kind=friend] svg rect');
       return { round: getComputedStyle(t).borderRadius, border: getComputedStyle(t).borderTopWidth, rect: !!f, circle: !!document.querySelector('#map .tm-pin i svg circle') }; }""")
     assert r['round'] == '50%' and r['border'] == '3px' and r['rect'] is True
+
+
+@pytest.mark.parametrize('ahead,fresh', [(5, True), (119, True), (121, False), (None, False)])
+def test_a_slightly_fast_radio_clock_reads_as_now_and_the_two_lists_agree(page, app_url, ahead, fresh):
+    """Up to 2 min ahead of the phone: fresh pin, youngest age. More, or t = 0: age unknown, old. The Radio sheet says the same."""
+    boot(page, app_url)
+    t = 0 if ahead is None else SEC + ahead
+    feed(page, node(ALPHA, 'Alpha', 'ALP', dict(lat=HOME[0] + 0.001, lon=HOME[1], time=t), 0))
+    wait_pins(page, 1)
+    p = pins(page)[0]
+    if fresh:
+        assert p['cls'] == 'tm-pin' and p['age'] == '1 min ago', p
+    else:
+        assert p['cls'] == 'tm-pin old' and p['age'] == 'age unknown', p
+    ev(page, "FK._test.mesh.link('on', 'Radio')")   # the list shows while the link is on
+    ev(page, "FK.radioSheet.open()")
+    page.wait_for_selector('#dlgRadio[open]')
+    page.wait_for_function("document.querySelectorAll('#rdTeam > li').length > 0")
+    row = page.eval_on_selector_all('#rdTeam > li', 'els => els.map(e => e.innerText.replace(/\\s+/g, " ").trim()).filter(x => x.startsWith("Alpha"))')[0]
+    assert row.endswith(p['age']), (row, p)
+    page.keyboard.press('Escape')
+    page.wait_for_function("!document.querySelector('#dlgRadio').open")
+    page.click('#map .tm-pin')
+    page.wait_for_selector('#dlgMate[open]')
+    sheet = page.inner_text('#tmAge')
+    assert sheet == ('Position from 1 min ago' if fresh else 'Position time unknown')

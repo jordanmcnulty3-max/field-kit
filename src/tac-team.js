@@ -11,9 +11,15 @@
   const OLD_MS = 30 * 60000;
   const dlg = $('#dlgMate');
 
-  /* "4 min ago", or '' when the time is unknown (0) or lies in the future: never a wrong age. */
-  const age = t => (t > 0 && t <= Date.now() ? FK.markers.ageText(t) : '');
-  const isOld = t => !(t > 0 && t <= Date.now() && Date.now() - t <= OLD_MS);
+  /* The one rule for a teammate's age, used by the pins, the sheet and the Radio sheet's list: { text, old }.
+     t is ms (0 = unknown). A time up to 2 min ahead of the phone clock is a radio clock a little fast: it counts as now
+     (the youngest age, a fresh pin). Further ahead, or 0: "age unknown" and an old pin. Never a wrong age. */
+  const SKEW_MS = 2 * 60000;
+  function age(t, now = Date.now()) {
+    if (!(t > 0) || t > now + SKEW_MS) return { text: 'age unknown', old: true };
+    const at = Math.min(t, now);
+    return { text: FK.markers.ageText(Date.now() - (now - at)), old: now - at > OLD_MS };
+  }
   const shows = () => FK.mesh.enabled() && FK.mesh.channel() !== 'public';
   const list = () => shows() ? FK.mesh.teammates().filter(m => m.lat !== null && m.lon !== null) : [];
   /* The Lucide user-round icon (vendor/lucide/comms-icons.json). */
@@ -24,7 +30,7 @@
     if (!map || !map._fkTeam) return;
     const g = map._fkTeam; g.clearLayers();
     list().forEach(m => {
-      const a = age(m.t), old = isOld(m.t), words = a || 'age unknown';
+      const { text: words, old } = age(m.t);
       const html = `<div class="tm-pin${old ? ' old' : ''}" data-num="${m.num}"><i>${FK.markers.line(USER)}</i><b>${esc(m.name)}</b><em>${esc(words)}</em></div>`;
       L.marker([m.lat, m.lon], { icon: L.divIcon({ className: 'tm-icon', iconSize: [30, 30], iconAnchor: [15, 15], html }),
         title: `${m.name}, ${words}`, zIndexOffset: -500 })   // marker pins have 0: theirs sit on top
@@ -44,7 +50,7 @@
     const rel = FK.relText(m.lat, m.lon, d => TGEOM.fmtDist(d, FK.tac.unit()));
     $('#tmRel').hidden = !rel; $('#tmRel').textContent = rel;
     const a = age(m.t);
-    $('#tmAge').textContent = a ? `Position from ${a}` : 'Position time unknown';
+    $('#tmAge').textContent = a.text === 'age unknown' ? 'Position time unknown' : `Position from ${a.text}`;
   }
   function open(num) {
     curNum = num;
@@ -79,5 +85,5 @@
   document.addEventListener('visibilitychange', () => { syncTimer(); if (tick) FK.team.render(); });
   syncTimer();
 
-  FK.team = { render, open, timerOn: () => !!tick };
+  FK.team = { render, open, age, timerOn: () => !!tick };
 })();

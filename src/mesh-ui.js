@@ -41,7 +41,7 @@
 
   /* ---- the sheet ---- */
   const show = (el, text) => { el.hidden = !text; el.textContent = text || ''; };
-  const ageOf = t => (t > 0 && FK.markers ? FK.markers.ageText(t) : '') || 'age unknown';
+  const ageOf = t => FK.team.age(t).text;   // one rule with the map pins (tac-team.js)
   const relOf = (lat, lon) => FK.relText(lat, lon, m => TGEOM.fmtDist(m, FK.tac.unit())) || 'distance unknown';
   const distOf = m => { const f = FK.getFix(); return f && m.lat !== null ? GEO.distance(f.lat, f.lon, m.lat, m.lon) : null; };
 

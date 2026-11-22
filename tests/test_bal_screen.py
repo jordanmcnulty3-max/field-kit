@@ -173,7 +173,7 @@ def test_show_all_units_is_temporary(page, app_url):
     # the sight's own lines stay and the other units are added beneath (a line the same as the sight's own is left out)
     assert c['elev'] == ['ELEVATION', 'U 3.5 mil', '35 clicks', 'U 12.2 MOA', 'Hold 64 in high'], c
     assert c['wind'] == ['WINDAGE', 'R 1.2 mil', '12 clicks', 'R 4.0 MOA', 'Hold 21 in right'], c
-    assert head(page)[:3] == ['Yd', 'Elev mil', 'Elev MOA']
+    assert head(page)[:3] == ['Yd', 'Elev mil', 'Elev clicks']        # the dope card keeps the sight's own columns (it turned to every unit)
     assert page.evaluate('FK._test.balState()') == {'profile': 'ut', 'showAll': True}
     page.select_option('#bProfile', 'ud')                         # a profile change turns it off
     expect(b).to_have_attribute('aria-pressed', 'false')
@@ -210,10 +210,10 @@ def test_dope_columns_follow_the_sight(page, app_url):
     assert head(page) == ['Yd', 'Mark', 'Elev hold in', 'Wind mil', 'Wind hold in', 'Path in', 'fps', 'ft-lb', 'Time s']      # no Drift in
     page.evaluate('FK.bal.select("ud")'); settle(page)
     assert head(page) == ['Yd', 'Elev hold in', 'Wind hold in', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
-    page.click('#bAll')
-    assert head(page) == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    page.click('#bAll')                                       # other units on the answer card only: the dope card is unchanged
+    assert head(page) == ['Yd', 'Elev hold in', 'Wind hold in', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
     rows = body(page)
-    assert all(len(r) == 10 for r in rows) and rows[0][0] == '50'
+    assert all(len(r) == 8 for r in rows) and rows[0][0] == '50'
 
 
 def test_dope_rows_keep_zero_and_transonic_marking(page, app_url):
@@ -751,3 +751,43 @@ def test_first_screen_fits_with_the_load_line_and_the_zero_line(page, app_url):
     for sel in ['#bProfile', '#bLoad', '#solution', '#bRange', '#bAngle', '#bWind', '#bClock']:
         r = page.locator(sel).bounding_box()
         assert r['y'] >= 0 and r['y'] + r['height'] <= nav_top, (sel, r, nav_top)
+
+
+
+# ---------- Second pass ----------
+
+def test_other_units_leave_the_dope_card_with_the_sights_own_columns(page, app_url):
+    open_screen(page, app_url, profile='ut', profiles=MINE)
+    before = (head(page), body(page))
+    page.click('#bAll')
+    expect(page.locator('#bAll')).to_have_attribute('aria-pressed', 'true')
+    assert 'Elev clicks' in head(page) and (head(page), body(page)) == before
+    page.evaluate('FK.bal.select("ur")'); settle(page)
+    page.click('#bAll')
+    assert head(page)[:3] == ['Yd', 'Mark', 'Elev hold in']
+    open_screen(page, app_url, profile='un', profiles=MINE)
+    assert head(page)[:3] == ['Yd', 'Elev mil', 'Elev MOA']        # no sight: unchanged
+
+
+def test_other_units_never_repeat_a_line_whatever_its_case(page, app_url):
+    open_screen(page, app_url, profile='ur', profiles=MINE)
+    page.click('#bAll')
+    wind = [x.lower() for x in card(page)['wind'][1:]]
+    assert wind[1].startswith('hold ') and len(wind) == len(set(wind)), wind
+
+
+def test_the_load_line_is_hidden_for_a_profile_the_screen_cannot_use(page, app_url):
+    odd = {'id': 'uo', 'name': 'Odd', 'bc': 0.00001, 'model': 'G7', 'w': 1e308, 'mv': 99999, 'sight': 1.5, 'zero': 0.001}
+    open_screen(page, app_url, profile='uo', profiles=[odd])
+    assert card(page)['sub'] == 'This profile needs a ballistic coefficient, a velocity and a zero range. Tap Edit.'
+    expect(page.locator('#bLoad')).to_be_hidden()
+    assert page.inner_text('#bLoad') == ''
+    open_screen(page, app_url, profile='ubare', profiles=[{'id': 'ubare', 'name': 'Bare', 'mv': 2600}])
+    expect(page.locator('#bLoad')).to_be_hidden()
+    open_screen(page, app_url, profile='ut', profiles=MINE)
+    expect(page.locator('#bLoad')).to_be_visible()
+
+
+def test_a_swipe_at_the_end_of_the_dope_box_carries_on_to_the_page(page, app_url):
+    open_screen(page, app_url, profile='ut', profiles=MINE)
+    assert page.evaluate("getComputedStyle(document.querySelector('#dope').closest('.tablewrap')).overscrollBehaviorY") == 'auto'

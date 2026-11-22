@@ -227,7 +227,7 @@
   const zeroAir = z => z && { temp: z.temp, alt: z.alt === undefined ? 0 : z.alt, press: z.press === undefined ? 0 : z.press, rh: z.rh };
   /* The profile row's sight and zero lines and the Show all units button. Returns whether the profile has a sight. */
   function head(p) {
-    const load = BALS.loadLine(p);
+    const load = loadOk(p) ? BALS.loadLine(p) : '';                    // nothing printed for numbers the screen will not use
     F('bLoad').textContent = load; F('bLoad').hidden = !load;
     F('bStart').hidden = !(p && PRESETS.some(x => x.id === p.id));      // a built-in load: urge a chronograph reading
     F('bSight').textContent = BALS.describe(p && p.optic);
@@ -258,8 +258,7 @@
     const sighted = head(p);
     condLine();
     F('solution').classList.remove('msg');
-    const optic = sighted ? p.optic : null;                      // null: every unit
-    const cardSight = showAll ? null : optic;                    // the dope card shows every unit while Show all units is on
+    const optic = sighted ? p.optic : null;                      // null: every unit (Show all units affects the answer card only)
     const target = read('bRange') === null ? NaN : read('bRange');
     if (!(inside(target, 1, 3000))) return nothing(MSG.range);
     if (!loadOk(p)) return nothing(MSG.profile);
@@ -291,7 +290,8 @@
     if (t) {
       const a = BALS.answer(t, optic), every = BALS.all(t);
       const lines = side => optic ? [a[side].main, a[side].sub] : every[side];
-      const more = side => optic && showAll ? every[side].filter(x => x !== a[side].main) : [];     // the sight's own lines stay
+      const own = side => [a[side].main, a[side].sub].filter(Boolean).map(x => x.toLowerCase());
+      const more = side => optic && showAll ? every[side].filter(x => !own(side).includes(x.toLowerCase())) : [];   // the sight's own lines stay, never repeated
       paint(F('solElev'), 'ELEVATION', lines('elev'), more('elev')); paint(F('solWind'), 'WINDAGE', lines('wind'), more('wind'));
       F('solSub').textContent = `At ${label(target)} yd: ${BALS.path(t)}, `
         + `${Math.round(t.fps)} fps, ${Math.round(t.ftlb)} ft-lb, ${t.tof.toFixed(2)} s flight`
@@ -301,10 +301,10 @@
       F('solSub').textContent = MSG.reach;
       F('solution').classList.add('msg');
     }
-    const c = BALS.cols(cardSight), generic = !!cardSight && cardSight.type === 'reticle';   // a reticle's wind columns already carry the drift
+    const c = BALS.cols(optic), generic = !!optic && optic.type === 'reticle';   // a reticle's wind columns already carry the drift
     const heads = ['Yd', ...c.elev, ...c.wind, 'Path in', ...(generic ? [] : ['Drift in']), 'fps', 'ft-lb', 'Time s'];
     const rows = at.map(rowFor).filter(Boolean).map(r => {
-      const x = BALS.cells(r, cardSight), trans = r.mach < 1.2;
+      const x = BALS.cells(r, optic), trans = r.mach < 1.2;
       return `<tr class="${r.yd === p.zero ? 'zero' : ''} ${trans ? 'trans' : ''}"><td>${label(r.yd)}${trans ? ' \u2020' : ''}</td>` +
         [...x.elev, ...x.wind, fx(r.dropIn, 1), ...(generic ? [] : [fx(Math.abs(r.windIn), 1)]), Math.round(r.fps), Math.round(r.ftlb), r.tof.toFixed(2)]
           .map(v => `<td>${esc(String(v))}</td>`).join('') + '</tr>';

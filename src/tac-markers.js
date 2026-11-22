@@ -97,7 +97,7 @@
      The row shows only while the Settings switch is on and either a radio can send now or the marker is already shared (or
      the user has just turned Share on). With the Settings switch off it stays hidden and the sheet is as it always was.
      With Share on, a name and a note are counted in bytes against what a waypoint can carry (MMK): nothing is ever cut;
-     anything that would save over the limit is refused with LIMIT_MSG until it is shortened or Share is turned off. */
+     anything that would save over the limit is refused with limitMsg() until it is shortened or Share is turned off. */
   const setText = (el, text) => { el.hidden = !text; el.textContent = text || ''; };
   const storedOf = () => cur && cur.id ? FK.tac.markers().find(x => x.id === cur.id) || null : null;
   const netOf = () => { const w = storedOf(); return w && w.net ? w.net : null; };

@@ -93,3 +93,20 @@ def test_note_fits_beside_the_map_buttons(page, app_url):
       return [...document.querySelectorAll('.mapctl button, .leaflet-control-zoom a, .maptag span:not([hidden])')].some(b => { const r = b.getBoundingClientRect();
         return r.left < n.right && r.right > n.left && r.top < n.bottom && r.bottom > n.top; }); }""")
     assert not over
+
+
+def test_map_is_a_named_region_and_the_grid_button_name_starts_with_its_text(page, app_url):
+    """Voice control says the words it sees: the button's accessible name must begin with the grid text on it."""
+    from .tac import open_map, center
+    open_map(page, app_url)
+    assert page.get_attribute('#map', 'role') == 'region'
+    assert page.get_attribute('#map', 'aria-label') == 'Map'
+    for lat, lon in [(43.0, -76.0), (43.2, -75.8)]:
+        center(page, lat, lon)
+        shown = page.inner_text('#mCenter')
+        assert shown not in ('', '—')
+        assert page.get_attribute('#mCenter', 'aria-label') == shown + '. Grid at crosshair. Tap to copy.'
+    # with no grid to show (the plain latitude/longitude text, or nothing yet) the old label stays
+    center(page, 85, 10, 5)   # beyond the MGRS band
+    page.wait_for_function("document.querySelector('#mCenter').textContent.includes(',')")
+    assert page.get_attribute('#mCenter', 'aria-label') == 'Grid at crosshair. Tap to copy.'

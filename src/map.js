@@ -188,6 +188,8 @@
     if (!visible()) return;
     const c = map.getCenter().wrap(), g = GEO.toMGRS(c.lat, c.lng);
     $('#mCenter').textContent = g ? g.text : `${c.lat.toFixed(5)}, ${c.lng.toFixed(5)}`;
+    // the accessible name starts with the text on the button, so a voice command that says what it shows hits it
+    $('#mCenter').setAttribute('aria-label', (g ? g.text + '. ' : '') + 'Grid at crosshair. Tap to copy.');
     $('#mCenterRel').textContent = FK.relText(c.lat, c.lng, fmtDist) || 'Grid at the crosshair';
   }
   $('#mCenter').addEventListener('click', async () => {

@@ -107,11 +107,12 @@
     return true;
   }
   /* Delete a marker here; a shared one is remembered (tomb). With everyone, the delete also goes out when the link can send.
-     Resolves 'sent' (the delete went out), 'local' (removed here only: teammates still have it) or 'no' (no such marker). */
+     Resolves 'sent' (the delete went out), 'local' (removed here only: teammates still have it), 'private' (it had no shared
+     record, so there was nothing for teammates to have) or 'no' (no such marker). */
   async function remove(id, everyone) {
     const m = find(id);
     if (!m) return 'no';
-    if (!m.net) { FK.tac.removeMarker(id); return 'local'; }
+    if (!m.net) { FK.tac.removeMarker(id); return 'private'; }
     const wp = everyone ? wpOf(m, 1) : null;
     tomb(m.net.wid); saveTombs();
     FK.tac.removeMarker(id);
@@ -121,7 +122,10 @@
   }
 
   /* ---- the spaced queue: pending markers on connection, and "send all mine again", one every GAP ms ---- */
-  let queue = [], qTimer = 0, busy = false;
+  let queue = [], qTimer = 0, busy = false, idleWaiters = [];
+  let batch = { ids: new Set(), sent: 0 };   // the last "send all mine again": how many of its markers went out
+  const idle = () => !queue.length && !busy && !qTimer;
+  function settleIdle() { if (!idle()) return; const w = idleWaiters; idleWaiters = []; w.forEach(f => f()); }
   function enqueue(ids) {
     let n = 0;
     ids.forEach(id => { if (!queue.includes(id)) { queue.push(id); n++; } });
@@ -134,18 +138,28 @@
   }
   async function step() {
     qTimer = 0;
-    if (stopped) return;
-    if (!FK.mesh.canShare()) { queue = []; return; }   // pending ones stay pending for the next connection
+    if (stopped) { settleIdle(); return; }
+    if (!FK.mesh.canShare()) {   // the link went: what was still queued waits, marked, for the next connection
+      const left = queue; queue = [];
+      left.forEach(id => { const m = find(id); if (m && m.net && !m.net.pending && on_()) FK.tac.setNet(id, { ...m.net, pending: true }); });
+      settleIdle();
+      return;
+    }
     const id = queue.shift(), m = find(id);
     if (m && m.net && MMK.fits(m).ok) {
       busy = true;
-      try { await sendNow(id); } finally { busy = false; }
+      let r;
+      try { r = await sendNow(id); } finally { busy = false; }
+      if (r === 'sent' && batch.ids.has(id)) batch.sent++;
     }
     kick();
+    settleIdle();
   }
   function resendMine() {
     if (!FK.mesh.canShare()) return 0;
-    return enqueue(FK.tac.markers().filter(m => isMine(m) && MMK.fits(m).ok).map(m => m.id));
+    const ids = FK.tac.markers().filter(m => isMine(m) && MMK.fits(m).ok).map(m => m.id);
+    batch = { ids: new Set(ids), sent: 0 };
+    return enqueue(ids);
   }
   /* The link can send again: queue every pending marker. Never from inside the radio's message handler (a channel verdict
      can arrive there): a timer starts it. */
@@ -172,14 +186,17 @@
   let dropped = 0;
   /* Inside a FK.tac.batch. idx: wid -> marker for every shared marker (kept up to date by the caller). Only markers that are
      not mine count and can go, never the navigation target. */
+  /* The marker open in the marker sheet is spared by the cap and by expiry while it is open (whatever is typed there must
+     not be lost to a sweep); the sweep after the sheet closes catches up. */
+  const openId = () => (FK.markers && FK.markers.openId ? FK.markers.openId() : null);
   function enforceCap(idx) {
-    const tgt = FK.tac.target(), tid = tgt && tgt.type === 'marker' ? tgt.id : null;
+    const tgt = FK.tac.target(), tid = tgt && tgt.type === 'marker' ? tgt.id : null, oid = openId();
     for (;;) {
       let n = 0, oldest = null;
       idx.forEach(m => {
         if (isMine(m)) return;
         n++;
-        if (m.id !== tid && (!oldest || m.net.t < oldest.net.t)) oldest = m;
+        if (m.id !== tid && m.id !== oid && (!oldest || m.net.t < oldest.net.t)) oldest = m;
       });
       if (n <= CAP || !oldest) return;
       FK.tac.removeMarker(oldest.id); idx.delete(oldest.net.wid); dropped++;
@@ -187,8 +204,9 @@
   }
   const indexShared = () => new Map(FK.tac.markers().filter(m => m.net).map(m => [m.net.wid, m]));
   function sweep(now, idx) {
+    const oid = openId();
     idx.forEach((m, wid) => {
-      if (m.net.expire > 0 && m.net.expire * 1000 <= now) { endShared(m, 'Sharing expired.'); idx.delete(wid); }
+      if (m.id !== oid && m.net.expire > 0 && m.net.expire * 1000 <= now) { endShared(m, 'Sharing expired.'); idx.delete(wid); }
     });
     pruneTombs(now);
     enforceCap(idx);
@@ -213,7 +231,8 @@
     if (expired || bare) {   // a delete: the maker keeps a private copy saying who deleted it
       if (!m) { tomb(wid); return; }
       idx.delete(wid);
-      notes.push({ id: m.id, what: 'deleted', name: d.name, kept: isMine(m) });
+      const tgt = FK.tac.target(), wasTarget = !isMine(m) && !!tgt && tgt.type === 'marker' && tgt.id === m.id;
+      notes.push({ id: m.id, what: 'deleted', name: d.name, kept: isMine(m), goto: wasTarget ? m.name : '' });
       endShared(m, `Deleted by ${d.name}.`);
       return;
     }
@@ -255,7 +274,11 @@
        was mine, so a private copy stays). Emitted once the burst is stored, for the marker sheet open on it. */
     const out = notes;
     notes = [];
-    out.forEach(n => emit('shareIn', n));
+    out.forEach(n => {
+      emit('shareIn', n);
+      // the marker being gone to: Go to has stopped (the sheet open on it says so itself)
+      if (n.goto && openId() !== n.id) FK.toast(`${n.name} deleted ${n.goto}, so Go to stopped.`);
+    });
   }
   on('meshWaypoint', d => {
     if (stopped || !d || !d.wp) return;
@@ -282,7 +305,9 @@
   syncTimer();
 
   FK.share = {
-    share, resend: sendNow, resendMine, unshare, remove, changed,
+    share, resend: sendNow, resendMine, unshare, remove, changed, sweep: sweepNow,
+    whenIdle: () => idle() ? Promise.resolve() : new Promise(f => idleWaiters.push(f)),
+    batchSent: () => batch.sent,
     isShared: id => !!(find(id) || {}).net,
     mine: id => isMine(find(id)),
     dropped: () => dropped

@@ -15,9 +15,9 @@ NOT_CONNECTED = ['You need a Meshtastic radio that is already set up in the Mesh
 FAILED = 'Couldn’t connect. If the Meshtastic app is open, close it and try again.'
 UNSUPPORTED = ('This phone’s browser can’t reach a radio. The Meshtastic app will still share your position and markers '
                'with the group.')
-PUBLIC = ('This radio is on a public channel, so Field Kit is not sending or showing anything. Set up a private channel in '
-          'the Meshtastic app and share it with your group.')
-POS_OFF = 'This channel is set to send no positions, so teammates won’t appear.'
+PUBLIC = ('This radio’s main channel is public, so Field Kit is not sending or showing anything. In the Meshtastic app, make '
+          'your private channel the main (primary) one, share it with your group, then connect again.')   # T15
+POS_OFF = 'This channel is set to send no positions: yours isn’t shared and teammates’ won’t arrive.'   # T15
 POS_APPROX = 'This channel sends approximate positions, so teammates may show in the wrong place.'
 
 
@@ -178,7 +178,8 @@ def test_connected_sheet(page, app_url):
     page.click('#rdDisconnect')
     page.wait_for_function("FK.mesh.status().state === 'off'")
     expect(page.locator('#rdConnect')).to_be_visible()
-    assert 'Channel:' not in sheet_text(page) and 'Teammates' not in sheet_text(page)
+    assert 'Channel:' not in sheet_text(page)
+    assert 'Teammates, last known (2)' in sheet_text(page)   # T10: not connected, the stored teammates show as last known
 
 
 def test_public_channel_warning(page, app_url):

@@ -47,6 +47,7 @@
     if (!m) { FK.sheet.close(dlg); return; }
     $('#tmTitle').textContent = m.name;
     $('#tmGrid').textContent = gridText(m.lat, m.lon);
+    $('#tmApprox').hidden = !m.approx;   // the channel or the radio sends it with reduced precision (the pin looks the same)
     const rel = FK.relText(m.lat, m.lon, d => TGEOM.fmtDist(d, FK.tac.unit()));
     $('#tmRel').hidden = !rel; $('#tmRel').textContent = rel;
     const a = age(m.t);

@@ -5,7 +5,7 @@
    can send 100+ events in one tick) and the sheet is only redrawn while it is open. Every name comes from another person's
    radio, so everything that reaches innerHTML goes through FK.esc. */
 (() => {
-  const { $, esc, on, toast } = FK;
+  const { $, esc, on } = FK;
   const dlg = $('#dlgRadio');
   /* The button is made here and only while the switch is on: with it off the map has its four buttons and nothing else. */
   let btn = null;
@@ -27,16 +27,29 @@
     'connection lost': '<path d="m7 7 10 10-5 5V2l5 5L7 17"/>'
   };
 
+  /* The button warns (a "!" dot drawn in CSS) whenever Field Kit cannot share: the link is lost, the radio is connected on a
+     channel that is not private, or it cannot transmit. Connected and sharing has no mark. */
+  function look() {
+    const s = FK.mesh.status().state, w = STATE[s] || 'off';
+    if (s === 'lost') return { w, label: w, warn: true };
+    if (s !== 'on') return { w, label: w, warn: false };
+    const ch = FK.mesh.channel();
+    if (ch === 'public') return { w, label: 'connected, not sharing (public channel)', warn: true };
+    if (ch !== 'private') return { w, label: 'connected, not sharing', warn: true };
+    if (FK.mesh.radioProblem()) return { w, label: 'connected, can’t transmit', warn: true };
+    return { w, label: w, warn: false };
+  }
   let shape = '';
   function drawButton() {
     if (!FK.mesh.enabled()) { dropButton(); return; }
     ensureButton();
-    const w = STATE[FK.mesh.status().state] || 'off';
-    if (w === shape) return;
-    shape = w;
-    btn.setAttribute('aria-label', 'Radio: ' + w);
-    btn.title = 'Radio: ' + w;
-    btn.innerHTML = FK.markers.line(ICON[w]);
+    const k = look(), key = k.w + '|' + k.label + '|' + k.warn;
+    if (key === shape) return;
+    shape = key;
+    btn.setAttribute('aria-label', 'Radio: ' + k.label);
+    btn.title = 'Radio: ' + k.label;
+    btn.classList.toggle('warn', k.warn);
+    btn.innerHTML = FK.markers.line(ICON[k.w]);
   }
 
   /* ---- the sheet ---- */
@@ -45,13 +58,16 @@
   const relOf = (lat, lon) => FK.relText(lat, lon, m => TGEOM.fmtDist(m, FK.tac.unit())) || 'distance unknown';
   const distOf = m => { const f = FK.getFix(); return f && m.lat !== null ? GEO.distance(f.lat, f.lon, m.lat, m.lon) : null; };
 
+  /* A row with a position is a button: it closes this sheet, centres the map on the teammate and opens the teammate sheet. */
   function rows(list) {
     const withPos = list.filter(m => m.lat !== null).map(m => ({ m, d: distOf(m) }));
     withPos.sort((a, b) => (a.d === null) - (b.d === null) || (a.d - b.d) || a.m.name.localeCompare(b.m.name));
     const none = list.filter(m => m.lat === null).sort((a, b) => a.name.localeCompare(b.name));
-    return withPos.map(x => `<li>${esc(x.m.name)} · ${esc(relOf(x.m.lat, x.m.lon))} · ${esc(ageOf(x.m.t))}</li>`)
+    return withPos.map(x => `<li><button type="button" data-num="${x.m.num}">${esc(x.m.name)} · ${esc(relOf(x.m.lat, x.m.lon))} · ${esc(ageOf(x.m.t))}</button></li>`)
       .concat(none.map(m => `<li>${esc(m.name)} · no position yet</li>`)).join('');
   }
+  const PROBLEM = { region: 'This radio has no region set, so it can’t transmit. Set the region in the Meshtastic app.',
+    txoff: 'This radio’s transmitter is switched off in its settings.' };
 
   function drawSheet() {
     if (!dlg.open) return;
@@ -67,7 +83,7 @@
     connect.hidden = unsupported || isOn;
     connect.disabled = busy;
     connect.textContent = busy ? 'Connecting…' : lost ? 'Connect again' : 'Connect a radio';
-    $('#rdDisconnect').hidden = !(isOn || lost);
+    $('#rdDisconnect').hidden = !isOn;   // always the quiet style; while lost, Connect again is the one action
     // what to do first, and why a connection failed
     const info = $('#rdInfo');
     if (s.state !== 'off') info.textContent = '';
@@ -77,13 +93,17 @@
     // the channel, only while the link is on (the last verdict is kept when it is lost)
     const ch = isOn ? FK.mesh.channel() : '', pos = isOn ? FK.mesh.positions() : '';
     show($('#rdChannel'), ch ? 'Channel: ' + ch : '');
-    show($('#rdWarn'), ch === 'public' ? 'This radio is on a public channel, so Field Kit is not sending or showing anything. Set up a private channel in the Meshtastic app and share it with your group.' : '');
-    show($('#rdPos'), ch === 'private' && pos === 'off' ? 'This channel is set to send no positions, so teammates won’t appear.'
+    show($('#rdProblem'), isOn ? PROBLEM[FK.mesh.radioProblem()] || '' : '');
+    show($('#rdWarn'), ch === 'public' ? 'This radio’s main channel is public, so Field Kit is not sending or showing anything. In the Meshtastic app, make your private channel the main (primary) one, share it with your group, then connect again.' : '');
+    show($('#rdPos'), ch === 'private' && pos === 'off' ? 'This channel is set to send no positions: yours isn’t shared and teammates’ won’t arrive.'
       : ch === 'private' && pos === 'approx' ? 'This channel sends approximate positions, so teammates may show in the wrong place.' : '');
-    const team = ch === 'private' ? FK.mesh.teammates() : null;
+    /* Connected on the private channel: the teammates heard. Not connected: the stored list, as last known (the pins stay
+       on the map too; none when the last verdict was a public channel, as on the map). */
+    const stored = !isOn && FK.mesh.channel() !== 'public' ? FK.mesh.teammates() : [];
+    const team = ch === 'private' ? FK.mesh.teammates() : stored.length ? stored : null;
     $('#rdTeamBox').hidden = !team;
     if (team) {
-      $('#rdTeamH').textContent = `Teammates (${team.length})`;
+      $('#rdTeamH').textContent = isOn ? `Teammates (${team.length})` : `Teammates, last known (${team.length})`;
       $('#rdTeam').innerHTML = team.length ? rows(team) : '<li class="hint">No teammates heard yet.</li>';
     }
     // shared markers: the cap's line, and sending this phone's own shared markers again (src/tac-share.js)
@@ -110,14 +130,43 @@
   $('#rdConnect').addEventListener('click', connectTap);
   $('#rdDisconnect').addEventListener('click', () => { if (performance.now() >= noDisc) FK.mesh.disconnect(); });
   $('#rdClose').addEventListener('click', () => FK.sheet.close(dlg));
-  $('#rdResend').addEventListener('click', () => {
+  /* Send all my shared markers again: the button itself says what happens (a toast would sit behind this sheet), and it is
+     disabled while its markers go out, one every few seconds. */
+  const RESEND = 'Send all my shared markers again';
+  const markersWord = n => `${n} ${n === 1 ? 'marker' : 'markers'}`;
+  let resendTimer = 0;
+  $('#rdResend').addEventListener('click', async () => {
+    const b = $('#rdResend');
+    if (b.disabled) return;
+    clearTimeout(resendTimer);
     const n = FK.share.resendMine();
-    toast(n ? `Sending ${n} ${n === 1 ? 'marker' : 'markers'}` : 'Nothing new to send');
+    if (!n) { b.textContent = 'Nothing to send'; resendTimer = setTimeout(() => { b.textContent = RESEND; }, 4000); return; }
+    b.disabled = true;
+    b.textContent = `Sending ${markersWord(n)}…`;
+    await FK.share.whenIdle();
+    const sent = FK.share.batchSent();
+    b.disabled = false;
+    b.textContent = sent >= n ? `Sent ${markersWord(n)}` : `Sent ${sent} of ${n}. The rest go out when the radio connects.`;
+    resendTimer = setTimeout(() => { b.textContent = RESEND; }, 4000);
+  });
+  $('#rdTeam').addEventListener('click', e => {
+    const b = e.target.closest('button[data-num]');
+    if (!b) return;
+    const num = Number(b.dataset.num), m = FK.mesh.teammates().find(x => x.num === num);
+    if (!m || m.lat === null) return;
+    FK.sheet.close(dlg);
+    FK.mapShow(m.lat, m.lon);
+    FK.team.open(num);   // FK.sheet.open waits for this sheet's step back
   });
 
+  /* While the sheet is open its ages move on with the clock, not only when a teammate is heard. */
+  let tick = 0;
   function open() {
     if (!FK.mesh.enabled()) return;
-    FK.sheet.open(dlg, { onOpen: () => { drawSheet(); $('#rdTitle').focus(); }, onClose: () => { if (btn) btn.focus(); } });
+    FK.sheet.open(dlg, {
+      onOpen: () => { drawSheet(); $('#rdTitle').focus(); clearInterval(tick); tick = setInterval(drawSheet, 60000); },
+      onClose: () => { clearInterval(tick); tick = 0; if (btn && !(FK.sheet.top && FK.sheet.top())) btn.focus(); }
+    });
   }
 
   on('mesh', () => { if (!FK.mesh.enabled() && dlg.open) FK.sheet.close(dlg); redraw(); });

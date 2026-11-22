@@ -91,7 +91,7 @@ def badge(scope):
 
 def test_shared_and_not_sent_badges_on_pins_and_list_rows(page, app_url):
     boot(page, app_url, [mk('s', 'Shared one', mine(80)), mk('p', 'Waiting', mine(81, pending=True), lat=HOME[0] + 0.002),
-                         mk('w', 'Private', lat=HOME[0] + 0.004)], night=False)
+                         mk('w', 'Private', lat=HOME[0] + 0.004)], link='private')   # nothing goes out: 'p' stays pending
     expect(badge(pin(page, 's'))).to_have_attribute('aria-label', 'Shared with teammates')
     expect(badge(pin(page, 'p'))).to_have_attribute('aria-label', 'Shared, not sent yet')
     expect(badge(pin(page, 'w'))).to_have_count(0)
@@ -457,6 +457,7 @@ def test_teammate_sheet_says_approximate_position(page, app_url):
     expect(page.locator('#tmApprox')).to_have_text('Approximate position')
     page.click('#tmClose')
     expect(page.locator('#dlgMate')).to_be_hidden()
+    page.evaluate('() => FK.mapShow(43.01, -76.01)')
     page.locator('.tm-pin[data-num="%d"]' % BRAVO).click()
     expect(page.locator('#dlgMate')).to_be_visible()
     expect(page.locator('#tmApprox')).to_be_hidden()

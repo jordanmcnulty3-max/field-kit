@@ -24,7 +24,7 @@ MIN = 60_000
 WPT = meshref.PORT['WAYPOINT']
 ICON = {'point': 0x1F4CD, 'camp': 0x26FA, 'hostile': 0x2666}
 FULL = 'Couldn’t save: phone storage for Field Kit is full. Back up, then delete old tracks or saved maps.'
-LIMIT = 'A shared marker’s name can be 29 characters and its note {}. Shorten it, or turn Share off.'
+TOO_LONG = 'Too long to share. Accents and emoji count extra. Shorten the name or note, or turn Share off.'   # final fix T6
 SLOW_GO = "const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0"   # a slow phone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -195,17 +195,17 @@ def test_a_refused_save_brings_the_over_limit_field_into_view(page, app_url):
     retype(page, '#mkName', 'n' * 35)
     page.evaluate("document.querySelector('#dlgMarker .mk-body').scrollTop = 9999")   # scrolled down to the note
     page.click('#mkSave')
-    expect(page.locator('#mkLimit')).to_be_visible()
-    for sel in ('#mkNameLeft', '#mkLimit'):
+    expect(page.locator('#mkNotice')).to_be_visible()
+    for sel in ('#mkNameLeft', '#mkNotice'):
         expect(page.locator(sel)).to_be_in_viewport()
-    expect(page.locator('#mkNameLeft')).to_have_text('6 characters too many')
+    expect(page.locator('#mkNameLeft')).to_have_text('6 over the limit')
     # an over-long note (name fine): the note's counter comes into view
     retype(page, '#mkName', 'Short')
     page.evaluate("document.querySelector('#dlgMarker .mk-body').scrollTop = 0")
     retype(page, '#mkNote', 'x' * 120)
     page.evaluate("document.querySelector('#dlgMarker .mk-body').scrollTop = 0")
     page.click('#mkSave')
-    expect(page.locator('#mkLeft')).to_have_text('21 characters too many')
+    expect(page.locator('#mkLeft')).to_have_text('21 over the limit')
     expect(page.locator('#mkLeft')).to_be_in_viewport()
     assert markers(page) == []
 
@@ -282,19 +282,19 @@ def test_bytes_not_characters_at_the_limit(page, app_url):
     open_new(page)
     page.click('#mkShare')
     retype(page, '#mkName', 'Café ⛺ north ridge lookout')     # 25 characters, 29 bytes
-    expect(page.locator('#mkNameLeft')).to_have_text('0 characters left')
+    expect(page.locator('#mkNameLeft')).to_have_text('Room for 0 more')
     page.keyboard.type('s')                                    # one byte more
-    expect(page.locator('#mkNameLeft')).to_have_text('1 character too many')
+    expect(page.locator('#mkNameLeft')).to_have_text('1 over the limit')
     page.click('#mkSave')
     expect(sheet(page)).to_be_visible()
-    expect(page.locator('#mkLimit')).to_have_text(LIMIT.format(99))
-    expect(page.locator('#mkLimit')).to_be_visible()
+    expect(page.locator('#mkNotice')).to_have_text(TOO_LONG)
+    expect(page.locator('#mkNotice')).to_be_visible()
     assert markers(page) == [] and sent_wps(page) == []
     page.click('#mkName')
     page.keyboard.press('End')
     page.keyboard.press('Backspace')
-    expect(page.locator('#mkNameLeft')).to_have_text('0 characters left')
-    expect(page.locator('#mkLimit')).to_be_hidden()
+    expect(page.locator('#mkNameLeft')).to_have_text('Room for 0 more')
+    expect(page.locator('#mkNotice')).to_be_hidden()
     page.click('#mkSave')
     expect(sheet(page)).to_be_hidden()
     assert [x.name for x in sent_wps(page)] == ['Café ⛺ north ridge lookout']   # whole, never cut
@@ -306,16 +306,16 @@ def test_note_room_follows_the_kind(page, app_url):
     open_new(page)
     page.click('#mkShare')
     retype(page, '#mkNote', 'n' * 90)
-    expect(page.locator('#mkLeft')).to_have_text('9 characters left')
+    expect(page.locator('#mkLeft')).to_have_text('Room for 9 more')
     page.click('#dlgMarker [data-kind="hostile"]')             # the seen time takes 19 bytes of an affiliation note
-    expect(page.locator('#mkLeft')).to_have_text('10 characters too many')
+    expect(page.locator('#mkLeft')).to_have_text('10 over the limit')
     page.click('#mkSave')
     expect(sheet(page)).to_be_visible()
-    expect(page.locator('#mkLimit')).to_have_text(LIMIT.format(80))
+    expect(page.locator('#mkNotice')).to_have_text(TOO_LONG)
     assert markers(page) == []
     page.click('#dlgMarker [data-kind="camp"]')
-    expect(page.locator('#mkLeft')).to_have_text('9 characters left')
-    expect(page.locator('#mkLimit')).to_be_hidden()
+    expect(page.locator('#mkLeft')).to_have_text('Room for 9 more')
+    expect(page.locator('#mkNotice')).to_be_hidden()
     page.click('#mkSave')
     expect(sheet(page)).to_be_hidden()
     assert sent_wps(page)[0].description == 'n' * 90
@@ -328,16 +328,17 @@ def test_turning_share_on_for_a_long_marker_asks_to_shorten_and_off_saves_it_who
     expect(page.locator('#mkNameLeft')).to_be_hidden()        # Share off: the counters are as they always were
     expect(page.locator('#mkLeft')).to_be_hidden()
     page.click('#mkShare')
-    expect(page.locator('#mkNameLeft')).to_have_text('2 characters too many')
-    expect(page.locator('#mkLeft')).to_have_text('21 characters too many')
-    expect(page.locator('#mkLimit')).to_have_text(LIMIT.format(99))
+    expect(page.locator('#mkNameLeft')).to_have_text('2 over the limit')
+    expect(page.locator('#mkLeft')).to_have_text('21 over the limit')
+    expect(page.locator('#mkNotice')).to_be_hidden()             # the message comes with a refused Save
     for button in ('#mkSave', '#mkGo', '#mkMove'):             # nothing that saves goes through
         page.click(button)
         expect(sheet(page)).to_be_visible()
+        expect(page.locator('#mkNotice')).to_have_text(TOO_LONG)
     assert 'net' not in one(page, 'w1') and sent_wps(page) == []
     assert page.evaluate('FK.tac.target()') is None and page.evaluate('FK.mapTools.mode()') is None
     page.click('#mkShare')                                     # Share off: the long name is fine again
-    expect(page.locator('#mkLimit')).to_be_hidden()
+    expect(page.locator('#mkNotice')).to_be_hidden()
     expect(page.locator('#mkNameLeft')).to_be_hidden()
     page.click('#mkSave')
     expect(sheet(page)).to_be_hidden()
@@ -356,9 +357,9 @@ def test_a_paste_over_the_limit_is_shown_not_hidden(page, app_url):
     page.keyboard.press('Control+A')
     page.keyboard.press('Control+V')
     expect(page.locator('#mkName')).to_have_value('p' * 60)
-    expect(page.locator('#mkNameLeft')).to_have_text('31 characters too many')
+    expect(page.locator('#mkNameLeft')).to_have_text('31 over the limit')
     page.click('#mkSave')
-    expect(page.locator('#mkLimit')).to_have_text(LIMIT.format(99))
+    expect(page.locator('#mkNotice')).to_have_text(TOO_LONG)
     expect(sheet(page)).to_be_visible()
     assert markers(page) == [] and sent_wps(page) == []
 
@@ -567,7 +568,7 @@ def test_send_again(page, app_url):
     open_marker(page, 's1')
     expect(page.locator('#mkResend')).to_have_text('Send again')
     page.click('#mkResend')
-    expect(toast(page)).to_have_text('Sent')
+    expect(page.locator('#mkResend')).to_have_text('Sent')     # on the button: a toast would sit behind the sheet (T3)
     expect(sheet(page)).to_be_visible()                        # the sheet stays open
     assert [x.id for x in sent_wps(page)] == [56]
     page.evaluate('() => FK._test.mesh.link("lost", "")')
@@ -594,7 +595,7 @@ def test_an_incoming_change_keeps_what_was_typed_and_save_wins(page, app_url):
     open_marker(page, 's1')
     retype(page, '#mkName', 'Rally mine')
     incoming(page, CHARLIE, id=58, lat=43.0, lon=-76.0, name='Rally theirs', icon=ICON['point'])
-    expect(page.locator('#mkShareLine')).to_have_text(
+    expect(page.locator('#mkNotice')).to_have_text(
         'This marker was changed by Charlie while you were editing. Saving keeps your version.')
     expect(page.locator('#mkName')).to_have_value('Rally mine')
     assert one(page, 's1')['name'] == 'Rally theirs'
@@ -627,7 +628,7 @@ def deleted_while_typing(page, app_url, wid):
     page.click('#dlgMarker [data-kind="water"]')
     retype(page, '#mkNote', 'my typing')
     incoming(page, BRAVO, id=wid, lat=43.002, lon=-76.0, name='Rally', expire=1, icon=ICON['point'])
-    expect(page.locator('#mkShareLine')).to_have_text(DRAFT)
+    expect(page.locator('#mkNotice')).to_have_text(DRAFT)
     expect(sheet(page)).to_be_visible()
     expect(page.locator('#mkTitle')).to_have_text('New marker')
     expect(page.locator('#mkName')).to_have_value('Rally kept')
@@ -714,14 +715,14 @@ def test_an_incoming_delete_of_mine_while_typing_keeps_the_typing_and_makes_it_p
     open_marker(page, 's1')
     retype(page, '#mkNote', 'south side')
     incoming(page, BRAVO, id=69, lat=43.0, lon=-76.0, name='Rally', expire=1, icon=ICON['point'])
-    expect(page.locator('#mkShareLine')).to_have_text('Bravo deleted this marker for everyone. Your copy is now private.')
+    expect(page.locator('#mkNotice')).to_have_text('Bravo deleted this marker for everyone. Your copy is now private.')
     expect(page.locator('#mkNote')).to_have_value('south side')
     expect(page.locator('#mkShare')).not_to_be_checked()
     expect(page.locator('#mkTitle')).to_have_text('Marker')
     page.click('#mkSave')
     expect(sheet(page)).to_be_hidden()
     m = one(page, 's1')
-    assert m['note'] == 'south side' and 'net' not in m
+    assert m['note'] == 'Deleted by Bravo. south side' and 'net' not in m   # T8: the line is kept in front of what was typed
     page.wait_for_timeout(300)
     assert sent_wps(page) == []
 
@@ -751,7 +752,7 @@ def test_radio_sheet_send_all_mine_again(page, app_url):
     page.wait_for_selector('#dlgRadio[open]')
     expect(page.locator('#rdResend')).to_be_visible()
     page.click('#rdResend')
-    expect(toast(page)).to_have_text('Sending 2 markers')
+    expect(page.locator('#rdResend')).to_have_text('Sending 2 markers…')   # on the button (T3)
     page.wait_for_function('() => FakeRadio.sent.length >= 1')
     page.clock.run_for(3500)
     page.wait_for_function('() => FakeRadio.sent.filter(Boolean).length >= 2')

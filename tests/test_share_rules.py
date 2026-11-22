@@ -500,7 +500,7 @@ def test_remove_for_everyone_sends_expire_1_tombs_and_removes(page, app_url):
     w = sent_wps(page)[-1]
     assert (w.id, w.expire, w.name, w.icon, w.latitude_i, w.longitude_i) == (99, 1, 'Theirs', ICON['point'], 430000000, -760000000)
     assert [m['id'] for m in markers(page)] == ['p'] and tombs(page) == [99]
-    assert js(page, "() => FK.share.remove('p', true)") == 'local'  # a private marker: removed, nothing sent, no tomb
+    assert js(page, "() => FK.share.remove('p', true)") == 'private'  # a private marker: removed, nothing sent, no tomb
     assert markers(page) == [] and len(sent_wps(page)) == 1 and tombs(page) == [99]
     assert js(page, "() => FK.share.remove('nope', true)") == 'no'
 

@@ -665,6 +665,15 @@
     if (b.version !== undefined && newerVersion(b.version, APP_VERSION)) { msg.textContent = 'This backup is from a newer version of Field Kit. Update the app first.'; return; }
     const file = {};
     Object.entries(d).forEach(([k, v]) => { if (backedUp(k)) file[k] = v; });
+    /* A shared marker that had not gone out when the backup was made is not sent by itself after the restore (it may be long
+       out of date): its "not sent yet" is cleared, and Send again is there for it. */
+    if (file['fk.wps']) {
+      try {
+        const w = JSON.parse(file['fk.wps']);
+        const was = x => !!x && typeof x === 'object' && !!x.net && typeof x.net === 'object' && x.net.pending === true;
+        if (Array.isArray(w) && w.some(was)) file['fk.wps'] = JSON.stringify(w.map(x => was(x) ? { ...x, net: { ...x.net, pending: false } } : x));
+      } catch { /* not JSON: tac-data's own checks deal with it after the reload */ }
+    }
     if (!Object.keys(file).length) { msg.textContent = 'That backup is empty, so nothing was restored.'; return; }
     const when = new Date(b.saved);
     pendingRestore = file;

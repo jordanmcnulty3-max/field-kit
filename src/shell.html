@@ -552,6 +552,11 @@ body.maptool #tacSeg{display:none}
 .tb-btns .btn[hidden]{display:none}
 .tb-btns #tbAdd,.tb-btns #tbPlace{flex:1.7 1 0;font-weight:700}
 /* comms radio */
+/* The Radio button's warning: a filled dot with "!" at its corner whenever Field Kit cannot share (lost, not a private
+   channel, a radio that can't transmit). Drawn in CSS, not an icon; it takes no taps. */
+#mRadio{position:relative}
+#mRadio.warn::after{content:"!";position:absolute;top:-6px;right:-6px;width:18px;height:18px;box-sizing:border-box;border-radius:50%;
+  background:var(--blaze);color:var(--on-accent);border:2px solid var(--surface);font:800 12px/14px system-ui,sans-serif;text-align:center;pointer-events:none}
 #dlgRadio .mk-act{grid-template-columns:1fr}
 #dlgRadio .mk-body{padding-bottom:12px}
 .rd-status{margin:12px 0 0;font-size:18px;font-weight:650;overflow-wrap:anywhere}
@@ -560,6 +565,8 @@ body.maptool #tacSeg{display:none}
 .rd-note{margin:12px 0 0;padding:8px 12px;border-left:4px solid var(--blaze);background:var(--surface);font-size:15px;font-weight:600;overflow-wrap:anywhere}
 .rd-h{margin:20px 0 4px;font-size:16px;font-weight:700;color:var(--ink)}
 .rd-team li{padding:10px 0;font-size:16px;overflow-wrap:anywhere}
+.rd-team li:has(>button){padding:0}
+.rd-team li>button{display:block;width:100%;min-height:48px;padding:10px 0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;overflow-wrap:anywhere}
 .rd-team .hint{display:block;margin-top:2px}
 .rd-resend{display:block;width:100%;margin-top:16px;white-space:normal}
 /* /comms radio */
@@ -601,6 +608,21 @@ body.maptool #tacSeg{display:none}
 .mk-left{margin:4px 0 0}
 .mk-over{color:var(--blaze);font-weight:600}
 #dlgMkDel .row:has(>.btn[hidden]){display:none}
+/* The one place for what happened while typing and for a refused Save: above the buttons, never scrolled away. */
+.mk-act .mk-notice{grid-column:1/-1;margin:0;font-size:15px;white-space:pre-line}
+.mk-sendhint{margin:4px 0 8px}
+.mk-emo{margin-left:6px;color:var(--ink)}
+/* A shared marker's corner mark (Lucide share-2; clock while not sent yet). It sits over the pin's corner and takes no taps:
+   the pin's size and hit area stay as they were. */
+.mk-net{position:absolute;top:-4px;left:19px;width:13px;height:13px;box-sizing:border-box;display:grid;place-items:center;border-radius:50%;
+  background:var(--surface);color:var(--ink);border:1px solid var(--ink);pointer-events:none;z-index:1}
+.mk-net svg{width:9px;height:9px;stroke-width:2.6}
+.mk-list .mk-ic{position:relative}
+.mk-list .mk-net{top:-3px;left:18px}
+:root[data-theme="night"] .mk-net{background:#000;color:var(--ink);border-color:var(--ink)}
+/* A Point that carries the sender's own emoji (another app's icon): the emoji in place of the Point drawing. */
+.mk-emoji{font-size:17px;line-height:1;font-style:normal}
+.mk-list .mk-emoji{font-size:22px}
 /* /comms share */
 #dlgShape .mk-act .btn[hidden]{display:none}
 #shType{margin-top:-6px}
@@ -716,6 +738,9 @@ dialog .row{flex-wrap:wrap}
 dialog.sheet{margin:auto auto 0;width:min(560px,100vw);max-width:100vw;border-radius:16px 16px 0 0;border-bottom:0;
   padding:20px 16px calc(16px + env(safe-area-inset-bottom))}
 dialog.sheet .row .btn{flex:1 1 140px}
+/* The Settings menu is taller than a small phone: it scrolls, and its last row (Check for update, Close) stays pinned at the
+   bottom edge, so Close is always on screen. */
+#dlgMenu>.row:last-child{position:sticky;bottom:-20px;margin:8px -16px -20px;padding:8px 16px 20px;background:var(--paper);border-top:1px solid var(--line)}
 .btn.danger{background:var(--blaze);border-color:var(--blaze);color:var(--on-accent)}
 .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
 .opt input{width:22px;min-height:22px;height:22px;margin-top:2px;accent-color:var(--c)}
@@ -1185,24 +1210,26 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <p class="hint mk-left" id="mkNameLeft" hidden></p>
       <div class="mk-share" id="mkShareBox" hidden>
         <label class="opt"><input type="checkbox" id="mkShare" role="switch" aria-describedby="mkShareHint"><span>Share with teammates</span></label>
-        <p class="mk-msg" id="mkLimit" role="alert" hidden></p>
         <p class="hint" id="mkShareHint" hidden></p>
         <p class="mk-shline" id="mkShareLine" hidden></p>
         <button type="button" class="btn ghost" id="mkResend" hidden>Send again</button>
+        <p class="hint mk-sendhint" id="mkSendHint" hidden>Save your changes to send them.</p>
       </div>
       <fieldset class="mk-kinds">
-        <legend>Kind</legend>
+        <legend>Kind <span class="mk-emo" id="mkEmoji" hidden></span></legend>
         <div class="mk-grid" id="mkPlaces"></div>
         <p class="mk-sub">Affiliation</p>
         <div class="mk-grid" id="mkAffil"></div>
       </fieldset>
       <label class="f">Note<textarea id="mkNote" maxlength="500" rows="2"></textarea></label>
       <p class="hint" id="mkLeft" hidden></p>
+      <p class="hint" id="mkSeenHint" hidden>A shared sighting carries the time it was seen, which uses part of the note.</p>
       <button type="button" class="mk-gridline" id="mkGrid" translate="no" aria-describedby="mkGridHint"></button><span class="vh" id="mkGridHint">Tap to copy the grid.</span>
       <p class="mk-rel" id="mkRel" hidden></p>
       <p class="mk-rel" id="mkAge" hidden></p>
     </div>
     <div class="mk-act">
+      <p class="mk-msg mk-notice" id="mkNotice" role="status" hidden></p>
       <button type="submit" class="btn" id="mkSave">Save</button>
       <button type="button" class="btn ghost" id="mkGo">Go to</button>
       <button type="button" class="btn ghost" id="mkMove">Move</button>
@@ -1290,6 +1317,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <p class="rd-line" id="rdChannel" hidden></p>
     <div class="rd-info" id="rdInfo"></div>
     <p class="rd-note" id="rdErr" role="status" hidden></p>
+    <p class="rd-note" id="rdProblem" hidden></p>
     <p class="rd-note" id="rdWarn" hidden></p>
     <p class="rd-note" id="rdPos" hidden></p>
     <div id="rdTeamBox" hidden>
@@ -1301,7 +1329,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   </div>
   <div class="mk-act">
     <button type="button" class="btn" id="rdConnect">Connect a radio</button>
-    <button type="button" class="btn" id="rdDisconnect" hidden>Disconnect</button>
+    <button type="button" class="btn ghost" id="rdDisconnect" hidden>Disconnect</button>
     <button type="button" class="btn ghost" id="rdClose">Close</button>
   </div>
 </dialog>
@@ -1313,6 +1341,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <p class="tm-kind">Teammate</p>
     <h2 id="tmTitle" tabindex="-1"></h2>
     <p class="tm-grid" id="tmGrid" translate="no"></p>
+    <p class="tm-line" id="tmApprox" hidden>Approximate position</p>
     <p class="tm-line" id="tmRel" hidden></p>
     <p class="tm-line" id="tmAge"></p>
   </div>

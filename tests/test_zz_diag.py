@@ -21,5 +21,10 @@ def test_diag(page, app_url):
         label: l.id || l.firstChild.textContent.trim(), sw: l.scrollWidth, cw: l.clientWidth,
         kids: [...l.childNodes].map(n => n.nodeType === 3 ? {text: n.textContent.trim(), w: (() => { const r = document.createRange(); r.selectNodeContents(n); return Math.round(r.getBoundingClientRect().width); })()}
           : {tag: n.tagName, id: n.id, w: Math.round(n.getBoundingClientRect().width), sw: n.scrollWidth, minW: getComputedStyle(n).minWidth, fs: getComputedStyle(n).fontSize})}))""", DLG)
-    print('DIAG ' + json.dumps(info))
+    sc = "d => { const e = document.querySelector(d); return [e.scrollWidth, e.clientWidth, document.documentElement.scrollWidth, innerWidth]; }"
+    after = page.evaluate(sc, DLG)
+    page.evaluate("document.querySelector('#rfOptic').style.overflow = 'visible'")
+    before = page.evaluate(sc, DLG)
+    page.evaluate("document.querySelector('#rfOptic').style.overflow = ''")
+    print('DIAG ' + json.dumps({'labels': info, 'dialog_and_page_scroll_with_fix': after, 'without_fix': before}))
     assert info == [], json.dumps(info)

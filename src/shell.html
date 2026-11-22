@@ -148,9 +148,9 @@ p{margin:0 0 8px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
 label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
 label.f.wide{grid-column:1/-1}
-/* min-width:0 and max-width:100%: Safari keeps a field at least as wide as its own text (a select's chosen option),
-   which pushed the rifle editor's Sight row past the sheet with large text (WebKit check, 2026-11-22). */
-label.f>input,label.f>select{min-width:0;max-width:100%}
+/* Safari lets a select's chosen option spill past the box with large text; it widened the rifle editor's Sight row by 9 px
+   (WebKit check, 2026-11-22). Clip it inside the field with an ellipsis. */
+label.f>select{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 input,select{min-height:48px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);
   font-size:17px;color:var(--ink);width:100%}
 input::placeholder{color:var(--muted);opacity:.8}

@@ -49,7 +49,7 @@ To roll back: `git checkout vOLD -- src figs vendor`, set both version numbers t
 Every push to any branch runs `.github/workflows/checks.yml` (results on the repo's Actions tab):
 
 - **Build and tests (Chromium):** builds, fails if the committed root files differ from a fresh build of `src/`, runs the full test suite. On `main` and tags it also runs the `--release` draft check.
-- **iPhone engine (WebKit) layout:** the sheet, screen and button-size tests in WebKit, Safari's engine (catches the kind of bug the first iPhone test found). Non-blocking until it has passed once.
+- **iPhone engine (WebKit) layout:** the sheet, screen and button-size tests in WebKit, Safari's engine (catches the kind of bug the first iPhone test found). Non-blocking until its one known failure (rifle profile editor, drop reticle, large text) is fixed.
 - **Lighthouse:** audits Survival, Tactical map and Emergency as a phone. Accessibility below 95 fails; the reports are kept as a download on the run.
 
 Run them locally:

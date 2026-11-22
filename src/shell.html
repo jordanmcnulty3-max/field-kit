@@ -624,6 +624,8 @@ body.maptool #tacSeg{display:none}
 /* A Point that carries the sender's own emoji (another app's icon): the emoji in place of the Point drawing. */
 .mk-emoji{font-size:17px;line-height:1;font-style:normal}
 .mk-list .mk-emoji{font-size:22px}
+/* Night: no full-colour emoji to spoil night vision: grey, then the theme's red (as the map tiles are treated). */
+:root[data-theme="night"] .mk-emoji{filter:grayscale(1) sepia(1) saturate(9) hue-rotate(-38deg) brightness(.85)}
 /* /comms share */
 #dlgShape .mk-act .btn[hidden]{display:none}
 #shType{margin-top:-6px}

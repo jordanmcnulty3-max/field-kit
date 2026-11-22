@@ -174,7 +174,7 @@ def test_a_save_that_cannot_go_out_says_not_sent_yet(page, app_url):
     expect(sheet(page)).to_be_hidden()
     page.wait_for_selector('#toolBar:not([hidden])')
     page.click('#tbPlace')
-    expect(toast(page)).to_have_text(NOT_SENT)
+    expect(toast(page)).to_have_text('Moved Rally. Not sent yet: it goes out when the radio connects.')   # second pass item 2
 
 
 def test_send_all_again_reports_on_its_button(page, app_url):
@@ -480,3 +480,148 @@ def test_settings_close_is_on_screen_at_360_by_640(page, app_url):
     assert page.evaluate("document.querySelector('#dlgMenu h2').getBoundingClientRect().top") >= d['y']   # nothing above moved off
     page.click('#menuClose')
     expect(page.locator('#dlgMenu')).to_be_hidden()
+
+
+# ---------------------------------------------------------------- second pass (final-fix-findings-r2.md)
+
+from .test_marker_share import history_clean, tombs  # noqa: E402
+
+EXPIRED_LINE = 'This shared marker has expired. Save keeps what you typed as a private marker of your own.'
+EXPIRED_TOAST = 'This shared marker expired. Your changes were kept as a private marker.'
+
+
+def soon(s=60):
+    return (NOW + s * 1000) // 1000
+
+
+def test_save_on_a_teammates_marker_that_expired_while_typing_keeps_a_private_copy(page, app_url):
+    boot(page, app_url, [mk('t1', 'Temp', net(91, expire=soon()), kind='camp')])
+    page.evaluate(SLOW_GO)
+    open_marker(page, 't1')
+    retype(page, '#mkNote', 'water is behind the shed')
+    page.clock.run_for(130_000)
+    expect(page.locator('#mkNotice')).to_have_text(EXPIRED_LINE)
+    expect(page.locator('#mkResend')).to_be_hidden()
+    clear_toast(page)
+    page.click('#mkSave')
+    expect(sheet(page)).to_be_hidden()
+    expect(toast(page)).to_have_text(EXPIRED_TOAST)
+    page.clock.run_for(2000)
+    page.wait_for_timeout(300)
+    ms = markers(page)
+    assert len(ms) == 1 and 'net' not in ms[0], ms
+    assert (ms[0]['name'], ms[0]['note'], ms[0]['kind'], ms[0]['lat'], ms[0]['lon']) == ('Temp', 'water is behind the shed', 'camp', HOME[0], HOME[1])
+    assert sent_wps(page) == []
+    assert 91 in tombs(page)
+    history_clean(page)
+
+
+def test_save_with_nothing_typed_on_an_expired_teammates_marker_sends_nothing(page, app_url):
+    boot(page, app_url, [mk('t1', 'Temp', net(92, expire=soon()))])
+    page.evaluate(SLOW_GO)
+    open_marker(page, 't1')
+    page.clock.run_for(130_000)
+    expect(page.locator('#mkNotice')).to_be_hidden()
+    expect(page.locator('#mkResend')).to_be_hidden()
+    clear_toast(page)
+    page.click('#mkSave')
+    expect(sheet(page)).to_be_hidden()
+    page.clock.run_for(2000)
+    page.wait_for_timeout(300)
+    assert markers(page) == [] and sent_wps(page) == []
+    assert 'Sent' not in toast(page).inner_text()
+    history_clean(page)
+
+
+def test_go_to_on_my_own_marker_that_expired_while_typing_keeps_it_private(page, app_url):
+    boot(page, app_url, [mk('s1', 'Rally', mine(93, expire=soon()), note='north side')])
+    page.evaluate(SLOW_GO)
+    open_marker(page, 's1')
+    retype(page, '#mkNote', 'south side')
+    page.clock.run_for(130_000)
+    expect(page.locator('#mkNotice')).to_have_text(EXPIRED_LINE)
+    clear_toast(page)
+    page.click('#mkGo')
+    expect(sheet(page)).to_be_hidden()
+    expect(toast(page)).to_have_text(EXPIRED_TOAST)
+    page.clock.run_for(2000)
+    page.wait_for_timeout(300)
+    m = one(page, 's1')
+    assert m is not None and 'net' not in m and m['note'] == 'Sharing expired. south side'
+    assert page.evaluate('FK.tac.target()') == {'type': 'marker', 'id': 's1'}
+    assert sent_wps(page) == [] and 93 in tombs(page)
+    history_clean(page)
+
+
+def test_the_cap_drops_another_marker_so_the_open_one_saves_normally(page, app_url):
+    """The cap never leaves the open marker over the limit: it drops the next oldest instead (S2), so after Save the open
+    marker is still shared and its change goes out (it has not expired)."""
+    many = [mk(f't{i}', f'T{i}', net(2000 + i, t=NOW - (600 - i) * MIN), lat=HOME[0] + (i % 20) * 0.001,
+               lon=HOME[1] + (i // 20) * 0.001) for i in range(500)]
+    boot(page, app_url, many)
+    page.evaluate(SLOW_GO)
+    page.evaluate("() => FK.markers.edit('t0')")                 # the oldest: the cap's first choice
+    expect(sheet(page)).to_be_visible()
+    retype(page, '#mkNote', 'kept')
+    incoming(page, BRAVO, id=3999, lat=43.05, lon=-76.05, name='New one', icon=ICON['point'])
+    assert one(page, 't0') is not None and one(page, 't1') is None
+    page.click('#mkSave')
+    expect(sheet(page)).to_be_hidden()
+    page.clock.run_for(2000)
+    m = one(page, 't0')
+    assert m is not None and m['note'] == 'kept' and m['net']['wid'] == 2000
+    assert [w.id for w in sent_wps(page)] == [2000]
+
+
+def test_an_expired_marker_is_never_sent_by_any_caller(page, app_url):
+    boot(page, app_url, [mk('s1', 'Rally', mine(94, expire=soon(3600))), mk('t1', 'Theirs', net(95, expire=soon(3600)), lat=HOME[0] + 0.002)])
+    page.clock.run_for(1000)
+    n0 = len(sent_wps(page))
+    # the expiry passes (as a teammate's later message could set it) and, before any sweep, every sending path is tried
+    got = page.evaluate("""async () => {
+      for (const id of ['s1', 't1']) { const m = FK.tac.markers().find(x => x.id === id); FK.tac.setNet(id, { ...m.net, expire: Math.floor(Date.now() / 1000) - 30 }); }
+      const out = [];
+      for (const id of ['s1', 't1']) { out.push(await FK.share.changed(id)); out.push(await FK.share.resend(id)); }
+      out.push(FK.share.resendMine());
+      return out; }""")
+    assert got == ['no', 'no', 'no', 'no', 0], got
+    page.clock.run_for(4000)
+    assert len(sent_wps(page)) == n0
+
+
+def test_moving_a_shared_marker_says_moved_and_sent_in_one_toast(page, app_url):
+    boot(page, app_url, [mk('s1', 'Rally', mine(96))])
+    page.evaluate(SLOW_GO)
+    open_marker(page, 's1')
+    page.click('#mkMove')
+    expect(sheet(page)).to_be_hidden()
+    page.wait_for_selector('#toolBar:not([hidden])')
+    page.click('#tbPlace')
+    expect(toast(page)).to_have_text('Moved Rally. Sent to teammates.')
+    page.wait_for_timeout(300)
+    expect(toast(page)).to_have_text('Moved Rally. Sent to teammates.')
+    radio.drop(page)
+    page.wait_for_function('FK.mesh.status().state === "lost"')
+    open_marker(page, 's1')
+    page.click('#mkMove')
+    expect(sheet(page)).to_be_hidden()
+    page.wait_for_selector('#toolBar:not([hidden])')
+    page.click('#tbPlace')
+    expect(toast(page)).to_have_text('Moved Rally. Not sent yet: it goes out when the radio connects.')
+
+
+def test_no_foreign_emoji_with_the_switch_off(page, app_url):
+    boot(page, app_url, [mk('e', 'Deer stand', net(97, icon=0x1F98C))], link='off')
+    expect(pin(page, 'e')).to_be_visible()
+    assert page.locator('.mk-emoji').count() == 0
+    assert pin(page, 'e').locator('i svg').count() == 1
+    page.click('#mList')
+    page.wait_for_selector('#dlgList[open]')
+    assert page.locator('.mk-emoji').count() == 0
+
+
+def test_foreign_emoji_is_tinted_in_the_night_theme(page, app_url):
+    boot(page, app_url, [mk('e', 'Deer stand', net(98, icon=0x1F98C))], link='private', night=True)
+    expect(pin(page, 'e').locator('.mk-emoji')).to_have_text('🦌')
+    f = page.evaluate("getComputedStyle(document.querySelector('.mk-pin[data-id=e] .mk-emoji')).filter")
+    assert 'grayscale(1)' in f, f

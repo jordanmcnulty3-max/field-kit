@@ -52,6 +52,9 @@
   /* The waypoint for a marker: its stored expiry and foreign icon go out again unchanged. */
   const wpOf = (m, expire) => MMK.toWaypoint(m, m.net.wid, { icon: m.net.icon, expire: expire === undefined ? m.net.expire : expire });
 
+  /* A marker whose own expiry has passed is never sent, by any caller: others would take it as expired or deleted. */
+  const expiredNow = m => !!(m && m.net && m.net.expire > 0 && m.net.expire * 1000 <= Date.now());
+
   /* ---- sending ---- */
   let lastSend = -Infinity;
   /* Send a shared marker as it is now. 'no' (no such shared marker), 'toolong' (nothing changed), 'pending' (no link, or the
@@ -59,7 +62,7 @@
      radio's number when it first goes out. */
   async function sendNow(id) {
     const m = find(id);
-    if (!on_() || !m || !m.net) return 'no';
+    if (!on_() || !m || !m.net || expiredNow(m)) return 'no';
     if (!MMK.fits(m).ok) return 'toolong';
     if (!FK.mesh.canShare()) {
       if (!m.net.pending) FK.tac.setNet(id, { ...m.net, pending: true });
@@ -93,7 +96,7 @@
      "changed by" anyone, so that line clears. */
   async function changed(id) {
     const m = find(id);
-    if (!on_() || !m || !m.net) return 'no';
+    if (!on_() || !m || !m.net || expiredNow(m)) return 'no';
     if (!MMK.fits(m).ok) return 'toolong';
     if (m.net.chBy || m.net.chT) FK.tac.setNet(id, { ...m.net, chBy: '', chT: 0 });
     return sendNow(id);
@@ -157,7 +160,7 @@
   }
   function resendMine() {
     if (!FK.mesh.canShare()) return 0;
-    const ids = FK.tac.markers().filter(m => isMine(m) && MMK.fits(m).ok).map(m => m.id);
+    const ids = FK.tac.markers().filter(m => isMine(m) && MMK.fits(m).ok && !expiredNow(m)).map(m => m.id);
     batch = { ids: new Set(ids), sent: 0 };
     return enqueue(ids);
   }
@@ -210,6 +213,16 @@
     });
     pruneTombs(now);
     enforceCap(idx);
+  }
+  /* End the sharing of one marker whose expiry has passed now, open in the sheet or not (the sheet's Save on a marker the
+     sweep spared while it was open): as the sweep would, a marker of mine stays here private, any other is removed; the number
+     is tombed. False when it is not shared or not expired. */
+  function expire(id) {
+    const m = find(id);
+    if (stopped || !on_() || !expiredNow(m)) return false;
+    FK.tac.batch(() => endShared(m, 'Sharing expired.'));
+    saveTombs();
+    return true;
   }
   function sweepNow() {
     if (stopped || !on_()) return;
@@ -305,7 +318,7 @@
   syncTimer();
 
   FK.share = {
-    share, resend: sendNow, resendMine, unshare, remove, changed, sweep: sweepNow,
+    share, resend: sendNow, resendMine, unshare, remove, changed, sweep: sweepNow, expire, expired: id => expiredNow(find(id)),
     whenIdle: () => idle() ? Promise.resolve() : new Promise(f => idleWaiters.push(f)),
     batchSent: () => batch.sent,
     isShared: id => !!(find(id) || {}).net,

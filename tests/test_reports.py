@@ -65,7 +65,7 @@ def test_no_fix_leaves_location_blank(page, app_url):
 
 
 def test_screen_asks_for_its_own_fix_and_refreshes_line_one(page, app_url):
-    boot(page, app_url, storage={'lastFix': fix(10 * 60_000)}, hash_=NINE, init=geo_stub('ok', delay=1000))
+    boot(page, app_url, storage={'lastFix': fix(10 * 60_000)}, hash_=NINE, init=geo_stub('ok', delay=1000), hold=False)
     assert 'min old' in page.input_value('#nl1')
     page.clock.run_for(1500)
     assert page.input_value('#nl1') == mgrs(page, 51.5, -0.12)

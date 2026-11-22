@@ -20,8 +20,9 @@ def seed(page, raw):
 
 def boot(page, app_url, raw=None, hash_='', clock=False):
     if clock:
-        page.clock.install(time=T0 // 1000)
-        page.clock.pause_at(T0 // 1000)   # a running clock lets seconds pass under load: hold it, advance with run_for
+        # Date.now() fixed at T0 for the whole test (timers still run on real time): a running fake clock let seconds pass under
+        # load before the tourniquet's elapsed time was read. (pause_at after install fails when the install itself took a moment.)
+        page.clock.set_fixed_time(T0 // 1000)
     seed(page, {'fk.advAck': 'true', **(raw or {})})
     page.goto(app_url + hash_)
     page.wait_for_function('window.FK && FK.tools && FK.tools.cpr')
@@ -242,7 +243,6 @@ def test_v5_localstorage_boots_with_no_console_errors(page, app_url):
     page.click('#tacSeg [data-view=position]')
     expect(page.locator('#wpCount')).to_have_text('2 markers')
     page.click('#wpOpenList')
-    page.clock.run_for(100)   # the clock is held: let the list's animation frames run (0.1 s, so the timer below still reads 14:32)
     page.wait_for_selector('#dlgList[open]')
     names = page.locator('#lsList li .mk-name').all_inner_texts()
     assert sorted(names) == ['Truck', 'Water cache']

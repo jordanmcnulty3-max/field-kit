@@ -95,7 +95,8 @@ def test_built_in_load_offers_save_as_new_only(page, app_url):
     expect(page.locator('#rfDelete')).to_be_hidden()
     expect(page.locator('#rfSaveNew')).to_be_visible()
     expect(page.locator('#rfCancel')).to_be_visible()
-    assert "Built-in loads can't be changed. Save as a new profile to edit one." in page.text_content(DLG)
+    assert 'This is a built-in load. Change what you need, then save it as a new profile.' in page.text_content(DLG)
+    assert "can't be changed" not in page.text_content(DLG)
     before = page.evaluate('FK.bal.selected()')
     page.fill('#rfMV', '2700')
     page.press('#rfMV', 'Enter')                      # Enter must not save over a built-in load
@@ -144,7 +145,7 @@ def test_marks_parse_and_refuse(page, app_url):
     page.fill('#rfMarks', 'abc')
     refuse(page, 'Marks must be numbers, like 1.5, 3, 4.6.', 'rfMarks')
     page.fill('#rfMarks', '1.5, -3')
-    refuse(page, 'Marks must be numbers, like 1.5, 3, 4.6.', 'rfMarks')
+    refuse(page, 'Marks must be more than 0.', 'rfMarks')       # a number not above 0 is named as such (it read 'Marks must be numbers')
     page.fill('#rfMarks', ' '.join(str(i) for i in range(1, 12)))
     refuse(page, 'Up to 10 marks.', 'rfMarks')
     assert 'optic' not in profiles(page)[0]
@@ -637,3 +638,62 @@ def test_a_built_in_opens_with_a_name_of_its_own(page, app_url):
         page.click('#rfCancel')
         expect(page.locator(DLG)).to_be_hidden()
         page.wait_for_timeout(400)
+
+
+# ---------- Enter, the keyboards, the marks box's words ----------
+
+def test_enter_never_saves_the_profile(page, app_url):
+    open_editor(page, app_url, profiles=(RET,), select='u2')
+    assert page.get_attribute('#rfSave', 'type') == 'button'
+    page.fill('#rfName', 'Changed by Enter')
+    for field in ('rfName', 'rfBC', 'rfW', 'rfMV', 'rfSH', 'rfZero', 'rfMarks', 'rfZTemp', 'rfZAlt', 'rfZPress'):
+        page.press('#' + field, 'Enter')
+        page.wait_for_timeout(50)
+        expect(page.locator(DLG)).to_be_visible()
+        assert msg(page) == '', field
+    assert profiles(page) == [RET]
+    page.click('#rfSave')                            # only the Save buttons save
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['name'] == 'Changed by Enter'
+
+
+FIVE = ['bAngle', 'bTemp', 'bAlt', 'rfZTemp', 'rfZAlt']
+
+
+def test_fields_that_can_be_below_zero_open_the_ordinary_keyboard(page, app_url):
+    open_editor(page, app_url)
+    for i in FIVE:
+        el = page.locator('#' + i)
+        assert el.get_attribute('type') == 'text' and el.get_attribute('inputmode') is None, i
+        assert [el.get_attribute(a) for a in ('autocapitalize', 'autocomplete', 'autocorrect', 'spellcheck')] == ['off', 'off', 'off', 'false'], i
+    for i in ['bRange', 'bWind', 'bPress', 'bRH', 'bMax', 'rfBC', 'rfW', 'rfMV', 'rfSH', 'rfZero', 'rfZPress', 'rfTrueYd', 'rfTrueVal']:
+        assert page.evaluate(f"[document.getElementById('{i}').type, document.getElementById('{i}').inputMode]") == ['number', 'decimal'], i
+
+
+def test_the_typographic_minus_counts_as_a_minus_in_the_editor(page, app_url):
+    open_editor(page, app_url)
+    page.fill('#rfZTemp', '\u221212')
+    page.fill('#rfZAlt', '\u2212100')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['zeroAtm'] == {'temp': -12, 'alt': -100, 'rh': 50}
+    page.wait_for_timeout(400)
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    page.fill('#rfZTemp', 'cold')                    # not a number: refused, never read as nothing
+    refuse(page, 'Temperature must be between -60 and 140 \u00b0F.', 'rfZTemp')
+
+
+def test_marks_typed_with_decimal_commas_or_below_zero_say_what_is_wrong(page, app_url):
+    open_editor(page, app_url)
+    reticle(page, '2,5 6,5')
+    refuse(page, 'Use a point for decimals: 2.5, not 2,5.', 'rfMarks')
+    page.fill('#rfMarks', '1,5 3')
+    refuse(page, 'Use a point for decimals: 2.5, not 2,5.', 'rfMarks')
+    for text in ('-1 3', '0 3 5', '\u22121 2'):
+        page.fill('#rfMarks', text)
+        refuse(page, 'Marks must be more than 0.', 'rfMarks')
+    page.fill('#rfMarks', '1,2,3')                   # commas with no spaces still separate
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['optic']['marks'] == [1, 2, 3]

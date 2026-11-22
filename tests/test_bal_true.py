@@ -11,7 +11,7 @@ LOAD = {'id': 'u1', 'name': 'Mine', 'bc': 0.243, 'model': 'G7', 'w': 175, 'mv': 
 OWN = LOAD
 AIR = dict(temp=59, alt=0, press=0, rh=50)
 NEAR = 'Use a shot at 300 yd or more. Closer in, a small error gives a wild velocity.'
-SLOW = "At that distance the bullet is near the speed of sound, where velocity isn't the thing in doubt."
+SLOW = "At that distance the bullet is near the speed of sound, where velocity isn't the thing in doubt. Use a shot at a shorter distance."
 FAR = 'That needs a velocity change of more than 15%. Check the distance, the zero and the sight height first.'
 WARN = "That's a change of more than 5%. Check the distance, the zero and the sight height first."
 ASK = 'Enter the distance and the elevation the rifle needed.'
@@ -171,11 +171,11 @@ def test_the_rifle_and_conditions_must_be_usable(page, app_url):
     open_editor(page, app_url)
     page.fill('#rfBC', '')
     work(page, 600, 3, 'mil')
-    assert out(page) == 'Fill in the rifle and load first.'
+    assert out(page) == 'Ballistic coefficient must be between 0.05 and 1.2.'     # the editor's own message (it read 'Fill in the rifle and load first.')
     page.fill('#rfBC', '0.3')
     page.fill('#rfZTemp', '500')
     page.click('#rfTrueGo')
-    assert out(page) == 'Fill in the rifle and load first.'      # zero conditions out of range
+    assert out(page) == 'Temperature must be between -60 and 140 \u00b0F.'      # zero conditions out of range
     page.fill('#rfZTemp', '')
     page.evaluate("() => { const t = document.querySelector('#bTemp'); t.value = '900'; }")
     page.click('#rfTrueGo')
@@ -523,3 +523,25 @@ def test_a_corrected_velocity_below_mach_1_2_at_the_shot_is_refused(page, app_ur
     expect(page.locator('#rfTrueSave')).to_be_hidden()
     work(page, 600, round(typed(page, shot(page, 2480, 600), 600, 'mil'), 4), 'mil')    # nearer in it is above Mach 1.2: found
     assert out(page).startswith('Velocity 2,600 fps → 2,48'), out(page)
+
+
+
+def test_enter_in_the_correction_part_works_it_out(page, app_url):
+    open_editor(page, app_url)
+    page.fill('#rfTrueYd', '600')
+    page.fill('#rfTrueVal', str(round(typed(page, shot(page, 2550, 600), 600, 'mil'), 4)))
+    page.select_option('#rfTrueUnit', 'mil')
+    page.press('#rfTrueVal', 'Enter')
+    expect(page.locator('#rfTrueSave')).to_be_visible()
+    assert out(page).startswith('Velocity 2,600 fps')
+    expect(page.locator(DLG)).to_be_visible()
+    assert profiles(page)[0]['mv'] == 2600
+    page.fill('#rfTrueYd', '250')
+    page.press('#rfTrueYd', 'Enter')
+    assert out(page) == NEAR
+
+
+def test_the_unit_picker_is_named_for_screen_readers(page, app_url):
+    open_editor(page, app_url)
+    assert page.get_attribute('#rfTrueUnit', 'aria-label') == 'Unit of the elevation'
+    assert 'In' in page.inner_text('#rfTruePart')

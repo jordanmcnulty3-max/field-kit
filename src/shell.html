@@ -1015,7 +1015,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <div class="bal-shot">
       <div class="grid2">
         <label class="f">Target range (yd)<input id="bRange" type="number" inputmode="decimal" value="500"></label>
-        <label class="f">Incline (°)<input id="bAngle" type="number" inputmode="decimal" value="0" placeholder="+ up, − down"></label>
+        <label class="f">Incline (°)<input id="bAngle" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" value="0" placeholder="+ up, − down"></label>
         <label class="f">Wind speed (mph)<input id="bWind" type="number" inputmode="decimal" value="10"></label>
         <label class="f">Wind from (clock)
           <select id="bClock">
@@ -1033,8 +1033,8 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <div class="bal-cond"><p id="bCond">59°F · 0 ft · 50%</p><button type="button" class="btn ghost" id="bCondBtn" aria-expanded="false" aria-controls="bCondFields">Change</button></div>
       <div id="bCondFields" hidden>
         <div class="grid2">
-          <label class="f">Temperature (°F)<input id="bTemp" type="number" inputmode="decimal" value="59"></label>
-          <label class="f">Altitude (ft)<input id="bAlt" type="number" inputmode="decimal" value="0"></label>
+          <label class="f">Temperature (°F)<input id="bTemp" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" value="59"></label>
+          <label class="f">Altitude (ft)<input id="bAlt" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" value="0"></label>
           <label class="f">Station pressure (inHg)<input id="bPress" type="number" inputmode="decimal" step="0.01" placeholder="From altitude"></label>
           <label class="f">Humidity (%)<input id="bRH" type="number" inputmode="decimal" value="50"></label>
         </div>
@@ -1140,7 +1140,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <form id="rfForm" autocomplete="off" novalidate>
     <div class="mk-body">
       <h2 id="rfTitle" tabindex="-1">Edit profile</h2>
-      <p class="hint" id="rfBuiltIn" hidden>Built-in loads can't be changed. Save as a new profile to edit one.</p>
+      <p class="hint" id="rfBuiltIn" hidden>This is a built-in load. Change what you need, then save it as a new profile.</p>
       <h3 class="rf-h">Rifle and load</h3>
       <label class="f">Name<input id="rfName" type="text" maxlength="60" enterkeyhint="done"></label>
       <label class="f">Ballistic coefficient<input id="rfBC" type="number" inputmode="decimal" step="0.001"></label>
@@ -1169,8 +1169,8 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
         <p class="hint">If the reticle doesn't grow with magnification, the marks are true at one magnification only. The manual says which.</p>
       </div>
       <h3 class="rf-h">Zero conditions</h3>
-      <label class="f">Temperature (°F)<input id="rfZTemp" type="number" inputmode="decimal"></label>
-      <label class="f">Altitude (ft)<input id="rfZAlt" type="number" inputmode="decimal"></label>
+      <label class="f">Temperature (°F)<input id="rfZTemp" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></label>
+      <label class="f">Altitude (ft)<input id="rfZAlt" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></label>
       <label class="f">Station pressure (inHg)<input id="rfZPress" type="number" inputmode="decimal" step="0.01"></label>
       <p class="hint" id="rfZHint">Zero conditions not set: assumed the same as today.</p>
       <div id="rfTruePart" hidden>
@@ -1178,7 +1178,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
         <p class="hint">Enter a distance and the elevation the rifle really needed there. Uses today's conditions from the Ballistics screen, a level shot and no wind.</p>
         <label class="f">Distance (yd)<input id="rfTrueYd" type="number" inputmode="decimal"></label>
         <label class="f">Elevation needed<input id="rfTrueVal" type="number" inputmode="decimal"></label>
-        <label class="f">In<select id="rfTrueUnit"></select></label>
+        <label class="f">In<select id="rfTrueUnit" aria-label="Unit of the elevation"></select></label>
         <button type="button" class="btn ghost rf-true-btn" id="rfTrueGo">Work it out</button>
         <p class="hint rf-true-out" id="rfTrueOut" aria-live="polite"></p>
         <button type="button" class="btn rf-true-btn" id="rfTrueSave" hidden></button>
@@ -1187,7 +1187,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     </div>
     <p class="rf-msg" id="rfMsg" aria-live="polite"></p>
     <div class="mk-act">
-      <button type="submit" class="btn" id="rfSave">Save</button>
+      <button type="button" class="btn" id="rfSave">Save</button>
       <button type="button" class="btn ghost" id="rfSaveNew">Save as new profile</button>
       <button type="button" class="btn ghost" id="rfDelete">Delete profile</button>
       <button type="button" class="btn ghost" id="rfCancel">Cancel</button>

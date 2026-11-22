@@ -4,7 +4,15 @@
 (() => {
   const FK = window.FK;
   const { $, $$, store, toast, esc, okId } = FK;
-  const num = el => { const v = parseFloat(el.value); return Number.isFinite(v) ? v : 0; };
+  /* The one reader of a typed number: blank is null, a plain decimal is its value (a leading typographic minus, U+2212, counts as a
+     minus: the fields that can be below zero open the ordinary keyboard), anything else is NaN, which no range accepts. */
+  const parseNum = text => {
+    const t = String(text === undefined || text === null ? '' : text).trim().replace(/^\u2212/, '-');
+    if (t === '') return null;
+    return /^[+-]?(\d+\.?\d*|\.\d+)$/.test(t) ? Number(t) : NaN;
+  };
+  const read = id => parseNum($('#' + id).value);
+  const num = el => { const v = parseNum(el.value); return Number.isFinite(v) ? v : 0; };   // blank or unreadable as 0 (wind, card length)
 
   const PRESETS = [
     { id: 'p556m193', name: 'Sellier & Bellot 5.56×45 M193 55 gr FMJ, 23.5″ barrel', bc: 0.127, model: 'G7', w: 55, mv: 3301, sight: 2.6, zero: 100 },
@@ -188,7 +196,6 @@
     wind: 'Enter a wind speed from 0 to 100 mph.',
     angle: 'Enter an incline from -60 to 60 degrees.'
   };
-  const given = id => F(id).value.trim() !== '';
   const inside = (v, lo, hi) => v >= lo && v <= hi;
   const label = yd => String(Number(yd.toFixed(1)));          // 500 -> "500", 36.5 -> "36.5"
   const fx = (v, d) => { const t = v.toFixed(d); return /^-0(\.0+)?$/.test(t) ? t.slice(1) : t; };   // never "-0.0"
@@ -220,15 +227,17 @@
     return sighted;
   }
   function condLine() {
-    const t = given('bTemp') ? num(F('bTemp')) : 59, press = num(F('bPress')), alt = num(F('bAlt'));
-    F('bCond').textContent = `${label(t)}°F · ${given('bPress') && press > 0 ? press.toFixed(2) + ' inHg' : label(alt) + ' ft'} · ${label(given('bRH') ? num(F('bRH')) : 50)}%`;
+    const or = (v, d) => v === null ? d : v, show = v => fin(v) ? label(v) : '—';         // something unreadable shows as a dash
+    const t = or(read('bTemp'), 59), press = read('bPress'), alt = or(read('bAlt'), 0), rh = or(read('bRH'), 50);
+    F('bCond').textContent = `${show(t)}°F · ${press !== null && fin(press) && press > 0 ? press.toFixed(2) + ' inHg' : show(alt) + ' ft'} · ${show(rh)}%`;
   }
 
   /* Today's conditions from the screen's fields, with the screen's defaults (59 °F, sea level, 50 %), or null when one is out of range. */
   function shotAir() {
-    const temp = given('bTemp') ? num(F('bTemp')) : 59, alt = num(F('bAlt')), press = num(F('bPress')), rh = given('bRH') ? num(F('bRH')) : 50;
-    if (!within(temp, 'temp') || !within(alt, 'alt') || (given('bPress') && !within(press, 'press')) || !within(rh, 'rh')) return null;
-    return { temp, alt, press, rh };
+    const or = (v, d) => v === null ? d : v;
+    const temp = or(read('bTemp'), 59), alt = or(read('bAlt'), 0), p = read('bPress'), rh = or(read('bRH'), 50);
+    if (!within(temp, 'temp') || !within(alt, 'alt') || (p !== null && !within(p, 'press')) || !within(rh, 'rh')) return null;
+    return { temp, alt, press: p === null ? 0 : p, rh };
   }
 
   function calc() {
@@ -237,7 +246,7 @@
     condLine();
     F('solution').classList.remove('msg');
     const optic = sighted && !showAll ? p.optic : null;          // null: every unit
-    const target = given('bRange') ? parseFloat(F('bRange').value) : NaN;
+    const target = read('bRange') === null ? NaN : read('bRange');
     if (!(inside(target, 1, 3000))) return nothing(MSG.range);
     if (!loadOk(p)) return nothing(MSG.profile);
     const air = shotAir();
@@ -245,7 +254,7 @@
     const { temp, alt, press, rh } = air;
     const wind = num(F('bWind'));
     if (!inside(wind, 0, 100)) return nothing(MSG.wind);
-    const angle = num(F('bAngle'));
+    const angle = read('bAngle') === null ? 0 : read('bAngle');      // unreadable: NaN, refused below
     if (!inside(angle, -60, 60)) return nothing(MSG.angle);
 
     const max = Math.min(3000, Math.max(50, num(F('bMax')) || 1000));
@@ -376,7 +385,7 @@
     }
   }
   FK.balHost = {
-    newId, RANGE, within, marksOk, nameTaken, freeName,
+    newId, RANGE, within, marksOk, nameTaken, freeName, parseNum,
     find: id => { const p = anyProfile(id); return p ? { profile: copy(p), own: !!ownProfile(id) } : null; }
   };
   FK._test.presets = () => PRESETS.map(p => ({ ...p }));

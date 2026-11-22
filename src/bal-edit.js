@@ -77,15 +77,17 @@
 
   /* The marks box: pieces split on commas and spaces, each a number above 0, at most 10, each larger than the one before. */
   function parseMarks(text) {
-    const parts = text.split(/[\s,]+/).filter(Boolean);
+    const groups = text.trim().split(/\s+/).filter(Boolean);
+    if (groups.length > 1 && groups.some(g => /\d,\d/.test(g))) return { error: 'Use a point for decimals: 2.5, not 2,5.' };   // "2,5 6,5"
+    const parts = text.split(/[\s,]+/).filter(Boolean), nums = parts.map(FK.balHost.parseNum);
     if (!parts.length) return { error: 'A reticle needs at least one mark.' };
-    if (!parts.every(x => /^(\d+\.?\d*|\.\d+)$/.test(x) && parseFloat(x) > 0)) return { error: 'Marks must be numbers, like 1.5, 3, 4.6.' };
-    if (parts.length > 10) return { error: 'Up to 10 marks.' };
-    const marks = parts.map(parseFloat);
-    if (!marks.every((m, i) => i === 0 || m > marks[i - 1])) return { error: 'Marks must get larger down the list.' };
-    return { marks };
+    if (!nums.every(Number.isFinite)) return { error: 'Marks must be numbers, like 1.5, 3, 4.6.' };
+    if (!nums.every(m => m > 0)) return { error: 'Marks must be more than 0.' };
+    if (nums.length > 10) return { error: 'Up to 10 marks.' };
+    if (!FK.balHost.marksOk(nums)) return { error: 'Marks must get larger down the list.' };      // the screen's own rule
+    return { marks: nums };
   }
-  const numOf = id => { const t = F(id).value.trim(); const v = parseFloat(t); return t !== '' && Number.isFinite(v) ? v : null; };
+  const numOf = id => FK.balHost.parseNum(F(id).value);      // null when blank, NaN when unreadable (refused by every range)
   /* What the sheet holds as a profile (without an id), or { error, focus } for the first thing at fault. */
   function readEditor(forShot) {
     const bad = (error, focus) => ({ error, focus });
@@ -167,11 +169,10 @@
   /* ---------- Correct from a real shot ---------- */
   const MORE = {
     near: 'Use a shot at 300 yd or more. Closer in, a small error gives a wild velocity.',
-    slow: "At that distance the bullet is near the speed of sound, where velocity isn't the thing in doubt.",
+    slow: "At that distance the bullet is near the speed of sound, where velocity isn't the thing in doubt. Use a shot at a shorter distance.",
     far: 'That needs a velocity change of more than 15%. Check the distance, the zero and the sight height first.',
     warn: "That's a change of more than 5%. Check the distance, the zero and the sight height first.",
     ask: 'Enter the distance and the elevation the rifle needed.',
-    rifle: 'Fill in the rifle and load first.',
     air: 'Check the conditions on the Ballistics screen first.'
   };
   const UNIT_NAME = { mil: 'Mil', moa: 'MOA', iphy: 'Inches per 100 yd', in: 'Inches of drop' };
@@ -215,7 +216,7 @@
     const angle = BALS.toAngle(val, F('rfTrueUnit').value, yd);
     if (!(angle > 0)) return show(MORE.ask);
     const v = readEditor(true);
-    if (v.error) return show(MORE.rifle);
+    if (v.error) return show(v.error);                          // the editor's own message for what is wrong
     const air = FK.bal.shotAir();
     if (!air) return show(MORE.air);
     const za = v.zeroAtm;
@@ -255,7 +256,14 @@
   /* What the answer was worked out from has changed: it no longer holds. */
   F('rfForm').addEventListener('input', clearResult);
   F('rfForm').addEventListener('change', clearResult);
-  F('rfForm').addEventListener('submit', e => { e.preventDefault(); commitEditor(false); });
+  /* Enter never saves: only the Save buttons do. In the correction part Enter works it out; anywhere else in the editor it does nothing. */
+  F('rfForm').addEventListener('submit', e => e.preventDefault());
+  F('rfForm').addEventListener('keydown', e => {
+    if (e.key !== 'Enter' || !(e.target instanceof HTMLInputElement)) return;
+    e.preventDefault();
+    if (F('rfTruePart').contains(e.target)) workItOut();
+  });
+  F('rfSave').addEventListener('click', () => commitEditor(false));
   F('rfSaveNew').addEventListener('click', () => commitEditor(true));
   F('rfCancel').addEventListener('click', () => FK.sheet.dismiss(dlg));     // asks Keep editing / Discard when something changed, as Back does
   F('rfOptic').addEventListener('change', () => { showSight(); fillTrueUnits(); });

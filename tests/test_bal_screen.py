@@ -626,3 +626,19 @@ def test_the_focused_field_is_clear_of_the_card_and_the_tab_bar(page, app_url, v
         bar = page.locator('.tabbar').bounding_box()
         assert not intersects(f, c) and not intersects(f, bar), (sel, f, c, bar)
         assert f['y'] >= 0 and f['y'] + f['height'] <= view[1], (sel, f)
+
+
+
+def test_the_typographic_minus_counts_on_the_screen(page, app_url):
+    open_screen(page, app_url, profile='ut', profiles=MINE)
+    page.click('#bCondBtn')
+    shot(page, bTemp='-10', bAlt='-500', bAngle='-20')
+    plain = (card(page), page.inner_text('#bCond'))
+    shot(page, bTemp='\u221210', bAlt='\u2212500', bAngle='\u221220')
+    assert (card(page), page.inner_text('#bCond')) == plain
+    assert plain[1] == '-10°F · -500 ft · 50%'
+    shot(page, bTemp='warm')                         # not a number: the conditions message, never 0 °F
+    says(page, 'Check the conditions: temperature, altitude, pressure or humidity is out of range.')
+    shot(page, bTemp='59', bAngle='steep')
+    says(page, 'Enter an incline from -60 to 60 degrees.')
+    whole_page_is_clean(page)

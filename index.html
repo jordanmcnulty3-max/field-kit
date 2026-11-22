@@ -551,6 +551,18 @@ body.maptool #tacSeg{display:none}
 .tb-btns .btn{flex:1 1 0;min-width:44px;min-height:48px;padding:4px 6px;font-size:15px;line-height:1.15;white-space:normal;overflow-wrap:anywhere}
 .tb-btns .btn[hidden]{display:none}
 .tb-btns #tbAdd,.tb-btns #tbPlace{flex:1.7 1 0;font-weight:700}
+/* comms radio */
+#dlgRadio .mk-act{grid-template-columns:1fr}
+#dlgRadio .mk-body{padding-bottom:12px}
+.rd-status{margin:12px 0 0;font-size:18px;font-weight:650;overflow-wrap:anywhere}
+.rd-line{margin:4px 0 0;font-size:16px}
+.rd-info p{margin:12px 0 0;font-size:16px}
+.rd-note{margin:12px 0 0;padding:8px 12px;border-left:4px solid var(--blaze);background:var(--surface);font-size:15px;font-weight:600;overflow-wrap:anywhere}
+.rd-h{margin:20px 0 4px;font-size:16px;font-weight:700;color:var(--ink)}
+.rd-team li{padding:10px 0;font-size:16px;overflow-wrap:anywhere}
+.rd-team .hint{display:block;margin-top:2px}
+.rd-resend{display:block;width:100%;margin-top:16px;white-space:normal}
+/* /comms radio */
 .tl-list{list-style:none;margin:0;padding:0}
 .tl-list li{border-top:1px solid var(--line)}
 .tl-list button{display:flex;gap:12px;align-items:center;width:100%;min-height:56px;padding:8px 0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;font-size:17px;font-weight:600}
@@ -892,6 +904,9 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h12M9 12h12M9 18h12"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg>
         </button>
         <!-- /v7.8 markers -->
+        <!-- comms radio -->
+        <button id="mRadio" aria-label="Radio: off" title="Radio" hidden></button>
+        <!-- /comms radio -->
       </div>
       <div class="mapbottom">
         <!-- v7.8 units -->
@@ -1294,6 +1309,30 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 </dialog>
 <!-- /v7.8 markers -->
 
+<!-- comms radio -->
+<dialog id="dlgRadio" class="sheet mk-sheet" aria-labelledby="rdTitle">
+  <div class="mk-body">
+    <h2 id="rdTitle" tabindex="-1">Radio</h2>
+    <p class="rd-status" id="rdStatus" role="status" hidden></p>
+    <p class="rd-line" id="rdChannel" hidden></p>
+    <div class="rd-info" id="rdInfo"></div>
+    <p class="rd-note" id="rdErr" role="status" hidden></p>
+    <p class="rd-note" id="rdWarn" hidden></p>
+    <p class="rd-note" id="rdPos" hidden></p>
+    <div id="rdTeamBox" hidden>
+      <h3 class="rd-h" id="rdTeamH"></h3>
+      <ul class="mk-list rd-team" id="rdTeam"></ul>
+    </div>
+    <button type="button" class="btn ghost rd-resend" id="rdResend" hidden>Send all my shared markers again</button>
+  </div>
+  <div class="mk-act">
+    <button type="button" class="btn" id="rdConnect">Connect a radio</button>
+    <button type="button" class="btn" id="rdDisconnect" hidden>Disconnect</button>
+    <button type="button" class="btn ghost" id="rdClose">Close</button>
+  </div>
+</dialog>
+<!-- /comms radio -->
+
 <!-- v7.8 tools -->
 <dialog id="dlgTools" class="sheet mk-sheet" aria-labelledby="tlTitle">
   <div class="mk-body">
@@ -1450,6 +1489,10 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <p id="bkAsk" role="alert"></p>
     <div class="row"><button class="btn ghost" id="bkGo">Restore</button><button class="btn ghost" id="bkNo">Cancel</button></div>
   </div>
+  <!-- Radio link -->
+  <label class="opt"><input type="checkbox" id="meshOn" role="switch"><span>Radio link (testing)</span></label>
+  <p class="hint">Connects Field Kit to a Meshtastic radio over Bluetooth. Android only.</p>
+  <!-- /Radio link -->
   <h3>This phone</h3>
   <p class="hint" id="diag"></p>
   <div class="row"><button class="btn ghost" id="updBtn">Check for update</button><button class="btn ghost" id="menuClose">Close</button></div>
@@ -2090,6 +2133,336 @@ const WMM = (() => {
   }
 
   return { name: 'WMM2025', epoch: EPOCH, validUntil: VALID_UNTIL, declination };
+})();
+
+/* ---------- MPB: the Meshtastic protobuf byte codec (just the messages Field Kit needs). Pure: no DOM, no FK. ----------
+   Field numbers and wire types are recorded in docs/content-review.md (Comms). Decoders never throw: bad bytes give null,
+   or { type: 'other' } from fromRadio. */
+const MPB = (() => {
+  const PORT = { TEXT: 1, POSITION: 3, NODEINFO: 4, WAYPOINT: 8 };
+  const BROADCAST = 0xFFFFFFFF;
+  const U = new TextEncoder(), D = new TextDecoder('utf-8');
+  const EMPTY = new Uint8Array(0);
+
+  /* ---- reader ---- */
+  /* Walks every field of a message and returns { fieldNumber: value } (the last occurrence wins, as in protobuf). Values:
+     varint -> its low 32 bits as an unsigned number (enough for every field used here, and a negative int32 sent as a
+     10-byte varint keeps its low 32 bits; signed fields apply |0), fixed32 -> unsigned number, length-delimited ->
+     Uint8Array view. Unknown fields are walked and skipped by wire type. `order`, if given, receives the field numbers in the order they appeared.
+     Throws on truncation or a length past the end. */
+  function parse(b, order) {
+    const res = {}, wts = {}, n = b.length;
+    let p = 0, hi = 0;
+    const varint = () => {
+      let lo = 0, h = 0;
+      for (let i = 0; i < 10; i++) {
+        if (p >= n) throw 0;
+        const c = b[p++];
+        if (i < 4) lo |= (c & 127) << (7 * i);
+        else if (i === 4) { lo |= (c & 15) << 28; h = (c & 112) >> 4; }   // bits 32..34
+        else if (i < 9) h |= (c & 127) << (7 * i - 32);                  // never read, only so hi===0 means "fits in 32 bits"
+        else h |= c & 1;
+        if (!(c & 128)) { hi = h; return lo >>> 0; }
+      }
+      throw 0;   // a varint longer than 10 bytes
+    };
+    const fixed32 = () => { if (p + 4 > n) throw 0; p += 4; return (b[p - 4] | b[p - 3] << 8 | b[p - 2] << 16 | b[p - 1] << 24) >>> 0; };
+    let depth = 0;   // open groups being skipped (deprecated wire types 3 and 4; never sent by Meshtastic, skipped leniently)
+    while (p < n) {
+      const key = varint(), num = key >>> 3, wt = key & 7;
+      let v;
+      if (wt === 0) v = varint();
+      else if (wt === 5) v = fixed32();
+      else if (wt === 2) {
+        const len = varint();
+        if (hi !== 0 || len > n - p) throw 0;
+        v = b.subarray(p, p + len); p += len;
+      } else if (wt === 1) { if (p + 8 > n) throw 0; p += 8; continue; }
+      else if (wt === 3) { depth++; continue; }
+      else if (wt === 4) { if (!depth) throw 0; depth--; continue; }
+      else throw 0;
+      if (!depth && num > 0) { res[num] = v; wts[num] = wt; if (order) order.push(num); }
+    }
+    if (depth) throw 0;
+    Object.defineProperty(res, 'wt', { value: wts });   // wire type of each field present, for the checked accessors
+    return res;
+  }
+  const safe = (f) => (b) => { try { return f(b); } catch (e) { return null; } };
+  /* Checked accessors: an absent field reads as its proto3 default, a field sent with the wrong wire type throws (so the
+     decoder returns null / 'other' instead of a wrong-typed value). V varint, F fixed32, L length-delimited. */
+  const chk = (f, k, wt) => { if (f[k] !== undefined && f.wt[k] !== wt) throw 0; return f[k]; };
+  const V = (f, k) => chk(f, k, 0) || 0, F = (f, k) => chk(f, k, 5) || 0;
+  const L = (f, k) => chk(f, k, 2);
+  const str = (f, k) => { const v = L(f, k); return v ? D.decode(v) : ''; };
+  const bytes = (f, k) => L(f, k) || EMPTY;
+  const sgn = v => (v | 0);   // int32 / sfixed32 from the unsigned low 32 bits
+  const deg = v => (v | 0) / 1e7;
+
+  /* ---- writer ---- */
+  /* A message is built as a plain array of numbers. Zero/absent scalars are left out (proto3), fields are written in
+     ascending number order, so output is byte-for-byte what a reference serializer produces. */
+  function wv(a, x) { x = Math.floor(x); while (x > 127) { a.push((x % 128) | 128); x = Math.floor(x / 128); } a.push(x); }
+  const key = (a, num, wt) => wv(a, num * 8 + wt);
+  function wVar(a, num, x) { if (x) { key(a, num, 0); wv(a, x < 0 ? x >>> 0 : x); } }
+  function wFix(a, num, x) { if (x) { key(a, num, 5); const v = x | 0; a.push(v & 255, (v >> 8) & 255, (v >> 16) & 255, (v >>> 24) & 255); } }
+  function wLen(a, num, bs) { if (bs && bs.length) { key(a, num, 2); wv(a, bs.length); for (let i = 0; i < bs.length; i++) a.push(bs[i]); } }
+  const wStr = (a, num, s) => wLen(a, num, U.encode(s || ''));
+  const wMsg = (a, num, m) => { key(a, num, 2); wv(a, m.length); for (let i = 0; i < m.length; i++) a.push(m[i]); };   // present even when empty
+  const done = a => Uint8Array.from(a);
+
+  const enc = {
+    wantConfig(nonce) { const a = []; wVar(a, 3, nonce); return done(a); },
+    heartbeat() { const a = []; wMsg(a, 7, []); return done(a); },
+    /* A whole ToRadio carrying one MeshPacket with a decoded Data. */
+    packet({ to, channel, id, portnum, payload, wantAck, hopLimit }) {
+      const data = []; wVar(data, 1, portnum); wLen(data, 2, payload);
+      const mp = []; wFix(mp, 2, to); wVar(mp, 3, channel); wMsg(mp, 4, data); wFix(mp, 6, id); wVar(mp, 9, hopLimit);
+      if (wantAck) { key(mp, 10, 0); mp.push(1); }
+      const a = []; wMsg(a, 1, mp); return done(a);
+    },
+    waypoint({ id, lat, lon, expire, lockedTo, name, description, icon }) {
+      const a = [];
+      wVar(a, 1, id); wFix(a, 2, Math.round(lat * 1e7)); wFix(a, 3, Math.round(lon * 1e7)); wVar(a, 4, expire); wVar(a, 5, lockedTo);
+      wStr(a, 6, name); wStr(a, 7, description); wFix(a, 8, icon);
+      return done(a);
+    },
+  };
+
+  /* ---- decoders ---- */
+  const NONE = parse(EMPTY);   // stands in for an absent nested message
+  const position = safe(b => {
+    const f = parse(b);
+    if (f[1] === undefined && f[2] === undefined) return null;   // no fix
+    return { lat: deg(F(f, 1)), lon: deg(F(f, 2)), alt: sgn(V(f, 3)), time: F(f, 4) };
+  });
+  const user = safe(b => { const f = parse(b); return { longName: str(f, 2), shortName: str(f, 3) }; });
+  const waypoint = safe(b => {
+    const f = parse(b);
+    return { id: V(f, 1), lat: deg(F(f, 2)), lon: deg(F(f, 3)), expire: V(f, 4), lockedTo: V(f, 5), name: str(f, 6), description: str(f, 7), icon: F(f, 8) };
+  });
+
+  function packet(b) {
+    const f = parse(b), m = { type: 'packet', from: F(f, 1), to: F(f, 2), channel: V(f, 3), id: F(f, 6), rxTime: F(f, 7), portnum: null, payload: null };
+    if (L(f, 5) !== undefined && L(f, 4) === undefined) return m;   // still encrypted
+    if (f[4]) { const d = parse(L(f, 4)); m.portnum = V(d, 1); m.payload = bytes(d, 2); }
+    return m;
+  }
+  function nodeInfo(b) {
+    const f = parse(b), us = f[2] ? user(L(f, 2)) : null, ps = f[3] ? position(L(f, 3)) : null;
+    if (f[2] && !us) throw 0;
+    return { type: 'nodeInfo', num: V(f, 1), longName: us ? us.longName : '', shortName: us ? us.shortName : '',
+             position: ps, lastHeard: F(f, 5), channel: V(f, 7) };
+  }
+  function channel(b) {
+    const f = parse(b), s = f[2] ? parse(L(f, 2)) : NONE, ms = s[7] ? parse(L(s, 7)) : NONE, role = V(f, 3);
+    return { type: 'channel', index: sgn(V(f, 1)), role: role === 1 ? 'primary' : role === 2 ? 'secondary' : 'disabled',
+             name: str(s, 3), psk: bytes(s, 2), positionPrecision: V(ms, 1) };
+  }
+
+  const fromRadio = (b) => {
+    try {
+      const order = [], f = parse(b, order);
+      let last = 0;   // the FromRadio payload is a oneof: the last member present wins
+      for (const k of order) if (k === 2 || k === 3 || k === 4 || k === 7 || k === 8 || k === 10) last = k;
+      switch (last) {
+        case 2: return packet(L(f, 2));
+        case 3: return { type: 'myInfo', myNodeNum: V(parse(L(f, 3)), 1) };
+        case 4: return nodeInfo(L(f, 4));
+        case 7: return { type: 'configComplete', id: V(f, 7) };
+        case 8: V(f, 8); return { type: 'rebooted' };
+        case 10: return channel(L(f, 10));
+      }
+    } catch (e) { /* fall through */ }
+    return { type: 'other' };
+  };
+
+  return { PORT, BROADCAST, enc, dec: { fromRadio, position, user, waypoint } };
+})();
+
+/* ---------- MLINK: the Bluetooth link to a Meshtastic radio. No FK, no DOM; needs MPB. ----------
+   The Web Bluetooth object is passed in (MLINK.create({ bluetooth })), and nothing here touches navigator.bluetooth at load time.
+   Service and characteristic UUIDs are recorded in docs/content-review.md (Comms).
+   States: 'off' (reason: 'cancelled' | 'unsupported' | 'failed' | 'user'), 'connecting', 'syncing', 'on', 'lost'.
+   'on' is reported only after configComplete carrying our nonce, so every start-up message has already reached onMessage.
+   onMessage gets each decoded FromRadio (MPB.dec.fromRadio) except { type: 'other' }, which is read and dropped. */
+const MLINK = (() => {
+  const UUID = {
+    service: '6ba1b218-15a8-461f-9fa8-5dcae273eafd',
+    toradio: 'f75c76d2-129e-4dad-a1dd-7866124401e7',
+    fromradio: '2c55e69e-4993-11ed-b878-0242ac120002',
+    fromnum: 'ed9da18c-a800-4f66-a670-aa7547e34453',
+  };
+  const SYNC_MS = 30000, BEAT_MS = 300000;
+
+  const supported = (bt = navigator.bluetooth) => !!(bt && typeof bt.requestDevice === 'function');
+
+  function create({ bluetooth = navigator.bluetooth, onMessage, onState } = {}) {
+    let st = 'off';
+    let device = null;      // the chosen radio, kept across connections so reconnect() needs no chooser
+    let S = null;           // the live connection (null when there is none); every async step checks it is still current
+    let inflight = null;    // the connect()/reconnect() promise in progress
+    const say = (fn, arg) => { try { if (fn) fn(arg); } catch (e) { console.error('MLINK callback failed', e); } };
+    const setState = (state, reason) => {
+      st = state;
+      say(onState, { state, name: device && device.name ? device.name : '', reason: state === 'off' ? reason : undefined });
+    };
+    const onGone = () => { if (S && S.device === device) closed(S); };
+
+    /* Drop the live connection quietly: stop timers and listeners, close GATT, resolve whoever waits. */
+    function teardown() {
+      const s = S;
+      if (!s) return;
+      S = null;
+      clearTimeout(s.syncTimer); clearInterval(s.beatTimer);
+      if (s.num) s.num.removeEventListener('characteristicvaluechanged', s.onNum);
+      try { if (s.device.gatt && s.device.gatt.connected) s.device.gatt.disconnect(); } catch (e) { /* already gone */ }
+      if (s.done) { const d = s.done; s.done = null; d(false); }
+    }
+    function fail(s, reason) {
+      if (S !== s) return;
+      teardown();
+      setState('off', reason);
+    }
+    function closed(s) {   // GATT went away under us
+      if (S !== s) return;
+      if (s.wasOn) { teardown(); setState('lost'); } else fail(s, 'failed');
+    }
+
+    /* Writes: one queue, one at a time. A write that cannot happen (not connected, GATT error) resolves false. */
+    function write(s, bytes) {
+      const data = Uint8Array.from(bytes);
+      const p = s.queue.then(async () => {
+        if (S !== s || !s.device.gatt.connected) return false;
+        if (s.to.writeValueWithResponse) await s.to.writeValueWithResponse(data); else await s.to.writeValue(data);
+        return true;
+      }).catch(() => false);
+      s.queue = p;
+      return p;
+    }
+
+    function handle(s, m) {
+      if (m.type === 'other') return;
+      say(onMessage, m);
+      if (S !== s) return;
+      if (m.type === 'configComplete' && m.id === s.nonce && st === 'syncing') {
+        clearTimeout(s.syncTimer);
+        s.wasOn = true;
+        setState('on');
+        s.beatTimer = setInterval(() => { write(s, MPB.enc.heartbeat()); }, BEAT_MS);
+        if (s.done) { const d = s.done; s.done = null; d(true); }
+      } else if (m.type === 'rebooted') startSync(s);
+    }
+
+    /* Read fromradio until an empty read. A notification during a drain only sets `again`. */
+    async function drain(s) {
+      if (s.draining) { s.again = true; return; }
+      s.draining = true;
+      try {
+        do {
+          s.again = false;
+          for (;;) {
+            const v = await s.from.readValue();
+            if (S !== s) return;
+            if (!v.byteLength) break;   // empty: the radio's queue is drained
+            const bytes = new Uint8Array(v.byteLength);   // a fresh buffer per message: the decoder returns views onto it
+            bytes.set(new Uint8Array(v.buffer, v.byteOffset, v.byteLength));
+            handle(s, MPB.dec.fromRadio(bytes));
+            if (S !== s) return;
+          }
+        } while (s.again);
+      } catch (e) {
+        if (S === s) { if (s.wasOn) { teardown(); setState('lost'); } else fail(s, 'failed'); }
+      } finally { s.draining = false; }
+    }
+
+    /* Ask the radio for its whole state and read it (at connect, and again after a reboot). */
+    function startSync(s) {
+      s.nonce = 1 + Math.floor(Math.random() * 0xFFFFFFFE);
+      clearTimeout(s.syncTimer); clearInterval(s.beatTimer);
+      s.syncTimer = setTimeout(() => fail(s, 'failed'), SYNC_MS);
+      setState('syncing');
+      write(s, MPB.enc.wantConfig(s.nonce)).then(ok => { if (!ok) closed(s); else drain(s); });
+    }
+
+    function open(choose) {
+      teardown();
+      setState('connecting');
+      const s = S = { device: null, to: null, from: null, num: null, queue: Promise.resolve(), draining: false, again: false,
+                      nonce: 0, lastNum: null, wasOn: false, syncTimer: 0, beatTimer: 0, done: null, onNum: null };
+      const result = new Promise(res => { s.done = res; });   // teardown() resolves it false; reaching 'on' resolves it true
+      const arm = () => { clearTimeout(s.syncTimer); s.syncTimer = setTimeout(() => fail(s, 'failed'), SYNC_MS); };
+      const go = async () => {
+        let stage = 'chooser';
+        try {
+          if (choose) {
+            const d = await bluetooth.requestDevice({ filters: [{ services: [UUID.service] }] });
+            if (S !== s) return;   // disconnect() while the chooser was open: a late pick does nothing
+            if (device && device !== d) device.removeEventListener('gattserverdisconnected', onGone);
+            device = d;
+            device.removeEventListener('gattserverdisconnected', onGone);
+            device.addEventListener('gattserverdisconnected', onGone);
+          }
+          s.device = device;
+          stage = 'gatt';
+          arm();   // the chooser is the user's to dismiss; every step after it is bounded
+          const server = await device.gatt.connect();
+          if (S !== s) { if (!S) { try { server.disconnect(); } catch (e) { /* already gone */ } } return; }   // a newer attempt shares this GATT object: leave it
+          const service = await server.getPrimaryService(UUID.service);
+          s.to = await service.getCharacteristic(UUID.toradio);
+          s.from = await service.getCharacteristic(UUID.fromradio);
+          s.num = await service.getCharacteristic(UUID.fromnum);
+          if (S !== s) return;
+          s.onNum = (ev) => {
+            const v = ev.target.value;
+            const n = v && v.byteLength >= 4 ? v.getUint32(0, true) : null;
+            if (n !== null) {
+              const down = s.lastNum !== null && n < s.lastNum;
+              s.lastNum = n;
+              if (down) { startSync(s); return; }   // the radio's counter restarted: it rebooted
+            }
+            drain(s);
+          };
+          s.num.addEventListener('characteristicvaluechanged', s.onNum);
+          await s.num.startNotifications();
+          if (S !== s) return;
+          startSync(s);
+        } catch (e) {
+          if (S === s) {
+            const cancelled = stage === 'chooser' && e && e.name === 'NotFoundError';
+            teardown();
+            setState('off', cancelled ? 'cancelled' : 'failed');
+          }
+        }
+      };
+      go();
+      return result;
+    }
+
+    function begin(choose) {
+      if (inflight) return inflight;
+      if (st === 'on' || st === 'syncing') return Promise.resolve(true);
+      if (choose && !supported(bluetooth)) { setState('off', 'unsupported'); return Promise.resolve(false); }
+      if (!choose && !device) return Promise.resolve(false);
+      const p = open(choose).then(ok => { if (inflight === p) inflight = null; return ok; });
+      inflight = p;
+      return p;
+    }
+
+    return {
+      connect: () => begin(true),
+      reconnect: () => begin(false),
+      disconnect() {
+        inflight = null;
+        const had = st !== 'off';
+        teardown();
+        if (had) setState('off', 'user');
+      },
+      send(bytes) { return S && st === 'on' ? write(S, bytes) : Promise.resolve(false); },
+      state: () => st,
+    };
+  }
+
+  return { supported, create };
 })();
 
 /* ---------- Ballistics: point-mass solver, G1/G7 standard drag ---------- */
@@ -3018,7 +3391,7 @@ const BALS = (() => {
   /* Keys that stay on this phone: never written to a backup and never touched by a restore. A half-finished
      protocol must not reappear on another phone, a stale position must not pass as current, and a backup handed
      to someone else must not skip their advanced-procedures warning. */
-  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck'];
+  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck', 'fk.meshTeam', 'fk.meshMe'];
   const backedUp = k => k.startsWith('fk.') && !SESSION_ONLY.includes(k);
   const phoneKeys = () => { const ks = []; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (backedUp(k)) ks.push(k); } return ks; };
   const hasPatients = data => { try { const v = JSON.parse(data['fk.patients']); return Array.isArray(v) && v.length > 0; } catch { return false; } };
@@ -4345,6 +4718,169 @@ const BALS = (() => {
     unit: () => unit, setUnit
   };
   emit('wps');   // app.js loads first and had nothing to draw: draw the Position count now
+})();
+
+/* ---------- FK.mesh: app state for the radio link (Meshtastic over Bluetooth) ----------
+   The Bluetooth link (MLINK) is built only when the Settings switch is on and the user connects, so with the switch off nothing
+   here reads navigator.bluetooth. This module decides what the channel is (private, public, unknown), keeps teammates from the
+   radio's list and live packets, and sends a marker to the team. It holds no channel key: the key is looked at once to reach a
+   verdict and dropped. Storage: meshOn (the switch), meshMe (the last known number of this phone's radio), meshTeam (teammates;
+   a session-only key, never in a backup). Bus events: 'mesh', 'team', 'meshWaypoint' { wp, from, name }. */
+(() => {
+  const { store, fin, okLatLon, emit, on } = FK;
+  const MAX_TEAM = 100, MAX_NAME = 40, DAY = 864e5;
+
+  let enabled = store.get('meshOn', false) === true;
+  let myNum = (n => Number.isInteger(n) && n > 0 && n <= 0xFFFFFFFF ? n : null)(store.get('meshMe', null));
+  let myName = '';
+  let link = null;                                   // MLINK.create(...) result, made on the first connect()
+  let st = { state: 'off', name: '', reason: undefined };
+  let channel = 'unknown', positions = 'unknown';
+
+  /* ---- teammates ---- */
+  const cleanName = s => typeof s === 'string' ? s.slice(0, MAX_NAME) : '';
+  const cleanTeam = v => (Array.isArray(v) ? v : []).filter(x => x && Number.isInteger(x.num) && x.num > 0 && x.num <= 0xFFFFFFFF).slice(0, MAX_TEAM).map(x => ({
+    num: x.num, long: cleanName(x.long), short: cleanName(x.short),
+    lat: okLatLon(x.lat, x.lon) ? x.lat : null, lon: okLatLon(x.lat, x.lon) ? x.lon : null,
+    t: fin(x.t) && x.t > 0 ? x.t : 0, heard: fin(x.heard) && x.heard > 0 ? x.heard : 0
+  }));
+  let team = cleanTeam(store.get('meshTeam', []));
+  const saveTeam = () => { store.set('meshTeam', team); emit('team'); };
+
+  const radioName = num => 'Radio ' + (num & 0xFFFF).toString(16).padStart(4, '0');
+  const nameOf = num => {
+    const m = team.find(x => x.num === num);
+    const n = m ? (m.long || m.short) : num === myNum ? myName : '';
+    return n || radioName(num);
+  };
+
+  const goodPos = p => !!p && okLatLon(p.lat, p.lon) && !(p.lat === 0 && p.lon === 0);
+  const posTime = p => { const t = fin(p.time) && p.time > 0 ? p.time * 1000 : 0; return t > Date.now() + DAY ? 0 : t; };
+
+  /* Add or update one teammate; `patch` may hold long, short, pos ({ lat, lon, time }), heard. Saves and emits when it changed. */
+  function touch(num, patch) {
+    if (!Number.isInteger(num) || num <= 0 || num === myNum || num === 0xFFFFFFFF) return;
+    let m = team.find(x => x.num === num);
+    const before = m ? JSON.stringify(m) : '';
+    if (!m) { m = { num, long: '', short: '', lat: null, lon: null, t: 0, heard: 0 }; team.push(m); }
+    if (patch.long) m.long = cleanName(patch.long);
+    if (patch.short) m.short = cleanName(patch.short);
+    if (goodPos(patch.pos)) { m.lat = patch.pos.lat; m.lon = patch.pos.lon; m.t = posTime(patch.pos); }
+    if (patch.heard > m.heard) m.heard = patch.heard;
+    if (team.length > MAX_TEAM) {   // least recently heard goes first
+      let drop = team[0];
+      for (const x of team) if (x.heard < drop.heard) drop = x;
+      team = team.filter(x => x !== drop);
+    }
+    if (JSON.stringify(m) !== before) saveTeam();
+  }
+
+  /* ---- the channel verdict ---- */
+  function setVerdict(c, p) {
+    if (c === channel && p === positions) return;
+    channel = c; positions = p;
+    emit('mesh');
+  }
+  function verdict(m) {
+    if (m.role !== 'primary') return;                // only the primary channel is what a marker is sent on
+    const n = m.psk ? m.psk.length : 0;
+    const c = n <= 1 ? 'public' : n === 16 || n === 32 ? 'private' : 'unknown';
+    setVerdict(c, m.positionPrecision === 32 ? 'precise' : m.positionPrecision === 0 ? 'off' : 'approx');
+  }
+
+  /* ---- messages and link state from the radio ---- */
+  /* The start-up messages may come in any order, so until the primary channel's verdict is known, nothing from the mesh is shown
+     or emitted: teammate updates and waypoint packets wait here (200 at most, oldest dropped). A private verdict applies them in
+     order; a public verdict, the end of the download with no verdict, or a new download discards them. */
+  const MAX_HELD = 200;
+  let held = [];
+  const isMesh = m => (m.type === 'nodeInfo' && !(m.num && m.num === myNum)) ||
+    (m.type === 'packet' && m.channel === 0 && (m.portnum === MPB.PORT.POSITION || m.portnum === MPB.PORT.NODEINFO || m.portnum === MPB.PORT.WAYPOINT));
+
+  function apply(m, now) {
+    if (m.type === 'nodeInfo') {
+      if (m.channel === 0) touch(m.num, { long: m.longName, short: m.shortName, pos: m.position, heard: m.lastHeard * 1000 });
+    } else if (m.portnum === MPB.PORT.POSITION && m.payload) touch(m.from, { pos: MPB.dec.position(m.payload), heard: now });
+    else if (m.portnum === MPB.PORT.NODEINFO && m.payload) {
+      const u = MPB.dec.user(m.payload);
+      if (u) touch(m.from, { long: u.longName, short: u.shortName, heard: now });
+    } else if (m.portnum === MPB.PORT.WAYPOINT && m.payload) {
+      const wp = MPB.dec.waypoint(m.payload);
+      if (wp) emit('meshWaypoint', { wp, from: m.from, name: nameOf(m.from) });
+    }
+  }
+  function onMessage(m) {
+    if (!enabled || !m) return;
+    if (m.type === 'myInfo') {
+      myNum = m.myNodeNum || null;
+      store.set('meshMe', myNum);
+      if (myNum && team.some(x => x.num === myNum)) { team = team.filter(x => x.num !== myNum); saveTeam(); }
+    } else if (m.type === 'channel') {
+      verdict(m);
+      if (channel === 'private') { const h = held; held = []; h.forEach(x => apply(x.m, x.at)); }
+      else if (channel === 'public') held = [];
+    } else if (m.type === 'nodeInfo' && m.num && m.num === myNum) {
+      if (m.longName || m.shortName) myName = cleanName(m.longName) || cleanName(m.shortName);
+    } else if (isMesh(m)) {
+      if (channel === 'private') apply(m, Date.now());
+      else if (channel === 'unknown') { held.push({ m, at: Date.now() }); if (held.length > MAX_HELD) held.shift(); }
+    }
+  }
+  function onState(s) {
+    if (!enabled) return;
+    st = { state: s.state, name: s.name || '', reason: s.reason };
+    if (s.state === 'syncing') { channel = 'unknown'; positions = 'unknown'; held = []; }   // every start-up download decides afresh
+    else if (s.state === 'on' && channel === 'unknown') held = [];                          // the download ended with no verdict
+    emit('mesh');
+  }
+
+  /* ---- the switch and the link ---- */
+  function setEnabled(v) {
+    v = !!v;
+    if (v === enabled) return;
+    enabled = v;
+    store.set('meshOn', v);
+    if (!v) {
+      if (link) link.disconnect();                   // its 'off' report is ignored now: enabled is false
+      st = { state: 'off', name: '', reason: 'user' };
+      channel = 'unknown'; positions = 'unknown'; held = [];
+    }
+    emit('mesh');
+  }
+  const supported = () => { try { return enabled && MLINK.supported(navigator.bluetooth); } catch (e) { return false; } };
+  const canShare = () => enabled && st.state === 'on' && channel === 'private';
+  const ensureLink = () => link || (link = MLINK.create({ bluetooth: navigator.bluetooth, onMessage, onState }));
+
+  const randId = () => 1 + Math.floor(Math.random() * 0xFFFFFFFE);
+  async function sendWaypoint(wp) {
+    if (!canShare() || !wp || !okLatLon(wp.lat, wp.lon)) return false;
+    const payload = MPB.enc.waypoint({ id: wp.id || randId(), lat: wp.lat, lon: wp.lon, expire: wp.expire, lockedTo: wp.lockedTo,
+                                       name: wp.name, description: wp.description, icon: wp.icon });
+    return link.send(MPB.enc.packet({ to: MPB.BROADCAST, channel: 0, id: randId(), portnum: MPB.PORT.WAYPOINT, payload }));
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && enabled && link && st.state === 'lost') link.reconnect();
+  });
+
+  FK.mesh = {
+    enabled: () => enabled, setEnabled, supported,
+    status: () => enabled ? { state: st.state, name: st.name, reason: st.reason } : { state: 'off', name: '', reason: 'user' },
+    channel: () => channel, positions: () => positions, canShare,
+    myNum: () => myNum, nameOf,
+    teammates: () => team.map(m => ({ num: m.num, name: m.long || m.short || radioName(m.num), lat: m.lat, lon: m.lon, t: m.t, heard: m.heard })),
+    connect: () => enabled ? ensureLink().connect() : Promise.resolve(false),
+    reconnect: () => enabled && link ? link.reconnect() : Promise.resolve(false),
+    disconnect: () => { if (link) link.disconnect(); },
+    sendWaypoint
+  };
+  FK._test.mesh = { feed: onMessage, link: (state, name, reason) => onState({ state, name, reason }) };
+
+  /* ---- Settings: the switch ---- */
+  const sw = FK.$('#meshOn');
+  sw.checked = enabled;
+  sw.addEventListener('change', () => FK.mesh.setEnabled(sw.checked));
+  on('mesh', () => { sw.checked = enabled; });
 })();
 
 /* ---------- Router: every screen has an address, so the Back button works ---------- */
@@ -7563,6 +8099,121 @@ const BALS = (() => {
   syncTimer();
 
   FK.markers = { icon, edit, create, openList, render, ageText, timerOn: () => !!tick };
+})();
+
+/* ---------- The Radio button on the map and the Radio sheet (FK.radioSheet) ----------
+   The button exists only while the Settings switch is on (FK.mesh.enabled()). Its label and its icon shape follow the link:
+   off, connecting (also while the radio's list downloads), connected, lost. The sheet connects and disconnects, and shows the
+   channel, the warnings about it and the teammates. Redraws are coalesced to one per animation frame (a start-up download
+   can send 100+ events in one tick) and the sheet is only redrawn while it is open. Every name comes from another person's
+   radio, so everything that reaches innerHTML goes through FK.esc. */
+(() => {
+  const { $, esc, on } = FK;
+  const btn = $('#mRadio'), dlg = $('#dlgRadio');
+  const STATE = { off: 'off', connecting: 'connecting', syncing: 'connecting', on: 'connected', lost: 'connection lost' };
+  const MAST = '<path d="M12 12v9M9 21h6"/>';
+  const ARCS = { in: '<path d="M8.5 6.5a5 5 0 0 0 0 7M15.5 6.5a5 5 0 0 1 0 7"/>', out: '<path d="M5.5 4a9 9 0 0 0 0 12M18.5 4a9 9 0 0 1 0 12"/>' };
+  const ICON = {
+    off: MAST + '<circle cx="12" cy="9" r="1.5"/><path d="M3 3l18 18"/>',
+    connecting: MAST + '<circle cx="12" cy="10" r="1.5" fill="currentColor"/><g stroke-dasharray="2 3">' + ARCS.in + ARCS.out + '</g>',
+    connected: MAST + '<circle cx="12" cy="10" r="1.5" fill="currentColor"/>' + ARCS.in + ARCS.out,
+    'connection lost': MAST + '<circle cx="12" cy="10" r="1.5" fill="currentColor"/>' + ARCS.in + '<path d="M17 2l5 5M22 2l-5 5"/>'
+  };
+  const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+
+  let shape = '';
+  function drawButton() {
+    const en = FK.mesh.enabled();
+    btn.hidden = !en;
+    if (!en) { shape = ''; return; }
+    const w = STATE[FK.mesh.status().state] || 'off';
+    if (w === shape) return;
+    shape = w;
+    btn.setAttribute('aria-label', 'Radio: ' + w);
+    btn.title = 'Radio: ' + w;
+    btn.innerHTML = svg(ICON[w === 'off' ? 'off' : w]);
+  }
+
+  /* ---- the sheet ---- */
+  const show = (el, text) => { el.hidden = !text; el.textContent = text || ''; };
+  const ageOf = t => (t > 0 && FK.markers ? FK.markers.ageText(t) : '') || 'age unknown';
+  const relOf = (lat, lon) => FK.relText(lat, lon, m => TGEOM.fmtDist(m, FK.tac.unit())) || 'distance unknown';
+  const distOf = m => { const f = FK.getFix(); return f && m.lat !== null ? GEO.distance(f.lat, f.lon, m.lat, m.lon) : null; };
+
+  function rows(list) {
+    const withPos = list.filter(m => m.lat !== null).map(m => ({ m, d: distOf(m) }));
+    withPos.sort((a, b) => (a.d === null) - (b.d === null) || (a.d - b.d) || a.m.name.localeCompare(b.m.name));
+    const none = list.filter(m => m.lat === null).sort((a, b) => a.name.localeCompare(b.name));
+    return withPos.map(x => `<li>${esc(x.m.name)} · ${esc(relOf(x.m.lat, x.m.lon))} · ${esc(ageOf(x.m.t))}</li>`)
+      .concat(none.map(m => `<li>${esc(m.name)} · no position yet</li>`)).join('');
+  }
+
+  function drawSheet() {
+    if (!dlg.open) return;
+    const s = FK.mesh.status(), busy = s.state === 'connecting' || s.state === 'syncing', isOn = s.state === 'on', lost = s.state === 'lost';
+    const connect = $('#rdConnect');
+    const unsupported = s.state === 'off' && !FK.mesh.supported();
+    // status line and the one action
+    let status = '';
+    if (busy) status = 'Connecting…';
+    else if (isOn) status = `Connected to "${s.name}"`;
+    else if (lost) status = 'Connection lost. Check that the radio is on and close by.';
+    show($('#rdStatus'), status);
+    connect.hidden = unsupported || isOn;
+    connect.disabled = busy;
+    connect.textContent = busy ? 'Connecting…' : lost ? 'Connect again' : 'Connect a radio';
+    $('#rdDisconnect').hidden = !(isOn || lost);
+    // what to do first, and why a connection failed
+    const info = $('#rdInfo');
+    if (s.state !== 'off') info.textContent = '';
+    else if (unsupported) info.innerHTML = '<p>This phone’s browser can’t reach a radio. The Meshtastic app will still share your position and markers with the group.</p>';
+    else info.innerHTML = '<p>You need a Meshtastic radio that is already set up in the Meshtastic app.</p><p>Close the Meshtastic app first: a radio talks to one app at a time.</p>';
+    show($('#rdErr'), s.state === 'off' && s.reason === 'failed' ? 'Couldn’t connect. If the Meshtastic app is open, close it and try again.' : '');
+    // the channel, only while the link is on (the last verdict is kept when it is lost)
+    const ch = isOn ? FK.mesh.channel() : '', pos = isOn ? FK.mesh.positions() : '';
+    show($('#rdChannel'), ch ? 'Channel: ' + ch : '');
+    show($('#rdWarn'), ch === 'public' ? 'This radio is on a public channel, so Field Kit is not sending or showing anything. Set up a private channel in the Meshtastic app and share it with your group.' : '');
+    show($('#rdPos'), ch === 'private' && pos === 'off' ? 'This channel is set to send no positions, so teammates won’t appear.'
+      : ch === 'private' && pos === 'approx' ? 'This channel sends approximate positions, so teammates may show in the wrong place.' : '');
+    const team = ch === 'private' ? FK.mesh.teammates() : null;
+    $('#rdTeamBox').hidden = !team;
+    if (team) {
+      $('#rdTeamH').textContent = `Teammates (${team.length})`;
+      $('#rdTeam').innerHTML = team.length ? rows(team) : '<li class="hint">No teammates heard yet.</li>';
+    }
+  }
+
+  let queued = 0;
+  function redraw() {
+    if (queued) return;
+    queued = requestAnimationFrame(() => { queued = 0; drawButton(); drawSheet(); });
+  }
+
+  let noDisc = 0, tapped = false;
+  function connectTap() {
+    if (tapped || btn.hidden) return;
+    tapped = true;
+    noDisc = performance.now() + 400;   // a second tap of a double tap must not land on Disconnect
+    const s = FK.mesh.status().state;
+    const p = s === 'lost' ? FK.mesh.reconnect() : FK.mesh.connect();   // called inside the tap: the device chooser needs it
+    redraw();
+    Promise.resolve(p).catch(e => console.warn('radio connect', e)).then(() => { tapped = false; redraw(); });
+  }
+  $('#rdConnect').addEventListener('click', connectTap);
+  $('#rdDisconnect').addEventListener('click', () => { if (performance.now() >= noDisc) FK.mesh.disconnect(); });
+  $('#rdClose').addEventListener('click', () => FK.sheet.close(dlg));
+
+  function open() {
+    if (!FK.mesh.enabled()) return;
+    FK.sheet.open(dlg, { onOpen: () => { drawSheet(); $('#rdTitle').focus(); }, onClose: () => { if (!btn.hidden) btn.focus(); } });
+  }
+  btn.addEventListener('click', open);
+
+  on('mesh', () => { if (!FK.mesh.enabled() && dlg.open) FK.sheet.close(dlg); redraw(); });
+  on('team', () => { if (dlg.open) redraw(); });
+  drawButton();
+
+  FK.radioSheet = { open };
 })();
 
 /* ---------- Tactical map tools: the scale bar, the Tools sheet, the tool modes (Measure, Route, Area, Move a marker) and Go to grid ----------

@@ -455,6 +455,21 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
 6. On the smallest phone in the group, check the wind fields are reachable for a profile with zero conditions.
 7. Night mode: the transonic rows carry the dagger and the note reads.
 8. A turret with 1/4 MOA clicks: the angle shown is clicks times a quarter (for example U 12.25 MOA, 49 clicks).
-9. The earlier list still applies: Settings shows the version; v7.8 profiles survived; set up one real rifle with its sight;
+9. The earlier list still applies: Settings shows "Version 7.10" (seven point ten, the release after 7.9); v7.8 profiles survived; set up one real rifle with its sight;
    compare the card with elevations already known at two distances; count clicks on a real turret; read a real drop reticle's
    marks from its manual; Back on the editor with typing in it.
+10. On an iPhone, open Edit on a profile: the sheet fills the screen with Save and Cancel at the bottom (v7.9 fixed other
+    sheets that showed only as a strip at the bottom edge; the profile sheet had the same fault and the same fix).
+
+## Release
+
+- **Main moved during the build.** v7.9 (iPhone: Marker, Tools and list sheets) was released from another session at 21:21 on
+  2026-11-21. The branch took it in by a merge, with no conflicts. Cost if wrong: none found; the full suite ran on the merged
+  release build (108 content checks, 2,245 browser tests, 0 failed).
+- **The profile sheet had the fault v7.9 fixed.** `#rfForm` used `flex: 1` inside an auto-height sheet, which Safari sizes to a
+  strip. It now uses `flex: 1 1 auto`, and v7.9's own test covers every sheet of this kind. This one-line change was made by the
+  controller at the merge and was not separately reviewed. Cost if wrong: the sheet's height on iPhone; item 10 above checks it.
+- **Version 7.10.** 7.9 was taken, so this release is 7.10 (ten, not one-zero). The app compares versions as numbers, so 7.10
+  is newer than 7.9 for backups and updates (`tests/test_migration.py` covers dotted versions). Cost if wrong: someone reads
+  "7.10" as "7.1"; the alternative, 8.0, is reserved for the team map.
+

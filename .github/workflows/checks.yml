@@ -44,7 +44,9 @@ jobs:
         # Layout tests measure text; use the same Roboto files the expected sizes were taken with.
         run: mkdir -p ~/.local/share/fonts && cp tests/fonts/*.ttf ~/.local/share/fonts/ && fc-cache -f
       - name: Tests
-        run: python -m pytest -q -n auto -p no:cacheprovider
+        run: python -m pytest -q -n auto -p no:cacheprovider --ignore=tests/test_search.py
+      - name: Search tests (on their own: they time searches in milliseconds, which parallel tests slow down)
+        run: python -m pytest -q -p no:cacheprovider tests/test_search.py
 
   iphone:
     name: iPhone engine (WebKit) layout

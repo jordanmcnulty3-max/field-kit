@@ -483,6 +483,7 @@ def test_every_mk_sheet_sizes_from_content_on_safari(page, app_url):
     open_map(page, app_url)
     ids = page.evaluate("[...document.querySelectorAll('dialog.mk-sheet')].map(d => d.id)")
     assert len(ids) >= 4
+    assert 'dlgRadio' in ids
     for i in ids:
         page.evaluate("id => document.getElementById(id).showModal()", i)
         assert page.evaluate(SHEET_BASIS, '#' + i) == [], i

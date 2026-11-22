@@ -457,8 +457,10 @@ path.area-rect{stroke:var(--od);stroke-width:2;stroke-dasharray:4 6;fill:var(--o
 :root[data-theme="night"] .af:not(.stale){fill:color-mix(in srgb,var(--ink) 85%,#fff);stroke:#000}
 :root[data-theme="night"] .afh{stroke:#000}
 dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding-bottom:0}
-#mkForm{display:flex;flex-direction:column;min-height:0;flex:1}
-.mk-body{overflow-y:auto;overflow-x:hidden;min-height:0;flex:1;overscroll-behavior:contain}
+/* flex: 1 1 auto, never flex: 1 (basis 0%): Safari sizes these auto-height sheets from the basis, and 0% left only a strip
+   at the bottom edge with the buttons below the screen (iPhone first test). min-height: 0 lets the body shrink and scroll. */
+#mkForm{display:flex;flex-direction:column;min-height:0;flex:1 1 auto}
+.mk-body{overflow-y:auto;overflow-x:hidden;min-height:0;flex:1 1 auto;overscroll-behavior:contain}
 .mk-act{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px 0 calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--paper)}
 .mk-act .btn{min-height:48px;white-space:normal;padding-inline:8px}
 .mk-act .btn[hidden]{display:none}

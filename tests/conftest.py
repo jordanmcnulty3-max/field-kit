@@ -11,6 +11,10 @@ from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOCAL_HOSTS = ('127.0.0.1', 'localhost')
+# Browser engine: chromium (default) or webkit, Safari's engine, which stands in for the iPhone (FK_BROWSER=webkit).
+ENGINE = os.environ.get('FK_BROWSER', 'chromium')
+if ENGINE not in ('chromium', 'webkit'):
+    raise ValueError(f'FK_BROWSER must be chromium or webkit, not {ENGINE!r}')
 
 
 @pytest.fixture(scope='session')
@@ -33,7 +37,7 @@ class _QuietHandler(http.server.SimpleHTTPRequestHandler):
 @pytest.fixture(scope='session')
 def browser():
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = getattr(p, ENGINE).launch()
         yield b
         b.close()
 

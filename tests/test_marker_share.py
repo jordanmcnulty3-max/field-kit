@@ -586,6 +586,33 @@ def test_an_incoming_delete_closes_the_sheet(page, app_url):
     history_clean(page)
 
 
+def test_an_incoming_delete_while_discard_is_asked_closes_both(page, app_url):
+    boot(page, app_url, [mk('s1', 'Rally', net(64))])
+    page.evaluate(SLOW_GO)
+    open_marker(page, 's1')
+    retype(page, '#mkNote', 'typing')
+    page.go_back()                                             # Back with typing: "Discard this marker?"
+    expect(page.locator('#cfTitle')).to_have_text('Discard this marker?')
+    incoming(page, BRAVO, id=64, lat=43.0, lon=-76.0, name='Rally', expire=1, icon=ICON['point'])
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
+    expect(sheet(page)).to_be_hidden()
+    expect(toast(page)).to_have_text('Bravo deleted this marker')
+    history_clean(page)
+
+
+def test_an_incoming_delete_while_the_delete_question_is_open_closes_both(page, app_url):
+    boot(page, app_url, [mk('s2', 'Spring', net(65))])
+    page.evaluate(SLOW_GO)
+    open_marker(page, 's2')
+    ask_delete(page)
+    incoming(page, BRAVO, id=65, lat=43.0, lon=-76.0, name='Spring', expire=1, icon=ICON['point'])
+    expect(page.locator('#dlgMkDel')).to_be_hidden()
+    expect(sheet(page)).to_be_hidden()
+    expect(toast(page)).to_have_text('Bravo deleted this marker')
+    assert sent_wps(page) == []
+    history_clean(page)
+
+
 def test_an_incoming_delete_of_mine_refills_it_as_private(page, app_url):
     boot(page, app_url, [mk('s1', 'Rally', net(60, frm=ME, by='Alpha'), note='north side')])
     open_marker(page, 's1')

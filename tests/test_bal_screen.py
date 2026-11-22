@@ -322,7 +322,8 @@ def test_conditions_out_of_range_say_so(page, app_url):
     open_screen(page, app_url, profile='ut', profiles=MINE)
     msg = 'Check the conditions: temperature, altitude, pressure or humidity is out of range.'
     page.click('#bCondBtn')
-    for k, v in [('bTemp', '141'), ('bTemp', '-61'), ('bAlt', '30001'), ('bAlt', '-2001'), ('bPress', '0'), ('bPress', '-3'), ('bRH', '101'), ('bRH', '-1')]:
+    for k, v in [('bTemp', '141'), ('bTemp', '-61'), ('bAlt', '30001'), ('bAlt', '-2001'), ('bPress', '0'), ('bPress', '-3'), ('bRH', '101'), ('bRH', '-1'),
+                 ('bPress', '2.992'), ('bPress', '0.1'), ('bPress', '7.9'), ('bPress', '33.1')]:
         shot(page, **{k: v})
         says(page, msg)
         shot(page, bTemp=59, bAlt=0, bPress='', bRH=50)
@@ -330,6 +331,9 @@ def test_conditions_out_of_range_say_so(page, app_url):
     assert card(page)['elev'][1] != '—'
     shot(page, bTemp=-60, bAlt=-2000, bRH=0, bPress='')
     assert card(page)['elev'][1] != '—'
+    for v in ('8', '33'):
+        shot(page, bPress=v)
+        assert card(page)['elev'][1] != '—', v
 
 
 def test_profile_without_numbers_asks_for_them(page, app_url):

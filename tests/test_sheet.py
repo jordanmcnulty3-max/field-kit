@@ -501,17 +501,18 @@ def test_reopening_the_same_sheet_in_the_same_tick_keeps_it_open(page, app_url):
 
 
 CONFIRM_TWICE = """async () => {
+  // history.go()'s popstate can take a while under load (sheet.js allows 3 s): poll, never a fixed sleep.
+  const until = async (f, ms = 4000) => { const end = performance.now() + ms; while (!f()) { if (performance.now() > end) return false; await new Promise(r => setTimeout(r, 10)); } return true; };
   window.__second = 'pending';
   const first = FK.sheet.confirm({ title: 'One', ok: 'Yes' });
-  await new Promise(r => setTimeout(r, 30));
+  await until(() => document.querySelector('#dlgConfirm').open && document.querySelector('#cfTitle').textContent === 'One');
   document.querySelector('#cfOk').click();
   const a = await first;
   const second = FK.sheet.confirm({ title: 'Two', ok: 'Yes' });   // in the continuation
   second.then(v => { window.__second = v; });
-  await new Promise(r => setTimeout(r, 100));
-  const open = document.querySelector('#dlgConfirm').open && document.querySelector('#cfTitle').textContent === 'Two';
+  const open = await until(() => document.querySelector('#dlgConfirm').open && document.querySelector('#cfTitle').textContent === 'Two');
   if (open) document.querySelector('#cfOk').click();
-  await new Promise(r => setTimeout(r, 100));
+  await until(() => window.__second !== 'pending' && !history.state.fkSheet);
   return a === true && open && window.__second === true && FK.route.index() === history.state.fkIdx && !history.state.fkSheet;
 }"""
 

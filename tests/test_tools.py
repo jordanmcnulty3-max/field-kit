@@ -648,7 +648,9 @@ def test_cpr_says_when_sound_is_off_and_a_tap_turns_it_back_on(page, app_url):
     page.wait_for_function("location.hash === '#/emergency'")
     assert page.inner_text('#emActive [data-tool="cpr"]').strip().endswith(', no sound')
     reopen_cpr(page)
-    page.evaluate('window.__allowResume = true')   # a tap is a user gesture: now it may resume
+    # A tap is a user gesture: from the press on, the audio may resume. Set at the press itself, not before it: the CPR tick
+    # keeps asking the audio to resume, and a flag set early lets a tick hide the notice before the tap lands.
+    page.evaluate("document.querySelector('#cprSound').addEventListener('pointerdown', () => { window.__allowResume = true; }, { capture: true, once: true })")
     page.click('#cprSound')
     page.clock.run_for(100)
     assert page.locator('#cprSound').is_hidden()

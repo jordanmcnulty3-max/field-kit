@@ -101,7 +101,7 @@
   const setText = (el, text) => { el.hidden = !text; el.textContent = text || ''; };
   const storedOf = () => cur && cur.id ? FK.tac.markers().find(x => x.id === cur.id) || null : null;
   const netOf = () => { const w = storedOf(); return w && w.net ? w.net : null; };
-  const rowShown = () => !!cur && FK.mesh.enabled() && (FK.mesh.canShare() || !!netOf() || shareEl.checked);
+  const rowShown = () => !!cur && FK.mesh.enabled() && (FK.mesh.canShare() || !!netOf() || shareEl.checked || !!conflict);
   const shareOn = () => rowShown() && shareEl.checked;
   /* What Save will do about sharing: with the row hidden (the Settings switch off), whatever the marker was. */
   const wantShare = () => rowShown() ? shareEl.checked : !!(opened ? opened.share : netOf());
@@ -179,8 +179,8 @@
   /* What the sheet showed when it opened, so Back, Escape or a backdrop tap can ask before losing what was typed. */
   let opened = null;
   const snap = () => { if (cur) opened = { name: nameEl.value, note: noteEl.value, kind: cur.kind, share: shareEl.checked }; };
-  const changed = () => !!cur && !!opened && !deleting &&
-    (nameEl.value !== opened.name || noteEl.value !== opened.note || cur.kind !== opened.kind || shareEl.checked !== opened.share);
+  const changed = () => !!cur && !!opened && !deleting && (!!cur.orphan ||   // a draft left by a teammate's delete: all of it is unsaved
+    nameEl.value !== opened.name || noteEl.value !== opened.note || cur.kind !== opened.kind || shareEl.checked !== opened.share);
   /* The open sheet shows the marker as it is stored now (a teammate changed it and nothing here was typed). */
   function refill() {
     const w = storedOf();
@@ -260,7 +260,11 @@
   function save(onlyIfChanged) {
     if (shareOn() && over()) {
       setText($('#mkLimit'), limitMsg(cur.kind));
+      // the message, then the first field over the limit with its counter (the note can be a screen below the message)
       $('#mkLimit').scrollIntoView({ block: 'nearest' });
+      const r = room();
+      if (r.name < 0) { nameEl.scrollIntoView({ block: 'nearest' }); $('#mkNameLeft').scrollIntoView({ block: 'nearest' }); }
+      else { noteEl.scrollIntoView({ block: 'nearest' }); $('#mkLeft').scrollIntoView({ block: 'nearest' }); }
       return false;
     }
     const want = wantShare(), was = !!(opened ? opened.share : netOf());
@@ -284,7 +288,8 @@
     if (save(false) === false) return;
     FK.sheet.close(dlg);
   });
-  $('#mkCancel').addEventListener('click', () => FK.sheet.close(dlg));
+  // Cancel throws the edits away, except in a draft left by a teammate's delete: there it asks first, as Back does.
+  $('#mkCancel').addEventListener('click', () => { if (cur && cur.orphan) FK.sheet.dismiss(dlg); else FK.sheet.close(dlg); });
   /* Go to and Stop keep what was typed: they save first. If storage is full the target still holds for this session. */
   $('#mkGo').addEventListener('click', () => {
     if (blocked()) return;
@@ -370,6 +375,7 @@
      it is now; with typing, the typing stays and a line says what happened (Save keeps the typed version). */
   FK.on('shareIn', d => {
     if (!d || !dlg.open || !cur || !cur.id || d.id !== cur.id || dlg.inert) return;
+    if (d.what === 'deleted' && !d.kept && changed()) { orphan(d.name); return; }
     if (d.what === 'deleted' && !d.kept) {
       deleting = true;   // no "Discard?" for a marker that is gone, and nothing else in the sheet may act
       dlg.inert = true;
@@ -387,6 +393,20 @@
     } else conflict = `This marker was changed by ${d.name} while you were editing. Saving keeps your version.`;
     renderShare();
   });
+  /* A teammate deleted a teammate's marker while this sheet held unsaved typing: the typing is never thrown away. The sheet
+     becomes an unsaved new private marker at the same place, holding what is typed; Save makes it, Cancel and Back ask. */
+  function orphan(name) {
+    cur = { ...cur, id: null, typed: true, t: 0, rx: false, orphan: true };
+    $('#mkTitle').textContent = 'New marker';
+    $('#mkDel').hidden = true;
+    $('#mkMove').hidden = true;
+    $('#mkGo').textContent = 'Go to';
+    shareEl.checked = false;
+    if (opened) opened.share = false;
+    conflict = `${name} deleted this marker for everyone. Save keeps what you typed as a private marker of your own.`;
+    renderAge();
+    renderShare();
+  }
   FK.on('mesh', () => { if (dlg.open && cur) renderShare(); });
   FK.on('wps', () => { if (dlg.open && cur && !dlg.inert) renderShare(); });
 

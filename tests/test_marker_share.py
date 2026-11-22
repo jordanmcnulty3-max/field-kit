@@ -179,6 +179,37 @@ def test_share_row_shows_when_a_radio_can_share_and_a_new_marker_starts_off(page
     assert 'net' not in markers(page)[0] and sent_wps(page) == []
 
 
+def test_the_share_switch_is_on_screen_when_a_new_marker_opens(page, app_url):
+    boot(page, app_url)
+    open_new(page)
+    sw = page.locator('#dlgMarker .mk-share .opt').bounding_box()
+    save = page.locator('#mkSave').bounding_box()
+    assert sw['y'] >= 0 and sw['y'] + sw['height'] <= save['y'], (sw, save)
+    assert page.evaluate("document.querySelector('#dlgMarker .mk-body').scrollTop") == 0
+
+
+def test_a_refused_save_brings_the_over_limit_field_into_view(page, app_url):
+    boot(page, app_url)
+    open_new(page)
+    page.click('#mkShare')
+    retype(page, '#mkName', 'n' * 35)
+    page.evaluate("document.querySelector('#dlgMarker .mk-body').scrollTop = 9999")   # scrolled down to the note
+    page.click('#mkSave')
+    expect(page.locator('#mkLimit')).to_be_visible()
+    for sel in ('#mkNameLeft', '#mkLimit'):
+        expect(page.locator(sel)).to_be_in_viewport()
+    expect(page.locator('#mkNameLeft')).to_have_text('6 characters too many')
+    # an over-long note (name fine): the note's counter comes into view
+    retype(page, '#mkName', 'Short')
+    page.evaluate("document.querySelector('#dlgMarker .mk-body').scrollTop = 0")
+    retype(page, '#mkNote', 'x' * 120)
+    page.evaluate("document.querySelector('#dlgMarker .mk-body').scrollTop = 0")
+    page.click('#mkSave')
+    expect(page.locator('#mkLeft')).to_have_text('21 characters too many')
+    expect(page.locator('#mkLeft')).to_be_in_viewport()
+    assert markers(page) == []
+
+
 def test_share_row_needs_a_link_or_a_shared_marker(page, app_url):
     boot(page, app_url, [mk('w1', 'Camp'), mk('s1', 'Rally', net(41), lat=HOME[0] + 0.002)], link='private')
     open_new(page)
@@ -573,11 +604,13 @@ def test_an_incoming_change_keeps_what_was_typed_and_save_wins(page, app_url):
     assert [(x.id, x.name) for x in sent_wps(page)] == [(58, 'Rally mine')]
 
 
-def test_an_incoming_delete_closes_the_sheet(page, app_url):
+DRAFT = 'Bravo deleted this marker for everyone. Save keeps what you typed as a private marker of your own.'
+
+
+def test_an_incoming_delete_closes_the_sheet_with_nothing_typed(page, app_url):
     boot(page, app_url, [mk('s1', 'Rally', net(59))])
     page.evaluate(SLOW_GO)
     open_marker(page, 's1')
-    retype(page, '#mkNote', 'typing')
     incoming(page, BRAVO, id=59, lat=43.0, lon=-76.0, name='Rally', expire=1, icon=ICON['point'])
     expect(sheet(page)).to_be_hidden()
     expect(toast(page)).to_have_text('Bravo deleted this marker')
@@ -586,7 +619,67 @@ def test_an_incoming_delete_closes_the_sheet(page, app_url):
     history_clean(page)
 
 
-def test_an_incoming_delete_while_discard_is_asked_closes_both(page, app_url):
+def deleted_while_typing(page, app_url, wid):
+    boot(page, app_url, [mk('s1', 'Rally', net(wid), lat=43.002, note='north')])
+    page.evaluate(SLOW_GO)
+    open_marker(page, 's1')
+    retype(page, '#mkName', 'Rally kept')
+    page.click('#dlgMarker [data-kind="water"]')
+    retype(page, '#mkNote', 'my typing')
+    incoming(page, BRAVO, id=wid, lat=43.002, lon=-76.0, name='Rally', expire=1, icon=ICON['point'])
+    expect(page.locator('#mkShareLine')).to_have_text(DRAFT)
+    expect(sheet(page)).to_be_visible()
+    expect(page.locator('#mkTitle')).to_have_text('New marker')
+    expect(page.locator('#mkName')).to_have_value('Rally kept')
+    expect(page.locator('#mkNote')).to_have_value('my typing')
+    expect(page.locator('#dlgMarker [data-kind="water"]')).to_have_attribute('aria-pressed', 'true')
+    for hidden in ('#mkDel', '#mkMove', '#mkResend'):
+        expect(page.locator(hidden)).to_be_hidden()
+    expect(page.locator('#mkShare')).not_to_be_checked()
+    assert markers(page) == [] and wid in tombs(page)
+
+
+def test_a_teammates_delete_while_typing_keeps_the_typing_as_a_new_private_draft(page, app_url):
+    deleted_while_typing(page, app_url, 66)
+    page.click('#mkSave')
+    expect(sheet(page)).to_be_hidden()
+    ms = markers(page)
+    assert len(ms) == 1 and ms[0]['id'] != 's1' and 'net' not in ms[0]
+    assert (ms[0]['name'], ms[0]['note'], ms[0]['kind']) == ('Rally kept', 'my typing', 'water')
+    assert abs(ms[0]['lat'] - 43.002) < 1e-9
+    page.wait_for_timeout(300)
+    assert sent_wps(page) == [] and 66 in tombs(page)
+    history_clean(page)
+
+
+def test_a_teammates_delete_while_typing_then_cancel_asks_before_discarding(page, app_url):
+    deleted_while_typing(page, app_url, 67)
+    page.click('#mkCancel')
+    expect(page.locator('#cfTitle')).to_have_text('Discard this marker?')
+    page.click('#cfOk')
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
+    expect(sheet(page)).to_be_hidden()
+    assert markers(page) == [] and sent_wps(page) == []
+    history_clean(page)
+
+
+def test_a_teammates_delete_while_typing_then_back_asks_before_discarding(page, app_url):
+    deleted_while_typing(page, app_url, 68)
+    page.go_back()
+    expect(page.locator('#cfTitle')).to_have_text('Discard this marker?')
+    page.click('#cfCancel')                                    # Keep editing: the draft is still there
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
+    expect(page.locator('#mkNote')).to_have_value('my typing')
+    page.wait_for_timeout(400)
+    page.go_back()
+    expect(page.locator('#cfTitle')).to_have_text('Discard this marker?')
+    page.click('#cfOk')
+    expect(sheet(page)).to_be_hidden()
+    assert markers(page) == []
+    history_clean(page)
+
+
+def test_an_incoming_delete_while_discard_is_asked_keeps_the_draft_under_it(page, app_url):
     boot(page, app_url, [mk('s1', 'Rally', net(64))])
     page.evaluate(SLOW_GO)
     open_marker(page, 's1')
@@ -594,9 +687,12 @@ def test_an_incoming_delete_while_discard_is_asked_closes_both(page, app_url):
     page.go_back()                                             # Back with typing: "Discard this marker?"
     expect(page.locator('#cfTitle')).to_have_text('Discard this marker?')
     incoming(page, BRAVO, id=64, lat=43.0, lon=-76.0, name='Rally', expire=1, icon=ICON['point'])
+    expect(page.locator('#dlgConfirm')).to_be_visible()        # the question stays; the sheet under it is now a draft
+    expect(page.locator('#mkTitle')).to_have_text('New marker')
+    page.click('#cfOk')                                        # Discard
     expect(page.locator('#dlgConfirm')).to_be_hidden()
     expect(sheet(page)).to_be_hidden()
-    expect(toast(page)).to_have_text('Bravo deleted this marker')
+    assert markers(page) == [] and sent_wps(page) == []
     history_clean(page)
 
 
@@ -611,6 +707,23 @@ def test_an_incoming_delete_while_the_delete_question_is_open_closes_both(page, 
     expect(toast(page)).to_have_text('Bravo deleted this marker')
     assert sent_wps(page) == []
     history_clean(page)
+
+
+def test_an_incoming_delete_of_mine_while_typing_keeps_the_typing_and_makes_it_private(page, app_url):
+    boot(page, app_url, [mk('s1', 'Rally', net(69, frm=ME, by='Alpha'), note='north side')])
+    open_marker(page, 's1')
+    retype(page, '#mkNote', 'south side')
+    incoming(page, BRAVO, id=69, lat=43.0, lon=-76.0, name='Rally', expire=1, icon=ICON['point'])
+    expect(page.locator('#mkShareLine')).to_have_text('Bravo deleted this marker for everyone. Your copy is now private.')
+    expect(page.locator('#mkNote')).to_have_value('south side')
+    expect(page.locator('#mkShare')).not_to_be_checked()
+    expect(page.locator('#mkTitle')).to_have_text('Marker')
+    page.click('#mkSave')
+    expect(sheet(page)).to_be_hidden()
+    m = one(page, 's1')
+    assert m['note'] == 'south side' and 'net' not in m
+    page.wait_for_timeout(300)
+    assert sent_wps(page) == []
 
 
 def test_an_incoming_delete_of_mine_refills_it_as_private(page, app_url):

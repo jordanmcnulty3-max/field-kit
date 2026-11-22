@@ -591,7 +591,7 @@ body.maptool #tacSeg{display:none}
 .tl-list .hint{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:2px}
 #dlgMarker .mk-act{grid-template-columns:repeat(3,minmax(0,1fr))}
 /* comms share: the Share switch, its limits and status lines (only while the radio link is switched on) */
-.mk-share{margin:8px 0 4px;border-top:1px solid var(--line)}
+.mk-share{margin:8px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .mk-share .opt{border-top:0;align-items:center;min-height:48px;padding:6px 0;font-size:17px;font-weight:600}
 .mk-share .opt input{margin-top:0}
 .mk-msg{margin:0 0 8px;color:var(--blaze);font-weight:600;overflow-wrap:anywhere}
@@ -1183,6 +1183,13 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <h2 id="mkTitle" tabindex="-1">Marker</h2>
       <label class="f">Name<input id="mkName" type="text" maxlength="60" enterkeyhint="done"></label>
       <p class="hint mk-left" id="mkNameLeft" hidden></p>
+      <div class="mk-share" id="mkShareBox" hidden>
+        <label class="opt"><input type="checkbox" id="mkShare" role="switch" aria-describedby="mkShareHint"><span>Share with teammates</span></label>
+        <p class="mk-msg" id="mkLimit" role="alert" hidden></p>
+        <p class="hint" id="mkShareHint" hidden></p>
+        <p class="mk-shline" id="mkShareLine" hidden></p>
+        <button type="button" class="btn ghost" id="mkResend" hidden>Send again</button>
+      </div>
       <fieldset class="mk-kinds">
         <legend>Kind</legend>
         <div class="mk-grid" id="mkPlaces"></div>
@@ -1191,13 +1198,6 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       </fieldset>
       <label class="f">Note<textarea id="mkNote" maxlength="500" rows="2"></textarea></label>
       <p class="hint" id="mkLeft" hidden></p>
-      <div class="mk-share" id="mkShareBox" hidden>
-        <label class="opt"><input type="checkbox" id="mkShare" role="switch" aria-describedby="mkShareHint"><span>Share with teammates</span></label>
-        <p class="mk-msg" id="mkLimit" role="alert" hidden></p>
-        <p class="hint" id="mkShareHint" hidden></p>
-        <p class="mk-shline" id="mkShareLine" hidden></p>
-        <button type="button" class="btn ghost" id="mkResend" hidden>Send again</button>
-      </div>
       <button type="button" class="mk-gridline" id="mkGrid" translate="no" aria-describedby="mkGridHint"></button><span class="vh" id="mkGridHint">Tap to copy the grid.</span>
       <p class="mk-rel" id="mkRel" hidden></p>
       <p class="mk-rel" id="mkAge" hidden></p>

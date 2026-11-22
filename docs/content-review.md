@@ -8090,6 +8090,8 @@ Recorded, not judged:
 - Standard ballistics atmosphere sea level, 59 F, 29.53 inHg, 78 %: Dexadine, https://dexadine.com/bexhelp/bexhelp42.htm.
 - Which makers use which standard (Metro: Barnes, Hornady, Sierra; ICAO: Berger, Nosler, Lapua), factors 1.018 and 0.982:
   Long Range Hunting, "Using The Right BC in Your Ballistic Application", https://www.longrangehunting.com/goto/post?id=764918.
+  (The final maths review notes that Hornady's own coefficient page, https://www.hornady.com/bc, refers its coefficients to ICAO:
+  sea level, 59 F, 29.92 inHg, 0 % humidity. The post's list is not used for any built-in load.)
 - G1 drag coefficient 0.2629, 0.2558, 0.2487 at Mach 0, 0.05, 0.10 (the data-format example of the G1/G7 files) and their origin
   (BRL, E.D. Lowry, Winchester-Western, 1965; McCoy): ballistics-engine data README,
   https://docs.rs/crate/ballistics-engine/0.32.0/source/data/README.md.
@@ -8154,7 +8156,7 @@ thread (https://www.snipershide.com/shooting/goto/post?id=9268996; no tables).
 
 ### Built-in loads (2026-11-21)
 
-Each built-in load (`PRESETS` in `src/app.js`) was checked against pages opened on 2026-11-21. A load stays only if one maker
+Each built-in load (`PRESETS` in `src/bal-ui.js`) was checked against pages opened on 2026-11-21. A load stays only if one maker
 page (or two pages of the same maker) gives both a coefficient with the drag model stated (G1 or G7) and a velocity with its test
 barrel length, for the cartridge the load is named after. A coefficient printed without a model is not used. A retailer page or a
 forum post is not a source. The test is `test_built_in_loads_are_the_sourced_values` in `tests/test_ballistics_math.py`; the
@@ -8212,7 +8214,10 @@ Pages taken from:
 - **RWS, "5.56x45 NATO BALL (SS109)" 4.0 g / 62 gr dual core**,
   https://www.rws-technology.com/en/armed-forces-law-enforcement/product/556x45-nato-ball-ss109-62gr-2422469. Taken: V0 925 m/s
   (3,035 fps) with a 508 mm (20 in) test barrel (the page's velocity row is measured at v10, 10 m from the muzzle, tolerance plus
-  or minus 15 m/s; a second "assault rifle" line gives 914 m/s). Caveat: 3,035 fps is a reading 10 m from the muzzle, not a muzzle velocity; the page's decay (898 m/s at 25 m) implies about 3,071 fps at the muzzle (cost in `docs/ballistics-rulings.md`), and the table "Ballistic coefficient G1 / G7" by distance:
+  or minus 15 m/s; a second "assault rifle" line gives 914 m/s). Corrected after the final maths review: an earlier caveat here
+  said 3,035 fps is a reading 10 m from the muzzle and implied about 3,071 fps at the muzzle; RWS's own table lists 925 m/s at
+  0 m, and G7 0.151 flown from 925 m/s reproduces its 898 m/s at 25 m exactly, so 3,035 fps agrees with the maker's table (see
+  `docs/ballistics-rulings.md`). The table "Ballistic coefficient G1 / G7" by distance:
   25 m 0.292 / 0.151; 100 m 0.281 / 0.151; 200 m 0.284 / 0.155; 300 m 0.281 / 0.153; 400 m 0.273 / 0.151; 500 m 0.242 / 0.144;
   600 m 0.238 / 0.158; 700 m 0.237 / 0.123; 800 m 0.236 / 0.094; 900 m 0.229 / 0.106; 1000 m 0.234 / 0.123 (speed at those
   distances 898, 818, 719, 626, 538, 451, 379, 329, 298, 275, 257 m/s). No atmosphere is stated on that page.

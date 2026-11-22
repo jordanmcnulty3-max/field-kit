@@ -82,9 +82,13 @@ published coefficients are referred to. **So the solver treats a coefficient as 
 used with the Metro density (0.075126 lb/ft3) it gives the same drag within 0.02 %, which is why the Hornady tables (Metro) and
 the pyballistic and Steiner tables (ICAO) all agree with the solver unchanged.
 
-Where the standard matters is a coefficient quoted against one standard and used as if it were the other. Dexadine's Ballistic
-Explorer help and a Long Range Hunting post both give the conversion as a factor of 1.018 (Metro to ICAO, 0.982 the other way);
-ballistics-engine gives 0.075126 / 0.076474 = 0.98237. Measured on the default profile at 1,000 yd:
+**Corrected after the final maths review (2026-11-21).** The solver computes drag from Cd with the density of the actual air, so a
+coefficient that its publisher reduced properly (from velocities measured in known air) does not depend on which standard it is
+quoted against: the standard only names the reference density, and the solver's constant and density agree for both. The 1.018
+factor matters only in a hypothetical case: a coefficient its publisher reduced inconsistently (measured in one air, divided by the
+other standard's density). Dexadine's Ballistic Explorer help and a Long Range Hunting post both give that conversion as 1.018
+(Metro to ICAO, 0.982 the other way); ballistics-engine gives 0.075126 / 0.076474 = 0.98237. What such a coefficient would cost,
+measured on the default profile as it was then (G7 0.243) at 1,000 yd:
 
 | Coefficient used | Elevation | Wind | Velocity |
 |---|---|---|---|
@@ -92,8 +96,8 @@ ballistics-engine gives 0.075126 / 0.076474 = 0.98237. Measured on the default p
 | x 0.982 (other standard one way) | U 12.16 mil (+0.19) | R 3.19 mil (+0.08) | 1077 fps |
 | x 1.018 (the other way) | U 11.79 mil (-0.18) | R 3.02 mil (-0.08) | 1108 fps |
 
-Report only; the solver is not changed for it. Cost if a user enters a Metro-referred coefficient as ICAO (or the reverse):
-about 0.2 mil of elevation at 1,000 yd and about 0.03 mil at 500 yd.
+Report only; the solver is not changed for it. Cost, only for an inconsistently reduced coefficient (no built-in load is known to
+be one): about 0.2 mil of elevation at 1,000 yd and about 0.03 mil at 500 yd.
 
 ## Built-in loads sourced (2026-11-21)
 
@@ -112,7 +116,7 @@ p76239 are retired.** Names now give the maker and cartridge, so the coefficient
 | p556m193 | (none; p556 held G1 0.304, 3020 fps) | G7 0.127, 3301 fps, 55 gr; "Sellier & Bellot 5.56×45 M193 55 gr FMJ, 23.5″ barrel" | Sellier & Bellot's page prints 3,301 fps at 23½ in with G1 0.259 and G7 0.127 |
 | p556ss109 | (none) | G7 0.151, 3035 fps, 62 gr; "RWS 5.56x45 NATO Ball SS109 62 gr, 20″ barrel" | RWS prints 925 m/s from a 508 mm barrel and G1 / G7 coefficients by distance |
 | p76239sb | (none; p76239 held G1 0.29, 2350 fps, 123 gr) | G1 0.286, 2421 fps, 124 gr; "Sellier & Bellot 7.62×39 124 gr FMJ, 20.5″ barrel" | Sellier & Bellot prints 738 m/s from 520 mm with G1 0.286 and G7 0.143 |
-| p556, p76239 | as above | retired, never reused | their numbers had no source; a stored selection falls to Custom (below) |
+| p556, p76239 | as above | retired, never reused | their numbers had no source; a stored selection becomes an own profile named for what it was (below) |
 
 On the screen, default inputs (59 F, sea level, 50 %, 10 mph from 3 o'clock), before and after, for the two that changed:
 
@@ -128,7 +132,9 @@ and for the second starting point it used, `p556`. `p308`'s numbers changed, so 
 screen, read the same way the test reads it (`#solElev`, `#solWind`, `#solSub` and the dope card text, mil and MOA). `p556` is
 retired, so the second set pins `p223` (300 yd, 10 mph from 9 o'clock), captured the same way; the keys are `p223_mil` and
 `p223_moa`. A comment beside `BEFORE` names this ruling. Renaming the loads afterwards (Ruling A) changed no figure and the pinned
-text holds no load name, so `BEFORE` was not touched again; the two tests that used `p556` use `p223`.
+text holds no load name, so `BEFORE` was not touched again; the two tests that used `p556` use `p223`. The final drive changed
+only the reader (R35): the dope column "Drop in" is now headed "Path in", a transonic row's yardage carries a dagger, and the
+sentence reads "63.6 in low, drift 21.2 in left"; the reader maps them back, and every pinned figure is unchanged.
 
 Decisions made without Jordan:
 
@@ -150,9 +156,11 @@ Decisions made without Jordan:
 - **p65cm kept at G7 0.326, Hornady's Mach 2.25 value, although Hornady says the Mach 1.75 values (G7 0.310) are the ones to use
   beyond 600 yd.** 0.326 is the one Hornady says to use when comparing with other published coefficients, and it is what the load
   already held. Cost if wrong: beyond 600 yd the drop is understated; at 1,000 yd with 0.310 the elevation is U 9.11 mil against
-  U 8.86 mil (0.25 mil, about 9 in), and 500 yd differs by 0.04 mil. Hornady also refers its coefficients to Army Standard Metro
-  air; the solver reads every coefficient as ICAO (see "Standard atmosphere of the coefficient"), a further 1.8 % on the
-  coefficient (up to about 0.2 mil at 1,000 yd).
+  U 8.86 mil (0.25 mil, about 9 in), and 500 yd differs by 0.04 mil. (Corrected after the final maths review: this entry said
+  Hornady refers its coefficients to Army Standard Metro air and claimed a further 1.8 % on the coefficient, up to 0.2 mil at
+  1,000 yd. Hornady's coefficient page, hornady.com/bc, refers them to ICAO: sea level, 59 F, 29.92 inHg, 0 % humidity, the
+  standard the solver uses; and a properly reduced coefficient does not depend on the standard anyway, see "Standard atmosphere
+  of the coefficient". The extra cost does not apply.)
 - **Ruling B (controller): look again for 5.56 and 7.62x39 loads, since the release is for AR rifles as much as long range.**
   Loads were accepted from a maker that prints both a labelled coefficient and a velocity with its test barrel length for its own
   cartridge. Hornady (Frontier 55 gr M193, 62 gr FMJ, BLACK 62 gr FMJ and 123 gr SST), Federal American Eagle, PMC, Winchester,
@@ -167,20 +175,19 @@ Decisions made without Jordan:
   100 m and 400 m, 0.155 at 200 m, 0.153 at 300 m, 0.144 at 500 m, and 0.158 to 0.094 beyond 600 m (where the bullet is near
   Mach 1.2 and below). 0.151 is the value that holds from 25 m to 400 m, where the bullet is still above Mach 1.5. Cost if wrong:
   past 500 yd the drop is understated; with 0.144 the 500 yd elevation is U 2.96 mil against U 2.86 mil (0.10 mil, 5 in) and
-  1585 against 1642 fps; the table's own value changes again beyond 600 m, which a single coefficient cannot follow. **The velocity 3035
-  fps (925 m/s) is a reading 10 m from the muzzle (v10), not a muzzle velocity**: the RWS page prints it under its technical
-  delivery terms with that measuring point and shows 898 m/s at 25 m and 818 m/s at 100 m, a loss of about 1.1 m/s per metre. The
-  figure was kept because it is what the maker printed (its second line, 914 m/s "assault rifle", was not used). Implied muzzle
-  velocity from the page's own decay: 925 + 10 x (925 - 898) / 25 = about 936 m/s, 3071 fps. Measured cost, G7 0.151, 62 gr, sight
-  2.6 in, 100 yd zero, standard air: at 3035 fps the elevation is U 0.945 mil at 300 yd and U 2.858 mil at 500 yd (drop 51.4 in);
-  at 3071 fps it is U 0.909 and U 2.767 mil (49.8 in). So the load as shipped overstates the drop by 0.04 mil at 300 yd and 0.09 mil
-  (1.6 in) at 500 yd. Sellier & Bellot's SS109 62 gr line (945 m/s) was looked at as a replacement but its page gives no test barrel
-  length and no coefficient, so it could not replace this one.
+  1585 against 1642 fps; the table's own value changes again beyond 600 m, which a single coefficient cannot follow (RWS's G7
+  falls to 0.144 at 500 m, so the app understates elevation by about 0.1 mil near 550 yd). **The velocity 3035 fps (925 m/s) is
+  the muzzle velocity RWS's own table uses.** (Corrected after the final maths review. This entry said 925 m/s is a v10 reading,
+  implied a muzzle velocity of about 3071 fps, and claimed the load as shipped overstates the drop by 0.04 mil at 300 yd and
+  0.09 mil at 500 yd. RWS's table lists 925 m/s at 0 m; G7 0.151 flown from 925 m/s at 0 m reproduces the table's 898 m/s at 25 m
+  exactly, while from 936 m/s it gives 909. So 3035 fps agrees with the maker's table and the overstatement claim is not
+  supported.) Its second line, 914 m/s "assault rifle", was not used. Sellier & Bellot's SS109 62 gr line (945 m/s) was looked at
+  as a replacement but its page gives no test barrel length and no coefficient, so it could not replace this one.
 - **p76239sb is 124 gr, not 123 gr, and G1 0.286.** Sellier & Bellot's only 7.62x39 FMJ row is 124 gr; Hornady's 123 gr SST page
   prints no coefficient, and no maker page with a labelled coefficient for a 123 gr FMJ was found. G1 was chosen for this
   flat-base bullet (S&B also prints G7 0.143); with G7 0.143 the 500 yd elevation is U 5.54 mil against U 5.45 mil (0.09 mil) and
   the velocity 1146 against 1219 fps. Cost if wrong: about 0.1 mil at 500 yd. The velocity 2421 fps is S&B's 738 m/s, the barrel
-  20.5 in is 520 mm. A phone selecting the old 123 gr p76239 now meets the Custom fallback below, not a 124 gr load.
+  20.5 in is 520 mm. A phone selecting the old 123 gr p76239 now meets the fallback below, not a 124 gr load.
 - **No 16 in barrel velocity was added.** The only 16 in figures found are PMC's (55 gr 3120 fps, 62 gr LAP 2920 fps, its
   catalogue states "Barrel Length: 16 inches"), and PMC prints its coefficients (0.243, 0.304) with no drag model anywhere; Federal's
   Fusion MSR 62 gr is 2750 fps at 16 in with no coefficient. Under the rule a coefficient with no model is unusable, so no load
@@ -189,55 +196,64 @@ Decisions made without Jordan:
 - **No M855 or Hornady 62 gr load.** RWS's SS109 is the NATO 62 gr round with a labelled coefficient; the U.S. M855 pages
   (Winchester catalogue, Federal, an unnamed maker's data sheet) gave no model or no barrel length. Cost if wrong: none to
   existing screens.
-- **A phone whose stored selection names a retired load shows "Custom (unsaved)" and keeps the numbers it had.** The existing
-  code already does this (an id that is not in the list falls to Custom, and the stored field values are restored); a test covers
-  both retired ids and checks that no console error is raised. The alternative, loading another built-in load, would swap the
-  user's coefficient and velocity without warning. Cost if wrong: such a phone keeps showing the old p556 or p76239 numbers under
-  "Custom (unsaved)" until the user picks a load; those numbers are the unsourced ones.
+- **A phone whose stored selection names a retired load keeps the numbers it had, as one of its own profiles (corrected).** This
+  entry used to say such a phone shows "Custom (unsaved)"; there is no unsaved entry any more (R12). When the stored copy holds a
+  coefficient and a velocity, they become the own profile `ucustom`, named for what it was: "5.56 NATO 62 gr (old built-in)" for
+  p556 and "7.62×39 123 gr (old built-in)" for p76239 (R34; a stored v7.8 "custom" still becomes "Custom"), and it is selected;
+  otherwise the default built-in load is selected. A test covers both retired ids and checks that no console error is raised.
+  The alternative, loading another built-in load, would swap the user's coefficient and velocity without warning. Cost if
+  wrong: such a phone keeps the old, unsourced p556 or p76239 numbers until the user edits or deletes that profile.
 - **Sight height and zero left as they were** (sight height 2.6 in for the AR loads and p223, 2.0 in for p76239sb, 1.5 in for p65cm
   and p308, all zeroed at 100 yd); they are the app's own starting values, not sourced.
 - **A stored selection of a built-in load shows that load's current numbers (fix round 1).** On restore, when the stored
   `profile` is the id of a load in `PRESETS`, the six load fields (coefficient, drag model, weight, velocity, sight height, zero)
   are loaded from `PRESETS`; every other stored input (range, wind, conditions, card settings) is restored as stored. Reason:
-  typing in a load field already flips the selection to Custom, so a stored built-in id means the person picked the built-in and
-  never typed those numbers; without this a phone on the default .308 would show the new Federal name over the old 0.243. A stored
-  Custom selection and a stored selection of the user's own saved profile are unchanged (tests cover both, and the retired ids).
+  the load is not typed on the main screen (it lives in the profile, edited in the profile editor), so a stored built-in id means
+  the person picked the built-in and never typed those numbers; without this a phone on the default .308 would show the new
+  Federal name over the old 0.243. A stored Custom selection and a stored selection of the user's own saved profile are
+  unchanged (tests cover both, and the retired ids).
   Cost: on update, a phone sitting on the default .308 sees its card move without anyone editing it (500 yd, default inputs, from
   U 3.6 to U 3.5 mil; the figures are in the table above), and a phone on p223 sees G7 0.188 and 2720 fps in place of G1 0.372 and
-  2750 fps. If a person had hand-set a load field and still showed a built-in id, that cannot happen through the screen (typing
-  flips to Custom); a hand-edited backup could, and its numbers would be replaced.
+  2750 fps. A hand-edited backup that pairs a built-in id with other numbers has those numbers replaced.
 
 ## Correcting a profile from a real shot (2026-11-21)
 
 A person types the distance and the elevation their rifle really needed there, and the editor finds the muzzle velocity that
 reproduces it (`BAL.trueMv`, a bisection on velocity between 0.85 and 1.15 times the profile's, to within 0.5 fps). Only the
-velocity moves. The figures below are the default .308 (G7 0.243, 175 gr, 2600 fps, 1.5 in sight, 100 yd zero, 59 F, sea level,
-50 %) measured with the solver on 2026-11-21.
+velocity moves. The figures below are the default .308 as it ships now (G7 0.25, 175 gr, 2600 fps, 1.5 in sight, 100 yd zero,
+59 F, sea level, 50 %), measured with the solver; they were recomputed in the fix wave after the default moved from G7 0.243.
 
 - **Only the velocity is corrected, never the coefficient.** One shot gives one number, and a velocity and a coefficient cannot
   both be found from it. Velocity is the figure a person is least sure of (chronograph, barrel, temperature) and the one a
   single shot at distance is most sensitive to. Cost if wrong: the velocity absorbs any error that is really in the
-  coefficient, and it is right only near the distance of the shot. With a coefficient 7 % too high (0.26 for 0.243) a shot at
-  600 yd gives 2567 fps, and the card is then 0.03 mil off at 400 yd, 0.08 mil off at 800 yd and 0.29 mil off at 1,000 yd.
+  coefficient, and it is right only near the distance of the shot. With a coefficient 7 % too high (0.2675 for 0.25) a shot at
+  600 yd gives 2569 fps, and the card is then 0.02 mil off at 400 yd, 0.09 mil off at 800 yd and 0.28 mil off at 1,000 yd.
   Nothing on screen says the fit belongs to one distance beyond the line under the heading.
 - **Refused under 300 yd.** Near the muzzle a small misreading becomes a large velocity error: a 0.1 mil misreading at 300 yd
-  moves the answer by 68 fps (2.6 %), and at 200 yd it would be larger still, past what a person could judge. Cost if wrong:
+  moves the answer by 69 fps (2.7 %), and at 200 yd it would be larger still, past what a person could judge. Cost if wrong:
   a person with a real, careful 250 yd shot is turned away and must shoot farther; a limit set lower would let wild velocities
   through as results.
-- **Refused where the bullet is below Mach 1.2 at that distance with the profile's own velocity.** Through the transonic zone
-  the drag table changes fast, so the same angle comes from very different velocities, and the error is in the coefficient
-  curve, not the velocity. The default .308 is Mach 1.08 at 900 yd and 0.98 at 1,000 yd. Cost if wrong: a person shooting a
-  slow load far out cannot use this at all; a limit nearer Mach 1.0 would give them a velocity that is mostly the drag table's
-  error.
-- **A change over 5 % warns; a change over 15 % is refused.** 5 % of 2600 fps is 130 fps, which is 0.62 mil at 600 yd; 15 % is
-  390 fps, 2.2 mil. A real chronograph difference between a box and a rifle is usually a few percent; more than that points at
-  the distance, the zero or the sight height. The numbers are judgement, not measured. Cost if wrong: a rifle that really is
-  more than 15 % off its stated velocity (a much shorter barrel than the load was tested in) is refused and the person must
-  edit the velocity by hand; a limit too wide would let a typing slip through as a result.
+- **Refused where the bullet is below Mach 1.2 at that distance, with the profile's own velocity or with the velocity found.**
+  Through the transonic zone the drag table changes fast, so the same angle comes from very different velocities, and the error
+  is in the coefficient curve, not the velocity. The default .308 is Mach 1.22 at 800 yd, 1.16 at 850 yd, 1.11 at 900 yd and
+  1.00 at 1,000 yd, so a shot past about 815 yd is refused. The refusal now says what to do: "Use a shot at a shorter distance."
+  The check at the velocity found (final maths review) is made in the editor (`src/bal-edit.js`, with `BAL.solve` at the found
+  velocity), not inside `BAL.trueMv`: putting it in `BAL.trueMv` changes an existing solver test (the -14.9 % boundary case at
+  600 yd is below Mach 1.2 there), and that test file is kept untouched. Cost if wrong: a person shooting a slow load far out
+  cannot use this at all; a limit nearer Mach 1.0 would give them a velocity that is mostly the drag table's error; and any
+  other caller of `BAL.trueMv` (there is none) would not get the second check.
+- **A change over 5 % warns; a change over 15 % is refused, counted from the profile's original velocity.** 5 % of 2600 fps is
+  130 fps, which is 0.61 mil at 600 yd; 15 % is 390 fps, 2.2 mil. A real chronograph difference between a box and a rifle is
+  usually a few percent; more than that points at the distance, the zero or the sight height. The numbers are judgement, not
+  measured. The 15 % is measured by `BAL.trueMv` against the velocity in the field and also by the editor against the original
+  velocity (the profile's `mv0` if it has one, otherwise the velocity the sheet opened with), so two corrections cannot add up
+  past it (final code review). Cost if wrong: a rifle that really is more than 15 % off its stated velocity (a much shorter
+  barrel than the load was tested in) is refused and the person must edit the velocity by hand; a limit too wide would let a
+  typing slip through as a result.
 - **The shot is read level, with no wind, in today's conditions from the Ballistics screen.** The part's line says so. The
   profile's zero conditions are used as the zero air. Cost if wrong: whatever the shot had in it is folded into the velocity.
   At 600 yd on the default .308: a 20 degree incline gives 2681 fps (+3.1 %) for a rifle that is really at 2600; air at 20 F
-  when the screen says 59 F gives 2567 fps (-1.3 %); a 10 mph wind along the line of fire gives 2594 fps (-0.2 %), because it
+  when the screen says 59 F gives 2568 fps (-1.2 %); a 10 mph wind along the line of fire gives 2594 fps (-0.2 %), because it
   barely moves the drop. A crosswind does not affect elevation here.
 - **The original velocity is kept and can be put back.** The first correction stores the velocity the sheet opened with as
   `mv0` on the profile; later corrections leave it alone; "Put back" writes it into the velocity field and the sheet's Save
@@ -245,12 +261,181 @@ velocity moves. The figures below are the default .308 (G7 0.243, 175 gr, 2600 f
   velocity by hand never creates or removes it. Cost if wrong: a person who corrects, then hand-edits, then corrects again
   can only put back the first velocity, not an in-between one; and a profile that has been corrected keeps a second number in
   storage (and in a backup) that older copies of the app drop on their next save.
-- **The editor reaches the screen through two objects (fix round 1).** `FK.bal` is the public surface (its keys are pinned by tests);
-  `FK.balHost` (`find`, `newId`, `ZT`, `ZA`) is a read-only seam for `src/bal-edit.js` only, so the editor could leave
-  `bal-ui.js` without widening `FK.bal`. Cost if wrong: two objects to know about, and a change to the screen's profile
-  handling must keep both in step; nothing outside `bal-edit.js` may use `FK.balHost`.
+- **A worked-out velocity is never lost without a question (final drive).** "Work it out" scrolls the result (or the refusal)
+  and the Use button into view above the sheet's buttons. Save or Save as new with a result that has not been used asks "Use
+  the corrected velocity?" with "Use it and save" and "Save without it"; closing the question (Back, Escape, a tap outside)
+  saves nothing and leaves the sheet as it was. Cancel asks Keep editing / Discard when anything changed, as Back does (R33).
+  Cost if wrong: one more question on the way out; on an iPhone (no Back button) the question is closed only by a tap outside
+  it, since the ruling named exactly two choices.
+- **The editor reaches the screen through two objects (fix round 1, widened in the fix wave).** `FK.bal` is the public surface
+  (its keys are pinned by tests); `FK.balHost` is a read-only seam for `src/bal-edit.js` only: `find`, `newId`, and the one
+  definition of each rule the editor shares with the screen (`RANGE`, `CLICK_SIZES`, `within`, `marksOk`, `parseNum`,
+  `zeroAir`, `nameTaken`, `freeName`; final code review C13). The editor's range refusals are worded from `RANGE`. Cost if
+  wrong: two objects to know about, and a change to the screen's profile handling must keep both in step; nothing outside
+  `bal-edit.js` may use `FK.balHost`.
 - **`mv0` is written only when it means something (fix round 1).** At Save, a profile without `mv0` gets the velocity the sheet
   opened with only if a correction was applied since the last Put back and the velocity being saved differs from it; a profile
   that already has `mv0` keeps it through put back and correct again; Put back then Save removes it; a copy made after Put back
   has none. Cost if wrong: a person who corrects and then types the old velocity back gets no `mv0`, so no "Put back" later
   (nothing is lost: the velocity is the same).
+
+## Decisions recorded in the build ledger (R6 to R35)
+
+These were made by the controller while the release was built and lived only in its ledger until the final code review. Those
+that concerned only the order of the build (R1 to R5, R14) are left out. Each says what was decided, why, and its cost if wrong.
+
+- **R6. A test that compared against a commit no longer on GitHub was replaced by a checksum.**
+  `tests/test_final_fixes.py::test_v77_search_fixture_is_unchanged` compared the fixture with commit 594a3ad, removed at the v7.8
+  squash, so it failed in every fresh clone; it now checks the fixture's sha256 (identical to main 22efd72). Cost if wrong: none;
+  the fixture is still pinned.
+- **R7. A coefficient published by the ammunition maker for its own loaded cartridge is an acceptable source**, provided the
+  load's name names that cartridge (recorded above as Ruling A). Cost if wrong: Federal's rounded G7 0.25 against the commonly
+  used 0.243 is 0.29 mil less elevation at 1,000 yd for the default load.
+- **R8. The release carries 5.56 and 7.62x39 loads** from makers that print a labelled coefficient and a velocity with its barrel
+  length (recorded above as Ruling B); the retired ids p556 and p76239 are never reused. Cost if wrong: none if sourced.
+- **R9. A stored selection of a built-in load always shows that load's current numbers** (recorded above). Cost if wrong: on
+  update a phone on the default .308 sees its card move (500 yd U 3.6 to U 3.5 mil) without anyone editing; it is on the
+  phone-check list.
+- **R10. p223 keeps its id**: it is the same slot (a .223 Rem 77 gr match load) with sourced figures; a new id would orphan every
+  phone that selected it. Cost if wrong: none beyond R9.
+- **R11. The exact words of the dope-card columns and cells, and "a malformed sight is no sight"**, were fixed by the controller
+  because the plan only outlined them and the screen's tests needed exact strings. Cost if wrong: none (wording since changed by
+  the final drive, R35).
+- **R12. A stored selection of a retired built-in is handled like a stored "custom"**: with a coefficient and a velocity stored,
+  the own profile `ucustom` is made from them and selected; there is no unsaved entry. Its name is now set by R34. Cost if wrong:
+  none.
+- **R13. The `FK.bal` method contracts** (what `save`, `select`, `remove`, `clean`, `profiles`, `selected` take and give) were
+  fixed by the controller because later tasks consumed them. Cost if wrong: none.
+- **R15. The editor's wording, validation messages, marks parsing, click choices, headings and guard wording** were fixed by
+  the controller because the plan left them open. Cost if wrong: wording Jordan may want changed (several messages were since
+  reworded by the final reviews: R26 to R32).
+- **R16. The marks box is a plain text field with the full keyboard**, with the hint "Separate marks with spaces or commas, like
+  1.5 3 4.6.", and a comma is a separator: a keypad that cannot type a separator makes the feature unusable on iPhone. Since the
+  final drive, a box that has both spaces and a comma between two digits ("2,5 6,5") is refused with "Use a point for decimals:
+  2.5, not 2,5."; "1,5" alone still reads as the marks 1 and 5. Cost if wrong: someone who types "1,5" meaning 1.5 with no other
+  mark gets marks 1 and 5 accepted.
+- **R17. A zero-conditions pressure must be in range when given, and `clean()` drops an out-of-range temperature, altitude or
+  pressure from a stored `zeroAtm`** (a restored backup could carry them). The pressure range is now 8 to 33 inHg (R27). Cost if
+  wrong: none.
+- **R18. The dope card's columns** are Yd, the sight's elevation and wind columns, then the path, drift, fps, ft-lb and time; a
+  reticle drops the separate drift column because its wind columns already carry the hold. Cost if wrong: none.
+- **R19. The words of the sight line, the range and conditions messages, and that a new profile is made by editing a built-in
+  and saving it as new** (no separate New button). Cost if wrong: wording Jordan may want changed.
+- **R20. The answer card compacts only while a Ballistics input has focus and the screen is short; a message is always shown.**
+  A landscape phone with nothing focused gets the full card. "Short" is now decided from the visible height (R29), not a media
+  query. Cost if wrong: none.
+- **R21. A blank humidity means 50 %**, as a blank temperature means 59 F. Cost if wrong: none.
+- **R22. "Correct from a real shot" works on the values in the editor sheet; "Use NNNN fps" writes into the velocity field and
+  the sheet's own Save stores it** (one save path, covered by the unsaved-changes guard). Cost if wrong: one more tap (Save)
+  after a correction.
+- **R23. `FK.balHost` is the editor's internal seam** (recorded above). Cost if wrong: two objects to know about.
+- **R24. `mv0` is written only when it means something** (recorded above). Cost if wrong: none.
+- **R25. A turret shows the dialled value**: clicks times click size, with the click's decimals (one for 0.1 mil, 1/2 and 1; two
+  for 0.05 mil and 1/4; three for 1/8) and the direction letter whenever a click is dialled. "0.0 mil / 1 click" was possible.
+  At 500 yd (drop 64.3 in) with 1/4 MOA it reads "U 12.25 MOA", "49 clicks"; 0.1 mil is unchanged. The dope card's turret cells
+  follow it; "Show all units" and the no-sight form stay the true angle to one decimal. Cost if wrong: the turret line shows the
+  nearest dialable value, not the exact need (at most half a click apart).
+- **R26. Save and Save as new refuse a name another profile or a built-in already has** (trimmed, any case): "Give the profile
+  its own name." A built-in opens with " (mine)" after its name (" (mine 2)" and on if taken, cut to fit 60 characters). Two
+  entries with one name and different numbers were possible. Cost if wrong: one forced rename.
+- **R27. One station-pressure range, 8 to 33 inHg, everywhere** (screen, editor, stored zero conditions): a slipped decimal
+  (2.992) gave a confident wrong answer (U 2.6 mil at 500 yd where U 3.5 is right). Cost if wrong: a true reading outside it
+  (none on land) is refused.
+- **R28. Enter never saves the profile**; in the correction part it runs "Work it out"; elsewhere in the editor it does nothing.
+  A keypad's action key could store a half-finished edit. Cost if wrong: no keyboard shortcut for Save.
+- **R29. The short-screen state is decided in JavaScript from the visible height** (`visualViewport` where there is one, else
+  the window), re-checked on resize and focus changes, and the focused field is kept between the pinned card and the tab bar or
+  the bottom of the visible viewport. A media query cannot see a real phone keyboard. Cost if wrong: unverified until the phone
+  check (see "What could not be tested").
+- **R30. Incline, temperature and altitude (five fields) open the ordinary keyboard and take the typographic minus (U+2212)**,
+  as the wind chill box does (v7.3 rulings, item 24): iPhone number pads have no minus. One reader parses every typed number on
+  the screen and in the editor; anything unreadable is refused, never read as 0. Cost if wrong: a few more taps to reach digits.
+- **R31. Plausible ranges for a load**: coefficient 0.05 to 1.2, weight blank/0 or 1 to 1,000 gr, velocity 300 to 5,000 fps,
+  zero range 5 to 1,000 yd, sight height 0 to 6 in, enforced by the editor; a stored profile outside them is kept and the screen
+  asks for an edit. Absurd input printed absurd numbers ("3002648 fps", "Infinity ft-lb"). Cost if wrong: an unusual but real
+  load outside them is refused (the ranges are wide).
+- **R32. A stored drop reticle with any bad mark, more than ten marks or marks out of order loses its whole sight** (it was
+  renumbered or cut short), and the editor measures the 15 % correction limit against the original velocity. Cost if wrong: a
+  hand-edited backup with one bad mark shows every unit until the sight is set again.
+- **R33. In the profile editor, Cancel asks Keep editing / Discard when there are unsaved changes**, overriding "the sheet's own
+  Cancel does not ask" for this sheet: a worked correction or a whole rifle set-up could be lost by one tap. The marker sheet
+  keeps its own rule. Cost if wrong: one more tap to cancel.
+- **R34. A migrated retired built-in is named for what it was**: "5.56 NATO 62 gr (old built-in)" for p556, "7.62×39 123 gr (old
+  built-in)" for p76239; a stored "custom" still becomes "Custom"; the id stays `ucustom`. "Custom" gave no clue which rifle it
+  was. Cost if wrong: none.
+- **R35. The screen's words and layout from the final drive**: "Show all units" keeps the sight's own lines and adds the other
+  units beneath, and reads "Hide other units" (pressed) when on; the dope card scrolls in its own box (at most 70 % of the
+  visible height, at least 240 px) with a sticky heading row and yard column; headings say elevation or wind ("Elev clicks",
+  "Wind hold in") and click cells carry their direction ("U 36"); transonic rows carry a dagger with the note "† Below Mach 1.2
+  (transonic): less certain. Confirm these with real shots."; the sentence says "63.6 in low, drift 21.2 in left" and the Drop
+  column is "Path in"; past a reticle's last mark the answer is a hold in the reticle's unit and inches; a load line under the
+  picker, and for a built-in load a line asking for a chronograph reading; help under both pressure fields saying to leave them
+  blank without a true station reading. Cost if wrong: wording and layout Jordan may want changed.
+
+## Decisions made in the final fix wave (2026-11-21)
+
+- **The question about an unused correction needs three answers**, so `FK.sheet.confirm` gained `choice: true`: it resolves
+  'ok' or 'cancel' for the two buttons and null when closed any other way, and focus starts on the title so a stray Enter takes
+  neither. Without it, closing the question could not be told from "Save without it". Cost if wrong: none to other callers
+  (their answers are still true or false).
+- **The drift column keeps its unsigned figures.** The final drive asked the hint to match the column's actual sign
+  convention; the column has always been unsigned (and `BEFORE` pins it so), so the key under the card reads "Path: inches above
+  the line of sight; a minus means below. Drift: inches the wind moves the bullet, shown without a sign." (the drift part is
+  left out for a reticle, which has no drift column). The sentence under the answer gives the drift's direction. Cost if wrong:
+  the direction of the drift is read from the sentence or the wind columns, not the drift column.
+- **"Show all units" still turns the dope card to every unit.** The final drive's ruling covered the answer card; the dope card
+  keeps its every-unit columns while the button is on. Cost if wrong: with the button on, the dope card does not show clicks.
+- **While the card is pinned (keyboard up) the extra units are hidden**, like the button and the sentence, so the card stays
+  short. Cost if wrong: none; they come back when focus leaves.
+- **A reticle's windage with no hold reads "No hold"** (it read "0 in"), and the path at the zero reads "on the line of sight".
+  Cost if wrong: wording.
+- **Spacing on the main screen was tightened** (the card's padding and gaps, the lines under the picker, the shot fields'
+  gaps, the card's labels) so the load line, the chronograph line and the button beneath the sentence still leave the profile row,
+  the answer card and the four shot inputs on the first screen at 360 x 640. With a turret, a zero line and the load line it fits
+  with no pixel to spare. Cost if wrong: a longer sight description or a larger default font pushes the incline and wind fields
+  under the tab bar; nothing is cut off, it scrolls.
+- **A pre-existing flaky test was fixed**: `tests/test_map_tools.py::test_navigating_away_leaves_the_mode_and_keeps_nothing`
+  checked for no route mode in the two animation frames before the designed resume of an unfinished route (v7.8 rulings) and
+  failed about one run in four, at the base commit too. It now waits for the resume. Cost if wrong: none.
+
+## Accepted limits
+
+- **The profile editor is cramped in landscape** (final drive). Not fixed in this release: the sheet's own scroll still reaches
+  every field and button. Cost: more scrolling on a landscape phone.
+
+## What could not be confirmed
+
+- **Independent re-entry (final maths review, 2026-11-21).** Three outside cases re-entered by the reviewer agree with this
+  record's figures to 0.002 mil; the sanity checks pass (vacuum limit, wind symmetry, the Didion lag rule to 0.01 in, `trueMv`
+  recovering known velocities). Verdict: trustworthy to 600 yd given a correct muzzle velocity; at 1,000 yd the default .308 is
+  good to about ±0.3 to 0.4 mil only (below Mach 1.2 from about 815 yd, the coefficient 0.243 against 0.25, and spin drift and
+  Coriolis, about 0.4 mil sideways, not modelled).
+- **The Zdziarski pressure reading** (taken as the pressure at the firing point, above) is supported by the table's velocity
+  column, which the solver matches to 0.04 % at every row; the two readings differ by 2.9 % in density, which would show in the
+  velocities.
+- **The G7 gap past 500 yd stays open.** The closest lead is ballistics-engine's validation data,
+  `data/validation/xref_g7_supersonic_308.json` and `xref_g7_transonic_reach.json` (inputs in its generator script: G7 0.243,
+  800 m/s, 175 gr, ICAO, sight height 0); no search returned their URLs, so they were not opened.
+
+## What could not be tested
+
+- **The pinned answer card with a real phone keyboard.** The short state is decided from `visualViewport` (R29) and the tests
+  stand in a fake visual viewport and shrink the window; how iOS Safari and Android Chrome move the page, the sticky card and the
+  tab bar when a real keyboard opens was not seen.
+- **The ordinary keyboard on the five below-zero fields** and the typographic minus on a real iPhone keyboard.
+- **The dope card's own scroll box inside the page** with a finger on iOS (a scroll box inside a scrolling page).
+- **The question about an unused correction on an iPhone**, where it is closed only by a tap outside it.
+
+## Phone check for this release
+
+1. With the keyboard up on Target range, Wind speed, Temperature and Humidity, in portrait and in landscape: the answer card
+   stays at the top of what can be seen, and the field being typed in is visible below it and above the keyboard or tab bar.
+2. Type a temperature below zero on an iPhone (the ordinary keyboard; its minus works) and an incline below zero.
+3. In the editor of an own profile: Work it out shows the result and the Use button without scrolling by hand; Save without
+   pressing Use asks first; a tap outside the question goes back to the sheet with nothing saved; Cancel after Use asks.
+4. Scroll the dope card down and across with a finger: the headings and the yard column stay put, and the page scrolls on past it.
+5. Night mode: the transonic rows carry the dagger and the note reads.
+6. A turret with 1/4 MOA clicks: the angle shown is clicks times a quarter (for example U 12.25 MOA, 49 clicks).
+7. The earlier list still applies: Settings shows the version; v7.8 profiles survived; set up one real rifle with its sight;
+   compare the card with elevations already known at two distances; count clicks on a real turret; read a real drop reticle's
+   marks from its manual; Back on the editor with typing in it.

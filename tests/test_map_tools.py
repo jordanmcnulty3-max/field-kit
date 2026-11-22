@@ -437,9 +437,13 @@ def test_navigating_away_leaves_the_mode_and_keeps_nothing(page, app_url):
     assert ev(page, 'FK.mapTools.mode()') is None and ev(page, 'FK.tac.shapes()') == []
     idx_ok(page)
     page.go_back()
-    page.wait_for_function("location.hash === '#/tactical/map' && !history.state.fkLayer")
-    expect(page.locator('#toolBar')).to_be_hidden()
-    expect(page.locator('#mMark')).to_be_visible()
+    # Back on the map the unfinished route comes back with its points and its own entry (docs/v7.8-rulings.md: "An unfinished
+    # route or area left by a tab tap or Search is kept in memory and comes back when the Map shows again"). This test used to
+    # check for no mode in the moment before the resume (two animation frames later) and failed whenever the resume won the race.
+    page.wait_for_function("location.hash === '#/tactical/map' && history.state.fkLayer && FK.mapTools.points().length === 2")
+    expect(page.locator('#toolBar')).to_be_visible()
+    expect(page.locator('#mMark')).to_be_hidden()
+    assert ev(page, 'FK.tac.shapes()') == []           # still nothing stored
     idx_ok(page)
 
 

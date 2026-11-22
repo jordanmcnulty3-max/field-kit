@@ -14,7 +14,7 @@ const MPB = (() => {
      Uint8Array view. Unknown fields are walked and skipped by wire type. `order`, if given, receives the field numbers in the order they appeared.
      Throws on truncation or a length past the end. */
   function parse(b, order) {
-    const res = {}, n = b.length;
+    const res = {}, wts = {}, n = b.length;
     let p = 0, hi = 0;
     const varint = () => {
       let lo = 0, h = 0;
@@ -44,16 +44,21 @@ const MPB = (() => {
       else if (wt === 3) { depth++; continue; }
       else if (wt === 4) { if (!depth) throw 0; depth--; continue; }
       else throw 0;
-      if (!depth && num > 0) { res[num] = v; if (order) order.push(num); }
+      if (!depth && num > 0) { res[num] = v; wts[num] = wt; if (order) order.push(num); }
     }
     if (depth) throw 0;
+    Object.defineProperty(res, 'wt', { value: wts });   // wire type of each field present, for the checked accessors
     return res;
   }
   const safe = (f) => (b) => { try { return f(b); } catch (e) { return null; } };
-  const str = v => v ? D.decode(v) : '';
-  const bytes = v => v ? v : EMPTY;
+  /* Checked accessors: an absent field reads as its proto3 default, a field sent with the wrong wire type throws (so the
+     decoder returns null / 'other' instead of a wrong-typed value). V varint, F fixed32, L length-delimited. */
+  const chk = (f, k, wt) => { if (f[k] !== undefined && f.wt[k] !== wt) throw 0; return f[k]; };
+  const V = (f, k) => chk(f, k, 0) || 0, F = (f, k) => chk(f, k, 5) || 0;
+  const L = (f, k) => chk(f, k, 2);
+  const str = (f, k) => { const v = L(f, k); return v ? D.decode(v) : ''; };
+  const bytes = (f, k) => L(f, k) || EMPTY;
   const sgn = v => (v | 0);   // int32 / sfixed32 from the unsigned low 32 bits
-  const u = v => v || 0;
   const deg = v => (v | 0) / 1e7;
 
   /* ---- writer ---- */
@@ -87,31 +92,34 @@ const MPB = (() => {
   };
 
   /* ---- decoders ---- */
+  const NONE = parse(EMPTY);   // stands in for an absent nested message
   const position = safe(b => {
     const f = parse(b);
     if (f[1] === undefined && f[2] === undefined) return null;   // no fix
-    return { lat: deg(f[1]), lon: deg(f[2]), alt: sgn(f[3]), time: u(f[4]) };
+    return { lat: deg(F(f, 1)), lon: deg(F(f, 2)), alt: sgn(V(f, 3)), time: F(f, 4) };
   });
-  const user = safe(b => { const f = parse(b); return { longName: str(f[2]), shortName: str(f[3]) }; });
+  const user = safe(b => { const f = parse(b); return { longName: str(f, 2), shortName: str(f, 3) }; });
   const waypoint = safe(b => {
     const f = parse(b);
-    return { id: u(f[1]), lat: deg(f[2]), lon: deg(f[3]), expire: u(f[4]), lockedTo: u(f[5]), name: str(f[6]), description: str(f[7]), icon: u(f[8]) };
+    return { id: V(f, 1), lat: deg(F(f, 2)), lon: deg(F(f, 3)), expire: V(f, 4), lockedTo: V(f, 5), name: str(f, 6), description: str(f, 7), icon: F(f, 8) };
   });
 
   function packet(b) {
-    const f = parse(b), m = { type: 'packet', from: u(f[1]), to: u(f[2]), channel: u(f[3]), id: u(f[6]), rxTime: u(f[7]), portnum: null, payload: null };
-    if (f[4]) { const d = parse(f[4]); m.portnum = u(d[1]); m.payload = bytes(d[2]); }   // else still encrypted (field 5)
+    const f = parse(b), m = { type: 'packet', from: F(f, 1), to: F(f, 2), channel: V(f, 3), id: F(f, 6), rxTime: F(f, 7), portnum: null, payload: null };
+    if (L(f, 5) !== undefined && L(f, 4) === undefined) return m;   // still encrypted
+    if (f[4]) { const d = parse(L(f, 4)); m.portnum = V(d, 1); m.payload = bytes(d, 2); }
     return m;
   }
   function nodeInfo(b) {
-    const f = parse(b), us = f[2] ? user(f[2]) : null;
-    return { type: 'nodeInfo', num: u(f[1]), longName: us ? us.longName : '', shortName: us ? us.shortName : '',
-             position: f[3] ? position(f[3]) : null, lastHeard: u(f[5]), channel: u(f[7]) };
+    const f = parse(b), us = f[2] ? user(L(f, 2)) : null, ps = f[3] ? position(L(f, 3)) : null;
+    if (f[2] && !us) throw 0;
+    return { type: 'nodeInfo', num: V(f, 1), longName: us ? us.longName : '', shortName: us ? us.shortName : '',
+             position: ps, lastHeard: F(f, 5), channel: V(f, 7) };
   }
   function channel(b) {
-    const f = parse(b), s = f[2] ? parse(f[2]) : {}, ms = s[7] ? parse(s[7]) : {};
-    return { type: 'channel', index: sgn(f[1]), role: f[3] === 1 ? 'primary' : f[3] === 2 ? 'secondary' : 'disabled',
-             name: str(s[3]), psk: bytes(s[2]), positionPrecision: u(ms[1]) };
+    const f = parse(b), s = f[2] ? parse(L(f, 2)) : NONE, ms = s[7] ? parse(L(s, 7)) : NONE, role = V(f, 3);
+    return { type: 'channel', index: sgn(V(f, 1)), role: role === 1 ? 'primary' : role === 2 ? 'secondary' : 'disabled',
+             name: str(s, 3), psk: bytes(s, 2), positionPrecision: V(ms, 1) };
   }
 
   const fromRadio = (b) => {
@@ -120,12 +128,12 @@ const MPB = (() => {
       let last = 0;   // the FromRadio payload is a oneof: the last member present wins
       for (const k of order) if (k === 2 || k === 3 || k === 4 || k === 7 || k === 8 || k === 10) last = k;
       switch (last) {
-        case 2: return packet(f[2]);
-        case 3: return { type: 'myInfo', myNodeNum: u(parse(f[3])[1]) };
-        case 4: return nodeInfo(f[4]);
-        case 7: return { type: 'configComplete', id: f[7] };
-        case 8: return { type: 'rebooted' };
-        case 10: return channel(f[10]);
+        case 2: return packet(L(f, 2));
+        case 3: return { type: 'myInfo', myNodeNum: V(parse(L(f, 3)), 1) };
+        case 4: return nodeInfo(L(f, 4));
+        case 7: return { type: 'configComplete', id: V(f, 7) };
+        case 8: V(f, 8); return { type: 'rebooted' };
+        case 10: return channel(L(f, 10));
       }
     } catch (e) { /* fall through */ }
     return { type: 'other' };

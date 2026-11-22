@@ -136,7 +136,7 @@ def test_negative_and_large_values(ready):
     c = dec(page, 'fromRadio', meshref.ref_from_radio(channel=dict(index=-1, role=channel_pb2.Channel.PRIMARY)))
     assert c['index'] == -1
     # a varint that uses all 64 bits (-1 as int64) is read without error, low 32 bits kept
-    assert dec(page, 'position', bytes([0x18] + [0xff] * 9 + [0x01, 0x08, 0x01, 0x10, 0x01]))['alt'] == -1
+    assert dec(page, 'position', bytes([0x18] + [0xff] * 9 + [0x01, 0x0d, 1, 0, 0, 0, 0x15, 1, 0, 0, 0]))['alt'] == -1
     # written ids above 2**31 survive as unsigned fixed32
     got = enc(page, 'waypoint', dict(id=4294967295, lat=-43.0, lon=-76.0, icon=0x80000000))
     w = mesh_pb2.Waypoint()
@@ -212,3 +212,33 @@ def test_garbage_never_throws(ready):
     assert dec(page, 'fromRadio', bytes([0x12, 0x80, 0x80, 0x80, 0x80, 0x10])) == {'type': 'other'}
     assert dec(page, 'position', bytes([0x08] + [0x80] * 12)) is None
     assert dec(page, 'waypoint', bytes([0x32, 0x80, 0x80, 0x80, 0x80, 0x08])) is None
+
+
+def test_wrong_wire_types_are_rejected(ready):
+    page = ready
+    other = {'type': 'other'}
+    # a message field sent as a varint / fixed32 is not a message: no fabricated empty packet, myInfo, nodeInfo or channel
+    for b in (bytes([0x10, 0x05]), bytes([0x18, 0x05]), bytes([0x20, 0x05]), bytes([0x50, 0x05]),
+              bytes([0x15, 1, 0, 0, 0])):
+        assert dec(page, 'fromRadio', b) == other, list(b)
+    # Data.payload as a varint
+    data = bytes([0x08, 0x03, 0x10, 0x05])
+    mp = bytes([0x22, len(data)]) + data
+    assert dec(page, 'fromRadio', bytes([0x12, len(mp)]) + mp) == other
+    # channel psk as a varint
+    cs = bytes([0x10, 0x05])
+    ch = bytes([0x12, len(cs)]) + cs
+    assert dec(page, 'fromRadio', bytes([0x52, len(ch)]) + ch) == other
+    # NodeInfo.num length-delimited
+    ni = bytes([0x0a, 0x01, 0x07])
+    assert dec(page, 'fromRadio', bytes([0x22, len(ni)]) + ni) == other
+    # config_complete_id length-delimited
+    assert dec(page, 'fromRadio', bytes([0x3a, 0x01, 0x07])) == other
+    # the other decoders
+    assert dec(page, 'position', bytes([0x08, 0x05, 0x10, 0x05])) is None      # lat/lon as varints, not sfixed32
+    assert dec(page, 'position', bytes([0x1a, 0x01, 0x05, 0x0d, 1, 0, 0, 0])) is None   # altitude length-delimited
+    assert dec(page, 'user', bytes([0x10, 0x05])) is None                      # long_name as a varint
+    assert dec(page, 'waypoint', bytes([0x0a, 0x01, 0x05])) is None            # id length-delimited
+    assert dec(page, 'waypoint', bytes([0x30, 0x05])) is None                  # name as a varint
+    # the right types still decode
+    assert dec(page, 'fromRadio', bytes([0x38, 0x07])) == {'type': 'configComplete', 'id': 7}

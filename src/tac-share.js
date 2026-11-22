@@ -12,7 +12,7 @@
    again already expired (expire = 1, epoch seconds). On receipt, that form (any expiry at or before now) is a delete, and so
    is the reference package's form for a number this phone holds: only the id, no position, no name, expire 0. */
 (() => {
-  const { store, fin, on } = FK;
+  const { store, fin, on, emit } = FK;
   const DAY = 864e5, TOMB_MS = 30 * DAY, MAX_TOMBS = 2000, CAP = 500, GAP = 3000;
   const okWid = v => Number.isInteger(v) && v >= 1 && v <= 0xFFFFFFFF;
   let stopped = false;                 // a restore is replacing storage: write nothing more (the page reloads)
@@ -213,6 +213,7 @@
     if (expired || bare) {   // a delete: the maker keeps a private copy saying who deleted it
       if (!m) { tomb(wid); return; }
       idx.delete(wid);
+      notes.push({ id: m.id, what: 'deleted', name: d.name, kept: isMine(m) });
       endShared(m, `Deleted by ${d.name}.`);
       return;
     }
@@ -227,6 +228,7 @@
       FK.tac.updateMarker(m.id, patch);
       FK.tac.setNet(m.id, { ...m.net, chBy: d.name, chT: now, t: now, icon, expire: f.expire, rx: f.rx ? m.net.rx : false });
       idx.set(wid, find(m.id));
+      notes.push({ id: m.id, what: 'changed', name: d.name });
       return;
     }
     const added = FK.tac.addShared({ name: f.name, lat: f.lat, lon: f.lon, kind: f.kind, note: f.note, t: f.t,
@@ -235,19 +237,25 @@
   }
   /* Waypoints arrive in bursts: they wait here and apply once per animation frame (a timer stands in while the page is hidden,
      when frames stop), so a burst costs one storage write and one 'wps' event. */
-  let inbox = [], raf = 0, tmr = 0;
+  let inbox = [], raf = 0, tmr = 0, notes = [];
   function flush() {
     cancelAnimationFrame(raf); clearTimeout(tmr); raf = tmr = 0;
     const got = inbox;
     inbox = [];
     if (stopped || !got.length) return;
     const now = Date.now();
+    notes = [];
     FK.tac.batch(() => {
       const idx = indexShared();
       got.forEach(d => receive(d, now, idx));
       sweep(now, idx);
     });
     saveTombs();
+    /* 'shareIn' { id, what: 'changed' | 'deleted', name, kept }: a teammate changed or deleted a marker held here (kept: it
+       was mine, so a private copy stays). Emitted once the burst is stored, for the marker sheet open on it. */
+    const out = notes;
+    notes = [];
+    out.forEach(n => emit('shareIn', n));
   }
   on('meshWaypoint', d => {
     if (stopped || !d || !d.wp) return;

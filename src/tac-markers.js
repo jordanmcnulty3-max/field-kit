@@ -49,10 +49,10 @@
   const known = w => w.t > 0;
   const isStale = w => isAffil(w.kind) && known(w) && Date.now() - w.t > DAY;
   const hm = t => new Date(t).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-  const markedText = t => {
+  const markedText = (t, word = 'Marked') => {
     const d = new Date(t), same = d.toDateString() === new Date().toDateString();
     const age = ageText(t);
-    return `Marked ${same ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' '}${hm(t)}${age ? ', ' + age : ''}`;
+    return `${word} ${same ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' '}${hm(t)}${age ? ', ' + age : ''}`;
   };
   const gridText = (lat, lon) => { const g = GEO.toMGRS(lat, lon); return g ? g.text : `${lat.toFixed(5)}, ${lon.toFixed(5)}`; };
   const relText = (lat, lon) => FK.relText(lat, lon, m => TGEOM.fmtDist(m, FK.tac.unit()));   // app.js: one rule for live and last fixes
@@ -74,8 +74,8 @@
   }
 
   /* ---------- Marker sheet ---------- */
-  const dlg = $('#dlgMarker'), nameEl = $('#mkName'), noteEl = $('#mkNote');
-  let cur = null;   // { id (null for new), lat, lon, kind, typed (the name was edited by hand), t }
+  const dlg = $('#dlgMarker'), nameEl = $('#mkName'), noteEl = $('#mkNote'), shareEl = $('#mkShare');
+  let cur = null;   // { id (null for new), lat, lon, kind, typed (the name was edited by hand), t, rx (t is when it arrived) }
   const kindBtn = k => `<button type="button" class="mk-kind" data-kind="${k.id}" aria-pressed="false">${icon(k.id)}<span>${esc(k.label)}</span></button>`;
   $('#mkPlaces').innerHTML = FK.tac.KINDS.filter(k => k.group === 'place').map(kindBtn).join('');
   $('#mkAffil').innerHTML = FK.tac.KINDS.filter(k => k.group === 'affil').map(kindBtn).join('');
@@ -90,23 +90,81 @@
     dlg.querySelectorAll('.mk-kind').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.kind === kind)));
     if (!cur.id && !cur.typed) nameEl.value = defaultName(kind);
     renderAge();
+    renderLeft();
+  }
+
+  /* ---------- Share (src/tac-share.js): the switch, a shared marker's limits and its status lines ----------
+     The row shows only while the Settings switch is on and either a radio can send now or the marker is already shared (or
+     the user has just turned Share on). With the Settings switch off it stays hidden and the sheet is as it always was.
+     With Share on, a name and a note are counted in bytes against what a waypoint can carry (MMK): nothing is ever cut;
+     anything that would save over the limit is refused with LIMIT_MSG until it is shortened or Share is turned off. */
+  const setText = (el, text) => { el.hidden = !text; el.textContent = text || ''; };
+  const storedOf = () => cur && cur.id ? FK.tac.markers().find(x => x.id === cur.id) || null : null;
+  const netOf = () => { const w = storedOf(); return w && w.net ? w.net : null; };
+  const rowShown = () => !!cur && FK.mesh.enabled() && (FK.mesh.canShare() || !!netOf() || shareEl.checked);
+  const shareOn = () => rowShown() && shareEl.checked;
+  /* What Save will do about sharing: with the row hidden (the Settings switch off), whatever the marker was. */
+  const wantShare = () => rowShown() ? shareEl.checked : !!(opened ? opened.share : netOf());
+  const limitMsg = kind => `A shared marker’s name can be ${MMK.NAME_MAX} characters and its note ${MMK.noteRoom(kind)}. Shorten it, or turn Share off.`;
+  /* The name Save will store: what is typed, else the marker's own name (existing) or the default (new). */
+  const finalName = () => nameEl.value.trim() || (cur.id ? (storedOf() || { name: '' }).name : defaultName(cur.kind));
+  const room = () => ({ name: MMK.NAME_MAX - MMK.bytes(finalName()), note: MMK.noteRoom(cur.kind) - MMK.bytes(noteEl.value.slice(0, 500)) });
+  const over = () => { const r = room(); return r.name < 0 || r.note < 0; };
+  const chars = n => `${n} ${n === 1 ? 'character' : 'characters'}`;
+  function count(el, n) {
+    el.hidden = false;
+    el.textContent = n >= 0 ? `${chars(n)} left` : `${chars(-n)} too many`;
+    el.classList.toggle('mk-over', n < 0);
   }
   function renderLeft() {
+    const nameLeft = $('#mkNameLeft'), noteLeft = $('#mkLeft');
+    if (cur && shareOn()) {
+      const r = room();
+      count(nameLeft, r.name); count(noteLeft, r.note);
+      setText($('#mkLimit'), r.name < 0 || r.note < 0 ? limitMsg(cur.kind) : '');
+      return;
+    }
+    nameLeft.hidden = true; nameLeft.textContent = '';
+    setText($('#mkLimit'), '');
     const left = 500 - noteEl.value.length;
-    $('#mkLeft').hidden = left >= 50;
-    $('#mkLeft').textContent = `${left} ${left === 1 ? 'character' : 'characters'} left`;
+    noteLeft.classList.remove('mk-over');
+    noteLeft.hidden = left >= 50;
+    noteLeft.textContent = `${left} ${left === 1 ? 'character' : 'characters'} left`;
   }
+  /* A teammate changed or deleted this marker while the user was typing: this line replaces the status lines until the
+     sheet closes or refills. */
+  let conflict = '';
+  function renderShare() {
+    if (!cur) return;
+    const show = rowShown(), n = netOf();
+    $('#mkShareBox').hidden = !show;
+    setText($('#mkShareHint'), show && n && !shareEl.checked ? 'Your copy becomes private. Teammates keep theirs.' : '');
+    const lines = [];
+    if (conflict) lines.push(conflict);
+    else if (n) {
+      lines.push(`Shared by ${n.mine ? 'you' : n.by || 'a teammate'}`);
+      if (n.chBy) { const a = ageText(n.chT); lines.push(`Changed by ${n.chBy}${a ? ', ' + a : ''}`); }
+      if (n.pending) lines.push('Not sent yet: no radio connected');
+    }
+    setText($('#mkShareLine'), show ? lines.join('\n') : '');   // textContent: these names come from other people's radios
+    $('#mkResend').hidden = !(show && n && FK.mesh.canShare());
+    renderLeft();
+  }
+
   function renderAge() {
     const show = !!cur.id && isAffil(cur.kind) && cur.t > 0;
     $('#mkAge').hidden = !show;
-    $('#mkAge').textContent = show ? markedText(cur.t) : '';
+    $('#mkAge').textContent = show ? markedText(cur.t, cur.rx ? 'Received' : 'Marked') : '';
   }
   function fill(o) {
     cur = o;
     $('#mkTitle').textContent = o.id ? 'Marker' : 'New marker';
     nameEl.value = o.name; noteEl.value = o.note;
+    shareEl.checked = !!netOf();   // a new marker starts with Share off
+    conflict = '';
+    $('#mkResend').textContent = 'Send again';
     setKind(o.kind);
-    renderLeft();
+    renderShare();
     $('#mkGrid').textContent = gridText(o.lat, o.lon);
     const rel = relText(o.lat, o.lon);
     $('#mkRel').hidden = !rel; $('#mkRel').textContent = rel;
@@ -115,13 +173,29 @@
     $('#mkGo').textContent = o.id && o.id === targetId() ? 'Stop' : 'Go to';
     dlg.querySelector('.mk-body').scrollTop = 0;
     opened = null;
-    FK.sheet.open(dlg, { onClose: () => { cur = null; deleting = false; dlg.inert = false; opened = null; }, onOpen: () => { $('#mkTitle').focus(); snap(); },   // no keyboard popping up on a phone
+    FK.sheet.open(dlg, { onClose: () => { cur = null; deleting = false; dlg.inert = false; opened = null; conflict = ''; }, onOpen: () => { $('#mkTitle').focus(); snap(); },   // no keyboard popping up on a phone
       guard: { dirty: changed, title: 'Discard this marker?', text: 'The name, note and kind are not kept.' } });
   }
   /* What the sheet showed when it opened, so Back, Escape or a backdrop tap can ask before losing what was typed. */
   let opened = null;
-  const snap = () => { if (cur) opened = { name: nameEl.value, note: noteEl.value, kind: cur.kind }; };
-  const changed = () => !!cur && !!opened && !deleting && (nameEl.value !== opened.name || noteEl.value !== opened.note || cur.kind !== opened.kind);
+  const snap = () => { if (cur) opened = { name: nameEl.value, note: noteEl.value, kind: cur.kind, share: shareEl.checked }; };
+  const changed = () => !!cur && !!opened && !deleting &&
+    (nameEl.value !== opened.name || noteEl.value !== opened.note || cur.kind !== opened.kind || shareEl.checked !== opened.share);
+  /* The open sheet shows the marker as it is stored now (a teammate changed it and nothing here was typed). */
+  function refill() {
+    const w = storedOf();
+    if (!w) return;
+    cur = { ...cur, lat: w.lat, lon: w.lon, t: w.t, typed: true, rx: !!(w.net && w.net.rx) };
+    nameEl.value = w.name; noteEl.value = w.note;
+    shareEl.checked = !!w.net;
+    conflict = '';
+    setKind(w.kind);
+    renderShare();
+    $('#mkGrid').textContent = gridText(w.lat, w.lon);
+    const rel = relText(w.lat, w.lon);
+    $('#mkRel').hidden = !rel; $('#mkRel').textContent = rel;
+    snap();
+  }
   function create(lat, lon) {
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
     lon = ((lon + 540) % 360) - 180;
@@ -131,12 +205,13 @@
   }
   function edit(id) {
     const w = FK.tac.markers().find(x => x.id === id);
-    if (w) fill({ id, lat: w.lat, lon: w.lon, kind: w.kind, typed: true, t: w.t, name: w.name, note: w.note });
+    if (w) fill({ id, lat: w.lat, lon: w.lon, kind: w.kind, typed: true, t: w.t, name: w.name, note: w.note, rx: !!(w.net && w.net.rx) });
   }
 
   dlg.querySelector('.mk-kinds').addEventListener('click', e => { const b = e.target.closest('[data-kind]'); if (b && cur) setKind(b.dataset.kind); });
-  nameEl.addEventListener('input', () => { if (cur) cur.typed = true; });
-  noteEl.addEventListener('input', renderLeft);
+  nameEl.addEventListener('input', () => { if (cur) { cur.typed = true; renderLeft(); } });
+  noteEl.addEventListener('input', () => { if (cur) renderLeft(); });
+  shareEl.addEventListener('change', renderShare);
   $('#mkGrid').addEventListener('click', async () => {
     const t = $('#mkGrid').textContent;
     try { await navigator.clipboard.writeText(t); toast('Copied ' + t); } catch { toast(t); }
@@ -145,17 +220,22 @@
      session and shows the full-storage message itself, every time.
      With onlyIfChanged, an existing marker whose fields are unchanged is not written. */
   let deleting = false;   // Delete has been pressed: nothing else in the sheet may act
+  let wrote = false;      // the last commit() changed the marker (or made it)
   const exists = id => FK.tac.markers().some(x => x.id === id);
   function commit(onlyIfChanged) {
     const name = nameEl.value.trim(), note = noteEl.value.slice(0, 500), kind = cur.kind;
+    wrote = false;
     if (cur.id) {
       const w = FK.tac.markers().find(x => x.id === cur.id);
       const patch = { kind, note };
       if (name) patch.name = name;
-      if (onlyIfChanged && w.kind === kind && w.note === note && (!name || name === w.name)) return cur.id;
+      const same = w.kind === kind && w.note === note && (!name || name === w.name);
+      if (onlyIfChanged && same) return cur.id;
       FK.tac.updateMarker(cur.id, patch);
+      wrote = !same;
       return cur.id;
     }
+    wrote = true;
     const before = new Set(FK.tac.markers().map(x => x.id));
     const m = FK.tac.addMarker({ lat: cur.lat, lon: cur.lon, name: name || defaultName(kind), kind, note });
     if (m) { toast(`Added ${m.name}`); return m.id; }
@@ -166,11 +246,42 @@
   function gone() { FK.sheet.close(dlg); toast('That marker no longer exists.'); }
   const blocked = () => !cur || deleting;
 
+  /* After this phone changed a shared marker (a save here, or a move on the map): send it again under its number. */
+  function sendChange(id) {
+    FK.share.changed(id).then(r => {
+      const w = FK.tac.markers().find(x => x.id === id);
+      if (r === 'toolong' && w) toast(limitMsg(w.kind));
+    });
+  }
+  /* commit() with Share around it. false: refused (Share is on and the name or note is over a shared marker's limit; the
+     sheet stays open with the message). Otherwise what commit() returned, after: Share newly on shares the marker; Share
+     turned off stops sharing it (the copy here becomes private); a shared marker that changed is sent again. A shared marker
+     saved unchanged is not sent (Send again is there for that): an old copy must not overwrite a teammate's newer edit. */
+  function save(onlyIfChanged) {
+    if (shareOn() && over()) {
+      setText($('#mkLimit'), limitMsg(cur.kind));
+      $('#mkLimit').scrollIntoView({ block: 'nearest' });
+      return false;
+    }
+    const want = wantShare(), was = !!(opened ? opened.share : netOf());
+    const id = commit(onlyIfChanged);
+    if (!id) return id;
+    const shared = FK.share.isShared(id);
+    if (want && !was && !shared) {
+      FK.share.share(id).then(r => {
+        if (r === 'sent') toast('Shared');
+        else if (r === 'toolong') { const w = FK.tac.markers().find(x => x.id === id); if (w) toast(limitMsg(w.kind)); }
+      });   // 'pending': the sheet says "Not sent yet"; 'no': storage refused (tac-data said so) or the switch is off
+    } else if (!want && was && shared) FK.share.unshare(id);
+    else if (want && shared && wrote) sendChange(id);
+    return id;
+  }
+
   $('#mkForm').addEventListener('submit', e => {
     e.preventDefault();
     if (blocked()) return;
     if (cur.id && !exists(cur.id)) { gone(); return; }
-    commit(false);
+    if (save(false) === false) return;
     FK.sheet.close(dlg);
   });
   $('#mkCancel').addEventListener('click', () => FK.sheet.close(dlg));
@@ -179,7 +290,8 @@
     if (blocked()) return;
     if (cur.id && !exists(cur.id)) { gone(); return; }
     const stop = !!cur.id && cur.id === targetId();
-    const id = commit(true);
+    const id = save(true);
+    if (id === false) return;
     if (stop) FK.tac.setTarget(null);
     else if (id) FK.tac.setTarget({ type: 'marker', id });
     FK.sheet.close(dlg);
@@ -188,7 +300,8 @@
   $('#mkMove').addEventListener('click', () => {
     if (blocked() || !cur.id) return;
     if (!exists(cur.id)) { gone(); return; }
-    const id = commit(true);
+    const id = save(true);
+    if (id === false) return;
     FK.sheet.close(dlg);
     FK.mapTools.moveMarker(id);   // its history entry waits for this sheet's step back
   });
@@ -197,6 +310,7 @@
     const id = cur.id, w = FK.tac.markers().find(x => x.id === id);
     if (!w) { gone(); return; }
     deleting = true;
+    if (w.net) { deleteShared(id, w); return; }
     const yes = await FK.sheet.confirm({ title: 'Delete the marker?', text: `Delete marker ${w.name}? This can’t be undone.`, ok: 'Delete marker', danger: true });
     if (!yes || !cur || cur.id !== id) { deleting = false; return; }
     FK.tac.removeMarker(id);
@@ -204,6 +318,77 @@
     // The confirm's own step back is still on its way: close the marker sheet once it has landed.
     FK.sheet.afterStep(() => FK.sheet.close(dlg));
   });
+  /* A shared marker: for everyone (offered only when a radio can send now) or on this phone only. Either way it goes through
+     FK.share.remove, which remembers its number so a teammate's later send cannot bring it back. */
+  const ddlg = $('#dlgMkDel');
+  function askDelete(w) {
+    const all = FK.mesh.canShare();
+    $('#mdText').textContent = `Delete marker ${w.name}? This can’t be undone.`;
+    $('#mdAll').hidden = !all;
+    $('#mdHere').classList.toggle('danger', !all);
+    $('#mdHere').classList.toggle('ghost', all);
+    return new Promise(resolve => {
+      let result = null;   // Cancel, Back, Escape and a backdrop tap all leave it null
+      $('#mdAll').onclick = () => { result = 'all'; FK.sheet.close(ddlg); };
+      $('#mdHere').onclick = () => { result = 'here'; FK.sheet.close(ddlg); };
+      $('#mdCancel').onclick = () => FK.sheet.close(ddlg);
+      FK.sheet.open(ddlg, { onClose: () => resolve(result), onOpen: () => $('#mdTitle').focus() });   // a stray Enter takes no choice
+    });
+  }
+  async function deleteShared(id, w) {
+    const choice = await askDelete(w);
+    if (!choice || !cur || cur.id !== id || dlg.inert) { if (cur && !dlg.inert) deleting = false; return; }
+    const everyone = choice === 'all';
+    const done = FK.share.remove(id, everyone);   // the marker is gone from this phone before this returns
+    dlg.inert = true;
+    // The question's own step back is still on its way: close the marker sheet once it has landed.
+    FK.sheet.afterStep(() => FK.sheet.close(dlg));
+    const r = await done;
+    if (r === 'no') toast('That marker no longer exists.');
+    else if (everyone) toast(r === 'sent' ? 'Deleted for everyone' : 'Deleted on this phone. Couldn’t reach the radio, so teammates still have it.');
+  }
+  /* Send again: the marker as it is stored (not what is typed) goes out again under its number. */
+  let resending = false, sentTimer = 0;
+  $('#mkResend').addEventListener('click', async () => {
+    if (blocked() || !cur.id || resending) return;
+    if (!exists(cur.id)) { gone(); return; }
+    const id = cur.id, kind = (storedOf() || {}).kind;
+    resending = true;
+    let r;
+    try { r = await FK.share.resend(id); } finally { resending = false; }
+    if (r === 'toolong') { toast(limitMsg(kind)); if (cur && cur.id === id) setText($('#mkLimit'), limitMsg(kind)); return; }
+    if (r !== 'sent') return;   // 'pending': the status line now says "Not sent yet"
+    toast('Sent');
+    const b = $('#mkResend');   // the toast sits under an open sheet: say it on the button too
+    b.textContent = 'Sent';
+    clearTimeout(sentTimer);
+    sentTimer = setTimeout(() => { b.textContent = 'Send again'; }, 2000);
+  });
+
+  /* A teammate changed or deleted the marker whose sheet is open (src/tac-share.js 'shareIn'). Deleted (and not this
+     phone's own marker): the sheet closes, whatever was typed. Otherwise, with nothing typed, the sheet shows the marker as
+     it is now; with typing, the typing stays and a line says what happened (Save keeps the typed version). */
+  FK.on('shareIn', d => {
+    if (!d || !dlg.open || !cur || !cur.id || d.id !== cur.id || dlg.inert) return;
+    if (d.what === 'deleted' && !d.kept) {
+      deleting = true;   // no "Discard?" for a marker that is gone, and nothing else in the sheet may act
+      dlg.inert = true;
+      toast(`${d.name} deleted this marker`);
+      FK.sheet.afterStep(() => FK.sheet.close(dlg));   // closes the delete question too, if it is open
+      return;
+    }
+    if (deleting) return;   // the delete question is open: its answer decides
+    const typed = changed();
+    if (!typed) { refill(); return; }
+    if (d.what === 'deleted') {   // this phone's own marker: it is private now
+      shareEl.checked = false;
+      if (opened) opened.share = false;
+      conflict = `${d.name} deleted this marker for everyone. Your copy is now private.`;
+    } else conflict = `This marker was changed by ${d.name} while you were editing. Saving keeps your version.`;
+    renderShare();
+  });
+  FK.on('mesh', () => { if (dlg.open && cur) renderShare(); });
+  FK.on('wps', () => { if (dlg.open && cur && !dlg.inert) renderShare(); });
 
   /* ---------- List sheet: markers and drawn shapes (tac-shapes.js) together ---------- */
   const ldlg = $('#dlgList');
@@ -304,6 +489,7 @@
     if (ldlg.open) renderList();
     if (dlg.open && cur) {
       renderAge();
+      renderShare();
       const rel = relText(cur.lat, cur.lon);
       $('#mkRel').hidden = !rel; $('#mkRel').textContent = rel;
     }
@@ -318,5 +504,5 @@
   document.addEventListener('visibilitychange', () => { syncTimer(); if (tick) refresh(); });
   syncTimer();
 
-  FK.markers = { icon, line: LINE, edit, create, openList, render, ageText, timerOn: () => !!tick };
+  FK.markers = { icon, line: LINE, edit, create, openList, render, ageText, sendChange, timerOn: () => !!tick };
 })();

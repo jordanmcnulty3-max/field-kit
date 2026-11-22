@@ -5,7 +5,7 @@
    can send 100+ events in one tick) and the sheet is only redrawn while it is open. Every name comes from another person's
    radio, so everything that reaches innerHTML goes through FK.esc. */
 (() => {
-  const { $, esc, on } = FK;
+  const { $, esc, on, toast } = FK;
   const dlg = $('#dlgRadio');
   /* The button is made here and only while the switch is on: with it off the map has its four buttons and nothing else. */
   let btn = null;
@@ -86,6 +86,9 @@
       $('#rdTeamH').textContent = `Teammates (${team.length})`;
       $('#rdTeam').innerHTML = team.length ? rows(team) : '<li class="hint">No teammates heard yet.</li>';
     }
+    // shared markers: the cap's line, and sending this phone's own shared markers again (src/tac-share.js)
+    show($('#rdDropped'), FK.share.dropped() > 0 ? 'Some older markers from teammates were dropped: this phone holds 500.' : '');
+    $('#rdResend').hidden = !(FK.mesh.canShare() && FK.tac.markers().some(m => m.net && FK.share.mine(m.id)));
   }
 
   let queued = 0;
@@ -107,6 +110,10 @@
   $('#rdConnect').addEventListener('click', connectTap);
   $('#rdDisconnect').addEventListener('click', () => { if (performance.now() >= noDisc) FK.mesh.disconnect(); });
   $('#rdClose').addEventListener('click', () => FK.sheet.close(dlg));
+  $('#rdResend').addEventListener('click', () => {
+    const n = FK.share.resendMine();
+    toast(n ? `Sending ${n} ${n === 1 ? 'marker' : 'markers'}` : 'Nothing new to send');
+  });
 
   function open() {
     if (!FK.mesh.enabled()) return;
@@ -115,6 +122,7 @@
 
   on('mesh', () => { if (!FK.mesh.enabled() && dlg.open) FK.sheet.close(dlg); redraw(); });
   on('team', () => { if (dlg.open) redraw(); });
+  on('wps', () => { if (dlg.open) redraw(); });
   drawButton();
 
   FK.radioSheet = { open };

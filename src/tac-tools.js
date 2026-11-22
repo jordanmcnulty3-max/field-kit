@@ -241,6 +241,7 @@
     if (w) {
       // A failed save still moves the marker for this session; tac-data shows the full-storage message itself.
       if (FK.tac.updateMarker(id, { lat: c[0], lon: c[1], alt: null })) toast(`Moved ${w.name}`);
+      if (FK.share.isShared(id)) FK.markers.sendChange(id);   // a shared marker goes out again at its new place (tac-markers.js)
     }
     leave();
   });

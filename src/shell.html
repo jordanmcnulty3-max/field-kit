@@ -521,7 +521,7 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .mk-gridline{display:block;border:0;background:none;padding:8px 0 0;min-height:44px;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left}
 .mk-rel{margin:0;font-size:14px;color:var(--muted)}
 .mk-count{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
-.mk-sheet h2:focus,#cfTitle:focus{outline:none}
+.mk-sheet h2:focus,#cfTitle:focus,#mdTitle:focus{outline:none}
 .mk-chips{display:flex;gap:6px;margin:0 -16px 8px;padding:0 16px 4px;overflow-x:auto;scrollbar-width:none}
 .mk-chips::-webkit-scrollbar{display:none}
 .mk-chips button{flex:none;white-space:nowrap;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:14px;cursor:pointer}
@@ -590,6 +590,18 @@ body.maptool #tacSeg{display:none}
 .tl-list button svg{flex:none;width:24px;height:24px}
 .tl-list .hint{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:2px}
 #dlgMarker .mk-act{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* comms share: the Share switch, its limits and status lines (only while the radio link is switched on) */
+.mk-share{margin:8px 0 4px;border-top:1px solid var(--line)}
+.mk-share .opt{border-top:0;align-items:center;min-height:48px;padding:6px 0;font-size:17px;font-weight:600}
+.mk-share .opt input{margin-top:0}
+.mk-msg{margin:0 0 8px;color:var(--blaze);font-weight:600;overflow-wrap:anywhere}
+.mk-shline{margin:0 0 4px;font-size:15px;color:var(--ink);overflow-wrap:anywhere;white-space:pre-line}
+.mk-share .hint{margin:0 0 6px}
+#mkResend{width:100%;min-height:48px;margin:4px 0 4px}
+.mk-left{margin:4px 0 0}
+.mk-over{color:var(--blaze);font-weight:600}
+#dlgMkDel .row:has(>.btn[hidden]){display:none}
+/* /comms share */
 #dlgShape .mk-act .btn[hidden]{display:none}
 #shType{margin-top:-6px}
 #shName{overflow-wrap:anywhere}
@@ -1158,11 +1170,19 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 </dialog>
 
 <!-- v7.8 markers -->
+<dialog id="dlgMkDel" class="sheet" aria-labelledby="mdTitle">
+  <h2 id="mdTitle" tabindex="-1">Delete this marker?</h2>
+  <p id="mdText"></p>
+  <div class="row"><button type="button" class="btn danger full" id="mdAll">Delete for everyone</button></div>
+  <div class="row"><button type="button" class="btn ghost full" id="mdHere">Delete on this phone only</button></div>
+  <div class="row"><button type="button" class="btn ghost full" id="mdCancel">Cancel</button></div>
+</dialog>
 <dialog id="dlgMarker" class="sheet mk-sheet" aria-labelledby="mkTitle">
   <form id="mkForm" autocomplete="off">
     <div class="mk-body">
       <h2 id="mkTitle" tabindex="-1">Marker</h2>
       <label class="f">Name<input id="mkName" type="text" maxlength="60" enterkeyhint="done"></label>
+      <p class="hint mk-left" id="mkNameLeft" hidden></p>
       <fieldset class="mk-kinds">
         <legend>Kind</legend>
         <div class="mk-grid" id="mkPlaces"></div>
@@ -1171,6 +1191,13 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       </fieldset>
       <label class="f">Note<textarea id="mkNote" maxlength="500" rows="2"></textarea></label>
       <p class="hint" id="mkLeft" hidden></p>
+      <div class="mk-share" id="mkShareBox" hidden>
+        <label class="opt"><input type="checkbox" id="mkShare" role="switch" aria-describedby="mkShareHint"><span>Share with teammates</span></label>
+        <p class="mk-msg" id="mkLimit" role="alert" hidden></p>
+        <p class="hint" id="mkShareHint" hidden></p>
+        <p class="mk-shline" id="mkShareLine" hidden></p>
+        <button type="button" class="btn ghost" id="mkResend" hidden>Send again</button>
+      </div>
       <button type="button" class="mk-gridline" id="mkGrid" translate="no" aria-describedby="mkGridHint"></button><span class="vh" id="mkGridHint">Tap to copy the grid.</span>
       <p class="mk-rel" id="mkRel" hidden></p>
       <p class="mk-rel" id="mkAge" hidden></p>
@@ -1269,6 +1296,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <h3 class="rd-h" id="rdTeamH"></h3>
       <ul class="mk-list rd-team" id="rdTeam"></ul>
     </div>
+    <p class="rd-line" id="rdDropped" hidden></p>
     <button type="button" class="btn ghost rd-resend" id="rdResend" hidden>Send all my shared markers again</button>
   </div>
   <div class="mk-act">

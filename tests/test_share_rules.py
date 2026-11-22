@@ -196,6 +196,27 @@ def test_incoming_known_wid_updates_name_note_kind_position_and_changed_by(page,
     assert len(markers(page)) == 1
 
 
+def test_teammate_update_of_mine_keeps_it_mine(page, app_url):
+    start(page, app_url, wps=[mk('a', net(65, frm=ME, by='Alpha'))], link='private')
+    incoming(page, BRAVO, id=65, lat=43.01, lon=-76.0, name='Camp moved', icon=ICON['camp'])
+    m = one(page, 'a')
+    assert (m['name'], m['kind'], m['lat'], m['net']['from'], m['net']['by'], m['net']['chBy']) == \
+        ('Camp moved', 'camp', 43.01, ME, 'Alpha', 'Radio 0c02')
+    assert js(page, "() => FK.share.mine('a')") is True and len(markers(page)) == 1
+
+
+def test_after_unshare_a_teammates_copy_comes_back_as_a_new_shared_marker(page, app_url):
+    """Stop sharing leaves no tomb (it is not a delete): teammates keep their copies, and one they send again arrives as a
+    new shared marker beside the private one. A delete under that number only leaves a tomb."""
+    start(page, app_url, wps=[mk('a', net(67, frm=ME), name='Camp')], link='private')
+    assert js(page, "() => FK.share.unshare('a')") is True
+    incoming(page, BRAVO, id=67, lat=43.0, lon=-76.0, name='Camp')
+    ms = markers(page)
+    assert len(ms) == 2 and 'net' not in ms[0] and ms[1]['net']['wid'] == 67 and ms[1]['net']['from'] == BRAVO
+    incoming(page, BRAVO, id=67, lat=43.0, lon=-76.0, expire=1)
+    assert [m['id'] for m in markers(page)] == ['a'] and 'net' not in one(page, 'a') and tombs(page) == [67]
+
+
 def test_incoming_past_expiry_is_a_delete(page, app_url):
     start(page, app_url, wps=[mk('a', net(61)), mk('b', net(62))], link='private')
     incoming(page, CHARLIE, id=61, lat=43.0, lon=-76.0, name='Camp', expire=1)
@@ -206,12 +227,13 @@ def test_incoming_past_expiry_is_a_delete(page, app_url):
 
 
 def test_incoming_malformed_is_ignored(page, app_url):
-    start(page, app_url, wps=[mk('a', net(64), name='Camp')], link='private')
+    start(page, app_url, wps=[mk('a', net(64), name='Camp'), mk('m', net(66, frm=ME), name='Mine')], link='private')
     before = markers(page)
     incoming(page, CHARLIE, id=64, name='No place')                          # no position (0, 0)
     incoming(page, CHARLIE, id=64, lat=95.0, lon=-76.0, name='Off the map')
     incoming(page, CHARLIE, id=0, lat=43.0, lon=-76.0, name='No number')    # no waypoint number
     incoming(page, CHARLIE, id=65, name='Nowhere new')
+    incoming(page, CHARLIE, id=66, lat=0.0, lon=0.0, name='Mine moved to nowhere')
     feed_packet(page, CHARLIE, WPT, b'\xff\xff\xff')                          # bytes that do not decode
     settle(page)
     assert markers(page) == before and tombs(page) == []
@@ -224,17 +246,18 @@ def test_incoming_delete_removes_and_tombs(page, app_url):
 
 
 def test_incoming_delete_of_mine_keeps_a_private_copy_with_a_note(page, app_url):
-    start(page, app_url, wps=[mk('a', net(68, frm=ME), note='by the oak'), mk('b', net(69, frm=ME), note='x' * 495)],
-          link='private')
-    incoming(page, BRAVO, id=68, lat=43.0, lon=-76.0, expire=1)
-    incoming(page, BRAVO, id=69, lat=43.0, lon=-76.0, expire=1)
+    start(page, app_url, wps=[mk('a', net(68, frm=ME), note='by the oak'), mk('b', net(69, frm=ME), note='x' * 495),
+                              mk('c', net(70, frm=ME))], link='private')
+    for wid in (68, 69, 70):
+        incoming(page, BRAVO, id=wid, lat=43.0, lon=-76.0, expire=1)
+    assert one(page, 'c')['note'] == 'Deleted by Radio 0c02.' and 'net' not in one(page, 'c')
     a, b = one(page, 'a'), one(page, 'b')
     assert 'net' not in a and a['note'] == 'Deleted by Radio 0c02. by the oak'     # the deleter's radio name
     assert 'net' not in b and b['note'] == ('Deleted by Radio 0c02. ' + 'x' * 495)[:500] and len(b['note']) == 500
-    assert sorted(tombs(page)) == [68, 69]
+    assert sorted(tombs(page)) == [68, 69, 70]
     # deleted markers stay deleted: a teammate who missed the delete cannot bring it back
     incoming(page, CHARLIE, id=68, lat=43.0, lon=-76.0, name='Camp')
-    assert len(markers(page)) == 2 and 'net' not in one(page, 'a')
+    assert len(markers(page)) == 3 and 'net' not in one(page, 'a')
 
 
 @pytest.mark.parametrize('event', ['update', 'delete', 'future', 'malformed'])
@@ -340,8 +363,9 @@ def test_pending_markers_are_sent_on_connect_3s_apart(page, app_url):
            mk('d', net(84, frm=ME, pending=True))]
     start(page, app_url, wps=wps, link=False, clock=NOW)
     assert js(page, '() => FK.mesh.connect()') is True
+    assert sent_wps(page) == []                            # never from inside the start-up handler: a timer starts it
     page.clock.run_for(50)
-    assert [w.id for w in sent_wps(page)] == [81]          # the first at once, never from inside the start-up handler
+    assert [w.id for w in sent_wps(page)] == [81]          # the first at once
     page.clock.run_for(2_900)
     assert len(sent_wps(page)) == 1
     page.clock.run_for(100)

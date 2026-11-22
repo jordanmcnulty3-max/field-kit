@@ -6,7 +6,7 @@
    On the wire a delete is the waypoint sent again already expired (expire = 1, epoch seconds). */
 (() => {
   const { store, fin, on } = FK;
-  const DAY = 864e5, TOMB_MS = 30 * DAY, MAX_TOMBS = 5000, CAP = 500, GAP = 3000;
+  const DAY = 864e5, TOMB_MS = 30 * DAY, MAX_TOMBS = 2000, CAP = 500, GAP = 3000;
   const okWid = v => Number.isInteger(v) && v >= 1 && v <= 0xFFFFFFFF;
   let stopped = false;                 // a restore is replacing storage: write nothing more (the page reloads)
 
@@ -60,6 +60,7 @@
     const who = m.net.from === 0 && me() !== null ? { from: me(), by: FK.mesh.nameOf(me()) } : {};
     lastSend = Date.now();
     const ok = await FK.mesh.sendWaypoint(wpOf(m));
+    if (stopped) return ok ? 'sent' : 'pending';                 // a restore replaced storage meanwhile: write nothing
     const after = find(id);
     if (after && after.net && after.net.wid === m.net.wid) {   // still held and shared under the same number
       if (ok) FK.tac.setNet(id, { ...after.net, ...who, pending: false, t: Date.now() });
@@ -182,7 +183,7 @@
       idx.delete(wid);
       if (isMine(m)) {   // the maker keeps it, private, with who deleted it
         FK.tac.setNet(m.id, null);
-        FK.tac.updateMarker(m.id, { note: `Deleted by ${d.name}. ${m.note}`.slice(0, FK.tac.MAX_NOTE) });
+        FK.tac.updateMarker(m.id, { note: (`Deleted by ${d.name}.` + (m.note ? ' ' + m.note : '')).slice(0, FK.tac.MAX_NOTE) });
       } else FK.tac.removeMarker(m.id);
       return;
     }

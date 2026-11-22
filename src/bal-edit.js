@@ -4,7 +4,10 @@
 (() => {
   const FK = window.FK;
   const { $, toast } = FK;
-  const { within } = FK.balHost;
+  const { within, RANGE } = FK.balHost;
+  const fmtN = n => n.toLocaleString('en-US', { maximumFractionDigits: 3 });
+  /* A range refusal from the one table of ranges: "Muzzle velocity must be between 300 and 5,000 fps." */
+  const between = (what, k, unit, tail) => `${what} must be between ${fmtN(RANGE[k][0])} and ${fmtN(RANGE[k][1])}${unit}${tail || ''}.`;
   const fin = FK.fin;
   const copy = p => JSON.parse(JSON.stringify(p));
   const F = id => $('#' + id);
@@ -12,11 +15,6 @@
      One sheet (#dlgRifle). An own profile can be saved in place, saved as a new profile or deleted; a built-in load only
      saved as a new profile. The sight and the zero conditions are stored on the profile and never reach BAL.solve. */
   const dlg = F('dlgRifle');
-  const CLICK_CHOICES = {
-    mil: [[0.1, '0.1 mil'], [0.05, '0.05 mil']],
-    moa: [[0.25, '1/4 MOA'], [0.125, '1/8 MOA'], [0.5, '1/2 MOA'], [1, '1 MOA']],
-    iphy: [[0.25, '1/4 in'], [0.125, '1/8 in'], [0.5, '1/2 in'], [1, '1 in']]
-  };
   const E = ['rfName', 'rfBC', 'rfModel', 'rfW', 'rfMV', 'rfSH', 'rfZero', 'rfOptic', 'rfUnit', 'rfClick', 'rfMarks', 'rfZTemp', 'rfZAlt', 'rfZPress'];
   let editing = null;        // { base: profile, own: bool } while the sheet is open
   let opened = null;         // what the sheet showed when it opened
@@ -28,7 +26,7 @@
   let unitTouched = false;   // the person chose the unit in rfTrueUnit; otherwise it follows the Sight and Unit fields
 
   function fillClicks(unitKey, want) {
-    const list = CLICK_CHOICES[unitKey].slice();
+    const list = FK.balHost.CLICK_SIZES[unitKey].map(c => [c, BALS.clickWord(c, unitKey)]);
     if (want !== undefined && !list.some(c => c[0] === want)) list.push([want, String(want)]);
     F('rfClick').innerHTML = list.map(c => `<option value="${c[0]}">${c[1]}</option>`).join('');
     F('rfClick').value = String(want !== undefined ? want : list[0][0]);
@@ -94,11 +92,11 @@
     const name = F('rfName').value.trim();
     if (!name && !forShot) return bad('Give the profile a name.', 'rfName');
     const bc = numOf('rfBC'), mv = numOf('rfMV'), zero = numOf('rfZero'), sh = numOf('rfSH'), w = numOf('rfW');
-    if (!within(bc, 'bc')) return bad('Ballistic coefficient must be between 0.05 and 1.2.', 'rfBC');
-    if (!within(mv, 'mv')) return bad('Muzzle velocity must be between 300 and 5,000 fps.', 'rfMV');
-    if (!within(zero, 'zero')) return bad('Zero range must be between 5 and 1,000 yd.', 'rfZero');
-    if (w !== null && w !== 0 && !within(w, 'w')) return bad('Bullet weight must be between 1 and 1,000 gr, or blank.', 'rfW');
-    if (sh !== null && !within(sh, 'sight')) return bad('Sight height must be between 0 and 6 in.', 'rfSH');
+    if (!within(bc, 'bc')) return bad(between('Ballistic coefficient', 'bc', ''), 'rfBC');
+    if (!within(mv, 'mv')) return bad(between('Muzzle velocity', 'mv', ' fps'), 'rfMV');
+    if (!within(zero, 'zero')) return bad(between('Zero range', 'zero', ' yd'), 'rfZero');
+    if (w !== null && w !== 0 && !within(w, 'w')) return bad(between('Bullet weight', 'w', ' gr', ', or blank'), 'rfW');
+    if (sh !== null && !within(sh, 'sight')) return bad(between('Sight height', 'sight', ' in'), 'rfSH');
     const out = { name, bc, model: F('rfModel').value, w: w || 0, mv, sight: sh || 0, zero, optic: null, zeroAtm: null };
     const t = forShot ? 'none' : F('rfOptic').value, unit = F('rfUnit').value;     // the sight never reaches the solver
     if (t === 'turret') out.optic = { type: 'turret', unit, click: parseFloat(F('rfClick').value) };
@@ -110,9 +108,9 @@
     }
     const temp = numOf('rfZTemp'), alt = numOf('rfZAlt'), press = numOf('rfZPress');
     if (temp !== null || alt !== null || press !== null) {
-      if (temp !== null && !within(temp, 'temp')) return bad('Temperature must be between -60 and 140 \u00b0F.', 'rfZTemp');
-      if (alt !== null && !within(alt, 'alt')) return bad('Altitude must be between -2,000 and 30,000 ft.', 'rfZAlt');
-      if (press !== null && !within(press, 'press')) return bad('Station pressure must be between 8 and 33 inHg.', 'rfZPress');
+      if (temp !== null && !within(temp, 'temp')) return bad(between('Temperature', 'temp', ' \u00b0F'), 'rfZTemp');
+      if (alt !== null && !within(alt, 'alt')) return bad(between('Altitude', 'alt', ' ft'), 'rfZAlt');
+      if (press !== null && !within(press, 'press')) return bad(between('Station pressure', 'press', ' inHg'), 'rfZPress');
       if (temp === null || (alt === null && press === null)) return bad('Zero conditions need a temperature and an altitude or a pressure.', temp === null ? 'rfZTemp' : 'rfZAlt');
       const base = editing.base.zeroAtm;
       out.zeroAtm = { temp, rh: base && fin(base.rh) ? base.rh : 50 };
@@ -219,9 +217,7 @@
     if (v.error) return show(v.error);                          // the editor's own message for what is wrong
     const air = FK.bal.shotAir();
     if (!air) return show(MORE.air);
-    const za = v.zeroAtm;
-    const p = { bc: v.bc, model: v.model, w: v.w, mv: v.mv, sight: v.sight, zero: v.zero, ...air,
-      zeroAtm: za && { temp: za.temp, alt: za.alt === undefined ? 0 : za.alt, press: za.press === undefined ? 0 : za.press, rh: za.rh } };
+    const p = { bc: v.bc, model: v.model, w: v.w, mv: v.mv, sight: v.sight, zero: v.zero, ...air, zeroAtm: FK.balHost.zeroAir(v.zeroAtm) };
     const r = BAL.trueMv(p, yd, angle);
     if (r.error) return show(r.error === 'bad' ? MORE.ask : MORE[r.error]);
     /* BAL.trueMv checks Mach 1.2 at the profile's velocity; the velocity found must be above it there too, or the answer is mostly

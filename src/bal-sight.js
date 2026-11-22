@@ -176,5 +176,5 @@ const BALS = (() => {
     return parts.join(' \u00b7 ');
   }
 
-  return { answer, all, cols, cells, toAngle, describe, zeroLine, path, loadLine };
+  return { answer, all, cols, cells, toAngle, describe, zeroLine, path, loadLine, clickWord };
 })();

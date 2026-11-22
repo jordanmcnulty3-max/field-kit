@@ -697,3 +697,24 @@ def test_marks_typed_with_decimal_commas_or_below_zero_say_what_is_wrong(page, a
     page.click('#rfSave')
     expect(page.locator(DLG)).to_be_hidden()
     assert profiles(page)[0]['optic']['marks'] == [1, 2, 3]
+
+
+def test_the_editor_uses_the_screens_own_rules(page, app_url):
+    """One definition of each shared rule (src/bal-ui.js, through FK.balHost): click sizes, ranges, the marks rule, the zero air."""
+    open_editor(page, app_url)
+    host = page.evaluate('Object.keys(FK.balHost).sort()')
+    for k in ('CLICK_SIZES', 'RANGE', 'marksOk', 'parseNum', 'within', 'zeroAir'):
+        assert k in host, k
+    sizes = page.evaluate('FK.balHost.CLICK_SIZES')
+    page.select_option('#rfOptic', 'turret')
+    for unit in ('mil', 'moa', 'iphy'):
+        page.select_option('#rfUnit', unit)
+        got = [float(v) for v in page.locator('#rfClick option').evaluate_all('o => o.map(x => x.value)')]
+        assert got == sizes[unit], unit
+        for c in got:
+            assert page.evaluate('o => !!FK.bal.clean({ id: "u9", name: "x", optic: o }).optic', {'type': 'turret', 'unit': unit, 'click': c})
+    rng = page.evaluate('FK.balHost.RANGE')
+    page.fill('#rfMV', str(rng['mv'][1] + 1))
+    page.click('#rfSave')
+    expect(page.locator('#rfMsg')).to_have_text(f"Muzzle velocity must be between {rng['mv'][0]:,} and {rng['mv'][1]:,} fps.")
+    assert page.evaluate('FK.balHost.zeroAir({ temp: 40, alt: 300, rh: 50 })') == {'temp': 40, 'alt': 300, 'press': 0, 'rh': 50}

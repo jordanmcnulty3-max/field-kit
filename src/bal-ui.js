@@ -35,7 +35,10 @@
      clean() first, so a hand-edited or damaged entry cannot break the screen or inject markup. */
   /* Ids that were once built in. A stored selection naming one becomes an own profile named for what it was. */
   const RETIRED = { p556: '5.56 NATO 62 gr (old built-in)', p76239: '7.62\u00d739 123 gr (old built-in)' };
-  const UNITS = ['mil', 'moa', 'iphy'], CLICKS = [0.1, 0.05, 0.25, 0.125, 0.5, 1];
+  /* The click sizes the editor offers for each unit; a stored turret may carry any of them under any unit (as before). */
+  const UNITS = ['mil', 'moa', 'iphy'];
+  const CLICK_SIZES = Object.freeze({ mil: Object.freeze([0.1, 0.05]), moa: Object.freeze([0.25, 0.125, 0.5, 1]), iphy: Object.freeze([0.25, 0.125, 0.5, 1]) });
+  const CLICKS = [...new Set([].concat(CLICK_SIZES.mil, CLICK_SIZES.moa, CLICK_SIZES.iphy))];
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const isObj = v => !!v && typeof v === 'object' && !Array.isArray(v);
   const fin = FK.fin;
@@ -390,8 +393,10 @@
     profiles: () => profiles.map(copy),
     selected: () => copy(anyProfile(cur))
   };
-  /* For src/bal-edit.js only: its read-only seam to the screen's profiles. FK.bal stays the public surface; nothing else may depend on this.
-     find gives a copy of a profile, own or built in, with whether it is the person's own. */
+  /* For src/bal-edit.js only: its read-only seam to the screen's profiles and the one definition of each shared rule. FK.bal stays
+     the public surface; nothing else may depend on this. find gives a copy of a profile, own or built in, with whether it is the
+     person's own. RANGE, CLICK_SIZES, within, marksOk, parseNum and zeroAir are the rules the editor must apply exactly as the screen
+     does; nameTaken and freeName keep names unique. */
   const nameKey = n => String(n).trim().slice(0, 60).toLowerCase();
   /* Whether another profile (own, except exceptId, or built in) already has this name, trimmed and compared without regard to case. */
   const nameTaken = (name, exceptId) => profiles.concat(PRESETS).some(p => p.id !== exceptId && nameKey(p.name) === nameKey(name));
@@ -403,7 +408,7 @@
     }
   }
   FK.balHost = {
-    newId, RANGE, within, marksOk, nameTaken, freeName, parseNum,
+    newId, RANGE, CLICK_SIZES, within, marksOk, nameTaken, freeName, parseNum, zeroAir,
     find: id => { const p = anyProfile(id); return p ? { profile: copy(p), own: !!ownProfile(id) } : null; }
   };
   FK._test.presets = () => PRESETS.map(p => ({ ...p }));

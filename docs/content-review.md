@@ -8317,3 +8317,12 @@ descriptors. Wire type: V = varint, F32 = fixed32, SF32 = sfixed32, L = length-d
 Note the fixed32 fields: `from`, `to`, `id`, `rx_time`, `time`, `last_heard` and the waypoint `icon` are fixed-width on the wire, while
 the waypoint `id`, `expire` and `locked_to` are varints. Coordinates are degrees times 1e7. Altitude is a signed int32: a negative value
 is a 10-byte varint, of which the codec keeps the low 32 bits. Page opened: none (no web page was needed; the package descriptors are the source).
+
+# Comms: Bluetooth link (src/mesh-link.js)
+
+Page opened: Meshtastic, "Client API" (https://meshtastic.org/docs/development/device/client-api/; the page shows no date, only "Last updated by" a
+contributor). It gives the service UUID `6ba1b218-15a8-461f-9fa8-5dcae273eafd` and the three characteristics: fromradio
+`2c55e69e-4993-11ed-b878-0242ac120002`, toradio `f75c76d2-129e-4dad-a1dd-7866124401e7`, fromnum `ed9da18c-a800-4f66-a670-aa7547e34453`. All four match
+the task brief and are what the code uses. The page says to keep reading fromradio until it returns an empty packet (also after each fromnum
+notification). It does not mention heartbeats: the 300 s heartbeat is implemented as the task brief specifies, and whether a real radio needs
+it is not proved here.

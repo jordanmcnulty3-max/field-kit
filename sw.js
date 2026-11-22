@@ -1,5 +1,5 @@
 /* Field Kit offline cache. Bump VERSION whenever you upload changed files. */
-const VERSION = 'fieldkit-v7.9';
+const VERSION = 'fieldkit-v7.10';
 const TILES = 'fk-tiles';
 const TILE_HOSTS = ['basemap.nationalmap.gov'];
 const ASSETS = ['./', './index.html', './manifest.json', './leaflet.js', './leaflet.css',

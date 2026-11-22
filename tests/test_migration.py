@@ -1,6 +1,8 @@
 """Backup, restore and v5 -> current migration."""
 import json, os, re
 
+import pytest
+
 from playwright.sync_api import expect
 
 from .test_tools import T0
@@ -231,9 +233,9 @@ def test_v5_localstorage_boots_with_no_console_errors(page, app_url):
     # Rifle profile is selectable and fills the load fields
     assert page.input_value('#bProfile') == 'u1k2j3x'
     page.select_option('#bProfile', 'p308')
-    assert page.input_value('#bMV') == '2600'
+    assert page.evaluate('FK.bal.selected().mv') == 2600
     page.select_option('#bProfile', 'u1k2j3x')
-    assert page.input_value('#bMV') == '2850' and page.input_value('#bW') == '105'
+    assert page.evaluate('[FK.bal.selected().mv, FK.bal.selected().w]') == [2850, 105]
     assert page.input_value('#bRange') == '650'
     # Waypoints load as markers and the target is still the target
     page.click('#tacSeg [data-view=position]')
@@ -521,3 +523,82 @@ def test_v76_backup_with_the_three_moved_topics_restores_and_they_still_open_fro
     page.locator('#survCats summary', has_text='Food from the land').click()
     keys = page.evaluate("[...document.querySelectorAll('#survCats details[data-cat=\"land\"] button[data-key]')].map(b => b.dataset.key)")
     assert set(moved) <= set(keys)
+
+
+@pytest.mark.parametrize('gone,bc,mv,name', [('p556', '0.304', '3020', '5.56 NATO 62 gr (old built-in)'), ('p76239', '0.29', '2350', '7.62×39 123 gr (old built-in)')])
+def test_a_phone_whose_stored_load_was_removed_opens_without_error(page, app_url, gone, bc, mv, name):
+    """p556 and p76239 are no longer built in. A phone that had one selected is handled like a stored Custom: the numbers it
+    was using become a profile named for what it was (it was named "Custom") and it is selected; nothing throws (the harness
+    fails the test on any console error)."""
+    stored = {'profile': gone, 'bBC': bc, 'bModel': 'G1', 'bW': '62', 'bMV': mv, 'bSH': '2.6', 'bZero': '100',
+              'bRange': '300', 'bWind': '0', 'bClock': '3', 'bTemp': '59', 'bAlt': '0', 'bPress': '', 'bRH': '50',
+              'bMax': '1000', 'bStep': '50'}
+    boot(page, app_url, {'fk.bal': json.dumps(stored)}, hash_='#/tactical/ballistics')
+    page.wait_for_selector('#dope tr')
+    assert page.input_value('#bProfile') == 'ucustom'
+    expect(page.locator('#bProfile option:checked')).to_have_text(name)
+    assert page.evaluate('[FK.bal.selected().bc, FK.bal.selected().mv]') == [float(bc), float(mv)]
+    assert page.locator('#bProfile option[value="%s"]' % gone).count() == 0
+    page.select_option('#bProfile', 'p308')       # and the built-in loads still load
+    assert page.evaluate('FK.bal.selected().mv') == 2600
+
+
+# ---------- A stored built-in selection shows that load's current numbers ----------
+
+FIELDS_REST = {'bRange': '600', 'bWind': '5', 'bClock': '3', 'bTemp': '59', 'bAlt': '0', 'bPress': '', 'bRH': '50',
+               'bMax': '1000', 'bStep': '50'}
+
+
+def stored_bal(profile, bc, model, w, mv, sh, zero, **rest):
+    return {'profile': profile, 'bBC': bc, 'bModel': model, 'bW': w, 'bMV': mv, 'bSH': sh, 'bZero': zero,
+            **{**FIELDS_REST, **rest}}
+
+
+def open_ballistics(page, app_url, stored, extra=None):
+    boot(page, app_url, {'fk.bal': json.dumps(stored), **(extra or {})}, hash_='#/tactical/ballistics')
+    page.wait_for_function("document.querySelector('#solElev').textContent.length > 3")
+    page.wait_for_timeout(450)    # the screen recalculates on a 150 ms timer
+
+
+def card(page):
+    return page.evaluate("[document.querySelector('#solElev').textContent, document.querySelector('#solWind').textContent,"
+                         " document.querySelector('#solSub').textContent]")
+
+
+def load_fields(page):
+    """The selected profile's load, as numbers: bc, model, weight, velocity, sight height, zero."""
+    return page.evaluate("(p => [p.bc, p.model, p.w, p.mv, p.sight, p.zero])(FK.bal.selected())")
+
+
+def test_stored_p308_shows_the_current_load_and_keeps_the_other_inputs(page, app_url):
+    open_ballistics(page, app_url, stored_bal('p308', '0.243', 'G7', '175', '2600', '1.5', '100'))
+    assert page.input_value('#bProfile') == 'p308'
+    assert load_fields(page) == [0.25, 'G7', 175, 2600, 1.5, 100]
+    assert page.input_value('#bRange') == '600' and page.input_value('#bWind') == '5'
+    stored_card = card(page)
+    page.select_option('#bProfile', 'p223')       # leave and come back: a fresh pick of p308
+    page.select_option('#bProfile', 'p308')
+    page.wait_for_timeout(450)
+    assert page.input_value('#bRange') == '600'
+    assert card(page) == stored_card
+
+
+def test_stored_p223_shows_the_current_load(page, app_url):
+    open_ballistics(page, app_url, stored_bal('p223', '0.372', 'G1', '77', '2750', '2.6', '100'))
+    assert page.input_value('#bProfile') == 'p223'
+    assert load_fields(page) == [0.188, 'G7', 77, 2720, 2.6, 100]
+    assert page.input_value('#bRange') == '600'
+
+
+def test_stored_custom_selection_keeps_its_typed_numbers(page, app_url):
+    open_ballistics(page, app_url, stored_bal('custom', '0.31', 'G1', '150', '2900', '1.8', '200'))
+    assert page.input_value('#bProfile') == 'ucustom'
+    assert load_fields(page) == [0.31, 'G1', 150, 2900, 1.8, 200]
+
+
+def test_stored_own_profile_selection_is_unchanged(page, app_url):
+    own = {'id': 'umine', 'name': 'My rifle', 'bc': 0.4, 'model': 'G1', 'w': 168, 'mv': 2700, 'sight': 1.7, 'zero': 100}
+    open_ballistics(page, app_url, stored_bal('umine', '0.4', 'G1', '168', '2700', '1.7', '100'),
+                    extra={'fk.profiles': json.dumps([own])})
+    assert page.input_value('#bProfile') == 'umine'
+    assert load_fields(page) == [0.4, 'G1', 168, 2700, 1.7, 100]

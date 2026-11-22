@@ -298,9 +298,11 @@ def test_a_three_line_question_keeps_the_buttons_on_screen(page, app_url):
 
 def test_v77_search_fixture_is_unchanged():
     f = _os.path.join(ROOT, 'tests', 'fixtures', 'search_v77_on_screen.json')
-    import subprocess
-    out = subprocess.run(['git', 'diff', '--quiet', '594a3ad', '--', f], cwd=ROOT)
-    assert out.returncode == 0
+    # The fixture as released in v7.7 and v7.8. This used to ask git to compare with a commit on the v7.8 work branch;
+    # that history was removed from GitHub at the v7.8 release, so the check failed in every fresh clone.
+    import hashlib
+    with open(f, 'rb') as fh:
+        assert hashlib.sha256(fh.read()).hexdigest() == '733dd05b86b7d8dbd8ed42657106dab13fe403edf81922e0dfabdcf01407ccc7'
 
 
 # ---------- 7. Sightings older than 24 h are drawn as outlines on the map ----------

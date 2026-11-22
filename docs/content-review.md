@@ -8034,3 +8034,260 @@ Code: `src/wmm.js`; tests: `tests/test_wmm.py`. Both pages below were opened on 
 Other pages opened in the search and not used for numbers: NCEI's WMMHR2025 product page (https://www.ncei.noaa.gov/node/7156),
 the "WMM Update" notice (https://ncei.noaa.gov/node/6716) and the release news item (https://www.ncei.noaa.gov/node/7266); none
 holds the coefficient table.
+
+## Ballistics
+
+### Reference trajectories for the solver check (2026-11-21)
+
+`BAL.solve` (`src/ballistics.js`) is checked against published trajectories computed with a single stated G1 or G7 coefficient.
+Every page below was opened on 2026-11-21 with the figures taken as printed. The rows are in
+`tests/fixtures/ballistics_reference.json`, the test is `tests/test_ballistics_math.py`, and the results and decisions are in
+`docs/ballistics-rulings.md`. Drop is compared as an angle, atan(inches / (yards x 36)); only rows where the bullet is above
+Mach 1.2 are judged.
+
+Judged sources (four independent publishers; three G1, one G7):
+
+- **Hornady, "External Ballistics"** (text of the Hornady Handbook),
+  https://www.hornady.com/team-hornady/ballistic-information/ballistic-resources/external-ballistics. States that Hornady
+  coefficients are referred to the G1 model and that all coefficients and tables are adjusted to standard conditions: sea level,
+  59 F, 29.53 inHg, 78 % humidity (Army Standard Metro). Sight height is not printed as a number; each muzzle row reads -1.5 in.
+  Rows taken: the two 30 cal 180 gr example tables (Spire Point BC .425, Round Nose BC .241, both 3000 fps, 100 yd zero), every
+  row from 50 to 500 yd, drop and velocity; "Test #1: Standard Conditions" (BC .338, 2900 fps, 100 yd zero), every row from 100
+  to 500 yd. Tests #2 to #4 (other air, recalculated coefficient) not used.
+- **pyballistic QuickStart** (LGPL ballistic library), https://dbookstaber.github.io/pyballistic/latest. Range card example:
+  G7 0.22, 2600 fps, sight height 2, 100 yd zero, wind 5 mph from 3 o'clock. Rows taken: 100 to 500 yd, height, windage,
+  velocity, time. The example sets no atmosphere; `Shot` then uses `Atmo.icao()`
+  (https://dbookstaber.github.io/pyballistic/latest/api/conditions/shot), which is sea level at ICAO standard temperature and
+  pressure (https://dbookstaber.github.io/pyballistic/latest/api/conditions/atmo); that page names the default humidity constant
+  without its value, entered as 0 %. Also opened, no values used: https://dbookstaber.github.io/pyballistic/latest/concepts/conditions/atmo
+  and https://dbookstaber.github.io/pyballistic/latest/api/drag_tables (lists the tables' types, not their values).
+- **Steiner 3TR Ballistics**, https://www.eurooptic.com/content/pdf/Steiner/Steiner 3TR Ballistics.pdf. 5.56mm SS109/M855 62 gr
+  FMJ, BC 0.304 (model not named; taken as G1, see the rulings), 3100 fps, sight 1.5 in, 200 yd zero, 0 ft, 59 F, 29.92 inHg,
+  0 %, wind 10 mph at 90 degrees (3 o'clock). Rows taken: every 50 yd row from 200 to 1,000 yd (elevation in, wind drift in,
+  velocity, flight time). The table continues to 2,200 yd; rows past 1,000 yd not used.
+- **Sniper's Hide forum, "Range Report .308 Sierra MatchKing 175gr ballistic data/card"**,
+  https://www.snipershide.com/shooting/threads/308-sierra-matchking-175gr-ballistic-data-card.198129. Output of Zdziarski's
+  ballistic program: G1 0.496 (single), 2600 fps in the header and 2606 fps in the 0 yd row, sight 3.0 in, 100 yd zero (zero air
+  0 ft, 29.92 inHg, 59 F, 0 %), firing air 794 ft, 30.13 inHg, 20.8 F, 54 %, no wind. Rows taken: every row from 50 to 1,000 yd,
+  drop, velocity and time; the 214 yd row (peak) and the wind column (spin drift) not used.
+
+Recorded, not judged:
+
+- **Federal Premium, Gold Medal Sierra MatchKing 308 Win 175 gr (GM308M2)**,
+  https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M2.html. BC .505 (not labelled G1; G7 0.25
+  given separately), 2600 fps, sight 1.5 in, 100 yd zero, 10 mph crosswind. No atmosphere stated, so `"judged": false`. Rows
+  taken: velocity and wind drift 100 to 500 yd; drop at 50, 200 and 300 yd ("Average Range"). A Federal compare page with the
+  same figures also opened: https://308ar.com/wp-content/uploads/2016/03/Federal-Gold-Medal-Match-308-Winchester-Match-Ammunition.pdf
+
+### Standard atmospheres and drag tables (2026-11-21)
+
+- ICAO sea-level density 1.225 kg/m3 (0.076474 lb/ft3), speed of sound 340.29 m/s at 15 C and 1013.25 hPa, Army Standard Metro
+  density 0.075126 lb/ft3, the ICAO retardation constant 2.08551e-4 and the Metro constant 0.000683 x 0.30: ballistics-engine
+  `src/constants.rs`, https://docs.rs/crate/ballistics-engine/0.30.1/source/src/constants.rs. Used in the density test (1.225)
+  and the rulings.
+- Army Standard Metro density 0.0751265 lb/ft3 at 29.5275 inHg; Metro to ICAO coefficient factor 1.018: Dexadine Ballistic
+  Explorer help, https://dexadine.com/bexhelp/bexhelp140.htm. Used in the density test (0.0751265 lb/ft3 = 1.2034 kg/m3).
+- Standard ballistics atmosphere sea level, 59 F, 29.53 inHg, 78 %: Dexadine, https://dexadine.com/bexhelp/bexhelp42.htm.
+- Which makers use which standard (Metro: Barnes, Hornady, Sierra; ICAO: Berger, Nosler, Lapua), factors 1.018 and 0.982:
+  Long Range Hunting, "Using The Right BC in Your Ballistic Application", https://www.longrangehunting.com/goto/post?id=764918.
+  (The final maths review notes that Hornady's own coefficient page, https://www.hornady.com/bc, refers its coefficients to ICAO:
+  sea level, 59 F, 29.92 inHg, 0 % humidity. The post's list is not used for any built-in load.)
+- G1 drag coefficient 0.2629, 0.2558, 0.2487 at Mach 0, 0.05, 0.10 (the data-format example of the G1/G7 files) and their origin
+  (BRL, E.D. Lowry, Winchester-Western, 1965; McCoy): ballistics-engine data README,
+  https://docs.rs/crate/ballistics-engine/0.32.0/source/data/README.md.
+- At Mach 3 the G1 projectile's drag coefficient is 0.51 and the G7's 0.24: Applied Ballistics, "ABDOC130 Custom Drag Models",
+  https://appliedballisticsllc.com/wp-content/uploads/2019/11/ABDOC130_CDM.pdf (also holds plots of both curves, no table).
+
+- Full G1 and G7 tables, every [Mach, Cd] pair (G1 79 pairs, G7 84 pairs), added in fix round 1: ballistics-engine 0.17.0
+  `data/g1.csv`, https://docs.rs/crate/ballistics-engine/0.17.0/source/data/g1.csv, and `data/g7.csv`,
+  https://docs.rs/crate/ballistics-engine/0.17.0/source/data/g7.csv (both returned by a search; origin as stated in the data
+  README above). Copied into `tests/fixtures/ballistics_drag_tables.json`; every pair of `BAL.tables` matches exactly.
+- U.S. Standard Atmosphere in English units, rows for 0, 5,000 and 10,000 ft (temperature 518.69, 500.86, 483.04 R; pressure
+  2116.2, 1760.9, 1455.6 lb/ft2; density 2.3769, 2.0482, 1.7556 x 10^-3 slug/ft3), added in fix round 1: Anderson,
+  "Appendix E: Standard Atmosphere, English Engineering Units" (McGraw-Hill),
+  https://highered.mheducation.com/sites/dl/free/0072950463/281732/and50463_appE.pdf. Used in the altitude density test.
+
+Fix round 1, searched for a G7 (or stated-atmosphere G1 .308) trajectory to 1,000 yd; opened and not usable:
+- Exbal card, .308 168 gr SMK, https://rifleshooter.com/wp-content/uploads/2012/08/1682561.pdf: stepped coefficients (four
+  BCs by velocity band), so not judged and not entered.
+- RUAG Swiss P Target 175 gr, https://defence.nioa.com.au/uploads/documents/RUAG/7.62x51/5061_308_Win._SWISS_P_Target_11.3_g_-_175_gr_EN.pdf:
+  stepped G1 and G7 coefficients, sight height not stated; not entered.
+- Sniper Central 175 gr ballistic card listing, https://snipercentral.com/?p=29912: table only as an image, no BC stated.
+- py-ballisticcalc GitHub README, https://github.com/o-murphy/py-ballisticcalc: links example notebooks but prints no output;
+  the notebooks' own URLs were not returned by any search, so they were not opened.
+- Would not open (refused by the fetch tool): ballistics-engine validation README,
+  https://docs.rs/crate/ballistics-engine/0.32.0/source/data/validation/README.md, and its reference generator,
+  https://docs.rs/crate/ballistics-engine/0.30.1/source/data/validation/generators/gen_pybc_refs.py.
+- Also opened while looking for the drag tables, none prints them: https://bfxyz.nl/docs/bfxaboutdragfunctions.shtml and
+  https://snipercountry.com/?p=67.
+
+URL record (fix round 1): every URL in this Ballistics section is written exactly as a search returned it. Two look odd and
+are still as returned: the Steiner PDF URL contains raw spaces (the search result gave it that way, and it opened that way),
+and Wikipedia "External ballistics" was returned by the search as https://www.wikipedia.org/wiki/Bullet_drop (a redirect
+name); it was not built by hand. No URL in this section was constructed.
+
+### Pages that would not open or held no usable figures (2026-11-21)
+
+Would not open: Sierra Bullets "308 WINCHESTER ~ 175 GRAIN MATCHKING ~ Trajectory Chart" (https://sierrabullets.com/?p=30542);
+Wikipedia "External ballistics" (https://www.wikipedia.org/wiki/Bullet_drop).
+
+Opened but held no table text: Sierra 168 gr chart (https://www.sierrabullets.com/?p=30540), Sierra "5.0 Trajectory Tables"
+(https://www.sierrabullets.com/?p=17331) and "5.1 Effects of Altitude" (https://www.sierrabullets.com/?p=17378) returned only site
+navigation; the JBM example table in "long range shooting ballistic table how to read it"
+(https://thearmsguide.com/6977/long-range-shooting-ballistic-table-how-to-read-it-post-16) is an image; ammo.com 5.56 ballistics
+(https://ammo.com/ballistics/5.56-ballistics) charts are images; ballistics-engine `src/drag.rs`
+(https://docs.rs/crate/ballistics-engine/0.18.3/source/src/drag.rs) holds only a 21-point fallback that the source calls coarse.
+
+Opened, not used: Sig Sauer "Ballistics Data 2024" (https://www.sigsauer.com/media/sigsauer/resources/Ballistics_Data_2024.pdf;
+G1 tables with no zero, sight height or atmosphere stated); Chuck Hawks rifle trajectory table
+(https://chuckhawks.com/rifle_trajectory_table.htm; mixed sources, model not stated); Applied Ballistics "Practical Ballistics"
+(https://appliedballisticsllc.com/wp-content/uploads/2021/06/ABDOC118_PracticalBallistics-2021-Copyright.pdf; G1 and G7 drop for a
+175 gr bullet with no sight height or zero stated, and marked proprietary); the py-ballisticcalc PyPI pages
+(https://pypi.org/project/py-ballisticcalc, https://pypi.org/project/py-ballisticcalc/1.0.0/) and ballistics-engine CLI pages
+(https://docs.rs/crate/ballistics-engine/0.17.0/source/CLI_USAGE.md, https://docs.rs/crate/ballistics-engine/0.33.0), which print
+no trajectory output.
+Also opened with nothing to take: shooterscalculator.com chart (https://shooterscalculator.com/ballistic-trajectory-chart.php?t=13a2d644;
+empty form), Load Out Room JBM article (https://loadoutroom.com/thearmsguide/long-range-shooting-with-jbm-ballistics-table; no
+values), Garmin Applied Ballistics glossary
+(https://www8.garmin.com/manuals/webhelp/GUID-9258AC82-CE63-4DE9-84B7-473FEB0EA745/EN-US/GUID-BA44283F-CC42-45FF-94E8-D09DD5D138F3.html),
+Dexadine "Drag Table Information" (https://dexadine.com/bexhelp/bexhelp117.htm; tables as an image), DTIC ADA554683
+(https://apps.dtic.mil/sti/tr/pdf/ADA554683.pdf; bullet coefficients, no drag tables) and the Sniper's Hide "G1 & G7 Tables?"
+thread (https://www.snipershide.com/shooting/goto/post?id=9268996; no tables).
+
+### Built-in loads (2026-11-21)
+
+Each built-in load (`PRESETS` in `src/bal-ui.js`) was checked against pages opened on 2026-11-21. A load stays only if one maker
+page (or two pages of the same maker) gives both a coefficient with the drag model stated (G1 or G7) and a velocity with its test
+barrel length, for the cartridge the load is named after. A coefficient printed without a model is not used. A retailer page or a
+forum post is not a source. The test is `test_built_in_loads_are_the_sourced_values` in `tests/test_ballistics_math.py`; the
+decisions and what each costs if wrong are in `docs/ballistics-rulings.md`. Sight height and zero range in each load are the
+app's own starting values, not sourced numbers.
+
+Loads as they are now (the values copied into the test as `SOURCED`):
+
+| Id | Name | Coefficient | Weight | Velocity | Outcome |
+|---|---|---|---|---|---|
+| p556m193 | Sellier & Bellot 5.56×45 M193 55 gr FMJ, 23.5″ barrel | G7 0.127 | 55 gr | 3301 fps | new |
+| p556ss109 | RWS 5.56x45 NATO Ball SS109 62 gr, 20″ barrel | G7 0.151 | 62 gr | 3035 fps | new |
+| p223 | Federal Gold Medal .223 Rem 77 gr SMK, 24″ barrel | G7 0.188 | 77 gr | 2720 fps | changed (was G1 0.372, 2750 fps) |
+| p76239sb | Sellier & Bellot 7.62×39 124 gr FMJ, 20.5″ barrel | G1 0.286 | 124 gr | 2421 fps | new |
+| p65cm | Hornady 6.5 Creedmoor 140 gr ELD-M, 24″ barrel | G7 0.326 | 140 gr | 2710 fps | kept, values unchanged |
+| p308 | Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel | G7 0.25 | 175 gr | 2600 fps | changed (was G7 0.243) |
+
+Retired, ids never to be reused: p556 (5.56 NATO 62 gr M855, 20″ barrel, G1 0.304, 3020 fps) and p76239 (7.62x39 123 gr FMJ, G1
+0.29, 2350 fps): neither had a source for its numbers. No 16 in barrel velocity could be paired with a labelled coefficient.
+
+Pages taken from:
+
+- **Hornady, "6.5 Creedmoor 140 gr ELD Match"** (the loaded cartridge),
+  https://www.hornady.com/ammunition/rifle/6-5-creedmoor-140-gr-eld-match. Taken: 140 gr, muzzle velocity 2710 fps in the table
+  headed "Test Barrel (24")". The page prints no coefficient.
+- **Hornady, "Ballistic Coefficient"**, https://www.hornady.com/bc. Taken: for the 6.5mm 140 gr ELD Match, G1 and G7 by speed:
+  Mach 2.25 (2512 fps) 0.646 / 0.326; Mach 2.0 (2232 fps) 0.637 / 0.320; Mach 1.75 (1953 fps) 0.616 / 0.310. The page says the
+  Mach 2.25 values are the ones for comparing with other published coefficients and the Mach 1.75 values are for trajectories
+  beyond 600 yd. The first request for this page was refused by the fetch tool's permission check and the second opened. Also
+  opened, no coefficient printed (it links to the page above): https://www.hornady.com/bullets/rifle/6.5mm-.264-140-gr-eld-match-500
+- **Federal, "Gold Medal Sierra MatchKing 308 Win. 175 gr (GM308M2)"**,
+  https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM308M2.html. Taken: 175 gr, 2600 fps,
+  ballistic coefficient .505 (not labelled with a model) and "Ballistic Coefficient G7" 0.25. No barrel length on this page.
+- **Federal, "Gold Medal 308 Win." product page**, https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=151.
+  Taken: 175 gr, 2600 fps, test barrel length 24 in, ballistic coefficient 0.505 (no model label).
+- **Federal, "Gold Medal Sierra MatchKing 223 Rem. 77 gr (GM223M3)"**,
+  https://www.federalpremium.com/rifle/gold-medal/gold-medal-sierra-matchking/11-GM223M3.html. Taken: Sierra MatchKing BTHP,
+  77 gr, 2720 fps, ballistic coefficient .372 (no model label) and "Ballistic Coefficient G7" .188. No barrel length on this page.
+- **Federal, "Gold Medal 223 Rem. (5.56x45mm)" product page**,
+  https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=147. Taken: Sierra MatchKing BTHP, 77 gr, 2720 fps, test
+  barrel length 24 in, ballistic coefficient 0.372 (no model label). The Federal data sheet for the same cartridge,
+  https://defence.nioa.com.au/uploads/documents/Federal/Rifle/223_556/GM223M3.pdf, gives 2730 fps plus or minus 25 from the
+  "SAAMI standard test barrel" of 24.0 in and no coefficient; not used for the value (the product pages above give 2720).
+- **Sellier & Bellot, "5,56 × 45" M193 55 GRS SB556A**,
+  https://www.sellier-bellot.cz/en-us/products/rifle-ammunition/rifle-ammunition-fmj/detail/745/. Taken: 55 gr, velocity at the
+  muzzle 3,301 fps (2,912 fps at 100), test barrel length 23½ in, G1 0.259 and G7 0.127. The same figures (1,006 m/s, 600 mm,
+  0.259 / 0.127) are in the row for the .223 Rem. 55 grs FMJ (V341862) on
+  https://sellier-bellot.cz/en/products/rifle-ammunition/rifle-ammunition-fmj and (V341872) on
+  https://www.sellier-bellot.cz/en/products/rifle-ammunition/rifle-ammunition-training-fmj/.
+- **Sellier & Bellot, "7,62 × 39" FMJ 124 GRS (V340832 / V340842)**, the same two list pages. Taken: 124 gr (8.00 g), V0 738 m/s
+  (2,421 fps), V100 640 m/s, test barrel length 520 mm (20.5 in), G1 0.286 and G7 0.143. The table header gives millimetres for
+  the barrel; neither list has a 123 gr row. The page https://www.sellier-bellot.cz/en/products/ballistic-coefficient-calculation/
+  says the coefficients are calculated from measured velocities and "converted to standard ICAO air conditions" (15 C, 0 %
+  humidity, 1013.25 hPa), the standard this solver uses.
+- **RWS, "5.56x45 NATO BALL (SS109)" 4.0 g / 62 gr dual core**,
+  https://www.rws-technology.com/en/armed-forces-law-enforcement/product/556x45-nato-ball-ss109-62gr-2422469. Taken: V0 925 m/s
+  (3,035 fps) with a 508 mm (20 in) test barrel (the page's velocity row is measured at v10, 10 m from the muzzle, tolerance plus
+  or minus 15 m/s; a second "assault rifle" line gives 914 m/s). Corrected after the final maths review: an earlier caveat here
+  said 3,035 fps is a reading 10 m from the muzzle and implied about 3,071 fps at the muzzle; RWS's own table lists 925 m/s at
+  0 m, and G7 0.151 flown from 925 m/s reproduces its 898 m/s at 25 m exactly, so 3,035 fps agrees with the maker's table (see
+  `docs/ballistics-rulings.md`). The table "Ballistic coefficient G1 / G7" by distance:
+  25 m 0.292 / 0.151; 100 m 0.281 / 0.151; 200 m 0.284 / 0.155; 300 m 0.281 / 0.153; 400 m 0.273 / 0.151; 500 m 0.242 / 0.144;
+  600 m 0.238 / 0.158; 700 m 0.237 / 0.123; 800 m 0.236 / 0.094; 900 m 0.229 / 0.106; 1000 m 0.234 / 0.123 (speed at those
+  distances 898, 818, 719, 626, 538, 451, 379, 329, 298, 275, 257 m/s). No atmosphere is stated on that page.
+
+Opened, nothing usable for these loads:
+
+- Sierra, ".22 Cal / 5.56mm 77 Gr. HPBT MatchKing", https://sierrabullets.com/product/22-caliber-77-gr-hpbt-matchking. Prints
+  .372 at 3000 fps and above, .362 from 2500 to 1700 fps, .343 below 1700 fps, and does not say which drag model. Weight 77 gr.
+- Sierra 175 gr MatchKing pages, https://www.sierrabullets.com/?p=15298, https://sierrabullets.com/30-cal-175-gr-hpbt-matchking-smk/
+  and https://sierrabullets.com/product/30-cal-7-62mm-175-gr-hpbt-matchking: the weight and caliber only; their Ballistics and Specs
+  tabs showed only a loading icon, so no coefficient was read. https://www.sierrabullets.com/?p=15292 (22 cal list) prints none.
+  Sierra "4.1 Basic Definitions", https://www.sierrabullets.com/?p=17353, does not name a drag model.
+- Hornady cartridge pages print velocity with a test barrel and no coefficient, so none could source a 5.56 or 7.62x39 load:
+  https://www.hornady.com/ammunition/rifle/5.56-nato-55-gr-fmj-bt-frontier (55 gr M193 Frontier, 3240 fps, 20 in),
+  https://www.hornady.com/ammunition/rifle/5.56-nato-55-gr-fmj-(m193)-frontier-50bx (same), https://www.hornady.com/ammunition/rifle/223-rem-55-gr-fmj-bt-frontier#!/
+  (3240 fps, 24 in), https://www.hornady.com/ammunition/rifle/5.56-nato-62-gr-fmj-frontier?age=confirmed (62 gr FMJ, 3060 fps,
+  20 in), https://www.hornady.com/ammunition/rifle/223-remington-62-gr-fmj-black (62 gr FMJ BLACK, 3100 fps, 24 in) and
+  https://www.hornady.com/ammunition/rifle/7.62x39-123-gr-sst-black?age=confirmed (123 gr SST BLACK, 2350 fps, 20 in; the first
+  request was refused by the fetch tool's permission check and the second opened). Hornady bullet pages
+  https://www.hornady.com/bullets/rifle/22-cal-224-55-gr-fmj-bt-with-cannelure, https://www.hornady.com/bullets/rifle/22-cal-.224-62-gr-fmj
+  and https://www.hornady.com/bullets/rifle/7-62-cal-310-123-gr-sst print no coefficient either (their Specifications section is a
+  link that returned no values).
+- Federal American Eagle pages: https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=71 (62 gr FMJ boat-tail,
+  3020 fps, 24 in, 0.307), https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=69 (55 gr, 3240 fps, 24 in, 0.269),
+  https://le.vistaoutdoor.com/ammunition/federal/rifle/details.aspx?id=66 (7.62x39 124 gr FMJ, 2350 fps, 20 in, 0.298),
+  https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE193.html (5.56x45 55 gr, 3165 fps, no barrel
+  length, .246) and https://www.federalpremium.com/rifle/american-eagle/american-eagle-rifle/11-AE223N.html (223 Rem 62 gr, 3020 fps,
+  no barrel length, .307); no coefficient carries a model label. Federal's 2019 ballistics catalogue
+  (https://www.federalpremium.com/on/demandware.static/-/Library-Sites-VistaFederalSharedLibrary/default/ve1ee04a44271d744373155c0b4d7e4c993afc242/contentDocuments/catalog/2019/Federal2019-Ballistics.pdf)
+  has G1 and G7 columns but they are blank for every 223 Rem 55, 62 and 64 gr entry (and it has no coefficient for the
+  American Eagle table), so it cannot supply a model either.
+- PMC, https://pmcammo.com/product/x-tac-5-56x/ (5.56mm NATO 55 gr FMJ-BT, 3120 fps, coefficient 0.243) and
+  https://pmcammo.com/product/x-tac-5-56k/ (62 gr LAP, 2920 fps, 0.304), with the catalogue
+  https://pmcammo.com/wp-content/uploads/PMC-Catalog-2024-web.pdf stating "Barrel Length: 16 inches" for both: the only 16 in
+  velocities found, but neither the pages nor the catalogue say G1 or G7 for the coefficient, so not usable.
+- Norma, https://www.norma-ammunition.com/governmental/products/fmj/223-rem-full-metal-jacket-55gr---91012003: 223 Rem FMJ
+  3.6 g / 55 gr, V0 3232 fps, 24 in barrel, 0.232 G1 (a complete source, not used because Sellier & Bellot's page also gives a G7
+  and an imperial table). Norma's FMJ list https://www.norma-ammunition.com/governmental/products/fmj prints no values.
+- Other makers opened with no coefficient or no model: Winchester https://winchester.com/Products/Ammunition/Rifle/USA/W223K and
+  https://winchester.com/Products/Ammunition/Rifle/USA/USA223R1 ("no ballistics data available"); Nosler
+  https://www.nosler.com/223-remington-55gr-ballistic-tip-varmint-ammunition.html (3100 fps, 24 in) and
+  https://www.nosler.com/223-rem-62gr-fbhp-varmageddon-ammunition.html (2950 fps, 24 in), no coefficient; Barnes
+  https://barnesbullets.com/vor-tx-rifle-tsx-5-56-x-45mm/ (Specs and Ballistics tabs did not load); Black Hills
+  https://www.black-hills.com/shop/new-rifle-ammo/5-56mm/ (20 in, no coefficient); Fiocchi
+  https://www.fiocchiusa.com/centerfire-rifle/range-dynamics-rifle/33-556M193L.html (5.56 NATO 55 gr FMJ-BT, 3240 fps, no barrel
+  length, .243 unlabelled); Remington https://www.remington.com/rifle/umc-rifle/29-23711.html (223 Rem 55 gr, 3240 fps, no barrel
+  length, .202 unlabelled); Sellier & Bellot law-enforcement list
+  https://www.sellier-bellot.cz/en/products/law-enforcement-products/5-56x45/list/ (SS109 62 gr 945 m/s, no barrel length or
+  coefficient) and catalogue https://www.sellier-bellot.cz/repository/file/SB-le-catalogue-2024-en.pdf (no barrel lengths or
+  coefficients); Sellier & Bellot 123 gr: no row (the 7.62x39 row is 124 gr).
+- M855: 2022 Winchester military small-caliber catalog, https://online.flippingbook.com/view/895403448 (62 gr, 3,020 ft/s plus or
+  minus 40 measured 78 ft from the muzzle; no barrel length, no coefficient); the 62 gr FMJ product data sheet on
+  https://cdn.shopify.com/s/files/1/0286/2592/8227/files/Product_Data_Sheet_5.56x45mm_62gr_FMJ.pdf (3100 ft/s plus or minus 30 at
+  0 m; no barrel length, no coefficient; the maker is not named, only a web address); Army Research Laboratory report ADA530895,
+  https://ntrl.ntis.gov/NTRL/dashboard/searchResults/titleDetail/ADA530895.xhtml (record only; no numbers on the page); DTIC
+  ADA300525, https://apps.dtic.mil/sti/pdfs/ADA300525.pdf (the M856 tracer only).
+
+Opened and not used as sources (a retailer page and forum posts): a retailer's page for Hornady Frontier 7.62x39 123 gr FMJ
+(https://www.luckygunner.com/7-62x39-123-grain-fmj-hornady-frontier-50-rounds; 2340 fps from a 24 in barrel, 0.266 G1); a Sniper's
+Hide post (https://www.snipershide.com/shooting/posts/10401844; calls 0.326 the advertised G7 of the 140 gr ELD Match).
+
+Would not open: Hornady bullet page https://www.hornady.com/bullets/rifle/6-5mm-264-140-gr-eld-match (returned "You are being
+redirected" twice); https://www.federalpremium.com/products/details/rifle.aspx?id=151 and
+https://www.hornady.com/ammunition/rifle/6-5-creedmoor-140-gr-eld-match?age=confirmed (refused by the fetch tool's permission
+check, not retried); https://www.sellierbellot.us/products/rifle-ammunition/rifle-ammunition-target-match/detail/792/ (refused by
+the permission check, not retried); Sellier & Bellot https://www.sellier-bellot.cz/produkty/naboje-pro-ozbrojene-slozky/5-56x45/detail/798/
+(opened, navigation menus only, no figures); Norma SS109 page
+https://www.norma-ammunition.com/en-gb/products/governmental/centerfire-rifle/steel-core/556x45-nato-steel-core-ss109-62gr---91012014
+(failed at its site, a second request was also refused), Norma TSX copper 62 gr page
+https://www.norma-ammunition.com/governmental/products/tsx-copper-solid/223-rem-tsx-copper-solid-62gr---91012001 (failed),
+Fiocchi https://fiocchi.com/en/705556.html (failed); Sniper's Hide thread
+https://www.snipershide.com/shooting/threads/g7-bc-for-308-175-smk.7775/page-2 (the fetch failed). Not opened for lack of a
+search result giving the address: any Sierra page that prints a G1 or G7 for the 175 gr MatchKing.

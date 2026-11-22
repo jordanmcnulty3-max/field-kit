@@ -173,28 +173,36 @@ def test_delete_saved_map(page, app_url):
     page.wait_for_function("JSON.parse(localStorage.getItem('fk.areas')).length === 0")
 
 
+def open_editor(page, profile_id):
+    page.evaluate('id => FK.bal.select(id)', profile_id)
+    page.click('#bEdit')
+    expect(page.locator('#dlgRifle')).to_be_visible()
+
+
 def test_save_profile_name(page, app_url):
+    """New profiles are made in the profile editor (Save as new profile) and named there; there is no separate name sheet."""
     boot(page, app_url, '#/tactical/ballistics')
-    page.click('#bSave')
-    expect(page.locator('#dlgAsk h2')).to_have_text('Name this profile')
-    expect(page.locator('#dlgAsk input')).to_have_value('')
-    page.click('#dlgAsk [data-act="cancel"]')
+    open_editor(page, 'p308')
+    expect(page.locator('#rfName')).to_have_value('Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel (mine)')   # a name of its own
+    page.click('#rfCancel')
+    expect(page.locator('#dlgRifle')).to_be_hidden()
     assert len(page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))")) == 1
-    page.click('#bSave')
-    page.fill('#dlgAsk input', 'Second')
-    page.keyboard.press('Enter')
+    page.click('#bEdit')
+    page.fill('#rfName', 'Second')
+    page.click('#rfSaveNew')
     page.wait_for_function("JSON.parse(localStorage.getItem('fk.profiles')).length === 2")
     assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))[1].name") == 'Second'
 
 
 def test_delete_profile(page, app_url):
     boot(page, app_url, '#/tactical/ballistics')
-    page.select_option('#bProfile', 'u1')
-    page.click('#bDel')
+    open_editor(page, 'u1')
+    page.click('#rfDelete')
     expect(page.locator('#dlgConfirm [data-act="ok"]')).to_have_text('Delete profile')
     page.click('#dlgConfirm [data-act="cancel"]')
     assert len(page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))")) == 1
-    page.click('#bDel')
+    expect(page.locator('#dlgRifle')).to_be_visible()      # still on the editor underneath
+    page.click('#rfDelete')
     page.click('#dlgConfirm [data-act="ok"]')
     page.wait_for_function("JSON.parse(localStorage.getItem('fk.profiles')).length === 0")
 
@@ -527,3 +535,33 @@ def test_escape_and_a_plain_close_still_end_the_sheet_entry(page, app_url):
     assert page.evaluate('FK.route.index() === history.state.fkIdx')
     page.go_back()
     assert page.url == 'about:blank'
+
+
+def test_a_confirm_with_two_choices_tells_a_close_from_either_choice(page, app_url):
+    """choice: true resolves 'ok' or 'cancel' for the two buttons and null when the sheet is closed any other way."""
+    boot(page, app_url)
+    page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0")   # a slow phone
+    ask = "window.__r = 'pending'; void FK.sheet.confirm({ title: 'Which?', ok: 'A', cancel: 'B', choice: true }).then(v => { window.__r = v; })"
+    for how, want in [('#cfOk', 'ok'), ('#cfCancel', 'cancel'), ('back', None), ('Escape', None)]:
+        page.wait_for_timeout(400)
+        page.evaluate(ask)
+        expect(page.locator('#dlgConfirm')).to_be_visible()
+        expect(page.locator('#cfOk')).to_have_text('A')
+        expect(page.locator('#cfCancel')).to_have_text('B')
+        assert page.evaluate('document.activeElement.id') == 'cfTitle'      # neither choice is taken by a stray Enter
+        if how == 'back':
+            page.go_back()
+        elif how == 'Escape':
+            page.keyboard.press('Escape')
+        else:
+            page.click(how)
+        expect(page.locator('#dlgConfirm')).to_be_hidden()
+        page.wait_for_function("window.__r !== 'pending'")
+        assert page.evaluate('window.__r') == want, how
+    page.wait_for_timeout(400)
+    # without choice the answer is still true or false
+    page.evaluate("window.__r = 'pending'; void FK.sheet.confirm({ title: 'Sure?', ok: 'Go' }).then(v => { window.__r = v; })")
+    assert page.evaluate('document.activeElement.id') == 'cfCancel'
+    page.go_back()
+    page.wait_for_function("window.__r !== 'pending'")
+    assert page.evaluate('window.__r') is False

@@ -153,6 +153,7 @@ input,select{min-height:48px;padding:8px 12px;border:1px solid var(--line);borde
 input::placeholder{color:var(--muted);opacity:.8}
 .row{display:flex;gap:8px;margin-top:8px}
 .row>input{flex:1;min-width:0}
+.row.wrap{flex-wrap:wrap}
 .btn{min-height:48px;padding:0 16px;border-radius:8px;border:1px solid var(--c);background:var(--c);color:var(--on-accent);
   font-weight:600;cursor:pointer;white-space:nowrap}
 .btn.ghost{background:none;color:var(--c)}
@@ -163,11 +164,36 @@ input::placeholder{color:var(--muted);opacity:.8}
 .wact{grid-column:2;grid-row:1/3;display:flex;gap:6px}
 
 /* Ballistics output */
-.solution{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px;border:2px solid var(--c);border-radius:8px;margin-bottom:8px}
-.solution .k{font-size:14px;color:var(--muted)}
-.solution .v{font-size:36px;line-height:1.1;font-weight:700}
-.solution .v small{font-size:16px;font-weight:500;color:var(--muted)}
-.solution .sub{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.solution{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;padding:6px 14px;border:2px solid var(--c);border-radius:8px;margin-bottom:6px}
+.solution .k{font-size:13px;line-height:1.2;color:var(--muted);letter-spacing:.04em}
+.solution .v{font-size:28px;line-height:1.05;font-weight:700;overflow-wrap:anywhere}
+.solution .v2{font-size:17px;line-height:1.3;font-weight:600;overflow-wrap:anywhere}
+.solution .s{font-size:16px;line-height:1.2;color:var(--muted);overflow-wrap:anywhere}
+/* The sentence takes the card's full width and Show all units sits beneath it, at every text size. */
+.solution .sol-foot{grid-column:1/-1;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.solution .sub{align-self:stretch;min-width:0;margin:0;font-size:14px;line-height:1.25;color:var(--muted)}
+.solution .sol-all{flex:none;min-height:44px;padding:0 12px}
+.solution .sol-all[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.bal-profile{margin-bottom:8px}
+.bal-pick{display:flex;gap:8px}
+.bal-pick select{flex:1;min-width:0;min-height:44px;font:inherit}
+.bal-pick .btn{min-height:44px}
+.bal-shot input,.bal-shot select{min-height:44px}
+.bal-pick .btn{flex:none;min-width:64px}
+.bal-sight{margin:2px 0 0;font-size:14px;line-height:1.25;color:var(--muted)}
+.bal-shot .grid2{gap:6px 12px}
+.bal-shot label.f{gap:2px}
+.bal-cond{display:flex;align-items:center;gap:12px}
+.bal-cond p{flex:1;margin:0;min-width:0;font-size:16px}
+.bal-cond .btn{flex:none}
+#bCondFields{margin-top:12px}
+/* A short screen with a field focused (keyboard up; src/bal-ui.js decides from the visible height and sets .compact): the answer card
+   is pinned at the top of what can be seen and compact. A message always stays; the transonic sentence and Show all units wait
+   until focus leaves. */
+.solution.compact{position:sticky;top:var(--balTop,73px);z-index:2;background:var(--paper);padding:8px 12px;gap:4px 12px}
+.solution.compact .v{font-size:22px}
+.solution.compact .sol-all,.solution.compact .more{display:none}
+.solution.compact:not(.msg) .sol-foot{display:none}
 .tablewrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:8px}
 table{border-collapse:collapse;width:100%;font-size:15px}
 th,td{padding:8px 10px;text-align:right;white-space:nowrap}
@@ -175,6 +201,13 @@ th{font-weight:600;font-size:13px;color:var(--muted);border-bottom:1px solid var
 td:first-child,th:first-child{text-align:left;font-weight:600}
 tr.zero td{color:var(--muted)}
 tr.trans td{color:var(--blaze)}
+#dopeKey:empty{display:none}
+/* The dope card scrolls inside its own box both ways (its height is set from the visible height); the heading row and the yard column stay put. */
+#view-ballistics .tablewrap{overflow:auto;max-height:70vh}
+#view-ballistics .tablewrap th{position:sticky;top:0;z-index:1}
+#view-ballistics .tablewrap th:first-child,#view-ballistics .tablewrap td:first-child{position:sticky;left:0;background:var(--paper);box-shadow:inset -1px 0 0 var(--line)}
+#view-ballistics .tablewrap td:first-child{z-index:1}
+#view-ballistics .tablewrap th:first-child{z-index:3;background:var(--surface)}
 tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 60%,transparent)}
 details.more{margin-top:12px}
 details.more summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600;color:var(--c)}
@@ -465,6 +498,16 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .mk-act .btn{min-height:48px;white-space:normal;padding-inline:8px}
 .mk-act .btn[hidden]{display:none}
 .mk-act:has(#mkDel[hidden]){grid-template-columns:repeat(3,minmax(0,1fr))}
+#rfForm{display:flex;flex-direction:column;min-height:0;flex:1 1 auto}
+#rfForm .mk-body{padding-bottom:16px}
+.rf-h{margin:20px 0 0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#rfForm label.f{margin-top:12px}
+#rfForm .hint{margin:6px 0 0}
+.rf-msg{margin:0;padding:8px 0 0;font-size:15px;font-weight:600;color:var(--blaze);overflow-wrap:anywhere}
+.rf-msg:empty{display:none}
+.rf-true-btn{display:block;width:100%;margin-top:12px;min-height:48px;white-space:normal;padding:8px 16px}
+#rfForm .rf-true-out{margin-top:12px;font-size:16px;font-weight:600;color:var(--ink);overflow-wrap:anywhere}
+.rf-true-out:empty{display:none}
 #dlgList .mk-act{grid-template-columns:1fr}
 .mk-kinds{margin:12px 0;padding:0;border:0;min-width:0}
 .mk-kinds legend{padding:0;margin:0 0 6px;font-size:14px;color:var(--muted)}
@@ -478,7 +521,7 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .mk-gridline{display:block;border:0;background:none;padding:8px 0 0;min-height:44px;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left}
 .mk-rel{margin:0;font-size:14px;color:var(--muted)}
 .mk-count{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
-.mk-sheet h2:focus{outline:none}
+.mk-sheet h2:focus,#cfTitle:focus{outline:none}
 .mk-chips{display:flex;gap:6px;margin:0 -16px 8px;padding:0 16px 4px;overflow-x:auto;scrollbar-width:none}
 .mk-chips::-webkit-scrollbar{display:none}
 .mk-chips button{flex:none;white-space:nowrap;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:14px;cursor:pointer}
@@ -677,11 +720,12 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 .sv-page td{font-size:14px}
 /* A table wider than the phone scrolls inside its box: the cue says so, and the first column stays put (opaque, over the scrolled cells). */
 .sv-swipe{margin:0 0 4px;font-size:14px;font-weight:600;color:var(--c)}
-.sv-page .wide th:first-child,.sv-page .wide td:first-child{position:sticky;left:0;z-index:1;background:var(--paper);box-shadow:inset -1px 0 0 var(--line)}
-.sv-page .wide th:first-child{z-index:2;background:var(--surface)}
-.sv-page .wide tbody tr:nth-child(even) td:first-child{background:color-mix(in srgb,var(--surface) 60%,var(--paper))}
-.sv-page .wide th,.sv-page .wide td{min-width:4.5em}
+.sv-page .wide th:first-child,.sv-page .wide td:first-child,#view-ballistics .wide th:first-child,#view-ballistics .wide td:first-child{position:sticky;left:0;z-index:1;background:var(--paper);box-shadow:inset -1px 0 0 var(--line)}
+.sv-page .wide th:first-child,#view-ballistics .wide th:first-child{z-index:2;background:var(--surface)}
+.sv-page .wide tbody tr:nth-child(even) td:first-child,#view-ballistics .wide tbody tr:nth-child(even) td:first-child{background:color-mix(in srgb,var(--surface) 60%,var(--paper))}
+.sv-page .wide th,.sv-page .wide td,#view-ballistics .wide th,#view-ballistics .wide td{min-width:4.5em}
 .sv-page .wide td:first-child{min-width:6.5em}
+#view-ballistics .wide td:first-child{min-width:4em}
 .sv-link{display:flex;width:100%;min-height:48px;align-items:center;justify-content:space-between;gap:8px;margin:0 0 8px;padding:8px 12px;
   border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--c);font-weight:600;text-align:left;cursor:pointer}
 .sv-link::after{content:"›";font-size:22px;line-height:1}
@@ -962,21 +1006,30 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 
   <!-- Ballistics -->
   <div id="view-ballistics" hidden>
-    <div class="solution" id="solution" aria-live="polite">
-      <div><div class="k">Elevation</div><div class="v" id="solElev">—</div></div>
-      <div><div class="k">Windage</div><div class="v" id="solWind">—</div></div>
-      <div class="sub" id="solSub"></div>
+    <div class="bal-profile">
+      <div class="bal-pick">
+        <label class="vh" for="bProfile">Profile</label>
+        <select id="bProfile"></select>
+        <button type="button" class="btn ghost" id="bEdit">Edit</button>
+      </div>
+      <p class="bal-sight" id="bLoad"></p>
+      <p class="bal-sight" id="bSight"></p>
+      <p class="bal-sight" id="bStart" hidden>Built-in figures are a starting point. Chronograph your rifle and save your own profile.</p>
+      <p class="bal-sight" id="bZeroLine" hidden></p>
     </div>
-    <div class="seg small" role="tablist" id="unitSeg" style="margin:12px 0">
-      <button role="tab" data-unit="mil" aria-selected="true">MIL (MRAD)</button>
-      <button role="tab" data-unit="moa" aria-selected="false">MOA</button>
+    <div class="solution" id="solution" aria-live="polite">
+      <div class="sol-col" id="solElev">—</div>
+      <div class="sol-col" id="solWind">—</div>
+      <div class="sol-foot">
+        <p class="sub" id="solSub"></p>
+        <button type="button" class="btn ghost sol-all" id="bAll" aria-pressed="false" hidden>Show all units</button>
+      </div>
     </div>
 
-    <div class="block">
-      <h2 class="sv-cat">Shot</h2>
+    <div class="bal-shot">
       <div class="grid2">
         <label class="f">Target range (yd)<input id="bRange" type="number" inputmode="decimal" value="500"></label>
-        <label class="f">Incline (°)<input id="bAngle" type="number" inputmode="decimal" value="0" placeholder="+ up, − down"></label>
+        <label class="f">Incline (°)<input id="bAngle" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" value="0" placeholder="+ up, − down"></label>
         <label class="f">Wind speed (mph)<input id="bWind" type="number" inputmode="decimal" value="10"></label>
         <label class="f">Wind from (clock)
           <select id="bClock">
@@ -990,33 +1043,17 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     </div>
 
     <div class="block">
-      <h2 class="sv-cat">Rifle and load</h2>
-      <label class="f wide">Profile
-        <select id="bProfile"></select>
-      </label>
-      <div class="grid2" style="margin-top:12px">
-        <label class="f">Ballistic coefficient<input id="bBC" type="number" inputmode="decimal" step="0.001"></label>
-        <label class="f">Drag model
-          <select id="bModel"><option>G1</option><option>G7</option></select>
-        </label>
-        <label class="f">Bullet weight (gr)<input id="bW" type="number" inputmode="decimal"></label>
-        <label class="f">Muzzle velocity (fps)<input id="bMV" type="number" inputmode="decimal"></label>
-        <label class="f">Sight height (in)<input id="bSH" type="number" inputmode="decimal" step="0.1"></label>
-        <label class="f">Zero range (yd)<input id="bZero" type="number" inputmode="decimal"></label>
-      </div>
-      <p class="hint" style="margin-top:8px">Built-in profiles are starting points. Your barrel and ammo lot change velocity, so chronograph your load and confirm at distance. AR-15 scopes usually sit 2.5–2.7 in above the bore.</p>
-      <div class="row"><button class="btn ghost" id="bSave">Save as new profile</button><button class="btn ghost" id="bDel" hidden>Delete profile</button></div>
-    </div>
-
-    <div class="block">
       <h2 class="sv-cat">Conditions</h2>
-      <div class="grid2">
-        <label class="f">Temperature (°F)<input id="bTemp" type="number" inputmode="decimal" value="59"></label>
-        <label class="f">Altitude (ft)<input id="bAlt" type="number" inputmode="decimal" value="0"></label>
-        <label class="f">Station pressure (inHg)<input id="bPress" type="number" inputmode="decimal" step="0.01" placeholder="From altitude"></label>
-        <label class="f">Humidity (%)<input id="bRH" type="number" inputmode="decimal" value="50"></label>
+      <div class="bal-cond"><p id="bCond">59°F · 0 ft · 50%</p><button type="button" class="btn ghost" id="bCondBtn" aria-expanded="false" aria-controls="bCondFields">Change</button></div>
+      <div id="bCondFields" hidden>
+        <div class="grid2">
+          <label class="f">Temperature (°F)<input id="bTemp" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" value="59"></label>
+          <label class="f">Altitude (ft)<input id="bAlt" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" value="0"></label>
+          <label class="f">Station pressure (inHg)<input id="bPress" type="number" inputmode="decimal" step="0.01" placeholder="From altitude"></label>
+          <label class="f">Humidity (%)<input id="bRH" type="number" inputmode="decimal" value="50"></label>
+        </div>
+        <p class="hint" style="margin-top:8px">Leave blank unless you have a true station reading. Weather reports and phones give pressure corrected to sea level.</p>
       </div>
-      <p class="hint" style="margin-top:8px">Leave pressure blank to estimate it from altitude. A Kestrel or phone barometer reading is more accurate.</p>
     </div>
 
     <div class="block">
@@ -1027,8 +1064,11 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
           <select id="bStep"><option>25</option><option selected>50</option><option>100</option></select>
         </label>
       </div>
-      <div class="tablewrap" tabindex="0" role="region" aria-label="Dope card table, scrolls sideways"><table id="dope"></table></div>
-      <p class="hint" style="margin-top:8px">Rows in orange are transonic (below Mach 1.2), where accuracy falls off and predictions get less reliable. Spin drift and Coriolis are not included yet.</p>
+      <p class="sv-swipe" id="dopeCue" hidden>Swipe sideways to see more columns</p>
+      <div class="tablewrap" tabindex="0" role="region" aria-label="Dope card table, scrolls both ways"><table id="dope"></table></div>
+      <p class="hint" id="dopeKey" style="margin-top:8px"></p>
+      <p class="hint" id="dopeTrans" style="margin-top:8px">† Below Mach 1.2 (transonic): less certain. Confirm these with real shots.</p>
+      <p class="hint" style="margin-top:8px">Spin drift and Coriolis are not included yet.</p>
     </div>
   </div>
 </section>
@@ -1079,7 +1119,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 </dialog>
 
 <dialog id="dlgConfirm" class="sheet" aria-labelledby="cfTitle">
-  <h2 id="cfTitle"></h2>
+  <h2 id="cfTitle" tabindex="-1"></h2>
   <p id="cfText" hidden></p>
   <div class="row"><button type="button" class="btn ghost" id="cfCancel" data-act="cancel" autofocus>Cancel</button><button type="button" class="btn" id="cfOk" data-act="ok"></button></div>
 </dialog>
@@ -1108,6 +1148,66 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <button type="button" class="btn ghost" id="mkMove">Move</button>
       <button type="button" class="btn ghost" id="mkDel">Delete</button>
       <button type="button" class="btn ghost" id="mkCancel">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgRifle" class="sheet mk-sheet" aria-labelledby="rfTitle">
+  <form id="rfForm" autocomplete="off" novalidate>
+    <div class="mk-body">
+      <h2 id="rfTitle" tabindex="-1">Edit profile</h2>
+      <p class="hint" id="rfBuiltIn" hidden>This is a built-in load. Change what you need, then save it as a new profile.</p>
+      <h3 class="rf-h">Rifle and load</h3>
+      <label class="f">Name<input id="rfName" type="text" maxlength="60" enterkeyhint="done"></label>
+      <label class="f">Ballistic coefficient<input id="rfBC" type="number" inputmode="decimal" step="0.001"></label>
+      <label class="f">Drag model<select id="rfModel"><option>G1</option><option>G7</option></select></label>
+      <label class="f">Bullet weight (gr)<input id="rfW" type="number" inputmode="decimal"></label>
+      <label class="f">Muzzle velocity (fps)<input id="rfMV" type="number" inputmode="decimal"></label>
+      <p class="hint">Measure velocity near the temperature you'll shoot in.</p>
+      <label class="f">Sight height (in)<input id="rfSH" type="number" inputmode="decimal" step="0.1"></label>
+      <label class="f">Zero range (yd)<input id="rfZero" type="number" inputmode="decimal"></label>
+      <h3 class="rf-h">Sight</h3>
+      <label class="f">Sight
+        <select id="rfOptic">
+          <option value="none">Not set</option><option value="turret">Scope with turrets</option>
+          <option value="reticle">Drop reticle (low-power scope)</option><option value="dot">Red dot or iron sights</option>
+        </select>
+      </label>
+      <label class="f" id="rfUnitRow">Unit
+        <select id="rfUnit"><option value="mil">Mil</option><option value="moa">MOA (1.047 in at 100 yd)</option><option value="iphy">Inches per 100 yd</option></select>
+      </label>
+      <p class="hint" id="rfUnitHint">Some scopes sold as MOA move 1 inch per 100 yd. Check the manual.</p>
+      <label class="f" id="rfClickRow">Click size<select id="rfClick"></select></label>
+      <label class="f" id="rfMarksRow">Marks<input id="rfMarks" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="done"></label>
+      <div id="rfMarksHint">
+        <p class="hint">Separate marks with spaces or commas, like 1.5 3 4.6.</p>
+        <p class="hint">Type each mark's distance below the centre, from your scope's manual. If the manual gives only yardages, this isn't supported yet.</p>
+        <p class="hint">If the reticle doesn't grow with magnification, the marks are true at one magnification only. The manual says which.</p>
+      </div>
+      <h3 class="rf-h">Zero conditions</h3>
+      <label class="f">Temperature (°F)<input id="rfZTemp" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></label>
+      <label class="f">Altitude (ft)<input id="rfZAlt" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></label>
+      <label class="f">Station pressure (inHg)<input id="rfZPress" type="number" inputmode="decimal" step="0.01"></label>
+      <p class="hint">Leave blank unless you have a true station reading. Weather reports and phones give pressure corrected to sea level.</p>
+      <p class="hint" id="rfZHint">Zero conditions not set: assumed the same as today.</p>
+      <div id="rfTruePart" hidden>
+        <h3 class="rf-h">Correct from a real shot</h3>
+        <p class="hint">Enter a distance and the elevation the rifle really needed there. Uses today's conditions from the Ballistics screen, a level shot and no wind.</p>
+        <label class="f">Distance (yd)<input id="rfTrueYd" type="number" inputmode="decimal"></label>
+        <label class="f">Elevation needed<input id="rfTrueVal" type="number" inputmode="decimal"></label>
+        <label class="f">In<select id="rfTrueUnit" aria-label="Unit of the elevation"></select></label>
+        <button type="button" class="btn ghost rf-true-btn" id="rfTrueGo">Work it out</button>
+        <p class="hint rf-true-out" id="rfTrueOut" aria-live="polite"></p>
+        <button type="button" class="btn rf-true-btn" id="rfTrueSave" hidden></button>
+        <button type="button" class="btn ghost rf-true-btn" id="rfTrueUndo" hidden></button>
+      </div>
+    </div>
+    <p class="rf-msg" id="rfMsg" aria-live="polite"></p>
+    <div class="mk-act">
+      <button type="button" class="btn" id="rfSave">Save</button>
+      <button type="button" class="btn ghost" id="rfSaveNew">Save as new profile</button>
+      <button type="button" class="btn ghost" id="rfDelete">Delete profile</button>
+      <button type="button" class="btn ghost" id="rfCancel">Cancel</button>
     </div>
   </form>
 </dialog>

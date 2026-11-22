@@ -44,7 +44,7 @@ const BAL = (() => {
     let st = [0, -s.h, 0, s.v0 * Math.cos(alpha), s.v0 * Math.sin(alpha), 0, 0];
     const out = [];
     let i = 0;
-    const dt = 0.001;
+    const dt = s.dt;
     while (i < xs.length && st[6] < 15) {
       const [x, y, z, vx, vy, vz, tm] = st;
       const a1 = acc(vx, vy, vz);
@@ -69,18 +69,23 @@ const BAL = (() => {
 
   /* p: { bc, model, w (gr), mv (fps), sight (in), zero (yd), temp (°F), alt (ft),
           press (inHg, 0 = from altitude), rh (%), wind (mph), clock (1–12), angle (°),
-          ranges: [yd,...] } */
+          ranges: [yd,...], dt (s, integration step, default 0.001),
+          zeroAtm: { temp, alt, press, rh } the air the zero was made in (same units; absent, null or any
+          non-finite field = today's air) } */
   function solve(p) {
     if (!(p.bc > 0) || !(p.mv > 0) || !(p.zero > 0)) return { error: 'Enter a BC, muzzle velocity and zero range.' };
     const atm = atmosphere(p.temp, p.alt || 0, p.press, p.rh || 0);
     const s = { model: p.model === 'G7' ? 'G7' : 'G1', K: (Math.PI / 8) / (p.bc * LBIN2),
-      rho: atm.rho, c: atm.c, v0: p.mv * FPS, h: (p.sight || 0) * IN };
+      rho: atm.rho, c: atm.c, v0: p.mv * FPS, h: (p.sight || 0) * IN, dt: p.dt > 0 ? p.dt : 0.001 };
 
-    // Zero under current conditions, level, no wind.
+    // Zero level, no wind, in the air the rifle was zeroed in (today's air when zeroAtm is absent or incomplete).
+    const za = p.zeroAtm, zeroAir = za && [za.temp, za.alt, za.press, za.rh].every(Number.isFinite)
+      ? atmosphere(za.temp, za.alt || 0, za.press, za.rh) : atm;
+    const sz = Object.assign({}, s, { rho: zeroAir.rho, c: zeroAir.c });
     const zx = p.zero * YD;
     let alpha = Math.atan(s.h / zx);
     for (let n = 0; n < 25; n++) {
-      const r = fly(s, alpha, 0, 0, 0, [zx])[0];
+      const r = fly(sz, alpha, 0, 0, 0, [zx])[0];
       if (!r) return { error: 'Bullet never reaches the zero range with these inputs.' };
       if (Math.abs(r.y) < 1e-6) break;
       alpha -= r.y / zx;
@@ -104,5 +109,36 @@ const BAL = (() => {
     return { rows, atm, cross: W / MPH * Math.sin(ang), head: W / MPH * Math.cos(ang) };
   }
 
-  return { solve, atmosphere };
+  /* The muzzle velocity that reproduces one real shot. p: a full solve() input (the load, the zero, zeroAtm and the day's air);
+     yd: the distance of the shot; angleRad: the angle up from the line of sight the rifle really needed there. The shot is read
+     level and with no wind whatever p carries. Looks between 0.85 and 1.15 times p.mv, to within 0.5 fps.
+     Returns { mv (whole fps), change (fraction, signed), warn? (change over 5%) } or { error }:
+     'bad' (a number missing or not above 0), 'near' (under 300 yd), 'slow' (below Mach 1.2 there at p.mv), 'far' (more than
+     15% off, or nothing in range reproduces it). */
+  function trueMv(p, yd, angleRad) {
+    const ok = v => typeof v === 'number' && Number.isFinite(v) && v > 0;
+    if (!p || !ok(yd) || !ok(angleRad) || !ok(p.mv)) return { error: 'bad' };
+    if (yd < 300) return { error: 'near' };
+    const need = mv => {
+      const r = solve({ ...p, mv, wind: 0, clock: 12, angle: 0, ranges: [yd] });
+      const row = !r.error && r.rows.length === 1 ? r.rows[0] : null;
+      return row && { rad: Math.atan(-row.dropIn / (yd * 36)), mach: row.mach };
+    };
+    const now = need(p.mv);
+    if (!now) return { error: 'slow' };         // never gets there at this velocity
+    if (now.mach < 1.2) return { error: 'slow' };
+    let lo = p.mv * 0.85, hi = p.mv * 1.15;     // a faster bullet needs less angle
+    const a = need(lo), b = need(hi);
+    if (!a || !b || a.rad < angleRad || b.rad > angleRad) return { error: 'far' };
+    while (hi - lo > 0.5) {
+      const mid = (lo + hi) / 2, m = need(mid);
+      if (!m) return { error: 'far' };
+      if (m.rad > angleRad) lo = mid; else hi = mid;
+    }
+    const mv = Math.round((lo + hi) / 2), change = (mv - p.mv) / p.mv;
+    if (Math.abs(change) > 0.15) return { error: 'far' };
+    return Math.abs(change) > 0.05 ? { mv, change, warn: true } : { mv, change };
+  }
+
+  return { solve, trueMv, atmosphere, tables: TABLES };
 })();

@@ -291,16 +291,38 @@
   /* A backup is being restored: drop the pending save so it cannot land on top of it. */
   FK.on('restoring', () => { frozen = true; clearTimeout(calcT); });
   FK.on('restoreFailed', () => { frozen = false; later(); });
-  /* On a short screen (keyboard up) the answer card is pinned under the header; the header's height sets where. */
-  const view = $('#view-ballistics'), card = F('solution');
-  view.addEventListener('focusin', e => {
+  /* A short screen (keyboard up): while a Ballistics input has focus and the VISIBLE height is 480 px or less, the answer card is
+     compact and pinned at the top of what can be seen, and the focused field is kept between the card and whatever covers the
+     bottom (the tab bar when it is inside the visible viewport, otherwise the bottom of the visible viewport). A phone keyboard
+     shrinks only the visual viewport, so the height comes from window.visualViewport where there is one, else innerHeight. */
+  const view = $('#view-ballistics'), card = F('solution'), SHORT = 480, GAP = 4;
+  const balShort = h => typeof h === 'number' && Number.isFinite(h) && h <= SHORT;
+  const seen = () => { const v = window.visualViewport; return v && Number.isFinite(v.height) ? { top: v.offsetTop || 0, height: v.height } : { top: 0, height: innerHeight }; };
+  const typing = el => !!el && !view.hidden && view.contains(el) && el.matches('input, select') && !el.closest('.bal-profile');
+  function pin() {
+    const el = document.activeElement, vis = seen(), on = typing(el) && balShort(vis.height);
+    card.classList.toggle('compact', on);
+    if (!on) return;
     const top = $('.top');
-    document.documentElement.style.setProperty('--balTop', (top ? top.getBoundingClientRect().bottom : 73) + 'px');
-    if (e.target.matches('input, select') && !e.target.closest('.bal-profile')) card.classList.add('compact');
-  });
-  view.addEventListener('focusout', e => {
-    if (!e.relatedTarget || !view.contains(e.relatedTarget) || !e.relatedTarget.matches('input, select')) card.classList.remove('compact');
-  });
+    document.documentElement.style.setProperty('--balTop', Math.max(top ? top.getBoundingClientRect().bottom : 0, vis.top) + 'px');
+    const bar = $('.tabbar'), barTop = bar ? bar.getBoundingClientRect().top : Infinity, visBottom = vis.top + vis.height;
+    const cover = barTop < visBottom ? barTop : visBottom;
+    for (let i = 0; i < 4; i++) {                              // the card sticks part way through a scroll: measure again
+      const c = card.getBoundingClientRect(), f = el.getBoundingClientRect();
+      let d = 0;
+      if (f.bottom > cover - GAP) d = f.bottom - (cover - GAP);
+      if (f.top - d < c.bottom + GAP) d = f.top - (c.bottom + GAP);
+      if (Math.abs(d) < 1) break;
+      const y = scrollY;
+      scrollBy(0, d);
+      if (scrollY === y) break;                                // nothing more to scroll
+    }
+  }
+  const pinSoon = () => { pin(); requestAnimationFrame(pin); setTimeout(pin, 150); };   // after the browser's own scroll to the field
+  view.addEventListener('focusin', pinSoon);
+  view.addEventListener('focusout', () => setTimeout(pin, 0));
+  addEventListener('resize', () => { if (!view.hidden) pin(); });
+  if (window.visualViewport) { visualViewport.addEventListener('resize', pin); visualViewport.addEventListener('scroll', pin); }
   /* The screen opens with every unit hidden again and the conditions folded away. */
   let was = false;
   FK.on('shown', s => {
@@ -332,5 +354,6 @@
   };
   FK._test.presets = () => PRESETS.map(p => ({ ...p }));
   FK._test.balState = () => ({ profile: cur, showAll });
+  FK._test.balShort = balShort;
   init();
 })();

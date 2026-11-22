@@ -382,3 +382,106 @@ def test_mv0_after_put_back_and_corrections(page, app_url):
     expect(page.locator(DLG)).to_be_hidden()
     got = [p for p in profiles(page) if p['id'] == 'u1'][0]
     assert got['mv'] == 2900 and 'mv0' not in got
+
+
+# ---------- The result is seen and never lost without a question ----------
+
+def boxes(page):
+    return page.evaluate("""() => { const r = s => document.querySelector(s).getBoundingClientRect();
+      return { body: r('#dlgRifle .mk-body'), act: r('#dlgRifle .mk-act'), out: r('#rfTrueOut'), use: r('#rfTrueSave') }; }""")
+
+
+def test_work_it_out_brings_the_result_and_use_into_view(page, app_url):
+    page.set_viewport_size({'width': 360, 'height': 640})
+    open_editor(page, app_url)
+    page.locator('#rfTrueGo').scroll_into_view_if_needed()
+    work(page, 600, round(typed(page, shot(page, 2550, 600), 600, 'mil'), 4), 'mil')
+    page.wait_for_timeout(100)
+    b = boxes(page)
+    assert b['out']['top'] >= b['body']['top'] and b['use']['bottom'] <= b['body']['bottom'] <= b['act']['top'] + 1, b
+    assert b['use']['height'] >= 44
+    assert page.get_attribute('#rfTrueOut', 'aria-live') == 'polite'
+    # a refusal is brought into view too
+    page.locator('#rfTitle').scroll_into_view_if_needed()
+    page.evaluate("document.querySelector('#dlgRifle .mk-body').scrollTop = document.querySelector('#rfTrueGo').offsetTop - 300")
+    work(page, 250, 1)
+    page.wait_for_timeout(100)
+    b = boxes(page)
+    assert out(page) == NEAR
+    assert b['out']['top'] >= b['body']['top'] and b['out']['bottom'] <= b['body']['bottom'], b
+
+
+def worked(page):
+    work(page, 600, round(typed(page, shot(page, 2550, 600), 600, 'mil'), 4), 'mil')
+    return int(out(page).split('→ ')[1].split(' fps')[0].replace(',', ''))
+
+
+@pytest.mark.parametrize('button', ['#rfSave', '#rfSaveNew'])
+def test_saving_with_an_unused_result_asks_and_can_use_it(page, app_url, button):
+    open_editor(page, app_url)
+    mv = worked(page)
+    if button == '#rfSaveNew':
+        page.fill('#rfName', 'Corrected copy')
+        mv = worked(page)                            # typing a name clears the result: work it out again
+    page.click(button)
+    expect(page.locator('#cfTitle')).to_have_text('Use the corrected velocity?')
+    expect(page.locator('#cfText')).to_have_text(f"You worked out {mv:,} fps but haven't used it.")
+    expect(page.locator('#cfOk')).to_have_text('Use it and save')
+    expect(page.locator('#cfCancel')).to_have_text('Save without it')
+    page.click('#cfOk')
+    expect(page.locator(DLG)).to_be_hidden()
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
+    got = [p for p in profiles(page) if p['name'] == ('Mine' if button == '#rfSave' else 'Corrected copy')][0]
+    assert got['mv'] == mv and got['mv0'] == 2600
+    page.wait_for_timeout(600)
+    assert page.evaluate('FK.view()') == 'ballistics'
+
+
+def test_saving_with_an_unused_result_can_save_without_it(page, app_url):
+    open_editor(page, app_url)
+    page.fill('#rfBC', '0.25')
+    worked(page)
+    page.click('#rfSave')
+    page.click('#cfCancel')                          # Save without it
+    expect(page.locator(DLG)).to_be_hidden()
+    got = profiles(page)[0]
+    assert got['mv'] == 2600 and got['bc'] == 0.25 and 'mv0' not in got
+
+
+def test_closing_the_question_saves_nothing_and_keeps_the_sheet(page, app_url):
+    open_editor(page, app_url)
+    page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0")   # a slow phone
+    mv = worked(page)
+    page.click('#rfSave')
+    expect(page.locator('#cfTitle')).to_have_text('Use the corrected velocity?')
+    page.go_back()
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
+    page.wait_for_timeout(400)
+    expect(page.locator(DLG)).to_be_visible()
+    assert profiles(page)[0]['mv'] == 2600
+    expect(page.locator('#rfTrueSave')).to_have_text(f'Use {mv:,} fps')      # the result is still waiting
+    page.click('#rfSave')
+    expect(page.locator('#cfTitle')).to_have_text('Use the corrected velocity?')
+    page.keyboard.press('Escape')
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
+    expect(page.locator(DLG)).to_be_visible()
+    page.click('#rfSave')
+    page.click('#cfOk')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['mv'] == mv
+    page.wait_for_timeout(800)
+    assert page.evaluate('FK.view()') == 'ballistics'
+
+
+def test_cancel_after_use_asks(page, app_url):
+    open_editor(page, app_url)
+    correct(page, 2550)
+    page.click('#rfCancel')
+    expect(page.locator('#cfTitle')).to_have_text('Discard changes to this profile?')
+    page.click('#cfCancel')                          # Keep editing
+    expect(page.locator(DLG)).to_be_visible()
+    assert page.input_value('#rfMV') != '2600'
+    page.click('#rfCancel')
+    page.click('#cfOk')                              # Discard
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['mv'] == 2600

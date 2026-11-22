@@ -184,15 +184,13 @@ input::placeholder{color:var(--muted);opacity:.8}
 .bal-cond p{flex:1;margin:0;min-width:0;font-size:16px}
 .bal-cond .btn{flex:none}
 #bCondFields{margin-top:12px}
-/* A short screen with a field focused (keyboard up): the answer card is pinned under the header and compact. A message always stays;
-   the transonic sentence and Show all units wait until focus leaves. Focused fields keep clear of the card. */
-@media (max-height:480px){
-  .solution.compact{position:sticky;top:var(--balTop,73px);z-index:2;background:var(--paper);padding:8px 12px;gap:4px 12px}
-  .solution.compact .v{font-size:22px}
-  .solution.compact .sol-all{display:none}
-  .solution.compact:not(.msg) .sol-foot{display:none}
-  .bal-shot input,.bal-shot select,#bCondFields input{scroll-margin-top:170px}
-}
+/* A short screen with a field focused (keyboard up; src/bal-ui.js decides from the visible height and sets .compact): the answer card
+   is pinned at the top of what can be seen and compact. A message always stays; the transonic sentence and Show all units wait
+   until focus leaves. */
+.solution.compact{position:sticky;top:var(--balTop,73px);z-index:2;background:var(--paper);padding:8px 12px;gap:4px 12px}
+.solution.compact .v{font-size:22px}
+.solution.compact .sol-all{display:none}
+.solution.compact:not(.msg) .sol-foot{display:none}
 .tablewrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:8px}
 table{border-collapse:collapse;width:100%;font-size:15px}
 th,td{padding:8px 10px;text-align:right;white-space:nowrap}
@@ -489,6 +487,7 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .mk-act .btn[hidden]{display:none}
 .mk-act:has(#mkDel[hidden]){grid-template-columns:repeat(3,minmax(0,1fr))}
 #rfForm{display:flex;flex-direction:column;min-height:0;flex:1}
+#rfForm .mk-body{padding-bottom:16px}
 .rf-h{margin:20px 0 0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 #rfForm label.f{margin-top:12px}
 #rfForm .hint{margin:6px 0 0}
@@ -510,7 +509,7 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .mk-gridline{display:block;border:0;background:none;padding:8px 0 0;min-height:44px;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left}
 .mk-rel{margin:0;font-size:14px;color:var(--muted)}
 .mk-count{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
-.mk-sheet h2:focus{outline:none}
+.mk-sheet h2:focus,#cfTitle:focus{outline:none}
 .mk-chips{display:flex;gap:6px;margin:0 -16px 8px;padding:0 16px 4px;overflow-x:auto;scrollbar-width:none}
 .mk-chips::-webkit-scrollbar{display:none}
 .mk-chips button{flex:none;white-space:nowrap;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:14px;cursor:pointer}
@@ -1104,7 +1103,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 </dialog>
 
 <dialog id="dlgConfirm" class="sheet" aria-labelledby="cfTitle">
-  <h2 id="cfTitle"></h2>
+  <h2 id="cfTitle" tabindex="-1"></h2>
   <p id="cfText" hidden></p>
   <div class="row"><button type="button" class="btn ghost" id="cfCancel" data-act="cancel" autofocus>Cancel</button><button type="button" class="btn" id="cfOk" data-act="ok"></button></div>
 </dialog>

@@ -243,19 +243,36 @@ def test_back_with_unsaved_typing_asks(page, app_url):
     assert page.evaluate('FK.view()') == 'ballistics'
 
 
-def test_back_without_typing_closes_and_cancel_never_asks(page, app_url):
+def test_back_without_typing_closes_and_cancel_asks_like_back(page, app_url):
+    """Cancel asks Keep editing / Discard when something was changed, exactly as Back does (it asked nothing before)."""
     open_editor(page, app_url)
     page.go_back()
     expect(page.locator(DLG)).to_be_hidden()
     page.wait_for_timeout(400)    # a tap on the same spot straight after a sheet closes is swallowed (double-tap guard)
     page.click('#bEdit')
+    page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0")   # a slow phone
     page.fill('#rfName', 'Changed')
     page.click('#rfCancel')
+    expect(page.locator('#cfTitle')).to_have_text('Discard changes to this profile?')
+    expect(page.locator('#cfText')).to_have_text('What you typed is not kept.')
+    page.click('#cfCancel')                                 # Keep editing
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
+    page.wait_for_timeout(400)
+    expect(page.locator(DLG)).to_be_visible()
+    assert page.input_value('#rfName') == 'Changed'
+    page.click('#rfCancel')
+    page.click('#cfOk')                                     # Discard
     expect(page.locator(DLG)).to_be_hidden()
     expect(page.locator('#dlgConfirm')).to_be_hidden()
     assert profiles(page) == [OWN]
-    page.wait_for_timeout(400)
+    page.wait_for_timeout(800)
     assert page.evaluate('FK.view()') == 'ballistics'
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    page.wait_for_timeout(250)
+    page.click('#rfCancel')                                 # nothing changed: closes at once
+    expect(page.locator(DLG)).to_be_hidden()
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
 
 
 def test_typing_and_changing_back_is_not_a_change(page, app_url):
@@ -483,6 +500,7 @@ def test_state_resets_between_openings(page, app_url):
     page.fill('#rfBC', '')
     refuse(page, 'Ballistic coefficient must be more than 0.', 'rfBC')
     page.click('#rfCancel')
+    page.click('#cfOk')                                 # Discard (Cancel asks: the coefficient was changed)
     expect(page.locator(DLG)).to_be_hidden()
     page.wait_for_timeout(400)
     page.click('#bEdit')

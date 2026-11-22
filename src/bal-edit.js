@@ -126,12 +126,15 @@
     if (ed.applied) return ed.base.mv0 !== undefined ? ed.base.mv0 : moved ? ed.openMv : undefined;
     return ed.undone ? undefined : ed.base.mv0;
   }
-  /* Save what the sheet shows, in place or as a new profile. Stays open (with the reason in #rfMsg) if it cannot. */
-  function commitEditor(asNew) {
-    if (!editing || deleting || (!asNew && !editing.own)) return;
+  /* Save what the sheet shows, in place or as a new profile. Stays open (with the reason in #rfMsg) if it cannot. A velocity worked
+     out and not used is never dropped silently: Save asks first (decided: true once the question has been answered). */
+  let asking = false;        // the question about an unused correction is open
+  function commitEditor(asNew, decided) {
+    if (!editing || deleting || asking || (!asNew && !editing.own)) return;
     const v = readEditor();
     if (v.error) { say(v.error); F(v.focus).focus(); return; }
     say('');
+    if (result && !decided) { askUse(asNew); return; }
     const p = { ...editing.base, ...v, id: asNew ? FK.balHost.newId() : editing.base.id };
     ['optic', 'zeroAtm'].forEach(k => { if (!p[k]) delete p[k]; });
     /* The original velocity: kept through every correction, gone once put back. A copy carries one only when a correction was applied here. */
@@ -142,6 +145,20 @@
     FK.bal.select(saved.id);
     FK.sheet.close(dlg);
     toast(`Saved ${saved.name}`);
+  }
+
+  async function askUse(asNew) {
+    const mv = result.mv, base = editing;
+    asking = true;
+    const how = await FK.sheet.confirm({ title: 'Use the corrected velocity?', text: `You worked out ${fmt(mv)} fps but haven't used it.`,
+      ok: 'Use it and save', cancel: 'Save without it', choice: true });
+    asking = false;
+    if (!how || editing !== base) return;                        // closed: back to the sheet, nothing saved
+    FK.sheet.afterStep(() => {                                   // the question's own step back is still on its way
+      if (editing !== base) return;
+      if (how === 'ok' && result) useResult();
+      commitEditor(asNew, true);
+    });
   }
 
   /* ---------- Correct from a real shot ---------- */
@@ -176,10 +193,20 @@
   function clearResult() { result = null; F('rfTrueOut').textContent = ''; showTrue(); }
   const signed = pct => { const t = Math.abs(pct).toFixed(1); return Number(t) === 0 ? '0.0' : (pct < 0 ? '-' : '+') + t; };
 
+  /* The result (or the refusal) and its Use button, scrolled into the sheet's visible part above the sticky buttons (and above a
+     keyboard: the visible viewport), never past the top of the result line. */
+  function reveal() {
+    const body = dlg.querySelector('.mk-body'), out = F('rfTrueOut'), last = F('rfTrueSave').hidden ? out : F('rfTrueSave');
+    if (!out.textContent) return;
+    const b = body.getBoundingClientRect(), vv = window.visualViewport, GAP = 8;
+    const bottom = Math.min(b.bottom, vv ? vv.offsetTop + vv.height : innerHeight) - GAP;
+    const need = last.getBoundingClientRect().bottom - bottom, room = out.getBoundingClientRect().top - (b.top + GAP);
+    if (need > 0) body.scrollTop += Math.ceil(Math.max(0, Math.min(need, room)));
+  }
   function workItOut() {
     if (!editing || deleting || !editing.own) return;
     clearResult();
-    const show = text => { F('rfTrueOut').textContent = text; };
+    const show = text => { F('rfTrueOut').textContent = text; reveal(); };
     const yd = numOf('rfTrueYd'), val = numOf('rfTrueVal');
     if (!(yd > 0) || !(val > 0)) return show(MORE.ask);
     const angle = BALS.toAngle(val, F('rfTrueUnit').value, yd);
@@ -194,8 +221,8 @@
     const r = BAL.trueMv(p, yd, angle);
     if (r.error) return show(r.error === 'bad' ? MORE.ask : MORE[r.error]);
     result = { mv: r.mv };
-    show(`Velocity ${fmt(v.mv)} fps \u2192 ${fmt(r.mv)} fps (${signed(r.change * 100)}%).` + (r.warn ? ' ' + MORE.warn : ''));
     showTrue();
+    show(`Velocity ${fmt(v.mv)} fps \u2192 ${fmt(r.mv)} fps (${signed(r.change * 100)}%).` + (r.warn ? ' ' + MORE.warn : ''));
   }
   /* Both buttons write into the velocity field; the profile is stored only by the sheet's own Save. */
   function setVelocity(mv, text) {
@@ -204,12 +231,12 @@
     say(text);
   }
   F('rfTrueGo').addEventListener('click', workItOut);
-  F('rfTrueSave').addEventListener('click', () => {
-    if (!result || !editing) return;
+  function useResult() {
     const mv = result.mv;
     editing.applied = true; editing.undone = false;
     setVelocity(mv, `Velocity set to ${fmt(mv)} fps. Press Save to keep it.`);
-  });
+  }
+  F('rfTrueSave').addEventListener('click', () => { if (result && editing && !asking) useResult(); });
   F('rfTrueUndo').addEventListener('click', () => {
     if (!editing || editing.base.mv0 === undefined) return;
     editing.undone = true; editing.applied = false;
@@ -221,7 +248,7 @@
   F('rfForm').addEventListener('change', clearResult);
   F('rfForm').addEventListener('submit', e => { e.preventDefault(); commitEditor(false); });
   F('rfSaveNew').addEventListener('click', () => commitEditor(true));
-  F('rfCancel').addEventListener('click', () => FK.sheet.close(dlg));
+  F('rfCancel').addEventListener('click', () => FK.sheet.dismiss(dlg));     // asks Keep editing / Discard when something changed, as Back does
   F('rfOptic').addEventListener('change', () => { showSight(); fillTrueUnits(); });
   F('rfUnit').addEventListener('change', () => { fillClicks(F('rfUnit').value); fillTrueUnits(); });
   ['rfZTemp', 'rfZAlt', 'rfZPress'].forEach(i => F(i).addEventListener('input', showZHint));

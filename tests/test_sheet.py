@@ -535,3 +535,33 @@ def test_escape_and_a_plain_close_still_end_the_sheet_entry(page, app_url):
     assert page.evaluate('FK.route.index() === history.state.fkIdx')
     page.go_back()
     assert page.url == 'about:blank'
+
+
+def test_a_confirm_with_two_choices_tells_a_close_from_either_choice(page, app_url):
+    """choice: true resolves 'ok' or 'cancel' for the two buttons and null when the sheet is closed any other way."""
+    boot(page, app_url)
+    page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0")   # a slow phone
+    ask = "window.__r = 'pending'; void FK.sheet.confirm({ title: 'Which?', ok: 'A', cancel: 'B', choice: true }).then(v => { window.__r = v; })"
+    for how, want in [('#cfOk', 'ok'), ('#cfCancel', 'cancel'), ('back', None), ('Escape', None)]:
+        page.wait_for_timeout(400)
+        page.evaluate(ask)
+        expect(page.locator('#dlgConfirm')).to_be_visible()
+        expect(page.locator('#cfOk')).to_have_text('A')
+        expect(page.locator('#cfCancel')).to_have_text('B')
+        assert page.evaluate('document.activeElement.id') == 'cfTitle'      # neither choice is taken by a stray Enter
+        if how == 'back':
+            page.go_back()
+        elif how == 'Escape':
+            page.keyboard.press('Escape')
+        else:
+            page.click(how)
+        expect(page.locator('#dlgConfirm')).to_be_hidden()
+        page.wait_for_function("window.__r !== 'pending'")
+        assert page.evaluate('window.__r') == want, how
+    page.wait_for_timeout(400)
+    # without choice the answer is still true or false
+    page.evaluate("window.__r = 'pending'; void FK.sheet.confirm({ title: 'Sure?', ok: 'Go' }).then(v => { window.__r = v; })")
+    assert page.evaluate('document.activeElement.id') == 'cfCancel'
+    page.go_back()
+    page.wait_for_function("window.__r !== 'pending'")
+    assert page.evaluate('window.__r') is False

@@ -556,3 +556,69 @@ def test_saving_the_same_profile_keeps_show_all_units(page, app_url):
     expect(page.locator('#bAll')).to_have_attribute('aria-pressed', 'true')
     page.select_option('#bProfile', 'ud')
     expect(page.locator('#bAll')).to_have_attribute('aria-pressed', 'false')
+
+
+# ---------- The short state follows the visible height (a real keyboard does not shrink the page) ----------
+
+def test_short_rule_is_480_px_of_visible_height(page, app_url):
+    open_screen(page, app_url)
+    got = page.evaluate('[200, 340, 479, 480, 481, 640, NaN, undefined].map(h => FK._test.balShort(h))')
+    assert got == [True, True, True, True, False, False, False, False]
+
+
+FAKE_VV = """(() => {
+  const vv = new EventTarget();
+  vv.width = 360; vv.height = %d; vv.offsetTop = 0; vv.offsetLeft = 0; vv.pageTop = 0; vv.scale = 1;
+  Object.defineProperty(window, 'visualViewport', { configurable: true, get: () => vv });
+  window.__vv = vv;
+})()"""
+
+
+def test_a_keyboard_that_only_shrinks_the_visible_viewport_pins_the_card(page, app_url):
+    """The page stays 640 px tall (as on a phone with its keyboard up) and only visualViewport says 300 px are visible."""
+    page.add_init_script(FAKE_VV % 300)
+    open_screen(page, app_url, profile='ut', profiles=MINE)
+    assert not page.evaluate("document.querySelector('#solution').classList.contains('compact')")
+    for sel in ['#bRange', '#bWind']:
+        page.focus(sel)
+        page.wait_for_timeout(250)
+        assert page.evaluate("document.querySelector('#solution').classList.contains('compact')"), sel
+        c, f = page.locator('#solution').bounding_box(), page.locator(sel).bounding_box()
+        assert c['y'] >= 0 and f['y'] >= c['y'] + c['height'] and f['y'] + f['height'] <= 300, (sel, c, f)
+    # the keyboard goes down: the visible height grows past 480 and the card is full again
+    page.evaluate("window.__vv.height = 640; window.__vv.dispatchEvent(new Event('resize'))")
+    page.wait_for_timeout(100)
+    assert not page.evaluate("document.querySelector('#solution').classList.contains('compact')")
+    page.evaluate("window.__vv.height = 300; window.__vv.dispatchEvent(new Event('resize'))")
+    page.wait_for_timeout(100)
+    assert page.evaluate("document.querySelector('#solution').classList.contains('compact')")
+
+
+def test_without_visual_viewport_the_window_height_decides(page, app_url):
+    page.add_init_script("Object.defineProperty(window, 'visualViewport', { configurable: true, get: () => undefined })")
+    open_screen(page, app_url, profile='ut', profiles=MINE, view=(360, 340))
+    page.focus('#bRange')
+    page.wait_for_timeout(250)
+    assert page.evaluate("document.querySelector('#solution').classList.contains('compact')")
+    open_screen(page, app_url, profile='ut', profiles=MINE)
+    page.focus('#bRange')
+    page.wait_for_timeout(250)
+    assert not page.evaluate("document.querySelector('#solution').classList.contains('compact')")
+
+
+def intersects(a, b):
+    return a['x'] < b['x'] + b['width'] and b['x'] < a['x'] + a['width'] and a['y'] < b['y'] + b['height'] and b['y'] < a['y'] + a['height']
+
+
+@pytest.mark.parametrize('view', [(360, 340), (640, 360)], ids=['short', 'landscape'])
+def test_the_focused_field_is_clear_of_the_card_and_the_tab_bar(page, app_url, view):
+    for sel in ['#bRange', '#bWind', '#bTemp', '#bRH']:
+        open_screen(page, app_url, profile='ut', profiles=MINE, view=view)
+        if sel in ('#bTemp', '#bRH'):
+            page.click('#bCondBtn')
+        page.focus(sel)
+        page.wait_for_timeout(250)
+        c, f = page.locator('#solution').bounding_box(), page.locator(sel).bounding_box()
+        bar = page.locator('.tabbar').bounding_box()
+        assert not intersects(f, c) and not intersects(f, bar), (sel, f, c, bar)
+        assert f['y'] >= 0 and f['y'] + f['height'] <= view[1], (sel, f)

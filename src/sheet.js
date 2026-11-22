@@ -240,8 +240,10 @@
     });
   }
 
-  /* Confirm in #dlgConfirm. Focus starts on Cancel, so a stray Enter never does the destructive thing. */
-  function askConfirm({ title, text = '', ok, cancel = 'Cancel', danger = false }) {
+  /* Confirm in #dlgConfirm. Focus starts on Cancel, so a stray Enter never does the destructive thing. Resolves true (ok) or false.
+     choice: true makes both buttons answers: resolves 'ok' or 'cancel' for the button pressed and null when the sheet is closed any
+     other way (Back, Escape, a backdrop tap); focus then starts on the title, so a stray Enter takes neither. */
+  function askConfirm({ title, text = '', ok, cancel = 'Cancel', danger = false, choice = false }) {
     const dlg = $('#dlgConfirm');
     if (live.has(dlg)) return Promise.resolve(false);
     live.add(dlg);
@@ -251,10 +253,10 @@
     go.textContent = ok; go.classList.toggle('danger', !!danger);
     $('#cfCancel').textContent = cancel;
     return new Promise(resolve => {
-      let result = false;
-      go.onclick = () => { result = true; close(dlg); };
-      $('#cfCancel').onclick = () => close(dlg);
-      open(dlg, { onClose: () => { live.delete(dlg); resolve(result); }, onOpen: () => $('#cfCancel').focus() });
+      let result = choice ? null : false;
+      go.onclick = () => { result = choice ? 'ok' : true; close(dlg); };
+      $('#cfCancel').onclick = () => { if (choice) result = 'cancel'; close(dlg); };
+      open(dlg, { onClose: () => { live.delete(dlg); resolve(result); }, onOpen: () => $(choice ? '#cfTitle' : '#cfCancel').focus() });
     });
   }
 

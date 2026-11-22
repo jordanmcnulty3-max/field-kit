@@ -208,7 +208,7 @@
     dlg.querySelector('.mk-body').scrollTop = 0;
     opened = null;
     FK.sheet.open(dlg, { onClose: () => { cur = null; deleting = false; dlg.inert = false; opened = null; conflict = ''; refused = false;
-                                            if (FK.share && FK.share.sweep) setTimeout(FK.share.sweep, 0); },   // what was spared while open (expiry, the cap) catches up
+                                            if (FK.mesh.enabled() && FK.share && FK.share.sweep) setTimeout(FK.share.sweep, 0); },   // what was spared while open (expiry, the cap) catches up
                          onOpen: () => { $('#mkTitle').focus(); snap(); renderShare(); },   // no keyboard popping up on a phone
       guard: { dirty: changed, title: 'Discard this marker?', text: 'The name, note and kind are not kept.' } });
   }

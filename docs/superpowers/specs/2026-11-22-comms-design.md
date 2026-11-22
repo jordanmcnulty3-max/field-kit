@@ -188,6 +188,20 @@ they move in this release.
   "Send all my shared markers again" (spaced out, a few seconds apart, to respect airtime). No
   automatic re-sending in this release.
 - Markers received from the mesh while on a public channel: none (see above).
+- **Deleted markers stay deleted (my call).** Field Kit remembers the number of every shared
+  marker deleted here ("for everyone" or "on this phone only") or deleted by a teammate, for 30
+  days, and ignores anything arriving under that number. Without this, a teammate who missed the
+  delete would bring the marker back for everyone with one Send again.
+- **Send again** on one marker is open to anyone who holds it (a deliberate act). **"Send all my
+  shared markers again" sends only markers this phone made**, so one person cannot overwrite the
+  whole group's edits with old copies.
+- **Accepted limit:** a waypoint carries no version. A Send again from a phone holding an older
+  copy overwrites a newer edit. The sheet's "Changed by ..., ... ago" line is how a user notices.
+- **Expiry (my call).** Field Kit's own shared markers never expire. An incoming marker with an
+  expiry is removed at that time, as it is on the official apps, and keeps its expiry if Field Kit
+  sends it again. Delete and expiry are one rule: a marker whose expiry has passed is gone.
+- **Cap (my call):** at most 500 markers received from the mesh are held; past that the oldest
+  received marker that this phone did not make is dropped, with a line in the Radio sheet.
 
 ### Where it lives
 

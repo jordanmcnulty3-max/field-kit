@@ -264,7 +264,9 @@ velocity moves. The figures below are the default .308 as it ships now (G7 0.25,
 - **A worked-out velocity is never lost without a question (final drive).** "Work it out" scrolls the result (or the refusal)
   and the Use button into view above the sheet's buttons. Save or Save as new with a result that has not been used asks "Use
   the corrected velocity?" with "Use it and save" and "Save without it"; closing the question (Back, Escape, a tap outside)
-  saves nothing and leaves the sheet as it was. Cancel asks Keep editing / Discard when anything changed, as Back does (R33).
+  saves nothing and leaves the sheet as it was. A result is cleared only when the distance, the elevation or the unit (or the
+  sheet's own numbers it was worked out from) really changes, never merely because a field lost focus. Cancel asks Keep editing
+  / Discard when anything changed, as Back does (R33).
   Cost if wrong: one more question on the way out; on an iPhone (no Back button) the question is closed only by a tap outside
   it, since the ruling named exactly two choices.
 - **The editor reaches the screen through two objects (fix round 1, widened in the fix wave).** `FK.bal` is the public surface
@@ -383,22 +385,36 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   the line of sight; a minus means below. Drift: inches the wind moves the bullet, shown without a sign." (the drift part is
   left out for a reticle, which has no drift column). The sentence under the answer gives the drift's direction. Cost if wrong:
   the direction of the drift is read from the sentence or the wind columns, not the drift column.
-- **"Show all units" still turns the dope card to every unit.** The final drive's ruling covered the answer card; the dope card
-  keeps its every-unit columns while the button is on. Cost if wrong: with the button on, the dope card does not show clicks.
+- **"Show all units" affects the answer card only** (second pass). The dope card is always built from the profile's sight: clicks
+  for a turret, mark and hold for a reticle, hold for a dot; a profile with no sight shows every unit as before. The other-unit
+  lines on the answer card skip any line equal to the sight's own main or sub line, case ignored ("hold 22 in right" is not
+  repeated as "Hold 22 in right"). Cost if wrong: the dope card never shows mil and MOA side by side for a sighted profile.
 - **While the card is pinned (keyboard up) the extra units are hidden**, like the button and the sentence, so the card stays
   short. Cost if wrong: none; they come back when focus leaves.
 - **A reticle's windage with no hold reads "No hold"** (it read "0 in"), and the path at the zero reads "on the line of sight".
   Cost if wrong: wording.
 - **Spacing on the main screen was tightened** (the card's padding and gaps, the lines under the picker, the shot fields'
-  gaps, the card's labels) so the load line, the chronograph line and the button beneath the sentence still leave the profile row,
-  the answer card and the four shot inputs on the first screen at 360 x 640. With a turret, a zero line and the load line it fits
-  with no pixel to spare. Cost if wrong: a longer sight description or a larger default font pushes the incline and wind fields
-  under the tab bar; nothing is cut off, it scrolls.
+  gaps, the card's labels) for the load line, the chronograph line and the button beneath the sentence. Measured at 360 x 640,
+  the space between the bottom of the wind fields and the top of the tab bar (negative: partly under the bar): built-in .308
+  load +6 px; turret 0.1 mil with zero conditions 0; red dot +10; red dot with zero conditions -10; mil reticle +20; MOA reticle
+  past its last mark -29; MOA reticle with zero conditions -48; 1/8 MOA turret with zero conditions -29; built-in loads at ranges
+  where the "Subsonic" sentence shows -12. So the first screen does not always hold all four shot inputs: this is an accepted
+  limit on a 360 x 640 screen (the wind fields are reached with a short scroll; nothing is cut off), and the owner's phone is
+  taller. It is on the phone check. Cost: on the smallest phones, one short scroll to reach the wind fields for some profiles.
+- **A second, narrow fix pass was run after the final re-check found a fault in the first fix.** A velocity worked out with
+  Enter was cleared by the change event the next tap fired, so Use did nothing and Save stored the old velocity with no
+  question (reopening D1); a result is now cleared only when what it was worked out from really changes. The same pass made the
+  dope card keep the sight's own columns with other units shown, stopped a repeated hold line, hid the load line for a profile
+  the screen cannot use, and let a swipe at the end of the dope box carry on to the page. Cost: none beyond the entries above.
 - **A pre-existing flaky test was fixed**: `tests/test_map_tools.py::test_navigating_away_leaves_the_mode_and_keeps_nothing`
   checked for no route mode in the two animation frames before the designed resume of an unfinished route (v7.8 rulings) and
   failed about one run in four, at the base commit too. It now waits for the resume. Cost if wrong: none.
 
 ## Accepted limits
+
+- **The four shot inputs are not always on the first screen at 360 x 640** (measured figures under "Decisions made in the final
+  fix wave"). The wind fields are a short scroll away for profiles with zero conditions, a MOA reticle past its last mark, or a
+  subsonic range. Cost: one short scroll on the smallest phones.
 
 - **The profile editor is cramped in landscape** (final drive). Not fixed in this release: the sheet's own scroll still reaches
   every field and button. Cost: more scrolling on a landscape phone.
@@ -433,9 +449,12 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
 2. Type a temperature below zero on an iPhone (the ordinary keyboard; its minus works) and an incline below zero.
 3. In the editor of an own profile: Work it out shows the result and the Use button without scrolling by hand; Save without
    pressing Use asks first; a tap outside the question goes back to the sheet with nothing saved; Cancel after Use asks.
-4. Scroll the dope card down and across with a finger: the headings and the yard column stay put, and the page scrolls on past it.
-5. Night mode: the transonic rows carry the dagger and the note reads.
-6. A turret with 1/4 MOA clicks: the angle shown is clicks times a quarter (for example U 12.25 MOA, 49 clicks).
-7. The earlier list still applies: Settings shows the version; v7.8 profiles survived; set up one real rifle with its sight;
+4. Scroll the dope card down and across with a finger: the headings and the yard column stay put, and a swipe that reaches the
+   end of the card's box carries on to scroll the page.
+5. With the keyboard up, scroll away from the field you are typing in: the page should let you.
+6. On the smallest phone in the group, check the wind fields are reachable for a profile with zero conditions.
+7. Night mode: the transonic rows carry the dagger and the note reads.
+8. A turret with 1/4 MOA clicks: the angle shown is clicks times a quarter (for example U 12.25 MOA, 49 clicks).
+9. The earlier list still applies: Settings shows the version; v7.8 profiles survived; set up one real rifle with its sight;
    compare the card with elevations already known at two distances; count clicks on a real turret; read a real drop reticle's
    marks from its manual; Back on the editor with typing in it.

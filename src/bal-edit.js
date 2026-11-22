@@ -192,7 +192,13 @@
     u.hidden = !has;
     if (has) u.textContent = `Put back ${fmt(editing.base.mv0)} fps`;
   }
-  function clearResult() { result = null; F('rfTrueOut').textContent = ''; showTrue(); }
+  /* What a result (or a refusal) was worked out from: the sheet's own fields, the distance, the elevation and the unit. It is cleared
+     only when one of them really differs from this snapshot, never merely because a change or blur event fired (Enter leaves a
+     typed value uncommitted, and its change event arrives with the next tap). */
+  let basis = null;
+  const snapshot = () => [typed(), F('rfTrueYd').value, F('rfTrueVal').value, F('rfTrueUnit').value].join('\u0002');
+  function clearResult() { result = null; basis = null; F('rfTrueOut').textContent = ''; showTrue(); }
+  const recheck = () => { if (basis !== null && snapshot() !== basis) clearResult(); };
   const signed = pct => { const t = Math.abs(pct).toFixed(1); return Number(t) === 0 ? '0.0' : (pct < 0 ? '-' : '+') + t; };
 
   /* The result (or the refusal) and its Use button, scrolled into the sheet's visible part above the sticky buttons (and above a
@@ -208,7 +214,7 @@
   function workItOut() {
     if (!editing || deleting || !editing.own) return;
     clearResult();
-    const show = text => { F('rfTrueOut').textContent = text; reveal(); };
+    const show = text => { F('rfTrueOut').textContent = text; basis = snapshot(); reveal(); };
     const yd = numOf('rfTrueYd'), val = numOf('rfTrueVal');
     if (!(yd > 0) || !(val > 0)) return show(MORE.ask);
     const angle = BALS.toAngle(val, F('rfTrueUnit').value, yd);
@@ -250,8 +256,8 @@
   });
   F('rfTrueUnit').addEventListener('change', () => { unitTouched = true; });
   /* What the answer was worked out from has changed: it no longer holds. */
-  F('rfForm').addEventListener('input', clearResult);
-  F('rfForm').addEventListener('change', clearResult);
+  F('rfForm').addEventListener('input', recheck);
+  F('rfForm').addEventListener('change', recheck);
   /* Enter never saves: only the Save buttons do. In the correction part Enter works it out; anywhere else in the editor it does nothing. */
   F('rfForm').addEventListener('submit', e => e.preventDefault());
   F('rfForm').addEventListener('keydown', e => {

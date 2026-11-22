@@ -545,3 +545,59 @@ def test_the_unit_picker_is_named_for_screen_readers(page, app_url):
     open_editor(page, app_url)
     assert page.get_attribute('#rfTrueUnit', 'aria-label') == 'Unit of the elevation'
     assert 'In' in page.inner_text('#rfTruePart')
+
+
+# ---------- Second pass: a result worked out with Enter survives the next tap ----------
+
+def typed_in(page, sel, text):
+    page.click(sel)
+    page.keyboard.press('Control+A')
+    page.keyboard.type(text)
+
+
+def enter_result(page, where='#rfTrueVal'):
+    page.select_option('#rfTrueUnit', 'mil')
+    vals = {'#rfTrueYd': '600', '#rfTrueVal': str(round(typed(page, shot(page, 2550, 600), 600, 'mil'), 4))}
+    for sel in sorted(vals, key=lambda k: k == where):      # the field Enter is pressed in is typed last, its value uncommitted
+        typed_in(page, sel, vals[sel])
+    page.keyboard.press('Enter')
+    expect(page.locator('#rfTrueSave')).to_be_visible()
+    return int(out(page).split('→ ')[1].split(' fps')[0].replace(',', ''))
+
+
+@pytest.mark.parametrize('where', ['#rfTrueVal', '#rfTrueYd'])
+def test_enter_then_use_puts_the_velocity_in(page, app_url, where):
+    open_editor(page, app_url)
+    mv = enter_result(page, where)
+    page.click('#rfTrueSave')
+    assert page.input_value('#rfMV') == str(mv)
+
+
+@pytest.mark.parametrize('where', ['#rfTrueVal', '#rfTrueYd'])
+@pytest.mark.parametrize('button', ['#rfSave', '#rfSaveNew'])
+def test_enter_then_save_asks_about_the_result(page, app_url, where, button):
+    open_editor(page, app_url)
+    if button == '#rfSaveNew':
+        typed_in(page, '#rfName', 'Enter copy')           # a copy needs its own name (typed before: a name change clears a result)
+    mv = enter_result(page, where)
+    page.click(button)
+    expect(page.locator('#cfTitle')).to_have_text('Use the corrected velocity?')
+    expect(page.locator('#cfText')).to_have_text(f"You worked out {mv:,} fps but haven't used it.")
+
+
+def test_a_real_change_clears_the_result_and_a_visit_does_not(page, app_url):
+    open_editor(page, app_url)
+    enter_result(page)
+    for sel in ('#rfTrueYd', '#rfTrueVal', '#rfBC'):         # focus and leave without changing
+        page.click(sel)
+        page.click('#rfTitle')
+    page.select_option('#rfTrueUnit', 'mil')                 # the same unit again
+    expect(page.locator('#rfTrueSave')).to_be_visible()
+    assert out(page).startswith('Velocity')
+    typed_in(page, '#rfTrueYd', '650')                       # really changed
+    page.click('#rfTitle')
+    expect(page.locator('#rfTrueSave')).to_be_hidden()
+    assert out(page) == ''
+    enter_result(page)
+    page.select_option('#rfTrueUnit', 'moa')                 # the unit really changed
+    expect(page.locator('#rfTrueSave')).to_be_hidden()

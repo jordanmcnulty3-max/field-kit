@@ -43,3 +43,20 @@ git push && git push --tags   # needs a token with Contents: write on this repo
 Phones pick up the new version on the next open (update banner) because the service-worker cache name changed.
 To roll back: `git checkout vOLD -- src figs vendor`, set both version numbers to a new, higher N, rebuild, commit and tag vN.
 (Reusing an old version number would leave installed phones on their cached copy.)
+
+## Checks
+
+Every push to any branch runs `.github/workflows/checks.yml` (results on the repo's Actions tab):
+
+- **Build and tests (Chromium):** builds, fails if the committed root files differ from a fresh build of `src/`, runs the full test suite. On `main` and tags it also runs the `--release` draft check.
+- **iPhone engine (WebKit) layout:** the sheet, screen and button-size tests in WebKit, Safari's engine (catches the kind of bug the first iPhone test found). Non-blocking until it has passed once.
+- **Lighthouse:** audits Survival, Tactical map and Emergency as a phone. Accessibility below 95 fails; the reports are kept as a download on the run.
+
+Run them locally:
+
+```
+pip install -r requirements-dev.txt && python3 -m playwright install chromium webkit
+python3 -m pytest -q -n auto                      # Chromium
+FK_BROWSER=webkit python3 -m pytest -q tests/test_sheet.py tests/test_tactical_layout.py
+python3 build.py _site && npx @lhci/cli@0.16.1 autorun
+```

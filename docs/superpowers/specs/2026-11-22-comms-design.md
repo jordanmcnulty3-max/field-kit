@@ -80,6 +80,13 @@ repository into `src/`.
   always showing; dashed and hollow once older than 30 minutes; never removed for age. Tapping one
   shows name, grid, distance and bearing, age and Go to. No edit, no delete.
 - Build our own link (approach 2); test on real radios when they arrive.
+- **The link ships switched off.** Settings gets a "Radio link (testing)" switch, off by default.
+  With it off there is no radio button, no Radio sheet and no Share switch, and no Bluetooth code
+  runs. Jordan turns it on for the phone check; the switch is removed once the link is proven.
+- **The primary channel must be private** (see "Is the channel private?").
+- **A shared Friend, Hostile, Neutral or Unknown marker carries when it was seen** at the start of
+  its note, for example "Seen 22 Nov 14:32", so its age is true on every phone and iPhone users
+  see it too.
 
 ## The design
 
@@ -117,8 +124,9 @@ the map parts against `FK.mesh` fed by a test hook.
 Field Kit reads the radio's primary channel. If its key is the public default (or there is no key),
 Field Kit connects but **sends nothing and shows nothing from the mesh**, and the Radio sheet says
 why and what to do (set up a private channel in the Meshtastic app and share it with the group by
-QR). This is my proposal, not yet Jordan's decision. Field Kit never displays, stores or exports
-the key.
+QR). **Jordan's decision (2026-11-22): strict.** The primary channel itself must be private; a
+public primary with a private secondary channel is refused the same way, because Meshtastic sends
+markers on the primary channel only. Field Kit never displays, stores or exports the key.
 
 The Radio sheet also warns when the channel is set to send no position, or an approximate one
 (a per-channel setting in Meshtastic), because then teammates will not appear or will appear in
@@ -173,6 +181,14 @@ they move in this release.
 
   An incoming marker whose icon is not in the table becomes a Point that shows its own emoji, and
   keeps that emoji when Field Kit sends it again, so an iPhone user's icon is never rewritten.
+- **Seen time.** For the four affiliation kinds, Field Kit writes "Seen DD Mon HH:MM" (24-hour,
+  the sender's local time, about 18 characters) at the start of the outgoing note, from the
+  marker's own marked time, and does not show that prefix in its own note box. The user's note
+  gets the remaining characters, and the sheet's counter reflects that. On receipt Field Kit reads
+  the prefix back into the marker's time, so the 24-hour dashed rule works as it does today. An
+  affiliation marker arriving without a readable prefix (made in the official app) is timed at
+  receipt and its sheet says "Received ..." in place of "Marked ...". The year is taken as the
+  most recent one that puts the time in the past. Place kinds carry no prefix.
 - **Incoming marker:** a number Field Kit already holds updates that marker; a new number adds
   one. The marker sheet shows "Shared by Mike" and "Changed by Sam, 3 min ago".
 - **Deleting a shared marker** in Field Kit asks: "Delete for everyone" or "Delete on this phone

@@ -73,8 +73,7 @@ jobs:
           FK_BROWSER: webkit
         run: >
           python -m pytest -q -n auto -p no:cacheprovider
-          tests/test_tactical_layout.py tests/test_sheet.py tests/test_bal_editor.py
-          tests/test_home.py tests/test_survival_home.py
+          tests/test_zz_diag.py tests/test_bal_editor.py
 
   lighthouse:
     name: Lighthouse

@@ -11,7 +11,13 @@ const MLINK = (() => {
     fromradio: '2c55e69e-4993-11ed-b878-0242ac120002',
     fromnum: 'ed9da18c-a800-4f66-a670-aa7547e34453',
   };
-  const SYNC_MS = 30000, BEAT_MS = 300000;
+  /* OPEN_MS bounds connecting, finding the service and turning notifications on (Android may ask for the radio's PIN then,
+     and a person types it); SYNC_MS is the longest silence allowed while the radio's list downloads (a big node database
+     over Bluetooth takes longer than that in all, but a message arrives every fraction of a second). */
+  const OPEN_MS = 60000, SYNC_MS = 30000, BEAT_MS = 300000;
+  /* want_config_id 69420 and 69421 ask current firmware for the config only / the nodes only: never use them. */
+  const nonce = () => { let n; do n = 1 + Math.floor(Math.random() * 0xFFFFFFFE); while (n === 69420 || n === 69421); return n; };
+  const warn = e => { try { console.warn('Field Kit radio:', e && e.name); } catch (x) { /* no console */ } };
 
   const supported = (bt = navigator.bluetooth) => !!(bt && typeof bt.requestDevice === 'function');
 
@@ -47,17 +53,27 @@ const MLINK = (() => {
       if (s.wasOn) { teardown(); setState('lost'); } else fail(s, 'failed');
     }
 
-    /* Writes: one queue, one at a time. A write that cannot happen (not connected, GATT error) resolves false. */
-    function write(s, bytes) {
-      const data = Uint8Array.from(bytes);
-      const p = s.queue.then(async () => {
-        if (S !== s || !s.device.gatt.connected) return false;
-        if (s.to.writeValueWithResponse) await s.to.writeValueWithResponse(data); else await s.to.writeValue(data);
-        return true;
-      }).catch(() => false);
-      s.queue = p;
+    /* Every GATT operation (a read, a write, turning notifications on) goes through one queue, one at a time: Android can
+       reject an operation started while another is running. One that fails is tried once more before it counts as failed. */
+    function gatt(s, fn) {
+      const run = async () => {
+        if (S !== s || !s.device.gatt.connected) throw new DOMException('Not connected', 'NetworkError');
+        try { return await fn(); } catch (e) {
+          if (S !== s || !s.device.gatt.connected) throw e;
+          return await fn();
+        }
+      };
+      const p = s.queue.then(run);
+      s.queue = p.catch(() => {});
       return p;
     }
+    /* A write that cannot happen (not connected, GATT error twice) resolves false. */
+    function write(s, bytes) {
+      const data = Uint8Array.from(bytes);
+      return gatt(s, () => s.to.writeValueWithResponse ? s.to.writeValueWithResponse(data) : s.to.writeValue(data))
+        .then(() => true, e => { if (S === s) warn(e); return false; });
+    }
+    const arm = (s, ms) => { clearTimeout(s.syncTimer); s.syncTimer = setTimeout(() => fail(s, 'failed'), ms); };
 
     function handle(s, m) {
       if (m.type === 'other') return;
@@ -80,9 +96,10 @@ const MLINK = (() => {
         do {
           s.again = false;
           for (;;) {
-            const v = await s.from.readValue();
+            const v = await gatt(s, () => s.from.readValue());
             if (S !== s) return;
             if (!v.byteLength) break;   // empty: the radio's queue is drained
+            if (st === 'syncing') arm(s, SYNC_MS);   // the download is moving: the allowed silence starts again
             const bytes = new Uint8Array(v.byteLength);   // a fresh buffer per message: the decoder returns views onto it
             bytes.set(new Uint8Array(v.buffer, v.byteOffset, v.byteLength));
             handle(s, MPB.dec.fromRadio(bytes));
@@ -90,15 +107,15 @@ const MLINK = (() => {
           }
         } while (s.again);
       } catch (e) {
-        if (S === s) { if (s.wasOn) { teardown(); setState('lost'); } else fail(s, 'failed'); }
+        if (S === s) { warn(e); if (s.wasOn) { teardown(); setState('lost'); } else fail(s, 'failed'); }
       } finally { s.draining = false; }
     }
 
     /* Ask the radio for its whole state and read it (at connect, and again after a reboot). */
     function startSync(s) {
-      s.nonce = 1 + Math.floor(Math.random() * 0xFFFFFFFE);
-      clearTimeout(s.syncTimer); clearInterval(s.beatTimer);
-      s.syncTimer = setTimeout(() => fail(s, 'failed'), SYNC_MS);
+      s.nonce = nonce();
+      clearInterval(s.beatTimer);
+      arm(s, SYNC_MS);
       setState('syncing');
       write(s, MPB.enc.wantConfig(s.nonce)).then(ok => { if (!ok) closed(s); else drain(s); });
     }
@@ -109,7 +126,6 @@ const MLINK = (() => {
       const s = S = { device: null, to: null, from: null, num: null, queue: Promise.resolve(), draining: false, again: false,
                       nonce: 0, lastNum: null, wasOn: false, syncTimer: 0, beatTimer: 0, done: null, onNum: null };
       const result = new Promise(res => { s.done = res; });   // teardown() resolves it false; reaching 'on' resolves it true
-      const arm = () => { clearTimeout(s.syncTimer); s.syncTimer = setTimeout(() => fail(s, 'failed'), SYNC_MS); };
       const go = async () => {
         let stage = 'chooser';
         try {
@@ -123,7 +139,7 @@ const MLINK = (() => {
           }
           s.device = device;
           stage = 'gatt';
-          arm();   // the chooser is the user's to dismiss; every step after it is bounded
+          arm(s, OPEN_MS);   // the chooser is the user's to dismiss; every step after it is bounded
           const server = await device.gatt.connect();
           if (S !== s) { if (!S) { try { server.disconnect(); } catch (e) { /* already gone */ } } return; }   // a newer attempt shares this GATT object: leave it
           const service = await server.getPrimaryService(UUID.service);
@@ -142,11 +158,12 @@ const MLINK = (() => {
             drain(s);
           };
           s.num.addEventListener('characteristicvaluechanged', s.onNum);
-          await s.num.startNotifications();
+          await gatt(s, () => s.num.startNotifications());
           if (S !== s) return;
           startSync(s);
         } catch (e) {
           if (S === s) {
+            warn(e);
             const cancelled = stage === 'chooser' && e && e.name === 'NotFoundError';
             teardown();
             setState('off', cancelled ? 'cancelled' : 'failed');

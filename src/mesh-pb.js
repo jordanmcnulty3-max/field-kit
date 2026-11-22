@@ -96,7 +96,7 @@ const MPB = (() => {
   const position = safe(b => {
     const f = parse(b);
     if (f[1] === undefined && f[2] === undefined) return null;   // no fix
-    return { lat: deg(F(f, 1)), lon: deg(F(f, 2)), alt: sgn(V(f, 3)), time: F(f, 4) };
+    return { lat: deg(F(f, 1)), lon: deg(F(f, 2)), alt: sgn(V(f, 3)), time: F(f, 4), precisionBits: V(f, 23) };
   });
   const user = safe(b => { const f = parse(b); return { longName: str(f, 2), shortName: str(f, 3) }; });
   const waypoint = safe(b => {
@@ -105,7 +105,9 @@ const MPB = (() => {
   });
 
   function packet(b) {
-    const f = parse(b), m = { type: 'packet', from: F(f, 1), to: F(f, 2), channel: V(f, 3), id: F(f, 6), rxTime: F(f, 7), portnum: null, payload: null };
+    /* pki: a direct message encrypted to this radio's own key (field 17): it arrives with channel 0 but is not channel traffic. */
+    const f = parse(b), m = { type: 'packet', from: F(f, 1), to: F(f, 2), channel: V(f, 3), id: F(f, 6), rxTime: F(f, 7), portnum: null, payload: null,
+                              pki: !!V(f, 17) };
     if (L(f, 5) !== undefined && L(f, 4) === undefined) return m;   // still encrypted
     if (f[4]) { const d = parse(L(f, 4)); m.portnum = V(d, 1); m.payload = bytes(d, 2); }
     return m;
@@ -114,7 +116,7 @@ const MPB = (() => {
     const f = parse(b), us = f[2] ? user(L(f, 2)) : null, ps = f[3] ? position(L(f, 3)) : null;
     if (f[2] && !us) throw 0;
     return { type: 'nodeInfo', num: V(f, 1), longName: us ? us.longName : '', shortName: us ? us.shortName : '',
-             position: ps, lastHeard: F(f, 5), channel: V(f, 7) };
+             position: ps, lastHeard: F(f, 5), channel: V(f, 7), viaMqtt: !!V(f, 8), isIgnored: !!V(f, 11) };
   }
   function channel(b) {
     const f = parse(b), s = f[2] ? parse(L(f, 2)) : NONE, ms = s[7] ? parse(L(s, 7)) : NONE, role = V(f, 3);
@@ -122,15 +124,25 @@ const MPB = (() => {
              name: str(s, 3), psk: bytes(s, 2), positionPrecision: V(ms, 1) };
   }
 
+  /* FromRadio.config (5) is a oneof of Config members; only lora (6) is read: region (7, 0 = UNSET: the radio will not
+     transmit), hop_limit (8), tx_enabled (9; a radio's own default is true, so false means switched off). */
+  function config(b) {
+    const f = parse(b);
+    if (!f[6]) return { type: 'config', lora: null };
+    const lo = parse(L(f, 6));
+    return { type: 'config', lora: { region: V(lo, 7), hopLimit: V(lo, 8), txEnabled: !!V(lo, 9) } };
+  }
+
   const fromRadio = (b) => {
     try {
       const order = [], f = parse(b, order);
       let last = 0;   // the FromRadio payload is a oneof: the last member present wins
-      for (const k of order) if (k === 2 || k === 3 || k === 4 || k === 7 || k === 8 || k === 10) last = k;
+      for (const k of order) if (k === 2 || k === 3 || k === 4 || k === 5 || k === 7 || k === 8 || k === 10) last = k;
       switch (last) {
         case 2: return packet(L(f, 2));
         case 3: return { type: 'myInfo', myNodeNum: V(parse(L(f, 3)), 1) };
         case 4: return nodeInfo(L(f, 4));
+        case 5: return config(L(f, 5));
         case 7: return { type: 'configComplete', id: V(f, 7) };
         case 8: V(f, 8); return { type: 'rebooted' };
         case 10: return channel(L(f, 10));

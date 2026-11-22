@@ -67,7 +67,7 @@ def test_from_radio_every_type_matches_reference(ready):
     n = dec(page, 'fromRadio', meshref.ref_from_radio(node=dict(num=2864434397, long='Alpha One', short='AL1',
                                                                  pos=(43.0, -76.0, 120, 1766000000), last_heard=1766000100, channel=2)))
     assert n['type'] == 'nodeInfo' and (n['num'], n['longName'], n['shortName'], n['lastHeard'], n['channel']) == (2864434397, 'Alpha One', 'AL1', 1766000100, 2)
-    assert n['position'] == {'lat': pytest.approx(43.0), 'lon': pytest.approx(-76.0), 'alt': 120, 'time': 1766000000}
+    assert n['position'] == {'lat': pytest.approx(43.0), 'lon': pytest.approx(-76.0), 'alt': 120, 'time': 1766000000, 'precisionBits': 0}
 
     n = dec(page, 'fromRadio', meshref.ref_from_radio(node=dict(num=5, long='Bravo', short='BR')))
     assert n['position'] is None and n['longName'] == 'Bravo' and n['lastHeard'] == 0
@@ -91,14 +91,14 @@ def test_from_radio_every_type_matches_reference(ready):
         m = dec(page, 'fromRadio', meshref.ref_from_radio(packet=meshref.mesh_packet(
             frm=3000000000, to=0xFFFFFFFF, channel=1, id=4000000000, rx_time=1766000000, portnum=port, payload=payload)))
         assert m == {'type': 'packet', 'from': 3000000000, 'to': 0xFFFFFFFF, 'channel': 1, 'id': 4000000000,
-                     'rxTime': 1766000000, 'portnum': port, 'payload': list(payload)}
+                     'rxTime': 1766000000, 'portnum': port, 'payload': list(payload), 'pki': False}
     m = dec(page, 'fromRadio', meshref.ref_from_radio(packet=meshref.mesh_packet(frm=7, to=8, id=9, encrypted=b'\xde\xad\xbe\xef')))
     assert (m['type'], m['from'], m['to'], m['portnum'], m['payload']) == ('packet', 7, 8, None, None)
 
     assert dec(page, 'fromRadio', mesh_pb2.FromRadio(id=5, queueStatus=mesh_pb2.QueueStatus(free=3)).SerializeToString()) == {'type': 'other'}
     assert dec(page, 'fromRadio', b'') == {'type': 'other'}
 
-    assert dec(page, 'position', pos) == {'lat': pytest.approx(43.0), 'lon': pytest.approx(-76.0), 'alt': 5, 'time': 1766000000}
+    assert dec(page, 'position', pos) == {'lat': pytest.approx(43.0), 'lon': pytest.approx(-76.0), 'alt': 5, 'time': 1766000000, 'precisionBits': 0}
     assert dec(page, 'user', meshref.user_bytes('Alpha', 'A')) == {'longName': 'Alpha', 'shortName': 'A'}
 
 
@@ -242,3 +242,42 @@ def test_wrong_wire_types_are_rejected(ready):
     assert dec(page, 'waypoint', bytes([0x30, 0x05])) is None                  # name as a varint
     # the right types still decode
     assert dec(page, 'fromRadio', bytes([0x38, 0x07])) == {'type': 'configComplete', 'id': 7}
+
+
+# ---------- Final fix round: the fields the protocol review found unread (P1, P4, P6, P8, P11) ----------
+
+def test_config_lora_is_decoded(ready):
+    """FromRadio.config (5) -> Config.lora (6) -> LoRaConfig region (7), hop_limit (8), tx_enabled (9)."""
+    page = ready
+    assert [f.number for f in meshref.mesh_pb2.FromRadio.DESCRIPTOR.fields if f.name == 'config'] == [5]
+    lo = meshref.config_pb2.Config.LoRaConfig.DESCRIPTOR.fields_by_name
+    assert (lo['region'].number, lo['hop_limit'].number, lo['tx_enabled'].number) == (7, 8, 9)
+    assert meshref.config_pb2.Config.DESCRIPTOR.fields_by_name['lora'].number == 6
+    c = dec(page, 'fromRadio', meshref.ref_from_radio(lora=dict(hop_limit=5, region=1, tx_enabled=True)))
+    assert c == {'type': 'config', 'lora': {'region': 1, 'hopLimit': 5, 'txEnabled': True}}
+    c = dec(page, 'fromRadio', meshref.ref_from_radio(lora=dict(hop_limit=0, region=0, tx_enabled=False)))
+    assert c == {'type': 'config', 'lora': {'region': 0, 'hopLimit': 0, 'txEnabled': False}}
+    # another Config member: a config message with no lora in it
+    assert dec(page, 'fromRadio', meshref.ref_from_radio(device_config=True)) == {'type': 'config', 'lora': None}
+    for kw in ('module_config', 'metadata', 'queue_status'):
+        assert dec(page, 'fromRadio', meshref.ref_from_radio(**{kw: True})) == {'type': 'other'}, kw
+
+
+def test_node_flags_pki_and_precision_are_decoded(ready):
+    page = ready
+    ni = meshref.mesh_pb2.NodeInfo.DESCRIPTOR.fields_by_name
+    assert (ni['via_mqtt'].number, ni['is_ignored'].number) == (8, 11)
+    assert meshref.mesh_pb2.MeshPacket.DESCRIPTOR.fields_by_name['pki_encrypted'].number == 17
+    assert meshref.mesh_pb2.Position.DESCRIPTOR.fields_by_name['precision_bits'].number == 23
+    n = dec(page, 'fromRadio', meshref.ref_from_radio(node=dict(num=5, long='M', via_mqtt=True)))
+    assert (n['viaMqtt'], n['isIgnored']) == (True, False)
+    n = dec(page, 'fromRadio', meshref.ref_from_radio(node=dict(num=5, long='M', is_ignored=True,
+                                                                 pos=(43.0, -76.0, 0, 1766000000), precision_bits=13)))
+    assert (n['viaMqtt'], n['isIgnored'], n['position']['precisionBits']) == (False, True, 13)
+    assert dec(page, 'position', meshref.position_bytes(43.0, -76.0))['precisionBits'] == 0
+    m = dec(page, 'fromRadio', meshref.ref_from_radio(packet=meshref.mesh_packet(
+        frm=7, to=8, id=9, portnum=meshref.PORT['WAYPOINT'], payload=b'\x08\x01', pki_encrypted=True)))
+    assert m['pki'] is True
+    m = dec(page, 'fromRadio', meshref.ref_from_radio(packet=meshref.mesh_packet(
+        frm=7, to=8, id=9, portnum=meshref.PORT['WAYPOINT'], payload=b'\x08\x01')))
+    assert m['pki'] is False

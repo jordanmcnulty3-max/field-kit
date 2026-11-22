@@ -446,3 +446,44 @@ def test_service_worker_helper_falls_back(page, app_url):
     assert 40 <= took < 1000
     assert page.evaluate("""h => { delete window.AbortController;
       return new Function(h + '; return timeoutSignal;')()(50) === undefined; }""", helper)
+
+
+# ---------- Bottom sheets on Safari ----------
+# Safari (WebKit) sizes an auto-height column flexbox from its items' flex-basis. An item with flex: 1 (basis 0%) adds
+# nothing, so the Marker, Tools and list sheets came out a strip at the bottom edge with their buttons below the screen
+# (iPhone first test, iOS 18.7, 2026-11-21; reproduced in WebKitGTK 2.52). The test Chromium sizes them from content, so the
+# fault never shows here: guard the cause instead. In every column flexbox inside an open sheet, no item may have a
+# percentage or zero flex-basis.
+SHEET_BASIS = """sel => {
+  const dlg = document.querySelector(sel), bad = [];
+  if (!dlg.open) return ['not open'];
+  [dlg, ...dlg.querySelectorAll('*')].forEach(box => {
+    const cs = getComputedStyle(box);
+    if (!/flex/.test(cs.display) || !cs.flexDirection.startsWith('column')) return;
+    [...box.children].forEach(k => {
+      const b = getComputedStyle(k).flexBasis;
+      if (/%$/.test(b) || /^0(px)?$/.test(b)) bad.push(`${box.id || box.className} > ${k.id || k.className}: ${b}`);
+    });
+  });
+  return bad;
+}"""
+
+
+@pytest.mark.parametrize('button,sheet', [('#mMark', '#dlgMarker'), ('#mTools', '#dlgTools'), ('#mList', '#dlgList')])
+def test_sheets_size_from_content_on_safari(page, app_url, button, sheet):
+    open_map(page, app_url)
+    page.click(button)
+    expect(page.locator(sheet)).to_be_visible()
+    assert page.evaluate(SHEET_BASIS, sheet) == []
+
+
+def test_every_mk_sheet_sizes_from_content_on_safari(page, app_url):
+    """Every sheet built on the mk-sheet layout, including any added later (the Shape sheet, Ballistics' rifle sheet),
+    opened bare: the guard is on the CSS, not on what the sheet's own code fills in."""
+    open_map(page, app_url)
+    ids = page.evaluate("[...document.querySelectorAll('dialog.mk-sheet')].map(d => d.id)")
+    assert len(ids) >= 4
+    for i in ids:
+        page.evaluate("id => document.getElementById(id).showModal()", i)
+        assert page.evaluate(SHEET_BASIS, '#' + i) == [], i
+        page.evaluate("id => document.getElementById(id).close()", i)

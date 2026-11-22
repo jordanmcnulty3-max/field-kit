@@ -8326,3 +8326,45 @@ contributor). It gives the service UUID `6ba1b218-15a8-461f-9fa8-5dcae273eafd` a
 the task brief and are what the code uses. The page says to keep reading fromradio until it returns an empty packet (also after each fromnum
 notification). It does not mention heartbeats: the 300 s heartbeat is implemented as the task brief specifies, and whether a real radio needs
 it is not proved here.
+
+# Comms: protocol facts added in the final fix round (release 1, v7.11)
+
+Field numbers below were read from the `meshtastic` Python package 2.7.11 descriptors (`config_pb2.Config.DESCRIPTOR.fields`,
+`config_pb2.Config.LoRaConfig.DESCRIPTOR.fields`, `mesh_pb2.NodeInfo`, `mesh_pb2.MeshPacket`, `mesh_pb2.Position`, `mesh_pb2.FromRadio`);
+`tests/test_mesh_pb.py::test_config_lora_is_decoded` and `::test_node_flags_pki_and_precision_are_decoded` assert them against the package.
+
+| Message | Field (number, type) now read |
+|---|---|
+| FromRadio | config (5, Config): added to the oneof members the codec reads; moduleConfig (9), metadata (13), queueStatus (11) stay 'other' |
+| Config | lora (6, LoRaConfig); every other member gives `{ type: 'config', lora: null }` |
+| LoRaConfig | region (7, enum V; 0 = UNSET), hop_limit (8, uint32 V), tx_enabled (9, bool V) |
+| NodeInfo | via_mqtt (8, bool V), is_ignored (11, bool V) |
+| MeshPacket | pki_encrypted (17, bool V) |
+| Position | precision_bits (23, uint32 V) |
+
+- Defaults (page opened: Meshtastic, "LoRa Configuration", https://meshtastic.org/docs/configuration/radio/lora; no date shown): Transmit
+  Enabled "Defaults to true"; Max Hops "Default is 3"; Region "Default is `unset`. As long as this is not set, the node screen will display a
+  message and not transmit any packets." So a received LoRaConfig with tx_enabled absent (proto3 false) is a transmitter switched off (a fresh
+  radio sends true), and region 0 is a radio that will not transmit. Field Kit's `FK.mesh.radioProblem()` reports 'region' or 'txoff' only once a
+  LoRaConfig has arrived in the current download; with none it reports nothing.
+- Hop limit: MeshPacket.hop_limit left at 0 with want_ack off makes the firmware send the packet zero-hop (the protocol review, citing
+  github.com/meshtastic/meshtastic-sdk pull 201 on Router::sendLocal; not opened in this round). Field Kit sends every packet with the radio's
+  LoRaConfig.hop_limit (capped at 7, the protocol's most), or 3 until that config has arrived or when it reads 0.
+- The default channel key (the package's `meshtastic/util.py`: `DEFAULT_KEY = base64.b64decode("1PG7OiApB1nwvP+rz05pAQ==")`, and the
+  channel.proto comment in `channel_pb2.pyi`: "`1` = The special "default" channel key: {0xd4, 0xf1, 0xbb, 0x3a, 0x20, 0x29, 0x07, 0x59, 0xf0,
+  0xbc, 0xff, 0xab, 0xcf, 0x4e, 0x69, 0x01}"). Page opened: Meshtastic, "Encryption technical"
+  (https://meshtastic.org/docs/development/reference/encryption-technical/): a one-byte PSK is shorthand, "`1` selects the published default
+  key", "`2` through `255` select the default key with that value minus one added to its last byte", "These are public keys, not private
+  ones", "A key of length 0 disables encryption". The rule that the firmware treats any 16-byte key whose first 15 bytes are the default's as
+  public (Channels.cpp) is the protocol review's reading of the firmware; it was not opened here. Field Kit: a key of 0 or 1 byte, a key of all
+  zero bytes, or a 16-byte key starting with the first 15 default bytes is 'public'. The bytes are published, not a secret.
+- Special nonces: current firmware gives want_config_id 69420 (config only) and 69421 (nodes only) a meaning of their own (protocol review);
+  Field Kit's random nonce is never 0, 69420 or 69421.
+- Heartbeat: ToRadio.heartbeat is written empty, so its nonce is 0 (a nonce of 1 asks the radio to broadcast its NodeInfo: protocol review).
+- pki_encrypted: a direct message encrypted to this radio's own key arrives with channel 0; Field Kit ignores every such packet for teammates
+  and markers, and accepts a waypoint only when `to` is the broadcast address.
+- rx_time / position time: a time more than 2 minutes ahead of the phone clock is treated as absent. A live packet is heard at its rx_time
+  (else the phone clock); a live position with no time of its own takes that; a node-database position with no time stays "age unknown".
+- precision_bits 1-31 is a reduced-precision position: the teammate sheet says "Approximate position".
+- Primary channel: the verdict is taken only from role primary at index 0 (sends and filters use index 0); a primary reported at another index
+  gives 'unknown'.

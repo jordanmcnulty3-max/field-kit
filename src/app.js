@@ -3,7 +3,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
-  const APP_VERSION = '7.10';
+  const APP_VERSION = '7.11';
   /* What a grid that GEO.parseAny cannot read gets: the Position Add row and the map's Go to grid both show it. */
   const GRID_HELP = 'Couldn’t read that location. Try a grid like 18T VN 12345 67890, or 43.0000, -76.0000, or 43°00′00″N 76°00′00″W.';
   const BLOCKED_MSG = 'Location is blocked. Allow location for this site in Chrome’s site settings, then reload.';

@@ -563,6 +563,27 @@ body.maptool #tacSeg{display:none}
 .rd-team .hint{display:block;margin-top:2px}
 .rd-resend{display:block;width:100%;margin-top:16px;white-space:normal}
 /* /comms radio */
+/* comms teammates */
+.tm-icon{background:none;border:0}
+.tm-pin{position:relative;width:30px;height:30px}
+.tm-pin i{display:grid;place-items:center;width:30px;height:30px;box-sizing:border-box;border-radius:50%;border:3px solid var(--me);
+  background:var(--surface);color:var(--me);box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+.tm-pin i svg{width:16px;height:16px}
+/* Not heard from for 30 min (or the time is unknown): a dashed outline and no fill, so it reads as old by shape in every theme. */
+.tm-pin.old i{border-style:dashed;background:transparent;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.tm-pin.old i svg{display:none}
+.tm-pin b,.tm-pin em{position:absolute;left:50%;transform:translateX(-50%);max-width:112px;padding:0 3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-style:normal;color:var(--ink);text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface)}
+.tm-pin b{top:33px;font-size:13px;font-weight:700;line-height:15px}
+.tm-pin em{top:48px;font-size:12px;font-weight:500;line-height:14px}
+.tm-pin.old b,.tm-pin.old em{color:var(--muted)}
+:root[data-theme="night"] .tm-pin i,:root[data-theme="night"] .tm-pin.old i{box-shadow:0 0 0 1.5px #000}
+#dlgMate .mk-body{padding-bottom:12px}
+.tm-kind{margin:12px 0 0;font-size:14px;font-weight:600;color:var(--muted)}
+#tmTitle{margin-top:2px;overflow-wrap:anywhere}
+.tm-grid{margin:8px 0 0;font-size:19px;font-weight:650;overflow-wrap:anywhere}
+.tm-line{margin:4px 0 0;font-size:16px;overflow-wrap:anywhere}
+/* /comms teammates */
 .tl-list{list-style:none;margin:0;padding:0}
 .tl-list li{border-top:1px solid var(--line)}
 .tl-list button{display:flex;gap:12px;align-items:center;width:100%;min-height:56px;padding:8px 0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;font-size:17px;font-weight:600}
@@ -879,7 +900,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <!-- Map -->
   <div id="view-map">
     <div class="mapwrap" id="mapWrap">
-      <div id="map" aria-label="Map"></div>
+      <div id="map" role="region" aria-label="Map"></div>
       <div class="cross" aria-hidden="true"></div>
       <div class="maptag"><span id="mLayerName">USGS Topo</span><button type="button" class="rec" id="recChip" hidden aria-label="Recording. Open Track recording.">Recording</button>
         <!-- v7.8 nav -->
@@ -1329,6 +1350,22 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   </div>
 </dialog>
 <!-- /comms radio -->
+
+<!-- comms teammates -->
+<dialog id="dlgMate" class="sheet mk-sheet" aria-labelledby="tmTitle">
+  <div class="mk-body">
+    <p class="tm-kind">Teammate</p>
+    <h2 id="tmTitle" tabindex="-1"></h2>
+    <p class="tm-grid" id="tmGrid" translate="no"></p>
+    <p class="tm-line" id="tmRel" hidden></p>
+    <p class="tm-line" id="tmAge"></p>
+  </div>
+  <div class="mk-act">
+    <button type="button" class="btn" id="tmGo">Go to</button>
+    <button type="button" class="btn ghost" id="tmClose">Close</button>
+  </div>
+</dialog>
+<!-- /comms teammates -->
 
 <!-- v7.8 tools -->
 <dialog id="dlgTools" class="sheet mk-sheet" aria-labelledby="tlTitle">
@@ -2460,6 +2497,95 @@ const MLINK = (() => {
   }
 
   return { supported, create };
+})();
+
+/* ---------- MMK: Field Kit marker <-> Meshtastic waypoint (pure: no DOM, no FK) ----------
+   A waypoint has an id, a position, an emoji icon (a code point), a name (30 bytes on the wire: 29 usable here) and a
+   description (100 bytes: 99 here). The icon carries the marker's kind. An affiliation marker (Friend, Hostile, Neutral,
+   Unknown) also carries when it was seen, as a prefix of the description: "Seen 22 Nov 14:32. ", written and read in this
+   phone's local time. A waypoint from another app has no such prefix; it is taken as seen when it arrived. */
+const MMK = (() => {
+  const ICON = { point: 0x1F4CD, camp: 0x26FA, vehicle: 0x1F699, water: 0x1F4A7, cache: 0x1F4E6, hazard: 0x26A0, rally: 0x1F6A9,
+    observe: 0x1F52D, medical: 0x1F3E5, friend: 0x1F7E6, hostile: 0x2666, neutral: 0x1F7E9, unknown: 0x2753 };
+  const AFFIL = ['friend', 'hostile', 'neutral', 'unknown'];
+  const NAME_MAX = 29, NOTE_MAX = 99, DAY = 864e5;
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const BY_ICON = new Map(Object.entries(ICON).map(([k, v]) => [v, k]));
+  const kindFor = icon => BY_ICON.get(icon) || null;
+  const isAffil = kind => AFFIL.includes(kind);
+
+  /* UTF-8 length of a string, counted by hand (a lone surrogate is 3 bytes, as the encoder's replacement character). */
+  function cpBytes(c) { return c < 0x80 ? 1 : c < 0x800 ? 2 : c < 0x10000 ? 3 : 4; }
+  const bytes = s => { let n = 0; for (const ch of String(s == null ? '' : s)) n += cpBytes(ch.codePointAt(0)); return n; };
+  /* The longest start of s that fits in max bytes, never cutting a character in half. */
+  function clip(s, max) {
+    s = String(s == null ? '' : s);
+    let n = 0, out = '';
+    for (const ch of s) { const b = cpBytes(ch.codePointAt(0)); if (n + b > max) break; n += b; out += ch; }
+    return out;
+  }
+
+  const p2 = n => String(n).padStart(2, '0');
+  const seen = t => { const d = new Date(t); return `Seen ${d.getDate()} ${MON[d.getMonth()]} ${p2(d.getHours())}:${p2(d.getMinutes())}. `; };
+  /* The prefix is up to 19 bytes ("Seen 22 Nov 14:32. "; a day under 10 is one byte shorter). The room for a note keeps
+     the longest, so the answer does not depend on the day. */
+  const PREFIX_MAX = 19;
+  const noteRoom = kind => isAffil(kind) ? NOTE_MAX - PREFIX_MAX : NOTE_MAX;
+  const fits = m => {
+    const name = bytes(m && m.name) <= NAME_MAX, note = bytes(m && m.note) <= noteRoom(m && m.kind);
+    return { ok: name && note, name, note };
+  };
+
+  /* A marker as the waypoint to send. Too long a name or note is cut at a character boundary (fits() says beforehand).
+     keep: what an earlier waypoint with this id had. Its expiry is kept, and so is its icon when this marker is a plain Point
+     and that icon is one this app has no kind for (another app's emoji), so a resend does not change it. */
+  function toWaypoint(m, wid, keep) {
+    keep = keep || {};
+    const kind = ICON[m.kind] ? m.kind : 'point';
+    let icon = ICON[kind];
+    if (kind === 'point' && Number.isInteger(keep.icon) && keep.icon > 0 && !kindFor(keep.icon)) icon = keep.icon;
+    const stamp = isAffil(kind) && m.t > 0 ? seen(m.t) : '';
+    return { id: wid, lat: m.lat, lon: m.lon, expire: keep.expire > 0 ? keep.expire : 0, lockedTo: 0,
+      name: clip(m.name, NAME_MAX), description: stamp + clip(m.note, noteRoom(kind)), icon };
+  }
+
+  /* "Seen 22 Nov 14:32. " at the start of a description: the time as ms, the text after it, or null. The year is the latest
+     one that puts the time at or before now + 24 h (a little ahead is a phone clock a little off; further ahead is last year). */
+  const PREFIX = /^Seen (\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{2}):(\d{2})\. /;
+  function parseSeen(text, now) {
+    const m = PREFIX.exec(text);
+    if (!m) return null;
+    const day = +m[1], mon = MON.indexOf(m[2]), hh = +m[3], mm = +m[4];
+    if (day < 1 || day > 31 || hh > 23 || mm > 59) return null;
+    const limit = now + DAY;
+    for (let y = new Date(limit).getFullYear(), n = 0; n < 8; y--, n++) {
+      const d = new Date(y, mon, day, hh, mm);
+      if (d.getMonth() !== mon || d.getDate() !== day) continue;   // 29 Feb in a year without one
+      if (d.getTime() <= limit) return { t: d.getTime(), rest: text.slice(m[0].length) };
+    }
+    return null;
+  }
+
+  const okPos = (lat, lon) => typeof lat === 'number' && typeof lon === 'number' && Number.isFinite(lat) && Number.isFinite(lon) &&
+    Math.abs(lat) <= 90 && Math.abs(lon) <= 180 && !(lat === 0 && lon === 0);   // 0, 0 is a radio with no position
+  /* A received waypoint as a marker's fields, or null when its position is no place. The text is returned as it came (it is
+     another person's text; whoever draws it escapes it). A foreign icon gives a Point that still reports the icon.
+     t and rx: for an affiliation marker with the prefix, t is the time in it and rx is false; otherwise t is `now` and rx is
+     true (received just now). A Point or other place never has a prefix, so it is always rx. */
+  function fromWaypoint(wp, now) {
+    if (!wp || !okPos(wp.lat, wp.lon)) return null;
+    const icon = Number.isInteger(wp.icon) && wp.icon > 0 ? wp.icon : 0;
+    const kind = kindFor(icon) || 'point';
+    const name = String(wp.name == null ? '' : wp.name).trim() || 'Marker';
+    let note = String(wp.description == null ? '' : wp.description), t = now, rx = true;
+    if (isAffil(kind)) {
+      const s = parseSeen(note, now);
+      if (s) { t = s.t; rx = false; note = s.rest; }
+    }
+    return { name, note, kind, lat: wp.lat, lon: wp.lon, t, rx, icon, expire: Number.isFinite(wp.expire) && wp.expire > 0 ? wp.expire : 0 };
+  }
+
+  return { ICON, kindFor, bytes, NAME_MAX, NOTE_MAX, seen, noteRoom, fits, toWaypoint, fromWaypoint };
 })();
 
 /* ---------- Ballistics: point-mass solver, G1/G7 standard drag ---------- */
@@ -7321,7 +7447,7 @@ const BALS = (() => {
       map.invalidateSize({ pan: false });
       if (follow && f) map.setView([f.lat, f.lon], map.getZoom(), { animate: false });
       else if (v) map.setView([v.lat, v.lon], v.z, { animate: false, reset: true });   // reset: a pan would round to whole pixels
-      FK.markers.render(); renderTarget(); renderMe(); renderCenter();
+      FK.markers.render(); FK.team.render(); renderTarget(); renderMe(); renderCenter();
       return;
     }
     if (!window.L) { $('#mapWrap').innerHTML = '<p class="hint" style="padding:16px">The map library didn’t load. Reload the app while online.</p>'; return; }
@@ -7332,6 +7458,7 @@ const BALS = (() => {
     L.control.zoom({ position: 'topleft' }).addTo(map);
     map.attributionControl.setPrefix(false);
     map._fkAreas = L.layerGroup().addTo(map);
+    map._fkTeam = L.layerGroup().addTo(map);   // teammates (tac-team.js): before the markers' group, and their pins sit lower
     map._fkWps = L.layerGroup().addTo(map);
     trackLine = L.polyline([], { className: 'trk', interactive: false }).addTo(map);
     tgtLine = L.polyline([], { className: 'tgt-line', interactive: false }).addTo(map);
@@ -7350,7 +7477,7 @@ const BALS = (() => {
       const ll = e.latlng.wrap(); FK.markers.create(ll.lat, ll.lng);
     });
 
-    renderAreas(); FK.markers.render(); renderTarget(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
+    renderAreas(); FK.markers.render(); FK.team.render(); renderTarget(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
   }
 
   /* Tile layer that, when a tile is missing (e.g. offline past the saved zoom), scales up the
@@ -7446,6 +7573,8 @@ const BALS = (() => {
     if (!visible()) return;
     const c = map.getCenter().wrap(), g = GEO.toMGRS(c.lat, c.lng);
     $('#mCenter').textContent = g ? g.text : `${c.lat.toFixed(5)}, ${c.lng.toFixed(5)}`;
+    // the accessible name starts with the text on the button, so a voice command that says what it shows hits it
+    $('#mCenter').setAttribute('aria-label', (g ? g.text + '. ' : '') + 'Grid at crosshair. Tap to copy.');
     $('#mCenterRel').textContent = FK.relText(c.lat, c.lng, fmtDist) || 'Grid at the crosshair';
   }
   $('#mCenter').addEventListener('click', async () => {
@@ -8218,6 +8347,90 @@ const BALS = (() => {
   drawButton();
 
   FK.radioSheet = { open };
+})();
+
+/* ---------- Teammates on the map (FK.team) ----------
+   Each teammate with a position (FK.mesh.teammates()) is a blue ring with the radio's name and how long ago it was heard under
+   it; not heard for 30 minutes, or the time unknown, it is dashed and hollow. Tapping one opens the Teammate sheet (read only:
+   Go to, Close). The group is map._fkTeam, under the marker pins. Redraws from 'team' events are coalesced to one per animation
+   frame (a start-up download sends 100+ in one tick) and happen only while the map exists; a one-minute timer, running only while
+   the Settings switch is on and the map is showing, moves a pin past 30 minutes without waiting for news. Names come from other
+   people's radios: everything that reaches innerHTML goes through FK.esc. */
+(() => {
+  const FK = window.FK;
+  const { $, esc, on } = FK;
+  const OLD_MS = 30 * 60000;
+  const dlg = $('#dlgMate');
+
+  /* "4 min ago", or '' when the time is unknown (0) or lies in the future: never a wrong age. */
+  const age = t => (t > 0 && t <= Date.now() ? FK.markers.ageText(t) : '');
+  const isOld = t => !(t > 0 && t <= Date.now() && Date.now() - t <= OLD_MS);
+  const shows = () => FK.mesh.enabled() && FK.mesh.channel() !== 'public';
+  const list = () => shows() ? FK.mesh.teammates().filter(m => m.lat !== null && m.lon !== null) : [];
+  /* The Lucide user-round icon (vendor/lucide/comms-icons.json). */
+  const USER = '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>';
+
+  function render() {
+    const map = FK.leafletMap();
+    if (!map || !map._fkTeam) return;
+    const g = map._fkTeam; g.clearLayers();
+    list().forEach(m => {
+      const a = age(m.t), old = isOld(m.t), words = a || 'age unknown';
+      const html = `<div class="tm-pin${old ? ' old' : ''}" data-num="${m.num}"><i>${FK.markers.line(USER)}</i><b>${esc(m.name)}</b><em>${esc(words)}</em></div>`;
+      L.marker([m.lat, m.lon], { icon: L.divIcon({ className: 'tm-icon', iconSize: [30, 30], iconAnchor: [15, 15], html }),
+        title: `${m.name}, ${words}`, zIndexOffset: -500 })   // marker pins have 0: theirs sit on top
+        .on('click', () => { if (!(FK.mapTools && FK.mapTools.mode())) open(m.num); }).addTo(g);   // inert while a tool mode is on
+    });
+  }
+
+  /* ---- the sheet ---- */
+  let curNum = null;
+  const find = num => list().find(m => m.num === num);
+  const gridText = (lat, lon) => { const g = GEO.toMGRS(lat, lon); return g ? g.text : `${lat.toFixed(5)}, ${lon.toFixed(5)}`; };
+  function fill() {
+    const m = find(curNum);
+    if (!m) { FK.sheet.close(dlg); return; }
+    $('#tmTitle').textContent = m.name;
+    $('#tmGrid').textContent = gridText(m.lat, m.lon);
+    const rel = FK.relText(m.lat, m.lon, d => TGEOM.fmtDist(d, FK.tac.unit()));
+    $('#tmRel').hidden = !rel; $('#tmRel').textContent = rel;
+    const a = age(m.t);
+    $('#tmAge').textContent = a ? `Position from ${a}` : 'Position time unknown';
+  }
+  function open(num) {
+    curNum = num;
+    if (!find(num)) return;
+    fill();
+    FK.sheet.open(dlg, { onOpen: () => $('#tmTitle').focus(), onClose: () => { curNum = null; } });
+  }
+  $('#tmGo').addEventListener('click', () => {
+    const m = find(curNum);
+    if (m) FK.tac.setTarget({ type: 'point', lat: m.lat, lon: m.lon, name: m.name });
+    FK.sheet.close(dlg);
+  });
+  $('#tmClose').addEventListener('click', () => FK.sheet.close(dlg));
+
+  /* ---- redraws ---- */
+  let queued = 0;
+  function schedule() {
+    if (queued) return;
+    queued = requestAnimationFrame(() => { queued = 0; FK.team.render(); if (dlg.open && curNum !== null) fill(); });
+  }
+  let tick = 0;
+  function syncTimer() {
+    const want = FK.mesh.enabled() && !document.hidden && FK.tab() === 'tactical' && FK.view() === 'map';
+    if (want && !tick) tick = setInterval(() => { FK.team.render(); if (dlg.open && curNum !== null) fill(); }, 60000);
+    else if (!want && tick) { clearInterval(tick); tick = 0; }
+  }
+  on('team', schedule);
+  on('mesh', () => { schedule(); syncTimer(); if (!FK.mesh.enabled() && dlg.open) FK.sheet.close(dlg); });
+  on('shown', () => { syncTimer(); });
+  on('unit', () => { if (dlg.open) fill(); });
+  on('fix', () => { if (dlg.open && curNum !== null) schedule(); });
+  document.addEventListener('visibilitychange', () => { syncTimer(); if (tick) FK.team.render(); });
+  syncTimer();
+
+  FK.team = { render, open, timerOn: () => !!tick };
 })();
 
 /* ---------- Tactical map tools: the scale bar, the Tools sheet, the tool modes (Measure, Route, Area, Move a marker) and Go to grid ----------

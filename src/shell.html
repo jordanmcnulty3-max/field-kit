@@ -563,6 +563,27 @@ body.maptool #tacSeg{display:none}
 .rd-team .hint{display:block;margin-top:2px}
 .rd-resend{display:block;width:100%;margin-top:16px;white-space:normal}
 /* /comms radio */
+/* comms teammates */
+.tm-icon{background:none;border:0}
+.tm-pin{position:relative;width:30px;height:30px}
+.tm-pin i{display:grid;place-items:center;width:30px;height:30px;box-sizing:border-box;border-radius:50%;border:3px solid var(--me);
+  background:var(--surface);color:var(--me);box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+.tm-pin i svg{width:16px;height:16px}
+/* Not heard from for 30 min (or the time is unknown): a dashed outline and no fill, so it reads as old by shape in every theme. */
+.tm-pin.old i{border-style:dashed;background:transparent;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.tm-pin.old i svg{display:none}
+.tm-pin b,.tm-pin em{position:absolute;left:50%;transform:translateX(-50%);max-width:112px;padding:0 3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-style:normal;color:var(--ink);text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface)}
+.tm-pin b{top:33px;font-size:13px;font-weight:700;line-height:15px}
+.tm-pin em{top:48px;font-size:12px;font-weight:500;line-height:14px}
+.tm-pin.old b,.tm-pin.old em{color:var(--muted)}
+:root[data-theme="night"] .tm-pin i,:root[data-theme="night"] .tm-pin.old i{box-shadow:0 0 0 1.5px #000}
+#dlgMate .mk-body{padding-bottom:12px}
+.tm-kind{margin:12px 0 0;font-size:14px;font-weight:600;color:var(--muted)}
+#tmTitle{margin-top:2px;overflow-wrap:anywhere}
+.tm-grid{margin:8px 0 0;font-size:19px;font-weight:650;overflow-wrap:anywhere}
+.tm-line{margin:4px 0 0;font-size:16px;overflow-wrap:anywhere}
+/* /comms teammates */
 .tl-list{list-style:none;margin:0;padding:0}
 .tl-list li{border-top:1px solid var(--line)}
 .tl-list button{display:flex;gap:12px;align-items:center;width:100%;min-height:56px;padding:8px 0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;font-size:17px;font-weight:600}
@@ -1257,6 +1278,22 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   </div>
 </dialog>
 <!-- /comms radio -->
+
+<!-- comms teammates -->
+<dialog id="dlgMate" class="sheet mk-sheet" aria-labelledby="tmTitle">
+  <div class="mk-body">
+    <p class="tm-kind">Teammate</p>
+    <h2 id="tmTitle" tabindex="-1"></h2>
+    <p class="tm-grid" id="tmGrid" translate="no"></p>
+    <p class="tm-line" id="tmRel" hidden></p>
+    <p class="tm-line" id="tmAge"></p>
+  </div>
+  <div class="mk-act">
+    <button type="button" class="btn" id="tmGo">Go to</button>
+    <button type="button" class="btn ghost" id="tmClose">Close</button>
+  </div>
+</dialog>
+<!-- /comms teammates -->
 
 <!-- v7.8 tools -->
 <dialog id="dlgTools" class="sheet mk-sheet" aria-labelledby="tlTitle">

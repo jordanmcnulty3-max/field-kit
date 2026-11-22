@@ -598,7 +598,7 @@
   /* Keys that stay on this phone: never written to a backup and never touched by a restore. A half-finished
      protocol must not reappear on another phone, a stale position must not pass as current, and a backup handed
      to someone else must not skip their advanced-procedures warning. */
-  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck'];
+  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck', 'fk.meshTeam', 'fk.meshMe'];
   const backedUp = k => k.startsWith('fk.') && !SESSION_ONLY.includes(k);
   const phoneKeys = () => { const ks = []; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (backedUp(k)) ks.push(k); } return ks; };
   const hasPatients = data => { try { const v = JSON.parse(data['fk.patients']); return Array.isArray(v) && v.length > 0; } catch { return false; } };

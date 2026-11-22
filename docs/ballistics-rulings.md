@@ -458,7 +458,8 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
 9. The earlier list still applies: Settings shows "Version 7.10" (seven point ten, the release after 7.9); v7.8 profiles survived; set up one real rifle with its sight;
    compare the card with elevations already known at two distances; count clicks on a real turret; read a real drop reticle's
    marks from its manual; Back on the editor with typing in it.
-10. On an iPhone, open Edit on a profile: the sheet fills the screen with Save and Cancel at the bottom (v7.9 fixed other
+10. On an iPhone, open a rifle profile both ways (a new one from a built-in load, and Edit on your own): the whole form shows
+    with its buttons above the home bar. The sheet fills the screen with Save and Cancel at the bottom (v7.9 fixed other
     sheets that showed only as a strip at the bottom edge; the profile sheet had the same fault and the same fix).
 
 ## Release

@@ -47,13 +47,13 @@ def node(num, long='', short='', pos=None, heard=0, channel=0):
     return dict(type='nodeInfo', num=num, longName=long, shortName=short, position=pos, lastHeard=heard, channel=channel)
 
 
-def pkt(frm, portnum, payload, channel=0):
-    return dict(type='packet', **{'from': frm}, to=BC, channel=channel, id=7, rxTime=0, portnum=portnum,
-                payload=list(payload))
+def pkt(frm, portnum, payload, channel=0, to=BC, rx=0, pki=False):
+    return dict(type='packet', **{'from': frm}, to=to, channel=channel, id=7, rxTime=rx, portnum=portnum,
+                payload=list(payload), pki=pki)
 
 
-def feed_packet(page, frm, portnum, payload, channel=0):
-    page.evaluate('m => { m.payload = Uint8Array.from(m.payload); FK._test.mesh.feed(m); }', pkt(frm, portnum, payload, channel))
+def feed_packet(page, frm, portnum, payload, channel=0, **kw):
+    page.evaluate('m => { m.payload = Uint8Array.from(m.payload); FK._test.mesh.feed(m); }', pkt(frm, portnum, payload, channel, **kw))
 
 
 def team(page):
@@ -233,8 +233,14 @@ def test_future_position_has_no_time(page, app_url):
     feed(page, node(DELTA, long='Delta', pos=dict(lat=43.0, lon=-76.0, alt=0, time=now + 2 * 86400)))
     d = team(page)[DELTA]
     assert (d['lat'], d['lon'], d['t']) == (43.0, -76.0, 0)   # the place is kept, the impossible time is not
-    feed(page, node(DELTA, long='Delta', pos=dict(lat=43.0, lon=-76.0, alt=0, time=now + 3600)))
-    assert team(page)[DELTA]['t'] == (now + 3600) * 1000      # an hour ahead is clock drift, kept
+    # T9: more than 2 minutes ahead counts as no time at all (from the node database: age unknown) ...
+    feed(page, node(DELTA, long='Delta', pos=dict(lat=43.001, lon=-76.0, alt=0, time=now + 3600)))
+    assert (team(page)[DELTA]['lat'], team(page)[DELTA]['t']) == (43.001, 0)
+    # ... and on a live packet the position takes the time the radio heard it
+    feed_packet(page, DELTA, meshref.PORT['POSITION'], meshref.position_bytes(43.002, -76.0, 0, now + 3600), rx=now - 60)
+    assert (team(page)[DELTA]['lat'], team(page)[DELTA]['t']) == (43.002, (now - 60) * 1000)
+    feed_packet(page, DELTA, meshref.PORT['POSITION'], meshref.position_bytes(43.003, -76.0, 0, now + 60), rx=now)
+    assert team(page)[DELTA]['t'] == (now + 60) * 1000          # a minute ahead is a clock a little off: kept
 
 
 def test_public_channel_emits_nothing(page, app_url):
@@ -243,7 +249,7 @@ def test_public_channel_emits_nothing(page, app_url):
     chan(page, psk=b'\x01')   # the radio now reports the public channel
     watch(page)
     feed(page, node(DELTA, long='Delta', pos=dict(lat=43.0, lon=-76.0, alt=0, time=1766000000)))
-    feed(page, node(BRAVO, long='Bravo2', pos=dict(lat=44.0, lon=-77.0, alt=0, time=1766000000)))
+    feed(page, node(BRAVO, long='Bravo2', pos=dict(lat=43.02, lon=-76.02, alt=0, time=1766000000)))
     feed_packet(page, DELTA, meshref.PORT['POSITION'], meshref.position_bytes(43.0, -76.0, 0, 1766000300))
     feed_packet(page, DELTA, meshref.PORT['NODEINFO'], meshref.user_bytes('Delta', 'DLT'))
     feed_packet(page, DELTA, meshref.PORT['WAYPOINT'], meshref.waypoint_bytes(id=5, lat=43.0, lon=-76.0, name='Rally'))
@@ -419,3 +425,184 @@ def test_waiting_messages_are_capped_and_the_oldest_dropped(page, app_url):
     chan(page, psk=PRIV)
     froms = [e['from'] for e in events(page, 'meshWaypoint')]
     assert len(froms) == 200 and froms[0] == 7006 and froms[-1] == 7205   # the newest 200, in order
+
+
+# ---------- Final fix round: hop limit (P1), default key (C5/P3), not-teammates (P4), direct messages (P6), heard (P7),
+# precision (P8), primary index (P10), a radio that cannot transmit (P11), older positions (T12) ----------
+
+from meshtastic.protobuf import mesh_pb2  # noqa: E402
+
+DEFAULT_KEY = bytes.fromhex('d4f1bb3a20290759f0bcffabcf4e6901')   # published: meshtastic.org, channel.proto; meshtastic util.DEFAULT_KEY
+
+
+def last_hop(page):
+    return mesh_pb2.ToRadio.FromString(radio.sent(page)[-1]).packet.hop_limit
+
+
+def test_sends_carry_the_radios_hop_limit(page, app_url):
+    connected(page, app_url, script=radio.realistic_script(hop_limit=5))
+    assert page.evaluate("() => FK.mesh.sendWaypoint({ lat: 43.0, lon: -76.0, name: 'A' })") is True
+    assert last_hop(page) == 5
+
+
+def test_sends_use_3_hops_without_a_config_or_with_0(page, app_url):
+    connected(page, app_url)   # the default script sends no config
+    assert page.evaluate("() => FK.mesh.sendWaypoint({ lat: 43.0, lon: -76.0, name: 'A' })") is True
+    assert last_hop(page) == 3
+    feed(page, dict(type='config', lora=dict(region=1, hopLimit=0, txEnabled=True)))
+    page.evaluate("() => FK.mesh.sendWaypoint({ lat: 43.0, lon: -76.0, name: 'B' })")
+    assert last_hop(page) == 3
+    feed(page, dict(type='config', lora=dict(region=1, hopLimit=7, txEnabled=True)))
+    page.evaluate("() => FK.mesh.sendWaypoint({ lat: 43.0, lon: -76.0, name: 'C' })")
+    assert last_hop(page) == 7
+
+
+def test_realistic_start_up_reaches_private(page, app_url):
+    connected(page, app_url, script=radio.realistic_script())
+    assert page.evaluate('() => [FK.mesh.channel(), FK.mesh.positions(), FK.mesh.canShare(), FK.mesh.radioProblem()]') == \
+        ['private', 'precise', True, None]
+    assert set(team(page)) == {BRAVO, CHARLIE}
+
+
+def test_default_key_written_out_is_public(page, app_url):
+    boot(page, app_url)
+    assert DEFAULT_KEY == __import__('meshtastic.util', fromlist=['DEFAULT_KEY']).DEFAULT_KEY
+    for psk in (DEFAULT_KEY, DEFAULT_KEY[:15] + b'\x02', DEFAULT_KEY[:15] + b'\x0a', bytes(16), bytes(32), bytes(1)):
+        chan(page, psk=PRIV)
+        chan(page, psk=psk)
+        assert page.evaluate('() => FK.mesh.channel()') == 'public', psk.hex()
+    chan(page, psk=bytes.fromhex('8a3c51f09e2d47b6c1e85a0f3d926e74'))   # a random 16-byte key
+    assert page.evaluate('() => FK.mesh.channel()') == 'private'
+    chan(page, psk=DEFAULT_KEY + DEFAULT_KEY)   # 32 bytes that merely start with it: a real AES-256 key
+    assert page.evaluate('() => FK.mesh.channel()') == 'private'
+
+
+def test_primary_at_another_index_is_unknown(page, app_url):
+    boot(page, app_url)
+    chan(page, psk=PRIV, precision=32, index=1)
+    assert page.evaluate('() => [FK.mesh.channel(), FK.mesh.positions()]') == ['unknown', 'unknown']
+    chan(page, psk=PRIV, precision=32, index=0)
+    assert page.evaluate('() => FK.mesh.channel()') == 'private'
+    chan(page, psk=PRIV, precision=32, index=2)
+    assert page.evaluate('() => FK.mesh.channel()') == 'unknown'
+
+
+def test_mqtt_and_ignored_nodes_are_not_teammates(page, app_url):
+    connected(page, app_url)
+    feed(page, dict(node(DELTA, long='Delta', pos=dict(lat=43.0, lon=-76.0, alt=0, time=1766000000)), viaMqtt=True))
+    feed(page, dict(node(0x0A0B0C05, long='Echo'), isIgnored=True))
+    assert DELTA not in team(page) and 0x0A0B0C05 not in team(page)
+    assert BRAVO in team(page)
+    feed(page, dict(node(BRAVO, long='Bravo'), isIgnored=True))   # a teammate the owner now ignores leaves the list
+    assert BRAVO not in team(page)
+    # and its live packets do not bring it back
+    feed_packet(page, BRAVO, meshref.PORT['POSITION'], meshref.position_bytes(43.0, -76.0, 0, 1766000900))
+    assert BRAVO not in team(page)
+
+
+def test_realistic_radio_with_mqtt_ignored_and_channel_1_nodes(page, app_url):
+    nodes = [R(node=dict(num=BRAVO, long='Bravo', pos=(43.01, -76.01, 0, 1766000100), last_heard=1766000100)),
+             R(node=dict(num=DELTA, long='Delta', via_mqtt=True, pos=(43.0, -76.0, 0, 1766000100), last_heard=1766000100)),
+             R(node=dict(num=0x0A0B0C05, long='Echo', is_ignored=True, last_heard=1766000100)),
+             R(node=dict(num=0x0A0B0C06, long='Fox', channel=1, last_heard=1766000100))]
+    connected(page, app_url, script=radio.realistic_script(nodes=nodes))
+    assert set(team(page)) == {BRAVO}
+
+
+def test_direct_messages_are_not_team_traffic(page, app_url):
+    connected(page, app_url)
+    watch(page)
+    wp = meshref.waypoint_bytes(id=5, lat=43.0, lon=-76.0, name='Rally')
+    feed_packet(page, BRAVO, meshref.PORT['WAYPOINT'], wp, to=ME, pki=True)
+    feed_packet(page, BRAVO, meshref.PORT['WAYPOINT'], wp, to=ME)          # addressed to this radio, not to the team
+    feed_packet(page, BRAVO, meshref.PORT['WAYPOINT'], wp, pki=True)       # PKI is never channel traffic
+    assert events(page, 'meshWaypoint') == []
+    feed_packet(page, DELTA, meshref.PORT['POSITION'], meshref.position_bytes(43.0, -76.0, 0, 1766000900), to=ME, pki=True)
+    feed_packet(page, DELTA, meshref.PORT['NODEINFO'], meshref.user_bytes('Delta', 'DLT'), to=ME, pki=True)
+    assert DELTA not in team(page)
+    # a plain position sent to this radio (an answer to a position request) is still a teammate's position
+    feed_packet(page, DELTA, meshref.PORT['POSITION'], meshref.position_bytes(43.0, -76.0, 0, 1766000900), to=ME)
+    assert team(page)[DELTA]['lat'] == 43.0
+    feed_packet(page, BRAVO, meshref.PORT['WAYPOINT'], wp)
+    assert len(events(page, 'meshWaypoint')) == 1
+
+
+def test_pki_waypoint_from_the_radio_is_ignored(page, app_url):
+    dm = R(packet=meshref.mesh_packet(frm=BRAVO, to=ME, id=31, portnum=meshref.PORT['WAYPOINT'], pki_encrypted=True,
+                                      payload=meshref.waypoint_bytes(id=5, lat=43.0, lon=-76.0, name='Secret')))
+    connected(page, app_url)
+    watch(page)
+    radio.push(page, dm)
+    radio.push(page, R(packet=meshref.mesh_packet(frm=BRAVO, to=BC, id=32, portnum=meshref.PORT['WAYPOINT'],
+                                                  payload=meshref.waypoint_bytes(id=6, lat=43.0, lon=-76.0, name='Open'))))
+    page.wait_for_function('window.__ev.meshWaypoint.length === 1')
+    assert [e['wp']['name'] for e in events(page, 'meshWaypoint')] == ['Open']
+
+
+def test_heard_is_the_radios_receive_time(page, app_url):
+    connected(page, app_url)
+    now = page.evaluate('() => Date.now()') // 1000
+    # a live position with no time of its own takes the time its packet was heard
+    feed_packet(page, DELTA, meshref.PORT['POSITION'], meshref.position_bytes(43.0, -76.0), rx=now - 600)
+    d = team(page)[DELTA]
+    assert (d['t'], d['heard']) == ((now - 600) * 1000, (now - 600) * 1000)
+    # a receive time far ahead of the phone clock is not believed: the phone clock stands in
+    feed_packet(page, CHARLIE, meshref.PORT['NODEINFO'], meshref.user_bytes('Charlie', 'CHA'), rx=now + 3600)
+    assert abs(team(page)[CHARLIE]['heard'] - now * 1000) < 5000
+    # from the node database, a position with no time stays "age unknown"
+    feed(page, node(0x0A0B0C07, long='Golf', pos=dict(lat=43.0, lon=-76.0, alt=0, time=0), heard=now - 30))
+    assert team(page)[0x0A0B0C07]['t'] == 0
+
+
+def test_replayed_packets_after_start_up_keep_their_old_time(page, app_url):
+    """A real radio replays what it queued while no phone was connected, once the download is over, with the old rx_time."""
+    import time
+    old = int(time.time()) - 3 * 3600
+    replay = [R(packet=meshref.mesh_packet(frm=DELTA, to=BC, id=41, rx_time=old, portnum=meshref.PORT['POSITION'],
+                                           payload=meshref.position_bytes(43.0, -76.0)))]
+    radio.install(page, after=replay)
+    page.goto(app_url)
+    page.wait_for_function('window.FK && FK.mesh')
+    page.evaluate('() => FK.mesh.setEnabled(true)')
+    assert page.evaluate('() => FK.mesh.connect()') is True
+    page.wait_for_function('() => FK.mesh.teammates().some(t => t.num === %d)' % DELTA)
+    d = team(page)[DELTA]
+    assert d['t'] == old * 1000 and d['heard'] == old * 1000
+    assert page.evaluate('t => FK.team.age(t).text', d['t']) == '3 h ago'
+
+
+def test_an_older_position_never_replaces_a_newer_one(page, app_url):
+    connected(page, app_url)
+    now = page.evaluate('() => Date.now()') // 1000
+    feed_packet(page, DELTA, meshref.PORT['POSITION'], meshref.position_bytes(43.0, -76.0, 0, now - 13 * 60), rx=now - 13 * 60)
+    feed(page, node(DELTA, long='Delta', pos=dict(lat=43.009, lon=-76.009, alt=0, time=now - 49 * 60), heard=now - 49 * 60))
+    d = team(page)[DELTA]
+    assert (d['lat'], d['t'], d['name']) == (43.0, (now - 13 * 60) * 1000, 'Delta')   # the name still arrives
+    # with no time on either side, the one heard later wins
+    feed(page, node(0x0A0B0C08, long='Hotel', pos=dict(lat=43.0, lon=-76.0, alt=0, time=0), heard=now - 100))
+    feed(page, node(0x0A0B0C08, long='Hotel', pos=dict(lat=43.005, lon=-76.0, alt=0, time=0), heard=now - 200))
+    assert team(page)[0x0A0B0C08]['lat'] == 43.0
+    feed(page, node(0x0A0B0C08, long='Hotel', pos=dict(lat=43.006, lon=-76.0, alt=0, time=0), heard=now - 50))
+    assert team(page)[0x0A0B0C08]['lat'] == 43.006
+
+
+def test_reduced_precision_is_reported(page, app_url):
+    connected(page, app_url)
+    feed(page, node(DELTA, long='Delta', pos=dict(lat=43.0, lon=-76.0, alt=0, time=1766000000, precisionBits=13)))
+    feed(page, node(0x0A0B0C09, long='India', pos=dict(lat=43.0, lon=-76.0, alt=0, time=1766000000, precisionBits=32)))
+    t = team(page)
+    assert t[DELTA]['approx'] is True and t[0x0A0B0C09]['approx'] is False and t[BRAVO]['approx'] is False
+
+
+def test_radio_that_cannot_transmit(page, app_url):
+    connected(page, app_url, script=radio.realistic_script(region=0))
+    assert page.evaluate('() => [FK.mesh.radioProblem(), FK.mesh.canShare(), FK.mesh.channel()]') == ['region', False, 'private']
+    n = len(radio.sent(page))
+    assert page.evaluate("() => FK.mesh.sendWaypoint({ lat: 43.0, lon: -76.0, name: 'A' })") is False
+    assert len(radio.sent(page)) == n
+    feed(page, dict(type='config', lora=dict(region=1, hopLimit=3, txEnabled=False)))
+    assert page.evaluate('() => [FK.mesh.radioProblem(), FK.mesh.canShare()]') == ['txoff', False]
+    feed(page, dict(type='config', lora=dict(region=1, hopLimit=3, txEnabled=True)))
+    assert page.evaluate('() => [FK.mesh.radioProblem(), FK.mesh.canShare()]') == [None, True]
+    feed(page, dict(type='config', lora=None))   # another Config member changes nothing
+    assert page.evaluate('() => FK.mesh.radioProblem()') is None

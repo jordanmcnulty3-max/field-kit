@@ -226,16 +226,21 @@ OVERFLOW_JS = """root => {
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName)) continue;   // a long value in a field scrolls inside it
     if (getComputedStyle(el).textOverflow === 'ellipsis') continue;
     if (el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 1) {
-      /* Safari counts a select's chosen option text in its parent's scrollWidth even though the select clips it inside its
-         own box (WebKit check, 2026-11-22: the rifle editor's Sight row read 335 > 326 while the select, the sheet and the
-         page all fit). For a box holding a select, measure its children's boxes instead. */
-      if (el.querySelector(':scope > select')) {
+      /* Safari counts a select's chosen option text in the scrollWidth of every box around it, even though the select clips
+         it inside its own box (WebKit check, 2026-11-22: the rifle editor's Sight row and sheet body read 335 > 326 while the
+         select, the sheet and the page all fit). For a box holding a select, measure what is inside it instead: every visible
+         element and text, with the select counted by its own box. */
+      if (el.querySelector('select')) {
         const box = el.getBoundingClientRect(), range = document.createRange();
-        const sticksOut = [...el.childNodes].some(n => {
-          if (n.nodeType === 3) { if (!n.textContent.trim()) return false; range.selectNodeContents(n); }
-          else if (n.nodeType !== 1) return false;
-          const c = n.nodeType === 3 ? range.getBoundingClientRect() : n.getBoundingClientRect();
-          return c.width && (c.right > box.right + 1 || c.left < box.left - 1); });
+        const walk = document.createTreeWalker(el, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, { acceptNode: n =>
+          n.parentElement && n.parentElement.closest('select') && n.parentElement.closest('select') !== n ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+        let sticksOut = false;
+        for (let n = walk.nextNode(); n && !sticksOut; n = walk.nextNode()) {
+          let c;
+          if (n.nodeType === 3) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); c = range.getBoundingClientRect(); }
+          else c = n.getBoundingClientRect();
+          if (c.width && (c.right > box.right + 1 || c.left < box.left - 1)) sticksOut = true;
+        }
         if (!sticksOut) continue;
       }
       bad.push(name(el) + ' content ' + el.scrollWidth + ' > ' + el.clientWidth);

@@ -8291,3 +8291,29 @@ https://www.norma-ammunition.com/governmental/products/tsx-copper-solid/223-rem-
 Fiocchi https://fiocchi.com/en/705556.html (failed); Sniper's Hide thread
 https://www.snipershide.com/shooting/threads/g7-bc-for-308-175-smk.7775/page-2 (the fetch failed). Not opened for lack of a
 search result giving the address: any Sierra page that prints a G1 or G7 for the 175 gr MatchKing.
+
+# Comms: Meshtastic protobuf codec (src/mesh-pb.js)
+
+Source checked: the `meshtastic` Python package, version 2.7.11 (`meshtastic.protobuf.mesh_pb2`, `channel_pb2`, `portnums_pb2`),
+reading each message's `DESCRIPTOR.fields`. No code was taken from the package; `tests/test_mesh_pb.py` compares the codec's bytes
+and decoded values against it. Every field number below matched the task brief's list; the wire types were added from the
+descriptors. Wire type: V = varint, F32 = fixed32, SF32 = sfixed32, L = length-delimited. Fields not listed are skipped by wire type.
+
+| Message | Field (number, type) used |
+|---|---|
+| ToRadio | packet (1, MeshPacket), want_config_id (3, uint32 V), heartbeat (7, Heartbeat, written empty) |
+| FromRadio | packet (2), my_info (3), node_info (4), config_complete_id (7, uint32 V), rebooted (8, bool V), channel (10); the last of these present is the payload (a oneof) |
+| MeshPacket | from (1, fixed32), to (2, fixed32), channel (3, uint32 V), decoded (4, Data), encrypted (5, bytes; read only to tell encrypted from decoded), id (6, fixed32), rx_time (7, fixed32), hop_limit (9, uint32 V), want_ack (10, bool V) |
+| Data | portnum (1, enum V), payload (2, bytes) |
+| Position | latitude_i (1, sfixed32), longitude_i (2, sfixed32), altitude (3, int32 V), time (4, fixed32) |
+| User | long_name (2, string), short_name (3, string) |
+| NodeInfo | num (1, uint32 V), user (2), position (3), last_heard (5, fixed32), channel (7, uint32 V) |
+| MyNodeInfo | my_node_num (1, uint32 V) |
+| Channel | index (1, int32 V), settings (2, ChannelSettings), role (3, enum V: 0 disabled, 1 primary, 2 secondary) |
+| ChannelSettings | psk (2, bytes), name (3, string), module_settings (7, ModuleSettings) |
+| ModuleSettings | position_precision (1, uint32 V) |
+| Waypoint | id (1, uint32 V), latitude_i (2, sfixed32), longitude_i (3, sfixed32), expire (4, uint32 V), locked_to (5, uint32 V), name (6, string), description (7, string), icon (8, fixed32) |
+
+Note the fixed32 fields: `from`, `to`, `id`, `rx_time`, `time`, `last_heard` and the waypoint `icon` are fixed-width on the wire, while
+the waypoint `id`, `expire` and `locked_to` are varints. Coordinates are degrees times 1e7. Altitude is a signed int32: a negative value
+is a 10-byte varint, of which the codec keeps the low 32 bits. Page opened: none (no web page was needed; the package descriptors are the source).

@@ -44,7 +44,7 @@ b = shell.index('</section>', a) + len('</section>')
 shell = shell[:a] + emerg + shell[b:]
 shell = shell.replace('</style>', read('figs/figs.css') + '\n</style>', 1)
 shell = shell.replace('<body>\n', '<body>\n' + read('figs/markers.html'), 1)
-js = '\n'.join(read('src/' + f) for f in ['astro.js', 'geo.js', 'tac-geom.js', 'wmm.js', 'ballistics.js', 'bal-sight.js', 'app.js', 'sheet.js', 'bal-ui.js', 'bal-edit.js', 'tac-data.js', 'router.js', 'emergency.js', 'emergency-tools.js', 'patients.js', 'reports.js', 'protocol.js', 'search.js', 'map.js', 'tac-markers.js', 'tac-tools.js', 'tac-shapes.js', 'tac-nav.js', 'tac-io.js', 'survival.js', 'survival-tools.js'])
+js = '\n'.join(read('src/' + f) for f in ['astro.js', 'geo.js', 'tac-geom.js', 'wmm.js', 'mesh-pb.js', 'ballistics.js', 'bal-sight.js', 'app.js', 'sheet.js', 'bal-ui.js', 'bal-edit.js', 'tac-data.js', 'router.js', 'emergency.js', 'emergency-tools.js', 'patients.js', 'reports.js', 'protocol.js', 'search.js', 'map.js', 'tac-markers.js', 'tac-tools.js', 'tac-shapes.js', 'tac-nav.js', 'tac-io.js', 'survival.js', 'survival-tools.js'])
 
 # Protocols, topics, checklists and tool data: validate every JSON file, then inline as window.FK_DATA (sorted by id).
 def load_json_dir(pattern):

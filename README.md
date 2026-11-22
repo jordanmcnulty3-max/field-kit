@@ -29,6 +29,13 @@ Each release is one commit tagged `vN` (versions are `N` or dotted `N.M`, for ex
 | `index.html`, `sw.js`, `manifest.json`, `leaflet.js`, `leaflet.css` | **Build output, served by Pages. Never edit by hand.** |
 | `icon-*.png` | App icons (static) |
 
+## Tests
+
+```
+pip install pytest playwright meshtastic   # meshtastic: reference bytes for the radio codec tests (tests/meshref.py)
+python3 -m unittest tests.test_validate && python3 -m pytest tests -q
+```
+
 ## Release
 
 ```

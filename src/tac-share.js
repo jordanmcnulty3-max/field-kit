@@ -1,0 +1,254 @@
+/* ---------- FK.share: shared markers (Meshtastic waypoints) and the rules for incoming ones ----------
+   A marker is shared when it has a net record (src/tac-data.js). Sharing is opt-in per marker: nothing saved before the radio
+   link has a record, so nothing old is ever sent. Every shared marker is open: anyone holding it can change, send or delete
+   it. Storage: meshTombs [{ wid, t }], the waypoint numbers deleted here or by a teammate, kept 30 days; anything arriving
+   under one of them is ignored, so a teammate who missed the delete cannot bring the marker back.
+   On the wire a delete is the waypoint sent again already expired (expire = 1, epoch seconds). */
+(() => {
+  const { store, fin, on } = FK;
+  const DAY = 864e5, TOMB_MS = 30 * DAY, MAX_TOMBS = 5000, CAP = 500, GAP = 3000;
+  const okWid = v => Number.isInteger(v) && v >= 1 && v <= 0xFFFFFFFF;
+  let stopped = false;                 // a restore is replacing storage: write nothing more (the page reloads)
+
+  /* ---- tombs ---- */
+  const loadTombs = () => {
+    const seen = new Set(), now = Date.now(), v = store.get('meshTombs', []);
+    return (Array.isArray(v) ? v : [])
+      .filter(x => x && typeof x === 'object' && okWid(x.wid) && fin(x.t) && !seen.has(x.wid) && seen.add(x.wid))
+      .map(x => ({ wid: x.wid, t: Math.min(x.t, now) }))   // a time ahead (another phone's clock) would never run out
+      .slice(-MAX_TOMBS);
+  };
+  let tombs = loadTombs(), tombSet = new Set(tombs.map(x => x.wid)), tombsDirty = false;
+  function tomb(wid) {
+    if (tombSet.has(wid)) return;
+    tombs.push({ wid, t: Date.now() }); tombSet.add(wid); tombsDirty = true;
+    if (tombs.length > MAX_TOMBS) tombSet.delete(tombs.shift().wid);
+  }
+  function pruneTombs(now) {
+    const keep = tombs.filter(x => now - x.t < TOMB_MS);
+    if (keep.length === tombs.length) return;
+    tombs = keep; tombSet = new Set(tombs.map(x => x.wid)); tombsDirty = true;
+  }
+  const saveTombs = () => { if (tombsDirty && !stopped) { tombsDirty = false; store.set('meshTombs', tombs); } };
+
+  /* ---- who holds what ---- */
+  const find = id => FK.tac.markers().find(m => m.id === id) || null;
+  const me = () => FK.mesh.myNum();
+  const isMine = m => !!(m && m.net) && me() !== null && m.net.from === me();
+  const newWid = () => {
+    const held = new Set(FK.tac.markers().filter(m => m.net).map(m => m.net.wid));
+    let w;
+    do w = 1 + Math.floor(Math.random() * 0xFFFFFFFF); while (held.has(w) || tombSet.has(w) || !okWid(w));
+    return w;
+  };
+  /* The waypoint for a marker: its stored expiry and foreign icon go out again unchanged. */
+  const wpOf = (m, expire) => MMK.toWaypoint(m, m.net.wid, { icon: m.net.icon, expire: expire === undefined ? m.net.expire : expire });
+
+  /* ---- sending ---- */
+  let lastSend = -Infinity;
+  /* Send a shared marker as it is now. 'no' (no such shared marker), 'toolong' (nothing changed), 'pending' (no link, or the
+     radio refused: sent on the next connection) or 'sent'. A record made before any radio was known (from 0) takes this
+     radio's number when it first goes out. */
+  async function sendNow(id) {
+    const m = find(id);
+    if (!m || !m.net) return 'no';
+    if (!MMK.fits(m).ok) return 'toolong';
+    if (!FK.mesh.canShare()) {
+      if (!m.net.pending) FK.tac.setNet(id, { ...m.net, pending: true });
+      return 'pending';
+    }
+    const who = m.net.from === 0 && me() !== null ? { from: me(), by: FK.mesh.nameOf(me()) } : {};
+    lastSend = Date.now();
+    const ok = await FK.mesh.sendWaypoint(wpOf(m));
+    const after = find(id);
+    if (after && after.net && after.net.wid === m.net.wid) {   // still held and shared under the same number
+      if (ok) FK.tac.setNet(id, { ...after.net, ...who, pending: false, t: Date.now() });
+      else if (!after.net.pending) FK.tac.setNet(id, { ...after.net, pending: true });
+    }
+    return ok ? 'sent' : 'pending';
+  }
+
+  async function share(id) {
+    const m = find(id);
+    if (!m) return 'no';
+    if (!MMK.fits(m).ok) return 'toolong';
+    if (!m.net) {
+      const n = me();
+      const net = { wid: newWid(), from: n === null ? 0 : n, by: n === null ? '' : FK.mesh.nameOf(n), t: Date.now(), chBy: '', chT: 0,
+        icon: 0, expire: 0, pending: true, rx: false };
+      if (!FK.tac.setNet(id, net)) return 'no';
+    }
+    return sendNow(id);
+  }
+  /* After this phone saved or moved a shared marker: send it again under the same number. This phone's own change is not
+     "changed by" anyone, so that line clears. */
+  async function changed(id) {
+    const m = find(id);
+    if (!m || !m.net) return 'no';
+    if (!MMK.fits(m).ok) return 'toolong';
+    if (m.net.chBy || m.net.chT) FK.tac.setNet(id, { ...m.net, chBy: '', chT: 0 });
+    return sendNow(id);
+  }
+  function unshare(id) {
+    const m = find(id);
+    return !!(m && m.net) && FK.tac.setNet(id, null);
+  }
+  /* Delete a marker here. A shared one is remembered (tomb); with everyone, the delete also goes out (when the link can send).
+     Resolves true when the delete was sent. */
+  async function remove(id, everyone) {
+    const m = find(id);
+    if (!m) return false;
+    if (!m.net) { FK.tac.removeMarker(id); return false; }
+    const wp = everyone ? wpOf(m, 1) : null;
+    tomb(m.net.wid); saveTombs();
+    FK.tac.removeMarker(id);
+    if (!wp || !FK.mesh.canShare()) return false;
+    lastSend = Date.now();
+    return FK.mesh.sendWaypoint(wp);
+  }
+
+  /* ---- the spaced queue: pending markers on connection, and "send all mine again", one every GAP ms ---- */
+  let queue = [], qTimer = 0, busy = false;
+  function enqueue(ids) {
+    let n = 0;
+    ids.forEach(id => { if (!queue.includes(id)) { queue.push(id); n++; } });
+    kick();
+    return n;
+  }
+  function kick() {
+    if (busy || qTimer || !queue.length || stopped) return;
+    qTimer = setTimeout(step, Math.max(0, lastSend + GAP - Date.now()));
+  }
+  async function step() {
+    qTimer = 0;
+    if (stopped) return;
+    if (!FK.mesh.canShare()) { queue = []; return; }   // pending ones stay pending for the next connection
+    const id = queue.shift(), m = find(id);
+    if (m && m.net && MMK.fits(m).ok) {
+      busy = true;
+      try { await sendNow(id); } finally { busy = false; }
+    }
+    kick();
+  }
+  function resendMine() {
+    if (!FK.mesh.canShare()) return 0;
+    return enqueue(FK.tac.markers().filter(m => isMine(m) && MMK.fits(m).ok).map(m => m.id));
+  }
+  /* The link can send again: queue every pending marker. Never from inside the radio's message handler (a channel verdict
+     can arrive there): a timer starts it. */
+  let could = false;
+  on('mesh', () => {
+    const can = FK.mesh.canShare();
+    if (can && !could) setTimeout(() => {
+      if (FK.mesh.canShare()) enqueue(FK.tac.markers().filter(m => m.net && m.net.pending).map(m => m.id));
+    }, 0);
+    could = can;
+  });
+
+  /* ---- held markers over time: expiry, tombs' age, the cap ---- */
+  let dropped = 0;
+  /* Inside a FK.tac.batch. idx: wid -> marker for every shared marker (kept up to date by the caller). */
+  function enforceCap(idx) {
+    for (;;) {
+      let n = 0, oldest = null;
+      idx.forEach(m => { if (!isMine(m)) { n++; if (!oldest || m.net.t < oldest.net.t) oldest = m; } });
+      if (n <= CAP) return;
+      FK.tac.removeMarker(oldest.id); idx.delete(oldest.net.wid); dropped++;
+    }
+  }
+  const indexShared = () => new Map(FK.tac.markers().filter(m => m.net).map(m => [m.net.wid, m]));
+  function sweep(now, idx) {
+    idx.forEach((m, wid) => {
+      if (m.net.expire > 0 && m.net.expire * 1000 <= now) { tomb(wid); FK.tac.removeMarker(m.id); idx.delete(wid); }
+    });
+    pruneTombs(now);
+    enforceCap(idx);
+  }
+  function sweepNow() {
+    if (stopped) return;
+    FK.tac.batch(() => sweep(Date.now(), indexShared()));
+    saveTombs();
+  }
+
+  /* ---- incoming ---- */
+  /* One received waypoint (inside a batch). d: the 'meshWaypoint' detail { wp, from, name }. */
+  function receive(d, now, idx) {
+    const wp = d.wp, wid = wp.id;
+    if (!okWid(wid) || tombSet.has(wid)) return;
+    const m = idx.get(wid);
+    if (fin(wp.expire) && wp.expire > 0 && wp.expire * 1000 <= now) {   // a delete
+      tomb(wid);
+      if (!m) return;
+      idx.delete(wid);
+      if (isMine(m)) {   // the maker keeps it, private, with who deleted it
+        FK.tac.setNet(m.id, null);
+        FK.tac.updateMarker(m.id, { note: `Deleted by ${d.name}. ${m.note}`.slice(0, FK.tac.MAX_NOTE) });
+      } else FK.tac.removeMarker(m.id);
+      return;
+    }
+    const f = MMK.fromWaypoint(wp, now);
+    if (!f) return;
+    if (f.t > now) f.t = now;                    // a sighting cannot be in the future (rx stays false: it had a time)
+    const icon = f.kind === 'point' && f.icon && !MMK.kindFor(f.icon) ? f.icon : 0;
+    if (m) {
+      if (d.from === me()) return;               // our own send coming back
+      const patch = { name: f.name, note: f.note, kind: f.kind, lat: f.lat, lon: f.lon };
+      if (m.lat !== f.lat || m.lon !== f.lon) patch.alt = null;
+      if (!f.rx) patch.t = f.t;
+      FK.tac.updateMarker(m.id, patch);
+      FK.tac.setNet(m.id, { ...m.net, chBy: d.name, chT: now, t: now, icon, expire: f.expire, rx: f.rx ? m.net.rx : false });
+      idx.set(wid, find(m.id));
+      return;
+    }
+    const added = FK.tac.addShared({ name: f.name, lat: f.lat, lon: f.lon, kind: f.kind, note: f.note, t: f.t,
+      net: { wid, from: d.from, by: d.name, t: now, chBy: '', chT: 0, icon, expire: f.expire, pending: false, rx: f.rx } });
+    if (added) { idx.set(wid, added); if (!isMine(added)) enforceCap(idx); }
+  }
+  /* Waypoints arrive in bursts: they wait here and apply once per animation frame (a timer stands in while the page is hidden,
+     when frames stop), so a burst costs one storage write and one 'wps' event. */
+  let inbox = [], raf = 0, tmr = 0;
+  function flush() {
+    cancelAnimationFrame(raf); clearTimeout(tmr); raf = tmr = 0;
+    const got = inbox;
+    inbox = [];
+    if (stopped || !got.length) return;
+    const now = Date.now();
+    FK.tac.batch(() => {
+      const idx = indexShared();
+      got.forEach(d => receive(d, now, idx));
+      sweep(now, idx);
+    });
+    saveTombs();
+  }
+  on('meshWaypoint', d => {
+    if (stopped || !d || !d.wp) return;
+    inbox.push(d);
+    if (!raf) raf = requestAnimationFrame(flush);
+    if (!tmr) tmr = setTimeout(flush, 1000);
+  });
+
+  /* Expiry is checked on load, on each incoming message, and each minute while the map shows. */
+  let tick = 0;
+  function syncTimer() {
+    const want = !stopped && !document.hidden && FK.tab() === 'tactical' && FK.view() === 'map';
+    if (want && !tick) tick = setInterval(sweepNow, 60000);
+    else if (!want && tick) { clearInterval(tick); tick = 0; }
+  }
+  on('shown', syncTimer);
+  document.addEventListener('visibilitychange', syncTimer);
+  on('restoring', () => {
+    stopped = true; inbox = []; queue = [];
+    clearTimeout(qTimer); clearTimeout(tmr); cancelAnimationFrame(raf); clearInterval(tick); tick = 0;
+  });
+  on('restoreFailed', () => { stopped = false; syncTimer(); });
+  sweepNow();
+  syncTimer();
+
+  FK.share = {
+    share, resend: sendNow, resendMine, unshare, remove, changed,
+    isShared: id => !!(find(id) || {}).net,
+    mine: id => isMine(find(id)),
+    dropped: () => dropped
+  };
+  FK._test.share = { flush };
+})();

@@ -3,7 +3,9 @@
    link has a record, so nothing old is ever sent. Every shared marker is open: anyone holding it can change, send or delete
    it. Storage: meshTombs [{ wid, t }], the waypoint numbers deleted here or by a teammate, kept 30 days; anything arriving
    under one of them is ignored, so a teammate who missed the delete cannot bring the marker back.
-   On the wire a delete is the waypoint sent again already expired (expire = 1, epoch seconds). */
+   A delete on the wire (neither form is confirmed by the official apps' documentation): this app sends the whole waypoint
+   again already expired (expire = 1, epoch seconds). On receipt, that form (any expiry at or before now) is a delete, and so
+   is the reference package's form for a number this phone holds: only the id, no position, no name, expire 0. */
 (() => {
   const { store, fin, on } = FK;
   const DAY = 864e5, TOMB_MS = 30 * DAY, MAX_TOMBS = 2000, CAP = 500, GAP = 3000;
@@ -90,22 +92,26 @@
     if (m.net.chBy || m.net.chT) FK.tac.setNet(id, { ...m.net, chBy: '', chT: 0 });
     return sendNow(id);
   }
+  /* Stop sharing: the copy here becomes private and nothing is sent. The number is remembered (tomb), so a teammate's later
+     send of it does not come back beside the private copy. */
   function unshare(id) {
     const m = find(id);
-    return !!(m && m.net) && FK.tac.setNet(id, null);
+    if (!m || !m.net || !FK.tac.setNet(id, null)) return false;
+    tomb(m.net.wid); saveTombs();
+    return true;
   }
-  /* Delete a marker here. A shared one is remembered (tomb); with everyone, the delete also goes out (when the link can send).
-     Resolves true when the delete was sent. */
+  /* Delete a marker here; a shared one is remembered (tomb). With everyone, the delete also goes out when the link can send.
+     Resolves 'sent' (the delete went out), 'local' (removed here only: teammates still have it) or 'no' (no such marker). */
   async function remove(id, everyone) {
     const m = find(id);
-    if (!m) return false;
-    if (!m.net) { FK.tac.removeMarker(id); return false; }
+    if (!m) return 'no';
+    if (!m.net) { FK.tac.removeMarker(id); return 'local'; }
     const wp = everyone ? wpOf(m, 1) : null;
     tomb(m.net.wid); saveTombs();
     FK.tac.removeMarker(id);
-    if (!wp || !FK.mesh.canShare()) return false;
+    if (!wp || !FK.mesh.canShare()) return 'local';
     lastSend = Date.now();
-    return FK.mesh.sendWaypoint(wp);
+    return (await FK.mesh.sendWaypoint(wp)) ? 'sent' : 'local';
   }
 
   /* ---- the spaced queue: pending markers on connection, and "send all mine again", one every GAP ms ---- */
@@ -177,7 +183,11 @@
     const wp = d.wp, wid = wp.id;
     if (!okWid(wid) || tombSet.has(wid)) return;
     const m = idx.get(wid);
-    if (fin(wp.expire) && wp.expire > 0 && wp.expire * 1000 <= now) {   // a delete
+    const expired = fin(wp.expire) && wp.expire > 0 && wp.expire * 1000 <= now;
+    /* The reference package's delete: no position, no name, no expiry. For a number not held it is ignored and leaves no
+       tomb (it cannot be told from a malformed packet). Checked before fromWaypoint, which rejects 0, 0. */
+    const bare = !!m && wp.lat === 0 && wp.lon === 0 && !wp.name && !(wp.expire > 0);
+    if (expired || bare) {   // a delete
       tomb(wid);
       if (!m) return;
       idx.delete(wid);

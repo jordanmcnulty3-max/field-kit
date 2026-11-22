@@ -205,16 +205,46 @@ def test_teammate_update_of_mine_keeps_it_mine(page, app_url):
     assert js(page, "() => FK.share.mine('a')") is True and len(markers(page)) == 1
 
 
-def test_after_unshare_a_teammates_copy_comes_back_as_a_new_shared_marker(page, app_url):
-    """Stop sharing leaves no tomb (it is not a delete): teammates keep their copies, and one they send again arrives as a
-    new shared marker beside the private one. A delete under that number only leaves a tomb."""
+def test_after_unshare_a_teammates_resend_is_ignored(page, app_url):
+    """Stop sharing tombs the number: a teammate's later resend does not re-create it beside the private copy."""
     start(page, app_url, wps=[mk('a', net(67, frm=ME), name='Camp')], link='private')
     assert js(page, "() => FK.share.unshare('a')") is True
+    assert tombs(page) == [67]
+    before = markers(page)
     incoming(page, BRAVO, id=67, lat=43.0, lon=-76.0, name='Camp')
-    ms = markers(page)
-    assert len(ms) == 2 and 'net' not in ms[0] and ms[1]['net']['wid'] == 67 and ms[1]['net']['from'] == BRAVO
     incoming(page, BRAVO, id=67, lat=43.0, lon=-76.0, expire=1)
-    assert [m['id'] for m in markers(page)] == ['a'] and 'net' not in one(page, 'a') and tombs(page) == [67]
+    assert markers(page) == before and 'net' not in one(page, 'a') and tombs(page) == [67]
+
+
+# The reference package's delete (meshtastic Python deleteWaypoint): only the id, expire 0, no position, no name.
+def test_bare_delete_removes_a_held_marker_from_a_teammate_and_tombs(page, app_url):
+    start(page, app_url, wps=[mk('a', net(130)), mk('p')], link='private')
+    incoming(page, CHARLIE, id=130)
+    assert [m['id'] for m in markers(page)] == ['p'] and tombs(page) == [130]
+
+
+def test_bare_delete_of_mine_keeps_a_private_copy_with_a_note(page, app_url):
+    start(page, app_url, wps=[mk('a', net(131, frm=ME), note='by the oak')], link='private')
+    incoming(page, BRAVO, id=131)
+    a = one(page, 'a')
+    assert 'net' not in a and a['note'] == 'Deleted by Radio 0c02. by the oak' and tombs(page) == [131]
+
+
+def test_bare_delete_for_a_number_not_held_is_ignored_and_adds_no_tomb(page, app_url):
+    start(page, app_url, wps=[mk('a', net(132))], link='private')
+    before = markers(page)
+    incoming(page, CHARLIE, id=133)
+    assert markers(page) == before and tombs(page) == []
+
+
+def test_a_bare_packet_with_a_name_or_a_position_is_not_a_delete(page, app_url):
+    start(page, app_url, wps=[mk('a', net(134), name='Camp'), mk('b', net(135), name='Spring')], link='private')
+    incoming(page, CHARLIE, id=134, name='Renamed')                       # a name, no position: malformed, ignored
+    incoming(page, CHARLIE, id=135, lat=43.01, lon=-76.01)               # a position, no name: an update
+    a, b = by_wid(page)[134], by_wid(page)[135]
+    assert (a['name'], a['lat']) == ('Camp', 43.0)
+    assert (b['name'], b['lat']) == ('Marker', 43.01)
+    assert tombs(page) == []
 
 
 def test_incoming_past_expiry_is_a_delete(page, app_url):
@@ -288,7 +318,7 @@ def test_echo_of_own_send_changes_nothing(page, app_url):
     settle(page)
     assert markers(page) == before                                      # no copy, no "changed by" ourselves, t not rounded
     # and an echo of a delete we sent
-    assert js(page, "() => FK.share.remove('a', true)") is True
+    assert js(page, "() => FK.share.remove('a', true)") == 'sent'
     feed_packet(page, ME, WPT, mesh_pb2.ToRadio.FromString(radio.sent(page)[-1]).packet.decoded.payload)
     settle(page)
     assert markers(page) == []
@@ -454,23 +484,37 @@ def test_changed_sends_again_under_the_same_wid(page, app_url):
 def test_unshare_makes_a_private_copy_and_sends_nothing(page, app_url):
     start(page, app_url, wps=[mk('a', net(98, frm=ME))])
     assert js(page, "() => FK.share.unshare('a')") is True
-    assert 'net' not in one(page, 'a') and sent_wps(page) == [] and tombs(page) == []
+    assert 'net' not in one(page, 'a') and sent_wps(page) == [] and tombs(page) == [98]
     assert js(page, "() => FK.share.unshare('a')") is False
 
 
 def test_remove_for_everyone_sends_expire_1_tombs_and_removes(page, app_url):
     start(page, app_url, wps=[mk('a', net(99), name='Theirs'), mk('p')])
-    assert js(page, "() => FK.share.remove('a', true)") is True     # anyone may delete a shared marker for everyone
+    assert js(page, "() => FK.share.remove('a', true)") == 'sent'   # anyone may delete a shared marker for everyone
     w = sent_wps(page)[-1]
-    assert (w.id, w.expire) == (99, 1)
+    assert (w.id, w.expire, w.name, w.icon, w.latitude_i, w.longitude_i) == (99, 1, 'Theirs', ICON['point'], 430000000, -760000000)
     assert [m['id'] for m in markers(page)] == ['p'] and tombs(page) == [99]
-    assert js(page, "() => FK.share.remove('p', true)") is False    # a private marker: removed, nothing sent, no tomb
+    assert js(page, "() => FK.share.remove('p', true)") == 'local'  # a private marker: removed, nothing sent, no tomb
     assert markers(page) == [] and len(sent_wps(page)) == 1 and tombs(page) == [99]
+    assert js(page, "() => FK.share.remove('nope', true)") == 'no'
+
+
+def test_remove_for_everyone_without_a_link_is_local(page, app_url):
+    start(page, app_url, wps=[mk('a', net(136))], link='private')
+    assert js(page, "() => FK.share.remove('a', true)") == 'local'
+    assert markers(page) == [] and tombs(page) == [136]
+
+
+def test_remove_for_everyone_when_the_send_fails_is_local(page, app_url):
+    start(page, app_url, wps=[mk('a', net(137))])
+    js(page, '() => { FK.mesh.sendWaypoint = async () => false; }')
+    assert js(page, "() => FK.share.remove('a', true)") == 'local'
+    assert markers(page) == [] and tombs(page) == [137] and sent_wps(page) == []
 
 
 def test_remove_on_this_phone_only_tombs_and_sends_nothing(page, app_url):
     start(page, app_url, wps=[mk('a', net(100))])
-    assert js(page, "() => FK.share.remove('a', false)") is False
+    assert js(page, "() => FK.share.remove('a', false)") == 'local'
     assert markers(page) == [] and tombs(page) == [100] and sent_wps(page) == []
     incoming(page, BRAVO, id=100, lat=43.0, lon=-76.0, name='Back')
     assert markers(page) == []
@@ -496,7 +540,7 @@ def test_expiry_on_load_on_incoming_and_each_minute_on_the_map(page, app_url):
 
 def test_tombs_are_kept_30_days(page, app_url):
     start(page, app_url, wps=[mk('a', net(110))], link='private', clock=NOW)
-    assert js(page, "() => FK.share.remove('a', false)") is False
+    assert js(page, "() => FK.share.remove('a', false)") == 'local'
     for _ in range(29):   # a day at a time: one call of 29 days in ms overflows
         page.clock.fast_forward(DAY)
     incoming(page, BRAVO, clock=True, id=110, lat=43.0, lon=-76.0, name='Back')

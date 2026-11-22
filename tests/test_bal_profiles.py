@@ -116,10 +116,11 @@ def test_clean_optic_rules(page, app_url):
            {'type': 'turret', 'unit': 'toString', 'click': 0.1}, {'type': 'toString'}]
     for o in bad:
         assert 'optic' not in clean(page, {**base, 'optic': o}), o
-    got = clean(page, {**base, 'optic': {'type': 'reticle', 'unit': 'mil', 'marks': list(range(1, 30))}})
-    assert got['optic']['marks'] == list(range(1, 11))     # at most ten
-    got = clean(page, {**base, 'optic': {'type': 'reticle', 'unit': 'mil', 'marks': [1, 'a', -2, 2, None, 3]}})
-    assert got['optic']['marks'] == [1, 2, 3]              # only finite positive numbers count
+    # one bad mark, or more than ten, drops the whole sight: nothing is renumbered or cut short
+    for marks in (list(range(1, 30)), list(range(1, 12)), [1, 'a', 2, 3], [1, -2, 2], [1, None, 3], [0, 1, 2], [1, 2, float('inf')], [2, 1]):
+        assert 'optic' not in clean(page, {**base, 'optic': {'type': 'reticle', 'unit': 'mil', 'marks': marks}}), marks
+    got = clean(page, {**base, 'optic': {'type': 'reticle', 'unit': 'mil', 'marks': list(range(1, 11))}})
+    assert got['optic']['marks'] == list(range(1, 11))     # ten is allowed
 
 
 def test_clean_zero_conditions_and_mv0(page, app_url):
@@ -285,3 +286,38 @@ def test_a_failed_profile_write_leaves_custom_stored_so_the_migration_is_retried
     page.wait_for_selector('#dope tr')
     assert page.evaluate('FK.bal.profiles()') == [{'id': 'ucustom', 'name': 'Custom', 'bc': 0.4, 'model': 'G1', 'w': 150, 'mv': 2800, 'sight': 1.8, 'zero': 200}]
     assert stored_state(page) == 'ucustom'
+
+
+# ---------- Ranges a real rifle and real air can have ----------
+
+def test_clean_keeps_pressure_only_between_8_and_33_inhg(page, app_url):
+    boot(page, app_url)
+    base = {'id': 'u5', 'name': 'P'}
+    for press in (8, 29.92, 33):
+        assert clean(page, {**base, 'zeroAtm': {'temp': 40, 'press': press}})['zeroAtm'] == {'temp': 40, 'press': press, 'rh': 50}
+    for press in (2.992, 0.1, 7.99, 33.01, 299.2):
+        assert 'zeroAtm' not in clean(page, {**base, 'zeroAtm': {'temp': 40, 'press': press}}), press
+        assert clean(page, {**base, 'zeroAtm': {'temp': 40, 'alt': 300, 'press': press}})['zeroAtm'] == {'temp': 40, 'alt': 300, 'rh': 50}
+
+
+def test_a_stored_profile_outside_the_plausible_ranges_is_kept_and_asks_for_an_edit(page, app_url):
+    from .test_bal_screen import open_screen
+    ok = {'id': 'u6', 'name': 'Odd', 'bc': 0.3, 'model': 'G7', 'w': 150, 'mv': 2700, 'sight': 1.5, 'zero': 100}
+    ask = 'This profile needs a ballistic coefficient, a velocity and a zero range. Tap Edit.'
+    for bad in ({'bc': 0.00001}, {'bc': 5}, {'w': 1e308}, {'w': 0.5}, {'mv': 99999}, {'mv': 299}, {'zero': 0.001}, {'zero': 2000}, {'sight': 30}, {'sight': -1}):
+        p = {**ok, **bad}
+        open_screen(page, app_url, profile='u6', profiles=[p])
+        assert page.evaluate('FK.bal.selected()') == p, bad
+        assert page.inner_text('#solSub') == ask, bad
+        assert page.locator('#dope tbody tr').count() == 0
+    for edge in ({'bc': 0.05}, {'bc': 1.2}, {'w': 0}, {'w': 1}, {'w': 1000}, {'mv': 300}, {'mv': 5000}, {'zero': 5}, {'zero': 1000}, {'sight': 0}, {'sight': 6}):
+        open_screen(page, app_url, profile='u6', profiles=[{**ok, **edge}])
+        assert page.inner_text('#solSub') != ask, edge
+
+
+def test_an_unknown_stored_wind_clock_or_card_step_falls_back_to_the_default(page, app_url):
+    from .test_bal_screen import open_screen
+    for clock, step in (('13', '30'), ('0', 'x'), ('', '')):
+        open_screen(page, app_url, shot={'bClock': clock, 'bStep': step, 'bWind': '10'})
+        assert page.input_value('#bClock') == '3' and page.input_value('#bStep') == '50', (clock, step)
+        assert page.inner_text('#solWind').split('\n')[1].startswith('R '), clock     # a crosswind from the right, not a head wind

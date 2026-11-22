@@ -30,21 +30,30 @@
   const fin = FK.fin;
   const copy = p => JSON.parse(JSON.stringify(p));
 
+  /* ---------- The shared rules: one definition each, used here and by the editor (through FK.balHost) ----------
+     RANGE: what a real rifle, load and air can have. [low, high], both allowed. */
+  const RANGE = Object.freeze({
+    temp: [-60, 140], alt: [-2000, 30000], press: [8, 33], rh: [0, 100],                 // °F, ft, inHg (station), %
+    bc: [0.05, 1.2], w: [1, 1000], mv: [300, 5000], zero: [5, 1000], sight: [0, 6]       // -, gr (blank or 0 also), fps, yd, in
+  });
+  const within = (v, k) => fin(v) && v >= RANGE[k][0] && v <= RANGE[k][1];
+  /* A load the screen can solve: coefficient, velocity and zero inside their ranges; weight blank, 0 or inside; sight height blank or inside. */
+  const loadOk = p => !!p && within(p.bc, 'bc') && within(p.mv, 'mv') && within(p.zero, 'zero')
+    && (p.w === undefined || p.w === 0 || within(p.w, 'w')) && (p.sight === undefined || within(p.sight, 'sight'));
+  /* A drop reticle's marks: 1 to 10 numbers, each above 0 and larger than the one before. */
+  const marksOk = m => Array.isArray(m) && m.length >= 1 && m.length <= 10 && m.every((x, i) => fin(x) && x > 0 && (i === 0 || x > m[i - 1]));
+
   function cleanOptic(o) {
     if (!isObj(o)) return null;
     if (o.type === 'dot') return o.unit === undefined ? { type: 'dot' } : UNITS.includes(o.unit) ? { type: 'dot', unit: o.unit } : null;
     if (!UNITS.includes(o.unit)) return null;
     if (o.type === 'turret') return CLICKS.includes(o.click) ? { type: 'turret', unit: o.unit, click: o.click } : null;
-    if (o.type === 'reticle' && Array.isArray(o.marks)) {
-      const marks = o.marks.filter(m => fin(m) && m > 0).slice(0, 10);
-      return marks.length && marks.every((m, i) => i === 0 || m > marks[i - 1]) ? { type: 'reticle', unit: o.unit, marks } : null;
-    }
+    if (o.type === 'reticle') return marksOk(o.marks) ? { type: 'reticle', unit: o.unit, marks: o.marks.slice() } : null;   // one bad mark drops the sight
     return null;
   }
-  const ZT = [-60, 140], ZA = [-2000, 30000];     // zero conditions a person could really have: temperature °F, altitude ft
   function cleanAtm(z) {
-    if (!isObj(z) || !fin(z.temp) || z.temp < ZT[0] || z.temp > ZT[1]) return null;
-    const alt = fin(z.alt) && z.alt >= ZA[0] && z.alt <= ZA[1], press = fin(z.press) && z.press > 0;
+    if (!isObj(z) || !within(z.temp, 'temp')) return null;
+    const alt = within(z.alt, 'alt'), press = within(z.press, 'press');
     if (!alt && !press) return null;
     const out = { temp: z.temp };
     if (alt) out.alt = z.alt;
@@ -52,7 +61,8 @@
     out.rh = fin(z.rh) ? z.rh : 50;
     return out;
   }
-  /* A safe profile, or null (no usable id or name, or the id belongs to a built-in load). */
+  /* A safe profile, or null (no usable id or name, or the id belongs to a built-in load). Load numbers outside RANGE are kept as
+     they are (the person can still open and fix them); the screen will not solve with them (loadOk). */
   function clean(raw) {
     if (!isObj(raw) || !okId(raw.id) || typeof raw.name !== 'string' || PRESETS.some(x => x.id === raw.id)) return null;
     const p = { id: raw.id, name: raw.name.slice(0, 60) };
@@ -145,7 +155,14 @@
   function restoreInputs() {
     const s = store.get('bal', null);
     if (!isObj(s)) { cur = firstBuiltIn().id; fillProfiles(); return; }
-    SHOT_FIELDS.forEach(id => { if (typeof s[id] === 'string' || typeof s[id] === 'number') F(id).value = s[id]; });
+    SHOT_FIELDS.forEach(id => {
+      const el = F(id);
+      if (typeof s[id] === 'string' || typeof s[id] === 'number') el.value = s[id];
+      if (el.tagName === 'SELECT' && el.selectedIndex < 0) {         // a value that is not one of the choices: the field's default
+        const d = [...el.options].find(o => o.defaultSelected) || el.options[0];
+        el.value = d.value;
+      }
+    });
     let keepStored = false;                      // a failed profile write leaves the stored selection as it was, so the next open retries
     if (anyProfile(s.profile)) cur = s.profile;
     else if (s.profile === 'custom' || RETIRED.includes(s.profile)) {
@@ -210,7 +227,7 @@
   /* Today's conditions from the screen's fields, with the screen's defaults (59 °F, sea level, 50 %), or null when one is out of range. */
   function shotAir() {
     const temp = given('bTemp') ? num(F('bTemp')) : 59, alt = num(F('bAlt')), press = num(F('bPress')), rh = given('bRH') ? num(F('bRH')) : 50;
-    if (!inside(temp, -60, 140) || !inside(alt, -2000, 30000) || (given('bPress') && !(press > 0)) || !inside(rh, 0, 100)) return null;
+    if (!within(temp, 'temp') || !within(alt, 'alt') || (given('bPress') && !within(press, 'press')) || !within(rh, 'rh')) return null;
     return { temp, alt, press, rh };
   }
 
@@ -222,7 +239,7 @@
     const optic = sighted && !showAll ? p.optic : null;          // null: every unit
     const target = given('bRange') ? parseFloat(F('bRange').value) : NaN;
     if (!(inside(target, 1, 3000))) return nothing(MSG.range);
-    if (!p || !(p.bc > 0) || !(p.mv > 0) || !(p.zero > 0)) return nothing(MSG.profile);
+    if (!loadOk(p)) return nothing(MSG.profile);
     const air = shotAir();
     if (!air) return nothing(MSG.cond);
     const { temp, alt, press, rh } = air;
@@ -348,8 +365,18 @@
   };
   /* For src/bal-edit.js only: its read-only seam to the screen's profiles. FK.bal stays the public surface; nothing else may depend on this.
      find gives a copy of a profile, own or built in, with whether it is the person's own. */
+  const nameKey = n => String(n).trim().slice(0, 60).toLowerCase();
+  /* Whether another profile (own, except exceptId, or built in) already has this name, trimmed and compared without regard to case. */
+  const nameTaken = (name, exceptId) => profiles.concat(PRESETS).some(p => p.id !== exceptId && nameKey(p.name) === nameKey(name));
+  /* A free name for a copy of a built-in load: its name + " (mine)", then " (mine 2)" and so on, cut to fit 60 characters. */
+  function freeName(base) {
+    for (let n = 1; ; n++) {
+      const tail = n === 1 ? ' (mine)' : ` (mine ${n})`, name = base.slice(0, 60 - tail.length).trimEnd() + tail;
+      if (!nameTaken(name)) return name;
+    }
+  }
   FK.balHost = {
-    newId, ZT, ZA,
+    newId, RANGE, within, marksOk, nameTaken, freeName,
     find: id => { const p = anyProfile(id); return p ? { profile: copy(p), own: !!ownProfile(id) } : null; }
   };
   FK._test.presets = () => PRESETS.map(p => ({ ...p }));

@@ -21,6 +21,13 @@ const BALS = (() => {
   const withDir = (v, pos, neg) => { const d = dir(v, pos, neg); return (d ? d + ' ' : '') + ang(v); };
   const clicks = (v, click) => Math.round(Math.abs(v) / click);
   const clicksText = n => n + (n === 1 ? ' click' : ' clicks');
+  /* A turret shows what is dialled: clicks x click size, with the click's own decimals (0.1 mil, 1/2 and 1: one; 0.05 mil and 1/4:
+     two; 1/8: three), and the direction letter whenever at least one click is dialled. */
+  const clickDec = click => Math.max(1, Math.min(3, (String(click).split('.')[1] || '').length));
+  const dialled = (v, click, pos, neg) => {
+    const n = clicks(v, click);
+    return (n > 0 ? (v > 0 ? pos : neg) + ' ' : '') + (n * click).toFixed(clickDec(click));
+  };
 
   /* Normalise a sight: null means no sight (mil form). */
   function sightOf(s) {
@@ -64,7 +71,10 @@ const BALS = (() => {
     const a = axis(row, ax), unit = sight ? sight.unit : 'mil';
     const angle = withDir(fromRad(a.rad, unit), a.pos, a.neg) + ' ' + LABEL[unit];
     if (!sight) return { main: angle, sub: '' };
-    if (sight.type === 'turret') return { main: angle, sub: clicksText(clicks(fromRad(a.rad, unit), sight.click)) };
+    if (sight.type === 'turret') {
+      const v = fromRad(a.rad, unit);
+      return { main: dialled(v, sight.click, a.pos, a.neg) + ' ' + LABEL[unit], sub: clicksText(clicks(v, sight.click)) };
+    }
     if (sight.type === 'dot') return { main: dotText(a, ax), sub: '' };
     if (ax === 'wind') return { main: angle, sub: (inchZero(a.hold) ? '0' : inch(a.hold)) + ' in' };
     const m = reticleMark(a, row, sight);
@@ -107,7 +117,8 @@ const BALS = (() => {
     }
     if (s.type === 'turret') {
       const c = a => String(clicks(fromRad(a.rad, s.unit), s.click));
-      return { elev: [dir1(e, s.unit), c(e)], wind: [dir1(w, s.unit), c(w)] };
+      const d = a => dialled(fromRad(a.rad, s.unit), s.click, a.pos, a.neg);
+      return { elev: [d(e), c(e)], wind: [d(w), c(w)] };
     }
     const m = reticleMark(e, row, s);
     const elev = m.at === s.marks.length ? ['Past', dir1(e, s.unit) + ' ' + LABEL[s.unit]]

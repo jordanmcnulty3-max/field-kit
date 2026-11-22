@@ -39,8 +39,30 @@ def test_turret_mil(ready):
 
 
 def test_turret_true_moa_and_inches_per_100(ready):
-    assert answer(ready, ROW, {'type': 'turret', 'unit': 'moa', 'click': 0.25})['elev'] == {'main': 'U 12.3 MOA', 'sub': '49 clicks'}
-    assert answer(ready, ROW, {'type': 'turret', 'unit': 'iphy', 'click': 0.25})['elev'] == {'main': 'U 12.9 in/100 yd', 'sub': '51 clicks'}
+    # the angle shown is what is dialled: clicks x click size (it read 'U 12.3 MOA' and 'U 12.9 in/100 yd', the exact need)
+    assert answer(ready, ROW, {'type': 'turret', 'unit': 'moa', 'click': 0.25})['elev'] == {'main': 'U 12.25 MOA', 'sub': '49 clicks'}
+    assert answer(ready, ROW, {'type': 'turret', 'unit': 'iphy', 'click': 0.25})['elev'] == {'main': 'U 12.75 in/100 yd', 'sub': '51 clicks'}
+
+
+def test_turret_angle_is_the_dialled_value_with_decimals_to_suit_the_click(ready):
+    got = lambda u, c, row=ROW: answer(ready, row, {'type': 'turret', 'unit': u, 'click': c})
+    assert got('mil', 0.1)['elev'] == {'main': 'U 3.6 mil', 'sub': '36 clicks'}
+    assert got('mil', 0.05)['elev'] == {'main': 'U 3.55 mil', 'sub': '71 clicks'}
+    assert got('moa', 0.125)['elev'] == {'main': 'U 12.250 MOA', 'sub': '98 clicks'}
+    assert got('moa', 0.5)['elev'] == {'main': 'U 12.5 MOA', 'sub': '25 clicks'}
+    assert got('moa', 1)['elev'] == {'main': 'U 12.0 MOA', 'sub': '12 clicks'}
+    assert got('moa', 0.25)['wind'] == {'main': 'R 4.25 MOA', 'sub': '17 clicks'}
+    # one click is never shown as a zero angle without a direction (it read '0.0 mil / 1 click')
+    assert got('mil', 0.05, {'yd': 100, 'dropIn': -0.108, 'windIn': 0})['elev'] == {'main': 'U 0.05 mil', 'sub': '1 click'}
+    assert got('mil', 0.05, {'yd': 100, 'dropIn': 0.108, 'windIn': 0})['elev'] == {'main': 'D 0.05 mil', 'sub': '1 click'}
+    # no clicks: zero in the click's decimals, no letter
+    assert got('moa', 0.25, {'yd': 100, 'dropIn': -0.05, 'windIn': 0.05})['elev'] == {'main': '0.00 MOA', 'sub': '0 clicks'}
+    assert got('moa', 0.125, {'yd': 100, 'dropIn': 0.05, 'windIn': 0})['elev'] == {'main': '0.000 MOA', 'sub': '0 clicks'}
+    # the dope card's angle cells follow the same rule; every unit and no sight stay the true angle to one decimal
+    assert cells(ready, ROW, {'type': 'turret', 'unit': 'moa', 'click': 0.25})['elev'][0] == 'U 12.25'
+    assert cells(ready, ROW, {'type': 'turret', 'unit': 'mil', 'click': 0.05})['wind'][0] == 'R 1.20'
+    assert answer(ready, ROW, None)['elev']['main'] == 'U 3.6 mil'
+    assert ready.evaluate('r => BALS.all(r)', ROW)['elev'][1] == 'U 12.3 MOA'
 
 
 def test_turret_one_click_is_singular(ready):

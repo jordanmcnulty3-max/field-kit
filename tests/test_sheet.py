@@ -183,7 +183,7 @@ def test_save_profile_name(page, app_url):
     """New profiles are made in the profile editor (Save as new profile) and named there; there is no separate name sheet."""
     boot(page, app_url, '#/tactical/ballistics')
     open_editor(page, 'p308')
-    expect(page.locator('#rfName')).to_have_value('Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel')
+    expect(page.locator('#rfName')).to_have_value('Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel (mine)')   # a name of its own
     page.click('#rfCancel')
     expect(page.locator('#dlgRifle')).to_be_hidden()
     assert len(page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))")) == 1

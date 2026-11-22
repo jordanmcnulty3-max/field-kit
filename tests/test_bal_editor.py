@@ -197,8 +197,8 @@ def test_zero_conditions_optional(page, app_url):
 def test_required_fields(page, app_url):
     open_editor(page, app_url)
     before = profiles(page)
-    for field, text in [('rfName', 'Give the profile a name.'), ('rfBC', 'Ballistic coefficient must be more than 0.'),
-                        ('rfMV', 'Muzzle velocity must be more than 0.'), ('rfZero', 'Zero range must be more than 0.')]:
+    for field, text in [('rfName', 'Give the profile a name.'), ('rfBC', 'Ballistic coefficient must be between 0.05 and 1.2.'),
+                        ('rfMV', 'Muzzle velocity must be between 300 and 5,000 fps.'), ('rfZero', 'Zero range must be between 5 and 1,000 yd.')]:
         old = page.input_value('#' + field)
         page.fill('#' + field, '   ' if field == 'rfName' else '')
         refuse(page, text, field)
@@ -209,6 +209,7 @@ def test_required_fields(page, app_url):
     # sight height and weight may be blank
     page.fill('#rfSH', '')
     page.fill('#rfW', '')
+    page.fill('#rfName', 'Blank weight')            # a copy needs its own name
     page.click('#rfSaveNew')
     expect(page.locator(DLG)).to_be_hidden()
     got = profiles(page)[-1]
@@ -218,7 +219,7 @@ def test_required_fields(page, app_url):
 def test_refusal_message_clears_when_it_is_fixed(page, app_url):
     open_editor(page, app_url)
     page.fill('#rfBC', '')
-    refuse(page, 'Ballistic coefficient must be more than 0.', 'rfBC')
+    refuse(page, 'Ballistic coefficient must be between 0.05 and 1.2.', 'rfBC')
     page.fill('#rfBC', '0.3')
     page.click('#rfSave')
     expect(page.locator(DLG)).to_be_hidden()
@@ -363,16 +364,20 @@ def test_built_in_editor_fits_with_large_text(page, app_url):
 
 # ---------- Fix round 1 ----------
 
-def test_station_pressure_must_be_above_zero(page, app_url):
+def test_station_pressure_must_be_between_8_and_33_inhg(page, app_url):
     open_editor(page, app_url)
     page.fill('#rfZTemp', '40')
-    page.fill('#rfZPress', '0')
-    refuse(page, 'Station pressure must be more than 0.', 'rfZPress')
-    page.fill('#rfZPress', '-3')
-    refuse(page, 'Station pressure must be more than 0.', 'rfZPress')
+    for bad in ('0', '-3', '2.992', '7.9', '33.1', '299.2'):
+        page.fill('#rfZPress', bad)
+        refuse(page, 'Station pressure must be between 8 and 33 inHg.', 'rfZPress')
     page.fill('#rfZAlt', '800')
-    refuse(page, 'Station pressure must be more than 0.', 'rfZPress')
+    page.fill('#rfZPress', '0.1')
+    refuse(page, 'Station pressure must be between 8 and 33 inHg.', 'rfZPress')
     assert 'zeroAtm' not in profiles(page)[0]
+    page.fill('#rfZPress', '8')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['zeroAtm']['press'] == 8
 
 
 def test_zero_condition_ranges_are_refused(page, app_url):
@@ -498,7 +503,7 @@ def test_state_resets_between_openings(page, app_url):
     expect(page.locator('#rfBuiltIn')).to_be_hidden()
     expect(page.locator('#rfTitle')).to_have_text('Edit profile')
     page.fill('#rfBC', '')
-    refuse(page, 'Ballistic coefficient must be more than 0.', 'rfBC')
+    refuse(page, 'Ballistic coefficient must be between 0.05 and 1.2.', 'rfBC')
     page.click('#rfCancel')
     page.click('#cfOk')                                 # Discard (Cancel asks: the coefficient was changed)
     expect(page.locator(DLG)).to_be_hidden()
@@ -512,6 +517,7 @@ def test_save_as_new_keeps_the_sight(page, app_url):
     page.select_option('#rfOptic', 'turret')
     page.select_option('#rfUnit', 'iphy')
     page.select_option('#rfClick', '0.125')
+    page.fill('#rfName', 'Turret copy')             # a copy needs its own name
     page.click('#rfSaveNew')
     expect(page.locator(DLG)).to_be_hidden()
     assert profiles(page)[0] == OWN
@@ -519,6 +525,7 @@ def test_save_as_new_keeps_the_sight(page, app_url):
     page.wait_for_timeout(400)
     page.click('#bEdit')
     reticle(page, '1 2.5 4')
+    page.fill('#rfName', 'Reticle copy')
     page.click('#rfSaveNew')
     assert profiles(page)[2]['optic'] == {'type': 'reticle', 'unit': 'mil', 'marks': [1, 2.5, 4]}
     assert profiles(page)[1]['optic']['type'] == 'turret'
@@ -527,10 +534,10 @@ def test_save_as_new_keeps_the_sight(page, app_url):
 def test_negative_weight_and_sight_height_are_refused(page, app_url):
     open_editor(page, app_url)
     page.fill('#rfW', '-1')
-    refuse(page, 'Bullet weight can\u2019t be below 0.', 'rfW')
+    refuse(page, 'Bullet weight must be between 1 and 1,000 gr, or blank.', 'rfW')
     page.fill('#rfW', '150')
     page.fill('#rfSH', '-0.5')
-    refuse(page, 'Sight height can\u2019t be below 0.', 'rfSH')
+    refuse(page, 'Sight height must be between 0 and 6 in.', 'rfSH')
     assert profiles(page) == [OWN]
 
 
@@ -552,3 +559,81 @@ def test_a_refusal_at_enlarged_text_stays_inside_the_screen(page, app_url, night
         assert l >= -1 and r <= 361 and t >= 0 and b <= 641, (id_, l, r, t, b)
         assert sw <= cw + 1 and sh <= ch + 1, (id_, 'clipped')
     assert page.evaluate("document.querySelector('#dlgRifle').scrollWidth <= document.querySelector('#dlgRifle').clientWidth + 1")
+
+
+# ---------- Plausible loads and names of their own ----------
+
+def test_load_values_outside_plausible_ranges_are_refused(page, app_url):
+    open_editor(page, app_url)
+    cases = [('rfBC', ['0.049', '1.21', '5', '0.00001'], ['0.05', '1.2'], 'Ballistic coefficient must be between 0.05 and 1.2.'),
+             ('rfMV', ['299', '5001', '99999'], ['300', '5000'], 'Muzzle velocity must be between 300 and 5,000 fps.'),
+             ('rfZero', ['4.9', '1001', '2000', '0.001'], ['5', '1000'], 'Zero range must be between 5 and 1,000 yd.'),
+             ('rfW', ['0.5', '1001', '-1', '1e308'], ['', '0', '1', '1000'], 'Bullet weight must be between 1 and 1,000 gr, or blank.'),
+             ('rfSH', ['-0.1', '6.1', '30'], ['', '0', '6'], 'Sight height must be between 0 and 6 in.')]
+    for field, bad, good, text in cases:
+        keep = page.input_value('#' + field)
+        for v in bad:
+            page.fill('#' + field, v)
+            refuse(page, text, field)
+        for v in good:
+            page.fill('#' + field, v)
+            page.click('#rfSave')
+            expect(page.locator(DLG)).to_be_hidden()
+            page.wait_for_timeout(400)
+            page.click('#bEdit')
+            expect(page.locator(DLG)).to_be_visible()
+            page.wait_for_timeout(250)
+        page.fill('#' + field, keep)
+    assert page.evaluate('document.body.innerText').count('Infinity') == 0
+
+
+def test_a_name_already_used_is_refused(page, app_url):
+    other = {**OWN, 'id': 'u2', 'name': 'Second rifle'}
+    open_editor(page, app_url, profiles=(OWN, other))
+    for name in ('Second rifle', '  second RIFLE ', 'Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel', 'federal gold medal .308 win 175 gr smk, 24″ barrel'):
+        page.fill('#rfName', name)
+        refuse(page, 'Give the profile its own name.', 'rfName')
+        page.click('#rfSaveNew')
+        expect(page.locator('#rfMsg')).to_have_text('Give the profile its own name.')
+        assert page.evaluate('document.activeElement.id') == 'rfName'
+    page.fill('#rfName', 'Mine')                     # its own name, saved in place, is fine
+    page.click('#rfSaveNew')                         # but a copy may not share it
+    expect(page.locator('#rfMsg')).to_have_text('Give the profile its own name.')
+    assert len(profiles(page)) == 2
+    page.fill('#rfName', ' MINE ')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert [p['name'] for p in profiles(page)] == ['MINE', 'Second rifle']
+
+
+def test_a_built_in_opens_with_a_name_of_its_own(page, app_url):
+    open_editor(page, app_url, select='p308')
+    name = 'Federal Gold Medal .308 Win 175 gr SMK, 24″ barrel'
+    assert page.input_value('#rfName') == name + ' (mine)'
+    page.go_back()                                   # the name is not a change: Back closes at once
+    expect(page.locator(DLG)).to_be_hidden()
+    page.wait_for_timeout(400)
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    page.wait_for_timeout(250)
+    page.click('#rfSaveNew')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[-1]['name'] == name + ' (mine)'
+    page.wait_for_timeout(400)
+    page.evaluate("FK.bal.select('p308')")
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    assert page.input_value('#rfName') == name + ' (mine 2)'
+    # the longest built-in name still fits in 60 characters with its suffix
+    page.click('#rfCancel')
+    page.wait_for_timeout(400)
+    longest = page.evaluate('FK._test.presets().map(p => p.id).sort((a, b) => 0)')
+    for pid in longest:
+        page.evaluate('id => FK.bal.select(id)', pid)
+        page.click('#bEdit')
+        expect(page.locator(DLG)).to_be_visible()
+        v = page.input_value('#rfName')
+        assert len(v) <= 60 and v.endswith(')') and ' (mine' in v, v
+        page.click('#rfCancel')
+        expect(page.locator(DLG)).to_be_hidden()
+        page.wait_for_timeout(400)

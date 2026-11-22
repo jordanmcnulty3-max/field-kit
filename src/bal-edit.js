@@ -1,9 +1,10 @@
 /* ---------- Profile editor: load, the sight on it, the conditions it was zeroed in, and a velocity corrected from one real shot ----------
-   Loads after bal-ui.js and reaches the screen only through FK.bal (save, select, remove, selected, shotAir) and FK.balHost (find, newId, ZT, ZA); it adds FK.bal.edit. ---------- */
+   Loads after bal-ui.js and reaches the screen only through FK.bal (save, select, remove, selected, shotAir) and FK.balHost (find, newId,
+   and the shared rules: RANGE, within, marksOk, nameTaken, freeName); it adds FK.bal.edit. ---------- */
 (() => {
   const FK = window.FK;
   const { $, toast } = FK;
-  const { ZT, ZA } = FK.balHost;
+  const { within } = FK.balHost;
   const fin = FK.fin;
   const copy = p => JSON.parse(JSON.stringify(p));
   const F = id => $('#' + id);
@@ -51,7 +52,8 @@
     F('rfBuiltIn').hidden = own;
     F('rfSave').hidden = F('rfDelete').hidden = !own;
     const set = (id, v) => { F(id).value = v === undefined || v === null ? '' : v; };
-    set('rfName', p.name); set('rfBC', p.bc); set('rfModel', p.model || 'G7'); set('rfW', p.w); set('rfMV', p.mv); set('rfSH', p.sight); set('rfZero', p.zero);
+    set('rfName', own ? p.name : FK.balHost.freeName(p.name));      // a copy of a built-in starts with a name of its own
+    set('rfBC', p.bc); set('rfModel', p.model || 'G7'); set('rfW', p.w); set('rfMV', p.mv); set('rfSH', p.sight); set('rfZero', p.zero);
     set('rfOptic', o && o.type !== 'dot' ? o.type : o ? 'dot' : 'none');
     const u = o && o.unit ? o.unit : 'mil';
     set('rfUnit', u);
@@ -90,11 +92,11 @@
     const name = F('rfName').value.trim();
     if (!name && !forShot) return bad('Give the profile a name.', 'rfName');
     const bc = numOf('rfBC'), mv = numOf('rfMV'), zero = numOf('rfZero'), sh = numOf('rfSH'), w = numOf('rfW');
-    if (!(bc > 0)) return bad('Ballistic coefficient must be more than 0.', 'rfBC');
-    if (!(mv > 0)) return bad('Muzzle velocity must be more than 0.', 'rfMV');
-    if (!(zero > 0)) return bad('Zero range must be more than 0.', 'rfZero');
-    if (w !== null && w < 0) return bad('Bullet weight can’t be below 0.', 'rfW');
-    if (sh !== null && sh < 0) return bad('Sight height can’t be below 0.', 'rfSH');
+    if (!within(bc, 'bc')) return bad('Ballistic coefficient must be between 0.05 and 1.2.', 'rfBC');
+    if (!within(mv, 'mv')) return bad('Muzzle velocity must be between 300 and 5,000 fps.', 'rfMV');
+    if (!within(zero, 'zero')) return bad('Zero range must be between 5 and 1,000 yd.', 'rfZero');
+    if (w !== null && w !== 0 && !within(w, 'w')) return bad('Bullet weight must be between 1 and 1,000 gr, or blank.', 'rfW');
+    if (sh !== null && !within(sh, 'sight')) return bad('Sight height must be between 0 and 6 in.', 'rfSH');
     const out = { name, bc, model: F('rfModel').value, w: w || 0, mv, sight: sh || 0, zero, optic: null, zeroAtm: null };
     const t = forShot ? 'none' : F('rfOptic').value, unit = F('rfUnit').value;     // the sight never reaches the solver
     if (t === 'turret') out.optic = { type: 'turret', unit, click: parseFloat(F('rfClick').value) };
@@ -106,9 +108,9 @@
     }
     const temp = numOf('rfZTemp'), alt = numOf('rfZAlt'), press = numOf('rfZPress');
     if (temp !== null || alt !== null || press !== null) {
-      if (temp !== null && (temp < ZT[0] || temp > ZT[1])) return bad('Temperature must be between -60 and 140 \u00b0F.', 'rfZTemp');
-      if (alt !== null && (alt < ZA[0] || alt > ZA[1])) return bad('Altitude must be between -2,000 and 30,000 ft.', 'rfZAlt');
-      if (press !== null && !(press > 0)) return bad('Station pressure must be more than 0.', 'rfZPress');
+      if (temp !== null && !within(temp, 'temp')) return bad('Temperature must be between -60 and 140 \u00b0F.', 'rfZTemp');
+      if (alt !== null && !within(alt, 'alt')) return bad('Altitude must be between -2,000 and 30,000 ft.', 'rfZAlt');
+      if (press !== null && !within(press, 'press')) return bad('Station pressure must be between 8 and 33 inHg.', 'rfZPress');
       if (temp === null || (alt === null && press === null)) return bad('Zero conditions need a temperature and an altitude or a pressure.', temp === null ? 'rfZTemp' : 'rfZAlt');
       const base = editing.base.zeroAtm;
       out.zeroAtm = { temp, rh: base && fin(base.rh) ? base.rh : 50 };
@@ -133,6 +135,7 @@
     if (!editing || deleting || asking || (!asNew && !editing.own)) return;
     const v = readEditor();
     if (v.error) { say(v.error); F(v.focus).focus(); return; }
+    if (FK.balHost.nameTaken(v.name, asNew ? undefined : editing.base.id)) { say('Give the profile its own name.'); F('rfName').focus(); return; }
     say('');
     if (result && !decided) { askUse(asNew); return; }
     const p = { ...editing.base, ...v, id: asNew ? FK.balHost.newId() : editing.base.id };
@@ -220,6 +223,12 @@
       zeroAtm: za && { temp: za.temp, alt: za.alt === undefined ? 0 : za.alt, press: za.press === undefined ? 0 : za.press, rh: za.rh } };
     const r = BAL.trueMv(p, yd, angle);
     if (r.error) return show(r.error === 'bad' ? MORE.ask : MORE[r.error]);
+    /* BAL.trueMv checks Mach 1.2 at the profile's velocity; the velocity found must be above it there too, or the answer is mostly
+       the drag table's error (the same rule, applied here so the solver and its tests stay as they are). */
+    const there = BAL.solve({ ...p, mv: r.mv, wind: 0, clock: 12, angle: 0, ranges: [yd] });
+    if (there.error || there.rows.length !== 1 || !(there.rows[0].mach >= 1.2)) return show(MORE.slow);
+    const orig = editing.base.mv0 !== undefined ? editing.base.mv0 : editing.openMv;    // two corrections cannot add up past the limit
+    if (Math.abs(r.mv - orig) / orig > 0.15) return show(MORE.far);
     result = { mv: r.mv };
     showTrue();
     show(`Velocity ${fmt(v.mv)} fps \u2192 ${fmt(r.mv)} fps (${signed(r.change * 100)}%).` + (r.warn ? ' ' + MORE.warn : ''));

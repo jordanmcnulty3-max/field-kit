@@ -485,3 +485,41 @@ def test_cancel_after_use_asks(page, app_url):
     page.click('#cfOk')                              # Discard
     expect(page.locator(DLG)).to_be_hidden()
     assert profiles(page)[0]['mv'] == 2600
+
+
+def test_the_fifteen_percent_limit_counts_from_the_original_velocity(page, app_url):
+    # a profile corrected before: 2450 is -5.8 % from the 2600 in the field but -15.5 % from its original 2900
+    open_editor(page, app_url, profiles=({**OWN, 'mv0': 2900},))
+    work(page, 600, round(typed(page, shot(page, 2450, 600), 600, 'mil'), 4), 'mil')
+    assert out(page) == FAR
+    expect(page.locator('#rfTrueSave')).to_be_hidden()
+    work(page, 600, round(typed(page, shot(page, 2500, 600), 600, 'mil'), 4), 'mil')     # -13.8 % from 2900: allowed
+    assert out(page).startswith('Velocity 2,600 fps → 2,50'), out(page)
+    # no original stored: two corrections in one sheet cannot add up past 15 % of the velocity it opened with
+    page.click('#rfCancel')
+    expect(page.locator(DLG)).to_be_hidden()
+    fresh_load(page)
+    correct(page, 2300, 400)                                                              # -11.5 %
+    assert abs(int(page.input_value('#rfMV')) - 2300) <= 2
+    work(page, 400, round(typed(page, shot(page, 2150, 400), 400, 'mil'), 4), 'mil')     # -6.5 % from 2300, -17.3 % from 2600
+    assert out(page) == FAR
+    assert abs(int(page.input_value('#rfMV')) - 2300) <= 2
+
+
+def test_a_corrected_velocity_below_mach_1_2_at_the_shot_is_refused(page, app_url):
+    """The Mach 1.2 rule holds at the velocity found as well as at the profile's own: a slower real velocity that puts the bullet
+    below Mach 1.2 at that distance is refused as 'slow', even though the profile's velocity is above it there."""
+    open_editor(page, app_url)
+    case = page.evaluate("""([p, air]) => {
+      const at = (mv, yd) => BAL.solve({ ...p, ...air, mv, wind: 0, clock: 12, ranges: [yd] }).rows[0];
+      for (let yd = 600; yd <= 1000; yd += 10) {
+        const fast = at(2600, yd), slow = at(2480, yd);
+        if (fast.mach >= 1.22 && slow.mach < 1.18) return yd;
+      }
+      return null; }""", [LOAD, AIR])
+    assert case, 'no distance splits the two velocities around Mach 1.2'
+    work(page, case, round(typed(page, shot(page, 2480, case), case, 'mil'), 4), 'mil')
+    assert out(page) == SLOW
+    expect(page.locator('#rfTrueSave')).to_be_hidden()
+    work(page, 600, round(typed(page, shot(page, 2480, 600), 600, 'mil'), 4), 'mil')    # nearer in it is above Mach 1.2: found
+    assert out(page).startswith('Velocity 2,600 fps → 2,48'), out(page)

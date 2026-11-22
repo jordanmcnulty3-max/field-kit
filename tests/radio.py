@@ -26,6 +26,8 @@ Helpers (all take the page):
                             (this makes "a notification arrives while a drain is in progress" reproducible)
     release_reads(page)
     slow_writes(page, ms)   each ToRadio write takes ms real milliseconds (so overlapping writes would show)
+    hold(page, what)        'chooser' or 'gatt': requestDevice / gatt.connect() wait (forever, until released) before answering
+    release(page, what)     let the held call(s) finish, as a late chooser pick or a late connection would
     default_script()        the FromRadio list the default radio plays
 In the page, window.FakeRadio holds the live state for assertions: sent, queue, fromnum, choosers (requestDevice calls),
 connects (gatt.connect calls), connected(), maxActive (most writes ever in flight at once), heldReads, lastOptions (what
@@ -102,6 +104,15 @@ def release_reads(page):
     _call(page, 'FakeRadio.releaseReads()')
 
 
+def hold(page, what):
+    assert what in ('chooser', 'gatt')
+    _call(page, 'FakeRadio.holds[a] = true', what)
+
+
+def release(page, what):
+    _call(page, 'FakeRadio.release(a)', what)
+
+
 def slow_writes(page, ms):
     _call(page, 'FakeRadio.writeDelay = a', ms)
 
@@ -125,6 +136,9 @@ _JS = r"""
 
   const R = window.FakeRadio = {
     queue: [], sent: [], fromnum: 0, refuse: null, hold: false, heldReads: 0, waiters: [],
+    holds: { chooser: false, gatt: false }, gates: { chooser: [], gatt: [] },
+    wait(what) { return R.holds[what] ? new Promise(f => R.gates[what].push(f)) : null; },
+    release(what) { R.holds[what] = false; const w = R.gates[what]; R.gates[what] = []; w.forEach(f => f()); },
     choosers: 0, connects: 0, active: 0, maxActive: 0, writeDelay: 0, lastOptions: null,
     connected: () => gatt.connected,
     push(bytes) { R.queue.push(bytes); R.fromnum++; R.notify(); },
@@ -182,6 +196,7 @@ _JS = r"""
     connected: false, device,
     async connect() {
       R.connects++;
+      await R.wait('gatt');
       if (R.refuse === 'gatt') throw err('NetworkError', 'Connection attempt failed.');
       gatt.connected = true;
       return gatt;
@@ -202,6 +217,7 @@ _JS = r"""
   const bluetooth = {
     async requestDevice(opts) {
       R.choosers++; R.lastOptions = JSON.parse(JSON.stringify(opts || {}));
+      await R.wait('chooser');
       if (R.refuse === 'cancel') throw err('NotFoundError', 'User cancelled the requestDevice() chooser.');
       return device;
     },

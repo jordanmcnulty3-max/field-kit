@@ -216,3 +216,54 @@ def test_unsupported_browser(page, app_url):
     assert page.evaluate('() => __link.connect()') is False
     last = page.evaluate('() => window.__states[window.__states.length - 1]')
     assert (last['state'], last['reason']) == ('off', 'unsupported')
+
+
+def last_state(page):
+    return page.evaluate('() => window.__states[window.__states.length - 1]')
+
+
+def start_connect(page):
+    page.evaluate('() => { window.__res = undefined; __link.connect().then(v => (window.__res = v)); }')
+
+
+def test_disconnect_during_chooser_then_late_pick_does_not_connect(page, app_url):
+    boot(page, app_url)
+    radio.hold(page, 'chooser')
+    start_connect(page)
+    page.wait_for_function('FakeRadio.choosers === 1')
+    page.evaluate('() => __link.disconnect()')
+    assert (last_state(page)['state'], last_state(page)['reason']) == ('off', 'user')
+    radio.release(page, 'chooser')   # the user picks a radio after all
+    page.wait_for_function('window.__res === false')
+    assert page.evaluate('() => FakeRadio.connects') == 0
+    assert page.evaluate('() => FakeRadio.connected()') is False
+    assert (last_state(page)['state'], last_state(page)['reason']) == ('off', 'user')
+    assert page.evaluate('() => __link.connect()') is True   # a following connect opens exactly one new chooser
+    assert page.evaluate('() => FakeRadio.choosers') == 2
+
+
+def test_disconnect_during_gatt_connect_leaves_the_radio_free(page, app_url):
+    boot(page, app_url)
+    radio.hold(page, 'gatt')
+    start_connect(page)
+    page.wait_for_function('FakeRadio.connects === 1')
+    page.evaluate('() => __link.disconnect()')
+    radio.release(page, 'gatt')   # the connection completes after the user said disconnect
+    page.wait_for_function('window.__res === false')
+    assert page.evaluate('() => FakeRadio.connected()') is False
+    assert (last_state(page)['state'], last_state(page)['reason']) == ('off', 'user')
+    assert page.evaluate('() => __link.connect()') is True
+    assert page.evaluate('() => FakeRadio.choosers') == 2
+    assert page.evaluate('() => FakeRadio.connected()') is True
+
+
+def test_hung_gatt_connect_times_out(page, app_url):
+    boot(page, app_url, clock=True)
+    radio.hold(page, 'gatt')   # never released
+    start_connect(page)
+    page.wait_for_function('FakeRadio.connects === 1')
+    page.clock.run_for(29_000)
+    assert page.evaluate('() => [__link.state(), window.__res]') == ['connecting', None]
+    page.clock.run_for(1_500)
+    page.wait_for_function('window.__res === false')
+    assert (last_state(page)['state'], last_state(page)['reason']) == ('off', 'failed')

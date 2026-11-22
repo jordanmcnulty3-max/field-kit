@@ -103,53 +103,58 @@ const MLINK = (() => {
       write(s, MPB.enc.wantConfig(s.nonce)).then(ok => { if (!ok) closed(s); else drain(s); });
     }
 
-    async function open(choose) {
+    function open(choose) {
       teardown();
       setState('connecting');
       const s = S = { device: null, to: null, from: null, num: null, queue: Promise.resolve(), draining: false, again: false,
                       nonce: 0, lastNum: null, wasOn: false, syncTimer: 0, beatTimer: 0, done: null, onNum: null };
-      let stage = 'chooser';
-      try {
-        if (choose) {
-          const d = await bluetooth.requestDevice({ filters: [{ services: [UUID.service] }] });
-          if (device && device !== d) device.removeEventListener('gattserverdisconnected', onGone);
-          device = d;
-          device.removeEventListener('gattserverdisconnected', onGone);
-          device.addEventListener('gattserverdisconnected', onGone);
-        }
-        s.device = device;
-        stage = 'gatt';
-        const server = await device.gatt.connect();
-        if (S !== s) return false;
-        const service = await server.getPrimaryService(UUID.service);
-        s.to = await service.getCharacteristic(UUID.toradio);
-        s.from = await service.getCharacteristic(UUID.fromradio);
-        s.num = await service.getCharacteristic(UUID.fromnum);
-        if (S !== s) return false;
-        s.onNum = (ev) => {
-          const v = ev.target.value;
-          const n = v && v.byteLength >= 4 ? v.getUint32(0, true) : null;
-          if (n !== null) {
-            const down = s.lastNum !== null && n < s.lastNum;
-            s.lastNum = n;
-            if (down) { startSync(s); return; }   // the radio's counter restarted: it rebooted
+      const result = new Promise(res => { s.done = res; });   // teardown() resolves it false; reaching 'on' resolves it true
+      const arm = () => { clearTimeout(s.syncTimer); s.syncTimer = setTimeout(() => fail(s, 'failed'), SYNC_MS); };
+      const go = async () => {
+        let stage = 'chooser';
+        try {
+          if (choose) {
+            const d = await bluetooth.requestDevice({ filters: [{ services: [UUID.service] }] });
+            if (S !== s) return;   // disconnect() while the chooser was open: a late pick does nothing
+            if (device && device !== d) device.removeEventListener('gattserverdisconnected', onGone);
+            device = d;
+            device.removeEventListener('gattserverdisconnected', onGone);
+            device.addEventListener('gattserverdisconnected', onGone);
           }
-          drain(s);
-        };
-        s.num.addEventListener('characteristicvaluechanged', s.onNum);
-        await s.num.startNotifications();
-        if (S !== s) return false;
-        const result = new Promise(res => { s.done = res; });
-        startSync(s);
-        return await result;
-      } catch (e) {
-        if (S === s) {
-          const cancelled = stage === 'chooser' && e && e.name === 'NotFoundError';
-          teardown();
-          setState('off', cancelled ? 'cancelled' : 'failed');
+          s.device = device;
+          stage = 'gatt';
+          arm();   // the chooser is the user's to dismiss; every step after it is bounded
+          const server = await device.gatt.connect();
+          if (S !== s) { if (!S) { try { server.disconnect(); } catch (e) { /* already gone */ } } return; }   // a newer attempt shares this GATT object: leave it
+          const service = await server.getPrimaryService(UUID.service);
+          s.to = await service.getCharacteristic(UUID.toradio);
+          s.from = await service.getCharacteristic(UUID.fromradio);
+          s.num = await service.getCharacteristic(UUID.fromnum);
+          if (S !== s) return;
+          s.onNum = (ev) => {
+            const v = ev.target.value;
+            const n = v && v.byteLength >= 4 ? v.getUint32(0, true) : null;
+            if (n !== null) {
+              const down = s.lastNum !== null && n < s.lastNum;
+              s.lastNum = n;
+              if (down) { startSync(s); return; }   // the radio's counter restarted: it rebooted
+            }
+            drain(s);
+          };
+          s.num.addEventListener('characteristicvaluechanged', s.onNum);
+          await s.num.startNotifications();
+          if (S !== s) return;
+          startSync(s);
+        } catch (e) {
+          if (S === s) {
+            const cancelled = stage === 'chooser' && e && e.name === 'NotFoundError';
+            teardown();
+            setState('off', cancelled ? 'cancelled' : 'failed');
+          }
         }
-        return false;
-      }
+      };
+      go();
+      return result;
     }
 
     function begin(choose) {

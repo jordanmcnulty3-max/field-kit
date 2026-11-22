@@ -3,6 +3,11 @@
    link has a record, so nothing old is ever sent. Every shared marker is open: anyone holding it can change, send or delete
    it. Storage: meshTombs [{ wid, t }], the waypoint numbers deleted here or by a teammate, kept 30 days; anything arriving
    under one of them is ignored, so a teammate who missed the delete cannot bring the marker back.
+   "Mine" is net.mine: this phone chose to share the marker. It does not depend on the radio number (a marker shared before
+   any radio was known, or before a radio change, stays mine). A marker that is mine is never destroyed from the mesh: a
+   teammate's delete or a passing expiry leaves it here as a private marker with a line in its note.
+   With the Settings switch off this module does nothing (no expiry, no cap, no queue, no sending); Stop sharing and delete
+   still work on this phone, and expiry and tomb pruning catch up when the switch is turned on.
    A delete on the wire (neither form is confirmed by the official apps' documentation): this app sends the whole waypoint
    again already expired (expire = 1, epoch seconds). On receipt, that form (any expiry at or before now) is a delete, and so
    is the reference package's form for a number this phone holds: only the id, no position, no name, expire 0. */
@@ -36,7 +41,8 @@
   /* ---- who holds what ---- */
   const find = id => FK.tac.markers().find(m => m.id === id) || null;
   const me = () => FK.mesh.myNum();
-  const isMine = m => !!(m && m.net) && me() !== null && m.net.from === me();
+  const isMine = m => !!(m && m.net && m.net.mine === true);
+  const on_ = () => FK.mesh.enabled();
   const newWid = () => {
     const held = new Set(FK.tac.markers().filter(m => m.net).map(m => m.net.wid));
     let w;
@@ -53,7 +59,7 @@
      radio's number when it first goes out. */
   async function sendNow(id) {
     const m = find(id);
-    if (!m || !m.net) return 'no';
+    if (!on_() || !m || !m.net) return 'no';
     if (!MMK.fits(m).ok) return 'toolong';
     if (!FK.mesh.canShare()) {
       if (!m.net.pending) FK.tac.setNet(id, { ...m.net, pending: true });
@@ -73,12 +79,12 @@
 
   async function share(id) {
     const m = find(id);
-    if (!m) return 'no';
+    if (!on_() || !m) return 'no';
     if (!MMK.fits(m).ok) return 'toolong';
     if (!m.net) {
       const n = me();
       const net = { wid: newWid(), from: n === null ? 0 : n, by: n === null ? '' : FK.mesh.nameOf(n), t: Date.now(), chBy: '', chT: 0,
-        icon: 0, expire: 0, pending: true, rx: false };
+        icon: 0, expire: 0, pending: true, rx: false, mine: true };
       if (!FK.tac.setNet(id, net)) return 'no';
     }
     return sendNow(id);
@@ -87,7 +93,7 @@
      "changed by" anyone, so that line clears. */
   async function changed(id) {
     const m = find(id);
-    if (!m || !m.net) return 'no';
+    if (!on_() || !m || !m.net) return 'no';
     if (!MMK.fits(m).ok) return 'toolong';
     if (m.net.chBy || m.net.chT) FK.tac.setNet(id, { ...m.net, chBy: '', chT: 0 });
     return sendNow(id);
@@ -143,8 +149,9 @@
   }
   /* The link can send again: queue every pending marker. Never from inside the radio's message handler (a channel verdict
      can arrive there): a timer starts it. */
-  let could = false;
+  let could = false, wasOn = on_();
   on('mesh', () => {
+    if (on_() !== wasOn) { wasOn = on_(); if (wasOn) sweepNow(); syncTimer(); }   // switched on: expiry and tombs catch up
     const can = FK.mesh.canShare();
     if (can && !could) setTimeout(() => {
       if (FK.mesh.canShare()) enqueue(FK.tac.markers().filter(m => m.net && m.net.pending).map(m => m.id));
@@ -153,26 +160,41 @@
   });
 
   /* ---- held markers over time: expiry, tombs' age, the cap ---- */
+  /* The end of sharing for a marker from the mesh (a delete, or its expiry): a marker that is mine stays here, private, its
+     note starting with why; any other is removed. The number is tombed either way. */
+  function endShared(m, line) {
+    tomb(m.net.wid);
+    if (isMine(m)) {
+      FK.tac.setNet(m.id, null);
+      FK.tac.updateMarker(m.id, { note: (line + (m.note ? ' ' + m.note : '')).slice(0, FK.tac.MAX_NOTE) });
+    } else FK.tac.removeMarker(m.id);
+  }
   let dropped = 0;
-  /* Inside a FK.tac.batch. idx: wid -> marker for every shared marker (kept up to date by the caller). */
+  /* Inside a FK.tac.batch. idx: wid -> marker for every shared marker (kept up to date by the caller). Only markers that are
+     not mine count and can go, never the navigation target. */
   function enforceCap(idx) {
+    const tgt = FK.tac.target(), tid = tgt && tgt.type === 'marker' ? tgt.id : null;
     for (;;) {
       let n = 0, oldest = null;
-      idx.forEach(m => { if (!isMine(m)) { n++; if (!oldest || m.net.t < oldest.net.t) oldest = m; } });
-      if (n <= CAP) return;
+      idx.forEach(m => {
+        if (isMine(m)) return;
+        n++;
+        if (m.id !== tid && (!oldest || m.net.t < oldest.net.t)) oldest = m;
+      });
+      if (n <= CAP || !oldest) return;
       FK.tac.removeMarker(oldest.id); idx.delete(oldest.net.wid); dropped++;
     }
   }
   const indexShared = () => new Map(FK.tac.markers().filter(m => m.net).map(m => [m.net.wid, m]));
   function sweep(now, idx) {
     idx.forEach((m, wid) => {
-      if (m.net.expire > 0 && m.net.expire * 1000 <= now) { tomb(wid); FK.tac.removeMarker(m.id); idx.delete(wid); }
+      if (m.net.expire > 0 && m.net.expire * 1000 <= now) { endShared(m, 'Sharing expired.'); idx.delete(wid); }
     });
     pruneTombs(now);
     enforceCap(idx);
   }
   function sweepNow() {
-    if (stopped) return;
+    if (stopped || !on_()) return;
     FK.tac.batch(() => sweep(Date.now(), indexShared()));
     saveTombs();
   }
@@ -182,19 +204,16 @@
   function receive(d, now, idx) {
     const wp = d.wp, wid = wp.id;
     if (!okWid(wid) || tombSet.has(wid)) return;
+    if (d.from === me()) return;                 // our own radio's number: an echo of what this phone sent
     const m = idx.get(wid);
     const expired = fin(wp.expire) && wp.expire > 0 && wp.expire * 1000 <= now;
     /* The reference package's delete: no position, no name, no expiry. For a number not held it is ignored and leaves no
        tomb (it cannot be told from a malformed packet). Checked before fromWaypoint, which rejects 0, 0. */
     const bare = !!m && wp.lat === 0 && wp.lon === 0 && !wp.name && !(wp.expire > 0);
-    if (expired || bare) {   // a delete
-      tomb(wid);
-      if (!m) return;
+    if (expired || bare) {   // a delete: the maker keeps a private copy saying who deleted it
+      if (!m) { tomb(wid); return; }
       idx.delete(wid);
-      if (isMine(m)) {   // the maker keeps it, private, with who deleted it
-        FK.tac.setNet(m.id, null);
-        FK.tac.updateMarker(m.id, { note: (`Deleted by ${d.name}.` + (m.note ? ' ' + m.note : '')).slice(0, FK.tac.MAX_NOTE) });
-      } else FK.tac.removeMarker(m.id);
+      endShared(m, `Deleted by ${d.name}.`);
       return;
     }
     const f = MMK.fromWaypoint(wp, now);
@@ -202,7 +221,6 @@
     if (f.t > now) f.t = now;                    // a sighting cannot be in the future (rx stays false: it had a time)
     const icon = f.kind === 'point' && f.icon && !MMK.kindFor(f.icon) ? f.icon : 0;
     if (m) {
-      if (d.from === me()) return;               // our own send coming back
       const patch = { name: f.name, note: f.note, kind: f.kind, lat: f.lat, lon: f.lon };
       if (m.lat !== f.lat || m.lon !== f.lon) patch.alt = null;
       if (!f.rx) patch.t = f.t;
@@ -212,7 +230,7 @@
       return;
     }
     const added = FK.tac.addShared({ name: f.name, lat: f.lat, lon: f.lon, kind: f.kind, note: f.note, t: f.t,
-      net: { wid, from: d.from, by: d.name, t: now, chBy: '', chT: 0, icon, expire: f.expire, pending: false, rx: f.rx } });
+      net: { wid, from: d.from, by: d.name, t: now, chBy: '', chT: 0, icon, expire: f.expire, pending: false, rx: f.rx, mine: false } });
     if (added) { idx.set(wid, added); if (!isMine(added)) enforceCap(idx); }
   }
   /* Waypoints arrive in bursts: they wait here and apply once per animation frame (a timer stands in while the page is hidden,
@@ -241,7 +259,7 @@
   /* Expiry is checked on load, on each incoming message, and each minute while the map shows. */
   let tick = 0;
   function syncTimer() {
-    const want = !stopped && !document.hidden && FK.tab() === 'tactical' && FK.view() === 'map';
+    const want = !stopped && on_() && !document.hidden && FK.tab() === 'tactical' && FK.view() === 'map';
     if (want && !tick) tick = setInterval(sweepNow, 60000);
     else if (!want && tick) { clearInterval(tick); tick = 0; }
   }

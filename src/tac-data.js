@@ -18,17 +18,19 @@
      from (the maker's radio number; 0 = this phone, before any radio was known), by (the maker's name), t (last sent or
      received, ms), chBy and chT (who changed it last from the mesh, and when), icon (another app's emoji, kept only on a
      Point; 0 otherwise), expire (epoch SECONDS as on the wire; 0 never), pending (to send on the next connection), rx (t is
-     when it arrived, not when it was marked). Kept only when every field has the right type; otherwise the marker is
+     when it arrived, not when it was marked), mine (this phone chose to share it; a record without it counts as mine only
+     when from is 0, which only this phone's unsent share can have). Kept only when every field has the right type; otherwise the marker is
      private. Markers saved before the radio link have no net, and a marker with no net is never sent. */
   const NET_STR = 40;
   const u32 = v => Number.isInteger(v) && v >= 0 && v <= 0xFFFFFFFF;
   function cleanNet(n, kind) {
     if (!n || typeof n !== 'object' || Array.isArray(n)) return null;
     const { wid, from, by, t, chBy, chT, icon, expire, pending, rx } = n;
+    const mine = n.mine === undefined ? from === 0 : n.mine;
     if (!(u32(wid) && wid >= 1) || !u32(from) || typeof by !== 'string' || !fin(t) || typeof chBy !== 'string' || !fin(chT) ||
-        !u32(icon) || !u32(expire) || typeof pending !== 'boolean' || typeof rx !== 'boolean') return null;
+        !u32(icon) || !u32(expire) || typeof pending !== 'boolean' || typeof rx !== 'boolean' || typeof mine !== 'boolean') return null;
     return { wid, from, by: by.slice(0, NET_STR), t, chBy: chBy.slice(0, NET_STR), chT,
-      icon: kind === 'point' && !MMK.kindFor(icon) ? icon : 0, expire, pending, rx };
+      icon: kind === 'point' && !MMK.kindFor(icon) ? icon : 0, expire, pending, rx, mine };
   }
   const cleanMarker = w => {
     const kind = kindOk(w.kind) ? w.kind : 'point';
@@ -112,7 +114,8 @@
   }
   const widHeld = (wid, exceptId) => wps.some(w => w.net && w.net.wid === wid && w.id !== exceptId);
   /* Set (or with null, clear) a marker's shared record. False when there is no such marker, the record is malformed, another
-     marker holds its wid, or storage refused. */
+     marker holds its wid, or storage refused; then the marker is left exactly as it was (a record that is not saved must not
+     be sent later). */
   function setNet(id, n) {
     const i = wps.findIndex(w => w.id === id);
     if (i < 0) return false;
@@ -123,9 +126,10 @@
       if (!c || widHeld(c.wid, id)) return false;
       next = { ...wps[i], net: c };
     }
+    const prev = wps[i];
     wps[i] = next;
     const ok = saveWps();
-    if (!ok) toast(FULL_MSG);
+    if (!ok) { wps[i] = prev; toast(FULL_MSG); }
     return ok;
   }
   /* A marker that came from the mesh: { name, lat, lon, kind, note, t, net }. Name and note are cut to this app's limits

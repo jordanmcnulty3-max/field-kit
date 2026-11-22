@@ -22,6 +22,8 @@ SMILE = 0x1F600              # an emoji Field Kit has no kind for (another app's
 
 
 def net(wid, frm=BRAVO, by='Bravo', **kw):
+    """A stored shared record. mine defaults to True for this phone's radio number (or 0: shared before any radio)."""
+    kw.setdefault('mine', frm in (ME, 0))
     return dict(dict(wid=wid, by=by, t=T0, chBy='', chT=0, icon=0, expire=0, pending=False, rx=False, **{'from': frm}), **kw)
 
 
@@ -47,7 +49,7 @@ def start(page, app_url, wps=(), tombs=None, link=True, clock=None, me=ME, **see
     if link is True:
         connected(page, app_url)
     else:
-        boot(page, app_url)
+        boot(page, app_url, on=link != 'off')   # 'off': the Settings switch stays off
         if link == 'private':
             chan(page, psk=PRIV)
     page.wait_for_function('window.FK && FK.share')
@@ -120,7 +122,7 @@ def test_old_markers_have_no_net_and_are_never_sent(page, app_url):
 BAD_NETS = {
     'b0': net(0), 'b1': net(0x100000000), 'b2': net(1.5), 'b3': net(13, by=7), 'b4': net(14, pending='yes'),
     'b5': {k: v for k, v in net(15).items() if k != 'rx'}, 'b6': 'junk', 'b7': net(17, expire=-1), 'b8': net(18, icon=1.5),
-    'b9': net(19, t='x'), 'b10': net(20, chT=None), 'b11': net(21, frm=-4), 'b12': [21], 'b13': net(23, chBy=5),
+    'b9': net(19, t='x'), 'b10': net(20, chT=None), 'b11': net(21, frm=-4), 'b12': [21], 'b13': net(23, chBy=5), 'b14': net(24, mine='yes'),
 }
 
 
@@ -346,6 +348,8 @@ def test_incoming_future_expiry_is_kept_and_removed_when_it_passes(page, app_url
     page.clock.run_for(601_000)
     incoming(page, CHARLIE, clock=True, id=76, lat=43.0, lon=-76.0, name='Other')                # any incoming checks
     assert list(by_wid(page)) == [76] and sorted(tombs(page)) == [73, 74, 75]
+    c = one(page, 'c')                                            # mine: kept, private, with a line saying why
+    assert 'net' not in c and c['note'] == 'Sharing expired.'
 
 
 # ---------------------------------------------------------------- sharing
@@ -407,11 +411,12 @@ def test_pending_markers_are_sent_on_connect_3s_apart(page, app_url):
     assert [m['net']['pending'] for m in markers(page)] == [False, False, False, False]
 
 
-def test_pending_marker_shared_before_any_radio_becomes_mine_when_sent(page, app_url):
+def test_pending_marker_shared_before_any_radio_is_mine_and_takes_the_radio_number_when_sent(page, app_url):
     start(page, app_url, wps=[mk('a')], link=False, me=None)
     assert js(page, '() => FK.mesh.myNum()') is None
     assert js(page, "() => FK.share.share('a')") == 'pending'
-    assert one(page, 'a')['net']['from'] == 0 and js(page, "() => FK.share.mine('a')") is False
+    assert one(page, 'a')['net']['from'] == 0 and one(page, 'a')['net']['mine'] is True
+    assert js(page, "() => FK.share.mine('a')") is True
     assert js(page, '() => FK.mesh.connect()') is True
     page.wait_for_function("() => FK.tac.markers()[0].net.pending === false")
     n = one(page, 'a')['net']
@@ -419,10 +424,11 @@ def test_pending_marker_shared_before_any_radio_becomes_mine_when_sent(page, app
     assert [w.id for w in sent_wps(page)] == [n['wid']]
 
 
-def test_mine_is_false_before_any_radio_has_connected(page, app_url):
-    start(page, app_url, wps=[mk('a', net(85, frm=ME)), mk('b', net(86, frm=0))], link=False, me=None)
-    assert js(page, '() => [FK.mesh.myNum(), FK.share.mine("a"), FK.share.mine("b"), FK.share.isShared("a")]') == \
-        [None, False, False, True]
+def test_mine_is_the_stored_flag_not_the_radio_number(page, app_url):
+    start(page, app_url, wps=[mk('a', net(85, frm=ME)), mk('b', net(86, frm=0)), mk('c', net(87, frm=ME, mine=False)),
+                              mk('d', net(88, frm=BRAVO, mine=True))], link=False, me=None)
+    assert js(page, '() => [FK.mesh.myNum(), ...["a", "b", "c", "d"].map(FK.share.mine), FK.share.isShared("a")]') == \
+        [None, True, True, False, True, True]
 
 
 def test_resend_mine_sends_only_mine_3s_apart(page, app_url):
@@ -595,3 +601,111 @@ def test_backup_carries_net_and_tombs_as_they_are(page, app_url, tmp_path):
     data = json.loads(path.read_text())['data']
     assert data['fk.wps'] == stored_wps and data['fk.meshTombs'] == stored_tombs
     assert json.loads(data['fk.wps'])[0]['net'] == net(120, expire=2_000_000_000, icon=SMILE)
+
+
+# ---------------------------------------------------------------- review round 1
+
+def test_a_mine_marker_shared_before_any_radio_survives_a_10000_burst(page, app_url):
+    start(page, app_url, wps=[mk('own', net(140, frm=0, pending=True, t=1))], link='private', me=None)
+    js(page, """() => { for (let i = 0; i < 10000; i++) FK._test.mesh.feed({ type: 'packet', from: 0x0A0B0C02, to: 0xFFFFFFFF,
+      channel: 0, id: i + 1, rxTime: 0, portnum: MPB.PORT.WAYPOINT, payload: MPB.enc.waypoint({ id: 5000 + i, lat: 43, lon: -76,
+      expire: 0, lockedTo: 0, name: 'W' + i, description: '', icon: 0 }) }); }""")
+    settle(page)
+    o = one(page, 'own')
+    assert o is not None and o['net']['pending'] is True and o['net']['mine'] is True
+    assert len(markers(page)) == 501 and js(page, '() => FK.share.dropped()') == 9500
+
+
+def test_load_without_a_known_radio_drops_nothing_that_is_mine(page, app_url):
+    wps = [mk('own1', net(141, frm=ME, t=1)), mk('own2', net(142, frm=0, t=2))] + \
+          [mk(f't{i}', net(1000 + i, t=T0 + i)) for i in range(503)]
+    start(page, app_url, wps=wps, link=False, me=None, meshOn=True)   # meshMe is session-only: absent after a restore
+    ids = [m['id'] for m in markers(page)]
+    assert 'own1' in ids and 'own2' in ids and len(ids) == 502
+    assert {'t0', 't1', 't2'}.isdisjoint(ids) and js(page, '() => FK.share.dropped()') == 3
+
+
+def test_a_radio_change_leaves_mine_markers_mine(page, app_url):
+    start(page, app_url, wps=[mk('a', net(143, frm=ME)), mk('b', net(144))])
+    page.evaluate("() => FK._test.mesh.feed({ type: 'myInfo', myNodeNum: 0x0A0B0CEE })")
+    assert js(page, '() => [FK.mesh.myNum(), FK.share.mine("a"), FK.share.mine("b")]') == [0x0A0B0CEE, True, False]
+    assert js(page, '() => FK.share.resendMine()') == 1
+    # a waypoint from this phone's OLD radio number is just a teammate's update: applied, still mine
+    incoming(page, ME, id=143, lat=43.01, lon=-76.0, name='Moved')
+    a = one(page, 'a')
+    assert (a['name'], a['net']['mine'], a['net']['chBy']) == ('Moved', True, 'Radio 0c01')   # the old number has no name now
+
+
+def test_the_cap_never_drops_the_navigation_target(page, app_url):
+    wps = [mk(f't{i}', net(1000 + i, t=T0 + i)) for i in range(500)]
+    start(page, app_url, wps=wps, link='private')
+    assert js(page, "() => FK.tac.setTarget({ type: 'marker', id: 't0' })") is True
+    incoming(page, CHARLIE, id=2000, lat=43.0, lon=-76.0, name='New')
+    ids = [m['id'] for m in markers(page)]
+    assert 't0' in ids and 't1' not in ids and len(ids) == 500
+    assert js(page, '() => FK.tac.target()') == {'type': 'marker', 'id': 't0'}
+
+
+def test_expiry_of_a_mine_marker_makes_it_private_with_a_note(page, app_url):
+    s = NOW // 1000
+    start(page, app_url, wps=[mk('a', net(145, frm=ME, expire=s + 60), note='by the oak'),
+                              mk('b', net(146, frm=ME, expire=s + 60), note='x' * 500), mk('c', net(147, expire=s + 60))],
+          link='private', clock=NOW)
+    js(page, "() => FK.route.go('/tactical/map')")
+    page.clock.run_for(130_000)                    # past the expiry, then the minute timer
+    a, b = one(page, 'a'), one(page, 'b')
+    assert 'net' not in a and a['note'] == 'Sharing expired. by the oak'
+    assert 'net' not in b and b['note'] == ('Sharing expired. ' + 'x' * 500)[:500]
+    assert one(page, 'c') is None and sorted(tombs(page)) == [145, 146, 147]
+
+
+def test_anything_from_our_own_radio_number_is_ignored(page, app_url):
+    start(page, app_url, wps=[mk('a', net(148, frm=ME)), mk('b', net(149, frm=ME)), mk('c', net(150))], link='private')
+    before = markers(page)
+    incoming(page, ME, id=148, lat=43.0, lon=-76.0, expire=1)      # form (a) delete
+    incoming(page, ME, id=149)                                     # form (b) delete
+    incoming(page, ME, id=150, lat=43.0, lon=-76.0, expire=1)      # a delete of a teammate's marker
+    incoming(page, ME, id=151, lat=43.0, lon=-76.0, name='New')    # a new number
+    assert markers(page) == before and tombs(page) == []
+
+
+def test_share_with_storage_full_is_no_and_nothing_is_sent_later(page, app_url):
+    start(page, app_url, wps=[mk('a')], link='private')
+    js(page, """() => { const set = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { if (k === 'fk.wps') throw new DOMException('full', 'QuotaExceededError');
+        return set.call(this, k, v); }; }""")
+    assert js(page, "() => FK.share.share('a')") == 'no'
+    assert js(page, "() => [FK.share.isShared('a'), 'net' in FK.tac.markers()[0]]") == [False, False]
+    assert js(page, '() => FK.mesh.connect()') is True
+    page.wait_for_timeout(400)
+    assert sent_wps(page) == []
+
+
+def test_set_net_failing_to_save_leaves_the_marker_as_it_was(page, app_url):
+    start(page, app_url, wps=[mk('a', net(152)), mk('b')], link=False)
+    js(page, """() => { const set = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { if (k === 'fk.wps') throw new DOMException('full', 'QuotaExceededError');
+        return set.call(this, k, v); }; }""")
+    before = markers(page)
+    assert js(page, '() => FK.tac.setNet("a", null)') is False
+    assert js(page, 'n => FK.tac.setNet("b", n)', net(153)) is False
+    assert markers(page) == before
+
+
+def test_with_the_switch_off_the_module_does_nothing(page, app_url):
+    s = NOW // 1000
+    wps = [mk('old', net(160, expire=s - 10)), mk('a'), mk('m', net(161, frm=ME)), mk('r', net(162))]
+    start(page, app_url, wps=wps, tombs=[{'wid': 9, 't': NOW - 40 * DAY}], link='off', clock=NOW)
+    assert js(page, '() => FK.mesh.enabled()') is False
+    assert [m['id'] for m in markers(page)] == ['old', 'a', 'm', 'r']              # no expiry at load
+    js(page, "() => FK.route.go('/tactical/map')")
+    page.clock.run_for(130_000)                                                    # no minute timer
+    assert [m['id'] for m in markers(page)] == ['old', 'a', 'm', 'r']
+    r = js(page, """() => Promise.all([FK.share.share('a'), FK.share.resend('m'), FK.share.changed('m'), FK.share.resendMine()])""")
+    assert r == ['no', 'no', 'no', 0]
+    assert 'net' not in one(page, 'a') and one(page, 'm')['net']['pending'] is False
+    assert js(page, "() => FK.share.unshare('m')") is True and 'net' not in one(page, 'm')
+    assert js(page, "() => FK.share.remove('r', true)") == 'local' and one(page, 'r') is None
+    assert sorted(tombs(page)) == [9, 161, 162]                                   # no pruning while off either
+    js(page, '() => FK.mesh.setEnabled(true)')                                     # catches up when switched on
+    assert [m['id'] for m in markers(page)] == ['a', 'm'] and sorted(tombs(page)) == [160, 161, 162]

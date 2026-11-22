@@ -322,7 +322,7 @@ def test_update_marker_only_takes_its_own_fields(ready):
 
 
 # ---------- The shared record (marker.net, comms Task 6) ----------
-NET = {'wid': 5, 'from': 0x0A0B0C02, 'by': 'Bravo', 't': 1, 'chBy': '', 'chT': 0, 'icon': 0, 'expire': 0, 'pending': False, 'rx': False}
+NET = {'wid': 5, 'from': 0x0A0B0C02, 'by': 'Bravo', 't': 1, 'chBy': '', 'chT': 0, 'icon': 0, 'expire': 0, 'pending': False, 'rx': False, 'mine': False}
 
 
 def test_net_is_kept_only_when_well_formed(ready):
@@ -387,3 +387,12 @@ def test_batch_writes_once_and_emits_once(ready):
     assert r == {'inside': [1, 1], 'out': 42, 'writes': 1, 'events': 1, 'n': 2}
     assert ev(page, 'FK.tac.target()') is None and len(json.loads(ls(page, 'wps'))) == 2
     assert ev(page, '() => { let e = 0; FK.on("wps", () => e++); FK.tac.batch(() => {}); return e; }') == 0   # nothing changed
+
+
+def test_net_mine_is_a_boolean_and_defaults_from_the_sender(ready):
+    no_mine = {k: v for k, v in NET.items() if k != 'mine'}
+    page = ready(wps=[dict(W1, net=no_mine), dict(W2, net=dict(no_mine, wid=6, **{'from': 0})),
+                      dict(W1, id='w3', net=dict(NET, wid=7, mine='yes')), dict(W1, id='w4', net=dict(NET, wid=8, mine=True))])
+    ms = {m['id']: m for m in ev(page, 'FK.tac.markers()')}
+    assert ms['w1']['net']['mine'] is False and ms['w2']['net']['mine'] is True     # from 0: this phone's unsent share
+    assert 'net' not in ms['w3'] and ms['w4']['net']['mine'] is True

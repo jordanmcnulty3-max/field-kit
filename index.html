@@ -904,9 +904,6 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h12M9 12h12M9 18h12"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg>
         </button>
         <!-- /v7.8 markers -->
-        <!-- comms radio -->
-        <button id="mRadio" aria-label="Radio: off" title="Radio" hidden></button>
-        <!-- /comms radio -->
       </div>
       <div class="mapbottom">
         <!-- v7.8 units -->
@@ -8098,7 +8095,7 @@ const BALS = (() => {
   document.addEventListener('visibilitychange', () => { syncTimer(); if (tick) refresh(); });
   syncTimer();
 
-  FK.markers = { icon, edit, create, openList, render, ageText, timerOn: () => !!tick };
+  FK.markers = { icon, line: LINE, edit, create, openList, render, ageText, timerOn: () => !!tick };
 })();
 
 /* ---------- The Radio button on the map and the Radio sheet (FK.radioSheet) ----------
@@ -8109,29 +8106,37 @@ const BALS = (() => {
    radio, so everything that reaches innerHTML goes through FK.esc. */
 (() => {
   const { $, esc, on } = FK;
-  const btn = $('#mRadio'), dlg = $('#dlgRadio');
+  const dlg = $('#dlgRadio');
+  /* The button is made here and only while the switch is on: with it off the map has its four buttons and nothing else. */
+  let btn = null;
+  function ensureButton() {
+    if (btn) return btn;
+    btn = document.createElement('button');
+    btn.id = 'mRadio';
+    btn.addEventListener('click', open);
+    $('.mapctl').appendChild(btn);
+    return btn;
+  }
+  const dropButton = () => { if (btn) { btn.remove(); btn = null; shape = ''; } };
   const STATE = { off: 'off', connecting: 'connecting', syncing: 'connecting', on: 'connected', lost: 'connection lost' };
-  const MAST = '<path d="M12 12v9M9 21h6"/>';
-  const ARCS = { in: '<path d="M8.5 6.5a5 5 0 0 0 0 7M15.5 6.5a5 5 0 0 1 0 7"/>', out: '<path d="M5.5 4a9 9 0 0 0 0 12M18.5 4a9 9 0 0 1 0 12"/>' };
+  /* Lucide line icons (vendor/lucide/comms-icons.json), the inside of a 24 px icon; each state has its own shape. */
   const ICON = {
-    off: MAST + '<circle cx="12" cy="9" r="1.5"/><path d="M3 3l18 18"/>',
-    connecting: MAST + '<circle cx="12" cy="10" r="1.5" fill="currentColor"/><g stroke-dasharray="2 3">' + ARCS.in + ARCS.out + '</g>',
-    connected: MAST + '<circle cx="12" cy="10" r="1.5" fill="currentColor"/>' + ARCS.in + ARCS.out,
-    'connection lost': MAST + '<circle cx="12" cy="10" r="1.5" fill="currentColor"/>' + ARCS.in + '<path d="M17 2l5 5M22 2l-5 5"/>'
+    off: '<path d="m17 17-5 5V12l-5 5"/><path d="m2 2 20 20"/><path d="M14.5 9.5 17 7l-5-5v4.5"/>',
+    connecting: '<path d="m7 7 10 10-5 5V2l5 5L7 17"/><path d="M20.83 14.83a4 4 0 0 0 0-5.66"/><path d="M18 12h.01"/>',
+    connected: '<path d="m7 7 10 10-5 5V2l5 5L7 17"/><line x1="18" x2="21" y1="12" y2="12"/><line x1="3" x2="6" y1="12" y2="12"/>',
+    'connection lost': '<path d="m7 7 10 10-5 5V2l5 5L7 17"/>'
   };
-  const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 
   let shape = '';
   function drawButton() {
-    const en = FK.mesh.enabled();
-    btn.hidden = !en;
-    if (!en) { shape = ''; return; }
+    if (!FK.mesh.enabled()) { dropButton(); return; }
+    ensureButton();
     const w = STATE[FK.mesh.status().state] || 'off';
     if (w === shape) return;
     shape = w;
     btn.setAttribute('aria-label', 'Radio: ' + w);
     btn.title = 'Radio: ' + w;
-    btn.innerHTML = svg(ICON[w === 'off' ? 'off' : w]);
+    btn.innerHTML = FK.markers.line(ICON[w]);
   }
 
   /* ---- the sheet ---- */
@@ -8191,7 +8196,7 @@ const BALS = (() => {
 
   let noDisc = 0, tapped = false;
   function connectTap() {
-    if (tapped || btn.hidden) return;
+    if (tapped) return;
     tapped = true;
     noDisc = performance.now() + 400;   // a second tap of a double tap must not land on Disconnect
     const s = FK.mesh.status().state;
@@ -8205,9 +8210,8 @@ const BALS = (() => {
 
   function open() {
     if (!FK.mesh.enabled()) return;
-    FK.sheet.open(dlg, { onOpen: () => { drawSheet(); $('#rdTitle').focus(); }, onClose: () => { if (!btn.hidden) btn.focus(); } });
+    FK.sheet.open(dlg, { onOpen: () => { drawSheet(); $('#rdTitle').focus(); }, onClose: () => { if (btn) btn.focus(); } });
   }
-  btn.addEventListener('click', open);
 
   on('mesh', () => { if (!FK.mesh.enabled() && dlg.open) FK.sheet.close(dlg); redraw(); });
   on('team', () => { if (dlg.open) redraw(); });

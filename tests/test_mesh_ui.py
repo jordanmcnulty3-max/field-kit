@@ -56,7 +56,7 @@ def label(page):
 
 def test_no_button_when_switch_off(page, app_url):
     boot_map(page, app_url, on=False)
-    assert page.locator('#mRadio').count() == 1 and page.is_hidden('#mRadio')
+    assert page.locator('#mRadio').count() == 0 and page.is_hidden('#mRadio')
     assert page.evaluate('() => FakeRadio.choosers') == 0
 
 
@@ -317,3 +317,13 @@ def test_sheet_fits_iphone_guard(page, app_url):
     assert box['bottom'] <= box['h'] + 1 and box['btnBottom'] <= box['h'] and box['sw'] <= box['w']
     ids = page.evaluate("[...document.querySelectorAll('dialog.mk-sheet')].map(d => d.id)")
     assert 'dlgRadio' in ids
+
+
+def test_map_button_column_with_the_switch_on_and_off(page, app_url):
+    ids = "[...document.querySelectorAll('.mapctl button')].map(b => b.id)"
+    boot_map(page, app_url)
+    page.wait_for_selector('#mRadio')
+    assert page.evaluate(ids) == ['mLayers', 'mLocate', 'mTools', 'mList', 'mRadio']
+    page.evaluate('() => FK.mesh.setEnabled(false)')
+    page.wait_for_function("!document.querySelector('#mRadio')")
+    assert page.evaluate(ids) == ['mLayers', 'mLocate', 'mTools', 'mList']

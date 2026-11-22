@@ -318,5 +318,5 @@
   document.addEventListener('visibilitychange', () => { syncTimer(); if (tick) refresh(); });
   syncTimer();
 
-  FK.markers = { icon, edit, create, openList, render, ageText, timerOn: () => !!tick };
+  FK.markers = { icon, line: LINE, edit, create, openList, render, ageText, timerOn: () => !!tick };
 })();

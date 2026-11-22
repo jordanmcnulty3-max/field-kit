@@ -50,10 +50,6 @@ jobs:
     name: iPhone engine (WebKit) layout
     runs-on: ubuntu-latest
     timeout-minutes: 45
-    # Non-blocking for now. Known failure (found by this job, 2026-11-22): the rifle profile editor with a drop reticle
-    # and enlarged text is 9 px wider than the sheet in WebKit (test_editor_fits_360_day_and_night_with_large_text[reticle-*]).
-    # Once that is fixed, delete continue-on-error so an iPhone layout break blocks like any other test.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v6
         with:

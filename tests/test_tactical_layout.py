@@ -225,7 +225,21 @@ OVERFLOW_JS = """root => {
     if (tw || el.id === 'view-map' || el.querySelector(':scope > .mk-chips')) continue;
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName)) continue;   // a long value in a field scrolls inside it
     if (getComputedStyle(el).textOverflow === 'ellipsis') continue;
-    if (el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 1) bad.push(name(el) + ' content ' + el.scrollWidth + ' > ' + el.clientWidth);
+    if (el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 1) {
+      /* Safari counts a select's chosen option text in its parent's scrollWidth even though the select clips it inside its
+         own box (WebKit check, 2026-11-22: the rifle editor's Sight row read 335 > 326 while the select, the sheet and the
+         page all fit). For a box holding a select, measure its children's boxes instead. */
+      if (el.querySelector(':scope > select')) {
+        const box = el.getBoundingClientRect(), range = document.createRange();
+        const sticksOut = [...el.childNodes].some(n => {
+          if (n.nodeType === 3) { if (!n.textContent.trim()) return false; range.selectNodeContents(n); }
+          else if (n.nodeType !== 1) return false;
+          const c = n.nodeType === 3 ? range.getBoundingClientRect() : n.getBoundingClientRect();
+          return c.width && (c.right > box.right + 1 || c.left < box.left - 1); });
+        if (!sticksOut) continue;
+      }
+      bad.push(name(el) + ' content ' + el.scrollWidth + ' > ' + el.clientWidth);
+    }
   }
   if (document.documentElement.scrollWidth > W) bad.push('page scrolls sideways ' + document.documentElement.scrollWidth);
   return bad; }"""

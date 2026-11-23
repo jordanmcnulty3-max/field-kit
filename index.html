@@ -624,6 +624,8 @@ body.maptool #tacSeg{display:none}
 /* A Point that carries the sender's own emoji (another app's icon): the emoji in place of the Point drawing. */
 .mk-emoji{font-size:17px;line-height:1;font-style:normal}
 .mk-list .mk-emoji{font-size:22px}
+/* Night: no full-colour emoji to spoil night vision: grey, then the theme's red (as the map tiles are treated). */
+:root[data-theme="night"] .mk-emoji{filter:grayscale(1) sepia(1) saturate(9) hue-rotate(-38deg) brightness(.85)}
 /* /comms share */
 #dlgShape .mk-act .btn[hidden]{display:none}
 #shType{margin-top:-6px}
@@ -5288,6 +5290,9 @@ const BALS = (() => {
   /* The waypoint for a marker: its stored expiry and foreign icon go out again unchanged. */
   const wpOf = (m, expire) => MMK.toWaypoint(m, m.net.wid, { icon: m.net.icon, expire: expire === undefined ? m.net.expire : expire });
 
+  /* A marker whose own expiry has passed is never sent, by any caller: others would take it as expired or deleted. */
+  const expiredNow = m => !!(m && m.net && m.net.expire > 0 && m.net.expire * 1000 <= Date.now());
+
   /* ---- sending ---- */
   let lastSend = -Infinity;
   /* Send a shared marker as it is now. 'no' (no such shared marker), 'toolong' (nothing changed), 'pending' (no link, or the
@@ -5295,7 +5300,7 @@ const BALS = (() => {
      radio's number when it first goes out. */
   async function sendNow(id) {
     const m = find(id);
-    if (!on_() || !m || !m.net) return 'no';
+    if (!on_() || !m || !m.net || expiredNow(m)) return 'no';
     if (!MMK.fits(m).ok) return 'toolong';
     if (!FK.mesh.canShare()) {
       if (!m.net.pending) FK.tac.setNet(id, { ...m.net, pending: true });
@@ -5329,7 +5334,7 @@ const BALS = (() => {
      "changed by" anyone, so that line clears. */
   async function changed(id) {
     const m = find(id);
-    if (!on_() || !m || !m.net) return 'no';
+    if (!on_() || !m || !m.net || expiredNow(m)) return 'no';
     if (!MMK.fits(m).ok) return 'toolong';
     if (m.net.chBy || m.net.chT) FK.tac.setNet(id, { ...m.net, chBy: '', chT: 0 });
     return sendNow(id);
@@ -5393,7 +5398,7 @@ const BALS = (() => {
   }
   function resendMine() {
     if (!FK.mesh.canShare()) return 0;
-    const ids = FK.tac.markers().filter(m => isMine(m) && MMK.fits(m).ok).map(m => m.id);
+    const ids = FK.tac.markers().filter(m => isMine(m) && MMK.fits(m).ok && !expiredNow(m)).map(m => m.id);
     batch = { ids: new Set(ids), sent: 0 };
     return enqueue(ids);
   }
@@ -5446,6 +5451,16 @@ const BALS = (() => {
     });
     pruneTombs(now);
     enforceCap(idx);
+  }
+  /* End the sharing of one marker whose expiry has passed now, open in the sheet or not (the sheet's Save on a marker the
+     sweep spared while it was open): as the sweep would, a marker of mine stays here private, any other is removed; the number
+     is tombed. False when it is not shared or not expired. */
+  function expire(id) {
+    const m = find(id);
+    if (stopped || !on_() || !expiredNow(m)) return false;
+    FK.tac.batch(() => endShared(m, 'Sharing expired.'));
+    saveTombs();
+    return true;
   }
   function sweepNow() {
     if (stopped || !on_()) return;
@@ -5541,7 +5556,7 @@ const BALS = (() => {
   syncTimer();
 
   FK.share = {
-    share, resend: sendNow, resendMine, unshare, remove, changed, sweep: sweepNow,
+    share, resend: sendNow, resendMine, unshare, remove, changed, sweep: sweepNow, expire, expired: id => expiredNow(find(id)),
     whenIdle: () => idle() ? Promise.resolve() : new Promise(f => idleWaiters.push(f)),
     batchSent: () => batch.sent,
     isShared: id => !!(find(id) || {}).net,
@@ -8519,6 +8534,7 @@ const BALS = (() => {
   }
   /* A Point received with another app's emoji keeps showing that emoji (one code point; a number, drawn as text). */
   function foreignEmoji(w, kind = w.kind) {
+    if (!FK.mesh || !FK.mesh.enabled()) return '';   // with the switch off, pins and rows are as they always were
     const c = w && w.net ? w.net.icon : 0;
     if (kind !== 'point' || !Number.isInteger(c) || c <= 0x20 || c > 0x10FFFF || (c >= 0xD800 && c <= 0xDFFF) || MMK.kindFor(c)) return '';
     return String.fromCodePoint(c);
@@ -8574,6 +8590,10 @@ const BALS = (() => {
   const wantShare = () => rowShown() ? shareEl.checked : !!(opened ? opened.share : netOf());
   const TOO_LONG = 'Too long to share. Accents and emoji count extra. Shorten the name or note, or turn Share off.';
   const NOT_SENT = 'Saved. Not sent yet: it goes out when the radio connects.';
+  const EXPIRED_LINE = 'This shared marker has expired. Save keeps what you typed as a private marker of your own.';
+  const EXPIRED_TOAST = 'This shared marker expired. Your changes were kept as a private marker.';
+  /* The open marker's expiry passed while its sheet was open (the sweep spares the open marker): nothing of it is sent again. */
+  const expiredOpen = () => !!cur && !!cur.id && FK.mesh.enabled() && !!FK.share && FK.share.expired(cur.id);
   const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const p2 = n => String(n).padStart(2, '0');
   const dayTime = t => { const d = new Date(t); return `${d.getDate()} ${MON[d.getMonth()]} ${p2(d.getHours())}:${p2(d.getMinutes())}`; };
@@ -8591,7 +8611,8 @@ const BALS = (() => {
   let refused = false;   // Save was refused for length; the message stays until the name and note fit (or Share is off)
   function renderNotice() {
     if (refused && !(cur && shareOn() && over())) refused = false;
-    setText($('#mkNotice'), [conflict, refused ? TOO_LONG : ''].filter(Boolean).join('\n'));
+    const lapsed = expiredOpen() && changed() ? EXPIRED_LINE : '';
+    setText($('#mkNotice'), [conflict, lapsed, refused ? TOO_LONG : ''].filter(Boolean).join('\n'));
   }
   function renderLeft() {
     const nameLeft = $('#mkNameLeft'), noteLeft = $('#mkLeft');
@@ -8627,7 +8648,7 @@ const BALS = (() => {
     setText($('#mkShareLine'), show ? lines.join('\n') : '');   // textContent: these names come from other people's radios
     /* Send again sends what is saved: offered only with nothing unsaved, Share on and a marker that fits; with unsaved
        changes a hint takes its place. */
-    const can = show && !!n && shareEl.checked && FK.mesh.canShare() && !!w && MMK.fits(w).ok;
+    const can = show && !!n && shareEl.checked && FK.mesh.canShare() && !!w && MMK.fits(w).ok && !expiredOpen();
     const dirty = can && changed();
     $('#mkResend').hidden = !can || dirty;
     $('#mkSendHint').hidden = !dirty;
@@ -8737,18 +8758,35 @@ const BALS = (() => {
   const blocked = () => !cur || deleting;
 
   /* After this phone changed a shared marker (a save here, or a move on the map): send it again under its number. */
-  function sendChange(id) {
+  /* moved: the marker's name after a Move on the map, for one toast that says both ("Moved X. Sent to teammates."). */
+  function sendChange(id, moved) {
     FK.share.changed(id).then(r => {
-      if (r === 'sent') toast('Sent to teammates');
-      else if (r === 'pending') toast(NOT_SENT);
+      if (r === 'sent') toast(moved ? `Moved ${moved}. Sent to teammates.` : 'Sent to teammates');
+      else if (r === 'pending') toast(moved ? `Moved ${moved}. Not sent yet: it goes out when the radio connects.` : NOT_SENT);
       else if (r === 'toolong') toast(TOO_LONG);
+      else if (moved) toast(`Moved ${moved}`);
     });
   }
   /* commit() with Share around it. false: refused (Share is on and the name or note is over a shared marker's limit; the
      sheet stays open with the message). Otherwise what commit() returned, after: Share newly on shares the marker; Share
      turned off stops sharing it (the copy here becomes private); a shared marker that changed is sent again. A shared marker
      saved unchanged is not sent (Send again is there for that): an old copy must not overwrite a teammate's newer edit. */
+  /* Save on a marker whose expiry passed while its sheet was open: nothing is sent. With typing, what the sheet shows is kept
+     as a private marker (a teammate's becomes a new private marker of this phone's, like a teammate's delete while typing; this
+     phone's own becomes private with "Sharing expired." in front of the typed note); with no typing, the sheet just closes and
+     the marker ends as the sweep would have ended it. */
+  function saveExpired() {
+    const id = cur.id, typed = changed(), mine = FK.share.mine(id);
+    FK.share.expire(id);
+    if (!typed) return exists(id) ? id : null;
+    if (mine) cur.delLine = 'Sharing expired.';
+    else cur = { ...cur, id: null };
+    const kept = commit(false);
+    toast(EXPIRED_TOAST);
+    return kept;
+  }
   function save(onlyIfChanged) {
+    if (expiredOpen()) return saveExpired();
     if (shareOn() && over()) {
       refused = true;
       renderNotice();   // above the buttons, always on screen; the first field over the limit comes into view with its counter
@@ -8799,7 +8837,7 @@ const BALS = (() => {
     const id = save(true);
     if (id === false) return;
     FK.sheet.close(dlg);
-    FK.mapTools.moveMarker(id);   // its history entry waits for this sheet's step back
+    if (id) FK.mapTools.moveMarker(id);   // its history entry waits for this sheet's step back
   });
   $('#mkDel').addEventListener('click', async () => {
     if (blocked() || !cur.id) return;
@@ -9536,8 +9574,10 @@ const BALS = (() => {
     const id = moveId, w = FK.tac.markers().find(x => x.id === id), c = crosshair();
     if (w) {
       // A failed save still moves the marker for this session; tac-data shows the full-storage message itself.
-      if (FK.tac.updateMarker(id, { lat: c[0], lon: c[1], alt: null })) toast(`Moved ${w.name}`);
-      if (FK.share.isShared(id)) FK.markers.sendChange(id);   // a shared marker goes out again at its new place (tac-markers.js)
+      const ok = FK.tac.updateMarker(id, { lat: c[0], lon: c[1], alt: null });
+      // a shared marker goes out again at its new place, with one toast for both (tac-markers.js)
+      if (FK.share.isShared(id)) FK.markers.sendChange(id, ok ? w.name : '');
+      else if (ok) toast(`Moved ${w.name}`);
     }
     leave();
   });

@@ -37,6 +37,7 @@ Screenshot it if anything looks wrong.
 14. Tap the moon button at the top right (red light mode). Is everything readable?
 15. Type a number in Ballistics or in the declination box on Position (tap By hand). Does the keyboard have a minus sign and a decimal point?
 16. If you can, leave the app unused for a week. Are the marker and the saved map still there?
+17. The Radio link (Settings) is Android only: Safari has no Bluetooth for web apps, so leave it off. If your group uses Meshtastic radios, use the Meshtastic app on the iPhone; the group's shared markers still reach you there.
 
 ## 4. Send results
 

@@ -240,7 +240,10 @@
     const id = moveId, w = FK.tac.markers().find(x => x.id === id), c = crosshair();
     if (w) {
       // A failed save still moves the marker for this session; tac-data shows the full-storage message itself.
-      if (FK.tac.updateMarker(id, { lat: c[0], lon: c[1], alt: null })) toast(`Moved ${w.name}`);
+      const ok = FK.tac.updateMarker(id, { lat: c[0], lon: c[1], alt: null });
+      // a shared marker goes out again at its new place, with one toast for both (tac-markers.js)
+      if (FK.share.isShared(id)) FK.markers.sendChange(id, ok ? w.name : '');
+      else if (ok) toast(`Moved ${w.name}`);
     }
     leave();
   });

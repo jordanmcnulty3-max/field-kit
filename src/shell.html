@@ -521,7 +521,7 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .mk-gridline{display:block;border:0;background:none;padding:8px 0 0;min-height:44px;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left}
 .mk-rel{margin:0;font-size:14px;color:var(--muted)}
 .mk-count{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
-.mk-sheet h2:focus,#cfTitle:focus{outline:none}
+.mk-sheet h2:focus,#cfTitle:focus,#mdTitle:focus{outline:none}
 .mk-chips{display:flex;gap:6px;margin:0 -16px 8px;padding:0 16px 4px;overflow-x:auto;scrollbar-width:none}
 .mk-chips::-webkit-scrollbar{display:none}
 .mk-chips button{flex:none;white-space:nowrap;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:14px;cursor:pointer}
@@ -551,12 +551,82 @@ body.maptool #tacSeg{display:none}
 .tb-btns .btn{flex:1 1 0;min-width:44px;min-height:48px;padding:4px 6px;font-size:15px;line-height:1.15;white-space:normal;overflow-wrap:anywhere}
 .tb-btns .btn[hidden]{display:none}
 .tb-btns #tbAdd,.tb-btns #tbPlace{flex:1.7 1 0;font-weight:700}
+/* comms radio */
+/* The Radio button's warning: a filled dot with "!" at its corner whenever Field Kit cannot share (lost, not a private
+   channel, a radio that can't transmit). Drawn in CSS, not an icon; it takes no taps. */
+#mRadio{position:relative}
+#mRadio.warn::after{content:"!";position:absolute;top:-6px;right:-6px;width:18px;height:18px;box-sizing:border-box;border-radius:50%;
+  background:var(--blaze);color:var(--on-accent);border:2px solid var(--surface);font:800 12px/14px system-ui,sans-serif;text-align:center;pointer-events:none}
+#dlgRadio .mk-act{grid-template-columns:1fr}
+#dlgRadio .mk-body{padding-bottom:12px}
+.rd-status{margin:12px 0 0;font-size:18px;font-weight:650;overflow-wrap:anywhere}
+.rd-line{margin:4px 0 0;font-size:16px}
+.rd-info p{margin:12px 0 0;font-size:16px}
+.rd-note{margin:12px 0 0;padding:8px 12px;border-left:4px solid var(--blaze);background:var(--surface);font-size:15px;font-weight:600;overflow-wrap:anywhere}
+.rd-h{margin:20px 0 4px;font-size:16px;font-weight:700;color:var(--ink)}
+.rd-team li{padding:10px 0;font-size:16px;overflow-wrap:anywhere}
+.rd-team li:has(>button){padding:0}
+.rd-team li>button{display:block;width:100%;min-height:48px;padding:10px 0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;overflow-wrap:anywhere}
+.rd-team .hint{display:block;margin-top:2px}
+.rd-resend{display:block;width:100%;margin-top:16px;white-space:normal}
+/* /comms radio */
+/* comms teammates */
+.tm-icon{background:none;border:0}
+.tm-pin{position:relative;width:30px;height:30px}
+.tm-pin i{display:grid;place-items:center;width:30px;height:30px;box-sizing:border-box;border-radius:50%;border:3px solid var(--me);
+  background:var(--surface);color:var(--me);box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+.tm-pin i svg{width:16px;height:16px}
+/* Not heard from for 30 min (or the time is unknown): a dashed outline and no fill, so it reads as old by shape in every theme. */
+.tm-pin.old i{border-style:dashed;background:transparent;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.tm-pin.old i svg{display:none}
+.tm-pin b,.tm-pin em{position:absolute;left:50%;transform:translateX(-50%);max-width:112px;padding:0 3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-style:normal;color:var(--ink);text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface)}
+.tm-pin b{top:33px;font-size:13px;font-weight:700;line-height:15px}
+.tm-pin em{top:48px;font-size:12px;font-weight:500;line-height:14px}
+.tm-pin.old b,.tm-pin.old em{color:var(--muted)}
+:root[data-theme="night"] .tm-pin i,:root[data-theme="night"] .tm-pin.old i{box-shadow:0 0 0 1.5px #000}
+#dlgMate .mk-body{padding-bottom:12px}
+.tm-kind{margin:12px 0 0;font-size:14px;font-weight:600;color:var(--muted)}
+#tmTitle{margin-top:2px;overflow-wrap:anywhere}
+.tm-grid{margin:8px 0 0;font-size:19px;font-weight:650;overflow-wrap:anywhere}
+.tm-line{margin:4px 0 0;font-size:16px;overflow-wrap:anywhere}
+/* /comms teammates */
 .tl-list{list-style:none;margin:0;padding:0}
 .tl-list li{border-top:1px solid var(--line)}
 .tl-list button{display:flex;gap:12px;align-items:center;width:100%;min-height:56px;padding:8px 0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;font-size:17px;font-weight:600}
 .tl-list button svg{flex:none;width:24px;height:24px}
 .tl-list .hint{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:2px}
 #dlgMarker .mk-act{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* comms share: the Share switch, its limits and status lines (only while the radio link is switched on) */
+.mk-share{margin:8px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mk-share .opt{border-top:0;align-items:center;min-height:48px;padding:6px 0;font-size:17px;font-weight:600}
+.mk-share .opt input{margin-top:0}
+.mk-msg{margin:0 0 8px;color:var(--blaze);font-weight:600;overflow-wrap:anywhere}
+.mk-shline{margin:0 0 4px;font-size:15px;color:var(--ink);overflow-wrap:anywhere;white-space:pre-line}
+.mk-share .hint{margin:0 0 6px}
+#mkResend{width:100%;min-height:48px;margin:4px 0 4px}
+.mk-left{margin:4px 0 0}
+.mk-over{color:var(--blaze);font-weight:600}
+#dlgMkDel .row:has(>.btn[hidden]){display:none}
+/* The one place for what happened while typing and for a refused Save: above the buttons, never scrolled away. */
+.mk-act .mk-notice{grid-column:1/-1;margin:0;font-size:15px;white-space:pre-line}
+.mk-sendhint{margin:4px 0 8px}
+.mk-emo{margin-left:6px;color:var(--ink)}
+/* A shared marker's corner mark (Lucide share-2; clock while not sent yet). It sits over the pin's corner and takes no taps:
+   the pin's size and hit area stay as they were. */
+.mk-net{position:absolute;top:-4px;left:19px;width:13px;height:13px;box-sizing:border-box;display:grid;place-items:center;border-radius:50%;
+  background:var(--surface);color:var(--ink);border:1px solid var(--ink);pointer-events:none;z-index:1}
+.mk-net svg{width:9px;height:9px;stroke-width:2.6}
+.mk-list .mk-ic{position:relative}
+.mk-list .mk-ic .mk-net{top:-4px;left:19px}
+.mk-list .mk-ic .mk-net svg,.mk-pin .mk-net svg{width:9px;height:9px}
+:root[data-theme="night"] .mk-net{background:#000;color:var(--ink);border-color:var(--ink)}
+/* A Point that carries the sender's own emoji (another app's icon): the emoji in place of the Point drawing. */
+.mk-emoji{font-size:17px;line-height:1;font-style:normal}
+.mk-list .mk-emoji{font-size:22px}
+/* Night: no full-colour emoji to spoil night vision: grey, then the theme's red (as the map tiles are treated). */
+:root[data-theme="night"] .mk-emoji{filter:grayscale(1) sepia(1) saturate(9) hue-rotate(-38deg) brightness(.85)}
+/* /comms share */
 #dlgShape .mk-act .btn[hidden]{display:none}
 #shType{margin-top:-6px}
 #shName{overflow-wrap:anywhere}
@@ -671,6 +741,9 @@ dialog .row{flex-wrap:wrap}
 dialog.sheet{margin:auto auto 0;width:min(560px,100vw);max-width:100vw;border-radius:16px 16px 0 0;border-bottom:0;
   padding:20px 16px calc(16px + env(safe-area-inset-bottom))}
 dialog.sheet .row .btn{flex:1 1 140px}
+/* The Settings menu is taller than a small phone: it scrolls, and its last row (Check for update, Close) stays pinned at the
+   bottom edge, so Close is always on screen. */
+#dlgMenu>.row:last-child{position:sticky;bottom:-20px;margin:8px -16px -20px;padding:8px 16px 20px;background:var(--paper);border-top:1px solid var(--line)}
 .btn.danger{background:var(--blaze);border-color:var(--blaze);color:var(--on-accent)}
 .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
 .opt input{width:22px;min-height:22px;height:22px;margin-top:2px;accent-color:var(--c)}
@@ -830,7 +903,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <!-- Map -->
   <div id="view-map">
     <div class="mapwrap" id="mapWrap">
-      <div id="map" aria-label="Map"></div>
+      <div id="map" role="region" aria-label="Map"></div>
       <div class="cross" aria-hidden="true"></div>
       <div class="maptag"><span id="mLayerName">USGS Topo</span><button type="button" class="rec" id="recChip" hidden aria-label="Recording. Open Track recording.">Recording</button>
         <!-- v7.8 nav -->
@@ -1125,24 +1198,41 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 </dialog>
 
 <!-- v7.8 markers -->
+<dialog id="dlgMkDel" class="sheet" aria-labelledby="mdTitle">
+  <h2 id="mdTitle" tabindex="-1">Delete this marker?</h2>
+  <p id="mdText"></p>
+  <div class="row"><button type="button" class="btn danger full" id="mdAll">Delete for everyone</button></div>
+  <div class="row"><button type="button" class="btn ghost full" id="mdHere">Delete on this phone only</button></div>
+  <div class="row"><button type="button" class="btn ghost full" id="mdCancel">Cancel</button></div>
+</dialog>
 <dialog id="dlgMarker" class="sheet mk-sheet" aria-labelledby="mkTitle">
   <form id="mkForm" autocomplete="off">
     <div class="mk-body">
       <h2 id="mkTitle" tabindex="-1">Marker</h2>
       <label class="f">Name<input id="mkName" type="text" maxlength="60" enterkeyhint="done"></label>
+      <p class="hint mk-left" id="mkNameLeft" hidden></p>
+      <div class="mk-share" id="mkShareBox" hidden>
+        <label class="opt"><input type="checkbox" id="mkShare" role="switch" aria-describedby="mkShareHint"><span>Share with teammates</span></label>
+        <p class="hint" id="mkShareHint" hidden></p>
+        <p class="mk-shline" id="mkShareLine" hidden></p>
+        <button type="button" class="btn ghost" id="mkResend" hidden>Send again</button>
+        <p class="hint mk-sendhint" id="mkSendHint" hidden>Save your changes to send them.</p>
+      </div>
       <fieldset class="mk-kinds">
-        <legend>Kind</legend>
+        <legend>Kind <span class="mk-emo" id="mkEmoji" hidden></span></legend>
         <div class="mk-grid" id="mkPlaces"></div>
         <p class="mk-sub">Affiliation</p>
         <div class="mk-grid" id="mkAffil"></div>
       </fieldset>
       <label class="f">Note<textarea id="mkNote" maxlength="500" rows="2"></textarea></label>
       <p class="hint" id="mkLeft" hidden></p>
+      <p class="hint" id="mkSeenHint" hidden>A shared sighting carries the time it was seen, which uses part of the note.</p>
       <button type="button" class="mk-gridline" id="mkGrid" translate="no" aria-describedby="mkGridHint"></button><span class="vh" id="mkGridHint">Tap to copy the grid.</span>
       <p class="mk-rel" id="mkRel" hidden></p>
       <p class="mk-rel" id="mkAge" hidden></p>
     </div>
     <div class="mk-act">
+      <p class="mk-msg mk-notice" id="mkNotice" role="status" hidden></p>
       <button type="submit" class="btn" id="mkSave">Save</button>
       <button type="button" class="btn ghost" id="mkGo">Go to</button>
       <button type="button" class="btn ghost" id="mkMove">Move</button>
@@ -1221,6 +1311,49 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <div class="mk-act"><button type="button" class="btn ghost" id="lsClose">Close</button></div>
 </dialog>
 <!-- /v7.8 markers -->
+
+<!-- comms radio -->
+<dialog id="dlgRadio" class="sheet mk-sheet" aria-labelledby="rdTitle">
+  <div class="mk-body">
+    <h2 id="rdTitle" tabindex="-1">Radio</h2>
+    <p class="rd-status" id="rdStatus" role="status" hidden></p>
+    <p class="rd-line" id="rdChannel" hidden></p>
+    <div class="rd-info" id="rdInfo"></div>
+    <p class="rd-note" id="rdErr" role="status" hidden></p>
+    <p class="rd-note" id="rdProblem" hidden></p>
+    <p class="rd-note" id="rdWarn" hidden></p>
+    <p class="rd-note" id="rdPos" hidden></p>
+    <div id="rdTeamBox" hidden>
+      <h3 class="rd-h" id="rdTeamH"></h3>
+      <ul class="mk-list rd-team" id="rdTeam"></ul>
+    </div>
+    <p class="rd-line" id="rdDropped" hidden></p>
+    <button type="button" class="btn ghost rd-resend" id="rdResend" hidden>Send all my shared markers again</button>
+  </div>
+  <div class="mk-act">
+    <button type="button" class="btn" id="rdConnect">Connect a radio</button>
+    <button type="button" class="btn ghost" id="rdDisconnect" hidden>Disconnect</button>
+    <button type="button" class="btn ghost" id="rdClose">Close</button>
+  </div>
+</dialog>
+<!-- /comms radio -->
+
+<!-- comms teammates -->
+<dialog id="dlgMate" class="sheet mk-sheet" aria-labelledby="tmTitle">
+  <div class="mk-body">
+    <p class="tm-kind">Teammate</p>
+    <h2 id="tmTitle" tabindex="-1"></h2>
+    <p class="tm-grid" id="tmGrid" translate="no"></p>
+    <p class="tm-line" id="tmApprox" hidden>Approximate position</p>
+    <p class="tm-line" id="tmRel" hidden></p>
+    <p class="tm-line" id="tmAge"></p>
+  </div>
+  <div class="mk-act">
+    <button type="button" class="btn" id="tmGo">Go to</button>
+    <button type="button" class="btn ghost" id="tmClose">Close</button>
+  </div>
+</dialog>
+<!-- /comms teammates -->
 
 <!-- v7.8 tools -->
 <dialog id="dlgTools" class="sheet mk-sheet" aria-labelledby="tlTitle">
@@ -1378,6 +1511,10 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <p id="bkAsk" role="alert"></p>
     <div class="row"><button class="btn ghost" id="bkGo">Restore</button><button class="btn ghost" id="bkNo">Cancel</button></div>
   </div>
+  <!-- Radio link -->
+  <label class="opt"><input type="checkbox" id="meshOn" role="switch"><span>Radio link (testing)</span></label>
+  <p class="hint">Connects Field Kit to a Meshtastic radio over Bluetooth. Android only.</p>
+  <!-- /Radio link -->
   <h3>This phone</h3>
   <p class="hint" id="diag"></p>
   <div class="row"><button class="btn ghost" id="updBtn">Check for update</button><button class="btn ghost" id="menuClose">Close</button></div>

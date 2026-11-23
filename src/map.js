@@ -63,7 +63,7 @@
       map.invalidateSize({ pan: false });
       if (follow && f) map.setView([f.lat, f.lon], map.getZoom(), { animate: false });
       else if (v) map.setView([v.lat, v.lon], v.z, { animate: false, reset: true });   // reset: a pan would round to whole pixels
-      FK.markers.render(); renderTarget(); renderMe(); renderCenter();
+      FK.markers.render(); FK.team.render(); renderTarget(); renderMe(); renderCenter();
       return;
     }
     if (!window.L) { $('#mapWrap').innerHTML = '<p class="hint" style="padding:16px">The map library didn’t load. Reload the app while online.</p>'; return; }
@@ -74,6 +74,7 @@
     L.control.zoom({ position: 'topleft' }).addTo(map);
     map.attributionControl.setPrefix(false);
     map._fkAreas = L.layerGroup().addTo(map);
+    map._fkTeam = L.layerGroup().addTo(map);   // teammates (tac-team.js): before the markers' group, and their pins sit lower
     map._fkWps = L.layerGroup().addTo(map);
     trackLine = L.polyline([], { className: 'trk', interactive: false }).addTo(map);
     tgtLine = L.polyline([], { className: 'tgt-line', interactive: false }).addTo(map);
@@ -92,7 +93,7 @@
       const ll = e.latlng.wrap(); FK.markers.create(ll.lat, ll.lng);
     });
 
-    renderAreas(); FK.markers.render(); renderTarget(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
+    renderAreas(); FK.markers.render(); FK.team.render(); renderTarget(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
   }
 
   /* Tile layer that, when a tile is missing (e.g. offline past the saved zoom), scales up the
@@ -188,6 +189,8 @@
     if (!visible()) return;
     const c = map.getCenter().wrap(), g = GEO.toMGRS(c.lat, c.lng);
     $('#mCenter').textContent = g ? g.text : `${c.lat.toFixed(5)}, ${c.lng.toFixed(5)}`;
+    // the accessible name starts with the text on the button, so a voice command that says what it shows hits it
+    $('#mCenter').setAttribute('aria-label', (g ? g.text + '. ' : '') + 'Grid at crosshair. Tap to copy.');
     $('#mCenterRel').textContent = FK.relText(c.lat, c.lng, fmtDist) || 'Grid at the crosshair';
   }
   $('#mCenter').addEventListener('click', async () => {

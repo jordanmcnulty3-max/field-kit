@@ -521,7 +521,7 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .mk-gridline{display:block;border:0;background:none;padding:8px 0 0;min-height:44px;font-size:19px;font-weight:650;color:var(--ink);cursor:pointer;text-align:left}
 .mk-rel{margin:0;font-size:14px;color:var(--muted)}
 .mk-count{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
-.mk-sheet h2:focus,#cfTitle:focus{outline:none}
+.mk-sheet h2:focus,#cfTitle:focus,#mdTitle:focus{outline:none}
 .mk-chips{display:flex;gap:6px;margin:0 -16px 8px;padding:0 16px 4px;overflow-x:auto;scrollbar-width:none}
 .mk-chips::-webkit-scrollbar{display:none}
 .mk-chips button{flex:none;white-space:nowrap;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:14px;cursor:pointer}
@@ -551,12 +551,82 @@ body.maptool #tacSeg{display:none}
 .tb-btns .btn{flex:1 1 0;min-width:44px;min-height:48px;padding:4px 6px;font-size:15px;line-height:1.15;white-space:normal;overflow-wrap:anywhere}
 .tb-btns .btn[hidden]{display:none}
 .tb-btns #tbAdd,.tb-btns #tbPlace{flex:1.7 1 0;font-weight:700}
+/* comms radio */
+/* The Radio button's warning: a filled dot with "!" at its corner whenever Field Kit cannot share (lost, not a private
+   channel, a radio that can't transmit). Drawn in CSS, not an icon; it takes no taps. */
+#mRadio{position:relative}
+#mRadio.warn::after{content:"!";position:absolute;top:-6px;right:-6px;width:18px;height:18px;box-sizing:border-box;border-radius:50%;
+  background:var(--blaze);color:var(--on-accent);border:2px solid var(--surface);font:800 12px/14px system-ui,sans-serif;text-align:center;pointer-events:none}
+#dlgRadio .mk-act{grid-template-columns:1fr}
+#dlgRadio .mk-body{padding-bottom:12px}
+.rd-status{margin:12px 0 0;font-size:18px;font-weight:650;overflow-wrap:anywhere}
+.rd-line{margin:4px 0 0;font-size:16px}
+.rd-info p{margin:12px 0 0;font-size:16px}
+.rd-note{margin:12px 0 0;padding:8px 12px;border-left:4px solid var(--blaze);background:var(--surface);font-size:15px;font-weight:600;overflow-wrap:anywhere}
+.rd-h{margin:20px 0 4px;font-size:16px;font-weight:700;color:var(--ink)}
+.rd-team li{padding:10px 0;font-size:16px;overflow-wrap:anywhere}
+.rd-team li:has(>button){padding:0}
+.rd-team li>button{display:block;width:100%;min-height:48px;padding:10px 0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;overflow-wrap:anywhere}
+.rd-team .hint{display:block;margin-top:2px}
+.rd-resend{display:block;width:100%;margin-top:16px;white-space:normal}
+/* /comms radio */
+/* comms teammates */
+.tm-icon{background:none;border:0}
+.tm-pin{position:relative;width:30px;height:30px}
+.tm-pin i{display:grid;place-items:center;width:30px;height:30px;box-sizing:border-box;border-radius:50%;border:3px solid var(--me);
+  background:var(--surface);color:var(--me);box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+.tm-pin i svg{width:16px;height:16px}
+/* Not heard from for 30 min (or the time is unknown): a dashed outline and no fill, so it reads as old by shape in every theme. */
+.tm-pin.old i{border-style:dashed;background:transparent;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.tm-pin.old i svg{display:none}
+.tm-pin b,.tm-pin em{position:absolute;left:50%;transform:translateX(-50%);max-width:112px;padding:0 3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-style:normal;color:var(--ink);text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 4px var(--surface)}
+.tm-pin b{top:33px;font-size:13px;font-weight:700;line-height:15px}
+.tm-pin em{top:48px;font-size:12px;font-weight:500;line-height:14px}
+.tm-pin.old b,.tm-pin.old em{color:var(--muted)}
+:root[data-theme="night"] .tm-pin i,:root[data-theme="night"] .tm-pin.old i{box-shadow:0 0 0 1.5px #000}
+#dlgMate .mk-body{padding-bottom:12px}
+.tm-kind{margin:12px 0 0;font-size:14px;font-weight:600;color:var(--muted)}
+#tmTitle{margin-top:2px;overflow-wrap:anywhere}
+.tm-grid{margin:8px 0 0;font-size:19px;font-weight:650;overflow-wrap:anywhere}
+.tm-line{margin:4px 0 0;font-size:16px;overflow-wrap:anywhere}
+/* /comms teammates */
 .tl-list{list-style:none;margin:0;padding:0}
 .tl-list li{border-top:1px solid var(--line)}
 .tl-list button{display:flex;gap:12px;align-items:center;width:100%;min-height:56px;padding:8px 0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;font-size:17px;font-weight:600}
 .tl-list button svg{flex:none;width:24px;height:24px}
 .tl-list .hint{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:2px}
 #dlgMarker .mk-act{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* comms share: the Share switch, its limits and status lines (only while the radio link is switched on) */
+.mk-share{margin:8px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mk-share .opt{border-top:0;align-items:center;min-height:48px;padding:6px 0;font-size:17px;font-weight:600}
+.mk-share .opt input{margin-top:0}
+.mk-msg{margin:0 0 8px;color:var(--blaze);font-weight:600;overflow-wrap:anywhere}
+.mk-shline{margin:0 0 4px;font-size:15px;color:var(--ink);overflow-wrap:anywhere;white-space:pre-line}
+.mk-share .hint{margin:0 0 6px}
+#mkResend{width:100%;min-height:48px;margin:4px 0 4px}
+.mk-left{margin:4px 0 0}
+.mk-over{color:var(--blaze);font-weight:600}
+#dlgMkDel .row:has(>.btn[hidden]){display:none}
+/* The one place for what happened while typing and for a refused Save: above the buttons, never scrolled away. */
+.mk-act .mk-notice{grid-column:1/-1;margin:0;font-size:15px;white-space:pre-line}
+.mk-sendhint{margin:4px 0 8px}
+.mk-emo{margin-left:6px;color:var(--ink)}
+/* A shared marker's corner mark (Lucide share-2; clock while not sent yet). It sits over the pin's corner and takes no taps:
+   the pin's size and hit area stay as they were. */
+.mk-net{position:absolute;top:-4px;left:19px;width:13px;height:13px;box-sizing:border-box;display:grid;place-items:center;border-radius:50%;
+  background:var(--surface);color:var(--ink);border:1px solid var(--ink);pointer-events:none;z-index:1}
+.mk-net svg{width:9px;height:9px;stroke-width:2.6}
+.mk-list .mk-ic{position:relative}
+.mk-list .mk-ic .mk-net{top:-4px;left:19px}
+.mk-list .mk-ic .mk-net svg,.mk-pin .mk-net svg{width:9px;height:9px}
+:root[data-theme="night"] .mk-net{background:#000;color:var(--ink);border-color:var(--ink)}
+/* A Point that carries the sender's own emoji (another app's icon): the emoji in place of the Point drawing. */
+.mk-emoji{font-size:17px;line-height:1;font-style:normal}
+.mk-list .mk-emoji{font-size:22px}
+/* Night: no full-colour emoji to spoil night vision: grey, then the theme's red (as the map tiles are treated). */
+:root[data-theme="night"] .mk-emoji{filter:grayscale(1) sepia(1) saturate(9) hue-rotate(-38deg) brightness(.85)}
+/* /comms share */
 #dlgShape .mk-act .btn[hidden]{display:none}
 #shType{margin-top:-6px}
 #shName{overflow-wrap:anywhere}
@@ -671,6 +741,9 @@ dialog .row{flex-wrap:wrap}
 dialog.sheet{margin:auto auto 0;width:min(560px,100vw);max-width:100vw;border-radius:16px 16px 0 0;border-bottom:0;
   padding:20px 16px calc(16px + env(safe-area-inset-bottom))}
 dialog.sheet .row .btn{flex:1 1 140px}
+/* The Settings menu is taller than a small phone: it scrolls, and its last row (Check for update, Close) stays pinned at the
+   bottom edge, so Close is always on screen. */
+#dlgMenu>.row:last-child{position:sticky;bottom:-20px;margin:8px -16px -20px;padding:8px 16px 20px;background:var(--paper);border-top:1px solid var(--line)}
 .btn.danger{background:var(--blaze);border-color:var(--blaze);color:var(--on-accent)}
 .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
 .opt input{width:22px;min-height:22px;height:22px;margin-top:2px;accent-color:var(--c)}
@@ -867,7 +940,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <!-- Map -->
   <div id="view-map">
     <div class="mapwrap" id="mapWrap">
-      <div id="map" aria-label="Map"></div>
+      <div id="map" role="region" aria-label="Map"></div>
       <div class="cross" aria-hidden="true"></div>
       <div class="maptag"><span id="mLayerName">USGS Topo</span><button type="button" class="rec" id="recChip" hidden aria-label="Recording. Open Track recording.">Recording</button>
         <!-- v7.8 nav -->
@@ -1197,24 +1270,41 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
 </dialog>
 
 <!-- v7.8 markers -->
+<dialog id="dlgMkDel" class="sheet" aria-labelledby="mdTitle">
+  <h2 id="mdTitle" tabindex="-1">Delete this marker?</h2>
+  <p id="mdText"></p>
+  <div class="row"><button type="button" class="btn danger full" id="mdAll">Delete for everyone</button></div>
+  <div class="row"><button type="button" class="btn ghost full" id="mdHere">Delete on this phone only</button></div>
+  <div class="row"><button type="button" class="btn ghost full" id="mdCancel">Cancel</button></div>
+</dialog>
 <dialog id="dlgMarker" class="sheet mk-sheet" aria-labelledby="mkTitle">
   <form id="mkForm" autocomplete="off">
     <div class="mk-body">
       <h2 id="mkTitle" tabindex="-1">Marker</h2>
       <label class="f">Name<input id="mkName" type="text" maxlength="60" enterkeyhint="done"></label>
+      <p class="hint mk-left" id="mkNameLeft" hidden></p>
+      <div class="mk-share" id="mkShareBox" hidden>
+        <label class="opt"><input type="checkbox" id="mkShare" role="switch" aria-describedby="mkShareHint"><span>Share with teammates</span></label>
+        <p class="hint" id="mkShareHint" hidden></p>
+        <p class="mk-shline" id="mkShareLine" hidden></p>
+        <button type="button" class="btn ghost" id="mkResend" hidden>Send again</button>
+        <p class="hint mk-sendhint" id="mkSendHint" hidden>Save your changes to send them.</p>
+      </div>
       <fieldset class="mk-kinds">
-        <legend>Kind</legend>
+        <legend>Kind <span class="mk-emo" id="mkEmoji" hidden></span></legend>
         <div class="mk-grid" id="mkPlaces"></div>
         <p class="mk-sub">Affiliation</p>
         <div class="mk-grid" id="mkAffil"></div>
       </fieldset>
       <label class="f">Note<textarea id="mkNote" maxlength="500" rows="2"></textarea></label>
       <p class="hint" id="mkLeft" hidden></p>
+      <p class="hint" id="mkSeenHint" hidden>A shared sighting carries the time it was seen, which uses part of the note.</p>
       <button type="button" class="mk-gridline" id="mkGrid" translate="no" aria-describedby="mkGridHint"></button><span class="vh" id="mkGridHint">Tap to copy the grid.</span>
       <p class="mk-rel" id="mkRel" hidden></p>
       <p class="mk-rel" id="mkAge" hidden></p>
     </div>
     <div class="mk-act">
+      <p class="mk-msg mk-notice" id="mkNotice" role="status" hidden></p>
       <button type="submit" class="btn" id="mkSave">Save</button>
       <button type="button" class="btn ghost" id="mkGo">Go to</button>
       <button type="button" class="btn ghost" id="mkMove">Move</button>
@@ -1293,6 +1383,49 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
   <div class="mk-act"><button type="button" class="btn ghost" id="lsClose">Close</button></div>
 </dialog>
 <!-- /v7.8 markers -->
+
+<!-- comms radio -->
+<dialog id="dlgRadio" class="sheet mk-sheet" aria-labelledby="rdTitle">
+  <div class="mk-body">
+    <h2 id="rdTitle" tabindex="-1">Radio</h2>
+    <p class="rd-status" id="rdStatus" role="status" hidden></p>
+    <p class="rd-line" id="rdChannel" hidden></p>
+    <div class="rd-info" id="rdInfo"></div>
+    <p class="rd-note" id="rdErr" role="status" hidden></p>
+    <p class="rd-note" id="rdProblem" hidden></p>
+    <p class="rd-note" id="rdWarn" hidden></p>
+    <p class="rd-note" id="rdPos" hidden></p>
+    <div id="rdTeamBox" hidden>
+      <h3 class="rd-h" id="rdTeamH"></h3>
+      <ul class="mk-list rd-team" id="rdTeam"></ul>
+    </div>
+    <p class="rd-line" id="rdDropped" hidden></p>
+    <button type="button" class="btn ghost rd-resend" id="rdResend" hidden>Send all my shared markers again</button>
+  </div>
+  <div class="mk-act">
+    <button type="button" class="btn" id="rdConnect">Connect a radio</button>
+    <button type="button" class="btn ghost" id="rdDisconnect" hidden>Disconnect</button>
+    <button type="button" class="btn ghost" id="rdClose">Close</button>
+  </div>
+</dialog>
+<!-- /comms radio -->
+
+<!-- comms teammates -->
+<dialog id="dlgMate" class="sheet mk-sheet" aria-labelledby="tmTitle">
+  <div class="mk-body">
+    <p class="tm-kind">Teammate</p>
+    <h2 id="tmTitle" tabindex="-1"></h2>
+    <p class="tm-grid" id="tmGrid" translate="no"></p>
+    <p class="tm-line" id="tmApprox" hidden>Approximate position</p>
+    <p class="tm-line" id="tmRel" hidden></p>
+    <p class="tm-line" id="tmAge"></p>
+  </div>
+  <div class="mk-act">
+    <button type="button" class="btn" id="tmGo">Go to</button>
+    <button type="button" class="btn ghost" id="tmClose">Close</button>
+  </div>
+</dialog>
+<!-- /comms teammates -->
 
 <!-- v7.8 tools -->
 <dialog id="dlgTools" class="sheet mk-sheet" aria-labelledby="tlTitle">
@@ -1450,6 +1583,10 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <p id="bkAsk" role="alert"></p>
     <div class="row"><button class="btn ghost" id="bkGo">Restore</button><button class="btn ghost" id="bkNo">Cancel</button></div>
   </div>
+  <!-- Radio link -->
+  <label class="opt"><input type="checkbox" id="meshOn" role="switch"><span>Radio link (testing)</span></label>
+  <p class="hint">Connects Field Kit to a Meshtastic radio over Bluetooth. Android only.</p>
+  <!-- /Radio link -->
   <h3>This phone</h3>
   <p class="hint" id="diag"></p>
   <div class="row"><button class="btn ghost" id="updBtn">Check for update</button><button class="btn ghost" id="menuClose">Close</button></div>
@@ -2092,6 +2229,454 @@ const WMM = (() => {
   return { name: 'WMM2025', epoch: EPOCH, validUntil: VALID_UNTIL, declination };
 })();
 
+/* ---------- MPB: the Meshtastic protobuf byte codec (just the messages Field Kit needs). Pure: no DOM, no FK. ----------
+   Field numbers and wire types are recorded in docs/content-review.md (Comms). Decoders never throw: bad bytes give null,
+   or { type: 'other' } from fromRadio. */
+const MPB = (() => {
+  const PORT = { TEXT: 1, POSITION: 3, NODEINFO: 4, WAYPOINT: 8 };
+  const BROADCAST = 0xFFFFFFFF;
+  const U = new TextEncoder(), D = new TextDecoder('utf-8');
+  const EMPTY = new Uint8Array(0);
+
+  /* ---- reader ---- */
+  /* Walks every field of a message and returns { fieldNumber: value } (the last occurrence wins, as in protobuf). Values:
+     varint -> its low 32 bits as an unsigned number (enough for every field used here, and a negative int32 sent as a
+     10-byte varint keeps its low 32 bits; signed fields apply |0), fixed32 -> unsigned number, length-delimited ->
+     Uint8Array view. Unknown fields are walked and skipped by wire type. `order`, if given, receives the field numbers in the order they appeared.
+     Throws on truncation or a length past the end. */
+  function parse(b, order) {
+    const res = {}, wts = {}, n = b.length;
+    let p = 0, hi = 0;
+    const varint = () => {
+      let lo = 0, h = 0;
+      for (let i = 0; i < 10; i++) {
+        if (p >= n) throw 0;
+        const c = b[p++];
+        if (i < 4) lo |= (c & 127) << (7 * i);
+        else if (i === 4) { lo |= (c & 15) << 28; h = (c & 112) >> 4; }   // bits 32..34
+        else if (i < 9) h |= (c & 127) << (7 * i - 32);                  // never read, only so hi===0 means "fits in 32 bits"
+        else h |= c & 1;
+        if (!(c & 128)) { hi = h; return lo >>> 0; }
+      }
+      throw 0;   // a varint longer than 10 bytes
+    };
+    const fixed32 = () => { if (p + 4 > n) throw 0; p += 4; return (b[p - 4] | b[p - 3] << 8 | b[p - 2] << 16 | b[p - 1] << 24) >>> 0; };
+    let depth = 0;   // open groups being skipped (deprecated wire types 3 and 4; never sent by Meshtastic, skipped leniently)
+    while (p < n) {
+      const key = varint(), num = key >>> 3, wt = key & 7;
+      let v;
+      if (wt === 0) v = varint();
+      else if (wt === 5) v = fixed32();
+      else if (wt === 2) {
+        const len = varint();
+        if (hi !== 0 || len > n - p) throw 0;
+        v = b.subarray(p, p + len); p += len;
+      } else if (wt === 1) { if (p + 8 > n) throw 0; p += 8; continue; }
+      else if (wt === 3) { depth++; continue; }
+      else if (wt === 4) { if (!depth) throw 0; depth--; continue; }
+      else throw 0;
+      if (!depth && num > 0) { res[num] = v; wts[num] = wt; if (order) order.push(num); }
+    }
+    if (depth) throw 0;
+    Object.defineProperty(res, 'wt', { value: wts });   // wire type of each field present, for the checked accessors
+    return res;
+  }
+  const safe = (f) => (b) => { try { return f(b); } catch (e) { return null; } };
+  /* Checked accessors: an absent field reads as its proto3 default, a field sent with the wrong wire type throws (so the
+     decoder returns null / 'other' instead of a wrong-typed value). V varint, F fixed32, L length-delimited. */
+  const chk = (f, k, wt) => { if (f[k] !== undefined && f.wt[k] !== wt) throw 0; return f[k]; };
+  const V = (f, k) => chk(f, k, 0) || 0, F = (f, k) => chk(f, k, 5) || 0;
+  const L = (f, k) => chk(f, k, 2);
+  const str = (f, k) => { const v = L(f, k); return v ? D.decode(v) : ''; };
+  const bytes = (f, k) => L(f, k) || EMPTY;
+  const sgn = v => (v | 0);   // int32 / sfixed32 from the unsigned low 32 bits
+  const deg = v => (v | 0) / 1e7;
+
+  /* ---- writer ---- */
+  /* A message is built as a plain array of numbers. Zero/absent scalars are left out (proto3), fields are written in
+     ascending number order, so output is byte-for-byte what a reference serializer produces. */
+  function wv(a, x) { x = Math.floor(x); while (x > 127) { a.push((x % 128) | 128); x = Math.floor(x / 128); } a.push(x); }
+  const key = (a, num, wt) => wv(a, num * 8 + wt);
+  function wVar(a, num, x) { if (x) { key(a, num, 0); wv(a, x < 0 ? x >>> 0 : x); } }
+  function wFix(a, num, x) { if (x) { key(a, num, 5); const v = x | 0; a.push(v & 255, (v >> 8) & 255, (v >> 16) & 255, (v >>> 24) & 255); } }
+  function wLen(a, num, bs) { if (bs && bs.length) { key(a, num, 2); wv(a, bs.length); for (let i = 0; i < bs.length; i++) a.push(bs[i]); } }
+  const wStr = (a, num, s) => wLen(a, num, U.encode(s || ''));
+  const wMsg = (a, num, m) => { key(a, num, 2); wv(a, m.length); for (let i = 0; i < m.length; i++) a.push(m[i]); };   // present even when empty
+  const done = a => Uint8Array.from(a);
+
+  const enc = {
+    wantConfig(nonce) { const a = []; wVar(a, 3, nonce); return done(a); },
+    heartbeat() { const a = []; wMsg(a, 7, []); return done(a); },
+    /* A whole ToRadio carrying one MeshPacket with a decoded Data. */
+    packet({ to, channel, id, portnum, payload, wantAck, hopLimit }) {
+      const data = []; wVar(data, 1, portnum); wLen(data, 2, payload);
+      const mp = []; wFix(mp, 2, to); wVar(mp, 3, channel); wMsg(mp, 4, data); wFix(mp, 6, id); wVar(mp, 9, hopLimit);
+      if (wantAck) { key(mp, 10, 0); mp.push(1); }
+      const a = []; wMsg(a, 1, mp); return done(a);
+    },
+    waypoint({ id, lat, lon, expire, lockedTo, name, description, icon }) {
+      const a = [];
+      wVar(a, 1, id); wFix(a, 2, Math.round(lat * 1e7)); wFix(a, 3, Math.round(lon * 1e7)); wVar(a, 4, expire); wVar(a, 5, lockedTo);
+      wStr(a, 6, name); wStr(a, 7, description); wFix(a, 8, icon);
+      return done(a);
+    },
+  };
+
+  /* ---- decoders ---- */
+  const NONE = parse(EMPTY);   // stands in for an absent nested message
+  const position = safe(b => {
+    const f = parse(b);
+    if (f[1] === undefined && f[2] === undefined) return null;   // no fix
+    return { lat: deg(F(f, 1)), lon: deg(F(f, 2)), alt: sgn(V(f, 3)), time: F(f, 4), precisionBits: V(f, 23) };
+  });
+  const user = safe(b => { const f = parse(b); return { longName: str(f, 2), shortName: str(f, 3) }; });
+  const waypoint = safe(b => {
+    const f = parse(b);
+    return { id: V(f, 1), lat: deg(F(f, 2)), lon: deg(F(f, 3)), expire: V(f, 4), lockedTo: V(f, 5), name: str(f, 6), description: str(f, 7), icon: F(f, 8) };
+  });
+
+  function packet(b) {
+    /* pki: a direct message encrypted to this radio's own key (field 17): it arrives with channel 0 but is not channel traffic. */
+    const f = parse(b), m = { type: 'packet', from: F(f, 1), to: F(f, 2), channel: V(f, 3), id: F(f, 6), rxTime: F(f, 7), portnum: null, payload: null,
+                              pki: !!V(f, 17) };
+    if (L(f, 5) !== undefined && L(f, 4) === undefined) return m;   // still encrypted
+    if (f[4]) { const d = parse(L(f, 4)); m.portnum = V(d, 1); m.payload = bytes(d, 2); }
+    return m;
+  }
+  function nodeInfo(b) {
+    const f = parse(b), us = f[2] ? user(L(f, 2)) : null, ps = f[3] ? position(L(f, 3)) : null;
+    if (f[2] && !us) throw 0;
+    return { type: 'nodeInfo', num: V(f, 1), longName: us ? us.longName : '', shortName: us ? us.shortName : '',
+             position: ps, lastHeard: F(f, 5), channel: V(f, 7), viaMqtt: !!V(f, 8), isIgnored: !!V(f, 11) };
+  }
+  function channel(b) {
+    const f = parse(b), s = f[2] ? parse(L(f, 2)) : NONE, ms = s[7] ? parse(L(s, 7)) : NONE, role = V(f, 3);
+    return { type: 'channel', index: sgn(V(f, 1)), role: role === 1 ? 'primary' : role === 2 ? 'secondary' : 'disabled',
+             name: str(s, 3), psk: bytes(s, 2), positionPrecision: V(ms, 1) };
+  }
+
+  /* FromRadio.config (5) is a oneof of Config members; only lora (6) is read: region (7, 0 = UNSET: the radio will not
+     transmit), hop_limit (8), tx_enabled (9; a radio's own default is true, so false means switched off). */
+  function config(b) {
+    const f = parse(b);
+    if (!f[6]) return { type: 'config', lora: null };
+    const lo = parse(L(f, 6));
+    return { type: 'config', lora: { region: V(lo, 7), hopLimit: V(lo, 8), txEnabled: !!V(lo, 9) } };
+  }
+
+  const fromRadio = (b) => {
+    try {
+      const order = [], f = parse(b, order);
+      let last = 0;   // the FromRadio payload is a oneof: the last member present wins
+      for (const k of order) if (k === 2 || k === 3 || k === 4 || k === 5 || k === 7 || k === 8 || k === 10) last = k;
+      switch (last) {
+        case 2: return packet(L(f, 2));
+        case 3: return { type: 'myInfo', myNodeNum: V(parse(L(f, 3)), 1) };
+        case 4: return nodeInfo(L(f, 4));
+        case 5: return config(L(f, 5));
+        case 7: return { type: 'configComplete', id: V(f, 7) };
+        case 8: V(f, 8); return { type: 'rebooted' };
+        case 10: return channel(L(f, 10));
+      }
+    } catch (e) { /* fall through */ }
+    return { type: 'other' };
+  };
+
+  return { PORT, BROADCAST, enc, dec: { fromRadio, position, user, waypoint } };
+})();
+
+/* ---------- MLINK: the Bluetooth link to a Meshtastic radio. No FK, no DOM; needs MPB. ----------
+   The Web Bluetooth object is passed in (MLINK.create({ bluetooth })), and nothing here touches navigator.bluetooth at load time.
+   Service and characteristic UUIDs are recorded in docs/content-review.md (Comms).
+   States: 'off' (reason: 'cancelled' | 'unsupported' | 'failed' | 'user'), 'connecting', 'syncing', 'on', 'lost'.
+   'on' is reported only after configComplete carrying our nonce, so every start-up message has already reached onMessage.
+   onMessage gets each decoded FromRadio (MPB.dec.fromRadio) except { type: 'other' }, which is read and dropped. */
+const MLINK = (() => {
+  const UUID = {
+    service: '6ba1b218-15a8-461f-9fa8-5dcae273eafd',
+    toradio: 'f75c76d2-129e-4dad-a1dd-7866124401e7',
+    fromradio: '2c55e69e-4993-11ed-b878-0242ac120002',
+    fromnum: 'ed9da18c-a800-4f66-a670-aa7547e34453',
+  };
+  /* OPEN_MS bounds connecting, finding the service and turning notifications on (Android may ask for the radio's PIN then,
+     and a person types it); SYNC_MS is the longest silence allowed while the radio's list downloads (a big node database
+     over Bluetooth takes longer than that in all, but a message arrives every fraction of a second). */
+  const OPEN_MS = 60000, SYNC_MS = 30000, BEAT_MS = 300000;
+  /* want_config_id 69420 and 69421 ask current firmware for the config only / the nodes only: never use them. */
+  const nonce = () => { let n; do n = 1 + Math.floor(Math.random() * 0xFFFFFFFE); while (n === 69420 || n === 69421); return n; };
+  const warn = e => { try { console.warn('Field Kit radio:', e && e.name); } catch (x) { /* no console */ } };
+
+  const supported = (bt = navigator.bluetooth) => !!(bt && typeof bt.requestDevice === 'function');
+
+  function create({ bluetooth = navigator.bluetooth, onMessage, onState } = {}) {
+    let st = 'off';
+    let device = null;      // the chosen radio, kept across connections so reconnect() needs no chooser
+    let S = null;           // the live connection (null when there is none); every async step checks it is still current
+    let inflight = null;    // the connect()/reconnect() promise in progress
+    const say = (fn, arg) => { try { if (fn) fn(arg); } catch (e) { console.error('MLINK callback failed', e); } };
+    const setState = (state, reason) => {
+      st = state;
+      say(onState, { state, name: device && device.name ? device.name : '', reason: state === 'off' ? reason : undefined });
+    };
+    const onGone = () => { if (S && S.device === device) closed(S); };
+
+    /* Drop the live connection quietly: stop timers and listeners, close GATT, resolve whoever waits. */
+    function teardown() {
+      const s = S;
+      if (!s) return;
+      S = null;
+      clearTimeout(s.syncTimer); clearInterval(s.beatTimer);
+      if (s.num) s.num.removeEventListener('characteristicvaluechanged', s.onNum);
+      try { if (s.device.gatt && s.device.gatt.connected) s.device.gatt.disconnect(); } catch (e) { /* already gone */ }
+      if (s.done) { const d = s.done; s.done = null; d(false); }
+    }
+    function fail(s, reason) {
+      if (S !== s) return;
+      teardown();
+      setState('off', reason);
+    }
+    function closed(s) {   // GATT went away under us
+      if (S !== s) return;
+      if (s.wasOn) { teardown(); setState('lost'); } else fail(s, 'failed');
+    }
+
+    /* Every GATT operation (a read, a write, turning notifications on) goes through one queue, one at a time: Android can
+       reject an operation started while another is running. One that fails is tried once more before it counts as failed. */
+    function gatt(s, fn) {
+      const run = async () => {
+        if (S !== s || !s.device.gatt.connected) throw new DOMException('Not connected', 'NetworkError');
+        try { return await fn(); } catch (e) {
+          if (S !== s || !s.device.gatt.connected) throw e;
+          return await fn();
+        }
+      };
+      const p = s.queue.then(run);
+      s.queue = p.catch(() => {});
+      return p;
+    }
+    /* A write that cannot happen (not connected, GATT error twice) resolves false. */
+    function write(s, bytes) {
+      const data = Uint8Array.from(bytes);
+      return gatt(s, () => s.to.writeValueWithResponse ? s.to.writeValueWithResponse(data) : s.to.writeValue(data))
+        .then(() => true, e => { if (S === s) warn(e); return false; });
+    }
+    const arm = (s, ms) => { clearTimeout(s.syncTimer); s.syncTimer = setTimeout(() => fail(s, 'failed'), ms); };
+
+    function handle(s, m) {
+      if (m.type === 'other') return;
+      say(onMessage, m);
+      if (S !== s) return;
+      if (m.type === 'configComplete' && m.id === s.nonce && st === 'syncing') {
+        clearTimeout(s.syncTimer);
+        s.wasOn = true;
+        setState('on');
+        s.beatTimer = setInterval(() => { write(s, MPB.enc.heartbeat()); }, BEAT_MS);
+        if (s.done) { const d = s.done; s.done = null; d(true); }
+      } else if (m.type === 'rebooted') startSync(s);
+    }
+
+    /* Read fromradio until an empty read. A notification during a drain only sets `again`. */
+    async function drain(s) {
+      if (s.draining) { s.again = true; return; }
+      s.draining = true;
+      try {
+        do {
+          s.again = false;
+          for (;;) {
+            const v = await gatt(s, () => s.from.readValue());
+            if (S !== s) return;
+            if (!v.byteLength) break;   // empty: the radio's queue is drained
+            if (st === 'syncing') arm(s, SYNC_MS);   // the download is moving: the allowed silence starts again
+            const bytes = new Uint8Array(v.byteLength);   // a fresh buffer per message: the decoder returns views onto it
+            bytes.set(new Uint8Array(v.buffer, v.byteOffset, v.byteLength));
+            handle(s, MPB.dec.fromRadio(bytes));
+            if (S !== s) return;
+          }
+        } while (s.again);
+      } catch (e) {
+        if (S === s) { warn(e); if (s.wasOn) { teardown(); setState('lost'); } else fail(s, 'failed'); }
+      } finally { s.draining = false; }
+    }
+
+    /* Ask the radio for its whole state and read it (at connect, and again after a reboot). */
+    function startSync(s) {
+      s.nonce = nonce();
+      clearInterval(s.beatTimer);
+      arm(s, SYNC_MS);
+      setState('syncing');
+      write(s, MPB.enc.wantConfig(s.nonce)).then(ok => { if (!ok) closed(s); else drain(s); });
+    }
+
+    function open(choose) {
+      teardown();
+      setState('connecting');
+      const s = S = { device: null, to: null, from: null, num: null, queue: Promise.resolve(), draining: false, again: false,
+                      nonce: 0, lastNum: null, wasOn: false, syncTimer: 0, beatTimer: 0, done: null, onNum: null };
+      const result = new Promise(res => { s.done = res; });   // teardown() resolves it false; reaching 'on' resolves it true
+      const go = async () => {
+        let stage = 'chooser';
+        try {
+          if (choose) {
+            const d = await bluetooth.requestDevice({ filters: [{ services: [UUID.service] }] });
+            if (S !== s) return;   // disconnect() while the chooser was open: a late pick does nothing
+            if (device && device !== d) device.removeEventListener('gattserverdisconnected', onGone);
+            device = d;
+            device.removeEventListener('gattserverdisconnected', onGone);
+            device.addEventListener('gattserverdisconnected', onGone);
+          }
+          s.device = device;
+          stage = 'gatt';
+          arm(s, OPEN_MS);   // the chooser is the user's to dismiss; every step after it is bounded
+          const server = await device.gatt.connect();
+          if (S !== s) { if (!S) { try { server.disconnect(); } catch (e) { /* already gone */ } } return; }   // a newer attempt shares this GATT object: leave it
+          const service = await server.getPrimaryService(UUID.service);
+          s.to = await service.getCharacteristic(UUID.toradio);
+          s.from = await service.getCharacteristic(UUID.fromradio);
+          s.num = await service.getCharacteristic(UUID.fromnum);
+          if (S !== s) return;
+          s.onNum = (ev) => {
+            const v = ev.target.value;
+            const n = v && v.byteLength >= 4 ? v.getUint32(0, true) : null;
+            if (n !== null) {
+              const down = s.lastNum !== null && n < s.lastNum;
+              s.lastNum = n;
+              if (down) { startSync(s); return; }   // the radio's counter restarted: it rebooted
+            }
+            drain(s);
+          };
+          s.num.addEventListener('characteristicvaluechanged', s.onNum);
+          await gatt(s, () => s.num.startNotifications());
+          if (S !== s) return;
+          startSync(s);
+        } catch (e) {
+          if (S === s) {
+            warn(e);
+            const cancelled = stage === 'chooser' && e && e.name === 'NotFoundError';
+            teardown();
+            setState('off', cancelled ? 'cancelled' : 'failed');
+          }
+        }
+      };
+      go();
+      return result;
+    }
+
+    function begin(choose) {
+      if (inflight) return inflight;
+      if (st === 'on' || st === 'syncing') return Promise.resolve(true);
+      if (choose && !supported(bluetooth)) { setState('off', 'unsupported'); return Promise.resolve(false); }
+      if (!choose && !device) return Promise.resolve(false);
+      const p = open(choose).then(ok => { if (inflight === p) inflight = null; return ok; });
+      inflight = p;
+      return p;
+    }
+
+    return {
+      connect: () => begin(true),
+      reconnect: () => begin(false),
+      disconnect() {
+        inflight = null;
+        const had = st !== 'off';
+        teardown();
+        if (had) setState('off', 'user');
+      },
+      send(bytes) { return S && st === 'on' ? write(S, bytes) : Promise.resolve(false); },
+      state: () => st,
+    };
+  }
+
+  return { supported, create };
+})();
+
+/* ---------- MMK: Field Kit marker <-> Meshtastic waypoint (pure: no DOM, no FK) ----------
+   A waypoint has an id, a position, an emoji icon (a code point), a name (30 bytes on the wire: 29 usable here) and a
+   description (100 bytes: 99 here). The icon carries the marker's kind. An affiliation marker (Friend, Hostile, Neutral,
+   Unknown) also carries when it was seen, as a prefix of the description: "Seen 22 Nov 14:32. ", written and read in this
+   phone's local time. A waypoint from another app has no such prefix; it is taken as seen when it arrived. */
+const MMK = (() => {
+  const ICON = { point: 0x1F4CD, camp: 0x26FA, vehicle: 0x1F699, water: 0x1F4A7, cache: 0x1F4E6, hazard: 0x26A0, rally: 0x1F6A9,
+    observe: 0x1F52D, medical: 0x1F3E5, friend: 0x1F7E6, hostile: 0x2666, neutral: 0x1F7E9, unknown: 0x2753 };
+  const AFFIL = ['friend', 'hostile', 'neutral', 'unknown'];
+  const NAME_MAX = 29, NOTE_MAX = 99, DAY = 864e5;
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const BY_ICON = new Map(Object.entries(ICON).map(([k, v]) => [v, k]));
+  const kindFor = icon => BY_ICON.get(icon) || null;
+  const isAffil = kind => AFFIL.includes(kind);
+
+  /* UTF-8 length of a string, counted by hand (a lone surrogate is 3 bytes, as the encoder's replacement character). */
+  function cpBytes(c) { return c < 0x80 ? 1 : c < 0x800 ? 2 : c < 0x10000 ? 3 : 4; }
+  const bytes = s => { let n = 0; for (const ch of String(s == null ? '' : s)) n += cpBytes(ch.codePointAt(0)); return n; };
+  /* The longest start of s that fits in max bytes, never cutting a character in half. */
+  function clip(s, max) {
+    s = String(s == null ? '' : s);
+    let n = 0, out = '';
+    for (const ch of s) { const b = cpBytes(ch.codePointAt(0)); if (n + b > max) break; n += b; out += ch; }
+    return out;
+  }
+
+  const p2 = n => String(n).padStart(2, '0');
+  const seen = t => { const d = new Date(t); return `Seen ${d.getDate()} ${MON[d.getMonth()]} ${p2(d.getHours())}:${p2(d.getMinutes())}. `; };
+  /* The prefix is up to 19 bytes ("Seen 22 Nov 14:32. "; a day under 10 is one byte shorter). The room for a note keeps
+     the longest, so the answer does not depend on the day. */
+  const PREFIX_MAX = 19;
+  const noteRoom = kind => isAffil(kind) ? NOTE_MAX - PREFIX_MAX : NOTE_MAX;
+  const fits = m => {
+    const name = bytes(m && m.name) <= NAME_MAX, note = bytes(m && m.note) <= noteRoom(m && m.kind);
+    return { ok: name && note, name, note };
+  };
+
+  /* A marker as the waypoint to send. Too long a name or note is cut at a character boundary (fits() says beforehand).
+     keep: what an earlier waypoint with this id had. Its expiry is kept, and so is its icon when this marker is a plain Point
+     and that icon is one this app has no kind for (another app's emoji), so a resend does not change it. */
+  function toWaypoint(m, wid, keep) {
+    keep = keep || {};
+    const kind = ICON[m.kind] ? m.kind : 'point';
+    let icon = ICON[kind];
+    if (kind === 'point' && Number.isInteger(keep.icon) && keep.icon > 0 && !kindFor(keep.icon)) icon = keep.icon;
+    const stamp = isAffil(kind) && m.t > 0 ? seen(m.t) : '';
+    return { id: wid, lat: m.lat, lon: m.lon, expire: keep.expire > 0 ? keep.expire : 0, lockedTo: 0,
+      name: clip(m.name, NAME_MAX), description: stamp + clip(m.note, noteRoom(kind)), icon };
+  }
+
+  /* "Seen 22 Nov 14:32. " at the start of a description: the time as ms, the text after it, or null. The year is the latest
+     one that puts the time at or before now + 24 h (a little ahead is a phone clock a little off; further ahead is last year). */
+  const PREFIX = /^Seen (\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{2}):(\d{2})\. /;
+  function parseSeen(text, now) {
+    const m = PREFIX.exec(text);
+    if (!m) return null;
+    const day = +m[1], mon = MON.indexOf(m[2]), hh = +m[3], mm = +m[4];
+    if (day < 1 || day > 31 || hh > 23 || mm > 59) return null;
+    const limit = now + DAY;
+    for (let y = new Date(limit).getFullYear(), n = 0; n < 8; y--, n++) {
+      const d = new Date(y, mon, day, hh, mm);
+      if (d.getMonth() !== mon || d.getDate() !== day) continue;   // 29 Feb in a year without one
+      if (d.getTime() <= limit) return { t: d.getTime(), rest: text.slice(m[0].length) };
+    }
+    return null;
+  }
+
+  const okPos = (lat, lon) => typeof lat === 'number' && typeof lon === 'number' && Number.isFinite(lat) && Number.isFinite(lon) &&
+    Math.abs(lat) <= 90 && Math.abs(lon) <= 180 && !(lat === 0 && lon === 0);   // 0, 0 is a radio with no position
+  /* A received waypoint as a marker's fields, or null when its position is no place. The text is returned as it came (it is
+     another person's text; whoever draws it escapes it). A foreign icon gives a Point that still reports the icon.
+     t and rx: for an affiliation marker with the prefix, t is the time in it and rx is false; otherwise t is `now` and rx is
+     true (received just now). A Point or other place never has a prefix, so it is always rx. */
+  function fromWaypoint(wp, now) {
+    if (!wp || !okPos(wp.lat, wp.lon)) return null;
+    const icon = Number.isInteger(wp.icon) && wp.icon > 0 ? wp.icon : 0;
+    const kind = kindFor(icon) || 'point';
+    const name = String(wp.name == null ? '' : wp.name).trim() || 'Marker';
+    let note = String(wp.description == null ? '' : wp.description), t = now, rx = true;
+    if (isAffil(kind)) {
+      const s = parseSeen(note, now);
+      if (s) { t = s.t; rx = false; note = s.rest; }
+    }
+    return { name, note, kind, lat: wp.lat, lon: wp.lon, t, rx, icon, expire: Number.isFinite(wp.expire) && wp.expire > 0 ? wp.expire : 0 };
+  }
+
+  return { ICON, kindFor, bytes, NAME_MAX, NOTE_MAX, seen, noteRoom, fits, toWaypoint, fromWaypoint };
+})();
+
 /* ---------- Ballistics: point-mass solver, G1/G7 standard drag ---------- */
 const BAL = (() => {
   // [Mach, Cd] standard projectile drag tables
@@ -2423,7 +3008,7 @@ const BALS = (() => {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
-  const APP_VERSION = '7.10';
+  const APP_VERSION = '7.11';
   /* What a grid that GEO.parseAny cannot read gets: the Position Add row and the map's Go to grid both show it. */
   const GRID_HELP = 'Couldn’t read that location. Try a grid like 18T VN 12345 67890, or 43.0000, -76.0000, or 43°00′00″N 76°00′00″W.';
   const BLOCKED_MSG = 'Location is blocked. Allow location for this site in Chrome’s site settings, then reload.';
@@ -3018,7 +3603,7 @@ const BALS = (() => {
   /* Keys that stay on this phone: never written to a backup and never touched by a restore. A half-finished
      protocol must not reappear on another phone, a stale position must not pass as current, and a backup handed
      to someone else must not skip their advanced-procedures warning. */
-  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck'];
+  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck', 'fk.meshTeam', 'fk.meshMe'];
   const backedUp = k => k.startsWith('fk.') && !SESSION_ONLY.includes(k);
   const phoneKeys = () => { const ks = []; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (backedUp(k)) ks.push(k); } return ks; };
   const hasPatients = data => { try { const v = JSON.parse(data['fk.patients']); return Array.isArray(v) && v.length > 0; } catch { return false; } };
@@ -3085,6 +3670,15 @@ const BALS = (() => {
     if (b.version !== undefined && newerVersion(b.version, APP_VERSION)) { msg.textContent = 'This backup is from a newer version of Field Kit. Update the app first.'; return; }
     const file = {};
     Object.entries(d).forEach(([k, v]) => { if (backedUp(k)) file[k] = v; });
+    /* A shared marker that had not gone out when the backup was made is not sent by itself after the restore (it may be long
+       out of date): its "not sent yet" is cleared, and Send again is there for it. */
+    if (file['fk.wps']) {
+      try {
+        const w = JSON.parse(file['fk.wps']);
+        const was = x => !!x && typeof x === 'object' && !!x.net && typeof x.net === 'object' && x.net.pending === true;
+        if (Array.isArray(w) && w.some(was)) file['fk.wps'] = JSON.stringify(w.map(x => was(x) ? { ...x, net: { ...x.net, pending: false } } : x));
+      } catch { /* not JSON: tac-data's own checks deal with it after the reload */ }
+    }
     if (!Object.keys(file).length) { msg.textContent = 'That backup is empty, so nothing was restored.'; return; }
     const when = new Date(b.saved);
     pendingRestore = file;
@@ -4151,27 +4745,57 @@ const BALS = (() => {
   const TYPES = { route: { min: 2, name: 'Route' }, area: { min: 3, name: 'Area' }, ring: { min: 1, name: 'Ring' } };
 
   /* ---------- Markers ---------- */
-  const cleanMarker = w => ({
-    id: w.id, name: String(w.name ?? 'Marker').slice(0, MAX_NAME), lat: w.lat, lon: w.lon, alt: fin(w.alt) ? w.alt : null, t: fin(w.t) ? w.t : 0,
-    kind: kindOk(w.kind) ? w.kind : 'point', note: typeof w.note === 'string' ? w.note.slice(0, MAX_NOTE) : ''
-  });
+  /* A shared marker carries net, its record on the radio mesh (src/tac-share.js): wid (the waypoint number, 1..0xFFFFFFFF),
+     from (the maker's radio number; 0 = this phone, before any radio was known), by (the maker's name), t (last sent or
+     received, ms), chBy and chT (who changed it last from the mesh, and when), icon (another app's emoji, kept only on a
+     Point; 0 otherwise), expire (epoch SECONDS as on the wire; 0 never), pending (to send on the next connection), rx (t is
+     when it arrived, not when it was marked), mine (this phone chose to share it; a record without it counts as mine only
+     when from is 0, which only this phone's unsent share can have). Kept only when every field has the right type; otherwise the marker is
+     private. Markers saved before the radio link have no net, and a marker with no net is never sent. */
+  const NET_STR = 40;
+  const u32 = v => Number.isInteger(v) && v >= 0 && v <= 0xFFFFFFFF;
+  function cleanNet(n, kind) {
+    if (!n || typeof n !== 'object' || Array.isArray(n)) return null;
+    const { wid, from, by, t, chBy, chT, icon, expire, pending, rx } = n;
+    const mine = n.mine === undefined ? from === 0 : n.mine;
+    if (!(u32(wid) && wid >= 1) || !u32(from) || typeof by !== 'string' || !fin(t) || typeof chBy !== 'string' || !fin(chT) ||
+        !u32(icon) || !u32(expire) || typeof pending !== 'boolean' || typeof rx !== 'boolean' || typeof mine !== 'boolean') return null;
+    return { wid, from, by: by.slice(0, NET_STR), t, chBy: chBy.slice(0, NET_STR), chT,
+      icon: kind === 'point' && !MMK.kindFor(icon) ? icon : 0, expire, pending, rx, mine };
+  }
+  const cleanMarker = w => {
+    const kind = kindOk(w.kind) ? w.kind : 'point';
+    const m = {
+      id: w.id, name: String(w.name ?? 'Marker').slice(0, MAX_NAME), lat: w.lat, lon: w.lon, alt: fin(w.alt) ? w.alt : null, t: fin(w.t) ? w.t : 0,
+      kind, note: typeof w.note === 'string' ? w.note.slice(0, MAX_NOTE) : ''
+    };
+    const net = cleanNet(w.net, kind);
+    if (net) m.net = net;
+    return m;
+  };
   /* Keep the first record of any repeated id. */
   const firsts = arr => { const seen = new Set(); return arr.filter(x => !seen.has(x.id) && seen.add(x.id)); };
   let wps = firsts(list('wps', w => okId(w.id) && okLatLon(w.lat, w.lon))).map(cleanMarker);
-  const saveWps = () => { const ok = store.set('wps', wps); emit('wps'); return ok; };
+  { const wids = new Set(); wps.forEach(w => { if (w.net && (wids.has(w.net.wid) || !wids.add(w.net.wid))) delete w.net; }); }   // a repeated wid: the first keeps it
+  /* Inside batch() a change is only marked: the batch writes once and emits 'wps' once at its end. */
+  let batching = 0, dirty = false;
+  const saveWps = () => {
+    if (batching) { dirty = true; return true; }
+    const ok = store.set('wps', wps); emit('wps'); return ok;
+  };
   /* A new id that no marker or shape holds, however many are added in the same millisecond. */
   let seq = 0;
   const newId = prefix => {
-    const used = new Set(wps.map(w => w.id).concat(shapes.map(s => s.id)));
+    const used = id => wps.some(w => w.id === id) || shapes.some(s => s.id === id);   // no Set per call: a burst adds thousands
     let id;
-    do id = prefix + Date.now().toString(36) + (seq++).toString(36); while (used.has(id));
+    do id = prefix + Date.now().toString(36) + (seq++).toString(36); while (used(id));
     return id;
   };
 
   /* Returns the marker, or null if it couldn't be saved (it stays on screen until the app closes). */
   function addMarker(o) {
     if (!o || !okLatLon(o.lat, o.lon)) return null;
-    const m = cleanMarker({ ...o, id: newId('m'), name: String(o.name || '').trim() || `WP ${wps.length + 1}`, t: Date.now() });
+    const m = cleanMarker({ ...o, net: null, id: newId('m'), name: String(o.name || '').trim() || `WP ${wps.length + 1}`, t: Date.now() });
     wps.push(m);
     const ok = saveWps();
     if (!ok) { toast(FULL_MSG); return null; }
@@ -4187,7 +4811,7 @@ const BALS = (() => {
     const added = [];
     (Array.isArray(arr) ? arr : []).forEach(o => {
       if (!o || !okLatLon(o.lat, o.lon)) return;
-      const m = cleanMarker({ ...o, id: newId('m'), name: String(o.name || '').trim() || `WP ${wps.length + 1}`, t: okTime(o.t) ? o.t : Date.now() });
+      const m = cleanMarker({ ...o, net: null, id: newId('m'), name: String(o.name || '').trim() || `WP ${wps.length + 1}`, t: okTime(o.t) ? o.t : Date.now() });
       wps.push(m); added.push(m);
     });
     if (!added.length) return { added, ok: true };
@@ -4198,7 +4822,7 @@ const BALS = (() => {
   /* Only these fields can change; a bad value refuses the whole patch. */
   const PATCH = {
     name: v => typeof v === 'string' && v.trim() !== '', lat: v => fin(v) && Math.abs(v) <= 90, lon: v => fin(v) && Math.abs(v) <= 180,
-    alt: v => v === null || fin(v), kind: kindOk, note: v => typeof v === 'string'
+    alt: v => v === null || fin(v), kind: kindOk, note: v => typeof v === 'string', t: fin
   };
   const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   function patchOk(patch) {
@@ -4218,6 +4842,53 @@ const BALS = (() => {
     wps = wps.filter(w => w.id !== id);
     fixTarget();
     saveWps();
+  }
+  const widHeld = (wid, exceptId) => wps.some(w => w.net && w.net.wid === wid && w.id !== exceptId);
+  /* Set (or with null, clear) a marker's shared record. False when there is no such marker, the record is malformed, another
+     marker holds its wid, or storage refused; then the marker is left exactly as it was (a record that is not saved must not
+     be sent later). */
+  function setNet(id, n) {
+    const i = wps.findIndex(w => w.id === id);
+    if (i < 0) return false;
+    let next;
+    if (n === null) { next = { ...wps[i] }; delete next.net; }
+    else {
+      const c = cleanNet(n, wps[i].kind);
+      if (!c || widHeld(c.wid, id)) return false;
+      next = { ...wps[i], net: c };
+    }
+    const prev = wps[i];
+    wps[i] = next;
+    const ok = saveWps();
+    if (!ok) { wps[i] = prev; toast(FULL_MSG); }
+    return ok;
+  }
+  /* A marker that came from the mesh: { name, lat, lon, kind, note, t, net }. Name and note are cut to this app's limits
+     (they are another person's text: whoever draws them escapes them). Returns the marker, or null (bad place, malformed or
+     already held wid, storage refused). */
+  function addShared(o) {
+    if (!o || !okLatLon(o.lat, o.lon)) return null;
+    const kind = kindOk(o.kind) ? o.kind : 'point', net = cleanNet(o.net, kind);
+    if (!net || widHeld(net.wid)) return null;
+    const m = cleanMarker({ id: newId('m'), name: String(o.name ?? '').trim() || 'Marker', lat: o.lat, lon: o.lon, alt: null,
+      t: fin(o.t) ? o.t : Date.now(), kind, note: o.note, net });
+    wps.push(m);
+    const ok = saveWps();
+    if (!ok) { toast(FULL_MSG); return null; }
+    return m;
+  }
+  /* Many marker changes (addShared, updateMarker, removeMarker, setNet) as one: fn runs them, then one storage write and one
+     'wps' event, only if something changed. Returns what fn returns. */
+  function batch(fn) {
+    batching++;
+    let r;
+    try { r = fn(); } finally { batching--; }
+    if (!batching && dirty) {
+      dirty = false;
+      fixTarget();
+      if (!saveWps()) toast(FULL_MSG);
+    }
+    return r;
   }
 
   /* ---------- Shapes ---------- */
@@ -4339,12 +5010,560 @@ const BALS = (() => {
   FK.tac = {
     KINDS, MAX_PTS, MAX_SHAPES,
     MAX_NAME, MAX_NOTE,
-    markers: () => wps.slice(), addMarker, addMarkers, updateMarker, removeMarker,
+    markers: () => wps.slice(), addMarker, addMarkers, updateMarker, removeMarker, setNet, addShared, batch,
     shapes: () => shapes.slice(), addShape, addShapes, updateShape, removeShape,
     target: () => target && { ...target }, setTarget, targetPoint,
     unit: () => unit, setUnit
   };
   emit('wps');   // app.js loads first and had nothing to draw: draw the Position count now
+})();
+
+/* ---------- FK.mesh: app state for the radio link (Meshtastic over Bluetooth) ----------
+   The Bluetooth link (MLINK) is built only when the Settings switch is on and the user connects, so with the switch off nothing
+   here reads navigator.bluetooth. This module decides what the channel is (private, public, unknown), keeps teammates from the
+   radio's list and live packets, and sends a marker to the team. It holds no channel key: the key is looked at once to reach a
+   verdict and dropped. Storage: meshOn (the switch), meshMe (the last known number of this phone's radio), meshTeam (teammates;
+   a session-only key, never in a backup). Bus events: 'mesh', 'team', 'meshWaypoint' { wp, from, name }. */
+(() => {
+  const { store, fin, okLatLon, emit, on } = FK;
+  const MAX_TEAM = 100, MAX_NAME = 40;
+
+  let enabled = store.get('meshOn', false) === true;
+  let myNum = (n => Number.isInteger(n) && n > 0 && n <= 0xFFFFFFFF ? n : null)(store.get('meshMe', null));
+  let myName = '';
+  let link = null;                                   // MLINK.create(...) result, made on the first connect()
+  let st = { state: 'off', name: '', reason: undefined };
+  let channel = 'unknown', positions = 'unknown';
+  let lora = null;                                   // { region, hopLimit, txEnabled } from the radio's Config.lora, this download
+
+  /* ---- teammates ---- */
+  const cleanName = s => typeof s === 'string' ? s.slice(0, MAX_NAME) : '';
+  const cleanTeam = v => (Array.isArray(v) ? v : []).filter(x => x && Number.isInteger(x.num) && x.num > 0 && x.num <= 0xFFFFFFFF).slice(0, MAX_TEAM).map(x => ({
+    num: x.num, long: cleanName(x.long), short: cleanName(x.short),
+    lat: okLatLon(x.lat, x.lon) ? x.lat : null, lon: okLatLon(x.lat, x.lon) ? x.lon : null,
+    t: fin(x.t) && x.t > 0 ? x.t : 0, heard: fin(x.heard) && x.heard > 0 ? x.heard : 0,
+    ph: fin(x.ph) && x.ph > 0 ? x.ph : 0, approx: x.approx === true   // ph: when the stored position was heard
+  }));
+  let team = cleanTeam(store.get('meshTeam', []));
+  const saveTeam = () => { store.set('meshTeam', team); emit('team'); };
+
+  const radioName = num => 'Radio ' + (num & 0xFFFF).toString(16).padStart(4, '0');
+  const nameOf = num => {
+    const m = team.find(x => x.num === num);
+    const n = m ? (m.long || m.short) : num === myNum ? myName : '';
+    return n || radioName(num);
+  };
+
+  const goodPos = p => !!p && okLatLon(p.lat, p.lon) && !(p.lat === 0 && p.lon === 0);
+  /* A radio time (seconds) as ms, or 0 when there is none or it is more than 2 minutes ahead of this phone's clock (a radio
+     clock that far off says nothing true about when). */
+  const SKEW_MS = 2 * 60000;
+  const radioTime = s => { const t = fin(s) && s > 0 ? s * 1000 : 0; return t > Date.now() + SKEW_MS ? 0 : t; };
+
+  /* Add or update one teammate; `patch` may hold long, short, pos ({ lat, lon, time, precisionBits }), heard, and live (the
+     position came in a live packet: with no time of its own it takes the time it was heard; from the radio's node database
+     it stays "time unknown"). A stored position is never replaced by an older one; when either has no time, the one heard
+     later wins. Saves and emits when it changed. */
+  function touch(num, patch) {
+    if (!Number.isInteger(num) || num <= 0 || num === myNum || num === 0xFFFFFFFF) return;
+    let m = team.find(x => x.num === num);
+    const before = m ? JSON.stringify(m) : '';
+    if (!m) { m = { num, long: '', short: '', lat: null, lon: null, t: 0, heard: 0, ph: 0, approx: false }; team.push(m); }
+    if (patch.long) m.long = cleanName(patch.long);
+    if (patch.short) m.short = cleanName(patch.short);
+    if (goodPos(patch.pos)) {
+      const heard = fin(patch.heard) && patch.heard > 0 ? patch.heard : 0;
+      const t = radioTime(patch.pos.time) || (patch.live ? heard : 0);
+      const newer = m.lat === null || (t && m.t ? t >= m.t : heard >= m.ph);
+      if (newer) {
+        const bits = patch.pos.precisionBits;
+        m.lat = patch.pos.lat; m.lon = patch.pos.lon; m.t = t; m.ph = heard; m.approx = bits > 0 && bits < 32;
+      }
+    }
+    if (patch.heard > m.heard) m.heard = patch.heard;
+    if (team.length > MAX_TEAM) {   // least recently heard goes first
+      let drop = team[0];
+      for (const x of team) if (x.heard < drop.heard) drop = x;
+      team = team.filter(x => x !== drop);
+    }
+    if (JSON.stringify(m) !== before) saveTeam();
+  }
+
+  /* ---- the channel verdict ---- */
+  function setVerdict(c, p) {
+    if (c === channel && p === positions) return;
+    channel = c; positions = p;
+    emit('mesh');
+  }
+  /* The published default key (meshtastic.org; channel.proto; docs/content-review.md). A one-byte key picks it or a variant
+     of it, and so does a 16-byte key whose first 15 bytes are its own (the firmware counts those as public); a key of all
+     zeros encrypts nothing. Not a secret. */
+  const DEFAULT_KEY = [0xd4, 0xf1, 0xbb, 0x3a, 0x20, 0x29, 0x07, 0x59, 0xf0, 0xbc, 0xff, 0xab, 0xcf, 0x4e, 0x69, 0x01];
+  function keyVerdict(psk) {
+    const n = psk ? psk.length : 0;
+    if (n <= 1) return 'public';
+    if (Array.prototype.every.call(psk, b => b === 0)) return 'public';
+    if (n === 16 && DEFAULT_KEY.slice(0, 15).every((b, i) => psk[i] === b)) return 'public';
+    return n === 16 || n === 32 ? 'private' : 'unknown';
+  }
+  function verdict(m) {
+    if (m.role !== 'primary') return;                // only the primary channel is what a marker is sent on
+    if (m.index !== 0) { setVerdict('unknown', 'unknown'); return; }   // sends and filters use index 0: anything else is not understood
+    setVerdict(keyVerdict(m.psk), m.positionPrecision === 32 ? 'precise' : m.positionPrecision === 0 ? 'off' : 'approx');
+  }
+
+  /* ---- messages and link state from the radio ---- */
+  /* The start-up messages may come in any order, so until the primary channel's verdict is known, nothing from the mesh is shown
+     or emitted: teammate updates and waypoint packets wait here (200 at most, oldest dropped). A private verdict applies them in
+     order; a public verdict, the end of the download with no verdict, or a new download discards them. */
+  const MAX_HELD = 200;
+  let held = [];
+  /* A direct message (pki) is never channel traffic, though it arrives as channel 0; a waypoint counts only when it was sent
+     to everyone. A position addressed to this radio is still a teammate's (radios answer a position request directly). */
+  const isMesh = m => (m.type === 'nodeInfo' && !(m.num && m.num === myNum)) ||
+    (m.type === 'packet' && m.channel === 0 && !m.pki &&
+      (m.portnum === MPB.PORT.POSITION || m.portnum === MPB.PORT.NODEINFO || (m.portnum === MPB.PORT.WAYPOINT && m.to === MPB.BROADCAST)));
+  /* Nodes the owner ignores, and nodes seen only through an internet bridge (MQTT), are never teammates. */
+  const notMate = num => {
+    const was = team.length;
+    team = team.filter(x => x.num !== num);
+    if (team.length !== was) saveTeam();
+  };
+  const blocked = new Set();   // numbers flagged that way in this session: their live packets do not bring them back
+
+  /* now: when the phone got the message. A live packet was heard at its rx_time when the radio gave a plausible one. */
+  function apply(m, now) {
+    if (m.type === 'nodeInfo') {
+      if (m.viaMqtt || m.isIgnored) { blocked.add(m.num); notMate(m.num); return; }
+      blocked.delete(m.num);
+      if (m.channel === 0) touch(m.num, { long: m.longName, short: m.shortName, pos: m.position, heard: radioTime(m.lastHeard) });
+      return;
+    }
+    if (blocked.has(m.from)) return;
+    const heard = radioTime(m.rxTime) || now;
+    if (m.portnum === MPB.PORT.POSITION && m.payload) touch(m.from, { pos: MPB.dec.position(m.payload), heard, live: true });
+    else if (m.portnum === MPB.PORT.NODEINFO && m.payload) {
+      const u = MPB.dec.user(m.payload);
+      if (u) touch(m.from, { long: u.longName, short: u.shortName, heard });
+    } else if (m.portnum === MPB.PORT.WAYPOINT && m.payload) {
+      const wp = MPB.dec.waypoint(m.payload);
+      if (wp) emit('meshWaypoint', { wp, from: m.from, name: nameOf(m.from) });
+    }
+  }
+  function onMessage(m) {
+    if (!enabled || !m) return;
+    if (m.type === 'myInfo') {
+      myNum = m.myNodeNum || null;
+      store.set('meshMe', myNum);
+      if (myNum && team.some(x => x.num === myNum)) { team = team.filter(x => x.num !== myNum); saveTeam(); }
+    } else if (m.type === 'config') {
+      if (m.lora) { const was = radioProblem(); lora = m.lora; if (radioProblem() !== was) emit('mesh'); }
+    } else if (m.type === 'channel') {
+      verdict(m);
+      if (channel === 'private') { const h = held; held = []; h.forEach(x => apply(x.m, x.at)); }
+      else if (channel === 'public') held = [];
+    } else if (m.type === 'nodeInfo' && m.num && m.num === myNum) {
+      if (m.longName || m.shortName) myName = cleanName(m.longName) || cleanName(m.shortName);
+    } else if (isMesh(m)) {
+      if (channel === 'private') apply(m, Date.now());
+      else if (channel === 'unknown') { held.push({ m, at: Date.now() }); if (held.length > MAX_HELD) held.shift(); }
+    }
+  }
+  function onState(s) {
+    if (!enabled) return;
+    st = { state: s.state, name: s.name || '', reason: s.reason };
+    if (s.state === 'syncing') { channel = 'unknown'; positions = 'unknown'; held = []; lora = null; }   // every start-up download decides afresh
+    else if (s.state === 'on' && channel === 'unknown') held = [];                          // the download ended with no verdict
+    emit('mesh');
+  }
+
+  /* ---- the switch and the link ---- */
+  function setEnabled(v) {
+    v = !!v;
+    if (v === enabled) return;
+    enabled = v;
+    store.set('meshOn', v);
+    if (!v) {
+      if (link) link.disconnect();                   // its 'off' report is ignored now: enabled is false
+      st = { state: 'off', name: '', reason: 'user' };
+      channel = 'unknown'; positions = 'unknown'; held = []; lora = null;
+    }
+    emit('mesh');
+  }
+  const supported = () => { try { return enabled && MLINK.supported(navigator.bluetooth); } catch (e) { return false; } };
+  /* 'region' (no region set: the radio will not transmit), 'txoff' (its transmitter is switched off) or null (fine, or not
+     known yet: no Config.lora in this download). */
+  function radioProblem() {
+    if (!enabled || !lora) return null;
+    return !lora.region ? 'region' : !lora.txEnabled ? 'txoff' : null;
+  }
+  const canShare = () => enabled && st.state === 'on' && channel === 'private' && !radioProblem();
+  /* Every packet goes out with the radio's own hop limit: left at 0 with no ack wanted, the firmware sends it zero-hop and no
+     radio relays it. 3 (the firmware default) until the config has arrived, or when it reads 0. */
+  const hops = () => { const h = lora && lora.hopLimit; return Number.isInteger(h) && h >= 1 ? Math.min(h, 7) : 3; };
+  const ensureLink = () => link || (link = MLINK.create({ bluetooth: navigator.bluetooth, onMessage, onState }));
+
+  const randId = () => 1 + Math.floor(Math.random() * 0xFFFFFFFE);
+  async function sendWaypoint(wp) {
+    if (!canShare() || !wp || !okLatLon(wp.lat, wp.lon)) return false;
+    const payload = MPB.enc.waypoint({ id: wp.id || randId(), lat: wp.lat, lon: wp.lon, expire: wp.expire, lockedTo: wp.lockedTo,
+                                       name: wp.name, description: wp.description, icon: wp.icon });
+    return link.send(MPB.enc.packet({ to: MPB.BROADCAST, channel: 0, id: randId(), portnum: MPB.PORT.WAYPOINT, payload, hopLimit: hops() }));
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && enabled && link && st.state === 'lost') link.reconnect();
+  });
+
+  FK.mesh = {
+    enabled: () => enabled, setEnabled, supported,
+    status: () => enabled ? { state: st.state, name: st.name, reason: st.reason } : { state: 'off', name: '', reason: 'user' },
+    channel: () => channel, positions: () => positions, canShare, radioProblem,
+    myNum: () => myNum, nameOf,
+    teammates: () => team.map(m => ({ num: m.num, name: m.long || m.short || radioName(m.num), lat: m.lat, lon: m.lon, t: m.t, heard: m.heard,
+                                       approx: m.approx })),
+    connect: () => enabled ? ensureLink().connect() : Promise.resolve(false),
+    reconnect: () => enabled && link ? link.reconnect() : Promise.resolve(false),
+    disconnect: () => { if (link) link.disconnect(); },
+    sendWaypoint
+  };
+  FK._test.mesh = { feed: onMessage, link: (state, name, reason) => onState({ state, name, reason }) };
+
+  /* ---- Settings: the switch ---- */
+  const sw = FK.$('#meshOn');
+  sw.checked = enabled;
+  sw.addEventListener('change', () => FK.mesh.setEnabled(sw.checked));
+  on('mesh', () => { sw.checked = enabled; });
+})();
+
+/* ---------- FK.share: shared markers (Meshtastic waypoints) and the rules for incoming ones ----------
+   A marker is shared when it has a net record (src/tac-data.js). Sharing is opt-in per marker: nothing saved before the radio
+   link has a record, so nothing old is ever sent. Every shared marker is open: anyone holding it can change, send or delete
+   it. Storage: meshTombs [{ wid, t }], the waypoint numbers deleted here or by a teammate, kept 30 days; anything arriving
+   under one of them is ignored, so a teammate who missed the delete cannot bring the marker back.
+   "Mine" is net.mine: this phone chose to share the marker. It does not depend on the radio number (a marker shared before
+   any radio was known, or before a radio change, stays mine). A marker that is mine is never destroyed from the mesh: a
+   teammate's delete or a passing expiry leaves it here as a private marker with a line in its note.
+   With the Settings switch off this module does nothing (no expiry, no cap, no queue, no sending); Stop sharing and delete
+   still work on this phone, and expiry and tomb pruning catch up when the switch is turned on.
+   A delete on the wire (neither form is confirmed by the official apps' documentation): this app sends the whole waypoint
+   again already expired (expire = 1, epoch seconds). On receipt, that form (any expiry at or before now) is a delete, and so
+   is the reference package's form for a number this phone holds: only the id, no position, no name, expire 0. */
+(() => {
+  const { store, fin, on, emit } = FK;
+  const DAY = 864e5, TOMB_MS = 30 * DAY, MAX_TOMBS = 2000, CAP = 500, GAP = 3000;
+  const okWid = v => Number.isInteger(v) && v >= 1 && v <= 0xFFFFFFFF;
+  let stopped = false;                 // a restore is replacing storage: write nothing more (the page reloads)
+
+  /* ---- tombs ---- */
+  const loadTombs = () => {
+    const seen = new Set(), now = Date.now(), v = store.get('meshTombs', []);
+    return (Array.isArray(v) ? v : [])
+      .filter(x => x && typeof x === 'object' && okWid(x.wid) && fin(x.t) && !seen.has(x.wid) && seen.add(x.wid))
+      .map(x => ({ wid: x.wid, t: Math.min(x.t, now) }))   // a time ahead (another phone's clock) would never run out
+      .slice(-MAX_TOMBS);
+  };
+  let tombs = loadTombs(), tombSet = new Set(tombs.map(x => x.wid)), tombsDirty = false;
+  function tomb(wid) {
+    if (tombSet.has(wid)) return;
+    tombs.push({ wid, t: Date.now() }); tombSet.add(wid); tombsDirty = true;
+    if (tombs.length > MAX_TOMBS) tombSet.delete(tombs.shift().wid);
+  }
+  function pruneTombs(now) {
+    const keep = tombs.filter(x => now - x.t < TOMB_MS);
+    if (keep.length === tombs.length) return;
+    tombs = keep; tombSet = new Set(tombs.map(x => x.wid)); tombsDirty = true;
+  }
+  const saveTombs = () => { if (tombsDirty && !stopped) { tombsDirty = false; store.set('meshTombs', tombs); } };
+
+  /* ---- who holds what ---- */
+  const find = id => FK.tac.markers().find(m => m.id === id) || null;
+  const me = () => FK.mesh.myNum();
+  const isMine = m => !!(m && m.net && m.net.mine === true);
+  const on_ = () => FK.mesh.enabled();
+  const newWid = () => {
+    const held = new Set(FK.tac.markers().filter(m => m.net).map(m => m.net.wid));
+    let w;
+    do w = 1 + Math.floor(Math.random() * 0xFFFFFFFF); while (held.has(w) || tombSet.has(w) || !okWid(w));
+    return w;
+  };
+  /* The waypoint for a marker: its stored expiry and foreign icon go out again unchanged. */
+  const wpOf = (m, expire) => MMK.toWaypoint(m, m.net.wid, { icon: m.net.icon, expire: expire === undefined ? m.net.expire : expire });
+
+  /* A marker whose own expiry has passed is never sent, by any caller: others would take it as expired or deleted. */
+  const expiredNow = m => !!(m && m.net && m.net.expire > 0 && m.net.expire * 1000 <= Date.now());
+
+  /* ---- sending ---- */
+  let lastSend = -Infinity;
+  /* Send a shared marker as it is now. 'no' (no such shared marker), 'toolong' (nothing changed), 'pending' (no link, or the
+     radio refused: sent on the next connection) or 'sent'. A record made before any radio was known (from 0) takes this
+     radio's number when it first goes out. */
+  async function sendNow(id) {
+    const m = find(id);
+    if (!on_() || !m || !m.net || expiredNow(m)) return 'no';
+    if (!MMK.fits(m).ok) return 'toolong';
+    if (!FK.mesh.canShare()) {
+      if (!m.net.pending) FK.tac.setNet(id, { ...m.net, pending: true });
+      return 'pending';
+    }
+    const who = m.net.from === 0 && me() !== null ? { from: me(), by: FK.mesh.nameOf(me()) } : {};
+    lastSend = Date.now();
+    const ok = await FK.mesh.sendWaypoint(wpOf(m));
+    if (stopped) return ok ? 'sent' : 'pending';                 // a restore replaced storage meanwhile: write nothing
+    const after = find(id);
+    if (after && after.net && after.net.wid === m.net.wid) {   // still held and shared under the same number
+      if (ok) FK.tac.setNet(id, { ...after.net, ...who, pending: false, t: Date.now() });
+      else if (!after.net.pending) FK.tac.setNet(id, { ...after.net, pending: true });
+    }
+    return ok ? 'sent' : 'pending';
+  }
+
+  async function share(id) {
+    const m = find(id);
+    if (!on_() || !m) return 'no';
+    if (!MMK.fits(m).ok) return 'toolong';
+    if (!m.net) {
+      const n = me();
+      const net = { wid: newWid(), from: n === null ? 0 : n, by: n === null ? '' : FK.mesh.nameOf(n), t: Date.now(), chBy: '', chT: 0,
+        icon: 0, expire: 0, pending: true, rx: false, mine: true };
+      if (!FK.tac.setNet(id, net)) return 'no';
+    }
+    return sendNow(id);
+  }
+  /* After this phone saved or moved a shared marker: send it again under the same number. This phone's own change is not
+     "changed by" anyone, so that line clears. */
+  async function changed(id) {
+    const m = find(id);
+    if (!on_() || !m || !m.net || expiredNow(m)) return 'no';
+    if (!MMK.fits(m).ok) return 'toolong';
+    if (m.net.chBy || m.net.chT) FK.tac.setNet(id, { ...m.net, chBy: '', chT: 0 });
+    return sendNow(id);
+  }
+  /* Stop sharing: the copy here becomes private and nothing is sent. The number is remembered (tomb), so a teammate's later
+     send of it does not come back beside the private copy. */
+  function unshare(id) {
+    const m = find(id);
+    if (!m || !m.net || !FK.tac.setNet(id, null)) return false;
+    tomb(m.net.wid); saveTombs();
+    return true;
+  }
+  /* Delete a marker here; a shared one is remembered (tomb). With everyone, the delete also goes out when the link can send.
+     Resolves 'sent' (the delete went out), 'local' (removed here only: teammates still have it), 'private' (it had no shared
+     record, so there was nothing for teammates to have) or 'no' (no such marker). */
+  async function remove(id, everyone) {
+    const m = find(id);
+    if (!m) return 'no';
+    if (!m.net) { FK.tac.removeMarker(id); return 'private'; }
+    const wp = everyone ? wpOf(m, 1) : null;
+    tomb(m.net.wid); saveTombs();
+    FK.tac.removeMarker(id);
+    if (!wp || !FK.mesh.canShare()) return 'local';
+    lastSend = Date.now();
+    return (await FK.mesh.sendWaypoint(wp)) ? 'sent' : 'local';
+  }
+
+  /* ---- the spaced queue: pending markers on connection, and "send all mine again", one every GAP ms ---- */
+  let queue = [], qTimer = 0, busy = false, idleWaiters = [];
+  let batch = { ids: new Set(), sent: 0 };   // the last "send all mine again": how many of its markers went out
+  const idle = () => !queue.length && !busy && !qTimer;
+  function settleIdle() { if (!idle()) return; const w = idleWaiters; idleWaiters = []; w.forEach(f => f()); }
+  function enqueue(ids) {
+    let n = 0;
+    ids.forEach(id => { if (!queue.includes(id)) { queue.push(id); n++; } });
+    kick();
+    return n;
+  }
+  function kick() {
+    if (busy || qTimer || !queue.length || stopped) return;
+    qTimer = setTimeout(step, Math.max(0, lastSend + GAP - Date.now()));
+  }
+  async function step() {
+    qTimer = 0;
+    if (stopped) { settleIdle(); return; }
+    if (!FK.mesh.canShare()) {   // the link went: what was still queued waits, marked, for the next connection
+      const left = queue; queue = [];
+      left.forEach(id => { const m = find(id); if (m && m.net && !m.net.pending && on_()) FK.tac.setNet(id, { ...m.net, pending: true }); });
+      settleIdle();
+      return;
+    }
+    const id = queue.shift(), m = find(id);
+    if (m && m.net && MMK.fits(m).ok) {
+      busy = true;
+      let r;
+      try { r = await sendNow(id); } finally { busy = false; }
+      if (r === 'sent' && batch.ids.has(id)) batch.sent++;
+    }
+    kick();
+    settleIdle();
+  }
+  function resendMine() {
+    if (!FK.mesh.canShare()) return 0;
+    const ids = FK.tac.markers().filter(m => isMine(m) && MMK.fits(m).ok && !expiredNow(m)).map(m => m.id);
+    batch = { ids: new Set(ids), sent: 0 };
+    return enqueue(ids);
+  }
+  /* The link can send again: queue every pending marker. Never from inside the radio's message handler (a channel verdict
+     can arrive there): a timer starts it. */
+  let could = false, wasOn = on_();
+  on('mesh', () => {
+    if (on_() !== wasOn) { wasOn = on_(); if (wasOn) sweepNow(); syncTimer(); }   // switched on: expiry and tombs catch up
+    const can = FK.mesh.canShare();
+    if (can && !could) setTimeout(() => {
+      if (FK.mesh.canShare()) enqueue(FK.tac.markers().filter(m => m.net && m.net.pending).map(m => m.id));
+    }, 0);
+    could = can;
+  });
+
+  /* ---- held markers over time: expiry, tombs' age, the cap ---- */
+  /* The end of sharing for a marker from the mesh (a delete, or its expiry): a marker that is mine stays here, private, its
+     note starting with why; any other is removed. The number is tombed either way. */
+  function endShared(m, line) {
+    tomb(m.net.wid);
+    if (isMine(m)) {
+      FK.tac.setNet(m.id, null);
+      FK.tac.updateMarker(m.id, { note: (line + (m.note ? ' ' + m.note : '')).slice(0, FK.tac.MAX_NOTE) });
+    } else FK.tac.removeMarker(m.id);
+  }
+  let dropped = 0;
+  /* Inside a FK.tac.batch. idx: wid -> marker for every shared marker (kept up to date by the caller). Only markers that are
+     not mine count and can go, never the navigation target. */
+  /* The marker open in the marker sheet is spared by the cap and by expiry while it is open (whatever is typed there must
+     not be lost to a sweep); the sweep after the sheet closes catches up. */
+  const openId = () => (FK.markers && FK.markers.openId ? FK.markers.openId() : null);
+  function enforceCap(idx) {
+    const tgt = FK.tac.target(), tid = tgt && tgt.type === 'marker' ? tgt.id : null, oid = openId();
+    for (;;) {
+      let n = 0, oldest = null;
+      idx.forEach(m => {
+        if (isMine(m)) return;
+        n++;
+        if (m.id !== tid && m.id !== oid && (!oldest || m.net.t < oldest.net.t)) oldest = m;
+      });
+      if (n <= CAP || !oldest) return;
+      FK.tac.removeMarker(oldest.id); idx.delete(oldest.net.wid); dropped++;
+    }
+  }
+  const indexShared = () => new Map(FK.tac.markers().filter(m => m.net).map(m => [m.net.wid, m]));
+  function sweep(now, idx) {
+    const oid = openId();
+    idx.forEach((m, wid) => {
+      if (m.id !== oid && m.net.expire > 0 && m.net.expire * 1000 <= now) { endShared(m, 'Sharing expired.'); idx.delete(wid); }
+    });
+    pruneTombs(now);
+    enforceCap(idx);
+  }
+  /* End the sharing of one marker whose expiry has passed now, open in the sheet or not (the sheet's Save on a marker the
+     sweep spared while it was open): as the sweep would, a marker of mine stays here private, any other is removed; the number
+     is tombed. False when it is not shared or not expired. */
+  function expire(id) {
+    const m = find(id);
+    if (stopped || !on_() || !expiredNow(m)) return false;
+    FK.tac.batch(() => endShared(m, 'Sharing expired.'));
+    saveTombs();
+    return true;
+  }
+  function sweepNow() {
+    if (stopped || !on_()) return;
+    FK.tac.batch(() => sweep(Date.now(), indexShared()));
+    saveTombs();
+  }
+
+  /* ---- incoming ---- */
+  /* One received waypoint (inside a batch). d: the 'meshWaypoint' detail { wp, from, name }. */
+  function receive(d, now, idx) {
+    const wp = d.wp, wid = wp.id;
+    if (!okWid(wid) || tombSet.has(wid)) return;
+    if (d.from === me()) return;                 // our own radio's number: an echo of what this phone sent
+    const m = idx.get(wid);
+    const expired = fin(wp.expire) && wp.expire > 0 && wp.expire * 1000 <= now;
+    /* The reference package's delete: no position, no name, no expiry. For a number not held it is ignored and leaves no
+       tomb (it cannot be told from a malformed packet). Checked before fromWaypoint, which rejects 0, 0. */
+    const bare = !!m && wp.lat === 0 && wp.lon === 0 && !wp.name && !(wp.expire > 0);
+    if (expired || bare) {   // a delete: the maker keeps a private copy saying who deleted it
+      if (!m) { tomb(wid); return; }
+      idx.delete(wid);
+      const tgt = FK.tac.target(), wasTarget = !isMine(m) && !!tgt && tgt.type === 'marker' && tgt.id === m.id;
+      notes.push({ id: m.id, what: 'deleted', name: d.name, kept: isMine(m), goto: wasTarget ? m.name : '' });
+      endShared(m, `Deleted by ${d.name}.`);
+      return;
+    }
+    const f = MMK.fromWaypoint(wp, now);
+    if (!f) return;
+    if (f.t > now) f.t = now;                    // a sighting cannot be in the future (rx stays false: it had a time)
+    const icon = f.kind === 'point' && f.icon && !MMK.kindFor(f.icon) ? f.icon : 0;
+    if (m) {
+      const patch = { name: f.name, note: f.note, kind: f.kind, lat: f.lat, lon: f.lon };
+      if (m.lat !== f.lat || m.lon !== f.lon) patch.alt = null;
+      if (!f.rx) patch.t = f.t;
+      FK.tac.updateMarker(m.id, patch);
+      FK.tac.setNet(m.id, { ...m.net, chBy: d.name, chT: now, t: now, icon, expire: f.expire, rx: f.rx ? m.net.rx : false });
+      idx.set(wid, find(m.id));
+      notes.push({ id: m.id, what: 'changed', name: d.name });
+      return;
+    }
+    const added = FK.tac.addShared({ name: f.name, lat: f.lat, lon: f.lon, kind: f.kind, note: f.note, t: f.t,
+      net: { wid, from: d.from, by: d.name, t: now, chBy: '', chT: 0, icon, expire: f.expire, pending: false, rx: f.rx, mine: false } });
+    if (added) { idx.set(wid, added); if (!isMine(added)) enforceCap(idx); }
+  }
+  /* Waypoints arrive in bursts: they wait here and apply once per animation frame (a timer stands in while the page is hidden,
+     when frames stop), so a burst costs one storage write and one 'wps' event. */
+  let inbox = [], raf = 0, tmr = 0, notes = [];
+  function flush() {
+    cancelAnimationFrame(raf); clearTimeout(tmr); raf = tmr = 0;
+    const got = inbox;
+    inbox = [];
+    if (stopped || !got.length) return;
+    const now = Date.now();
+    notes = [];
+    FK.tac.batch(() => {
+      const idx = indexShared();
+      got.forEach(d => receive(d, now, idx));
+      sweep(now, idx);
+    });
+    saveTombs();
+    /* 'shareIn' { id, what: 'changed' | 'deleted', name, kept }: a teammate changed or deleted a marker held here (kept: it
+       was mine, so a private copy stays). Emitted once the burst is stored, for the marker sheet open on it. */
+    const out = notes;
+    notes = [];
+    out.forEach(n => {
+      emit('shareIn', n);
+      // the marker being gone to: Go to has stopped (the sheet open on it says so itself)
+      if (n.goto && openId() !== n.id) FK.toast(`${n.name} deleted ${n.goto}, so Go to stopped.`);
+    });
+  }
+  on('meshWaypoint', d => {
+    if (stopped || !d || !d.wp) return;
+    inbox.push(d);
+    if (!raf) raf = requestAnimationFrame(flush);
+    if (!tmr) tmr = setTimeout(flush, 1000);
+  });
+
+  /* Expiry is checked on load, on each incoming message, and each minute while the map shows. */
+  let tick = 0;
+  function syncTimer() {
+    const want = !stopped && on_() && !document.hidden && FK.tab() === 'tactical' && FK.view() === 'map';
+    if (want && !tick) tick = setInterval(sweepNow, 60000);
+    else if (!want && tick) { clearInterval(tick); tick = 0; }
+  }
+  on('shown', syncTimer);
+  document.addEventListener('visibilitychange', syncTimer);
+  on('restoring', () => {
+    stopped = true; inbox = []; queue = [];
+    clearTimeout(qTimer); clearTimeout(tmr); cancelAnimationFrame(raf); clearInterval(tick); tick = 0;
+  });
+  on('restoreFailed', () => { stopped = false; syncTimer(); });
+  sweepNow();
+  syncTimer();
+
+  FK.share = {
+    share, resend: sendNow, resendMine, unshare, remove, changed, sweep: sweepNow, expire, expired: id => expiredNow(find(id)),
+    whenIdle: () => idle() ? Promise.resolve() : new Promise(f => idleWaiters.push(f)),
+    batchSent: () => batch.sent,
+    isShared: id => !!(find(id) || {}).net,
+    mine: id => isMine(find(id)),
+    dropped: () => dropped
+  };
+  FK._test.share = { flush };
 })();
 
 /* ---------- Router: every screen has an address, so the Back button works ---------- */
@@ -6788,7 +8007,7 @@ const BALS = (() => {
       map.invalidateSize({ pan: false });
       if (follow && f) map.setView([f.lat, f.lon], map.getZoom(), { animate: false });
       else if (v) map.setView([v.lat, v.lon], v.z, { animate: false, reset: true });   // reset: a pan would round to whole pixels
-      FK.markers.render(); renderTarget(); renderMe(); renderCenter();
+      FK.markers.render(); FK.team.render(); renderTarget(); renderMe(); renderCenter();
       return;
     }
     if (!window.L) { $('#mapWrap').innerHTML = '<p class="hint" style="padding:16px">The map library didn’t load. Reload the app while online.</p>'; return; }
@@ -6799,6 +8018,7 @@ const BALS = (() => {
     L.control.zoom({ position: 'topleft' }).addTo(map);
     map.attributionControl.setPrefix(false);
     map._fkAreas = L.layerGroup().addTo(map);
+    map._fkTeam = L.layerGroup().addTo(map);   // teammates (tac-team.js): before the markers' group, and their pins sit lower
     map._fkWps = L.layerGroup().addTo(map);
     trackLine = L.polyline([], { className: 'trk', interactive: false }).addTo(map);
     tgtLine = L.polyline([], { className: 'tgt-line', interactive: false }).addTo(map);
@@ -6817,7 +8037,7 @@ const BALS = (() => {
       const ll = e.latlng.wrap(); FK.markers.create(ll.lat, ll.lng);
     });
 
-    renderAreas(); FK.markers.render(); renderTarget(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
+    renderAreas(); FK.markers.render(); FK.team.render(); renderTarget(); renderTrack(); renderMe(); renderCenter(); setFollow(follow);
   }
 
   /* Tile layer that, when a tile is missing (e.g. offline past the saved zoom), scales up the
@@ -6913,6 +8133,8 @@ const BALS = (() => {
     if (!visible()) return;
     const c = map.getCenter().wrap(), g = GEO.toMGRS(c.lat, c.lng);
     $('#mCenter').textContent = g ? g.text : `${c.lat.toFixed(5)}, ${c.lng.toFixed(5)}`;
+    // the accessible name starts with the text on the button, so a voice command that says what it shows hits it
+    $('#mCenter').setAttribute('aria-label', (g ? g.text + '. ' : '') + 'Grid at crosshair. Tap to copy.');
     $('#mCenterRel').textContent = FK.relText(c.lat, c.lng, fmtDist) || 'Grid at the crosshair';
   }
   $('#mCenter').addEventListener('click', async () => {
@@ -7293,14 +8515,31 @@ const BALS = (() => {
   const known = w => w.t > 0;
   const isStale = w => isAffil(w.kind) && known(w) && Date.now() - w.t > DAY;
   const hm = t => new Date(t).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-  const markedText = t => {
+  const markedText = (t, word = 'Marked') => {
     const d = new Date(t), same = d.toDateString() === new Date().toDateString();
     const age = ageText(t);
-    return `Marked ${same ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' '}${hm(t)}${age ? ', ' + age : ''}`;
+    return `${word} ${same ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' '}${hm(t)}${age ? ', ' + age : ''}`;
   };
   const gridText = (lat, lon) => { const g = GEO.toMGRS(lat, lon); return g ? g.text : `${lat.toFixed(5)}, ${lon.toFixed(5)}`; };
   const relText = (lat, lon) => FK.relText(lat, lon, m => TGEOM.fmtDist(m, FK.tac.unit()));   // app.js: one rule for live and last fixes
   const targetId = () => { const t = FK.tac.target(); return t && t.type === 'marker' ? t.id : null; };
+
+  /* A shared marker's corner mark, only while the Settings switch is on (Lucide share-2; clock while it has not gone out). */
+  const SHARE2 = '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>';
+  const CLOCK = '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>';
+  function netBadge(w) {
+    if (!w.net || !FK.mesh || !FK.mesh.enabled()) return '';
+    const label = w.net.pending ? 'Shared, not sent yet' : 'Shared with teammates';
+    return `<span class="mk-net" role="img" aria-label="${label}" title="${label}">${LINE(w.net.pending ? CLOCK : SHARE2)}</span>`;
+  }
+  /* A Point received with another app's emoji keeps showing that emoji (one code point; a number, drawn as text). */
+  function foreignEmoji(w, kind = w.kind) {
+    if (!FK.mesh || !FK.mesh.enabled()) return '';   // with the switch off, pins and rows are as they always were
+    const c = w && w.net ? w.net.icon : 0;
+    if (kind !== 'point' || !Number.isInteger(c) || c <= 0x20 || c > 0x10FFFF || (c >= 0xD800 && c <= 0xDFFF) || MMK.kindFor(c)) return '';
+    return String.fromCodePoint(c);
+  }
+  const glyph = (w, o) => { const e = foreignEmoji(w); return e ? `<span class="mk-emoji">${esc(e)}</span>` : icon(w.kind, o); };
 
   /* ---------- Drawing on the map ---------- */
   function render() {
@@ -7311,15 +8550,15 @@ const BALS = (() => {
     FK.tac.markers().forEach(w => {
       const stale = isStale(w);
       const cls = 'mk-pin' + (w.id === tid ? ' tgt' : '') + (stale ? ' stale' : '');
-      const html = `<div class="${cls}" data-id="${esc(w.id)}" data-kind="${w.kind}"><i>${icon(w.kind, { stale })}</i><b>${esc(w.name)}</b></div>`;
+      const html = `<div class="${cls}" data-id="${esc(w.id)}" data-kind="${w.kind}"><i>${glyph(w, { stale })}</i>${netBadge(w)}<b>${esc(w.name)}</b></div>`;
       L.marker([w.lat, w.lon], { icon: L.divIcon({ className: 'mk-icon', iconSize: [30, 30], iconAnchor: [15, 15], html }), title: w.name,
         zIndexOffset: w.id === tid ? 500 : 0 }).on('click', () => { if (!FK.mapTools.mode()) edit(w.id); }).addTo(g);   // inert while a tool mode is on
     });
   }
 
   /* ---------- Marker sheet ---------- */
-  const dlg = $('#dlgMarker'), nameEl = $('#mkName'), noteEl = $('#mkNote');
-  let cur = null;   // { id (null for new), lat, lon, kind, typed (the name was edited by hand), t }
+  const dlg = $('#dlgMarker'), nameEl = $('#mkName'), noteEl = $('#mkNote'), shareEl = $('#mkShare');
+  let cur = null;   // { id (null for new), lat, lon, kind, typed (the name was edited by hand), t, rx (t is when it arrived) }
   const kindBtn = k => `<button type="button" class="mk-kind" data-kind="${k.id}" aria-pressed="false">${icon(k.id)}<span>${esc(k.label)}</span></button>`;
   $('#mkPlaces').innerHTML = FK.tac.KINDS.filter(k => k.group === 'place').map(kindBtn).join('');
   $('#mkAffil').innerHTML = FK.tac.KINDS.filter(k => k.group === 'affil').map(kindBtn).join('');
@@ -7334,23 +8573,104 @@ const BALS = (() => {
     dlg.querySelectorAll('.mk-kind').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.kind === kind)));
     if (!cur.id && !cur.typed) nameEl.value = defaultName(kind);
     renderAge();
+    renderShare();
+  }
+
+  /* ---------- Share (src/tac-share.js): the switch, a shared marker's limits and its status lines ----------
+     The row shows only while the Settings switch is on and either a radio can send now or the marker is already shared (or
+     the user has just turned Share on). With the Settings switch off it stays hidden and the sheet is as it always was.
+     With Share on, a name and a note are counted in bytes against what a waypoint can carry (MMK): nothing is ever cut;
+     anything that would save over the limit is refused (the message above the buttons) until it is shortened or Share is turned off. */
+  const setText = (el, text) => { el.hidden = !text; el.textContent = text || ''; };
+  const storedOf = () => cur && cur.id ? FK.tac.markers().find(x => x.id === cur.id) || null : null;
+  const netOf = () => { const w = storedOf(); return w && w.net ? w.net : null; };
+  const rowShown = () => !!cur && FK.mesh.enabled() && (FK.mesh.canShare() || !!netOf() || shareEl.checked || !!conflict);
+  const shareOn = () => rowShown() && shareEl.checked;
+  /* What Save will do about sharing: with the row hidden (the Settings switch off), whatever the marker was. */
+  const wantShare = () => rowShown() ? shareEl.checked : !!(opened ? opened.share : netOf());
+  const TOO_LONG = 'Too long to share. Accents and emoji count extra. Shorten the name or note, or turn Share off.';
+  const NOT_SENT = 'Saved. Not sent yet: it goes out when the radio connects.';
+  const EXPIRED_LINE = 'This shared marker has expired. Save keeps what you typed as a private marker of your own.';
+  const EXPIRED_TOAST = 'This shared marker expired. Your changes were kept as a private marker.';
+  /* The open marker's expiry passed while its sheet was open (the sweep spares the open marker): nothing of it is sent again. */
+  const expiredOpen = () => !!cur && !!cur.id && FK.mesh.enabled() && !!FK.share && FK.share.expired(cur.id);
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const p2 = n => String(n).padStart(2, '0');
+  const dayTime = t => { const d = new Date(t); return `${d.getDate()} ${MON[d.getMonth()]} ${p2(d.getHours())}:${p2(d.getMinutes())}`; };
+  /* The name Save will store: what is typed, else the marker's own name (existing) or the default (new). */
+  const finalName = () => nameEl.value.trim() || (cur.id ? (storedOf() || { name: '' }).name : defaultName(cur.kind));
+  const room = () => ({ name: MMK.NAME_MAX - MMK.bytes(finalName()), note: MMK.noteRoom(cur.kind) - MMK.bytes(noteEl.value.slice(0, 500)) });
+  const over = () => { const r = room(); return r.name < 0 || r.note < 0; };
+  /* Counted in bytes (what a waypoint carries), so the words never say "characters". */
+  function count(el, n) {
+    el.hidden = false;
+    el.textContent = n >= 0 ? `Room for ${n} more` : `${-n} over the limit`;
+    el.classList.toggle('mk-over', n < 0);
+  }
+  /* The one fixed place above the buttons: what a teammate did while the user typed, and why Save was refused. */
+  let refused = false;   // Save was refused for length; the message stays until the name and note fit (or Share is off)
+  function renderNotice() {
+    if (refused && !(cur && shareOn() && over())) refused = false;
+    const lapsed = expiredOpen() && changed() ? EXPIRED_LINE : '';
+    setText($('#mkNotice'), [conflict, lapsed, refused ? TOO_LONG : ''].filter(Boolean).join('\n'));
   }
   function renderLeft() {
+    const nameLeft = $('#mkNameLeft'), noteLeft = $('#mkLeft');
+    $('#mkSeenHint').hidden = !(cur && shareOn() && isAffil(cur.kind));
+    if (cur && shareOn()) {
+      const r = room();
+      count(nameLeft, r.name); count(noteLeft, r.note);
+      renderNotice();
+      return;
+    }
+    nameLeft.hidden = true; nameLeft.textContent = '';
+    renderNotice();
     const left = 500 - noteEl.value.length;
-    $('#mkLeft').hidden = left >= 50;
-    $('#mkLeft').textContent = `${left} ${left === 1 ? 'character' : 'characters'} left`;
+    noteLeft.classList.remove('mk-over');
+    noteLeft.hidden = left >= 50;
+    noteLeft.textContent = `${left} ${left === 1 ? 'character' : 'characters'} left`;
   }
+  /* A teammate changed or deleted this marker while the user was typing: this line shows above the buttons until the sheet
+     closes or refills. */
+  let conflict = '';
+  function renderShare() {
+    if (!cur) return;
+    const show = rowShown(), n = netOf(), w = storedOf();
+    $('#mkShareBox').hidden = !show;
+    setText($('#mkShareHint'), show && n && !shareEl.checked ? 'Your copy becomes private. Teammates keep theirs.' : '');
+    const lines = [];
+    if (n) {
+      lines.push(`Shared by ${n.mine ? 'you' : n.by || 'a teammate'}`);
+      if (n.chBy) { const a = ageText(n.chT); lines.push(`Changed by ${n.chBy}${a ? ', ' + a : ''}`); }
+      if (n.pending) lines.push('Not sent yet: no radio connected');
+      if (n.expire > 0) lines.push(`Expires ${dayTime(n.expire * 1000)}`);
+    }
+    setText($('#mkShareLine'), show ? lines.join('\n') : '');   // textContent: these names come from other people's radios
+    /* Send again sends what is saved: offered only with nothing unsaved, Share on and a marker that fits; with unsaved
+       changes a hint takes its place. */
+    const can = show && !!n && shareEl.checked && FK.mesh.canShare() && !!w && MMK.fits(w).ok && !expiredOpen();
+    const dirty = can && changed();
+    $('#mkResend').hidden = !can || dirty;
+    $('#mkSendHint').hidden = !dirty;
+    const e = w ? foreignEmoji(w, cur.kind) : '';
+    setText($('#mkEmoji'), e ? `Sender’s icon: ${e}` : '');
+    renderLeft();
+  }
+
   function renderAge() {
     const show = !!cur.id && isAffil(cur.kind) && cur.t > 0;
     $('#mkAge').hidden = !show;
-    $('#mkAge').textContent = show ? markedText(cur.t) : '';
+    $('#mkAge').textContent = show ? markedText(cur.t, cur.rx ? 'Received' : 'Marked') : '';
   }
   function fill(o) {
     cur = o;
     $('#mkTitle').textContent = o.id ? 'Marker' : 'New marker';
     nameEl.value = o.name; noteEl.value = o.note;
+    shareEl.checked = !!netOf();   // a new marker starts with Share off
+    conflict = ''; refused = false;
+    $('#mkResend').textContent = 'Send again';
     setKind(o.kind);
-    renderLeft();
+    renderShare();
     $('#mkGrid').textContent = gridText(o.lat, o.lon);
     const rel = relText(o.lat, o.lon);
     $('#mkRel').hidden = !rel; $('#mkRel').textContent = rel;
@@ -7359,13 +8679,31 @@ const BALS = (() => {
     $('#mkGo').textContent = o.id && o.id === targetId() ? 'Stop' : 'Go to';
     dlg.querySelector('.mk-body').scrollTop = 0;
     opened = null;
-    FK.sheet.open(dlg, { onClose: () => { cur = null; deleting = false; dlg.inert = false; opened = null; }, onOpen: () => { $('#mkTitle').focus(); snap(); },   // no keyboard popping up on a phone
+    FK.sheet.open(dlg, { onClose: () => { cur = null; deleting = false; dlg.inert = false; opened = null; conflict = ''; refused = false;
+                                            if (FK.mesh.enabled() && FK.share && FK.share.sweep) setTimeout(FK.share.sweep, 0); },   // what was spared while open (expiry, the cap) catches up
+                         onOpen: () => { $('#mkTitle').focus(); snap(); renderShare(); },   // no keyboard popping up on a phone
       guard: { dirty: changed, title: 'Discard this marker?', text: 'The name, note and kind are not kept.' } });
   }
   /* What the sheet showed when it opened, so Back, Escape or a backdrop tap can ask before losing what was typed. */
   let opened = null;
-  const snap = () => { if (cur) opened = { name: nameEl.value, note: noteEl.value, kind: cur.kind }; };
-  const changed = () => !!cur && !!opened && !deleting && (nameEl.value !== opened.name || noteEl.value !== opened.note || cur.kind !== opened.kind);
+  const snap = () => { if (cur) opened = { name: nameEl.value, note: noteEl.value, kind: cur.kind, share: shareEl.checked }; };
+  const changed = () => !!cur && !!opened && !deleting && (!!cur.orphan ||   // a draft left by a teammate's delete: all of it is unsaved
+    nameEl.value !== opened.name || noteEl.value !== opened.note || cur.kind !== opened.kind || shareEl.checked !== opened.share);
+  /* The open sheet shows the marker as it is stored now (a teammate changed it and nothing here was typed). */
+  function refill() {
+    const w = storedOf();
+    if (!w) return;
+    cur = { ...cur, lat: w.lat, lon: w.lon, t: w.t, typed: true, rx: !!(w.net && w.net.rx) };
+    nameEl.value = w.name; noteEl.value = w.note;
+    shareEl.checked = !!w.net;
+    conflict = ''; refused = false;
+    setKind(w.kind);
+    renderShare();
+    $('#mkGrid').textContent = gridText(w.lat, w.lon);
+    const rel = relText(w.lat, w.lon);
+    $('#mkRel').hidden = !rel; $('#mkRel').textContent = rel;
+    snap();
+  }
   function create(lat, lon) {
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
     lon = ((lon + 540) % 360) - 180;
@@ -7375,12 +8713,13 @@ const BALS = (() => {
   }
   function edit(id) {
     const w = FK.tac.markers().find(x => x.id === id);
-    if (w) fill({ id, lat: w.lat, lon: w.lon, kind: w.kind, typed: true, t: w.t, name: w.name, note: w.note });
+    if (w) fill({ id, lat: w.lat, lon: w.lon, kind: w.kind, typed: true, t: w.t, name: w.name, note: w.note, rx: !!(w.net && w.net.rx) });
   }
 
   dlg.querySelector('.mk-kinds').addEventListener('click', e => { const b = e.target.closest('[data-kind]'); if (b && cur) setKind(b.dataset.kind); });
-  nameEl.addEventListener('input', () => { if (cur) cur.typed = true; });
-  noteEl.addEventListener('input', renderLeft);
+  nameEl.addEventListener('input', () => { if (cur) { cur.typed = true; renderShare(); } });
+  noteEl.addEventListener('input', () => { if (cur) renderShare(); });
+  shareEl.addEventListener('change', renderShare);
   $('#mkGrid').addEventListener('click', async () => {
     const t = $('#mkGrid').textContent;
     try { await navigator.clipboard.writeText(t); toast('Copied ' + t); } catch { toast(t); }
@@ -7389,17 +8728,25 @@ const BALS = (() => {
      session and shows the full-storage message itself, every time.
      With onlyIfChanged, an existing marker whose fields are unchanged is not written. */
   let deleting = false;   // Delete has been pressed: nothing else in the sheet may act
+  let wrote = false;      // the last commit() changed the marker (or made it)
   const exists = id => FK.tac.markers().some(x => x.id === id);
   function commit(onlyIfChanged) {
-    const name = nameEl.value.trim(), note = noteEl.value.slice(0, 500), kind = cur.kind;
+    const name = nameEl.value.trim(), kind = cur.kind;
+    let note = noteEl.value.slice(0, 500);
+    /* A teammate deleted this phone's own marker while a new note was typed: the line saying so is kept in front of it. */
+    if (cur.delLine && !note.startsWith(cur.delLine)) note = (cur.delLine + (note ? ' ' + note : '')).slice(0, FK.tac.MAX_NOTE);
+    wrote = false;
     if (cur.id) {
       const w = FK.tac.markers().find(x => x.id === cur.id);
       const patch = { kind, note };
       if (name) patch.name = name;
-      if (onlyIfChanged && w.kind === kind && w.note === note && (!name || name === w.name)) return cur.id;
+      const same = w.kind === kind && w.note === note && (!name || name === w.name);
+      if (onlyIfChanged && same) return cur.id;
       FK.tac.updateMarker(cur.id, patch);
+      wrote = !same;
       return cur.id;
     }
+    wrote = true;
     const before = new Set(FK.tac.markers().map(x => x.id));
     const m = FK.tac.addMarker({ lat: cur.lat, lon: cur.lon, name: name || defaultName(kind), kind, note });
     if (m) { toast(`Added ${m.name}`); return m.id; }
@@ -7410,20 +8757,75 @@ const BALS = (() => {
   function gone() { FK.sheet.close(dlg); toast('That marker no longer exists.'); }
   const blocked = () => !cur || deleting;
 
+  /* After this phone changed a shared marker (a save here, or a move on the map): send it again under its number. */
+  /* moved: the marker's name after a Move on the map, for one toast that says both ("Moved X. Sent to teammates."). */
+  function sendChange(id, moved) {
+    FK.share.changed(id).then(r => {
+      if (r === 'sent') toast(moved ? `Moved ${moved}. Sent to teammates.` : 'Sent to teammates');
+      else if (r === 'pending') toast(moved ? `Moved ${moved}. Not sent yet: it goes out when the radio connects.` : NOT_SENT);
+      else if (r === 'toolong') toast(TOO_LONG);
+      else if (moved) toast(`Moved ${moved}`);
+    });
+  }
+  /* commit() with Share around it. false: refused (Share is on and the name or note is over a shared marker's limit; the
+     sheet stays open with the message). Otherwise what commit() returned, after: Share newly on shares the marker; Share
+     turned off stops sharing it (the copy here becomes private); a shared marker that changed is sent again. A shared marker
+     saved unchanged is not sent (Send again is there for that): an old copy must not overwrite a teammate's newer edit. */
+  /* Save on a marker whose expiry passed while its sheet was open: nothing is sent. With typing, what the sheet shows is kept
+     as a private marker (a teammate's becomes a new private marker of this phone's, like a teammate's delete while typing; this
+     phone's own becomes private with "Sharing expired." in front of the typed note); with no typing, the sheet just closes and
+     the marker ends as the sweep would have ended it. */
+  function saveExpired() {
+    const id = cur.id, typed = changed(), mine = FK.share.mine(id);
+    FK.share.expire(id);
+    if (!typed) return exists(id) ? id : null;
+    if (mine) cur.delLine = 'Sharing expired.';
+    else cur = { ...cur, id: null };
+    const kept = commit(false);
+    toast(EXPIRED_TOAST);
+    return kept;
+  }
+  function save(onlyIfChanged) {
+    if (expiredOpen()) return saveExpired();
+    if (shareOn() && over()) {
+      refused = true;
+      renderNotice();   // above the buttons, always on screen; the first field over the limit comes into view with its counter
+      const r = room();
+      if (r.name < 0) { nameEl.scrollIntoView({ block: 'nearest' }); $('#mkNameLeft').scrollIntoView({ block: 'nearest' }); }
+      else { noteEl.scrollIntoView({ block: 'nearest' }); $('#mkLeft').scrollIntoView({ block: 'nearest' }); }
+      return false;
+    }
+    const want = wantShare(), was = !!(opened ? opened.share : netOf());
+    const id = commit(onlyIfChanged);
+    if (!id) return id;
+    const shared = FK.share.isShared(id);
+    if (want && !was && !shared) {
+      FK.share.share(id).then(r => {
+        if (r === 'sent') toast('Shared');
+        else if (r === 'pending') toast(NOT_SENT);
+        else if (r === 'toolong') toast(TOO_LONG);
+      });   // 'no': storage refused (tac-data said so) or the switch is off
+    } else if (!want && was && shared) FK.share.unshare(id);
+    else if (want && shared && wrote) sendChange(id);
+    return id;
+  }
+
   $('#mkForm').addEventListener('submit', e => {
     e.preventDefault();
     if (blocked()) return;
     if (cur.id && !exists(cur.id)) { gone(); return; }
-    commit(false);
+    if (save(false) === false) return;
     FK.sheet.close(dlg);
   });
-  $('#mkCancel').addEventListener('click', () => FK.sheet.close(dlg));
+  // Cancel throws the edits away, except in a draft left by a teammate's delete: there it asks first, as Back does.
+  $('#mkCancel').addEventListener('click', () => { if (cur && cur.orphan) FK.sheet.dismiss(dlg); else FK.sheet.close(dlg); });
   /* Go to and Stop keep what was typed: they save first. If storage is full the target still holds for this session. */
   $('#mkGo').addEventListener('click', () => {
     if (blocked()) return;
     if (cur.id && !exists(cur.id)) { gone(); return; }
     const stop = !!cur.id && cur.id === targetId();
-    const id = commit(true);
+    const id = save(true);
+    if (id === false) return;
     if (stop) FK.tac.setTarget(null);
     else if (id) FK.tac.setTarget({ type: 'marker', id });
     FK.sheet.close(dlg);
@@ -7432,15 +8834,17 @@ const BALS = (() => {
   $('#mkMove').addEventListener('click', () => {
     if (blocked() || !cur.id) return;
     if (!exists(cur.id)) { gone(); return; }
-    const id = commit(true);
+    const id = save(true);
+    if (id === false) return;
     FK.sheet.close(dlg);
-    FK.mapTools.moveMarker(id);   // its history entry waits for this sheet's step back
+    if (id) FK.mapTools.moveMarker(id);   // its history entry waits for this sheet's step back
   });
   $('#mkDel').addEventListener('click', async () => {
     if (blocked() || !cur.id) return;
     const id = cur.id, w = FK.tac.markers().find(x => x.id === id);
     if (!w) { gone(); return; }
     deleting = true;
+    if (w.net) { deleteShared(id, w); return; }
     const yes = await FK.sheet.confirm({ title: 'Delete the marker?', text: `Delete marker ${w.name}? This can’t be undone.`, ok: 'Delete marker', danger: true });
     if (!yes || !cur || cur.id !== id) { deleting = false; return; }
     FK.tac.removeMarker(id);
@@ -7448,6 +8852,97 @@ const BALS = (() => {
     // The confirm's own step back is still on its way: close the marker sheet once it has landed.
     FK.sheet.afterStep(() => FK.sheet.close(dlg));
   });
+  /* A shared marker: for everyone (offered only when a radio can send now) or on this phone only. Either way it goes through
+     FK.share.remove, which remembers its number so a teammate's later send cannot bring it back. */
+  const ddlg = $('#dlgMkDel');
+  function askDelete(w) {
+    const all = FK.mesh.canShare();
+    $('#mdText').textContent = `Delete marker ${w.name}? This can’t be undone.`;
+    $('#mdAll').hidden = !all;
+    $('#mdHere').classList.toggle('danger', !all);
+    $('#mdHere').classList.toggle('ghost', all);
+    return new Promise(resolve => {
+      let result = null;   // Cancel, Back, Escape and a backdrop tap all leave it null
+      $('#mdAll').onclick = () => { result = 'all'; FK.sheet.close(ddlg); };
+      $('#mdHere').onclick = () => { result = 'here'; FK.sheet.close(ddlg); };
+      $('#mdCancel').onclick = () => FK.sheet.close(ddlg);
+      FK.sheet.open(ddlg, { onClose: () => resolve(result), onOpen: () => $('#mdTitle').focus() });   // a stray Enter takes no choice
+    });
+  }
+  async function deleteShared(id, w) {
+    const choice = await askDelete(w);
+    if (!choice || !cur || cur.id !== id || dlg.inert) { if (cur && !dlg.inert) deleting = false; return; }
+    const everyone = choice === 'all';
+    const done = FK.share.remove(id, everyone);   // the marker is gone from this phone before this returns
+    dlg.inert = true;
+    // The question's own step back is still on its way: close the marker sheet once it has landed.
+    FK.sheet.afterStep(() => FK.sheet.close(dlg));
+    const r = await done;
+    if (r === 'no') toast('That marker no longer exists.');
+    else if (everyone && r !== 'private') toast(r === 'sent' ? 'Deleted for everyone' : 'Deleted on this phone. Couldn’t reach the radio, so teammates still have it.');
+  }
+  /* Send again: the marker as it is stored goes out again under its number (it is offered only with nothing unsaved). The
+     result shows on the button: a toast would sit behind the open sheet. */
+  let resending = false, sentTimer = 0;
+  $('#mkResend').addEventListener('click', async () => {
+    if (blocked() || !cur.id || resending) return;
+    if (!exists(cur.id)) { gone(); return; }
+    const id = cur.id;
+    resending = true;
+    let r;
+    try { r = await FK.share.resend(id); } finally { resending = false; }
+    if (r !== 'sent') return;   // 'pending': the status line now says "Not sent yet"
+    const b = $('#mkResend');
+    b.textContent = 'Sent';
+    clearTimeout(sentTimer);
+    sentTimer = setTimeout(() => { b.textContent = 'Send again'; }, 2000);
+  });
+
+  /* A teammate changed or deleted the marker whose sheet is open (src/tac-share.js 'shareIn'). Deleted (and not this
+     phone's own marker): the sheet closes, whatever was typed. Otherwise, with nothing typed, the sheet shows the marker as
+     it is now; with typing, the typing stays and a line says what happened (Save keeps the typed version). */
+  FK.on('shareIn', d => {
+    if (!d || !dlg.open || !cur || !cur.id || d.id !== cur.id || dlg.inert) return;
+    if (d.what === 'deleted' && !d.kept && changed()) { orphan(d.name); return; }
+    if (d.what === 'deleted' && !d.kept) {
+      deleting = true;   // no "Discard?" for a marker that is gone, and nothing else in the sheet may act
+      dlg.inert = true;
+      toast(`${d.name} deleted this marker`);
+      FK.sheet.afterStep(() => FK.sheet.close(dlg));   // closes the delete question too, if it is open
+      return;
+    }
+    if (deleting) return;   // the delete question is open: its answer decides
+    const typed = changed();
+    if (!typed) { refill(); return; }
+    if (d.what === 'deleted') {   // this phone's own marker: it is private now
+      shareEl.checked = false;
+      if (opened) opened.share = false;
+      cur.delLine = `Deleted by ${d.name}.`;
+      conflict = `${d.name} deleted this marker for everyone. Your copy is now private.`;
+    } else conflict = `This marker was changed by ${d.name} while you were editing. Saving keeps your version.`;
+    renderShare();
+  });
+  /* A teammate deleted a teammate's marker while this sheet held unsaved typing: the typing is never thrown away. The sheet
+     becomes an unsaved new private marker at the same place, holding what is typed; Save makes it, Cancel and Back ask. */
+  function orphan(name) {
+    cur = { ...cur, id: null, typed: true, t: 0, rx: false, orphan: true };
+    $('#mkTitle').textContent = 'New marker';
+    $('#mkDel').hidden = true;
+    $('#mkMove').hidden = true;
+    $('#mkGo').textContent = 'Go to';
+    shareEl.checked = false;
+    if (opened) opened.share = false;
+    conflict = `${name} deleted this marker for everyone. Save keeps what you typed as a private marker of your own.`;
+    renderAge();
+    renderShare();
+  }
+  let badges = !!(FK.mesh && FK.mesh.enabled());
+  FK.on('mesh', () => {
+    if (dlg.open && cur) renderShare();
+    const now = FK.mesh.enabled();
+    if (now !== badges) { badges = now; render(); if (ldlg.open) renderList(); }   // the corner marks come and go with the switch
+  });
+  FK.on('wps', () => { if (dlg.open && cur && !dlg.inert) renderShare(); });
 
   /* ---------- List sheet: markers and drawn shapes (tac-shapes.js) together ---------- */
   const ldlg = $('#dlgList');
@@ -7490,7 +8985,7 @@ const BALS = (() => {
       const w = r.w, rel = relText(w.lat, w.lon), age = isAffil(w.kind) && known(w) ? ageText(w.t) : '';
       const meta = [gridText(w.lat, w.lon), rel, age].filter(Boolean).map(esc).join('<br>');
       return `<li class="${w.id === tid ? 'tgt' : ''}"><button type="button" data-id="${esc(w.id)}">
-        <i class="mk-ic${isStale(w) ? ' stale' : ''}">${icon(w.kind, { stale: isStale(w) })}</i>
+        <i class="mk-ic${isStale(w) ? ' stale' : ''}">${glyph(w, { stale: isStale(w) })}${netBadge(w)}</i>
         <span><span class="mk-name">${esc(w.name)}</span>${w.id === tid ? ' <span class="mk-tag">Going to</span>' : ''}<br><span class="hint">${meta}</span></span></button></li>`;
     }).join('');
   }
@@ -7548,6 +9043,7 @@ const BALS = (() => {
     if (ldlg.open) renderList();
     if (dlg.open && cur) {
       renderAge();
+      renderShare();
       const rel = relText(cur.lat, cur.lon);
       $('#mkRel').hidden = !rel; $('#mkRel').textContent = rel;
     }
@@ -7562,7 +9058,278 @@ const BALS = (() => {
   document.addEventListener('visibilitychange', () => { syncTimer(); if (tick) refresh(); });
   syncTimer();
 
-  FK.markers = { icon, edit, create, openList, render, ageText, timerOn: () => !!tick };
+  FK.markers = { icon, line: LINE, edit, create, openList, render, ageText, sendChange, timerOn: () => !!tick,
+                 openId: () => (dlg.open && cur && cur.id) || null };
+})();
+
+/* ---------- The Radio button on the map and the Radio sheet (FK.radioSheet) ----------
+   The button exists only while the Settings switch is on (FK.mesh.enabled()). Its label and its icon shape follow the link:
+   off, connecting (also while the radio's list downloads), connected, lost. The sheet connects and disconnects, and shows the
+   channel, the warnings about it and the teammates. Redraws are coalesced to one per animation frame (a start-up download
+   can send 100+ events in one tick) and the sheet is only redrawn while it is open. Every name comes from another person's
+   radio, so everything that reaches innerHTML goes through FK.esc. */
+(() => {
+  const { $, esc, on } = FK;
+  const dlg = $('#dlgRadio');
+  /* The button is made here and only while the switch is on: with it off the map has its four buttons and nothing else. */
+  let btn = null;
+  function ensureButton() {
+    if (btn) return btn;
+    btn = document.createElement('button');
+    btn.id = 'mRadio';
+    btn.addEventListener('click', open);
+    $('.mapctl').appendChild(btn);
+    return btn;
+  }
+  const dropButton = () => { if (btn) { btn.remove(); btn = null; shape = ''; } };
+  const STATE = { off: 'off', connecting: 'connecting', syncing: 'connecting', on: 'connected', lost: 'connection lost' };
+  /* Lucide line icons (vendor/lucide/comms-icons.json), the inside of a 24 px icon; each state has its own shape. */
+  const ICON = {
+    off: '<path d="m17 17-5 5V12l-5 5"/><path d="m2 2 20 20"/><path d="M14.5 9.5 17 7l-5-5v4.5"/>',
+    connecting: '<path d="m7 7 10 10-5 5V2l5 5L7 17"/><path d="M20.83 14.83a4 4 0 0 0 0-5.66"/><path d="M18 12h.01"/>',
+    connected: '<path d="m7 7 10 10-5 5V2l5 5L7 17"/><line x1="18" x2="21" y1="12" y2="12"/><line x1="3" x2="6" y1="12" y2="12"/>',
+    'connection lost': '<path d="m7 7 10 10-5 5V2l5 5L7 17"/>'
+  };
+
+  /* The button warns (a "!" dot drawn in CSS) whenever Field Kit cannot share: the link is lost, the radio is connected on a
+     channel that is not private, or it cannot transmit. Connected and sharing has no mark. */
+  function look() {
+    const s = FK.mesh.status().state, w = STATE[s] || 'off';
+    if (s === 'lost') return { w, label: w, warn: true };
+    if (s !== 'on') return { w, label: w, warn: false };
+    const ch = FK.mesh.channel();
+    if (ch === 'public') return { w, label: 'connected, not sharing (public channel)', warn: true };
+    if (ch !== 'private') return { w, label: 'connected, not sharing', warn: true };
+    if (FK.mesh.radioProblem()) return { w, label: 'connected, can’t transmit', warn: true };
+    return { w, label: w, warn: false };
+  }
+  let shape = '';
+  function drawButton() {
+    if (!FK.mesh.enabled()) { dropButton(); return; }
+    ensureButton();
+    const k = look(), key = k.w + '|' + k.label + '|' + k.warn;
+    if (key === shape) return;
+    shape = key;
+    btn.setAttribute('aria-label', 'Radio: ' + k.label);
+    btn.title = 'Radio: ' + k.label;
+    btn.classList.toggle('warn', k.warn);
+    btn.innerHTML = FK.markers.line(ICON[k.w]);
+  }
+
+  /* ---- the sheet ---- */
+  const show = (el, text) => { el.hidden = !text; el.textContent = text || ''; };
+  const ageOf = t => FK.team.age(t).text;   // one rule with the map pins (tac-team.js)
+  const relOf = (lat, lon) => FK.relText(lat, lon, m => TGEOM.fmtDist(m, FK.tac.unit())) || 'distance unknown';
+  const distOf = m => { const f = FK.getFix(); return f && m.lat !== null ? GEO.distance(f.lat, f.lon, m.lat, m.lon) : null; };
+
+  /* A row with a position is a button: it closes this sheet, centres the map on the teammate and opens the teammate sheet. */
+  function rows(list) {
+    const withPos = list.filter(m => m.lat !== null).map(m => ({ m, d: distOf(m) }));
+    withPos.sort((a, b) => (a.d === null) - (b.d === null) || (a.d - b.d) || a.m.name.localeCompare(b.m.name));
+    const none = list.filter(m => m.lat === null).sort((a, b) => a.name.localeCompare(b.name));
+    return withPos.map(x => `<li><button type="button" data-num="${x.m.num}">${esc(x.m.name)} · ${esc(relOf(x.m.lat, x.m.lon))} · ${esc(ageOf(x.m.t))}</button></li>`)
+      .concat(none.map(m => `<li>${esc(m.name)} · no position yet</li>`)).join('');
+  }
+  const PROBLEM = { region: 'This radio has no region set, so it can’t transmit. Set the region in the Meshtastic app.',
+    txoff: 'This radio’s transmitter is switched off in its settings.' };
+
+  function drawSheet() {
+    if (!dlg.open) return;
+    const s = FK.mesh.status(), busy = s.state === 'connecting' || s.state === 'syncing', isOn = s.state === 'on', lost = s.state === 'lost';
+    const connect = $('#rdConnect');
+    const unsupported = s.state === 'off' && !FK.mesh.supported();
+    // status line and the one action
+    let status = '';
+    if (busy) status = 'Connecting…';
+    else if (isOn) status = `Connected to "${s.name}"`;
+    else if (lost) status = 'Connection lost. Check that the radio is on and close by.';
+    show($('#rdStatus'), status);
+    connect.hidden = unsupported || isOn;
+    connect.disabled = busy;
+    connect.textContent = busy ? 'Connecting…' : lost ? 'Connect again' : 'Connect a radio';
+    $('#rdDisconnect').hidden = !isOn;   // always the quiet style; while lost, Connect again is the one action
+    // what to do first, and why a connection failed
+    const info = $('#rdInfo');
+    if (s.state !== 'off') info.textContent = '';
+    else if (unsupported) info.innerHTML = '<p>This phone’s browser can’t reach a radio. The Meshtastic app will still share your position and markers with the group.</p>';
+    else info.innerHTML = '<p>You need a Meshtastic radio that is already set up in the Meshtastic app.</p><p>Close the Meshtastic app first: a radio talks to one app at a time.</p>';
+    show($('#rdErr'), s.state === 'off' && s.reason === 'failed' ? 'Couldn’t connect. If the Meshtastic app is open, close it and try again.' : '');
+    // the channel, only while the link is on (the last verdict is kept when it is lost)
+    const ch = isOn ? FK.mesh.channel() : '', pos = isOn ? FK.mesh.positions() : '';
+    show($('#rdChannel'), ch ? 'Channel: ' + ch : '');
+    show($('#rdProblem'), isOn ? PROBLEM[FK.mesh.radioProblem()] || '' : '');
+    show($('#rdWarn'), ch === 'public' ? 'This radio’s main channel is public, so Field Kit is not sending or showing anything. In the Meshtastic app, make your private channel the main (primary) one, share it with your group, then connect again.' : '');
+    show($('#rdPos'), ch === 'private' && pos === 'off' ? 'This channel is set to send no positions: yours isn’t shared and teammates’ won’t arrive.'
+      : ch === 'private' && pos === 'approx' ? 'This channel sends approximate positions, so teammates may show in the wrong place.' : '');
+    /* Connected on the private channel: the teammates heard. Not connected: the stored list, as last known (the pins stay
+       on the map too; none when the last verdict was a public channel, as on the map). */
+    const stored = !isOn && FK.mesh.channel() !== 'public' ? FK.mesh.teammates() : [];
+    const team = ch === 'private' ? FK.mesh.teammates() : stored.length ? stored : null;
+    $('#rdTeamBox').hidden = !team;
+    if (team) {
+      $('#rdTeamH').textContent = isOn ? `Teammates (${team.length})` : `Teammates, last known (${team.length})`;
+      $('#rdTeam').innerHTML = team.length ? rows(team) : '<li class="hint">No teammates heard yet.</li>';
+    }
+    // shared markers: the cap's line, and sending this phone's own shared markers again (src/tac-share.js)
+    show($('#rdDropped'), FK.share.dropped() > 0 ? 'Some older markers from teammates were dropped: this phone holds 500.' : '');
+    $('#rdResend').hidden = !(FK.mesh.canShare() && FK.tac.markers().some(m => m.net && FK.share.mine(m.id)));
+  }
+
+  let queued = 0;
+  function redraw() {
+    if (queued) return;
+    queued = requestAnimationFrame(() => { queued = 0; drawButton(); drawSheet(); });
+  }
+
+  let noDisc = 0, tapped = false;
+  function connectTap() {
+    if (tapped) return;
+    tapped = true;
+    noDisc = performance.now() + 400;   // a second tap of a double tap must not land on Disconnect
+    const s = FK.mesh.status().state;
+    const p = s === 'lost' ? FK.mesh.reconnect() : FK.mesh.connect();   // called inside the tap: the device chooser needs it
+    redraw();
+    Promise.resolve(p).catch(e => console.warn('radio connect', e)).then(() => { tapped = false; redraw(); });
+  }
+  $('#rdConnect').addEventListener('click', connectTap);
+  $('#rdDisconnect').addEventListener('click', () => { if (performance.now() >= noDisc) FK.mesh.disconnect(); });
+  $('#rdClose').addEventListener('click', () => FK.sheet.close(dlg));
+  /* Send all my shared markers again: the button itself says what happens (a toast would sit behind this sheet), and it is
+     disabled while its markers go out, one every few seconds. */
+  const RESEND = 'Send all my shared markers again';
+  const markersWord = n => `${n} ${n === 1 ? 'marker' : 'markers'}`;
+  let resendTimer = 0;
+  $('#rdResend').addEventListener('click', async () => {
+    const b = $('#rdResend');
+    if (b.disabled) return;
+    clearTimeout(resendTimer);
+    const n = FK.share.resendMine();
+    if (!n) { b.textContent = 'Nothing to send'; resendTimer = setTimeout(() => { b.textContent = RESEND; }, 4000); return; }
+    b.disabled = true;
+    b.textContent = `Sending ${markersWord(n)}…`;
+    await FK.share.whenIdle();
+    const sent = FK.share.batchSent();
+    b.disabled = false;
+    b.textContent = sent >= n ? `Sent ${markersWord(n)}` : `Sent ${sent} of ${n}. The rest go out when the radio connects.`;
+    resendTimer = setTimeout(() => { b.textContent = RESEND; }, 4000);
+  });
+  $('#rdTeam').addEventListener('click', e => {
+    const b = e.target.closest('button[data-num]');
+    if (!b) return;
+    const num = Number(b.dataset.num), m = FK.mesh.teammates().find(x => x.num === num);
+    if (!m || m.lat === null) return;
+    FK.sheet.close(dlg);
+    FK.mapShow(m.lat, m.lon);
+    FK.team.open(num);   // FK.sheet.open waits for this sheet's step back
+  });
+
+  /* While the sheet is open its ages move on with the clock, not only when a teammate is heard. */
+  let tick = 0;
+  function open() {
+    if (!FK.mesh.enabled()) return;
+    FK.sheet.open(dlg, {
+      onOpen: () => { drawSheet(); $('#rdTitle').focus(); clearInterval(tick); tick = setInterval(drawSheet, 60000); },
+      onClose: () => { clearInterval(tick); tick = 0; if (btn && !(FK.sheet.top && FK.sheet.top())) btn.focus(); }
+    });
+  }
+
+  on('mesh', () => { if (!FK.mesh.enabled() && dlg.open) FK.sheet.close(dlg); redraw(); });
+  on('team', () => { if (dlg.open) redraw(); });
+  on('wps', () => { if (dlg.open) redraw(); });
+  drawButton();
+
+  FK.radioSheet = { open };
+})();
+
+/* ---------- Teammates on the map (FK.team) ----------
+   Each teammate with a position (FK.mesh.teammates()) is a blue ring with the radio's name and how long ago it was heard under
+   it; not heard for 30 minutes, or the time unknown, it is dashed and hollow. Tapping one opens the Teammate sheet (read only:
+   Go to, Close). The group is map._fkTeam, under the marker pins. Redraws from 'team' events are coalesced to one per animation
+   frame (a start-up download sends 100+ in one tick) and happen only while the map exists; a one-minute timer, running only while
+   the Settings switch is on and the map is showing, moves a pin past 30 minutes without waiting for news. Names come from other
+   people's radios: everything that reaches innerHTML goes through FK.esc. */
+(() => {
+  const FK = window.FK;
+  const { $, esc, on } = FK;
+  const OLD_MS = 30 * 60000;
+  const dlg = $('#dlgMate');
+
+  /* The one rule for a teammate's age, used by the pins, the sheet and the Radio sheet's list: { text, old }.
+     t is ms (0 = unknown). A time up to 2 min ahead of the phone clock is a radio clock a little fast: it counts as now
+     (the youngest age, a fresh pin). Further ahead, or 0: "age unknown" and an old pin. Never a wrong age. */
+  const SKEW_MS = 2 * 60000;
+  function age(t, now = Date.now()) {
+    if (!(t > 0) || t > now + SKEW_MS) return { text: 'age unknown', old: true };
+    const at = Math.min(t, now);
+    return { text: FK.markers.ageText(Date.now() - (now - at)), old: now - at > OLD_MS };
+  }
+  const shows = () => FK.mesh.enabled() && FK.mesh.channel() !== 'public';
+  const list = () => shows() ? FK.mesh.teammates().filter(m => m.lat !== null && m.lon !== null) : [];
+  /* The Lucide user-round icon (vendor/lucide/comms-icons.json). */
+  const USER = '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>';
+
+  function render() {
+    const map = FK.leafletMap();
+    if (!map || !map._fkTeam) return;
+    const g = map._fkTeam; g.clearLayers();
+    list().forEach(m => {
+      const { text: words, old } = age(m.t);
+      const html = `<div class="tm-pin${old ? ' old' : ''}" data-num="${m.num}"><i>${FK.markers.line(USER)}</i><b>${esc(m.name)}</b><em>${esc(words)}</em></div>`;
+      L.marker([m.lat, m.lon], { icon: L.divIcon({ className: 'tm-icon', iconSize: [30, 30], iconAnchor: [15, 15], html }),
+        title: `${m.name}, ${words}`, zIndexOffset: -500 })   // marker pins have 0: theirs sit on top
+        .on('click', () => { if (!(FK.mapTools && FK.mapTools.mode())) open(m.num); }).addTo(g);   // inert while a tool mode is on
+    });
+  }
+
+  /* ---- the sheet ---- */
+  let curNum = null;
+  const find = num => list().find(m => m.num === num);
+  const gridText = (lat, lon) => { const g = GEO.toMGRS(lat, lon); return g ? g.text : `${lat.toFixed(5)}, ${lon.toFixed(5)}`; };
+  function fill() {
+    const m = find(curNum);
+    if (!m) { FK.sheet.close(dlg); return; }
+    $('#tmTitle').textContent = m.name;
+    $('#tmGrid').textContent = gridText(m.lat, m.lon);
+    $('#tmApprox').hidden = !m.approx;   // the channel or the radio sends it with reduced precision (the pin looks the same)
+    const rel = FK.relText(m.lat, m.lon, d => TGEOM.fmtDist(d, FK.tac.unit()));
+    $('#tmRel').hidden = !rel; $('#tmRel').textContent = rel;
+    const a = age(m.t);
+    $('#tmAge').textContent = a.text === 'age unknown' ? 'Position time unknown' : `Position from ${a.text}`;
+  }
+  function open(num) {
+    curNum = num;
+    if (!find(num)) return;
+    fill();
+    FK.sheet.open(dlg, { onOpen: () => $('#tmTitle').focus(), onClose: () => { curNum = null; } });
+  }
+  $('#tmGo').addEventListener('click', () => {
+    const m = find(curNum);
+    if (m) FK.tac.setTarget({ type: 'point', lat: m.lat, lon: m.lon, name: m.name });
+    FK.sheet.close(dlg);
+  });
+  $('#tmClose').addEventListener('click', () => FK.sheet.close(dlg));
+
+  /* ---- redraws ---- */
+  let queued = 0;
+  function schedule() {
+    if (queued) return;
+    queued = requestAnimationFrame(() => { queued = 0; FK.team.render(); if (dlg.open && curNum !== null) fill(); });
+  }
+  let tick = 0;
+  function syncTimer() {
+    const want = FK.mesh.enabled() && !document.hidden && FK.tab() === 'tactical' && FK.view() === 'map';
+    if (want && !tick) tick = setInterval(() => { FK.team.render(); if (dlg.open && curNum !== null) fill(); }, 60000);
+    else if (!want && tick) { clearInterval(tick); tick = 0; }
+  }
+  on('team', schedule);
+  on('mesh', () => { schedule(); syncTimer(); if (!FK.mesh.enabled() && dlg.open) FK.sheet.close(dlg); });
+  on('shown', () => { syncTimer(); });
+  on('unit', () => { if (dlg.open) fill(); });
+  on('fix', () => { if (dlg.open && curNum !== null) schedule(); });
+  document.addEventListener('visibilitychange', () => { syncTimer(); if (tick) FK.team.render(); });
+  syncTimer();
+
+  FK.team = { render, open, age, timerOn: () => !!tick };
 })();
 
 /* ---------- Tactical map tools: the scale bar, the Tools sheet, the tool modes (Measure, Route, Area, Move a marker) and Go to grid ----------
@@ -7807,7 +9574,10 @@ const BALS = (() => {
     const id = moveId, w = FK.tac.markers().find(x => x.id === id), c = crosshair();
     if (w) {
       // A failed save still moves the marker for this session; tac-data shows the full-storage message itself.
-      if (FK.tac.updateMarker(id, { lat: c[0], lon: c[1], alt: null })) toast(`Moved ${w.name}`);
+      const ok = FK.tac.updateMarker(id, { lat: c[0], lon: c[1], alt: null });
+      // a shared marker goes out again at its new place, with one toast for both (tac-markers.js)
+      if (FK.share.isShared(id)) FK.markers.sendChange(id, ok ? w.name : '');
+      else if (ok) toast(`Moved ${w.name}`);
     }
     leave();
   });

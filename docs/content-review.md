@@ -8291,3 +8291,80 @@ https://www.norma-ammunition.com/governmental/products/tsx-copper-solid/223-rem-
 Fiocchi https://fiocchi.com/en/705556.html (failed); Sniper's Hide thread
 https://www.snipershide.com/shooting/threads/g7-bc-for-308-175-smk.7775/page-2 (the fetch failed). Not opened for lack of a
 search result giving the address: any Sierra page that prints a G1 or G7 for the 175 gr MatchKing.
+
+# Comms: Meshtastic protobuf codec (src/mesh-pb.js)
+
+Source checked: the `meshtastic` Python package, version 2.7.11 (`meshtastic.protobuf.mesh_pb2`, `channel_pb2`, `portnums_pb2`),
+reading each message's `DESCRIPTOR.fields`. No code was taken from the package; `tests/test_mesh_pb.py` compares the codec's bytes
+and decoded values against it. Every field number below matched the task brief's list; the wire types were added from the
+descriptors. Wire type: V = varint, F32 = fixed32, SF32 = sfixed32, L = length-delimited. Fields not listed are skipped by wire type.
+
+| Message | Field (number, type) used |
+|---|---|
+| ToRadio | packet (1, MeshPacket), want_config_id (3, uint32 V), heartbeat (7, Heartbeat, written empty) |
+| FromRadio | packet (2), my_info (3), node_info (4), config_complete_id (7, uint32 V), rebooted (8, bool V), channel (10); the last of these present is the payload (a oneof) |
+| MeshPacket | from (1, fixed32), to (2, fixed32), channel (3, uint32 V), decoded (4, Data), encrypted (5, bytes; read only to tell encrypted from decoded), id (6, fixed32), rx_time (7, fixed32), hop_limit (9, uint32 V), want_ack (10, bool V) |
+| Data | portnum (1, enum V), payload (2, bytes) |
+| Position | latitude_i (1, sfixed32), longitude_i (2, sfixed32), altitude (3, int32 V), time (4, fixed32) |
+| User | long_name (2, string), short_name (3, string) |
+| NodeInfo | num (1, uint32 V), user (2), position (3), last_heard (5, fixed32), channel (7, uint32 V) |
+| MyNodeInfo | my_node_num (1, uint32 V) |
+| Channel | index (1, int32 V), settings (2, ChannelSettings), role (3, enum V: 0 disabled, 1 primary, 2 secondary) |
+| ChannelSettings | psk (2, bytes), name (3, string), module_settings (7, ModuleSettings) |
+| ModuleSettings | position_precision (1, uint32 V) |
+| Waypoint | id (1, uint32 V), latitude_i (2, sfixed32), longitude_i (3, sfixed32), expire (4, uint32 V), locked_to (5, uint32 V), name (6, string), description (7, string), icon (8, fixed32) |
+
+Note the fixed32 fields: `from`, `to`, `id`, `rx_time`, `time`, `last_heard` and the waypoint `icon` are fixed-width on the wire, while
+the waypoint `id`, `expire` and `locked_to` are varints. Coordinates are degrees times 1e7. Altitude is a signed int32: a negative value
+is a 10-byte varint, of which the codec keeps the low 32 bits. Page opened: none (no web page was needed; the package descriptors are the source).
+
+# Comms: Bluetooth link (src/mesh-link.js)
+
+Page opened: Meshtastic, "Client API" (https://meshtastic.org/docs/development/device/client-api/; the page shows no date, only "Last updated by" a
+contributor). It gives the service UUID `6ba1b218-15a8-461f-9fa8-5dcae273eafd` and the three characteristics: fromradio
+`2c55e69e-4993-11ed-b878-0242ac120002`, toradio `f75c76d2-129e-4dad-a1dd-7866124401e7`, fromnum `ed9da18c-a800-4f66-a670-aa7547e34453`. All four match
+the task brief and are what the code uses. The page says to keep reading fromradio until it returns an empty packet (also after each fromnum
+notification). It does not mention heartbeats: the 300 s heartbeat is implemented as the task brief specifies, and whether a real radio needs
+it is not proved here.
+
+# Comms: protocol facts added in the final fix round (release 1, v7.11)
+
+Field numbers below were read from the `meshtastic` Python package 2.7.11 descriptors (`config_pb2.Config.DESCRIPTOR.fields`,
+`config_pb2.Config.LoRaConfig.DESCRIPTOR.fields`, `mesh_pb2.NodeInfo`, `mesh_pb2.MeshPacket`, `mesh_pb2.Position`, `mesh_pb2.FromRadio`);
+`tests/test_mesh_pb.py::test_config_lora_is_decoded` and `::test_node_flags_pki_and_precision_are_decoded` assert them against the package.
+
+| Message | Field (number, type) now read |
+|---|---|
+| FromRadio | config (5, Config): added to the oneof members the codec reads; moduleConfig (9), metadata (13), queueStatus (11) stay 'other' |
+| Config | lora (6, LoRaConfig); every other member gives `{ type: 'config', lora: null }` |
+| LoRaConfig | region (7, enum V; 0 = UNSET), hop_limit (8, uint32 V), tx_enabled (9, bool V) |
+| NodeInfo | via_mqtt (8, bool V), is_ignored (11, bool V) |
+| MeshPacket | pki_encrypted (17, bool V) |
+| Position | precision_bits (23, uint32 V) |
+
+- Defaults (page opened: Meshtastic, "LoRa Configuration", https://meshtastic.org/docs/configuration/radio/lora; no date shown): Transmit
+  Enabled "Defaults to true"; Max Hops "Default is 3"; Region "Default is `unset`. As long as this is not set, the node screen will display a
+  message and not transmit any packets." So a received LoRaConfig with tx_enabled absent (proto3 false) is a transmitter switched off (a fresh
+  radio sends true), and region 0 is a radio that will not transmit. Field Kit's `FK.mesh.radioProblem()` reports 'region' or 'txoff' only once a
+  LoRaConfig has arrived in the current download; with none it reports nothing.
+- Hop limit: MeshPacket.hop_limit left at 0 with want_ack off makes the firmware send the packet zero-hop (the protocol review, citing
+  github.com/meshtastic/meshtastic-sdk pull 201 on Router::sendLocal; not opened in this round). Field Kit sends every packet with the radio's
+  LoRaConfig.hop_limit (capped at 7, the protocol's most), or 3 until that config has arrived or when it reads 0.
+- The default channel key (the package's `meshtastic/util.py`: `DEFAULT_KEY = base64.b64decode("1PG7OiApB1nwvP+rz05pAQ==")`, and the
+  channel.proto comment in `channel_pb2.pyi`: "`1` = The special "default" channel key: {0xd4, 0xf1, 0xbb, 0x3a, 0x20, 0x29, 0x07, 0x59, 0xf0,
+  0xbc, 0xff, 0xab, 0xcf, 0x4e, 0x69, 0x01}"). Page opened: Meshtastic, "Encryption technical"
+  (https://meshtastic.org/docs/development/reference/encryption-technical/): a one-byte PSK is shorthand, "`1` selects the published default
+  key", "`2` through `255` select the default key with that value minus one added to its last byte", "These are public keys, not private
+  ones", "A key of length 0 disables encryption". The rule that the firmware treats any 16-byte key whose first 15 bytes are the default's as
+  public (Channels.cpp) is the protocol review's reading of the firmware; it was not opened here. Field Kit: a key of 0 or 1 byte, a key of all
+  zero bytes, or a 16-byte key starting with the first 15 default bytes is 'public'. The bytes are published, not a secret.
+- Special nonces: current firmware gives want_config_id 69420 (config only) and 69421 (nodes only) a meaning of their own (protocol review);
+  Field Kit's random nonce is never 0, 69420 or 69421.
+- Heartbeat: ToRadio.heartbeat is written empty, so its nonce is 0 (a nonce of 1 asks the radio to broadcast its NodeInfo: protocol review).
+- pki_encrypted: a direct message encrypted to this radio's own key arrives with channel 0; Field Kit ignores every such packet for teammates
+  and markers, and accepts a waypoint only when `to` is the broadcast address.
+- rx_time / position time: a time more than 2 minutes ahead of the phone clock is treated as absent. A live packet is heard at its rx_time
+  (else the phone clock); a live position with no time of its own takes that; a node-database position with no time stays "age unknown".
+- precision_bits 1-31 is a reduced-precision position: the teammate sheet says "Approximate position".
+- Primary channel: the verdict is taken only from role primary at index 0 (sends and filters use index 0); a primary reported at another index
+  gives 'unknown'.

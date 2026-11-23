@@ -794,7 +794,7 @@ def test_unfinished_route_waits_for_a_sheet_opened_from_search(page, app_url, ke
     page.fill('#searchInput', q)
     page.click(f'#searchBody .sr-item[data-key="{key}"]')
     page.wait_for_selector(f'{dlg}[open]')
-    page.wait_for_timeout(300)
+    page.evaluate('new Promise(r => FK.sheet.afterStep(r))')   # the sheet's history step has landed (was a fixed 300 ms)
     assert ev(page, 'FK.mapTools.mode()') is None
     assert ev(page, 'history.state.fkLayer') is None
     page.click(close)
@@ -915,12 +915,12 @@ def test_unfinished_route_stays_out_of_the_way_of_a_marker_opened_from_the_list_
     page.fill('#searchInput', 'markers')
     page.click('#searchBody .sr-item[data-key="a:waypoints"]')
     page.wait_for_selector('#dlgList[open]')
-    page.wait_for_timeout(300)
+    page.evaluate('new Promise(r => FK.sheet.afterStep(r))')   # the sheet's history step has landed (was a fixed 300 ms)
     # a slow phone: every history step lands a quarter of a second late
     page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0")
     page.click('#dlgList [data-id]')
     page.wait_for_selector('#dlgMarker[open]')
-    page.wait_for_timeout(700)
+    page.evaluate('new Promise(r => FK.sheet.afterStep(r))')   # the slowed step has landed (was a fixed 700 ms)
     assert ev(page, 'FK.mapTools.mode()') is None
     assert ev(page, 'history.state.fkLayer') is None
     assert ev(page, 'history.state.fkSheet') == 'dlgMarker'

@@ -12,6 +12,15 @@ AREA = {'id': 'a1', 'name': 'Home', 'layer': 'topo', 's': 43.0, 'w': -76.3, 'n':
         'zMin': 5, 'zMax': 14, 'tiles': 10, 'bytes': 1000}
 
 
+# A sheet's own history step has landed (FK.sheet.afterStep runs once it settles on popstate, or at once when none is on its
+# way): polled for instead of a fixed sleep, which a busy machine can outlast.
+SETTLED = "new Promise(r => FK.sheet.afterStep(r))"
+
+
+def settled(page):
+    page.evaluate(SETTLED)
+
+
 def boot(page, app_url, hash_='#/tactical/map'):
     """An entry from outside the app first, so an overshoot would leave Field Kit."""
     page.goto('about:blank')
@@ -87,7 +96,8 @@ def test_popping_a_sheet_does_not_rerender_the_screen(page, app_url):
     expect(page.locator('#dlgAsk')).to_be_visible()
     page.go_back()
     expect(page.locator('#dlgAsk')).to_be_hidden()
-    page.wait_for_timeout(100)
+    page.wait_for_function('!history.state.fkSheet && FK.sheet.top() === null')
+    settled(page)
     assert page.evaluate('window.__n') == 0
 
 
@@ -123,7 +133,8 @@ def test_on_close_runs_once(page, app_url):
     page.evaluate("window.__c = 0; FK.sheet.open(document.querySelector('#dlgLayers'), { onClose: () => window.__c++ })")
     page.keyboard.press('Escape')
     expect(page.locator('#dlgLayers')).to_be_hidden()
-    page.wait_for_timeout(100)
+    page.wait_for_function('FK.sheet.top() === null && !history.state.fkSheet')
+    settled(page)
     assert page.evaluate('window.__c') == 1
 
 
@@ -259,7 +270,7 @@ def test_open_that_cannot_show_leaves_stack_and_history_alone(page, app_url):
     boot(page, app_url)
     before = page.evaluate('[history.length, history.state.fkIdx]')
     page.evaluate("window.__c = 0; const d = document.querySelector('#dlgLayers'); d.show(); FK.sheet.open(d, { onClose: () => window.__c++ })")
-    page.wait_for_timeout(100)
+    settled(page)
     assert page.evaluate('window.__c') == 1
     assert page.evaluate('FK.sheet.top()') is None
     assert page.evaluate('[history.length, history.state.fkIdx, history.state.fkSheet === undefined]') == [*before, True]
@@ -291,8 +302,9 @@ def test_opening_search_while_a_sheet_is_open_closes_it(page, app_url):
 
 
 def settle_sheets(page):
-    """Let a sheet's history step finish (it settles on popstate, or after its 500 ms fallback)."""
-    page.evaluate("new Promise(r => setTimeout(r, 700))")
+    """Let a sheet's history step finish (it settles on popstate, or after its fallback)."""
+    page.wait_for_function('FK.sheet.top() === null || !!document.querySelector("dialog[open]")')
+    settled(page)
 
 
 def assert_navigated_cleanly(page):
@@ -432,7 +444,7 @@ def test_layer_on_back_can_open_a_confirm_that_stays_open(page, app_url):
     expect(page.locator('#dlgConfirm')).to_be_visible()
     page.click('#cfOk')
     page.wait_for_function('window.__r === true && !history.state.fkLayer && !history.state.fkSheet')
-    page.wait_for_timeout(100)
+    settled(page)
     assert page.evaluate('FK.route.index() === history.state.fkIdx')
     page.go_back()
     assert page.url == 'about:blank'
@@ -461,22 +473,25 @@ def test_layer_close_with_a_sheet_open_on_top_closes_both(page, app_url):
 
 def test_each_layer_gets_its_own_entry_id(page, app_url):
     boot(page, app_url)
-    ids = page.evaluate("""async () => { const a = FK.sheet.layer('t', {}); await new Promise(r => setTimeout(r, 50)); const x = history.state.fkLayer;
-      a.close(); await new Promise(r => setTimeout(r, 200)); FK.sheet.layer('t', {}); await new Promise(r => setTimeout(r, 50)); return [x, history.state.fkLayer]; }""")
+    ids = page.evaluate("""async () => { const step = () => new Promise(r => FK.sheet.afterStep(r));
+      const a = FK.sheet.layer('t', {}); await step(); const x = history.state.fkLayer;
+      a.close(); await step(); FK.sheet.layer('t', {}); await step(); return [x, history.state.fkLayer]; }""")
     assert ids[0] != ids[1] and all(i.startswith('t.') for i in ids)
 
 
 # ---------- The same dialog closed and opened again at once (a confirm after a confirm, a tap right after Close) ----------
 
 REOPEN = """async () => {
+  // each wait is for the sheet's own history step to land (FK.sheet.afterStep), never a fixed sleep
+  const step = () => new Promise(r => FK.sheet.afterStep(r));
   const d = document.querySelector('#dlgLayers');
   FK.sheet.open(d);
-  await new Promise(r => setTimeout(r, 50));
+  await step();
   FK.sheet.close(d); FK.sheet.open(d);   // same tick
-  await new Promise(r => setTimeout(r, 100));
+  await step();
   const ok = d.open && FK.sheet.top() === d && history.state.fkSheet === 'dlgLayers' && FK.route.index() === history.state.fkIdx;
   FK.sheet.close(d);
-  await new Promise(r => setTimeout(r, 100));
+  await step();
   return ok && !d.open && !history.state.fkSheet;
 }"""
 
@@ -487,10 +502,11 @@ def test_reopening_the_same_sheet_in_the_same_tick_keeps_it_open(page, app_url):
     fails = sum(0 if page.evaluate(REOPEN) else 1 for _ in range(20))
     assert fails == 0, f'{fails} of 20'
     page.evaluate("FK.sheet.close(document.querySelector('#dlgLayers'))")
-    page.wait_for_timeout(100)
+    settled(page)
     # Back closes a reopened sheet, and only one entry was ever left for it
-    page.evaluate("(async () => { const d = document.querySelector('#dlgLayers'); FK.sheet.open(d); await new Promise(r => setTimeout(r, 50)); FK.sheet.close(d); FK.sheet.open(d); })()")
-    page.wait_for_timeout(150)
+    page.evaluate("(async () => { const d = document.querySelector('#dlgLayers'); FK.sheet.open(d); await new Promise(r => FK.sheet.afterStep(r)); FK.sheet.close(d); FK.sheet.open(d); })()")
+    page.wait_for_function("FK.sheet.top() === document.querySelector('#dlgLayers') && history.state.fkSheet === 'dlgLayers'")
+    settled(page)
     expect(page.locator('#dlgLayers')).to_be_visible()
     page.go_back()
     expect(page.locator('#dlgLayers')).to_be_hidden()
@@ -501,17 +517,18 @@ def test_reopening_the_same_sheet_in_the_same_tick_keeps_it_open(page, app_url):
 
 
 CONFIRM_TWICE = """async () => {
+  // history.go()'s popstate can take a while under load (sheet.js allows 3 s): poll, never a fixed sleep.
+  const until = async (f, ms = 4000) => { const end = performance.now() + ms; while (!f()) { if (performance.now() > end) return false; await new Promise(r => setTimeout(r, 10)); } return true; };
   window.__second = 'pending';
   const first = FK.sheet.confirm({ title: 'One', ok: 'Yes' });
-  await new Promise(r => setTimeout(r, 30));
+  await until(() => document.querySelector('#dlgConfirm').open && document.querySelector('#cfTitle').textContent === 'One');
   document.querySelector('#cfOk').click();
   const a = await first;
   const second = FK.sheet.confirm({ title: 'Two', ok: 'Yes' });   // in the continuation
   second.then(v => { window.__second = v; });
-  await new Promise(r => setTimeout(r, 100));
-  const open = document.querySelector('#dlgConfirm').open && document.querySelector('#cfTitle').textContent === 'Two';
+  const open = await until(() => document.querySelector('#dlgConfirm').open && document.querySelector('#cfTitle').textContent === 'Two');
   if (open) document.querySelector('#cfOk').click();
-  await new Promise(r => setTimeout(r, 100));
+  await until(() => window.__second !== 'pending' && !history.state.fkSheet);
   return a === true && open && window.__second === true && FK.route.index() === history.state.fkIdx && !history.state.fkSheet;
 }"""
 
@@ -543,7 +560,7 @@ def test_a_confirm_with_two_choices_tells_a_close_from_either_choice(page, app_u
     page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0")   # a slow phone
     ask = "window.__r = 'pending'; void FK.sheet.confirm({ title: 'Which?', ok: 'A', cancel: 'B', choice: true }).then(v => { window.__r = v; })"
     for how, want in [('#cfOk', 'ok'), ('#cfCancel', 'cancel'), ('back', None), ('Escape', None)]:
-        page.wait_for_timeout(400)
+        settled(page)   # the slowed step of the last answer has landed
         page.evaluate(ask)
         expect(page.locator('#dlgConfirm')).to_be_visible()
         expect(page.locator('#cfOk')).to_have_text('A')
@@ -558,7 +575,7 @@ def test_a_confirm_with_two_choices_tells_a_close_from_either_choice(page, app_u
         expect(page.locator('#dlgConfirm')).to_be_hidden()
         page.wait_for_function("window.__r !== 'pending'")
         assert page.evaluate('window.__r') == want, how
-    page.wait_for_timeout(400)
+    settled(page)
     # without choice the answer is still true or false
     page.evaluate("window.__r = 'pending'; void FK.sheet.confirm({ title: 'Sure?', ok: 'Go' }).then(v => { window.__r = v; })")
     assert page.evaluate('document.activeElement.id') == 'cfCancel'

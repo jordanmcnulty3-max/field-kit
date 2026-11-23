@@ -3,7 +3,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
-  const APP_VERSION = '7.10';
+  const APP_VERSION = '7.11';
   /* What a grid that GEO.parseAny cannot read gets: the Position Add row and the map's Go to grid both show it. */
   const GRID_HELP = 'Couldn’t read that location. Try a grid like 18T VN 12345 67890, or 43.0000, -76.0000, or 43°00′00″N 76°00′00″W.';
   const BLOCKED_MSG = 'Location is blocked. Allow location for this site in Chrome’s site settings, then reload.';
@@ -598,7 +598,7 @@
   /* Keys that stay on this phone: never written to a backup and never touched by a restore. A half-finished
      protocol must not reappear on another phone, a stale position must not pass as current, and a backup handed
      to someone else must not skip their advanced-procedures warning. */
-  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck'];
+  const SESSION_ONLY = ['fk.proto.active', 'fk.lastFix', 'fk.advAck', 'fk.meshTeam', 'fk.meshMe'];
   const backedUp = k => k.startsWith('fk.') && !SESSION_ONLY.includes(k);
   const phoneKeys = () => { const ks = []; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (backedUp(k)) ks.push(k); } return ks; };
   const hasPatients = data => { try { const v = JSON.parse(data['fk.patients']); return Array.isArray(v) && v.length > 0; } catch { return false; } };
@@ -665,6 +665,15 @@
     if (b.version !== undefined && newerVersion(b.version, APP_VERSION)) { msg.textContent = 'This backup is from a newer version of Field Kit. Update the app first.'; return; }
     const file = {};
     Object.entries(d).forEach(([k, v]) => { if (backedUp(k)) file[k] = v; });
+    /* A shared marker that had not gone out when the backup was made is not sent by itself after the restore (it may be long
+       out of date): its "not sent yet" is cleared, and Send again is there for it. */
+    if (file['fk.wps']) {
+      try {
+        const w = JSON.parse(file['fk.wps']);
+        const was = x => !!x && typeof x === 'object' && !!x.net && typeof x.net === 'object' && x.net.pending === true;
+        if (Array.isArray(w) && w.some(was)) file['fk.wps'] = JSON.stringify(w.map(x => was(x) ? { ...x, net: { ...x.net, pending: false } } : x));
+      } catch { /* not JSON: tac-data's own checks deal with it after the reload */ }
+    }
     if (!Object.keys(file).length) { msg.textContent = 'That backup is empty, so nothing was restored.'; return; }
     const when = new Date(b.saved);
     pendingRestore = file;

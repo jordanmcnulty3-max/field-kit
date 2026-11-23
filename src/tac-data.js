@@ -14,27 +14,57 @@
   const TYPES = { route: { min: 2, name: 'Route' }, area: { min: 3, name: 'Area' }, ring: { min: 1, name: 'Ring' } };
 
   /* ---------- Markers ---------- */
-  const cleanMarker = w => ({
-    id: w.id, name: String(w.name ?? 'Marker').slice(0, MAX_NAME), lat: w.lat, lon: w.lon, alt: fin(w.alt) ? w.alt : null, t: fin(w.t) ? w.t : 0,
-    kind: kindOk(w.kind) ? w.kind : 'point', note: typeof w.note === 'string' ? w.note.slice(0, MAX_NOTE) : ''
-  });
+  /* A shared marker carries net, its record on the radio mesh (src/tac-share.js): wid (the waypoint number, 1..0xFFFFFFFF),
+     from (the maker's radio number; 0 = this phone, before any radio was known), by (the maker's name), t (last sent or
+     received, ms), chBy and chT (who changed it last from the mesh, and when), icon (another app's emoji, kept only on a
+     Point; 0 otherwise), expire (epoch SECONDS as on the wire; 0 never), pending (to send on the next connection), rx (t is
+     when it arrived, not when it was marked), mine (this phone chose to share it; a record without it counts as mine only
+     when from is 0, which only this phone's unsent share can have). Kept only when every field has the right type; otherwise the marker is
+     private. Markers saved before the radio link have no net, and a marker with no net is never sent. */
+  const NET_STR = 40;
+  const u32 = v => Number.isInteger(v) && v >= 0 && v <= 0xFFFFFFFF;
+  function cleanNet(n, kind) {
+    if (!n || typeof n !== 'object' || Array.isArray(n)) return null;
+    const { wid, from, by, t, chBy, chT, icon, expire, pending, rx } = n;
+    const mine = n.mine === undefined ? from === 0 : n.mine;
+    if (!(u32(wid) && wid >= 1) || !u32(from) || typeof by !== 'string' || !fin(t) || typeof chBy !== 'string' || !fin(chT) ||
+        !u32(icon) || !u32(expire) || typeof pending !== 'boolean' || typeof rx !== 'boolean' || typeof mine !== 'boolean') return null;
+    return { wid, from, by: by.slice(0, NET_STR), t, chBy: chBy.slice(0, NET_STR), chT,
+      icon: kind === 'point' && !MMK.kindFor(icon) ? icon : 0, expire, pending, rx, mine };
+  }
+  const cleanMarker = w => {
+    const kind = kindOk(w.kind) ? w.kind : 'point';
+    const m = {
+      id: w.id, name: String(w.name ?? 'Marker').slice(0, MAX_NAME), lat: w.lat, lon: w.lon, alt: fin(w.alt) ? w.alt : null, t: fin(w.t) ? w.t : 0,
+      kind, note: typeof w.note === 'string' ? w.note.slice(0, MAX_NOTE) : ''
+    };
+    const net = cleanNet(w.net, kind);
+    if (net) m.net = net;
+    return m;
+  };
   /* Keep the first record of any repeated id. */
   const firsts = arr => { const seen = new Set(); return arr.filter(x => !seen.has(x.id) && seen.add(x.id)); };
   let wps = firsts(list('wps', w => okId(w.id) && okLatLon(w.lat, w.lon))).map(cleanMarker);
-  const saveWps = () => { const ok = store.set('wps', wps); emit('wps'); return ok; };
+  { const wids = new Set(); wps.forEach(w => { if (w.net && (wids.has(w.net.wid) || !wids.add(w.net.wid))) delete w.net; }); }   // a repeated wid: the first keeps it
+  /* Inside batch() a change is only marked: the batch writes once and emits 'wps' once at its end. */
+  let batching = 0, dirty = false;
+  const saveWps = () => {
+    if (batching) { dirty = true; return true; }
+    const ok = store.set('wps', wps); emit('wps'); return ok;
+  };
   /* A new id that no marker or shape holds, however many are added in the same millisecond. */
   let seq = 0;
   const newId = prefix => {
-    const used = new Set(wps.map(w => w.id).concat(shapes.map(s => s.id)));
+    const used = id => wps.some(w => w.id === id) || shapes.some(s => s.id === id);   // no Set per call: a burst adds thousands
     let id;
-    do id = prefix + Date.now().toString(36) + (seq++).toString(36); while (used.has(id));
+    do id = prefix + Date.now().toString(36) + (seq++).toString(36); while (used(id));
     return id;
   };
 
   /* Returns the marker, or null if it couldn't be saved (it stays on screen until the app closes). */
   function addMarker(o) {
     if (!o || !okLatLon(o.lat, o.lon)) return null;
-    const m = cleanMarker({ ...o, id: newId('m'), name: String(o.name || '').trim() || `WP ${wps.length + 1}`, t: Date.now() });
+    const m = cleanMarker({ ...o, net: null, id: newId('m'), name: String(o.name || '').trim() || `WP ${wps.length + 1}`, t: Date.now() });
     wps.push(m);
     const ok = saveWps();
     if (!ok) { toast(FULL_MSG); return null; }
@@ -50,7 +80,7 @@
     const added = [];
     (Array.isArray(arr) ? arr : []).forEach(o => {
       if (!o || !okLatLon(o.lat, o.lon)) return;
-      const m = cleanMarker({ ...o, id: newId('m'), name: String(o.name || '').trim() || `WP ${wps.length + 1}`, t: okTime(o.t) ? o.t : Date.now() });
+      const m = cleanMarker({ ...o, net: null, id: newId('m'), name: String(o.name || '').trim() || `WP ${wps.length + 1}`, t: okTime(o.t) ? o.t : Date.now() });
       wps.push(m); added.push(m);
     });
     if (!added.length) return { added, ok: true };
@@ -61,7 +91,7 @@
   /* Only these fields can change; a bad value refuses the whole patch. */
   const PATCH = {
     name: v => typeof v === 'string' && v.trim() !== '', lat: v => fin(v) && Math.abs(v) <= 90, lon: v => fin(v) && Math.abs(v) <= 180,
-    alt: v => v === null || fin(v), kind: kindOk, note: v => typeof v === 'string'
+    alt: v => v === null || fin(v), kind: kindOk, note: v => typeof v === 'string', t: fin
   };
   const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   function patchOk(patch) {
@@ -81,6 +111,53 @@
     wps = wps.filter(w => w.id !== id);
     fixTarget();
     saveWps();
+  }
+  const widHeld = (wid, exceptId) => wps.some(w => w.net && w.net.wid === wid && w.id !== exceptId);
+  /* Set (or with null, clear) a marker's shared record. False when there is no such marker, the record is malformed, another
+     marker holds its wid, or storage refused; then the marker is left exactly as it was (a record that is not saved must not
+     be sent later). */
+  function setNet(id, n) {
+    const i = wps.findIndex(w => w.id === id);
+    if (i < 0) return false;
+    let next;
+    if (n === null) { next = { ...wps[i] }; delete next.net; }
+    else {
+      const c = cleanNet(n, wps[i].kind);
+      if (!c || widHeld(c.wid, id)) return false;
+      next = { ...wps[i], net: c };
+    }
+    const prev = wps[i];
+    wps[i] = next;
+    const ok = saveWps();
+    if (!ok) { wps[i] = prev; toast(FULL_MSG); }
+    return ok;
+  }
+  /* A marker that came from the mesh: { name, lat, lon, kind, note, t, net }. Name and note are cut to this app's limits
+     (they are another person's text: whoever draws them escapes them). Returns the marker, or null (bad place, malformed or
+     already held wid, storage refused). */
+  function addShared(o) {
+    if (!o || !okLatLon(o.lat, o.lon)) return null;
+    const kind = kindOk(o.kind) ? o.kind : 'point', net = cleanNet(o.net, kind);
+    if (!net || widHeld(net.wid)) return null;
+    const m = cleanMarker({ id: newId('m'), name: String(o.name ?? '').trim() || 'Marker', lat: o.lat, lon: o.lon, alt: null,
+      t: fin(o.t) ? o.t : Date.now(), kind, note: o.note, net });
+    wps.push(m);
+    const ok = saveWps();
+    if (!ok) { toast(FULL_MSG); return null; }
+    return m;
+  }
+  /* Many marker changes (addShared, updateMarker, removeMarker, setNet) as one: fn runs them, then one storage write and one
+     'wps' event, only if something changed. Returns what fn returns. */
+  function batch(fn) {
+    batching++;
+    let r;
+    try { r = fn(); } finally { batching--; }
+    if (!batching && dirty) {
+      dirty = false;
+      fixTarget();
+      if (!saveWps()) toast(FULL_MSG);
+    }
+    return r;
   }
 
   /* ---------- Shapes ---------- */
@@ -202,7 +279,7 @@
   FK.tac = {
     KINDS, MAX_PTS, MAX_SHAPES,
     MAX_NAME, MAX_NOTE,
-    markers: () => wps.slice(), addMarker, addMarkers, updateMarker, removeMarker,
+    markers: () => wps.slice(), addMarker, addMarkers, updateMarker, removeMarker, setNet, addShared, batch,
     shapes: () => shapes.slice(), addShape, addShapes, updateShape, removeShape,
     target: () => target && { ...target }, setTarget, targetPoint,
     unit: () => unit, setUnit

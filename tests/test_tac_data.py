@@ -319,3 +319,80 @@ def test_update_marker_only_takes_its_own_fields(ready):
                   '{ name: "ok", constructor: 1 }']:
         assert ev(page, f'FK.tac.updateMarker("w1", {patch})') is False, patch
     assert ev(page, 'FK.tac.markers()[0].name') == 'Camp' and ls(page, 'wps') == before
+
+
+# ---------- The shared record (marker.net, comms Task 6) ----------
+NET = {'wid': 5, 'from': 0x0A0B0C02, 'by': 'Bravo', 't': 1, 'chBy': '', 'chT': 0, 'icon': 0, 'expire': 0, 'pending': False, 'rx': False, 'mine': False}
+
+
+def test_net_is_kept_only_when_well_formed(ready):
+    page = ready(wps=[dict(W1, net=NET), dict(W2, net=dict(NET, wid=0)), dict(W1, id='w3', net=dict(NET, wid=6, by='b' * 99, chBy='c' * 99)),
+                      dict(W1, id='w4', net=dict(NET, wid=7, icon=0x1F600)), dict(W1, id='w5', kind='camp', net=dict(NET, wid=8, icon=0x1F600)),
+                      dict(W1, id='w6', net=dict(NET, wid=9, icon=0x26FA)), dict(W1, id='w7', net=dict(NET, extra=1, wid=10)),
+                      dict(W1, id='w8', net=NET)])   # a repeated wid: the first keeps it
+    ms = {m['id']: m for m in ev(page, 'FK.tac.markers()')}
+    assert ms['w1']['net'] == NET and 'net' not in ms['w2'] and 'net' not in ms['w8']
+    assert (len(ms['w3']['net']['by']), len(ms['w3']['net']['chBy'])) == (40, 40)
+    assert ms['w4']['net']['icon'] == 0x1F600                 # a foreign icon on a Point is kept
+    assert ms['w5']['net']['icon'] == 0 and ms['w6']['net']['icon'] == 0   # never on another kind, never a known icon
+    assert ms['w7']['net'] == dict(NET, wid=10)               # only the known fields
+
+
+def test_set_net_and_add_shared(ready):
+    page = ready(wps=[W1, W2])
+    assert ev(page, 'n => FK.tac.setNet("w1", n)', NET) is True
+    assert ev(page, 'FK.tac.markers()[0].net.wid') == 5
+    assert ev(page, 'n => FK.tac.setNet("w2", n)', NET) is False             # a wid another marker holds
+    assert ev(page, 'n => FK.tac.setNet("w2", n)', dict(NET, wid=6, rx='no')) is False
+    assert ev(page, 'n => FK.tac.setNet("nope", n)', dict(NET, wid=6)) is False
+    assert json.loads(ls(page, 'wps'))[0]['net']['wid'] == 5
+    assert ev(page, 'FK.tac.setNet("w1", null)') is True
+    assert 'net' not in ev(page, 'FK.tac.markers()[0]')
+    m = ev(page, 'n => FK.tac.addShared({ name: " Spring ", lat: 43.01, lon: -76, kind: "water", note: "n".repeat(900), t: 7, net: n })',
+           dict(NET, wid=11))
+    assert (m['name'], m['kind'], len(m['note']), m['t'], m['net']['wid'], m['alt']) == ('Spring', 'water', 500, 7, 11, None)
+    assert ev(page, 'n => FK.tac.addShared({ name: "", lat: 43, lon: -76, kind: "zzz", note: 5, net: n }).name', dict(NET, wid=12)) == 'Marker'
+    assert ev(page, 'n => FK.tac.addShared({ name: "x", lat: 43, lon: -76, net: n })', dict(NET, wid=11)) is None   # held
+    assert ev(page, 'n => FK.tac.addShared({ name: "x", lat: 99, lon: -76, net: n })', dict(NET, wid=13)) is None
+    assert ev(page, '() => FK.tac.addShared({ name: "x", lat: 43, lon: -76, net: null })') is None
+    assert len(json.loads(ls(page, 'wps'))) == 4
+
+
+def test_add_marker_never_takes_a_net(ready):
+    page = ready()
+    assert 'net' not in ev(page, 'n => FK.tac.addMarker({ lat: 43, lon: -76, name: "x", net: n })', NET)
+    assert 'net' not in ev(page, 'n => FK.tac.addMarkers([{ lat: 43, lon: -76, name: "x", net: n }]).added[0]', NET)
+    assert ev(page, 'n => FK.tac.updateMarker(FK.tac.markers()[0].id, { net: n })', NET) is False
+
+
+def test_update_marker_takes_a_time(ready):
+    page = ready(wps=[W1])
+    assert ev(page, 'FK.tac.updateMarker("w1", { t: 1766000000000 })') is True
+    assert ev(page, 'FK.tac.markers()[0].t') == 1766000000000
+    assert ev(page, 'FK.tac.updateMarker("w1", { t: "soon" })') is False
+    assert ev(page, 'FK.tac.updateMarker("w1", { t: Infinity })') is False
+
+
+def test_batch_writes_once_and_emits_once(ready):
+    page = ready(wps=[W1, W2])
+    ev(page, 'FK.tac.setTarget({ type: "marker", id: "w2" })')
+    r = ev(page, """n => { let writes = 0, events = 0; const set = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { if (k === 'fk.wps') writes++; return set.call(this, k, v); };
+      FK.on('wps', () => events++);
+      const out = FK.tac.batch(() => { FK.tac.addShared({ name: 'a', lat: 43, lon: -76, net: n });
+        FK.tac.updateMarker('w1', { name: 'b' }); FK.tac.removeMarker('w2'); FK.tac.setNet('w1', null); return 42; });
+      const inside = [writes, events];
+      Storage.prototype.setItem = set;
+      return { inside, out, writes, events, n: FK.tac.markers().length }; }""", NET)
+    assert r == {'inside': [1, 1], 'out': 42, 'writes': 1, 'events': 1, 'n': 2}
+    assert ev(page, 'FK.tac.target()') is None and len(json.loads(ls(page, 'wps'))) == 2
+    assert ev(page, '() => { let e = 0; FK.on("wps", () => e++); FK.tac.batch(() => {}); return e; }') == 0   # nothing changed
+
+
+def test_net_mine_is_a_boolean_and_defaults_from_the_sender(ready):
+    no_mine = {k: v for k, v in NET.items() if k != 'mine'}
+    page = ready(wps=[dict(W1, net=no_mine), dict(W2, net=dict(no_mine, wid=6, **{'from': 0})),
+                      dict(W1, id='w3', net=dict(NET, wid=7, mine='yes')), dict(W1, id='w4', net=dict(NET, wid=8, mine=True))])
+    ms = {m['id']: m for m in ev(page, 'FK.tac.markers()')}
+    assert ms['w1']['net']['mine'] is False and ms['w2']['net']['mine'] is True     # from 0: this phone's unsent share
+    assert 'net' not in ms['w3'] and ms['w4']['net']['mine'] is True

@@ -18,9 +18,13 @@ FIXTURES = [proto('bleeding', 'Severe bleeding'), proto('cpr-adult', 'CPR adult'
             proto('cpr-child', 'CPR child', coach={'compressions': 15, 'breaths': 2})]
 
 
-def boot(page, app_url, storage=None, hash_='#/emergency', fixtures=FIXTURES, clock=True, strip_apis=False, init='', only=False):
-    if clock:
-        page.clock.install(time=T0 // 1000)   # Python API takes seconds
+def boot(page, app_url, storage=None, hash_='#/emergency', fixtures=FIXTURES, clock=True, strip_apis=False, init='', only=False, hold=True):
+    if clock and not hold:
+        page.clock.install(time=T0 // 1000)   # running: a test whose page timers must fire while it loads
+    elif clock:
+        # Python API takes seconds. Installed before T0 and held at T0 once the page is up (pause_at only moves forward): from
+        # then on only run_for / fast_forward move time, so a busy machine cannot shift a timer or the CPR beat.
+        page.clock.install(time=T0 // 1000 - 30)
     inject_protocols(page, fixtures, only)
     if strip_apis:
         page.add_init_script("""
@@ -34,6 +38,8 @@ def boot(page, app_url, storage=None, hash_='#/emergency', fixtures=FIXTURES, cl
         + ''.join(f"localStorage.setItem('fk.{k}', {json.dumps(json.dumps(v))});" for k, v in seed.items()) + '}')
     page.goto(app_url + hash_)
     page.wait_for_function('window.FK && FK.tools && FK.tools.cpr')
+    if clock and hold:
+        page.clock.pause_at(T0 // 1000)
 
 
 def tool_open(page):
@@ -648,7 +654,9 @@ def test_cpr_says_when_sound_is_off_and_a_tap_turns_it_back_on(page, app_url):
     page.wait_for_function("location.hash === '#/emergency'")
     assert page.inner_text('#emActive [data-tool="cpr"]').strip().endswith(', no sound')
     reopen_cpr(page)
-    page.evaluate('window.__allowResume = true')   # a tap is a user gesture: now it may resume
+    # A tap is a user gesture: from the press on, the audio may resume. Set at the press itself, not before it: the CPR tick
+    # keeps asking the audio to resume, and a flag set early lets a tick hide the notice before the tap lands.
+    page.evaluate("document.querySelector('#cprSound').addEventListener('pointerdown', () => { window.__allowResume = true; }, { capture: true, once: true })")
     page.click('#cprSound')
     page.clock.run_for(100)
     assert page.locator('#cprSound').is_hidden()

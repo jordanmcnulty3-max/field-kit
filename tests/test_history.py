@@ -114,7 +114,7 @@ def test_search_result_same_protocol_then_android_back_then_header_back(page, ap
     wait_hash(page, '#/emergency/branchy')
     page.go_back()   # Android Back: the same step again, from an older entry
     wait_hash(page, '#/emergency/branchy')
-    page.wait_for_timeout(100)
+    page.wait_for_function('FK.route.index() === history.state.fkIdx')   # the router has taken the Back step (was a fixed 100 ms)
     expect(page.locator('#player')).to_be_visible()
     page.click('#player [data-act="home"]')
     assert_left_to_home(page, app_url)
@@ -134,7 +134,7 @@ def test_search_result_same_protocol_then_first_step_back_leaves(page, app_url):
     page.click('#searchBody .sr-item[data-key="p:branchy"]')
     page.go_back()
     wait_hash(page, '#/emergency/branchy')
-    page.wait_for_timeout(100)
+    page.wait_for_function('FK.route.index() === history.state.fkIdx')   # the router has taken the Back step (was a fixed 100 ms)
     page.click('#player [data-act="back"]')
     assert_left_to_home(page, app_url)
 
@@ -151,7 +151,7 @@ def test_reload_inside_protocol_then_header_back_then_android_back(page, app_url
     assert_left_to_home(page, app_url)
     assert resume_step(page) == 'q'
     page.go_back()   # the entry before home is outside the app here: Field Kit is left, never re-entered at a step
-    page.wait_for_timeout(150)
+    page.wait_for_url(lambda u: not u.startswith(app_url))   # the Back step has landed outside the app (was a fixed 150 ms)
     assert 'branchy' not in page.url
 
 
@@ -172,7 +172,7 @@ def test_leave_falls_back_home_when_history_does_not_move(page, app_url):
     open_branchy_at_q(page)
     page.evaluate("history.go = () => {}; 0")   # an out-of-range jump does nothing in an installed app
     page.click('#player [data-act="home"]')
-    page.wait_for_timeout(700)
+    wait_hash(page, '#/emergency')   # the fallback has taken it home (was a fixed 700 ms)
     assert_left_to_home(page, app_url)
 
 
@@ -212,8 +212,7 @@ def test_tool_close_falls_back_home_when_history_does_not_move(page, app_url):
     wait_hash(page, '#/emergency/tool/rate')
     page.evaluate("history.go = () => {}; 0")
     page.click('#toolClose')
-    page.wait_for_timeout(700)
-    wait_hash(page, '#/emergency')
+    wait_hash(page, '#/emergency')   # the fallback has closed the tool (was a fixed 700 ms before this same wait)
     expect(page.locator('#toolPane')).to_be_hidden()
     page.evaluate("FK.tools.start('rate')")   # and the overlay still opens and closes afterwards
     wait_hash(page, '#/emergency/tool/rate')

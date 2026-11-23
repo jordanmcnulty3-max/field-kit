@@ -134,7 +134,7 @@ def clear_toast(page):
 def history_clean(page):
     """No sheet entry left; Back leaves Field Kit (the page before it was about:blank)."""
     page.wait_for_function('!history.state.fkSheet && FK.sheet.top() === null')
-    page.wait_for_timeout(600)
+    page.evaluate('new Promise(r => FK.sheet.afterStep(r))')   # the last sheet step has landed (was a fixed 600 ms)
     assert page.evaluate("[...document.querySelectorAll('dialog')].filter(d => d.open).length") == 0
     assert page.evaluate('location.hash') == '#/tactical/map'
     assert page.evaluate('FK.route.index() === history.state.fkIdx')
@@ -483,7 +483,8 @@ def test_delete_on_a_shared_marker_asks_and_cancel_keeps_it(page, app_url):
     expect(sheet(page)).to_be_visible()
     assert one(page, 's1') is not None
     for how in ('back', 'Escape'):                              # any other way out is Cancel too
-        page.wait_for_timeout(400)
+        page.wait_for_function('FK.sheet.top() === document.querySelector("#dlgMarker")')
+        page.evaluate('new Promise(r => FK.sheet.afterStep(r))')   # the question's step has landed (was a fixed 400 ms)
         ask_delete(page)
         if how == 'back':
             page.go_back()
@@ -492,7 +493,8 @@ def test_delete_on_a_shared_marker_asks_and_cancel_keeps_it(page, app_url):
         expect(page.locator('#dlgMkDel')).to_be_hidden()
         expect(sheet(page)).to_be_visible()
     assert one(page, 's1') is not None and sent_wps(page) == []
-    page.wait_for_timeout(400)
+    page.wait_for_function('FK.sheet.top() === document.querySelector("#dlgMarker")')
+    page.evaluate('new Promise(r => FK.sheet.afterStep(r))')   # was a fixed 400 ms
     page.click('#mkCancel')
     expect(sheet(page)).to_be_hidden()
     history_clean(page)
@@ -671,7 +673,8 @@ def test_a_teammates_delete_while_typing_then_back_asks_before_discarding(page, 
     page.click('#cfCancel')                                    # Keep editing: the draft is still there
     expect(page.locator('#dlgConfirm')).to_be_hidden()
     expect(page.locator('#mkNote')).to_have_value('my typing')
-    page.wait_for_timeout(400)
+    page.wait_for_function('FK.sheet.top() === document.querySelector("#dlgMarker")')
+    page.evaluate('new Promise(r => FK.sheet.afterStep(r))')   # Keep editing's step has landed (was a fixed 400 ms)
     page.go_back()
     expect(page.locator('#cfTitle')).to_have_text('Discard this marker?')
     page.click('#cfOk')

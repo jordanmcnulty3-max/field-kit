@@ -562,3 +562,26 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   wrong: wording only.
 - **The shot-field tests wait on the stored copy** (`localStorage['fk.bal']` holding what was typed), which `later()` writes in the
   same tick as the recalculation. No sleeps in the Task 3 tests (the older helpers are unchanged).
+
+### Release 2, Task 4 (zero and close-range module)
+
+- **A crossing within 2 yd of the zero is the zero itself; `other` is the first sign change farther than that, rounded to a whole
+  yard.** With the 0.005 in no-sign band, a path that only touches the line of sight at its top gives no sign change at all, so
+  `other` is null and `past` false. Cost if wrong: a zero a yard or two either side of a true crossing hides a real second
+  crossing; on the M193 load the apex zero is about 111 yd, so it affects only a narrow band of zeros.
+- **Signs are taken between one signed sample and the next signed one**, skipping the samples inside the 0.005 in band, and the
+  crossing is interpolated linearly between those two samples. Cost if wrong: a path that lingers inside the band is placed up to
+  a few yards off; the displayed `other` is a whole yard anyway.
+- **`path[i]` is `null` (never a number, never missing) where the solver gave no row for `YDS[i]`;** `close()` leaves out rows the
+  solver did not give. Cost if wrong: a sheet prints a dash where a shorter list might have been expected.
+- **`peak` is the highest sampled whole yard** from 1 to the last row, not an interpolated apex (error well under 0.01 in at the
+  top, where the path is flat). It can sit at the last yard when the bullet is still rising there. Cost if wrong: a peak
+  distance off by under a yard.
+- **A load's `zero` is ignored by `compare` (each column uses its own); `close` uses the load's own.** The load's `wind`, `clock`
+  and `angle` are never passed on. Cost if wrong: none seen, the sheets are level and windless by the brief.
+- **The stops-short test uses G1, bc 0.01, 400 fps, not the brief's bc 0.05, 400 fps.** With the preset's G7 model that bullet
+  still reaches 500 yd (500 rows), so it would not test the short-rows path. G1 bc 0.01 gives 174 rows (zero 25), short of the
+  175 yd row of `YDS`. Cost if wrong: none; the premise is asserted inside the test.
+- **The `other` and peak example numbers in the tests are ranges, not the planner's single figures,** and the 100 yd zero is not
+  used for the peak test: M193 (3,301 fps, 2.6 in sight) at 100 yd peaks only 0.06 in above the line, 0.01 over the 0.05 in floor.
+  Cost if wrong: none.

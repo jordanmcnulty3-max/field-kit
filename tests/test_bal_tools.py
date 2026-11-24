@@ -1328,7 +1328,10 @@ def test_the_no_sight_line_fits_both_sheets_at_360_with_large_text(page, app_url
     mine = {**MINE, 'id': 'unosh', 'name': 'No sight height', 'sight': 0}
     open_screen(page, app_url, profile='unosh', profiles=[mine], night=night)
     open_zeros(page)
+    before = float(page.evaluate("parseFloat(getComputedStyle(document.querySelector('#zsSvg text')).fontSize)"))
     enlarge_text(page)
+    page.evaluate("dispatchEvent(new Event('resize'))")            # the chart redraws at the new text size, as in the label test
+    page.wait_for_function("fs => parseFloat(getComputedStyle(document.querySelector('#zsSvg text')).fontSize) > fs + 2", arg=before)
     for sel in ('#zsNoSight',):
         box = page.locator(sel).bounding_box()
         assert box['x'] >= 0 and box['x'] + box['width'] <= 360, box

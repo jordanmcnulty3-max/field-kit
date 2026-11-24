@@ -552,5 +552,13 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
 - **The crossing test uses a 1.2 mph wind from 3 o'clock, not 2 mph.** With this .308 load and 1:10 twist, 1 mph never leaves
   the right side, 1.5 mph and up stay left to 1,500 yd, and 1.2 mph crosses near 1,000 yd. Cost if wrong: none; the test pins
   one real crossing, found by running the card.
-- **The formula test allows 0.1 in at 500 yd** (flight time is read from the card to 0.01 s, drift to 0.1 in). Cost if wrong:
-  a test that fails on rounding, not on the formula; at 600 yd the same reading can differ by 0.12.
+- **The formula test reads 600 yd and states its bounds.** The screen shows each figure to 0.1 in and the time to 0.01 s. Against
+  the formula worked from the solver's unrounded flight time only display rounding differs (tolerance 0.06 in; the probe shows
+  0.012). Against the printed time: 0.05 in rounding plus 1.83 x drift / tof x 0.005 s, about 0.06 in at 600 yd (tolerance 0.15).
+  SPIN minus PLAIN adds a second rounded reading (tolerance 0.17). (An earlier note here said the 600 yd difference could be 0.12;
+  that was wrong.) Cost if wrong: a test that fails on rounding, not on the formula.
+- **When the target is out of reach the line says "The dope card includes spin drift (...)", not "Windage includes ..."**, since
+  the answer card's WINDAGE shows a dash and only the dope card carries the share. Same bracket rules as the normal line. Cost if
+  wrong: wording only.
+- **The shot-field tests wait on the stored copy** (`localStorage['fk.bal']` holding what was typed), which `later()` writes in the
+  same tick as the recalculation. No sleeps in the Task 3 tests (the older helpers are unchanged).

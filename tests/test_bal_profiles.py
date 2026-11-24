@@ -401,18 +401,28 @@ def test_default_card_is_unchanged(page, app_url):
 
 
 def test_spin_fields_change_only_the_windage_on_the_card(page, app_url):
-    """Task 2 stored the fields and the card ignored them; since Task 3 spin drift reaches the windage (and its words) and nothing else:
-    elevation, the Path column, speed, energy and time are exactly as without the fields."""
+    """Task 2 stored the fields and the card ignored them; since Task 3 spin drift reaches the windage and the drift words and nothing
+    else. Everything spin cannot change is compared exactly: all of #solution but the windage column and the drift clause of the
+    sentence (so the elevation column, the sentence's other words, Show all units and the card's state), and every dope column but
+    the two wind columns and Drift (Yd, both Elev columns, Path, fps, ft-lb, Time)."""
     from .test_bal_screen import open_screen
     plain = {**SPIN_BASE}
-    grab = lambda: page.evaluate("""() => ({ elev: document.querySelector('#solElev').innerText, wind: document.querySelector('#solWind').innerText,
-      sub: document.querySelector('#solSub').innerText,
-      rows: [...document.querySelectorAll('#dope tbody tr')].map(r => [...r.children].map(c => c.textContent)) })""")
+    grab = lambda: page.evaluate("""() => {
+      const card = document.querySelector('#solution').cloneNode(true);
+      card.querySelector('#solWind').remove();
+      const sub = card.querySelector('#solSub');
+      sub.textContent = sub.textContent.replace(/drift \\d+\\.\\d in(?: left| right)?(?: \\(spin drift \\d+\\.\\d in (?:left|right) included\\))?, /, '');
+      return { card: card.innerText, cls: card.className, all: document.querySelector('#bAll').outerHTML,
+        wind: document.querySelector('#solWind').innerText, sub: document.querySelector('#solSub').innerText,
+        head: [...document.querySelectorAll('#dope th')].map(c => c.textContent),
+        rows: [...document.querySelectorAll('#dope tbody tr')].map(r => [...r.children].map(c => c.textContent)) } }""")
     open_screen(page, app_url, profile='u8', profiles=[plain])
     before = grab()
     open_screen(page, app_url, profile='u8', profiles=[{**plain, 'twist': 8, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308}])
     after = grab()
-    assert after['elev'] == before['elev'] and after['wind'] != before['wind']
-    assert 'spin drift' in after['sub'] and 'spin drift' not in before['sub']
-    cut = lambda rows: [r[:1] + r[5:6] + r[7:] for r in rows]      # yd, path, fps, ft-lb, time: the columns spin drift cannot touch
-    assert cut(after['rows']) == cut(before['rows'])
+    assert before['head'] == after['head'] == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    assert 'drift' not in before['card'].split('\n')[-1] and before['card'] == after['card'] and before['cls'] == after['cls'] and before['all'] == after['all']
+    assert after['wind'] != before['wind'] and 'spin drift' in after['sub'] and 'spin drift' not in before['sub']
+    keep = lambda rows: [r[:3] + r[5:6] + r[7:] for r in rows]
+    assert keep(after['rows']) == keep(before['rows']) and len(after['rows']) > 10
+    assert [r[3:5] + r[6:7] for r in after['rows']] != [r[3:5] + r[6:7] for r in before['rows']]

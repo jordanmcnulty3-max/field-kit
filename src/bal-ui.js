@@ -234,9 +234,9 @@
      (nothing is solved, so no windage is shown) it never says spin drift is included. */
   const TAIL = ' Coriolis is not included.';
   const words = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
-  const spinNote = s => {
+  const spinNote = (s, windage) => {
     if (s && s.grade === 'unstable') return 'Spin drift not included: by the Miller formula this bullet is not stable in this twist (stability ' + BSPIN.text(s.sg) + ').' + TAIL;
-    if (s && s.sg !== undefined) return 'Windage includes spin drift (stability ' + BSPIN.text(s.sg) + (s.grade === 'marginal' ? ', marginal' : '') + ', '
+    if (s && s.sg !== undefined) return (windage === false ? 'The dope card includes' : 'Windage includes') + ' spin drift (stability ' + BSPIN.text(s.sg) + (s.grade === 'marginal' ? ', marginal' : '') + ', '
       + (s.sign < 0 ? 'left' : 'right') + '-hand twist).' + TAIL;
     return 'Spin drift not included' + (s && s.missing.length ? ': add ' + words(s.missing) + ' to the profile.' : '.') + TAIL;
   };
@@ -315,7 +315,6 @@
     /* Spin drift: from the profile's twist and bullet, today's temperature and the station pressure the solver used; applied only to a
        stable or marginal bullet. spinIn is signed like windIn (right positive) and is added to it. */
     const spin = BSPIN.of(p, { temp, press: res.atm.pIn }), spun = !!spin.grade && spin.grade !== 'unstable';
-    F('bSpin').textContent = spinNote(spin);
     const xs = [...new Set(ranges.filter(r => r > 0))].sort((a, b) => a - b);   // the solver's own order: row i belongs to xs[i]
     const rowFor = x => {
       const i = xs.indexOf(x), r = i >= 0 && res.rows[i];
@@ -324,6 +323,7 @@
       return { ...r, yd: x, windIn: r.windIn + spinIn, spinIn };
     };
     const t = rowFor(target);
+    F('bSpin').textContent = spinNote(spin, !!t);      // out of reach: the answer card shows dashes, only the dope card carries spin drift
     if (t) {
       const a = BALS.answer(t, optic), every = BALS.all(t);
       const lines = side => optic ? [a[side].main, a[side].sub] : every[side];

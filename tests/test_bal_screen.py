@@ -1,5 +1,6 @@
 """The Ballistics screen: the answer written for the profile's sight, the shot beside it, the dope card, the messages."""
 import json
+import os
 import re
 
 import pytest
@@ -795,6 +796,19 @@ def test_a_swipe_at_the_end_of_the_dope_box_carries_on_to_the_page(page, app_url
 
 # ---------- Spin drift ----------
 
+def shot_now(page, **kv):
+    """Type into the shot fields and wait for the real condition: the 150 ms timer has fired. `later()` runs `saveInputs(); calc()`
+    in one tick and saveInputs stores every shot field (all ten, selects included), so once the stored copy holds each typed value
+    the card and dope card have been recalculated. No fixed sleep."""
+    for k, v in kv.items():
+        if k == 'bClock':
+            page.select_option('#bClock', str(v))
+        else:
+            page.fill('#' + k, str(v))
+    page.wait_for_function("kv => { const s = JSON.parse(localStorage.getItem('fk.bal') || '{}'); return Object.keys(kv).every(k => String(s[k]) === kv[k]); }",
+                           arg={k: str(v) for k, v in kv.items()})
+
+
 SPIN = {**LOAD, 'id': 'us', 'name': 'Spin rifle', 'twist': 10, 'blen': 1.24, 'bdia': 0.308}
 SPIN_L = {**SPIN, 'id': 'ul', 'name': 'Left rifle', 'twistDir': 'L'}
 SPIN_MARGINAL = {**SPIN, 'id': 'um', 'name': 'Marginal rifle', 'twist': 14}       # Miller 1.22 (checked below)
@@ -841,29 +855,37 @@ def test_no_wind_gives_a_left_hold_that_grows_with_range(page, app_url):
     d = drift_col(page)
     assert d['600'].endswith(' R') and d['1000'].endswith(' R'), d
     assert signed(d['1000']) > signed(d['600']) > signed(d['300']) > 0
-    page.evaluate('FK.bal.select("un")'); settle(page)
+    page.evaluate('FK.bal.select("un")')
     assert card(page)['wind'] == ['WINDAGE', '0.0 mil', '0.0 MOA', 'No hold'], card(page)['wind']     # no twist given: no windage at all
     assert set(drift_col(page).values()) == {'0.0'}
 
 
 def test_windage_equals_wind_alone_plus_the_formula(page, app_url):
-    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0', 'bRange': '500'})
-    sg, spin_in, tof = sg_of(SPIN), signed(drift_col(page)['500']), times(page)['500']
-    assert abs(spin_in - 1.25 * (sg + 1.2) * tof ** 1.83) < 0.1, (spin_in, tof)
+    """At 600 yd. The screen shows each figure rounded to 0.1 in. So (a) the spin share against the formula worked from the solver's
+    own unrounded flight time: only the display rounding (0.05 in) can differ, tolerance 0.06; (b) the same from the flight time
+    printed on the card (rounded to 0.01 s, worth up to 1.83 x drift / tof x 0.005 = about 0.06 in at 600 yd): 0.05 + 0.06, tolerance
+    0.15; (c) SPIN minus PLAIN with a wind: two rounded readings add up to 0.1 in, plus the 0.06: tolerance 0.17."""
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0', 'bRange': '600'})
+    sg = sg_of(SPIN)
+    exact = page.evaluate("""p => BAL.solve({ bc: p.bc, model: p.model, w: p.w, mv: p.mv, sight: p.sight, zero: p.zero, temp: 59, alt: 0, press: 0, rh: 50,
+      wind: 0, clock: 3, angle: 0, ranges: [600] }).rows[0].tof""", SPIN)
+    shown = signed(drift_col(page)['600'])
+    assert abs(shown - 1.25 * (sg + 1.2) * exact ** 1.83) < 0.06, (shown, exact)
+    assert abs(shown - 1.25 * (sg + 1.2) * times(page)['600'] ** 1.83) < 0.15, (shown, times(page)['600'])
     for wind, clock in (('10', 3), ('8', 9)):
-        shot(page, bWind=wind, bClock=clock)
-        with_spin = signed(drift_col(page)['500'])
-        page.evaluate('FK.bal.select("un")'); settle(page)
-        plain = signed(drift_col(page)['500'])                              # the plain column has no letter: wind from 3 o'clock carries the bullet left
+        shot_now(page, bWind=wind, bClock=clock, bRange=600)
+        with_spin = signed(drift_col(page)['600'])
+        page.evaluate('FK.bal.select("un")')
+        plain = signed(drift_col(page)['600'])                              # the plain column has no letter: wind from 3 o'clock carries the bullet left
         plain *= -1 if clock == 3 else 1
-        page.evaluate('FK.bal.select("us")'); settle(page)
-        assert abs((with_spin - plain) - 1.25 * (sg + 1.2) * times(page)['500'] ** 1.83) < 0.1, (wind, clock, with_spin, plain)
+        page.evaluate('FK.bal.select("us")')
+        assert abs((with_spin - plain) - 1.25 * (sg + 1.2) * times(page)['600'] ** 1.83) < 0.17, (wind, clock, with_spin, plain)
 
 
 def test_left_twist_mirrors_it(page, app_url):
     open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0'})
     right = drift_col(page)
-    page.evaluate('FK.bal.select("ul")'); settle(page)
+    page.evaluate('FK.bal.select("ul")')
     left = drift_col(page)
     assert card(page)['wind'][1].startswith('R '), card(page)['wind']
     for yd, v in right.items():
@@ -878,6 +900,7 @@ def test_spin_against_the_wind_changes_side_along_the_card(page, app_url):
     assert 'L' in sides and 'R' in sides, cells
     first_r = next(i for i, s in enumerate(sides) if s == 'R')
     assert 'L' in sides[:first_r] and set(sides[first_r:]) == {'R'}, cells        # one change of side, wind first and spin after
+    assert '0.0' in cells, cells                                                  # the crossing rounds to zero: no letter
     assert not [c for c in cells if NASTY.search(c) or re.search(r'[RL] 0\.0', c)], cells
     whole_page_is_clean(page)
 
@@ -887,14 +910,14 @@ def test_answer_line_names_the_spin_share(page, app_url):
     sub = card(page)['sub']
     m = re.match(r'At 500 yd: \d+\.\d in low, drift (\d+\.\d) in right \(spin drift (\d+\.\d) in right included\), ', sub)
     assert m and m.group(1) == m.group(2), sub
-    shot(page, bWind=10)
+    shot_now(page, bWind=10)
     assert re.search(r'drift \d+\.\d in left \(spin drift \d+\.\d in right included\), ', card(page)['sub']), card(page)['sub']
-    page.evaluate('FK.bal.select("ul")'); settle(page)
+    page.evaluate('FK.bal.select("ul")')
     assert re.search(r'\(spin drift \d+\.\d in left included\)', card(page)['sub']), card(page)['sub']
-    page.evaluate('FK.bal.select("un")'); settle(page)
+    page.evaluate('FK.bal.select("un")')
     assert 'spin' not in card(page)['sub']
-    shot(page, bRange=1, bWind=0)                                             # a share that rounds to zero is not named
-    page.evaluate('FK.bal.select("us")'); settle(page)
+    shot_now(page, bRange=1, bWind=0)                                             # a share that rounds to zero is not named
+    page.evaluate('FK.bal.select("us")')
     assert 'spin' not in card(page)['sub'] and 'drift 0.0 in,' in card(page)['sub'], card(page)['sub']
 
 
@@ -902,13 +925,13 @@ def test_spin_line_three_texts(page, app_url):
     open_screen(page, app_url, profile='us', profiles=SPINNERS)
     g = f"stability {int(sg_of(SPIN) * 10) / 10:.1f}"
     assert page.inner_text('#bSpin') == f'Windage includes spin drift ({g}, right-hand twist).{TAIL}'
-    page.evaluate('FK.bal.select("ul")'); settle(page)
+    page.evaluate('FK.bal.select("ul")')
     assert page.inner_text('#bSpin') == f'Windage includes spin drift ({g}, left-hand twist).{TAIL}'
-    page.evaluate('FK.bal.select("uu")'); settle(page)
+    page.evaluate('FK.bal.select("uu")')
     assert page.inner_text('#bSpin') == f'Spin drift not included: by the Miller formula this bullet is not stable in this twist (stability 0.7).{TAIL}'
-    page.evaluate('FK.bal.select("ub")'); settle(page)
+    page.evaluate('FK.bal.select("ub")')
     assert page.inner_text('#bSpin') == f'Spin drift not included: add twist and bullet length to the profile.{TAIL}'
-    page.evaluate('FK.bal.select("un")'); settle(page)
+    page.evaluate('FK.bal.select("un")')
     assert page.inner_text('#bSpin') == f'Spin drift not included: add twist, bullet length and bullet diameter to the profile.{TAIL}'
     one = {k: v for k, v in {**SPIN, 'id': 'uo', 'name': 'One short'}.items() if k != 'blen'}
     open_screen(page, app_url, profile='uo', profiles=[one])
@@ -932,8 +955,21 @@ def test_marginal_is_shown_and_still_applied(page, app_url):
     assert page.inner_text('#bSpin') == f'Windage includes spin drift (stability {int(sg_of(SPIN_MARGINAL) * 10) / 10:.1f}, marginal, right-hand twist).{TAIL}'
     assert drift_col(page)['500'].endswith(' R') and 'spin drift' in card(page)['sub']
     marginal = signed(drift_col(page)['500'])
-    page.evaluate('FK.bal.select("us")'); settle(page)
+    page.evaluate('FK.bal.select("us")')
     assert signed(drift_col(page)['500']) > marginal > 0               # the stability figure is in the formula: steadier, more drift
+
+
+def test_out_of_reach_says_the_dope_card_has_it_not_the_windage(page, app_url):
+    nine = {'id': 'u9', 'name': '9 mm', 'bc': 0.15, 'model': 'G1', 'w': 124, 'mv': 1150, 'sight': 1.5, 'zero': 25,
+            'twist': 10, 'blen': 0.72, 'bdia': 0.355}                           # Miller 7.5 (checked below)
+    assert 7.5 <= miller(124, 0.355, 0.72, 10, 1150) < 7.6
+    open_screen(page, app_url, profile='u9', profiles=[nine], shot={'bRange': '3000', 'bWind': '0', 'bMax': '3000'})
+    says(page, "Bullet doesn't reach that range with these inputs.")
+    assert card(page)['wind'] == ['WINDAGE', '—']
+    assert page.inner_text('#bSpin') == f'The dope card includes spin drift (stability 7.5, right-hand twist).{TAIL}'
+    assert any(c.endswith(' R') for c in drift_col(page).values())
+    shot_now(page, bRange=100)                                                  # in reach again: the windage has it
+    assert page.inner_text('#bSpin') == f'Windage includes spin drift (stability 7.5, right-hand twist).{TAIL}'
 
 
 def test_spin_line_on_every_message_path(page, app_url):
@@ -941,7 +977,7 @@ def test_spin_line_on_every_message_path(page, app_url):
     for field, bad in (('bRange', '0'), ('bWind', '500'), ('bAngle', '99'), ('bTemp', '500')):
         if field == 'bTemp':
             page.click('#bCondBtn')
-        shot(page, **{field: bad})
+        shot_now(page, **{field: bad})
         assert re.match(r'Enter an? |Check the conditions', card(page)['sub']), card(page)['sub']
         assert page.inner_text('#bSpin') == f'Spin drift not included.{TAIL}', (field, page.inner_text('#bSpin'))
         open_screen(page, app_url, profile='us', profiles=SPINNERS)
@@ -953,13 +989,15 @@ def test_spin_line_on_every_message_path(page, app_url):
 
 
 def test_card_without_spin_is_byte_for_byte_v711(page, app_url):
+    """Headers, key, every body cell, the answer card and the sentence for a profile without spin fields, against what the v7.11 build
+    (commit f74c5db) showed: tests/fixtures/ballistics_v711_plain_card.json, captured from that build, not from this one."""
+    want = json.load(open(os.path.join(os.path.dirname(__file__), 'fixtures', 'ballistics_v711_plain_card.json')))
     open_screen(page, app_url, profile='un', profiles=SPINNERS)
-    assert head(page) == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
-    assert page.inner_text('#dopeKey') == 'Path: inches above the line of sight; a minus means below. Drift: inches the wind moves the bullet, shown without a sign.'
-    rows = body(page)
-    assert rows[9] == ['500', 'U 3.5', 'U 12.2', 'R 1.2', 'R 4.0', '-63.6', '21.2', '1782', '1234', '0.70'], rows[9]
-    assert all(re.fullmatch(r'\d+\.\d', r[head(page).index('Drift in')]) for r in rows)
-    assert 'spin' not in card(page)['sub']
+    assert head(page) == want['head']
+    assert page.inner_text('#dopeKey') == want['key']
+    assert body(page) == want['body'] and len(want['body']) == 20
+    assert card(page) == want['card']
+    assert page.inner_text('#bSpin') == f'Spin drift not included: add twist, bullet length and bullet diameter to the profile.{TAIL}'   # the one line that changed
 
 
 def test_spin_card_key_and_cells(page, app_url):

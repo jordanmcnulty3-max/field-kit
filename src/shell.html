@@ -528,7 +528,7 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .zs-tick input{width:22px;height:22px;min-height:22px;flex:none;accent-color:var(--c)}
 #dlgZeros label.f{margin-top:8px}
 #zsWrap{margin-top:8px}
-#zsCue{margin:8px 0 0}
+#zsCue{margin:8px 0 0;font-size:14px;font-weight:600;color:var(--c)}
 #zsLines{list-style:none;margin:8px 0 0;padding:0}
 #zsLines li{padding:8px 0;border-top:1px solid var(--line);font-size:15px;overflow-wrap:anywhere}
 #zsUse{display:grid;gap:8px;margin-top:8px}
@@ -1435,7 +1435,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <label class="f">Other (yd)<input id="zsOther" type="number" inputmode="decimal"></label>
     </fieldset>
     <p class="rf-msg" id="zsMsg" role="status" hidden></p>
-    <p class="sv-swipe" id="zsCue" hidden>Swipe sideways to see more columns</p>
+    <p class="zs-cue" id="zsCue" hidden>Swipe sideways to see more columns</p>
     <div class="tablewrap" id="zsWrap" tabindex="0" role="region" aria-label="Zero comparison table, scrolls sideways"><table id="zsTable"></table></div>
     <p class="hint" id="zsKey">Inches above the line of sight; a minus means below. Level, no wind.</p>
     <ul id="zsLines"></ul>

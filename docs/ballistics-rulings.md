@@ -605,3 +605,35 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   until Task 6. Cost if wrong: a rearranged block.
 - **#bWind's pinned top is 525.17 px** (360 x 640, default profile, measured in a v7.11 build of f74c5db made outside this tree),
   compared to within 0.5 px.
+
+### Release 2, Task 6 (Compare zeros sheet)
+
+- **The five summary sentences replace the brief's three** (controller ruling): both crossings and a peak; a crossing and no peak;
+  `past` (no "Highest" part, since the peak of a still-rising path is only yard 500); touches only; and no crossing before the bullet
+  runs out of reach. The highest point is printed to one decimal ("0.1 in" for the 0.06 in of M193's 100 yd zero). Cost if wrong: wording.
+- **`near the apex` sweep passed unchanged: `src/bal-zero.js` is not touched.** For M193 (apex zero 111.5) and `p308` (apex zero 70),
+  zeros from 15 yd below to 15 yd above never reported themselves as `other`, and every reported `other` put the path within 0.15 in
+  of the line at the original zero. Cost if wrong: a zero within a few yards of the apex could list itself as its own other crossing.
+- **Columns run smallest zero first, not in the order ticked.** Cost if wrong: a person who ticked 200 then 50 sees 50 on the left.
+- **Other (yd) is kept to a tenth of a yard; blank is simply not used.** So 100.04 is the 100 yd box (counts once) and 87.25 reads
+  87.3. A browser "bad input" (a lone "1e"), and anything under 10 or over 300, give "Enter a zero from 10 to 300 yd." and the field is
+  left out; the ticked boxes are still compared. Cost if wrong: a zero typed to more than a tenth is rounded.
+- **A typed zero that would be a fourth is left out with "Up to three at a time."** (the brief only refuses the fourth tick). Cost if
+  wrong: the person has to untick one before the typed value counts.
+- **When Other is refused and fewer than two boxes remain, the Other message wins over "Pick two or three zeros."** Cost if wrong: one
+  message instead of the other.
+- **The profile's own zero opens in Other only inside 10 to 300 yd.** A zero of 5 yd or 400 yd opens with 50 and 200 only (the field
+  would open already refused). Cost if wrong: that profile's own zero is not on the table until typed into Other and refused anyway.
+- **Added "Current zero: N yd" under the profile name, and a "Zero set to N yd" line inside the sheet beside the toast.** The toast is
+  a fixed element under the modal sheet's layer, so on a phone it would not be seen while the sheet is open; the line says the same
+  thing where the person is looking. Cost if wrong: one extra line.
+- **Use this zero saves `{ ...FK.bal.selected(), zero }` read at the moment the question is answered, after the question's history
+  step has landed, and does nothing if the sheet closed, the profile changed or is no longer the person's own.** Pressing Use or Set
+  zero twice asks once and saves once. A refused save leaves the sheet, the picks and the buttons as they were (no "Zero set" line).
+  Cost if wrong: none seen.
+- **The table scrolls sideways with the "Swipe sideways" cue only when it is wider than its box** (measured on open, on a pick and when
+  the box or table resizes). At 360 px, normal text, three zeros fit; with enlarged text the cue shows. Cost if wrong: none.
+- **Close-range sheet, Task 5 review items:** an empty `rows` with no error shows "No holds to show for this profile." and no table;
+  the sight-height line is hidden when the profile is unusable (the message replaces the table). Cost if wrong: wording.
+- **The Compare zeros cue is `.zs-cue`, not `.sv-swipe`.** `test_dope_table_scrolls_with_the_cue_when_wide` finds the dope card's cue by
+  the class `.sv-swipe` alone, so a second element with that class (even hidden) would break it. Same text and look. Cost if wrong: none.

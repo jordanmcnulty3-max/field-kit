@@ -149,3 +149,22 @@ def test_of_with_unusable_air_is_an_empty_missing_list_never_a_nan(ready):
                 dict(temp='59', press=29.92), dict(temp=None, press=29.92)):
         r = js_of(ready, GOOD, air)
         assert r == {'missing': []}, (air, r)
+
+
+@pytest.mark.parametrize('sg,text', [(1.38, '1.3'), (1.4, '1.4'), (0.97, '0.9'), (1.0, '1.0'), (2.3, '2.3'), (2.4003, '2.4'),
+                                     (1.99999, '1.9'), (0.05, '0.0'), (12.34, '12.3')])
+def test_text_rounds_the_figure_down_to_one_decimal(ready, sg, text):
+    assert ready.evaluate('sg => BSPIN.text(sg)', sg) == text
+
+
+def test_text_is_empty_for_anything_that_is_not_a_finite_number(ready):
+    for js in ('NaN', 'Infinity', '-Infinity', 'null', 'undefined', '"2.4"'):
+        assert ready.evaluate('BSPIN.text(%s)' % js) == '', js
+
+
+def test_text_survives_binary_floating_error_at_exact_decimals(ready):
+    # every one-decimal value from 0.1 to 9.9 prints as itself, however the division that made it rounded
+    bad = ready.evaluate("""() => { const out = [];
+      for (let i = 1; i < 100; i++) { const v = i / 10; for (const x of [v, v * 1.0000000001 - 1e-12, +(v / 3 * 3).toPrecision(15)]) if (BSPIN.text(x) !== v.toFixed(1)) out.push([x, BSPIN.text(x)]); }
+      return out; }""")
+    assert bad == []

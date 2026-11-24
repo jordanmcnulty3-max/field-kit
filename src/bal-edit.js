@@ -108,8 +108,8 @@
     const air = FK.bal.shotAir() || { temp: 59, alt: 0, press: 0, rh: 50 };
     const r = BSPIN.of({ twist: use('rfTwist', 'twist'), twistDir: F('rfTwistDir').value, blen: blen !== undefined && bdia !== undefined && !FK.balHost.lenFits(blen, bdia) ? undefined : blen,
       bdia, w: use('rfW', 'w'), mv: use('rfMV', 'mv') }, { temp: air.temp, press: BAL.atmosphere(air.temp, air.alt, air.press, air.rh).pIn });
-    const text = r.missing ? '' : r.grade === 'unstable' ? `Stability ${r.sg.toFixed(1)}: by this formula the bullet is not stable in this twist. Spin drift is not shown.`
-      : r.grade === 'marginal' ? `Stability ${r.sg.toFixed(1)}: marginal for this twist. Spin drift is still shown.` : `Stability ${r.sg.toFixed(1)}.`;
+    const text = r.missing ? '' : r.grade === 'unstable' ? `Stability ${BSPIN.text(r.sg)}: by this formula the bullet is not stable in this twist. Spin drift is not shown.`
+      : r.grade === 'marginal' ? `Stability ${BSPIN.text(r.sg)}: marginal for this twist. Spin drift is still shown.` : `Stability ${BSPIN.text(r.sg)}.`;
     line.textContent = text; line.hidden = !text;
   }
   /* What the sheet holds as a profile (without an id), or { error, focus } for the first thing at fault. */

@@ -24,6 +24,11 @@ const BSPIN = (() => {
     return sg < MARGINAL_BELOW ? 'marginal' : 'stable';
   }
 
+  /* The stability figure as printed: rounded DOWN to one decimal, so a figure under a threshold never prints as the threshold
+     (1.38 is "1.3", not "1.4"). The 1e-9 keeps a value that is exactly one decimal from losing a step to binary error
+     (2.3 * 10 is not always 23). '' for anything that is not a finite number. */
+  const text = sg => typeof sg === 'number' && Number.isFinite(sg) ? (Math.floor(sg * 10 + 1e-9) / 10).toFixed(1) : '';
+
   /* profile: { w, mv, twist, twistDir, blen, bdia }; air: { temp, press (station) }.
      Either { sg, grade, sign } or { missing: [...] }: the names of what is absent (twist, bullet length, bullet diameter, bullet
      weight, muzzle velocity, in that order), or an empty list when only the air is unusable. Callers treat any `missing`, even an
@@ -39,5 +44,5 @@ const BSPIN = (() => {
     return { sg, grade: grade(sg), sign: p.twistDir === 'L' ? -1 : 1 };
   }
 
-  return { stability, drift, grade, of };
+  return { stability, drift, grade, of, text };
 })();

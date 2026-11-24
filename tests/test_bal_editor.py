@@ -1,5 +1,6 @@
 """The rifle profile editor: load, the sight on it, and the conditions it was zeroed in."""
 import json
+import math
 
 import pytest
 from playwright.sync_api import expect
@@ -732,6 +733,14 @@ def miller(w, dia, length, twist, mv, temp=59, press=29.92126):
     return (30 * w / (t * t * dia ** 3 * L * (1 + L * L)) * (mv / 2800) ** (1 / 3) * (temp + 460) / 519 * 29.92 / press)
 
 
+def reopen(page):
+    """Open the editor again once the sheet has really closed and its history step has landed (no sleep: the conditions are waited for)."""
+    page.wait_for_function('FK.sheet.top() === null')
+    page.evaluate('new Promise(done => FK.sheet.afterStep(done))')
+    page.evaluate('FK.bal.edit()')
+    expect(page.locator(DLG)).to_be_visible()
+
+
 def spin(page, twist=None, direction=None, blen=None, bdia=None):
     for i, v in (('rfTwist', twist), ('rfBLen', blen), ('rfBDia', bdia)):
         if v is not None:
@@ -764,9 +773,7 @@ def test_spin_fields_save_and_reopen(page, app_url):
     got = profiles(page)[0]
     assert (got['twist'], got['twistDir'], got['blen'], got['bdia']) == (8, 'L', 0.994, 0.224)
     assert list(got)[-4:] == ['twist', 'twistDir', 'blen', 'bdia']
-    page.wait_for_timeout(400)    # a tap on the same spot straight after a sheet closes is swallowed (double-tap guard)
-    page.click('#bEdit')
-    expect(page.locator(DLG)).to_be_visible()
+    reopen(page)
     assert [page.input_value('#' + i) for i in ('rfTwist', 'rfTwistDir', 'rfBLen', 'rfBDia')] == ['8', 'L', '0.994', '0.224']
 
 
@@ -776,9 +783,7 @@ def test_right_twist_stores_no_direction(page, app_url):
     page.click('#rfSave')
     expect(page.locator(DLG)).to_be_hidden()
     assert profiles(page)[0]['twistDir'] == 'L'
-    page.wait_for_timeout(400)
-    page.click('#bEdit')
-    expect(page.locator(DLG)).to_be_visible()
+    reopen(page)
     page.select_option('#rfTwistDir', 'R')
     page.click('#rfSave')
     expect(page.locator(DLG)).to_be_hidden()
@@ -794,8 +799,7 @@ def test_blank_fields_are_removed_from_the_profile_and_each_is_independent(page,
     page.click('#rfSave')
     expect(page.locator(DLG)).to_be_hidden()
     assert profiles(page)[0] == {**SPIN_ONE, 'twistDir': 'L', 'bdia': 0.308}
-    page.wait_for_timeout(400)
-    page.click('#bEdit')
+    reopen(page)
     page.fill('#rfBDia', '')
     page.select_option('#rfTwistDir', 'R')
     page.click('#rfSave')
@@ -880,7 +884,7 @@ def test_typing_in_the_spin_fields_keeps_a_worked_out_velocity(page, app_url):
 
 
 def stab_text(sg, grade):
-    one = f'{sg:.1f}'
+    one = f'{math.floor(sg * 10 + 1e-9) / 10:.1f}'      # printed rounded down, as the ruling says
     return {'stable': f'Stability {one}.',
             'marginal': f'Stability {one}: marginal for this twist. Spin drift is still shown.',
             'unstable': f'Stability {one}: by this formula the bullet is not stable in this twist. Spin drift is not shown.'}[grade]
@@ -909,6 +913,25 @@ def test_stability_line_follows_typing(page, app_url):
     expect(stab).to_have_text(stab_text(sg, 'unstable'))
     page.fill('#rfTwist', '')
     expect(stab).to_be_hidden()
+
+
+def test_the_figure_just_under_a_threshold_prints_the_lower_decimal_with_its_grades_words(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    page.fill('#rfBDia', '0.308'); page.fill('#rfBLen', '1.24')
+    # twists whose figure is just under each line (found by bisection on the formula written out here): the shown figure is rounded down
+    def twist_for(target):
+        a, b = 3.0, 30.0
+        for _ in range(60):
+            m = (a + b) / 2
+            a, b = (m, b) if miller(175, 0.308, 1.24, m, 2600) > target else (a, m)
+        return a
+    for target, text in ((1.38, 'Stability 1.3: marginal for this twist. Spin drift is still shown.'),
+                         (0.97, 'Stability 0.9: by this formula the bullet is not stable in this twist. Spin drift is not shown.'),
+                         (1.42, 'Stability 1.4.')):
+        tw = round(twist_for(target), 3)
+        assert abs(miller(175, 0.308, 1.24, tw, 2600) - target) < 0.01, target
+        page.fill('#rfTwist', str(tw))
+        expect(page.locator('#rfStab')).to_have_text(text)
 
 
 def test_stability_line_hides_for_anything_unusable_and_never_blocks_save(page, app_url):

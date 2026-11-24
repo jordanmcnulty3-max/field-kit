@@ -523,3 +523,7 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   screen after a twist change, which does not affect it.
 - **The twist label says "inches per turn"; the direction select is Right / Left, Right first and the default.** Cost if wrong:
   wording only.
+- **The stability figure is printed rounded DOWN to one decimal, through one helper, `BSPIN.text(sg)`** (1.38 prints "1.3", 0.97
+  "0.9", 1.4 "1.4", 2.4003 "2.4"; empty for a non-finite figure; 1e-9 guards exact decimals against binary error). The grade is
+  decided on the unrounded value, so rounding to nearest showed "Stability 1.4: marginal" against a 1.4 threshold. The editor
+  and, in Task 3, the screen use the same helper. Cost if wrong: a shown figure can read up to 0.1 lower than other calculators give.

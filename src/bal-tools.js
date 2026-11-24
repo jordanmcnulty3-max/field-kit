@@ -106,6 +106,8 @@
     F('zsMsg').hidden = !msg;
     F('zsMsg').classList.toggle('zs-note', !!msg && msg === note && !err && !forced && !sel.problem);   // a note is not an error
     ['zsWrap', 'zsKey', 'zsLines'].forEach(id => { F(id).hidden = !res; });
+    lastRes = res;
+    drawChart();                                                 // the chart is shown and hidden with the table, and drawn from the same figures
     F('zsCue').hidden = true;
     F('zsUse').hidden = !res || !own;
     F('zsBuiltin').hidden = !!err || own;
@@ -128,6 +130,130 @@
     });
     fit();
   }
+
+  /* ---------- The chart above the table: the same figures, drawn. Each path joins the table's own points with straight segments
+     (nothing is solved again), starts at its 5 yd point, and is told apart by its dash pattern, never by colour. The picture is
+     laid out in CSS pixels (the SVG is as wide as its box), so its text is real text size, and the box and font are read each time
+     it is drawn. Labels sit at the right-hand end of each path; two that would touch are moved apart with a short leader. ---------- */
+  const NS = 'http://www.w3.org/2000/svg';
+  const DASHES = [null, '10 6', '0.1 5.5'];            // solid, long dash, dot (round caps make the dot)
+  const GAP = 1.2;                                     // text rows keep this many font sizes between centres
+  let lastRes = null;
+  const node = (name, attrs, parent) => {
+    const e = document.createElementNS(NS, name);
+    for (const k in attrs) if (attrs[k] !== null) e.setAttribute(k, String(attrs[k]));
+    if (parent) parent.appendChild(e);
+    return e;
+  };
+  const px = v => String(Math.round(v * 100) / 100 + 0);   // two decimals, never "-0"
+  const sgn = v => (v > 0 ? '+' + v : String(v));
+  const list = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+
+  /* Push rows that touch apart (only those whose columns overlap), each by half the overshoot, inside lo..hi. */
+  function spread(items, gap, lo, hi) {
+    const clamp = () => items.forEach(i => { i.c = Math.min(hi, Math.max(lo, i.c)); });
+    const hit = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && Math.abs(b.c - a.c) < gap - 0.01;
+    for (let n = 0; n < 80; n++) {
+      items.sort((a, b) => a.c - b.c);
+      let moved = false;
+      for (let i = 0; i < items.length - 1; i++) {
+        const a = items[i], b = items[i + 1];
+        if (hit(a, b)) { const d = (gap - (b.c - a.c)) / 2; a.c -= d; b.c += d; moved = true; }
+      }
+      clamp();
+      if (!moved) break;
+    }
+    items.sort((a, b) => a.c - b.c);                                   // last: push down, then back up from the bottom edge
+    for (let i = 0; i < items.length - 1; i++) if (hit(items[i], items[i + 1])) items[i + 1].c = items[i].c + gap;
+    for (let i = items.length - 1; i > 0; i--) if (items[i].c > hi) { items[i].c = hi; if (hit(items[i - 1], items[i])) items[i - 1].c = hi - gap; }
+  }
+
+  function drawChart() {
+    const svg = F('zsSvg'), box = F('zsChart');
+    svg.textContent = '';
+    box.hidden = !lastRes;
+    if (!lastRes) { svg.removeAttribute('aria-label'); return; }
+    const cols = lastRes.cols;
+    svg.setAttribute('aria-label', `Chart of the bullet's path for ${list(cols.map(c => yd(c.zero)))} yd zeros, 5 to 300 yd. The table below has the figures.`);
+    const base = parseFloat(getComputedStyle(svg).fontSize);
+    const fs = Math.max(12, 13 * (Number.isFinite(base) && base > 0 ? base : 16) / 16);
+    const W = Math.floor(box.clientWidth) || 320;
+    const measure = (t, cls) => {                                       // the text's real width; an estimate where nothing is laid out
+      const e = node('text', { class: cls, 'font-size': px(fs) }, svg);
+      e.textContent = t;
+      const w = e.getComputedTextLength ? e.getComputedTextLength() : 0;
+      svg.removeChild(e);
+      return w > 0 ? w : t.length * fs * 0.62;
+    };
+    const vals = cols.flatMap(c => c.path.filter(Number.isFinite));
+    let lo = Math.min(0, Math.floor(Math.min(...vals))), hi = Math.max(0, Math.ceil(Math.max(...vals)));
+    if (!Number.isFinite(lo) || !Number.isFinite(hi)) { lo = -1; hi = 1; }
+    if (hi === lo) hi = lo + 1;
+    const ymarks = [...new Set([lo, 0, hi])].map(v => ({ v, t: sgn(v) + (v === hi ? ' in' : '') }));
+    const names = cols.map(c => `${yd(c.zero)} yd`);
+    const ML = Math.ceil(Math.max(...ymarks.map(m => measure(m.t, 'zs-ax')))) + 8;
+    const MR = Math.ceil(Math.max(...names.map(n => measure(n, 'zs-lab')))) + 10;
+    const MT = Math.ceil(fs * 0.7) + 3, MB = Math.ceil(fs) + 9;
+    const H = Math.round(230 + (fs - 13) * 8), PW = Math.max(60, W - ML - MR), PH = H - MT - MB;
+    const X = y => ML + y / 300 * PW, Y = v => MT + (hi - v) / (hi - lo) * PH;
+    svg.setAttribute('width', String(W)); svg.setAttribute('height', String(H));
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    // frame: the lowest and highest inch, and a light line at each 100 yd
+    [lo, hi].forEach(v => node('line', { class: 'zs-hgrid', x1: px(ML), x2: px(ML + PW), y1: px(Y(v)), y2: px(Y(v)) }, svg));
+    [0, 100, 200, 300].forEach(d => node('line', { class: 'zs-grid', 'data-yd': d, x1: px(X(d)), x2: px(X(d)), y1: px(MT), y2: px(MT + PH) }, svg));
+    // axis labels: the inches on the left (kept a row apart), the yards under the chart
+    const rows = ymarks.map(m => ({ m, c: Y(m.v), x0: 0, x1: 1 }));
+    spread(rows, fs * GAP, MT, MT + PH + fs * 0.4);
+    rows.forEach(r => {
+      const t = node('text', { class: 'zs-ax', x: px(ML - 5), y: px(r.c + fs * 0.35), 'text-anchor': 'end', 'font-size': px(fs) }, svg);
+      t.textContent = r.m.t;
+    });
+    [[0, '0', 'start'], [100, '100', 'middle'], [200, '200', 'middle'], [300, '300 yd', 'end']].forEach(([d, t, a]) => {
+      const e = node('text', { class: 'zs-ax', x: px(X(d)), y: px(MT + PH + fs + 3), 'text-anchor': a, 'font-size': px(fs) }, svg);
+      e.textContent = t;
+    });
+    // the line of sight, and the paths over it
+    node('line', { class: 'zs-los', x1: px(ML), x2: px(ML + PW), y1: px(Y(0)), y2: px(Y(0)), 'stroke-width': 1 }, svg);
+    const ends = [], pts = [];
+    cols.forEach((c, k) => {
+      const dash = DASHES[k % DASHES.length];
+      let d = '', pen = false, last = null;
+      BALZ.YDS.forEach((y, i) => {
+        const v = c.path[i];
+        if (!Number.isFinite(v)) { pen = false; return; }               // the bullet does not reach: no point, no line
+        d += `${pen ? 'L' : 'M'}${px(X(y))} ${px(Y(v))}`;
+        pen = true; last = { x: X(y), y: Y(v) };
+        pts.push(last);
+      });
+      node('path', { class: 'zs-path', 'data-zero': yd(c.zero), d, fill: 'none', 'stroke-width': dash && dash.startsWith('0.') ? 3 : 2.5,
+        'stroke-dasharray': dash, 'stroke-linecap': dash && dash.startsWith('0.') ? 'round' : 'butt', 'stroke-linejoin': 'round' }, svg);
+      if (last) ends.push({ k, name: names[k], zero: yd(c.zero), at: last, c: last.y, x0: last.x + 8, x1: last.x + 8 + measure(names[k], 'zs-lab') });
+    });
+    spread(ends, fs * GAP, MT, MT + PH + fs * 0.4);
+    ends.forEach(e => {
+      const x = Math.min(e.x0, W - (e.x1 - e.x0) - 1);
+      if (Math.abs(e.c - e.at.y) > 2) node('line', { class: 'zs-lead', x1: px(e.at.x + 1.5), y1: px(e.at.y), x2: px(x - 2), y2: px(e.c) }, svg);
+      const t = node('text', { class: 'zs-lab', 'data-zero': e.zero, x: px(x), y: px(e.c + fs * 0.35), 'font-size': px(fs) }, svg);
+      t.textContent = e.name;
+    });
+    // "line of sight": above or below the rule, where the fewest paths and labels run through it
+    const text = 'line of sight', tw = measure(text, 'zs-ax'), y0 = Y(0), best = { n: Infinity };
+    ends.forEach(e => { for (let x = e.x0; x < e.x1; x += 3) pts.push({ x, y: e.c }); });
+    for (const above of [true, false]) {
+      const top = above ? y0 - fs - 3 : y0 + 3, bottom = top + fs;
+      for (let x = ML + 6; x + tw <= ML + PW - 4; x += 4) {
+        const n = pts.filter(p => p.x >= x - 3 && p.x <= x + tw + 3 && p.y >= top - 2 && p.y <= bottom + 2).length;
+        if (n < best.n) Object.assign(best, { n, x, above });
+      }
+    }
+    if (Number.isFinite(best.n)) {
+      const t = node('text', { class: 'zs-ax zs-name', x: px(best.x), y: px(best.above ? y0 - 6 : y0 + fs + 1), 'font-size': px(fs) }, svg);
+      t.textContent = text;
+    }
+  }
+  const redraw = () => { if (zdlg.open && lastRes) drawChart(); };
+  if (window.ResizeObserver) { const ro2 = new ResizeObserver(redraw); ro2.observe(F('zsChart')); }
+  addEventListener('resize', redraw);
 
   /* Only a table wider than its box shows the swipe cue (the dope card's pattern). */
   function fit() {

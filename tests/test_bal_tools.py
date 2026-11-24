@@ -887,3 +887,188 @@ def test_the_zero_set_note_is_not_in_the_error_colour_and_focus_moves_to_the_tit
         page.fill('#zsOther', '301')
         expect(page.locator('#zsMsg')).to_have_text(BAD_OTHER)                       # an error is the error colour again
         assert page.evaluate("getComputedStyle(document.querySelector('#zsMsg')).color") == err
+
+
+# ---------- Compare zeros: the chart above the table ----------
+
+CHART_JS = """() => {
+  const svg = document.querySelector('#zsSvg'), box = document.querySelector('#zsChart');
+  const num = s => (s.match(/-?\\d+(?:\\.\\d+)?/g) || []).map(Number);
+  const grid = Object.fromEntries([...svg.querySelectorAll('.zs-grid')].map(g => [g.dataset.yd, Number(g.getAttribute('x1'))]));
+  const los = svg.querySelector('.zs-los');
+  return {
+    shown: !box.hidden, role: svg.getAttribute('role'), aria: svg.getAttribute('aria-label'),
+    w: Number(svg.getAttribute('width')), h: Number(svg.getAttribute('height')), box: box.getBoundingClientRect().width,
+    grid, losY: los ? Number(los.getAttribute('y1')) : null, losW: los ? los.getAttribute('stroke-width') : null,
+    paths: [...svg.querySelectorAll('path.zs-path')].map(p => ({ zero: p.dataset.zero, d: p.getAttribute('d'), pts: num(p.getAttribute('d')),
+      dash: p.getAttribute('stroke-dasharray') || '', width: Number(p.getAttribute('stroke-width')), fill: p.getAttribute('fill') })),
+    labels: [...svg.querySelectorAll('text.zs-lab')].map(t => { const b = t.getBBox(); return { zero: t.dataset.zero, text: t.textContent, x: b.x, y: b.y, w: b.width, h: b.height, fs: parseFloat(getComputedStyle(t).fontSize) }; }),
+    texts: [...svg.querySelectorAll('text')].map(t => { const b = t.getBBox(); return { text: t.textContent, cls: t.getAttribute('class'), x: b.x, y: b.y, w: b.width, h: b.height, fs: parseFloat(getComputedStyle(t).fontSize) }; }),
+    markup: svg.outerHTML };
+}"""
+
+
+def chart(page):
+    return page.evaluate(CHART_JS)
+
+
+def chart_sheet(page, app_url, zeros, night=False, **kw):
+    open_screen(page, app_url, night=night, **kw)
+    open_zeros(page)
+    ticks = [z for z in zeros if str(z) in BOXES]
+    pick(page, ticks, ([z for z in zeros if str(z) not in BOXES] or [''])[0])         # a zero that has no box is typed into Other
+    page.wait_for_function("document.querySelectorAll('#zsSvg path.zs-path').length === %d" % len(zeros))
+
+
+def y_at(path, x):
+    """The path's y at x, by straight segments between its own points."""
+    p = path['pts']
+    pts = [(p[i], p[i + 1]) for i in range(0, len(p) - 1, 2)]
+    for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+        if x0 <= x <= x1:
+            return y0 + (y1 - y0) * (x - x0) / (x1 - x0)
+    return None
+
+
+def test_one_path_per_zero_each_with_its_own_dash_and_label(page, app_url):
+    chart_sheet(page, app_url, [25, 50, 200])
+    c = chart(page)
+    assert c['shown']
+    assert [p['zero'] for p in c['paths']] == ['25', '50', '200']
+    dashes = [p['dash'] for p in c['paths']]
+    assert len(set(dashes)) == 3 and dashes[0] == ''                 # solid, then two different patterns
+    assert all(p['width'] >= 2 and p['fill'] == 'none' for p in c['paths'])
+    assert sorted(l['text'] for l in c['labels']) == ['200 yd', '25 yd', '50 yd']
+    assert {l['zero'] for l in c['labels']} == {'25', '50', '200'}
+    assert any(t['text'] == 'line of sight' for t in c['texts'])
+    assert c['losW'] is not None and float(c['losW']) <= 1.5
+    assert not NASTY.search(c['markup']), NASTY.search(c['markup'])
+    # two zeros: two paths; and the column heading style of a typed zero is the label's
+    pick(page, [50], '87.5')
+    page.wait_for_function("[...document.querySelectorAll('#zsSvg text.zs-lab')].some(t => t.textContent === '87.5 yd')")
+    c = chart(page)
+    assert [p['zero'] for p in c['paths']] == ['50', '87.5']
+    assert len({p['dash'] for p in c['paths']}) == 2
+
+
+@pytest.mark.parametrize('zeros', [[25, 50, 200], [36, 100], [25, 36, 100]], ids=['25-50-200', '36-100', '25-36-100'])
+def test_each_path_meets_the_line_of_sight_at_its_zero(page, app_url, zeros):
+    chart_sheet(page, app_url, zeros)
+    c = chart(page)
+    x0, x300 = c['grid']['0'], c['grid']['300']
+    assert x300 > x0
+    for p in c['paths']:
+        x = x0 + float(p['zero']) / 300 * (x300 - x0)
+        y = y_at(p, x)
+        assert y is not None and abs(y - c['losY']) <= 1, (p['zero'], y, c['losY'])
+        assert p['pts'][0] == pytest.approx(x0 + 5 / 300 * (x300 - x0), abs=0.02)   # it starts at its 5 yd point, not at the muzzle
+
+
+def test_the_paths_are_the_tables_own_figures(page, app_url):
+    chart_sheet(page, app_url, [36, 100, 200])
+    c = chart(page)
+    x0, x300 = c['grid']['0'], c['grid']['300']
+    want = page.evaluate("zs => BALZ.compare(FK.bal.load(), zs).cols.map(c => ({ yds: BALZ.YDS, path: c.path }))", [36, 100, 200])
+    k = None
+    for p, w in zip(c['paths'], want):
+        pts = [(p['pts'][i], p['pts'][i + 1]) for i in range(0, len(p['pts']) - 1, 2)]
+        have = [(y, v) for y, v in zip(w['yds'], w['path']) if v is not None]
+        assert len(pts) == len(have)
+        for (x, y), (yd_, v) in zip(pts, have):
+            assert x == pytest.approx(x0 + yd_ / 300 * (x300 - x0), abs=0.02)
+            if abs(v) > 1:
+                k = k or (c['losY'] - y) / v                       # one pixels-per-inch for the whole chart
+        for (x, y), (yd_, v) in zip(pts, have):
+            assert c['losY'] - y == pytest.approx(k * v, abs=0.02)
+
+
+def test_chart_has_a_text_alternative(page, app_url):
+    chart_sheet(page, app_url, [25, 50, 200])
+    c = chart(page)
+    assert c['role'] == 'img'
+    assert c['aria'] == "Chart of the bullet's path for 25, 50 and 200 yd zeros, 5 to 300 yd. The table below has the figures."
+    pick(page, [36, 100])
+    page.wait_for_function("document.querySelectorAll('#zsSvg path.zs-path').length === 2")
+    assert chart(page)['aria'] == "Chart of the bullet's path for 36 and 100 yd zeros, 5 to 300 yd. The table below has the figures."
+    # the chart sits above the table
+    assert page.evaluate("document.querySelector('#zsChart').compareDocumentPosition(document.querySelector('#zsWrap')) & Node.DOCUMENT_POSITION_FOLLOWING")
+
+
+def test_chart_follows_the_table_and_hides_with_it(page, app_url):
+    chart_sheet(page, app_url, [50, 200])
+    assert chart(page)['shown']
+    pick(page, [50])                                          # one zero: a message, no table, no chart
+    expect(page.locator('#zsMsg')).to_have_text(TOO_FEW)
+    assert not chart(page)['shown']
+    assert page.evaluate("document.querySelector('#zsSvg').childElementCount") == 0
+    page.fill('#zsOther', '36')                               # the Other field brings it back
+    page.wait_for_function("document.querySelectorAll('#zsSvg path.zs-path').length === 2")
+    assert chart(page)['shown']
+    page.fill('#zsOther', '301')                              # refused: ticked 50 alone remains
+    expect(page.locator('#zsMsg')).to_have_text(BAD_OTHER)
+    assert not chart(page)['shown']
+
+
+def test_chart_redraws_after_use_this_zero(page, app_url):
+    open_screen(page, app_url, profile='umine', profiles=[own()])
+    open_zeros(page)
+    pick(page, [50, 200])
+    page.wait_for_function("document.querySelectorAll('#zsSvg path.zs-path').length === 2")
+    before = chart(page)
+    page.locator('#zsUse button', has_text='Use 50 yd zero').click()
+    page.locator('#cfOk').click()
+    page.wait_for_function("document.querySelector('#zsNow').textContent === 'Current zero: 50 yd'")
+    after = chart(page)
+    assert after['shown'] and [p['zero'] for p in after['paths']] == ['50', '200']
+    assert after['paths'][0]['d'] != before['paths'][0]['d'] or after['paths'] == before['paths']   # drawn again from the new maths, never blank
+    assert not NASTY.search(after['markup'])
+
+
+@pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
+@pytest.mark.parametrize('zeros', [[25, 50, 200], [36, 100], [25, 36, 50], [10, 25, 36], [36, 38, 100]], ids=['25-50-200', '36-100', '25-36-50', '10-25-36', '36-38-100'])
+def test_labels_do_not_overlap_each_other_or_leave_the_box_at_360(page, app_url, night, zeros):
+    chart_sheet(page, app_url, zeros, night=night)
+
+    def check():
+        c = chart(page)
+        assert c['w'] <= 360 and c['w'] == pytest.approx(c['box'], abs=1)
+        rects = [(t['text'], t['x'], t['y'], t['x'] + t['w'], t['y'] + t['h']) for t in c['texts']]
+        assert rects
+        for name, x0, y0, x1, y1 in rects:
+            assert x0 >= -0.5 and y0 >= -0.5 and x1 <= c['w'] + 0.5 and y1 <= c['h'] + 0.5, (name, x0, y0, x1, y1, c['w'], c['h'])
+        for i, a in enumerate(rects):
+            for b in rects[i + 1:]:
+                gapx = min(a[3], b[3]) - max(a[1], b[1])
+                gapy = min(a[4], b[4]) - max(a[2], b[2])
+                assert not (gapx > 0.5 and gapy > 0.5), (a, b)       # no two texts share any area
+        assert len(c['labels']) == len(zeros)                       # moved apart, never dropped
+        assert all(l['fs'] >= 12 for l in c['texts'])
+        assert not NASTY.search(c['markup'])
+        assert overflow(page, ZDLG) == []
+        box = page.locator('#zsClose').bounding_box()               # the Close button stays on the screen
+        assert box['y'] >= 0 and box['y'] + box['height'] <= 640
+
+    check()
+    page.locator('#zsChart').scroll_into_view_if_needed()
+    check()
+    before = chart(page)['texts'][0]['fs']
+    enlarge_text(page)
+    page.evaluate("dispatchEvent(new Event('resize'))")
+    page.wait_for_function("fs => parseFloat(getComputedStyle(document.querySelector('#zsSvg text')).fontSize) > fs + 2", arg=before)
+    check()
+    assert chart(page)['texts'][0]['fs'] >= before * 1.3
+
+
+def test_a_label_that_moves_apart_keeps_a_leader_to_its_path_end(page, app_url):
+    chart_sheet(page, app_url, [36, 38, 100])                   # 36 and 38 yd zeros end a few hundredths of an inch apart at 300 yd
+    c = chart(page)
+    ends = page.evaluate("""() => [...document.querySelectorAll('#zsSvg .zs-lead')].map(l => [Number(l.getAttribute('x1')), Number(l.getAttribute('y1')), Number(l.getAttribute('x2')), Number(l.getAttribute('y2'))])""")
+    near = 0
+    for p in c['paths']:
+        end_y = p['pts'][-1]
+        label = next(l for l in c['labels'] if l['zero'] == p['zero'])
+        centre = label['y'] + label['h'] / 2
+        if abs(centre - end_y) > 3:
+            near += 1
+            assert any(abs(e[0] - p['pts'][-2]) < 2 and abs(e[1] - end_y) < 1 for e in ends), (p['zero'], ends)
+    assert near >= 1                                           # at least one label really had to move, so the leader is exercised

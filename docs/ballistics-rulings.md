@@ -644,3 +644,28 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   is `inert` from Yes until the question's history step has landed (cleared on every exit), so a Close tap cannot drop the confirmed
   save; Back or Escape in that window still closes the sheet (sheet.js is not changed) and the save is then dropped. The "Zero set"
   note is a hint-coloured line (class `zs-note`), errors keep the error colour; after a save focus moves to the sheet title.
+
+### Release 2, Task 7 (zero comparison chart)
+
+- **The chart is kept for now; the image-first review (Step 6) is the controller's and decides.** If two answers are wrong on either
+  screenshot the chart (`#zsChart`, `drawChart` in `src/bal-tools.js`) comes out and the table stays. Cost if wrong: a chart that
+  does not read stays until the review.
+- **Drawn in CSS pixels, not scaled.** The SVG is as wide as its box and its viewBox is that width, so 13 px text is 13 px on the phone
+  (never smaller than 12). Font size is taken from the SVG's own computed size (13/16 of it), so enlarged text enlarges the chart's
+  text and the margins and height grow with it; the drawing is redrawn on resize and when the box resizes. Cost if wrong: a redraw
+  on every resize of the sheet.
+- **Axis is 0 to 300 yd; paths start at their 5 yd point.** The 25 yd and 36 yd zeros cross the line of sight again beyond 300 yd
+  (425 and 326 yd for M193), so on the chart they do not visibly cross again; the table and summary lines carry the figure. Cost if
+  wrong: none, the table below has it.
+- **Vertical range is the lowest and highest path value widened to whole inches, always including 0.** Labels: the lowest inch, 0 and
+  the highest inch (the highest carries "in"). When these would touch (a 10 yd zero climbs past 50 in) they are kept a row apart, so
+  a label can sit a few pixels off its level; the grid lines mark the true levels. Cost if wrong: a label a few pixels off.
+- **Dash patterns follow the order of the columns (smallest zero first): solid, long dash, dot.** All in the text colour; the dot is
+  3 px wide with round caps, the others 2.5 px. A column keeps its pattern as zeros are added or removed. Cost if wrong: a zero's
+  pattern changes when another is ticked.
+- **Labels read "25 yd" (not "25 yd zero") at the path's last point + 8 px, and a label moved apart from its path end gets a thin
+  leader.** A path that ends before 300 yd (bullet out of reach) is labelled where it ends. Cost if wrong: none seen.
+- **"line of sight" is placed above or below the rule wherever the fewest path points run through it;** all text has a halo in the
+  sheet's colour so a line behind a letter never cuts it. Cost if wrong: the label may sit over a line at some zeros (still readable).
+- **No colour but the text colour and `--muted`;** grid lines are `--muted` at 40 percent. In night mode they are dim red on black
+  (decoration only; every figure is also in the table). Cost if wrong: faint grid at night.

@@ -300,3 +300,25 @@ def test_load_line(ready):
     assert line({'bc': 0.3, 'model': 'G1', 'w': 0, 'mv': 950, 'zero': 36.5}) == 'G1 0.3 · 950 fps · zero 36.5 yd'
     assert line({'bc': 0.3, 'mv': 2800}) == 'G7 0.3 · 2,800 fps'
     assert line(None) == '' and clean(line({'bc': float('nan'), 'mv': 'x', 'zero': None}))
+
+
+def test_path_without_spinIn_is_unchanged(ready):
+    path = lambda row: ready.evaluate('r => BALS.path(r)', row)
+    base = {'yd': 500, 'dropIn': -63.62, 'windIn': -21.2}
+    for extra in ({}, {'spinIn': None}, {'spinIn': float('nan')}, {'spinIn': 'x'}):
+        assert path({**base, **extra}) == '63.6 in low, drift 21.2 in left'
+    assert ready.evaluate('r => BALS.path(r)', {**base, 'spinIn': None}) == '63.6 in low, drift 21.2 in left'
+    assert ready.evaluate('r => BALS.path({ ...r, spinIn: Infinity })', base) == '63.6 in low, drift 21.2 in left'
+
+
+def test_path_names_the_spin_share_and_its_side(ready):
+    path = lambda row: ready.evaluate('r => BALS.path(r)', row)
+    assert path({'yd': 500, 'dropIn': -63.62, 'windIn': -21.2, 'spinIn': 5.24}) == '63.6 in low, drift 21.2 in left (spin drift 5.2 in right included)'
+    assert path({'yd': 500, 'dropIn': -63.62, 'windIn': 5.2, 'spinIn': -3.04}) == '63.6 in low, drift 5.2 in right (spin drift 3.0 in left included)'
+
+
+def test_path_drops_a_spin_share_that_rounds_to_zero(ready):
+    path = lambda row: ready.evaluate('r => BALS.path(r)', row)
+    for spin in (0, 0.04, -0.04, -0):
+        assert path({'yd': 100, 'dropIn': 1.7, 'windIn': 0.66, 'spinIn': spin}) == '1.7 in high, drift 0.7 in right', spin
+    assert path({'yd': 100, 'dropIn': 1.7, 'windIn': 0.66, 'spinIn': 0.05}).endswith('(spin drift 0.1 in right included)')

@@ -217,6 +217,10 @@
   const label = yd => String(Number(yd.toFixed(1)));          // 500 -> "500", 36.5 -> "36.5"
   const fx = (v, d) => { const t = v.toFixed(d); return /^-0(\.0+)?$/.test(t) ? t.slice(1) : t; };   // never "-0.0"
 
+  /* The Drift column: inches without a sign while spin drift is not applied; with it, the side the bullet is carried (R right, L left),
+     and no letter for a figure that rounds to zero. */
+  const driftCell = (v, sided) => { const t = fx(Math.abs(v), 1); return !sided || Number(t) === 0 ? t : t + (v > 0 ? ' R' : ' L'); };
+
   /* A column of the answer card: label, then the lines. lines: [main, sub] for a sight, or the three every-unit lines; more: the
      other units added beneath a sight's own lines (Show all units). */
   function paint(el, name, lines, more) {
@@ -226,7 +230,20 @@
     lines.forEach((t, i) => { if (t) add(i === 0 ? 'v' : lines.length === 3 ? 'v2' : 's', t); });
     (more || []).forEach(t => add('v2 more', t));
   }
-  function nothing(text) {
+  /* The line under the dope card about spin drift and Coriolis. words(missing) is "a", "a and b", "a, b and c". On a message path
+     (nothing is solved, so no windage is shown) it never says spin drift is included. */
+  const TAIL = ' Coriolis is not included.';
+  const words = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+  const spinNote = s => {
+    if (s && s.grade === 'unstable') return 'Spin drift not included: by the Miller formula this bullet is not stable in this twist (stability ' + BSPIN.text(s.sg) + ').' + TAIL;
+    if (s && s.sg !== undefined) return 'Windage includes spin drift (stability ' + BSPIN.text(s.sg) + (s.grade === 'marginal' ? ', marginal' : '') + ', '
+      + (s.sign < 0 ? 'left' : 'right') + '-hand twist).' + TAIL;
+    return 'Spin drift not included' + (s && s.missing.length ? ': add ' + words(s.missing) + ' to the profile.' : '.') + TAIL;
+  };
+  /* The profile's own answer when no air is known (a message path): only what is missing from the profile can be said. */
+  const spinGap = p => { const s = BSPIN.of(p, null); return s.missing && s.missing.length ? s : { missing: [] }; };
+  function nothing(text, p) {
+    F('bSpin').textContent = spinNote(spinGap(p));
     paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
     F('solSub').textContent = text;
     F('solution').classList.add('msg');
@@ -271,15 +288,15 @@
     F('solution').classList.remove('msg');
     const optic = sighted ? p.optic : null;                      // null: every unit (Show all units affects the answer card only)
     const target = read('bRange') === null ? NaN : read('bRange');
-    if (!(inside(target, 1, 3000))) return nothing(MSG.range);
-    if (!loadOk(p)) return nothing(MSG.profile);
+    if (!(inside(target, 1, 3000))) return nothing(MSG.range, p);
+    if (!loadOk(p)) return nothing(MSG.profile, p);
     const air = shotAir();
-    if (!air) return nothing(MSG.cond);
+    if (!air) return nothing(MSG.cond, p);
     const { temp, alt, press, rh } = air;
     const wind = num(F('bWind'));
-    if (!inside(wind, 0, 100)) return nothing(MSG.wind);
+    if (!inside(wind, 0, 100)) return nothing(MSG.wind, p);
     const angle = read('bAngle') === null ? 0 : read('bAngle');      // unreadable: NaN, refused below
-    if (!inside(angle, -60, 60)) return nothing(MSG.angle);
+    if (!inside(angle, -60, 60)) return nothing(MSG.angle, p);
 
     const max = Math.min(3000, Math.max(50, num(F('bMax')) || 1000));
     const step = +F('bStep').value || 50;
@@ -293,10 +310,19 @@
       bc: p.bc, model: p.model || 'G7', w: p.w || 0, mv: p.mv, sight: p.sight || 0, zero: p.zero, zeroAtm: zeroAir(p.zeroAtm),
       temp, alt, press, rh, wind, clock: +F('bClock').value, angle, ranges
     });
-    if (res.error) return nothing(res.error);
+    if (res.error) return nothing(res.error, p);
 
+    /* Spin drift: from the profile's twist and bullet, today's temperature and the station pressure the solver used; applied only to a
+       stable or marginal bullet. spinIn is signed like windIn (right positive) and is added to it. */
+    const spin = BSPIN.of(p, { temp, press: res.atm.pIn }), spun = !!spin.grade && spin.grade !== 'unstable';
+    F('bSpin').textContent = spinNote(spin);
     const xs = [...new Set(ranges.filter(r => r > 0))].sort((a, b) => a - b);   // the solver's own order: row i belongs to xs[i]
-    const rowFor = x => { const i = xs.indexOf(x); return i >= 0 && res.rows[i] ? { ...res.rows[i], yd: x } : null; };
+    const rowFor = x => {
+      const i = xs.indexOf(x), r = i >= 0 && res.rows[i];
+      if (!r) return null;
+      const d = spun ? spin.sign * BSPIN.drift(spin.sg, r.tof) : 0, spinIn = Number.isFinite(d) ? d : 0;
+      return { ...r, yd: x, windIn: r.windIn + spinIn, spinIn };
+    };
     const t = rowFor(target);
     if (t) {
       const a = BALS.answer(t, optic), every = BALS.all(t);
@@ -317,12 +343,12 @@
     const rows = at.map(rowFor).filter(Boolean).map(r => {
       const x = BALS.cells(r, optic), trans = r.mach < 1.2;
       return `<tr class="${r.yd === p.zero ? 'zero' : ''} ${trans ? 'trans' : ''}"><td>${label(r.yd)}${trans ? ' \u2020' : ''}</td>` +
-        [...x.elev, ...x.wind, fx(r.dropIn, 1), ...(generic ? [] : [fx(Math.abs(r.windIn), 1)]), Math.round(r.fps), Math.round(r.ftlb), r.tof.toFixed(2)]
+        [...x.elev, ...x.wind, fx(r.dropIn, 1), ...(generic ? [] : [driftCell(r.windIn, spun)]), Math.round(r.fps), Math.round(r.ftlb), r.tof.toFixed(2)]
           .map(v => `<td>${esc(String(v))}</td>`).join('') + '</tr>';
     });
     $('#dope').innerHTML = `<thead><tr>${heads.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody>`;
     F('dopeKey').textContent = 'Path: inches above the line of sight; a minus means below.'
-      + (generic ? '' : ' Drift: inches the wind moves the bullet, shown without a sign.');
+      + (generic ? '' : spun ? ' Drift: inches the wind and the spin move the bullet; R right, L left.' : ' Drift: inches the wind moves the bullet, shown without a sign.');
     fitDope();
   }
   /* Only a table wider than its box shows the swipe cue and a sticky first column (the Survival tables' pattern). Measured when the

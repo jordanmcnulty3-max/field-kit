@@ -791,3 +791,204 @@ def test_the_load_line_is_hidden_for_a_profile_the_screen_cannot_use(page, app_u
 def test_a_swipe_at_the_end_of_the_dope_box_carries_on_to_the_page(page, app_url):
     open_screen(page, app_url, profile='ut', profiles=MINE)
     assert page.evaluate("getComputedStyle(document.querySelector('#dope').closest('.tablewrap')).overscrollBehaviorY") == 'auto'
+
+
+# ---------- Spin drift ----------
+
+SPIN = {**LOAD, 'id': 'us', 'name': 'Spin rifle', 'twist': 10, 'blen': 1.24, 'bdia': 0.308}
+SPIN_L = {**SPIN, 'id': 'ul', 'name': 'Left rifle', 'twistDir': 'L'}
+SPIN_MARGINAL = {**SPIN, 'id': 'um', 'name': 'Marginal rifle', 'twist': 14}       # Miller 1.22 (checked below)
+SPIN_UNSTABLE = {**SPIN, 'id': 'uu', 'name': 'Unstable rifle', 'twist': 18}       # Miller 0.74
+SPINNERS = [PLAIN, SPIN, SPIN_L, SPIN_MARGINAL, SPIN_UNSTABLE, {**LOAD, 'id': 'ub', 'name': 'Half rifle', 'bdia': 0.308}]
+TAIL = ' Coriolis is not included.'
+
+
+def miller(w, dia, length, twist, mv, temp=59, press=29.92126):
+    """Courtney & Miller equation 1, written out here and not read from the app."""
+    t, L = twist / dia, length / dia
+    return 30 * w / (t * t * dia ** 3 * L * (1 + L * L)) * (mv / 2800) ** (1 / 3) * (temp + 460) / 519 * 29.92 / press
+
+
+def sg_of(p):
+    return miller(p['w'], p['bdia'], p['blen'], p['twist'], p['mv'])
+
+
+def drift_col(page):
+    """The dope card's Drift column as signed inches (right +), or the text when it carries no letter."""
+    i = head(page).index('Drift in')
+    return {r[0]: r[i] for r in body(page)}
+
+
+def signed(cell):
+    m = re.fullmatch(r'(\d+\.\d)(?: ([RL]))?', cell)
+    assert m, cell
+    return float(m.group(1)) * (-1 if m.group(2) == 'L' else 1)
+
+
+def times(page):
+    i = head(page).index('Time s')
+    return {r[0]: float(r[i]) for r in body(page)}
+
+
+def test_the_test_inputs_sit_inside_their_bands():
+    assert sg_of(SPIN) > 1.5 and 1.05 < sg_of(SPIN_MARGINAL) < 1.35 and sg_of(SPIN_UNSTABLE) < 0.9
+
+
+def test_no_wind_gives_a_left_hold_that_grows_with_range(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0', 'bRange': '600'})
+    w = card(page)['wind']
+    assert w[0] == 'WINDAGE' and w[1].startswith('L '), w                 # the bullet drifts right, so the hold is left
+    d = drift_col(page)
+    assert d['600'].endswith(' R') and d['1000'].endswith(' R'), d
+    assert signed(d['1000']) > signed(d['600']) > signed(d['300']) > 0
+    page.evaluate('FK.bal.select("un")'); settle(page)
+    assert card(page)['wind'] == ['WINDAGE', '0.0 mil', '0.0 MOA', 'No hold'], card(page)['wind']     # no twist given: no windage at all
+    assert set(drift_col(page).values()) == {'0.0'}
+
+
+def test_windage_equals_wind_alone_plus_the_formula(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0', 'bRange': '500'})
+    sg, spin_in, tof = sg_of(SPIN), signed(drift_col(page)['500']), times(page)['500']
+    assert abs(spin_in - 1.25 * (sg + 1.2) * tof ** 1.83) < 0.1, (spin_in, tof)
+    for wind, clock in (('10', 3), ('8', 9)):
+        shot(page, bWind=wind, bClock=clock)
+        with_spin = signed(drift_col(page)['500'])
+        page.evaluate('FK.bal.select("un")'); settle(page)
+        plain = signed(drift_col(page)['500'])                              # the plain column has no letter: wind from 3 o'clock carries the bullet left
+        plain *= -1 if clock == 3 else 1
+        page.evaluate('FK.bal.select("us")'); settle(page)
+        assert abs((with_spin - plain) - 1.25 * (sg + 1.2) * times(page)['500'] ** 1.83) < 0.1, (wind, clock, with_spin, plain)
+
+
+def test_left_twist_mirrors_it(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0'})
+    right = drift_col(page)
+    page.evaluate('FK.bal.select("ul")'); settle(page)
+    left = drift_col(page)
+    assert card(page)['wind'][1].startswith('R '), card(page)['wind']
+    for yd, v in right.items():
+        assert v.endswith(' R') == left[yd].endswith(' L') and v[:-2] == left[yd][:-2], (yd, v, left[yd])
+    assert 'left-hand twist' in page.inner_text('#bSpin')
+
+
+def test_spin_against_the_wind_changes_side_along_the_card(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '1.2', 'bClock': '3', 'bMax': '1500'})     # at 1.2 mph the sides cross near 1,000 yd
+    cells = list(drift_col(page).values())
+    sides = [c[-1] for c in cells if c[-1] in 'RL']
+    assert 'L' in sides and 'R' in sides, cells
+    first_r = next(i for i, s in enumerate(sides) if s == 'R')
+    assert 'L' in sides[:first_r] and set(sides[first_r:]) == {'R'}, cells        # one change of side, wind first and spin after
+    assert not [c for c in cells if NASTY.search(c) or re.search(r'[RL] 0\.0', c)], cells
+    whole_page_is_clean(page)
+
+
+def test_answer_line_names_the_spin_share(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0', 'bRange': '500'})
+    sub = card(page)['sub']
+    m = re.match(r'At 500 yd: \d+\.\d in low, drift (\d+\.\d) in right \(spin drift (\d+\.\d) in right included\), ', sub)
+    assert m and m.group(1) == m.group(2), sub
+    shot(page, bWind=10)
+    assert re.search(r'drift \d+\.\d in left \(spin drift \d+\.\d in right included\), ', card(page)['sub']), card(page)['sub']
+    page.evaluate('FK.bal.select("ul")'); settle(page)
+    assert re.search(r'\(spin drift \d+\.\d in left included\)', card(page)['sub']), card(page)['sub']
+    page.evaluate('FK.bal.select("un")'); settle(page)
+    assert 'spin' not in card(page)['sub']
+    shot(page, bRange=1, bWind=0)                                             # a share that rounds to zero is not named
+    page.evaluate('FK.bal.select("us")'); settle(page)
+    assert 'spin' not in card(page)['sub'] and 'drift 0.0 in,' in card(page)['sub'], card(page)['sub']
+
+
+def test_spin_line_three_texts(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS)
+    g = f"stability {int(sg_of(SPIN) * 10) / 10:.1f}"
+    assert page.inner_text('#bSpin') == f'Windage includes spin drift ({g}, right-hand twist).{TAIL}'
+    page.evaluate('FK.bal.select("ul")'); settle(page)
+    assert page.inner_text('#bSpin') == f'Windage includes spin drift ({g}, left-hand twist).{TAIL}'
+    page.evaluate('FK.bal.select("uu")'); settle(page)
+    assert page.inner_text('#bSpin') == f'Spin drift not included: by the Miller formula this bullet is not stable in this twist (stability 0.7).{TAIL}'
+    page.evaluate('FK.bal.select("ub")'); settle(page)
+    assert page.inner_text('#bSpin') == f'Spin drift not included: add twist and bullet length to the profile.{TAIL}'
+    page.evaluate('FK.bal.select("un")'); settle(page)
+    assert page.inner_text('#bSpin') == f'Spin drift not included: add twist, bullet length and bullet diameter to the profile.{TAIL}'
+    one = {k: v for k, v in {**SPIN, 'id': 'uo', 'name': 'One short'}.items() if k != 'blen'}
+    open_screen(page, app_url, profile='uo', profiles=[one])
+    assert page.inner_text('#bSpin') == f'Spin drift not included: add bullet length to the profile.{TAIL}'
+
+
+def test_unstable_bullet_gets_no_spin_drift(page, app_url):
+    open_screen(page, app_url, profile='uu', profiles=SPINNERS, shot={'bWind': '0'})
+    assert set(drift_col(page).values()) == {'0.0'} and 'spin' not in card(page)['sub']
+    assert head(page).count('Drift in') == 1
+    assert page.inner_text('#dopeKey').endswith('Drift: inches the wind moves the bullet, shown without a sign.')
+
+
+def test_builtin_load_says_what_to_add(page, app_url):
+    open_screen(page, app_url)
+    assert page.inner_text('#bSpin') == f'Spin drift not included: add twist, bullet length and bullet diameter to the profile.{TAIL}'
+
+
+def test_marginal_is_shown_and_still_applied(page, app_url):
+    open_screen(page, app_url, profile='um', profiles=SPINNERS, shot={'bWind': '0'})
+    assert page.inner_text('#bSpin') == f'Windage includes spin drift (stability {int(sg_of(SPIN_MARGINAL) * 10) / 10:.1f}, marginal, right-hand twist).{TAIL}'
+    assert drift_col(page)['500'].endswith(' R') and 'spin drift' in card(page)['sub']
+    marginal = signed(drift_col(page)['500'])
+    page.evaluate('FK.bal.select("us")'); settle(page)
+    assert signed(drift_col(page)['500']) > marginal > 0               # the stability figure is in the formula: steadier, more drift
+
+
+def test_spin_line_on_every_message_path(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS)
+    for field, bad in (('bRange', '0'), ('bWind', '500'), ('bAngle', '99'), ('bTemp', '500')):
+        if field == 'bTemp':
+            page.click('#bCondBtn')
+        shot(page, **{field: bad})
+        assert re.match(r'Enter an? |Check the conditions', card(page)['sub']), card(page)['sub']
+        assert page.inner_text('#bSpin') == f'Spin drift not included.{TAIL}', (field, page.inner_text('#bSpin'))
+        open_screen(page, app_url, profile='us', profiles=SPINNERS)
+    open_screen(page, app_url, profile='un', profiles=SPINNERS, shot={'bRange': '0'})
+    assert page.inner_text('#bSpin') == f'Spin drift not included: add twist, bullet length and bullet diameter to the profile.{TAIL}'
+    open_screen(page, app_url, profile='us', profiles=[{**SPIN, 'bc': 0}])
+    assert 'needs a ballistic coefficient' in card(page)['sub']
+    assert page.inner_text('#bSpin') == f'Spin drift not included.{TAIL}'
+
+
+def test_card_without_spin_is_byte_for_byte_v711(page, app_url):
+    open_screen(page, app_url, profile='un', profiles=SPINNERS)
+    assert head(page) == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    assert page.inner_text('#dopeKey') == 'Path: inches above the line of sight; a minus means below. Drift: inches the wind moves the bullet, shown without a sign.'
+    rows = body(page)
+    assert rows[9] == ['500', 'U 3.5', 'U 12.2', 'R 1.2', 'R 4.0', '-63.6', '21.2', '1782', '1234', '0.70'], rows[9]
+    assert all(re.fullmatch(r'\d+\.\d', r[head(page).index('Drift in')]) for r in rows)
+    assert 'spin' not in card(page)['sub']
+
+
+def test_spin_card_key_and_cells(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0'})
+    assert page.inner_text('#dopeKey') == 'Path: inches above the line of sight; a minus means below. Drift: inches the wind and the spin move the bullet; R right, L left.'
+    d = drift_col(page)
+    assert all(re.fullmatch(r'\d+\.\d [RL]|0\.0', v) for v in d.values()), d
+    assert not [v for v in d.values() if NASTY.search(v)]
+
+
+@pytest.mark.parametrize('sight', [None, {'type': 'turret', 'unit': 'mil', 'click': 0.1}, {'type': 'dot'},
+                                   {'type': 'reticle', 'unit': 'mil', 'marks': [1.5, 3, 4.6, 6.3]}])
+def test_every_sight_reads_the_adjusted_windage(page, app_url, sight):
+    p = {**SPIN, 'id': 'ux', 'name': 'Sighted spin rifle', **({'optic': sight} if sight else {})}
+    open_screen(page, app_url, profile='ux', profiles=[p], shot={'bWind': '0', 'bRange': '600'})
+    w = ' '.join(card(page)['wind'])
+    assert re.search(r'\bL\b|left', w) and not NASTY.search(w), w
+    assert not NASTY.search(page.inner_text('#dope'))
+    if sight and sight['type'] == 'reticle':
+        assert 'Drift in' not in head(page)
+
+
+@pytest.mark.parametrize('night', [False, True])
+@pytest.mark.parametrize('profile', ['us', 'un', 'uu', 'um'])
+def test_spin_line_fits_360_day_night_large_text(page, app_url, night, profile):
+    open_screen(page, app_url, profile=profile, profiles=SPINNERS, night=night)
+    enlarge_text(page)
+    assert overflow(page, '#view-ballistics') == []
+    box = page.locator('#bSpin').bounding_box()
+    assert box['x'] >= 0 and box['x'] + box['width'] <= 360
+    assert page.evaluate("(() => { const e = document.querySelector('#bSpin'); return e.scrollWidth <= e.clientWidth + 1; })()")
+    whole_page_is_clean(page)

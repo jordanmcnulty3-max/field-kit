@@ -203,3 +203,36 @@ def test_compare_does_not_change_the_load(ready):
       return JSON.stringify(L) === before;
     }}""")
     assert same is True
+
+
+@pytest.mark.parametrize('pid', ['p556m193', 'p308'])
+def test_zeros_near_the_apex_zero_never_report_themselves_as_the_other_crossing(ready, pid):
+    """Task 4 review: near the top of the path the zero's own crossing can slide by more than the 2 yd the near-crossing test allows.
+    Sweep 15 yd either side of the apex zero in 1 yd steps: `other` is null or at least 5 yd from the zero, and a zero set at `other`
+    puts the path back on the line of sight at the original zero."""
+    got = ready.evaluate("""(pid) => {
+      const p = FK._test.presets().find(x => x.id === pid);
+      const L = { bc: p.bc, model: p.model, w: p.w, mv: p.mv, sight: p.sight, zero: p.zero, temp: 59, alt: 0, press: 0, rh: 50 };
+      let apex = null;
+      for (let z = 20; z <= 480 && apex === null; z += 0.5) {
+        const c = BALZ.compare(L, [z, z + 0.25]).cols[0];
+        if (c.other === null && c.past === false && c.peak === null) apex = z;
+      }
+      if (apex === null) return { apex };
+      const out = [];
+      for (let z = Math.max(10, Math.round(apex) - 15); z <= Math.round(apex) + 15; z++) {
+        const c = BALZ.compare(L, [z, z + 1]).cols[0];
+        let back = null;
+        if (c.other !== null) {
+          const s = BAL.solve(Object.assign({}, L, { zero: c.other, wind: 0, clock: 12, angle: 0, ranges: [z] }));
+          back = s.rows[0].dropIn;
+        }
+        out.push({ z, other: c.other, back });
+      }
+      return { apex, out };
+    }""", pid)
+    assert got['apex'] is not None, pid
+    assert len(got['out']) >= 30
+    for r in got['out']:
+        assert r['other'] is None or abs(r['other'] - r['z']) >= 5, (pid, r)
+        assert r['back'] is None or abs(r['back']) <= 0.15, (pid, r)

@@ -508,7 +508,16 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .rf-true-btn{display:block;width:100%;margin-top:12px;min-height:48px;white-space:normal;padding:8px 16px}
 #rfForm .rf-true-out{margin-top:12px;font-size:16px;font-weight:600;color:var(--ink);overflow-wrap:anywhere}
 .rf-true-out:empty{display:none}
-#dlgList .mk-act{grid-template-columns:1fr}
+#dlgList .mk-act,#dlgClose .mk-act{grid-template-columns:1fr}
+/* Ballistics Tools: the buttons under the dope card, one per row; the Close-range holds sheet (src/bal-tools.js). */
+.bal-tools{display:grid;gap:8px}
+.bal-tools .btn{width:100%;min-height:48px;white-space:normal}
+.bal-tools .btn[hidden]{display:none}
+#dlgClose .mk-body{padding-bottom:12px}
+.cl-name{margin:0 0 4px;font-size:16px;font-weight:600;overflow-wrap:anywhere}
+.cl-warn{color:var(--blaze);font-weight:600}
+#clWrap{margin-top:8px}
+#dlgClose .hint{margin:6px 0 0}
 .mk-kinds{margin:12px 0;padding:0;border:0;min-width:0}
 .mk-kinds legend{padding:0;margin:0 0 6px;font-size:14px;color:var(--muted)}
 .mk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
@@ -1180,6 +1189,14 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <p class="hint" id="dopeTrans" style="margin-top:8px">† Below Mach 1.2 (transonic): less certain. Confirm these with real shots.</p>
       <p class="hint" id="bSpin" style="margin-top:8px"></p>
     </div>
+
+    <div class="block">
+      <h2 class="sv-cat">Tools</h2>
+      <div class="bal-tools">
+        <button type="button" class="btn ghost" id="bClose">Close-range holds</button>
+        <button type="button" class="btn ghost" id="bZeros" hidden>Compare zeros</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1443,6 +1460,19 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <ul class="tl-list" id="tlList"></ul>
   </div>
   <div class="mk-act"><button type="button" class="btn ghost" id="tlClose">Close</button></div>
+</dialog>
+
+<dialog id="dlgClose" class="sheet mk-sheet" aria-labelledby="clTitle">
+  <div class="mk-body">
+    <h2 id="clTitle" tabindex="-1">Close-range holds</h2>
+    <p class="cl-name" id="clProfile"></p>
+    <p class="hint" id="clSight"></p>
+    <p class="hint cl-warn" id="clNoSight" hidden>This profile has no sight height, so every hold reads zero. Tap Edit and set it.</p>
+    <p class="rf-msg cl-msg" id="clMsg" role="status" hidden></p>
+    <div class="tablewrap" id="clWrap"><table id="clTable"></table></div>
+    <p class="hint" id="clNote">Level, no wind. Inside the zero the bullet strikes low, so the hold is high.</p>
+  </div>
+  <div class="mk-act"><button type="button" class="btn ghost" id="clClose">Close</button></div>
 </dialog>
 
 <dialog id="dlgShape" class="sheet mk-sheet" aria-labelledby="shName">
@@ -4432,6 +4462,19 @@ const BALS = (() => {
     return { temp, alt, press: p === null ? 0 : p, rh };
   }
 
+  /* What BAL.solve takes besides the shot: the profile's load and the air it is fired in. The one place the field list lives (calc and FK.bal.load). */
+  const loadFor = (p, air) => ({
+    bc: p.bc, model: p.model || 'G7', w: p.w || 0, mv: p.mv, sight: p.sight || 0, zero: p.zero, zeroAtm: zeroAir(p.zeroAtm),
+    temp: air.temp, alt: air.alt, press: air.press, rh: air.rh
+  });
+  /* The selected profile's load in today's air, for the sheets under the dope card; or { error } with the screen's own message. */
+  function load() {
+    const p = anyProfile(cur);
+    if (!loadOk(p)) return { error: MSG.profile };
+    const air = shotAir();
+    return air ? loadFor(p, air) : { error: MSG.cond };
+  }
+
   function calc() {
     const p = anyProfile(cur);
     const sighted = head(p);
@@ -4457,10 +4500,7 @@ const BALS = (() => {
     if (!at.includes(p.zero)) at.push(p.zero);
     at.sort((a, b) => a - b);
     const ranges = at.concat([target]);
-    const res = BAL.solve({
-      bc: p.bc, model: p.model || 'G7', w: p.w || 0, mv: p.mv, sight: p.sight || 0, zero: p.zero, zeroAtm: zeroAir(p.zeroAtm),
-      temp, alt, press, rh, wind, clock: +F('bClock').value, angle, ranges
-    });
+    const res = BAL.solve({ ...loadFor(p, air), wind, clock: +F('bClock').value, angle, ranges });
     if (res.error) return nothing(res.error, p);
 
     /* Spin drift: from the profile's twist and bullet, today's temperature and the station pressure the solver used; applied only to a
@@ -4577,7 +4617,7 @@ const BALS = (() => {
   }
   /* The surface other screens and tests use (edit is added by bal-edit.js). */
   FK.bal = {
-    init, calc, clean, save, remove, select, shotAir,
+    init, calc, clean, save, remove, select, shotAir, load,
     profiles: () => profiles.map(copy),
     selected: () => copy(anyProfile(cur))
   };
@@ -4927,6 +4967,46 @@ const BALS = (() => {
   FK.bal.edit = edit;
 })();
 
+
+/* ---------- Ballistics tools: the sheets under the dope card. Close-range holds here; Compare zeros is added below.
+   Loads after bal-edit.js and reaches the screen only through FK.bal (load, selected); the paths come from BALZ and the words
+   from BALS. Each sheet reads the profile and today's air when it opens and has nothing to save. ---------- */
+(() => {
+  const FK = window.FK;
+  const { $ } = FK;
+  const F = id => $('#' + id);
+  const dlg = F('dlgClose');
+  const yd = v => String(Number(v.toFixed(1)));      // 100 -> "100", 36.5 -> "36.5"
+  const inches = v => String(Number(v.toFixed(2)));  // 2.6 -> "2.6", 2 -> "2"
+  const text = (id, t) => { F(id).textContent = t; };
+
+  /* The hold for one row the way the red dot answer words it ("Hold 2.4 in high", "Hold on"). */
+  const hold = r => BALS.answer({ yd: r.yd, dropIn: r.dropIn, windIn: 0 }, { type: 'dot' }).elev.main;
+
+  function fill() {
+    const p = FK.bal.selected(), load = FK.bal.load();
+    text('clProfile', p.name);                                   // user data: text, never markup
+    const noSight = !(p.sight > 0);
+    text('clSight', `Sight height ${noSight ? 'not set' : inches(p.sight) + ' in'} · zero ${Number.isFinite(p.zero) ? yd(p.zero) + ' yd' : 'not set'}`);
+    const res = load.error ? { error: load.error } : BALZ.close(load);
+    const rows = res.error ? [] : res.rows;
+    F('clNoSight').hidden = !!res.error || !noSight;
+    text('clMsg', res.error || '');
+    F('clMsg').hidden = !res.error;
+    F('clWrap').hidden = !!res.error;
+    F('clNote').hidden = !!res.error;
+    const body = F('clTable'), head = document.createElement('thead'), tb = document.createElement('tbody');
+    body.textContent = '';
+    if (res.error) return;
+    const tr = (tag, cells) => { const r = document.createElement('tr'); cells.forEach(c => { const d = document.createElement(tag); d.textContent = c; r.appendChild(d); }); return r; };
+    head.appendChild(tr('th', ['Yd', 'Hold']));
+    rows.forEach(r => tb.appendChild(tr('td', [yd(r.yd), noSight ? 'Hold on' : hold(r)])));   // no sight height: the line above the table says every hold reads zero
+    body.append(head, tb);
+  }
+
+  F('bClose').addEventListener('click', () => FK.sheet.open(dlg, { onOpen: () => { fill(); F('clTitle').focus(); } }));
+  F('clClose').addEventListener('click', () => FK.sheet.close(dlg));
+})();
 
 /* ---------- Tactical data: markers, routes, areas and rings, the navigation target, and the distance unit ----------
    Storage keys stay as they were in v7.7 (wps, target); shapes and distUnit are new. Everything read from storage is

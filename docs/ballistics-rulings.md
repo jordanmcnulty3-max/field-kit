@@ -585,3 +585,23 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
 - **The `other` and peak example numbers in the tests are ranges, not the planner's single figures,** and the 100 yd zero is not
   used for the peak test: M193 (3,301 fps, 2.6 in sight) at 100 yd peaks only 0.06 in above the line, 0.01 over the 0.05 in floor.
   Cost if wrong: none.
+
+### Release 2, Task 5 (Tools block and the Close-range holds sheet)
+
+- **With no sight height (blank or 0) every row reads "Hold on".** The brief's line says "every hold reads zero", but the solver with a
+  sight height of 0 puts the 25 yd row 0.51 in above the line of sight, which the red dot wording would print as "Hold 0.5 in low",
+  contradicting the line above the table. The sheet therefore prints "Hold on" for every row in that case. Cost if wrong: a profile
+  with a deliberately entered 0 in sight height loses its (tiny, physically meaningless) 0.5 in figure at 25 yd.
+- **The sight line for a missing sight height reads "Sight height not set · zero 100 yd"** (the brief gave the wording only for a
+  sight height). Cost if wrong: one line of wording.
+- **Sight height is printed without trailing zeros ("2 in", "2.6 in", at most two decimals) and the zero with at most one decimal.**
+  Cost if wrong: a profile with a 2.0 in sight reads "2 in".
+- **A sight height of 0 counts as "no sight height"** (the editor allows 0 to 6 in, and BAL.solve treats 0 as nothing). Cost if wrong:
+  a person who really means a bore-height sight gets the "Tap Edit and set it" line.
+- **The reopen in the Back/Close test sends the click without coordinates.** The sheet's double-tap guard (sheet.js) swallows a second
+  tap at the same spot for 350 ms after a close; waiting that out would need a fixed sleep. Cost if wrong: none for the app; the real
+  tap is covered by every first open.
+- **The Tools block's buttons are full width, one per row, 48 px high** (brief did not give a layout). Compare zeros stays `hidden`
+  until Task 6. Cost if wrong: a rearranged block.
+- **#bWind's pinned top is 525.17 px** (360 x 640, default profile, measured in a v7.11 build of f74c5db made outside this tree),
+  compared to within 0.5 px.

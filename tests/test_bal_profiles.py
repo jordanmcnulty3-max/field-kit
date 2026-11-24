@@ -196,7 +196,7 @@ def test_save_as_new_profile_and_delete_land_on_the_right_profile(page, app_url)
 
 def test_surface_save_select_remove(page, app_url):
     open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'))
-    assert page.evaluate('Object.keys(FK.bal).sort()') == ['calc', 'clean', 'edit', 'init', 'profiles', 'remove', 'save', 'select', 'selected', 'shotAir']
+    assert page.evaluate('Object.keys(FK.bal).sort()') == ['calc', 'clean', 'edit', 'init', 'load', 'profiles', 'remove', 'save', 'select', 'selected', 'shotAir']
     assert page.evaluate('FK.bal.save({ id: "p308", name: "x" })') is None
     saved = page.evaluate('FK.bal.save({ id: "u9", name: "Nine", bc: 0.3, mv: 2500, junk: 1, optic: { type: "dot" } })')
     assert saved == {'id': 'u9', 'name': 'Nine', 'bc': 0.3, 'mv': 2500, 'optic': {'type': 'dot'}}

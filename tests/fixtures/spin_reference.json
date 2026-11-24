@@ -1,0 +1,29 @@
+{
+  "stability": {
+    "source": "Courtney & Miller, A Stability Formula for Plastic-Tipped Bullets, Part 1 (arXiv 1410.5340), equation 1: Sg = 30 m / (t^2 d^3 L (1 + L^2)) x (V/2800)^(1/3) x (FT+460)/(59+460) x 29.92/P; m grains, t and L in calibers, d inches, V fps, FT deg F, P inHg. Worked example: Wikipedia, Miller twist rule (180 gr .308 Nosler Spitzer, 1.180 in = 3.83 calibers, safe Sg 2.0 gives 39.2511937 calibers per turn, about 12 in); velocity Mach 2.5 (about 2800 fps) taken as 2800, standard air.",
+    "url": "https://arxiv.org/pdf/1410.5340",
+    "exampleUrl": "https://en.wikipedia.org/wiki/Miller_twist_rule",
+    "opened": "2026-11-23",
+    "examples": [
+      { "w": 180, "dia": 0.308, "len": 1.18, "twist": 12.089368, "mv": 2800, "temp": 59, "press": 29.92, "sg": 2.0 }
+    ],
+    "marginalBelow": 1.4,
+    "unstableBelow": 1.0,
+    "thresholdsNote": "The paper gives no named bands: Sg above 1.0 is stable in a perfect world, 1.4 to 2.0 is the recommended design range, drag rises below about 1.3, tumbling is expected near 1.0. marginalBelow takes the low end of the recommended range (1.4), unstableBelow the 1.0 boundary."
+  },
+  "drift": {
+    "source": "Litz spin drift estimator SD(in) = 1.25 (Sg + 1.2) tof^1.83, stated in ballistics-engine spin_drift.rs (litz_drift_inches; its test sg 2.0, 1.5 s gives about 8.40 in) and, independently, as Eq. 18 with a five-bullet table (Sg, TOF at 1000 yd, Litz SD) in a Sniper's Hide thread",
+    "url": "https://docs.rs/ballistics-engine/0.33.0/src/ballistics_engine/spin_drift.rs.html",
+    "url2": "https://www.snipershide.com/shooting/threads/calculating-yaw-of-repose-spin-drift-a-novel-approach.6456023",
+    "opened": "2026-11-23",
+    "examples": [
+      { "sg": 2.0, "tof": 1.5, "inches": 8.40 },
+      { "sg": 1.74, "tof": 1.73, "inches": 10.0203 },
+      { "sg": 1.94, "tof": 1.6923, "inches": 10.2791 },
+      { "sg": 1.594, "tof": 1.239, "inches": 5.1696 },
+      { "sg": 2.24, "tof": 1.687, "inches": 11.1967 },
+      { "sg": 1.91, "tof": 1.64, "inches": 9.6125 }
+    ]
+  },
+  "bullets": []
+}

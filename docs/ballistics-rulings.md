@@ -474,3 +474,27 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   is newer than 7.9 for backups and updates (`tests/test_migration.py` covers dotted versions). Cost if wrong: someone reads
   "7.10" as "7.1"; the alternative, 8.0, is reserved for the team map.
 
+
+## Release 2
+
+- **Stability bands use the paper's numbers, 1.0 and 1.4, not the expected 1.0 and 1.5.** Courtney and Miller name no
+  "marginal" band: tumbling near 1.0, recommended range 1.4 to 2.0, drag rising below about 1.3. `unstableBelow` is 1.0 and
+  `marginalBelow` is 1.4 (the bottom of the recommended range). Other tools use 1.5 (ballistics-engine's "adequate" comment,
+  Josef's calculator). Cost if wrong: a bullet at Sg 1.4 to 1.5 shows "stable" where a stricter reader would say "marginal".
+  Changing it is one constant and one fixture value.
+- **The stability example is worked backwards from Wikipedia's twist.** No opened page prints a bullet's inputs and its Sg from
+  the corrected formula. The one worked example (180 gr .308, 1.18 in, Sg 2.0 gives 39.2511937 calibers per turn) takes
+  "Mach 2.5, about 2800 fps" as 2800 fps and standard air; the result is 1.997, tested to 0.01. The independent check is the
+  formula written out again in Python (relative 1e-9). Cost if wrong: the velocity and air corrections are checked only
+  against the paper's equation, not against a printed number.
+- **Spin drift is confirmed by two statements that agree, not by a publisher's worked example.** ballistics-engine and a Sniper's
+  Hide post (quoting Litz's estimator, with a five-row table) give the same formula and six agreeing numbers. Litz's own
+  publication was not opened. Cost if wrong: the estimate follows a secondary copy of Litz's formula.
+- **No bullet length or diameter entered for any built-in load.** The only lengths found were a forum member's measurement
+  (175 gr SMK, 1.232 in) and no publisher figure; none of the six passed the rule "from a page I opened". `bullets` in the fixture is
+  empty and every built-in asks for its bullet. Cost if wrong: the user types one more number per built-in load.
+- **`grade` of a non-number is 'unstable'**, and `of` with a missing or unusable muzzle velocity or air returns `sg: NaN` with
+  grade 'unstable' (only the four listed items go in `missing`). Cost if wrong: the screen must test `isFinite(sg)` before
+  showing a number.
+- **`of` reads no `twistDir` other than 'L' as left**; anything else, including absent, is right (+1). Cost if wrong: a left-twist
+  rifle with a mistyped direction drifts the wrong way.

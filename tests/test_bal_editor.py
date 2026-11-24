@@ -724,7 +724,8 @@ def test_the_editor_uses_the_screens_own_rules(page, app_url):
 # ---------- Barrel and bullet (for spin drift) ----------
 
 SPIN_ONE = {**OWN, 'w': 175, 'mv': 2600}      # 175 gr, 2600 fps: with a .308, 1.24 in bullet the Miller figure is 2.4 at 1:10
-LEN_MSG = 'Bullet length looks wrong for that diameter. Measure the bullet, not the cartridge.'
+SHORT_MSG = 'Bullet length looks too short for that diameter. Check both numbers.'
+LONG_MSG = 'Bullet length looks too long for that diameter. Measure the bullet, not the cartridge.'
 
 
 def miller(w, dia, length, twist, mv, temp=59, press=29.92126):
@@ -828,9 +829,13 @@ def test_save_as_new_from_a_built_in_load_carries_the_spin_fields_typed(page, ap
 
 def test_editor_refuses_a_length_wrong_for_the_diameter(page, app_url):
     open_editor(page, app_url, profiles=(SPIN_ONE,))
-    for length in ('0.5', '2.3'):                        # under 2 and over 7 calibers of .308
+    for length, msg in (('0.5', SHORT_MSG), ('2.3', LONG_MSG)):   # under 2 and over 7 calibers of .308
         spin(page, 10, None, length, 0.308)
-        refuse(page, LEN_MSG, 'rfBLen')
+        refuse(page, msg, 'rfBLen')
+    for length, msg in (('0.3', SHORT_MSG), ('1.6', LONG_MSG)):   # and of .224 (the tester's 0.3)
+        spin(page, 10, None, length, 0.224)
+        refuse(page, msg, 'rfBLen')
+    page.fill('#rfBDia', '0.308')
     spin(page, None, None, '1.24')
     page.click('#rfSave')
     expect(page.locator(DLG)).to_be_hidden()
@@ -887,7 +892,7 @@ def stab_text(sg, grade):
     one = f'{math.floor(sg * 10 + 1e-9) / 10:.1f}'      # printed rounded down, as the ruling says
     return {'stable': f'Stability {one}.',
             'marginal': f'Stability {one}: marginal for this twist. Spin drift is still shown.',
-            'unstable': f'Stability {one}: by this formula the bullet is not stable in this twist. Spin drift is not shown.'}[grade]
+            'unstable': f'Stability {one}: by this formula the bullet is not stable in this twist. Spin drift is not shown. A polymer-tipped bullet reads low here.'}[grade]
 
 
 def test_stability_line_follows_typing(page, app_url):
@@ -926,7 +931,7 @@ def test_the_figure_just_under_a_threshold_prints_the_lower_decimal_with_its_gra
             a, b = (m, b) if miller(175, 0.308, 1.24, m, 2600) > target else (a, m)
         return a
     for target, text in ((1.38, 'Stability 1.3: marginal for this twist. Spin drift is still shown.'),
-                         (0.97, 'Stability 0.9: by this formula the bullet is not stable in this twist. Spin drift is not shown.'),
+                         (0.97, 'Stability 0.9: by this formula the bullet is not stable in this twist. Spin drift is not shown. A polymer-tipped bullet reads low here.'),
                          (1.42, 'Stability 1.4.')):
         tw = round(twist_for(target), 3)
         assert abs(miller(175, 0.308, 1.24, tw, 2600) - target) < 0.01, target
@@ -1045,3 +1050,29 @@ def test_rifle_sheet_still_fits_360_day_and_night_with_enlarged_text(page, app_u
         assert r['x'] >= 0 and r['x'] + r['width'] <= 361, (i, r)
     r = page.locator('#rfCancel').bounding_box()
     assert r['y'] >= 0 and r['y'] + r['height'] <= 641, r
+
+
+@pytest.mark.parametrize('field,typed,msg', [('rfTwist', '10e', 'Twist must be a number.'),
+                                             ('rfBLen', '1.24e', 'Bullet length must be a number.'),
+                                             ('rfBDia', '0.224e', 'Bullet diameter must be a number.')])
+def test_text_the_phone_cannot_read_is_refused_not_saved_as_blank(page, app_url, field, typed, msg):
+    full = {**SPIN_ONE, 'twist': 10, 'blen': 1.24, 'bdia': 0.308}
+    open_editor(page, app_url, profiles=(full,))
+    page.fill('#' + field, '')
+    page.type('#' + field, typed)                        # real typing: the browser keeps the text but reads no number from it
+    assert page.evaluate(f'document.querySelector("#{field}").validity.badInput')
+    refuse(page, msg, field)
+    assert profiles(page) == [full]                      # nothing was saved
+    page.fill('#' + field, '')
+    page.click('#rfSave')                                # blank is still allowed, and removes that field
+    expect(page.locator(DLG)).to_be_hidden()
+    assert field.replace('rfTwist', 'twist').replace('rfBLen', 'blen').replace('rfBDia', 'bdia') not in profiles(page)[0]
+
+
+def test_older_number_fields_are_left_as_they_were(page, app_url):
+    """Only the three new fields refuse unreadable text in this release (the ruling): the weight field still reads it as blank."""
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    page.fill('#rfW', '')
+    page.type('#rfW', '175e')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()

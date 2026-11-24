@@ -93,11 +93,16 @@
   /* The barrel and bullet fields: { twist, twistDir, blen, bdia } (null for a blank one), or { error, focus }. */
   function readSpin() {
     const bad = (error, focus) => ({ error, focus });
+    /* Text the browser cannot read as a number (a stray "e") reads as blank: refused, so what is on screen is never dropped unseen. */
+    const unread = [['rfTwist', 'Twist'], ['rfBLen', 'Bullet length'], ['rfBDia', 'Bullet diameter']].find(([id]) => F(id).validity.badInput);
+    if (unread) return bad(unread[1] + ' must be a number.', unread[0]);
     const twist = numOf('rfTwist'), blen = numOf('rfBLen'), bdia = numOf('rfBDia');
     if (twist !== null && !within(twist, 'twist')) return bad(between('Twist', 'twist', ' inches per turn'), 'rfTwist');
     if (blen !== null && !within(blen, 'blen')) return bad(between('Bullet length', 'blen', ' in'), 'rfBLen');
     if (bdia !== null && !within(bdia, 'bdia')) return bad(between('Bullet diameter', 'bdia', ' in'), 'rfBDia');
-    if (blen !== null && bdia !== null && !FK.balHost.lenFits(blen, bdia)) return bad('Bullet length looks wrong for that diameter. Measure the bullet, not the cartridge.', 'rfBLen');
+    if (blen !== null && bdia !== null && !FK.balHost.lenFits(blen, bdia)) return bad(blen / bdia < FK.balHost.CALIBERS[0]
+      ? 'Bullet length looks too short for that diameter. Check both numbers.'
+      : 'Bullet length looks too long for that diameter. Measure the bullet, not the cartridge.', 'rfBLen');
     return { twist, twistDir: F('rfTwistDir').value === 'L' ? 'L' : null, blen, bdia };
   }
   /* The stability line: worked out from what is typed (only what is usable) and today's air from the screen (standard air when that is
@@ -108,7 +113,7 @@
     const air = FK.bal.shotAir() || { temp: 59, alt: 0, press: 0, rh: 50 };
     const r = BSPIN.of({ twist: use('rfTwist', 'twist'), twistDir: F('rfTwistDir').value, blen: blen !== undefined && bdia !== undefined && !FK.balHost.lenFits(blen, bdia) ? undefined : blen,
       bdia, w: use('rfW', 'w'), mv: use('rfMV', 'mv') }, { temp: air.temp, press: BAL.atmosphere(air.temp, air.alt, air.press, air.rh).pIn });
-    const text = r.missing ? '' : r.grade === 'unstable' ? `Stability ${BSPIN.text(r.sg)}: by this formula the bullet is not stable in this twist. Spin drift is not shown.`
+    const text = r.missing ? '' : r.grade === 'unstable' ? `Stability ${BSPIN.text(r.sg)}: by this formula the bullet is not stable in this twist. Spin drift is not shown. A polymer-tipped bullet reads low here.`
       : r.grade === 'marginal' ? `Stability ${BSPIN.text(r.sg)}: marginal for this twist. Spin drift is still shown.` : `Stability ${BSPIN.text(r.sg)}.`;
     line.textContent = text; line.hidden = !text;
   }

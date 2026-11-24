@@ -477,7 +477,7 @@
     }
   }
   FK.balHost = {
-    newId, RANGE, CLICK_SIZES, within, marksOk, lenFits, nameTaken, freeName, parseNum, zeroAir,
+    newId, RANGE, CLICK_SIZES, CALIBERS, within, marksOk, lenFits, nameTaken, freeName, parseNum, zeroAir,
     find: id => { const p = anyProfile(id); return p ? { profile: copy(p), own: !!ownProfile(id) } : null; }
   };
   FK._test.presets = () => PRESETS.map(p => ({ ...p }));

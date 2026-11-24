@@ -30,7 +30,8 @@
   let frozen = false;                            // a backup is being restored: nothing is written over it
 
   /* ---------- Profiles ----------
-     A profile: { id, name, bc, model, w, mv, sight (height, in), zero, optic?, zeroAtm?, mv0? }. The built-in loads (PRESETS) are
+     A profile: { id, name, bc, model, w, mv, sight (height, in), zero, optic?, zeroAtm?, mv0?, twist?, twistDir?, blen?, bdia? }
+     (twist in per turn; twistDir 'L' only for a left-hand twist, absent means right; blen and bdia, the bullet's length and diameter, in). The built-in loads (PRESETS) are
      read-only; the person's own profiles are stored under 'profiles'. Whatever comes out of storage or a backup goes through
      clean() first, so a hand-edited or damaged entry cannot break the screen or inject markup. */
   /* Ids that were once built in. A stored selection naming one becomes an own profile named for what it was. */
@@ -48,8 +49,13 @@
      RANGE: what a real rifle, load and air can have. [low, high], both allowed. */
   const RANGE = Object.freeze({
     temp: [-60, 140], alt: [-2000, 30000], press: [8, 33], rh: [0, 100],                 // °F, ft, inHg (station), %
-    bc: [0.05, 1.2], w: [1, 1000], mv: [300, 5000], zero: [5, 1000], sight: [0, 6]       // -, gr (blank or 0 also), fps, yd, in
+    bc: [0.05, 1.2], w: [1, 1000], mv: [300, 5000], zero: [5, 1000], sight: [0, 6],      // -, gr (blank or 0 also), fps, yd, in
+    twist: [3, 30], blen: [0.2, 3], bdia: [0.17, 0.6]                                   // in per turn, in, in (bullet length and diameter)
   });
+  /* A bullet is 2 to 7 calibers long; with both typed, a length outside that is a mistake (the cartridge measured, or inches for mm).
+     The small allowance keeps 7 x .308 = 2.156 inside whatever the division gives. */
+  const CALIBERS = Object.freeze([2, 7]);
+  const lenFits = (blen, bdia) => { const r = blen / bdia; return r >= CALIBERS[0] - 1e-9 && r <= CALIBERS[1] + 1e-9; };
   const within = (v, k) => fin(v) && v >= RANGE[k][0] && v <= RANGE[k][1];
   /* A load the screen can solve: coefficient, velocity and zero inside their ranges; weight blank, 0 or inside; sight height blank or inside. */
   const loadOk = p => !!p && within(p.bc, 'bc') && within(p.mv, 'mv') && within(p.zero, 'zero')
@@ -86,12 +92,17 @@
     if (optic) p.optic = optic;
     if (zeroAtm) p.zeroAtm = zeroAtm;
     if (fin(raw.mv0) && raw.mv0 > 0) p.mv0 = raw.mv0;
+    /* The barrel and bullet (for spin drift): each kept only when it is a number inside its range; a left twist is the only direction
+       stored; a length that cannot belong to the diameter given with it is dropped (it is the length that was measured). */
+    ['twist', 'blen', 'bdia'].forEach(k => { if (within(raw[k], k)) p[k] = raw[k]; });
+    if (raw.twistDir === 'L') p.twistDir = 'L';
+    if (p.blen !== undefined && p.bdia !== undefined && !lenFits(p.blen, p.bdia)) delete p.blen;
     return p;
   }
-  /* Key order of a stored profile: the fields every profile has first, in the order v7.8 wrote them. */
+  /* Key order of a stored profile: the fields every profile has first, in the order v7.8 wrote them; the barrel and bullet last. */
   const ordered = p => {
     const out = {};
-    ['id', 'name', 'bc', 'model', 'w', 'mv', 'sight', 'zero', 'optic', 'zeroAtm', 'mv0'].forEach(k => { if (has(p, k)) out[k] = p[k]; });
+    ['id', 'name', 'bc', 'model', 'w', 'mv', 'sight', 'zero', 'optic', 'zeroAtm', 'mv0', 'twist', 'twistDir', 'blen', 'bdia'].forEach(k => { if (has(p, k)) out[k] = p[k]; });
     return out;
   };
 
@@ -395,7 +406,7 @@
   };
   /* For src/bal-edit.js only: its read-only seam to the screen's profiles and the one definition of each shared rule. FK.bal stays
      the public surface; nothing else may depend on this. find gives a copy of a profile, own or built in, with whether it is the
-     person's own. RANGE, CLICK_SIZES, within, marksOk, parseNum and zeroAir are the rules the editor must apply exactly as the screen
+     person's own. RANGE, CLICK_SIZES, within, marksOk, lenFits, parseNum and zeroAir are the rules the editor must apply exactly as the screen
      does; nameTaken and freeName keep names unique. */
   const nameKey = n => String(n).trim().slice(0, 60).toLowerCase();
   /* Whether another profile (own, except exceptId, or built in) already has this name, trimmed and compared without regard to case. */
@@ -408,7 +419,7 @@
     }
   }
   FK.balHost = {
-    newId, RANGE, CLICK_SIZES, within, marksOk, nameTaken, freeName, parseNum, zeroAir,
+    newId, RANGE, CLICK_SIZES, within, marksOk, lenFits, nameTaken, freeName, parseNum, zeroAir,
     find: id => { const p = anyProfile(id); return p ? { profile: copy(p), own: !!ownProfile(id) } : null; }
   };
   FK._test.presets = () => PRESETS.map(p => ({ ...p }));

@@ -1280,6 +1280,15 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <label class="f">Station pressure (inHg)<input id="rfZPress" type="number" inputmode="decimal" step="0.01"></label>
       <p class="hint">Leave blank unless you have a true station reading. Weather reports and phones give pressure corrected to sea level.</p>
       <p class="hint" id="rfZHint">Zero conditions not set: assumed the same as today.</p>
+      <h3 class="rf-h">Barrel and bullet (for spin drift)</h3>
+      <label class="f">Twist (inches per turn)<input id="rfTwist" type="number" inputmode="decimal" step="0.1"></label>
+      <label class="f">Twist direction
+        <select id="rfTwistDir"><option value="R">Right</option><option value="L">Left</option></select>
+      </label>
+      <label class="f">Bullet length (in)<input id="rfBLen" type="number" inputmode="decimal" step="0.001"></label>
+      <label class="f">Bullet diameter (in)<input id="rfBDia" type="number" inputmode="decimal" step="0.001"></label>
+      <p class="hint">Bullet length is the bullet alone, from the maker's data or a caliper. For a polymer-tipped bullet the stability figure reads a little low.</p>
+      <p class="hint" id="rfStab" aria-live="polite" hidden></p>
       <div id="rfTruePart" hidden>
         <h3 class="rf-h">Correct from a real shot</h3>
         <p class="hint">Enter a distance and the elevation the rifle really needed there. Uses today's conditions from the Ballistics screen, a level shot and no wind.</p>

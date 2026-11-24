@@ -69,7 +69,7 @@ def test_part_sits_after_zero_conditions_with_its_words(page, app_url):
     page.locator('#rfTruePart').scroll_into_view_if_needed()
     expect(page.locator('#rfTruePart h3')).to_have_text('Correct from a real shot')
     assert page.evaluate("""() => { const z = [...document.querySelectorAll('#dlgRifle h3')].map(h => h.textContent);
-      return z.slice(-2).join('|'); }""") == 'Zero conditions|Correct from a real shot'
+      return z.slice(-3).join('|'); }""") == 'Zero conditions|Barrel and bullet (for spin drift)|Correct from a real shot'   # the barrel and bullet part (release 2) sits between
     text = page.inner_text('#rfTruePart')
     assert 'Enter a distance and the elevation the rifle really needed there. Uses today\'s conditions from the Ballistics screen, a level shot and no wind.' in text
     for s in ['Distance (yd)', 'Elevation needed', 'In', 'Work it out']:

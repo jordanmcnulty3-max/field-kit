@@ -24,14 +24,18 @@ const BSPIN = (() => {
     return sg < MARGINAL_BELOW ? 'marginal' : 'stable';
   }
 
-  /* profile: { w, mv, twist, twistDir, blen, bdia }; air: { temp, press (station) }. */
+  /* profile: { w, mv, twist, twistDir, blen, bdia }; air: { temp, press (station) }.
+     Either { sg, grade, sign } or { missing: [...] }: the names of what is absent (twist, bullet length, bullet diameter, bullet
+     weight, muzzle velocity, in that order), or an empty list when only the air is unusable. Callers treat any `missing`, even an
+     empty one, as "spin drift not applied"; sg is always a finite number. */
   function of(profile, air) {
     const p = profile || {};
-    const missing = [['twist', p.twist], ['bullet length', p.blen], ['bullet diameter', p.bdia], ['bullet weight', p.w]]
+    const missing = [['twist', p.twist], ['bullet length', p.blen], ['bullet diameter', p.bdia], ['bullet weight', p.w], ['muzzle velocity', p.mv]]
       .filter(([, v]) => !pos(v)).map(([name]) => name);
     if (missing.length) return { missing };
     const a = air || {};
     const sg = stability({ w: p.w, dia: p.bdia, len: p.blen, twist: p.twist, mv: p.mv, temp: a.temp, press: a.press });
+    if (!Number.isFinite(sg)) return { missing: [] };
     return { sg, grade: grade(sg), sign: p.twistDir === 'L' ? -1 : 1 };
   }
 

@@ -321,3 +321,89 @@ def test_an_unknown_stored_wind_clock_or_card_step_falls_back_to_the_default(pag
         open_screen(page, app_url, shot={'bClock': clock, 'bStep': step, 'bWind': '10'})
         assert page.input_value('#bClock') == '3' and page.input_value('#bStep') == '50', (clock, step)
         assert page.inner_text('#solWind').split('\n')[1].startswith('R '), clock     # a crosswind from the right, not a head wind
+
+
+# ---------- Twist and bullet fields (Ballistics release 2) ----------
+
+SPIN_KEYS = ['twist', 'twistDir', 'blen', 'bdia']
+V711 = {'id': 'u711', 'name': 'Seven eleven', 'bc': 0.31, 'model': 'G7', 'w': 105, 'mv': 2850, 'sight': 1.9, 'zero': 100,
+        'optic': {'type': 'turret', 'unit': 'mil', 'click': 0.1}, 'zeroAtm': {'temp': 59, 'alt': 500, 'rh': 50}, 'mv0': 2900}
+SPIN_BASE = {'id': 'u8', 'name': 'Spin', 'bc': 0.3, 'model': 'G7', 'w': 175, 'mv': 2600, 'sight': 1.5, 'zero': 100}
+
+
+def test_v711_profiles_load_unchanged_and_gain_no_fields(page, app_url):
+    raw = json.dumps([V78, V711])
+    open_ballistics(page, app_url, stored_bal('u711', '0.31', 'G7', '105', '2850', '1.9', '100'), extra={'fk.profiles': raw})
+    assert page.evaluate('FK.bal.profiles()') == [V78, V711]
+    assert [k for p in page.evaluate('FK.bal.profiles()') for k in SPIN_KEYS if k in p] == []
+    assert ls(page, 'profiles') == raw                       # nothing is rewritten in storage
+    assert list(page.evaluate('FK.bal.selected()')) == list(V711)     # and the key order is what v7.11 wrote
+
+
+def test_bad_spin_fields_are_dropped_one_by_one(page, app_url):
+    boot(page, app_url)
+    got = clean(page, {**SPIN_BASE, 'twist': '8', 'twistDir': '<b>', 'blen': -1, 'bdia': 0.308})
+    assert got == {**SPIN_BASE, 'bdia': 0.308}              # the name and the load are intact
+    for bad in ({'twist': 2}, {'twist': 31}, {'twist': None}, {'twist': True}, {'twist': float('inf')}, {'twist': [8]},
+                {'blen': 0.19}, {'blen': 3.01}, {'blen': 0}, {'blen': '1.2'},
+                {'bdia': 0.16}, {'bdia': 0.61}, {'bdia': '0.308'}, {'bdia': -0.308},
+                {'twistDir': 'R'}, {'twistDir': 'l'}, {'twistDir': 'Left'}, {'twistDir': '<img src=x>'}, {'twistDir': 1}, {'twistDir': ['L']}):
+        got = clean(page, {**SPIN_BASE, **bad})
+        assert got == SPIN_BASE, bad
+    only = clean(page, {**SPIN_BASE, 'twist': 8, 'twistDir': '<b>', 'blen': '1.2', 'bdia': 5})
+    assert only == {**SPIN_BASE, 'twist': 8}
+
+
+def test_good_spin_fields_are_kept_and_independent(page, app_url):
+    boot(page, app_url)
+    full = {**SPIN_BASE, 'twist': 8, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308}
+    assert clean(page, full) == full
+    for k in SPIN_KEYS:
+        got = clean(page, {**SPIN_BASE, k: full[k]})
+        assert got == {**SPIN_BASE, k: full[k]}, k
+    for k, edge in (('twist', 3), ('twist', 30), ('blen', 0.2), ('blen', 3), ('bdia', 0.17), ('bdia', 0.6)):
+        assert clean(page, {**SPIN_BASE, k: edge})[k] == edge, (k, edge)
+    assert page.evaluate('FK.balHost.RANGE.twist') == [3, 30]
+    assert page.evaluate('FK.balHost.RANGE.blen') == [0.2, 3]
+    assert page.evaluate('FK.balHost.RANGE.bdia') == [0.17, 0.6]
+
+
+def test_length_outside_2_to_7_calibers_is_dropped(page, app_url):
+    boot(page, app_url)
+    for blen in (0.3, 0.6, 2.2, 3):                          # under 2 and over 7 calibers of .308
+        assert 'blen' not in clean(page, {**SPIN_BASE, 'blen': blen, 'bdia': 0.308}), blen
+        assert clean(page, {**SPIN_BASE, 'blen': blen, 'bdia': 0.308})['bdia'] == 0.308
+    for blen in (0.616, 1.0, 1.24, 2.156):                   # 2.0 and 7.0 calibers are allowed
+        assert clean(page, {**SPIN_BASE, 'blen': blen, 'bdia': 0.308})['blen'] == blen, blen
+    assert clean(page, {**SPIN_BASE, 'blen': 0.3})['blen'] == 0.3           # the rule needs both
+    assert clean(page, {**SPIN_BASE, 'blen': 0.3, 'bdia': 5})['blen'] == 0.3    # a diameter that is itself dropped decides nothing
+
+
+def test_builtin_loads_carry_none_of_the_spin_fields(page, app_url):
+    boot(page, app_url)
+    presets = page.evaluate('FK._test.presets()')
+    assert len(presets) == 6
+    for p in presets:
+        assert [k for k in SPIN_KEYS if k in p] == [], p['id']
+
+
+def test_stored_order_puts_the_spin_fields_after_mv0(page, app_url):
+    open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'))
+    page.evaluate('p => FK.bal.save(p)', {'bdia': 0.308, 'twistDir': 'L', 'blen': 1.24, 'twist': 10, 'mv0': 2650, **SPIN_BASE})
+    assert list(own(page)[0]) == ['id', 'name', 'bc', 'model', 'w', 'mv', 'sight', 'zero', 'mv0', 'twist', 'twistDir', 'blen', 'bdia']
+
+
+def test_default_card_is_unchanged(page, app_url):
+    from .test_tactical_layout import ballistics, pinned
+    ballistics(page, app_url)
+    assert pinned(page, 'default_mil', 'mil') == 'left'
+    assert pinned(page, 'default_moa', 'moa') == 'left'
+
+
+def test_spin_fields_change_nothing_on_the_card(page, app_url):
+    from .test_bal_screen import open_screen
+    plain = {**SPIN_BASE}
+    open_screen(page, app_url, profile='u8', profiles=[plain])
+    before = page.evaluate("[...document.querySelectorAll('#solution, #dopeTable, #dope')].map(e => e.innerText)")
+    open_screen(page, app_url, profile='u8', profiles=[{**plain, 'twist': 8, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308}])
+    assert page.evaluate("[...document.querySelectorAll('#solution, #dopeTable, #dope')].map(e => e.innerText)") == before

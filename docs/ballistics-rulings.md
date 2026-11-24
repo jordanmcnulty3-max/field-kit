@@ -493,8 +493,33 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
 - **No bullet length or diameter entered for any built-in load.** The only lengths found were a forum member's measurement
   (175 gr SMK, 1.232 in) and no publisher figure; none of the six passed the rule "from a page I opened". `bullets` in the fixture is
   empty and every built-in asks for its bullet. Cost if wrong: the user types one more number per built-in load.
-- **`grade` of a non-number is 'unstable'**, and `of` with a missing or unusable muzzle velocity or air returns `sg: NaN` with
-  grade 'unstable' (only the four listed items go in `missing`). Cost if wrong: the screen must test `isFinite(sg)` before
-  showing a number.
+- **`grade` of a non-number is 'unstable'**, but `of` never returns it for a figure that is not a number: it returns
+  `{ missing: [...] }` whenever the stability figure is not finite. The list names what is absent (twist, bullet length, bullet
+  diameter, bullet weight, then muzzle velocity); when only the air is unusable the list is empty. Callers treat any `missing`,
+  even an empty one, as "spin drift not applied" and never read `sg` from it. (Replaces the first version, which returned
+  `sg: NaN` with grade 'unstable'.) Cost if wrong: a caller that tests only `missing.length` will treat an unusable-air result
+  as "nothing missing"; the rule is to test for the key, not the length.
 - **`of` reads no `twistDir` other than 'L' as left**; anything else, including absent, is right (+1). Cost if wrong: a left-twist
   rifle with a mistyped direction drifts the wrong way.
+- **The ballistics-engine 8.40 in drift example is not an independent check.** Its test computes the expected value from the same
+  formula, so it only shows that the formula was copied correctly. It stays in the fixture, labelled; the five Sniper's Hide rows
+  are the independent check. Cost if wrong: none to the app; a reader who took 8.40 as confirmation would over-trust the formula.
+- **Barrel and bullet fields are four independent optional fields; whatever is valid is stored** (a left twist with no twist rate
+  is kept). Cost if wrong: a profile can hold a direction with nothing to apply it to; harmless, as nothing reads it alone.
+- **Range messages for the new fields:** "Twist must be between 3 and 30 inches per turn.", "Bullet length must be between 0.2 and
+  3 in.", "Bullet diameter must be between 0.17 and 0.6 in." (the editor's one `between()` helper). Cost if wrong: wording only.
+- **The 2 to 7 caliber rule is inclusive and allows 1e-9 for the division** (7 x .308 = 2.156 divides to 7.000000000000001). The
+  editor refuses it; `clean()` drops `blen` and keeps `bdia`, because the length is what was measured by hand. A diameter that is
+  itself out of range is dropped first and then decides nothing. Cost if wrong: a length exactly at the edge is refused or kept
+  by a hair; a bad diameter costs the length its check.
+- **Built-in loads gain none of the four fields** (Task 1: no bullet dimension sourced), so a built-in copied with "Save as new
+  profile" starts with all four blank. Cost if wrong: the user types the bullet's numbers once per saved copy.
+- **The stability line uses only values that are valid on their own** (inside RANGE, and a length that fits the diameter); anything
+  else hides the line, and Save's own refusal explains it. Station pressure comes from `BAL.atmosphere` (today's pressure, or
+  from altitude when none is typed), so it is the figure the solver uses. Out-of-range air on the screen gives standard air
+  (59 F, sea level), as the brief says. Cost if wrong: a profile with a typo shows no line instead of a wrong one.
+- **Typing in the four new fields does not clear a worked-out velocity** in "Correct from a real shot" (its snapshot ignores them),
+  though they do make the sheet dirty. A shot correction also ignores a bad value in them. Cost if wrong: a correction stays on
+  screen after a twist change, which does not affect it.
+- **The twist label says "inches per turn"; the direction select is Right / Left, Right first and the default.** Cost if wrong:
+  wording only.

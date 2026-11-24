@@ -117,8 +117,8 @@ def test_of_returns_sg_grade_and_sign(ready):
 
 
 def test_of_lists_what_is_missing_in_order(ready):
-    assert js_of(ready, {}) == {'missing': ['twist', 'bullet length', 'bullet diameter', 'bullet weight']}
-    assert js_of(ready, {'twist': 10}) == {'missing': ['bullet length', 'bullet diameter', 'bullet weight']}
+    assert js_of(ready, {'mv': 2600}) == {'missing': ['twist', 'bullet length', 'bullet diameter', 'bullet weight']}
+    assert js_of(ready, {'mv': 2600, 'twist': 10}) == {'missing': ['bullet length', 'bullet diameter', 'bullet weight']}
     assert js_of(ready, dict(GOOD, blen=0, w=None)) == {'missing': ['bullet length', 'bullet weight']}
 
 
@@ -131,3 +131,21 @@ def test_of_left_twist_is_minus_one(ready):
 def test_of_ignores_strings_and_negatives(ready):
     r = js_of(ready, dict(GOOD, twist='8', blen=-1))
     assert r == {'missing': ['twist', 'bullet length']}
+
+
+def test_of_without_a_usable_muzzle_velocity_is_missing_it(ready):
+    # after the four named items, in the same order rule; the list is the whole answer (no sg, no grade)
+    assert js_of(ready, dict(GOOD, mv=None)) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, dict(GOOD, mv=0)) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, dict(GOOD, mv=-5)) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, dict(GOOD, mv='2600')) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, {k: v for k, v in GOOD.items() if k != 'mv'}) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, dict(GOOD, twist=None, mv=None)) == {'missing': ['twist', 'muzzle velocity']}
+    assert js_of(ready, {}) == {'missing': ['twist', 'bullet length', 'bullet diameter', 'bullet weight', 'muzzle velocity']}
+
+
+def test_of_with_unusable_air_is_an_empty_missing_list_never_a_nan(ready):
+    for air in (None, {}, dict(temp=59), dict(press=29.92), dict(temp=59, press=0), dict(temp=59, press=-3),
+                dict(temp='59', press=29.92), dict(temp=None, press=29.92)):
+        r = js_of(ready, GOOD, air)
+        assert r == {'missing': []}, (air, r)

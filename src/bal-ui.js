@@ -281,6 +281,19 @@
     return { temp, alt, press: p === null ? 0 : p, rh };
   }
 
+  /* What BAL.solve takes besides the shot: the profile's load and the air it is fired in. The one place the field list lives (calc and FK.bal.load). */
+  const loadFor = (p, air) => ({
+    bc: p.bc, model: p.model || 'G7', w: p.w || 0, mv: p.mv, sight: p.sight || 0, zero: p.zero, zeroAtm: zeroAir(p.zeroAtm),
+    temp: air.temp, alt: air.alt, press: air.press, rh: air.rh
+  });
+  /* The selected profile's load in today's air, for the sheets under the dope card; or { error } with the screen's own message. */
+  function load() {
+    const p = anyProfile(cur);
+    if (!loadOk(p)) return { error: MSG.profile };
+    const air = shotAir();
+    return air ? loadFor(p, air) : { error: MSG.cond };
+  }
+
   function calc() {
     const p = anyProfile(cur);
     const sighted = head(p);
@@ -306,10 +319,7 @@
     if (!at.includes(p.zero)) at.push(p.zero);
     at.sort((a, b) => a - b);
     const ranges = at.concat([target]);
-    const res = BAL.solve({
-      bc: p.bc, model: p.model || 'G7', w: p.w || 0, mv: p.mv, sight: p.sight || 0, zero: p.zero, zeroAtm: zeroAir(p.zeroAtm),
-      temp, alt, press, rh, wind, clock: +F('bClock').value, angle, ranges
-    });
+    const res = BAL.solve({ ...loadFor(p, air), wind, clock: +F('bClock').value, angle, ranges });
     if (res.error) return nothing(res.error, p);
 
     /* Spin drift: from the profile's twist and bullet, today's temperature and the station pressure the solver used; applied only to a
@@ -426,7 +436,7 @@
   }
   /* The surface other screens and tests use (edit is added by bal-edit.js). */
   FK.bal = {
-    init, calc, clean, save, remove, select, shotAir,
+    init, calc, clean, save, remove, select, shotAir, load,
     profiles: () => profiles.map(copy),
     selected: () => copy(anyProfile(cur))
   };

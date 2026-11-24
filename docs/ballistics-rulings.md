@@ -693,8 +693,9 @@ finding and one fix wave carried them out. Each ruling with its cost if wrong.
   `BSPIN.fromZero`; `tof_zero` is the same solve's row at the profile's zero (always among the solved ranges). Without that row spin
   drift is not applied and the line reads "Spin drift not included. Coriolis is not included." The .308 (G7 0.25, 2,600 fps, 1:10,
   1.24 in, 100 yd zero, standard air) now reads 0.137 mil at 600 yd and 0.327 mil at 1,000 yd (was 0.162 and 0.352); a 300 yd zero
-  shows no windage at 300 yd with no wind. Inside the zero the share is a fraction of an inch to the other side and the "rounds to
-  zero" rules apply. No opened source says whether solvers reference spin drift to the zero; this follows how the rifle is zeroed
+  shows no windage at 300 yd with no wind. Inside the zero the share is a fraction of an inch to the other side. With a short zero it rounds
+  away (0.026 mil for a 100 yd zero); with a long zero it does not: a 300 yd zero shows "R 0.1 mil, 1 click" at 25, 50 and 75 yd
+  with no wind (0.073 mil, about 0.07 in at 25 yd). That is the formula working as ruled, and the card and its sentence agree. No opened source says whether solvers reference spin drift to the zero; this follows how the rifle is zeroed
   and how elevation is already treated. Cost if wrong: a constant angle of drift(zero)/zero (0.026 mil for a 100 yd zero, 0.073 mil
   for 300 yd) too little at every range.
 - **A2. No spin drift for a bullet that leaves the muzzle below the speed of sound in today's air** (`mv x 0.3048 < res.atm.c`). The
@@ -777,3 +778,46 @@ Planner calls that were missing from this ledger (final review, D1):
   600 yd and 0.11 mil at 1,000 yd on the .308 test load (A3).
 - Plastic tips: no correction; drift reads low by about 0.04 to 0.09 mil at 1,000 yd, and a tipped bullet graded under 1.0 loses
   about 0.2 mil at 1,000 yd entirely (B3). The built-in 6.5 Creedmoor ELD-M is tipped.
+- **Found by the re-check of the final fixes (2026-11-24), left as they are:**
+  - With a long zero the screen shows a small windage hold at close range with no wind (300 yd zero: "R 0.1 mil, 1 click" at 25 to
+    75 yd). It is real by the model (the sights carry the spin drift of the zero range) but it is a fraction of an inch. Say if you
+    would rather the app show no windage inside the zero.
+  - Typing unreadable text such as "0.3e" into an EMPTY twist, length or diameter field and then pressing Cancel or Back closes the
+    editor without the "Discard?" question (the browser reports the field as blank). Save still refuses it.
+  - A profile graded "not stable" carries no stability warning on the Close-range holds and Compare zeros sheets (the main screen
+    and the editor do).
+  - On a message path (bad range, wind, incline or conditions) the line under the dope card says only "Spin drift not included."
+    without the reason.
+  - The time of flight to the zero used for spin drift is taken in today's air and on the shot's incline, not the zero's own
+    conditions. The difference is far below a click.
+
+## Phone check for release 2 (v7.12)
+
+Nothing in this release has been on a real phone or beside a real rifle. Spin drift is an estimate from a formula that one of its
+own sources says tends to over-predict (from about 2 % under to 44 % over measured values, up to about 0.1 mil at 1,000 yd).
+
+Everyone:
+1. Settings says "Version 7.12"; the rifle profiles from before the update are still there and read as they did (default .308:
+   500 yd is U 3.5 mil).
+2. A built-in load: the line under the dope card says spin drift is not included and that you add twist, bullet length and bullet
+   diameter to a profile of your own.
+3. Edit your own profile: "Barrel and bullet (for spin drift)". With the keyboard up, the field you are typing in is visible; the
+   stability line appears once twist, length and diameter are in. Bullet length is the bullet alone, not the cartridge.
+4. With those filled in and the wind at 0: no windage at the range the rifle is zeroed at; a small one beyond it. For a .308 with a
+   1:10 right-hand twist and a 100 yd zero expect about L 0.1 mil at 600 yd and L 0.3 mil at 1,000 yd.
+5. **With a rifle, in still air:** compare that windage with what the rifle really needs at 600 yd and beyond. This is the only
+   real test of the spin drift figures.
+6. Dope card with spin drift on: the Drift column carries R or L; the Wind columns show the side to dial, the opposite side; the key
+   says so. Readable in night mode?
+7. The answer card can read "L 0.2 mil" beside "drift 3.5 in right" (dial left because the bullet goes right). Say if that reads
+   wrong to you; changing it is your call.
+8. Tools, Close-range holds: on paper at 7 and 25 yd with an AR, do the holds match? They depend on the sight height being right.
+9. Tools, Compare zeros: the chart outdoors, day and night: can you tell the lines apart? Do the sentences under the table match
+   what you know of a 50 yd and a 100 yd zero at 25 and 200 yd?
+10. "Use N yd zero": read the question, answer Yes; the note appears, the main screen shows the new zero. Then press Back with the
+    sheet open, and again with the question open.
+11. A profile with no sight height: the main screen says "No sight height set"; both tools say it too.
+12. On the smallest phone in the group: the Tools buttons under the dope card are reachable and both sheets' Close buttons are on
+    screen, also with large text.
+13. **iPhone:** both tool sheets show whole with Close above the home bar; the four new editor fields take a decimal point; the
+    chart draws.

@@ -8387,7 +8387,7 @@ below was opened on 2026-11-23; the rulings are in `docs/ballistics-rulings.md` 
   (`litz_drift_inches`, exponent 1.83),
   https://docs.rs/ballistics-engine/0.33.0/src/ballistics_engine/spin_drift.rs.html; its test, Sg 2.0 and 1.5 s, expects about
   8.40 in. That example is NOT an independent check: the project's test computes its expected value from the same formula, so it
-  only shows the formula was copied correctly. The five Sniper's Hide rows below are the independent check. Independent statement and worked table (Eq. 18; five bullets, Sg, time of flight at 1000 yd, Litz SD, 5.17 to
+  only shows the formula was copied correctly. The five Sniper's Hide rows below are outputs of the same formula: they check the arithmetic, not whether the formula is true (see the measured comparison below). Independent statement and worked table (Eq. 18; five bullets, Sg, time of flight at 1000 yd, Litz SD, 5.17 to
   11.20 in; the thread notes the estimate "tends to over predict"):
   https://www.snipershide.com/shooting/threads/calculating-yaw-of-repose-spin-drift-a-novel-approach.6456023. All six rows
   agree with the formula to four places. The estimate is a magnitude only; the sign comes from the twist direction.

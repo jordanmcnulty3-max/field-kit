@@ -1038,9 +1038,10 @@ def assert_chart_is_the_table(page, zeros):
     return c
 
 
-@pytest.mark.parametrize('zeros', [[36, 100, 200], [25, 50, 200]], ids=['36-100-200', '25-50-200'])
-def test_the_paths_are_the_tables_own_figures_and_up_is_up(page, app_url, zeros):
-    chart_sheet(page, app_url, zeros)
+@pytest.mark.parametrize('zeros,profile', [([36, 100, 200], 'p556m193'), ([25, 50, 200], 'p556m193'), ([50, 100, 200], 'p308')],
+                         ids=['36-100-200', '25-50-200', 'p308-50-100-200'])
+def test_the_paths_are_the_tables_own_figures_and_up_is_up(page, app_url, zeros, profile):
+    chart_sheet(page, app_url, zeros, profile=profile)
     assert_chart_is_the_table(page, zeros)
 
 
@@ -1136,10 +1137,13 @@ def test_chart_redraws_after_use_this_zero(page, app_url):
     assert after['aria'] == before['aria'] and not NASTY.search(after['markup'])
 
 
+@pytest.mark.parametrize('profile', ['p556m193', 'p308'])
 @pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
 @pytest.mark.parametrize('zeros', [[25, 50, 200], [36, 100], [25, 36, 50], [10, 25, 36], [36, 38, 100]], ids=['25-50-200', '36-100', '25-36-50', '10-25-36', '36-38-100'])
-def test_labels_do_not_overlap_each_other_or_leave_the_box_at_360(page, app_url, night, zeros):
-    chart_sheet(page, app_url, zeros, night=night)
+def test_labels_do_not_overlap_each_other_or_leave_the_box_at_360(page, app_url, night, zeros, profile):
+    """The labels' rules hold for the review load (M193) and the owner's default (.308); the caption is kept off every path only for
+    M193 at normal text size (the ruled limit: under the .308 or enlarged text it may touch a path, and only the texts-apart rule holds)."""
+    chart_sheet(page, app_url, zeros, night=night, profile=profile)
 
     def check(strict=True):
         c = chart(page)
@@ -1166,9 +1170,10 @@ def test_labels_do_not_overlap_each_other_or_leave_the_box_at_360(page, app_url,
         box = page.locator('#zsClose').bounding_box()               # the Close button stays on the screen
         assert box['y'] >= 0 and box['y'] + box['height'] <= 640
 
-    check()
+    strict = profile == 'p556m193'
+    check(strict)
     page.locator('#zsChart').scroll_into_view_if_needed()
-    check()
+    check(strict)
     before = chart(page)['texts'][0]['fs']
     enlarge_text(page)
     page.evaluate("dispatchEvent(new Event('resize'))")
@@ -1316,3 +1321,16 @@ def test_the_note_after_use_names_the_zero_conditions_only_when_the_profile_has_
     page.click('#cfOk')
     expect(page.locator('#zsMsg')).to_have_text('Zero set to 200 yd. Update the zero conditions in Edit after you re-zero.')
     expect(page.locator('#toast')).to_have_text('Zero set to 200 yd')
+
+
+@pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
+def test_the_no_sight_line_fits_both_sheets_at_360_with_large_text(page, app_url, night):
+    mine = {**MINE, 'id': 'unosh', 'name': 'No sight height', 'sight': 0}
+    open_screen(page, app_url, profile='unosh', profiles=[mine], night=night)
+    open_zeros(page)
+    enlarge_text(page)
+    for sel in ('#zsNoSight',):
+        box = page.locator(sel).bounding_box()
+        assert box['x'] >= 0 and box['x'] + box['width'] <= 360, box
+    assert overflow(page, ZDLG) == []
+    assert not NASTY.search(page.inner_text(ZDLG))

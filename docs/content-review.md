@@ -8391,10 +8391,23 @@ below was opened on 2026-11-23; the rulings are in `docs/ballistics-rulings.md` 
   11.20 in; the thread notes the estimate "tends to over predict"):
   https://www.snipershide.com/shooting/threads/calculating-yaw-of-repose-spin-drift-a-novel-approach.6456023. All six rows
   agree with the formula to four places. The estimate is a magnitude only; the sign comes from the twist direction.
+  **The five rows are the formula's own outputs: they check the arithmetic, not the truth.** Re-opened 2026-11-24 (final review,
+  item A3): the same table prints drifts from other methods beside the Litz figure, recorded in the fixture as `reference`, not as
+  test targets: 168 gr International, Litz 10.02 in against McCoy (figure 9.8) 9.15 (+9.5 %); 175.16 gr M118LR, 10.28 against
+  PRODAS runs 9.54 (+7.7 %); 175 gr Berger Tactical, 11.20 against drift firings 11.4 (-1.8 %); 185 gr Berger LR-BT, 9.61 against
+  drift firings 6.7 (+43.5 %; the column is read by its position, as the page text has no separators). The thread: "In general
+  terms, the Litz model tends to over predict SD in a significant way." So the formula runs from about 2 % under to 44 % over
+  those measurements; on the .308 test load (175 gr, 1:10, Sg 2.4) that is up to about 0.05 mil at 600 yd and 0.11 mil at
+  1,000 yd. The screen calls the figure "an estimate of spin drift".
 - **Other sources opened**: ballistics-engine 0.18.3 `stability.rs`, https://docs.rs/crate/ballistics-engine/0.18.3/source/src/stability.rs
   (same Miller form; its comment "greater than 1.5 is generally considered adequate"; no numeric Sg test). Josef's Stability
-  Calculator, https://jsbartunek.github.io/josefs-stability-calculator/ (bands 1.0, 1.3, 1.5, 2.0; a .308 165 gr, 2625 fps, 1:12
-  validation of 1.378 whose bullet length is inferred; not used as a fixture value). Courtney and Miller Part 2,
+  Calculator, https://jsbartunek.github.io/josefs-stability-calculator/ (bands 1.0, 1.3, 1.5, 2.0). Re-opened 2026-11-24 (final
+  review, item D3): it prints a forward worked example, "Sg 1.378 at standard conditions for a .308 165 gr bullet, 33 mm, 2625 fps,
+  1:12", and for the same bullet "1.21 at -20 °C" (33 mm is not labelled on the page; it is the bullet's length, as the maths
+  review read it). The app gives 1.3779 and 1.2106 (33 mm = 1.2992 in, standard pressure for the cold case, which the page does not
+  state). Both are now fixture rows (`independent: true`) checked to 0.01; they exercise the velocity and temperature factors,
+  which the Wikipedia example does not. (Correction: this entry earlier said the bullet length was inferred and the example was
+  not used.) No opened page prints a number that checks the pressure factor (29.92 / P). Courtney and Miller Part 2,
   https://arxiv.org/pdf/1410.5737 (53 gr and 40 gr tables give Sg below 1.0 with the original rule; bullet diameter not
   printed, so not used). Applied Ballistics "Gyroscopic Drift and Coriolis Effect",
   https://appliedballisticsllc.com/wp-content/uploads/2021/06/Gyroscopic-Drift-and-Coriolis-Effect.pdf (no formula; about 8 to 9 in

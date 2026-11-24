@@ -208,3 +208,21 @@ def test_from_zero_is_nan_for_bad_input_and_never_throws(ready):
             r = ready.evaluate('a => { const v = a.map(x => x === "Infinity" ? Infinity : x); return Number.isNaN(BSPIN.fromZero(...v)); }', a)
             assert r, (i, bad)
     assert ready.evaluate('Number.isNaN(BSPIN.fromZero())')
+
+
+def test_josefs_forward_example_checks_the_velocity_and_temperature_factors(ready, ref):
+    """Josef's Stability Calculator prints a forward worked example (opened 2026-11-24): .308, 165 gr, 33 mm, 1:12, 2625 fps, Sg 1.378
+    in standard air and 1.21 at -20 C. Both rows are in the fixture as independent examples and are checked here to 0.01."""
+    rows = [e for e in ref['stability']['examples'] if e.get('independent') and e['w'] == 165]
+    assert sorted((e['temp'], e['sg']) for e in rows) == [(-4, 1.21), (59, 1.378)]
+    for e in rows:
+        assert e['mv'] != 2800 and e['len'] == pytest.approx(33 / 25.4, abs=1e-6)        # the velocity factor is not 1
+        assert js_stability(ready, e) == pytest.approx(e['sg'], abs=0.01)
+        assert miller(e) == pytest.approx(e['sg'], abs=0.01)
+
+
+def test_the_drift_reference_rows_are_recorded_and_show_the_estimate_running_high(ref):
+    refs = ref['drift']['reference']
+    over = [r['litz'] / r['inches'] - 1 for r in refs]
+    assert len(refs) == 4 and min(over) == pytest.approx(-0.018, abs=0.001) and max(over) == pytest.approx(0.435, abs=0.001)
+    assert 'arithmetic' in ref['drift']['examplesNote']

@@ -1,12 +1,13 @@
 """The Tools block under the dope card and its two sheets: Close-range holds (six rows from the solver, worded as the red dot answer is)
 and Compare zeros (two or three zero ranges side by side, and Use this zero on the person's own profile)."""
+import math
 import re
 
 import pytest
 from playwright.sync_api import expect
 
 from .test_bal_screen import LOAD, NASTY, open_screen, shot_now
-from .test_tactical_layout import clipped_buttons, enlarge_text, overflow, too_small
+from .test_tactical_layout import clipped_buttons, contrast_ratio, enlarge_text, overflow, too_small
 
 DLG = '#dlgClose'
 NOTE = 'Level, no wind. Inside the zero the bullet strikes low, so the hold is high.'
@@ -904,6 +905,10 @@ CHART_JS = """() => {
       dash: p.getAttribute('stroke-dasharray') || '', width: Number(p.getAttribute('stroke-width')), fill: p.getAttribute('fill') })),
     labels: [...svg.querySelectorAll('text.zs-lab')].map(t => { const b = t.getBBox(); return { zero: t.dataset.zero, text: t.textContent, x: b.x, y: b.y, w: b.width, h: b.height, fs: parseFloat(getComputedStyle(t).fontSize) }; }),
     texts: [...svg.querySelectorAll('text')].map(t => { const b = t.getBBox(); return { text: t.textContent, cls: t.getAttribute('class'), x: b.x, y: b.y, w: b.width, h: b.height, fs: parseFloat(getComputedStyle(t).fontSize) }; }),
+    ylabels: [...svg.querySelectorAll('text.zs-ay')].map(t => { const b = t.getBBox(); return { text: t.textContent, c: b.y + b.height / 2 }; }),
+    hgrid: [...svg.querySelectorAll('.zs-hgrid')].map(l => Number(l.getAttribute('y1'))),
+    dots: [...svg.querySelectorAll('circle.zs-dot')].map(c => ({ zero: c.dataset.zero, x: Number(c.getAttribute('cx')), y: Number(c.getAttribute('cy')) })),
+    caption: (t => { if (!t) return null; const b = t.getBBox(); return { x: b.x, y: b.y, w: b.width, h: b.height }; })([...svg.querySelectorAll('text.zs-name')][0]),
     markup: svg.outerHTML };
 }"""
 
@@ -913,6 +918,7 @@ def chart(page):
 
 
 def chart_sheet(page, app_url, zeros, night=False, **kw):
+    kw.setdefault('profile', 'p556m193')                             # the load of the review pictures; the others are tried where a test says so
     open_screen(page, app_url, night=night, **kw)
     open_zeros(page)
     ticks = [z for z in zeros if str(z) in BOXES]
@@ -928,6 +934,39 @@ def y_at(path, x):
         if x0 <= x <= x1:
             return y0 + (y1 - y0) * (x - x0) / (x1 - x0)
     return None
+
+
+def subpaths(path):
+    """The path's points, one list per pen-down run (an M starts a new run)."""
+    runs = []
+    for m in re.finditer(r'([ML])(-?[\d.]+) (-?[\d.]+)', path['d']):
+        if m.group(1) == 'M':
+            runs.append([])
+        runs[-1].append((float(m.group(2)), float(m.group(3))))
+    return runs
+
+
+def trace(path, step=1.0):
+    """Points along the drawn line, every `step` px."""
+    out = []
+    for run in subpaths(path):
+        out.append(run[0])
+        for (x0, y0), (x1, y1) in zip(run, run[1:]):
+            n = max(1, int(((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5 / step))
+            out += [(x0 + (x1 - x0) * i / n, y0 + (y1 - y0) * i / n) for i in range(1, n + 1)]
+    return out
+
+
+def want_range(page, zeros):
+    """The lowest and highest whole inch the chart must show: the data's own range with 0, in whole inches, one more where a path is within half an inch."""
+    vals = page.evaluate("zs => BALZ.compare(FK.bal.load(), zs).cols.flatMap(c => c.path.filter(v => v !== null))", zeros)
+    top, bottom = max(vals), min(vals)
+    lo, hi = min(0, math.floor(bottom)), max(0, math.ceil(top))
+    if hi - top < 0.5:
+        hi += 1
+    if bottom - lo < 0.5:
+        lo -= 1
+    return lo, hi, bottom, top
 
 
 def test_one_path_per_zero_each_with_its_own_dash_and_label(page, app_url):
@@ -964,22 +1003,79 @@ def test_each_path_meets_the_line_of_sight_at_its_zero(page, app_url, zeros):
         assert p['pts'][0] == pytest.approx(x0 + 5 / 300 * (x300 - x0), abs=0.02)   # it starts at its 5 yd point, not at the muzzle
 
 
-def test_the_paths_are_the_tables_own_figures(page, app_url):
-    chart_sheet(page, app_url, [36, 100, 200])
+def assert_chart_is_the_table(page, zeros):
+    """Every path point sits at the table's own figure for these zeros, up is up, and one scale (pixels per inch, positive) holds for all of them."""
     c = chart(page)
     x0, x300 = c['grid']['0'], c['grid']['300']
-    want = page.evaluate("zs => BALZ.compare(FK.bal.load(), zs).cols.map(c => ({ yds: BALZ.YDS, path: c.path }))", [36, 100, 200])
-    k = None
+    want = page.evaluate("zs => BALZ.compare(FK.bal.load(), zs).cols.map(c => ({ yds: BALZ.YDS, path: c.path }))", zeros)
+    lo, hi, _, _ = want_range(page, zeros)
+    top, bottom = [l for l in c['ylabels'] if l['text'].startswith('+')][0], [l for l in c['ylabels'] if l['text'].startswith('-')][0]
+    k = (bottom['c'] - top['c']) / (hi - lo)                       # pixels per inch, read from the axis labels
+    assert k > 0, k
+    assert len(c['paths']) == len(want)
     for p, w in zip(c['paths'], want):
-        pts = [(p['pts'][i], p['pts'][i + 1]) for i in range(0, len(p['pts']) - 1, 2)]
+        pts = [pt for run in subpaths(p) for pt in run]
         have = [(y, v) for y, v in zip(w['yds'], w['path']) if v is not None]
         assert len(pts) == len(have)
         for (x, y), (yd_, v) in zip(pts, have):
             assert x == pytest.approx(x0 + yd_ / 300 * (x300 - x0), abs=0.02)
-            if abs(v) > 1:
-                k = k or (c['losY'] - y) / v                       # one pixels-per-inch for the whole chart
-        for (x, y), (yd_, v) in zip(pts, have):
-            assert c['losY'] - y == pytest.approx(k * v, abs=0.02)
+            assert c['losY'] - y == pytest.approx(k * v, abs=0.25)   # up is positive: a positive figure is above the rule (a smaller y)
+            if v > 0.5:
+                assert y < c['losY']
+            if v < -0.5:
+                assert y > c['losY']
+    return c
+
+
+@pytest.mark.parametrize('zeros', [[36, 100, 200], [25, 50, 200]], ids=['36-100-200', '25-50-200'])
+def test_the_paths_are_the_tables_own_figures_and_up_is_up(page, app_url, zeros):
+    chart_sheet(page, app_url, zeros)
+    assert_chart_is_the_table(page, zeros)
+
+
+@pytest.mark.parametrize('zeros', [[25, 50, 200], [36, 100], [10, 25, 36]], ids=['25-50-200', '36-100', '10-25-36'])
+def test_axis_labels_are_the_lowest_whole_inch_zero_and_the_highest(page, app_url, zeros):
+    chart_sheet(page, app_url, zeros)
+    c = chart(page)
+    lo, hi, bottom, top = want_range(page, zeros)
+    labels = {l['text']: l['c'] for l in c['ylabels']}
+    if zeros != [10, 25, 36]:                                       # the sets where the scale is the data's own, widened to whole inches
+        assert set(labels) == {f'{lo} in', '0', f'+{hi} in'}, labels
+        lo_y, hi_y = labels[f'{lo} in'], labels[f'+{hi} in']
+        assert hi_y < labels['0'] < lo_y                            # the highest inch at the top, the lowest at the bottom
+        k = (lo_y - hi_y) / (hi - lo)
+        assert labels['0'] - hi_y == pytest.approx(hi * k, abs=1)
+        assert c['losY'] == pytest.approx(labels['0'], abs=2)
+        assert sorted(c['hgrid']) == pytest.approx(sorted([lo_y, hi_y]), abs=2)
+        assert hi >= top + 0.5 and bottom - lo >= 0.5               # whole inches, and no path touches the frame
+    else:                                                           # a very close zero: the scale is at least the data's, with room under the rule for the caption
+        names = sorted(labels, key=labels.get)
+        assert names[0].startswith('+') and names[-1].endswith(' in') and '0' in labels
+        assert int(names[0][1:-3]) >= hi and int(names[-1][:-3]) <= lo
+    assert all(t.endswith(' in') for t in labels if t != '0')       # the unit is on the top and the bottom label
+
+
+def test_a_path_never_touches_the_frame(page, app_url):
+    chart_sheet(page, app_url, [25, 50, 200])                       # the 25 yd path peaks at 11.97 in: the scale reaches 13, not 12
+    c = chart(page)
+    top = min(y for p in c['paths'] for _, y in [pt for run in subpaths(p) for pt in run])
+    bottom = max(y for p in c['paths'] for _, y in [pt for run in subpaths(p) for pt in run])
+    assert top - min(c['hgrid']) >= 4 and max(c['hgrid']) - bottom >= 4, (top, bottom, c['hgrid'])
+    assert '+13 in' in [l['text'] for l in c['ylabels']]
+
+
+@pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
+def test_grid_lines_are_visible_against_the_sheet(page, app_url, night):
+    chart_sheet(page, app_url, [36, 100], night=night)
+    got = page.evaluate("""() => { const num = s => (s.match(/[\\d.]+/g) || []).map(Number), pc = s => s.startsWith('color(srgb') ? num(s).slice(0, 3).map(v => v * 255) : num(s).slice(0, 3);
+      return [...document.querySelectorAll('#zsSvg .zs-grid, #zsSvg .zs-hgrid')].map(l => { const cs = getComputedStyle(l);
+        return { fg: pc(cs.stroke), a: Number(cs.strokeOpacity), bg: pc(getComputedStyle(document.querySelector('#dlgZeros')).backgroundColor) }; }); }""")
+    assert len(got) == 6
+    for g in got:
+        eff = [g['a'] * f + (1 - g['a']) * b for f, b in zip(g['fg'], g['bg'])]
+        assert contrast_ratio(page, eff, g['bg']) >= 1.5, (night, g, eff)
+    if not night:
+        assert all(g['a'] <= 0.4 for g in got)                      # the day look is as it was
 
 
 def test_chart_has_a_text_alternative(page, app_url):
@@ -1012,16 +1108,21 @@ def test_chart_follows_the_table_and_hides_with_it(page, app_url):
 def test_chart_redraws_after_use_this_zero(page, app_url):
     open_screen(page, app_url, profile='umine', profiles=[own()])
     open_zeros(page)
-    pick(page, [50, 200])
-    page.wait_for_function("document.querySelectorAll('#zsSvg path.zs-path').length === 2")
+    pick(page, [50, 100, 200])                                  # the profile's own zero (100) is one of the three
+    page.wait_for_function("document.querySelectorAll('#zsSvg path.zs-path').length === 3")
+    assert_chart_is_the_table(page, [50, 100, 200])
     before = chart(page)
+    assert zbuttons(page) == ['Use 50 yd zero', 'Use 200 yd zero']      # no button for the zero the profile has now
     page.locator('#zsUse button', has_text='Use 50 yd zero').click()
     page.locator('#cfOk').click()
     page.wait_for_function("document.querySelector('#zsNow').textContent === 'Current zero: 50 yd'")
-    after = chart(page)
-    assert after['shown'] and [p['zero'] for p in after['paths']] == ['50', '200']
-    assert after['paths'][0]['d'] != before['paths'][0]['d'] or after['paths'] == before['paths']   # drawn again from the new maths, never blank
-    assert not NASTY.search(after['markup'])
+    assert zbuttons(page) == ['Use 100 yd zero', 'Use 200 yd zero']     # the table side has changed: 50 is the current zero now
+    after = assert_chart_is_the_table(page, [50, 100, 200])       # and the chart equals the table's figures for the state on screen
+    assert after['shown'] and [p['zero'] for p in after['paths']] == ['50', '100', '200']
+    heads = [h.replace(' yd zero', ' yd') for h in ztable(page)['head'][1:]]
+    assert sorted(l['text'] for l in after['labels']) == sorted(heads)
+    assert after['aria'] == "Chart of the bullet's path for 50, 100 and 200 yd zeros, 5 to 300 yd. The table below has the figures."
+    assert after['aria'] == before['aria'] and not NASTY.search(after['markup'])
 
 
 @pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
@@ -1029,7 +1130,7 @@ def test_chart_redraws_after_use_this_zero(page, app_url):
 def test_labels_do_not_overlap_each_other_or_leave_the_box_at_360(page, app_url, night, zeros):
     chart_sheet(page, app_url, zeros, night=night)
 
-    def check():
+    def check(strict=True):
         c = chart(page)
         assert c['w'] <= 360 and c['w'] == pytest.approx(c['box'], abs=1)
         rects = [(t['text'], t['x'], t['y'], t['x'] + t['w'], t['y'] + t['h']) for t in c['texts']]
@@ -1042,6 +1143,12 @@ def test_labels_do_not_overlap_each_other_or_leave_the_box_at_360(page, app_url,
                 gapy = min(a[4], b[4]) - max(a[2], b[2])
                 assert not (gapx > 0.5 and gapy > 0.5), (a, b)       # no two texts share any area
         assert len(c['labels']) == len(zeros)                       # moved apart, never dropped
+        cap = c['caption']
+        assert cap is not None
+        for p in c['paths'] if strict else []:                      # the caption shares no area with any path's stroke (half a stroke added); with enlarged text the caption is as wide as a third of the plot and only the texts-apart rule above holds
+            for x, y in trace(p):
+                assert not (cap['x'] - 1.5 < x < cap['x'] + cap['w'] + 1.5 and cap['y'] - 1.5 < y < cap['y'] + cap['h'] + 1.5), (p['zero'], x, y, cap)
+        assert cap['x'] >= c['grid']['0'] and cap['x'] + cap['w'] <= c['grid']['300']      # inside the plot
         assert all(l['fs'] >= 12 for l in c['texts'])
         assert not NASTY.search(c['markup'])
         assert overflow(page, ZDLG) == []
@@ -1055,12 +1162,12 @@ def test_labels_do_not_overlap_each_other_or_leave_the_box_at_360(page, app_url,
     enlarge_text(page)
     page.evaluate("dispatchEvent(new Event('resize'))")
     page.wait_for_function("fs => parseFloat(getComputedStyle(document.querySelector('#zsSvg text')).fontSize) > fs + 2", arg=before)
-    check()
+    check(strict=False)
     assert chart(page)['texts'][0]['fs'] >= before * 1.3
 
 
 def test_a_label_that_moves_apart_keeps_a_leader_to_its_path_end(page, app_url):
-    chart_sheet(page, app_url, [36, 38, 100])                   # 36 and 38 yd zeros end a few hundredths of an inch apart at 300 yd
+    chart_sheet(page, app_url, [36, 36.5, 100])                 # 36 and 36.5 yd zeros end a few hundredths of an inch apart at 300 yd
     c = chart(page)
     ends = page.evaluate("""() => [...document.querySelectorAll('#zsSvg .zs-lead')].map(l => [Number(l.getAttribute('x1')), Number(l.getAttribute('y1')), Number(l.getAttribute('x2')), Number(l.getAttribute('y2'))])""")
     near = 0
@@ -1072,3 +1179,40 @@ def test_a_label_that_moves_apart_keeps_a_leader_to_its_path_end(page, app_url):
             near += 1
             assert any(abs(e[0] - p['pts'][-2]) < 2 and abs(e[1] - end_y) < 1 for e in ends), (p['zero'], ends)
     assert near >= 1                                           # at least one label really had to move, so the leader is exercised
+
+
+def stubbed_compare(page, zeros, edit):
+    """Run the sheet with BALZ.compare replaced by the real one with its result edited (restored in a finally, as test_bal_zero's sign-noise test does)."""
+    open_zeros(page)
+    pick(page, zeros)
+    page.wait_for_function("document.querySelectorAll('#zsSvg path.zs-path').length === %d" % len(zeros))
+    page.evaluate("""edit => { window.__real = BALZ.compare; BALZ.compare = (l, z) => { const r = window.__real(l, z); (new Function('r', edit))(r); return r; }; }""", edit)
+    try:
+        page.locator('#zs36').click()                           # any pick redraws table and chart through the stub
+        page.locator('#zs36').click()
+        page.wait_for_function("document.querySelectorAll('#zsSvg .zs-lab').length === %d" % len(zeros))
+        return chart(page)
+    finally:
+        page.evaluate("BALZ.compare = window.__real")
+
+
+def test_a_column_with_no_points_keeps_its_label_and_has_no_path(page, app_url):
+    open_screen(page, app_url)
+    c = stubbed_compare(page, [25, 50, 200], "r.cols[0].path = r.cols[0].path.map(() => null); r.cols[0].other = null; r.cols[0].peak = null;")
+    assert [p['zero'] for p in c['paths']] == ['50', '200']      # no path element at all, not an empty d
+    assert all(p['d'] for p in c['paths'])
+    assert sorted(l['text'] for l in c['labels']) == ['200 yd', '25 yd', '50 yd']
+    lab = next(l for l in c['labels'] if l['zero'] == '25')
+    assert lab['x'] >= c['grid']['300'] and abs(lab['y'] + lab['h'] / 2 - c['losY']) < 40    # at the right edge, near the line of sight
+    assert not NASTY.search(c['markup'])
+
+
+def test_a_column_with_one_point_is_a_dot(page, app_url):
+    open_screen(page, app_url)
+    c = stubbed_compare(page, [25, 50, 200], "r.cols[1].path = r.cols[1].path.map((v, i) => i === 3 ? v : null); r.cols[1].other = null;")
+    assert [p['zero'] for p in c['paths']] == ['25', '200']
+    assert [d['zero'] for d in c['dots']] == ['50']
+    want = page.evaluate("BALZ.YDS[3]")
+    assert c['dots'][0]['x'] == pytest.approx(c['grid']['0'] + want / 300 * (c['grid']['300'] - c['grid']['0']), abs=0.02)
+    assert sorted(l['text'] for l in c['labels']) == ['200 yd', '25 yd', '50 yd']
+    assert not NASTY.search(c['markup'])

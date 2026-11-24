@@ -669,3 +669,13 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   sheet's colour so a line behind a letter never cuts it. Cost if wrong: the label may sit over a line at some zeros (still readable).
 - **No colour but the text colour and `--muted`;** grid lines are `--muted` at 40 percent. In night mode they are dim red on black
   (decoration only; every figure is also in the table). Cost if wrong: faint grid at night.
+- **Task 7 review fixes.** (a) The scale gets one more whole inch on a side where a path is within half an inch of the frame (25/50/200
+  now reads +13 to -7). (b) The lowest label carries "in" too. (c) Room guard: the plot keeps at least a text row plus 8 px between
+  the line of sight and the top and bottom, widening the scale by whole inches until it does (a 10 yd zero that climbs past 50 in shows
+  to about -7), so the "line of sight" caption has a free side. Cost if wrong: a few more inches of empty scale for lopsided paths.
+  (d) The caption takes the right half of the rule first, then the left, above or below, whichever is furthest from every path point
+  and label (12 px counts as far enough). With the .308 profile and with enlarged text some zero sets leave no clear place; the caption
+  then takes the best one and its halo keeps it legible. Pinned clear of every path for five zero sets, day and night, with M193 at
+  normal text size only. Cost if wrong: a caption crossed by a line at those combinations. (e) A column with no reachable point has no
+  path but keeps its label at the line of sight on the right edge; a column with one point is a dot. (f) Night grid lines are at 70
+  percent `--muted` (contrast on the sheet at least 1.5:1 in both modes); day is unchanged at 40 percent.

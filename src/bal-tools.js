@@ -186,15 +186,26 @@
       return w > 0 ? w : t.length * fs * 0.62;
     };
     const vals = cols.flatMap(c => c.path.filter(Number.isFinite));
-    let lo = Math.min(0, Math.floor(Math.min(...vals))), hi = Math.max(0, Math.ceil(Math.max(...vals)));
-    if (!Number.isFinite(lo) || !Number.isFinite(hi)) { lo = -1; hi = 1; }
+    let lo = 0, hi = 0;
+    if (vals.length) {
+      const top = Math.max(...vals), bottom = Math.min(...vals);
+      lo = Math.min(0, Math.floor(bottom)); hi = Math.max(0, Math.ceil(top));
+      if (hi - top < 0.5) hi++;                                         // no path touches the frame: one more inch where it is within half an inch
+      if (bottom - lo < 0.5) lo--;
+    }
     if (hi === lo) hi = lo + 1;
-    const ymarks = [...new Set([lo, 0, hi])].map(v => ({ v, t: sgn(v) + (v === hi ? ' in' : '') }));
+    const MT = Math.ceil(fs * 0.7) + 3, MB = Math.ceil(fs) + 9;
+    const H = Math.round(230 + (fs - 13) * 8), PH = H - MT - MB;
+    for (let n = 0; n < 200; n++) {                                     // room for the caption on both sides of the line of sight, even when one path runs far above it
+      if (-lo * PH / (hi - lo) < fs + 8) lo--;
+      else if (hi * PH / (hi - lo) < fs + 8) hi++;
+      else break;
+    }
+    const ymarks = [...new Set([lo, 0, hi])].map(v => ({ v, t: sgn(v) + (v === hi || v === lo ? ' in' : '') }));
     const names = cols.map(c => `${yd(c.zero)} yd`);
     const ML = Math.ceil(Math.max(...ymarks.map(m => measure(m.t, 'zs-ax')))) + 8;
     const MR = Math.ceil(Math.max(...names.map(n => measure(n, 'zs-lab')))) + 10;
-    const MT = Math.ceil(fs * 0.7) + 3, MB = Math.ceil(fs) + 9;
-    const H = Math.round(230 + (fs - 13) * 8), PW = Math.max(60, W - ML - MR), PH = H - MT - MB;
+    const PW = Math.max(60, W - ML - MR);
     const X = y => ML + y / 300 * PW, Y = v => MT + (hi - v) / (hi - lo) * PH;
     svg.setAttribute('width', String(W)); svg.setAttribute('height', String(H));
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
@@ -205,7 +216,7 @@
     const rows = ymarks.map(m => ({ m, c: Y(m.v), x0: 0, x1: 1 }));
     spread(rows, fs * GAP, MT, MT + PH + fs * 0.4);
     rows.forEach(r => {
-      const t = node('text', { class: 'zs-ax', x: px(ML - 5), y: px(r.c + fs * 0.35), 'text-anchor': 'end', 'font-size': px(fs) }, svg);
+      const t = node('text', { class: 'zs-ax zs-ay', x: px(ML - 5), y: px(r.c + fs * 0.35), 'text-anchor': 'end', 'font-size': px(fs) }, svg);
       t.textContent = r.m.t;
     });
     [[0, '0', 'start'], [100, '100', 'middle'], [200, '200', 'middle'], [300, '300 yd', 'end']].forEach(([d, t, a]) => {
@@ -217,15 +228,24 @@
     const ends = [], pts = [];
     cols.forEach((c, k) => {
       const dash = DASHES[k % DASHES.length];
-      let d = '', pen = false, last = null;
+      let d = '', pen = false, last = null, n = 0;
       BALZ.YDS.forEach((y, i) => {
         const v = c.path[i];
         if (!Number.isFinite(v)) { pen = false; return; }               // the bullet does not reach: no point, no line
-        d += `${pen ? 'L' : 'M'}${px(X(y))} ${px(Y(v))}`;
-        pen = true; last = { x: X(y), y: Y(v) };
-        pts.push(last);
+        const here = { x: X(y), y: Y(v) };
+        d += `${pen ? 'L' : 'M'}${px(here.x)} ${px(here.y)}`;
+        if (pen) for (let t = 2; t < Math.hypot(here.x - last.x, here.y - last.y); t += 2) {   // the line itself, for keeping the caption off it
+          const f = t / Math.hypot(here.x - last.x, here.y - last.y);
+          pts.push({ x: last.x + (here.x - last.x) * f, y: last.y + (here.y - last.y) * f });
+        }
+        pen = true; last = here; n++;
+        pts.push(here);
       });
-      node('path', { class: 'zs-path', 'data-zero': yd(c.zero), d, fill: 'none', 'stroke-width': dash && dash.startsWith('0.') ? 3 : 2.5,
+      if (n === 0) {                                                    // nothing reached: no path, but the zero keeps its label, at the line of sight
+        last = { x: X(300), y: Y(0) };
+      } else if (n === 1) {                                             // one point: a dot, so it can be seen
+        node('circle', { class: 'zs-dot', 'data-zero': yd(c.zero), cx: px(last.x), cy: px(last.y), r: 3.5 }, svg);
+      } else node('path', { class: 'zs-path', 'data-zero': yd(c.zero), d, fill: 'none', 'stroke-width': dash && dash.startsWith('0.') ? 3 : 2.5,
         'stroke-dasharray': dash, 'stroke-linecap': dash && dash.startsWith('0.') ? 'round' : 'butt', 'stroke-linejoin': 'round' }, svg);
       if (last) ends.push({ k, name: names[k], zero: yd(c.zero), at: last, c: last.y, x0: last.x + 8, x1: last.x + 8 + measure(names[k], 'zs-lab') });
     });
@@ -236,18 +256,20 @@
       const t = node('text', { class: 'zs-lab', 'data-zero': e.zero, x: px(x), y: px(e.c + fs * 0.35), 'font-size': px(fs) }, svg);
       t.textContent = e.name;
     });
-    // "line of sight": above or below the rule, where the fewest paths and labels run through it
-    const text = 'line of sight', tw = measure(text, 'zs-ax'), y0 = Y(0), best = { n: Infinity };
-    ends.forEach(e => { for (let x = e.x0; x < e.x1; x += 3) pts.push({ x, y: e.c }); });
+    // "line of sight": on the right half of the rule if there is room, above or below it, wherever it is furthest from every path and label
+    const text = 'line of sight', tw = measure(text, 'zs-ax'), y0 = Y(0);
+    ends.forEach(e => { for (let x = e.x0; x < e.x1; x += 4) for (let y = e.c - fs * 0.6; y <= e.c + fs * 0.6; y += 4) pts.push({ x, y }); });
+    const clear = (x, top, bottom) => pts.reduce((m, p) => Math.min(m, Math.hypot(Math.max(x - p.x, 0, p.x - (x + tw)), Math.max(top - p.y, 0, p.y - bottom))), 99);
+    const cands = [], half = ML + PW / 2;
     for (const above of [true, false]) {
-      const top = above ? y0 - fs - 3 : y0 + 3, bottom = top + fs;
-      for (let x = ML + 6; x + tw <= ML + PW - 4; x += 4) {
-        const n = pts.filter(p => p.x >= x - 3 && p.x <= x + tw + 3 && p.y >= top - 2 && p.y <= bottom + 2).length;
-        if (n < best.n) Object.assign(best, { n, x, above });
-      }
+      const base = above ? y0 - 5 : y0 + fs + 1, top = base - fs * 0.95, bottom = base + fs * 0.3;
+      if (top < MT || bottom > MT + PH) continue;                       // inside the plot
+      for (let x = ML + 4; x + tw <= ML + PW - 4; x += 3) cands.push({ cl: Math.min(clear(x, top, bottom), 12), x, base, right: x + tw / 2 >= half });
     }
-    if (Number.isFinite(best.n)) {
-      const t = node('text', { class: 'zs-ax zs-name', x: px(best.x), y: px(best.above ? y0 - 6 : y0 + fs + 1), 'font-size': px(fs) }, svg);
+    const most = list => list.reduce((m, c) => (!m || c.cl > m.cl + 0.01 ? c : m), null);
+    const best = most(cands.filter(c => c.right && c.cl >= 4)) || most(cands);
+    if (best) {
+      const t = node('text', { class: 'zs-ax zs-name', x: px(best.x), y: px(best.base), 'font-size': px(fs) }, svg);
       t.textContent = text;
     }
   }

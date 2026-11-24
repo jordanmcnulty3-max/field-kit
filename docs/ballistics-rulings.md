@@ -637,3 +637,10 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   the sight-height line is hidden when the profile is unusable (the message replaces the table). Cost if wrong: wording.
 - **The Compare zeros cue is `.zs-cue`, not `.sv-swipe`.** `test_dope_table_scrolls_with_the_cue_when_wide` finds the dope card's cue by
   the class `.sv-swipe` alone, so a second element with that class (even hidden) would break it. Same text and look. Cost if wrong: none.
+- **Review fixes for Task 6.** Other is range-checked on what was typed (9.99 and 300.01 are refused), then kept to a tenth. The
+  profile's current zero is recognised the way the sheet shows it (one decimal, one helper for picks, labels and the test): no Use button
+  for that column, and the column is worked with the stored zero itself, nothing written (a stored 100.04 opens with the 100 box ticked;
+  87.25 opens as Other 87.3). Cost if wrong: a person who really wants to round 87.25 to 87.3 must do it in the profile editor. The sheet
+  is `inert` from Yes until the question's history step has landed (cleared on every exit), so a Close tap cannot drop the confirmed
+  save; Back or Escape in that window still closes the sheet (sheet.js is not changed) and the save is then dropped. The "Zero set"
+  note is a hint-coloured line (class `zs-note`), errors keep the error colour; after a save focus moves to the sheet title.

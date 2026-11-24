@@ -319,7 +319,7 @@ def want_table(page, zeros):
     """What the sheet must print for these zeros, worked out from BALZ in the page (zeros in the order they appear: smallest first)."""
     return page.evaluate("zs => { " + FX_JS + """
       const r = BALZ.compare(FK.bal.load(), zs);
-      return { head: ['Yd', ...r.cols.map(c => c.zero + ' yd zero')],
+      return { head: ['Yd', ...r.cols.map(c => Number(c.zero.toFixed(1)) + ' yd zero')],
                rows: BALZ.YDS.map((y, i) => [String(y), ...r.cols.map(c => fx(c.path[i]))]) }; }""", zeros)
 
 
@@ -348,7 +348,7 @@ def own(pid='umine', **over):
 
 def test_opens_with_the_profiles_zero_and_two_more(page, app_url):
     for zero, boxes, other in [(100, ['50', '100', '200'], ''), (50, ['36', '50', '200'], ''), (200, ['36', '50', '200'], ''),
-                               (36, ['36', '50', '200'], ''), (25, ['25', '50', '200'], ''), (75, ['50', '200'], '75'), (87.5, ['50', '200'], '87.5')]:
+                               (36, ['36', '50', '200'], ''), (25, ['25', '50', '200'], ''), (75, ['50', '200'], '75'), (87.5, ['50', '200'], '87.5'), (87.25, ['50', '200'], '87.3'), (100.04, ['50', '100', '200'], '')]:
         open_screen(page, app_url, profile='umine', profiles=[own(zero=zero)])
         open_zeros(page)
         assert ticked(page) == boxes, zero
@@ -408,8 +408,7 @@ def test_a_bullet_that_does_not_reach_prints_a_dash(page, app_url):
 
 
 def test_summary_lines_for_other_past_and_touch(page, app_url):
-    profile = ('p556m193', [])
-    open_screen(page, app_url, profile=profile[0])
+    open_screen(page, app_url, profile='p556m193')
     open_zeros(page)
     shapes_seen = set()
     for ticks, other in [([36], '10'), ([36], '105'), ([200], '111.5')]:
@@ -509,7 +508,7 @@ def test_junk_or_out_of_range_other_is_refused(page, app_url):
     open_zeros(page)
     pick(page, [50, 100])
     base = want_table(page, [50, 100])
-    for typed in ('5', '9.9', '301', '1000', '0', '-20'):
+    for typed in ('5', '9.9', '9.95', '9.99', '300.01', '300.04', '301', '1000', '0', '-20'):
         page.fill('#zsOther', typed)
         expect(page.locator('#zsMsg')).to_have_text(BAD_OTHER)
         assert ztable(page) == base, typed               # left out: the two ticked zeros are still compared
@@ -520,7 +519,7 @@ def test_junk_or_out_of_range_other_is_refused(page, app_url):
     assert ztable(page) == base
     page.fill('#zsOther', '')                            # blank is simply not used
     expect(page.locator('#zsMsg')).to_be_hidden()
-    for typed, zs in (('10', [10, 50, 100]), ('300', [50, 100, 300]), ('150.5', [50, 100, 150.5])):    # the edges are inside
+    for typed, zs in (('10', [10, 50, 100]), ('300', [50, 100, 300]), ('10.0', [10, 50, 100]), ('300.00', [50, 100, 300]), ('150.5', [50, 100, 150.5])):    # the edges are inside, 9.99 and 300.01 are not
         page.fill('#zsOther', typed)
         expect(page.locator('#zsMsg')).to_be_hidden()
         assert ztable(page) == want_table(page, zs), typed
@@ -591,6 +590,7 @@ def test_storage_full_leaves_the_profile_and_the_sheet(page, app_url):
     expect(page.locator('#bLoad')).not_to_contain_text('zero 50 yd')
     expect(page.locator(ZDLG)).to_be_visible()
     expect(page.locator('#zsMsg')).to_be_hidden()               # no "Zero set to" when nothing was saved
+    assert page.evaluate("document.querySelector('#dlgZeros').inert") is False
     assert zbuttons(page) == ['Use 50 yd zero', 'Use 200 yd zero']
     expect(page.locator('#zsNow')).to_have_text('Current zero: 100 yd')
 
@@ -746,7 +746,7 @@ def test_zeros_sheet_fits_360_day_night_with_enlarged_text(page, app_url, night,
     if count == 3:
         assert page.evaluate("!document.querySelector('#zsCue').hidden")
         expect(page.locator('#zsCue')).to_have_text('Swipe sideways to see more columns')
-    # every control is reachable: scroll the body to the buttons and tap one (own profile)
+    # the Use buttons are reached by scrolling the body, and are 44 px or more high
     page.locator('#zsUse button').first.scroll_into_view_if_needed()
     assert page.locator('#zsUse button').first.bounding_box()['height'] >= 44
 
@@ -771,7 +771,6 @@ def test_no_cell_or_line_is_nasty_for_any_builtin(page, app_url, profile):
         pick(page, ticks, other)
         text = page.inner_text(ZDLG)
         assert not NASTY.search(text), (profile, ticks, other)
-        assert '−' not in text.replace('a minus means below', '') or True
         cells = [c for r in ztable(page)['rows'] for c in r[1:]]
         assert cells and all(c == '—' or re.fullmatch(r'-?\d+\.\d', c) for c in cells), (profile, ticks, other)
         assert all(l.endswith('.') for l in zlines(page))
@@ -785,3 +784,106 @@ def test_the_sheet_does_not_change_what_the_screen_shows(page, app_url):
     page.click('#zsClose')
     wait_closed(page)
     assert page.evaluate("[document.querySelector('#solElev').textContent, document.querySelector('#dope').textContent, localStorage.getItem('fk.bal')]") == before
+
+
+@pytest.mark.parametrize('stored', [87.25, 100.04], ids=['87.25', '100.04'])
+def test_a_zero_that_is_not_a_tenth_is_still_the_profiles_current_zero(page, app_url, stored):
+    open_screen(page, app_url, profile='umine', profiles=[own(zero=stored)])
+    before = page.evaluate("localStorage.getItem('fk.profiles')")
+    shown = {87.25: '87.3', 100.04: '100'}[stored]
+    open_zeros(page)
+    expect(page.locator('#zsNow')).to_have_text(f'Current zero: {shown} yd')
+    want = page.evaluate("""z => { """ + FX_JS + """
+      const L = FK.bal.load(), r = BALZ.compare(L, [50, z, 200].sort((a, b) => a - b));
+      return { head: ['Yd', ...r.cols.map(c => Number(c.zero.toFixed(1)) + ' yd zero')], rows: BALZ.YDS.map((y, i) => [String(y), ...r.cols.map(c => fx(c.path[i]))]) }; }""", stored)
+    if stored == 87.25:
+        assert ztable(page) == want and f'{shown} yd zero' in ztable(page)['head']
+        assert page.evaluate("""() => { const L = FK.bal.load(), a = BALZ.compare(L, [87.25, 50]).cols.find(c => c.zero === 87.25);
+          return L.zero === 87.25 && !!a; }""")
+    assert zbuttons(page) == [b for b in ['Use 50 yd zero', 'Use 200 yd zero'] if b != f'Use {shown} yd zero']
+    assert all(shown not in b for b in zbuttons(page))                      # no offer to "use" the zero it already has
+    pick(page, [50, 200], shown)                                              # ticking and typing change nothing stored either
+    assert all(f'Use {shown} yd' != b[:len(f'Use {shown} yd')] for b in zbuttons(page))
+    page.click('#zsClose')
+    wait_closed(page)
+    assert page.evaluate("localStorage.getItem('fk.profiles')") == before
+    assert page.evaluate('FK.bal.selected().zero') == stored
+
+
+def test_the_current_zero_column_uses_the_stored_zero_for_its_maths(page, app_url):
+    open_screen(page, app_url, profile='umine', profiles=[own(zero=87.25)])
+    open_zeros(page)
+    got = ztable(page)
+    col = got['head'].index('87.3 yd zero')
+    exact = page.evaluate("""() => { const r = BALZ.compare(FK.bal.load(), [50, 87.25, 200]); const c = r.cols[1];
+      const t = BALZ.compare(FK.bal.load(), [50, 87.3, 200]).cols[1];
+      return { exact: c.path.map(v => v === null ? null : Number(v.toFixed(1))), rounded: t.path.map(v => v === null ? null : Number(v.toFixed(1))) }; }""")
+    cells = [float(r[col]) for r in got['rows']]
+    assert cells == exact['exact']
+
+
+def test_close_during_the_questions_step_does_not_drop_the_saved_zero(page, app_url):
+    open_screen(page, app_url, profile='umine', profiles=[own()])
+    page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 1200); }; 0")      # a slow phone
+    open_zeros(page)
+    box = page.locator('#zsClose').bounding_box()
+    page.locator('#zsUse button', has_text='Use 50 yd zero').click()
+    expect(page.locator('#dlgConfirm')).to_be_visible()
+    page.click('#cfOk')
+    page.wait_for_function("document.querySelector('#dlgZeros').inert === true")     # between Yes and the end of the question's step
+    page.mouse.click(box['x'] + box['width'] / 2, box['y'] + box['height'] / 2)     # a real tap on Close: nothing is there to take it
+    expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd')
+    assert page.evaluate('FK.bal.selected().zero') == 50
+    page.evaluate('new Promise(done => FK.sheet.afterStep(done))')
+    assert page.evaluate("document.querySelector('#dlgZeros').inert") is False
+    expect(page.locator(ZDLG)).to_be_visible()
+    assert page.evaluate("FK.sheet.top() && FK.sheet.top().id") == 'dlgZeros'
+    assert page.evaluate("history.state && history.state.fkSheet") == 'dlgZeros'
+    page.click('#zsClose')                                                           # and it closes normally afterwards
+    wait_closed(page)
+    expect(page.locator(ZDLG)).to_be_hidden()
+
+
+def test_inert_is_cleared_when_the_profile_changed_or_the_sheet_went(page, app_url):
+    open_screen(page, app_url, profile='umine', profiles=[own()])
+    open_zeros(page)
+    page.locator('#zsUse button', has_text='Use 50 yd zero').click()
+    page.evaluate("FK.bal.save({ ...FK.bal.selected(), zero: 75 })")                 # the profile changes under the question
+    page.click('#cfOk')
+    page.evaluate('new Promise(done => FK.sheet.afterStep(done))')
+    assert page.evaluate("document.querySelector('#dlgZeros').inert") is False
+    assert page.evaluate('FK.bal.selected().zero') == 50            # same profile id: the saved zero is the one asked for
+    page.click('#zsClose')
+    wait_closed(page)
+    page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 600); }; 0")
+    open_zeros(page, again=True)
+    zero_now = page.evaluate('FK.bal.selected().zero')
+    page.locator('#zsUse button').first.click()
+    page.click('#cfOk')
+    page.wait_for_function("document.querySelector('#dlgZeros').inert === true")
+    page.evaluate("FK.sheet.close(document.querySelector('#dlgZeros'))")             # the sheet goes underneath the confirmed question
+    wait_closed(page)
+    assert page.evaluate("document.querySelector('#dlgZeros').inert") is False
+    assert page.evaluate('FK.bal.selected().zero') == zero_now                      # nothing is saved to a sheet that is gone
+
+
+def test_the_zero_set_note_is_not_in_the_error_colour_and_focus_moves_to_the_title(page, app_url):
+    for night in (False, True):
+        open_screen(page, app_url, profile='umine', profiles=[own()], night=night)
+        open_zeros(page)
+        page.fill('#zsOther', '301')
+        expect(page.locator('#zsMsg')).to_have_text(BAD_OTHER)
+        err = page.evaluate("getComputedStyle(document.querySelector('#zsMsg')).color")
+        page.fill('#zsOther', '')
+        page.locator('#zsUse button', has_text='Use 50 yd zero').click()
+        page.click('#cfOk')
+        expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd')
+        ok = page.evaluate("getComputedStyle(document.querySelector('#zsMsg')).color")
+        hint = page.evaluate("getComputedStyle(document.querySelector('#zsKey')).color")
+        assert ok != err and ok == hint, (night, err, ok, hint)
+        assert page.evaluate('document.activeElement.id') == 'zsTitle'              # the Use button it was on has been rebuilt
+        assert page.evaluate("document.querySelector('#zsTitle').getAttribute('tabindex')") == '-1'
+        assert page.evaluate("document.querySelector('#zsMsg').classList.contains('rf-msg')")    # still the error style class for errors
+        page.fill('#zsOther', '301')
+        expect(page.locator('#zsMsg')).to_have_text(BAD_OTHER)                       # an error is the error colour again
+        assert page.evaluate("getComputedStyle(document.querySelector('#zsMsg')).color") == err

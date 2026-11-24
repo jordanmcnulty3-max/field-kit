@@ -529,6 +529,7 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 #dlgZeros label.f{margin-top:8px}
 #zsWrap{margin-top:8px}
 #zsCue{margin:8px 0 0;font-size:14px;font-weight:600;color:var(--c)}
+.rf-msg.zs-note{font-size:14px;color:var(--muted)}
 #zsLines{list-style:none;margin:8px 0 0;padding:0}
 #zsLines li{padding:8px 0;border-top:1px solid var(--line);font-size:15px;overflow-wrap:anywhere}
 #zsUse{display:grid;gap:8px;margin-top:8px}
@@ -5058,6 +5059,7 @@ const BALS = (() => {
   const LOW = 10, HIGH = 300, MOST = 3;
   const FEW = 'Pick two or three zeros.', MANY = 'Up to three at a time.', BAD = 'Enter a zero from 10 to 300 yd.';
   const DASH = '—';
+  const one = v => Number(v.toFixed(1));              // a zero as the sheet shows it (one decimal): the one helper for picks, labels and the current-zero test
   const fx = (v, d) => { const t = v.toFixed(d); return /^-0(\.0+)?$/.test(t) ? t.slice(1) : t; };   // never "-0.0"
   let ctx = null;          // the profile and the air as they were when the sheet opened (and after a save)
   let session = 0;         // one per opening: an answer that comes back to a sheet that has been closed is dropped
@@ -5072,8 +5074,8 @@ const BALS = (() => {
   function readOther() {
     const o = F('zsOther'), t = o.value.trim();
     if (t === '') return o.validity.badInput ? { bad: true } : { blank: true };
-    const v = Math.round(Number(t) * 10) / 10;
-    return Number.isFinite(v) && v >= LOW && v <= HIGH ? { value: v } : { bad: true };
+    const n = Number(t);                                         // the range is checked on what was typed, before it is kept to a tenth
+    return Number.isFinite(n) && n >= LOW && n <= HIGH ? { value: one(n) } : { bad: true };
   }
   const chosen = () => {
     const ticks = boxes().filter(b => b.checked).map(b => Number(b.value)), o = readOther(), zeros = ticks.slice();
@@ -5102,7 +5104,9 @@ const BALS = (() => {
   function render(forced) {
     const { p, load } = ctx, err = load.error || '';
     const sel = err ? null : selection();
-    let res = err || sel.zeros.length < 2 ? null : BALZ.compare(load, sel.zeros);
+    // the column that stands for the profile's own zero is worked with the stored zero itself: the table is the rifle's real path
+    const same = z => Number.isFinite(p.zero) && one(z) === one(p.zero);
+    let res = err || sel.zeros.length < 2 ? null : BALZ.compare(load, sel.zeros.map(z => same(z) ? p.zero : z));
     let msg = err || forced || sel.problem || '';
     if (res && res.error) { msg = res.error; res = null; }
     if (!msg && note) msg = note;
@@ -5113,6 +5117,7 @@ const BALS = (() => {
     F('zsPicks').hidden = !!err;
     text('zsMsg', msg);
     F('zsMsg').hidden = !msg;
+    F('zsMsg').classList.toggle('zs-note', !!msg && msg === note && !err && !forced && !sel.problem);   // a note is not an error
     ['zsWrap', 'zsKey', 'zsLines'].forEach(id => { F(id).hidden = !res; });
     F('zsCue').hidden = true;
     F('zsUse').hidden = !res || !own;
@@ -5127,7 +5132,7 @@ const BALS = (() => {
     table.append(head, tb);
     res.cols.forEach(c => {
       const li = document.createElement('li'); li.textContent = line(c); lines.appendChild(li);
-      if (own && c.zero !== p.zero) {
+      if (own && !same(c.zero)) {              // never offer to "use" the zero the person reads as the one they have
         const b = document.createElement('button');
         b.type = 'button'; b.className = 'btn ghost'; b.textContent = `Use ${yd(c.zero)} yd zero`;
         b.addEventListener('click', () => useZero(c.zero));
@@ -5148,11 +5153,11 @@ const BALS = (() => {
   /* The boxes the sheet opens with: the profile's own zero (in a box, or typed into Other when it is none of the five), 50 and 200,
      and 36 in the place of a 50 or 200 that is the profile's own. */
   function defaults() {
-    const z = ctx.p.zero, want = new Set(BOXES.includes(z) ? [z] : []);
+    const z = ctx.p.zero, zr = Number.isFinite(z) ? one(z) : NaN, want = new Set(BOXES.includes(zr) ? [zr] : []);
     [50, 200].forEach(b => want.add(b));
-    if (want.size < MOST && (z === 50 || z === 200)) want.add(36);
+    if (want.size < MOST && (zr === 50 || zr === 200)) want.add(36);
     boxes().forEach(b => { b.checked = want.has(Number(b.value)); });
-    F('zsOther').value = !BOXES.includes(z) && Number.isFinite(z) && z >= LOW && z <= HIGH ? String(Number(z.toFixed(1))) : '';
+    F('zsOther').value = !BOXES.includes(zr) && Number.isFinite(z) && z >= LOW && z <= HIGH ? String(zr) : '';
   }
 
   boxes().forEach(b => b.addEventListener('change', () => {
@@ -5170,8 +5175,10 @@ const BALS = (() => {
     const mine = session, id = ctx.p.id;
     const yes = await FK.sheet.confirm({ title: `Set the zero to ${yd(zero)} yd?`, text: 'The card changes now. The rifle itself still has to be re-zeroed at the range.', ok: 'Set zero' });
     if (!yes) { asking = false; return; }
+    zdlg.inert = true;                                           // a Close tap before the question's step lands would drop the confirmed save
     FK.sheet.afterStep(() => {
       asking = false;
+      zdlg.inert = false;                                        // every way out of here: the rest runs at once
       if (mine !== session || !zdlg.open) return;
       const cur = FK.bal.selected();
       if (cur.id !== id || !isOwn(cur)) return;
@@ -5180,11 +5187,12 @@ const BALS = (() => {
       note = `Zero set to ${yd(zero)} yd`;                       // the toast sits under a sheet: say it here as well
       ctx = { p: FK.bal.selected(), load: FK.bal.load() };
       render();
+      F('zsTitle').focus();                                      // the Use button that had focus has been rebuilt
     });
   }
 
   F('bZeros').addEventListener('click', () => FK.sheet.open(zdlg, { onOpen: () => {
-    session++; asking = false; note = '';
+    session++; asking = false; note = ''; zdlg.inert = false;
     ctx = { p: FK.bal.selected(), load: FK.bal.load() };
     defaults(); render(); F('zsTitle').focus();
   } }));

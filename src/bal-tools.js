@@ -10,6 +10,12 @@
   const yd = v => String(Number(v.toFixed(1)));      // 100 -> "100", 36.5 -> "36.5"
   const inches = v => String(Number(v.toFixed(2)));  // 2.6 -> "2.6", 2 -> "2"
   const text = (id, t) => { F(id).textContent = t; };
+  /* The one line both sheets show for a profile with no sight height (blank or 0). */
+  const NO_SIGHT = 'This profile has no sight height, so these figures assume the sight sits on the bore. Tap Edit and set it.';
+  text('clNoSight', NO_SIGHT);
+  text('zsNoSight', NO_SIGHT);
+  /* The note under the close-range holds: the second sentence only holds when the sight sits above the bore. */
+  const NOTE = 'Level, no wind.', NOTE_HIGH = ' Inside the zero the bullet strikes low, so the hold is high.';
 
   /* The hold for one row the way the red dot answer words it ("Hold 2.4 in high", "Hold on"). */
   const hold = r => BALS.answer({ yd: r.yd, dropIn: r.dropIn, windIn: 0 }, { type: 'dot' }).elev.main;
@@ -28,6 +34,7 @@
     F('clMsg').hidden = !msg;
     F('clWrap').hidden = !!msg;
     F('clNote').hidden = !!msg;
+    text('clNote', NOTE + (noSight ? '' : NOTE_HIGH));
     const body = F('clTable'), head = document.createElement('thead'), tb = document.createElement('tbody');
     body.textContent = '';
     if (msg) return;
@@ -79,13 +86,17 @@
     return { zeros: use.slice().sort((a, b) => a - b), problem };
   }
 
+  /* The sentence for one zero (N the zero as shown, X the other crossing, P the highest point, Y its yard). A crossing beyond the zero is
+     "again", one before it is "first". With no other crossing: still rising at 500 yd; out of reach before 500 yd; a path that starts
+     on the line of sight (no sight height) and only comes down through the zero; or one that only touches it there. */
   const line = c => {
-    const n = `${yd(c.zero)} yd zero`;
-    if (c.other !== null && c.peak) return `${n}: crosses the line of sight again at ${c.other} yd. Highest ${fx(c.peak.pathIn, 1)} in above it, at ${c.peak.yd} yd.`;
-    if (c.other !== null) return `${n}: crosses the line of sight again at ${c.other} yd.`;
+    const n = `${yd(c.zero)} yd zero`, top = c.peak ? ` Highest ${fx(c.peak.pathIn, 1)} in above it, at ${c.peak.yd} yd.` : '';
+    if (c.other !== null && c.other > c.zero) return `${n}: crosses the line of sight again at ${c.other} yd.${top}`;
+    if (c.other !== null) return `${n}: first crosses the line of sight at ${c.other} yd.${top}`;
     if (c.past) return `${n}: does not cross it again inside 500 yd.`;   // the path is still rising at 500 yd: its "peak" is only the last yard
-    if (!c.peak) return `${n}: touches the line of sight there and stays below it.`;
-    return `${n}: does not cross it again before the bullet runs out of reach.`;
+    if (!(c.last >= BALZ.LIMIT)) return `${n}: does not cross it again before the bullet runs out of reach.`;
+    if (c.peak) return `${n}: crosses the line of sight only there.`;
+    return `${n}: touches the line of sight there and stays below it.`;
   };
 
   function render(forced) {
@@ -106,6 +117,7 @@
     F('zsMsg').hidden = !msg;
     F('zsMsg').classList.toggle('zs-note', !!msg && msg === note && !err && !forced && !sel.problem);   // a note is not an error
     ['zsWrap', 'zsKey', 'zsLines'].forEach(id => { F(id).hidden = !res; });
+    F('zsNoSight').hidden = !res || p.sight > 0;                 // with the table only: no sight height (blank or 0)
     lastRes = res;
     drawChart();                                                 // the chart is shown and hidden with the table, and drawn from the same figures
     F('zsCue').hidden = true;
@@ -319,7 +331,7 @@
       if (cur.id !== id || !isOwn(cur)) return;
       if (!FK.bal.save({ ...cur, zero })) return;                // storage refused: it has said so, and the sheet stays as it was
       FK.toast(`Zero set to ${yd(zero)} yd`);
-      note = `Zero set to ${yd(zero)} yd`;                       // the toast sits under a sheet: say it here as well
+      note = `Zero set to ${yd(zero)} yd.` + (cur.zeroAtm ? ' Update the zero conditions in Edit after you re-zero.' : '');   // the toast sits under a sheet: say it here as well
       ctx = { p: FK.bal.selected(), load: FK.bal.load() };
       render();
       F('zsTitle').focus();                                      // the Use button that had focus has been rebuilt

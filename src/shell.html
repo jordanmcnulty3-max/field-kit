@@ -1425,10 +1425,10 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <h2 id="clTitle" tabindex="-1">Close-range holds</h2>
     <p class="cl-name" id="clProfile"></p>
     <p class="hint" id="clSight"></p>
-    <p class="hint cl-warn" id="clNoSight" hidden>This profile has no sight height, so these holds assume the sight sits on the bore. Tap Edit and set it.</p>
+    <p class="hint cl-warn" id="clNoSight" hidden></p>
     <p class="rf-msg cl-msg" id="clMsg" role="status" hidden></p>
     <div class="tablewrap" id="clWrap"><table id="clTable"></table></div>
-    <p class="hint" id="clNote">Level, no wind. Inside the zero the bullet strikes low, so the hold is high.</p>
+    <p class="hint" id="clNote"></p>
   </div>
   <div class="mk-act"><button type="button" class="btn ghost" id="clClose">Close</button></div>
 </dialog>
@@ -1450,6 +1450,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <label class="f">Other (yd)<input id="zsOther" type="number" inputmode="decimal"></label>
     </fieldset>
     <p class="rf-msg" id="zsMsg" role="status" hidden></p>
+    <p class="hint cl-warn" id="zsNoSight" hidden></p>
     <div class="zs-chart" id="zsChart" hidden><svg id="zsSvg" role="img" focusable="false"></svg></div>
     <p class="zs-cue" id="zsCue" hidden>Swipe sideways to see more columns</p>
     <div class="tablewrap" id="zsWrap" tabindex="0" role="region" aria-label="Zero comparison table, scrolls sideways"><table id="zsTable"></table></div>

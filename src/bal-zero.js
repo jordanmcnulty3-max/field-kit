@@ -24,7 +24,7 @@ const BALZ = (() => {
     return { rows: r.rows.filter(x => num(x.yd) && num(x.dropIn)).map(x => ({ yd: x.yd, dropIn: x.dropIn })) };
   }
 
-  /* One zero: its path at YDS (null where the bullet never got), the other crossing, past, peak. */
+  /* One zero: its path at YDS (null where the bullet never got), the other crossing, past, peak, and the last yard solved. */
   function column(load, zero) {
     const r = run(load, zero, ALL);
     if (r.error) return { error: r.error };
@@ -46,7 +46,7 @@ const BALZ = (() => {
     const last = pts[pts.length - 1];
     const past = other === null && !!last && last.yd === LIMIT && last.v >= NOISE;
     const peak = top && top.v >= PEAK_MIN ? { yd: top.yd, pathIn: top.v } : null;
-    return { zero, path, other, past, peak };
+    return { zero, path, other, past, peak, last: last ? last.yd : null };   // last: the last whole yard solved (LIMIT when it gets there)
   }
 
   /* zeros: 2 or 3 distinct finite numbers above 0 (yd). */

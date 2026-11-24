@@ -236,3 +236,12 @@ def test_zeros_near_the_apex_zero_never_report_themselves_as_the_other_crossing(
     for r in got['out']:
         assert r['other'] is None or abs(r['other'] - r['z']) >= 5, (pid, r)
         assert r['back'] is None or abs(r['back']) <= 0.15, (pid, r)
+
+
+def test_each_column_carries_the_last_whole_yard_the_solve_returned(ready):
+    cols = compare(ready, [36, 100])['cols']
+    assert [c['last'] for c in cols] == [500, 500]                    # the bullet reaches the limit
+    over = dict(bc=0.01, model='G1', mv=400)
+    for col in compare(ready, [25, 50], **over)['cols']:
+        rows = solve(ready, list(range(1, 501)), zero=col['zero'], **over)['rows']
+        assert col['last'] == rows[-1]['yd'] and col['last'] < 500

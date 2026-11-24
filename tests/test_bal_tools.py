@@ -11,7 +11,7 @@ from .test_tactical_layout import clipped_buttons, contrast_ratio, enlarge_text,
 
 DLG = '#dlgClose'
 NOTE = 'Level, no wind. Inside the zero the bullet strikes low, so the hold is high.'
-NO_SIGHT = 'This profile has no sight height, so these holds assume the sight sits on the bore. Tap Edit and set it.'
+NO_SIGHT = 'This profile has no sight height, so these figures assume the sight sits on the bore. Tap Edit and set it.'
 PROFILE_MSG = 'This profile needs a ballistic coefficient, a velocity and a zero range. Tap Edit.'
 COND_MSG = 'Check the conditions: temperature, altitude, pressure or humidity is out of range.'
 YDS = ['3', '5', '7', '10', '15', '25']
@@ -271,6 +271,7 @@ BOXES = ['25', '36', '50', '100', '200']
 TOO_FEW = 'Pick two or three zeros.'
 TOO_MANY = 'Up to three at a time.'
 BAD_OTHER = 'Enter a zero from 10 to 300 yd.'
+UPDATE = 'Update the zero conditions in Edit after you re-zero.'
 KEY = 'Inches above the line of sight; a minus means below. Level, no wind.'
 BUILTIN_LINE = "Built-in loads can't be changed. Tap Edit, set the zero range and save it as a new profile."
 SET_TEXT = 'The card changes now. The rifle itself still has to be re-zeroed at the range.'
@@ -324,22 +325,32 @@ def want_table(page, zeros):
                rows: BALZ.YDS.map((y, i) => [String(y), ...r.cols.map(c => fx(c.path[i]))]) }; }""", zeros)
 
 
+def shape(c):
+    """Which of the eight ruled sentences a column takes (X = other, against the zero; last = the last yard solved)."""
+    if c['other'] is not None:
+        return ('again' if c['other'] > c['zero'] else 'first') + ('+peak' if c['peak'] else '')
+    if c['past']:
+        return 'past'
+    if c['last'] < 500:
+        return 'short'
+    return 'only' if c['peak'] else 'touch'
+
+
 def want_lines(page, zeros):
     """The summary sentences, written here from BALZ's own figures (the shapes are asserted by each test)."""
-    cols = page.evaluate("zs => BALZ.compare(FK.bal.load(), zs).cols.map(c => ({ zero: c.zero, other: c.other, past: c.past, peak: c.peak && { yd: c.peak.yd, p: c.peak.pathIn.toFixed(1) } }))", zeros)
+    cols = page.evaluate("zs => BALZ.compare(FK.bal.load(), zs).cols.map(c => ({ zero: c.zero, other: c.other, past: c.past, last: c.last, peak: c.peak && { yd: c.peak.yd, p: c.peak.pathIn.toFixed(1) } }))", zeros)
     out = []
     for c in cols:
         n = f"{c['zero']:g} yd zero"
-        if c['other'] is not None and c['peak']:
-            out.append(f"{n}: crosses the line of sight again at {c['other']} yd. Highest {c['peak']['p']} in above it, at {c['peak']['yd']} yd.")
-        elif c['other'] is not None:
-            out.append(f"{n}: crosses the line of sight again at {c['other']} yd.")
-        elif c['past']:
-            out.append(f"{n}: does not cross it again inside 500 yd.")
-        elif not c['peak']:
-            out.append(f"{n}: touches the line of sight there and stays below it.")
-        else:
-            out.append(f"{n}: does not cross it again before the bullet runs out of reach.")
+        top = f" Highest {c['peak']['p']} in above it, at {c['peak']['yd']} yd." if c['peak'] else ''
+        out.append(n + {'again+peak': f": crosses the line of sight again at {c['other']} yd.{top}",
+                        'again': f": crosses the line of sight again at {c['other']} yd.",
+                        'first+peak': f": first crosses the line of sight at {c['other']} yd.{top}",
+                        'first': f": first crosses the line of sight at {c['other']} yd.",
+                        'past': ': does not cross it again inside 500 yd.',
+                        'short': ': does not cross it again before the bullet runs out of reach.',
+                        'only': ': crosses the line of sight only there.',
+                        'touch': ': touches the line of sight there and stays below it.'}[shape(c)])
     return cols, out
 
 
@@ -418,8 +429,8 @@ def test_summary_lines_for_other_past_and_touch(page, app_url):
         cols, want = want_lines(page, zs)
         assert zlines(page) == want, (ticks, other)
         for c in cols:
-            shapes_seen.add(('both' if c['other'] is not None and c['peak'] else 'other' if c['other'] is not None else 'past' if c['past'] else 'touch' if not c['peak'] else 'short'))
-    assert shapes_seen == {'both', 'other', 'past', 'touch'}
+            shapes_seen.add(shape(c))
+    assert shapes_seen == {'again+peak', 'again', 'first+peak', 'past', 'touch'}
     # the figures the brief quotes for this load
     pick(page, [36, 100])
     lines = zlines(page)
@@ -445,7 +456,7 @@ def test_a_bullet_that_runs_out_of_reach_above_the_line_says_so(page, app_url):
     assert page.input_value('#zsOther') == '80'
     pick(page, [50], '80')
     cols, want = want_lines(page, [50, 80])
-    assert cols[1]['other'] is None and cols[1]['past'] is False and cols[1]['peak'] is not None      # the shape under test
+    assert cols[1]['other'] is None and cols[1]['past'] is False and cols[1]['peak'] is not None and cols[1]['last'] < 500     # the shape under test
     assert zlines(page) == want
     assert want[1] == '80 yd zero: does not cross it again before the bullet runs out of reach.'
 
@@ -542,7 +553,7 @@ def test_use_this_zero_asks_then_writes_the_profile_and_the_card(page, app_url):
     expect(page.locator('#cfOk')).to_have_text('Set zero')
     assert page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))") == before      # nothing written until yes
     page.click('#cfOk')
-    expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd')
+    expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd. ' + UPDATE)
     after = page.evaluate("JSON.parse(localStorage.getItem('fk.profiles'))")
     assert after[0]['zero'] == 50
     assert {k: v for k, v in after[0].items() if k != 'zero'} == {k: v for k, v in before[0].items() if k != 'zero'}     # zeroAtm, mv0, sight, spin fields kept
@@ -627,7 +638,7 @@ def test_pressing_use_twice_quickly_asks_once_and_saves_once(page, app_url):
     page.evaluate("() => { const b = [...document.querySelectorAll('#zsUse button')].find(x => x.textContent === 'Use 50 yd zero'); b.click(); b.click(); }")
     expect(page.locator('#dlgConfirm')).to_be_visible()
     page.click('#cfOk')
-    expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd')
+    expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd. ' + UPDATE)
     page.evaluate('new Promise(done => FK.sheet.afterStep(done))')
     assert page.evaluate('window.__w') == 1
     assert page.evaluate('FK.bal.selected().zero') == 50
@@ -635,7 +646,7 @@ def test_pressing_use_twice_quickly_asks_once_and_saves_once(page, app_url):
     # pressing "Set zero" twice quickly saves once as well
     page.locator('#zsUse button', has_text='Use 200 yd zero').click()
     page.evaluate("() => { const b = document.querySelector('#cfOk'); b.click(); b.click(); }")
-    expect(page.locator('#zsMsg')).to_have_text('Zero set to 200 yd')
+    expect(page.locator('#zsMsg')).to_have_text('Zero set to 200 yd. ' + UPDATE)
     page.evaluate('new Promise(done => FK.sheet.afterStep(done))')
     assert page.evaluate('window.__w') == 2
     assert page.evaluate('FK.bal.selected().zero') == 200
@@ -651,7 +662,7 @@ def test_a_profile_whose_zero_is_compared_has_no_button_for_it(page, app_url):
     page.locator('#zsUse button', has_text='Use 120 yd zero').click()
     expect(page.locator('#cfTitle')).to_have_text('Set the zero to 120 yd?')
     page.click('#cfOk')
-    expect(page.locator('#zsMsg')).to_have_text('Zero set to 120 yd')
+    expect(page.locator('#zsMsg')).to_have_text('Zero set to 120 yd. ' + UPDATE)
     assert page.evaluate('FK.bal.selected().zero') == 120
     assert zbuttons(page) == ['Use 36 yd zero', 'Use 50 yd zero']
 
@@ -833,7 +844,7 @@ def test_close_during_the_questions_step_does_not_drop_the_saved_zero(page, app_
     page.click('#cfOk')
     page.wait_for_function("document.querySelector('#dlgZeros').inert === true")     # between Yes and the end of the question's step
     page.mouse.click(box['x'] + box['width'] / 2, box['y'] + box['height'] / 2)     # a real tap on Close: nothing is there to take it
-    expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd')
+    expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd. ' + UPDATE)
     assert page.evaluate('FK.bal.selected().zero') == 50
     page.evaluate('new Promise(done => FK.sheet.afterStep(done))')
     assert page.evaluate("document.querySelector('#dlgZeros').inert") is False
@@ -878,7 +889,7 @@ def test_the_zero_set_note_is_not_in_the_error_colour_and_focus_moves_to_the_tit
         page.fill('#zsOther', '')
         page.locator('#zsUse button', has_text='Use 50 yd zero').click()
         page.click('#cfOk')
-        expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd')
+        expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd. ' + UPDATE)
         ok = page.evaluate("getComputedStyle(document.querySelector('#zsMsg')).color")
         hint = page.evaluate("getComputedStyle(document.querySelector('#zsKey')).color")
         assert ok != err and ok == hint, (night, err, ok, hint)
@@ -1216,3 +1227,92 @@ def test_a_column_with_one_point_is_a_dot(page, app_url):
     assert c['dots'][0]['x'] == pytest.approx(c['grid']['0'] + want / 300 * (c['grid']['300'] - c['grid']['0']), abs=0.02)
     assert sorted(l['text'] for l in c['labels']) == ['200 yd', '25 yd', '50 yd']
     assert not NASTY.search(c['markup'])
+
+
+# ---------- Final review: the eight summary sentences, no sight height in both sheets, the note after Use ----------
+
+FIGURES_NO_SIGHT = 'This profile has no sight height, so these figures assume the sight sits on the bore. Tap Edit and set it.'
+NOTE_NO_SIGHT = 'Level, no wind.'
+
+
+def test_a_crossing_before_the_zero_is_the_first_not_again(page, app_url):
+    open_screen(page, app_url, profile='p556m193')
+    open_zeros(page)
+    pick(page, [50, 200])
+    lines = zlines(page)
+    assert lines[1].startswith('200 yd zero: first crosses the line of sight at 65 yd. Highest 1.0 in above it, at '), lines
+    assert lines[0].startswith('50 yd zero: crosses the line of sight again at 251 yd.'), lines
+    open_screen(page, app_url)                                    # the built-in .308: 100 yd zero first crosses at 54 yd
+    open_zeros(page)
+    assert [l for l in zlines(page) if l.startswith('100 yd zero')][0].startswith('100 yd zero: first crosses the line of sight at '), zlines(page)
+    assert all(' again at ' not in l or int(re.search(r'again at (\d+) yd', l).group(1)) > float(l.split(' yd zero')[0]) for l in zlines(page))
+
+
+def test_a_first_crossing_with_no_peak_has_its_own_sentence(page, app_url):
+    open_screen(page, app_url, profile='p556m193')
+    open_zeros(page)
+    # a zero just past the top of the path: it first crosses a few yards before, and never rises 0.05 in above the line
+    z = page.evaluate("""() => { const l = FK.bal.load();
+      for (let z = 110; z <= 140; z += 0.5) { const c = BALZ.compare(l, [36, z]).cols[1]; if (c.other !== null && c.other < z && !c.peak) return z; }
+      return null; }""")
+    assert z is not None
+    pick(page, [36], str(z))
+    cols, want = want_lines(page, [36, z])
+    assert shape(cols[1]) == 'first' and zlines(page) == want
+    assert zlines(page)[1] == f"{z:g} yd zero: first crosses the line of sight at {cols[1]['other']} yd."
+
+
+@pytest.mark.parametrize('sight', [0, None], ids=['zero', 'blank'])
+def test_no_sight_height_sentences_say_what_the_path_does(page, app_url, sight):
+    mine = {k: v for k, v in {**MINE, 'id': 'unosh', 'name': 'No sight height', 'sight': sight}.items() if v is not None}
+    open_screen(page, app_url, profile='unosh', profiles=[mine])
+    open_zeros(page)
+    pick(page, [25, 200], '100')
+    cols, want = want_lines(page, [25, 100, 200])
+    assert [shape(c) for c in cols] == ['touch', 'only', 'only'], cols
+    assert zlines(page) == want
+    assert zlines(page)[1:] == ['100 yd zero: crosses the line of sight only there.', '200 yd zero: crosses the line of sight only there.']
+    assert zlines(page)[0] == '25 yd zero: touches the line of sight there and stays below it.'
+    expect(page.locator('#zsNoSight')).to_be_visible()
+    expect(page.locator('#zsNoSight')).to_have_text(FIGURES_NO_SIGHT)
+    box, chart = page.locator('#zsNoSight').bounding_box(), page.locator('#zsWrap').bounding_box()
+    assert box['y'] + box['height'] <= chart['y']                  # above the table
+
+
+def test_the_no_sight_line_in_compare_zeros_is_hidden_with_a_sight_or_no_table(page, app_url):
+    open_screen(page, app_url)
+    open_zeros(page)
+    expect(page.locator('#zsNoSight')).to_be_hidden()
+    bad = {k: v for k, v in {**MINE, 'id': 'ubad', 'name': 'Broken', 'bc': 0, 'sight': None}.items() if v is not None}
+    open_screen(page, app_url, profile='ubad', profiles=[bad])
+    open_zeros(page)
+    expect(page.locator('#zsNoSight')).to_be_hidden()               # no table: the profile message says what is wrong
+
+
+def test_both_sheets_use_the_same_words_for_no_sight_height(page, app_url):
+    mine = {**MINE, 'id': 'unosh', 'name': 'No sight height', 'sight': 0}
+    open_screen(page, app_url, profile='unosh', profiles=[mine])
+    open_sheet(page)
+    expect(page.locator('#clNoSight')).to_have_text(FIGURES_NO_SIGHT)
+    expect(page.locator('#clNote')).to_have_text(NOTE_NO_SIGHT)
+    page.click('#clClose')
+    wait_closed(page)
+    open_screen(page, app_url)
+    open_sheet(page)
+    expect(page.locator('#clNote')).to_have_text(NOTE)              # with a sight height the note keeps its second sentence
+
+
+def test_the_note_after_use_names_the_zero_conditions_only_when_the_profile_has_them(page, app_url):
+    bare = {k: v for k, v in own('ubare').items() if k != 'zeroAtm'}
+    open_screen(page, app_url, profile='ubare', profiles=[bare])
+    open_zeros(page)
+    page.locator('#zsUse button', has_text='Use 50 yd zero').click()
+    page.click('#cfOk')
+    expect(page.locator('#zsMsg')).to_have_text('Zero set to 50 yd.')
+    expect(page.locator('#toast')).to_have_text('Zero set to 50 yd')
+    open_screen(page, app_url, profile='umine', profiles=[own()])
+    open_zeros(page)
+    page.locator('#zsUse button', has_text='Use 200 yd zero').click()
+    page.click('#cfOk')
+    expect(page.locator('#zsMsg')).to_have_text('Zero set to 200 yd. Update the zero conditions in Edit after you re-zero.')
+    expect(page.locator('#toast')).to_have_text('Zero set to 200 yd')

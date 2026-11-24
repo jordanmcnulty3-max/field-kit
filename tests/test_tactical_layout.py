@@ -365,9 +365,9 @@ def test_ballistics_fields_and_their_order(page, app_url):
         ['Dope card', ['bMax', 'bStep']],
     ]
     ids = page.evaluate("[...document.querySelectorAll('#view-ballistics [id]')].map(e => e.id)")
-    # the final drive added the load line (bLoad), the built-in line (bStart) and the dope card's key and transonic note
+    # the final drive added the load line (bLoad), the built-in line (bStart) and the dope card's key and transonic note; Ballistics 2 made the spin drift line (bSpin) a named element
     assert ids == ['bProfile', 'bEdit', 'bLoad', 'bSight', 'bStart', 'bZeroLine', 'solution', 'solElev', 'solWind', 'solSub', 'bAll', 'bRange', 'bAngle', 'bWind',
-                   'bClock', 'bCond', 'bCondBtn', 'bCondFields', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dopeCue', 'dope', 'dopeKey', 'dopeTrans']
+                   'bClock', 'bCond', 'bCondBtn', 'bCondFields', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dopeCue', 'dope', 'dopeKey', 'dopeTrans', 'bSpin']
 
 
 # ---------- Ballistics behaviour ----------

@@ -816,7 +816,7 @@ def sg_of(p):
 def drift_col(page):
     """The dope card's Drift column as signed inches (right +), or the text when it carries no letter."""
     i = head(page).index('Drift in')
-    return {r[0]: r[i] for r in body(page)}
+    return {r[0].split(' ')[0]: r[i] for r in body(page)}      # the yardage, without a transonic dagger
 
 
 def signed(cell):
@@ -827,7 +827,7 @@ def signed(cell):
 
 def times(page):
     i = head(page).index('Time s')
-    return {r[0]: float(r[i]) for r in body(page)}
+    return {r[0].split(' ')[0]: float(r[i]) for r in body(page)}
 
 
 def test_the_test_inputs_sit_inside_their_bands():

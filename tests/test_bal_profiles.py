@@ -400,10 +400,19 @@ def test_default_card_is_unchanged(page, app_url):
     assert pinned(page, 'default_moa', 'moa') == 'left'
 
 
-def test_spin_fields_change_nothing_on_the_card(page, app_url):
+def test_spin_fields_change_only_the_windage_on_the_card(page, app_url):
+    """Task 2 stored the fields and the card ignored them; since Task 3 spin drift reaches the windage (and its words) and nothing else:
+    elevation, the Path column, speed, energy and time are exactly as without the fields."""
     from .test_bal_screen import open_screen
     plain = {**SPIN_BASE}
+    grab = lambda: page.evaluate("""() => ({ elev: document.querySelector('#solElev').innerText, wind: document.querySelector('#solWind').innerText,
+      sub: document.querySelector('#solSub').innerText,
+      rows: [...document.querySelectorAll('#dope tbody tr')].map(r => [...r.children].map(c => c.textContent)) })""")
     open_screen(page, app_url, profile='u8', profiles=[plain])
-    before = page.evaluate("[...document.querySelectorAll('#solution, #dopeTable, #dope')].map(e => e.innerText)")
+    before = grab()
     open_screen(page, app_url, profile='u8', profiles=[{**plain, 'twist': 8, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308}])
-    assert page.evaluate("[...document.querySelectorAll('#solution, #dopeTable, #dope')].map(e => e.innerText)") == before
+    after = grab()
+    assert after['elev'] == before['elev'] and after['wind'] != before['wind']
+    assert 'spin drift' in after['sub'] and 'spin drift' not in before['sub']
+    cut = lambda rows: [r[:1] + r[5:6] + r[7:] for r in rows]      # yd, path, fps, ft-lb, time: the columns spin drift cannot touch
+    assert cut(after['rows']) == cut(before['rows'])

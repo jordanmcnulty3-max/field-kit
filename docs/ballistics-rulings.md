@@ -527,3 +527,30 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   "0.9", 1.4 "1.4", 2.4003 "2.4"; empty for a non-finite figure; 1e-9 guards exact decimals against binary error). The grade is
   decided on the unrounded value, so rounding to nearest showed "Stability 1.4: marginal" against a 1.4 threshold. The editor
   and, in Task 3, the screen use the same helper. Cost if wrong: a shown figure can read up to 0.1 lower than other calculators give.
+
+### Release 2, Task 3 (spin drift on the screen)
+
+- **An unstable bullet gets no spin drift, and the line says why** (the brief's call). Its Drift column and key stay as in v7.11
+  (unsigned inches). Cost if wrong: a tumbling bullet's windage is the wind alone, which is not what it would do.
+- **The spin share is worked from each row's own flight time and the stability for today's air** (today's temperature and the
+  station pressure the solver used, `res.atm.pIn`; the zero's air plays no part, as a gyroscope sees only the air it flies in).
+  The solver is not touched: `rowFor` adds `spinIn` to `windIn` after it. Cost if wrong: a hot or high day moves stability a few
+  hundredths, which moves drift by well under 0.1 in at 1,000 yd.
+- **The dope card's letter says where the bullet goes, not where to hold.** `5.2 R` is a bullet 5.2 in right of the line of sight
+  (as the sentence under the card says "right"); the windage answer above is the opposite hold ("L"). Cost if wrong: a reader
+  takes `R` in the Drift column as a hold; the key says "inches the wind and the spin move the bullet".
+- **A figure that rounds to 0.0 has no letter** in the Drift column, and a spin share that rounds to under 0.1 is not named in
+  the sentence. Cost if wrong: none seen; it keeps `R 0.0` off the screen.
+- **The line under the dope card on a message path** (bad range, wind, incline or conditions, a profile the screen cannot solve,
+  a solver error): nothing is solved, so it never says spin drift is included. It names what the profile lacks when it lacks
+  something (`BSPIN.of(p, null)` gives the list without air), otherwise `Spin drift not included. Coriolis is not included.`
+  The same short text is used when `missing` is empty. After a solve that finds the target out of reach, the line is the normal one,
+  since the dope card still carries spin drift. Cost if wrong: wording only.
+- **Built-in loads read "add twist, bullet length and bullet diameter to the profile."** (they carry none of the four fields); the
+  list is `missing` joined with commas and a final "and" (`a`, `a and b`, `a, b and c`). A profile that lacks weight or velocity
+  names those too. Cost if wrong: wording only.
+- **The crossing test uses a 1.2 mph wind from 3 o'clock, not 2 mph.** With this .308 load and 1:10 twist, 1 mph never leaves
+  the right side, 1.5 mph and up stay left to 1,500 yd, and 1.2 mph crosses near 1,000 yd. Cost if wrong: none; the test pins
+  one real crossing, found by running the card.
+- **The formula test allows 0.1 in at 500 yd** (flight time is read from the card to 0.01 s, drift to 0.1 in). Cost if wrong:
+  a test that fails on rounding, not on the formula; at 600 yd the same reading can differ by 0.12.

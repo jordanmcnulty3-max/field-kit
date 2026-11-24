@@ -168,3 +168,43 @@ def test_text_survives_binary_floating_error_at_exact_decimals(ready):
       for (let i = 1; i < 100; i++) { const v = i / 10; for (const x of [v, v * 1.0000000001 - 1e-12, +(v / 3 * 3).toPrecision(15)]) if (BSPIN.text(x) !== v.toFixed(1)) out.push([x, BSPIN.text(x)]); }
       return out; }""")
     assert bad == []
+
+
+# ---------- Spin drift measured from the zero (BSPIN.fromZero) ----------
+
+def litz(sg, tof):
+    return 1.25 * (sg + 1.2) * tof ** 1.83
+
+
+def from_zero(page, *a):
+    return page.evaluate('a => BSPIN.fromZero(...a)', list(a))
+
+
+def test_from_zero_is_exactly_zero_at_the_zero(ready):
+    for sg, tof, zero in ((2.4, 0.11, 100), (2.4, 0.38, 300), (1.2, 0.2, 36.5), (7.5, 1.4, 25)):
+        assert from_zero(ready, sg, tof, zero, tof, zero) == 0, (sg, tof, zero)
+
+
+def test_from_zero_is_the_old_drift_less_the_straight_line_through_the_zero(ready):
+    # .308-like figures: zero 100 yd at 0.1193 s, 600 yd at 0.8729 s, 1000 yd at 1.7611 s (expected worked out here)
+    for tof, yd in ((0.8729, 600), (1.7611, 1000)):
+        want = litz(2.4, tof) - litz(2.4, 0.1193) * yd / 100
+        assert from_zero(ready, 2.4, tof, yd, 0.1193, 100) == pytest.approx(want, rel=1e-12)
+        assert from_zero(ready, 2.4, tof, yd, 0.1193, 100) < js_drift(ready, 2.4, tof)
+
+
+def test_from_zero_is_negative_inside_the_zero(ready):
+    # 300 yd zero at 0.38 s; 150 yd at 0.18 s: the drift there is less than its share of the correction made at 300 yd
+    got = from_zero(ready, 2.4, 0.18, 150, 0.38, 300)
+    assert got < 0 and got == pytest.approx(litz(2.4, 0.18) - litz(2.4, 0.38) / 2, rel=1e-12)
+
+
+def test_from_zero_is_nan_for_bad_input_and_never_throws(ready):
+    good = [2.4, 0.87, 600, 0.12, 100]
+    for i in range(5):
+        for bad in (0, -1, None, 'x', '2', float('inf')):
+            a = list(good)
+            a[i] = 'Infinity' if bad == float('inf') else bad
+            r = ready.evaluate('a => { const v = a.map(x => x === "Infinity" ? Infinity : x); return Number.isNaN(BSPIN.fromZero(...v)); }', a)
+            assert r, (i, bad)
+    assert ready.evaluate('Number.isNaN(BSPIN.fromZero())')

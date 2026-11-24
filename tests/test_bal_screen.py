@@ -861,17 +861,20 @@ def test_no_wind_gives_a_left_hold_that_grows_with_range(page, app_url):
 
 
 def test_windage_equals_wind_alone_plus_the_formula(page, app_url):
-    """At 600 yd. The screen shows each figure rounded to 0.1 in. So (a) the spin share against the formula worked from the solver's
-    own unrounded flight time: only the display rounding (0.05 in) can differ, tolerance 0.06; (b) the same from the flight time
-    printed on the card (rounded to 0.01 s, worth up to 1.83 x drift / tof x 0.005 = about 0.06 in at 600 yd): 0.05 + 0.06, tolerance
-    0.15; (c) SPIN minus PLAIN with a wind: two rounded readings add up to 0.1 in, plus the 0.06: tolerance 0.17."""
+    """At 600 yd. Spin drift is measured from the zero: litz(tof) - litz(tof at the zero) x 600 / 100, the zero's flight time taken
+    from the solver itself (unrounded) in every reading below. The screen shows each figure rounded to 0.1 in. So (a) the spin share
+    against the formula worked from the solver's own unrounded flight times: only the display rounding (0.05 in) can differ, tolerance
+    0.06; (b) the same from the 600 yd flight time printed on the card (rounded to 0.01 s, worth up to 1.83 x drift / tof x 0.005 =
+    about 0.06 in at 600 yd): 0.05 + 0.06, tolerance 0.15; (c) SPIN minus PLAIN with a wind: two rounded readings add up to 0.1 in,
+    plus the 0.06: tolerance 0.17."""
     open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0', 'bRange': '600'})
     sg = sg_of(SPIN)
-    exact = page.evaluate("""p => BAL.solve({ bc: p.bc, model: p.model, w: p.w, mv: p.mv, sight: p.sight, zero: p.zero, temp: 59, alt: 0, press: 0, rh: 50,
-      wind: 0, clock: 3, angle: 0, ranges: [600] }).rows[0].tof""", SPIN)
+    tz, exact = page.evaluate("""p => BAL.solve({ bc: p.bc, model: p.model, w: p.w, mv: p.mv, sight: p.sight, zero: p.zero, temp: 59, alt: 0, press: 0, rh: 50,
+      wind: 0, clock: 3, angle: 0, ranges: [100, 600] }).rows.map(r => r.tof)""", SPIN)
+    spin = lambda tof: 1.25 * (sg + 1.2) * (tof ** 1.83 - tz ** 1.83 * 600 / 100)
     shown = signed(drift_col(page)['600'])
-    assert abs(shown - 1.25 * (sg + 1.2) * exact ** 1.83) < 0.06, (shown, exact)
-    assert abs(shown - 1.25 * (sg + 1.2) * times(page)['600'] ** 1.83) < 0.15, (shown, times(page)['600'])
+    assert abs(shown - spin(exact)) < 0.06, (shown, exact)
+    assert abs(shown - spin(times(page)['600'])) < 0.15, (shown, times(page)['600'])
     for wind, clock in (('10', 3), ('8', 9)):
         shot_now(page, bWind=wind, bClock=clock, bRange=600)
         with_spin = signed(drift_col(page)['600'])
@@ -879,7 +882,7 @@ def test_windage_equals_wind_alone_plus_the_formula(page, app_url):
         plain = signed(drift_col(page)['600'])                              # the plain column has no letter: wind from 3 o'clock carries the bullet left
         plain *= -1 if clock == 3 else 1
         page.evaluate('FK.bal.select("us")')
-        assert abs((with_spin - plain) - 1.25 * (sg + 1.2) * times(page)['600'] ** 1.83) < 0.17, (wind, clock, with_spin, plain)
+        assert abs((with_spin - plain) - spin(times(page)['600'])) < 0.17, (wind, clock, with_spin, plain)
 
 
 def test_left_twist_mirrors_it(page, app_url):
@@ -1029,4 +1032,60 @@ def test_spin_line_fits_360_day_night_large_text(page, app_url, night, profile):
     box = page.locator('#bSpin').bounding_box()
     assert box['x'] >= 0 and box['x'] + box['width'] <= 360
     assert page.evaluate("(() => { const e = document.querySelector('#bSpin'); return e.scrollWidth <= e.clientWidth + 1; })()")
+    whole_page_is_clean(page)
+
+
+SPIN_300 = {**SPIN, 'id': 'u3', 'name': '300 zero rifle', 'zero': 300, 'optic': {'type': 'turret', 'unit': 'mil', 'click': 0.1}}
+
+
+def litz_from_zero(page, p, yd):
+    """Spin drift from the zero, worked out here: Litz at the row's flight time less the drift at the zero carried on in a straight line.
+    The flight times come from the solver (the same call the screen makes), the formula from the source, not from the app."""
+    tz, tx = page.evaluate("""([p, x]) => BAL.solve({ bc: p.bc, model: p.model, w: p.w, mv: p.mv, sight: p.sight, zero: p.zero, temp: 59, alt: 0,
+      press: 0, rh: 50, wind: 0, clock: 3, angle: 0, ranges: [p.zero, x] }).rows.map(r => r.tof)""", [p, yd])
+    if yd < p['zero']:
+        tz, tx = tx, tz                                          # the solver returns its rows nearest first
+    sg = sg_of(p)
+    return 1.25 * (sg + 1.2) * (tx ** 1.83 - tz ** 1.83 * yd / p['zero'])
+
+
+def test_no_windage_at_the_zero_range_with_no_wind(page, app_url):
+    open_screen(page, app_url, profile='u3', profiles=[SPIN_300], shot={'bWind': '0', 'bRange': '300'})
+    assert card(page)['wind'] == ['WINDAGE', '0.0 mil', '0 clicks'], card(page)['wind']
+    assert 'spin' not in card(page)['sub'] and 'drift 0.0 in,' in card(page)['sub'], card(page)['sub']
+    assert drift_col(page)['300'] == '0.0'
+    i = head(page).index('Wind clicks')
+    assert {r[0].split(' ')[0]: r[i] for r in body(page)}['300'] == '0'
+    shot_now(page, bRange=600)                                   # beyond the zero: the drift less what the zero already took out
+    assert abs(signed(drift_col(page)['600']) - litz_from_zero(page, SPIN_300, 600)) < 0.06
+    assert card(page)['wind'][1].startswith('L '), card(page)['wind']
+    assert 'spin drift' in card(page)['sub']
+
+
+def test_inside_the_zero_the_tiny_share_is_on_the_other_side_and_rounds_away(page, app_url):
+    open_screen(page, app_url, profile='u3', profiles=[SPIN_300], shot={'bWind': '0', 'bRange': '150'})
+    share = litz_from_zero(page, SPIN_300, 150)
+    assert -0.5 < share < 0                                      # left of the line for a right-hand twist, a fraction of an inch
+    d = drift_col(page)
+    assert d['150'] == f'{abs(share):.1f} L' or (round(abs(share), 1) == 0 and d['150'] == '0.0'), (d['150'], share)
+    assert not [v for v in d.values() if NASTY.search(v) or re.search(r'^0\.0 [RL]', v)], d
+    whole_page_is_clean(page)
+
+
+def test_a_100_yard_zero_row_carries_no_drift_and_1000_yd_follows_the_formula(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0', 'bRange': '1000'})
+    d = drift_col(page)
+    assert d['100'] == '0.0', d['100']
+    assert abs(signed(d['1000']) - litz_from_zero(page, SPIN, 1000)) < 0.06, (d['1000'], litz_from_zero(page, SPIN, 1000))
+    page.evaluate('FK.bal.select("ul")')
+    assert drift_col(page)['100'] == '0.0' and abs(signed(drift_col(page)['1000']) + litz_from_zero(page, SPIN, 1000)) < 0.06
+
+
+def test_no_row_at_the_zero_means_no_spin_drift(page, app_url):
+    open_screen(page, app_url, profile='us', profiles=SPINNERS, shot={'bWind': '0'})
+    page.evaluate("""() => { const real = BAL.solve;
+      BAL.solve = p => { const r = real(p); return r.error ? r : { ...r, rows: r.rows.filter(x => x.yd < p.zero) }; };
+      FK.bal.calc(); }""")
+    assert page.inner_text('#bSpin') == f'Spin drift not included.{TAIL}'
+    assert page.inner_text('#dopeKey').endswith('Drift: inches the wind moves the bullet, shown without a sign.')
     whole_page_is_clean(page)

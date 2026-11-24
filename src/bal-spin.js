@@ -19,6 +19,17 @@ const BSPIN = (() => {
     return pos(sg) && pos(tof) ? 1.25 * (sg + 1.2) * Math.pow(tof, 1.83) : NaN;
   }
 
+  /* Spin drift measured from the zero, inches, before the twist's sign: a rifle zeroed at zeroYd already has the drift there in its
+     sights, and that correction is an angle, so it grows in a straight line with range. drift(tof) - drift(tofZero) x yd / zeroYd:
+     exactly 0 at the zero, a little negative (the other side) inside it. NaN when any input is not a finite number above 0. */
+  function fromZero(sg, tof, yd, tofZero, zeroYd) {
+    if (![yd, zeroYd].every(pos)) return NaN;
+    const here = drift(sg, tof), there = drift(sg, tofZero);
+    if (!Number.isFinite(here) || !Number.isFinite(there)) return NaN;
+    if (yd === zeroYd && tof === tofZero) return 0;
+    return here - there * (yd / zeroYd);
+  }
+
   function grade(sg) {
     if (!(sg >= UNSTABLE_BELOW)) return 'unstable';   // also NaN
     return sg < MARGINAL_BELOW ? 'marginal' : 'stable';
@@ -44,5 +55,5 @@ const BSPIN = (() => {
     return { sg, grade: grade(sg), sign: p.twistDir === 'L' ? -1 : 1 };
   }
 
-  return { stability, drift, grade, of, text };
+  return { stability, drift, fromZero, grade, of, text };
 })();

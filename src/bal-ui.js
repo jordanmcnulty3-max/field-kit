@@ -234,8 +234,9 @@
      (nothing is solved, so no windage is shown) it never says spin drift is included. */
   const TAIL = ' Coriolis is not included.';
   const words = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
-  const spinNote = (s, windage) => {
+  const spinNote = (s, windage, why) => {
     if (s && s.grade === 'unstable') return 'Spin drift not included: by the Miller formula this bullet is not stable in this twist (stability ' + BSPIN.text(s.sg) + ').' + TAIL;
+    if (why) return 'Spin drift not included.' + TAIL;
     if (s && s.sg !== undefined) return (windage === false ? 'The dope card includes' : 'Windage includes') + ' spin drift (stability ' + BSPIN.text(s.sg) + (s.grade === 'marginal' ? ', marginal' : '') + ', '
       + (s.sign < 0 ? 'left' : 'right') + '-hand twist).' + TAIL;
     return 'Spin drift not included' + (s && s.missing.length ? ': add ' + words(s.missing) + ' to the profile.' : '.') + TAIL;
@@ -323,17 +324,22 @@
     if (res.error) return nothing(res.error, p);
 
     /* Spin drift: from the profile's twist and bullet, today's temperature and the station pressure the solver used; applied only to a
-       stable or marginal bullet. spinIn is signed like windIn (right positive) and is added to it. */
-    const spin = BSPIN.of(p, { temp, press: res.atm.pIn }), spun = !!spin.grade && spin.grade !== 'unstable';
+       stable or marginal bullet. It is measured from the zero (the rifle was zeroed with the drift there in its sights), so it needs the
+       time of flight of this solve's own row at the zero; without that row it is not applied. spinIn is signed like windIn (right
+       positive) and is added to it. */
+    const spin = BSPIN.of(p, { temp, press: res.atm.pIn });
     const xs = [...new Set(ranges.filter(r => r > 0))].sort((a, b) => a - b);   // the solver's own order: row i belongs to xs[i]
+    const zr = res.rows[xs.indexOf(p.zero)], tofZero = zr && fin(zr.tof) ? zr.tof : NaN;
+    const why = !spin.grade || spin.grade === 'unstable' ? '' : !fin(tofZero) ? 'zero' : '';
+    const spun = !!spin.grade && spin.grade !== 'unstable' && !why;
     const rowFor = x => {
       const i = xs.indexOf(x), r = i >= 0 && res.rows[i];
       if (!r) return null;
-      const d = spun ? spin.sign * BSPIN.drift(spin.sg, r.tof) : 0, spinIn = Number.isFinite(d) ? d : 0;
+      const d = spun ? spin.sign * BSPIN.fromZero(spin.sg, r.tof, x, tofZero, p.zero) : 0, spinIn = Number.isFinite(d) ? d + 0 : 0;   // + 0: never a -0
       return { ...r, yd: x, windIn: r.windIn + spinIn, spinIn };
     };
     const t = rowFor(target);
-    F('bSpin').textContent = spinNote(spin, !!t);      // out of reach: the answer card shows dashes, only the dope card carries spin drift
+    F('bSpin').textContent = spinNote(spin, !!t, why);   // out of reach: the answer card shows dashes, only the dope card carries spin drift
     if (t) {
       const a = BALS.answer(t, optic), every = BALS.all(t);
       const lines = side => optic ? [a[side].main, a[side].sub] : every[side];

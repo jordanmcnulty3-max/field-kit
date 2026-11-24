@@ -366,8 +366,8 @@ def test_ballistics_fields_and_their_order(page, app_url):
         ['Tools', ['bClose', 'bZeros']],
     ]
     ids = page.evaluate("[...document.querySelectorAll('#view-ballistics [id]')].map(e => e.id)")
-    # the final drive added the load line (bLoad), the built-in line (bStart) and the dope card's key and transonic note; Ballistics 2 made the spin drift line (bSpin) a named element; Ballistics 2 added the Tools block (Close-range holds, Compare zeros) under the dope card
-    assert ids == ['bProfile', 'bEdit', 'bLoad', 'bSight', 'bStart', 'bZeroLine', 'solution', 'solElev', 'solWind', 'solSub', 'bAll', 'bRange', 'bAngle', 'bWind',
+    # the final drive added the load line (bLoad), the built-in line (bStart) and the dope card's key and transonic note; Ballistics 2 made the spin drift line (bSpin) a named element; Ballistics 2 added the Tools block (Close-range holds, Compare zeros) under the dope card, and the no-sight-height line (bNoSH)
+    assert ids == ['bProfile', 'bEdit', 'bLoad', 'bSight', 'bNoSH', 'bStart', 'bZeroLine', 'solution', 'solElev', 'solWind', 'solSub', 'bAll', 'bRange', 'bAngle', 'bWind',
                    'bClock', 'bCond', 'bCondBtn', 'bCondFields', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dopeCue', 'dope', 'dopeKey', 'dopeTrans', 'bSpin', 'bClose', 'bZeros']
 
 

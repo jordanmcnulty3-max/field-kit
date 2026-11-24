@@ -231,20 +231,31 @@
     (more || []).forEach(t => add('v2 more', t));
   }
   /* The line under the dope card about spin drift and Coriolis. words(missing) is "a", "a and b", "a, b and c". On a message path
-     (nothing is solved, so no windage is shown) it never says spin drift is included. */
+     (nothing is solved, so no windage is shown) it never says spin drift is included. why: '' or the reason a graded bullet still gets
+     none ('subsonic': the muzzle velocity is below the speed of sound today; 'zero': the solve has no row at the zero). own: the profile
+     is the person's own (a built-in load cannot be edited, so it is told where its numbers go). */
   const TAIL = ' Coriolis is not included.';
   const words = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
-  const spinNote = (s, windage, why) => {
+  const spinNote = (s, windage, why, own) => {
     if (s && s.grade === 'unstable') return 'Spin drift not included: by the Miller formula this bullet is not stable in this twist (stability ' + BSPIN.text(s.sg) + ').' + TAIL;
+    if (why === 'subsonic') return 'Spin drift not included: the formula is for supersonic bullets.' + TAIL;
     if (why) return 'Spin drift not included.' + TAIL;
-    if (s && s.sg !== undefined) return (windage === false ? 'The dope card includes' : 'Windage includes') + ' spin drift (stability ' + BSPIN.text(s.sg) + (s.grade === 'marginal' ? ', marginal' : '') + ', '
+    if (s && s.sg !== undefined) return (windage === false ? 'The dope card includes' : 'Windage includes') + ' an estimate of spin drift (stability ' + BSPIN.text(s.sg) + (s.grade === 'marginal' ? ', marginal' : '') + ', '
       + (s.sign < 0 ? 'left' : 'right') + '-hand twist).' + TAIL;
-    return 'Spin drift not included' + (s && s.missing.length ? ': add ' + words(s.missing) + ' to the profile.' : '.') + TAIL;
+    if (!(s && s.missing.length)) return 'Spin drift not included.' + TAIL;
+    return 'Spin drift not included: add ' + words(s.missing) + (own ? ' to the profile in Edit.' : ' to a profile of your own (tap Edit, then Save as new profile).') + TAIL;
   };
+  /* The sentence added under the answer card for a bullet the Miller formula grades not stable. */
+  const unstableSub = s => s && s.grade === 'unstable'
+    ? ' By the Miller formula this bullet is not stable in this twist (stability ' + BSPIN.text(s.sg) + '): treat every figure here as doubtful.' : '';
+  /* The transonic note under the dope card: with spin drift applied it also says the formula was not checked there. */
+  const TRANS = '\u2020 Below Mach 1.2 (transonic): less certain. Confirm these with real shots.';
+  const TRANS_SPUN = '\u2020 Below Mach 1.2 (transonic): less certain, and the spin drift there is outside what the formula was checked for. Confirm these with real shots.';
   /* The profile's own answer when no air is known (a message path): only what is missing from the profile can be said. */
   const spinGap = p => { const s = BSPIN.of(p, null); return s.missing && s.missing.length ? s : { missing: [] }; };
   function nothing(text, p) {
-    F('bSpin').textContent = spinNote(spinGap(p));
+    F('bSpin').textContent = spinNote(spinGap(p), undefined, '', !!(p && ownProfile(p.id)));
+    F('dopeTrans').textContent = TRANS;
     paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
     F('solSub').textContent = text;
     F('solution').classList.add('msg');
@@ -260,6 +271,7 @@
     F('bLoad').textContent = load; F('bLoad').hidden = !load;
     F('bStart').hidden = !(p && PRESETS.some(x => x.id === p.id));      // a built-in load: urge a chronograph reading
     F('bSight').textContent = BALS.describe(p && p.optic);
+    F('bNoSH').hidden = !p || p.sight > 0;                              // no sight height (blank or 0): every hold assumes the sight is on the bore
     const z = BALS.zeroLine(p && p.zeroAtm);
     F('bZeroLine').textContent = z; F('bZeroLine').hidden = !z;
     const sighted = !!(p && p.optic);
@@ -330,7 +342,9 @@
     const spin = BSPIN.of(p, { temp, press: res.atm.pIn });
     const xs = [...new Set(ranges.filter(r => r > 0))].sort((a, b) => a - b);   // the solver's own order: row i belongs to xs[i]
     const zr = res.rows[xs.indexOf(p.zero)], tofZero = zr && fin(zr.tof) ? zr.tof : NaN;
-    const why = !spin.grade || spin.grade === 'unstable' ? '' : !fin(tofZero) ? 'zero' : '';
+    /* Not applied to a bullet that leaves the muzzle below the speed of sound in today's air: the formula is for supersonic bullets.
+       Rows that slow below Mach 1.2 downrange keep theirs (the transonic note says so). */
+    const why = !spin.grade || spin.grade === 'unstable' ? '' : p.mv * 0.3048 < res.atm.c ? 'subsonic' : !fin(tofZero) ? 'zero' : '';
     const spun = !!spin.grade && spin.grade !== 'unstable' && !why;
     const rowFor = x => {
       const i = xs.indexOf(x), r = i >= 0 && res.rows[i];
@@ -339,7 +353,7 @@
       return { ...r, yd: x, windIn: r.windIn + spinIn, spinIn };
     };
     const t = rowFor(target);
-    F('bSpin').textContent = spinNote(spin, !!t, why);   // out of reach: the answer card shows dashes, only the dope card carries spin drift
+    F('bSpin').textContent = spinNote(spin, !!t, why, !!ownProfile(p.id));   // out of reach: the answer card shows dashes, only the dope card carries spin drift
     if (t) {
       const a = BALS.answer(t, optic), every = BALS.all(t);
       const lines = side => optic ? [a[side].main, a[side].sub] : every[side];
@@ -348,10 +362,10 @@
       paint(F('solElev'), 'ELEVATION', lines('elev'), more('elev')); paint(F('solWind'), 'WINDAGE', lines('wind'), more('wind'));
       F('solSub').textContent = `At ${label(target)} yd: ${BALS.path(t)}, `
         + `${Math.round(t.fps)} fps, ${Math.round(t.ftlb)} ft-lb, ${t.tof.toFixed(2)} s flight`
-        + (t.mach < 1 ? '. Subsonic: expect larger errors.' : '.');
+        + (t.mach < 1 ? '. Subsonic: expect larger errors.' : '.') + unstableSub(spin);
     } else {
       paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
-      F('solSub').textContent = MSG.reach;
+      F('solSub').textContent = MSG.reach + unstableSub(spin);
       F('solution').classList.add('msg');
     }
     const c = BALS.cols(optic), generic = !!optic && optic.type === 'reticle';   // a reticle's wind columns already carry the drift
@@ -364,7 +378,9 @@
     });
     $('#dope').innerHTML = `<thead><tr>${heads.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody>`;
     F('dopeKey').textContent = 'Path: inches above the line of sight; a minus means below.'
-      + (generic ? '' : spun ? ' Drift: inches the wind and the spin move the bullet; R right, L left.' : ' Drift: inches the wind moves the bullet, shown without a sign.');
+      + (generic ? '' : spun ? ' Drift: inches the wind and the spin move the bullet; R right, L left. The Wind columns show the side to dial or hold, which is the opposite side.'
+        : ' Drift: inches the wind moves the bullet, shown without a sign.');
+    F('dopeTrans').textContent = spun ? TRANS_SPUN : TRANS;
     fitDope();
   }
   /* Only a table wider than its box shows the swipe cue and a sticky first column (the Survival tables' pattern). Measured when the

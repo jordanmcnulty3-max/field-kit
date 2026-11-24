@@ -588,10 +588,10 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
 
 ### Release 2, Task 5 (Tools block and the Close-range holds sheet)
 
-- **With no sight height (blank or 0) every row reads "Hold on".** The brief's line says "every hold reads zero", but the solver with a
-  sight height of 0 puts the 25 yd row 0.51 in above the line of sight, which the red dot wording would print as "Hold 0.5 in low",
-  contradicting the line above the table. The sheet therefore prints "Hold on" for every row in that case. Cost if wrong: a profile
-  with a deliberately entered 0 in sight height loses its (tiny, physically meaningless) 0.5 in figure at 25 yd.
+- **With no sight height (blank or 0) the sheet still prints the solver's own holds, row for row, and the line above the table reads
+  "This profile has no sight height, so these holds assume the sight sits on the bore. Tap Edit and set it."** (controller ruling: the
+  brief's "every hold reads zero" was wrong, the solver is right; the sheet never replaces its figures, e.g. "Hold 0.5 in low" at
+  25 yd for a 100 yd zero). Cost if wrong: the wording differs from the approved plan.
 - **The sight line for a missing sight height reads "Sight height not set · zero 100 yd"** (the brief gave the wording only for a
   sight height). Cost if wrong: one line of wording.
 - **Sight height is printed without trailing zeros ("2 in", "2.6 in", at most two decimals) and the zero with at most one decimal.**

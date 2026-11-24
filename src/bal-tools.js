@@ -30,7 +30,7 @@
     if (res.error) return;
     const tr = (tag, cells) => { const r = document.createElement('tr'); cells.forEach(c => { const d = document.createElement(tag); d.textContent = c; r.appendChild(d); }); return r; };
     head.appendChild(tr('th', ['Yd', 'Hold']));
-    rows.forEach(r => tb.appendChild(tr('td', [yd(r.yd), noSight ? 'Hold on' : hold(r)])));   // no sight height: the line above the table says every hold reads zero
+    rows.forEach(r => tb.appendChild(tr('td', [yd(r.yd), hold(r)])));   // the solver's own figures, whatever the profile carries
     body.append(head, tb);
   }
 

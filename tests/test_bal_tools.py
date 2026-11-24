@@ -7,7 +7,7 @@ from .test_tactical_layout import clipped_buttons, enlarge_text, overflow, too_s
 
 DLG = '#dlgClose'
 NOTE = 'Level, no wind. Inside the zero the bullet strikes low, so the hold is high.'
-NO_SIGHT = 'This profile has no sight height, so every hold reads zero. Tap Edit and set it.'
+NO_SIGHT = 'This profile has no sight height, so these holds assume the sight sits on the bore. Tap Edit and set it.'
 PROFILE_MSG = 'This profile needs a ballistic coefficient, a velocity and a zero range. Tap Edit.'
 COND_MSG = 'Check the conditions: temperature, altitude, pressure or humidity is out of range.'
 YDS = ['3', '5', '7', '10', '15', '25']
@@ -86,7 +86,9 @@ def test_no_sight_height_says_so(page, app_url, sight):
     expect(page.locator('#clSight')).to_have_text('Sight height not set · zero 100 yd')
     got = rows(page)
     assert [r[0] for r in got] == YDS                       # shown, not blocked
-    assert all(r[1] == 'Hold on' for r in got), got         # every hold reads zero, as the line above the table says
+    want = page.evaluate("""() => BALZ.close(FK.bal.load()).rows.map(r => BALS.answer({ yd: r.yd, dropIn: r.dropIn, windIn: 0 }, { type: 'dot' }).elev.main)""")
+    assert [r[1] for r in got] == want                      # the solver's own figures, never replaced
+    assert any(h != 'Hold on' for h in want), want          # and at least one is a real hold (25 yd reads low with the sight on the bore)
 
 
 def test_the_no_sight_line_is_hidden_when_there_is_a_sight(page, app_url):

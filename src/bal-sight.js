@@ -157,12 +157,16 @@ const BALS = (() => {
   }
 
   /* Where the bullet is at the target, for the sentence under the card: "63.6 in low, drift 21.2 in left". Path is measured from the
-     line of sight (positive up), drift from it (positive right); one decimal. '' for a bad row. */
+     line of sight (positive up), drift from it (positive right); one decimal. When row.spinIn (the share of the drift that is spin
+     drift, positive right, already inside windIn) is a number that rounds to at least 0.1, it is named after the drift words:
+     "drift 21.2 in left (spin drift 5.2 in right included)". The sentence does not compute it. '' for a bad row. */
   function path(row) {
     if (!rows(row)) return '';
     const p = Math.abs(row.dropIn).toFixed(1), d = Math.abs(row.windIn).toFixed(1);
+    const sp = typeof row.spinIn === 'number' && fin(row.spinIn) ? Math.abs(row.spinIn).toFixed(1) : '0.0';
     return (Number(p) === 0 ? 'on the line of sight' : p + ' in ' + (row.dropIn > 0 ? 'high' : 'low'))
-      + ', drift ' + d + ' in' + (Number(d) === 0 ? '' : row.windIn > 0 ? ' right' : ' left');
+      + ', drift ' + d + ' in' + (Number(d) === 0 ? '' : row.windIn > 0 ? ' right' : ' left')
+      + (Number(sp) === 0 ? '' : ' (spin drift ' + sp + ' in ' + (row.spinIn > 0 ? 'right' : 'left') + ' included)');
   }
   /* The load, in one line: "175 gr · G7 0.25 · 2,600 fps · zero 100 yd" (the weight left out when 0 or missing). '' when unusable. */
   function loadLine(p) {

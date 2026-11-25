@@ -8368,3 +8368,58 @@ Field numbers below were read from the `meshtastic` Python package 2.7.11 descri
 - precision_bits 1-31 is a reduced-precision position: the teammate sheet says "Approximate position".
 - Primary channel: the verdict is taken only from role primary at index 0 (sends and filters use index 0); a primary reported at another index
   gives 'unknown'.
+
+### Spin drift and gyroscopic stability, Ballistics release 2 (2026-11-23)
+
+`BSPIN` (`src/bal-spin.js`) is checked by `tests/test_bal_spin.py` against `tests/fixtures/spin_reference.json`. Every page
+below was opened on 2026-11-23; the rulings are in `docs/ballistics-rulings.md` under "Release 2".
+
+- **Miller stability formula**: Courtney and Miller, "A Stability Formula for Plastic-Tipped Bullets, Part 1" (arXiv 1410.5340),
+  https://arxiv.org/pdf/1410.5340, equation 1: Sg = 30 m / (t^2 d^3 L (1 + L^2)) x (V/2800)^(1/3) x (FT+460)/(59+460) x 29.92/P,
+  m in grains, t (twist) and L (length) in calibers, d inches, V fps, FT degrees F, P inHg. The paper prints no full worked
+  calculation. Its thresholds: Sg above 1.0 is stable "in a perfect world"; 1.4 to 2.0 is the recommended range; drag rises
+  below about 1.3; tumbling is expected as Sg nears 1.0. It names no "marginal" or "unstable" band.
+- **Stability worked example**: Wikipedia, "Miller twist rule", https://en.wikipedia.org/wiki/Miller_twist_rule. 180 gr Nosler
+  Spitzer, .308, length 1.180 in (3.83 calibers), velocity Mach 2.5 (about 2800 fps), safe Sg 2.0, gives 39.2511937 calibers per
+  turn (about 12 in). The page works twist from Sg; the test works Sg back from the twist (1.997 with 2800 fps, standard air,
+  within the 0.01 allowed). The equations did not come through in the page text, so the formula itself rests on the paper.
+- **Litz spin drift estimate** SD(in) = 1.25 (Sg + 1.2) tof^1.83: ballistics-engine 0.33.0 `spin_drift.rs`
+  (`litz_drift_inches`, exponent 1.83),
+  https://docs.rs/ballistics-engine/0.33.0/src/ballistics_engine/spin_drift.rs.html; its test, Sg 2.0 and 1.5 s, expects about
+  8.40 in. That example is NOT an independent check: the project's test computes its expected value from the same formula, so it
+  only shows the formula was copied correctly. The five Sniper's Hide rows below are outputs of the same formula: they check the arithmetic, not whether the formula is true (see the measured comparison below). Independent statement and worked table (Eq. 18; five bullets, Sg, time of flight at 1000 yd, Litz SD, 5.17 to
+  11.20 in; the thread notes the estimate "tends to over predict"):
+  https://www.snipershide.com/shooting/threads/calculating-yaw-of-repose-spin-drift-a-novel-approach.6456023. All six rows
+  agree with the formula to four places. The estimate is a magnitude only; the sign comes from the twist direction.
+  **The five rows are the formula's own outputs: they check the arithmetic, not the truth.** Re-opened 2026-11-24 (final review,
+  item A3): the same table prints drifts from other methods beside the Litz figure, recorded in the fixture as `reference`, not as
+  test targets: 168 gr International, Litz 10.02 in against McCoy (figure 9.8) 9.15 (+9.5 %); 175.16 gr M118LR, 10.28 against
+  PRODAS runs 9.54 (+7.7 %); 175 gr Berger Tactical, 11.20 against drift firings 11.4 (-1.8 %); 185 gr Berger LR-BT, 9.61 against
+  drift firings 6.7 (+43.5 %; the column is read by its position, as the page text has no separators). The thread: "In general
+  terms, the Litz model tends to over predict SD in a significant way." So the formula runs from about 2 % under to 44 % over
+  those measurements; on the .308 test load (175 gr, 1:10, Sg 2.4) that is up to about 0.05 mil at 600 yd and 0.11 mil at
+  1,000 yd. The screen calls the figure "an estimate of spin drift".
+- **Other sources opened**: ballistics-engine 0.18.3 `stability.rs`, https://docs.rs/crate/ballistics-engine/0.18.3/source/src/stability.rs
+  (same Miller form; its comment "greater than 1.5 is generally considered adequate"; no numeric Sg test). Josef's Stability
+  Calculator, https://jsbartunek.github.io/josefs-stability-calculator/ (bands 1.0, 1.3, 1.5, 2.0). Re-opened 2026-11-24 (final
+  review, item D3): it prints a forward worked example, "Sg 1.378 at standard conditions for a .308 165 gr bullet, 33 mm, 2625 fps,
+  1:12", and for the same bullet "1.21 at -20 °C" (33 mm is not labelled on the page; it is the bullet's length, as the maths
+  review read it). The app gives 1.3779 and 1.2106 (33 mm = 1.2992 in, standard pressure for the cold case, which the page does not
+  state). Both are now fixture rows (`independent: true`) checked to 0.01; they exercise the velocity and temperature factors,
+  which the Wikipedia example does not. (Correction: this entry earlier said the bullet length was inferred and the example was
+  not used.) No opened page prints a number that checks the pressure factor (29.92 / P). Courtney and Miller Part 2,
+  https://arxiv.org/pdf/1410.5737 (53 gr and 40 gr tables give Sg below 1.0 with the original rule; bullet diameter not
+  printed, so not used). Applied Ballistics "Gyroscopic Drift and Coriolis Effect",
+  https://appliedballisticsllc.com/wp-content/uploads/2021/06/Gyroscopic-Drift-and-Coriolis-Effect.pdf (no formula; about 8 to 9 in
+  at 1000 yd for small arms). UNITAF Force Manual, https://unitedtaskforce.net/handbook/block/558/spin-drift-calculation (a
+  different, game-specific formula; not used). SSUSA twist article,
+  https://www.ssusa.org/articles/2019/11/5/how-to-calculate-rifling-twist-rates-for-stabilizing-bullets (Greenhill only).
+- **Bullet lengths for the six built-in loads: none entered.** Hornady 6.5mm .264 140 gr ELD Match,
+  https://www.hornady.com/bullets/rifle/6-5mm-264-140-gr-eld-match (and the "-500" pack page): diameter .264 and weight 140 gr
+  printed, no length (the specification block did not open). Sierra, https://www.sierrabullets.com/?p=15298 and
+  https://www.sierrabullets.com/?p=15292: weights only, no diameter or length. Sniper's Hide,
+  https://www.snipershide.com/shooting/threads/how-long-is-the-175gr-smk-used-in-fgm-ammo.234075/latest: one member's
+  measured average for the 175 gr SMK, 1.232 in, "Sierra and Federal don't list it" (not a publisher figure, so not entered).
+  https://snipershide.com/shooting/goto/post?id=9796258: no length for the 77 gr SMK. Not searched or not found: the 55 gr M193,
+  the 62 gr SS109 and the 124 gr 7.62x39 bullet. Each built-in therefore asks for its bullet length (and diameter).
+- Not opened: https://www.wikipedia.org/wiki/Bullet_drop (refused by the tool's permission check; not retried).

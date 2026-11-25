@@ -1,0 +1,124 @@
+{
+  "stability": {
+    "source": "Courtney & Miller, A Stability Formula for Plastic-Tipped Bullets, Part 1 (arXiv 1410.5340), equation 1: Sg = 30 m / (t^2 d^3 L (1 + L^2)) x (V/2800)^(1/3) x (FT+460)/(59+460) x 29.92/P; m grains, t and L in calibers, d inches, V fps, FT deg F, P inHg. Worked example: Wikipedia, Miller twist rule (180 gr .308 Nosler Spitzer, 1.180 in = 3.83 calibers, safe Sg 2.0 gives 39.2511937 calibers per turn, about 12 in); velocity Mach 2.5 (about 2800 fps) taken as 2800, standard air.",
+    "url": "https://arxiv.org/pdf/1410.5340",
+    "exampleUrl": "https://en.wikipedia.org/wiki/Miller_twist_rule",
+    "opened": "2026-11-23",
+    "examples": [
+      {
+        "w": 180,
+        "dia": 0.308,
+        "len": 1.18,
+        "twist": 12.089368,
+        "mv": 2800,
+        "temp": 59,
+        "press": 29.92,
+        "sg": 2.0,
+        "independent": false,
+        "note": "Wikipedia's twist worked backwards; velocity and air factors are exactly 1 here, so it does not exercise them."
+      },
+      {
+        "w": 165,
+        "dia": 0.308,
+        "len": 1.2992126,
+        "twist": 12,
+        "mv": 2625,
+        "temp": 59,
+        "press": 29.92,
+        "sg": 1.378,
+        "independent": true,
+        "note": "Josef's Stability Calculator, forward worked example: .308, 165 gr, 33 mm long, 1:12, 2625 fps, standard conditions, Sg 1.378. Checks the velocity factor."
+      },
+      {
+        "w": 165,
+        "dia": 0.308,
+        "len": 1.2992126,
+        "twist": 12,
+        "mv": 2625,
+        "temp": -4,
+        "press": 29.92,
+        "sg": 1.21,
+        "independent": true,
+        "note": "The same bullet at -20 C (-4 F), Sg 1.21 (the page prints no pressure for it; sea-level standard taken). Checks the temperature factor. No printed number checks the pressure factor."
+      }
+    ],
+    "marginalBelow": 1.4,
+    "unstableBelow": 1.0,
+    "thresholdsNote": "The paper gives no named bands: Sg above 1.0 is stable in a perfect world, 1.4 to 2.0 is the recommended design range, drag rises below about 1.3, tumbling is expected near 1.0. marginalBelow takes the low end of the recommended range (1.4), unstableBelow the 1.0 boundary.",
+    "example2Url": "https://jsbartunek.github.io/josefs-stability-calculator/",
+    "example2Opened": "2026-11-24"
+  },
+  "drift": {
+    "source": "Litz spin drift estimator SD(in) = 1.25 (Sg + 1.2) tof^1.83, stated in ballistics-engine spin_drift.rs (litz_drift_inches; its test sg 2.0, 1.5 s gives about 8.40 in, but that test computes its expected value from the same formula, so the 8.40 row is NOT an independent check) and, independently, as Eq. 18 with a five-bullet table (Sg, TOF at 1000 yd, Litz SD) in a Sniper's Hide thread",
+    "url": "https://docs.rs/ballistics-engine/0.33.0/src/ballistics_engine/spin_drift.rs.html",
+    "url2": "https://www.snipershide.com/shooting/threads/calculating-yaw-of-repose-spin-drift-a-novel-approach.6456023",
+    "opened": "2026-11-23",
+    "examples": [
+      {
+        "sg": 2.0,
+        "tof": 1.5,
+        "inches": 8.4,
+        "independent": false,
+        "note": "ballistics-engine's own test; its expected value comes from the same formula (circular). Kept as a copy check only."
+      },
+      {
+        "sg": 1.74,
+        "tof": 1.73,
+        "inches": 10.0203
+      },
+      {
+        "sg": 1.94,
+        "tof": 1.6923,
+        "inches": 10.2791
+      },
+      {
+        "sg": 1.594,
+        "tof": 1.239,
+        "inches": 5.1696
+      },
+      {
+        "sg": 2.24,
+        "tof": 1.687,
+        "inches": 11.1967
+      },
+      {
+        "sg": 1.91,
+        "tof": 1.64,
+        "inches": 9.6125
+      }
+    ],
+    "examplesNote": "The five Sniper's Hide rows are the Litz formula's own outputs printed by the thread: they check the arithmetic (the transcription), not whether the formula is true. 'reference' lists the independent drifts the same table prints; they are not test targets.",
+    "reference": [
+      {
+        "bullet": "168 gr International",
+        "litz": 10.0203,
+        "inches": 9.15,
+        "from": "McCoy figure 9.8",
+        "litzOver": "+9.5 %"
+      },
+      {
+        "bullet": "175.16 gr M118LR",
+        "litz": 10.2791,
+        "inches": 9.5407,
+        "from": "PRODAS runs",
+        "litzOver": "+7.7 %"
+      },
+      {
+        "bullet": "175 gr Berger Tactical",
+        "litz": 11.1967,
+        "inches": 11.4,
+        "from": "drift firings",
+        "litzOver": "-1.8 %"
+      },
+      {
+        "bullet": "185 gr Berger LR-BT",
+        "litz": 9.6125,
+        "inches": 6.7,
+        "from": "drift firings (column read by position)",
+        "litzOver": "+43.5 %"
+      }
+    ],
+    "referenceOpened": "2026-11-24"
+  },
+  "bullets": []
+}

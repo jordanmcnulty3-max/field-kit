@@ -196,7 +196,7 @@ def test_save_as_new_profile_and_delete_land_on_the_right_profile(page, app_url)
 
 def test_surface_save_select_remove(page, app_url):
     open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'))
-    assert page.evaluate('Object.keys(FK.bal).sort()') == ['calc', 'clean', 'edit', 'init', 'profiles', 'remove', 'save', 'select', 'selected', 'shotAir']
+    assert page.evaluate('Object.keys(FK.bal).sort()') == ['calc', 'clean', 'edit', 'init', 'load', 'profiles', 'remove', 'save', 'select', 'selected', 'shotAir']
     assert page.evaluate('FK.bal.save({ id: "p308", name: "x" })') is None
     saved = page.evaluate('FK.bal.save({ id: "u9", name: "Nine", bc: 0.3, mv: 2500, junk: 1, optic: { type: "dot" } })')
     assert saved == {'id': 'u9', 'name': 'Nine', 'bc': 0.3, 'mv': 2500, 'optic': {'type': 'dot'}}
@@ -321,3 +321,108 @@ def test_an_unknown_stored_wind_clock_or_card_step_falls_back_to_the_default(pag
         open_screen(page, app_url, shot={'bClock': clock, 'bStep': step, 'bWind': '10'})
         assert page.input_value('#bClock') == '3' and page.input_value('#bStep') == '50', (clock, step)
         assert page.inner_text('#solWind').split('\n')[1].startswith('R '), clock     # a crosswind from the right, not a head wind
+
+
+# ---------- Twist and bullet fields (Ballistics release 2) ----------
+
+SPIN_KEYS = ['twist', 'twistDir', 'blen', 'bdia']
+V711 = {'id': 'u711', 'name': 'Seven eleven', 'bc': 0.31, 'model': 'G7', 'w': 105, 'mv': 2850, 'sight': 1.9, 'zero': 100,
+        'optic': {'type': 'turret', 'unit': 'mil', 'click': 0.1}, 'zeroAtm': {'temp': 59, 'alt': 500, 'rh': 50}, 'mv0': 2900}
+SPIN_BASE = {'id': 'u8', 'name': 'Spin', 'bc': 0.3, 'model': 'G7', 'w': 175, 'mv': 2600, 'sight': 1.5, 'zero': 100}
+
+
+def test_v711_profiles_load_unchanged_and_gain_no_fields(page, app_url):
+    raw = json.dumps([V78, V711])
+    open_ballistics(page, app_url, stored_bal('u711', '0.31', 'G7', '105', '2850', '1.9', '100'), extra={'fk.profiles': raw})
+    assert page.evaluate('FK.bal.profiles()') == [V78, V711]
+    assert [k for p in page.evaluate('FK.bal.profiles()') for k in SPIN_KEYS if k in p] == []
+    assert ls(page, 'profiles') == raw                       # nothing is rewritten in storage
+    assert list(page.evaluate('FK.bal.selected()')) == list(V711)     # and the key order is what v7.11 wrote
+
+
+def test_bad_spin_fields_are_dropped_one_by_one(page, app_url):
+    boot(page, app_url)
+    got = clean(page, {**SPIN_BASE, 'twist': '8', 'twistDir': '<b>', 'blen': -1, 'bdia': 0.308})
+    assert got == {**SPIN_BASE, 'bdia': 0.308}              # the name and the load are intact
+    for bad in ({'twist': 2}, {'twist': 31}, {'twist': None}, {'twist': True}, {'twist': float('inf')}, {'twist': [8]},
+                {'blen': 0.19}, {'blen': 3.01}, {'blen': 0}, {'blen': '1.2'},
+                {'bdia': 0.16}, {'bdia': 0.61}, {'bdia': '0.308'}, {'bdia': -0.308},
+                {'twistDir': 'R'}, {'twistDir': 'l'}, {'twistDir': 'Left'}, {'twistDir': '<img src=x>'}, {'twistDir': 1}, {'twistDir': ['L']}):
+        got = clean(page, {**SPIN_BASE, **bad})
+        assert got == SPIN_BASE, bad
+    only = clean(page, {**SPIN_BASE, 'twist': 8, 'twistDir': '<b>', 'blen': '1.2', 'bdia': 5})
+    assert only == {**SPIN_BASE, 'twist': 8}
+
+
+def test_good_spin_fields_are_kept_and_independent(page, app_url):
+    boot(page, app_url)
+    full = {**SPIN_BASE, 'twist': 8, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308}
+    assert clean(page, full) == full
+    for k in SPIN_KEYS:
+        got = clean(page, {**SPIN_BASE, k: full[k]})
+        assert got == {**SPIN_BASE, k: full[k]}, k
+    for k, edge in (('twist', 3), ('twist', 30), ('blen', 0.2), ('blen', 3), ('bdia', 0.17), ('bdia', 0.6)):
+        assert clean(page, {**SPIN_BASE, k: edge})[k] == edge, (k, edge)
+    assert page.evaluate('FK.balHost.RANGE.twist') == [3, 30]
+    assert page.evaluate('FK.balHost.RANGE.blen') == [0.2, 3]
+    assert page.evaluate('FK.balHost.RANGE.bdia') == [0.17, 0.6]
+
+
+def test_length_outside_2_to_7_calibers_is_dropped(page, app_url):
+    boot(page, app_url)
+    for blen in (0.3, 0.6, 2.2, 3):                          # under 2 and over 7 calibers of .308
+        assert 'blen' not in clean(page, {**SPIN_BASE, 'blen': blen, 'bdia': 0.308}), blen
+        assert clean(page, {**SPIN_BASE, 'blen': blen, 'bdia': 0.308})['bdia'] == 0.308
+    for blen in (0.616, 1.0, 1.24, 2.156):                   # 2.0 and 7.0 calibers are allowed
+        assert clean(page, {**SPIN_BASE, 'blen': blen, 'bdia': 0.308})['blen'] == blen, blen
+    assert clean(page, {**SPIN_BASE, 'blen': 0.3})['blen'] == 0.3           # the rule needs both
+    assert clean(page, {**SPIN_BASE, 'blen': 0.3, 'bdia': 5})['blen'] == 0.3    # a diameter that is itself dropped decides nothing
+
+
+def test_builtin_loads_carry_none_of_the_spin_fields(page, app_url):
+    boot(page, app_url)
+    presets = page.evaluate('FK._test.presets()')
+    assert len(presets) == 6
+    for p in presets:
+        assert [k for k in SPIN_KEYS if k in p] == [], p['id']
+
+
+def test_stored_order_puts_the_spin_fields_after_mv0(page, app_url):
+    open_ballistics(page, app_url, stored_bal('p308', '0.25', 'G7', '175', '2600', '1.5', '100'))
+    page.evaluate('p => FK.bal.save(p)', {'bdia': 0.308, 'twistDir': 'L', 'blen': 1.24, 'twist': 10, 'mv0': 2650, **SPIN_BASE})
+    assert list(own(page)[0]) == ['id', 'name', 'bc', 'model', 'w', 'mv', 'sight', 'zero', 'mv0', 'twist', 'twistDir', 'blen', 'bdia']
+
+
+def test_default_card_is_unchanged(page, app_url):
+    from .test_tactical_layout import ballistics, pinned
+    ballistics(page, app_url)
+    assert pinned(page, 'default_mil', 'mil') == 'left'
+    assert pinned(page, 'default_moa', 'moa') == 'left'
+
+
+def test_spin_fields_change_only_the_windage_on_the_card(page, app_url):
+    """Task 2 stored the fields and the card ignored them; since Task 3 spin drift reaches the windage and the drift words and nothing
+    else. Everything spin cannot change is compared exactly: all of #solution but the windage column and the drift clause of the
+    sentence (so the elevation column, the sentence's other words, Show all units and the card's state), and every dope column but
+    the two wind columns and Drift (Yd, both Elev columns, Path, fps, ft-lb, Time)."""
+    from .test_bal_screen import open_screen
+    plain = {**SPIN_BASE}
+    grab = lambda: page.evaluate("""() => {
+      const card = document.querySelector('#solution').cloneNode(true);
+      card.querySelector('#solWind').remove();
+      const sub = card.querySelector('#solSub');
+      sub.textContent = sub.textContent.replace(/drift \\d+\\.\\d in(?: left| right)?(?: \\(spin drift \\d+\\.\\d in (?:left|right) included\\))?, /, '');
+      return { card: card.innerText, cls: card.className, all: document.querySelector('#bAll').outerHTML,
+        wind: document.querySelector('#solWind').innerText, sub: document.querySelector('#solSub').innerText,
+        head: [...document.querySelectorAll('#dope th')].map(c => c.textContent),
+        rows: [...document.querySelectorAll('#dope tbody tr')].map(r => [...r.children].map(c => c.textContent)) } }""")
+    open_screen(page, app_url, profile='u8', profiles=[plain])
+    before = grab()
+    open_screen(page, app_url, profile='u8', profiles=[{**plain, 'twist': 8, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308}])
+    after = grab()
+    assert before['head'] == after['head'] == ['Yd', 'Elev mil', 'Elev MOA', 'Wind mil', 'Wind MOA', 'Path in', 'Drift in', 'fps', 'ft-lb', 'Time s']
+    assert 'drift' not in before['card'].split('\n')[-1] and before['card'] == after['card'] and before['cls'] == after['cls'] and before['all'] == after['all']
+    assert after['wind'] != before['wind'] and 'spin drift' in after['sub'] and 'spin drift' not in before['sub']
+    keep = lambda rows: [r[:3] + r[5:6] + r[7:] for r in rows]
+    assert keep(after['rows']) == keep(before['rows']) and len(after['rows']) > 10
+    assert [r[3:5] + r[6:7] for r in after['rows']] != [r[3:5] + r[6:7] for r in before['rows']]

@@ -474,3 +474,350 @@ that concerned only the order of the build (R1 to R5, R14) are left out. Each sa
   is newer than 7.9 for backups and updates (`tests/test_migration.py` covers dotted versions). Cost if wrong: someone reads
   "7.10" as "7.1"; the alternative, 8.0, is reserved for the team map.
 
+
+## Release 2
+
+- **Stability bands use the paper's numbers, 1.0 and 1.4, not the expected 1.0 and 1.5.** Courtney and Miller name no
+  "marginal" band: tumbling near 1.0, recommended range 1.4 to 2.0, drag rising below about 1.3. `unstableBelow` is 1.0 and
+  `marginalBelow` is 1.4 (the bottom of the recommended range). Other tools use 1.5 (ballistics-engine's "adequate" comment,
+  Josef's calculator). Cost if wrong: a bullet at Sg 1.4 to 1.5 shows "stable" where a stricter reader would say "marginal".
+  Changing it is one constant and one fixture value.
+- **The stability example is worked backwards from Wikipedia's twist.** (Corrected in the final review: Josef's Stability Calculator
+  does print a forward worked example, 165 gr .308, 33 mm, 1:12, 2625 fps: Sg 1.378, and 1.21 at -20 C; the app gives 1.3779 and
+  1.2106 and both are now fixture rows. What follows was written before that page was read as a worked example.) No opened page
+  printed, to the first writer, a bullet's inputs and its Sg from the corrected formula. The one worked example (180 gr .308, 1.18 in, Sg 2.0 gives 39.2511937 calibers per turn) takes
+  "Mach 2.5, about 2800 fps" as 2800 fps and standard air; the result is 1.997, tested to 0.01. The independent check is the
+  formula written out again in Python (relative 1e-9). Cost if wrong: the velocity and air corrections are checked only
+  against the paper's equation, not against a printed number.
+- **Spin drift is confirmed by two statements that agree, not by a publisher's worked example.** ballistics-engine and a Sniper's
+  Hide post (quoting Litz's estimator, with a five-row table) give the same formula and six agreeing numbers. Litz's own
+  publication was not opened. Cost if wrong: the estimate follows a secondary copy of Litz's formula.
+- **No bullet length or diameter entered for any built-in load.** The only lengths found were a forum member's measurement
+  (175 gr SMK, 1.232 in) and no publisher figure; none of the six passed the rule "from a page I opened". `bullets` in the fixture is
+  empty and every built-in asks for its bullet. Cost if wrong: the user types one more number per built-in load.
+- **`grade` of a non-number is 'unstable'**, but `of` never returns it for a figure that is not a number: it returns
+  `{ missing: [...] }` whenever the stability figure is not finite. The list names what is absent (twist, bullet length, bullet
+  diameter, bullet weight, then muzzle velocity); when only the air is unusable the list is empty. Callers treat any `missing`,
+  even an empty one, as "spin drift not applied" and never read `sg` from it. (Replaces the first version, which returned
+  `sg: NaN` with grade 'unstable'.) Cost if wrong: a caller that tests only `missing.length` will treat an unusable-air result
+  as "nothing missing"; the rule is to test for the key, not the length.
+- **`of` reads no `twistDir` other than 'L' as left**; anything else, including absent, is right (+1). Cost if wrong: a left-twist
+  rifle with a mistyped direction drifts the wrong way.
+- **The ballistics-engine 8.40 in drift example is not an independent check.** Its test computes the expected value from the same
+  formula, so it only shows that the formula was copied correctly. It stays in the fixture, labelled; the five Sniper's Hide rows
+  are the independent check. Cost if wrong: none to the app; a reader who took 8.40 as confirmation would over-trust the formula.
+- **Barrel and bullet fields are four independent optional fields; whatever is valid is stored** (a left twist with no twist rate
+  is kept). Cost if wrong: a profile can hold a direction with nothing to apply it to; harmless, as nothing reads it alone.
+- **Range messages for the new fields:** "Twist must be between 3 and 30 inches per turn.", "Bullet length must be between 0.2 and
+  3 in.", "Bullet diameter must be between 0.17 and 0.6 in." (the editor's one `between()` helper). Cost if wrong: wording only.
+- **The 2 to 7 caliber rule is inclusive and allows 1e-9 for the division** (7 x .308 = 2.156 divides to 7.000000000000001). The
+  editor refuses it; `clean()` drops `blen` and keeps `bdia`, because the length is what was measured by hand. A diameter that is
+  itself out of range is dropped first and then decides nothing. Cost if wrong: a length exactly at the edge is refused or kept
+  by a hair; a bad diameter costs the length its check.
+- **Built-in loads gain none of the four fields** (Task 1: no bullet dimension sourced), so a built-in copied with "Save as new
+  profile" starts with all four blank. Cost if wrong: the user types the bullet's numbers once per saved copy.
+- **The stability line uses only values that are valid on their own** (inside RANGE, and a length that fits the diameter); anything
+  else hides the line, and Save's own refusal explains it. Station pressure comes from `BAL.atmosphere` (today's pressure, or
+  from altitude when none is typed), so it is the figure the solver uses. Out-of-range air on the screen gives standard air
+  (59 F, sea level), as the brief says. Cost if wrong: a profile with a typo shows no line instead of a wrong one.
+- **Typing in the four new fields does not clear a worked-out velocity** in "Correct from a real shot" (its snapshot ignores them),
+  though they do make the sheet dirty. A shot correction also ignores a bad value in them. Cost if wrong: a correction stays on
+  screen after a twist change, which does not affect it.
+- **The twist label says "inches per turn"; the direction select is Right / Left, Right first and the default.** Cost if wrong:
+  wording only.
+- **The stability figure is printed rounded DOWN to one decimal, through one helper, `BSPIN.text(sg)`** (1.38 prints "1.3", 0.97
+  "0.9", 1.4 "1.4", 2.4003 "2.4"; empty for a non-finite figure; 1e-9 guards exact decimals against binary error). The grade is
+  decided on the unrounded value, so rounding to nearest showed "Stability 1.4: marginal" against a 1.4 threshold. The editor
+  and, in Task 3, the screen use the same helper. Cost if wrong: a shown figure can read up to 0.1 lower than other calculators give.
+
+### Release 2, Task 3 (spin drift on the screen)
+
+- **An unstable bullet gets no spin drift, and the line says why** (the brief's call). Its Drift column and key stay as in v7.11
+  (unsigned inches). Cost if wrong: a tumbling bullet's windage is the wind alone, which is not what it would do.
+- **The spin share is worked from each row's own flight time and the stability for today's air** (today's temperature and the
+  station pressure the solver used, `res.atm.pIn`; the zero's air plays no part, as a gyroscope sees only the air it flies in).
+  The solver is not touched: `rowFor` adds `spinIn` to `windIn` after it. Cost if wrong: a hot or high day moves stability a few
+  hundredths, which moves drift by well under 0.1 in at 1,000 yd.
+- **The dope card's letter says where the bullet goes, not where to hold.** `5.2 R` is a bullet 5.2 in right of the line of sight
+  (as the sentence under the card says "right"); the windage answer above is the opposite hold ("L"). Cost if wrong: a reader
+  takes `R` in the Drift column as a hold; the key says "inches the wind and the spin move the bullet".
+- **A figure that rounds to 0.0 has no letter** in the Drift column, and a spin share that rounds to under 0.1 is not named in
+  the sentence. Cost if wrong: none seen; it keeps `R 0.0` off the screen.
+- **The line under the dope card on a message path** (bad range, wind, incline or conditions, a profile the screen cannot solve,
+  a solver error): nothing is solved, so it never says spin drift is included. It names what the profile lacks when it lacks
+  something (`BSPIN.of(p, null)` gives the list without air), otherwise `Spin drift not included. Coriolis is not included.`
+  The same short text is used when `missing` is empty. After a solve that finds the target out of reach, the line is the normal one,
+  since the dope card still carries spin drift. Cost if wrong: wording only.
+- **Built-in loads read "add twist, bullet length and bullet diameter to the profile."** (they carry none of the four fields); the
+  list is `missing` joined with commas and a final "and" (`a`, `a and b`, `a, b and c`). A profile that lacks weight or velocity
+  names those too. Cost if wrong: wording only.
+- **The crossing test uses a 1.2 mph wind from 3 o'clock, not 2 mph.** With this .308 load and 1:10 twist, 1 mph never leaves
+  the right side, 1.5 mph and up stay left to 1,500 yd, and 1.2 mph crosses near 1,000 yd. Cost if wrong: none; the test pins
+  one real crossing, found by running the card.
+- **The formula test reads 600 yd and states its bounds.** The screen shows each figure to 0.1 in and the time to 0.01 s. Against
+  the formula worked from the solver's unrounded flight time only display rounding differs (tolerance 0.06 in; the probe shows
+  0.012). Against the printed time: 0.05 in rounding plus 1.83 x drift / tof x 0.005 s, about 0.06 in at 600 yd (tolerance 0.15).
+  SPIN minus PLAIN adds a second rounded reading (tolerance 0.17). (An earlier note here said the 600 yd difference could be 0.12;
+  that was wrong.) Cost if wrong: a test that fails on rounding, not on the formula.
+- **When the target is out of reach the line says "The dope card includes spin drift (...)", not "Windage includes ..."**, since
+  the answer card's WINDAGE shows a dash and only the dope card carries the share. Same bracket rules as the normal line. Cost if
+  wrong: wording only.
+- **The shot-field tests wait on the stored copy** (`localStorage['fk.bal']` holding what was typed), which `later()` writes in the
+  same tick as the recalculation. No sleeps in the Task 3 tests (the older helpers are unchanged).
+
+### Release 2, Task 4 (zero and close-range module)
+
+- **A crossing within 2 yd of the zero is the zero itself; `other` is the first sign change farther than that, rounded to a whole
+  yard.** With the 0.005 in no-sign band, a path that only touches the line of sight at its top gives no sign change at all, so
+  `other` is null and `past` false. Cost if wrong: a zero a yard or two either side of a true crossing hides a real second
+  crossing; on the M193 load the apex zero is about 111 yd, so it affects only a narrow band of zeros.
+- **Signs are taken between one signed sample and the next signed one**, skipping the samples inside the 0.005 in band, and the
+  crossing is interpolated linearly between those two samples. Cost if wrong: a path that lingers inside the band is placed up to
+  a few yards off; the displayed `other` is a whole yard anyway.
+- **`path[i]` is `null` (never a number, never missing) where the solver gave no row for `YDS[i]`;** `close()` leaves out rows the
+  solver did not give. Cost if wrong: a sheet prints a dash where a shorter list might have been expected.
+- **`peak` is the highest sampled whole yard** from 1 to the last row, not an interpolated apex (error well under 0.01 in at the
+  top, where the path is flat). It can sit at the last yard when the bullet is still rising there. Cost if wrong: a peak
+  distance off by under a yard.
+- **A load's `zero` is ignored by `compare` (each column uses its own); `close` uses the load's own.** The load's `wind`, `clock`
+  and `angle` are never passed on. Cost if wrong: none seen, the sheets are level and windless by the brief.
+- **The stops-short test uses G1, bc 0.01, 400 fps, not the brief's bc 0.05, 400 fps.** With the preset's G7 model that bullet
+  still reaches 500 yd (500 rows), so it would not test the short-rows path. G1 bc 0.01 gives 174 rows (zero 25), short of the
+  175 yd row of `YDS`. Cost if wrong: none; the premise is asserted inside the test.
+- **The `other` and peak example numbers in the tests are ranges, not the planner's single figures,** and the 100 yd zero is not
+  used for the peak test: M193 (3,301 fps, 2.6 in sight) at 100 yd peaks only 0.06 in above the line, 0.01 over the 0.05 in floor.
+  Cost if wrong: none.
+
+### Release 2, Task 5 (Tools block and the Close-range holds sheet)
+
+- **With no sight height (blank or 0) the sheet still prints the solver's own holds, row for row, and the line above the table reads
+  "This profile has no sight height, so these holds assume the sight sits on the bore. Tap Edit and set it."** (controller ruling: the
+  brief's "every hold reads zero" was wrong, the solver is right; the sheet never replaces its figures, e.g. "Hold 0.5 in low" at
+  25 yd for a 100 yd zero). Cost if wrong: the wording differs from the approved plan.
+- **The sight line for a missing sight height reads "Sight height not set · zero 100 yd"** (the brief gave the wording only for a
+  sight height). Cost if wrong: one line of wording.
+- **Sight height is printed without trailing zeros ("2 in", "2.6 in", at most two decimals) and the zero with at most one decimal.**
+  Cost if wrong: a profile with a 2.0 in sight reads "2 in".
+- **A sight height of 0 counts as "no sight height"** (the editor allows 0 to 6 in, and BAL.solve treats 0 as nothing). Cost if wrong:
+  a person who really means a bore-height sight gets the "Tap Edit and set it" line.
+- **The reopen in the Back/Close test sends the click without coordinates.** The sheet's double-tap guard (sheet.js) swallows a second
+  tap at the same spot for 350 ms after a close; waiting that out would need a fixed sleep. Cost if wrong: none for the app; the real
+  tap is covered by every first open.
+- **The Tools block's buttons are full width, one per row, 48 px high** (brief did not give a layout). Compare zeros stays `hidden`
+  until Task 6. Cost if wrong: a rearranged block.
+- **#bWind's pinned top is 525.17 px** (360 x 640, default profile, measured in a v7.11 build of f74c5db made outside this tree),
+  compared to within 0.5 px.
+
+### Release 2, Task 6 (Compare zeros sheet)
+
+- **The five summary sentences replace the brief's three** (controller ruling): both crossings and a peak; a crossing and no peak;
+  `past` (no "Highest" part, since the peak of a still-rising path is only yard 500); touches only; and no crossing before the bullet
+  runs out of reach. The highest point is printed to one decimal ("0.1 in" for the 0.06 in of M193's 100 yd zero). Cost if wrong: wording.
+- **`near the apex` sweep passed unchanged: `src/bal-zero.js` is not touched.** For M193 (apex zero 111.5) and `p308` (apex zero 70),
+  zeros from 15 yd below to 15 yd above never reported themselves as `other`, and every reported `other` put the path within 0.15 in
+  of the line at the original zero. Cost if wrong: a zero within a few yards of the apex could list itself as its own other crossing.
+- **Columns run smallest zero first, not in the order ticked.** Cost if wrong: a person who ticked 200 then 50 sees 50 on the left.
+- **Other (yd) is kept to a tenth of a yard; blank is simply not used.** So 100.04 is the 100 yd box (counts once) and 87.25 reads
+  87.3. A browser "bad input" (a lone "1e"), and anything under 10 or over 300, give "Enter a zero from 10 to 300 yd." and the field is
+  left out; the ticked boxes are still compared. Cost if wrong: a zero typed to more than a tenth is rounded.
+- **A typed zero that would be a fourth is left out with "Up to three at a time."** (the brief only refuses the fourth tick). Cost if
+  wrong: the person has to untick one before the typed value counts.
+- **When Other is refused and fewer than two boxes remain, the Other message wins over "Pick two or three zeros."** Cost if wrong: one
+  message instead of the other.
+- **The profile's own zero opens in Other only inside 10 to 300 yd.** A zero of 5 yd or 400 yd opens with 50 and 200 only (the field
+  would open already refused). Cost if wrong: that profile's own zero is not on the table until typed into Other and refused anyway.
+- **Added "Current zero: N yd" under the profile name, and a "Zero set to N yd" line inside the sheet beside the toast.** The toast is
+  a fixed element under the modal sheet's layer, so on a phone it would not be seen while the sheet is open; the line says the same
+  thing where the person is looking. Cost if wrong: one extra line.
+- **Use this zero saves `{ ...FK.bal.selected(), zero }` read at the moment the question is answered, after the question's history
+  step has landed, and does nothing if the sheet closed, the profile changed or is no longer the person's own.** Pressing Use or Set
+  zero twice asks once and saves once. A refused save leaves the sheet, the picks and the buttons as they were (no "Zero set" line).
+  Cost if wrong: none seen.
+- **The table scrolls sideways with the "Swipe sideways" cue only when it is wider than its box** (measured on open, on a pick and when
+  the box or table resizes). At 360 px, normal text, three zeros fit; with enlarged text the cue shows. Cost if wrong: none.
+- **Close-range sheet, Task 5 review items:** an empty `rows` with no error shows "No holds to show for this profile." and no table;
+  the sight-height line is hidden when the profile is unusable (the message replaces the table). Cost if wrong: wording.
+- **The Compare zeros cue is `.zs-cue`, not `.sv-swipe`.** `test_dope_table_scrolls_with_the_cue_when_wide` finds the dope card's cue by
+  the class `.sv-swipe` alone, so a second element with that class (even hidden) would break it. Same text and look. Cost if wrong: none.
+- **Review fixes for Task 6.** Other is range-checked on what was typed (9.99 and 300.01 are refused), then kept to a tenth. The
+  profile's current zero is recognised the way the sheet shows it (one decimal, one helper for picks, labels and the test): no Use button
+  for that column, and the column is worked with the stored zero itself, nothing written (a stored 100.04 opens with the 100 box ticked;
+  87.25 opens as Other 87.3). Cost if wrong: a person who really wants to round 87.25 to 87.3 must do it in the profile editor. The sheet
+  is `inert` from Yes until the question's history step has landed (cleared on every exit), so a Close tap cannot drop the confirmed
+  save; Back or Escape in that window still closes the sheet (sheet.js is not changed) and the save is then dropped. The "Zero set"
+  note is a hint-coloured line (class `zs-note`), errors keep the error colour; after a save focus moves to the sheet title.
+
+### Release 2, Task 7 (zero comparison chart)
+
+- **The chart was kept after the image-first review (outcome recorded in the final review, item D2).** The picture-only review was
+  held on the chart as first built (commit c1564dd). Set 25/50/200 was read with no wrong answer, day and night; set 36/100 had one
+  uncertain reading (whether the 100 yd path crosses again or only touches: it rises 0.06 in), one doubtful answer against a pass
+  mark of two, so the chart stayed. The scale, caption and grid were changed afterwards (72f9e7d) and re-checked by a reviewer from
+  new screenshots, not by a second picture-only review. Cost if wrong: the pictures that were graded are not the chart that ships.
+- **Drawn in CSS pixels, not scaled.** The SVG is as wide as its box and its viewBox is that width, so 13 px text is 13 px on the phone
+  (never smaller than 12). Font size is taken from the SVG's own computed size (13/16 of it), so enlarged text enlarges the chart's
+  text and the margins and height grow with it; the drawing is redrawn on resize and when the box resizes. Cost if wrong: a redraw
+  on every resize of the sheet.
+- **Axis is 0 to 300 yd; paths start at their 5 yd point.** The 25 yd and 36 yd zeros cross the line of sight again beyond 300 yd
+  (425 and 326 yd for M193), so on the chart they do not visibly cross again; the table and summary lines carry the figure. Cost if
+  wrong: none, the table below has it.
+- **Vertical range is the lowest and highest path value widened to whole inches, always including 0.** Labels: the lowest inch, 0 and
+  the highest inch (the highest carries "in"). When these would touch (a 10 yd zero climbs past 50 in) they are kept a row apart, so
+  a label can sit a few pixels off its level; the grid lines mark the true levels. Cost if wrong: a label a few pixels off.
+- **Dash patterns follow the order of the columns (smallest zero first): solid, long dash, dot.** All in the text colour; the dot is
+  3 px wide with round caps, the others 2.5 px. A column keeps its pattern as zeros are added or removed. Cost if wrong: a zero's
+  pattern changes when another is ticked.
+- **Labels read "25 yd" (not "25 yd zero") at the path's last point + 8 px, and a label moved apart from its path end gets a thin
+  leader.** A path that ends before 300 yd (bullet out of reach) is labelled where it ends. Cost if wrong: none seen.
+- **"line of sight" is placed above or below the rule wherever the fewest path points run through it;** all text has a halo in the
+  sheet's colour so a line behind a letter never cuts it. Cost if wrong: the label may sit over a line at some zeros (still readable).
+- **No colour but the text colour and `--muted`;** grid lines are `--muted` at 40 percent. In night mode they are dim red on black
+  (decoration only; every figure is also in the table). Cost if wrong: faint grid at night.
+- **Task 7 review fixes.** (a) The scale gets one more whole inch on a side where a path is within half an inch of the frame (25/50/200
+  now reads +13 to -7). (b) The lowest label carries "in" too. (c) Room guard: the plot keeps at least a text row plus 8 px between
+  the line of sight and the top and bottom, widening the scale by whole inches until it does (a 10 yd zero that climbs past 50 in shows
+  to about -7), so the "line of sight" caption has a free side. Cost if wrong: a few more inches of empty scale for lopsided paths.
+  (d) The caption takes the right half of the rule first, then the left, above or below, whichever is furthest from every path point
+  and label (12 px counts as far enough). With the .308 profile and with enlarged text some zero sets leave no clear place; the caption
+  then takes the best one and its halo keeps it legible. Pinned clear of every path for five zero sets, day and night, with M193 at
+  normal text size only. Cost if wrong: a caption crossed by a line at those combinations. (e) A column with no reachable point has no
+  path but keeps its label at the line of sight on the right edge; a column with one point is a dot. (f) Night grid lines are at 70
+  percent `--muted` (contrast on the sheet at least 1.5:1 in both modes); day is unchanged at 40 percent.
+
+### Release 2, final review
+
+Three independent final reviews (maths and sources, whole-branch code, a tester driving the built app); the controller ruled on each
+finding and one fix wave carried them out. Each ruling with its cost if wrong.
+
+- **A1. Spin drift is measured from the zero.** `spinIn(x) = sign x (drift(tof_x) - drift(tof_zero) x x / zero)`, one pure function,
+  `BSPIN.fromZero`; `tof_zero` is the same solve's row at the profile's zero (always among the solved ranges). Without that row spin
+  drift is not applied and the line reads "Spin drift not included. Coriolis is not included." The .308 (G7 0.25, 2,600 fps, 1:10,
+  1.24 in, 100 yd zero, standard air) now reads 0.137 mil at 600 yd and 0.327 mil at 1,000 yd (was 0.162 and 0.352); a 300 yd zero
+  shows no windage at 300 yd with no wind. Inside the zero the share is a fraction of an inch to the other side. With a short zero it rounds
+  away (0.026 mil for a 100 yd zero); with a long zero it does not: a 300 yd zero shows "R 0.1 mil, 1 click" at 25, 50 and 75 yd
+  with no wind (0.073 mil, about 0.07 in at 25 yd). That is the formula working as ruled, and the card and its sentence agree. No opened source says whether solvers reference spin drift to the zero; this follows how the rifle is zeroed
+  and how elevation is already treated. Cost if wrong: a constant angle of drift(zero)/zero (0.026 mil for a 100 yd zero, 0.073 mil
+  for 300 yd) too little at every range.
+- **A2. No spin drift for a bullet that leaves the muzzle below the speed of sound in today's air** (`mv x 0.3048 < res.atm.c`). The
+  line reads "Spin drift not included: the formula is for supersonic bullets. Coriolis is not included." Rows that slow below Mach
+  1.2 downrange keep theirs, and the transonic note then says the spin drift there is outside what the formula was checked for.
+  Cost if wrong: a subsonic load (0.1 mil at 100 yd in the maths review's example) gets no estimate at all; downrange transonic
+  rows keep an estimate the sources do not support (the .308 at 1,050 yd carries 14 in).
+- **A3. The figure is called an estimate** ("Windage includes an estimate of spin drift (...)", "The dope card includes an estimate
+  of spin drift (...)"). The Sniper's Hide table, re-opened 2026-11-24, runs from about 2 % under to 44 % over the independent
+  drifts it prints (McCoy, PRODAS, two drift firings); on the .308 load that is up to about 0.05 mil at 600 yd and 0.11 mil at
+  1,000 yd too much. The five Litz rows in the fixture are the formula's own outputs and check arithmetic only. Cost if wrong: the
+  user is told it is an estimate but not by how much.
+- **A4. An unstable grade is said under the answer card** as well as in the footer: "By the Miller formula this bullet is not
+  stable in this twist (stability X): treat every figure here as doubtful." Fixer's call: it is added on the out-of-reach message
+  too ("Bullet doesn't reach that range with these inputs. By the Miller formula ..."), since the dope card still shows figures.
+  Cost if wrong: a longer card line for an unstable load.
+- **A5. The missing-fields line says where to add them**: own profile "add ... to the profile in Edit."; built-in load "add twist,
+  bullet length and bullet diameter to a profile of your own (tap Edit, then Save as new profile)." The built-in text is built
+  from the same list, so it reads exactly that for every built-in (none carries the three fields). Cost if wrong: wording only.
+- **A6. The dope card key explains the Wind columns** when spin drift is applied and the Drift column is shown: "... The Wind
+  columns show the side to dial or hold, which is the opposite side." The answer card is unchanged (see "For Jordan"). Cost if
+  wrong: wording only.
+- **A7. A missing or 0 sight height is said on the main screen**: "No sight height set: figures assume the sight sits on the bore.
+  Tap Edit." (`#bNoSH`, after `#bSight`). Profiles with a sight height show what they showed before. Cost if wrong: one more line
+  for a profile that really means a bore-height sight.
+- **B1. Two length messages**: under 2 calibers "Bullet length looks too short for that diameter. Check both numbers."; over 7
+  "Bullet length looks too long for that diameter. Measure the bullet, not the cartridge." Focus stays on the length. Cost: wording.
+- **B2. Unreadable text in the three new number fields is refused** ("Twist must be a number.", "Bullet length must be a number.",
+  "Bullet diameter must be a number.", focus on that field), checked before the ranges, in field order. The older number fields
+  are not changed (see "For Jordan"). Cost if wrong: none seen; a stray "e" can no longer drop spin drift unseen.
+- **B3. No tip-length correction in this release.** The editor's "not stable" line adds "A polymer-tipped bullet reads low here."
+  Cost if wrong (maths review): for a tipped bullet the drift reads low by about 0.04 to 0.09 mil at 1,000 yd (tips of 0.10 to
+  0.20 in on the .308 load); a tipped bullet graded under 1.0 loses its drift entirely, about 0.2 mil at 1,000 yd, with a "not
+  stable" message the paper says is often false for tipped bullets. The built-in 6.5 Creedmoor ELD-M is a tipped bullet.
+- **C1. Compare zeros has eight ruled sentences.** `BALZ.compare` columns gain `last`, the last whole yard solved (500 when the
+  bullet reaches the limit; null when nothing was solved, which reads as out of reach). A crossing beyond the zero is "crosses ...
+  again at X yd", one before it "first crosses the line of sight at X yd" (each with "Highest P in above it, at Y yd." when there
+  is a peak); then past 500 yd, out of reach (last under 500), "crosses the line of sight only there" (no sight height: the path
+  starts on the line and only comes down through the zero), and "touches the line of sight there and stays below it". The only
+  change in `src/bal-zero.js`. Cost if wrong: wording; near the apex zero the 0.005 in band still decides between "touches" and a
+  crossing a few yards away (ruled in Task 4).
+- **C2. Compare zeros shows the no-sight-height line** above its chart and table, from the one constant both sheets use: "This
+  profile has no sight height, so these figures assume the sight sits on the bore. Tap Edit and set it." ("figures", not "holds",
+  in both). Hidden when there is no table (the profile message says what is wrong). Cost: wording.
+- **C3. The close-range note** is "Level, no wind. Inside the zero the bullet strikes low, so the hold is high." only with a sight
+  height; without one "Level, no wind." Cost: wording.
+- **C4. After "Use this zero"** the sheet's note reads "Zero set to N yd. Update the zero conditions in Edit after you re-zero." when
+  the profile carries zero conditions, otherwise "Zero set to N yd." (with the ruled full stop; before, the note had none). The toast
+  stays "Zero set to N yd". Cost: wording.
+- **C5.** The chart's label tests and one chart-equals-table case now run under the default .308 as well; the caption is kept off
+  every path only for M193 at normal text size. Cost: none to the app.
+- **D3.** See the corrected stability-example ruling above and `docs/content-review.md`: Josef's forward example (1.378; 1.21 at
+  -20 C) is now checked. The pressure factor is still checked against no printed number.
+- **Fixer's calls.** (a) The footer line's order when more than one thing holds: not stable, then subsonic, then no zero row, then
+  included, then what is missing. A subsonic bullet that is also graded not stable is told it is not stable. (b) A spin share of
+  -0 (left twist at the zero) is stored as 0, so nothing can print "-0.0". (c) The fixture file was rewritten by a JSON tool
+  (two-space indent, one key per line); no value changed except the added rows and notes. Cost if wrong: none seen.
+
+Planner calls that were missing from this ledger (final review, D1):
+
+- **"Use this zero" keeps the zero conditions (`zeroAtm`) and the corrected velocity (`mv0`)**; it writes only the zero. Cost if
+  wrong: the zero conditions describe the old zero until the person updates them (at most about 0.05 mil at 800 yd in the code
+  review's probe); C4's note now tells them to.
+- **Ranges for the new fields: twist 3 to 30 in per turn, bullet length 0.2 to 3 in, diameter 0.17 to 0.6 in.** Cost if wrong: a
+  real 1:2.5 twist or a .700 bullet cannot be entered.
+- **A bullet is 2 to 7 calibers long** (with both given; inclusive, 1e-9 allowance). Cost if wrong: a very short or very long real
+  bullet is refused, or a slightly mismeasured one is accepted.
+- **No tip-length correction** (B3 above, with its cost).
+- **Compare zeros' Other field takes 10 to 300 yd.** Cost if wrong: a 5 yd or 400 yd zero cannot be compared.
+
+#### For Jordan
+
+- The answer card shows the windage hold's letter ("L 0.2 mil") beside the sentence's drift side ("drift 3.5 in right"): v7.10's
+  convention, kept; the dope card key now explains the Wind columns (A6). Your call whether the card should say so too.
+- The older number fields in the profile editor (weight, velocity, sight height, zero and the others) still save unreadable text
+  such as "175e" as blank, with no message. Only the three new fields refuse it in this release.
+- Back or Escape in the instant between Yes and the save in "Use this zero" still drops the change; fixing it needs `src/sheet.js`.
+- The chart's "line of sight" caption may touch a path under the .308 or with enlarged text.
+- The spin drift estimate runs from about 2 % under to 44 % over the measured drifts its source prints: up to about 0.05 mil at
+  600 yd and 0.11 mil at 1,000 yd on the .308 test load (A3).
+- Plastic tips: no correction; drift reads low by about 0.04 to 0.09 mil at 1,000 yd, and a tipped bullet graded under 1.0 loses
+  about 0.2 mil at 1,000 yd entirely (B3). The built-in 6.5 Creedmoor ELD-M is tipped.
+- **Found by the re-check of the final fixes (2026-11-24), left as they are:**
+  - With a long zero the screen shows a small windage hold at close range with no wind (300 yd zero: "R 0.1 mil, 1 click" at 25 to
+    75 yd). It is real by the model (the sights carry the spin drift of the zero range) but it is a fraction of an inch. Say if you
+    would rather the app show no windage inside the zero.
+  - Typing unreadable text such as "0.3e" into an EMPTY twist, length or diameter field and then pressing Cancel or Back closes the
+    editor without the "Discard?" question (the browser reports the field as blank). Save still refuses it.
+  - A profile graded "not stable" carries no stability warning on the Close-range holds and Compare zeros sheets (the main screen
+    and the editor do).
+  - On a message path (bad range, wind, incline or conditions) the line under the dope card says only "Spin drift not included."
+    without the reason.
+  - The time of flight to the zero used for spin drift is taken in today's air and on the shot's incline, not the zero's own
+    conditions. The difference is far below a click.
+
+## Phone check for release 2 (v7.12)
+
+Nothing in this release has been on a real phone or beside a real rifle. Spin drift is an estimate from a formula that one of its
+own sources says tends to over-predict (from about 2 % under to 44 % over measured values, up to about 0.1 mil at 1,000 yd).
+
+Everyone:
+1. Settings says "Version 7.12"; the rifle profiles from before the update are still there and read as they did (default .308:
+   500 yd is U 3.5 mil).
+2. A built-in load: the line under the dope card says spin drift is not included and that you add twist, bullet length and bullet
+   diameter to a profile of your own.
+3. Edit your own profile: "Barrel and bullet (for spin drift)". With the keyboard up, the field you are typing in is visible; the
+   stability line appears once twist, length and diameter are in. Bullet length is the bullet alone, not the cartridge.
+4. With those filled in and the wind at 0: no windage at the range the rifle is zeroed at; a small one beyond it. For a .308 with a
+   1:10 right-hand twist and a 100 yd zero expect about L 0.1 mil at 600 yd and L 0.3 mil at 1,000 yd.
+5. **With a rifle, in still air:** compare that windage with what the rifle really needs at 600 yd and beyond. This is the only
+   real test of the spin drift figures.
+6. Dope card with spin drift on: the Drift column carries R or L; the Wind columns show the side to dial, the opposite side; the key
+   says so. Readable in night mode?
+7. The answer card can read "L 0.2 mil" beside "drift 3.5 in right" (dial left because the bullet goes right). Say if that reads
+   wrong to you; changing it is your call.
+8. Tools, Close-range holds: on paper at 7 and 25 yd with an AR, do the holds match? They depend on the sight height being right.
+9. Tools, Compare zeros: the chart outdoors, day and night: can you tell the lines apart? Do the sentences under the table match
+   what you know of a 50 yd and a 100 yd zero at 25 and 200 yd?
+10. "Use N yd zero": read the question, answer Yes; the note appears, the main screen shows the new zero. Then press Back with the
+    sheet open, and again with the question open.
+11. A profile with no sight height: the main screen says "No sight height set"; both tools say it too.
+12. On the smallest phone in the group: the Tools buttons under the dope card are reachable and both sheets' Close buttons are on
+    screen, also with large text.
+13. **iPhone:** both tool sheets show whole with Close above the home bar; the four new editor fields take a decimal point; the
+    chart draws.

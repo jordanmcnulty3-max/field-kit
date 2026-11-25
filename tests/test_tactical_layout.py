@@ -323,7 +323,7 @@ def test_tactical_headings_match_the_survival_home_heading(page, app_url, night)
     go(page, '/tactical/ballistics')
     page.wait_for_function('FK.view() === "ballistics"')
     heads = page.locator('#view-ballistics h2')
-    expect(heads).to_have_text(['Conditions', 'Dope card'])
+    expect(heads).to_have_text(['Conditions', 'Dope card', 'Tools'])
     for i in range(heads.count()):
         h = heads.nth(i)
         h.evaluate('(e, i) => e.setAttribute("data-t12", i)', i)
@@ -342,7 +342,7 @@ def test_tactical_headings_match_the_survival_home_heading(page, app_url, night)
     go(page, '/tactical/ballistics')
     page.wait_for_function('FK.view() === "ballistics"')
     tops = page.evaluate("""() => [...document.querySelectorAll('#view-ballistics h2')].map(h => getComputedStyle(h.parentElement).marginTop)""")
-    assert tops == [gap] * 2
+    assert tops == [gap] * 3
 
 
 def test_ballistics_sections_have_clear_space_above_like_the_home(page, app_url):
@@ -351,7 +351,7 @@ def test_ballistics_sections_have_clear_space_above_like_the_home(page, app_url)
       let prev = h.parentElement.previousElementSibling;
       while (prev && !prev.getBoundingClientRect().height) prev = prev.previousElementSibling;
       return h.getBoundingClientRect().top - prev.getBoundingClientRect().bottom; })""")
-    assert len(gaps) == 2 and all(g >= 24 for g in gaps), gaps
+    assert len(gaps) == 3 and all(g >= 24 for g in gaps), gaps
 
 
 def test_ballistics_fields_and_their_order(page, app_url):
@@ -363,11 +363,12 @@ def test_ballistics_fields_and_their_order(page, app_url):
     assert got == [
         ['Conditions', ['bCondBtn', 'bTemp', 'bAlt', 'bPress', 'bRH']],
         ['Dope card', ['bMax', 'bStep']],
+        ['Tools', ['bClose', 'bZeros']],
     ]
     ids = page.evaluate("[...document.querySelectorAll('#view-ballistics [id]')].map(e => e.id)")
-    # the final drive added the load line (bLoad), the built-in line (bStart) and the dope card's key and transonic note
-    assert ids == ['bProfile', 'bEdit', 'bLoad', 'bSight', 'bStart', 'bZeroLine', 'solution', 'solElev', 'solWind', 'solSub', 'bAll', 'bRange', 'bAngle', 'bWind',
-                   'bClock', 'bCond', 'bCondBtn', 'bCondFields', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dopeCue', 'dope', 'dopeKey', 'dopeTrans']
+    # the final drive added the load line (bLoad), the built-in line (bStart) and the dope card's key and transonic note; Ballistics 2 made the spin drift line (bSpin) a named element; Ballistics 2 added the Tools block (Close-range holds, Compare zeros) under the dope card, and the no-sight-height line (bNoSH)
+    assert ids == ['bProfile', 'bEdit', 'bLoad', 'bSight', 'bNoSH', 'bStart', 'bZeroLine', 'solution', 'solElev', 'solWind', 'solSub', 'bAll', 'bRange', 'bAngle', 'bWind',
+                   'bClock', 'bCond', 'bCondBtn', 'bCondFields', 'bTemp', 'bAlt', 'bPress', 'bRH', 'bMax', 'bStep', 'dopeCue', 'dope', 'dopeKey', 'dopeTrans', 'bSpin', 'bClose', 'bZeros']
 
 
 # ---------- Ballistics behaviour ----------
@@ -433,7 +434,7 @@ def test_ballistics_text_is_readable(page, app_url, night):
     assert weak == []
     page.evaluate("document.querySelector('#bProfile').scrollIntoView()")
     heads = [r for r in rows if r['el'].startswith('H2')]
-    assert len(heads) == 2
+    assert len(heads) == 3
     if night:
         assert page.evaluate("document.documentElement.dataset.theme") == 'night'
 

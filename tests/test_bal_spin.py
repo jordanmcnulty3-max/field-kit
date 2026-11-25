@@ -1,0 +1,228 @@
+"""Spin drift and gyroscopic stability (src/bal-spin.js) checked against the published formulas and worked examples.
+Sources are recorded in docs/content-review.md ("Ballistics") and tests/fixtures/spin_reference.json; decisions are in
+docs/ballistics-rulings.md ("Release 2")."""
+import json
+import math
+import os
+
+import pytest
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(HERE, 'fixtures', 'spin_reference.json')) as f:
+    REF = json.load(f)
+
+CASE = dict(w=175, dia=0.308, len=1.24, twist=10, mv=2600, temp=59, press=29.92)
+
+
+def miller(c):
+    """Courtney & Miller equation 1, written out here and not copied from the app."""
+    t, L = c['twist'] / c['dia'], c['len'] / c['dia']
+    return (30 * c['w'] / (t ** 2 * c['dia'] ** 3 * L * (1 + L * L))
+            * (c['mv'] / 2800) ** (1 / 3) * (c['temp'] + 460) / (59 + 460) * 29.92 / c['press'])
+
+
+@pytest.fixture
+def ready(page, app_url):
+    page.goto(app_url)
+    page.wait_for_function('typeof BSPIN !== "undefined"')
+    return page
+
+
+@pytest.fixture
+def ref():
+    return REF
+
+
+def js_stability(page, c):
+    return page.evaluate('c => BSPIN.stability(c)', c)
+
+
+def js_drift(page, sg, tof):
+    return page.evaluate('([a, b]) => BSPIN.drift(a, b)', [sg, tof])
+
+
+def test_stability_matches_every_source_example(ready, ref):
+    for ex in ref['stability']['examples']:
+        assert js_stability(ready, ex) == pytest.approx(ex['sg'], abs=0.01)
+
+
+def test_stability_matches_the_formula_written_out_in_python(ready):
+    # 175 gr, .308, 1.24 in, 1:10, 2600 fps, 59 F, 29.92 inHg; expected computed here, not copied from the app
+    assert js_stability(ready, CASE) == pytest.approx(miller(CASE), rel=1e-9)
+    odd = dict(CASE, w=62, dia=0.224, len=0.9, twist=7, mv=3000, temp=20, press=27.5)
+    assert js_stability(ready, odd) == pytest.approx(miller(odd), rel=1e-9)
+
+
+def test_colder_denser_air_lowers_stability(ready):
+    sg = lambda **k: js_stability(ready, dict(CASE, **k))
+    assert sg(temp=0) < sg(temp=59) < sg(temp=100)
+    assert sg(press=29.92) < sg(press=25.0)
+
+
+def test_stability_is_nan_for_bad_input(ready):
+    for key in ('w', 'dia', 'len', 'twist', 'mv', 'press'):
+        for bad in (0, -1, None, 'x', '8', 'Infinity'):
+            value = float('inf') if bad == 'Infinity' else bad
+            r = ready.evaluate('([k, v]) => BSPIN.stability(Object.assign({}, %s, { [k]: v }))' % json.dumps(CASE), [key, value])
+            assert r is None or (isinstance(r, float) and math.isnan(r)), (key, bad, r)
+    # temperature: any finite number, zero and below included; but not a missing or non-number one
+    assert js_stability(ready, dict(CASE, temp=-40)) > 0
+    assert js_stability(ready, dict(CASE, temp=0)) > 0
+    assert ready.evaluate('c => Number.isNaN(BSPIN.stability(Object.assign({}, c, { temp: "59" })))', CASE)
+    assert ready.evaluate('c => Number.isNaN(BSPIN.stability(Object.assign({}, c, { temp: null })))', CASE)
+
+
+def test_drift_matches_every_source_example(ready, ref):
+    for ex in ref['drift']['examples']:
+        assert js_drift(ready, ex['sg'], ex['tof']) == pytest.approx(ex['inches'], abs=0.05)
+
+
+def test_drift_is_never_negative_and_is_nan_for_bad_input(ready):
+    assert js_drift(ready, 1.5, 1.0) > 0
+    for bad in (0, -1, 'x', '2'):
+        assert ready.evaluate('([a, b]) => Number.isNaN(BSPIN.drift(a, b))', [bad, 1.0]), bad
+        assert ready.evaluate('([a, b]) => Number.isNaN(BSPIN.drift(a, b))', [1.5, bad]), bad
+    for js in ('BSPIN.drift(null, 1)', 'BSPIN.drift(1.5, null)', 'BSPIN.drift(Infinity, 1)', 'BSPIN.drift(1.5, Infinity)',
+               'BSPIN.drift(NaN, 1)', 'BSPIN.drift()'):
+        assert ready.evaluate('Number.isNaN(%s)' % js), js
+    for sg in (0.5, 1.0, 3.0):
+        assert ready.evaluate('([a]) => BSPIN.drift(a, 0.5) >= 0', [sg])
+
+
+def test_grade_uses_the_source_thresholds(ready, ref):
+    s = ref['stability']
+    grade = lambda sg: ready.evaluate('sg => BSPIN.grade(sg)', sg)
+    lo, hi = s['unstableBelow'], s['marginalBelow']
+    assert grade(lo - 0.001) == 'unstable'
+    assert grade(lo) == 'marginal'
+    assert grade(hi - 0.001) == 'marginal'
+    assert grade(hi) == 'stable'
+    assert grade(2.5) == 'stable'
+    assert grade(float('nan')) == 'unstable'
+
+
+GOOD = dict(w=175, mv=2600, twist=10, twistDir='R', blen=1.24, bdia=0.308)
+AIR = dict(temp=59, press=29.92)
+
+
+def js_of(page, profile, air=AIR):
+    return page.evaluate('([p, a]) => BSPIN.of(p, a)', [profile, air])
+
+
+def test_of_returns_sg_grade_and_sign(ready):
+    r = js_of(ready, GOOD)
+    assert r['sg'] == pytest.approx(miller(dict(CASE)), rel=1e-9)
+    assert r['grade'] in ('unstable', 'marginal', 'stable')
+    assert r['sign'] == 1
+
+
+def test_of_lists_what_is_missing_in_order(ready):
+    assert js_of(ready, {'mv': 2600}) == {'missing': ['twist', 'bullet length', 'bullet diameter', 'bullet weight']}
+    assert js_of(ready, {'mv': 2600, 'twist': 10}) == {'missing': ['bullet length', 'bullet diameter', 'bullet weight']}
+    assert js_of(ready, dict(GOOD, blen=0, w=None)) == {'missing': ['bullet length', 'bullet weight']}
+
+
+def test_of_left_twist_is_minus_one(ready):
+    assert js_of(ready, dict(GOOD, twistDir='L'))['sign'] == -1
+    assert js_of(ready, dict(GOOD, twistDir='R'))['sign'] == 1
+    assert js_of(ready, {k: v for k, v in GOOD.items() if k != 'twistDir'})['sign'] == 1
+
+
+def test_of_ignores_strings_and_negatives(ready):
+    r = js_of(ready, dict(GOOD, twist='8', blen=-1))
+    assert r == {'missing': ['twist', 'bullet length']}
+
+
+def test_of_without_a_usable_muzzle_velocity_is_missing_it(ready):
+    # after the four named items, in the same order rule; the list is the whole answer (no sg, no grade)
+    assert js_of(ready, dict(GOOD, mv=None)) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, dict(GOOD, mv=0)) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, dict(GOOD, mv=-5)) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, dict(GOOD, mv='2600')) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, {k: v for k, v in GOOD.items() if k != 'mv'}) == {'missing': ['muzzle velocity']}
+    assert js_of(ready, dict(GOOD, twist=None, mv=None)) == {'missing': ['twist', 'muzzle velocity']}
+    assert js_of(ready, {}) == {'missing': ['twist', 'bullet length', 'bullet diameter', 'bullet weight', 'muzzle velocity']}
+
+
+def test_of_with_unusable_air_is_an_empty_missing_list_never_a_nan(ready):
+    for air in (None, {}, dict(temp=59), dict(press=29.92), dict(temp=59, press=0), dict(temp=59, press=-3),
+                dict(temp='59', press=29.92), dict(temp=None, press=29.92)):
+        r = js_of(ready, GOOD, air)
+        assert r == {'missing': []}, (air, r)
+
+
+@pytest.mark.parametrize('sg,text', [(1.38, '1.3'), (1.4, '1.4'), (0.97, '0.9'), (1.0, '1.0'), (2.3, '2.3'), (2.4003, '2.4'),
+                                     (1.99999, '1.9'), (0.05, '0.0'), (12.34, '12.3')])
+def test_text_rounds_the_figure_down_to_one_decimal(ready, sg, text):
+    assert ready.evaluate('sg => BSPIN.text(sg)', sg) == text
+
+
+def test_text_is_empty_for_anything_that_is_not_a_finite_number(ready):
+    for js in ('NaN', 'Infinity', '-Infinity', 'null', 'undefined', '"2.4"'):
+        assert ready.evaluate('BSPIN.text(%s)' % js) == '', js
+
+
+def test_text_survives_binary_floating_error_at_exact_decimals(ready):
+    # every one-decimal value from 0.1 to 9.9 prints as itself, however the division that made it rounded
+    bad = ready.evaluate("""() => { const out = [];
+      for (let i = 1; i < 100; i++) { const v = i / 10; for (const x of [v, v * 1.0000000001 - 1e-12, +(v / 3 * 3).toPrecision(15)]) if (BSPIN.text(x) !== v.toFixed(1)) out.push([x, BSPIN.text(x)]); }
+      return out; }""")
+    assert bad == []
+
+
+# ---------- Spin drift measured from the zero (BSPIN.fromZero) ----------
+
+def litz(sg, tof):
+    return 1.25 * (sg + 1.2) * tof ** 1.83
+
+
+def from_zero(page, *a):
+    return page.evaluate('a => BSPIN.fromZero(...a)', list(a))
+
+
+def test_from_zero_is_exactly_zero_at_the_zero(ready):
+    for sg, tof, zero in ((2.4, 0.11, 100), (2.4, 0.38, 300), (1.2, 0.2, 36.5), (7.5, 1.4, 25)):
+        assert from_zero(ready, sg, tof, zero, tof, zero) == 0, (sg, tof, zero)
+
+
+def test_from_zero_is_the_old_drift_less_the_straight_line_through_the_zero(ready):
+    # .308-like figures: zero 100 yd at 0.1193 s, 600 yd at 0.8729 s, 1000 yd at 1.7611 s (expected worked out here)
+    for tof, yd in ((0.8729, 600), (1.7611, 1000)):
+        want = litz(2.4, tof) - litz(2.4, 0.1193) * yd / 100
+        assert from_zero(ready, 2.4, tof, yd, 0.1193, 100) == pytest.approx(want, rel=1e-12)
+        assert from_zero(ready, 2.4, tof, yd, 0.1193, 100) < js_drift(ready, 2.4, tof)
+
+
+def test_from_zero_is_negative_inside_the_zero(ready):
+    # 300 yd zero at 0.38 s; 150 yd at 0.18 s: the drift there is less than its share of the correction made at 300 yd
+    got = from_zero(ready, 2.4, 0.18, 150, 0.38, 300)
+    assert got < 0 and got == pytest.approx(litz(2.4, 0.18) - litz(2.4, 0.38) / 2, rel=1e-12)
+
+
+def test_from_zero_is_nan_for_bad_input_and_never_throws(ready):
+    good = [2.4, 0.87, 600, 0.12, 100]
+    for i in range(5):
+        for bad in (0, -1, None, 'x', '2', float('inf')):
+            a = list(good)
+            a[i] = 'Infinity' if bad == float('inf') else bad
+            r = ready.evaluate('a => { const v = a.map(x => x === "Infinity" ? Infinity : x); return Number.isNaN(BSPIN.fromZero(...v)); }', a)
+            assert r, (i, bad)
+    assert ready.evaluate('Number.isNaN(BSPIN.fromZero())')
+
+
+def test_josefs_forward_example_checks_the_velocity_and_temperature_factors(ready, ref):
+    """Josef's Stability Calculator prints a forward worked example (opened 2026-11-24): .308, 165 gr, 33 mm, 1:12, 2625 fps, Sg 1.378
+    in standard air and 1.21 at -20 C. Both rows are in the fixture as independent examples and are checked here to 0.01."""
+    rows = [e for e in ref['stability']['examples'] if e.get('independent') and e['w'] == 165]
+    assert sorted((e['temp'], e['sg']) for e in rows) == [(-4, 1.21), (59, 1.378)]
+    for e in rows:
+        assert e['mv'] != 2800 and e['len'] == pytest.approx(33 / 25.4, abs=1e-6)        # the velocity factor is not 1
+        assert js_stability(ready, e) == pytest.approx(e['sg'], abs=0.01)
+        assert miller(e) == pytest.approx(e['sg'], abs=0.01)
+
+
+def test_the_drift_reference_rows_are_recorded_and_show_the_estimate_running_high(ref):
+    refs = ref['drift']['reference']
+    over = [r['litz'] / r['inches'] - 1 for r in refs]
+    assert len(refs) == 4 and min(over) == pytest.approx(-0.018, abs=0.001) and max(over) == pytest.approx(0.435, abs=0.001)
+    assert 'arithmetic' in ref['drift']['examplesNote']

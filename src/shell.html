@@ -508,7 +508,45 @@ dialog.mk-sheet[open]{display:flex;flex-direction:column;overflow:hidden;padding
 .rf-true-btn{display:block;width:100%;margin-top:12px;min-height:48px;white-space:normal;padding:8px 16px}
 #rfForm .rf-true-out{margin-top:12px;font-size:16px;font-weight:600;color:var(--ink);overflow-wrap:anywhere}
 .rf-true-out:empty{display:none}
-#dlgList .mk-act{grid-template-columns:1fr}
+#dlgList .mk-act,#dlgClose .mk-act,#dlgZeros .mk-act{grid-template-columns:1fr}
+/* Ballistics Tools: the buttons under the dope card, one per row; the Close-range holds sheet (src/bal-tools.js). */
+.bal-tools{display:grid;gap:8px}
+.bal-tools .btn{width:100%;min-height:48px;white-space:normal}
+.bal-tools .btn[hidden]{display:none}
+#dlgClose .mk-body{padding-bottom:12px}
+.cl-name{margin:0 0 4px;font-size:16px;font-weight:600;overflow-wrap:anywhere}
+.cl-warn{color:var(--blaze);font-weight:600}
+#clWrap{margin-top:8px}
+#dlgClose .hint{margin:6px 0 0}
+/* Compare zeros: five tick boxes (each a 44 px label row), an Other field, the table, a line per zero and a Use button per zero. */
+#dlgZeros .mk-body{padding-bottom:12px}
+#dlgZeros .hint{margin:6px 0 0}
+.zs-picks{margin:12px 0 0;padding:0;border:0;min-width:0}
+.zs-picks legend{padding:0;margin:0 0 4px;font-size:14px;color:var(--muted)}
+.zs-ticks{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:0 8px}
+.zs-tick{display:flex;align-items:center;gap:10px;min-height:44px;min-width:44px;font-size:16px;font-weight:600;cursor:pointer}
+.zs-tick input{width:22px;height:22px;min-height:22px;flex:none;accent-color:var(--c)}
+#dlgZeros label.f{margin-top:8px}
+#zsWrap{margin-top:8px}
+/* The zero chart: paths are the text colour told apart by dashes; labels carry a halo in the sheet's own colour so a line behind a label
+   never cuts it. Sizes are set in the drawing code from the font size, so the text is real pixels. */
+.zs-chart{margin-top:12px}
+#zsSvg{display:block;max-width:100%;font-family:inherit}
+#zsSvg .zs-path{stroke:var(--ink)}
+#zsSvg .zs-los{stroke:var(--ink)}
+#zsSvg .zs-grid,#zsSvg .zs-hgrid{stroke:var(--muted);stroke-opacity:.4;stroke-width:1}
+#zsSvg .zs-dot{fill:var(--ink)}
+:root[data-theme="night"] #zsSvg .zs-grid,:root[data-theme="night"] #zsSvg .zs-hgrid{stroke-opacity:.7}
+#zsSvg .zs-lead{stroke:var(--ink);stroke-width:1}
+#zsSvg text{paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-linejoin:round}
+#zsSvg .zs-ax{fill:var(--muted)}
+#zsSvg .zs-lab{fill:var(--ink);font-weight:700}
+#zsCue{margin:8px 0 0;font-size:14px;font-weight:600;color:var(--c)}
+.rf-msg.zs-note{font-size:14px;color:var(--muted)}
+#zsLines{list-style:none;margin:8px 0 0;padding:0}
+#zsLines li{padding:8px 0;border-top:1px solid var(--line);font-size:15px;overflow-wrap:anywhere}
+#zsUse{display:grid;gap:8px;margin-top:8px}
+#zsUse .btn{width:100%;min-height:48px;white-space:normal}
 .mk-kinds{margin:12px 0;padding:0;border:0;min-width:0}
 .mk-kinds legend{padding:0;margin:0 0 6px;font-size:14px;color:var(--muted)}
 .mk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
@@ -1087,6 +1125,7 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       </div>
       <p class="bal-sight" id="bLoad"></p>
       <p class="bal-sight" id="bSight"></p>
+      <p class="bal-sight" id="bNoSH" hidden>No sight height set: figures assume the sight sits on the bore. Tap Edit.</p>
       <p class="bal-sight" id="bStart" hidden>Built-in figures are a starting point. Chronograph your rifle and save your own profile.</p>
       <p class="bal-sight" id="bZeroLine" hidden></p>
     </div>
@@ -1141,7 +1180,15 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <div class="tablewrap" tabindex="0" role="region" aria-label="Dope card table, scrolls both ways"><table id="dope"></table></div>
       <p class="hint" id="dopeKey" style="margin-top:8px"></p>
       <p class="hint" id="dopeTrans" style="margin-top:8px">† Below Mach 1.2 (transonic): less certain. Confirm these with real shots.</p>
-      <p class="hint" style="margin-top:8px">Spin drift and Coriolis are not included yet.</p>
+      <p class="hint" id="bSpin" style="margin-top:8px"></p>
+    </div>
+
+    <div class="block">
+      <h2 class="sv-cat">Tools</h2>
+      <div class="bal-tools">
+        <button type="button" class="btn ghost" id="bClose">Close-range holds</button>
+        <button type="button" class="btn ghost" id="bZeros">Compare zeros</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1280,6 +1327,15 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
       <label class="f">Station pressure (inHg)<input id="rfZPress" type="number" inputmode="decimal" step="0.01"></label>
       <p class="hint">Leave blank unless you have a true station reading. Weather reports and phones give pressure corrected to sea level.</p>
       <p class="hint" id="rfZHint">Zero conditions not set: assumed the same as today.</p>
+      <h3 class="rf-h">Barrel and bullet (for spin drift)</h3>
+      <label class="f">Twist (inches per turn)<input id="rfTwist" type="number" inputmode="decimal" step="0.1"></label>
+      <label class="f">Twist direction
+        <select id="rfTwistDir"><option value="R">Right</option><option value="L">Left</option></select>
+      </label>
+      <label class="f">Bullet length (in)<input id="rfBLen" type="number" inputmode="decimal" step="0.001"></label>
+      <label class="f">Bullet diameter (in)<input id="rfBDia" type="number" inputmode="decimal" step="0.001"></label>
+      <p class="hint">Bullet length is the bullet alone, from the maker's data or a caliper. For a polymer-tipped bullet the stability figure reads a little low.</p>
+      <p class="hint" id="rfStab" aria-live="polite" hidden></p>
       <div id="rfTruePart" hidden>
         <h3 class="rf-h">Correct from a real shot</h3>
         <p class="hint">Enter a distance and the elevation the rifle really needed there. Uses today's conditions from the Ballistics screen, a level shot and no wind.</p>
@@ -1362,6 +1418,48 @@ progress{width:100%;height:10px;accent-color:var(--c);margin-top:8px}
     <ul class="tl-list" id="tlList"></ul>
   </div>
   <div class="mk-act"><button type="button" class="btn ghost" id="tlClose">Close</button></div>
+</dialog>
+
+<dialog id="dlgClose" class="sheet mk-sheet" aria-labelledby="clTitle">
+  <div class="mk-body">
+    <h2 id="clTitle" tabindex="-1">Close-range holds</h2>
+    <p class="cl-name" id="clProfile"></p>
+    <p class="hint" id="clSight"></p>
+    <p class="hint cl-warn" id="clNoSight" hidden></p>
+    <p class="rf-msg cl-msg" id="clMsg" role="status" hidden></p>
+    <div class="tablewrap" id="clWrap"><table id="clTable"></table></div>
+    <p class="hint" id="clNote"></p>
+  </div>
+  <div class="mk-act"><button type="button" class="btn ghost" id="clClose">Close</button></div>
+</dialog>
+
+<dialog id="dlgZeros" class="sheet mk-sheet" aria-labelledby="zsTitle">
+  <div class="mk-body">
+    <h2 id="zsTitle" tabindex="-1">Compare zeros</h2>
+    <p class="cl-name" id="zsProfile"></p>
+    <p class="hint" id="zsNow"></p>
+    <fieldset class="zs-picks" id="zsPicks">
+      <legend>Zero ranges to compare</legend>
+      <div class="zs-ticks">
+        <label class="zs-tick"><input type="checkbox" id="zs25" value="25"><span>25 yd</span></label>
+        <label class="zs-tick"><input type="checkbox" id="zs36" value="36"><span>36 yd</span></label>
+        <label class="zs-tick"><input type="checkbox" id="zs50" value="50"><span>50 yd</span></label>
+        <label class="zs-tick"><input type="checkbox" id="zs100" value="100"><span>100 yd</span></label>
+        <label class="zs-tick"><input type="checkbox" id="zs200" value="200"><span>200 yd</span></label>
+      </div>
+      <label class="f">Other (yd)<input id="zsOther" type="number" inputmode="decimal"></label>
+    </fieldset>
+    <p class="rf-msg" id="zsMsg" role="status" hidden></p>
+    <p class="hint cl-warn" id="zsNoSight" hidden></p>
+    <div class="zs-chart" id="zsChart" hidden><svg id="zsSvg" role="img" focusable="false"></svg></div>
+    <p class="zs-cue" id="zsCue" hidden>Swipe sideways to see more columns</p>
+    <div class="tablewrap" id="zsWrap" tabindex="0" role="region" aria-label="Zero comparison table, scrolls sideways"><table id="zsTable"></table></div>
+    <p class="hint" id="zsKey">Inches above the line of sight; a minus means below. Level, no wind.</p>
+    <ul id="zsLines"></ul>
+    <div id="zsUse"></div>
+    <p class="hint" id="zsBuiltin" hidden>Built-in loads can't be changed. Tap Edit, set the zero range and save it as a new profile.</p>
+  </div>
+  <div class="mk-act"><button type="button" class="btn ghost" id="zsClose">Close</button></div>
 </dialog>
 
 <dialog id="dlgShape" class="sheet mk-sheet" aria-labelledby="shName">

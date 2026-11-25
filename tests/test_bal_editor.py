@@ -1,5 +1,6 @@
 """The rifle profile editor: load, the sight on it, and the conditions it was zeroed in."""
 import json
+import math
 
 import pytest
 from playwright.sync_api import expect
@@ -718,3 +719,360 @@ def test_the_editor_uses_the_screens_own_rules(page, app_url):
     page.click('#rfSave')
     expect(page.locator('#rfMsg')).to_have_text(f"Muzzle velocity must be between {rng['mv'][0]:,} and {rng['mv'][1]:,} fps.")
     assert page.evaluate('FK.balHost.zeroAir({ temp: 40, alt: 300, rh: 50 })') == {'temp': 40, 'alt': 300, 'press': 0, 'rh': 50}
+
+
+# ---------- Barrel and bullet (for spin drift) ----------
+
+SPIN_ONE = {**OWN, 'w': 175, 'mv': 2600}      # 175 gr, 2600 fps: with a .308, 1.24 in bullet the Miller figure is 2.4 at 1:10
+SHORT_MSG = 'Bullet length looks too short for that diameter. Check both numbers.'
+LONG_MSG = 'Bullet length looks too long for that diameter. Measure the bullet, not the cartridge.'
+
+
+def miller(w, dia, length, twist, mv, temp=59, press=29.92126):
+    """Courtney & Miller equation 1, written out here and not read from the app."""
+    t, L = twist / dia, length / dia
+    return (30 * w / (t * t * dia ** 3 * L * (1 + L * L)) * (mv / 2800) ** (1 / 3) * (temp + 460) / 519 * 29.92 / press)
+
+
+def reopen(page):
+    """Open the editor again once the sheet has really closed and its history step has landed (no sleep: the conditions are waited for)."""
+    page.wait_for_function('FK.sheet.top() === null')
+    page.evaluate('new Promise(done => FK.sheet.afterStep(done))')
+    page.evaluate('FK.bal.edit()')
+    expect(page.locator(DLG)).to_be_visible()
+
+
+def spin(page, twist=None, direction=None, blen=None, bdia=None):
+    for i, v in (('rfTwist', twist), ('rfBLen', blen), ('rfBDia', bdia)):
+        if v is not None:
+            page.fill('#' + i, str(v))
+    if direction:
+        page.select_option('#rfTwistDir', direction)
+
+
+def test_spin_fields_are_in_the_editor_in_their_place(page, app_url):
+    open_editor(page, app_url)
+    heads = page.evaluate("[...document.querySelectorAll('#dlgRifle h3.rf-h')].map(h => h.textContent)")      # as written, not as shown (capitals)
+    assert heads.index('Barrel and bullet (for spin drift)') == heads.index('Zero conditions') + 1
+    order = page.evaluate("""() => { const f = [...document.querySelectorAll('#rfForm h3, #rfForm input, #rfForm select')].map(e => e.id || e.textContent);
+      return f.slice(f.indexOf('rfZPress')); }""")
+    assert order[:6] == ['rfZPress', 'Barrel and bullet (for spin drift)', 'rfTwist', 'rfTwistDir', 'rfBLen', 'rfBDia']
+    assert 'Correct from a real shot' in order[6:]
+    assert page.locator('#rfTwistDir option').evaluate_all('o => o.map(x => [x.value, x.textContent])') == [['R', 'Right'], ['L', 'Left']]
+    for i in ('rfTwist', 'rfBLen', 'rfBDia'):
+        assert page.get_attribute('#' + i, 'type') == 'number' and page.get_attribute('#' + i, 'inputmode') == 'decimal'
+    assert ("Bullet length is the bullet alone, from the maker's data or a caliper. "
+            "For a polymer-tipped bullet the stability figure reads a little low.") in page.text_content(DLG)
+    assert page.input_value('#rfTwistDir') == 'R' and page.input_value('#rfTwist') == ''
+
+
+def test_spin_fields_save_and_reopen(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    spin(page, 8, 'L', 0.994, 0.224)
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    got = profiles(page)[0]
+    assert (got['twist'], got['twistDir'], got['blen'], got['bdia']) == (8, 'L', 0.994, 0.224)
+    assert list(got)[-4:] == ['twist', 'twistDir', 'blen', 'bdia']
+    reopen(page)
+    assert [page.input_value('#' + i) for i in ('rfTwist', 'rfTwistDir', 'rfBLen', 'rfBDia')] == ['8', 'L', '0.994', '0.224']
+
+
+def test_right_twist_stores_no_direction(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    spin(page, 8, 'L', 1.0, 0.308)
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['twistDir'] == 'L'
+    reopen(page)
+    page.select_option('#rfTwistDir', 'R')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    got = profiles(page)[0]
+    assert 'twistDir' not in got and got['twist'] == 8
+
+
+def test_blank_fields_are_removed_from_the_profile_and_each_is_independent(page, app_url):
+    full = {**SPIN_ONE, 'twist': 8, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308}
+    open_editor(page, app_url, profiles=(full,))
+    page.fill('#rfTwist', '')
+    page.fill('#rfBLen', '')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0] == {**SPIN_ONE, 'twistDir': 'L', 'bdia': 0.308}
+    reopen(page)
+    page.fill('#rfBDia', '')
+    page.select_option('#rfTwistDir', 'R')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0] == SPIN_ONE
+
+
+def test_a_profile_saved_without_spin_fields_stays_without_them(page, app_url):
+    open_editor(page, app_url)
+    page.fill('#rfBC', '0.35')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0] == {**OWN, 'bc': 0.35}
+
+
+def test_save_as_new_from_a_built_in_load_carries_the_spin_fields_typed(page, app_url):
+    open_editor(page, app_url, select='p308')
+    assert [page.input_value('#' + i) for i in ('rfTwist', 'rfBLen', 'rfBDia')] == ['', '', '']
+    spin(page, 10, None, 1.24, 0.308)
+    page.click('#rfSaveNew')
+    expect(page.locator(DLG)).to_be_hidden()
+    got = profiles(page)[-1]
+    assert (got['twist'], got['blen'], got['bdia']) == (10, 1.24, 0.308)
+    assert [k for k in ('twist', 'blen', 'bdia') if k in page.evaluate('FK._test.presets().find(p => p.id === "p308")')] == []
+
+
+def test_editor_refuses_a_length_wrong_for_the_diameter(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    for length, msg in (('0.5', SHORT_MSG), ('2.3', LONG_MSG)):   # under 2 and over 7 calibers of .308
+        spin(page, 10, None, length, 0.308)
+        refuse(page, msg, 'rfBLen')
+    for length, msg in (('0.3', SHORT_MSG), ('1.6', LONG_MSG)):   # and of .224 (the tester's 0.3)
+        spin(page, 10, None, length, 0.224)
+        refuse(page, msg, 'rfBLen')
+    page.fill('#rfBDia', '0.308')
+    spin(page, None, None, '1.24')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['blen'] == 1.24
+
+
+def test_editor_refuses_values_out_of_range(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    for field, bad, text in (('rfTwist', '2', 'Twist must be between 3 and 30 inches per turn.'),
+                             ('rfTwist', '31', 'Twist must be between 3 and 30 inches per turn.'),
+                             ('rfBLen', '0.1', 'Bullet length must be between 0.2 and 3 in.'),
+                             ('rfBLen', '3.5', 'Bullet length must be between 0.2 and 3 in.'),
+                             ('rfBDia', '0.1', 'Bullet diameter must be between 0.17 and 0.6 in.'),
+                             ('rfBDia', '0.7', 'Bullet diameter must be between 0.17 and 0.6 in.')):
+        page.fill('#' + field, bad)
+        refuse(page, text, field)
+        page.fill('#' + field, '')
+    assert profiles(page) == [SPIN_ONE]
+    page.fill('#rfTwist', '3'); page.fill('#rfBDia', '0.6'); page.fill('#rfBLen', '3')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()
+
+
+SHOT_LOAD = {**SPIN_ONE, 'bc': 0.243, 'model': 'G7'}
+
+
+def work_out(page, mv_true=2550, yd=600):
+    """Type the elevation (mil) the load would need at yd if it left the muzzle at mv_true, and press Work it out."""
+    from .test_bal_true import shot
+    page.fill('#rfTrueYd', str(yd))
+    page.select_option('#rfTrueUnit', 'mil')
+    page.fill('#rfTrueVal', f"{shot(page, mv_true, yd, SHOT_LOAD) * 1000:.3f}")
+    page.click('#rfTrueGo')
+
+
+def test_a_bad_spin_field_does_not_stop_a_shot_correction(page, app_url):
+    open_editor(page, app_url, profiles=(SHOT_LOAD,))
+    page.fill('#rfTwist', '99')
+    work_out(page)
+    expect(page.locator('#rfTrueOut')).to_contain_text('Velocity')
+    assert 'Twist' not in page.inner_text('#rfTrueOut')
+
+
+def test_typing_in_the_spin_fields_keeps_a_worked_out_velocity(page, app_url):
+    open_editor(page, app_url, profiles=(SHOT_LOAD,))
+    work_out(page)
+    expect(page.locator('#rfTrueSave')).to_be_visible()
+    spin(page, 10, 'L', 1.24, 0.308)
+    expect(page.locator('#rfStab')).to_be_visible()
+    expect(page.locator('#rfTrueSave')).to_be_visible()
+
+
+def stab_text(sg, grade):
+    one = f'{math.floor(sg * 10 + 1e-9) / 10:.1f}'      # printed rounded down, as the ruling says
+    return {'stable': f'Stability {one}.',
+            'marginal': f'Stability {one}: marginal for this twist. Spin drift is still shown.',
+            'unstable': f'Stability {one}: by this formula the bullet is not stable in this twist. Spin drift is not shown. A polymer-tipped bullet reads low here.'}[grade]
+
+
+def test_stability_line_follows_typing(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    stab = page.locator('#rfStab')
+    assert page.evaluate('document.querySelector("#rfStab").className') == 'hint' and page.get_attribute('#rfStab', 'aria-live') == 'polite'
+    expect(stab).to_be_hidden()
+    spin(page, 10)
+    expect(stab).to_be_hidden()                          # length and diameter still missing
+    page.fill('#rfBDia', '0.308')
+    expect(stab).to_be_hidden()
+    page.fill('#rfBLen', '1.24')
+    sg = miller(175, 0.308, 1.24, 10, 2600)
+    assert 2.0 < sg
+    expect(stab).to_have_text(stab_text(sg, 'stable'))
+    page.fill('#rfTwist', '14')
+    sg = miller(175, 0.308, 1.24, 14, 2600)
+    assert 1.0 < sg < 1.4 - 0.05
+    expect(stab).to_have_text(stab_text(sg, 'marginal'))
+    page.fill('#rfTwist', '16')
+    sg = miller(175, 0.308, 1.24, 16, 2600)
+    assert sg < 0.95
+    expect(stab).to_have_text(stab_text(sg, 'unstable'))
+    page.fill('#rfTwist', '')
+    expect(stab).to_be_hidden()
+
+
+def test_the_figure_just_under_a_threshold_prints_the_lower_decimal_with_its_grades_words(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    page.fill('#rfBDia', '0.308'); page.fill('#rfBLen', '1.24')
+    # twists whose figure is just under each line (found by bisection on the formula written out here): the shown figure is rounded down
+    def twist_for(target):
+        a, b = 3.0, 30.0
+        for _ in range(60):
+            m = (a + b) / 2
+            a, b = (m, b) if miller(175, 0.308, 1.24, m, 2600) > target else (a, m)
+        return a
+    for target, text in ((1.38, 'Stability 1.3: marginal for this twist. Spin drift is still shown.'),
+                         (0.97, 'Stability 0.9: by this formula the bullet is not stable in this twist. Spin drift is not shown. A polymer-tipped bullet reads low here.'),
+                         (1.42, 'Stability 1.4.')):
+        tw = round(twist_for(target), 3)
+        assert abs(miller(175, 0.308, 1.24, tw, 2600) - target) < 0.01, target
+        page.fill('#rfTwist', str(tw))
+        expect(page.locator('#rfStab')).to_have_text(text)
+
+
+def test_stability_line_hides_for_anything_unusable_and_never_blocks_save(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    spin(page, 16, None, 1.24, 0.308)
+    expect(page.locator('#rfStab')).to_contain_text('not stable')
+    for field, bad in (('rfMV', ''), ('rfMV', '99999'), ('rfW', '0'), ('rfW', ''), ('rfTwist', '2'), ('rfBLen', '0.5'), ('rfBDia', '0.7')):
+        good = page.input_value('#' + field)
+        page.fill('#' + field, bad)
+        expect(page.locator('#rfStab')).to_be_hidden()
+        page.fill('#' + field, good)
+        expect(page.locator('#rfStab')).to_be_visible()
+    text = page.inner_text('#dlgRifle')
+    import re
+    assert not re.search(r'NaN|Infinity|undefined|-0\.0', text), text
+    page.click('#rfSave')                                # an unstable bullet saves
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page)[0]['twist'] == 16
+
+
+def test_stability_line_uses_todays_air_from_the_screen(page, app_url):
+    ballistics(page, app_url, profiles=[SPIN_ONE])
+    page.click('#bCondBtn')
+    page.fill('#bTemp', '-20')
+    page.fill('#bAlt', '8000')
+    page.evaluate("FK.bal.select('u1')")
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    spin(page, 11, None, 1.24, 0.308)
+    press = 29.92126 * (1 - 6.8755856e-6 * 8000) ** 5.2558797
+    sg = miller(175, 0.308, 1.24, 11, 2600, temp=-20, press=press)
+    expect(page.locator('#rfStab')).to_have_text(stab_text(sg, 'stable' if sg >= 1.4 else 'marginal' if sg >= 1.0 else 'unstable'))
+    assert sg != pytest.approx(miller(175, 0.308, 1.24, 11, 2600), abs=0.2)     # the air made a difference
+
+
+def test_stability_line_falls_back_to_standard_air_when_the_screens_air_is_out_of_range(page, app_url):
+    ballistics(page, app_url, profiles=[SPIN_ONE])
+    page.click('#bCondBtn')
+    page.fill('#bTemp', '900')
+    page.evaluate("FK.bal.select('u1')")
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    spin(page, 10, None, 1.24, 0.308)
+    expect(page.locator('#rfStab')).to_have_text(stab_text(miller(175, 0.308, 1.24, 10, 2600, press=29.92126), 'stable'))
+
+
+def test_typing_a_twist_makes_the_sheet_dirty(page, app_url):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0")   # a slow phone
+    page.fill('#rfTwist', '8')
+    page.go_back()
+    expect(page.locator('#cfTitle')).to_have_text('Discard changes to this profile?')
+    expect(page.locator('#cfCancel')).to_have_text('Keep editing')
+    expect(page.locator('#cfOk')).to_have_text('Discard')
+    page.click('#cfCancel')
+    expect(page.locator('#cfOk')).to_be_hidden()
+    expect(page.locator(DLG)).to_be_visible()
+    assert page.input_value('#rfTwist') == '8'
+    page.go_back()
+    page.click('#cfOk')
+    expect(page.locator(DLG)).to_be_hidden()
+    assert profiles(page) == [SPIN_ONE]
+
+
+@pytest.mark.parametrize('field,value', [('rfTwistDir', 'L'), ('rfBLen', '1.2'), ('rfBDia', '0.308')])
+def test_each_new_field_makes_the_sheet_dirty(page, app_url, field, value):
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    page.evaluate("const g = history.go.bind(history); history.go = k => { setTimeout(() => g(k), 250); }; 0")
+    if field == 'rfTwistDir':
+        page.select_option('#' + field, value)
+    else:
+        page.fill('#' + field, value)
+    page.click('#rfCancel')
+    expect(page.locator('#cfTitle')).to_have_text('Discard changes to this profile?')
+    page.click('#cfCancel')
+
+
+def test_untouched_spin_fields_do_not_make_the_sheet_dirty(page, app_url):
+    full = {**SPIN_ONE, 'twist': 8, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308}
+    open_editor(page, app_url, profiles=(full,))
+    page.click('#rfCancel')
+    expect(page.locator(DLG)).to_be_hidden()
+    expect(page.locator('#dlgConfirm')).to_be_hidden()
+
+
+@pytest.mark.parametrize('night', [False, True], ids=['day', 'night'])
+def test_rifle_sheet_still_fits_360_day_and_night_with_enlarged_text(page, app_url, night):
+    full = {**SPIN_ONE, 'name': 'A fairly long profile name for a rifle in a long case', 'twist': 16, 'twistDir': 'L', 'blen': 1.24, 'bdia': 0.308,
+            'optic': {'type': 'reticle', 'unit': 'mil', 'marks': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}}
+    ballistics(page, app_url, night=night, profiles=[full])
+    page.evaluate("FK.bal.select('u1')")
+    page.click('#bEdit')
+    expect(page.locator(DLG)).to_be_visible()
+    expect(page.locator('#rfStab')).to_be_visible()           # the longest of the three lines is on screen
+    page.fill('#rfZTemp', '40')
+    page.fill('#rfZAlt', '800')
+    page.locator('#rfBDia').scroll_into_view_if_needed()
+    box = page.locator(DLG).bounding_box()
+    assert box['x'] >= -1 and box['x'] + box['width'] <= 361, box
+    assert [x for x in overflow(page, DLG) if 'page scrolls' not in x] == []
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    assert too_small(page, DLG) == [] and clipped_buttons(page, DLG) == []
+    enlarge_text(page)
+    page.locator('#rfStab').scroll_into_view_if_needed()
+    assert [x for x in overflow(page, DLG) if 'page scrolls' not in x] == []
+    assert page.evaluate("d => { const e = document.querySelector(d); return e.scrollWidth <= e.clientWidth + 1; }", DLG)
+    assert clipped_buttons(page, DLG) == []
+    assert too_small(page, DLG) == []
+    for i in ('rfTwist', 'rfTwistDir', 'rfBLen', 'rfBDia', 'rfStab'):      # every new control lies inside the sheet's own width
+        r = page.locator('#' + i).bounding_box()
+        assert r['x'] >= 0 and r['x'] + r['width'] <= 361, (i, r)
+    r = page.locator('#rfCancel').bounding_box()
+    assert r['y'] >= 0 and r['y'] + r['height'] <= 641, r
+
+
+@pytest.mark.parametrize('field,typed,msg', [('rfTwist', '10e', 'Twist must be a number.'),
+                                             ('rfBLen', '1.24e', 'Bullet length must be a number.'),
+                                             ('rfBDia', '0.224e', 'Bullet diameter must be a number.')])
+def test_text_the_phone_cannot_read_is_refused_not_saved_as_blank(page, app_url, field, typed, msg):
+    full = {**SPIN_ONE, 'twist': 10, 'blen': 1.24, 'bdia': 0.308}
+    open_editor(page, app_url, profiles=(full,))
+    page.fill('#' + field, '')
+    page.type('#' + field, typed)                        # real typing: the browser keeps the text but reads no number from it
+    assert page.evaluate(f'document.querySelector("#{field}").validity.badInput')
+    refuse(page, msg, field)
+    assert profiles(page) == [full]                      # nothing was saved
+    page.fill('#' + field, '')
+    page.click('#rfSave')                                # blank is still allowed, and removes that field
+    expect(page.locator(DLG)).to_be_hidden()
+    assert field.replace('rfTwist', 'twist').replace('rfBLen', 'blen').replace('rfBDia', 'bdia') not in profiles(page)[0]
+
+
+def test_older_number_fields_are_left_as_they_were(page, app_url):
+    """Only the three new fields refuse unreadable text in this release (the ruling): the weight field still reads it as blank."""
+    open_editor(page, app_url, profiles=(SPIN_ONE,))
+    page.fill('#rfW', '')
+    page.type('#rfW', '175e')
+    page.click('#rfSave')
+    expect(page.locator(DLG)).to_be_hidden()

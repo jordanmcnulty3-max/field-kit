@@ -30,7 +30,8 @@
   let frozen = false;                            // a backup is being restored: nothing is written over it
 
   /* ---------- Profiles ----------
-     A profile: { id, name, bc, model, w, mv, sight (height, in), zero, optic?, zeroAtm?, mv0? }. The built-in loads (PRESETS) are
+     A profile: { id, name, bc, model, w, mv, sight (height, in), zero, optic?, zeroAtm?, mv0?, twist?, twistDir?, blen?, bdia? }
+     (twist in per turn; twistDir 'L' only for a left-hand twist, absent means right; blen and bdia, the bullet's length and diameter, in). The built-in loads (PRESETS) are
      read-only; the person's own profiles are stored under 'profiles'. Whatever comes out of storage or a backup goes through
      clean() first, so a hand-edited or damaged entry cannot break the screen or inject markup. */
   /* Ids that were once built in. A stored selection naming one becomes an own profile named for what it was. */
@@ -48,8 +49,13 @@
      RANGE: what a real rifle, load and air can have. [low, high], both allowed. */
   const RANGE = Object.freeze({
     temp: [-60, 140], alt: [-2000, 30000], press: [8, 33], rh: [0, 100],                 // °F, ft, inHg (station), %
-    bc: [0.05, 1.2], w: [1, 1000], mv: [300, 5000], zero: [5, 1000], sight: [0, 6]       // -, gr (blank or 0 also), fps, yd, in
+    bc: [0.05, 1.2], w: [1, 1000], mv: [300, 5000], zero: [5, 1000], sight: [0, 6],      // -, gr (blank or 0 also), fps, yd, in
+    twist: [3, 30], blen: [0.2, 3], bdia: [0.17, 0.6]                                   // in per turn, in, in (bullet length and diameter)
   });
+  /* A bullet is 2 to 7 calibers long; with both typed, a length outside that is a mistake (the cartridge measured, or inches for mm).
+     The small allowance keeps 7 x .308 = 2.156 inside whatever the division gives. */
+  const CALIBERS = Object.freeze([2, 7]);
+  const lenFits = (blen, bdia) => { const r = blen / bdia; return r >= CALIBERS[0] - 1e-9 && r <= CALIBERS[1] + 1e-9; };
   const within = (v, k) => fin(v) && v >= RANGE[k][0] && v <= RANGE[k][1];
   /* A load the screen can solve: coefficient, velocity and zero inside their ranges; weight blank, 0 or inside; sight height blank or inside. */
   const loadOk = p => !!p && within(p.bc, 'bc') && within(p.mv, 'mv') && within(p.zero, 'zero')
@@ -86,12 +92,17 @@
     if (optic) p.optic = optic;
     if (zeroAtm) p.zeroAtm = zeroAtm;
     if (fin(raw.mv0) && raw.mv0 > 0) p.mv0 = raw.mv0;
+    /* The barrel and bullet (for spin drift): each kept only when it is a number inside its range; a left twist is the only direction
+       stored; a length that cannot belong to the diameter given with it is dropped (it is the length that was measured). */
+    ['twist', 'blen', 'bdia'].forEach(k => { if (within(raw[k], k)) p[k] = raw[k]; });
+    if (raw.twistDir === 'L') p.twistDir = 'L';
+    if (p.blen !== undefined && p.bdia !== undefined && !lenFits(p.blen, p.bdia)) delete p.blen;
     return p;
   }
-  /* Key order of a stored profile: the fields every profile has first, in the order v7.8 wrote them. */
+  /* Key order of a stored profile: the fields every profile has first, in the order v7.8 wrote them; the barrel and bullet last. */
   const ordered = p => {
     const out = {};
-    ['id', 'name', 'bc', 'model', 'w', 'mv', 'sight', 'zero', 'optic', 'zeroAtm', 'mv0'].forEach(k => { if (has(p, k)) out[k] = p[k]; });
+    ['id', 'name', 'bc', 'model', 'w', 'mv', 'sight', 'zero', 'optic', 'zeroAtm', 'mv0', 'twist', 'twistDir', 'blen', 'bdia'].forEach(k => { if (has(p, k)) out[k] = p[k]; });
     return out;
   };
 
@@ -206,6 +217,10 @@
   const label = yd => String(Number(yd.toFixed(1)));          // 500 -> "500", 36.5 -> "36.5"
   const fx = (v, d) => { const t = v.toFixed(d); return /^-0(\.0+)?$/.test(t) ? t.slice(1) : t; };   // never "-0.0"
 
+  /* The Drift column: inches without a sign while spin drift is not applied; with it, the side the bullet is carried (R right, L left),
+     and no letter for a figure that rounds to zero. */
+  const driftCell = (v, sided) => { const t = fx(Math.abs(v), 1); return !sided || Number(t) === 0 ? t : t + (v > 0 ? ' R' : ' L'); };
+
   /* A column of the answer card: label, then the lines. lines: [main, sub] for a sight, or the three every-unit lines; more: the
      other units added beneath a sight's own lines (Show all units). */
   function paint(el, name, lines, more) {
@@ -215,7 +230,32 @@
     lines.forEach((t, i) => { if (t) add(i === 0 ? 'v' : lines.length === 3 ? 'v2' : 's', t); });
     (more || []).forEach(t => add('v2 more', t));
   }
-  function nothing(text) {
+  /* The line under the dope card about spin drift and Coriolis. words(missing) is "a", "a and b", "a, b and c". On a message path
+     (nothing is solved, so no windage is shown) it never says spin drift is included. why: '' or the reason a graded bullet still gets
+     none ('subsonic': the muzzle velocity is below the speed of sound today; 'zero': the solve has no row at the zero). own: the profile
+     is the person's own (a built-in load cannot be edited, so it is told where its numbers go). */
+  const TAIL = ' Coriolis is not included.';
+  const words = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+  const spinNote = (s, windage, why, own) => {
+    if (s && s.grade === 'unstable') return 'Spin drift not included: by the Miller formula this bullet is not stable in this twist (stability ' + BSPIN.text(s.sg) + ').' + TAIL;
+    if (why === 'subsonic') return 'Spin drift not included: the formula is for supersonic bullets.' + TAIL;
+    if (why) return 'Spin drift not included.' + TAIL;
+    if (s && s.sg !== undefined) return (windage === false ? 'The dope card includes' : 'Windage includes') + ' an estimate of spin drift (stability ' + BSPIN.text(s.sg) + (s.grade === 'marginal' ? ', marginal' : '') + ', '
+      + (s.sign < 0 ? 'left' : 'right') + '-hand twist).' + TAIL;
+    if (!(s && s.missing.length)) return 'Spin drift not included.' + TAIL;
+    return 'Spin drift not included: add ' + words(s.missing) + (own ? ' to the profile in Edit.' : ' to a profile of your own (tap Edit, then Save as new profile).') + TAIL;
+  };
+  /* The sentence added under the answer card for a bullet the Miller formula grades not stable. */
+  const unstableSub = s => s && s.grade === 'unstable'
+    ? ' By the Miller formula this bullet is not stable in this twist (stability ' + BSPIN.text(s.sg) + '): treat every figure here as doubtful.' : '';
+  /* The transonic note under the dope card: with spin drift applied it also says the formula was not checked there. */
+  const TRANS = '\u2020 Below Mach 1.2 (transonic): less certain. Confirm these with real shots.';
+  const TRANS_SPUN = '\u2020 Below Mach 1.2 (transonic): less certain, and the spin drift there is outside what the formula was checked for. Confirm these with real shots.';
+  /* The profile's own answer when no air is known (a message path): only what is missing from the profile can be said. */
+  const spinGap = p => { const s = BSPIN.of(p, null); return s.missing && s.missing.length ? s : { missing: [] }; };
+  function nothing(text, p) {
+    F('bSpin').textContent = spinNote(spinGap(p), undefined, '', !!(p && ownProfile(p.id)));
+    F('dopeTrans').textContent = TRANS;
     paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
     F('solSub').textContent = text;
     F('solution').classList.add('msg');
@@ -231,6 +271,7 @@
     F('bLoad').textContent = load; F('bLoad').hidden = !load;
     F('bStart').hidden = !(p && PRESETS.some(x => x.id === p.id));      // a built-in load: urge a chronograph reading
     F('bSight').textContent = BALS.describe(p && p.optic);
+    F('bNoSH').hidden = !p || p.sight > 0;                              // no sight height (blank or 0): every hold assumes the sight is on the bore
     const z = BALS.zeroLine(p && p.zeroAtm);
     F('bZeroLine').textContent = z; F('bZeroLine').hidden = !z;
     const sighted = !!(p && p.optic);
@@ -253,6 +294,19 @@
     return { temp, alt, press: p === null ? 0 : p, rh };
   }
 
+  /* What BAL.solve takes besides the shot: the profile's load and the air it is fired in. The one place the field list lives (calc and FK.bal.load). */
+  const loadFor = (p, air) => ({
+    bc: p.bc, model: p.model || 'G7', w: p.w || 0, mv: p.mv, sight: p.sight || 0, zero: p.zero, zeroAtm: zeroAir(p.zeroAtm),
+    temp: air.temp, alt: air.alt, press: air.press, rh: air.rh
+  });
+  /* The selected profile's load in today's air, for the sheets under the dope card; or { error } with the screen's own message. */
+  function load() {
+    const p = anyProfile(cur);
+    if (!loadOk(p)) return { error: MSG.profile };
+    const air = shotAir();
+    return air ? loadFor(p, air) : { error: MSG.cond };
+  }
+
   function calc() {
     const p = anyProfile(cur);
     const sighted = head(p);
@@ -260,15 +314,15 @@
     F('solution').classList.remove('msg');
     const optic = sighted ? p.optic : null;                      // null: every unit (Show all units affects the answer card only)
     const target = read('bRange') === null ? NaN : read('bRange');
-    if (!(inside(target, 1, 3000))) return nothing(MSG.range);
-    if (!loadOk(p)) return nothing(MSG.profile);
+    if (!(inside(target, 1, 3000))) return nothing(MSG.range, p);
+    if (!loadOk(p)) return nothing(MSG.profile, p);
     const air = shotAir();
-    if (!air) return nothing(MSG.cond);
+    if (!air) return nothing(MSG.cond, p);
     const { temp, alt, press, rh } = air;
     const wind = num(F('bWind'));
-    if (!inside(wind, 0, 100)) return nothing(MSG.wind);
+    if (!inside(wind, 0, 100)) return nothing(MSG.wind, p);
     const angle = read('bAngle') === null ? 0 : read('bAngle');      // unreadable: NaN, refused below
-    if (!inside(angle, -60, 60)) return nothing(MSG.angle);
+    if (!inside(angle, -60, 60)) return nothing(MSG.angle, p);
 
     const max = Math.min(3000, Math.max(50, num(F('bMax')) || 1000));
     const step = +F('bStep').value || 50;
@@ -278,15 +332,28 @@
     if (!at.includes(p.zero)) at.push(p.zero);
     at.sort((a, b) => a - b);
     const ranges = at.concat([target]);
-    const res = BAL.solve({
-      bc: p.bc, model: p.model || 'G7', w: p.w || 0, mv: p.mv, sight: p.sight || 0, zero: p.zero, zeroAtm: zeroAir(p.zeroAtm),
-      temp, alt, press, rh, wind, clock: +F('bClock').value, angle, ranges
-    });
-    if (res.error) return nothing(res.error);
+    const res = BAL.solve({ ...loadFor(p, air), wind, clock: +F('bClock').value, angle, ranges });
+    if (res.error) return nothing(res.error, p);
 
+    /* Spin drift: from the profile's twist and bullet, today's temperature and the station pressure the solver used; applied only to a
+       stable or marginal bullet. It is measured from the zero (the rifle was zeroed with the drift there in its sights), so it needs the
+       time of flight of this solve's own row at the zero; without that row it is not applied. spinIn is signed like windIn (right
+       positive) and is added to it. */
+    const spin = BSPIN.of(p, { temp, press: res.atm.pIn });
     const xs = [...new Set(ranges.filter(r => r > 0))].sort((a, b) => a - b);   // the solver's own order: row i belongs to xs[i]
-    const rowFor = x => { const i = xs.indexOf(x); return i >= 0 && res.rows[i] ? { ...res.rows[i], yd: x } : null; };
+    const zr = res.rows[xs.indexOf(p.zero)], tofZero = zr && fin(zr.tof) ? zr.tof : NaN;
+    /* Not applied to a bullet that leaves the muzzle below the speed of sound in today's air: the formula is for supersonic bullets.
+       Rows that slow below Mach 1.2 downrange keep theirs (the transonic note says so). */
+    const why = !spin.grade || spin.grade === 'unstable' ? '' : p.mv * 0.3048 < res.atm.c ? 'subsonic' : !fin(tofZero) ? 'zero' : '';
+    const spun = !!spin.grade && spin.grade !== 'unstable' && !why;
+    const rowFor = x => {
+      const i = xs.indexOf(x), r = i >= 0 && res.rows[i];
+      if (!r) return null;
+      const d = spun ? spin.sign * BSPIN.fromZero(spin.sg, r.tof, x, tofZero, p.zero) : 0, spinIn = Number.isFinite(d) ? d + 0 : 0;   // + 0: never a -0
+      return { ...r, yd: x, windIn: r.windIn + spinIn, spinIn };
+    };
     const t = rowFor(target);
+    F('bSpin').textContent = spinNote(spin, !!t, why, !!ownProfile(p.id));   // out of reach: the answer card shows dashes, only the dope card carries spin drift
     if (t) {
       const a = BALS.answer(t, optic), every = BALS.all(t);
       const lines = side => optic ? [a[side].main, a[side].sub] : every[side];
@@ -295,10 +362,10 @@
       paint(F('solElev'), 'ELEVATION', lines('elev'), more('elev')); paint(F('solWind'), 'WINDAGE', lines('wind'), more('wind'));
       F('solSub').textContent = `At ${label(target)} yd: ${BALS.path(t)}, `
         + `${Math.round(t.fps)} fps, ${Math.round(t.ftlb)} ft-lb, ${t.tof.toFixed(2)} s flight`
-        + (t.mach < 1 ? '. Subsonic: expect larger errors.' : '.');
+        + (t.mach < 1 ? '. Subsonic: expect larger errors.' : '.') + unstableSub(spin);
     } else {
       paint(F('solElev'), 'ELEVATION', ['—']); paint(F('solWind'), 'WINDAGE', ['—']);
-      F('solSub').textContent = MSG.reach;
+      F('solSub').textContent = MSG.reach + unstableSub(spin);
       F('solution').classList.add('msg');
     }
     const c = BALS.cols(optic), generic = !!optic && optic.type === 'reticle';   // a reticle's wind columns already carry the drift
@@ -306,12 +373,14 @@
     const rows = at.map(rowFor).filter(Boolean).map(r => {
       const x = BALS.cells(r, optic), trans = r.mach < 1.2;
       return `<tr class="${r.yd === p.zero ? 'zero' : ''} ${trans ? 'trans' : ''}"><td>${label(r.yd)}${trans ? ' \u2020' : ''}</td>` +
-        [...x.elev, ...x.wind, fx(r.dropIn, 1), ...(generic ? [] : [fx(Math.abs(r.windIn), 1)]), Math.round(r.fps), Math.round(r.ftlb), r.tof.toFixed(2)]
+        [...x.elev, ...x.wind, fx(r.dropIn, 1), ...(generic ? [] : [driftCell(r.windIn, spun)]), Math.round(r.fps), Math.round(r.ftlb), r.tof.toFixed(2)]
           .map(v => `<td>${esc(String(v))}</td>`).join('') + '</tr>';
     });
     $('#dope').innerHTML = `<thead><tr>${heads.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody>`;
     F('dopeKey').textContent = 'Path: inches above the line of sight; a minus means below.'
-      + (generic ? '' : ' Drift: inches the wind moves the bullet, shown without a sign.');
+      + (generic ? '' : spun ? ' Drift: inches the wind and the spin move the bullet; R right, L left. The Wind columns show the side to dial or hold, which is the opposite side.'
+        : ' Drift: inches the wind moves the bullet, shown without a sign.');
+    F('dopeTrans').textContent = spun ? TRANS_SPUN : TRANS;
     fitDope();
   }
   /* Only a table wider than its box shows the swipe cue and a sticky first column (the Survival tables' pattern). Measured when the
@@ -389,13 +458,13 @@
   }
   /* The surface other screens and tests use (edit is added by bal-edit.js). */
   FK.bal = {
-    init, calc, clean, save, remove, select, shotAir,
+    init, calc, clean, save, remove, select, shotAir, load,
     profiles: () => profiles.map(copy),
     selected: () => copy(anyProfile(cur))
   };
   /* For src/bal-edit.js only: its read-only seam to the screen's profiles and the one definition of each shared rule. FK.bal stays
      the public surface; nothing else may depend on this. find gives a copy of a profile, own or built in, with whether it is the
-     person's own. RANGE, CLICK_SIZES, within, marksOk, parseNum and zeroAir are the rules the editor must apply exactly as the screen
+     person's own. RANGE, CLICK_SIZES, within, marksOk, lenFits, parseNum and zeroAir are the rules the editor must apply exactly as the screen
      does; nameTaken and freeName keep names unique. */
   const nameKey = n => String(n).trim().slice(0, 60).toLowerCase();
   /* Whether another profile (own, except exceptId, or built in) already has this name, trimmed and compared without regard to case. */
@@ -408,7 +477,7 @@
     }
   }
   FK.balHost = {
-    newId, RANGE, CLICK_SIZES, within, marksOk, nameTaken, freeName, parseNum, zeroAir,
+    newId, RANGE, CLICK_SIZES, CALIBERS, within, marksOk, lenFits, nameTaken, freeName, parseNum, zeroAir,
     find: id => { const p = anyProfile(id); return p ? { profile: copy(p), own: !!ownProfile(id) } : null; }
   };
   FK._test.presets = () => PRESETS.map(p => ({ ...p }));

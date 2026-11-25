@@ -1,6 +1,6 @@
 /* ---------- Profile editor: load, the sight on it, the conditions it was zeroed in, and a velocity corrected from one real shot ----------
    Loads after bal-ui.js and reaches the screen only through FK.bal (save, select, remove, selected, shotAir) and FK.balHost (find, newId,
-   and the shared rules: RANGE, within, marksOk, nameTaken, freeName); it adds FK.bal.edit. ---------- */
+   and the shared rules: RANGE, within, marksOk, lenFits, nameTaken, freeName); it adds FK.bal.edit. ---------- */
 (() => {
   const FK = window.FK;
   const { $, toast } = FK;
@@ -16,6 +16,8 @@
      saved as a new profile. The sight and the zero conditions are stored on the profile and never reach BAL.solve. */
   const dlg = F('dlgRifle');
   const E = ['rfName', 'rfBC', 'rfModel', 'rfW', 'rfMV', 'rfSH', 'rfZero', 'rfOptic', 'rfUnit', 'rfClick', 'rfMarks', 'rfZTemp', 'rfZAlt', 'rfZPress'];
+  const SPIN = ['rfTwist', 'rfTwistDir', 'rfBLen', 'rfBDia'];    // the barrel and bullet: part of the profile, so the guard covers them
+  E.push(...SPIN);
   let editing = null;        // { base: profile, own: bool } while the sheet is open
   let opened = null;         // what the sheet showed when it opened
   let deleting = false;      // Delete has been confirmed: nothing else in the sheet may act
@@ -39,6 +41,7 @@
   }
   const showZHint = () => { F('rfZHint').hidden = ['rfZTemp', 'rfZAlt', 'rfZPress'].some(i => F(i).value.trim() !== ''); };
   const typed = () => E.map(i => F(i).value).join('\u0001');
+  const typedForShot = () => E.filter(i => !SPIN.includes(i)).map(i => F(i).value).join('\u0001');   // what a shot correction depends on
   const fmt = n => Math.round(n).toLocaleString('en-US');
   const say = text => { F('rfMsg').textContent = text; };
 
@@ -58,8 +61,9 @@
     fillClicks(u, o && o.type === 'turret' ? o.click : undefined);
     set('rfMarks', o && o.type === 'reticle' ? o.marks.join(', ') : '');
     set('rfZTemp', z && z.temp); set('rfZAlt', z && z.alt); set('rfZPress', z && z.press);
+    set('rfTwist', p.twist); set('rfTwistDir', p.twistDir === 'L' ? 'L' : 'R'); set('rfBLen', p.blen); set('rfBDia', p.bdia);
     F('rfTrueYd').value = F('rfTrueVal').value = '';
-    say(''); showSight(); showZHint(); fillTrueUnits(); clearResult();
+    say(''); showSight(); showZHint(); showStab(); fillTrueUnits(); clearResult();
     dlg.querySelector('.mk-body').scrollTop = 0;
     opened = null;
     FK.sheet.open(dlg, {
@@ -86,6 +90,33 @@
     return { marks: nums };
   }
   const numOf = id => FK.balHost.parseNum(F(id).value);      // null when blank, NaN when unreadable (refused by every range)
+  /* The barrel and bullet fields: { twist, twistDir, blen, bdia } (null for a blank one), or { error, focus }. */
+  function readSpin() {
+    const bad = (error, focus) => ({ error, focus });
+    /* Text the browser cannot read as a number (a stray "e") reads as blank: refused, so what is on screen is never dropped unseen. */
+    const unread = [['rfTwist', 'Twist'], ['rfBLen', 'Bullet length'], ['rfBDia', 'Bullet diameter']].find(([id]) => F(id).validity.badInput);
+    if (unread) return bad(unread[1] + ' must be a number.', unread[0]);
+    const twist = numOf('rfTwist'), blen = numOf('rfBLen'), bdia = numOf('rfBDia');
+    if (twist !== null && !within(twist, 'twist')) return bad(between('Twist', 'twist', ' inches per turn'), 'rfTwist');
+    if (blen !== null && !within(blen, 'blen')) return bad(between('Bullet length', 'blen', ' in'), 'rfBLen');
+    if (bdia !== null && !within(bdia, 'bdia')) return bad(between('Bullet diameter', 'bdia', ' in'), 'rfBDia');
+    if (blen !== null && bdia !== null && !FK.balHost.lenFits(blen, bdia)) return bad(blen / bdia < FK.balHost.CALIBERS[0]
+      ? 'Bullet length looks too short for that diameter. Check both numbers.'
+      : 'Bullet length looks too long for that diameter. Measure the bullet, not the cartridge.', 'rfBLen');
+    return { twist, twistDir: F('rfTwistDir').value === 'L' ? 'L' : null, blen, bdia };
+  }
+  /* The stability line: worked out from what is typed (only what is usable) and today's air from the screen (standard air when that is
+     out of range). Hidden while anything is missing; it never stops a Save. */
+  function showStab() {
+    const line = F('rfStab'), use = (id, k) => { const v = numOf(id); return within(v, k) ? v : undefined; };
+    const blen = use('rfBLen', 'blen'), bdia = use('rfBDia', 'bdia');
+    const air = FK.bal.shotAir() || { temp: 59, alt: 0, press: 0, rh: 50 };
+    const r = BSPIN.of({ twist: use('rfTwist', 'twist'), twistDir: F('rfTwistDir').value, blen: blen !== undefined && bdia !== undefined && !FK.balHost.lenFits(blen, bdia) ? undefined : blen,
+      bdia, w: use('rfW', 'w'), mv: use('rfMV', 'mv') }, { temp: air.temp, press: BAL.atmosphere(air.temp, air.alt, air.press, air.rh).pIn });
+    const text = r.missing ? '' : r.grade === 'unstable' ? `Stability ${BSPIN.text(r.sg)}: by this formula the bullet is not stable in this twist. Spin drift is not shown. A polymer-tipped bullet reads low here.`
+      : r.grade === 'marginal' ? `Stability ${BSPIN.text(r.sg)}: marginal for this twist. Spin drift is still shown.` : `Stability ${BSPIN.text(r.sg)}.`;
+    line.textContent = text; line.hidden = !text;
+  }
   /* What the sheet holds as a profile (without an id), or { error, focus } for the first thing at fault. */
   function readEditor(forShot) {
     const bad = (error, focus) => ({ error, focus });
@@ -97,7 +128,7 @@
     if (!within(zero, 'zero')) return bad(between('Zero range', 'zero', ' yd'), 'rfZero');
     if (w !== null && w !== 0 && !within(w, 'w')) return bad(between('Bullet weight', 'w', ' gr', ', or blank'), 'rfW');
     if (sh !== null && !within(sh, 'sight')) return bad(between('Sight height', 'sight', ' in'), 'rfSH');
-    const out = { name, bc, model: F('rfModel').value, w: w || 0, mv, sight: sh || 0, zero, optic: null, zeroAtm: null };
+    const out = { name, bc, model: F('rfModel').value, w: w || 0, mv, sight: sh || 0, zero, optic: null, zeroAtm: null, twist: null, twistDir: null, blen: null, bdia: null };
     const t = forShot ? 'none' : F('rfOptic').value, unit = F('rfUnit').value;     // the sight never reaches the solver
     if (t === 'turret') out.optic = { type: 'turret', unit, click: parseFloat(F('rfClick').value) };
     else if (t === 'dot') out.optic = { type: 'dot' };
@@ -116,6 +147,11 @@
       out.zeroAtm = { temp, rh: base && fin(base.rh) ? base.rh : 50 };
       if (alt !== null) out.zeroAtm.alt = alt;
       if (press !== null) out.zeroAtm.press = press;
+    }
+    if (!forShot) {                                   // a shot correction never needs them, so a typo there does not stop it
+      const s = readSpin();
+      if (s.error) return s;
+      Object.assign(out, s);
     }
     return out;
   }
@@ -139,7 +175,7 @@
     say('');
     if (result && !decided) { askUse(asNew); return; }
     const p = { ...editing.base, ...v, id: asNew ? FK.balHost.newId() : editing.base.id };
-    ['optic', 'zeroAtm'].forEach(k => { if (!p[k]) delete p[k]; });
+    ['optic', 'zeroAtm', 'twist', 'twistDir', 'blen', 'bdia'].forEach(k => { if (!p[k]) delete p[k]; });     // blank: gone, even from the profile it came from
     /* The original velocity: kept through every correction, gone once put back. A copy carries one only when a correction was applied here. */
     const mv0 = nextMv0(asNew, v.mv);
     if (mv0 === undefined) delete p.mv0; else p.mv0 = mv0;
@@ -196,7 +232,7 @@
      only when one of them really differs from this snapshot, never merely because a change or blur event fired (Enter leaves a
      typed value uncommitted, and its change event arrives with the next tap). */
   let basis = null;
-  const snapshot = () => [typed(), F('rfTrueYd').value, F('rfTrueVal').value, F('rfTrueUnit').value].join('\u0002');
+  const snapshot = () => [typedForShot(), F('rfTrueYd').value, F('rfTrueVal').value, F('rfTrueUnit').value].join('\u0002');
   function clearResult() { result = null; basis = null; F('rfTrueOut').textContent = ''; showTrue(); }
   const recheck = () => { if (basis !== null && snapshot() !== basis) clearResult(); };
   const signed = pct => { const t = Math.abs(pct).toFixed(1); return Number(t) === 0 ? '0.0' : (pct < 0 ? '-' : '+') + t; };
@@ -239,6 +275,7 @@
   /* Both buttons write into the velocity field; the profile is stored only by the sheet's own Save. */
   function setVelocity(mv, text) {
     F('rfMV').value = String(mv);
+    showStab();
     clearResult();
     say(text);
   }
@@ -271,6 +308,7 @@
   F('rfOptic').addEventListener('change', () => { showSight(); fillTrueUnits(); });
   F('rfUnit').addEventListener('change', () => { fillClicks(F('rfUnit').value); fillTrueUnits(); });
   ['rfZTemp', 'rfZAlt', 'rfZPress'].forEach(i => F(i).addEventListener('input', showZHint));
+  [...SPIN, 'rfW', 'rfMV'].forEach(i => { F(i).addEventListener('input', showStab); F(i).addEventListener('change', showStab); });
   F('rfDelete').addEventListener('click', async () => {
     if (!editing || !editing.own || deleting) return;
     const id = editing.base.id, f = FK.balHost.find(id), p = f && f.own ? f.profile : null;
